@@ -289,6 +289,9 @@ standard normal quantile implementation.
 * UPDATED: The `thurstone_mosteller_ranker` and `trueskill_ranker` libraries
 to use the new `univariate_distributions` library.
 
+* UPDATED: The `hmac` library documentation to mention the BLAKE2 hash
+functions and added tests for HMAC-BLAKE2b and HMAC-BLAKE2s.
+
 * FIXED: The `crypto` library PBKDF2 implementation conformance with RFC 8018.
 
 * FIXED: A race condition in the `http_process_transport` library when closing
@@ -312,11 +315,10 @@ connections.
 * FIXED: Performance issue in the `rest` library when looking for duplicated
 endpoint identifiers. Thanks to Lindsey Spratt for the patch.
 
-* UPDATED: The `hmac` library documentation to mention the BLAKE2 hash
-functions and added tests for HMAC-BLAKE2b and HMAC-BLAKE2s.
-
 * FIXED: Portability of the `jwt` library when using backends that don't
 provide `length/2` as a built-in predicate.
+
+* FIXED: Harmless make check warning in the `graphs` library.
 
 * FIXED: Several `random` library sampling API declaration, formula,
 parameter validation, and edge case handling issues.

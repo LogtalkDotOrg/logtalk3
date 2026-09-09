@@ -23,9 +23,9 @@
 	imports((unweighted_graph_common(_Dictionary_), undirected_graph_common))).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-20,
+		date is 2026-09-09,
 		comment is 'Unweighted undirected graph predicates using a dictionary representation. Undirected edges are stored as two directed edges. The parametric object parameter is the dictionary to use for the graph representation.',
 		parnames is ['Dictionary']
 	]).
@@ -37,13 +37,6 @@
 	:- info(degree/3, [
 		comment is 'Unifies ``Degree`` with the number of edges incident to ``Vertex``. Fails if ``Vertex`` is not in the graph.',
 		argnames is ['Vertex', 'Graph', 'Degree']
-	]).
-
-	:- public(is_connected/1).
-	:- mode(is_connected(+graph), zero_or_one).
-	:- info(is_connected/1, [
-		comment is 'True iff the graph is connected (every vertex is reachable from every other vertex).',
-		argnames is ['Graph']
 	]).
 
 	:- public(connected_components/2).

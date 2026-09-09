@@ -23,9 +23,9 @@
 	imports((weighted_graph_common(_Dictionary_), undirected_graph_common))).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-20,
+		date is 2026-09-09,
 		comment is 'Weighted undirected graph predicates using a dictionary representation. Each edge is stored in both directions. Edge weights use a pair representation (``Vertex-Weight`` in neighbor lists, ``(Vertex1-Vertex2)-Weight`` for edge lists). The parametric object parameter is the dictionary to use for the graph representation.',
 		parnames is ['Dictionary']
 	]).
@@ -37,13 +37,6 @@
 	:- info(degree/3, [
 		comment is 'Returns the degree (number of edges incident to the vertex) of ``Vertex`` in ``Graph``.',
 		argnames is ['Vertex', 'Graph', 'Degree']
-	]).
-
-	:- public(is_connected/1).
-	:- mode(is_connected(+graph), zero_or_one).
-	:- info(is_connected/1, [
-		comment is 'True if ``Graph`` is connected (all vertices are reachable from any vertex).',
-		argnames is ['Graph']
 	]).
 
 	:- public(connected_components/2).

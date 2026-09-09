@@ -23,9 +23,9 @@
 	extends(graph_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-25,
+		date is 2026-09-09,
 		comment is 'Common predicates shared by undirected graph objects. Uses self-dispatch to call object-specific predicates such as ``is_connected/1``, ``vertices/2``, ``edges/2``, and ``neighbors/3``.'
 	]).
 
@@ -48,6 +48,13 @@
 		size/2 as set_size/2,
 		subtract/3 as set_subtract/3,
 		union/3 as set_union/3
+	]).
+
+	:- public(is_connected/1).
+	:- mode(is_connected(+graph), zero_or_one).
+	:- info(is_connected/1, [
+		comment is 'True iff ``Graph`` is connected (all vertices are reachable from any vertex).',
+		argnames is ['Graph']
 	]).
 
 	:- public(is_tree/1).

@@ -14,8 +14,8 @@ Common predicates shared by undirected graph objects. Uses self-dispatch to call
 |    ``logtalk_load(graphs(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-02-25
+| **Version:** 1:1:0
+| **Date:** 2026-09-09
 
 | **Compilation flags:**
 |    ``static``
@@ -40,6 +40,25 @@ Common predicates shared by undirected graph objects. Uses self-dispatch to call
 
 Public predicates
 -----------------
+
+.. index:: is_connected/1
+.. _undirected_graph_common/0::is_connected/1:
+
+``is_connected/1``
+^^^^^^^^^^^^^^^^^^
+
+True iff ``Graph`` is connected (all vertices are reachable from any vertex).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_connected(Graph)``
+| **Mode and number of proofs:**
+|    ``is_connected(+graph)`` - ``zero_or_one``
+
+
+------------
 
 .. index:: is_tree/1
 .. _undirected_graph_common/0::is_tree/1:
