@@ -27,6 +27,8 @@
 	logtalk_load([
 		ranker_protocol,
 		ranker_common,
+		ranking_dataset_common,
+		ranking_dataset_protocol,
 		score_ranker_common,
 		score_ranker_model_common,
 		glicko2_common,
@@ -34,8 +36,6 @@
 		grouped_strength_ranker_common,
 		plackett_luce_common,
 		pairwise_strength_ranker_common,
-		ranking_dataset_common,
-		ranking_dataset_protocol,
 		pairwise_ranking_dataset_protocol,
 		pairwise_measurement_dataset_protocol,
 		temporal_pairwise_ranking_dataset_protocol,

@@ -15,12 +15,14 @@ Shared predicates for language detection profiles.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-09-06
+| **Date:** 2026-09-09
 
 | **Compilation flags:**
 |    ``static``
 
 
+| **Implements:**
+|    ``public`` :ref:`language_profile_protocol <language_profile_protocol/0>`
 | **Uses:**
 |    :ref:`list <list/0>`
 |    :ref:`n_grams(Representation) <n_grams/1>`
@@ -30,7 +32,7 @@ Shared predicates for language detection profiles.
 |    (none)
 
 | **Inherited public predicates:**
-|    (none)
+|     :ref:`language_profile_protocol/0::language/1`  :ref:`language_profile_protocol/0::stop_word/1`  
 
 .. contents::
    :local:

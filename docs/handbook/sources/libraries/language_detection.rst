@@ -179,7 +179,7 @@ predicate receives normalized character codes and a validated list of
 candidate language codes and returns one ``Language-Score`` pair for
 every candidate, or an empty list when it finds no evidence.
 
-A custom profile implements the ``language_profile_protocol`` protocol.
+A custom profile imports the ``language_profile_common`` category.
 Profiles are registered by defining the
 ``language_profiles::custom_profile/2`` multifile predicate. For
 example:

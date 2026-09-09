@@ -21,8 +21,6 @@ English language detection profile.
 |    ``static, context_switching_calls``
 
 
-| **Implements:**
-|    ``public`` :ref:`language_profile_protocol <language_profile_protocol/0>`
 | **Imports:**
 |    ``public`` :ref:`language_profile_common <language_profile_common/0>`
 | **Provides:**
@@ -34,7 +32,7 @@ English language detection profile.
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`language_profile_protocol/0::language/1`  :ref:`language_profile_protocol/0::stop_word/1`  :ref:`language_profile_protocol/0::trigram_counts/1`  
+|     :ref:`language_profile_protocol/0::language/1`  :ref:`language_profile_protocol/0::stop_word/1`  :ref:`language_profile_common/0::trigram_counts/1`  
 
 .. contents::
    :local:

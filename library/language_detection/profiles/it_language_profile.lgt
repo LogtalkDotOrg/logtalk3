@@ -20,7 +20,6 @@
 
 
 :- object(it_language_profile,
-	implements(language_profile_protocol),
 	imports(language_profile_common)).
 
 	:- info([

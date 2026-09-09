@@ -20,13 +20,12 @@
 
 
 :- object(bn_language_profile,
-	implements(language_profile_protocol),
 	imports(language_profile_common)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-07,
+		date is 2026-09-09,
 		comment is 'Bengali language detection profile.'
 	]).
 

@@ -567,7 +567,7 @@ licenses, and generated entry counts.</p>
 predicate receives normalized character codes and a validated list of
 candidate language codes and returns one <code class="docutils literal notranslate"><span class="pre">Language-Score</span></code> pair for
 every candidate, or an empty list when it finds no evidence.</p>
-<p>A custom profile implements the <code class="docutils literal notranslate"><span class="pre">language_profile_protocol</span></code> protocol.
+<p>A custom profile imports the <code class="docutils literal notranslate"><span class="pre">language_profile_common</span></code> category.
 Profiles are registered by defining the
 <code class="docutils literal notranslate"><span class="pre">language_profiles::custom_profile/2</span></code> multifile predicate. For
 example:</p>

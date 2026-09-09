@@ -19,12 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- category(language_profile_common).
+:- category(language_profile_common,
+	implements(language_profile_protocol)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-06,
+		date is 2026-09-09,
 		comment is 'Shared predicates for language detection profiles.'
 	]).
 
