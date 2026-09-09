@@ -157,6 +157,7 @@
 <li class="toctree-l2"><a class="reference internal" href="genetic_algorithm.html"><code class="docutils literal notranslate"><span class="pre">genetic_algorithm</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="genint.html"><code class="docutils literal notranslate"><span class="pre">genint</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="gensym.html"><code class="docutils literal notranslate"><span class="pre">gensym</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="geohash.html"><code class="docutils literal notranslate"><span class="pre">geohash</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="geojson.html"><code class="docutils literal notranslate"><span class="pre">geojson</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="geospatial.html"><code class="docutils literal notranslate"><span class="pre">geospatial</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="git.html"><code class="docutils literal notranslate"><span class="pre">git</span></code></a></li>
@@ -468,8 +469,10 @@ and <code class="docutils literal notranslate"><span class="pre">strings</span><
 </ul>
 </li>
 <li><p>Identifiers: <code class="docutils literal notranslate"><span class="pre">cuid2</span></code>, <code class="docutils literal notranslate"><span class="pre">genint</span></code>, <code class="docutils literal notranslate"><span class="pre">gensym</span></code>, <code class="docutils literal notranslate"><span class="pre">ids</span></code>, <code class="docutils literal notranslate"><span class="pre">ksuid</span></code>,
-<code class="docutils literal notranslate"><span class="pre">nanoid</span></code>, <code class="docutils literal notranslate"><span class="pre">snowflakeid</span></code>, <code class="docutils literal notranslate"><span class="pre">sqids</span></code> <code class="docutils literal notranslate"><span class="pre">typeid</span></code>, <code class="docutils literal notranslate"><span class="pre">ulid</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">nanoid</span></code>, <code class="docutils literal notranslate"><span class="pre">snowflakeid</span></code>, <code class="docutils literal notranslate"><span class="pre">sqids</span></code>, <code class="docutils literal notranslate"><span class="pre">typeid</span></code>, <code class="docutils literal notranslate"><span class="pre">ulid</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">uuid</span></code>.</p></li>
+<li><p>International standards and reference data: <code class="docutils literal notranslate"><span class="pre">iso_13616</span></code>,
+<code class="docutils literal notranslate"><span class="pre">iso_3166</span></code>, <code class="docutils literal notranslate"><span class="pre">iso_4217</span></code>, <code class="docutils literal notranslate"><span class="pre">iso_639</span></code>, and <code class="docutils literal notranslate"><span class="pre">iso_9362</span></code>.</p></li>
 <li><p>Interchange formats and wire protocols: <code class="docutils literal notranslate"><span class="pre">amqp</span></code>, <code class="docutils literal notranslate"><span class="pre">avro</span></code>,
 <code class="docutils literal notranslate"><span class="pre">base32</span></code>, <code class="docutils literal notranslate"><span class="pre">base58</span></code>, <code class="docutils literal notranslate"><span class="pre">base64</span></code>, <code class="docutils literal notranslate"><span class="pre">base85</span></code>, <code class="docutils literal notranslate"><span class="pre">bson</span></code>, <code class="docutils literal notranslate"><span class="pre">cbor</span></code>,
 <code class="docutils literal notranslate"><span class="pre">csv</span></code>, <code class="docutils literal notranslate"><span class="pre">json</span></code>, <code class="docutils literal notranslate"><span class="pre">json_graph</span></code>, <code class="docutils literal notranslate"><span class="pre">json_ld</span></code>, <code class="docutils literal notranslate"><span class="pre">json_lines</span></code>,
@@ -551,8 +554,8 @@ a small number of standalone reusable entities, namely <code class="docutils lit
 <code class="docutils literal notranslate"><span class="pre">cloning</span></code>, <code class="docutils literal notranslate"><span class="pre">counters</span></code>, and <code class="docutils literal notranslate"><span class="pre">streamvars</span></code>.</p>
 <p>Specific notes about individual libraries can be found in the
 corresponding library directory <code class="docutils literal notranslate"><span class="pre">NOTES.md</span></code> files.</p>
-<p>A plain Prolog version of the Unicode 6.2 standard is also included in
-the <code class="docutils literal notranslate"><span class="pre">unicode_data</span></code> folder. See its <code class="docutils literal notranslate"><span class="pre">README.md</span></code> file for details.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">unicode_data</span></code> library is a plain Prolog version of the Unicode
+17.0 standard. See its documentation file for details.</p>
 <p>A <code class="docutils literal notranslate"><span class="pre">parallel_logtalk_processes_setup.pl</span></code> Prolog file is also provided
 with sample code for selected backend Prolog compilers for initializing
 Logtalk processes such that each process uses a unique scratch

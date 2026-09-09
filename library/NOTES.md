@@ -72,8 +72,10 @@ Library groups
         `http_process_transport`, `http_static_files`, `http_websocket_messages`,
 	    `http_websocket_service`, `http_websocket_session`.
 - Identifiers:
-	`cuid2`, `genint`, `gensym`, `ids`, `ksuid`, `nanoid`, `snowflakeid`, `sqids`
+	`cuid2`, `genint`, `gensym`, `ids`, `ksuid`, `nanoid`, `snowflakeid`, `sqids`,
     `typeid`, `ulid`, and `uuid`.
+- International standards and reference data:
+	`iso_13616`, `iso_3166`, `iso_4217`, `iso_639`, and `iso_9362`.
 - Interchange formats and wire protocols:
 	`amqp`, `avro`, `base32`, `base58`, `base64`, `base85`, `bson`, `cbor`,	`csv`,
 	`json`, `json_graph`, `json_ld`, `json_lines`, `json_patch`, `json_path`, `json_pointer`, `json_rpc`, `json_schema`,
@@ -139,8 +141,8 @@ small number of standalone reusable entities, namely `attributes`, `cloning`,
 Specific notes about individual libraries can be found in the corresponding
 library directory `NOTES.md` files.
 
-A plain Prolog version of the Unicode 6.2 standard is also included in the
-`unicode_data` folder. See its `README.md` file for details.
+The `unicode_data` library is a plain Prolog version of the Unicode 17.0
+standard. See its documentation file for details.
 
 A `parallel_logtalk_processes_setup.pl` Prolog file is also provided with
 sample code for selected backend Prolog compilers for initializing Logtalk

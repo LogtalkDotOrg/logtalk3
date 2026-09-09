@@ -107,6 +107,7 @@ directory in the ``NOTES.md`` file.
    genetic_algorithm
    genint
    gensym
+   geohash
    geojson
    geospatial
    git
