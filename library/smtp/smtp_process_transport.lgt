@@ -42,6 +42,13 @@
 		argnames is ['Connection', 'Input', 'Output']
 	]).
 
+	:- public(failure_details/3).
+	:- mode(failure_details(+compound, --term, --atom), one).
+	:- info(failure_details/3, [
+		comment is 'Returns the process exit status and standard error output after an OpenSSL connection failure.',
+		argnames is ['Connection', 'Status', 'Diagnostic']
+	]).
+
 	:- public(close/1).
 	:- mode(close(+compound), one).
 	:- info(close/1, [
@@ -67,7 +74,7 @@
 		process::create(ExecutablePath, Arguments, [stdin(Output), stdout(Input), stderr(Error), process(Process), type(binary)]),
 		Connection = smtp_process_connection(Input, Output, Error, Process),
 		catch(
-			setup_streams(Input, Output),
+			setup_streams(Input, Output, Error),
 			SetupError,
 			(	close(Connection),
 				throw(SetupError)
@@ -81,16 +88,21 @@
 	streams(Connection, _Input, _Output) :-
 		domain_error(smtp_process_connection, Connection).
 
+	failure_details(smtp_process_connection(_Input, _Output, Error, Process), Status, Diagnostic) :-
+		read_error_stream(Error, Bytes),
+		wait_process_status(Process, Status),
+		atom_codes(Diagnostic, Bytes).
+
 	close(smtp_process_connection(Input, Output, Error, Process)) :-
 		close_stream(Output),
 		close_stream(Input),
 		close_stream(Error),
-		catch(process::kill(Process, sigterm), _, true),
-		catch(process::wait(Process, _Status), _, true).
+		kill_process(Process),
+		wait_process(Process).
 
 	connection_arguments(Host, Port, Security, Helo, ServerName, Options, Arguments) :-
 		connect_argument(Host, Port, ConnectArgument),
-		Base = ['s_client', '-quiet', '-no_ign_eof', '-connect', ConnectArgument],
+		Base = ['s_client', '-quiet', '-no_ign_eof', '-nocommands', '-connect', ConnectArgument],
 		add_server_name(ServerName, Base, Arguments0),
 		add_verification(Host, ServerName, Options, Arguments0, Arguments1),
 		add_ca_file(Options, Arguments1, Arguments2),
@@ -160,41 +172,68 @@
 
 	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
 
-		setup_streams(Input, Output) :-
+		setup_streams(Input, Output, Error) :-
 			{set_stream_property(Input, encoding, octet)},
-			{set_stream_property(Output, encoding, octet)}.
+			{set_stream_property(Output, encoding, octet)},
+			{set_stream_property(Error, encoding, octet)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
 
-		setup_streams(Input, Output) :-
+		setup_streams(Input, Output, Error) :-
 			{set_stream_type(Input, binary)},
-			{set_stream_type(Output, binary)}.
+			{set_stream_type(Output, binary)},
+			{set_stream_type(Error, binary)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 
-		setup_streams(_Input, _Output).
+		setup_streams(_Input, _Output, _Error).
 
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 
-		setup_streams(Input, Output) :-
+		setup_streams(Input, Output, Error) :-
 			{set_stream(Input, type(binary))},
-			{set_stream(Output, type(binary))}.
+			{set_stream(Output, type(binary))},
+			{set_stream(Error, type(binary))}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, trealla)).
 
-		setup_streams(Input, Output) :-
+		setup_streams(Input, Output, Error) :-
 			{set_stream(Input, type(binary))},
-			{set_stream(Output, type(binary))}.
+			{set_stream(Output, type(binary))},
+			{set_stream(Error, type(binary))}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, xvm)).
 
-		setup_streams(Input, Output) :-
+		setup_streams(Input, Output, Error) :-
 			{set_stream_type(Input, binary)},
-			{set_stream_type(Output, binary)}.
+			{set_stream_type(Output, binary)},
+			{set_stream_type(Error, binary)}.
 
 	:- endif.
 
 	close_stream(Stream) :-
-		catch(close(Stream), _, true).
+		catch(close(Stream), _, true),
+		!.
+	close_stream(_Stream).
+
+	kill_process(Process) :-
+		catch(process::kill(Process, sigterm), _, true),
+		!.
+	kill_process(_Process).
+
+	wait_process(Process) :-
+		catch(process::wait(Process, _Status), _, true),
+		!.
+	wait_process(_Process).
+
+	read_error_stream(Error, Bytes) :-
+		catch(reader::stream_to_bytes(Error, Bytes), _, fail),
+		!.
+	read_error_stream(_Error, []).
+
+	wait_process_status(Process, Status) :-
+		catch(process::wait(Process, Status), _, fail),
+		!.
+	wait_process_status(_Process, unknown).
 
 :- end_object.

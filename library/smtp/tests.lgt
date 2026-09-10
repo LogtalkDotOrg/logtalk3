@@ -230,7 +230,21 @@
 
 		test(smtp_closed_connection_01, deterministic) :-
 			run_connect_error(mock_closed_connection_server, [], Error),
-			Error = error(smtp_error(connection_closed), _).
+			Error = error(smtp_error(connection_closed(greeting)), _).
+
+		test(smtp_transaction_closed_01, deterministic) :-
+			socket::server_open('127.0.0.1', Port, Listener, [type(binary)]),
+			threaded_once(mock_transaction_closed_server(Listener), Tag),
+			smtp::connect('127.0.0.1', Port, Connection, [helo('client.test')]),
+			catch(
+				smtp::send(Connection, smtp_message('alice@example.com', 'bob@example.com', [], ''), _Result, []),
+				Error,
+				true
+			),
+			smtp::disconnect(Connection),
+			threaded_exit(mock_transaction_closed_server(Listener), Tag),
+			socket::server_close(Listener),
+			Error = error(smtp_error(connection_closed(mail_from)), _).
 
 		test(smtp_greeting_failed_01, deterministic) :-
 			run_connect_error(mock_greeting_failed_server, [], Error),
@@ -431,6 +445,14 @@
 
 		mock_closed_connection_server(Listener) :-
 			socket::server_accept(Listener, Input, Output, _ClientInfo, [type(binary)]),
+			socket::close(Input, Output).
+
+		mock_transaction_closed_server(Listener) :-
+			socket::server_accept(Listener, Input, Output, _ClientInfo, [type(binary)]),
+			write_line(Output, '220 mock.example ESMTP'),
+			read_line(Input, _Ehlo),
+			write_line(Output, '250 mock.example'),
+			read_line(Input, _Mail),
 			socket::close(Input, Output).
 
 		mock_greeting_failed_server(Listener) :-

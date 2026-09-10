@@ -97,8 +97,10 @@ Opens an SMTP session, sends a message, and closes the session.
 |        ``domain_error(option,Option)``
 |    The SMTP connection cannot be opened:
 |        ``smtp_error(connection_failed)``
-|    The SMTP server closes the connection while a response is expected:
-|        ``smtp_error(connection_closed)``
+|    OpenSSL terminates the secure connection while an SMTP response is expected:
+|        ``smtp_error(secure_connection_failed(Status,Diagnostic))``
+|    The SMTP server closes the connection while a response is expected at ``Stage``:
+|        ``smtp_error(connection_closed(Stage))``
 |    The SMTP server rejects the session greeting:
 |        ``smtp_error(greeting_failed(Code,Lines))``
 |    The SMTP server returns an invalid or unexpected response:
@@ -156,8 +158,10 @@ Opens an SMTP session for sending one or more messages.
 |        ``domain_error(smtp_connection_option,Option)``
 |    The SMTP connection cannot be opened:
 |        ``smtp_error(connection_failed)``
-|    The SMTP server closes the connection while a response is expected:
-|        ``smtp_error(connection_closed)``
+|    OpenSSL terminates the secure connection while an SMTP response is expected:
+|        ``smtp_error(secure_connection_failed(Status,Diagnostic))``
+|    The SMTP server closes the connection while a response is expected at ``Stage``:
+|        ``smtp_error(connection_closed(Stage))``
 |    The SMTP server rejects the session greeting:
 |        ``smtp_error(greeting_failed(Code,Lines))``
 |    The SMTP server returns an invalid or unexpected response:
@@ -267,8 +271,8 @@ Sends a message over an open SMTP session.
 |        ``domain_error(option,Option)``
 |    ``Option`` is valid but is not a transaction option:
 |        ``domain_error(smtp_transaction_option,Option)``
-|    The SMTP server closes the connection while a response is expected:
-|        ``smtp_error(connection_closed)``
+|    The SMTP server closes the connection while a response is expected at ``Stage``:
+|        ``smtp_error(connection_closed(Stage))``
 |    The SMTP server returns an invalid or unexpected response:
 |        ``smtp_error(protocol_error(Response))``
 |    The SMTP server rejects the envelope sender:

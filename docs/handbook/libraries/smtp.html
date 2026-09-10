@@ -526,7 +526,10 @@ represented by <code class="docutils literal notranslate"><span class="pre">Reci
 <p>Implicit TLS and STARTTLS use <code class="docutils literal notranslate"><span class="pre">openssl</span> <span class="pre">s_client</span></code>. STARTTLS uses
 OpenSSL’s <code class="docutils literal notranslate"><span class="pre">-starttls</span> <span class="pre">smtp</span></code> support: OpenSSL consumes the initial
 plaintext greeting, EHLO, and STARTTLS exchange, after which this
-library sends the required EHLO over the encrypted connection.</p>
+library sends the required EHLO over the encrypted connection. The
+OpenSSL interactive command interpreter is disabled so that SMTP
+commands such as <code class="docutils literal notranslate"><span class="pre">RCPT</span></code>, <code class="docutils literal notranslate"><span class="pre">RSET</span></code>, and <code class="docutils literal notranslate"><span class="pre">QUIT</span></code> are forwarded
+unchanged.</p>
 <p>Peer and hostname verification are enabled by default. Authentication
 supports the advertised PLAIN and LOGIN mechanisms, preferring PLAIN.
 Authentication on a plaintext connection is rejected unless

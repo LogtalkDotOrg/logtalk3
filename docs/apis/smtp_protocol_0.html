@@ -600,9 +600,13 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">smtp_error(connection_failed)</span></code></div>
 </div>
-<div class="line">The SMTP server closes the connection while a response is expected:</div>
+<div class="line">OpenSSL terminates the secure connection while an SMTP response is expected:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">smtp_error(connection_closed)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">smtp_error(secure_connection_failed(Status,Diagnostic))</span></code></div>
+</div>
+<div class="line">The SMTP server closes the connection while a response is expected at <code class="docutils literal notranslate"><span class="pre">Stage</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">smtp_error(connection_closed(Stage))</span></code></div>
 </div>
 <div class="line">The SMTP server rejects the session greeting:</div>
 <div class="line-block">
@@ -702,9 +706,13 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">smtp_error(connection_failed)</span></code></div>
 </div>
-<div class="line">The SMTP server closes the connection while a response is expected:</div>
+<div class="line">OpenSSL terminates the secure connection while an SMTP response is expected:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">smtp_error(connection_closed)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">smtp_error(secure_connection_failed(Status,Diagnostic))</span></code></div>
+</div>
+<div class="line">The SMTP server closes the connection while a response is expected at <code class="docutils literal notranslate"><span class="pre">Stage</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">smtp_error(connection_closed(Stage))</span></code></div>
 </div>
 <div class="line">The SMTP server rejects the session greeting:</div>
 <div class="line-block">
@@ -875,9 +883,9 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(smtp_transaction_option,Option)</span></code></div>
 </div>
-<div class="line">The SMTP server closes the connection while a response is expected:</div>
+<div class="line">The SMTP server closes the connection while a response is expected at <code class="docutils literal notranslate"><span class="pre">Stage</span></code>:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">smtp_error(connection_closed)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">smtp_error(connection_closed(Stage))</span></code></div>
 </div>
 <div class="line">The SMTP server returns an invalid or unexpected response:</div>
 <div class="line-block">

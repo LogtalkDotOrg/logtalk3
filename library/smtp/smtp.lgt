@@ -131,21 +131,34 @@
 		catch(
 			negotiate_secure_session(Security, Input, Output, Helo, Options, Features, Context),
 			Error,
-			(	smtp_process_transport::close(ProcessConnection),
-				throw(Error)
+			(	secure_connection_error(Error, ProcessConnection, ConnectionError),
+				smtp_process_transport::close(ProcessConnection),
+				throw(ConnectionError)
 			)
 		),
 		Connection = smtp_connection(Input, Output, Host, Port, Features, process(ProcessConnection)).
 
+	secure_connection_error(error(smtp_error(connection_closed(Stage)), ErrorContext), ProcessConnection, ConnectionError) :-
+		!,
+		smtp_process_transport::failure_details(ProcessConnection, Status, Diagnostic),
+		(	successful_process_status(Status) ->
+			ConnectionError = error(smtp_error(connection_closed(Stage)), ErrorContext)
+		;	ConnectionError = error(smtp_error(secure_connection_failed(Status, Diagnostic)), ErrorContext)
+		).
+	secure_connection_error(Error, _ProcessConnection, Error).
+
+	successful_process_status(0).
+	successful_process_status(exit(0)).
+
 	negotiate_secure_session(tls, Input, Output, Helo, Options, Features, Context) :-
-		read_response(Input, Greeting, Context),
+		read_response_at(greeting, Input, Greeting, Context),
 		expect_code(Greeting, [220], greeting_failed, Context),
 		negotiate_ehlo(Input, Output, Helo, Options, tls, Features, Context).
 	negotiate_secure_session(starttls, Input, Output, Helo, Options, Features, Context) :-
 		negotiate_ehlo(Input, Output, Helo, Options, starttls, Features, Context).
 
 	negotiate_session(Input, Output, Host, Options, Features, Context) :-
-		read_response(Input, Greeting, Context),
+		read_response_at(greeting, Input, Greeting, Context),
 		expect_code(Greeting, [220], greeting_failed, Context),
 		helo_name(Host, Options, Helo),
 		negotiate_ehlo(Input, Output, Helo, Options, plain, Features, Context).
@@ -158,13 +171,13 @@
 
 	negotiate_ehlo(Input, Output, Helo, Options, Security, Features, Context) :-
 		send_atom_command(Output, 'EHLO', Helo),
-		read_response(Input, EhloResponse, Context),
+		read_response_at(ehlo, Input, EhloResponse, Context),
 		(	EhloResponse = smtp_response(250, Features0) ->
 			Features = Features0
 		;	EhloResponse = smtp_response(Code, _),
 			member(Code, [500, 502, 504]) ->
 			send_atom_command(Output, 'HELO', Helo),
-			read_response(Input, HeloResponse, Context),
+			read_response_at(helo, Input, HeloResponse, Context),
 			expect_code(HeloResponse, [250], protocol_error, Context),
 			Features = []
 		;	throw(error(smtp_error(protocol_error(EhloResponse)), Context))
@@ -201,7 +214,7 @@
 		authentication_mechanism(Features, Mechanism).
 
 	authentication_feature_codes([0'A,0'U,0'T,0'H,Separator| Codes], Mechanisms) :-
-		member(Separator, [0' , 0'=]),
+		member(Separator, [32, 0'=]),
 		!,
 		authentication_mechanism_codes(Codes, Mechanisms).
 
@@ -213,13 +226,13 @@
 		atom_codes(Mechanism, WordCodes),
 		authentication_mechanism_codes(Rest, Mechanisms).
 
-	drop_spaces([0' | Codes], Rest) :-
+	drop_spaces([32| Codes], Rest) :-
 		!,
 		drop_spaces(Codes, Rest).
 	drop_spaces(Codes, Codes).
 
 	take_word([], [], []).
-	take_word([0' | Codes], [], Codes) :-
+	take_word([32| Codes], [], Codes) :-
 		!.
 	take_word([Code| Codes], [Code| Word], Rest) :-
 		take_word(Codes, Word, Rest).
@@ -235,28 +248,28 @@
 	authenticate(plain, Input, Output, User, Password, Context) :-
 		plain_credentials(User, Password, Encoded),
 		send_atom_command(Output, 'AUTH PLAIN', Encoded),
-		read_response(Input, Response, Context),
+		read_response_at(authentication, Input, Response, Context),
 		(	Response = smtp_response(235, _) ->
 			true
 		;	Response = smtp_response(334, _) ->
 			send_command_atom(Output, Encoded),
-			read_response(Input, FinalResponse, Context),
+			read_response_at(authentication, Input, FinalResponse, Context),
 			expect_authentication_success(FinalResponse, Context)
 		;	throw_authentication_error(Response, Context)
 		).
 	authenticate(login, Input, Output, User, Password, Context) :-
-		send_command(Output, [0'A,0'U,0'T,0'H,0' ,0'L,0'O,0'G,0'I,0'N]),
-		read_response(Input, UserChallenge, Context),
+		send_command(Output, [0'A,0'U,0'T,0'H,32,0'L,0'O,0'G,0'I,0'N]),
+		read_response_at(authentication, Input, UserChallenge, Context),
 		expect_authentication_challenge(UserChallenge, Context),
 		atom_codes(User, UserCodes),
 		base64::generate(atom(EncodedUser), UserCodes),
 		send_command_atom(Output, EncodedUser),
-		read_response(Input, PasswordChallenge, Context),
+		read_response_at(authentication, Input, PasswordChallenge, Context),
 		expect_authentication_challenge(PasswordChallenge, Context),
 		atom_codes(Password, PasswordCodes),
 		base64::generate(atom(EncodedPassword), PasswordCodes),
 		send_command_atom(Output, EncodedPassword),
-		read_response(Input, Response, Context),
+		read_response_at(authentication, Input, Response, Context),
 		expect_authentication_success(Response, Context).
 
 	plain_credentials(User, Password, Encoded) :-
@@ -285,7 +298,7 @@
 		),
 		normalize_recipients(Recipients0, Recipients),
 		send_envelope_command(Output, 'MAIL FROM:<', From),
-		read_response(Input, MailResponse, Context),
+		read_response_at(mail_from, Input, MailResponse, Context),
 		expect_code(MailResponse, [250], sender_rejected, Context),
 		send_recipients(Recipients, Input, Output, [], Accepted0, [], Rejected0, Context),
 		reverse(Accepted0, Accepted),
@@ -298,10 +311,10 @@
 			reset_transaction(Input, Output, Context),
 			Result = smtp_result(not_sent, Accepted, Rejected)
 		;	send_command(Output, [0'D,0'A,0'T,0'A]),
-			read_response(Input, DataResponse, Context),
+			read_response_at(data, Input, DataResponse, Context),
 			expect_code(DataResponse, [354], send_failed, Context),
 			write_message(Output, From, Recipients, Headers, Body, Options),
-			read_response(Input, FinalResponse, Context),
+			read_response_at(message, Input, FinalResponse, Context),
 			expect_code(FinalResponse, [250], send_failed, Context),
 			Result = smtp_result(FinalResponse, Accepted, Rejected)
 		).
@@ -309,7 +322,7 @@
 	send_recipients([], _Input, _Output, Accepted, Accepted, Rejected, Rejected, _Context).
 	send_recipients([Recipient| Recipients], Input, Output, Accepted0, Accepted, Rejected0, Rejected, Context) :-
 		send_envelope_command(Output, 'RCPT TO:<', Recipient),
-		read_response(Input, Response, Context),
+		read_response_at(rcpt_to(Recipient), Input, Response, Context),
 		Response = smtp_response(Code, _),
 		(	member(Code, [250, 251, 252]) ->
 			send_recipients(Recipients, Input, Output, [Recipient| Accepted0], Accepted, Rejected0, Rejected, Context)
@@ -318,7 +331,7 @@
 
 	reset_transaction(Input, Output, Context) :-
 		send_command(Output, [0'R,0'S,0'E,0'T]),
-		read_response(Input, Response, Context),
+		read_response_at(reset, Input, Response, Context),
 		expect_code(Response, [250], protocol_error, Context).
 
 	write_message(Output, From, Recipients, Headers, Body, Options) :-
@@ -426,7 +439,7 @@
 		reverse(ReversedCodes, TrimmedCodes).
 
 	drop_ows([Code| Codes], TrimmedCodes) :-
-		member(Code, [0' , 0'\t]),
+		member(Code, [32, 0'\t]),
 		!,
 		drop_ows(Codes, TrimmedCodes).
 	drop_ows(Codes, Codes).
@@ -454,7 +467,7 @@
 
 	remove_ows([], []).
 	remove_ows([Code| Codes], CompactCodes) :-
-		(	member(Code, [0' , 0'\t]) ->
+		(	member(Code, [32, 0'\t]) ->
 			remove_ows(Codes, CompactCodes)
 		;	CompactCodes = [Code| Rest],
 			remove_ows(Codes, Rest)
@@ -464,7 +477,7 @@
 		atom_codes(Name, NameCodes),
 		atom_codes(Value, ValueCodes),
 		write_bytes(NameCodes, Output),
-		write_bytes([0':,0' ], Output),
+		write_bytes([0':,32], Output),
 		write_bytes(ValueCodes, Output),
 		write_crlf(Output).
 
@@ -492,7 +505,7 @@
 	send_atom_command(Output, Command, Argument) :-
 		atom_codes(Command, CommandCodes),
 		atom_codes(Argument, ArgumentCodes),
-		append(CommandCodes, [0' | ArgumentCodes], Codes),
+		append(CommandCodes, [32| ArgumentCodes], Codes),
 		send_command(Output, Codes).
 
 	send_command_atom(Output, Atom) :-
@@ -526,7 +539,14 @@
 		read_response_lines(Separator, Input, Code, [Text], ReversedLines, Context),
 		reverse(ReversedLines, Lines).
 
-	read_response_lines(0' , _Input, _Code, Lines, Lines, _Context).
+	read_response_at(Stage, Input, Response, Context) :-
+		catch(
+			read_response(Input, Response, Context),
+			error(smtp_error(connection_closed), ErrorContext),
+			throw(error(smtp_error(connection_closed(Stage)), ErrorContext))
+		).
+
+	read_response_lines(32, _Input, _Code, Lines, Lines, _Context).
 	read_response_lines(0'-, Input, Code, Lines0, Lines, Context) :-
 		line_to_bytes(Input, Line),
 		parse_response_line(Line, NextCode, Separator, Text, Context),
@@ -539,9 +559,9 @@
 		throw(error(smtp_error(connection_closed), Context)).
 	parse_response_line([Digit1, Digit2, Digit3, Separator| TextCodes], Code, Separator, Text, _Context) :-
 		digit_code(Digit1), digit_code(Digit2), digit_code(Digit3),
-		member(Separator, [0' , 0'-]),
+		member(Separator, [32, 0'-]),
 		!,
-		Code is (Digit1 - 0'0) * 100 + (Digit2 - 0'0) * 10 + Digit3 - 0'0,
+		number_codes(Code, [Digit1, Digit2, Digit3]),
 		atom_codes(Text, TextCodes).
 	parse_response_line(Line, _Code, _Separator, _Text, Context) :-
 		throw(error(smtp_error(protocol_error(Line)), Context)).

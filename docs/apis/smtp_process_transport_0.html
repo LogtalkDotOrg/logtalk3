@@ -464,6 +464,7 @@
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
 <div class="line"><a class="reference internal" href="os_0.html#os-0"><span class="std std-ref">os</span></a></div>
 <div class="line"><a class="reference internal" href="process_0.html#process-0"><span class="std std-ref">process</span></a></div>
+<div class="line"><a class="reference internal" href="reader_0.html#reader-0"><span class="std std-ref">reader</span></a></div>
 <div class="line"><a class="reference internal" href="user_0.html#user-0"><span class="std std-ref">user</span></a></div>
 </div>
 </div>
@@ -485,12 +486,13 @@
 <ul>
 <li><p><a class="reference internal" href="#open-8" id="id2"><code class="docutils literal notranslate"><span class="pre">open/8</span></code></a></p></li>
 <li><p><a class="reference internal" href="#streams-3" id="id3"><code class="docutils literal notranslate"><span class="pre">streams/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#close-1" id="id4"><code class="docutils literal notranslate"><span class="pre">close/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#failure-details-3" id="id4"><code class="docutils literal notranslate"><span class="pre">failure_details/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#close-1" id="id5"><code class="docutils literal notranslate"><span class="pre">close/1</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id5">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id6">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id7">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id6">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id7">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id8">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -537,8 +539,29 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="failure-details-3">
+<span id="smtp-process-transport-0-failure-details-3"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">failure_details/3</span></code></a><a class="headerlink" href="#failure-details-3" title="Link to this heading"></a></h3>
+<p>Returns the process exit status and standard error output after an OpenSSL connection failure.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">failure_details(Connection,Status,Diagnostic)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">failure_details(+compound,--term,--atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="close-1">
-<span id="smtp-process-transport-0-close-1"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">close/1</span></code></a><a class="headerlink" href="#close-1" title="Link to this heading"></a></h3>
+<span id="smtp-process-transport-0-close-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">close/1</span></code></a><a class="headerlink" href="#close-1" title="Link to this heading"></a></h3>
 <p>Closes the streams and terminates the OpenSSL process.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

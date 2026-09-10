@@ -25,6 +25,7 @@ Process-backed TLS transport support for the SMTP client.
 |    :ref:`list <list/0>`
 |    :ref:`os <os/0>`
 |    :ref:`process <process/0>`
+|    :ref:`reader <reader/0>`
 |    :ref:`user <user/0>`
 
 | **Remarks:**
@@ -74,6 +75,25 @@ Returns the input and output streams for an open process connection.
 |    ``streams(Connection,Input,Output)``
 | **Mode and number of proofs:**
 |    ``streams(+compound,--stream,--stream)`` - ``one_or_error``
+
+
+------------
+
+.. index:: failure_details/3
+.. _smtp_process_transport/0::failure_details/3:
+
+``failure_details/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns the process exit status and standard error output after an OpenSSL connection failure.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``failure_details(Connection,Status,Diagnostic)``
+| **Mode and number of proofs:**
+|    ``failure_details(+compound,--term,--atom)`` - ``one``
 
 
 ------------

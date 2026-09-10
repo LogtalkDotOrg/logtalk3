@@ -137,7 +137,9 @@ Security
 Implicit TLS and STARTTLS use `openssl s_client`. STARTTLS uses OpenSSL's
 `-starttls smtp` support: OpenSSL consumes the initial plaintext greeting,
 EHLO, and STARTTLS exchange, after which this library sends the required EHLO
-over the encrypted connection.
+over the encrypted connection. The OpenSSL interactive command interpreter is
+disabled so that SMTP commands such as `RCPT`, `RSET`, and `QUIT` are forwarded
+unchanged.
 
 Peer and hostname verification are enabled by default. Authentication supports
 the advertised PLAIN and LOGIN mechanisms, preferring PLAIN. Authentication on
