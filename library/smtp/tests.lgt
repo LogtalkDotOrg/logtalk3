@@ -62,8 +62,20 @@
 	test(smtp_invalid_body_01, error(domain_error(smtp_body, body(term)))) :-
 		smtp::send(localhost, 25, smtp_message('a@example.com', 'b@example.com', [], body(term)), _Result, []).
 
-	test(smtp_invalid_body_code_01, error(domain_error(smtp_body_code, 128))) :-
-		smtp::send(localhost, 25, smtp_message('a@example.com', ['b@example.com'], [], [128]), _Result, []).
+	test(smtp_invalid_body_code_01, error(domain_error(smtp_body, codes([0xD800])))) :-
+		smtp::send(localhost, 25, smtp_message('a@example.com', ['b@example.com'], [], codes([0xD800])), _Result, []).
+
+	test(smtp_invalid_body_code_02, error(domain_error(smtp_body, codes([0x110000])))) :-
+		smtp::send(localhost, 25, smtp_message('a@example.com', ['b@example.com'], [], codes([0x110000])), _Result, []).
+
+	test(smtp_invalid_body_character_01, error(domain_error(smtp_body, chars([ab])))) :-
+		smtp::send(localhost, 25, smtp_message('a@example.com', ['b@example.com'], [], chars([ab])), _Result, []).
+
+	test(smtp_invalid_body_representation_01, error(domain_error(smtp_body, chars(not_a_list)))) :-
+		smtp::send(localhost, 25, smtp_message('a@example.com', ['b@example.com'], [], chars(not_a_list)), _Result, []).
+
+	test(smtp_invalid_body_representation_02, error(domain_error(smtp_body, [97,98,99]))) :-
+		smtp::send(localhost, 25, smtp_message('a@example.com', ['b@example.com'], [], [97,98,99]), _Result, []).
 
 	test(smtp_invalid_header_01, error(domain_error(smtp_header, malformed))) :-
 		smtp::send(localhost, 25, smtp_message('a@example.com', 'b@example.com', [malformed], ''), _Result, []).
@@ -80,11 +92,23 @@
 	test(smtp_transaction_option_partition_01, error(domain_error(smtp_transaction_option, helo(localhost)))) :-
 		smtp::send(not_a_connection, smtp_message('a@example.com', 'b@example.com', [], ''), _Result, [helo(localhost)]).
 
+	test(smtp_mime_header_conflict_01, error(domain_error(smtp_mime_header, 'Content-Transfer-Encoding'-'8bit'))) :-
+		smtp::send(localhost, 25, smtp_message('a@example.com', 'b@example.com', ['Content-Transfer-Encoding'-'8bit'], ''), _Result, []).
+
+	test(smtp_mime_header_conflict_02, error(domain_error(smtp_mime_header, 'Content-Type'-'text/plain; charset=ISO-8859-1'))) :-
+		smtp::send(localhost, 25, smtp_message('a@example.com', 'b@example.com', ['Content-Type'-'text/plain; charset=ISO-8859-1'], ''), _Result, []).
+
+	test(smtp_mime_header_conflict_03, error(domain_error(smtp_mime_header, 'Content-Transfer-Encoding'-'8bit'))) :-
+		smtp::send(localhost, 25, smtp_message('a@example.com', 'b@example.com', [], ''), _Result, [header('Content-Transfer-Encoding', '8bit')]).
+
+	test(smtp_mime_header_duplicate_01, error(domain_error(smtp_mime_header, 'mime-version'-'1.0'))) :-
+		smtp::send(localhost, 25, smtp_message('a@example.com', 'b@example.com', ['MIME-Version'-'1.0'], ''), _Result, [header('mime-version', '1.0')]).
+
 	:- if(current_logtalk_flag(threads, supported)).
 
 		:- threaded.
 
-		test(smtp_send_plain_01, deterministic((Result == smtp_result(smtp_response(250, ['queued']), ['bob@example.com'], []), Transcript == transcript('EHLO client.test', 'MAIL FROM:<alice@example.com>', 'RCPT TO:<bob@example.com>', 'DATA', ['From: alice@example.com', 'To: bob@example.com', 'Subject: Test', '', 'Hello', 'CR', '..leading dot'], 'QUIT')))) :-
+		test(smtp_send_plain_01, deterministic((Result == smtp_result(smtp_response(250, ['queued']), ['bob@example.com'], []), Transcript == transcript('EHLO client.test', 'MAIL FROM:<alice@example.com>', 'RCPT TO:<bob@example.com>', 'DATA', ['From: alice@example.com', 'To: bob@example.com', 'MIME-Version: 1.0', 'Content-Type: text/plain; charset=UTF-8', 'Content-Transfer-Encoding: base64', 'Subject: Test', '', 'SGVsbG8NCkNSDQoubGVhZGluZyBkb3Q='], 'QUIT')))) :-
 			socket::server_open('127.0.0.1', Port, Listener, [type(binary)]),
 			threaded_once(mock_smtp_server(Listener, Transcript), Tag),
 			smtp::send(
@@ -114,16 +138,42 @@
 			threaded_exit(mock_helo_server(Listener, Ehlo, Helo), Tag),
 			socket::server_close(Listener).
 
-		test(smtp_connection_reuse_01, deterministic((Result == smtp_result(smtp_response(250, ['queued']), ['bob@example.com'], []), Alive == true, Closed == true, Data == ['From: alice@example.com', 'To: bob@example.com', 'X-Test: value', '']))) :-
+		test(smtp_connection_reuse_01, deterministic((Result == smtp_result(smtp_response(250, ['queued']), ['bob@example.com'], []), Alive == true, Closed == true, Data == ['From: alice@example.com', 'To: bob@example.com', 'MIME-Version: 1.0', 'Content-Type: text/plain; charset=UTF-8', 'Content-Transfer-Encoding: base64', 'X-Test: value', '']))) :-
 			socket::server_open('127.0.0.1', Port, Listener, [type(binary)]),
 			threaded_once(mock_reuse_server(Listener, Data), Tag),
 			smtp::connect('127.0.0.1', Port, Connection, [helo('client.test')]),
 			( smtp::connection_alive(Connection) -> Alive = true; Alive = false ),
-			smtp::send(Connection, smtp_message('alice@example.com', ['bob@example.com'], [], []), Result, [header('X-Test', value)]),
+			smtp::send(Connection, smtp_message('alice@example.com', ['bob@example.com'], [], codes([])), Result, [header('X-Test', value)]),
 			smtp::disconnect(Connection),
 			( smtp::connection_alive(Connection) -> Closed = false; Closed = true ),
 			threaded_exit(mock_reuse_server(Listener, Data), Tag),
 			socket::server_close(Listener).
+
+		test(smtp_utf8_body_representations_01, deterministic((AtomData == Expected, CharsData == Expected, CodesData == Expected))) :-
+			Codes = [233,10,8364,13,128512],
+			atom_codes(Atom, Codes),
+			codes_to_chars(Codes, Chars),
+			capture_body(Atom, AtomData),
+			capture_body(chars(Chars), CharsData),
+			capture_body(codes(Codes), CodesData),
+			Expected = ['From: alice@example.com', 'To: bob@example.com', 'MIME-Version: 1.0', 'Content-Type: text/plain; charset=UTF-8', 'Content-Transfer-Encoding: base64', '', 'w6kNCuKCrA0K8J+YgA=='].
+
+		test(smtp_base64_folding_01, deterministic((Length1 == 76, Length2 == 4))) :-
+			repeat_code(60, 0'a, Codes),
+			capture_body(codes(Codes), Data),
+			Data = ['From: alice@example.com', 'To: bob@example.com', 'MIME-Version: 1.0', 'Content-Type: text/plain; charset=UTF-8', 'Content-Transfer-Encoding: base64', '', Line1, Line2],
+			atom_length(Line1, Length1),
+			atom_length(Line2, Length2).
+
+		test(smtp_compatible_mime_headers_01, deterministic(Data == ['From: alice@example.com', 'To: bob@example.com', 'mime-version: 1.0', 'CONTENT-TYPE: text/html; charset="utf-8"', 'content-transfer-encoding: BASE64', '', 'YWJj'])) :-
+			capture_message(
+				smtp_message('alice@example.com', 'bob@example.com', [
+					'mime-version'-'1.0',
+					'CONTENT-TYPE'-'text/html; charset="utf-8"',
+					'content-transfer-encoding'-'BASE64'
+				], abc),
+				Data
+			).
 
 		test(smtp_require_all_recipients_01, deterministic(Result == smtp_result(not_sent, ['good@example.com'], ['bad@example.com'-smtp_response(550, ['rejected'])]))) :-
 			socket::server_open('127.0.0.1', Port, Listener, [type(binary)]),
@@ -214,6 +264,27 @@
 			threaded_exit(call(Server, Listener), Tag),
 			socket::server_close(Listener).
 
+		capture_body(Body, Data) :-
+			capture_message(smtp_message('alice@example.com', 'bob@example.com', [], Body), Data).
+
+		capture_message(Message, Data) :-
+			socket::server_open('127.0.0.1', Port, Listener, [type(binary)]),
+			threaded_once(mock_body_server(Listener, Data), Tag),
+			smtp::send('127.0.0.1', Port, Message, _Result, [helo('client.test')]),
+			threaded_exit(mock_body_server(Listener, Data), Tag),
+			socket::server_close(Listener).
+
+		codes_to_chars([], []).
+		codes_to_chars([Code| Codes], [Char| Chars]) :-
+			char_code(Char, Code),
+			codes_to_chars(Codes, Chars).
+
+		repeat_code(0, _Code, []) :-
+			!.
+		repeat_code(Count, Code, [Code| Codes]) :-
+			NextCount is Count - 1,
+			repeat_code(NextCount, Code, Codes).
+
 		mock_smtp_server(Listener, transcript(Ehlo, Mail, Recipient, DataCommand, Data, Quit)) :-
 			socket::server_accept(Listener, Input, Output, _ClientInfo, [type(binary)]),
 			write_line(Output, '220 mock.example ESMTP'),
@@ -272,6 +343,9 @@
 			read_line(Input, _Quit),
 			write_line(Output, '221 bye'),
 			socket::close(Input, Output).
+
+		mock_body_server(Listener, Data) :-
+			mock_reuse_server(Listener, Data).
 
 		mock_rejection_server(Listener) :-
 			socket::server_accept(Listener, Input, Output, _ClientInfo, [type(binary)]),

@@ -81,10 +81,10 @@ Opens an SMTP session, sends a message, and closes the session.
 |        ``type_error(atom,HeaderComponent)``
 |    ``Header`` is not a valid header pair:
 |        ``domain_error(smtp_header,Header)``
-|    ``Body`` is neither an atom nor a list of 7-bit character codes:
+|    ``Body`` is not a supported text representation:
 |        ``domain_error(smtp_body,Body)``
-|    ``Code`` in the message body is not a 7-bit character code:
-|        ``domain_error(smtp_body_code,Code)``
+|    A caller-supplied MIME header conflicts with UTF-8 Base64 serialization or duplicates another MIME header:
+|        ``domain_error(smtp_mime_header,Header)``
 |    ``Options`` is a variable:
 |        ``instantiation_error``
 |    ``Options`` is neither a variable nor a list:
@@ -251,10 +251,10 @@ Sends a message over an open SMTP session.
 |        ``type_error(atom,HeaderComponent)``
 |    ``Header`` is not a valid header pair:
 |        ``domain_error(smtp_header,Header)``
-|    ``Body`` is neither an atom nor a list of 7-bit character codes:
+|    ``Body`` is not a supported text representation:
 |        ``domain_error(smtp_body,Body)``
-|    ``Code`` in the message body is not a 7-bit character code:
-|        ``domain_error(smtp_body_code,Code)``
+|    A caller-supplied MIME header conflicts with UTF-8 Base64 serialization or duplicates another MIME header:
+|        ``domain_error(smtp_mime_header,Header)``
 |    ``Options`` is a variable:
 |        ``instantiation_error``
 |    ``Options`` is neither a variable nor a list:

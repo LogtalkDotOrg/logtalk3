@@ -24,6 +24,7 @@
 	:- initialization((
 		logtalk_load(basic_types(loader)),
 		logtalk_load(base64(loader)),
+		logtalk_load(character_sets(loader)),
 		logtalk_load(options(loader)),
 		logtalk_load(os(loader)),
 		logtalk_load(process(loader)),

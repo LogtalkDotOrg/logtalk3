@@ -54,6 +54,8 @@
 		check(atom, Host, Context),
 		check(positive_integer, Port, Context),
 		validate_message(Message, Context),
+		Message = smtp_message(_From, _Recipients, Headers, _Body),
+		resolve_mime_headers(Headers, MergedOptions, _MimeHeaders),
 		connect_(Host, Port, Connection, MergedOptions, Context),
 		catch(
 			send_(Connection, Message, Result, MergedOptions, Context),
@@ -90,6 +92,8 @@
 		check_transaction_options(Options),
 		^^merge_options(Options, MergedOptions),
 		validate_message(Message, Context),
+		Message = smtp_message(_From, _Recipients, Headers, _Body),
+		resolve_mime_headers(Headers, MergedOptions, _MimeHeaders),
 		send_(Connection, Message, Result, MergedOptions, Context).
 
 	connect_(Host, Port, Connection, Options, Context) :-
@@ -321,11 +325,13 @@
 		write_header(Output, 'From', From),
 		atomic_list_concat(Recipients, ', ', To),
 		write_header(Output, 'To', To),
+		resolve_mime_headers(Headers, Options, MimeHeaders),
+		write_headers(MimeHeaders, Output),
 		write_headers(Headers, Output),
 		write_option_headers(Options, Output),
 		write_crlf(Output),
-		body_codes(Body, BodyCodes),
-		write_body(BodyCodes, Output),
+		body_base64_codes(Body, Base64Codes),
+		write_body(Base64Codes, Output),
 		write_bytes([0'.,0'\r,0'\n], Output),
 		flush_output(Output).
 
@@ -341,6 +347,118 @@
 		write_option_headers(Options, Output).
 	write_option_headers([_| Options], Output) :-
 		write_option_headers(Options, Output).
+
+	resolve_mime_headers(Headers, Options, MimeHeaders) :-
+		option_headers(Options, OptionHeaders),
+		append(Headers, OptionHeaders, AllHeaders),
+		resolve_mime_header(mime_version, 'MIME-Version'-'1.0', AllHeaders, MimeVersionHeaders),
+		resolve_mime_header(content_type, 'Content-Type'-'text/plain; charset=UTF-8', AllHeaders, ContentTypeHeaders),
+		resolve_mime_header(content_transfer_encoding, 'Content-Transfer-Encoding'-base64, AllHeaders, TransferEncodingHeaders),
+		append(MimeVersionHeaders, ContentTypeHeaders, Headers0),
+		append(Headers0, TransferEncodingHeaders, MimeHeaders).
+
+	option_headers([], []).
+	option_headers([header(Name, Value)| Options], [Name-Value| Headers]) :-
+		!,
+		option_headers(Options, Headers).
+	option_headers([_| Options], Headers) :-
+		option_headers(Options, Headers).
+
+	resolve_mime_header(Key, Default, Headers, Resolved) :-
+		mime_header_values(Headers, Key, Values),
+		(	Values == [] ->
+			Resolved = [Default]
+		;	Values = [Name-Value] ->
+			( valid_mime_header_value(Key, Value) ->
+				Resolved = []
+			; domain_error(smtp_mime_header, Name-Value)
+			)
+		;	Values = [_First, Duplicate| _],
+			domain_error(smtp_mime_header, Duplicate)
+		).
+
+	mime_header_values([], _Key, []).
+	mime_header_values([Name-Value| Headers], Key, Values) :-
+		(	mime_header_name(Name, Key) ->
+			Values = [Name-Value| Rest]
+		;	Values = Rest
+		),
+		mime_header_values(Headers, Key, Rest).
+
+	mime_header_name(Name, Key) :-
+		atom_codes(Name, Codes),
+		lowercase_ascii_codes(Codes, LowercaseCodes),
+		atom_codes(NormalizedName, LowercaseCodes),
+		mime_header_key(NormalizedName, Key).
+
+	mime_header_key('mime-version', mime_version).
+	mime_header_key('content-type', content_type).
+	mime_header_key('content-transfer-encoding', content_transfer_encoding).
+
+	valid_mime_header_value(mime_version, Value) :-
+		normalized_ascii_atom(Value, '1.0').
+	valid_mime_header_value(content_transfer_encoding, Value) :-
+		normalized_ascii_atom(Value, base64).
+	valid_mime_header_value(content_type, Value) :-
+		atom_codes(Value, Codes),
+		lowercase_ascii_codes(Codes, LowercaseCodes),
+		split_parameter_codes(LowercaseCodes, [_MediaType| Parameters]),
+		utf8_charset_parameter(Parameters).
+
+	normalized_ascii_atom(Atom, Normalized) :-
+		atom_codes(Atom, Codes),
+		trim_ows(Codes, TrimmedCodes),
+		lowercase_ascii_codes(TrimmedCodes, LowercaseCodes),
+		atom_codes(Normalized, LowercaseCodes).
+
+	lowercase_ascii_codes([], []).
+	lowercase_ascii_codes([Code| Codes], [LowercaseCode| LowercaseCodes]) :-
+		(	Code >= 0'A, Code =< 0'Z ->
+			LowercaseCode is Code + 32
+		;	LowercaseCode = Code
+		),
+		lowercase_ascii_codes(Codes, LowercaseCodes).
+
+	trim_ows(Codes, TrimmedCodes) :-
+		drop_ows(Codes, Codes1),
+		reverse(Codes1, ReversedCodes1),
+		drop_ows(ReversedCodes1, ReversedCodes),
+		reverse(ReversedCodes, TrimmedCodes).
+
+	drop_ows([Code| Codes], TrimmedCodes) :-
+		member(Code, [0' , 0'\t]),
+		!,
+		drop_ows(Codes, TrimmedCodes).
+	drop_ows(Codes, Codes).
+
+	split_parameter_codes(Codes, [Segment| Segments]) :-
+		take_parameter_codes(Codes, Segment, Rest),
+		(	Rest == [] ->
+			Segments = []
+		;	split_parameter_codes(Rest, Segments)
+		).
+
+	take_parameter_codes([], [], []).
+	take_parameter_codes([0';| Codes], [], Codes) :-
+		!.
+	take_parameter_codes([Code| Codes], [Code| Segment], Rest) :-
+		take_parameter_codes(Codes, Segment, Rest).
+
+	utf8_charset_parameter([Parameter| _]) :-
+		remove_ows(Parameter, CompactCodes),
+		atom_codes(Compact, CompactCodes),
+		member(Compact, ['charset=utf-8', 'charset="utf-8"']),
+		!.
+	utf8_charset_parameter([_| Parameters]) :-
+		utf8_charset_parameter(Parameters).
+
+	remove_ows([], []).
+	remove_ows([Code| Codes], CompactCodes) :-
+		(	member(Code, [0' , 0'\t]) ->
+			remove_ows(Codes, CompactCodes)
+		;	CompactCodes = [Code| Rest],
+			remove_ows(Codes, Rest)
+		).
 
 	write_header(Output, Name, Value) :-
 		atom_codes(Name, NameCodes),
@@ -481,7 +599,7 @@
 		validate_recipients(RecipientList, Context),
 		validate_headers(Headers, Context),
 		body_codes(Body, BodyCodes),
-		validate_body_codes(BodyCodes, Context).
+		utf_8::codes_to_bytes(BodyCodes, _Bytes).
 	validate_message(Message, _Context) :-
 		domain_error(smtp_message, Message).
 
@@ -552,8 +670,12 @@
 		once((Code == 0'\t; Code >= 32, Code =< 126)),
 		valid_header_value_codes(Codes).
 
-	body_codes(Body, Body) :-
-		proper_list(Body),
+	body_codes(chars(Chars), Codes) :-
+		valid(chars(unicode_full), Chars),
+		!,
+		chars_to_codes(Chars, Codes).
+	body_codes(codes(Codes), Codes) :-
+		valid(codes(unicode_full), Codes),
 		!.
 	body_codes(Body, Codes) :-
 		atom(Body),
@@ -562,12 +684,38 @@
 	body_codes(Body, _Codes) :-
 		domain_error(smtp_body, Body).
 
-	validate_body_codes([], _Context).
-	validate_body_codes([Code| Codes], Context) :-
-		(	integer(Code), Code >= 0, Code =< 127 ->
-			validate_body_codes(Codes, Context)
-		;	domain_error(smtp_body_code, Code)
-		).
+	chars_to_codes([], []).
+	chars_to_codes([Char| Chars], [Code| Codes]) :-
+		char_code(Char, Code),
+		chars_to_codes(Chars, Codes).
+
+	body_base64_codes(Body, Base64Codes) :-
+		body_codes(Body, BodyCodes),
+		normalize_body_newlines(BodyCodes, NormalizedCodes),
+		utf_8::codes_to_bytes(NormalizedCodes, Bytes),
+		base64::generate(codes(Codes), Bytes),
+		fold_base64_codes(Codes, 76, Base64Codes).
+
+	normalize_body_newlines([], []).
+	normalize_body_newlines([0'\r,0'\n| Codes], [0'\r,0'\n| NormalizedCodes]) :-
+		!,
+		normalize_body_newlines(Codes, NormalizedCodes).
+	normalize_body_newlines([0'\r| Codes], [0'\r,0'\n| NormalizedCodes]) :-
+		!,
+		normalize_body_newlines(Codes, NormalizedCodes).
+	normalize_body_newlines([0'\n| Codes], [0'\r,0'\n| NormalizedCodes]) :-
+		!,
+		normalize_body_newlines(Codes, NormalizedCodes).
+	normalize_body_newlines([Code| Codes], [Code| NormalizedCodes]) :-
+		normalize_body_newlines(Codes, NormalizedCodes).
+
+	fold_base64_codes([], _Remaining, []).
+	fold_base64_codes([Code| Codes], 0, [0'\r,0'\n,Code| FoldedCodes]) :-
+		!,
+		fold_base64_codes(Codes, 75, FoldedCodes).
+	fold_base64_codes([Code| Codes], Remaining, [Code| FoldedCodes]) :-
+		NextRemaining is Remaining - 1,
+		fold_base64_codes(Codes, NextRemaining, FoldedCodes).
 
 	check_one_shot_options([]).
 	check_one_shot_options([Option| Options]) :-

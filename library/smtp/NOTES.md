@@ -62,7 +62,7 @@ socket or process resources before returning:
 	         'alice@example.com',
 	         ['bob@example.com'],
 	         ['Subject'-'Hello'],
-	         'This is a test message.'
+	         'Olá, mundo!'
 	     ),
 	     smtp::send('smtp.example.com', 587, Message, Result, [
 	         security(starttls),
@@ -82,8 +82,22 @@ Messages use the term:
 	smtp_message(EnvelopeFrom, Recipients, Headers, Body)
 
 `Recipients` is a mailbox atom or a non-empty list of mailbox atoms. `Headers`
-is a list of `Name-Value` pairs. The current implementation accepts atoms or
-lists of 7-bit character codes as bodies.
+is a list of `Name-Value` pairs. Bodies are text represented by an atom, a
+`chars(Chars)` term, or a `codes(Codes)` term.
+
+All bodies are encoded as UTF-8 and transferred using MIME Base64 encoding.
+Input CRLF, bare CR, and bare LF line endings are normalized to CRLF before
+encoding, and Base64 output is folded at 76 characters per line. The library
+adds the following headers when they are not supplied by the caller:
+
+- `MIME-Version: 1.0`
+- `Content-Type: text/plain; charset=UTF-8`
+- `Content-Transfer-Encoding: base64`
+
+Caller-supplied MIME headers are preserved when compatible. Header names are
+matched case-insensitively. Conflicting or duplicate MIME headers are rejected
+before opening a connection. A caller-supplied `Content-Type` may select a
+different media type, such as `text/html`, but must declare the UTF-8 charset.
 
 Results use the term:
 
@@ -134,8 +148,11 @@ explicitly specified.
 Limitations
 -----------
 
-The current version supports 7-bit plain text messages. MIME multipart bodies,
-attachments, SMTPUTF8, 8BITMIME, PIPELINING, CHUNKING, DSN, automatic retries,
-connection pooling, and operation timeouts are not implemented. Automatic
-retry after `DATA` is deliberately omitted because loss of the final reply
-makes delivery status ambiguous and retrying can duplicate mail.
+The current version supports UTF-8 MIME text bodies. Header names and values,
+including subjects and display names, remain restricted to ASCII; RFC 2047
+encoded words are not generated. MIME multipart bodies, attachments, SMTPUTF8
+envelopes, quoted-printable transfer encoding, 8BITMIME, PIPELINING, CHUNKING,
+DSN, automatic retries, connection pooling, and operation timeouts are not
+implemented. Automatic retry after `DATA` is deliberately omitted because loss
+of the final reply makes delivery status ambiguous and retrying can duplicate
+mail.

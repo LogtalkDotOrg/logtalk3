@@ -568,13 +568,13 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(smtp_header,Header)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Body</span></code> is neither an atom nor a list of 7-bit character codes:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Body</span></code> is not a supported text representation:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(smtp_body,Body)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Code</span></code> in the message body is not a 7-bit character code:</div>
+<div class="line">A caller-supplied MIME header conflicts with UTF-8 Base64 serialization or duplicates another MIME header:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(smtp_body_code,Code)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(smtp_mime_header,Header)</span></code></div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
 <div class="line-block">
@@ -843,13 +843,13 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(smtp_header,Header)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Body</span></code> is neither an atom nor a list of 7-bit character codes:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Body</span></code> is not a supported text representation:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(smtp_body,Body)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Code</span></code> in the message body is not a 7-bit character code:</div>
+<div class="line">A caller-supplied MIME header conflicts with UTF-8 Base64 serialization or duplicates another MIME header:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(smtp_body_code,Code)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(smtp_mime_header,Header)</span></code></div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
 <div class="line-block">

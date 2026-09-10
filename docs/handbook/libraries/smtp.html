@@ -451,7 +451,7 @@ connection, negotiates the SMTP session, sends one message, issues
          <span class="s">&#39;alice@example.com&#39;</span>,
          [<span class="s">&#39;bob@example.com&#39;</span>],
          [<span class="s">&#39;Subject&#39;</span><span class="o">-</span><span class="s">&#39;Hello&#39;</span>],
-         <span class="s">&#39;This is a test message.&#39;</span>
+         <span class="s">&#39;Olá, mundo!&#39;</span>
      ),
      smtp<span class="o">::</span>send(<span class="s">&#39;smtp.example.com&#39;</span>, <span class="m">587</span>, <span class="nv">Message</span>, <span class="nv">Result</span>, [
          security(starttls),
@@ -471,9 +471,24 @@ global session state.</p>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">Recipients</span></code> is a mailbox atom or a non-empty list of mailbox atoms.
-<code class="docutils literal notranslate"><span class="pre">Headers</span></code> is a list of <code class="docutils literal notranslate"><span class="pre">Name-Value</span></code> pairs. The current
-implementation accepts atoms or lists of 7-bit character codes as
-bodies.</p>
+<code class="docutils literal notranslate"><span class="pre">Headers</span></code> is a list of <code class="docutils literal notranslate"><span class="pre">Name-Value</span></code> pairs. Bodies are text
+represented by an atom, a <code class="docutils literal notranslate"><span class="pre">chars(Chars)</span></code> term, or a <code class="docutils literal notranslate"><span class="pre">codes(Codes)</span></code>
+term.</p>
+<p>All bodies are encoded as UTF-8 and transferred using MIME Base64
+encoding. Input CRLF, bare CR, and bare LF line endings are normalized
+to CRLF before encoding, and Base64 output is folded at 76 characters
+per line. The library adds the following headers when they are not
+supplied by the caller:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MIME-Version:</span> <span class="pre">1.0</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Content-Type:</span> <span class="pre">text/plain;</span> <span class="pre">charset=UTF-8</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Content-Transfer-Encoding:</span> <span class="pre">base64</span></code></p></li>
+</ul>
+<p>Caller-supplied MIME headers are preserved when compatible. Header names
+are matched case-insensitively. Conflicting or duplicate MIME headers
+are rejected before opening a connection. A caller-supplied
+<code class="docutils literal notranslate"><span class="pre">Content-Type</span></code> may select a different media type, such as
+<code class="docutils literal notranslate"><span class="pre">text/html</span></code>, but must declare the UTF-8 charset.</p>
 <p>Results use the term:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>smtp_result(<span class="nv">FinalResponse</span>, <span class="nv">AcceptedRecipients</span>, <span class="nv">RejectedRecipients</span>)
 </pre></div>
@@ -519,12 +534,14 @@ Authentication on a plaintext connection is rejected unless
 </section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
-<p>The current version supports 7-bit plain text messages. MIME multipart
-bodies, attachments, SMTPUTF8, 8BITMIME, PIPELINING, CHUNKING, DSN,
-automatic retries, connection pooling, and operation timeouts are not
-implemented. Automatic retry after <code class="docutils literal notranslate"><span class="pre">DATA</span></code> is deliberately omitted
-because loss of the final reply makes delivery status ambiguous and
-retrying can duplicate mail.</p>
+<p>The current version supports UTF-8 MIME text bodies. Header names and
+values, including subjects and display names, remain restricted to
+ASCII; RFC 2047 encoded words are not generated. MIME multipart bodies,
+attachments, SMTPUTF8 envelopes, quoted-printable transfer encoding,
+8BITMIME, PIPELINING, CHUNKING, DSN, automatic retries, connection
+pooling, and operation timeouts are not implemented. Automatic retry
+after <code class="docutils literal notranslate"><span class="pre">DATA</span></code> is deliberately omitted because loss of the final reply
+makes delivery status ambiguous and retrying can duplicate mail.</p>
 </section>
 </section>
 
