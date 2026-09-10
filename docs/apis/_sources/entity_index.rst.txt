@@ -789,6 +789,8 @@ Objects
    size_metric <size_metric_0>
    sk_language_profile <sk_language_profile_0>
    sl_language_profile <sl_language_profile_0>
+   smtp <smtp_0>
+   smtp_process_transport <smtp_process_transport_0>
    snowflakeid <snowflakeid_0>
    snowflakeid(Representation,EpochMilliseconds,TimeUnitMilliseconds,TimestampBits,NodeBits,SequenceBits,Node) <snowflakeid_7>
    snowflakeid_instagram <snowflakeid_instagram_0>
@@ -1164,6 +1166,7 @@ Protocols
    sequence_dataset_protocol <sequence_dataset_protocol_0>
    setp <setp_0>
    simulated_annealing_protocol <simulated_annealing_protocol_0>
+   smtp_protocol <smtp_protocol_0>
    snowflakeid_protocol <snowflakeid_protocol_0>
    spelling_normalizer_protocol <spelling_normalizer_protocol_0>
    statisticsp <statisticsp_0>

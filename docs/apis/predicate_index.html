@@ -5658,6 +5658,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#open-5"><code class="docutils literal notranslate"><span class="pre">open/5</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#open-8"><code class="docutils literal notranslate"><span class="pre">open/8</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#open-api-bad-request-response-1"><code class="docutils literal notranslate"><span class="pre">open_api_bad_request_response/1</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -7620,6 +7623,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#send-4"><code class="docutils literal notranslate"><span class="pre">send/4</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#send-5"><code class="docutils literal notranslate"><span class="pre">send/5</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#send-binary-2"><code class="docutils literal notranslate"><span class="pre">send_binary/2</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -8191,6 +8197,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#stream-to-terms-3"><code class="docutils literal notranslate"><span class="pre">stream_to_terms/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#streams-3"><code class="docutils literal notranslate"><span class="pre">streams/3</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#string-chars-2"><code class="docutils literal notranslate"><span class="pre">string_chars/2</span></code></a><ul class="simple">
@@ -12206,6 +12215,7 @@
 <li><p><a class="reference internal" href="http_websocket_0.html#http-websocket-0-close-1"><span class="std std-ref">http_websocket</span></a></p></li>
 <li><p><a class="reference internal" href="http_websocket_service_registry_0.html#http-websocket-service-registry-0-close-1"><span class="std std-ref">http_websocket_service_registry</span></a></p></li>
 <li><p><a class="reference internal" href="s3_session_1.html#s3-session-1-close-1"><span class="std std-ref">s3_session(HTTPTransport)</span></a></p></li>
+<li><p><a class="reference internal" href="smtp_process_transport_0.html#smtp-process-transport-0-close-1"><span class="std std-ref">smtp_process_transport</span></a></p></li>
 </ul>
 </section>
 <section id="close-2">
@@ -12630,6 +12640,7 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="amqp_0.html#amqp-0-connect-4"><span class="std std-ref">amqp</span></a></p></li>
 <li><p><a class="reference internal" href="mqtt_0.html#mqtt-0-connect-4"><span class="std std-ref">mqtt</span></a></p></li>
+<li><p><a class="reference internal" href="smtp_protocol_0.html#smtp-protocol-0-connect-4"><span class="std std-ref">smtp_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="stomp_0.html#stomp-0-connect-4"><span class="std std-ref">stomp</span></a></p></li>
 </ul>
 </section>
@@ -12649,6 +12660,7 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="amqp_0.html#amqp-0-connection-alive-1"><span class="std std-ref">amqp</span></a></p></li>
 <li><p><a class="reference internal" href="mqtt_0.html#mqtt-0-connection-alive-1"><span class="std std-ref">mqtt</span></a></p></li>
+<li><p><a class="reference internal" href="smtp_protocol_0.html#smtp-protocol-0-connection-alive-1"><span class="std std-ref">smtp_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="stomp_0.html#stomp-0-connection-alive-1"><span class="std std-ref">stomp</span></a></p></li>
 </ul>
 </section>
@@ -14954,6 +14966,7 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="memcached_0.html#memcached-0-disconnect-1"><span class="std std-ref">memcached</span></a></p></li>
 <li><p><a class="reference internal" href="redis_0.html#redis-0-disconnect-1"><span class="std std-ref">redis</span></a></p></li>
+<li><p><a class="reference internal" href="smtp_protocol_0.html#smtp-protocol-0-disconnect-1"><span class="std std-ref">smtp_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="disconnect-2">
@@ -24903,6 +24916,14 @@
 <li><p><a class="reference internal" href="http_websocket_client_service_1.html#http-websocket-client-service-1-open-5"><span class="std std-ref">http_websocket_client_service(HTTPTransport)</span></a></p></li>
 </ul>
 </section>
+<section id="open-8">
+<h2><code class="docutils literal notranslate"><span class="pre">open/8</span></code><a class="headerlink" href="#open-8" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="smtp_process_transport_0.html#smtp-process-transport-0-open-8"><span class="std std-ref">smtp_process_transport</span></a></p></li>
+</ul>
+</section>
 <section id="open-api-bad-request-response-1">
 <h2><code class="docutils literal notranslate"><span class="pre">open_api_bad_request_response/1</span></code><a class="headerlink" href="#open-api-bad-request-response-1" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -30367,7 +30388,16 @@
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
+<li><p><a class="reference internal" href="smtp_protocol_0.html#smtp-protocol-0-send-4"><span class="std std-ref">smtp_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="stomp_0.html#stomp-0-send-4"><span class="std std-ref">stomp</span></a></p></li>
+</ul>
+</section>
+<section id="send-5">
+<h2><code class="docutils literal notranslate"><span class="pre">send/5</span></code><a class="headerlink" href="#send-5" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="smtp_protocol_0.html#smtp-protocol-0-send-5"><span class="std std-ref">smtp_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="send-binary-2">
@@ -31948,6 +31978,14 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="reader_0.html#reader-0-stream-to-terms-3"><span class="std std-ref">reader</span></a></p></li>
+</ul>
+</section>
+<section id="streams-3">
+<h2><code class="docutils literal notranslate"><span class="pre">streams/3</span></code><a class="headerlink" href="#streams-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="smtp_process_transport_0.html#smtp-process-transport-0-streams-3"><span class="std std-ref">smtp_process_transport</span></a></p></li>
 </ul>
 </section>
 <section id="string-chars-2">

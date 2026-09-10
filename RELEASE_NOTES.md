@@ -147,6 +147,8 @@ Mahalanobis distance predicates.
 
 * ADDED: New `mqtt` library implementing a MQTT 5.0 client.
 
+* ADDED: New `smtp` library implementing a portable SMTP/ESMTP client.
+
 * ADDED: New `linear_programming` library providing immutable construction
 and solving of small linear programs.
 

@@ -129,6 +129,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">dependents</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="deques.html"><code class="docutils literal notranslate"><span class="pre">deques</span></code></a></li>
@@ -322,6 +323,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sets.html"><code class="docutils literal notranslate"><span class="pre">sets</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgd_classifier.html"><code class="docutils literal notranslate"><span class="pre">sgd_classifier</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="simulated_annealing.html"><code class="docutils literal notranslate"><span class="pre">simulated_annealing</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="smtp.html"><code class="docutils literal notranslate"><span class="pre">smtp</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="snowflakeid.html"><code class="docutils literal notranslate"><span class="pre">snowflakeid</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="sockets.html"><code class="docutils literal notranslate"><span class="pre">sockets</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="spade_pattern_miner.html"><code class="docutils literal notranslate"><span class="pre">spade_pattern_miner</span></code></a></li>
@@ -424,6 +426,13 @@ link in a web browser.</p>
 <p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> utility
 file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(dependents(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(dependents(tester)).
 </pre></div>
 </div>
 </section>

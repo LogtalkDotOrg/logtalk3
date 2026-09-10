@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on September 9, 2026
+##   Last updated on September 10, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -326,6 +326,7 @@ sed '1,19d' ../../../library/sequential_pattern_mining_protocols/NOTES.md | pand
 sed '1,19d' ../../../library/sets/NOTES.md | pandoc -f gfm -t rst -o libraries/sets.rst
 sed '1,19d' ../../../library/sgd_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/sgd_classifier.rst
 sed '1,19d' ../../../library/simulated_annealing/NOTES.md | pandoc -f gfm -t rst -o libraries/simulated_annealing.rst
+sed '1,19d' ../../../library/smtp/NOTES.md | pandoc -f gfm -t rst -o libraries/smtp.rst
 sed '1,19d' ../../../library/snowflakeid/NOTES.md | pandoc -f gfm -t rst -o libraries/snowflakeid.rst
 sed '1,19d' ../../../library/sockets/NOTES.md | pandoc -f gfm -t rst -o libraries/sockets.rst
 sed '1,19d' ../../../library/spade_pattern_miner/NOTES.md | pandoc -f gfm -t rst -o libraries/spade_pattern_miner.rst

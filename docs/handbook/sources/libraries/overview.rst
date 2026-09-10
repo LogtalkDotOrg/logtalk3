@@ -65,7 +65,8 @@ Library groups
   ``csv``, ``json``, ``json_graph``, ``json_ld``, ``json_lines``,
   ``json_patch``, ``json_path``, ``json_pointer``, ``json_rpc``,
   ``json_schema``, ``message_pack``, ``mcp_server``, ``mqtt``,
-  ``protobuf``, ``stomp``, ``toml``, ``toon``, ``tsv``, and ``yaml``.
+  ``protobuf``, ``smtp``, ``stomp``, ``toml``, ``toon``, ``tsv``, and
+  ``yaml``.
 - Coordination and data stores: ``linda``, ``memcached``, and ``redis``.
 - System and external integration: ``crontab``, ``git``, ``java``,
   ``os``, and ``sockets``.

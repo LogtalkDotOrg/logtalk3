@@ -1,0 +1,114 @@
+.. index:: single: smtp_process_transport
+.. _smtp_process_transport/0:
+
+.. rst-class:: right
+
+**object**
+
+``smtp_process_transport``
+==========================
+
+Process-backed TLS transport support for the SMTP client.
+
+| **Availability:** 
+|    ``logtalk_load(smtp(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-10
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`os <os/0>`
+|    :ref:`process <process/0>`
+|    :ref:`user <user/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: open/8
+.. _smtp_process_transport/0::open/8:
+
+``open/8``
+^^^^^^^^^^
+
+Opens an implicit TLS or STARTTLS SMTP connection using OpenSSL.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open(Host,Port,Security,Helo,Executable,ServerName,Options,Connection)``
+| **Mode and number of proofs:**
+|    ``open(+atom,+integer,+atom,+atom,+atom,+atom,+list,--compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: streams/3
+.. _smtp_process_transport/0::streams/3:
+
+``streams/3``
+^^^^^^^^^^^^^
+
+Returns the input and output streams for an open process connection.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``streams(Connection,Input,Output)``
+| **Mode and number of proofs:**
+|    ``streams(+compound,--stream,--stream)`` - ``one_or_error``
+
+
+------------
+
+.. index:: close/1
+.. _smtp_process_transport/0::close/1:
+
+``close/1``
+^^^^^^^^^^^
+
+Closes the streams and terminates the OpenSSL process.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``close(Connection)``
+| **Mode and number of proofs:**
+|    ``close(+compound)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

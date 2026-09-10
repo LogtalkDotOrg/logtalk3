@@ -3429,6 +3429,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`http_websocket <http_websocket/0::close/1>`
 * :ref:`http_websocket_service_registry <http_websocket_service_registry/0::close/1>`
 * :ref:`s3_session(HTTPTransport) <s3_session/1::close/1>`
+* :ref:`smtp_process_transport <smtp_process_transport/0::close/1>`
 
 ``close/2``
 -----------
@@ -3957,6 +3958,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`amqp <amqp/0::connect/4>`
 * :ref:`mqtt <mqtt/0::connect/4>`
+* :ref:`smtp_protocol <smtp_protocol/0::connect/4>`
 * :ref:`stomp <stomp/0::connect/4>`
 
 ``connected_components/2``
@@ -3980,6 +3982,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`amqp <amqp/0::connection_alive/1>`
 * :ref:`mqtt <mqtt/0::connection_alive/1>`
+* :ref:`smtp_protocol <smtp_protocol/0::connection_alive/1>`
 * :ref:`stomp <stomp/0::connection_alive/1>`
 
 ``connection_pool_stats/2``
@@ -6839,6 +6842,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`memcached <memcached/0::disconnect/1>`
 * :ref:`redis <redis/0::disconnect/1>`
+* :ref:`smtp_protocol <smtp_protocol/0::disconnect/1>`
 
 ``disconnect/2``
 ----------------
@@ -19185,6 +19189,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_websocket_client_service(HTTPTransport) <http_websocket_client_service/1::open/5>`
 
+``open/8``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`smtp_process_transport <smtp_process_transport/0::open/8>`
+
 ``open_api_bad_request_response/1``
 -----------------------------------
 
@@ -25958,7 +25972,18 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`smtp_protocol <smtp_protocol/0::send/4>`
 * :ref:`stomp <stomp/0::send/4>`
+
+``send/5``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`smtp_protocol <smtp_protocol/0::send/5>`
 
 ``send_binary/2``
 -----------------
@@ -27921,6 +27946,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`reader <reader/0::stream_to_terms/3>`
+
+``streams/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`smtp_process_transport <smtp_process_transport/0::streams/3>`
 
 ``string_chars/2``
 ------------------

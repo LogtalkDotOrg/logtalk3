@@ -291,6 +291,7 @@
 		listing(loader),
 		amqp(loader),
 		mqtt(loader),
+		smtp(loader),
 		stomp(loader),
 		linda(loader),
 		command_line_options(loader),

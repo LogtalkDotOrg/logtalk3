@@ -276,6 +276,7 @@ directory in the ``NOTES.md`` file.
    sets
    sgd_classifier
    simulated_annealing
+   smtp
    snowflakeid
    sockets
    spade_pattern_miner

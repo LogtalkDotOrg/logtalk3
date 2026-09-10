@@ -3162,6 +3162,18 @@ To load an entity, always load the library that includes it using the goal ``log
    simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing_2>
    simulated_annealing_protocol <simulated_annealing_protocol_0>
 
+``library/smtp/``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   smtp <smtp_0>
+   smtp_process_transport <smtp_process_transport_0>
+   smtp_protocol <smtp_protocol_0>
+
 ``library/snowflakeid/``
 ------------------------
 
