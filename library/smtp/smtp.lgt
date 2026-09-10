@@ -449,6 +449,7 @@
 		throw(error(smtp_error(protocol_error(Response)), Context)).
 
 	disconnect_(smtp_connection(Input, Output, _Host, _Port, _Features, socket)) :-
+		!,
 		catch(
 			(	send_command(Output, [0'Q,0'U,0'I,0'T]),
 				read_response(Input, _Response, _Context)

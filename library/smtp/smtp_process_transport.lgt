@@ -133,13 +133,12 @@
 		sub_atom(Host, _, _, _, ':'),
 		!.
 	ip_address(Host) :-
-		atom_codes(Host, Codes),
-		Codes = [_| _],
-		ip_address_codes(Codes).
+		atom_codes(Host, [Code| Codes]),
+		ip_address_codes([Code| Codes]).
 
 	ip_address_codes([]).
 	ip_address_codes([Code| Codes]) :-
-		(Code == 0'.; Code >= 0'0, Code =< 0'9),
+		once((Code == 0'.; Code >= 0'0, Code =< 0'9)),
 		ip_address_codes(Codes).
 
 	add_ca_file(Options, Arguments0, Arguments) :-

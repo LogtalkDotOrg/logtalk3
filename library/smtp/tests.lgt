@@ -31,16 +31,16 @@
 
 	cover(smtp).
 
-	test(smtp_default_options_01, true(Defaults == [security(plain), allow_insecure_auth(false), require_all_recipients(false), openssl_executable(openssl), server_name(default), verify_peer(true), openssl_arguments([])])) :-
+	test(smtp_default_options_01, deterministic(Defaults == [security(plain), allow_insecure_auth(false), require_all_recipients(false), openssl_executable(openssl), server_name(default), verify_peer(true), openssl_arguments([])])) :-
 		smtp::default_options(Defaults).
 
-	test(smtp_invalid_option_01, ball(error(domain_error(option, bogus(value)), _))) :-
+	test(smtp_invalid_option_01, error(domain_error(option, bogus(value)))) :-
 		smtp::send(localhost, 25, smtp_message('a@example.com', 'b@example.com', [], ''), _Result, [bogus(value)]).
 
-	test(smtp_connection_option_partition_01, ball(error(domain_error(smtp_connection_option, require_all_recipients(true)), _))) :-
+	test(smtp_connection_option_partition_01, error(domain_error(smtp_connection_option, require_all_recipients(true)))) :-
 		smtp::connect(localhost, 25, _Connection, [require_all_recipients(true)]).
 
-	test(smtp_valid_options_01, true) :-
+	test(smtp_valid_options_01, deterministic) :-
 		smtp::valid_option(security(tls)),
 		smtp::valid_option(helo(localhost)),
 		smtp::valid_option(auth(user-password)),
@@ -53,38 +53,38 @@
 		smtp::valid_option(ca_file('/tmp/ca.pem')),
 		smtp::valid_option(openssl_arguments(['-brief'])).
 
-	test(smtp_invalid_recipients_01, ball(error(domain_error(smtp_recipients, []), _))) :-
+	test(smtp_invalid_recipients_01, error(domain_error(smtp_recipients, []))) :-
 		smtp::send(localhost, 25, smtp_message('a@example.com', [], [], ''), _Result, []).
 
-	test(smtp_invalid_recipients_02, ball(error(domain_error(smtp_recipients, recipients(term)), _))) :-
+	test(smtp_invalid_recipients_02, error(domain_error(smtp_recipients, recipients(term)))) :-
 		smtp::send(localhost, 25, smtp_message('a@example.com', recipients(term), [], ''), _Result, []).
 
-	test(smtp_invalid_body_01, ball(error(domain_error(smtp_body, body(term)), _))) :-
+	test(smtp_invalid_body_01, error(domain_error(smtp_body, body(term)))) :-
 		smtp::send(localhost, 25, smtp_message('a@example.com', 'b@example.com', [], body(term)), _Result, []).
 
-	test(smtp_invalid_body_code_01, ball(error(domain_error(smtp_body_code, 128), _))) :-
+	test(smtp_invalid_body_code_01, error(domain_error(smtp_body_code, 128))) :-
 		smtp::send(localhost, 25, smtp_message('a@example.com', ['b@example.com'], [], [128]), _Result, []).
 
-	test(smtp_invalid_header_01, ball(error(domain_error(smtp_header, malformed), _))) :-
+	test(smtp_invalid_header_01, error(domain_error(smtp_header, malformed))) :-
 		smtp::send(localhost, 25, smtp_message('a@example.com', 'b@example.com', [malformed], ''), _Result, []).
 
-	test(smtp_invalid_message_01, ball(error(domain_error(smtp_message, malformed), _))) :-
+	test(smtp_invalid_message_01, error(domain_error(smtp_message, malformed))) :-
 		smtp::send(localhost, 25, malformed, _Result, []).
 
-	test(smtp_connection_options_01, ball(error(type_error(atom, 42), _))) :-
+	test(smtp_connection_options_01, error(type_error(atom, 42))) :-
 		smtp::send(42, 25, smtp_message('a@example.com', 'b@example.com', [], ''), _Result, [
 			security(tls), openssl_executable(openssl), server_name(none), verify_peer(false),
 			ca_file('/tmp/ca.pem'), openssl_arguments(['-brief'])
 		]).
 
-	test(smtp_transaction_option_partition_01, ball(error(domain_error(smtp_transaction_option, helo(localhost)), _))) :-
+	test(smtp_transaction_option_partition_01, error(domain_error(smtp_transaction_option, helo(localhost)))) :-
 		smtp::send(not_a_connection, smtp_message('a@example.com', 'b@example.com', [], ''), _Result, [helo(localhost)]).
 
 	:- if(current_logtalk_flag(threads, supported)).
 
 		:- threaded.
 
-		test(smtp_send_plain_01, true((Result == smtp_result(smtp_response(250, ['queued']), ['bob@example.com'], []), Transcript == transcript('EHLO client.test', 'MAIL FROM:<alice@example.com>', 'RCPT TO:<bob@example.com>', 'DATA', ['From: alice@example.com', 'To: bob@example.com', 'Subject: Test', '', 'Hello', 'CR', '..leading dot'], 'QUIT')))) :-
+		test(smtp_send_plain_01, deterministic((Result == smtp_result(smtp_response(250, ['queued']), ['bob@example.com'], []), Transcript == transcript('EHLO client.test', 'MAIL FROM:<alice@example.com>', 'RCPT TO:<bob@example.com>', 'DATA', ['From: alice@example.com', 'To: bob@example.com', 'Subject: Test', '', 'Hello', 'CR', '..leading dot'], 'QUIT')))) :-
 			socket::server_open('127.0.0.1', Port, Listener, [type(binary)]),
 			threaded_once(mock_smtp_server(Listener, Transcript), Tag),
 			smtp::send(
@@ -96,7 +96,7 @@
 			threaded_exit(mock_smtp_server(Listener, Transcript), Tag),
 			socket::server_close(Listener).
 
-		test(smtp_auth_plain_01, true(Auth == 'AUTH PLAIN AHVzZXIAc2VjcmV0')) :-
+		test(smtp_auth_plain_01, deterministic(Auth == 'AUTH PLAIN AHVzZXIAc2VjcmV0')) :-
 			socket::server_open('127.0.0.1', Port, Listener, [type(binary)]),
 			threaded_once(mock_auth_server(Listener, Auth), Tag),
 			smtp::connect('127.0.0.1', Port, Connection, [
@@ -106,7 +106,7 @@
 			threaded_exit(mock_auth_server(Listener, Auth), Tag),
 			socket::server_close(Listener).
 
-		test(smtp_helo_fallback_01, true((Ehlo == 'EHLO client.test', Helo == 'HELO client.test'))) :-
+		test(smtp_helo_fallback_01, deterministic((Ehlo == 'EHLO client.test', Helo == 'HELO client.test'))) :-
 			socket::server_open('127.0.0.1', Port, Listener, [type(binary)]),
 			threaded_once(mock_helo_server(Listener, Ehlo, Helo), Tag),
 			smtp::connect('127.0.0.1', Port, Connection, [helo('client.test')]),
@@ -114,7 +114,7 @@
 			threaded_exit(mock_helo_server(Listener, Ehlo, Helo), Tag),
 			socket::server_close(Listener).
 
-		test(smtp_connection_reuse_01, true((Result == smtp_result(smtp_response(250, ['queued']), ['bob@example.com'], []), Alive == true, Closed == true, Data == ['From: alice@example.com', 'To: bob@example.com', 'X-Test: value', '']))) :-
+		test(smtp_connection_reuse_01, deterministic((Result == smtp_result(smtp_response(250, ['queued']), ['bob@example.com'], []), Alive == true, Closed == true, Data == ['From: alice@example.com', 'To: bob@example.com', 'X-Test: value', '']))) :-
 			socket::server_open('127.0.0.1', Port, Listener, [type(binary)]),
 			threaded_once(mock_reuse_server(Listener, Data), Tag),
 			smtp::connect('127.0.0.1', Port, Connection, [helo('client.test')]),
@@ -125,7 +125,7 @@
 			threaded_exit(mock_reuse_server(Listener, Data), Tag),
 			socket::server_close(Listener).
 
-		test(smtp_require_all_recipients_01, true(Result == smtp_result(not_sent, ['good@example.com'], ['bad@example.com'-smtp_response(550, ['rejected'])]))) :-
+		test(smtp_require_all_recipients_01, deterministic(Result == smtp_result(not_sent, ['good@example.com'], ['bad@example.com'-smtp_response(550, ['rejected'])]))) :-
 			socket::server_open('127.0.0.1', Port, Listener, [type(binary)]),
 			threaded_once(mock_rejection_server(Listener), Tag),
 			smtp::send(
@@ -137,7 +137,7 @@
 			threaded_exit(mock_rejection_server(Listener), Tag),
 			socket::server_close(Listener).
 
-		test(smtp_auth_login_01, true(Transcript == auth_login('AUTH LOGIN', 'dXNlcg==', c2VjcmV0))) :-
+		test(smtp_auth_login_01, deterministic(Transcript == auth_login('AUTH LOGIN', 'dXNlcg==', c2VjcmV0))) :-
 			socket::server_open('127.0.0.1', Port, Listener, [type(binary)]),
 			threaded_once(mock_auth_login_server(Listener, Transcript), Tag),
 			smtp::connect('127.0.0.1', Port, Connection, [
@@ -147,7 +147,7 @@
 			threaded_exit(mock_auth_login_server(Listener, Transcript), Tag),
 			socket::server_close(Listener).
 
-		test(smtp_auth_plain_challenge_01, true((Initial == 'AUTH PLAIN AHVzZXIAc2VjcmV0', Response == 'AHVzZXIAc2VjcmV0'))) :-
+		test(smtp_auth_plain_challenge_01, deterministic((Initial == 'AUTH PLAIN AHVzZXIAc2VjcmV0', Response == 'AHVzZXIAc2VjcmV0'))) :-
 			socket::server_open('127.0.0.1', Port, Listener, [type(binary)]),
 			threaded_once(mock_auth_plain_challenge_server(Listener, Initial, Response), Tag),
 			smtp::connect('127.0.0.1', Port, Connection, [
@@ -157,46 +157,48 @@
 			threaded_exit(mock_auth_plain_challenge_server(Listener, Initial, Response), Tag),
 			socket::server_close(Listener).
 
-		test(smtp_auth_unsupported_01, true) :-
+		test(smtp_auth_unsupported_01, deterministic) :-
 			run_connect_error(mock_auth_unsupported_server, [auth(user-secret), allow_insecure_auth(true)], Error),
 			Error = error(smtp_error(authentication_not_supported), _).
 
-		test(smtp_auth_failed_01, true) :-
+		test(smtp_auth_failed_01, deterministic) :-
 			run_connect_error(mock_auth_failed_server, [auth(user-secret), allow_insecure_auth(true)], Error),
 			Error = error(smtp_error(auth_failed(535, ['denied'])), _).
 
-		test(smtp_auth_login_challenge_failed_01, true) :-
+		test(smtp_auth_login_challenge_failed_01, deterministic) :-
 			run_connect_error(mock_auth_login_challenge_failed_server, [auth(user-secret), allow_insecure_auth(true)], Error),
 			Error = error(smtp_error(auth_failed(535, ['denied'])), _).
 
-		test(smtp_auth_login_response_failed_01, true) :-
+		test(smtp_auth_login_response_failed_01, deterministic) :-
 			run_connect_error(mock_auth_login_response_failed_server, [auth(user-secret), allow_insecure_auth(true)], Error),
 			Error = error(smtp_error(auth_failed(535, ['denied'])), _).
 
-		test(smtp_malformed_response_01, true) :-
+		test(smtp_malformed_response_01, deterministic) :-
 			run_connect_error(mock_malformed_response_server, [], Error),
 			atom_codes(malformed, Line),
 			Error = error(smtp_error(protocol_error(Line)), _).
 
-		test(smtp_closed_connection_01, true) :-
+		test(smtp_closed_connection_01, deterministic) :-
 			run_connect_error(mock_closed_connection_server, [], Error),
 			Error = error(smtp_error(connection_closed), _).
 
-		test(smtp_greeting_failed_01, true) :-
+		test(smtp_greeting_failed_01, deterministic) :-
 			run_connect_error(mock_greeting_failed_server, [], Error),
 			Error = error(smtp_error(greeting_failed(554, ['unavailable'])), _).
 
-		test(smtp_sender_rejected_01, true) :-
+		test(smtp_sender_rejected_01, deterministic) :-
 			run_send_error(mock_sender_rejected_server, Error),
 			Error = error(smtp_error(sender_rejected(550, ['rejected'])), _).
 
-		test(smtp_data_rejected_01, true) :-
+		test(smtp_data_rejected_01, deterministic) :-
 			run_send_error(mock_data_rejected_server, Error),
 			Error = error(smtp_error(send_failed(554, ['rejected'])), _).
 
-		test(smtp_helo_rejected_01, true) :-
+		test(smtp_helo_rejected_01, deterministic) :-
 			run_connect_error(mock_helo_rejected_server, [], Error),
 			Error = error(smtp_error(protocol_error(smtp_response(550, ['rejected']))), _).
+
+		% auxiliary predicates
 
 		run_connect_error(Server, Options, Error) :-
 			socket::server_open('127.0.0.1', Port, Listener, [type(binary)]),
@@ -410,15 +412,15 @@
 
 		write_line(Output, Line) :-
 			atom_codes(Line, Codes),
-			write_bytes(Output, Codes),
+			write_bytes(Codes, Output),
 			put_byte(Output, 0'\r),
 			put_byte(Output, 0'\n),
 			flush_output(Output).
 
-		write_bytes(_Output, []).
-		write_bytes(Output, [Byte| Bytes]) :-
+		write_bytes([], _Output).
+		write_bytes([Byte| Bytes], Output) :-
 			put_byte(Output, Byte),
-			write_bytes(Output, Bytes).
+			write_bytes(Bytes, Output).
 
 	:- endif.
 
