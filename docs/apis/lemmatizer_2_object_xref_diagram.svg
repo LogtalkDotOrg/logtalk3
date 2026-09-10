@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-916 2170.2,-916 2170.2,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object lemmatizer/2</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;09&#45;08, 23:53</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;09&#45;10, 01:17</text>
 <g id="clust1" class="cluster">
 <title>cluster_lemmatizer_2_object</title>
 <g id="a_clust1"><a xlink:title="lemmatizer(Representation,Language)">
 <path fill="snow" stroke="dimgray" d="M25.2,-54.25C25.2,-54.25 2146.2,-54.25 2146.2,-54.25 2152.2,-54.25 2158.2,-60.25 2158.2,-66.25 2158.2,-66.25 2158.2,-892 2158.2,-892 2158.2,-898 2152.2,-904 2146.2,-904 2146.2,-904 25.2,-904 25.2,-904 19.2,-904 13.2,-898 13.2,-892 13.2,-892 13.2,-66.25 13.2,-66.25 13.2,-60.25 19.2,-54.25 25.2,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="25.2" y="-886.25" font-family="Monospace" font-size="10.00" fill="dimgray">lemmatizer(Representation,Language)</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>check_text/1</title>
 <polygon fill="cornsilk" stroke="black" points="192.95,-338.75 85.45,-338.75 85.45,-302.75 192.95,-302.75 192.95,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="93.45" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L187" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L187">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L187" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L187">
 <text xml:space="preserve" text-anchor="start" x="98.7" y="-322.62" font-family="Monospace" font-size="11.00">check_text/1</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>check_text/2</title>
 <polygon fill="cornsilk" stroke="black" points="174.95,-219.5 67.45,-219.5 67.45,-183.5 174.95,-183.5 174.95,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="75.45" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node24_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L190" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L190">
+<g id="a_node24_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L190" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L190">
 <text xml:space="preserve" text-anchor="start" x="80.7" y="-203.38" font-family="Monospace" font-size="11.00">check_text/2</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- check_text/1&#45;&gt;check_text/2 -->
 <g id="edge28" class="edge">
 <title>check_text/1&#45;&gt;check_text/2</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L187" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L187" xlink:title="calls">
 <path fill="none" stroke="black" d="M136.55,-302.45C133.66,-283.66 129.01,-253.34 125.58,-231.02"/>
 <polygon fill="black" stroke="black" points="129.08,-230.72 124.1,-221.37 122.16,-231.78 129.08,-230.72"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L187" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L187">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L187" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L187">
 <text xml:space="preserve" text-anchor="start" x="130.74" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>lemmas/2</title>
 <polygon fill="cornsilk" stroke="black" points="1186.45,-865.25 1105.95,-865.25 1105.95,-829.25 1186.45,-829.25 1186.45,-865.25"/>
 <text xml:space="preserve" text-anchor="start" x="1113.95" y="-849.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L62">
+<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L62">
 <text xml:space="preserve" text-anchor="start" x="1119.2" y="-849.12" font-family="Monospace" font-size="11.00">lemmas/2</text>
 </a>
 </g>
@@ -84,7 +84,7 @@
 <title>lemmas/3</title>
 <polygon fill="cornsilk" stroke="black" points="1186.45,-746 1105.95,-746 1105.95,-710 1186.45,-710 1186.45,-746"/>
 <text xml:space="preserve" text-anchor="start" x="1113.95" y="-730.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L65">
+<g id="a_node5_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L65">
 <text xml:space="preserve" text-anchor="start" x="1119.2" y="-729.88" font-family="Monospace" font-size="11.00">lemmas/3</text>
 </a>
 </g>
@@ -96,12 +96,12 @@
 <!-- lemmas/2&#45;&gt;lemmas/3 -->
 <g id="edge10" class="edge">
 <title>lemmas/2&#45;&gt;lemmas/3</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L62" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L62" xlink:title="calls">
 <path fill="none" stroke="black" d="M1146.2,-828.95C1146.2,-810.25 1146.2,-780.12 1146.2,-757.83"/>
 <polygon fill="black" stroke="black" points="1149.7,-757.89 1146.2,-747.89 1142.7,-757.89 1149.7,-757.89"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L62">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L62">
 <text xml:space="preserve" text-anchor="start" x="1146.2" y="-784.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -111,7 +111,7 @@
 <title>lemma/2</title>
 <polygon fill="cornsilk" stroke="black" points="2002.08,-746 1928.33,-746 1928.33,-710 2002.08,-710 2002.08,-746"/>
 <text xml:space="preserve" text-anchor="start" x="1936.33" y="-730.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L46">
+<g id="a_node3_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L46">
 <text xml:space="preserve" text-anchor="start" x="1941.58" y="-729.88" font-family="Monospace" font-size="11.00">lemma/2</text>
 </a>
 </g>
@@ -125,7 +125,7 @@
 <title>lemma/3</title>
 <polygon fill="cornsilk" stroke="black" points="1649.08,-626.75 1575.33,-626.75 1575.33,-590.75 1649.08,-590.75 1649.08,-626.75"/>
 <text xml:space="preserve" text-anchor="start" x="1583.33" y="-611" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49">
+<g id="a_node4_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49">
 <text xml:space="preserve" text-anchor="start" x="1588.58" y="-610.62" font-family="Monospace" font-size="11.00">lemma/3</text>
 </a>
 </g>
@@ -137,12 +137,12 @@
 <!-- lemma/2&#45;&gt;lemma/3 -->
 <g id="edge1" class="edge">
 <title>lemma/2&#45;&gt;lemma/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L46" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L46" xlink:title="calls">
 <path fill="none" stroke="black" d="M1964.05,-709.52C1962.1,-694.78 1956.91,-674.29 1943.2,-662.75 1921.9,-644.81 1747.34,-624.06 1660.66,-614.74"/>
 <polygon fill="black" stroke="black" points="1661.11,-611.27 1650.79,-613.69 1660.37,-618.23 1661.11,-611.27"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L46">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L46">
 <text xml:space="preserve" text-anchor="start" x="1952.53" y="-665" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -150,12 +150,12 @@
 <!-- lemma/3&#45;&gt;check_text/1 -->
 <g id="edge4" class="edge">
 <title>lemma/3&#45;&gt;check_text/1</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49" xlink:title="calls">
 <path fill="none" stroke="black" d="M1575.06,-600.21C1529.55,-590.73 1450.23,-573.42 1383.2,-554.75 1283.99,-527.11 1250.99,-536.19 1162.95,-482.75 1143.41,-470.89 1144.75,-460.13 1126.2,-446.75 1069.46,-405.81 1053.66,-393.33 986.2,-374.75 839.28,-334.28 376.71,-324.61 204.58,-322.39"/>
 <polygon fill="black" stroke="black" points="204.74,-318.89 194.69,-322.26 204.65,-325.89 204.74,-318.89"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49">
 <text xml:space="preserve" text-anchor="start" x="1162.95" y="-461.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -165,7 +165,7 @@
 <title>check_scalar_options/1</title>
 <polygon fill="cornsilk" stroke="black" points="1912.7,-410.75 1737.7,-410.75 1737.7,-374.75 1912.7,-374.75 1912.7,-410.75"/>
 <text xml:space="preserve" text-anchor="start" x="1745.7" y="-395" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L87">
+<g id="a_node8_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L87">
 <text xml:space="preserve" text-anchor="start" x="1750.95" y="-394.62" font-family="Monospace" font-size="11.00">check_scalar_options/1</text>
 </a>
 </g>
@@ -177,12 +177,12 @@
 <!-- lemma/3&#45;&gt;check_scalar_options/1 -->
 <g id="edge5" class="edge">
 <title>lemma/3&#45;&gt;check_scalar_options/1</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49" xlink:title="calls">
 <path fill="none" stroke="black" d="M1649.31,-598.47C1676.02,-590.36 1711.69,-576.42 1737.2,-554.75 1751.63,-542.5 1743.89,-528.75 1759.95,-518.75 1823.94,-478.92 2046.82,-538.8 2097.2,-482.75 2107.9,-470.85 2107.38,-459.1 2097.2,-446.75 2095.76,-445 2001.3,-426.86 1924.11,-412.28"/>
 <polygon fill="black" stroke="black" points="1924.82,-408.85 1914.34,-410.44 1923.52,-415.73 1924.82,-408.85"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49">
 <text xml:space="preserve" text-anchor="start" x="1759.95" y="-533.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -192,7 +192,7 @@
 <title>part_of_speech_option/2</title>
 <polygon fill="cornsilk" stroke="black" points="2099.08,-410.75 1917.33,-410.75 1917.33,-374.75 2099.08,-374.75 2099.08,-410.75"/>
 <text xml:space="preserve" text-anchor="start" x="1925.33" y="-395" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L100">
+<g id="a_node10_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="1930.58" y="-394.62" font-family="Monospace" font-size="11.00">part_of_speech_option/2</text>
 </a>
 </g>
@@ -204,12 +204,12 @@
 <!-- lemma/3&#45;&gt;part_of_speech_option/2 -->
 <g id="edge6" class="edge">
 <title>lemma/3&#45;&gt;part_of_speech_option/2</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49" xlink:title="calls">
 <path fill="none" stroke="black" d="M1649.44,-604.78C1687.63,-599.98 1746.85,-587.44 1786.2,-554.75 1800.08,-543.22 1790.11,-529.01 1804.95,-518.75 1860.42,-480.42 2061.45,-533.17 2106.2,-482.75 2116.83,-470.78 2114.4,-460.49 2106.2,-446.75 2098.59,-433.97 2086.71,-424.09 2073.81,-416.52"/>
 <polygon fill="black" stroke="black" points="2075.6,-413.51 2065.13,-411.88 2072.3,-419.68 2075.6,-413.51"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49">
 <text xml:space="preserve" text-anchor="start" x="1804.95" y="-533.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -219,7 +219,7 @@
 <title>select_word_lemma/6</title>
 <polygon fill="cornsilk" stroke="black" points="2088.58,-482.75 1933.83,-482.75 1933.83,-446.75 2088.58,-446.75 2088.58,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="1941.83" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node17_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L142">
+<g id="a_node17_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L142">
 <text xml:space="preserve" text-anchor="start" x="1947.08" y="-466.62" font-family="Monospace" font-size="11.00">select_word_lemma/6</text>
 </a>
 </g>
@@ -231,12 +231,12 @@
 <!-- lemma/3&#45;&gt;select_word_lemma/6 -->
 <g id="edge9" class="edge">
 <title>lemma/3&#45;&gt;select_word_lemma/6</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49" xlink:title="calls">
 <path fill="none" stroke="black" d="M1642.84,-590.35C1657.63,-581.01 1674.98,-568.59 1688.2,-554.75 1701.28,-541.07 1695.19,-529.23 1710.95,-518.75 1788.37,-467.27 1827.28,-497.65 1922.18,-483.12"/>
 <polygon fill="black" stroke="black" points="1922.63,-486.59 1931.91,-481.48 1921.47,-479.69 1922.63,-486.59"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49">
 <text xml:space="preserve" text-anchor="start" x="1710.95" y="-533.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -246,7 +246,7 @@
 <title>provider_lemmas/3</title>
 <polygon fill="cornsilk" stroke="black" points="1915.83,-482.75 1774.58,-482.75 1774.58,-446.75 1915.83,-446.75 1915.83,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="1782.58" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node18_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L148">
+<g id="a_node18_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L148">
 <text xml:space="preserve" text-anchor="start" x="1787.83" y="-466.62" font-family="Monospace" font-size="11.00">provider_lemmas/3</text>
 </a>
 </g>
@@ -258,12 +258,12 @@
 <!-- lemma/3&#45;&gt;provider_lemmas/3 -->
 <g id="edge8" class="edge">
 <title>lemma/3&#45;&gt;provider_lemmas/3</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49" xlink:title="calls">
 <path fill="none" stroke="black" d="M1620.9,-590.59C1633.41,-566.16 1655.68,-523.73 1661.95,-518.75 1670.53,-511.93 1719.21,-498 1764.24,-486.13"/>
 <polygon fill="black" stroke="black" points="1765.03,-489.54 1773.82,-483.63 1763.26,-482.77 1765.03,-489.54"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49">
 <text xml:space="preserve" text-anchor="start" x="1661.95" y="-533.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -273,7 +273,7 @@
 <title>check_representation/0</title>
 <polygon fill="cornsilk" stroke="black" points="1372.7,-482.75 1197.7,-482.75 1197.7,-446.75 1372.7,-446.75 1372.7,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="1205.7" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node20_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L162" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L162">
+<g id="a_node20_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L162" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L162">
 <text xml:space="preserve" text-anchor="start" x="1210.95" y="-466.62" font-family="Monospace" font-size="11.00">check_representation/0</text>
 </a>
 </g>
@@ -285,12 +285,12 @@
 <!-- lemma/3&#45;&gt;check_representation/0 -->
 <g id="edge2" class="edge">
 <title>lemma/3&#45;&gt;check_representation/0</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49" xlink:title="calls">
 <path fill="none" stroke="black" d="M1575.06,-596.38C1543.9,-586.48 1498.44,-571.16 1459.95,-554.75 1412.92,-534.7 1360.93,-507.54 1325.99,-488.52"/>
 <polygon fill="black" stroke="black" points="1327.94,-485.6 1317.49,-483.87 1324.58,-491.74 1327.94,-485.6"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49">
 <text xml:space="preserve" text-anchor="start" x="1459.95" y="-533.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -300,7 +300,7 @@
 <title>check_language/0</title>
 <polygon fill="cornsilk" stroke="black" points="1637.45,-482.75 1502.95,-482.75 1502.95,-446.75 1637.45,-446.75 1637.45,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="1510.95" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node21_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L170">
+<g id="a_node21_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L170">
 <text xml:space="preserve" text-anchor="start" x="1516.2" y="-466.62" font-family="Monospace" font-size="11.00">check_language/0</text>
 </a>
 </g>
@@ -312,12 +312,12 @@
 <!-- lemma/3&#45;&gt;check_language/0 -->
 <g id="edge3" class="edge">
 <title>lemma/3&#45;&gt;check_language/0</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49" xlink:title="calls">
 <path fill="none" stroke="black" d="M1590.13,-590.32C1580.1,-580.98 1569.3,-568.56 1563.95,-554.75 1556.51,-535.53 1558.5,-512.24 1562.12,-494.31"/>
 <polygon fill="black" stroke="black" points="1565.52,-495.14 1564.38,-484.6 1558.7,-493.55 1565.52,-495.14"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49">
 <text xml:space="preserve" text-anchor="start" x="1563.95" y="-533.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -327,7 +327,7 @@
 <title>normalize/2</title>
 <polygon fill="cornsilk" stroke="black" points="1756.58,-482.75 1655.83,-482.75 1655.83,-446.75 1756.58,-446.75 1756.58,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="1663.83" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node25_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L197" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L197">
+<g id="a_node25_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L197" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L197">
 <text xml:space="preserve" text-anchor="start" x="1669.08" y="-466.62" font-family="Monospace" font-size="11.00">normalize/2</text>
 </a>
 </g>
@@ -339,12 +339,12 @@
 <!-- lemma/3&#45;&gt;normalize/2 -->
 <g id="edge7" class="edge">
 <title>lemma/3&#45;&gt;normalize/2</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49" xlink:title="calls">
 <path fill="none" stroke="black" d="M1607.52,-590.34C1603.46,-571.35 1600.04,-540.73 1612.95,-518.75 1620.55,-505.83 1632.58,-495.79 1645.52,-488.11"/>
 <polygon fill="black" stroke="black" points="1647.07,-491.24 1654.19,-483.4 1643.73,-485.09 1647.07,-491.24"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49">
 <text xml:space="preserve" text-anchor="start" x="1612.95" y="-533.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -363,12 +363,12 @@
 <!-- lemma/3&#45;&gt;^^check_options/1 -->
 <g id="edge30" class="edge">
 <title>lemma/3&#45;&gt;^^check_options/1</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49" xlink:title="calls">
 <path fill="none" stroke="black" d="M1575.17,-605.1C1469.64,-597.34 1172.45,-574.03 1132.95,-554.75 1104.16,-540.69 1079.59,-513 1064.02,-492.22"/>
 <polygon fill="black" stroke="black" points="1066.9,-490.23 1058.21,-484.18 1061.23,-494.33 1066.9,-490.23"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49">
 <text xml:space="preserve" text-anchor="start" x="1132.95" y="-533.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -387,12 +387,12 @@
 <!-- lemma/3&#45;&gt;^^option/3 -->
 <g id="edge31" class="edge">
 <title>lemma/3&#45;&gt;^^option/3</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49" xlink:title="calls">
 <path fill="none" stroke="black" d="M1581.5,-590.31C1565.32,-580.61 1545.46,-567.86 1528.95,-554.75 1504.49,-535.32 1479.33,-510.16 1461.72,-491.55"/>
 <polygon fill="black" stroke="black" points="1464.38,-489.27 1455,-484.36 1459.27,-494.05 1464.38,-489.27"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L49">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L49">
 <text xml:space="preserve" text-anchor="start" x="1528.95" y="-533.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -402,7 +402,7 @@
 <title>check_list_options/1</title>
 <polygon fill="cornsilk" stroke="black" points="2147.95,-554.75 1986.45,-554.75 1986.45,-518.75 2147.95,-518.75 2147.95,-554.75"/>
 <text xml:space="preserve" text-anchor="start" x="1994.45" y="-539" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L93">
+<g id="a_node9_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L93">
 <text xml:space="preserve" text-anchor="start" x="1999.7" y="-538.62" font-family="Monospace" font-size="11.00">check_list_options/1</text>
 </a>
 </g>
@@ -414,12 +414,12 @@
 <!-- lemmas/3&#45;&gt;check_list_options/1 -->
 <g id="edge14" class="edge">
 <title>lemmas/3&#45;&gt;check_list_options/1</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L65" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L65" xlink:title="calls">
 <path fill="none" stroke="black" d="M1186.94,-726.93C1302.67,-725.6 1642.09,-713.99 1906.2,-626.75 1953.06,-611.27 2002.01,-582.06 2033.45,-561.32"/>
 <polygon fill="black" stroke="black" points="2035,-564.5 2041.37,-556.03 2031.11,-558.68 2035,-564.5"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L65">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L65">
 <text xml:space="preserve" text-anchor="start" x="1762.24" y="-665" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -429,7 +429,7 @@
 <title>parts_of_speech_option/3</title>
 <polygon fill="cornsilk" stroke="black" points="835.45,-626.75 646.95,-626.75 646.95,-590.75 835.45,-590.75 835.45,-626.75"/>
 <text xml:space="preserve" text-anchor="start" x="654.95" y="-611" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L106">
+<g id="a_node11_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L106">
 <text xml:space="preserve" text-anchor="start" x="660.2" y="-610.62" font-family="Monospace" font-size="11.00">parts_of_speech_option/3</text>
 </a>
 </g>
@@ -441,12 +441,12 @@
 <!-- lemmas/3&#45;&gt;parts_of_speech_option/3 -->
 <g id="edge15" class="edge">
 <title>lemmas/3&#45;&gt;parts_of_speech_option/3</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L65" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L65" xlink:title="calls">
 <path fill="none" stroke="black" d="M1105.52,-715.22C1036.91,-695.36 897.4,-654.97 812.33,-630.34"/>
 <polygon fill="black" stroke="black" points="813.5,-627.04 802.92,-627.62 811.55,-633.76 813.5,-627.04"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L65">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L65">
 <text xml:space="preserve" text-anchor="start" x="955.85" y="-665" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -456,7 +456,7 @@
 <title>lemmas/5</title>
 <polygon fill="cornsilk" stroke="black" points="1897.45,-626.75 1816.95,-626.75 1816.95,-590.75 1897.45,-590.75 1897.45,-626.75"/>
 <text xml:space="preserve" text-anchor="start" x="1824.95" y="-611" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node16_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L135">
+<g id="a_node16_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L135">
 <text xml:space="preserve" text-anchor="start" x="1830.2" y="-610.62" font-family="Monospace" font-size="11.00">lemmas/5</text>
 </a>
 </g>
@@ -468,12 +468,12 @@
 <!-- lemmas/3&#45;&gt;lemmas/5 -->
 <g id="edge16" class="edge">
 <title>lemmas/3&#45;&gt;lemmas/5</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L65" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L65" xlink:title="calls">
 <path fill="none" stroke="black" d="M1186.73,-720.32C1308.31,-700.27 1669.95,-640.63 1805.3,-618.31"/>
 <polygon fill="black" stroke="black" points="1805.75,-621.78 1815.05,-616.7 1804.61,-614.88 1805.75,-621.78"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L65">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L65">
 <text xml:space="preserve" text-anchor="start" x="1523.02" y="-665" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -481,12 +481,12 @@
 <!-- lemmas/3&#45;&gt;check_representation/0 -->
 <g id="edge11" class="edge">
 <title>lemmas/3&#45;&gt;check_representation/0</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L65" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L65" xlink:title="calls">
 <path fill="none" stroke="black" d="M1135.75,-709.63C1114.1,-671.15 1069.83,-577.5 1113.2,-518.75 1122.92,-505.59 1153.44,-494.34 1186.13,-485.62"/>
 <polygon fill="black" stroke="black" points="1186.99,-489.02 1195.81,-483.14 1185.25,-482.24 1186.99,-489.02"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L65">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L65">
 <text xml:space="preserve" text-anchor="start" x="1100.78" y="-605.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -494,12 +494,12 @@
 <!-- lemmas/3&#45;&gt;check_language/0 -->
 <g id="edge12" class="edge">
 <title>lemmas/3&#45;&gt;check_language/0</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L65" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L65" xlink:title="calls">
 <path fill="none" stroke="black" d="M1177.25,-709.55C1208.55,-691.17 1257.37,-660.28 1294.2,-626.75 1340.2,-584.88 1331.14,-552.78 1383.2,-518.75 1392.78,-512.49 1444.7,-497.99 1491.4,-485.73"/>
 <polygon fill="black" stroke="black" points="1492.25,-489.13 1501.05,-483.22 1490.49,-482.35 1492.25,-489.13"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L65">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L65">
 <text xml:space="preserve" text-anchor="start" x="1323.87" y="-605.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -509,7 +509,7 @@
 <title>check_words/1</title>
 <polygon fill="cornsilk" stroke="black" points="171.33,-626.75 57.08,-626.75 57.08,-590.75 171.33,-590.75 171.33,-626.75"/>
 <text xml:space="preserve" text-anchor="start" x="65.08" y="-611" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node22_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L178">
+<g id="a_node22_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L178">
 <text xml:space="preserve" text-anchor="start" x="70.33" y="-610.62" font-family="Monospace" font-size="11.00">check_words/1</text>
 </a>
 </g>
@@ -521,12 +521,12 @@
 <!-- lemmas/3&#45;&gt;check_words/1 -->
 <g id="edge13" class="edge">
 <title>lemmas/3&#45;&gt;check_words/1</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L65" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L65" xlink:title="calls">
 <path fill="none" stroke="black" d="M1105.75,-722.4C949.09,-704.61 381.26,-640.09 183.05,-617.57"/>
 <polygon fill="black" stroke="black" points="183.48,-614.1 173.15,-616.45 182.69,-621.05 183.48,-614.1"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L65">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L65">
 <text xml:space="preserve" text-anchor="start" x="661.15" y="-665" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -534,12 +534,12 @@
 <!-- lemmas/3&#45;&gt;^^check_options/1 -->
 <g id="edge32" class="edge">
 <title>lemmas/3&#45;&gt;^^check_options/1</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L65" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L65" xlink:title="calls">
 <path fill="none" stroke="black" d="M1124.92,-709.57C1104.32,-691.31 1074.19,-660.62 1059.95,-626.75 1041.66,-583.22 1041.48,-527.32 1043.5,-494.15"/>
 <polygon fill="black" stroke="black" points="1046.96,-494.76 1044.2,-484.53 1039.98,-494.24 1046.96,-494.76"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L65">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L65">
 <text xml:space="preserve" text-anchor="start" x="1059.95" y="-605.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -547,12 +547,12 @@
 <!-- lemmas/3&#45;&gt;^^option/3 -->
 <g id="edge33" class="edge">
 <title>lemmas/3&#45;&gt;^^option/3</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L65" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L65" xlink:title="calls">
 <path fill="none" stroke="black" d="M1159.74,-709.74C1190.03,-671.86 1266.77,-580 1345.2,-518.75 1359.62,-507.49 1376.7,-497.05 1392.27,-488.47"/>
 <polygon fill="black" stroke="black" points="1393.75,-491.65 1400.9,-483.83 1390.43,-485.48 1393.75,-491.65"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L65">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L65">
 <text xml:space="preserve" text-anchor="start" x="1263.81" y="-605.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -562,7 +562,7 @@
 <title>default_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="1627.45,-865.25 1492.95,-865.25 1492.95,-829.25 1627.45,-829.25 1627.45,-865.25"/>
 <text xml:space="preserve" text-anchor="start" x="1500.95" y="-849.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L76">
+<g id="a_node6_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L76">
 <text xml:space="preserve" text-anchor="start" x="1506.2" y="-849.12" font-family="Monospace" font-size="11.00">default_option/1</text>
 </a>
 </g>
@@ -576,7 +576,7 @@
 <title>valid_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="2147.7,-338.75 2026.7,-338.75 2026.7,-302.75 2147.7,-302.75 2147.7,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="2034.7" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L78" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L78">
+<g id="a_node7_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L78" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L78">
 <text xml:space="preserve" text-anchor="start" x="2039.95" y="-322.62" font-family="Monospace" font-size="11.00">valid_option/1</text>
 </a>
 </g>
@@ -602,12 +602,12 @@
 <!-- valid_option/1&#45;&gt;type::valid/2 -->
 <g id="edge34" class="edge">
 <title>valid_option/1&#45;&gt;type::valid/2</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L80" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L80" xlink:title="calls">
 <path fill="none" stroke="black" d="M2087.2,-302.45C2087.2,-283.75 2087.2,-253.62 2087.2,-231.33"/>
 <polygon fill="black" stroke="black" points="2090.7,-231.39 2087.2,-221.39 2083.7,-231.39 2090.7,-231.39"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L80">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="2087.2" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -629,12 +629,12 @@
 <!-- valid_option/1&#45;&gt;list::member/2 -->
 <g id="edge35" class="edge">
 <title>valid_option/1&#45;&gt;list::member/2</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L82" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L82" xlink:title="calls">
 <path fill="none" stroke="black" d="M2069.79,-302.46C2055.24,-288.62 2033.5,-269.3 2012.2,-255.5 1994.16,-243.8 1973.12,-233.15 1954.19,-224.52"/>
 <polygon fill="black" stroke="black" points="1955.86,-221.44 1945.3,-220.56 1953,-227.83 1955.86,-221.44"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L82">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L82">
 <text xml:space="preserve" text-anchor="start" x="2027.64" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -642,12 +642,12 @@
 <!-- check_scalar_options/1&#45;&gt;list::member/2 -->
 <g id="edge36" class="edge">
 <title>check_scalar_options/1&#45;&gt;list::member/2</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L87" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L87" xlink:title="calls">
 <path fill="none" stroke="black" d="M1845.3,-374.51C1855.18,-364.95 1866.4,-352.28 1873.2,-338.75 1890.55,-304.25 1896.76,-259.6 1898.98,-231"/>
 <polygon fill="black" stroke="black" points="1902.45,-231.52 1899.61,-221.31 1895.46,-231.06 1902.45,-231.52"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L87">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L87">
 <text xml:space="preserve" text-anchor="start" x="1886.66" y="-317.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -655,12 +655,12 @@
 <!-- check_list_options/1&#45;&gt;list::member/2 -->
 <g id="edge37" class="edge">
 <title>check_list_options/1&#45;&gt;list::member/2</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L93" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L93" xlink:title="calls">
 <path fill="none" stroke="black" d="M2089.17,-518.3C2099.14,-508.96 2109.89,-496.53 2115.2,-482.75 2132.64,-437.53 2130.72,-412.39 2100.2,-374.75 2075.14,-343.83 2046.41,-366.83 2018.2,-338.75 2005.79,-326.4 2012.18,-317.14 2002.2,-302.75 1982.06,-273.7 1952.77,-245.95 1930.74,-227.04"/>
 <polygon fill="black" stroke="black" points="1933.15,-224.5 1923.25,-220.73 1928.64,-229.85 1933.15,-224.5"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L93">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L93">
 <text xml:space="preserve" text-anchor="start" x="2121.97" y="-389.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -668,12 +668,12 @@
 <!-- part_of_speech_option/2&#45;&gt;list::member/2 -->
 <g id="edge38" class="edge">
 <title>part_of_speech_option/2&#45;&gt;list::member/2</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L100" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L100" xlink:title="calls">
 <path fill="none" stroke="black" d="M1997.57,-374.67C1991.2,-364.33 1983,-350.85 1975.95,-338.75 1954.2,-301.37 1930.09,-257.57 1915.04,-229.93"/>
 <polygon fill="black" stroke="black" points="1918.13,-228.28 1910.28,-221.16 1911.98,-231.62 1918.13,-228.28"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L100">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="1975.95" y="-317.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -683,7 +683,7 @@
 <title>check_same_length/4</title>
 <polygon fill="cornsilk" stroke="black" points="743.58,-482.75 588.83,-482.75 588.83,-446.75 743.58,-446.75 743.58,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="596.83" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L115">
+<g id="a_node12_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L115">
 <text xml:space="preserve" text-anchor="start" x="602.08" y="-466.62" font-family="Monospace" font-size="11.00">check_same_length/4</text>
 </a>
 </g>
@@ -695,12 +695,12 @@
 <!-- parts_of_speech_option/3&#45;&gt;check_same_length/4 -->
 <g id="edge17" class="edge">
 <title>parts_of_speech_option/3&#45;&gt;check_same_length/4</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L106" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L106" xlink:title="calls">
 <path fill="none" stroke="black" d="M732.01,-590.34C719.17,-566.04 695.77,-521.72 680.61,-493.02"/>
 <polygon fill="black" stroke="black" points="683.71,-491.41 675.95,-484.2 677.52,-494.68 683.71,-491.41"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L106">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L106">
 <text xml:space="preserve" text-anchor="start" x="712.63" y="-533.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -710,7 +710,7 @@
 <title>wrap_parts_of_speech/2</title>
 <polygon fill="cornsilk" stroke="black" points="936.7,-482.75 761.7,-482.75 761.7,-446.75 936.7,-446.75 936.7,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="769.7" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node13_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L123" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L123">
+<g id="a_node13_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L123" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L123">
 <text xml:space="preserve" text-anchor="start" x="774.95" y="-466.62" font-family="Monospace" font-size="11.00">wrap_parts_of_speech/2</text>
 </a>
 </g>
@@ -722,12 +722,12 @@
 <!-- parts_of_speech_option/3&#45;&gt;wrap_parts_of_speech/2 -->
 <g id="edge18" class="edge">
 <title>parts_of_speech_option/3&#45;&gt;wrap_parts_of_speech/2</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L106" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L106" xlink:title="calls">
 <path fill="none" stroke="black" d="M754.45,-590.34C773.17,-565.72 807.53,-520.55 829.32,-491.89"/>
 <polygon fill="black" stroke="black" points="832.01,-494.14 835.27,-484.07 826.43,-489.91 832.01,-494.14"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L106">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L106">
 <text xml:space="preserve" text-anchor="start" x="808.05" y="-533.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -737,7 +737,7 @@
 <title>shared_parts_of_speech/3</title>
 <polygon fill="cornsilk" stroke="black" points="391.45,-482.75 202.95,-482.75 202.95,-446.75 391.45,-446.75 391.45,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="210.95" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node14_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L127" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L127">
+<g id="a_node14_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L127" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L127">
 <text xml:space="preserve" text-anchor="start" x="216.2" y="-466.62" font-family="Monospace" font-size="11.00">shared_parts_of_speech/3</text>
 </a>
 </g>
@@ -749,12 +749,12 @@
 <!-- parts_of_speech_option/3&#45;&gt;shared_parts_of_speech/3 -->
 <g id="edge19" class="edge">
 <title>parts_of_speech_option/3&#45;&gt;shared_parts_of_speech/3</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L106" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L106" xlink:title="calls">
 <path fill="none" stroke="black" d="M677.08,-590.3C641.3,-580.34 596,-567.36 555.95,-554.75 487,-533.04 408.59,-505.69 356.34,-487.08"/>
 <polygon fill="black" stroke="black" points="357.61,-483.82 347.02,-483.76 355.26,-490.41 357.61,-483.82"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L106">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L106">
 <text xml:space="preserve" text-anchor="start" x="555.95" y="-533.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -764,7 +764,7 @@
 <title>no_parts_of_speech/2</title>
 <polygon fill="cornsilk" stroke="black" points="570.95,-482.75 409.45,-482.75 409.45,-446.75 570.95,-446.75 570.95,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="417.45" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node15_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L131">
+<g id="a_node15_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L131">
 <text xml:space="preserve" text-anchor="start" x="422.7" y="-466.62" font-family="Monospace" font-size="11.00">no_parts_of_speech/2</text>
 </a>
 </g>
@@ -776,12 +776,12 @@
 <!-- parts_of_speech_option/3&#45;&gt;no_parts_of_speech/2 -->
 <g id="edge20" class="edge">
 <title>parts_of_speech_option/3&#45;&gt;no_parts_of_speech/2</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L106" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L106" xlink:title="calls">
 <path fill="none" stroke="black" d="M710.43,-590.34C665.24,-564.77 580.87,-517.04 530.7,-488.66"/>
 <polygon fill="black" stroke="black" points="532.58,-485.71 522.16,-483.83 529.14,-491.8 532.58,-485.71"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L106">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L106">
 <text xml:space="preserve" text-anchor="start" x="645.57" y="-533.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -789,12 +789,12 @@
 <!-- parts_of_speech_option/3&#45;&gt;list::member/2 -->
 <g id="edge39" class="edge">
 <title>parts_of_speech_option/3&#45;&gt;list::member/2</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L106" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L106" xlink:title="calls">
 <path fill="none" stroke="black" d="M774.84,-590.31C793.69,-580.3 817.52,-567.27 838.2,-554.75 887.56,-524.89 907.09,-525.16 946.2,-482.75 958.61,-469.29 955.34,-461.48 966.2,-446.75 1018.83,-375.42 1030.59,-352.13 1104.2,-302.75 1151.8,-270.82 1168.35,-268.38 1224.2,-255.5 1337.47,-229.38 1678.25,-212.02 1828.14,-205.45"/>
 <polygon fill="black" stroke="black" points="1828.1,-208.95 1837.94,-205.02 1827.8,-201.96 1828.1,-208.95"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L106">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L106">
 <text xml:space="preserve" text-anchor="start" x="1019.67" y="-389.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -802,12 +802,12 @@
 <!-- lemmas/5&#45;&gt;select_word_lemma/6 -->
 <g id="edge23" class="edge">
 <title>lemmas/5&#45;&gt;select_word_lemma/6</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L136" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L136" xlink:title="calls">
 <path fill="none" stroke="black" d="M1877.91,-590.31C1889.67,-580.18 1904.54,-567.05 1917.2,-554.75 1932.94,-539.47 1935.2,-534.01 1950.95,-518.75 1960.78,-509.23 1971.94,-499.21 1981.96,-490.48"/>
 <polygon fill="black" stroke="black" points="1983.98,-493.36 1989.26,-484.17 1979.4,-488.06 1983.98,-493.36"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L136" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L136">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L136" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L136">
 <text xml:space="preserve" text-anchor="start" x="1950.95" y="-533.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -815,12 +815,12 @@
 <!-- lemmas/5&#45;&gt;provider_lemmas/3 -->
 <g id="edge22" class="edge">
 <title>lemmas/5&#45;&gt;provider_lemmas/3</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L136" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L136" xlink:title="calls">
 <path fill="none" stroke="black" d="M1868.95,-590.28C1879.54,-572.28 1892.31,-543.45 1884.2,-518.75 1881.08,-509.23 1875.52,-500.02 1869.56,-492.01"/>
 <polygon fill="black" stroke="black" points="1872.44,-490.01 1863.45,-484.41 1866.98,-494.39 1872.44,-490.01"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L136" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L136">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L136" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L136">
 <text xml:space="preserve" text-anchor="start" x="1886.77" y="-533.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -828,12 +828,12 @@
 <!-- lemmas/5&#45;&gt;normalize/2 -->
 <g id="edge21" class="edge">
 <title>lemmas/5&#45;&gt;normalize/2</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L136" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L136" xlink:title="calls">
 <path fill="none" stroke="black" d="M1857.37,-590.26C1856.64,-570.62 1852.56,-538.88 1835.2,-518.75 1825.6,-507.61 1796.06,-495.11 1767.67,-485.05"/>
 <polygon fill="black" stroke="black" points="1768.92,-481.77 1758.32,-481.81 1766.63,-488.39 1768.92,-481.77"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L136" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L136">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L136" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L136">
 <text xml:space="preserve" text-anchor="start" x="1852.33" y="-533.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -843,7 +843,7 @@
 <title>select_lemma/5</title>
 <polygon fill="cornsilk" stroke="black" points="1863.7,-338.75 1742.7,-338.75 1742.7,-302.75 1863.7,-302.75 1863.7,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="1750.7" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node19_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L153">
+<g id="a_node19_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L153">
 <text xml:space="preserve" text-anchor="start" x="1755.95" y="-322.62" font-family="Monospace" font-size="11.00">select_lemma/5</text>
 </a>
 </g>
@@ -855,12 +855,12 @@
 <!-- select_word_lemma/6&#45;&gt;select_lemma/5 -->
 <g id="edge24" class="edge">
 <title>select_word_lemma/6&#45;&gt;select_lemma/5</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L144" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L144" xlink:title="calls">
 <path fill="none" stroke="black" d="M1933.41,-448.25C1930.64,-447.74 1927.9,-447.23 1925.2,-446.75 1875.96,-437.9 1735.38,-448.85 1702.95,-410.75 1692.58,-398.57 1694.7,-388.45 1702.95,-374.75 1710.69,-361.92 1722.68,-352.03 1735.72,-344.47"/>
 <polygon fill="black" stroke="black" points="1737.29,-347.6 1744.5,-339.84 1734.02,-341.41 1737.29,-347.6"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L144">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L144">
 <text xml:space="preserve" text-anchor="start" x="1702.95" y="-389.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -870,7 +870,7 @@
 <title>atom_to_word/3</title>
 <polygon fill="cornsilk" stroke="black" points="1724.7,-338.75 1603.7,-338.75 1603.7,-302.75 1724.7,-302.75 1724.7,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="1611.7" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node26_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L201" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L201">
+<g id="a_node26_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L201" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L201">
 <text xml:space="preserve" text-anchor="start" x="1616.95" y="-322.62" font-family="Monospace" font-size="11.00">atom_to_word/3</text>
 </a>
 </g>
@@ -882,12 +882,12 @@
 <!-- select_word_lemma/6&#45;&gt;atom_to_word/3 -->
 <g id="edge25" class="edge">
 <title>select_word_lemma/6&#45;&gt;atom_to_word/3</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L144" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L144" xlink:title="calls">
 <path fill="none" stroke="black" d="M1933.42,-448.17C1930.65,-447.68 1927.91,-447.2 1925.2,-446.75 1867.84,-437.11 1704.58,-454.24 1665.95,-410.75 1651.68,-394.67 1652.4,-369.79 1656.04,-350.41"/>
 <polygon fill="black" stroke="black" points="1659.45,-351.19 1658.24,-340.66 1652.62,-349.65 1659.45,-351.19"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L144">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L144">
 <text xml:space="preserve" text-anchor="start" x="1665.95" y="-389.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -895,12 +895,12 @@
 <!-- select_lemma/5&#45;&gt;list::member/2 -->
 <g id="edge40" class="edge">
 <title>select_lemma/5&#45;&gt;list::member/2</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L157" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L157" xlink:title="calls">
 <path fill="none" stroke="black" d="M1817.52,-302.45C1833.64,-282.97 1860,-251.09 1878.62,-228.58"/>
 <polygon fill="black" stroke="black" points="1881.19,-230.97 1884.87,-221.04 1875.8,-226.51 1881.19,-230.97"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L157">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L157">
 <text xml:space="preserve" text-anchor="start" x="1854.61" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -908,12 +908,12 @@
 <!-- check_representation/0&#45;&gt;list::member/2 -->
 <g id="edge41" class="edge">
 <title>check_representation/0&#45;&gt;list::member/2</title>
-<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L162" xlink:title="calls">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L162" xlink:title="calls">
 <path fill="none" stroke="black" d="M1242.52,-446.28C1201.34,-426.83 1141.46,-391.09 1114.95,-338.75 1107.73,-324.48 1104.38,-314.76 1114.95,-302.75 1161.8,-249.55 1643.12,-216.99 1828.22,-206.35"/>
 <polygon fill="black" stroke="black" points="1828.15,-209.86 1837.94,-205.8 1827.75,-202.87 1828.15,-209.86"/>
 </a>
 </g>
-<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L162" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L162">
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L162" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L162">
 <text xml:space="preserve" text-anchor="start" x="1114.95" y="-317.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -923,7 +923,7 @@
 <title>check_word_list/1</title>
 <polygon fill="cornsilk" stroke="black" points="184.83,-482.75 43.58,-482.75 43.58,-446.75 184.83,-446.75 184.83,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="51.58" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node23_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L182">
+<g id="a_node23_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L182">
 <text xml:space="preserve" text-anchor="start" x="56.83" y="-466.62" font-family="Monospace" font-size="11.00">check_word_list/1</text>
 </a>
 </g>
@@ -935,12 +935,12 @@
 <!-- check_words/1&#45;&gt;check_word_list/1 -->
 <g id="edge26" class="edge">
 <title>check_words/1&#45;&gt;check_word_list/1</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L178" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L178" xlink:title="calls">
 <path fill="none" stroke="black" d="M114.2,-590.34C114.2,-566.36 114.2,-522.89 114.2,-494.17"/>
 <polygon fill="black" stroke="black" points="117.7,-494.37 114.2,-484.37 110.7,-494.37 117.7,-494.37"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L178">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L178">
 <text xml:space="preserve" text-anchor="start" x="114.2" y="-533.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -962,12 +962,12 @@
 <!-- check_words/1&#45;&gt;type::check/2 -->
 <g id="edge42" class="edge">
 <title>check_words/1&#45;&gt;type::check/2</title>
-<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L178" xlink:title="calls">
+<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L178" xlink:title="calls">
 <path fill="none" stroke="black" d="M98.38,-590.34C78.86,-567.58 46.72,-525.53 34.2,-482.75 15.83,-419.95 -43.28,-570.55 58.2,-183.5 64.94,-157.81 77.66,-130.41 87.86,-110.76"/>
 <polygon fill="black" stroke="black" points="90.89,-112.51 92.5,-102.04 84.71,-109.22 90.89,-112.51"/>
 </a>
 </g>
-<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L178">
+<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L178">
 <text xml:space="preserve" text-anchor="start" x="27.57" y="-317.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -975,12 +975,12 @@
 <!-- check_word_list/1&#45;&gt;check_text/1 -->
 <g id="edge27" class="edge">
 <title>check_word_list/1&#45;&gt;check_text/1</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L183" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L183" xlink:title="calls">
 <path fill="none" stroke="black" d="M117.27,-446.34C121.49,-422.36 129.14,-378.89 134.2,-350.17"/>
 <polygon fill="black" stroke="black" points="137.64,-350.81 135.93,-340.35 130.75,-349.59 137.64,-350.81"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L183" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L183">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L183" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L183">
 <text xml:space="preserve" text-anchor="start" x="129.68" y="-389.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -988,12 +988,12 @@
 <!-- check_text/2&#45;&gt;type::check/2 -->
 <g id="edge43" class="edge">
 <title>check_text/2&#45;&gt;type::check/2</title>
-<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L190" xlink:title="calls">
+<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L190" xlink:title="calls">
 <path fill="none" stroke="black" d="M118.55,-183.2C115.66,-164.41 111.01,-134.09 107.58,-111.77"/>
 <polygon fill="black" stroke="black" points="111.08,-111.47 106.1,-102.12 104.16,-112.53 111.08,-111.47"/>
 </a>
 </g>
-<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L190" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L190">
+<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L190" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L190">
 <text xml:space="preserve" text-anchor="start" x="112.74" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1003,7 +1003,7 @@
 <title>word_to_atom/3</title>
 <polygon fill="cornsilk" stroke="black" points="1270.7,-338.75 1149.7,-338.75 1149.7,-302.75 1270.7,-302.75 1270.7,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="1157.7" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node27_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L207" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L207">
+<g id="a_node27_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L207" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L207">
 <text xml:space="preserve" text-anchor="start" x="1162.95" y="-322.62" font-family="Monospace" font-size="11.00">word_to_atom/3</text>
 </a>
 </g>
@@ -1015,12 +1015,12 @@
 <!-- normalize/2&#45;&gt;word_to_atom/3 -->
 <g id="edge29" class="edge">
 <title>normalize/2&#45;&gt;word_to_atom/3</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L197" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L197" xlink:title="calls">
 <path fill="none" stroke="black" d="M1655.48,-449.3C1652.35,-448.43 1649.23,-447.58 1646.2,-446.75 1585.36,-430.15 1569.68,-427.75 1508.95,-410.75 1429.23,-388.43 1338.11,-361 1277.68,-342.54"/>
 <polygon fill="black" stroke="black" points="1278.79,-339.23 1268.21,-339.65 1276.75,-345.92 1278.79,-339.23"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L197" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L197">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L197" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L197">
 <text xml:space="preserve" text-anchor="start" x="1508.95" y="-389.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1042,12 +1042,12 @@
 <!-- normalize/2&#45;&gt;string(Representation)::string_lower/2 -->
 <g id="edge44" class="edge">
 <title>normalize/2&#45;&gt;string(Representation)::string_lower/2</title>
-<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L197" xlink:title="calls">
+<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L197" xlink:title="calls">
 <path fill="none" stroke="black" d="M1673.22,-446.34C1624.58,-420.66 1533.61,-372.64 1479.93,-344.3"/>
 <polygon fill="black" stroke="black" points="1481.85,-341.36 1471.38,-339.79 1478.59,-347.55 1481.85,-341.36"/>
 </a>
 </g>
-<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L197" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0430573fac81e384f6c7be3935ef39b4cebc88b7/library/lemmatization/lemmatizer.lgt#L197">
+<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L197" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/lemmatization/lemmatizer.lgt#L197">
 <text xml:space="preserve" text-anchor="start" x="1603.71" y="-389.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>

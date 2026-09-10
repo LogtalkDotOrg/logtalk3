@@ -11,7 +11,7 @@ API documentation
 -----------------
 
 Open the
-`../../docs/library_index.html#smtp <../../docs/library_index.html#smtp>`__
+`../../apis/library_index.html#smtp <../../apis/library_index.html#smtp>`__
 link in a web browser.
 
 Loading
