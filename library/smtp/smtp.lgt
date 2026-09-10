@@ -552,13 +552,13 @@
 		once((Code == 0'\t; Code >= 32, Code =< 126)),
 		valid_header_value_codes(Codes).
 
+	body_codes(Body, Body) :-
+		proper_list(Body),
+		!.
 	body_codes(Body, Codes) :-
 		atom(Body),
 		!,
 		atom_codes(Body, Codes).
-	body_codes(Body, Body) :-
-		proper_list(Body),
-		!.
 	body_codes(Body, _Codes) :-
 		domain_error(smtp_body, Body).
 
