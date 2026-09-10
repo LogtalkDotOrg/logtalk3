@@ -27,9 +27,9 @@
 :- object(type).
 
 	:- info([
-		version is 2:9:0,
+		version is 2:9:1,
 		author is 'Paulo Moura',
-		date is 2026-08-11,
+		date is 2026-09-10,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the ``type/1`` and ``check/2`` multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``.',
@@ -41,7 +41,7 @@
 			'Float derived types' - '``positive_float``, ``negative_float``, ``non_positive_float``, ``non_negative_float, probability``, ``open_probability``.',
 			'Integer derived types' - '``positive_integer``, ``negative_integer``, ``non_positive_integer``, ``non_negative_integer``, ``byte``, ``in_byte``, ``character_code``, ``in_character_code``, ``code``, ``operator_priority``, ``hex_code``.',
 			'Integer derived parametric types' - '``character_code(CharSet)``, ``in_character_code(CharSet)``, ``code(CharSet)``.',
-			'List types (compound derived types)' - '``list``, ``non_empty_list``, ``partial_list``, ``list_or_partial_list``, ``list(Type)``, ``list(Type,Length)``, ``list(Type,Min,Max)``, ``list(Type,Length,Min,Max)``, ``non_empty_list(Type)``, ``codes``, ``chars``.',
+			'List types (compound derived types)' - '``list``, ``non_empty_list``, ``partial_list``, ``list_or_partial_list``, ``list(Type)``, ``list(Type,Length)``, ``list(Type,Min,Max)``, ``list(Type,Length,Min,Max)``, ``non_empty_list(Type)``, ``codes``, ``codes(CharSet)``, ``chars``, ``chars(CharSet)``.',
 			'Difference list types (compound derived types)' - '``difference_list``, ``difference_list(Type)``.',
 			'Other compound derived types' - '``compound(Name,Types)``, ``predicate_indicator``, ``non_terminal_indicator``, ``predicate_or_non_terminal_indicator``, ``clause``, ``grammar_rule``, ``pair``, ``pair(KeyType,ValueType)``, ``cyclic``, ``acyclic``.',
 			'Stream types' - '``stream``, ``stream_or_alias``, ``stream(Property)``, ``stream_or_alias(Property)``.',

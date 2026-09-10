@@ -319,6 +319,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sgd_classifier.html"><code class="docutils literal notranslate"><span class="pre">sgd_classifier</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="simulated_annealing.html"><code class="docutils literal notranslate"><span class="pre">simulated_annealing</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">smtp</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
@@ -420,6 +421,36 @@
 <p>Portable SMTP/ESMTP client using the <code class="docutils literal notranslate"><span class="pre">sockets</span></code> library for plaintext
 connections and the <code class="docutils literal notranslate"><span class="pre">process</span></code> library with OpenSSL for implicit TLS
 and STARTTLS connections. Requires a backend supporting sockets.</p>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">openssl</span></code> (version 3.0.0 or later) command must be available on
+the system <code class="docutils literal notranslate"><span class="pre">PATH</span></code>.</p>
+<p>On macOS, this command can be installed using e.g. Homebrew:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> brew install openssl
+</pre></div>
+</div>
+<p>Or using MacPorts:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo port install openssl
+</pre></div>
+</div>
+<p>On Ubuntu, this command can be installed using:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo apt install openssl
+</pre></div>
+</div>
+<p>On RedHat distributions (8.x and later):</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo dnf install openssl
+</pre></div>
+</div>
+<p>For older RedHat distributions:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo yum install openssl
+</pre></div>
+</div>
+<p>On Windows, the <code class="docutils literal notranslate"><span class="pre">openssl</span></code> command can be installed using e.g.
+Chocolatey:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> choco install openssl
+</pre></div>
+</div>
+</section>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the

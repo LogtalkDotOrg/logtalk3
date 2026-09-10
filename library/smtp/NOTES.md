@@ -26,6 +26,37 @@ connections and the `process` library with OpenSSL for implicit TLS and
 STARTTLS connections. Requires a backend supporting sockets.
 
 
+Requirements
+------------
+
+The `openssl` (version 3.0.0 or later) command must be available on the
+system `PATH`.
+
+On macOS, this command can be installed using e.g. Homebrew:
+
+	$ brew install openssl
+
+Or using MacPorts:
+
+	$ sudo port install openssl
+
+On Ubuntu, this command can be installed using:
+
+	$ sudo apt install openssl
+
+On RedHat distributions (8.x and later):
+
+	$ sudo dnf install openssl
+
+For older RedHat distributions:
+
+    $ sudo yum install openssl
+
+On Windows, the `openssl` command can be installed using e.g. Chocolatey:
+
+	> choco install openssl
+
+
 API documentation
 -----------------
 
