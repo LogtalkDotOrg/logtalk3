@@ -23,9 +23,9 @@
 	implements(http_handler_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-09-10,
 		comment is 'Echo handler used by the "http_process_transport" library server-side tests.'
 	]).
 
@@ -292,6 +292,21 @@
 			http_process_transport::close_listener(Listener),
 			compound(ClientInfo),
 			http_core::status(Response, status(200, 'OK')).
+
+		test(http_process_transport_exchange_4_tls_range_01, deterministic, [condition(tls_listener_available)]) :-
+			Host = '127.0.0.1',
+			Prefix = 'logtalk_http_process_transport_range_test_',
+			Request = request(get, origin('/range'), http(1, 1), [host-host(Host), range-'bytes=0-1'], empty, []),
+			setup_call_cleanup(
+				http_process_transport::open_listener(Host, Port, Listener, [listener_transport(tls), temporary_tls_credentials(Prefix)]),
+				( threaded_once(http_process_transport::exchange(Host, Port, Request, Response, [connection_transport(tls)]), Tag),
+					http_process_transport::serve_once(Listener, echo_http_process_transport_handler, ClientInfo),
+					threaded_exit(http_process_transport::exchange(Host, Port, Request, Response, [connection_transport(tls)]), Tag),
+					compound(ClientInfo),
+					http_core::status(Response, status(200, 'OK'))
+				),
+				http_process_transport::close_listener(Listener)
+			).
 
 		test(http_process_transport_open_listener_4_06, deterministic, [condition(executable_available(ncat))]) :-
 			setup_call_cleanup(

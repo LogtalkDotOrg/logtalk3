@@ -316,6 +316,10 @@ of document roots accessed through symbolic links when using SWI-Prolog.
 handling of per-connection errors to keep listeners serving subsequent
 connections.
 
+* FIXED: The `http_process_transport` library handling of OpenSSL calls to
+avoid HTTP headers being mistaken for commands. OpenSSL 3.0.0 or later is
+now required.
+
 * FIXED: Performance issue in the `rest` library when looking for duplicated
 endpoint identifiers. Thanks to Lindsey Spratt for the patch.
 

@@ -28,7 +28,7 @@ still require backend thread support.
 Requirements
 ------------
 
-The ``openssl`` (version 1.0.2 or later), ``ncat`` (version 7.96 or
+The ``openssl`` (version 3.0.0 or later), ``ncat`` (version 7.96 or
 later), and ``socat`` (version 1.7.3.0 or later) commands must be
 available on the system ``PATH``.
 

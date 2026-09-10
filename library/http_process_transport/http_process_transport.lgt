@@ -24,9 +24,9 @@
 	imports([options, http_message_helpers, http_text_helpers])).
 
 	:- info([
-		version is 1:1:6,
+		version is 1:1:7,
 		author is 'Paulo Moura',
-		date is 2026-08-13,
+		date is 2026-09-10,
 		comment is 'Process-backed HTTP transport predicates using the process library and helper processes.'
 	]).
 
@@ -1155,7 +1155,7 @@
 	build_openssl_arguments(Host, Port, ServerNameOption, OpensslArguments, Arguments) :-
 		resolve_server_name(ServerNameOption, Host, ServerName),
 		openssl_connect_argument(Host, Port, ConnectArgument),
-		BaseArguments0 = ['s_client', '-quiet', '-no_ign_eof', '-connect', ConnectArgument],
+		BaseArguments0 = ['s_client', '-quiet', '-no_ign_eof', '-nocommands', '-connect', ConnectArgument],
 		add_server_name_argument(ServerName, BaseArguments0, BaseArguments),
 		append(BaseArguments, OpensslArguments, Arguments).
 
