@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-389.5 572,-389.5 572,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for category language_detection_scoring</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;09&#45;10, 01:17</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;09&#45;10, 16:29</text>
 <g id="clust1" class="cluster">
 <title>cluster_language_detection_scoring_category</title>
 <g id="a_clust1"><a xlink:title="language_detection_scoring">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 548,-54.25 548,-54.25 554,-54.25 560,-60.25 560,-66.25 560,-66.25 560,-365.5 560,-365.5 560,-371.5 554,-377.5 548,-377.5 548,-377.5 20,-377.5 20,-377.5 14,-377.5 8,-371.5 8,-365.5 8,-365.5 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L21" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L21">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L21" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L21">
 <text xml:space="preserve" text-anchor="start" x="20" y="-359.75" font-family="Monospace" font-size="10.00" fill="dimgray">language_detection_scoring</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>cosine_similarity/3</title>
 <polygon fill="yellow" stroke="black" points="207.38,-338.75 52.62,-338.75 52.62,-302.75 207.38,-302.75 207.38,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="60.62" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L30" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L30">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L30" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L30">
 <text xml:space="preserve" text-anchor="start" x="65.88" y="-322.62" font-family="Monospace" font-size="11.00">cosine_similarity/3</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>dot_product/4</title>
 <polygon fill="cornsilk" stroke="black" points="132.12,-219.5 17.87,-219.5 17.87,-183.5 132.12,-183.5 132.12,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="25.88" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L54">
+<g id="a_node3_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L54">
 <text xml:space="preserve" text-anchor="start" x="31.12" y="-203.38" font-family="Monospace" font-size="11.00">dot_product/4</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- cosine_similarity/3&#45;&gt;dot_product/4 -->
 <g id="edge1" class="edge">
 <title>cosine_similarity/3&#45;&gt;dot_product/4</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L44" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L44" xlink:title="calls">
 <path fill="none" stroke="black" d="M121.88,-302.45C112.95,-283.4 98.46,-252.5 87.95,-230.1"/>
 <polygon fill="black" stroke="black" points="91.21,-228.81 83.79,-221.24 84.87,-231.78 91.21,-228.81"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L44">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L44">
 <text xml:space="preserve" text-anchor="start" x="104.15" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>square_sum/3</title>
 <polygon fill="cornsilk" stroke="black" points="257.75,-219.5 150.25,-219.5 150.25,-183.5 257.75,-183.5 257.75,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="158.25" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L70">
+<g id="a_node5_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L70">
 <text xml:space="preserve" text-anchor="start" x="163.5" y="-203.38" font-family="Monospace" font-size="11.00">square_sum/3</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- cosine_similarity/3&#45;&gt;square_sum/3 -->
 <g id="edge2" class="edge">
 <title>cosine_similarity/3&#45;&gt;square_sum/3</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L44" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L44" xlink:title="calls">
 <path fill="none" stroke="black" d="M140.92,-302.45C153.05,-283.23 172.8,-251.94 186.97,-229.49"/>
 <polygon fill="black" stroke="black" points="189.85,-231.48 192.23,-221.15 183.93,-227.74 189.85,-231.48"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L44">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L44">
 <text xml:space="preserve" text-anchor="start" x="169.22" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -97,7 +97,7 @@
 <title>normalize_scores/2</title>
 <polygon fill="yellow" stroke="black" points="477,-338.75 329,-338.75 329,-302.75 477,-302.75 477,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="337" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L37">
+<g id="a_node2_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L37">
 <text xml:space="preserve" text-anchor="start" x="342.25" y="-322.62" font-family="Monospace" font-size="11.00">normalize_scores/2</text>
 </a>
 </g>
@@ -111,7 +111,7 @@
 <title>sum_scores/3</title>
 <polygon fill="cornsilk" stroke="black" points="383.75,-219.5 276.25,-219.5 276.25,-183.5 383.75,-183.5 383.75,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="284.25" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L82">
+<g id="a_node6_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L82">
 <text xml:space="preserve" text-anchor="start" x="289.5" y="-203.38" font-family="Monospace" font-size="11.00">sum_scores/3</text>
 </a>
 </g>
@@ -123,12 +123,12 @@
 <!-- normalize_scores/2&#45;&gt;sum_scores/3 -->
 <g id="edge5" class="edge">
 <title>normalize_scores/2&#45;&gt;sum_scores/3</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L75" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L75" xlink:title="calls">
 <path fill="none" stroke="black" d="M392.23,-302.45C380.26,-283.23 360.78,-251.94 346.8,-229.49"/>
 <polygon fill="black" stroke="black" points="349.87,-227.8 341.62,-221.16 343.93,-231.5 349.87,-227.8"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L75">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L75">
 <text xml:space="preserve" text-anchor="start" x="368.69" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -138,7 +138,7 @@
 <title>normalize_scores/3</title>
 <polygon fill="cornsilk" stroke="black" points="550,-219.5 402,-219.5 402,-183.5 550,-183.5 550,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="410" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L87">
+<g id="a_node7_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L87">
 <text xml:space="preserve" text-anchor="start" x="415.25" y="-203.38" font-family="Monospace" font-size="11.00">normalize_scores/3</text>
 </a>
 </g>
@@ -150,12 +150,12 @@
 <!-- normalize_scores/2&#45;&gt;normalize_scores/3 -->
 <g id="edge6" class="edge">
 <title>normalize_scores/2&#45;&gt;normalize_scores/3</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L75" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L75" xlink:title="calls">
 <path fill="none" stroke="black" d="M413.77,-302.45C425.74,-283.23 445.22,-251.94 459.2,-229.49"/>
 <polygon fill="black" stroke="black" points="462.07,-231.5 464.38,-221.16 456.13,-227.8 462.07,-231.5"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L75">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L75">
 <text xml:space="preserve" text-anchor="start" x="441.69" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -165,7 +165,7 @@
 <title>dot_product/9</title>
 <polygon fill="cornsilk" stroke="black" points="146.12,-100.25 31.87,-100.25 31.87,-64.25 146.12,-64.25 146.12,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="39.88" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L62">
+<g id="a_node4_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L62">
 <text xml:space="preserve" text-anchor="start" x="45.12" y="-84.12" font-family="Monospace" font-size="11.00">dot_product/9</text>
 </a>
 </g>
@@ -177,12 +177,12 @@
 <!-- dot_product/4&#45;&gt;dot_product/9 -->
 <g id="edge3" class="edge">
 <title>dot_product/4&#45;&gt;dot_product/9</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L58" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L58" xlink:title="calls">
 <path fill="none" stroke="black" d="M64.23,-183.08C57.6,-170.17 51.18,-152.14 55.75,-136.25 58.37,-127.15 63.06,-118.1 68.11,-110.12"/>
 <polygon fill="black" stroke="black" points="70.96,-112.15 73.71,-101.92 65.18,-108.2 70.96,-112.15"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L58">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="55.75" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -190,12 +190,12 @@
 <!-- dot_product/9&#45;&gt;dot_product/4 -->
 <g id="edge4" class="edge">
 <title>dot_product/9&#45;&gt;dot_product/4</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L62" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L62" xlink:title="calls">
 <path fill="none" stroke="black" d="M87.21,-100.71C85.85,-113.64 83.91,-131.68 82,-147.5 81.04,-155.45 79.93,-164.07 78.89,-172"/>
 <polygon fill="black" stroke="black" points="75.43,-171.45 77.57,-181.83 82.37,-172.38 75.43,-171.45"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/55af6809220c295f586668d0b43dae5f2653e8bb/library/language_detection/language_detection_scoring.lgt#L62">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7660df8b7e6259798d462993a94bedd72baeafe/library/language_detection/language_detection_scoring.lgt#L62">
 <text xml:space="preserve" text-anchor="start" x="83.24" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
