@@ -44,7 +44,7 @@ Xoshiro128++ random number generator (`xoshiro128pp`) as the default.
 API documentation
 ------------------
 
-Open the [../../docs/library_index.html#ant-colony](../../docs/library_index.html#ant-colony)
+Open the [../../apis/library_index.html#ant-colony](../../apis/library_index.html#ant-colony)
 link in a web browser.
 
 

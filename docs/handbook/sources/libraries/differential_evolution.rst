@@ -22,7 +22,7 @@ API documentation
 -----------------
 
 Open the
-`../../docs/library_index.html#differential-evolution <../../docs/library_index.html#differential-evolution>`__
+`../../apis/library_index.html#differential-evolution <../../apis/library_index.html#differential-evolution>`__
 link in a web browser.
 
 Loading

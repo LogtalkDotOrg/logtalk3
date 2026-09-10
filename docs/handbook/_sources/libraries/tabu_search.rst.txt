@@ -24,7 +24,7 @@ API documentation
 -----------------
 
 Open the
-`../../docs/library_index.html#tabu-search <../../docs/library_index.html#tabu-search>`__
+`../../apis/library_index.html#tabu-search <../../apis/library_index.html#tabu-search>`__
 link in a web browser.
 
 Loading

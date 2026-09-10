@@ -12,7 +12,7 @@ API documentation
 -----------------
 
 Open the
-`../../docs/library_index.html#process <../../docs/library_index.html#process>`__
+`../../apis/library_index.html#process <../../apis/library_index.html#process>`__
 link in a web browser.
 
 Loading

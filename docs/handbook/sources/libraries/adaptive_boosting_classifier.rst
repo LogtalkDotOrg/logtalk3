@@ -27,7 +27,7 @@ API documentation
 -----------------
 
 Open the
-`../../docs/library_index.html#adaptive_boosting_classifier <../../docs/library_index.html#adaptive_boosting_classifier>`__
+`../../apis/library_index.html#adaptive_boosting_classifier <../../apis/library_index.html#adaptive_boosting_classifier>`__
 link in a web browser.
 
 Loading

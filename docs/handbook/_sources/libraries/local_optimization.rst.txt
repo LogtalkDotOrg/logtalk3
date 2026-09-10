@@ -33,7 +33,7 @@ API documentation
 -----------------
 
 Open the
-`../../docs/library_index.html#local-optimization <../../docs/library_index.html#local-optimization>`__
+`../../apis/library_index.html#local-optimization <../../apis/library_index.html#local-optimization>`__
 link in a web browser.
 
 Loading

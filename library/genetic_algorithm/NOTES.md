@@ -42,7 +42,7 @@ the Xoshiro128++ random number generator (`xoshiro128pp`) as the default.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#genetic-algorithm](../../docs/library_index.html#genetic-algorithm)
+Open the [../../apis/library_index.html#genetic-algorithm](../../apis/library_index.html#genetic-algorithm)
 link in a web browser.
 
 

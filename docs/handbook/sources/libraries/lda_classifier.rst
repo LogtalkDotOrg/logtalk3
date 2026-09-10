@@ -22,7 +22,7 @@ API documentation
 -----------------
 
 Open the
-`../../docs/library_index.html#lda_classifier <../../docs/library_index.html#lda_classifier>`__
+`../../apis/library_index.html#lda_classifier <../../apis/library_index.html#lda_classifier>`__
 link in a web browser.
 
 Loading

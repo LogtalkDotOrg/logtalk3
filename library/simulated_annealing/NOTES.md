@@ -39,7 +39,7 @@ the Xoshiro128++ random number generator (`xoshiro128pp`) as the default.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#simulated-annealing](../../docs/library_index.html#simulated-annealing)
+Open the [../../apis/library_index.html#simulated-annealing](../../apis/library_index.html#simulated-annealing)
 link in a web browser.
 
 

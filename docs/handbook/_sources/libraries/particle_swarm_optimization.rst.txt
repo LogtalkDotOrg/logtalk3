@@ -21,7 +21,7 @@ API documentation
 -----------------
 
 Open the
-`../../docs/library_index.html#particle-swarm-optimization <../../docs/library_index.html#particle-swarm-optimization>`__
+`../../apis/library_index.html#particle-swarm-optimization <../../apis/library_index.html#particle-swarm-optimization>`__
 link in a web browser.
 
 Loading

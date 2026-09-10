@@ -29,7 +29,7 @@ SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#process](../../docs/library_index.html#process)
+Open the [../../apis/library_index.html#process](../../apis/library_index.html#process)
 link in a web browser.
 
 

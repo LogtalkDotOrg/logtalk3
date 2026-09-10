@@ -40,7 +40,7 @@ the Xoshiro128++ random number generator (`xoshiro128pp`) as the default.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#tabu-search](../../docs/library_index.html#tabu-search)
+Open the [../../apis/library_index.html#tabu-search](../../apis/library_index.html#tabu-search)
 link in a web browser.
 
 

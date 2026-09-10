@@ -42,7 +42,7 @@ continuous, categorical, and mixed-feature testing.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#logistic_regression_classifier](../../docs/library_index.html#logistic_regression_classifier)
+Open the [../../apis/library_index.html#logistic_regression_classifier](../../apis/library_index.html#logistic_regression_classifier)
 link in a web browser.
 
 

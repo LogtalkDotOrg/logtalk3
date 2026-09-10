@@ -39,7 +39,7 @@ attributes must be declared as `continuous`.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#lda_classifier](../../docs/library_index.html#lda_classifier)
+Open the [../../apis/library_index.html#lda_classifier](../../apis/library_index.html#lda_classifier)
 link in a web browser.
 
 

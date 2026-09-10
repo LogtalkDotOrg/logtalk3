@@ -41,7 +41,7 @@ categorical, and mixed-feature datasets are supported.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#sgd_classifier](../../docs/library_index.html#sgd_classifier)
+Open the [../../apis/library_index.html#sgd_classifier](../../apis/library_index.html#sgd_classifier)
 link in a web browser.
 
 

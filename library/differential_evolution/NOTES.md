@@ -38,7 +38,7 @@ Xoshiro128++ random number generator (`xoshiro128pp`).
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#differential-evolution](../../docs/library_index.html#differential-evolution)
+Open the [../../apis/library_index.html#differential-evolution](../../apis/library_index.html#differential-evolution)
 link in a web browser.
 
 

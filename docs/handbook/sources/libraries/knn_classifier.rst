@@ -21,7 +21,7 @@ API documentation
 -----------------
 
 Open the
-`../../docs/library_index.html#knn_classifier <../../docs/library_index.html#knn_classifier>`__
+`../../apis/library_index.html#knn_classifier <../../apis/library_index.html#knn_classifier>`__
 link in a web browser.
 
 Loading

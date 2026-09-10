@@ -39,7 +39,7 @@ directory for examples.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#knn_classifier](../../docs/library_index.html#knn_classifier)
+Open the [../../apis/library_index.html#knn_classifier](../../apis/library_index.html#knn_classifier)
 link in a web browser.
 
 

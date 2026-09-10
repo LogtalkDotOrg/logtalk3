@@ -37,7 +37,7 @@ for examples.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#nearest_centroid_classifier](../../docs/library_index.html#nearest_centroid_classifier)
+Open the [../../apis/library_index.html#nearest_centroid_classifier](../../apis/library_index.html#nearest_centroid_classifier)
 link in a web browser.
 
 

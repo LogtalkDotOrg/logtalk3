@@ -24,7 +24,7 @@ API documentation
 -----------------
 
 Open the
-`../../docs/library_index.html#sgd_classifier <../../docs/library_index.html#sgd_classifier>`__
+`../../apis/library_index.html#sgd_classifier <../../apis/library_index.html#sgd_classifier>`__
 link in a web browser.
 
 Loading

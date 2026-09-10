@@ -38,7 +38,7 @@ for examples.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#naive_bayes_classifier](../../docs/library_index.html#naive_bayes_classifier)
+Open the [../../apis/library_index.html#naive_bayes_classifier](../../apis/library_index.html#naive_bayes_classifier)
 link in a web browser.
 
 

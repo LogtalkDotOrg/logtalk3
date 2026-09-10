@@ -40,7 +40,7 @@ multiclass, continuous, categorical, and mixed-feature testing.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#linear_svm_classifier](../../docs/library_index.html#linear_svm_classifier)
+Open the [../../apis/library_index.html#linear_svm_classifier](../../apis/library_index.html#linear_svm_classifier)
 link in a web browser.
 
 

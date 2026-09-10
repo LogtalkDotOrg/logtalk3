@@ -23,7 +23,7 @@ API documentation
 -----------------
 
 Open the
-`../../docs/library_index.html#simulated-annealing <../../docs/library_index.html#simulated-annealing>`__
+`../../apis/library_index.html#simulated-annealing <../../apis/library_index.html#simulated-annealing>`__
 link in a web browser.
 
 Loading

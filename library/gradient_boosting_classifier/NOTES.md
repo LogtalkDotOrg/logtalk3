@@ -41,7 +41,7 @@ categorical, and mixed-feature datasets are supported through the reused
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#gradient_boosting_classifier](../../docs/library_index.html#gradient_boosting_classifier)
+Open the [../../apis/library_index.html#gradient_boosting_classifier](../../apis/library_index.html#gradient_boosting_classifier)
 link in a web browser.
 
 

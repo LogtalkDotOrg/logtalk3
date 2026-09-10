@@ -22,7 +22,7 @@ API documentation
 -----------------
 
 Open the
-`../../docs/library_index.html#random_forest_classifier <../../docs/library_index.html#random_forest_classifier>`__
+`../../apis/library_index.html#random_forest_classifier <../../apis/library_index.html#random_forest_classifier>`__
 link in a web browser.
 
 Loading

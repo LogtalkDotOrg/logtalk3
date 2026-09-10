@@ -29,7 +29,7 @@ constraints.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#constrained-optimization](../../docs/library_index.html#constrained-optimization)
+Open the [../../apis/library_index.html#constrained-optimization](../../apis/library_index.html#constrained-optimization)
 link in a web browser.
 
 

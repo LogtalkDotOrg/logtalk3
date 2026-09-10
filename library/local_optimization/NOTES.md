@@ -46,7 +46,7 @@ library.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#local-optimization](../../docs/library_index.html#local-optimization)
+Open the [../../apis/library_index.html#local-optimization](../../apis/library_index.html#local-optimization)
 link in a web browser.
 
 

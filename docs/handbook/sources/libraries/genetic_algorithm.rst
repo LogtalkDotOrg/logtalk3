@@ -26,7 +26,7 @@ API documentation
 -----------------
 
 Open the
-`../../docs/library_index.html#genetic-algorithm <../../docs/library_index.html#genetic-algorithm>`__
+`../../apis/library_index.html#genetic-algorithm <../../apis/library_index.html#genetic-algorithm>`__
 link in a web browser.
 
 Loading
