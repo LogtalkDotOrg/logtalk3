@@ -695,10 +695,7 @@
 
 	parse_hex_atom(Hex, Bytes, Context) :-
 		atom_codes(Hex, Codes),
-		(	Codes == [] ->
-			Bytes = []
-		;	parse_hex_codes(Codes, Hex, Bytes, Context)
-		).
+		parse_hex_codes(Codes, Hex, Bytes, Context).
 
 	parse_hex_codes([], _, [], _) :-
 		!.
