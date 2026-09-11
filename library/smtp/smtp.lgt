@@ -24,14 +24,14 @@
 	imports(options)).
 
 	:- info([
-		version is 0:1:0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-10,
+		date is 2026-09-11,
 		comment is 'Portable SMTP/ESMTP client.'
 	]).
 
 	:- uses(list, [
-		append/3, member/2, reverse/2, valid/1 as proper_list/1
+		append/3, length/2, member/2, memberchk/2, reverse/2, valid/1 as proper_list/1
 	]).
 
 	:- uses(reader, [
@@ -478,8 +478,62 @@
 		atom_codes(Value, ValueCodes),
 		write_bytes(NameCodes, Output),
 		write_bytes([0':,32], Output),
-		write_bytes(ValueCodes, Output),
+		write_header_value(Output, Name, ValueCodes),
 		write_crlf(Output).
+
+	write_header_value(Output, Name, ValueCodes) :-
+		rfc2047_text_header(Name),
+		contains_non_ascii_code(ValueCodes),
+		!,
+		rfc2047_encoded_words(ValueCodes, EncodedWords),
+		write_encoded_words(EncodedWords, Output),
+		!.
+	write_header_value(Output, _Name, ValueCodes) :-
+		write_bytes(ValueCodes, Output).
+
+	rfc2047_text_header(Name) :-
+		atom_codes(Name, Codes),
+		lowercase_ascii_codes(Codes, LowercaseCodes),
+		atom_codes(LowercaseName, LowercaseCodes),
+		memberchk(LowercaseName, [subject, comments]).
+
+	contains_non_ascii_code([Code| _Codes]) :-
+		Code > 127,
+		!.
+	contains_non_ascii_code([_Code| Codes]) :-
+		contains_non_ascii_code(Codes).
+
+	rfc2047_encoded_words([], []).
+	rfc2047_encoded_words(Codes, [EncodedWord| EncodedWords]) :-
+		take_rfc2047_chunk(Codes, 42, Chunk, Rest),
+		utf_8::codes_to_bytes(Chunk, Bytes),
+		base64::generate(codes(Base64Codes), Bytes),
+		EncodedWord0 = [0'=,0'?,0'U,0'T,0'F,0'-,0'8,0'?,0'B,0'?| Base64Codes],
+		append(EncodedWord0, [0'?,0'=], EncodedWord),
+		rfc2047_encoded_words(Rest, EncodedWords).
+
+	take_rfc2047_chunk([], _Remaining, [], []).
+	take_rfc2047_chunk([Code| Codes], Remaining, Chunk, Rest) :-
+		utf_8::codes_to_bytes([Code], Bytes),
+		length(Bytes, ByteCount),
+		(	ByteCount =< Remaining ->
+			Chunk = [Code| ChunkCodes],
+			NextRemaining is Remaining - ByteCount,
+			take_rfc2047_chunk(Codes, NextRemaining, ChunkCodes, Rest)
+		;	Chunk = [],
+			Rest = [Code| Codes]
+		).
+
+	write_encoded_words([EncodedWord| EncodedWords], Output) :-
+		write_bytes(EncodedWord, Output),
+		write_continuation_encoded_words(EncodedWords, Output).
+
+	write_continuation_encoded_words([], _Output).
+	write_continuation_encoded_words([EncodedWord| EncodedWords], Output) :-
+		write_crlf(Output),
+		put_byte(Output, 32),
+		write_bytes(EncodedWord, Output),
+		write_continuation_encoded_words(EncodedWords, Output).
 
 	write_body([], _Output).
 	write_body([Code| Codes], Output) :-
@@ -669,9 +723,7 @@
 		check(atom, Value, Context),
 		atom_codes(Name, NameCodes),
 		atom_codes(Value, ValueCodes),
-		(	NameCodes = [_| _],
-			valid_header_name_codes(NameCodes),
-			valid_header_value_codes(ValueCodes) ->
+		(	valid_header(Name, NameCodes, ValueCodes) ->
 			validate_header_list(Headers, Context)
 		;	domain_error(smtp_header, Name-Value)
 		).
@@ -685,10 +737,24 @@
 		Code =\= 0':,
 		valid_header_name_codes(Codes).
 
+	valid_header(Name, NameCodes, ValueCodes) :-
+		NameCodes = [_| _],
+		valid_header_name_codes(NameCodes),
+		(	rfc2047_text_header(Name) ->
+			valid_unicode_header_value_codes(ValueCodes)
+		;	valid_header_value_codes(ValueCodes)
+		).
+
 	valid_header_value_codes([]).
 	valid_header_value_codes([Code| Codes]) :-
 		once((Code == 0'\t; Code >= 32, Code =< 126)),
 		valid_header_value_codes(Codes).
+
+	valid_unicode_header_value_codes([]).
+	valid_unicode_header_value_codes([Code| Codes]) :-
+		once((Code == 0'\t; Code >= 32, Code =\= 127)),
+		catch(utf_8::codes_to_bytes([Code], _Bytes), _, fail),
+		valid_unicode_header_value_codes(Codes).
 
 	body_codes(chars(Chars), Codes) :-
 		valid(chars(unicode_full), Chars),
@@ -792,9 +858,7 @@
 		atom(Value),
 		atom_codes(Name, NameCodes),
 		atom_codes(Value, ValueCodes),
-		NameCodes = [_| _],
-		valid_header_name_codes(NameCodes),
-		valid_header_value_codes(ValueCodes).
+		valid_header(Name, NameCodes, ValueCodes).
 	valid_option(openssl_executable(Executable)) :-
 		atom(Executable).
 	valid_option(server_name(ServerName)) :-

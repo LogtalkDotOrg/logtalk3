@@ -133,6 +133,13 @@ are rejected before opening a connection. A caller-supplied
 ``Content-Type`` may select a different media type, such as
 ``text/html``, but must declare the UTF-8 charset.
 
+Unicode ``Subject`` and ``Comments`` values are automatically serialized
+as RFC 2047 UTF-8 Base64 encoded words. Encoded words are limited to 75
+characters and long values are folded between encoded words without
+splitting a Unicode character. ASCII values, including caller-supplied
+encoded words, are preserved unchanged. Other header values remain
+restricted to ASCII.
+
 Results use the term:
 
 ::
@@ -187,11 +194,11 @@ Authentication on a plaintext connection is rejected unless
 Limitations
 -----------
 
-The current version supports UTF-8 MIME text bodies. Header names and
-values, including subjects and display names, remain restricted to
-ASCII; RFC 2047 encoded words are not generated. MIME multipart bodies,
-attachments, SMTPUTF8 envelopes, quoted-printable transfer encoding,
-8BITMIME, PIPELINING, CHUNKING, DSN, automatic retries, connection
-pooling, and operation timeouts are not implemented. Automatic retry
-after ``DATA`` is deliberately omitted because loss of the final reply
-makes delivery status ambiguous and retrying can duplicate mail.
+The current version does not generate RFC 2047 encoded words for display
+names, structured fields, or arbitrary extension fields. MIME multipart
+bodies, attachments, SMTPUTF8 envelopes, quoted-printable transfer
+encoding, 8BITMIME, PIPELINING, CHUNKING, DSN, automatic retries,
+connection pooling, and operation timeouts are not implemented.
+Automatic retry after ``DATA`` is deliberately omitted because loss of
+the final reply makes delivery status ambiguous and retrying can
+duplicate mail.

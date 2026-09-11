@@ -25,8 +25,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-10,
+		date is 2026-09-11,
 		comment is 'Unit tests for the "smtp" library.'
+	]).
+
+	:- uses(user, [
+		atomic_list_concat/2
 	]).
 
 	cover(smtp).
@@ -79,6 +83,18 @@
 
 	test(smtp_invalid_header_01, error(domain_error(smtp_header, malformed))) :-
 		smtp::send(localhost, 25, smtp_message('a@example.com', 'b@example.com', [malformed], ''), _Result, []).
+
+	test(smtp_invalid_header_unicode_field_01, error(domain_error(smtp_header, _))) :-
+		atom_codes(Value, [0'c,0'a,0'f,233]),
+		smtp::send(localhost, 25, smtp_message('a@example.com', 'b@example.com', ['X-Label'-Value], ''), _Result, []).
+
+	test(smtp_invalid_header_unicode_control_01, error(domain_error(smtp_header, _))) :-
+		atom_codes(Value, [0'a,10,233]),
+		smtp::send(localhost, 25, smtp_message('a@example.com', 'b@example.com', ['Subject'-Value], ''), _Result, []).
+
+	test(smtp_valid_unicode_header_option_01, deterministic) :-
+		atom_codes(Value, [0'c,0'a,0'f,233]),
+		smtp::valid_option(header('Subject', Value)).
 
 	test(smtp_invalid_message_01, error(domain_error(smtp_message, malformed))) :-
 		smtp::send(localhost, 25, malformed, _Result, []).
@@ -174,6 +190,38 @@
 				], abc),
 				Data
 			).
+
+		test(smtp_rfc2047_ascii_subject_01, deterministic(Data == ['From: alice@example.com', 'To: bob@example.com', 'MIME-Version: 1.0', 'Content-Type: text/plain; charset=UTF-8', 'Content-Transfer-Encoding: base64', 'Subject: Hello', ''])) :-
+			capture_message(smtp_message('alice@example.com', 'bob@example.com', ['Subject'-'Hello'], ''), Data).
+
+		test(smtp_rfc2047_utf8_subject_01, deterministic(Data == ['From: alice@example.com', 'To: bob@example.com', 'MIME-Version: 1.0', 'Content-Type: text/plain; charset=UTF-8', 'Content-Transfer-Encoding: base64', 'Subject: =?UTF-8?B?SMOpbGxv?=', ''])) :-
+			atom_codes(Subject, [0'H,233,0'l,0'l,0'o]),
+			capture_message(smtp_message('alice@example.com', 'bob@example.com', ['Subject'-Subject], ''), Data).
+
+		test(smtp_rfc2047_utf8_comments_01, deterministic(Data == ['From: alice@example.com', 'To: bob@example.com', 'MIME-Version: 1.0', 'Content-Type: text/plain; charset=UTF-8', 'Content-Transfer-Encoding: base64', 'comments: =?UTF-8?B?T2zDoQ==?=', ''])) :-
+			atom_codes(Comments, [0'O,0'l,225]),
+			capture_message(smtp_message('alice@example.com', 'bob@example.com', [comments-Comments], ''), Data).
+
+		test(smtp_rfc2047_existing_encoded_word_01, deterministic(Data == ['From: alice@example.com', 'To: bob@example.com', 'MIME-Version: 1.0', 'Content-Type: text/plain; charset=UTF-8', 'Content-Transfer-Encoding: base64', 'Subject: =?UTF-8?B?SMOpbGxv?=', ''])) :-
+			capture_message(smtp_message('alice@example.com', 'bob@example.com', ['Subject'-'=?UTF-8?B?SMOpbGxv?='], ''), Data).
+
+		test(smtp_rfc2047_option_header_01, deterministic(Data == ['From: alice@example.com', 'To: bob@example.com', 'MIME-Version: 1.0', 'Content-Type: text/plain; charset=UTF-8', 'Content-Transfer-Encoding: base64', 'Subject: =?UTF-8?B?8J+YgA==?=', ''])) :-
+			atom_codes(Subject, [128512]),
+			capture_message(smtp_message('alice@example.com', 'bob@example.com', [], ''), [header('Subject', Subject)], Data).
+
+		test(smtp_rfc2047_folding_01, deterministic((First == ExpectedFirst, Continuation == ExpectedContinuation, FirstLength == 77, ContinuationLength == 21))) :-
+			repeat_code(42, 0'a, As),
+			list::append(As, [128512], SubjectCodes),
+			atom_codes(Subject, SubjectCodes),
+			base64::generate(atom(FirstBase64), As),
+			utf_8::codes_to_bytes([128512], EmojiBytes),
+			base64::generate(atom(SecondBase64), EmojiBytes),
+			atomic_list_concat(['Subject: =?UTF-8?B?', FirstBase64, '?='], ExpectedFirst),
+			atomic_list_concat([' =?UTF-8?B?', SecondBase64, '?='], ExpectedContinuation),
+			capture_message(smtp_message('alice@example.com', 'bob@example.com', ['Subject'-Subject], ''), Data),
+			Data = ['From: alice@example.com', 'To: bob@example.com', 'MIME-Version: 1.0', 'Content-Type: text/plain; charset=UTF-8', 'Content-Transfer-Encoding: base64', First, Continuation, ''],
+			atom_length(First, FirstLength),
+			atom_length(Continuation, ContinuationLength).
 
 		test(smtp_require_all_recipients_01, deterministic(Result == smtp_result(not_sent, ['good@example.com'], ['bad@example.com'-smtp_response(550, ['rejected'])]))) :-
 			socket::server_open('127.0.0.1', Port, Listener, [type(binary)]),
@@ -282,9 +330,12 @@
 			capture_message(smtp_message('alice@example.com', 'bob@example.com', [], Body), Data).
 
 		capture_message(Message, Data) :-
+			capture_message(Message, [], Data).
+
+		capture_message(Message, Options, Data) :-
 			socket::server_open('127.0.0.1', Port, Listener, [type(binary)]),
 			threaded_once(mock_body_server(Listener, Data), Tag),
-			smtp::send('127.0.0.1', Port, Message, _Result, [helo('client.test')]),
+			smtp::send('127.0.0.1', Port, Message, _Result, [helo('client.test')| Options]),
 			threaded_exit(mock_body_server(Listener, Data), Tag),
 			socket::server_close(Listener).
 

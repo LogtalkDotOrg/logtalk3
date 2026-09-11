@@ -15,7 +15,7 @@ Protocol for portable SMTP clients.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-09-10
+| **Date:** 2026-09-11
 
 | **Compilation flags:**
 |    ``static``
@@ -44,7 +44,7 @@ Public predicates
 ``send/5``
 ^^^^^^^^^^
 
-Opens an SMTP session, sends a message, and closes the session.
+Opens an SMTP session, sends a message, and closes the session. Unicode ``Subject`` and ``Comments`` header values are serialized as RFC 2047 UTF-8 Base64 encoded words; all other header values must be ASCII.
 
 | **Compilation flags:**
 |    ``static``
@@ -224,7 +224,7 @@ Checks if the local streams for an SMTP connection are open.
 ``send/4``
 ^^^^^^^^^^
 
-Sends a message over an open SMTP session.
+Sends a message over an open SMTP session. Unicode ``Subject`` and ``Comments`` header values are serialized as RFC 2047 UTF-8 Base64 encoded words; all other header values must be ASCII.
 
 | **Compilation flags:**
 |    ``static``

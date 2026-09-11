@@ -520,6 +520,12 @@ are matched case-insensitively. Conflicting or duplicate MIME headers
 are rejected before opening a connection. A caller-supplied
 <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code> may select a different media type, such as
 <code class="docutils literal notranslate"><span class="pre">text/html</span></code>, but must declare the UTF-8 charset.</p>
+<p>Unicode <code class="docutils literal notranslate"><span class="pre">Subject</span></code> and <code class="docutils literal notranslate"><span class="pre">Comments</span></code> values are automatically serialized
+as RFC 2047 UTF-8 Base64 encoded words. Encoded words are limited to 75
+characters and long values are folded between encoded words without
+splitting a Unicode character. ASCII values, including caller-supplied
+encoded words, are preserved unchanged. Other header values remain
+restricted to ASCII.</p>
 <p>Results use the term:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>smtp_result(<span class="nv">FinalResponse</span>, <span class="nv">AcceptedRecipients</span>, <span class="nv">RejectedRecipients</span>)
 </pre></div>
@@ -568,14 +574,14 @@ Authentication on a plaintext connection is rejected unless
 </section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
-<p>The current version supports UTF-8 MIME text bodies. Header names and
-values, including subjects and display names, remain restricted to
-ASCII; RFC 2047 encoded words are not generated. MIME multipart bodies,
-attachments, SMTPUTF8 envelopes, quoted-printable transfer encoding,
-8BITMIME, PIPELINING, CHUNKING, DSN, automatic retries, connection
-pooling, and operation timeouts are not implemented. Automatic retry
-after <code class="docutils literal notranslate"><span class="pre">DATA</span></code> is deliberately omitted because loss of the final reply
-makes delivery status ambiguous and retrying can duplicate mail.</p>
+<p>The current version does not generate RFC 2047 encoded words for display
+names, structured fields, or arbitrary extension fields. MIME multipart
+bodies, attachments, SMTPUTF8 envelopes, quoted-printable transfer
+encoding, 8BITMIME, PIPELINING, CHUNKING, DSN, automatic retries,
+connection pooling, and operation timeouts are not implemented.
+Automatic retry after <code class="docutils literal notranslate"><span class="pre">DATA</span></code> is deliberately omitted because loss of
+the final reply makes delivery status ambiguous and retrying can
+duplicate mail.</p>
 </section>
 </section>
 

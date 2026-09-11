@@ -24,14 +24,14 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-10,
+		date is 2026-09-11,
 		comment is 'Protocol for portable SMTP clients.'
 	]).
 
 	:- public(send/5).
 	:- mode(send(+atom, +integer, +compound, --compound, +list), one_or_error).
 	:- info(send/5, [
-		comment is 'Opens an SMTP session, sends a message, and closes the session.',
+		comment is 'Opens an SMTP session, sends a message, and closes the session. Unicode ``Subject`` and ``Comments`` header values are serialized as RFC 2047 UTF-8 Base64 encoded words; all other header values must be ASCII.',
 		argnames is ['Host', 'Port', 'Message', 'Result', 'Options'],
 		exceptions is [
 			'``Host`` or ``Port`` is a variable' - instantiation_error,
@@ -114,7 +114,7 @@
 	:- public(send/4).
 	:- mode(send(+compound, +compound, --compound, +list), one_or_error).
 	:- info(send/4, [
-		comment is 'Sends a message over an open SMTP session.',
+		comment is 'Sends a message over an open SMTP session. Unicode ``Subject`` and ``Comments`` header values are serialized as RFC 2047 UTF-8 Base64 encoded words; all other header values must be ASCII.',
 		argnames is ['Connection', 'Message', 'Result', 'Options'],
 		exceptions is [
 			'``Connection`` is not an open SMTP connection handle' - domain_error(smtp_connection, 'Connection'),

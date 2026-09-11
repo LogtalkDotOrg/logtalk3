@@ -450,7 +450,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-09-10</div>
+<div class="line"><strong>Date:</strong> 2026-09-11</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -496,7 +496,7 @@
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
 <section id="send-5">
 <span id="smtp-protocol-0-send-5"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">send/5</span></code></a><a class="headerlink" href="#send-5" title="Link to this heading"></a></h3>
-<p>Opens an SMTP session, sends a message, and closes the session.</p>
+<p>Opens an SMTP session, sends a message, and closes the session. Unicode <code class="docutils literal notranslate"><span class="pre">Subject</span></code> and <code class="docutils literal notranslate"><span class="pre">Comments</span></code> header values are serialized as RFC 2047 UTF-8 Base64 encoded words; all other header values must be ASCII.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -791,7 +791,7 @@
 </section>
 <section id="send-4">
 <span id="smtp-protocol-0-send-4"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">send/4</span></code></a><a class="headerlink" href="#send-4" title="Link to this heading"></a></h3>
-<p>Sends a message over an open SMTP session.</p>
+<p>Sends a message over an open SMTP session. Unicode <code class="docutils literal notranslate"><span class="pre">Subject</span></code> and <code class="docutils literal notranslate"><span class="pre">Comments</span></code> header values are serialized as RFC 2047 UTF-8 Base64 encoded words; all other header values must be ASCII.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

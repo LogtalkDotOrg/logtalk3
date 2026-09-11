@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-10,
+		date is 2026-09-11,
 		comment is 'Process-backed TLS transport support for the SMTP client.'
 	]).
 
