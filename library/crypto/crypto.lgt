@@ -22,9 +22,9 @@
 :- object(crypto).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-08-04,
+		date is 2026-09-11,
 		comment is 'Transport-neutral cryptographic helper predicates.'
 	]).
 
@@ -450,6 +450,9 @@
 
 	pbkdf2(Hash, Password, Salt, Iterations, Length, DerivedKey) :-
 		context(Context),
+		pbkdf2(Hash, Password, Salt, Iterations, Length, DerivedKey, Context).
+
+	pbkdf2(Hash, Password, Salt, Iterations, Length, DerivedKey, Context) :-
 		check_hash(Hash, Context),
 		check(list(byte), Password, Context),
 		check(list(byte), Salt, Context),
@@ -461,6 +464,9 @@
 
 	apr1(Password, Salt, Checksum) :-
 		context(Context),
+		apr1(Password, Salt, Checksum, Context).
+
+	apr1(Password, Salt, Checksum, Context) :-
 		check(list(byte), Password, Context),
 		check(list(byte), Salt, Context),
 		check_apr1_salt(Salt, Context),
@@ -470,6 +476,9 @@
 
 	bcrypt(Password, Cost, Salt, Checksum) :-
 		context(Context),
+		bcrypt(Password, Cost, Salt, Checksum, Context).
+
+	bcrypt(Password, Cost, Salt, Checksum, Context) :-
 		check(list(byte), Password, Context),
 		check_bcrypt_password(Password, Context),
 		check_bcrypt_cost(Cost, Context),
@@ -494,24 +503,20 @@
 	password_hash(bcrypt, Password, PasswordHash, Options) :-
 		!,
 		context(Context),
-		check(list(byte), Password, Context),
-		check_bcrypt_password(Password, Context),
 		parse_bcrypt_options(Options, Cost, Salt, Context),
-		bcrypt(Password, Cost, Salt, Checksum),
+		bcrypt(Password, Cost, Salt, Checksum, Context),
 		PasswordHash = bcrypt(Cost, Salt, Checksum).
 	password_hash(apr1, Password, PasswordHash, Options) :-
 		!,
 		context(Context),
-		check(list(byte), Password, Context),
 		parse_apr1_options(Options, Salt, Context),
-		apr1(Password, Salt, Checksum),
+		apr1(Password, Salt, Checksum, Context),
 		PasswordHash = apr1(Salt, Checksum).
 	password_hash(Hash, Password, PasswordHash, Options) :-
 		context(Context),
 		check_hash(Hash, Context),
-		check(list(byte), Password, Context),
 		parse_password_hash_options(Options, Hash, Iterations, Salt, Length, Context),
-		pbkdf2(Hash, Password, Salt, Iterations, Length, DerivedKey),
+		pbkdf2(Hash, Password, Salt, Iterations, Length, DerivedKey, Context),
 		PasswordHash = pbkdf2(Hash, Iterations, Salt, DerivedKey).
 
 	password_hash_needs_rehash(_PasswordHash, Method, _Options) :-
@@ -785,65 +790,36 @@
 	parse_password_hash_options(Options, Hash, Iterations, Salt, Length, Context) :-
 		check(list(compound), Options, Context),
 		Hash::digest_size(DefaultLength),
-		(	var(Options) ->
-			throw(error(instantiation_error, Context))
-		;	parse_password_hash_options(Options, 131072, none, 16, DefaultLength, Iterations, SaltOption, SaltLength, Length, Context),
-			(	SaltOption == none ->
-				random_bytes(SaltLength, Salt)
-			;	Salt = SaltOption
-			)
+		parse_password_hash_options(Options, 131072, none, 16, DefaultLength, Iterations, SaltOption, SaltLength, Length, Context),
+		(	SaltOption == none ->
+			random_bytes(SaltLength, Salt)
+		;	Salt = SaltOption
 		).
 
-	parse_password_hash_options([], Iterations, Salt, SaltLength, Length, Iterations, Salt, SaltLength, Length, _) :-
-		!.
+	parse_password_hash_options([], Iterations, Salt, SaltLength, Length, Iterations, Salt, SaltLength, Length, _).
 	parse_password_hash_options([Option| Options], Iterations0, Salt0, SaltLength0, Length0, Iterations, Salt, SaltLength, Length, Context) :-
-		!,
-		parse_password_hash_option(Option, Iterations0, Salt0, SaltLength0, Length0, Iterations1, Salt1, SaltLength1, Length1, Context),
-		parse_password_hash_options(Options, Iterations1, Salt1, SaltLength1, Length1, Iterations, Salt, SaltLength, Length, Context).
-	parse_password_hash_options(Options, _, _, _, _, _, _, _, _, Context) :-
-		throw(error(type_error(list, Options), Context)).
-
-	parse_password_hash_option(Option, Iterations0, Salt0, SaltLength0, Length0, Iterations, Salt, SaltLength, Length, Context) :-
-		(	var(Option) ->
-			throw(error(instantiation_error, Context))
-		;	Option = iterations(Value) ->
-			check(positive_integer, Value, Context),
-			Iterations = Value,
-			Salt = Salt0,
-			SaltLength = SaltLength0,
-			Length = Length0
-		;	Option = salt(SaltBytes) ->
-			check(list(byte), SaltBytes, Context),
-			Iterations = Iterations0,
-			Salt = SaltBytes,
-			SaltLength = SaltLength0,
-			Length = Length0
-		;	Option = salt_length(Value) ->
-			check(non_negative_integer, Value, Context),
-			Iterations = Iterations0,
-			Salt = Salt0,
-			SaltLength = Value,
-			Length = Length0
-		;	Option = length(Value) ->
-			check(positive_integer, Value, Context),
-			Iterations = Iterations0,
-			Salt = Salt0,
-			SaltLength = SaltLength0,
-			Length = Value
+		(	parse_password_hash_option(Option, Iterations0, Salt0, SaltLength0, Length0, Iterations1, Salt1, SaltLength1, Length1, Context) ->
+			parse_password_hash_options(Options, Iterations1, Salt1, SaltLength1, Length1, Iterations, Salt, SaltLength, Length, Context)
 		;	throw(error(domain_error(password_hash_option, Option), Context))
 		).
+
+	parse_password_hash_option(iterations(Iterations), _Iterations0, Salt, SaltLength, Length, Iterations, Salt, SaltLength, Length, Context) :-
+			check(positive_integer, Iterations, Context).
+	parse_password_hash_option(salt(Salt), Iterations, _Salt0, SaltLength, Length, Iterations, Salt, SaltLength, Length, Context) :-
+			check(list(byte), Salt, Context).
+	parse_password_hash_option(salt_length(SaltLength), Iterations, Salt, _SaltLength0, Length, Iterations, Salt, SaltLength, Length, Context) :-
+			check(non_negative_integer, SaltLength, Context).
+	parse_password_hash_option(length(Length), Iterations, Salt, SaltLength, _Length0, Iterations, Salt, SaltLength, Length, Context) :-
+			check(positive_integer, Length, Context).
 
 	parse_password_hash_policy_options(Options, Hash, Iterations, SaltLength, Length, Context) :-
 		check(list(compound), Options, Context),
 		Hash::digest_size(DefaultLength),
-		( 	var(Options) ->
-			throw(error(instantiation_error, Context))
-		; 	parse_password_hash_options(Options, 131072, none, 16, DefaultLength, Iterations, SaltOption, SaltLength0, Length, Context),
-			check_pbkdf2_output_length(Length, DefaultLength, Context),
-			( 	SaltOption == none ->
-				SaltLength = SaltLength0
-			; 	length(SaltOption, SaltLength)
-			)
+		parse_password_hash_options(Options, 131072, none, 16, DefaultLength, Iterations, SaltOption, SaltLength0, Length, Context),
+		check_pbkdf2_output_length(Length, DefaultLength, Context),
+		( 	SaltOption == none ->
+			SaltLength = SaltLength0
+		; 	length(SaltOption, SaltLength)
 		).
 
 	parse_bcrypt_options(Options, Cost, Salt, Context) :-
@@ -854,13 +830,9 @@
 		;	Salt = SaltOption
 		).
 
-	parse_bcrypt_options([], Cost, Salt, Cost, Salt, _) :-
-		!.
+	parse_bcrypt_options([], Cost, Salt, Cost, Salt, _).
 	parse_bcrypt_options([Option| Options], Cost0, Salt0, Cost, Salt, Context) :-
-		!,
-		(	var(Option) ->
-			throw(error(instantiation_error, Context))
-		;	Option = cost(Value) ->
+		(	Option = cost(Value) ->
 			check_bcrypt_cost(Value, Context),
 			Cost1 = Value,
 			Salt1 = Salt0
@@ -872,20 +844,14 @@
 		;	throw(error(domain_error(password_hash_option, Option), Context))
 		),
 		parse_bcrypt_options(Options, Cost1, Salt1, Cost, Salt, Context).
-	parse_bcrypt_options(Options, _, _, _, _, Context) :-
-		throw(error(type_error(list, Options), Context)).
 
 	parse_bcrypt_policy_options(Options, Cost, Context) :-
 		check(list(compound), Options, Context),
 		parse_bcrypt_policy_options(Options, 12, Cost, Context).
 
-	parse_bcrypt_policy_options([], Cost, Cost, _) :-
-		!.
+	parse_bcrypt_policy_options([], Cost, Cost, _).
 	parse_bcrypt_policy_options([Option| Options], Cost0, Cost, Context) :-
-		!,
-		(	var(Option) ->
-			throw(error(instantiation_error, Context))
-		;	Option = cost(Value) ->
+		(	Option = cost(Value) ->
 			check_bcrypt_cost(Value, Context),
 			Cost1 = Value
 		;	Option = salt(SaltBytes) ->
@@ -895,8 +861,6 @@
 		;	throw(error(domain_error(password_hash_option, Option), Context))
 		),
 		parse_bcrypt_policy_options(Options, Cost1, Cost, Context).
-	parse_bcrypt_policy_options(Options, _, _, Context) :-
-		throw(error(type_error(list, Options), Context)).
 
 	parse_apr1_options(Options, Salt, Context) :-
 		check(list(compound), Options, Context),
@@ -906,13 +870,9 @@
 		;	Salt = SaltOption
 		).
 
-	parse_apr1_options([], Salt, SaltLength, Salt, SaltLength, _) :-
-		!.
+	parse_apr1_options([], Salt, SaltLength, Salt, SaltLength, _).
 	parse_apr1_options([Option| Options], Salt0, SaltLength0, Salt, SaltLength, Context) :-
-		!,
-		(	var(Option) ->
-			throw(error(instantiation_error, Context))
-		;	Option = salt(SaltBytes) ->
+		(	Option = salt(SaltBytes) ->
 			check(list(byte), SaltBytes, Context),
 			check_apr1_salt(SaltBytes, Context),
 			Salt1 = SaltBytes,
@@ -924,20 +884,15 @@
 		;	throw(error(domain_error(password_hash_option, Option), Context))
 		),
 		parse_apr1_options(Options, Salt1, SaltLength1, Salt, SaltLength, Context).
-	parse_apr1_options(Options, _, _, _, _, Context) :-
-		throw(error(type_error(list, Options), Context)).
 
 	parse_apr1_policy_options(Options, SaltLength, Context) :-
 		check(list(compound), Options, Context),
 		parse_apr1_policy_options(Options, 8, SaltLength, Context).
 
-	parse_apr1_policy_options([], SaltLength, SaltLength, _) :-
-		!.
+	parse_apr1_policy_options([], SaltLength, SaltLength, _).
 	parse_apr1_policy_options([Option| Options], _SaltLength0, SaltLength, Context) :-
 		!,
-		(	var(Option) ->
-			throw(error(instantiation_error, Context))
-		;	Option = salt_length(Value) ->
+		(	Option = salt_length(Value) ->
 			check_apr1_salt_length(Value, Context),
 			SaltLength1 = Value
 		;	Option = salt(SaltBytes) ->
@@ -947,8 +902,6 @@
 		;	throw(error(domain_error(password_hash_option, Option), Context))
 		),
 		parse_apr1_policy_options(Options, SaltLength1, SaltLength, Context).
-	parse_apr1_policy_options(Options, _, _, Context) :-
-		throw(error(type_error(list, Options), Context)).
 
 	check_password_hash(PasswordHash, Hash, Iterations, Salt, StoredKey, Context) :-
 		(	var(PasswordHash) ->
