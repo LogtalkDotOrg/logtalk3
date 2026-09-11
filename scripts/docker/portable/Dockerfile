@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on July 24, 2026
+##   Last updated on September 12, 2026
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2017-2026 Paulo Moura <pmoura@logtalk.org>
@@ -51,7 +51,7 @@ ENV LOGTALKUSER=/root/logtalk
 
 WORKDIR /downloads
 
-# Install Logtalk developer tools dependencies
+# Install Logtalk library and developer tool dependencies
 RUN apt-get update \
     && apt-get install --no-install-recommends -y \
         curl \
@@ -74,6 +74,9 @@ RUN apt-get update \
         latexmk \
         xsltproc \
         gh \
+        openssl \
+        ncat \
+        socat \
     && rm -rf /var/lib/apt/lists/* \
     && python3 -m pip install pygments==2.19.1 \
     && python3 -m pip install sphinx==7.4.7 \
