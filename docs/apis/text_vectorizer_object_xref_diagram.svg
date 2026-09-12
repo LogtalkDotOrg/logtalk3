@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-985.75 3237,-985.75 3237,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object text_vectorizer</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;09&#45;11, 12:05</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;09&#45;12, 16:43</text>
 <g id="clust1" class="cluster">
 <title>cluster_text_vectorizer_object</title>
 <g id="a_clust1"><a xlink:title="text_vectorizer">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 3213,-54.25 3213,-54.25 3219,-54.25 3225,-60.25 3225,-66.25 3225,-66.25 3225,-961.75 3225,-961.75 3225,-967.75 3219,-973.75 3213,-973.75 3213,-973.75 20,-973.75 20,-973.75 14,-973.75 8,-967.75 8,-961.75 8,-961.75 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-956" font-family="Monospace" font-size="10.00" fill="dimgray">text_vectorizer</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>learn_transform/3</title>
 <polygon fill="cornsilk" stroke="black" points="1513.62,-935 1372.38,-935 1372.38,-899 1513.62,-899 1513.62,-935"/>
 <text xml:space="preserve" text-anchor="start" x="1380.38" y="-919.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L88">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L88">
 <text xml:space="preserve" text-anchor="start" x="1385.62" y="-918.88" font-family="Monospace" font-size="11.00">learn_transform/3</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>learn_transform/4</title>
 <polygon fill="cornsilk" stroke="black" points="1513.62,-815.75 1372.38,-815.75 1372.38,-779.75 1513.62,-779.75 1513.62,-815.75"/>
 <text xml:space="preserve" text-anchor="start" x="1380.38" y="-800" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L91">
+<g id="a_node6_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L91">
 <text xml:space="preserve" text-anchor="start" x="1385.62" y="-799.62" font-family="Monospace" font-size="11.00">learn_transform/4</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- learn_transform/3&#45;&gt;learn_transform/4 -->
 <g id="edge17" class="edge">
 <title>learn_transform/3&#45;&gt;learn_transform/4</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L88" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L88" xlink:title="calls">
 <path fill="none" stroke="black" d="M1443,-898.7C1443,-880 1443,-849.87 1443,-827.58"/>
 <polygon fill="black" stroke="black" points="1446.5,-827.64 1443,-817.64 1439.5,-827.64 1446.5,-827.64"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L88">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L88">
 <text xml:space="preserve" text-anchor="start" x="1443" y="-854" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>learn/2</title>
 <polygon fill="cornsilk" stroke="black" points="1273.88,-815.75 1200.12,-815.75 1200.12,-779.75 1273.88,-779.75 1273.88,-815.75"/>
 <text xml:space="preserve" text-anchor="start" x="1208.12" y="-800" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L42">
+<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L42">
 <text xml:space="preserve" text-anchor="start" x="1213.38" y="-799.62" font-family="Monospace" font-size="11.00">learn/2</text>
 </a>
 </g>
@@ -84,7 +84,7 @@
 <title>learn/3</title>
 <polygon fill="cornsilk" stroke="black" points="1273.88,-696.5 1200.12,-696.5 1200.12,-660.5 1273.88,-660.5 1273.88,-696.5"/>
 <text xml:space="preserve" text-anchor="start" x="1208.12" y="-680.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45">
+<g id="a_node3_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="1213.38" y="-680.38" font-family="Monospace" font-size="11.00">learn/3</text>
 </a>
 </g>
@@ -96,12 +96,12 @@
 <!-- learn/2&#45;&gt;learn/3 -->
 <g id="edge1" class="edge">
 <title>learn/2&#45;&gt;learn/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L42" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L42" xlink:title="calls">
 <path fill="none" stroke="black" d="M1237,-779.45C1237,-760.75 1237,-730.62 1237,-708.33"/>
 <polygon fill="black" stroke="black" points="1240.5,-708.39 1237,-698.39 1233.5,-708.39 1240.5,-708.39"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L42">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L42">
 <text xml:space="preserve" text-anchor="start" x="1237" y="-734.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -111,7 +111,7 @@
 <title>check_corpus/1</title>
 <polygon fill="cornsilk" stroke="black" points="1377.5,-577.25 1256.5,-577.25 1256.5,-541.25 1377.5,-541.25 1377.5,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="1264.5" y="-561.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node16_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L168">
+<g id="a_node16_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L168">
 <text xml:space="preserve" text-anchor="start" x="1269.75" y="-561.12" font-family="Monospace" font-size="11.00">check_corpus/1</text>
 </a>
 </g>
@@ -123,12 +123,12 @@
 <!-- learn/3&#45;&gt;check_corpus/1 -->
 <g id="edge2" class="edge">
 <title>learn/3&#45;&gt;check_corpus/1</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M1248.8,-660.2C1261.98,-640.89 1283.46,-609.41 1298.79,-586.94"/>
 <polygon fill="black" stroke="black" points="1301.55,-589.1 1304.29,-578.87 1295.77,-585.16 1301.55,-589.1"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="1279.4" y="-615.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -138,7 +138,7 @@
 <title>check_frequency_options/2</title>
 <polygon fill="cornsilk" stroke="black" points="843.62,-577.25 648.38,-577.25 648.38,-541.25 843.62,-541.25 843.62,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="656.38" y="-561.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node21_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L196">
+<g id="a_node21_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L196">
 <text xml:space="preserve" text-anchor="start" x="661.62" y="-561.12" font-family="Monospace" font-size="11.00">check_frequency_options/2</text>
 </a>
 </g>
@@ -150,12 +150,12 @@
 <!-- learn/3&#45;&gt;check_frequency_options/2 -->
 <g id="edge3" class="edge">
 <title>learn/3&#45;&gt;check_frequency_options/2</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M1199.64,-677.56C1128.96,-676.56 971.73,-669.01 848.75,-624.5 822.57,-615.02 796,-598.17 776.43,-584.11"/>
 <polygon fill="black" stroke="black" points="778.77,-581.48 768.65,-578.37 774.62,-587.12 778.77,-581.48"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="848.75" y="-615.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -165,7 +165,7 @@
 <title>corpus_counts/4</title>
 <polygon fill="cornsilk" stroke="black" points="1702.88,-577.25 1575.12,-577.25 1575.12,-541.25 1702.88,-541.25 1702.88,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="1583.12" y="-561.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node22_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L210" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L210">
+<g id="a_node22_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L210" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L210">
 <text xml:space="preserve" text-anchor="start" x="1588.38" y="-561.12" font-family="Monospace" font-size="11.00">corpus_counts/4</text>
 </a>
 </g>
@@ -177,12 +177,12 @@
 <!-- learn/3&#45;&gt;corpus_counts/4 -->
 <g id="edge4" class="edge">
 <title>learn/3&#45;&gt;corpus_counts/4</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M1274.2,-675.2C1352.86,-669.81 1533.16,-654.47 1586,-624.5 1601.59,-615.66 1614.5,-600.32 1623.68,-586.85"/>
 <polygon fill="black" stroke="black" points="1626.42,-589.07 1628.87,-578.76 1620.52,-585.29 1626.42,-589.07"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="1600.54" y="-615.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -192,7 +192,7 @@
 <title>build_features/5</title>
 <polygon fill="cornsilk" stroke="black" points="1218.25,-577.25 1083.75,-577.25 1083.75,-541.25 1218.25,-541.25 1218.25,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="1091.75" y="-561.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node25_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L228">
+<g id="a_node25_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L228">
 <text xml:space="preserve" text-anchor="start" x="1097" y="-561.12" font-family="Monospace" font-size="11.00">build_features/5</text>
 </a>
 </g>
@@ -204,12 +204,12 @@
 <!-- learn/3&#45;&gt;build_features/5 -->
 <g id="edge5" class="edge">
 <title>learn/3&#45;&gt;build_features/5</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M1224.31,-660.2C1210.08,-640.8 1186.85,-609.13 1170.35,-586.64"/>
 <polygon fill="black" stroke="black" points="1173.37,-584.84 1164.64,-578.84 1167.73,-588.98 1173.37,-584.84"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="1196.58" y="-615.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -219,7 +219,7 @@
 <title>filter_features/3</title>
 <polygon fill="cornsilk" stroke="black" points="1065.62,-577.25 924.38,-577.25 924.38,-541.25 1065.62,-541.25 1065.62,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="932.38" y="-561.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node27_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L238" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L238">
+<g id="a_node27_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L238" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L238">
 <text xml:space="preserve" text-anchor="start" x="937.62" y="-561.12" font-family="Monospace" font-size="11.00">filter_features/3</text>
 </a>
 </g>
@@ -231,12 +231,12 @@
 <!-- learn/3&#45;&gt;filter_features/3 -->
 <g id="edge6" class="edge">
 <title>learn/3&#45;&gt;filter_features/3</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M1201.03,-660.07C1158.43,-639.43 1087.4,-605.02 1040.88,-582.48"/>
 <polygon fill="black" stroke="black" points="1042.66,-579.45 1032.13,-578.24 1039.61,-585.75 1042.66,-579.45"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="1123.26" y="-615.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -246,7 +246,7 @@
 <title>limit_features/3</title>
 <polygon fill="cornsilk" stroke="black" points="630.25,-577.25 495.75,-577.25 495.75,-541.25 630.25,-541.25 630.25,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="503.75" y="-561.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node29_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L252" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L252">
+<g id="a_node29_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L252" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L252">
 <text xml:space="preserve" text-anchor="start" x="509" y="-561.12" font-family="Monospace" font-size="11.00">limit_features/3</text>
 </a>
 </g>
@@ -258,12 +258,12 @@
 <!-- learn/3&#45;&gt;limit_features/3 -->
 <g id="edge7" class="edge">
 <title>learn/3&#45;&gt;limit_features/3</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M1199.72,-674.95C1123.23,-669.28 943.26,-653.81 794.75,-624.5 737.49,-613.2 673.66,-595.08 627.51,-580.96"/>
 <polygon fill="black" stroke="black" points="628.8,-577.7 618.21,-578.09 626.73,-584.39 628.8,-577.7"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="794.75" y="-615.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -285,12 +285,12 @@
 <!-- learn/3&#45;&gt;list::length/2 -->
 <g id="edge54" class="edge">
 <title>learn/3&#45;&gt;list::length/2</title>
-<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="calls">
+<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M1235.47,-660.16C1230,-593.9 1214.1,-357.62 1260,-302.75 1302.05,-252.48 1340.76,-287.28 1403,-266.75 1439.83,-254.6 1480.28,-237.83 1510.77,-224.48"/>
 <polygon fill="black" stroke="black" points="1512,-227.76 1519.73,-220.52 1509.17,-221.36 1512,-227.76"/>
 </a>
 </g>
-<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45">
+<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="1230.56" y="-436.62" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -309,12 +309,12 @@
 <!-- learn/3&#45;&gt;^^check_options/1 -->
 <g id="edge46" class="edge">
 <title>learn/3&#45;&gt;^^check_options/1</title>
-<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="calls">
+<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M1274.23,-676.48C1440.86,-671.46 2110,-645.93 2110,-560.25 2110,-560.25 2110,-560.25 2110,-319.75 2110,-288.31 2121.13,-253.84 2130.46,-230.47"/>
 <polygon fill="black" stroke="black" points="2133.65,-231.92 2134.26,-221.34 2127.19,-229.23 2133.65,-231.92"/>
 </a>
 </g>
-<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45">
+<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="2110" y="-436.62" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -333,12 +333,12 @@
 <!-- learn/3&#45;&gt;^^merge_options/2 -->
 <g id="edge47" class="edge">
 <title>learn/3&#45;&gt;^^merge_options/2</title>
-<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="calls">
+<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M1270.79,-660.2C1310.87,-639.68 1377.8,-605.41 1421.93,-582.82"/>
 <polygon fill="black" stroke="black" points="1423.42,-585.98 1430.72,-578.31 1420.23,-579.75 1423.42,-585.98"/>
 </a>
 </g>
-<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45">
+<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="1358.37" y="-615.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -357,12 +357,12 @@
 <!-- learn/3&#45;&gt;^^option/2 -->
 <g id="edge48" class="edge">
 <title>learn/3&#45;&gt;^^option/2</title>
-<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="calls">
+<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M1199.63,-671.92C1118.45,-659.01 930,-624.55 888.75,-577.25 875.15,-561.66 870.91,-504.86 869.59,-469.71"/>
 <polygon fill="black" stroke="black" points="873.1,-469.68 869.29,-459.79 866.1,-469.9 873.1,-469.68"/>
 </a>
 </g>
-<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L45">
+<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="888.75" y="-555.88" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -372,7 +372,7 @@
 <title>transform/3</title>
 <polygon fill="cornsilk" stroke="black" points="2366.38,-577.25 2265.62,-577.25 2265.62,-541.25 2366.38,-541.25 2366.38,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="2273.62" y="-561.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L70">
+<g id="a_node4_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L70">
 <text xml:space="preserve" text-anchor="start" x="2278.88" y="-561.12" font-family="Monospace" font-size="11.00">transform/3</text>
 </a>
 </g>
@@ -386,7 +386,7 @@
 <title>check_vectorizer/1</title>
 <polygon fill="cornsilk" stroke="black" points="2987,-458 2839,-458 2839,-422 2987,-422 2987,-458"/>
 <text xml:space="preserve" text-anchor="start" x="2847" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L100">
+<g id="a_node8_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="2852.25" y="-441.88" font-family="Monospace" font-size="11.00">check_vectorizer/1</text>
 </a>
 </g>
@@ -398,12 +398,12 @@
 <!-- transform/3&#45;&gt;check_vectorizer/1 -->
 <g id="edge8" class="edge">
 <title>transform/3&#45;&gt;check_vectorizer/1</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="calls">
 <path fill="none" stroke="black" d="M2366.64,-548.3C2468.99,-528.2 2701.43,-482.55 2827.63,-457.77"/>
 <polygon fill="black" stroke="black" points="2828.14,-461.23 2837.28,-455.87 2826.79,-454.36 2828.14,-461.23"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L70">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L70">
 <text xml:space="preserve" text-anchor="start" x="2632.4" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -413,7 +413,7 @@
 <title>check_document/1</title>
 <polygon fill="cornsilk" stroke="black" points="1480.25,-219.5 1345.75,-219.5 1345.75,-183.5 1480.25,-183.5 1480.25,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="1353.75" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node19_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L184">
+<g id="a_node19_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L184">
 <text xml:space="preserve" text-anchor="start" x="1359" y="-203.38" font-family="Monospace" font-size="11.00">check_document/1</text>
 </a>
 </g>
@@ -425,12 +425,12 @@
 <!-- transform/3&#45;&gt;check_document/1 -->
 <g id="edge9" class="edge">
 <title>transform/3&#45;&gt;check_document/1</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="calls">
 <path fill="none" stroke="black" d="M2282.48,-540.89C2250.03,-523.01 2200.63,-492.9 2165,-458 2151.08,-444.37 2155.52,-433.77 2140,-422 2011.06,-324.23 1950.83,-349.77 1796,-302.75 1691.63,-271.05 1569.48,-240.13 1491.7,-221.2"/>
 <polygon fill="black" stroke="black" points="1492.57,-217.81 1482.02,-218.85 1490.92,-224.61 1492.57,-217.81"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L70">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L70">
 <text xml:space="preserve" text-anchor="start" x="2084.77" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -440,7 +440,7 @@
 <title>in_vocabulary_counts/3</title>
 <polygon fill="cornsilk" stroke="black" points="2800.5,-458 2625.5,-458 2625.5,-422 2800.5,-422 2800.5,-458"/>
 <text xml:space="preserve" text-anchor="start" x="2633.5" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node34_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L283" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L283">
+<g id="a_node34_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L283" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L283">
 <text xml:space="preserve" text-anchor="start" x="2638.75" y="-441.88" font-family="Monospace" font-size="11.00">in_vocabulary_counts/3</text>
 </a>
 </g>
@@ -452,12 +452,12 @@
 <!-- transform/3&#45;&gt;in_vocabulary_counts/3 -->
 <g id="edge10" class="edge">
 <title>transform/3&#45;&gt;in_vocabulary_counts/3</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="calls">
 <path fill="none" stroke="black" d="M2366.68,-543.28C2436.86,-522.56 2563.9,-485.04 2643.06,-461.66"/>
 <polygon fill="black" stroke="black" points="2643.85,-465.07 2652.45,-458.88 2641.87,-458.36 2643.85,-465.07"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L70">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L70">
 <text xml:space="preserve" text-anchor="start" x="2526.4" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -467,7 +467,7 @@
 <title>counts_total/3</title>
 <polygon fill="cornsilk" stroke="black" points="2607.5,-458 2486.5,-458 2486.5,-422 2607.5,-422 2607.5,-458"/>
 <text xml:space="preserve" text-anchor="start" x="2494.5" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node35_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L291" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L291">
+<g id="a_node35_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L291" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L291">
 <text xml:space="preserve" text-anchor="start" x="2499.75" y="-441.88" font-family="Monospace" font-size="11.00">counts_total/3</text>
 </a>
 </g>
@@ -479,12 +479,12 @@
 <!-- transform/3&#45;&gt;counts_total/3 -->
 <g id="edge11" class="edge">
 <title>transform/3&#45;&gt;counts_total/3</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="calls">
 <path fill="none" stroke="black" d="M2350.33,-540.82C2390.82,-520.27 2458.23,-486.06 2502.64,-463.52"/>
 <polygon fill="black" stroke="black" points="2504.17,-466.66 2511.51,-459.02 2501,-460.42 2504.17,-466.66"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L70">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L70">
 <text xml:space="preserve" text-anchor="start" x="2438.43" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -494,7 +494,7 @@
 <title>weight_counts/4</title>
 <polygon fill="cornsilk" stroke="black" points="2301.88,-458 2174.12,-458 2174.12,-422 2301.88,-422 2301.88,-458"/>
 <text xml:space="preserve" text-anchor="start" x="2182.12" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node36_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L296" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L296">
+<g id="a_node36_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L296" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L296">
 <text xml:space="preserve" text-anchor="start" x="2187.38" y="-441.88" font-family="Monospace" font-size="11.00">weight_counts/4</text>
 </a>
 </g>
@@ -506,12 +506,12 @@
 <!-- transform/3&#45;&gt;weight_counts/4 -->
 <g id="edge12" class="edge">
 <title>transform/3&#45;&gt;weight_counts/4</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="calls">
 <path fill="none" stroke="black" d="M2304.49,-540.95C2291.64,-521.64 2270.7,-490.16 2255.75,-467.69"/>
 <polygon fill="black" stroke="black" points="2258.85,-466.02 2250.39,-459.63 2253.02,-469.9 2258.85,-466.02"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L70">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L70">
 <text xml:space="preserve" text-anchor="start" x="2279.34" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -521,7 +521,7 @@
 <title>normalize_vector/3</title>
 <polygon fill="cornsilk" stroke="black" points="2468,-458 2320,-458 2320,-422 2468,-422 2468,-458"/>
 <text xml:space="preserve" text-anchor="start" x="2328" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node38_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L318" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L318">
+<g id="a_node38_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L318" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L318">
 <text xml:space="preserve" text-anchor="start" x="2333.25" y="-441.88" font-family="Monospace" font-size="11.00">normalize_vector/3</text>
 </a>
 </g>
@@ -533,12 +533,12 @@
 <!-- transform/3&#45;&gt;normalize_vector/3 -->
 <g id="edge13" class="edge">
 <title>transform/3&#45;&gt;normalize_vector/3</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="calls">
 <path fill="none" stroke="black" d="M2327.51,-540.95C2340.36,-521.64 2361.3,-490.16 2376.25,-467.69"/>
 <polygon fill="black" stroke="black" points="2378.98,-469.9 2381.61,-459.63 2373.15,-466.02 2378.98,-469.9"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L70">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L70">
 <text xml:space="preserve" text-anchor="start" x="2357.34" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -560,12 +560,12 @@
 <!-- transform/3&#45;&gt;list::memberchk/2 -->
 <g id="edge55" class="edge">
 <title>transform/3&#45;&gt;list::memberchk/2</title>
-<g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="calls">
+<g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="calls">
 <path fill="none" stroke="black" d="M2366.85,-556.74C2511.19,-552.09 2916.3,-536.39 2967,-505.25 2988,-492.35 2988.07,-481.33 2996,-458 3022.82,-379.14 3024.88,-279.37 3024.03,-231.17"/>
 <polygon fill="black" stroke="black" points="3027.53,-231.22 3023.79,-221.31 3020.54,-231.39 3027.53,-231.22"/>
 </a>
 </g>
-<g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L70">
+<g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L70">
 <text xml:space="preserve" text-anchor="start" x="3015.13" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -587,12 +587,12 @@
 <!-- transform/3&#45;&gt;list::occurrences/2 -->
 <g id="edge56" class="edge">
 <title>transform/3&#45;&gt;list::occurrences/2</title>
-<g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="calls">
+<g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="calls">
 <path fill="none" stroke="black" d="M2265.32,-547.21C2226.03,-537.96 2170.57,-523.36 2123.75,-505.25 2093.85,-493.69 2061.65,-477.31 2037.19,-463.98"/>
 <polygon fill="black" stroke="black" points="2038.98,-460.97 2028.53,-459.21 2035.6,-467.1 2038.98,-460.97"/>
 </a>
 </g>
-<g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L70">
+<g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L70">
 <text xml:space="preserve" text-anchor="start" x="2123.75" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -600,12 +600,12 @@
 <!-- transform/3&#45;&gt;^^option/2 -->
 <g id="edge49" class="edge">
 <title>transform/3&#45;&gt;^^option/2</title>
-<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="calls">
+<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="calls">
 <path fill="none" stroke="black" d="M2265.37,-554.76C2030.12,-538.5 1050.31,-470.59 927.79,-457.63"/>
 <polygon fill="black" stroke="black" points="928.34,-454.17 917.98,-456.39 927.46,-461.12 928.34,-454.17"/>
 </a>
 </g>
-<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L70">
+<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L70">
 <text xml:space="preserve" text-anchor="start" x="1552.55" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -615,7 +615,7 @@
 <title>transform_all/3</title>
 <polygon fill="cornsilk" stroke="black" points="1882.88,-815.75 1755.12,-815.75 1755.12,-779.75 1882.88,-779.75 1882.88,-815.75"/>
 <text xml:space="preserve" text-anchor="start" x="1763.12" y="-800" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L83">
+<g id="a_node5_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L83">
 <text xml:space="preserve" text-anchor="start" x="1768.38" y="-799.62" font-family="Monospace" font-size="11.00">transform_all/3</text>
 </a>
 </g>
@@ -629,7 +629,7 @@
 <title>transform_documents/3</title>
 <polygon fill="cornsilk" stroke="black" points="1903.12,-696.5 1734.88,-696.5 1734.88,-660.5 1903.12,-660.5 1903.12,-696.5"/>
 <text xml:space="preserve" text-anchor="start" x="1742.88" y="-680.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L95">
+<g id="a_node7_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="1748.12" y="-680.38" font-family="Monospace" font-size="11.00">transform_documents/3</text>
 </a>
 </g>
@@ -641,12 +641,12 @@
 <!-- transform_all/3&#45;&gt;transform_documents/3 -->
 <g id="edge16" class="edge">
 <title>transform_all/3&#45;&gt;transform_documents/3</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L83" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L83" xlink:title="calls">
 <path fill="none" stroke="black" d="M1819,-779.45C1819,-760.75 1819,-730.62 1819,-708.33"/>
 <polygon fill="black" stroke="black" points="1822.5,-708.39 1819,-698.39 1815.5,-708.39 1822.5,-708.39"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L83">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L83">
 <text xml:space="preserve" text-anchor="start" x="1819" y="-734.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -654,12 +654,12 @@
 <!-- transform_all/3&#45;&gt;check_vectorizer/1 -->
 <g id="edge14" class="edge">
 <title>transform_all/3&#45;&gt;check_vectorizer/1</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L83" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L83" xlink:title="calls">
 <path fill="none" stroke="black" d="M1883.32,-794.41C2078.55,-786.68 2661.79,-758.83 2840,-696.5 2931.99,-664.33 2977.46,-662.87 3024,-577.25 3047.83,-533.42 2995.93,-489.99 2955.32,-464.34"/>
 <polygon fill="black" stroke="black" points="2957.2,-461.38 2946.85,-459.15 2953.55,-467.36 2957.2,-461.38"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L83">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L83">
 <text xml:space="preserve" text-anchor="start" x="3000.23" y="-615.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -669,7 +669,7 @@
 <title>check_corpus_documents/1</title>
 <polygon fill="cornsilk" stroke="black" points="1489.25,-458 1300.75,-458 1300.75,-422 1489.25,-422 1489.25,-458"/>
 <text xml:space="preserve" text-anchor="start" x="1308.75" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node17_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L175">
+<g id="a_node17_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L175">
 <text xml:space="preserve" text-anchor="start" x="1314" y="-441.88" font-family="Monospace" font-size="11.00">check_corpus_documents/1</text>
 </a>
 </g>
@@ -681,12 +681,12 @@
 <!-- transform_all/3&#45;&gt;check_corpus_documents/1 -->
 <g id="edge15" class="edge">
 <title>transform_all/3&#45;&gt;check_corpus_documents/1</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L83" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L83" xlink:title="calls">
 <path fill="none" stroke="black" d="M1769.07,-779.3C1707.61,-754.98 1605.31,-704.62 1555.75,-624.5 1536.15,-592.82 1556.16,-577.09 1546,-541.25 1539.68,-518.96 1540.75,-510 1524,-494 1509.95,-480.58 1492.03,-470.37 1474.05,-462.67"/>
 <polygon fill="black" stroke="black" points="1475.47,-459.47 1464.89,-458.98 1472.86,-465.96 1475.47,-459.47"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L83">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L83">
 <text xml:space="preserve" text-anchor="start" x="1555.75" y="-615.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -694,12 +694,12 @@
 <!-- learn_transform/4&#45;&gt;learn/3 -->
 <g id="edge18" class="edge">
 <title>learn_transform/4&#45;&gt;learn/3</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L91" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L91" xlink:title="calls">
 <path fill="none" stroke="black" d="M1412.6,-779.45C1376.78,-759.06 1317.1,-725.09 1277.4,-702.5"/>
 <polygon fill="black" stroke="black" points="1279.26,-699.53 1268.84,-697.62 1275.8,-705.61 1279.26,-699.53"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L91">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L91">
 <text xml:space="preserve" text-anchor="start" x="1346.18" y="-734.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -707,12 +707,12 @@
 <!-- learn_transform/4&#45;&gt;transform_documents/3 -->
 <g id="edge19" class="edge">
 <title>learn_transform/4&#45;&gt;transform_documents/3</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L91" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L91" xlink:title="calls">
 <path fill="none" stroke="black" d="M1498.88,-779.32C1566.5,-758.24 1680.23,-722.77 1752.35,-700.28"/>
 <polygon fill="black" stroke="black" points="1753.17,-703.7 1761.67,-697.38 1751.08,-697.01 1753.17,-703.7"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L91">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L91">
 <text xml:space="preserve" text-anchor="start" x="1642.27" y="-734.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -720,12 +720,12 @@
 <!-- transform_documents/3&#45;&gt;transform/3 -->
 <g id="edge20" class="edge">
 <title>transform_documents/3&#45;&gt;transform/3</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L96" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L96" xlink:title="calls">
 <path fill="none" stroke="black" d="M1903.51,-665.41C1963.07,-656.15 2044.44,-642.01 2115,-624.5 2163.43,-612.48 2217.22,-595.07 2256.96,-581.4"/>
 <polygon fill="black" stroke="black" points="2258.04,-584.72 2266.35,-578.14 2255.75,-578.11 2258.04,-584.72"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L96">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L96">
 <text xml:space="preserve" text-anchor="start" x="2153.99" y="-615.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -735,7 +735,7 @@
 <title>valid_vectorizer_term/1</title>
 <polygon fill="cornsilk" stroke="black" points="2998.88,-338.75 2817.12,-338.75 2817.12,-302.75 2998.88,-302.75 2998.88,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="2825.12" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node43_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L347" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L347">
+<g id="a_node43_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L347" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L347">
 <text xml:space="preserve" text-anchor="start" x="2830.38" y="-322.62" font-family="Monospace" font-size="11.00">valid_vectorizer_term/1</text>
 </a>
 </g>
@@ -747,12 +747,12 @@
 <!-- check_vectorizer/1&#45;&gt;valid_vectorizer_term/1 -->
 <g id="edge21" class="edge">
 <title>check_vectorizer/1&#45;&gt;valid_vectorizer_term/1</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L100" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L100" xlink:title="calls">
 <path fill="none" stroke="black" d="M2912.26,-421.7C2911.46,-403 2910.18,-372.87 2909.23,-350.58"/>
 <polygon fill="black" stroke="black" points="2912.73,-350.48 2908.81,-340.63 2905.73,-350.77 2912.73,-350.48"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L100">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="2910.65" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -762,7 +762,7 @@
 <title>valid_vectorizer/1</title>
 <polygon fill="cornsilk" stroke="black" points="2883,-577.25 2735,-577.25 2735,-541.25 2883,-541.25 2883,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="2743" y="-561.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L108">
+<g id="a_node9_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L108">
 <text xml:space="preserve" text-anchor="start" x="2748.25" y="-561.12" font-family="Monospace" font-size="11.00">valid_vectorizer/1</text>
 </a>
 </g>
@@ -774,12 +774,12 @@
 <!-- valid_vectorizer/1&#45;&gt;check_vectorizer/1 -->
 <g id="edge22" class="edge">
 <title>valid_vectorizer/1&#45;&gt;check_vectorizer/1</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L108" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L108" xlink:title="calls">
 <path fill="none" stroke="black" d="M2824.35,-540.95C2841.7,-521.38 2870.15,-489.31 2890.13,-466.78"/>
 <polygon fill="black" stroke="black" points="2892.57,-469.31 2896.59,-459.5 2887.33,-464.66 2892.57,-469.31"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L108">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L108">
 <text xml:space="preserve" text-anchor="start" x="2864.12" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -789,7 +789,7 @@
 <title>vocabulary/2</title>
 <polygon fill="cornsilk" stroke="black" points="3160.75,-577.25 3053.25,-577.25 3053.25,-541.25 3160.75,-541.25 3160.75,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="3061.25" y="-561.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L111">
+<g id="a_node10_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L111">
 <text xml:space="preserve" text-anchor="start" x="3066.5" y="-561.12" font-family="Monospace" font-size="11.00">vocabulary/2</text>
 </a>
 </g>
@@ -801,12 +801,12 @@
 <!-- vocabulary/2&#45;&gt;check_vectorizer/1 -->
 <g id="edge23" class="edge">
 <title>vocabulary/2&#45;&gt;check_vectorizer/1</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L111" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L111" xlink:title="calls">
 <path fill="none" stroke="black" d="M3091.08,-540.98C3077.47,-526.96 3056.84,-507.39 3036,-494 3016.93,-481.74 2994.54,-471.13 2974.13,-462.7"/>
 <polygon fill="black" stroke="black" points="2975.65,-459.54 2965.07,-459.05 2973.04,-466.03 2975.65,-459.54"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L111">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L111">
 <text xml:space="preserve" text-anchor="start" x="3050.91" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -816,7 +816,7 @@
 <title>feature_names/2</title>
 <polygon fill="cornsilk" stroke="black" points="3152.88,-458 3025.12,-458 3025.12,-422 3152.88,-422 3152.88,-458"/>
 <text xml:space="preserve" text-anchor="start" x="3033.12" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node45_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L381" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L381">
+<g id="a_node45_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L381" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L381">
 <text xml:space="preserve" text-anchor="start" x="3038.38" y="-441.88" font-family="Monospace" font-size="11.00">feature_names/2</text>
 </a>
 </g>
@@ -828,12 +828,12 @@
 <!-- vocabulary/2&#45;&gt;feature_names/2 -->
 <g id="edge24" class="edge">
 <title>vocabulary/2&#45;&gt;feature_names/2</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L111" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L111" xlink:title="calls">
 <path fill="none" stroke="black" d="M3104.34,-540.95C3101.46,-522.16 3096.81,-491.84 3093.38,-469.52"/>
 <polygon fill="black" stroke="black" points="3096.87,-469.22 3091.9,-459.87 3089.95,-470.28 3096.87,-469.22"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L111">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L111">
 <text xml:space="preserve" text-anchor="start" x="3098.54" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -843,7 +843,7 @@
 <title>diagnostics/2</title>
 <polygon fill="cornsilk" stroke="black" points="3015.12,-577.25 2900.88,-577.25 2900.88,-541.25 3015.12,-541.25 3015.12,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="2908.88" y="-561.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L116">
+<g id="a_node11_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L116">
 <text xml:space="preserve" text-anchor="start" x="2914.12" y="-561.12" font-family="Monospace" font-size="11.00">diagnostics/2</text>
 </a>
 </g>
@@ -855,12 +855,12 @@
 <!-- diagnostics/2&#45;&gt;check_vectorizer/1 -->
 <g id="edge25" class="edge">
 <title>diagnostics/2&#45;&gt;check_vectorizer/1</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L116" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L116" xlink:title="calls">
 <path fill="none" stroke="black" d="M2951.36,-540.95C2944.08,-521.99 2932.3,-491.28 2923.71,-468.9"/>
 <polygon fill="black" stroke="black" points="2927.06,-467.87 2920.21,-459.78 2920.53,-470.37 2927.06,-467.87"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L116">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L116">
 <text xml:space="preserve" text-anchor="start" x="2936.85" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -870,7 +870,7 @@
 <title>diagnostic/2</title>
 <polygon fill="cornsilk" stroke="black" points="2830.75,-696.5 2723.25,-696.5 2723.25,-660.5 2830.75,-660.5 2830.75,-696.5"/>
 <text xml:space="preserve" text-anchor="start" x="2731.25" y="-680.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L120">
+<g id="a_node12_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L120">
 <text xml:space="preserve" text-anchor="start" x="2736.5" y="-680.38" font-family="Monospace" font-size="11.00">diagnostic/2</text>
 </a>
 </g>
@@ -882,12 +882,12 @@
 <!-- diagnostic/2&#45;&gt;diagnostics/2 -->
 <g id="edge26" class="edge">
 <title>diagnostic/2&#45;&gt;diagnostics/2</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L120" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L120" xlink:title="calls">
 <path fill="none" stroke="black" d="M2803.71,-660.2C2834.99,-639.94 2886.95,-606.27 2921.83,-583.68"/>
 <polygon fill="black" stroke="black" points="2923.42,-586.82 2929.91,-578.44 2919.62,-580.94 2923.42,-586.82"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L120">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L120">
 <text xml:space="preserve" text-anchor="start" x="2872.93" y="-615.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -909,12 +909,12 @@
 <!-- diagnostic/2&#45;&gt;list::member/2 -->
 <g id="edge57" class="edge">
 <title>diagnostic/2&#45;&gt;list::member/2</title>
-<g id="a_edge57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L120" xlink:title="calls">
+<g id="a_edge57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L120" xlink:title="calls">
 <path fill="none" stroke="black" d="M2761.9,-660.13C2741.19,-634.08 2708.41,-583.45 2726,-541.25 2746.22,-492.73 2789.78,-506.52 2810,-458 2816.16,-443.23 2814.85,-437.25 2810,-422 2800.95,-393.58 2780.6,-366.29 2764,-347.38"/>
 <polygon fill="black" stroke="black" points="2766.78,-345.24 2757.47,-340.18 2761.59,-349.94 2766.78,-345.24"/>
 </a>
 </g>
-<g id="a_edge57&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L120">
+<g id="a_edge57&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L120">
 <text xml:space="preserve" text-anchor="start" x="2777.52" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -924,7 +924,7 @@
 <title>vectorizer_options/2</title>
 <polygon fill="cornsilk" stroke="black" points="3214.75,-696.5 3053.25,-696.5 3053.25,-660.5 3214.75,-660.5 3214.75,-696.5"/>
 <text xml:space="preserve" text-anchor="start" x="3061.25" y="-680.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node13_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L124">
+<g id="a_node13_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L124">
 <text xml:space="preserve" text-anchor="start" x="3066.5" y="-680.38" font-family="Monospace" font-size="11.00">vectorizer_options/2</text>
 </a>
 </g>
@@ -936,12 +936,12 @@
 <!-- vectorizer_options/2&#45;&gt;diagnostics/2 -->
 <g id="edge27" class="edge">
 <title>vectorizer_options/2&#45;&gt;diagnostics/2</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L124" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L124" xlink:title="calls">
 <path fill="none" stroke="black" d="M3117.87,-660.24C3104.36,-646.41 3084.11,-627.1 3064,-613.25 3047.21,-601.69 3027.55,-591.14 3009.74,-582.55"/>
 <polygon fill="black" stroke="black" points="3011.42,-579.47 3000.88,-578.37 3008.43,-585.8 3011.42,-579.47"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L124">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L124">
 <text xml:space="preserve" text-anchor="start" x="3078.54" y="-615.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -949,12 +949,12 @@
 <!-- vectorizer_options/2&#45;&gt;list::memberchk/2 -->
 <g id="edge58" class="edge">
 <title>vectorizer_options/2&#45;&gt;list::memberchk/2</title>
-<g id="a_edge58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L124" xlink:title="calls">
+<g id="a_edge58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L124" xlink:title="calls">
 <path fill="none" stroke="black" d="M3148.16,-660.02C3164.46,-638.1 3189,-598.7 3189,-560.25 3189,-560.25 3189,-560.25 3189,-319.75 3189,-271.73 3142.09,-241.63 3098.14,-223.97"/>
 <polygon fill="black" stroke="black" points="3099.66,-220.8 3089.07,-220.5 3097.16,-227.34 3099.66,-220.8"/>
 </a>
 </g>
-<g id="a_edge58&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L124">
+<g id="a_edge58&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L124">
 <text xml:space="preserve" text-anchor="start" x="3189" y="-436.62" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -964,7 +964,7 @@
 <title>default_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="2480.25,-935 2345.75,-935 2345.75,-899 2480.25,-899 2480.25,-935"/>
 <text xml:space="preserve" text-anchor="start" x="2353.75" y="-919.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node14_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L128" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L128">
+<g id="a_node14_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L128" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L128">
 <text xml:space="preserve" text-anchor="start" x="2359" y="-918.88" font-family="Monospace" font-size="11.00">default_option/1</text>
 </a>
 </g>
@@ -978,7 +978,7 @@
 <title>valid_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="2719.5,-219.5 2598.5,-219.5 2598.5,-183.5 2719.5,-183.5 2719.5,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="2606.5" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node15_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L135">
+<g id="a_node15_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L135">
 <text xml:space="preserve" text-anchor="start" x="2611.75" y="-203.38" font-family="Monospace" font-size="11.00">valid_option/1</text>
 </a>
 </g>
@@ -1004,12 +1004,12 @@
 <!-- valid_option/1&#45;&gt;type::valid/2 -->
 <g id="edge59" class="edge">
 <title>valid_option/1&#45;&gt;type::valid/2</title>
-<g id="a_edge59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L155" xlink:title="calls">
+<g id="a_edge59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L155" xlink:title="calls">
 <path fill="none" stroke="black" d="M2680.54,-183.2C2705.45,-163.2 2746.62,-130.13 2774.74,-107.55"/>
 <polygon fill="black" stroke="black" points="2776.58,-110.56 2782.19,-101.57 2772.2,-105.1 2776.58,-110.56"/>
 </a>
 </g>
-<g id="a_edge59&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L155">
+<g id="a_edge59&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="2736.38" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1017,12 +1017,12 @@
 <!-- check_corpus/1&#45;&gt;check_corpus_documents/1 -->
 <g id="edge28" class="edge">
 <title>check_corpus/1&#45;&gt;check_corpus_documents/1</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L168" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L168" xlink:title="calls">
 <path fill="none" stroke="black" d="M1328.51,-540.95C1341.36,-521.64 1362.3,-490.16 1377.25,-467.69"/>
 <polygon fill="black" stroke="black" points="1379.98,-469.9 1382.61,-459.63 1374.15,-466.02 1379.98,-469.9"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L168">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L168">
 <text xml:space="preserve" text-anchor="start" x="1358.34" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1044,12 +1044,12 @@
 <!-- check_corpus/1&#45;&gt;type::check/2 -->
 <g id="edge60" class="edge">
 <title>check_corpus/1&#45;&gt;type::check/2</title>
-<g id="a_edge60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L168" xlink:title="calls">
+<g id="a_edge60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L168" xlink:title="calls">
 <path fill="none" stroke="black" d="M1308.35,-540.86C1297.98,-518.38 1282,-477.75 1282,-441 1282,-441 1282,-441 1282,-200.5 1282,-169.67 1289.44,-135.05 1295.66,-111.47"/>
 <polygon fill="black" stroke="black" points="1298.99,-112.57 1298.27,-102 1292.24,-110.71 1298.99,-112.57"/>
 </a>
 </g>
-<g id="a_edge60&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L168">
+<g id="a_edge60&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L168">
 <text xml:space="preserve" text-anchor="start" x="1282" y="-317.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1059,7 +1059,7 @@
 <title>check_documents/1</title>
 <polygon fill="cornsilk" stroke="black" points="1487.62,-338.75 1346.38,-338.75 1346.38,-302.75 1487.62,-302.75 1487.62,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="1354.38" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node18_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L179" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L179">
+<g id="a_node18_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L179" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L179">
 <text xml:space="preserve" text-anchor="start" x="1359.62" y="-322.62" font-family="Monospace" font-size="11.00">check_documents/1</text>
 </a>
 </g>
@@ -1071,12 +1071,12 @@
 <!-- check_corpus_documents/1&#45;&gt;check_documents/1 -->
 <g id="edge29" class="edge">
 <title>check_corpus_documents/1&#45;&gt;check_documents/1</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L175" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L175" xlink:title="calls">
 <path fill="none" stroke="black" d="M1398.25,-421.7C1401.77,-402.91 1407.46,-372.59 1411.65,-350.27"/>
 <polygon fill="black" stroke="black" points="1415.06,-351.08 1413.46,-340.61 1408.18,-349.79 1415.06,-351.08"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L175">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L175">
 <text xml:space="preserve" text-anchor="start" x="1406.66" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1084,12 +1084,12 @@
 <!-- check_corpus_documents/1&#45;&gt;type::check/2 -->
 <g id="edge61" class="edge">
 <title>check_corpus_documents/1&#45;&gt;type::check/2</title>
-<g id="a_edge61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L175" xlink:title="calls">
+<g id="a_edge61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L175" xlink:title="calls">
 <path fill="none" stroke="black" d="M1382.01,-421.57C1368.4,-402.34 1347.58,-369.98 1337,-338.75 1310.21,-259.64 1304.95,-159.99 1304.06,-111.86"/>
 <polygon fill="black" stroke="black" points="1307.56,-111.98 1303.93,-102.02 1300.56,-112.07 1307.56,-111.98"/>
 </a>
 </g>
-<g id="a_edge61&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L175">
+<g id="a_edge61&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L175">
 <text xml:space="preserve" text-anchor="start" x="1318.46" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1097,12 +1097,12 @@
 <!-- check_documents/1&#45;&gt;check_document/1 -->
 <g id="edge30" class="edge">
 <title>check_documents/1&#45;&gt;check_document/1</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L180" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L180" xlink:title="calls">
 <path fill="none" stroke="black" d="M1416.41,-302.45C1415.77,-283.75 1414.74,-253.62 1413.98,-231.33"/>
 <polygon fill="black" stroke="black" points="1417.48,-231.26 1413.64,-221.38 1410.49,-231.5 1417.48,-231.26"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L180">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L180">
 <text xml:space="preserve" text-anchor="start" x="1415.12" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1112,7 +1112,7 @@
 <title>check_features/1</title>
 <polygon fill="cornsilk" stroke="black" points="1513.25,-100.25 1378.75,-100.25 1378.75,-64.25 1513.25,-64.25 1513.25,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="1386.75" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node20_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L188">
+<g id="a_node20_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L188">
 <text xml:space="preserve" text-anchor="start" x="1392" y="-84.12" font-family="Monospace" font-size="11.00">check_features/1</text>
 </a>
 </g>
@@ -1124,12 +1124,12 @@
 <!-- check_document/1&#45;&gt;check_features/1 -->
 <g id="edge31" class="edge">
 <title>check_document/1&#45;&gt;check_features/1</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L184" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L184" xlink:title="calls">
 <path fill="none" stroke="black" d="M1417.87,-183.2C1423.18,-164.32 1431.77,-133.81 1438.06,-111.46"/>
 <polygon fill="black" stroke="black" points="1441.36,-112.65 1440.7,-102.08 1434.62,-110.76 1441.36,-112.65"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L184">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L184">
 <text xml:space="preserve" text-anchor="start" x="1430.49" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1137,12 +1137,12 @@
 <!-- check_document/1&#45;&gt;type::check/2 -->
 <g id="edge62" class="edge">
 <title>check_document/1&#45;&gt;type::check/2</title>
-<g id="a_edge62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L184" xlink:title="calls">
+<g id="a_edge62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L184" xlink:title="calls">
 <path fill="none" stroke="black" d="M1396.92,-183.2C1378.72,-163.63 1348.91,-131.56 1327.97,-109.03"/>
 <polygon fill="black" stroke="black" points="1330.55,-106.67 1321.18,-101.73 1325.43,-111.44 1330.55,-106.67"/>
 </a>
 </g>
-<g id="a_edge62&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L184">
+<g id="a_edge62&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L184">
 <text xml:space="preserve" text-anchor="start" x="1361.77" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1150,12 +1150,12 @@
 <!-- check_frequency_options/2&#45;&gt;^^option/2 -->
 <g id="edge50" class="edge">
 <title>check_frequency_options/2&#45;&gt;^^option/2</title>
-<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L196" xlink:title="calls">
+<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L196" xlink:title="calls">
 <path fill="none" stroke="black" d="M778.14,-540.98C793.67,-531.67 811.95,-519.24 826,-505.25 836.93,-494.38 846.7,-480.33 854.16,-468.14"/>
 <polygon fill="black" stroke="black" points="857.04,-470.15 859.09,-459.76 851,-466.61 857.04,-470.15"/>
 </a>
 </g>
-<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L196">
+<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L196">
 <text xml:space="preserve" text-anchor="start" x="835.86" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1165,7 +1165,7 @@
 <title>flatten_documents/2</title>
 <polygon fill="cornsilk" stroke="black" points="1901.38,-458 1746.62,-458 1746.62,-422 1901.38,-422 1901.38,-458"/>
 <text xml:space="preserve" text-anchor="start" x="1754.62" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node23_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L217" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L217">
+<g id="a_node23_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L217" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L217">
 <text xml:space="preserve" text-anchor="start" x="1759.88" y="-441.88" font-family="Monospace" font-size="11.00">flatten_documents/2</text>
 </a>
 </g>
@@ -1177,12 +1177,12 @@
 <!-- corpus_counts/4&#45;&gt;flatten_documents/2 -->
 <g id="edge32" class="edge">
 <title>corpus_counts/4&#45;&gt;flatten_documents/2</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L210" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L210" xlink:title="calls">
 <path fill="none" stroke="black" d="M1666.3,-540.95C1698.27,-520.69 1751.38,-487.02 1787.03,-464.43"/>
 <polygon fill="black" stroke="black" points="1788.74,-467.49 1795.31,-459.18 1784.99,-461.58 1788.74,-467.49"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L210" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L210">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L210" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L210">
 <text xml:space="preserve" text-anchor="start" x="1737.05" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1192,7 +1192,7 @@
 <title>document_unique_features/2</title>
 <polygon fill="cornsilk" stroke="black" points="1729,-458 1527,-458 1527,-422 1729,-422 1729,-458"/>
 <text xml:space="preserve" text-anchor="start" x="1535" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node24_39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L222" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L222">
+<g id="a_node24_39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L222" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L222">
 <text xml:space="preserve" text-anchor="start" x="1540.25" y="-441.88" font-family="Monospace" font-size="11.00">document_unique_features/2</text>
 </a>
 </g>
@@ -1204,12 +1204,12 @@
 <!-- corpus_counts/4&#45;&gt;document_unique_features/2 -->
 <g id="edge33" class="edge">
 <title>corpus_counts/4&#45;&gt;document_unique_features/2</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L210" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L210" xlink:title="calls">
 <path fill="none" stroke="black" d="M1637.38,-540.95C1635.62,-522.25 1632.8,-492.12 1630.7,-469.83"/>
 <polygon fill="black" stroke="black" points="1634.19,-469.51 1629.77,-459.88 1627.22,-470.16 1634.19,-469.51"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L210" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L210">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L210" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L210">
 <text xml:space="preserve" text-anchor="start" x="1633.83" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1217,12 +1217,12 @@
 <!-- corpus_counts/4&#45;&gt;list::length/2 -->
 <g id="edge64" class="edge">
 <title>corpus_counts/4&#45;&gt;list::length/2</title>
-<g id="a_edge64"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L210" xlink:title="calls">
+<g id="a_edge64"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L210" xlink:title="calls">
 <path fill="none" stroke="black" d="M1604.34,-540.8C1575.25,-524.02 1535.7,-495.65 1518,-458 1481.92,-381.24 1521.35,-278.74 1544.55,-230.21"/>
 <polygon fill="black" stroke="black" points="1547.68,-231.77 1548.96,-221.25 1541.4,-228.67 1547.68,-231.77"/>
 </a>
 </g>
-<g id="a_edge64&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L210" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L210">
+<g id="a_edge64&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L210" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L210">
 <text xml:space="preserve" text-anchor="start" x="1503.7" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1230,12 +1230,12 @@
 <!-- corpus_counts/4&#45;&gt;list::occurrences/2 -->
 <g id="edge63" class="edge">
 <title>corpus_counts/4&#45;&gt;list::occurrences/2</title>
-<g id="a_edge63"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L210" xlink:title="calls">
+<g id="a_edge63"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L210" xlink:title="calls">
 <path fill="none" stroke="black" d="M1692.21,-540.82C1756.46,-519.78 1864.43,-484.42 1933.12,-461.92"/>
 <polygon fill="black" stroke="black" points="1933.94,-465.34 1942.35,-458.9 1931.76,-458.68 1933.94,-465.34"/>
 </a>
 </g>
-<g id="a_edge63&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L210" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L210">
+<g id="a_edge63&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L210" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L210">
 <text xml:space="preserve" text-anchor="start" x="1828.73" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1257,12 +1257,12 @@
 <!-- flatten_documents/2&#45;&gt;list::append/3 -->
 <g id="edge65" class="edge">
 <title>flatten_documents/2&#45;&gt;list::append/3</title>
-<g id="a_edge65"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L218" xlink:title="calls">
+<g id="a_edge65"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L218" xlink:title="calls">
 <path fill="none" stroke="black" d="M1809.54,-421.7C1793.25,-402.22 1766.61,-370.34 1747.8,-347.83"/>
 <polygon fill="black" stroke="black" points="1750.59,-345.71 1741.49,-340.28 1745.22,-350.2 1750.59,-345.71"/>
 </a>
 </g>
-<g id="a_edge65&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L218" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L218">
+<g id="a_edge65&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L218" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L218">
 <text xml:space="preserve" text-anchor="start" x="1777.94" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1270,12 +1270,12 @@
 <!-- document_unique_features/2&#45;&gt;list::append/3 -->
 <g id="edge66" class="edge">
 <title>document_unique_features/2&#45;&gt;list::append/3</title>
-<g id="a_edge66"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L223" xlink:title="calls">
+<g id="a_edge66"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L223" xlink:title="calls">
 <path fill="none" stroke="black" d="M1642.46,-421.7C1658.75,-402.22 1685.39,-370.34 1704.2,-347.83"/>
 <polygon fill="black" stroke="black" points="1706.78,-350.2 1710.51,-340.28 1701.41,-345.71 1706.78,-350.2"/>
 </a>
 </g>
-<g id="a_edge66&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L223" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L223">
+<g id="a_edge66&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L223" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L223">
 <text xml:space="preserve" text-anchor="start" x="1679.94" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1285,7 +1285,7 @@
 <title>idf_weight/4</title>
 <polygon fill="cornsilk" stroke="black" points="1200.75,-458 1093.25,-458 1093.25,-422 1200.75,-422 1200.75,-458"/>
 <text xml:space="preserve" text-anchor="start" x="1101.25" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node26_41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L233" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L233">
+<g id="a_node26_41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L233" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L233">
 <text xml:space="preserve" text-anchor="start" x="1106.5" y="-441.88" font-family="Monospace" font-size="11.00">idf_weight/4</text>
 </a>
 </g>
@@ -1297,12 +1297,12 @@
 <!-- build_features/5&#45;&gt;idf_weight/4 -->
 <g id="edge34" class="edge">
 <title>build_features/5&#45;&gt;idf_weight/4</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L229" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L229" xlink:title="calls">
 <path fill="none" stroke="black" d="M1150.41,-540.95C1149.77,-522.25 1148.74,-492.12 1147.98,-469.83"/>
 <polygon fill="black" stroke="black" points="1151.48,-469.76 1147.64,-459.88 1144.49,-470 1151.48,-469.76"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L229">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L229">
 <text xml:space="preserve" text-anchor="start" x="1149.12" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1312,7 +1312,7 @@
 <title>filter_features/4</title>
 <polygon fill="cornsilk" stroke="black" points="1075.62,-458 934.38,-458 934.38,-422 1075.62,-422 1075.62,-458"/>
 <text xml:space="preserve" text-anchor="start" x="942.38" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node28_42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L243" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L243">
+<g id="a_node28_42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L243" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L243">
 <text xml:space="preserve" text-anchor="start" x="947.62" y="-441.88" font-family="Monospace" font-size="11.00">filter_features/4</text>
 </a>
 </g>
@@ -1324,12 +1324,12 @@
 <!-- filter_features/3&#45;&gt;filter_features/4 -->
 <g id="edge35" class="edge">
 <title>filter_features/3&#45;&gt;filter_features/4</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L238" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L238" xlink:title="calls">
 <path fill="none" stroke="black" d="M996.48,-540.95C998.07,-522.25 1000.64,-492.12 1002.54,-469.83"/>
 <polygon fill="black" stroke="black" points="1006.03,-470.14 1003.39,-459.88 999.05,-469.55 1006.03,-470.14"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L238" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L238">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L238" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L238">
 <text xml:space="preserve" text-anchor="start" x="1000.3" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1337,12 +1337,12 @@
 <!-- filter_features/3&#45;&gt;^^option/2 -->
 <g id="edge51" class="edge">
 <title>filter_features/3&#45;&gt;^^option/2</title>
-<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L238" xlink:title="calls">
+<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L238" xlink:title="calls">
 <path fill="none" stroke="black" d="M976.41,-540.95C955.19,-521.21 920.3,-488.74 896.07,-466.19"/>
 <polygon fill="black" stroke="black" points="898.48,-463.65 888.78,-459.4 893.71,-468.78 898.48,-463.65"/>
 </a>
 </g>
-<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L238" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L238">
+<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L238" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L238">
 <text xml:space="preserve" text-anchor="start" x="935.78" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1352,7 +1352,7 @@
 <title>decorate_features/2</title>
 <polygon fill="cornsilk" stroke="black" points="318.38,-458 163.62,-458 163.62,-422 318.38,-422 318.38,-458"/>
 <text xml:space="preserve" text-anchor="start" x="171.62" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node30_43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L263" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L263">
+<g id="a_node30_43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L263" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L263">
 <text xml:space="preserve" text-anchor="start" x="176.88" y="-441.88" font-family="Monospace" font-size="11.00">decorate_features/2</text>
 </a>
 </g>
@@ -1364,12 +1364,12 @@
 <!-- limit_features/3&#45;&gt;decorate_features/2 -->
 <g id="edge37" class="edge">
 <title>limit_features/3&#45;&gt;decorate_features/2</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L252" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L252" xlink:title="calls">
 <path fill="none" stroke="black" d="M515.14,-540.82C457.71,-519.91 361.44,-484.86 299.61,-462.34"/>
 <polygon fill="black" stroke="black" points="300.87,-459.08 290.28,-458.94 298.48,-465.65 300.87,-459.08"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L252" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L252">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L252" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L252">
 <text xml:space="preserve" text-anchor="start" x="411.65" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1379,7 +1379,7 @@
 <title>take_features/3</title>
 <polygon fill="cornsilk" stroke="black" points="145.88,-458 18.12,-458 18.12,-422 145.88,-422 145.88,-458"/>
 <text xml:space="preserve" text-anchor="start" x="26.12" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node31_44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L268" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L268">
+<g id="a_node31_44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L268" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L268">
 <text xml:space="preserve" text-anchor="start" x="31.38" y="-441.88" font-family="Monospace" font-size="11.00">take_features/3</text>
 </a>
 </g>
@@ -1391,12 +1391,12 @@
 <!-- limit_features/3&#45;&gt;take_features/3 -->
 <g id="edge38" class="edge">
 <title>limit_features/3&#45;&gt;take_features/3</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L252" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L252" xlink:title="calls">
 <path fill="none" stroke="black" d="M495.36,-541.76C406.22,-520.03 249.9,-481.93 157.16,-459.32"/>
 <polygon fill="black" stroke="black" points="158.18,-455.97 147.64,-457 156.53,-462.77 158.18,-455.97"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L252" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L252">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L252" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L252">
 <text xml:space="preserve" text-anchor="start" x="336.92" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1406,7 +1406,7 @@
 <title>selected_features/2</title>
 <polygon fill="cornsilk" stroke="black" points="491.38,-458 336.62,-458 336.62,-422 491.38,-422 491.38,-458"/>
 <text xml:space="preserve" text-anchor="start" x="344.62" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node32_45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L275" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L275">
+<g id="a_node32_45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L275" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L275">
 <text xml:space="preserve" text-anchor="start" x="349.88" y="-441.88" font-family="Monospace" font-size="11.00">selected_features/2</text>
 </a>
 </g>
@@ -1418,12 +1418,12 @@
 <!-- limit_features/3&#45;&gt;selected_features/2 -->
 <g id="edge39" class="edge">
 <title>limit_features/3&#45;&gt;selected_features/2</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L252" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L252" xlink:title="calls">
 <path fill="none" stroke="black" d="M541.01,-540.95C515.59,-520.95 473.58,-487.88 444.89,-465.3"/>
 <polygon fill="black" stroke="black" points="447.29,-462.74 437.27,-459.31 442.96,-468.24 447.29,-462.74"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L252" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L252">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L252" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L252">
 <text xml:space="preserve" text-anchor="start" x="492.97" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1433,7 +1433,7 @@
 <title>candidates_features/2</title>
 <polygon fill="cornsilk" stroke="black" points="678.12,-458 509.88,-458 509.88,-422 678.12,-422 678.12,-458"/>
 <text xml:space="preserve" text-anchor="start" x="517.88" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node33_46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L279" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L279">
+<g id="a_node33_46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L279" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L279">
 <text xml:space="preserve" text-anchor="start" x="523.12" y="-441.88" font-family="Monospace" font-size="11.00">candidates_features/2</text>
 </a>
 </g>
@@ -1445,12 +1445,12 @@
 <!-- limit_features/3&#45;&gt;candidates_features/2 -->
 <g id="edge36" class="edge">
 <title>limit_features/3&#45;&gt;candidates_features/2</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L252" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L252" xlink:title="calls">
 <path fill="none" stroke="black" d="M567.57,-540.95C572.57,-522.07 580.63,-491.56 586.54,-469.21"/>
 <polygon fill="black" stroke="black" points="589.85,-470.4 589.02,-459.83 583.08,-468.61 589.85,-470.4"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L252" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L252">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L252" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L252">
 <text xml:space="preserve" text-anchor="start" x="579.43" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1472,12 +1472,12 @@
 <!-- limit_features/3&#45;&gt;list::sort/4 -->
 <g id="edge67" class="edge">
 <title>limit_features/3&#45;&gt;list::sort/4</title>
-<g id="a_edge67"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L252" xlink:title="calls">
+<g id="a_edge67"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L252" xlink:title="calls">
 <path fill="none" stroke="black" d="M590.59,-540.95C622.91,-520.69 676.6,-487.02 712.63,-464.43"/>
 <polygon fill="black" stroke="black" points="714.4,-467.45 721.01,-459.18 710.68,-461.52 714.4,-467.45"/>
 </a>
 </g>
-<g id="a_edge67&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L252" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L252">
+<g id="a_edge67&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L252" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L252">
 <text xml:space="preserve" text-anchor="start" x="662.11" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1485,12 +1485,12 @@
 <!-- limit_features/3&#45;&gt;^^option/2 -->
 <g id="edge52" class="edge">
 <title>limit_features/3&#45;&gt;^^option/2</title>
-<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L252" xlink:title="calls">
+<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L252" xlink:title="calls">
 <path fill="none" stroke="black" d="M608.48,-540.82C662.95,-519.95 754.17,-485 812.94,-462.48"/>
 <polygon fill="black" stroke="black" points="814.02,-465.81 822.11,-458.97 811.52,-459.28 814.02,-465.81"/>
 </a>
 </g>
-<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L252" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L252">
+<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L252" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L252">
 <text xml:space="preserve" text-anchor="start" x="725.18" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1498,12 +1498,12 @@
 <!-- in_vocabulary_counts/3&#45;&gt;list::member/2 -->
 <g id="edge68" class="edge">
 <title>in_vocabulary_counts/3&#45;&gt;list::member/2</title>
-<g id="a_edge68"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L284" xlink:title="calls">
+<g id="a_edge68"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L284" xlink:title="calls">
 <path fill="none" stroke="black" d="M2716.84,-421.7C2721,-402.91 2727.73,-372.59 2732.68,-350.27"/>
 <polygon fill="black" stroke="black" points="2736.07,-351.12 2734.82,-340.6 2729.24,-349.6 2736.07,-351.12"/>
 </a>
 </g>
-<g id="a_edge68&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L284" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L284">
+<g id="a_edge68&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L284" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L284">
 <text xml:space="preserve" text-anchor="start" x="2726.78" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1513,7 +1513,7 @@
 <title>feature_weight/5</title>
 <polygon fill="cornsilk" stroke="black" points="2263.25,-338.75 2128.75,-338.75 2128.75,-302.75 2263.25,-302.75 2263.25,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="2136.75" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node37_48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L305" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L305">
+<g id="a_node37_48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L305" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L305">
 <text xml:space="preserve" text-anchor="start" x="2142" y="-322.62" font-family="Monospace" font-size="11.00">feature_weight/5</text>
 </a>
 </g>
@@ -1525,12 +1525,12 @@
 <!-- weight_counts/4&#45;&gt;feature_weight/5 -->
 <g id="edge40" class="edge">
 <title>weight_counts/4&#45;&gt;feature_weight/5</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L297" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L297" xlink:title="calls">
 <path fill="none" stroke="black" d="M2231.8,-421.7C2225.01,-402.74 2214.01,-372.03 2206,-349.65"/>
 <polygon fill="black" stroke="black" points="2209.4,-348.78 2202.73,-340.55 2202.81,-351.14 2209.4,-348.78"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L297" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L297">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L297" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L297">
 <text xml:space="preserve" text-anchor="start" x="2218.26" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1540,7 +1540,7 @@
 <title>l1_norm/3</title>
 <polygon fill="cornsilk" stroke="black" points="2507.62,-338.75 2420.38,-338.75 2420.38,-302.75 2507.62,-302.75 2507.62,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="2428.38" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node39_49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L327" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L327">
+<g id="a_node39_49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L327" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L327">
 <text xml:space="preserve" text-anchor="start" x="2433.62" y="-322.62" font-family="Monospace" font-size="11.00">l1_norm/3</text>
 </a>
 </g>
@@ -1552,12 +1552,12 @@
 <!-- normalize_vector/3&#45;&gt;l1_norm/3 -->
 <g id="edge41" class="edge">
 <title>normalize_vector/3&#45;&gt;l1_norm/3</title>
-<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L319" xlink:title="calls">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L319" xlink:title="calls">
 <path fill="none" stroke="black" d="M2404.33,-421.7C2415.81,-402.48 2434.48,-371.19 2447.89,-348.74"/>
 <polygon fill="black" stroke="black" points="2450.73,-350.8 2452.85,-340.42 2444.72,-347.21 2450.73,-350.8"/>
 </a>
 </g>
-<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L319" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L319">
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L319" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L319">
 <text xml:space="preserve" text-anchor="start" x="2431.1" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1567,7 +1567,7 @@
 <title>l2_square_norm/3</title>
 <polygon fill="cornsilk" stroke="black" points="2660.25,-338.75 2525.75,-338.75 2525.75,-302.75 2660.25,-302.75 2660.25,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="2533.75" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node40_50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L332" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L332">
+<g id="a_node40_50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L332" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L332">
 <text xml:space="preserve" text-anchor="start" x="2539" y="-322.62" font-family="Monospace" font-size="11.00">l2_square_norm/3</text>
 </a>
 </g>
@@ -1579,12 +1579,12 @@
 <!-- normalize_vector/3&#45;&gt;l2_square_norm/3 -->
 <g id="edge43" class="edge">
 <title>normalize_vector/3&#45;&gt;l2_square_norm/3</title>
-<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L322" xlink:title="calls">
+<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L322" xlink:title="calls">
 <path fill="none" stroke="black" d="M2423.36,-421.7C2457.9,-401.35 2515.38,-367.48 2553.72,-344.89"/>
 <polygon fill="black" stroke="black" points="2555.37,-347.98 2562.21,-339.89 2551.82,-341.95 2555.37,-347.98"/>
 </a>
 </g>
-<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L322" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L322">
+<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L322" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L322">
 <text xml:space="preserve" text-anchor="start" x="2499.47" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1594,7 +1594,7 @@
 <title>normalize_by/3</title>
 <polygon fill="cornsilk" stroke="black" points="2402.5,-338.75 2281.5,-338.75 2281.5,-302.75 2402.5,-302.75 2402.5,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="2289.5" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node41_51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L337" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L337">
+<g id="a_node41_51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L337" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L337">
 <text xml:space="preserve" text-anchor="start" x="2294.75" y="-322.62" font-family="Monospace" font-size="11.00">normalize_by/3</text>
 </a>
 </g>
@@ -1606,12 +1606,12 @@
 <!-- normalize_vector/3&#45;&gt;normalize_by/3 -->
 <g id="edge42" class="edge">
 <title>normalize_vector/3&#45;&gt;normalize_by/3</title>
-<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L319" xlink:title="calls">
+<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L319" xlink:title="calls">
 <path fill="none" stroke="black" d="M2386.33,-421.7C2377.88,-402.65 2364.18,-371.75 2354.24,-349.35"/>
 <polygon fill="black" stroke="black" points="2357.57,-348.23 2350.32,-340.51 2351.17,-351.07 2357.57,-348.23"/>
 </a>
 </g>
-<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L319" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L319">
+<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L319" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L319">
 <text xml:space="preserve" text-anchor="start" x="2369.56" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1621,7 +1621,7 @@
 <title>normalize_weights/3</title>
 <polygon fill="cornsilk" stroke="black" points="2419.38,-219.5 2264.62,-219.5 2264.62,-183.5 2419.38,-183.5 2419.38,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="2272.62" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node42_52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L342" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L342">
+<g id="a_node42_52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L342" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L342">
 <text xml:space="preserve" text-anchor="start" x="2277.88" y="-203.38" font-family="Monospace" font-size="11.00">normalize_weights/3</text>
 </a>
 </g>
@@ -1633,12 +1633,12 @@
 <!-- normalize_by/3&#45;&gt;normalize_weights/3 -->
 <g id="edge44" class="edge">
 <title>normalize_by/3&#45;&gt;normalize_weights/3</title>
-<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L339" xlink:title="calls">
+<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L339" xlink:title="calls">
 <path fill="none" stroke="black" d="M2342,-302.45C2342,-283.75 2342,-253.62 2342,-231.33"/>
 <polygon fill="black" stroke="black" points="2345.5,-231.39 2342,-221.39 2338.5,-231.39 2345.5,-231.39"/>
 </a>
 </g>
-<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L339" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L339">
+<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L339" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L339">
 <text xml:space="preserve" text-anchor="start" x="2342" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1648,7 +1648,7 @@
 <title>valid_features/3</title>
 <polygon fill="cornsilk" stroke="black" points="2872.25,-219.5 2737.75,-219.5 2737.75,-183.5 2872.25,-183.5 2872.25,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="2745.75" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node44_53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L369" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L369">
+<g id="a_node44_53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L369" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L369">
 <text xml:space="preserve" text-anchor="start" x="2751" y="-203.38" font-family="Monospace" font-size="11.00">valid_features/3</text>
 </a>
 </g>
@@ -1660,12 +1660,12 @@
 <!-- valid_vectorizer_term/1&#45;&gt;valid_features/3 -->
 <g id="edge45" class="edge">
 <title>valid_vectorizer_term/1&#45;&gt;valid_features/3</title>
-<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L347" xlink:title="calls">
+<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L347" xlink:title="calls">
 <path fill="none" stroke="black" d="M2892.8,-302.45C2875.61,-282.88 2847.44,-250.81 2827.65,-228.28"/>
 <polygon fill="black" stroke="black" points="2830.49,-226.21 2821.26,-221.01 2825.23,-230.83 2830.49,-226.21"/>
 </a>
 </g>
-<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L347" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L347">
+<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L347" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L347">
 <text xml:space="preserve" text-anchor="start" x="2859.59" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1673,12 +1673,12 @@
 <!-- valid_vectorizer_term/1&#45;&gt;list::length/2 -->
 <g id="edge70" class="edge">
 <title>valid_vectorizer_term/1&#45;&gt;list::length/2</title>
-<g id="a_edge70"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L347" xlink:title="calls">
+<g id="a_edge70"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L347" xlink:title="calls">
 <path fill="none" stroke="black" d="M2816.89,-303.73C2814.23,-303.38 2811.6,-303.05 2809,-302.75 2558.98,-273.41 2494.7,-286.51 2243.75,-266.75 2020.1,-249.14 1755.9,-222.77 1631.14,-209.99"/>
 <polygon fill="black" stroke="black" points="1631.68,-206.52 1621.37,-208.98 1630.96,-213.49 1631.68,-206.52"/>
 </a>
 </g>
-<g id="a_edge70&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L347" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L347">
+<g id="a_edge70&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L347" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L347">
 <text xml:space="preserve" text-anchor="start" x="2243.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1686,12 +1686,12 @@
 <!-- valid_vectorizer_term/1&#45;&gt;list::memberchk/2 -->
 <g id="edge71" class="edge">
 <title>valid_vectorizer_term/1&#45;&gt;list::memberchk/2</title>
-<g id="a_edge71"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L347" xlink:title="calls">
+<g id="a_edge71"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L347" xlink:title="calls">
 <path fill="none" stroke="black" d="M2924.97,-302.45C2944.25,-282.79 2975.9,-250.52 2998,-227.99"/>
 <polygon fill="black" stroke="black" points="3000.4,-230.54 3004.9,-220.95 2995.4,-225.64 3000.4,-230.54"/>
 </a>
 </g>
-<g id="a_edge71&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L347" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L347">
+<g id="a_edge71&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L347" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L347">
 <text xml:space="preserve" text-anchor="start" x="2968.95" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1699,12 +1699,12 @@
 <!-- valid_vectorizer_term/1&#45;&gt;type::valid/2 -->
 <g id="edge69" class="edge">
 <title>valid_vectorizer_term/1&#45;&gt;type::valid/2</title>
-<g id="a_edge69"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L347" xlink:title="calls">
+<g id="a_edge69"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L347" xlink:title="calls">
 <path fill="none" stroke="black" d="M2907.08,-302.65C2905.11,-276.08 2899.08,-223.76 2881,-183.5 2868.41,-155.47 2846.7,-127.96 2829.7,-108.87"/>
 <polygon fill="black" stroke="black" points="2832.37,-106.62 2823.05,-101.59 2827.2,-111.34 2832.37,-106.62"/>
 </a>
 </g>
-<g id="a_edge69&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L347" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L347">
+<g id="a_edge69&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L347" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L347">
 <text xml:space="preserve" text-anchor="start" x="2893.52" y="-198.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1712,12 +1712,12 @@
 <!-- valid_vectorizer_term/1&#45;&gt;^^check_options/1 -->
 <g id="edge53" class="edge">
 <title>valid_vectorizer_term/1&#45;&gt;^^check_options/1</title>
-<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L347" xlink:title="calls">
+<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L347" xlink:title="calls">
 <path fill="none" stroke="black" d="M2816.88,-303.76C2814.23,-303.4 2811.6,-303.07 2809,-302.75 2589.05,-275.97 2528.08,-314.68 2311.75,-266.75 2269.22,-257.33 2223.14,-239.2 2189.89,-224.6"/>
 <polygon fill="black" stroke="black" points="2191.51,-221.49 2180.96,-220.61 2188.66,-227.88 2191.51,-221.49"/>
 </a>
 </g>
-<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L347" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L347">
+<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L347" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L347">
 <text xml:space="preserve" text-anchor="start" x="2311.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1725,12 +1725,12 @@
 <!-- valid_features/3&#45;&gt;type::valid/2 -->
 <g id="edge72" class="edge">
 <title>valid_features/3&#45;&gt;type::valid/2</title>
-<g id="a_edge72"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L370" xlink:title="calls">
+<g id="a_edge72"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L370" xlink:title="calls">
 <path fill="none" stroke="black" d="M2805,-183.2C2805,-164.5 2805,-134.37 2805,-112.08"/>
 <polygon fill="black" stroke="black" points="2808.5,-112.14 2805,-102.14 2801.5,-112.14 2808.5,-112.14"/>
 </a>
 </g>
-<g id="a_edge72&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L370" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3df8ea083c243f645464e89767597544fb14e41c/library/text_vectorization/text_vectorizer.lgt#L370">
+<g id="a_edge72&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L370" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1c6a807077b9577e024e4885b88fa0ef992c5640/library/text_vectorization/text_vectorizer.lgt#L370">
 <text xml:space="preserve" text-anchor="start" x="2805" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
