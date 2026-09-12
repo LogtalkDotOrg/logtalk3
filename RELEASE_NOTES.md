@@ -304,6 +304,9 @@ functions and added tests for HMAC-BLAKE2b and HMAC-BLAKE2s.
 
 * FIXED: The `crypto` library PBKDF2 implementation conformance with RFC 8018.
 
+* FIXED: A `html` library bug where generating a file would fail to close its
+stream in case of error.
+
 * FIXED: A race condition in the `http_process_transport` library when closing
 `ncat`-backed connections that could discard pending output bytes. Thanks to
 Andrew Davison for the bug report.

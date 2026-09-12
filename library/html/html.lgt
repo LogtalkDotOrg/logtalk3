@@ -23,9 +23,9 @@
 :- category(html).
 
 	:- info([
-		version is 0:4:1,
+		version is 0:5:0,
 		author is 'Paul Brown and Paulo Moura',
-		date is 2021-06-16,
+		date is 2026-09-12,
 		comment is 'HTML generation.'
 	]).
 
@@ -81,7 +81,13 @@
 		instantiation_error.
 	generate(file(File), Term) :-
 		open(File, write, Stream),
-		write_html(Term, Stream),
+		catch(
+			write_html(Term, Stream),
+			Error,
+			(	close(Stream),
+				throw(Error)
+			)
+		),
 		close(Stream),
 		!.
 	generate(stream(Stream), Term) :-
