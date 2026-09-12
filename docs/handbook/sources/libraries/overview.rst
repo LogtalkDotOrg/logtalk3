@@ -212,6 +212,58 @@ backend Prolog compiler:
    $ cd ~/logtalk/library
    $ logtalk_tester -p eclipse
 
+Library requirements
+--------------------
+
+Some of the libraries (notably, for the HTTP and SMTP functionality)
+have third-party dependencies. The ``openssl`` (version 3.0.0 or later),
+``ncat`` (version 7.96 or later), and ``socat`` (version 1.7.3.0 or
+later) commands must be available on the system ``PATH``. The
+``http_process_transport`` library uses by default ``socat`` on POSIX
+systems and ``ncat`` on Windows. Both the ``http_process_transport`` and
+the ``smtp`` libraries use the ``openssl`` command.
+
+On macOS, these commands can be installed using e.g. Homebrew:
+
+::
+
+   $ brew install openssl nmap socat
+
+Or using MacPorts:
+
+::
+
+   $ sudo port install openssl nmap socat
+
+On Ubuntu, both commands can be installed using:
+
+::
+
+   $ sudo apt install openssl ncat socat
+
+On RedHat distributions (8.x and later):
+
+::
+
+   $ sudo dnf install openssl nmap-ncat socat
+
+For older RedHat distributions:
+
+::
+
+   $ sudo yum install openssl nmap-ncat socat
+
+On Windows, ``openssl`` and ``ncat`` commands can be installed using
+e.g. Chocolatey:
+
+::
+
+   > choco install openssl
+   > choco install nmap
+
+The ``socat`` command doesn't have an easy install solution on Windows;
+use ``ncat`` instead.
+
 Credits
 -------
 

@@ -61,6 +61,8 @@ properties and tautology/falsehood candidates used by the linter.
 Documentation
 -------------
 
+* ADDED: Handbook section on library third-party dependencies.
+
 * IMPROVED: The manual installation instructions.
 
 * FIXED: Some Handbook library and tool links to their API documentation.
