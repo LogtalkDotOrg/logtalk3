@@ -24,9 +24,9 @@
 	imports([options, http_message_helpers, http_text_helpers])).
 
 	:- info([
-		version is 1:1:7,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-09-10,
+		date is 2026-09-12,
 		comment is 'Process-backed HTTP transport predicates using the process library and helper processes.'
 	]).
 
@@ -1343,12 +1343,20 @@
 
 	default_option(type(binary)).
 	default_option(connection_transport(tcp)).
-	default_option(connection_helper_executable(ncat)).
+	default_option(connection_helper_executable(ConnectionHelper)) :-
+		(	operating_system_type(windows) ->
+			ConnectionHelper = ncat
+		;	ConnectionHelper = socat
+		).
 	default_option(openssl_executable(openssl)).
 	default_option(server_name(default)).
 	default_option(backlog(5)).
 	default_option(listener_transport(tcp)).
-	default_option(listener_helper_executable(ncat)).
+	default_option(listener_helper_executable(ListenerHelper)) :-
+		(	operating_system_type(windows) ->
+			ListenerHelper = ncat
+		;	ListenerHelper = socat
+		).
 	default_option(shutdown(keep_open)).
 	default_option(workers(serial)).
 	default_option(openssl_arguments([])).

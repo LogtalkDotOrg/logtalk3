@@ -249,7 +249,9 @@ predicate. Allow the optional `input_schema/2` and `output_schema/2` predicates
 to override schema inference from a tool/predicate documentation.
 
 * ADDED: Full support for `socat` to the `http_process_transport` library and
-a new `connection_helper_executable/1` option (defaulting to `ncat`).
+a new `connection_helper_executable/1` option (defaulting to `ncat` on Windows
+and `socat` on POSIX systems). The existing `listener_helper_executable/1`
+option uses the same defaults.
 
 * ADDED: Support to the `ranking_protocols` library for ordered multiplayer
 ranking datasets with ranked teams and weighted player participation, plus

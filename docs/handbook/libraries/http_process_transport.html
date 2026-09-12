@@ -519,9 +519,9 @@ compatible</p></li>
 support</p></li>
 <li><p>the <code class="docutils literal notranslate"><span class="pre">openssl</span></code> executable must be available on the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> unless
 overridden with the <code class="docutils literal notranslate"><span class="pre">openssl_executable/1</span></code> option</p></li>
-<li><p>server-side listeners require <code class="docutils literal notranslate"><span class="pre">ncat</span></code> on the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> unless
-overridden with the <code class="docutils literal notranslate"><span class="pre">listener_helper_executable/1</span></code> option to use
-<code class="docutils literal notranslate"><span class="pre">socat</span></code> instead</p></li>
+<li><p>server-side listeners require <code class="docutils literal notranslate"><span class="pre">ncat</span></code> or <code class="docutils literal notranslate"><span class="pre">socat</span></code> on the <code class="docutils literal notranslate"><span class="pre">PATH</span></code>
+(see the <code class="docutils literal notranslate"><span class="pre">listener_helper_executable/1</span></code> option; the default value
+depends on the operating-system)</p></li>
 <li><p>the TLS listener implementation is limited to server-side stream
 exposure and handshake handling; advanced TLS options such as ALPN,
 client certificate verification, and protocol version tuning are not
@@ -533,8 +533,8 @@ provided</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">type(text)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">connection_transport(tcp)</span></code> (default)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">connection_transport(tls)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">connection_helper_executable(ncat)</span></code> (default)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">connection_helper_executable(socat)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">connection_helper_executable(ncat)</span></code> (default on Windows)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">connection_helper_executable(socat)</span></code> (default on POSIX systems)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">openssl_executable(Executable)</span></code> (default <code class="docutils literal notranslate"><span class="pre">openssl</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">server_name(Name)</span></code> (default <code class="docutils literal notranslate"><span class="pre">default</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">openssl_arguments(Arguments)</span></code> (default <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</p></li>
@@ -569,8 +569,8 @@ client certificate flags directly to <code class="docutils literal notranslate">
 <li><p><code class="docutils literal notranslate"><span class="pre">type(text)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">listener_transport(tcp)</span></code> (default)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">listener_transport(tls)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">listener_helper_executable(ncat)</span></code> (default)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">listener_helper_executable(socat)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">listener_helper_executable(ncat)</span></code> (default on Windows)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">listener_helper_executable(socat)</span></code> (default on POSIX systems)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">temporary_tls_credentials(Prefix)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tls_certificate_file(File)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tls_key_file(File)</span></code></p></li>

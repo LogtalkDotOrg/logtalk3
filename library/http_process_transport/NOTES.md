@@ -122,8 +122,9 @@ Current limitations
 - the `openssl` executable must be available on the `PATH` unless
   overridden with the `openssl_executable/1` option
 
-- server-side listeners require `ncat` on the `PATH` unless overridden with
-  the `listener_helper_executable/1` option to use `socat` instead
+- server-side listeners require `ncat` or `socat` on the `PATH` (see the
+  `listener_helper_executable/1` option; the default value depends on the
+  operating-system)
 - the TLS listener implementation is limited to server-side stream exposure
   and handshake handling; advanced TLS options such as ALPN, client
   certificate verification, and protocol version tuning are not provided
@@ -134,8 +135,8 @@ Connection options accepted by `open_connection/4`:
 - `type(text)`
 - `connection_transport(tcp)` (default)
 - `connection_transport(tls)`
-- `connection_helper_executable(ncat)` (default)
-- `connection_helper_executable(socat)`
+- `connection_helper_executable(ncat)` (default on Windows)
+- `connection_helper_executable(socat)` (default on POSIX systems)
 - `openssl_executable(Executable)` (default `openssl`)
 - `server_name(Name)` (default `default`)
 - `openssl_arguments(Arguments)` (default `[]`)
@@ -169,8 +170,8 @@ Listener options accepted by `open_listener/4`:
 - `type(text)`
 - `listener_transport(tcp)` (default)
 - `listener_transport(tls)`
-- `listener_helper_executable(ncat)` (default)
-- `listener_helper_executable(socat)`
+- `listener_helper_executable(ncat)` (default on Windows)
+- `listener_helper_executable(socat)` (default on POSIX systems)
 - `temporary_tls_credentials(Prefix)`
 - `tls_certificate_file(File)`
 - `tls_key_file(File)`
