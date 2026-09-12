@@ -796,6 +796,13 @@
 		sub_atom(Line, _, _, _, 'listening on'),
 		startup_listener_port(Line, BoundPort),
 		!.
+	startup_listener_outcome(socat, Line, Context, _BoundPort, error(error(socket_error(Line), Context))) :-
+		socat_connection_error_line(Line),
+		!.
+	startup_listener_outcome(socat, Line, _Context, _BoundPort, continue) :-
+		atom(Line),
+		Line \== end_of_file,
+		!.
 	startup_listener_outcome(ncat, Line, _Context, BoundPort, ready(BoundPort)) :-
 		atom(Line),
 		sub_atom(Line, _, _, _, 'Listening on '),
