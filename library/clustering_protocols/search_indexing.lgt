@@ -22,9 +22,9 @@
 :- category(search_indexing).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-04-23,
+		date is 2026-09-12,
 		comment is 'Shared helpers for adaptive search-index construction and range queries used by clustering libraries.'
 	]).
 
@@ -229,14 +229,12 @@
 		),
 		metric_range_query_leaf(Rows, Vector, Options, Epsilon, NeighborTail, Tail).
 
-	search_inner_branch(_Distance, _Epsilon, none) :-
-		fail.
 	search_inner_branch(Distance, Epsilon, InnerUpperBound) :-
+		InnerUpperBound \== none,
 		Distance - Epsilon =< InnerUpperBound.
 
-	search_outer_branch(_Distance, _Epsilon, none) :-
-		fail.
 	search_outer_branch(Distance, Epsilon, OuterLowerBound) :-
+		OuterLowerBound \== none,
 		Distance + Epsilon >= OuterLowerBound.
 
 	current_neighbor(Id, Vector, Distance, Epsilon, [Id-Vector| Tail], Tail) :-

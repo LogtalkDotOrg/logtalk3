@@ -270,6 +270,8 @@ the default option have a different indicator than queried option.
 
 * ADDED: Tests to the `dependents` library.
 
+* IMPROVED: Tests code coverage of the `clustering_protocols` library.
+
 * IMPROVED: Performance of the `list::nth0/3` and `list::nth1/3` library
 predicates. Thanks to Andrew Davison for the performance bug report.
 
