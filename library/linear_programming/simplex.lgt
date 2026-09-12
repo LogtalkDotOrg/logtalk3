@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-03,
+		date is 2026-09-12,
 		comment is 'Portable dense two-phase simplex solver for small continuous linear programs.',
 		remarks is [
 			'Variable types' - 'This backend supports continuous variables only. Integer and binary variables are accepted by the shared model API for use by future MILP backends but rejected when solving.',
@@ -306,8 +306,6 @@
 	entering_column(dantzig, Coefficients, Forbidden, Tolerance, Entering) :-
 		dantzig_entering_column(Coefficients, Forbidden, Tolerance, 1, none, Entering).
 
-	bland_entering_column([], _Forbidden, _Tolerance, _Index, _Entering) :-
-		fail.
 	bland_entering_column([Coefficient| _Coefficients], Forbidden, Tolerance, Index, Index) :-
 		Coefficient < -Tolerance,
 		\+ member(Index, Forbidden),
@@ -316,8 +314,6 @@
 		NextIndex is Index + 1,
 		bland_entering_column(Coefficients, Forbidden, Tolerance, NextIndex, Entering).
 
-	dantzig_entering_column([], _Forbidden, _Tolerance, _Index, none, _Entering) :-
-		fail.
 	dantzig_entering_column([], _Forbidden, _Tolerance, _Index, Entering- _Coefficient, Entering).
 	dantzig_entering_column([Coefficient| Coefficients], Forbidden, Tolerance, Index, Best0, Entering) :-
 		(	Coefficient < -Tolerance,
@@ -430,8 +426,6 @@
 			Basis = Basis0
 		).
 
-	artificial_basic([], _ArtificialColumns, _RowIndex, _Found) :-
-		fail.
 	artificial_basic([Basic| _Basis], ArtificialColumns, RowIndex, RowIndex) :-
 		member(Basic, ArtificialColumns),
 		!.
@@ -439,8 +433,6 @@
 		NextRowIndex is RowIndex + 1,
 		artificial_basic(Basis, ArtificialColumns, NextRowIndex, Found).
 
-	replacement_column([], _ArtificialColumns, _Tolerance, _Index, _Entering) :-
-		fail.
 	replacement_column([Coefficient| _Coefficients], ArtificialColumns, Tolerance, Index, Index) :-
 		abs(Coefficient) > Tolerance,
 		\+ member(Index, ArtificialColumns),
@@ -502,8 +494,6 @@
 		NextIndex is Index + 1,
 		column_values(NextIndex, VariableCount, Tableau, Basis, Values).
 
-	basic_row(_Column, [], _RowIndex, _Found) :-
-		fail.
 	basic_row(Column, [Basic| _Basis], RowIndex, RowIndex) :-
 		Column =:= Basic,
 		!.

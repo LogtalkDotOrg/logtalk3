@@ -24,9 +24,9 @@
 	extends(term)).
 
 	:- info([
-		version is 2:13:0,
+		version is 2:14:0,
 		author is 'Paulo Moura and Paul Fodor',
-		date is 2026-02-10,
+		date is 2026-09-12,
 		comment is 'Simple binary tree implementation of the dictionary protocol. Uses standard order to compare keys.',
 		see_also is [avltree, rbtree, splaytree]
 	]).
@@ -281,8 +281,6 @@
 		values(Right, Values0, Values1),
 		values(Left, [Value| Values1], Values).
 
-	delete(t, _, _, t) :-
-		fail.
 	delete(t(Key1, Value1, Left1, Right1), Key, Value, NewTree) :-
 		compare(Order, Key, Key1),
 		delete(Order, Key1, Value1, Left1, Right1, Key, Value, NewTree).

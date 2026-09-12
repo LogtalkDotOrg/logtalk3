@@ -140,6 +140,8 @@
 		comment is 'Failing handler used by the http_server_core tests.'
 	]).
 
+	% this clasue is redundant (calls to declared but not defined predicates fail)
+	% but it makes the code clear
 	handle(_Request, _Response) :-
 		fail.
 

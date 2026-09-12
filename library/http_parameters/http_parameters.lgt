@@ -23,9 +23,9 @@
 	imports(http_json_term_helpers)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-08-09,
+		date is 2026-09-12,
 		comment is 'Typed HTTP query, form, path, header, and cookie parameter extraction helpers plus OpenAPI descriptor generation helpers.'
 	]).
 
@@ -400,14 +400,10 @@
 		;	domain_error(http_parameter_default(list(ScalarType)), invalid_default(Name, Value))
 		).
 
-	normalize_default_list([], _ScalarType, []) :-
-		!.
+	normalize_default_list([], _ScalarType, []).
 	normalize_default_list([Value| Values], ScalarType, [NormalizedValue| NormalizedValues]) :-
-		!,
 		normalize_default_scalar(ScalarType, Value, NormalizedValue),
 		normalize_default_list(Values, ScalarType, NormalizedValues).
-	normalize_default_list(_Value, _ScalarType, _NormalizedValue) :-
-		fail.
 
 	normalize_default_scalar(string, Value, NormalizedValue) :-
 		normalize_text_atom(Value, NormalizedValue).
@@ -742,10 +738,7 @@
 
 	ignored_open_api_parameter(Name, header) :-
 		lowercase_ascii_atom(Name, LowerName),
-		ignored_open_api_header_name(LowerName),
-		!.
-	ignored_open_api_parameter(_Name, _Source) :-
-		fail.
+		ignored_open_api_header_name(LowerName).
 
 	ignored_open_api_header_name(accept).
 	ignored_open_api_header_name(authorization).

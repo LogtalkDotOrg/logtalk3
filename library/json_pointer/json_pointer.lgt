@@ -23,9 +23,9 @@
 	implements(json_pointer_protocol)).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-09-12,
 		comment is 'JSON Pointer (RFC 6901) and Relative JSON Pointer parser, generator, and evaluator.',
 		parameters is [
 			'StringRepresentation' - 'Text representation to be used for reference tokens. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
@@ -177,13 +177,9 @@
 		!,
 		atom_codes(Atom, FragmentCodes).
 
-	parse_pointer_codes([], []) :-
-		!.
+	parse_pointer_codes([], []).
 	parse_pointer_codes([0'/| Codes], Pointer) :-
-		!,
 		parse_pointer_tokens(Codes, Pointer).
-	parse_pointer_codes(_, _) :-
-		fail.
 
 	parse_relative_pointer_codes(Codes, relative(Up, Shift, Suffix)) :-
 		parse_non_negative_integer(Codes, Up, RemainingCodes),
@@ -320,11 +316,8 @@
 		encode_pointer_segment_codes(TokenCodes, Codes, Tail).
 
 	fragment_codes_pointer_codes([0'#| FragmentCodes], PointerCodes) :-
-		!,
 		fragment_codes_bytes(FragmentCodes, Bytes, []),
 		bytes_to_codes(Bytes, PointerCodes).
-	fragment_codes_pointer_codes(_, _) :-
-		fail.
 
 	fragment_codes_bytes([], Bytes, Bytes).
 	fragment_codes_bytes([0'%, High, Low| Codes], [Byte| Bytes], Tail) :-
@@ -488,11 +481,8 @@
 		unique_curly_pair_value(Pairs, Token, _).
 	relative_hash_value(Array, Token, Index) :-
 		proper_list(Array),
-		!,
 		token_index(Token, Index),
 		nth0(Index, Array, _).
-	relative_hash_value(_, _, _) :-
-		fail.
 
 	evaluate_token(json(Pairs), Token, Value) :-
 		!,
@@ -505,11 +495,8 @@
 		unique_curly_pair_value(Pairs, Token, Value).
 	evaluate_token(Array, Token, Value) :-
 		proper_list(Array),
-		!,
 		token_index(Token, Index),
 		nth0(Index, Array, Value).
-	evaluate_token(_, _, _) :-
-		fail.
 
 	unique_curly_pair_value(Pairs, Token, Value) :-
 		object_match_count(Pairs, Token, 0, Count, _, Value),

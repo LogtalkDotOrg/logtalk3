@@ -22,9 +22,9 @@
 :- category(http_json_term_helpers).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-09-12,
 		comment is 'Internal shared helpers for the repository-standard JSON term representation used by the HTTP, OpenAPI, and HTTP router libraries.'
 	]).
 
@@ -83,10 +83,7 @@
 	json_object_pairs({Pairs}, PairsList) :-
 		!,
 		curly_pairs_to_list(Pairs, PairsList).
-	json_object_pairs(json(Pairs), Pairs) :-
-		!.
-	json_object_pairs(_, _) :-
-		fail.
+	json_object_pairs(json(Pairs), Pairs).
 
 	pairs_to_object([], {}) :-
 		!.

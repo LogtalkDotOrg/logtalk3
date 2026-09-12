@@ -23,9 +23,9 @@
 	imports([clusterer_common, search_indexing])).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-05-22,
+		date is 2026-09-12,
 		comment is 'OPTICS clusterer for continuous datasets. Learns an ordering from a dataset object implementing the ``clustering_dataset_protocol`` protocol and extracts clusters using an epsilon threshold so the result can be used with the standard clusterer protocol.',
 		see_also is [clusterer_protocol, clustering_dataset_protocol, dbscan_clusterer]
 	]).
@@ -449,8 +449,6 @@
 	nearest_reachable_core_distance(CorePoints, Features, Options, DistanceLimit, Distance) :-
 		nearest_reachable_core_distance(CorePoints, Features, Options, DistanceLimit, none, Distance).
 
-	nearest_reachable_core_distance([], _Features, _Options, _DistanceLimit, none, _Distance) :-
-		fail.
 	nearest_reachable_core_distance([], _Features, _Options, _DistanceLimit, Distance, Distance).
 	nearest_reachable_core_distance([CorePoint| CorePoints], Features, Options, DistanceLimit, CurrentDistance0, Distance) :-
 		distance(Options, Features, CorePoint, CandidateDistance),

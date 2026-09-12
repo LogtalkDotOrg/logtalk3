@@ -23,9 +23,9 @@
 	implements(json_path_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-03,
+		date is 2026-09-12,
 		comment is 'Initial JSONPath implementation supporting child and descendant navigation, names, wildcards, indexes, and slices.',
 		parameters is [
 			'StringRepresentation' - 'Text representation to be used for query member names and normalized paths. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
@@ -1219,11 +1219,8 @@
 
 	query_codes(json_path(Segments), Codes0, Codes) :-
 		proper_list(Segments),
-		!,
 		append(Codes0, [0'$], Codes1),
 		segments_codes(Segments, Codes1, Codes).
-	query_codes(_, _, _) :-
-		fail.
 
 	segments_codes([], Codes, Codes).
 	segments_codes([Segment| Segments], Codes0, Codes) :-
@@ -1232,19 +1229,15 @@
 
 	segment_codes(child(Selectors), Codes0, Codes) :-
 		proper_list(Selectors),
-		!,
 		append(Codes0, [91], Codes1),
 		selectors_codes(Selectors, Codes1, Codes2),
 		append(Codes2, [93], Codes3),
 		segments_codes([], Codes3, Codes).
 	segment_codes(descendant(Selectors), Codes0, Codes) :-
 		proper_list(Selectors),
-		!,
 		append(Codes0, [46, 46, 91], Codes1),
 		selectors_codes(Selectors, Codes1, Codes2),
 		append(Codes2, [93], Codes).
-	segment_codes(_, _, _) :-
-		fail.
 
 	selectors_codes([Selector], Codes0, Codes) :-
 		!,
@@ -1255,28 +1248,21 @@
 		selectors_codes(Selectors, Codes2, Codes).
 
 	selector_codes(name(Token), Codes0, Codes) :-
-		!,
 		append(Codes0, [39], Codes1),
 		text_codes(Token, TokenCodes),
 		append_escaped_codes(TokenCodes, Codes1, Codes2),
 		append(Codes2, [39], Codes).
 	selector_codes(wildcard, Codes0, Codes) :-
-		!,
 		append(Codes0, [0'*], Codes).
 	selector_codes(index(Index), Codes0, Codes) :-
 		integer(Index),
-		!,
 		number_codes(Index, IndexCodes),
 		append(Codes0, IndexCodes, Codes).
 	selector_codes(slice(Start, End, Step), Codes0, Codes) :-
-		!,
 		slice_codes(Start, End, Step, Codes0, Codes).
 	selector_codes(filter(Expression), Codes0, Codes) :-
-		!,
 		append(Codes0, [63], Codes1),
 		logical_expr_codes(Expression, 1, Codes1, Codes).
-	selector_codes(_, _, _) :-
-		fail.
 
 	logical_expr_codes(Expression, ContextPrecedence, Codes0, Codes) :-
 		logical_expr_codes_(Expression, ExpressionPrecedence, Codes0, InnerCodes),
@@ -1404,14 +1390,10 @@
 	parse_source_codes(codes(Codes), Codes) :-
 		valid_code_list(Codes),
 		!.
-	parse_source_codes(codes(_), _) :-
-		fail.
 	parse_source_codes(chars(Chars), Codes) :-
 		valid_char_list(Chars),
 		!,
 		chars_to_codes(Chars, Codes).
-	parse_source_codes(chars(_), _) :-
-		fail.
 	parse_source_codes(atom(Atom), Codes) :-
 		!,
 		atom_codes(Atom, Codes).
@@ -1460,14 +1442,10 @@
 		atom(Atom),
 		!.
 	text_atom(chars(Chars), Atom) :-
-		!,
 		chars_to_codes(Chars, Codes),
 		atom_codes(Atom, Codes).
 	text_atom(codes(Codes), Atom) :-
-		!,
 		atom_codes(Atom, Codes).
-	text_atom(_, _) :-
-		fail.
 
 	object_entries({}, []) :-
 		!.

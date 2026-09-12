@@ -23,9 +23,9 @@
 	implements(json_ld_protocol)).
 
 	:- info([
-		version is 1:2:1,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-09-12,
 		comment is 'JSON-LD 1.1 parser, generator, and processor. Builds on top of the ``json`` library for JSON parsing and generation.',
 		parameters is [
 			'ObjectRepresentation' - 'Object representation to be used when decoding JSON objects. Possible values are ``curly`` (default) and ``list``.',
@@ -1435,7 +1435,6 @@
 	compact_value_array(Values, ActiveContext, CompactedValues) :-
 		compact_array(Values, ActiveContext, CompactedValues).
 
-	find_term_for_iri([], _IRI, _Term) :- fail.
 	find_term_for_iri([Entry| _], IRI, Term) :-
 		pair_key_value(Entry, Key, Value),
 		atom(Value),
@@ -1451,7 +1450,6 @@
 	find_term_for_iri([_| Entries], IRI, Term) :-
 		find_term_for_iri(Entries, IRI, Term).
 
-	find_prefix_for_iri([], _IRI, _Prefix, _Suffix) :- fail.
 	find_prefix_for_iri([Entry| _], IRI, Prefix, Suffix) :-
 		pair_key_value(Entry, Key, Value),
 		atom(Value),
@@ -1809,7 +1807,6 @@
 		\+ (sub_atom(Atom, EarlierPos, 1, _, Separator), EarlierPos < Pos),
 		!.
 
-	last_slash_position([], _Pos, _) :- fail.
 	last_slash_position([Code| Codes], CurrentPos, LastPos) :-
 		NextPos is CurrentPos + 1,
 		(	Code =:= 0'/ ->

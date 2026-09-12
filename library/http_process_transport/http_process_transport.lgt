@@ -962,26 +962,18 @@
 	listener_executable(ListenerId, ListenerExecutableKind) :-
 		process_listener_state_(ListenerId, ListenerExecutableKind, _Process, _RelayListener, _Error),
 		!.
-	listener_executable(_ListenerId, _ListenerExecutableKind) :-
-		fail.
 
 	listener_relay_socket(ListenerId, RelayListener) :-
 		process_listener_state_(ListenerId, _ListenerExecutableKind, _Process, relay(RelayListener, _RelayPort), _Error),
 		!.
-	listener_relay_socket(_ListenerId, _RelayListener) :-
-		fail.
 
 	listener_relay_port(ListenerId, RelayPort) :-
 		process_listener_state_(ListenerId, _ListenerExecutableKind, _Process, relay(_RelayListener, RelayPort), _Error),
 		!.
-	listener_relay_port(_ListenerId, _RelayPort) :-
-		fail.
 
 	listener_error_stream(ListenerId, Error) :-
 		process_listener_state_(ListenerId, _ListenerExecutableKind, _Process, _RelayListener, Error),
 		!.
-	listener_error_stream(_ListenerId, _Error) :-
-		fail.
 
 	listener_process_event(ListenerExecutableKind, Error, Event) :-
 		line_to_codes(Error, Codes),

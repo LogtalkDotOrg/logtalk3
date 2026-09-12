@@ -24,9 +24,9 @@
 	extends([http_json_term_helpers, http_text_helpers])).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-08-09,
+		date is 2026-09-12,
 		comment is 'Declarative HTTP router category for objects implementing the http_handler_protocol protocol.'
 	]).
 
@@ -797,8 +797,6 @@
 	route_open_api_properties_([_| Metadata], Properties) :-
 		route_open_api_properties_(Metadata, Properties).
 
-	route_metadata_property_value(_Name, [], _Value) :-
-		fail.
 	route_metadata_property_value(Name, [Property| _Metadata], Value) :-
 		nonvar(Property),
 		functor(Property, Name, 1),
@@ -1019,8 +1017,6 @@
 	best_produced_media_type(ProducedMediaTypes, AcceptSpecs, MediaType) :-
 		best_produced_media_type(ProducedMediaTypes, AcceptSpecs, none, MediaType).
 
-	best_produced_media_type([], _AcceptSpecs, none, _MediaType) :-
-		fail.
 	best_produced_media_type([], _AcceptSpecs, choice(MediaType, _Quality, _Specificity), MediaType).
 	best_produced_media_type([ProducedMediaType| ProducedMediaTypes], AcceptSpecs, BestChoice0, MediaType) :-
 		(	best_accept_match(ProducedMediaType, AcceptSpecs, Quality, Specificity) ->
@@ -1033,8 +1029,6 @@
 		media_type_atom_parts(ProducedMediaType, Type, Subtype),
 		best_accept_match(AcceptSpecs, Type, Subtype, none, Quality, Specificity).
 
-	best_accept_match([], _Type, _Subtype, none, _Quality, _Specificity) :-
-		fail.
 	best_accept_match([], _Type, _Subtype, choice(_Type, _Subtype, Quality, Specificity), Quality, Specificity).
 	best_accept_match([AcceptSpec| AcceptSpecs], Type, Subtype, BestChoice0, Quality, Specificity) :-
 		(	accept_spec_matches(AcceptSpec, Type, Subtype, MatchQuality, MatchSpecificity) ->

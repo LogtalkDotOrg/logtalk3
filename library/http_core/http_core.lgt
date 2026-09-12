@@ -23,9 +23,9 @@
 	imports(http_text_helpers)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-09-12,
 		comment is 'Transport-independent normalized HTTP request and response constructors, validators, wire parsers and generators, and body codec dispatch.'
 	]).
 
@@ -2669,8 +2669,6 @@
 		\+ member(Token, Tokens),
 		unique_atom_list(Tokens).
 
-	valid_token_codes([]) :-
-		fail.
 	valid_token_codes([Code| Codes]) :-
 		token_code(Code),
 		valid_token_codes_tail(Codes).
@@ -3380,8 +3378,6 @@
 	split_once(Separator, Codes, Left, Right) :-
 		split_once(Separator, Codes, [], Left, Right).
 
-	split_once(_Separator, [], _Acc, _Left, _Right) :-
-		fail.
 	split_once(Separator, [Separator| Codes], Acc, Left, Codes) :-
 		reverse(Acc, Left),
 		!.
