@@ -32,7 +32,6 @@ Prolog backends:
 - Tau Prolog
 - Trealla Prolog
 - XSB
-- YAP
 
 Includes Jupyter, JupyterLab, and the Logtalk kernel.
 
@@ -64,7 +63,7 @@ Valid identifiers are as shown in the Logtalk GitHub repository at
 - `TAU_VERSION` (`0.3.4`)
 - `TREALLA_VERSION` (`main`)
 - `XSB_VERSION` (`git-origin`)
-- `YAP_VERSION` (`master`)
+- `YAP_VERSION` (`none`)
 
 Valid identifiers are as shown in the backend repositories or download
 websites. Setting the backend version build argument to `none` skips
