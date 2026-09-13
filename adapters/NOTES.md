@@ -81,22 +81,22 @@ Some Logtalk features are optional and require compatible support for specific
 (and sometimes not yet standard) features by the backend Prolog compilers. The
 following table summarizes the availability of these features:
 
-|  Compiler        |    Tabling    |  Coinduction  |    Unicode    |    Engines    |    Threads    |  Unbound Ints |  Clause Refs |  
-| :--------------: | :-----------: | :-----------: | :-----------: | :-----------: | :-----------: | :-----------: | :----------: |  
-|  B-Prolog        |      yes      |       no      |       no      |       no      |       no      |       no      |       no     |  
-|  Ciao Prolog     |      yes      |       no      |       no      |       no      |       no      |       no      |      yes     |  
-|  CxProlog        |       no      |     partial   |      yes      |       no      |       no      |       no      |       no     |  
-|  ECLiPSe         |       no      |     partial   |       no      |      yes      |     partial   |      yes      |       no     |  
-|  GNU Prolog      |       no      |       no      |       no      |       no      |       no      |       no      |       no     |  
-|  JIProlog        |       no      |       no      |      yes      |       no      |       no      |       no      |       no     |  
-|  Quintus Prolog  |       no      |       no      |       no      |       no      |       no      |       no      |      yes     |  
-|  SICStus Prolog  |       no      |      yes      |      yes      |       no      |       no      |      yes      |      yes     |  
-|  SWI-Prolog      |      yes      |      yes      |      yes      |      yes      |      yes      |      yes      |      yes     |  
-|  Tau Prolog      |       no      |       no      |      yes      |       no      |       no      |       no      |       no     |  
-|  Trealla Prolog  |       no      |       no      |      yes      |      yes      |      yes      |      yes      |      yes     |  
-|  XSB             |      yes      |       no      |       no      |       no      |       no      |       no      |       no     |  
-|  XVM             |       no      |      yes      |      yes      |       no      |       no      |      yes      |      yes     |  
-|  YAP             |      yes      |      yes      |      yes      |       no      |       no      |      yes      |      yes     |  
+|  Compiler        |   Tabling   |  Coinduction  |   Unicode   |   Engines   |    Threads    |  Unbound Ints |  Clause Refs |   Sockets   |  
+| :--------------: | :---------: | :-----------: | :---------: | :---------: | :-----------: | :-----------: | :----------: | :---------: |  
+|  B-Prolog        |     yes     |       no      |      no     |      no     |       no      |       no      |       no     |      no     |  
+|  Ciao Prolog     |     yes     |       no      |      no     |      no     |       no      |       no      |      yes     |      no     |   
+|  CxProlog        |      no     |     partial   |     yes     |      no     |       no      |       no      |       no     |      no     |   
+|  ECLiPSe         |      no     |     partial   |      no     |     yes     |     partial   |      yes      |       no     |     yes     |   
+|  GNU Prolog      |      no     |       no      |      no     |      no     |       no      |       no      |       no     |     yes     |   
+|  JIProlog        |      no     |       no      |     yes     |      no     |       no      |       no      |       no     |      no     |   
+|  Quintus Prolog  |      no     |       no      |      no     |      no     |       no      |       no      |      yes     |      no     |   
+|  SICStus Prolog  |      no     |      yes      |     yes     |      no     |       no      |      yes      |      yes     |     yes     |   
+|  SWI-Prolog      |     yes     |      yes      |     yes     |     yes     |      yes      |      yes      |      yes     |     yes     |   
+|  Tau Prolog      |      no     |       no      |     yes     |      no     |       no      |       no      |       no     |      no     |   
+|  Trealla Prolog  |     yes     |       no      |     yes     |     yes     |      yes      |      yes      |      yes     |     yes     |   
+|  XSB             |     yes     |       no      |      no     |      no     |       no      |       no      |       no     |      no     |   
+|  XVM             |      no     |      yes      |     yes     |      no     |       no      |      yes      |      yes     |     yes     |   
+|  YAP             |     yes     |      yes      |     yes     |      no     |       no      |      yes      |      yes     |      no     |   
 
 A value of "yes" means at least minimal support (i.e., some limitations may be
 present and a recent version of the Prolog system may be required). A value
@@ -414,8 +414,8 @@ and examples. These issues are expected to be solved soon. For the best
 experience, use the latest Tau Prolog git version.
 
 
-Trealla Prolog 2.84.29 and later versions
----------------------------------------
+Trealla Prolog 3.9.64 and later versions
+----------------------------------------
 
 	trealla.pl
 

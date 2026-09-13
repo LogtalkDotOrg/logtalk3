@@ -49,14 +49,16 @@ in included files where the initialization goals could be called out-of-order.
 Prolog adapter and integration files
 ------------------------------------
 
-* UPDATED: The SWI-Prolog adapter file table of proprietary predicate
-properties used by the linter.
+* CHANGED: The Trealla Prolog adapter file to require version 3.9.64 or later.
 
 * UPDATED: The Trealla Prolog adapter file for the tabling support added in
 its 3.0.0 version. Thanks to Andrew Davison for the patch file.
 
 * UPDATED: The Trealla Prolog adapter file tables of proprietary predicate
 properties and tautology/falsehood candidates used by the linter.
+
+* UPDATED: The SWI-Prolog adapter file table of proprietary predicate
+properties used by the linter.
 
 Documentation
 -------------

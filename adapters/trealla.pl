@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for Trealla Prolog 2.84.29 and later versions
-%  Last updated on July 26, 2026
+%  Adapter file for Trealla Prolog 3.9.64 and later versions
+%  Last updated on September 13, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -22,12 +22,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if((
-	current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)),
-	(Major,Minor,Patch) @>= (3,0,0)
-)).
-	:- use_module(library(tabling)).
-:- endif.
+:- use_module(library(tabling)).
 
 
 
@@ -278,21 +273,11 @@
 '$lgt_prolog_feature'(prolog_dialect, trealla).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(2, 84, 29))).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(3, 9, 64))).
 
 '$lgt_prolog_feature'(encoding_directive, source).
-'$lgt_prolog_feature'(sockets, Sockets) :-
-	(	current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)),
-		v(Major, Minor, Patch) @>= v(2, 90, 3) ->
-		Sockets = supported
-	;	Sockets = unsupported
-	).
-'$lgt_prolog_feature'(tabling, Tabling) :-
-	current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)),
-	(	(Major,Minor,Patch) @>= (3,0,0) ->
-		Tabling = supported
-	;	Tabling = unsupported
-	).
+'$lgt_prolog_feature'(sockets, supported).
+'$lgt_prolog_feature'(tabling, supported).
 '$lgt_prolog_feature'(engines, Engines) :-
 	(	predicate_property(message_queue_create(_, _), built_in) ->
 		Engines = supported
