@@ -24,9 +24,9 @@
 	imports([options, http_message_helpers, http_text_helpers])).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-09-12,
+		date is 2026-09-13,
 		comment is 'Process-backed HTTP transport predicates using the process library and helper processes.'
 	]).
 
@@ -593,38 +593,36 @@
 
 	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
 
-	setup_process_connection_streams(binary, Input, Output) :-
-		{set_stream_property(Input, encoding, octet)},
-		{set_stream_property(Output, encoding, octet)}.
-	setup_process_connection_streams(text, _Input, _Output).
+		setup_process_connection_streams(binary, Input, Output) :-
+			{set_stream_property(Input, encoding, octet)},
+			{set_stream_property(Output, encoding, octet)}.
+		setup_process_connection_streams(text, _Input, _Output).
 
 	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
 
-	setup_process_connection_streams(Type, Input, Output) :-
-		{set_stream_type(Input, Type)},
-		{set_stream_type(Output, Type)}.
+		setup_process_connection_streams(Type, Input, Output) :-
+			{set_stream_type(Input, Type)},
+			{set_stream_type(Output, Type)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 
-	setup_process_connection_streams(_Type, _Input, _Output).
+		setup_process_connection_streams(_Type, _Input, _Output).
 
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 
-	setup_process_connection_streams(Type, Input, Output) :-
-		{set_stream(Input, type(Type))},
-		{set_stream(Output, type(Type))}.
+		setup_process_connection_streams(Type, Input, Output) :-
+			{set_stream(Input, type(Type))},
+			{set_stream(Output, type(Type))}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, trealla)).
 
-	setup_process_connection_streams(Type, Input, Output) :-
-		{set_stream(Input, type(Type))},
-		{set_stream(Output, type(Type))}.
+		setup_process_connection_streams(_Type, _Input, _Output).
 
 	:- elif(current_logtalk_flag(prolog_dialect, xvm)).
 
-	setup_process_connection_streams(Type, Input, Output) :-
-		{set_stream_type(Input, Type)},
-		{set_stream_type(Output, Type)}.
+		setup_process_connection_streams(Type, Input, Output) :-
+			{set_stream_type(Input, Type)},
+			{set_stream_type(Output, Type)}.
 
 	:- endif.
 

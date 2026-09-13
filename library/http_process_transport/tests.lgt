@@ -41,9 +41,9 @@
 	implements(http_handler_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-06-19,
+		date is 2026-09-13,
 		comment is 'WebSocket handshake handler used by the "http_process_transport" library server-side tests.'
 	]).
 
@@ -140,25 +140,25 @@
 	test(http_process_transport_connection_streams_3_01, error(domain_error(http_socket_transport_connection, invalid_connection))) :-
 		http_process_transport::connection_streams(invalid_connection, _Input, _Output).
 
-	test(http_process_transport_open_listener_4_01, deterministic, [condition(executable_available(ncat))]) :-
+	test(http_process_transport_open_listener_4_01, deterministic) :-
 		http_process_transport::open_listener('127.0.0.1', Port, Listener, []),
 		integer(Port),
 		Port > 0,
 		http_process_transport::close_listener(Listener).
 
-	test(http_process_transport_open_listener_4_02, deterministic, [condition(executable_available(ncat))]) :-
+	test(http_process_transport_open_listener_4_02, deterministic) :-
 		http_process_transport::open_listener('127.0.0.1', Port, Listener, [backlog(1)]),
 		integer(Port),
 		Port > 0,
 		http_process_transport::close_listener(Listener).
 
-	test(http_process_transport_open_listener_4_03, deterministic, [condition(executable_available(ncat))]) :-
+	test(http_process_transport_open_listener_4_03, deterministic) :-
 		http_process_transport::open_listener('127.0.0.1', Port, Listener, [type(text)]),
 		integer(Port),
 		Port > 0,
 		http_process_transport::close_listener(Listener).
 
-	test(http_process_transport_open_listener_4_04, error(domain_error(http_process_transport_listener_tls_options, [tls_certificate_file(none), tls_key_file(none)])), [condition(executable_available(ncat))]) :-
+	test(http_process_transport_open_listener_4_04, error(domain_error(http_process_transport_listener_tls_options, [tls_certificate_file(none), tls_key_file(none)]))) :-
 		http_process_transport::open_listener('127.0.0.1', _Port, _Listener, [listener_transport(tls)]).
 
 	test(http_process_transport_open_listener_4_07, deterministic, [condition(tls_listener_available)]) :-
@@ -178,7 +178,7 @@
 		\+ os::file_exists(CertificateFile),
 		\+ os::file_exists(KeyFile).
 
-	test(http_process_transport_open_listener_4_05, deterministic, [condition(executable_available(ncat))]) :-
+	test(http_process_transport_open_listener_4_05, deterministic) :-
 		Request = request(get, origin('/ping'), http(1, 1), [host-host('example.com')], empty, [connection([close])]),
 		ResponseAtom = 'HTTP/1.1 200 OK\r\ncontent-length: 0\r\n\r\n',
 		setup_call_cleanup(
@@ -195,7 +195,7 @@
 			http_process_transport::close_listener(Listener)
 		).
 
-	test(http_process_transport_serve_once_3_01, deterministic, [condition(executable_available(ncat))]) :-
+	test(http_process_transport_serve_once_3_01, deterministic) :-
 		Request = request(get, origin('/ping'), http(1, 1), [host-host('example.com')], empty, [connection([close])]),
 		setup_call_cleanup(
 			http_process_transport::open_listener('127.0.0.1', Port, Listener, []),
@@ -211,7 +211,7 @@
 			http_process_transport::close_listener(Listener)
 		).
 
-	test(http_process_transport_serve_once_3_02, deterministic, [condition(executable_available(ncat))]) :-
+	test(http_process_transport_serve_once_3_02, deterministic) :-
 		ErrorRequest = request(get, origin('/error'), http(1, 1), [host-host('example.com')], empty, [connection([close])]),
 		OkRequest = request(get, origin('/ok'), http(1, 1), [host-host('example.com')], empty, [connection([close])]),
 		setup_call_cleanup(
@@ -234,7 +234,7 @@
 			http_process_transport::close_listener(Listener)
 		).
 
-	test(http_process_transport_serve_websocket_once_5_01, deterministic, [condition(executable_available(ncat))]) :-
+	test(http_process_transport_serve_websocket_once_5_01, deterministic) :-
 		Host = '127.0.0.1',
 		Path = '/socket',
 		Key = 'dGhlIHNhbXBsZSBub25jZQ==',
@@ -282,7 +282,7 @@
 
 	:- if(current_logtalk_flag(threads, supported)).
 
-		test(http_process_transport_exchange_4_02, deterministic, [condition(executable_available(ncat))]) :-
+		test(http_process_transport_exchange_4_02, deterministic) :-
 			Host = '127.0.0.1',
 			Request = request(get, origin('/ping'), http(1, 1), [host-host(Host)], empty, []),
 			http_process_transport::open_listener(Host, Port, Listener, []),
@@ -308,7 +308,7 @@
 				http_process_transport::close_listener(Listener)
 			).
 
-		test(http_process_transport_open_listener_4_06, deterministic, [condition(executable_available(ncat))]) :-
+		test(http_process_transport_open_listener_4_06, deterministic) :-
 			setup_call_cleanup(
 				http_process_transport::open_listener('127.0.0.1', Port, Listener, []),
 				(	threaded_once(server_accept_and_close_once(Listener), Tag),
@@ -371,7 +371,7 @@
 			compound(ClientInfo),
 			http_core::status(Response, status(200, 'OK')).
 
-		test(http_process_transport_serve_listener_5_01, deterministic, [condition(executable_available(ncat))]) :-
+		test(http_process_transport_serve_listener_5_01, deterministic) :-
 			Host = '127.0.0.1',
 			Request1 = request(post, origin('/one'), http(1, 1), [host-host(Host)], content('text/plain', text(one)), []),
 			Request2 = request(post, origin('/two'), http(1, 1), [host-host(Host)], content('text/plain', text(two)), []),
@@ -396,7 +396,7 @@
 				http_process_transport::close_listener(Listener)
 			).
 
-		test(http_process_transport_request_shutdown_1_01, deterministic, [condition(executable_available(ncat))]) :-
+		test(http_process_transport_request_shutdown_1_01, deterministic) :-
 			Control = serial_listener_control,
 			Request = request(post, origin('/serial-shutdown'), http(1, 1), [host-host('example.com')], content('text/plain', text(serial)), []),
 			http_process_transport::open_listener('127.0.0.1', Port, Listener, []),
@@ -408,7 +408,7 @@
 			http_core::status(Response, status(200, 'OK')),
 			http_core::body(Response, content('text/plain', text(serial))).
 
-		test(http_process_transport_serve_until_shutdown_4_01, deterministic, [condition(executable_available(ncat))]) :-
+		test(http_process_transport_serve_until_shutdown_4_01, deterministic) :-
 			Control = serial_connection_error_control,
 			ErrorRequest = request(get, origin('/error'), http(1, 1), [host-host('example.com')], empty, []),
 			OkRequest = request(get, origin('/ok'), http(1, 1), [host-host('example.com')], empty, []),
@@ -423,7 +423,7 @@
 			http_core::status(Response, status(200, 'OK')),
 			http_core::body(Response, content('text/plain', text(ok))).
 
-		test(http_process_transport_serve_until_shutdown_4_02, deterministic, [condition(executable_available(ncat))]) :-
+		test(http_process_transport_serve_until_shutdown_4_02, deterministic) :-
 			Control = threaded_connection_error_control,
 			ErrorRequest = request(get, origin('/error'), http(1, 1), [host-host('example.com')], empty, []),
 			OkRequest = request(get, origin('/ok'), http(1, 1), [host-host('example.com')], empty, []),
@@ -438,7 +438,7 @@
 			http_core::status(Response, status(200, 'OK')),
 			http_core::body(Response, content('text/plain', text(ok))).
 
-		test(http_process_transport_serve_until_shutdown_5_01, deterministic, [condition(executable_available(ncat))]) :-
+		test(http_process_transport_serve_until_shutdown_5_01, deterministic) :-
 			Control = control_ready,
 			http_process_transport::open_listener('127.0.0.1', _Port, Listener, []),
 			http_process_transport::serve_until_shutdown(Listener, echo_http_process_transport_handler, Control, [], request_ready_shutdown(Control)).

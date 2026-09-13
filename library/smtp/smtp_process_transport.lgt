@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-11,
+		date is 2026-09-13,
 		comment is 'Process-backed TLS transport support for the SMTP client.'
 	]).
 
@@ -74,7 +74,7 @@
 		process::create(ExecutablePath, Arguments, [stdin(Output), stdout(Input), stderr(Error), process(Process), type(binary)]),
 		Connection = smtp_process_connection(Input, Output, Error, Process),
 		catch(
-			setup_streams(Input, Output, Error),
+			setup_streams(Input, Output),
 			SetupError,
 			(	close(Connection),
 				throw(SetupError)
@@ -172,42 +172,35 @@
 
 	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
 
-		setup_streams(Input, Output, Error) :-
+		setup_streams(Input, Output) :-
 			{set_stream_property(Input, encoding, octet)},
-			{set_stream_property(Output, encoding, octet)},
-			{set_stream_property(Error, encoding, octet)}.
+			{set_stream_property(Output, encoding, octet)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
 
-		setup_streams(Input, Output, Error) :-
+		setup_streams(Input, Output) :-
 			{set_stream_type(Input, binary)},
-			{set_stream_type(Output, binary)},
-			{set_stream_type(Error, binary)}.
+			{set_stream_type(Output, binary)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 
-		setup_streams(_Input, _Output, _Error).
+		setup_streams(_Input, _Output).
 
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 
-		setup_streams(Input, Output, Error) :-
+		setup_streams(Input, Output) :-
 			{set_stream(Input, type(binary))},
-			{set_stream(Output, type(binary))},
-			{set_stream(Error, type(binary))}.
+			{set_stream(Output, type(binary))}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, trealla)).
 
-		setup_streams(Input, Output, Error) :-
-			{set_stream(Input, type(binary))},
-			{set_stream(Output, type(binary))},
-			{set_stream(Error, type(binary))}.
+		setup_streams(_Input, _Output).
 
 	:- elif(current_logtalk_flag(prolog_dialect, xvm)).
 
-		setup_streams(Input, Output, Error) :-
+		setup_streams(Input, Output) :-
 			{set_stream_type(Input, binary)},
-			{set_stream_type(Output, binary)},
-			{set_stream_type(Error, binary)}.
+			{set_stream_type(Output, binary)}.
 
 	:- endif.
 
