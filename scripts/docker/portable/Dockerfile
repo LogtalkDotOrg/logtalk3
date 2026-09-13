@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on September 12, 2026
+##   Last updated on September 13, 2026
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2017-2026 Paulo Moura <pmoura@logtalk.org>
@@ -43,7 +43,7 @@ ARG SWI_VERSION=master
 ARG TAU_VERSION=0.3.4
 ARG TREALLA_VERSION=main
 ARG XSB_VERSION=git-origin
-ARG YAP_VERSION=master
+ARG YAP_VERSION=none
 
 # Logtalk environment
 ENV LOGTALKHOME=/usr/local/share/logtalk

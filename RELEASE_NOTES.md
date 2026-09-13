@@ -410,6 +410,9 @@ Contributions
 Installers and installation scripts
 -----------------------------------
 
+* CHANGED: The portable Docker image to exclude YAP by default as its
+current git version is not usable and no tags for a stable version exist.
+
 * UPDATED: The portable Docker image to compile SWI-Prolog without its
 documentation (to avoid recurrent failures) and in optimized mode.
 
