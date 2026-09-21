@@ -133,10 +133,13 @@ Ready to start writing your own programs?
 the section on "Prolog integration and migration".
 
 2. Take a look at the [`coding`](coding) directory. There you will find
-syntax  support files for popular text editors that enable syntax coloring
+syntax support files for popular text editors that enable syntax coloring
 and other text services when editing Logtalk source files. There's also
 support for syntax highlighters used for publishing source code and for
-source code versioning systems.
+source code versioning systems. The recommended development environment
+is VSCode (or VSCodium) using the
+[Logtalk for VSCode](https://github.com/LogtalkDotOrg/logtalk-for-vscode)
+extension.
 
 3. The [`tools`](tools) directory contains a comprehensive set of developer
 tools to help you test, debug, analyze, and document your applications.
