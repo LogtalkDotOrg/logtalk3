@@ -139,26 +139,28 @@ support for syntax highlighters used for publishing source code and for
 source code versioning systems. The recommended development environment
 is VSCode (or VSCodium) using the
 [Logtalk for VSCode](https://github.com/LogtalkDotOrg/logtalk-for-vscode)
-extension.
+extension. There's also [Hercutalk](https://pypi.org/project/logtalk-jupyter-kernel/),
+a Jupyter kernel (supporting selected backends) if you prefer a notebook
+solution (most of the provided programming examples can be run as notebooks).
 
-3. The [`tools`](tools) directory contains a comprehensive set of developer
+1. The [`tools`](tools) directory contains a comprehensive set of developer
 tools to help you test, debug, analyze, and document your applications.
 
-4. Create a directory (preferably outside of your Logtalk user folder,
+1. Create a directory (preferably outside of your Logtalk user folder,
 which is updated when you update Logtalk) with a suitable name to hold
 all the files of your application.
 
-5. Copy or rename the [`samples/settings-sample.lgt`](samples/settings-sample.lgt)
+1. Copy or rename the [`samples/settings-sample.lgt`](samples/settings-sample.lgt)
 file to `settings.lgt`, and modify it to preload developer tools (e.g., the `help`
 and `debugger` tools), to define library aliases for your applications, to
 define default compiler flags, and more (see the comments in the file itself
 and the [`CUSTOMIZE.md`](CUSTOMIZE.md) file for details).
 
-6. Copy to your application directory the [`samples/loader-sample.lgt`](samples/loader-sample.lgt)
+1. Copy to your application directory the [`samples/loader-sample.lgt`](samples/loader-sample.lgt)
 file, rename it to `loader.lgt`, and modify it to load your application source
 files. You may also copy the [`samples/tester-sample.lgt`](samples/tester-sample.lgt)
 and [`samples/tests-sample.lgt`](samples/tests-sample.lgt) files, renaming
 them to `tester.lgt` and `tests.lgt`, and editing them to define and run your
 application unit tests.
 
-7. Have fun!
+1. Have fun!
