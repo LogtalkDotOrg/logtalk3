@@ -25,9 +25,9 @@ copyright = '1998-2026, Paulo Moura'
 author = 'Paulo Moura'
 
 # The short X.Y version
-version = '3.102.0'
+version = '3.103.0'
 # The full version, including alpha/beta/rc tags
-release = u'v3.102.0'
+release = u'v3.103.0'
 
 
 # -- General configuration ---------------------------------------------------
@@ -123,27 +123,34 @@ htmlhelp_basename = 'logtalkapis'
 # -- Options for LaTeX output ------------------------------------------------
 
 latex_elements = {
-    # The paper size ('letterpaper' or 'a4paper').
-    #
-    # 'papersize': 'letterpaper',
-
-    # The font size ('10pt', '11pt' or '12pt').
-    #
-    # 'pointsize': '10pt',
-
-    # Additional stuff for the LaTeX preamble.
-    #
-    # 'preamble': '',
-    'preamble': r'''
-        \usepackage{charter}
-        \usepackage[defaultsans]{lato}
-        \usepackage{inconsolata}
-        \usepackage[utf8]{inputenc}
+    'pointsize': '10pt',
+    'passoptionstopackages': r'''
+        \PassOptionsToPackage{bookmarksdepth=0}{hyperref}
     ''',
-
-    # Latex figure (float) alignment
-    #
-    # 'figure_align': 'htbp',
+    'preamble': r'''
+        \definecolor{LogtalkRed}{HTML}{8C1D18}
+        \definecolor{LogtalkBlue}{HTML}{245B78}
+        \definecolor{LogtalkCode}{HTML}{F3F5F7}
+        \definecolor{LogtalkCodeBorder}{HTML}{CCD3D8}
+        \let\sphinxcodeold\sphinxcode
+        \protected\def\sphinxcode#1{\textcolor{LogtalkRed}{\sphinxcodeold{#1}}}
+        \setlength{\parskip}{2pt plus 1pt minus 1pt}
+    ''',
+    'sphinxsetup': r'''
+        hmargin={1.8cm,1.8cm},
+        vmargin={2cm,2cm},
+        marginpar=1.2cm,
+        TitleColor={HTML}{8C1D18},
+        InnerLinkColor={HTML}{245B78},
+        OuterLinkColor={HTML}{245B78},
+        VerbatimColor={HTML}{F3F5F7},
+        VerbatimBorderColor={HTML}{CCD3D8},
+        verbatimwithframe=true,
+        verbatimwrapslines=true,
+        verbatimforcewraps=true,
+        verbatimmaxunderfull=2
+    ''',
+    'figure_align': 'htbp',
 }
 
 # Grouping the document tree into LaTeX files. List of tuples

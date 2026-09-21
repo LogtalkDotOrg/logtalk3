@@ -11,1199 +11,2380 @@ To load an entity, always load the library that includes it using the goal ``log
 Categories
 ----------
 
-.. toctree::
-   :maxdepth: 1
+.. only:: not latex
 
+   .. toctree::
+      :maxdepth: 1
 
+      amqp_pool <amqp_pool_0>
+      anomaly_detector_common <anomaly_detector_common_0>
+      application_common <application_common_0>
+      arbitrary <arbitrary_0>
+      assertions_messages <assertions_messages_0>
+      association_rule_miner_common <association_rule_miner_common_0>
+      authenticated_channel <authenticated_channel_0>
+      best_first <best_first_0>
+      blake2_core(Key,DigestSize) <blake2_core_2>
+      block_cipher_modes_common <block_cipher_modes_common_0>
+      ccsds_frames_types <ccsds_frames_types_0>
+      ccsds_packets_types <ccsds_packets_types_0>
+      ccsds_time_codes_types <ccsds_time_codes_types_0>
+      character_set <character_set_0>
+      class_hierarchy <class_hierarchy_0>
+      classifier_common <classifier_common_0>
+      clusterer_common <clusterer_common_0>
+      code_metric <code_metric_0>
+      code_metrics_messages <code_metrics_messages_0>
+      code_metrics_utilities <code_metrics_utilities_0>
+      command_line_option <command_line_option_0>
+      condorcet_victory_common <condorcet_victory_common_0>
+      constrained_optimization_solver <constrained_optimization_solver_0>
+      core_messages <core_messages_0>
+      counters <counters_0>
+      csv_guess_questions <csv_guess_questions_0>
+      dead_code_scanner_messages <dead_code_scanner_messages_0>
+      debugger_messages <debugger_messages_0>
+      diagram(Format) <diagram_1>
+      dimension_reducer_common <dimension_reducer_common_0>
+      directed_graph_common <directed_graph_common_0>
+      directory_diagram(Format) <directory_diagram_1>
+      ed25519 <ed25519_0>
+      file_diagram(Format) <file_diagram_1>
+      flags <flags_0>
+      flatting <flatting_0>
+      frequent_pattern_mining_common <frequent_pattern_mining_common_0>
+      genint_core <genint_core_0>
+      gensym_core <gensym_core_0>
+      glicko2_common <glicko2_common_0>
+      graph_common <graph_common_0>
+      graph_types <graph_types_0>
+      grouped_strength_ranker_common <grouped_strength_ranker_common_0>
+      html <html_0>
+      http_authentication_helpers <http_authentication_helpers_0>
+      http_docroot_paths <http_docroot_paths_0>
+      http_json_term_helpers <http_json_term_helpers_0>
+      http_message_helpers <http_message_helpers_0>
+      http_oauth_helpers <http_oauth_helpers_0>
+      http_origin_site_helpers <http_origin_site_helpers_0>
+      http_router <http_router_0>
+      http_router_basic_auth(Verifier,BaseOptions) <http_router_basic_auth_2>
+      http_router_digest_auth(Verifier,ProtectOptions,AuthenticationInfoOptions) <http_router_digest_auth_3>
+      http_router_htmx <http_router_htmx_0>
+      http_router_oauth(Verifier,BaseOptions) <http_router_oauth_2>
+      http_router_parameters <http_router_parameters_0>
+      http_router_server_session(Manager) <http_router_server_session_1>
+      http_text_helpers <http_text_helpers_0>
+      ieee_754_common(Precision,ByteOrder) <ieee_754_common_2>
+      interpolator <interpolator_0>
+      jwt_helpers <jwt_helpers_0>
+      language_detection_scoring <language_detection_scoring_0>
+      language_profile_common <language_profile_common_0>
+      lgtdoc_messages <lgtdoc_messages_0>
+      lgtunit_messages <lgtunit_messages_0>
+      library_diagram(Format) <library_diagram_1>
+      linda_client <linda_client_0>
+      linda_server <linda_server_0>
+      linear_programming_common <linear_programming_common_0>
+      linear_programming_types <linear_programming_types_0>
+      listing <listing_0>
+      local_optimization_solver(Problem) <local_optimization_solver_1>
+      logging <logging_0>
+      mapped_single_byte_character_set <mapped_single_byte_character_set_0>
+      mcp_server_application <mcp_server_application_0>
+      monitor <monitor_0>
+      mutation_testing_messages <mutation_testing_messages_0>
+      mutations <mutations_0>
+      mutator_common <mutator_common_0>
+      observer <observer_0>
+      ode_solver(System) <ode_solver_1>
+      open_id_helpers <open_id_helpers_0>
+      options <options_0>
+      os_types <os_types_0>
+      packs_common <packs_common_0>
+      packs_messages <packs_messages_0>
+      pairwise_strength_ranker_common <pairwise_strength_ranker_common_0>
+      paseto_claims_helpers <paseto_claims_helpers_0>
+      paseto_helpers <paseto_helpers_0>
+      pattern_miner_common <pattern_miner_common_0>
+      plackett_luce_common <plackett_luce_common_0>
+      probabilistic_classifier_common <probabilistic_classifier_common_0>
+      proto_hierarchy <proto_hierarchy_0>
+      quadrature(Function) <quadrature_1>
+      ranker_common <ranker_common_0>
+      ranking_dataset_common <ranking_dataset_common_0>
+      read_file <read_file_0>
+      recorded_database_core <recorded_database_core_0>
+      regressor_common <regressor_common_0>
+      rest <rest_0>
+      root_finder(Function) <root_finder_1>
+      score_ranker_common <score_ranker_common_0>
+      score_ranker_model_common <score_ranker_model_common_0>
+      search_indexing <search_indexing_0>
+      sequential_pattern_mining_common <sequential_pattern_mining_common_0>
+      single_byte_character_set(MaxCode) <single_byte_character_set_1>
+      statistics <statistics_0>
+      subject <subject_0>
+      text_case_folding <text_case_folding_0>
+      text_diacritics <text_diacritics_0>
+      text_entities <text_entities_0>
+      text_unicode <text_unicode_0>
+      text_whitespace <text_whitespace_0>
+      tokenizer_rules <tokenizer_rules_0>
+      tool_diagnostics_common <tool_diagnostics_common_0>
+      tutor_explanations <tutor_explanations_0>
+      ulid_types <ulid_types_0>
+      undirected_graph_common <undirected_graph_common_0>
+      unweighted_graph_common(Dictionary) <unweighted_graph_common_1>
+      utf_16_character_set(Endian) <utf_16_character_set_1>
+      utf_32_character_set(Endian) <utf_32_character_set_1>
+      weighted_graph_common(Dictionary) <weighted_graph_common_1>
+      x25519 <x25519_0>
+      xchacha20_poly1305 <xchacha20_poly1305_0>
 
-   amqp_pool <amqp_pool_0>
-   anomaly_detector_common <anomaly_detector_common_0>
-   application_common <application_common_0>
-   arbitrary <arbitrary_0>
-   assertions_messages <assertions_messages_0>
-   association_rule_miner_common <association_rule_miner_common_0>
-   authenticated_channel <authenticated_channel_0>
-   best_first <best_first_0>
-   blake2_core(Key,DigestSize) <blake2_core_2>
-   block_cipher_modes_common <block_cipher_modes_common_0>
-   ccsds_frames_types <ccsds_frames_types_0>
-   ccsds_packets_types <ccsds_packets_types_0>
-   ccsds_time_codes_types <ccsds_time_codes_types_0>
-   character_set <character_set_0>
-   class_hierarchy <class_hierarchy_0>
-   classifier_common <classifier_common_0>
-   clusterer_common <clusterer_common_0>
-   code_metric <code_metric_0>
-   code_metrics_messages <code_metrics_messages_0>
-   code_metrics_utilities <code_metrics_utilities_0>
-   command_line_option <command_line_option_0>
-   condorcet_victory_common <condorcet_victory_common_0>
-   constrained_optimization_solver <constrained_optimization_solver_0>
-   core_messages <core_messages_0>
-   counters <counters_0>
-   csv_guess_questions <csv_guess_questions_0>
-   dead_code_scanner_messages <dead_code_scanner_messages_0>
-   debugger_messages <debugger_messages_0>
-   diagram(Format) <diagram_1>
-   dimension_reducer_common <dimension_reducer_common_0>
-   directed_graph_common <directed_graph_common_0>
-   directory_diagram(Format) <directory_diagram_1>
-   ed25519 <ed25519_0>
-   file_diagram(Format) <file_diagram_1>
-   flags <flags_0>
-   flatting <flatting_0>
-   frequent_pattern_mining_common <frequent_pattern_mining_common_0>
-   genint_core <genint_core_0>
-   gensym_core <gensym_core_0>
-   glicko2_common <glicko2_common_0>
-   graph_common <graph_common_0>
-   graph_types <graph_types_0>
-   grouped_strength_ranker_common <grouped_strength_ranker_common_0>
-   html <html_0>
-   http_authentication_helpers <http_authentication_helpers_0>
-   http_docroot_paths <http_docroot_paths_0>
-   http_json_term_helpers <http_json_term_helpers_0>
-   http_message_helpers <http_message_helpers_0>
-   http_oauth_helpers <http_oauth_helpers_0>
-   http_origin_site_helpers <http_origin_site_helpers_0>
-   http_router <http_router_0>
-   http_router_basic_auth(Verifier,BaseOptions) <http_router_basic_auth_2>
-   http_router_digest_auth(Verifier,ProtectOptions,AuthenticationInfoOptions) <http_router_digest_auth_3>
-   http_router_htmx <http_router_htmx_0>
-   http_router_oauth(Verifier,BaseOptions) <http_router_oauth_2>
-   http_router_parameters <http_router_parameters_0>
-   http_router_server_session(Manager) <http_router_server_session_1>
-   http_text_helpers <http_text_helpers_0>
-   ieee_754_common(Precision,ByteOrder) <ieee_754_common_2>
-   interpolator <interpolator_0>
-   jwt_helpers <jwt_helpers_0>
-   language_detection_scoring <language_detection_scoring_0>
-   language_profile_common <language_profile_common_0>
-   lgtdoc_messages <lgtdoc_messages_0>
-   lgtunit_messages <lgtunit_messages_0>
-   library_diagram(Format) <library_diagram_1>
-   linda_client <linda_client_0>
-   linda_server <linda_server_0>
-   linear_programming_common <linear_programming_common_0>
-   linear_programming_types <linear_programming_types_0>
-   listing <listing_0>
-   local_optimization_solver(Problem) <local_optimization_solver_1>
-   logging <logging_0>
-   mapped_single_byte_character_set <mapped_single_byte_character_set_0>
-   mcp_server_application <mcp_server_application_0>
-   monitor <monitor_0>
-   mutation_testing_messages <mutation_testing_messages_0>
-   mutations <mutations_0>
-   mutator_common <mutator_common_0>
-   observer <observer_0>
-   ode_solver(System) <ode_solver_1>
-   open_id_helpers <open_id_helpers_0>
-   options <options_0>
-   os_types <os_types_0>
-   packs_common <packs_common_0>
-   packs_messages <packs_messages_0>
-   pairwise_strength_ranker_common <pairwise_strength_ranker_common_0>
-   paseto_claims_helpers <paseto_claims_helpers_0>
-   paseto_helpers <paseto_helpers_0>
-   pattern_miner_common <pattern_miner_common_0>
-   plackett_luce_common <plackett_luce_common_0>
-   probabilistic_classifier_common <probabilistic_classifier_common_0>
-   proto_hierarchy <proto_hierarchy_0>
-   quadrature(Function) <quadrature_1>
-   ranker_common <ranker_common_0>
-   ranking_dataset_common <ranking_dataset_common_0>
-   read_file <read_file_0>
-   recorded_database_core <recorded_database_core_0>
-   regressor_common <regressor_common_0>
-   rest <rest_0>
-   root_finder(Function) <root_finder_1>
-   score_ranker_common <score_ranker_common_0>
-   score_ranker_model_common <score_ranker_model_common_0>
-   search_indexing <search_indexing_0>
-   sequential_pattern_mining_common <sequential_pattern_mining_common_0>
-   single_byte_character_set(MaxCode) <single_byte_character_set_1>
-   statistics <statistics_0>
-   subject <subject_0>
-   text_case_folding <text_case_folding_0>
-   text_diacritics <text_diacritics_0>
-   text_entities <text_entities_0>
-   text_unicode <text_unicode_0>
-   text_whitespace <text_whitespace_0>
-   tokenizer_rules <tokenizer_rules_0>
-   tool_diagnostics_common <tool_diagnostics_common_0>
-   tutor_explanations <tutor_explanations_0>
-   ulid_types <ulid_types_0>
-   undirected_graph_common <undirected_graph_common_0>
-   unweighted_graph_common(Dictionary) <unweighted_graph_common_1>
-   utf_16_character_set(Endian) <utf_16_character_set_1>
-   utf_32_character_set(Endian) <utf_32_character_set_1>
-   weighted_graph_common(Dictionary) <weighted_graph_common_1>
-   x25519 <x25519_0>
-   xchacha20_poly1305 <xchacha20_poly1305_0>
+.. only:: latex
+
+   * :doc:`amqp_pool <amqp_pool_0>`
+   * :doc:`anomaly_detector_common <anomaly_detector_common_0>`
+   * :doc:`application_common <application_common_0>`
+   * :doc:`arbitrary <arbitrary_0>`
+   * :doc:`assertions_messages <assertions_messages_0>`
+   * :doc:`association_rule_miner_common <association_rule_miner_common_0>`
+   * :doc:`authenticated_channel <authenticated_channel_0>`
+   * :doc:`best_first <best_first_0>`
+   * :doc:`blake2_core(Key,DigestSize) <blake2_core_2>`
+   * :doc:`block_cipher_modes_common <block_cipher_modes_common_0>`
+   * :doc:`ccsds_frames_types <ccsds_frames_types_0>`
+   * :doc:`ccsds_packets_types <ccsds_packets_types_0>`
+   * :doc:`ccsds_time_codes_types <ccsds_time_codes_types_0>`
+   * :doc:`character_set <character_set_0>`
+   * :doc:`class_hierarchy <class_hierarchy_0>`
+   * :doc:`classifier_common <classifier_common_0>`
+   * :doc:`clusterer_common <clusterer_common_0>`
+   * :doc:`code_metric <code_metric_0>`
+   * :doc:`code_metrics_messages <code_metrics_messages_0>`
+   * :doc:`code_metrics_utilities <code_metrics_utilities_0>`
+   * :doc:`command_line_option <command_line_option_0>`
+   * :doc:`condorcet_victory_common <condorcet_victory_common_0>`
+   * :doc:`constrained_optimization_solver <constrained_optimization_solver_0>`
+   * :doc:`core_messages <core_messages_0>`
+   * :doc:`counters <counters_0>`
+   * :doc:`csv_guess_questions <csv_guess_questions_0>`
+   * :doc:`dead_code_scanner_messages <dead_code_scanner_messages_0>`
+   * :doc:`debugger_messages <debugger_messages_0>`
+   * :doc:`diagram(Format) <diagram_1>`
+   * :doc:`dimension_reducer_common <dimension_reducer_common_0>`
+   * :doc:`directed_graph_common <directed_graph_common_0>`
+   * :doc:`directory_diagram(Format) <directory_diagram_1>`
+   * :doc:`ed25519 <ed25519_0>`
+   * :doc:`file_diagram(Format) <file_diagram_1>`
+   * :doc:`flags <flags_0>`
+   * :doc:`flatting <flatting_0>`
+   * :doc:`frequent_pattern_mining_common <frequent_pattern_mining_common_0>`
+   * :doc:`genint_core <genint_core_0>`
+   * :doc:`gensym_core <gensym_core_0>`
+   * :doc:`glicko2_common <glicko2_common_0>`
+   * :doc:`graph_common <graph_common_0>`
+   * :doc:`graph_types <graph_types_0>`
+   * :doc:`grouped_strength_ranker_common <grouped_strength_ranker_common_0>`
+   * :doc:`html <html_0>`
+   * :doc:`http_authentication_helpers <http_authentication_helpers_0>`
+   * :doc:`http_docroot_paths <http_docroot_paths_0>`
+   * :doc:`http_json_term_helpers <http_json_term_helpers_0>`
+   * :doc:`http_message_helpers <http_message_helpers_0>`
+   * :doc:`http_oauth_helpers <http_oauth_helpers_0>`
+   * :doc:`http_origin_site_helpers <http_origin_site_helpers_0>`
+   * :doc:`http_router <http_router_0>`
+   * :doc:`http_router_basic_auth(Verifier,BaseOptions) <http_router_basic_auth_2>`
+   * :doc:`http_router_digest_auth(Verifier,ProtectOptions,AuthenticationInfoOptions) <http_router_digest_auth_3>`
+   * :doc:`http_router_htmx <http_router_htmx_0>`
+   * :doc:`http_router_oauth(Verifier,BaseOptions) <http_router_oauth_2>`
+   * :doc:`http_router_parameters <http_router_parameters_0>`
+   * :doc:`http_router_server_session(Manager) <http_router_server_session_1>`
+   * :doc:`http_text_helpers <http_text_helpers_0>`
+   * :doc:`ieee_754_common(Precision,ByteOrder) <ieee_754_common_2>`
+   * :doc:`interpolator <interpolator_0>`
+   * :doc:`jwt_helpers <jwt_helpers_0>`
+   * :doc:`language_detection_scoring <language_detection_scoring_0>`
+   * :doc:`language_profile_common <language_profile_common_0>`
+   * :doc:`lgtdoc_messages <lgtdoc_messages_0>`
+   * :doc:`lgtunit_messages <lgtunit_messages_0>`
+   * :doc:`library_diagram(Format) <library_diagram_1>`
+   * :doc:`linda_client <linda_client_0>`
+   * :doc:`linda_server <linda_server_0>`
+   * :doc:`linear_programming_common <linear_programming_common_0>`
+   * :doc:`linear_programming_types <linear_programming_types_0>`
+   * :doc:`listing <listing_0>`
+   * :doc:`local_optimization_solver(Problem) <local_optimization_solver_1>`
+   * :doc:`logging <logging_0>`
+   * :doc:`mapped_single_byte_character_set <mapped_single_byte_character_set_0>`
+   * :doc:`mcp_server_application <mcp_server_application_0>`
+   * :doc:`monitor <monitor_0>`
+   * :doc:`mutation_testing_messages <mutation_testing_messages_0>`
+   * :doc:`mutations <mutations_0>`
+   * :doc:`mutator_common <mutator_common_0>`
+   * :doc:`observer <observer_0>`
+   * :doc:`ode_solver(System) <ode_solver_1>`
+   * :doc:`open_id_helpers <open_id_helpers_0>`
+   * :doc:`options <options_0>`
+   * :doc:`os_types <os_types_0>`
+   * :doc:`packs_common <packs_common_0>`
+   * :doc:`packs_messages <packs_messages_0>`
+   * :doc:`pairwise_strength_ranker_common <pairwise_strength_ranker_common_0>`
+   * :doc:`paseto_claims_helpers <paseto_claims_helpers_0>`
+   * :doc:`paseto_helpers <paseto_helpers_0>`
+   * :doc:`pattern_miner_common <pattern_miner_common_0>`
+   * :doc:`plackett_luce_common <plackett_luce_common_0>`
+   * :doc:`probabilistic_classifier_common <probabilistic_classifier_common_0>`
+   * :doc:`proto_hierarchy <proto_hierarchy_0>`
+   * :doc:`quadrature(Function) <quadrature_1>`
+   * :doc:`ranker_common <ranker_common_0>`
+   * :doc:`ranking_dataset_common <ranking_dataset_common_0>`
+   * :doc:`read_file <read_file_0>`
+   * :doc:`recorded_database_core <recorded_database_core_0>`
+   * :doc:`regressor_common <regressor_common_0>`
+   * :doc:`rest <rest_0>`
+   * :doc:`root_finder(Function) <root_finder_1>`
+   * :doc:`score_ranker_common <score_ranker_common_0>`
+   * :doc:`score_ranker_model_common <score_ranker_model_common_0>`
+   * :doc:`search_indexing <search_indexing_0>`
+   * :doc:`sequential_pattern_mining_common <sequential_pattern_mining_common_0>`
+   * :doc:`single_byte_character_set(MaxCode) <single_byte_character_set_1>`
+   * :doc:`statistics <statistics_0>`
+   * :doc:`subject <subject_0>`
+   * :doc:`text_case_folding <text_case_folding_0>`
+   * :doc:`text_diacritics <text_diacritics_0>`
+   * :doc:`text_entities <text_entities_0>`
+   * :doc:`text_unicode <text_unicode_0>`
+   * :doc:`text_whitespace <text_whitespace_0>`
+   * :doc:`tokenizer_rules <tokenizer_rules_0>`
+   * :doc:`tool_diagnostics_common <tool_diagnostics_common_0>`
+   * :doc:`tutor_explanations <tutor_explanations_0>`
+   * :doc:`ulid_types <ulid_types_0>`
+   * :doc:`undirected_graph_common <undirected_graph_common_0>`
+   * :doc:`unweighted_graph_common(Dictionary) <unweighted_graph_common_1>`
+   * :doc:`utf_16_character_set(Endian) <utf_16_character_set_1>`
+   * :doc:`utf_32_character_set(Endian) <utf_32_character_set_1>`
+   * :doc:`weighted_graph_common(Dictionary) <weighted_graph_common_1>`
+   * :doc:`x25519 <x25519_0>`
+   * :doc:`xchacha20_poly1305 <xchacha20_poly1305_0>`
 
 Objects
 -------
 
-.. toctree::
-   :maxdepth: 1
+.. only:: not latex
 
+   .. toctree::
+      :maxdepth: 1
 
+      a_star_interpreter(W) <a_star_interpreter_1>
+      adaptive_boosting_classifier <adaptive_boosting_classifier_0>
+      adaptive_simpson_quadrature(Function) <adaptive_simpson_quadrature_1>
+      aes128 <aes128_0>
+      aes192 <aes192_0>
+      aes256 <aes256_0>
+      aes_common(KeySize,Nk,Nr) <aes_common_3>
+      af_language_profile <af_language_profile_0>
+      after_event_registry <after_event_registry_0>
+      agglomerative_clusterer <agglomerative_clusterer_0>
+      amqp <amqp_0>
+      ant_colony(Problem) <ant_colony_1>
+      ant_colony(Problem,RandomAlgorithm) <ant_colony_2>
+      apriori_pattern_miner <apriori_pattern_miner_0>
+      ar_language_profile <ar_language_profile_0>
+      arithmetic_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <arithmetic_operator_replacement_5>
+      arrangements <arrangements_0>
+      assertions <assertions_0>
+      assertions(Mode) <assertions_1>
+      assignvars <assignvars_0>
+      association_rule_miner <association_rule_miner_0>
+      atom <atom_0>
+      atomic <atomic_0>
+      augmented_lagrangian(Problem,InnerSolver) <augmented_lagrangian_2>
+      automation_report <automation_report_0>
+      avltree <avltree_0>
+      avro <avro_0>
+      backend_adapter_hook <backend_adapter_hook_0>
+      backend_random <backend_random_0>
+      barrier_sub_problem(Problem,OuterIteration,StartPoint,Mu,Rho,Sign) <barrier_sub_problem_6>
+      barycentric_interpolator <barycentric_interpolator_0>
+      barzilai_borwein(Problem) <barzilai_borwein_1>
+      base32 <base32_0>
+      base58 <base58_0>
+      base64 <base64_0>
+      base64url <base64url_0>
+      base64url_no_padding <base64url_no_padding_0>
+      base85 <base85_0>
+      bayesian_ridge_regression <bayesian_ridge_regression_0>
+      before_event_registry <before_event_registry_0>
+      benchmark_generators <benchmark_generators_0>
+      bfgs(Problem) <bfgs_1>
+      bfs_interpreter <bfs_interpreter_0>
+      bg_language_profile <bg_language_profile_0>
+      binary_heap(Order) <binary_heap_1>
+      binary_heap_max <binary_heap_max_0>
+      binary_heap_min <binary_heap_min_0>
+      bintree <bintree_0>
+      bisection_root_finder(Function) <bisection_root_finder_1>
+      blake2b <blake2b_0>
+      blake2b(Key,DigestSize) <blake2b_2>
+      blake2s <blake2s_0>
+      blake2s(Key,DigestSize) <blake2s_2>
+      blank_grammars(Format) <blank_grammars_1>
+      bn_language_profile <bn_language_profile_0>
+      body_goal_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <body_goal_negation_5>
+      borda_ranker <borda_ranker_0>
+      br_language_profile <br_language_profile_0>
+      bradley_terry_ranker <bradley_terry_ranker_0>
+      brent_root_finder(Function) <brent_root_finder_1>
+      bson <bson_0>
+      bson(StringRepresentation) <bson_1>
+      bup_interpreter <bup_interpreter_0>
+      byte_order <byte_order_0>
+      c45_classifier <c45_classifier_0>
+      ca_language_profile <ca_language_profile_0>
+      callable <callable_0>
+      caller_diagram <caller_diagram_0>
+      caller_diagram(Format) <caller_diagram_1>
+      cartesian_products <cartesian_products_0>
+      cbc <cbc_0>
+      cbor <cbor_0>
+      cbor(StringRepresentation) <cbor_1>
+      cc_metric <cc_metric_0>
+      ccsds_aos_frames(FrameLength,InsertZoneLength,HasOCF,HasFECF) <ccsds_aos_frames_4>
+      ccsds_ccs(CalendarVariant,FractionOctets) <ccsds_ccs_2>
+      ccsds_cds(DaySegmentOctets,SubmillisecondOctets,Epoch) <ccsds_cds_3>
+      ccsds_cuc(CoarseOctets,FineOctets,Epoch) <ccsds_cuc_3>
+      ccsds_frames <ccsds_frames_0>
+      ccsds_link_profiles <ccsds_link_profiles_0>
+      ccsds_packet_services <ccsds_packet_services_0>
+      ccsds_packetization <ccsds_packetization_0>
+      ccsds_packets <ccsds_packets_0>
+      ccsds_packets(SecondaryHeaderLength) <ccsds_packets_1>
+      ccsds_tc_frames(FrameLength,SegmentHeaderLength,HasFECF) <ccsds_tc_frames_3>
+      ccsds_tc_services <ccsds_tc_services_0>
+      ccsds_time_codes <ccsds_time_codes_0>
+      ccsds_time_fields <ccsds_time_fields_0>
+      ccsds_tm_frames(FrameLength,SecondaryHeaderLength,HasFECF) <ccsds_tm_frames_3>
+      character <character_0>
+      clauses_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <clauses_reordering_5>
+      clo_span_pattern_miner <clo_span_pattern_miner_0>
+      cmac <cmac_0>
+      cobertura_report <cobertura_report_0>
+      code_metrics <code_metrics_0>
+      cogc_metric <cogc_metric_0>
+      colley_ranker <colley_ranker_0>
+      combinations <combinations_0>
+      command_line_options <command_line_options_0>
+      compound <compound_0>
+      conjugate_gradient(Problem) <conjugate_gradient_1>
+      copeland_ranker <copeland_ranker_0>
+      coroutining <coroutining_0>
+      counter <counter_0>
+      coupling_metric <coupling_metric_0>
+      coverage_report <coverage_report_0>
+      crc32_non_reflected(Polynomial,Initial,FinalXor,AppendLength) <crc32_non_reflected_4>
+      crc32_reflected(Polynomial) <crc32_reflected_1>
+      crc32b <crc32b_0>
+      crc32bzip2 <crc32bzip2_0>
+      crc32c <crc32c_0>
+      crc32mpeg2 <crc32mpeg2_0>
+      crc32posix <crc32posix_0>
+      crc32q <crc32q_0>
+      crontab <crontab_0>
+      crontab(Representation) <crontab_1>
+      crs_projections <crs_projections_0>
+      crypto <crypto_0>
+      cs_language_profile <cs_language_profile_0>
+      csv <csv_0>
+      csv(Header,Separator,IgnoreQuotes) <csv_3>
+      csv(Header,Separator,IgnoreQuotes,Comments) <csv_4>
+      ctr <ctr_0>
+      ctrf_output <ctrf_output_0>
+      ctrf_report <ctrf_report_0>
+      cubic_spline_interpolator <cubic_spline_interpolator_0>
+      cuid2 <cuid2_0>
+      cuid2(Representation,Size,Alphabet) <cuid2_3>
+      cusum_anomaly_detector <cusum_anomaly_detector_0>
+      cytoscapejs_graph_language <cytoscapejs_graph_language_0>
+      d2_graph_language <d2_graph_language_0>
+      da_language_profile <da_language_profile_0>
+      datalog <datalog_0>
+      date <date_0>
+      dates_tz <dates_tz_0>
+      dbscan_clusterer <dbscan_clusterer_0>
+      de_language_profile <de_language_profile_0>
+      dead_code_scanner <dead_code_scanner_0>
+      debug_expansion(Mode) <debug_expansion_1>
+      debug_messages <debug_messages_0>
+      debugger <debugger_0>
+      default_atom_mutations <default_atom_mutations_0>
+      default_compound_mutations <default_compound_mutations_0>
+      default_float_mutations <default_float_mutations_0>
+      default_integer_mutations <default_integer_mutations_0>
+      default_list_mutations <default_list_mutations_0>
+      default_text_normalization <default_text_normalization_0>
+      default_workflow_hook <default_workflow_hook_0>
+      demodb <demodb_0>
+      deque <deque_0>
+      derangements <derangements_0>
+      dfs_interpreter <dfs_interpreter_0>
+      diagrams <diagrams_0>
+      diagrams(Format) <diagrams_1>
+      dif <dif_0>
+      differential_evolution(Problem) <differential_evolution_1>
+      differential_evolution(Problem,RandomAlgorithm) <differential_evolution_2>
+      difflist <difflist_0>
+      directory_dependency_diagram <directory_dependency_diagram_0>
+      directory_dependency_diagram(Format) <directory_dependency_diagram_1>
+      directory_load_diagram <directory_load_diagram_0>
+      directory_load_diagram(Format) <directory_load_diagram_1>
+      dit_metric <dit_metric_0>
+      djb2_32 <djb2_32_0>
+      djb2_64 <djb2_64_0>
+      doc_metric <doc_metric_0>
+      doclet <doclet_0>
+      dot_graph_language <dot_graph_language_0>
+      dump_trace <dump_trace_0>
+      ecb <ecb_0>
+      eclat_pattern_miner <eclat_pattern_miner_0>
+      edcg <edcg_0>
+      either <either_0>
+      el_language_profile <el_language_profile_0>
+      elastic_net_regression <elastic_net_regression_0>
+      elo_ranker <elo_ranker_0>
+      en_language_profile <en_language_profile_0>
+      english_lemmatizer <english_lemmatizer_0>
+      english_tokenizer <english_tokenizer_0>
+      entity_diagram <entity_diagram_0>
+      entity_diagram(Format) <entity_diagram_1>
+      eo_language_profile <eo_language_profile_0>
+      es_language_profile <es_language_profile_0>
+      et_language_profile <et_language_profile_0>
+      eu_language_profile <eu_language_profile_0>
+      euler_ode_solver(System) <euler_ode_solver_1>
+      event_registry <event_registry_0>
+      ewma_anomaly_detector <ewma_anomaly_detector_0>
+      expand_library_alias_paths <expand_library_alias_paths_0>
+      expected <expected_0>
+      expected(Expected) <expected_1>
+      fa_language_profile <fa_language_profile_0>
+      fail_insertion(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <fail_insertion_5>
+      fast_random <fast_random_0>
+      fast_random(Algorithm) <fast_random_1>
+      fcube <fcube_0>
+      fi_language_profile <fi_language_profile_0>
+      file_dependency_diagram <file_dependency_diagram_0>
+      file_dependency_diagram(Format) <file_dependency_diagram_1>
+      file_load_diagram <file_load_diagram_0>
+      file_load_diagram(Format) <file_load_diagram_1>
+      fips202_fixed_hash(RateBytes,Suffix,OutputBytes) <fips202_fixed_hash_3>
+      fips202_hash(RateBytes,Suffix,OutputBytes) <fips202_hash_3>
+      float <float_0>
+      fnv1a_32 <fnv1a_32_0>
+      fnv1a_64 <fnv1a_64_0>
+      format <format_0>
+      fp_growth_pattern_miner <fp_growth_pattern_miner_0>
+      fr_language_profile <fr_language_profile_0>
+      ga_language_profile <ga_language_profile_0>
+      gauss_legendre_quadrature(Function) <gauss_legendre_quadrature_1>
+      gaussian_mixture_clusterer <gaussian_mixture_clusterer_0>
+      gaussian_process_regression <gaussian_process_regression_0>
+      generalized_ripple_down_rules <generalized_ripple_down_rules_0>
+      genetic_algorithm(Problem) <genetic_algorithm_1>
+      genetic_algorithm(Problem,RandomAlgorithm) <genetic_algorithm_2>
+      genint <genint_0>
+      gensym <gensym_0>
+      geohash <geohash_0>
+      geojson <geojson_0>
+      geojson(ObjectRepresentation,PairRepresentation,StringRepresentation) <geojson_3>
+      geospatial <geospatial_0>
+      git <git_0>
+      gl_language_profile <gl_language_profile_0>
+      glicko2_periodic_ranker <glicko2_periodic_ranker_0>
+      glicko2_ranker <glicko2_ranker_0>
+      gpx <gpx_0>
+      gradient_boosting_classifier <gradient_boosting_classifier_0>
+      gradient_boosting_regression <gradient_boosting_regression_0>
+      gradient_descent(Problem) <gradient_descent_1>
+      grammar_rules_hook <grammar_rules_hook_0>
+      graph_language_registry <graph_language_registry_0>
+      gravatar <gravatar_0>
+      gravatar_api <gravatar_api_0>
+      gsp_pattern_miner <gsp_pattern_miner_0>
+      ha_language_profile <ha_language_profile_0>
+      halstead_metric <halstead_metric_0>
+      halstead_metric(Stroud) <halstead_metric_1>
+      hash_common_32 <hash_common_32_0>
+      hash_common_64 <hash_common_64_0>
+      hdbscan_clusterer <hdbscan_clusterer_0>
+      he_language_profile <he_language_profile_0>
+      head_arguments_mutation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <head_arguments_mutation_5>
+      head_arguments_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <head_arguments_reordering_5>
+      heap(Order) <heap_1>
+      help <help_0>
+      heuristic_expansion(Mode) <heuristic_expansion_1>
+      hi_language_profile <hi_language_profile_0>
+      hierarchical_clustering <hierarchical_clustering_0>
+      hmac <hmac_0>
+      hodge_rank <hodge_rank_0>
+      hook_pipeline(Pipeline) <hook_pipeline_1>
+      hook_set(Set) <hook_set_1>
+      hr_language_profile <hr_language_profile_0>
+      html5 <html5_0>
+      http_authenticate <http_authenticate_0>
+      http_client <http_client_0>
+      http_client_core <http_client_core_0>
+      http_client_digest_session <http_client_digest_session_0>
+      http_client_digest_session(HTTPTransport) <http_client_digest_session_1>
+      http_client_session <http_client_session_0>
+      http_client_session(HTTPTransport) <http_client_session_1>
+      http_cookie_jar <http_cookie_jar_0>
+      http_cookies(Representation) <http_cookies_1>
+      http_core <http_core_0>
+      http_cors <http_cors_0>
+      http_digest <http_digest_0>
+      http_directory_listing <http_directory_listing_0>
+      http_form_body_codec <http_form_body_codec_0>
+      http_htmx <http_htmx_0>
+      http_htpasswd_verifier(Path) <http_htpasswd_verifier_1>
+      http_json_body_codec <http_json_body_codec_0>
+      http_multipart <http_multipart_0>
+      http_oauth <http_oauth_0>
+      http_oauth_exact_scope_checker <http_oauth_exact_scope_checker_0>
+      http_oauth_introspection_client <http_oauth_introspection_client_0>
+      http_oauth_introspection_verifier(Endpoint,Options) <http_oauth_introspection_verifier_2>
+      http_oauth_jwt_verifier(KeyOrJWKSet,Options) <http_oauth_jwt_verifier_2>
+      http_oauth_metadata <http_oauth_metadata_0>
+      http_octet_stream_body_codec <http_octet_stream_body_codec_0>
+      http_parameters <http_parameters_0>
+      http_process_transport <http_process_transport_0>
+      http_server <http_server_0>
+      http_server_core <http_server_core_0>
+      http_server_core_basic_handler(Verifier,Handler,ProtectOptions) <http_server_core_basic_handler_3>
+      http_server_core_digest_handler(Verifier,Handler,ProtectOptions,AuthenticationInfoOptions) <http_server_core_digest_handler_4>
+      http_server_core_oauth_endpoint_handler(ProtectedResource,MetadataDescriptors,MetadataOptions,Verifier,Handler,ProtectOptions) <http_server_core_oauth_endpoint_handler_6>
+      http_server_core_oauth_handler(Verifier,Handler,ProtectOptions) <http_server_core_oauth_handler_3>
+      http_server_core_session <http_server_core_session_0>
+      http_server_core_session_handler(Manager,Handler) <http_server_core_session_handler_2>
+      http_socket_transport <http_socket_transport_0>
+      http_sse <http_sse_0>
+      http_sse_accept_handler(Options) <http_sse_accept_handler_1>
+      http_static_files <http_static_files_0>
+      http_text_body_codec <http_text_body_codec_0>
+      http_websocket <http_websocket_0>
+      http_websocket_accept_handler(Options) <http_websocket_accept_handler_1>
+      http_websocket_client_service <http_websocket_client_service_0>
+      http_websocket_client_service(HTTPTransport) <http_websocket_client_service_1>
+      http_websocket_client_session <http_websocket_client_session_0>
+      http_websocket_frames <http_websocket_frames_0>
+      http_websocket_handshake <http_websocket_handshake_0>
+      http_websocket_messages <http_websocket_messages_0>
+      http_websocket_messages(TextRepresentation) <http_websocket_messages_1>
+      http_websocket_server_service <http_websocket_server_service_0>
+      http_websocket_server_service(HTTPTransport) <http_websocket_server_service_1>
+      http_websocket_server_session <http_websocket_server_session_0>
+      http_websocket_service(HTTPTransport,Role,TextRepresentation) <http_websocket_service_3>
+      http_websocket_service_loop_options <http_websocket_service_loop_options_0>
+      http_websocket_service_registry <http_websocket_service_registry_0>
+      http_websocket_session(Role,TextRepresentation) <http_websocket_session_2>
+      http_websocket_session_read_options <http_websocket_session_read_options_0>
+      http_websocket_session_write_options <http_websocket_session_write_options_0>
+      hu_language_profile <hu_language_profile_0>
+      hy_language_profile <hy_language_profile_0>
+      hybrid_language_detector <hybrid_language_detector_0>
+      ica_projection <ica_projection_0>
+      id_language_profile <id_language_profile_0>
+      iddfs_interpreter(Increment) <iddfs_interpreter_1>
+      identity_hook <identity_hook_0>
+      ids <ids_0>
+      ids(Representation,Bytes) <ids_2>
+      ieee_754(Precision,ByteOrder,NaNRepresentation) <ieee_754_3>
+      ieee_754_fields(Precision,ByteOrder) <ieee_754_fields_2>
+      inheritance_diagram <inheritance_diagram_0>
+      inheritance_diagram(Format) <inheritance_diagram_1>
+      integer <integer_0>
+      integer_partitions <integer_partitions_0>
+      interval <interval_0>
+      interval_algebra <interval_algebra_0>
+      interval_constraint_network <interval_constraint_network_0>
+      interval_relation_set <interval_relation_set_0>
+      ip_grammars(Format) <ip_grammars_1>
+      iqr_anomaly_detector <iqr_anomaly_detector_0>
+      iso8601 <iso8601_0>
+      iso_13616 <iso_13616_0>
+      iso_13616_registry <iso_13616_registry_0>
+      iso_3166 <iso_3166_0>
+      iso_3166_1 <iso_3166_1_0>
+      iso_3166_2 <iso_3166_2_0>
+      iso_4217 <iso_4217_0>
+      iso_639 <iso_639_0>
+      iso_639_1 <iso_639_1_0>
+      iso_639_2 <iso_639_2_0>
+      iso_639_3 <iso_639_3_0>
+      iso_639_5 <iso_639_5_0>
+      iso_8859_1 <iso_8859_1_0>
+      iso_8859_10 <iso_8859_10_0>
+      iso_8859_13 <iso_8859_13_0>
+      iso_8859_14 <iso_8859_14_0>
+      iso_8859_15 <iso_8859_15_0>
+      iso_8859_16 <iso_8859_16_0>
+      iso_8859_2 <iso_8859_2_0>
+      iso_8859_3 <iso_8859_3_0>
+      iso_8859_4 <iso_8859_4_0>
+      iso_8859_9 <iso_8859_9_0>
+      iso_9362 <iso_9362_0>
+      isolation_forest_anomaly_detector <isolation_forest_anomaly_detector_0>
+      issue_creator <issue_creator_0>
+      it_language_profile <it_language_profile_0>
+      ja_language_profile <ja_language_profile_0>
+      java <java_0>
+      java(Reference) <java_1>
+      java(Reference,ReturnValue) <java_2>
+      java_hook <java_hook_0>
+      json <json_0>
+      json(StringRepresentation) <json_1>
+      json(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_3>
+      json_graph <json_graph_0>
+      json_ld <json_ld_0>
+      json_ld(StringRepresentation) <json_ld_1>
+      json_ld(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_ld_3>
+      json_lines <json_lines_0>
+      json_lines(StringRepresentation) <json_lines_1>
+      json_lines(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_lines_3>
+      json_patch <json_patch_0>
+      json_path <json_path_0>
+      json_path(StringRepresentation) <json_path_1>
+      json_pointer <json_pointer_0>
+      json_pointer(StringRepresentation) <json_pointer_1>
+      json_rpc <json_rpc_0>
+      json_schema <json_schema_0>
+      json_schema(StringRepresentation) <json_schema_1>
+      json_schema(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_schema_3>
+      jwt <jwt_0>
+      jwt_claims <jwt_claims_0>
+      jwt_compact <jwt_compact_0>
+      jwt_der <jwt_der_0>
+      jwt_jwa <jwt_jwa_0>
+      jwt_jwk <jwt_jwk_0>
+      jwt_jwks <jwt_jwks_0>
+      jwt_jws <jwt_jws_0>
+      jwt_openssl <jwt_openssl_0>
+      kcenters_clusterer <kcenters_clusterer_0>
+      kemeny_young_ranker <kemeny_young_ranker_0>
+      kernel_pca_projection <kernel_pca_projection_0>
+      kernel_svm_classifier <kernel_svm_classifier_0>
+      kmeans_clusterer <kmeans_clusterer_0>
+      kmedians_clusterer <kmedians_clusterer_0>
+      kmedoids_clusterer <kmedoids_clusterer_0>
+      kmodes_clusterer <kmodes_clusterer_0>
+      knn_classifier <knn_classifier_0>
+      knn_distance_anomaly_detector <knn_distance_anomaly_detector_0>
+      knn_regression <knn_regression_0>
+      ko_language_profile <ko_language_profile_0>
+      kprototypes_clusterer <kprototypes_clusterer_0>
+      ksuid <ksuid_0>
+      ksuid(Representation,Alphabet) <ksuid_2>
+      ku_language_profile <ku_language_profile_0>
+      la_language_profile <la_language_profile_0>
+      language_detection_scripts <language_detection_scripts_0>
+      language_detection_tokenizer <language_detection_tokenizer_0>
+      language_detector(Representation,Strategy) <language_detector_2>
+      language_profiles <language_profiles_0>
+      lasso_regression <lasso_regression_0>
+      lbfgs(Problem) <lbfgs_1>
+      lbfgs_b(Problem) <lbfgs_b_1>
+      lcom_metric <lcom_metric_0>
+      lcov_report <lcov_report_0>
+      lda_classifier <lda_classifier_0>
+      lda_projection <lda_projection_0>
+      lemmatizer(Representation,Language) <lemmatizer_2>
+      lgtdoc <lgtdoc_0>
+      lgtunit <lgtunit_0>
+      library_dependency_diagram <library_dependency_diagram_0>
+      library_dependency_diagram(Format) <library_dependency_diagram_1>
+      library_load_diagram <library_load_diagram_0>
+      library_load_diagram(Format) <library_load_diagram_1>
+      linda <linda_0>
+      linear_algebra <linear_algebra_0>
+      linear_regression <linear_regression_0>
+      linear_svm_classifier <linear_svm_classifier_0>
+      lines_metric <lines_metric_0>
+      linter_reporter <linter_reporter_0>
+      list <list_0>
+      list(Type) <list_1>
+      lof_anomaly_detector <lof_anomaly_detector_0>
+      log_barrier(Problem,InnerSolver) <log_barrier_2>
+      logger <logger_0>
+      logistic_regression_classifier <logistic_regression_classifier_0>
+      logtalk <logtalk_0>
+      loop <loop_0>
+      lovins_stemmer(Representation) <lovins_stemmer_1>
+      lru_cache <lru_cache_0>
+      lt_language_profile <lt_language_profile_0>
+      lv_language_profile <lv_language_profile_0>
+      magic <magic_0>
+      magic_expansion(Mode) <magic_expansion_1>
+      massey_ranker <massey_ranker_0>
+      maxheap <maxheap_0>
+      maybe <maybe_0>
+      mcp_server <mcp_server_0>
+      mcp_server_2025_06_18_spec <mcp_server_2025_06_18_spec_0>
+      mcp_server_2025_11_25_spec <mcp_server_2025_11_25_spec_0>
+      mcp_server_2026_07_28_spec <mcp_server_2026_07_28_spec_0>
+      mcp_server_stdio_transport <mcp_server_stdio_transport_0>
+      mcp_server_streamable_http_transport <mcp_server_streamable_http_transport_0>
+      mcp_streamable_http_handler <mcp_streamable_http_handler_0>
+      md5 <md5_0>
+      memcached <memcached_0>
+      mermaid_graph_language <mermaid_graph_language_0>
+      message_pack(StringRepresentation) <message_pack_1>
+      meta <meta_0>
+      meta_compiler <meta_compiler_0>
+      metagol <metagol_0>
+      mi_metric <mi_metric_0>
+      mi_metric(Stroud) <mi_metric_1>
+      milp_branch_and_bound <milp_branch_and_bound_0>
+      mime_types <mime_types_0>
+      minheap <minheap_0>
+      minimal_output <minimal_output_0>
+      mlp_classifier <mlp_classifier_0>
+      modified_z_score_anomaly_detector <modified_z_score_anomaly_detector_0>
+      modules_diagram_support <modules_diagram_support_0>
+      mqtt <mqtt_0>
+      mr_language_profile <mr_language_profile_0>
+      ms_language_profile <ms_language_profile_0>
+      multi_classification_ripple_down_rules <multi_classification_ripple_down_rules_0>
+      multisets <multisets_0>
+      multivariate_distributions(Random) <multivariate_distributions_1>
+      murmurhash3_x64_128 <murmurhash3_x64_128_0>
+      murmurhash3_x86_128 <murmurhash3_x86_128_0>
+      murmurhash3_x86_32 <murmurhash3_x86_32_0>
+      mutation_testing <mutation_testing_0>
+      mutations_store <mutations_store_0>
+      n_grams(Representation) <n_grams_1>
+      naive_bayes_classifier <naive_bayes_classifier_0>
+      nanoid <nanoid_0>
+      nanoid(Representation,Size,Alphabet) <nanoid_3>
+      natural <natural_0>
+      navltree <navltree_0>
+      nbintree <nbintree_0>
+      nearest_centroid_classifier <nearest_centroid_classifier_0>
+      nelder_mead(Problem) <nelder_mead_1>
+      newton_root_finder(Function) <newton_root_finder_1>
+      ngram_language_detector <ngram_language_detector_0>
+      nl_language_profile <nl_language_profile_0>
+      nmea <nmea_0>
+      nmf_projection <nmf_projection_0>
+      no_language_profile <no_language_profile_0>
+      noc_metric <noc_metric_0>
+      nor_metric <nor_metric_0>
+      nrbtree <nrbtree_0>
+      number <number_0>
+      number_grammars(Format) <number_grammars_1>
+      numberlist <numberlist_0>
+      object_wrapper_hook <object_wrapper_hook_0>
+      object_wrapper_hook(Protocol) <object_wrapper_hook_1>
+      object_wrapper_hook(Name,Relations) <object_wrapper_hook_2>
+      one_class_svm_anomaly_detector <one_class_svm_anomaly_detector_0>
+      open_ai <open_ai_0>
+      open_ai_api <open_ai_api_0>
+      open_ai_catalog <open_ai_catalog_0>
+      open_ai_client <open_ai_client_0>
+      open_ai_event_stream <open_ai_event_stream_0>
+      open_ai_server(Backend) <open_ai_server_1>
+      open_api <open_api_0>
+      open_id <open_id_0>
+      open_id_client <open_id_client_0>
+      open_id_der <open_id_der_0>
+      open_id_discovery <open_id_discovery_0>
+      open_id_jwks <open_id_jwks_0>
+      open_id_jwks_cache <open_id_jwks_cache_0>
+      open_id_jwt <open_id_jwt_0>
+      open_id_logout <open_id_logout_0>
+      open_id_openssl <open_id_openssl_0>
+      open_id_pkce <open_id_pkce_0>
+      open_id_response <open_id_response_0>
+      optics_clusterer <optics_clusterer_0>
+      optional <optional_0>
+      optional(Optional) <optional_1>
+      os <os_0>
+      otp <otp_0>
+      packs <packs_0>
+      packs_specs_hook <packs_specs_hook_0>
+      pairing_heap(Order) <pairing_heap_1>
+      pairing_heap_max <pairing_heap_max_0>
+      pairing_heap_min <pairing_heap_min_0>
+      pairs <pairs_0>
+      particle_swarm_optimization(Problem) <particle_swarm_optimization_1>
+      particle_swarm_optimization(Problem,RandomAlgorithm) <particle_swarm_optimization_2>
+      partitions <partitions_0>
+      paseto <paseto_0>
+      paseto_claims <paseto_claims_0>
+      paseto_keys <paseto_keys_0>
+      paseto_v4 <paseto_v4_0>
+      pca_projection <pca_projection_0>
+      pddl <pddl_0>
+      penalty_sub_problem(Problem,OuterIteration,StartPoint,Rho,Sign) <penalty_sub_problem_5>
+      permutations <permutations_0>
+      phase1_sub_problem(Problem,StartPoint) <phase1_sub_problem_2>
+      piecewise_linear_interpolator <piecewise_linear_interpolator_0>
+      pl_language_profile <pl_language_profile_0>
+      plackett_luce_last_ranker <plackett_luce_last_ranker_0>
+      plackett_luce_ranker <plackett_luce_ranker_0>
+      plantuml_graph_language <plantuml_graph_language_0>
+      pls_projection <pls_projection_0>
+      population <population_0>
+      porter_stemmer(Representation) <porter_stemmer_1>
+      ports_profiler <ports_profiler_0>
+      predicate_directive_suppression(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation) <predicate_directive_suppression_5>
+      prefix_span_pattern_miner <prefix_span_pattern_miner_0>
+      primal_dual_interior_point(Problem) <primal_dual_interior_point_1>
+      print_goal_hook <print_goal_hook_0>
+      probabilistic_pca_projection <probabilistic_pca_projection_0>
+      process <process_0>
+      prolog_module_hook(Module) <prolog_module_hook_1>
+      protobuf <protobuf_0>
+      pt_language_profile <pt_language_profile_0>
+      qda_classifier <qda_classifier_0>
+      qp_active_set <qp_active_set_0>
+      quadratic_penalty(Problem,InnerSolver) <quadratic_penalty_2>
+      queue <queue_0>
+      random <random_0>
+      random(Algorithm) <random_1>
+      random_forest_classifier <random_forest_classifier_0>
+      random_forest_regression <random_forest_regression_0>
+      random_projection <random_projection_0>
+      rank_centrality <rank_centrality_0>
+      ranked_pairs <ranked_pairs_0>
+      rbtree <rbtree_0>
+      reader <reader_0>
+      recorded_database <recorded_database_0>
+      redis <redis_0>
+      registries <registries_0>
+      registry_loader_hook <registry_loader_hook_0>
+      regression_tree <regression_tree_0>
+      regularized_bradley_terry_ranker <regularized_bradley_terry_ranker_0>
+      relational_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <relational_operator_replacement_5>
+      rfc_metric <rfc_metric_0>
+      ridge_regression <ridge_regression_0>
+      rk45_ode_solver(System) <rk45_ode_solver_1>
+      rk4_ode_solver(System) <rk4_ode_solver_1>
+      ro_language_profile <ro_language_profile_0>
+      ru_language_profile <ru_language_profile_0>
+      rule_expansion(Mode) <rule_expansion_1>
+      s3_client <s3_client_0>
+      s3_client(HTTPTransport) <s3_client_1>
+      s3_endpoints <s3_endpoints_0>
+      s3_headers <s3_headers_0>
+      s3_session(HTTPTransport) <s3_session_1>
+      s3_signing <s3_signing_0>
+      s3_xml <s3_xml_0>
+      sample <sample_0>
+      sarif <sarif_0>
+      sbom <sbom_0>
+      schulze_ranker <schulze_ranker_0>
+      scope_directive_replacement(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation) <scope_directive_replacement_5>
+      script_language_detector <script_language_detector_0>
+      sdbm_32 <sdbm_32_0>
+      sdbm_64 <sdbm_64_0>
+      secant_root_finder(Function) <secant_root_finder_1>
+      sequence_grammars <sequence_grammars_0>
+      set <set_0>
+      set(Type) <set_1>
+      sgd_classifier <sgd_classifier_0>
+      sha1 <sha1_0>
+      sha224 <sha224_0>
+      sha256 <sha256_0>
+      sha384 <sha384_0>
+      sha3_224 <sha3_224_0>
+      sha3_256 <sha3_256_0>
+      sha3_384 <sha3_384_0>
+      sha3_512 <sha3_512_0>
+      sha512 <sha512_0>
+      sha512_256 <sha512_256_0>
+      shake128(OutputBytes) <shake128_1>
+      shake256(OutputBytes) <shake256_1>
+      shell <shell_0>
+      shell(Interpreters) <shell_1>
+      shell_expansion(Mode) <shell_expansion_1>
+      simplex <simplex_0>
+      simulated_annealing(Problem) <simulated_annealing_1>
+      simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing_2>
+      single_classification_ripple_down_rules <single_classification_ripple_down_rules_0>
+      siphash_2_4 <siphash_2_4_0>
+      siphash_2_4(Key) <siphash_2_4_1>
+      size_metric <size_metric_0>
+      sk_language_profile <sk_language_profile_0>
+      sl_language_profile <sl_language_profile_0>
+      smtp <smtp_0>
+      smtp_process_transport <smtp_process_transport_0>
+      snowflakeid <snowflakeid_0>
+      snowflakeid(Representation,EpochMilliseconds,TimeUnitMilliseconds,TimestampBits,NodeBits,SequenceBits,Node) <snowflakeid_7>
+      snowflakeid_instagram <snowflakeid_instagram_0>
+      snowflakeid_instagram(Representation) <snowflakeid_instagram_1>
+      snowflakeid_sonyflake <snowflakeid_sonyflake_0>
+      snowflakeid_sonyflake(Representation) <snowflakeid_sonyflake_1>
+      snowflakeid_twitter <snowflakeid_twitter_0>
+      snowflakeid_twitter(Representation) <snowflakeid_twitter_1>
+      so_language_profile <so_language_profile_0>
+      socket <socket_0>
+      spade_pattern_miner <spade_pattern_miner_0>
+      spectral_clusterer <spectral_clusterer_0>
+      splaytree <splaytree_0>
+      sqids <sqids_0>
+      sqids(Representation) <sqids_1>
+      sqp_active_set(Problem) <sqp_active_set_1>
+      st_language_profile <st_language_profile_0>
+      stomp <stomp_0>
+      stop_words(Representation,Language) <stop_words_2>
+      stopword_language_detector <stopword_language_detector_0>
+      stopwords_af <stopwords_af_0>
+      stopwords_ar <stopwords_ar_0>
+      stopwords_bg <stopwords_bg_0>
+      stopwords_bn <stopwords_bn_0>
+      stopwords_br <stopwords_br_0>
+      stopwords_ca <stopwords_ca_0>
+      stopwords_cs <stopwords_cs_0>
+      stopwords_da <stopwords_da_0>
+      stopwords_de <stopwords_de_0>
+      stopwords_el <stopwords_el_0>
+      stopwords_en <stopwords_en_0>
+      stopwords_eo <stopwords_eo_0>
+      stopwords_es <stopwords_es_0>
+      stopwords_et <stopwords_et_0>
+      stopwords_eu <stopwords_eu_0>
+      stopwords_fa <stopwords_fa_0>
+      stopwords_fi <stopwords_fi_0>
+      stopwords_fr <stopwords_fr_0>
+      stopwords_ga <stopwords_ga_0>
+      stopwords_gl <stopwords_gl_0>
+      stopwords_ha <stopwords_ha_0>
+      stopwords_he <stopwords_he_0>
+      stopwords_hi <stopwords_hi_0>
+      stopwords_hr <stopwords_hr_0>
+      stopwords_hu <stopwords_hu_0>
+      stopwords_hy <stopwords_hy_0>
+      stopwords_id <stopwords_id_0>
+      stopwords_it <stopwords_it_0>
+      stopwords_ja <stopwords_ja_0>
+      stopwords_ko <stopwords_ko_0>
+      stopwords_ku <stopwords_ku_0>
+      stopwords_la <stopwords_la_0>
+      stopwords_lt <stopwords_lt_0>
+      stopwords_lv <stopwords_lv_0>
+      stopwords_mr <stopwords_mr_0>
+      stopwords_ms <stopwords_ms_0>
+      stopwords_nl <stopwords_nl_0>
+      stopwords_no <stopwords_no_0>
+      stopwords_pl <stopwords_pl_0>
+      stopwords_pt <stopwords_pt_0>
+      stopwords_ro <stopwords_ro_0>
+      stopwords_ru <stopwords_ru_0>
+      stopwords_sk <stopwords_sk_0>
+      stopwords_sl <stopwords_sl_0>
+      stopwords_so <stopwords_so_0>
+      stopwords_st <stopwords_st_0>
+      stopwords_sv <stopwords_sv_0>
+      stopwords_sw <stopwords_sw_0>
+      stopwords_th <stopwords_th_0>
+      stopwords_tl <stopwords_tl_0>
+      stopwords_tr <stopwords_tr_0>
+      stopwords_uk <stopwords_uk_0>
+      stopwords_ur <stopwords_ur_0>
+      stopwords_vi <stopwords_vi_0>
+      stopwords_yo <stopwords_yo_0>
+      stopwords_zh <stopwords_zh_0>
+      stopwords_zu <stopwords_zu_0>
+      streamvars <streamvars_0>
+      string(Representation) <string_1>
+      string_distance(Representation) <string_distance_1>
+      sub_problem(Problem,OuterIteration,StartPoint,EqLambda,IneqLambda,Rho,Sign) <sub_problem_7>
+      subprocess_coverage_hook <subprocess_coverage_hook_0>
+      subprocess_mutation_hook <subprocess_mutation_hook_0>
+      subsequences <subsequences_0>
+      subunit_v1_output <subunit_v1_output_0>
+      subunit_v1_report <subunit_v1_report_0>
+      subunit_v2_output <subunit_v2_output_0>
+      subunit_v2_report <subunit_v2_report_0>
+      suppress_goal_hook <suppress_goal_hook_0>
+      sv_language_profile <sv_language_profile_0>
+      svr_regression <svr_regression_0>
+      sw_language_profile <sw_language_profile_0>
+      tabu_search(Problem) <tabu_search_1>
+      tabu_search(Problem,RandomAlgorithm) <tabu_search_2>
+      tap_output <tap_output_0>
+      tap_report <tap_report_0>
+      term <term_0>
+      term_io <term_io_0>
+      text_normalizer(Representation,Profile) <text_normalizer_2>
+      text_vectorizer <text_vectorizer_0>
+      th_language_profile <th_language_profile_0>
+      thurstone_mosteller_ranker <thurstone_mosteller_ranker_0>
+      time <time_0>
+      time_scales <time_scales_0>
+      time_scales_data <time_scales_data_0>
+      timeout <timeout_0>
+      tl_language_profile <tl_language_profile_0>
+      tle_orbits <tle_orbits_0>
+      tokenizer(Representation,Language) <tokenizer_2>
+      toml <toml_0>
+      toml(StringRepresentation) <toml_1>
+      toml(ObjectRepresentation,PairRepresentation,StringRepresentation) <toml_3>
+      toon <toon_0>
+      toon(StringRepresentation) <toon_1>
+      toon(ObjectRepresentation,PairRepresentation,StringRepresentation) <toon_3>
+      toychrdb <toychrdb_0>
+      tr_language_profile <tr_language_profile_0>
+      treap_set <treap_set_0>
+      trie(Representation) <trie_1>
+      trueskill_ranker <trueskill_ranker_0>
+      truncated_svd_projection <truncated_svd_projection_0>
+      trust_region_newton_cg(Problem) <trust_region_newton_cg_1>
+      truth_literal_flip(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <truth_literal_flip_5>
+      tsne_projection <tsne_projection_0>
+      tsv <tsv_0>
+      tsv(Header) <tsv_1>
+      tsv(Header,Comments) <tsv_2>
+      tutor <tutor_0>
+      two3tree <two3tree_0>
+      type <type_0>
+      typeid <typeid_0>
+      typeid(Representation) <typeid_1>
+      tzif <tzif_0>
+      tzif_zone_ids <tzif_zone_ids_0>
+      uk_language_profile <uk_language_profile_0>
+      ulid <ulid_0>
+      ulid(Representation) <ulid_1>
+      umap_projection <umap_projection_0>
+      union_find <union_find_0>
+      univariate_distributions(Random) <univariate_distributions_1>
+      unweighted_directed_graph <unweighted_directed_graph_0>
+      unweighted_directed_graph(Dictionary) <unweighted_directed_graph_1>
+      unweighted_undirected_graph <unweighted_undirected_graph_0>
+      unweighted_undirected_graph(Dictionary) <unweighted_undirected_graph_1>
+      upn_metric <upn_metric_0>
+      ur_language_profile <ur_language_profile_0>
+      uri_template(Representation) <uri_template_1>
+      url(Representation) <url_1>
+      us_ascii <us_ascii_0>
+      user <user_0>
+      uses_diagram <uses_diagram_0>
+      uses_diagram(Format) <uses_diagram_1>
+      uses_directive_resource_deletion(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation) <uses_directive_resource_deletion_5>
+      utf_16be <utf_16be_0>
+      utf_16le <utf_16le_0>
+      utf_32be <utf_32be_0>
+      utf_32le <utf_32le_0>
+      utf_8 <utf_8_0>
+      utf_8_character_set <utf_8_character_set_0>
+      uuid <uuid_0>
+      uuid(Representation) <uuid_1>
+      validated <validated_0>
+      validation <validation_0>
+      validation(Validation) <validation_1>
+      varlist <varlist_0>
+      vi_language_profile <vi_language_profile_0>
+      weighted_directed_graph <weighted_directed_graph_0>
+      weighted_directed_graph(Dictionary) <weighted_directed_graph_1>
+      weighted_undirected_graph <weighted_undirected_graph_0>
+      weighted_undirected_graph(Dictionary) <weighted_undirected_graph_1>
+      windows_1250 <windows_1250_0>
+      windows_1251 <windows_1251_0>
+      windows_1252 <windows_1252_0>
+      windows_1253 <windows_1253_0>
+      windows_1254 <windows_1254_0>
+      windows_1257 <windows_1257_0>
+      wkt_wkb <wkt_wkb_0>
+      wmc_metric <wmc_metric_0>
+      wrapper <wrapper_0>
+      write_to_file_hook(File) <write_to_file_hook_1>
+      write_to_file_hook(File,Options) <write_to_file_hook_2>
+      write_to_stream_hook(Stream) <write_to_stream_hook_1>
+      write_to_stream_hook(Stream,Options) <write_to_stream_hook_2>
+      xhtml11 <xhtml11_0>
+      xml <xml_0>
+      xml_whatwg_entities <xml_whatwg_entities_0>
+      xref_diagram <xref_diagram_0>
+      xref_diagram(Format) <xref_diagram_1>
+      xunit_net_v2_output <xunit_net_v2_output_0>
+      xunit_net_v2_report <xunit_net_v2_report_0>
+      xunit_output <xunit_output_0>
+      xunit_report <xunit_report_0>
+      yaml <yaml_0>
+      yo_language_profile <yo_language_profile_0>
+      z_score_anomaly_detector <z_score_anomaly_detector_0>
+      zh_language_profile <zh_language_profile_0>
+      zlist <zlist_0>
+      zu_language_profile <zu_language_profile_0>
 
-   a_star_interpreter(W) <a_star_interpreter_1>
-   adaptive_boosting_classifier <adaptive_boosting_classifier_0>
-   adaptive_simpson_quadrature(Function) <adaptive_simpson_quadrature_1>
-   aes128 <aes128_0>
-   aes192 <aes192_0>
-   aes256 <aes256_0>
-   aes_common(KeySize,Nk,Nr) <aes_common_3>
-   af_language_profile <af_language_profile_0>
-   after_event_registry <after_event_registry_0>
-   agglomerative_clusterer <agglomerative_clusterer_0>
-   amqp <amqp_0>
-   ant_colony(Problem) <ant_colony_1>
-   ant_colony(Problem,RandomAlgorithm) <ant_colony_2>
-   apriori_pattern_miner <apriori_pattern_miner_0>
-   ar_language_profile <ar_language_profile_0>
-   arithmetic_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <arithmetic_operator_replacement_5>
-   arrangements <arrangements_0>
-   assertions <assertions_0>
-   assertions(Mode) <assertions_1>
-   assignvars <assignvars_0>
-   association_rule_miner <association_rule_miner_0>
-   atom <atom_0>
-   atomic <atomic_0>
-   augmented_lagrangian(Problem,InnerSolver) <augmented_lagrangian_2>
-   automation_report <automation_report_0>
-   avltree <avltree_0>
-   avro <avro_0>
-   backend_adapter_hook <backend_adapter_hook_0>
-   backend_random <backend_random_0>
-   barrier_sub_problem(Problem,OuterIteration,StartPoint,Mu,Rho,Sign) <barrier_sub_problem_6>
-   barycentric_interpolator <barycentric_interpolator_0>
-   barzilai_borwein(Problem) <barzilai_borwein_1>
-   base32 <base32_0>
-   base58 <base58_0>
-   base64 <base64_0>
-   base64url <base64url_0>
-   base64url_no_padding <base64url_no_padding_0>
-   base85 <base85_0>
-   bayesian_ridge_regression <bayesian_ridge_regression_0>
-   before_event_registry <before_event_registry_0>
-   benchmark_generators <benchmark_generators_0>
-   bfgs(Problem) <bfgs_1>
-   bfs_interpreter <bfs_interpreter_0>
-   bg_language_profile <bg_language_profile_0>
-   binary_heap(Order) <binary_heap_1>
-   binary_heap_max <binary_heap_max_0>
-   binary_heap_min <binary_heap_min_0>
-   bintree <bintree_0>
-   bisection_root_finder(Function) <bisection_root_finder_1>
-   blake2b <blake2b_0>
-   blake2b(Key,DigestSize) <blake2b_2>
-   blake2s <blake2s_0>
-   blake2s(Key,DigestSize) <blake2s_2>
-   blank_grammars(Format) <blank_grammars_1>
-   bn_language_profile <bn_language_profile_0>
-   body_goal_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <body_goal_negation_5>
-   borda_ranker <borda_ranker_0>
-   br_language_profile <br_language_profile_0>
-   bradley_terry_ranker <bradley_terry_ranker_0>
-   brent_root_finder(Function) <brent_root_finder_1>
-   bson <bson_0>
-   bson(StringRepresentation) <bson_1>
-   bup_interpreter <bup_interpreter_0>
-   byte_order <byte_order_0>
-   c45_classifier <c45_classifier_0>
-   ca_language_profile <ca_language_profile_0>
-   callable <callable_0>
-   caller_diagram <caller_diagram_0>
-   caller_diagram(Format) <caller_diagram_1>
-   cartesian_products <cartesian_products_0>
-   cbc <cbc_0>
-   cbor <cbor_0>
-   cbor(StringRepresentation) <cbor_1>
-   cc_metric <cc_metric_0>
-   ccsds_aos_frames(FrameLength,InsertZoneLength,HasOCF,HasFECF) <ccsds_aos_frames_4>
-   ccsds_ccs(CalendarVariant,FractionOctets) <ccsds_ccs_2>
-   ccsds_cds(DaySegmentOctets,SubmillisecondOctets,Epoch) <ccsds_cds_3>
-   ccsds_cuc(CoarseOctets,FineOctets,Epoch) <ccsds_cuc_3>
-   ccsds_frames <ccsds_frames_0>
-   ccsds_link_profiles <ccsds_link_profiles_0>
-   ccsds_packet_services <ccsds_packet_services_0>
-   ccsds_packetization <ccsds_packetization_0>
-   ccsds_packets <ccsds_packets_0>
-   ccsds_packets(SecondaryHeaderLength) <ccsds_packets_1>
-   ccsds_tc_frames(FrameLength,SegmentHeaderLength,HasFECF) <ccsds_tc_frames_3>
-   ccsds_tc_services <ccsds_tc_services_0>
-   ccsds_time_codes <ccsds_time_codes_0>
-   ccsds_time_fields <ccsds_time_fields_0>
-   ccsds_tm_frames(FrameLength,SecondaryHeaderLength,HasFECF) <ccsds_tm_frames_3>
-   character <character_0>
-   clauses_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <clauses_reordering_5>
-   clo_span_pattern_miner <clo_span_pattern_miner_0>
-   cmac <cmac_0>
-   cobertura_report <cobertura_report_0>
-   code_metrics <code_metrics_0>
-   cogc_metric <cogc_metric_0>
-   colley_ranker <colley_ranker_0>
-   combinations <combinations_0>
-   command_line_options <command_line_options_0>
-   compound <compound_0>
-   conjugate_gradient(Problem) <conjugate_gradient_1>
-   copeland_ranker <copeland_ranker_0>
-   coroutining <coroutining_0>
-   counter <counter_0>
-   coupling_metric <coupling_metric_0>
-   coverage_report <coverage_report_0>
-   crc32_non_reflected(Polynomial,Initial,FinalXor,AppendLength) <crc32_non_reflected_4>
-   crc32_reflected(Polynomial) <crc32_reflected_1>
-   crc32b <crc32b_0>
-   crc32bzip2 <crc32bzip2_0>
-   crc32c <crc32c_0>
-   crc32mpeg2 <crc32mpeg2_0>
-   crc32posix <crc32posix_0>
-   crc32q <crc32q_0>
-   crontab <crontab_0>
-   crontab(Representation) <crontab_1>
-   crs_projections <crs_projections_0>
-   crypto <crypto_0>
-   cs_language_profile <cs_language_profile_0>
-   csv <csv_0>
-   csv(Header,Separator,IgnoreQuotes) <csv_3>
-   csv(Header,Separator,IgnoreQuotes,Comments) <csv_4>
-   ctr <ctr_0>
-   ctrf_output <ctrf_output_0>
-   ctrf_report <ctrf_report_0>
-   cubic_spline_interpolator <cubic_spline_interpolator_0>
-   cuid2 <cuid2_0>
-   cuid2(Representation,Size,Alphabet) <cuid2_3>
-   cusum_anomaly_detector <cusum_anomaly_detector_0>
-   cytoscapejs_graph_language <cytoscapejs_graph_language_0>
-   d2_graph_language <d2_graph_language_0>
-   da_language_profile <da_language_profile_0>
-   datalog <datalog_0>
-   date <date_0>
-   dates_tz <dates_tz_0>
-   dbscan_clusterer <dbscan_clusterer_0>
-   de_language_profile <de_language_profile_0>
-   dead_code_scanner <dead_code_scanner_0>
-   debug_expansion(Mode) <debug_expansion_1>
-   debug_messages <debug_messages_0>
-   debugger <debugger_0>
-   default_atom_mutations <default_atom_mutations_0>
-   default_compound_mutations <default_compound_mutations_0>
-   default_float_mutations <default_float_mutations_0>
-   default_integer_mutations <default_integer_mutations_0>
-   default_list_mutations <default_list_mutations_0>
-   default_text_normalization <default_text_normalization_0>
-   default_workflow_hook <default_workflow_hook_0>
-   demodb <demodb_0>
-   deque <deque_0>
-   derangements <derangements_0>
-   dfs_interpreter <dfs_interpreter_0>
-   diagrams <diagrams_0>
-   diagrams(Format) <diagrams_1>
-   dif <dif_0>
-   differential_evolution(Problem) <differential_evolution_1>
-   differential_evolution(Problem,RandomAlgorithm) <differential_evolution_2>
-   difflist <difflist_0>
-   directory_dependency_diagram <directory_dependency_diagram_0>
-   directory_dependency_diagram(Format) <directory_dependency_diagram_1>
-   directory_load_diagram <directory_load_diagram_0>
-   directory_load_diagram(Format) <directory_load_diagram_1>
-   dit_metric <dit_metric_0>
-   djb2_32 <djb2_32_0>
-   djb2_64 <djb2_64_0>
-   doc_metric <doc_metric_0>
-   doclet <doclet_0>
-   dot_graph_language <dot_graph_language_0>
-   dump_trace <dump_trace_0>
-   ecb <ecb_0>
-   eclat_pattern_miner <eclat_pattern_miner_0>
-   edcg <edcg_0>
-   either <either_0>
-   el_language_profile <el_language_profile_0>
-   elastic_net_regression <elastic_net_regression_0>
-   elo_ranker <elo_ranker_0>
-   en_language_profile <en_language_profile_0>
-   english_lemmatizer <english_lemmatizer_0>
-   english_tokenizer <english_tokenizer_0>
-   entity_diagram <entity_diagram_0>
-   entity_diagram(Format) <entity_diagram_1>
-   eo_language_profile <eo_language_profile_0>
-   es_language_profile <es_language_profile_0>
-   et_language_profile <et_language_profile_0>
-   eu_language_profile <eu_language_profile_0>
-   euler_ode_solver(System) <euler_ode_solver_1>
-   event_registry <event_registry_0>
-   ewma_anomaly_detector <ewma_anomaly_detector_0>
-   expand_library_alias_paths <expand_library_alias_paths_0>
-   expected <expected_0>
-   expected(Expected) <expected_1>
-   fa_language_profile <fa_language_profile_0>
-   fail_insertion(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <fail_insertion_5>
-   fast_random <fast_random_0>
-   fast_random(Algorithm) <fast_random_1>
-   fcube <fcube_0>
-   fi_language_profile <fi_language_profile_0>
-   file_dependency_diagram <file_dependency_diagram_0>
-   file_dependency_diagram(Format) <file_dependency_diagram_1>
-   file_load_diagram <file_load_diagram_0>
-   file_load_diagram(Format) <file_load_diagram_1>
-   fips202_fixed_hash(RateBytes,Suffix,OutputBytes) <fips202_fixed_hash_3>
-   fips202_hash(RateBytes,Suffix,OutputBytes) <fips202_hash_3>
-   float <float_0>
-   fnv1a_32 <fnv1a_32_0>
-   fnv1a_64 <fnv1a_64_0>
-   format <format_0>
-   fp_growth_pattern_miner <fp_growth_pattern_miner_0>
-   fr_language_profile <fr_language_profile_0>
-   ga_language_profile <ga_language_profile_0>
-   gauss_legendre_quadrature(Function) <gauss_legendre_quadrature_1>
-   gaussian_mixture_clusterer <gaussian_mixture_clusterer_0>
-   gaussian_process_regression <gaussian_process_regression_0>
-   generalized_ripple_down_rules <generalized_ripple_down_rules_0>
-   genetic_algorithm(Problem) <genetic_algorithm_1>
-   genetic_algorithm(Problem,RandomAlgorithm) <genetic_algorithm_2>
-   genint <genint_0>
-   gensym <gensym_0>
-   geohash <geohash_0>
-   geojson <geojson_0>
-   geojson(ObjectRepresentation,PairRepresentation,StringRepresentation) <geojson_3>
-   geospatial <geospatial_0>
-   git <git_0>
-   gl_language_profile <gl_language_profile_0>
-   glicko2_periodic_ranker <glicko2_periodic_ranker_0>
-   glicko2_ranker <glicko2_ranker_0>
-   gpx <gpx_0>
-   gradient_boosting_classifier <gradient_boosting_classifier_0>
-   gradient_boosting_regression <gradient_boosting_regression_0>
-   gradient_descent(Problem) <gradient_descent_1>
-   grammar_rules_hook <grammar_rules_hook_0>
-   graph_language_registry <graph_language_registry_0>
-   gravatar <gravatar_0>
-   gravatar_api <gravatar_api_0>
-   gsp_pattern_miner <gsp_pattern_miner_0>
-   ha_language_profile <ha_language_profile_0>
-   halstead_metric <halstead_metric_0>
-   halstead_metric(Stroud) <halstead_metric_1>
-   hash_common_32 <hash_common_32_0>
-   hash_common_64 <hash_common_64_0>
-   hdbscan_clusterer <hdbscan_clusterer_0>
-   he_language_profile <he_language_profile_0>
-   head_arguments_mutation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <head_arguments_mutation_5>
-   head_arguments_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <head_arguments_reordering_5>
-   heap(Order) <heap_1>
-   help <help_0>
-   heuristic_expansion(Mode) <heuristic_expansion_1>
-   hi_language_profile <hi_language_profile_0>
-   hierarchical_clustering <hierarchical_clustering_0>
-   hmac <hmac_0>
-   hodge_rank <hodge_rank_0>
-   hook_pipeline(Pipeline) <hook_pipeline_1>
-   hook_set(Set) <hook_set_1>
-   hr_language_profile <hr_language_profile_0>
-   html5 <html5_0>
-   http_authenticate <http_authenticate_0>
-   http_client <http_client_0>
-   http_client_core <http_client_core_0>
-   http_client_digest_session <http_client_digest_session_0>
-   http_client_digest_session(HTTPTransport) <http_client_digest_session_1>
-   http_client_session <http_client_session_0>
-   http_client_session(HTTPTransport) <http_client_session_1>
-   http_cookie_jar <http_cookie_jar_0>
-   http_cookies(Representation) <http_cookies_1>
-   http_core <http_core_0>
-   http_cors <http_cors_0>
-   http_digest <http_digest_0>
-   http_directory_listing <http_directory_listing_0>
-   http_form_body_codec <http_form_body_codec_0>
-   http_htmx <http_htmx_0>
-   http_htpasswd_verifier(Path) <http_htpasswd_verifier_1>
-   http_json_body_codec <http_json_body_codec_0>
-   http_multipart <http_multipart_0>
-   http_oauth <http_oauth_0>
-   http_oauth_exact_scope_checker <http_oauth_exact_scope_checker_0>
-   http_oauth_introspection_client <http_oauth_introspection_client_0>
-   http_oauth_introspection_verifier(Endpoint,Options) <http_oauth_introspection_verifier_2>
-   http_oauth_jwt_verifier(KeyOrJWKSet,Options) <http_oauth_jwt_verifier_2>
-   http_oauth_metadata <http_oauth_metadata_0>
-   http_octet_stream_body_codec <http_octet_stream_body_codec_0>
-   http_parameters <http_parameters_0>
-   http_process_transport <http_process_transport_0>
-   http_server <http_server_0>
-   http_server_core <http_server_core_0>
-   http_server_core_basic_handler(Verifier,Handler,ProtectOptions) <http_server_core_basic_handler_3>
-   http_server_core_digest_handler(Verifier,Handler,ProtectOptions,AuthenticationInfoOptions) <http_server_core_digest_handler_4>
-   http_server_core_oauth_endpoint_handler(ProtectedResource,MetadataDescriptors,MetadataOptions,Verifier,Handler,ProtectOptions) <http_server_core_oauth_endpoint_handler_6>
-   http_server_core_oauth_handler(Verifier,Handler,ProtectOptions) <http_server_core_oauth_handler_3>
-   http_server_core_session <http_server_core_session_0>
-   http_server_core_session_handler(Manager,Handler) <http_server_core_session_handler_2>
-   http_socket_transport <http_socket_transport_0>
-   http_sse <http_sse_0>
-   http_sse_accept_handler(Options) <http_sse_accept_handler_1>
-   http_static_files <http_static_files_0>
-   http_text_body_codec <http_text_body_codec_0>
-   http_websocket <http_websocket_0>
-   http_websocket_accept_handler(Options) <http_websocket_accept_handler_1>
-   http_websocket_client_service <http_websocket_client_service_0>
-   http_websocket_client_service(HTTPTransport) <http_websocket_client_service_1>
-   http_websocket_client_session <http_websocket_client_session_0>
-   http_websocket_frames <http_websocket_frames_0>
-   http_websocket_handshake <http_websocket_handshake_0>
-   http_websocket_messages <http_websocket_messages_0>
-   http_websocket_messages(TextRepresentation) <http_websocket_messages_1>
-   http_websocket_server_service <http_websocket_server_service_0>
-   http_websocket_server_service(HTTPTransport) <http_websocket_server_service_1>
-   http_websocket_server_session <http_websocket_server_session_0>
-   http_websocket_service(HTTPTransport,Role,TextRepresentation) <http_websocket_service_3>
-   http_websocket_service_loop_options <http_websocket_service_loop_options_0>
-   http_websocket_service_registry <http_websocket_service_registry_0>
-   http_websocket_session(Role,TextRepresentation) <http_websocket_session_2>
-   http_websocket_session_read_options <http_websocket_session_read_options_0>
-   http_websocket_session_write_options <http_websocket_session_write_options_0>
-   hu_language_profile <hu_language_profile_0>
-   hy_language_profile <hy_language_profile_0>
-   hybrid_language_detector <hybrid_language_detector_0>
-   ica_projection <ica_projection_0>
-   id_language_profile <id_language_profile_0>
-   iddfs_interpreter(Increment) <iddfs_interpreter_1>
-   identity_hook <identity_hook_0>
-   ids <ids_0>
-   ids(Representation,Bytes) <ids_2>
-   ieee_754(Precision,ByteOrder,NaNRepresentation) <ieee_754_3>
-   ieee_754_fields(Precision,ByteOrder) <ieee_754_fields_2>
-   inheritance_diagram <inheritance_diagram_0>
-   inheritance_diagram(Format) <inheritance_diagram_1>
-   integer <integer_0>
-   integer_partitions <integer_partitions_0>
-   interval <interval_0>
-   interval_algebra <interval_algebra_0>
-   interval_constraint_network <interval_constraint_network_0>
-   interval_relation_set <interval_relation_set_0>
-   ip_grammars(Format) <ip_grammars_1>
-   iqr_anomaly_detector <iqr_anomaly_detector_0>
-   iso8601 <iso8601_0>
-   iso_13616 <iso_13616_0>
-   iso_13616_registry <iso_13616_registry_0>
-   iso_3166 <iso_3166_0>
-   iso_3166_1 <iso_3166_1_0>
-   iso_3166_2 <iso_3166_2_0>
-   iso_4217 <iso_4217_0>
-   iso_639 <iso_639_0>
-   iso_639_1 <iso_639_1_0>
-   iso_639_2 <iso_639_2_0>
-   iso_639_3 <iso_639_3_0>
-   iso_639_5 <iso_639_5_0>
-   iso_8859_1 <iso_8859_1_0>
-   iso_8859_10 <iso_8859_10_0>
-   iso_8859_13 <iso_8859_13_0>
-   iso_8859_14 <iso_8859_14_0>
-   iso_8859_15 <iso_8859_15_0>
-   iso_8859_16 <iso_8859_16_0>
-   iso_8859_2 <iso_8859_2_0>
-   iso_8859_3 <iso_8859_3_0>
-   iso_8859_4 <iso_8859_4_0>
-   iso_8859_9 <iso_8859_9_0>
-   iso_9362 <iso_9362_0>
-   isolation_forest_anomaly_detector <isolation_forest_anomaly_detector_0>
-   issue_creator <issue_creator_0>
-   it_language_profile <it_language_profile_0>
-   ja_language_profile <ja_language_profile_0>
-   java <java_0>
-   java(Reference) <java_1>
-   java(Reference,ReturnValue) <java_2>
-   java_hook <java_hook_0>
-   json <json_0>
-   json(StringRepresentation) <json_1>
-   json(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_3>
-   json_graph <json_graph_0>
-   json_ld <json_ld_0>
-   json_ld(StringRepresentation) <json_ld_1>
-   json_ld(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_ld_3>
-   json_lines <json_lines_0>
-   json_lines(StringRepresentation) <json_lines_1>
-   json_lines(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_lines_3>
-   json_patch <json_patch_0>
-   json_path <json_path_0>
-   json_path(StringRepresentation) <json_path_1>
-   json_pointer <json_pointer_0>
-   json_pointer(StringRepresentation) <json_pointer_1>
-   json_rpc <json_rpc_0>
-   json_schema <json_schema_0>
-   json_schema(StringRepresentation) <json_schema_1>
-   json_schema(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_schema_3>
-   jwt <jwt_0>
-   jwt_claims <jwt_claims_0>
-   jwt_compact <jwt_compact_0>
-   jwt_der <jwt_der_0>
-   jwt_jwa <jwt_jwa_0>
-   jwt_jwk <jwt_jwk_0>
-   jwt_jwks <jwt_jwks_0>
-   jwt_jws <jwt_jws_0>
-   jwt_openssl <jwt_openssl_0>
-   kcenters_clusterer <kcenters_clusterer_0>
-   kemeny_young_ranker <kemeny_young_ranker_0>
-   kernel_pca_projection <kernel_pca_projection_0>
-   kernel_svm_classifier <kernel_svm_classifier_0>
-   kmeans_clusterer <kmeans_clusterer_0>
-   kmedians_clusterer <kmedians_clusterer_0>
-   kmedoids_clusterer <kmedoids_clusterer_0>
-   kmodes_clusterer <kmodes_clusterer_0>
-   knn_classifier <knn_classifier_0>
-   knn_distance_anomaly_detector <knn_distance_anomaly_detector_0>
-   knn_regression <knn_regression_0>
-   ko_language_profile <ko_language_profile_0>
-   kprototypes_clusterer <kprototypes_clusterer_0>
-   ksuid <ksuid_0>
-   ksuid(Representation,Alphabet) <ksuid_2>
-   ku_language_profile <ku_language_profile_0>
-   la_language_profile <la_language_profile_0>
-   language_detection_scripts <language_detection_scripts_0>
-   language_detection_tokenizer <language_detection_tokenizer_0>
-   language_detector(Representation,Strategy) <language_detector_2>
-   language_profiles <language_profiles_0>
-   lasso_regression <lasso_regression_0>
-   lbfgs(Problem) <lbfgs_1>
-   lbfgs_b(Problem) <lbfgs_b_1>
-   lcom_metric <lcom_metric_0>
-   lcov_report <lcov_report_0>
-   lda_classifier <lda_classifier_0>
-   lda_projection <lda_projection_0>
-   lemmatizer(Representation,Language) <lemmatizer_2>
-   lgtdoc <lgtdoc_0>
-   lgtunit <lgtunit_0>
-   library_dependency_diagram <library_dependency_diagram_0>
-   library_dependency_diagram(Format) <library_dependency_diagram_1>
-   library_load_diagram <library_load_diagram_0>
-   library_load_diagram(Format) <library_load_diagram_1>
-   linda <linda_0>
-   linear_algebra <linear_algebra_0>
-   linear_regression <linear_regression_0>
-   linear_svm_classifier <linear_svm_classifier_0>
-   lines_metric <lines_metric_0>
-   linter_reporter <linter_reporter_0>
-   list <list_0>
-   list(Type) <list_1>
-   lof_anomaly_detector <lof_anomaly_detector_0>
-   log_barrier(Problem,InnerSolver) <log_barrier_2>
-   logger <logger_0>
-   logistic_regression_classifier <logistic_regression_classifier_0>
-   logtalk <logtalk_0>
-   loop <loop_0>
-   lovins_stemmer(Representation) <lovins_stemmer_1>
-   lru_cache <lru_cache_0>
-   lt_language_profile <lt_language_profile_0>
-   lv_language_profile <lv_language_profile_0>
-   magic <magic_0>
-   magic_expansion(Mode) <magic_expansion_1>
-   massey_ranker <massey_ranker_0>
-   maxheap <maxheap_0>
-   maybe <maybe_0>
-   mcp_server <mcp_server_0>
-   mcp_server_2025_06_18_spec <mcp_server_2025_06_18_spec_0>
-   mcp_server_2025_11_25_spec <mcp_server_2025_11_25_spec_0>
-   mcp_server_2026_07_28_spec <mcp_server_2026_07_28_spec_0>
-   mcp_server_stdio_transport <mcp_server_stdio_transport_0>
-   mcp_server_streamable_http_transport <mcp_server_streamable_http_transport_0>
-   mcp_streamable_http_handler <mcp_streamable_http_handler_0>
-   md5 <md5_0>
-   memcached <memcached_0>
-   mermaid_graph_language <mermaid_graph_language_0>
-   message_pack(StringRepresentation) <message_pack_1>
-   meta <meta_0>
-   meta_compiler <meta_compiler_0>
-   metagol <metagol_0>
-   mi_metric <mi_metric_0>
-   mi_metric(Stroud) <mi_metric_1>
-   milp_branch_and_bound <milp_branch_and_bound_0>
-   mime_types <mime_types_0>
-   minheap <minheap_0>
-   minimal_output <minimal_output_0>
-   mlp_classifier <mlp_classifier_0>
-   modified_z_score_anomaly_detector <modified_z_score_anomaly_detector_0>
-   modules_diagram_support <modules_diagram_support_0>
-   mqtt <mqtt_0>
-   mr_language_profile <mr_language_profile_0>
-   ms_language_profile <ms_language_profile_0>
-   multi_classification_ripple_down_rules <multi_classification_ripple_down_rules_0>
-   multisets <multisets_0>
-   multivariate_distributions(Random) <multivariate_distributions_1>
-   murmurhash3_x64_128 <murmurhash3_x64_128_0>
-   murmurhash3_x86_128 <murmurhash3_x86_128_0>
-   murmurhash3_x86_32 <murmurhash3_x86_32_0>
-   mutation_testing <mutation_testing_0>
-   mutations_store <mutations_store_0>
-   n_grams(Representation) <n_grams_1>
-   naive_bayes_classifier <naive_bayes_classifier_0>
-   nanoid <nanoid_0>
-   nanoid(Representation,Size,Alphabet) <nanoid_3>
-   natural <natural_0>
-   navltree <navltree_0>
-   nbintree <nbintree_0>
-   nearest_centroid_classifier <nearest_centroid_classifier_0>
-   nelder_mead(Problem) <nelder_mead_1>
-   newton_root_finder(Function) <newton_root_finder_1>
-   ngram_language_detector <ngram_language_detector_0>
-   nl_language_profile <nl_language_profile_0>
-   nmea <nmea_0>
-   nmf_projection <nmf_projection_0>
-   no_language_profile <no_language_profile_0>
-   noc_metric <noc_metric_0>
-   nor_metric <nor_metric_0>
-   nrbtree <nrbtree_0>
-   number <number_0>
-   number_grammars(Format) <number_grammars_1>
-   numberlist <numberlist_0>
-   object_wrapper_hook <object_wrapper_hook_0>
-   object_wrapper_hook(Protocol) <object_wrapper_hook_1>
-   object_wrapper_hook(Name,Relations) <object_wrapper_hook_2>
-   one_class_svm_anomaly_detector <one_class_svm_anomaly_detector_0>
-   open_ai <open_ai_0>
-   open_ai_api <open_ai_api_0>
-   open_ai_catalog <open_ai_catalog_0>
-   open_ai_client <open_ai_client_0>
-   open_ai_event_stream <open_ai_event_stream_0>
-   open_ai_server(Backend) <open_ai_server_1>
-   open_api <open_api_0>
-   open_id <open_id_0>
-   open_id_client <open_id_client_0>
-   open_id_der <open_id_der_0>
-   open_id_discovery <open_id_discovery_0>
-   open_id_jwks <open_id_jwks_0>
-   open_id_jwks_cache <open_id_jwks_cache_0>
-   open_id_jwt <open_id_jwt_0>
-   open_id_logout <open_id_logout_0>
-   open_id_openssl <open_id_openssl_0>
-   open_id_pkce <open_id_pkce_0>
-   open_id_response <open_id_response_0>
-   optics_clusterer <optics_clusterer_0>
-   optional <optional_0>
-   optional(Optional) <optional_1>
-   os <os_0>
-   otp <otp_0>
-   packs <packs_0>
-   packs_specs_hook <packs_specs_hook_0>
-   pairing_heap(Order) <pairing_heap_1>
-   pairing_heap_max <pairing_heap_max_0>
-   pairing_heap_min <pairing_heap_min_0>
-   pairs <pairs_0>
-   particle_swarm_optimization(Problem) <particle_swarm_optimization_1>
-   particle_swarm_optimization(Problem,RandomAlgorithm) <particle_swarm_optimization_2>
-   partitions <partitions_0>
-   paseto <paseto_0>
-   paseto_claims <paseto_claims_0>
-   paseto_keys <paseto_keys_0>
-   paseto_v4 <paseto_v4_0>
-   pca_projection <pca_projection_0>
-   pddl <pddl_0>
-   penalty_sub_problem(Problem,OuterIteration,StartPoint,Rho,Sign) <penalty_sub_problem_5>
-   permutations <permutations_0>
-   phase1_sub_problem(Problem,StartPoint) <phase1_sub_problem_2>
-   piecewise_linear_interpolator <piecewise_linear_interpolator_0>
-   pl_language_profile <pl_language_profile_0>
-   plackett_luce_last_ranker <plackett_luce_last_ranker_0>
-   plackett_luce_ranker <plackett_luce_ranker_0>
-   plantuml_graph_language <plantuml_graph_language_0>
-   pls_projection <pls_projection_0>
-   population <population_0>
-   porter_stemmer(Representation) <porter_stemmer_1>
-   ports_profiler <ports_profiler_0>
-   predicate_directive_suppression(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation) <predicate_directive_suppression_5>
-   prefix_span_pattern_miner <prefix_span_pattern_miner_0>
-   primal_dual_interior_point(Problem) <primal_dual_interior_point_1>
-   print_goal_hook <print_goal_hook_0>
-   probabilistic_pca_projection <probabilistic_pca_projection_0>
-   process <process_0>
-   prolog_module_hook(Module) <prolog_module_hook_1>
-   protobuf <protobuf_0>
-   pt_language_profile <pt_language_profile_0>
-   qda_classifier <qda_classifier_0>
-   qp_active_set <qp_active_set_0>
-   quadratic_penalty(Problem,InnerSolver) <quadratic_penalty_2>
-   queue <queue_0>
-   random <random_0>
-   random(Algorithm) <random_1>
-   random_forest_classifier <random_forest_classifier_0>
-   random_forest_regression <random_forest_regression_0>
-   random_projection <random_projection_0>
-   rank_centrality <rank_centrality_0>
-   ranked_pairs <ranked_pairs_0>
-   rbtree <rbtree_0>
-   reader <reader_0>
-   recorded_database <recorded_database_0>
-   redis <redis_0>
-   registries <registries_0>
-   registry_loader_hook <registry_loader_hook_0>
-   regression_tree <regression_tree_0>
-   regularized_bradley_terry_ranker <regularized_bradley_terry_ranker_0>
-   relational_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <relational_operator_replacement_5>
-   rfc_metric <rfc_metric_0>
-   ridge_regression <ridge_regression_0>
-   rk45_ode_solver(System) <rk45_ode_solver_1>
-   rk4_ode_solver(System) <rk4_ode_solver_1>
-   ro_language_profile <ro_language_profile_0>
-   ru_language_profile <ru_language_profile_0>
-   rule_expansion(Mode) <rule_expansion_1>
-   s3_client <s3_client_0>
-   s3_client(HTTPTransport) <s3_client_1>
-   s3_endpoints <s3_endpoints_0>
-   s3_headers <s3_headers_0>
-   s3_session(HTTPTransport) <s3_session_1>
-   s3_signing <s3_signing_0>
-   s3_xml <s3_xml_0>
-   sample <sample_0>
-   sarif <sarif_0>
-   sbom <sbom_0>
-   schulze_ranker <schulze_ranker_0>
-   scope_directive_replacement(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation) <scope_directive_replacement_5>
-   script_language_detector <script_language_detector_0>
-   sdbm_32 <sdbm_32_0>
-   sdbm_64 <sdbm_64_0>
-   secant_root_finder(Function) <secant_root_finder_1>
-   sequence_grammars <sequence_grammars_0>
-   set <set_0>
-   set(Type) <set_1>
-   sgd_classifier <sgd_classifier_0>
-   sha1 <sha1_0>
-   sha224 <sha224_0>
-   sha256 <sha256_0>
-   sha384 <sha384_0>
-   sha3_224 <sha3_224_0>
-   sha3_256 <sha3_256_0>
-   sha3_384 <sha3_384_0>
-   sha3_512 <sha3_512_0>
-   sha512 <sha512_0>
-   sha512_256 <sha512_256_0>
-   shake128(OutputBytes) <shake128_1>
-   shake256(OutputBytes) <shake256_1>
-   shell <shell_0>
-   shell(Interpreters) <shell_1>
-   shell_expansion(Mode) <shell_expansion_1>
-   simplex <simplex_0>
-   simulated_annealing(Problem) <simulated_annealing_1>
-   simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing_2>
-   single_classification_ripple_down_rules <single_classification_ripple_down_rules_0>
-   siphash_2_4 <siphash_2_4_0>
-   siphash_2_4(Key) <siphash_2_4_1>
-   size_metric <size_metric_0>
-   sk_language_profile <sk_language_profile_0>
-   sl_language_profile <sl_language_profile_0>
-   smtp <smtp_0>
-   smtp_process_transport <smtp_process_transport_0>
-   snowflakeid <snowflakeid_0>
-   snowflakeid(Representation,EpochMilliseconds,TimeUnitMilliseconds,TimestampBits,NodeBits,SequenceBits,Node) <snowflakeid_7>
-   snowflakeid_instagram <snowflakeid_instagram_0>
-   snowflakeid_instagram(Representation) <snowflakeid_instagram_1>
-   snowflakeid_sonyflake <snowflakeid_sonyflake_0>
-   snowflakeid_sonyflake(Representation) <snowflakeid_sonyflake_1>
-   snowflakeid_twitter <snowflakeid_twitter_0>
-   snowflakeid_twitter(Representation) <snowflakeid_twitter_1>
-   so_language_profile <so_language_profile_0>
-   socket <socket_0>
-   spade_pattern_miner <spade_pattern_miner_0>
-   spectral_clusterer <spectral_clusterer_0>
-   splaytree <splaytree_0>
-   sqids <sqids_0>
-   sqids(Representation) <sqids_1>
-   sqp_active_set(Problem) <sqp_active_set_1>
-   st_language_profile <st_language_profile_0>
-   stomp <stomp_0>
-   stop_words(Representation,Language) <stop_words_2>
-   stopword_language_detector <stopword_language_detector_0>
-   stopwords_af <stopwords_af_0>
-   stopwords_ar <stopwords_ar_0>
-   stopwords_bg <stopwords_bg_0>
-   stopwords_bn <stopwords_bn_0>
-   stopwords_br <stopwords_br_0>
-   stopwords_ca <stopwords_ca_0>
-   stopwords_cs <stopwords_cs_0>
-   stopwords_da <stopwords_da_0>
-   stopwords_de <stopwords_de_0>
-   stopwords_el <stopwords_el_0>
-   stopwords_en <stopwords_en_0>
-   stopwords_eo <stopwords_eo_0>
-   stopwords_es <stopwords_es_0>
-   stopwords_et <stopwords_et_0>
-   stopwords_eu <stopwords_eu_0>
-   stopwords_fa <stopwords_fa_0>
-   stopwords_fi <stopwords_fi_0>
-   stopwords_fr <stopwords_fr_0>
-   stopwords_ga <stopwords_ga_0>
-   stopwords_gl <stopwords_gl_0>
-   stopwords_ha <stopwords_ha_0>
-   stopwords_he <stopwords_he_0>
-   stopwords_hi <stopwords_hi_0>
-   stopwords_hr <stopwords_hr_0>
-   stopwords_hu <stopwords_hu_0>
-   stopwords_hy <stopwords_hy_0>
-   stopwords_id <stopwords_id_0>
-   stopwords_it <stopwords_it_0>
-   stopwords_ja <stopwords_ja_0>
-   stopwords_ko <stopwords_ko_0>
-   stopwords_ku <stopwords_ku_0>
-   stopwords_la <stopwords_la_0>
-   stopwords_lt <stopwords_lt_0>
-   stopwords_lv <stopwords_lv_0>
-   stopwords_mr <stopwords_mr_0>
-   stopwords_ms <stopwords_ms_0>
-   stopwords_nl <stopwords_nl_0>
-   stopwords_no <stopwords_no_0>
-   stopwords_pl <stopwords_pl_0>
-   stopwords_pt <stopwords_pt_0>
-   stopwords_ro <stopwords_ro_0>
-   stopwords_ru <stopwords_ru_0>
-   stopwords_sk <stopwords_sk_0>
-   stopwords_sl <stopwords_sl_0>
-   stopwords_so <stopwords_so_0>
-   stopwords_st <stopwords_st_0>
-   stopwords_sv <stopwords_sv_0>
-   stopwords_sw <stopwords_sw_0>
-   stopwords_th <stopwords_th_0>
-   stopwords_tl <stopwords_tl_0>
-   stopwords_tr <stopwords_tr_0>
-   stopwords_uk <stopwords_uk_0>
-   stopwords_ur <stopwords_ur_0>
-   stopwords_vi <stopwords_vi_0>
-   stopwords_yo <stopwords_yo_0>
-   stopwords_zh <stopwords_zh_0>
-   stopwords_zu <stopwords_zu_0>
-   streamvars <streamvars_0>
-   string(Representation) <string_1>
-   string_distance(Representation) <string_distance_1>
-   sub_problem(Problem,OuterIteration,StartPoint,EqLambda,IneqLambda,Rho,Sign) <sub_problem_7>
-   subprocess_coverage_hook <subprocess_coverage_hook_0>
-   subprocess_mutation_hook <subprocess_mutation_hook_0>
-   subsequences <subsequences_0>
-   subunit_v1_output <subunit_v1_output_0>
-   subunit_v1_report <subunit_v1_report_0>
-   subunit_v2_output <subunit_v2_output_0>
-   subunit_v2_report <subunit_v2_report_0>
-   suppress_goal_hook <suppress_goal_hook_0>
-   sv_language_profile <sv_language_profile_0>
-   svr_regression <svr_regression_0>
-   sw_language_profile <sw_language_profile_0>
-   tabu_search(Problem) <tabu_search_1>
-   tabu_search(Problem,RandomAlgorithm) <tabu_search_2>
-   tap_output <tap_output_0>
-   tap_report <tap_report_0>
-   term <term_0>
-   term_io <term_io_0>
-   text_normalizer(Representation,Profile) <text_normalizer_2>
-   text_vectorizer <text_vectorizer_0>
-   th_language_profile <th_language_profile_0>
-   thurstone_mosteller_ranker <thurstone_mosteller_ranker_0>
-   time <time_0>
-   time_scales <time_scales_0>
-   time_scales_data <time_scales_data_0>
-   timeout <timeout_0>
-   tl_language_profile <tl_language_profile_0>
-   tle_orbits <tle_orbits_0>
-   tokenizer(Representation,Language) <tokenizer_2>
-   toml <toml_0>
-   toml(StringRepresentation) <toml_1>
-   toml(ObjectRepresentation,PairRepresentation,StringRepresentation) <toml_3>
-   toon <toon_0>
-   toon(StringRepresentation) <toon_1>
-   toon(ObjectRepresentation,PairRepresentation,StringRepresentation) <toon_3>
-   toychrdb <toychrdb_0>
-   tr_language_profile <tr_language_profile_0>
-   treap_set <treap_set_0>
-   trie(Representation) <trie_1>
-   trueskill_ranker <trueskill_ranker_0>
-   truncated_svd_projection <truncated_svd_projection_0>
-   trust_region_newton_cg(Problem) <trust_region_newton_cg_1>
-   truth_literal_flip(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <truth_literal_flip_5>
-   tsne_projection <tsne_projection_0>
-   tsv <tsv_0>
-   tsv(Header) <tsv_1>
-   tsv(Header,Comments) <tsv_2>
-   tutor <tutor_0>
-   two3tree <two3tree_0>
-   type <type_0>
-   typeid <typeid_0>
-   typeid(Representation) <typeid_1>
-   tzif <tzif_0>
-   tzif_zone_ids <tzif_zone_ids_0>
-   uk_language_profile <uk_language_profile_0>
-   ulid <ulid_0>
-   ulid(Representation) <ulid_1>
-   umap_projection <umap_projection_0>
-   union_find <union_find_0>
-   univariate_distributions(Random) <univariate_distributions_1>
-   unweighted_directed_graph <unweighted_directed_graph_0>
-   unweighted_directed_graph(Dictionary) <unweighted_directed_graph_1>
-   unweighted_undirected_graph <unweighted_undirected_graph_0>
-   unweighted_undirected_graph(Dictionary) <unweighted_undirected_graph_1>
-   upn_metric <upn_metric_0>
-   ur_language_profile <ur_language_profile_0>
-   uri_template(Representation) <uri_template_1>
-   url(Representation) <url_1>
-   us_ascii <us_ascii_0>
-   user <user_0>
-   uses_diagram <uses_diagram_0>
-   uses_diagram(Format) <uses_diagram_1>
-   uses_directive_resource_deletion(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation) <uses_directive_resource_deletion_5>
-   utf_16be <utf_16be_0>
-   utf_16le <utf_16le_0>
-   utf_32be <utf_32be_0>
-   utf_32le <utf_32le_0>
-   utf_8 <utf_8_0>
-   utf_8_character_set <utf_8_character_set_0>
-   uuid <uuid_0>
-   uuid(Representation) <uuid_1>
-   validated <validated_0>
-   validation <validation_0>
-   validation(Validation) <validation_1>
-   varlist <varlist_0>
-   vi_language_profile <vi_language_profile_0>
-   weighted_directed_graph <weighted_directed_graph_0>
-   weighted_directed_graph(Dictionary) <weighted_directed_graph_1>
-   weighted_undirected_graph <weighted_undirected_graph_0>
-   weighted_undirected_graph(Dictionary) <weighted_undirected_graph_1>
-   windows_1250 <windows_1250_0>
-   windows_1251 <windows_1251_0>
-   windows_1252 <windows_1252_0>
-   windows_1253 <windows_1253_0>
-   windows_1254 <windows_1254_0>
-   windows_1257 <windows_1257_0>
-   wkt_wkb <wkt_wkb_0>
-   wmc_metric <wmc_metric_0>
-   wrapper <wrapper_0>
-   write_to_file_hook(File) <write_to_file_hook_1>
-   write_to_file_hook(File,Options) <write_to_file_hook_2>
-   write_to_stream_hook(Stream) <write_to_stream_hook_1>
-   write_to_stream_hook(Stream,Options) <write_to_stream_hook_2>
-   xhtml11 <xhtml11_0>
-   xml <xml_0>
-   xml_whatwg_entities <xml_whatwg_entities_0>
-   xref_diagram <xref_diagram_0>
-   xref_diagram(Format) <xref_diagram_1>
-   xunit_net_v2_output <xunit_net_v2_output_0>
-   xunit_net_v2_report <xunit_net_v2_report_0>
-   xunit_output <xunit_output_0>
-   xunit_report <xunit_report_0>
-   yaml <yaml_0>
-   yo_language_profile <yo_language_profile_0>
-   z_score_anomaly_detector <z_score_anomaly_detector_0>
-   zh_language_profile <zh_language_profile_0>
-   zlist <zlist_0>
-   zu_language_profile <zu_language_profile_0>
+.. only:: latex
+
+   * :doc:`a_star_interpreter(W) <a_star_interpreter_1>`
+   * :doc:`adaptive_boosting_classifier <adaptive_boosting_classifier_0>`
+   * :doc:`adaptive_simpson_quadrature(Function) <adaptive_simpson_quadrature_1>`
+   * :doc:`aes128 <aes128_0>`
+   * :doc:`aes192 <aes192_0>`
+   * :doc:`aes256 <aes256_0>`
+   * :doc:`aes_common(KeySize,Nk,Nr) <aes_common_3>`
+   * :doc:`af_language_profile <af_language_profile_0>`
+   * :doc:`after_event_registry <after_event_registry_0>`
+   * :doc:`agglomerative_clusterer <agglomerative_clusterer_0>`
+   * :doc:`amqp <amqp_0>`
+   * :doc:`ant_colony(Problem) <ant_colony_1>`
+   * :doc:`ant_colony(Problem,RandomAlgorithm) <ant_colony_2>`
+   * :doc:`apriori_pattern_miner <apriori_pattern_miner_0>`
+   * :doc:`ar_language_profile <ar_language_profile_0>`
+   * :doc:`arithmetic_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <arithmetic_operator_replacement_5>`
+   * :doc:`arrangements <arrangements_0>`
+   * :doc:`assertions <assertions_0>`
+   * :doc:`assertions(Mode) <assertions_1>`
+   * :doc:`assignvars <assignvars_0>`
+   * :doc:`association_rule_miner <association_rule_miner_0>`
+   * :doc:`atom <atom_0>`
+   * :doc:`atomic <atomic_0>`
+   * :doc:`augmented_lagrangian(Problem,InnerSolver) <augmented_lagrangian_2>`
+   * :doc:`automation_report <automation_report_0>`
+   * :doc:`avltree <avltree_0>`
+   * :doc:`avro <avro_0>`
+   * :doc:`backend_adapter_hook <backend_adapter_hook_0>`
+   * :doc:`backend_random <backend_random_0>`
+   * :doc:`barrier_sub_problem(Problem,OuterIteration,StartPoint,Mu,Rho,Sign) <barrier_sub_problem_6>`
+   * :doc:`barycentric_interpolator <barycentric_interpolator_0>`
+   * :doc:`barzilai_borwein(Problem) <barzilai_borwein_1>`
+   * :doc:`base32 <base32_0>`
+   * :doc:`base58 <base58_0>`
+   * :doc:`base64 <base64_0>`
+   * :doc:`base64url <base64url_0>`
+   * :doc:`base64url_no_padding <base64url_no_padding_0>`
+   * :doc:`base85 <base85_0>`
+   * :doc:`bayesian_ridge_regression <bayesian_ridge_regression_0>`
+   * :doc:`before_event_registry <before_event_registry_0>`
+   * :doc:`benchmark_generators <benchmark_generators_0>`
+   * :doc:`bfgs(Problem) <bfgs_1>`
+   * :doc:`bfs_interpreter <bfs_interpreter_0>`
+   * :doc:`bg_language_profile <bg_language_profile_0>`
+   * :doc:`binary_heap(Order) <binary_heap_1>`
+   * :doc:`binary_heap_max <binary_heap_max_0>`
+   * :doc:`binary_heap_min <binary_heap_min_0>`
+   * :doc:`bintree <bintree_0>`
+   * :doc:`bisection_root_finder(Function) <bisection_root_finder_1>`
+   * :doc:`blake2b <blake2b_0>`
+   * :doc:`blake2b(Key,DigestSize) <blake2b_2>`
+   * :doc:`blake2s <blake2s_0>`
+   * :doc:`blake2s(Key,DigestSize) <blake2s_2>`
+   * :doc:`blank_grammars(Format) <blank_grammars_1>`
+   * :doc:`bn_language_profile <bn_language_profile_0>`
+   * :doc:`body_goal_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <body_goal_negation_5>`
+   * :doc:`borda_ranker <borda_ranker_0>`
+   * :doc:`br_language_profile <br_language_profile_0>`
+   * :doc:`bradley_terry_ranker <bradley_terry_ranker_0>`
+   * :doc:`brent_root_finder(Function) <brent_root_finder_1>`
+   * :doc:`bson <bson_0>`
+   * :doc:`bson(StringRepresentation) <bson_1>`
+   * :doc:`bup_interpreter <bup_interpreter_0>`
+   * :doc:`byte_order <byte_order_0>`
+   * :doc:`c45_classifier <c45_classifier_0>`
+   * :doc:`ca_language_profile <ca_language_profile_0>`
+   * :doc:`callable <callable_0>`
+   * :doc:`caller_diagram <caller_diagram_0>`
+   * :doc:`caller_diagram(Format) <caller_diagram_1>`
+   * :doc:`cartesian_products <cartesian_products_0>`
+   * :doc:`cbc <cbc_0>`
+   * :doc:`cbor <cbor_0>`
+   * :doc:`cbor(StringRepresentation) <cbor_1>`
+   * :doc:`cc_metric <cc_metric_0>`
+   * :doc:`ccsds_aos_frames(FrameLength,InsertZoneLength,HasOCF,HasFECF) <ccsds_aos_frames_4>`
+   * :doc:`ccsds_ccs(CalendarVariant,FractionOctets) <ccsds_ccs_2>`
+   * :doc:`ccsds_cds(DaySegmentOctets,SubmillisecondOctets,Epoch) <ccsds_cds_3>`
+   * :doc:`ccsds_cuc(CoarseOctets,FineOctets,Epoch) <ccsds_cuc_3>`
+   * :doc:`ccsds_frames <ccsds_frames_0>`
+   * :doc:`ccsds_link_profiles <ccsds_link_profiles_0>`
+   * :doc:`ccsds_packet_services <ccsds_packet_services_0>`
+   * :doc:`ccsds_packetization <ccsds_packetization_0>`
+   * :doc:`ccsds_packets <ccsds_packets_0>`
+   * :doc:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets_1>`
+   * :doc:`ccsds_tc_frames(FrameLength,SegmentHeaderLength,HasFECF) <ccsds_tc_frames_3>`
+   * :doc:`ccsds_tc_services <ccsds_tc_services_0>`
+   * :doc:`ccsds_time_codes <ccsds_time_codes_0>`
+   * :doc:`ccsds_time_fields <ccsds_time_fields_0>`
+   * :doc:`ccsds_tm_frames(FrameLength,SecondaryHeaderLength,HasFECF) <ccsds_tm_frames_3>`
+   * :doc:`character <character_0>`
+   * :doc:`clauses_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <clauses_reordering_5>`
+   * :doc:`clo_span_pattern_miner <clo_span_pattern_miner_0>`
+   * :doc:`cmac <cmac_0>`
+   * :doc:`cobertura_report <cobertura_report_0>`
+   * :doc:`code_metrics <code_metrics_0>`
+   * :doc:`cogc_metric <cogc_metric_0>`
+   * :doc:`colley_ranker <colley_ranker_0>`
+   * :doc:`combinations <combinations_0>`
+   * :doc:`command_line_options <command_line_options_0>`
+   * :doc:`compound <compound_0>`
+   * :doc:`conjugate_gradient(Problem) <conjugate_gradient_1>`
+   * :doc:`copeland_ranker <copeland_ranker_0>`
+   * :doc:`coroutining <coroutining_0>`
+   * :doc:`counter <counter_0>`
+   * :doc:`coupling_metric <coupling_metric_0>`
+   * :doc:`coverage_report <coverage_report_0>`
+   * :doc:`crc32_non_reflected(Polynomial,Initial,FinalXor,AppendLength) <crc32_non_reflected_4>`
+   * :doc:`crc32_reflected(Polynomial) <crc32_reflected_1>`
+   * :doc:`crc32b <crc32b_0>`
+   * :doc:`crc32bzip2 <crc32bzip2_0>`
+   * :doc:`crc32c <crc32c_0>`
+   * :doc:`crc32mpeg2 <crc32mpeg2_0>`
+   * :doc:`crc32posix <crc32posix_0>`
+   * :doc:`crc32q <crc32q_0>`
+   * :doc:`crontab <crontab_0>`
+   * :doc:`crontab(Representation) <crontab_1>`
+   * :doc:`crs_projections <crs_projections_0>`
+   * :doc:`crypto <crypto_0>`
+   * :doc:`cs_language_profile <cs_language_profile_0>`
+   * :doc:`csv <csv_0>`
+   * :doc:`csv(Header,Separator,IgnoreQuotes) <csv_3>`
+   * :doc:`csv(Header,Separator,IgnoreQuotes,Comments) <csv_4>`
+   * :doc:`ctr <ctr_0>`
+   * :doc:`ctrf_output <ctrf_output_0>`
+   * :doc:`ctrf_report <ctrf_report_0>`
+   * :doc:`cubic_spline_interpolator <cubic_spline_interpolator_0>`
+   * :doc:`cuid2 <cuid2_0>`
+   * :doc:`cuid2(Representation,Size,Alphabet) <cuid2_3>`
+   * :doc:`cusum_anomaly_detector <cusum_anomaly_detector_0>`
+   * :doc:`cytoscapejs_graph_language <cytoscapejs_graph_language_0>`
+   * :doc:`d2_graph_language <d2_graph_language_0>`
+   * :doc:`da_language_profile <da_language_profile_0>`
+   * :doc:`datalog <datalog_0>`
+   * :doc:`date <date_0>`
+   * :doc:`dates_tz <dates_tz_0>`
+   * :doc:`dbscan_clusterer <dbscan_clusterer_0>`
+   * :doc:`de_language_profile <de_language_profile_0>`
+   * :doc:`dead_code_scanner <dead_code_scanner_0>`
+   * :doc:`debug_expansion(Mode) <debug_expansion_1>`
+   * :doc:`debug_messages <debug_messages_0>`
+   * :doc:`debugger <debugger_0>`
+   * :doc:`default_atom_mutations <default_atom_mutations_0>`
+   * :doc:`default_compound_mutations <default_compound_mutations_0>`
+   * :doc:`default_float_mutations <default_float_mutations_0>`
+   * :doc:`default_integer_mutations <default_integer_mutations_0>`
+   * :doc:`default_list_mutations <default_list_mutations_0>`
+   * :doc:`default_text_normalization <default_text_normalization_0>`
+   * :doc:`default_workflow_hook <default_workflow_hook_0>`
+   * :doc:`demodb <demodb_0>`
+   * :doc:`deque <deque_0>`
+   * :doc:`derangements <derangements_0>`
+   * :doc:`dfs_interpreter <dfs_interpreter_0>`
+   * :doc:`diagrams <diagrams_0>`
+   * :doc:`diagrams(Format) <diagrams_1>`
+   * :doc:`dif <dif_0>`
+   * :doc:`differential_evolution(Problem) <differential_evolution_1>`
+   * :doc:`differential_evolution(Problem,RandomAlgorithm) <differential_evolution_2>`
+   * :doc:`difflist <difflist_0>`
+   * :doc:`directory_dependency_diagram <directory_dependency_diagram_0>`
+   * :doc:`directory_dependency_diagram(Format) <directory_dependency_diagram_1>`
+   * :doc:`directory_load_diagram <directory_load_diagram_0>`
+   * :doc:`directory_load_diagram(Format) <directory_load_diagram_1>`
+   * :doc:`dit_metric <dit_metric_0>`
+   * :doc:`djb2_32 <djb2_32_0>`
+   * :doc:`djb2_64 <djb2_64_0>`
+   * :doc:`doc_metric <doc_metric_0>`
+   * :doc:`doclet <doclet_0>`
+   * :doc:`dot_graph_language <dot_graph_language_0>`
+   * :doc:`dump_trace <dump_trace_0>`
+   * :doc:`ecb <ecb_0>`
+   * :doc:`eclat_pattern_miner <eclat_pattern_miner_0>`
+   * :doc:`edcg <edcg_0>`
+   * :doc:`either <either_0>`
+   * :doc:`el_language_profile <el_language_profile_0>`
+   * :doc:`elastic_net_regression <elastic_net_regression_0>`
+   * :doc:`elo_ranker <elo_ranker_0>`
+   * :doc:`en_language_profile <en_language_profile_0>`
+   * :doc:`english_lemmatizer <english_lemmatizer_0>`
+   * :doc:`english_tokenizer <english_tokenizer_0>`
+   * :doc:`entity_diagram <entity_diagram_0>`
+   * :doc:`entity_diagram(Format) <entity_diagram_1>`
+   * :doc:`eo_language_profile <eo_language_profile_0>`
+   * :doc:`es_language_profile <es_language_profile_0>`
+   * :doc:`et_language_profile <et_language_profile_0>`
+   * :doc:`eu_language_profile <eu_language_profile_0>`
+   * :doc:`euler_ode_solver(System) <euler_ode_solver_1>`
+   * :doc:`event_registry <event_registry_0>`
+   * :doc:`ewma_anomaly_detector <ewma_anomaly_detector_0>`
+   * :doc:`expand_library_alias_paths <expand_library_alias_paths_0>`
+   * :doc:`expected <expected_0>`
+   * :doc:`expected(Expected) <expected_1>`
+   * :doc:`fa_language_profile <fa_language_profile_0>`
+   * :doc:`fail_insertion(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <fail_insertion_5>`
+   * :doc:`fast_random <fast_random_0>`
+   * :doc:`fast_random(Algorithm) <fast_random_1>`
+   * :doc:`fcube <fcube_0>`
+   * :doc:`fi_language_profile <fi_language_profile_0>`
+   * :doc:`file_dependency_diagram <file_dependency_diagram_0>`
+   * :doc:`file_dependency_diagram(Format) <file_dependency_diagram_1>`
+   * :doc:`file_load_diagram <file_load_diagram_0>`
+   * :doc:`file_load_diagram(Format) <file_load_diagram_1>`
+   * :doc:`fips202_fixed_hash(RateBytes,Suffix,OutputBytes) <fips202_fixed_hash_3>`
+   * :doc:`fips202_hash(RateBytes,Suffix,OutputBytes) <fips202_hash_3>`
+   * :doc:`float <float_0>`
+   * :doc:`fnv1a_32 <fnv1a_32_0>`
+   * :doc:`fnv1a_64 <fnv1a_64_0>`
+   * :doc:`format <format_0>`
+   * :doc:`fp_growth_pattern_miner <fp_growth_pattern_miner_0>`
+   * :doc:`fr_language_profile <fr_language_profile_0>`
+   * :doc:`ga_language_profile <ga_language_profile_0>`
+   * :doc:`gauss_legendre_quadrature(Function) <gauss_legendre_quadrature_1>`
+   * :doc:`gaussian_mixture_clusterer <gaussian_mixture_clusterer_0>`
+   * :doc:`gaussian_process_regression <gaussian_process_regression_0>`
+   * :doc:`generalized_ripple_down_rules <generalized_ripple_down_rules_0>`
+   * :doc:`genetic_algorithm(Problem) <genetic_algorithm_1>`
+   * :doc:`genetic_algorithm(Problem,RandomAlgorithm) <genetic_algorithm_2>`
+   * :doc:`genint <genint_0>`
+   * :doc:`gensym <gensym_0>`
+   * :doc:`geohash <geohash_0>`
+   * :doc:`geojson <geojson_0>`
+   * :doc:`geojson(ObjectRepresentation,PairRepresentation,StringRepresentation) <geojson_3>`
+   * :doc:`geospatial <geospatial_0>`
+   * :doc:`git <git_0>`
+   * :doc:`gl_language_profile <gl_language_profile_0>`
+   * :doc:`glicko2_periodic_ranker <glicko2_periodic_ranker_0>`
+   * :doc:`glicko2_ranker <glicko2_ranker_0>`
+   * :doc:`gpx <gpx_0>`
+   * :doc:`gradient_boosting_classifier <gradient_boosting_classifier_0>`
+   * :doc:`gradient_boosting_regression <gradient_boosting_regression_0>`
+   * :doc:`gradient_descent(Problem) <gradient_descent_1>`
+   * :doc:`grammar_rules_hook <grammar_rules_hook_0>`
+   * :doc:`graph_language_registry <graph_language_registry_0>`
+   * :doc:`gravatar <gravatar_0>`
+   * :doc:`gravatar_api <gravatar_api_0>`
+   * :doc:`gsp_pattern_miner <gsp_pattern_miner_0>`
+   * :doc:`ha_language_profile <ha_language_profile_0>`
+   * :doc:`halstead_metric <halstead_metric_0>`
+   * :doc:`halstead_metric(Stroud) <halstead_metric_1>`
+   * :doc:`hash_common_32 <hash_common_32_0>`
+   * :doc:`hash_common_64 <hash_common_64_0>`
+   * :doc:`hdbscan_clusterer <hdbscan_clusterer_0>`
+   * :doc:`he_language_profile <he_language_profile_0>`
+   * :doc:`head_arguments_mutation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <head_arguments_mutation_5>`
+   * :doc:`head_arguments_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <head_arguments_reordering_5>`
+   * :doc:`heap(Order) <heap_1>`
+   * :doc:`help <help_0>`
+   * :doc:`heuristic_expansion(Mode) <heuristic_expansion_1>`
+   * :doc:`hi_language_profile <hi_language_profile_0>`
+   * :doc:`hierarchical_clustering <hierarchical_clustering_0>`
+   * :doc:`hmac <hmac_0>`
+   * :doc:`hodge_rank <hodge_rank_0>`
+   * :doc:`hook_pipeline(Pipeline) <hook_pipeline_1>`
+   * :doc:`hook_set(Set) <hook_set_1>`
+   * :doc:`hr_language_profile <hr_language_profile_0>`
+   * :doc:`html5 <html5_0>`
+   * :doc:`http_authenticate <http_authenticate_0>`
+   * :doc:`http_client <http_client_0>`
+   * :doc:`http_client_core <http_client_core_0>`
+   * :doc:`http_client_digest_session <http_client_digest_session_0>`
+   * :doc:`http_client_digest_session(HTTPTransport) <http_client_digest_session_1>`
+   * :doc:`http_client_session <http_client_session_0>`
+   * :doc:`http_client_session(HTTPTransport) <http_client_session_1>`
+   * :doc:`http_cookie_jar <http_cookie_jar_0>`
+   * :doc:`http_cookies(Representation) <http_cookies_1>`
+   * :doc:`http_core <http_core_0>`
+   * :doc:`http_cors <http_cors_0>`
+   * :doc:`http_digest <http_digest_0>`
+   * :doc:`http_directory_listing <http_directory_listing_0>`
+   * :doc:`http_form_body_codec <http_form_body_codec_0>`
+   * :doc:`http_htmx <http_htmx_0>`
+   * :doc:`http_htpasswd_verifier(Path) <http_htpasswd_verifier_1>`
+   * :doc:`http_json_body_codec <http_json_body_codec_0>`
+   * :doc:`http_multipart <http_multipart_0>`
+   * :doc:`http_oauth <http_oauth_0>`
+   * :doc:`http_oauth_exact_scope_checker <http_oauth_exact_scope_checker_0>`
+   * :doc:`http_oauth_introspection_client <http_oauth_introspection_client_0>`
+   * :doc:`http_oauth_introspection_verifier(Endpoint,Options) <http_oauth_introspection_verifier_2>`
+   * :doc:`http_oauth_jwt_verifier(KeyOrJWKSet,Options) <http_oauth_jwt_verifier_2>`
+   * :doc:`http_oauth_metadata <http_oauth_metadata_0>`
+   * :doc:`http_octet_stream_body_codec <http_octet_stream_body_codec_0>`
+   * :doc:`http_parameters <http_parameters_0>`
+   * :doc:`http_process_transport <http_process_transport_0>`
+   * :doc:`http_server <http_server_0>`
+   * :doc:`http_server_core <http_server_core_0>`
+   * :doc:`http_server_core_basic_handler(Verifier,Handler,ProtectOptions) <http_server_core_basic_handler_3>`
+   * :doc:`http_server_core_digest_handler(Verifier,Handler,ProtectOptions,AuthenticationInfoOptions) <http_server_core_digest_handler_4>`
+   * :doc:`http_server_core_oauth_endpoint_handler(ProtectedResource,MetadataDescriptors,MetadataOptions,Verifier,Handler,ProtectOptions) <http_server_core_oauth_endpoint_handler_6>`
+   * :doc:`http_server_core_oauth_handler(Verifier,Handler,ProtectOptions) <http_server_core_oauth_handler_3>`
+   * :doc:`http_server_core_session <http_server_core_session_0>`
+   * :doc:`http_server_core_session_handler(Manager,Handler) <http_server_core_session_handler_2>`
+   * :doc:`http_socket_transport <http_socket_transport_0>`
+   * :doc:`http_sse <http_sse_0>`
+   * :doc:`http_sse_accept_handler(Options) <http_sse_accept_handler_1>`
+   * :doc:`http_static_files <http_static_files_0>`
+   * :doc:`http_text_body_codec <http_text_body_codec_0>`
+   * :doc:`http_websocket <http_websocket_0>`
+   * :doc:`http_websocket_accept_handler(Options) <http_websocket_accept_handler_1>`
+   * :doc:`http_websocket_client_service <http_websocket_client_service_0>`
+   * :doc:`http_websocket_client_service(HTTPTransport) <http_websocket_client_service_1>`
+   * :doc:`http_websocket_client_session <http_websocket_client_session_0>`
+   * :doc:`http_websocket_frames <http_websocket_frames_0>`
+   * :doc:`http_websocket_handshake <http_websocket_handshake_0>`
+   * :doc:`http_websocket_messages <http_websocket_messages_0>`
+   * :doc:`http_websocket_messages(TextRepresentation) <http_websocket_messages_1>`
+   * :doc:`http_websocket_server_service <http_websocket_server_service_0>`
+   * :doc:`http_websocket_server_service(HTTPTransport) <http_websocket_server_service_1>`
+   * :doc:`http_websocket_server_session <http_websocket_server_session_0>`
+   * :doc:`http_websocket_service(HTTPTransport,Role,TextRepresentation) <http_websocket_service_3>`
+   * :doc:`http_websocket_service_loop_options <http_websocket_service_loop_options_0>`
+   * :doc:`http_websocket_service_registry <http_websocket_service_registry_0>`
+   * :doc:`http_websocket_session(Role,TextRepresentation) <http_websocket_session_2>`
+   * :doc:`http_websocket_session_read_options <http_websocket_session_read_options_0>`
+   * :doc:`http_websocket_session_write_options <http_websocket_session_write_options_0>`
+   * :doc:`hu_language_profile <hu_language_profile_0>`
+   * :doc:`hy_language_profile <hy_language_profile_0>`
+   * :doc:`hybrid_language_detector <hybrid_language_detector_0>`
+   * :doc:`ica_projection <ica_projection_0>`
+   * :doc:`id_language_profile <id_language_profile_0>`
+   * :doc:`iddfs_interpreter(Increment) <iddfs_interpreter_1>`
+   * :doc:`identity_hook <identity_hook_0>`
+   * :doc:`ids <ids_0>`
+   * :doc:`ids(Representation,Bytes) <ids_2>`
+   * :doc:`ieee_754(Precision,ByteOrder,NaNRepresentation) <ieee_754_3>`
+   * :doc:`ieee_754_fields(Precision,ByteOrder) <ieee_754_fields_2>`
+   * :doc:`inheritance_diagram <inheritance_diagram_0>`
+   * :doc:`inheritance_diagram(Format) <inheritance_diagram_1>`
+   * :doc:`integer <integer_0>`
+   * :doc:`integer_partitions <integer_partitions_0>`
+   * :doc:`interval <interval_0>`
+   * :doc:`interval_algebra <interval_algebra_0>`
+   * :doc:`interval_constraint_network <interval_constraint_network_0>`
+   * :doc:`interval_relation_set <interval_relation_set_0>`
+   * :doc:`ip_grammars(Format) <ip_grammars_1>`
+   * :doc:`iqr_anomaly_detector <iqr_anomaly_detector_0>`
+   * :doc:`iso8601 <iso8601_0>`
+   * :doc:`iso_13616 <iso_13616_0>`
+   * :doc:`iso_13616_registry <iso_13616_registry_0>`
+   * :doc:`iso_3166 <iso_3166_0>`
+   * :doc:`iso_3166_1 <iso_3166_1_0>`
+   * :doc:`iso_3166_2 <iso_3166_2_0>`
+   * :doc:`iso_4217 <iso_4217_0>`
+   * :doc:`iso_639 <iso_639_0>`
+   * :doc:`iso_639_1 <iso_639_1_0>`
+   * :doc:`iso_639_2 <iso_639_2_0>`
+   * :doc:`iso_639_3 <iso_639_3_0>`
+   * :doc:`iso_639_5 <iso_639_5_0>`
+   * :doc:`iso_8859_1 <iso_8859_1_0>`
+   * :doc:`iso_8859_10 <iso_8859_10_0>`
+   * :doc:`iso_8859_13 <iso_8859_13_0>`
+   * :doc:`iso_8859_14 <iso_8859_14_0>`
+   * :doc:`iso_8859_15 <iso_8859_15_0>`
+   * :doc:`iso_8859_16 <iso_8859_16_0>`
+   * :doc:`iso_8859_2 <iso_8859_2_0>`
+   * :doc:`iso_8859_3 <iso_8859_3_0>`
+   * :doc:`iso_8859_4 <iso_8859_4_0>`
+   * :doc:`iso_8859_9 <iso_8859_9_0>`
+   * :doc:`iso_9362 <iso_9362_0>`
+   * :doc:`isolation_forest_anomaly_detector <isolation_forest_anomaly_detector_0>`
+   * :doc:`issue_creator <issue_creator_0>`
+   * :doc:`it_language_profile <it_language_profile_0>`
+   * :doc:`ja_language_profile <ja_language_profile_0>`
+   * :doc:`java <java_0>`
+   * :doc:`java(Reference) <java_1>`
+   * :doc:`java(Reference,ReturnValue) <java_2>`
+   * :doc:`java_hook <java_hook_0>`
+   * :doc:`json <json_0>`
+   * :doc:`json(StringRepresentation) <json_1>`
+   * :doc:`json(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_3>`
+   * :doc:`json_graph <json_graph_0>`
+   * :doc:`json_ld <json_ld_0>`
+   * :doc:`json_ld(StringRepresentation) <json_ld_1>`
+   * :doc:`json_ld(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_ld_3>`
+   * :doc:`json_lines <json_lines_0>`
+   * :doc:`json_lines(StringRepresentation) <json_lines_1>`
+   * :doc:`json_lines(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_lines_3>`
+   * :doc:`json_patch <json_patch_0>`
+   * :doc:`json_path <json_path_0>`
+   * :doc:`json_path(StringRepresentation) <json_path_1>`
+   * :doc:`json_pointer <json_pointer_0>`
+   * :doc:`json_pointer(StringRepresentation) <json_pointer_1>`
+   * :doc:`json_rpc <json_rpc_0>`
+   * :doc:`json_schema <json_schema_0>`
+   * :doc:`json_schema(StringRepresentation) <json_schema_1>`
+   * :doc:`json_schema(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_schema_3>`
+   * :doc:`jwt <jwt_0>`
+   * :doc:`jwt_claims <jwt_claims_0>`
+   * :doc:`jwt_compact <jwt_compact_0>`
+   * :doc:`jwt_der <jwt_der_0>`
+   * :doc:`jwt_jwa <jwt_jwa_0>`
+   * :doc:`jwt_jwk <jwt_jwk_0>`
+   * :doc:`jwt_jwks <jwt_jwks_0>`
+   * :doc:`jwt_jws <jwt_jws_0>`
+   * :doc:`jwt_openssl <jwt_openssl_0>`
+   * :doc:`kcenters_clusterer <kcenters_clusterer_0>`
+   * :doc:`kemeny_young_ranker <kemeny_young_ranker_0>`
+   * :doc:`kernel_pca_projection <kernel_pca_projection_0>`
+   * :doc:`kernel_svm_classifier <kernel_svm_classifier_0>`
+   * :doc:`kmeans_clusterer <kmeans_clusterer_0>`
+   * :doc:`kmedians_clusterer <kmedians_clusterer_0>`
+   * :doc:`kmedoids_clusterer <kmedoids_clusterer_0>`
+   * :doc:`kmodes_clusterer <kmodes_clusterer_0>`
+   * :doc:`knn_classifier <knn_classifier_0>`
+   * :doc:`knn_distance_anomaly_detector <knn_distance_anomaly_detector_0>`
+   * :doc:`knn_regression <knn_regression_0>`
+   * :doc:`ko_language_profile <ko_language_profile_0>`
+   * :doc:`kprototypes_clusterer <kprototypes_clusterer_0>`
+   * :doc:`ksuid <ksuid_0>`
+   * :doc:`ksuid(Representation,Alphabet) <ksuid_2>`
+   * :doc:`ku_language_profile <ku_language_profile_0>`
+   * :doc:`la_language_profile <la_language_profile_0>`
+   * :doc:`language_detection_scripts <language_detection_scripts_0>`
+   * :doc:`language_detection_tokenizer <language_detection_tokenizer_0>`
+   * :doc:`language_detector(Representation,Strategy) <language_detector_2>`
+   * :doc:`language_profiles <language_profiles_0>`
+   * :doc:`lasso_regression <lasso_regression_0>`
+   * :doc:`lbfgs(Problem) <lbfgs_1>`
+   * :doc:`lbfgs_b(Problem) <lbfgs_b_1>`
+   * :doc:`lcom_metric <lcom_metric_0>`
+   * :doc:`lcov_report <lcov_report_0>`
+   * :doc:`lda_classifier <lda_classifier_0>`
+   * :doc:`lda_projection <lda_projection_0>`
+   * :doc:`lemmatizer(Representation,Language) <lemmatizer_2>`
+   * :doc:`lgtdoc <lgtdoc_0>`
+   * :doc:`lgtunit <lgtunit_0>`
+   * :doc:`library_dependency_diagram <library_dependency_diagram_0>`
+   * :doc:`library_dependency_diagram(Format) <library_dependency_diagram_1>`
+   * :doc:`library_load_diagram <library_load_diagram_0>`
+   * :doc:`library_load_diagram(Format) <library_load_diagram_1>`
+   * :doc:`linda <linda_0>`
+   * :doc:`linear_algebra <linear_algebra_0>`
+   * :doc:`linear_regression <linear_regression_0>`
+   * :doc:`linear_svm_classifier <linear_svm_classifier_0>`
+   * :doc:`lines_metric <lines_metric_0>`
+   * :doc:`linter_reporter <linter_reporter_0>`
+   * :doc:`list <list_0>`
+   * :doc:`list(Type) <list_1>`
+   * :doc:`lof_anomaly_detector <lof_anomaly_detector_0>`
+   * :doc:`log_barrier(Problem,InnerSolver) <log_barrier_2>`
+   * :doc:`logger <logger_0>`
+   * :doc:`logistic_regression_classifier <logistic_regression_classifier_0>`
+   * :doc:`logtalk <logtalk_0>`
+   * :doc:`loop <loop_0>`
+   * :doc:`lovins_stemmer(Representation) <lovins_stemmer_1>`
+   * :doc:`lru_cache <lru_cache_0>`
+   * :doc:`lt_language_profile <lt_language_profile_0>`
+   * :doc:`lv_language_profile <lv_language_profile_0>`
+   * :doc:`magic <magic_0>`
+   * :doc:`magic_expansion(Mode) <magic_expansion_1>`
+   * :doc:`massey_ranker <massey_ranker_0>`
+   * :doc:`maxheap <maxheap_0>`
+   * :doc:`maybe <maybe_0>`
+   * :doc:`mcp_server <mcp_server_0>`
+   * :doc:`mcp_server_2025_06_18_spec <mcp_server_2025_06_18_spec_0>`
+   * :doc:`mcp_server_2025_11_25_spec <mcp_server_2025_11_25_spec_0>`
+   * :doc:`mcp_server_2026_07_28_spec <mcp_server_2026_07_28_spec_0>`
+   * :doc:`mcp_server_stdio_transport <mcp_server_stdio_transport_0>`
+   * :doc:`mcp_server_streamable_http_transport <mcp_server_streamable_http_transport_0>`
+   * :doc:`mcp_streamable_http_handler <mcp_streamable_http_handler_0>`
+   * :doc:`md5 <md5_0>`
+   * :doc:`memcached <memcached_0>`
+   * :doc:`mermaid_graph_language <mermaid_graph_language_0>`
+   * :doc:`message_pack(StringRepresentation) <message_pack_1>`
+   * :doc:`meta <meta_0>`
+   * :doc:`meta_compiler <meta_compiler_0>`
+   * :doc:`metagol <metagol_0>`
+   * :doc:`mi_metric <mi_metric_0>`
+   * :doc:`mi_metric(Stroud) <mi_metric_1>`
+   * :doc:`milp_branch_and_bound <milp_branch_and_bound_0>`
+   * :doc:`mime_types <mime_types_0>`
+   * :doc:`minheap <minheap_0>`
+   * :doc:`minimal_output <minimal_output_0>`
+   * :doc:`mlp_classifier <mlp_classifier_0>`
+   * :doc:`modified_z_score_anomaly_detector <modified_z_score_anomaly_detector_0>`
+   * :doc:`modules_diagram_support <modules_diagram_support_0>`
+   * :doc:`mqtt <mqtt_0>`
+   * :doc:`mr_language_profile <mr_language_profile_0>`
+   * :doc:`ms_language_profile <ms_language_profile_0>`
+   * :doc:`multi_classification_ripple_down_rules <multi_classification_ripple_down_rules_0>`
+   * :doc:`multisets <multisets_0>`
+   * :doc:`multivariate_distributions(Random) <multivariate_distributions_1>`
+   * :doc:`murmurhash3_x64_128 <murmurhash3_x64_128_0>`
+   * :doc:`murmurhash3_x86_128 <murmurhash3_x86_128_0>`
+   * :doc:`murmurhash3_x86_32 <murmurhash3_x86_32_0>`
+   * :doc:`mutation_testing <mutation_testing_0>`
+   * :doc:`mutations_store <mutations_store_0>`
+   * :doc:`n_grams(Representation) <n_grams_1>`
+   * :doc:`naive_bayes_classifier <naive_bayes_classifier_0>`
+   * :doc:`nanoid <nanoid_0>`
+   * :doc:`nanoid(Representation,Size,Alphabet) <nanoid_3>`
+   * :doc:`natural <natural_0>`
+   * :doc:`navltree <navltree_0>`
+   * :doc:`nbintree <nbintree_0>`
+   * :doc:`nearest_centroid_classifier <nearest_centroid_classifier_0>`
+   * :doc:`nelder_mead(Problem) <nelder_mead_1>`
+   * :doc:`newton_root_finder(Function) <newton_root_finder_1>`
+   * :doc:`ngram_language_detector <ngram_language_detector_0>`
+   * :doc:`nl_language_profile <nl_language_profile_0>`
+   * :doc:`nmea <nmea_0>`
+   * :doc:`nmf_projection <nmf_projection_0>`
+   * :doc:`no_language_profile <no_language_profile_0>`
+   * :doc:`noc_metric <noc_metric_0>`
+   * :doc:`nor_metric <nor_metric_0>`
+   * :doc:`nrbtree <nrbtree_0>`
+   * :doc:`number <number_0>`
+   * :doc:`number_grammars(Format) <number_grammars_1>`
+   * :doc:`numberlist <numberlist_0>`
+   * :doc:`object_wrapper_hook <object_wrapper_hook_0>`
+   * :doc:`object_wrapper_hook(Protocol) <object_wrapper_hook_1>`
+   * :doc:`object_wrapper_hook(Name,Relations) <object_wrapper_hook_2>`
+   * :doc:`one_class_svm_anomaly_detector <one_class_svm_anomaly_detector_0>`
+   * :doc:`open_ai <open_ai_0>`
+   * :doc:`open_ai_api <open_ai_api_0>`
+   * :doc:`open_ai_catalog <open_ai_catalog_0>`
+   * :doc:`open_ai_client <open_ai_client_0>`
+   * :doc:`open_ai_event_stream <open_ai_event_stream_0>`
+   * :doc:`open_ai_server(Backend) <open_ai_server_1>`
+   * :doc:`open_api <open_api_0>`
+   * :doc:`open_id <open_id_0>`
+   * :doc:`open_id_client <open_id_client_0>`
+   * :doc:`open_id_der <open_id_der_0>`
+   * :doc:`open_id_discovery <open_id_discovery_0>`
+   * :doc:`open_id_jwks <open_id_jwks_0>`
+   * :doc:`open_id_jwks_cache <open_id_jwks_cache_0>`
+   * :doc:`open_id_jwt <open_id_jwt_0>`
+   * :doc:`open_id_logout <open_id_logout_0>`
+   * :doc:`open_id_openssl <open_id_openssl_0>`
+   * :doc:`open_id_pkce <open_id_pkce_0>`
+   * :doc:`open_id_response <open_id_response_0>`
+   * :doc:`optics_clusterer <optics_clusterer_0>`
+   * :doc:`optional <optional_0>`
+   * :doc:`optional(Optional) <optional_1>`
+   * :doc:`os <os_0>`
+   * :doc:`otp <otp_0>`
+   * :doc:`packs <packs_0>`
+   * :doc:`packs_specs_hook <packs_specs_hook_0>`
+   * :doc:`pairing_heap(Order) <pairing_heap_1>`
+   * :doc:`pairing_heap_max <pairing_heap_max_0>`
+   * :doc:`pairing_heap_min <pairing_heap_min_0>`
+   * :doc:`pairs <pairs_0>`
+   * :doc:`particle_swarm_optimization(Problem) <particle_swarm_optimization_1>`
+   * :doc:`particle_swarm_optimization(Problem,RandomAlgorithm) <particle_swarm_optimization_2>`
+   * :doc:`partitions <partitions_0>`
+   * :doc:`paseto <paseto_0>`
+   * :doc:`paseto_claims <paseto_claims_0>`
+   * :doc:`paseto_keys <paseto_keys_0>`
+   * :doc:`paseto_v4 <paseto_v4_0>`
+   * :doc:`pca_projection <pca_projection_0>`
+   * :doc:`pddl <pddl_0>`
+   * :doc:`penalty_sub_problem(Problem,OuterIteration,StartPoint,Rho,Sign) <penalty_sub_problem_5>`
+   * :doc:`permutations <permutations_0>`
+   * :doc:`phase1_sub_problem(Problem,StartPoint) <phase1_sub_problem_2>`
+   * :doc:`piecewise_linear_interpolator <piecewise_linear_interpolator_0>`
+   * :doc:`pl_language_profile <pl_language_profile_0>`
+   * :doc:`plackett_luce_last_ranker <plackett_luce_last_ranker_0>`
+   * :doc:`plackett_luce_ranker <plackett_luce_ranker_0>`
+   * :doc:`plantuml_graph_language <plantuml_graph_language_0>`
+   * :doc:`pls_projection <pls_projection_0>`
+   * :doc:`population <population_0>`
+   * :doc:`porter_stemmer(Representation) <porter_stemmer_1>`
+   * :doc:`ports_profiler <ports_profiler_0>`
+   * :doc:`predicate_directive_suppression(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation) <predicate_directive_suppression_5>`
+   * :doc:`prefix_span_pattern_miner <prefix_span_pattern_miner_0>`
+   * :doc:`primal_dual_interior_point(Problem) <primal_dual_interior_point_1>`
+   * :doc:`print_goal_hook <print_goal_hook_0>`
+   * :doc:`probabilistic_pca_projection <probabilistic_pca_projection_0>`
+   * :doc:`process <process_0>`
+   * :doc:`prolog_module_hook(Module) <prolog_module_hook_1>`
+   * :doc:`protobuf <protobuf_0>`
+   * :doc:`pt_language_profile <pt_language_profile_0>`
+   * :doc:`qda_classifier <qda_classifier_0>`
+   * :doc:`qp_active_set <qp_active_set_0>`
+   * :doc:`quadratic_penalty(Problem,InnerSolver) <quadratic_penalty_2>`
+   * :doc:`queue <queue_0>`
+   * :doc:`random <random_0>`
+   * :doc:`random(Algorithm) <random_1>`
+   * :doc:`random_forest_classifier <random_forest_classifier_0>`
+   * :doc:`random_forest_regression <random_forest_regression_0>`
+   * :doc:`random_projection <random_projection_0>`
+   * :doc:`rank_centrality <rank_centrality_0>`
+   * :doc:`ranked_pairs <ranked_pairs_0>`
+   * :doc:`rbtree <rbtree_0>`
+   * :doc:`reader <reader_0>`
+   * :doc:`recorded_database <recorded_database_0>`
+   * :doc:`redis <redis_0>`
+   * :doc:`registries <registries_0>`
+   * :doc:`registry_loader_hook <registry_loader_hook_0>`
+   * :doc:`regression_tree <regression_tree_0>`
+   * :doc:`regularized_bradley_terry_ranker <regularized_bradley_terry_ranker_0>`
+   * :doc:`relational_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <relational_operator_replacement_5>`
+   * :doc:`rfc_metric <rfc_metric_0>`
+   * :doc:`ridge_regression <ridge_regression_0>`
+   * :doc:`rk45_ode_solver(System) <rk45_ode_solver_1>`
+   * :doc:`rk4_ode_solver(System) <rk4_ode_solver_1>`
+   * :doc:`ro_language_profile <ro_language_profile_0>`
+   * :doc:`ru_language_profile <ru_language_profile_0>`
+   * :doc:`rule_expansion(Mode) <rule_expansion_1>`
+   * :doc:`s3_client <s3_client_0>`
+   * :doc:`s3_client(HTTPTransport) <s3_client_1>`
+   * :doc:`s3_endpoints <s3_endpoints_0>`
+   * :doc:`s3_headers <s3_headers_0>`
+   * :doc:`s3_session(HTTPTransport) <s3_session_1>`
+   * :doc:`s3_signing <s3_signing_0>`
+   * :doc:`s3_xml <s3_xml_0>`
+   * :doc:`sample <sample_0>`
+   * :doc:`sarif <sarif_0>`
+   * :doc:`sbom <sbom_0>`
+   * :doc:`schulze_ranker <schulze_ranker_0>`
+   * :doc:`scope_directive_replacement(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation) <scope_directive_replacement_5>`
+   * :doc:`script_language_detector <script_language_detector_0>`
+   * :doc:`sdbm_32 <sdbm_32_0>`
+   * :doc:`sdbm_64 <sdbm_64_0>`
+   * :doc:`secant_root_finder(Function) <secant_root_finder_1>`
+   * :doc:`sequence_grammars <sequence_grammars_0>`
+   * :doc:`set <set_0>`
+   * :doc:`set(Type) <set_1>`
+   * :doc:`sgd_classifier <sgd_classifier_0>`
+   * :doc:`sha1 <sha1_0>`
+   * :doc:`sha224 <sha224_0>`
+   * :doc:`sha256 <sha256_0>`
+   * :doc:`sha384 <sha384_0>`
+   * :doc:`sha3_224 <sha3_224_0>`
+   * :doc:`sha3_256 <sha3_256_0>`
+   * :doc:`sha3_384 <sha3_384_0>`
+   * :doc:`sha3_512 <sha3_512_0>`
+   * :doc:`sha512 <sha512_0>`
+   * :doc:`sha512_256 <sha512_256_0>`
+   * :doc:`shake128(OutputBytes) <shake128_1>`
+   * :doc:`shake256(OutputBytes) <shake256_1>`
+   * :doc:`shell <shell_0>`
+   * :doc:`shell(Interpreters) <shell_1>`
+   * :doc:`shell_expansion(Mode) <shell_expansion_1>`
+   * :doc:`simplex <simplex_0>`
+   * :doc:`simulated_annealing(Problem) <simulated_annealing_1>`
+   * :doc:`simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing_2>`
+   * :doc:`single_classification_ripple_down_rules <single_classification_ripple_down_rules_0>`
+   * :doc:`siphash_2_4 <siphash_2_4_0>`
+   * :doc:`siphash_2_4(Key) <siphash_2_4_1>`
+   * :doc:`size_metric <size_metric_0>`
+   * :doc:`sk_language_profile <sk_language_profile_0>`
+   * :doc:`sl_language_profile <sl_language_profile_0>`
+   * :doc:`smtp <smtp_0>`
+   * :doc:`smtp_process_transport <smtp_process_transport_0>`
+   * :doc:`snowflakeid <snowflakeid_0>`
+   * :doc:`snowflakeid(Representation,EpochMilliseconds,TimeUnitMilliseconds,TimestampBits,NodeBits,SequenceBits,Node) <snowflakeid_7>`
+   * :doc:`snowflakeid_instagram <snowflakeid_instagram_0>`
+   * :doc:`snowflakeid_instagram(Representation) <snowflakeid_instagram_1>`
+   * :doc:`snowflakeid_sonyflake <snowflakeid_sonyflake_0>`
+   * :doc:`snowflakeid_sonyflake(Representation) <snowflakeid_sonyflake_1>`
+   * :doc:`snowflakeid_twitter <snowflakeid_twitter_0>`
+   * :doc:`snowflakeid_twitter(Representation) <snowflakeid_twitter_1>`
+   * :doc:`so_language_profile <so_language_profile_0>`
+   * :doc:`socket <socket_0>`
+   * :doc:`spade_pattern_miner <spade_pattern_miner_0>`
+   * :doc:`spectral_clusterer <spectral_clusterer_0>`
+   * :doc:`splaytree <splaytree_0>`
+   * :doc:`sqids <sqids_0>`
+   * :doc:`sqids(Representation) <sqids_1>`
+   * :doc:`sqp_active_set(Problem) <sqp_active_set_1>`
+   * :doc:`st_language_profile <st_language_profile_0>`
+   * :doc:`stomp <stomp_0>`
+   * :doc:`stop_words(Representation,Language) <stop_words_2>`
+   * :doc:`stopword_language_detector <stopword_language_detector_0>`
+   * :doc:`stopwords_af <stopwords_af_0>`
+   * :doc:`stopwords_ar <stopwords_ar_0>`
+   * :doc:`stopwords_bg <stopwords_bg_0>`
+   * :doc:`stopwords_bn <stopwords_bn_0>`
+   * :doc:`stopwords_br <stopwords_br_0>`
+   * :doc:`stopwords_ca <stopwords_ca_0>`
+   * :doc:`stopwords_cs <stopwords_cs_0>`
+   * :doc:`stopwords_da <stopwords_da_0>`
+   * :doc:`stopwords_de <stopwords_de_0>`
+   * :doc:`stopwords_el <stopwords_el_0>`
+   * :doc:`stopwords_en <stopwords_en_0>`
+   * :doc:`stopwords_eo <stopwords_eo_0>`
+   * :doc:`stopwords_es <stopwords_es_0>`
+   * :doc:`stopwords_et <stopwords_et_0>`
+   * :doc:`stopwords_eu <stopwords_eu_0>`
+   * :doc:`stopwords_fa <stopwords_fa_0>`
+   * :doc:`stopwords_fi <stopwords_fi_0>`
+   * :doc:`stopwords_fr <stopwords_fr_0>`
+   * :doc:`stopwords_ga <stopwords_ga_0>`
+   * :doc:`stopwords_gl <stopwords_gl_0>`
+   * :doc:`stopwords_ha <stopwords_ha_0>`
+   * :doc:`stopwords_he <stopwords_he_0>`
+   * :doc:`stopwords_hi <stopwords_hi_0>`
+   * :doc:`stopwords_hr <stopwords_hr_0>`
+   * :doc:`stopwords_hu <stopwords_hu_0>`
+   * :doc:`stopwords_hy <stopwords_hy_0>`
+   * :doc:`stopwords_id <stopwords_id_0>`
+   * :doc:`stopwords_it <stopwords_it_0>`
+   * :doc:`stopwords_ja <stopwords_ja_0>`
+   * :doc:`stopwords_ko <stopwords_ko_0>`
+   * :doc:`stopwords_ku <stopwords_ku_0>`
+   * :doc:`stopwords_la <stopwords_la_0>`
+   * :doc:`stopwords_lt <stopwords_lt_0>`
+   * :doc:`stopwords_lv <stopwords_lv_0>`
+   * :doc:`stopwords_mr <stopwords_mr_0>`
+   * :doc:`stopwords_ms <stopwords_ms_0>`
+   * :doc:`stopwords_nl <stopwords_nl_0>`
+   * :doc:`stopwords_no <stopwords_no_0>`
+   * :doc:`stopwords_pl <stopwords_pl_0>`
+   * :doc:`stopwords_pt <stopwords_pt_0>`
+   * :doc:`stopwords_ro <stopwords_ro_0>`
+   * :doc:`stopwords_ru <stopwords_ru_0>`
+   * :doc:`stopwords_sk <stopwords_sk_0>`
+   * :doc:`stopwords_sl <stopwords_sl_0>`
+   * :doc:`stopwords_so <stopwords_so_0>`
+   * :doc:`stopwords_st <stopwords_st_0>`
+   * :doc:`stopwords_sv <stopwords_sv_0>`
+   * :doc:`stopwords_sw <stopwords_sw_0>`
+   * :doc:`stopwords_th <stopwords_th_0>`
+   * :doc:`stopwords_tl <stopwords_tl_0>`
+   * :doc:`stopwords_tr <stopwords_tr_0>`
+   * :doc:`stopwords_uk <stopwords_uk_0>`
+   * :doc:`stopwords_ur <stopwords_ur_0>`
+   * :doc:`stopwords_vi <stopwords_vi_0>`
+   * :doc:`stopwords_yo <stopwords_yo_0>`
+   * :doc:`stopwords_zh <stopwords_zh_0>`
+   * :doc:`stopwords_zu <stopwords_zu_0>`
+   * :doc:`streamvars <streamvars_0>`
+   * :doc:`string(Representation) <string_1>`
+   * :doc:`string_distance(Representation) <string_distance_1>`
+   * :doc:`sub_problem(Problem,OuterIteration,StartPoint,EqLambda,IneqLambda,Rho,Sign) <sub_problem_7>`
+   * :doc:`subprocess_coverage_hook <subprocess_coverage_hook_0>`
+   * :doc:`subprocess_mutation_hook <subprocess_mutation_hook_0>`
+   * :doc:`subsequences <subsequences_0>`
+   * :doc:`subunit_v1_output <subunit_v1_output_0>`
+   * :doc:`subunit_v1_report <subunit_v1_report_0>`
+   * :doc:`subunit_v2_output <subunit_v2_output_0>`
+   * :doc:`subunit_v2_report <subunit_v2_report_0>`
+   * :doc:`suppress_goal_hook <suppress_goal_hook_0>`
+   * :doc:`sv_language_profile <sv_language_profile_0>`
+   * :doc:`svr_regression <svr_regression_0>`
+   * :doc:`sw_language_profile <sw_language_profile_0>`
+   * :doc:`tabu_search(Problem) <tabu_search_1>`
+   * :doc:`tabu_search(Problem,RandomAlgorithm) <tabu_search_2>`
+   * :doc:`tap_output <tap_output_0>`
+   * :doc:`tap_report <tap_report_0>`
+   * :doc:`term <term_0>`
+   * :doc:`term_io <term_io_0>`
+   * :doc:`text_normalizer(Representation,Profile) <text_normalizer_2>`
+   * :doc:`text_vectorizer <text_vectorizer_0>`
+   * :doc:`th_language_profile <th_language_profile_0>`
+   * :doc:`thurstone_mosteller_ranker <thurstone_mosteller_ranker_0>`
+   * :doc:`time <time_0>`
+   * :doc:`time_scales <time_scales_0>`
+   * :doc:`time_scales_data <time_scales_data_0>`
+   * :doc:`timeout <timeout_0>`
+   * :doc:`tl_language_profile <tl_language_profile_0>`
+   * :doc:`tle_orbits <tle_orbits_0>`
+   * :doc:`tokenizer(Representation,Language) <tokenizer_2>`
+   * :doc:`toml <toml_0>`
+   * :doc:`toml(StringRepresentation) <toml_1>`
+   * :doc:`toml(ObjectRepresentation,PairRepresentation,StringRepresentation) <toml_3>`
+   * :doc:`toon <toon_0>`
+   * :doc:`toon(StringRepresentation) <toon_1>`
+   * :doc:`toon(ObjectRepresentation,PairRepresentation,StringRepresentation) <toon_3>`
+   * :doc:`toychrdb <toychrdb_0>`
+   * :doc:`tr_language_profile <tr_language_profile_0>`
+   * :doc:`treap_set <treap_set_0>`
+   * :doc:`trie(Representation) <trie_1>`
+   * :doc:`trueskill_ranker <trueskill_ranker_0>`
+   * :doc:`truncated_svd_projection <truncated_svd_projection_0>`
+   * :doc:`trust_region_newton_cg(Problem) <trust_region_newton_cg_1>`
+   * :doc:`truth_literal_flip(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <truth_literal_flip_5>`
+   * :doc:`tsne_projection <tsne_projection_0>`
+   * :doc:`tsv <tsv_0>`
+   * :doc:`tsv(Header) <tsv_1>`
+   * :doc:`tsv(Header,Comments) <tsv_2>`
+   * :doc:`tutor <tutor_0>`
+   * :doc:`two3tree <two3tree_0>`
+   * :doc:`type <type_0>`
+   * :doc:`typeid <typeid_0>`
+   * :doc:`typeid(Representation) <typeid_1>`
+   * :doc:`tzif <tzif_0>`
+   * :doc:`tzif_zone_ids <tzif_zone_ids_0>`
+   * :doc:`uk_language_profile <uk_language_profile_0>`
+   * :doc:`ulid <ulid_0>`
+   * :doc:`ulid(Representation) <ulid_1>`
+   * :doc:`umap_projection <umap_projection_0>`
+   * :doc:`union_find <union_find_0>`
+   * :doc:`univariate_distributions(Random) <univariate_distributions_1>`
+   * :doc:`unweighted_directed_graph <unweighted_directed_graph_0>`
+   * :doc:`unweighted_directed_graph(Dictionary) <unweighted_directed_graph_1>`
+   * :doc:`unweighted_undirected_graph <unweighted_undirected_graph_0>`
+   * :doc:`unweighted_undirected_graph(Dictionary) <unweighted_undirected_graph_1>`
+   * :doc:`upn_metric <upn_metric_0>`
+   * :doc:`ur_language_profile <ur_language_profile_0>`
+   * :doc:`uri_template(Representation) <uri_template_1>`
+   * :doc:`url(Representation) <url_1>`
+   * :doc:`us_ascii <us_ascii_0>`
+   * :doc:`user <user_0>`
+   * :doc:`uses_diagram <uses_diagram_0>`
+   * :doc:`uses_diagram(Format) <uses_diagram_1>`
+   * :doc:`uses_directive_resource_deletion(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation) <uses_directive_resource_deletion_5>`
+   * :doc:`utf_16be <utf_16be_0>`
+   * :doc:`utf_16le <utf_16le_0>`
+   * :doc:`utf_32be <utf_32be_0>`
+   * :doc:`utf_32le <utf_32le_0>`
+   * :doc:`utf_8 <utf_8_0>`
+   * :doc:`utf_8_character_set <utf_8_character_set_0>`
+   * :doc:`uuid <uuid_0>`
+   * :doc:`uuid(Representation) <uuid_1>`
+   * :doc:`validated <validated_0>`
+   * :doc:`validation <validation_0>`
+   * :doc:`validation(Validation) <validation_1>`
+   * :doc:`varlist <varlist_0>`
+   * :doc:`vi_language_profile <vi_language_profile_0>`
+   * :doc:`weighted_directed_graph <weighted_directed_graph_0>`
+   * :doc:`weighted_directed_graph(Dictionary) <weighted_directed_graph_1>`
+   * :doc:`weighted_undirected_graph <weighted_undirected_graph_0>`
+   * :doc:`weighted_undirected_graph(Dictionary) <weighted_undirected_graph_1>`
+   * :doc:`windows_1250 <windows_1250_0>`
+   * :doc:`windows_1251 <windows_1251_0>`
+   * :doc:`windows_1252 <windows_1252_0>`
+   * :doc:`windows_1253 <windows_1253_0>`
+   * :doc:`windows_1254 <windows_1254_0>`
+   * :doc:`windows_1257 <windows_1257_0>`
+   * :doc:`wkt_wkb <wkt_wkb_0>`
+   * :doc:`wmc_metric <wmc_metric_0>`
+   * :doc:`wrapper <wrapper_0>`
+   * :doc:`write_to_file_hook(File) <write_to_file_hook_1>`
+   * :doc:`write_to_file_hook(File,Options) <write_to_file_hook_2>`
+   * :doc:`write_to_stream_hook(Stream) <write_to_stream_hook_1>`
+   * :doc:`write_to_stream_hook(Stream,Options) <write_to_stream_hook_2>`
+   * :doc:`xhtml11 <xhtml11_0>`
+   * :doc:`xml <xml_0>`
+   * :doc:`xml_whatwg_entities <xml_whatwg_entities_0>`
+   * :doc:`xref_diagram <xref_diagram_0>`
+   * :doc:`xref_diagram(Format) <xref_diagram_1>`
+   * :doc:`xunit_net_v2_output <xunit_net_v2_output_0>`
+   * :doc:`xunit_net_v2_report <xunit_net_v2_report_0>`
+   * :doc:`xunit_output <xunit_output_0>`
+   * :doc:`xunit_report <xunit_report_0>`
+   * :doc:`yaml <yaml_0>`
+   * :doc:`yo_language_profile <yo_language_profile_0>`
+   * :doc:`z_score_anomaly_detector <z_score_anomaly_detector_0>`
+   * :doc:`zh_language_profile <zh_language_profile_0>`
+   * :doc:`zlist <zlist_0>`
+   * :doc:`zu_language_profile <zu_language_profile_0>`
 
 Protocols
 ---------
 
-.. toctree::
-   :maxdepth: 1
+.. only:: not latex
 
+   .. toctree::
+      :maxdepth: 1
 
+      anomaly_dataset_protocol <anomaly_dataset_protocol_0>
+      anomaly_detector_protocol <anomaly_detector_protocol_0>
+      ant_colony_problem_protocol <ant_colony_problem_protocol_0>
+      application_protocol <application_protocol_0>
+      arrangements_protocol <arrangements_protocol_0>
+      assignvarsp <assignvarsp_0>
+      association_rule_miner_protocol <association_rule_miner_protocol_0>
+      block_cipher_prepared_key_protocol <block_cipher_prepared_key_protocol_0>
+      block_cipher_protocol <block_cipher_protocol_0>
+      cartesian_products_protocol <cartesian_products_protocol_0>
+      ccsds_frame_protocol <ccsds_frame_protocol_0>
+      ccsds_time_code_protocol <ccsds_time_code_protocol_0>
+      character_set_protocol <character_set_protocol_0>
+      characterp <characterp_0>
+      class_hierarchyp <class_hierarchyp_0>
+      classifier_protocol <classifier_protocol_0>
+      clause_mutator_protocol <clause_mutator_protocol_0>
+      cloning <cloning_0>
+      clusterer_protocol <clusterer_protocol_0>
+      clustering_dataset_protocol <clustering_dataset_protocol_0>
+      cmac_protocol <cmac_protocol_0>
+      combinations_protocol <combinations_protocol_0>
+      comparingp <comparingp_0>
+      constrained_optimization_problem_protocol <constrained_optimization_problem_protocol_0>
+      crs_projections_protocol <crs_projections_protocol_0>
+      csv_protocol <csv_protocol_0>
+      cuid2_protocol <cuid2_protocol_0>
+      databasep <databasep_0>
+      datalog_protocol <datalog_protocol_0>
+      dataset_protocol <dataset_protocol_0>
+      datep <datep_0>
+      dates_tz_protocol <dates_tz_protocol_0>
+      debuggerp <debuggerp_0>
+      deque_protocol <deque_protocol_0>
+      derangements_protocol <derangements_protocol_0>
+      dictionaryp <dictionaryp_0>
+      differential_evolution_problem_protocol <differential_evolution_problem_protocol_0>
+      dimension_reducer_protocol <dimension_reducer_protocol_0>
+      dimension_reduction_dataset_protocol <dimension_reduction_dataset_protocol_0>
+      directed_graph_protocol <directed_graph_protocol_0>
+      directive_mutator_protocol <directive_mutator_protocol_0>
+      event_registryp <event_registryp_0>
+      expanding <expanding_0>
+      flags_validator <flags_validator_0>
+      forwarding <forwarding_0>
+      genetic_algorithm_problem_protocol <genetic_algorithm_problem_protocol_0>
+      geohash_protocol <geohash_protocol_0>
+      geojson_protocol <geojson_protocol_0>
+      geospatial_protocol <geospatial_protocol_0>
+      git_protocol <git_protocol_0>
+      gpx_protocol <gpx_protocol_0>
+      graph_language_protocol <graph_language_protocol_0>
+      graph_protocol <graph_protocol_0>
+      hash_digest_protocol <hash_digest_protocol_0>
+      hash_protocol <hash_protocol_0>
+      hash_state_protocol <hash_state_protocol_0>
+      heap_protocol <heap_protocol_0>
+      heapp <heapp_0>
+      hierarchyp <hierarchyp_0>
+      hmac_protocol <hmac_protocol_0>
+      http_authenticate_verifier_protocol <http_authenticate_verifier_protocol_0>
+      http_body_codec_protocol <http_body_codec_protocol_0>
+      http_digest_verifier_protocol <http_digest_verifier_protocol_0>
+      http_handler_protocol <http_handler_protocol_0>
+      http_oauth_scope_checker_protocol <http_oauth_scope_checker_protocol_0>
+      http_oauth_verifier_protocol <http_oauth_verifier_protocol_0>
+      http_request_protocol <http_request_protocol_0>
+      http_response_protocol <http_response_protocol_0>
+      http_sse_service_handler_protocol <http_sse_service_handler_protocol_0>
+      http_transport_protocol <http_transport_protocol_0>
+      http_websocket_service_handler_protocol <http_websocket_service_handler_protocol_0>
+      ieee_754_fields_protocol <ieee_754_fields_protocol_0>
+      ieee_754_protocol <ieee_754_protocol_0>
+      integer_partitions_protocol <integer_partitions_protocol_0>
+      interpolator_protocol <interpolator_protocol_0>
+      interpreterp <interpreterp_0>
+      interval_algebra_protocol <interval_algebra_protocol_0>
+      interval_constraint_network_protocol <interval_constraint_network_protocol_0>
+      interval_protocol <interval_protocol_0>
+      interval_relation_set_protocol <interval_relation_set_protocol_0>
+      iso_13616_protocol <iso_13616_protocol_0>
+      iso_3166_protocol <iso_3166_protocol_0>
+      iso_4217_protocol <iso_4217_protocol_0>
+      iso_639_protocol <iso_639_protocol_0>
+      iso_9362_protocol <iso_9362_protocol_0>
+      java_access_protocol <java_access_protocol_0>
+      java_utils_protocol <java_utils_protocol_0>
+      json_graph_data_protocol <json_graph_data_protocol_0>
+      json_graph_protocol <json_graph_protocol_0>
+      json_ld_protocol <json_ld_protocol_0>
+      json_lines_protocol <json_lines_protocol_0>
+      json_patch_protocol <json_patch_protocol_0>
+      json_path_protocol <json_path_protocol_0>
+      json_pointer_protocol <json_pointer_protocol_0>
+      json_protocol <json_protocol_0>
+      json_schema_protocol <json_schema_protocol_0>
+      ksuid_protocol <ksuid_protocol_0>
+      language_detection_strategy_protocol <language_detection_strategy_protocol_0>
+      language_detector_protocol <language_detector_protocol_0>
+      language_profile_protocol <language_profile_protocol_0>
+      lemmatizer_language_protocol <lemmatizer_language_protocol_0>
+      lemmatizer_protocol <lemmatizer_protocol_0>
+      lgtdocp <lgtdocp_0>
+      linear_algebra_protocol <linear_algebra_protocol_0>
+      linear_programming_protocol <linear_programming_protocol_0>
+      listp <listp_0>
+      local_optimization_problem_protocol <local_optimization_problem_protocol_0>
+      loggingp <loggingp_0>
+      loopp <loopp_0>
+      lru_cache_protocol <lru_cache_protocol_0>
+      mcp_cache_protocol <mcp_cache_protocol_0>
+      mcp_completion_protocol <mcp_completion_protocol_0>
+      mcp_multiround_protocol <mcp_multiround_protocol_0>
+      mcp_prompt_protocol <mcp_prompt_protocol_0>
+      mcp_resource_protocol <mcp_resource_protocol_0>
+      mcp_server_spec_protocol <mcp_server_spec_protocol_0>
+      mcp_server_transport_protocol <mcp_server_transport_protocol_0>
+      mcp_tool_protocol <mcp_tool_protocol_0>
+      mcp_ui_protocol <mcp_ui_protocol_0>
+      metagol_example_protocol <metagol_example_protocol_0>
+      metap <metap_0>
+      monitoring <monitoring_0>
+      monitorp <monitorp_0>
+      multiplayer_ranking_dataset_protocol <multiplayer_ranking_dataset_protocol_0>
+      multisets_protocol <multisets_protocol_0>
+      multivariate_distributions_protocol <multivariate_distributions_protocol_0>
+      mutator_protocol <mutator_protocol_0>
+      n_grams_protocol <n_grams_protocol_0>
+      nanoid_protocol <nanoid_protocol_0>
+      nested_dictionary_protocol <nested_dictionary_protocol_0>
+      nmea_protocol <nmea_protocol_0>
+      numberlistp <numberlistp_0>
+      ode_solver_protocol <ode_solver_protocol_0>
+      ode_system_protocol <ode_system_protocol_0>
+      open_ai_backend_protocol <open_ai_backend_protocol_0>
+      open_api_provider_protocol <open_api_provider_protocol_0>
+      options_protocol <options_protocol_0>
+      osp <osp_0>
+      otp_protocol <otp_protocol_0>
+      pack_protocol <pack_protocol_0>
+      pairwise_measurement_dataset_protocol <pairwise_measurement_dataset_protocol_0>
+      pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol_0>
+      particle_swarm_optimization_protocol <particle_swarm_optimization_protocol_0>
+      partitions_protocol <partitions_protocol_0>
+      paseto_protocol <paseto_protocol_0>
+      pattern_miner_protocol <pattern_miner_protocol_0>
+      permutations_protocol <permutations_protocol_0>
+      probabilistic_classifier_protocol <probabilistic_classifier_protocol_0>
+      proto_hierarchyp <proto_hierarchyp_0>
+      pseudo_random_protocol <pseudo_random_protocol_0>
+      qp_solver_protocol <qp_solver_protocol_0>
+      quadrature_protocol <quadrature_protocol_0>
+      queuep <queuep_0>
+      random_protocol <random_protocol_0>
+      ranker_protocol <ranker_protocol_0>
+      ranking_dataset_protocol <ranking_dataset_protocol_0>
+      registry_protocol <registry_protocol_0>
+      regression_dataset_protocol <regression_dataset_protocol_0>
+      regressor_protocol <regressor_protocol_0>
+      ripple_down_rules_common_protocol <ripple_down_rules_common_protocol_0>
+      ripple_down_rules_protocol <ripple_down_rules_protocol_0>
+      root_finder_protocol <root_finder_protocol_0>
+      s3_protocol <s3_protocol_0>
+      sampling_protocol <sampling_protocol_0>
+      sentence_splitter_protocol <sentence_splitter_protocol_0>
+      sequence_dataset_protocol <sequence_dataset_protocol_0>
+      setp <setp_0>
+      simulated_annealing_protocol <simulated_annealing_protocol_0>
+      smtp_protocol <smtp_protocol_0>
+      snowflakeid_protocol <snowflakeid_protocol_0>
+      spelling_normalizer_protocol <spelling_normalizer_protocol_0>
+      statisticsp <statisticsp_0>
+      stemmer_protocol <stemmer_protocol_0>
+      stop_words_language_protocol <stop_words_language_protocol_0>
+      stop_words_protocol <stop_words_protocol_0>
+      subsequences_protocol <subsequences_protocol_0>
+      supervised_dimension_reduction_dataset_protocol <supervised_dimension_reduction_dataset_protocol_0>
+      tabu_search_problem_protocol <tabu_search_problem_protocol_0>
+      target_supervised_dimension_reduction_dataset_protocol <target_supervised_dimension_reduction_dataset_protocol_0>
+      temporal_pairwise_ranking_dataset_protocol <temporal_pairwise_ranking_dataset_protocol_0>
+      term_io_protocol <term_io_protocol_0>
+      termp <termp_0>
+      text_normalization_profile_protocol <text_normalization_profile_protocol_0>
+      text_normalizer_protocol <text_normalizer_protocol_0>
+      text_vectorizer_protocol <text_vectorizer_protocol_0>
+      time_scales_protocol <time_scales_protocol_0>
+      timep <timep_0>
+      tle_orbits_protocol <tle_orbits_protocol_0>
+      tokenizer_language_protocol <tokenizer_language_protocol_0>
+      tokenizer_protocol <tokenizer_protocol_0>
+      toml_protocol <toml_protocol_0>
+      tool_diagnostics_protocol <tool_diagnostics_protocol_0>
+      toon_protocol <toon_protocol_0>
+      transaction_dataset_protocol <transaction_dataset_protocol_0>
+      tsv_protocol <tsv_protocol_0>
+      typeid_protocol <typeid_protocol_0>
+      tzif_protocol <tzif_protocol_0>
+      ulid_protocol <ulid_protocol_0>
+      union_find_protocol <union_find_protocol_0>
+      univariate_distributions_protocol <univariate_distributions_protocol_0>
+      univariate_function_protocol <univariate_function_protocol_0>
+      unweighted_graph_protocol <unweighted_graph_protocol_0>
+      uuid_protocol <uuid_protocol_0>
+      varlistp <varlistp_0>
+      weighted_graph_protocol <weighted_graph_protocol_0>
+      wkt_wkb_protocol <wkt_wkb_protocol_0>
+      yaml_protocol <yaml_protocol_0>
+      zipperp <zipperp_0>
 
-   anomaly_dataset_protocol <anomaly_dataset_protocol_0>
-   anomaly_detector_protocol <anomaly_detector_protocol_0>
-   ant_colony_problem_protocol <ant_colony_problem_protocol_0>
-   application_protocol <application_protocol_0>
-   arrangements_protocol <arrangements_protocol_0>
-   assignvarsp <assignvarsp_0>
-   association_rule_miner_protocol <association_rule_miner_protocol_0>
-   block_cipher_prepared_key_protocol <block_cipher_prepared_key_protocol_0>
-   block_cipher_protocol <block_cipher_protocol_0>
-   cartesian_products_protocol <cartesian_products_protocol_0>
-   ccsds_frame_protocol <ccsds_frame_protocol_0>
-   ccsds_time_code_protocol <ccsds_time_code_protocol_0>
-   character_set_protocol <character_set_protocol_0>
-   characterp <characterp_0>
-   class_hierarchyp <class_hierarchyp_0>
-   classifier_protocol <classifier_protocol_0>
-   clause_mutator_protocol <clause_mutator_protocol_0>
-   cloning <cloning_0>
-   clusterer_protocol <clusterer_protocol_0>
-   clustering_dataset_protocol <clustering_dataset_protocol_0>
-   cmac_protocol <cmac_protocol_0>
-   combinations_protocol <combinations_protocol_0>
-   comparingp <comparingp_0>
-   constrained_optimization_problem_protocol <constrained_optimization_problem_protocol_0>
-   crs_projections_protocol <crs_projections_protocol_0>
-   csv_protocol <csv_protocol_0>
-   cuid2_protocol <cuid2_protocol_0>
-   databasep <databasep_0>
-   datalog_protocol <datalog_protocol_0>
-   dataset_protocol <dataset_protocol_0>
-   datep <datep_0>
-   dates_tz_protocol <dates_tz_protocol_0>
-   debuggerp <debuggerp_0>
-   deque_protocol <deque_protocol_0>
-   derangements_protocol <derangements_protocol_0>
-   dictionaryp <dictionaryp_0>
-   differential_evolution_problem_protocol <differential_evolution_problem_protocol_0>
-   dimension_reducer_protocol <dimension_reducer_protocol_0>
-   dimension_reduction_dataset_protocol <dimension_reduction_dataset_protocol_0>
-   directed_graph_protocol <directed_graph_protocol_0>
-   directive_mutator_protocol <directive_mutator_protocol_0>
-   event_registryp <event_registryp_0>
-   expanding <expanding_0>
-   flags_validator <flags_validator_0>
-   forwarding <forwarding_0>
-   genetic_algorithm_problem_protocol <genetic_algorithm_problem_protocol_0>
-   geohash_protocol <geohash_protocol_0>
-   geojson_protocol <geojson_protocol_0>
-   geospatial_protocol <geospatial_protocol_0>
-   git_protocol <git_protocol_0>
-   gpx_protocol <gpx_protocol_0>
-   graph_language_protocol <graph_language_protocol_0>
-   graph_protocol <graph_protocol_0>
-   hash_digest_protocol <hash_digest_protocol_0>
-   hash_protocol <hash_protocol_0>
-   hash_state_protocol <hash_state_protocol_0>
-   heap_protocol <heap_protocol_0>
-   heapp <heapp_0>
-   hierarchyp <hierarchyp_0>
-   hmac_protocol <hmac_protocol_0>
-   http_authenticate_verifier_protocol <http_authenticate_verifier_protocol_0>
-   http_body_codec_protocol <http_body_codec_protocol_0>
-   http_digest_verifier_protocol <http_digest_verifier_protocol_0>
-   http_handler_protocol <http_handler_protocol_0>
-   http_oauth_scope_checker_protocol <http_oauth_scope_checker_protocol_0>
-   http_oauth_verifier_protocol <http_oauth_verifier_protocol_0>
-   http_request_protocol <http_request_protocol_0>
-   http_response_protocol <http_response_protocol_0>
-   http_sse_service_handler_protocol <http_sse_service_handler_protocol_0>
-   http_transport_protocol <http_transport_protocol_0>
-   http_websocket_service_handler_protocol <http_websocket_service_handler_protocol_0>
-   ieee_754_fields_protocol <ieee_754_fields_protocol_0>
-   ieee_754_protocol <ieee_754_protocol_0>
-   integer_partitions_protocol <integer_partitions_protocol_0>
-   interpolator_protocol <interpolator_protocol_0>
-   interpreterp <interpreterp_0>
-   interval_algebra_protocol <interval_algebra_protocol_0>
-   interval_constraint_network_protocol <interval_constraint_network_protocol_0>
-   interval_protocol <interval_protocol_0>
-   interval_relation_set_protocol <interval_relation_set_protocol_0>
-   iso_13616_protocol <iso_13616_protocol_0>
-   iso_3166_protocol <iso_3166_protocol_0>
-   iso_4217_protocol <iso_4217_protocol_0>
-   iso_639_protocol <iso_639_protocol_0>
-   iso_9362_protocol <iso_9362_protocol_0>
-   java_access_protocol <java_access_protocol_0>
-   java_utils_protocol <java_utils_protocol_0>
-   json_graph_data_protocol <json_graph_data_protocol_0>
-   json_graph_protocol <json_graph_protocol_0>
-   json_ld_protocol <json_ld_protocol_0>
-   json_lines_protocol <json_lines_protocol_0>
-   json_patch_protocol <json_patch_protocol_0>
-   json_path_protocol <json_path_protocol_0>
-   json_pointer_protocol <json_pointer_protocol_0>
-   json_protocol <json_protocol_0>
-   json_schema_protocol <json_schema_protocol_0>
-   ksuid_protocol <ksuid_protocol_0>
-   language_detection_strategy_protocol <language_detection_strategy_protocol_0>
-   language_detector_protocol <language_detector_protocol_0>
-   language_profile_protocol <language_profile_protocol_0>
-   lemmatizer_language_protocol <lemmatizer_language_protocol_0>
-   lemmatizer_protocol <lemmatizer_protocol_0>
-   lgtdocp <lgtdocp_0>
-   linear_algebra_protocol <linear_algebra_protocol_0>
-   linear_programming_protocol <linear_programming_protocol_0>
-   listp <listp_0>
-   local_optimization_problem_protocol <local_optimization_problem_protocol_0>
-   loggingp <loggingp_0>
-   loopp <loopp_0>
-   lru_cache_protocol <lru_cache_protocol_0>
-   mcp_cache_protocol <mcp_cache_protocol_0>
-   mcp_completion_protocol <mcp_completion_protocol_0>
-   mcp_multiround_protocol <mcp_multiround_protocol_0>
-   mcp_prompt_protocol <mcp_prompt_protocol_0>
-   mcp_resource_protocol <mcp_resource_protocol_0>
-   mcp_server_spec_protocol <mcp_server_spec_protocol_0>
-   mcp_server_transport_protocol <mcp_server_transport_protocol_0>
-   mcp_tool_protocol <mcp_tool_protocol_0>
-   mcp_ui_protocol <mcp_ui_protocol_0>
-   metagol_example_protocol <metagol_example_protocol_0>
-   metap <metap_0>
-   monitoring <monitoring_0>
-   monitorp <monitorp_0>
-   multiplayer_ranking_dataset_protocol <multiplayer_ranking_dataset_protocol_0>
-   multisets_protocol <multisets_protocol_0>
-   multivariate_distributions_protocol <multivariate_distributions_protocol_0>
-   mutator_protocol <mutator_protocol_0>
-   n_grams_protocol <n_grams_protocol_0>
-   nanoid_protocol <nanoid_protocol_0>
-   nested_dictionary_protocol <nested_dictionary_protocol_0>
-   nmea_protocol <nmea_protocol_0>
-   numberlistp <numberlistp_0>
-   ode_solver_protocol <ode_solver_protocol_0>
-   ode_system_protocol <ode_system_protocol_0>
-   open_ai_backend_protocol <open_ai_backend_protocol_0>
-   open_api_provider_protocol <open_api_provider_protocol_0>
-   options_protocol <options_protocol_0>
-   osp <osp_0>
-   otp_protocol <otp_protocol_0>
-   pack_protocol <pack_protocol_0>
-   pairwise_measurement_dataset_protocol <pairwise_measurement_dataset_protocol_0>
-   pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol_0>
-   particle_swarm_optimization_protocol <particle_swarm_optimization_protocol_0>
-   partitions_protocol <partitions_protocol_0>
-   paseto_protocol <paseto_protocol_0>
-   pattern_miner_protocol <pattern_miner_protocol_0>
-   permutations_protocol <permutations_protocol_0>
-   probabilistic_classifier_protocol <probabilistic_classifier_protocol_0>
-   proto_hierarchyp <proto_hierarchyp_0>
-   pseudo_random_protocol <pseudo_random_protocol_0>
-   qp_solver_protocol <qp_solver_protocol_0>
-   quadrature_protocol <quadrature_protocol_0>
-   queuep <queuep_0>
-   random_protocol <random_protocol_0>
-   ranker_protocol <ranker_protocol_0>
-   ranking_dataset_protocol <ranking_dataset_protocol_0>
-   registry_protocol <registry_protocol_0>
-   regression_dataset_protocol <regression_dataset_protocol_0>
-   regressor_protocol <regressor_protocol_0>
-   ripple_down_rules_common_protocol <ripple_down_rules_common_protocol_0>
-   ripple_down_rules_protocol <ripple_down_rules_protocol_0>
-   root_finder_protocol <root_finder_protocol_0>
-   s3_protocol <s3_protocol_0>
-   sampling_protocol <sampling_protocol_0>
-   sentence_splitter_protocol <sentence_splitter_protocol_0>
-   sequence_dataset_protocol <sequence_dataset_protocol_0>
-   setp <setp_0>
-   simulated_annealing_protocol <simulated_annealing_protocol_0>
-   smtp_protocol <smtp_protocol_0>
-   snowflakeid_protocol <snowflakeid_protocol_0>
-   spelling_normalizer_protocol <spelling_normalizer_protocol_0>
-   statisticsp <statisticsp_0>
-   stemmer_protocol <stemmer_protocol_0>
-   stop_words_language_protocol <stop_words_language_protocol_0>
-   stop_words_protocol <stop_words_protocol_0>
-   subsequences_protocol <subsequences_protocol_0>
-   supervised_dimension_reduction_dataset_protocol <supervised_dimension_reduction_dataset_protocol_0>
-   tabu_search_problem_protocol <tabu_search_problem_protocol_0>
-   target_supervised_dimension_reduction_dataset_protocol <target_supervised_dimension_reduction_dataset_protocol_0>
-   temporal_pairwise_ranking_dataset_protocol <temporal_pairwise_ranking_dataset_protocol_0>
-   term_io_protocol <term_io_protocol_0>
-   termp <termp_0>
-   text_normalization_profile_protocol <text_normalization_profile_protocol_0>
-   text_normalizer_protocol <text_normalizer_protocol_0>
-   text_vectorizer_protocol <text_vectorizer_protocol_0>
-   time_scales_protocol <time_scales_protocol_0>
-   timep <timep_0>
-   tle_orbits_protocol <tle_orbits_protocol_0>
-   tokenizer_language_protocol <tokenizer_language_protocol_0>
-   tokenizer_protocol <tokenizer_protocol_0>
-   toml_protocol <toml_protocol_0>
-   tool_diagnostics_protocol <tool_diagnostics_protocol_0>
-   toon_protocol <toon_protocol_0>
-   transaction_dataset_protocol <transaction_dataset_protocol_0>
-   tsv_protocol <tsv_protocol_0>
-   typeid_protocol <typeid_protocol_0>
-   tzif_protocol <tzif_protocol_0>
-   ulid_protocol <ulid_protocol_0>
-   union_find_protocol <union_find_protocol_0>
-   univariate_distributions_protocol <univariate_distributions_protocol_0>
-   univariate_function_protocol <univariate_function_protocol_0>
-   unweighted_graph_protocol <unweighted_graph_protocol_0>
-   uuid_protocol <uuid_protocol_0>
-   varlistp <varlistp_0>
-   weighted_graph_protocol <weighted_graph_protocol_0>
-   wkt_wkb_protocol <wkt_wkb_protocol_0>
-   yaml_protocol <yaml_protocol_0>
-   zipperp <zipperp_0>
+.. only:: latex
+
+   * :doc:`anomaly_dataset_protocol <anomaly_dataset_protocol_0>`
+   * :doc:`anomaly_detector_protocol <anomaly_detector_protocol_0>`
+   * :doc:`ant_colony_problem_protocol <ant_colony_problem_protocol_0>`
+   * :doc:`application_protocol <application_protocol_0>`
+   * :doc:`arrangements_protocol <arrangements_protocol_0>`
+   * :doc:`assignvarsp <assignvarsp_0>`
+   * :doc:`association_rule_miner_protocol <association_rule_miner_protocol_0>`
+   * :doc:`block_cipher_prepared_key_protocol <block_cipher_prepared_key_protocol_0>`
+   * :doc:`block_cipher_protocol <block_cipher_protocol_0>`
+   * :doc:`cartesian_products_protocol <cartesian_products_protocol_0>`
+   * :doc:`ccsds_frame_protocol <ccsds_frame_protocol_0>`
+   * :doc:`ccsds_time_code_protocol <ccsds_time_code_protocol_0>`
+   * :doc:`character_set_protocol <character_set_protocol_0>`
+   * :doc:`characterp <characterp_0>`
+   * :doc:`class_hierarchyp <class_hierarchyp_0>`
+   * :doc:`classifier_protocol <classifier_protocol_0>`
+   * :doc:`clause_mutator_protocol <clause_mutator_protocol_0>`
+   * :doc:`cloning <cloning_0>`
+   * :doc:`clusterer_protocol <clusterer_protocol_0>`
+   * :doc:`clustering_dataset_protocol <clustering_dataset_protocol_0>`
+   * :doc:`cmac_protocol <cmac_protocol_0>`
+   * :doc:`combinations_protocol <combinations_protocol_0>`
+   * :doc:`comparingp <comparingp_0>`
+   * :doc:`constrained_optimization_problem_protocol <constrained_optimization_problem_protocol_0>`
+   * :doc:`crs_projections_protocol <crs_projections_protocol_0>`
+   * :doc:`csv_protocol <csv_protocol_0>`
+   * :doc:`cuid2_protocol <cuid2_protocol_0>`
+   * :doc:`databasep <databasep_0>`
+   * :doc:`datalog_protocol <datalog_protocol_0>`
+   * :doc:`dataset_protocol <dataset_protocol_0>`
+   * :doc:`datep <datep_0>`
+   * :doc:`dates_tz_protocol <dates_tz_protocol_0>`
+   * :doc:`debuggerp <debuggerp_0>`
+   * :doc:`deque_protocol <deque_protocol_0>`
+   * :doc:`derangements_protocol <derangements_protocol_0>`
+   * :doc:`dictionaryp <dictionaryp_0>`
+   * :doc:`differential_evolution_problem_protocol <differential_evolution_problem_protocol_0>`
+   * :doc:`dimension_reducer_protocol <dimension_reducer_protocol_0>`
+   * :doc:`dimension_reduction_dataset_protocol <dimension_reduction_dataset_protocol_0>`
+   * :doc:`directed_graph_protocol <directed_graph_protocol_0>`
+   * :doc:`directive_mutator_protocol <directive_mutator_protocol_0>`
+   * :doc:`event_registryp <event_registryp_0>`
+   * :doc:`expanding <expanding_0>`
+   * :doc:`flags_validator <flags_validator_0>`
+   * :doc:`forwarding <forwarding_0>`
+   * :doc:`genetic_algorithm_problem_protocol <genetic_algorithm_problem_protocol_0>`
+   * :doc:`geohash_protocol <geohash_protocol_0>`
+   * :doc:`geojson_protocol <geojson_protocol_0>`
+   * :doc:`geospatial_protocol <geospatial_protocol_0>`
+   * :doc:`git_protocol <git_protocol_0>`
+   * :doc:`gpx_protocol <gpx_protocol_0>`
+   * :doc:`graph_language_protocol <graph_language_protocol_0>`
+   * :doc:`graph_protocol <graph_protocol_0>`
+   * :doc:`hash_digest_protocol <hash_digest_protocol_0>`
+   * :doc:`hash_protocol <hash_protocol_0>`
+   * :doc:`hash_state_protocol <hash_state_protocol_0>`
+   * :doc:`heap_protocol <heap_protocol_0>`
+   * :doc:`heapp <heapp_0>`
+   * :doc:`hierarchyp <hierarchyp_0>`
+   * :doc:`hmac_protocol <hmac_protocol_0>`
+   * :doc:`http_authenticate_verifier_protocol <http_authenticate_verifier_protocol_0>`
+   * :doc:`http_body_codec_protocol <http_body_codec_protocol_0>`
+   * :doc:`http_digest_verifier_protocol <http_digest_verifier_protocol_0>`
+   * :doc:`http_handler_protocol <http_handler_protocol_0>`
+   * :doc:`http_oauth_scope_checker_protocol <http_oauth_scope_checker_protocol_0>`
+   * :doc:`http_oauth_verifier_protocol <http_oauth_verifier_protocol_0>`
+   * :doc:`http_request_protocol <http_request_protocol_0>`
+   * :doc:`http_response_protocol <http_response_protocol_0>`
+   * :doc:`http_sse_service_handler_protocol <http_sse_service_handler_protocol_0>`
+   * :doc:`http_transport_protocol <http_transport_protocol_0>`
+   * :doc:`http_websocket_service_handler_protocol <http_websocket_service_handler_protocol_0>`
+   * :doc:`ieee_754_fields_protocol <ieee_754_fields_protocol_0>`
+   * :doc:`ieee_754_protocol <ieee_754_protocol_0>`
+   * :doc:`integer_partitions_protocol <integer_partitions_protocol_0>`
+   * :doc:`interpolator_protocol <interpolator_protocol_0>`
+   * :doc:`interpreterp <interpreterp_0>`
+   * :doc:`interval_algebra_protocol <interval_algebra_protocol_0>`
+   * :doc:`interval_constraint_network_protocol <interval_constraint_network_protocol_0>`
+   * :doc:`interval_protocol <interval_protocol_0>`
+   * :doc:`interval_relation_set_protocol <interval_relation_set_protocol_0>`
+   * :doc:`iso_13616_protocol <iso_13616_protocol_0>`
+   * :doc:`iso_3166_protocol <iso_3166_protocol_0>`
+   * :doc:`iso_4217_protocol <iso_4217_protocol_0>`
+   * :doc:`iso_639_protocol <iso_639_protocol_0>`
+   * :doc:`iso_9362_protocol <iso_9362_protocol_0>`
+   * :doc:`java_access_protocol <java_access_protocol_0>`
+   * :doc:`java_utils_protocol <java_utils_protocol_0>`
+   * :doc:`json_graph_data_protocol <json_graph_data_protocol_0>`
+   * :doc:`json_graph_protocol <json_graph_protocol_0>`
+   * :doc:`json_ld_protocol <json_ld_protocol_0>`
+   * :doc:`json_lines_protocol <json_lines_protocol_0>`
+   * :doc:`json_patch_protocol <json_patch_protocol_0>`
+   * :doc:`json_path_protocol <json_path_protocol_0>`
+   * :doc:`json_pointer_protocol <json_pointer_protocol_0>`
+   * :doc:`json_protocol <json_protocol_0>`
+   * :doc:`json_schema_protocol <json_schema_protocol_0>`
+   * :doc:`ksuid_protocol <ksuid_protocol_0>`
+   * :doc:`language_detection_strategy_protocol <language_detection_strategy_protocol_0>`
+   * :doc:`language_detector_protocol <language_detector_protocol_0>`
+   * :doc:`language_profile_protocol <language_profile_protocol_0>`
+   * :doc:`lemmatizer_language_protocol <lemmatizer_language_protocol_0>`
+   * :doc:`lemmatizer_protocol <lemmatizer_protocol_0>`
+   * :doc:`lgtdocp <lgtdocp_0>`
+   * :doc:`linear_algebra_protocol <linear_algebra_protocol_0>`
+   * :doc:`linear_programming_protocol <linear_programming_protocol_0>`
+   * :doc:`listp <listp_0>`
+   * :doc:`local_optimization_problem_protocol <local_optimization_problem_protocol_0>`
+   * :doc:`loggingp <loggingp_0>`
+   * :doc:`loopp <loopp_0>`
+   * :doc:`lru_cache_protocol <lru_cache_protocol_0>`
+   * :doc:`mcp_cache_protocol <mcp_cache_protocol_0>`
+   * :doc:`mcp_completion_protocol <mcp_completion_protocol_0>`
+   * :doc:`mcp_multiround_protocol <mcp_multiround_protocol_0>`
+   * :doc:`mcp_prompt_protocol <mcp_prompt_protocol_0>`
+   * :doc:`mcp_resource_protocol <mcp_resource_protocol_0>`
+   * :doc:`mcp_server_spec_protocol <mcp_server_spec_protocol_0>`
+   * :doc:`mcp_server_transport_protocol <mcp_server_transport_protocol_0>`
+   * :doc:`mcp_tool_protocol <mcp_tool_protocol_0>`
+   * :doc:`mcp_ui_protocol <mcp_ui_protocol_0>`
+   * :doc:`metagol_example_protocol <metagol_example_protocol_0>`
+   * :doc:`metap <metap_0>`
+   * :doc:`monitoring <monitoring_0>`
+   * :doc:`monitorp <monitorp_0>`
+   * :doc:`multiplayer_ranking_dataset_protocol <multiplayer_ranking_dataset_protocol_0>`
+   * :doc:`multisets_protocol <multisets_protocol_0>`
+   * :doc:`multivariate_distributions_protocol <multivariate_distributions_protocol_0>`
+   * :doc:`mutator_protocol <mutator_protocol_0>`
+   * :doc:`n_grams_protocol <n_grams_protocol_0>`
+   * :doc:`nanoid_protocol <nanoid_protocol_0>`
+   * :doc:`nested_dictionary_protocol <nested_dictionary_protocol_0>`
+   * :doc:`nmea_protocol <nmea_protocol_0>`
+   * :doc:`numberlistp <numberlistp_0>`
+   * :doc:`ode_solver_protocol <ode_solver_protocol_0>`
+   * :doc:`ode_system_protocol <ode_system_protocol_0>`
+   * :doc:`open_ai_backend_protocol <open_ai_backend_protocol_0>`
+   * :doc:`open_api_provider_protocol <open_api_provider_protocol_0>`
+   * :doc:`options_protocol <options_protocol_0>`
+   * :doc:`osp <osp_0>`
+   * :doc:`otp_protocol <otp_protocol_0>`
+   * :doc:`pack_protocol <pack_protocol_0>`
+   * :doc:`pairwise_measurement_dataset_protocol <pairwise_measurement_dataset_protocol_0>`
+   * :doc:`pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol_0>`
+   * :doc:`particle_swarm_optimization_protocol <particle_swarm_optimization_protocol_0>`
+   * :doc:`partitions_protocol <partitions_protocol_0>`
+   * :doc:`paseto_protocol <paseto_protocol_0>`
+   * :doc:`pattern_miner_protocol <pattern_miner_protocol_0>`
+   * :doc:`permutations_protocol <permutations_protocol_0>`
+   * :doc:`probabilistic_classifier_protocol <probabilistic_classifier_protocol_0>`
+   * :doc:`proto_hierarchyp <proto_hierarchyp_0>`
+   * :doc:`pseudo_random_protocol <pseudo_random_protocol_0>`
+   * :doc:`qp_solver_protocol <qp_solver_protocol_0>`
+   * :doc:`quadrature_protocol <quadrature_protocol_0>`
+   * :doc:`queuep <queuep_0>`
+   * :doc:`random_protocol <random_protocol_0>`
+   * :doc:`ranker_protocol <ranker_protocol_0>`
+   * :doc:`ranking_dataset_protocol <ranking_dataset_protocol_0>`
+   * :doc:`registry_protocol <registry_protocol_0>`
+   * :doc:`regression_dataset_protocol <regression_dataset_protocol_0>`
+   * :doc:`regressor_protocol <regressor_protocol_0>`
+   * :doc:`ripple_down_rules_common_protocol <ripple_down_rules_common_protocol_0>`
+   * :doc:`ripple_down_rules_protocol <ripple_down_rules_protocol_0>`
+   * :doc:`root_finder_protocol <root_finder_protocol_0>`
+   * :doc:`s3_protocol <s3_protocol_0>`
+   * :doc:`sampling_protocol <sampling_protocol_0>`
+   * :doc:`sentence_splitter_protocol <sentence_splitter_protocol_0>`
+   * :doc:`sequence_dataset_protocol <sequence_dataset_protocol_0>`
+   * :doc:`setp <setp_0>`
+   * :doc:`simulated_annealing_protocol <simulated_annealing_protocol_0>`
+   * :doc:`smtp_protocol <smtp_protocol_0>`
+   * :doc:`snowflakeid_protocol <snowflakeid_protocol_0>`
+   * :doc:`spelling_normalizer_protocol <spelling_normalizer_protocol_0>`
+   * :doc:`statisticsp <statisticsp_0>`
+   * :doc:`stemmer_protocol <stemmer_protocol_0>`
+   * :doc:`stop_words_language_protocol <stop_words_language_protocol_0>`
+   * :doc:`stop_words_protocol <stop_words_protocol_0>`
+   * :doc:`subsequences_protocol <subsequences_protocol_0>`
+   * :doc:`supervised_dimension_reduction_dataset_protocol <supervised_dimension_reduction_dataset_protocol_0>`
+   * :doc:`tabu_search_problem_protocol <tabu_search_problem_protocol_0>`
+   * :doc:`target_supervised_dimension_reduction_dataset_protocol <target_supervised_dimension_reduction_dataset_protocol_0>`
+   * :doc:`temporal_pairwise_ranking_dataset_protocol <temporal_pairwise_ranking_dataset_protocol_0>`
+   * :doc:`term_io_protocol <term_io_protocol_0>`
+   * :doc:`termp <termp_0>`
+   * :doc:`text_normalization_profile_protocol <text_normalization_profile_protocol_0>`
+   * :doc:`text_normalizer_protocol <text_normalizer_protocol_0>`
+   * :doc:`text_vectorizer_protocol <text_vectorizer_protocol_0>`
+   * :doc:`time_scales_protocol <time_scales_protocol_0>`
+   * :doc:`timep <timep_0>`
+   * :doc:`tle_orbits_protocol <tle_orbits_protocol_0>`
+   * :doc:`tokenizer_language_protocol <tokenizer_language_protocol_0>`
+   * :doc:`tokenizer_protocol <tokenizer_protocol_0>`
+   * :doc:`toml_protocol <toml_protocol_0>`
+   * :doc:`tool_diagnostics_protocol <tool_diagnostics_protocol_0>`
+   * :doc:`toon_protocol <toon_protocol_0>`
+   * :doc:`transaction_dataset_protocol <transaction_dataset_protocol_0>`
+   * :doc:`tsv_protocol <tsv_protocol_0>`
+   * :doc:`typeid_protocol <typeid_protocol_0>`
+   * :doc:`tzif_protocol <tzif_protocol_0>`
+   * :doc:`ulid_protocol <ulid_protocol_0>`
+   * :doc:`union_find_protocol <union_find_protocol_0>`
+   * :doc:`univariate_distributions_protocol <univariate_distributions_protocol_0>`
+   * :doc:`univariate_function_protocol <univariate_function_protocol_0>`
+   * :doc:`unweighted_graph_protocol <unweighted_graph_protocol_0>`
+   * :doc:`uuid_protocol <uuid_protocol_0>`
+   * :doc:`varlistp <varlistp_0>`
+   * :doc:`weighted_graph_protocol <weighted_graph_protocol_0>`
+   * :doc:`wkt_wkb_protocol <wkt_wkb_protocol_0>`
+   * :doc:`yaml_protocol <yaml_protocol_0>`
+   * :doc:`zipperp <zipperp_0>`
 

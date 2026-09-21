@@ -22,6 +22,16 @@ RELEASE NOTES
 =============
 
 
+3.103.0 - October ??, 2026
+==========================
+
+Documentation
+-------------
+
+* IMPROVED: The PDF version of the API documentation by using better and more
+compact styling, adding internal links, and reducing the number of pages.
+
+
 3.102.0 - September 14, 2026
 ============================
 

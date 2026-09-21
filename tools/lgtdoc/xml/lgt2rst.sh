@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   XML documenting files to reStructuredText files conversion script
-##   Last updated on March 23, 2025
+##   Last updated on September 21, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -92,11 +92,13 @@ create_index_file() {
 		echo "   entity_index" >> "$index_file"
 		echo "   predicate_index" >> "$index_file"
 		echo "" >> "$index_file"
-		echo "Indices and tables" >> "$index_file"
-		echo "==================" >> "$index_file"
+		echo ".. only:: not latex" >> "$index_file"
 		echo "" >> "$index_file"
-		echo "* :ref:\`genindex\`" >> "$index_file"
-		echo "* :ref:\`search\`" >> "$index_file"
+		echo "   Indices and tables" >> "$index_file"
+		echo "   ==================" >> "$index_file"
+		echo "" >> "$index_file"
+		echo "   * :ref:\`genindex\`" >> "$index_file"
+		echo "   * :ref:\`search\`" >> "$index_file"
 	else
 		echo ".. toctree::" >> "$index_file"
 		echo "   :maxdepth: 1" >> "$index_file"
@@ -116,9 +118,11 @@ create_index_file() {
 		done
 	fi
 
-	date="$(eval date)"
+	date="$(date '+%a %B %d %H:%M:%S %Z %Y')"
 	echo "" >> "$index_file"
-	echo "Generated on $date" >> "$index_file"
+	echo ".. only:: not latex" >> "$index_file"
+	echo "" >> "$index_file"
+	echo "   Generated on $date" >> "$index_file"
 }
 
 while getopts "vd:i:t:p:l:smh" option; do

@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   XML documenting files to reStructuredText files conversion script
-##   Last updated on March 23, 2025
+##   Last updated on September 21, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   Copyright 2022-2026 Paulo Moura <pmoura@logtalk.org>
@@ -108,11 +108,13 @@ function New-Index-File() {
 		Add-Content -Path "$i" -Value "   entity_index"
 		Add-Content -Path "$i" -Value "   predicate_index"
 		Add-Content -Path "$i" -Value ""
-		Add-Content -Path "$i" -Value "Indices and tables"
-		Add-Content -Path "$i" -Value "=================="
+		Add-Content -Path "$i" -Value ".. only:: not latex"
 		Add-Content -Path "$i" -Value ""
-		Add-Content -Path "$i" -Value '* :ref:`genindex`'
-		Add-Content -Path "$i" -Value '* :ref:`search`'
+		Add-Content -Path "$i" -Value "   Indices and tables"
+		Add-Content -Path "$i" -Value "   =================="
+		Add-Content -Path "$i" -Value ""
+		Add-Content -Path "$i" -Value '   * :ref:`genindex`'
+		Add-Content -Path "$i" -Value '   * :ref:`search`'
 	} elseif (Get-ChildItem -Path . -Filter .\*.xml | Select-String -Pattern '<logtalk_entity' -CaseSensitive -SimpleMatch -Quiet) {
 		Add-Content -Path "$i" -Value ".. toctree::"
 		Add-Content -Path "$i" -Value "   :maxdepth: 1"
@@ -132,10 +134,12 @@ function New-Index-File() {
 		}
 	}
 
-	$date = Get-Date -Format "ddd MMM dd HH:mm:ss K yyyy"
+	$date = Get-Date -Format "ddd MMMM dd HH:mm:ss K yyyy"
 
 	Add-Content -Path "$i" -Value ""
-	Add-Content -Path "$i" -Value "Generated on $date"
+	Add-Content -Path "$i" -Value ".. only:: not latex"
+	Add-Content -Path "$i" -Value ""
+	Add-Content -Path "$i" -Value "   Generated on $date"
 }
 
 ###################### here it starts ############################
