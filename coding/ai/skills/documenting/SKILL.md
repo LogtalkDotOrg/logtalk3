@@ -28,7 +28,7 @@ Do not duplicate the handbook content. Prefer linking to specific sections when 
 1. Turn `source_data` on when you want the compiler to retain documenting information for `lgtdoc`.
 2. Use the standard directives; they are visible to reflection and to `lgtdoc`.
 3. Prefer short, precise comments. Put longer explanations under `remarks` or `fails_if`.
-4. Follow the handbook style for comments (third-person singular, “True iff …”, “Enumerates, by backtracking, …”, “Fails if …”).
+4. Follow the handbook style for comments (third-person singular, “True iff …", “Enumerates, by backtracking, …", “Fails if …").
 5. Use controlled language for exceptions: https://logtalk.org/handbook/userman/documenting.html#documenting-predicate-exceptions
 
 ## Entity documentation (`info/1`)
@@ -63,9 +63,9 @@ Also document modes with `mode/2` and meta-predicates with `meta_predicate/1` wh
 
 ### Style guidelines for comments
 
-- Start with a verb in third-person singular (“Runs …”, “Converts …”) or with “True iff …” / “True if …”.
-- Multi-solution predicates: “Enumerates, by backtracking, all/the …”.
-- Failure conditions: “Fails if …” / “Fails when …”.
+- Start with a verb in third-person singular (“Runs …", “Converts …") or with “True iff …" / “True if …".
+- Multi-solution predicates: “Enumerates, by backtracking, all/the …".
+- Failure conditions: “Fails if …" / “Fails when …".
 - Keep the main `comment` concise; move detail to `remarks` or `fails_if`.
 
 ### Exceptions

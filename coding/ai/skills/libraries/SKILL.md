@@ -79,7 +79,7 @@ If Context7 is unavailable, use the official API index and handbook links above.
 ## What to avoid
 
 - Local `member/2`, `append/3`, `reverse/2`, `map`-style helpers that duplicate libraries
-- New “utils” objects that mirror standard library APIs without need
+- New “utils" objects that mirror standard library APIs without need
 - Guessing predicate names or arities instead of looking them up
 - Loading libraries only in interactive sessions and forgetting them in `loader.lgt`
 - Copying large documentation blocks into source files

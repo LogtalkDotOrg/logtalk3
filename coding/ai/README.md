@@ -20,6 +20,7 @@ Current skills cover common Logtalk workflows such as:
 
 - Following coding guidelines
 - Writing and running tests with `lgtunit`
+- Performance (indexing, determinism, tail recursion)
 - Reusing standard libraries
 - Debugging applications
 - Documenting entities
@@ -48,15 +49,15 @@ You can keep a single canonical `AGENTS.md` and create thin adapters (or symlink
 1. Create a new directory under `skills/`, e.g. `skills/my-task/`.
 2. Add a `SKILL.md` with:
    - YAML frontmatter containing at least `name` and `description`
-   - Clear “When to use” and step-by-step procedure
+   - Clear “When to use" and step-by-step procedure
    - Logtalk-specific conventions and verification steps
 3. Optionally add `references/`, `examples/`, or `scripts/`.
 4. Keep the skill focused on one coherent task.
 
 ## Philosophy
 
-- **AGENTS.md** answers “What is this project and how should I work here?”
-- **Skills** answer “How do I perform this specific task well in Logtalk?”
+- **AGENTS.md** answers “What is this project and how should I work here?"
+- **Skills** answer “How do I perform this specific task well in Logtalk?"
 - **Agents** provide focused personas or isolated context for particular roles.
 
 Prefer short, actionable instructions over long narrative. Update these files when Logtalk conventions or tooling change.
