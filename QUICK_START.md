@@ -142,6 +142,8 @@ is VSCode (or VSCodium) using the
 extension. There's also [Hercutalk](https://pypi.org/project/logtalk-jupyter-kernel/),
 a Jupyter kernel (supporting selected backends) if you prefer a notebook
 solution (most of the provided programming examples can be run as notebooks).
+See the [`coding/ai`](coding/ai) directory for default AI coding assistant
+support files.
 
 1. The [`tools`](tools) directory contains a comprehensive set of developer
 tools to help you test, debug, analyze, and document your applications.

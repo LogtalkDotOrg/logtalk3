@@ -31,6 +31,11 @@ Documentation
 * IMPROVED: The PDF version of the API documentation by using better and more
 compact styling, adding internal links, and reducing the number of pages.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* ADDED: Default AI coding assistant support files at `coding/ai`.
+
 
 3.102.0 - September 14, 2026
 ============================
