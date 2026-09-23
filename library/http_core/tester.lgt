@@ -44,7 +44,8 @@
 		http_core,
 		http_origin_site_helpers,
 		http_docroot_paths,
-		http_message_helpers
+		http_message_helpers,
+		test_objects
 	], [
 		debug(on),
 		source_data(on)

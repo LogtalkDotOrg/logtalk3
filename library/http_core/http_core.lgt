@@ -23,9 +23,9 @@
 	imports(http_text_helpers)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-09-12,
+		date is 2026-09-23,
 		comment is 'Transport-independent normalized HTTP request and response constructors, validators, wire parsers and generators, and body codec dispatch.'
 	]).
 
@@ -699,24 +699,24 @@
 		properties_from_target(Target, [], ReversedProperties),
 		reverse(ReversedProperties, Properties).
 
-	properties_from_target(absolute(Components), Acc, Properties) :-
-		(	memberchk(scheme(Scheme0), Components) ->
+	properties_from_target(absolute(Components), Acc0, Properties) :-
+		(	member(scheme(Scheme0), Components) ->
 			normalize_atom_text(Scheme0, Scheme),
-			add_unique_property(scheme(Scheme), Acc, Acc0)
-		;	Acc0 = Acc
-		),
-		(	memberchk(authority(Authority), Components), authority_host_property(Authority, HostProperty) ->
-			add_unique_property(HostProperty, Acc0, Acc1)
+			add_unique_property(scheme(Scheme), Acc0, Acc1)
 		;	Acc1 = Acc0
 		),
-		(	memberchk(path(Path), Components) ->
-			path_segments_property(Path, PathProperty),
-			add_optional_property(PathProperty, Acc1, Acc2)
+		(	member(authority(Authority), Components), authority_host_property(Authority, HostProperty) ->
+			add_unique_property(HostProperty, Acc1, Acc2)
 		;	Acc2 = Acc1
 		),
-		(	memberchk(query(Query), Components), query_pairs_property(Query, QueryProperty) ->
-			add_unique_property(QueryProperty, Acc2, Properties)
-		;	Properties = Acc2
+		(	member(path(Path), Components) ->
+			path_segments_property(Path, PathProperty),
+			add_optional_property(PathProperty, Acc2, Acc3)
+		;	Acc3 = Acc2
+		),
+		(	member(query(Query), Components), query_pairs_property(Query, QueryProperty) ->
+			add_unique_property(QueryProperty, Acc3, Properties)
+		;	Properties = Acc3
 		).
 	properties_from_target(authority(Host), Acc, Properties) :-
 		normalize_atom_text(Host, NormalizedHost),
@@ -740,87 +740,87 @@
 		properties_from_headers(Headers, [], ReversedProperties),
 		reverse(ReversedProperties, Properties).
 
-	properties_from_headers(Headers, Acc, Properties) :-
+	properties_from_headers(Headers, Acc0, Properties) :-
 		(	semantic_single_header_value(Headers, host, HostProperty) ->
-			add_unique_property(HostProperty, Acc, Acc0)
-		;	Acc0 = Acc
-		),
-		(	semantic_single_header_value(Headers, content_type, media_type(MediaType, Parameters)) ->
-			add_unique_property(content_type(MediaType, Parameters), Acc0, Acc1)
+			add_unique_property(HostProperty, Acc0, Acc1)
 		;	Acc1 = Acc0
 		),
-		(	semantic_single_header_value(Headers, accept_query, MediaRanges) ->
-			add_unique_property(accept_query(MediaRanges), Acc1, Acc2)
+		(	semantic_single_header_value(Headers, content_type, media_type(MediaType, Parameters)) ->
+			add_unique_property(content_type(MediaType, Parameters), Acc1, Acc2)
 		;	Acc2 = Acc1
 		),
-		(	semantic_single_header_value(Headers, content_length, Length) ->
-			add_unique_property(content_length(Length), Acc2, Acc3)
+		(	semantic_single_header_value(Headers, accept_query, MediaRanges) ->
+			add_unique_property(accept_query(MediaRanges), Acc2, Acc3)
 		;	Acc3 = Acc2
 		),
-		(	semantic_single_header_value(Headers, cookie, Pairs) ->
-			add_unique_property(cookies(Pairs), Acc3, Acc4)
+		(	semantic_single_header_value(Headers, content_length, Length) ->
+			add_unique_property(content_length(Length), Acc3, Acc4)
 		;	Acc4 = Acc3
+		),
+		(	semantic_single_header_value(Headers, cookie, Pairs) ->
+			add_unique_property(cookies(Pairs), Acc4, Acc5)
+		;	Acc5 = Acc4
 		),
 		header_values(Headers, set_cookie, SetCookies),
 		(	SetCookies \== [] ->
-			add_unique_property(set_cookies(SetCookies), Acc4, Acc5)
-		;	Acc5 = Acc4
-		),
-		(	semantic_single_header_value(Headers, connection, ConnectionTokens) ->
-			add_unique_property(connection(ConnectionTokens), Acc5, Acc6)
+			add_unique_property(set_cookies(SetCookies), Acc5, Acc6)
 		;	Acc6 = Acc5
 		),
-		(	semantic_single_header_value(Headers, upgrade, UpgradeTokens) ->
-			add_unique_property(upgrade(UpgradeTokens), Acc6, Acc7)
+		(	semantic_single_header_value(Headers, connection, ConnectionTokens) ->
+			add_unique_property(connection(ConnectionTokens), Acc6, Acc7)
 		;	Acc7 = Acc6
 		),
-		(	semantic_single_header_value(Headers, sec_websocket_key, Key) ->
-			add_unique_property(websocket_key(Key), Acc7, Acc8)
+		(	semantic_single_header_value(Headers, upgrade, UpgradeTokens) ->
+			add_unique_property(upgrade(UpgradeTokens), Acc7, Acc8)
 		;	Acc8 = Acc7
 		),
-		(	semantic_websocket_version_header_value(Headers, Version) ->
-			add_unique_property(websocket_version(Version), Acc8, Acc9)
+		(	semantic_single_header_value(Headers, sec_websocket_key, Key) ->
+			add_unique_property(websocket_key(Key), Acc8, Acc9)
 		;	Acc9 = Acc8
 		),
-		(	semantic_single_header_value(Headers, sec_websocket_accept, Accept) ->
-			add_unique_property(websocket_accept(Accept), Acc9, Acc10)
+		(	semantic_websocket_version_header_value(Headers, Version) ->
+			add_unique_property(websocket_version(Version), Acc9, Acc10)
 		;	Acc10 = Acc9
 		),
-		(	semantic_single_header_value(Headers, sec_websocket_protocol, Protocols) ->
-			add_unique_property(websocket_protocol(Protocols), Acc10, Acc11)
+		(	semantic_single_header_value(Headers, sec_websocket_accept, Accept) ->
+			add_unique_property(websocket_accept(Accept), Acc10, Acc11)
 		;	Acc11 = Acc10
 		),
+		(	semantic_single_header_value(Headers, sec_websocket_protocol, Protocols) ->
+			add_unique_property(websocket_protocol(Protocols), Acc11, Acc12)
+		;	Acc12 = Acc11
+		),
 		(	semantic_single_header_value(Headers, transfer_encoding, TransferTokens) ->
-			add_unique_property(transfer_encoding(TransferTokens), Acc11, Properties)
-		;	Properties = Acc11
+			add_unique_property(transfer_encoding(TransferTokens), Acc12, Properties)
+		;	Properties = Acc12
 		).
 
 	properties_from_body(Body, Properties) :-
 		properties_from_body(Body, [], ReversedProperties),
 		reverse(ReversedProperties, Properties).
 
-	properties_from_body(Body, Acc, Properties) :-
+	properties_from_body(Body, Acc0, Properties) :-
 		(	body_decoded_state(Body, false),
 			body_length_if_known(Body, Length) ->
-			add_unique_property(content_length(Length), Acc, Acc0)
-		;	Acc0 = Acc
+			add_unique_property(content_length(Length), Acc0, Acc1)
+		;	Acc1 = Acc0
 		),
 		body_decoded_state(Body, Decoded),
-		add_unique_property(decoded_body(Decoded), Acc0, Properties).
+		add_unique_property(decoded_body(Decoded), Acc1, Properties).
 
 	merge_property_lists(PropertyLists, Properties) :-
 		merge_property_lists(PropertyLists, [], ReversedProperties),
 		reverse(ReversedProperties, Properties).
 
 	merge_property_lists([], Properties, Properties).
-	merge_property_lists([List| Lists], Acc, Properties) :-
-		merge_property_list(List, Acc, Acc0),
-		merge_property_lists(Lists, Acc0, Properties).
+	merge_property_lists([List| Lists], Properties0, Properties) :-
+		merge_property_list(List, Properties0, Properties1),
+		merge_property_lists(Lists, Properties1, Properties).
 
 	merge_property_list([], Properties, Properties).
-	merge_property_list([Property| Rest], Acc, Properties) :-
-		add_unique_property(Property, Acc, Acc0),
-		merge_property_list(Rest, Acc0, Properties).
+	merge_property_list([Property| Rest], Properties0, Properties) :-
+		add_unique_property(Property, Properties0, Properties1),
+		merge_property_list(Rest, Properties1, Properties).
 
 	add_optional_property(none, Properties, Properties) :-
 		!.
@@ -928,7 +928,7 @@
 		header_name_present(Headers, cookie),
 		!.
 	maybe_add_cookie_header(Properties, Headers, [cookie-Pairs| Headers]) :-
-		memberchk(cookies(Pairs), Properties),
+		member(cookies(Pairs), Properties),
 		!.
 	maybe_add_cookie_header(_Properties, Headers, Headers).
 
@@ -982,7 +982,7 @@
 		header_name_present(Headers, sec_websocket_version),
 		!.
 	maybe_add_websocket_version_header(Properties, Headers, [sec_websocket_version-Version| Headers]) :-
-		memberchk(websocket_version(Version), Properties),
+		member(websocket_version(Version), Properties),
 		!.
 	maybe_add_websocket_version_header(_Properties, Headers, Headers).
 
@@ -1956,15 +1956,13 @@
 	websocket_header_values([_Header| Headers], Values) :-
 		websocket_header_values(Headers, Values).
 
-	header_values(Headers, Name, Values) :-
-		header_values(Headers, Name, [], ReversedValues),
-		reverse(ReversedValues, Values).
-
-	header_values([], _Name, Values, Values).
-	header_values([HeaderName-RawValue| Headers], Name, Acc, Values) :-
-		(	HeaderName == Name, normalize_semantic_header_value(Name, RawValue, Value) ->
-			header_values(Headers, Name, [Value| Acc], Values)
-		;	header_values(Headers, Name, Acc, Values)
+	header_values([], _Name, []).
+	header_values([HeaderName-RawValue| Headers], Name, Values) :-
+		(	HeaderName == Name,
+			normalize_semantic_header_value(Name, RawValue, Value) ->
+			Values = [Value| ValuesTail],
+			header_values(Headers, Name, ValuesTail)
+		;	header_values(Headers, Name, Values)
 		).
 
 	normalize_semantic_header_value(Name, RawValue, Value) :-

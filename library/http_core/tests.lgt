@@ -19,54 +19,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(http_docroot_paths_test_helper,
-	imports(http_docroot_paths)).
-
-	:- public(check_relative_path/1).
-	:- mode(check_relative_path(+atom), one_or_error).
-
-	:- public(check_document_root/1).
-	:- mode(check_document_root(+atom), one_or_error).
-
-	check_relative_path(Path) :-
-		^^validate_relative_path(Path).
-
-	check_document_root(DocumentRoot) :-
-		^^validate_document_root(DocumentRoot).
-
-:- end_object.
-
-
-:- object(http_origin_site_test_helper,
-	imports(http_origin_site_helpers)).
-
-	:- public(check_absolute_url_context/2).
-	:- mode(check_absolute_url_context(+atom, -compound), one_or_error).
-
-	:- public(check_origin_endpoint/2).
-	:- mode(check_origin_endpoint(+atom, -compound), one_or_error).
-
-	:- public(check_request_endpoint/2).
-	:- mode(check_request_endpoint(+compound, -compound), one_or_error).
-
-	:- public(check_same_site/2).
-	:- mode(check_same_site(+compound, +compound), zero_or_one).
-
-	check_absolute_url_context(URL, Context) :-
-		^^absolute_url_context(URL, Context).
-
-	check_origin_endpoint(Origin, Endpoint) :-
-		^^origin_endpoint(Origin, Endpoint).
-
-	check_request_endpoint(Request, Endpoint) :-
-		^^request_endpoint(Request, Endpoint).
-
-	check_same_site(Left, Right) :-
-		^^same_site(Left, Right).
-
-:- end_object.
-
-
 :- object(tests,
 	extends(lgtunit)).
 
@@ -74,7 +26,7 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-07-07,
-		comment is 'Unit tests for the "http" library.'
+		comment is 'Unit tests for the "http_core" library.'
 	]).
 
 	:- uses(list, [
