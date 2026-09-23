@@ -27,6 +27,7 @@ For task-specific procedures, load the matching skill under `coding-assistants/s
 | `skills/packs/SKILL.md` | Authoring packs and registries (`pack_protocol`, versions, checksums) |
 | `skills/performance/SKILL.md` | Writing performant code |
 | `skills/portability/SKILL.md` | Authoring portable applications and libraries |
+| `skills/scaffolding/SKILL.md` | Scaffold a new app (directory, settings, loader, tester) |
 | `skills/testing/SKILL.md` | Writing or running tests, `tester.lgt`, QuickCheck, coverage |
 
 ## Project layout (typical application or library)

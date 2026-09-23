@@ -18,6 +18,7 @@ Portable, on-demand task knowledge following the Agent Skills standard. Each ski
 
 Current skills cover common Logtalk workflows such as:
 
+- Scaffolding a new application (settings, loader, tests)
 - Following coding guidelines
 - Writing and running tests with `lgtunit`
 - Performance (indexing, determinism, tail recursion)
