@@ -14,7 +14,7 @@ The single source of truth for project-level context. It tells AI agents:
 Keep this file concise. Detailed procedures belong in skills.
 
 ### Skills (`skills/*/SKILL.md`)
-Portable, on-demand task knowledge following the Agent Skills standard. Each skill is a directory containing at least a `SKILL.md` file with YAML frontmatter (`name` + `description`) and a clear procedure.
+Portable, on-demand task knowledge following the Agent Skills standard. Each skill is a directory containing at least a `SKILL.md` file with YAML frontmatter (`name` + `description`) and a clear procedure. Copy or adapt them into the location expected by your tool (e.g. `.agents/skills/` or `.claude/skills/`).
 
 Current skills cover common Logtalk workflows such as:
 
@@ -35,13 +35,13 @@ Definitions for specialized sub-agents (tester, documenter, reviewer, etc.). The
 
 ## Tool-Specific Adapters
 
-| Tool              | Recommended file                          | Notes |
-|-------------------|-------------------------------------------|-------|
-| Most tools        | `AGENTS.md` (root of project)             | Preferred cross-tool standard |
-| Claude Code       | `CLAUDE.md` (can `@import` AGENTS.md)     | Also supports `.claude/skills/` and `.claude/agents/` |
-| Cursor            | `AGENTS.md` or `.cursor/rules/`           | Skills can live under `.cursor/skills/` |
-| GitHub Copilot    | `AGENTS.md` + `.github/copilot-instructions.md` | Custom agents under `.github/agents/` |
-| Others            | `AGENTS.md`                               | Many tools already look for it |
+| Tool              | Recommended file                                | Notes                                                 |
+|-------------------|-------------------------------------------------|-------------------------------------------------------|
+| Most tools        | `AGENTS.md` (root of project)                   | Preferred cross-tool standard                         |
+| Claude Code       | `CLAUDE.md` (can `@import` AGENTS.md)           | Also supports `.claude/skills/` and `.claude/agents/` |
+| Cursor            | `AGENTS.md` or `.cursor/rules/`                 | Skills can live under `.cursor/skills/`               |
+| GitHub Copilot    | `AGENTS.md` + `.github/copilot-instructions.md` | Custom agents under `.github/agents/`                 |
+| Others            | `AGENTS.md`                                     | Many tools already look for it                        |
 
 You can keep a single canonical `AGENTS.md` and create thin adapters (or symlinks) for tools that prefer a different filename.
 
