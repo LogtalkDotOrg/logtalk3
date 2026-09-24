@@ -19,31 +19,32 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(types(loader)),
-	logtalk_load(format(loader)),
-	logtalk_load(os(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(random(loader)),
-	logtalk_load(anomaly_detection_protocols(loader)),
-	logtalk_load([
-		isolation_forest_anomaly_detector,
-		test_objects
-	], [
-		source_data(on),
-		debug(on)
-	]),
-	logtalk_load([
-		anomaly_detection_protocols('test_datasets/gaussian_anomalies'),
-		anomaly_detection_protocols('test_datasets/shuttle_anomalies'),
-		anomaly_detection_protocols('test_datasets/water_potability'),
-		anomaly_detection_protocols('test_datasets/sensor_anomalies')
-	], [
-		source_data(on),
-		debug(on)
-	]),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(isolation_forest_empty_anomalies,
+	implements(anomaly_dataset_protocol)).
+
+	attribute_values(x, continuous).
+
+	class(label).
+
+	class_values([normal, anomaly]).
+
+:- end_object.
+
+
+:- object(missing_value_branching_fixture,
+	implements(anomaly_dataset_protocol)).
+
+	attribute_values(x, continuous).
+
+	class(label).
+
+	class_values([normal, anomaly]).
+
+	example(1, normal, [x-0.00]).
+	example(2, normal, [x-0.10]).
+	example(3, normal, [x-0.20]).
+	example(4, normal, [x-0.30]).
+	example(5, anomaly, [x-5.00]).
+	example(6, anomaly, [x-5.20]).
+
+:- end_object.

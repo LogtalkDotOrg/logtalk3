@@ -23,11 +23,14 @@
 	imports(anomaly_detector_common)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-09-24,
 		comment is 'Extended Isolation Forest (EIF) algorithm for anomaly detection. Implements the improved version described by Hariri et al. (2019) that uses random hyperplane cuts instead of axis-aligned cuts, eliminating score bias artifacts. Builds an ensemble of isolation trees from baseline training examples selected from a dataset object implementing the ``anomaly_dataset_protocol`` protocol. Missing attribute values are represented using anonymous variables.',
-		see_also is [anomaly_dataset_protocol, anomaly_detector_protocol, knn_distance_anomaly_detector, lof_anomaly_detector]
+		see_also is [
+			anomaly_dataset_protocol, anomaly_detector_protocol, knn_distance_anomaly_detector,
+			lof_anomaly_detector
+		]
 	]).
 
 	:- public(score/3).
@@ -93,12 +96,16 @@
 		% Determine subsample size
 		(	^^option(subsample_size(Psi), Options) ->
 			true
-		;	(NumInstances < 256 -> Psi = NumInstances ; Psi = 256)
+		;	NumInstances < 256 ->
+			Psi = NumInstances
+		;	Psi = 256
 		),
 		% Determine extension level
 		(	^^option(extension_level(ExtLevel), Options) ->
 			true
-		;	(NumDimensions > 1 -> ExtLevel is NumDimensions - 1 ; ExtLevel = 0)
+		;	NumDimensions > 1 ->
+			ExtLevel is NumDimensions - 1
+		;	ExtLevel = 0
 		),
 		% Determine number of trees
 		^^option(number_of_trees(NumTrees), Options),
@@ -432,7 +439,9 @@
 	% Extended Isolation Forest: uses random hyperplane cuts
 	build_itree(Data, MaxDepth, CurrentDepth, _NumDimensions, _ExtLevel, external(Size)) :-
 		length(Data, Size),
-		(Size =< 1 ; CurrentDepth >= MaxDepth),
+		(	Size =< 1
+		;	CurrentDepth >= MaxDepth
+		),
 		!.
 	build_itree(Data, MaxDepth, CurrentDepth, NumDimensions, ExtLevel, Tree) :-
 		length(Data, Size),
@@ -624,6 +633,7 @@
 
 	dot_shifted_interval([], [], [], [], [], MinDotProduct, MinDotProduct, MaxDotProduct, MaxDotProduct).
 	dot_shifted_interval([Xi| Xs], [Pi| Ps], [Ni| Ns], [false| Ms], [_-_| Rs], Min0, MinDotProduct, Max0, MaxDotProduct) :-
+		!,
 		Contribution is (Xi - Pi) * Ni,
 		Min1 is Min0 + Contribution,
 		Max1 is Max0 + Contribution,
@@ -697,6 +707,6 @@
 	valid_option(baseline_class_values(BaselineClassValues)) :-
 		^^valid_baseline_class_values(BaselineClassValues).
 	valid_option(baseline_selection_policy(Policy)) :-
-		valid(one_of(atom, [reject, filter]), Policy).
+		once((Policy == reject; Policy == filter)).
 
 :- end_object.

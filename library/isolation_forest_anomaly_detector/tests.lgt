@@ -1,18 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-
-:- object(isolation_forest_empty_anomalies,
-	implements(anomaly_dataset_protocol)).
-
-	attribute_values(x, continuous).
-
-	class(label).
-
-	class_values([normal, anomaly]).
-
-:- end_object.
-
-
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
@@ -30,25 +17,6 @@
 %  limitations under the License.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-:- object(missing_value_branching_fixture,
-	implements(anomaly_dataset_protocol)).
-
-	attribute_values(x, continuous).
-
-	class(label).
-
-	class_values([normal, anomaly]).
-
-	example(1, normal, [x-0.00]).
-	example(2, normal, [x-0.10]).
-	example(3, normal, [x-0.20]).
-	example(4, normal, [x-0.30]).
-	example(5, anomaly, [x-5.00]).
-	example(6, anomaly, [x-5.20]).
-
-:- end_object.
 
 
 :- object(tests,
@@ -76,9 +44,7 @@
 	learn_filtered(Dataset, ExtraOptions, Model) :-
 		isolation_forest_anomaly_detector::learn(Dataset, Model, [baseline_selection_policy(filter)| ExtraOptions]).
 
-	% ===================================================================
 	% learn/2 tests - gaussian_anomalies dataset
-	% ===================================================================
 
 	test(isolation_forest_learn_2_gaussian_anomalies_error, error(domain_error(baseline_only_training_data, gaussian_anomalies))) :-
 		isolation_forest_anomaly_detector::learn(gaussian_anomalies, _Model).
@@ -122,9 +88,7 @@
 		Model = if_model(Trees, _, _, _, _, _),
 		length(Trees, NumTrees).
 
-	% ===================================================================
 	% learn/3 tests - with options
-	% ===================================================================
 
 	test(isolation_forest_learn_3_custom_trees, true(NumTrees == 20)) :-
 		learn_filtered(gaussian_anomalies, [number_of_trees(20)], Model),
@@ -138,9 +102,7 @@
 		% Extension level 0 should behave like original Isolation Forest
 		learn_filtered(gaussian_anomalies, [number_of_trees(10), extension_level(0)], Model).
 
-	% ===================================================================
 	% score/3 tests - gaussian_anomalies dataset
-	% ===================================================================
 
 	test(isolation_forest_score_3_gaussian_normal_point, true(Score < 0.65)) :-
 		% A point at the center of the cluster should have a low anomaly score
@@ -163,9 +125,7 @@
 		learn_filtered(gaussian_anomalies, [number_of_trees(20)], Model),
 		isolation_forest_anomaly_detector::score(Model, [x-0.12, y-0.34], Score).
 
-	% ===================================================================
 	% predict/3 tests - gaussian_anomalies dataset
-	% ===================================================================
 
 	test(isolation_forest_predict_3_gaussian_normal, true(Prediction == normal)) :-
 		learn_filtered(gaussian_anomalies, [number_of_trees(100)], Model),
@@ -179,9 +139,7 @@
 		learn_filtered(gaussian_anomalies, [number_of_trees(50), anomaly_threshold(0.6)], Model),
 		isolation_forest_anomaly_detector::predict(Model, [x-0.12, y-0.34], Prediction).
 
-	% ===================================================================
 	% score_all/3 tests - gaussian_anomalies dataset
-	% ===================================================================
 
 	test(isolation_forest_score_all_3_gaussian, true(length(Scores, 48))) :-
 		learn_filtered(gaussian_anomalies, [number_of_trees(50)], Model),
@@ -200,9 +158,7 @@
 		take(8, Scores, TopScores),
 		count_class(TopScores, anomaly, AnomalyCount).
 
-	% ===================================================================
 	% learn/2 and score/3 tests - shuttle_anomalies dataset
-	% ===================================================================
 
 	test(isolation_forest_learn_2_shuttle_anomalies, true(ground(Model))) :-
 		learn_filtered(shuttle_anomalies, Model).
@@ -229,9 +185,7 @@
 		take(10, Scores, TopScores),
 		count_class(TopScores, anomaly, AnomalyCount).
 
-	% ===================================================================
 	% learn/2 and score/3 tests - water_potability dataset
-	% ===================================================================
 
 	test(isolation_forest_learn_2_water_potability, true(ground(Model))) :-
 		learn_filtered(water_potability, Model).
@@ -258,9 +212,7 @@
 		take(8, Scores, TopScores),
 		count_class(TopScores, anomaly, AnomalyCount).
 
-	% ===================================================================
 	% predict/4 tests - with options
-	% ===================================================================
 
 	test(isolation_forest_predict_4_gaussian_custom_threshold_low, true(Prediction == anomaly)) :-
 		% A low threshold should make more points classified as anomalies
@@ -282,9 +234,7 @@
 		learn_filtered(sensor_anomalies, [number_of_trees(100)], Model),
 		isolation_forest_anomaly_detector::predict(Model, [temperature-102.0, pressure-45.0, vibration- _], Prediction, [anomaly_threshold(0.5)]).
 
-	% ===================================================================
 	% export_to_clauses/4 tests
-	% ===================================================================
 
 	test(isolation_forest_export_to_clauses_4_gaussian, true(N == 1)) :-
 		learn_filtered(gaussian_anomalies, [number_of_trees(10)], Model),
@@ -318,27 +268,21 @@
 		isolation_forest_anomaly_detector::export_to_clauses(sensor_anomalies, Model, detect, Clauses),
 		length(Clauses, N).
 
-	% ===================================================================
 	% export_to_file/4 tests
-	% ===================================================================
 
 	test(isolation_forest_export_to_file_4_gaussian, deterministic(os::file_exists(File))) :-
 		^^file_path('test_output.pl', File),
 		learn_filtered(gaussian_anomalies, [number_of_trees(10)], Model),
 		isolation_forest_anomaly_detector::export_to_file(gaussian_anomalies, Model, iforest, File).
 
-	% ===================================================================
 	% print_anomaly_detector/1 tests
-	% ===================================================================
 
 	test(isolation_forest_print_anomaly_detector_1, deterministic) :-
 		^^suppress_text_output,
 		learn_filtered(gaussian_anomalies, [number_of_trees(5)], Model),
 		isolation_forest_anomaly_detector::print_anomaly_detector(Model).
 
-	% ===================================================================
 	% Extension level tests
-	% ===================================================================
 
 	test(isolation_forest_extension_level_0_vs_full, true((ground(Model0), ground(ModelFull)))) :-
 		% Both extension levels should produce valid models
@@ -351,9 +295,7 @@
 		isolation_forest_anomaly_detector::score(Model, [x-0.12, y-0.34], NormalScore),
 		isolation_forest_anomaly_detector::score(Model, [x-4.50, y-4.20], AnomalyScore).
 
-	% ===================================================================
 	% Missing values tests - sensor_anomalies dataset
-	% ===================================================================
 
 	test(isolation_forest_learn_2_sensor_anomalies, true(ground(Model))) :-
 		% Dataset with missing values should be learnable
@@ -419,9 +361,7 @@
 		isolation_forest_anomaly_detector::score(Model, [x- _], MissingScore),
 		isolation_forest_anomaly_detector::score(Model, [x-5.10], AnomalyScore).
 
-	% ===================================================================
-	% Auxiliary predicates
-	% ===================================================================
+	% auxiliary predicates
 
 	count_class([], _, 0).
 	count_class([_-Class-_| Rest], Class, Count) :-
