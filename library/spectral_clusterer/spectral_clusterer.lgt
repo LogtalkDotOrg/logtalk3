@@ -23,9 +23,9 @@
 	imports(clusterer_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-01,
+		date is 2026-09-24,
 		comment is 'Normalized spectral clusterer for continuous datasets using a Gaussian RBF affinity and a Nystroem extension for assigning new instances to clusters.',
 		see_also is [clusterer_protocol, clustering_dataset_protocol, kmeans_clusterer, linear_algebra]
 	]).
@@ -164,8 +164,8 @@
 	pairwise_positive_distances([], []).
 	pairwise_positive_distances([Row| Rows], Distances) :-
 		distances_to_rows(Rows, Row, HeadDistances),
-		pairwise_positive_distances(Rows, TailDistances),
-		append(HeadDistances, TailDistances, Distances).
+		append(HeadDistances, TailDistances, Distances),
+		pairwise_positive_distances(Rows, TailDistances).
 
 	distances_to_rows([], _Row, []).
 	distances_to_rows([OtherRow| Rows], Row, Distances) :-

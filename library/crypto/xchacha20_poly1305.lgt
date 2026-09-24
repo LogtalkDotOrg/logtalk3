@@ -286,8 +286,8 @@
 		),
 		xor_bytes(Block, KeystreamBlock, OutputBlock),
 		Counter1 is Counter + 1,
-		chacha20_encrypt(KeyWords, Counter1, NonceWords, Rest, OutputRest),
-		append(OutputBlock, OutputRest, Output).
+		append(OutputBlock, OutputRest, Output),
+		chacha20_encrypt(KeyWords, Counter1, NonceWords, Rest, OutputRest).
 
 	chacha20_block(KeyWords, Counter, NonceWords, OutBytes) :-
 		chacha20_constants(C0, C1, C2, C3),
@@ -359,8 +359,8 @@
 	words32_to_bytes([], []).
 	words32_to_bytes([Word| Words], Bytes) :-
 		int_to_le_bytes_fixed(Word, 4, WordBytes),
-		words32_to_bytes(Words, Rest),
-		append(WordBytes, Rest, Bytes).
+		append(WordBytes, Rest, Bytes),
+		words32_to_bytes(Words, Rest).
 
 	xor_bytes([], [], []).
 	xor_bytes([Byte1| Bytes1], [Byte2| Bytes2], [XorByte| XorBytes]) :-

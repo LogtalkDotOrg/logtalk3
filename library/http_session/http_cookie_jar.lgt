@@ -23,9 +23,9 @@
 	imports([http_text_helpers, http_origin_site_helpers, options])).
 
 	:- info([
-		version is 1:0:2,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-12,
+		date is 2026-09-24,
 		comment is 'HTTP cookie jar implementing explicit storage and request matching on top of the http_cookies parsing and generation predicates, with explicit save and load operations for persisting jar contents.'
 	]).
 
@@ -345,11 +345,11 @@
 	normalize_persisted_cookie_list_items([], _CurrentTime, []).
 	normalize_persisted_cookie_list_items([PersistedCookie0| PersistedCookies0], CurrentTime, PersistedCookies) :-
 		normalize_persisted_cookie(PersistedCookie0, CurrentTime, PersistedCookie),
-		normalize_persisted_cookie_list_items(PersistedCookies0, CurrentTime, PersistedCookies1),
 		(	PersistedCookie == skip ->
 			PersistedCookies = PersistedCookies1
 		;	PersistedCookies = [PersistedCookie| PersistedCookies1]
-		).
+		),
+		normalize_persisted_cookie_list_items(PersistedCookies0, CurrentTime, PersistedCookies1).
 
 	normalize_persisted_cookie(PersistedCookie0, CurrentTime, PersistedCookie) :-
 		persisted_cookie_term(PersistedCookie0, CurrentTime, PersistedCookie),

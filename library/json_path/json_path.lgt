@@ -23,9 +23,9 @@
 	implements(json_path_protocol)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-09-12,
+		date is 2026-09-24,
 		comment is 'Initial JSONPath implementation supporting child and descendant navigation, names, wildcards, indexes, and slices.',
 		parameters is [
 			'StringRepresentation' - 'Text representation to be used for query member names and normalized paths. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
@@ -129,21 +129,21 @@
 	apply_child_segment([], _, _, []).
 	apply_child_segment([Node| Nodes], RootJSON, Selectors, OutputNodes) :-
 		selector_results(Selectors, Node, RootJSON, HeadNodes),
-		apply_child_segment(Nodes, RootJSON, Selectors, TailNodes),
-		append(HeadNodes, TailNodes, OutputNodes).
+		append(HeadNodes, TailNodes, OutputNodes),
+		apply_child_segment(Nodes, RootJSON, Selectors, TailNodes).
 
 	apply_descendant_segment([], _, _, []).
 	apply_descendant_segment([Node| Nodes], RootJSON, Selectors, OutputNodes) :-
 		descendant_nodes(Node, DescendantNodes),
 		apply_child_segment(DescendantNodes, RootJSON, Selectors, HeadNodes),
-		apply_descendant_segment(Nodes, RootJSON, Selectors, TailNodes),
-		append(HeadNodes, TailNodes, OutputNodes).
+		append(HeadNodes, TailNodes, OutputNodes),
+		apply_descendant_segment(Nodes, RootJSON, Selectors, TailNodes).
 
 	selector_results([], _, _, []).
 	selector_results([Selector| Selectors], Node, RootJSON, OutputNodes) :-
 		selector_nodes(Selector, Node, RootJSON, HeadNodes),
-		selector_results(Selectors, Node, RootJSON, TailNodes),
-		append(HeadNodes, TailNodes, OutputNodes).
+		append(HeadNodes, TailNodes, OutputNodes),
+		selector_results(Selectors, Node, RootJSON, TailNodes).
 
 	selector_nodes(name(Token), inode(Location, JSON), _, Nodes) :-
 		!,
@@ -188,8 +188,8 @@
 	descendant_lists([], []).
 	descendant_lists([Child| Children], Descendants) :-
 		descendant_nodes(Child, ChildDescendants),
-		descendant_lists(Children, RemainingDescendants),
-		append(ChildDescendants, RemainingDescendants, Descendants).
+		append(ChildDescendants, RemainingDescendants, Descendants),
+		descendant_lists(Children, RemainingDescendants).
 
 	node_children(inode(Location, JSON), Children) :-
 		child_nodes(Location, JSON, Children).

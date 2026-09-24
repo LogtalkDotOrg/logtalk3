@@ -23,9 +23,9 @@
 	implements(datalog_protocol)).
 
 	:- info([
-		version is 0:1:1,
+		version is 0:2:0,
 		author is 'Paulo Moura',
-		date is 2026-03-30,
+		date is 2026-09-24,
 		comment is 'Portable Datalog engine with stratified negation and incremental updates.'
 	]).
 
@@ -359,7 +359,6 @@
 	partition_body_literals([], [], [], [], []).
 	partition_body_literals([Literal| Literals], PositiveGround0, PositiveNonGround0, Aggregate0, Negative0) :-
 		literal_bucket(Literal, Bucket),
-		partition_body_literals(Literals, PositiveGround1, PositiveNonGround1, Aggregate1, Negative1),
 		(	Bucket == positive_ground ->
 			PositiveGround0 = [Literal| PositiveGround1],
 			PositiveNonGround0 = PositiveNonGround1,
@@ -379,7 +378,8 @@
 			PositiveNonGround0 = PositiveNonGround1,
 			Aggregate0 = Aggregate1,
 			Negative0 = [Literal| Negative1]
-		).
+		),
+		partition_body_literals(Literals, PositiveGround1, PositiveNonGround1, Aggregate1, Negative1).
 
 	literal_bucket(Literal, positive_ground) :-
 		body_literal_term(Literal, Term, positive),
@@ -895,20 +895,20 @@
 
 	materialize_delta_fixpoint :-
 		maximum_stratum(MaximumStratum),
-		derive_all_strata(0, MaximumStratum, NewEdges),
+		derive_all_strata(0, MaximumStratum, 0, NewEdges),
 		(	NewEdges =:= 0 ->
 			true
 		;	materialize_delta_fixpoint
 		).
 
-	derive_all_strata(Stratum, MaximumStratum, 0) :-
+	derive_all_strata(Stratum, MaximumStratum, NewEdges, NewEdges) :-
 		Stratum > MaximumStratum,
 		!.
-	derive_all_strata(Stratum, MaximumStratum, NewEdges) :-
+	derive_all_strata(Stratum, MaximumStratum, NewEdges0, NewEdges) :-
 		derive_all(Stratum, CurrentEdges),
 		NextStratum is Stratum + 1,
-		derive_all_strata(NextStratum, MaximumStratum, RemainingEdges),
-		NewEdges is CurrentEdges + RemainingEdges.
+		NewEdges1 is CurrentEdges + NewEdges0,
+		derive_all_strata(NextStratum, MaximumStratum, NewEdges1, NewEdges).
 
 	query(Goal) :-
 		fact_true_(Goal).

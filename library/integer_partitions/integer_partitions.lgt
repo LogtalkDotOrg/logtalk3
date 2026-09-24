@@ -23,9 +23,9 @@
 	implements(integer_partitions_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-27,
+		date is 2026-09-24,
 		comment is 'Implementation of integer partition operations.'
 	]).
 
@@ -391,8 +391,8 @@
 			Part is Upper - Offset + 1,
 			N1 is N - Part,
 			K1 is K - 1,
-			integer_partition(N1, K1, Part, Rest),
-			Partition = [Part| Rest]
+			Partition = [Part| Rest],
+			integer_partition(N1, K1, Part, Rest)
 		).
 
 	% generates partitions of N into pairwise distinct (strictly decreasing)
@@ -437,8 +437,8 @@
 			N1 is N - Part,
 			K1 is K - 1,
 			Max1 is Part - 1,
-			distinct_integer_partition(N1, K1, Max1, Rest),
-			Partition = [Part| Rest]
+			Partition = [Part| Rest],
+			distinct_integer_partition(N1, K1, Max1, Rest)
 		).
 
 	% number of partitions of N into exactly K parts, computed with the

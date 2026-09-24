@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-09-09,
+		date is 2026-09-24,
 		comment is 'Parser and generator for user and system crontab files.',
 		parameters is [
 			'Representation' - 'Text representation. Valid values are ``atom``, ``chars``, and ``codes``.'
@@ -474,8 +474,8 @@
 	entries_codes([], _, []).
 	entries_codes([Entry| Entries], Format, Codes) :-
 		entry_codes(Entry, Format, EntryCodes),
-		entries_codes(Entries, Format, Rest),
-		append(EntryCodes, [10| Rest], Codes).
+		append(EntryCodes, [10| Rest], Codes),
+		entries_codes(Entries, Format, Rest).
 
 	entry_codes(blank, _, []).
 	entry_codes(comment(Text), _, [0'#| Codes]) :-
@@ -559,13 +559,13 @@
 	field_items_codes([Item| Items], Kind, Codes) :-
 		Item \= list(_),
 		field_codes(Item, Kind, ItemCodes),
-		field_items_codes(Items, Kind, Rest),
-		append(ItemCodes, [0',| Rest], Codes).
+		append(ItemCodes, [0',| Rest], Codes),
+		field_items_codes(Items, Kind, Rest).
 
 	join_fields([Codes], Codes).
 	join_fields([Codes| Fields], Joined) :-
-		join_fields(Fields, Rest),
-		append(Codes, [32| Rest], Joined).
+		append(Codes, [32| Rest], Joined),
+		join_fields(Fields, Rest).
 
 	command_codes(Command, none, Codes) :-
 		escape_percent(Command, Codes).

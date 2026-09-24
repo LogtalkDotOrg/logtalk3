@@ -23,9 +23,9 @@
 	implements(interval_relation_set_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-13,
+		date is 2026-09-24,
 		comment is 'Allen interval relation-set operations using canonical ordered duplicate-free lists of base relation atoms.'
 	]).
 
@@ -129,13 +129,13 @@
 	compose_relations([], _RelationSet2, []).
 	compose_relations([Relation1| RelationSet1], RelationSet2, Relations) :-
 		compose_with_relation(RelationSet2, Relation1, Relations1),
-		compose_relations(RelationSet1, RelationSet2, Relations2),
-		append(Relations1, Relations2, Relations).
+		append(Relations1, Relations2, Relations),
+		compose_relations(RelationSet1, RelationSet2, Relations2).
 
 	compose_with_relation([], _Relation1, []).
 	compose_with_relation([Relation2| RelationSet2], Relation1, Relations) :-
 		interval_algebra::compose(Relation1, Relation2, Relations1),
-		compose_with_relation(RelationSet2, Relation1, Relations2),
-		append(Relations1, Relations2, Relations).
+		append(Relations1, Relations2, Relations),
+		compose_with_relation(RelationSet2, Relation1, Relations2).
 
 :- end_object.

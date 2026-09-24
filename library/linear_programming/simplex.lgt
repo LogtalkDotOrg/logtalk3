@@ -23,9 +23,9 @@
 	imports(linear_programming_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-09-12,
+		date is 2026-09-24,
 		comment is 'Portable dense two-phase simplex solver for small continuous linear programs.',
 		remarks is [
 			'Variable types' - 'This backend supports continuous variables only. Integer and binary variables are accepted by the shared model API for use by future MILP backends but rejected when solving.',
@@ -100,8 +100,8 @@
 	prepare_variables([], NextColumn, NextColumn, [], []).
 	prepare_variables([variable(Name, continuous, Lower, Upper)| Variables], Column0, Column, [recovery(Name, Constant, Terms)| Recoveries], BoundRows) :-
 		variable_transformation(Lower, Upper, Column0, Column1, Constant, Terms, VariableBoundRows),
-		prepare_variables(Variables, Column1, Column, Recoveries, RemainingBoundRows),
-		append(VariableBoundRows, RemainingBoundRows, BoundRows).
+		append(VariableBoundRows, RemainingBoundRows, BoundRows),
+		prepare_variables(Variables, Column1, Column, Recoveries, RemainingBoundRows).
 
 	variable_transformation(Lower, Upper, Column, Column, Lower, [], []) :-
 		number(Lower), number(Upper), Lower =:= Upper,
@@ -224,8 +224,8 @@
 		pad_vector(Coefficients0, VariableCount, OriginalCoefficients),
 		pad_vector(OriginalCoefficients, TotalColumns, PaddedCoefficients),
 		add_auxiliary_columns(Sense, NextColumn0, PaddedCoefficients, Coefficients, Basic, NextColumn, RowArtificialColumns),
-		build_tableau_rows(Rows, VariableCount, TotalColumns, NextColumn, Tableau, Basis, RemainingArtificialColumns),
-		append(RowArtificialColumns, RemainingArtificialColumns, ArtificialColumns).
+		append(RowArtificialColumns, RemainingArtificialColumns, ArtificialColumns),
+		build_tableau_rows(Rows, VariableCount, TotalColumns, NextColumn, Tableau, Basis, RemainingArtificialColumns).
 
 	pad_vector(Vector, Length, Padded) :-
 		length(Vector, CurrentLength),

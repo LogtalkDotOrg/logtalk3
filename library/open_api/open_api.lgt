@@ -23,9 +23,9 @@
 	imports(http_json_term_helpers)).
 
 	:- info([
-		version is 1:0:2,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-09-24,
 		comment is 'OpenAPI 3.1.0 document derivation, parsing, generation, and validation built on top of the ``json`` and ``json_schema`` libraries.',
 		see_also is [json, json_schema, application_protocol, open_api_provider_protocol]
 	]).
@@ -365,8 +365,8 @@
 		;	ServerErrors = []
 		),
 		NextIndex is Index + 1,
-		validate_document_server_array_known_fields(Servers, NextIndex, RestErrors),
-		append(ServerErrors, RestErrors, Errors).
+		append(ServerErrors, RestErrors, Errors),
+		validate_document_server_array_known_fields(Servers, NextIndex, RestErrors).
 	validate_document_server_array_known_fields(_, _, []).
 
 	validate_document_components_known_fields(DocumentPairs, Errors) :-
@@ -385,8 +385,8 @@
 			CurrentErrors = []
 		;	validate_document_component_member_map(Key, Value, CurrentErrors)
 		),
-		validate_document_component_member_maps(Pairs, RestErrors),
-		append(CurrentErrors, RestErrors, Errors).
+		append(CurrentErrors, RestErrors, Errors),
+		validate_document_component_member_maps(Pairs, RestErrors).
 
 	validate_document_component_member_map(Key, Value, Errors) :-
 		(	^^json_object_pairs(Value, Pairs) ->
@@ -402,8 +402,8 @@
 			CurrentErrors = []
 		;	CurrentErrors = [error(Path, invalid_component_name(Name))]
 		),
-		validate_document_component_member_pairs(Pairs, Context, RestErrors),
-		append(CurrentErrors, RestErrors, Errors).
+		append(CurrentErrors, RestErrors, Errors),
+		validate_document_component_member_pairs(Pairs, Context, RestErrors).
 
 	validate_document_external_docs_known_fields(DocumentPairs, Errors) :-
 		(	lookup_pair_value(externalDocs, DocumentPairs, ExternalDocs),
@@ -470,8 +470,8 @@
 			PathErrors = []
 		;	validate_document_operation_security_path_item(PathItem, Path, SecuritySchemePairs, PathErrors)
 		),
-		validate_document_operation_security_path_pairs(Pairs, SecuritySchemePairs, RestErrors),
-		append(PathErrors, RestErrors, Errors).
+		append(PathErrors, RestErrors, Errors),
+		validate_document_operation_security_path_pairs(Pairs, SecuritySchemePairs, RestErrors).
 
 	validate_document_operation_security_path_item(PathItem, Path, SecuritySchemePairs, Errors) :-
 		(	^^json_object_pairs(PathItem, PathItemPairs) ->
@@ -489,8 +489,8 @@
 			validate_document_security_requirement_array(Requirements, Context, SecuritySchemePairs, OperationErrors)
 		;	OperationErrors = []
 		),
-		validate_document_operation_security_pairs(Pairs, Path, SecuritySchemePairs, RestErrors),
-		append(OperationErrors, RestErrors, Errors).
+		append(OperationErrors, RestErrors, Errors),
+		validate_document_operation_security_pairs(Pairs, Path, SecuritySchemePairs, RestErrors).
 
 	validate_document_security_requirement_array([], _, _, []) :-
 		!.
@@ -499,8 +499,8 @@
 			validate_document_security_requirement_pairs(RequirementPairs, Context, SecuritySchemePairs, RequirementErrors)
 		;	RequirementErrors = [error(Context, expected_type(object))]
 		),
-		validate_document_security_requirement_array(Requirements, Context, SecuritySchemePairs, RestErrors),
-		append(RequirementErrors, RestErrors, Errors).
+		append(RequirementErrors, RestErrors, Errors),
+		validate_document_security_requirement_array(Requirements, Context, SecuritySchemePairs, RestErrors).
 	validate_document_security_requirement_array(_, Context, _, [error(Context, expected_type(array))]).
 
 	validate_document_security_requirement_pairs([], _, _, []) :-
@@ -511,8 +511,8 @@
 			validate_document_security_requirement_scopes(Scheme, SecurityScheme, Scopes, SchemePath, ScopeErrors)
 		;	ScopeErrors = [error(SchemePath, existence_error(open_api_security_scheme, Scheme))]
 		),
-		validate_document_security_requirement_pairs(Requirements, Context, SecuritySchemePairs, RestErrors),
-		append(ScopeErrors, RestErrors, Errors).
+		append(ScopeErrors, RestErrors, Errors),
+		validate_document_security_requirement_pairs(Requirements, Context, SecuritySchemePairs, RestErrors).
 
 	validate_document_security_requirement_scopes(Scheme, SecurityScheme, Scopes, Path, Errors) :-
 		(	catch(validate_security_requirement_scopes(Scheme, SecurityScheme, Scopes), Error, true) ->
@@ -656,8 +656,8 @@
 		;	CurrentErrors = [error(TagPath, expected_type(string))]
 		),
 		NextIndex is Index + 1,
-		validate_document_tag_array(Tags, Path, NextIndex, RestErrors),
-		append(CurrentErrors, RestErrors, Errors).
+		append(CurrentErrors, RestErrors, Errors),
+		validate_document_tag_array(Tags, Path, NextIndex, RestErrors).
 
 	validate_document_request_body_field(Pairs, Context, Errors) :-
 		(	lookup_pair_value(requestBody, Pairs, RequestBody) ->
@@ -698,8 +698,7 @@
 		validate_document_response_status(Status, Path, StatusErrors),
 		validate_document_response_object(Response, Path, ResponseErrors),
 		validate_document_response_pairs(Pairs, Context, RestErrors),
-		append(StatusErrors, ResponseErrors, Errors0),
-		append(Errors0, RestErrors, Errors).
+		append([StatusErrors, ResponseErrors, RestErrors], Errors).
 
 	validate_document_response_status(Status, Path, Errors) :-
 		(	valid_document_response_status(Status) ->
@@ -786,8 +785,8 @@
 		;	CurrentErrors = [],
 			Seen1 = Seen0
 		),
-		validate_document_parameter_array_definitions(Parameters, Context, Seen1, RestErrors),
-		append(CurrentErrors, RestErrors, Errors).
+		append(CurrentErrors, RestErrors, Errors),
+		validate_document_parameter_array_definitions(Parameters, Context, Seen1, RestErrors).
 	validate_document_parameter_array_definitions(_, _, _, []).
 
 	document_parameter_key(Parameter, Name-In) :-
@@ -811,8 +810,8 @@
 	document_path_parameter_array([Parameter| Parameters], TemplateNames, Context, Names0, Names, ReferencesPresent0, ReferencesPresent, Errors) :-
 		document_path_parameter_entry(Parameter, TemplateNames, Context, Names0, Names1, EntryReferencesPresent, EntryErrors),
 		merge_document_reference_flags(ReferencesPresent0, EntryReferencesPresent, ReferencesPresent1),
-		document_path_parameter_array(Parameters, TemplateNames, Context, Names1, Names, ReferencesPresent1, ReferencesPresent, RestErrors),
-		append(EntryErrors, RestErrors, Errors).
+		append(EntryErrors, RestErrors, Errors),
+		document_path_parameter_array(Parameters, TemplateNames, Context, Names1, Names, ReferencesPresent1, ReferencesPresent, RestErrors).
 	document_path_parameter_array(Parameters, _, Context, Names, Names, ReferencesPresent, ReferencesPresent, [error(Context, expected_type(array))]) :-
 		Parameters \== [],
 		Parameters \== [_| _].
@@ -869,8 +868,8 @@
 			CurrentErrors = []
 		;	CurrentErrors = [error(Context, missing_path_parameter(Name))]
 		),
-		validate_document_path_parameter_coverage(Names, DeclaredNames, Context, RestErrors),
-		append(CurrentErrors, RestErrors, Errors).
+		append(CurrentErrors, RestErrors, Errors),
+		validate_document_path_parameter_coverage(Names, DeclaredNames, Context, RestErrors).
 
 	merge_document_reference_flags(yes, _, yes) :-
 		!.
@@ -1655,8 +1654,8 @@
 			)
 		;	CurrentErrors = [missing_parameter(path, Name)]
 		),
-		validate_declared_path_parameters(Parameters, DeclaredParameters, RestErrors),
-		append(CurrentErrors, RestErrors, Errors).
+		append(CurrentErrors, RestErrors, Errors),
+		validate_declared_path_parameters(Parameters, DeclaredParameters, RestErrors).
 
 	path_parameters_property(Properties, Pairs) :-
 		(	property_list_value(path_params, Properties, Pairs) ->

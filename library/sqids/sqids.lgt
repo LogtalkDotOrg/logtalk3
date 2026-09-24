@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-09,
+		date is 2026-09-24,
 		comment is 'Encoding and decoding of short, obfuscated, URL-safe ids from lists of non-negative integers, per the Sqids specification.',
 		remarks is [
 			'Specification' - 'https://github.com/sqids/sqids-spec',
@@ -202,8 +202,8 @@
 		Alphabet = [Separator| Rest],
 		to_id_chars(Number, Rest, NumberChars),
 		shuffle(Alphabet, NextAlphabet),
-		encode_loop(Numbers, NextAlphabet, RestChars, FinalAlphabet),
-		append(NumberChars, [Separator| RestChars], Chars).
+		append(NumberChars, [Separator| RestChars], Chars),
+		encode_loop(Numbers, NextAlphabet, RestChars, FinalAlphabet).
 
 	numbers_offset(Numbers, Alphabet, Length, Offset) :-
 		length(Numbers, Count),
@@ -287,8 +287,8 @@
 		;	chars_to_number(Chunk, AlphabetWithoutSeparator, Number),
 			(	Found == true ->
 				shuffle(Alphabet, NextAlphabet),
-				decode_loop(After, NextAlphabet, NumbersTail),
-				Numbers = [Number| NumbersTail]
+				Numbers = [Number| NumbersTail],
+				decode_loop(After, NextAlphabet, NumbersTail)
 			;	Numbers = [Number]
 			)
 		).

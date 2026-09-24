@@ -23,9 +23,9 @@
 	extends(http_text_helpers)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-06-09,
+		date is 2026-09-24,
 		comment is 'Internal shared helpers for parsing HTTP origins and absolute URLs, deriving request endpoints, and comparing endpoints for schemeful same-site semantics.'
 	]).
 
@@ -70,6 +70,10 @@
 
 	:- uses(http_core, [
 		property/2 as http_property/2, request/7 as http_request/7, target/2 as http_target/2
+	]).
+
+	:- uses(user, [
+		atomic_list_concat/3
 	]).
 
 	absolute_url_context(URL, http_url_context(Scheme, Host, Port, Path)) :-
@@ -205,7 +209,7 @@
 	host_site_key(Host, SiteHost) :-
 		host_labels(Host, Labels),
 		registrable_domain_labels(Labels, SiteLabels),
-		host_labels_atom(SiteLabels, SiteHost).
+		atomic_list_concat(SiteLabels, '.', SiteHost).
 
 	registrable_domain_labels(Labels, Labels) :-
 		public_suffix_length(Labels, Length),
@@ -257,13 +261,6 @@
 		length(Rule, RuleLength),
 		LabelsLength > RuleLength,
 		Length is RuleLength + 1.
-
-	host_labels_atom([Label], Label) :-
-		!.
-	host_labels_atom([Label| Labels], Atom) :-
-		host_labels_atom(Labels, LabelsAtom),
-		atom_concat(Label, '.', Prefix),
-		atom_concat(Prefix, LabelsAtom, Atom).
 
 	reversed_prefix([], _Labels).
 	reversed_prefix([Label| Prefix], [Label| Labels]) :-

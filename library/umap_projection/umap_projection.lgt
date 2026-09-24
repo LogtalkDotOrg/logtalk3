@@ -23,9 +23,9 @@
 	imports(dimension_reducer_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-09-24,
 		comment is 'Uniform Manifold Approximation and Projection dimension reducer for continuous, categorical, and mixed datasets.',
 		see_also is [tsne_projection, spectral_clusterer]
 	]).
@@ -486,8 +486,8 @@
 		Sigma is max(Sigma0, MinimumSigma),
 		directed_memberships(Neighbors, Index, Rho, Sigma, RowMemberships),
 		NextIndex is Index + 1,
-		smooth_neighbor_rows(NeighborRows, LocalConnectivity, GlobalMean, NeighborCount, NextIndex, RestMemberships),
-		append(RowMemberships, RestMemberships, DirectedMemberships).
+		append(RowMemberships, RestMemberships, DirectedMemberships),
+		smooth_neighbor_rows(NeighborRows, LocalConnectivity, GlobalMean, NeighborCount, NextIndex, RestMemberships).
 
 	neighbor_distances([], []).
 	neighbor_distances([neighbor(_Index, Distance)| Neighbors], [Distance| Distances]) :-
@@ -577,8 +577,8 @@
 		Target is Source + 1,
 		merge_source_memberships(Source, Target, Count, DirectedMemberships, MixRatio, SourceEdges),
 		NextSource is Source + 1,
-		merge_directed_memberships(NextSource, Count, DirectedMemberships, MixRatio, RestEdges),
-		append(SourceEdges, RestEdges, FuzzyGraph).
+		append(SourceEdges, RestEdges, FuzzyGraph),
+		merge_directed_memberships(NextSource, Count, DirectedMemberships, MixRatio, RestEdges).
 
 	merge_source_memberships(_Source, Target, Count, _DirectedMemberships, _MixRatio, []) :-
 		Target >= Count,

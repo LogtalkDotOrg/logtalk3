@@ -24,9 +24,9 @@
 	extends([http_json_term_helpers, http_text_helpers])).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2026-09-12,
+		date is 2026-09-24,
 		comment is 'Declarative HTTP router category for objects implementing the http_handler_protocol protocol.'
 	]).
 
@@ -300,8 +300,8 @@
 		atom_codes(Segment, Codes).
 	open_api_path_segments_codes([Segment| Segments], Codes) :-
 		atom_codes(Segment, SegmentCodes),
-		open_api_path_segments_codes(Segments, RestCodes),
-		append(SegmentCodes, [0'/| RestCodes], Codes).
+		append(SegmentCodes, [0'/| RestCodes], Codes),
+		open_api_path_segments_codes(Segments, RestCodes).
 
 	route_open_api_metadata(RouteId, Metadata) :-
 		(	::route_metadata(RouteId, Metadata0) ->
@@ -1273,11 +1273,10 @@
 	reserved_route_metadata_functor(matched_path).
 
 	merge_route_metadata([], Properties, Properties).
-	merge_route_metadata([MetadataProperty| Metadata], Properties0, Properties) :-
+	merge_route_metadata([MetadataProperty| Metadata], Properties0, [MetadataProperty| Properties2]) :-
 		functor(MetadataProperty, Functor, _),
 		remove_property_functor(Properties0, Functor, Properties1),
-		merge_route_metadata(Metadata, Properties1, Properties2),
-		Properties = [MetadataProperty| Properties2].
+		merge_route_metadata(Metadata, Properties1, Properties2).
 
 	open_api_info(info(Title, '1.0.0', 'HTTP router API', [])) :-
 		this(This),
@@ -1475,8 +1474,8 @@
 		method_name_codes(Method, MethodCodes).
 	allow_header_codes([Method| Methods], AllowCodes) :-
 		method_name_codes(Method, MethodCodes),
-		allow_header_codes(Methods, RemainingCodes),
-		append(MethodCodes, [0',, 32| RemainingCodes], AllowCodes).
+		append(MethodCodes, [0',, 32| RemainingCodes], AllowCodes),
+		allow_header_codes(Methods, RemainingCodes).
 
 	method_name_codes(Method, MethodCodes) :-
 		atom(Method),

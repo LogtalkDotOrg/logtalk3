@@ -23,9 +23,9 @@
 	imports([ranking_dataset_common, score_ranker_model_common, pairwise_strength_ranker_common])).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-08-18,
+		date is 2026-09-24,
 		comment is 'Colley pairwise preference ranker. Learns one deterministic rating per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by solving the Colley linear system built from aggregated pairwise outcomes and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
 		see_also is [pairwise_ranking_dataset_protocol, ranker_protocol, copeland_ranker, rank_centrality]
 	]).
@@ -85,16 +85,16 @@
 	colley_system(Index, Count, PairWeights, Wins, [Row| Matrix], [Value| Vector]) :-
 		nth1(Index, PairWeights, Neighbors),
 		nth1(Index, Wins, WinCount),
-		row_games(Neighbors, Games),
+		row_games(Neighbors, 0.0, Games),
 		row_value(WinCount, Games, Value),
 		row_coefficients(1, Count, Index, Neighbors, Games, Row),
 		NextIndex is Index + 1,
 		colley_system(NextIndex, Count, PairWeights, Wins, Matrix, Vector).
 
-	row_games([], 0.0).
-	row_games([_Neighbor-Weight| Neighbors], Games) :-
-		row_games(Neighbors, RestGames),
-		Games is Weight + RestGames.
+	row_games([], Games, Games).
+	row_games([_Neighbor-Weight| Neighbors], Games0, Games) :-
+		Games1 is Weight + Games0,
+		row_games(Neighbors, Games1, Games).
 
 	row_value(Wins, Games, Value) :-
 		Value is 1.0 + Wins - Games / 2.0.

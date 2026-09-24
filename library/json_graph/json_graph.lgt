@@ -23,9 +23,9 @@
 	implements(json_graph_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-03,
+		date is 2026-09-24,
 		comment is 'JSON Graph Format v2 parser and generator.'
 	]).
 
@@ -101,8 +101,8 @@
 	graphs_json_terms([Graph| Graphs], N, Terms) :-
 		graph_json_terms(N, Graph, GraphTerms),
 		M is N + 1,
-		graphs_json_terms(Graphs, M, OtherTerms),
-		append(GraphTerms, OtherTerms, Terms).
+		append(GraphTerms, OtherTerms, Terms),
+		graphs_json_terms(Graphs, M, OtherTerms).
 
 	graph_json_terms(DefaultGraphId, Graph, Terms) :-
 		valid_graph_json(Graph),

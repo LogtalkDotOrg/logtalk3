@@ -23,9 +23,9 @@
 	imports(http_text_helpers)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-09-23,
+		date is 2026-09-24,
 		comment is 'Transport-independent normalized HTTP request and response constructors, validators, wire parsers and generators, and body codec dispatch.'
 	]).
 
@@ -1249,8 +1249,8 @@
 		multipart_close_marker_codes(BoundaryCodes, Bytes).
 	multipart_parts_bytes([Part| Parts], BoundaryCodes, Bytes) :-
 		multipart_part_bytes(Part, BoundaryCodes, PartBytes),
-		multipart_parts_bytes(Parts, BoundaryCodes, RestBytes),
-		append(PartBytes, RestBytes, Bytes).
+		append(PartBytes, RestBytes, Bytes),
+		multipart_parts_bytes(Parts, BoundaryCodes, RestBytes).
 
 	multipart_part_bytes(part(Headers0, Body, Properties), BoundaryCodes, Bytes) :-
 		part_effective_headers(Headers0, Body, Properties, Headers),
@@ -2797,8 +2797,8 @@
 		accept_query_range_codes(MediaRange, Codes).
 	accept_query_ranges_codes([MediaRange| MediaRanges], Codes) :-
 		accept_query_range_codes(MediaRange, RangeCodes),
-		accept_query_ranges_codes(MediaRanges, RangesCodes),
-		append(RangeCodes, [0',, 32| RangesCodes], Codes).
+		append(RangeCodes, [0',, 32| RangesCodes], Codes),
+		accept_query_ranges_codes(MediaRanges, RangesCodes).
 
 	accept_query_range_codes(media_range(MediaRange, Parameters), Codes) :-
 		accept_query_media_range_value_codes(MediaRange, MediaRangeCodes),
@@ -3016,7 +3016,7 @@
 		(	Pairs == [] ->
 			append([NameCodes, [0'=], ValueCodes], Codes)
 		;	generate_www_form_codes(Pairs, RestCodes),
-			append([NameCodes, [0'=], ValueCodes, [0'&], RestCodes], Codes)
+			append([NameCodes, [0'=| ValueCodes], [0'&| RestCodes]], Codes)
 		).
 
 	www_form_encode_text(Text, Codes) :-
@@ -3256,8 +3256,8 @@
 	token_list_codes([Token| Tokens], Codes) :-
 		normalize_atom_text(Token, NormalizedToken),
 		atom_codes(NormalizedToken, TokenCodes),
-		token_list_codes(Tokens, RestCodes),
-		append([TokenCodes, [0',, 0' ], RestCodes], Codes).
+		append([TokenCodes, [0',, 0' ], RestCodes], Codes),
+		token_list_codes(Tokens, RestCodes).
 
 	websocket_versions_codes(Version, Codes) :-
 		integer(Version),
@@ -3268,8 +3268,8 @@
 		number_codes(Version, Codes).
 	websocket_versions_codes([Version| Versions], Codes) :-
 		number_codes(Version, VersionCodes),
-		websocket_versions_codes(Versions, RestCodes),
-		append([VersionCodes, [0',, 0' ], RestCodes], Codes).
+		append(VersionCodes, [0',, 32| RestCodes], Codes),
+		websocket_versions_codes(Versions, RestCodes).
 
 	method_token_code(Code) :-
 		token_code(Code).

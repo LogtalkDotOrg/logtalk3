@@ -23,9 +23,9 @@
 	implements(wkt_wkb_protocol)).
 
 	:- info([
-		version is 1:1:2,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-09-24,
 		comment is 'Well-Known Text (WKT) and Well-Known Binary (WKB) geometry parser, generator, and validator.',
 		see_also is [wkt_wkb_protocol, geojson, geospatial, cbor, message_pack(_)]
 	]).
@@ -900,8 +900,11 @@
 		indexed_rev_path(CoordinateRevPath, Index, RingRevPath),
 		validate_ring_rev(Ring, RingRevPath, RingArity, Errors, Errors1),
 		NextIndex is Index + 1,
-		validate_rings_rev(Rings, CoordinateRevPath, NextIndex, RestArities, Errors1, Tail),
-		(	RingArity == none -> Arities = RestArities ; Arities = [RingArity| RestArities] ).
+		(	RingArity == none ->
+			Arities = RestArities
+		;	Arities = [RingArity| RestArities]
+		),
+		validate_rings_rev(Rings, CoordinateRevPath, NextIndex, RestArities, Errors1, Tail).
 
 	validate_ring_rev(Ring, RingRevPath, Arity, Errors, Tail) :-
 		(	is_list(Ring) ->
@@ -929,11 +932,11 @@
 		indexed_rev_path(CoordinateRevPath, Index, PointRevPath),
 		validate_multi_point_rev(Point, PointRevPath, PointArity, Errors, Errors1),
 		NextIndex is Index + 1,
-		validate_multi_points_rev(Points, CoordinateRevPath, NextIndex, RestArities, Errors1, Tail),
 		(	PointArity == none ->
 			Arities = RestArities
 		;	Arities = [PointArity| RestArities]
-		).
+		),
+		validate_multi_points_rev(Points, CoordinateRevPath, NextIndex, RestArities, Errors1, Tail).
 
 	validate_multi_point_rev([], _PointRevPath, none, Errors, Errors) :-
 		!.
@@ -952,8 +955,11 @@
 		indexed_rev_path(CoordinateRevPath, Index, LineStringRevPath),
 		validate_line_string_coordinates_rev(LineString, 2, LineStringRevPath, LineArity, Errors, Errors1),
 		NextIndex is Index + 1,
-		validate_multi_line_strings_rev(LineStrings, CoordinateRevPath, NextIndex, RestArities, Errors1, Tail),
-		(	LineArity == none -> Arities = RestArities ; Arities = [LineArity| RestArities] ).
+		(	LineArity == none ->
+			Arities = RestArities
+		;	Arities = [LineArity| RestArities]
+		),
+		validate_multi_line_strings_rev(LineStrings, CoordinateRevPath, NextIndex, RestArities, Errors1, Tail).
 
 	validate_multi_polygons_rev(Polygons, CoordinateRevPath, Arities, Errors, Tail) :-
 		validate_multi_polygons_rev(Polygons, CoordinateRevPath, 0, Arities, Errors, Tail).
@@ -997,27 +1003,27 @@
 		validate_geometry_rev(Geometry, GeometryRevPath, Errors, Errors1),
 		geometry_term_arity(Geometry, GeometryArity),
 		NextIndex is Index + 1,
-		validate_geometries_rev(Geometries, GeometriesRevPath, NextIndex, RestArities, Errors1, Tail),
 		(	GeometryArity == none ->
 			Arities = RestArities
 		;	Arities = [GeometryArity| RestArities]
-		).
+		),
+		validate_geometries_rev(Geometries, GeometriesRevPath, NextIndex, RestArities, Errors1, Tail).
 
-	validate_positions_rev(Data, CoordinateRevPath, Count, Arity, Errors, Tail) :-
-		validate_positions_rev(Data, CoordinateRevPath, 0, Count, Arities, Errors, Errors1),
-		consistent_arities_rev(Arities, CoordinateRevPath, Arity, Errors1, Tail).
+	validate_positions_rev(Data, CoordinateRevPath, Count, Arity, Errors0, Errors) :-
+		validate_positions_rev(Data, CoordinateRevPath, 0, 0, Count, Arities, Errors0, Errors1),
+		consistent_arities_rev(Arities, CoordinateRevPath, Arity, Errors1, Errors).
 
-	validate_positions_rev([], _CoordinateRevPath, _Index, 0, [], Errors, Errors).
-	validate_positions_rev([Position| Positions], CoordinateRevPath, Index, Count, Arities, Errors, Tail) :-
+	validate_positions_rev([], _CoordinateRevPath, _Index, Count, Count, [], Errors, Errors).
+	validate_positions_rev([Position| Positions], CoordinateRevPath, Index, Count0, Count, Arities, Errors0, Errors) :-
 		indexed_rev_path(CoordinateRevPath, Index, PositionRevPath),
-		validate_position_rev(Position, PositionRevPath, PositionArity, Errors, Errors1),
+		validate_position_rev(Position, PositionRevPath, PositionArity, Errors0, Errors1),
 		NextIndex is Index + 1,
-		validate_positions_rev(Positions, CoordinateRevPath, NextIndex, RestCount, RestArities, Errors1, Tail),
-		Count is RestCount + 1,
+		Count1 is Count0 + 1,
 		(	PositionArity == none ->
 			Arities = RestArities
 		;	Arities = [PositionArity| RestArities]
-		).
+		),
+		validate_positions_rev(Positions, CoordinateRevPath, NextIndex, Count1, Count, RestArities, Errors1, Errors).
 
 	validate_position_rev(Position, _PositionRevPath, Arity, Errors, Tail) :-
 		valid_position_arity(Position, Arity),

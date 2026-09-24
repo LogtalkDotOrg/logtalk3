@@ -23,9 +23,9 @@
 	imports(http_text_helpers)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-09-24,
 		comment is 'Multipart helper predicates built on top of the normalized body and part terms provided by the http library.'
 	]).
 
@@ -619,9 +619,9 @@
 		text_to_codes(Name, NameCodes),
 		text_to_codes(Value, ValueCodes0),
 		escaped_quoted_codes(ValueCodes0, ValueCodes),
-		content_disposition_parameters_codes(Parameters, Codes2),
 		append([0';,32| NameCodes], [0'=,0'"| ValueCodes], Codes1),
-		append(Codes1, [0'"| Codes2], Codes).
+		append(Codes1, [0'"| Codes2], Codes),
+		content_disposition_parameters_codes(Parameters, Codes2).
 
 	escaped_quoted_codes([], []).
 	escaped_quoted_codes([Code| Codes], [0'\\, Code| EscapedCodes]) :-

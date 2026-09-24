@@ -23,9 +23,9 @@
 	implements(gpx_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-09-24,
 		comment is 'GPX 1.1 parser, generator, and validator.'
 	]).
 
@@ -333,8 +333,8 @@
 		path_element(Path, Index, ValuePath),
 		validate_list_value(Kind, Value, ValuePath, ValueErrors),
 		NextIndex is Index + 1,
-		validate_list(Values, Kind, Path, NextIndex, RestErrors),
-		append(ValueErrors, RestErrors, Errors).
+		append(ValueErrors, RestErrors, Errors),
+		validate_list(Values, Kind, Path, NextIndex, RestErrors).
 
 	validate_list_value(point, Value, Path, Errors) :-
 		validate_point(Value, Path, Errors).
@@ -865,8 +865,8 @@
 	properties_scalars([PropertyName-ElementName-Kind| Specs], Properties0, Properties, Content) :-
 		take_scalar(PropertyName, Kind, Properties0, Properties1, Value),
 		scalar_node(ElementName, Value, ValueContent),
-		properties_scalars(Specs, Properties1, Properties, RemainingContent),
-		append(ValueContent, RemainingContent, Content).
+		append(ValueContent, RemainingContent, Content),
+		properties_scalars(Specs, Properties1, Properties, RemainingContent).
 
 	scalar_value(atom, Codes, Value) :-
 		atom_codes(Value, Codes).

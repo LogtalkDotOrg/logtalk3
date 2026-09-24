@@ -22,9 +22,9 @@
 :- category(ranking_dataset_common).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-18,
+		date is 2026-09-24,
 		comment is 'Shared predicates for collecting, analyzing, and validating ranking datasets.'
 	]).
 
@@ -871,14 +871,14 @@
 	multiplayer_event_edges([match(_Match, Teams)| Events], Preferences) :-
 		multiplayer_team_members(Teams, Participants),
 		multiplayer_participant_edges(Participants, EventPreferences),
-		multiplayer_event_edges(Events, Rest),
-		append(EventPreferences, Rest, Preferences).
+		append(EventPreferences, Rest, Preferences),
+		multiplayer_event_edges(Events, Rest).
 
 	multiplayer_team_members([], []).
 	multiplayer_team_members([team(_Team, _Rank, Members)| Teams], Participants) :-
 		member_items(Members, TeamParticipants),
-		multiplayer_team_members(Teams, Rest),
-		append(TeamParticipants, Rest, Participants).
+		append(TeamParticipants, Rest, Participants),
+		multiplayer_team_members(Teams, Rest).
 
 	member_items([], []).
 	member_items([Item-_Weight| Members], [Item| Items]) :-

@@ -24,9 +24,9 @@
 	imports(mcp_server_application)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-09-02,
+		date is 2026-09-24,
 		comment is 'Implements the Streamable HTTP transport for MCP servers. Uses Logtalk ``http_server::serve_until_shutdown/5`` and a dedicated ``http_handler_protocol`` handler object. Supports specs 2025-06-18, 2025-11-25, and 2026-07-28 selected via the ``spec/1`` option and delegated to the matching ``mcp_server_*_spec`` object. Supports optional OAuth protection and protected-resource metadata publication using the ``oauth/4`` option. Long-lived subscriptions/listen streams emit periodic SSE comment keep-alives (``http_sse_keepalive/1``). Requires a multi-threaded backend for subscriptions/listen.'
 	]).
 
@@ -1069,8 +1069,8 @@
 		sse_data_event_codes(FinalMsg, Codes).
 	sse_events_codes([Event| Events], FinalMsg, Codes) :-
 		sse_data_event_codes(Event, Codes0),
-		sse_events_codes(Events, FinalMsg, Codes1),
-		append(Codes0, Codes1, Codes).
+		append(Codes0, Codes1, Codes),
+		sse_events_codes(Events, FinalMsg, Codes1).
 
 	sse_data_event_codes(Term, Codes) :-
 		json_serialize(Term, Atom),

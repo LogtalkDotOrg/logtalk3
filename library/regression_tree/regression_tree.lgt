@@ -23,9 +23,9 @@
 	imports(regressor_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-05,
+		date is 2026-09-24,
 		comment is 'Regression tree regressor supporting continuous and mixed-feature datasets using recursive variance-reduction splits.',
 		see_also is [linear_regression, knn_regression, random_forest_regression, gradient_boosting_regression]
 	]).
@@ -171,8 +171,8 @@
 
 	flatten_attribute_feature_indexes([], []).
 	flatten_attribute_feature_indexes([_-Indexes| AttributeIndexes], FeatureIndexes) :-
-		flatten_attribute_feature_indexes(AttributeIndexes, RestFeatureIndexes),
-		append(Indexes, RestFeatureIndexes, FeatureIndexes).
+		append(Indexes, RestFeatureIndexes, FeatureIndexes),
+		flatten_attribute_feature_indexes(AttributeIndexes, RestFeatureIndexes).
 
 	best_split_feature([], _Rows, _ParentSSE, _Options, BestIndex0, BestReduction0, BestThreshold0, BestLeft0, BestRight0, BestIndex, BestThreshold, BestReduction, BestLeft, BestRight) :-
 		!,

@@ -23,11 +23,14 @@
 	imports(association_rule_miner_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-03,
+		date is 2026-09-24,
 		comment is 'Association rule miner deriving confidence- and lift-scored rules from frequent itemsets and sequential patterns.',
-		see_also is [association_rule_miner_protocol, pattern_miner_protocol, transaction_dataset_protocol, sequence_dataset_protocol]
+		see_also is [
+			association_rule_miner_protocol, pattern_miner_protocol, transaction_dataset_protocol,
+			sequence_dataset_protocol
+		]
 	]).
 
 	:- uses(format, [
@@ -139,7 +142,7 @@
 		sequence_candidates(Patterns, Options, RestCandidates).
 
 	sequence_pattern_candidates(Pattern, Support, Options, Candidates) :-
-		pattern_length(Pattern, RuleLength),
+		pattern_length(Pattern, 0, RuleLength),
 		^^option(maximum_rule_length(MaximumRuleLength), Options),
 		(	Pattern = [_FirstEvent, _SecondEvent| _Events], RuleLength =< MaximumRuleLength ->
 			sequence_splits(Pattern, Splits),
@@ -157,7 +160,7 @@
 
 	filter_sequence_splits([], _Pattern, _Support, _Options, []).
 	filter_sequence_splits([Antecedent-Consequent| Splits], Pattern, Support, Options, Candidates) :-
-		pattern_length(Consequent, ConsequentLength),
+		pattern_length(Consequent, 0, ConsequentLength),
 		(	consequent_length_allowed(ConsequentLength, Options) ->
 			Candidates = [raw_candidate(Antecedent, Consequent, Pattern, Support)| RestCandidates]
 		;	Candidates = RestCandidates
@@ -304,8 +307,8 @@
 	decorate_rules([], []).
 	decorate_rules([Rule| Rules], [key(RuleLength, Antecedent, Consequent)-Rule| DecoratedRules]) :-
 		Rule = association_rule(Antecedent, Consequent, _Support, _AntecedentSupport, _ConsequentSupport, _Confidence, _Lift),
-		pattern_length(Antecedent, AntecedentLength),
-		pattern_length(Consequent, ConsequentLength),
+		pattern_length(Antecedent, 0, AntecedentLength),
+		pattern_length(Consequent, 0, ConsequentLength),
 		RuleLength is AntecedentLength + ConsequentLength,
 		decorate_rules(Rules, DecoratedRules).
 
@@ -351,8 +354,8 @@
 		^^option(minimum_lift(MinimumLift), Options),
 		Confidence >= MinimumConfidence,
 		Lift >= MinimumLift,
-		pattern_length(Antecedent, AntecedentLength),
-		pattern_length(Consequent, ConsequentLength),
+		pattern_length(Antecedent, 0, AntecedentLength),
+		pattern_length(Consequent, 0, ConsequentLength),
 		RuleLength is AntecedentLength + ConsequentLength,
 		^^option(maximum_rule_length(MaximumRuleLength), Options),
 		RuleLength =< MaximumRuleLength,
@@ -465,14 +468,14 @@
 		;	domain_error(pattern_support, Support)
 		).
 
-	pattern_length([], 0).
-	pattern_length([Item| Items], PatternLength) :-
+	pattern_length([], PatternLength, PatternLength).
+	pattern_length([Item| Items], PatternLength0, PatternLength) :-
 		(	Item = [_| _] ->
 			length(Item, ItemLength)
 		;	ItemLength = 1
 		),
-		pattern_length(Items, RestLength),
-		PatternLength is ItemLength + RestLength.
+		PatternLength1 is ItemLength + PatternLength0,
+		pattern_length(Items, PatternLength1, PatternLength).
 
 	print_association_rule_miner(association_rule_miner(SourceMiner, ItemDomain, DatasetSize, CandidateRuleCount, Rules, Options)) :-
 		format('Association Rule Miner~n', []),

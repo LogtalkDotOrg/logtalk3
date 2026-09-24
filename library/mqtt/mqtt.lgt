@@ -23,9 +23,9 @@
 	imports([options, http_origin_site_helpers])).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-08,
+		date is 2026-09-24,
 		comment is 'Portable MQTT 5 client predicates using ``http_transport_protocol`` implementations.'
 	]).
 
@@ -1000,8 +1000,8 @@
 		!.
 	encode_subscriptions_tail([Subscription| Subscriptions], Bytes) :-
 		encode_subscription(Subscription, SubscriptionBytes),
-		encode_subscriptions_tail(Subscriptions, TailBytes),
-		append(SubscriptionBytes, TailBytes, Bytes).
+		append(SubscriptionBytes, TailBytes, Bytes),
+		encode_subscriptions_tail(Subscriptions, TailBytes).
 
 	encode_subscription(subscription(TopicFilter, Options), Bytes) :-
 		!,
@@ -1080,16 +1080,16 @@
 	encode_topic_filters([TopicFilter| TopicFilters], Bytes) :-
 		validate_topic_filter(TopicFilter),
 		encode_utf8_string(TopicFilter, TopicFilterBytes),
-		encode_topic_filters_tail(TopicFilters, TailBytes),
-		append(TopicFilterBytes, TailBytes, Bytes).
+		append(TopicFilterBytes, TailBytes, Bytes),
+		encode_topic_filters_tail(TopicFilters, TailBytes).
 
 	encode_topic_filters_tail([], []) :-
 		!.
 	encode_topic_filters_tail([TopicFilter| TopicFilters], Bytes) :-
 		validate_topic_filter(TopicFilter),
 		encode_utf8_string(TopicFilter, TopicFilterBytes),
-		encode_topic_filters_tail(TopicFilters, TailBytes),
-		append(TopicFilterBytes, TailBytes, Bytes).
+		append(TopicFilterBytes, TailBytes, Bytes),
+		encode_topic_filters_tail(TopicFilters, TailBytes).
 
 	decode_topic_filters([], _TopicFilters) :-
 		domain_error(mqtt_topic_filters, []).
@@ -1179,15 +1179,15 @@
 		domain_error(mqtt_reason_code_list, []).
 	encode_reason_code_list(Type, [ReasonCode| ReasonCodes], Bytes) :-
 		encode_reason_code(Type, ReasonCode, ReasonCodeBytes),
-		encode_reason_code_list_tail(Type, ReasonCodes, TailBytes),
-		append(ReasonCodeBytes, TailBytes, Bytes).
+		append(ReasonCodeBytes, TailBytes, Bytes),
+		encode_reason_code_list_tail(Type, ReasonCodes, TailBytes).
 
 	encode_reason_code_list_tail(_Type, [], []) :-
 		!.
 	encode_reason_code_list_tail(Type, [ReasonCode| ReasonCodes], Bytes) :-
 		encode_reason_code(Type, ReasonCode, ReasonCodeBytes),
-		encode_reason_code_list_tail(Type, ReasonCodes, TailBytes),
-		append(ReasonCodeBytes, TailBytes, Bytes).
+		append(ReasonCodeBytes, TailBytes, Bytes),
+		encode_reason_code_list_tail(Type, ReasonCodes, TailBytes).
 
 	decode_reason_code_list(_Type, [], _ReasonCodes) :-
 		domain_error(mqtt_reason_code_list, []).
@@ -1391,8 +1391,8 @@
 		!.
 	encode_property_list([Property| Properties], Bytes) :-
 		encode_property(Property, PropertyBytes),
-		encode_property_list(Properties, TailBytes),
-		append(PropertyBytes, TailBytes, Bytes).
+		append(PropertyBytes, TailBytes, Bytes),
+		encode_property_list(Properties, TailBytes).
 
 	decode_property_list([], []) :-
 		!.

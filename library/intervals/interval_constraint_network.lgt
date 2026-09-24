@@ -23,9 +23,9 @@
 	implements(interval_constraint_network_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-13,
+		date is 2026-09-24,
 		comment is 'Allen interval constraint-network operations built on canonical relation sets, intended for small-to-medium symbolic networks.'
 	]).
 
@@ -452,8 +452,8 @@
 	batch_refine_seed_compiled([Constraint| Constraints], CompiledNetwork0, CompiledNetwork, ScheduledPairs0, ScheduledPairs, SeedPairs, Changes) :-
 		refine_seed_constraint_compiled(CompiledNetwork0, Constraint, CompiledNetwork1, SeedPairs1, Changes1),
 		batch_refine_seed_compiled(Constraints, CompiledNetwork1, CompiledNetwork, ScheduledPairs0, ScheduledPairs1, SeedPairs2, Changes2),
-		enqueue_unique_pairs(SeedPairs1, ScheduledPairs1, ScheduledPairs, SeedPairs2, SeedPairs),
-		append(Changes1, Changes2, Changes).
+		append(Changes1, Changes2, Changes),
+		enqueue_unique_pairs(SeedPairs1, ScheduledPairs1, ScheduledPairs, SeedPairs2, SeedPairs).
 
 	refine_seed_constraint_compiled(CompiledNetwork, constraint(Node1, Node2, RelationSet), RefinedNetwork, SeedPairs, Changes) :-
 		!,
@@ -545,8 +545,8 @@
 			Changes2 = Changes0
 		),
 		NextIndex is Index + 1,
-		propagate_compiled_pair(NextIndex, Size, LeftIndex, RightIndex, CompiledNetwork2, CompiledNetwork, PairSuffix, Changes2, Changes),
-		append(PairPrefix, PairSuffix, NewPairs).
+		append(PairPrefix, PairSuffix, NewPairs),
+		propagate_compiled_pair(NextIndex, Size, LeftIndex, RightIndex, CompiledNetwork2, CompiledNetwork, PairSuffix, Changes2, Changes).
 
 	distinct_indices(Index1, Index2, Index3) :-
 		Index1 =\= Index2,

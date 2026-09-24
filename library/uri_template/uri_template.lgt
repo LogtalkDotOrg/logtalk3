@@ -22,9 +22,9 @@
 :- object(uri_template(_Representation_)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-09-02,
+		date is 2026-09-24,
 		comment is 'URI template validation, variable enumeration, and expansion predicates implementing RFC 6570.',
 		parameters is [
 			'Representation' - 'URI template, variable name, variable value, and expansion representation. Valid values are ``atom``, ``codes``, and ``chars``.'
@@ -328,9 +328,9 @@
 	expand_exploded_list_tail([Value| Values], Name, Separator, Named, Empty, Allow, Expansion) :-
 		encode_codes(Value, Allow, EncodedValue, []),
 		expand_named_value(Named, Name, EncodedValue, Empty, Encoded),
-		expand_exploded_list_tail(Values, Name, Separator, Named, Empty, Allow, Rest),
 		append(Separator, Encoded, Prefix),
-		append(Prefix, Rest, Expansion).
+		append(Prefix, Rest, Expansion),
+		expand_exploded_list_tail(Values, Name, Separator, Named, Empty, Allow, Rest).
 
 	expand_association(none, Pairs, Name, _, Named, Empty, Allow, Expansion) :-
 		encode_flat_pairs(Pairs, Allow, EncodedPairs),
@@ -341,17 +341,17 @@
 	encode_flat_pairs([Name-Value| Pairs], Allow, Expansion) :-
 		encode_codes(Name, Allow, EncodedName, []),
 		encode_codes(Value, Allow, EncodedValue, []),
-		encode_flat_pairs_tail(Pairs, Allow, Rest),
 		append(EncodedName, [0',| EncodedValue], First),
-		append(First, Rest, Expansion).
+		append(First, Rest, Expansion),
+		encode_flat_pairs_tail(Pairs, Allow, Rest).
 
 	encode_flat_pairs_tail([], _, []).
 	encode_flat_pairs_tail([Name-Value| Pairs], Allow, Expansion) :-
 		encode_codes(Name, Allow, EncodedName, []),
 		encode_codes(Value, Allow, EncodedValue, []),
-		encode_flat_pairs_tail(Pairs, Allow, Rest),
 		append([0',| EncodedName], [0',| EncodedValue], First),
-		append(First, Rest, Expansion).
+		append(First, Rest, Expansion),
+		encode_flat_pairs_tail(Pairs, Allow, Rest).
 
 	encode_values([Value| Values], Separator, Allow, Expansion) :-
 		encode_codes(Value, Allow, Encoded, []),
@@ -361,9 +361,9 @@
 	encode_values_tail([], _, _, []).
 	encode_values_tail([Value| Values], Separator, Allow, Expansion) :-
 		encode_codes(Value, Allow, Encoded, []),
-		encode_values_tail(Values, Separator, Allow, Rest),
 		append(Separator, Encoded, Prefix),
-		append(Prefix, Rest, Expansion).
+		append(Prefix, Rest, Expansion),
+		encode_values_tail(Values, Separator, Allow, Rest).
 
 	encode_pairs([Name-Value| Pairs], Separator, Empty, Allow, Expansion) :-
 		encode_pair(Name, Value, Empty, Allow, Encoded),
@@ -373,9 +373,9 @@
 	encode_pairs_tail([], _, _, _, []).
 	encode_pairs_tail([Name-Value| Pairs], Separator, Empty, Allow, Expansion) :-
 		encode_pair(Name, Value, Empty, Allow, Encoded),
-		encode_pairs_tail(Pairs, Separator, Empty, Allow, Rest),
 		append(Separator, Encoded, Prefix),
-		append(Prefix, Rest, Expansion).
+		append(Prefix, Rest, Expansion),
+		encode_pairs_tail(Pairs, Separator, Empty, Allow, Rest).
 
 	encode_pair(Name, [], Empty, Allow, Expansion) :-
 		!,
@@ -540,8 +540,8 @@
 	literals_rest(Codes) -->
 		literal(Literal),
 		!,
-		literals_rest(Rest),
-		{append(Literal, Rest, Codes)}.
+		{append(Literal, Rest, Codes)},
+		literals_rest(Rest).
 	literals_rest([]) -->
 		[].
 

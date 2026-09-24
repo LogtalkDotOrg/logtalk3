@@ -72,9 +72,9 @@
 	extends(http_websocket_session(_Role_, _TextRepresentation_))).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-09,
+		date is 2026-09-24,
 		comment is 'Callback-driven WebSocket session loops over upgraded WebSocket connections provided by a selected ``http_transport_protocol`` implementation, including automatic close-handshake orchestration, optional auto-pong, keepalive, and idle-timeout policies.',
 		parameters is [
 			'HTTPTransport' - 'The object implementing ``http_transport_protocol``.',
@@ -705,13 +705,13 @@
 	validate_registry_handler_action_list([], [], []).
 	validate_registry_handler_action_list([Action| Actions0], Replies, Actions) :-
 		validate_registry_handler_action(Action, Normalized, Kind),
-		validate_registry_handler_action_list(Actions0, Replies0, Actions0b),
 		(	Kind == reply ->
 			Replies = [Normalized| Replies0],
 			Actions = Actions0b
 		;	Replies = Replies0,
 			Actions = [Normalized| Actions0b]
-		).
+		),
+		validate_registry_handler_action_list(Actions0, Replies0, Actions0b).
 
 	validate_registry_handler_action(reply(Message), Message, reply) :-
 		!,

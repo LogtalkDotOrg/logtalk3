@@ -14,8 +14,8 @@ Internal shared helpers for parsing HTTP origins and absolute URLs, deriving req
 |    ``logtalk_load(http_core(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-06-09
+| **Version:** 1:1:0
+| **Date:** 2026-09-24
 
 | **Compilation flags:**
 |    ``static``
@@ -28,6 +28,7 @@ Internal shared helpers for parsing HTTP origins and absolute URLs, deriving req
 |    :ref:`http_core <http_core/0>`
 |    :ref:`list <list/0>`
 |    :ref:`url(Representation) <url/1>`
+|    :ref:`user <user/0>`
 
 | **Remarks:**
 |    (none)
