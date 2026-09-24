@@ -23,9 +23,9 @@
 	imports([options, http_origin_site_helpers])).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-09-24,
 		comment is 'Transport-neutral CORS request classification, preflight response generation, and response decoration helpers for normalized HTTP messages.'
 	]).
 
@@ -84,6 +84,10 @@
 
 	:- uses(list, [
 		append/3, member/2, memberchk/2, reverse/2
+	]).
+
+	:- uses(user, [
+		atomic_list_concat/3
 	]).
 
 	request_origin(Request, Origin) :-
@@ -634,7 +638,7 @@
 
 	method_list_atom(Methods, Atom) :-
 		method_display_atoms(Methods, Atoms),
-		join_atoms(Atoms, ', ', Atom).
+		atomic_list_concat(Atoms, ', ', Atom).
 
 	method_display_atoms([], []).
 	method_display_atoms([Method| Methods], [Display| Atoms]) :-
@@ -656,7 +660,7 @@
 
 	header_name_list_atom(Names, Atom) :-
 		header_name_display_atoms(Names, Atoms),
-		join_atoms(Atoms, ', ', Atom).
+		atomic_list_concat(Atoms, ', ', Atom).
 
 	header_name_display_atoms([], []).
 	header_name_display_atoms([Name| Names], [Display| Atoms]) :-
@@ -679,29 +683,6 @@
 	header_name_display_codes([Code| Codes], false, [DisplayCode| DisplayCodes]) :-
 		lowercase_ascii_code(Code, DisplayCode),
 		header_name_display_codes(Codes, false, DisplayCodes).
-
-	join_atoms([Atom], _Separator, Atom) :-
-		!.
-	join_atoms([], _Separator, '') :-
-		!.
-	join_atoms(Atoms, Separator, Atom) :-
-		atom_codes(Separator, SeparatorCodes),
-		join_atom_codes(Atoms, SeparatorCodes, Codes, []),
-		atom_codes(Atom, Codes).
-
-	join_atom_codes([], _SeparatorCodes, Tail, Tail).
-	join_atom_codes([Atom], _SeparatorCodes, Codes, Tail) :-
-		atom_codes(Atom, AtomCodes),
-		append_codes(AtomCodes, Codes, Tail).
-	join_atom_codes([Atom| Atoms], SeparatorCodes, Codes, Tail) :-
-		atom_codes(Atom, AtomCodes),
-		append_codes(AtomCodes, Codes, Codes1),
-		append_codes(SeparatorCodes, Codes1, Codes2),
-		join_atom_codes(Atoms, SeparatorCodes, Codes2, Tail).
-
-	append_codes([], Codes, Codes).
-	append_codes([Code| Rest], [Code| Codes], Tail) :-
-		append_codes(Rest, Codes, Tail).
 
 	unique_preserving_order(List, Unique) :-
 		unique_preserving_order(List, [], Unique, []).

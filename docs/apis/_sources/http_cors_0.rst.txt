@@ -14,8 +14,8 @@ Transport-neutral CORS request classification, preflight response generation, an
 |    ``logtalk_load(http_cors(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-06-26
+| **Version:** 1:0:1
+| **Date:** 2026-09-24
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -28,6 +28,7 @@ Transport-neutral CORS request classification, preflight response generation, an
 |    :ref:`atom <atom/0>`
 |    :ref:`http_core <http_core/0>`
 |    :ref:`list <list/0>`
+|    :ref:`user <user/0>`
 
 | **Remarks:**
 |    (none)
