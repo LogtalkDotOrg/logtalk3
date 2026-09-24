@@ -23,9 +23,9 @@
 	complements(crypto)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-03,
+		date is 2026-09-24,
 		comment is 'X25519 Diffie-Hellman key agreement implementation (RFC 7748). Requires exact, unbounded integer arithmetic for arithmetic modulo the 255-bit field prime.'
 	]).
 
@@ -148,6 +148,7 @@
 
 	le_bytes_to_int(Bytes, Integer) :-
 		le_bytes_to_int(Bytes, 0, 0, Integer).
+
 	le_bytes_to_int([], _Shift, Integer, Integer).
 	le_bytes_to_int([Byte| Bytes], Shift, Integer0, Integer) :-
 		Integer1 is Integer0 \/ (Byte << Shift),
@@ -156,13 +157,13 @@
 
 	int_to_le_bytes_fixed(Integer, Count, Bytes) :-
 		length(Bytes, Count),
-		int_to_le_bytes_fixed(Integer, Bytes).
-	int_to_le_bytes_fixed(_Integer, []) :-
-		!.
-	int_to_le_bytes_fixed(Integer, [Byte| Bytes]) :-
+		int_to_le_bytes_fixed(Bytes, Integer).
+
+	int_to_le_bytes_fixed([], _Integer).
+	int_to_le_bytes_fixed([Byte| Bytes], Integer) :-
 		Byte is Integer /\ 0xff,
 		NextInteger is Integer >> 8,
-		int_to_le_bytes_fixed(NextInteger, Bytes).
+		int_to_le_bytes_fixed(Bytes, NextInteger).
 
 	all_zero_bytes([]).
 	all_zero_bytes([0| Bytes]) :-

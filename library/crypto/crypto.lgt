@@ -22,9 +22,9 @@
 :- object(crypto).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-09-11,
+		date is 2026-09-24,
 		comment is 'Transport-neutral cryptographic helper predicates.'
 	]).
 
@@ -695,18 +695,17 @@
 
 	parse_hex_atom(Hex, Bytes, Context) :-
 		atom_codes(Hex, Codes),
-		parse_hex_codes(Codes, Hex, Bytes, Context).
+		(	parse_hex_codes(Codes, Hex, Bytes, Context) ->
+			true
+		;	throw(error(domain_error(hexadecimal_atom, Hex), Context))
+		).
 
-	parse_hex_codes([], _, [], _) :-
-		!.
+	parse_hex_codes([], _, [], _).
 	parse_hex_codes([HighCode, LowCode| Codes], Hex, [Byte| Bytes], Context) :-
-		!,
 		hex_digit_value(HighCode, High, Hex, Context),
 		hex_digit_value(LowCode, Low, Hex, Context),
 		Byte is (High << 4) + Low,
 		parse_hex_codes(Codes, Hex, Bytes, Context).
-	parse_hex_codes(_, Hex, _, Context) :-
-		throw(error(domain_error(hexadecimal_atom, Hex), Context)).
 
 	hex_digit_value(Code, Value, _Hex, _Context) :-
 		0'0 =< Code,
@@ -801,13 +800,13 @@
 		).
 
 	parse_password_hash_option(iterations(Iterations), _Iterations0, Salt, SaltLength, Length, Iterations, Salt, SaltLength, Length, Context) :-
-			check(positive_integer, Iterations, Context).
+		check(positive_integer, Iterations, Context).
 	parse_password_hash_option(salt(Salt), Iterations, _Salt0, SaltLength, Length, Iterations, Salt, SaltLength, Length, Context) :-
-			check(list(byte), Salt, Context).
+		check(list(byte), Salt, Context).
 	parse_password_hash_option(salt_length(SaltLength), Iterations, Salt, _SaltLength0, Length, Iterations, Salt, SaltLength, Length, Context) :-
-			check(non_negative_integer, SaltLength, Context).
+		check(non_negative_integer, SaltLength, Context).
 	parse_password_hash_option(length(Length), Iterations, Salt, SaltLength, _Length0, Iterations, Salt, SaltLength, Length, Context) :-
-			check(positive_integer, Length, Context).
+		check(positive_integer, Length, Context).
 
 	parse_password_hash_policy_options(Options, Hash, Iterations, SaltLength, Length, Context) :-
 		check(list(compound), Options, Context),
@@ -1380,9 +1379,9 @@
 		append([Prefix, SaltPart, PasswordPart, Suffix], Input).
 
 	apr1_encode_digest([
-			Byte00, Byte01, Byte02, Byte03, Byte04, Byte05, Byte06, Byte07,
-			Byte08, Byte09, Byte10, Byte11, Byte12, Byte13, Byte14, Byte15
-		], Checksum) :-
+		Byte00, Byte01, Byte02, Byte03, Byte04, Byte05, Byte06, Byte07,
+		Byte08, Byte09, Byte10, Byte11, Byte12, Byte13, Byte14, Byte15
+	], Checksum) :-
 		apr1_to64((Byte00 << 16) \/ (Byte06 << 8) \/ Byte12, 4, Checksum, Checksum1),
 		apr1_to64((Byte01 << 16) \/ (Byte07 << 8) \/ Byte13, 4, Checksum1, Checksum2),
 		apr1_to64((Byte02 << 16) \/ (Byte08 << 8) \/ Byte14, 4, Checksum2, Checksum3),

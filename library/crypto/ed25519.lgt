@@ -23,9 +23,9 @@
 	complements(crypto)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-09-24,
 		comment is 'Ed25519 (RFC 8032) public-key signature implementation. Requires exact, unbounded integer arithmetic for arithmetic modulo the 255-bit field prime and modulo the group order.'
 	]).
 
@@ -89,6 +89,7 @@
 
 	le_bytes_to_int(Bytes, Int) :-
 		le_bytes_to_int(Bytes, 0, 0, Int).
+
 	le_bytes_to_int([], _, Accumulator, Accumulator).
 	le_bytes_to_int([Byte| Bytes], Shift, Accumulator0, Int) :-
 		Accumulator1 is Accumulator0 \/ (Byte << Shift),
@@ -97,13 +98,13 @@
 
 	int_to_le_bytes_fixed(Int, Count, Bytes) :-
 		length(Bytes, Count),
-		int_to_le_bytes_fixed_loop(Int, Bytes).
-	int_to_le_bytes_fixed_loop(_, []) :-
-		!.
-	int_to_le_bytes_fixed_loop(Int, [Byte| Bytes]) :-
+		int_to_le_bytes_fixed_loop(Bytes, Int).
+
+	int_to_le_bytes_fixed_loop([], _).
+	int_to_le_bytes_fixed_loop([Byte| Bytes], Int) :-
 		Byte is Int /\ 0xff,
 		Int1 is Int >> 8,
-		int_to_le_bytes_fixed_loop(Int1, Bytes).
+		int_to_le_bytes_fixed_loop(Bytes, Int1).
 
 	% ---------------------------------------------------------------
 	% Ed25519 (RFC 8032).
@@ -157,9 +158,8 @@
 
 	ed25519_verify(PublicKey, Message, Signature) :-
 		is_list(PublicKey), length(PublicKey, 32),
+		is_list(Message), length(RBytes, 32),
 		is_list(Signature), length(Signature, 64),
-		is_list(Message),
-		length(RBytes, 32),
 		append(RBytes, SBytes, Signature),
 		le_bytes_to_int(SBytes, S),
 		ed25519_q(Q),

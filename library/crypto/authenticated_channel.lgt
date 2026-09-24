@@ -23,9 +23,9 @@
 	complements(crypto)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-03,
+		date is 2026-09-24,
 		comment is 'Identity-authenticated ephemeral X25519 channels with directional XChaCha20-Poly1305 keys, strict counters, and per-message symmetric key ratcheting.'
 	]).
 
@@ -349,13 +349,13 @@
 
 	counter_bytes(Counter, Bytes) :-
 		length(Bytes, 8),
-		counter_bytes_loop(Counter, Bytes).
-	counter_bytes_loop(_Counter, []) :-
-		!.
-	counter_bytes_loop(Counter, [Byte| Bytes]) :-
+		counter_bytes_loop(Bytes, Counter).
+
+	counter_bytes_loop([], _Counter).
+	counter_bytes_loop([Byte| Bytes], Counter) :-
 		Byte is Counter /\ 0xff,
 		NextCounter is Counter // 256,
-		counter_bytes_loop(NextCounter, Bytes).
+		counter_bytes_loop(Bytes, NextCounter).
 
 	protocol_label([108,111,103,116,97,108,107,45,99,114,121,112,116,111,45,97,117,116,104,101,110,116,105,99,97,116,101,100,45,99,104,97,110,110,101,108,45,118,49]).
 

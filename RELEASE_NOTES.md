@@ -31,6 +31,11 @@ Documentation
 * IMPROVED: The PDF version of the API documentation by using better and more
 compact styling, adding internal links, and reducing the number of pages.
 
+Library
+-------
+
+* IMPROVED: Performance of the `crypto` library.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
