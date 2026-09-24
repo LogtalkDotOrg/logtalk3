@@ -23,11 +23,14 @@
 	imports(probabilistic_classifier_common)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-11,
+		date is 2026-09-24,
 		comment is 'Logistic regression classifier supporting binary and multiclass classification using joint softmax training. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
-		see_also is [dataset_protocol, c45_classifier, knn_classifier, naive_bayes_classifier, nearest_centroid_classifier, random_forest_classifier, adaptive_boosting_classifier]
+		see_also is [
+			dataset_protocol, c45_classifier, knn_classifier, naive_bayes_classifier,
+			nearest_centroid_classifier, random_forest_classifier, adaptive_boosting_classifier
+		]
 	]).
 
 	:- uses(format, [
@@ -319,7 +322,7 @@
 		(	classifier_data(Classifier, Classes, Encoders, Models, Options),
 			^^valid_class_values(Classes),
 			^^valid_linear_encoders(Encoders),
-			catch(::check_options(Options), _Error, fail),
+			catch(^^check_options(Options), _Error, fail),
 			encoders_feature_count(Encoders, 0, EncodedFeatures),
 			length(Classes, ModelCount),
 			length(Models, ModelCount),

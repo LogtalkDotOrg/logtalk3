@@ -150,6 +150,8 @@
 		logistic_regression_classifier::learn(mixed, Classifier),
 		logistic_regression_classifier::print_classifier(Classifier).
 
+	% auxiliary predicates
+
 	sum_probabilities([], Total, Total).
 	sum_probabilities([_-Probability| Probabilities], Total0, Total) :-
 		Total1 is Total0 + Probability,
