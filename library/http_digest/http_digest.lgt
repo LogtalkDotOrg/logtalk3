@@ -23,9 +23,9 @@
 	imports((options, http_authentication_helpers))).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-09-08,
+		date is 2026-09-24,
 		comment is 'HTTP Digest authentication parsing, generation, request decoration, and verification helpers.'
 	]).
 
@@ -1440,29 +1440,23 @@
 		pad_left_codes(Codes0, 8, 0'0, Codes),
 		atom_codes(Hex, Codes).
 
-	integer_to_hex_codes(Integer, Codes) :-
-		Integer >= 0,
-		integer_to_hex_codes_(Integer, Codes0),
-		(	Codes0 == [] ->
-			Codes = [0'0]
-		;	Codes = Codes0
-		).
-
-	integer_to_hex_codes_(0, []) :-
+	integer_to_hex_codes(0, [0'0]) :-
 		!.
-	integer_to_hex_codes_(Integer, Codes) :-
-		Digit is Integer mod 16,
-		Rest is Integer // 16,
-		integer_to_hex_codes_(Rest, RestCodes),
-		hex_digit_code(Digit, Code),
-		append(RestCodes, [Code], Codes).
+	integer_to_hex_codes(Integer, HexCodes) :-
+		Integer > 0,
+		integer_to_hex_codes_(Integer, [], HexCodes).
 
-	hex_digit_code(Digit, Code) :-
-		Digit < 10,
-		!,
-		Code is 0'0 + Digit.
-	hex_digit_code(Digit, Code) :-
-		Code is 0'a + Digit - 10.
+	integer_to_hex_codes_(0, HexCodes, HexCodes) :-
+		!.
+	integer_to_hex_codes_(Integer, HexCodes0, HexCodes) :-
+		Integer > 0,
+		Nibble is Integer /\ 15,
+		(	Nibble < 10 ->
+			Code is Nibble + 0'0
+		;	Code is Nibble - 10 + 0'a
+		),
+		Integer1 is Integer >> 4,
+		integer_to_hex_codes_(Integer1, [Code| HexCodes0], HexCodes).
 
 	pad_left_codes(Codes, Width, _PadCode, Codes) :-
 		length(Codes, Length),

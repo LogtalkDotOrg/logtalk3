@@ -23,9 +23,9 @@
 	implements(ccsds_time_code_protocol)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-06-24,
+		date is 2026-06-25,
 		comment is 'CCSDS calendar segmented time code parser and generator.',
 		parameters is [
 			'CalendarVariant' - 'Calendar representation. Supported values are ``calendar`` and ``day_of_year``.',
@@ -382,21 +382,27 @@
 		Digits is _FractionOctets_ * 2,
 		power10(Digits, Scale).
 
-	power10(0, 1) :-
-		!.
 	power10(Exponent, Value) :-
-		Exponent > 0,
-		Exponent1 is Exponent - 1,
-		power10(Exponent1, Partial),
-		Value is Partial * 10.
+		power10_(Exponent, 1, Value).
 
-	power100(0, 1) :-
+	power10_(0, Value, Value) :-
 		!.
-	power100(Exponent, Value) :-
+	power10_(Exponent, Value0, Value) :-
 		Exponent > 0,
 		Exponent1 is Exponent - 1,
-		power100(Exponent1, Partial),
-		Value is Partial * 100.
+		Value1 is Value0 * 10,
+		power10_(Exponent1, Value1, Value).
+
+	power100(Exponent, Value) :-
+		power100_(Exponent, 1, Value).
+
+	power100_(0, Value, Value) :-
+		!.
+	power100_(Exponent, Value0, Value) :-
+		Exponent > 0,
+		Exponent1 is Exponent - 1,
+		Value1 is Value0 * 100,
+		power100_(Exponent1, Value1, Value).
 
 	max_bcd_value(0, 0) :-
 		!.

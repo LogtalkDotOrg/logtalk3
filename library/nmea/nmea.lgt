@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 2:0:1,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-09-25,
 		comment is 'Parser for NMEA 0183 sentences with typed semantic decoding for selected GPS/GNSS sentence types.'
 	]).
 
@@ -493,13 +493,16 @@
 		power_of_ten(Digits, RawDenominator),
 		normalize_fraction(RawNumerator, RawDenominator, Numerator, Denominator).
 
-	power_of_ten(0, 1) :-
+	power_of_ten(Exponent, Value) :-
+		power_of_ten_(Exponent, 1, Value).
+
+	power_of_ten_(0, Value, Value) :-
 		!.
-	power_of_ten(Power, Value) :-
-		Power > 0,
-		NextPower is Power - 1,
-		power_of_ten(NextPower, NextValue),
-		Value is NextValue * 10.
+	power_of_ten_(Exponent, Value0, Value) :-
+		Exponent > 0,
+		Exponent1 is Exponent - 1,
+		Value1 is Value0 * 10,
+		power_of_ten_(Exponent1, Value1, Value).
 
 	normalize_fraction(0, _, 0, 1) :-
 		!.
