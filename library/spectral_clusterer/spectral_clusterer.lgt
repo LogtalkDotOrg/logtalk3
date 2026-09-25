@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-09-24,
+		date is 2026-09-25,
 		comment is 'Normalized spectral clusterer for continuous datasets using a Gaussian RBF affinity and a Nystroem extension for assigning new instances to clusters.',
 		see_also is [clusterer_protocol, clustering_dataset_protocol, kmeans_clusterer, linear_algebra]
 	]).
@@ -42,7 +42,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, memberchk/2, nth0/3
+		append/3, length/2, memberchk/2, msort/2, nth0/3
 	]).
 
 	:- uses(numberlist, [
@@ -144,21 +144,8 @@
 		pairwise_positive_distances(Rows, Distances),
 		(	Distances == [] ->
 			domain_error(positive_pairwise_distance, 0.0)
-		;	sort_numbers(Distances, SortedDistances),
+		;	msort(Distances, SortedDistances),
 			median_sorted(SortedDistances, Sigma)
-		).
-
-	sort_numbers([], []).
-	sort_numbers([Number| Numbers], Sorted) :-
-		sort_numbers(Numbers, Sorted0),
-		insert_number(Sorted0, Number, Sorted).
-
-	insert_number([], Number, [Number]).
-	insert_number([Head| Tail], Number, Sorted) :-
-		(	Number =< Head ->
-			Sorted = [Number, Head| Tail]
-		;	Sorted = [Head| SortedTail],
-			insert_number(Tail, Number, SortedTail)
 		).
 
 	pairwise_positive_distances([], []).
