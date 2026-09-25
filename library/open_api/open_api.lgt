@@ -697,8 +697,8 @@
 		append(Context, [Status], Path),
 		validate_document_response_status(Status, Path, StatusErrors),
 		validate_document_response_object(Response, Path, ResponseErrors),
-		validate_document_response_pairs(Pairs, Context, RestErrors),
-		append([StatusErrors, ResponseErrors, RestErrors], Errors).
+		append([StatusErrors, ResponseErrors, RestErrors], Errors),
+		validate_document_response_pairs(Pairs, Context, RestErrors).
 
 	validate_document_response_status(Status, Path, Errors) :-
 		(	valid_document_response_status(Status) ->

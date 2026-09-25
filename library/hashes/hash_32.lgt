@@ -476,9 +476,9 @@
 	implements([hash_digest_protocol, hash_state_protocol])).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-09-25,
 		comment is 'Common BLAKE2 hash function core.',
 		parameters is [
 			'Key' - 'A list of key bytes. Use the empty list for unkeyed hashing.',
@@ -703,18 +703,18 @@
 		var(Key),
 		instantiation_error.
 	key_length(Key, Length) :-
-		key_length_checked(Key, Length),
+		key_length_checked(Key, 0, Length),
 		!.
 	key_length(Key, _) :-
 		domain_error(blake2_key, Key).
 
-	key_length_checked([], 0).
-	key_length_checked([Byte| Bytes], Length) :-
+	key_length_checked([], Length, Length).
+	key_length_checked([Byte| Bytes], Length0, Length) :-
 		integer(Byte),
 		Byte >= 0,
 		Byte =< 255,
-		key_length_checked(Bytes, Length0),
-		Length is Length0 + 1.
+		Length1 is Length0 + 1,
+		key_length_checked(Bytes, Length1, Length).
 
 	blake2_parameter_word(KeyLength, ParameterWord) :-
 		ParameterWord is _DigestSize_ + (KeyLength << 8) + 0x01010000.

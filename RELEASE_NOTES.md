@@ -36,13 +36,13 @@ Library
 
 * IMPROVED: Performance of the `crypto` library.
 
-* FIXED: Non-tail-recursive predicate definitions in the `colley_ranker`,
-`association_rule_miner`, `crontab`, `crypto`, `datalog`, `gpx`, `http_core`,
-`http_multipart`, `http_router`, `http_session`, `http_websocket_service`,
-`integer_partitions`, `intervals`, `json_graph`, `json_path`, `mcp_server`,
-`linear_programming`, `mqtt`, `open_api`, `ranking_protocols`, `sqids`,
-`regression_tree`, `spectral_clusterer`, `umap_projection`, `uri_template`,
-and `wkt_wkb` libraries.
+* FIXED: Non-tail-recursive predicate definitions in the `ant_colony`,
+`association_rule_miner`, `colley_ranker`, `crontab`, `crypto`, `datalog`,
+`gpx`, `hashes`, `http_core`, `http_multipart`, `http_router`, `http_session`,
+`http_websocket_service`, `integer_partitions`, `intervals`, `json_graph`,
+`json_path`, `mcp_server`, `linear_programming`, `mqtt`, `open_api`,
+`ranking_protocols`, `sqids`, `regression_tree`, `spectral_clusterer`,
+`umap_projection`, `uri_template`, and `wkt_wkb` libraries.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------

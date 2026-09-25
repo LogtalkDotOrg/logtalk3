@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-16,
+		date is 2026-09-24,
 		comment is 'Ant Colony Optimization (Ant System) metaheuristic. Parameterized by a problem object implementing the ``ant_colony_problem_protocol`` protocol and by a random number generator algorithm for the ``fast_random`` library. The algorithm minimizes the solution cost defined by the problem. Classic Ant System pheromone update, optional MAX-MIN pheromone bounds, candidate construction by probabilistic state transition, optional elitist reinforcement, progress reporting, and seed control are supported; suitable defaults are used otherwise.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``ant_colony_problem_protocol``.',
@@ -245,7 +245,7 @@
 	% roulette-wheel selection among remaining nodes
 
 	select_next(Current, Remaining, Pheromone, Alpha, Beta, Next) :-
-		scores(Remaining, Current, Pheromone, Alpha, Beta, Scores, Total),
+		scores(Remaining, Current, Pheromone, Alpha, Beta, Scores, 0.0, Total),
 		(	Total =< 0.0 ->
 			% fallback: uniform random among remaining
 			length(Remaining, Lenght),
@@ -256,13 +256,13 @@
 			pick_by_score(Scores, Threshold, 0.0, Next)
 		).
 
-	scores([], _Current, _Pheromone, _Alpha, _Beta, [], 0.0).
-	scores([Node| Nodes], Current, Pheromone, Alpha, Beta, [Node-Score| Scores], Total) :-
+	scores([], _Current, _Pheromone, _Alpha, _Beta, [], Total, Total).
+	scores([Node| Nodes], Current, Pheromone, Alpha, Beta, [Node-Score| Scores], Total0, Total) :-
 		pheromone_lookup(Current, Node, Pheromone, Tau),
 		heuristic(Current, Node, Eta),
 		Score is (Tau ** Alpha) * (Eta ** Beta),
-		scores(Nodes, Current, Pheromone, Alpha, Beta, Scores, Total0),
-		Total is Total0 + Score.
+		Total1 is Total0 + Score,
+		scores(Nodes, Current, Pheromone, Alpha, Beta, Scores, Total1, Total).
 
 	pick_by_score([Node-_Score], _Threshold, _Acc, Node) :-
 		!.
