@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-09-24,
+		date is 2026-09-25,
 		comment is 'Well-Known Text (WKT) and Well-Known Binary (WKB) geometry parser, generator, and validator.',
 		see_also is [wkt_wkb_protocol, geojson, geospatial, cbor, message_pack(_)]
 	]).
@@ -969,8 +969,11 @@
 		indexed_rev_path(CoordinateRevPath, Index, PolygonRevPath),
 		validate_polygon_coordinates_rev(Polygon, PolygonRevPath, PolygonArity, Errors, Errors1),
 		NextIndex is Index + 1,
-		validate_multi_polygons_rev(Polygons, CoordinateRevPath, NextIndex, RestArities, Errors1, Tail),
-		(	PolygonArity == none -> Arities = RestArities ; Arities = [PolygonArity| RestArities] ).
+		(	PolygonArity == none ->
+			Arities = RestArities
+		;	Arities = [PolygonArity| RestArities]
+		),
+		validate_multi_polygons_rev(Polygons, CoordinateRevPath, NextIndex, RestArities, Errors1, Tail).
 
 	validate_line_string_coordinates_rev(Data, Minimum, CoordinateRevPath, Arity, Errors, Tail) :-
 		(	is_list(Data) ->

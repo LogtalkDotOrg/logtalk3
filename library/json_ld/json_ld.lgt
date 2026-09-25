@@ -23,9 +23,9 @@
 	implements(json_ld_protocol)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2026-09-12,
+		date is 2026-09-25,
 		comment is 'JSON-LD 1.1 parser, generator, and processor. Builds on top of the ``json`` library for JSON parsing and generation.',
 		parameters is [
 			'ObjectRepresentation' - 'Object representation to be used when decoding JSON objects. Possible values are ``curly`` (default) and ``list``.',
@@ -43,7 +43,11 @@
 		append/3, member/2, reverse/2, valid/1 as is_list/1
 	]).
 
-	% ==================== parse/2 ====================
+	:- uses(user, [
+		atomic_list_concat/3
+	]).
+
+	% parse/2
 
 	parse(Source, _) :-
 		var(Source),
@@ -66,7 +70,7 @@
 	parse(Source, _) :-
 		domain_error(json_ld_source, Source).
 
-	% ==================== generate/2 ====================
+	% generate/2
 
 	generate(Sink, _) :-
 		var(Sink),
@@ -89,7 +93,7 @@
 	generate(Sink, _) :-
 		domain_error(json_ld_sink, Sink).
 
-	% ==================== expand/2 ====================
+	% expand/2
 
 	expand(Document, _) :-
 		var(Document),
@@ -97,7 +101,7 @@
 	expand(Document, Expanded) :-
 		expand_document(Document, [], Expanded).
 
-	% ==================== compact/3 ====================
+	% compact/3
 
 	compact(Document, _, _) :-
 		var(Document),
@@ -109,7 +113,7 @@
 		build_context(Context, ActiveContext),
 		compact_document(Document, ActiveContext, Compacted).
 
-	% ==================== frame/3 ====================
+	% frame/3
 
 	frame(Document, _, _) :-
 		var(Document),
@@ -125,7 +129,7 @@
 		frame_nodes(Nodes, ExpandedFrame, Nodes, [], FramedExpanded),
 		frame_output(Frame, ActiveContext, FramedExpanded, Framed).
 
-	% ==================== flatten/2 ====================
+	% flatten/2
 
 	flatten(Document, _) :-
 		var(Document),
@@ -425,7 +429,7 @@
 		pairs_to_object(OrderedPairs, Object),
 		nodes_to_objects(Nodes, Objects).
 
-	% ==================== Framing ====================
+	% Framing
 
 	normalize_frame(Frame, ActiveContext, ExpandedFrame) :-
 		(	is_object(Frame) ->
@@ -841,7 +845,7 @@
 		make_pair('@graph', Graph, GraphPair),
 		pairs_to_object([ContextPair, GraphPair], Framed).
 
-	% ==================== Expansion ====================
+	% Expansion
 
 	% Top-level expansion: a JSON-LD document can be an array or an object
 	expand_document([], _ActiveContext, []) :- !.
@@ -1159,7 +1163,7 @@
 		make_pair('@language', Lang, Pair2),
 		pairs_to_object([Pair1, Pair2], Object).
 
-	% ==================== Context Processing ====================
+	% Context Processing
 
 	process_local_context(ContextValue, ActiveContext, NewContext) :-
 		(	is_list(ContextValue) ->
@@ -1301,7 +1305,7 @@
 		).
 	expand_term_iri(IRI, _ActiveContext, IRI).
 
-	% ==================== IRI Expansion ====================
+	% IRI Expansion
 
 	expand_iri(Value, _ActiveContext, _Mode, Value) :-
 		var(Value),
@@ -1349,7 +1353,7 @@
 		;	ExpandedIRI = CompactIRI
 		).
 
-	% ==================== Compaction ====================
+	% Compaction
 
 	build_context(ContextTerm, ActiveContext) :-
 		(	is_object(ContextTerm) ->
@@ -1467,7 +1471,7 @@
 	find_prefix_for_iri([_| Entries], IRI, Prefix, Suffix) :-
 		find_prefix_for_iri(Entries, IRI, Prefix, Suffix).
 
-	% ==================== Utility predicates ====================
+	% Utility predicates
 
 	% Object representation handling
 	is_object({}) :- _ObjectRepresentation_ == curly, !.
@@ -1748,7 +1752,7 @@
 		!,
 		split_path_segments(Path, Segments),
 		normalize_segments(Segments, [], NormalizedSegments),
-		join_segments(NormalizedSegments, JoinedPath),
+		atomic_list_concat(NormalizedSegments, '/', JoinedPath),
 		(	JoinedPath == '' ->
 			NormalizedPath = ('/')
 		;	atom_concat('/', JoinedPath, NormalizedPath)
@@ -1756,7 +1760,7 @@
 	normalize_path(Path, NormalizedPath) :-
 		split_path_segments(Path, Segments),
 		normalize_segments(Segments, [], NormalizedSegments),
-		join_segments(NormalizedSegments, NormalizedPath).
+		atomic_list_concat(NormalizedSegments, '/', NormalizedPath).
 
 	split_path_segments(Path, [Segment| Segments]) :-
 		first_separator_position(Path, '/', Pos),
@@ -1784,14 +1788,6 @@
 		!.
 	remove_last_segment([Segment| Segments], [Segment| RemainingSegments]) :-
 		remove_last_segment(Segments, RemainingSegments).
-
-	join_segments([], '').
-	join_segments([Segment], Segment) :-
-		!.
-	join_segments([Segment| Segments], Joined) :-
-		join_segments(Segments, JoinedRest),
-		atom_concat(Segment, '/', Prefix),
-		atom_concat(Prefix, JoinedRest, Joined).
 
 	first_query_fragment_position(Atom, Pos) :-
 		(	first_separator_position(Atom, '?', QueryPos) ->

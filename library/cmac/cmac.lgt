@@ -23,15 +23,15 @@
 	implements(cmac_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-04,
+		date is 2026-09-25,
 		comment is 'CMAC (Cipher-based Message Authentication Code) implementation as specified in NIST SP 800-38B.',
 		see_also is [aes128, aes192, aes256]
 	]).
 
 	:- uses(list, [
-		append/3, length/2, take/3
+		append/3, length/2, take/3, take/4
 	]).
 
 	:- uses(type, [
@@ -96,7 +96,7 @@
 	cmac_blocks(Cipher, PreparedKey, BlockSize, MessageBytes, Chain, K1, K2, DigestBytes) :-
 		length(MessageBytes, Length),
 		(	Length > BlockSize ->
-			take_block(BlockSize, MessageBytes, Block, Rest),
+			take(BlockSize, MessageBytes, Block, Rest),
 			xor_bytes(Chain, Block, InputBlock),
 			Cipher::encrypt_prepared_block(PreparedKey, InputBlock, NextChain),
 			cmac_blocks(Cipher, PreparedKey, BlockSize, Rest, NextChain, K1, K2, DigestBytes)
@@ -132,12 +132,6 @@
 		XorByte is xor(Byte, Constant).
 	xor_last_byte([Byte| Bytes], Constant, [Byte| XorBytes]) :-
 		xor_last_byte(Bytes, Constant, XorBytes).
-
-	take_block(0, Bytes, [], Bytes) :-
-		!.
-	take_block(Count, [Byte| Bytes], [Byte| Block], Rest) :-
-		NextCount is Count - 1,
-		take_block(NextCount, Bytes, Block, Rest).
 
 	pad_final_block(BlockSize, Bytes, PaddedBlock) :-
 		length(Bytes, Length),

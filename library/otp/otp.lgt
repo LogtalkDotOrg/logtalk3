@@ -23,9 +23,9 @@
 	implements(otp_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-14,
+		date is 2026-09-25,
 		comment is 'HOTP and TOTP generation and verification predicates.',
 		see_also is [base32, hmac, sha1, sha256, sha512_256]
 	]).
@@ -242,13 +242,16 @@
 		NextOffset is Offset - 1,
 		four_bytes_at(NextOffset, Bytes, Byte0, Byte1, Byte2, Byte3).
 
-	power_of_ten(1, 10) :-
+	power_of_ten(Exponent, Value) :-
+		power_of_ten(Exponent, 1, Value).
+
+	power_of_ten(0, Value, Value) :-
 		!.
-	power_of_ten(Digits, Power) :-
-		Digits > 1,
-		NextDigits is Digits - 1,
-		power_of_ten(NextDigits, NextPower),
-		Power is NextPower * 10.
+	power_of_ten(Exponent, Value0, Value) :-
+		Exponent > 0,
+		Exponent1 is Exponent - 1,
+		Value1 is Value0 * 10,
+		power_of_ten(Exponent1, Value1, Value).
 
 	otp_atom(Value, Digits, OTP) :-
 		number_codes(Value, ValueCodes),

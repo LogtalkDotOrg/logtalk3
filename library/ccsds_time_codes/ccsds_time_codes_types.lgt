@@ -22,9 +22,9 @@
 :- category(ccsds_time_codes_types).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-08,
+		date is 2026-09-25,
 		comment is 'Type definitions and arbitrary generators for CCSDS time codes.'
 	]).
 
@@ -187,13 +187,16 @@
 		power10(Digits, Scale),
 		MaxFraction is Scale - 1.
 
-	power10(0, 1) :-
-		!.
 	power10(Exponent, Value) :-
+		power10_(Exponent, 1, Value).
+
+	power10_(0, Value, Value) :-
+		!.
+	power10_(Exponent, Value0, Value) :-
 		Exponent > 0,
 		Exponent1 is Exponent - 1,
-		power10(Exponent1, Partial),
-		Value is Partial * 10.
+		Value1 is Value0 * 10,
+		power10_(Exponent1, Value1, Value).
 
 	max_day_of_year(Year, 366) :-
 		leap_year(Year),
