@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-09-24,
+		date is 2026-09-25,
 		comment is 'Ant Colony Optimization (Ant System) metaheuristic. Parameterized by a problem object implementing the ``ant_colony_problem_protocol`` protocol and by a random number generator algorithm for the ``fast_random`` library. The algorithm minimizes the solution cost defined by the problem. Classic Ant System pheromone update, optional MAX-MIN pheromone bounds, candidate construction by probabilistic state transition, optional elitist reinforcement, progress reporting, and seed control are supported; suitable defaults are used otherwise.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``ant_colony_problem_protocol``.',
@@ -193,7 +193,7 @@
 		construct_colony(Ants, Nodes, Pheromone, Alpha, Beta, Tours),
 		Solutions1 is Solutions + Ants,
 		% evaluate and find iteration best
-		evaluate_tours(Tours, EvalTours, IterBestTour, IterationBestCost),
+		evaluate_tours(Tours, EvalTours, IterBestTour, 1.0e300, IterationBestCost),
 		(	IterationBestCost < BestCost ->
 			NewBest = IterBestTour, NewBestCost = IterationBestCost,
 			Improves1 is Improves + 1
@@ -275,14 +275,14 @@
 
 	% evaluate list of tours -> list of Tour-Cost, plus iteration best
 
-	evaluate_tours([], [], none, 1.0e300).
-	evaluate_tours([Tour| Tours], [Tour-Cost| Eval], BestTour, BestCost) :-
+	evaluate_tours([], [], none, BestCost, BestCost).
+	evaluate_tours([Tour| Tours], [Tour-Cost| Eval], BestTour, BestCost0, BestCost) :-
 		solution_cost(Tour, Cost),
-		evaluate_tours(Tours, Eval, BestTour0, BestCost0),
 		(	Cost < BestCost0 ->
-			BestTour = Tour, BestCost = Cost
-		;	BestTour = BestTour0, BestCost = BestCost0
-		).
+			BestTour = Tour, BestCost1 = Cost
+		;	BestTour = BestTour0, BestCost1 = BestCost0
+		),
+		evaluate_tours(Tours, Eval, BestTour0, BestCost1, BestCost).
 
 	% pheromone: association list of From-To -> Tau (directed)
 

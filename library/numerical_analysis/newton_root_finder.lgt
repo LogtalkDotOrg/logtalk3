@@ -23,9 +23,9 @@
 	imports(root_finder(_Function_))).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-09-04,
+		date is 2026-09-25,
 		comment is 'Newton root finder using a function first derivative and one initial guess.',
 		parameters is [
 			'Function' - 'Object implementing ``univariate_function_protocol`` and defining ``derivative/2``.'
@@ -46,7 +46,7 @@
 		check_guess(Initial, Guess),
 		require_derivative,
 		^^evaluate_function(Guess, Value),
-		newton(0, MaxIterations, TolX, TolF, Guess, Value, Root, FinalValue, Iterations, FunctionEvaluations, DerivativeEvaluations, Reason, Converged),
+		newton(0, MaxIterations, TolX, TolF, Guess, Value, Root, FinalValue, Iterations, 1, FunctionEvaluations, 0, DerivativeEvaluations, Reason, Converged),
 		Statistics = [
 			iterations(Iterations),
 			evaluations(FunctionEvaluations),
@@ -56,13 +56,13 @@
 			termination_reason(Reason)
 		].
 
-	newton(Iteration, _MaxIterations, _TolX, TolF, X, Value, X, Value, Iteration, 1, 0, function_tolerance, true) :-
+	newton(Iteration, _MaxIterations, _TolX, TolF, X, Value, X, Value, Iteration, FunctionEvaluations, FunctionEvaluations, DerivativeEvaluations, DerivativeEvaluations, function_tolerance, true) :-
 		abs(Value) =< TolF,
 		!.
-	newton(Iteration, MaxIterations, _TolX, _TolF, X, Value, X, Value, Iteration, 1, 0, max_iterations, false) :-
+	newton(Iteration, MaxIterations, _TolX, _TolF, X, Value, X, Value, Iteration, FunctionEvaluations, FunctionEvaluations, DerivativeEvaluations, DerivativeEvaluations, max_iterations, false) :-
 		Iteration >= MaxIterations,
 		!.
-	newton(Iteration, MaxIterations, TolX, TolF, X, Value, Root, FinalValue, Iterations, FunctionEvaluations, DerivativeEvaluations, Reason, Converged) :-
+	newton(Iteration, MaxIterations, TolX, TolF, X, Value, Root, FinalValue, Iterations, FunctionEvaluations0, FunctionEvaluations, DerivativeEvaluations0, DerivativeEvaluations, Reason, Converged) :-
 		evaluate_derivative(X, Derivative),
 		(	abs(Derivative) =< 0.0 ->
 			Root = X,
@@ -83,9 +83,10 @@
 				DerivativeEvaluations = 1,
 				Reason = position_tolerance,
 				Converged = true
-			;	newton(NextIteration, MaxIterations, TolX, TolF, Next, NextValue, Root, FinalValue, Iterations, TailFunctionEvaluations, TailDerivativeEvaluations, Reason, Converged),
-				FunctionEvaluations is TailFunctionEvaluations + 1,
-				DerivativeEvaluations is TailDerivativeEvaluations + 1
+			;	DerivativeEvaluations1 is DerivativeEvaluations0 + 1,
+				FunctionEvaluations1 is FunctionEvaluations0 + 1,
+				newton(NextIteration, MaxIterations, TolX, TolF, Next, NextValue, Root, FinalValue, Iterations, FunctionEvaluations1, FunctionEvaluations, DerivativeEvaluations1, DerivativeEvaluations, Reason, Converged)
+
 			)
 		).
 

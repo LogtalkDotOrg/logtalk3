@@ -23,9 +23,9 @@
 	imports(root_finder(_Function_))).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-09-04,
+		date is 2026-09-25,
 		comment is 'Derivative-free secant root finder using two initial guesses.',
 		parameters is [
 			'Function' - 'Object implementing ``univariate_function_protocol``.'
@@ -56,7 +56,7 @@
 			Reason = function_tolerance,
 			Converged = true,
 			Evaluations = 2
-		;	secant(0, MaxIterations, TolX, TolF, First, FirstValue, Second, SecondValue, Root, FinalValue, Iterations, InnerEvaluations, Reason, Converged),
+		;	secant(0, MaxIterations, TolX, TolF, First, FirstValue, Second, SecondValue, Root, FinalValue, Iterations, 0, InnerEvaluations, Reason, Converged),
 			Evaluations is InnerEvaluations + 2
 		),
 		Statistics = [
@@ -67,13 +67,13 @@
 			termination_reason(Reason)
 		].
 
-	secant(Iteration, MaxIterations, _TolX, _TolF, _First, _FirstValue, Second, SecondValue, Second, SecondValue, Iteration, 0, max_iterations, false) :-
+	secant(Iteration, MaxIterations, _TolX, _TolF, _First, _FirstValue, Second, SecondValue, Second, SecondValue, Iteration, Evaluations, Evaluations, max_iterations, false) :-
 		Iteration >= MaxIterations,
 		!.
-	secant(Iteration, _MaxIterations, _TolX, _TolF, _First, FirstValue, Second, SecondValue, Second, SecondValue, Iteration, 0, zero_denominator, false) :-
+	secant(Iteration, _MaxIterations, _TolX, _TolF, _First, FirstValue, Second, SecondValue, Second, SecondValue, Iteration, Evaluations, Evaluations, zero_denominator, false) :-
 		abs(SecondValue - FirstValue) =< 0.0,
 		!.
-	secant(Iteration, MaxIterations, TolX, TolF, First, FirstValue, Second, SecondValue, Root, FinalValue, Iterations, Evaluations, Reason, Converged) :-
+	secant(Iteration, MaxIterations, TolX, TolF, First, FirstValue, Second, SecondValue, Root, FinalValue, Iterations, Evaluations0, Evaluations, Reason, Converged) :-
 		Next is Second - SecondValue * (Second - First) / (SecondValue - FirstValue),
 		^^evaluate_function(Next, NextValue),
 		NextIteration is Iteration + 1,
@@ -91,8 +91,8 @@
 			Evaluations = 1,
 			Reason = position_tolerance,
 			Converged = true
-		;	secant(NextIteration, MaxIterations, TolX, TolF, Second, SecondValue, Next, NextValue, Root, FinalValue, Iterations, TailEvaluations, Reason, Converged),
-			Evaluations is TailEvaluations + 1
+		;	Evaluations1 is Evaluations0 + 1,
+			secant(NextIteration, MaxIterations, TolX, TolF, Second, SecondValue, Next, NextValue, Root, FinalValue, Iterations, Evaluations1, Evaluations, Reason, Converged)
 		).
 
 	check_guesses(Initial, _, _) :-

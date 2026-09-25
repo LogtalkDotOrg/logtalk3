@@ -38,12 +38,13 @@ Library
 
 * IMPROVED: Rewrite predicate definitions as tail-recursive in the
 `ant_colony`, `association_rule_miner`, `ccsds`, `colley_ranker`, `crontab`,
-`crypto`, `datalog`, `gpx`, `hashes`, `http_core`, `http_digest`,
-`http_multipart`, `http_router`, `http_session`, `http_websocket_service`,
-`integer_partitions`, `intervals`, `json_graph`, `json_path`, `mcp_server`,
-`linear_programming`, `mqtt`, `nmea`, `open_api`, `ranking_protocols`,
-`sqids`, `regression_tree`, `spectral_clusterer`, `umap_projection`,
-`uri_template`, and `wkt_wkb` libraries.
+`crypto`, `datalog`, `genetic_algorithm`, `gpx`, `hashes`, `http_core`,
+`http_digest`, `http_multipart`, `http_router`, `http_session`,
+`http_websocket_service`, `integer_partitions`, `intervals`, `json_graph`,
+`json_path`, `mcp_server`, `linear_programming`, `mqtt`, `nmea`,
+`numerical_analysis`, `open_api`, `ranking_protocols`, `sqids`,
+`regression_tree`, `spectral_clusterer`, `umap_projection`, `uri_template`,
+and `wkt_wkb` libraries.
 
 Tools
 -----

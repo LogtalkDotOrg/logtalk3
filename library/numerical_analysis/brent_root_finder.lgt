@@ -23,9 +23,9 @@
 	imports(root_finder(_Function_))).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-09-04,
+		date is 2026-09-25,
 		comment is 'Brent-Dekker derivative-free root finder combining interpolation with bisection safeguards.',
 		parameters is [
 			'Function' - 'Object implementing ``univariate_function_protocol``.'
@@ -50,7 +50,7 @@
 			Evaluations = 2, Reason = function_tolerance, Converged = true
 		;	LowerValue * UpperValue < 0.0 ->
 			order_endpoints(Lower, LowerValue, Upper, UpperValue, A, FA, B, FB),
-			brent(0, MaxIterations, TolX, TolF, A, FA, B, FB, A, FA, A, true, Root, FinalValue, Iterations, InnerEvaluations, Reason, Converged),
+			brent(0, MaxIterations, TolX, TolF, A, FA, B, FB, A, FA, A, true, Root, FinalValue, Iterations, 0, InnerEvaluations, Reason, Converged),
 			Evaluations is InnerEvaluations + 2
 		;	domain_error(root_bracket, Initial)
 		),
@@ -59,16 +59,16 @@
 			converged(Converged), termination_reason(Reason)
 		].
 
-	brent(Iteration, _MaxIterations, _TolX, TolF, _A, _FA, B, FB, _C, _FC, _D, _Bisected, B, FB, Iteration, 0, function_tolerance, true) :-
+	brent(Iteration, _MaxIterations, _TolX, TolF, _A, _FA, B, FB, _C, _FC, _D, _Bisected, B, FB, Iteration, Evaluations, Evaluations, function_tolerance, true) :-
 		abs(FB) =< TolF,
 		!.
-	brent(Iteration, _MaxIterations, TolX, _TolF, A, _FA, B, FB, _C, _FC, _D, _Bisected, B, FB, Iteration, 0, position_tolerance, true) :-
+	brent(Iteration, _MaxIterations, TolX, _TolF, A, _FA, B, FB, _C, _FC, _D, _Bisected, B, FB, Iteration, Evaluations, Evaluations, position_tolerance, true) :-
 		abs(B - A) =< TolX,
 		!.
-	brent(Iteration, MaxIterations, _TolX, _TolF, _A, _FA, B, FB, _C, _FC, _D, _Bisected, B, FB, Iteration, 0, max_iterations, false) :-
+	brent(Iteration, MaxIterations, _TolX, _TolF, _A, _FA, B, FB, _C, _FC, _D, _Bisected, B, FB, Iteration, Evaluations, Evaluations, max_iterations, false) :-
 		Iteration >= MaxIterations,
 		!.
-	brent(Iteration, MaxIterations, TolX, TolF, A, FA, B, FB, C, FC, D, Bisected, Root, FinalValue, Iterations, Evaluations, Reason, Converged) :-
+	brent(Iteration, MaxIterations, TolX, TolF, A, FA, B, FB, C, FC, D, Bisected, Root, FinalValue, Iterations, Evaluations0, Evaluations, Reason, Converged) :-
 		interpolation_candidate(A, FA, B, FB, C, FC, Candidate),
 		(	safeguard(Candidate, A, B, C, D, Bisected, TolX) ->
 			S is (A + B) / 2.0,
@@ -83,8 +83,8 @@
 		),
 		order_endpoints(A0, FA0, B0, FB0, A1, FA1, B1, FB1),
 		NextIteration is Iteration + 1,
-		brent(NextIteration, MaxIterations, TolX, TolF, A1, FA1, B1, FB1, B, FB, C, NextBisected, Root, FinalValue, Iterations, TailEvaluations, Reason, Converged),
-		Evaluations is TailEvaluations + 1.
+		Evaluations1 is Evaluations0 + 1,
+		brent(NextIteration, MaxIterations, TolX, TolF, A1, FA1, B1, FB1, B, FB, C, NextBisected, Root, FinalValue, Iterations, Evaluations1, Evaluations, Reason, Converged).
 
 	interpolation_candidate(A, FA, B, FB, C, FC, Candidate) :-
 		FA =\= FC,

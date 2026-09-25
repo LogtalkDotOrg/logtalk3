@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-16,
+		date is 2026-09-25,
 		comment is 'Genetic algorithm meta-heuristic optimizer. Parameterized by a problem object implementing the ``genetic_algorithm_problem_protocol`` protocol and by a random number generator algorithm for the ``fast_random`` library. The algorithm minimizes the energy (cost) function defined by the problem by default; maximization is supported via options. Custom stop conditions, diversity measures, progress reporting, and selection pressure can be defined by the problem object or configured via options; suitable defaults are used otherwise.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``genetic_algorithm_problem_protocol``.',
@@ -315,7 +315,7 @@
 			Need is PopulationSize
 		),
 		(	Need > 0 ->
-			breed(Need, Population, CrossoverRate, MutationRate, Selection, Objective, Offspring, OffspringEvaluations)
+			breed(Need, Population, CrossoverRate, MutationRate, Selection, Objective, Offspring, 0, OffspringEvaluations)
 		;	Offspring = [],
 			OffspringEvaluations = 0
 		),
@@ -347,9 +347,9 @@
 
 	% breeding (selection, crossover, mutation)
 
-	breed(0, _, _, _, _, _, [], 0) :-
+	breed(0, _, _, _, _, _, [], Evaluations, Evaluations) :-
 		!.
-	breed(Need, Population, CrossoverRate, MutationRate, Selection, Objective, Offspring, Evaluations) :-
+	breed(Need, Population, CrossoverRate, MutationRate, Selection, Objective, Offspring, Evaluations0, Evaluations) :-
 		Need > 0,
 		% select two parents
 		select_parent(Selection, Population, Objective, Parent1),
@@ -371,9 +371,9 @@
 			Offspring = [Child1-Energy1],
 			Evaluations is 1
 		;	Need1 is Need - 2,
-			breed(Need1, Population, CrossoverRate, MutationRate, Selection, Objective, Rest, RestEvaluations),
 			Offspring = [Child1-Energy1, Child2-Energy2| Rest],
-			Evaluations is RestEvaluations + 2
+			Evaluations1 is Evaluations0 + 2,
+			breed(Need1, Population, CrossoverRate, MutationRate, Selection, Objective, Rest, Evaluations1, Evaluations)
 		).
 
 	maybe_mutate(Individual, Rate, Mutated) :-
