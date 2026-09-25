@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-09-24,
+		date is 2026-09-25,
 		comment is 'X25519 Diffie-Hellman key agreement implementation (RFC 7748). Requires exact, unbounded integer arithmetic for arithmetic modulo the 255-bit field prime.'
 	]).
 
@@ -134,17 +134,20 @@
 	x25519_prime(Prime) :-
 		Prime is (1 << 255) - 19.
 
-	x25519_modexp(_Base, 0, Modulus, Result) :-
-		!,
-		Result is 1 mod Modulus.
 	x25519_modexp(Base, Exponent, Modulus, Result) :-
-		HalfExponent is Exponent // 2,
-		x25519_modexp(Base, HalfExponent, Modulus, Half),
-		Square is (Half * Half) mod Modulus,
-		(	Exponent mod 2 =:= 1 ->
-			Result is (Square * (Base mod Modulus)) mod Modulus
-		;	Result = Square
-		).
+		x25519_modexp_(Exponent, Base, Modulus, 1, Result).
+
+	x25519_modexp_(0, _Base, Modulus, Result0, Result) :-
+		!,
+		Result is Result0 mod Modulus.
+	x25519_modexp_(Exponent, Base, Modulus, Result0, Result) :-
+		(	Exponent /\ 1 =:= 1 ->
+			Result1 is (Result0 * Base) mod Modulus
+		;	Result1 = Result0
+		),
+		Base1 is (Base * Base) mod Modulus,
+		Exponent1 is Exponent >> 1,
+		x25519_modexp_(Exponent1, Base1, Modulus, Result1, Result).
 
 	le_bytes_to_int(Bytes, Integer) :-
 		le_bytes_to_int(Bytes, 0, 0, Integer).

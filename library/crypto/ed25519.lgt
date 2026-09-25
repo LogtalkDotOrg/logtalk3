@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-09-24,
+		date is 2026-09-25,
 		comment is 'Ed25519 (RFC 8032) public-key signature implementation. Requires exact, unbounded integer arithmetic for arithmetic modulo the 255-bit field prime and modulo the group order.'
 	]).
 
@@ -215,18 +215,22 @@
 		Exponent is P - 2,
 		ed25519_modexp(X, Exponent, P, R).
 
-	ed25519_modexp(_, 0, M, R) :-
-		!,
-		R is 1 mod M.
 	ed25519_modexp(B, E, M, R) :-
+		E >= 0,
+		ed25519_modexp(E, B, M, 1, R).
+
+	ed25519_modexp(0, _B, M, Acc, R) :-
+		!,
+		R is Acc mod M.
+	ed25519_modexp(E, B, M, Acc, R) :-
 		E > 0,
-		E2 is E // 2,
-		ed25519_modexp(B, E2, M, Half),
-		Sq is (Half*Half) mod M,
-		(	E mod 2 =:= 1 ->
-			R is (Sq * (B mod M)) mod M
-		;	R = Sq
-		).
+		(	E /\ 1 =:= 1 ->
+			Acc1 is (Acc * B) mod M
+		;	Acc1 = Acc
+		),
+		B1 is (B * B) mod M,
+		E1 is E >> 1,
+		ed25519_modexp(E1, B1, M, Acc1, R).
 
 	ed25519_modp_sqrt_m1(R) :-
 		ed25519_p(P),
@@ -247,17 +251,20 @@
 		E is (B-A) mod P, F is (Dd-C) mod P, G is (Dd+C) mod P, H is (B+A) mod P,
 		X2 is (E*F) mod P, Y2 is (G*H) mod P, Z2 is (F*G) mod P, T2 is (E*H) mod P.
 
-	ed25519_point_mul(0, _, pt(0,1,1,0)) :-
-		!.
 	ed25519_point_mul(S, P, R) :-
+		ed25519_point_mul(S, P, pt(0,1,1,0), R).
+
+	ed25519_point_mul(0, _P, Acc, Acc) :-
+		!.
+	ed25519_point_mul(S, P, Acc, R) :-
 		S > 0,
-		S1 is S // 2,
-		ed25519_point_mul(S1, P, Half),
-		ed25519_point_add(Half, Half, Double),
-		(	S mod 2 =:= 1 ->
-			ed25519_point_add(Double, P, R)
-		;	R = Double
-		).
+		(	S /\ 1 =:= 1 ->
+			ed25519_point_add(Acc, P, Acc1)
+		;	Acc1 = Acc
+		),
+		ed25519_point_add(P, P, P1),
+		S1 is S >> 1,
+		ed25519_point_mul(S1, P1, Acc1, R).
 
 	ed25519_point_equal(pt(X0,Y0,Z0,_), pt(X1,Y1,Z1,_)) :-
 		ed25519_p(P),
