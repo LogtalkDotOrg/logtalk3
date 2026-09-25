@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on July 21, 2026
+##   Last updated on September 25, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -33,7 +33,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 30.0"
+	echo "$(basename "$0") 31.0"
 	exit 0
 }
 
@@ -126,6 +126,28 @@ format_decimal() {
     local places=$2
     LC_NUMERIC=C
 	printf "%.${places}f" "$num"
+}
+
+# Compare two non-negative plain-decimal numbers (e.g. "0", "3.14", ".5")
+# without shelling out to awk/bc. Succeeds (returns 0) when num1 <= num2.
+decimal_le() {
+	local a="$1" b="$2"
+	local a_int=${a%%.*} a_frac=${a#*.}
+	local b_int=${b%%.*} b_frac=${b#*.}
+	[[ $a == *.* ]] || a_frac=""
+	[[ $b == *.* ]] || b_frac=""
+	a_int=${a_int:-0}
+	b_int=${b_int:-0}
+	local len=${#a_frac}
+	[ ${#b_frac} -gt "$len" ] && len=${#b_frac}
+	while [ ${#a_frac} -lt "$len" ] ; do a_frac="${a_frac}0" ; done
+	while [ ${#b_frac} -lt "$len" ] ; do b_frac="${b_frac}0" ; done
+	if [ $((10#$a_int)) -ne $((10#$b_int)) ] ; then
+		[ $((10#$a_int)) -le $((10#$b_int)) ]
+		return
+	fi
+	[ -z "$a_frac" ] && return 0
+	[ $((10#$a_frac)) -le $((10#$b_frac)) ]
 }
 
 notify_completion() {
@@ -708,6 +730,7 @@ start_time=$(date +%s)
 if [ "$output" != 'quiet' ] ; then
 	start_date=$(eval date \"+%Y-%m-%d %H:%M:%S\")
 	echo "% Batch testing started @ $start_date"
+	echo "%"
 	$logtalk_call $versions_goal > "$results"/tester_versions.txt 2> /dev/null
 	grep -a "Logtalk version:" "$results"/tester_versions.txt
 	grep -a "Prolog version:" "$results"/tester_versions.txt | $sed "s/Prolog/$prolog/"
@@ -859,13 +882,36 @@ skipped=0
 passed=0
 failed=0
 flaky=0
+min_duration=""
+max_duration=""
+fastest_unit=""
+slowest_unit=""
 temp_file=$(mktemp)
-grep -s '^object' ./*.totals > "$temp_file"
+# Include source filename so we can recover the test set path from the .totals basename
+grep -s -H '^object' ./*.totals > "$temp_file" 2>/dev/null || true
 while read -r line ; do
-	skipped=$((skipped+$(cut -f 4 <<< "$line")))
-	passed=$((passed+$(cut -f 5 <<< "$line")))
-	failed=$((failed+$(cut -f 6 <<< "$line")))
-	flaky=$((flaky+$(cut -f 7 <<< "$line")))
+	# line format: ./name.totals:object\tObject\tTotal\tSkipped\tPassed\tFailed\tFlaky\tWallTime
+	file_part=${line%%:*}
+	data_part=${line#*:}
+	skipped=$((skipped+$(cut -f 4 <<< "$data_part")))
+	passed=$((passed+$(cut -f 5 <<< "$data_part")))
+	failed=$((failed+$(cut -f 6 <<< "$data_part")))
+	flaky=$((flaky+$(cut -f 7 <<< "$data_part")))
+	duration=$(cut -f 8 <<< "$data_part")
+	if [ -n "$duration" ] && { [ -z "$min_duration" ] || decimal_le "$duration" "$min_duration" ; } ; then
+		min_duration="$duration"
+		unit_name=$(basename "$file_part" .totals)
+		# restore path separators used when deriving the results file name
+		unit_name=${unit_name//__//}
+		fastest_unit=$(echo "$unit_name" | $sed "s|^$prefix||")
+	fi
+	if [ -n "$duration" ] && { [ -z "$max_duration" ] || decimal_le "$max_duration" "$duration" ; } ; then
+		max_duration="$duration"
+		unit_name=$(basename "$file_part" .totals)
+		# restore path separators used when deriving the results file name
+		unit_name=${unit_name//__//}
+		slowest_unit=$(echo "$unit_name" | $sed "s|^$prefix||")
+	fi
 done < "$temp_file"
 rm -f "$temp_file"
 total=$((skipped+passed+failed))
@@ -935,13 +981,15 @@ hours=$((runtime / 3600))
 minutes=$(( (runtime % 3600) / 60 ))
 seconds=$((runtime % 60))
 
-if [ "$output" == 'verbose' ] ; then
-	end_date=$(eval date \"+%Y-%m-%d %H:%M:%S\")
-	echo "%"
-	echo "% Batch testing ended @ $end_date"
-fi
-
+end_date=$(eval date \"+%Y-%m-%d %H:%M:%S\")
+echo "%"
+echo "% Batch testing ended @ $end_date"
 echo "% Batch run took $(printf '%dh:%02dm:%02ds' $hours $minutes $seconds)"
+if [ "$testsets" -gt 1 ] && [ -n "$fastest_unit" ] ; then
+	echo "%"
+	echo "% Fastest test set: $fastest_unit ($(format_decimal "$min_duration" 3) seconds)"
+	echo "% Slowest test set: $slowest_unit ($(format_decimal "$max_duration" 3) seconds)"
+fi
 
 if [ "$output" == 'quiet' ] ; then
 	exec 1>&4 4>&-

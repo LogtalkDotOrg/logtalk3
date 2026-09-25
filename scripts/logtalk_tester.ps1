@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on July 22, 2026
+##   Last updated on September 25, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -56,7 +56,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
-	Write-Output "$myName 23.0"
+	Write-Output "$myName 24.0"
 }
 
 Function Format-Decimal {
@@ -766,6 +766,7 @@ $start_time = Get-Date
 if ($o -ne "quiet") {
 	$start_date = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 	Write-Output "% Batch testing started @ $start_date"
+	Write-Output "%"
 	& $logtalk $backend_options $logtalk_option $versions_goal | Out-File $results/tester_versions.txt
 	Select-String -Path $results/tester_versions.txt -Pattern "Logtalk version:" -Raw -SimpleMatch
 	(Select-String -Path $results/tester_versions.txt -Pattern "Prolog version:" -Raw -SimpleMatch) -replace "Prolog", $prolog
@@ -961,10 +962,15 @@ $skipped = 0
 $passed = 0
 $failed = 0
 $flaky = 0
+$min_duration = $null
+$max_duration = $null
+$fastest_unit = ""
+$slowest_unit = ""
 
 Get-ChildItem -Path . -Filter *.totals |
 Foreach-Object {
-	Get-Content -Path $_ |
+	$totals_file = $_
+	Get-Content -Path $totals_file |
 	Select-String -Pattern '^object' -CaseSensitive |
 	ForEach-Object {
 		$line = $_.Line.Split("`t")
@@ -972,6 +978,23 @@ Foreach-Object {
 		$passed =  $passed  + [int]$line[4]
 		$failed =  $failed  + [int]$line[5]
 		$flaky =   $flaky   + [int]$line[6]
+		if ($line.Length -gt 7 -and $line[7] -ne "") {
+			$duration = [double]$line[7]
+			if ($null -eq $min_duration -or $duration -le $min_duration) {
+				$min_duration = $duration
+				# recover test set path from .totals basename (matches how names are derived when writing logs)
+				$unit_name = $totals_file.BaseName
+				$unit_name = ($unit_name -replace '___', ':') -replace '__', '/'
+				$fastest_unit = $unit_name -replace [regex]::Escape($prefix), ""
+			}
+			if ($null -eq $max_duration -or $duration -ge $max_duration) {
+				$max_duration = $duration
+				# recover test set path from .totals basename (matches how names are derived when writing logs)
+				$unit_name = $totals_file.BaseName
+				$unit_name = ($unit_name -replace '___', ':') -replace '__', '/'
+				$slowest_unit = $unit_name -replace [regex]::Escape($prefix), ""
+			}
+		}
 	}
 }
 
@@ -1069,13 +1092,17 @@ $quiet_report = {
 	$runtime = (Get-Date) - $start_time
 	$runtime_str = "{0}h:{1:D2}m:{2:D2}s" -f [int][Math]::Floor($runtime.TotalHours), $runtime.Minutes, $runtime.Seconds
 
-	if ($o -eq "verbose") {
-		$end_date = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-		Write-Output "%"
-		Write-Output "% Batch testing ended @ $end_date"
-	}
-
+	$end_date = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+	Write-Output "%"
+	Write-Output "% Batch testing ended @ $end_date"
 	Write-Output "% Batch run took $runtime_str"
+	if ($testsets -gt 1 -and $fastest_unit -ne "") {
+		$fastest_str = Format-Decimal -Number $min_duration -DecimalPlaces 3
+		$slowest_str = Format-Decimal -Number $max_duration -DecimalPlaces 3
+		Write-Output "%"
+		Write-Output "% Fastest test set: $fastest_unit ($fastest_str seconds)"
+		Write-Output "% Slowest test set: $slowest_unit ($slowest_str seconds)"
+	}
 }
 
 if ($o -eq "quiet") {

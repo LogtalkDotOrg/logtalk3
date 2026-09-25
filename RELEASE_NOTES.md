@@ -45,6 +45,13 @@ Library
 `sqids`, `regression_tree`, `spectral_clusterer`, `umap_projection`,
 `uri_template`, and `wkt_wkb` libraries.
 
+Tools
+-----
+
+* UPDATED: The `logtalk_tester.sh` and `logtalk_tester.ps1` testing
+automation scripts to print the fastest and slowest test set names
+and execution times.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
