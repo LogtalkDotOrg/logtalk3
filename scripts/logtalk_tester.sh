@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on September 25, 2026
+##   Last updated on September 26, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -128,26 +128,61 @@ format_decimal() {
 	printf "%.${places}f" "$num"
 }
 
-# Compare two non-negative plain-decimal numbers (e.g. "0", "3.14", ".5")
-# without shelling out to awk/bc. Succeeds (returns 0) when num1 <= num2.
-decimal_le() {
-	local a="$1" b="$2"
-	local a_int=${a%%.*} a_frac=${a#*.}
-	local b_int=${b%%.*} b_frac=${b#*.}
-	[[ $a == *.* ]] || a_frac=""
-	[[ $b == *.* ]] || b_frac=""
-	a_int=${a_int:-0}
-	b_int=${b_int:-0}
-	local len=${#a_frac}
-	[ ${#b_frac} -gt "$len" ] && len=${#b_frac}
-	while [ ${#a_frac} -lt "$len" ] ; do a_frac="${a_frac}0" ; done
-	while [ ${#b_frac} -lt "$len" ] ; do b_frac="${b_frac}0" ; done
-	if [ $((10#$a_int)) -ne $((10#$b_int)) ] ; then
-		[ $((10#$a_int)) -le $((10#$b_int)) ]
+# Return the decimal magnitude and significand for a non-negative decimal number.
+# Scientific notation is accepted (e.g. "3.45e-05").
+decimal_components() {
+	local number="$1" mantissa exponent integer fraction digits magnitude
+	if [[ "$number" =~ ^([0-9]+\.?[0-9]*|\.[0-9]+)([eE]([+-]?[0-9]+))?$ ]] ; then
+		mantissa=${BASH_REMATCH[1]}
+		exponent=${BASH_REMATCH[3]:-0}
+	else
+		return 1
+	fi
+	if [[ "$mantissa" == *.* ]] ; then
+		integer=${mantissa%%.*}
+		fraction=${mantissa#*.}
+	else
+		integer=$mantissa
+		fraction=""
+	fi
+	digits=${integer}${fraction}
+	while [ "${#digits}" -gt 1 ] && [[ "$digits" == 0* ]] ; do
+		digits=${digits#0}
+	done
+	if [ "$digits" == "0" ] ; then
+		printf '0\t0\n'
 		return
 	fi
-	[ -z "$a_frac" ] && return 0
-	[ $((10#$a_frac)) -le $((10#$b_frac)) ]
+	case "$exponent" in
+		-*) exponent=$((-10#${exponent#-})) ;;
+		+*) exponent=$((10#${exponent#+})) ;;
+		*)  exponent=$((10#$exponent)) ;;
+	esac
+	magnitude=$((${#digits} + exponent - ${#fraction}))
+	printf '%s\t%s\n' "$magnitude" "$digits"
+}
+
+# Compare two non-negative decimal numbers without shelling out to awk/bc.
+# Succeeds (returns 0) when num1 <= num2.
+decimal_le() {
+	local a_components b_components a_magnitude a_digits b_magnitude b_digits length
+	a_components=$(decimal_components "$1") || return 1
+	b_components=$(decimal_components "$2") || return 1
+	IFS=$'\t' read -r a_magnitude a_digits <<< "$a_components"
+	IFS=$'\t' read -r b_magnitude b_digits <<< "$b_components"
+	if [ "$a_digits" == "0" ] ; then
+		return 0
+	elif [ "$b_digits" == "0" ] ; then
+		return 1
+	elif [ "$a_magnitude" -ne "$b_magnitude" ] ; then
+		[ "$a_magnitude" -lt "$b_magnitude" ]
+		return
+	fi
+	length=${#a_digits}
+	[ ${#b_digits} -gt "$length" ] && length=${#b_digits}
+	while [ ${#a_digits} -lt "$length" ] ; do a_digits="${a_digits}0" ; done
+	while [ ${#b_digits} -lt "$length" ] ; do b_digits="${b_digits}0" ; done
+	[[ "$a_digits" == "$b_digits" || "$a_digits" < "$b_digits" ]]
 }
 
 notify_completion() {
