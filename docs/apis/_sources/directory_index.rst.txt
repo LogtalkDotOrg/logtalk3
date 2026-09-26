@@ -336,6 +336,30 @@ To load an entity, always load the library that includes it using the goal ``log
    * :doc:`association_rule_miner_common <association_rule_miner_common_0>`
    * :doc:`association_rule_miner_protocol <association_rule_miner_protocol_0>`
 
+``library/atms/``
+-----------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      atms <atms_0>
+      atms_bitset_environment <atms_bitset_environment_0>
+      atms_environment_protocol <atms_environment_protocol_0>
+      atms_ordered_list_environment <atms_ordered_list_environment_0>
+      atms_protocol <atms_protocol_0>
+      atms_segmented_bitset_environment <atms_segmented_bitset_environment_0>
+
+.. only:: latex
+
+   * :doc:`atms <atms_0>`
+   * :doc:`atms_bitset_environment <atms_bitset_environment_0>`
+   * :doc:`atms_environment_protocol <atms_environment_protocol_0>`
+   * :doc:`atms_ordered_list_environment <atms_ordered_list_environment_0>`
+   * :doc:`atms_protocol <atms_protocol_0>`
+   * :doc:`atms_segmented_bitset_environment <atms_segmented_bitset_environment_0>`
+
 ``library/avro/``
 -----------------
 

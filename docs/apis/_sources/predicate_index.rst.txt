@@ -1341,6 +1341,28 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``assumption/2``
+   ----------------
+
+   * :ref:`atms_protocol <atms_protocol/0::assumption/2>`
+
+.. only:: latex
+
+   * ``assumption/2`` - :ref:`atms_protocol <atms_protocol/0::assumption/2>`
+
+.. only:: not latex
+
+   ``assumptions/2``
+   -----------------
+
+   * :ref:`atms_protocol <atms_protocol/0::assumptions/2>`
+
+.. only:: latex
+
+   * ``assumptions/2`` - :ref:`atms_protocol <atms_protocol/0::assumptions/2>`
+
+.. only:: not latex
+
    ``atom_string/2``
    -----------------
 
@@ -3636,11 +3658,12 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    ``clear/2``
    -----------
 
+   * :ref:`atms_protocol <atms_protocol/0::clear/2>`
    * :ref:`lru_cache_protocol <lru_cache_protocol/0::clear/2>`
 
 .. only:: latex
 
-   * ``clear/2`` - :ref:`lru_cache_protocol <lru_cache_protocol/0::clear/2>`
+   * ``clear/2`` - :ref:`atms_protocol <atms_protocol/0::clear/2>`, :ref:`lru_cache_protocol <lru_cache_protocol/0::clear/2>`
 
 .. only:: not latex
 
@@ -4430,6 +4453,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``consistent/2``
+   ----------------
+
+   * :ref:`atms_protocol <atms_protocol/0::consistent/2>`
+
+.. only:: latex
+
+   * ``consistent/2`` - :ref:`atms_protocol <atms_protocol/0::consistent/2>`
+
+.. only:: not latex
+
    ``console/1``
    -------------
 
@@ -4488,11 +4522,12 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    ``contradiction/2``
    -------------------
 
+   * :ref:`atms_protocol <atms_protocol/0::contradiction/2>`
    * :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::contradiction/2>`
 
 .. only:: latex
 
-   * ``contradiction/2`` - :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::contradiction/2>`
+   * ``contradiction/2`` - :ref:`atms_protocol <atms_protocol/0::contradiction/2>`, :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::contradiction/2>`
 
 .. only:: not latex
 
@@ -5166,6 +5201,28 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``create_assumption/4``
+   -----------------------
+
+   * :ref:`atms_protocol <atms_protocol/0::create_assumption/4>`
+
+.. only:: latex
+
+   * ``create_assumption/4`` - :ref:`atms_protocol <atms_protocol/0::create_assumption/4>`
+
+.. only:: not latex
+
+   ``create_contradiction/4``
+   --------------------------
+
+   * :ref:`atms_protocol <atms_protocol/0::create_contradiction/4>`
+
+.. only:: latex
+
+   * ``create_contradiction/4`` - :ref:`atms_protocol <atms_protocol/0::create_contradiction/4>`
+
+.. only:: not latex
+
    ``create_multipart_upload_response/2``
    --------------------------------------
 
@@ -5174,6 +5231,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``create_multipart_upload_response/2`` - :ref:`s3_xml <s3_xml/0::create_multipart_upload_response/2>`
+
+.. only:: not latex
+
+   ``create_node/4``
+   -----------------
+
+   * :ref:`atms_protocol <atms_protocol/0::create_node/4>`
+
+.. only:: latex
+
+   * ``create_node/4`` - :ref:`atms_protocol <atms_protocol/0::create_node/4>`
 
 .. only:: not latex
 
@@ -8519,6 +8587,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    ``empty/1``
    -----------
 
+   * :ref:`atms_environment_protocol <atms_environment_protocol/0::empty/1>`
    * :ref:`deque_protocol <deque_protocol/0::empty/1>`
    * :ref:`dictionaryp <dictionaryp/0::empty/1>`
    * :ref:`graph_protocol <graph_protocol/0::empty/1>`
@@ -8535,7 +8604,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: latex
 
-   * ``empty/1`` - :ref:`deque_protocol <deque_protocol/0::empty/1>`, :ref:`dictionaryp <dictionaryp/0::empty/1>`, :ref:`graph_protocol <graph_protocol/0::empty/1>`, :ref:`heap_protocol <heap_protocol/0::empty/1>`, :ref:`interval_relation_set_protocol <interval_relation_set_protocol/0::empty/1>`, :ref:`listp <listp/0::empty/1>`, :ref:`lru_cache_protocol <lru_cache_protocol/0::empty/1>`, :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::empty/1>`, :ref:`optional <optional/0::empty/1>`, :ref:`queuep <queuep/0::empty/1>`, :ref:`setp <setp/0::empty/1>`, :ref:`trie(Representation) <trie/1::empty/1>`, :ref:`varlistp <varlistp/0::empty/1>`
+   * ``empty/1`` - :ref:`atms_environment_protocol <atms_environment_protocol/0::empty/1>`, :ref:`deque_protocol <deque_protocol/0::empty/1>`, :ref:`dictionaryp <dictionaryp/0::empty/1>`, :ref:`graph_protocol <graph_protocol/0::empty/1>`, :ref:`heap_protocol <heap_protocol/0::empty/1>`, :ref:`interval_relation_set_protocol <interval_relation_set_protocol/0::empty/1>`, :ref:`listp <listp/0::empty/1>`, :ref:`lru_cache_protocol <lru_cache_protocol/0::empty/1>`, :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::empty/1>`, :ref:`optional <optional/0::empty/1>`, :ref:`queuep <queuep/0::empty/1>`, :ref:`setp <setp/0::empty/1>`, :ref:`trie(Representation) <trie/1::empty/1>`, :ref:`varlistp <varlistp/0::empty/1>`
 
 .. only:: not latex
 
@@ -9015,12 +9084,13 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    ``equal/2``
    -----------
 
+   * :ref:`atms_environment_protocol <atms_environment_protocol/0::equal/2>`
    * :ref:`interval_protocol <interval_protocol/0::equal/2>`
    * :ref:`setp <setp/0::equal/2>`
 
 .. only:: latex
 
-   * ``equal/2`` - :ref:`interval_protocol <interval_protocol/0::equal/2>`, :ref:`setp <setp/0::equal/2>`
+   * ``equal/2`` - :ref:`atms_environment_protocol <atms_environment_protocol/0::equal/2>`, :ref:`interval_protocol <interval_protocol/0::equal/2>`, :ref:`setp <setp/0::equal/2>`
 
 .. only:: not latex
 
@@ -11393,6 +11463,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``from_list/2``
+   ---------------
+
+   * :ref:`atms_environment_protocol <atms_environment_protocol/0::from_list/2>`
+
+.. only:: latex
+
+   * ``from_list/2`` - :ref:`atms_environment_protocol <atms_environment_protocol/0::from_list/2>`
+
+.. only:: not latex
+
    ``from_optional/3``
    -------------------
 
@@ -13301,6 +13382,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``in_label/3``
+   --------------
+
+   * :ref:`atms_protocol <atms_protocol/0::in_label/3>`
+
+.. only:: latex
+
+   * ``in_label/3`` - :ref:`atms_protocol <atms_protocol/0::in_label/3>`
+
+.. only:: not latex
+
    ``in_list/2``
    -------------
 
@@ -14066,6 +14158,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``interpolate_rhumb/4`` - :ref:`geospatial_protocol <geospatial_protocol/0::interpolate_rhumb/4>`
+
+.. only:: not latex
+
+   ``interpretations/2``
+   ---------------------
+
+   * :ref:`atms_protocol <atms_protocol/0::interpretations/2>`
+
+.. only:: latex
+
+   * ``interpretations/2`` - :ref:`atms_protocol <atms_protocol/0::interpretations/2>`
 
 .. only:: not latex
 
@@ -15210,6 +15313,28 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``justifications/2``
+   --------------------
+
+   * :ref:`atms_protocol <atms_protocol/0::justifications/2>`
+
+.. only:: latex
+
+   * ``justifications/2`` - :ref:`atms_protocol <atms_protocol/0::justifications/2>`
+
+.. only:: not latex
+
+   ``justify/5``
+   -------------
+
+   * :ref:`atms_protocol <atms_protocol/0::justify/5>`
+
+.. only:: latex
+
+   * ``justify/5`` - :ref:`atms_protocol <atms_protocol/0::justify/5>`
+
+.. only:: not latex
+
    ``jwks/3``
    ----------
 
@@ -15407,6 +15532,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``kurtosis/2`` - :ref:`statisticsp <statisticsp/0::kurtosis/2>`
+
+.. only:: not latex
+
+   ``label/3``
+   -----------
+
+   * :ref:`atms_protocol <atms_protocol/0::label/3>`
+
+.. only:: latex
+
+   * ``label/3`` - :ref:`atms_protocol <atms_protocol/0::label/3>`
 
 .. only:: not latex
 
@@ -19515,6 +19651,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    ``new/1``
    ---------
 
+   * :ref:`atms_protocol <atms_protocol/0::new/1>`
    * :ref:`graph_protocol <graph_protocol/0::new/1>`
    * :ref:`java_access_protocol <java_access_protocol/0::new/1>`
    * :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::new/1>`
@@ -19525,13 +19662,14 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: latex
 
-   * ``new/1`` - :ref:`graph_protocol <graph_protocol/0::new/1>`, :ref:`java_access_protocol <java_access_protocol/0::new/1>`, :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::new/1>`, :ref:`ripple_down_rules_common_protocol <ripple_down_rules_common_protocol/0::new/1>`, :ref:`streamvars <streamvars/0::new/1>`, :ref:`termp <termp/0::new/1>`, :ref:`trie(Representation) <trie/1::new/1>`
+   * ``new/1`` - :ref:`atms_protocol <atms_protocol/0::new/1>`, :ref:`graph_protocol <graph_protocol/0::new/1>`, :ref:`java_access_protocol <java_access_protocol/0::new/1>`, :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::new/1>`, :ref:`ripple_down_rules_common_protocol <ripple_down_rules_common_protocol/0::new/1>`, :ref:`streamvars <streamvars/0::new/1>`, :ref:`termp <termp/0::new/1>`, :ref:`trie(Representation) <trie/1::new/1>`
 
 .. only:: not latex
 
    ``new/2``
    ---------
 
+   * :ref:`atms_protocol <atms_protocol/0::new/2>`
    * :ref:`graph_protocol <graph_protocol/0::new/2>`
    * :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::new/2>`
    * :ref:`java_access_protocol <java_access_protocol/0::new/2>`
@@ -19542,7 +19680,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: latex
 
-   * ``new/2`` - :ref:`graph_protocol <graph_protocol/0::new/2>`, :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::new/2>`, :ref:`java_access_protocol <java_access_protocol/0::new/2>`, :ref:`lru_cache_protocol <lru_cache_protocol/0::new/2>`, :ref:`ripple_down_rules_common_protocol <ripple_down_rules_common_protocol/0::new/2>`, :ref:`streamvars <streamvars/0::new/2>`, :ref:`union_find_protocol <union_find_protocol/0::new/2>`
+   * ``new/2`` - :ref:`atms_protocol <atms_protocol/0::new/2>`, :ref:`graph_protocol <graph_protocol/0::new/2>`, :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::new/2>`, :ref:`java_access_protocol <java_access_protocol/0::new/2>`, :ref:`lru_cache_protocol <lru_cache_protocol/0::new/2>`, :ref:`ripple_down_rules_common_protocol <ripple_down_rules_common_protocol/0::new/2>`, :ref:`streamvars <streamvars/0::new/2>`, :ref:`union_find_protocol <union_find_protocol/0::new/2>`
 
 .. only:: not latex
 
@@ -19804,6 +19942,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``node/2``
+   ----------
+
+   * :ref:`atms_protocol <atms_protocol/0::node/2>`
+
+.. only:: latex
+
+   * ``node/2`` - :ref:`atms_protocol <atms_protocol/0::node/2>`
+
+.. only:: not latex
+
    ``node/3``
    ----------
 
@@ -19851,11 +20000,12 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    ``nodes/2``
    -----------
 
+   * :ref:`atms_protocol <atms_protocol/0::nodes/2>`
    * :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::nodes/2>`
 
 .. only:: latex
 
-   * ``nodes/2`` - :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::nodes/2>`
+   * ``nodes/2`` - :ref:`atms_protocol <atms_protocol/0::nodes/2>`, :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::nodes/2>`
 
 .. only:: not latex
 
@@ -19867,6 +20017,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``nodes/3`` - :ref:`json_path_protocol <json_path_protocol/0::nodes/3>`
+
+.. only:: not latex
+
+   ``nogood/2``
+   ------------
+
+   * :ref:`atms_protocol <atms_protocol/0::nogood/2>`
+
+.. only:: latex
+
+   * ``nogood/2`` - :ref:`atms_protocol <atms_protocol/0::nogood/2>`
 
 .. only:: not latex
 
@@ -26773,6 +26934,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``representation/2``
+   --------------------
+
+   * :ref:`atms_protocol <atms_protocol/0::representation/2>`
+
+.. only:: latex
+
+   * ``representation/2`` - :ref:`atms_protocol <atms_protocol/0::representation/2>`
+
+.. only:: not latex
+
    ``request/3``
    -------------
 
@@ -29473,11 +29645,12 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    ``singleton/2``
    ---------------
 
+   * :ref:`atms_environment_protocol <atms_environment_protocol/0::singleton/2>`
    * :ref:`interval_relation_set_protocol <interval_relation_set_protocol/0::singleton/2>`
 
 .. only:: latex
 
-   * ``singleton/2`` - :ref:`interval_relation_set_protocol <interval_relation_set_protocol/0::singleton/2>`
+   * ``singleton/2`` - :ref:`atms_environment_protocol <atms_environment_protocol/0::singleton/2>`, :ref:`interval_relation_set_protocol <interval_relation_set_protocol/0::singleton/2>`
 
 .. only:: not latex
 
@@ -30986,12 +31159,13 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    ``subset/2``
    ------------
 
+   * :ref:`atms_environment_protocol <atms_environment_protocol/0::subset/2>`
    * :ref:`interval_relation_set_protocol <interval_relation_set_protocol/0::subset/2>`
    * :ref:`setp <setp/0::subset/2>`
 
 .. only:: latex
 
-   * ``subset/2`` - :ref:`interval_relation_set_protocol <interval_relation_set_protocol/0::subset/2>`, :ref:`setp <setp/0::subset/2>`
+   * ``subset/2`` - :ref:`atms_environment_protocol <atms_environment_protocol/0::subset/2>`, :ref:`interval_relation_set_protocol <interval_relation_set_protocol/0::subset/2>`, :ref:`setp <setp/0::subset/2>`
 
 .. only:: not latex
 
@@ -31974,6 +32148,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``to_list/2``
+   -------------
+
+   * :ref:`atms_environment_protocol <atms_environment_protocol/0::to_list/2>`
+
+.. only:: latex
+
+   * ``to_list/2`` - :ref:`atms_environment_protocol <atms_environment_protocol/0::to_list/2>`
+
+.. only:: not latex
+
    ``to_optional/1``
    -----------------
 
@@ -32749,6 +32934,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    ``union/3``
    -----------
 
+   * :ref:`atms_environment_protocol <atms_environment_protocol/0::union/3>`
    * :ref:`interval_relation_set_protocol <interval_relation_set_protocol/0::union/3>`
    * :ref:`setp <setp/0::union/3>`
    * :ref:`two3tree <two3tree/0::union/3>`
@@ -32756,7 +32942,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: latex
 
-   * ``union/3`` - :ref:`interval_relation_set_protocol <interval_relation_set_protocol/0::union/3>`, :ref:`setp <setp/0::union/3>`, :ref:`two3tree <two3tree/0::union/3>`, :ref:`unweighted_directed_graph(Dictionary) <unweighted_directed_graph/1::union/3>`
+   * ``union/3`` - :ref:`atms_environment_protocol <atms_environment_protocol/0::union/3>`, :ref:`interval_relation_set_protocol <interval_relation_set_protocol/0::union/3>`, :ref:`setp <setp/0::union/3>`, :ref:`two3tree <two3tree/0::union/3>`, :ref:`unweighted_directed_graph(Dictionary) <unweighted_directed_graph/1::union/3>`
 
 .. only:: not latex
 
@@ -34633,6 +34819,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``white_spaces//0`` - :ref:`blank_grammars(Format) <blank_grammars/1::white_spaces//0>`
+
+.. only:: not latex
+
+   ``why/3``
+   ---------
+
+   * :ref:`atms_protocol <atms_protocol/0::why/3>`
+
+.. only:: latex
+
+   * ``why/3`` - :ref:`atms_protocol <atms_protocol/0::why/3>`
 
 .. only:: not latex
 

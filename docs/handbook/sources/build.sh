@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on September 10, 2026
+##   Last updated on September 26, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -90,6 +90,7 @@ sed '1,19d' ../../../library/arbitrary/NOTES.md | pandoc -f gfm -t rst -o librar
 sed '1,19d' ../../../library/arrangements/NOTES.md | pandoc -f gfm -t rst -o libraries/arrangements.rst
 sed '1,19d' ../../../library/assignvars/NOTES.md | pandoc -f gfm -t rst -o libraries/assignvars.rst
 sed '1,19d' ../../../library/association_rule_miner/NOTES.md | pandoc -f gfm -t rst -o libraries/association_rule_miner.rst
+sed '1,19d' ../../../library/atms/NOTES.md | pandoc -f gfm -t rst -o libraries/atms.rst
 sed '1,19d' ../../../library/avro/NOTES.md | pandoc -f gfm -t rst -o libraries/avro.rst
 sed '1,19d' ../../../library/base32/NOTES.md | pandoc -f gfm -t rst -o libraries/base32.rst
 sed '1,19d' ../../../library/base58/NOTES.md | pandoc -f gfm -t rst -o libraries/base58.rst

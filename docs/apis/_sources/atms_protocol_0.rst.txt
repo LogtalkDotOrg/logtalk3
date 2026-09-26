@@ -1,0 +1,437 @@
+.. index:: single: atms_protocol
+.. _atms_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``atms_protocol``
+=================
+
+Portable, functional Assumption-based Truth Maintenance System API.
+
+| **Availability:** 
+|    ``logtalk_load(atms(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-26
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+
+   - State: All update predicates take an input ATMS state and return a new state. This permits several ATMS instances without relying on backend-specific mutable databases.
+   - Environments: The public API uses ordered lists of node identifiers. The representation selected when creating a state is internal.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: new/1
+.. _atms_protocol/0::new/1:
+
+``new/1``
+^^^^^^^^^
+
+Creates a new empty ATMS using the default ordered-list environment representation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``new(State)``
+| **Mode and number of proofs:**
+|    ``new(-atms_state)`` - ``one``
+
+
+------------
+
+.. index:: new/2
+.. _atms_protocol/0::new/2:
+
+``new/2``
+^^^^^^^^^
+
+Creates a new empty ATMS using the specified environment representation object. Fails if the object does not conform to the environment protocol.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``new(Representation,State)``
+| **Mode and number of proofs:**
+|    ``new(+object,-atms_state)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: clear/2
+.. _atms_protocol/0::clear/2:
+
+``clear/2``
+^^^^^^^^^^^
+
+Returns a new empty ATMS using the same environment representation as the given state.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``clear(State,ClearedState)``
+| **Mode and number of proofs:**
+|    ``clear(+atms_state,-atms_state)`` - ``one``
+
+
+------------
+
+.. index:: representation/2
+.. _atms_protocol/0::representation/2:
+
+``representation/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns the environment representation object used by the given state.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``representation(State,Representation)``
+| **Mode and number of proofs:**
+|    ``representation(+atms_state,?object)`` - ``one``
+
+
+------------
+
+.. index:: create_node/4
+.. _atms_protocol/0::create_node/4:
+
+``create_node/4``
+^^^^^^^^^^^^^^^^^
+
+Creates an ordinary node for the given datum and returns the updated state.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``create_node(Datum,State,Node,NewState)``
+| **Mode and number of proofs:**
+|    ``create_node(+term,+atms_state,-atms_node,-atms_state)`` - ``one``
+
+
+------------
+
+.. index:: create_assumption/4
+.. _atms_protocol/0::create_assumption/4:
+
+``create_assumption/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Creates an assumption node for the given datum and returns the updated state.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``create_assumption(Datum,State,Assumption,NewState)``
+| **Mode and number of proofs:**
+|    ``create_assumption(+term,+atms_state,-atms_node,-atms_state)`` - ``one``
+
+
+------------
+
+.. index:: create_contradiction/4
+.. _atms_protocol/0::create_contradiction/4:
+
+``create_contradiction/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Creates a contradiction node for the given datum and returns the updated state.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``create_contradiction(Datum,State,Contradiction,NewState)``
+| **Mode and number of proofs:**
+|    ``create_contradiction(+term,+atms_state,-atms_node,-atms_state)`` - ``one``
+
+
+------------
+
+.. index:: justify/5
+.. _atms_protocol/0::justify/5:
+
+``justify/5``
+^^^^^^^^^^^^^
+
+Adds a Horn justification from the antecedent nodes to the consequent node, incrementally propagating label changes. Fails if any referenced node is unknown.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``justify(Consequent,Antecedents,Info,State,NewState)``
+| **Mode and number of proofs:**
+|    ``justify(+atms_node,+list(atms_node),+term,+atms_state,-atms_state)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: node/2
+.. _atms_protocol/0::node/2:
+
+``node/2``
+^^^^^^^^^^
+
+Enumerates or tests the nodes in the given state.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``node(Node,State)``
+| **Mode and number of proofs:**
+|    ``node(?atms_node,+atms_state)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: assumption/2
+.. _atms_protocol/0::assumption/2:
+
+``assumption/2``
+^^^^^^^^^^^^^^^^
+
+Enumerates or tests the assumption nodes in the given state.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``assumption(Assumption,State)``
+| **Mode and number of proofs:**
+|    ``assumption(?atms_node,+atms_state)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: contradiction/2
+.. _atms_protocol/0::contradiction/2:
+
+``contradiction/2``
+^^^^^^^^^^^^^^^^^^^
+
+Enumerates or tests the contradiction nodes in the given state.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``contradiction(Contradiction,State)``
+| **Mode and number of proofs:**
+|    ``contradiction(?atms_node,+atms_state)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: nodes/2
+.. _atms_protocol/0::nodes/2:
+
+``nodes/2``
+^^^^^^^^^^^
+
+Returns the node-datum pairs in node identifier order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nodes(State,Nodes)``
+| **Mode and number of proofs:**
+|    ``nodes(+atms_state,-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: assumptions/2
+.. _atms_protocol/0::assumptions/2:
+
+``assumptions/2``
+^^^^^^^^^^^^^^^^^
+
+Returns the assumption nodes in node identifier order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``assumptions(State,Assumptions)``
+| **Mode and number of proofs:**
+|    ``assumptions(+atms_state,-list(atms_node))`` - ``one``
+
+
+------------
+
+.. index:: justifications/2
+.. _atms_protocol/0::justifications/2:
+
+``justifications/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns all justifications in insertion order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``justifications(State,Justifications)``
+| **Mode and number of proofs:**
+|    ``justifications(+atms_state,-list(term))`` - ``one``
+
+
+------------
+
+.. index:: label/3
+.. _atms_protocol/0::label/3:
+
+``label/3``
+^^^^^^^^^^^
+
+Returns the minimal consistent environments supporting the given node. Fails if the node is unknown.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``label(Node,State,Environments)``
+| **Mode and number of proofs:**
+|    ``label(+atms_node,+atms_state,-list(list(atms_node)))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: in_label/3
+.. _atms_protocol/0::in_label/3:
+
+``in_label/3``
+^^^^^^^^^^^^^^
+
+True iff the given environment is a member of the node label.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``in_label(Node,Environment,State)``
+| **Mode and number of proofs:**
+|    ``in_label(+atms_node,+list(atms_node),+atms_state)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: consistent/2
+.. _atms_protocol/0::consistent/2:
+
+``consistent/2``
+^^^^^^^^^^^^^^^^
+
+True iff the given environment contains no recorded nogood.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``consistent(Environment,State)``
+| **Mode and number of proofs:**
+|    ``consistent(+list(atms_node),+atms_state)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: nogood/2
+.. _atms_protocol/0::nogood/2:
+
+``nogood/2``
+^^^^^^^^^^^^
+
+Enumerates or tests the minimal nogood environments in the given state.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nogood(Environment,State)``
+| **Mode and number of proofs:**
+|    ``nogood(?list(atms_node),+atms_state)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: interpretations/2
+.. _atms_protocol/0::interpretations/2:
+
+``interpretations/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns the maximal consistent environments over all assumptions.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``interpretations(State,Interpretations)``
+| **Mode and number of proofs:**
+|    ``interpretations(+atms_state,-list(list(atms_node)))`` - ``one``
+
+
+------------
+
+.. index:: why/3
+.. _atms_protocol/0::why/3:
+
+``why/3``
+^^^^^^^^^
+
+Returns the direct justifications for the given node in insertion order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``why(Node,State,Justifications)``
+| **Mode and number of proofs:**
+|    ``why(+atms_node,+atms_state,-list(term))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

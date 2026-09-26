@@ -34,6 +34,9 @@ compact styling, adding internal links, and reducing the number of pages.
 Library
 -------
 
+* ADDED: New `atms` library implementing the Horn fragment of Johan de Kleer's
+Assumption-based Truth Maintenance System (ATMS).
+
 * IMPROVED: Performance of the `crypto` library.
 
 * IMPROVED: Rewrite predicate definitions as tail-recursive in the

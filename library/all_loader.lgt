@@ -190,6 +190,7 @@
 		ccsds_packetization(loader),
 		ccsds_packet_services(loader),
 		ieee_754(loader),
+		atms(loader),
 		avro(loader),
 		protobuf(loader),
 		character_sets(loader),

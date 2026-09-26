@@ -116,6 +116,19 @@ To load any library (including developer tools, ports, and contributions), use t
    association_rule_miner_common <association_rule_miner_common_0>
    association_rule_miner_protocol <association_rule_miner_protocol_0>
 
+:ref:`atms <library_atms>`
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   atms <atms_0>
+   atms_bitset_environment <atms_bitset_environment_0>
+   atms_environment_protocol <atms_environment_protocol_0>
+   atms_ordered_list_environment <atms_ordered_list_environment_0>
+   atms_protocol <atms_protocol_0>
+   atms_segmented_bitset_environment <atms_segmented_bitset_environment_0>
+
 :ref:`avro <library_avro>`
 --------------------------
 

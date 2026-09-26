@@ -1,0 +1,56 @@
+.. index:: single: atms_bitset_environment
+.. _atms_bitset_environment/0:
+
+.. rst-class:: right
+
+**object**
+
+``atms_bitset_environment``
+===========================
+
+ATMS environments represented by non-negative integer bitsets. Best suited to a modest number of assumptions.
+
+| **Availability:** 
+|    ``logtalk_load(atms(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-26
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`atms_environment_protocol <atms_environment_protocol/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`atms_environment_protocol/0::empty/1`  :ref:`atms_environment_protocol/0::equal/2`  :ref:`atms_environment_protocol/0::from_list/2`  :ref:`atms_environment_protocol/0::singleton/2`  :ref:`atms_environment_protocol/0::subset/2`  :ref:`atms_environment_protocol/0::to_list/2`  :ref:`atms_environment_protocol/0::union/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

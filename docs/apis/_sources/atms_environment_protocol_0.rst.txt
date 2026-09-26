@@ -1,0 +1,192 @@
+.. index:: single: atms_environment_protocol
+.. _atms_environment_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``atms_environment_protocol``
+=============================
+
+Protocol for the opaque environment representation used by the ATMS library.
+
+| **Availability:** 
+|    ``logtalk_load(atms(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-26
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: empty/1
+.. _atms_environment_protocol/0::empty/1:
+
+``empty/1``
+^^^^^^^^^^^
+
+Returns the empty environment.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``empty(Environment)``
+| **Mode and number of proofs:**
+|    ``empty(-atms_environment)`` - ``one``
+
+
+------------
+
+.. index:: singleton/2
+.. _atms_environment_protocol/0::singleton/2:
+
+``singleton/2``
+^^^^^^^^^^^^^^^
+
+Returns the environment containing only the given node.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``singleton(Node,Environment)``
+| **Mode and number of proofs:**
+|    ``singleton(+atms_node,-atms_environment)`` - ``one``
+
+
+------------
+
+.. index:: union/3
+.. _atms_environment_protocol/0::union/3:
+
+``union/3``
+^^^^^^^^^^^
+
+Returns the union of two environments.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``union(Environment1,Environment2,Union)``
+| **Mode and number of proofs:**
+|    ``union(+atms_environment,+atms_environment,-atms_environment)`` - ``one``
+
+
+------------
+
+.. index:: subset/2
+.. _atms_environment_protocol/0::subset/2:
+
+``subset/2``
+^^^^^^^^^^^^
+
+True iff the first environment is a subset of the second environment.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``subset(Environment1,Environment2)``
+| **Mode and number of proofs:**
+|    ``subset(+atms_environment,+atms_environment)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: equal/2
+.. _atms_environment_protocol/0::equal/2:
+
+``equal/2``
+^^^^^^^^^^^
+
+True iff the two environments are equal.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``equal(Environment1,Environment2)``
+| **Mode and number of proofs:**
+|    ``equal(+atms_environment,+atms_environment)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: from_list/2
+.. _atms_environment_protocol/0::from_list/2:
+
+``from_list/2``
+^^^^^^^^^^^^^^^
+
+Converts a list of node identifiers to the canonical internal environment representation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``from_list(Nodes,Environment)``
+| **Mode and number of proofs:**
+|    ``from_list(+list(atms_node),-atms_environment)`` - ``one``
+
+
+------------
+
+.. index:: to_list/2
+.. _atms_environment_protocol/0::to_list/2:
+
+``to_list/2``
+^^^^^^^^^^^^^
+
+Converts an internal environment to an ordered list of node identifiers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``to_list(Environment,Nodes)``
+| **Mode and number of proofs:**
+|    ``to_list(+atms_environment,-list(atms_node))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`atms <atms/0>`, :ref:`atms_ordered_list_environment <atms_ordered_list_environment/0>`, :ref:`atms_bitset_environment <atms_bitset_environment/0>`, :ref:`atms_segmented_bitset_environment <atms_segmented_bitset_environment/0>`
+
