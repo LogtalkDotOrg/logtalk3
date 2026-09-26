@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths for the programming examples
-%  Last updated on September 1, 2026
+%  Last updated on September 26, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -99,6 +99,7 @@ logtalk_library_path(fibonacci, threads('fibonacci/')).
 logtalk_library_path(figures, ncl('figures/')).
 logtalk_library_path(fluents, engines('fluents/')).
 logtalk_library_path(free_nodes, ncl('free_nodes/')).
+logtalk_library_path(full_adder_diagnosis, examples('full_adder_diagnosis')).
 logtalk_library_path(functions, threads('functions/')).
 logtalk_library_path(futures, examples('futures/')).
 logtalk_library_path(get_time_mcp_app, examples('get_time_mcp_app/')).

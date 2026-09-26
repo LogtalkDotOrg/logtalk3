@@ -300,6 +300,9 @@ Follows a short description of each included example (in alphabetical order):
 	alternative version of the `family` example using a family registry
 	implemented using multifile predicates to avoid dynamic binding
 
+- `full_adder_diagnosis`  
+    classical example illustrating the use of the `atms` library
+
 - `futures`  
     simple example of defining and using _futures_, a common concurrent
     programming idiom

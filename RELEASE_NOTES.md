@@ -56,6 +56,12 @@ Tools
 automation scripts to print the fastest and slowest test set names
 and execution times.
 
+Examples
+--------
+
+* ADDED: New `full_adder_diagnosis` example illustrating the new `atms`
+library.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
