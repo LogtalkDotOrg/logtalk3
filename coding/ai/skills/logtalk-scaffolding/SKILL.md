@@ -1,5 +1,5 @@
 ---
-name: scaffolding
+name: logtalk-scaffolding
 description: Scaffold a new Logtalk application (directory, settings.lgt, loader.lgt, optional tester/tests). Use when starting a project from scratch or setting up loaders, settings, and unit-test drivers.
 ---
 

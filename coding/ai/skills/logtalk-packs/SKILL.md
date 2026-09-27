@@ -1,5 +1,5 @@
 ---
-name: packs
+name: logtalk-packs
 description: Create Logtalk packs and pack registries (pack_protocol, registry_protocol, version metadata, checksums, loaders). Use when authoring a distributable library or application pack, adding it to a registry, or publishing pack specs.
 ---
 

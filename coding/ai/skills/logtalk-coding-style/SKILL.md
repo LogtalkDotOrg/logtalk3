@@ -1,5 +1,5 @@
 ---
-name: coding-style
+name: logtalk-coding-style
 description: Apply and review Logtalk coding style guidelines (layout, naming, directives, clauses). Use when writing or reformatting Logtalk code, reviewing style, or matching distribution conventions.
 ---
 

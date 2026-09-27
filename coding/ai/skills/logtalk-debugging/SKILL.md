@@ -1,5 +1,5 @@
 ---
-name: debugging
+name: logtalk-debugging
 description: Debug Logtalk code with the debugger tool, debug mode, breakpoints, tracing, and related techniques. Use when diagnosing failures, unexpected solutions, exceptions, or non-determinism in Logtalk entities.
 ---
 

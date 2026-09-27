@@ -1,5 +1,5 @@
 ---
-name: portability
+name: logtalk-portability
 description: Write Logtalk code portable across Prolog backends. Use when implementing libraries or applications that must run on multiple systems, reviewing non-portable constructs, or isolating backend-specific code.
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: testing
+name: logtalk-testing
 description: Write, organize, run, and debug Logtalk unit tests with lgtunit. Use when adding tests, fixing failing tests, improving coverage, setting up tester drivers, or using QuickCheck.
 ---
 
@@ -33,7 +33,8 @@ Do not duplicate the handbook content. Prefer linking to specific sections when 
 2. **Define tests in objects that extend `lgtunit`**
    - Prefer one primary test object named `tests` for simple cases.
    - Use descriptive, unique, ground test identifiers (usually atoms).
-   - Keep test objects focused; put supporting code in separate entities/files.
+   - Keep test objects focused; put supporting code in separate entities/files (e.g., `test_objects.lgt`).
+   - Add `cover/1` facts before the tests for each tested object and category to collect code coverage stats.
 
 3. **Compile tests with the required hook**
    ```logtalk

@@ -1,5 +1,5 @@
 ---
-name: libraries
+name: logtalk-libraries
 description: Discover and reuse Logtalk standard libraries instead of reimplementing predicates. Use when writing utilities, working with lists, sets, dictionaries, types, OS, random, JSON, or any common infrastructure; or when tempted to add a local helper that may already exist.
 ---
 
