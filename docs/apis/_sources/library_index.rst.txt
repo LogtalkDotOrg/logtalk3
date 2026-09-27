@@ -3118,6 +3118,16 @@ To load any library (including developer tools, ports, and contributions), use t
    time_scales_data <time_scales_data_0>
    time_scales_protocol <time_scales_protocol_0>
 
+:ref:`time_series_protocols <library_time_series_protocols>`
+------------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   forecaster_common <forecaster_common_0>
+   forecaster_protocol <forecaster_protocol_0>
+   time_series_dataset_protocol <time_series_dataset_protocol_0>
+
 :ref:`timeout <library_timeout>`
 --------------------------------
 

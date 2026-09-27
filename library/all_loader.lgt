@@ -248,6 +248,7 @@
 		gsp_pattern_miner(loader),
 		spade_pattern_miner(loader),
 		clo_span_pattern_miner(loader),
+		time_series_protocols(loader),
 		uri_template(loader),
 		url(loader),
 		sqids(loader),

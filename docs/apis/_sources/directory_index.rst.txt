@@ -5304,6 +5304,24 @@ To load an entity, always load the library that includes it using the goal ``log
    * :doc:`time_scales_data <time_scales_data_0>`
    * :doc:`time_scales_protocol <time_scales_protocol_0>`
 
+``library/time_series_protocols/``
+----------------------------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      forecaster_common <forecaster_common_0>
+      forecaster_protocol <forecaster_protocol_0>
+      time_series_dataset_protocol <time_series_dataset_protocol_0>
+
+.. only:: latex
+
+   * :doc:`forecaster_common <forecaster_common_0>`
+   * :doc:`forecaster_protocol <forecaster_protocol_0>`
+   * :doc:`time_series_dataset_protocol <time_series_dataset_protocol_0>`
+
 ``library/timeout/``
 --------------------
 

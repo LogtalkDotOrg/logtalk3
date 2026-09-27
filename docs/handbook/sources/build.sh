@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on September 26, 2026
+##   Last updated on September 27, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -347,6 +347,7 @@ sed '1,19d' ../../../library/text_normalization/NOTES.md | pandoc -f gfm -t rst 
 sed '1,19d' ../../../library/text_vectorization/NOTES.md | pandoc -f gfm -t rst -o libraries/text_vectorization.rst
 sed '1,19d' ../../../library/thurstone_mosteller_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/thurstone_mosteller_ranker.rst
 sed '1,19d' ../../../library/time_scales/NOTES.md | pandoc -f gfm -t rst -o libraries/time_scales.rst
+sed '1,19d' ../../../library/time_series_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/time_series_protocols.rst
 sed '1,19d' ../../../library/timeout/NOTES.md | pandoc -f gfm -t rst -o libraries/timeout.rst
 sed '1,19d' ../../../library/tle_orbits/NOTES.md | pandoc -f gfm -t rst -o libraries/tle_orbits.rst
 sed '1,19d' ../../../library/tokenization/NOTES.md | pandoc -f gfm -t rst -o libraries/tokenization.rst

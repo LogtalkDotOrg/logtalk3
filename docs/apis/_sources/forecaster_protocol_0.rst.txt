@@ -1,0 +1,274 @@
+.. index:: single: forecaster_protocol
+.. _forecaster_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``forecaster_protocol``
+=======================
+
+Protocol for time series forecasting models.
+
+| **Availability:** 
+|    ``logtalk_load(time_series_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-27
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: learn/3
+.. _forecaster_protocol/0::learn/3:
+
+``learn/3``
+^^^^^^^^^^^
+
+Learns a forecasting model from the given time series dataset object using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Forecaster,Options)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound,+list(compound))`` - ``one``
+
+
+------------
+
+.. index:: learn/2
+.. _forecaster_protocol/0::learn/2:
+
+``learn/2``
+^^^^^^^^^^^
+
+Learns a forecasting model from the given time series dataset object using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Forecaster)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound)`` - ``one``
+
+
+------------
+
+.. index:: forecast/3
+.. _forecaster_protocol/0::forecast/3:
+
+``forecast/3``
+^^^^^^^^^^^^^^
+
+Forecasts the next ``Horizon`` values beyond the training series using the learned forecasting model.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``forecast(Forecaster,Horizon,Forecasts)``
+| **Mode and number of proofs:**
+|    ``forecast(+compound,+integer,-list(number))`` - ``one``
+
+
+------------
+
+.. index:: check_forecaster/1
+.. _forecaster_protocol/0::check_forecaster/1:
+
+``check_forecaster/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that a learned forecaster term is structurally valid for the receiving implementation. Throws an exception when the term is not a valid forecaster representation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_forecaster(Forecaster)``
+| **Mode and number of proofs:**
+|    ``check_forecaster(@compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Forecaster`` is a variable:
+|        ``instantiation_error``
+|    ``Forecaster`` is neither a variable nor a valid forecaster:
+|        ``domain_error(forecaster,Forecaster)``
+
+
+------------
+
+.. index:: valid_forecaster/1
+.. _forecaster_protocol/0::valid_forecaster/1:
+
+``valid_forecaster/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+True when a learned forecaster term is structurally valid for the receiving implementation. Succeeds iff ``check_forecaster/1`` succeeds without throwing an exception.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_forecaster(Forecaster)``
+| **Mode and number of proofs:**
+|    ``valid_forecaster(@compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: diagnostics/2
+.. _forecaster_protocol/0::diagnostics/2:
+
+``diagnostics/2``
+^^^^^^^^^^^^^^^^^
+
+Returns diagnostics metadata for a learned forecaster.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostics(Forecaster,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``diagnostics(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: diagnostic/2
+.. _forecaster_protocol/0::diagnostic/2:
+
+``diagnostic/2``
+^^^^^^^^^^^^^^^^
+
+Enumerates individual diagnostics metadata terms for a learned forecaster.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostic(Forecaster,Diagnostic)``
+| **Mode and number of proofs:**
+|    ``diagnostic(+compound,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: forecaster_options/2
+.. _forecaster_protocol/0::forecaster_options/2:
+
+``forecaster_options/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the effective training options recorded in a learned forecaster diagnostics metadata.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``forecaster_options(Forecaster,Options)``
+| **Mode and number of proofs:**
+|    ``forecaster_options(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: export_to_clauses/4
+.. _forecaster_protocol/0::export_to_clauses/4:
+
+``export_to_clauses/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts a forecaster into a list of predicate clauses. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized forecaster term, a noun such as ``forecaster`` or ``model`` is usually clearer than a verb such as ``forecast``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``export_to_clauses(Dataset,Forecaster,Functor,Clauses)``
+| **Mode and number of proofs:**
+|    ``export_to_clauses(+object_identifier,+compound,+callable,-list(clause))`` - ``one``
+
+
+------------
+
+.. index:: export_to_file/4
+.. _forecaster_protocol/0::export_to_file/4:
+
+``export_to_file/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Exports a forecaster to a file. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized forecaster term, a noun such as ``forecaster`` or ``model`` is usually clearer than a verb such as ``forecast``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``export_to_file(Dataset,Forecaster,Functor,File)``
+| **Mode and number of proofs:**
+|    ``export_to_file(+object_identifier,+compound,+callable,+atom)`` - ``one``
+
+
+------------
+
+.. index:: print_forecaster/1
+.. _forecaster_protocol/0::print_forecaster/1:
+
+``print_forecaster/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Prints a forecaster to the current output stream in a human-readable format.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_forecaster(Forecaster)``
+| **Mode and number of proofs:**
+|    ``print_forecaster(+compound)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`time_series_dataset_protocol <time_series_dataset_protocol/0>`
+

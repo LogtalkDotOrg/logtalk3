@@ -1,0 +1,425 @@
+.. index:: single: forecaster_common
+.. _forecaster_common/0:
+
+.. rst-class:: right
+
+**category**
+
+``forecaster_common``
+=====================
+
+Shared predicates for forecaster diagnostics, time series dataset validation, differencing, lag construction, forecast error metrics, and naive baselines.
+
+| **Availability:** 
+|    ``logtalk_load(time_series_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-27
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Implements:**
+|    ``public`` :ref:`forecaster_protocol <forecaster_protocol/0>`
+| **Extends:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+|    :ref:`numberlist <numberlist/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`forecaster_protocol/0::check_forecaster/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`forecaster_protocol/0::diagnostic/2`  :ref:`forecaster_protocol/0::diagnostics/2`  :ref:`forecaster_protocol/0::export_to_clauses/4`  :ref:`forecaster_protocol/0::export_to_file/4`  :ref:`forecaster_protocol/0::forecast/3`  :ref:`forecaster_protocol/0::forecaster_options/2`  :ref:`forecaster_protocol/0::learn/2`  :ref:`forecaster_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`forecaster_protocol/0::print_forecaster/1`  :ref:`forecaster_protocol/0::valid_forecaster/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: forecaster_diagnostics_data/2
+.. _forecaster_common/0::forecaster_diagnostics_data/2:
+
+``forecaster_diagnostics_data/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing forecaster implementations must define in order to expose diagnostics metadata. A default implementation is provided that assumes the diagnostics list is the last argument of the forecaster term; concrete implementations following that convention do not need to override it.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``forecaster_diagnostics_data(Forecaster,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``forecaster_diagnostics_data(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: forecaster_export_template/4
+.. _forecaster_common/0::forecaster_export_template/4:
+
+``forecaster_export_template/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing forecaster implementations must define in order to expose the exported forecaster template for a given functor.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``forecaster_export_template(Dataset,Forecaster,Functor,Template)``
+| **Mode and number of proofs:**
+|    ``forecaster_export_template(+object_identifier,+compound,+atom,-callable)`` - ``one``
+
+
+------------
+
+.. index:: forecaster_term_template/2
+.. _forecaster_common/0::forecaster_term_template/2:
+
+``forecaster_term_template/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing forecaster implementations must define in order to expose the learned forecaster term template used by pretty-printing helpers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``forecaster_term_template(Forecaster,Template)``
+| **Mode and number of proofs:**
+|    ``forecaster_term_template(+compound,-callable)`` - ``one``
+
+
+------------
+
+.. index:: print_forecaster_template/1
+.. _forecaster_common/0::print_forecaster_template/1:
+
+``print_forecaster_template/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Pretty-printing helper predicate used by importing forecaster implementations to show the learned forecaster term template.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_forecaster_template(Forecaster)``
+| **Mode and number of proofs:**
+|    ``print_forecaster_template(+compound)`` - ``one``
+
+
+------------
+
+.. index:: dataset_series/2
+.. _forecaster_common/0::dataset_series/2:
+
+``dataset_series/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Collects the dataset time-ordered observation values. Checks that the observation indices form a complete, gap-free, 1-based sequence.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dataset_series(Dataset,Series)``
+| **Mode and number of proofs:**
+|    ``dataset_series(+object_identifier,-list(number))`` - ``one``
+
+
+------------
+
+.. index:: check_series/2
+.. _forecaster_common/0::check_series/2:
+
+``check_series/2``
+^^^^^^^^^^^^^^^^^^
+
+Checks that a time series is non-empty and that every observation value is a number.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_series(Dataset,Series)``
+| **Mode and number of proofs:**
+|    ``check_series(+object_identifier,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Series`` is empty:
+|        ``domain_error(non_empty_series,Dataset)``
+|    An observation value is not a number:
+|        ``type_error(number,Value)``
+
+
+------------
+
+.. index:: check_series_length/3
+.. _forecaster_common/0::check_series_length/3:
+
+``check_series_length/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that a time series has at least the given minimum number of observations.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_series_length(Dataset,Series,MinimumLength)``
+| **Mode and number of proofs:**
+|    ``check_series_length(+object_identifier,+list,+integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Series`` is shorter than ``MinimumLength``:
+|        ``domain_error(series_length,Dataset)``
+
+
+------------
+
+.. index:: base_forecaster_diagnostics/5
+.. _forecaster_common/0::base_forecaster_diagnostics/5:
+
+``base_forecaster_diagnostics/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Builds the common part of a forecaster diagnostics metadata list, combined with implementation-specific extra diagnostics terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``base_forecaster_diagnostics(Model,TrainingSeriesLength,Options,ExtraDiagnostics,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``base_forecaster_diagnostics(+atom,+integer,+list(compound),+list(compound),-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: valid_forecaster_metadata/2
+.. _forecaster_common/0::valid_forecaster_metadata/2:
+
+``valid_forecaster_metadata/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when diagnostics metadata contains the expected model term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_forecaster_metadata(Model,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``valid_forecaster_metadata(+atom,+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_forecaster_metadata/3
+.. _forecaster_common/0::valid_forecaster_metadata/3:
+
+``valid_forecaster_metadata/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when diagnostics metadata contains the expected model term and records the given effective options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_forecaster_metadata(Model,Options,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``valid_forecaster_metadata(+atom,+list(compound),+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: difference_series/2
+.. _forecaster_common/0::difference_series/2:
+
+``difference_series/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the first-order differences of a series: ``Differences[i] = Series[i+1] - Series[i]``. The result has one fewer element than ``Series``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``difference_series(Series,Differences)``
+| **Mode and number of proofs:**
+|    ``difference_series(+list(number),-list(number))`` - ``one``
+
+
+------------
+
+.. index:: integrate_series/3
+.. _forecaster_common/0::integrate_series/3:
+
+``integrate_series/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Reconstructs a series of levels from a series of differences and a starting base value (typically the last observed original value), by cumulative summing. Used to undo ``difference_series/2`` on forecasted differences.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``integrate_series(Differences,Base,Series)``
+| **Mode and number of proofs:**
+|    ``integrate_series(+list(number),+number,-list(number))`` - ``one``
+
+
+------------
+
+.. index:: lagged_rows/3
+.. _forecaster_common/0::lagged_rows/3:
+
+``lagged_rows/3``
+^^^^^^^^^^^^^^^^^
+
+Builds a list of ``Lags-Target`` rows from a series, where ``Lags`` is a list of the ``Order`` most recent values preceding ``Target``, most recent first (``[X(t-1), X(t-2), ..., X(t-Order)]-X(t)``). Requires the series to have more than ``Order`` observations.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``lagged_rows(Series,Order,Rows)``
+| **Mode and number of proofs:**
+|    ``lagged_rows(+list(number),+integer,-list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Series`` has ``Order`` or fewer observations:
+|        ``domain_error(series_length,Series)``
+
+
+------------
+
+.. index:: mean_absolute_error/3
+.. _forecaster_common/0::mean_absolute_error/3:
+
+``mean_absolute_error/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the mean absolute error (MAE) between actual and predicted value lists of matching length.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``mean_absolute_error(Actual,Predicted,MAE)``
+| **Mode and number of proofs:**
+|    ``mean_absolute_error(+list(number),+list(number),-float)`` - ``one``
+
+
+------------
+
+.. index:: root_mean_squared_error/3
+.. _forecaster_common/0::root_mean_squared_error/3:
+
+``root_mean_squared_error/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the root mean squared error (RMSE) between actual and predicted value lists of matching length.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``root_mean_squared_error(Actual,Predicted,RMSE)``
+| **Mode and number of proofs:**
+|    ``root_mean_squared_error(+list(number),+list(number),-float)`` - ``one``
+
+
+------------
+
+.. index:: mean_absolute_percentage_error/3
+.. _forecaster_common/0::mean_absolute_percentage_error/3:
+
+``mean_absolute_percentage_error/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the mean absolute percentage error (MAPE), as a percentage, between actual and predicted value lists of matching length.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``mean_absolute_percentage_error(Actual,Predicted,MAPE)``
+| **Mode and number of proofs:**
+|    ``mean_absolute_percentage_error(+list(number),+list(number),-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    An actual value is zero:
+|        ``evaluation_error(zero_divisor)``
+
+
+------------
+
+.. index:: naive_forecast/3
+.. _forecaster_common/0::naive_forecast/3:
+
+``naive_forecast/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Repeats the last observed series value ``Horizon`` times (the naive/persistence baseline forecast).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``naive_forecast(Series,Horizon,Forecasts)``
+| **Mode and number of proofs:**
+|    ``naive_forecast(+list(number),+integer,-list(number))`` - ``one``
+
+
+------------
+
+.. index:: seasonal_naive_forecast/4
+.. _forecaster_common/0::seasonal_naive_forecast/4:
+
+``seasonal_naive_forecast/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Repeats the last full seasonal cycle of ``Frequency`` observations, cycling as needed to cover ``Horizon`` forecasts (the seasonal naive baseline forecast).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``seasonal_naive_forecast(Series,Frequency,Horizon,Forecasts)``
+| **Mode and number of proofs:**
+|    ``seasonal_naive_forecast(+list(number),+integer,+integer,-list(number))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Series`` has fewer than ``Frequency`` observations:
+|        ``domain_error(series_length,Series)``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

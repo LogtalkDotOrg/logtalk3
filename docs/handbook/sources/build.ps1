@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on September 26, 2026
+##   Last updated on September 27, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -347,6 +347,7 @@ Foreach-Object {
 (Get-Content ../../../library/text_vectorization/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/text_vectorization.rst
 (Get-Content ../../../library/thurstone_mosteller_ranker/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/thurstone_mosteller_ranker.rst
 (Get-Content ../../../library/time_scales/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/time_scales.rst
+(Get-Content ../../../library/time_series_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/time_series_protocols.rst
 (Get-Content ../../../library/timeout/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/timeout.rst
 (Get-Content ../../../library/tle_orbits/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/tle_orbits.rst
 (Get-Content ../../../library/tokenization/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/tokenization.rst

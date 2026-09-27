@@ -37,6 +37,10 @@ Library
 * ADDED: New `atms` library implementing the Horn fragment of Johan de Kleer's
 Assumption-based Truth Maintenance System (ATMS).
 
+* ADDED: New `time_series_protocols` library defining protocols, common
+predicates, and test datasets for implementing time series forecasting
+algorithms.
+
 * IMPROVED: Performance of the `crypto` library.
 
 * IMPROVED: Rewrite predicate definitions as tail-recursive in the

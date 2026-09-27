@@ -298,6 +298,7 @@ directory in the ``NOTES.md`` file.
    thurstone_mosteller_ranker
    timeout
    time_scales
+   time_series_protocols
    tle_orbits
    tokenization
    toml

@@ -1,0 +1,112 @@
+.. index:: single: time_series_dataset_protocol
+.. _time_series_dataset_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``time_series_dataset_protocol``
+================================
+
+Protocol for datasets used with time series forecasting algorithms.
+
+| **Availability:** 
+|    ``logtalk_load(time_series_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-27
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: observation/2
+.. _time_series_dataset_protocol/0::observation/2:
+
+``observation/2``
+^^^^^^^^^^^^^^^^^
+
+Enumerates by backtracking the time-ordered observations. ``Index`` is the 1-based position of the observation in the series and ``Value`` is its numeric value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``observation(Index,Value)``
+| **Mode and number of proofs:**
+|    ``observation(-integer,-number)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: series_length/1
+.. _time_series_dataset_protocol/0::series_length/1:
+
+``series_length/1``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the number of observations in the series.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``series_length(Length)``
+| **Mode and number of proofs:**
+|    ``series_length(-integer)`` - ``one``
+
+
+------------
+
+.. index:: frequency/1
+.. _time_series_dataset_protocol/0::frequency/1:
+
+``frequency/1``
+^^^^^^^^^^^^^^^
+
+Returns the number of observations per seasonal cycle (e.g. 12 for monthly data with yearly seasonality). Fails when the series has no declared seasonal period.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``frequency(Frequency)``
+| **Mode and number of proofs:**
+|    ``frequency(-integer)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

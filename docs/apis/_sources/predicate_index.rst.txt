@@ -3132,6 +3132,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``check_forecaster/1``
+   ----------------------
+
+   * :ref:`forecaster_protocol <forecaster_protocol/0::check_forecaster/1>`
+
+.. only:: latex
+
+   * ``check_forecaster/1`` - :ref:`forecaster_protocol <forecaster_protocol/0::check_forecaster/1>`
+
+.. only:: not latex
+
    ``check_instant/1``
    -------------------
 
@@ -7014,6 +7025,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    * :ref:`classifier_protocol <classifier_protocol/0::diagnostic/2>`
    * :ref:`clusterer_protocol <clusterer_protocol/0::diagnostic/2>`
    * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::diagnostic/2>`
+   * :ref:`forecaster_protocol <forecaster_protocol/0::diagnostic/2>`
    * :ref:`pattern_miner_protocol <pattern_miner_protocol/0::diagnostic/2>`
    * :ref:`ranker_protocol <ranker_protocol/0::diagnostic/2>`
    * :ref:`regressor_protocol <regressor_protocol/0::diagnostic/2>`
@@ -7022,7 +7034,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: latex
 
-   * ``diagnostic/2`` - :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::diagnostic/2>`, :ref:`association_rule_miner_protocol <association_rule_miner_protocol/0::diagnostic/2>`, :ref:`classifier_protocol <classifier_protocol/0::diagnostic/2>`, :ref:`clusterer_protocol <clusterer_protocol/0::diagnostic/2>`, :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::diagnostic/2>`, :ref:`pattern_miner_protocol <pattern_miner_protocol/0::diagnostic/2>`, :ref:`ranker_protocol <ranker_protocol/0::diagnostic/2>`, :ref:`regressor_protocol <regressor_protocol/0::diagnostic/2>`, :ref:`text_vectorizer_protocol <text_vectorizer_protocol/0::diagnostic/2>`, :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostic/2>`
+   * ``diagnostic/2`` - :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::diagnostic/2>`, :ref:`association_rule_miner_protocol <association_rule_miner_protocol/0::diagnostic/2>`, :ref:`classifier_protocol <classifier_protocol/0::diagnostic/2>`, :ref:`clusterer_protocol <clusterer_protocol/0::diagnostic/2>`, :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::diagnostic/2>`, :ref:`forecaster_protocol <forecaster_protocol/0::diagnostic/2>`, :ref:`pattern_miner_protocol <pattern_miner_protocol/0::diagnostic/2>`, :ref:`ranker_protocol <ranker_protocol/0::diagnostic/2>`, :ref:`regressor_protocol <regressor_protocol/0::diagnostic/2>`, :ref:`text_vectorizer_protocol <text_vectorizer_protocol/0::diagnostic/2>`, :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostic/2>`
 
 .. only:: not latex
 
@@ -7078,6 +7090,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    * :ref:`classifier_protocol <classifier_protocol/0::diagnostics/2>`
    * :ref:`clusterer_protocol <clusterer_protocol/0::diagnostics/2>`
    * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::diagnostics/2>`
+   * :ref:`forecaster_protocol <forecaster_protocol/0::diagnostics/2>`
    * :ref:`pattern_miner_protocol <pattern_miner_protocol/0::diagnostics/2>`
    * :ref:`ranker_protocol <ranker_protocol/0::diagnostics/2>`
    * :ref:`regressor_protocol <regressor_protocol/0::diagnostics/2>`
@@ -7086,7 +7099,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: latex
 
-   * ``diagnostics/2`` - :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::diagnostics/2>`, :ref:`association_rule_miner_protocol <association_rule_miner_protocol/0::diagnostics/2>`, :ref:`classifier_protocol <classifier_protocol/0::diagnostics/2>`, :ref:`clusterer_protocol <clusterer_protocol/0::diagnostics/2>`, :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::diagnostics/2>`, :ref:`pattern_miner_protocol <pattern_miner_protocol/0::diagnostics/2>`, :ref:`ranker_protocol <ranker_protocol/0::diagnostics/2>`, :ref:`regressor_protocol <regressor_protocol/0::diagnostics/2>`, :ref:`text_vectorizer_protocol <text_vectorizer_protocol/0::diagnostics/2>`, :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostics/2>`
+   * ``diagnostics/2`` - :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::diagnostics/2>`, :ref:`association_rule_miner_protocol <association_rule_miner_protocol/0::diagnostics/2>`, :ref:`classifier_protocol <classifier_protocol/0::diagnostics/2>`, :ref:`clusterer_protocol <clusterer_protocol/0::diagnostics/2>`, :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::diagnostics/2>`, :ref:`forecaster_protocol <forecaster_protocol/0::diagnostics/2>`, :ref:`pattern_miner_protocol <pattern_miner_protocol/0::diagnostics/2>`, :ref:`ranker_protocol <ranker_protocol/0::diagnostics/2>`, :ref:`regressor_protocol <regressor_protocol/0::diagnostics/2>`, :ref:`text_vectorizer_protocol <text_vectorizer_protocol/0::diagnostics/2>`, :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostics/2>`
 
 .. only:: not latex
 
@@ -9778,13 +9791,14 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    * :ref:`classifier_protocol <classifier_protocol/0::export_to_clauses/4>`
    * :ref:`clusterer_protocol <clusterer_protocol/0::export_to_clauses/4>`
    * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::export_to_clauses/4>`
+   * :ref:`forecaster_protocol <forecaster_protocol/0::export_to_clauses/4>`
    * :ref:`pattern_miner_protocol <pattern_miner_protocol/0::export_to_clauses/4>`
    * :ref:`ranker_protocol <ranker_protocol/0::export_to_clauses/4>`
    * :ref:`regressor_protocol <regressor_protocol/0::export_to_clauses/4>`
 
 .. only:: latex
 
-   * ``export_to_clauses/4`` - :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::export_to_clauses/4>`, :ref:`association_rule_miner_protocol <association_rule_miner_protocol/0::export_to_clauses/4>`, :ref:`classifier_protocol <classifier_protocol/0::export_to_clauses/4>`, :ref:`clusterer_protocol <clusterer_protocol/0::export_to_clauses/4>`, :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::export_to_clauses/4>`, :ref:`pattern_miner_protocol <pattern_miner_protocol/0::export_to_clauses/4>`, :ref:`ranker_protocol <ranker_protocol/0::export_to_clauses/4>`, :ref:`regressor_protocol <regressor_protocol/0::export_to_clauses/4>`
+   * ``export_to_clauses/4`` - :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::export_to_clauses/4>`, :ref:`association_rule_miner_protocol <association_rule_miner_protocol/0::export_to_clauses/4>`, :ref:`classifier_protocol <classifier_protocol/0::export_to_clauses/4>`, :ref:`clusterer_protocol <clusterer_protocol/0::export_to_clauses/4>`, :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::export_to_clauses/4>`, :ref:`forecaster_protocol <forecaster_protocol/0::export_to_clauses/4>`, :ref:`pattern_miner_protocol <pattern_miner_protocol/0::export_to_clauses/4>`, :ref:`ranker_protocol <ranker_protocol/0::export_to_clauses/4>`, :ref:`regressor_protocol <regressor_protocol/0::export_to_clauses/4>`
 
 .. only:: not latex
 
@@ -9796,13 +9810,14 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    * :ref:`classifier_protocol <classifier_protocol/0::export_to_file/4>`
    * :ref:`clusterer_protocol <clusterer_protocol/0::export_to_file/4>`
    * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::export_to_file/4>`
+   * :ref:`forecaster_protocol <forecaster_protocol/0::export_to_file/4>`
    * :ref:`pattern_miner_protocol <pattern_miner_protocol/0::export_to_file/4>`
    * :ref:`ranker_protocol <ranker_protocol/0::export_to_file/4>`
    * :ref:`regressor_protocol <regressor_protocol/0::export_to_file/4>`
 
 .. only:: latex
 
-   * ``export_to_file/4`` - :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::export_to_file/4>`, :ref:`association_rule_miner_protocol <association_rule_miner_protocol/0::export_to_file/4>`, :ref:`classifier_protocol <classifier_protocol/0::export_to_file/4>`, :ref:`clusterer_protocol <clusterer_protocol/0::export_to_file/4>`, :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::export_to_file/4>`, :ref:`pattern_miner_protocol <pattern_miner_protocol/0::export_to_file/4>`, :ref:`ranker_protocol <ranker_protocol/0::export_to_file/4>`, :ref:`regressor_protocol <regressor_protocol/0::export_to_file/4>`
+   * ``export_to_file/4`` - :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::export_to_file/4>`, :ref:`association_rule_miner_protocol <association_rule_miner_protocol/0::export_to_file/4>`, :ref:`classifier_protocol <classifier_protocol/0::export_to_file/4>`, :ref:`clusterer_protocol <clusterer_protocol/0::export_to_file/4>`, :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::export_to_file/4>`, :ref:`forecaster_protocol <forecaster_protocol/0::export_to_file/4>`, :ref:`pattern_miner_protocol <pattern_miner_protocol/0::export_to_file/4>`, :ref:`ranker_protocol <ranker_protocol/0::export_to_file/4>`, :ref:`regressor_protocol <regressor_protocol/0::export_to_file/4>`
 
 .. only:: not latex
 
@@ -10955,6 +10970,28 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``forecast/3``
+   --------------
+
+   * :ref:`forecaster_protocol <forecaster_protocol/0::forecast/3>`
+
+.. only:: latex
+
+   * ``forecast/3`` - :ref:`forecaster_protocol <forecaster_protocol/0::forecast/3>`
+
+.. only:: not latex
+
+   ``forecaster_options/2``
+   ------------------------
+
+   * :ref:`forecaster_protocol <forecaster_protocol/0::forecaster_options/2>`
+
+.. only:: latex
+
+   * ``forecaster_options/2`` - :ref:`forecaster_protocol <forecaster_protocol/0::forecaster_options/2>`
+
+.. only:: not latex
+
    ``form_body/2``
    ---------------
 
@@ -11329,6 +11366,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``freeze/2`` - :ref:`coroutining <coroutining/0::freeze/2>`
+
+.. only:: not latex
+
+   ``frequency/1``
+   ---------------
+
+   * :ref:`time_series_dataset_protocol <time_series_dataset_protocol/0::frequency/1>`
+
+.. only:: latex
+
+   * ``frequency/1`` - :ref:`time_series_dataset_protocol <time_series_dataset_protocol/0::frequency/1>`
 
 .. only:: not latex
 
@@ -15814,6 +15862,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    * :ref:`classifier_protocol <classifier_protocol/0::learn/2>`
    * :ref:`clusterer_protocol <clusterer_protocol/0::learn/2>`
    * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::learn/2>`
+   * :ref:`forecaster_protocol <forecaster_protocol/0::learn/2>`
    * :ref:`metagol <metagol/0::learn/2>`
    * :ref:`ranker_protocol <ranker_protocol/0::learn/2>`
    * :ref:`regressor_protocol <regressor_protocol/0::learn/2>`
@@ -15821,7 +15870,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: latex
 
-   * ``learn/2`` - :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::learn/2>`, :ref:`classifier_protocol <classifier_protocol/0::learn/2>`, :ref:`clusterer_protocol <clusterer_protocol/0::learn/2>`, :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::learn/2>`, :ref:`metagol <metagol/0::learn/2>`, :ref:`ranker_protocol <ranker_protocol/0::learn/2>`, :ref:`regressor_protocol <regressor_protocol/0::learn/2>`, :ref:`text_vectorizer_protocol <text_vectorizer_protocol/0::learn/2>`
+   * ``learn/2`` - :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::learn/2>`, :ref:`classifier_protocol <classifier_protocol/0::learn/2>`, :ref:`clusterer_protocol <clusterer_protocol/0::learn/2>`, :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::learn/2>`, :ref:`forecaster_protocol <forecaster_protocol/0::learn/2>`, :ref:`metagol <metagol/0::learn/2>`, :ref:`ranker_protocol <ranker_protocol/0::learn/2>`, :ref:`regressor_protocol <regressor_protocol/0::learn/2>`, :ref:`text_vectorizer_protocol <text_vectorizer_protocol/0::learn/2>`
 
 .. only:: not latex
 
@@ -15832,6 +15881,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    * :ref:`classifier_protocol <classifier_protocol/0::learn/3>`
    * :ref:`clusterer_protocol <clusterer_protocol/0::learn/3>`
    * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::learn/3>`
+   * :ref:`forecaster_protocol <forecaster_protocol/0::learn/3>`
    * :ref:`metagol <metagol/0::learn/3>`
    * :ref:`ranker_protocol <ranker_protocol/0::learn/3>`
    * :ref:`regressor_protocol <regressor_protocol/0::learn/3>`
@@ -15840,7 +15890,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: latex
 
-   * ``learn/3`` - :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::learn/3>`, :ref:`classifier_protocol <classifier_protocol/0::learn/3>`, :ref:`clusterer_protocol <clusterer_protocol/0::learn/3>`, :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::learn/3>`, :ref:`metagol <metagol/0::learn/3>`, :ref:`ranker_protocol <ranker_protocol/0::learn/3>`, :ref:`regressor_protocol <regressor_protocol/0::learn/3>`, :ref:`text_vectorizer_protocol <text_vectorizer_protocol/0::learn/3>`, :ref:`truncated_svd_projection <truncated_svd_projection/0::learn/3>`
+   * ``learn/3`` - :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::learn/3>`, :ref:`classifier_protocol <classifier_protocol/0::learn/3>`, :ref:`clusterer_protocol <clusterer_protocol/0::learn/3>`, :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::learn/3>`, :ref:`forecaster_protocol <forecaster_protocol/0::learn/3>`, :ref:`metagol <metagol/0::learn/3>`, :ref:`ranker_protocol <ranker_protocol/0::learn/3>`, :ref:`regressor_protocol <regressor_protocol/0::learn/3>`, :ref:`text_vectorizer_protocol <text_vectorizer_protocol/0::learn/3>`, :ref:`truncated_svd_projection <truncated_svd_projection/0::learn/3>`
 
 .. only:: not latex
 
@@ -20958,6 +21008,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``observation/2``
+   -----------------
+
+   * :ref:`time_series_dataset_protocol <time_series_dataset_protocol/0::observation/2>`
+
+.. only:: latex
+
+   * ``observation/2`` - :ref:`time_series_dataset_protocol <time_series_dataset_protocol/0::observation/2>`
+
+.. only:: not latex
+
    ``occurrences/2``
    -----------------
 
@@ -24200,6 +24261,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``print_flags/1`` - :ref:`flags <flags/0::print_flags/1>`
+
+.. only:: not latex
+
+   ``print_forecaster/1``
+   ----------------------
+
+   * :ref:`forecaster_protocol <forecaster_protocol/0::print_forecaster/1>`
+
+.. only:: latex
+
+   * ``print_forecaster/1`` - :ref:`forecaster_protocol <forecaster_protocol/0::print_forecaster/1>`
 
 .. only:: not latex
 
@@ -28930,6 +29002,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``series_length/1``
+   -------------------
+
+   * :ref:`time_series_dataset_protocol <time_series_dataset_protocol/0::series_length/1>`
+
+.. only:: latex
+
+   * ``series_length/1`` - :ref:`time_series_dataset_protocol <time_series_dataset_protocol/0::series_length/1>`
+
+.. only:: not latex
+
    ``serve/3``
    -----------
 
@@ -33635,6 +33718,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``valid_discontinuity_policy/1`` - :ref:`ccsds_link_profiles <ccsds_link_profiles/0::valid_discontinuity_policy/1>`, :ref:`ccsds_packet_services <ccsds_packet_services/0::valid_discontinuity_policy/1>`, :ref:`ccsds_tc_services <ccsds_tc_services/0::valid_discontinuity_policy/1>`
+
+.. only:: not latex
+
+   ``valid_forecaster/1``
+   ----------------------
+
+   * :ref:`forecaster_protocol <forecaster_protocol/0::valid_forecaster/1>`
+
+.. only:: latex
+
+   * ``valid_forecaster/1`` - :ref:`forecaster_protocol <forecaster_protocol/0::valid_forecaster/1>`
 
 .. only:: not latex
 
