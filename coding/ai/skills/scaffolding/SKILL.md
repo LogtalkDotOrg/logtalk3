@@ -78,6 +78,13 @@ my_app/
 
 Plus a configured `settings.lgt` in the location Logtalk uses for startup settings (often the Logtalk user directory), defining a library alias that points at `my_app` if you load via library notation.
 
+### SBOM support
+
+Ask the user if a SBOM would be required for the application. If true:
+
+- Load the `application` library using the goal `logtalk_load(application(loader))` in the `loader.lgt` and `tester.lgt` files.
+- Add a file named after the application containing an object importing `application_common` and defining the application metadata.
+
 ## After scaffolding
 
 ```logtalk
