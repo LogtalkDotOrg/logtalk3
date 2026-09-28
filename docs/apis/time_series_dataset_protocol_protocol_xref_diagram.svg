@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-151 422,-151 422,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol time_series_dataset_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;09&#45;28, 01:28</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;09&#45;28, 22:49</text>
 <g id="clust1" class="cluster">
 <title>cluster_time_series_dataset_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="time_series_dataset_protocol">
 <path fill="snow" stroke="dimgray" d="M22,-54.25C22,-54.25 396,-54.25 396,-54.25 402,-54.25 408,-60.25 408,-66.25 408,-66.25 408,-127 408,-127 408,-133 402,-139 396,-139 396,-139 22,-139 22,-139 16,-139 10,-133 10,-127 10,-127 10,-66.25 10,-66.25 10,-60.25 16,-54.25 22,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f981e2b4cbb54ad929a77208a3cecb4caa3ad24d/library/time_series_protocols/time_series_dataset_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f981e2b4cbb54ad929a77208a3cecb4caa3ad24d/library/time_series_protocols/time_series_dataset_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6380ecca84badd4c0aaeecca8e9fea5ead9828d8/library/time_series_protocols/time_series_dataset_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6380ecca84badd4c0aaeecca8e9fea5ead9828d8/library/time_series_protocols/time_series_dataset_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="22" y="-121.25" font-family="Monospace" font-size="10.00" fill="dimgray">time_series_dataset_protocol</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>observation/2</title>
 <polygon fill="springgreen" stroke="black" points="134.12,-100.25 19.87,-100.25 19.87,-64.25 134.12,-64.25 134.12,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="27.88" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f981e2b4cbb54ad929a77208a3cecb4caa3ad24d/library/time_series_protocols/time_series_dataset_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f981e2b4cbb54ad929a77208a3cecb4caa3ad24d/library/time_series_protocols/time_series_dataset_protocol.lgt#L31">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6380ecca84badd4c0aaeecca8e9fea5ead9828d8/library/time_series_protocols/time_series_dataset_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6380ecca84badd4c0aaeecca8e9fea5ead9828d8/library/time_series_protocols/time_series_dataset_protocol.lgt#L31">
 <text xml:space="preserve" text-anchor="start" x="33.12" y="-84.12" font-family="Monospace" font-size="11.00">observation/2</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>series_length/1</title>
 <polygon fill="springgreen" stroke="black" points="279.88,-100.25 152.12,-100.25 152.12,-64.25 279.88,-64.25 279.88,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="160.12" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f981e2b4cbb54ad929a77208a3cecb4caa3ad24d/library/time_series_protocols/time_series_dataset_protocol.lgt#L38" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f981e2b4cbb54ad929a77208a3cecb4caa3ad24d/library/time_series_protocols/time_series_dataset_protocol.lgt#L38">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6380ecca84badd4c0aaeecca8e9fea5ead9828d8/library/time_series_protocols/time_series_dataset_protocol.lgt#L38" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6380ecca84badd4c0aaeecca8e9fea5ead9828d8/library/time_series_protocols/time_series_dataset_protocol.lgt#L38">
 <text xml:space="preserve" text-anchor="start" x="165.38" y="-84.12" font-family="Monospace" font-size="11.00">series_length/1</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>frequency/1</title>
 <polygon fill="springgreen" stroke="black" points="398.38,-100.25 297.62,-100.25 297.62,-64.25 398.38,-64.25 398.38,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="305.62" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f981e2b4cbb54ad929a77208a3cecb4caa3ad24d/library/time_series_protocols/time_series_dataset_protocol.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f981e2b4cbb54ad929a77208a3cecb4caa3ad24d/library/time_series_protocols/time_series_dataset_protocol.lgt#L45">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6380ecca84badd4c0aaeecca8e9fea5ead9828d8/library/time_series_protocols/time_series_dataset_protocol.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6380ecca84badd4c0aaeecca8e9fea5ead9828d8/library/time_series_protocols/time_series_dataset_protocol.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="310.88" y="-84.12" font-family="Monospace" font-size="11.00">frequency/1</text>
 </a>
 </g>
