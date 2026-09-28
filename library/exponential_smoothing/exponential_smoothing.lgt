@@ -1241,7 +1241,7 @@
 	% (n - k - 1) is not positive are rejected outright
 
 	aicc_score(Method, Frequency, Initialization, SumSquaredError, ErrorCount, ParameterSpecification, LambdaAutomatic, Score) :-
-		count_automatic_parameters(ParameterSpecification, AutomaticCount),
+		count_automatic_parameters(ParameterSpecification, 0, AutomaticCount),
 		count_optimized_initial_parameters(Initialization, Method, Frequency, InitialCount),
 		count_automatic_lambda(LambdaAutomatic, LambdaCount),
 		K is AutomaticCount + InitialCount + LambdaCount + 1,
@@ -1257,14 +1257,14 @@
 	count_automatic_lambda(true, 1).
 	count_automatic_lambda(false, 0).
 
-	count_automatic_parameters([], 0).
-	count_automatic_parameters([Option| Options], Count) :-
+	count_automatic_parameters([], Count, Count).
+	count_automatic_parameters([Option| Options], Count0, Count) :-
 		Option =.. [_Name, Value],
-		count_automatic_parameters(Options, Count0),
 		(	Value == auto ->
-			Count is Count0 + 1
-		;	Count = Count0
-		).
+			Count1 is Count0 + 1
+		;	Count1 = Count0
+		),
+		count_automatic_parameters(Options, Count1, Count).
 
 	count_optimized_initial_parameters(optimized, simple, none, 1) :-
 		!.
