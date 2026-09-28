@@ -57,8 +57,8 @@ series forecasting using autoregressive (AR) models fitted by least squares.
 `http_websocket_service`, `integer_partitions`, `intervals`, `json_graph`,
 `json_path`, `mcp_server`, `linear_programming`, `mqtt`, `nmea`,
 `numerical_analysis`, `open_api`, `ranking_protocols`, `sqids`,
-`regression_tree`, `spectral_clusterer`, `umap_projection`, `uri_template`,
-and `wkt_wkb` libraries.
+`regression_tree`, `spectral_clusterer`, `tsne_projection`, `umap_projection`,
+`uri_template`, and `wkt_wkb` libraries.
 
 Tools
 -----

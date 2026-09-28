@@ -23,9 +23,9 @@
 	imports(dimension_reducer_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-19,
+		date is 2026-09-28,
 		comment is 'Exact t-distributed Stochastic Neighbor Embedding dimension reducer for continuous datasets.',
 		see_also is [kernel_pca_projection, pca_projection, random_projection]
 	]).
@@ -448,7 +448,7 @@
 		optimization_phase(Iteration, Options, ProbabilityScale, Momentum),
 		gradient_matrix(Probabilities, QProbabilities, Weights, Embedding0, ProbabilityScale, Gradients),
 		^^option(learning_rate(LearningRate), Options),
-		update_embedding(Embedding0, Gradients, PreviousUpdates0, Gains0, LearningRate, Momentum, Embedding1, PreviousUpdates, Gains, Delta),
+		update_embedding(Embedding0, Gradients, PreviousUpdates0, Gains0, LearningRate, Momentum, Embedding1, PreviousUpdates, Gains, 0.0, Delta),
 		center_embedding(Embedding1, CenteredEmbedding),
 		^^option(early_exaggeration_iterations(EarlyIterations), Options),
 		^^option(maximum_iterations(MaximumIterations), Options),
@@ -536,22 +536,22 @@
 		Result is Accumulator + Factor * (Left - Right),
 		add_scaled_difference(Lefts, Rights, Factor, Accumulators, Results).
 
-	update_embedding([], [], [], [], _LearningRate, _Momentum, [], [], [], 0.0).
-	update_embedding([Row| Rows], [Gradient| Gradients], [PreviousUpdate| PreviousUpdates0], [Gain| Gains0], LearningRate, Momentum, [UpdatedRow| UpdatedRows], [Update| Updates], [UpdatedGain| UpdatedGains], Delta) :-
-		update_row(Row, Gradient, PreviousUpdate, Gain, LearningRate, Momentum, UpdatedRow, Update, UpdatedGain, RowDelta),
-		update_embedding(Rows, Gradients, PreviousUpdates0, Gains0, LearningRate, Momentum, UpdatedRows, Updates, UpdatedGains, RowsDelta),
-		Delta is max(RowDelta, RowsDelta).
+	update_embedding([], [], [], [], _LearningRate, _Momentum, [], [], [], Delta, Delta).
+	update_embedding([Row| Rows], [Gradient| Gradients], [PreviousUpdate| PreviousUpdates0], [Gain| Gains0], LearningRate, Momentum, [UpdatedRow| UpdatedRows], [Update| Updates], [UpdatedGain| UpdatedGains], Delta0, Delta) :-
+		update_row(Row, Gradient, PreviousUpdate, Gain, LearningRate, Momentum, UpdatedRow, Update, UpdatedGain, 0.0, RowDelta),
+		Delta1 is max(RowDelta, Delta0),
+		update_embedding(Rows, Gradients, PreviousUpdates0, Gains0, LearningRate, Momentum, UpdatedRows, Updates, UpdatedGains, Delta1, Delta).
 
-	update_row([], [], [], [], _LearningRate, _Momentum, [], [], [], 0.0).
-	update_row([Coordinate| Coordinates], [Gradient| Gradients], [PreviousUpdate| PreviousUpdates], [Gain| Gains], LearningRate, Momentum, [UpdatedCoordinate| UpdatedCoordinates], [Update| Updates], [UpdatedGain| UpdatedGains], Delta) :-
+	update_row([], [], [], [], _LearningRate, _Momentum, [], [], [], Delta, Delta).
+	update_row([Coordinate| Coordinates], [Gradient| Gradients], [PreviousUpdate| PreviousUpdates], [Gain| Gains], LearningRate, Momentum, [UpdatedCoordinate| UpdatedCoordinates], [Update| Updates], [UpdatedGain| UpdatedGains], Delta0, Delta) :-
 		(	Gradient * PreviousUpdate < 0.0 ->
 			UpdatedGain is Gain + 0.2
 		;	UpdatedGain is max(0.01, Gain * 0.8)
 		),
 		Update is Momentum * PreviousUpdate - LearningRate * UpdatedGain * Gradient,
 		UpdatedCoordinate is Coordinate + Update,
-		update_row(Coordinates, Gradients, PreviousUpdates, Gains, LearningRate, Momentum, UpdatedCoordinates, Updates, UpdatedGains, TailDelta),
-		Delta is max(abs(Update), TailDelta).
+		Delta1 is max(abs(Update), Delta0),
+		update_row(Coordinates, Gradients, PreviousUpdates, Gains, LearningRate, Momentum, UpdatedCoordinates, Updates, UpdatedGains, Delta1, Delta).
 
 	center_embedding(Embedding, CenteredEmbedding) :-
 		transpose_matrix(Embedding, Columns),
@@ -609,7 +609,7 @@
 	iterate_new_coordinates(Probabilities, EmbeddingRows, Options, Iteration0, Coordinates0, PreviousUpdate0, Coordinates) :-
 		new_point_gradient(Probabilities, EmbeddingRows, Coordinates0, Gradient),
 		^^option(learning_rate(LearningRate), Options),
-		update_new_coordinates(Coordinates0, Gradient, PreviousUpdate0, LearningRate, 0.5, Coordinates1, PreviousUpdate, Delta),
+		update_new_coordinates(Coordinates0, Gradient, PreviousUpdate0, LearningRate, 0.5, Coordinates1, PreviousUpdate, 0.0, Delta),
 		Iteration is Iteration0 + 1,
 		^^option(maximum_iterations(MaximumIterations), Options),
 		^^option(tolerance(Tolerance), Options),
@@ -633,12 +633,12 @@
 		Sum1 is Sum0 + Weight,
 		new_point_weights(Rows, Coordinates, Weights, Sum1, Sum).
 
-	update_new_coordinates([], [], [], _LearningRate, _Momentum, [], [], 0.0).
-	update_new_coordinates([Coordinate| Coordinates], [Gradient| Gradients], [PreviousUpdate| PreviousUpdates], LearningRate, Momentum, [UpdatedCoordinate| UpdatedCoordinates], [Update| Updates], Delta) :-
+	update_new_coordinates([], [], [], _LearningRate, _Momentum, [], [], Delta, Delta).
+	update_new_coordinates([Coordinate| Coordinates], [Gradient| Gradients], [PreviousUpdate| PreviousUpdates], LearningRate, Momentum, [UpdatedCoordinate| UpdatedCoordinates], [Update| Updates], Delta0, Delta) :-
 		Update is Momentum * PreviousUpdate - LearningRate * Gradient,
 		UpdatedCoordinate is Coordinate + Update,
-		update_new_coordinates(Coordinates, Gradients, PreviousUpdates, LearningRate, Momentum, UpdatedCoordinates, Updates, TailDelta),
-		Delta is max(abs(Update), TailDelta).
+		Delta1 is max(abs(Update), Delta0),
+		update_new_coordinates(Coordinates, Gradients, PreviousUpdates, LearningRate, Momentum, UpdatedCoordinates, Updates, Delta1, Delta).
 
 	coordinate_pairs([], _Index, []).
 	coordinate_pairs([Coordinate| Coordinates], Index, [Name-Coordinate| Pairs]) :-
