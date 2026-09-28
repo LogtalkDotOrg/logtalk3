@@ -49,6 +49,7 @@ Categories
       directed_graph_common <directed_graph_common_0>
       directory_diagram(Format) <directory_diagram_1>
       ed25519 <ed25519_0>
+      exponential_smoothing_common <exponential_smoothing_common_0>
       file_diagram(Format) <file_diagram_1>
       flags <flags_0>
       flatting <flatting_0>
@@ -177,6 +178,7 @@ Categories
    * :doc:`directed_graph_common <directed_graph_common_0>`
    * :doc:`directory_diagram(Format) <directory_diagram_1>`
    * :doc:`ed25519 <ed25519_0>`
+   * :doc:`exponential_smoothing_common <exponential_smoothing_common_0>`
    * :doc:`file_diagram(Format) <file_diagram_1>`
    * :doc:`flags <flags_0>`
    * :doc:`flatting <flatting_0>`
@@ -473,6 +475,8 @@ Objects
       expand_library_alias_paths <expand_library_alias_paths_0>
       expected <expected_0>
       expected(Expected) <expected_1>
+      exponential_smoothing <exponential_smoothing_0>
+      exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification,MissingMarker) <exponential_smoothing_problem_7>
       fa_language_profile <fa_language_profile_0>
       fail_insertion(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <fail_insertion_5>
       fast_random <fast_random_0>
@@ -1320,6 +1324,8 @@ Objects
    * :doc:`expand_library_alias_paths <expand_library_alias_paths_0>`
    * :doc:`expected <expected_0>`
    * :doc:`expected(Expected) <expected_1>`
+   * :doc:`exponential_smoothing <exponential_smoothing_0>`
+   * :doc:`exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification,MissingMarker) <exponential_smoothing_problem_7>`
    * :doc:`fa_language_profile <fa_language_profile_0>`
    * :doc:`fail_insertion(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <fail_insertion_5>`
    * :doc:`fast_random <fast_random_0>`

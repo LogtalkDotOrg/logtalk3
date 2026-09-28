@@ -134,7 +134,7 @@ Library groups
     ``eclat_pattern_miner``, ``fp_growth_pattern_miner``,
     ``gsp_pattern_miner``, ``prefix_span_pattern_miner``, and
     ``spade_pattern_miner``.
-  - Time series: ``time_series_protocols``.
+  - Time series: ``time_series_protocols``, ``exponential_smoothing``.
 
 In addition to the loader-based libraries, this directory also contains
 a small number of standalone reusable entities, namely ``attributes``,

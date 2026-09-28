@@ -1400,6 +1400,24 @@ To load an entity, always load the library that includes it using the goal ``log
    * :doc:`expected <expected_0>`
    * :doc:`expected(Expected) <expected_1>`
 
+``library/exponential_smoothing/``
+----------------------------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      exponential_smoothing <exponential_smoothing_0>
+      exponential_smoothing_common <exponential_smoothing_common_0>
+      exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification,MissingMarker) <exponential_smoothing_problem_7>
+
+.. only:: latex
+
+   * :doc:`exponential_smoothing <exponential_smoothing_0>`
+   * :doc:`exponential_smoothing_common <exponential_smoothing_common_0>`
+   * :doc:`exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification,MissingMarker) <exponential_smoothing_problem_7>`
+
 ``library/format/``
 -------------------
 

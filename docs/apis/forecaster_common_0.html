@@ -142,6 +142,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ewma-anomaly-detector"><span class="xref std std-ref">ewma_anomaly_detector</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#expand-library-alias-paths"><span class="xref std std-ref">expand_library_alias_paths</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#expecteds"><span class="xref std std-ref">expecteds</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#exponential-smoothing"><span class="xref std std-ref">exponential_smoothing</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#fcube"><span class="xref std std-ref">fcube</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#flags"><span class="xref std std-ref">flags</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#format"><span class="xref std std-ref">format</span></a></li>
@@ -472,8 +473,10 @@
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
 <div class="line"><a class="reference internal" href="format_0.html#format-0"><span class="std std-ref">format</span></a></div>
+<div class="line"><a class="reference internal" href="integer_0.html#integer-0"><span class="std std-ref">integer</span></a></div>
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
 <div class="line"><a class="reference internal" href="numberlist_0.html#numberlist-0"><span class="std std-ref">numberlist</span></a></div>
+<div class="line"><a class="reference internal" href="pairs_0.html#pairs-0"><span class="std std-ref">pairs</span></a></div>
 <div class="line"><a class="reference internal" href="type_0.html#type-0"><span class="std std-ref">type</span></a></div>
 </div>
 </div>
@@ -511,11 +514,13 @@
 <li><p><a class="reference internal" href="#root-mean-squared-error-3" id="id17"><code class="docutils literal notranslate"><span class="pre">root_mean_squared_error/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#mean-absolute-percentage-error-3" id="id18"><code class="docutils literal notranslate"><span class="pre">mean_absolute_percentage_error/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#naive-forecast-3" id="id19"><code class="docutils literal notranslate"><span class="pre">naive_forecast/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#seasonal-naive-forecast-4" id="id20"><code class="docutils literal notranslate"><span class="pre">seasonal_naive_forecast/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#check-forecast-horizon-1" id="id20"><code class="docutils literal notranslate"><span class="pre">check_forecast_horizon/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#seasonal-naive-forecast-4" id="id21"><code class="docutils literal notranslate"><span class="pre">seasonal_naive_forecast/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#check-frequency-1" id="id22"><code class="docutils literal notranslate"><span class="pre">check_frequency/1</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#private-predicates" id="id21">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id22">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id23">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id24">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -610,7 +615,7 @@
 </section>
 <section id="dataset-series-2">
 <span id="forecaster-common-0-dataset-series-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">dataset_series/2</span></code></a><a class="headerlink" href="#dataset-series-2" title="Link to this heading"></a></h3>
-<p>Collects the dataset time-ordered observation values. Checks that the observation indices form a complete, gap-free, 1-based sequence.</p>
+<p>Collects the dataset time-ordered observation values. Checks that the observation indices form a complete, gap-free, 1-based sequence and that the declared series length matches the observed length.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -624,7 +629,36 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dataset_series(+object_identifier,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dataset_series(+object_identifier,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The dataset contains no observations:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_series,Dataset)</span></code></div>
+</div>
+<div class="line">The observation indices do not form a complete, gap-free, 1-based sequence:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(series_index_sequence,Dataset)</span></code></div>
+</div>
+<div class="line">The declared series length is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The declared series length is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,DeclaredLength)</span></code></div>
+</div>
+<div class="line">The declared series length is an integer but is not positive:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,DeclaredLength)</span></code></div>
+</div>
+<div class="line">The declared and observed series lengths differ:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(series_length,DeclaredLength,ObservedLength)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -651,13 +685,17 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Series</span></code> is a partial list or a list with an element which is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Value</span></code> of the <code class="docutils literal notranslate"><span class="pre">Series</span></code> list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Value)</span></code></div>
+</div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Series</span></code> is empty:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_series,Dataset)</span></code></div>
-</div>
-<div class="line">An observation value is not a number:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Value)</span></code></div>
 </div>
 </div>
 </div>
@@ -679,12 +717,24 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">check_series_length(+object_identifier,+list,+integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_series_length(+object_identifier,+list,+non_negative_integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">MinimumLength</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">MinimumLength</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,MinimumLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">MinimumLength</span></code> is an integer but is negative:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,MinimumLength)</span></code></div>
+</div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Series</span></code> is shorter than <code class="docutils literal notranslate"><span class="pre">MinimumLength</span></code>:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(series_length,Dataset)</span></code></div>
@@ -772,7 +822,16 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">difference_series(+list(number),-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">difference_series(+list(number),-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Series</span></code> is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_series,Series)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -814,12 +873,24 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">lagged_rows(+list(number),+integer,-list(pair))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">lagged_rows(+list(number),+positive_integer,-list(pair))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Order</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Order</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Order)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Order</span></code> is an integer but is not positive:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,Order)</span></code></div>
+</div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Series</span></code> has <code class="docutils literal notranslate"><span class="pre">Order</span></code> or fewer observations:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(series_length,Series)</span></code></div>
@@ -844,7 +915,20 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">mean_absolute_error(+list(number),+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">mean_absolute_error(+list(number),+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">An input series is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_series,Series)</span></code></div>
+</div>
+<div class="line">The actual and predicted series have different lengths:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(same_length,Actual,Predicted)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -865,7 +949,20 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">root_mean_squared_error(+list(number),+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">root_mean_squared_error(+list(number),+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">An input series is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_series,Series)</span></code></div>
+</div>
+<div class="line">The actual and predicted series have different lengths:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(same_length,Actual,Predicted)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -892,6 +989,14 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
+<div class="line">An input series is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_series,Series)</span></code></div>
+</div>
+<div class="line">The actual and predicted series have different lengths:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(same_length,Actual,Predicted)</span></code></div>
+</div>
 <div class="line">An actual value is zero:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(zero_divisor)</span></code></div>
@@ -902,7 +1007,7 @@
 </section>
 <section id="naive-forecast-3">
 <span id="forecaster-common-0-naive-forecast-3"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">naive_forecast/3</span></code></a><a class="headerlink" href="#naive-forecast-3" title="Link to this heading"></a></h3>
-<p>Repeats the last observed series value <code class="docutils literal notranslate"><span class="pre">Horizon</span></code> times (the naive/persistence baseline forecast).</p>
+<p>Repeats the last observed series value <code class="docutils literal notranslate"><span class="pre">Horizon</span></code> times (the naive/persistence baseline forecast). A zero horizon returns an empty list.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -916,13 +1021,51 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">naive_forecast(+list(number),+integer,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">naive_forecast(+list(number),+non_negative_integer,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Horizon</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Horizon</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Horizon)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Horizon</span></code> is an integer but is negative:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Horizon)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="check-forecast-horizon-1">
+<span id="forecaster-common-0-check-forecast-horizon-1"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_forecast_horizon/1</span></code></a><a class="headerlink" href="#check-forecast-horizon-1" title="Link to this heading"></a></h3>
+<p>Checks that a forecast horizon is a non-negative integer.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_forecast_horizon(Horizon)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_forecast_horizon(+non_negative_integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="seasonal-naive-forecast-4">
-<span id="forecaster-common-0-seasonal-naive-forecast-4"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seasonal_naive_forecast/4</span></code></a><a class="headerlink" href="#seasonal-naive-forecast-4" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-seasonal-naive-forecast-4"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seasonal_naive_forecast/4</span></code></a><a class="headerlink" href="#seasonal-naive-forecast-4" title="Link to this heading"></a></h3>
 <p>Repeats the last full seasonal cycle of <code class="docutils literal notranslate"><span class="pre">Frequency</span></code> observations, cycling as needed to cover <code class="docutils literal notranslate"><span class="pre">Horizon</span></code> forecasts (the seasonal naive baseline forecast).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -937,16 +1080,61 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_naive_forecast(+list(number),+integer,+integer,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_naive_forecast(+list(number),+positive_integer,+non_negative_integer,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frequency</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frequency</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Frequency)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frequency</span></code> is an integer but is not positive:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,Frequency)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Horizon</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Horizon</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Horizon)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Horizon</span></code> is an integer but is negative:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Horizon)</span></code></div>
+</div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Series</span></code> has fewer than <code class="docutils literal notranslate"><span class="pre">Frequency</span></code> observations:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(series_length,Series)</span></code></div>
 </div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="check-frequency-1">
+<span id="forecaster-common-0-check-frequency-1"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_frequency/1</span></code></a><a class="headerlink" href="#check-frequency-1" title="Link to this heading"></a></h3>
+<p>Checks that a seasonal frequency is a positive integer.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_frequency(Frequency)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_frequency(+positive_integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 </section>

@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>exponential_smoothing &mdash; Logtalk 3.103.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=4823beec"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="format" href="format.html" />
+    <link rel="prev" title="expecteds" href="expecteds.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            The Logtalk Handbook
+              <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.103.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adaptive_boosting_classifier.html"><code class="docutils literal notranslate"><span class="pre">adaptive_boosting_classifier</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="agglomerative_clusterer.html"><code class="docutils literal notranslate"><span class="pre">agglomerative_clusterer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="amqp.html"><code class="docutils literal notranslate"><span class="pre">amqp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="anomaly_detection_protocols.html"><code class="docutils literal notranslate"><span class="pre">anomaly_detection_protocols</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ant_colony.html"><code class="docutils literal notranslate"><span class="pre">ant_colony</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="application.html"><code class="docutils literal notranslate"><span class="pre">application</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="apriori_pattern_miner.html"><code class="docutils literal notranslate"><span class="pre">apriori_pattern_miner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="arbitrary.html"><code class="docutils literal notranslate"><span class="pre">arbitrary</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="arrangements.html"><code class="docutils literal notranslate"><span class="pre">arrangements</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="assignvars.html"><code class="docutils literal notranslate"><span class="pre">assignvars</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="association_rule_miner.html"><code class="docutils literal notranslate"><span class="pre">association_rule_miner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="atms.html"><code class="docutils literal notranslate"><span class="pre">atms</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="avro.html"><code class="docutils literal notranslate"><span class="pre">avro</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base32.html"><code class="docutils literal notranslate"><span class="pre">base32</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base58.html"><code class="docutils literal notranslate"><span class="pre">base58</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base64.html"><code class="docutils literal notranslate"><span class="pre">base64</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base85.html"><code class="docutils literal notranslate"><span class="pre">base85</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_types.html"><code class="docutils literal notranslate"><span class="pre">basic_types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="bayesian_ridge_regression.html"><code class="docutils literal notranslate"><span class="pre">bayesian_ridge_regression</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="block_ciphers.html"><code class="docutils literal notranslate"><span class="pre">block_ciphers</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="borda_ranker.html"><code class="docutils literal notranslate"><span class="pre">borda_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="bradley_terry_ranker.html"><code class="docutils literal notranslate"><span class="pre">bradley_terry_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="bson.html"><code class="docutils literal notranslate"><span class="pre">bson</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="byte_order.html"><code class="docutils literal notranslate"><span class="pre">byte_order</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="c45_classifier.html"><code class="docutils literal notranslate"><span class="pre">c45_classifier</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cartesian_products.html"><code class="docutils literal notranslate"><span class="pre">cartesian_products</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbor.html"><code class="docutils literal notranslate"><span class="pre">cbor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ccsds_frames.html"><code class="docutils literal notranslate"><span class="pre">ccsds_frames</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ccsds_link_profiles.html"><code class="docutils literal notranslate"><span class="pre">ccsds_link_profiles</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ccsds_packetization.html"><code class="docutils literal notranslate"><span class="pre">ccsds_packetization</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ccsds_packets.html"><code class="docutils literal notranslate"><span class="pre">ccsds_packets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ccsds_packet_services.html"><code class="docutils literal notranslate"><span class="pre">ccsds_packet_services</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ccsds_tc_services.html"><code class="docutils literal notranslate"><span class="pre">ccsds_tc_services</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ccsds_time_codes.html"><code class="docutils literal notranslate"><span class="pre">ccsds_time_codes</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ccsds_time_fields.html"><code class="docutils literal notranslate"><span class="pre">ccsds_time_fields</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="character_sets.html"><code class="docutils literal notranslate"><span class="pre">character_sets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="classification_protocols.html"><code class="docutils literal notranslate"><span class="pre">classification_protocols</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="clo_span_pattern_miner.html"><code class="docutils literal notranslate"><span class="pre">clo_span_pattern_miner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="clustering_protocols.html"><code class="docutils literal notranslate"><span class="pre">clustering_protocols</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmac.html"><code class="docutils literal notranslate"><span class="pre">cmac</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="colley_ranker.html"><code class="docutils literal notranslate"><span class="pre">colley_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="combinations.html"><code class="docutils literal notranslate"><span class="pre">combinations</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="command_line_options.html"><code class="docutils literal notranslate"><span class="pre">command_line_options</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="constrained_optimization.html"><code class="docutils literal notranslate"><span class="pre">constrained_optimization</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="copeland_ranker.html"><code class="docutils literal notranslate"><span class="pre">copeland_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html"><code class="docutils literal notranslate"><span class="pre">core</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="coroutining.html"><code class="docutils literal notranslate"><span class="pre">coroutining</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crontab.html"><code class="docutils literal notranslate"><span class="pre">crontab</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crs_projections.html"><code class="docutils literal notranslate"><span class="pre">crs_projections</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crypto.html"><code class="docutils literal notranslate"><span class="pre">crypto</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="csv.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cuid2.html"><code class="docutils literal notranslate"><span class="pre">cuid2</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cusum_anomaly_detector.html"><code class="docutils literal notranslate"><span class="pre">cusum_anomaly_detector</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="datalog.html"><code class="docutils literal notranslate"><span class="pre">datalog</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dates.html"><code class="docutils literal notranslate"><span class="pre">dates</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dates_tz.html"><code class="docutils literal notranslate"><span class="pre">dates_tz</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dbscan_clusterer.html"><code class="docutils literal notranslate"><span class="pre">dbscan_clusterer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependents.html"><code class="docutils literal notranslate"><span class="pre">dependents</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="deques.html"><code class="docutils literal notranslate"><span class="pre">deques</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="derangements.html"><code class="docutils literal notranslate"><span class="pre">derangements</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dictionaries.html"><code class="docutils literal notranslate"><span class="pre">dictionaries</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dif.html"><code class="docutils literal notranslate"><span class="pre">dif</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="differential_evolution.html"><code class="docutils literal notranslate"><span class="pre">differential_evolution</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dimension_reduction_protocols.html"><code class="docutils literal notranslate"><span class="pre">dimension_reduction_protocols</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="eclat_pattern_miner.html"><code class="docutils literal notranslate"><span class="pre">eclat_pattern_miner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="edcg.html"><code class="docutils literal notranslate"><span class="pre">edcg</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="elastic_net_regression.html"><code class="docutils literal notranslate"><span class="pre">elastic_net_regression</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="elo_ranker.html"><code class="docutils literal notranslate"><span class="pre">elo_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html"><code class="docutils literal notranslate"><span class="pre">events</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ewma_anomaly_detector.html"><code class="docutils literal notranslate"><span class="pre">ewma_anomaly_detector</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expand_library_alias_paths.html"><code class="docutils literal notranslate"><span class="pre">expand_library_alias_paths</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expecteds.html"><code class="docutils literal notranslate"><span class="pre">expecteds</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">exponential_smoothing</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#models">Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optimizer-strategies">Optimizer strategies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#missing-observations">Missing observations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#immutable-online-updates">Immutable online updates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#forecaster-representation">Forecaster representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#transformations">Transformations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prediction-intervals">Prediction intervals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="format.html"><code class="docutils literal notranslate"><span class="pre">format</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fp_growth_pattern_miner.html"><code class="docutils literal notranslate"><span class="pre">fp_growth_pattern_miner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="frequent_pattern_mining_protocols.html"><code class="docutils literal notranslate"><span class="pre">frequent_pattern_mining_protocols</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gaussian_mixture_clusterer.html"><code class="docutils literal notranslate"><span class="pre">gaussian_mixture_clusterer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gaussian_process_regression.html"><code class="docutils literal notranslate"><span class="pre">gaussian_process_regression</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="genetic_algorithm.html"><code class="docutils literal notranslate"><span class="pre">genetic_algorithm</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="genint.html"><code class="docutils literal notranslate"><span class="pre">genint</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gensym.html"><code class="docutils literal notranslate"><span class="pre">gensym</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="geohash.html"><code class="docutils literal notranslate"><span class="pre">geohash</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="geojson.html"><code class="docutils literal notranslate"><span class="pre">geojson</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="geospatial.html"><code class="docutils literal notranslate"><span class="pre">geospatial</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="git.html"><code class="docutils literal notranslate"><span class="pre">git</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="glicko2_periodic_ranker.html"><code class="docutils literal notranslate"><span class="pre">glicko2_periodic_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="glicko2_ranker.html"><code class="docutils literal notranslate"><span class="pre">glicko2_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpx.html"><code class="docutils literal notranslate"><span class="pre">gpx</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gradient_boosting_classifier.html"><code class="docutils literal notranslate"><span class="pre">gradient_boosting_classifier</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gradient_boosting_regression.html"><code class="docutils literal notranslate"><span class="pre">gradient_boosting_regression</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="grammars.html"><code class="docutils literal notranslate"><span class="pre">grammars</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="graphs.html"><code class="docutils literal notranslate"><span class="pre">graphs</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gravatar.html"><code class="docutils literal notranslate"><span class="pre">gravatar</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gsp_pattern_miner.html"><code class="docutils literal notranslate"><span class="pre">gsp_pattern_miner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hashes.html"><code class="docutils literal notranslate"><span class="pre">hashes</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hdbscan_clusterer.html"><code class="docutils literal notranslate"><span class="pre">hdbscan_clusterer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="heaps.html"><code class="docutils literal notranslate"><span class="pre">heaps</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hierarchical_clustering.html"><code class="docutils literal notranslate"><span class="pre">hierarchical_clustering</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hierarchies.html"><code class="docutils literal notranslate"><span class="pre">hierarchies</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hmac.html"><code class="docutils literal notranslate"><span class="pre">hmac</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hodge_rank.html"><code class="docutils literal notranslate"><span class="pre">hodge_rank</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_flows.html"><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_objects.html"><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="html.html"><code class="docutils literal notranslate"><span class="pre">html</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_authenticate.html"><code class="docutils literal notranslate"><span class="pre">http_authenticate</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_client.html"><code class="docutils literal notranslate"><span class="pre">http_client</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_client_core.html"><code class="docutils literal notranslate"><span class="pre">http_client_core</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_cookies.html"><code class="docutils literal notranslate"><span class="pre">http_cookies</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_core.html"><code class="docutils literal notranslate"><span class="pre">http_core</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_cors.html"><code class="docutils literal notranslate"><span class="pre">http_cors</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_digest.html"><code class="docutils literal notranslate"><span class="pre">http_digest</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_directory_listing.html"><code class="docutils literal notranslate"><span class="pre">http_directory_listing</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_htmx.html"><code class="docutils literal notranslate"><span class="pre">http_htmx</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_multipart.html"><code class="docutils literal notranslate"><span class="pre">http_multipart</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_oauth.html"><code class="docutils literal notranslate"><span class="pre">http_oauth</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_parameters.html"><code class="docutils literal notranslate"><span class="pre">http_parameters</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_process_transport.html"><code class="docutils literal notranslate"><span class="pre">http_process_transport</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_router.html"><code class="docutils literal notranslate"><span class="pre">http_router</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_server.html"><code class="docutils literal notranslate"><span class="pre">http_server</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_server_core.html"><code class="docutils literal notranslate"><span class="pre">http_server_core</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_session.html"><code class="docutils literal notranslate"><span class="pre">http_session</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_socket_transport.html"><code class="docutils literal notranslate"><span class="pre">http_socket_transport</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_sse.html"><code class="docutils literal notranslate"><span class="pre">http_sse</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_static_files.html"><code class="docutils literal notranslate"><span class="pre">http_static_files</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_websocket.html"><code class="docutils literal notranslate"><span class="pre">http_websocket</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_websocket_frames.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_frames</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_websocket_handshake.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_handshake</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_websocket_messages.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_messages</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_websocket_service.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_service</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_websocket_session.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_session</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ica_projection.html"><code class="docutils literal notranslate"><span class="pre">ica_projection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ids.html"><code class="docutils literal notranslate"><span class="pre">ids</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ieee_754.html"><code class="docutils literal notranslate"><span class="pre">ieee_754</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="integer_partitions.html"><code class="docutils literal notranslate"><span class="pre">integer_partitions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="intervals.html"><code class="docutils literal notranslate"><span class="pre">intervals</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="iqr_anomaly_detector.html"><code class="docutils literal notranslate"><span class="pre">iqr_anomaly_detector</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="isolation_forest_anomaly_detector.html"><code class="docutils literal notranslate"><span class="pre">isolation_forest_anomaly_detector</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="iso_13616.html"><code class="docutils literal notranslate"><span class="pre">iso_13616</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="iso_3166.html"><code class="docutils literal notranslate"><span class="pre">iso_3166</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="iso_4217.html"><code class="docutils literal notranslate"><span class="pre">iso_4217</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="iso_639.html"><code class="docutils literal notranslate"><span class="pre">iso_639</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="iso_9362.html"><code class="docutils literal notranslate"><span class="pre">iso_9362</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="java.html"><code class="docutils literal notranslate"><span class="pre">java</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_graph.html"><code class="docutils literal notranslate"><span class="pre">json_graph</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_ld.html"><code class="docutils literal notranslate"><span class="pre">json_ld</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_lines.html"><code class="docutils literal notranslate"><span class="pre">json_lines</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_patch.html"><code class="docutils literal notranslate"><span class="pre">json_patch</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_path.html"><code class="docutils literal notranslate"><span class="pre">json_path</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_pointer.html"><code class="docutils literal notranslate"><span class="pre">json_pointer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_rpc.html"><code class="docutils literal notranslate"><span class="pre">json_rpc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_schema.html"><code class="docutils literal notranslate"><span class="pre">json_schema</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jwt.html"><code class="docutils literal notranslate"><span class="pre">jwt</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="kcenters_clusterer.html"><code class="docutils literal notranslate"><span class="pre">kcenters_clusterer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="kemeny_young_ranker.html"><code class="docutils literal notranslate"><span class="pre">kemeny_young_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="kernel_pca_projection.html"><code class="docutils literal notranslate"><span class="pre">kernel_pca_projection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="kernel_svm_classifier.html"><code class="docutils literal notranslate"><span class="pre">kernel_svm_classifier</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="kmeans_clusterer.html"><code class="docutils literal notranslate"><span class="pre">kmeans_clusterer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="kmedians_clusterer.html"><code class="docutils literal notranslate"><span class="pre">kmedians_clusterer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="kmedoids_clusterer.html"><code class="docutils literal notranslate"><span class="pre">kmedoids_clusterer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="kmodes_clusterer.html"><code class="docutils literal notranslate"><span class="pre">kmodes_clusterer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="knn_classifier.html"><code class="docutils literal notranslate"><span class="pre">knn_classifier</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="knn_distance_anomaly_detector.html"><code class="docutils literal notranslate"><span class="pre">knn_distance_anomaly_detector</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="knn_regression.html"><code class="docutils literal notranslate"><span class="pre">knn_regression</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="kprototypes_clusterer.html"><code class="docutils literal notranslate"><span class="pre">kprototypes_clusterer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ksuid.html"><code class="docutils literal notranslate"><span class="pre">ksuid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="language_detection.html"><code class="docutils literal notranslate"><span class="pre">language_detection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lasso_regression.html"><code class="docutils literal notranslate"><span class="pre">lasso_regression</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lda_classifier.html"><code class="docutils literal notranslate"><span class="pre">lda_classifier</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lda_projection.html"><code class="docutils literal notranslate"><span class="pre">lda_projection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lemmatization.html"><code class="docutils literal notranslate"><span class="pre">lemmatization</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linda.html"><code class="docutils literal notranslate"><span class="pre">linda</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_algebra.html"><code class="docutils literal notranslate"><span class="pre">linear_algebra</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_programming.html"><code class="docutils literal notranslate"><span class="pre">linear_programming</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_regression.html"><code class="docutils literal notranslate"><span class="pre">linear_regression</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_svm_classifier.html"><code class="docutils literal notranslate"><span class="pre">linear_svm_classifier</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="listing.html"><code class="docutils literal notranslate"><span class="pre">listing</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="local_optimization.html"><code class="docutils literal notranslate"><span class="pre">local_optimization</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lof_anomaly_detector.html"><code class="docutils literal notranslate"><span class="pre">lof_anomaly_detector</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html"><code class="docutils literal notranslate"><span class="pre">logging</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="logistic_regression_classifier.html"><code class="docutils literal notranslate"><span class="pre">logistic_regression_classifier</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="loops.html"><code class="docutils literal notranslate"><span class="pre">loops</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lru_caches.html"><code class="docutils literal notranslate"><span class="pre">lru_caches</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="massey_ranker.html"><code class="docutils literal notranslate"><span class="pre">massey_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mcp_server.html"><code class="docutils literal notranslate"><span class="pre">mcp_server</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="memcached.html"><code class="docutils literal notranslate"><span class="pre">memcached</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="message_pack.html"><code class="docutils literal notranslate"><span class="pre">message_pack</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta.html"><code class="docutils literal notranslate"><span class="pre">meta</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_compiler.html"><code class="docutils literal notranslate"><span class="pre">meta_compiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mime_types.html"><code class="docutils literal notranslate"><span class="pre">mime_types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlp_classifier.html"><code class="docutils literal notranslate"><span class="pre">mlp_classifier</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modified_z_score_anomaly_detector.html"><code class="docutils literal notranslate"><span class="pre">modified_z_score_anomaly_detector</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mqtt.html"><code class="docutils literal notranslate"><span class="pre">mqtt</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="multisets.html"><code class="docutils literal notranslate"><span class="pre">multisets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="multivariate_distributions.html"><code class="docutils literal notranslate"><span class="pre">multivariate_distributions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mutations.html"><code class="docutils literal notranslate"><span class="pre">mutations</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="n_grams.html"><code class="docutils literal notranslate"><span class="pre">n_grams</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="naive_bayes_classifier.html"><code class="docutils literal notranslate"><span class="pre">naive_bayes_classifier</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nanoid.html"><code class="docutils literal notranslate"><span class="pre">nanoid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nearest_centroid_classifier.html"><code class="docutils literal notranslate"><span class="pre">nearest_centroid_classifier</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nested_dictionaries.html"><code class="docutils literal notranslate"><span class="pre">nested_dictionaries</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nmea.html"><code class="docutils literal notranslate"><span class="pre">nmea</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nmf_projection.html"><code class="docutils literal notranslate"><span class="pre">nmf_projection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerical_analysis.html"><code class="docutils literal notranslate"><span class="pre">numerical_analysis</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="one_class_svm_anomaly_detector.html"><code class="docutils literal notranslate"><span class="pre">one_class_svm_anomaly_detector</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="open_ai.html"><code class="docutils literal notranslate"><span class="pre">open_ai</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="open_api.html"><code class="docutils literal notranslate"><span class="pre">open_api</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="open_id.html"><code class="docutils literal notranslate"><span class="pre">open_id</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="optics_clusterer.html"><code class="docutils literal notranslate"><span class="pre">optics_clusterer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="optionals.html"><code class="docutils literal notranslate"><span class="pre">optionals</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="options.html"><code class="docutils literal notranslate"><span class="pre">options</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="os.html"><code class="docutils literal notranslate"><span class="pre">os</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="otp.html"><code class="docutils literal notranslate"><span class="pre">otp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="particle_swarm_optimization.html"><code class="docutils literal notranslate"><span class="pre">particle_swarm_optimization</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="partitions.html"><code class="docutils literal notranslate"><span class="pre">partitions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="paseto.html"><code class="docutils literal notranslate"><span class="pre">paseto</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pattern_mining_protocols.html"><code class="docutils literal notranslate"><span class="pre">pattern_mining_protocols</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pca_projection.html"><code class="docutils literal notranslate"><span class="pre">pca_projection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="permutations.html"><code class="docutils literal notranslate"><span class="pre">permutations</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="plackett_luce_last_ranker.html"><code class="docutils literal notranslate"><span class="pre">plackett_luce_last_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="plackett_luce_ranker.html"><code class="docutils literal notranslate"><span class="pre">plackett_luce_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pls_projection.html"><code class="docutils literal notranslate"><span class="pre">pls_projection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="prefix_span_pattern_miner.html"><code class="docutils literal notranslate"><span class="pre">prefix_span_pattern_miner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="probabilistic_pca_projection.html"><code class="docutils literal notranslate"><span class="pre">probabilistic_pca_projection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="process.html"><code class="docutils literal notranslate"><span class="pre">process</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="protobuf.html"><code class="docutils literal notranslate"><span class="pre">protobuf</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="qda_classifier.html"><code class="docutils literal notranslate"><span class="pre">qda_classifier</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="queues.html"><code class="docutils literal notranslate"><span class="pre">queues</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="random.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="random_forest_classifier.html"><code class="docutils literal notranslate"><span class="pre">random_forest_classifier</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="random_forest_regression.html"><code class="docutils literal notranslate"><span class="pre">random_forest_regression</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="random_projection.html"><code class="docutils literal notranslate"><span class="pre">random_projection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ranked_pairs.html"><code class="docutils literal notranslate"><span class="pre">ranked_pairs</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ranking_protocols.html"><code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rank_centrality.html"><code class="docutils literal notranslate"><span class="pre">rank_centrality</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reader.html"><code class="docutils literal notranslate"><span class="pre">reader</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="recorded_database.html"><code class="docutils literal notranslate"><span class="pre">recorded_database</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="redis.html"><code class="docutils literal notranslate"><span class="pre">redis</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="regression_protocols.html"><code class="docutils literal notranslate"><span class="pre">regression_protocols</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="regression_tree.html"><code class="docutils literal notranslate"><span class="pre">regression_tree</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="regularized_bradley_terry_ranker.html"><code class="docutils literal notranslate"><span class="pre">regularized_bradley_terry_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rest.html"><code class="docutils literal notranslate"><span class="pre">rest</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ridge_regression.html"><code class="docutils literal notranslate"><span class="pre">ridge_regression</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ripple_down_rules.html"><code class="docutils literal notranslate"><span class="pre">ripple_down_rules</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="s3.html"><code class="docutils literal notranslate"><span class="pre">s3</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="schulze_ranker.html"><code class="docutils literal notranslate"><span class="pre">schulze_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sequential_pattern_mining_protocols.html"><code class="docutils literal notranslate"><span class="pre">sequential_pattern_mining_protocols</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sets.html"><code class="docutils literal notranslate"><span class="pre">sets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sgd_classifier.html"><code class="docutils literal notranslate"><span class="pre">sgd_classifier</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulated_annealing.html"><code class="docutils literal notranslate"><span class="pre">simulated_annealing</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="smtp.html"><code class="docutils literal notranslate"><span class="pre">smtp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="snowflakeid.html"><code class="docutils literal notranslate"><span class="pre">snowflakeid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sockets.html"><code class="docutils literal notranslate"><span class="pre">sockets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spade_pattern_miner.html"><code class="docutils literal notranslate"><span class="pre">spade_pattern_miner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spectral_clusterer.html"><code class="docutils literal notranslate"><span class="pre">spectral_clusterer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sqids.html"><code class="docutils literal notranslate"><span class="pre">sqids</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="statistics.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="stemming.html"><code class="docutils literal notranslate"><span class="pre">stemming</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="stomp.html"><code class="docutils literal notranslate"><span class="pre">stomp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="stop_words.html"><code class="docutils literal notranslate"><span class="pre">stop_words</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="strings.html"><code class="docutils literal notranslate"><span class="pre">strings</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="string_distance.html"><code class="docutils literal notranslate"><span class="pre">string_distance</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="subsequences.html"><code class="docutils literal notranslate"><span class="pre">subsequences</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="svr_regression.html"><code class="docutils literal notranslate"><span class="pre">svr_regression</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tabu_search.html"><code class="docutils literal notranslate"><span class="pre">tabu_search</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="term_io.html"><code class="docutils literal notranslate"><span class="pre">term_io</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="text_normalization.html"><code class="docutils literal notranslate"><span class="pre">text_normalization</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="text_vectorization.html"><code class="docutils literal notranslate"><span class="pre">text_vectorization</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="thurstone_mosteller_ranker.html"><code class="docutils literal notranslate"><span class="pre">thurstone_mosteller_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeout.html"><code class="docutils literal notranslate"><span class="pre">timeout</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="time_scales.html"><code class="docutils literal notranslate"><span class="pre">time_scales</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="time_series_protocols.html"><code class="docutils literal notranslate"><span class="pre">time_series_protocols</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tle_orbits.html"><code class="docutils literal notranslate"><span class="pre">tle_orbits</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tokenization.html"><code class="docutils literal notranslate"><span class="pre">tokenization</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="toml.html"><code class="docutils literal notranslate"><span class="pre">toml</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="toon.html"><code class="docutils literal notranslate"><span class="pre">toon</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tries.html"><code class="docutils literal notranslate"><span class="pre">tries</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trueskill_ranker.html"><code class="docutils literal notranslate"><span class="pre">trueskill_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="truncated_svd_projection.html"><code class="docutils literal notranslate"><span class="pre">truncated_svd_projection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tsne_projection.html"><code class="docutils literal notranslate"><span class="pre">tsne_projection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tsv.html"><code class="docutils literal notranslate"><span class="pre">tsv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="typeid.html"><code class="docutils literal notranslate"><span class="pre">typeid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html"><code class="docutils literal notranslate"><span class="pre">types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tzif.html"><code class="docutils literal notranslate"><span class="pre">tzif</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ulid.html"><code class="docutils literal notranslate"><span class="pre">ulid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="umap_projection.html"><code class="docutils literal notranslate"><span class="pre">umap_projection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="unicode_data.html"><code class="docutils literal notranslate"><span class="pre">unicode_data</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="union_find.html"><code class="docutils literal notranslate"><span class="pre">union_find</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="univariate_distributions.html"><code class="docutils literal notranslate"><span class="pre">univariate_distributions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="uri_template.html"><code class="docutils literal notranslate"><span class="pre">uri_template</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="url.html"><code class="docutils literal notranslate"><span class="pre">url</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="uuid.html"><code class="docutils literal notranslate"><span class="pre">uuid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="validations.html"><code class="docutils literal notranslate"><span class="pre">validations</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="wkt_wkb.html"><code class="docutils literal notranslate"><span class="pre">wkt_wkb</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml.html"><code class="docutils literal notranslate"><span class="pre">yaml</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="zippers.html"><code class="docutils literal notranslate"><span class="pre">zippers</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="z_score_anomaly_detector.html"><code class="docutils literal notranslate"><span class="pre">z_score_anomaly_detector</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ports/index.html">Ports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributions/index.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../../apis/index.html">APIs</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Libraries</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">exponential_smoothing</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/libraries/exponential_smoothing.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="exponential-smoothing">
+<span id="library-exponential-smoothing"></span><h1><code class="docutils literal notranslate"><span class="pre">exponential_smoothing</span></code><a class="headerlink" href="#exponential-smoothing" title="Link to this heading"></a></h1>
+<p>This library implements univariate time series forecasting using simple
+exponential smoothing, Holt linear-trend smoothing, and additive or
+multiplicative Holt-Winters seasonal smoothing. It implements the
+<code class="docutils literal notranslate"><span class="pre">forecaster_protocol</span></code> and reuses dataset validation, diagnostics,
+export, and lifecycle support from the <code class="docutils literal notranslate"><span class="pre">time_series_protocols</span></code>
+library.</p>
+<p>Datasets are objects implementing the <code class="docutils literal notranslate"><span class="pre">time_series_dataset_protocol</span></code>.
+Seasonal models additionally require a <code class="docutils literal notranslate"><span class="pre">frequency/1</span></code> value of at least
+<code class="docutils literal notranslate"><span class="pre">2</span></code>. The library supports explicit smoothing factors or deterministic
+fitting of any combination of automatic factors by bounded Nelder-Mead
+optimization.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../apis/library_index.html#exponential-smoothing">../../apis/library_index.html#exponential-smoothing</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>To load this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(exponential_smoothing(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(exponential_smoothing(tester)).
+</pre></div>
+</div>
+</section>
+<section id="models">
+<h2>Models<a class="headerlink" href="#models" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">model/1</span></code> option selects one of seven methods:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">simple</span></code>: simple exponential smoothing with a level component.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">holt</span></code>: Holt smoothing with level and linear-trend components.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">holt_damped</span></code>: Holt smoothing with a damped linear trend.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">holt_winters_additive</span></code>: Holt-Winters smoothing with additive
+seasonal factors.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">holt_winters_multiplicative</span></code>: Holt-Winters smoothing with
+multiplicative seasonal factors. All training observations must be
+strictly positive.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">holt_winters_additive_damped</span></code>: additive Holt-Winters smoothing with
+a damped trend.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">holt_winters_multiplicative_damped</span></code>: multiplicative Holt-Winters
+smoothing with a damped trend. All training observations must be
+strictly positive.</p></li>
+</ul>
+<p>Simple smoothing requires at least two observations. Holt smoothing
+requires at least three. Seasonal smoothing requires at least two full
+cycles plus one observation, i.e. <code class="docutils literal notranslate"><span class="pre">2*Frequency</span> <span class="pre">+</span> <span class="pre">1</span></code> observations.</p>
+<p>Holt initialization uses the second observation as the initial level and
+the difference between the first two observations as the initial trend.
+Seasonal initialization uses the first two complete cycles. The initial
+trend is the difference between the two cycle means divided by the
+frequency. For additive smoothing, the initial level is aligned with the
+end of the second cycle. For a cycle position <code class="docutils literal notranslate"><span class="pre">p</span></code>, the offset
+<code class="docutils literal notranslate"><span class="pre">(p</span> <span class="pre">-</span> <span class="pre">(Frequency</span> <span class="pre">+</span> <span class="pre">1)/2)</span> <span class="pre">*</span> <span class="pre">Trend</span></code> is removed from both cycle
+observations before their additive seasonal deviations are averaged. For
+multiplicative smoothing, the initial level is the unadjusted
+second-cycle mean and corresponding ratios to the two cycle means are
+averaged.</p>
+</section>
+<section id="options">
+<h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
+<p>The following options are supported by <code class="docutils literal notranslate"><span class="pre">learn/3</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">model(Method)</span></code>: smoothing method (default: <code class="docutils literal notranslate"><span class="pre">simple</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">alpha(Value)</span></code>: level smoothing factor (default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">beta(Value)</span></code>: trend smoothing factor (default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gamma(Value)</span></code>: seasonal smoothing factor (default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">phi(Value)</span></code>: damping factor for damped methods (default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>).
+It must satisfy <code class="docutils literal notranslate"><span class="pre">0.0</span> <span class="pre">&lt;</span> <span class="pre">Value</span> <span class="pre">=&lt;</span> <span class="pre">1.0</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">initialization(Strategy)</span></code>: initial-state strategy, one of
+<code class="docutils literal notranslate"><span class="pre">two_cycles</span></code>, <code class="docutils literal notranslate"><span class="pre">regression</span></code>, or <code class="docutils literal notranslate"><span class="pre">optimized</span></code> (default:
+<code class="docutils literal notranslate"><span class="pre">two_cycles</span></code>). <code class="docutils literal notranslate"><span class="pre">optimized</span></code> jointly fits the initial level, trend,
+and seasonal factors with any automatic smoothing parameters.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">initial_cycles(Count)</span></code>: number of complete cycles used by seasonal
+regression initialization (default: <code class="docutils literal notranslate"><span class="pre">2</span></code>; minimum: <code class="docutils literal notranslate"><span class="pre">2</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">optimizer(Strategy)</span></code>: automatic-fitting search strategy, one of
+<code class="docutils literal notranslate"><span class="pre">nelder_mead</span></code>, <code class="docutils literal notranslate"><span class="pre">multi_start(Starts)</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">differential_evolution</span></code> (default: <code class="docutils literal notranslate"><span class="pre">nelder_mead</span></code>). See “Optimizer
+strategies” below.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">optimizer_options(Options)</span></code>: options passed to bounded Nelder-Mead
+fitting (default: <code class="docutils literal notranslate"><span class="pre">[]</span></code>). Supported sub-options are
+<code class="docutils literal notranslate"><span class="pre">max_iterations/1</span></code>, <code class="docutils literal notranslate"><span class="pre">tol_x/1</span></code>, <code class="docutils literal notranslate"><span class="pre">tol_f/1</span></code>, <code class="docutils literal notranslate"><span class="pre">initial_step/1</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">adaptive/1</span></code>. Used directly by <code class="docutils literal notranslate"><span class="pre">nelder_mead</span></code>, per start by
+<code class="docutils literal notranslate"><span class="pre">multi_start/1</span></code>, and, when <code class="docutils literal notranslate"><span class="pre">polish(true)</span></code> is in effect, to refine
+the <code class="docutils literal notranslate"><span class="pre">differential_evolution</span></code> result.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">de_options(Options)</span></code>: options passed to Differential Evolution
+fitting, only relevant when <code class="docutils literal notranslate"><span class="pre">optimizer(differential_evolution)</span></code> is
+selected (default: <code class="docutils literal notranslate"><span class="pre">[]</span></code>). Supported sub-options are <code class="docutils literal notranslate"><span class="pre">seed/1</span></code>
+(default: <code class="docutils literal notranslate"><span class="pre">42</span></code>), <code class="docutils literal notranslate"><span class="pre">population_size/1</span></code>, <code class="docutils literal notranslate"><span class="pre">max_generations/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">crossover_probability/1</span></code>, <code class="docutils literal notranslate"><span class="pre">differential_weight/1</span></code>, <code class="docutils literal notranslate"><span class="pre">strategy/1</span></code>
+(one of <code class="docutils literal notranslate"><span class="pre">rand/1/bin</span></code>, <code class="docutils literal notranslate"><span class="pre">rand/1/exp</span></code>, <code class="docutils literal notranslate"><span class="pre">best/1/bin</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">current-to-best/1/bin</span></code>), and <code class="docutils literal notranslate"><span class="pre">polish/1</span></code> (default: <code class="docutils literal notranslate"><span class="pre">true</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">transformation(Transformation)</span></code>: pre-fitting series transformation,
+one of <code class="docutils literal notranslate"><span class="pre">none</span></code>, <code class="docutils literal notranslate"><span class="pre">log</span></code>, or <code class="docutils literal notranslate"><span class="pre">box_cox(Lambda)</span></code> (default: <code class="docutils literal notranslate"><span class="pre">none</span></code>).
+<code class="docutils literal notranslate"><span class="pre">Lambda</span></code> is either a finite number or <code class="docutils literal notranslate"><span class="pre">auto</span></code>. A numeric <code class="docutils literal notranslate"><span class="pre">Lambda</span></code>
+with <code class="docutils literal notranslate"><span class="pre">abs(Lambda)</span> <span class="pre">=&lt;</span> <span class="pre">1.0e-6</span></code> is treated as <code class="docutils literal notranslate"><span class="pre">log</span></code> for numerical
+stability. Training observations must be strictly positive when a
+transformation other than <code class="docutils literal notranslate"><span class="pre">none</span></code> is selected.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">box_cox_bounds(Lower,</span> <span class="pre">Upper)</span></code>: finite open search interval for
+<code class="docutils literal notranslate"><span class="pre">transformation(box_cox(auto))</span></code>, with <code class="docutils literal notranslate"><span class="pre">Lower</span> <span class="pre">&lt;</span> <span class="pre">Upper</span></code> (default:
+<code class="docutils literal notranslate"><span class="pre">box_cox_bounds(-1.0,</span> <span class="pre">2.0)</span></code>). An explicit occurrence is rejected
+unless automatic Box-Cox transformation is selected.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bias_adjustment(Adjustment)</span></code>: inverse-transform bias correction,
+either <code class="docutils literal notranslate"><span class="pre">none</span></code> or <code class="docutils literal notranslate"><span class="pre">delta</span></code> (default: <code class="docutils literal notranslate"><span class="pre">none</span></code>). <code class="docutils literal notranslate"><span class="pre">delta</span></code> is
+rejected when <code class="docutils literal notranslate"><span class="pre">transformation/1</span></code> is <code class="docutils literal notranslate"><span class="pre">none</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">retain_residuals(Boolean)</span></code>: when <code class="docutils literal notranslate"><span class="pre">true</span></code>, retains the one-step
+training residuals (on the fitted, possibly transformed, scale) in the
+forecaster diagnostics for later use by <code class="docutils literal notranslate"><span class="pre">forecast_interval/5</span></code>
+(default: <code class="docutils literal notranslate"><span class="pre">false</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">missing_value(Marker)</span></code>: ground term denoting a missing observation
+(default: the atom <code class="docutils literal notranslate"><span class="pre">missing</span></code>). Marker comparison uses term identity.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">missing_policy(Policy)</span></code>: either <code class="docutils literal notranslate"><span class="pre">error</span></code> or <code class="docutils literal notranslate"><span class="pre">skip_update</span></code>
+(default: <code class="docutils literal notranslate"><span class="pre">error</span></code>). The default preserves the ordinary
+numeric-series validation and rejects marker terms. See “Missing
+observations” below.</p></li>
+</ul>
+<p>A smoothing factor can be <code class="docutils literal notranslate"><span class="pre">auto</span></code> or a number in the closed interval
+<code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">1.0]</span></code>. Automatic factors are optimized by minimizing the
+one-step-ahead sum of squared errors. Explicit factors remain fixed,
+allowing partially constrained models. When all relevant factors are
+explicit, optimization is bypassed.</p>
+<p><code class="docutils literal notranslate"><span class="pre">beta/1</span></code> is relevant only to Holt and Holt-Winters models. <code class="docutils literal notranslate"><span class="pre">gamma/1</span></code>
+is relevant only to Holt-Winters models. Explicit numeric values for an
+irrelevant factor are rejected instead of being silently ignored.</p>
+</section>
+<section id="optimizer-strategies">
+<h2>Optimizer strategies<a class="headerlink" href="#optimizer-strategies" title="Link to this heading"></a></h2>
+<p>Automatic factors are fitted by minimizing the one-step-ahead sum of
+squared errors over the <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">1.0]</span></code> box of automatic parameters. The
+<code class="docutils literal notranslate"><span class="pre">optimizer/1</span></code> option selects the search strategy; explicit/fixed
+factors always bypass optimization entirely, regardless of the selected
+strategy, and are reported with <code class="docutils literal notranslate"><span class="pre">convergence(fixed_parameters)</span></code> and
+zero iterations and evaluations.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">nelder_mead</span></code> (default): a single bounded Nelder-Mead run from the
+deterministic initial point described above. Behavior and defaults are
+unchanged from previous releases.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">multi_start(Starts)</span></code>: <code class="docutils literal notranslate"><span class="pre">Starts</span></code> (a positive integer) bounded
+Nelder-Mead runs, each using <code class="docutils literal notranslate"><span class="pre">optimizer_options/1</span></code>. The first start
+is the same deterministic initial point used by <code class="docutils literal notranslate"><span class="pre">nelder_mead</span></code>; the
+remaining <code class="docutils literal notranslate"><span class="pre">Starts</span> <span class="pre">-</span> <span class="pre">1</span></code> points are a deterministic Halton
+low-discrepancy sequence (bases <code class="docutils literal notranslate"><span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">5,</span> <span class="pre">...</span></code>, one per automatic
+parameter) mapped onto the parameter box, so the same options always
+produce the same starts. The run with the lowest sum of squared errors
+is selected; exact ties are broken by the lexicographically smallest
+parameter point (standard order of terms). Reported <code class="docutils literal notranslate"><span class="pre">iterations/1</span></code>
+and <code class="docutils literal notranslate"><span class="pre">evaluations/1</span></code> are totals summed over every start;
+<code class="docutils literal notranslate"><span class="pre">convergence/1</span></code> reflects only the winning start’s own termination
+status against <code class="docutils literal notranslate"><span class="pre">optimizer_options/1</span></code> <code class="docutils literal notranslate"><span class="pre">max_iterations/1</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">differential_evolution</span></code>: a single run of the
+<code class="docutils literal notranslate"><span class="pre">differential_evolution</span></code> library’s <code class="docutils literal notranslate"><span class="pre">rand/1/bin</span></code>-family
+metaheuristic over the same bounded objective, using a dedicated
+<code class="docutils literal notranslate"><span class="pre">fast_random(xoshiro128pp)</span></code> generator instance whose seed is saved
+before the run and restored afterward, so fitting neither depends on
+nor mutates any global random state. The <code class="docutils literal notranslate"><span class="pre">de_options/1</span></code> <code class="docutils literal notranslate"><span class="pre">seed/1</span></code>
+sub-option (default <code class="docutils literal notranslate"><span class="pre">42</span></code>) makes runs deterministic. When
+<code class="docutils literal notranslate"><span class="pre">polish/1</span></code> is <code class="docutils literal notranslate"><span class="pre">true</span></code> (the default), the DE result is refined by a
+further bounded Nelder-Mead run (using <code class="docutils literal notranslate"><span class="pre">optimizer_options/1</span></code>)
+starting from the DE best point; <code class="docutils literal notranslate"><span class="pre">iterations/1</span></code> and
+<code class="docutils literal notranslate"><span class="pre">evaluations/1</span></code> report the sum of the DE generations/evaluations
+and, when polishing ran, the polishing iterations/evaluations.
+<code class="docutils literal notranslate"><span class="pre">convergence/1</span></code> reflects whether the DE generation cap
+(<code class="docutils literal notranslate"><span class="pre">max_generations/1</span></code>, default <code class="docutils literal notranslate"><span class="pre">100</span></code>) was reached, independently of
+any subsequent polishing.</p></li>
+</ul>
+<p>None of the three strategies guarantees the global minimum of the
+training objective; <code class="docutils literal notranslate"><span class="pre">multi_start/1</span></code> and <code class="docutils literal notranslate"><span class="pre">differential_evolution</span></code>
+only reduce, but do not eliminate, the risk of a poor local optimum
+found from a single start.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">initialization(optimized)</span></code>, optimization is also required when
+all smoothing parameters are explicit. Initial level and trend bounds
+are finite and derived from the observed minimum, maximum, and range.
+Seasonal models use <code class="docutils literal notranslate"><span class="pre">Frequency-1</span></code> identifiable coordinates: additive
+coordinates decode to factors normalized to exact zero mean, while
+multiplicative log-ratio coordinates decode to strictly positive factors
+normalized to mean one. The learned forecaster keeps the canonical state
+and smoothing-parameter shapes; initial-state coordinates are not
+persisted as a second representation. Model and frequency selection
+count these fitted initial-state coordinates in the AICc parameter
+total. An automatically fitted Box-Cox lambda is also counted as one
+fitted parameter.</p>
+</section>
+<section id="missing-observations">
+<h2>Missing observations<a class="headerlink" href="#missing-observations" title="Link to this heading"></a></h2>
+<p>Missing observations are opt-in. With <code class="docutils literal notranslate"><span class="pre">missing_policy(error)</span></code>, the
+default, all observations must be numbers and the existing validation
+errors are preserved. With <code class="docutils literal notranslate"><span class="pre">missing_policy(skip_update)</span></code>, an
+observation identical to the ground <code class="docutils literal notranslate"><span class="pre">missing_value(Marker)</span></code> term is
+accepted. Observation indices remain a regular, gap-free, 1-based
+sequence; missing markers are not removed from the time axis.</p>
+<p>At a missing observation, simple smoothing retains its level. Holt
+models advance the level by the current trend. Damped models advance by
+the damped trend and decay the trend. Seasonal models also rotate the
+seasonal queue, retaining the factor for that phase. No residual is
+recorded, no error is scored, and no smoothing update is applied.
+Transformations are applied only to known observations. Automatic
+parameter fitting and model or frequency selection evaluate the same
+missing-aware objective.</p>
+<p>Initialization never imputes a missing value. Nonseasonal two-point
+initialization uses the first required known observations and their
+original indices. Regression initialization fits only known values
+against their original indices. A seasonal initialization window must
+contain at least one known value in every seasonal phase and enough
+known values to estimate its level and trend. Otherwise learning raises
+<code class="docutils literal notranslate"><span class="pre">domain_error(insufficient_seasonal_phase_observations,</span> <span class="pre">Phase)</span></code> or
+<code class="docutils literal notranslate"><span class="pre">domain_error(insufficient_known_observations,</span> <span class="pre">Context)</span></code>. At least one
+known observation must remain to score after initialization.</p>
+</section>
+<section id="immutable-online-updates">
+<h2>Immutable online updates<a class="headerlink" href="#immutable-online-updates" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">update/3-4</span></code> predicates apply one new observation to a learned
+forecaster and return a new forecaster term; the input forecaster is
+never modified. Updates reuse the fitted parameters and the exact
+per-observation equations used by batch fitting, including transformed
+and damped states and rotation of the current seasonal queue. Parameters
+are not refitted. <code class="docutils literal notranslate"><span class="pre">update/3</span></code> delegates to <code class="docutils literal notranslate"><span class="pre">update/4</span></code> with an empty
+options list; no update options are currently defined.</p>
+<p>The original effective training options remain unchanged. Each update
+increments <code class="docutils literal notranslate"><span class="pre">training_series_length/1</span></code> and <code class="docutils literal notranslate"><span class="pre">update_count/1</span></code>. Known
+observations also increment <code class="docutils literal notranslate"><span class="pre">observed_count/1</span></code> and <code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code>,
+add their one-step squared error to <code class="docutils literal notranslate"><span class="pre">sum_squared_error/1</span></code>, and
+recompute <code class="docutils literal notranslate"><span class="pre">mean_squared_error/1</span></code>. A skipped missing observation
+instead increments only <code class="docutils literal notranslate"><span class="pre">missing_count/1</span></code> while advancing trend
+prediction and seasonal phase exactly as during batch fitting.</p>
+<p>Residual retention follows the original <code class="docutils literal notranslate"><span class="pre">retain_residuals/1</span></code> learning
+option. When enabled, each known online residual is appended
+chronologically to the retained training residuals; skipped missing
+observations append nothing. When disabled, diagnostics continue to
+store <code class="docutils literal notranslate"><span class="pre">residuals(none)</span></code>.</p>
+</section>
+<section id="forecaster-representation">
+<h2>Forecaster representation<a class="headerlink" href="#forecaster-representation" title="Link to this heading"></a></h2>
+<p>A learned forecaster is represented as:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>exponential_smoothing_forecaster(<span class="nv">Method</span>, <span class="nv">State</span>, <span class="nv">Parameters</span>, <span class="nv">Diagnostics</span>)
+</pre></div>
+</div>
+<p>The state is one of:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">level(Level)</span></code> for simple exponential smoothing.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">holt(Level,</span> <span class="pre">Trend)</span></code> for Holt smoothing.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">holt_damped(Level,</span> <span class="pre">Trend,</span> <span class="pre">Phi)</span></code> for damped Holt smoothing.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">holt_winters(Level,</span> <span class="pre">Trend,</span> <span class="pre">Frequency,</span> <span class="pre">SeasonalQueue)</span></code> for seasonal
+smoothing. The queue begins at the seasonal position used by the next
+forecast.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">holt_winters_damped(Level,</span> <span class="pre">Trend,</span> <span class="pre">Phi,</span> <span class="pre">Frequency,</span> <span class="pre">SeasonalQueue)</span></code>
+for damped seasonal smoothing.</p></li>
+</ul>
+<p>When <code class="docutils literal notranslate"><span class="pre">transformation/1</span></code> is not <code class="docutils literal notranslate"><span class="pre">none</span></code>, the state is instead wrapped
+as:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>transformed(<span class="nv">Transformation</span>, <span class="nv">InnerState</span>, residual_variance(<span class="nv">Variance</span>))
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">InnerState</span></code> is one of the method-specific states above, fitted
+on the transformed series, and <code class="docutils literal notranslate"><span class="pre">Variance</span></code> is the transformed-scale
+mean squared one-step error. The <code class="docutils literal notranslate"><span class="pre">none</span></code> transformation keeps the
+unwrapped state shapes above unchanged.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Parameters</span></code> contains the fitted numeric factors in canonical order:
+<code class="docutils literal notranslate"><span class="pre">[Alpha]</span></code>, <code class="docutils literal notranslate"><span class="pre">[Alpha,</span> <span class="pre">Beta]</span></code>, <code class="docutils literal notranslate"><span class="pre">[Alpha,</span> <span class="pre">Beta,</span> <span class="pre">Phi]</span></code>,
+<code class="docutils literal notranslate"><span class="pre">[Alpha,</span> <span class="pre">Beta,</span> <span class="pre">Gamma]</span></code>, or <code class="docutils literal notranslate"><span class="pre">[Alpha,</span> <span class="pre">Beta,</span> <span class="pre">Gamma,</span> <span class="pre">Phi]</span></code>.</p>
+<p>Damped forecasts accumulate powers of <code class="docutils literal notranslate"><span class="pre">Phi</span></code> over the forecast horizon.
+Setting <code class="docutils literal notranslate"><span class="pre">Phi</span></code> to <code class="docutils literal notranslate"><span class="pre">1.0</span></code> is equivalent to the corresponding undamped
+model; values below <code class="docutils literal notranslate"><span class="pre">1.0</span></code> make the projected trend approach a finite
+limit.</p>
+<p>Diagnostics include the common model, training-series length, and
+options metadata plus the selected method, seasonal frequency when
+applicable, fitted parameters, sum and mean squared one-step errors, the
+selected <code class="docutils literal notranslate"><span class="pre">optimizer(Optimizer)</span></code> strategy, <code class="docutils literal notranslate"><span class="pre">update_count(Count)</span></code>,
+convergence status, optimizer iterations, objective evaluations, and
+<code class="docutils literal notranslate"><span class="pre">observed_count(ObservedCount)</span></code>, <code class="docutils literal notranslate"><span class="pre">missing_count(MissingCount)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">scored_count(ScoredCount)</span></code>, and the retained residuals metadata term
+<code class="docutils literal notranslate"><span class="pre">residuals(Residuals)</span></code>. <code class="docutils literal notranslate"><span class="pre">Residuals</span></code> is the chronologically ordered
+list of one-step fitting residuals when <code class="docutils literal notranslate"><span class="pre">retain_residuals(true)</span></code> was
+in effect, or the atom <code class="docutils literal notranslate"><span class="pre">none</span></code> otherwise. The mean squared error
+denominator and retained residual list length are both <code class="docutils literal notranslate"><span class="pre">ScoredCount</span></code>;
+initialization observations and missing observations are not scored.
+Forecaster validation requires the persisted counts to agree with the
+training length and error statistics. The convergence status is
+<code class="docutils literal notranslate"><span class="pre">fixed_parameters</span></code>, <code class="docutils literal notranslate"><span class="pre">converged</span></code>, or <code class="docutils literal notranslate"><span class="pre">maximum_iterations</span></code>; see
+“Optimizer strategies” above for how iterations, evaluations, and
+convergence are aggregated for <code class="docutils literal notranslate"><span class="pre">multi_start/1</span></code> and
+<code class="docutils literal notranslate"><span class="pre">differential_evolution</span></code>.</p>
+<p>Forecaster validation checks the representation, method/state pairing,
+finite numeric state and diagnostic values, parameter ranges, effective
+model and factor options, seasonal frequency, convergence consistency
+with the configured optimizer strategy and iteration limit, and
+consistency between sum and mean squared errors. When the state is a
+transformation wrapper, validation also checks that the wrapper
+transformation matches the effective <code class="docutils literal notranslate"><span class="pre">transformation/1</span></code> option, that
+the residual variance is a finite non-negative number, and that the
+inner state is valid for the method. Validation also checks that the
+retained residuals metadata term matches the effective
+<code class="docutils literal notranslate"><span class="pre">retain_residuals/1</span></code> option: <code class="docutils literal notranslate"><span class="pre">none</span></code> when the option is <code class="docutils literal notranslate"><span class="pre">false</span></code>, or
+a list of finite numbers whose length equals the one-step error count
+implied by the method, frequency, and initialization strategy when the
+option is <code class="docutils literal notranslate"><span class="pre">true</span></code>. Diagnostics are serialized metadata and are not
+recomputed from the original training series; manually constructed terms
+can therefore contain internally consistent but inaccurate error
+statistics.</p>
+</section>
+<section id="transformations">
+<h2>Transformations<a class="headerlink" href="#transformations" title="Link to this heading"></a></h2>
+<p>When <code class="docutils literal notranslate"><span class="pre">transformation/1</span></code> is <code class="docutils literal notranslate"><span class="pre">log</span></code> or <code class="docutils literal notranslate"><span class="pre">box_cox(Lambda)</span></code>, the
+training series is transformed before fitting and forecasts are produced
+on the transformed scale and then inverted:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">log</span></code>: forward <code class="docutils literal notranslate"><span class="pre">log(Value)</span></code>, inverse <code class="docutils literal notranslate"><span class="pre">exp(Value)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">box_cox(Lambda)</span></code> with <code class="docutils literal notranslate"><span class="pre">abs(Lambda)</span> <span class="pre">&gt;</span> <span class="pre">1.0e-6</span></code>: forward
+<code class="docutils literal notranslate"><span class="pre">(Value**Lambda</span> <span class="pre">-</span> <span class="pre">1)</span> <span class="pre">/</span> <span class="pre">Lambda</span></code>, inverse
+<code class="docutils literal notranslate"><span class="pre">(Lambda*Value</span> <span class="pre">+</span> <span class="pre">1)</span> <span class="pre">**</span> <span class="pre">(1/Lambda)</span></code>. The inverse raises
+<code class="docutils literal notranslate"><span class="pre">domain_error(box_cox_inverse_domain,</span> <span class="pre">Base)</span></code> when
+<code class="docutils literal notranslate"><span class="pre">Base</span> <span class="pre">=</span> <span class="pre">Lambda*Value</span> <span class="pre">+</span> <span class="pre">1</span></code> is not strictly positive.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">box_cox(Lambda)</span></code> with <code class="docutils literal notranslate"><span class="pre">abs(Lambda)</span> <span class="pre">=&lt;</span> <span class="pre">1.0e-6</span></code> uses the <code class="docutils literal notranslate"><span class="pre">log</span></code>
+formulas, avoiding numerical instability from dividing by a near-zero
+<code class="docutils literal notranslate"><span class="pre">Lambda</span></code>.</p></li>
+</ul>
+<p>With <code class="docutils literal notranslate"><span class="pre">transformation(box_cox(auto))</span></code>, lambda is selected
+deterministically inside <code class="docutils literal notranslate"><span class="pre">box_cox_bounds/2</span></code> by 24 iterations of
+golden-section search. Each lambda evaluation transforms the series and
+performs a complete fit using the configured smoothing optimizer,
+initialization strategy, model selection, and frequency selection. The
+minimized profile-likelihood criterion uses
+<code class="docutils literal notranslate"><span class="pre">N*log(SSE/E)</span> <span class="pre">-</span> <span class="pre">2*(Lambda-1)*sum(log(Y))</span></code>, where <code class="docutils literal notranslate"><span class="pre">N</span></code> is the number
+of known observations and <code class="docutils literal notranslate"><span class="pre">E</span></code> is the number of scored one-step errors,
+including the Box-Cox Jacobian over known observations. Missing markers
+under <code class="docutils literal notranslate"><span class="pre">missing_policy(skip_update)</span></code> are excluded from the transform
+and Jacobian; every known observation must be strictly positive.</p>
+<p>The learned state and effective <code class="docutils literal notranslate"><span class="pre">options/1</span></code> diagnostics always store
+the selected numeric <code class="docutils literal notranslate"><span class="pre">box_cox(Lambda)</span></code> term; <code class="docutils literal notranslate"><span class="pre">auto</span></code> is never
+persisted. Forecasts, bias adjustment, residual intervals, immutable
+updates, validation, and export therefore use the same fixed selected
+lambda. Model and frequency AICc scores count automatic lambda as a
+fitted parameter. If any required transformed fit is infeasible,
+learning propagates the error; it does not fall back to an untransformed
+or fixed-lambda fit.</p>
+<p>Diagnostics <code class="docutils literal notranslate"><span class="pre">sum_squared_error/1</span></code> and <code class="docutils literal notranslate"><span class="pre">mean_squared_error/1</span></code> are
+always computed and reported on the transformed scale.</p>
+<p>When <code class="docutils literal notranslate"><span class="pre">bias_adjustment/1</span></code> is <code class="docutils literal notranslate"><span class="pre">delta</span></code>, the inverse-transform forecast
+is corrected using the stored transformed-scale residual variance <code class="docutils literal notranslate"><span class="pre">V</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">log</span></code>: <code class="docutils literal notranslate"><span class="pre">Forecast</span> <span class="pre">is</span> <span class="pre">exp(Value)</span> <span class="pre">*</span> <span class="pre">exp(V</span> <span class="pre">/</span> <span class="pre">2)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">box_cox(Lambda)</span></code> with <code class="docutils literal notranslate"><span class="pre">abs(Lambda)</span> <span class="pre">&gt;</span> <span class="pre">1.0e-6</span></code>: the second-order
+delta correction
+<code class="docutils literal notranslate"><span class="pre">Forecast</span> <span class="pre">is</span> <span class="pre">Base**(1/Lambda)</span> <span class="pre">*</span> <span class="pre">(1</span> <span class="pre">+</span> <span class="pre">V*(1</span> <span class="pre">-</span> <span class="pre">Lambda)</span> <span class="pre">/</span> <span class="pre">(2*Base*Base))</span></code>,
+with <code class="docutils literal notranslate"><span class="pre">Base</span> <span class="pre">=</span> <span class="pre">Lambda*Value</span> <span class="pre">+</span> <span class="pre">1</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">box_cox(Lambda)</span></code> with <code class="docutils literal notranslate"><span class="pre">abs(Lambda)</span> <span class="pre">=&lt;</span> <span class="pre">1.0e-6</span></code> uses the <code class="docutils literal notranslate"><span class="pre">log</span></code>
+formula.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">bias_adjustment(delta)</span></code> is rejected when <code class="docutils literal notranslate"><span class="pre">transformation/1</span></code> is
+<code class="docutils literal notranslate"><span class="pre">none</span></code>.</p>
+</section>
+<section id="prediction-intervals">
+<h2>Prediction intervals<a class="headerlink" href="#prediction-intervals" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">forecast_interval/5</span></code> computes residual-bootstrap prediction interval
+bounds for the next <code class="docutils literal notranslate"><span class="pre">Horizon</span></code> forecasts:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>exponential_smoothing<span class="o">::</span>forecast_interval(<span class="nv">Forecaster</span>, <span class="nv">Horizon</span>, <span class="nv">Lower</span>, <span class="nv">Upper</span>, <span class="nv">Options</span>)
+</pre></div>
+</div>
+<p>This requires a forecaster learned with <code class="docutils literal notranslate"><span class="pre">retain_residuals(true)</span></code>; a
+<code class="docutils literal notranslate"><span class="pre">domain_error(retained_residuals,</span> <span class="pre">Forecaster)</span></code> is raised for a
+positive <code class="docutils literal notranslate"><span class="pre">Horizon</span></code> otherwise. A zero <code class="docutils literal notranslate"><span class="pre">Horizon</span></code> returns two empty
+lists and does not require retained residuals.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Options</span></code> is validated independently from <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> options (a
+<code class="docutils literal notranslate"><span class="pre">domain_error(option,</span> <span class="pre">Option)</span></code> is raised for an unsupported option)
+and supports:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">confidence(Level)</span></code>: central interval coverage, a number in the open
+interval <code class="docutils literal notranslate"><span class="pre">]0.0,</span> <span class="pre">1.0[</span></code> (default: <code class="docutils literal notranslate"><span class="pre">0.95</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">method(residual_bootstrap)</span></code>: the only supported interval method
+(default, and currently the only accepted value).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">samples(Count)</span></code>: number of simulated bootstrap paths, a positive
+integer (default: <code class="docutils literal notranslate"><span class="pre">1000</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">seed(Seed)</span></code>: positive integer seed for the dedicated bootstrap
+random number generator (default: <code class="docutils literal notranslate"><span class="pre">42</span></code>).</p></li>
+</ul>
+<p>For each of <code class="docutils literal notranslate"><span class="pre">samples/1</span></code> simulated paths and each horizon step, the
+method independently resamples, with replacement, one retained one-step
+training residual and adds it to the deterministic point forecast for
+that step (from <code class="docutils literal notranslate"><span class="pre">forecast_smoothing/4</span></code> on the fitted, possibly
+transformed, scale), thus preserving the seasonal phase of the point
+forecast without re-simulating the level, trend, or seasonal state. Each
+simulated value is then inverse-transformed using the same
+transformation and <code class="docutils literal notranslate"><span class="pre">bias_adjustment/1</span></code> option as <code class="docutils literal notranslate"><span class="pre">forecast/3</span></code>.
+<code class="docutils literal notranslate"><span class="pre">Lower</span></code> and <code class="docutils literal notranslate"><span class="pre">Upper</span></code> are the empirical <code class="docutils literal notranslate"><span class="pre">(1-Confidence)/2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">(1+Confidence)/2</span></code> quantiles (nearest-rank method) of the simulated
+values for each step, widened when necessary with <code class="docutils literal notranslate"><span class="pre">min/2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">max/2</span></code> against the point forecast so that <code class="docutils literal notranslate"><span class="pre">Lower</span> <span class="pre">=&lt;</span> <span class="pre">Point</span> <span class="pre">=&lt;</span> <span class="pre">Upper</span></code>
+always holds.</p>
+<p>Sampling uses a dedicated <code class="docutils literal notranslate"><span class="pre">fast_random(as183)</span></code> generator instance,
+isolated from the default <code class="docutils literal notranslate"><span class="pre">fast_random</span></code> and <code class="docutils literal notranslate"><span class="pre">random</span></code> objects. The
+generator seed is saved, deterministically reset from <code class="docutils literal notranslate"><span class="pre">seed/1</span></code> with
+<code class="docutils literal notranslate"><span class="pre">randomize/1</span></code>, used for sampling, and then restored, so
+<code class="docutils literal notranslate"><span class="pre">forecast_interval/5</span></code> neither depends on nor mutates any global random
+state, and repeated calls with the same forecaster, horizon, and options
+are deterministic.</p>
+<p>Because simulated values are point forecasts plus additive residual
+noise rather than full re-simulated forecasting paths, interval bounds
+for multiplicative or transformed models are only an approximation: a
+sampled value can in principle fall outside the domain that produced the
+retained residuals (for example, a non-positive multiplicative-scale
+value with <code class="docutils literal notranslate"><span class="pre">transformation(none)</span></code>). Such simulated values are not
+filtered or clipped.</p>
+</section>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading"></a></h2>
+<p>Seasonal fitting uses the <code class="docutils literal notranslate"><span class="pre">deques</span></code> library internally. Initial
+seasonal factors are converted to an opaque deque, updated factors are
+rotated from front to back, and the deque is normalized once per
+completed seasonal cycle. The learned state remains an ordered
+seasonal-factor list beginning at the next forecast position. Thus,
+fitting a series of length <code class="docutils literal notranslate"><span class="pre">n</span></code> and frequency <code class="docutils literal notranslate"><span class="pre">m</span></code> takes <code class="docutils literal notranslate"><span class="pre">O(n)</span></code> time
+and <code class="docutils literal notranslate"><span class="pre">O(m)</span></code> seasonal state, while preserving the documented and
+exported forecaster representation.</p>
+<p>Model selection is explicit; the library does not compare methods or
+select a seasonal frequency automatically. Missing observations,
+irregular timestamps, exogenous regressors, multivariate series, and
+online state updates are outside the scope of this library. Prediction
+intervals are supported only through the residual-bootstrap
+<code class="docutils literal notranslate"><span class="pre">forecast_interval/5</span></code> approximation described above.</p>
+<p>Initialization is deterministic. The compatibility-default
+<code class="docutils literal notranslate"><span class="pre">two_cycles</span></code> strategy uses the first two complete cycles.
+Multiplicative two-cycle initialization uses cycle means without
+within-cycle detrending, which is robust for stable seasonality but only
+an approximation when a strong trend is present. The <code class="docutils literal notranslate"><span class="pre">regression</span></code>
+strategy estimates non-seasonal level and trend by linear regression.
+For seasonal models, it regresses complete-cycle means, converts the
+slope to a per-observation trend, averages detrended values or ratios by
+phase, and normalizes the seasonal factors. Although the shared
+frequency contract accepts any positive integer, this library rejects
+seasonal frequency <code class="docutils literal notranslate"><span class="pre">1</span></code> as a degenerate seasonal model.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">optimized</span></code> strategy consumes <code class="docutils literal notranslate"><span class="pre">initial_cycles*Frequency</span></code>
+observations for seasonal initialization, just like <code class="docutils literal notranslate"><span class="pre">regression</span></code>, and
+jointly minimizes the subsequent one-step errors over the initial state
+and automatic smoothing parameters. It uses the deterministic two-cycle
+estimates only as an optimizer starting point. Optimization or final-fit
+errors are propagated; the strategy never falls back silently to
+<code class="docutils literal notranslate"><span class="pre">two_cycles</span></code> or <code class="docutils literal notranslate"><span class="pre">regression</span></code>.</p>
+<p>Automatic fitting uses deterministic initial values of <code class="docutils literal notranslate"><span class="pre">0.2</span></code> for
+<code class="docutils literal notranslate"><span class="pre">alpha</span></code>, <code class="docutils literal notranslate"><span class="pre">0.1</span></code> for <code class="docutils literal notranslate"><span class="pre">beta</span></code>, and <code class="docutils literal notranslate"><span class="pre">0.1</span></code> for <code class="docutils literal notranslate"><span class="pre">gamma</span></code>.
+Multiplicative Holt-Winters instead starts an automatic <code class="docutils literal notranslate"><span class="pre">alpha</span></code> at
+<code class="docutils literal notranslate"><span class="pre">1.0</span></code>, ensuring that the initial optimizer simplex contains a feasible
+point for sharply declining positive series. Every automatic factor is
+constrained to <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">1.0]</span></code>. Multiplicative trial points that would
+produce a non-positive level receive a finite objective penalty,
+allowing the optimizer to continue. The same condition in a model with
+explicitly fixed factors remains a domain error.</p>
+<p>Multiplicative forecasts must remain strictly positive. Forecasting
+raises a <code class="docutils literal notranslate"><span class="pre">domain_error(positive_multiplicative_forecast,</span> <span class="pre">Forecast)</span></code>
+error when the additive trend component would otherwise produce a zero
+or negative forecast.</p>
+<p>Solver objective and update-reporting options are controlled internally
+and cannot be overridden through <code class="docutils literal notranslate"><span class="pre">optimizer_options/1</span></code> or
+<code class="docutils literal notranslate"><span class="pre">de_options/1</span></code>. Nelder-Mead is a local optimizer with one
+deterministic initial simplex; <code class="docutils literal notranslate"><span class="pre">multi_start/1</span></code> and
+<code class="docutils literal notranslate"><span class="pre">differential_evolution</span></code> explore the parameter box more broadly but
+remain deterministic heuristics, so automatic fitting never guarantees
+the global minimum of the training objective under any <code class="docutils literal notranslate"><span class="pre">optimizer/1</span></code>
+strategy.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="expecteds.html" class="btn btn-neutral float-left" title="expecteds" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="format.html" class="btn btn-neutral float-right" title="format" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2026, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

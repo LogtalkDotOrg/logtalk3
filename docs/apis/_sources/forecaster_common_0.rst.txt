@@ -27,8 +27,10 @@ Shared predicates for forecaster diagnostics, time series dataset validation, di
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
 |    :ref:`format <format/0>`
+|    :ref:`integer <integer/0>`
 |    :ref:`list <list/0>`
 |    :ref:`numberlist <numberlist/0>`
+|    :ref:`pairs <pairs/0>`
 |    :ref:`type <type/0>`
 
 | **Remarks:**
@@ -131,7 +133,7 @@ Pretty-printing helper predicate used by importing forecaster implementations to
 ``dataset_series/2``
 ^^^^^^^^^^^^^^^^^^^^
 
-Collects the dataset time-ordered observation values. Checks that the observation indices form a complete, gap-free, 1-based sequence.
+Collects the dataset time-ordered observation values. Checks that the observation indices form a complete, gap-free, 1-based sequence and that the declared series length matches the observed length.
 
 | **Compilation flags:**
 |    ``static``
@@ -139,7 +141,21 @@ Collects the dataset time-ordered observation values. Checks that the observatio
 | **Template:**
 |    ``dataset_series(Dataset,Series)``
 | **Mode and number of proofs:**
-|    ``dataset_series(+object_identifier,-list(number))`` - ``one``
+|    ``dataset_series(+object_identifier,-list(number))`` - ``one_or_error``
+
+| **Exceptions:**
+|    The dataset contains no observations:
+|        ``domain_error(non_empty_series,Dataset)``
+|    The observation indices do not form a complete, gap-free, 1-based sequence:
+|        ``domain_error(series_index_sequence,Dataset)``
+|    The declared series length is a variable:
+|        ``instantiation_error``
+|    The declared series length is neither a variable nor an integer:
+|        ``type_error(integer,DeclaredLength)``
+|    The declared series length is an integer but is not positive:
+|        ``domain_error(positive_integer,DeclaredLength)``
+|    The declared and observed series lengths differ:
+|        ``consistency_error(series_length,DeclaredLength,ObservedLength)``
 
 
 ------------
@@ -161,10 +177,12 @@ Checks that a time series is non-empty and that every observation value is a num
 |    ``check_series(+object_identifier,+list)`` - ``one_or_error``
 
 | **Exceptions:**
+|    ``Series`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    An element ``Value`` of the ``Series`` list is neither a variable nor a number:
+|        ``type_error(number,Value)``
 |    ``Series`` is empty:
 |        ``domain_error(non_empty_series,Dataset)``
-|    An observation value is not a number:
-|        ``type_error(number,Value)``
 
 
 ------------
@@ -183,9 +201,15 @@ Checks that a time series has at least the given minimum number of observations.
 | **Template:**
 |    ``check_series_length(Dataset,Series,MinimumLength)``
 | **Mode and number of proofs:**
-|    ``check_series_length(+object_identifier,+list,+integer)`` - ``one_or_error``
+|    ``check_series_length(+object_identifier,+list,+non_negative_integer)`` - ``one_or_error``
 
 | **Exceptions:**
+|    ``MinimumLength`` is a variable:
+|        ``instantiation_error``
+|    ``MinimumLength`` is neither a variable nor an integer:
+|        ``type_error(integer,MinimumLength)``
+|    ``MinimumLength`` is an integer but is negative:
+|        ``domain_error(non_negative_integer,MinimumLength)``
 |    ``Series`` is shorter than ``MinimumLength``:
 |        ``domain_error(series_length,Dataset)``
 
@@ -263,7 +287,11 @@ Computes the first-order differences of a series: ``Differences[i] = Series[i+1]
 | **Template:**
 |    ``difference_series(Series,Differences)``
 | **Mode and number of proofs:**
-|    ``difference_series(+list(number),-list(number))`` - ``one``
+|    ``difference_series(+list(number),-list(number))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Series`` is empty:
+|        ``domain_error(non_empty_series,Series)``
 
 
 ------------
@@ -301,9 +329,15 @@ Builds a list of ``Lags-Target`` rows from a series, where ``Lags`` is a list of
 | **Template:**
 |    ``lagged_rows(Series,Order,Rows)``
 | **Mode and number of proofs:**
-|    ``lagged_rows(+list(number),+integer,-list(pair))`` - ``one_or_error``
+|    ``lagged_rows(+list(number),+positive_integer,-list(pair))`` - ``one_or_error``
 
 | **Exceptions:**
+|    ``Order`` is a variable:
+|        ``instantiation_error``
+|    ``Order`` is neither a variable nor an integer:
+|        ``type_error(integer,Order)``
+|    ``Order`` is an integer but is not positive:
+|        ``domain_error(positive_integer,Order)``
 |    ``Series`` has ``Order`` or fewer observations:
 |        ``domain_error(series_length,Series)``
 
@@ -324,7 +358,13 @@ Computes the mean absolute error (MAE) between actual and predicted value lists 
 | **Template:**
 |    ``mean_absolute_error(Actual,Predicted,MAE)``
 | **Mode and number of proofs:**
-|    ``mean_absolute_error(+list(number),+list(number),-float)`` - ``one``
+|    ``mean_absolute_error(+list(number),+list(number),-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    An input series is empty:
+|        ``domain_error(non_empty_series,Series)``
+|    The actual and predicted series have different lengths:
+|        ``consistency_error(same_length,Actual,Predicted)``
 
 
 ------------
@@ -343,7 +383,13 @@ Computes the root mean squared error (RMSE) between actual and predicted value l
 | **Template:**
 |    ``root_mean_squared_error(Actual,Predicted,RMSE)``
 | **Mode and number of proofs:**
-|    ``root_mean_squared_error(+list(number),+list(number),-float)`` - ``one``
+|    ``root_mean_squared_error(+list(number),+list(number),-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    An input series is empty:
+|        ``domain_error(non_empty_series,Series)``
+|    The actual and predicted series have different lengths:
+|        ``consistency_error(same_length,Actual,Predicted)``
 
 
 ------------
@@ -365,6 +411,10 @@ Computes the mean absolute percentage error (MAPE), as a percentage, between act
 |    ``mean_absolute_percentage_error(+list(number),+list(number),-float)`` - ``one_or_error``
 
 | **Exceptions:**
+|    An input series is empty:
+|        ``domain_error(non_empty_series,Series)``
+|    The actual and predicted series have different lengths:
+|        ``consistency_error(same_length,Actual,Predicted)``
 |    An actual value is zero:
 |        ``evaluation_error(zero_divisor)``
 
@@ -377,7 +427,7 @@ Computes the mean absolute percentage error (MAPE), as a percentage, between act
 ``naive_forecast/3``
 ^^^^^^^^^^^^^^^^^^^^
 
-Repeats the last observed series value ``Horizon`` times (the naive/persistence baseline forecast).
+Repeats the last observed series value ``Horizon`` times (the naive/persistence baseline forecast). A zero horizon returns an empty list.
 
 | **Compilation flags:**
 |    ``static``
@@ -385,7 +435,34 @@ Repeats the last observed series value ``Horizon`` times (the naive/persistence 
 | **Template:**
 |    ``naive_forecast(Series,Horizon,Forecasts)``
 | **Mode and number of proofs:**
-|    ``naive_forecast(+list(number),+integer,-list(number))`` - ``one``
+|    ``naive_forecast(+list(number),+non_negative_integer,-list(number))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Horizon`` is a variable:
+|        ``instantiation_error``
+|    ``Horizon`` is neither a variable nor an integer:
+|        ``type_error(integer,Horizon)``
+|    ``Horizon`` is an integer but is negative:
+|        ``domain_error(non_negative_integer,Horizon)``
+
+
+------------
+
+.. index:: check_forecast_horizon/1
+.. _forecaster_common/0::check_forecast_horizon/1:
+
+``check_forecast_horizon/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that a forecast horizon is a non-negative integer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_forecast_horizon(Horizon)``
+| **Mode and number of proofs:**
+|    ``check_forecast_horizon(+non_negative_integer)`` - ``one_or_error``
 
 
 ------------
@@ -404,11 +481,42 @@ Repeats the last full seasonal cycle of ``Frequency`` observations, cycling as n
 | **Template:**
 |    ``seasonal_naive_forecast(Series,Frequency,Horizon,Forecasts)``
 | **Mode and number of proofs:**
-|    ``seasonal_naive_forecast(+list(number),+integer,+integer,-list(number))`` - ``one_or_error``
+|    ``seasonal_naive_forecast(+list(number),+positive_integer,+non_negative_integer,-list(number))`` - ``one_or_error``
 
 | **Exceptions:**
+|    ``Frequency`` is a variable:
+|        ``instantiation_error``
+|    ``Frequency`` is neither a variable nor an integer:
+|        ``type_error(integer,Frequency)``
+|    ``Frequency`` is an integer but is not positive:
+|        ``domain_error(positive_integer,Frequency)``
+|    ``Horizon`` is a variable:
+|        ``instantiation_error``
+|    ``Horizon`` is neither a variable nor an integer:
+|        ``type_error(integer,Horizon)``
+|    ``Horizon`` is an integer but is negative:
+|        ``domain_error(non_negative_integer,Horizon)``
 |    ``Series`` has fewer than ``Frequency`` observations:
 |        ``domain_error(series_length,Series)``
+
+
+------------
+
+.. index:: check_frequency/1
+.. _forecaster_common/0::check_frequency/1:
+
+``check_frequency/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Checks that a seasonal frequency is a positive integer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_frequency(Frequency)``
+| **Mode and number of proofs:**
+|    ``check_frequency(+positive_integer)`` - ``one_or_error``
 
 
 ------------

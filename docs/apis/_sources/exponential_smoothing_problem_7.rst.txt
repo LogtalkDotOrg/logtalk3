@@ -1,0 +1,68 @@
+.. index:: single: exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification,MissingMarker)
+.. _exponential_smoothing_problem/7:
+
+.. rst-class:: right
+
+**object**
+
+``exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification,MissingMarker)``
+==============================================================================================================================================
+
+* ``Method`` - Exponential smoothing method.
+* ``Series`` - Validated training series.
+* ``OptimizationSeries`` - Training series with missing observations removed for optimizer initialization and bounds.
+* ``Frequency`` - Seasonal frequency or ``none``.
+* ``ParameterSpecification`` - Canonical list of fixed or automatic parameter options.
+* ``InitializationSpecification`` - Initialization strategy and number of initial cycles.
+* ``MissingMarker`` - Term denoting an unobserved value.
+
+
+Bounded sum-of-squared-errors optimization problem for exponential smoothing parameters. Implements both the local-optimization (Nelder-Mead) and Differential Evolution problem protocols over the same objective.
+
+| **Availability:** 
+|    ``logtalk_load(exponential_smoothing(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:1:0
+| **Date:** 2026-09-27
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`local_optimization_problem_protocol <local_optimization_problem_protocol/0>`
+|    ``public`` :ref:`differential_evolution_problem_protocol <differential_evolution_problem_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`exponential_smoothing_common <exponential_smoothing_common/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`differential_evolution_problem_protocol/0::fitness/2`  :ref:`local_optimization_problem_protocol/0::gradient/2`  :ref:`local_optimization_problem_protocol/0::hessian/2`  :ref:`local_optimization_problem_protocol/0::initial_point/1`  :ref:`differential_evolution_problem_protocol/0::initial_positions/1`  :ref:`local_optimization_problem_protocol/0::objective/2`  :ref:`local_optimization_problem_protocol/0::position_bounds/1`  :ref:`local_optimization_problem_protocol/0::progress/5`  :ref:`local_optimization_problem_protocol/0::stop_condition/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

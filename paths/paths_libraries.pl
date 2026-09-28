@@ -104,6 +104,7 @@ logtalk_library_path(events, library('events/')).
 logtalk_library_path(ewma_anomaly_detector, library('ewma_anomaly_detector/')).
 logtalk_library_path(expand_library_alias_paths, library('expand_library_alias_paths/')).
 logtalk_library_path(expecteds, library('expecteds/')).
+logtalk_library_path(exponential_smoothing, library('exponential_smoothing/')).
 logtalk_library_path(format, library('format/')).
 logtalk_library_path(fp_growth_pattern_miner, library('fp_growth_pattern_miner/')).
 logtalk_library_path(frequent_pattern_mining_protocols, library('frequent_pattern_mining_protocols/')).

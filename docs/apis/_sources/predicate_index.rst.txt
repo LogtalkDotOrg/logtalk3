@@ -10981,6 +10981,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``forecast_interval/5``
+   -----------------------
+
+   * :ref:`exponential_smoothing <exponential_smoothing/0::forecast_interval/5>`
+
+.. only:: latex
+
+   * ``forecast_interval/5`` - :ref:`exponential_smoothing <exponential_smoothing/0::forecast_interval/5>`
+
+.. only:: not latex
+
    ``forecaster_options/2``
    ------------------------
 
@@ -33194,11 +33205,12 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
    * :ref:`datalog_protocol <datalog_protocol/0::update/3>`
    * :ref:`dictionaryp <dictionaryp/0::update/3>`
+   * :ref:`exponential_smoothing <exponential_smoothing/0::update/3>`
    * :ref:`packs <packs/0::update/3>`
 
 .. only:: latex
 
-   * ``update/3`` - :ref:`datalog_protocol <datalog_protocol/0::update/3>`, :ref:`dictionaryp <dictionaryp/0::update/3>`, :ref:`packs <packs/0::update/3>`
+   * ``update/3`` - :ref:`datalog_protocol <datalog_protocol/0::update/3>`, :ref:`dictionaryp <dictionaryp/0::update/3>`, :ref:`exponential_smoothing <exponential_smoothing/0::update/3>`, :ref:`packs <packs/0::update/3>`
 
 .. only:: not latex
 
@@ -33206,11 +33218,12 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    ------------
 
    * :ref:`dictionaryp <dictionaryp/0::update/4>`
+   * :ref:`exponential_smoothing <exponential_smoothing/0::update/4>`
    * :ref:`trie(Representation) <trie/1::update/4>`
 
 .. only:: latex
 
-   * ``update/4`` - :ref:`dictionaryp <dictionaryp/0::update/4>`, :ref:`trie(Representation) <trie/1::update/4>`
+   * ``update/4`` - :ref:`dictionaryp <dictionaryp/0::update/4>`, :ref:`exponential_smoothing <exponential_smoothing/0::update/4>`, :ref:`trie(Representation) <trie/1::update/4>`
 
 .. only:: not latex
 

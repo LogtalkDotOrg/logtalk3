@@ -150,6 +150,7 @@ sed '1,19d' ../../../library/events/NOTES.md | pandoc -f gfm -t rst -o libraries
 sed '1,19d' ../../../library/ewma_anomaly_detector/NOTES.md | pandoc -f gfm -t rst -o libraries/ewma_anomaly_detector.rst
 sed '1,19d' ../../../library/expand_library_alias_paths/NOTES.md | pandoc -f gfm -t rst -o libraries/expand_library_alias_paths.rst
 sed '1,19d' ../../../library/expecteds/NOTES.md | pandoc -f gfm -t rst -o libraries/expecteds.rst
+sed '1,19d' ../../../library/exponential_smoothing/NOTES.md | pandoc -f gfm -t rst -o libraries/exponential_smoothing.rst
 sed '1,19d' ../../../library/format/NOTES.md | pandoc -f gfm -t rst -o libraries/format.rst
 sed '1,19d' ../../../library/fp_growth_pattern_miner/NOTES.md | pandoc -f gfm -t rst -o libraries/fp_growth_pattern_miner.rst
 sed '1,19d' ../../../library/frequent_pattern_mining_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/frequent_pattern_mining_protocols.rst

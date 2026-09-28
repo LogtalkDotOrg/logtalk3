@@ -142,6 +142,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ewma-anomaly-detector"><span class="xref std std-ref">ewma_anomaly_detector</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#expand-library-alias-paths"><span class="xref std std-ref">expand_library_alias_paths</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#expecteds"><span class="xref std std-ref">expecteds</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#exponential-smoothing"><span class="xref std std-ref">exponential_smoothing</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#fcube"><span class="xref std std-ref">fcube</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#flags"><span class="xref std std-ref">flags</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#format"><span class="xref std std-ref">format</span></a></li>
@@ -546,7 +547,7 @@
 </section>
 <section id="forecast-3">
 <span id="forecaster-protocol-0-forecast-3"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">forecast/3</span></code></a><a class="headerlink" href="#forecast-3" title="Link to this heading"></a></h3>
-<p>Forecasts the next <code class="docutils literal notranslate"><span class="pre">Horizon</span></code> values beyond the training series using the learned forecasting model.</p>
+<p>Forecasts the next <code class="docutils literal notranslate"><span class="pre">Horizon</span></code> values beyond the training series using the learned forecasting model. A zero horizon returns an empty list.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -560,7 +561,24 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">forecast(+compound,+integer,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">forecast(+compound,+non_negative_integer,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Horizon</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Horizon</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Horizon)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Horizon</span></code> is an integer but is negative:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Horizon)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -699,7 +717,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">export_to_clauses(+object_identifier,+compound,+callable,-list(clause))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">export_to_clauses(+object_identifier,+compound,+atom,-list(clause))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -720,7 +738,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">export_to_file(+object_identifier,+compound,+callable,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">export_to_file(+object_identifier,+compound,+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />

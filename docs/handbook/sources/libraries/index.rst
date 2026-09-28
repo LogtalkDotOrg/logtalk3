@@ -100,6 +100,7 @@ directory in the ``NOTES.md`` file.
    ewma_anomaly_detector
    expand_library_alias_paths
    expecteds
+   exponential_smoothing
    format
    fp_growth_pattern_miner
    frequent_pattern_mining_protocols

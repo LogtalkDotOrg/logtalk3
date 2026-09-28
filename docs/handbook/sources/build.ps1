@@ -150,6 +150,7 @@ Foreach-Object {
 (Get-Content ../../../library/ewma_anomaly_detector/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ewma_anomaly_detector.rst
 (Get-Content ../../../library/expand_library_alias_paths/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/expand_library_alias_paths.rst
 (Get-Content ../../../library/expecteds/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/expecteds.rst
+(Get-Content ../../../library/exponential_smoothing/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/exponential_smoothing.rst
 (Get-Content ../../../library/format/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/format.rst
 (Get-Content ../../../library/fp_growth_pattern_miner/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/fp_growth_pattern_miner.rst
 (Get-Content ../../../library/frequent_pattern_mining_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/frequent_pattern_mining_protocols.rst

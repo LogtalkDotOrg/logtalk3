@@ -41,6 +41,10 @@ Assumption-based Truth Maintenance System (ATMS).
 predicates, and test datasets for implementing time series forecasting
 algorithms.
 
+* ADDED: New `exponential_smoothing` library implementing univariate time
+series forecasting using simple exponential smoothing, Holt linear-trend
+smoothing, and additive or multiplicative Holt-Winters seasonal smoothing.
+
 * IMPROVED: Performance of the `crypto` library.
 
 * IMPROVED: Rewrite predicate definitions as tail-recursive in the

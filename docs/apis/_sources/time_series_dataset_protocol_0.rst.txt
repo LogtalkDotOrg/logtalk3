@@ -63,7 +63,7 @@ Enumerates by backtracking the time-ordered observations. ``Index`` is the 1-bas
 ``series_length/1``
 ^^^^^^^^^^^^^^^^^^^
 
-Returns the number of observations in the series.
+Returns the number of observations in the series. The declared length must match the number of observations enumerated by ``observation/2``.
 
 | **Compilation flags:**
 |    ``static``
@@ -71,7 +71,7 @@ Returns the number of observations in the series.
 | **Template:**
 |    ``series_length(Length)``
 | **Mode and number of proofs:**
-|    ``series_length(-integer)`` - ``one``
+|    ``series_length(-positive_integer)`` - ``one``
 
 
 ------------
@@ -82,7 +82,7 @@ Returns the number of observations in the series.
 ``frequency/1``
 ^^^^^^^^^^^^^^^
 
-Returns the number of observations per seasonal cycle (e.g. 12 for monthly data with yearly seasonality). Fails when the series has no declared seasonal period.
+Returns the positive number of observations per seasonal cycle (e.g. 12 for monthly data with yearly seasonality). Fails when the series has no declared seasonal period.
 
 | **Compilation flags:**
 |    ``static``
@@ -90,7 +90,7 @@ Returns the number of observations per seasonal cycle (e.g. 12 for monthly data 
 | **Template:**
 |    ``frequency(Frequency)``
 | **Mode and number of proofs:**
-|    ``frequency(-integer)`` - ``zero_or_one``
+|    ``frequency(-positive_integer)`` - ``zero_or_one``
 
 
 ------------

@@ -82,7 +82,7 @@ Learns a forecasting model from the given time series dataset object using defau
 ``forecast/3``
 ^^^^^^^^^^^^^^
 
-Forecasts the next ``Horizon`` values beyond the training series using the learned forecasting model.
+Forecasts the next ``Horizon`` values beyond the training series using the learned forecasting model. A zero horizon returns an empty list.
 
 | **Compilation flags:**
 |    ``static``
@@ -90,7 +90,15 @@ Forecasts the next ``Horizon`` values beyond the training series using the learn
 | **Template:**
 |    ``forecast(Forecaster,Horizon,Forecasts)``
 | **Mode and number of proofs:**
-|    ``forecast(+compound,+integer,-list(number))`` - ``one``
+|    ``forecast(+compound,+non_negative_integer,-list(number))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Horizon`` is a variable:
+|        ``instantiation_error``
+|    ``Horizon`` is neither a variable nor an integer:
+|        ``type_error(integer,Horizon)``
+|    ``Horizon`` is an integer but is negative:
+|        ``domain_error(non_negative_integer,Horizon)``
 
 
 ------------
@@ -210,7 +218,7 @@ Converts a forecaster into a list of predicate clauses. ``Functor`` is the funct
 | **Template:**
 |    ``export_to_clauses(Dataset,Forecaster,Functor,Clauses)``
 | **Mode and number of proofs:**
-|    ``export_to_clauses(+object_identifier,+compound,+callable,-list(clause))`` - ``one``
+|    ``export_to_clauses(+object_identifier,+compound,+atom,-list(clause))`` - ``one``
 
 
 ------------
@@ -229,7 +237,7 @@ Exports a forecaster to a file. ``Functor`` is the functor for the generated pre
 | **Template:**
 |    ``export_to_file(Dataset,Forecaster,Functor,File)``
 | **Mode and number of proofs:**
-|    ``export_to_file(+object_identifier,+compound,+callable,+atom)`` - ``one``
+|    ``export_to_file(+object_identifier,+compound,+atom,+atom)`` - ``one``
 
 
 ------------
