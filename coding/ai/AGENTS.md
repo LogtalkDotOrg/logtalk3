@@ -18,17 +18,17 @@ For task-specific procedures, load the matching skill under `coding-assistants/s
 
 ## Skills (on demand)
 
-| Skill | Use when |
-|-------|----------|
-| `skills/coding-style/SKILL.md` | Layout, naming, refactors, style review |
-| `skills/debugging/SKILL.md` | Debug mode, debugger, breakpoints, tracing |
-| `skills/documenting/SKILL.md` | `info/1`, `info/2`, `mode/2`, `lgtdoc` |
-| `skills/libraries/SKILL.md` | Reusing standard libraries; avoiding duplicate local helpers |
-| `skills/packs/SKILL.md` | Authoring packs and registries (`pack_protocol`, versions, checksums) |
-| `skills/performance/SKILL.md` | Writing performant code |
-| `skills/portability/SKILL.md` | Authoring portable applications and libraries |
-| `skills/scaffolding/SKILL.md` | Scaffold a new app (directory, settings, loader, tester) |
-| `skills/testing/SKILL.md` | Writing or running tests, `tester.lgt`, QuickCheck, coverage |
+| Skill                                  | Use when                                                              |
+|----------------------------------------|-----------------------------------------------------------------------|
+| `skills/logtalk-coding-style/SKILL.md` | Layout, naming, refactors, style review                               |
+| `skills/logtalk-debugging/SKILL.md`    | Debug mode, debugger, breakpoints, tracing                            |
+| `skills/logtalk-documenting/SKILL.md`  | `info/1`, `info/2`, `mode/2`, `lgtdoc`                                |
+| `skills/logtalk-libraries/SKILL.md`    | Reusing standard libraries; avoiding duplicate local helpers          |
+| `skills/logtalk-packs/SKILL.md`        | Authoring packs and registries (`pack_protocol`, versions, checksums) |
+| `skills/logtalk-performance/SKILL.md`  | Writing performant code                                               |
+| `skills/logtalk-portability/SKILL.md`  | Authoring portable applications and libraries                         |
+| `skills/logtalk-scaffolding/SKILL.md`  | Scaffold a new app (directory, settings, loader, tester)              |
+| `skills/logtalk-testing/SKILL.md`      | Writing or running tests, `tester.lgt`, QuickCheck, coverage          |
 
 ## Project layout (typical application or library)
 
