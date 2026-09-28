@@ -45,6 +45,9 @@ algorithms.
 series forecasting using simple exponential smoothing, Holt linear-trend
 smoothing, and additive or multiplicative Holt-Winters seasonal smoothing.
 
+* ADDED: New `time_series_regression` library implementing univariate time
+series forecasting using autoregressive (AR) models fitted by least squares.
+
 * IMPROVED: Performance of the `crypto` library.
 
 * IMPROVED: Rewrite predicate definitions as tail-recursive in the

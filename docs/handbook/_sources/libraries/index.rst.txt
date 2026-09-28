@@ -300,6 +300,7 @@ directory in the ``NOTES.md`` file.
    timeout
    time_scales
    time_series_protocols
+   time_series_regression
    tle_orbits
    tokenization
    toml

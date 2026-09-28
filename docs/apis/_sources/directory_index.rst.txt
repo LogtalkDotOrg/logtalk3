@@ -5340,6 +5340,20 @@ To load an entity, always load the library that includes it using the goal ``log
    * :doc:`forecaster_protocol <forecaster_protocol_0>`
    * :doc:`time_series_dataset_protocol <time_series_dataset_protocol_0>`
 
+``library/time_series_regression/``
+-----------------------------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      time_series_regression <time_series_regression_0>
+
+.. only:: latex
+
+   * :doc:`time_series_regression <time_series_regression_0>`
+
 ``library/timeout/``
 --------------------
 

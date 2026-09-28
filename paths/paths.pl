@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on September 27, 2026
+%  Last updated on September 28, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -378,6 +378,7 @@ logtalk_library_path(text_normalization, library('text_normalization/')).
 logtalk_library_path(text_vectorization, library('text_vectorization/')).
 logtalk_library_path(time_scales, library('time_scales/')).
 logtalk_library_path(time_series_protocols, library('time_series_protocols/')).
+logtalk_library_path(time_series_regression, library('time_series_regression/')).
 logtalk_library_path(timeout, library('timeout/')).
 logtalk_library_path(tle_orbits, library('tle_orbits/')).
 logtalk_library_path(tokenization, library('tokenization/')).
