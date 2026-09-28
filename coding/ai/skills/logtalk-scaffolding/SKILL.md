@@ -1,6 +1,9 @@
 ---
 name: logtalk-scaffolding
 description: Scaffold a new Logtalk application (directory, settings.lgt, loader.lgt, optional tester/tests). Use when starting a project from scratch or setting up loaders, settings, and unit-test drivers.
+license: Apache-2.0
+metadata:
+  copyright: "2026 Paulo Moura <pmoura@logtalk.org>"
 ---
 
 # New Application Skill

@@ -1,6 +1,9 @@
 ---
 name: logtalk-documenting
 description: Document Logtalk entities and predicates using info/1, info/2, mode/2, and related directives, and generate API docs with lgtdoc. Use when adding or improving source documentation, writing info directives, or producing HTML/PDF API documentation.
+license: Apache-2.0
+metadata:
+  copyright: "2026 Paulo Moura <pmoura@logtalk.org>"
 ---
 
 # Documenting Skill

@@ -1,6 +1,9 @@
 ---
 name: logtalk-portability
 description: Write Logtalk code portable across Prolog backends. Use when implementing libraries or applications that must run on multiple systems, reviewing non-portable constructs, or isolating backend-specific code.
+license: Apache-2.0
+metadata:
+  copyright: "2026 Paulo Moura <pmoura@logtalk.org>"
 ---
 
 # Portability Skill

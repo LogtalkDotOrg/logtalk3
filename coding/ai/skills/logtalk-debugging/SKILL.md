@@ -1,6 +1,9 @@
 ---
 name: logtalk-debugging
 description: Debug Logtalk code with the debugger tool, debug mode, breakpoints, tracing, and related techniques. Use when diagnosing failures, unexpected solutions, exceptions, or non-determinism in Logtalk entities.
+license: Apache-2.0
+metadata:
+  copyright: "2026 Paulo Moura <pmoura@logtalk.org>"
 ---
 
 # Debugging Skill

@@ -1,6 +1,9 @@
 ---
 name: logtalk-coding-style
 description: Apply and review Logtalk coding style guidelines (layout, naming, directives, clauses). Use when writing or reformatting Logtalk code, reviewing style, or matching distribution conventions.
+license: Apache-2.0
+metadata:
+  copyright: "2026 Paulo Moura <pmoura@logtalk.org>"
 ---
 
 # Coding Style Skill

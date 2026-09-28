@@ -1,6 +1,9 @@
 ---
 name: logtalk-performance
 description: Write efficient Logtalk and Prolog predicates—first-argument indexing, avoid defaulty representations, no reverse/2 after head-to-tail accumulation, fix non-determinism without cuts on main APIs, prefer tail recursion. Use when optimizing code, reviewing hot paths, or fixing spurious choice-points.
+license: Apache-2.0
+metadata:
+  copyright: "2026 Paulo Moura <pmoura@logtalk.org>"
 ---
 
 # Performance Skill

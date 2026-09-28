@@ -1,6 +1,9 @@
 ---
 name: logtalk-testing
 description: Write, organize, run, and debug Logtalk unit tests with lgtunit. Use when adding tests, fixing failing tests, improving coverage, setting up tester drivers, or using QuickCheck.
+license: Apache-2.0
+metadata:
+  copyright: "2026 Paulo Moura <pmoura@logtalk.org>"
 ---
 
 # Testing Skill
