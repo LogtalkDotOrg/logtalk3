@@ -24,6 +24,7 @@
 	logtalk_load(format(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(statistics(loader)),
+	logtalk_load(univariate_distributions(loader)),
 	logtalk_load(linear_algebra(loader)),
 	logtalk_load(time_series_protocols(loader)),
 	logtalk_load(time_series_regression, [

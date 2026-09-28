@@ -61,6 +61,26 @@
 		]
 	]).
 
+	:- public(forecast_interval/5).
+	:- mode(forecast_interval(+compound, +non_negative_integer, -list(number), -list(number), +list(compound)), one_or_error).
+	:- info(forecast_interval/5, [
+		comment is 'Computes analytic prediction interval bounds for the next ``Horizon`` forecasts of a learned forecaster, assuming independent, identically distributed, zero-mean Gaussian innovations and treating the fitted coefficients as known. The ``h``-step forecast error variance is the residual variance times the sum of the squared ``psi`` weights ``psi(0)..psi(h-1)`` of the (integrated) model, and the bounds are the point forecast plus or minus the standard normal quantile for the requested confidence times the forecast error standard deviation. The residual variance is the sum of squared errors divided by the residual degrees of freedom (the number of scored observations minus the design matrix rank). A zero horizon returns two empty lists.',
+		argnames is ['Forecaster', 'Horizon', 'Lower', 'Upper', 'Options'],
+		exceptions is [
+			'``Forecaster`` is a variable' - instantiation_error,
+			'``Forecaster`` is neither a variable nor a valid forecaster' - domain_error(forecaster, 'Forecaster'),
+			'``Horizon`` is a variable' - instantiation_error,
+			'``Horizon`` is neither a variable nor an integer' - type_error(integer, 'Horizon'),
+			'``Horizon`` is an integer but is negative' - domain_error(non_negative_integer, 'Horizon'),
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An option is a variable or has an unbound argument' - instantiation_error,
+			'An option is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An option is a compound term but is not a valid interval option' - domain_error(option, 'Option'),
+			'``Horizon`` is positive and the forecaster has no residual degrees of freedom (an exactly determined fit)' - domain_error(residual_degrees_of_freedom, 'Forecaster')
+		]
+	]).
+
 	:- uses(format, [
 		format/2
 	]).
@@ -79,6 +99,10 @@
 
 	:- uses(linear_algebra, [
 		least_squares/3, matrix_rank/2
+	]).
+
+	:- uses(univariate_distributions(fast_random), [
+		standard_normal_quantile/2
 	]).
 
 	% learning
@@ -309,6 +333,147 @@
 	first_values(Count, [Value| Values], [Value| Kept]) :-
 		Count1 is Count - 1,
 		first_values(Count1, Values, Kept).
+
+	% prediction intervals
+
+	forecast_interval(Forecaster, Horizon, Lower, Upper, UserOptions) :-
+		check_forecaster(Forecaster),
+		^^check_forecast_horizon(Horizon),
+		check_interval_options(UserOptions),
+		merge_interval_options(UserOptions, Options),
+		memberchk(confidence(Confidence), Options),
+		(	Horizon =:= 0 ->
+			Lower = [],
+			Upper = []
+		;	Forecaster = time_series_regression_forecaster(ar(_Order, Differencing), _State, ar_parameters(_InterceptValue, Coefficients), Diagnostics),
+			residual_deviation(Forecaster, Diagnostics, Deviation),
+			forecast(Forecaster, Horizon, PointForecasts),
+			integrated_coefficients(Differencing, Coefficients, IntegratedCoefficients),
+			interval_scales(Horizon, IntegratedCoefficients, Scales),
+			Probability is 0.5 + Confidence / 2.0,
+			standard_normal_quantile(Probability, Quantile),
+			HalfWidthFactor is abs(Quantile) * Deviation,
+			interval_bounds(PointForecasts, Scales, HalfWidthFactor, Lower, Upper)
+		).
+
+	% the residual variance estimate is the sum of squared errors divided
+	% by the residual degrees of freedom; it is undefined for an exactly
+	% determined fit
+
+	residual_deviation(Forecaster, Diagnostics, Deviation) :-
+		memberchk(scored_count(ScoredCount), Diagnostics),
+		memberchk(design_rank(Rank), Diagnostics),
+		DegreesOfFreedom is ScoredCount - Rank,
+		(	DegreesOfFreedom > 0 ->
+			memberchk(sum_squared_error(SumSquaredError), Diagnostics),
+			Deviation is sqrt(SumSquaredError / DegreesOfFreedom)
+		;	domain_error(residual_degrees_of_freedom, Forecaster)
+		).
+
+	% expands (1 - phi(1)*B - ... - phi(p)*B^p) * (1 - B)^d into
+	% 1 - pi(1)*B - ... - pi(p+d)*B^(p+d) and returns the pi coefficients
+
+	integrated_coefficients(Differencing, Coefficients, IntegratedCoefficients) :-
+		negate_values(Coefficients, Negated),
+		multiply_by_difference(Differencing, [1.0| Negated], [_| Polynomial]),
+		negate_values(Polynomial, IntegratedCoefficients).
+
+	multiply_by_difference(0, Polynomial, Polynomial) :-
+		!.
+	multiply_by_difference(Differencing, Polynomial0, Polynomial) :-
+		Differencing > 0,
+		difference_polynomial(Polynomial0, 0.0, Polynomial1),
+		Differencing1 is Differencing - 1,
+		multiply_by_difference(Differencing1, Polynomial1, Polynomial).
+
+	difference_polynomial([], Previous, [Term]) :-
+		Term is -Previous.
+	difference_polynomial([Coefficient| Coefficients], Previous, [Term| Terms]) :-
+		Term is Coefficient - Previous,
+		difference_polynomial(Coefficients, Coefficient, Terms).
+
+	negate_values([], []).
+	negate_values([Value| Values], [Negated| NegatedValues]) :-
+		Negated is -Value,
+		negate_values(Values, NegatedValues).
+
+	% for each horizon step h, computes the square root of the sum of the
+	% squared psi weights psi(0)..psi(h-1); the history holds the most
+	% recent psi weights, most recent first
+
+	interval_scales(Horizon, IntegratedCoefficients, Scales) :-
+		length(IntegratedCoefficients, Count),
+		ZeroCount is Count - 1,
+		zeros(ZeroCount, Zeros),
+		interval_scales(Horizon, IntegratedCoefficients, [1.0| Zeros], 0.0, Scales).
+
+	interval_scales(0, _, _, _, []) :-
+		!.
+	interval_scales(Horizon, IntegratedCoefficients, History, Sum0, [Scale| Scales]) :-
+		History = [Psi| _],
+		Sum1 is Sum0 + Psi * Psi,
+		Scale is sqrt(Sum1),
+		dot_product(IntegratedCoefficients, History, 0.0, NextPsi),
+		push_window(History, NextPsi, NextHistory),
+		Horizon1 is Horizon - 1,
+		interval_scales(Horizon1, IntegratedCoefficients, NextHistory, Sum1, Scales).
+
+	zeros(0, []) :-
+		!.
+	zeros(Count, [0.0| Zeros]) :-
+		Count1 is Count - 1,
+		zeros(Count1, Zeros).
+
+	interval_bounds([], [], _, [], []).
+	interval_bounds([Point| Points], [Scale| Scales], HalfWidthFactor, [Lower| Lowers], [Upper| Uppers]) :-
+		HalfWidth is HalfWidthFactor * Scale,
+		Lower is Point - HalfWidth,
+		Upper is Point + HalfWidth,
+		interval_bounds(Points, Scales, HalfWidthFactor, Lowers, Uppers).
+
+	% interval options are validated independently from the learn/3 options
+
+	check_interval_options(Options) :-
+		context(Context),
+		check(list, Options, Context),
+		check_interval_options_(Options).
+
+	check_interval_options_([]).
+	check_interval_options_([Option| Options]) :-
+		(	\+ ground(Option) ->
+			instantiation_error
+		;	\+ compound(Option) ->
+			type_error(compound, Option)
+		;	\+ valid_interval_option(Option) ->
+			domain_error(option, Option)
+		;	true
+		),
+		check_interval_options_(Options).
+
+	merge_interval_options(UserOptions, Options) :-
+		findall(
+			DefaultOption,
+			(	default_interval_option(DefaultOption),
+				functor(DefaultOption, Name, Arity),
+				functor(Template, Name, Arity),
+				\+ memberchk(Template, UserOptions)
+			),
+			DefaultOptions
+		),
+		append(UserOptions, DefaultOptions, Options).
+
+	valid_interval_option(confidence(Level)) :-
+		number(Level),
+		Level > 0.0,
+		Level < 1.0,
+		% ensure that the upper tail probability is distinguishable from one
+		Probability is 0.5 + Level / 2.0,
+		Probability < 1.0.
+	valid_interval_option(method(Method)) :-
+		Method == normal.
+
+	default_interval_option(confidence(0.95)).
+	default_interval_option(method(normal)).
 
 	% online updates
 

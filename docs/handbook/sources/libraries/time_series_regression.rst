@@ -6,11 +6,13 @@
 This library implements univariate time series forecasting using
 autoregressive (AR) models fitted by least squares, with an optional
 intercept, optional differencing (ARI models), and optional automatic
-order selection using information criteria. It implements the
-``forecaster_protocol`` and reuses dataset validation, diagnostics,
-export, lag construction, and differencing support from the
-``time_series_protocols`` library. Least-squares problems are solved
-using the ``linear_algebra`` library.
+order selection using information criteria, plus analytic prediction
+intervals. It implements the ``forecaster_protocol`` and reuses dataset
+validation, diagnostics, export, lag construction, and differencing
+support from the ``time_series_protocols`` library. Least-squares
+problems are solved using the ``linear_algebra`` library, and prediction
+interval quantiles are computed using the ``univariate_distributions``
+library.
 
 Datasets are objects implementing the ``time_series_dataset_protocol``
 protocol. All observations must be numbers; missing observations are not
@@ -42,8 +44,9 @@ To test this library predicates, load the ``tester.lgt`` file:
    | ?- logtalk_load(time_series_regression(tester)).
 
 The test suite compares fitted coefficients, error sums, information
-criteria, and forecasts for a noisy AR(2) dataset with values computed
-independently using NumPy least squares.
+criteria, forecasts, and prediction interval bounds for a noisy AR(2)
+dataset with values computed independently using NumPy least squares
+(and, for prediction intervals, SciPy's normal quantile function).
 
 Model
 -----
@@ -168,8 +171,52 @@ forecasters plus ``order/1``, ``differencing/1``, ``intercept/1``,
 ``residuals/1`` (``none`` unless retained) terms, and
 ``order_selection/2`` when ``order(auto)`` is used.
 
+Prediction intervals
+--------------------
+
+``forecast_interval/5`` computes analytic prediction interval bounds for
+the next ``Horizon`` forecasts:
+
+::
+
+   time_series_regression::forecast_interval(Forecaster, Horizon, Lower, Upper, Options)
+
+The bounds assume independent, identically distributed, zero-mean
+Gaussian innovations and treat the fitted intercept and coefficients as
+known. The ``h``-step forecast error variance is the residual variance
+times the sum of the squared ``psi(0)..psi(h-1)`` weights of the model
+(the AR polynomial combined with the differencing polynomial, when
+``differencing/1`` is positive), and the bounds are the point forecast
+plus or minus the standard normal quantile for the requested confidence
+times the forecast error standard deviation. The residual variance is
+``sum_squared_error/1`` divided by the residual degrees of freedom
+(``scored_count/1`` minus ``design_rank/1``). A zero ``Horizon`` returns
+two empty lists.
+
+``Options`` is validated independently from ``learn/3`` options (a
+``domain_error(option, Option)`` is raised for an unsupported option)
+and supports:
+
+- ``confidence(Level)``: central interval coverage, a number in the open
+  interval ``]0.0, 1.0[`` (default: ``0.95``).
+- ``method(normal)``: the only supported interval method (default, and
+  currently the only accepted value).
+
+When the residual degrees of freedom are not positive (an exactly
+determined fit, where ``scored_count/1`` equals ``design_rank/1``), a
+positive ``Horizon`` raises a
+``domain_error(residual_degrees_of_freedom, Forecaster)`` error, since
+the residual variance is then undefined.
+
+The standard normal quantile is computed by the
+``univariate_distributions`` library.
+
 Limitations
 -----------
 
 - Missing observations are not supported.
-- Prediction intervals are not provided.
+- Prediction intervals are the analytic normal-theory approximation
+  described above. They do not account for uncertainty in the estimated
+  intercept and coefficients (only in future innovations), which
+  understates interval width, particularly for short training series or
+  high orders; no bootstrap or simulation-based alternative is provided.

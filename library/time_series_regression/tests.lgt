@@ -29,6 +29,10 @@
 		comment is 'Tests for the "time_series_regression" library. Reference values for the noisy AR(2) dataset were computed independently using NumPy least squares.'
 	]).
 
+	:- uses(lgtunit, [
+		op(700, xfx, =~=), (=~=)/2
+	]).
+
 	:- uses(list, [
 		length/2, memberchk/2
 	]).
@@ -47,51 +51,51 @@
 	test(ts_regression_ar1_parameters, deterministic) :-
 		time_series_regression::learn(ar1_series, Forecaster),
 		parameters(Forecaster, Intercept, [Coefficient]),
-		close(Intercept, 2.0),
-		close(Coefficient, 0.5).
+		Intercept =~= 2.0,
+		Coefficient =~= 0.5.
 
 	test(ts_regression_ar1_forecast, deterministic) :-
 		time_series_regression::learn(ar1_series, Forecaster),
 		time_series_regression::forecast(Forecaster, 3, Forecasts),
-		close_list(Forecasts, [3.984375, 3.9921875, 3.99609375]).
+		Forecasts =~= [3.984375, 3.9921875, 3.99609375].
 
 	test(ts_regression_ar2_parameters, deterministic) :-
 		time_series_regression::learn(ar2_series, Forecaster, [order(2)]),
 		parameters(Forecaster, Intercept, Coefficients),
-		close(Intercept, 1.0),
-		close_list(Coefficients, [0.5, -0.25]).
+		Intercept =~= 1.0,
+		Coefficients =~= [0.5, -0.25].
 
 	test(ts_regression_ar2_forecast, deterministic) :-
 		time_series_regression::learn(ar2_series, Forecaster, [order(2)]),
 		time_series_regression::forecast(Forecaster, 3, Forecasts),
-		close_list(Forecasts, [1.33203125, 1.33251953125, 1.333251953125]).
+		Forecasts =~= [1.33203125, 1.33251953125, 1.333251953125].
 
 	test(ts_regression_no_intercept, deterministic) :-
 		time_series_regression::learn(decay_series, Forecaster, [intercept(false)]),
 		parameters(Forecaster, Intercept, [Coefficient]),
-		close(Intercept, 0.0),
-		close(Coefficient, 0.5),
+		Intercept =~= 0.0,
+		Coefficient =~= 0.5,
 		time_series_regression::forecast(Forecaster, 3, Forecasts),
-		close_list(Forecasts, [0.0625, 0.03125, 0.015625]).
+		Forecasts =~= [0.0625, 0.03125, 0.015625].
 
 	% differencing
 
 	test(ts_regression_differencing_1, deterministic) :-
 		time_series_regression::learn(linear_trend, Forecaster, [differencing(1)]),
 		time_series_regression::forecast(Forecaster, 3, Forecasts),
-		close_list(Forecasts, [22.0, 24.0, 26.0]).
+		Forecasts =~= [22.0, 24.0, 26.0].
 
 	test(ts_regression_differencing_2, deterministic) :-
 		time_series_regression::learn(quadratic_trend, Forecaster, [differencing(2)]),
 		time_series_regression::forecast(Forecaster, 3, Forecasts),
-		close_list(Forecasts, [81.0, 100.0, 121.0]).
+		Forecasts =~= [81.0, 100.0, 121.0].
 
 	% rank-deficient design matrices
 
 	test(ts_regression_constant_series_forecast, deterministic) :-
 		time_series_regression::learn(constant_series, Forecaster),
 		time_series_regression::forecast(Forecaster, 3, Forecasts),
-		close_list(Forecasts, [5.0, 5.0, 5.0]).
+		Forecasts =~= [5.0, 5.0, 5.0].
 
 	test(ts_regression_constant_series_rank, true(Rank == 1)) :-
 		time_series_regression::learn(constant_series, Forecaster),
@@ -102,34 +106,34 @@
 	test(ts_regression_noisy_ar2_parameters, deterministic) :-
 		time_series_regression::learn(noisy_ar2_series, Forecaster, [order(2)]),
 		parameters(Forecaster, Intercept, Coefficients),
-		close(Intercept, 0.8840570534290365),
-		close_list(Coefficients, [0.6382169512066711, -0.21981628666999298]).
+		Intercept =~= 0.8840570534290365,
+		Coefficients =~= [0.6382169512066711, -0.21981628666999298].
 
 	test(ts_regression_noisy_ar2_forecast, deterministic) :-
 		time_series_regression::learn(noisy_ar2_series, Forecaster, [order(2)]),
 		time_series_regression::forecast(Forecaster, 3, Forecasts),
-		close_list(Forecasts, [2.366094149595506, 1.698573771941963, 1.4480095976817724]).
+		Forecasts =~= [2.366094149595506, 1.698573771941963, 1.4480095976817724].
 
 	test(ts_regression_noisy_ar2_diagnostics, true) :-
 		time_series_regression::learn(noisy_ar2_series, Forecaster, [order(2)]),
 		time_series_regression::diagnostic(Forecaster, sum_squared_error(SumSquaredError)),
-		close(SumSquaredError, 18.486552852643516),
+		SumSquaredError =~= 18.486552852643516,
 		time_series_regression::diagnostic(Forecaster, scored_count(78)),
 		time_series_regression::diagnostic(Forecaster, parameter_count(3)),
 		time_series_regression::diagnostic(Forecaster, aic(AIC)),
-		close(AIC, -106.29388807537143),
+		AIC =~= -106.29388807537143,
 		time_series_regression::diagnostic(Forecaster, aicc(AICc)),
-		close(AICc, -105.9695637510471),
+		AICc =~= -105.9695637510471,
 		time_series_regression::diagnostic(Forecaster, bic(BIC)),
-		close(BIC, -99.22376159530265).
+		BIC =~= -99.22376159530265.
 
 	test(ts_regression_noisy_ar2_no_intercept, true) :-
 		time_series_regression::learn(noisy_ar2_series, Forecaster, [order(1), intercept(false)]),
 		parameters(Forecaster, Intercept, [Coefficient]),
-		close(Intercept, 0.0),
-		close(Coefficient, 0.95588704),
+		Intercept =~= 0.0,
+		Coefficient =~= 0.95588704,
 		time_series_regression::diagnostic(Forecaster, sum_squared_error(SumSquaredError)),
-		close(SumSquaredError, 25.080785846809995).
+		SumSquaredError =~= 25.080785846809995.
 
 	% automatic order selection
 
@@ -141,10 +145,10 @@
 		time_series_regression::learn(noisy_ar2_series, Forecaster, [order(auto), max_order(4)]),
 		time_series_regression::diagnostic(Forecaster, order_selection(aicc, Candidates)),
 		Candidates = [1-Score1, 2-Score2, 3-Score3, 4-Score4],
-		close(Score1, -109.4554269388882),
-		close(Score2, -110.27190041015955),
-		close(Score3, -108.07961515949322),
-		close(Score4, -106.04102157651033).
+		Score1 =~= -109.4554269388882,
+		Score2 =~= -110.27190041015955,
+		Score3 =~= -108.07961515949322,
+		Score4 =~= -106.04102157651033.
 
 	test(ts_regression_auto_order_bic, true(Order == 1)) :-
 		time_series_regression::learn(noisy_ar2_series, Forecaster, [order(auto), max_order(4), selection_criterion(bic)]),
@@ -154,10 +158,10 @@
 		time_series_regression::learn(noisy_ar2_series, Forecaster, [order(auto), max_order(4), selection_criterion(bic)]),
 		time_series_regression::diagnostic(Forecaster, order_selection(bic, Candidates)),
 		Candidates = [1-Score1, 2-Score2, 3-Score3, 4-Score4],
-		close(Score1, -104.95834381995937),
-		close(Score2, -103.61303372263387),
-		close(Score3, -99.32006208003804),
-		close(Score4, -95.24449773222153).
+		Score1 =~= -104.95834381995937,
+		Score2 =~= -103.61303372263387,
+		Score3 =~= -99.32006208003804,
+		Score4 =~= -95.24449773222153.
 
 	test(ts_regression_auto_order_aic_selects, true(Order == 2)) :-
 		time_series_regression::learn(noisy_ar2_series, Forecaster, [order(auto), max_order(4), selection_criterion(aic)]),
@@ -184,7 +188,7 @@
 		length(Residuals, 78),
 		sum_squares(Residuals, 0.0, SumSquares),
 		time_series_regression::diagnostic(Forecaster, sum_squared_error(SumSquaredError)),
-		close(SumSquares, SumSquaredError).
+		SumSquares =~= SumSquaredError.
 
 	% options
 
@@ -280,14 +284,14 @@
 		time_series_regression::learn(ar2_series, Forecaster, [order(2)]),
 		time_series_regression::update(Forecaster, 1.33203125, Updated),
 		time_series_regression::forecast(Updated, 2, Forecasts),
-		close_list(Forecasts, [1.33251953125, 1.333251953125]).
+		Forecasts =~= [1.33251953125, 1.333251953125].
 
 	test(ts_regression_update_keeps_original_forecaster, deterministic) :-
 		time_series_regression::learn(ar2_series, Forecaster, [order(2)]),
 		time_series_regression::forecast(Forecaster, 2, Forecasts0),
 		time_series_regression::update(Forecaster, 1.33203125, _Updated),
 		time_series_regression::forecast(Forecaster, 2, Forecasts1),
-		close_list(Forecasts1, Forecasts0).
+		Forecasts1 =~= Forecasts0.
 
 	test(ts_regression_update_diagnostics, true) :-
 		time_series_regression::learn(ar2_series, Forecaster, [order(2)]),
@@ -303,22 +307,22 @@
 		time_series_regression::learn(linear_trend, Forecaster, [differencing(1)]),
 		time_series_regression::update(Forecaster, 22, Updated),
 		time_series_regression::forecast(Updated, 2, Forecasts),
-		close_list(Forecasts, [24.0, 26.0]).
+		Forecasts =~= [24.0, 26.0].
 
 	test(ts_regression_update_differencing_2, deterministic) :-
 		time_series_regression::learn(quadratic_trend, Forecaster, [differencing(2)]),
 		time_series_regression::update(Forecaster, 81, Updated),
 		time_series_regression::forecast(Updated, 2, Forecasts),
-		close_list(Forecasts, [100.0, 121.0]).
+		Forecasts =~= [100.0, 121.0].
 
 	test(ts_regression_update_off_model_observation, true) :-
 		time_series_regression::learn(ar2_series, Forecaster, [order(2)]),
 		time_series_regression::update(Forecaster, 2.0, Updated),
 		time_series_regression::forecast(Updated, 1, Forecasts),
-		close_list(Forecasts, [1.66650390625]),
+		Forecasts =~= [1.66650390625],
 		time_series_regression::diagnostic(Updated, sum_squared_error(SumSquaredError)),
-		Residual is 2.0 - 1.33203125,
-		close(SumSquaredError, Residual * Residual).
+		ResidualSquared is (2.0 - 1.33203125) ** 2,
+		SumSquaredError =~= ResidualSquared.
 
 	test(ts_regression_update_retained_residuals, true) :-
 		time_series_regression::learn(noisy_ar2_series, Forecaster, [order(2), retain_residuals(true)]),
@@ -356,6 +360,119 @@
 	test(ts_regression_update_invalid_option, error(domain_error(option, foo(1)))) :-
 		time_series_regression::learn(ar1_series, Forecaster),
 		time_series_regression::update(Forecaster, 1.0, _, [foo(1)]).
+
+	% prediction intervals
+
+	test(ts_regression_forecast_interval_zero_horizon, true(Lower-Upper == []-[])) :-
+		time_series_regression::learn(ar1_series, Forecaster),
+		time_series_regression::forecast_interval(Forecaster, 0, Lower, Upper, []).
+
+	test(ts_regression_forecast_interval_noiseless_ar1, true) :-
+		time_series_regression::learn(ar1_series, Forecaster),
+		time_series_regression::forecast(Forecaster, 3, PointForecasts),
+		time_series_regression::forecast_interval(Forecaster, 3, Lower, Upper, []),
+		Lower =~= PointForecasts,
+		Upper =~= PointForecasts.
+
+	test(ts_regression_forecast_interval_noisy_ar2, true) :-
+		time_series_regression::learn(noisy_ar2_series, Forecaster, [order(2)]),
+		time_series_regression::forecast_interval(Forecaster, 5, Lower, Upper, []),
+		Lower =~= [1.3930211374666417, 0.5442118493687096, 0.27931737352364405, 0.2659626606596961, 0.3114304179122329],
+		Upper =~= [3.3391671617243706, 2.8529356945152164, 2.616701821839901, 2.6036916293326433, 2.65155351527206].
+
+	test(ts_regression_forecast_interval_brackets_point_forecast, true) :-
+		time_series_regression::learn(noisy_ar2_series, Forecaster, [order(2)]),
+		time_series_regression::forecast(Forecaster, 6, PointForecasts),
+		time_series_regression::forecast_interval(Forecaster, 6, Lower, Upper, []),
+		bracketed(PointForecasts, Lower, Upper).
+
+	test(ts_regression_forecast_interval_widens_with_horizon, true) :-
+		time_series_regression::learn(noisy_ar2_series, Forecaster, [order(2)]),
+		time_series_regression::forecast_interval(Forecaster, 6, Lower, Upper, []),
+		widths(Lower, Upper, Widths),
+		non_decreasing(Widths).
+
+	test(ts_regression_forecast_interval_narrower_confidence, true) :-
+		time_series_regression::learn(noisy_ar2_series, Forecaster, [order(2)]),
+		time_series_regression::forecast_interval(Forecaster, 4, Lower80, Upper80, [confidence(0.8)]),
+		time_series_regression::forecast_interval(Forecaster, 4, Lower95, Upper95, [confidence(0.95)]),
+		widths(Lower80, Upper80, Widths80),
+		widths(Lower95, Upper95, Widths95),
+		narrower(Widths80, Widths95).
+
+	test(ts_regression_forecast_interval_differencing_1, true) :-
+		time_series_regression::learn(linear_trend, Forecaster, [differencing(1)]),
+		time_series_regression::forecast(Forecaster, 3, PointForecasts),
+		time_series_regression::forecast_interval(Forecaster, 3, Lower, Upper, []),
+		Lower =~= PointForecasts,
+		Upper =~= PointForecasts.
+
+	test(ts_regression_forecast_interval_exactly_determined_fit, error(domain_error(residual_degrees_of_freedom, _))) :-
+		time_series_regression::learn(exactly_determined_series, Forecaster, [order(3)]),
+		time_series_regression::diagnostic(Forecaster, scored_count(4)),
+		time_series_regression::diagnostic(Forecaster, design_rank(4)),
+		time_series_regression::forecast_interval(Forecaster, 1, _, _, []).
+
+	test(ts_regression_forecast_interval_default_options, true) :-
+		time_series_regression::learn(ar2_series, Forecaster, [order(2)]),
+		time_series_regression::forecast_interval(Forecaster, 2, Lower0, Upper0, []),
+		time_series_regression::forecast_interval(Forecaster, 2, Lower1, Upper1, [confidence(0.95), method(normal)]),
+		Lower0 =~= Lower1,
+		Upper0 =~= Upper1.
+
+	test(ts_regression_forecast_interval_confidence_too_high, error(domain_error(option, confidence(1.0)))) :-
+		time_series_regression::learn(ar1_series, Forecaster),
+		time_series_regression::forecast_interval(Forecaster, 1, _, _, [confidence(1.0)]).
+
+	test(ts_regression_forecast_interval_confidence_too_low, error(domain_error(option, confidence(0.0)))) :-
+		time_series_regression::learn(ar1_series, Forecaster),
+		time_series_regression::forecast_interval(Forecaster, 1, _, _, [confidence(0.0)]).
+
+	test(ts_regression_forecast_interval_confidence_negative, error(domain_error(option, confidence(-0.5)))) :-
+		time_series_regression::learn(ar1_series, Forecaster),
+		time_series_regression::forecast_interval(Forecaster, 1, _, _, [confidence(-0.5)]).
+
+	test(ts_regression_forecast_interval_unsupported_method, error(domain_error(option, method(bootstrap)))) :-
+		time_series_regression::learn(ar1_series, Forecaster),
+		time_series_regression::forecast_interval(Forecaster, 1, _, _, [method(bootstrap)]).
+
+	test(ts_regression_forecast_interval_unknown_option, error(domain_error(option, foo(1)))) :-
+		time_series_regression::learn(ar1_series, Forecaster),
+		time_series_regression::forecast_interval(Forecaster, 1, _, _, [foo(1)]).
+
+	test(ts_regression_forecast_interval_options_not_a_list, error(type_error(list, foo))) :-
+		time_series_regression::learn(ar1_series, Forecaster),
+		time_series_regression::forecast_interval(Forecaster, 1, _, _, foo).
+
+	test(ts_regression_forecast_interval_options_partial_list, error(instantiation_error)) :-
+		time_series_regression::learn(ar1_series, Forecaster),
+		time_series_regression::forecast_interval(Forecaster, 1, _, _, [_| _]).
+
+	test(ts_regression_forecast_interval_option_not_compound, error(type_error(compound, foo))) :-
+		time_series_regression::learn(ar1_series, Forecaster),
+		time_series_regression::forecast_interval(Forecaster, 1, _, _, [foo]).
+
+	test(ts_regression_forecast_interval_option_unbound_argument, error(instantiation_error)) :-
+		time_series_regression::learn(ar1_series, Forecaster),
+		time_series_regression::forecast_interval(Forecaster, 1, _, _, [confidence(_)]).
+
+	test(ts_regression_forecast_interval_unbound_forecaster, error(instantiation_error)) :-
+		time_series_regression::forecast_interval(_, 1, _, _, []).
+
+	test(ts_regression_forecast_interval_invalid_forecaster, error(domain_error(forecaster, foo))) :-
+		time_series_regression::forecast_interval(foo, 1, _, _, []).
+
+	test(ts_regression_forecast_interval_negative_horizon, error(domain_error(non_negative_integer, -1))) :-
+		time_series_regression::learn(ar1_series, Forecaster),
+		time_series_regression::forecast_interval(Forecaster, -1, _, _, []).
+
+	test(ts_regression_forecast_interval_non_integer_horizon, error(type_error(integer, foo))) :-
+		time_series_regression::learn(ar1_series, Forecaster),
+		time_series_regression::forecast_interval(Forecaster, foo, _, _, []).
+
+	test(ts_regression_forecast_interval_unbound_horizon, error(instantiation_error)) :-
+		time_series_regression::learn(ar1_series, Forecaster),
+		time_series_regression::forecast_interval(Forecaster, _, _, _, []).
 
 	% forecaster protocol predicates
 
@@ -438,7 +555,7 @@
 		time_series_regression::valid_forecaster(Loaded),
 		time_series_regression::forecast(Forecaster, 2, Forecasts0),
 		time_series_regression::forecast(Loaded, 2, Forecasts1),
-		close_list(Forecasts1, Forecasts0).
+		Forecasts1 =~= Forecasts0.
 
 	test(ts_regression_print_forecaster_1, deterministic) :-
 		^^suppress_text_output,
@@ -449,13 +566,27 @@
 
 	parameters(time_series_regression_forecaster(_, _, ar_parameters(Intercept, Coefficients), _), Intercept, Coefficients).
 
-	close(Value, Expected) :-
-		abs(Value - Expected) < 1.0e-6.
+	bracketed([], [], []).
+	bracketed([Point| Points], [Lower| Lowers], [Upper| Uppers]) :-
+		Lower =< Point,
+		Point =< Upper,
+		bracketed(Points, Lowers, Uppers).
 
-	close_list([], []).
-	close_list([Value| Values], [Expected| Expecteds]) :-
-		close(Value, Expected),
-		close_list(Values, Expecteds).
+	widths([], [], []).
+	widths([Lower| Lowers], [Upper| Uppers], [Width| Widths]) :-
+		Width is Upper - Lower,
+		widths(Lowers, Uppers, Widths).
+
+	non_decreasing([_]) :-
+		!.
+	non_decreasing([Width1, Width2| Widths]) :-
+		Width1 =< Width2 + 1.0e-9,
+		non_decreasing([Width2| Widths]).
+
+	narrower([], []).
+	narrower([Width0| Widths0], [Width1| Widths1]) :-
+		Width0 < Width1,
+		narrower(Widths0, Widths1).
 
 	sum_squares([], SumSquares, SumSquares).
 	sum_squares([Value| Values], SumSquares0, SumSquares) :-

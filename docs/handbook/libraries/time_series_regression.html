@@ -352,6 +352,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#rank-deficient-designs">Rank-deficient designs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#immutable-online-updates">Immutable online updates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#forecaster-representation">Forecaster representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prediction-intervals">Prediction intervals</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 </ul>
 </li>
@@ -426,11 +427,13 @@
 <p>This library implements univariate time series forecasting using
 autoregressive (AR) models fitted by least squares, with an optional
 intercept, optional differencing (ARI models), and optional automatic
-order selection using information criteria. It implements the
-<code class="docutils literal notranslate"><span class="pre">forecaster_protocol</span></code> and reuses dataset validation, diagnostics,
-export, lag construction, and differencing support from the
-<code class="docutils literal notranslate"><span class="pre">time_series_protocols</span></code> library. Least-squares problems are solved
-using the <code class="docutils literal notranslate"><span class="pre">linear_algebra</span></code> library.</p>
+order selection using information criteria, plus analytic prediction
+intervals. It implements the <code class="docutils literal notranslate"><span class="pre">forecaster_protocol</span></code> and reuses dataset
+validation, diagnostics, export, lag construction, and differencing
+support from the <code class="docutils literal notranslate"><span class="pre">time_series_protocols</span></code> library. Least-squares
+problems are solved using the <code class="docutils literal notranslate"><span class="pre">linear_algebra</span></code> library, and prediction
+interval quantiles are computed using the <code class="docutils literal notranslate"><span class="pre">univariate_distributions</span></code>
+library.</p>
 <p>Datasets are objects implementing the <code class="docutils literal notranslate"><span class="pre">time_series_dataset_protocol</span></code>
 protocol. All observations must be numbers; missing observations are not
 supported.</p>
@@ -454,8 +457,9 @@ link in a web browser.</p>
 </pre></div>
 </div>
 <p>The test suite compares fitted coefficients, error sums, information
-criteria, and forecasts for a noisy AR(2) dataset with values computed
-independently using NumPy least squares.</p>
+criteria, forecasts, and prediction interval bounds for a noisy AR(2)
+dataset with values computed independently using NumPy least squares
+(and, for prediction intervals, SciPy’s normal quantile function).</p>
 </section>
 <section id="model">
 <h2>Model<a class="headerlink" href="#model" title="Link to this heading"></a></h2>
@@ -566,11 +570,50 @@ forecasters plus <code class="docutils literal notranslate"><span class="pre">or
 <code class="docutils literal notranslate"><span class="pre">residuals/1</span></code> (<code class="docutils literal notranslate"><span class="pre">none</span></code> unless retained) terms, and
 <code class="docutils literal notranslate"><span class="pre">order_selection/2</span></code> when <code class="docutils literal notranslate"><span class="pre">order(auto)</span></code> is used.</p>
 </section>
+<section id="prediction-intervals">
+<h2>Prediction intervals<a class="headerlink" href="#prediction-intervals" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">forecast_interval/5</span></code> computes analytic prediction interval bounds for
+the next <code class="docutils literal notranslate"><span class="pre">Horizon</span></code> forecasts:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>time_series_regression<span class="o">::</span>forecast_interval(<span class="nv">Forecaster</span>, <span class="nv">Horizon</span>, <span class="nv">Lower</span>, <span class="nv">Upper</span>, <span class="nv">Options</span>)
+</pre></div>
+</div>
+<p>The bounds assume independent, identically distributed, zero-mean
+Gaussian innovations and treat the fitted intercept and coefficients as
+known. The <code class="docutils literal notranslate"><span class="pre">h</span></code>-step forecast error variance is the residual variance
+times the sum of the squared <code class="docutils literal notranslate"><span class="pre">psi(0)..psi(h-1)</span></code> weights of the model
+(the AR polynomial combined with the differencing polynomial, when
+<code class="docutils literal notranslate"><span class="pre">differencing/1</span></code> is positive), and the bounds are the point forecast
+plus or minus the standard normal quantile for the requested confidence
+times the forecast error standard deviation. The residual variance is
+<code class="docutils literal notranslate"><span class="pre">sum_squared_error/1</span></code> divided by the residual degrees of freedom
+(<code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code> minus <code class="docutils literal notranslate"><span class="pre">design_rank/1</span></code>). A zero <code class="docutils literal notranslate"><span class="pre">Horizon</span></code> returns
+two empty lists.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Options</span></code> is validated independently from <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> options (a
+<code class="docutils literal notranslate"><span class="pre">domain_error(option,</span> <span class="pre">Option)</span></code> is raised for an unsupported option)
+and supports:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">confidence(Level)</span></code>: central interval coverage, a number in the open
+interval <code class="docutils literal notranslate"><span class="pre">]0.0,</span> <span class="pre">1.0[</span></code> (default: <code class="docutils literal notranslate"><span class="pre">0.95</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">method(normal)</span></code>: the only supported interval method (default, and
+currently the only accepted value).</p></li>
+</ul>
+<p>When the residual degrees of freedom are not positive (an exactly
+determined fit, where <code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code> equals <code class="docutils literal notranslate"><span class="pre">design_rank/1</span></code>), a
+positive <code class="docutils literal notranslate"><span class="pre">Horizon</span></code> raises a
+<code class="docutils literal notranslate"><span class="pre">domain_error(residual_degrees_of_freedom,</span> <span class="pre">Forecaster)</span></code> error, since
+the residual variance is then undefined.</p>
+<p>The standard normal quantile is computed by the
+<code class="docutils literal notranslate"><span class="pre">univariate_distributions</span></code> library.</p>
+</section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Missing observations are not supported.</p></li>
-<li><p>Prediction intervals are not provided.</p></li>
+<li><p>Prediction intervals are the analytic normal-theory approximation
+described above. They do not account for uncertainty in the estimated
+intercept and coefficients (only in future innovations), which
+understates interval width, particularly for short training series or
+high orders; no bootstrap or simulation-based alternative is provided.</p></li>
 </ul>
 </section>
 </section>

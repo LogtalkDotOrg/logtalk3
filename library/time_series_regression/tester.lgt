@@ -25,6 +25,7 @@
 	logtalk_load(format(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(statistics(loader)),
+	logtalk_load(univariate_distributions(loader)),
 	logtalk_load(linear_algebra(loader)),
 	logtalk_load(time_series_protocols(loader)),
 	logtalk_load([
@@ -36,6 +37,7 @@
 		'test_datasets/ar2_series',
 		'test_datasets/constant_series',
 		'test_datasets/decay_series',
+		'test_datasets/exactly_determined_series',
 		'test_datasets/noisy_ar2_series',
 		'test_datasets/quadratic_trend',
 		time_series_regression
