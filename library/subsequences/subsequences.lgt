@@ -23,9 +23,9 @@
 	implements(subsequences_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-26,
+		date is 2026-09-28,
 		comment is 'Implementation of subsequence operations over lists.'
 	]).
 
@@ -144,13 +144,19 @@
 
 	longest_list([], []).
 	longest_list([Head| Tail], Longest) :-
-		longest_list(Tail, TailLongest),
-		(	length(Head, HeadLength),
-			length(TailLongest, TailLongestLength),
-			HeadLength > TailLongestLength ->
-			Longest = Head
-		;	Longest = TailLongest
-		).
+		length(Head, HeadLength),
+		longest_list(Tail, Head, HeadLength, Longest).
+
+	longest_list([], List, _, List).
+	longest_list([Head| Tail], List0, Length0, Longest) :-
+		length(Head, HeadLength),
+		(	HeadLength > Length0 ->
+			List1 = Head,
+			Length1 = HeadLength
+		;	List1 = List0,
+			Length1 = Length0
+		),
+		longest_list(Tail, List1, Length1, Longest).
 
 	% Longest decreasing subsequence - symmetric to LIS
 	longest_decreasing_subsequence(List, LDS) :-
