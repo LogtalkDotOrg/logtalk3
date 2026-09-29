@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-27,
+		date is 2026-09-29,
 		comment is 'Smoke tests for the "time_series_protocols" library.'
 	]).
 
@@ -70,9 +70,13 @@
 	test(dataset_series_non_integer_length, error(type_error(integer, one))) :-
 		^^dataset_series(non_integer_series_length, _Series).
 
-	test(check_series_non_numeric_value, error(type_error(number, bad))) :-
+	test(check_series_non_numeric_value_invalid, error(type_error(number, bad))) :-
 		^^dataset_series(non_numeric_value, Series),
 		^^check_series(non_numeric_value, Series).
+
+	test(check_series_non_numeric_value_valid, deterministic) :-
+		^^dataset_series(non_numeric_value, Series),
+		^^check_series(non_numeric_value, Series, [number,atom]).
 
 	test(check_series_length_short_series, error(domain_error(series_length, short_series))) :-
 		^^dataset_series(short_series, Series),
