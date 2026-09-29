@@ -38,6 +38,10 @@
 		'test_datasets/constant_series',
 		'test_datasets/decay_series',
 		'test_datasets/exactly_determined_series',
+		'test_datasets/ar1_series_missing_interior',
+		'test_datasets/ar1_series_missing_trailing',
+		'test_datasets/mostly_missing_series',
+		'test_datasets/noisy_ar2_series_missing',
 		'test_datasets/noisy_ar2_series',
 		'test_datasets/quadratic_trend',
 		time_series_regression

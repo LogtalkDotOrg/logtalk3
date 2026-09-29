@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-28,
+		date is 2026-09-29,
 		comment is 'Tests for the "time_series_regression" library. Reference values for the noisy AR(2) dataset were computed independently using NumPy least squares.'
 	]).
 
@@ -250,6 +250,110 @@
 	test(ts_regression_non_numeric_value, error(type_error(number, bad))) :-
 		time_series_regression::learn(non_numeric_value, _).
 
+	% missing observations
+
+	test(ts_regression_missing_interior_diagnostics, true) :-
+		time_series_regression::learn(ar1_series_missing_interior, Forecaster),
+		time_series_regression::diagnostic(Forecaster, missing_count(1)),
+		time_series_regression::diagnostic(Forecaster, scored_count(5)).
+
+	test(ts_regression_missing_interior_parameters, deterministic) :-
+		time_series_regression::learn(ar1_series_missing_interior, Forecaster),
+		parameters(Forecaster, Intercept, [Coefficient]),
+		Intercept =~= 2.0,
+		Coefficient =~= 0.5.
+
+	test(ts_regression_missing_interior_forecast, deterministic) :-
+		time_series_regression::learn(ar1_series_missing_interior, Forecaster),
+		time_series_regression::forecast(Forecaster, 3, Forecasts),
+		Forecasts =~= [3.984375, 3.9921875, 3.99609375].
+
+	test(ts_regression_no_missing_observations, true(MissingCount == 0)) :-
+		time_series_regression::learn(ar1_series, Forecaster),
+		time_series_regression::diagnostic(Forecaster, missing_count(MissingCount)).
+
+	test(ts_regression_missing_trailing_learn_succeeds, deterministic) :-
+		time_series_regression::learn(ar1_series_missing_trailing, Forecaster),
+		time_series_regression::valid_forecaster(Forecaster).
+
+	test(ts_regression_missing_trailing_window_unknown, false) :-
+		time_series_regression::learn(ar1_series_missing_trailing, Forecaster),
+		Forecaster = time_series_regression_forecaster(_, ar_state(Window, _), _, _),
+		ground(Window).
+
+	test(ts_regression_missing_trailing_forecast_fails, error(domain_error(missing_observation, _))) :-
+		time_series_regression::learn(ar1_series_missing_trailing, Forecaster),
+		time_series_regression::forecast(Forecaster, 1, _).
+
+	test(ts_regression_missing_trailing_forecast_interval_fails, error(domain_error(missing_observation, _))) :-
+		time_series_regression::learn(ar1_series_missing_trailing, Forecaster),
+		time_series_regression::forecast_interval(Forecaster, 1, _, _, []).
+
+	test(ts_regression_missing_trailing_zero_horizon_succeeds, true(Forecasts == [])) :-
+		time_series_regression::learn(ar1_series_missing_trailing, Forecaster),
+		time_series_regression::forecast(Forecaster, 0, Forecasts).
+
+	test(ts_regression_missing_trailing_resolved_by_update, deterministic) :-
+		time_series_regression::learn(ar1_series_missing_trailing, Forecaster),
+		time_series_regression::update(Forecaster, 3.984375, Updated),
+		time_series_regression::forecast(Updated, 2, Forecasts),
+		Forecasts =~= [3.9921875, 3.99609375].
+
+	test(ts_regression_missing_trailing_resolved_diagnostics, true) :-
+		time_series_regression::learn(ar1_series_missing_trailing, Forecaster),
+		time_series_regression::update(Forecaster, 3.984375, Updated),
+		time_series_regression::diagnostic(Updated, training_series_length(9)),
+		time_series_regression::diagnostic(Updated, scored_count(6)),
+		time_series_regression::diagnostic(Updated, update_count(1)).
+
+	test(ts_regression_insufficient_observations, error(domain_error(insufficient_observations, mostly_missing_series))) :-
+		time_series_regression::learn(mostly_missing_series, _).
+
+	test(ts_regression_insufficient_observations_auto, error(domain_error(insufficient_observations, mostly_missing_series))) :-
+		time_series_regression::learn(mostly_missing_series, _, [order(auto)]).
+
+	test(ts_regression_missing_noisy_ar2_parameters, deterministic) :-
+		time_series_regression::learn(noisy_ar2_series_missing, Forecaster, [order(2)]),
+		parameters(Forecaster, Intercept, Coefficients),
+		Intercept =~= 0.897384797302548,
+		Coefficients =~= [0.6358515329152057, -0.2466415211322606].
+
+	test(ts_regression_missing_noisy_ar2_diagnostics, true) :-
+		time_series_regression::learn(noisy_ar2_series_missing, Forecaster, [order(2)]),
+		time_series_regression::diagnostic(Forecaster, sum_squared_error(SumSquaredError)),
+		SumSquaredError =~= 15.730060233008743,
+		time_series_regression::diagnostic(Forecaster, scored_count(69)),
+		time_series_regression::diagnostic(Forecaster, design_rank(3)),
+		time_series_regression::diagnostic(Forecaster, missing_count(3)).
+
+	test(ts_regression_missing_noisy_ar2_auto_order, true) :-
+		time_series_regression::learn(noisy_ar2_series_missing, Forecaster, [order(auto), max_order(4)]),
+		time_series_regression::diagnostic(Forecaster, order_selection(aicc, Candidates)),
+		Candidates = [1-Score1, 2-Score2, 3-Score3, 4-Score4],
+		Score1 =~= -90.07575784188968,
+		Score2 =~= -89.9510741643165,
+		Score3 =~= -88.77615020174682,
+		Score4 =~= -87.4621955240711.
+
+	test(ts_regression_missing_observation_appended, true) :-
+		time_series_regression::learn(ar1_series, Forecaster),
+		time_series_regression::update(Forecaster, _, Updated),
+		time_series_regression::diagnostic(Updated, missing_count(1)),
+		time_series_regression::diagnostic(Updated, training_series_length(9)),
+		time_series_regression::diagnostic(Updated, scored_count(7)).
+
+	test(ts_regression_missing_observation_appended_blocks_forecast, error(domain_error(missing_observation, _))) :-
+		time_series_regression::learn(ar1_series, Forecaster),
+		time_series_regression::update(Forecaster, _, Updated),
+		time_series_regression::forecast(Updated, 1, _).
+
+	test(ts_regression_missing_observation_appended_resolved, deterministic) :-
+		time_series_regression::learn(ar1_series, Forecaster),
+		time_series_regression::update(Forecaster, _, Updated),
+		time_series_regression::update(Updated, 3.98, Resolved),
+		time_series_regression::forecast(Resolved, 1, Forecasts),
+		Forecasts =~= [3.99].
+
 	% forecasting
 
 	test(ts_regression_forecast_zero_horizon, deterministic(Forecasts == [])) :-
@@ -337,9 +441,10 @@
 	test(ts_regression_update_invalid_forecaster, error(domain_error(forecaster, foo))) :-
 		time_series_regression::update(foo, 1.0, _).
 
-	test(ts_regression_update_unbound_observation, error(instantiation_error)) :-
+	test(ts_regression_update_unbound_observation_is_missing, deterministic) :-
 		time_series_regression::learn(ar1_series, Forecaster),
-		time_series_regression::update(Forecaster, _, _).
+		time_series_regression::update(Forecaster, _, Updated),
+		time_series_regression::valid_forecaster(Updated).
 
 	test(ts_regression_update_non_numeric_observation, error(type_error(number, foo))) :-
 		time_series_regression::learn(ar1_series, Forecaster),

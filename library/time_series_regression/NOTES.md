@@ -32,8 +32,8 @@ are solved using the `linear_algebra` library, and prediction interval
 quantiles are computed using the `univariate_distributions` library.
 
 Datasets are objects implementing the `time_series_dataset_protocol`
-protocol. All observations must be numbers; missing observations are not
-supported.
+protocol. Every observation must be a number or a missing observation,
+represented as an unbound variable (see "Missing observations" below).
 
 
 API documentation
@@ -61,7 +61,10 @@ To test this library predicates, load the `tester.lgt` file:
 The test suite compares fitted coefficients, error sums, information
 criteria, forecasts, and prediction interval bounds for a noisy AR(2)
 dataset with values computed independently using NumPy least squares
-(and, for prediction intervals, SciPy's normal quantile function).
+(and, for prediction intervals, SciPy's normal quantile function), and
+covers learning, forecasting, and updating with missing observations,
+including automatic order selection over a series with scattered
+missing observations.
 
 
 Model
@@ -147,18 +150,58 @@ The `design_rank/1` diagnostic reports the numerical rank of the design
 matrix.
 
 
+Missing observations
+--------------------
+
+A missing observation is represented, following common practice, as an
+unbound variable: `observation(Index, _)` in a dataset object, or an
+unbound `Observation` argument to `update/3-4`. A series may freely mix
+numbers and missing observations; only its length and index sequence
+need to be well-formed (checked as usual by `dataset_series/2` and
+`check_series_length/3`).
+
+Differencing propagates missingness: a difference with a missing operand
+is itself missing. Fitting uses casewise deletion: a design matrix row
+(built from `Order` lagged values and a target, after differencing) that
+involves any missing value is excluded from the least-squares fit. This
+is applied identically to an explicit order and to every candidate order
+considered by automatic order selection (candidates are still compared
+on a common sample, now the sample complete at the largest candidate
+order). The number of raw missing observations in the training series is
+reported in the `missing_count/1` diagnostic; `scored_count/1` already
+reflects the number of complete rows actually used for fitting. If casewise
+deletion leaves no complete row at all, `learn/3` raises a
+`domain_error(insufficient_observations, Dataset)` error.
+
+`learn/3` still succeeds when the most recent observations (needed to
+seed the forecaster's window or, under differencing, its levels) are
+missing; the missing values are simply carried into the learned
+forecaster's state. `forecast/3` and `forecast_interval/5` then raise a
+`domain_error(missing_observation, Forecaster)` error for a positive
+horizon (a zero horizon still trivially succeeds), until `update/3-4`
+supplies the missing values.
+
+
 Immutable online updates
 ------------------------
 
 The `update/3-4` predicates return a new forecaster after appending one
 observation to the series while keeping the fitted intercept and
-coefficients unchanged. The original forecaster is not modified. The
-one-step prediction error for the new observation is added to the
-`sum_squared_error/1`, `mean_squared_error/1`, and `scored_count/1`
-diagnostics (and to the retained residuals, if enabled). The information
-criteria diagnostics keep describing the original fit. No update options
-are currently defined, so the `Options` argument of `update/4` must be an
-empty list.
+coefficients unchanged. The original forecaster is not modified. The new
+`Observation` may be left an unbound variable to represent a missing
+observation (see "Missing observations" above).
+
+When both the new observation and the forecaster's prior window are fully
+known, the one-step prediction error is added to the `sum_squared_error/1`,
+`mean_squared_error/1`, and `scored_count/1` diagnostics (and to the
+retained residuals, if enabled), and the information criteria diagnostics
+keep describing the original fit. Otherwise, no prediction error is
+available and only `training_series_length/1`, `update_count/1`, and,
+when `Observation` is a variable, `missing_count/1` are updated. In both
+cases `training_series_length/1` and `update_count/1` are incremented,
+and the observation, known or not, is pushed into the window (and used to
+update the levels). No update options are currently defined, so the
+`Options` argument of `update/4` must be an empty list.
 
 
 Forecaster representation
@@ -177,11 +220,11 @@ original series. The intercept is `0.0` when `intercept(false)` is used.
 
 The diagnostics list includes the `model/1`, `training_series_length/1`, and
 `options/1` terms common to all forecasters plus `order/1`,
-`differencing/1`, `intercept/1`, `parameter_count/1`, `scored_count/1`,
-`design_rank/1`, `sum_squared_error/1`, `mean_squared_error/1`, `aic/1`,
-`aicc/1` (`none` when undefined), `bic/1`, `update_count/1`, and
-`residuals/1` (`none` unless retained) terms, and `order_selection/2` when
-`order(auto)` is used.
+`differencing/1`, `intercept/1`, `missing_count/1`, `parameter_count/1`,
+`scored_count/1`, `design_rank/1`, `sum_squared_error/1`,
+`mean_squared_error/1`, `aic/1`, `aicc/1` (`none` when undefined), `bic/1`,
+`update_count/1`, and `residuals/1` (`none` unless retained) terms, and
+`order_selection/2` when `order(auto)` is used.
 
 
 Prediction intervals
@@ -224,9 +267,17 @@ library.
 Limitations
 -----------
 
-- Missing observations are not supported.
+- Missing observations are handled by casewise deletion at fitting time,
+  which discards an entire design matrix row (up to `Order + 1`
+  consecutive rows per missing observation) rather than imputing a value
+  or modeling the series with a method robust to missing data (such as a
+  state-space or Kalman filter formulation); this reduces the effective
+  sample size and, under automatic order selection, can favor a lower
+  order than the same series would with no missing observations.
 - Prediction intervals are the analytic normal-theory approximation
   described above. They do not account for uncertainty in the estimated
   intercept and coefficients (only in future innovations), which
   understates interval width, particularly for short training series or
   high orders; no bootstrap or simulation-based alternative is provided.
+  They are also unavailable whenever the forecaster's window or levels
+  are not fully known (see "Missing observations" above).

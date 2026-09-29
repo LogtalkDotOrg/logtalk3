@@ -350,6 +350,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#automatic-order-selection">Automatic order selection</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rank-deficient-designs">Rank-deficient designs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#missing-observations">Missing observations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#immutable-online-updates">Immutable online updates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#forecaster-representation">Forecaster representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#prediction-intervals">Prediction intervals</a></li>
@@ -435,8 +436,8 @@ problems are solved using the <code class="docutils literal notranslate"><span c
 interval quantiles are computed using the <code class="docutils literal notranslate"><span class="pre">univariate_distributions</span></code>
 library.</p>
 <p>Datasets are objects implementing the <code class="docutils literal notranslate"><span class="pre">time_series_dataset_protocol</span></code>
-protocol. All observations must be numbers; missing observations are not
-supported.</p>
+protocol. Every observation must be a number or a missing observation,
+represented as an unbound variable (see “Missing observations” below).</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -459,7 +460,10 @@ link in a web browser.</p>
 <p>The test suite compares fitted coefficients, error sums, information
 criteria, forecasts, and prediction interval bounds for a noisy AR(2)
 dataset with values computed independently using NumPy least squares
-(and, for prediction intervals, SciPy’s normal quantile function).</p>
+(and, for prediction intervals, SciPy’s normal quantile function), and
+covers learning, forecasting, and updating with missing observations,
+including automatic order selection over a series with scattered missing
+observations.</p>
 </section>
 <section id="model">
 <h2>Model<a class="headerlink" href="#model" title="Link to this heading"></a></h2>
@@ -536,17 +540,55 @@ least-squares forecasts, but the individual coefficient values should
 not be interpreted. The <code class="docutils literal notranslate"><span class="pre">design_rank/1</span></code> diagnostic reports the
 numerical rank of the design matrix.</p>
 </section>
+<section id="missing-observations">
+<h2>Missing observations<a class="headerlink" href="#missing-observations" title="Link to this heading"></a></h2>
+<p>A missing observation is represented, following common practice, as an
+unbound variable: <code class="docutils literal notranslate"><span class="pre">observation(Index,</span> <span class="pre">_)</span></code> in a dataset object, or an
+unbound <code class="docutils literal notranslate"><span class="pre">Observation</span></code> argument to <code class="docutils literal notranslate"><span class="pre">update/3-4</span></code>. A series may freely
+mix numbers and missing observations; only its length and index sequence
+need to be well-formed (checked as usual by <code class="docutils literal notranslate"><span class="pre">dataset_series/2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">check_series_length/3</span></code>).</p>
+<p>Differencing propagates missingness: a difference with a missing operand
+is itself missing. Fitting uses casewise deletion: a design matrix row
+(built from <code class="docutils literal notranslate"><span class="pre">Order</span></code> lagged values and a target, after differencing)
+that involves any missing value is excluded from the least-squares fit.
+This is applied identically to an explicit order and to every candidate
+order considered by automatic order selection (candidates are still
+compared on a common sample, now the sample complete at the largest
+candidate order). The number of raw missing observations in the training
+series is reported in the <code class="docutils literal notranslate"><span class="pre">missing_count/1</span></code> diagnostic;
+<code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code> already reflects the number of complete rows actually
+used for fitting. If casewise deletion leaves no complete row at all,
+<code class="docutils literal notranslate"><span class="pre">learn/3</span></code> raises a
+<code class="docutils literal notranslate"><span class="pre">domain_error(insufficient_observations,</span> <span class="pre">Dataset)</span></code> error.</p>
+<p><code class="docutils literal notranslate"><span class="pre">learn/3</span></code> still succeeds when the most recent observations (needed to
+seed the forecaster’s window or, under differencing, its levels) are
+missing; the missing values are simply carried into the learned
+forecaster’s state. <code class="docutils literal notranslate"><span class="pre">forecast/3</span></code> and <code class="docutils literal notranslate"><span class="pre">forecast_interval/5</span></code> then
+raise a <code class="docutils literal notranslate"><span class="pre">domain_error(missing_observation,</span> <span class="pre">Forecaster)</span></code> error for a
+positive horizon (a zero horizon still trivially succeeds), until
+<code class="docutils literal notranslate"><span class="pre">update/3-4</span></code> supplies the missing values.</p>
+</section>
 <section id="immutable-online-updates">
 <h2>Immutable online updates<a class="headerlink" href="#immutable-online-updates" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">update/3-4</span></code> predicates return a new forecaster after appending
 one observation to the series while keeping the fitted intercept and
-coefficients unchanged. The original forecaster is not modified. The
-one-step prediction error for the new observation is added to the
+coefficients unchanged. The original forecaster is not modified. The new
+<code class="docutils literal notranslate"><span class="pre">Observation</span></code> may be left an unbound variable to represent a missing
+observation (see “Missing observations” above).</p>
+<p>When both the new observation and the forecaster’s prior window are
+fully known, the one-step prediction error is added to the
 <code class="docutils literal notranslate"><span class="pre">sum_squared_error/1</span></code>, <code class="docutils literal notranslate"><span class="pre">mean_squared_error/1</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code> diagnostics (and to the retained residuals, if
-enabled). The information criteria diagnostics keep describing the
-original fit. No update options are currently defined, so the
-<code class="docutils literal notranslate"><span class="pre">Options</span></code> argument of <code class="docutils literal notranslate"><span class="pre">update/4</span></code> must be an empty list.</p>
+enabled), and the information criteria diagnostics keep describing the
+original fit. Otherwise, no prediction error is available and only
+<code class="docutils literal notranslate"><span class="pre">training_series_length/1</span></code>, <code class="docutils literal notranslate"><span class="pre">update_count/1</span></code>, and, when
+<code class="docutils literal notranslate"><span class="pre">Observation</span></code> is a variable, <code class="docutils literal notranslate"><span class="pre">missing_count/1</span></code> are updated. In both
+cases <code class="docutils literal notranslate"><span class="pre">training_series_length/1</span></code> and <code class="docutils literal notranslate"><span class="pre">update_count/1</span></code> are
+incremented, and the observation, known or not, is pushed into the
+window (and used to update the levels). No update options are currently
+defined, so the <code class="docutils literal notranslate"><span class="pre">Options</span></code> argument of <code class="docutils literal notranslate"><span class="pre">update/4</span></code> must be an empty
+list.</p>
 </section>
 <section id="forecaster-representation">
 <h2>Forecaster representation<a class="headerlink" href="#forecaster-representation" title="Link to this heading"></a></h2>
@@ -564,11 +606,11 @@ level, starting with the original series. The intercept is <code class="docutils
 <p>The diagnostics list includes the <code class="docutils literal notranslate"><span class="pre">model/1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">training_series_length/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">options/1</span></code> terms common to all
 forecasters plus <code class="docutils literal notranslate"><span class="pre">order/1</span></code>, <code class="docutils literal notranslate"><span class="pre">differencing/1</span></code>, <code class="docutils literal notranslate"><span class="pre">intercept/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">parameter_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">design_rank/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">sum_squared_error/1</span></code>, <code class="docutils literal notranslate"><span class="pre">mean_squared_error/1</span></code>, <code class="docutils literal notranslate"><span class="pre">aic/1</span></code>, <code class="docutils literal notranslate"><span class="pre">aicc/1</span></code>
-(<code class="docutils literal notranslate"><span class="pre">none</span></code> when undefined), <code class="docutils literal notranslate"><span class="pre">bic/1</span></code>, <code class="docutils literal notranslate"><span class="pre">update_count/1</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">residuals/1</span></code> (<code class="docutils literal notranslate"><span class="pre">none</span></code> unless retained) terms, and
-<code class="docutils literal notranslate"><span class="pre">order_selection/2</span></code> when <code class="docutils literal notranslate"><span class="pre">order(auto)</span></code> is used.</p>
+<code class="docutils literal notranslate"><span class="pre">missing_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">parameter_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">design_rank/1</span></code>, <code class="docutils literal notranslate"><span class="pre">sum_squared_error/1</span></code>, <code class="docutils literal notranslate"><span class="pre">mean_squared_error/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">aic/1</span></code>, <code class="docutils literal notranslate"><span class="pre">aicc/1</span></code> (<code class="docutils literal notranslate"><span class="pre">none</span></code> when undefined), <code class="docutils literal notranslate"><span class="pre">bic/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">update_count/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">residuals/1</span></code> (<code class="docutils literal notranslate"><span class="pre">none</span></code> unless retained)
+terms, and <code class="docutils literal notranslate"><span class="pre">order_selection/2</span></code> when <code class="docutils literal notranslate"><span class="pre">order(auto)</span></code> is used.</p>
 </section>
 <section id="prediction-intervals">
 <h2>Prediction intervals<a class="headerlink" href="#prediction-intervals" title="Link to this heading"></a></h2>
@@ -608,12 +650,20 @@ the residual variance is then undefined.</p>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>Missing observations are not supported.</p></li>
+<li><p>Missing observations are handled by casewise deletion at fitting time,
+which discards an entire design matrix row (up to <code class="docutils literal notranslate"><span class="pre">Order</span> <span class="pre">+</span> <span class="pre">1</span></code>
+consecutive rows per missing observation) rather than imputing a value
+or modeling the series with a method robust to missing data (such as a
+state-space or Kalman filter formulation); this reduces the effective
+sample size and, under automatic order selection, can favor a lower
+order than the same series would with no missing observations.</p></li>
 <li><p>Prediction intervals are the analytic normal-theory approximation
 described above. They do not account for uncertainty in the estimated
 intercept and coefficients (only in future innovations), which
 understates interval width, particularly for short training series or
-high orders; no bootstrap or simulation-based alternative is provided.</p></li>
+high orders; no bootstrap or simulation-based alternative is provided.
+They are also unavailable whenever the forecaster’s window or levels
+are not fully known (see “Missing observations” above).</p></li>
 </ul>
 </section>
 </section>

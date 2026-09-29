@@ -25,20 +25,19 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-28,
-		comment is 'Autoregressive (AR) time series forecaster fitted by least squares, with optional intercept, optional differencing (ARI models), and automatic order selection using information criteria.',
+		date is 2026-09-29,
+		comment is 'Autoregressive (AR) time series forecaster fitted by least squares, with optional intercept, optional differencing (ARI models), automatic order selection using information criteria, and support for missing observations represented as unbound variables.',
 		see_also is [forecaster_protocol, time_series_dataset_protocol]
 	]).
 
 	:- public(update/4).
-	:- mode(update(+compound, +number, -compound, +list(compound)), one_or_error).
+	:- mode(update(+compound, @number, -compound, +list(compound)), one_or_error).
 	:- info(update/4, [
-		comment is 'Returns a new forecaster after appending one observation to the series, keeping the fitted coefficients unchanged. The original forecaster is unchanged. The one-step prediction error of the new observation is added to the training error diagnostics (and to the retained residuals when residual retention was enabled during learning); the information criteria diagnostics keep describing the original fit. No update options are currently defined.',
+		comment is 'Returns a new forecaster after appending one observation to the series, keeping the fitted coefficients unchanged. The original forecaster is unchanged. ``Observation`` may be left an unbound variable to represent a missing (not yet known) observation; in that case, and whenever the resulting one-step prediction cannot be computed because the forecaster state is not fully known (see ``learn/3``), no prediction error is available and the training error diagnostics are left unchanged, only ``training_series_length/1``, ``update_count/1``, and, when ``Observation`` is a variable, ``missing_count/1`` are updated. Otherwise, the one-step prediction error of the new observation is added to the training error diagnostics (and to the retained residuals when residual retention was enabled during learning); the information criteria diagnostics keep describing the original fit. No update options are currently defined.',
 		argnames is ['Forecaster', 'Observation', 'UpdatedForecaster', 'Options'],
 		exceptions is [
 			'``Forecaster`` is a variable' - instantiation_error,
 			'``Forecaster`` is neither a variable nor a valid forecaster' - domain_error(forecaster, 'Forecaster'),
-			'``Observation`` is a variable' - instantiation_error,
 			'``Observation`` is neither a variable nor a number' - type_error(number, 'Observation'),
 			'``Options`` is a variable or a partial list' - instantiation_error,
 			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
@@ -49,14 +48,13 @@
 	]).
 
 	:- public(update/3).
-	:- mode(update(+compound, +number, -compound), one_or_error).
+	:- mode(update(+compound, @number, -compound), one_or_error).
 	:- info(update/3, [
-		comment is 'Returns a new forecaster after appending one observation using default update options.',
+		comment is 'Returns a new forecaster after appending one observation using default update options. ``Observation`` may be left an unbound variable to represent a missing observation; see ``update/4``.',
 		argnames is ['Forecaster', 'Observation', 'UpdatedForecaster'],
 		exceptions is [
 			'``Forecaster`` is a variable' - instantiation_error,
 			'``Forecaster`` is neither a variable nor a valid forecaster' - domain_error(forecaster, 'Forecaster'),
-			'``Observation`` is a variable' - instantiation_error,
 			'``Observation`` is neither a variable nor a number' - type_error(number, 'Observation')
 		]
 	]).
@@ -118,14 +116,20 @@
 		^^option(retain_residuals(RetainResiduals), Options),
 		check_relevant_options(OrderOption, UserOptions),
 		^^dataset_series(Dataset, Series),
-		^^check_series(Dataset, Series),
+		check_series_with_missing(Dataset, Series),
+		missing_count(Series, MissingCount),
 		intercept_count(Intercept, InterceptCount),
 		minimum_series_length(OrderOption, Differencing, InterceptCount, MinimumLength),
 		^^check_series_length(Dataset, Series, MinimumLength),
 		length(Series, TrainingSeriesLength),
 		difference_levels(Differencing, Series, Levels, DifferencedSeries),
-		select_order(OrderOption, MaxOrder, Criterion, Intercept, InterceptCount, DifferencedSeries, Order, SelectionDiagnostic),
-		^^lagged_rows(DifferencedSeries, Order, Rows),
+		select_order(Dataset, OrderOption, MaxOrder, Criterion, Intercept, InterceptCount, DifferencedSeries, Order, SelectionDiagnostic),
+		^^lagged_rows(DifferencedSeries, Order, Rows0),
+		filter_complete_rows(Rows0, Rows),
+		(	Rows == [] ->
+			domain_error(insufficient_observations, Dataset)
+		;	true
+		),
 		fit_rows(Rows, Intercept, Matrix, InterceptValue, Coefficients, Residuals, SumSquaredError),
 		matrix_rank(Matrix, Rank),
 		length(Rows, ScoredCount),
@@ -142,6 +146,7 @@
 				order(Order),
 				differencing(Differencing),
 				intercept(Intercept),
+				missing_count(MissingCount),
 				parameter_count(ParameterCount),
 				scored_count(ScoredCount),
 				design_rank(Rank),
@@ -180,32 +185,104 @@
 	minimum_series_length(Order, Differencing, InterceptCount, MinimumLength) :-
 		MinimumLength is Differencing + 2 * Order + InterceptCount.
 
+	% missing observations are represented as unbound variables; a series
+	% with missing observations is otherwise a proper, gap-free list
+
+	check_series_with_missing(Dataset, Series) :-
+		(	Series == [] ->
+			domain_error(non_empty_series, Dataset)
+		;	true
+		),
+		check_series_values_with_missing(Series).
+
+	check_series_values_with_missing([]).
+	check_series_values_with_missing([Value| Values]) :-
+		(	var(Value) ->
+			true
+		;	number(Value) ->
+			true
+		;	type_error(number, Value)
+		),
+		check_series_values_with_missing(Values).
+
+	missing_count([], 0).
+	missing_count([Value| Values], Count) :-
+		missing_count(Values, Count0),
+		(	var(Value) ->
+			Count is Count0 + 1
+		;	Count = Count0
+		).
+
 	% differencing; the levels list holds the last value of the series at
-	% each differencing level, starting with the original series
+	% each differencing level, starting with the original series; a
+	% difference with a missing operand is itself missing (left unbound)
 
 	difference_levels(0, Series, [], Series) :-
 		!.
 	difference_levels(Differencing, Series, [Last| Levels], DifferencedSeries) :-
 		Differencing > 0,
 		last(Series, Last),
-		^^difference_series(Series, Series1),
+		difference_series_with_missing(Series, Series1),
 		Differencing1 is Differencing - 1,
 		difference_levels(Differencing1, Series1, Levels, DifferencedSeries).
+
+	difference_series_with_missing([First| Rest], Differences) :-
+		difference_series_with_missing_(Rest, First, Differences).
+
+	difference_series_with_missing_([], _, []).
+	difference_series_with_missing_([Value| Values], Previous, [Difference| Differences]) :-
+		subtract_or_missing(Value, Previous, Difference),
+		difference_series_with_missing_(Values, Value, Differences).
+
+	subtract_or_missing(Value, Previous, Difference) :-
+		(	number(Value),
+			number(Previous) ->
+			Difference is Value - Previous
+		;	true
+		).
 
 	initial_window(DifferencedSeries, Order, Window) :-
 		reverse(DifferencedSeries, Reversed),
 		first_values(Order, Reversed, Window).
 
+	% a design matrix row built across a missing observation (as a target
+	% or as one of the lagged values) is excluded from fitting (casewise
+	% deletion); this is applied uniformly to explicit and automatically
+	% selected orders, and to every candidate order considered by
+	% automatic order selection
+
+	filter_complete_rows([], []).
+	filter_complete_rows([Row| Rows], Filtered) :-
+		(	complete_row(Row) ->
+			Filtered = [Row| FilteredRest]
+		;	Filtered = FilteredRest
+		),
+		filter_complete_rows(Rows, FilteredRest).
+
+	complete_row(Lags-Target) :-
+		number(Target),
+		ground_number_list(Lags).
+
+	ground_number_list([]).
+	ground_number_list([Value| Values]) :-
+		number(Value),
+		ground_number_list(Values).
+
 	% order selection
 
-	select_order(OrderOption, _MaxOrder, _Criterion, _Intercept, _InterceptCount, _DifferencedSeries, OrderOption, none) :-
+	select_order(_Dataset, OrderOption, _MaxOrder, _Criterion, _Intercept, _InterceptCount, _DifferencedSeries, OrderOption, none) :-
 		integer(OrderOption),
 		!.
-	select_order(auto, MaxOrder, Criterion, Intercept, InterceptCount, DifferencedSeries, Order, order_selection(Criterion, Candidates)) :-
+	select_order(Dataset, auto, MaxOrder, Criterion, Intercept, InterceptCount, DifferencedSeries, Order, order_selection(Criterion, Candidates)) :-
 		length(DifferencedSeries, Length),
 		Cap is (Length - InterceptCount - 2) // 2,
 		EffectiveMaxOrder is min(MaxOrder, Cap),
-		^^lagged_rows(DifferencedSeries, EffectiveMaxOrder, CommonRows),
+		^^lagged_rows(DifferencedSeries, EffectiveMaxOrder, CommonRows0),
+		filter_complete_rows(CommonRows0, CommonRows),
+		(	CommonRows == [] ->
+			domain_error(insufficient_observations, Dataset)
+		;	true
+		),
 		length(CommonRows, SampleSize),
 		sequence(1, EffectiveMaxOrder, Orders),
 		candidate_scores(Orders, CommonRows, Intercept, InterceptCount, Criterion, SampleSize, Candidates),
@@ -303,9 +380,20 @@
 		check_forecaster(Forecaster),
 		^^check_forecast_horizon(Horizon),
 		Forecaster = time_series_regression_forecaster(_Model, ar_state(Window, Levels), ar_parameters(InterceptValue, Coefficients), _Diagnostics),
-		project(Horizon, InterceptValue, Coefficients, Window, DifferencedForecasts),
-		reverse(Levels, ReversedLevels),
-		integrate_levels(ReversedLevels, DifferencedForecasts, Forecasts).
+		(	Horizon =:= 0 ->
+			Forecasts = []
+		;	check_known_state(Forecaster, Window, Levels),
+			project(Horizon, InterceptValue, Coefficients, Window, DifferencedForecasts),
+			reverse(Levels, ReversedLevels),
+			integrate_levels(ReversedLevels, DifferencedForecasts, Forecasts)
+		).
+
+	check_known_state(Forecaster, Window, Levels) :-
+		(	ground(Window),
+			ground(Levels) ->
+			true
+		;	domain_error(missing_observation, Forecaster)
+		).
 
 	project(0, _, _, _, []) :-
 		!.
@@ -484,10 +572,15 @@
 		Forecaster = time_series_regression_forecaster(Model, ar_state(Window, Levels), Parameters, Diagnostics),
 		Parameters = ar_parameters(InterceptValue, Coefficients),
 		update_levels(Levels, Observation, UpdatedLevels, DifferencedObservation),
-		predict(InterceptValue, Coefficients, Window, Prediction),
-		Residual is DifferencedObservation - Prediction,
+		(	ground(Window),
+			nonvar(DifferencedObservation) ->
+			predict(InterceptValue, Coefficients, Window, Prediction),
+			Residual is DifferencedObservation - Prediction,
+			Outcome = scored(Residual)
+		;	Outcome = unscored
+		),
 		push_window(Window, DifferencedObservation, UpdatedWindow),
-		updated_diagnostics(Diagnostics, Residual, UpdatedDiagnostics),
+		updated_diagnostics(Diagnostics, Outcome, Observation, UpdatedDiagnostics),
 		UpdatedForecaster = time_series_regression_forecaster(Model, ar_state(UpdatedWindow, UpdatedLevels), Parameters, UpdatedDiagnostics).
 
 	update(Forecaster, Observation, UpdatedForecaster) :-
@@ -495,7 +588,7 @@
 
 	check_observation(Observation) :-
 		(	var(Observation) ->
-			instantiation_error
+			true
 		;	number(Observation) ->
 			true
 		;	type_error(number, Observation)
@@ -518,27 +611,37 @@
 
 	update_levels([], DifferencedObservation, [], DifferencedObservation).
 	update_levels([Last| Lasts], Value, [Value| UpdatedLasts], DifferencedObservation) :-
-		Difference is Value - Last,
+		subtract_or_missing(Value, Last, Difference),
 		update_levels(Lasts, Difference, UpdatedLasts, DifferencedObservation).
 
-	updated_diagnostics(Diagnostics, Residual, UpdatedDiagnostics) :-
+	updated_diagnostics(Diagnostics, Outcome, Observation, UpdatedDiagnostics) :-
 		memberchk(training_series_length(TrainingSeriesLength0), Diagnostics),
+		memberchk(update_count(UpdateCount0), Diagnostics),
+		memberchk(missing_count(MissingCount0), Diagnostics),
+		TrainingSeriesLength is TrainingSeriesLength0 + 1,
+		UpdateCount is UpdateCount0 + 1,
+		(	var(Observation) ->
+			MissingCount is MissingCount0 + 1
+		;	MissingCount = MissingCount0
+		),
+		replace_diagnostic(training_series_length, TrainingSeriesLength, Diagnostics, Diagnostics1),
+		replace_diagnostic(update_count, UpdateCount, Diagnostics1, Diagnostics2),
+		replace_diagnostic(missing_count, MissingCount, Diagnostics2, Diagnostics3),
+		apply_outcome(Outcome, Diagnostics3, UpdatedDiagnostics).
+
+	apply_outcome(unscored, Diagnostics, Diagnostics).
+	apply_outcome(scored(Residual), Diagnostics, UpdatedDiagnostics) :-
 		memberchk(scored_count(ScoredCount0), Diagnostics),
 		memberchk(sum_squared_error(SumSquaredError0), Diagnostics),
-		memberchk(update_count(UpdateCount0), Diagnostics),
 		memberchk(residuals(Residuals0), Diagnostics),
-		TrainingSeriesLength is TrainingSeriesLength0 + 1,
 		ScoredCount is ScoredCount0 + 1,
 		SumSquaredError is SumSquaredError0 + Residual * Residual,
 		MeanSquaredError is SumSquaredError / ScoredCount,
-		UpdateCount is UpdateCount0 + 1,
 		updated_residuals(Residuals0, Residual, Residuals),
-		replace_diagnostic(training_series_length, TrainingSeriesLength, Diagnostics, Diagnostics1),
-		replace_diagnostic(scored_count, ScoredCount, Diagnostics1, Diagnostics2),
-		replace_diagnostic(sum_squared_error, SumSquaredError, Diagnostics2, Diagnostics3),
-		replace_diagnostic(mean_squared_error, MeanSquaredError, Diagnostics3, Diagnostics4),
-		replace_diagnostic(update_count, UpdateCount, Diagnostics4, Diagnostics5),
-		replace_diagnostic(residuals, Residuals, Diagnostics5, UpdatedDiagnostics).
+		replace_diagnostic(scored_count, ScoredCount, Diagnostics, Diagnostics1),
+		replace_diagnostic(sum_squared_error, SumSquaredError, Diagnostics1, Diagnostics2),
+		replace_diagnostic(mean_squared_error, MeanSquaredError, Diagnostics2, Diagnostics3),
+		replace_diagnostic(residuals, Residuals, Diagnostics3, UpdatedDiagnostics).
 
 	updated_residuals(none, _Residual, none) :-
 		!.
@@ -577,10 +680,18 @@
 		length(Coefficients, Order).
 
 	valid_state(Order, Differencing, ar_state(Window, Levels)) :-
-		valid(list(number), Window),
+		possibly_missing_number_list(Window),
 		length(Window, Order),
-		valid(list(number), Levels),
+		possibly_missing_number_list(Levels),
 		length(Levels, Differencing).
+
+	possibly_missing_number_list([]).
+	possibly_missing_number_list([Value| Values]) :-
+		once((
+			var(Value)
+		;	number(Value)
+		)),
+		possibly_missing_number_list(Values).
 
 	valid_diagnostics(Order, Differencing, ar_parameters(InterceptValue, _), Diagnostics) :-
 		^^valid_forecaster_metadata(time_series_regression, _Options, Diagnostics),
@@ -592,6 +703,8 @@
 		;	Intercept == false,
 			InterceptValue =:= 0
 		),
+		memberchk(missing_count(MissingCount), Diagnostics),
+		valid(non_negative_integer, MissingCount),
 		memberchk(training_series_length(TrainingSeriesLength), Diagnostics),
 		valid(positive_integer, TrainingSeriesLength),
 		memberchk(parameter_count(ParameterCount), Diagnostics),
