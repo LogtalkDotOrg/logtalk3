@@ -60,6 +60,10 @@ series forecasting using autoregressive (AR) models fitted by least squares.
 `regression_tree`, `spectral_clusterer`, `subsequences`, `tsne_projection`,
 `umap_projection`, `uri_template`, and `wkt_wkb` libraries.
 
+* IMPROVED: The `http_process_transport` library to only warn about a missing
+default socket command (`socat` on POSIX systems and `ncat` on Windows
+systems).
+
 Tools
 -----
 

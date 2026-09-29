@@ -24,9 +24,9 @@
 	imports([options, http_message_helpers, http_text_helpers])).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:3:1,
 		author is 'Paulo Moura',
-		date is 2026-09-13,
+		date is 2026-09-29,
 		comment is 'Process-backed HTTP transport predicates using the process library and helper processes.'
 	]).
 
@@ -2093,9 +2093,9 @@
 			true
 		;	print_message(warning, http_process_transport, @'Missing openssl command!')
 		),
-		(	shell('type ncat >/dev/null 2>&1') ->
+		(	shell('type socat >/dev/null 2>&1') ->
 			true
-		;	print_message(warning, http_process_transport, @'Missing ncat command!')
+		;	print_message(warning, http_process_transport, @'Missing socat command!')
 		).
 	verify_commands_availability(windows) :-
 		(	shell('where /q openssl.exe') ->

@@ -428,10 +428,10 @@ implementation of the <code class="docutils literal notranslate"><span class="pr
 HTTPS and WSS connections. The current implementation uses
 <code class="docutils literal notranslate"><span class="pre">openssl</span> <span class="pre">s_client</span></code> to expose a reusable client-side byte stream
 suitable for the existing <code class="docutils literal notranslate"><span class="pre">http_client_core</span></code> predicates. The current
-server-side implementation defaults to <code class="docutils literal notranslate"><span class="pre">ncat</span></code> to own the public
-listener socket and expose accepted connections to the parent object
-using a loopback relay listener plus peer metadata parsed from helper
-diagnostics.</p>
+server-side implementation defaults to <code class="docutils literal notranslate"><span class="pre">socat</span></code> in POSIX systems and
+<code class="docutils literal notranslate"><span class="pre">ncat</span></code> in Windows systems to own the public listener socket and expose
+accepted connections to the parent object using a loopback relay
+listener plus peer metadata parsed from helper diagnostics.</p>
 <p>This library requires backend support for the <code class="docutils literal notranslate"><span class="pre">process</span></code> and <code class="docutils literal notranslate"><span class="pre">socket</span></code>
 libraries. Sequential client-side transport, including reusable
 connections, one-shot client exchanges, and connection pools, depends on
@@ -443,9 +443,11 @@ HTTPS and WSS serving. Worker-based serving modes and shutdown control
 still require backend thread support.</p>
 <section id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">openssl</span></code> (version 3.0.0 or later), <code class="docutils literal notranslate"><span class="pre">ncat</span></code> (version 7.96 or
-later), and <code class="docutils literal notranslate"><span class="pre">socat</span></code> (version 1.7.3.0 or later) commands must be
-available on the system <code class="docutils literal notranslate"><span class="pre">PATH</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">openssl</span></code> (version 3.0.0 or later) command and either the
+<code class="docutils literal notranslate"><span class="pre">socat</span></code> (version 1.7.3.0 or later on POSIX systems) or <code class="docutils literal notranslate"><span class="pre">ncat</span></code>
+(version 7.96 or later on Windows systems) commands must be available on
+the system <code class="docutils literal notranslate"><span class="pre">PATH</span></code>. The library verifies their availability when loaded
+and warns on missing commands.</p>
 <p>On macOS, these commands can be installed using e.g. Homebrew:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> brew install openssl nmap socat
 </pre></div>

@@ -9,10 +9,10 @@ implementation of the ``http_transport_protocol`` protocol. Based on the
 HTTPS and WSS connections. The current implementation uses
 ``openssl s_client`` to expose a reusable client-side byte stream
 suitable for the existing ``http_client_core`` predicates. The current
-server-side implementation defaults to ``ncat`` to own the public
-listener socket and expose accepted connections to the parent object
-using a loopback relay listener plus peer metadata parsed from helper
-diagnostics.
+server-side implementation defaults to ``socat`` in POSIX systems and
+``ncat`` in Windows systems to own the public listener socket and expose
+accepted connections to the parent object using a loopback relay
+listener plus peer metadata parsed from helper diagnostics.
 
 This library requires backend support for the ``process`` and ``socket``
 libraries. Sequential client-side transport, including reusable
@@ -28,9 +28,11 @@ still require backend thread support.
 Requirements
 ------------
 
-The ``openssl`` (version 3.0.0 or later), ``ncat`` (version 7.96 or
-later), and ``socat`` (version 1.7.3.0 or later) commands must be
-available on the system ``PATH``.
+The ``openssl`` (version 3.0.0 or later) command and either the
+``socat`` (version 1.7.3.0 or later on POSIX systems) or ``ncat``
+(version 7.96 or later on Windows systems) commands must be available on
+the system ``PATH``. The library verifies their availability when loaded
+and warns on missing commands.
 
 On macOS, these commands can be installed using e.g. Homebrew:
 
