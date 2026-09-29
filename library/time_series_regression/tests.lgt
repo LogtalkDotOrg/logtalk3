@@ -247,7 +247,7 @@
 	test(ts_regression_gap_index, error(domain_error(series_index_sequence, gap_index))) :-
 		time_series_regression::learn(gap_index, _).
 
-	test(ts_regression_non_numeric_value, error(type_error(number, bad))) :-
+	test(ts_regression_non_numeric_value, error(domain_error(types([number,var]), bad))) :-
 		time_series_regression::learn(non_numeric_value, _).
 
 	% missing observations

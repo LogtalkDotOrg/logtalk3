@@ -15,7 +15,7 @@ Shared predicates for forecaster diagnostics, time series dataset validation, di
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-09-27
+| **Date:** 2026-09-29
 
 | **Compilation flags:**
 |    ``static``
@@ -141,7 +141,7 @@ Collects the dataset time-ordered observation values. Checks that the observatio
 | **Template:**
 |    ``dataset_series(Dataset,Series)``
 | **Mode and number of proofs:**
-|    ``dataset_series(+object_identifier,-list(number))`` - ``one_or_error``
+|    ``dataset_series(+object_identifier,-list)`` - ``one_or_error``
 
 | **Exceptions:**
 |    The dataset contains no observations:
@@ -181,6 +181,33 @@ Checks that a time series is non-empty and that every observation value is a num
 |        ``instantiation_error``
 |    An element ``Value`` of the ``Series`` list is neither a variable nor a number:
 |        ``type_error(number,Value)``
+|    ``Series`` is empty:
+|        ``domain_error(non_empty_series,Dataset)``
+
+
+------------
+
+.. index:: check_series/3
+.. _forecaster_common/0::check_series/3:
+
+``check_series/3``
+^^^^^^^^^^^^^^^^^^
+
+Checks that a time series is non-empty and that every observation value is of one of the given types.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_series(Dataset,Series,Types)``
+| **Mode and number of proofs:**
+|    ``check_series(+object_identifier,+list,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Series`` is a partial list:
+|        ``instantiation_error``
+|    An element ``Value`` of the ``Series`` list is neither a variable nor a number:
+|        ``domain_error(types(Types),Value)``
 |    ``Series`` is empty:
 |        ``domain_error(non_empty_series,Dataset)``
 

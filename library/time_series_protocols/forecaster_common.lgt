@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-27,
+		date is 2026-09-29,
 		comment is 'Shared predicates for forecaster diagnostics, time series dataset validation, differencing, lag construction, forecast error metrics, and naive baselines.'
 	]).
 
@@ -125,7 +125,7 @@
 	% dataset collection and validation
 
 	:- protected(dataset_series/2).
-	:- mode(dataset_series(+object_identifier, -list(number)), one_or_error).
+	:- mode(dataset_series(+object_identifier, -list), one_or_error).
 	:- info(dataset_series/2, [
 		comment is 'Collects the dataset time-ordered observation values. Checks that the observation indices form a complete, gap-free, 1-based sequence and that the declared series length matches the observed length.',
 		argnames is ['Dataset', 'Series'],
@@ -177,15 +177,38 @@
 	]).
 
 	check_series(Dataset, Series) :-
+		context(Context),
 		(	Series == [] ->
 			domain_error(non_empty_series, Dataset)
 		;	true
 		),
-		check_series_values(Series).
+		check_series_values(Series, Context).
 
-	check_series_values(Values) :-
-		context(Context),
+	check_series_values(Values, Context) :-
 		check(list(number), Values, Context).
+
+	:- protected(check_series/3).
+	:- mode(check_series(+object_identifier, +list, +list), one_or_error).
+	:- info(check_series/3, [
+		comment is 'Checks that a time series is non-empty and that every observation value is of one of the given types.',
+		argnames is ['Dataset', 'Series', 'Types'],
+		exceptions is [
+			'``Series`` is a partial list' - instantiation_error,
+			'An element ``Value`` of the ``Series`` list is neither a variable nor a number' - domain_error(types('Types'), 'Value'),
+			'``Series`` is empty' - domain_error(non_empty_series, 'Dataset')
+		]
+	]).
+
+	check_series(Dataset, Series, Types) :-
+		context(Context),
+		(	Series == [] ->
+			domain_error(non_empty_series, Dataset)
+		;	true
+		),
+		check_series_values(Series, Types, Context).
+
+	check_series_values(Values, Types, Context) :-
+		check(list(types(Types)), Values, Context).
 
 	:- protected(check_series_length/3).
 	:- mode(check_series_length(+object_identifier, +list, +non_negative_integer), one_or_error).

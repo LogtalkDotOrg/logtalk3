@@ -116,7 +116,8 @@
 		^^option(retain_residuals(RetainResiduals), Options),
 		check_relevant_options(OrderOption, UserOptions),
 		^^dataset_series(Dataset, Series),
-		check_series_with_missing(Dataset, Series),
+		% missing observations are represented as unbound variables
+		^^check_series(Dataset, Series, [number, var]),
 		missing_count(Series, MissingCount),
 		intercept_count(Intercept, InterceptCount),
 		minimum_series_length(OrderOption, Differencing, InterceptCount, MinimumLength),
@@ -187,23 +188,6 @@
 
 	% missing observations are represented as unbound variables; a series
 	% with missing observations is otherwise a proper, gap-free list
-
-	check_series_with_missing(Dataset, Series) :-
-		(	Series == [] ->
-			domain_error(non_empty_series, Dataset)
-		;	true
-		),
-		check_series_values_with_missing(Series).
-
-	check_series_values_with_missing([]).
-	check_series_values_with_missing([Value| Values]) :-
-		(	var(Value) ->
-			true
-		;	number(Value) ->
-			true
-		;	type_error(number, Value)
-		),
-		check_series_values_with_missing(Values).
 
 	missing_count([], 0).
 	missing_count([Value| Values], Count) :-
