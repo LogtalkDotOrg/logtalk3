@@ -74,6 +74,9 @@ Tools
 automation scripts to print the fastest and slowest test set names
 and execution times.
 
+* FIXED: The `help` tool inline opening of documentation pages when their file
+paths contain spaces.
+
 * FIXED: The `lgtunit` tool printing of the linter warning for misuse of
 `^^assertion/1-2` goals to not print `'$VAR'/1` terms.
 

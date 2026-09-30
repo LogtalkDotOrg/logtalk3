@@ -23,9 +23,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0:43:0,
+		version is 0:43:1,
 		author is 'Paulo Moura',
-		date is 2026-02-04,
+		date is 2026-09-30,
 		comment is 'Command-line help for Logtalk tools, libraries, entities, predicates, and non-terminals.'
 	]).
 
@@ -656,7 +656,7 @@
 		),
 		!,
 		environment_variable('LOGTALKHOME', LOGTALKHOME),
-		atomic_list_concat([Executable, ' ', LOGTALKHOME, Directory, File], Command),
+		atomic_list_concat([Executable, ' "', LOGTALKHOME, Directory, File, '"'], Command),
 		shell(Command).
 	open_in_inline_browser(_, Executable, Directory, File) :-
 		% for other terminal-based browsers or when the help_default_files flag is set to xhtml
@@ -666,7 +666,7 @@
 		atomic_list_concat([Directory0, Name0, '.xhtml'], Path),
 		file_exists(Path),
 		!,
-		atomic_list_concat([Executable, ' ', Path], Command),
+		atomic_list_concat([Executable, ' "', Path, '"'], Command),
 		shell(Command).
 	open_in_inline_browser(_, Executable, Directory, File) :-
 		% resort to .html files when the .xhtml files are not cached
