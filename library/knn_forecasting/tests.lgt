@@ -30,7 +30,7 @@
 	]).
 
 	:- uses(lgtunit, [
-		op(700, xfx, =~=), (=~=)/2
+		op(700, xfx, =~=), (=~=)/2, assertion/1
 	]).
 
 	:- uses(list, [
@@ -44,34 +44,30 @@
 
 	% exact recovery on periodic and seasonal patterns
 
-	test(knn_periodic_1nn_forecast, deterministic) :-
+	test(knn_periodic_1nn_forecast, deterministic(Forecasts =~= [1.0, 2.0, 3.0, 10.0, 1.0])) :-
 		knn_forecasting::learn(periodic_series, Forecaster, [order(3), k(1)]),
-		knn_forecasting::forecast(Forecaster, 5, Forecasts),
-		Forecasts =~= [1.0, 2.0, 3.0, 10.0, 1.0].
+		knn_forecasting::forecast(Forecaster, 5, Forecasts).
 
 	test(knn_periodic_1nn_perfect_fit, true) :-
 		knn_forecasting::learn(periodic_series, Forecaster, [order(3), k(1)]),
 		knn_forecasting::diagnostic(Forecaster, mean_absolute_error(MeanAbsoluteError)),
 		knn_forecasting::diagnostic(Forecaster, mean_squared_error(MeanSquaredError)),
-		MeanAbsoluteError =~= 0.0,
-		MeanSquaredError =~= 0.0.
+		assertion(MeanAbsoluteError =~= 0.0),
+		assertion(MeanSquaredError =~= 0.0).
 
-	test(knn_periodic_2nn_uniform, deterministic) :-
+	test(knn_periodic_2nn_uniform, deterministic(Forecasts =~= [1.0])) :-
 		knn_forecasting::learn(periodic_series, Forecaster, [order(3), k(2), weight_scheme(uniform)]),
-		knn_forecasting::forecast(Forecaster, 1, Forecasts),
-		Forecasts =~= [1.0].
+		knn_forecasting::forecast(Forecaster, 1, Forecasts).
 
-	test(knn_seasonal_forecast, deterministic) :-
+	test(knn_seasonal_forecast, deterministic(Forecasts =~= [10.0, 20.0, 15.0, 5.0])) :-
 		knn_forecasting::learn(seasonal_series, Forecaster, [order(4), k(1)]),
-		knn_forecasting::forecast(Forecaster, 4, Forecasts),
-		Forecasts =~= [10.0, 20.0, 15.0, 5.0].
+		knn_forecasting::forecast(Forecaster, 4, Forecasts).
 
 	% differencing
 
-	test(knn_differencing_1_linear_trend, deterministic) :-
+	test(knn_differencing_1_linear_trend, deterministic(Forecasts =~= [22.0, 24.0, 26.0])) :-
 		knn_forecasting::learn(linear_trend, Forecaster, [order(2), k(1), differencing(1)]),
-		knn_forecasting::forecast(Forecaster, 3, Forecasts),
-		Forecasts =~= [22.0, 24.0, 26.0].
+		knn_forecasting::forecast(Forecaster, 3, Forecasts).
 
 	test(knn_no_differencing_by_default, true(Differencing == 0)) :-
 		knn_forecasting::learn(periodic_series, Forecaster, [order(3), k(1)]),
@@ -79,38 +75,34 @@
 
 	% distance metrics and weighting schemes (cross-checked independently)
 
-	test(knn_euclidean_distance_weighted, deterministic) :-
+	test(knn_euclidean_distance_weighted, deterministic(Forecasts =~= [5.76295471315825, 8.919527903694872, 6.772501394662145, 3.5308409760469703])) :-
 		knn_forecasting::learn(noisy_pattern_series, Forecaster, [order(8), k(3), distance_metric(euclidean), weight_scheme(distance)]),
-		knn_forecasting::forecast(Forecaster, 4, Forecasts),
-		Forecasts =~= [5.76295471315825, 8.919527903694872, 6.772501394662145, 3.5308409760469703].
+		knn_forecasting::forecast(Forecaster, 4, Forecasts).
 
-	test(knn_manhattan_gaussian_weighted, deterministic) :-
+	test(knn_manhattan_gaussian_weighted, deterministic(Forecasts =~= [5.729899999999946, 9.124399999999898, 7.299899999999926])) :-
 		knn_forecasting::learn(noisy_pattern_series, Forecaster, [order(8), k(2), distance_metric(manhattan), weight_scheme(gaussian)]),
-		knn_forecasting::forecast(Forecaster, 3, Forecasts),
-		Forecasts =~= [5.729899999999946, 9.124399999999898, 7.299899999999926].
+		knn_forecasting::forecast(Forecaster, 3, Forecasts).
 
-	test(knn_chebyshev_uniform_weighted, deterministic) :-
+	test(knn_chebyshev_uniform_weighted, deterministic(Forecasts =~= [5.958333333333333, 8.608033333333333, 5.802])) :-
 		knn_forecasting::learn(noisy_pattern_series, Forecaster, [order(5), k(3), distance_metric(chebyshev), weight_scheme(uniform)]),
-		knn_forecasting::forecast(Forecaster, 3, Forecasts),
-		Forecasts =~= [5.958333333333333, 8.608033333333333, 5.802].
+		knn_forecasting::forecast(Forecaster, 3, Forecasts).
 
-	test(knn_minkowski_uniform_weighted, deterministic) :-
+	test(knn_minkowski_uniform_weighted, deterministic(Forecasts =~= [5.4748, 8.465399999999999, 6.6598500000000005])) :-
 		knn_forecasting::learn(noisy_pattern_series, Forecaster, [order(6), k(2), distance_metric(minkowski), minkowski_power(4.0), weight_scheme(uniform)]),
-		knn_forecasting::forecast(Forecaster, 3, Forecasts),
-		Forecasts =~= [5.4748, 8.465399999999999, 6.6598500000000005].
+		knn_forecasting::forecast(Forecaster, 3, Forecasts).
 
 	test(knn_leave_one_out_diagnostics, true) :-
 		knn_forecasting::learn(noisy_pattern_series, Forecaster, [order(8), k(3), distance_metric(euclidean), weight_scheme(distance)]),
 		knn_forecasting::diagnostic(Forecaster, mean_absolute_error(MeanAbsoluteError)),
 		knn_forecasting::diagnostic(Forecaster, mean_squared_error(MeanSquaredError)),
 		RootMeanSquaredError is sqrt(MeanSquaredError),
-		MeanAbsoluteError =~= 0.9758538017255322,
-		RootMeanSquaredError =~= 1.18835369439477,
-		knn_forecasting::diagnostic(Forecaster, scored_count(16)).
+		assertion(MeanAbsoluteError =~= 0.9758538017255322),
+		assertion(RootMeanSquaredError =~= 1.18835369439477),
+		assertion(knn_forecasting::diagnostic(Forecaster, scored_count(16))).
 
 	% options
 
-	test(knn_default_options, true) :-
+	test(knn_default_options, deterministic) :-
 		knn_forecasting::learn(noisy_pattern_series, Forecaster),
 		knn_forecasting::forecaster_options(Forecaster, Options),
 		memberchk(order(3), Options),
@@ -160,7 +152,7 @@
 
 	% forecasting
 
-	test(knn_forecast_zero_horizon, true(Forecasts == [])) :-
+	test(knn_forecast_zero_horizon, deterministic(Forecasts == [])) :-
 		knn_forecasting::learn(periodic_series, Forecaster, [order(3), k(1)]),
 		knn_forecasting::forecast(Forecaster, 0, Forecasts).
 
@@ -182,27 +174,24 @@
 	test(knn_forecast_invalid_forecaster, error(domain_error(forecaster, foo))) :-
 		knn_forecasting::forecast(foo, 1, _).
 
-	test(knn_learn_2_same_as_learn_3, true) :-
+	test(knn_learn_2_same_as_learn_3, deterministic(Forecaster0 == Forecaster1)) :-
 		knn_forecasting::learn(periodic_series, Forecaster0, [order(3), k(1)]),
-		knn_forecasting::learn(periodic_series, Forecaster1, [order(3), k(1)]),
-		Forecaster0 == Forecaster1.
+		knn_forecasting::learn(periodic_series, Forecaster1, [order(3), k(1)]).
 
 	% online updates
 
-	test(knn_update_forecast, deterministic) :-
+	test(knn_update_forecast, deterministic(Forecasts =~= [2.0, 3.0, 10.0])) :-
 		knn_forecasting::learn(periodic_series, Forecaster, [order(3), k(1)]),
 		knn_forecasting::update(Forecaster, 1.0, Updated),
-		knn_forecasting::forecast(Updated, 3, Forecasts),
-		Forecasts =~= [2.0, 3.0, 10.0].
+		knn_forecasting::forecast(Updated, 3, Forecasts).
 
-	test(knn_update_keeps_original_forecaster, true) :-
+	test(knn_update_keeps_original_forecaster, deterministic(Forecasts1 =~= Forecasts0)) :-
 		knn_forecasting::learn(periodic_series, Forecaster, [order(3), k(1)]),
 		knn_forecasting::forecast(Forecaster, 2, Forecasts0),
 		knn_forecasting::update(Forecaster, 1.0, _Updated),
-		knn_forecasting::forecast(Forecaster, 2, Forecasts1),
-		Forecasts1 =~= Forecasts0.
+		knn_forecasting::forecast(Forecaster, 2, Forecasts1).
 
-	test(knn_update_keeps_rows_fixed, true(RowCount1 == RowCount0)) :-
+	test(knn_update_keeps_rows_fixed, deterministic(RowCount1 == RowCount0)) :-
 		knn_forecasting::learn(periodic_series, Forecaster, [order(3), k(1)]),
 		Forecaster = knn_forecaster(_Model0, _State0, Rows0, _Diagnostics0),
 		length(Rows0, RowCount0),
@@ -220,19 +209,17 @@
 		SumSquaredError =~= 0.0,
 		knn_forecasting::valid_forecaster(Updated).
 
-	test(knn_update_off_pattern_observation, true) :-
+	test(knn_update_off_pattern_observation, true(SumSquaredError =~= ExpectedSumSquaredError)) :-
 		knn_forecasting::learn(periodic_series, Forecaster, [order(3), k(1)]),
 		knn_forecasting::update(Forecaster, 99.0, Updated),
 		knn_forecasting::diagnostic(Updated, sum_squared_error(SumSquaredError)),
 		Residual is 99.0 - 1.0,
-		ExpectedSumSquaredError is Residual * Residual,
-		SumSquaredError =~= ExpectedSumSquaredError.
+		ExpectedSumSquaredError is Residual * Residual.
 
-	test(knn_update_differencing_1, deterministic) :-
+	test(knn_update_differencing_1, deterministic(Forecasts =~= [24.0, 26.0])) :-
 		knn_forecasting::learn(linear_trend, Forecaster, [order(2), k(1), differencing(1)]),
 		knn_forecasting::update(Forecaster, 22, Updated),
-		knn_forecasting::forecast(Updated, 2, Forecasts),
-		Forecasts =~= [24.0, 26.0].
+		knn_forecasting::forecast(Updated, 2, Forecasts).
 
 	test(knn_update_unbound_forecaster, error(instantiation_error)) :-
 		knn_forecasting::update(_, 1.0, _).
@@ -266,7 +253,7 @@
 
 	% forecaster protocol predicates
 
-	test(knn_valid_forecaster, true) :-
+	test(knn_valid_forecaster, deterministic) :-
 		knn_forecasting::learn(periodic_series, Forecaster, [order(3), k(1)]),
 		knn_forecasting::valid_forecaster(Forecaster).
 
@@ -297,7 +284,7 @@
 		knn_forecasting::learn(periodic_series, knn_forecaster(Model, State, Rows, _Diagnostics), [order(3), k(1)]),
 		knn_forecasting::valid_forecaster(knn_forecaster(Model, State, Rows, [])).
 
-	test(knn_diagnostics_2, true) :-
+	test(knn_diagnostics_2, deterministic) :-
 		knn_forecasting::learn(periodic_series, Forecaster, [order(3), k(1)]),
 		knn_forecasting::diagnostics(Forecaster, Diagnostics),
 		memberchk(model(knn_forecasting), Diagnostics),
@@ -306,29 +293,28 @@
 		memberchk(k(1), Diagnostics),
 		memberchk(update_count(0), Diagnostics).
 
-	test(knn_diagnostic_2_enumeration, true(Names == [model, training_series_length, options])) :-
+	test(knn_diagnostic_2_enumeration, deterministic(Names == [model, training_series_length, options])) :-
 		knn_forecasting::learn(periodic_series, Forecaster, [order(3), k(1)]),
 		findall(Name, (knn_forecasting::diagnostic(Forecaster, Diagnostic), functor(Diagnostic, Name, 1)), [Name1, Name2, Name3| _]),
 		Names = [Name1, Name2, Name3].
 
 	% export and printing
 
-	test(knn_export_to_clauses_4, true) :-
+	test(knn_export_to_clauses_4, deterministic(Clause == forecaster_model(Forecaster))) :-
 		knn_forecasting::learn(periodic_series, Forecaster, [order(3), k(1)]),
-		knn_forecasting::export_to_clauses(periodic_series, Forecaster, forecaster_model, [Clause]),
-		Clause == forecaster_model(Forecaster).
+		knn_forecasting::export_to_clauses(periodic_series, Forecaster, forecaster_model, [Clause]).
 
-	test(knn_export_to_file_4_header, true) :-
+	test(knn_export_to_file_4_header, deterministic) :-
 		^^file_path('test_output.pl', File),
 		knn_forecasting::learn(periodic_series, Forecaster, [order(3), k(1)]),
 		knn_forecasting::export_to_file(periodic_series, Forecaster, forecaster_model, File),
 		header_lines(File, [Line1, Line2, Line3, _, Line5]),
-		Line1 == '% exported forecaster predicate: forecaster_model/1',
-		Line2 == '% training dataset: periodic_series',
-		Line3 == '% training series length: 16',
-		Line5 == '% forecaster_model(Forecaster)'.
+		assertion(Line1 == '% exported forecaster predicate: forecaster_model/1'),
+		assertion(Line2 == '% training dataset: periodic_series'),
+		assertion(Line3 == '% training series length: 16'),
+		assertion(Line5 == '% forecaster_model(Forecaster)').
 
-	test(knn_export_to_file_4_loadable, true) :-
+	test(knn_export_to_file_4_loadable, deterministic(Forecasts1 =~= Forecasts0)) :-
 		^^file_path('test_output.pl', File),
 		knn_forecasting::learn(periodic_series, Forecaster, [order(3), k(1)]),
 		knn_forecasting::export_to_file(periodic_series, Forecaster, forecaster_model, File),
@@ -336,8 +322,7 @@
 		{forecaster_model(Loaded)},
 		knn_forecasting::valid_forecaster(Loaded),
 		knn_forecasting::forecast(Forecaster, 2, Forecasts0),
-		knn_forecasting::forecast(Loaded, 2, Forecasts1),
-		Forecasts1 =~= Forecasts0.
+		knn_forecasting::forecast(Loaded, 2, Forecasts1).
 
 	test(knn_print_forecaster_1, deterministic) :-
 		^^suppress_text_output,
