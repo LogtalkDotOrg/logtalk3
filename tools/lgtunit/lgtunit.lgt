@@ -28,9 +28,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 22:9:0,
+		version is 22:10:0,
 		author is 'Paulo Moura',
-		date is 2026-08-31,
+		date is 2026-09-30,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1689,9 +1689,11 @@
 		Assertion \= (_; _),
 		\+ predicate_property(Assertion, built_in),
 		load_context(File, Position, Type, Entity),
+		logtalk_load_context(variable_names(Term), VariableNames),
 		\+ \+ (
-			numbervars(Assertion, 0, _),
-			print_message(warning, lgtunit, assertion_called_in_the_wrong_context(File, Position, Type, Entity, Assertion))
+			term::subterm(Subterm, Term),
+			variant(Subterm, Assertion),
+			print_message(warning, lgtunit, assertion_called_in_the_wrong_context(File, Position, Type, Entity, Subterm, VariableNames))
 		),
 		fail.
 

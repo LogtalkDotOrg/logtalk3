@@ -14,8 +14,8 @@ A unit test framework supporting predicate clause coverage, determinism testing,
 |    ``logtalk_load(lgtunit(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 22:9:0
-| **Date:** 2026-08-31
+| **Version:** 22:10:0
+| **Date:** 2026-09-30
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -36,6 +36,7 @@ A unit test framework supporting predicate clause coverage, determinism testing,
 |    :ref:`list <list/0>`
 |    :ref:`logtalk <logtalk/0>`
 |    :ref:`os <os/0>`
+|    :ref:`term <term/0>`
 |    :ref:`term_io <term_io/0>`
 |    :ref:`type <type/0>`
 |    :ref:`user <user/0>`
