@@ -45,6 +45,9 @@ algorithms.
 series forecasting using simple exponential smoothing, Holt linear-trend
 smoothing, and additive or multiplicative Holt-Winters seasonal smoothing.
 
+* ADDED: New `knn_forecasting` library implementing univariate time
+series forecasting using the k-Nearest Neighbors ("analog") method.
+
 * ADDED: New `time_series_regression` library implementing univariate time
 series forecasting using autoregressive (AR) models fitted by least squares.
 

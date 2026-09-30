@@ -3120,6 +3120,20 @@ To load an entity, always load the library that includes it using the goal ``log
 
    * :doc:`knn_distance_anomaly_detector <knn_distance_anomaly_detector_0>`
 
+``library/knn_forecasting/``
+----------------------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      knn_forecasting <knn_forecasting_0>
+
+.. only:: latex
+
+   * :doc:`knn_forecasting <knn_forecasting_0>`
+
 ``library/knn_regression/``
 ---------------------------
 

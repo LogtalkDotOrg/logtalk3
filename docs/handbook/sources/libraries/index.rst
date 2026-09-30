@@ -191,6 +191,7 @@ directory in the ``NOTES.md`` file.
    kmodes_clusterer
    knn_classifier
    knn_distance_anomaly_detector
+   knn_forecasting
    knn_regression
    kprototypes_clusterer
    ksuid

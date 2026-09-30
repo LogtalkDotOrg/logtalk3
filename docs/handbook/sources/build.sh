@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on September 28, 2026
+##   Last updated on September 30, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -241,6 +241,7 @@ sed '1,19d' ../../../library/kmedoids_clusterer/NOTES.md | pandoc -f gfm -t rst 
 sed '1,19d' ../../../library/kmodes_clusterer/NOTES.md | pandoc -f gfm -t rst -o libraries/kmodes_clusterer.rst
 sed '1,19d' ../../../library/knn_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/knn_classifier.rst
 sed '1,19d' ../../../library/knn_distance_anomaly_detector/NOTES.md | pandoc -f gfm -t rst -o libraries/knn_distance_anomaly_detector.rst
+sed '1,19d' ../../../library/knn_forecasting/NOTES.md | pandoc -f gfm -t rst -o libraries/knn_forecasting.rst
 sed '1,19d' ../../../library/knn_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/knn_regression.rst
 sed '1,19d' ../../../library/kprototypes_clusterer/NOTES.md | pandoc -f gfm -t rst -o libraries/kprototypes_clusterer.rst
 sed '1,19d' ../../../library/ksuid/NOTES.md | pandoc -f gfm -t rst -o libraries/ksuid.rst

@@ -250,6 +250,7 @@
 		clo_span_pattern_miner(loader),
 		time_series_protocols(loader),
 		exponential_smoothing(loader),
+		knn_forecasting(loader),
 		time_series_regression(loader),
 		uri_template(loader),
 		url(loader),

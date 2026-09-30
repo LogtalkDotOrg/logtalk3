@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on September 28, 2026
+%  Last updated on September 30, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -195,6 +195,7 @@ logtalk_library_path(kmedoids_clusterer, library('kmedoids_clusterer/')).
 logtalk_library_path(kmodes_clusterer, library('kmodes_clusterer/')).
 logtalk_library_path(knn_classifier, library('knn_classifier/')).
 logtalk_library_path(knn_distance_anomaly_detector, library('knn_distance_anomaly_detector/')).
+logtalk_library_path(knn_forecasting, library('knn_forecasting/')).
 logtalk_library_path(knn_regression, library('knn_regression/')).
 logtalk_library_path(kprototypes_clusterer, library('kprototypes_clusterer/')).
 logtalk_library_path(ksuid, library('ksuid/')).

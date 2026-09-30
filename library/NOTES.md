@@ -134,7 +134,8 @@ Library groups
         `fp_growth_pattern_miner`, `gsp_pattern_miner`, `prefix_span_pattern_miner`,
         and `spade_pattern_miner`.
     - Time series:
-        `time_series_protocols`, `exponential_smoothing`, `time_series_regression`.
+        `time_series_protocols`, `exponential_smoothing`, `knn_forecasting`,
+        `time_series_regression`.
 
 In addition to the loader-based libraries, this directory also contains a
 small number of standalone reusable entities, namely `attributes`, `cloning`,
