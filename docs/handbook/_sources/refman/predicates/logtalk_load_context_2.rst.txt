@@ -52,9 +52,9 @@ are currently supported:
 * ``term_position(Term)`` - the position of the term being compiled (``StartLine-EndLine``)
 * ``variables`` - the variables of the term being compiled (``[Variable1, ...]``)
 * ``variable_names`` - the variable names of the term being compiled (``[Name1=Variable1, ...]``)
-* ``variable_names(Term)`` - the variable names of the term being compiled (``[Name1=Variable1, ...]``)
+* ``variable_names(Term)`` - the variable names of the term or goal being compiled (``[Name1=Variable1, ...]``)
 * ``singletons`` - the singleton variables of the term being compiled (``[Name1=Variable1, ...]``)
-* ``singletons(Term)`` - the singleton variables of the term being compiled (``[Name1=Variable1, ...]``)
+* ``singletons(Term)`` - the singleton variables of the term or goal being compiled (``[Name1=Variable1, ...]``)
 * ``parameter_variables`` - list of parameter variable names and positions (``[Name1-Position1, ...]``)
 
 For the ``entity_relation`` key, the possible values are:
@@ -89,7 +89,11 @@ from an object ``initialization/1`` directive.
    and ``singletons`` keys are not shared with, respectively, the term and
    goal arguments of the ``term_expansion/2`` and ``goal_expansion/2`` methods.
    Use instead the ``variable_names(Term)`` and ``singletons(Term)`` keys when
-   possible.
+   possible. The ``Term`` argument can be the full term being expanded (typically
+   when ``logtalk_load_context/2`` is called from ``term_expansion/2``) or the goal
+   being expanded (typically when ``logtalk_load_context/2`` is called from
+   ``goal_expansion/2``). In the case of a goal argument, the runtime assumes
+   the term containing the goal contains only a single variant of the argument.
 
 Modes and number of proofs
 --------------------------

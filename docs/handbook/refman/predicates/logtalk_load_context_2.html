@@ -168,9 +168,9 @@ are currently supported:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">term_position(Term)</span></code> - the position of the term being compiled (<code class="docutils literal notranslate"><span class="pre">StartLine-EndLine</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">variables</span></code> - the variables of the term being compiled (<code class="docutils literal notranslate"><span class="pre">[Variable1,</span> <span class="pre">...]</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">variable_names</span></code> - the variable names of the term being compiled (<code class="docutils literal notranslate"><span class="pre">[Name1=Variable1,</span> <span class="pre">...]</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">variable_names(Term)</span></code> - the variable names of the term being compiled (<code class="docutils literal notranslate"><span class="pre">[Name1=Variable1,</span> <span class="pre">...]</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">variable_names(Term)</span></code> - the variable names of the term or goal being compiled (<code class="docutils literal notranslate"><span class="pre">[Name1=Variable1,</span> <span class="pre">...]</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">singletons</span></code> - the singleton variables of the term being compiled (<code class="docutils literal notranslate"><span class="pre">[Name1=Variable1,</span> <span class="pre">...]</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">singletons(Term)</span></code> - the singleton variables of the term being compiled (<code class="docutils literal notranslate"><span class="pre">[Name1=Variable1,</span> <span class="pre">...]</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">singletons(Term)</span></code> - the singleton variables of the term or goal being compiled (<code class="docutils literal notranslate"><span class="pre">[Name1=Variable1,</span> <span class="pre">...]</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">parameter_variables</span></code> - list of parameter variable names and positions (<code class="docutils literal notranslate"><span class="pre">[Name1-Position1,</span> <span class="pre">...]</span></code>)</p></li>
 </ul>
 <p>For the <code class="docutils literal notranslate"><span class="pre">entity_relation</span></code> key, the possible values are:</p>
@@ -202,7 +202,11 @@ the start and the end lines.</p>
 and <code class="docutils literal notranslate"><span class="pre">singletons</span></code> keys are not shared with, respectively, the term and
 goal arguments of the <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> and <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> methods.
 Use instead the <code class="docutils literal notranslate"><span class="pre">variable_names(Term)</span></code> and <code class="docutils literal notranslate"><span class="pre">singletons(Term)</span></code> keys when
-possible.</p>
+possible. The <code class="docutils literal notranslate"><span class="pre">Term</span></code> argument can be the full term being expanded (typically
+when <code class="docutils literal notranslate"><span class="pre">logtalk_load_context/2</span></code> is called from <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code>) or the goal
+being expanded (typically when <code class="docutils literal notranslate"><span class="pre">logtalk_load_context/2</span></code> is called from
+<code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code>). In the case of a goal argument, the runtime assumes
+the term containing the goal contains only a single variant of the argument.</p>
 </div>
 </section>
 <section id="modes-and-number-of-proofs">

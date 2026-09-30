@@ -1689,12 +1689,8 @@
 		Assertion \= (_; _),
 		\+ predicate_property(Assertion, built_in),
 		load_context(File, Position, Type, Entity),
-		logtalk_load_context(variable_names(Term), VariableNames),
-		\+ \+ (
-			term::subterm(Subterm, Term),
-			variant(Subterm, Assertion),
-			print_message(warning, lgtunit, assertion_called_in_the_wrong_context(File, Position, Type, Entity, Subterm, VariableNames))
-		),
+		logtalk_load_context(variable_names(Assertion), VariableNames),
+		print_message(warning, lgtunit, assertion_called_in_the_wrong_context(File, Position, Type, Entity, Assertion, VariableNames)),
 		fail.
 
 	% expand lgtunit::assertion/1-2 goals in test bodies to avoid false dead code

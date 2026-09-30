@@ -25,6 +25,13 @@ RELEASE NOTES
 3.103.0 - October ??, 2026
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* CHANGED: Allow the `logtalk_load_context/2` built-in predicate `singletons/1`
+and `variable_names/1` key arguments to be either the term being term-expanded
+or the goal being goal-expanded.
+
 Documentation
 -------------
 

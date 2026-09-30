@@ -3682,16 +3682,34 @@ logtalk_load_context(Key, Value) :-
 	'$lgt_pp_term_source_data_'(_, VariableNames, _, _, _).
 
 '$lgt_logtalk_load_context_checked'(variable_names(Term), VariableNames) :-
-	% variable names for the full file term being compiled
-	'$lgt_pp_term_source_data_'(Term, VariableNames, _, _, _).
+	'$lgt_pp_term_source_data_'(CurrentTerm, VariableNames, _, _, _),
+	% variable names for the file term being compiled
+	(	Term = CurrentTerm ->
+		% assume full file term being compiled
+		true
+	;	% assume goal being compiled
+		'$lgt_subterm'(Subterm, CurrentTerm),
+		'$lgt_variant'(Subterm, Term) ->
+		Subterm = Term
+	;	fail
+	).
 
 '$lgt_logtalk_load_context_checked'(singletons, Singletons) :-
 	% singleton variables in the full file term being compiled
 	'$lgt_pp_term_source_data_'(_, _, Singletons, _, _).
 
 '$lgt_logtalk_load_context_checked'(singletons(Term), Singletons) :-
-	% singleton variables in the full file term being compiled
-	'$lgt_pp_term_source_data_'(Term, _, Singletons, _, _).
+	'$lgt_pp_term_source_data_'(CurrentTerm, _, Singletons, _, _),
+	% singleton variables in the file term being compiled
+	(	Term = CurrentTerm ->
+		% assume full file term being compiled
+		true
+	;	% assume goal being compiled
+		'$lgt_subterm'(Subterm, CurrentTerm),
+		'$lgt_variant'(Subterm, Term) ->
+		Subterm = Term
+	;	fail
+	).
 
 '$lgt_logtalk_load_context_checked'(parameter_variables, ParameterVariablePairs) :-
 	% only succeeds when compiling a parametric entity containing parameter variables
@@ -3763,6 +3781,24 @@ logtalk_load_context(Key, Value) :-
 '$lgt_valid_logtalk_load_context_key'(variable_names(_)).
 '$lgt_valid_logtalk_load_context_key'(singletons).
 '$lgt_valid_logtalk_load_context_key'(singletons(_)).
+
+
+%
+
+'$lgt_subterm'(Term, Term).
+'$lgt_subterm'(Subterm, Term) :-
+	nonvar(Term),
+	functor(Term, _, N),
+	'$lgt_subterm'(N, Subterm, Term).
+
+'$lgt_subterm'(N, Subterm, Term) :-
+	compound(Term),
+	arg(N, Term, Arg),
+	'$lgt_subterm'(Subterm, Arg).
+'$lgt_subterm'(N, Subterm, Term) :-
+	N > 1,
+	M is N-1,
+	'$lgt_subterm'(M, Subterm, Term).
 
 
 
