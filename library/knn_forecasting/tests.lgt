@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-29,
+		date is 2026-10-01,
 		comment is 'Tests for the "knn_forecasting" library. Reference values for the noisy_pattern_series dataset were computed independently using a Python re-implementation of the nearest-neighbor search and weighting schemes.'
 	]).
 
@@ -147,8 +147,82 @@
 	test(knn_gap_index, error(domain_error(series_index_sequence, gap_index))) :-
 		knn_forecasting::learn(gap_index, _).
 
-	test(knn_non_numeric_value, error(type_error(number, bad))) :-
+	test(knn_non_numeric_value, error(domain_error(types([number,var]), bad))) :-
 		knn_forecasting::learn(non_numeric_value, _).
+
+	% missing observations
+
+	test(knn_missing_interior_diagnostics, true) :-
+		knn_forecasting::learn(periodic_series_missing_interior, Forecaster, [order(3), k(1)]),
+		knn_forecasting::diagnostic(Forecaster, missing_count(1)),
+		knn_forecasting::diagnostic(Forecaster, scored_count(9)).
+
+	test(knn_missing_interior_perfect_fit, true) :-
+		knn_forecasting::learn(periodic_series_missing_interior, Forecaster, [order(3), k(1)]),
+		knn_forecasting::diagnostic(Forecaster, mean_absolute_error(MeanAbsoluteError)),
+		knn_forecasting::diagnostic(Forecaster, mean_squared_error(MeanSquaredError)),
+		MeanAbsoluteError =~= 0.0,
+		MeanSquaredError =~= 0.0.
+
+	test(knn_missing_interior_forecast, deterministic(Forecasts =~= [1.0, 2.0, 3.0, 10.0, 1.0])) :-
+		knn_forecasting::learn(periodic_series_missing_interior, Forecaster, [order(3), k(1)]),
+		knn_forecasting::forecast(Forecaster, 5, Forecasts).
+
+	test(knn_no_missing_observations, true(MissingCount == 0)) :-
+		knn_forecasting::learn(periodic_series, Forecaster, [order(3), k(1)]),
+		knn_forecasting::diagnostic(Forecaster, missing_count(MissingCount)).
+
+	test(knn_missing_trailing_learn_succeeds, deterministic) :-
+		knn_forecasting::learn(periodic_series_missing_trailing, Forecaster, [order(1), k(1)]),
+		knn_forecasting::valid_forecaster(Forecaster).
+
+	test(knn_missing_trailing_window_unknown, false) :-
+		knn_forecasting::learn(periodic_series_missing_trailing, Forecaster, [order(1), k(1)]),
+		Forecaster = knn_forecaster(_, knn_state(Window, _), _, _),
+		ground(Window).
+
+	test(knn_missing_trailing_forecast_fails, error(domain_error(missing_observation, _))) :-
+		knn_forecasting::learn(periodic_series_missing_trailing, Forecaster, [order(1), k(1)]),
+		knn_forecasting::forecast(Forecaster, 1, _).
+
+	test(knn_missing_trailing_zero_horizon_succeeds, deterministic(Forecasts == [])) :-
+		knn_forecasting::learn(periodic_series_missing_trailing, Forecaster, [order(1), k(1)]),
+		knn_forecasting::forecast(Forecaster, 0, Forecasts).
+
+	test(knn_missing_trailing_resolved_by_update, deterministic(Forecasts =~= [1.0, 2.0])) :-
+		knn_forecasting::learn(periodic_series_missing_trailing, Forecaster, [order(1), k(1)]),
+		knn_forecasting::update(Forecaster, 10.0, Updated),
+		knn_forecasting::forecast(Updated, 2, Forecasts).
+
+	test(knn_missing_trailing_resolved_diagnostics, true) :-
+		knn_forecasting::learn(periodic_series_missing_trailing, Forecaster, [order(1), k(1)]),
+		knn_forecasting::update(Forecaster, 10.0, Updated),
+		knn_forecasting::diagnostic(Updated, training_series_length(17)),
+		knn_forecasting::diagnostic(Updated, scored_count(14)),
+		knn_forecasting::diagnostic(Updated, update_count(1)).
+
+	test(knn_insufficient_observations, error(consistency_error(k, 3, 0))) :-
+		knn_forecasting::learn(mostly_missing_series, _).
+
+	test(knn_missing_observation_appended, true) :-
+		knn_forecasting::learn(periodic_series, Forecaster, [order(3), k(1)]),
+		knn_forecasting::update(Forecaster, _, Updated),
+		knn_forecasting::diagnostic(Updated, missing_count(1)),
+		knn_forecasting::diagnostic(Updated, training_series_length(17)),
+		knn_forecasting::diagnostic(Updated, scored_count(13)).
+
+	test(knn_missing_observation_appended_blocks_forecast, error(domain_error(missing_observation, _))) :-
+		knn_forecasting::learn(periodic_series, Forecaster, [order(3), k(1)]),
+		knn_forecasting::update(Forecaster, _, Updated),
+		knn_forecasting::forecast(Updated, 1, _).
+
+	test(knn_missing_observation_appended_resolved, deterministic(Forecasts =~= [10.0])) :-
+		knn_forecasting::learn(periodic_series, Forecaster, [order(3), k(1)]),
+		knn_forecasting::update(Forecaster, _, Updated),
+		knn_forecasting::update(Updated, 1.0, Updated1),
+		knn_forecasting::update(Updated1, 2.0, Updated2),
+		knn_forecasting::update(Updated2, 3.0, Updated3),
+		knn_forecasting::forecast(Updated3, 1, Forecasts).
 
 	% forecasting
 
@@ -227,9 +301,10 @@
 	test(knn_update_invalid_forecaster, error(domain_error(forecaster, foo))) :-
 		knn_forecasting::update(foo, 1.0, _).
 
-	test(knn_update_unbound_observation, error(instantiation_error)) :-
+	test(knn_update_unbound_observation_is_missing, deterministic) :-
 		knn_forecasting::learn(periodic_series, Forecaster, [order(3), k(1)]),
-		knn_forecasting::update(Forecaster, _, _).
+		knn_forecasting::update(Forecaster, _, Updated),
+		knn_forecasting::valid_forecaster(Updated).
 
 	test(knn_update_non_numeric_observation, error(type_error(number, foo))) :-
 		knn_forecasting::learn(periodic_series, Forecaster, [order(3), k(1)]),

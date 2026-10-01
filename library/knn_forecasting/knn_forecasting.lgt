@@ -25,20 +25,19 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-29,
-		comment is 'k-Nearest Neighbors (analog method) time series forecaster: matches the most recent window of observations against historical windows of the same length and predicts by aggregating what followed the most similar ones. Supports multiple distance metrics, neighbor weighting schemes, and optional differencing.',
+		date is 2026-10-01,
+		comment is 'k-Nearest Neighbors (analog method) time series forecaster: matches the most recent window of observations against historical windows of the same length and predicts by aggregating what followed the most similar ones. Supports multiple distance metrics, neighbor weighting schemes, optional differencing, and missing observations represented as unbound variables.',
 		see_also is [exponential_smoothing, time_series_regression]
 	]).
 
 	:- public(update/4).
-	:- mode(update(+compound, +number, -compound, +list(compound)), one_or_error).
+	:- mode(update(+compound, @number, -compound, +list(compound)), one_or_error).
 	:- info(update/4, [
-		comment is 'Returns a new forecaster after appending one observation to the series, keeping the memorized historical windows (and so the set of possible analogs) unchanged. The original forecaster is unchanged. The one-step prediction error of the new observation (predicted from the prior window using the same K nearest neighbors search used for forecasting) is added to the training error diagnostics. No update options are currently defined.',
+		comment is 'Returns a new forecaster after appending one observation to the series, keeping the memorized historical windows (and so the set of possible analogs) unchanged. The original forecaster is unchanged. ``Observation`` may be left an unbound variable to represent a missing (not yet known) observation; in that case, and whenever the resulting one-step prediction cannot be computed because the forecaster state is not fully known (see ``learn/3``), no prediction error is available and the training error diagnostics are left unchanged, only ``training_series_length/1``, ``update_count/1``, and, when ``Observation`` is a variable, ``missing_count/1`` are updated. Otherwise, the one-step prediction error of the new observation (predicted from the prior window using the same K nearest neighbors search used for forecasting) is added to the training error diagnostics. No update options are currently defined.',
 		argnames is ['Forecaster', 'Observation', 'UpdatedForecaster', 'Options'],
 		exceptions is [
 			'``Forecaster`` is a variable' - instantiation_error,
 			'``Forecaster`` is neither a variable nor a valid forecaster' - domain_error(forecaster, 'Forecaster'),
-			'``Observation`` is a variable' - instantiation_error,
 			'``Observation`` is neither a variable nor a number' - type_error(number, 'Observation'),
 			'``Options`` is a variable or a partial list' - instantiation_error,
 			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
@@ -49,14 +48,13 @@
 	]).
 
 	:- public(update/3).
-	:- mode(update(+compound, +number, -compound), one_or_error).
+	:- mode(update(+compound, @number, -compound), one_or_error).
 	:- info(update/3, [
-		comment is 'Returns a new forecaster after appending one observation using default update options.',
+		comment is 'Returns a new forecaster after appending one observation using default update options. ``Observation`` may be left an unbound variable to represent a missing observation; see ``update/4``.',
 		argnames is ['Forecaster', 'Observation', 'UpdatedForecaster'],
 		exceptions is [
 			'``Forecaster`` is a variable' - instantiation_error,
 			'``Forecaster`` is neither a variable nor a valid forecaster' - domain_error(forecaster, 'Forecaster'),
-			'``Observation`` is a variable' - instantiation_error,
 			'``Observation`` is neither a variable nor a number' - type_error(number, 'Observation')
 		]
 	]).
@@ -89,18 +87,27 @@
 		^^option(weight_scheme(WeightScheme), Options),
 		^^option(differencing(Differencing), Options),
 		^^dataset_series(Dataset, Series),
-		^^check_series(Dataset, Series),
+		% missing observations are represented as unbound variables
+		^^check_series(Dataset, Series, [number, var]),
+		missing_count(Series, MissingCount),
 		% every candidate order requires more than Order observations to
 		% form even a single row (see lagged_rows/3); requiring K + 1 rows
 		% guarantees enough neighbors for both forecasting (K rows) and the
 		% leave-one-out cross-validation computed below (K rows excluding
-		% the one left out)
+		% the one left out), PROVIDED no observation is missing; missing
+		% observations can still leave fewer than K + 1 complete rows, which
+		% is checked for explicitly below
 		MinimumLength is Differencing + Order + K + 1,
 		^^check_series_length(Dataset, Series, MinimumLength),
 		length(Series, TrainingSeriesLength),
 		difference_levels(Differencing, Series, Levels, DifferencedSeries),
-		^^lagged_rows(DifferencedSeries, Order, Rows),
+		^^lagged_rows(DifferencedSeries, Order, Rows0),
+		filter_complete_rows(Rows0, Rows),
 		length(Rows, RowCount),
+		(	RowCount > K ->
+			true
+		;	consistency_error(k, K, RowCount)
+		),
 		initial_window(DifferencedSeries, Order, Window),
 		leave_one_out(Rows, K, DistanceMetric, MinkowskiPower, WeightScheme, Actual, Predicted),
 		^^mean_absolute_error(Actual, Predicted, MeanAbsoluteError),
@@ -113,6 +120,7 @@
 			[
 				order(Order),
 				differencing(Differencing),
+				missing_count(MissingCount),
 				k(K),
 				distance_metric(DistanceMetric),
 				minkowski_power(MinkowskiPower),
@@ -133,22 +141,71 @@
 			Diagnostics
 		).
 
+	% missing observations are represented as unbound variables; a series
+	% with missing observations is otherwise a proper, gap-free list (same
+	% convention as in the time_series_regression library)
+
+	missing_count([], 0).
+	missing_count([Value| Values], Count) :-
+		missing_count(Values, Count0),
+		(	var(Value) ->
+			Count is Count0 + 1
+		;	Count = Count0
+		).
+
 	% differencing; the levels list holds the last value of the series at
 	% each differencing level, starting with the original series (same
-	% construction as in the time_series_regression library)
+	% construction as in the time_series_regression library); a difference
+	% with a missing operand is itself missing (left unbound)
 
 	difference_levels(0, Series, [], Series) :-
 		!.
 	difference_levels(Differencing, Series, [Last| Levels], DifferencedSeries) :-
 		Differencing > 0,
 		last(Series, Last),
-		^^difference_series(Series, Series1),
+		difference_series_with_missing(Series, Series1),
 		Differencing1 is Differencing - 1,
 		difference_levels(Differencing1, Series1, Levels, DifferencedSeries).
+
+	difference_series_with_missing([First| Rest], Differences) :-
+		difference_series_with_missing_(Rest, First, Differences).
+
+	difference_series_with_missing_([], _, []).
+	difference_series_with_missing_([Value| Values], Previous, [Difference| Differences]) :-
+		subtract_or_missing(Value, Previous, Difference),
+		difference_series_with_missing_(Values, Value, Differences).
+
+	subtract_or_missing(Value, Previous, Difference) :-
+		(	number(Value),
+			number(Previous) ->
+			Difference is Value - Previous
+		;	true
+		).
 
 	initial_window(DifferencedSeries, Order, Window) :-
 		reverse(DifferencedSeries, Reversed),
 		take(Order, Reversed, Window).
+
+	% a memorized row built across a missing observation (as a target or
+	% as one of the lagged values) is excluded from the memorized set
+	% (casewise deletion), so every memorized row is always fully known
+
+	filter_complete_rows([], []).
+	filter_complete_rows([Row| Rows], Filtered) :-
+		(	complete_row(Row) ->
+			Filtered = [Row| FilteredRest]
+		;	Filtered = FilteredRest
+		),
+		filter_complete_rows(Rows, FilteredRest).
+
+	complete_row(Lags-Target) :-
+		number(Target),
+		ground_number_list(Lags).
+
+	ground_number_list([]).
+	ground_number_list([Value| Values]) :-
+		number(Value),
+		ground_number_list(Values).
 
 	% leave-one-out cross-validation over the memorized rows, used to seed
 	% the training error diagnostics; each row's target is predicted from
@@ -249,9 +306,20 @@
 		check_forecaster(Forecaster),
 		^^check_forecast_horizon(Horizon),
 		Forecaster = knn_forecaster(knn(_Order, _Differencing, K, DistanceMetric, MinkowskiPower, WeightScheme), knn_state(Window, Levels), Rows, _Diagnostics),
-		project(Horizon, Rows, K, DistanceMetric, MinkowskiPower, WeightScheme, Window, DifferencedForecasts),
-		reverse(Levels, ReversedLevels),
-		integrate_levels(ReversedLevels, DifferencedForecasts, Forecasts).
+		(	Horizon =:= 0 ->
+			Forecasts = []
+		;	check_known_state(Forecaster, Window, Levels),
+			project(Horizon, Rows, K, DistanceMetric, MinkowskiPower, WeightScheme, Window, DifferencedForecasts),
+			reverse(Levels, ReversedLevels),
+			integrate_levels(ReversedLevels, DifferencedForecasts, Forecasts)
+		).
+
+	check_known_state(Forecaster, Window, Levels) :-
+		(	ground(Window),
+			ground(Levels) ->
+			true
+		;	domain_error(missing_observation, Forecaster)
+		).
 
 	project(0, _, _, _, _, _, _, []) :-
 		!.
@@ -284,11 +352,16 @@
 		Forecaster = knn_forecaster(Model, knn_state(Window, Levels), Rows, Diagnostics),
 		Model = knn(_Order, _Differencing, K, DistanceMetric, MinkowskiPower, WeightScheme),
 		update_levels(Levels, Observation, UpdatedLevels, DifferencedObservation),
-		find_k_nearest(Window, Rows, K, DistanceMetric, MinkowskiPower, Neighbors),
-		predict_from_neighbors(Neighbors, WeightScheme, Prediction),
-		Residual is DifferencedObservation - Prediction,
+		(	ground(Window),
+			nonvar(DifferencedObservation) ->
+			find_k_nearest(Window, Rows, K, DistanceMetric, MinkowskiPower, Neighbors),
+			predict_from_neighbors(Neighbors, WeightScheme, Prediction),
+			Residual is DifferencedObservation - Prediction,
+			Outcome = scored(Residual)
+		;	Outcome = unscored
+		),
 		push_window(Window, DifferencedObservation, UpdatedWindow),
-		updated_diagnostics(Diagnostics, Residual, UpdatedDiagnostics),
+		updated_diagnostics(Diagnostics, Outcome, Observation, UpdatedDiagnostics),
 		UpdatedForecaster = knn_forecaster(Model, knn_state(UpdatedWindow, UpdatedLevels), Rows, UpdatedDiagnostics).
 
 	update(Forecaster, Observation, UpdatedForecaster) :-
@@ -296,7 +369,7 @@
 
 	check_observation(Observation) :-
 		(	var(Observation) ->
-			instantiation_error
+			true
 		;	number(Observation) ->
 			true
 		;	type_error(number, Observation)
@@ -319,30 +392,40 @@
 
 	update_levels([], DifferencedObservation, [], DifferencedObservation).
 	update_levels([Last| Lasts], Value, [Value| UpdatedLasts], DifferencedObservation) :-
-		Difference is Value - Last,
+		subtract_or_missing(Value, Last, Difference),
 		update_levels(Lasts, Difference, UpdatedLasts, DifferencedObservation).
 
-	updated_diagnostics(Diagnostics, Residual, UpdatedDiagnostics) :-
+	updated_diagnostics(Diagnostics, Outcome, Observation, UpdatedDiagnostics) :-
 		memberchk(training_series_length(TrainingSeriesLength0), Diagnostics),
+		memberchk(update_count(UpdateCount0), Diagnostics),
+		memberchk(missing_count(MissingCount0), Diagnostics),
+		TrainingSeriesLength is TrainingSeriesLength0 + 1,
+		UpdateCount is UpdateCount0 + 1,
+		(	var(Observation) ->
+			MissingCount is MissingCount0 + 1
+		;	MissingCount = MissingCount0
+		),
+		replace_diagnostic(training_series_length, TrainingSeriesLength, Diagnostics, Diagnostics1),
+		replace_diagnostic(update_count, UpdateCount, Diagnostics1, Diagnostics2),
+		replace_diagnostic(missing_count, MissingCount, Diagnostics2, Diagnostics3),
+		apply_outcome(Outcome, Diagnostics3, UpdatedDiagnostics).
+
+	apply_outcome(unscored, Diagnostics, Diagnostics).
+	apply_outcome(scored(Residual), Diagnostics, UpdatedDiagnostics) :-
 		memberchk(scored_count(ScoredCount0), Diagnostics),
 		memberchk(sum_squared_error(SumSquaredError0), Diagnostics),
 		memberchk(sum_absolute_error(SumAbsoluteError0), Diagnostics),
-		memberchk(update_count(UpdateCount0), Diagnostics),
-		TrainingSeriesLength is TrainingSeriesLength0 + 1,
 		ScoredCount is ScoredCount0 + 1,
 		SumSquaredError is SumSquaredError0 + Residual * Residual,
 		MeanSquaredError is SumSquaredError / ScoredCount,
 		AbsoluteResidual is abs(Residual),
 		SumAbsoluteError is SumAbsoluteError0 + AbsoluteResidual,
 		MeanAbsoluteError is SumAbsoluteError / ScoredCount,
-		UpdateCount is UpdateCount0 + 1,
-		replace_diagnostic(training_series_length, TrainingSeriesLength, Diagnostics, Diagnostics1),
-		replace_diagnostic(scored_count, ScoredCount, Diagnostics1, Diagnostics2),
-		replace_diagnostic(sum_squared_error, SumSquaredError, Diagnostics2, Diagnostics3),
-		replace_diagnostic(mean_squared_error, MeanSquaredError, Diagnostics3, Diagnostics4),
-		replace_diagnostic(sum_absolute_error, SumAbsoluteError, Diagnostics4, Diagnostics5),
-		replace_diagnostic(mean_absolute_error, MeanAbsoluteError, Diagnostics5, Diagnostics6),
-		replace_diagnostic(update_count, UpdateCount, Diagnostics6, UpdatedDiagnostics).
+		replace_diagnostic(scored_count, ScoredCount, Diagnostics, Diagnostics1),
+		replace_diagnostic(sum_squared_error, SumSquaredError, Diagnostics1, Diagnostics2),
+		replace_diagnostic(mean_squared_error, MeanSquaredError, Diagnostics2, Diagnostics3),
+		replace_diagnostic(sum_absolute_error, SumAbsoluteError, Diagnostics3, Diagnostics4),
+		replace_diagnostic(mean_absolute_error, MeanAbsoluteError, Diagnostics4, UpdatedDiagnostics).
 
 	replace_diagnostic(Name, Value, [Diagnostic| Diagnostics], [UpdatedDiagnostic| Diagnostics]) :-
 		functor(Diagnostic, Name, 1),
@@ -375,9 +458,9 @@
 		valid_option(weight_scheme(WeightScheme)).
 
 	valid_state(Order, Differencing, knn_state(Window, Levels)) :-
-		valid(list(number), Window),
+		valid(list(types([number,var])), Window),
 		length(Window, Order),
-		valid(list(number), Levels),
+		valid(list(types([number,var])), Levels),
 		length(Levels, Differencing).
 
 	valid_rows(_Order, _K, []) :-
@@ -403,6 +486,9 @@
 		memberchk(distance_metric(DistanceMetric), Diagnostics),
 		memberchk(minkowski_power(MinkowskiPower), Diagnostics),
 		memberchk(weight_scheme(WeightScheme), Diagnostics),
+		memberchk(missing_count(MissingCount), Diagnostics),
+		integer(MissingCount),
+		MissingCount >= 0,
 		memberchk(training_series_length(TrainingSeriesLength), Diagnostics),
 		integer(TrainingSeriesLength),
 		TrainingSeriesLength > 0,

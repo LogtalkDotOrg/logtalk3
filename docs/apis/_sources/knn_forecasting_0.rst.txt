@@ -8,14 +8,14 @@
 ``knn_forecasting``
 ===================
 
-k-Nearest Neighbors (analog method) time series forecaster: matches the most recent window of observations against historical windows of the same length and predicts by aggregating what followed the most similar ones. Supports multiple distance metrics, neighbor weighting schemes, and optional differencing.
+k-Nearest Neighbors (analog method) time series forecaster: matches the most recent window of observations against historical windows of the same length and predicts by aggregating what followed the most similar ones. Supports multiple distance metrics, neighbor weighting schemes, optional differencing, and missing observations represented as unbound variables.
 
 | **Availability:** 
 |    ``logtalk_load(knn_forecasting(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-09-29
+| **Date:** 2026-10-01
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -48,7 +48,7 @@ Public predicates
 ``update/4``
 ^^^^^^^^^^^^
 
-Returns a new forecaster after appending one observation to the series, keeping the memorized historical windows (and so the set of possible analogs) unchanged. The original forecaster is unchanged. The one-step prediction error of the new observation (predicted from the prior window using the same K nearest neighbors search used for forecasting) is added to the training error diagnostics. No update options are currently defined.
+Returns a new forecaster after appending one observation to the series, keeping the memorized historical windows (and so the set of possible analogs) unchanged. The original forecaster is unchanged. ``Observation`` may be left an unbound variable to represent a missing (not yet known) observation; in that case, and whenever the resulting one-step prediction cannot be computed because the forecaster state is not fully known (see ``learn/3``), no prediction error is available and the training error diagnostics are left unchanged, only ``training_series_length/1``, ``update_count/1``, and, when ``Observation`` is a variable, ``missing_count/1`` are updated. Otherwise, the one-step prediction error of the new observation (predicted from the prior window using the same K nearest neighbors search used for forecasting) is added to the training error diagnostics. No update options are currently defined.
 
 | **Compilation flags:**
 |    ``static``
@@ -56,15 +56,13 @@ Returns a new forecaster after appending one observation to the series, keeping 
 | **Template:**
 |    ``update(Forecaster,Observation,UpdatedForecaster,Options)``
 | **Mode and number of proofs:**
-|    ``update(+compound,+number,-compound,+list(compound))`` - ``one_or_error``
+|    ``update(+compound,@number,-compound,+list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
 |    ``Forecaster`` is a variable:
 |        ``instantiation_error``
 |    ``Forecaster`` is neither a variable nor a valid forecaster:
 |        ``domain_error(forecaster,Forecaster)``
-|    ``Observation`` is a variable:
-|        ``instantiation_error``
 |    ``Observation`` is neither a variable nor a number:
 |        ``type_error(number,Observation)``
 |    ``Options`` is a variable or a partial list:
@@ -87,7 +85,7 @@ Returns a new forecaster after appending one observation to the series, keeping 
 ``update/3``
 ^^^^^^^^^^^^
 
-Returns a new forecaster after appending one observation using default update options.
+Returns a new forecaster after appending one observation using default update options. ``Observation`` may be left an unbound variable to represent a missing observation; see ``update/4``.
 
 | **Compilation flags:**
 |    ``static``
@@ -95,15 +93,13 @@ Returns a new forecaster after appending one observation using default update op
 | **Template:**
 |    ``update(Forecaster,Observation,UpdatedForecaster)``
 | **Mode and number of proofs:**
-|    ``update(+compound,+number,-compound)`` - ``one_or_error``
+|    ``update(+compound,@number,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
 |    ``Forecaster`` is a variable:
 |        ``instantiation_error``
 |    ``Forecaster`` is neither a variable nor a valid forecaster:
 |        ``domain_error(forecaster,Forecaster)``
-|    ``Observation`` is a variable:
-|        ``instantiation_error``
 |    ``Observation`` is neither a variable nor a number:
 |        ``type_error(number,Observation)``
 

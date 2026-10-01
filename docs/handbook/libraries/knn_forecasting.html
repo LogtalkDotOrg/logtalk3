@@ -241,6 +241,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#distance-metrics-and-weighting">Distance metrics and weighting</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#leave-one-out-training-diagnostics">Leave-one-out training diagnostics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#missing-observations">Missing observations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#immutable-online-updates">Immutable online updates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#forecaster-representation">Forecaster representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
@@ -437,8 +438,8 @@ a lazy (instance-based) learner: <code class="docutils literal notranslate"><spa
 parameters, it memorizes the historical windows themselves, and every
 forecast is computed by searching those memorized windows.</p>
 <p>Datasets are objects implementing the <code class="docutils literal notranslate"><span class="pre">time_series_dataset_protocol</span></code>
-protocol. All observations must be numbers; missing observations are not
-supported.</p>
+protocol. Every observation must be a number or a missing observation,
+represented as an unbound variable (see “Missing observations” below).</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -459,10 +460,11 @@ link in a web browser.</p>
 </pre></div>
 </div>
 <p>The test suite checks exact recovery on periodic and seasonal patterns
-(where the nearest historical window is an exact match), and compares
+(where the nearest historical window is an exact match), compares
 distance metrics, weighting schemes, and leave-one-out diagnostics for a
 synthetic noisy dataset against an independent Python re-implementation
-of the same nearest-neighbor search.</p>
+of the same nearest-neighbor search, and covers learning, forecasting,
+and updating with missing observations.</p>
 </section>
 <section id="model">
 <h2>Model<a class="headerlink" href="#model" title="Link to this heading"></a></h2>
@@ -549,6 +551,37 @@ from <code class="docutils literal notranslate"><span class="pre">time_series_pr
 row is compared against every other row), so <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> may be slow for
 very long training series; see “Limitations” below.</p>
 </section>
+<section id="missing-observations">
+<h2>Missing observations<a class="headerlink" href="#missing-observations" title="Link to this heading"></a></h2>
+<p>A missing observation is represented, following the same convention as
+<code class="docutils literal notranslate"><span class="pre">time_series_regression</span></code>, as an unbound variable:
+<code class="docutils literal notranslate"><span class="pre">observation(Index,</span> <span class="pre">_)</span></code> in a dataset object, or an unbound
+<code class="docutils literal notranslate"><span class="pre">Observation</span></code> argument to <code class="docutils literal notranslate"><span class="pre">update/3-4</span></code>. A series may freely mix
+numbers and missing observations; only its length and index sequence
+need to be well-formed (checked as usual by <code class="docutils literal notranslate"><span class="pre">dataset_series/2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">check_series_length/3</span></code>).</p>
+<p>Differencing propagates missingness: a difference with a missing operand
+is itself missing. A memorized row (built from <code class="docutils literal notranslate"><span class="pre">Order</span></code> lagged values
+and a target, after differencing) that involves any missing value is
+excluded from the memorized set (casewise deletion); since every
+memorized row is therefore always fully known, this has no effect on the
+leave-one-out cross-validation, which always runs over complete rows.
+The number of raw missing observations in the training series is
+reported in the <code class="docutils literal notranslate"><span class="pre">missing_count/1</span></code> diagnostic; <code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code>
+already reflects the number of complete rows actually memorized. If
+casewise deletion leaves <code class="docutils literal notranslate"><span class="pre">K</span></code> or fewer complete rows, <code class="docutils literal notranslate"><span class="pre">learn/3</span></code>
+raises a <code class="docutils literal notranslate"><span class="pre">consistency_error(k,</span> <span class="pre">K,</span> <span class="pre">RowCount)</span></code> error.</p>
+<p><code class="docutils literal notranslate"><span class="pre">learn/3</span></code> still succeeds when the most recent observations (needed to
+seed the forecaster’s window or, under differencing, its levels) are
+missing; the missing values are simply carried into the learned
+forecaster’s state. <code class="docutils literal notranslate"><span class="pre">forecast/3</span></code> then raises a
+<code class="docutils literal notranslate"><span class="pre">domain_error(missing_observation,</span> <span class="pre">Forecaster)</span></code> error for a positive
+horizon (a zero horizon still trivially succeeds), until <code class="docutils literal notranslate"><span class="pre">update/3-4</span></code>
+supplies the missing values. Note that a missing window entry is only
+resolved once it has been pushed out of the window by <code class="docutils literal notranslate"><span class="pre">Order</span></code> further
+updates (as for <code class="docutils literal notranslate"><span class="pre">time_series_regression</span></code>), not by the next update
+alone unless <code class="docutils literal notranslate"><span class="pre">Order</span></code> is <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</section>
 <section id="immutable-online-updates">
 <h2>Immutable online updates<a class="headerlink" href="#immutable-online-updates" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">update/3-4</span></code> predicates return a new forecaster after appending
@@ -558,12 +591,21 @@ only the forecasting window (and, under differencing, the levels) are
 advanced. This keeps the cost of an update, and of every subsequent
 forecast, independent of how many updates have been applied, at the cost
 of the model never learning from observations seen after <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> was
-called. The original forecaster is not modified. The one-step prediction
-error for the new observation (predicted from the prior window using the
-same neighbor search used for forecasting) is added to the
-<code class="docutils literal notranslate"><span class="pre">sum_squared_error/1</span></code>, <code class="docutils literal notranslate"><span class="pre">mean_squared_error/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">sum_absolute_error/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">mean_absolute_error/1</span></code> diagnostics. No
-update options are currently defined, so the <code class="docutils literal notranslate"><span class="pre">Options</span></code> argument of
+called. The original forecaster is not modified. The new <code class="docutils literal notranslate"><span class="pre">Observation</span></code>
+may be left an unbound variable to represent a missing observation (see
+“Missing observations” above).</p>
+<p>When both the new observation and the forecaster’s prior window are
+fully known, the one-step prediction error for the new observation
+(predicted from the prior window using the same neighbor search used for
+forecasting) is added to the <code class="docutils literal notranslate"><span class="pre">sum_squared_error/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mean_squared_error/1</span></code>, <code class="docutils literal notranslate"><span class="pre">sum_absolute_error/1</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">mean_absolute_error/1</span></code> diagnostics. Otherwise, no prediction error is
+available and only <code class="docutils literal notranslate"><span class="pre">training_series_length/1</span></code>, <code class="docutils literal notranslate"><span class="pre">update_count/1</span></code>,
+and, when <code class="docutils literal notranslate"><span class="pre">Observation</span></code> is a variable, <code class="docutils literal notranslate"><span class="pre">missing_count/1</span></code> are
+updated. In both cases <code class="docutils literal notranslate"><span class="pre">training_series_length/1</span></code> and
+<code class="docutils literal notranslate"><span class="pre">update_count/1</span></code> are incremented, and the observation, known or not,
+is pushed into the window (and used to update the levels). No update
+options are currently defined, so the <code class="docutils literal notranslate"><span class="pre">Options</span></code> argument of
 <code class="docutils literal notranslate"><span class="pre">update/4</span></code> must be an empty list.</p>
 </section>
 <section id="forecaster-representation">
@@ -582,18 +624,24 @@ level, starting with the original series (as in
 <code class="docutils literal notranslate"><span class="pre">time_series_regression</span></code>).</p>
 <p>The diagnostics list includes the <code class="docutils literal notranslate"><span class="pre">model/1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">training_series_length/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">options/1</span></code> terms common to all
-forecasters plus <code class="docutils literal notranslate"><span class="pre">order/1</span></code>, <code class="docutils literal notranslate"><span class="pre">differencing/1</span></code>, <code class="docutils literal notranslate"><span class="pre">k/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">distance_metric/1</span></code>, <code class="docutils literal notranslate"><span class="pre">minkowski_power/1</span></code>, <code class="docutils literal notranslate"><span class="pre">weight_scheme/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">sum_squared_error/1</span></code>, <code class="docutils literal notranslate"><span class="pre">mean_squared_error/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">sum_absolute_error/1</span></code>, <code class="docutils literal notranslate"><span class="pre">mean_absolute_error/1</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">update_count/1</span></code> terms. <code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code> is initially the number of
-memorized rows (the leave-one-out sample size) and grows by one with
-each successful <code class="docutils literal notranslate"><span class="pre">update/3-4</span></code> call.</p>
+forecasters plus <code class="docutils literal notranslate"><span class="pre">order/1</span></code>, <code class="docutils literal notranslate"><span class="pre">differencing/1</span></code>, <code class="docutils literal notranslate"><span class="pre">missing_count/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">k/1</span></code>, <code class="docutils literal notranslate"><span class="pre">distance_metric/1</span></code>, <code class="docutils literal notranslate"><span class="pre">minkowski_power/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">weight_scheme/1</span></code>, <code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">sum_squared_error/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mean_squared_error/1</span></code>, <code class="docutils literal notranslate"><span class="pre">sum_absolute_error/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mean_absolute_error/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">update_count/1</span></code> terms.
+<code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code> is initially the number of memorized rows (the
+leave-one-out sample size) and grows by one with each successful, fully
+known <code class="docutils literal notranslate"><span class="pre">update/3-4</span></code> call.</p>
 </section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>Missing observations are not supported.</p></li>
+<li><p>Missing observations are handled by casewise deletion when memorizing
+rows, which discards an entire row (up to <code class="docutils literal notranslate"><span class="pre">Order</span> <span class="pre">+</span> <span class="pre">1</span></code> consecutive
+rows per missing observation) rather than imputing a value; this
+reduces the pool of analogs available for matching, and can turn an
+otherwise sufficient series into one with too few complete rows for
+the requested <code class="docutils literal notranslate"><span class="pre">k/1</span></code>.</p></li>
 <li><p>Automatic selection of <code class="docutils literal notranslate"><span class="pre">order/1</span></code> or <code class="docutils literal notranslate"><span class="pre">k/1</span></code> is not implemented; both
 must be set explicitly (or left at their defaults). Choosing a good
 window length is a well-known hard problem for analog methods; a

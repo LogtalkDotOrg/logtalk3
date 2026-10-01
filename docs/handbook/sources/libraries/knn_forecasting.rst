@@ -18,8 +18,8 @@ parameters, it memorizes the historical windows themselves, and every
 forecast is computed by searching those memorized windows.
 
 Datasets are objects implementing the ``time_series_dataset_protocol``
-protocol. All observations must be numbers; missing observations are not
-supported.
+protocol. Every observation must be a number or a missing observation,
+represented as an unbound variable (see "Missing observations" below).
 
 API documentation
 -----------------
@@ -47,10 +47,11 @@ To test this library predicates, load the ``tester.lgt`` file:
    | ?- logtalk_load(knn_forecasting(tester)).
 
 The test suite checks exact recovery on periodic and seasonal patterns
-(where the nearest historical window is an exact match), and compares
+(where the nearest historical window is an exact match), compares
 distance metrics, weighting schemes, and leave-one-out diagnostics for a
 synthetic noisy dataset against an independent Python re-implementation
-of the same nearest-neighbor search.
+of the same nearest-neighbor search, and covers learning, forecasting,
+and updating with missing observations.
 
 Model
 -----
@@ -144,6 +145,40 @@ from ``time_series_protocols``. This is an ``O(n^2)`` computation (every
 row is compared against every other row), so ``learn/3`` may be slow for
 very long training series; see "Limitations" below.
 
+Missing observations
+--------------------
+
+A missing observation is represented, following the same convention as
+``time_series_regression``, as an unbound variable:
+``observation(Index, _)`` in a dataset object, or an unbound
+``Observation`` argument to ``update/3-4``. A series may freely mix
+numbers and missing observations; only its length and index sequence
+need to be well-formed (checked as usual by ``dataset_series/2`` and
+``check_series_length/3``).
+
+Differencing propagates missingness: a difference with a missing operand
+is itself missing. A memorized row (built from ``Order`` lagged values
+and a target, after differencing) that involves any missing value is
+excluded from the memorized set (casewise deletion); since every
+memorized row is therefore always fully known, this has no effect on the
+leave-one-out cross-validation, which always runs over complete rows.
+The number of raw missing observations in the training series is
+reported in the ``missing_count/1`` diagnostic; ``scored_count/1``
+already reflects the number of complete rows actually memorized. If
+casewise deletion leaves ``K`` or fewer complete rows, ``learn/3``
+raises a ``consistency_error(k, K, RowCount)`` error.
+
+``learn/3`` still succeeds when the most recent observations (needed to
+seed the forecaster's window or, under differencing, its levels) are
+missing; the missing values are simply carried into the learned
+forecaster's state. ``forecast/3`` then raises a
+``domain_error(missing_observation, Forecaster)`` error for a positive
+horizon (a zero horizon still trivially succeeds), until ``update/3-4``
+supplies the missing values. Note that a missing window entry is only
+resolved once it has been pushed out of the window by ``Order`` further
+updates (as for ``time_series_regression``), not by the next update
+alone unless ``Order`` is ``1``.
+
 Immutable online updates
 ------------------------
 
@@ -154,12 +189,22 @@ only the forecasting window (and, under differencing, the levels) are
 advanced. This keeps the cost of an update, and of every subsequent
 forecast, independent of how many updates have been applied, at the cost
 of the model never learning from observations seen after ``learn/3`` was
-called. The original forecaster is not modified. The one-step prediction
-error for the new observation (predicted from the prior window using the
-same neighbor search used for forecasting) is added to the
-``sum_squared_error/1``, ``mean_squared_error/1``,
-``sum_absolute_error/1``, and ``mean_absolute_error/1`` diagnostics. No
-update options are currently defined, so the ``Options`` argument of
+called. The original forecaster is not modified. The new ``Observation``
+may be left an unbound variable to represent a missing observation (see
+"Missing observations" above).
+
+When both the new observation and the forecaster's prior window are
+fully known, the one-step prediction error for the new observation
+(predicted from the prior window using the same neighbor search used for
+forecasting) is added to the ``sum_squared_error/1``,
+``mean_squared_error/1``, ``sum_absolute_error/1``, and
+``mean_absolute_error/1`` diagnostics. Otherwise, no prediction error is
+available and only ``training_series_length/1``, ``update_count/1``,
+and, when ``Observation`` is a variable, ``missing_count/1`` are
+updated. In both cases ``training_series_length/1`` and
+``update_count/1`` are incremented, and the observation, known or not,
+is pushed into the window (and used to update the levels). No update
+options are currently defined, so the ``Options`` argument of
 ``update/4`` must be an empty list.
 
 Forecaster representation
@@ -182,18 +227,24 @@ level, starting with the original series (as in
 
 The diagnostics list includes the ``model/1``,
 ``training_series_length/1``, and ``options/1`` terms common to all
-forecasters plus ``order/1``, ``differencing/1``, ``k/1``,
-``distance_metric/1``, ``minkowski_power/1``, ``weight_scheme/1``,
-``scored_count/1``, ``sum_squared_error/1``, ``mean_squared_error/1``,
-``sum_absolute_error/1``, ``mean_absolute_error/1``, and
-``update_count/1`` terms. ``scored_count/1`` is initially the number of
-memorized rows (the leave-one-out sample size) and grows by one with
-each successful ``update/3-4`` call.
+forecasters plus ``order/1``, ``differencing/1``, ``missing_count/1``,
+``k/1``, ``distance_metric/1``, ``minkowski_power/1``,
+``weight_scheme/1``, ``scored_count/1``, ``sum_squared_error/1``,
+``mean_squared_error/1``, ``sum_absolute_error/1``,
+``mean_absolute_error/1``, and ``update_count/1`` terms.
+``scored_count/1`` is initially the number of memorized rows (the
+leave-one-out sample size) and grows by one with each successful, fully
+known ``update/3-4`` call.
 
 Limitations
 -----------
 
-- Missing observations are not supported.
+- Missing observations are handled by casewise deletion when memorizing
+  rows, which discards an entire row (up to ``Order + 1`` consecutive
+  rows per missing observation) rather than imputing a value; this
+  reduces the pool of analogs available for matching, and can turn an
+  otherwise sufficient series into one with too few complete rows for
+  the requested ``k/1``.
 - Automatic selection of ``order/1`` or ``k/1`` is not implemented; both
   must be set explicitly (or left at their defaults). Choosing a good
   window length is a well-known hard problem for analog methods; a

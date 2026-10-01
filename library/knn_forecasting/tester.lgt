@@ -32,8 +32,11 @@
 		time_series_protocols('test_datasets/non_numeric_value'),
 		time_series_protocols('test_datasets/seasonal_series'),
 		time_series_protocols('test_datasets/short_series'),
+		'test_datasets/mostly_missing_series',
 		'test_datasets/noisy_pattern_series',
 		'test_datasets/periodic_series',
+		'test_datasets/periodic_series_missing_interior',
+		'test_datasets/periodic_series_missing_trailing',
 		knn_forecasting
 	], [
 		source_data(on),
