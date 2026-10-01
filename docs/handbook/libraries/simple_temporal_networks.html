@@ -467,101 +467,42 @@ for successive intermediate nodes. No destructive term updates are used.</p>
 <p>Public modes, argument names, failure conditions, and explanation
 formats are documented in <code class="docutils literal notranslate"><span class="pre">stn_protocol.lgt</span></code> using <code class="docutils literal notranslate"><span class="pre">mode/2</span></code> and
 <code class="docutils literal notranslate"><span class="pre">info/2</span></code> directives.</p>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Predicates</p></th>
-<th class="head"><p>Purpose</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">new/2</span></code>, <code class="docutils literal notranslate"><span class="pre">add_time_points/3</span></code></p></td>
-<td><p>Construct a network or append
-fresh time-points</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">remove_time_points/3</span></code></p></td>
-<td><p>Remove time-points and all
-incident source constraints,
-rebuilding once</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">time_points/2</span></code>,
-<code class="docutils literal notranslate"><span class="pre">constraints/2</span></code>,
-<code class="docutils literal notranslate"><span class="pre">consistent/1</span></code></p></td>
-<td><p>Inspect a library-created state</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">schedule/2</span></code></p></td>
-<td><p>Return one finite feasible time
-assignment</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">earliest_schedule/2</span></code></p></td>
-<td><p>Return the componentwise
-earliest assignment when all
-lower bounds are finite</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">add_constraint/5-6</span></code></p></td>
-<td><p>Add one upper difference bound,
-optionally returning its ID</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">add_constraints/3-4</span></code></p></td>
-<td><p>Atomically add a batch,
-optionally returning its IDs</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">try_add_constraints/4</span></code></p></td>
-<td><p>Return an updated state or an
-identified negative-cycle
-witness</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">remove_constraints/3</span></code></p></td>
-<td><p>Remove source constraints by ID
-and rebuild once</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">distance/4-5</span></code></p></td>
-<td><p>Query an upper difference bound,
-optionally with one supporting
-path</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">earliest/3</span></code>, <code class="docutils literal notranslate"><span class="pre">latest/3</span></code>,
-<code class="docutils literal notranslate"><span class="pre">bounds/4</span></code></p></td>
-<td><p>Query absolute time bounds</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">difference_bounds/5</span></code></p></td>
-<td><p>Query both relative difference
-bounds</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">entails/4-5</span></code></p></td>
-<td><p>Test an upper difference bound,
-optionally with a supporting
-path</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">can_precede/3</span></code>,
-<code class="docutils literal notranslate"><span class="pre">must_precede/3</span></code></p></td>
-<td><p>Test possible or entailed strict
-precedence</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">can_precede_or_equal/3</span></code>,
-<code class="docutils literal notranslate"><span class="pre">must_precede_or_equal/3</span></code></p></td>
-<td><p>Test possible or entailed
-non-strict precedence</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">window_interval/3</span></code></p></td>
-<td><p>Export a finite non-degenerate
-marginal window as numeric
-<code class="docutils literal notranslate"><span class="pre">i(Start,End)</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">event_interval/4</span></code></p></td>
-<td><p>Export a fixed positive-duration
-event as numeric
-<code class="docutils literal notranslate"><span class="pre">i(Start,End)</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">window_relation/4</span></code></p></td>
-<td><p>Classify finite non-degenerate
-marginal windows</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">event_relation/6</span></code></p></td>
-<td><p>Classify two events whose four
-endpoints are fixed</p></td>
-</tr>
-</tbody>
-</table>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">new/2</span></code>, <code class="docutils literal notranslate"><span class="pre">add_time_points/3</span></code>: Construct a network or append fresh
+time-points</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">remove_time_points/3</span></code>: Remove time-points and all incident source
+constraints, rebuilding once</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time_points/2</span></code>, <code class="docutils literal notranslate"><span class="pre">constraints/2</span></code>, <code class="docutils literal notranslate"><span class="pre">consistent/1</span></code>: Inspect a
+library-created state</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">schedule/2</span></code>: Return one finite feasible time assignment</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">earliest_schedule/2</span></code>: Return the componentwise earliest assignment
+when all lower bounds are finite</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">add_constraint/5-6</span></code>: Add one upper difference bound, optionally
+returning its ID</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">add_constraints/3-4</span></code>: Atomically add a batch, optionally returning
+its IDs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">try_add_constraints/4</span></code>: Return an updated state or an identified
+negative-cycle witness</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">remove_constraints/3</span></code>: Remove source constraints by ID and rebuild
+once</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">distance/4-5</span></code>: Query an upper difference bound, optionally with one
+supporting path</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">earliest/3</span></code>, <code class="docutils literal notranslate"><span class="pre">latest/3</span></code>, <code class="docutils literal notranslate"><span class="pre">bounds/4</span></code>: Query absolute time bounds</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">difference_bounds/5</span></code>: Query both relative difference bounds</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">entails/4-5</span></code>: Test an upper difference bound, optionally with a
+supporting path</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">can_precede/3</span></code>, <code class="docutils literal notranslate"><span class="pre">must_precede/3</span></code>: Test possible or entailed
+strict precedence</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">can_precede_or_equal/3</span></code>, <code class="docutils literal notranslate"><span class="pre">must_precede_or_equal/3</span></code>: Test possible
+or entailed non-strict precedence</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">window_interval/3</span></code>: Export a finite non-degenerate marginal window
+as numeric <code class="docutils literal notranslate"><span class="pre">i(Start,End)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">event_interval/4</span></code>: Export a fixed positive-duration event as
+numeric <code class="docutils literal notranslate"><span class="pre">i(Start,End)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">window_relation/4</span></code>: Classify finite non-degenerate marginal windows</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">event_relation/6</span></code>: Classify two events whose four endpoints are
+fixed</p></li>
+</ul>
 <p>Malformed public arguments, unknown time-point labels, and invalid
 weights fail without binding input variables. State arguments must be
 states returned by this API. Arithmetic evaluation and representation

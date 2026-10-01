@@ -69,27 +69,25 @@ API overview
 Public modes, argument names, failure conditions, and explanation formats
 are documented in `stn_protocol.lgt` using `mode/2` and `info/2` directives.
 
-| Predicates | Purpose |
-|---|---|
-| `new/2`, `add_time_points/3` | Construct a network or append fresh time-points |
-| `remove_time_points/3` | Remove time-points and all incident source constraints, rebuilding once |
-| `time_points/2`, `constraints/2`, `consistent/1` | Inspect a library-created state |
-| `schedule/2` | Return one finite feasible time assignment |
-| `earliest_schedule/2` | Return the componentwise earliest assignment when all lower bounds are finite |
-| `add_constraint/5-6` | Add one upper difference bound, optionally returning its ID |
-| `add_constraints/3-4` | Atomically add a batch, optionally returning its IDs |
-| `try_add_constraints/4` | Return an updated state or an identified negative-cycle witness |
-| `remove_constraints/3` | Remove source constraints by ID and rebuild once |
-| `distance/4-5` | Query an upper difference bound, optionally with one supporting path |
-| `earliest/3`, `latest/3`, `bounds/4` | Query absolute time bounds |
-| `difference_bounds/5` | Query both relative difference bounds |
-| `entails/4-5` | Test an upper difference bound, optionally with a supporting path |
-| `can_precede/3`, `must_precede/3` | Test possible or entailed strict precedence |
-| `can_precede_or_equal/3`, `must_precede_or_equal/3` | Test possible or entailed non-strict precedence |
-| `window_interval/3` | Export a finite non-degenerate marginal window as numeric `i(Start,End)` |
-| `event_interval/4` | Export a fixed positive-duration event as numeric `i(Start,End)` |
-| `window_relation/4` | Classify finite non-degenerate marginal windows |
-| `event_relation/6` | Classify two events whose four endpoints are fixed |
+- `new/2`, `add_time_points/3`: Construct a network or append fresh time-points
+- `remove_time_points/3`: Remove time-points and all incident source constraints, rebuilding once
+- `time_points/2`, `constraints/2`, `consistent/1`: Inspect a library-created state
+- `schedule/2`: Return one finite feasible time assignment
+- `earliest_schedule/2`: Return the componentwise earliest assignment when all lower bounds are finite
+- `add_constraint/5-6`: Add one upper difference bound, optionally returning its ID
+- `add_constraints/3-4`: Atomically add a batch, optionally returning its IDs
+- `try_add_constraints/4`: Return an updated state or an identified negative-cycle witness
+- `remove_constraints/3`: Remove source constraints by ID and rebuild once
+- `distance/4-5`: Query an upper difference bound, optionally with one supporting path
+- `earliest/3`, `latest/3`, `bounds/4`: Query absolute time bounds
+- `difference_bounds/5`: Query both relative difference bounds
+- `entails/4-5`: Test an upper difference bound, optionally with a supporting path
+- `can_precede/3`, `must_precede/3`: Test possible or entailed strict precedence
+- `can_precede_or_equal/3`, `must_precede_or_equal/3`: Test possible or entailed non-strict precedence
+- `window_interval/3`: Export a finite non-degenerate marginal window as numeric `i(Start,End)`
+- `event_interval/4`: Export a fixed positive-duration event as numeric `i(Start,End)`
+- `window_relation/4`: Classify finite non-degenerate marginal windows
+- `event_relation/6`: Classify two events whose four endpoints are fixed
 
 Malformed public arguments, unknown time-point labels, and invalid weights
 fail without binding input variables. State arguments must be states returned
