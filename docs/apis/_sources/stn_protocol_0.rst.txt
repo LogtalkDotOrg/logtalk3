@@ -1,0 +1,734 @@
+.. index:: single: stn_protocol
+.. _stn_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``stn_protocol``
+================
+
+Portable, functional Simple Temporal Networks over closed difference constraints.
+
+| **Availability:** 
+|    ``logtalk_load(simple_temporal_networks(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-01
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+
+   - Constraints: A constraint from ``X`` to ``Y`` with weight ``Delta`` means ``time(Y) - time(X) =< Delta``.
+   - Inputs: States must be opaque ground terms returned by this API. Malformed public arguments and unknown time-points fail without instantiating inputs; hand-built internal states are unsupported.
+   - Numbers: Weights are finite integers or floats. Arithmetic errors propagate; floating-point results are approximate, with no implicit tolerance.
+   - Bounds: Unbounded query results use the atoms positive_infinity and negative_infinity, never native numeric infinities.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: new/2
+.. _stn_protocol/0::new/2:
+
+``new/2``
+^^^^^^^^^
+
+Creates an unconstrained network over distinct ground time-points and a reserved reference time-point zero fixed at time zero. Fails for duplicate labels or an explicitly supplied zero.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``new(TimePoints,STN)``
+| **Mode and number of proofs:**
+|    ``new(+list,-stn)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: add_time_points/3
+.. _stn_protocol/0::add_time_points/3:
+
+``add_time_points/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Appends distinct fresh ground time-points, rebuilding once and preserving source identifiers. Fails for existing labels or zero. An empty list returns the original state.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add_time_points(STN0,TimePoints,STN)``
+| **Mode and number of proofs:**
+|    ``add_time_points(+stn,+list,-stn)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    Arithmetic cannot be evaluated:
+|        ``evaluation_error(A)``
+|    Arithmetic exceeds a backend representation limit:
+|        ``representation_error(A)``
+
+
+------------
+
+.. index:: remove_time_points/3
+.. _stn_protocol/0::remove_time_points/3:
+
+``remove_time_points/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Removes time-points and all incident source constraints, rebuilding once and preserving surviving node order and source identifiers. Missing labels and duplicate requests are ignored. Fails for a request containing zero or a malformed or nonground list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``remove_time_points(STN0,TimePoints,STN)``
+| **Mode and number of proofs:**
+|    ``remove_time_points(+stn,+list,-stn)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    Arithmetic cannot be evaluated:
+|        ``evaluation_error(A)``
+|    Arithmetic exceeds a backend representation limit:
+|        ``representation_error(A)``
+
+| **Remarks:**
+
+    - Bounds: Deletion retracts incident sources, not just variables. Bounds supported through removed points may weaken or become unbounded; implied bounds are not preserved as new constraints.
+    - Identity: Labels are compared by term identity. The original state and next source identifier are preserved. A request removing no existing point returns the original state.
+
+
+------------
+
+.. index:: time_points/2
+.. _stn_protocol/0::time_points/2:
+
+``time_points/2``
+^^^^^^^^^^^^^^^^^
+
+Returns the declared time-points in insertion order, with zero first.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``time_points(STN,TimePoints)``
+| **Mode and number of proofs:**
+|    ``time_points(+stn,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: constraints/2
+.. _stn_protocol/0::constraints/2:
+
+``constraints/2``
+^^^^^^^^^^^^^^^^^
+
+Returns all source constraints in insertion order as ``constraint(Id, X, Y, Delta)`` terms, including redundant and parallel constraints.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``constraints(STN,Constraints)``
+| **Mode and number of proofs:**
+|    ``constraints(+stn,-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: consistent/1
+.. _stn_protocol/0::consistent/1:
+
+``consistent/1``
+^^^^^^^^^^^^^^^^
+
+True if the argument is a library-owned consistent state. All successfully returned states are consistent; this predicate is not an importer for hand-built internal terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``consistent(STN)``
+| **Mode and number of proofs:**
+|    ``consistent(+stn)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: schedule/2
+.. _stn_protocol/0::schedule/2:
+
+``schedule/2``
+^^^^^^^^^^^^^^
+
+Returns one finite feasible assignment as time(Point, Value) terms in declaration order, with time(zero, 0) first. Fails for invalid states without instantiating inputs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``schedule(STN,Schedule)``
+| **Mode and number of proofs:**
+|    ``schedule(+stn,-list(compound))`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    Arithmetic cannot be evaluated:
+|        ``evaluation_error(A)``
+|    Arithmetic exceeds a backend representation limit:
+|        ``representation_error(A)``
+
+| **Remarks:**
+
+    - Choice: The assignment is deterministic, not necessarily unique, earliest, non-negative, or optimal. Disconnected and absolutely unbounded points are assigned finite values.
+    - Numbers: Every retained source inequality is checked after normalization using backend arithmetic. Floating-point results remain approximate, with no implicit tolerance.
+
+
+------------
+
+.. index:: earliest_schedule/2
+.. _stn_protocol/0::earliest_schedule/2:
+
+``earliest_schedule/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the componentwise earliest feasible assignment as time(Point, Value) terms in declaration order, with time(zero, 0) first. Requires every declared point to have a finite absolute lower bound. Fails for invalid states or any unbounded lower bound without instantiating inputs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``earliest_schedule(STN,Schedule)``
+| **Mode and number of proofs:**
+|    ``earliest_schedule(+stn,-list(compound))`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    Arithmetic cannot be evaluated:
+|        ``evaluation_error(A)``
+|    Arithmetic exceeds a backend representation limit:
+|        ``representation_error(A)``
+
+| **Remarks:**
+
+    - Bounds: Finite upper bounds are not required. No artificial lower bounds are introduced and the original state and source identifiers are unchanged.
+    - Numbers: Componentwise minimality holds in exact arithmetic. Every retained source inequality is checked using backend arithmetic; floating-point feasibility and optimality are not exact-real guarantees and no tolerance is applied.
+
+
+------------
+
+.. index:: add_constraint/5
+.. _stn_protocol/0::add_constraint/5:
+
+``add_constraint/5``
+^^^^^^^^^^^^^^^^^^^^
+
+Adds ``Y - X =< Delta``, retaining the source even when redundant. Fails if the result is inconsistent or the inputs are invalid.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add_constraint(STN0,X,Y,Delta,STN)``
+| **Mode and number of proofs:**
+|    ``add_constraint(+stn,@term,@term,+number,-stn)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    Arithmetic cannot be evaluated:
+|        ``evaluation_error(A)``
+|    Arithmetic exceeds a backend representation limit:
+|        ``representation_error(A)``
+
+
+------------
+
+.. index:: add_constraint/6
+.. _stn_protocol/0::add_constraint/6:
+
+``add_constraint/6``
+^^^^^^^^^^^^^^^^^^^^
+
+Adds ``Y - X =< Delta`` and returns its source identifier. Fails for an inconsistent result or invalid inputs. Identifiers are local to a state lineage, not globally unique across forks.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add_constraint(STN0,X,Y,Delta,Id,STN)``
+| **Mode and number of proofs:**
+|    ``add_constraint(+stn,@term,@term,+number,-integer,-stn)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    Arithmetic cannot be evaluated:
+|        ``evaluation_error(A)``
+|    Arithmetic exceeds a backend representation limit:
+|        ``representation_error(A)``
+
+
+------------
+
+.. index:: add_constraints/3
+.. _stn_protocol/0::add_constraints/3:
+
+``add_constraints/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Atomically adds a batch of ``constraint(X, Y, Delta)`` terms, rebuilding once. Fails if any input is invalid or the combined network is inconsistent. An empty batch returns the original state.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add_constraints(STN0,Constraints,STN)``
+| **Mode and number of proofs:**
+|    ``add_constraints(+stn,+list(compound),-stn)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    Arithmetic cannot be evaluated:
+|        ``evaluation_error(A)``
+|    Arithmetic exceeds a backend representation limit:
+|        ``representation_error(A)``
+
+
+------------
+
+.. index:: add_constraints/4
+.. _stn_protocol/0::add_constraints/4:
+
+``add_constraints/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Atomically adds ``constraint(X, Y, Delta)`` terms and returns their source identifiers in batch order. Fails for invalid inputs or an inconsistent result.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add_constraints(STN0,Constraints,Ids,STN)``
+| **Mode and number of proofs:**
+|    ``add_constraints(+stn,+list(compound),-list(integer),-stn)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    Arithmetic cannot be evaluated:
+|        ``evaluation_error(A)``
+|    Arithmetic exceeds a backend representation limit:
+|        ``representation_error(A)``
+
+
+------------
+
+.. index:: try_add_constraints/4
+.. _stn_protocol/0::try_add_constraints/4:
+
+``try_add_constraints/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Attempts a batch update and returns ``consistent(STN)`` or ``inconsistent(cycle(Sources, Weight))``. The cycle is an ordered closed path of identified source constraints with negative total weight, not necessarily a minimal conflict. Invalid inputs fail.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``try_add_constraints(STN0,Constraints,Ids,Outcome)``
+| **Mode and number of proofs:**
+|    ``try_add_constraints(+stn,+list(compound),-list(integer),-compound)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    Arithmetic cannot be evaluated:
+|        ``evaluation_error(A)``
+|    Arithmetic exceeds a backend representation limit:
+|        ``representation_error(A)``
+
+| **Remarks:**
+
+    - Identifiers: Ids identifies candidate constraints in batch order even when rejected. No state is changed; rejected identifiers may coincide with later accepted allocations from the original state.
+    - Arithmetic: Backend arithmetic errors propagate. Non-finite computed sums raise evaluation_error(float_overflow); inconsistent numerical diagnostics raise evaluation_error(stn_numerical_inconsistency).
+
+
+------------
+
+.. index:: remove_constraints/3
+.. _stn_protocol/0::remove_constraints/3:
+
+``remove_constraints/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Removes source constraints by positive integer identifier, rebuilding once if necessary. Missing identifiers and duplicate requests are ignored. Surviving identifiers are preserved and removed identifiers are never reused in descendant states.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``remove_constraints(STN0,Ids,STN)``
+| **Mode and number of proofs:**
+|    ``remove_constraints(+stn,+list(integer),-stn)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    Arithmetic cannot be evaluated:
+|        ``evaluation_error(A)``
+|    Arithmetic exceeds a backend representation limit:
+|        ``representation_error(A)``
+
+
+------------
+
+.. index:: distance/4
+.. _stn_protocol/0::distance/4:
+
+``distance/4``
+^^^^^^^^^^^^^^
+
+Returns the tightest upper bound on ``Y - X``, or positive_infinity if no directed path exists.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distance(STN,X,Y,Upper)``
+| **Mode and number of proofs:**
+|    ``distance(+stn,@term,@term,-bound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: distance/5
+.. _stn_protocol/0::distance/5:
+
+``distance/5``
+^^^^^^^^^^^^^^
+
+Returns a finite tight upper bound on ``Y - X`` and one ordered supporting source-constraint path. Fails for an unreachable pair. An identity query returns zero and an empty path. Ties select one deterministic witness, not every support.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distance(STN,X,Y,Upper,Path)``
+| **Mode and number of proofs:**
+|    ``distance(+stn,@term,@term,-number,-list(compound))`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    A numerical witness cannot be reconstructed:
+|        ``evaluation_error(stn_numerical_inconsistency)``
+
+
+------------
+
+.. index:: entails/4
+.. _stn_protocol/0::entails/4:
+
+``entails/4``
+^^^^^^^^^^^^^
+
+True if the network entails ``Y - X =< Delta`` for a finite integer or float Delta.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``entails(STN,X,Y,Delta)``
+| **Mode and number of proofs:**
+|    ``entails(+stn,@term,@term,+number)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: entails/5
+.. _stn_protocol/0::entails/5:
+
+``entails/5``
+^^^^^^^^^^^^^
+
+True if the network entails ``Y - X =< Delta`` and returns one supporting source-constraint path.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``entails(STN,X,Y,Delta,Path)``
+| **Mode and number of proofs:**
+|    ``entails(+stn,@term,@term,+number,-list(compound))`` - ``zero_or_one``
+
+| **Exceptions:**
+|    A numerical witness cannot be reconstructed:
+|        ``evaluation_error(stn_numerical_inconsistency)``
+
+
+------------
+
+.. index:: earliest/3
+.. _stn_protocol/0::earliest/3:
+
+``earliest/3``
+^^^^^^^^^^^^^^
+
+Returns the earliest feasible time relative to zero, or negative_infinity when unbounded.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``earliest(STN,TimePoint,Earliest)``
+| **Mode and number of proofs:**
+|    ``earliest(+stn,@term,-bound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: latest/3
+.. _stn_protocol/0::latest/3:
+
+``latest/3``
+^^^^^^^^^^^^
+
+Returns the latest feasible time relative to zero, or positive_infinity when unbounded.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``latest(STN,TimePoint,Latest)``
+| **Mode and number of proofs:**
+|    ``latest(+stn,@term,-bound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: bounds/4
+.. _stn_protocol/0::bounds/4:
+
+``bounds/4``
+^^^^^^^^^^^^
+
+Returns the tightest absolute time window, including symbolic unbounded endpoints. The reference point zero has bounds ``[0, 0]``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bounds(STN,TimePoint,Earliest,Latest)``
+| **Mode and number of proofs:**
+|    ``bounds(+stn,@term,-bound,-bound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: difference_bounds/5
+.. _stn_protocol/0::difference_bounds/5:
+
+``difference_bounds/5``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns tight bounds ``Lower =< Y - X =< Upper``. ``Lower`` is the negated reverse distance, ``Upper`` the forward distance. Either endpoint may be symbolically unbounded.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``difference_bounds(STN,X,Y,Lower,Upper)``
+| **Mode and number of proofs:**
+|    ``difference_bounds(+stn,@term,@term,-bound,-bound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: can_precede/3
+.. _stn_protocol/0::can_precede/3:
+
+``can_precede/3``
+^^^^^^^^^^^^^^^^^
+
+True if some feasible schedule has ``X`` strictly earlier than ``Y``. Tests whether the upper bound on ``Y - X`` is positive or unbounded.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``can_precede(STN,X,Y)``
+| **Mode and number of proofs:**
+|    ``can_precede(+stn,@term,@term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: must_precede/3
+.. _stn_protocol/0::must_precede/3:
+
+``must_precede/3``
+^^^^^^^^^^^^^^^^^^
+
+True if every feasible schedule has ``X`` strictly earlier than ``Y``. Tests whether the lower bound on ``Y - X`` is positive.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``must_precede(STN,X,Y)``
+| **Mode and number of proofs:**
+|    ``must_precede(+stn,@term,@term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: can_precede_or_equal/3
+.. _stn_protocol/0::can_precede_or_equal/3:
+
+``can_precede_or_equal/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True if some feasible schedule has ``X`` no later than ``Y``. Tests whether the upper bound on ``Y - X`` is non-negative or unbounded.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``can_precede_or_equal(STN,X,Y)``
+| **Mode and number of proofs:**
+|    ``can_precede_or_equal(+stn,@term,@term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: must_precede_or_equal/3
+.. _stn_protocol/0::must_precede_or_equal/3:
+
+``must_precede_or_equal/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True if every feasible schedule has ``X`` no later than ``Y``. Tests whether the lower bound on ``Y - X`` is non-negative.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``must_precede_or_equal(STN,X,Y)``
+| **Mode and number of proofs:**
+|    ``must_precede_or_equal(+stn,@term,@term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: window_interval/3
+.. _stn_protocol/0::window_interval/3:
+
+``window_interval/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns a finite non-degenerate marginal time-point window as i(Start, End), preserving endpoint numeric representations. Fails for unknown points, invalid states, and unbounded or singleton windows.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``window_interval(STN,TimePoint,Interval)``
+| **Mode and number of proofs:**
+|    ``window_interval(+stn,@term,-compound)`` - ``zero_or_one``
+
+| **Remarks:**
+
+    - Numeric ordering: The descriptor uses arithmetic endpoint ordering, not term ordering. It is numeric data, not a portable replacement for the ranked interval bridge.
+    - Envelope: Describes marginal absolute bounds, not an event duration or joint endpoint correlations.
+
+
+------------
+
+.. index:: event_interval/4
+.. _stn_protocol/0::event_interval/4:
+
+``event_interval/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns a concrete event interval as i(Start, End), preserving endpoint numeric representations. Both points must have finite singleton absolute bounds and the duration must be strictly positive. Fails for invalid states and unknown, uncertain, unbounded, reversed, or zero-duration endpoints.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``event_interval(STN,StartPoint,EndPoint,Interval)``
+| **Mode and number of proofs:**
+|    ``event_interval(+stn,@term,@term,-compound)`` - ``zero_or_one``
+
+| **Remarks:**
+
+    - Numeric ordering: The descriptor uses arithmetic endpoint ordering, not term ordering. Use event_relation/6 for the portable ranked Allen-relation bridge.
+
+
+------------
+
+.. index:: window_relation/4
+.. _stn_protocol/0::window_relation/4:
+
+``window_relation/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Classifies two finite, non-degenerate marginal time-point windows using Allen relations. Fails for unbounded or singleton windows. This is an envelope diagnostic, not an entailed relation between uncertain events.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``window_relation(STN,TimePoint1,TimePoint2,Relation)``
+| **Mode and number of proofs:**
+|    ``window_relation(+stn,@term,@term,-atom)`` - ``zero_or_one``
+
+| **Remarks:**
+
+    - Numeric ordering: Delegates to interval after jointly ranking endpoints by arithmetic value, preserving numeric equality across integers and floats.
+
+
+------------
+
+.. index:: event_relation/6
+.. _stn_protocol/0::event_relation/6:
+
+``event_relation/6``
+^^^^^^^^^^^^^^^^^^^^
+
+Classifies two concrete event intervals using Allen relations. All four endpoint time-points must have finite singleton absolute bounds and each event must have strictly positive duration. Fails for uncertain, unbounded, reversed, or zero-duration events.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``event_relation(STN,Start1,End1,Start2,End2,Relation)``
+| **Mode and number of proofs:**
+|    ``event_relation(+stn,@term,@term,@term,@term,-atom)`` - ``zero_or_one``
+
+| **Remarks:**
+
+    - Numeric ordering: Delegates to interval after jointly ranking endpoints by arithmetic value, without converting integer endpoints to floats.
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

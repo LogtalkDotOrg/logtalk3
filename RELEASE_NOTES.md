@@ -41,6 +41,9 @@ compact styling, adding internal links, and reducing the number of pages.
 Library
 -------
 
+* ADDED: New `simple_temporal_networks` library implementing Simple Temporal
+Networks (STNs).
+
 * ADDED: New `atms` library implementing the Horn fragment of Johan de Kleer's
 Assumption-based Truth Maintenance System (ATMS).
 

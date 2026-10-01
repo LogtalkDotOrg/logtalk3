@@ -74,6 +74,7 @@
 		multivariate_distributions(loader),
 		ids(loader),
 		intervals(loader),
+		simple_temporal_networks(loader),
 		logging(loader),
 		meta_compiler(loader),
 		assignvars(loader),

@@ -1,0 +1,64 @@
+.. index:: single: stn
+.. _stn/0:
+
+.. rst-class:: right
+
+**object**
+
+``stn``
+=======
+
+Immutable Simple Temporal Networks with retained source constraints and cached all-pairs bounds.
+
+| **Availability:** 
+|    ``logtalk_load(simple_temporal_networks(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-01
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`stn_protocol <stn_protocol/0>`
+| **Uses:**
+|    :ref:`interval <interval/0>`
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`stn_protocol/0::add_constraint/5`  :ref:`stn_protocol/0::add_constraint/6`  :ref:`stn_protocol/0::add_constraints/3`  :ref:`stn_protocol/0::add_constraints/4`  :ref:`stn_protocol/0::add_time_points/3`  :ref:`stn_protocol/0::bounds/4`  :ref:`stn_protocol/0::can_precede/3`  :ref:`stn_protocol/0::can_precede_or_equal/3`  :ref:`stn_protocol/0::consistent/1`  :ref:`stn_protocol/0::constraints/2`  :ref:`stn_protocol/0::difference_bounds/5`  :ref:`stn_protocol/0::distance/4`  :ref:`stn_protocol/0::distance/5`  :ref:`stn_protocol/0::earliest/3`  :ref:`stn_protocol/0::earliest_schedule/2`  :ref:`stn_protocol/0::entails/4`  :ref:`stn_protocol/0::entails/5`  :ref:`stn_protocol/0::event_interval/4`  :ref:`stn_protocol/0::event_relation/6`  :ref:`stn_protocol/0::latest/3`  :ref:`stn_protocol/0::must_precede/3`  :ref:`stn_protocol/0::must_precede_or_equal/3`  :ref:`stn_protocol/0::new/2`  :ref:`stn_protocol/0::remove_constraints/3`  :ref:`stn_protocol/0::remove_time_points/3`  :ref:`stn_protocol/0::schedule/2`  :ref:`stn_protocol/0::time_points/2`  :ref:`stn_protocol/0::try_add_constraints/4`  :ref:`stn_protocol/0::window_interval/3`  :ref:`stn_protocol/0::window_relation/4`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`interval <interval/0>`, :ref:`interval_constraint_network <interval_constraint_network/0>`
+

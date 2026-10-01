@@ -278,6 +278,7 @@ directory in the ``NOTES.md`` file.
    sequential_pattern_mining_protocols
    sets
    sgd_classifier
+   simple_temporal_networks
    simulated_annealing
    smtp
    snowflakeid

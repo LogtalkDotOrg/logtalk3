@@ -15,8 +15,8 @@ Library groups
   ``types``, ``assignvars``, ``deques``, ``dictionaries``,
   ``nested_dictionaries``, ``graphs``, ``heaps``, ``hierarchies``,
   ``intervals``, ``lru_caches``, ``queues``, ``ripple_down_rules``,
-  ``sets``, ``subsequences``, ``tries``, ``union_find``, and
-  ``zippers``.
+  ``sets``, ``simple_temporal_networks``, ``subsequences``, ``tries``,
+  ``union_find``, and ``zippers``.
 - Combinatorics: ``arrangements``, ``cartesian_products``,
   ``combinations``, ``derangements``, ``integer_partitions``,
   ``multisets``, ``partitions``, and ``permutations``.

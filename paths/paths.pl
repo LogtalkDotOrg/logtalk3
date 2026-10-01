@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on September 30, 2026
+%  Last updated on October 1, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -357,6 +357,7 @@ logtalk_library_path(schulze_ranker, library('schulze_ranker/')).
 logtalk_library_path(sequential_pattern_mining_protocols, library('sequential_pattern_mining_protocols/')).
 logtalk_library_path(sets, library('sets/')).
 logtalk_library_path(sgd_classifier, library('sgd_classifier/')).
+logtalk_library_path(simple_temporal_networks, library('simple_temporal_networks/')).
 logtalk_library_path(simulated_annealing, library('simulated_annealing/')).
 logtalk_library_path(smtp, library('smtp/')).
 logtalk_library_path(snowflakeid, library('snowflakeid/')).

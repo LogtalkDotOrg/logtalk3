@@ -401,6 +401,50 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``add_constraint/5``
+   --------------------
+
+   * :ref:`stn_protocol <stn_protocol/0::add_constraint/5>`
+
+.. only:: latex
+
+   * ``add_constraint/5`` - :ref:`stn_protocol <stn_protocol/0::add_constraint/5>`
+
+.. only:: not latex
+
+   ``add_constraint/6``
+   --------------------
+
+   * :ref:`stn_protocol <stn_protocol/0::add_constraint/6>`
+
+.. only:: latex
+
+   * ``add_constraint/6`` - :ref:`stn_protocol <stn_protocol/0::add_constraint/6>`
+
+.. only:: not latex
+
+   ``add_constraints/3``
+   ---------------------
+
+   * :ref:`stn_protocol <stn_protocol/0::add_constraints/3>`
+
+.. only:: latex
+
+   * ``add_constraints/3`` - :ref:`stn_protocol <stn_protocol/0::add_constraints/3>`
+
+.. only:: not latex
+
+   ``add_constraints/4``
+   ---------------------
+
+   * :ref:`stn_protocol <stn_protocol/0::add_constraints/4>`
+
+.. only:: latex
+
+   * ``add_constraints/4`` - :ref:`stn_protocol <stn_protocol/0::add_constraints/4>`
+
+.. only:: not latex
+
    ``add_duration/3``
    ------------------
 
@@ -498,6 +542,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``add_scaled_vector/4`` - :ref:`linear_algebra_protocol <linear_algebra_protocol/0::add_scaled_vector/4>`
+
+.. only:: not latex
+
+   ``add_time_points/3``
+   ---------------------
+
+   * :ref:`stn_protocol <stn_protocol/0::add_time_points/3>`
+
+.. only:: latex
+
+   * ``add_time_points/3`` - :ref:`stn_protocol <stn_protocol/0::add_time_points/3>`
 
 .. only:: not latex
 
@@ -2291,6 +2346,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``bounds/4``
+   ------------
+
+   * :ref:`stn_protocol <stn_protocol/0::bounds/4>`
+
+.. only:: latex
+
+   * ``bounds/4`` - :ref:`stn_protocol <stn_protocol/0::bounds/4>`
+
+.. only:: not latex
+
    ``branch/2``
    ------------
 
@@ -2587,6 +2653,28 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``call_with_timeout/3`` - :ref:`timeout <timeout/0::call_with_timeout/3>`
+
+.. only:: not latex
+
+   ``can_precede/3``
+   -----------------
+
+   * :ref:`stn_protocol <stn_protocol/0::can_precede/3>`
+
+.. only:: latex
+
+   * ``can_precede/3`` - :ref:`stn_protocol <stn_protocol/0::can_precede/3>`
+
+.. only:: not latex
+
+   ``can_precede_or_equal/3``
+   --------------------------
+
+   * :ref:`stn_protocol <stn_protocol/0::can_precede_or_equal/3>`
+
+.. only:: latex
+
+   * ``can_precede_or_equal/3`` - :ref:`stn_protocol <stn_protocol/0::can_precede_or_equal/3>`
 
 .. only:: not latex
 
@@ -4457,10 +4545,11 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    ----------------
 
    * :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::consistent/1>`
+   * :ref:`stn_protocol <stn_protocol/0::consistent/1>`
 
 .. only:: latex
 
-   * ``consistent/1`` - :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::consistent/1>`
+   * ``consistent/1`` - :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::consistent/1>`, :ref:`stn_protocol <stn_protocol/0::consistent/1>`
 
 .. only:: not latex
 
@@ -4501,10 +4590,11 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    -----------------
 
    * :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::constraints/2>`
+   * :ref:`stn_protocol <stn_protocol/0::constraints/2>`
 
 .. only:: latex
 
-   * ``constraints/2`` - :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::constraints/2>`
+   * ``constraints/2`` - :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::constraints/2>`, :ref:`stn_protocol <stn_protocol/0::constraints/2>`
 
 .. only:: not latex
 
@@ -7248,6 +7338,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``difference_bounds/5``
+   -----------------------
+
+   * :ref:`stn_protocol <stn_protocol/0::difference_bounds/5>`
+
+.. only:: latex
+
+   * ``difference_bounds/5`` - :ref:`stn_protocol <stn_protocol/0::difference_bounds/5>`
+
+.. only:: not latex
+
    ``difference_norm/3``
    ---------------------
 
@@ -7719,10 +7820,11 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    --------------
 
    * :ref:`geospatial_protocol <geospatial_protocol/0::distance/4>`
+   * :ref:`stn_protocol <stn_protocol/0::distance/4>`
 
 .. only:: latex
 
-   * ``distance/4`` - :ref:`geospatial_protocol <geospatial_protocol/0::distance/4>`
+   * ``distance/4`` - :ref:`geospatial_protocol <geospatial_protocol/0::distance/4>`, :ref:`stn_protocol <stn_protocol/0::distance/4>`
 
 .. only:: not latex
 
@@ -7730,10 +7832,11 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    --------------
 
    * :ref:`geospatial_protocol <geospatial_protocol/0::distance/5>`
+   * :ref:`stn_protocol <stn_protocol/0::distance/5>`
 
 .. only:: latex
 
-   * ``distance/5`` - :ref:`geospatial_protocol <geospatial_protocol/0::distance/5>`
+   * ``distance/5`` - :ref:`geospatial_protocol <geospatial_protocol/0::distance/5>`, :ref:`stn_protocol <stn_protocol/0::distance/5>`
 
 .. only:: not latex
 
@@ -8388,6 +8491,28 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``earliest/3``
+   --------------
+
+   * :ref:`stn_protocol <stn_protocol/0::earliest/3>`
+
+.. only:: latex
+
+   * ``earliest/3`` - :ref:`stn_protocol <stn_protocol/0::earliest/3>`
+
+.. only:: not latex
+
+   ``earliest_schedule/2``
+   -----------------------
+
+   * :ref:`stn_protocol <stn_protocol/0::earliest_schedule/2>`
+
+.. only:: latex
+
+   * ``earliest_schedule/2`` - :ref:`stn_protocol <stn_protocol/0::earliest_schedule/2>`
+
+.. only:: not latex
+
    ``easter_day/3``
    ----------------
 
@@ -8894,10 +9019,11 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    -------------
 
    * :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::entails/4>`
+   * :ref:`stn_protocol <stn_protocol/0::entails/4>`
 
 .. only:: latex
 
-   * ``entails/4`` - :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::entails/4>`
+   * ``entails/4`` - :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::entails/4>`, :ref:`stn_protocol <stn_protocol/0::entails/4>`
 
 .. only:: not latex
 
@@ -8905,10 +9031,11 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    -------------
 
    * :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::entails/5>`
+   * :ref:`stn_protocol <stn_protocol/0::entails/5>`
 
 .. only:: latex
 
-   * ``entails/5`` - :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::entails/5>`
+   * ``entails/5`` - :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::entails/5>`, :ref:`stn_protocol <stn_protocol/0::entails/5>`
 
 .. only:: not latex
 
@@ -9363,6 +9490,28 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``event/2`` - :ref:`open_ai_event_stream <open_ai_event_stream/0::event/2>`
+
+.. only:: not latex
+
+   ``event_interval/4``
+   --------------------
+
+   * :ref:`stn_protocol <stn_protocol/0::event_interval/4>`
+
+.. only:: latex
+
+   * ``event_interval/4`` - :ref:`stn_protocol <stn_protocol/0::event_interval/4>`
+
+.. only:: not latex
+
+   ``event_relation/6``
+   --------------------
+
+   * :ref:`stn_protocol <stn_protocol/0::event_relation/6>`
+
+.. only:: latex
+
+   * ``event_relation/6`` - :ref:`stn_protocol <stn_protocol/0::event_relation/6>`
 
 .. only:: not latex
 
@@ -15721,6 +15870,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``latest/3``
+   ------------
+
+   * :ref:`stn_protocol <stn_protocol/0::latest/3>`
+
+.. only:: latex
+
+   * ``latest/3`` - :ref:`stn_protocol <stn_protocol/0::latest/3>`
+
+.. only:: not latex
+
    ``leaf/1``
    ----------
 
@@ -19427,6 +19587,28 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``must_precede/3``
+   ------------------
+
+   * :ref:`stn_protocol <stn_protocol/0::must_precede/3>`
+
+.. only:: latex
+
+   * ``must_precede/3`` - :ref:`stn_protocol <stn_protocol/0::must_precede/3>`
+
+.. only:: not latex
+
+   ``must_precede_or_equal/3``
+   ---------------------------
+
+   * :ref:`stn_protocol <stn_protocol/0::must_precede_or_equal/3>`
+
+.. only:: latex
+
+   * ``must_precede_or_equal/3`` - :ref:`stn_protocol <stn_protocol/0::must_precede_or_equal/3>`
+
+.. only:: not latex
+
    ``mutate/2``
    ------------
 
@@ -19737,12 +19919,13 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    * :ref:`java_access_protocol <java_access_protocol/0::new/2>`
    * :ref:`lru_cache_protocol <lru_cache_protocol/0::new/2>`
    * :ref:`ripple_down_rules_common_protocol <ripple_down_rules_common_protocol/0::new/2>`
+   * :ref:`stn_protocol <stn_protocol/0::new/2>`
    * :ref:`streamvars <streamvars/0::new/2>`
    * :ref:`union_find_protocol <union_find_protocol/0::new/2>`
 
 .. only:: latex
 
-   * ``new/2`` - :ref:`atms_protocol <atms_protocol/0::new/2>`, :ref:`graph_protocol <graph_protocol/0::new/2>`, :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::new/2>`, :ref:`java_access_protocol <java_access_protocol/0::new/2>`, :ref:`lru_cache_protocol <lru_cache_protocol/0::new/2>`, :ref:`ripple_down_rules_common_protocol <ripple_down_rules_common_protocol/0::new/2>`, :ref:`streamvars <streamvars/0::new/2>`, :ref:`union_find_protocol <union_find_protocol/0::new/2>`
+   * ``new/2`` - :ref:`atms_protocol <atms_protocol/0::new/2>`, :ref:`graph_protocol <graph_protocol/0::new/2>`, :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::new/2>`, :ref:`java_access_protocol <java_access_protocol/0::new/2>`, :ref:`lru_cache_protocol <lru_cache_protocol/0::new/2>`, :ref:`ripple_down_rules_common_protocol <ripple_down_rules_common_protocol/0::new/2>`, :ref:`stn_protocol <stn_protocol/0::new/2>`, :ref:`streamvars <streamvars/0::new/2>`, :ref:`union_find_protocol <union_find_protocol/0::new/2>`
 
 .. only:: not latex
 
@@ -26775,6 +26958,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``remove_constraints/3``
+   ------------------------
+
+   * :ref:`stn_protocol <stn_protocol/0::remove_constraints/3>`
+
+.. only:: latex
+
+   * ``remove_constraints/3`` - :ref:`stn_protocol <stn_protocol/0::remove_constraints/3>`
+
+.. only:: not latex
+
    ``remove_diacritics/2``
    -----------------------
 
@@ -26806,6 +27000,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``remove_rule/1`` - :ref:`datalog_protocol <datalog_protocol/0::remove_rule/1>`
+
+.. only:: not latex
+
+   ``remove_time_points/3``
+   ------------------------
+
+   * :ref:`stn_protocol <stn_protocol/0::remove_time_points/3>`
+
+.. only:: latex
+
+   * ``remove_time_points/3`` - :ref:`stn_protocol <stn_protocol/0::remove_time_points/3>`
 
 .. only:: not latex
 
@@ -28444,6 +28649,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``scard/3`` - :ref:`redis <redis/0::scard/3>`
+
+.. only:: not latex
+
+   ``schedule/2``
+   --------------
+
+   * :ref:`stn_protocol <stn_protocol/0::schedule/2>`
+
+.. only:: latex
+
+   * ``schedule/2`` - :ref:`stn_protocol <stn_protocol/0::schedule/2>`
 
 .. only:: not latex
 
@@ -32177,6 +32393,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``time_points/2``
+   -----------------
+
+   * :ref:`stn_protocol <stn_protocol/0::time_points/2>`
+
+.. only:: latex
+
+   * ``time_points/2`` - :ref:`stn_protocol <stn_protocol/0::time_points/2>`
+
+.. only:: not latex
+
    ``time_stamp/1``
    ----------------
 
@@ -32874,6 +33101,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``true/1`` - :ref:`java_utils_protocol <java_utils_protocol/0::true/1>`
+
+.. only:: not latex
+
+   ``try_add_constraints/4``
+   -------------------------
+
+   * :ref:`stn_protocol <stn_protocol/0::try_add_constraints/4>`
+
+.. only:: latex
+
+   * ``try_add_constraints/4`` - :ref:`stn_protocol <stn_protocol/0::try_add_constraints/4>`
 
 .. only:: not latex
 
@@ -34997,6 +35235,28 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``why/3`` - :ref:`atms_protocol <atms_protocol/0::why/3>`
+
+.. only:: not latex
+
+   ``window_interval/3``
+   ---------------------
+
+   * :ref:`stn_protocol <stn_protocol/0::window_interval/3>`
+
+.. only:: latex
+
+   * ``window_interval/3`` - :ref:`stn_protocol <stn_protocol/0::window_interval/3>`
+
+.. only:: not latex
+
+   ``window_relation/4``
+   ---------------------
+
+   * :ref:`stn_protocol <stn_protocol/0::window_relation/4>`
+
+.. only:: latex
+
+   * ``window_relation/4`` - :ref:`stn_protocol <stn_protocol/0::window_relation/4>`
 
 .. only:: not latex
 

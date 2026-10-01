@@ -4818,6 +4818,22 @@ To load an entity, always load the library that includes it using the goal ``log
 
    * :doc:`sgd_classifier <sgd_classifier_0>`
 
+``library/simple_temporal_networks/``
+-------------------------------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      stn <stn_0>
+      stn_protocol <stn_protocol_0>
+
+.. only:: latex
+
+   * :doc:`stn <stn_0>`
+   * :doc:`stn_protocol <stn_protocol_0>`
+
 ``library/simulated_annealing/``
 --------------------------------
 

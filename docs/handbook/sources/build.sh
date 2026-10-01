@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on September 30, 2026
+##   Last updated on October 1, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -328,6 +328,7 @@ sed '1,19d' ../../../library/schulze_ranker/NOTES.md | pandoc -f gfm -t rst -o l
 sed '1,19d' ../../../library/sequential_pattern_mining_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/sequential_pattern_mining_protocols.rst
 sed '1,19d' ../../../library/sets/NOTES.md | pandoc -f gfm -t rst -o libraries/sets.rst
 sed '1,19d' ../../../library/sgd_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/sgd_classifier.rst
+sed '1,19d' ../../../library/simple_temporal_networks/NOTES.md | pandoc -f gfm -t rst -o libraries/simple_temporal_networks.rst
 sed '1,19d' ../../../library/simulated_annealing/NOTES.md | pandoc -f gfm -t rst -o libraries/simulated_annealing.rst
 sed '1,19d' ../../../library/smtp/NOTES.md | pandoc -f gfm -t rst -o libraries/smtp.rst
 sed '1,19d' ../../../library/snowflakeid/NOTES.md | pandoc -f gfm -t rst -o libraries/snowflakeid.rst

@@ -101,6 +101,10 @@
 <li><a class="reference internal" href="#add64-3"><code class="docutils literal notranslate"><span class="pre">add64/3</span></code></a></li>
 <li><a class="reference internal" href="#adddependent-1"><code class="docutils literal notranslate"><span class="pre">addDependent/1</span></code></a></li>
 <li><a class="reference internal" href="#add-authentication-info-4"><code class="docutils literal notranslate"><span class="pre">add_authentication_info/4</span></code></a></li>
+<li><a class="reference internal" href="#add-constraint-5"><code class="docutils literal notranslate"><span class="pre">add_constraint/5</span></code></a></li>
+<li><a class="reference internal" href="#add-constraint-6"><code class="docutils literal notranslate"><span class="pre">add_constraint/6</span></code></a></li>
+<li><a class="reference internal" href="#add-constraints-3"><code class="docutils literal notranslate"><span class="pre">add_constraints/3</span></code></a></li>
+<li><a class="reference internal" href="#add-constraints-4"><code class="docutils literal notranslate"><span class="pre">add_constraints/4</span></code></a></li>
 <li><a class="reference internal" href="#add-duration-3"><code class="docutils literal notranslate"><span class="pre">add_duration/3</span></code></a></li>
 <li><a class="reference internal" href="#add-edge-4"><code class="docutils literal notranslate"><span class="pre">add_edge/4</span></code></a></li>
 <li><a class="reference internal" href="#add-edge-5"><code class="docutils literal notranslate"><span class="pre">add_edge/5</span></code></a></li>
@@ -110,6 +114,7 @@
 <li><a class="reference internal" href="#add-rule-3"><code class="docutils literal notranslate"><span class="pre">add_rule/3</span></code></a></li>
 <li><a class="reference internal" href="#add-scaled-outer-product-4"><code class="docutils literal notranslate"><span class="pre">add_scaled_outer_product/4</span></code></a></li>
 <li><a class="reference internal" href="#add-scaled-vector-4"><code class="docutils literal notranslate"><span class="pre">add_scaled_vector/4</span></code></a></li>
+<li><a class="reference internal" href="#add-time-points-3"><code class="docutils literal notranslate"><span class="pre">add_time_points/3</span></code></a></li>
 <li><a class="reference internal" href="#add-type-2"><code class="docutils literal notranslate"><span class="pre">add_type/2</span></code></a></li>
 <li><a class="reference internal" href="#add-type-3"><code class="docutils literal notranslate"><span class="pre">add_type/3</span></code></a></li>
 <li><a class="reference internal" href="#add-vectors-3"><code class="docutils literal notranslate"><span class="pre">add_vectors/3</span></code></a></li>
@@ -269,6 +274,7 @@
 <li><a class="reference internal" href="#bounding-box-3"><code class="docutils literal notranslate"><span class="pre">bounding_box/3</span></code></a></li>
 <li><a class="reference internal" href="#bounding-box-bits-3"><code class="docutils literal notranslate"><span class="pre">bounding_box_bits/3</span></code></a></li>
 <li><a class="reference internal" href="#bounding-box-int-3"><code class="docutils literal notranslate"><span class="pre">bounding_box_int/3</span></code></a></li>
+<li><a class="reference internal" href="#bounds-4"><code class="docutils literal notranslate"><span class="pre">bounds/4</span></code></a></li>
 <li><a class="reference internal" href="#branch-2"><code class="docutils literal notranslate"><span class="pre">branch/2</span></code></a></li>
 <li><a class="reference internal" href="#breadth-first-order-3"><code class="docutils literal notranslate"><span class="pre">breadth_first_order/3</span></code></a></li>
 <li><a class="reference internal" href="#bridges-2"><code class="docutils literal notranslate"><span class="pre">bridges/2</span></code></a></li>
@@ -296,6 +302,8 @@
 <li><a class="reference internal" href="#calendar-month-3"><code class="docutils literal notranslate"><span class="pre">calendar_month/3</span></code></a></li>
 <li><a class="reference internal" href="#call-with-timeout-2"><code class="docutils literal notranslate"><span class="pre">call_with_timeout/2</span></code></a></li>
 <li><a class="reference internal" href="#call-with-timeout-3"><code class="docutils literal notranslate"><span class="pre">call_with_timeout/3</span></code></a></li>
+<li><a class="reference internal" href="#can-precede-3"><code class="docutils literal notranslate"><span class="pre">can_precede/3</span></code></a></li>
+<li><a class="reference internal" href="#can-precede-or-equal-3"><code class="docutils literal notranslate"><span class="pre">can_precede_or_equal/3</span></code></a></li>
 <li><a class="reference internal" href="#canonical-bic-2"><code class="docutils literal notranslate"><span class="pre">canonical_bic/2</span></code></a></li>
 <li><a class="reference internal" href="#canonical-iban-2"><code class="docutils literal notranslate"><span class="pre">canonical_iban/2</span></code></a></li>
 <li><a class="reference internal" href="#canonical-query-2"><code class="docutils literal notranslate"><span class="pre">canonical_query/2</span></code></a></li>
@@ -709,6 +717,7 @@
 <li><a class="reference internal" href="#diagram-name-suffix-1"><code class="docutils literal notranslate"><span class="pre">diagram_name_suffix/1</span></code></a></li>
 <li><a class="reference internal" href="#dif-1"><code class="docutils literal notranslate"><span class="pre">dif/1</span></code></a></li>
 <li><a class="reference internal" href="#dif-2"><code class="docutils literal notranslate"><span class="pre">dif/2</span></code></a></li>
+<li><a class="reference internal" href="#difference-bounds-5"><code class="docutils literal notranslate"><span class="pre">difference_bounds/5</span></code></a></li>
 <li><a class="reference internal" href="#difference-norm-3"><code class="docutils literal notranslate"><span class="pre">difference_norm/3</span></code></a></li>
 <li><a class="reference internal" href="#digest-2"><code class="docutils literal notranslate"><span class="pre">digest/2</span></code></a></li>
 <li><a class="reference internal" href="#digest-4"><code class="docutils literal notranslate"><span class="pre">digest/4</span></code></a></li>
@@ -809,6 +818,8 @@
 <li><a class="reference internal" href="#dut1-entries-1"><code class="docutils literal notranslate"><span class="pre">dut1_entries/1</span></code></a></li>
 <li><a class="reference internal" href="#dut1-offset-at-utc-unix-3"><code class="docutils literal notranslate"><span class="pre">dut1_offset_at_utc_unix/3</span></code></a></li>
 <li><a class="reference internal" href="#dut1-source-1"><code class="docutils literal notranslate"><span class="pre">dut1_source/1</span></code></a></li>
+<li><a class="reference internal" href="#earliest-3"><code class="docutils literal notranslate"><span class="pre">earliest/3</span></code></a></li>
+<li><a class="reference internal" href="#earliest-schedule-2"><code class="docutils literal notranslate"><span class="pre">earliest_schedule/2</span></code></a></li>
 <li><a class="reference internal" href="#easter-day-3"><code class="docutils literal notranslate"><span class="pre">easter_day/3</span></code></a></li>
 <li><a class="reference internal" href="#ed25519-keypair-2"><code class="docutils literal notranslate"><span class="pre">ed25519_keypair/2</span></code></a></li>
 <li><a class="reference internal" href="#ed25519-public-key-2"><code class="docutils literal notranslate"><span class="pre">ed25519_public_key/2</span></code></a></li>
@@ -895,6 +906,8 @@
 <li><a class="reference internal" href="#evaluate-3"><code class="docutils literal notranslate"><span class="pre">evaluate/3</span></code></a></li>
 <li><a class="reference internal" href="#evaluate-relative-4"><code class="docutils literal notranslate"><span class="pre">evaluate_relative/4</span></code></a></li>
 <li><a class="reference internal" href="#event-2"><code class="docutils literal notranslate"><span class="pre">event/2</span></code></a></li>
+<li><a class="reference internal" href="#event-interval-4"><code class="docutils literal notranslate"><span class="pre">event_interval/4</span></code></a></li>
+<li><a class="reference internal" href="#event-relation-6"><code class="docutils literal notranslate"><span class="pre">event_relation/6</span></code></a></li>
 <li><a class="reference internal" href="#evict-3"><code class="docutils literal notranslate"><span class="pre">evict/3</span></code></a></li>
 <li><a class="reference internal" href="#exactly-representable-1"><code class="docutils literal notranslate"><span class="pre">exactly_representable/1</span></code></a></li>
 <li><a class="reference internal" href="#example-2"><code class="docutils literal notranslate"><span class="pre">example/2</span></code></a></li>
@@ -1457,6 +1470,7 @@
 <li><a class="reference internal" href="#language-object-2"><code class="docutils literal notranslate"><span class="pre">language_object/2</span></code></a></li>
 <li><a class="reference internal" href="#language-scripts-2"><code class="docutils literal notranslate"><span class="pre">language_scripts/2</span></code></a></li>
 <li><a class="reference internal" href="#last-2"><code class="docutils literal notranslate"><span class="pre">last/2</span></code></a></li>
+<li><a class="reference internal" href="#latest-3"><code class="docutils literal notranslate"><span class="pre">latest/3</span></code></a></li>
 <li><a class="reference internal" href="#leaf-1"><code class="docutils literal notranslate"><span class="pre">leaf/1</span></code></a></li>
 <li><a class="reference internal" href="#leaf-class-1"><code class="docutils literal notranslate"><span class="pre">leaf_class/1</span></code></a></li>
 <li><a class="reference internal" href="#leaf-classes-1"><code class="docutils literal notranslate"><span class="pre">leaf_classes/1</span></code></a></li>
@@ -1786,6 +1800,8 @@
 <li><a class="reference internal" href="#multivariate-t-log-density-6"><code class="docutils literal notranslate"><span class="pre">multivariate_t_log_density/6</span></code></a></li>
 <li><a class="reference internal" href="#multivariate-t-samples-5"><code class="docutils literal notranslate"><span class="pre">multivariate_t_samples/5</span></code></a></li>
 <li><a class="reference internal" href="#multivariate-t-samples-6"><code class="docutils literal notranslate"><span class="pre">multivariate_t_samples/6</span></code></a></li>
+<li><a class="reference internal" href="#must-precede-3"><code class="docutils literal notranslate"><span class="pre">must_precede/3</span></code></a></li>
+<li><a class="reference internal" href="#must-precede-or-equal-3"><code class="docutils literal notranslate"><span class="pre">must_precede_or_equal/3</span></code></a></li>
 <li><a class="reference internal" href="#mutate-2"><code class="docutils literal notranslate"><span class="pre">mutate/2</span></code></a></li>
 <li><a class="reference internal" href="#mutation-2"><code class="docutils literal notranslate"><span class="pre">mutation/2</span></code></a></li>
 <li><a class="reference internal" href="#mutation-3"><code class="docutils literal notranslate"><span class="pre">mutation/3</span></code></a></li>
@@ -2434,9 +2450,11 @@
 <li><a class="reference internal" href="#relevance-3"><code class="docutils literal notranslate"><span class="pre">relevance/3</span></code></a></li>
 <li><a class="reference internal" href="#remove-3"><code class="docutils literal notranslate"><span class="pre">remove/3</span></code></a></li>
 <li><a class="reference internal" href="#removedependent-1"><code class="docutils literal notranslate"><span class="pre">removeDependent/1</span></code></a></li>
+<li><a class="reference internal" href="#remove-constraints-3"><code class="docutils literal notranslate"><span class="pre">remove_constraints/3</span></code></a></li>
 <li><a class="reference internal" href="#remove-diacritics-2"><code class="docutils literal notranslate"><span class="pre">remove_diacritics/2</span></code></a></li>
 <li><a class="reference internal" href="#remove-duplicates-2"><code class="docutils literal notranslate"><span class="pre">remove_duplicates/2</span></code></a></li>
 <li><a class="reference internal" href="#remove-rule-1"><code class="docutils literal notranslate"><span class="pre">remove_rule/1</span></code></a></li>
+<li><a class="reference internal" href="#remove-time-points-3"><code class="docutils literal notranslate"><span class="pre">remove_time_points/3</span></code></a></li>
 <li><a class="reference internal" href="#rename-4"><code class="docutils literal notranslate"><span class="pre">rename/4</span></code></a></li>
 <li><a class="reference internal" href="#rename-file-2"><code class="docutils literal notranslate"><span class="pre">rename_file/2</span></code></a></li>
 <li><a class="reference internal" href="#renew-2"><code class="docutils literal notranslate"><span class="pre">renew/2</span></code></a></li>
@@ -2581,6 +2599,7 @@
 <li><a class="reference internal" href="#scan-right-4"><code class="docutils literal notranslate"><span class="pre">scan_right/4</span></code></a></li>
 <li><a class="reference internal" href="#scan-right-1-3"><code class="docutils literal notranslate"><span class="pre">scan_right_1/3</span></code></a></li>
 <li><a class="reference internal" href="#scard-3"><code class="docutils literal notranslate"><span class="pre">scard/3</span></code></a></li>
+<li><a class="reference internal" href="#schedule-2"><code class="docutils literal notranslate"><span class="pre">schedule/2</span></code></a></li>
 <li><a class="reference internal" href="#schema-2"><code class="docutils literal notranslate"><span class="pre">schema/2</span></code></a></li>
 <li><a class="reference internal" href="#scopes-2"><code class="docutils literal notranslate"><span class="pre">scopes/2</span></code></a></li>
 <li><a class="reference internal" href="#score-3"><code class="docutils literal notranslate"><span class="pre">score/3</span></code></a></li>
@@ -2912,6 +2931,7 @@
 <li><a class="reference internal" href="#test-1"><code class="docutils literal notranslate"><span class="pre">test/1</span></code></a></li>
 <li><a class="reference internal" href="#text-body-2"><code class="docutils literal notranslate"><span class="pre">text_body/2</span></code></a></li>
 <li><a class="reference internal" href="#time-of-day-4"><code class="docutils literal notranslate"><span class="pre">time_of_day/4</span></code></a></li>
+<li><a class="reference internal" href="#time-points-2"><code class="docutils literal notranslate"><span class="pre">time_points/2</span></code></a></li>
 <li><a class="reference internal" href="#time-stamp-1"><code class="docutils literal notranslate"><span class="pre">time_stamp/1</span></code></a></li>
 <li><a class="reference internal" href="#time-string-3"><code class="docutils literal notranslate"><span class="pre">time_string/3</span></code></a></li>
 <li><a class="reference internal" href="#time-type-2"><code class="docutils literal notranslate"><span class="pre">time_type/2</span></code></a></li>
@@ -2975,6 +2995,7 @@
 <li><a class="reference internal" href="#trim-right-3"><code class="docutils literal notranslate"><span class="pre">trim_right/3</span></code></a></li>
 <li><a class="reference internal" href="#trimmed-mean-3"><code class="docutils literal notranslate"><span class="pre">trimmed_mean/3</span></code></a></li>
 <li><a class="reference internal" href="#true-1"><code class="docutils literal notranslate"><span class="pre">true/1</span></code></a></li>
+<li><a class="reference internal" href="#try-add-constraints-4"><code class="docutils literal notranslate"><span class="pre">try_add_constraints/4</span></code></a></li>
 <li><a class="reference internal" href="#tt-minus-tai-2"><code class="docutils literal notranslate"><span class="pre">tt_minus_tai/2</span></code></a></li>
 <li><a class="reference internal" href="#ttl-3"><code class="docutils literal notranslate"><span class="pre">ttl/3</span></code></a></li>
 <li><a class="reference internal" href="#tx-commit-1"><code class="docutils literal notranslate"><span class="pre">tx_commit/1</span></code></a></li>
@@ -3160,6 +3181,8 @@
 <li><a class="reference internal" href="#white-space-0"><code class="docutils literal notranslate"><span class="pre">white_space//0</span></code></a></li>
 <li><a class="reference internal" href="#white-spaces-0"><code class="docutils literal notranslate"><span class="pre">white_spaces//0</span></code></a></li>
 <li><a class="reference internal" href="#why-3"><code class="docutils literal notranslate"><span class="pre">why/3</span></code></a></li>
+<li><a class="reference internal" href="#window-interval-3"><code class="docutils literal notranslate"><span class="pre">window_interval/3</span></code></a></li>
+<li><a class="reference internal" href="#window-relation-4"><code class="docutils literal notranslate"><span class="pre">window_relation/4</span></code></a></li>
 <li><a class="reference internal" href="#with-connection-1"><code class="docutils literal notranslate"><span class="pre">with_connection/1</span></code></a></li>
 <li><a class="reference internal" href="#with-output-to-2"><code class="docutils literal notranslate"><span class="pre">with_output_to/2</span></code></a></li>
 <li><a class="reference internal" href="#within-distance-4"><code class="docutils literal notranslate"><span class="pre">within_distance/4</span></code></a></li>
@@ -3477,6 +3500,30 @@
 <li><p><a class="reference internal" href="http_digest_0.html#http-digest-0-add-authentication-info-4"><span class="std std-ref">http_digest</span></a></p></li>
 </ul>
 </section>
+<section id="add-constraint-5">
+<h2><code class="docutils literal notranslate"><span class="pre">add_constraint/5</span></code><a class="headerlink" href="#add-constraint-5" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-add-constraint-5"><span class="std std-ref">stn_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="add-constraint-6">
+<h2><code class="docutils literal notranslate"><span class="pre">add_constraint/6</span></code><a class="headerlink" href="#add-constraint-6" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-add-constraint-6"><span class="std std-ref">stn_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="add-constraints-3">
+<h2><code class="docutils literal notranslate"><span class="pre">add_constraints/3</span></code><a class="headerlink" href="#add-constraints-3" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-add-constraints-3"><span class="std std-ref">stn_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="add-constraints-4">
+<h2><code class="docutils literal notranslate"><span class="pre">add_constraints/4</span></code><a class="headerlink" href="#add-constraints-4" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-add-constraints-4"><span class="std std-ref">stn_protocol</span></a></p></li>
+</ul>
+</section>
 <section id="add-duration-3">
 <h2><code class="docutils literal notranslate"><span class="pre">add_duration/3</span></code><a class="headerlink" href="#add-duration-3" title="Link to this heading"></a></h2>
 <ul class="simple">
@@ -3530,6 +3577,12 @@
 <h2><code class="docutils literal notranslate"><span class="pre">add_scaled_vector/4</span></code><a class="headerlink" href="#add-scaled-vector-4" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="linear_algebra_protocol_0.html#linear-algebra-protocol-0-add-scaled-vector-4"><span class="std std-ref">linear_algebra_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="add-time-points-3">
+<h2><code class="docutils literal notranslate"><span class="pre">add_time_points/3</span></code><a class="headerlink" href="#add-time-points-3" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-add-time-points-3"><span class="std std-ref">stn_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="add-type-2">
@@ -4527,6 +4580,12 @@
 <li><p><a class="reference internal" href="geohash_protocol_0.html#geohash-protocol-0-bounding-box-int-3"><span class="std std-ref">geohash_protocol</span></a></p></li>
 </ul>
 </section>
+<section id="bounds-4">
+<h2><code class="docutils literal notranslate"><span class="pre">bounds/4</span></code><a class="headerlink" href="#bounds-4" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-bounds-4"><span class="std std-ref">stn_protocol</span></a></p></li>
+</ul>
+</section>
 <section id="branch-2">
 <h2><code class="docutils literal notranslate"><span class="pre">branch/2</span></code><a class="headerlink" href="#branch-2" title="Link to this heading"></a></h2>
 <ul class="simple">
@@ -4689,6 +4748,18 @@
 <h2><code class="docutils literal notranslate"><span class="pre">call_with_timeout/3</span></code><a class="headerlink" href="#call-with-timeout-3" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="timeout_0.html#timeout-0-call-with-timeout-3"><span class="std std-ref">timeout</span></a></p></li>
+</ul>
+</section>
+<section id="can-precede-3">
+<h2><code class="docutils literal notranslate"><span class="pre">can_precede/3</span></code><a class="headerlink" href="#can-precede-3" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-can-precede-3"><span class="std std-ref">stn_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="can-precede-or-equal-3">
+<h2><code class="docutils literal notranslate"><span class="pre">can_precede_or_equal/3</span></code><a class="headerlink" href="#can-precede-or-equal-3" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-can-precede-or-equal-3"><span class="std std-ref">stn_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="canonical-bic-2">
@@ -5733,6 +5804,7 @@
 <h2><code class="docutils literal notranslate"><span class="pre">consistent/1</span></code><a class="headerlink" href="#consistent-1" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="interval_constraint_network_protocol_0.html#interval-constraint-network-protocol-0-consistent-1"><span class="std std-ref">interval_constraint_network_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-consistent-1"><span class="std std-ref">stn_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="consistent-2">
@@ -5757,6 +5829,7 @@
 <h2><code class="docutils literal notranslate"><span class="pre">constraints/2</span></code><a class="headerlink" href="#constraints-2" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="interval_constraint_network_protocol_0.html#interval-constraint-network-protocol-0-constraints-2"><span class="std std-ref">interval_constraint_network_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-constraints-2"><span class="std std-ref">stn_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="constraints-3">
@@ -7284,6 +7357,12 @@
 <li><p><a class="reference internal" href="dif_0.html#dif-0-dif-2"><span class="std std-ref">dif</span></a></p></li>
 </ul>
 </section>
+<section id="difference-bounds-5">
+<h2><code class="docutils literal notranslate"><span class="pre">difference_bounds/5</span></code><a class="headerlink" href="#difference-bounds-5" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-difference-bounds-5"><span class="std std-ref">stn_protocol</span></a></p></li>
+</ul>
+</section>
 <section id="difference-norm-3">
 <h2><code class="docutils literal notranslate"><span class="pre">difference_norm/3</span></code><a class="headerlink" href="#difference-norm-3" title="Link to this heading"></a></h2>
 <ul class="simple">
@@ -7555,12 +7634,14 @@
 <h2><code class="docutils literal notranslate"><span class="pre">distance/4</span></code><a class="headerlink" href="#distance-4" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="geospatial_protocol_0.html#geospatial-protocol-0-distance-4"><span class="std std-ref">geospatial_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-distance-4"><span class="std std-ref">stn_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="distance-5">
 <h2><code class="docutils literal notranslate"><span class="pre">distance/5</span></code><a class="headerlink" href="#distance-5" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="geospatial_protocol_0.html#geospatial-protocol-0-distance-5"><span class="std std-ref">geospatial_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-distance-5"><span class="std std-ref">stn_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="distinct-arrangement-3">
@@ -7924,6 +8005,18 @@
 <li><p><a class="reference internal" href="time_scales_protocol_0.html#time-scales-protocol-0-dut1-source-1"><span class="std std-ref">time_scales_protocol</span></a></p></li>
 </ul>
 </section>
+<section id="earliest-3">
+<h2><code class="docutils literal notranslate"><span class="pre">earliest/3</span></code><a class="headerlink" href="#earliest-3" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-earliest-3"><span class="std std-ref">stn_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="earliest-schedule-2">
+<h2><code class="docutils literal notranslate"><span class="pre">earliest_schedule/2</span></code><a class="headerlink" href="#earliest-schedule-2" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-earliest-schedule-2"><span class="std std-ref">stn_protocol</span></a></p></li>
+</ul>
+</section>
 <section id="easter-day-3">
 <h2><code class="docutils literal notranslate"><span class="pre">easter_day/3</span></code><a class="headerlink" href="#easter-day-3" title="Link to this heading"></a></h2>
 <ul class="simple">
@@ -8210,12 +8303,14 @@
 <h2><code class="docutils literal notranslate"><span class="pre">entails/4</span></code><a class="headerlink" href="#entails-4" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="interval_constraint_network_protocol_0.html#interval-constraint-network-protocol-0-entails-4"><span class="std std-ref">interval_constraint_network_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-entails-4"><span class="std std-ref">stn_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="entails-5">
 <h2><code class="docutils literal notranslate"><span class="pre">entails/5</span></code><a class="headerlink" href="#entails-5" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="interval_constraint_network_protocol_0.html#interval-constraint-network-protocol-0-entails-5"><span class="std std-ref">interval_constraint_network_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-entails-5"><span class="std std-ref">stn_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="entity-1">
@@ -8470,6 +8565,18 @@
 <h2><code class="docutils literal notranslate"><span class="pre">event/2</span></code><a class="headerlink" href="#event-2" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="open_ai_event_stream_0.html#open-ai-event-stream-0-event-2"><span class="std std-ref">open_ai_event_stream</span></a></p></li>
+</ul>
+</section>
+<section id="event-interval-4">
+<h2><code class="docutils literal notranslate"><span class="pre">event_interval/4</span></code><a class="headerlink" href="#event-interval-4" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-event-interval-4"><span class="std std-ref">stn_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="event-relation-6">
+<h2><code class="docutils literal notranslate"><span class="pre">event_relation/6</span></code><a class="headerlink" href="#event-relation-6" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-event-relation-6"><span class="std std-ref">stn_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="evict-3">
@@ -12017,6 +12124,12 @@
 <li><p><a class="reference internal" href="varlistp_0.html#varlistp-0-last-2"><span class="std std-ref">varlistp</span></a></p></li>
 </ul>
 </section>
+<section id="latest-3">
+<h2><code class="docutils literal notranslate"><span class="pre">latest/3</span></code><a class="headerlink" href="#latest-3" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-latest-3"><span class="std std-ref">stn_protocol</span></a></p></li>
+</ul>
+</section>
 <section id="leaf-1">
 <h2><code class="docutils literal notranslate"><span class="pre">leaf/1</span></code><a class="headerlink" href="#leaf-1" title="Link to this heading"></a></h2>
 <ul class="simple">
@@ -14078,6 +14191,18 @@
 <li><p><a class="reference internal" href="multivariate_distributions_protocol_0.html#multivariate-distributions-protocol-0-multivariate-t-samples-6"><span class="std std-ref">multivariate_distributions_protocol</span></a></p></li>
 </ul>
 </section>
+<section id="must-precede-3">
+<h2><code class="docutils literal notranslate"><span class="pre">must_precede/3</span></code><a class="headerlink" href="#must-precede-3" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-must-precede-3"><span class="std std-ref">stn_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="must-precede-or-equal-3">
+<h2><code class="docutils literal notranslate"><span class="pre">must_precede_or_equal/3</span></code><a class="headerlink" href="#must-precede-or-equal-3" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-must-precede-or-equal-3"><span class="std std-ref">stn_protocol</span></a></p></li>
+</ul>
+</section>
 <section id="mutate-2">
 <h2><code class="docutils literal notranslate"><span class="pre">mutate/2</span></code><a class="headerlink" href="#mutate-2" title="Link to this heading"></a></h2>
 <ul class="simple">
@@ -14258,6 +14383,7 @@
 <li><p><a class="reference internal" href="java_access_protocol_0.html#java-access-protocol-0-new-2"><span class="std std-ref">java_access_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="lru_cache_protocol_0.html#lru-cache-protocol-0-new-2"><span class="std std-ref">lru_cache_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="ripple_down_rules_common_protocol_0.html#ripple-down-rules-common-protocol-0-new-2"><span class="std std-ref">ripple_down_rules_common_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-new-2"><span class="std std-ref">stn_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="streamvars_0.html#streamvars-0-new-2"><span class="std std-ref">streamvars</span></a></p></li>
 <li><p><a class="reference internal" href="union_find_protocol_0.html#union-find-protocol-0-new-2"><span class="std std-ref">union_find_protocol</span></a></p></li>
 </ul>
@@ -18186,6 +18312,12 @@
 <li><p><a class="reference internal" href="subject_0.html#subject-0-removedependent-1"><span class="std std-ref">subject</span></a></p></li>
 </ul>
 </section>
+<section id="remove-constraints-3">
+<h2><code class="docutils literal notranslate"><span class="pre">remove_constraints/3</span></code><a class="headerlink" href="#remove-constraints-3" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-remove-constraints-3"><span class="std std-ref">stn_protocol</span></a></p></li>
+</ul>
+</section>
 <section id="remove-diacritics-2">
 <h2><code class="docutils literal notranslate"><span class="pre">remove_diacritics/2</span></code><a class="headerlink" href="#remove-diacritics-2" title="Link to this heading"></a></h2>
 <ul class="simple">
@@ -18203,6 +18335,12 @@
 <h2><code class="docutils literal notranslate"><span class="pre">remove_rule/1</span></code><a class="headerlink" href="#remove-rule-1" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="datalog_protocol_0.html#datalog-protocol-0-remove-rule-1"><span class="std std-ref">datalog_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="remove-time-points-3">
+<h2><code class="docutils literal notranslate"><span class="pre">remove_time_points/3</span></code><a class="headerlink" href="#remove-time-points-3" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-remove-time-points-3"><span class="std std-ref">stn_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="rename-4">
@@ -19121,6 +19259,12 @@
 <h2><code class="docutils literal notranslate"><span class="pre">scard/3</span></code><a class="headerlink" href="#scard-3" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="redis_0.html#redis-0-scard-3"><span class="std std-ref">redis</span></a></p></li>
+</ul>
+</section>
+<section id="schedule-2">
+<h2><code class="docutils literal notranslate"><span class="pre">schedule/2</span></code><a class="headerlink" href="#schedule-2" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-schedule-2"><span class="std std-ref">stn_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="schema-2">
@@ -21198,6 +21342,12 @@
 <li><p><a class="reference internal" href="ccsds_ccs_2.html#ccsds-ccs-2-time-of-day-4"><span class="std std-ref">ccsds_ccs(CalendarVariant,FractionOctets)</span></a></p></li>
 </ul>
 </section>
+<section id="time-points-2">
+<h2><code class="docutils literal notranslate"><span class="pre">time_points/2</span></code><a class="headerlink" href="#time-points-2" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-time-points-2"><span class="std std-ref">stn_protocol</span></a></p></li>
+</ul>
+</section>
 <section id="time-stamp-1">
 <h2><code class="docutils literal notranslate"><span class="pre">time_stamp/1</span></code><a class="headerlink" href="#time-stamp-1" title="Link to this heading"></a></h2>
 <ul class="simple">
@@ -21581,6 +21731,12 @@
 <h2><code class="docutils literal notranslate"><span class="pre">true/1</span></code><a class="headerlink" href="#true-1" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="java_utils_protocol_0.html#java-utils-protocol-0-true-1"><span class="std std-ref">java_utils_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="try-add-constraints-4">
+<h2><code class="docutils literal notranslate"><span class="pre">try_add_constraints/4</span></code><a class="headerlink" href="#try-add-constraints-4" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-try-add-constraints-4"><span class="std std-ref">stn_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="tt-minus-tai-2">
@@ -22779,6 +22935,18 @@
 <h2><code class="docutils literal notranslate"><span class="pre">why/3</span></code><a class="headerlink" href="#why-3" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="atms_protocol_0.html#atms-protocol-0-why-3"><span class="std std-ref">atms_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="window-interval-3">
+<h2><code class="docutils literal notranslate"><span class="pre">window_interval/3</span></code><a class="headerlink" href="#window-interval-3" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-window-interval-3"><span class="std std-ref">stn_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="window-relation-4">
+<h2><code class="docutils literal notranslate"><span class="pre">window_relation/4</span></code><a class="headerlink" href="#window-relation-4" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="stn_protocol_0.html#stn-protocol-0-window-relation-4"><span class="std std-ref">stn_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="with-connection-1">
