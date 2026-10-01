@@ -15,7 +15,7 @@ Portable, functional Assumption-based Truth Maintenance System API.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-09-26
+| **Date:** 2026-10-01
 
 | **Compilation flags:**
 |    ``static``
@@ -28,6 +28,7 @@ Portable, functional Assumption-based Truth Maintenance System API.
 | **Remarks:**
 
    - State: All update predicates take an input ATMS state and return a new state. This permits several ATMS instances without relying on backend-specific mutable databases.
+   - Retraction: Node and batch justification removal is idempotent. Single justification removal deletes one matching occurrence. Earlier states and surviving identifiers are preserved.
    - Environments: The public API uses ordered lists of node identifiers. The representation selected when creating a state is internal.
 
 | **Inherited public predicates:**
@@ -188,6 +189,133 @@ Adds a Horn justification from the antecedent nodes to the consequent node, incr
 |    ``justify(Consequent,Antecedents,Info,State,NewState)``
 | **Mode and number of proofs:**
 |    ``justify(+atms_node,+list(atms_node),+term,+atms_state,-atms_state)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: retract_justification/5
+.. _atms_protocol/0::retract_justification/5:
+
+``retract_justification/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Removes one occurrence of the specified Horn justification, rebuilding labels and nogoods when needed. Returns the input state unchanged if the justification is absent.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``retract_justification(Consequent,Antecedents,Info,State,NewState)``
+| **Mode and number of proofs:**
+|    ``retract_justification(+atms_node,+list(atms_node),+term,+atms_state,-atms_state)`` - ``one``
+
+| **Remarks:**
+
+    - Identity: Antecedents are sorted and deduplicated as in ``justify/5``. The complete justification, including Info, is matched using term identity rather than unification.
+    - Occurrences: If variable aliasing has made distinct stored rules identical, removes the most recently added matching occurrence. Use ``retract_justifications/3`` to remove all matches.
+    - Redundant rules: If another rule with the same consequent and canonical antecedents remains, preserves labels and nogoods and removes only the stored rule and its reverse dependency entries. Info is ignored only for this redundancy check.
+
+
+------------
+
+.. index:: retract_justifications/3
+.. _atms_protocol/0::retract_justifications/3:
+
+``retract_justifications/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Removes all occurrences matching the requested justification terms, rebuilding derived state at most once. Returns the input state unchanged if none match.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``retract_justifications(Justifications,State,NewState)``
+| **Mode and number of proofs:**
+|    ``retract_justifications(+list(term),+atms_state,-atms_state)`` - ``one``
+
+| **Remarks:**
+
+    - Targets: Each target is a ``justification(Consequent, Antecedents, Info)`` term. Antecedents are sorted and deduplicated; the full term is matched using term identity.
+    - Idempotence: Missing targets and duplicate requests have no additional effect. All matching stored occurrences are removed, including those made identical by variable aliasing.
+    - Redundant rules: Preserves labels and nogoods if every removed consequent and canonical antecedent signature still has a surviving rule, regardless of Info. Reverse dependencies retain the surviving occurrence counts.
+
+
+------------
+
+.. index:: retract_node/3
+.. _atms_protocol/0::retract_node/3:
+
+``retract_node/3``
+^^^^^^^^^^^^^^^^^^
+
+Removes an ordinary, assumption, or contradiction node and all justifications mentioning it, rebuilding derived state when needed. Returns the input state unchanged if the node is absent.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``retract_node(Node,State,NewState)``
+| **Mode and number of proofs:**
+|    ``retract_node(+atms_node,+atms_state,-atms_state)`` - ``one``
+
+| **Remarks:**
+
+    - Dependents: Other nodes are retained even when they lose all support.
+    - Isolated nodes: Removing a non-assumption node that appears in no justification deletes its label entry without rebuilding other labels, nogoods, or dependency indexes.
+    - Identifiers: Surviving node identifiers are preserved and removed identifiers are not reused in descendant states.
+
+
+------------
+
+.. index:: retract_nodes/3
+.. _atms_protocol/0::retract_nodes/3:
+
+``retract_nodes/3``
+^^^^^^^^^^^^^^^^^^^
+
+Removes the requested nodes and every justification mentioning any of them, rebuilding derived state at most once. Returns the input state unchanged if no nodes are removed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``retract_nodes(Nodes,State,NewState)``
+| **Mode and number of proofs:**
+|    ``retract_nodes(+list(atms_node),+atms_state,-atms_state)`` - ``one``
+
+| **Remarks:**
+
+    - Targets: Missing nodes and duplicate requests are ignored. All other nodes are retained, even when they lose all support.
+    - Isolated nodes: If no assumption or incident justification is removed, only node, role, and label entries are deleted; other derived indexes are preserved.
+    - Identifiers: Surviving identifiers and the next node identifier are preserved.
+
+
+------------
+
+.. index:: retract_batch/4
+.. _atms_protocol/0::retract_batch/4:
+
+``retract_batch/4``
+^^^^^^^^^^^^^^^^^^^
+
+Removes requested nodes, their incident justifications, and all exact matches for requested justification terms in one batch, rebuilding derived state at most once.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``retract_batch(Nodes,Justifications,State,NewState)``
+| **Mode and number of proofs:**
+|    ``retract_batch(+list(atms_node),+list(term),+atms_state,-atms_state)`` - ``one``
+
+| **Remarks:**
+
+    - Targets: Uses the same canonical antecedents and complete term identity as ``retract_justifications/3``. Missing targets and duplicate or overlapping requests are ignored.
+    - Occurrences: Every matching stored occurrence is removed, including occurrences made identical by variable aliasing.
+    - Identifiers: Surviving nodes, identifiers, and rule insertion order are preserved. Other nodes remain even when they lose support.
+    - No changes: Returns the input state unchanged if no targets match. Isolated non-assumption node removal preserves the other derived indexes.
+    - Redundant rules: If no nodes are removed, uses the same redundant-rule fast path as ``retract_justifications/3``. Effective node removal affecting assumptions or rules rebuilds once.
 
 
 ------------

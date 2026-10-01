@@ -27550,6 +27550,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``retract_batch/4``
+   -------------------
+
+   * :ref:`atms_protocol <atms_protocol/0::retract_batch/4>`
+
+.. only:: latex
+
+   * ``retract_batch/4`` - :ref:`atms_protocol <atms_protocol/0::retract_batch/4>`
+
+.. only:: not latex
+
    ``retract_fact/1``
    ------------------
 
@@ -27558,6 +27569,50 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``retract_fact/1`` - :ref:`datalog_protocol <datalog_protocol/0::retract_fact/1>`
+
+.. only:: not latex
+
+   ``retract_justification/5``
+   ---------------------------
+
+   * :ref:`atms_protocol <atms_protocol/0::retract_justification/5>`
+
+.. only:: latex
+
+   * ``retract_justification/5`` - :ref:`atms_protocol <atms_protocol/0::retract_justification/5>`
+
+.. only:: not latex
+
+   ``retract_justifications/3``
+   ----------------------------
+
+   * :ref:`atms_protocol <atms_protocol/0::retract_justifications/3>`
+
+.. only:: latex
+
+   * ``retract_justifications/3`` - :ref:`atms_protocol <atms_protocol/0::retract_justifications/3>`
+
+.. only:: not latex
+
+   ``retract_node/3``
+   ------------------
+
+   * :ref:`atms_protocol <atms_protocol/0::retract_node/3>`
+
+.. only:: latex
+
+   * ``retract_node/3`` - :ref:`atms_protocol <atms_protocol/0::retract_node/3>`
+
+.. only:: not latex
+
+   ``retract_nodes/3``
+   -------------------
+
+   * :ref:`atms_protocol <atms_protocol/0::retract_nodes/3>`
+
+.. only:: latex
+
+   * ``retract_nodes/3`` - :ref:`atms_protocol <atms_protocol/0::retract_nodes/3>`
 
 .. only:: not latex
 

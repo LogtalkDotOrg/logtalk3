@@ -15,7 +15,7 @@ Portable incremental Assumption-based Truth Maintenance System.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-09-26
+| **Date:** 2026-10-01
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -31,10 +31,11 @@ Portable incremental Assumption-based Truth Maintenance System.
 
    - Algorithm: A label is an antichain of minimal environments. New label environments are propagated as deltas through a reverse justification index.
    - Nogoods: Nogoods are also maintained as an antichain and immediately prune every affected label.
+   - Retraction: General removals rebuild derived state from surviving assumptions and stored justifications. Batch removals rebuild at most once; isolated non-assumption node removals preserve the other derived indexes.
    - Portability: The implementation is purely functional and uses the portable AVL tree dictionary for its state indexes.
 
 | **Inherited public predicates:**
-|     :ref:`atms_protocol/0::assumption/2`  :ref:`atms_protocol/0::assumptions/2`  :ref:`atms_protocol/0::clear/2`  :ref:`atms_protocol/0::consistent/2`  :ref:`atms_protocol/0::contradiction/2`  :ref:`atms_protocol/0::create_assumption/4`  :ref:`atms_protocol/0::create_contradiction/4`  :ref:`atms_protocol/0::create_node/4`  :ref:`atms_protocol/0::in_label/3`  :ref:`atms_protocol/0::interpretations/2`  :ref:`atms_protocol/0::justifications/2`  :ref:`atms_protocol/0::justify/5`  :ref:`atms_protocol/0::label/3`  :ref:`atms_protocol/0::new/1`  :ref:`atms_protocol/0::new/2`  :ref:`atms_protocol/0::node/2`  :ref:`atms_protocol/0::nodes/2`  :ref:`atms_protocol/0::nogood/2`  :ref:`atms_protocol/0::representation/2`  :ref:`atms_protocol/0::why/3`  
+|     :ref:`atms_protocol/0::assumption/2`  :ref:`atms_protocol/0::assumptions/2`  :ref:`atms_protocol/0::clear/2`  :ref:`atms_protocol/0::consistent/2`  :ref:`atms_protocol/0::contradiction/2`  :ref:`atms_protocol/0::create_assumption/4`  :ref:`atms_protocol/0::create_contradiction/4`  :ref:`atms_protocol/0::create_node/4`  :ref:`atms_protocol/0::in_label/3`  :ref:`atms_protocol/0::interpretations/2`  :ref:`atms_protocol/0::justifications/2`  :ref:`atms_protocol/0::justify/5`  :ref:`atms_protocol/0::label/3`  :ref:`atms_protocol/0::new/1`  :ref:`atms_protocol/0::new/2`  :ref:`atms_protocol/0::node/2`  :ref:`atms_protocol/0::nodes/2`  :ref:`atms_protocol/0::nogood/2`  :ref:`atms_protocol/0::representation/2`  :ref:`atms_protocol/0::retract_batch/4`  :ref:`atms_protocol/0::retract_justification/5`  :ref:`atms_protocol/0::retract_justifications/3`  :ref:`atms_protocol/0::retract_node/3`  :ref:`atms_protocol/0::retract_nodes/3`  :ref:`atms_protocol/0::why/3`  
 
 .. contents::
    :local:

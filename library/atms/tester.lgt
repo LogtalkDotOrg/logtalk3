@@ -35,6 +35,7 @@
 		debug(on),
 		source_data(on)
 	]),
+	logtalk_load(test_environments),
 	logtalk_load(tests, [hook(lgtunit)]),
 	lgtunit::run_test_sets([
 		tests(atms_ordered_list_environment),

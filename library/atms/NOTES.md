@@ -22,7 +22,7 @@ ________________________________________________________________________
 ======
 
 This library implements the Horn fragment of Johan de Kleer's Assumption-based
-Truth Maintenance System (ATMS). A system maintains assumption nodes, ordinary
+Truth Maintenance System (ATMS). The system maintains assumption nodes, ordinary
 nodes, Horn justifications, minimal labels, and minimal nogoods. A label is an
 antichain of the minimal consistent environments supporting a node.
 
@@ -49,17 +49,35 @@ To test this library predicates, load the `tester.lgt` file:
 
 	| ?- logtalk_load(atms(tester)).
 
+The test suite runs the same deterministic regressions and bounded QuickCheck
+edit histories for all three environment representations. Generated histories
+contain 20 edits and are limited to eight live nodes and four assumptions.
+After every edit, an independent ground model is reconstructed using public
+creation and justification predicates and compared with the current state,
+including labels, roles, nogoods, interpretations, explanations, rule order,
+and the next node identifier. Removed IDs are represented by ordinary padding
+nodes only in the reconstruction. Previous states are also checked again.
+
+QuickCheck test declarations reset the generator to its reproducible default
+seed in `setup/1` and restore the previous seed in `cleanup/1`;
+the test suite verifies that repeating the seed reproduces the histories.
+QuickCheck failures report the failing history and sequence/test seeds. A failure
+can be reproduced using `lgtunit::quick_check/3` with its reported opaque seed
+and the template `tests(Representation)<<edit_sequence(+list(byte,20))`.
+Nonground `Info` identity and aliasing remain covered by deterministic tests,
+without copying variables into the generated oracle.
+
 
 API and state
 -------------
 
 The `atms` object uses functional state:
 
-    | ?- atms::new(atms_bitset_environment, S0),
-         atms::create_assumption(sensor_ok, S0, A, S1),
-         atms::create_node(alarm, S1, Alarm, S2),
-         atms::justify(Alarm, [A], sensor_rule, S2, S3),
-         atms::label(Alarm, S3, Label).
+	| ?- atms::new(atms_bitset_environment, S0),
+	     atms::create_assumption(sensor_ok, S0, A, S1),
+	     atms::create_node(alarm, S1, Alarm, S2),
+	     atms::justify(Alarm, [A], sensor_rule, S2, S3),
+	     atms::label(Alarm, S3, Label).
 
 `Label` is `[[node(0)]]`. Node identifiers are intentionally opaque; use
 `atms::nodes/2` to obtain their associated data. State threading is a deliberate
@@ -74,6 +92,134 @@ nogood and prunes supersets from all labels immediately.
 `interpretations/2` enumerates maximal consistent environments. With no
 nogoods, it returns the environment containing all assumptions directly. When
 nogoods require subset search, it is intended for small sets of assumptions.
+
+
+Retraction
+----------
+
+`retract_justification(Consequent, Antecedents, Info, State, NewState)` removes
+one matching Horn justification. Antecedents are sorted and deduplicated as in
+`justify/5`. Matching uses strict term identity (`==/2`) for the complete
+justification, including `Info`, rather than unification. Rules with different
+`Info` terms are distinct even when they have the same consequent and
+antecedents. For nonground `Info` terms, matching requires the same variables.
+
+`retract_justifications(Justifications, State, NewState)` removes all stored
+occurrences matching any target in the list. Each target is a
+`justification(Consequent, Antecedents, Info)` term, with the same antecedent
+normalization and identity matching as single-rule removal. Duplicate requests
+and missing targets have no additional effect. The surviving rules retain
+their order, and the batch rebuilds derived state only once if any rule is
+removed.
+
+Rules that were distinct at insertion can become identical if variables in
+their `Info` terms are later unified. Rebuilding preserves every surviving
+occurrence and its original variables. Single-rule removal deletes the most
+recently added matching occurrence; repeated single calls can therefore remove
+further aliased occurrences. Batch removal deletes all matching occurrences
+and is idempotent even in this case. Public `justify/5` still suppresses rules
+that are identical when they are added.
+
+`retract_node(Node, State, NewState)` removes an ordinary, assumption, or
+contradiction node and every justification that mentions it as consequent or
+antecedent. It does not delete downstream nodes: they remain queryable, with
+empty labels if they lose all support. Removing an assumption also removes it
+from the environments returned by labels, nogoods, and interpretations.
+
+`retract_nodes(Nodes, State, NewState)` removes all requested nodes and every
+justification mentioning any of them. Duplicate node requests and missing
+nodes are ignored. Like batch rule removal, it rebuilds at most once.
+
+`retract_batch(Nodes, Justifications, State, NewState)` combines node and
+justification removal in one operation. It removes every incident rule and
+every exact requested rule match in a single traversal, then rebuilds at most
+once. Duplicate and overlapping requests do not remove an occurrence twice;
+missing targets are ignored. It follows the same identity and identifier
+rules as the separate batch operations:
+
+	| ?- atms::new(S0),
+	     atms::create_assumption(sensor_ok, S0, A, S1),
+	     atms::create_assumption(backup_ok, S1, B, S2),
+	     atms::create_node(alarm, S2, Alarm, S3),
+	     atms::justify(Alarm, [A], first, S3, S4),
+	     atms::justify(Alarm, [B], second, S4, S5),
+	     atms::retract_batch([B], [justification(Alarm, [A], first)], S5, S6),
+	     atms::label(Alarm, S6, []),
+	     atms::assumptions(S6, [A]).
+
+All removal operations are deterministic for their documented input modes.
+Node and batch removal are idempotent; single-rule removal is idempotent when
+there is at most one matching stored occurrence. If no target is present, the
+input state is returned unchanged. A justification referring to an unknown or
+already removed node is also absent.
+
+Empty batches return immediately, without scanning stored rules. Rule filters
+reuse unchanged list suffixes and preserve the original list when no rule is
+removed, including any variables in surviving justification information.
+Existing input states remain usable and are never modified:
+
+	| ?- atms::new(S0),
+	     atms::create_assumption(sensor_ok, S0, A, S1),
+	     atms::create_node(alarm, S1, Alarm, S2),
+	     atms::justify(Alarm, [A], sensor_rule, S2, S3),
+	     atms::retract_justification(Alarm, [A], sensor_rule, S3, S4),
+	     atms::label(Alarm, S4, []),
+	     atms::retract_node(A, S3, S5),
+	     atms::nodes(S5, [Alarm-alarm]),
+	     atms::label(Alarm, S5, []),
+	     atms::label(Alarm, S3, [[A]]).
+
+The following query shows both batch operations on separate descendants of the
+same input state:
+
+	| ?- atms::new(S0),
+	     atms::create_assumption(sensor_ok, S0, A, S1),
+	     atms::create_assumption(backup_ok, S1, B, S2),
+	     atms::create_node(alarm, S2, Alarm, S3),
+	     atms::justify(Alarm, [A], first, S3, S4),
+	     atms::justify(Alarm, [B], second, S4, S5),
+	     atms::retract_justifications([
+	         justification(Alarm, [A], first),
+	         justification(Alarm, [B], second)
+	     ], S5, S6),
+	     atms::label(Alarm, S6, []),
+	     atms::retract_nodes([A, B, A], S5, S7),
+	     atms::nodes(S7, [Alarm-alarm]),
+	     atms::label(Alarm, S7, []).
+
+Node identifiers and the selected environment representation are preserved.
+Removed identifiers are not reused in descendant states; new nodes continue
+from the previous next identifier. `clear/2` still creates an empty state with
+identifiers starting over. Surviving justifications retain their insertion
+order in `justifications/2` and `why/3`.
+
+General retractions rebuild all labels, nogoods, and reverse dependency
+indexes from surviving assumptions and stored justifications. Replay uses
+already normalized rules without repeating public validation or duplicate
+checks. This restores previously subsumed supports and environments pruned
+by nogoods, while preventing unsupported cycles from retaining stale labels.
+Nogoods disappear only when no surviving contradiction derivation supports
+them; retracting a contradiction node or justification can therefore restore
+consistency and labels throughout the system. Additions remain incremental,
+and new nodes and justifications can be added normally after retraction.
+
+Removing isolated ordinary or contradiction nodes takes a fast path: if no
+assumption or incident justification is removed, only node, role, and label
+entries are deleted. Other labels, nogoods, and dependency indexes are retained.
+Both antecedent and consequent references are checked, including unconditional
+rules. Assumption removals and any node removal affecting a rule use the
+rebuild fallback. This optimization applies to both single-node and batch
+removals.
+
+Rule-only removal also takes a fast path when every removed rule has a
+surviving rule with the same consequent and canonical antecedents. `Info` is
+ignored for this logical redundancy check, but never for target matching.
+Labels and nogoods are retained; stored rules and reverse dependency lists
+lose exactly the removed occurrences. This includes unconditional and
+contradiction rules and rules made identical by variable aliasing. Removing
+the final occurrence of any signature rebuilds derived state, even when a
+different signature currently produces the same label. Mixed batches use this
+fast path only when no node is actually removed.
 
 
 Environment representations
@@ -91,7 +237,8 @@ to `atms_environment_protocol`:
   Union and subset each use one integer operation whose runtime cost scales
   with the represented bit width. It is compact and fast for dense environments
   with modest highest identifiers. Large gaps or high identifiers create wide
-  integers, and the usable width can be backend-dependent.
+  integers, and the usable width can be backend-dependent. Use preferably with
+  backends supporting unbound integers.
 - `atms_segmented_bitset_environment` stores canonical sparse ordered lists of
   nonempty 16-bit blocks. Storage is linear in the number of occupied blocks;
   union and subset use linear block merges and bounded-width bit operations. It
@@ -108,10 +255,10 @@ sets, bit vectors, or a future BDD implementation.
 Limitations
 -----------
 
-- The library implements an add-only Horn ATMS. It does not provide non-Horn
-  justifications, focus management, node or justification retraction,
-  demand-driven labels, or recursive proof explanations. The `why/3` predicate
-  reports only the direct stored justifications for a node, in insertion order.
+- The library implements a Horn ATMS. It does not provide non-Horn
+  justifications, focus management, demand-driven labels, or recursive proof
+  explanations. The `why/3` predicate reports only the direct stored
+  justifications for a node, in insertion order.
 - Node identifiers are scoped to a state lineage, not globally unique.
   Independently created states and sibling states can contain equal identifiers
   for different nodes. Applications must not pass a node identifier to an
@@ -125,6 +272,20 @@ Limitations
   Adding a nogood must nevertheless map over every node label, while label and
   nogood antichain operations require linear subset scans. These costs can
   dominate updates in systems with many nodes or large antichains.
+- General retraction is not incremental: it recomputes the complete derived
+  state, except for isolated non-assumption node removals and logically
+  redundant rule removals. Its cost can be comparable to constructing the
+  surviving system anew, including potentially exponential label and nogood
+  antichains. Batch removal filters the requested targets before rebuilding at
+  most once; repeated single removals can rebuild repeatedly. Justification
+  batches with multiple targets index complete ground rule terms in a
+  temporary AVL dictionary. Ground membership requires logarithmic key
+  comparisons; nonground terms retain strict-identity linear scans to preserve
+  variable identity. Node batches similarly index the actual removed node IDs.
+  Empty and singleton batches avoid index construction. Even isolated-node
+  removal scans stored rules to check for incident references. Identifier gaps
+  are not compacted and can increase the bitset representation costs described
+  below.
 - The number of maximal environments returned by `interpretations/2` and the
   time required to find them can still be exponential in the number of
   assumptions. When nogoods are present, the implementation explores subsets
@@ -135,13 +296,11 @@ Limitations
   Its arithmetic and storage costs therefore depend on the highest node
   identifier, not just on the number of assumptions. Large or sparse node
   identifiers can be expensive, and the maximum usable identifier is
-  backend-dependent where integer arithmetic is bounded. For example, on GNU
-  Prolog, setting a bit for a sufficiently high node identifier can raise an
-  `evaluation_error(int_overflow)` error. Use the ordered-list or segmented
-  bitset representation when this limit may be reached.
+  backend-dependent where integer arithmetic is bounded. Use the ordered-list
+  or segmented bitset representation when this limit may be reached.
 - Alternative environment representations are trusted to implement canonical
-  conversion, union, subset, and equality consistently. Protocol conformance is
-  checked when creating a state, but these algebraic properties are not
+  conversion, union, subset, and equality consistently. Protocol conformance
+  is checked when creating a state, but these algebraic properties are not
   validated at runtime.
 
 

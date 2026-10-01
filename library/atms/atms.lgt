@@ -25,18 +25,20 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-26,
+		date is 2026-10-01,
 		comment is 'Portable incremental Assumption-based Truth Maintenance System.',
 		remarks is [
 			'Algorithm' - 'A label is an antichain of minimal environments. New label environments are propagated as deltas through a reverse justification index.',
 			'Nogoods' - 'Nogoods are also maintained as an antichain and immediately prune every affected label.',
+			'Retraction' - 'General removals rebuild derived state from surviving assumptions and stored justifications. Batch removals rebuild at most once; isolated non-assumption node removals preserve the other derived indexes.',
 			'Portability' - 'The implementation is purely functional and uses the portable AVL tree dictionary for its state indexes.'
 		],
 		see_also is [atms_environment_protocol, atms_ordered_list_environment, atms_bitset_environment]
 	]).
 
 	:- uses(avltree, [
-		as_list/2 as dictionary_as_list/2, insert/4 as dictionary_insert/4, keys/2 as dictionary_keys/2,
+		as_list/2 as dictionary_as_list/2, delete/4 as dictionary_delete/4,
+		insert/4 as dictionary_insert/4, keys/2 as dictionary_keys/2,
 		lookup/3 as dictionary_lookup/3, map/3 as dictionary_map/3, new/1 as dictionary_new/1,
 		update/4 as dictionary_update/4
 	]).
@@ -93,13 +95,257 @@
 		add_justification(Justification, State0, State1, Added),
 		(	Added == false ->
 			State = State1
-		;	candidates(Antecedents, State1, CandidateEnvironments),
-			update_label(Consequent, CandidateEnvironments, State1, State2, Delta),
-			(	contradiction(Consequent, State2) ->
-				State = State2
-			;	once(propagate([Consequent-Delta], State2, State))
+		;	evaluate_justification(Justification, State1, State)
+		).
+
+	evaluate_justification(justification(Consequent, Antecedents, _), State0, State) :-
+		candidates(Antecedents, State0, CandidateEnvironments),
+		update_label(Consequent, CandidateEnvironments, State0, State1, Delta),
+		(	contradiction(Consequent, State1) ->
+			State = State1
+		;	once(propagate([Consequent-Delta], State1, State))
+		).
+
+	retract_justification(Consequent, Antecedents0, Info, State0, State) :-
+		sort(Antecedents0, Antecedents),
+		State0 = atms_state(_, _, _, _, _, Justifications0, _, _, _),
+		( 	remove_justification(justification(Consequent, Antecedents, Info), Justifications0, Justifications, Removed) ->
+			finish_rule_retraction(State0, Justifications, [Removed], State)
+		;	State = State0
+		).
+
+	retract_justifications([], State, State) :-
+		!.
+	retract_justifications(Targets0, State0, State) :-
+		normalize_justification_targets(Targets0, Targets),
+		target_index(Targets, Index),
+		State0 = atms_state(_, _, _, _, _, Justifications0, _, _, _),
+		remove_matching_justifications(Justifications0, Index, Justifications, Removed),
+		finish_rule_retraction(State0, Justifications, Removed, State).
+
+	normalize_justification_targets([], []).
+	normalize_justification_targets([justification(Consequent, Antecedents0, Info)| Targets0], [justification(Consequent, Antecedents, Info)| Targets]) :-
+		sort(Antecedents0, Antecedents),
+		normalize_justification_targets(Targets0, Targets).
+
+	target_index([], linear([])) :-
+		!.
+	target_index([Target], linear([Target])) :-
+		!.
+	target_index([First, Second| Targets], indexed(Ground, Nonground)) :-
+		dictionary_new(Empty),
+		index_targets([First, Second| Targets], Empty, Ground, Nonground).
+
+	index_targets([], Ground, Ground, []).
+	index_targets([Target| Targets], Ground0, Ground, Nonground) :-
+		(	ground(Target) ->
+			insert_target(Target, Ground0, Ground1),
+			Nonground = Tail
+		;	Ground1 = Ground0,
+			Nonground = [Target| Tail]
+		),
+		index_targets(Targets, Ground1, Ground, Tail).
+
+	insert_target(Target, Index0, Index) :-
+		(	dictionary_lookup(Target, _, Index0) ->
+			Index = Index0
+		;	dictionary_insert(Index0, Target, true, Index)
+		).
+
+	matches_target(Target, linear(Targets)) :-
+		member_term(Target, Targets).
+	matches_target(Target, indexed(Ground, Nonground)) :-
+		(	ground(Target) ->
+			dictionary_lookup(Target, _, Ground)
+		;	member_term(Target, Nonground)
+		).
+
+	remove_matching_justifications(Original, Targets, Remaining, Removed) :-
+		remove_batch_justifications(Original, linear([]), Targets, Remaining, Removed).
+
+	remove_batch_justifications([], _, _, [], []) :-
+		!.
+	remove_batch_justifications(Original, Nodes, Targets, Remaining, Removed) :-
+		Original = [Justification| Justifications],
+		remove_batch_justifications(Justifications, Nodes, Targets, Tail, RemovedTail),
+		(	(matches_target(Justification, Targets); incident_justification(Justification, Nodes)) ->
+			Remaining = Tail,
+			Removed = [Justification| RemovedTail]
+		;	Removed = RemovedTail,
+			retain_justification(Original, Tail, RemovedTail, Remaining)
+		).
+
+	retain_justification(Original, Tail, Removed, Remaining) :-
+		(	Removed == [] ->
+			Remaining = Original
+		;	Original = [Justification| _],
+			Remaining = [Justification| Tail]
+		).
+
+	retract_node(Node, State0, State) :-
+		retract_nodes([Node], State0, State).
+
+	retract_nodes([], State, State) :-
+		!.
+	retract_nodes(Targets0, State0, State) :-
+		sort(Targets0, Targets),
+		remove_node_entries(Targets, State0, State1, Removed),
+		(	Removed == [] ->
+			State = State0
+		;	State1 = atms_state(_, _, _, _, _, Justifications0, _, _, _),
+			target_index(Removed, Index),
+			remove_incident_justifications(Justifications0, Index, Justifications, _),
+			finish_node_retraction(Removed, State0, State1, Justifications, State)
+		).
+
+	retract_batch([], [], State, State) :-
+		!.
+	retract_batch(NodeTargets0, RuleTargets0, State0, State) :-
+		sort(NodeTargets0, NodeTargets),
+		normalize_justification_targets(RuleTargets0, RuleTargets),
+		remove_node_entries(NodeTargets, State0, State1, RemovedNodes),
+		target_index(RemovedNodes, NodeIndex),
+		target_index(RuleTargets, RuleIndex),
+		State1 = atms_state(_, _, _, _, _, Justifications0, _, _, _),
+		remove_batch_justifications(Justifications0, NodeIndex, RuleIndex, Justifications, RemovedRules),
+		(	RemovedNodes == [] ->
+			finish_rule_retraction(State0, Justifications, RemovedRules, State)
+		;	finish_node_retraction(RemovedNodes, State0, State1, Justifications, State)
+		).
+
+	finish_rule_retraction(State0, Justifications, Removed, State) :-
+		State0 = atms_state(Representation, NextId, Nodes, Assumptions, Contradictions, _, Labels, Nogoods, Dependents0),
+		(	Removed == [] ->
+			State = State0
+		;	(	rules_redundant(Removed, Justifications) ->
+				unindex_justifications(Removed, Dependents0, Dependents),
+				State = atms_state(Representation, NextId, Nodes, Assumptions, Contradictions, Justifications, Labels, Nogoods, Dependents)
+			;	rebuild(Representation, NextId, Nodes, Assumptions, Contradictions, Justifications, State)
 			)
 		).
+
+	rules_redundant([justification(Consequent, Antecedents, _)], Survivors) :-
+		!,
+		surviving_signature(Consequent, Antecedents, Survivors).
+	rules_redundant([First, Second| Removed], Survivors) :-
+		dictionary_new(Empty),
+		signature_index(Survivors, Empty, Index),
+		all_signatures_present([First, Second| Removed], Index).
+
+	surviving_signature(Consequent, Antecedents, [justification(Head, Arguments, _)| Rules]) :-
+		(	Consequent == Head, Antecedents == Arguments ->
+			true
+		;	surviving_signature(Consequent, Antecedents, Rules)
+		).
+
+	signature_index([], Index, Index).
+	signature_index([justification(Consequent, Antecedents, _)| Rules], Index0, Index) :-
+		insert_target(signature(Consequent, Antecedents), Index0, Index1),
+		signature_index(Rules, Index1, Index).
+
+	all_signatures_present([], _).
+	all_signatures_present([justification(Consequent, Antecedents, _)| Rules], Index) :-
+		dictionary_lookup(signature(Consequent, Antecedents), _, Index),
+		all_signatures_present(Rules, Index).
+
+	unindex_justifications([], Dependents, Dependents).
+	unindex_justifications([Justification| Justifications], Dependents0, Dependents) :-
+		Justification = justification(_, Antecedents, _),
+		remove_rule_dependencies(Antecedents, Justification, Dependents0, Dependents1),
+		unindex_justifications(Justifications, Dependents1, Dependents).
+
+	remove_rule_dependencies([], _, Dependents, Dependents).
+	remove_rule_dependencies([Node| Nodes], Justification, Dependents0, Dependents) :-
+		dictionary_lookup(Node, Rules0, Dependents0),
+		remove_justification(Justification, Rules0, Rules, _),
+		(	Rules == [] ->
+			dictionary_delete(Dependents0, Node, _, Dependents1)
+		;	dictionary_update(Dependents0, Node, Rules, Dependents1)
+		),
+		remove_rule_dependencies(Nodes, Justification, Dependents1, Dependents).
+
+	remove_node_entries([], State, State, []).
+	remove_node_entries([Node| Targets], State0, State, Removed) :-
+		State0 = atms_state(Representation, NextId, Nodes0, Assumptions0, Contradictions0, Justifications0, Labels, Nogoods, Dependents),
+		( 	dictionary_delete(Nodes0, Node, _, Nodes) ->
+			delete_optional_key(Assumptions0, Node, Assumptions),
+			delete_optional_key(Contradictions0, Node, Contradictions),
+			State1 = atms_state(Representation, NextId, Nodes, Assumptions, Contradictions, Justifications0, Labels, Nogoods, Dependents),
+			Removed = [Node| Tail]
+		;	State1 = State0,
+			Removed = Tail
+		),
+		remove_node_entries(Targets, State1, State, Tail).
+
+	finish_node_retraction(Removed, State0, State1, Justifications, State) :-
+		State0 = atms_state(_, _, _, Assumptions0, _, Justifications0, _, _, _),
+		State1 = atms_state(Representation, NextId, Nodes, Assumptions, Contradictions, _, Labels0, Nogoods, Dependents),
+		(	Assumptions == Assumptions0,
+			Justifications == Justifications0 ->
+			remove_label_entries(Removed, Labels0, Labels),
+			State = atms_state(Representation, NextId, Nodes, Assumptions, Contradictions, Justifications, Labels, Nogoods, Dependents)
+		;	rebuild(Representation, NextId, Nodes, Assumptions, Contradictions, Justifications, State)
+		).
+
+	remove_label_entries([], Labels, Labels).
+	remove_label_entries([Node| Nodes], Labels0, Labels) :-
+		dictionary_delete(Labels0, Node, _, Labels1),
+		remove_label_entries(Nodes, Labels1, Labels).
+
+	delete_optional_key(Dictionary0, Key, Dictionary) :-
+		( 	dictionary_delete(Dictionary0, Key, _, Dictionary1) ->
+			Dictionary = Dictionary1
+		;	Dictionary = Dictionary0
+		).
+
+	remove_incident_justifications(Original, Nodes, Remaining, Removed) :-
+		remove_batch_justifications(Original, Nodes, linear([]), Remaining, Removed).
+
+	incident_justification(_, linear([])) :-
+		!,
+		fail.
+	incident_justification(justification(Consequent, Antecedents, _), Nodes) :-
+		(	matches_target(Consequent, Nodes) ->
+			true
+		;	incident_antecedent(Antecedents, Nodes)
+		).
+
+	incident_antecedent([Antecedent| Antecedents], Nodes) :-
+		(	matches_target(Antecedent, Nodes) ->
+			true
+		;	incident_antecedent(Antecedents, Nodes)
+		).
+
+	remove_justification(Justification, [Head| Tail], Justifications, Removed) :-
+		( 	Justification == Head ->
+			Justifications = Tail,
+			Removed = Head
+		;	Justifications = [Head| Remaining],
+			remove_justification(Justification, Tail, Remaining, Removed)
+		).
+
+	rebuild(Representation, NextId, Nodes, Assumptions, Contradictions, Justifications, State) :-
+		dictionary_map(empty_label, Nodes, Labels),
+		dictionary_new(Dependents),
+		State0 = atms_state(Representation, NextId, Nodes, Assumptions, Contradictions, [], Labels, [], Dependents),
+		dictionary_keys(Assumptions, AssumptionNodes),
+		seed_assumptions(AssumptionNodes, Representation, State0, State1),
+		reverse(Justifications, OrderedJustifications),
+		replay_justifications(OrderedJustifications, State1, State).
+
+	empty_label(Node-_, Node-[]).
+
+	seed_assumptions([], _, State, State).
+	seed_assumptions([Assumption| Assumptions], Representation, State0, State) :-
+		Representation::singleton(Assumption, Environment),
+		update_label(Assumption, [Environment], State0, State1, _),
+		seed_assumptions(Assumptions, Representation, State1, State).
+
+	replay_justifications([], State, State).
+	replay_justifications([Justification| Justifications], State0, State) :-
+		insert_stored_justification(Justification, State0, State1),
+		evaluate_justification(Justification, State1, State2),
+		replay_justifications(Justifications, State2, State).
 
 	node(Node, atms_state(_, _, Nodes, _, _, _, _, _, _)) :-
 		dictionary_key(Node, Nodes).
@@ -162,7 +408,10 @@
 		State = atms_state(_, _, _, _, _, Justifications, _, _, _),
 		member_term(Justification, Justifications),
 		!.
-	add_justification(Justification, atms_state(Representation, NextId, Nodes, Assumptions, Contradictions, Justifications0, Labels, Nogoods, Dependents0), State, true) :-
+	add_justification(Justification, State0, State, true) :-
+		insert_stored_justification(Justification, State0, State).
+
+	insert_stored_justification(Justification, atms_state(Representation, NextId, Nodes, Assumptions, Contradictions, Justifications0, Labels, Nogoods, Dependents0), State) :-
 		Justification = justification(_, Antecedents, _),
 		Justifications = [Justification| Justifications0],
 		index_justification(Antecedents, Justification, Dependents0, Dependents),

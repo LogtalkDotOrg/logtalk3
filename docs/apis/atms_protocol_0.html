@@ -458,7 +458,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-09-26</div>
+<div class="line"><strong>Date:</strong> 2026-10-01</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -478,6 +478,7 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>State: All update predicates take an input ATMS state and return a new state. This permits several ATMS instances without relying on backend-specific mutable databases.</p></li>
+<li><p>Retraction: Node and batch justification removal is idempotent. Single justification removal deletes one matching occurrence. Earlier states and surviving identifiers are preserved.</p></li>
 <li><p>Environments: The public API uses ordered lists of node identifiers. The representation selected when creating a state is internal.</p></li>
 </ul>
 </div></blockquote>
@@ -499,23 +500,28 @@
 <li><p><a class="reference internal" href="#create-assumption-4" id="id7"><code class="docutils literal notranslate"><span class="pre">create_assumption/4</span></code></a></p></li>
 <li><p><a class="reference internal" href="#create-contradiction-4" id="id8"><code class="docutils literal notranslate"><span class="pre">create_contradiction/4</span></code></a></p></li>
 <li><p><a class="reference internal" href="#justify-5" id="id9"><code class="docutils literal notranslate"><span class="pre">justify/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#node-2" id="id10"><code class="docutils literal notranslate"><span class="pre">node/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#assumption-2" id="id11"><code class="docutils literal notranslate"><span class="pre">assumption/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#contradiction-2" id="id12"><code class="docutils literal notranslate"><span class="pre">contradiction/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#nodes-2" id="id13"><code class="docutils literal notranslate"><span class="pre">nodes/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#assumptions-2" id="id14"><code class="docutils literal notranslate"><span class="pre">assumptions/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#justifications-2" id="id15"><code class="docutils literal notranslate"><span class="pre">justifications/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#label-3" id="id16"><code class="docutils literal notranslate"><span class="pre">label/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#in-label-3" id="id17"><code class="docutils literal notranslate"><span class="pre">in_label/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#consistent-2" id="id18"><code class="docutils literal notranslate"><span class="pre">consistent/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#nogood-2" id="id19"><code class="docutils literal notranslate"><span class="pre">nogood/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#interpretations-2" id="id20"><code class="docutils literal notranslate"><span class="pre">interpretations/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#why-3" id="id21"><code class="docutils literal notranslate"><span class="pre">why/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#retract-justification-5" id="id10"><code class="docutils literal notranslate"><span class="pre">retract_justification/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#retract-justifications-3" id="id11"><code class="docutils literal notranslate"><span class="pre">retract_justifications/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#retract-node-3" id="id12"><code class="docutils literal notranslate"><span class="pre">retract_node/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#retract-nodes-3" id="id13"><code class="docutils literal notranslate"><span class="pre">retract_nodes/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#retract-batch-4" id="id14"><code class="docutils literal notranslate"><span class="pre">retract_batch/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#node-2" id="id15"><code class="docutils literal notranslate"><span class="pre">node/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#assumption-2" id="id16"><code class="docutils literal notranslate"><span class="pre">assumption/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#contradiction-2" id="id17"><code class="docutils literal notranslate"><span class="pre">contradiction/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nodes-2" id="id18"><code class="docutils literal notranslate"><span class="pre">nodes/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#assumptions-2" id="id19"><code class="docutils literal notranslate"><span class="pre">assumptions/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#justifications-2" id="id20"><code class="docutils literal notranslate"><span class="pre">justifications/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#label-3" id="id21"><code class="docutils literal notranslate"><span class="pre">label/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#in-label-3" id="id22"><code class="docutils literal notranslate"><span class="pre">in_label/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#consistent-2" id="id23"><code class="docutils literal notranslate"><span class="pre">consistent/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nogood-2" id="id24"><code class="docutils literal notranslate"><span class="pre">nogood/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#interpretations-2" id="id25"><code class="docutils literal notranslate"><span class="pre">interpretations/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#why-3" id="id26"><code class="docutils literal notranslate"><span class="pre">why/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id22">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id23">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id24">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id27">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id28">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id29">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -688,8 +694,165 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="retract-justification-5">
+<span id="atms-protocol-0-retract-justification-5"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">retract_justification/5</span></code></a><a class="headerlink" href="#retract-justification-5" title="Link to this heading"></a></h3>
+<p>Removes one occurrence of the specified Horn justification, rebuilding labels and nogoods when needed. Returns the input state unchanged if the justification is absent.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">retract_justification(Consequent,Antecedents,Info,State,NewState)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">retract_justification(+atms_node,+list(atms_node),+term,+atms_state,-atms_state)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Identity: Antecedents are sorted and deduplicated as in <code class="docutils literal notranslate"><span class="pre">justify/5</span></code>. The complete justification, including Info, is matched using term identity rather than unification.</p></li>
+<li><p>Occurrences: If variable aliasing has made distinct stored rules identical, removes the most recently added matching occurrence. Use <code class="docutils literal notranslate"><span class="pre">retract_justifications/3</span></code> to remove all matches.</p></li>
+<li><p>Redundant rules: If another rule with the same consequent and canonical antecedents remains, preserves labels and nogoods and removes only the stored rule and its reverse dependency entries. Info is ignored only for this redundancy check.</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="retract-justifications-3">
+<span id="atms-protocol-0-retract-justifications-3"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">retract_justifications/3</span></code></a><a class="headerlink" href="#retract-justifications-3" title="Link to this heading"></a></h3>
+<p>Removes all occurrences matching the requested justification terms, rebuilding derived state at most once. Returns the input state unchanged if none match.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">retract_justifications(Justifications,State,NewState)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">retract_justifications(+list(term),+atms_state,-atms_state)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Targets: Each target is a <code class="docutils literal notranslate"><span class="pre">justification(Consequent,</span> <span class="pre">Antecedents,</span> <span class="pre">Info)</span></code> term. Antecedents are sorted and deduplicated; the full term is matched using term identity.</p></li>
+<li><p>Idempotence: Missing targets and duplicate requests have no additional effect. All matching stored occurrences are removed, including those made identical by variable aliasing.</p></li>
+<li><p>Redundant rules: Preserves labels and nogoods if every removed consequent and canonical antecedent signature still has a surviving rule, regardless of Info. Reverse dependencies retain the surviving occurrence counts.</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="retract-node-3">
+<span id="atms-protocol-0-retract-node-3"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">retract_node/3</span></code></a><a class="headerlink" href="#retract-node-3" title="Link to this heading"></a></h3>
+<p>Removes an ordinary, assumption, or contradiction node and all justifications mentioning it, rebuilding derived state when needed. Returns the input state unchanged if the node is absent.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">retract_node(Node,State,NewState)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">retract_node(+atms_node,+atms_state,-atms_state)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Dependents: Other nodes are retained even when they lose all support.</p></li>
+<li><p>Isolated nodes: Removing a non-assumption node that appears in no justification deletes its label entry without rebuilding other labels, nogoods, or dependency indexes.</p></li>
+<li><p>Identifiers: Surviving node identifiers are preserved and removed identifiers are not reused in descendant states.</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="retract-nodes-3">
+<span id="atms-protocol-0-retract-nodes-3"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">retract_nodes/3</span></code></a><a class="headerlink" href="#retract-nodes-3" title="Link to this heading"></a></h3>
+<p>Removes the requested nodes and every justification mentioning any of them, rebuilding derived state at most once. Returns the input state unchanged if no nodes are removed.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">retract_nodes(Nodes,State,NewState)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">retract_nodes(+list(atms_node),+atms_state,-atms_state)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Targets: Missing nodes and duplicate requests are ignored. All other nodes are retained, even when they lose all support.</p></li>
+<li><p>Isolated nodes: If no assumption or incident justification is removed, only node, role, and label entries are deleted; other derived indexes are preserved.</p></li>
+<li><p>Identifiers: Surviving identifiers and the next node identifier are preserved.</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="retract-batch-4">
+<span id="atms-protocol-0-retract-batch-4"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">retract_batch/4</span></code></a><a class="headerlink" href="#retract-batch-4" title="Link to this heading"></a></h3>
+<p>Removes requested nodes, their incident justifications, and all exact matches for requested justification terms in one batch, rebuilding derived state at most once.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">retract_batch(Nodes,Justifications,State,NewState)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">retract_batch(+list(atms_node),+list(term),+atms_state,-atms_state)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Targets: Uses the same canonical antecedents and complete term identity as <code class="docutils literal notranslate"><span class="pre">retract_justifications/3</span></code>. Missing targets and duplicate or overlapping requests are ignored.</p></li>
+<li><p>Occurrences: Every matching stored occurrence is removed, including occurrences made identical by variable aliasing.</p></li>
+<li><p>Identifiers: Surviving nodes, identifiers, and rule insertion order are preserved. Other nodes remain even when they lose support.</p></li>
+<li><p>No changes: Returns the input state unchanged if no targets match. Isolated non-assumption node removal preserves the other derived indexes.</p></li>
+<li><p>Redundant rules: If no nodes are removed, uses the same redundant-rule fast path as <code class="docutils literal notranslate"><span class="pre">retract_justifications/3</span></code>. Effective node removal affecting assumptions or rules rebuilds once.</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+</section>
 <section id="node-2">
-<span id="atms-protocol-0-node-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">node/2</span></code></a><a class="headerlink" href="#node-2" title="Link to this heading"></a></h3>
+<span id="atms-protocol-0-node-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">node/2</span></code></a><a class="headerlink" href="#node-2" title="Link to this heading"></a></h3>
 <p>Enumerates or tests the nodes in the given state.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -710,7 +873,7 @@
 <hr class="docutils" />
 </section>
 <section id="assumption-2">
-<span id="atms-protocol-0-assumption-2"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">assumption/2</span></code></a><a class="headerlink" href="#assumption-2" title="Link to this heading"></a></h3>
+<span id="atms-protocol-0-assumption-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">assumption/2</span></code></a><a class="headerlink" href="#assumption-2" title="Link to this heading"></a></h3>
 <p>Enumerates or tests the assumption nodes in the given state.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -731,7 +894,7 @@
 <hr class="docutils" />
 </section>
 <section id="contradiction-2">
-<span id="atms-protocol-0-contradiction-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">contradiction/2</span></code></a><a class="headerlink" href="#contradiction-2" title="Link to this heading"></a></h3>
+<span id="atms-protocol-0-contradiction-2"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">contradiction/2</span></code></a><a class="headerlink" href="#contradiction-2" title="Link to this heading"></a></h3>
 <p>Enumerates or tests the contradiction nodes in the given state.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -752,7 +915,7 @@
 <hr class="docutils" />
 </section>
 <section id="nodes-2">
-<span id="atms-protocol-0-nodes-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nodes/2</span></code></a><a class="headerlink" href="#nodes-2" title="Link to this heading"></a></h3>
+<span id="atms-protocol-0-nodes-2"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nodes/2</span></code></a><a class="headerlink" href="#nodes-2" title="Link to this heading"></a></h3>
 <p>Returns the node-datum pairs in node identifier order.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -773,7 +936,7 @@
 <hr class="docutils" />
 </section>
 <section id="assumptions-2">
-<span id="atms-protocol-0-assumptions-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">assumptions/2</span></code></a><a class="headerlink" href="#assumptions-2" title="Link to this heading"></a></h3>
+<span id="atms-protocol-0-assumptions-2"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">assumptions/2</span></code></a><a class="headerlink" href="#assumptions-2" title="Link to this heading"></a></h3>
 <p>Returns the assumption nodes in node identifier order.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -794,7 +957,7 @@
 <hr class="docutils" />
 </section>
 <section id="justifications-2">
-<span id="atms-protocol-0-justifications-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">justifications/2</span></code></a><a class="headerlink" href="#justifications-2" title="Link to this heading"></a></h3>
+<span id="atms-protocol-0-justifications-2"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">justifications/2</span></code></a><a class="headerlink" href="#justifications-2" title="Link to this heading"></a></h3>
 <p>Returns all justifications in insertion order.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -815,7 +978,7 @@
 <hr class="docutils" />
 </section>
 <section id="label-3">
-<span id="atms-protocol-0-label-3"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">label/3</span></code></a><a class="headerlink" href="#label-3" title="Link to this heading"></a></h3>
+<span id="atms-protocol-0-label-3"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">label/3</span></code></a><a class="headerlink" href="#label-3" title="Link to this heading"></a></h3>
 <p>Returns the minimal consistent environments supporting the given node. Fails if the node is unknown.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -836,7 +999,7 @@
 <hr class="docutils" />
 </section>
 <section id="in-label-3">
-<span id="atms-protocol-0-in-label-3"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">in_label/3</span></code></a><a class="headerlink" href="#in-label-3" title="Link to this heading"></a></h3>
+<span id="atms-protocol-0-in-label-3"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">in_label/3</span></code></a><a class="headerlink" href="#in-label-3" title="Link to this heading"></a></h3>
 <p>True iff the given environment is a member of the node label.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -857,7 +1020,7 @@
 <hr class="docutils" />
 </section>
 <section id="consistent-2">
-<span id="atms-protocol-0-consistent-2"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">consistent/2</span></code></a><a class="headerlink" href="#consistent-2" title="Link to this heading"></a></h3>
+<span id="atms-protocol-0-consistent-2"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">consistent/2</span></code></a><a class="headerlink" href="#consistent-2" title="Link to this heading"></a></h3>
 <p>True iff the given environment contains no recorded nogood.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -878,7 +1041,7 @@
 <hr class="docutils" />
 </section>
 <section id="nogood-2">
-<span id="atms-protocol-0-nogood-2"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nogood/2</span></code></a><a class="headerlink" href="#nogood-2" title="Link to this heading"></a></h3>
+<span id="atms-protocol-0-nogood-2"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nogood/2</span></code></a><a class="headerlink" href="#nogood-2" title="Link to this heading"></a></h3>
 <p>Enumerates or tests the minimal nogood environments in the given state.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -899,7 +1062,7 @@
 <hr class="docutils" />
 </section>
 <section id="interpretations-2">
-<span id="atms-protocol-0-interpretations-2"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">interpretations/2</span></code></a><a class="headerlink" href="#interpretations-2" title="Link to this heading"></a></h3>
+<span id="atms-protocol-0-interpretations-2"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">interpretations/2</span></code></a><a class="headerlink" href="#interpretations-2" title="Link to this heading"></a></h3>
 <p>Returns the maximal consistent environments over all assumptions.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -920,7 +1083,7 @@
 <hr class="docutils" />
 </section>
 <section id="why-3">
-<span id="atms-protocol-0-why-3"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">why/3</span></code></a><a class="headerlink" href="#why-3" title="Link to this heading"></a></h3>
+<span id="atms-protocol-0-why-3"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">why/3</span></code></a><a class="headerlink" href="#why-3" title="Link to this heading"></a></h3>
 <p>Returns the direct justifications for the given node in insertion order.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

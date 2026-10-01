@@ -86,6 +86,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api-and-state">API and state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#retraction">Retraction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#environment-representations">Environment representations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
@@ -422,7 +423,7 @@
   <section id="atms">
 <span id="library-atms"></span><h1><code class="docutils literal notranslate"><span class="pre">atms</span></code><a class="headerlink" href="#atms" title="Link to this heading"></a></h1>
 <p>This library implements the Horn fragment of Johan de Kleer’s
-Assumption-based Truth Maintenance System (ATMS). A system maintains
+Assumption-based Truth Maintenance System (ATMS). The system maintains
 assumption nodes, ordinary nodes, Horn justifications, minimal labels,
 and minimal nogoods. A label is an antichain of the minimal consistent
 environments supporting a node.</p>
@@ -445,6 +446,24 @@ link in a web browser.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(atms(tester)).
 </pre></div>
 </div>
+<p>The test suite runs the same deterministic regressions and bounded
+QuickCheck edit histories for all three environment representations.
+Generated histories contain 20 edits and are limited to eight live nodes
+and four assumptions. After every edit, an independent ground model is
+reconstructed using public creation and justification predicates and
+compared with the current state, including labels, roles, nogoods,
+interpretations, explanations, rule order, and the next node identifier.
+Removed IDs are represented by ordinary padding nodes only in the
+reconstruction. Previous states are also checked again.</p>
+<p>QuickCheck test declarations reset the generator to its reproducible
+default seed in <code class="docutils literal notranslate"><span class="pre">setup/1</span></code> and restore the previous seed in
+<code class="docutils literal notranslate"><span class="pre">cleanup/1</span></code>; the test suite verifies that repeating the seed
+reproduces the histories. QuickCheck failures report the failing history
+and sequence/test seeds. A failure can be reproduced using
+<code class="docutils literal notranslate"><span class="pre">lgtunit::quick_check/3</span></code> with its reported opaque seed and the
+template <code class="docutils literal notranslate"><span class="pre">tests(Representation)&lt;&lt;edit_sequence(+list(byte,20))</span></code>.
+Nonground <code class="docutils literal notranslate"><span class="pre">Info</span></code> identity and aliasing remain covered by deterministic
+tests, without copying variables into the generated oracle.</p>
 </section>
 <section id="api-and-state">
 <h2>API and state<a class="headerlink" href="#api-and-state" title="Link to this heading"></a></h2>
@@ -471,6 +490,132 @@ no nogoods, it returns the environment containing all assumptions
 directly. When nogoods require subset search, it is intended for small
 sets of assumptions.</p>
 </section>
+<section id="retraction">
+<h2>Retraction<a class="headerlink" href="#retraction" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">retract_justification(Consequent,</span> <span class="pre">Antecedents,</span> <span class="pre">Info,</span> <span class="pre">State,</span> <span class="pre">NewState)</span></code>
+removes one matching Horn justification. Antecedents are sorted and
+deduplicated as in <code class="docutils literal notranslate"><span class="pre">justify/5</span></code>. Matching uses strict term identity
+(<code class="docutils literal notranslate"><span class="pre">==/2</span></code>) for the complete justification, including <code class="docutils literal notranslate"><span class="pre">Info</span></code>, rather
+than unification. Rules with different <code class="docutils literal notranslate"><span class="pre">Info</span></code> terms are distinct even
+when they have the same consequent and antecedents. For nonground
+<code class="docutils literal notranslate"><span class="pre">Info</span></code> terms, matching requires the same variables.</p>
+<p><code class="docutils literal notranslate"><span class="pre">retract_justifications(Justifications,</span> <span class="pre">State,</span> <span class="pre">NewState)</span></code> removes all
+stored occurrences matching any target in the list. Each target is a
+<code class="docutils literal notranslate"><span class="pre">justification(Consequent,</span> <span class="pre">Antecedents,</span> <span class="pre">Info)</span></code> term, with the same
+antecedent normalization and identity matching as single-rule removal.
+Duplicate requests and missing targets have no additional effect. The
+surviving rules retain their order, and the batch rebuilds derived state
+only once if any rule is removed.</p>
+<p>Rules that were distinct at insertion can become identical if variables
+in their <code class="docutils literal notranslate"><span class="pre">Info</span></code> terms are later unified. Rebuilding preserves every
+surviving occurrence and its original variables. Single-rule removal
+deletes the most recently added matching occurrence; repeated single
+calls can therefore remove further aliased occurrences. Batch removal
+deletes all matching occurrences and is idempotent even in this case.
+Public <code class="docutils literal notranslate"><span class="pre">justify/5</span></code> still suppresses rules that are identical when they
+are added.</p>
+<p><code class="docutils literal notranslate"><span class="pre">retract_node(Node,</span> <span class="pre">State,</span> <span class="pre">NewState)</span></code> removes an ordinary, assumption,
+or contradiction node and every justification that mentions it as
+consequent or antecedent. It does not delete downstream nodes: they
+remain queryable, with empty labels if they lose all support. Removing
+an assumption also removes it from the environments returned by labels,
+nogoods, and interpretations.</p>
+<p><code class="docutils literal notranslate"><span class="pre">retract_nodes(Nodes,</span> <span class="pre">State,</span> <span class="pre">NewState)</span></code> removes all requested nodes
+and every justification mentioning any of them. Duplicate node requests
+and missing nodes are ignored. Like batch rule removal, it rebuilds at
+most once.</p>
+<p><code class="docutils literal notranslate"><span class="pre">retract_batch(Nodes,</span> <span class="pre">Justifications,</span> <span class="pre">State,</span> <span class="pre">NewState)</span></code> combines node
+and justification removal in one operation. It removes every incident
+rule and every exact requested rule match in a single traversal, then
+rebuilds at most once. Duplicate and overlapping requests do not remove
+an occurrence twice; missing targets are ignored. It follows the same
+identity and identifier rules as the separate batch operations:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> atms<span class="o">::</span>new(<span class="nv">S0</span>),
+     atms<span class="o">::</span>create_assumption(sensor_ok, <span class="nv">S0</span>, <span class="nv">A</span>, <span class="nv">S1</span>),
+     atms<span class="o">::</span>create_assumption(backup_ok, <span class="nv">S1</span>, <span class="nv">B</span>, <span class="nv">S2</span>),
+     atms<span class="o">::</span>create_node(alarm, <span class="nv">S2</span>, <span class="nv">Alarm</span>, <span class="nv">S3</span>),
+     atms<span class="o">::</span>justify(<span class="nv">Alarm</span>, [<span class="nv">A</span>], first, <span class="nv">S3</span>, <span class="nv">S4</span>),
+     atms<span class="o">::</span>justify(<span class="nv">Alarm</span>, [<span class="nv">B</span>], second, <span class="nv">S4</span>, <span class="nv">S5</span>),
+     atms<span class="o">::</span>retract_batch([<span class="nv">B</span>], [justification(<span class="nv">Alarm</span>, [<span class="nv">A</span>], first)], <span class="nv">S5</span>, <span class="nv">S6</span>),
+     atms<span class="o">::</span>label(<span class="nv">Alarm</span>, <span class="nv">S6</span>, []),
+     atms<span class="o">::</span>assumptions(<span class="nv">S6</span>, [<span class="nv">A</span>]).
+</pre></div>
+</div>
+<p>All removal operations are deterministic for their documented input
+modes. Node and batch removal are idempotent; single-rule removal is
+idempotent when there is at most one matching stored occurrence. If no
+target is present, the input state is returned unchanged. A
+justification referring to an unknown or already removed node is also
+absent.</p>
+<p>Empty batches return immediately, without scanning stored rules. Rule
+filters reuse unchanged list suffixes and preserve the original list
+when no rule is removed, including any variables in surviving
+justification information. Existing input states remain usable and are
+never modified:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> atms<span class="o">::</span>new(<span class="nv">S0</span>),
+     atms<span class="o">::</span>create_assumption(sensor_ok, <span class="nv">S0</span>, <span class="nv">A</span>, <span class="nv">S1</span>),
+     atms<span class="o">::</span>create_node(alarm, <span class="nv">S1</span>, <span class="nv">Alarm</span>, <span class="nv">S2</span>),
+     atms<span class="o">::</span>justify(<span class="nv">Alarm</span>, [<span class="nv">A</span>], sensor_rule, <span class="nv">S2</span>, <span class="nv">S3</span>),
+     atms<span class="o">::</span>retract_justification(<span class="nv">Alarm</span>, [<span class="nv">A</span>], sensor_rule, <span class="nv">S3</span>, <span class="nv">S4</span>),
+     atms<span class="o">::</span>label(<span class="nv">Alarm</span>, <span class="nv">S4</span>, []),
+     atms<span class="o">::</span>retract_node(<span class="nv">A</span>, <span class="nv">S3</span>, <span class="nv">S5</span>),
+     atms<span class="o">::</span>nodes(<span class="nv">S5</span>, [<span class="nv">Alarm</span><span class="o">-</span>alarm]),
+     atms<span class="o">::</span>label(<span class="nv">Alarm</span>, <span class="nv">S5</span>, []),
+     atms<span class="o">::</span>label(<span class="nv">Alarm</span>, <span class="nv">S3</span>, [[<span class="nv">A</span>]]).
+</pre></div>
+</div>
+<p>The following query shows both batch operations on separate descendants
+of the same input state:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> atms<span class="o">::</span>new(<span class="nv">S0</span>),
+     atms<span class="o">::</span>create_assumption(sensor_ok, <span class="nv">S0</span>, <span class="nv">A</span>, <span class="nv">S1</span>),
+     atms<span class="o">::</span>create_assumption(backup_ok, <span class="nv">S1</span>, <span class="nv">B</span>, <span class="nv">S2</span>),
+     atms<span class="o">::</span>create_node(alarm, <span class="nv">S2</span>, <span class="nv">Alarm</span>, <span class="nv">S3</span>),
+     atms<span class="o">::</span>justify(<span class="nv">Alarm</span>, [<span class="nv">A</span>], first, <span class="nv">S3</span>, <span class="nv">S4</span>),
+     atms<span class="o">::</span>justify(<span class="nv">Alarm</span>, [<span class="nv">B</span>], second, <span class="nv">S4</span>, <span class="nv">S5</span>),
+     atms<span class="o">::</span>retract_justifications([
+         justification(<span class="nv">Alarm</span>, [<span class="nv">A</span>], first),
+         justification(<span class="nv">Alarm</span>, [<span class="nv">B</span>], second)
+     ], <span class="nv">S5</span>, <span class="nv">S6</span>),
+     atms<span class="o">::</span>label(<span class="nv">Alarm</span>, <span class="nv">S6</span>, []),
+     atms<span class="o">::</span>retract_nodes([<span class="nv">A</span>, <span class="nv">B</span>, <span class="nv">A</span>], <span class="nv">S5</span>, <span class="nv">S7</span>),
+     atms<span class="o">::</span>nodes(<span class="nv">S7</span>, [<span class="nv">Alarm</span><span class="o">-</span>alarm]),
+     atms<span class="o">::</span>label(<span class="nv">Alarm</span>, <span class="nv">S7</span>, []).
+</pre></div>
+</div>
+<p>Node identifiers and the selected environment representation are
+preserved. Removed identifiers are not reused in descendant states; new
+nodes continue from the previous next identifier. <code class="docutils literal notranslate"><span class="pre">clear/2</span></code> still
+creates an empty state with identifiers starting over. Surviving
+justifications retain their insertion order in <code class="docutils literal notranslate"><span class="pre">justifications/2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">why/3</span></code>.</p>
+<p>General retractions rebuild all labels, nogoods, and reverse dependency
+indexes from surviving assumptions and stored justifications. Replay
+uses already normalized rules without repeating public validation or
+duplicate checks. This restores previously subsumed supports and
+environments pruned by nogoods, while preventing unsupported cycles from
+retaining stale labels. Nogoods disappear only when no surviving
+contradiction derivation supports them; retracting a contradiction node
+or justification can therefore restore consistency and labels throughout
+the system. Additions remain incremental, and new nodes and
+justifications can be added normally after retraction.</p>
+<p>Removing isolated ordinary or contradiction nodes takes a fast path: if
+no assumption or incident justification is removed, only node, role, and
+label entries are deleted. Other labels, nogoods, and dependency indexes
+are retained. Both antecedent and consequent references are checked,
+including unconditional rules. Assumption removals and any node removal
+affecting a rule use the rebuild fallback. This optimization applies to
+both single-node and batch removals.</p>
+<p>Rule-only removal also takes a fast path when every removed rule has a
+surviving rule with the same consequent and canonical antecedents.
+<code class="docutils literal notranslate"><span class="pre">Info</span></code> is ignored for this logical redundancy check, but never for
+target matching. Labels and nogoods are retained; stored rules and
+reverse dependency lists lose exactly the removed occurrences. This
+includes unconditional and contradiction rules and rules made identical
+by variable aliasing. Removing the final occurrence of any signature
+rebuilds derived state, even when a different signature currently
+produces the same label. Mixed batches use this fast path only when no
+node is actually removed.</p>
+</section>
 <section id="environment-representations">
 <h2>Environment representations<a class="headerlink" href="#environment-representations" title="Link to this heading"></a></h2>
 <p>The public API always accepts and returns environments as ordered lists
@@ -487,7 +632,8 @@ integer bitsets. Union and subset each use one integer operation whose
 runtime cost scales with the represented bit width. It is compact and
 fast for dense environments with modest highest identifiers. Large
 gaps or high identifiers create wide integers, and the usable width
-can be backend-dependent.</p></li>
+can be backend-dependent. Use preferably with backends supporting
+unbound integers.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">atms_segmented_bitset_environment</span></code> stores canonical sparse ordered
 lists of nonempty 16-bit blocks. Storage is linear in the number of
 occupied blocks; union and subset use linear block merges and
@@ -505,11 +651,10 @@ future BDD implementation.</p>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>The library implements an add-only Horn ATMS. It does not provide
-non-Horn justifications, focus management, node or justification
-retraction, demand-driven labels, or recursive proof explanations. The
-<code class="docutils literal notranslate"><span class="pre">why/3</span></code> predicate reports only the direct stored justifications for
-a node, in insertion order.</p></li>
+<li><p>The library implements a Horn ATMS. It does not provide non-Horn
+justifications, focus management, demand-driven labels, or recursive
+proof explanations. The <code class="docutils literal notranslate"><span class="pre">why/3</span></code> predicate reports only the direct
+stored justifications for a node, in insertion order.</p></li>
 <li><p>Node identifiers are scoped to a state lineage, not globally unique.
 Independently created states and sibling states can contain equal
 identifiers for different nodes. Applications must not pass a node
@@ -526,6 +671,21 @@ indexes. Adding a nogood must nevertheless map over every node label,
 while label and nogood antichain operations require linear subset
 scans. These costs can dominate updates in systems with many nodes or
 large antichains.</p></li>
+<li><p>General retraction is not incremental: it recomputes the complete
+derived state, except for isolated non-assumption node removals and
+logically redundant rule removals. Its cost can be comparable to
+constructing the surviving system anew, including potentially
+exponential label and nogood antichains. Batch removal filters the
+requested targets before rebuilding at most once; repeated single
+removals can rebuild repeatedly. Justification batches with multiple
+targets index complete ground rule terms in a temporary AVL
+dictionary. Ground membership requires logarithmic key comparisons;
+nonground terms retain strict-identity linear scans to preserve
+variable identity. Node batches similarly index the actual removed
+node IDs. Empty and singleton batches avoid index construction. Even
+isolated-node removal scans stored rules to check for incident
+references. Identifier gaps are not compacted and can increase the
+bitset representation costs described below.</p></li>
 <li><p>The number of maximal environments returned by <code class="docutils literal notranslate"><span class="pre">interpretations/2</span></code>
 and the time required to find them can still be exponential in the
 number of assumptions. When nogoods are present, the implementation
@@ -537,10 +697,8 @@ index. Its arithmetic and storage costs therefore depend on the
 highest node identifier, not just on the number of assumptions. Large
 or sparse node identifiers can be expensive, and the maximum usable
 identifier is backend-dependent where integer arithmetic is bounded.
-For example, on GNU Prolog, setting a bit for a sufficiently high node
-identifier can raise an <code class="docutils literal notranslate"><span class="pre">evaluation_error(int_overflow)</span></code> error. Use
-the ordered-list or segmented bitset representation when this limit
-may be reached.</p></li>
+Use the ordered-list or segmented bitset representation when this
+limit may be reached.</p></li>
 <li><p>Alternative environment representations are trusted to implement
 canonical conversion, union, subset, and equality consistently.
 Protocol conformance is checked when creating a state, but these
