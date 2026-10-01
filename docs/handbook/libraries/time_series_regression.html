@@ -88,7 +88,6 @@
 <li class="toctree-l2"><a class="reference internal" href="base64.html"><code class="docutils literal notranslate"><span class="pre">base64</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="base85.html"><code class="docutils literal notranslate"><span class="pre">base85</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="baseline_forecasting.html"><code class="docutils literal notranslate"><span class="pre">baseline_forecasting</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="baseline_forecasting.html"><code class="docutils literal notranslate"><span class="pre">baseline_forecasting</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="basic_types.html"><code class="docutils literal notranslate"><span class="pre">basic_types</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="bayesian_ridge_regression.html"><code class="docutils literal notranslate"><span class="pre">bayesian_ridge_regression</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="block_ciphers.html"><code class="docutils literal notranslate"><span class="pre">block_ciphers</span></code></a></li>
@@ -548,7 +547,7 @@ numerical rank of the design matrix.</p>
 <h2>Missing observations<a class="headerlink" href="#missing-observations" title="Link to this heading"></a></h2>
 <p>A missing observation is represented, following common practice, as an
 unbound variable: <code class="docutils literal notranslate"><span class="pre">observation(Index,</span> <span class="pre">_)</span></code> in a dataset object, or an
-unbound <code class="docutils literal notranslate"><span class="pre">Observation</span></code> argument to <code class="docutils literal notranslate"><span class="pre">update/3-4</span></code>. A series may freely
+unbound <code class="docutils literal notranslate"><span class="pre">Observation</span></code> argument to <code class="docutils literal notranslate"><span class="pre">update/3</span></code>. A series may freely
 mix numbers and missing observations; only its length and index sequence
 need to be well-formed (checked as usual by <code class="docutils literal notranslate"><span class="pre">dataset_series/2</span></code> and
 <code class="docutils literal notranslate"><span class="pre">check_series_length/3</span></code>).</p>
@@ -571,12 +570,12 @@ missing; the missing values are simply carried into the learned
 forecaster’s state. <code class="docutils literal notranslate"><span class="pre">forecast/3</span></code> and <code class="docutils literal notranslate"><span class="pre">forecast_interval/5</span></code> then
 raise a <code class="docutils literal notranslate"><span class="pre">domain_error(missing_observation,</span> <span class="pre">Forecaster)</span></code> error for a
 positive horizon (a zero horizon still trivially succeeds), until
-<code class="docutils literal notranslate"><span class="pre">update/3-4</span></code> supplies the missing values.</p>
+<code class="docutils literal notranslate"><span class="pre">update/3</span></code> supplies the missing values.</p>
 </section>
 <section id="immutable-online-updates">
 <h2>Immutable online updates<a class="headerlink" href="#immutable-online-updates" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">update/3-4</span></code> predicates return a new forecaster after appending
-one observation to the series while keeping the fitted intercept and
+<p>The <code class="docutils literal notranslate"><span class="pre">update/3</span></code> predicate returns a new forecaster after appending one
+observation to the series while keeping the fitted intercept and
 coefficients unchanged. The original forecaster is not modified. The new
 <code class="docutils literal notranslate"><span class="pre">Observation</span></code> may be left an unbound variable to represent a missing
 observation (see “Missing observations” above).</p>
@@ -590,9 +589,7 @@ original fit. Otherwise, no prediction error is available and only
 <code class="docutils literal notranslate"><span class="pre">Observation</span></code> is a variable, <code class="docutils literal notranslate"><span class="pre">missing_count/1</span></code> are updated. In both
 cases <code class="docutils literal notranslate"><span class="pre">training_series_length/1</span></code> and <code class="docutils literal notranslate"><span class="pre">update_count/1</span></code> are
 incremented, and the observation, known or not, is pushed into the
-window (and used to update the levels). No update options are currently
-defined, so the <code class="docutils literal notranslate"><span class="pre">Options</span></code> argument of <code class="docutils literal notranslate"><span class="pre">update/4</span></code> must be an empty
-list.</p>
+window (and used to update the levels).</p>
 </section>
 <section id="forecaster-representation">
 <h2>Forecaster representation<a class="headerlink" href="#forecaster-representation" title="Link to this heading"></a></h2>

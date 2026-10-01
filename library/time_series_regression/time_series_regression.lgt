@@ -25,32 +25,15 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-29,
+		date is 2026-10-01,
 		comment is 'Autoregressive (AR) time series forecaster fitted by least squares, with optional intercept, optional differencing (ARI models), automatic order selection using information criteria, and support for missing observations represented as unbound variables.',
 		see_also is [forecaster_protocol, time_series_dataset_protocol]
-	]).
-
-	:- public(update/4).
-	:- mode(update(+compound, @number, -compound, +list(compound)), one_or_error).
-	:- info(update/4, [
-		comment is 'Returns a new forecaster after appending one observation to the series, keeping the fitted coefficients unchanged. The original forecaster is unchanged. ``Observation`` may be left an unbound variable to represent a missing (not yet known) observation; in that case, and whenever the resulting one-step prediction cannot be computed because the forecaster state is not fully known (see ``learn/3``), no prediction error is available and the training error diagnostics are left unchanged, only ``training_series_length/1``, ``update_count/1``, and, when ``Observation`` is a variable, ``missing_count/1`` are updated. Otherwise, the one-step prediction error of the new observation is added to the training error diagnostics (and to the retained residuals when residual retention was enabled during learning); the information criteria diagnostics keep describing the original fit. No update options are currently defined.',
-		argnames is ['Forecaster', 'Observation', 'UpdatedForecaster', 'Options'],
-		exceptions is [
-			'``Forecaster`` is a variable' - instantiation_error,
-			'``Forecaster`` is neither a variable nor a valid forecaster' - domain_error(forecaster, 'Forecaster'),
-			'``Observation`` is neither a variable nor a number' - type_error(number, 'Observation'),
-			'``Options`` is a variable or a partial list' - instantiation_error,
-			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
-			'An option is a variable' - instantiation_error,
-			'An option is neither a variable nor a compound term' - type_error(compound, 'Option'),
-			'An option is a compound term but is not a valid update option' - domain_error(option, 'Option')
-		]
 	]).
 
 	:- public(update/3).
 	:- mode(update(+compound, @number, -compound), one_or_error).
 	:- info(update/3, [
-		comment is 'Returns a new forecaster after appending one observation using default update options. ``Observation`` may be left an unbound variable to represent a missing observation; see ``update/4``.',
+		comment is 'Returns a new forecaster after appending one observation. ``Observation`` may be left an unbound variable to represent a missing observation; see ``update/4``.',
 		argnames is ['Forecaster', 'Observation', 'UpdatedForecaster'],
 		exceptions is [
 			'``Forecaster`` is a variable' - instantiation_error,
@@ -549,10 +532,9 @@
 
 	% online updates
 
-	update(Forecaster, Observation, UpdatedForecaster, Options) :-
+	update(Forecaster, Observation, UpdatedForecaster) :-
 		check_forecaster(Forecaster),
 		check_observation(Observation),
-		check_update_options(Options),
 		Forecaster = time_series_regression_forecaster(Model, ar_state(Window, Levels), Parameters, Diagnostics),
 		Parameters = ar_parameters(InterceptValue, Coefficients),
 		update_levels(Levels, Observation, UpdatedLevels, DifferencedObservation),
@@ -567,9 +549,6 @@
 		updated_diagnostics(Diagnostics, Outcome, Observation, UpdatedDiagnostics),
 		UpdatedForecaster = time_series_regression_forecaster(Model, ar_state(UpdatedWindow, UpdatedLevels), Parameters, UpdatedDiagnostics).
 
-	update(Forecaster, Observation, UpdatedForecaster) :-
-		update(Forecaster, Observation, UpdatedForecaster, []).
-
 	check_observation(Observation) :-
 		(	var(Observation) ->
 			true
@@ -577,21 +556,6 @@
 			true
 		;	type_error(number, Observation)
 		).
-
-	check_update_options(Options) :-
-		context(Context),
-		check(list, Options, Context),
-		check_update_options_(Options).
-
-	check_update_options_([]).
-	check_update_options_([Option| Options]) :-
-		(	var(Option) ->
-			instantiation_error
-		;	\+ compound(Option) ->
-			type_error(compound, Option)
-		;	domain_error(option, Option)
-		),
-		check_update_options_(Options).
 
 	update_levels([], DifferencedObservation, [], DifferencedObservation).
 	update_levels([Last| Lasts], Value, [Value| UpdatedLasts], DifferencedObservation) :-

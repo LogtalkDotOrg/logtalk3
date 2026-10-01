@@ -310,22 +310,6 @@
 		knn_forecasting::learn(periodic_series, Forecaster, [order(3), k(1)]),
 		knn_forecasting::update(Forecaster, foo, _).
 
-	test(knn_update_options_not_a_list, error(type_error(list, foo))) :-
-		knn_forecasting::learn(periodic_series, Forecaster, [order(3), k(1)]),
-		knn_forecasting::update(Forecaster, 1.0, _, foo).
-
-	test(knn_update_options_partial_list, error(instantiation_error)) :-
-		knn_forecasting::learn(periodic_series, Forecaster, [order(3), k(1)]),
-		knn_forecasting::update(Forecaster, 1.0, _, [_| _]).
-
-	test(knn_update_option_not_compound, error(type_error(compound, foo))) :-
-		knn_forecasting::learn(periodic_series, Forecaster, [order(3), k(1)]),
-		knn_forecasting::update(Forecaster, 1.0, _, [foo]).
-
-	test(knn_update_invalid_option, error(domain_error(option, foo(1)))) :-
-		knn_forecasting::learn(periodic_series, Forecaster, [order(3), k(1)]),
-		knn_forecasting::update(Forecaster, 1.0, _, [foo(1)]).
-
 	% forecaster protocol predicates
 
 	test(knn_valid_forecaster, deterministic) :-

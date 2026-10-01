@@ -88,7 +88,6 @@
 <li class="toctree-l2"><a class="reference internal" href="base64.html"><code class="docutils literal notranslate"><span class="pre">base64</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="base85.html"><code class="docutils literal notranslate"><span class="pre">base85</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="baseline_forecasting.html"><code class="docutils literal notranslate"><span class="pre">baseline_forecasting</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="baseline_forecasting.html"><code class="docutils literal notranslate"><span class="pre">baseline_forecasting</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="basic_types.html"><code class="docutils literal notranslate"><span class="pre">basic_types</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="bayesian_ridge_regression.html"><code class="docutils literal notranslate"><span class="pre">bayesian_ridge_regression</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="block_ciphers.html"><code class="docutils literal notranslate"><span class="pre">block_ciphers</span></code></a></li>
@@ -559,7 +558,7 @@ very long training series; see “Limitations” below.</p>
 <p>A missing observation is represented, following the same convention as
 <code class="docutils literal notranslate"><span class="pre">time_series_regression</span></code>, as an unbound variable:
 <code class="docutils literal notranslate"><span class="pre">observation(Index,</span> <span class="pre">_)</span></code> in a dataset object, or an unbound
-<code class="docutils literal notranslate"><span class="pre">Observation</span></code> argument to <code class="docutils literal notranslate"><span class="pre">update/3-4</span></code>. A series may freely mix
+<code class="docutils literal notranslate"><span class="pre">Observation</span></code> argument to <code class="docutils literal notranslate"><span class="pre">update/3</span></code>. A series may freely mix
 numbers and missing observations; only its length and index sequence
 need to be well-formed (checked as usual by <code class="docutils literal notranslate"><span class="pre">dataset_series/2</span></code> and
 <code class="docutils literal notranslate"><span class="pre">check_series_length/3</span></code>).</p>
@@ -579,7 +578,7 @@ seed the forecaster’s window or, under differencing, its levels) are
 missing; the missing values are simply carried into the learned
 forecaster’s state. <code class="docutils literal notranslate"><span class="pre">forecast/3</span></code> then raises a
 <code class="docutils literal notranslate"><span class="pre">domain_error(missing_observation,</span> <span class="pre">Forecaster)</span></code> error for a positive
-horizon (a zero horizon still trivially succeeds), until <code class="docutils literal notranslate"><span class="pre">update/3-4</span></code>
+horizon (a zero horizon still trivially succeeds), until <code class="docutils literal notranslate"><span class="pre">update/3</span></code>
 supplies the missing values. Note that a missing window entry is only
 resolved once it has been pushed out of the window by <code class="docutils literal notranslate"><span class="pre">Order</span></code> further
 updates (as for <code class="docutils literal notranslate"><span class="pre">time_series_regression</span></code>), not by the next update
@@ -587,8 +586,8 @@ alone unless <code class="docutils literal notranslate"><span class="pre">Order<
 </section>
 <section id="immutable-online-updates">
 <h2>Immutable online updates<a class="headerlink" href="#immutable-online-updates" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">update/3-4</span></code> predicates return a new forecaster after appending
-one observation to the series. Unlike <code class="docutils literal notranslate"><span class="pre">time_series_regression</span></code>, the
+<p>The <code class="docutils literal notranslate"><span class="pre">update/3</span></code> predicate returns a new forecaster after appending one
+observation to the series. Unlike <code class="docutils literal notranslate"><span class="pre">time_series_regression</span></code>, the
 memorized rows (and so the set of possible analogs) are kept unchanged;
 only the forecasting window (and, under differencing, the levels) are
 advanced. This keeps the cost of an update, and of every subsequent
@@ -607,9 +606,7 @@ available and only <code class="docutils literal notranslate"><span class="pre">
 and, when <code class="docutils literal notranslate"><span class="pre">Observation</span></code> is a variable, <code class="docutils literal notranslate"><span class="pre">missing_count/1</span></code> are
 updated. In both cases <code class="docutils literal notranslate"><span class="pre">training_series_length/1</span></code> and
 <code class="docutils literal notranslate"><span class="pre">update_count/1</span></code> are incremented, and the observation, known or not,
-is pushed into the window (and used to update the levels). No update
-options are currently defined, so the <code class="docutils literal notranslate"><span class="pre">Options</span></code> argument of
-<code class="docutils literal notranslate"><span class="pre">update/4</span></code> must be an empty list.</p>
+is pushed into the window (and used to update the levels).</p>
 </section>
 <section id="forecaster-representation">
 <h2>Forecaster representation<a class="headerlink" href="#forecaster-representation" title="Link to this heading"></a></h2>
@@ -634,7 +631,7 @@ forecasters plus <code class="docutils literal notranslate"><span class="pre">or
 <code class="docutils literal notranslate"><span class="pre">mean_absolute_error/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">update_count/1</span></code> terms.
 <code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code> is initially the number of memorized rows (the
 leave-one-out sample size) and grows by one with each successful, fully
-known <code class="docutils literal notranslate"><span class="pre">update/3-4</span></code> call.</p>
+known <code class="docutils literal notranslate"><span class="pre">update/3</span></code> call.</p>
 </section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
@@ -659,11 +656,10 @@ compare every row against every other row; both are <code class="docutils litera
 forecast step and <code class="docutils literal notranslate"><span class="pre">O(n^2)</span></code> at <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> time, respectively, which
 may be slow for very long training series.</p></li>
 <li><p>Prediction intervals are not provided.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">update/3-4</span></code> never grows the memorized set of analogs, so the
-model’s pool of historical patterns is fixed at <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> time;
-observations supplied only through <code class="docutils literal notranslate"><span class="pre">update/3-4</span></code> extend the
-forecasting window but are never themselves available as future
-analogs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">update/3</span></code> never grows the memorized set of analogs, so the model’s
+pool of historical patterns is fixed at <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> time; observations
+supplied only through <code class="docutils literal notranslate"><span class="pre">update/3</span></code> extend the forecasting window but
+are never themselves available as future analogs.</p></li>
 </ul>
 </section>
 </section>

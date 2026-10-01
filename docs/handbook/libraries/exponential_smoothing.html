@@ -88,7 +88,6 @@
 <li class="toctree-l2"><a class="reference internal" href="base64.html"><code class="docutils literal notranslate"><span class="pre">base64</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="base85.html"><code class="docutils literal notranslate"><span class="pre">base85</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="baseline_forecasting.html"><code class="docutils literal notranslate"><span class="pre">baseline_forecasting</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="baseline_forecasting.html"><code class="docutils literal notranslate"><span class="pre">baseline_forecasting</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="basic_types.html"><code class="docutils literal notranslate"><span class="pre">basic_types</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="bayesian_ridge_regression.html"><code class="docutils literal notranslate"><span class="pre">bayesian_ridge_regression</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="block_ciphers.html"><code class="docutils literal notranslate"><span class="pre">block_ciphers</span></code></a></li>
@@ -644,13 +643,12 @@ known observation must remain to score after initialization.</p>
 </section>
 <section id="immutable-online-updates">
 <h2>Immutable online updates<a class="headerlink" href="#immutable-online-updates" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">update/3-4</span></code> predicates apply one new observation to a learned
+<p>The <code class="docutils literal notranslate"><span class="pre">update/3</span></code> predicate applies one new observation to a learned
 forecaster and return a new forecaster term; the input forecaster is
 never modified. Updates reuse the fitted parameters and the exact
 per-observation equations used by batch fitting, including transformed
 and damped states and rotation of the current seasonal queue. Parameters
-are not refitted. <code class="docutils literal notranslate"><span class="pre">update/3</span></code> delegates to <code class="docutils literal notranslate"><span class="pre">update/4</span></code> with an empty
-options list; no update options are currently defined.</p>
+are not refitted.</p>
 <p>The original effective training options remain unchanged. Each update
 increments <code class="docutils literal notranslate"><span class="pre">training_series_length/1</span></code> and <code class="docutils literal notranslate"><span class="pre">update_count/1</span></code>. Known
 observations also increment <code class="docutils literal notranslate"><span class="pre">observed_count/1</span></code> and <code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code>,

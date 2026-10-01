@@ -155,7 +155,7 @@ Missing observations
 
 A missing observation is represented, following common practice, as an
 unbound variable: `observation(Index, _)` in a dataset object, or an
-unbound `Observation` argument to `update/3-4`. A series may freely mix
+unbound `Observation` argument to `update/3`. A series may freely mix
 numbers and missing observations; only its length and index sequence
 need to be well-formed (checked as usual by `dataset_series/2` and
 `check_series_length/3`).
@@ -178,14 +178,14 @@ seed the forecaster's window or, under differencing, its levels) are
 missing; the missing values are simply carried into the learned
 forecaster's state. `forecast/3` and `forecast_interval/5` then raise a
 `domain_error(missing_observation, Forecaster)` error for a positive
-horizon (a zero horizon still trivially succeeds), until `update/3-4`
+horizon (a zero horizon still trivially succeeds), until `update/3`
 supplies the missing values.
 
 
 Immutable online updates
 ------------------------
 
-The `update/3-4` predicates return a new forecaster after appending one
+The `update/3` predicate returns a new forecaster after appending one
 observation to the series while keeping the fitted intercept and
 coefficients unchanged. The original forecaster is not modified. The new
 `Observation` may be left an unbound variable to represent a missing
@@ -200,8 +200,7 @@ available and only `training_series_length/1`, `update_count/1`, and,
 when `Observation` is a variable, `missing_count/1` are updated. In both
 cases `training_series_length/1` and `update_count/1` are incremented,
 and the observation, known or not, is pushed into the window (and used to
-update the levels). No update options are currently defined, so the
-`Options` argument of `update/4` must be an empty list.
+update the levels).
 
 
 Forecaster representation

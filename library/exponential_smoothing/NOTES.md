@@ -248,13 +248,11 @@ observation must remain to score after initialization.
 Immutable online updates
 ------------------------
 
-The `update/3-4` predicates apply one new observation to a learned forecaster
+The `update/3` predicate applies one new observation to a learned forecaster
 and return a new forecaster term; the input forecaster is never modified.
 Updates reuse the fitted parameters and the exact per-observation equations
 used by batch fitting, including transformed and damped states and rotation of
-the current seasonal queue. Parameters are not refitted. `update/3` delegates
-to `update/4` with an empty options list; no update options are currently
-defined.
+the current seasonal queue. Parameters are not refitted.
 
 The original effective training options remain unchanged. Each update
 increments `training_series_length/1` and `update_count/1`. Known observations

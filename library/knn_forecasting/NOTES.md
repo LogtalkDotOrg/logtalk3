@@ -166,7 +166,7 @@ Missing observations
 A missing observation is represented, following the same convention as
 `time_series_regression`, as an unbound variable: `observation(Index,
 _)` in a dataset object, or an unbound `Observation` argument to
-`update/3-4`. A series may freely mix numbers and missing observations;
+`update/3`. A series may freely mix numbers and missing observations;
 only its length and index sequence need to be well-formed (checked as
 usual by `dataset_series/2` and `check_series_length/3`).
 
@@ -187,7 +187,7 @@ seed the forecaster's window or, under differencing, its levels) are
 missing; the missing values are simply carried into the learned
 forecaster's state. `forecast/3` then raises a
 `domain_error(missing_observation, Forecaster)` error for a positive
-horizon (a zero horizon still trivially succeeds), until `update/3-4`
+horizon (a zero horizon still trivially succeeds), until `update/3`
 supplies the missing values. Note that a missing window entry is only
 resolved once it has been pushed out of the window by `Order` further
 updates (as for `time_series_regression`), not by the next update alone
@@ -197,7 +197,7 @@ unless `Order` is `1`.
 Immutable online updates
 ------------------------
 
-The `update/3-4` predicates return a new forecaster after appending one
+The `update/3` predicate returns a new forecaster after appending one
 observation to the series. Unlike `time_series_regression`, the
 memorized rows (and so the set of possible analogs) are kept unchanged;
 only the forecasting window (and, under differencing, the levels) are
@@ -218,8 +218,7 @@ available and only `training_series_length/1`, `update_count/1`, and,
 when `Observation` is a variable, `missing_count/1` are updated. In both
 cases `training_series_length/1` and `update_count/1` are incremented,
 and the observation, known or not, is pushed into the window (and used
-to update the levels). No update options are currently defined, so the
-`Options` argument of `update/4` must be an empty list.
+to update the levels).
 
 
 Forecaster representation
@@ -244,7 +243,7 @@ and `options/1` terms common to all forecasters plus `order/1`,
 `sum_squared_error/1`, `mean_squared_error/1`, `sum_absolute_error/1`,
 `mean_absolute_error/1`, and `update_count/1` terms. `scored_count/1` is
 initially the number of memorized rows (the leave-one-out sample size)
-and grows by one with each successful, fully known `update/3-4` call.
+and grows by one with each successful, fully known `update/3` call.
 
 
 Limitations
@@ -270,7 +269,7 @@ Limitations
   forecast step and `O(n^2)` at `learn/3` time, respectively, which may
   be slow for very long training series.
 - Prediction intervals are not provided.
-- `update/3-4` never grows the memorized set of analogs, so the model's
+- `update/3` never grows the memorized set of analogs, so the model's
   pool of historical patterns is fixed at `learn/3` time; observations
-  supplied only through `update/3-4` extend the forecasting window but
+  supplied only through `update/3` extend the forecasting window but
   are never themselves available as future analogs.

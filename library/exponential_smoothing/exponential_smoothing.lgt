@@ -25,9 +25,25 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-28,
+		date is 2026-10-01,
 		comment is 'Simple, Holt linear-trend, and additive or multiplicative Holt-Winters exponential smoothing forecaster.',
 		see_also is [forecaster_protocol, time_series_dataset_protocol]
+	]).
+
+	:- public(update/3).
+	:- mode(update(+compound, +term, -compound), one_or_error).
+	:- info(update/3, [
+		comment is 'Returns a new forecaster after applying one observation.',
+		argnames is ['Forecaster', 'Observation', 'UpdatedForecaster'],
+		exceptions is [
+			'``Forecaster`` is a variable' - instantiation_error,
+			'``Forecaster`` is neither a variable nor a valid forecaster' - domain_error(forecaster, 'Forecaster'),
+			'``Observation`` is a variable' - instantiation_error,
+			'``Observation`` is neither the configured missing marker under ``skip_update`` nor a number' - type_error(number, 'Observation'),
+			'``Observation`` is a number but is not finite' - domain_error(finite_number, 'Observation'),
+			'``Observation`` is incompatible with the learned transformation' - domain_error(positive_transformation_series, 'Observation'),
+			'``Observation`` is incompatible with a multiplicative model' - domain_error(positive_multiplicative_series, 'Observation')
+		]
 	]).
 
 	:- uses(format, [
@@ -192,30 +208,8 @@
 	retained_residuals_diagnostic(true, Residuals, Residuals).
 	retained_residuals_diagnostic(false, _Residuals, none).
 
-	:- public(update/4).
-	:- mode(update(+compound, +term, -compound, +list(compound)), one_or_error).
-	:- info(update/4, [
-		comment is 'Returns a new forecaster after applying one observation using the learned parameters and the same state transition used by batch fitting. The original forecaster is unchanged. Online residuals are appended only when residual retention was enabled during learning. No update options are currently defined.',
-		argnames is ['Forecaster', 'Observation', 'UpdatedForecaster', 'Options'],
-		exceptions is [
-			'``Forecaster`` is a variable' - instantiation_error,
-			'``Forecaster`` is neither a variable nor a valid forecaster' - domain_error(forecaster, 'Forecaster'),
-			'``Observation`` is a variable' - instantiation_error,
-			'``Observation`` is neither the configured missing marker under ``skip_update`` nor a number' - type_error(number, 'Observation'),
-			'``Observation`` is a number but is not finite' - domain_error(finite_number, 'Observation'),
-			'``Observation`` is incompatible with the learned transformation' - domain_error(positive_transformation_series, 'Observation'),
-			'``Observation`` is incompatible with a multiplicative model' - domain_error(positive_multiplicative_series, 'Observation'),
-			'``Options`` is a variable or a partial list' - instantiation_error,
-			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
-			'An option is a variable' - instantiation_error,
-			'An option is neither a variable nor a compound term' - type_error(compound, 'Option'),
-			'An option is a compound term but is not a valid update option' - domain_error(option, 'Option')
-		]
-	]).
-
-	update(Forecaster, Observation, UpdatedForecaster, Options) :-
+	update(Forecaster, Observation, UpdatedForecaster) :-
 		check_forecaster(Forecaster),
-		check_update_options(Options),
 		Forecaster = exponential_smoothing_forecaster(Method, State, Parameters, Diagnostics),
 		memberchk(options(TrainingOptions), Diagnostics),
 		memberchk(missing_value(MissingMarker), TrainingOptions),
@@ -227,43 +221,6 @@
 		wrap_state(Transformation, UpdatedInnerState, MeanSquaredError, UpdatedState),
 		UpdatedForecaster = exponential_smoothing_forecaster(Method, UpdatedState, Parameters, UpdatedDiagnostics),
 		!.
-
-	:- public(update/3).
-	:- mode(update(+compound, +term, -compound), one_or_error).
-	:- info(update/3, [
-		comment is 'Returns a new forecaster after applying one observation using default update options.',
-		argnames is ['Forecaster', 'Observation', 'UpdatedForecaster'],
-		exceptions is [
-			'``Forecaster`` is a variable' - instantiation_error,
-			'``Forecaster`` is neither a variable nor a valid forecaster' - domain_error(forecaster, 'Forecaster'),
-			'``Observation`` is a variable' - instantiation_error,
-			'``Observation`` is neither the configured missing marker under ``skip_update`` nor a number' - type_error(number, 'Observation'),
-			'``Observation`` is a number but is not finite' - domain_error(finite_number, 'Observation'),
-			'``Observation`` is incompatible with the learned transformation' - domain_error(positive_transformation_series, 'Observation'),
-			'``Observation`` is incompatible with a multiplicative model' - domain_error(positive_multiplicative_series, 'Observation')
-		]
-	]).
-
-	update(Forecaster, Observation, UpdatedForecaster) :-
-		update(Forecaster, Observation, UpdatedForecaster, []).
-
-	check_update_options(Options) :-
-		check_update_options(Options, Options).
-
-	check_update_options(Options, _) :-
-		var(Options),
-		instantiation_error.
-	check_update_options([Option| _Options], _Options0) :-
-		(	var(Option) ->
-			instantiation_error
-		;	\+ compound(Option) ->
-			type_error(compound, Option)
-		;	domain_error(option, Option)
-		).
-	check_update_options([], _) :-
-		!.
-	check_update_options(_, Options0) :-
-		type_error(list, Options0).
 
 	prepare_update_observation(Method, State, Observation, MissingMarker, MissingPolicy, UpdateObservation, Missing) :-
 		check_update_observation(Observation, MissingMarker, MissingPolicy, Missing),

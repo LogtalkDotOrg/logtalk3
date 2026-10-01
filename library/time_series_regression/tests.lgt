@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-29,
+		date is 2026-10-01,
 		comment is 'Tests for the "time_series_regression" library. Reference values for the noisy AR(2) dataset were computed independently using NumPy least squares.'
 	]).
 
@@ -399,7 +399,7 @@
 
 	test(ts_regression_update_diagnostics, true) :-
 		time_series_regression::learn(ar2_series, Forecaster, [order(2)]),
-		time_series_regression::update(Forecaster, 1.33203125, Updated, []),
+		time_series_regression::update(Forecaster, 1.33203125, Updated),
 		time_series_regression::diagnostic(Updated, training_series_length(11)),
 		time_series_regression::diagnostic(Updated, scored_count(9)),
 		time_series_regression::diagnostic(Updated, update_count(1)),
@@ -449,22 +449,6 @@
 	test(ts_regression_update_non_numeric_observation, error(type_error(number, foo))) :-
 		time_series_regression::learn(ar1_series, Forecaster),
 		time_series_regression::update(Forecaster, foo, _).
-
-	test(ts_regression_update_options_not_a_list, error(type_error(list, foo))) :-
-		time_series_regression::learn(ar1_series, Forecaster),
-		time_series_regression::update(Forecaster, 1.0, _, foo).
-
-	test(ts_regression_update_options_partial_list, error(instantiation_error)) :-
-		time_series_regression::learn(ar1_series, Forecaster),
-		time_series_regression::update(Forecaster, 1.0, _, [_| _]).
-
-	test(ts_regression_update_option_not_compound, error(type_error(compound, foo))) :-
-		time_series_regression::learn(ar1_series, Forecaster),
-		time_series_regression::update(Forecaster, 1.0, _, [foo]).
-
-	test(ts_regression_update_invalid_option, error(domain_error(option, foo(1)))) :-
-		time_series_regression::learn(ar1_series, Forecaster),
-		time_series_regression::update(Forecaster, 1.0, _, [foo(1)]).
 
 	% prediction intervals
 

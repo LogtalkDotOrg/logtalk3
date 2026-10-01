@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-28,
+		date is 2026-10-01,
 		comment is 'Unit tests for the "exponential_smoothing" library.'
 	]).
 
@@ -457,7 +457,7 @@
 		Options = [model(holt_damped), alpha(0.2), beta(0.1), phi(0.9), missing_policy(skip_update)],
 		exponential_smoothing::learn(online_missing_prefix, PrefixForecaster, Options),
 		exponential_smoothing::update(PrefixForecaster, missing, MissingForecaster),
-		exponential_smoothing::update(MissingForecaster, 12, OnlineForecaster, []),
+		exponential_smoothing::update(MissingForecaster, 12, OnlineForecaster),
 		exponential_smoothing::learn(online_missing_full, BatchForecaster, Options),
 		assert_online_batch_equivalent(holt_damped, OnlineForecaster, BatchForecaster),
 		exponential_smoothing::diagnostics(OnlineForecaster, Diagnostics),
@@ -516,22 +516,6 @@
 	test(exponential_smoothing_update_invalid_multiplicative_observation, error(domain_error(positive_multiplicative_series, 0))) :-
 		exponential_smoothing::learn(seasonal_multiplicative, Forecaster, [model(holt_winters_multiplicative), alpha(0.2), beta(0.1), gamma(0.1)]),
 		exponential_smoothing::update(Forecaster, 0, _UpdatedForecaster).
-
-	test(exponential_smoothing_update_variable_options, error(instantiation_error)) :-
-		exponential_smoothing::learn(constant_series, Forecaster, [alpha(0.5)]),
-		exponential_smoothing::update(Forecaster, 5, _UpdatedForecaster, _Options).
-
-	test(exponential_smoothing_update_non_list_options, error(type_error(list, bad))) :-
-		exponential_smoothing::learn(constant_series, Forecaster, [alpha(0.5)]),
-		exponential_smoothing::update(Forecaster, 5, _UpdatedForecaster, bad).
-
-	test(exponential_smoothing_update_non_compound_option, error(type_error(compound, bad))) :-
-		exponential_smoothing::learn(constant_series, Forecaster, [alpha(0.5)]),
-		exponential_smoothing::update(Forecaster, 5, _UpdatedForecaster, [bad]).
-
-	test(exponential_smoothing_update_unknown_option, error(domain_error(option, unknown(true)))) :-
-		exponential_smoothing::learn(constant_series, Forecaster, [alpha(0.5)]),
-		exponential_smoothing::update(Forecaster, 5, _UpdatedForecaster, [unknown(true)]).
 
 	% validation and error cases
 

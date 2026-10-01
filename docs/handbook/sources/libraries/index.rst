@@ -46,7 +46,6 @@ directory in the ``NOTES.md`` file.
    base64
    base85
    baseline_forecasting
-   baseline_forecasting
    basic_types
    bayesian_ridge_regression
    block_ciphers
