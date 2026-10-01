@@ -1,0 +1,350 @@
+.. index:: single: baseline_forecasting
+.. _baseline_forecasting/0:
+
+.. rst-class:: right
+
+**object**
+
+``baseline_forecasting``
+========================
+
+Naive, seasonal naive, mean, and drift time series forecasters with missing observations and immutable online updates.
+
+| **Availability:** 
+|    ``logtalk_load(baseline_forecasting(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-01
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`forecaster_protocol <forecaster_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`forecaster_common <forecaster_common/0>`
+| **Uses:**
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`forecaster_protocol/0::diagnostic/2`  :ref:`forecaster_protocol/0::diagnostics/2`  :ref:`forecaster_protocol/0::forecaster_options/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`forecaster_protocol/0::valid_forecaster/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: update/3
+.. _baseline_forecasting/0::update/3:
+
+``update/3``
+^^^^^^^^^^^^
+
+Returns a new forecaster after appending a numeric or missing (unbound) observation. The original forecaster is not modified.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``update(Forecaster,Observation,UpdatedForecaster)``
+| **Mode and number of proofs:**
+|    ``update(+compound,@term,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Forecaster`` is a variable:
+|        ``instantiation_error``
+|    ``Forecaster`` is not a valid baseline forecaster:
+|        ``domain_error(forecaster,Forecaster)``
+|    ``Observation`` is neither a variable nor a number:
+|        ``type_error(number,Observation)``
+|    Updating the numeric sum raises an arithmetic evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: learn/3
+.. _baseline_forecasting/0::learn/3:
+
+``learn/3``
+^^^^^^^^^^^
+
+Learns a baseline forecaster. The default model is naive; seasonal naive uses an explicit frequency option ahead of dataset metadata. Unbound observations remain missing and retain their time positions.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Forecaster,Options)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` is a variable or partial list, or an option is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An option is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An option is invalid:
+|        ``domain_error(option,Option)``
+|    A frequency option is supplied for a non-seasonal model:
+|        ``domain_error(baseline_forecasting_option,Option)``
+|    The seasonal model has no explicit or dataset frequency:
+|        ``domain_error(seasonal_frequency,Dataset)``
+|    The dataset frequency or declared length is a variable:
+|        ``instantiation_error``
+|    The dataset frequency is neither a variable nor an integer:
+|        ``type_error(integer,Frequency)``
+|    The dataset frequency is not positive:
+|        ``domain_error(positive_integer,Frequency)``
+|    The declared length is neither a variable nor an integer:
+|        ``type_error(integer,DeclaredLength)``
+|    The declared length is not positive:
+|        ``domain_error(positive_integer,DeclaredLength)``
+|    The dataset has no observations:
+|        ``domain_error(non_empty_series,Dataset)``
+|    The observation indices are not a gap-free 1-based sequence:
+|        ``domain_error(series_index_sequence,Dataset)``
+|    The declared and observed lengths differ:
+|        ``consistency_error(series_length,DeclaredLength,ObservedLength)``
+|    An observation is neither a variable nor a number:
+|        ``type_error(number,Observation)``
+|    The series is shorter than the model minimum:
+|        ``domain_error(series_length,Dataset)``
+|    All observations are missing:
+|        ``domain_error(insufficient_observations,Dataset)``
+|    Numeric summation raises an arithmetic evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: learn/2
+.. _baseline_forecasting/0::learn/2:
+
+``learn/2``
+^^^^^^^^^^^
+
+Learns a naive baseline forecaster using default options. Equivalent to learn/3 with an empty options list, propagating its dataset validation and numeric summation exceptions.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Forecaster)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The declared series length is a variable:
+|        ``instantiation_error``
+|    The declared length is neither a variable nor an integer:
+|        ``type_error(integer,DeclaredLength)``
+|    The declared length is not positive:
+|        ``domain_error(positive_integer,DeclaredLength)``
+|    The dataset has no observations:
+|        ``domain_error(non_empty_series,Dataset)``
+|    The observation indices are not a gap-free 1-based sequence:
+|        ``domain_error(series_index_sequence,Dataset)``
+|    The declared and observed lengths differ:
+|        ``consistency_error(series_length,DeclaredLength,ObservedLength)``
+|    An observation is neither a variable nor a number:
+|        ``type_error(number,Observation)``
+|    All observations are missing:
+|        ``domain_error(insufficient_observations,Dataset)``
+|    Numeric summation raises an arithmetic evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: forecast/3
+.. _baseline_forecasting/0::forecast/3:
+
+``forecast/3``
+^^^^^^^^^^^^^^
+
+Forecasts the next horizon values. A zero horizon returns an empty list even with missing state. A positive horizon requires only the values actually used by the selected model.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``forecast(Forecaster,Horizon,Forecasts)``
+| **Mode and number of proofs:**
+|    ``forecast(+compound,+non_negative_integer,-list(number))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Forecaster`` or ``Horizon`` is a variable:
+|        ``instantiation_error``
+|    ``Forecaster`` is not a valid baseline forecaster:
+|        ``domain_error(forecaster,Forecaster)``
+|    ``Horizon`` is neither a variable nor an integer:
+|        ``type_error(integer,Horizon)``
+|    ``Horizon`` is negative:
+|        ``domain_error(non_negative_integer,Horizon)``
+|    A requested forecast needs a missing observation:
+|        ``domain_error(missing_observation,Forecaster)``
+|    Forecast arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: check_forecaster/1
+.. _baseline_forecasting/0::check_forecaster/1:
+
+``check_forecaster/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Checks model-specific state, effective options, and diagnostic count consistency without instantiating missing observations.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_forecaster(Forecaster)``
+| **Mode and number of proofs:**
+|    ``check_forecaster(@compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Forecaster`` is a variable:
+|        ``instantiation_error``
+|    ``Forecaster`` is not a valid baseline forecaster:
+|        ``domain_error(forecaster,Forecaster)``
+|    Checking retained numeric observations raises an arithmetic evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: export_to_clauses/4
+.. _baseline_forecasting/0::export_to_clauses/4:
+
+``export_to_clauses/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Exports the validated forecaster as a single fact with the specified functor.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``export_to_clauses(Dataset,Forecaster,Functor,Clauses)``
+| **Mode and number of proofs:**
+|    ``export_to_clauses(+object_identifier,+compound,+atom,-list(clause))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Forecaster`` or ``Functor`` is a variable:
+|        ``instantiation_error``
+|    ``Forecaster`` is not a valid baseline forecaster:
+|        ``domain_error(forecaster,Forecaster)``
+|    ``Functor`` is neither a variable nor an atom:
+|        ``type_error(atom,Functor)``
+|    Checking retained numeric observations raises an arithmetic evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: print_forecaster/1
+.. _baseline_forecasting/0::print_forecaster/1:
+
+``print_forecaster/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Prints the validated method, state, and diagnostics to the current output stream.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_forecaster(Forecaster)``
+| **Mode and number of proofs:**
+|    ``print_forecaster(+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Forecaster`` is a variable:
+|        ``instantiation_error``
+|    ``Forecaster`` is not a valid baseline forecaster:
+|        ``domain_error(forecaster,Forecaster)``
+|    Checking retained numeric observations raises an arithmetic evaluation error:
+|        ``evaluation_error(Error)``
+|    The current stream cannot be written to:
+|        ``permission_error(output,stream,Stream)``
+
+
+------------
+
+.. index:: export_to_file/4
+.. _baseline_forecasting/0::export_to_file/4:
+
+``export_to_file/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Exports a validated forecaster as a single fact, with dataset and diagnostics comments. The shared export implementation closes the output stream if writing raises an exception.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``export_to_file(Dataset,Forecaster,Functor,File)``
+| **Mode and number of proofs:**
+|    ``export_to_file(+object_identifier,+compound,+atom,+atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Forecaster``, ``Functor``, ``File``, or the declared dataset length is a variable:
+|        ``instantiation_error``
+|    ``Forecaster`` is not a valid baseline forecaster:
+|        ``domain_error(forecaster,Forecaster)``
+|    ``Functor`` is neither a variable nor an atom:
+|        ``type_error(atom,Functor)``
+|    ``File`` is not a valid file specification:
+|        ``type_error(source_sink,File)``
+|    The output location does not exist:
+|        ``existence_error(source_sink,File)``
+|    The output file cannot be opened:
+|        ``permission_error(open,source_sink,File)``
+|    The output stream cannot be written to:
+|        ``permission_error(output,stream,Stream)``
+|    The dataset has no observations:
+|        ``domain_error(non_empty_series,Dataset)``
+|    The observation indices are not a gap-free 1-based sequence:
+|        ``domain_error(series_index_sequence,Dataset)``
+|    The declared length is neither a variable nor an integer:
+|        ``type_error(integer,DeclaredLength)``
+|    The declared length is not positive:
+|        ``domain_error(positive_integer,DeclaredLength)``
+|    The declared and observed lengths differ:
+|        ``consistency_error(series_length,DeclaredLength,ObservedLength)``
+|    Checking retained numeric observations raises an arithmetic evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

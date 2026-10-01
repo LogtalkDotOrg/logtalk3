@@ -243,6 +243,58 @@ Checks that a time series has at least the given minimum number of observations.
 
 ------------
 
+.. index:: check_observation/1
+.. _forecaster_common/0::check_observation/1:
+
+``check_observation/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that an observation is a number or an unbound variable representing a missing observation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_observation(Observation)``
+| **Mode and number of proofs:**
+|    ``check_observation(@term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Observation`` is neither a variable nor a number:
+|        ``type_error(number,Observation)``
+
+
+------------
+
+.. index:: series_observation_summary/4
+.. _forecaster_common/0::series_observation_summary/4:
+
+``series_observation_summary/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the elapsed length, numeric observation count, and numeric sum of a series. Unbound observations are counted in the length only and are not instantiated. An empty list has zero length, count, and sum.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``series_observation_summary(Series,Length,ObservedCount,Sum)``
+| **Mode and number of proofs:**
+|    ``series_observation_summary(+list,-non_negative_integer,-non_negative_integer,-number)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Series`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Series`` is neither a variable nor a list:
+|        ``type_error(list,Series)``
+|    An observation is neither a variable nor a number:
+|        ``type_error(number,Observation)``
+|    Numeric summation raises an arithmetic evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
 .. index:: base_forecaster_diagnostics/5
 .. _forecaster_common/0::base_forecaster_diagnostics/5:
 
@@ -296,6 +348,25 @@ True when diagnostics metadata contains the expected model term and records the 
 |    ``valid_forecaster_metadata(Model,Options,Diagnostics)``
 | **Mode and number of proofs:**
 |    ``valid_forecaster_metadata(+atom,+list(compound),+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: replace_diagnostic/4
+.. _forecaster_common/0::replace_diagnostic/4:
+
+``replace_diagnostic/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Replaces the value of the first unary diagnostic with the given name, preserving order. Fails when no such diagnostic exists.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``replace_diagnostic(Name,Value,Diagnostics,UpdatedDiagnostics)``
+| **Mode and number of proofs:**
+|    ``replace_diagnostic(+atom,+term,+list(compound),-list(compound))`` - ``zero_or_one``
 
 
 ------------
@@ -475,6 +546,66 @@ Repeats the last observed series value ``Horizon`` times (the naive/persistence 
 
 ------------
 
+.. index:: constant_forecast/3
+.. _forecaster_common/0::constant_forecast/3:
+
+``constant_forecast/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Repeats a value for the given forecast horizon. A zero horizon returns an empty list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``constant_forecast(Value,Horizon,Forecasts)``
+| **Mode and number of proofs:**
+|    ``constant_forecast(+number,+non_negative_integer,-list(number))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Horizon`` is a variable:
+|        ``instantiation_error``
+|    ``Horizon`` is neither a variable nor an integer:
+|        ``type_error(integer,Horizon)``
+|    ``Horizon`` is an integer but is negative:
+|        ``domain_error(non_negative_integer,Horizon)``
+
+
+------------
+
+.. index:: linear_trend_forecast/4
+.. _forecaster_common/0::linear_trend_forecast/4:
+
+``linear_trend_forecast/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Forecasts ``Last + Step * Slope`` for steps one through the horizon. A zero horizon returns an empty list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``linear_trend_forecast(Last,Slope,Horizon,Forecasts)``
+| **Mode and number of proofs:**
+|    ``linear_trend_forecast(+number,+number,+non_negative_integer,-list(number))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Horizon``, ``Last``, or ``Slope`` is a variable:
+|        ``instantiation_error``
+|    ``Horizon`` is neither a variable nor an integer:
+|        ``type_error(integer,Horizon)``
+|    ``Horizon`` is an integer but is negative:
+|        ``domain_error(non_negative_integer,Horizon)``
+|    ``Last`` is neither a variable nor a number:
+|        ``type_error(number,Last)``
+|    ``Slope`` is neither a variable nor a number:
+|        ``type_error(number,Slope)``
+|    Trend extrapolation raises an arithmetic evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
 .. index:: check_forecast_horizon/1
 .. _forecaster_common/0::check_forecast_horizon/1:
 
@@ -490,6 +621,14 @@ Checks that a forecast horizon is a non-negative integer.
 |    ``check_forecast_horizon(Horizon)``
 | **Mode and number of proofs:**
 |    ``check_forecast_horizon(+non_negative_integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Horizon`` is a variable:
+|        ``instantiation_error``
+|    ``Horizon`` is neither a variable nor an integer:
+|        ``type_error(integer,Horizon)``
+|    ``Horizon`` is an integer but is negative:
+|        ``domain_error(non_negative_integer,Horizon)``
 
 
 ------------
@@ -544,6 +683,14 @@ Checks that a seasonal frequency is a positive integer.
 |    ``check_frequency(Frequency)``
 | **Mode and number of proofs:**
 |    ``check_frequency(+positive_integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Frequency`` is a variable:
+|        ``instantiation_error``
+|    ``Frequency`` is neither a variable nor an integer:
+|        ``type_error(integer,Frequency)``
+|    ``Frequency`` is an integer but is not positive:
+|        ``domain_error(positive_integer,Frequency)``
 
 
 ------------

@@ -96,6 +96,7 @@ Foreach-Object {
 (Get-Content ../../../library/base58/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/base58.rst
 (Get-Content ../../../library/base64/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/base64.rst
 (Get-Content ../../../library/base85/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/base85.rst
+(Get-Content ../../../library/baseline_forecasting/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/baseline_forecasting.rst
 (Get-Content ../../../library/basic_types/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/basic_types.rst
 (Get-Content ../../../library/bayesian_ridge_regression/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/bayesian_ridge_regression.rst
 (Get-Content ../../../library/block_ciphers/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/block_ciphers.rst

@@ -96,6 +96,7 @@ sed '1,19d' ../../../library/base32/NOTES.md | pandoc -f gfm -t rst -o libraries
 sed '1,19d' ../../../library/base58/NOTES.md | pandoc -f gfm -t rst -o libraries/base58.rst
 sed '1,19d' ../../../library/base64/NOTES.md | pandoc -f gfm -t rst -o libraries/base64.rst
 sed '1,19d' ../../../library/base85/NOTES.md | pandoc -f gfm -t rst -o libraries/base85.rst
+sed '1,19d' ../../../library/baseline_forecasting/NOTES.md | pandoc -f gfm -t rst -o libraries/baseline_forecasting.rst
 sed '1,19d' ../../../library/basic_types/NOTES.md | pandoc -f gfm -t rst -o libraries/basic_types.rst
 sed '1,19d' ../../../library/bayesian_ridge_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/bayesian_ridge_regression.rst
 sed '1,19d' ../../../library/block_ciphers/NOTES.md | pandoc -f gfm -t rst -o libraries/block_ciphers.rst

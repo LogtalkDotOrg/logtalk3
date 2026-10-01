@@ -232,6 +232,57 @@
 		;	domain_error(series_length, Dataset)
 		).
 
+	:- protected(check_observation/1).
+	:- mode(check_observation(@term), one_or_error).
+	:- info(check_observation/1, [
+		comment is 'Checks that an observation is a number or an unbound variable representing a missing observation.',
+		argnames is ['Observation'],
+		exceptions is [
+			'``Observation`` is neither a variable nor a number' - type_error(number, 'Observation')
+		]
+	]).
+
+	check_observation(Observation) :-
+		(	var(Observation) ->
+			true
+		;	number(Observation) ->
+			true
+		;	type_error(number, Observation)
+		).
+
+	:- protected(series_observation_summary/4).
+	:- mode(series_observation_summary(+list, -non_negative_integer, -non_negative_integer, -number), one_or_error).
+	:- info(series_observation_summary/4, [
+		comment is 'Returns the elapsed length, numeric observation count, and numeric sum of a series. Unbound observations are counted in the length only and are not instantiated. An empty list has zero length, count, and sum.',
+		argnames is ['Series', 'Length', 'ObservedCount', 'Sum'],
+		exceptions is [
+			'``Series`` is a variable or a partial list' - instantiation_error,
+			'``Series`` is neither a variable nor a list' - type_error(list, 'Series'),
+			'An observation is neither a variable nor a number' - type_error(number, 'Observation'),
+			'Numeric summation raises an arithmetic evaluation error' - evaluation_error('Error')
+		]
+	]).
+
+	series_observation_summary(Series, Length, ObservedCount, Sum) :-
+		context(Context),
+		check(list, Series, Context),
+		observation_summary(Series, Length, ObservedCount, Sum).
+
+	observation_summary(Series, Length, ObservedCount, Sum) :-
+		observation_summary(Series, 0, 0, 0, Length, ObservedCount, Sum).
+
+	observation_summary([], Length, ObservedCount, Sum, Length, ObservedCount, Sum).
+	observation_summary([Observation| Observations], Length0, ObservedCount0, Sum0, Length, ObservedCount, Sum) :-
+		check_observation(Observation),
+		Length1 is Length0 + 1,
+		(	var(Observation) ->
+			ObservedCount1 = ObservedCount0,
+			Sum1 = Sum0
+		;	ObservedCount1 is ObservedCount0 + 1,
+			Sum1 is Sum0 + Observation
+		),
+		observation_summary(Observations, Length1, ObservedCount1, Sum1, Length, ObservedCount, Sum).
+
 	% diagnostics helpers
 
 	:- protected(base_forecaster_diagnostics/5).
@@ -270,6 +321,20 @@
 	valid_forecaster_metadata(Model, Options, Diagnostics) :-
 		valid_forecaster_metadata(Model, Diagnostics),
 		memberchk(options(Options), Diagnostics).
+
+	:- protected(replace_diagnostic/4).
+	:- mode(replace_diagnostic(+atom, +term, +list(compound), -list(compound)), zero_or_one).
+	:- info(replace_diagnostic/4, [
+		comment is 'Replaces the value of the first unary diagnostic with the given name, preserving order. Fails when no such diagnostic exists.',
+		argnames is ['Name', 'Value', 'Diagnostics', 'UpdatedDiagnostics']
+	]).
+
+	replace_diagnostic(Name, Value, [Diagnostic| Diagnostics], [UpdatedDiagnostic| Diagnostics]) :-
+		functor(Diagnostic, Name, 1),
+		!,
+		UpdatedDiagnostic =.. [Name, Value].
+	replace_diagnostic(Name, Value, [Diagnostic| Diagnostics], [Diagnostic| UpdatedDiagnostics]) :-
+		replace_diagnostic(Name, Value, Diagnostics, UpdatedDiagnostics).
 
 	export_to_file(Dataset, Forecaster, Functor, File) :-
 		::export_to_clauses(Dataset, Forecaster, Functor, Clauses),
@@ -488,14 +553,65 @@
 	naive_forecast(Series, Horizon, Forecasts) :-
 		check_forecast_horizon(Horizon),
 		last(Series, LastValue),
+		constant_forecast(LastValue, Horizon, Forecasts).
+
+	:- protected(constant_forecast/3).
+	:- mode(constant_forecast(+number, +non_negative_integer, -list(number)), one_or_error).
+	:- info(constant_forecast/3, [
+		comment is 'Repeats a value for the given forecast horizon. A zero horizon returns an empty list.',
+		argnames is ['Value', 'Horizon', 'Forecasts'],
+		exceptions is [
+			'``Horizon`` is a variable' - instantiation_error,
+			'``Horizon`` is neither a variable nor an integer' - type_error(integer, 'Horizon'),
+			'``Horizon`` is an integer but is negative' - domain_error(non_negative_integer, 'Horizon')
+		]
+	]).
+
+	constant_forecast(Value, Horizon, Forecasts) :-
+		check_forecast_horizon(Horizon),
 		length(Forecasts, Horizon),
-		repeat_value(Forecasts, LastValue).
+		repeat_value(Forecasts, Value).
+
+	:- protected(linear_trend_forecast/4).
+	:- mode(linear_trend_forecast(+number, +number, +non_negative_integer, -list(number)), one_or_error).
+	:- info(linear_trend_forecast/4, [
+		comment is 'Forecasts ``Last + Step * Slope`` for steps one through the horizon. A zero horizon returns an empty list.',
+		argnames is ['Last', 'Slope', 'Horizon', 'Forecasts'],
+		exceptions is [
+			'``Horizon``, ``Last``, or ``Slope`` is a variable' - instantiation_error,
+			'``Horizon`` is neither a variable nor an integer' - type_error(integer, 'Horizon'),
+			'``Horizon`` is an integer but is negative' - domain_error(non_negative_integer, 'Horizon'),
+			'``Last`` is neither a variable nor a number' - type_error(number, 'Last'),
+			'``Slope`` is neither a variable nor a number' - type_error(number, 'Slope'),
+			'Trend extrapolation raises an arithmetic evaluation error' - evaluation_error('Error')
+		]
+	]).
+
+	linear_trend_forecast(Last, Slope, Horizon, Forecasts) :-
+		check_forecast_horizon(Horizon),
+		context(Context),
+		check(number, Last, Context),
+		check(number, Slope, Context),
+		trend_forecasts(Horizon, 1, Last, Slope, Forecasts).
+
+	trend_forecasts(0, _, _, _, []) :-
+		!.
+	trend_forecasts(Remaining, Step, Last, Slope, [Value| Values]) :-
+		Value is Last + Step * Slope,
+		NextStep is Step + 1,
+		NextRemaining is Remaining - 1,
+		trend_forecasts(NextRemaining, NextStep, Last, Slope, Values).
 
 	:- protected(check_forecast_horizon/1).
 	:- mode(check_forecast_horizon(+non_negative_integer), one_or_error).
 	:- info(check_forecast_horizon/1, [
 		comment is 'Checks that a forecast horizon is a non-negative integer.',
-		argnames is ['Horizon']
+		argnames is ['Horizon'],
+		exceptions is [
+			'``Horizon`` is a variable' - instantiation_error,
+			'``Horizon`` is neither a variable nor an integer' - type_error(integer, 'Horizon'),
+			'``Horizon`` is an integer but is negative' - domain_error(non_negative_integer, 'Horizon')
+		]
 	]).
 
 	check_forecast_horizon(Horizon) :-
@@ -539,7 +655,12 @@
 	:- mode(check_frequency(+positive_integer), one_or_error).
 	:- info(check_frequency/1, [
 		comment is 'Checks that a seasonal frequency is a positive integer.',
-		argnames is ['Frequency']
+		argnames is ['Frequency'],
+		exceptions is [
+			'``Frequency`` is a variable' - instantiation_error,
+			'``Frequency`` is neither a variable nor an integer' - type_error(integer, 'Frequency'),
+			'``Frequency`` is an integer but is not positive' - domain_error(positive_integer, 'Frequency')
+		]
 	]).
 
 	check_frequency(Frequency) :-

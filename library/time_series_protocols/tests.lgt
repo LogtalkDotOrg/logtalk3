@@ -153,6 +153,69 @@
 	test(naive_forecast_1, deterministic(Forecasts == [20, 20, 20])) :-
 		^^naive_forecast([10, 12, 14, 16, 18, 20], 3, Forecasts).
 
+	test(constant_forecast, deterministic(Forecasts == [-2, -2, -2])) :-
+		^^constant_forecast(-2, 3, Forecasts).
+
+	test(constant_forecast_zero, deterministic(Forecasts == [])) :-
+		^^constant_forecast(1.5, 0, Forecasts).
+
+	test(constant_forecast_singleton, deterministic(Value =~= 1.5)) :-
+		^^constant_forecast(1.5, 1, [Value]).
+
+	test(constant_forecast_negative, error(domain_error(non_negative_integer, -1))) :-
+		^^constant_forecast(1, -1, _).
+
+	test(linear_trend_forecast, deterministic(Forecasts == [22, 24, 26])) :-
+		^^linear_trend_forecast(20, 2, 3, Forecasts).
+
+	test(linear_trend_forecast_zero, deterministic(Forecasts == [])) :-
+		^^linear_trend_forecast(20, 2, 0, Forecasts).
+
+	test(linear_trend_forecast_fractional, deterministic(Value =~= -2.5)) :-
+		^^linear_trend_forecast(-2.0, -0.5, 1, [Value]).
+
+	test(linear_trend_forecast_variable_horizon, error(instantiation_error)) :-
+		^^linear_trend_forecast(20, 2, _, _).
+
+	test(linear_trend_forecast_non_integer, error(type_error(integer, one))) :-
+		^^linear_trend_forecast(20, 2, one, _).
+
+	test(observation_summary_empty, deterministic) :-
+		^^series_observation_summary([], 0, 0, 0).
+
+	test(observation_summary_missing, deterministic) :-
+		^^series_observation_summary([10, Missing, 14], 3, 2, 24),
+		var(Missing).
+
+	test(observation_summary_all_missing, deterministic) :-
+		^^series_observation_summary([First, Last], 2, 0, 0),
+		var(First), var(Last).
+
+	test(observation_summary_fractional, deterministic(Sum =~= -1.5)) :-
+		^^series_observation_summary([-2, 0.5], 2, 2, Sum).
+
+	test(observation_summary_long, deterministic) :-
+		^^constant_forecast(1, 10000, Series),
+		^^series_observation_summary(Series, 10000, 10000, 10000).
+
+	test(linear_trend_forecast_invalid_slope, error(type_error(number, bad))) :-
+		^^linear_trend_forecast(20, bad, 1, _).
+
+	test(observation_summary_partial, error(instantiation_error)) :-
+		^^series_observation_summary([1| _], _, _, _).
+
+	test(observation_summary_invalid, error(type_error(number, bad))) :-
+		^^series_observation_summary([1, bad], _, _, _).
+
+	test(check_observation_missing, deterministic(var(Missing))) :-
+		^^check_observation(Missing).
+
+	test(replace_diagnostic, deterministic(Updated == [first(1), count(3), last(2)])) :-
+		^^replace_diagnostic(count, 3, [first(1), count(2), last(2)], Updated).
+
+	test(replace_diagnostic_absent, fail) :-
+		^^replace_diagnostic(count, 3, [first(1)], _).
+
 	test(naive_forecast_zero_horizon, deterministic(Forecasts == [])) :-
 		^^naive_forecast([10, 12], 0, Forecasts).
 

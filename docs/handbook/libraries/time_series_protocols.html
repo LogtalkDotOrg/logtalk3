@@ -87,6 +87,8 @@
 <li class="toctree-l2"><a class="reference internal" href="base58.html"><code class="docutils literal notranslate"><span class="pre">base58</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="base64.html"><code class="docutils literal notranslate"><span class="pre">base64</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="base85.html"><code class="docutils literal notranslate"><span class="pre">base85</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="baseline_forecasting.html"><code class="docutils literal notranslate"><span class="pre">baseline_forecasting</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="baseline_forecasting.html"><code class="docutils literal notranslate"><span class="pre">baseline_forecasting</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="basic_types.html"><code class="docutils literal notranslate"><span class="pre">basic_types</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="bayesian_ridge_regression.html"><code class="docutils literal notranslate"><span class="pre">bayesian_ridge_regression</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="block_ciphers.html"><code class="docutils literal notranslate"><span class="pre">block_ciphers</span></code></a></li>
@@ -504,11 +506,20 @@ metrics.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">naive_forecast/3</span></code> and <code class="docutils literal notranslate"><span class="pre">seasonal_naive_forecast/4</span></code>: persistence
 and seasonal-persistence baseline forecasts, usable both as standalone
 baselines and as building blocks or fallbacks in other forecasters.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">constant_forecast/3</span></code> and <code class="docutils literal notranslate"><span class="pre">linear_trend_forecast/4</span></code>:
+constant-value and linear-trend forecast construction, also used by
+mean and drift baselines.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">check_observation/1</span></code> and <code class="docutils literal notranslate"><span class="pre">series_observation_summary/4</span></code>:
+numeric-or-missing observation validation and tail-recursive
+collection of elapsed length, numeric count, and sum without
+instantiating missing observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">replace_diagnostic/4</span></code>: replaces a unary diagnostic value while
+preserving metadata order.</p></li>
 </ul>
 <p>These are declared <code class="docutils literal notranslate"><span class="pre">protected</span></code>, intended to be reused by concrete
-forecaster libraries (e.g. <code class="docutils literal notranslate"><span class="pre">exponential_smoothing</span></code>,
-<code class="docutils literal notranslate"><span class="pre">time_series_regression</span></code>, <code class="docutils literal notranslate"><span class="pre">similarity_forecasting</span></code>) that import this
-category.</p>
+forecaster libraries (e.g. <code class="docutils literal notranslate"><span class="pre">baseline_forecasting</span></code>,
+<code class="docutils literal notranslate"><span class="pre">exponential_smoothing</span></code>, <code class="docutils literal notranslate"><span class="pre">time_series_regression</span></code>,
+<code class="docutils literal notranslate"><span class="pre">similarity_forecasting</span></code>) that import this category.</p>
 </section>
 </section>
 

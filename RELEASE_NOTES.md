@@ -51,6 +51,9 @@ Assumption-based Truth Maintenance System (ATMS).
 predicates, and test datasets for implementing time series forecasting
 algorithms.
 
+* ADDED: New `baseline_forecasting` library implementing univariate naive,
+seasonal naive, mean, and drift forecasting.
+
 * ADDED: New `exponential_smoothing` library implementing univariate time
 series forecasting using simple exponential smoothing, Holt linear-trend
 smoothing, and additive or multiplicative Holt-Winters seasonal smoothing.

@@ -98,8 +98,11 @@ Shared predicates
 - `lagged_rows/3`: builds `Lags-Target` rows from a series for autoregressive-style model fitting.
 - `mean_absolute_error/3`, `root_mean_squared_error/3`, `mean_absolute_percentage_error/3`: standard forecast accuracy metrics.
 - `naive_forecast/3` and `seasonal_naive_forecast/4`: persistence and seasonal-persistence baseline forecasts, usable both as standalone baselines and as building blocks or fallbacks in other forecasters.
+- `constant_forecast/3` and `linear_trend_forecast/4`: constant-value and linear-trend forecast construction, also used by mean and drift baselines.
+- `check_observation/1` and `series_observation_summary/4`: numeric-or-missing observation validation and tail-recursive collection of elapsed length, numeric count, and sum without instantiating missing observations.
+- `replace_diagnostic/4`: replaces a unary diagnostic value while preserving metadata order.
 
 These are declared `protected`, intended to be reused by concrete
-forecaster libraries (e.g. `exponential_smoothing`,
+forecaster libraries (e.g. `baseline_forecasting`, `exponential_smoothing`,
 `time_series_regression`, `similarity_forecasting`) that import this
 category.

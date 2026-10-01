@@ -434,6 +434,20 @@ To load an entity, always load the library that includes it using the goal ``log
 
    * :doc:`base85 <base85_0>`
 
+``library/baseline_forecasting/``
+---------------------------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      baseline_forecasting <baseline_forecasting_0>
+
+.. only:: latex
+
+   * :doc:`baseline_forecasting <baseline_forecasting_0>`
+
 ``library/bayesian_ridge_regression/``
 --------------------------------------
 
