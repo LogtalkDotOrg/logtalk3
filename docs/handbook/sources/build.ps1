@@ -350,6 +350,7 @@ Foreach-Object {
 (Get-Content ../../../library/term_io/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/term_io.rst
 (Get-Content ../../../library/text_normalization/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/text_normalization.rst
 (Get-Content ../../../library/text_vectorization/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/text_vectorization.rst
+(Get-Content ../../../library/theta_forecasting/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/theta_forecasting.rst
 (Get-Content ../../../library/thurstone_mosteller_ranker/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/thurstone_mosteller_ranker.rst
 (Get-Content ../../../library/time_scales/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/time_scales.rst
 (Get-Content ../../../library/time_series_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/time_series_protocols.rst

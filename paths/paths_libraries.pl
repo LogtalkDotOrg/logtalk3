@@ -304,6 +304,7 @@ logtalk_library_path(tabu_search, library('tabu_search/')).
 logtalk_library_path(term_io, library('term_io/')).
 logtalk_library_path(text_normalization, library('text_normalization/')).
 logtalk_library_path(text_vectorization, library('text_vectorization/')).
+logtalk_library_path(theta_forecasting, library('theta_forecasting/')).
 logtalk_library_path(thurstone_mosteller_ranker, library('thurstone_mosteller_ranker/')).
 logtalk_library_path(time_scales, library('time_scales/')).
 logtalk_library_path(time_series_protocols, library('time_series_protocols/')).

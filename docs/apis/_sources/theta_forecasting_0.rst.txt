@@ -1,0 +1,813 @@
+.. index:: single: theta_forecasting
+.. _theta_forecasting/0:
+
+.. rst-class:: right
+
+**object**
+
+``theta_forecasting``
+=====================
+
+Standard Theta forecasting combining simple exponential smoothing and linear trend extrapolation.
+
+| **Availability:** 
+|    ``logtalk_load(theta_forecasting(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-02
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`forecaster_protocol <forecaster_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`forecaster_common <forecaster_common/0>`
+|    ``public`` :ref:`exponential_smoothing_common <exponential_smoothing_common/0>`
+| **Uses:**
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+|    :ref:`nelder_mead(Problem) <nelder_mead/1>`
+|    :ref:`numberlist <numberlist/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`forecaster_protocol/0::diagnostic/2`  :ref:`forecaster_protocol/0::diagnostics/2`  :ref:`forecaster_protocol/0::forecaster_options/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`forecaster_protocol/0::valid_forecaster/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: learn/3
+.. _theta_forecasting/0::learn/3:
+
+``learn/3``
+^^^^^^^^^^^
+
+Learns a standard Theta forecaster using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Forecaster,Options)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An option, length, or strict-policy observation is unbound:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    An observation is not numeric:
+|        ``type_error(number,Observation)``
+|    The declared length is not an integer:
+|        ``type_error(integer,DeclaredLength)``
+|    The declared length is not positive:
+|        ``domain_error(positive_integer,DeclaredLength)``
+|    The dataset has no observations:
+|        ``domain_error(non_empty_series,Dataset)``
+|    Indices are not gap-free and 1-based:
+|        ``domain_error(series_index_sequence,Dataset)``
+|    Declared and observed lengths differ:
+|        ``consistency_error(series_length,DeclaredLength,ObservedLength)``
+|    There are fewer than two observations:
+|        ``domain_error(series_length,Dataset)``
+|    There are fewer than two known observations:
+|        ``domain_error(insufficient_known_observations,Dataset)``
+|    The frequency is not an integer:
+|        ``type_error(integer,Frequency)``
+|    The frequency is not positive:
+|        ``domain_error(positive_integer,Frequency)``
+|    Forced seasonality needs a frequency greater than one:
+|        ``domain_error(seasonal_frequency,Frequency)``
+|    Forced seasonality has no dataset frequency:
+|        ``domain_error(seasonal_frequency,Dataset)``
+|    An explicit frequency accompanies no seasonality:
+|        ``domain_error(theta_forecasting_option,Option)``
+|    The series has fewer than two seasonal cycles:
+|        ``domain_error(series_length,Series)``
+|    A seasonal phase has no valid centered-window deviation:
+|        ``domain_error(insufficient_seasonal_phase_observations,Phase)``
+|    Multiplicative data or factors are not positive:
+|        ``domain_error(positive_number,Value)``
+|    Fitting arithmetic fails:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: learn/2
+.. _theta_forecasting/0::learn/2:
+
+``learn/2``
+^^^^^^^^^^^
+
+Learns a standard Theta forecaster using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Forecaster)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A length or frequency is unbound:
+|        ``instantiation_error``
+|    An observation is not numeric:
+|        ``type_error(number,Observation)``
+|    The declared length is not an integer:
+|        ``type_error(integer,DeclaredLength)``
+|    The declared length is not positive:
+|        ``domain_error(positive_integer,DeclaredLength)``
+|    The dataset has no observations:
+|        ``domain_error(non_empty_series,Dataset)``
+|    Indices are not gap-free and 1-based:
+|        ``domain_error(series_index_sequence,Dataset)``
+|    Declared and observed lengths differ:
+|        ``consistency_error(series_length,DeclaredLength,ObservedLength)``
+|    There are fewer than two observations:
+|        ``domain_error(series_length,Dataset)``
+|    There are fewer than two known observations:
+|        ``domain_error(insufficient_known_observations,Dataset)``
+|    The dataset frequency is not an integer:
+|        ``type_error(integer,Frequency)``
+|    The dataset frequency is not positive:
+|        ``domain_error(positive_integer,Frequency)``
+|    Seasonal decomposition has fewer than two cycles:
+|        ``domain_error(series_length,Series)``
+|    A seasonal phase has no valid centered-window deviation:
+|        ``domain_error(insufficient_seasonal_phase_observations,Phase)``
+|    Multiplicative factors are not positive:
+|        ``domain_error(positive_number,Value)``
+|    Fitting arithmetic fails:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: fitted_values/2
+.. _theta_forecasting/0::fitted_values/2:
+
+``fitted_values/2``
+^^^^^^^^^^^^^^^^^^^
+
+Returns aligned SES training fits on the original scale using default options. Missing targets and the first known initialization anchor have independent unbound placeholders. These are not prefix-wise Theta forecasts.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fitted_values(Dataset,Values)``
+| **Mode and number of proofs:**
+|    ``fitted_values(+object_identifier,-list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A length or frequency is unbound:
+|        ``instantiation_error``
+|    An observation is not numeric:
+|        ``type_error(number,Observation)``
+|    The declared length is not an integer:
+|        ``type_error(integer,DeclaredLength)``
+|    The declared length is not positive:
+|        ``domain_error(positive_integer,DeclaredLength)``
+|    The dataset has no observations:
+|        ``domain_error(non_empty_series,Dataset)``
+|    Indices are not gap-free and 1-based:
+|        ``domain_error(series_index_sequence,Dataset)``
+|    Declared and observed lengths differ:
+|        ``consistency_error(series_length,DeclaredLength,ObservedLength)``
+|    There are fewer than two observations:
+|        ``domain_error(series_length,Dataset)``
+|    There are fewer than two known observations:
+|        ``domain_error(insufficient_known_observations,Dataset)``
+|    The dataset frequency is not an integer:
+|        ``type_error(integer,Frequency)``
+|    The dataset frequency is not positive:
+|        ``domain_error(positive_integer,Frequency)``
+|    Seasonal decomposition has fewer than two cycles:
+|        ``domain_error(series_length,Series)``
+|    A seasonal phase has no valid centered-window deviation:
+|        ``domain_error(insufficient_seasonal_phase_observations,Phase)``
+|    Multiplicative factors are not positive:
+|        ``domain_error(positive_number,Value)``
+|    The residual count is inconsistent:
+|        ``domain_error(residual_count,Residuals)``
+|    Fitting or fit restoration arithmetic fails:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: fitted_values/3
+.. _theta_forecasting/0::fitted_values/3:
+
+``fitted_values/3``
+^^^^^^^^^^^^^^^^^^^
+
+Returns aligned SES training fits on the original scale using the learning options. Missing targets and the first known initialization anchor have independent unbound placeholders. Parameters and seasonal factors are fitted once using the full sample, not individual prefixes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fitted_values(Dataset,Values,Options)``
+| **Mode and number of proofs:**
+|    ``fitted_values(+object_identifier,-list,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An option, length, or strict-policy observation is unbound:
+|        ``instantiation_error``
+|    Options are not a list:
+|        ``type_error(list,Options)``
+|    An option is not a compound term:
+|        ``type_error(compound,Option)``
+|    An option is invalid:
+|        ``domain_error(option,Option)``
+|    An observation is not numeric:
+|        ``type_error(number,Observation)``
+|    The declared length is not an integer:
+|        ``type_error(integer,DeclaredLength)``
+|    The declared length is not positive:
+|        ``domain_error(positive_integer,DeclaredLength)``
+|    The dataset has no observations:
+|        ``domain_error(non_empty_series,Dataset)``
+|    Indices are not gap-free and 1-based:
+|        ``domain_error(series_index_sequence,Dataset)``
+|    Declared and observed lengths differ:
+|        ``consistency_error(series_length,DeclaredLength,ObservedLength)``
+|    There are fewer than two observations:
+|        ``domain_error(series_length,Dataset)``
+|    There are fewer than two known observations:
+|        ``domain_error(insufficient_known_observations,Dataset)``
+|    The frequency is not an integer:
+|        ``type_error(integer,Frequency)``
+|    The frequency is not positive:
+|        ``domain_error(positive_integer,Frequency)``
+|    Forced seasonality needs a frequency greater than one:
+|        ``domain_error(seasonal_frequency,Frequency)``
+|    Forced seasonality has no dataset frequency:
+|        ``domain_error(seasonal_frequency,Dataset)``
+|    An explicit frequency accompanies no seasonality:
+|        ``domain_error(theta_forecasting_option,Option)``
+|    The series has fewer than two seasonal cycles:
+|        ``domain_error(series_length,Series)``
+|    A seasonal phase has no valid centered-window deviation:
+|        ``domain_error(insufficient_seasonal_phase_observations,Phase)``
+|    Multiplicative data or factors are not positive:
+|        ``domain_error(positive_number,Value)``
+|    The residual count is inconsistent:
+|        ``domain_error(residual_count,Residuals)``
+|    Fitting or fit restoration arithmetic fails:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: forecast/3
+.. _theta_forecasting/0::forecast/3:
+
+``forecast/3``
+^^^^^^^^^^^^^^
+
+Forecasts the next ``Horizon`` observations. A zero horizon returns an empty list after validation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``forecast(Forecaster,Horizon,Forecasts)``
+| **Mode and number of proofs:**
+|    ``forecast(+compound,+non_negative_integer,-list(number))`` - ``one_or_error``
+
+| **Exceptions:**
+|    Forecaster or horizon is unbound:
+|        ``instantiation_error``
+|    The forecaster is invalid:
+|        ``domain_error(forecaster,Forecaster)``
+|    The horizon is not an integer:
+|        ``type_error(integer,Horizon)``
+|    The horizon is negative:
+|        ``domain_error(non_negative_integer,Horizon)``
+|    Forecast or validation arithmetic fails:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: check_forecaster/1
+.. _theta_forecasting/0::check_forecaster/1:
+
+``check_forecaster/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Checks the complete state and diagnostics without binding the argument.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_forecaster(Forecaster)``
+| **Mode and number of proofs:**
+|    ``check_forecaster(@compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The forecaster is unbound:
+|        ``instantiation_error``
+|    The forecaster is invalid:
+|        ``domain_error(forecaster,Forecaster)``
+|    Validation arithmetic fails:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: export_to_clauses/4
+.. _theta_forecasting/0::export_to_clauses/4:
+
+``export_to_clauses/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Exports a validated forecaster as one fact.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``export_to_clauses(Dataset,Forecaster,Functor,Clauses)``
+| **Mode and number of proofs:**
+|    ``export_to_clauses(+object_identifier,+compound,+atom,-list(clause))`` - ``one_or_error``
+
+| **Exceptions:**
+|    Forecaster or functor is unbound:
+|        ``instantiation_error``
+|    The forecaster is invalid:
+|        ``domain_error(forecaster,Forecaster)``
+|    The functor is not an atom:
+|        ``type_error(atom,Functor)``
+|    Validation arithmetic fails:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: print_forecaster/1
+.. _theta_forecasting/0::print_forecaster/1:
+
+``print_forecaster/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Prints a validated forecaster and its diagnostics.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_forecaster(Forecaster)``
+| **Mode and number of proofs:**
+|    ``print_forecaster(+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The forecaster is unbound:
+|        ``instantiation_error``
+|    The forecaster is invalid:
+|        ``domain_error(forecaster,Forecaster)``
+|    Validation arithmetic fails:
+|        ``evaluation_error(Error)``
+|    The current stream cannot be written:
+|        ``permission_error(output,stream,Stream)``
+
+
+------------
+
+.. index:: export_to_file/4
+.. _theta_forecasting/0::export_to_file/4:
+
+``export_to_file/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Exports a validated forecaster with dataset and diagnostics comments.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``export_to_file(Dataset,Forecaster,Functor,File)``
+| **Mode and number of proofs:**
+|    ``export_to_file(+object_identifier,+compound,+atom,+atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A forecaster, functor, file, or dataset length is unbound:
+|        ``instantiation_error``
+|    The forecaster is invalid:
+|        ``domain_error(forecaster,Forecaster)``
+|    The functor is not an atom:
+|        ``type_error(atom,Functor)``
+|    The file specification is invalid:
+|        ``type_error(source_sink,File)``
+|    The output location does not exist:
+|        ``existence_error(source_sink,File)``
+|    The file cannot be opened:
+|        ``permission_error(open,source_sink,File)``
+|    The stream cannot be written:
+|        ``permission_error(output,stream,Stream)``
+|    The dataset has no observations:
+|        ``domain_error(non_empty_series,Dataset)``
+|    Indices are not gap-free and 1-based:
+|        ``domain_error(series_index_sequence,Dataset)``
+|    The declared length is not an integer:
+|        ``type_error(integer,DeclaredLength)``
+|    The declared length is not positive:
+|        ``domain_error(positive_integer,DeclaredLength)``
+|    Declared and observed lengths differ:
+|        ``consistency_error(series_length,DeclaredLength,ObservedLength)``
+|    Validation arithmetic fails:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: prepare_learning/4
+.. _theta_forecasting/0::prepare_learning/4:
+
+``prepare_learning/4``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Collects and fits once, returning transient adjusted observations and residuals alongside the forecaster.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``prepare_learning(Dataset,Forecaster,FitData,Options)``
+| **Mode and number of proofs:**
+|    ``prepare_learning(+object_identifier,-compound,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An option, length, or strict-policy observation is unbound:
+|        ``instantiation_error``
+|    Options are not a list:
+|        ``type_error(list,Options)``
+|    An option is not a compound term:
+|        ``type_error(compound,Option)``
+|    An option is invalid:
+|        ``domain_error(option,Option)``
+|    An observation is not numeric:
+|        ``type_error(number,Observation)``
+|    The declared length is not an integer:
+|        ``type_error(integer,DeclaredLength)``
+|    The declared length is not positive:
+|        ``domain_error(positive_integer,DeclaredLength)``
+|    The dataset has no observations:
+|        ``domain_error(non_empty_series,Dataset)``
+|    Indices are not gap-free and 1-based:
+|        ``domain_error(series_index_sequence,Dataset)``
+|    Declared and observed lengths differ:
+|        ``consistency_error(series_length,DeclaredLength,ObservedLength)``
+|    There are fewer than two observations:
+|        ``domain_error(series_length,Dataset)``
+|    There are fewer than two known observations:
+|        ``domain_error(insufficient_known_observations,Dataset)``
+|    The frequency is not an integer:
+|        ``type_error(integer,Frequency)``
+|    The frequency is not positive:
+|        ``domain_error(positive_integer,Frequency)``
+|    Forced seasonality needs a frequency greater than one:
+|        ``domain_error(seasonal_frequency,Frequency)``
+|    Forced seasonality has no dataset frequency:
+|        ``domain_error(seasonal_frequency,Dataset)``
+|    An explicit frequency accompanies no seasonality:
+|        ``domain_error(theta_forecasting_option,Option)``
+|    The series has fewer than two seasonal cycles:
+|        ``domain_error(series_length,Series)``
+|    A seasonal phase has no valid centered-window deviation:
+|        ``domain_error(insufficient_seasonal_phase_observations,Phase)``
+|    Multiplicative data or factors are not positive:
+|        ``domain_error(positive_number,Value)``
+|    Fitting arithmetic fails:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: prepare_seasonality/8
+.. _theta_forecasting/0::prepare_seasonality/8:
+
+``prepare_seasonality/8``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Resolves the requested seasonal adjustment and dataset frequency.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``prepare_seasonality(Dataset,Series,UserOptions,Options,Adjusted,Seasonality,Mode,Frequency)``
+| **Mode and number of proofs:**
+|    ``prepare_seasonality(+object_identifier,+list,+list,+list,-list,-term,-atom,-integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The frequency is unbound:
+|        ``instantiation_error``
+|    The frequency is not an integer:
+|        ``type_error(integer,Frequency)``
+|    The frequency is not positive:
+|        ``domain_error(positive_integer,Frequency)``
+|    Forced seasonality has no dataset frequency:
+|        ``domain_error(seasonal_frequency,Dataset)``
+|    Forced seasonality has frequency one:
+|        ``domain_error(seasonal_frequency,Frequency)``
+|    A frequency option is supplied with no seasonality:
+|        ``domain_error(theta_forecasting_option,Option)``
+|    The series has fewer than two cycles:
+|        ``domain_error(series_length,Series)``
+|    A seasonal phase has no valid centered-window deviation:
+|        ``domain_error(insufficient_seasonal_phase_observations,Phase)``
+|    Multiplicative data or factors are not positive:
+|        ``domain_error(positive_number,Value)``
+|    Seasonal arithmetic fails:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: positive_series/1
+.. _theta_forecasting/0::positive_series/1:
+
+``positive_series/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Checks whether all known numeric observations are strictly positive, ignoring unbound observations.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``positive_series(Series)``
+| **Mode and number of proofs:**
+|    ``positive_series(+list)`` - ``zero_or_one``
+
+| **Exceptions:**
+|    Numeric comparison fails:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: training_totals/6
+.. _theta_forecasting/0::training_totals/6:
+
+``training_totals/6``
+^^^^^^^^^^^^^^^^^^^^^
+
+Scores SES training fits after restoring the original seasonal scale and returns the same compact scoring errors.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``training_totals(Series,Adjusted,Seasonality,Errors,Totals,OriginalErrors)``
+| **Mode and number of proofs:**
+|    ``training_totals(+list,+list,+term,+compound,-compound,-list(number))`` - ``one_or_error``
+
+| **Exceptions:**
+|    Training-error arithmetic fails:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: score_seasonal/9
+.. _theta_forecasting/0::score_seasonal/9:
+
+``score_seasonal/9``
+^^^^^^^^^^^^^^^^^^^^
+
+Scores known targets on their original scale, advancing phases but not residuals at gaps.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``score_seasonal(Actuals,Adjusted,Residuals,Method,Factors,Cycle,Totals0,Totals,OriginalErrors)``
+| **Mode and number of proofs:**
+|    ``score_seasonal(+list,+list,+list(number),+atom,+list(number),+list(number),+compound,-compound,-list(number))`` - ``one_or_error``
+
+| **Exceptions:**
+|    Fit restoration or error accumulation fails:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: anchor_series/2
+.. _theta_forecasting/0::anchor_series/2:
+
+``anchor_series/2``
+^^^^^^^^^^^^^^^^^^^
+
+Removes only leading missing positions before fitting the SES initialization anchor.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``anchor_series(Series,FitSeries)``
+| **Mode and number of proofs:**
+|    ``anchor_series(+list,-list)`` - ``one``
+
+
+------------
+
+.. index:: fit_level/13
+.. _theta_forecasting/0::fit_level/13:
+
+``fit_level/13``
+^^^^^^^^^^^^^^^^
+
+Fits the SES level using the existing bounded optimization problem when needed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fit_level(Series,RequestedAlpha,Initialization,OptimizerOptions,Alpha,InitialLevel,Level,SSE,Errors,Fitting,Convergence,Iterations,Evaluations)``
+| **Mode and number of proofs:**
+|    ``fit_level(+compound,+term,+atom,+list,-number,-number,-number,-number,-compound,-atom,-atom,-integer,-integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Optimizer options are invalid:
+|        ``domain_error(option,Option)``
+|    Fitting arithmetic fails:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: theta_correction/3
+.. _theta_forecasting/0::theta_correction/3:
+
+``theta_correction/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the finite-sample correction, including the zero-alpha limit.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``theta_correction(Length,Alpha,Correction)``
+| **Mode and number of proofs:**
+|    ``theta_correction(+positive_integer,+number,-number)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Correction arithmetic fails:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: correction_steps/4
+.. _theta_forecasting/0::correction_steps/4:
+
+``correction_steps/4``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Evaluates the geometric correction through a stable recurrence.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``correction_steps(Remaining,Weight,Previous,Correction)``
+| **Mode and number of proofs:**
+|    ``correction_steps(+non_negative_integer,+number,+number,-number)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Correction arithmetic fails:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: residual_totals/3
+.. _theta_forecasting/0::residual_totals/3:
+
+``residual_totals/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Accumulates training residual error totals.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``residual_totals(Residuals,Totals0,Totals)``
+| **Mode and number of proofs:**
+|    ``residual_totals(+list(number),+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Error accumulation fails:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: valid_model/1
+.. _theta_forecasting/0::valid_model/1:
+
+``valid_model/1``
+^^^^^^^^^^^^^^^^^
+
+Validates ground state and mandatory diagnostics.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_model(Forecaster)``
+| **Mode and number of proofs:**
+|    ``valid_model(+compound)`` - ``zero_or_one``
+
+| **Exceptions:**
+|    Validation arithmetic fails:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: valid_seasonality/4
+.. _theta_forecasting/0::valid_seasonality/4:
+
+``valid_seasonality/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates retained seasonal factors and next forecast phase.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_seasonality(Seasonality,Length,Mode,Frequency)``
+| **Mode and number of proofs:**
+|    ``valid_seasonality(+term,+positive_integer,?atom,?positive_integer)`` - ``zero_or_one``
+
+| **Exceptions:**
+|    Phase arithmetic fails:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: valid_fitting/2
+.. _theta_forecasting/0::valid_fitting/2:
+
+``valid_fitting/2``
+^^^^^^^^^^^^^^^^^^^
+
+Validates fitting provenance and optimizer counters.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_fitting(Initialization,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``valid_fitting(+atom,+list(compound))`` - ``zero_or_one``
+
+| **Exceptions:**
+|    Counter comparison fails:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

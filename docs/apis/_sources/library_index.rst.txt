@@ -843,7 +843,7 @@ To load any library (including developer tools, ports, and contributions), use t
 
    exponential_smoothing <exponential_smoothing_0>
    exponential_smoothing_common <exponential_smoothing_common_0>
-   exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification,MissingMarker) <exponential_smoothing_problem_7>
+   exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification) <exponential_smoothing_problem_6>
 
 :ref:`fcube <library_fcube>`
 ----------------------------
@@ -3142,6 +3142,14 @@ To load any library (including developer tools, ports, and contributions), use t
 
    text_vectorizer <text_vectorizer_0>
    text_vectorizer_protocol <text_vectorizer_protocol_0>
+
+:ref:`theta_forecasting <library_theta_forecasting>`
+----------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   theta_forecasting <theta_forecasting_0>
 
 :ref:`thurstone_mosteller_ranker <library_thurstone_mosteller_ranker>`
 ----------------------------------------------------------------------

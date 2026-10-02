@@ -29,13 +29,13 @@
 		comment is 'Regular nonseasonal series with leading, consecutive, intermediate, and trailing missing observations.'
 	]).
 
-	observation(1, missing).
+	observation(1, _).
 	observation(2, 2).
-	observation(3, missing).
-	observation(4, missing).
+	observation(3, _).
+	observation(4, _).
 	observation(5, 8).
 	observation(6, 10).
-	observation(7, missing).
+	observation(7, _).
 
 	series_length(7).
 
@@ -52,14 +52,14 @@
 		comment is 'Two-position seasonal series with missing observations during initialization and fitting.'
 	]).
 
-	observation(1, missing).
+	observation(1, _).
 	observation(2, 20).
 	observation(3, 10).
 	observation(4, 20).
-	observation(5, missing).
+	observation(5, _).
 	observation(6, 20).
 	observation(7, 10).
-	observation(8, missing).
+	observation(8, _).
 	observation(9, 10).
 
 	series_length(9).
@@ -79,9 +79,9 @@
 		comment is 'Seasonal series whose initialization window has no known value for its first phase.'
 	]).
 
-	observation(1, missing).
+	observation(1, _).
 	observation(2, 20).
-	observation(3, missing).
+	observation(3, _).
 	observation(4, 20).
 	observation(5, 10).
 
@@ -92,21 +92,43 @@
 :- end_object.
 
 
-:- object(custom_missing_marker,
+:- object(missing_transformed,
 	implements(time_series_dataset_protocol)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-09-27,
-		comment is 'Series using a custom missing observation marker.'
+		comment is 'Positive series with an anonymous missing observation for transformed fitting.'
 	]).
 
 	observation(1, 2).
-	observation(2, na).
+	observation(2, _).
 	observation(3, 6).
 	observation(4, 8).
 
 	series_length(4).
+
+:- end_object.
+
+
+:- object(smoothing_series(_Values_),
+	implements(time_series_dataset_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-10-02,
+		comment is 'Parametric series for missing-observation validation and input-preservation tests.',
+		parameters is ['Values' - 'Time-ordered numeric or unbound observations, or invalid values for rejection tests.']
+	]).
+
+	:- uses(list, [length/2, nth1/3]).
+
+	observation(Index, Value) :-
+		nth1(Index, _Values_, Value).
+
+	series_length(Length) :-
+		length(_Values_, Length).
 
 :- end_object.

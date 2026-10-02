@@ -127,12 +127,10 @@ The following options are supported by ``learn/3``:
   training residuals (on the fitted, possibly transformed, scale) in the
   forecaster diagnostics for later use by ``forecast_interval/5``
   (default: ``false``).
-- ``missing_value(Marker)``: ground term denoting a missing observation
-  (default: the atom ``missing``). Marker comparison uses term identity.
 - ``missing_policy(Policy)``: either ``error`` or ``skip_update``
   (default: ``error``). The default preserves the ordinary
-  numeric-series validation and rejects marker terms. See "Missing
-  observations" below.
+  numeric-series validation and rejects unbound observations. See
+  "Missing observations" below.
 
 A smoothing factor can be ``auto`` or a number in the closed interval
 ``[0.0, 1.0]``. Automatic factors are optimized by minimizing the
@@ -208,10 +206,17 @@ Missing observations
 
 Missing observations are opt-in. With ``missing_policy(error)``, the
 default, all observations must be numbers and the existing validation
-errors are preserved. With ``missing_policy(skip_update)``, an
-observation identical to the ground ``missing_value(Marker)`` term is
-accepted. Observation indices remain a regular, gap-free, 1-based
-sequence; missing markers are not removed from the time axis.
+errors are preserved. With ``missing_policy(skip_update)``, unbound
+variables represent missing observations, uniformly with the other
+time-series libraries. Dataset facts can use anonymous variables, for
+example ``observation(3, _).``. Learning and updates do not bind missing
+observations, and learned forecasters remain ground. Observation indices
+remain a regular, gap-free, 1-based sequence; missing positions are not
+removed from the time axis.
+
+Atoms such as ``missing`` or ``na`` are not missing observations and are
+rejected. There is no configurable missing-value marker or
+``missing_value/1`` option.
 
 At a missing observation, simple smoothing retains its level. Holt
 models advance the level by the current trend. Damped models advance by
@@ -241,6 +246,11 @@ never modified. Updates reuse the fitted parameters and the exact
 per-observation equations used by batch fitting, including transformed
 and damped states and rotation of the current seasonal queue. Parameters
 are not refitted.
+
+With ``missing_policy(skip_update)``, pass an anonymous or unbound
+variable to ``update/3`` for a missing observation. With
+``missing_policy(error)``, an unbound update observation raises an
+instantiation error.
 
 The original effective training options remain unchanged. Each update
 increments ``training_series_length/1`` and ``update_count/1``. Known

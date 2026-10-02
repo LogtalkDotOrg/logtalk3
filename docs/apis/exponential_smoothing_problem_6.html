@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification,MissingMarker) &mdash; Logtalk 3.103.0</title>
+  <title>exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification) &mdash; Logtalk 3.103.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -146,7 +146,7 @@
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#exponential-smoothing"><span class="xref std std-ref">exponential_smoothing</span></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="exponential_smoothing_0.html">exponential_smoothing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="exponential_smoothing_common_0.html">exponential_smoothing_common</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification,MissingMarker)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#fcube"><span class="xref std std-ref">fcube</span></a></li>
@@ -363,6 +363,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#term-io"><span class="xref std std-ref">term_io</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#text-normalization"><span class="xref std std-ref">text_normalization</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#text-vectorization"><span class="xref std std-ref">text_vectorization</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#theta-forecasting"><span class="xref std std-ref">theta_forecasting</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#thurstone-mosteller-ranker"><span class="xref std std-ref">thurstone_mosteller_ranker</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#time-scales"><span class="xref std std-ref">time_scales</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#time-series-protocols"><span class="xref std std-ref">time_series_protocols</span></a></li>
@@ -435,9 +436,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification,MissingMarker)</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification)</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/exponential_smoothing_problem_7.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/exponential_smoothing_problem_6.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -445,9 +446,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="exponential-smoothing-problem-7"><span id="index-0"></span><strong>object</strong></p>
-<section id="exponential-smoothing-problem-method-series-optimizationseries-frequency-parameterspecification-initializationspecification-missingmarker">
-<h1><code class="docutils literal notranslate"><span class="pre">exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification,MissingMarker)</span></code><a class="headerlink" href="#exponential-smoothing-problem-method-series-optimizationseries-frequency-parameterspecification-initializationspecification-missingmarker" title="Link to this heading"></a></h1>
+  <p class="right" id="exponential-smoothing-problem-6"><span id="index-0"></span><strong>object</strong></p>
+<section id="exponential-smoothing-problem-method-series-optimizationseries-frequency-parameterspecification-initializationspecification">
+<h1><code class="docutils literal notranslate"><span class="pre">exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification)</span></code><a class="headerlink" href="#exponential-smoothing-problem-method-series-optimizationseries-frequency-parameterspecification-initializationspecification" title="Link to this heading"></a></h1>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Method</span></code> - Exponential smoothing method.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Series</span></code> - Validated training series.</p></li>
@@ -455,7 +456,6 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">Frequency</span></code> - Seasonal frequency or <code class="docutils literal notranslate"><span class="pre">none</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ParameterSpecification</span></code> - Canonical list of fixed or automatic parameter options.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">InitializationSpecification</span></code> - Initialization strategy and number of initial cycles.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">MissingMarker</span></code> - Term denoting an unobserved value.</p></li>
 </ul>
 <p>Bounded sum-of-squared-errors optimization problem for exponential smoothing parameters. Implements both the local-optimization (Nelder-Mead) and Differential Evolution problem protocols over the same objective.</p>
 <div class="line-block">
@@ -467,7 +467,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:1:0</div>
-<div class="line"><strong>Date:</strong> 2026-09-27</div>
+<div class="line"><strong>Date:</strong> 2026-10-02</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

@@ -1424,13 +1424,13 @@ To load an entity, always load the library that includes it using the goal ``log
 
       exponential_smoothing <exponential_smoothing_0>
       exponential_smoothing_common <exponential_smoothing_common_0>
-      exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification,MissingMarker) <exponential_smoothing_problem_7>
+      exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification) <exponential_smoothing_problem_6>
 
 .. only:: latex
 
    * :doc:`exponential_smoothing <exponential_smoothing_0>`
    * :doc:`exponential_smoothing_common <exponential_smoothing_common_0>`
-   * :doc:`exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification,MissingMarker) <exponential_smoothing_problem_7>`
+   * :doc:`exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification) <exponential_smoothing_problem_6>`
 
 ``library/format/``
 -------------------
@@ -5347,6 +5347,20 @@ To load an entity, always load the library that includes it using the goal ``log
 
    * :doc:`text_vectorizer <text_vectorizer_0>`
    * :doc:`text_vectorizer_protocol <text_vectorizer_protocol_0>`
+
+``library/theta_forecasting/``
+------------------------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      theta_forecasting <theta_forecasting_0>
+
+.. only:: latex
+
+   * :doc:`theta_forecasting <theta_forecasting_0>`
 
 ``library/thurstone_mosteller_ranker/``
 ---------------------------------------

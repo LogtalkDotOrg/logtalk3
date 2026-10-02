@@ -342,6 +342,7 @@
 <li class="toctree-l2"><a class="reference internal" href="term_io.html"><code class="docutils literal notranslate"><span class="pre">term_io</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="text_normalization.html"><code class="docutils literal notranslate"><span class="pre">text_normalization</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="text_vectorization.html"><code class="docutils literal notranslate"><span class="pre">text_vectorization</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="theta_forecasting.html"><code class="docutils literal notranslate"><span class="pre">theta_forecasting</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="thurstone_mosteller_ranker.html"><code class="docutils literal notranslate"><span class="pre">thurstone_mosteller_ranker</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="timeout.html"><code class="docutils literal notranslate"><span class="pre">timeout</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="time_scales.html"><code class="docutils literal notranslate"><span class="pre">time_scales</span></code></a></li>
@@ -351,6 +352,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#test-datasets">Test datasets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#shared-predicates">Shared predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#seasonal-preprocessing">Seasonal preprocessing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="time_series_regression.html"><code class="docutils literal notranslate"><span class="pre">time_series_regression</span></code></a></li>
@@ -523,17 +525,84 @@ mean and drift baselines.</p></li>
 numeric-or-missing observation validation and tail-recursive
 collection of elapsed length, numeric count, and sum without
 instantiating missing observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">indexed_series_observations/3</span></code>: collects known numeric values and
+their original one-based indices, skipping anonymous-variable
+observations without compressing time positions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">normalize_missing_series/3</span></code>: copies numeric-or-unbound observations
+with a fresh shared variable among missing positions, without binding
+caller variables. The shared variable is returned separately and is
+not a configurable data marker. Smoothing fitters accept unbound
+observations directly and do not require this normalization.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">residual_fitted_values/3</span></code>: reconstructs aligned numeric pre-update
+fits as observation minus residual, treating the first known
+observation as the unscored initialization anchor. Missing positions
+and the anchor receive fresh independent placeholders. It validates
+numeric-or-unbound observations and numeric residuals without binding
+caller inputs, and raises <code class="docutils literal notranslate"><span class="pre">domain_error(residual_count,</span> <span class="pre">Residuals)</span></code>
+unless the residual count equals the known count minus the anchor
+(zero for empty or all-missing series). Reconstruction takes linear
+time and output memory and propagates arithmetic evaluation errors.
+Seasonal fits can be restored with <code class="docutils literal notranslate"><span class="pre">restore_seasonality/5</span></code> starting
+at training phase one.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">valid_residual_history/5</span></code>: validates ground parallel numeric
+residuals and original integer indices without binding inputs. Both
+lists must match the supplied scored count; indices must increase
+strictly after the initialization anchor and remain within the elapsed
+length. The caller checks numeric finiteness. This helper does not
+recompute aggregate errors or certify historical observations.
+Validation is linear in the retained count and propagates index/count
+arithmetic evaluation errors.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">replace_diagnostic/4</span></code>: replaces a unary diagnostic value while
 preserving metadata order.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">updated_observation_diagnostics/3</span></code>: advances training length,
 update count, observed count, and missing count after a numeric or
 missing observation, preserving all other metadata and its order.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">seasonal_autocorrelation_test/4</span></code>: tests the lag-frequency
+autocorrelation using the standard Theta threshold, returning
+nonseasonal for constant series or series with at most two cycles.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">classical_seasonal_adjustment/5</span></code>: computes classical additive or
+multiplicative seasonal factors using centered moving averages and
+returns the adjusted series and phase-ordered normalized factors.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">restore_seasonality/5</span></code>: restores an additive or multiplicative
+seasonal cycle from an explicit starting phase.</p></li>
 </ul>
 <p>These are declared <code class="docutils literal notranslate"><span class="pre">protected</span></code>, intended to be reused by concrete
 forecaster libraries (e.g. <code class="docutils literal notranslate"><span class="pre">baseline_forecasting</span></code>,
 <code class="docutils literal notranslate"><span class="pre">exponential_smoothing</span></code>, <code class="docutils literal notranslate"><span class="pre">intermittent_demand_forecasting</span></code>,
 <code class="docutils literal notranslate"><span class="pre">knn_forecasting</span></code>, and <code class="docutils literal notranslate"><span class="pre">time_series_regression</span></code>) that import this
 category.</p>
+</section>
+<section id="seasonal-preprocessing">
+<h2>Seasonal preprocessing<a class="headerlink" href="#seasonal-preprocessing" title="Link to this heading"></a></h2>
+<p>Seasonal helpers accept numeric observations and anonymous variables for
+missing observations. The autocorrelation test uses the mean-centered
+available-pair biased autocorrelations up to the supplied seasonal lag
+and the standard Theta cutoff 1.6448536269514722. Constant data,
+frequency one, series with at most two elapsed cycles or <code class="docutils literal notranslate"><span class="pre">2*Frequency</span></code>
+known values, and any tested lag with fewer than two known pairs are
+nonseasonal. The mean and variance use known values, covariance sums
+skip unavailable pairs at original lags, and the test statistic uses the
+known count. This missing-data extension is a conservative heuristic,
+not a calibrated significance guarantee for arbitrary gaps. Its direct
+lag calculation costs O(N*Frequency).</p>
+<p>Classical seasonal adjustment requires frequency at least two and at
+least two elapsed cycles. It uses complete centered moving-average
+windows, including the two-by-frequency filter for even periods,
+followed by phase means of interior differences or ratios. Factors are
+normalized to zero mean for additive adjustment or unit mean for
+multiplicative adjustment. Every original phase must have a valid
+interior deviation; otherwise the lowest unestimable phase raises
+<code class="docutils literal notranslate"><span class="pre">domain_error(insufficient_seasonal_phase_observations,</span> <span class="pre">Phase)</span></code>.
+Incomplete windows are discarded, not renormalized or interpolated.
+Known values, including endpoints, are adjusted and missing values
+remain unbound. Multiplicative known observations, valid trends and
+factors must be positive. Rolling window sums and cycle-wise phase
+totals cost O(N+Frequency).</p>
+<p>Restoration uses an explicit 1-based start phase and cycles factors in
+input order, advancing phase through missing positions without binding
+them. It validates the phase and factors even when the values list is
+empty. These helpers do not interpolate missing values, mutate input
+data or silently replace failed seasonal decompositions.</p>
 </section>
 </section>
 

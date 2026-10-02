@@ -32,7 +32,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification,MissingMarker)" href="exponential_smoothing_problem_7.html" />
+    <link rel="next" title="exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification)" href="exponential_smoothing_problem_6.html" />
     <link rel="prev" title="exponential_smoothing" href="exponential_smoothing_0.html" />
    
 </head>
@@ -146,7 +146,7 @@
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#exponential-smoothing"><span class="xref std std-ref">exponential_smoothing</span></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="exponential_smoothing_0.html">exponential_smoothing</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">exponential_smoothing_common</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exponential_smoothing_problem_7.html">exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification,MissingMarker)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exponential_smoothing_problem_6.html">exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#fcube"><span class="xref std std-ref">fcube</span></a></li>
@@ -363,6 +363,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#term-io"><span class="xref std std-ref">term_io</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#text-normalization"><span class="xref std std-ref">text_normalization</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#text-vectorization"><span class="xref std std-ref">text_vectorization</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#theta-forecasting"><span class="xref std std-ref">theta_forecasting</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#thurstone-mosteller-ranker"><span class="xref std std-ref">thurstone_mosteller_ranker</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#time-scales"><span class="xref std std-ref">time_scales</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#time-series-protocols"><span class="xref std std-ref">time_series_protocols</span></a></li>
@@ -458,7 +459,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-09-27</div>
+<div class="line"><strong>Date:</strong> 2026-10-02</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -492,9 +493,9 @@
 <li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p>
 <ul>
 <li><p><a class="reference internal" href="#finite-number-1" id="id3"><code class="docutils literal notranslate"><span class="pre">finite_number/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#observed-series-3" id="id4"><code class="docutils literal notranslate"><span class="pre">observed_series/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#fit-smoothing-10" id="id5"><code class="docutils literal notranslate"><span class="pre">fit_smoothing/10</span></code></a></p></li>
-<li><p><a class="reference internal" href="#update-smoothing-8" id="id6"><code class="docutils literal notranslate"><span class="pre">update_smoothing/8</span></code></a></p></li>
+<li><p><a class="reference internal" href="#observed-series-2" id="id4"><code class="docutils literal notranslate"><span class="pre">observed_series/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#fit-smoothing-9" id="id5"><code class="docutils literal notranslate"><span class="pre">fit_smoothing/9</span></code></a></p></li>
+<li><p><a class="reference internal" href="#update-smoothing-7" id="id6"><code class="docutils literal notranslate"><span class="pre">update_smoothing/7</span></code></a></p></li>
 <li><p><a class="reference internal" href="#forecast-smoothing-4" id="id7"><code class="docutils literal notranslate"><span class="pre">forecast_smoothing/4</span></code></a></p></li>
 <li><p><a class="reference internal" href="#initial-parameter-point-2" id="id8"><code class="docutils literal notranslate"><span class="pre">initial_parameter_point/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#parameter-bounds-2" id="id9"><code class="docutils literal notranslate"><span class="pre">parameter_bounds/2</span></code></a></p></li>
@@ -535,9 +536,9 @@
 </div>
 <hr class="docutils" />
 </section>
-<section id="observed-series-3">
-<span id="exponential-smoothing-common-0-observed-series-3"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">observed_series/3</span></code></a><a class="headerlink" href="#observed-series-3" title="Link to this heading"></a></h3>
-<p>Returns the observations that are not identical to the configured missing marker.</p>
+<section id="observed-series-2">
+<span id="exponential-smoothing-common-0-observed-series-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">observed_series/2</span></code></a><a class="headerlink" href="#observed-series-2" title="Link to this heading"></a></h3>
+<p>Returns the known observations from a validated numeric-or-unbound series without binding missing observations.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -547,18 +548,18 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">observed_series(Series,MissingMarker,ObservedSeries)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">observed_series(Series,ObservedSeries)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">observed_series(+list,+term,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">observed_series(+list,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
-<section id="fit-smoothing-10">
-<span id="exponential-smoothing-common-0-fit-smoothing-10"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">fit_smoothing/10</span></code></a><a class="headerlink" href="#fit-smoothing-10" title="Link to this heading"></a></h3>
-<p>Fits the selected exponential smoothing method using fixed parameters and the requested initialization strategy. Values identical to the missing marker advance predictions and seasonal phase without being scored or updating smoothing components.</p>
+<section id="fit-smoothing-9">
+<span id="exponential-smoothing-common-0-fit-smoothing-9"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">fit_smoothing/9</span></code></a><a class="headerlink" href="#fit-smoothing-9" title="Link to this heading"></a></h3>
+<p>Fits the selected exponential smoothing method using fixed parameters and the requested initialization strategy. Unbound observations advance predictions and seasonal phase without being scored, instantiated, or updating smoothing components.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -568,26 +569,38 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">fit_smoothing(Method,Series,Frequency,Parameters,InitializationSpecification,MissingMarker,State,SumSquaredError,ErrorCount,Residuals)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">fit_smoothing(Method,Series,Frequency,Parameters,InitializationSpecification,State,SumSquaredError,ErrorCount,Residuals)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">fit_smoothing(+atom,+list,+term,+list(float),+compound,+term,-compound,-float,-non_negative_integer,-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">fit_smoothing(+atom,+list,+term,+list(float),+compound,-compound,-float,-non_negative_integer,-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
+<div class="line">Initialization has too few known observations:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(insufficient_known_observations,Initialization)</span></code></div>
+</div>
+<div class="line">A seasonal phase has no known initialization observation:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(insufficient_seasonal_phase_observations,Phase)</span></code></div>
+</div>
 <div class="line">The multiplicative Holt-Winters level update is not positive:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_multiplicative_level,Level)</span></code></div>
+</div>
+<div class="line">Fitting or initialization arithmetic fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
 </div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
-<section id="update-smoothing-8">
-<span id="exponential-smoothing-common-0-update-smoothing-8"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">update_smoothing/8</span></code></a><a class="headerlink" href="#update-smoothing-8" title="Link to this heading"></a></h3>
+<section id="update-smoothing-7">
+<span id="exponential-smoothing-common-0-update-smoothing-7"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">update_smoothing/7</span></code></a><a class="headerlink" href="#update-smoothing-7" title="Link to this heading"></a></h3>
 <p>Updates a learned smoothing state with one observation by applying the same fixed-parameter transition used during batch fitting. The returned residual list is empty for a skipped missing observation and a singleton for an observed value.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -598,11 +611,11 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">update_smoothing(Method,State,Parameters,Observation,MissingMarker,UpdatedState,SumSquaredErrorIncrement,Residuals)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">update_smoothing(Method,State,Parameters,Observation,UpdatedState,SumSquaredErrorIncrement,Residuals)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">update_smoothing(+atom,+compound,+list(float),+term,+term,-compound,-float,-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">update_smoothing(+atom,+compound,+list(float),+term,-compound,-float,-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -611,6 +624,10 @@
 <div class="line">The multiplicative Holt-Winters level update is not positive:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_multiplicative_level,Level)</span></code></div>
+</div>
+<div class="line">Update arithmetic fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
 </div>
 </div>
 </div>
@@ -788,7 +805,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="exponential_smoothing_0.html" class="btn btn-neutral float-left" title="exponential_smoothing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="exponential_smoothing_problem_7.html" class="btn btn-neutral float-right" title="exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification,MissingMarker)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="exponential_smoothing_problem_6.html" class="btn btn-neutral float-right" title="exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

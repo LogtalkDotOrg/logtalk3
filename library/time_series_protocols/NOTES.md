@@ -102,10 +102,51 @@ Shared predicates
 - `naive_forecast/3` and `seasonal_naive_forecast/4`: persistence and seasonal-persistence baseline forecasts, usable both as standalone baselines and as building blocks or fallbacks in other forecasters.
 - `constant_forecast/3` and `linear_trend_forecast/4`: constant-value and linear-trend forecast construction, also used by mean and drift baselines.
 - `check_observation/1` and `series_observation_summary/4`: numeric-or-missing observation validation and tail-recursive collection of elapsed length, numeric count, and sum without instantiating missing observations.
+- `indexed_series_observations/3`: collects known numeric values and their original one-based indices, skipping anonymous-variable observations without compressing time positions.
+- `normalize_missing_series/3`: copies numeric-or-unbound observations with a fresh shared variable among missing positions, without binding caller variables. The shared variable is returned separately and is not a configurable data marker. Smoothing fitters accept unbound observations directly and do not require this normalization.
+- `residual_fitted_values/3`: reconstructs aligned numeric pre-update fits as observation minus residual, treating the first known observation as the unscored initialization anchor. Missing positions and the anchor receive fresh independent placeholders. It validates numeric-or-unbound observations and numeric residuals without binding caller inputs, and raises `domain_error(residual_count, Residuals)` unless the residual count equals the known count minus the anchor (zero for empty or all-missing series). Reconstruction takes linear time and output memory and propagates arithmetic evaluation errors. Seasonal fits can be restored with `restore_seasonality/5` starting at training phase one.
+- `valid_residual_history/5`: validates ground parallel numeric residuals and original integer indices without binding inputs. Both lists must match the supplied scored count; indices must increase strictly after the initialization anchor and remain within the elapsed length. The caller checks numeric finiteness. This helper does not recompute aggregate errors or certify historical observations. Validation is linear in the retained count and propagates index/count arithmetic evaluation errors.
 - `replace_diagnostic/4`: replaces a unary diagnostic value while preserving metadata order.
 - `updated_observation_diagnostics/3`: advances training length, update count, observed count, and missing count after a numeric or missing observation, preserving all other metadata and its order.
+
+- `seasonal_autocorrelation_test/4`: tests the lag-frequency autocorrelation using the standard Theta threshold, returning nonseasonal for constant series or series with at most two cycles.
+- `classical_seasonal_adjustment/5`: computes classical additive or multiplicative seasonal factors using centered moving averages and returns the adjusted series and phase-ordered normalized factors.
+- `restore_seasonality/5`: restores an additive or multiplicative seasonal cycle from an explicit starting phase.
 
 These are declared `protected`, intended to be reused by concrete
 forecaster libraries (e.g. `baseline_forecasting`, `exponential_smoothing`,
 `intermittent_demand_forecasting`, `knn_forecasting`, and
 `time_series_regression`) that import this category.
+
+Seasonal preprocessing
+----------------------
+
+Seasonal helpers accept numeric observations and anonymous variables for
+missing observations. The autocorrelation test uses the mean-centered
+available-pair biased autocorrelations up to the supplied seasonal lag
+and the standard Theta cutoff 1.6448536269514722. Constant data, frequency
+one, series with at most two elapsed cycles or `2*Frequency` known values,
+and any tested lag with fewer than two known pairs are nonseasonal. The
+mean and variance use known values, covariance sums skip unavailable
+pairs at original lags, and the test statistic uses the known count.
+This missing-data extension is a conservative heuristic, not a calibrated
+significance guarantee for arbitrary gaps. Its direct
+lag calculation costs O(N*Frequency).
+
+Classical seasonal adjustment requires frequency at least two and at least two
+elapsed cycles. It uses complete centered moving-average windows, including
+the two-by-frequency filter for even periods, followed by phase means of
+interior differences or ratios. Factors are normalized to zero mean for
+additive adjustment or unit mean for multiplicative adjustment. Every original
+phase must have a valid interior deviation; otherwise the lowest unestimable
+phase raises `domain_error(insufficient_seasonal_phase_observations, Phase)`.
+Incomplete windows are discarded, not renormalized or interpolated. Known
+values, including endpoints, are adjusted and missing values remain unbound.
+Multiplicative known observations, valid trends and factors must be positive.
+Rolling window sums and cycle-wise phase totals cost O(N+Frequency).
+
+Restoration uses an explicit 1-based start phase and cycles factors in
+input order, advancing phase through missing positions without binding
+them. It validates the phase and factors even when the values
+list is empty. These helpers do not interpolate missing values, mutate
+input data or silently replace failed seasonal decompositions.

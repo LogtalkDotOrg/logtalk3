@@ -15,7 +15,7 @@ Simple, Holt linear-trend, and additive or multiplicative Holt-Winters exponenti
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-10-01
+| **Date:** 2026-10-02
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -53,7 +53,7 @@ Public predicates
 ``update/3``
 ^^^^^^^^^^^^
 
-Returns a new forecaster after applying one observation.
+Returns a new forecaster after applying one numeric observation or, under skip_update, an unbound variable representing a missing observation. Does not bind missing observations.
 
 | **Compilation flags:**
 |    ``static``
@@ -61,16 +61,16 @@ Returns a new forecaster after applying one observation.
 | **Template:**
 |    ``update(Forecaster,Observation,UpdatedForecaster)``
 | **Mode and number of proofs:**
-|    ``update(+compound,+term,-compound)`` - ``one_or_error``
+|    ``update(+compound,@term,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
 |    ``Forecaster`` is a variable:
 |        ``instantiation_error``
 |    ``Forecaster`` is neither a variable nor a valid forecaster:
 |        ``domain_error(forecaster,Forecaster)``
-|    ``Observation`` is a variable:
+|    ``Observation`` is a variable under the error missing policy:
 |        ``instantiation_error``
-|    ``Observation`` is neither the configured missing marker under ``skip_update`` nor a number:
+|    ``Observation`` is neither a variable nor a number:
 |        ``type_error(number,Observation)``
 |    ``Observation`` is a number but is not finite:
 |        ``domain_error(finite_number,Observation)``
@@ -78,6 +78,10 @@ Returns a new forecaster after applying one observation.
 |        ``domain_error(positive_transformation_series,Observation)``
 |    ``Observation`` is incompatible with a multiplicative model:
 |        ``domain_error(positive_multiplicative_series,Observation)``
+|    The multiplicative level update is not positive:
+|        ``domain_error(positive_multiplicative_level,Level)``
+|    Update or diagnostic arithmetic fails:
+|        ``evaluation_error(Error)``
 
 
 ------------

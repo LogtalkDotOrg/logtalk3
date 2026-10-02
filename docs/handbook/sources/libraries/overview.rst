@@ -136,7 +136,8 @@ Library groups
     ``spade_pattern_miner``.
   - Time series: ``time_series_protocols``, ``baseline_forecasting``,
     ``exponential_smoothing``, ``intermittent_demand_forecasting``,
-    ``knn_forecasting``, ``time_series_regression``.
+    ``knn_forecasting``, ``theta_forecasting``, and
+    ``time_series_regression``.
 
 In addition to the loader-based libraries, this directory also contains
 a small number of standalone reusable entities, namely ``attributes``,

@@ -15,7 +15,7 @@ Shared fitting and forecasting predicates for exponential smoothing models.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-09-27
+| **Date:** 2026-10-02
 
 | **Compilation flags:**
 |    ``static``
@@ -63,52 +63,58 @@ True when the argument is a finite integer or floating point number.
 
 ------------
 
-.. index:: observed_series/3
-.. _exponential_smoothing_common/0::observed_series/3:
+.. index:: observed_series/2
+.. _exponential_smoothing_common/0::observed_series/2:
 
-``observed_series/3``
+``observed_series/2``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Returns the observations that are not identical to the configured missing marker.
+Returns the known observations from a validated numeric-or-unbound series without binding missing observations.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``observed_series(Series,MissingMarker,ObservedSeries)``
+|    ``observed_series(Series,ObservedSeries)``
 | **Mode and number of proofs:**
-|    ``observed_series(+list,+term,-list(number))`` - ``one``
+|    ``observed_series(+list,-list(number))`` - ``one``
 
 
 ------------
 
-.. index:: fit_smoothing/10
-.. _exponential_smoothing_common/0::fit_smoothing/10:
+.. index:: fit_smoothing/9
+.. _exponential_smoothing_common/0::fit_smoothing/9:
 
-``fit_smoothing/10``
-^^^^^^^^^^^^^^^^^^^^
+``fit_smoothing/9``
+^^^^^^^^^^^^^^^^^^^
 
-Fits the selected exponential smoothing method using fixed parameters and the requested initialization strategy. Values identical to the missing marker advance predictions and seasonal phase without being scored or updating smoothing components.
+Fits the selected exponential smoothing method using fixed parameters and the requested initialization strategy. Unbound observations advance predictions and seasonal phase without being scored, instantiated, or updating smoothing components.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``fit_smoothing(Method,Series,Frequency,Parameters,InitializationSpecification,MissingMarker,State,SumSquaredError,ErrorCount,Residuals)``
+|    ``fit_smoothing(Method,Series,Frequency,Parameters,InitializationSpecification,State,SumSquaredError,ErrorCount,Residuals)``
 | **Mode and number of proofs:**
-|    ``fit_smoothing(+atom,+list,+term,+list(float),+compound,+term,-compound,-float,-non_negative_integer,-list(float))`` - ``one_or_error``
+|    ``fit_smoothing(+atom,+list,+term,+list(float),+compound,-compound,-float,-non_negative_integer,-list(float))`` - ``one_or_error``
 
 | **Exceptions:**
+|    Initialization has too few known observations:
+|        ``domain_error(insufficient_known_observations,Initialization)``
+|    A seasonal phase has no known initialization observation:
+|        ``domain_error(insufficient_seasonal_phase_observations,Phase)``
 |    The multiplicative Holt-Winters level update is not positive:
 |        ``domain_error(positive_multiplicative_level,Level)``
+|    Fitting or initialization arithmetic fails:
+|        ``evaluation_error(Error)``
 
 
 ------------
 
-.. index:: update_smoothing/8
-.. _exponential_smoothing_common/0::update_smoothing/8:
+.. index:: update_smoothing/7
+.. _exponential_smoothing_common/0::update_smoothing/7:
 
-``update_smoothing/8``
+``update_smoothing/7``
 ^^^^^^^^^^^^^^^^^^^^^^
 
 Updates a learned smoothing state with one observation by applying the same fixed-parameter transition used during batch fitting. The returned residual list is empty for a skipped missing observation and a singleton for an observed value.
@@ -117,13 +123,15 @@ Updates a learned smoothing state with one observation by applying the same fixe
 |    ``static``
 
 | **Template:**
-|    ``update_smoothing(Method,State,Parameters,Observation,MissingMarker,UpdatedState,SumSquaredErrorIncrement,Residuals)``
+|    ``update_smoothing(Method,State,Parameters,Observation,UpdatedState,SumSquaredErrorIncrement,Residuals)``
 | **Mode and number of proofs:**
-|    ``update_smoothing(+atom,+compound,+list(float),+term,+term,-compound,-float,-list(float))`` - ``one_or_error``
+|    ``update_smoothing(+atom,+compound,+list(float),+term,-compound,-float,-list(float))`` - ``one_or_error``
 
 | **Exceptions:**
 |    The multiplicative Holt-Winters level update is not positive:
 |        ``domain_error(positive_multiplicative_level,Level)``
+|    Update arithmetic fails:
+|        ``evaluation_error(Error)``
 
 
 ------------

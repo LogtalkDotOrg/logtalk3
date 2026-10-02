@@ -19,14 +19,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(exponential_smoothing_problem(_Method_, _Series_, _OptimizationSeries_, _Frequency_, _ParameterSpecification_, _InitializationSpecification_, _MissingMarker_),
+:- object(exponential_smoothing_problem(_Method_, _Series_, _OptimizationSeries_, _Frequency_, _ParameterSpecification_, _InitializationSpecification_),
 	implements([local_optimization_problem_protocol, differential_evolution_problem_protocol]),
 	imports(exponential_smoothing_common)).
 
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-09-27,
+		date is 2026-10-02,
 		comment is 'Bounded sum-of-squared-errors optimization problem for exponential smoothing parameters. Implements both the local-optimization (Nelder-Mead) and Differential Evolution problem protocols over the same objective.',
 		parameters is [
 			'Method' - 'Exponential smoothing method.',
@@ -34,8 +34,7 @@
 			'OptimizationSeries' - 'Training series with missing observations removed for optimizer initialization and bounds.',
 			'Frequency' - 'Seasonal frequency or ``none``.',
 			'ParameterSpecification' - 'Canonical list of fixed or automatic parameter options.',
-			'InitializationSpecification' - 'Initialization strategy and number of initial cycles.',
-			'MissingMarker' - 'Term denoting an unobserved value.'
+			'InitializationSpecification' - 'Initialization strategy and number of initial cycles.'
 		]
 	]).
 
@@ -49,7 +48,7 @@
 	objective(Point, SumSquaredError) :-
 		^^optimization_components(_Method_, _OptimizationSeries_, _Frequency_, _ParameterSpecification_, _InitializationSpecification_, Point, Parameters, EffectiveInitializationSpecification),
 		(	catch(
-				^^fit_smoothing(_Method_, _Series_, _Frequency_, Parameters, EffectiveInitializationSpecification, _MissingMarker_, _State, SumSquaredError, _ErrorCount, _Residuals),
+				^^fit_smoothing(_Method_, _Series_, _Frequency_, Parameters, EffectiveInitializationSpecification, _State, SumSquaredError, _ErrorCount, _Residuals),
 				error(domain_error(positive_multiplicative_level, _), _),
 				fail
 			) ->

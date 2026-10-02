@@ -146,7 +146,7 @@
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#exponential-smoothing"><span class="xref std std-ref">exponential_smoothing</span></a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">exponential_smoothing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="exponential_smoothing_common_0.html">exponential_smoothing_common</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exponential_smoothing_problem_7.html">exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification,MissingMarker)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exponential_smoothing_problem_6.html">exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#fcube"><span class="xref std std-ref">fcube</span></a></li>
@@ -363,6 +363,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#term-io"><span class="xref std std-ref">term_io</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#text-normalization"><span class="xref std std-ref">text_normalization</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#text-vectorization"><span class="xref std std-ref">text_vectorization</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#theta-forecasting"><span class="xref std std-ref">theta_forecasting</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#thurstone-mosteller-ranker"><span class="xref std std-ref">thurstone_mosteller_ranker</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#time-scales"><span class="xref std std-ref">time_scales</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#time-series-protocols"><span class="xref std std-ref">time_series_protocols</span></a></li>
@@ -458,7 +459,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-10-01</div>
+<div class="line"><strong>Date:</strong> 2026-10-02</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -513,7 +514,7 @@
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
 <section id="update-3">
 <span id="exponential-smoothing-0-update-3"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">update/3</span></code></a><a class="headerlink" href="#update-3" title="Link to this heading"></a></h3>
-<p>Returns a new forecaster after applying one observation.</p>
+<p>Returns a new forecaster after applying one numeric observation or, under skip_update, an unbound variable representing a missing observation. Does not bind missing observations.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -527,7 +528,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">update(+compound,+term,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">update(+compound,&#64;term,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -541,11 +542,11 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(forecaster,Forecaster)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Observation</span></code> is a variable:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Observation</span></code> is a variable under the error missing policy:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Observation</span></code> is neither the configured missing marker under <code class="docutils literal notranslate"><span class="pre">skip_update</span></code> nor a number:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Observation</span></code> is neither a variable nor a number:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Observation)</span></code></div>
 </div>
@@ -560,6 +561,14 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Observation</span></code> is incompatible with a multiplicative model:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_multiplicative_series,Observation)</span></code></div>
+</div>
+<div class="line">The multiplicative level update is not positive:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_multiplicative_level,Level)</span></code></div>
+</div>
+<div class="line">Update or diagnostic arithmetic fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
 </div>
 </div>
 </div>

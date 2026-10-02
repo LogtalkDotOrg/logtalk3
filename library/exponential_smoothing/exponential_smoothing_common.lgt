@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-27,
+		date is 2026-10-02,
 		comment is 'Shared fitting and forecasting predicates for exponential smoothing models.'
 	]).
 
@@ -47,99 +47,103 @@
 		number(Number),
 		catch((Difference is Number - Number, Difference =:= 0), _Error, fail).
 
-	:- protected(observed_series/3).
-	:- mode(observed_series(+list, +term, -list(number)), one).
-	:- info(observed_series/3, [
-		comment is 'Returns the observations that are not identical to the configured missing marker.',
-		argnames is ['Series', 'MissingMarker', 'ObservedSeries']
+	:- protected(observed_series/2).
+	:- mode(observed_series(+list, -list(number)), one).
+	:- info(observed_series/2, [
+		comment is 'Returns the known observations from a validated numeric-or-unbound series without binding missing observations.',
+		argnames is ['Series', 'ObservedSeries']
 	]).
 
-	observed_series([], _MissingMarker, []).
-	observed_series([Value| Values], MissingMarker, ObservedSeries) :-
-		(	Value == MissingMarker ->
+	observed_series([], []).
+	observed_series([Value| Values], ObservedSeries) :-
+		(	var(Value) ->
 			ObservedSeries = Rest
 		;	ObservedSeries = [Value| Rest]
 		),
-		observed_series(Values, MissingMarker, Rest).
+		observed_series(Values, Rest).
 
-	:- protected(fit_smoothing/10).
-	:- mode(fit_smoothing(+atom, +list, +term, +list(float), +compound, +term, -compound, -float, -non_negative_integer, -list(float)), one_or_error).
-	:- info(fit_smoothing/10, [
-		comment is 'Fits the selected exponential smoothing method using fixed parameters and the requested initialization strategy. Values identical to the missing marker advance predictions and seasonal phase without being scored or updating smoothing components.',
-		argnames is ['Method', 'Series', 'Frequency', 'Parameters', 'InitializationSpecification', 'MissingMarker', 'State', 'SumSquaredError', 'ErrorCount', 'Residuals'],
+	:- protected(fit_smoothing/9).
+	:- mode(fit_smoothing(+atom, +list, +term, +list(float), +compound, -compound, -float, -non_negative_integer, -list(float)), one_or_error).
+	:- info(fit_smoothing/9, [
+		comment is 'Fits the selected exponential smoothing method using fixed parameters and the requested initialization strategy. Unbound observations advance predictions and seasonal phase without being scored, instantiated, or updating smoothing components.',
+		argnames is ['Method', 'Series', 'Frequency', 'Parameters', 'InitializationSpecification', 'State', 'SumSquaredError', 'ErrorCount', 'Residuals'],
 		exceptions is [
-			'The multiplicative Holt-Winters level update is not positive' - domain_error(positive_multiplicative_level, 'Level')
+			'Initialization has too few known observations' - domain_error(insufficient_known_observations, 'Initialization'),
+			'A seasonal phase has no known initialization observation' - domain_error(insufficient_seasonal_phase_observations, 'Phase'),
+			'The multiplicative Holt-Winters level update is not positive' - domain_error(positive_multiplicative_level, 'Level'),
+			'Fitting or initialization arithmetic fails' - evaluation_error('Error')
 		]
 	]).
 
-	fit_smoothing(simple, Series, none, [Alpha], InitializationSpecification, MissingMarker, level(Level), SumSquaredError, ErrorCount, Residuals) :-
+	fit_smoothing(simple, Series, none, [Alpha], InitializationSpecification, level(Level), SumSquaredError, ErrorCount, Residuals) :-
 		!,
-		initialize_simple_missing(InitializationSpecification, Series, MissingMarker, Values, Level0),
-		fit_simple(Values, MissingMarker, Alpha, Level0, 0.0, 0, Level, SumSquaredError, ErrorCount, Residuals).
-	fit_smoothing(holt, Series, none, [Alpha, Beta], InitializationSpecification, MissingMarker, holt(Level, Trend), SumSquaredError, ErrorCount, Residuals) :-
+		initialize_simple_missing(InitializationSpecification, Series, Values, Level0),
+		fit_simple(Values, Alpha, Level0, 0.0, 0, Level, SumSquaredError, ErrorCount, Residuals).
+	fit_smoothing(holt, Series, none, [Alpha, Beta], InitializationSpecification, holt(Level, Trend), SumSquaredError, ErrorCount, Residuals) :-
 		!,
-		initialize_holt_missing(InitializationSpecification, Series, MissingMarker, Values, Level0, Trend0),
-		fit_holt(Values, MissingMarker, Alpha, Beta, Level0, Trend0, 0.0, 0, Level, Trend, SumSquaredError, ErrorCount, Residuals).
-	fit_smoothing(holt_damped, Series, none, [Alpha, Beta, Phi], InitializationSpecification, MissingMarker, holt_damped(Level, Trend, Phi), SumSquaredError, ErrorCount, Residuals) :-
+		initialize_holt_missing(InitializationSpecification, Series, Values, Level0, Trend0),
+		fit_holt(Values, Alpha, Beta, Level0, Trend0, 0.0, 0, Level, Trend, SumSquaredError, ErrorCount, Residuals).
+	fit_smoothing(holt_damped, Series, none, [Alpha, Beta, Phi], InitializationSpecification, holt_damped(Level, Trend, Phi), SumSquaredError, ErrorCount, Residuals) :-
 		!,
-		initialize_holt_missing(InitializationSpecification, Series, MissingMarker, Values, Level0, Trend0),
-		fit_holt_damped(Values, MissingMarker, Alpha, Beta, Phi, Level0, Trend0, 0.0, 0, Level, Trend, SumSquaredError, ErrorCount, Residuals).
-	fit_smoothing(holt_winters_additive, Series, Frequency, [Alpha, Beta, Gamma], InitializationSpecification, MissingMarker, holt_winters(Level, Trend, Frequency, SeasonalQueue), SumSquaredError, ErrorCount, Residuals) :-
+		initialize_holt_missing(InitializationSpecification, Series, Values, Level0, Trend0),
+		fit_holt_damped(Values, Alpha, Beta, Phi, Level0, Trend0, 0.0, 0, Level, Trend, SumSquaredError, ErrorCount, Residuals).
+	fit_smoothing(holt_winters_additive, Series, Frequency, [Alpha, Beta, Gamma], InitializationSpecification, holt_winters(Level, Trend, Frequency, SeasonalQueue), SumSquaredError, ErrorCount, Residuals) :-
 		!,
-		initialize_seasonal_missing(InitializationSpecification, additive, Series, Frequency, MissingMarker, Remaining, Level0, Trend0, SeasonalFactors),
+		initialize_seasonal_missing(InitializationSpecification, additive, Series, Frequency, Remaining, Level0, Trend0, SeasonalFactors),
 		deque::as_deque(SeasonalFactors, SeasonalDeque0),
-		fit_seasonal(additive, Remaining, MissingMarker, Alpha, Beta, Gamma, Frequency, Frequency, Level0, Trend0, SeasonalDeque0, 0.0, 0, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, Residuals),
+		fit_seasonal(additive, Remaining, Alpha, Beta, Gamma, Frequency, Frequency, Level0, Trend0, SeasonalDeque0, 0.0, 0, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, Residuals),
 		deque::as_list(SeasonalDeque, SeasonalQueue).
-	fit_smoothing(holt_winters_multiplicative, Series, Frequency, [Alpha, Beta, Gamma], InitializationSpecification, MissingMarker, holt_winters(Level, Trend, Frequency, SeasonalQueue), SumSquaredError, ErrorCount, Residuals) :-
+	fit_smoothing(holt_winters_multiplicative, Series, Frequency, [Alpha, Beta, Gamma], InitializationSpecification, holt_winters(Level, Trend, Frequency, SeasonalQueue), SumSquaredError, ErrorCount, Residuals) :-
 		!,
-		initialize_seasonal_missing(InitializationSpecification, multiplicative, Series, Frequency, MissingMarker, Remaining, Level0, Trend0, SeasonalFactors),
+		initialize_seasonal_missing(InitializationSpecification, multiplicative, Series, Frequency, Remaining, Level0, Trend0, SeasonalFactors),
 		deque::as_deque(SeasonalFactors, SeasonalDeque0),
-		fit_seasonal(multiplicative, Remaining, MissingMarker, Alpha, Beta, Gamma, Frequency, Frequency, Level0, Trend0, SeasonalDeque0, 0.0, 0, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, Residuals),
+		fit_seasonal(multiplicative, Remaining, Alpha, Beta, Gamma, Frequency, Frequency, Level0, Trend0, SeasonalDeque0, 0.0, 0, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, Residuals),
 		deque::as_list(SeasonalDeque, SeasonalQueue).
-	fit_smoothing(holt_winters_additive_damped, Series, Frequency, [Alpha, Beta, Gamma, Phi], InitializationSpecification, MissingMarker, holt_winters_damped(Level, Trend, Phi, Frequency, SeasonalQueue), SumSquaredError, ErrorCount, Residuals) :-
+	fit_smoothing(holt_winters_additive_damped, Series, Frequency, [Alpha, Beta, Gamma, Phi], InitializationSpecification, holt_winters_damped(Level, Trend, Phi, Frequency, SeasonalQueue), SumSquaredError, ErrorCount, Residuals) :-
 		!,
-		initialize_seasonal_missing(InitializationSpecification, additive, Series, Frequency, MissingMarker, Remaining, Level0, Trend0, SeasonalFactors),
+		initialize_seasonal_missing(InitializationSpecification, additive, Series, Frequency, Remaining, Level0, Trend0, SeasonalFactors),
 		deque::as_deque(SeasonalFactors, SeasonalDeque0),
-		fit_seasonal_damped(additive, Remaining, MissingMarker, Alpha, Beta, Gamma, Phi, Frequency, Frequency, Level0, Trend0, SeasonalDeque0, 0.0, 0, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, Residuals),
+		fit_seasonal_damped(additive, Remaining, Alpha, Beta, Gamma, Phi, Frequency, Frequency, Level0, Trend0, SeasonalDeque0, 0.0, 0, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, Residuals),
 		deque::as_list(SeasonalDeque, SeasonalQueue).
-	fit_smoothing(holt_winters_multiplicative_damped, Series, Frequency, [Alpha, Beta, Gamma, Phi], InitializationSpecification, MissingMarker, holt_winters_damped(Level, Trend, Phi, Frequency, SeasonalQueue), SumSquaredError, ErrorCount, Residuals) :-
+	fit_smoothing(holt_winters_multiplicative_damped, Series, Frequency, [Alpha, Beta, Gamma, Phi], InitializationSpecification, holt_winters_damped(Level, Trend, Phi, Frequency, SeasonalQueue), SumSquaredError, ErrorCount, Residuals) :-
 		!,
-		initialize_seasonal_missing(InitializationSpecification, multiplicative, Series, Frequency, MissingMarker, Remaining, Level0, Trend0, SeasonalFactors),
+		initialize_seasonal_missing(InitializationSpecification, multiplicative, Series, Frequency, Remaining, Level0, Trend0, SeasonalFactors),
 		deque::as_deque(SeasonalFactors, SeasonalDeque0),
-		fit_seasonal_damped(multiplicative, Remaining, MissingMarker, Alpha, Beta, Gamma, Phi, Frequency, Frequency, Level0, Trend0, SeasonalDeque0, 0.0, 0, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, Residuals),
+		fit_seasonal_damped(multiplicative, Remaining, Alpha, Beta, Gamma, Phi, Frequency, Frequency, Level0, Trend0, SeasonalDeque0, 0.0, 0, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, Residuals),
 		deque::as_list(SeasonalDeque, SeasonalQueue).
 
-	:- protected(update_smoothing/8).
-	:- mode(update_smoothing(+atom, +compound, +list(float), +term, +term, -compound, -float, -list(float)), one_or_error).
-	:- info(update_smoothing/8, [
+	:- protected(update_smoothing/7).
+	:- mode(update_smoothing(+atom, +compound, +list(float), +term, -compound, -float, -list(float)), one_or_error).
+	:- info(update_smoothing/7, [
 		comment is 'Updates a learned smoothing state with one observation by applying the same fixed-parameter transition used during batch fitting. The returned residual list is empty for a skipped missing observation and a singleton for an observed value.',
-		argnames is ['Method', 'State', 'Parameters', 'Observation', 'MissingMarker', 'UpdatedState', 'SumSquaredErrorIncrement', 'Residuals'],
+		argnames is ['Method', 'State', 'Parameters', 'Observation', 'UpdatedState', 'SumSquaredErrorIncrement', 'Residuals'],
 		exceptions is [
-			'The multiplicative Holt-Winters level update is not positive' - domain_error(positive_multiplicative_level, 'Level')
+			'The multiplicative Holt-Winters level update is not positive' - domain_error(positive_multiplicative_level, 'Level'),
+			'Update arithmetic fails' - evaluation_error('Error')
 		]
 	]).
 
-	update_smoothing(simple, level(Level0), [Alpha], Observation, MissingMarker, level(Level), SumSquaredError, Residuals) :-
-		fit_simple([Observation], MissingMarker, Alpha, Level0, 0.0, 0, Level, SumSquaredError, _ErrorCount, Residuals).
-	update_smoothing(holt, holt(Level0, Trend0), [Alpha, Beta], Observation, MissingMarker, holt(Level, Trend), SumSquaredError, Residuals) :-
-		fit_holt([Observation], MissingMarker, Alpha, Beta, Level0, Trend0, 0.0, 0, Level, Trend, SumSquaredError, _ErrorCount, Residuals).
-	update_smoothing(holt_damped, holt_damped(Level0, Trend0, Phi), [Alpha, Beta, Phi], Observation, MissingMarker, holt_damped(Level, Trend, Phi), SumSquaredError, Residuals) :-
-		fit_holt_damped([Observation], MissingMarker, Alpha, Beta, Phi, Level0, Trend0, 0.0, 0, Level, Trend, SumSquaredError, _ErrorCount, Residuals).
-	update_smoothing(holt_winters_additive, holt_winters(Level0, Trend0, Frequency, SeasonalQueue0), [Alpha, Beta, Gamma], Observation, MissingMarker, holt_winters(Level, Trend, Frequency, SeasonalQueue), SumSquaredError, Residuals) :-
+	update_smoothing(simple, level(Level0), [Alpha], Observation, level(Level), SumSquaredError, Residuals) :-
+		fit_simple([Observation], Alpha, Level0, 0.0, 0, Level, SumSquaredError, _ErrorCount, Residuals).
+	update_smoothing(holt, holt(Level0, Trend0), [Alpha, Beta], Observation, holt(Level, Trend), SumSquaredError, Residuals) :-
+		fit_holt([Observation], Alpha, Beta, Level0, Trend0, 0.0, 0, Level, Trend, SumSquaredError, _ErrorCount, Residuals).
+	update_smoothing(holt_damped, holt_damped(Level0, Trend0, Phi), [Alpha, Beta, Phi], Observation, holt_damped(Level, Trend, Phi), SumSquaredError, Residuals) :-
+		fit_holt_damped([Observation], Alpha, Beta, Phi, Level0, Trend0, 0.0, 0, Level, Trend, SumSquaredError, _ErrorCount, Residuals).
+	update_smoothing(holt_winters_additive, holt_winters(Level0, Trend0, Frequency, SeasonalQueue0), [Alpha, Beta, Gamma], Observation, holt_winters(Level, Trend, Frequency, SeasonalQueue), SumSquaredError, Residuals) :-
 		deque::as_deque(SeasonalQueue0, SeasonalDeque0),
-		fit_seasonal(additive, [Observation], MissingMarker, Alpha, Beta, Gamma, Frequency, Frequency, Level0, Trend0, SeasonalDeque0, 0.0, 0, Level, Trend, SeasonalDeque, SumSquaredError, _ErrorCount, Residuals),
+		fit_seasonal(additive, [Observation], Alpha, Beta, Gamma, Frequency, Frequency, Level0, Trend0, SeasonalDeque0, 0.0, 0, Level, Trend, SeasonalDeque, SumSquaredError, _ErrorCount, Residuals),
 		deque::as_list(SeasonalDeque, SeasonalQueue).
-	update_smoothing(holt_winters_multiplicative, holt_winters(Level0, Trend0, Frequency, SeasonalQueue0), [Alpha, Beta, Gamma], Observation, MissingMarker, holt_winters(Level, Trend, Frequency, SeasonalQueue), SumSquaredError, Residuals) :-
+	update_smoothing(holt_winters_multiplicative, holt_winters(Level0, Trend0, Frequency, SeasonalQueue0), [Alpha, Beta, Gamma], Observation, holt_winters(Level, Trend, Frequency, SeasonalQueue), SumSquaredError, Residuals) :-
 		deque::as_deque(SeasonalQueue0, SeasonalDeque0),
-		fit_seasonal(multiplicative, [Observation], MissingMarker, Alpha, Beta, Gamma, Frequency, Frequency, Level0, Trend0, SeasonalDeque0, 0.0, 0, Level, Trend, SeasonalDeque, SumSquaredError, _ErrorCount, Residuals),
+		fit_seasonal(multiplicative, [Observation], Alpha, Beta, Gamma, Frequency, Frequency, Level0, Trend0, SeasonalDeque0, 0.0, 0, Level, Trend, SeasonalDeque, SumSquaredError, _ErrorCount, Residuals),
 		deque::as_list(SeasonalDeque, SeasonalQueue).
-	update_smoothing(holt_winters_additive_damped, holt_winters_damped(Level0, Trend0, Phi, Frequency, SeasonalQueue0), [Alpha, Beta, Gamma, Phi], Observation, MissingMarker, holt_winters_damped(Level, Trend, Phi, Frequency, SeasonalQueue), SumSquaredError, Residuals) :-
+	update_smoothing(holt_winters_additive_damped, holt_winters_damped(Level0, Trend0, Phi, Frequency, SeasonalQueue0), [Alpha, Beta, Gamma, Phi], Observation, holt_winters_damped(Level, Trend, Phi, Frequency, SeasonalQueue), SumSquaredError, Residuals) :-
 		deque::as_deque(SeasonalQueue0, SeasonalDeque0),
-		fit_seasonal_damped(additive, [Observation], MissingMarker, Alpha, Beta, Gamma, Phi, Frequency, Frequency, Level0, Trend0, SeasonalDeque0, 0.0, 0, Level, Trend, SeasonalDeque, SumSquaredError, _ErrorCount, Residuals),
+		fit_seasonal_damped(additive, [Observation], Alpha, Beta, Gamma, Phi, Frequency, Frequency, Level0, Trend0, SeasonalDeque0, 0.0, 0, Level, Trend, SeasonalDeque, SumSquaredError, _ErrorCount, Residuals),
 		deque::as_list(SeasonalDeque, SeasonalQueue).
-	update_smoothing(holt_winters_multiplicative_damped, holt_winters_damped(Level0, Trend0, Phi, Frequency, SeasonalQueue0), [Alpha, Beta, Gamma, Phi], Observation, MissingMarker, holt_winters_damped(Level, Trend, Phi, Frequency, SeasonalQueue), SumSquaredError, Residuals) :-
+	update_smoothing(holt_winters_multiplicative_damped, holt_winters_damped(Level0, Trend0, Phi, Frequency, SeasonalQueue0), [Alpha, Beta, Gamma, Phi], Observation, holt_winters_damped(Level, Trend, Phi, Frequency, SeasonalQueue), SumSquaredError, Residuals) :-
 		deque::as_deque(SeasonalQueue0, SeasonalDeque0),
-		fit_seasonal_damped(multiplicative, [Observation], MissingMarker, Alpha, Beta, Gamma, Phi, Frequency, Frequency, Level0, Trend0, SeasonalDeque0, 0.0, 0, Level, Trend, SeasonalDeque, SumSquaredError, _ErrorCount, Residuals),
+		fit_seasonal_damped(multiplicative, [Observation], Alpha, Beta, Gamma, Phi, Frequency, Frequency, Level0, Trend0, SeasonalDeque0, 0.0, 0, Level, Trend, SeasonalDeque, SumSquaredError, _ErrorCount, Residuals),
 		deque::as_list(SeasonalDeque, SeasonalQueue).
 
 	:- protected(forecast_smoothing/4).
@@ -404,143 +408,143 @@
 		Value is exp(Coordinate),
 		exponentiate_coordinates(Coordinates, Values).
 
-	initialize_simple_missing(InitializationSpecification, Series, MissingMarker, Values, Level) :-
-		\+ contains_missing(Series, MissingMarker),
+	initialize_simple_missing(InitializationSpecification, Series, Values, Level) :-
+		\+ contains_missing(Series),
 		!,
 		initialize_simple(InitializationSpecification, Series, Values, Level).
-	initialize_simple_missing(initialization(two_cycles, _InitialCycles), Series, MissingMarker, Values, Level) :-
+	initialize_simple_missing(initialization(two_cycles, _InitialCycles), Series, Values, Level) :-
 		!,
-		first_known_with_tail(Series, MissingMarker, 1, _Index, Level, Values).
-	initialize_simple_missing(initialization(regression, _InitialCycles), Series, MissingMarker, Values, Level) :-
+		first_known_with_tail(Series, 1, _Index, Level, Values).
+	initialize_simple_missing(initialization(regression, _InitialCycles), Series, Values, Level) :-
 		!,
-		indexed_regression_parameters(Series, MissingMarker, Trend, Intercept),
+		indexed_regression_parameters(Series, Trend, Intercept),
 		Level is Intercept + Trend,
 		take(1, Series, _Initial, Values).
-	initialize_simple_missing(initialization(optimized, _InitialCycles, level(Level)), Series, _MissingMarker, Values, Level) :-
+	initialize_simple_missing(initialization(optimized, _InitialCycles, level(Level)), Series, Values, Level) :-
 		take(1, Series, _Initial, Values).
 
-	initialize_holt_missing(InitializationSpecification, Series, MissingMarker, Values, Level, Trend) :-
-		\+ contains_missing(Series, MissingMarker),
+	initialize_holt_missing(InitializationSpecification, Series, Values, Level, Trend) :-
+		\+ contains_missing(Series),
 		!,
 		initialize_holt(InitializationSpecification, Series, Values, Level, Trend).
-	initialize_holt_missing(initialization(two_cycles, _InitialCycles), Series, MissingMarker, Values, Level, Trend) :-
+	initialize_holt_missing(initialization(two_cycles, _InitialCycles), Series, Values, Level, Trend) :-
 		!,
-		first_known_with_tail(Series, MissingMarker, 1, FirstIndex, First, AfterFirst),
+		first_known_with_tail(Series, 1, FirstIndex, First, AfterFirst),
 		NextIndex is FirstIndex + 1,
-		first_known_with_tail(AfterFirst, MissingMarker, NextIndex, SecondIndex, Level, Values),
+		first_known_with_tail(AfterFirst, NextIndex, SecondIndex, Level, Values),
 		Trend is (Level - First) / (SecondIndex - FirstIndex).
-	initialize_holt_missing(initialization(regression, _InitialCycles), Series, MissingMarker, Values, Level, Trend) :-
+	initialize_holt_missing(initialization(regression, _InitialCycles), Series, Values, Level, Trend) :-
 		!,
-		indexed_regression_parameters(Series, MissingMarker, Trend, Intercept),
+		indexed_regression_parameters(Series, Trend, Intercept),
 		Level is Intercept + 2.0 * Trend,
 		take(2, Series, _Initial, Values).
-	initialize_holt_missing(initialization(optimized, _InitialCycles, holt(Level, Trend)), Series, _MissingMarker, Values, Level, Trend) :-
+	initialize_holt_missing(initialization(optimized, _InitialCycles, holt(Level, Trend)), Series, Values, Level, Trend) :-
 		take(2, Series, _Initial, Values).
 
-	initialize_seasonal_missing(InitializationSpecification, Method, Series, Frequency, MissingMarker, Remaining, Level, Trend, Seasonal) :-
-		\+ contains_missing(Series, MissingMarker),
+	initialize_seasonal_missing(InitializationSpecification, Method, Series, Frequency, Remaining, Level, Trend, Seasonal) :-
+		\+ contains_missing(Series),
 		!,
 		initialize_seasonal(InitializationSpecification, Method, Series, Frequency, Remaining, Level, Trend, Seasonal).
-	initialize_seasonal_missing(initialization(two_cycles, _InitialCycles), Method, Series, Frequency, MissingMarker, Remaining, Level, Trend, Seasonal) :-
+	initialize_seasonal_missing(initialization(two_cycles, _InitialCycles), Method, Series, Frequency, Remaining, Level, Trend, Seasonal) :-
 		!,
 		InitializationLength is 2 * Frequency,
 		take(InitializationLength, Series, InitialSeries, Remaining),
-		seasonal_missing_parameters(Method, InitialSeries, Frequency, MissingMarker, Level, Trend, Seasonal).
-	initialize_seasonal_missing(initialization(regression, InitialCycles), Method, Series, Frequency, MissingMarker, Remaining, Level, Trend, Seasonal) :-
+		seasonal_missing_parameters(Method, InitialSeries, Frequency, Level, Trend, Seasonal).
+	initialize_seasonal_missing(initialization(regression, InitialCycles), Method, Series, Frequency, Remaining, Level, Trend, Seasonal) :-
 		!,
 		InitializationLength is InitialCycles * Frequency,
 		take(InitializationLength, Series, InitialSeries, Remaining),
-		indexed_regression_parameters(InitialSeries, MissingMarker, Trend, Intercept),
+		indexed_regression_parameters(InitialSeries, Trend, Intercept),
 		Level is Intercept + InitializationLength * Trend,
-		initial_regression_factors_missing(Method, InitialSeries, Frequency, MissingMarker, Trend, Intercept, Seasonal0),
+		initial_regression_factors_missing(Method, InitialSeries, Frequency, Trend, Intercept, Seasonal0),
 		normalize_seasonal_factors(Method, Seasonal0, Seasonal).
-	initialize_seasonal_missing(initialization(optimized, InitialCycles, seasonal(Level, Trend, Seasonal)), _Method, Series, Frequency, _MissingMarker, Remaining, Level, Trend, Seasonal) :-
+	initialize_seasonal_missing(initialization(optimized, InitialCycles, seasonal(Level, Trend, Seasonal)), _Method, Series, Frequency, Remaining, Level, Trend, Seasonal) :-
 		InitializationLength is InitialCycles * Frequency,
 		take(InitializationLength, Series, _InitialSeries, Remaining).
 
-	contains_missing([Value| _Values], MissingMarker) :-
-		Value == MissingMarker,
+	contains_missing([Value| _Values]) :-
+		var(Value),
 		!.
-	contains_missing([_Value| Values], MissingMarker) :-
-		contains_missing(Values, MissingMarker).
+	contains_missing([_Value| Values]) :-
+		contains_missing(Values).
 
-	first_known_with_tail([], _MissingMarker, _Index, _KnownIndex, _Value, _Tail) :-
+	first_known_with_tail([], _Index, _KnownIndex, _Value, _Tail) :-
 		domain_error(insufficient_known_observations, nonseasonal).
-	first_known_with_tail([Value| Values], MissingMarker, Index, KnownIndex, KnownValue, Tail) :-
-		(	Value == MissingMarker ->
+	first_known_with_tail([Value| Values], Index, KnownIndex, KnownValue, Tail) :-
+		(	var(Value) ->
 			NextIndex is Index + 1,
-			first_known_with_tail(Values, MissingMarker, NextIndex, KnownIndex, KnownValue, Tail)
+			first_known_with_tail(Values, NextIndex, KnownIndex, KnownValue, Tail)
 		;	KnownIndex = Index,
 			KnownValue = Value,
 			Tail = Values
 		).
 
-	indexed_regression_parameters(Series, MissingMarker, Trend, Intercept) :-
-		known_indexed_values(Series, MissingMarker, 1, Indices, Values),
+	indexed_regression_parameters(Series, Trend, Intercept) :-
+		known_indexed_values(Series, 1, Indices, Values),
 		(	Indices = [_First, _Second| _] ->
 			linear_regression(Indices, Values, Trend, Intercept)
 		;	domain_error(insufficient_known_observations, regression)
 		).
 
-	known_indexed_values([], _MissingMarker, _Index, [], []).
-	known_indexed_values([Value| Values], MissingMarker, Index, Indices, KnownValues) :-
+	known_indexed_values([], _Index, [], []).
+	known_indexed_values([Value| Values], Index, Indices, KnownValues) :-
 		NextIndex is Index + 1,
-		(	Value == MissingMarker ->
+		(	var(Value) ->
 			Indices = RestIndices,
 			KnownValues = RestValues
 		;	Indices = [Index| RestIndices],
 			KnownValues = [Value| RestValues]
 		),
-		known_indexed_values(Values, MissingMarker, NextIndex, RestIndices, RestValues).
+		known_indexed_values(Values, NextIndex, RestIndices, RestValues).
 
-	seasonal_missing_parameters(Method, InitialSeries, Frequency, MissingMarker, Level, Trend, Seasonal) :-
+	seasonal_missing_parameters(Method, InitialSeries, Frequency, Level, Trend, Seasonal) :-
 		take(Frequency, InitialSeries, FirstCycle, SecondCycle),
-		cycle_mean_missing(FirstCycle, MissingMarker, FirstMean),
-		cycle_mean_missing(SecondCycle, MissingMarker, SecondMean),
+		cycle_mean_missing(FirstCycle, FirstMean),
+		cycle_mean_missing(SecondCycle, SecondMean),
 		Trend is (SecondMean - FirstMean) / Frequency,
 		initial_seasonal_level(Method, Frequency, SecondMean, Trend, Level),
-		initial_missing_factors(1, Frequency, Method, FirstCycle, SecondCycle, MissingMarker, FirstMean, SecondMean, Trend, Seasonal0),
+		initial_missing_factors(1, Frequency, Method, FirstCycle, SecondCycle, FirstMean, SecondMean, Trend, Seasonal0),
 		normalize_seasonal_factors(Method, Seasonal0, Seasonal).
 
-	cycle_mean_missing(Cycle, MissingMarker, Mean) :-
-		known_sum_count(Cycle, MissingMarker, 0.0, 0, Sum, Count),
+	cycle_mean_missing(Cycle, Mean) :-
+		known_sum_count(Cycle, 0.0, 0, Sum, Count),
 		(	Count > 0 ->
 			Mean is Sum / Count
 		;	domain_error(insufficient_known_observations, seasonal_cycle)
 		).
 
-	known_sum_count([], _MissingMarker, Sum, Count, Sum, Count).
-	known_sum_count([Value| Values], MissingMarker, Sum0, Count0, Sum, Count) :-
-		(	Value == MissingMarker ->
+	known_sum_count([], Sum, Count, Sum, Count).
+	known_sum_count([Value| Values], Sum0, Count0, Sum, Count) :-
+		(	var(Value) ->
 			Sum1 = Sum0,
 			Count1 = Count0
 		;	Sum1 is Sum0 + Value,
 			Count1 is Count0 + 1
 		),
-		known_sum_count(Values, MissingMarker, Sum1, Count1, Sum, Count).
+		known_sum_count(Values, Sum1, Count1, Sum, Count).
 
-	initial_missing_factors(Phase, Frequency, _Method, _FirstCycle, _SecondCycle, _MissingMarker, _FirstMean, _SecondMean, _Trend, []) :-
+	initial_missing_factors(Phase, Frequency, _Method, _FirstCycle, _SecondCycle, _FirstMean, _SecondMean, _Trend, []) :-
 		Phase > Frequency,
 		!.
-	initial_missing_factors(Phase, Frequency, Method, FirstCycle, SecondCycle, MissingMarker, FirstMean, SecondMean, Trend, [Factor| Factors]) :-
+	initial_missing_factors(Phase, Frequency, Method, FirstCycle, SecondCycle, FirstMean, SecondMean, Trend, [Factor| Factors]) :-
 		nth1(Phase, FirstCycle, First),
 		nth1(Phase, SecondCycle, Second),
-		missing_phase_factor(Method, First, Second, MissingMarker, Phase, Frequency, FirstMean, SecondMean, Trend, Factor),
+		missing_phase_factor(Method, First, Second, Phase, Frequency, FirstMean, SecondMean, Trend, Factor),
 		NextPhase is Phase + 1,
-		initial_missing_factors(NextPhase, Frequency, Method, FirstCycle, SecondCycle, MissingMarker, FirstMean, SecondMean, Trend, Factors).
+		initial_missing_factors(NextPhase, Frequency, Method, FirstCycle, SecondCycle, FirstMean, SecondMean, Trend, Factors).
 
-	missing_phase_factor(Method, First, Second, MissingMarker, Phase, Frequency, FirstMean, SecondMean, Trend, Factor) :-
-		phase_candidate(Method, First, MissingMarker, Phase, Frequency, FirstMean, Trend, FirstCandidate),
-		phase_candidate(Method, Second, MissingMarker, Phase, Frequency, SecondMean, Trend, SecondCandidate),
+	missing_phase_factor(Method, First, Second, Phase, Frequency, FirstMean, SecondMean, Trend, Factor) :-
+		phase_candidate(Method, First, Phase, Frequency, FirstMean, Trend, FirstCandidate),
+		phase_candidate(Method, Second, Phase, Frequency, SecondMean, Trend, SecondCandidate),
 		average_phase_candidates(FirstCandidate, SecondCandidate, Phase, Factor).
 
-	phase_candidate(_Method, Value, MissingMarker, _Phase, _Frequency, _Mean, _Trend, none) :-
-		Value == MissingMarker,
+	phase_candidate(_Method, Value, _Phase, _Frequency, _Mean, _Trend, none) :-
+		var(Value),
 		!.
-	phase_candidate(additive, Value, _MissingMarker, Phase, Frequency, Mean, Trend, value(Factor)) :-
+	phase_candidate(additive, Value, Phase, Frequency, Mean, Trend, value(Factor)) :-
 		Midpoint is (Frequency + 1) / 2.0,
 		Factor is Value - Mean - (Phase - Midpoint) * Trend.
-	phase_candidate(multiplicative, Value, _MissingMarker, _Phase, _Frequency, Mean, _Trend, value(Factor)) :-
+	phase_candidate(multiplicative, Value, _Phase, _Frequency, Mean, _Trend, value(Factor)) :-
 		Factor is Value / Mean.
 
 	average_phase_candidates(none, none, Phase, _Factor) :-
@@ -552,26 +556,26 @@
 	average_phase_candidates(value(First), value(Second), _Phase, Factor) :-
 		Factor is (First + Second) / 2.0.
 
-	initial_regression_factors_missing(Method, Series, Frequency, MissingMarker, Trend, Intercept, Factors) :-
-		initial_regression_factors_missing(1, Frequency, Method, Series, MissingMarker, Trend, Intercept, Factors).
+	initial_regression_factors_missing(Method, Series, Frequency, Trend, Intercept, Factors) :-
+		initial_regression_factors_missing(1, Frequency, Method, Series, Trend, Intercept, Factors).
 
-	initial_regression_factors_missing(Phase, Frequency, _Method, _Series, _MissingMarker, _Trend, _Intercept, []) :-
+	initial_regression_factors_missing(Phase, Frequency, _Method, _Series, _Trend, _Intercept, []) :-
 		Phase > Frequency,
 		!.
-	initial_regression_factors_missing(Phase, Frequency, Method, Series, MissingMarker, Trend, Intercept, [Factor| Factors]) :-
-		phase_factor_missing(Series, MissingMarker, 1, Phase, Frequency, Method, Trend, Intercept, 0.0, 0, Sum, Count),
+	initial_regression_factors_missing(Phase, Frequency, Method, Series, Trend, Intercept, [Factor| Factors]) :-
+		phase_factor_missing(Series, 1, Phase, Frequency, Method, Trend, Intercept, 0.0, 0, Sum, Count),
 		(	Count > 0 ->
 			Factor is Sum / Count
 		;	domain_error(insufficient_seasonal_phase_observations, Phase)
 		),
 		NextPhase is Phase + 1,
-		initial_regression_factors_missing(NextPhase, Frequency, Method, Series, MissingMarker, Trend, Intercept, Factors).
+		initial_regression_factors_missing(NextPhase, Frequency, Method, Series, Trend, Intercept, Factors).
 
-	phase_factor_missing([], _MissingMarker, _Index, _Phase, _Frequency, _Method, _Trend, _Intercept, Sum, Count, Sum, Count).
-	phase_factor_missing([Value| Values], MissingMarker, Index, Phase, Frequency, Method, Trend, Intercept, Sum0, Count0, Sum, Count) :-
+	phase_factor_missing([], _Index, _Phase, _Frequency, _Method, _Trend, _Intercept, Sum, Count, Sum, Count).
+	phase_factor_missing([Value| Values], Index, Phase, Frequency, Method, Trend, Intercept, Sum0, Count0, Sum, Count) :-
 		Position is (Index - 1) mod Frequency + 1,
 		(	Position =:= Phase,
-			Value \== MissingMarker ->
+			nonvar(Value) ->
 			Baseline is Intercept + Trend * Index,
 			regression_seasonal_value(Method, Value, Baseline, SeasonalValue),
 			Sum1 is Sum0 + SeasonalValue,
@@ -580,7 +584,7 @@
 			Count1 = Count0
 		),
 		NextIndex is Index + 1,
-		phase_factor_missing(Values, MissingMarker, NextIndex, Phase, Frequency, Method, Trend, Intercept, Sum1, Count1, Sum, Count).
+		phase_factor_missing(Values, NextIndex, Phase, Frequency, Method, Trend, Intercept, Sum1, Count1, Sum, Count).
 
 	initialize_simple(initialization(two_cycles, _InitialCycles), [First| Values], Values, First) :-
 		!.
@@ -606,48 +610,48 @@
 		NextIndex is Index + 1,
 		series_indices(Values, NextIndex, Indices).
 
-	fit_simple([], _MissingMarker, _Alpha, Level, SumSquaredError, ErrorCount, Level, SumSquaredError, ErrorCount, []).
-	fit_simple([Value| Values], MissingMarker, Alpha, Level0, SumSquaredError0, ErrorCount0, Level, SumSquaredError, ErrorCount, Residuals) :-
-		Value == MissingMarker,
+	fit_simple([], _Alpha, Level, SumSquaredError, ErrorCount, Level, SumSquaredError, ErrorCount, []).
+	fit_simple([Value| Values], Alpha, Level0, SumSquaredError0, ErrorCount0, Level, SumSquaredError, ErrorCount, Residuals) :-
+		var(Value),
 		!,
-		fit_simple(Values, MissingMarker, Alpha, Level0, SumSquaredError0, ErrorCount0, Level, SumSquaredError, ErrorCount, Residuals).
-	fit_simple([Value| Values], MissingMarker, Alpha, Level0, SumSquaredError0, ErrorCount0, Level, SumSquaredError, ErrorCount, [Error| Residuals]) :-
+		fit_simple(Values, Alpha, Level0, SumSquaredError0, ErrorCount0, Level, SumSquaredError, ErrorCount, Residuals).
+	fit_simple([Value| Values], Alpha, Level0, SumSquaredError0, ErrorCount0, Level, SumSquaredError, ErrorCount, [Error| Residuals]) :-
 		Error is Value - Level0,
 		SumSquaredError1 is SumSquaredError0 + Error * Error,
 		Level1 is Alpha * Value + (1.0 - Alpha) * Level0,
 		ErrorCount1 is ErrorCount0 + 1,
-		fit_simple(Values, MissingMarker, Alpha, Level1, SumSquaredError1, ErrorCount1, Level, SumSquaredError, ErrorCount, Residuals).
+		fit_simple(Values, Alpha, Level1, SumSquaredError1, ErrorCount1, Level, SumSquaredError, ErrorCount, Residuals).
 
-	fit_holt([], _MissingMarker, _Alpha, _Beta, Level, Trend, SumSquaredError, ErrorCount, Level, Trend, SumSquaredError, ErrorCount, []).
-	fit_holt([Value| Values], MissingMarker, Alpha, Beta, Level0, Trend0, SumSquaredError0, ErrorCount0, Level, Trend, SumSquaredError, ErrorCount, Residuals) :-
-		Value == MissingMarker,
+	fit_holt([], _Alpha, _Beta, Level, Trend, SumSquaredError, ErrorCount, Level, Trend, SumSquaredError, ErrorCount, []).
+	fit_holt([Value| Values], Alpha, Beta, Level0, Trend0, SumSquaredError0, ErrorCount0, Level, Trend, SumSquaredError, ErrorCount, Residuals) :-
+		var(Value),
 		!,
 		Level1 is Level0 + Trend0,
-		fit_holt(Values, MissingMarker, Alpha, Beta, Level1, Trend0, SumSquaredError0, ErrorCount0, Level, Trend, SumSquaredError, ErrorCount, Residuals).
-	fit_holt([Value| Values], MissingMarker, Alpha, Beta, Level0, Trend0, SumSquaredError0, ErrorCount0, Level, Trend, SumSquaredError, ErrorCount, [Error| Residuals]) :-
+		fit_holt(Values, Alpha, Beta, Level1, Trend0, SumSquaredError0, ErrorCount0, Level, Trend, SumSquaredError, ErrorCount, Residuals).
+	fit_holt([Value| Values], Alpha, Beta, Level0, Trend0, SumSquaredError0, ErrorCount0, Level, Trend, SumSquaredError, ErrorCount, [Error| Residuals]) :-
 		Prediction is Level0 + Trend0,
 		Error is Value - Prediction,
 		SumSquaredError1 is SumSquaredError0 + Error * Error,
 		Level1 is Alpha * Value + (1.0 - Alpha) * Prediction,
 		Trend1 is Beta * (Level1 - Level0) + (1.0 - Beta) * Trend0,
 		ErrorCount1 is ErrorCount0 + 1,
-		fit_holt(Values, MissingMarker, Alpha, Beta, Level1, Trend1, SumSquaredError1, ErrorCount1, Level, Trend, SumSquaredError, ErrorCount, Residuals).
+		fit_holt(Values, Alpha, Beta, Level1, Trend1, SumSquaredError1, ErrorCount1, Level, Trend, SumSquaredError, ErrorCount, Residuals).
 
-	fit_holt_damped([], _MissingMarker, _Alpha, _Beta, _Phi, Level, Trend, SumSquaredError, ErrorCount, Level, Trend, SumSquaredError, ErrorCount, []).
-	fit_holt_damped([Value| Values], MissingMarker, Alpha, Beta, Phi, Level0, Trend0, SumSquaredError0, ErrorCount0, Level, Trend, SumSquaredError, ErrorCount, Residuals) :-
-		Value == MissingMarker,
+	fit_holt_damped([], _Alpha, _Beta, _Phi, Level, Trend, SumSquaredError, ErrorCount, Level, Trend, SumSquaredError, ErrorCount, []).
+	fit_holt_damped([Value| Values], Alpha, Beta, Phi, Level0, Trend0, SumSquaredError0, ErrorCount0, Level, Trend, SumSquaredError, ErrorCount, Residuals) :-
+		var(Value),
 		!,
 		Trend1 is Phi * Trend0,
 		Level1 is Level0 + Trend1,
-		fit_holt_damped(Values, MissingMarker, Alpha, Beta, Phi, Level1, Trend1, SumSquaredError0, ErrorCount0, Level, Trend, SumSquaredError, ErrorCount, Residuals).
-	fit_holt_damped([Value| Values], MissingMarker, Alpha, Beta, Phi, Level0, Trend0, SumSquaredError0, ErrorCount0, Level, Trend, SumSquaredError, ErrorCount, [Error| Residuals]) :-
+		fit_holt_damped(Values, Alpha, Beta, Phi, Level1, Trend1, SumSquaredError0, ErrorCount0, Level, Trend, SumSquaredError, ErrorCount, Residuals).
+	fit_holt_damped([Value| Values], Alpha, Beta, Phi, Level0, Trend0, SumSquaredError0, ErrorCount0, Level, Trend, SumSquaredError, ErrorCount, [Error| Residuals]) :-
 		Prediction is Level0 + Phi * Trend0,
 		Error is Value - Prediction,
 		SumSquaredError1 is SumSquaredError0 + Error * Error,
 		Level1 is Alpha * Value + (1.0 - Alpha) * Prediction,
 		Trend1 is Beta * (Level1 - Level0) + (1.0 - Beta) * Phi * Trend0,
 		ErrorCount1 is ErrorCount0 + 1,
-		fit_holt_damped(Values, MissingMarker, Alpha, Beta, Phi, Level1, Trend1, SumSquaredError1, ErrorCount1, Level, Trend, SumSquaredError, ErrorCount, Residuals).
+		fit_holt_damped(Values, Alpha, Beta, Phi, Level1, Trend1, SumSquaredError1, ErrorCount1, Level, Trend, SumSquaredError, ErrorCount, Residuals).
 
 	initialize_seasonal(initialization(two_cycles, _InitialCycles), Method, Series, Frequency, Remaining, Level, Trend, Seasonal) :-
 		!,
@@ -767,17 +771,17 @@
 		Seasonal is (First / FirstMean + Second / SecondMean) / 2.0,
 		initial_multiplicative_factors(FirstCycle, SecondCycle, FirstMean, SecondMean, Seasonals).
 
-	fit_seasonal(_Method, [], _MissingMarker, _Alpha, _Beta, _Gamma, _Frequency, _RemainingInCycle, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, []) :-
+	fit_seasonal(_Method, [], _Alpha, _Beta, _Gamma, _Frequency, _RemainingInCycle, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, []) :-
 		!.
-	fit_seasonal(Method, [Value| Values], MissingMarker, Alpha, Beta, Gamma, Frequency, RemainingInCycle0, Level0, Trend0, SeasonalDeque0, SumSquaredError0, ErrorCount0, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, Residuals) :-
+	fit_seasonal(Method, [Value| Values], Alpha, Beta, Gamma, Frequency, RemainingInCycle0, Level0, Trend0, SeasonalDeque0, SumSquaredError0, ErrorCount0, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, Residuals) :-
 		deque::pop_front(SeasonalDeque0, Seasonal0, SeasonalDeque1),
-		Value == MissingMarker,
+		var(Value),
 		!,
 		Level1 is Level0 + Trend0,
 		deque::push_back(Seasonal0, SeasonalDeque1, SeasonalDeque2),
 		advance_seasonal_queue(RemainingInCycle0, Frequency, SeasonalDeque2, RemainingInCycle, SeasonalDeque3),
-		fit_seasonal(Method, Values, MissingMarker, Alpha, Beta, Gamma, Frequency, RemainingInCycle, Level1, Trend0, SeasonalDeque3, SumSquaredError0, ErrorCount0, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, Residuals).
-	fit_seasonal(Method, [Value| Values], MissingMarker, Alpha, Beta, Gamma, Frequency, RemainingInCycle0, Level0, Trend0, SeasonalDeque0, SumSquaredError0, ErrorCount0, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, [Error| Residuals]) :-
+		fit_seasonal(Method, Values, Alpha, Beta, Gamma, Frequency, RemainingInCycle, Level1, Trend0, SeasonalDeque3, SumSquaredError0, ErrorCount0, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, Residuals).
+	fit_seasonal(Method, [Value| Values], Alpha, Beta, Gamma, Frequency, RemainingInCycle0, Level0, Trend0, SeasonalDeque0, SumSquaredError0, ErrorCount0, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, [Error| Residuals]) :-
 		deque::pop_front(SeasonalDeque0, Seasonal0, SeasonalDeque1),
 		seasonal_prediction(Method, Level0, Trend0, Seasonal0, Prediction),
 		Error is Value - Prediction,
@@ -787,20 +791,20 @@
 		deque::push_back(Seasonal1, SeasonalDeque1, SeasonalDeque2),
 		advance_seasonal_queue(RemainingInCycle0, Frequency, SeasonalDeque2, RemainingInCycle, SeasonalDeque3),
 		ErrorCount1 is ErrorCount0 + 1,
-		fit_seasonal(Method, Values, MissingMarker, Alpha, Beta, Gamma, Frequency, RemainingInCycle, Level1, Trend1, SeasonalDeque3, SumSquaredError1, ErrorCount1, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, Residuals).
+		fit_seasonal(Method, Values, Alpha, Beta, Gamma, Frequency, RemainingInCycle, Level1, Trend1, SeasonalDeque3, SumSquaredError1, ErrorCount1, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, Residuals).
 
-	fit_seasonal_damped(_Method, [], _MissingMarker, _Alpha, _Beta, _Gamma, _Phi, _Frequency, _RemainingInCycle, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, []) :-
+	fit_seasonal_damped(_Method, [], _Alpha, _Beta, _Gamma, _Phi, _Frequency, _RemainingInCycle, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, []) :-
 		!.
-	fit_seasonal_damped(Method, [Value| Values], MissingMarker, Alpha, Beta, Gamma, Phi, Frequency, RemainingInCycle0, Level0, Trend0, SeasonalDeque0, SumSquaredError0, ErrorCount0, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, Residuals) :-
+	fit_seasonal_damped(Method, [Value| Values], Alpha, Beta, Gamma, Phi, Frequency, RemainingInCycle0, Level0, Trend0, SeasonalDeque0, SumSquaredError0, ErrorCount0, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, Residuals) :-
 		deque::pop_front(SeasonalDeque0, Seasonal0, SeasonalDeque1),
 		DampedTrend is Phi * Trend0,
-		Value == MissingMarker,
+		var(Value),
 		!,
 		Level1 is Level0 + DampedTrend,
 		deque::push_back(Seasonal0, SeasonalDeque1, SeasonalDeque2),
 		advance_seasonal_queue(RemainingInCycle0, Frequency, SeasonalDeque2, RemainingInCycle, SeasonalDeque3),
-		fit_seasonal_damped(Method, Values, MissingMarker, Alpha, Beta, Gamma, Phi, Frequency, RemainingInCycle, Level1, DampedTrend, SeasonalDeque3, SumSquaredError0, ErrorCount0, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, Residuals).
-	fit_seasonal_damped(Method, [Value| Values], MissingMarker, Alpha, Beta, Gamma, Phi, Frequency, RemainingInCycle0, Level0, Trend0, SeasonalDeque0, SumSquaredError0, ErrorCount0, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, [Error| Residuals]) :-
+		fit_seasonal_damped(Method, Values, Alpha, Beta, Gamma, Phi, Frequency, RemainingInCycle, Level1, DampedTrend, SeasonalDeque3, SumSquaredError0, ErrorCount0, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, Residuals).
+	fit_seasonal_damped(Method, [Value| Values], Alpha, Beta, Gamma, Phi, Frequency, RemainingInCycle0, Level0, Trend0, SeasonalDeque0, SumSquaredError0, ErrorCount0, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, [Error| Residuals]) :-
 		deque::pop_front(SeasonalDeque0, Seasonal0, SeasonalDeque1),
 		DampedTrend is Phi * Trend0,
 		seasonal_prediction(Method, Level0, DampedTrend, Seasonal0, Prediction),
@@ -811,7 +815,7 @@
 		deque::push_back(Seasonal1, SeasonalDeque1, SeasonalDeque2),
 		advance_seasonal_queue(RemainingInCycle0, Frequency, SeasonalDeque2, RemainingInCycle, SeasonalDeque3),
 		ErrorCount1 is ErrorCount0 + 1,
-		fit_seasonal_damped(Method, Values, MissingMarker, Alpha, Beta, Gamma, Phi, Frequency, RemainingInCycle, Level1, Trend1, SeasonalDeque3, SumSquaredError1, ErrorCount1, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, Residuals).
+		fit_seasonal_damped(Method, Values, Alpha, Beta, Gamma, Phi, Frequency, RemainingInCycle, Level1, Trend1, SeasonalDeque3, SumSquaredError1, ErrorCount1, Level, Trend, SeasonalDeque, SumSquaredError, ErrorCount, Residuals).
 
 	advance_seasonal_queue(1, Frequency, SeasonalDeque0, Frequency, SeasonalDeque) :-
 		!,

@@ -115,7 +115,7 @@
 	observation(2, 4).
 	observation(3, 6).
 	observation(4, 8).
-	observation(5, missing).
+	observation(5, _).
 	observation(6, 12).
 
 	series_length(6).

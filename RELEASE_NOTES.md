@@ -62,6 +62,9 @@ forecasting for non-negative demand series with periods of zero demand.
 series forecasting using simple exponential smoothing, Holt linear-trend
 smoothing, and additive or multiplicative Holt-Winters seasonal smoothing.
 
+* ADDED: New `theta_forecasting` library implementing automatic seasonality
+detection and classical additive or multiplicative seasonal adjustment.
+
 * ADDED: New `knn_forecasting` library implementing univariate time
 series forecasting using the k-Nearest Neighbors ("analog") method.
 

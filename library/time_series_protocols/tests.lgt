@@ -31,13 +31,343 @@
 	]).
 
 	:- uses(lgtunit, [
-		op(700, xfx, =~=), (=~=)/2, assertion/1
+		op(700, xfx, =~=), (=~=)/2, assertion/1, variant/2
 	]).
 
 	cover(forecaster_common).
 
 	cleanup :-
 		^^clean_file('test_output.pl').
+
+	test(normalize_missing_variables, deterministic) :-
+		Series = [10,Missing,14,16], copy_term(Series, Before),
+		^^normalize_missing_series(Series, [10,Internal,14,16], Shared),
+		var(Internal), Internal == Shared, Internal \== Missing, var(Missing), variant(Series, Before),
+		^^indexed_series_observations(Series, [1,3,4], [10,14,16]).
+
+	test(normalize_shared_missing, deterministic) :-
+		^^normalize_missing_series([Value,2,Value], [First,2,Last], Shared),
+		var(Value), var(Shared), First == Shared, Last == Shared, Value \== Shared.
+
+	test(normalize_empty, deterministic(Normalized == [])) :-
+		^^normalize_missing_series([], Normalized, _).
+
+	test(normalize_numeric, deterministic(Normalized == [1,2])) :-
+		^^normalize_missing_series([1,2], Normalized, _).
+
+	test(normalize_atom_rejected, error(type_error(number, missing))) :-
+		^^normalize_missing_series([1,missing], _, _).
+
+	test(normalize_compound_rejected, error(type_error(number, absent(value)))) :-
+		^^normalize_missing_series([1,absent(value)], _, _).
+
+	test(indexed_missing_positions, deterministic) :-
+		^^indexed_series_observations([_,10,_,14,_], [2,4], [10,14]).
+
+	test(indexed_missing_all, deterministic) :-
+		^^indexed_series_observations([_,_], [], []).
+
+	test(indexed_atom_rejected, error(type_error(number, missing))) :-
+		^^indexed_series_observations([1,missing], _, _).
+
+	test(residual_fits_complete, deterministic) :-
+		^^residual_fitted_values([10,12,14,16], [2,3,3.5], [Anchor,Second,Third,Fourth]),
+		var(Anchor), Second =~= 10.0, Third =~= 11.0, Fourth =~= 12.5.
+
+	test(residual_fits_gaps, deterministic) :-
+		Series = [Leading,10,Gap,14,16,Trailing], copy_term(Series, Before),
+		^^residual_fitted_values(Series, [4,4], Values),
+		Values = [First,Anchor,Missing,Fourth,Fifth,Last],
+		variant(Series, Before), variant(Values, [_,_,_,10,12,_]),
+		var(First), var(Anchor), var(Missing), var(Last),
+		First \== Anchor, First \== Missing, First \== Last,
+		Anchor \== Missing, Anchor \== Last, Missing \== Last,
+		First \== Leading, Missing \== Gap, Last \== Trailing,
+		Fourth =~= 10.0, Fifth =~= 12.0.
+
+	test(residual_fits_shared_input, deterministic) :-
+		^^residual_fitted_values([Missing,10,Missing,14,Missing], [4], [First,Anchor,Gap,Fit,Last]),
+		var(Missing), var(First), var(Anchor), var(Gap), var(Last),
+		First \== Missing, Gap \== Missing, Last \== Missing,
+		First \== Gap, First \== Last, Gap \== Last, Fit =~= 10.0.
+
+	test(residual_fits_empty, deterministic(Values == [])) :-
+		^^residual_fitted_values([], [], Values).
+
+	test(residual_fits_all_missing, deterministic) :-
+		^^residual_fitted_values([Input,Input], [], [First,Second]),
+		var(Input), var(First), var(Second), First \== Second,
+		First \== Input, Second \== Input.
+
+	test(residual_fits_single_known, deterministic) :-
+		^^residual_fitted_values([_,10,_], [], Values), variant(Values, [_,_,_]).
+
+	test(residual_fits_negative_error, deterministic(Fit =~= 12.0)) :-
+		^^residual_fitted_values([12,10], [-2], [_,Fit]).
+
+	test(residual_fits_too_few, error(domain_error(residual_count, []))) :-
+		^^residual_fitted_values([10,12], [], _).
+
+	test(residual_fits_too_many, error(domain_error(residual_count, [2,3]))) :-
+		^^residual_fitted_values([10,12], [2,3], _).
+
+	test(residual_fits_empty_extra, error(domain_error(residual_count, [1]))) :-
+		^^residual_fitted_values([], [1], _).
+
+	test(residual_fits_missing_extra, error(domain_error(residual_count, [1]))) :-
+		^^residual_fitted_values([_,_], [1], _).
+
+	test(residual_fits_variable_series, error(instantiation_error)) :-
+		^^residual_fitted_values(_, [], _).
+
+	test(residual_fits_open_series, error(instantiation_error)) :-
+		^^residual_fitted_values([10| _], [], _).
+
+	test(residual_fits_improper_series, error(type_error(list, [10|bad]))) :-
+		^^residual_fitted_values([10|bad], [], _).
+
+	test(residual_fits_atom_observation, error(type_error(number, missing))) :-
+		^^residual_fitted_values([10,missing], [], _).
+
+	test(residual_fits_compound_observation, error(type_error(number, absent(value)))) :-
+		^^residual_fitted_values([10,absent(value)], [], _).
+
+	test(residual_fits_variable_residuals, error(instantiation_error)) :-
+		^^residual_fitted_values([10,12], _, _).
+
+	test(residual_fits_open_residuals, error(instantiation_error)) :-
+		^^residual_fitted_values([10,12], [2| _], _).
+
+	test(residual_fits_variable_residual, error(instantiation_error)) :-
+		^^residual_fitted_values([10,12], [_], _).
+
+	test(residual_fits_atom_residual, error(type_error(number, bad))) :-
+		^^residual_fitted_values([10,12], [bad], _).
+
+	test(residual_history_complete, deterministic) :-
+		^^valid_residual_history([2,3,3.5], [2,3,4], 1, 4, 3).
+
+	test(residual_history_gaps, deterministic) :-
+		^^valid_residual_history([4,4], [3,4], 1, 5, 2).
+
+	test(residual_history_leading, deterministic) :-
+		^^valid_residual_history([-2], [4], 2, 5, 1).
+
+	test(residual_history_empty, deterministic) :-
+		^^valid_residual_history([], [], 1, 1, 0).
+
+	test(residual_history_negative_errors, deterministic) :-
+		^^valid_residual_history([-2,0,3], [2,3,4], 1, 4, 3).
+
+	test(residual_history_unequal_lengths, fail) :-
+		^^valid_residual_history([4,4], [3], 1, 4, 2).
+
+	test(residual_history_wrong_count, fail) :-
+		^^valid_residual_history([4,4], [3,4], 1, 4, 1).
+
+	test(residual_history_pairs_rejected, fail) :-
+		^^valid_residual_history([3-4], [3], 1, 4, 1).
+
+	test(residual_history_bad_error, fail) :-
+		^^valid_residual_history([bad], [2], 1, 2, 1).
+
+	test(residual_history_bad_index, fail) :-
+		^^valid_residual_history([2], [2.0], 1, 2, 1).
+
+	test(residual_history_anchor_index, fail) :-
+		^^valid_residual_history([2], [1], 1, 2, 1).
+
+	test(residual_history_beyond_length, fail) :-
+		^^valid_residual_history([2], [3], 1, 2, 1).
+
+	test(residual_history_duplicate_index, fail) :-
+		^^valid_residual_history([2,3], [2,2], 1, 3, 2).
+
+	test(residual_history_decreasing_index, fail) :-
+		^^valid_residual_history([2,3], [3,2], 1, 3, 2).
+
+	test(residual_history_bad_controls, deterministic) :-
+		\+ ^^valid_residual_history([], [], 0, 1, 0),
+		\+ ^^valid_residual_history([], [], 2, 1, 0),
+		\+ ^^valid_residual_history([], [], 1, 1, -1),
+		\+ ^^valid_residual_history([], [], bad, 1, 0),
+		\+ ^^valid_residual_history([], [], 1, bad, 0),
+		\+ ^^valid_residual_history([], [], 1, 1, bad).
+
+	test(residual_history_nonbinding, deterministic) :-
+		History = history([Error], [Index], Anchor, Length, Count), copy_term(History, Before),
+		\+ ^^valid_residual_history([Error], [Index], Anchor, Length, Count), variant(History, Before),
+		\+ ^^valid_residual_history([2], [2], Anchor, 2, 1), var(Anchor),
+		\+ ^^valid_residual_history([2], [2], 1, Length, 1), var(Length),
+		\+ ^^valid_residual_history([2], [2], 1, 2, Count), var(Count).
+
+	test(residual_history_open_lists, deterministic) :-
+		History = history([2| Errors], [2| Indices]), copy_term(History, Before),
+		\+ ^^valid_residual_history([2| Errors], [2], 1, 2, 1),
+		\+ ^^valid_residual_history([2], [2| Indices], 1, 2, 1), variant(History, Before).
+
+	test(residual_history_improper_lists, deterministic) :-
+		\+ ^^valid_residual_history([2|bad], [2], 1, 2, 1),
+		\+ ^^valid_residual_history([2], [2|bad], 1, 2, 1).
+
+	test(classical_additive_even, deterministic) :-
+		^^classical_seasonal_adjustment([8,12,8,12,8,12], 2, additive, Adjusted, [First,Second]),
+		First =~= -2.0, Second =~= 2.0, check_ten(Adjusted).
+
+	test(classical_multiplicative_even, deterministic) :-
+		^^classical_seasonal_adjustment([5,15,5,15,5,15], 2, multiplicative, Adjusted, [First,Second]),
+		First =~= 0.5, Second =~= 1.5, check_ten(Adjusted).
+
+	test(classical_additive_odd, deterministic) :-
+		^^classical_seasonal_adjustment([8,10,12,8,10,12,8], 3, additive, Adjusted, [First,Second,Third]),
+		First =~= -2.0, Second =~= 0.0, Third =~= 2.0, check_ten(Adjusted).
+
+	test(classical_two_cycles, deterministic) :-
+		^^classical_seasonal_adjustment([8,12,8,12], 2, additive, Adjusted, _), check_ten(Adjusted).
+
+	test(classical_short, error(domain_error(series_length, [1,2,3]))) :-
+		^^classical_seasonal_adjustment([1,2,3], 2, additive, _, _).
+
+	test(classical_nonpositive, error(domain_error(positive_number, 0))) :-
+		^^classical_seasonal_adjustment([0,2,0,2], 2, multiplicative, _, _).
+
+	test(classical_frequency_one, error(domain_error(seasonal_frequency, 1))) :-
+		^^classical_seasonal_adjustment([1,2], 1, additive, _, _).
+
+	test(classical_invalid_method, error(domain_error(seasonal_adjustment_method, bad))) :-
+		^^classical_seasonal_adjustment([1,2,1,2], 2, bad, _, _).
+
+	test(seasonal_restore_offset, deterministic) :-
+		^^restore_seasonality(additive, [-2,0,2], 2, [10,10,10,10], [First,Second,Third,Fourth]),
+		First =~= 10.0, Second =~= 12.0, Third =~= 8.0, Fourth =~= 10.0.
+
+	test(seasonal_restore_multiply, deterministic) :-
+		^^restore_seasonality(multiplicative, [0.5,1.5], 2, [10,10,10], [First,Second,Third]),
+		First =~= 15.0, Second =~= 5.0, Third =~= 15.0.
+
+	test(seasonal_restore_empty, deterministic(Restored == [])) :-
+		^^restore_seasonality(additive, [1,2], 1, [], Restored).
+
+	test(seasonal_restore_bad_phase, error(domain_error(seasonal_phase, 3))) :-
+		^^restore_seasonality(additive, [1,2], 3, [10], _).
+
+	test(seasonal_test_constant, deterministic(Seasonal == false)) :-
+		^^seasonal_autocorrelation_test([7,7,7,7,7,7], 2, _, Seasonal).
+
+	test(seasonal_test_short, deterministic(Seasonal == false)) :-
+		^^seasonal_autocorrelation_test([8,12,8,12], 2, _, Seasonal).
+
+	test(seasonal_test_periodic, deterministic(Seasonal == true)) :-
+		^^seasonal_autocorrelation_test([8,12,8,12,8,12,8,12,8,12,8,12], 2, _, Seasonal).
+
+	test(seasonal_test_frequency_one, deterministic(Seasonal == false)) :-
+		^^seasonal_autocorrelation_test([1,2,3], 1, _, Seasonal).
+
+	test(seasonal_test_statistic, deterministic) :-
+		^^seasonal_autocorrelation_test([8,12,8,12,8,12,8,12,8,12,8,12], 2, Statistic, true),
+		Expected is (10/12) / sqrt((1 + 2*(11/12)*(11/12))/12), Statistic =~= Expected.
+
+	test(seasonal_test_nonseasonal, deterministic(Seasonal == false)) :-
+		^^seasonal_autocorrelation_test([1,2,3,4,5,6], 2, _, Seasonal).
+
+	test(classical_additive_trend, deterministic) :-
+		^^classical_seasonal_adjustment([0,3,2,5,4,7], 2, additive, [First,Second,Third,Fourth,Fifth,Sixth], [Low,High]),
+		Low =~= -1.0, High =~= 1.0,
+		First =~= 1.0, Second =~= 2.0, Third =~= 3.0, Fourth =~= 4.0, Fifth =~= 5.0, Sixth =~= 6.0.
+
+	test(classical_four_phases, deterministic) :-
+		^^classical_seasonal_adjustment([7,9,11,13,7,9,11,13,7], 4, additive, Adjusted, [First,Second,Third,Fourth]),
+		First =~= -3.0, Second =~= -1.0, Third =~= 1.0, Fourth =~= 3.0, check_ten(Adjusted).
+
+	test(classical_multiplicative_odd, deterministic) :-
+		^^classical_seasonal_adjustment([5,10,15,5,10,15], 3, multiplicative, Adjusted, [First,Second,Third]),
+		First =~= 0.5, Second =~= 1.0, Third =~= 1.5, check_ten(Adjusted).
+
+	test(seasonal_variable_method, error(instantiation_error)) :-
+		^^classical_seasonal_adjustment([1,2,1,2], 2, _, _, _).
+
+	test(seasonal_variable_frequency, error(instantiation_error)) :-
+		^^seasonal_autocorrelation_test([1,2,3], _, _, _).
+
+	test(seasonal_nonnumeric_value, error(type_error(number, bad))) :-
+		^^seasonal_autocorrelation_test([1,bad,3], 2, _, _).
+
+	test(seasonal_empty_series, error(domain_error(non_empty_series, []))) :-
+		^^seasonal_autocorrelation_test([], 2, _, _).
+
+	test(seasonal_restore_empty_factors, error(domain_error(non_empty_series, []))) :-
+		^^restore_seasonality(additive, [], 1, [1], _).
+
+	test(seasonal_restore_nonpositive_factor, error(domain_error(positive_number, 0))) :-
+		^^restore_seasonality(multiplicative, [0,1], 1, [1], _).
+
+	test(seasonal_restore_zero_phase, error(domain_error(positive_integer, 0))) :-
+		^^restore_seasonality(additive, [1,2], 0, [1], _).
+
+	test(seasonal_missing_acf_oracle, deterministic) :-
+		^^seasonal_autocorrelation_test([8,_,8,12,8,12], 2, Statistic, false),
+		Expected is (17/30) / sqrt((1 + 2*(3/5)*(3/5))/5), Statistic =~= Expected.
+
+	test(seasonal_missing_no_pairs, deterministic(Statistic =~= 0.0)) :-
+		^^seasonal_autocorrelation_test([1,_,2,_,3,_,4,_,5], 2, Statistic, false).
+
+	test(seasonal_missing_later_lag_no_pairs, deterministic(Statistic =~= 0.0)) :-
+		^^seasonal_autocorrelation_test([1,2,3,_,_,4,_,_,5,_,_,_], 2, Statistic, false).
+
+	test(seasonal_missing_constant, deterministic(Statistic =~= 0.0)) :-
+		^^seasonal_autocorrelation_test([7,_,7,7,7,7], 2, Statistic, false).
+
+	test(seasonal_missing_few_known, deterministic(Statistic =~= 0.0)) :-
+		^^seasonal_autocorrelation_test([8,12,_,_,8,12,_], 2, Statistic, false).
+
+	test(seasonal_missing_all, deterministic(Statistic =~= 0.0)) :-
+		^^seasonal_autocorrelation_test([_,_,_,_,_,_], 2, Statistic, false).
+
+	test(classical_missing_even, deterministic) :-
+		^^classical_seasonal_adjustment([8,12,8,12,_,12,8,12,8,12,8,12], 2, additive, Adjusted, [First,Second]),
+		First =~= -2.0, Second =~= 2.0, check_missing_ten(Adjusted).
+
+	test(classical_missing_odd, deterministic) :-
+		^^classical_seasonal_adjustment([8,10,12,8,10,12,_,10,12,8,10,12,8,10,12], 3, additive, Adjusted, [First,Second,Third]),
+		First =~= -2.0, Second =~= 0.0, Third =~= 2.0, check_missing_ten(Adjusted).
+
+	test(classical_missing_four, deterministic) :-
+		^^classical_seasonal_adjustment([7,9,11,13,7,9,11,13,_,9,11,13,7,9,11,13,7,9,11,13], 4, additive, Adjusted, [First,Second,Third,Fourth]),
+		First =~= -3.0, Second =~= -1.0, Third =~= 1.0, Fourth =~= 3.0, check_missing_ten(Adjusted).
+
+	test(classical_missing_multiplicative, deterministic) :-
+		^^classical_seasonal_adjustment([5,15,5,15,_,15,5,15,5,15,5,15], 2, multiplicative, Adjusted, [First,Second]),
+		First =~= 0.5, Second =~= 1.5, check_missing_ten(Adjusted).
+
+	test(classical_missing_unbound_nonbinding, deterministic) :-
+		Series = [8,12,8,12,Value,12,8,12,8,12], copy_term(Series, Before),
+		^^classical_seasonal_adjustment(Series, 2, additive, Adjusted, _),
+		var(Value), variant(Series, Before), check_missing_ten(Adjusted).
+
+	test(classical_missing_no_window, error(domain_error(insufficient_seasonal_phase_observations, 1))) :-
+		^^classical_seasonal_adjustment([8,_,8,12], 2, additive, _, _).
+
+	test(classical_missing_unestimable_phase, error(domain_error(insufficient_seasonal_phase_observations, 2))) :-
+		^^classical_seasonal_adjustment([8,12,_,12,8,12], 2, additive, _, _).
+
+	test(classical_missing_zero, error(domain_error(positive_number, 0))) :-
+		^^classical_seasonal_adjustment([0,_,0,2,0,2], 2, multiplicative, _, _).
+
+	test(classical_missing_short, error(domain_error(series_length, [1,_,2]))) :-
+		^^classical_seasonal_adjustment([1,_,2], 2, additive, _, _).
+
+	test(restore_missing_phase, deterministic) :-
+		^^restore_seasonality(additive, [-2,0,2], 2, [10,Gap,10,10], [First,RestoredGap,Third,Fourth]),
+		var(Gap), var(RestoredGap),
+		First =~= 10.0, Third =~= 8.0, Fourth =~= 10.0.
+
+	test(restore_missing_multiplicative, deterministic) :-
+		^^restore_seasonality(multiplicative, [0.5,1.5], 1, [Gap,10,10], [RestoredGap,Second,Third]),
+		var(Gap), var(RestoredGap),
+		Second =~= 15.0, Third =~= 5.0.
+
+	test(restore_missing_empty_invalid_phase, error(domain_error(seasonal_phase, 3))) :-
+		^^restore_seasonality(additive, [-2,2], 3, [], _).
 
 	% time_series_dataset_protocol tests
 
@@ -409,6 +739,19 @@
 		sample_forecaster::learn(gap_index, _Forecaster).
 
 	% auxiliary predicates
+
+	check_missing_ten([]) :-
+		!.
+	check_missing_ten([Value| Values]) :-
+		(	var(Value) ->
+			true
+		;	Value =~= 10.0
+		),
+		check_missing_ten(Values).
+
+	check_ten([]).
+	check_ten([Value| Values]) :-
+		Value =~= 10.0, check_ten(Values).
 
 	header_lines(File, Lines) :-
 		open(File, read, Stream),

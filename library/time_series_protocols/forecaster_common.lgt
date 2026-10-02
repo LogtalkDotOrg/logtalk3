@@ -27,7 +27,7 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-10-02,
-		comment is 'Shared predicates for forecaster diagnostics, time series dataset validation, differencing, lag construction, forecast error metrics, and naive baselines.'
+		comment is 'Shared predicates for forecaster diagnostics, dataset validation, differencing, lag construction, error metrics, seasonal adjustment, and baselines.'
 	]).
 
 	:- uses(format, [
@@ -282,6 +282,184 @@
 			Sum1 is Sum0 + Observation
 		),
 		observation_summary(Observations, Length1, ObservedCount1, Sum1, Length, ObservedCount, Sum).
+
+	:- protected(normalize_missing_series/3).
+	:- mode(normalize_missing_series(+list, -list, -term), one_or_error).
+	:- info(normalize_missing_series/3, [
+		comment is 'Copies numeric-or-unbound observations, sharing a fresh variable among missing positions without binding input variables.',
+		argnames is ['Series', 'Normalized', 'Missing'],
+		exceptions is [
+			'The series is unbound or partial' - instantiation_error,
+			'The series is not a list' - type_error(list, 'Series'),
+			'A known observation is not numeric' - type_error(number, 'Value')
+		]
+	]).
+
+	normalize_missing_series(Series, Normalized, Missing) :-
+		context(Context), check(list, Series, Context), normalize_missing_values(Series, Missing, Context, Normalized).
+
+	:- private(normalize_missing_values/4).
+	:- mode(normalize_missing_values(+list, -term, +term, -list), one_or_error).
+	:- info(normalize_missing_values/4, [
+		comment is 'Copies known numbers and replaces unbound inputs with a fresh shared variable.',
+		argnames is ['Series', 'Missing', 'Context', 'Normalized'],
+		exceptions is [
+			'A known observation is not numeric' - type_error(number, 'Value')
+		]
+	]).
+
+	normalize_missing_values([], _, _, []).
+	normalize_missing_values([Value| Values], Missing, Context, [Normalized| Rest]) :-
+		(	var(Value) ->
+			Normalized = Missing
+		;	check(number, Value, Context),
+			Normalized = Value
+		),
+		normalize_missing_values(Values, Missing, Context, Rest).
+
+	:- protected(indexed_series_observations/3).
+	:- mode(indexed_series_observations(+list, -list(positive_integer), -list(number)), one_or_error).
+	:- info(indexed_series_observations/3, [
+		comment is 'Collects known numeric values with their original one-based time indices.',
+		argnames is ['Series', 'Indices', 'Values'],
+		exceptions is [
+			'The list is unbound or partial' - instantiation_error,
+			'The series is not a list' - type_error(list, 'Series'),
+			'A known value is not numeric' - type_error(number, 'Value'),
+			'Index arithmetic fails' - evaluation_error('Error')
+		]
+	]).
+
+	indexed_series_observations(Series, Indices, Values) :-
+		context(Context),
+		check(list, Series, Context),
+		indexed_known_values(Series, 1, Context, Indices, Values).
+
+	:- private(indexed_known_values/5).
+	:- mode(indexed_known_values(+list, +positive_integer, +term, -list, -list), one_or_error).
+	:- info(indexed_known_values/5, [
+		comment is 'Extracts known observations while retaining elapsed positions.',
+		argnames is ['Series', 'Index', 'Context', 'Indices', 'Values'],
+		exceptions is [
+			'A known value is not numeric' - type_error(number, 'Value'),
+			'Index arithmetic fails' - evaluation_error('Error')
+		]
+	]).
+
+	indexed_known_values([], _, _, [], []).
+	indexed_known_values([Value| Values], Index, Context, Indices, Known) :-
+		Next is Index + 1,
+		(	var(Value) ->
+			Indices = RestIndices,
+			Known = RestKnown
+		;	check(number, Value, Context),
+			Indices = [Index| RestIndices],
+			Known = [Value| RestKnown]
+		),
+		indexed_known_values(Values, Next, Context, RestIndices, RestKnown).
+
+	:- protected(residual_fitted_values/3).
+	:- mode(residual_fitted_values(+list, +list(number), -list), one_or_error).
+	:- info(residual_fitted_values/3, [
+		comment is 'Reconstructs aligned pre-update fits from numeric-or-unbound observations and residuals after the first known initialization anchor. Missing positions and the anchor have fresh independent unbound output placeholders.',
+		argnames is ['Series', 'Residuals', 'Values'],
+		exceptions is [
+			'A list is unbound or partial, or a residual is unbound' - instantiation_error,
+			'Series or residuals are not lists' - type_error(list, 'List'),
+			'A known observation or residual is not numeric' - type_error(number, 'Value'),
+			'The residual count differs from the known count minus the initialization anchor' - domain_error(residual_count, 'Residuals'),
+			'Fit reconstruction arithmetic fails' - evaluation_error('Error')
+		]
+	]).
+
+	residual_fitted_values(Series, Residuals, Values) :-
+		context(Context),
+		check(list, Series, Context),
+		check(list, Residuals, Context),
+		check_numeric_residuals(Residuals, Context),
+		(	aligned_residual_fits(Series, Residuals, false, Context, Values) ->
+			true
+		;	domain_error(residual_count, Residuals)
+		).
+
+	:- private(check_numeric_residuals/2).
+	:- mode(check_numeric_residuals(+list, +term), one_or_error).
+	:- info(check_numeric_residuals/2, [
+		comment is 'Checks residual numbers without completing lists or binding entries.',
+		argnames is ['Residuals', 'Context'],
+		exceptions is [
+			'A residual is unbound' - instantiation_error,
+			'A residual is not numeric' - type_error(number, 'Value')
+		]
+	]).
+
+	check_numeric_residuals([], _).
+	check_numeric_residuals([Residual| Residuals], Context) :-
+		check(number, Residual, Context),
+		check_numeric_residuals(Residuals, Context).
+
+	:- private(aligned_residual_fits/5).
+	:- mode(aligned_residual_fits(+list, +list(number), +boolean, +term, -list), zero_or_one_or_error).
+	:- info(aligned_residual_fits/5, [
+		comment is 'Consumes residuals only at known positions after the initialization anchor, failing on a count mismatch.',
+		argnames is ['Series', 'Residuals', 'AnchorSeen', 'Context', 'Values'],
+		exceptions is [
+			'A known observation is not numeric' - type_error(number, 'Value'),
+			'Fit reconstruction arithmetic fails' - evaluation_error('Error')
+		]
+	]).
+
+	aligned_residual_fits([], [], _, _, []).
+	aligned_residual_fits([Observation| Observations], Residuals, AnchorSeen, Context, [Fit| Fits]) :-
+		(	var(Observation) ->
+			Remaining = Residuals,
+			NextAnchorSeen = AnchorSeen
+		;	check(number, Observation, Context),
+			(	AnchorSeen == false ->
+				Remaining = Residuals
+			;	Residuals = [Residual| Remaining],
+				Fit is Observation - Residual
+			),
+			NextAnchorSeen = true
+		),
+		aligned_residual_fits(Observations, Remaining, NextAnchorSeen, Context, Fits).
+
+	:- protected(valid_residual_history/5).
+	:- mode(valid_residual_history(@list, @list, @positive_integer, @positive_integer, @non_negative_integer), zero_or_one_or_error).
+	:- info(valid_residual_history/5, [
+		comment is 'Validates ground parallel numeric residuals and strictly increasing original indices after the initialization anchor. Both lists must match the scored count. The caller validates finiteness; this predicate does not reconstruct error totals or certify historical observations.',
+		argnames is ['Residuals', 'Indices', 'Anchor', 'Length', 'ScoredCount'],
+		exceptions is [
+			'Index or count arithmetic fails' - evaluation_error('Error')
+		]
+	]).
+
+	valid_residual_history(Residuals, Indices, Anchor, Length, ScoredCount) :-
+		ground(Residuals-Indices),
+		valid(list(number), Residuals),
+		valid(list(integer), Indices),
+		integer(Anchor), Anchor >= 1,
+		integer(Length), Length >= Anchor,
+		integer(ScoredCount), ScoredCount >= 0, ScoredCount =< Length - Anchor,
+		length(Residuals, ScoredCount),
+		length(Indices, ScoredCount),
+		valid_residual_positions(Indices, Anchor, Length).
+
+	:- private(valid_residual_positions/3).
+	:- mode(valid_residual_positions(+list(integer), +integer, +positive_integer), zero_or_one_or_error).
+	:- info(valid_residual_positions/3, [
+		comment is 'Checks original residual positions in strict chronological order within the elapsed length.',
+		argnames is ['Indices', 'Previous', 'Length'],
+		exceptions is [
+			'Index comparison fails' - evaluation_error('Error')
+		]
+	]).
+
+	valid_residual_positions([], _, _).
+	valid_residual_positions([Index| Indices], Previous, Length) :-
+		Index > Previous,
+		Index =< Length,
+		valid_residual_positions(Indices, Index, Length).
 
 	% diagnostics helpers
 
@@ -734,6 +912,646 @@
 	check_frequency(Frequency) :-
 		context(Context),
 		check(positive_integer, Frequency, Context).
+
+	:- private(seasonal_centered_values/5).
+	:- mode(seasonal_centered_values(+list(number), +number, -list(number), +number, -number), one_or_error).
+	:- info(seasonal_centered_values/5, [
+		comment is 'Centers validated observations and accumulates squared deviations.',
+		argnames is ['Series', 'Mean', 'Centered', 'Variance0', 'Variance'],
+		exceptions is [
+			'Centering arithmetic fails' - evaluation_error('Error')
+		]
+	]).
+
+	:- private(seasonal_lag_scores/7).
+	:- mode(seasonal_lag_scores(+positive_integer, +positive_integer, +list(number), +number, +number, -number, -number), one_or_error).
+	:- info(seasonal_lag_scores/7, [
+		comment is 'Accumulates earlier squared autocorrelations and the seasonal-lag score.',
+		argnames is ['Lag', 'Frequency', 'Centered', 'Variance', 'Squares0', 'Squares', 'Last'],
+		exceptions is [
+			'Autocorrelation arithmetic fails' - evaluation_error('Error')
+		]
+	]).
+
+	:- private(seasonal_covariance/4).
+	:- mode(seasonal_covariance(+list(number), +list(number), +number, -number), one_or_error).
+	:- info(seasonal_covariance/4, [
+		comment is 'Accumulates products of aligned centered observations.',
+		argnames is ['Suffix', 'Series', 'Covariance0', 'Covariance'],
+		exceptions is [
+			'Covariance arithmetic fails' - evaluation_error('Error')
+		]
+	]).
+
+	:- private(seasonal_check_method/1).
+	:- mode(seasonal_check_method(@term), one_or_error).
+	:- info(seasonal_check_method/1, [
+		comment is 'Checks the seasonal adjustment method without binding it.',
+		argnames is ['Method'],
+		exceptions is [
+			'The method is unbound' - instantiation_error,
+			'The method is invalid' - domain_error(seasonal_adjustment_method, 'Method')
+		]
+	]).
+
+	:- private(seasonal_positive_values/1).
+	:- mode(seasonal_positive_values(+list(number)), one_or_error).
+	:- info(seasonal_positive_values/1, [
+		comment is 'Requires strictly positive validated numeric values.',
+		argnames is ['Values'],
+		exceptions is [
+			'A value is not positive' - domain_error(positive_number, 'Value'),
+			'Numeric comparison fails' - evaluation_error('Error')
+		]
+	]).
+
+	:- private(seasonal_window_means/5).
+	:- mode(seasonal_window_means(+list(number), +list(number), +positive_integer, +number, -list(number)), one_or_error).
+	:- info(seasonal_window_means/5, [
+		comment is 'Computes successive moving averages with a rolling sum.',
+		argnames is ['Entering', 'Leaving', 'Frequency', 'Sum', 'Means'],
+		exceptions is [
+			'Moving-average arithmetic fails' - evaluation_error('Error')
+		]
+	]).
+
+	:- private(seasonal_center_even/2).
+	:- mode(seasonal_center_even(+list(number), -list(number)), one_or_error).
+	:- info(seasonal_center_even/2, [
+		comment is 'Centers even-period moving averages using adjacent means.',
+		argnames is ['Means', 'Centered'],
+		exceptions is [
+			'Centering arithmetic fails' - evaluation_error('Error')
+		]
+	]).
+
+	:- private(seasonal_deviations/4).
+	:- mode(seasonal_deviations(+list(number), +list(number), +atom, -list(number)), one_or_error).
+	:- info(seasonal_deviations/4, [
+		comment is 'Computes interior differences or ratios against centered trend estimates.',
+		argnames is ['Trends', 'Values', 'Method', 'Deviations'],
+		exceptions is [
+			'A multiplicative trend is not positive' - domain_error(positive_number, 'Value'),
+			'Detrending arithmetic fails' - evaluation_error('Error')
+		]
+	]).
+
+	:- private(seasonal_fold_cycles/3).
+	:- mode(seasonal_fold_cycles(+list, +list(compound), -list(compound)), one_or_error).
+	:- info(seasonal_fold_cycles/3, [
+		comment is 'Accumulates complete and partial cycles into phase buckets.',
+		argnames is ['Values', 'Buckets0', 'Buckets'],
+		exceptions is [
+			'Phase accumulation fails' - evaluation_error('Error')
+		]
+	]).
+
+	:- private(seasonal_bucket_means/2).
+	:- mode(seasonal_bucket_means(+list(compound), -list(number)), one_or_error).
+	:- info(seasonal_bucket_means/2, [
+		comment is 'Computes phase means from nonempty phase totals.',
+		argnames is ['Buckets', 'Means'],
+		exceptions is [
+			'Phase-mean arithmetic fails' - evaluation_error('Error')
+		]
+	]).
+
+	:- private(seasonal_normalize/4).
+	:- mode(seasonal_normalize(+list(number), +atom, +number, -list(number)), one_or_error).
+	:- info(seasonal_normalize/4, [
+		comment is 'Normalizes phase factors to zero or unit mean.',
+		argnames is ['Values', 'Method', 'Mean', 'Factors'],
+		exceptions is [
+			'A multiplicative factor is not positive' - domain_error(positive_number, 'Value'),
+			'Normalization arithmetic fails' - evaluation_error('Error')
+		]
+	]).
+
+	:- private(seasonal_inverse_factors/3).
+	:- mode(seasonal_inverse_factors(+list(number), +atom, -list(number)), one_or_error).
+	:- info(seasonal_inverse_factors/3, [
+		comment is 'Negates additive factors or reciprocates positive multiplicative factors.',
+		argnames is ['Factors', 'Method', 'Inverses'],
+		exceptions is [
+			'Factor inversion fails' - evaluation_error('Error')
+		]
+	]).
+
+	:- private(seasonal_restore_values/5).
+	:- mode(seasonal_restore_values(+list, +atom, +list(number), +list(number), -list), one_or_error).
+	:- info(seasonal_restore_values/5, [
+		comment is 'Restores validated values while cycling through phase factors.',
+		argnames is ['Values', 'Method', 'Factors', 'Cycle', 'Restored'],
+		exceptions is [
+			'Restoration arithmetic fails' - evaluation_error('Error')
+		]
+	]).
+
+	:- protected(seasonal_autocorrelation_test/4).
+	:- mode(seasonal_autocorrelation_test(+list, +positive_integer, -number, -boolean), one_or_error).
+	:- info(seasonal_autocorrelation_test/4, [
+		comment is 'Tests original-lag available-pair autocorrelations using the known observation count and requiring two known pairs at every tested lag.',
+		argnames is ['Series', 'Frequency', 'Statistic', 'Seasonal'],
+		exceptions is [
+			'The series or frequency is unbound' - instantiation_error,
+			'A series value is not numeric' - type_error(number, 'Value'),
+			'The series is not a list' - type_error(list, 'Series'),
+			'The series is empty' - domain_error(non_empty_series, 'Series'),
+			'The frequency is not an integer' - type_error(integer, 'Frequency'),
+			'The frequency is not positive' - domain_error(positive_integer, 'Frequency'),
+			'Seasonality test arithmetic fails' - evaluation_error('Error')
+		]
+	]).
+
+	:- private(seasonal_complete_autocorrelation_test/4).
+	:- mode(seasonal_complete_autocorrelation_test(+list(number), +positive_integer, -number, -boolean), one_or_error).
+	:- info(seasonal_complete_autocorrelation_test/4, [
+		comment is 'Computes the original complete-data seasonality statistic for validated inputs.',
+		argnames is ['Series', 'Frequency', 'Statistic', 'Seasonal'],
+		exceptions is [
+			'Autocorrelation arithmetic fails' - evaluation_error('Error')
+		]
+	]).
+
+	seasonal_complete_autocorrelation_test(Series, Frequency, Statistic, Seasonal) :-
+		length(Series, Length),
+		(	Frequency > 1,
+			Length > 2 * Frequency ->
+			sum(Series, Sum), Mean is Sum / Length,
+			seasonal_centered_values(Series, Mean, Centered, 0.0, Variance),
+			(	Variance > 0 ->
+				seasonal_lag_scores(1, Frequency, Centered, Variance, 0.0, EarlierSquares, Last),
+				Statistic is abs(Last) / sqrt((1.0 + 2.0 * EarlierSquares) / Length),
+				(	Statistic > 1.6448536269514722 ->
+					Seasonal = true
+				;	Seasonal = false
+				)
+			;	Statistic = 0.0,
+				Seasonal = false
+			)
+		;	Statistic = 0.0,
+			Seasonal = false
+		).
+
+	seasonal_centered_values([], _, [], Variance, Variance).
+	seasonal_centered_values([Value| Values], Mean, [Centered| Rest], Variance0, Variance) :-
+		Centered is Value - Mean,
+		Variance1 is Variance0 + Centered * Centered,
+		seasonal_centered_values(Values, Mean, Rest, Variance1, Variance).
+
+	seasonal_lag_scores(Lag, Frequency, Centered, Variance, Squares0, Squares, Last) :-
+		length(Skip, Lag),
+		append(Skip, Suffix, Centered),
+		seasonal_covariance(Suffix, Centered, 0.0, Covariance),
+		Score is Covariance / Variance,
+		(	Lag =:= Frequency ->
+			Squares = Squares0,
+			Last = Score
+		;	Squares1 is Squares0 + Score * Score,
+			NextLag is Lag + 1,
+			seasonal_lag_scores(NextLag, Frequency, Centered, Variance, Squares1, Squares, Last)
+		).
+
+	seasonal_covariance([], _, Covariance, Covariance).
+	seasonal_covariance([First| Firsts], [Second| Seconds], Covariance0, Covariance) :-
+		Covariance1 is Covariance0 + First * Second,
+		seasonal_covariance(Firsts, Seconds, Covariance1, Covariance).
+
+	:- protected(classical_seasonal_adjustment/5).
+	:- mode(classical_seasonal_adjustment(+list, +positive_integer, +atom, -list, -list(number)), one_or_error).
+	:- info(classical_seasonal_adjustment/5, [
+		comment is 'Deseasonalizes known values using complete centered windows and normalized phase factors, preserving missing observations as unbound variables.',
+		argnames is ['Series', 'Frequency', 'Method', 'AdjustedSeries', 'Factors'],
+		exceptions is [
+			'The series, frequency, or method is unbound' - instantiation_error,
+			'A value is not numeric' - type_error(number, 'Value'),
+			'The series is not a list' - type_error(list, 'Series'),
+			'The series is empty' - domain_error(non_empty_series, 'Series'),
+			'The frequency is not an integer' - type_error(integer, 'Frequency'),
+			'The frequency is not positive' - domain_error(positive_integer, 'Frequency'),
+			'The frequency is less than two' - domain_error(seasonal_frequency, 'Frequency'),
+			'The series has fewer than two cycles' - domain_error(series_length, 'Series'),
+			'The method is invalid' - domain_error(seasonal_adjustment_method, 'Method'),
+			'A phase has no valid centered-window deviation' - domain_error(insufficient_seasonal_phase_observations, 'Phase'),
+			'Multiplicative data or factors are not positive' - domain_error(positive_number, 'Value'),
+			'Seasonal adjustment arithmetic fails' - evaluation_error('Error')
+		]
+	]).
+
+	:- private(classical_complete_seasonal_adjustment/5).
+	:- mode(classical_complete_seasonal_adjustment(+list(number), +positive_integer, +atom, -list(number), -list(number)), one_or_error).
+	:- info(classical_complete_seasonal_adjustment/5, [
+		comment is 'Computes classical seasonal factors for validated complete data.',
+		argnames is ['Series', 'Frequency', 'Method', 'Adjusted', 'Factors'],
+		exceptions is [
+			'Multiplicative data, trends, or factors are not positive' - domain_error(positive_number, 'Value'),
+			'Seasonal arithmetic fails' - evaluation_error('Error')
+		]
+	]).
+
+	classical_complete_seasonal_adjustment(Series, Frequency, Method, Adjusted, Factors) :-
+		(	Method == multiplicative ->
+			seasonal_positive_values(Series)
+		;	true
+		),
+		length(Window, Frequency), append(Window, AfterWindow, Series), sum(Window, WindowSum),
+		FirstMean is WindowSum / Frequency,
+		seasonal_window_means(AfterWindow, Series, Frequency, WindowSum, RemainingMeans),
+		(	Frequency mod 2 =:= 0 ->
+			seasonal_center_even([FirstMean| RemainingMeans], Trends)
+		;	Trends = [FirstMean| RemainingMeans]
+		),
+		Half is Frequency // 2,
+		length(Prefix, Half),
+		append(Prefix, Interior, Series),
+		seasonal_deviations(Trends, Interior, Method, Deviations),
+		length(InitialBuckets, Frequency),
+		seasonal_empty_buckets(InitialBuckets),
+		seasonal_fold_cycles(Deviations, InitialBuckets, Buckets),
+		seasonal_bucket_means(Buckets, RawFactors),
+		sum(RawFactors, FactorSum),
+		FactorMean is FactorSum / Frequency,
+		seasonal_normalize(RawFactors, Method, FactorMean, Normalized),
+		StartPhase is Half mod Frequency + 1,
+		Split is Frequency - StartPhase + 1,
+		length(Leading, Split),
+		append(Leading, Trailing, Normalized),
+		append(Trailing, Leading, Factors),
+		seasonal_inverse_factors(Factors, Method, Inverse),
+		restore_seasonality(Method, Inverse, 1, Series, Adjusted).
+
+	seasonal_check_method(Method) :-
+		(	var(Method) ->
+			instantiation_error
+		;	member(Method, [additive,multiplicative]) ->
+			true
+		;	domain_error(seasonal_adjustment_method, Method)
+		).
+
+	seasonal_positive_values([]).
+	seasonal_positive_values([Value| Values]) :-
+		(	Value > 0 ->
+			true
+		;	domain_error(positive_number, Value)
+		),
+		seasonal_positive_values(Values).
+
+	seasonal_window_means([], _, _, _, []).
+	seasonal_window_means([New| News], [Old| Olds], Frequency, Sum0, [Mean| Means]) :-
+		Sum1 is Sum0 - Old + New,
+		Mean is Sum1 / Frequency,
+		seasonal_window_means(News, Olds, Frequency, Sum1, Means).
+
+	seasonal_center_even([_], []) :-
+		!.
+	seasonal_center_even([First,Second| Values], [Mean| Means]) :-
+		Mean is (First + Second) / 2.0,
+		seasonal_center_even([Second| Values], Means).
+
+	seasonal_deviations([], _, _, []).
+	seasonal_deviations([Trend| Trends], [Value| Values], Method, [Deviation| Deviations]) :-
+		(	Method == additive ->
+			Deviation is Value - Trend
+		;	seasonal_positive_values([Trend]),
+			Deviation is Value / Trend
+		),
+		seasonal_deviations(Trends, Values, Method, Deviations).
+
+	seasonal_empty_buckets([]).
+	seasonal_empty_buckets([bucket(0.0,0)| Buckets]) :-
+		seasonal_empty_buckets(Buckets).
+
+	seasonal_bucket_means([], []).
+	seasonal_bucket_means([bucket(Sum,Count)| Buckets], [Mean| Means]) :-
+		Mean is Sum / Count,
+		seasonal_bucket_means(Buckets, Means).
+
+	seasonal_normalize([], _, _, []).
+	seasonal_normalize([Value| Values], Method, Mean, [Factor| Factors]) :-
+		(	Method == additive ->
+			Factor is Value - Mean
+		;	Factor is Value / Mean,
+			seasonal_positive_values([Factor])
+		),
+		seasonal_normalize(Values, Method, Mean, Factors).
+
+	seasonal_inverse_factors([], _, []).
+	seasonal_inverse_factors([Factor| Factors], Method, [Inverse| Inverses]) :-
+		(	Method == additive ->
+			Inverse is -Factor
+		;	Inverse is 1.0 / Factor
+		),
+		seasonal_inverse_factors(Factors, Method, Inverses).
+
+	:- protected(restore_seasonality/5).
+	:- mode(restore_seasonality(+atom, +list(number), +positive_integer, +list, -list), one_or_error).
+	:- info(restore_seasonality/5, [
+		comment is 'Adds or multiplies a seasonal cycle, advancing phase through missing positions without instantiating them.',
+		argnames is ['Method', 'Factors', 'StartPhase', 'Values', 'RestoredValues'],
+		exceptions is [
+			'The method, phase, factor, or values list is unbound' - instantiation_error,
+			'A factor or value is not numeric' - type_error(number, 'Value'),
+			'Factors or values are not lists' - type_error(list, 'List'),
+			'The factors are empty' - domain_error(non_empty_series, 'Factors'),
+			'The method is invalid' - domain_error(seasonal_adjustment_method, 'Method'),
+			'The phase is not an integer' - type_error(integer, 'StartPhase'),
+			'The phase is not positive' - domain_error(positive_integer, 'StartPhase'),
+			'The phase exceeds the cycle length' - domain_error(seasonal_phase, 'StartPhase'),
+			'A multiplicative factor is not positive' - domain_error(positive_number, 'Value'),
+			'Restoration arithmetic fails' - evaluation_error('Error')
+		]
+	]).
+
+	restore_seasonality(Method, Factors, StartPhase, Values, Restored) :-
+		seasonal_check_method(Method), check_series(Factors, Factors),
+		context(Context), check(positive_integer, StartPhase, Context),
+		normalize_missing_series(Values, Normalized, _Missing),
+		length(Factors, Frequency),
+		(	StartPhase =< Frequency ->
+			true
+		;	domain_error(seasonal_phase, StartPhase)
+		),
+		(	Method == multiplicative ->
+			seasonal_positive_values(Factors)
+		;	true
+		),
+		Skip is StartPhase - 1,
+		length(Prefix, Skip),
+		append(Prefix, Suffix, Factors),
+		seasonal_restore_values(Normalized, Method, Suffix, Factors, Restored).
+
+	seasonal_autocorrelation_test(Series, Frequency, Statistic, Seasonal) :-
+		series_observation_summary(Series, Length, KnownCount, Sum),
+		(	Length > 0 ->
+			true
+		;	domain_error(non_empty_series, Series)
+		),
+		check_frequency(Frequency),
+		(	KnownCount =:= Length ->
+			seasonal_complete_autocorrelation_test(Series, Frequency, Statistic, Seasonal)
+		;	(	Frequency > 1, Length > 2 * Frequency, KnownCount > 2 * Frequency ->
+				Mean is Sum / KnownCount,
+				seasonal_gap_centered(Series, Mean, Centered, Variance),
+				(	Variance > 0, seasonal_gap_lags(1, Frequency, Centered, Variance, 0.0, Earlier, Last) ->
+					Statistic is abs(Last) / sqrt((1.0 + 2.0 * Earlier) / KnownCount),
+					( Statistic > 1.6448536269514722 -> Seasonal = true; Seasonal = false )
+				;	Statistic = 0.0, Seasonal = false
+				)
+			;	Statistic = 0.0, Seasonal = false
+			)
+		).
+
+	:- private(seasonal_gap_centered/4).
+	:- mode(seasonal_gap_centered(+list, +number, -list, -number), one_or_error).
+	:- info(seasonal_gap_centered/4, [
+		comment is 'Centers known values without removing gaps.',
+		argnames is ['Series', 'Mean', 'Centered', 'Variance'],
+		exceptions is [
+			'Centering arithmetic fails' - evaluation_error('Error')
+		]
+	]).
+
+	seasonal_gap_centered([], _, [], 0.0) :-
+		!.
+	seasonal_gap_centered([Value| Values], Mean, [Centered| Rest], Variance) :-
+		seasonal_gap_centered(Values, Mean, Rest, Variance0),
+		(	var(Value) ->
+			Variance = Variance0
+		;	Centered is Value - Mean,
+			Variance is Variance0 + Centered * Centered
+		).
+
+	:- private(seasonal_gap_lags/7).
+	:- mode(seasonal_gap_lags(+positive_integer, +positive_integer, +list, +number, +number, -number, -number), zero_or_one_or_error).
+	:- info(seasonal_gap_lags/7, [
+		comment is 'Accumulates original-lag scores, failing when fewer than two pairs are available.',
+		argnames is ['Lag', 'Frequency', 'Centered', 'Variance', 'Squares0', 'Squares', 'Last'],
+		exceptions is [
+			'Autocorrelation arithmetic fails' - evaluation_error('Error')
+		]
+	]).
+
+	seasonal_gap_lags(Lag, Frequency, Centered, Variance, Squares0, Squares, Last) :-
+		length(Skip, Lag), append(Skip, Suffix, Centered),
+		seasonal_gap_covariance(Suffix, Centered, Covariance, Pairs), Pairs >= 2,
+		Score is Covariance / Variance,
+		(	Lag =:= Frequency ->
+			Squares = Squares0,
+			Last = Score
+		;	Squares1 is Squares0 + Score * Score,
+			Next is Lag + 1,
+			seasonal_gap_lags(Next, Frequency, Centered, Variance, Squares1, Squares, Last)
+		).
+
+	:- private(seasonal_gap_covariance/4).
+	:- mode(seasonal_gap_covariance(+list, +list, -number, -non_negative_integer), one_or_error).
+	:- info(seasonal_gap_covariance/4, [
+		comment is 'Sums centered products and counts pairs with both positions known.',
+		argnames is ['Suffix', 'Series', 'Covariance', 'Pairs'],
+		exceptions is [
+			'Covariance arithmetic fails' - evaluation_error('Error')
+		]
+	]).
+
+	seasonal_gap_covariance([], _, 0.0, 0) :-
+		!.
+	seasonal_gap_covariance([First| Firsts], [Second| Seconds], Covariance, Pairs) :-
+		seasonal_gap_covariance(Firsts, Seconds, Covariance0, Pairs0),
+		(	(var(First); var(Second)) ->
+			Covariance = Covariance0,
+			Pairs = Pairs0
+		;	Covariance is Covariance0 + First * Second,
+			Pairs is Pairs0 + 1
+		).
+
+	classical_seasonal_adjustment(Series, Frequency, Method, Adjusted, Factors) :-
+		series_observation_summary(Series, Length, KnownCount, _Sum),
+		(	Length > 0 ->
+			true
+		;	domain_error(non_empty_series, Series)
+		),
+		check_frequency(Frequency), seasonal_check_method(Method),
+		(	Frequency >= 2 ->
+			true
+		;	domain_error(seasonal_frequency, Frequency)
+		),
+		Minimum is 2 * Frequency, check_series_length(Series, Series, Minimum),
+		(	KnownCount =:= Length ->
+			classical_complete_seasonal_adjustment(Series, Frequency, Method, Adjusted, Factors)
+		;	indexed_series_observations(Series, _, Known),
+			(	Method == multiplicative ->
+				seasonal_positive_values(Known)
+			;	true
+			),
+			length(Window, Frequency),
+			append(Window, AfterWindow, Series),
+			indexed_series_observations(Window, _, KnownWindow),
+			sum(KnownWindow, WindowSum),
+			length(KnownWindow, WindowCount),
+			WindowMissing is Frequency - WindowCount,
+			seasonal_gap_windows(AfterWindow, Series, Frequency, window(WindowSum,WindowMissing), Means),
+			(	Frequency mod 2 =:= 0 ->
+				seasonal_gap_even(Means, Trends)
+			;	Trends = Means
+			),
+			Half is Frequency // 2, length(Prefix, Half),
+			append(Prefix, Interior, Series),
+			seasonal_gap_deviations(Trends, Interior, Method, Deviations),
+			length(InitialBuckets, Frequency),
+			seasonal_empty_buckets(InitialBuckets),
+			seasonal_fold_cycles(Deviations, InitialBuckets, Buckets),
+			Split is Frequency - Half,
+			length(Leading, Split),
+			append(Leading, Trailing, Buckets),
+			append(Trailing, Leading, PhaseBuckets),
+			seasonal_check_buckets(PhaseBuckets, 1),
+			seasonal_bucket_means(PhaseBuckets, RawFactors),
+			sum(RawFactors, FactorSum),
+			FactorMean is FactorSum / Frequency,
+			seasonal_normalize(RawFactors, Method, FactorMean, Factors),
+			seasonal_inverse_factors(Factors, Method, Inverse),
+			restore_seasonality(Method, Inverse, 1, Series, Adjusted)
+		).
+
+	:- private(seasonal_gap_windows/5).
+	:- mode(seasonal_gap_windows(+list, +list, +positive_integer, +compound, -list), one_or_error).
+	:- info(seasonal_gap_windows/5, [
+		comment is 'Computes moving averages with rolling sums and missing counts, marking incomplete windows.',
+		argnames is ['Entering', 'Leaving', 'Frequency', 'Window', 'Means'],
+		exceptions is [
+			'Moving-average arithmetic fails' - evaluation_error('Error')
+		]
+	]).
+
+	seasonal_gap_windows(Entering, Leaving, Frequency, window(Sum,Missing), [Mean| Means]) :-
+		(	Missing =:= 0 ->
+			Mean is Sum / Frequency
+		;	true
+		),
+		(	Entering == [] ->
+			Means = []
+		;	Entering = [New| News],
+			Leaving = [Old| Olds],
+			(	var(Old) ->
+				OldValue = 0,
+				OldMissing = 1
+			;	OldValue = Old,
+				OldMissing = 0
+			),
+			(	var(New) ->
+				NewValue = 0,
+				NewMissing = 1
+			;	NewValue = New,
+				NewMissing = 0
+			),
+			Sum1 is Sum - OldValue + NewValue,
+			Missing1 is Missing - OldMissing + NewMissing,
+			seasonal_gap_windows(News, Olds, Frequency, window(Sum1,Missing1), Means)
+		).
+
+	:- private(seasonal_gap_even/2).
+	:- mode(seasonal_gap_even(+list, -list), one_or_error).
+	:- info(seasonal_gap_even/2, [
+		comment is 'Centers adjacent complete windows, requiring the full even-period support.',
+		argnames is ['Means', 'Trends'],
+		exceptions is [
+			'Centering arithmetic fails' - evaluation_error('Error')
+		]
+	]).
+
+	seasonal_gap_even([_], []) :-
+		!.
+	seasonal_gap_even([First,Second| Values], [Mean| Means]) :-
+		(	(var(First); var(Second)) ->
+			true
+		;	Mean is (First + Second) / 2.0
+		),
+		seasonal_gap_even([Second| Values], Means).
+
+	:- private(seasonal_gap_deviations/4).
+	:- mode(seasonal_gap_deviations(+list, +list, +atom, -list), one_or_error).
+	:- info(seasonal_gap_deviations/4, [
+		comment is 'Computes only known deviations with complete trend support, retaining phase positions.',
+		argnames is ['Trends', 'Values', 'Method', 'Deviations'],
+		exceptions is [
+			'A multiplicative trend is not positive' - domain_error(positive_number, 'Value'),
+			'Detrending arithmetic fails' - evaluation_error('Error')
+		]
+	]).
+
+	seasonal_gap_deviations([], _, _, []).
+	seasonal_gap_deviations([Trend| Trends], [Value| Values], Method, [Deviation| Deviations]) :-
+		(	(var(Trend); var(Value)) ->
+			true
+		;	Method == additive ->
+			Deviation is Value - Trend
+		;	seasonal_positive_values([Trend]),
+			Deviation is Value / Trend
+		),
+		seasonal_gap_deviations(Trends, Values, Method, Deviations).
+
+	seasonal_fold_cycles([], Buckets, Buckets) :-
+		!.
+	seasonal_fold_cycles(Values, Buckets0, Buckets) :-
+		seasonal_accumulate_cycle(Values, Buckets0, Buckets1, Rest),
+		seasonal_fold_cycles(Rest, Buckets1, Buckets).
+
+	:- private(seasonal_accumulate_cycle/4).
+	:- mode(seasonal_accumulate_cycle(+list, +list(compound), -list(compound), -list), one_or_error).
+	:- info(seasonal_accumulate_cycle/4, [
+		comment is 'Advances a phase bucket for every position, skipping missing contributions.',
+		argnames is ['Values', 'Buckets', 'Updated', 'Rest'],
+		exceptions is [
+			'Phase accumulation fails' - evaluation_error('Error')
+		]
+	]).
+
+	seasonal_accumulate_cycle([], Buckets, Buckets, []) :-
+		!.
+	seasonal_accumulate_cycle(Values, [], [], Values) :-
+		!.
+	seasonal_accumulate_cycle([Value| Values], [bucket(Sum,Count)| Buckets], [bucket(Sum1,Count1)| Updated], Rest) :-
+		(	var(Value) ->
+			Sum1 = Sum,
+			Count1 = Count
+		;	Sum1 is Sum + Value,
+			Count1 is Count + 1
+		),
+		seasonal_accumulate_cycle(Values, Buckets, Updated, Rest).
+
+	:- private(seasonal_check_buckets/2).
+	:- mode(seasonal_check_buckets(+list(compound), +positive_integer), one_or_error).
+	:- info(seasonal_check_buckets/2, [
+		comment is 'Reports the lowest absolute phase lacking an estimable seasonal deviation.',
+		argnames is ['Buckets', 'Phase'],
+		exceptions is [
+			'A phase has no valid deviation' - domain_error(insufficient_seasonal_phase_observations, 'Phase'),
+			'Phase arithmetic fails' - evaluation_error('Error')
+		]
+	]).
+
+	seasonal_check_buckets([], _).
+	seasonal_check_buckets([bucket(_,Count)| Buckets], Phase) :-
+		(	Count > 0 ->
+			true
+		;	domain_error(insufficient_seasonal_phase_observations, Phase)
+		),
+		Next is Phase + 1,
+		seasonal_check_buckets(Buckets, Next).
+
+	seasonal_restore_values([], _, _, _, []) :-
+		!.
+	seasonal_restore_values(Values, Method, [], Cycle, Restored) :-
+		!,
+		seasonal_restore_values(Values, Method, Cycle, Cycle, Restored).
+	seasonal_restore_values([Value| Values], Method, [Factor| Factors], Cycle, [Restored| Rest]) :-
+		(	var(Value) ->
+			true
+		;	Method == additive ->
+			Restored is Value + Factor
+		;	Restored is Value * Factor
+		),
+		seasonal_restore_values(Values, Method, Factors, Cycle, Rest).
 
 	cycle_take(_, _, 0, []) :-
 		!.

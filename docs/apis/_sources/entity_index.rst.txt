@@ -477,7 +477,7 @@ Objects
       expected <expected_0>
       expected(Expected) <expected_1>
       exponential_smoothing <exponential_smoothing_0>
-      exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification,MissingMarker) <exponential_smoothing_problem_7>
+      exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification) <exponential_smoothing_problem_6>
       fa_language_profile <fa_language_profile_0>
       fail_insertion(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <fail_insertion_5>
       fast_random <fast_random_0>
@@ -1033,6 +1033,7 @@ Objects
       text_normalizer(Representation,Profile) <text_normalizer_2>
       text_vectorizer <text_vectorizer_0>
       th_language_profile <th_language_profile_0>
+      theta_forecasting <theta_forecasting_0>
       thurstone_mosteller_ranker <thurstone_mosteller_ranker_0>
       time <time_0>
       time_scales <time_scales_0>
@@ -1331,7 +1332,7 @@ Objects
    * :doc:`expected <expected_0>`
    * :doc:`expected(Expected) <expected_1>`
    * :doc:`exponential_smoothing <exponential_smoothing_0>`
-   * :doc:`exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification,MissingMarker) <exponential_smoothing_problem_7>`
+   * :doc:`exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification) <exponential_smoothing_problem_6>`
    * :doc:`fa_language_profile <fa_language_profile_0>`
    * :doc:`fail_insertion(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <fail_insertion_5>`
    * :doc:`fast_random <fast_random_0>`
@@ -1887,6 +1888,7 @@ Objects
    * :doc:`text_normalizer(Representation,Profile) <text_normalizer_2>`
    * :doc:`text_vectorizer <text_vectorizer_0>`
    * :doc:`th_language_profile <th_language_profile_0>`
+   * :doc:`theta_forecasting <theta_forecasting_0>`
    * :doc:`thurstone_mosteller_ranker <thurstone_mosteller_ranker_0>`
    * :doc:`time <time_0>`
    * :doc:`time_scales <time_scales_0>`

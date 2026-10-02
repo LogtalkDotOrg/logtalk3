@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-01,
+		date is 2026-10-02,
 		comment is 'Autoregressive (AR) time series forecaster fitted by least squares, with optional intercept, optional differencing (ARI models), automatic order selection using information criteria, and support for missing observations represented as unbound variables.',
 		see_also is [forecaster_protocol, time_series_dataset_protocol]
 	]).
@@ -534,7 +534,7 @@
 
 	update(Forecaster, Observation, UpdatedForecaster) :-
 		check_forecaster(Forecaster),
-		check_observation(Observation),
+		^^check_observation(Observation),
 		Forecaster = time_series_regression_forecaster(Model, ar_state(Window, Levels), Parameters, Diagnostics),
 		Parameters = ar_parameters(InterceptValue, Coefficients),
 		update_levels(Levels, Observation, UpdatedLevels, DifferencedObservation),
@@ -548,14 +548,6 @@
 		push_window(Window, DifferencedObservation, UpdatedWindow),
 		updated_diagnostics(Diagnostics, Outcome, Observation, UpdatedDiagnostics),
 		UpdatedForecaster = time_series_regression_forecaster(Model, ar_state(UpdatedWindow, UpdatedLevels), Parameters, UpdatedDiagnostics).
-
-	check_observation(Observation) :-
-		(	var(Observation) ->
-			true
-		;	number(Observation) ->
-			true
-		;	type_error(number, Observation)
-		).
 
 	update_levels([], DifferencedObservation, [], DifferencedObservation).
 	update_levels([Last| Lasts], Value, [Value| UpdatedLasts], DifferencedObservation) :-
@@ -572,9 +564,9 @@
 			MissingCount is MissingCount0 + 1
 		;	MissingCount = MissingCount0
 		),
-		replace_diagnostic(training_series_length, TrainingSeriesLength, Diagnostics, Diagnostics1),
-		replace_diagnostic(update_count, UpdateCount, Diagnostics1, Diagnostics2),
-		replace_diagnostic(missing_count, MissingCount, Diagnostics2, Diagnostics3),
+		^^replace_diagnostic(training_series_length, TrainingSeriesLength, Diagnostics, Diagnostics1),
+		^^replace_diagnostic(update_count, UpdateCount, Diagnostics1, Diagnostics2),
+		^^replace_diagnostic(missing_count, MissingCount, Diagnostics2, Diagnostics3),
 		apply_outcome(Outcome, Diagnostics3, UpdatedDiagnostics).
 
 	apply_outcome(unscored, Diagnostics, Diagnostics).
@@ -586,22 +578,15 @@
 		SumSquaredError is SumSquaredError0 + Residual * Residual,
 		MeanSquaredError is SumSquaredError / ScoredCount,
 		updated_residuals(Residuals0, Residual, Residuals),
-		replace_diagnostic(scored_count, ScoredCount, Diagnostics, Diagnostics1),
-		replace_diagnostic(sum_squared_error, SumSquaredError, Diagnostics1, Diagnostics2),
-		replace_diagnostic(mean_squared_error, MeanSquaredError, Diagnostics2, Diagnostics3),
-		replace_diagnostic(residuals, Residuals, Diagnostics3, UpdatedDiagnostics).
+		^^replace_diagnostic(scored_count, ScoredCount, Diagnostics, Diagnostics1),
+		^^replace_diagnostic(sum_squared_error, SumSquaredError, Diagnostics1, Diagnostics2),
+		^^replace_diagnostic(mean_squared_error, MeanSquaredError, Diagnostics2, Diagnostics3),
+		^^replace_diagnostic(residuals, Residuals, Diagnostics3, UpdatedDiagnostics).
 
 	updated_residuals(none, _Residual, none) :-
 		!.
 	updated_residuals(Residuals0, Residual, Residuals) :-
 		append(Residuals0, [Residual], Residuals).
-
-	replace_diagnostic(Name, Value, [Diagnostic| Diagnostics], [UpdatedDiagnostic| Diagnostics]) :-
-		functor(Diagnostic, Name, 1),
-		!,
-		UpdatedDiagnostic =.. [Name, Value].
-	replace_diagnostic(Name, Value, [Diagnostic| Diagnostics], [Diagnostic| UpdatedDiagnostics]) :-
-		replace_diagnostic(Name, Value, Diagnostics, UpdatedDiagnostics).
 
 	% forecaster validation, export, and printing
 

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-01,
+		date is 2026-10-02,
 		comment is 'k-Nearest Neighbors (analog method) time series forecaster: matches the most recent window of observations against historical windows of the same length and predicts by aggregating what followed the most similar ones. Supports multiple distance metrics, neighbor weighting schemes, optional differencing, and missing observations represented as unbound variables.',
 		see_also is [exponential_smoothing, time_series_regression]
 	]).
@@ -330,7 +330,7 @@
 
 	update(Forecaster, Observation, UpdatedForecaster) :-
 		check_forecaster(Forecaster),
-		check_observation(Observation),
+		^^check_observation(Observation),
 		Forecaster = knn_forecaster(Model, knn_state(Window, Levels), Rows, Diagnostics),
 		Model = knn(_Order, _Differencing, K, DistanceMetric, MinkowskiPower, WeightScheme),
 		update_levels(Levels, Observation, UpdatedLevels, DifferencedObservation),
@@ -345,14 +345,6 @@
 		push_window(Window, DifferencedObservation, UpdatedWindow),
 		updated_diagnostics(Diagnostics, Outcome, Observation, UpdatedDiagnostics),
 		UpdatedForecaster = knn_forecaster(Model, knn_state(UpdatedWindow, UpdatedLevels), Rows, UpdatedDiagnostics).
-
-	check_observation(Observation) :-
-		(	var(Observation) ->
-			true
-		;	number(Observation) ->
-			true
-		;	type_error(number, Observation)
-		).
 
 	update_levels([], DifferencedObservation, [], DifferencedObservation).
 	update_levels([Last| Lasts], Value, [Value| UpdatedLasts], DifferencedObservation) :-
@@ -369,9 +361,9 @@
 			MissingCount is MissingCount0 + 1
 		;	MissingCount = MissingCount0
 		),
-		replace_diagnostic(training_series_length, TrainingSeriesLength, Diagnostics, Diagnostics1),
-		replace_diagnostic(update_count, UpdateCount, Diagnostics1, Diagnostics2),
-		replace_diagnostic(missing_count, MissingCount, Diagnostics2, Diagnostics3),
+		^^replace_diagnostic(training_series_length, TrainingSeriesLength, Diagnostics, Diagnostics1),
+		^^replace_diagnostic(update_count, UpdateCount, Diagnostics1, Diagnostics2),
+		^^replace_diagnostic(missing_count, MissingCount, Diagnostics2, Diagnostics3),
 		apply_outcome(Outcome, Diagnostics3, UpdatedDiagnostics).
 
 	apply_outcome(unscored, Diagnostics, Diagnostics).
@@ -385,18 +377,11 @@
 		AbsoluteResidual is abs(Residual),
 		SumAbsoluteError is SumAbsoluteError0 + AbsoluteResidual,
 		MeanAbsoluteError is SumAbsoluteError / ScoredCount,
-		replace_diagnostic(scored_count, ScoredCount, Diagnostics, Diagnostics1),
-		replace_diagnostic(sum_squared_error, SumSquaredError, Diagnostics1, Diagnostics2),
-		replace_diagnostic(mean_squared_error, MeanSquaredError, Diagnostics2, Diagnostics3),
-		replace_diagnostic(sum_absolute_error, SumAbsoluteError, Diagnostics3, Diagnostics4),
-		replace_diagnostic(mean_absolute_error, MeanAbsoluteError, Diagnostics4, UpdatedDiagnostics).
-
-	replace_diagnostic(Name, Value, [Diagnostic| Diagnostics], [UpdatedDiagnostic| Diagnostics]) :-
-		functor(Diagnostic, Name, 1),
-		!,
-		UpdatedDiagnostic =.. [Name, Value].
-	replace_diagnostic(Name, Value, [Diagnostic| Diagnostics], [Diagnostic| UpdatedDiagnostics]) :-
-		replace_diagnostic(Name, Value, Diagnostics, UpdatedDiagnostics).
+		^^replace_diagnostic(scored_count, ScoredCount, Diagnostics, Diagnostics1),
+		^^replace_diagnostic(sum_squared_error, SumSquaredError, Diagnostics1, Diagnostics2),
+		^^replace_diagnostic(mean_squared_error, MeanSquaredError, Diagnostics2, Diagnostics3),
+		^^replace_diagnostic(sum_absolute_error, SumAbsoluteError, Diagnostics3, Diagnostics4),
+		^^replace_diagnostic(mean_absolute_error, MeanAbsoluteError, Diagnostics4, UpdatedDiagnostics).
 
 	% forecaster validation, export, and printing
 

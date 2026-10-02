@@ -25,24 +25,26 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-01,
+		date is 2026-10-02,
 		comment is 'Simple, Holt linear-trend, and additive or multiplicative Holt-Winters exponential smoothing forecaster.',
 		see_also is [forecaster_protocol, time_series_dataset_protocol]
 	]).
 
 	:- public(update/3).
-	:- mode(update(+compound, +term, -compound), one_or_error).
+	:- mode(update(+compound, @term, -compound), one_or_error).
 	:- info(update/3, [
-		comment is 'Returns a new forecaster after applying one observation.',
+		comment is 'Returns a new forecaster after applying one numeric observation or, under skip_update, an unbound variable representing a missing observation. Does not bind missing observations.',
 		argnames is ['Forecaster', 'Observation', 'UpdatedForecaster'],
 		exceptions is [
 			'``Forecaster`` is a variable' - instantiation_error,
 			'``Forecaster`` is neither a variable nor a valid forecaster' - domain_error(forecaster, 'Forecaster'),
-			'``Observation`` is a variable' - instantiation_error,
-			'``Observation`` is neither the configured missing marker under ``skip_update`` nor a number' - type_error(number, 'Observation'),
+			'``Observation`` is a variable under the error missing policy' - instantiation_error,
+			'``Observation`` is neither a variable nor a number' - type_error(number, 'Observation'),
 			'``Observation`` is a number but is not finite' - domain_error(finite_number, 'Observation'),
 			'``Observation`` is incompatible with the learned transformation' - domain_error(positive_transformation_series, 'Observation'),
-			'``Observation`` is incompatible with a multiplicative model' - domain_error(positive_multiplicative_series, 'Observation')
+			'``Observation`` is incompatible with a multiplicative model' - domain_error(positive_multiplicative_series, 'Observation'),
+			'The multiplicative level update is not positive' - domain_error(positive_multiplicative_level, 'Level'),
+			'Update or diagnostic arithmetic fails' - evaluation_error('Error')
 		]
 	]).
 
@@ -74,13 +76,12 @@
 		^^option(bias_adjustment(BiasAdjustment), Options),
 		check_relevant_transformation_options(Transformation, BiasAdjustment, UserOptions),
 		^^option(retain_residuals(RetainResiduals), Options),
-		^^option(missing_value(MissingMarker), Options),
 		^^option(missing_policy(MissingPolicy), Options),
 		^^dataset_series(Dataset, RawSeries),
 		check_series_policy(Dataset, RawSeries, MissingPolicy),
-		check_observations(RawSeries, MissingMarker, MissingPolicy, ObservedCount, MissingCount),
+		check_observations(RawSeries, MissingPolicy, ObservedCount, MissingCount),
 		fit_transformation(
-			Transformation, Dataset, Method, RawSeries, MissingMarker, MissingPolicy, UserOptions, Options,
+			Transformation, Dataset, Method, RawSeries, MissingPolicy, UserOptions, Options,
 			EffectiveTransformation, EffectiveOptions, SelectedMethod, SelectionDiagnostic, FitResult
 		),
 		FitResult = fit_result(
@@ -105,18 +106,18 @@
 		Forecaster = exponential_smoothing_forecaster(SelectedMethod, State, Parameters, Diagnostics),
 		!.
 
-	fit_transformation(box_cox(auto), Dataset, Method, RawSeries, MissingMarker, MissingPolicy, UserOptions, Options,
+	fit_transformation(box_cox(auto), Dataset, Method, RawSeries, MissingPolicy, UserOptions, Options,
 			box_cox(Lambda), EffectiveOptions, SelectedMethod, SelectionDiagnostic, FitResult) :-
 		!,
-		check_positive_transformation_series(RawSeries, MissingMarker, MissingPolicy),
+		check_positive_transformation_series(RawSeries, MissingPolicy),
 		^^option(box_cox_bounds(Lower, Upper), Options),
 		optimize_box_cox(
-			Lower, Upper, Dataset, Method, RawSeries, MissingMarker, MissingPolicy, UserOptions, Options,
+			Lower, Upper, Dataset, Method, RawSeries, MissingPolicy, UserOptions, Options,
 			Lambda, EffectiveOptions, SelectedMethod, SelectionDiagnostic, FitResult
 		).
-	fit_transformation(Transformation, Dataset, Method, RawSeries, MissingMarker, MissingPolicy, UserOptions, Options,
+	fit_transformation(Transformation, Dataset, Method, RawSeries, MissingPolicy, UserOptions, Options,
 			Transformation, Options, SelectedMethod, SelectionDiagnostic, FitResult) :-
-		prepare_series(Transformation, RawSeries, MissingMarker, MissingPolicy, Series),
+		prepare_series(Transformation, RawSeries, MissingPolicy, Series),
 		fit_selected_model(Dataset, Method, RawSeries, Series, UserOptions, Options, false, SelectedMethod, SelectionDiagnostic, FitResult).
 
 	fit_selected_model(Dataset, auto, RawSeries, Series, UserOptions, Options, LambdaAutomatic, SelectedMethod, SelectionDiagnostic, FitResult) :-
@@ -127,71 +128,71 @@
 		check_relevant_parameter_options(Method, UserOptions),
 		fit_forecaster_core(Dataset, Method, Series, Options, LambdaAutomatic, FitResult).
 
-	optimize_box_cox(Lower, Upper, Dataset, Method, RawSeries, MissingMarker, MissingPolicy, UserOptions, Options,
+	optimize_box_cox(Lower, Upper, Dataset, Method, RawSeries, MissingPolicy, UserOptions, Options,
 			Lambda, EffectiveOptions, SelectedMethod, SelectionDiagnostic, FitResult) :-
 		GoldenRatio is (sqrt(5.0) - 1.0) / 2.0,
 		LeftLambda is Upper - GoldenRatio * (Upper - Lower),
 		RightLambda is Lower + GoldenRatio * (Upper - Lower),
-		evaluate_box_cox_lambda(LeftLambda, Dataset, Method, RawSeries, MissingMarker, MissingPolicy, UserOptions, Options, LeftCandidate),
-		evaluate_box_cox_lambda(RightLambda, Dataset, Method, RawSeries, MissingMarker, MissingPolicy, UserOptions, Options, RightCandidate),
+		evaluate_box_cox_lambda(LeftLambda, Dataset, Method, RawSeries, MissingPolicy, UserOptions, Options, LeftCandidate),
+		evaluate_box_cox_lambda(RightLambda, Dataset, Method, RawSeries, MissingPolicy, UserOptions, Options, RightCandidate),
 		golden_section_box_cox(
 			24, Lower, Upper, LeftCandidate, RightCandidate, GoldenRatio,
-			Dataset, Method, RawSeries, MissingMarker, MissingPolicy, UserOptions, Options, BestCandidate
+			Dataset, Method, RawSeries, MissingPolicy, UserOptions, Options, BestCandidate
 		),
 		BestCandidate = box_cox_candidate(Lambda, _Objective, EffectiveOptions, SelectedMethod, SelectionDiagnostic, FitResult).
 
 	golden_section_box_cox(0, _Lower, _Upper, LeftCandidate, RightCandidate, _GoldenRatio,
-			_Dataset, _Method, _RawSeries, _MissingMarker, _MissingPolicy, _UserOptions, _Options, BestCandidate) :-
+			_Dataset, _Method, _RawSeries, _MissingPolicy, _UserOptions, _Options, BestCandidate) :-
 		!,
 		better_box_cox_candidate(LeftCandidate, RightCandidate, BestCandidate).
 	golden_section_box_cox(Iterations, Lower, Upper, LeftCandidate, RightCandidate, GoldenRatio,
-			Dataset, Method, RawSeries, MissingMarker, MissingPolicy, UserOptions, Options, BestCandidate) :-
+			Dataset, Method, RawSeries, MissingPolicy, UserOptions, Options, BestCandidate) :-
 		LeftCandidate = box_cox_candidate(LeftLambda, LeftObjective, _LeftOptions, _LeftMethod, _LeftSelection, _LeftFit),
 		RightCandidate = box_cox_candidate(RightLambda, RightObjective, _RightOptions, _RightMethod, _RightSelection, _RightFit),
 		NextIterations is Iterations - 1,
 		(	LeftObjective =< RightObjective ->
 			NextUpper = RightLambda,
 			NextLeftLambda is NextUpper - GoldenRatio * (NextUpper - Lower),
-			evaluate_box_cox_lambda(NextLeftLambda, Dataset, Method, RawSeries, MissingMarker, MissingPolicy, UserOptions, Options, NextLeftCandidate),
+			evaluate_box_cox_lambda(NextLeftLambda, Dataset, Method, RawSeries, MissingPolicy, UserOptions, Options, NextLeftCandidate),
 			golden_section_box_cox(
 				NextIterations, Lower, NextUpper, NextLeftCandidate, LeftCandidate, GoldenRatio,
-				Dataset, Method, RawSeries, MissingMarker, MissingPolicy, UserOptions, Options, BestCandidate
+				Dataset, Method, RawSeries, MissingPolicy, UserOptions, Options, BestCandidate
 			)
 		;	NextLower = LeftLambda,
 			NextRightLambda is NextLower + GoldenRatio * (Upper - NextLower),
-			evaluate_box_cox_lambda(NextRightLambda, Dataset, Method, RawSeries, MissingMarker, MissingPolicy, UserOptions, Options, NextRightCandidate),
+			evaluate_box_cox_lambda(NextRightLambda, Dataset, Method, RawSeries, MissingPolicy, UserOptions, Options, NextRightCandidate),
 			golden_section_box_cox(
 				NextIterations, NextLower, Upper, RightCandidate, NextRightCandidate, GoldenRatio,
-				Dataset, Method, RawSeries, MissingMarker, MissingPolicy, UserOptions, Options, BestCandidate
+				Dataset, Method, RawSeries, MissingPolicy, UserOptions, Options, BestCandidate
 			)
 		).
 
-	evaluate_box_cox_lambda(Lambda, Dataset, Method, RawSeries, MissingMarker, MissingPolicy, UserOptions, Options,
+	evaluate_box_cox_lambda(Lambda, Dataset, Method, RawSeries, MissingPolicy, UserOptions, Options,
 			box_cox_candidate(Lambda, Objective, EffectiveOptions, SelectedMethod, SelectionDiagnostic, FitResult)) :-
 		Transformation = box_cox(Lambda),
-		transform_series(Transformation, RawSeries, MissingMarker, MissingPolicy, Series),
+		transform_series(Transformation, RawSeries, MissingPolicy, Series),
 		replace_option(transformation, transformation(Transformation), Options, EffectiveOptions),
 		fit_selected_model(Dataset, Method, RawSeries, Series, UserOptions, EffectiveOptions, true, SelectedMethod, SelectionDiagnostic, FitResult),
 		FitResult = fit_result(
 			_InnerState, _Parameters, SumSquaredError, ErrorCount, _Convergence, _Iterations, _Evaluations,
 			_Residuals, _ParameterSpecification, _Frequency, _FreqDiag
 		),
-		box_cox_profile_objective(RawSeries, MissingMarker, Lambda, SumSquaredError, ErrorCount, Objective).
+		box_cox_profile_objective(RawSeries, Lambda, SumSquaredError, ErrorCount, Objective).
 
-	box_cox_profile_objective(RawSeries, MissingMarker, Lambda, SumSquaredError, ErrorCount, Objective) :-
-		observed_log_sum(RawSeries, MissingMarker, 0.0, 0, LogSum, ObservedCount),
+	box_cox_profile_objective(RawSeries, Lambda, SumSquaredError, ErrorCount, Objective) :-
+		observed_log_sum(RawSeries, 0.0, 0, LogSum, ObservedCount),
 		AdjustedSumSquaredError is max(SumSquaredError, 1.0e-12),
 		Objective is ObservedCount * log(AdjustedSumSquaredError / ErrorCount) - 2.0 * (Lambda - 1.0) * LogSum.
 
-	observed_log_sum([], _MissingMarker, LogSum, ObservedCount, LogSum, ObservedCount).
-	observed_log_sum([Value| Values], MissingMarker, LogSum0, ObservedCount0, LogSum, ObservedCount) :-
-		(	Value == MissingMarker ->
+	observed_log_sum([], LogSum, ObservedCount, LogSum, ObservedCount).
+	observed_log_sum([Value| Values], LogSum0, ObservedCount0, LogSum, ObservedCount) :-
+		(	var(Value) ->
 			LogSum1 = LogSum0,
 			ObservedCount1 = ObservedCount0
 		;	LogSum1 is LogSum0 + log(Value),
 			ObservedCount1 is ObservedCount0 + 1
 		),
-		observed_log_sum(Values, MissingMarker, LogSum1, ObservedCount1, LogSum, ObservedCount).
+		observed_log_sum(Values, LogSum1, ObservedCount1, LogSum, ObservedCount).
 
 	better_box_cox_candidate(LeftCandidate, RightCandidate, BestCandidate) :-
 		LeftCandidate = box_cox_candidate(LeftLambda, LeftObjective, _LeftOptions, _LeftMethod, _LeftSelection, _LeftFit),
@@ -212,20 +213,19 @@
 		check_forecaster(Forecaster),
 		Forecaster = exponential_smoothing_forecaster(Method, State, Parameters, Diagnostics),
 		memberchk(options(TrainingOptions), Diagnostics),
-		memberchk(missing_value(MissingMarker), TrainingOptions),
 		memberchk(missing_policy(MissingPolicy), TrainingOptions),
-		prepare_update_observation(Method, State, Observation, MissingMarker, MissingPolicy, UpdateObservation, Missing),
+		prepare_update_observation(Method, State, Observation, MissingPolicy, UpdateObservation, Missing),
 		state_transformation_details(State, Transformation, InnerState, _Variance),
-		^^update_smoothing(Method, InnerState, Parameters, UpdateObservation, MissingMarker, UpdatedInnerState, SumSquaredErrorIncrement, StepResiduals),
+		^^update_smoothing(Method, InnerState, Parameters, UpdateObservation, UpdatedInnerState, SumSquaredErrorIncrement, StepResiduals),
 		updated_forecaster_diagnostics(Diagnostics, Missing, SumSquaredErrorIncrement, StepResiduals, UpdatedDiagnostics, MeanSquaredError),
 		wrap_state(Transformation, UpdatedInnerState, MeanSquaredError, UpdatedState),
 		UpdatedForecaster = exponential_smoothing_forecaster(Method, UpdatedState, Parameters, UpdatedDiagnostics),
 		!.
 
-	prepare_update_observation(Method, State, Observation, MissingMarker, MissingPolicy, UpdateObservation, Missing) :-
-		check_update_observation(Observation, MissingMarker, MissingPolicy, Missing),
+	prepare_update_observation(Method, State, Observation, MissingPolicy, UpdateObservation, Missing) :-
+		check_update_observation(Observation, MissingPolicy, Missing),
 		(	Missing == true ->
-			UpdateObservation = MissingMarker
+			true
 		;	State = transformed(Transformation, _InnerState, _ResidualVariance) ->
 			(	Observation > 0.0 ->
 				apply_transform(Transformation, Observation, TransformedObservation),
@@ -237,16 +237,16 @@
 			UpdateObservation = Observation
 		).
 
-	check_update_observation(Observation, _MissingMarker, _MissingPolicy, _Missing) :-
+	check_update_observation(Observation, error, _Missing) :-
 		var(Observation),
 		instantiation_error.
-	check_update_observation(Observation, MissingMarker, skip_update, true) :-
-		Observation == MissingMarker,
+	check_update_observation(Observation, skip_update, true) :-
+		var(Observation),
 		!.
-	check_update_observation(Observation, _MissingMarker, _MissingPolicy, false) :-
+	check_update_observation(Observation, _MissingPolicy, false) :-
 		^^finite_number(Observation),
 		!.
-	check_update_observation(Observation, _MissingMarker, _MissingPolicy, _Missing) :-
+	check_update_observation(Observation, _MissingPolicy, _Missing) :-
 		(	number(Observation) ->
 			domain_error(finite_number, Observation)
 		;	type_error(number, Observation)
@@ -269,36 +269,29 @@
 		TrainingSeriesLength is TrainingSeriesLength0 + 1,
 		UpdateCount is UpdateCount0 + 1,
 		SumSquaredError is SumSquaredError0 + SumSquaredErrorIncrement,
-		( Missing == true ->
+		(	Missing == true ->
 			ObservedCount = ObservedCount0,
 			MissingCount is MissingCount0 + 1,
 			ScoredCount = ScoredCount0
-		; ObservedCount is ObservedCount0 + 1,
+		;	ObservedCount is ObservedCount0 + 1,
 			MissingCount = MissingCount0,
 			ScoredCount is ScoredCount0 + 1
 		),
 		MeanSquaredError is SumSquaredError / ScoredCount,
 		updated_residuals(Residuals0, StepResiduals, Residuals),
-		replace_diagnostic(training_series_length, TrainingSeriesLength, Diagnostics, Diagnostics1),
-		replace_diagnostic(observed_count, ObservedCount, Diagnostics1, Diagnostics2),
-		replace_diagnostic(missing_count, MissingCount, Diagnostics2, Diagnostics3),
-		replace_diagnostic(scored_count, ScoredCount, Diagnostics3, Diagnostics4),
-		replace_diagnostic(sum_squared_error, SumSquaredError, Diagnostics4, Diagnostics5),
-		replace_diagnostic(mean_squared_error, MeanSquaredError, Diagnostics5, Diagnostics6),
-		replace_diagnostic(residuals, Residuals, Diagnostics6, Diagnostics7),
-		replace_diagnostic(update_count, UpdateCount, Diagnostics7, UpdatedDiagnostics).
+		^^replace_diagnostic(training_series_length, TrainingSeriesLength, Diagnostics, Diagnostics1),
+		^^replace_diagnostic(observed_count, ObservedCount, Diagnostics1, Diagnostics2),
+		^^replace_diagnostic(missing_count, MissingCount, Diagnostics2, Diagnostics3),
+		^^replace_diagnostic(scored_count, ScoredCount, Diagnostics3, Diagnostics4),
+		^^replace_diagnostic(sum_squared_error, SumSquaredError, Diagnostics4, Diagnostics5),
+		^^replace_diagnostic(mean_squared_error, MeanSquaredError, Diagnostics5, Diagnostics6),
+		^^replace_diagnostic(residuals, Residuals, Diagnostics6, Diagnostics7),
+		^^replace_diagnostic(update_count, UpdateCount, Diagnostics7, UpdatedDiagnostics).
 
 	updated_residuals(none, _StepResiduals, none) :-
 		!.
 	updated_residuals(Residuals0, StepResiduals, Residuals) :-
 		append(Residuals0, StepResiduals, Residuals).
-
-	replace_diagnostic(Name, Value, [Diagnostic| Diagnostics], [UpdatedDiagnostic| Diagnostics]) :-
-		functor(Diagnostic, Name, 1),
-		!,
-		UpdatedDiagnostic =.. [Name, Value].
-	replace_diagnostic(Name, Value, [Diagnostic| Diagnostics], [Diagnostic| UpdatedDiagnostics]) :-
-		replace_diagnostic(Name, Value, Diagnostics, UpdatedDiagnostics).
 
 	forecast(Forecaster, Horizon, Forecasts) :-
 		check_forecaster(Forecaster),
@@ -797,9 +790,8 @@
 		MinimumLength is CycleCount * Frequency + 1,
 		^^check_series_length(Dataset, Series, MinimumLength),
 		(	multiplicative_method(Method) ->
-			^^option(missing_value(MissingMarker), Options),
 			^^option(missing_policy(MissingPolicy), Options),
-			check_positive_series(Series, MissingMarker, MissingPolicy)
+			check_positive_series(Series, MissingPolicy)
 		;	true
 		),
 		^^option(alpha(Alpha), Options),
@@ -829,10 +821,8 @@
 		^^option(optimizer(Optimizer), Options),
 		^^option(optimizer_options(OptimizerOptions), Options),
 		^^option(de_options(DeOptions), Options),
-		^^option(missing_value(MissingMarker), Options),
 		fit_parameters(
-			Method, Series, Frequency, ParameterSpecification, InitializationSpecification,
-			MissingMarker, Optimizer, OptimizerOptions, DeOptions,
+			Method, Series, Frequency, ParameterSpecification, InitializationSpecification, Optimizer, OptimizerOptions, DeOptions,
 			Parameters, State, SumSquaredError, ErrorCount, Convergence, Iterations, Evaluations, Residuals
 		),
 		FitResult = fit_result(
@@ -871,8 +861,7 @@
 		),
 		normalize_frequency_candidates(RawCandidates, CandidateFrequencies),
 		length(Series, Length),
-		^^option(missing_value(MissingMarker), Options),
-		score_frequency_candidates(CandidateFrequencies, Series, MissingMarker, Length, CandidateTerms),
+		score_frequency_candidates(CandidateFrequencies, Series, Length, CandidateTerms),
 		shortlist_frequency_candidates(CandidateTerms, ShortList),
 		(	ShortList == [] ->
 			domain_error(no_viable_frequency_candidate, Method)
@@ -893,16 +882,16 @@
 	normalize_frequency_candidates(List, CandidateFrequencies) :-
 		sort(List, CandidateFrequencies).
 
-	score_frequency_candidates(CandidateFrequencies, Series, MissingMarker, Length, CandidateTerms) :-
-		indexed_regression(Series, MissingMarker, Trend, Intercept),
-		detrend_values_missing(Series, MissingMarker, 1, Trend, Intercept, Detrended),
-		score_frequency_candidates_(CandidateFrequencies, Detrended, MissingMarker, Length, CandidateTerms).
+	score_frequency_candidates(CandidateFrequencies, Series, Length, CandidateTerms) :-
+		indexed_regression(Series, Trend, Intercept),
+		detrend_values_missing(Series, 1, Trend, Intercept, Detrended),
+		score_frequency_candidates_(CandidateFrequencies, Detrended, Length, CandidateTerms).
 
-	score_frequency_candidates_([], _Detrended, _MissingMarker, _Length, []).
-	score_frequency_candidates_([Frequency| Frequencies], Detrended, MissingMarker, Length, [candidate(Frequency, Status, Score)| Terms]) :-
+	score_frequency_candidates_([], _Detrended, _Length, []).
+	score_frequency_candidates_([Frequency| Frequencies], Detrended, Length, [candidate(Frequency, Status, Score)| Terms]) :-
 		MinimumLength is 2 * Frequency + 1,
 		(	Length >= MinimumLength ->
-			autocorrelation_at_lag_missing(Detrended, MissingMarker, Frequency, Score0),
+			autocorrelation_at_lag_missing(Detrended, Frequency, Score0),
 			(	Score0 > 0.0 ->
 				Status = ok,
 				Score = Score0
@@ -912,38 +901,38 @@
 		;	Status = rejected(insufficient_observations),
 			Score = none
 		),
-		score_frequency_candidates_(Frequencies, Detrended, MissingMarker, Length, Terms).
+		score_frequency_candidates_(Frequencies, Detrended, Length, Terms).
 
-	indexed_regression(Series, MissingMarker, Trend, Intercept) :-
-		indexed_observations(Series, MissingMarker, 1, Indices, Observations),
+	indexed_regression(Series, Trend, Intercept) :-
+		indexed_observations(Series, 1, Indices, Observations),
 		(	Indices = [_First, _Second| _] ->
 			linear_regression(Indices, Observations, Trend, Intercept)
 		;	domain_error(insufficient_known_observations, frequency_selection)
 		).
 
-	indexed_observations([], _MissingMarker, _Index, [], []).
-	indexed_observations([Value| Values], MissingMarker, Index, Indices, Observations) :-
+	indexed_observations([], _Index, [], []).
+	indexed_observations([Value| Values], Index, Indices, Observations) :-
 		NextIndex is Index + 1,
-		(	Value == MissingMarker ->
+		(	var(Value) ->
 			Indices = RestIndices,
 			Observations = RestObservations
 		;	Indices = [Index| RestIndices],
 			Observations = [Value| RestObservations]
 		),
-		indexed_observations(Values, MissingMarker, NextIndex, RestIndices, RestObservations).
+		indexed_observations(Values, NextIndex, RestIndices, RestObservations).
 
-	detrend_values_missing([], _MissingMarker, _Index, _Trend, _Intercept, []).
-	detrend_values_missing([Value| Values], MissingMarker, Index, Trend, Intercept, [Detrended| Detrendeds]) :-
-		(	Value == MissingMarker ->
-			Detrended = MissingMarker
+	detrend_values_missing([], _Index, _Trend, _Intercept, []).
+	detrend_values_missing([Value| Values], Index, Trend, Intercept, [Detrended| Detrendeds]) :-
+		(	var(Value) ->
+			true
 		;	Prediction is Intercept + Trend * Index,
 			Detrended is Value - Prediction
 		),
 		NextIndex is Index + 1,
-		detrend_values_missing(Values, MissingMarker, NextIndex, Trend, Intercept, Detrendeds).
+		detrend_values_missing(Values, NextIndex, Trend, Intercept, Detrendeds).
 
-	autocorrelation_at_lag_missing(Detrended, MissingMarker, Lag, Score) :-
-		^^observed_series(Detrended, MissingMarker, Observations),
+	autocorrelation_at_lag_missing(Detrended, Lag, Score) :-
+		^^observed_series(Detrended, Observations),
 		length(Observations, Count),
 		sum(Observations, Sum),
 		Mean is Sum / Count,
@@ -953,21 +942,21 @@
 		append(Prefix, _Rest, Detrended),
 		length(Skip, Lag),
 		append(Skip, Suffix, Detrended),
-		missing_covariance(Prefix, Suffix, MissingMarker, Mean, 0.0, 0.0, Covariance, Variance),
+		missing_covariance(Prefix, Suffix, Mean, 0.0, 0.0, Covariance, Variance),
 		( Variance =< 0.0 -> Score = 0.0; Score is Covariance / Variance ).
 
-	missing_covariance([], [], _MissingMarker, _Mean, Covariance, Variance, Covariance, Variance).
-	missing_covariance([First| Firsts], [Second| Seconds], MissingMarker, Mean, Covariance0, Variance0, Covariance, Variance) :-
-		( First == MissingMarker ->
+	missing_covariance([], [], _Mean, Covariance, Variance, Covariance, Variance).
+	missing_covariance([First| Firsts], [Second| Seconds], Mean, Covariance0, Variance0, Covariance, Variance) :-
+		( var(First) ->
 			Covariance1 = Covariance0, Variance1 = Variance0
-		; Second == MissingMarker ->
+		; var(Second) ->
 			Covariance1 = Covariance0, Variance1 = Variance0
 		; CenteredFirst is First - Mean,
 			CenteredSecond is Second - Mean,
 			Covariance1 is Covariance0 + CenteredFirst * CenteredSecond,
 			Variance1 is Variance0 + CenteredFirst * CenteredFirst
 		),
-		missing_covariance(Firsts, Seconds, MissingMarker, Mean, Covariance1, Variance1, Covariance, Variance).
+		missing_covariance(Firsts, Seconds, Mean, Covariance1, Variance1, Covariance, Variance).
 
 	shortlist_frequency_candidates(CandidateTerms, ShortList) :-
 		ok_frequency_pairs(CandidateTerms, Pairs),
@@ -1012,7 +1001,7 @@
 	evaluate_frequency_candidate(Dataset, Method, Series, Options, LambdaAutomatic, Frequency, candidate(Frequency, Status, Score)) :-
 		replace_option(frequency, frequency(Frequency), Options, FrequencyOptions),
 		catch(
-			( fit_forecaster_core(Dataset, Method, Series, FrequencyOptions, LambdaAutomatic, FitResult) ->
+			(	fit_forecaster_core(Dataset, Method, Series, FrequencyOptions, LambdaAutomatic, FitResult) ->
 				FitResult = fit_result(
 					_State, _Parameters, SumSquaredError, ErrorCount, _Convergence, _Iterations, _Evaluations,
 					_Residuals, ParameterSpecification, _ResultFrequency, _FitFreqDiag
@@ -1169,8 +1158,7 @@
 		^^option(transformation(Transformation), Options),
 		^^option(bias_adjustment(BiasAdjustment), Options),
 		back_transform_all(Transformation, BiasAdjustment, MeanSquaredError, InnerForecasts, Forecasts),
-		^^option(missing_value(MissingMarker), Options),
-		sum_squared_errors(Forecasts, RawSuffix, MissingMarker, 0.0, 0, Score, Count),
+		sum_squared_errors(Forecasts, RawSuffix, 0.0, 0, Score, Count),
 		(	Count > 0 ->
 			true
 		;	domain_error(insufficient_known_observations, validation)
@@ -1181,16 +1169,16 @@
 	back_transform_all(Transformation, BiasAdjustment, Variance, InnerForecasts, Forecasts) :-
 		back_transform_forecasts(Transformation, BiasAdjustment, Variance, InnerForecasts, Forecasts).
 
-	sum_squared_errors([], [], _MissingMarker, Sum, Count, Sum, Count).
-	sum_squared_errors([_Forecast| Forecasts], [Actual| Actuals], MissingMarker, Sum0, Count0, Sum, Count) :-
-		Actual == MissingMarker,
+	sum_squared_errors([], [], Sum, Count, Sum, Count).
+	sum_squared_errors([_Forecast| Forecasts], [Actual| Actuals], Sum0, Count0, Sum, Count) :-
+		var(Actual),
 		!,
-		sum_squared_errors(Forecasts, Actuals, MissingMarker, Sum0, Count0, Sum, Count).
-	sum_squared_errors([Forecast| Forecasts], [Actual| Actuals], MissingMarker, Sum0, Count0, Sum, Count) :-
+		sum_squared_errors(Forecasts, Actuals, Sum0, Count0, Sum, Count).
+	sum_squared_errors([Forecast| Forecasts], [Actual| Actuals], Sum0, Count0, Sum, Count) :-
 		Difference is Forecast - Actual,
 		Sum1 is Sum0 + Difference * Difference,
 		Count1 is Count0 + 1,
-		sum_squared_errors(Forecasts, Actuals, MissingMarker, Sum1, Count1, Sum, Count).
+		sum_squared_errors(Forecasts, Actuals, Sum1, Count1, Sum, Count).
 
 	% AICc under a Gaussian one-step-error approximation: k counts every automatic
 	% smoothing parameter, every optimized initial-state coordinate, and one for
@@ -1260,8 +1248,8 @@
 		replace_option(Name, Replacement, Options, NewOptions).
 	replace_option(_Name, Replacement, [], [Replacement]).
 
-	fit_parameters(Method, Series, Frequency, ParameterSpecification, InitializationSpecification, MissingMarker, Optimizer, OptimizerOptions, DeOptions, Parameters, State, SumSquaredError, ErrorCount, Convergence, Iterations, Evaluations, Residuals) :-
-		^^observed_series(Series, MissingMarker, OptimizationSeries),
+	fit_parameters(Method, Series, Frequency, ParameterSpecification, InitializationSpecification, Optimizer, OptimizerOptions, DeOptions, Parameters, State, SumSquaredError, ErrorCount, Convergence, Iterations, Evaluations, Residuals) :-
+		^^observed_series(Series, OptimizationSeries),
 		^^optimization_initial_point(Method, OptimizationSeries, Frequency, ParameterSpecification, InitializationSpecification, InitialPoint),
 		(	InitialPoint == [] ->
 			^^parameters_from_point(ParameterSpecification, [], Parameters),
@@ -1269,11 +1257,11 @@
 			Convergence = fixed_parameters,
 			Iterations = 0,
 			Evaluations = 0
-		;	Problem = exponential_smoothing_problem(Method, Series, OptimizationSeries, Frequency, ParameterSpecification, InitializationSpecification, MissingMarker),
+		;	Problem = exponential_smoothing_problem(Method, Series, OptimizationSeries, Frequency, ParameterSpecification, InitializationSpecification),
 			run_optimizer(Optimizer, Problem, OptimizerOptions, DeOptions, Point, Iterations, Evaluations, Convergence),
 			^^optimization_components(Method, OptimizationSeries, Frequency, ParameterSpecification, InitializationSpecification, Point, Parameters, EffectiveInitializationSpecification)
 		),
-		^^fit_smoothing(Method, Series, Frequency, Parameters, EffectiveInitializationSpecification, MissingMarker, State, SumSquaredError, ErrorCount, Residuals).
+		^^fit_smoothing(Method, Series, Frequency, Parameters, EffectiveInitializationSpecification, State, SumSquaredError, ErrorCount, Residuals).
 
 	% optimizer strategy dispatch
 
@@ -1529,14 +1517,14 @@
 		;	true
 		).
 
-	check_positive_series([], _MissingMarker, _MissingPolicy).
-	check_positive_series([Value| Values], MissingMarker, skip_update) :-
-		Value == MissingMarker,
+	check_positive_series([], _MissingPolicy).
+	check_positive_series([Value| Values], skip_update) :-
+		var(Value),
 		!,
-		check_positive_series(Values, MissingMarker, skip_update).
-	check_positive_series([Value| Values], MissingMarker, MissingPolicy) :-
+		check_positive_series(Values, skip_update).
+	check_positive_series([Value| Values], MissingPolicy) :-
 		(	Value > 0 ->
-			check_positive_series(Values, MissingMarker, MissingPolicy)
+			check_positive_series(Values, MissingPolicy)
 		;	domain_error(positive_multiplicative_series, Value)
 		).
 
@@ -1547,17 +1535,16 @@
 		;	domain_error(finite_number, Value)
 		).
 
-	check_observations(Series, _MissingMarker, error, ObservedCount, 0) :-
+	check_observations(Series, error, ObservedCount, 0) :-
 		check_finite_series(Series),
 		length(Series, ObservedCount).
-	check_observations(Series, MissingMarker, skip_update, ObservedCount, MissingCount) :-
-		check_observations_(Series, MissingMarker, 0, 0, ObservedCount, MissingCount).
+	check_observations(Series, skip_update, ObservedCount, MissingCount) :-
+		check_observations_(Series, 0, 0, ObservedCount, MissingCount).
 
-	check_observations_([], _MissingMarker, ObservedCount, MissingCount, ObservedCount, MissingCount).
-	check_observations_([Value| Values], MissingMarker, ObservedCount0, MissingCount0, ObservedCount, MissingCount) :-
+	check_observations_([], ObservedCount, MissingCount, ObservedCount, MissingCount).
+	check_observations_([Value| Values], ObservedCount0, MissingCount0, ObservedCount, MissingCount) :-
+		^^check_observation(Value),
 		(	var(Value) ->
-			instantiation_error
-		;	Value == MissingMarker ->
 			ObservedCount1 = ObservedCount0,
 			MissingCount1 is MissingCount0 + 1
 		;	^^finite_number(Value) ->
@@ -1565,7 +1552,7 @@
 			MissingCount1 = MissingCount0
 		;	domain_error(finite_number, Value)
 		),
-		check_observations_(Values, MissingMarker, ObservedCount1, MissingCount1, ObservedCount, MissingCount).
+		check_observations_(Values, ObservedCount1, MissingCount1, ObservedCount, MissingCount).
 
 	check_series_policy(Dataset, Series, error) :-
 		^^check_series(Dataset, Series).
@@ -1591,31 +1578,31 @@
 	bias_adjustment_consistent(log, _BiasAdjustment).
 	bias_adjustment_consistent(box_cox(_Lambda), _BiasAdjustment).
 
-	prepare_series(none, Series, _MissingMarker, _MissingPolicy, Series) :-
+	prepare_series(none, Series, _MissingPolicy, Series) :-
 		!.
-	prepare_series(Transformation, Series, MissingMarker, MissingPolicy, TransformedSeries) :-
-		check_positive_transformation_series(Series, MissingMarker, MissingPolicy),
-		transform_series(Transformation, Series, MissingMarker, MissingPolicy, TransformedSeries).
+	prepare_series(Transformation, Series, MissingPolicy, TransformedSeries) :-
+		check_positive_transformation_series(Series, MissingPolicy),
+		transform_series(Transformation, Series, MissingPolicy, TransformedSeries).
 
-	check_positive_transformation_series([], _MissingMarker, _MissingPolicy).
-	check_positive_transformation_series([Value| Values], MissingMarker, skip_update) :-
-		Value == MissingMarker,
+	check_positive_transformation_series([], _MissingPolicy).
+	check_positive_transformation_series([Value| Values], skip_update) :-
+		var(Value),
 		!,
-		check_positive_transformation_series(Values, MissingMarker, skip_update).
-	check_positive_transformation_series([Value| Values], MissingMarker, MissingPolicy) :-
+		check_positive_transformation_series(Values, skip_update).
+	check_positive_transformation_series([Value| Values], MissingPolicy) :-
 		(	Value > 0 ->
-			check_positive_transformation_series(Values, MissingMarker, MissingPolicy)
+			check_positive_transformation_series(Values, MissingPolicy)
 		;	domain_error(positive_transformation_series, Value)
 		).
 
-	transform_series(_Transformation, [], _MissingMarker, _MissingPolicy, []).
-	transform_series(Transformation, [Value| Values], MissingMarker, skip_update, [Value| Transformeds]) :-
-		Value == MissingMarker,
+	transform_series(_Transformation, [], _MissingPolicy, []).
+	transform_series(Transformation, [Value| Values], skip_update, [Value| Transformeds]) :-
+		var(Value),
 		!,
-		transform_series(Transformation, Values, MissingMarker, skip_update, Transformeds).
-	transform_series(Transformation, [Value| Values], MissingMarker, MissingPolicy, [Transformed| Transformeds]) :-
+		transform_series(Transformation, Values, skip_update, Transformeds).
+	transform_series(Transformation, [Value| Values], MissingPolicy, [Transformed| Transformeds]) :-
 		apply_transform(Transformation, Value, Transformed),
-		transform_series(Transformation, Values, MissingMarker, MissingPolicy, Transformeds).
+		transform_series(Transformation, Values, MissingPolicy, Transformeds).
 
 	apply_transform(log, Value, Transformed) :-
 		!,
@@ -1797,7 +1784,6 @@
 	default_option(candidate_models(default)).
 	default_option(frequency(dataset)).
 	default_option(frequency_candidates(none)).
-	default_option(missing_value(missing)).
 	default_option(missing_policy(error)).
 
 	valid_option(model(Method)) :-
@@ -1886,8 +1872,6 @@
 	valid_option(frequency_candidates(Frequencies)) :-
 		valid(non_empty_list(integer), Frequencies),
 		valid_frequency_candidate_option_list(Frequencies).
-	valid_option(missing_value(Marker)) :-
-		ground(Marker).
 	valid_option(missing_policy(Policy)) :-
 		once((Policy == error; Policy == skip_update)).
 

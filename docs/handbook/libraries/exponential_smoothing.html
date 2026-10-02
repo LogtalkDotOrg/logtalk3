@@ -356,6 +356,7 @@
 <li class="toctree-l2"><a class="reference internal" href="term_io.html"><code class="docutils literal notranslate"><span class="pre">term_io</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="text_normalization.html"><code class="docutils literal notranslate"><span class="pre">text_normalization</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="text_vectorization.html"><code class="docutils literal notranslate"><span class="pre">text_vectorization</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="theta_forecasting.html"><code class="docutils literal notranslate"><span class="pre">theta_forecasting</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="thurstone_mosteller_ranker.html"><code class="docutils literal notranslate"><span class="pre">thurstone_mosteller_ranker</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="timeout.html"><code class="docutils literal notranslate"><span class="pre">timeout</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="time_scales.html"><code class="docutils literal notranslate"><span class="pre">time_scales</span></code></a></li>
@@ -543,12 +544,10 @@ rejected when <code class="docutils literal notranslate"><span class="pre">trans
 training residuals (on the fitted, possibly transformed, scale) in the
 forecaster diagnostics for later use by <code class="docutils literal notranslate"><span class="pre">forecast_interval/5</span></code>
 (default: <code class="docutils literal notranslate"><span class="pre">false</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">missing_value(Marker)</span></code>: ground term denoting a missing observation
-(default: the atom <code class="docutils literal notranslate"><span class="pre">missing</span></code>). Marker comparison uses term identity.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">missing_policy(Policy)</span></code>: either <code class="docutils literal notranslate"><span class="pre">error</span></code> or <code class="docutils literal notranslate"><span class="pre">skip_update</span></code>
 (default: <code class="docutils literal notranslate"><span class="pre">error</span></code>). The default preserves the ordinary
-numeric-series validation and rejects marker terms. See “Missing
-observations” below.</p></li>
+numeric-series validation and rejects unbound observations. See
+“Missing observations” below.</p></li>
 </ul>
 <p>A smoothing factor can be <code class="docutils literal notranslate"><span class="pre">auto</span></code> or a number in the closed interval
 <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">1.0]</span></code>. Automatic factors are optimized by minimizing the
@@ -620,10 +619,16 @@ fitted parameter.</p>
 <h2>Missing observations<a class="headerlink" href="#missing-observations" title="Link to this heading"></a></h2>
 <p>Missing observations are opt-in. With <code class="docutils literal notranslate"><span class="pre">missing_policy(error)</span></code>, the
 default, all observations must be numbers and the existing validation
-errors are preserved. With <code class="docutils literal notranslate"><span class="pre">missing_policy(skip_update)</span></code>, an
-observation identical to the ground <code class="docutils literal notranslate"><span class="pre">missing_value(Marker)</span></code> term is
-accepted. Observation indices remain a regular, gap-free, 1-based
-sequence; missing markers are not removed from the time axis.</p>
+errors are preserved. With <code class="docutils literal notranslate"><span class="pre">missing_policy(skip_update)</span></code>, unbound
+variables represent missing observations, uniformly with the other
+time-series libraries. Dataset facts can use anonymous variables, for
+example <code class="docutils literal notranslate"><span class="pre">observation(3,</span> <span class="pre">_).</span></code>. Learning and updates do not bind missing
+observations, and learned forecasters remain ground. Observation indices
+remain a regular, gap-free, 1-based sequence; missing positions are not
+removed from the time axis.</p>
+<p>Atoms such as <code class="docutils literal notranslate"><span class="pre">missing</span></code> or <code class="docutils literal notranslate"><span class="pre">na</span></code> are not missing observations and are
+rejected. There is no configurable missing-value marker or
+<code class="docutils literal notranslate"><span class="pre">missing_value/1</span></code> option.</p>
 <p>At a missing observation, simple smoothing retains its level. Holt
 models advance the level by the current trend. Damped models advance by
 the damped trend and decay the trend. Seasonal models also rotate the
@@ -650,6 +655,10 @@ never modified. Updates reuse the fitted parameters and the exact
 per-observation equations used by batch fitting, including transformed
 and damped states and rotation of the current seasonal queue. Parameters
 are not refitted.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">missing_policy(skip_update)</span></code>, pass an anonymous or unbound
+variable to <code class="docutils literal notranslate"><span class="pre">update/3</span></code> for a missing observation. With
+<code class="docutils literal notranslate"><span class="pre">missing_policy(error)</span></code>, an unbound update observation raises an
+instantiation error.</p>
 <p>The original effective training options remain unchanged. Each update
 increments <code class="docutils literal notranslate"><span class="pre">training_series_length/1</span></code> and <code class="docutils literal notranslate"><span class="pre">update_count/1</span></code>. Known
 observations also increment <code class="docutils literal notranslate"><span class="pre">observed_count/1</span></code> and <code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code>,

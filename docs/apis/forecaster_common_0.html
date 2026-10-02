@@ -358,6 +358,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#term-io"><span class="xref std std-ref">term_io</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#text-normalization"><span class="xref std std-ref">text_normalization</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#text-vectorization"><span class="xref std std-ref">text_vectorization</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#theta-forecasting"><span class="xref std std-ref">theta_forecasting</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#thurstone-mosteller-ranker"><span class="xref std std-ref">thurstone_mosteller_ranker</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#time-scales"><span class="xref std std-ref">time_scales</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#time-series-protocols"><span class="xref std std-ref">time_series_protocols</span></a><ul class="current">
@@ -448,7 +449,7 @@
   <p class="right" id="forecaster-common-0"><span id="index-0"></span><strong>category</strong></p>
 <section id="forecaster-common">
 <h1><code class="docutils literal notranslate"><span class="pre">forecaster_common</span></code><a class="headerlink" href="#forecaster-common" title="Link to this heading"></a></h1>
-<p>Shared predicates for forecaster diagnostics, time series dataset validation, differencing, lag construction, forecast error metrics, and naive baselines.</p>
+<p>Shared predicates for forecaster diagnostics, dataset validation, differencing, lag construction, error metrics, seasonal adjustment, and baselines.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -512,29 +513,67 @@
 <li><p><a class="reference internal" href="#check-series-length-3" id="id10"><code class="docutils literal notranslate"><span class="pre">check_series_length/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#check-observation-1" id="id11"><code class="docutils literal notranslate"><span class="pre">check_observation/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#series-observation-summary-4" id="id12"><code class="docutils literal notranslate"><span class="pre">series_observation_summary/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#base-forecaster-diagnostics-5" id="id13"><code class="docutils literal notranslate"><span class="pre">base_forecaster_diagnostics/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#valid-forecaster-metadata-2" id="id14"><code class="docutils literal notranslate"><span class="pre">valid_forecaster_metadata/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#valid-forecaster-metadata-3" id="id15"><code class="docutils literal notranslate"><span class="pre">valid_forecaster_metadata/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#replace-diagnostic-4" id="id16"><code class="docutils literal notranslate"><span class="pre">replace_diagnostic/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#updated-observation-diagnostics-3" id="id17"><code class="docutils literal notranslate"><span class="pre">updated_observation_diagnostics/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#difference-series-2" id="id18"><code class="docutils literal notranslate"><span class="pre">difference_series/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#integrate-series-3" id="id19"><code class="docutils literal notranslate"><span class="pre">integrate_series/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#lagged-rows-3" id="id20"><code class="docutils literal notranslate"><span class="pre">lagged_rows/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#accumulate-forecast-error-4" id="id21"><code class="docutils literal notranslate"><span class="pre">accumulate_forecast_error/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#forecast-error-metrics-3" id="id22"><code class="docutils literal notranslate"><span class="pre">forecast_error_metrics/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#mean-absolute-error-3" id="id23"><code class="docutils literal notranslate"><span class="pre">mean_absolute_error/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#root-mean-squared-error-3" id="id24"><code class="docutils literal notranslate"><span class="pre">root_mean_squared_error/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#mean-absolute-percentage-error-3" id="id25"><code class="docutils literal notranslate"><span class="pre">mean_absolute_percentage_error/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#naive-forecast-3" id="id26"><code class="docutils literal notranslate"><span class="pre">naive_forecast/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#constant-forecast-3" id="id27"><code class="docutils literal notranslate"><span class="pre">constant_forecast/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#linear-trend-forecast-4" id="id28"><code class="docutils literal notranslate"><span class="pre">linear_trend_forecast/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#check-forecast-horizon-1" id="id29"><code class="docutils literal notranslate"><span class="pre">check_forecast_horizon/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#seasonal-naive-forecast-4" id="id30"><code class="docutils literal notranslate"><span class="pre">seasonal_naive_forecast/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#check-frequency-1" id="id31"><code class="docutils literal notranslate"><span class="pre">check_frequency/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#normalize-missing-series-3" id="id13"><code class="docutils literal notranslate"><span class="pre">normalize_missing_series/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#indexed-series-observations-3" id="id14"><code class="docutils literal notranslate"><span class="pre">indexed_series_observations/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#residual-fitted-values-3" id="id15"><code class="docutils literal notranslate"><span class="pre">residual_fitted_values/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-residual-history-5" id="id16"><code class="docutils literal notranslate"><span class="pre">valid_residual_history/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#base-forecaster-diagnostics-5" id="id17"><code class="docutils literal notranslate"><span class="pre">base_forecaster_diagnostics/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-forecaster-metadata-2" id="id18"><code class="docutils literal notranslate"><span class="pre">valid_forecaster_metadata/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-forecaster-metadata-3" id="id19"><code class="docutils literal notranslate"><span class="pre">valid_forecaster_metadata/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#replace-diagnostic-4" id="id20"><code class="docutils literal notranslate"><span class="pre">replace_diagnostic/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#updated-observation-diagnostics-3" id="id21"><code class="docutils literal notranslate"><span class="pre">updated_observation_diagnostics/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#difference-series-2" id="id22"><code class="docutils literal notranslate"><span class="pre">difference_series/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#integrate-series-3" id="id23"><code class="docutils literal notranslate"><span class="pre">integrate_series/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#lagged-rows-3" id="id24"><code class="docutils literal notranslate"><span class="pre">lagged_rows/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#accumulate-forecast-error-4" id="id25"><code class="docutils literal notranslate"><span class="pre">accumulate_forecast_error/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#forecast-error-metrics-3" id="id26"><code class="docutils literal notranslate"><span class="pre">forecast_error_metrics/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#mean-absolute-error-3" id="id27"><code class="docutils literal notranslate"><span class="pre">mean_absolute_error/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#root-mean-squared-error-3" id="id28"><code class="docutils literal notranslate"><span class="pre">root_mean_squared_error/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#mean-absolute-percentage-error-3" id="id29"><code class="docutils literal notranslate"><span class="pre">mean_absolute_percentage_error/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#naive-forecast-3" id="id30"><code class="docutils literal notranslate"><span class="pre">naive_forecast/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#constant-forecast-3" id="id31"><code class="docutils literal notranslate"><span class="pre">constant_forecast/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#linear-trend-forecast-4" id="id32"><code class="docutils literal notranslate"><span class="pre">linear_trend_forecast/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#check-forecast-horizon-1" id="id33"><code class="docutils literal notranslate"><span class="pre">check_forecast_horizon/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#seasonal-naive-forecast-4" id="id34"><code class="docutils literal notranslate"><span class="pre">seasonal_naive_forecast/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#check-frequency-1" id="id35"><code class="docutils literal notranslate"><span class="pre">check_frequency/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#seasonal-autocorrelation-test-4" id="id36"><code class="docutils literal notranslate"><span class="pre">seasonal_autocorrelation_test/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#classical-seasonal-adjustment-5" id="id37"><code class="docutils literal notranslate"><span class="pre">classical_seasonal_adjustment/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#restore-seasonality-5" id="id38"><code class="docutils literal notranslate"><span class="pre">restore_seasonality/5</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#private-predicates" id="id32">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id33">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id39">Private predicates</a></p>
+<ul>
+<li><p><a class="reference internal" href="#normalize-missing-values-4" id="id40"><code class="docutils literal notranslate"><span class="pre">normalize_missing_values/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#indexed-known-values-5" id="id41"><code class="docutils literal notranslate"><span class="pre">indexed_known_values/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#check-numeric-residuals-2" id="id42"><code class="docutils literal notranslate"><span class="pre">check_numeric_residuals/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#aligned-residual-fits-5" id="id43"><code class="docutils literal notranslate"><span class="pre">aligned_residual_fits/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-residual-positions-3" id="id44"><code class="docutils literal notranslate"><span class="pre">valid_residual_positions/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#seasonal-centered-values-5" id="id45"><code class="docutils literal notranslate"><span class="pre">seasonal_centered_values/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#seasonal-lag-scores-7" id="id46"><code class="docutils literal notranslate"><span class="pre">seasonal_lag_scores/7</span></code></a></p></li>
+<li><p><a class="reference internal" href="#seasonal-covariance-4" id="id47"><code class="docutils literal notranslate"><span class="pre">seasonal_covariance/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#seasonal-check-method-1" id="id48"><code class="docutils literal notranslate"><span class="pre">seasonal_check_method/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#seasonal-positive-values-1" id="id49"><code class="docutils literal notranslate"><span class="pre">seasonal_positive_values/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#seasonal-window-means-5" id="id50"><code class="docutils literal notranslate"><span class="pre">seasonal_window_means/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#seasonal-center-even-2" id="id51"><code class="docutils literal notranslate"><span class="pre">seasonal_center_even/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#seasonal-deviations-4" id="id52"><code class="docutils literal notranslate"><span class="pre">seasonal_deviations/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#seasonal-fold-cycles-3" id="id53"><code class="docutils literal notranslate"><span class="pre">seasonal_fold_cycles/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#seasonal-bucket-means-2" id="id54"><code class="docutils literal notranslate"><span class="pre">seasonal_bucket_means/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#seasonal-normalize-4" id="id55"><code class="docutils literal notranslate"><span class="pre">seasonal_normalize/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#seasonal-inverse-factors-3" id="id56"><code class="docutils literal notranslate"><span class="pre">seasonal_inverse_factors/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#seasonal-restore-values-5" id="id57"><code class="docutils literal notranslate"><span class="pre">seasonal_restore_values/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#seasonal-complete-autocorrelation-test-4" id="id58"><code class="docutils literal notranslate"><span class="pre">seasonal_complete_autocorrelation_test/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#classical-complete-seasonal-adjustment-5" id="id59"><code class="docutils literal notranslate"><span class="pre">classical_complete_seasonal_adjustment/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#seasonal-gap-centered-4" id="id60"><code class="docutils literal notranslate"><span class="pre">seasonal_gap_centered/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#seasonal-gap-lags-7" id="id61"><code class="docutils literal notranslate"><span class="pre">seasonal_gap_lags/7</span></code></a></p></li>
+<li><p><a class="reference internal" href="#seasonal-gap-covariance-4" id="id62"><code class="docutils literal notranslate"><span class="pre">seasonal_gap_covariance/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#seasonal-gap-windows-5" id="id63"><code class="docutils literal notranslate"><span class="pre">seasonal_gap_windows/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#seasonal-gap-even-2" id="id64"><code class="docutils literal notranslate"><span class="pre">seasonal_gap_even/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#seasonal-gap-deviations-4" id="id65"><code class="docutils literal notranslate"><span class="pre">seasonal_gap_deviations/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#seasonal-accumulate-cycle-4" id="id66"><code class="docutils literal notranslate"><span class="pre">seasonal_accumulate_cycle/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#seasonal-check-buckets-2" id="id67"><code class="docutils literal notranslate"><span class="pre">seasonal_check_buckets/2</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#operators" id="id68">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -867,8 +906,164 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="normalize-missing-series-3">
+<span id="forecaster-common-0-normalize-missing-series-3"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">normalize_missing_series/3</span></code></a><a class="headerlink" href="#normalize-missing-series-3" title="Link to this heading"></a></h3>
+<p>Copies numeric-or-unbound observations, sharing a fresh variable among missing positions without binding input variables.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">normalize_missing_series(Series,Normalized,Missing)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">normalize_missing_series(+list,-list,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The series is unbound or partial:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The series is not a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Series)</span></code></div>
+</div>
+<div class="line">A known observation is not numeric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Value)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="indexed-series-observations-3">
+<span id="forecaster-common-0-indexed-series-observations-3"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">indexed_series_observations/3</span></code></a><a class="headerlink" href="#indexed-series-observations-3" title="Link to this heading"></a></h3>
+<p>Collects known numeric values with their original one-based time indices.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">indexed_series_observations(Series,Indices,Values)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">indexed_series_observations(+list,-list(positive_integer),-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The list is unbound or partial:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The series is not a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Series)</span></code></div>
+</div>
+<div class="line">A known value is not numeric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Value)</span></code></div>
+</div>
+<div class="line">Index arithmetic fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="residual-fitted-values-3">
+<span id="forecaster-common-0-residual-fitted-values-3"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">residual_fitted_values/3</span></code></a><a class="headerlink" href="#residual-fitted-values-3" title="Link to this heading"></a></h3>
+<p>Reconstructs aligned pre-update fits from numeric-or-unbound observations and residuals after the first known initialization anchor. Missing positions and the anchor have fresh independent unbound output placeholders.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">residual_fitted_values(Series,Residuals,Values)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">residual_fitted_values(+list,+list(number),-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">A list is unbound or partial, or a residual is unbound:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Series or residuals are not lists:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,List)</span></code></div>
+</div>
+<div class="line">A known observation or residual is not numeric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Value)</span></code></div>
+</div>
+<div class="line">The residual count differs from the known count minus the initialization anchor:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(residual_count,Residuals)</span></code></div>
+</div>
+<div class="line">Fit reconstruction arithmetic fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="valid-residual-history-5">
+<span id="forecaster-common-0-valid-residual-history-5"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_residual_history/5</span></code></a><a class="headerlink" href="#valid-residual-history-5" title="Link to this heading"></a></h3>
+<p>Validates ground parallel numeric residuals and strictly increasing original indices after the initialization anchor. Both lists must match the scored count. The caller validates finiteness; this predicate does not reconstruct error totals or certify historical observations.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_residual_history(Residuals,Indices,Anchor,Length,ScoredCount)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_residual_history(&#64;list,&#64;list,&#64;positive_integer,&#64;positive_integer,&#64;non_negative_integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Index or count arithmetic fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="base-forecaster-diagnostics-5">
-<span id="forecaster-common-0-base-forecaster-diagnostics-5"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">base_forecaster_diagnostics/5</span></code></a><a class="headerlink" href="#base-forecaster-diagnostics-5" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-base-forecaster-diagnostics-5"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">base_forecaster_diagnostics/5</span></code></a><a class="headerlink" href="#base-forecaster-diagnostics-5" title="Link to this heading"></a></h3>
 <p>Builds the common part of a forecaster diagnostics metadata list, combined with implementation-specific extra diagnostics terms.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -889,7 +1084,7 @@
 <hr class="docutils" />
 </section>
 <section id="valid-forecaster-metadata-2">
-<span id="forecaster-common-0-valid-forecaster-metadata-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_forecaster_metadata/2</span></code></a><a class="headerlink" href="#valid-forecaster-metadata-2" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-valid-forecaster-metadata-2"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_forecaster_metadata/2</span></code></a><a class="headerlink" href="#valid-forecaster-metadata-2" title="Link to this heading"></a></h3>
 <p>True when diagnostics metadata contains the expected model term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -910,7 +1105,7 @@
 <hr class="docutils" />
 </section>
 <section id="valid-forecaster-metadata-3">
-<span id="forecaster-common-0-valid-forecaster-metadata-3"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_forecaster_metadata/3</span></code></a><a class="headerlink" href="#valid-forecaster-metadata-3" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-valid-forecaster-metadata-3"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_forecaster_metadata/3</span></code></a><a class="headerlink" href="#valid-forecaster-metadata-3" title="Link to this heading"></a></h3>
 <p>True when diagnostics metadata contains the expected model term and records the given effective options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -931,7 +1126,7 @@
 <hr class="docutils" />
 </section>
 <section id="replace-diagnostic-4">
-<span id="forecaster-common-0-replace-diagnostic-4"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">replace_diagnostic/4</span></code></a><a class="headerlink" href="#replace-diagnostic-4" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-replace-diagnostic-4"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">replace_diagnostic/4</span></code></a><a class="headerlink" href="#replace-diagnostic-4" title="Link to this heading"></a></h3>
 <p>Replaces the value of the first unary diagnostic with the given name, preserving order. Fails when no such diagnostic exists.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -952,7 +1147,7 @@
 <hr class="docutils" />
 </section>
 <section id="updated-observation-diagnostics-3">
-<span id="forecaster-common-0-updated-observation-diagnostics-3"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">updated_observation_diagnostics/3</span></code></a><a class="headerlink" href="#updated-observation-diagnostics-3" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-updated-observation-diagnostics-3"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">updated_observation_diagnostics/3</span></code></a><a class="headerlink" href="#updated-observation-diagnostics-3" title="Link to this heading"></a></h3>
 <p>Updates the training length, update count, observed count, and missing count of validated diagnostics after a numeric or missing observation, preserving metadata order and all other diagnostics. Requires existing non-negative integer counters.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -986,7 +1181,7 @@
 <hr class="docutils" />
 </section>
 <section id="difference-series-2">
-<span id="forecaster-common-0-difference-series-2"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">difference_series/2</span></code></a><a class="headerlink" href="#difference-series-2" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-difference-series-2"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">difference_series/2</span></code></a><a class="headerlink" href="#difference-series-2" title="Link to this heading"></a></h3>
 <p>Computes the first-order differences of a series: <code class="docutils literal notranslate"><span class="pre">Differences[i]</span> <span class="pre">=</span> <span class="pre">Series[i+1]</span> <span class="pre">-</span> <span class="pre">Series[i]</span></code>. The result has one fewer element than <code class="docutils literal notranslate"><span class="pre">Series</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1016,7 +1211,7 @@
 <hr class="docutils" />
 </section>
 <section id="integrate-series-3">
-<span id="forecaster-common-0-integrate-series-3"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">integrate_series/3</span></code></a><a class="headerlink" href="#integrate-series-3" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-integrate-series-3"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">integrate_series/3</span></code></a><a class="headerlink" href="#integrate-series-3" title="Link to this heading"></a></h3>
 <p>Reconstructs a series of levels from a series of differences and a starting base value (typically the last observed original value), by cumulative summing. Used to undo <code class="docutils literal notranslate"><span class="pre">difference_series/2</span></code> on forecasted differences.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1037,7 +1232,7 @@
 <hr class="docutils" />
 </section>
 <section id="lagged-rows-3">
-<span id="forecaster-common-0-lagged-rows-3"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">lagged_rows/3</span></code></a><a class="headerlink" href="#lagged-rows-3" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-lagged-rows-3"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">lagged_rows/3</span></code></a><a class="headerlink" href="#lagged-rows-3" title="Link to this heading"></a></h3>
 <p>Builds a list of <code class="docutils literal notranslate"><span class="pre">Lags-Target</span></code> rows from a series, where <code class="docutils literal notranslate"><span class="pre">Lags</span></code> is a list of the <code class="docutils literal notranslate"><span class="pre">Order</span></code> most recent values preceding <code class="docutils literal notranslate"><span class="pre">Target</span></code>, most recent first (<code class="docutils literal notranslate"><span class="pre">[X(t-1),</span> <span class="pre">X(t-2),</span> <span class="pre">...,</span> <span class="pre">X(t-Order)]-X(t)</span></code>). Requires the series to have more than <code class="docutils literal notranslate"><span class="pre">Order</span></code> observations.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1079,7 +1274,7 @@
 <hr class="docutils" />
 </section>
 <section id="accumulate-forecast-error-4">
-<span id="forecaster-common-0-accumulate-forecast-error-4"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">accumulate_forecast_error/4</span></code></a><a class="headerlink" href="#accumulate-forecast-error-4" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-accumulate-forecast-error-4"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">accumulate_forecast_error/4</span></code></a><a class="headerlink" href="#accumulate-forecast-error-4" title="Link to this heading"></a></h3>
 <p>Adds one numeric actual/prediction error to validated forecast_error_totals(Count, AbsoluteSum, SquaredSum), without retaining observations. Requires a non-negative integer count and non-negative numeric sums; forecast_error_totals(0,0,0) initializes accumulation. Missing observations must be skipped by the caller.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1117,7 +1312,7 @@
 <hr class="docutils" />
 </section>
 <section id="forecast-error-metrics-3">
-<span id="forecaster-common-0-forecast-error-metrics-3"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">forecast_error_metrics/3</span></code></a><a class="headerlink" href="#forecast-error-metrics-3" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-forecast-error-metrics-3"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">forecast_error_metrics/3</span></code></a><a class="headerlink" href="#forecast-error-metrics-3" title="Link to this heading"></a></h3>
 <p>Computes MAE and RMSE from validated forecast_error_totals(Count, AbsoluteSum, SquaredSum). Requires non-negative numeric sums and a positive integer count. Does not retain or reconstruct actual/predicted observations.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1159,7 +1354,7 @@
 <hr class="docutils" />
 </section>
 <section id="mean-absolute-error-3">
-<span id="forecaster-common-0-mean-absolute-error-3"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">mean_absolute_error/3</span></code></a><a class="headerlink" href="#mean-absolute-error-3" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-mean-absolute-error-3"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">mean_absolute_error/3</span></code></a><a class="headerlink" href="#mean-absolute-error-3" title="Link to this heading"></a></h3>
 <p>Computes the mean absolute error (MAE) between actual and predicted value lists of matching length.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1193,7 +1388,7 @@
 <hr class="docutils" />
 </section>
 <section id="root-mean-squared-error-3">
-<span id="forecaster-common-0-root-mean-squared-error-3"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">root_mean_squared_error/3</span></code></a><a class="headerlink" href="#root-mean-squared-error-3" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-root-mean-squared-error-3"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">root_mean_squared_error/3</span></code></a><a class="headerlink" href="#root-mean-squared-error-3" title="Link to this heading"></a></h3>
 <p>Computes the root mean squared error (RMSE) between actual and predicted value lists of matching length.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1227,7 +1422,7 @@
 <hr class="docutils" />
 </section>
 <section id="mean-absolute-percentage-error-3">
-<span id="forecaster-common-0-mean-absolute-percentage-error-3"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">mean_absolute_percentage_error/3</span></code></a><a class="headerlink" href="#mean-absolute-percentage-error-3" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-mean-absolute-percentage-error-3"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">mean_absolute_percentage_error/3</span></code></a><a class="headerlink" href="#mean-absolute-percentage-error-3" title="Link to this heading"></a></h3>
 <p>Computes the mean absolute percentage error (MAPE), as a percentage, between actual and predicted value lists of matching length.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1265,7 +1460,7 @@
 <hr class="docutils" />
 </section>
 <section id="naive-forecast-3">
-<span id="forecaster-common-0-naive-forecast-3"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">naive_forecast/3</span></code></a><a class="headerlink" href="#naive-forecast-3" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-naive-forecast-3"></span><span id="index-28"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">naive_forecast/3</span></code></a><a class="headerlink" href="#naive-forecast-3" title="Link to this heading"></a></h3>
 <p>Repeats the last observed series value <code class="docutils literal notranslate"><span class="pre">Horizon</span></code> times (the naive/persistence baseline forecast). A zero horizon returns an empty list.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1303,7 +1498,7 @@
 <hr class="docutils" />
 </section>
 <section id="constant-forecast-3">
-<span id="forecaster-common-0-constant-forecast-3"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">constant_forecast/3</span></code></a><a class="headerlink" href="#constant-forecast-3" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-constant-forecast-3"></span><span id="index-29"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">constant_forecast/3</span></code></a><a class="headerlink" href="#constant-forecast-3" title="Link to this heading"></a></h3>
 <p>Repeats a value for the given forecast horizon. A zero horizon returns an empty list.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1341,7 +1536,7 @@
 <hr class="docutils" />
 </section>
 <section id="linear-trend-forecast-4">
-<span id="forecaster-common-0-linear-trend-forecast-4"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">linear_trend_forecast/4</span></code></a><a class="headerlink" href="#linear-trend-forecast-4" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-linear-trend-forecast-4"></span><span id="index-30"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">linear_trend_forecast/4</span></code></a><a class="headerlink" href="#linear-trend-forecast-4" title="Link to this heading"></a></h3>
 <p>Forecasts <code class="docutils literal notranslate"><span class="pre">Last</span> <span class="pre">+</span> <span class="pre">Step</span> <span class="pre">*</span> <span class="pre">Slope</span></code> for steps one through the horizon. A zero horizon returns an empty list.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1391,7 +1586,7 @@
 <hr class="docutils" />
 </section>
 <section id="check-forecast-horizon-1">
-<span id="forecaster-common-0-check-forecast-horizon-1"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_forecast_horizon/1</span></code></a><a class="headerlink" href="#check-forecast-horizon-1" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-check-forecast-horizon-1"></span><span id="index-31"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_forecast_horizon/1</span></code></a><a class="headerlink" href="#check-forecast-horizon-1" title="Link to this heading"></a></h3>
 <p>Checks that a forecast horizon is a non-negative integer.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1429,7 +1624,7 @@
 <hr class="docutils" />
 </section>
 <section id="seasonal-naive-forecast-4">
-<span id="forecaster-common-0-seasonal-naive-forecast-4"></span><span id="index-28"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seasonal_naive_forecast/4</span></code></a><a class="headerlink" href="#seasonal-naive-forecast-4" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-seasonal-naive-forecast-4"></span><span id="index-32"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seasonal_naive_forecast/4</span></code></a><a class="headerlink" href="#seasonal-naive-forecast-4" title="Link to this heading"></a></h3>
 <p>Repeats the last full seasonal cycle of <code class="docutils literal notranslate"><span class="pre">Frequency</span></code> observations, cycling as needed to cover <code class="docutils literal notranslate"><span class="pre">Horizon</span></code> forecasts (the seasonal naive baseline forecast).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1483,7 +1678,7 @@
 <hr class="docutils" />
 </section>
 <section id="check-frequency-1">
-<span id="forecaster-common-0-check-frequency-1"></span><span id="index-29"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_frequency/1</span></code></a><a class="headerlink" href="#check-frequency-1" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-check-frequency-1"></span><span id="index-33"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_frequency/1</span></code></a><a class="headerlink" href="#check-frequency-1" title="Link to this heading"></a></h3>
 <p>Checks that a seasonal frequency is a positive integer.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1518,13 +1713,1086 @@
 </div>
 </div>
 </div>
+<hr class="docutils" />
+</section>
+<section id="seasonal-autocorrelation-test-4">
+<span id="forecaster-common-0-seasonal-autocorrelation-test-4"></span><span id="index-34"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seasonal_autocorrelation_test/4</span></code></a><a class="headerlink" href="#seasonal-autocorrelation-test-4" title="Link to this heading"></a></h3>
+<p>Tests original-lag available-pair autocorrelations using the known observation count and requiring two known pairs at every tested lag.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_autocorrelation_test(Series,Frequency,Statistic,Seasonal)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_autocorrelation_test(+list,+positive_integer,-number,-boolean)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The series or frequency is unbound:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">A series value is not numeric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Value)</span></code></div>
+</div>
+<div class="line">The series is not a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Series)</span></code></div>
+</div>
+<div class="line">The series is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_series,Series)</span></code></div>
+</div>
+<div class="line">The frequency is not an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Frequency)</span></code></div>
+</div>
+<div class="line">The frequency is not positive:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,Frequency)</span></code></div>
+</div>
+<div class="line">Seasonality test arithmetic fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="classical-seasonal-adjustment-5">
+<span id="forecaster-common-0-classical-seasonal-adjustment-5"></span><span id="index-35"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">classical_seasonal_adjustment/5</span></code></a><a class="headerlink" href="#classical-seasonal-adjustment-5" title="Link to this heading"></a></h3>
+<p>Deseasonalizes known values using complete centered windows and normalized phase factors, preserving missing observations as unbound variables.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">classical_seasonal_adjustment(Series,Frequency,Method,AdjustedSeries,Factors)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">classical_seasonal_adjustment(+list,+positive_integer,+atom,-list,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The series, frequency, or method is unbound:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">A value is not numeric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Value)</span></code></div>
+</div>
+<div class="line">The series is not a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Series)</span></code></div>
+</div>
+<div class="line">The series is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_series,Series)</span></code></div>
+</div>
+<div class="line">The frequency is not an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Frequency)</span></code></div>
+</div>
+<div class="line">The frequency is not positive:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,Frequency)</span></code></div>
+</div>
+<div class="line">The frequency is less than two:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(seasonal_frequency,Frequency)</span></code></div>
+</div>
+<div class="line">The series has fewer than two cycles:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(series_length,Series)</span></code></div>
+</div>
+<div class="line">The method is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(seasonal_adjustment_method,Method)</span></code></div>
+</div>
+<div class="line">A phase has no valid centered-window deviation:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(insufficient_seasonal_phase_observations,Phase)</span></code></div>
+</div>
+<div class="line">Multiplicative data or factors are not positive:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_number,Value)</span></code></div>
+</div>
+<div class="line">Seasonal adjustment arithmetic fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="restore-seasonality-5">
+<span id="forecaster-common-0-restore-seasonality-5"></span><span id="index-36"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">restore_seasonality/5</span></code></a><a class="headerlink" href="#restore-seasonality-5" title="Link to this heading"></a></h3>
+<p>Adds or multiplies a seasonal cycle, advancing phase through missing positions without instantiating them.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">restore_seasonality(Method,Factors,StartPhase,Values,RestoredValues)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">restore_seasonality(+atom,+list(number),+positive_integer,+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The method, phase, factor, or values list is unbound:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">A factor or value is not numeric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Value)</span></code></div>
+</div>
+<div class="line">Factors or values are not lists:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,List)</span></code></div>
+</div>
+<div class="line">The factors are empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_series,Factors)</span></code></div>
+</div>
+<div class="line">The method is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(seasonal_adjustment_method,Method)</span></code></div>
+</div>
+<div class="line">The phase is not an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,StartPhase)</span></code></div>
+</div>
+<div class="line">The phase is not positive:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,StartPhase)</span></code></div>
+</div>
+<div class="line">The phase exceeds the cycle length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(seasonal_phase,StartPhase)</span></code></div>
+</div>
+<div class="line">A multiplicative factor is not positive:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_number,Value)</span></code></div>
+</div>
+<div class="line">Restoration arithmetic fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 <hr class="docutils" />
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
-<p>(no local declarations; see entity ancestors if any)</p>
+<section id="normalize-missing-values-4">
+<span id="forecaster-common-0-normalize-missing-values-4"></span><span id="index-37"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">normalize_missing_values/4</span></code></a><a class="headerlink" href="#normalize-missing-values-4" title="Link to this heading"></a></h3>
+<p>Copies known numbers and replaces unbound inputs with a fresh shared variable.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">normalize_missing_values(Series,Missing,Context,Normalized)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">normalize_missing_values(+list,-term,+term,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">A known observation is not numeric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Value)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
 </section>
+<section id="indexed-known-values-5">
+<span id="forecaster-common-0-indexed-known-values-5"></span><span id="index-38"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">indexed_known_values/5</span></code></a><a class="headerlink" href="#indexed-known-values-5" title="Link to this heading"></a></h3>
+<p>Extracts known observations while retaining elapsed positions.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">indexed_known_values(Series,Index,Context,Indices,Values)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">indexed_known_values(+list,+positive_integer,+term,-list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">A known value is not numeric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Value)</span></code></div>
+</div>
+<div class="line">Index arithmetic fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="check-numeric-residuals-2">
+<span id="forecaster-common-0-check-numeric-residuals-2"></span><span id="index-39"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_numeric_residuals/2</span></code></a><a class="headerlink" href="#check-numeric-residuals-2" title="Link to this heading"></a></h3>
+<p>Checks residual numbers without completing lists or binding entries.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_numeric_residuals(Residuals,Context)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_numeric_residuals(+list,+term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">A residual is unbound:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">A residual is not numeric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Value)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="aligned-residual-fits-5">
+<span id="forecaster-common-0-aligned-residual-fits-5"></span><span id="index-40"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">aligned_residual_fits/5</span></code></a><a class="headerlink" href="#aligned-residual-fits-5" title="Link to this heading"></a></h3>
+<p>Consumes residuals only at known positions after the initialization anchor, failing on a count mismatch.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">aligned_residual_fits(Series,Residuals,AnchorSeen,Context,Values)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">aligned_residual_fits(+list,+list(number),+boolean,+term,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">A known observation is not numeric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Value)</span></code></div>
+</div>
+<div class="line">Fit reconstruction arithmetic fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="valid-residual-positions-3">
+<span id="forecaster-common-0-valid-residual-positions-3"></span><span id="index-41"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_residual_positions/3</span></code></a><a class="headerlink" href="#valid-residual-positions-3" title="Link to this heading"></a></h3>
+<p>Checks original residual positions in strict chronological order within the elapsed length.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_residual_positions(Indices,Previous,Length)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_residual_positions(+list(integer),+integer,+positive_integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Index comparison fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="seasonal-centered-values-5">
+<span id="forecaster-common-0-seasonal-centered-values-5"></span><span id="index-42"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seasonal_centered_values/5</span></code></a><a class="headerlink" href="#seasonal-centered-values-5" title="Link to this heading"></a></h3>
+<p>Centers validated observations and accumulates squared deviations.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_centered_values(Series,Mean,Centered,Variance0,Variance)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_centered_values(+list(number),+number,-list(number),+number,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Centering arithmetic fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="seasonal-lag-scores-7">
+<span id="forecaster-common-0-seasonal-lag-scores-7"></span><span id="index-43"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seasonal_lag_scores/7</span></code></a><a class="headerlink" href="#seasonal-lag-scores-7" title="Link to this heading"></a></h3>
+<p>Accumulates earlier squared autocorrelations and the seasonal-lag score.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_lag_scores(Lag,Frequency,Centered,Variance,Squares0,Squares,Last)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_lag_scores(+positive_integer,+positive_integer,+list(number),+number,+number,-number,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Autocorrelation arithmetic fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="seasonal-covariance-4">
+<span id="forecaster-common-0-seasonal-covariance-4"></span><span id="index-44"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seasonal_covariance/4</span></code></a><a class="headerlink" href="#seasonal-covariance-4" title="Link to this heading"></a></h3>
+<p>Accumulates products of aligned centered observations.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_covariance(Suffix,Series,Covariance0,Covariance)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_covariance(+list(number),+list(number),+number,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Covariance arithmetic fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="seasonal-check-method-1">
+<span id="forecaster-common-0-seasonal-check-method-1"></span><span id="index-45"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seasonal_check_method/1</span></code></a><a class="headerlink" href="#seasonal-check-method-1" title="Link to this heading"></a></h3>
+<p>Checks the seasonal adjustment method without binding it.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_check_method(Method)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_check_method(&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The method is unbound:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The method is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(seasonal_adjustment_method,Method)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="seasonal-positive-values-1">
+<span id="forecaster-common-0-seasonal-positive-values-1"></span><span id="index-46"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seasonal_positive_values/1</span></code></a><a class="headerlink" href="#seasonal-positive-values-1" title="Link to this heading"></a></h3>
+<p>Requires strictly positive validated numeric values.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_positive_values(Values)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_positive_values(+list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">A value is not positive:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_number,Value)</span></code></div>
+</div>
+<div class="line">Numeric comparison fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="seasonal-window-means-5">
+<span id="forecaster-common-0-seasonal-window-means-5"></span><span id="index-47"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seasonal_window_means/5</span></code></a><a class="headerlink" href="#seasonal-window-means-5" title="Link to this heading"></a></h3>
+<p>Computes successive moving averages with a rolling sum.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_window_means(Entering,Leaving,Frequency,Sum,Means)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_window_means(+list(number),+list(number),+positive_integer,+number,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Moving-average arithmetic fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="seasonal-center-even-2">
+<span id="forecaster-common-0-seasonal-center-even-2"></span><span id="index-48"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seasonal_center_even/2</span></code></a><a class="headerlink" href="#seasonal-center-even-2" title="Link to this heading"></a></h3>
+<p>Centers even-period moving averages using adjacent means.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_center_even(Means,Centered)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_center_even(+list(number),-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Centering arithmetic fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="seasonal-deviations-4">
+<span id="forecaster-common-0-seasonal-deviations-4"></span><span id="index-49"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seasonal_deviations/4</span></code></a><a class="headerlink" href="#seasonal-deviations-4" title="Link to this heading"></a></h3>
+<p>Computes interior differences or ratios against centered trend estimates.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_deviations(Trends,Values,Method,Deviations)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_deviations(+list(number),+list(number),+atom,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">A multiplicative trend is not positive:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_number,Value)</span></code></div>
+</div>
+<div class="line">Detrending arithmetic fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="seasonal-fold-cycles-3">
+<span id="forecaster-common-0-seasonal-fold-cycles-3"></span><span id="index-50"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seasonal_fold_cycles/3</span></code></a><a class="headerlink" href="#seasonal-fold-cycles-3" title="Link to this heading"></a></h3>
+<p>Accumulates complete and partial cycles into phase buckets.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_fold_cycles(Values,Buckets0,Buckets)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_fold_cycles(+list,+list(compound),-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Phase accumulation fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="seasonal-bucket-means-2">
+<span id="forecaster-common-0-seasonal-bucket-means-2"></span><span id="index-51"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seasonal_bucket_means/2</span></code></a><a class="headerlink" href="#seasonal-bucket-means-2" title="Link to this heading"></a></h3>
+<p>Computes phase means from nonempty phase totals.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_bucket_means(Buckets,Means)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_bucket_means(+list(compound),-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Phase-mean arithmetic fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="seasonal-normalize-4">
+<span id="forecaster-common-0-seasonal-normalize-4"></span><span id="index-52"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seasonal_normalize/4</span></code></a><a class="headerlink" href="#seasonal-normalize-4" title="Link to this heading"></a></h3>
+<p>Normalizes phase factors to zero or unit mean.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_normalize(Values,Method,Mean,Factors)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_normalize(+list(number),+atom,+number,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">A multiplicative factor is not positive:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_number,Value)</span></code></div>
+</div>
+<div class="line">Normalization arithmetic fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="seasonal-inverse-factors-3">
+<span id="forecaster-common-0-seasonal-inverse-factors-3"></span><span id="index-53"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seasonal_inverse_factors/3</span></code></a><a class="headerlink" href="#seasonal-inverse-factors-3" title="Link to this heading"></a></h3>
+<p>Negates additive factors or reciprocates positive multiplicative factors.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_inverse_factors(Factors,Method,Inverses)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_inverse_factors(+list(number),+atom,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Factor inversion fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="seasonal-restore-values-5">
+<span id="forecaster-common-0-seasonal-restore-values-5"></span><span id="index-54"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seasonal_restore_values/5</span></code></a><a class="headerlink" href="#seasonal-restore-values-5" title="Link to this heading"></a></h3>
+<p>Restores validated values while cycling through phase factors.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_restore_values(Values,Method,Factors,Cycle,Restored)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_restore_values(+list,+atom,+list(number),+list(number),-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Restoration arithmetic fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="seasonal-complete-autocorrelation-test-4">
+<span id="forecaster-common-0-seasonal-complete-autocorrelation-test-4"></span><span id="index-55"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seasonal_complete_autocorrelation_test/4</span></code></a><a class="headerlink" href="#seasonal-complete-autocorrelation-test-4" title="Link to this heading"></a></h3>
+<p>Computes the original complete-data seasonality statistic for validated inputs.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_complete_autocorrelation_test(Series,Frequency,Statistic,Seasonal)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_complete_autocorrelation_test(+list(number),+positive_integer,-number,-boolean)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Autocorrelation arithmetic fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="classical-complete-seasonal-adjustment-5">
+<span id="forecaster-common-0-classical-complete-seasonal-adjustment-5"></span><span id="index-56"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">classical_complete_seasonal_adjustment/5</span></code></a><a class="headerlink" href="#classical-complete-seasonal-adjustment-5" title="Link to this heading"></a></h3>
+<p>Computes classical seasonal factors for validated complete data.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">classical_complete_seasonal_adjustment(Series,Frequency,Method,Adjusted,Factors)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">classical_complete_seasonal_adjustment(+list(number),+positive_integer,+atom,-list(number),-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Multiplicative data, trends, or factors are not positive:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_number,Value)</span></code></div>
+</div>
+<div class="line">Seasonal arithmetic fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="seasonal-gap-centered-4">
+<span id="forecaster-common-0-seasonal-gap-centered-4"></span><span id="index-57"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seasonal_gap_centered/4</span></code></a><a class="headerlink" href="#seasonal-gap-centered-4" title="Link to this heading"></a></h3>
+<p>Centers known values without removing gaps.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_gap_centered(Series,Mean,Centered,Variance)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_gap_centered(+list,+number,-list,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Centering arithmetic fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="seasonal-gap-lags-7">
+<span id="forecaster-common-0-seasonal-gap-lags-7"></span><span id="index-58"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seasonal_gap_lags/7</span></code></a><a class="headerlink" href="#seasonal-gap-lags-7" title="Link to this heading"></a></h3>
+<p>Accumulates original-lag scores, failing when fewer than two pairs are available.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_gap_lags(Lag,Frequency,Centered,Variance,Squares0,Squares,Last)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_gap_lags(+positive_integer,+positive_integer,+list,+number,+number,-number,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Autocorrelation arithmetic fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="seasonal-gap-covariance-4">
+<span id="forecaster-common-0-seasonal-gap-covariance-4"></span><span id="index-59"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seasonal_gap_covariance/4</span></code></a><a class="headerlink" href="#seasonal-gap-covariance-4" title="Link to this heading"></a></h3>
+<p>Sums centered products and counts pairs with both positions known.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_gap_covariance(Suffix,Series,Covariance,Pairs)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_gap_covariance(+list,+list,-number,-non_negative_integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Covariance arithmetic fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="seasonal-gap-windows-5">
+<span id="forecaster-common-0-seasonal-gap-windows-5"></span><span id="index-60"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seasonal_gap_windows/5</span></code></a><a class="headerlink" href="#seasonal-gap-windows-5" title="Link to this heading"></a></h3>
+<p>Computes moving averages with rolling sums and missing counts, marking incomplete windows.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_gap_windows(Entering,Leaving,Frequency,Window,Means)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_gap_windows(+list,+list,+positive_integer,+compound,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Moving-average arithmetic fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="seasonal-gap-even-2">
+<span id="forecaster-common-0-seasonal-gap-even-2"></span><span id="index-61"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seasonal_gap_even/2</span></code></a><a class="headerlink" href="#seasonal-gap-even-2" title="Link to this heading"></a></h3>
+<p>Centers adjacent complete windows, requiring the full even-period support.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_gap_even(Means,Trends)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_gap_even(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Centering arithmetic fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="seasonal-gap-deviations-4">
+<span id="forecaster-common-0-seasonal-gap-deviations-4"></span><span id="index-62"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seasonal_gap_deviations/4</span></code></a><a class="headerlink" href="#seasonal-gap-deviations-4" title="Link to this heading"></a></h3>
+<p>Computes only known deviations with complete trend support, retaining phase positions.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_gap_deviations(Trends,Values,Method,Deviations)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_gap_deviations(+list,+list,+atom,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">A multiplicative trend is not positive:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_number,Value)</span></code></div>
+</div>
+<div class="line">Detrending arithmetic fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="seasonal-accumulate-cycle-4">
+<span id="forecaster-common-0-seasonal-accumulate-cycle-4"></span><span id="index-63"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seasonal_accumulate_cycle/4</span></code></a><a class="headerlink" href="#seasonal-accumulate-cycle-4" title="Link to this heading"></a></h3>
+<p>Advances a phase bucket for every position, skipping missing contributions.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_accumulate_cycle(Values,Buckets,Updated,Rest)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_accumulate_cycle(+list,+list(compound),-list(compound),-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Phase accumulation fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="seasonal-check-buckets-2">
+<span id="forecaster-common-0-seasonal-check-buckets-2"></span><span id="index-64"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seasonal_check_buckets/2</span></code></a><a class="headerlink" href="#seasonal-check-buckets-2" title="Link to this heading"></a></h3>
+<p>Reports the lowest absolute phase lacking an estimable seasonal deviation.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_check_buckets(Buckets,Phase)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">seasonal_check_buckets(+list(compound),+positive_integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">A phase has no valid deviation:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(insufficient_seasonal_phase_observations,Phase)</span></code></div>
+</div>
+<div class="line">Phase arithmetic fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
 <section id="operators">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>

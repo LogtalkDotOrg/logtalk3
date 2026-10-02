@@ -1,12 +1,12 @@
-.. index:: single: exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification,MissingMarker)
-.. _exponential_smoothing_problem/7:
+.. index:: single: exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification)
+.. _exponential_smoothing_problem/6:
 
 .. rst-class:: right
 
 **object**
 
-``exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification,MissingMarker)``
-==============================================================================================================================================
+``exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification)``
+================================================================================================================================
 
 * ``Method`` - Exponential smoothing method.
 * ``Series`` - Validated training series.
@@ -14,7 +14,6 @@
 * ``Frequency`` - Seasonal frequency or ``none``.
 * ``ParameterSpecification`` - Canonical list of fixed or automatic parameter options.
 * ``InitializationSpecification`` - Initialization strategy and number of initial cycles.
-* ``MissingMarker`` - Term denoting an unobserved value.
 
 
 Bounded sum-of-squared-errors optimization problem for exponential smoothing parameters. Implements both the local-optimization (Nelder-Mead) and Differential Evolution problem protocols over the same objective.
@@ -24,7 +23,7 @@ Bounded sum-of-squared-errors optimization problem for exponential smoothing par
 
 | **Author:** Paulo Moura
 | **Version:** 1:1:0
-| **Date:** 2026-09-27
+| **Date:** 2026-10-02
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``

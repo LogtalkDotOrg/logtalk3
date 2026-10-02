@@ -25,12 +25,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-01,
+		date is 2026-10-02,
 		comment is 'Unit tests for the "exponential_smoothing" library.'
 	]).
 
 	:- uses(lgtunit, [
-		assertion/1, op(700, xfx, =~=), (=~=)/2
+		assertion/1, variant/2, op(700, xfx, =~=), (=~=)/2
 	]).
 
 	:- uses(list, [
@@ -456,7 +456,8 @@
 	test(exponential_smoothing_update_missing_matches_batch, deterministic) :-
 		Options = [model(holt_damped), alpha(0.2), beta(0.1), phi(0.9), missing_policy(skip_update)],
 		exponential_smoothing::learn(online_missing_prefix, PrefixForecaster, Options),
-		exponential_smoothing::update(PrefixForecaster, missing, MissingForecaster),
+		exponential_smoothing::update(PrefixForecaster, Missing, MissingForecaster),
+		assertion(var(Missing)),
 		exponential_smoothing::update(MissingForecaster, 12, OnlineForecaster),
 		exponential_smoothing::learn(online_missing_full, BatchForecaster, Options),
 		assert_online_batch_equivalent(holt_damped, OnlineForecaster, BatchForecaster),
@@ -597,15 +598,58 @@
 		exponential_smoothing::valid_forecaster(exponential_smoothing_forecaster(simple, level(5.0), [0.5], Diagnostics)).
 
 	test(exponential_smoothing_non_positive_multiplicative_forecast, error(domain_error(positive_multiplicative_forecast, -1.0))) :-
-		Options = [model(holt_winters_multiplicative), alpha(0.2), beta(0.1), gamma(0.1), phi(auto), initialization(two_cycles), initial_cycles(2), optimizer(nelder_mead), optimizer_options([]), de_options([]), transformation(none), bias_adjustment(none), retain_residuals(false), selection_criterion(aicc), candidate_models(default), frequency(dataset), frequency_candidates(none), missing_value(missing), missing_policy(error)],
+		Options = [model(holt_winters_multiplicative), alpha(0.2), beta(0.1), gamma(0.1), phi(auto), initialization(two_cycles), initial_cycles(2), optimizer(nelder_mead), optimizer_options([]), de_options([]), transformation(none), bias_adjustment(none), retain_residuals(false), selection_criterion(aicc), candidate_models(default), frequency(dataset), frequency_candidates(none), missing_policy(error)],
 		Diagnostics = [model(exponential_smoothing), training_series_length(5), options(Options), method(holt_winters_multiplicative), frequency(2), parameters([0.2, 0.1, 0.1]), sum_squared_error(1.0), mean_squared_error(1.0), optimizer(nelder_mead), convergence(fixed_parameters), iterations(0), evaluations(0), observed_count(5), missing_count(0), scored_count(1), update_count(0), residuals(none)],
 		State = holt_winters(1.0, -2.0, 2, [1.0, 1.0]),
 		exponential_smoothing::forecast(exponential_smoothing_forecaster(holt_winters_multiplicative, State, [0.2, 0.1, 0.1], Diagnostics), 1, _Forecasts).
 
 	% missing observations
 
-	test(exponential_smoothing_missing_default_error, error(type_error(number, missing))) :-
+	test(exponential_smoothing_missing_default_error, error(instantiation_error)) :-
 		exponential_smoothing::learn(missing_nonseasonal, _Forecaster, [model(simple), alpha(0.5)]).
+
+	test(exponential_smoothing_missing_marker_option_rejected, error(domain_error(option, missing_value(na)))) :-
+		exponential_smoothing::learn(constant_series, _, [missing_value(na)]).
+
+	test(exponential_smoothing_missing_marker_option_nonbinding, deterministic) :-
+		\+ exponential_smoothing::valid_option(missing_value(Marker)),
+		var(Marker).
+
+	test(exponential_smoothing_missing_atom_rejected, error(type_error(number, missing))) :-
+		exponential_smoothing::learn(smoothing_series([2,missing,6,8]), _, [alpha(0.5),missing_policy(skip_update)]).
+
+	test(exponential_smoothing_missing_custom_atom_rejected, error(type_error(number, na))) :-
+		exponential_smoothing::learn(smoothing_series([2,na,6,8]), _, [alpha(0.5),missing_policy(skip_update)]).
+
+	test(exponential_smoothing_missing_all_unbound, error(domain_error(insufficient_known_observations, nonseasonal))) :-
+		exponential_smoothing::learn(smoothing_series([_,_,_]), _, [alpha(0.5),missing_policy(skip_update)]).
+
+	test(exponential_smoothing_missing_inputs_preserved, deterministic) :-
+		Series = [Missing,10,Missing,14,16,Tail],
+		copy_term(Series, Before),
+		exponential_smoothing::learn(smoothing_series(Series), Forecaster, [alpha(0.5),missing_policy(skip_update),retain_residuals(true)]),
+		variant(Series, Before),
+		var(Missing), var(Tail), ground(Forecaster),
+		exponential_smoothing::diagnostics(Forecaster, Diagnostics),
+		memberchk(residuals([4,4.0]), Diagnostics),
+		exponential_smoothing::forecaster_options(Forecaster, Options),
+		\+ member(missing_value(_), Options),
+		exponential_smoothing::export_to_clauses(smoothing_series(Series), Forecaster, saved, [saved(Forecaster)]).
+
+	test(exponential_smoothing_missing_transformed_update_nonbinding, deterministic) :-
+		exponential_smoothing::learn(missing_transformed, Forecaster, [alpha(0.5),transformation(log),missing_policy(skip_update),retain_residuals(true)]),
+		copy_term(Forecaster, Before),
+		exponential_smoothing::update(Forecaster, Missing, Updated),
+		var(Missing), variant(Forecaster, Before), ground(Updated),
+		exponential_smoothing::diagnostics(Forecaster, Diagnostics),
+		exponential_smoothing::diagnostics(Updated, UpdatedDiagnostics),
+		memberchk(residuals(Residuals), Diagnostics),
+		memberchk(residuals(Residuals), UpdatedDiagnostics),
+		memberchk(missing_count(2), UpdatedDiagnostics).
+
+	test(exponential_smoothing_missing_update_atom_rejected, error(type_error(number, missing))) :-
+		exponential_smoothing::learn(constant_series, Forecaster, [alpha(0.5),missing_policy(skip_update)]),
+		exponential_smoothing::update(Forecaster, missing, _).
 
 	test(exponential_smoothing_invalid_missing_policy, error(domain_error(option, missing_policy(impute)))) :-
 		exponential_smoothing::learn(constant_series, _Forecaster, [missing_policy(impute)]).
@@ -624,8 +668,8 @@
 		exponential_smoothing::learn(missing_nonseasonal, Forecaster, [model(holt), alpha(0.0), beta(0.0), missing_policy(skip_update)]),
 		exponential_smoothing::forecast(Forecaster, 1, Forecasts).
 
-	test(exponential_smoothing_missing_custom_marker_transformation, deterministic) :-
-		exponential_smoothing::learn(custom_missing_marker, Forecaster, [model(simple), alpha(0.5), transformation(log), missing_value(na), missing_policy(skip_update)]),
+	test(exponential_smoothing_missing_transformation, deterministic) :-
+		exponential_smoothing::learn(missing_transformed, Forecaster, [model(simple), alpha(0.5), transformation(log), missing_policy(skip_update)]),
 		exponential_smoothing::forecast(Forecaster, 1, [Forecast]),
 		assertion(Forecast > 0.0).
 
@@ -634,10 +678,25 @@
 			Forecaster,
 			( missing_method_options(Method, Dataset, Parameters),
 				exponential_smoothing::learn(Dataset, Forecaster, [model(Method), missing_policy(skip_update)| Parameters]),
+				ground(Forecaster),
 				exponential_smoothing::valid_forecaster(Forecaster)
 			),
 			Forecasters
 		).
+
+	test(exponential_smoothing_missing_regression_initialization, deterministic(length(Forecasters, 7))) :-
+		findall(Forecaster, (
+			missing_method_options(Method, Dataset, Parameters),
+			exponential_smoothing::learn(Dataset, Forecaster, [model(Method),initialization(regression),missing_policy(skip_update)| Parameters]),
+			ground(Forecaster), exponential_smoothing::valid_forecaster(Forecaster)
+		), Forecasters).
+
+	test(exponential_smoothing_missing_optimized_initialization, deterministic(length(Forecasters, 7))) :-
+		findall(Forecaster, (
+			missing_method_options(Method, Dataset, Parameters),
+			exponential_smoothing::learn(Dataset, Forecaster, [model(Method),initialization(optimized),missing_policy(skip_update),optimizer_options([max_iterations(20)])| Parameters]),
+			ground(Forecaster), exponential_smoothing::valid_forecaster(Forecaster)
+		), Forecasters).
 
 	test(exponential_smoothing_missing_seasonal_phase_advance, deterministic) :-
 		exponential_smoothing::learn(missing_seasonal, Forecaster, [model(holt_winters_additive), alpha(0.2), beta(0.1), gamma(0.1), missing_policy(skip_update)]),
@@ -656,6 +715,20 @@
 		assertion(Alpha >= 0.0),
 		assertion(Alpha =< 1.0),
 		assertion(memberchk(scored_count(2), Diagnostics)).
+
+	test(exponential_smoothing_missing_differential_evolution, deterministic) :-
+		Series = [10,Missing,14,16],
+		copy_term(Series, Before),
+		exponential_smoothing::learn(smoothing_series(Series), Forecaster, [missing_policy(skip_update),optimizer(differential_evolution),de_options([seed(7),population_size(10),max_generations(15),polish(false)]),retain_residuals(true)]),
+		variant(Series, Before), var(Missing), ground(Forecaster),
+		exponential_smoothing::check_forecaster(Forecaster),
+		exponential_smoothing::diagnostics(Forecaster, Diagnostics),
+		memberchk(scored_count(2), Diagnostics),
+		memberchk(residuals(Residuals), Diagnostics), length(Residuals, 2).
+
+	test(exponential_smoothing_missing_validation_selection, deterministic) :-
+		exponential_smoothing::learn(missing_seasonal, Forecaster, [model(auto),candidate_models([simple]),missing_policy(skip_update),selection_criterion(validation(2)),optimizer_options([max_iterations(20)])]),
+		ground(Forecaster), exponential_smoothing::check_forecaster(Forecaster).
 
 	test(exponential_smoothing_missing_automatic_model, deterministic) :-
 		exponential_smoothing::learn(missing_seasonal, Forecaster, [model(auto), candidate_models([simple, holt]), missing_policy(skip_update), optimizer_options([max_iterations(20)])]),
@@ -731,8 +804,8 @@
 		Expected is 5 * log(AdjustedSumSquaredError / 5) + 6 + 24,
 		assertion(Score =~= Expected).
 
-	test(exponential_smoothing_box_cox_auto_missing_marker, deterministic) :-
-		exponential_smoothing::learn(custom_missing_marker, Forecaster, [model(simple), alpha(0.5), transformation(box_cox(auto)), missing_value(na), missing_policy(skip_update)]),
+	test(exponential_smoothing_box_cox_auto_missing, deterministic) :-
+		exponential_smoothing::learn(missing_transformed, Forecaster, [model(simple), alpha(0.5), transformation(box_cox(auto)), missing_policy(skip_update)]),
 		assertion(exponential_smoothing::valid_forecaster(Forecaster)).
 
 	test(exponential_smoothing_box_cox_auto_positivity_rejection, error(domain_error(positive_transformation_series, 0))) :-

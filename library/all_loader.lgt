@@ -253,6 +253,7 @@
 		baseline_forecasting(loader),
 		intermittent_demand_forecasting(loader),
 		exponential_smoothing(loader),
+		theta_forecasting(loader),
 		knn_forecasting(loader),
 		time_series_regression(loader),
 		uri_template(loader),
