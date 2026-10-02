@@ -43,7 +43,7 @@ link in a web browser.
 Loading
 -------
 
-To load all entities in this library, load the `loader.lgt` file:
+To load this library, load its `loader.lgt` file:
 
 	| ?- logtalk_load(pattern_mining_protocols(loader)).
 

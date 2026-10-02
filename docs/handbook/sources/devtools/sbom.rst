@@ -21,7 +21,7 @@ This tool API documentation is available at:
 Loading
 -------
 
-This tool can be loaded using the query:
+To load this tool, load its ``loader.lgt`` file:
 
 ::
 

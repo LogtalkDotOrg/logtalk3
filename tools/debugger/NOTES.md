@@ -38,7 +38,7 @@ This tool API documentation is available at:
 Loading
 -------
 
-This tool can be loaded using the query:
+To load this tool, load its `loader.lgt` file:
 
 	| ?- logtalk_load(debugger(loader)).
 
@@ -50,7 +50,7 @@ times.
 Testing
 -------
 
-To test this tool, load the `tester.lgt` file:
+To test this tool, load its `tester.lgt` file:
 
 	| ?- logtalk_load(debugger(tester)).
 

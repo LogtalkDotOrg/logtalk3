@@ -46,7 +46,7 @@ To load this library, load the `loader.lgt` file:
 Testing
 -------
 
-To test this library predicates, load the `tester.lgt` file:
+To test this library, load its `tester.lgt` file:
 
 	| ?- logtalk_load(random_forest_regression(tester)).
 

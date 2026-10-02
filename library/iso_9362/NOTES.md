@@ -47,7 +47,7 @@ link in a web browser.
 Loading
 -------
 
-To load all entities in this library, load the `loader.lgt` file:
+To load this library, load its `loader.lgt` file:
 
 	| ?- logtalk_load(iso_9362(loader)).
 
@@ -55,6 +55,6 @@ To load all entities in this library, load the `loader.lgt` file:
 Testing
 -------
 
-To test this library predicates, load the `tester.lgt` file:
+To test this library, load its `tester.lgt` file:
 
 	| ?- logtalk_load(iso_9362(tester)).

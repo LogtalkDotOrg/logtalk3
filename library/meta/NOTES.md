@@ -46,7 +46,7 @@ To load the main entities in this library, load the `loader.lgt` file:
 Testing
 -------
 
-To test this library predicates, load the `tester.lgt` file:
+To test this library, load its `tester.lgt` file:
 
 	| ?- logtalk_load(meta(tester)).
 

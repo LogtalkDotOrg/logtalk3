@@ -52,7 +52,7 @@ For sample queries, please see the `SCRIPT.txt` file in the tool directory.
 Loading
 -------
 
-This tool can be loaded using the query:
+To load this tool, load its `loader.lgt` file:
 
 	| ?- logtalk_load(doclet(loader)).
 

@@ -8,7 +8,7 @@ This tool contains simple wrappers for selected Prolog profiler tools.
 Loading
 -------
 
-This tool can be loaded using the query:
+To load this tool, load its ``loader.lgt`` file:
 
 ::
 
@@ -20,7 +20,7 @@ directory.
 Testing
 -------
 
-To test this tool, load the ``tester.lgt`` file:
+To test this tool, load its ``tester.lgt`` file:
 
 ::
 

@@ -35,7 +35,7 @@ To load also all the language provider objects, load the
 Testing
 -------
 
-To test this library predicates, load the ``tester.lgt`` file:
+To test this library, load its ``tester.lgt`` file:
 
 ::
 

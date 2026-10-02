@@ -35,12 +35,12 @@ Library groups
 	`basic_types`, `types`, `assignvars`, `deques`,
 	`dictionaries`, `nested_dictionaries`, `graphs`, `heaps`, `hierarchies`,
 	`intervals`, `lru_caches`, `queues`, `ripple_down_rules`, `sets`, `simple_temporal_networks`, `subsequences`, `tries`,
-    `union_find`, and `zippers`.
+	`union_find`, and `zippers`.
 - Combinatorics:
 	`arrangements`, `cartesian_products`, `combinations`, `derangements`,
-    `integer_partitions`, `multisets`, `partitions`, and `permutations`.
+	`integer_partitions`, `multisets`, `partitions`, and `permutations`.
 - Meta-programming:
-    `meta` and `meta_compiler`
+	`meta` and `meta_compiler`
 - Monoid implementations:
 	`expecteds`, `optionals`, and `validations`.
 - Control, state, and developer support:
@@ -50,7 +50,7 @@ Library groups
 - Portability:
 	`coroutining`, `dif`, `format`, `process`, `recorded_database`, and `timeout`.
 - Dates and time:
-    `dates`, `dates_tz`, `time_scales`, and `tzif`.
+	`dates`, `dates_tz`, `time_scales`, and `tzif`.
 - Geospatial data:
 	`crs_projections`, `geojson`, `geohash`, `geospatial`, `gpx`, `nmea`, `tle_orbits`, and `wkt_wkb`
 - Space communications and telemetry:
@@ -60,20 +60,20 @@ Library groups
 	`character_sets`, `grammars`, `string_distance`, and `strings`, `language_detection`,
 	`lemmatization`, `n_grams`, `stemming`, `stop_words`, `text_normalization`, `text_vectorization`, and `tokenization`.
 - Web and HTTP APIs:
-    - High-level libraries:
-	    `html`, `mime_types`, `uri_template`, `url`,
-        `http_client`, `http_server`, `http_sse`, `http_websocket`,
-        `gravatar`, `open_api`, `open_ai`, `open_id`, `rest`, and `s3`.        
-    - Supporting libraries:
-        `http_core`, `http_authenticate`, `http_client_core`, 
-	    `http_cookies`, `http_cors`, `http_digest`, `http_directory_listing`,
-	    `http_htmx`, `http_multipart`, `http_oauth`, `http_parameters`, `http_router`,
-	    `http_server_core`, `http_session`, `http_socket_transport`,
-        `http_process_transport`, `http_static_files`, `http_websocket_messages`,
-	    `http_websocket_service`, `http_websocket_session`.
+	- High-level libraries:
+		`html`, `mime_types`, `uri_template`, `url`,
+		`http_client`, `http_server`, `http_sse`, `http_websocket`,
+		`gravatar`, `open_api`, `open_ai`, `open_id`, `rest`, and `s3`.
+	- Supporting libraries:
+		`http_core`, `http_authenticate`, `http_client_core`, 
+		`http_cookies`, `http_cors`, `http_digest`, `http_directory_listing`,
+		`http_htmx`, `http_multipart`, `http_oauth`, `http_parameters`, `http_router`,
+		`http_server_core`, `http_session`, `http_socket_transport`,
+		`http_process_transport`, `http_static_files`, `http_websocket_messages`,
+		`http_websocket_service`, `http_websocket_session`.
 - Identifiers:
 	`cuid2`, `genint`, `gensym`, `ids`, `ksuid`, `nanoid`, `snowflakeid`, `sqids`,
-    `typeid`, `ulid`, and `uuid`.
+	`typeid`, `ulid`, and `uuid`.
 - International standards and reference data:
 	`iso_13616`, `iso_3166`, `iso_4217`, `iso_639`, and `iso_9362`.
 - Interchange formats and wire protocols:
@@ -93,15 +93,15 @@ Library groups
 	`arbitrary`, `mutations`, and `random`.
 - Mathematics and statistics:
 	`byte_order`, `ieee_754`, `linear_algebra`, `linear_programming`, `numerical_analysis`,
-    `univariate_distributions`, `multivariate_distributions`, and `statistics`,
+	`univariate_distributions`, `multivariate_distributions`, and `statistics`,
 - Local and meta-heuristic optimization:
-    `local_optimization`, `constrained_optimization`,
-    `ant_colony`, `differential_evolution`, `genetic_algorithm`,
-    `particle_swarm_optimization`, `simulated_annealing`, and `tabu_search`.
+	`local_optimization`, `constrained_optimization`,
+	`ant_colony`, `differential_evolution`, `genetic_algorithm`,
+	`particle_swarm_optimization`, `simulated_annealing`, and `tabu_search`.
 - Machine learning:
 	- Classification:
 		`classification_protocols`, `adaptive_boosting_classifier`, `c45_classifier`, `gradient_boosting_classifier`,
-        `kernel_svm_classifier`, `knn_classifier`, `lda_classifier`, `linear_svm_classifier`,
+		`kernel_svm_classifier`, `knn_classifier`, `lda_classifier`, `linear_svm_classifier`,
 		`logistic_regression_classifier`, `mlp_classifier`, `naive_bayes_classifier`, `nearest_centroid_classifier`, `qda_classifier`,
 		`random_forest_classifier`, and `sgd_classifier`.
 	- Anomaly detection:
@@ -109,15 +109,15 @@ Library groups
 		`knn_distance_anomaly_detector`, `lof_anomaly_detector`, `modified_z_score_anomaly_detector`, `one_class_svm_anomaly_detector`, and `z_score_anomaly_detector`.
 	- Regression:
 		`regression_protocols`, `bayesian_ridge_regression`, `elastic_net_regression`,
-        `gradient_boosting_regression`, `gaussian_process_regression`, `knn_regression`,
-        `lasso_regression`, `linear_regression`, `random_forest_regression`,
-        `regression_tree`, `ridge_regression`, and `svr_regression`.
+		`gradient_boosting_regression`, `gaussian_process_regression`, `knn_regression`,
+		`lasso_regression`, `linear_regression`, `random_forest_regression`,
+		`regression_tree`, `ridge_regression`, and `svr_regression`.
 	- Ranking:
 		`ranking_protocols`, `borda_ranker`, `bradley_terry_ranker`, `colley_ranker`, `copeland_ranker`,
-	    `elo_ranker`, `glicko2_ranker`, `glicko2_periodic_ranker`, `hodge_rank`, `kemeny_young_ranker`,
-        `massey_ranker`, `plackett_luce_ranker`, `plackett_luce_last_ranker`, `rank_centrality`,
-	    `ranked_pairs`, `regularized_bradley_terry_ranker`, `schulze_ranker`,
-	    `thurstone_mosteller_ranker`, and `trueskill_ranker`.
+		`elo_ranker`, `glicko2_ranker`, `glicko2_periodic_ranker`, `hodge_rank`, `kemeny_young_ranker`,
+		`massey_ranker`, `plackett_luce_ranker`, `plackett_luce_last_ranker`, `rank_centrality`,
+		`ranked_pairs`, `regularized_bradley_terry_ranker`, `schulze_ranker`,
+		`thurstone_mosteller_ranker`, and `trueskill_ranker`.
 	- Clustering:
 		`clustering_protocols`, `agglomerative_clusterer`, `dbscan_clusterer`,
 		`gaussian_mixture_clusterer`, `hdbscan_clusterer`, `hierarchical_clustering`,
@@ -125,18 +125,18 @@ Library groups
 		`kprototypes_clusterer`, `optics_clusterer`, and `spectral_clusterer`.
 	- Dimension reduction:
 		`dimension_reduction_protocols`, `ica_projection`, `kernel_pca_projection`, `lda_projection`,
-	    `nmf_projection`, `pca_projection`, `pls_projection`, `probabilistic_pca_projection`, and
-	    `random_projection`, `truncated_svd_projection`, `tsne_projection`, and `umap_projection`.
+		`nmf_projection`, `pca_projection`, `pls_projection`, `probabilistic_pca_projection`, and
+		`random_projection`, `truncated_svd_projection`, `tsne_projection`, and `umap_projection`.
 	- Pattern mining:
 		`pattern_mining_protocols`, `frequent_pattern_mining_protocols`,
 		`sequential_pattern_mining_protocols`, `association_rule_miner`,
-        `apriori_pattern_miner`, `clo_span_pattern_miner`, `eclat_pattern_miner`,
-        `fp_growth_pattern_miner`, `gsp_pattern_miner`, `prefix_span_pattern_miner`,
-        and `spade_pattern_miner`.
-    - Time series:
+		`apriori_pattern_miner`, `clo_span_pattern_miner`, `eclat_pattern_miner`,
+		`fp_growth_pattern_miner`, `gsp_pattern_miner`, `prefix_span_pattern_miner`,
+		and `spade_pattern_miner`.
+	- Time series:
 		`time_series_protocols`, `baseline_forecasting`, `exponential_smoothing`,
 		`intermittent_demand_forecasting`, `knn_forecasting`,
-        `time_series_regression`.
+		`time_series_regression`.
 
 In addition to the loader-based libraries, this directory also contains a
 small number of standalone reusable entities, namely `attributes`, `cloning`,
@@ -235,7 +235,7 @@ On RedHat distributions (8.x and later):
 
 For older RedHat distributions:
 
-    $ sudo yum install openssl nmap-ncat socat
+	$ sudo yum install openssl nmap-ncat socat
 
 On Windows, `openssl` and `ncat` commands can be installed using e.g.
 Chocolatey:

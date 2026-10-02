@@ -29,7 +29,7 @@ The `ieee_754` library is a support package for parsing and generating IEEE
 Loading
 -------
 
-To load all entities in this library, load the `loader.lgt` file:
+To load this library, load its `loader.lgt` file:
 
 	| ?- logtalk_load(ieee_754(loader)).
 
@@ -37,7 +37,7 @@ To load all entities in this library, load the `loader.lgt` file:
 Testing
 -------
 
-To test this library predicates, load the `tester.lgt` file:
+To test this library, load its `tester.lgt` file:
 
     | ?- logtalk_load(ieee_754(tester)).
 

@@ -29,7 +29,7 @@ the ``loader.lgt`` file:
 Testing
 -------
 
-To test this library predicates, load the ``tester.lgt`` file:
+To test this library, load its ``tester.lgt`` file:
 
 ::
 

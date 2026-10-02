@@ -18,7 +18,7 @@ installed. For the installation instructions see:
 Loading
 -------
 
-This tool can be loaded using the query:
+To load this tool, load its ``loader.lgt`` file:
 
 ::
 

@@ -31,7 +31,7 @@ the ``loader.lgt`` file from this directory:
 Testing
 -------
 
-To test this library predicates, load the ``tester.lgt`` file:
+To test this library, load its ``tester.lgt`` file:
 
 ::
 

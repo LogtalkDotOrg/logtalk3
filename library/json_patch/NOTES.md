@@ -49,7 +49,7 @@ To load all entities in this library from the repository checkout, load the
 Testing
 -------
 
-To test this library predicates, load the `tester.lgt` file:
+To test this library, load its `tester.lgt` file:
 
 	| ?- logtalk_load(json_patch(tester)).
 

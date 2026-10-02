@@ -47,7 +47,7 @@ To load the library main files and the English language provider, load the
 Testing
 -------
 
-To test this library predicates, load the `tester.lgt` file:
+To test this library, load its `tester.lgt` file:
 
 	| ?- logtalk_load(lemmatization(tester)).
 

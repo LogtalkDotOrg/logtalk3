@@ -27,7 +27,7 @@ Load the tool using:
 Testing
 -------
 
-To test this tool, load the ``tester.lgt`` file:
+To test this tool, load its ``tester.lgt`` file:
 
 ::
 

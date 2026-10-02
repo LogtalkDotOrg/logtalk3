@@ -135,13 +135,15 @@ This tool API documentation is available at:
 Loading
 -------
 
+To load this tool, load the `tester.lgt` file:
+
 	| ?- logtalk_load(help(loader)).
 
 
 Testing
 -------
 
-To test this tool, load the `tester.lgt` file:
+To test this tool, load its `tester.lgt` file:
 
 	| ?- logtalk_load(help(tester)).
 

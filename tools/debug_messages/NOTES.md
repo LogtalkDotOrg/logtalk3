@@ -43,7 +43,7 @@ following link and consult the debugging section of the User Manual:
 Loading
 -------
 
-This tool can be loaded using the query:
+To load this tool, load its `loader.lgt` file:
 
 	| ?- logtalk_load(debug_messages(loader)).
 
@@ -51,7 +51,7 @@ This tool can be loaded using the query:
 Testing
 -------
 
-To test this tool, load the `tester.lgt` file:
+To test this tool, load its `tester.lgt` file:
 
 	| ?- logtalk_load(debug_messages(tester)).
 

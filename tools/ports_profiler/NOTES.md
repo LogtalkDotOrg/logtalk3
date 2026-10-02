@@ -55,7 +55,7 @@ Loading
 Testing
 -------
 
-To test this tool, load the `tester.lgt` file:
+To test this tool, load its `tester.lgt` file:
 
 	| ?- logtalk_load(ports_profiler(tester)).
 

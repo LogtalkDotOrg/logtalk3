@@ -51,7 +51,7 @@ To load this library, load the `loader.lgt` file:
 Testing
 -------
 
-To test this library predicates, load the `tester.lgt` file:
+To test this library, load its `tester.lgt` file:
 
 	| ?- logtalk_load(amqp(tester)).
 
@@ -61,15 +61,15 @@ RabbitMQ AMQP listens on port 5672 by default with guest/guest credentials.
 For example, on macOS using Homebrew, you can setup a server using the
 commands:
 
-    $ brew install rabbitmq
-    $ rabbitmq-plugins enable rabbitmq_amqp1_0
-    $ brew services restart rabbitmq
+	$ brew install rabbitmq
+	$ rabbitmq-plugins enable rabbitmq_amqp1_0
+	$ brew services restart rabbitmq
 
 Alternatively:
 
-    $ rabbitmqctl stop
+	$ rabbitmqctl stop
 	$ rabbitmq-plugins enable rabbitmq_amqp1_0
-    $ rabbitmq-server start &
+	$ rabbitmq-server start &
 
 
 Features
