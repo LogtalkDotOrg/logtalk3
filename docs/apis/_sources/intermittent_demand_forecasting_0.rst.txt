@@ -1,0 +1,585 @@
+.. index:: single: intermittent_demand_forecasting
+.. _intermittent_demand_forecasting/0:
+
+.. rst-class:: right
+
+**object**
+
+``intermittent_demand_forecasting``
+===================================
+
+Croston, SBA, and TSB intermittent-demand forecasters with causal initialization, configurable missing observations, and immutable online updates.
+
+| **Availability:** 
+|    ``logtalk_load(intermittent_demand_forecasting(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-02
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`forecaster_protocol <forecaster_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`forecaster_common <forecaster_common/0>`
+| **Uses:**
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`forecaster_protocol/0::diagnostic/2`  :ref:`forecaster_protocol/0::diagnostics/2`  :ref:`forecaster_protocol/0::forecaster_options/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`forecaster_protocol/0::valid_forecaster/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: learn/2
+.. _intermittent_demand_forecasting/0::learn/2:
+
+``learn/2``
+^^^^^^^^^^^
+
+Learns a forecaster from ``Dataset`` using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Forecaster)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The declared series length is a variable:
+|        ``instantiation_error``
+|    The declared series length is not an integer:
+|        ``type_error(integer,DeclaredLength)``
+|    The declared series length is not positive:
+|        ``domain_error(positive_integer,DeclaredLength)``
+|    The dataset contains no observations:
+|        ``domain_error(non_empty_series,Dataset)``
+|    The indices are not a gap-free 1-based sequence:
+|        ``domain_error(series_index_sequence,Dataset)``
+|    The declared and observed lengths differ:
+|        ``consistency_error(series_length,DeclaredLength,ObservedLength)``
+|    An observation is neither a variable nor a number:
+|        ``type_error(number,Observation)``
+|    An observation is negative:
+|        ``domain_error(non_negative_number,Observation)``
+|    All observations are missing:
+|        ``domain_error(insufficient_observations,Dataset)``
+|    Learning or error-total arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: learn/3
+.. _intermittent_demand_forecasting/0::learn/3:
+
+``learn/3``
+^^^^^^^^^^^
+
+Learns a forecaster from ``Dataset`` using the specified ``Options``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Forecaster,Options)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    The declared series length is not an integer:
+|        ``type_error(integer,DeclaredLength)``
+|    The declared series length is not positive:
+|        ``domain_error(positive_integer,DeclaredLength)``
+|    The dataset contains no observations:
+|        ``domain_error(non_empty_series,Dataset)``
+|    The indices are not a gap-free 1-based sequence:
+|        ``domain_error(series_index_sequence,Dataset)``
+|    The declared and observed lengths differ:
+|        ``consistency_error(series_length,DeclaredLength,ObservedLength)``
+|    An observation is neither a variable nor a number:
+|        ``type_error(number,Observation)``
+|    An observation is negative:
+|        ``domain_error(non_negative_number,Observation)``
+|    All observations are missing:
+|        ``domain_error(insufficient_observations,Dataset)``
+|    Learning or error-total arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: fitted_values/2
+.. _intermittent_demand_forecasting/0::fitted_values/2:
+
+``fitted_values/2``
+^^^^^^^^^^^^^^^^^^^
+
+Returns aligned one-step fitted values for ``Dataset`` using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fitted_values(Dataset,Values)``
+| **Mode and number of proofs:**
+|    ``fitted_values(+object_identifier,-list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The declared series length is a variable:
+|        ``instantiation_error``
+|    The declared series length is not an integer:
+|        ``type_error(integer,DeclaredLength)``
+|    The declared series length is not positive:
+|        ``domain_error(positive_integer,DeclaredLength)``
+|    The dataset contains no observations:
+|        ``domain_error(non_empty_series,Dataset)``
+|    The indices are not a gap-free 1-based sequence:
+|        ``domain_error(series_index_sequence,Dataset)``
+|    The declared and observed lengths differ:
+|        ``consistency_error(series_length,DeclaredLength,ObservedLength)``
+|    An observation is neither a variable nor a number:
+|        ``type_error(number,Observation)``
+|    An observation is negative:
+|        ``domain_error(non_negative_number,Observation)``
+|    All observations are missing:
+|        ``domain_error(insufficient_observations,Dataset)``
+|    Fitting, error-total, or replay arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: fitted_values/3
+.. _intermittent_demand_forecasting/0::fitted_values/3:
+
+``fitted_values/3``
+^^^^^^^^^^^^^^^^^^^
+
+Returns aligned one-step fitted values for ``Dataset`` using the specified ``Options``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fitted_values(Dataset,Values,Options)``
+| **Mode and number of proofs:**
+|    ``fitted_values(+object_identifier,-list,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    The declared series length is not an integer:
+|        ``type_error(integer,DeclaredLength)``
+|    The declared series length is not positive:
+|        ``domain_error(positive_integer,DeclaredLength)``
+|    The dataset contains no observations:
+|        ``domain_error(non_empty_series,Dataset)``
+|    The indices are not a gap-free 1-based sequence:
+|        ``domain_error(series_index_sequence,Dataset)``
+|    The declared and observed lengths differ:
+|        ``consistency_error(series_length,DeclaredLength,ObservedLength)``
+|    An observation is neither a variable nor a number:
+|        ``type_error(number,Observation)``
+|    An observation is negative:
+|        ``domain_error(non_negative_number,Observation)``
+|    All observations are missing:
+|        ``domain_error(insufficient_observations,Dataset)``
+|    Fitting, error-total, or replay arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: forecast/3
+.. _intermittent_demand_forecasting/0::forecast/3:
+
+``forecast/3``
+^^^^^^^^^^^^^^
+
+Returns ``Horizon`` constant per-period expected-demand forecasts from ``Forecaster``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``forecast(Forecaster,Horizon,Forecasts)``
+| **Mode and number of proofs:**
+|    ``forecast(+compound,+non_negative_integer,-list(number))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Forecaster`` or ``Horizon`` is a variable:
+|        ``instantiation_error``
+|    ``Forecaster`` is not a valid intermittent-demand forecaster:
+|        ``domain_error(forecaster,Forecaster)``
+|    ``Horizon`` is not an integer:
+|        ``type_error(integer,Horizon)``
+|    ``Horizon`` is negative:
+|        ``domain_error(non_negative_integer,Horizon)``
+|    Forecast or diagnostic validation arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: update/3
+.. _intermittent_demand_forecasting/0::update/3:
+
+``update/3``
+^^^^^^^^^^^^
+
+Returns a new forecaster incorporating ``Observation`` without modifying ``Forecaster``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``update(Forecaster,Observation,UpdatedForecaster)``
+| **Mode and number of proofs:**
+|    ``update(+compound,@term,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Forecaster`` is a variable:
+|        ``instantiation_error``
+|    ``Forecaster`` is not a valid intermittent-demand forecaster:
+|        ``domain_error(forecaster,Forecaster)``
+|    ``Observation`` is neither a variable nor a number:
+|        ``type_error(number,Observation)``
+|    ``Observation`` is negative:
+|        ``domain_error(non_negative_number,Observation)``
+|    Update, error-total, or diagnostic validation arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: check_forecaster/1
+.. _intermittent_demand_forecasting/0::check_forecaster/1:
+
+``check_forecaster/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Checks whether ``Forecaster`` is a valid model.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_forecaster(Forecaster)``
+| **Mode and number of proofs:**
+|    ``check_forecaster(@term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Forecaster`` is a variable:
+|        ``instantiation_error``
+|    ``Forecaster`` is not a valid intermittent-demand forecaster:
+|        ``domain_error(forecaster,Forecaster)``
+|    Counter or metric validation arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: export_to_clauses/4
+.. _intermittent_demand_forecasting/0::export_to_clauses/4:
+
+``export_to_clauses/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Exports the validated forecaster as a single fact with the specified functor.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``export_to_clauses(Dataset,Forecaster,Functor,Clauses)``
+| **Mode and number of proofs:**
+|    ``export_to_clauses(+object_identifier,+compound,+atom,-list(clause))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Forecaster`` or ``Functor`` is a variable:
+|        ``instantiation_error``
+|    ``Forecaster`` is not a valid intermittent-demand forecaster:
+|        ``domain_error(forecaster,Forecaster)``
+|    ``Functor`` is not an atom:
+|        ``type_error(atom,Functor)``
+|    Counter validation arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: export_to_file/4
+.. _intermittent_demand_forecasting/0::export_to_file/4:
+
+``export_to_file/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Exports a validated forecaster as a single fact with dataset and diagnostics comments. The shared implementation closes the stream on writing exceptions.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``export_to_file(Dataset,Forecaster,Functor,File)``
+| **Mode and number of proofs:**
+|    ``export_to_file(+object_identifier,+compound,+atom,+atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Forecaster``, ``Functor``, ``File``, or the declared dataset length is a variable:
+|        ``instantiation_error``
+|    ``Forecaster`` is not a valid intermittent-demand forecaster:
+|        ``domain_error(forecaster,Forecaster)``
+|    ``Functor`` is not an atom:
+|        ``type_error(atom,Functor)``
+|    ``File`` is not a valid file specification:
+|        ``type_error(source_sink,File)``
+|    The output location does not exist:
+|        ``existence_error(source_sink,File)``
+|    The output file cannot be opened:
+|        ``permission_error(open,source_sink,File)``
+|    The output stream cannot be written to:
+|        ``permission_error(output,stream,Stream)``
+|    The dataset contains no observations:
+|        ``domain_error(non_empty_series,Dataset)``
+|    The observation indices are not a gap-free 1-based sequence:
+|        ``domain_error(series_index_sequence,Dataset)``
+|    The declared length is not an integer:
+|        ``type_error(integer,DeclaredLength)``
+|    The declared length is not positive:
+|        ``domain_error(positive_integer,DeclaredLength)``
+|    The declared and observed lengths differ:
+|        ``consistency_error(series_length,DeclaredLength,ObservedLength)``
+|    Counter validation arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: print_forecaster/1
+.. _intermittent_demand_forecasting/0::print_forecaster/1:
+
+``print_forecaster/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Prints the method, state, and diagnostics of ``Forecaster`` to the current output stream.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_forecaster(Forecaster)``
+| **Mode and number of proofs:**
+|    ``print_forecaster(+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Forecaster`` is a variable:
+|        ``instantiation_error``
+|    ``Forecaster`` is not a valid intermittent-demand forecaster:
+|        ``domain_error(forecaster,Forecaster)``
+|    Counter validation arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+|    The current stream cannot be written to:
+|        ``permission_error(output,stream,Stream)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: replay_series/5
+.. _intermittent_demand_forecasting/0::replay_series/5:
+
+``replay_series/5``
+^^^^^^^^^^^^^^^^^^^
+
+Replays an already validated series using a concrete method, validated parameters, and valid starting state. Emits pre-observation predictions for numeric targets and fresh placeholders for missing targets, preserving order and all input variables.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``replay_series(Series,Method,Parameters,State,Values)``
+| **Mode and number of proofs:**
+|    ``replay_series(@list,+atom,+compound,+compound,-list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Prediction or transition arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: prepare_learning/4
+.. _intermittent_demand_forecasting/0::prepare_learning/4:
+
+``prepare_learning/4``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Resolves numeric or auto method/coefficient requests, collects the dataset once, and fits the lowest-RMSE concrete configuration, returning the collected series for optional replay. Normalizes the validated coefficient_grid once when a coefficient is auto, default [0.1,0.2,0.5,0.8,1.0], to ascending distinct floats; ties follow method priority and ascending alpha/beta. Numeric requests remain unchanged. Never stores the grid in effective options. Preserves caller grid and missing observation variables.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``prepare_learning(Dataset,Series,Forecaster,Options)``
+| **Mode and number of proofs:**
+|    ``prepare_learning(+object_identifier,-list,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    The declared series length is not an integer:
+|        ``type_error(integer,DeclaredLength)``
+|    The declared series length is not positive:
+|        ``domain_error(positive_integer,DeclaredLength)``
+|    The dataset contains no observations:
+|        ``domain_error(non_empty_series,Dataset)``
+|    The indices are not a gap-free 1-based sequence:
+|        ``domain_error(series_index_sequence,Dataset)``
+|    The declared and observed lengths differ:
+|        ``consistency_error(series_length,DeclaredLength,ObservedLength)``
+|    An observation is neither a variable nor a number:
+|        ``type_error(number,Observation)``
+|    An observation is negative:
+|        ``domain_error(non_negative_number,Observation)``
+|    All observations are missing:
+|        ``domain_error(insufficient_observations,Dataset)``
+|    Learning or error-total arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: normalize_coefficient_grid/2
+.. _intermittent_demand_forecasting/0::normalize_coefficient_grid/2:
+
+``normalize_coefficient_grid/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Normalizes a validated nonempty coefficient grid to ascending distinct floats without modifying the supplied list. Integer 1 and float 1.0 become one candidate. No comparison tolerance is used.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normalize_coefficient_grid(Grid,NormalizedGrid)``
+| **Mode and number of proofs:**
+|    ``normalize_coefficient_grid(+list(number),-list(float))`` - ``one_or_error``
+
+| **Exceptions:**
+|    Coefficient conversion raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: learn_candidates/5
+.. _intermittent_demand_forecasting/0::learn_candidates/5:
+
+``learn_candidates/5``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Fits concrete candidate(Method,Alpha,Beta) specifications in priority order from an already collected series using the validated missing policy, returning RMSE-Forecaster pairs. Preserves missing variables and propagates candidate errors without skipping configurations.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn_candidates(Specifications,Dataset,Series,Policy,Candidates)``
+| **Mode and number of proofs:**
+|    ``learn_candidates(+list(compound),+object_identifier,@list,+atom,-list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    An observation is neither a variable nor a number:
+|        ``type_error(number,Observation)``
+|    An observation is negative:
+|        ``domain_error(non_negative_number,Observation)``
+|    All observations are missing:
+|        ``domain_error(insufficient_observations,Dataset)``
+|    Candidate fitting or error arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: learn_series/5
+.. _intermittent_demand_forecasting/0::learn_series/5:
+
+``learn_series/5``
+^^^^^^^^^^^^^^^^^^
+
+Fits a concrete method to an already collected series using validated parameters, preserving missing variables and recording canonical concrete options and causal error diagnostics.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn_series(Dataset,Series,Method,Parameters,Forecaster)``
+| **Mode and number of proofs:**
+|    ``learn_series(+object_identifier,@list,+atom,+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    An observation is neither a variable nor a number:
+|        ``type_error(number,Observation)``
+|    An observation is negative:
+|        ``domain_error(non_negative_number,Observation)``
+|    All observations are missing:
+|        ``domain_error(insufficient_observations,Dataset)``
+|    Fitting or error arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

@@ -211,6 +211,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ids"><span class="xref std std-ref">ids</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ieee-754"><span class="xref std std-ref">ieee_754</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#integer-partitions"><span class="xref std std-ref">integer_partitions</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#intermittent-demand-forecasting"><span class="xref std std-ref">intermittent_demand_forecasting</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#intervals"><span class="xref std std-ref">intervals</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#iqr-anomaly-detector"><span class="xref std std-ref">iqr_anomaly_detector</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#iso8601"><span class="xref std std-ref">iso8601</span></a></li>
@@ -455,7 +456,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-10-01</div>
+<div class="line"><strong>Date:</strong> 2026-10-02</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -576,7 +577,7 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable or partial list, or an option is a variable:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
@@ -584,11 +585,15 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
 </div>
-<div class="line">An option is neither a variable nor a compound term:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
 </div>
-<div class="line">An option is invalid:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
 </div>

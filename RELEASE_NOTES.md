@@ -54,6 +54,10 @@ algorithms.
 * ADDED: New `baseline_forecasting` library implementing univariate naive,
 seasonal naive, mean, and drift forecasting.
 
+* ADDED: New `intermittent_demand_forecasting` library implementing Croston,
+the Syntetos-Boylan approximation (SBA), and Teunter-Syntetos-Babai (TSB)
+forecasting for non-negative demand series with periods of zero demand.
+
 * ADDED: New `exponential_smoothing` library implementing univariate time
 series forecasting using simple exponential smoothing, Holt linear-trend
 smoothing, and additive or multiplicative Holt-Winters seasonal smoothing.

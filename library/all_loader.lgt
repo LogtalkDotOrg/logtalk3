@@ -251,6 +251,7 @@
 		clo_span_pattern_miner(loader),
 		time_series_protocols(loader),
 		baseline_forecasting(loader),
+		intermittent_demand_forecasting(loader),
 		exponential_smoothing(loader),
 		knn_forecasting(loader),
 		time_series_regression(loader),

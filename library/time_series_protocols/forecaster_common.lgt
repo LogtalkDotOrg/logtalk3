@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-29,
+		date is 2026-10-02,
 		comment is 'Shared predicates for forecaster diagnostics, time series dataset validation, differencing, lag construction, forecast error metrics, and naive baselines.'
 	]).
 
@@ -336,6 +336,34 @@
 	replace_diagnostic(Name, Value, [Diagnostic| Diagnostics], [Diagnostic| UpdatedDiagnostics]) :-
 		replace_diagnostic(Name, Value, Diagnostics, UpdatedDiagnostics).
 
+	:- protected(updated_observation_diagnostics/3).
+	:- mode(updated_observation_diagnostics(+list(compound), @term, -list(compound)), one_or_error).
+	:- info(updated_observation_diagnostics/3, [
+		comment is 'Updates the training length, update count, observed count, and missing count of validated diagnostics after a numeric or missing observation, preserving metadata order and all other diagnostics. Requires existing non-negative integer counters.',
+		argnames is ['Diagnostics', 'Observation', 'UpdatedDiagnostics'],
+		exceptions is [
+			'``Observation`` is neither a variable nor a number' - type_error(number, 'Observation'),
+			'Counter arithmetic raises an evaluation error' - evaluation_error('Error')
+		]
+	]).
+
+	updated_observation_diagnostics(Diagnostics, Observation, UpdatedDiagnostics) :-
+		check_observation(Observation),
+		memberchk(training_series_length(Length0), Diagnostics),
+		memberchk(update_count(Updates0), Diagnostics),
+		memberchk(observed_count(Count0), Diagnostics),
+		memberchk(missing_count(Missing0), Diagnostics),
+		Length is Length0 + 1,
+		Updates is Updates0 + 1,
+		(	var(Observation) ->
+			Count = Count0, Missing is Missing0 + 1
+		;	Count is Count0 + 1, Missing = Missing0
+		),
+		replace_diagnostic(training_series_length, Length, Diagnostics, Diagnostics1),
+		replace_diagnostic(update_count, Updates, Diagnostics1, Diagnostics2),
+		replace_diagnostic(observed_count, Count, Diagnostics2, Diagnostics3),
+		replace_diagnostic(missing_count, Missing, Diagnostics3, UpdatedDiagnostics).
+
 	export_to_file(Dataset, Forecaster, Functor, File) :-
 		::export_to_clauses(Dataset, Forecaster, Functor, Clauses),
 		open(File, write, Stream),
@@ -445,6 +473,46 @@
 		append(Trimmed, [_], Lags).
 
 	% forecast error metrics
+
+	:- protected(accumulate_forecast_error/4).
+	:- mode(accumulate_forecast_error(+number, +number, +compound, -compound), one_or_error).
+	:- info(accumulate_forecast_error/4, [
+		comment is 'Adds one numeric actual/prediction error to validated forecast_error_totals(Count, AbsoluteSum, SquaredSum), without retaining observations. Requires a non-negative integer count and non-negative numeric sums; forecast_error_totals(0,0,0) initializes accumulation. Missing observations must be skipped by the caller.',
+		argnames is ['Actual', 'Prediction', 'Totals', 'UpdatedTotals'],
+		exceptions is [
+			'``Actual`` or ``Prediction`` is a variable' - instantiation_error,
+			'``Actual`` or ``Prediction`` is not a number' - type_error(number, 'Value'),
+			'Error or total arithmetic raises an evaluation error' - evaluation_error('Error')
+		]
+	]).
+
+	accumulate_forecast_error(Actual, Prediction, forecast_error_totals(Count0, Absolute0, Squared0), forecast_error_totals(Count, Absolute, Squared)) :-
+		context(Context),
+		check(number, Actual, Context),
+		check(number, Prediction, Context),
+		Error is Actual - Prediction,
+		Count is Count0 + 1,
+		Absolute is Absolute0 + abs(Error),
+		Squared is Squared0 + Error * Error.
+
+	:- protected(forecast_error_metrics/3).
+	:- mode(forecast_error_metrics(+compound, -float, -float), one_or_error).
+	:- info(forecast_error_metrics/3, [
+		comment is 'Computes MAE and RMSE from validated forecast_error_totals(Count, AbsoluteSum, SquaredSum). Requires non-negative numeric sums and a positive integer count. Does not retain or reconstruct actual/predicted observations.',
+		argnames is ['Totals', 'MAE', 'RMSE'],
+		exceptions is [
+			'The scored count is a variable' - instantiation_error,
+			'The scored count is not an integer' - type_error(integer, 'Count'),
+			'The scored count is not positive' - domain_error(positive_integer, 'Count'),
+			'Metric arithmetic raises an evaluation error' - evaluation_error('Error')
+		]
+	]).
+
+	forecast_error_metrics(forecast_error_totals(Count, Absolute, Squared), MAE, RMSE) :-
+		context(Context),
+		check(positive_integer, Count, Context),
+		MAE is float(Absolute / Count),
+		RMSE is float(sqrt(Squared / Count)).
 
 	:- protected(mean_absolute_error/3).
 	:- mode(mean_absolute_error(+list(number), +list(number), -float), one_or_error).

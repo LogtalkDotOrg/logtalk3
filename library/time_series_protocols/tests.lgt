@@ -26,12 +26,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-29,
+		date is 2026-10-02,
 		comment is 'Smoke tests for the "time_series_protocols" library.'
 	]).
 
 	:- uses(lgtunit, [
-		op(700, xfx, =~=), (=~=)/2
+		op(700, xfx, =~=), (=~=)/2, assertion/1
 	]).
 
 	cover(forecaster_common).
@@ -114,6 +114,49 @@
 
 	test(mean_absolute_error_1, deterministic(MAE =~= 1.0)) :-
 		^^mean_absolute_error([1, 2, 3, 4], [2, 2, 2, 2], MAE).
+
+	test(accumulate_forecast_error_initial, deterministic(Totals == forecast_error_totals(1,6,36))) :-
+		^^accumulate_forecast_error(6, 0, forecast_error_totals(0,0,0), Totals).
+
+	test(accumulate_forecast_error_negative, deterministic(Totals == forecast_error_totals(2,9,45))) :-
+		^^accumulate_forecast_error(0, 3, forecast_error_totals(1,6,36), Totals).
+
+	test(accumulate_forecast_error_zero, deterministic(Totals == forecast_error_totals(1,0,0))) :-
+		^^accumulate_forecast_error(0, 0, forecast_error_totals(0,0,0), Totals).
+
+	test(forecast_error_metrics_zero, deterministic) :-
+		^^forecast_error_metrics(forecast_error_totals(3,0,0), MAE, RMSE),
+		MAE =~= 0.0, RMSE =~= 0.0.
+
+	test(forecast_error_metrics_list_equivalence, deterministic) :-
+		^^accumulate_forecast_error(0, 0, forecast_error_totals(0,0,0), Totals1),
+		^^accumulate_forecast_error(6, 0, Totals1, Totals2),
+		^^accumulate_forecast_error(0, 3, Totals2, Totals3),
+		^^accumulate_forecast_error(10, 3, Totals3, Totals),
+		Totals == forecast_error_totals(4,16,94),
+		^^forecast_error_metrics(Totals, MAE, RMSE),
+		^^mean_absolute_error([0,6,0,10], [0,0,3,3], ListMAE),
+		^^root_mean_squared_error([0,6,0,10], [0,0,3,3], ListRMSE),
+		MAE =~= ListMAE, RMSE =~= ListRMSE.
+
+	test(accumulate_forecast_error_fractional, deterministic) :-
+		^^accumulate_forecast_error(-1.5, 0.5, forecast_error_totals(0,0,0), forecast_error_totals(1,Absolute,Squared)),
+		Absolute =~= 2.0, Squared =~= 4.0.
+
+	test(accumulate_forecast_error_invalid_actual, error(type_error(number, bad))) :-
+		^^accumulate_forecast_error(bad, 0, forecast_error_totals(0,0,0), _).
+
+	test(accumulate_forecast_error_invalid_prediction, error(type_error(number, bad))) :-
+		^^accumulate_forecast_error(0, bad, forecast_error_totals(0,0,0), _).
+
+	test(accumulate_forecast_error_missing, error(instantiation_error)) :-
+		^^accumulate_forecast_error(_, 0, forecast_error_totals(0,0,0), _).
+
+	test(forecast_error_metrics_empty, error(domain_error(positive_integer, 0))) :-
+		^^forecast_error_metrics(forecast_error_totals(0,0,0), _, _).
+
+	test(forecast_error_metrics_non_integer_count, error(type_error(integer, one))) :-
+		^^forecast_error_metrics(forecast_error_totals(one,0,0), _, _).
 
 	test(mean_absolute_error_empty, error(domain_error(non_empty_series, []))) :-
 		^^mean_absolute_error([], [], _MAE).
@@ -215,6 +258,22 @@
 
 	test(replace_diagnostic_absent, fail) :-
 		^^replace_diagnostic(count, 3, [first(1)], _).
+
+	test(updated_observation_diagnostics_numeric, deterministic) :-
+		Diagnostics = [first(kept), training_series_length(3), options([]), observed_count(2), missing_count(1), update_count(0), last(kept)],
+		^^updated_observation_diagnostics(Diagnostics, 5, Updated),
+		assertion(Updated == [first(kept), training_series_length(4), options([]), observed_count(3), missing_count(1), update_count(1), last(kept)]),
+		assertion(Diagnostics == [first(kept), training_series_length(3), options([]), observed_count(2), missing_count(1), update_count(0), last(kept)]).
+
+	test(updated_observation_diagnostics_missing, deterministic) :-
+		Diagnostics = [training_series_length(3), update_count(1), observed_count(2), missing_count(1)],
+		^^updated_observation_diagnostics(Diagnostics, Missing, Updated),
+		var(Missing),
+		assertion(Updated == [training_series_length(4), update_count(2), observed_count(2), missing_count(2)]),
+		assertion(Diagnostics == [training_series_length(3), update_count(1), observed_count(2), missing_count(1)]).
+
+	test(updated_observation_diagnostics_invalid, error(type_error(number, bad))) :-
+		^^updated_observation_diagnostics([training_series_length(1), update_count(0), observed_count(1), missing_count(0)], bad, _).
 
 	test(naive_forecast_zero_horizon, deterministic(Forecasts == [])) :-
 		^^naive_forecast([10, 12], 0, Forecasts).

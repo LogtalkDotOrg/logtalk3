@@ -205,6 +205,7 @@
 <li class="toctree-l2"><a class="reference internal" href="ids.html"><code class="docutils literal notranslate"><span class="pre">ids</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ieee_754.html"><code class="docutils literal notranslate"><span class="pre">ieee_754</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="integer_partitions.html"><code class="docutils literal notranslate"><span class="pre">integer_partitions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="intermittent_demand_forecasting.html"><code class="docutils literal notranslate"><span class="pre">intermittent_demand_forecasting</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="intervals.html"><code class="docutils literal notranslate"><span class="pre">intervals</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="iqr_anomaly_detector.html"><code class="docutils literal notranslate"><span class="pre">iqr_anomaly_detector</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="isolation_forest_anomaly_detector.html"><code class="docutils literal notranslate"><span class="pre">isolation_forest_anomaly_detector</span></code></a></li>
@@ -502,6 +503,16 @@ autoregressive-style model fitting.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">mean_absolute_error/3</span></code>, <code class="docutils literal notranslate"><span class="pre">root_mean_squared_error/3</span></code>,
 <code class="docutils literal notranslate"><span class="pre">mean_absolute_percentage_error/3</span></code>: standard forecast accuracy
 metrics.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">accumulate_forecast_error/4</span></code>: adds a numeric actual/prediction
+error to compact
+<code class="docutils literal notranslate"><span class="pre">forecast_error_totals(Count,</span> <span class="pre">AbsoluteSum,</span> <span class="pre">SquaredSum)</span></code>, initialized
+with <code class="docutils literal notranslate"><span class="pre">forecast_error_totals(0,0,0)</span></code>. Requires validated non-negative
+totals; callers decide which observations to score and must skip
+missing targets.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">forecast_error_metrics/3</span></code>: computes MAE and RMSE from those totals
+using a positive integer score count. These two helpers retain no
+history and propagate arithmetic evaluation errors, including overflow
+when squaring or accumulating large errors.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">naive_forecast/3</span></code> and <code class="docutils literal notranslate"><span class="pre">seasonal_naive_forecast/4</span></code>: persistence
 and seasonal-persistence baseline forecasts, usable both as standalone
 baselines and as building blocks or fallbacks in other forecasters.</p></li>
@@ -514,11 +525,15 @@ collection of elapsed length, numeric count, and sum without
 instantiating missing observations.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">replace_diagnostic/4</span></code>: replaces a unary diagnostic value while
 preserving metadata order.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">updated_observation_diagnostics/3</span></code>: advances training length,
+update count, observed count, and missing count after a numeric or
+missing observation, preserving all other metadata and its order.</p></li>
 </ul>
 <p>These are declared <code class="docutils literal notranslate"><span class="pre">protected</span></code>, intended to be reused by concrete
 forecaster libraries (e.g. <code class="docutils literal notranslate"><span class="pre">baseline_forecasting</span></code>,
-<code class="docutils literal notranslate"><span class="pre">exponential_smoothing</span></code>, <code class="docutils literal notranslate"><span class="pre">time_series_regression</span></code>,
-<code class="docutils literal notranslate"><span class="pre">similarity_forecasting</span></code>) that import this category.</p>
+<code class="docutils literal notranslate"><span class="pre">exponential_smoothing</span></code>, <code class="docutils literal notranslate"><span class="pre">intermittent_demand_forecasting</span></code>,
+<code class="docutils literal notranslate"><span class="pre">knn_forecasting</span></code>, and <code class="docutils literal notranslate"><span class="pre">time_series_regression</span></code>) that import this
+category.</p>
 </section>
 </section>
 

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-01,
+		date is 2026-10-02,
 		comment is 'Tests for the baseline forecasting library.'
 	]).
 

@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-01,
+		date is 2026-10-02,
 		comment is 'Naive, seasonal naive, mean, and drift time series forecasters with missing observations and immutable online updates.'
 	]).
 
@@ -49,10 +49,11 @@
 		comment is 'Learns a baseline forecaster. The default model is naive; seasonal naive uses an explicit frequency option ahead of dataset metadata. Unbound observations remain missing and retain their time positions.',
 		argnames is ['Dataset', 'Forecaster', 'Options'],
 		exceptions is [
-			'``Options`` is a variable or partial list, or an option is a variable' - instantiation_error,
+			'``Options`` is a variable' - instantiation_error,
 			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
-			'An option is neither a variable nor a compound term' - type_error(compound, 'Option'),
-			'An option is invalid' - domain_error(option, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
 			'A frequency option is supplied for a non-seasonal model' - domain_error(baseline_forecasting_option, 'Option'),
 			'The seasonal model has no explicit or dataset frequency' - domain_error(seasonal_frequency, 'Dataset'),
 			'The dataset frequency or declared length is a variable' - instantiation_error,
@@ -267,7 +268,7 @@
 		^^check_observation(Observation),
 		copy_term(Forecaster-Observation, baseline_forecaster(Method, State, Diagnostics)-NewObservation),
 		updated_state(Method, State, NewObservation, UpdatedState),
-		updated_diagnostics(Diagnostics, NewObservation, UpdatedDiagnostics).
+		^^updated_observation_diagnostics(Diagnostics, NewObservation, UpdatedDiagnostics).
 
 	updated_state(naive, _State, Observation, naive_state(Observation)).
 	updated_state(seasonal_naive, seasonal_naive_state(Frequency, [_| Cycle]), Observation, seasonal_naive_state(Frequency, UpdatedCycle)) :-
@@ -279,22 +280,6 @@
 			UpdatedCount is Count + 1
 		).
 	updated_state(drift, drift_state(First, _), Observation, drift_state(First, Observation)).
-
-	updated_diagnostics(Diagnostics, Observation, UpdatedDiagnostics) :-
-		memberchk(training_series_length(Length0), Diagnostics),
-		memberchk(update_count(Updates0), Diagnostics),
-		memberchk(observed_count(Count0), Diagnostics),
-		memberchk(missing_count(Missing0), Diagnostics),
-		Length is Length0 + 1,
-		Updates is Updates0 + 1,
-		(	var(Observation) ->
-			Count = Count0, Missing is Missing0 + 1
-		;	Count is Count0 + 1, Missing = Missing0
-		),
-		^^replace_diagnostic(training_series_length, Length, Diagnostics, Diagnostics1),
-		^^replace_diagnostic(update_count, Updates, Diagnostics1, Diagnostics2),
-		^^replace_diagnostic(observed_count, Count, Diagnostics2, Diagnostics3),
-		^^replace_diagnostic(missing_count, Missing, Diagnostics3, UpdatedDiagnostics).
 
 	check_forecaster(Forecaster) :-
 		(	var(Forecaster) ->

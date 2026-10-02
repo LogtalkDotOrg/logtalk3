@@ -208,6 +208,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ids"><span class="xref std std-ref">ids</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ieee-754"><span class="xref std std-ref">ieee_754</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#integer-partitions"><span class="xref std std-ref">integer_partitions</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#intermittent-demand-forecasting"><span class="xref std std-ref">intermittent_demand_forecasting</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#intervals"><span class="xref std std-ref">intervals</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#iqr-anomaly-detector"><span class="xref std std-ref">iqr_anomaly_detector</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#iso8601"><span class="xref std std-ref">iso8601</span></a></li>
@@ -457,7 +458,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-09-29</div>
+<div class="line"><strong>Date:</strong> 2026-10-02</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -515,22 +516,25 @@
 <li><p><a class="reference internal" href="#valid-forecaster-metadata-2" id="id14"><code class="docutils literal notranslate"><span class="pre">valid_forecaster_metadata/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#valid-forecaster-metadata-3" id="id15"><code class="docutils literal notranslate"><span class="pre">valid_forecaster_metadata/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#replace-diagnostic-4" id="id16"><code class="docutils literal notranslate"><span class="pre">replace_diagnostic/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#difference-series-2" id="id17"><code class="docutils literal notranslate"><span class="pre">difference_series/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#integrate-series-3" id="id18"><code class="docutils literal notranslate"><span class="pre">integrate_series/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#lagged-rows-3" id="id19"><code class="docutils literal notranslate"><span class="pre">lagged_rows/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#mean-absolute-error-3" id="id20"><code class="docutils literal notranslate"><span class="pre">mean_absolute_error/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#root-mean-squared-error-3" id="id21"><code class="docutils literal notranslate"><span class="pre">root_mean_squared_error/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#mean-absolute-percentage-error-3" id="id22"><code class="docutils literal notranslate"><span class="pre">mean_absolute_percentage_error/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#naive-forecast-3" id="id23"><code class="docutils literal notranslate"><span class="pre">naive_forecast/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#constant-forecast-3" id="id24"><code class="docutils literal notranslate"><span class="pre">constant_forecast/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#linear-trend-forecast-4" id="id25"><code class="docutils literal notranslate"><span class="pre">linear_trend_forecast/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#check-forecast-horizon-1" id="id26"><code class="docutils literal notranslate"><span class="pre">check_forecast_horizon/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#seasonal-naive-forecast-4" id="id27"><code class="docutils literal notranslate"><span class="pre">seasonal_naive_forecast/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#check-frequency-1" id="id28"><code class="docutils literal notranslate"><span class="pre">check_frequency/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#updated-observation-diagnostics-3" id="id17"><code class="docutils literal notranslate"><span class="pre">updated_observation_diagnostics/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#difference-series-2" id="id18"><code class="docutils literal notranslate"><span class="pre">difference_series/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#integrate-series-3" id="id19"><code class="docutils literal notranslate"><span class="pre">integrate_series/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#lagged-rows-3" id="id20"><code class="docutils literal notranslate"><span class="pre">lagged_rows/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#accumulate-forecast-error-4" id="id21"><code class="docutils literal notranslate"><span class="pre">accumulate_forecast_error/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#forecast-error-metrics-3" id="id22"><code class="docutils literal notranslate"><span class="pre">forecast_error_metrics/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#mean-absolute-error-3" id="id23"><code class="docutils literal notranslate"><span class="pre">mean_absolute_error/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#root-mean-squared-error-3" id="id24"><code class="docutils literal notranslate"><span class="pre">root_mean_squared_error/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#mean-absolute-percentage-error-3" id="id25"><code class="docutils literal notranslate"><span class="pre">mean_absolute_percentage_error/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#naive-forecast-3" id="id26"><code class="docutils literal notranslate"><span class="pre">naive_forecast/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#constant-forecast-3" id="id27"><code class="docutils literal notranslate"><span class="pre">constant_forecast/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#linear-trend-forecast-4" id="id28"><code class="docutils literal notranslate"><span class="pre">linear_trend_forecast/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#check-forecast-horizon-1" id="id29"><code class="docutils literal notranslate"><span class="pre">check_forecast_horizon/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#seasonal-naive-forecast-4" id="id30"><code class="docutils literal notranslate"><span class="pre">seasonal_naive_forecast/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#check-frequency-1" id="id31"><code class="docutils literal notranslate"><span class="pre">check_frequency/1</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#private-predicates" id="id29">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id30">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id32">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id33">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -947,8 +951,42 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="updated-observation-diagnostics-3">
+<span id="forecaster-common-0-updated-observation-diagnostics-3"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">updated_observation_diagnostics/3</span></code></a><a class="headerlink" href="#updated-observation-diagnostics-3" title="Link to this heading"></a></h3>
+<p>Updates the training length, update count, observed count, and missing count of validated diagnostics after a numeric or missing observation, preserving metadata order and all other diagnostics. Requires existing non-negative integer counters.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">updated_observation_diagnostics(Diagnostics,Observation,UpdatedDiagnostics)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">updated_observation_diagnostics(+list(compound),&#64;term,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Observation</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Observation)</span></code></div>
+</div>
+<div class="line">Counter arithmetic raises an evaluation error:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="difference-series-2">
-<span id="forecaster-common-0-difference-series-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">difference_series/2</span></code></a><a class="headerlink" href="#difference-series-2" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-difference-series-2"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">difference_series/2</span></code></a><a class="headerlink" href="#difference-series-2" title="Link to this heading"></a></h3>
 <p>Computes the first-order differences of a series: <code class="docutils literal notranslate"><span class="pre">Differences[i]</span> <span class="pre">=</span> <span class="pre">Series[i+1]</span> <span class="pre">-</span> <span class="pre">Series[i]</span></code>. The result has one fewer element than <code class="docutils literal notranslate"><span class="pre">Series</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -978,7 +1016,7 @@
 <hr class="docutils" />
 </section>
 <section id="integrate-series-3">
-<span id="forecaster-common-0-integrate-series-3"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">integrate_series/3</span></code></a><a class="headerlink" href="#integrate-series-3" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-integrate-series-3"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">integrate_series/3</span></code></a><a class="headerlink" href="#integrate-series-3" title="Link to this heading"></a></h3>
 <p>Reconstructs a series of levels from a series of differences and a starting base value (typically the last observed original value), by cumulative summing. Used to undo <code class="docutils literal notranslate"><span class="pre">difference_series/2</span></code> on forecasted differences.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -999,7 +1037,7 @@
 <hr class="docutils" />
 </section>
 <section id="lagged-rows-3">
-<span id="forecaster-common-0-lagged-rows-3"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">lagged_rows/3</span></code></a><a class="headerlink" href="#lagged-rows-3" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-lagged-rows-3"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">lagged_rows/3</span></code></a><a class="headerlink" href="#lagged-rows-3" title="Link to this heading"></a></h3>
 <p>Builds a list of <code class="docutils literal notranslate"><span class="pre">Lags-Target</span></code> rows from a series, where <code class="docutils literal notranslate"><span class="pre">Lags</span></code> is a list of the <code class="docutils literal notranslate"><span class="pre">Order</span></code> most recent values preceding <code class="docutils literal notranslate"><span class="pre">Target</span></code>, most recent first (<code class="docutils literal notranslate"><span class="pre">[X(t-1),</span> <span class="pre">X(t-2),</span> <span class="pre">...,</span> <span class="pre">X(t-Order)]-X(t)</span></code>). Requires the series to have more than <code class="docutils literal notranslate"><span class="pre">Order</span></code> observations.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1040,8 +1078,88 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="accumulate-forecast-error-4">
+<span id="forecaster-common-0-accumulate-forecast-error-4"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">accumulate_forecast_error/4</span></code></a><a class="headerlink" href="#accumulate-forecast-error-4" title="Link to this heading"></a></h3>
+<p>Adds one numeric actual/prediction error to validated forecast_error_totals(Count, AbsoluteSum, SquaredSum), without retaining observations. Requires a non-negative integer count and non-negative numeric sums; forecast_error_totals(0,0,0) initializes accumulation. Missing observations must be skipped by the caller.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">accumulate_forecast_error(Actual,Prediction,Totals,UpdatedTotals)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">accumulate_forecast_error(+number,+number,+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Actual</span></code> or <code class="docutils literal notranslate"><span class="pre">Prediction</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Actual</span></code> or <code class="docutils literal notranslate"><span class="pre">Prediction</span></code> is not a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Value)</span></code></div>
+</div>
+<div class="line">Error or total arithmetic raises an evaluation error:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="forecast-error-metrics-3">
+<span id="forecaster-common-0-forecast-error-metrics-3"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">forecast_error_metrics/3</span></code></a><a class="headerlink" href="#forecast-error-metrics-3" title="Link to this heading"></a></h3>
+<p>Computes MAE and RMSE from validated forecast_error_totals(Count, AbsoluteSum, SquaredSum). Requires non-negative numeric sums and a positive integer count. Does not retain or reconstruct actual/predicted observations.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">forecast_error_metrics(Totals,MAE,RMSE)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">forecast_error_metrics(+compound,-float,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The scored count is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The scored count is not an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Count)</span></code></div>
+</div>
+<div class="line">The scored count is not positive:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,Count)</span></code></div>
+</div>
+<div class="line">Metric arithmetic raises an evaluation error:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="mean-absolute-error-3">
-<span id="forecaster-common-0-mean-absolute-error-3"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">mean_absolute_error/3</span></code></a><a class="headerlink" href="#mean-absolute-error-3" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-mean-absolute-error-3"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">mean_absolute_error/3</span></code></a><a class="headerlink" href="#mean-absolute-error-3" title="Link to this heading"></a></h3>
 <p>Computes the mean absolute error (MAE) between actual and predicted value lists of matching length.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1075,7 +1193,7 @@
 <hr class="docutils" />
 </section>
 <section id="root-mean-squared-error-3">
-<span id="forecaster-common-0-root-mean-squared-error-3"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">root_mean_squared_error/3</span></code></a><a class="headerlink" href="#root-mean-squared-error-3" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-root-mean-squared-error-3"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">root_mean_squared_error/3</span></code></a><a class="headerlink" href="#root-mean-squared-error-3" title="Link to this heading"></a></h3>
 <p>Computes the root mean squared error (RMSE) between actual and predicted value lists of matching length.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1109,7 +1227,7 @@
 <hr class="docutils" />
 </section>
 <section id="mean-absolute-percentage-error-3">
-<span id="forecaster-common-0-mean-absolute-percentage-error-3"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">mean_absolute_percentage_error/3</span></code></a><a class="headerlink" href="#mean-absolute-percentage-error-3" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-mean-absolute-percentage-error-3"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">mean_absolute_percentage_error/3</span></code></a><a class="headerlink" href="#mean-absolute-percentage-error-3" title="Link to this heading"></a></h3>
 <p>Computes the mean absolute percentage error (MAPE), as a percentage, between actual and predicted value lists of matching length.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1147,7 +1265,7 @@
 <hr class="docutils" />
 </section>
 <section id="naive-forecast-3">
-<span id="forecaster-common-0-naive-forecast-3"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">naive_forecast/3</span></code></a><a class="headerlink" href="#naive-forecast-3" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-naive-forecast-3"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">naive_forecast/3</span></code></a><a class="headerlink" href="#naive-forecast-3" title="Link to this heading"></a></h3>
 <p>Repeats the last observed series value <code class="docutils literal notranslate"><span class="pre">Horizon</span></code> times (the naive/persistence baseline forecast). A zero horizon returns an empty list.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1185,7 +1303,7 @@
 <hr class="docutils" />
 </section>
 <section id="constant-forecast-3">
-<span id="forecaster-common-0-constant-forecast-3"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">constant_forecast/3</span></code></a><a class="headerlink" href="#constant-forecast-3" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-constant-forecast-3"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">constant_forecast/3</span></code></a><a class="headerlink" href="#constant-forecast-3" title="Link to this heading"></a></h3>
 <p>Repeats a value for the given forecast horizon. A zero horizon returns an empty list.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1223,7 +1341,7 @@
 <hr class="docutils" />
 </section>
 <section id="linear-trend-forecast-4">
-<span id="forecaster-common-0-linear-trend-forecast-4"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">linear_trend_forecast/4</span></code></a><a class="headerlink" href="#linear-trend-forecast-4" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-linear-trend-forecast-4"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">linear_trend_forecast/4</span></code></a><a class="headerlink" href="#linear-trend-forecast-4" title="Link to this heading"></a></h3>
 <p>Forecasts <code class="docutils literal notranslate"><span class="pre">Last</span> <span class="pre">+</span> <span class="pre">Step</span> <span class="pre">*</span> <span class="pre">Slope</span></code> for steps one through the horizon. A zero horizon returns an empty list.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1273,7 +1391,7 @@
 <hr class="docutils" />
 </section>
 <section id="check-forecast-horizon-1">
-<span id="forecaster-common-0-check-forecast-horizon-1"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_forecast_horizon/1</span></code></a><a class="headerlink" href="#check-forecast-horizon-1" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-check-forecast-horizon-1"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_forecast_horizon/1</span></code></a><a class="headerlink" href="#check-forecast-horizon-1" title="Link to this heading"></a></h3>
 <p>Checks that a forecast horizon is a non-negative integer.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1311,7 +1429,7 @@
 <hr class="docutils" />
 </section>
 <section id="seasonal-naive-forecast-4">
-<span id="forecaster-common-0-seasonal-naive-forecast-4"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seasonal_naive_forecast/4</span></code></a><a class="headerlink" href="#seasonal-naive-forecast-4" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-seasonal-naive-forecast-4"></span><span id="index-28"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">seasonal_naive_forecast/4</span></code></a><a class="headerlink" href="#seasonal-naive-forecast-4" title="Link to this heading"></a></h3>
 <p>Repeats the last full seasonal cycle of <code class="docutils literal notranslate"><span class="pre">Frequency</span></code> observations, cycling as needed to cover <code class="docutils literal notranslate"><span class="pre">Horizon</span></code> forecasts (the seasonal naive baseline forecast).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1365,7 +1483,7 @@
 <hr class="docutils" />
 </section>
 <section id="check-frequency-1">
-<span id="forecaster-common-0-check-frequency-1"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_frequency/1</span></code></a><a class="headerlink" href="#check-frequency-1" title="Link to this heading"></a></h3>
+<span id="forecaster-common-0-check-frequency-1"></span><span id="index-29"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_frequency/1</span></code></a><a class="headerlink" href="#check-frequency-1" title="Link to this heading"></a></h3>
 <p>Checks that a seasonal frequency is a positive integer.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

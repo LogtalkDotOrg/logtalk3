@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on October 1, 2026
+##   Last updated on October 2, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -213,6 +213,7 @@ sed '1,19d' ../../../library/ica_projection/NOTES.md | pandoc -f gfm -t rst -o l
 sed '1,19d' ../../../library/ids/NOTES.md | pandoc -f gfm -t rst -o libraries/ids.rst
 sed '1,19d' ../../../library/ieee_754/NOTES.md | pandoc -f gfm -t rst -o libraries/ieee_754.rst
 sed '1,19d' ../../../library/integer_partitions/NOTES.md | pandoc -f gfm -t rst -o libraries/integer_partitions.rst
+sed '1,19d' ../../../library/intermittent_demand_forecasting/NOTES.md | pandoc -f gfm -t rst -o libraries/intermittent_demand_forecasting.rst
 sed '1,19d' ../../../library/intervals/NOTES.md | pandoc -f gfm -t rst -o libraries/intervals.rst
 sed '1,19d' ../../../library/iqr_anomaly_detector/NOTES.md | pandoc -f gfm -t rst -o libraries/iqr_anomaly_detector.rst
 sed '1,19d' ../../../library/iso_639/NOTES.md | pandoc -f gfm -t rst -o libraries/iso_639.rst

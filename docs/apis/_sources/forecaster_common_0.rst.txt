@@ -15,7 +15,7 @@ Shared predicates for forecaster diagnostics, time series dataset validation, di
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-09-29
+| **Date:** 2026-10-02
 
 | **Compilation flags:**
 |    ``static``
@@ -371,6 +371,31 @@ Replaces the value of the first unary diagnostic with the given name, preserving
 
 ------------
 
+.. index:: updated_observation_diagnostics/3
+.. _forecaster_common/0::updated_observation_diagnostics/3:
+
+``updated_observation_diagnostics/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Updates the training length, update count, observed count, and missing count of validated diagnostics after a numeric or missing observation, preserving metadata order and all other diagnostics. Requires existing non-negative integer counters.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``updated_observation_diagnostics(Diagnostics,Observation,UpdatedDiagnostics)``
+| **Mode and number of proofs:**
+|    ``updated_observation_diagnostics(+list(compound),@term,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Observation`` is neither a variable nor a number:
+|        ``type_error(number,Observation)``
+|    Counter arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
 .. index:: difference_series/2
 .. _forecaster_common/0::difference_series/2:
 
@@ -438,6 +463,62 @@ Builds a list of ``Lags-Target`` rows from a series, where ``Lags`` is a list of
 |        ``domain_error(positive_integer,Order)``
 |    ``Series`` has ``Order`` or fewer observations:
 |        ``domain_error(series_length,Series)``
+
+
+------------
+
+.. index:: accumulate_forecast_error/4
+.. _forecaster_common/0::accumulate_forecast_error/4:
+
+``accumulate_forecast_error/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Adds one numeric actual/prediction error to validated forecast_error_totals(Count, AbsoluteSum, SquaredSum), without retaining observations. Requires a non-negative integer count and non-negative numeric sums; forecast_error_totals(0,0,0) initializes accumulation. Missing observations must be skipped by the caller.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``accumulate_forecast_error(Actual,Prediction,Totals,UpdatedTotals)``
+| **Mode and number of proofs:**
+|    ``accumulate_forecast_error(+number,+number,+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Actual`` or ``Prediction`` is a variable:
+|        ``instantiation_error``
+|    ``Actual`` or ``Prediction`` is not a number:
+|        ``type_error(number,Value)``
+|    Error or total arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: forecast_error_metrics/3
+.. _forecaster_common/0::forecast_error_metrics/3:
+
+``forecast_error_metrics/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes MAE and RMSE from validated forecast_error_totals(Count, AbsoluteSum, SquaredSum). Requires non-negative numeric sums and a positive integer count. Does not retain or reconstruct actual/predicted observations.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``forecast_error_metrics(Totals,MAE,RMSE)``
+| **Mode and number of proofs:**
+|    ``forecast_error_metrics(+compound,-float,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The scored count is a variable:
+|        ``instantiation_error``
+|    The scored count is not an integer:
+|        ``type_error(integer,Count)``
+|    The scored count is not positive:
+|        ``domain_error(positive_integer,Count)``
+|    Metric arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
 
 
 ------------

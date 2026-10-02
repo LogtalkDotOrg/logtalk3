@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on October 1, 2026
+%  Last updated on October 2, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -242,6 +242,7 @@ logtalk_library_path(ica_projection, library('ica_projection/')).
 logtalk_library_path(ids, library('ids/')).
 logtalk_library_path(ieee_754, library('ieee_754/')).
 logtalk_library_path(integer_partitions, library('integer_partitions/')).
+logtalk_library_path(intermittent_demand_forecasting, library('intermittent_demand_forecasting/')).
 logtalk_library_path(intervals, library('intervals/')).
 logtalk_library_path(iqr_anomaly_detector, library('iqr_anomaly_detector/')).
 logtalk_library_path(iso_639, library('iso_639/')).

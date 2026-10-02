@@ -97,12 +97,15 @@ Shared predicates
 - `difference_series/2` and `integrate_series/3`: first-order differencing and its inverse, for algorithms that difference a series before fitting (e.g. ARIMA-style models) and need to undo it on forecasts.
 - `lagged_rows/3`: builds `Lags-Target` rows from a series for autoregressive-style model fitting.
 - `mean_absolute_error/3`, `root_mean_squared_error/3`, `mean_absolute_percentage_error/3`: standard forecast accuracy metrics.
+- `accumulate_forecast_error/4`: adds a numeric actual/prediction error to compact `forecast_error_totals(Count, AbsoluteSum, SquaredSum)`, initialized with `forecast_error_totals(0,0,0)`. Requires validated non-negative totals; callers decide which observations to score and must skip missing targets.
+- `forecast_error_metrics/3`: computes MAE and RMSE from those totals using a positive integer score count. These two helpers retain no history and propagate arithmetic evaluation errors, including overflow when squaring or accumulating large errors.
 - `naive_forecast/3` and `seasonal_naive_forecast/4`: persistence and seasonal-persistence baseline forecasts, usable both as standalone baselines and as building blocks or fallbacks in other forecasters.
 - `constant_forecast/3` and `linear_trend_forecast/4`: constant-value and linear-trend forecast construction, also used by mean and drift baselines.
 - `check_observation/1` and `series_observation_summary/4`: numeric-or-missing observation validation and tail-recursive collection of elapsed length, numeric count, and sum without instantiating missing observations.
 - `replace_diagnostic/4`: replaces a unary diagnostic value while preserving metadata order.
+- `updated_observation_diagnostics/3`: advances training length, update count, observed count, and missing count after a numeric or missing observation, preserving all other metadata and its order.
 
 These are declared `protected`, intended to be reused by concrete
 forecaster libraries (e.g. `baseline_forecasting`, `exponential_smoothing`,
-`time_series_regression`, `similarity_forecasting`) that import this
-category.
+`intermittent_demand_forecasting`, `knn_forecasting`, and
+`time_series_regression`) that import this category.

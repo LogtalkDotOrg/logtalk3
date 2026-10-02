@@ -2624,6 +2624,20 @@ To load an entity, always load the library that includes it using the goal ``log
    * :doc:`integer_partitions <integer_partitions_0>`
    * :doc:`integer_partitions_protocol <integer_partitions_protocol_0>`
 
+``library/intermittent_demand_forecasting/``
+--------------------------------------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      intermittent_demand_forecasting <intermittent_demand_forecasting_0>
+
+.. only:: latex
+
+   * :doc:`intermittent_demand_forecasting <intermittent_demand_forecasting_0>`
+
 ``library/intervals/``
 ----------------------
 

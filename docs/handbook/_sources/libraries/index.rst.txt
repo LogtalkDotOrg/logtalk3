@@ -163,6 +163,7 @@ directory in the ``NOTES.md`` file.
    ids
    ieee_754
    integer_partitions
+   intermittent_demand_forecasting
    intervals
    iqr_anomaly_detector
    isolation_forest_anomaly_detector
