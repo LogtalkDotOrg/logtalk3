@@ -194,7 +194,9 @@ directory in the ``NOTES.md`` file.
    knn_classifier
    knn_distance_anomaly_detector
    knn_forecasting
+   knn_item_recommender
    knn_regression
+   knn_user_recommender
    kprototypes_clusterer
    ksuid
    language_detection
@@ -267,6 +269,7 @@ directory in the ``NOTES.md`` file.
    ranking_protocols
    rank_centrality
    reader
+   recommender_protocols
    recorded_database
    redis
    regression_protocols
@@ -282,6 +285,7 @@ directory in the ``NOTES.md`` file.
    sgd_classifier
    simple_temporal_networks
    simulated_annealing
+   slope_one_recommender
    smtp
    snowflakeid
    sockets

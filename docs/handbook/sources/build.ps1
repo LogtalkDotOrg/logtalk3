@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on October 2, 2026
+##   Last updated on October 3, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -244,7 +244,9 @@ Foreach-Object {
 (Get-Content ../../../library/knn_classifier/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/knn_classifier.rst
 (Get-Content ../../../library/knn_distance_anomaly_detector/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/knn_distance_anomaly_detector.rst
 (Get-Content ../../../library/knn_forecasting/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/knn_forecasting.rst
+(Get-Content ../../../library/knn_item_recommender/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/knn_item_recommender.rst
 (Get-Content ../../../library/knn_regression/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/knn_regression.rst
+(Get-Content ../../../library/knn_user_recommender/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/knn_user_recommender.rst
 (Get-Content ../../../library/kprototypes_clusterer/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/kprototypes_clusterer.rst
 (Get-Content ../../../library/ksuid/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ksuid.rst
 (Get-Content ../../../library/language_detection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/language_detection.rst
@@ -317,6 +319,7 @@ Foreach-Object {
 (Get-Content ../../../library/ranked_pairs/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ranked_pairs.rst
 (Get-Content ../../../library/ranking_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ranking_protocols.rst
 (Get-Content ../../../library/reader/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/reader.rst
+(Get-Content ../../../library/recommender_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/recommender_protocols.rst
 (Get-Content ../../../library/recorded_database/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/recorded_database.rst
 (Get-Content ../../../library/redis/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/redis.rst
 (Get-Content ../../../library/regression_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/regression_protocols.rst
@@ -332,6 +335,7 @@ Foreach-Object {
 (Get-Content ../../../library/sgd_classifier/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/sgd_classifier.rst
 (Get-Content ../../../library/simple_temporal_networks/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/simple_temporal_networks.rst
 (Get-Content ../../../library/simulated_annealing/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/simulated_annealing.rst
+(Get-Content ../../../library/slope_one_recommender/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/slope_one_recommender.rst
 (Get-Content ../../../library/smtp/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/smtp.rst
 (Get-Content ../../../library/snowflakeid/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/snowflakeid.rst
 (Get-Content ../../../library/sockets/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/sockets.rst

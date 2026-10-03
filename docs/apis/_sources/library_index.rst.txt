@@ -1843,6 +1843,14 @@ To load any library (including developer tools, ports, and contributions), use t
 
    knn_forecasting <knn_forecasting_0>
 
+:ref:`knn_item_recommender <library_knn_item_recommender>`
+----------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   knn_item_recommender <knn_item_recommender_0>
+
 :ref:`knn_regression <library_knn_regression>`
 ----------------------------------------------
 
@@ -1850,6 +1858,14 @@ To load any library (including developer tools, ports, and contributions), use t
    :maxdepth: 1
 
    knn_regression <knn_regression_0>
+
+:ref:`knn_user_recommender <library_knn_user_recommender>`
+----------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   knn_user_recommender <knn_user_recommender_0>
 
 :ref:`kprototypes_clusterer <library_kprototypes_clusterer>`
 ------------------------------------------------------------
@@ -2752,6 +2768,23 @@ To load any library (including developer tools, ports, and contributions), use t
 
    reader <reader_0>
 
+:ref:`recommender_protocols <library_recommender_protocols>`
+------------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   cosine_similarity <cosine_similarity_0>
+   jaccard_similarity <jaccard_similarity_0>
+   msd_similarity <msd_similarity_0>
+   pearson_similarity <pearson_similarity_0>
+   rating_dataset_protocol <rating_dataset_protocol_0>
+   recommender_common <recommender_common_0>
+   recommender_protocol <recommender_protocol_0>
+   similarity_metric_common <similarity_metric_common_0>
+   similarity_metric_protocol <similarity_metric_protocol_0>
+   spearman_similarity <spearman_similarity_0>
+
 :ref:`recorded_database <library_recorded_database>`
 ----------------------------------------------------
 
@@ -2908,6 +2941,14 @@ To load any library (including developer tools, ports, and contributions), use t
    simulated_annealing(Problem) <simulated_annealing_1>
    simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing_2>
    simulated_annealing_protocol <simulated_annealing_protocol_0>
+
+:ref:`slope_one_recommender <library_slope_one_recommender>`
+------------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   slope_one_recommender <slope_one_recommender_0>
 
 :ref:`smtp <library_smtp>`
 --------------------------

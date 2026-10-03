@@ -138,6 +138,8 @@ Library groups
     ``exponential_smoothing``, ``intermittent_demand_forecasting``,
     ``knn_forecasting``, ``theta_forecasting``, and
     ``time_series_regression``.
+  - Recommandation: ``recommender_protocols``, ``knn_item_recommender``,
+    ``knn_user_recommender``, and ``slope_one_recommender``.
 
 In addition to the loader-based libraries, this directory also contains
 a small number of standalone reusable entities, namely ``attributes``,

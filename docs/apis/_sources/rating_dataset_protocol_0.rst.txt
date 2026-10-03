@@ -1,0 +1,112 @@
+.. index:: single: rating_dataset_protocol
+.. _rating_dataset_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``rating_dataset_protocol``
+===========================
+
+Protocol for datasets used with collaborative filtering recommendation algorithms.
+
+| **Availability:** 
+|    ``logtalk_load(recommender_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-02
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: rating/3
+.. _rating_dataset_protocol/0::rating/3:
+
+``rating/3``
+^^^^^^^^^^^^
+
+Enumerates by backtracking the known ratings. ``User`` and ``Item`` must be instantiated atomic identifiers and ``Rating`` is the numeric rating given by ``User`` to ``Item``. At most one rating is declared per ``User``-``Item`` pair.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rating(User,Item,Rating)``
+| **Mode and number of proofs:**
+|    ``rating(-atomic,-atomic,-number)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: rating_count/1
+.. _rating_dataset_protocol/0::rating_count/1:
+
+``rating_count/1``
+^^^^^^^^^^^^^^^^^^
+
+Returns the number of known ratings. The declared count must match the number of ratings enumerated by ``rating/3``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rating_count(Count)``
+| **Mode and number of proofs:**
+|    ``rating_count(-positive_integer)`` - ``one``
+
+
+------------
+
+.. index:: rating_scale/2
+.. _rating_dataset_protocol/0::rating_scale/2:
+
+``rating_scale/2``
+^^^^^^^^^^^^^^^^^^
+
+Returns the inclusive lower and upper bounds of the rating scale (e.g. ``1`` and ``5``). Fails when the dataset declares no fixed scale.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rating_scale(Min,Max)``
+| **Mode and number of proofs:**
+|    ``rating_scale(-number,-number)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

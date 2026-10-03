@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on October 2, 2026
+##   Last updated on October 3, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -244,7 +244,9 @@ sed '1,19d' ../../../library/kmodes_clusterer/NOTES.md | pandoc -f gfm -t rst -o
 sed '1,19d' ../../../library/knn_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/knn_classifier.rst
 sed '1,19d' ../../../library/knn_distance_anomaly_detector/NOTES.md | pandoc -f gfm -t rst -o libraries/knn_distance_anomaly_detector.rst
 sed '1,19d' ../../../library/knn_forecasting/NOTES.md | pandoc -f gfm -t rst -o libraries/knn_forecasting.rst
+sed '1,19d' ../../../library/knn_item_recommender/NOTES.md | pandoc -f gfm -t rst -o libraries/knn_item_recommender.rst
 sed '1,19d' ../../../library/knn_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/knn_regression.rst
+sed '1,19d' ../../../library/knn_user_recommender/NOTES.md | pandoc -f gfm -t rst -o libraries/knn_user_recommender.rst
 sed '1,19d' ../../../library/kprototypes_clusterer/NOTES.md | pandoc -f gfm -t rst -o libraries/kprototypes_clusterer.rst
 sed '1,19d' ../../../library/ksuid/NOTES.md | pandoc -f gfm -t rst -o libraries/ksuid.rst
 sed '1,19d' ../../../library/language_detection/NOTES.md | pandoc -f gfm -t rst -o libraries/language_detection.rst
@@ -317,6 +319,7 @@ sed '1,19d' ../../../library/rank_centrality/NOTES.md | pandoc -f gfm -t rst -o 
 sed '1,19d' ../../../library/ranked_pairs/NOTES.md | pandoc -f gfm -t rst -o libraries/ranked_pairs.rst
 sed '1,19d' ../../../library/ranking_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/ranking_protocols.rst
 sed '1,19d' ../../../library/reader/NOTES.md | pandoc -f gfm -t rst -o libraries/reader.rst
+sed '1,19d' ../../../library/recommender_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/recommender_protocols.rst
 sed '1,19d' ../../../library/recorded_database/NOTES.md | pandoc -f gfm -t rst -o libraries/recorded_database.rst
 sed '1,19d' ../../../library/redis/NOTES.md | pandoc -f gfm -t rst -o libraries/redis.rst
 sed '1,19d' ../../../library/regression_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/regression_protocols.rst
@@ -332,6 +335,7 @@ sed '1,19d' ../../../library/sets/NOTES.md | pandoc -f gfm -t rst -o libraries/s
 sed '1,19d' ../../../library/sgd_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/sgd_classifier.rst
 sed '1,19d' ../../../library/simple_temporal_networks/NOTES.md | pandoc -f gfm -t rst -o libraries/simple_temporal_networks.rst
 sed '1,19d' ../../../library/simulated_annealing/NOTES.md | pandoc -f gfm -t rst -o libraries/simulated_annealing.rst
+sed '1,19d' ../../../library/slope_one_recommender/NOTES.md | pandoc -f gfm -t rst -o libraries/slope_one_recommender.rst
 sed '1,19d' ../../../library/smtp/NOTES.md | pandoc -f gfm -t rst -o libraries/smtp.rst
 sed '1,19d' ../../../library/snowflakeid/NOTES.md | pandoc -f gfm -t rst -o libraries/snowflakeid.rst
 sed '1,19d' ../../../library/sockets/NOTES.md | pandoc -f gfm -t rst -o libraries/sockets.rst

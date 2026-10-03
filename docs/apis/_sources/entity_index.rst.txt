@@ -115,6 +115,7 @@ Categories
       ranker_common <ranker_common_0>
       ranking_dataset_common <ranking_dataset_common_0>
       read_file <read_file_0>
+      recommender_common <recommender_common_0>
       recorded_database_core <recorded_database_core_0>
       regressor_common <regressor_common_0>
       rest <rest_0>
@@ -123,6 +124,7 @@ Categories
       score_ranker_model_common <score_ranker_model_common_0>
       search_indexing <search_indexing_0>
       sequential_pattern_mining_common <sequential_pattern_mining_common_0>
+      similarity_metric_common <similarity_metric_common_0>
       single_byte_character_set(MaxCode) <single_byte_character_set_1>
       statistics <statistics_0>
       subject <subject_0>
@@ -244,6 +246,7 @@ Categories
    * :doc:`ranker_common <ranker_common_0>`
    * :doc:`ranking_dataset_common <ranking_dataset_common_0>`
    * :doc:`read_file <read_file_0>`
+   * :doc:`recommender_common <recommender_common_0>`
    * :doc:`recorded_database_core <recorded_database_core_0>`
    * :doc:`regressor_common <regressor_common_0>`
    * :doc:`rest <rest_0>`
@@ -252,6 +255,7 @@ Categories
    * :doc:`score_ranker_model_common <score_ranker_model_common_0>`
    * :doc:`search_indexing <search_indexing_0>`
    * :doc:`sequential_pattern_mining_common <sequential_pattern_mining_common_0>`
+   * :doc:`similarity_metric_common <similarity_metric_common_0>`
    * :doc:`single_byte_character_set(MaxCode) <single_byte_character_set_1>`
    * :doc:`statistics <statistics_0>`
    * :doc:`subject <subject_0>`
@@ -388,6 +392,7 @@ Objects
       conjugate_gradient(Problem) <conjugate_gradient_1>
       copeland_ranker <copeland_ranker_0>
       coroutining <coroutining_0>
+      cosine_similarity <cosine_similarity_0>
       counter <counter_0>
       coupling_metric <coupling_metric_0>
       coverage_report <coverage_report_0>
@@ -649,6 +654,7 @@ Objects
       issue_creator <issue_creator_0>
       it_language_profile <it_language_profile_0>
       ja_language_profile <ja_language_profile_0>
+      jaccard_similarity <jaccard_similarity_0>
       java <java_0>
       java(Reference) <java_1>
       java(Reference,ReturnValue) <java_2>
@@ -692,7 +698,9 @@ Objects
       knn_classifier <knn_classifier_0>
       knn_distance_anomaly_detector <knn_distance_anomaly_detector_0>
       knn_forecasting <knn_forecasting_0>
+      knn_item_recommender <knn_item_recommender_0>
       knn_regression <knn_regression_0>
+      knn_user_recommender <knn_user_recommender_0>
       ko_language_profile <ko_language_profile_0>
       kprototypes_clusterer <kprototypes_clusterer_0>
       ksuid <ksuid_0>
@@ -766,6 +774,7 @@ Objects
       mqtt <mqtt_0>
       mr_language_profile <mr_language_profile_0>
       ms_language_profile <ms_language_profile_0>
+      msd_similarity <msd_similarity_0>
       multi_classification_ripple_down_rules <multi_classification_ripple_down_rules_0>
       multisets <multisets_0>
       multivariate_distributions(Random) <multivariate_distributions_1>
@@ -837,6 +846,7 @@ Objects
       paseto_v4 <paseto_v4_0>
       pca_projection <pca_projection_0>
       pddl <pddl_0>
+      pearson_similarity <pearson_similarity_0>
       penalty_sub_problem(Problem,OuterIteration,StartPoint,Rho,Sign) <penalty_sub_problem_5>
       permutations <permutations_0>
       phase1_sub_problem(Problem,StartPoint) <phase1_sub_problem_2>
@@ -929,6 +939,7 @@ Objects
       size_metric <size_metric_0>
       sk_language_profile <sk_language_profile_0>
       sl_language_profile <sl_language_profile_0>
+      slope_one_recommender <slope_one_recommender_0>
       smtp <smtp_0>
       smtp_process_transport <smtp_process_transport_0>
       snowflakeid <snowflakeid_0>
@@ -942,6 +953,7 @@ Objects
       so_language_profile <so_language_profile_0>
       socket <socket_0>
       spade_pattern_miner <spade_pattern_miner_0>
+      spearman_similarity <spearman_similarity_0>
       spectral_clusterer <spectral_clusterer_0>
       splaytree <splaytree_0>
       sqids <sqids_0>
@@ -1243,6 +1255,7 @@ Objects
    * :doc:`conjugate_gradient(Problem) <conjugate_gradient_1>`
    * :doc:`copeland_ranker <copeland_ranker_0>`
    * :doc:`coroutining <coroutining_0>`
+   * :doc:`cosine_similarity <cosine_similarity_0>`
    * :doc:`counter <counter_0>`
    * :doc:`coupling_metric <coupling_metric_0>`
    * :doc:`coverage_report <coverage_report_0>`
@@ -1504,6 +1517,7 @@ Objects
    * :doc:`issue_creator <issue_creator_0>`
    * :doc:`it_language_profile <it_language_profile_0>`
    * :doc:`ja_language_profile <ja_language_profile_0>`
+   * :doc:`jaccard_similarity <jaccard_similarity_0>`
    * :doc:`java <java_0>`
    * :doc:`java(Reference) <java_1>`
    * :doc:`java(Reference,ReturnValue) <java_2>`
@@ -1547,7 +1561,9 @@ Objects
    * :doc:`knn_classifier <knn_classifier_0>`
    * :doc:`knn_distance_anomaly_detector <knn_distance_anomaly_detector_0>`
    * :doc:`knn_forecasting <knn_forecasting_0>`
+   * :doc:`knn_item_recommender <knn_item_recommender_0>`
    * :doc:`knn_regression <knn_regression_0>`
+   * :doc:`knn_user_recommender <knn_user_recommender_0>`
    * :doc:`ko_language_profile <ko_language_profile_0>`
    * :doc:`kprototypes_clusterer <kprototypes_clusterer_0>`
    * :doc:`ksuid <ksuid_0>`
@@ -1621,6 +1637,7 @@ Objects
    * :doc:`mqtt <mqtt_0>`
    * :doc:`mr_language_profile <mr_language_profile_0>`
    * :doc:`ms_language_profile <ms_language_profile_0>`
+   * :doc:`msd_similarity <msd_similarity_0>`
    * :doc:`multi_classification_ripple_down_rules <multi_classification_ripple_down_rules_0>`
    * :doc:`multisets <multisets_0>`
    * :doc:`multivariate_distributions(Random) <multivariate_distributions_1>`
@@ -1692,6 +1709,7 @@ Objects
    * :doc:`paseto_v4 <paseto_v4_0>`
    * :doc:`pca_projection <pca_projection_0>`
    * :doc:`pddl <pddl_0>`
+   * :doc:`pearson_similarity <pearson_similarity_0>`
    * :doc:`penalty_sub_problem(Problem,OuterIteration,StartPoint,Rho,Sign) <penalty_sub_problem_5>`
    * :doc:`permutations <permutations_0>`
    * :doc:`phase1_sub_problem(Problem,StartPoint) <phase1_sub_problem_2>`
@@ -1784,6 +1802,7 @@ Objects
    * :doc:`size_metric <size_metric_0>`
    * :doc:`sk_language_profile <sk_language_profile_0>`
    * :doc:`sl_language_profile <sl_language_profile_0>`
+   * :doc:`slope_one_recommender <slope_one_recommender_0>`
    * :doc:`smtp <smtp_0>`
    * :doc:`smtp_process_transport <smtp_process_transport_0>`
    * :doc:`snowflakeid <snowflakeid_0>`
@@ -1797,6 +1816,7 @@ Objects
    * :doc:`so_language_profile <so_language_profile_0>`
    * :doc:`socket <socket_0>`
    * :doc:`spade_pattern_miner <spade_pattern_miner_0>`
+   * :doc:`spearman_similarity <spearman_similarity_0>`
    * :doc:`spectral_clusterer <spectral_clusterer_0>`
    * :doc:`splaytree <splaytree_0>`
    * :doc:`sqids <sqids_0>`
@@ -2155,6 +2175,8 @@ Protocols
       random_protocol <random_protocol_0>
       ranker_protocol <ranker_protocol_0>
       ranking_dataset_protocol <ranking_dataset_protocol_0>
+      rating_dataset_protocol <rating_dataset_protocol_0>
+      recommender_protocol <recommender_protocol_0>
       registry_protocol <registry_protocol_0>
       regression_dataset_protocol <regression_dataset_protocol_0>
       regressor_protocol <regressor_protocol_0>
@@ -2166,6 +2188,7 @@ Protocols
       sentence_splitter_protocol <sentence_splitter_protocol_0>
       sequence_dataset_protocol <sequence_dataset_protocol_0>
       setp <setp_0>
+      similarity_metric_protocol <similarity_metric_protocol_0>
       simulated_annealing_protocol <simulated_annealing_protocol_0>
       smtp_protocol <smtp_protocol_0>
       snowflakeid_protocol <snowflakeid_protocol_0>
@@ -2371,6 +2394,8 @@ Protocols
    * :doc:`random_protocol <random_protocol_0>`
    * :doc:`ranker_protocol <ranker_protocol_0>`
    * :doc:`ranking_dataset_protocol <ranking_dataset_protocol_0>`
+   * :doc:`rating_dataset_protocol <rating_dataset_protocol_0>`
+   * :doc:`recommender_protocol <recommender_protocol_0>`
    * :doc:`registry_protocol <registry_protocol_0>`
    * :doc:`regression_dataset_protocol <regression_dataset_protocol_0>`
    * :doc:`regressor_protocol <regressor_protocol_0>`
@@ -2382,6 +2407,7 @@ Protocols
    * :doc:`sentence_splitter_protocol <sentence_splitter_protocol_0>`
    * :doc:`sequence_dataset_protocol <sequence_dataset_protocol_0>`
    * :doc:`setp <setp_0>`
+   * :doc:`similarity_metric_protocol <similarity_metric_protocol_0>`
    * :doc:`simulated_annealing_protocol <simulated_annealing_protocol_0>`
    * :doc:`smtp_protocol <smtp_protocol_0>`
    * :doc:`snowflakeid_protocol <snowflakeid_protocol_0>`

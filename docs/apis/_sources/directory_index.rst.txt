@@ -3162,6 +3162,20 @@ To load an entity, always load the library that includes it using the goal ``log
 
    * :doc:`knn_forecasting <knn_forecasting_0>`
 
+``library/knn_item_recommender/``
+---------------------------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      knn_item_recommender <knn_item_recommender_0>
+
+.. only:: latex
+
+   * :doc:`knn_item_recommender <knn_item_recommender_0>`
+
 ``library/knn_regression/``
 ---------------------------
 
@@ -3175,6 +3189,20 @@ To load an entity, always load the library that includes it using the goal ``log
 .. only:: latex
 
    * :doc:`knn_regression <knn_regression_0>`
+
+``library/knn_user_recommender/``
+---------------------------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      knn_user_recommender <knn_user_recommender_0>
+
+.. only:: latex
+
+   * :doc:`knn_user_recommender <knn_user_recommender_0>`
 
 ``library/kprototypes_clusterer/``
 ----------------------------------
@@ -4628,6 +4656,38 @@ To load an entity, always load the library that includes it using the goal ``log
 
    * :doc:`reader <reader_0>`
 
+``library/recommender_protocols/``
+----------------------------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      cosine_similarity <cosine_similarity_0>
+      jaccard_similarity <jaccard_similarity_0>
+      msd_similarity <msd_similarity_0>
+      pearson_similarity <pearson_similarity_0>
+      rating_dataset_protocol <rating_dataset_protocol_0>
+      recommender_common <recommender_common_0>
+      recommender_protocol <recommender_protocol_0>
+      similarity_metric_common <similarity_metric_common_0>
+      similarity_metric_protocol <similarity_metric_protocol_0>
+      spearman_similarity <spearman_similarity_0>
+
+.. only:: latex
+
+   * :doc:`cosine_similarity <cosine_similarity_0>`
+   * :doc:`jaccard_similarity <jaccard_similarity_0>`
+   * :doc:`msd_similarity <msd_similarity_0>`
+   * :doc:`pearson_similarity <pearson_similarity_0>`
+   * :doc:`rating_dataset_protocol <rating_dataset_protocol_0>`
+   * :doc:`recommender_common <recommender_common_0>`
+   * :doc:`recommender_protocol <recommender_protocol_0>`
+   * :doc:`similarity_metric_common <similarity_metric_common_0>`
+   * :doc:`similarity_metric_protocol <similarity_metric_protocol_0>`
+   * :doc:`spearman_similarity <spearman_similarity_0>`
+
 ``library/recorded_database/``
 ------------------------------
 
@@ -4879,6 +4939,20 @@ To load an entity, always load the library that includes it using the goal ``log
    * :doc:`simulated_annealing(Problem) <simulated_annealing_1>`
    * :doc:`simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing_2>`
    * :doc:`simulated_annealing_protocol <simulated_annealing_protocol_0>`
+
+``library/slope_one_recommender/``
+----------------------------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      slope_one_recommender <slope_one_recommender_0>
+
+.. only:: latex
+
+   * :doc:`slope_one_recommender <slope_one_recommender_0>`
 
 ``library/smtp/``
 -----------------

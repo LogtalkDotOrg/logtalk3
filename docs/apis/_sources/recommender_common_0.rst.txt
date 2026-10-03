@@ -1,0 +1,712 @@
+.. index:: single: recommender_common
+.. _recommender_common/0:
+
+.. rst-class:: right
+
+**category**
+
+``recommender_common``
+======================
+
+Shared predicates for recommender diagnostics, rating dataset validation, rating-matrix utilities, similarity metrics, and top-k retrieval.
+
+| **Availability:** 
+|    ``logtalk_load(recommender_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-02
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Implements:**
+|    ``public`` :ref:`recommender_protocol <recommender_protocol/0>`
+| **Extends:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`cosine_similarity <cosine_similarity/0>`
+|    :ref:`format <format/0>`
+|    :ref:`jaccard_similarity <jaccard_similarity/0>`
+|    :ref:`list <list/0>`
+|    :ref:`msd_similarity <msd_similarity/0>`
+|    :ref:`numberlist <numberlist/0>`
+|    :ref:`pearson_similarity <pearson_similarity/0>`
+|    :ref:`spearman_similarity <spearman_similarity/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`recommender_protocol/0::check_recommender/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`recommender_protocol/0::diagnostic/2`  :ref:`recommender_protocol/0::diagnostics/2`  :ref:`recommender_protocol/0::export_to_clauses/4`  :ref:`recommender_protocol/0::export_to_file/4`  :ref:`recommender_protocol/0::learn/2`  :ref:`recommender_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`recommender_protocol/0::predict_rating/4`  :ref:`recommender_protocol/0::print_recommender/1`  :ref:`recommender_protocol/0::recommend/4`  :ref:`recommender_protocol/0::recommender_options/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`recommender_protocol/0::valid_recommender/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: recommender_valid_data/1
+.. _recommender_common/0::recommender_valid_data/1:
+
+``recommender_valid_data/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Required hook that validates implementation-specific model data and its consistency with diagnostics without instantiating the recommender.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``recommender_valid_data(Recommender)``
+| **Mode and number of proofs:**
+|    ``recommender_valid_data(@compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: recommender_diagnostics_data/2
+.. _recommender_common/0::recommender_diagnostics_data/2:
+
+``recommender_diagnostics_data/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing recommender implementations must define in order to expose diagnostics metadata. A default implementation is provided that assumes the diagnostics list is the last argument of the recommender term; concrete implementations following that convention do not need to override it.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``recommender_diagnostics_data(Recommender,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``recommender_diagnostics_data(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: recommender_export_template/4
+.. _recommender_common/0::recommender_export_template/4:
+
+``recommender_export_template/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing recommender implementations must define in order to expose the exported recommender template for a given functor.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``recommender_export_template(Dataset,Recommender,Functor,Template)``
+| **Mode and number of proofs:**
+|    ``recommender_export_template(+object_identifier,+compound,+atom,-callable)`` - ``one``
+
+
+------------
+
+.. index:: recommender_term_template/2
+.. _recommender_common/0::recommender_term_template/2:
+
+``recommender_term_template/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing recommender implementations must define in order to expose the learned recommender term template used by pretty-printing helpers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``recommender_term_template(Recommender,Template)``
+| **Mode and number of proofs:**
+|    ``recommender_term_template(+compound,-callable)`` - ``one``
+
+
+------------
+
+.. index:: print_recommender_template/1
+.. _recommender_common/0::print_recommender_template/1:
+
+``print_recommender_template/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Pretty-printing helper predicate used by importing recommender implementations to show the learned recommender term template.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_recommender_template(Recommender)``
+| **Mode and number of proofs:**
+|    ``print_recommender_template(+compound)`` - ``one``
+
+
+------------
+
+.. index:: dataset_ratings/2
+.. _recommender_common/0::dataset_ratings/2:
+
+``dataset_ratings/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Collects ratings with atomic user and item identifiers as ``rating(User, Item, Rating)`` terms. Checks for duplicate user-item pairs and a declared rating count matching the observed count.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dataset_ratings(Dataset,Ratings)``
+| **Mode and number of proofs:**
+|    ``dataset_ratings(+object_identifier,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    The dataset contains no ratings:
+|        ``domain_error(non_empty_ratings,Dataset)``
+|    A user or item identifier is a variable:
+|        ``instantiation_error``
+|    A user or item identifier is not atomic:
+|        ``type_error(atomic,Identifier)``
+|    The same ``User``-``Item`` pair is rated more than once:
+|        ``domain_error(duplicate_rating,User-Item)``
+|    The declared rating count is a variable:
+|        ``instantiation_error``
+|    The declared rating count is neither a variable nor an integer:
+|        ``type_error(integer,DeclaredCount)``
+|    The declared rating count is an integer but is not positive:
+|        ``domain_error(positive_integer,DeclaredCount)``
+|    The declared and observed rating counts differ:
+|        ``consistency_error(rating_count,DeclaredCount,ObservedCount)``
+
+
+------------
+
+.. index:: check_no_duplicate_ratings/1
+.. _recommender_common/0::check_no_duplicate_ratings/1:
+
+``check_no_duplicate_ratings/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that ratings with atomic user and item identifiers contain no duplicate user-item pair.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_no_duplicate_ratings(Ratings)``
+| **Mode and number of proofs:**
+|    ``check_no_duplicate_ratings(+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    The same user-item pair is rated more than once:
+|        ``domain_error(duplicate_rating,User-Item)``
+
+
+------------
+
+.. index:: check_ratings/2
+.. _recommender_common/0::check_ratings/2:
+
+``check_ratings/2``
+^^^^^^^^^^^^^^^^^^^
+
+Checks that ratings are non-empty, have atomic user and item identifiers and numeric values, and fall within any declared ``rating_scale/2``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_ratings(Dataset,Ratings)``
+| **Mode and number of proofs:**
+|    ``check_ratings(+object_identifier,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Ratings`` is empty:
+|        ``domain_error(non_empty_ratings,Dataset)``
+|    A user or item identifier is a variable:
+|        ``instantiation_error``
+|    A user or item identifier is not atomic:
+|        ``type_error(atomic,Identifier)``
+|    A rating value is not a number:
+|        ``type_error(number,Rating)``
+|    A scale bound is not numeric:
+|        ``type_error(number,Bound)``
+|    Scale bounds are reversed:
+|        ``domain_error(rating_scale,Min-Max)``
+|    A rating value is a number but falls outside the declared rating scale:
+|        ``domain_error(rating_scale(Min,Max),Rating)``
+
+
+------------
+
+.. index:: check_query_identifiers/2
+.. _recommender_common/0::check_query_identifiers/2:
+
+``check_query_identifiers/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that prediction identifiers are instantiated atomic terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_query_identifiers(User,Item)``
+| **Mode and number of proofs:**
+|    ``check_query_identifiers(@term,@term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    An identifier is a variable:
+|        ``instantiation_error``
+|    An identifier is not atomic:
+|        ``type_error(atomic,Identifier)``
+
+
+------------
+
+.. index:: dataset_rating_scale/2
+.. _recommender_common/0::dataset_rating_scale/2:
+
+``dataset_rating_scale/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns ``none`` or a validated inclusive ``scale(Min, Max)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dataset_rating_scale(Dataset,Scale)``
+| **Mode and number of proofs:**
+|    ``dataset_rating_scale(+object_identifier,-term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A scale bound is a variable:
+|        ``instantiation_error``
+|    A scale bound is not numeric:
+|        ``type_error(number,Bound)``
+|    Scale bounds are reversed:
+|        ``domain_error(rating_scale,Min-Max)``
+
+
+------------
+
+.. index:: fallback_rating/5
+.. _recommender_common/0::fallback_rating/5:
+
+``fallback_rating/5``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns the user mean, otherwise the item mean, otherwise the supplied global mean.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fallback_rating(Ratings,GlobalMean,User,Item,Rating)``
+| **Mode and number of proofs:**
+|    ``fallback_rating(+list(compound),+number,+atomic,+atomic,-number)`` - ``one``
+
+
+------------
+
+.. index:: clip_rating/3
+.. _recommender_common/0::clip_rating/3:
+
+``clip_rating/3``
+^^^^^^^^^^^^^^^^^
+
+Clips a rating to a validated ``scale(Min, Max)``; ``none`` leaves it unchanged.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``clip_rating(Scale,Rating,Clipped)``
+| **Mode and number of proofs:**
+|    ``clip_rating(+term,+number,-number)`` - ``one``
+
+
+------------
+
+.. index:: recommend_from_ratings/5
+.. _recommender_common/0::recommend_from_ratings/5:
+
+``recommend_from_ratings/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Scores unrated catalog items using self ``predict_rating/4`` and returns up to ``N`` descending-score pairs; ties use descending standard item order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``recommend_from_ratings(Recommender,Ratings,User,N,Recommendations)``
+| **Mode and number of proofs:**
+|    ``recommend_from_ratings(+compound,+list(compound),+atomic,+positive_integer,-list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A required argument is a variable:
+|        ``instantiation_error``
+|    The model is invalid:
+|        ``domain_error(recommender,Recommender)``
+|    User is not atomic:
+|        ``type_error(atomic,User)``
+|    N is not an integer:
+|        ``type_error(integer,N)``
+|    N is not positive:
+|        ``domain_error(positive_integer,N)``
+
+
+------------
+
+.. index:: users/2
+.. _recommender_common/0::users/2:
+
+``users/2``
+^^^^^^^^^^^
+
+Returns the sorted list of distinct users appearing in a list of ``rating/3`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``users(Ratings,Users)``
+| **Mode and number of proofs:**
+|    ``users(+list(compound),-list(atomic))`` - ``one``
+
+
+------------
+
+.. index:: items/2
+.. _recommender_common/0::items/2:
+
+``items/2``
+^^^^^^^^^^^
+
+Returns the sorted list of distinct items appearing in a list of ``rating/3`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``items(Ratings,Items)``
+| **Mode and number of proofs:**
+|    ``items(+list(compound),-list(atomic))`` - ``one``
+
+
+------------
+
+.. index:: user_vector/3
+.. _recommender_common/0::user_vector/3:
+
+``user_vector/3``
+^^^^^^^^^^^^^^^^^
+
+Returns the sparse rating vector of a user, as a list of ``Item-Rating`` pairs, from a list of ``rating/3`` terms. The vector is empty when the user has no ratings.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``user_vector(Ratings,User,Vector)``
+| **Mode and number of proofs:**
+|    ``user_vector(+list(compound),+atomic,-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: item_vector/3
+.. _recommender_common/0::item_vector/3:
+
+``item_vector/3``
+^^^^^^^^^^^^^^^^^
+
+Returns the sparse rating vector of an item, as a list of ``User-Rating`` pairs, from a list of ``rating/3`` terms. The vector is empty when the item has no ratings.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``item_vector(Ratings,Item,Vector)``
+| **Mode and number of proofs:**
+|    ``item_vector(+list(compound),+atomic,-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: global_mean_rating/2
+.. _recommender_common/0::global_mean_rating/2:
+
+``global_mean_rating/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the mean of every rating in a list of ``rating/3`` terms (the global mean baseline).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``global_mean_rating(Ratings,Mean)``
+| **Mode and number of proofs:**
+|    ``global_mean_rating(+list(compound),-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Ratings`` is empty:
+|        ``evaluation_error(zero_divisor)``
+
+
+------------
+
+.. index:: user_mean_rating/3
+.. _recommender_common/0::user_mean_rating/3:
+
+``user_mean_rating/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the mean of the ratings given by a user (the user mean baseline).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``user_mean_rating(Ratings,User,Mean)``
+| **Mode and number of proofs:**
+|    ``user_mean_rating(+list(compound),+atomic,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``User`` has no ratings:
+|        ``evaluation_error(zero_divisor)``
+
+
+------------
+
+.. index:: item_mean_rating/3
+.. _recommender_common/0::item_mean_rating/3:
+
+``item_mean_rating/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the mean of the ratings received by an item (the item mean baseline).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``item_mean_rating(Ratings,Item,Mean)``
+| **Mode and number of proofs:**
+|    ``item_mean_rating(+list(compound),+atomic,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Item`` has no ratings:
+|        ``evaluation_error(zero_divisor)``
+
+
+------------
+
+.. index:: cosine_similarity/3
+.. _recommender_common/0::cosine_similarity/3:
+
+``cosine_similarity/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Convenience predicate equivalent to ``cosine_similarity::similarity/3``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cosine_similarity(Vector1,Vector2,Similarity)``
+| **Mode and number of proofs:**
+|    ``cosine_similarity(+list(pair),+list(pair),-number)`` - ``one``
+
+
+------------
+
+.. index:: pearson_similarity/3
+.. _recommender_common/0::pearson_similarity/3:
+
+``pearson_similarity/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Convenience predicate equivalent to ``pearson_similarity::similarity/3``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pearson_similarity(Vector1,Vector2,Similarity)``
+| **Mode and number of proofs:**
+|    ``pearson_similarity(+list(pair),+list(pair),-number)`` - ``one``
+
+
+------------
+
+.. index:: jaccard_similarity/3
+.. _recommender_common/0::jaccard_similarity/3:
+
+``jaccard_similarity/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Convenience predicate equivalent to ``jaccard_similarity::similarity/3``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``jaccard_similarity(Vector1,Vector2,Similarity)``
+| **Mode and number of proofs:**
+|    ``jaccard_similarity(+list(pair),+list(pair),-number)`` - ``one``
+
+
+------------
+
+.. index:: msd_similarity/3
+.. _recommender_common/0::msd_similarity/3:
+
+``msd_similarity/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Convenience predicate equivalent to ``msd_similarity::similarity/3``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``msd_similarity(Vector1,Vector2,Similarity)``
+| **Mode and number of proofs:**
+|    ``msd_similarity(+list(pair),+list(pair),-number)`` - ``one``
+
+
+------------
+
+.. index:: spearman_similarity/3
+.. _recommender_common/0::spearman_similarity/3:
+
+``spearman_similarity/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Convenience predicate equivalent to ``spearman_similarity::similarity/3``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``spearman_similarity(Vector1,Vector2,Similarity)``
+| **Mode and number of proofs:**
+|    ``spearman_similarity(+list(pair),+list(pair),-number)`` - ``one``
+
+
+------------
+
+.. index:: top_k/3
+.. _recommender_common/0::top_k/3:
+
+``top_k/3``
+^^^^^^^^^^^
+
+Returns the ``K`` highest-scoring ``Key-Score`` pairs, sorted by decreasing score. Returns every pair, still sorted, when fewer than ``K`` are given; does not fail or throw an exception in that case.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``top_k(Pairs,K,TopK)``
+| **Mode and number of proofs:**
+|    ``top_k(+list(pair),+positive_integer,-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: check_top_n/1
+.. _recommender_common/0::check_top_n/1:
+
+``check_top_n/1``
+^^^^^^^^^^^^^^^^^
+
+Checks that a requested recommendation count is a positive integer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_top_n(N)``
+| **Mode and number of proofs:**
+|    ``check_top_n(+positive_integer)`` - ``one_or_error``
+
+
+------------
+
+.. index:: base_recommender_diagnostics/5
+.. _recommender_common/0::base_recommender_diagnostics/5:
+
+``base_recommender_diagnostics/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Builds the common part of a recommender diagnostics metadata list, combined with implementation-specific extra diagnostics terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``base_recommender_diagnostics(Model,RatingCount,Options,ExtraDiagnostics,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``base_recommender_diagnostics(+atom,+positive_integer,+list(compound),+list(compound),-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: valid_recommender_metadata/2
+.. _recommender_common/0::valid_recommender_metadata/2:
+
+``valid_recommender_metadata/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when diagnostics metadata contains the expected model term, without instantiating the metadata.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_recommender_metadata(Model,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``valid_recommender_metadata(+atom,+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_recommender_metadata/3
+.. _recommender_common/0::valid_recommender_metadata/3:
+
+``valid_recommender_metadata/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when diagnostics metadata contains the expected model term and effective options, without instantiating the metadata.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_recommender_metadata(Model,Options,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``valid_recommender_metadata(+atom,+list(compound),+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

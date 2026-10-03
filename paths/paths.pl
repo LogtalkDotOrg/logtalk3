@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on October 2, 2026
+%  Last updated on October 3, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -273,7 +273,9 @@ logtalk_library_path(kmodes_clusterer, library('kmodes_clusterer/')).
 logtalk_library_path(knn_classifier, library('knn_classifier/')).
 logtalk_library_path(knn_distance_anomaly_detector, library('knn_distance_anomaly_detector/')).
 logtalk_library_path(knn_forecasting, library('knn_forecasting/')).
+logtalk_library_path(knn_item_recommender, library('knn_item_recommender/')).
 logtalk_library_path(knn_regression, library('knn_regression/')).
+logtalk_library_path(knn_user_recommender, library('knn_user_recommender/')).
 logtalk_library_path(kprototypes_clusterer, library('kprototypes_clusterer/')).
 logtalk_library_path(ksuid, library('ksuid/')).
 logtalk_library_path(language_detection, library('language_detection/')).
@@ -346,6 +348,7 @@ logtalk_library_path(rank_centrality, library('rank_centrality/')).
 logtalk_library_path(ranked_pairs, library('ranked_pairs/')).
 logtalk_library_path(ranking_protocols, library('ranking_protocols/')).
 logtalk_library_path(reader, library('reader/')).
+logtalk_library_path(recommender_protocols, library('recommender_protocols/')).
 logtalk_library_path(recorded_database, library('recorded_database/')).
 logtalk_library_path(redis, library('redis/')).
 logtalk_library_path(regression_protocols, library('regression_protocols/')).
@@ -361,6 +364,7 @@ logtalk_library_path(sets, library('sets/')).
 logtalk_library_path(sgd_classifier, library('sgd_classifier/')).
 logtalk_library_path(simple_temporal_networks, library('simple_temporal_networks/')).
 logtalk_library_path(simulated_annealing, library('simulated_annealing/')).
+logtalk_library_path(slope_one_recommender, library('slope_one_recommender/')).
 logtalk_library_path(smtp, library('smtp/')).
 logtalk_library_path(snowflakeid, library('snowflakeid/')).
 logtalk_library_path(sockets, library('sockets/')).

@@ -1,0 +1,60 @@
+.. index:: single: jaccard_similarity
+.. _jaccard_similarity/0:
+
+.. rst-class:: right
+
+**object**
+
+``jaccard_similarity``
+======================
+
+Jaccard similarity of the observed key sets of two sparse vectors: intersection size divided by union size. Values, including zeros, are ignored. Each key must occur at most once per vector. Results range from 0.0 to 1.0; an empty union gives 0.0.
+
+| **Availability:** 
+|    ``logtalk_load(recommender_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-02
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`similarity_metric_protocol <similarity_metric_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`similarity_metric_common <similarity_metric_common/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`similarity_metric_protocol/0::similarity/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

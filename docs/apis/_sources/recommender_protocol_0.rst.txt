@@ -1,0 +1,349 @@
+.. index:: single: recommender_protocol
+.. _recommender_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``recommender_protocol``
+========================
+
+Protocol for collaborative filtering recommendation models.
+
+| **Availability:** 
+|    ``logtalk_load(recommender_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-03
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: learn/3
+.. _recommender_protocol/0::learn/3:
+
+``learn/3``
+^^^^^^^^^^^
+
+Learns a recommender model from the given rating dataset object using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Recommender,Options)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    The dataset contains no ratings:
+|        ``domain_error(non_empty_ratings,Dataset)``
+|    A user or item identifier is a variable:
+|        ``instantiation_error``
+|    A user or item identifier is not atomic:
+|        ``type_error(atomic,Identifier)``
+|    The same ``User``-``Item`` pair is rated more than once:
+|        ``domain_error(duplicate_rating,User-Item)``
+|    The declared rating count is a variable:
+|        ``instantiation_error``
+|    The declared rating count is neither a variable nor an integer:
+|        ``type_error(integer,DeclaredCount)``
+|    The declared rating count is an integer but is not positive:
+|        ``domain_error(positive_integer,DeclaredCount)``
+|    The declared and observed rating counts differ:
+|        ``consistency_error(rating_count,DeclaredCount,ObservedCount)``
+|    A rating value is not a number:
+|        ``type_error(number,Rating)``
+|    A scale bound is a variable:
+|        ``instantiation_error``
+|    A scale bound is not numeric:
+|        ``type_error(number,Bound)``
+|    Scale bounds are reversed:
+|        ``domain_error(rating_scale,Min-Max)``
+|    A rating value falls outside the declared rating scale:
+|        ``domain_error(rating_scale(Min,Max),Rating)``
+
+
+------------
+
+.. index:: learn/2
+.. _recommender_protocol/0::learn/2:
+
+``learn/2``
+^^^^^^^^^^^
+
+Learns a recommender model from the given rating dataset object using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Recommender)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound)`` - ``one``
+
+
+------------
+
+.. index:: predict_rating/4
+.. _recommender_protocol/0::predict_rating/4:
+
+``predict_rating/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Predicts the rating ``User`` would give to ``Item`` using the learned recommender model. Whether, and how, a prediction is produced for a ``User`` or ``Item`` unknown to the training dataset (e.g. by falling back to a baseline) depends on the implementation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``predict_rating(Recommender,User,Item,Rating)``
+| **Mode and number of proofs:**
+|    ``predict_rating(+compound,+atomic,+atomic,-number)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Recommender`` is a variable:
+|        ``instantiation_error``
+|    ``Recommender`` is not a valid recommender:
+|        ``domain_error(recommender,Recommender)``
+
+
+------------
+
+.. index:: recommend/4
+.. _recommender_protocol/0::recommend/4:
+
+``recommend/4``
+^^^^^^^^^^^^^^^
+
+Recommends up to ``N`` items to ``User`` using the learned recommender model, as a list of ``Item-Score`` pairs sorted by decreasing score. Whether items already rated by ``User`` are excluded, and how ties and an unknown ``User`` are handled, depends on the implementation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``recommend(Recommender,User,N,Recommendations)``
+| **Mode and number of proofs:**
+|    ``recommend(+compound,+atomic,+positive_integer,-list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Recommender`` is a variable:
+|        ``instantiation_error``
+|    ``Recommender`` is not a valid recommender:
+|        ``domain_error(recommender,Recommender)``
+|    ``N`` is a variable:
+|        ``instantiation_error``
+|    ``N`` is neither a variable nor an integer:
+|        ``type_error(integer,N)``
+|    ``N`` is an integer but is not positive:
+|        ``domain_error(positive_integer,N)``
+
+
+------------
+
+.. index:: check_recommender/1
+.. _recommender_protocol/0::check_recommender/1:
+
+``check_recommender/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks model data and diagnostics for the receiving implementation without instantiating the recommender. Throws an exception when the term is not a valid recommender representation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_recommender(Recommender)``
+| **Mode and number of proofs:**
+|    ``check_recommender(@compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Recommender`` is a variable:
+|        ``instantiation_error``
+|    ``Recommender`` is neither a variable nor a valid recommender:
+|        ``domain_error(recommender,Recommender)``
+
+
+------------
+
+.. index:: valid_recommender/1
+.. _recommender_protocol/0::valid_recommender/1:
+
+``valid_recommender/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+True when a learned recommender term is structurally valid for the receiving implementation. Succeeds iff ``check_recommender/1`` succeeds without throwing an exception.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_recommender(Recommender)``
+| **Mode and number of proofs:**
+|    ``valid_recommender(@compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: diagnostics/2
+.. _recommender_protocol/0::diagnostics/2:
+
+``diagnostics/2``
+^^^^^^^^^^^^^^^^^
+
+Returns diagnostics metadata for a learned recommender.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostics(Recommender,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``diagnostics(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: diagnostic/2
+.. _recommender_protocol/0::diagnostic/2:
+
+``diagnostic/2``
+^^^^^^^^^^^^^^^^
+
+Enumerates individual diagnostics metadata terms for a learned recommender.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostic(Recommender,Diagnostic)``
+| **Mode and number of proofs:**
+|    ``diagnostic(+compound,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: recommender_options/2
+.. _recommender_protocol/0::recommender_options/2:
+
+``recommender_options/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the effective training options recorded in a learned recommender diagnostics metadata.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``recommender_options(Recommender,Options)``
+| **Mode and number of proofs:**
+|    ``recommender_options(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: export_to_clauses/4
+.. _recommender_protocol/0::export_to_clauses/4:
+
+``export_to_clauses/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts a recommender into a list of predicate clauses. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized recommender term, a noun such as ``recommender`` or ``model`` is usually clearer than a verb such as ``recommend``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``export_to_clauses(Dataset,Recommender,Functor,Clauses)``
+| **Mode and number of proofs:**
+|    ``export_to_clauses(+object_identifier,+compound,+atom,-list(clause))`` - ``one``
+
+
+------------
+
+.. index:: export_to_file/4
+.. _recommender_protocol/0::export_to_file/4:
+
+``export_to_file/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Exports a recommender to a file. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized recommender term, a noun such as ``recommender`` or ``model`` is usually clearer than a verb such as ``recommend``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``export_to_file(Dataset,Recommender,Functor,File)``
+| **Mode and number of proofs:**
+|    ``export_to_file(+object_identifier,+compound,+atom,+atom)`` - ``one``
+
+
+------------
+
+.. index:: print_recommender/1
+.. _recommender_protocol/0::print_recommender/1:
+
+``print_recommender/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Prints a recommender to the current output stream in a human-readable format.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_recommender(Recommender)``
+| **Mode and number of proofs:**
+|    ``print_recommender(+compound)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`rating_dataset_protocol <rating_dataset_protocol/0>`, :ref:`similarity_metric_protocol <similarity_metric_protocol/0>`
+

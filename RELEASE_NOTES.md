@@ -71,6 +71,20 @@ series forecasting using the k-Nearest Neighbors ("analog") method.
 * ADDED: New `time_series_regression` library implementing univariate time
 series forecasting using autoregressive (AR) models fitted by least squares.
 
+* ADDED: New `recommender_protocols` library providing rating
+dataset and recommender protocols, shared validation and rating-matrix
+utilities, and cosine, Pearson, Jaccard, inverse mean squared difference,
+and Spearman similarity strategies.
+
+* ADDED: New `knn_item_recommender` library implementing a item-based k-nearest
+neighbors recommender.
+
+* ADDED: New `knn_user_recommender` library implementing a user-based k-nearest
+neighbors recommender.
+
+* ADDED: New `slope_one_recommender` library implementing a weighted Slope One
+recommender.
+
 * IMPROVED: Performance of the `crypto` library.
 
 * IMPROVED: Rewrite predicate definitions as tail-recursive in the

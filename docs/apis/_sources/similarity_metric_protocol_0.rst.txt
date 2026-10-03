@@ -1,0 +1,74 @@
+.. index:: single: similarity_metric_protocol
+.. _similarity_metric_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``similarity_metric_protocol``
+==============================
+
+Protocol for pluggable similarity metrics between two sparse vectors, used to compare two users (by their item ratings) or two items (by the ratings they received).
+
+| **Availability:** 
+|    ``logtalk_load(recommender_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-02
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: similarity/3
+.. _similarity_metric_protocol/0::similarity/3:
+
+``similarity/3``
+^^^^^^^^^^^^^^^^
+
+Computes a similarity score between two sparse vectors of ``Key-Value`` pairs with unique ground keys and finite numeric values, unless an implementation ignores values. Higher scores indicate greater similarity. The range and handling of empty or non-overlapping vectors depend on the implementation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``similarity(Vector1,Vector2,Similarity)``
+| **Mode and number of proofs:**
+|    ``similarity(+list(pair),+list(pair),-number)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

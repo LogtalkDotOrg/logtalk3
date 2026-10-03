@@ -1,0 +1,185 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
+%
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+:- object(tests,
+	extends(lgtunit)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-10-03,
+		comment is 'Unit tests for the "knn_user_recommender" library.'
+	]).
+
+	:- uses(lgtunit, [
+		op(700, xfx, =~=), (=~=)/2, assertion/1
+	]).
+
+	:- uses(list, [
+		member/2
+	]).
+
+	cover(knn_user_recommender).
+
+	cleanup :-
+		^^clean_file('user_knn_export.pl').
+
+	test(learn, deterministic(ground(Model))) :-
+		knn_user_recommender::learn(user_knn_ratings, Model).
+
+	test(reference_prediction, deterministic(Rating =~= 3.3333333333333335)) :-
+		knn_user_recommender::learn(user_knn_ratings, Model),
+		knn_user_recommender::predict_rating(Model, u, c, Rating).
+
+	test(k_larger_than_available, deterministic(Rating =~= 3.3333333333333335)) :-
+		knn_user_recommender::learn(user_knn_ratings, Model, [k(20)]),
+		knn_user_recommender::predict_rating(Model, u, c, Rating).
+
+	test(overlap_fallback, deterministic(Rating =~= 2.0)) :-
+		knn_user_recommender::learn(user_knn_ratings, Model, [min_overlap(3)]),
+		knn_user_recommender::predict_rating(Model, u, c, Rating).
+
+	test(threshold_fallback, deterministic(Rating =~= 2.0)) :-
+		knn_user_recommender::learn(user_knn_ratings, Model, [min_similarity(2.0)]),
+		knn_user_recommender::predict_rating(Model, u, c, Rating).
+
+	test(unknown_identifiers, deterministic) :-
+		knn_user_recommender::learn(user_knn_ratings, Model),
+		knn_user_recommender::predict_rating(Model, unknown, c, ItemMean),
+		knn_user_recommender::predict_rating(Model, u, unknown, UserMean),
+		knn_user_recommender::predict_rating(Model, unknown, unknown, GlobalMean),
+		assertion(ItemMean =~= 5.0), assertion(UserMean =~= 2.0), assertion(GlobalMean =~= 3.0).
+
+	test(recommendation, deterministic) :-
+		knn_user_recommender::learn(user_knn_ratings, Model),
+		knn_user_recommender::recommend(Model, u, 10, [c-Rating]),
+		assertion(Rating =~= 3.3333333333333335).
+
+	test(no_candidates, deterministic(Recommendations == [])) :-
+		knn_user_recommender::learn(user_knn_ratings, Model),
+		knn_user_recommender::recommend(Model, v, 10, Recommendations).
+
+	test(metrics, true) :-
+		forall(member(Metric, [cosine_similarity, pearson_similarity, jaccard_similarity, msd_similarity, spearman_similarity, user_knn_metric(0.5)]),
+			(knn_user_recommender::learn(user_knn_ratings, Model, [similarity_metric(Metric)]),
+			 knn_user_recommender::predict_rating(Model, u, c, Rating), Rating =~= 3.3333333333333335)).
+
+	test(nonpositive_metric_fallback, true) :-
+		forall(member(Score, [0.0, -1.0]),
+			(knn_user_recommender::learn(user_knn_ratings, Model, [similarity_metric(user_knn_metric(Score))]),
+			 knn_user_recommender::predict_rating(Model, u, c, Rating), Rating =~= 2.0)).
+
+	test(invalid_metric_score, error(domain_error(similarity_score, [bad]))) :-
+		knn_user_recommender::learn(user_knn_ratings, Model, [similarity_metric(user_knn_metric(bad))]),
+		knn_user_recommender::predict_rating(Model, u, c, _).
+
+	test(nondeterministic_metric, error(domain_error(similarity_score, [0.5, 1.0]))) :-
+		knn_user_recommender::learn(user_knn_ratings, Model, [similarity_metric(user_knn_multiple_metric)]),
+		knn_user_recommender::predict_rating(Model, u, c, _).
+
+	test(invalid_k, error(domain_error(option, k(0)))) :-
+		knn_user_recommender::learn(user_knn_ratings, _, [k(0)]).
+
+	test(duplicate_options, deterministic(Rating =~= 1.3333333333333333)) :-
+		knn_user_recommender::learn(user_knn_tied_ratings, Model, [k(1), k(2)]),
+		knn_user_recommender::valid_recommender(Model),
+		knn_user_recommender::predict_rating(Model, u, c, Rating).
+
+	test(duplicate_ratings, error(domain_error(duplicate_rating, alice-m1))) :-
+		knn_user_recommender::learn(duplicate_rating, _).
+
+	test(query_variable, error(instantiation_error)) :-
+		knn_user_recommender::learn(user_knn_ratings, Model),
+		knn_user_recommender::predict_rating(Model, _, c, _).
+
+	test(query_compound, error(type_error(atomic, item(c)))) :-
+		knn_user_recommender::learn(user_knn_ratings, Model),
+		knn_user_recommender::predict_rating(Model, u, item(c), _).
+
+	test(nonpositive_n, error(domain_error(positive_integer, 0))) :-
+		knn_user_recommender::learn(user_knn_ratings, Model),
+		knn_user_recommender::recommend(Model, u, 0, _).
+
+	test(incomplete_model, variant(Model, Copy)) :-
+		Model = knn_user_model(_, _, _, _, _), copy_term(Model, Copy),
+		\+ knn_user_recommender::valid_recommender(Model).
+
+	test(tampered_profiles, fail) :-
+		knn_user_recommender::learn(user_knn_ratings, knn_user_model(Ratings, _, Mean, Scale, Diagnostics)),
+		knn_user_recommender::valid_recommender(knn_user_model(Ratings, [], Mean, Scale, Diagnostics)).
+
+	test(diagnostics, true) :-
+		knn_user_recommender::learn(user_knn_ratings, Model),
+		knn_user_recommender::diagnostic(Model, model(knn_user_recommender)),
+		knn_user_recommender::diagnostic(Model, rating_count(5)).
+
+	test(export_round_trip, deterministic) :-
+		knn_user_recommender::learn(user_knn_ratings, Model),
+		^^file_path('user_knn_export.pl', File),
+		knn_user_recommender::export_to_file(user_knn_ratings, Model, user_knn_saved, File),
+		logtalk_load(File), {user_knn_saved(Loaded)},
+		knn_user_recommender::predict_rating(Loaded, u, c, Rating),
+		assertion(Rating =~= 3.3333333333333335).
+
+	test(print, deterministic) :-
+		^^suppress_text_output,
+		knn_user_recommender::learn(user_knn_ratings, Model),
+		knn_user_recommender::print_recommender(Model).
+
+	test(clipping, true) :-
+		forall(member(Clip-Expected, [true-5.0, false-6.833333333333333]),
+			(knn_user_recommender::learn(user_knn_clipped_ratings, Model, [clip_to_scale(Clip)]),
+			 knn_user_recommender::predict_rating(Model, u, c, Rating), Rating =~= Expected)).
+
+	test(filter_before_k, deterministic(Rating =~= 3.3333333333333335)) :-
+		knn_user_recommender::learn(user_knn_filtered_ratings, Model, [k(1)]),
+		knn_user_recommender::predict_rating(Model, u, c, Rating).
+
+	test(neighbor_tie_order, deterministic(Rating =~= 1.3333333333333333)) :-
+		knn_user_recommender::learn(user_knn_tied_ratings, Model, [k(1)]),
+		knn_user_recommender::predict_rating(Model, u, c, Rating).
+
+	test(self_exclusion, deterministic(Rating =~= 2.3333333333333335)) :-
+		knn_user_recommender::learn(user_knn_ratings, Model),
+		knn_user_recommender::predict_rating(Model, u, b, Rating).
+
+	test(declared_metric, error(domain_error(option, similarity_metric(user_knn_declared_metric)))) :-
+		knn_user_recommender::learn(user_knn_ratings, _, [similarity_metric(user_knn_declared_metric)]).
+
+	test(failing_metric, error(domain_error(similarity_score, []))) :-
+		knn_user_recommender::learn(user_knn_ratings, Model, [similarity_metric(user_knn_failing_metric)]),
+		knn_user_recommender::predict_rating(Model, u, c, _).
+
+	test(tampered_counts, fail) :-
+		knn_user_recommender::learn(user_knn_ratings, knn_user_model(Ratings, Profiles, Mean, Scale, _)),
+		knn_user_recommender::valid_recommender(knn_user_model(Ratings, Profiles, Mean, Scale,
+			[model(knn_user_recommender), rating_count(5), options([k(3), similarity_metric(pearson_similarity), min_overlap(1), min_similarity(0.0), clip_to_scale(true)]), user_count(999), item_count(3), neighbor_axis(user)])).
+
+	test(default_options, deterministic(Model == Explicit)) :-
+		knn_user_recommender::learn(movie_ratings, Model),
+		knn_user_recommender::learn(movie_ratings, Explicit, []),
+		knn_user_recommender::valid_recommender(Model).
+
+	test(atomic_numeric_queries, deterministic(Rating =~= 3.0)) :-
+		knn_user_recommender::learn(user_knn_ratings, Model),
+		knn_user_recommender::predict_rating(Model, 123, 456, Rating).
+
+:- end_object.

@@ -1,0 +1,287 @@
+.. index:: single: similarity_metric_common
+.. _similarity_metric_common/0:
+
+.. rst-class:: right
+
+**category**
+
+``similarity_metric_common``
+============================
+
+Shared helper predicates for sparse-vector overlap, numeric scaling, normalization, and correlation, reused by the library similarity metric objects.
+
+| **Availability:** 
+|    ``logtalk_load(recommender_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-02
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`numberlist <numberlist/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: common_pairs/3
+.. _similarity_metric_common/0::common_pairs/3:
+
+``common_pairs/3``
+^^^^^^^^^^^^^^^^^^
+
+Collects the ``Value1-Value2`` pairs for the keys present in both sparse vectors. Assumes each vector declares at most one value per key.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``common_pairs(Vector1,Vector2,Pairs)``
+| **Mode and number of proofs:**
+|    ``common_pairs(+list(pair),+list(pair),-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: vector_norm/2
+.. _similarity_metric_common/0::vector_norm/2:
+
+``vector_norm/2``
+^^^^^^^^^^^^^^^^^
+
+Computes the Euclidean norm of the values of a sparse Key-Value vector.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``vector_norm(Vector,Norm)``
+| **Mode and number of proofs:**
+|    ``vector_norm(+list(pair),-float)`` - ``one``
+
+
+------------
+
+.. index:: scale_values/2
+.. _similarity_metric_common/0::scale_values/2:
+
+``scale_values/2``
+^^^^^^^^^^^^^^^^^^
+
+Scales numeric values by their maximum absolute magnitude, leaving empty and all-zero lists unchanged.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``scale_values(Values,Scaled)``
+| **Mode and number of proofs:**
+|    ``scale_values(+list(number),-list(number))`` - ``one``
+
+
+------------
+
+.. index:: normalize_values/2
+.. _similarity_metric_common/0::normalize_values/2:
+
+``normalize_values/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Unit-normalizes numeric values using bounded intermediate magnitudes, leaving empty and all-zero lists unchanged.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normalize_values(Values,Normalized)``
+| **Mode and number of proofs:**
+|    ``normalize_values(+list(number),-list(number))`` - ``one``
+
+
+------------
+
+.. index:: normalize_vector/2
+.. _similarity_metric_common/0::normalize_vector/2:
+
+``normalize_vector/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Unit-normalizes a sparse numeric vector while preserving its keys and their order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normalize_vector(Vector,Normalized)``
+| **Mode and number of proofs:**
+|    ``normalize_vector(+list(pair),-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: bounded_similarity/2
+.. _similarity_metric_common/0::bounded_similarity/2:
+
+``bounded_similarity/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Bounds a computed cosine or correlation score to its mathematical range, removing endpoint roundoff.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bounded_similarity(Score,Similarity)``
+| **Mode and number of proofs:**
+|    ``bounded_similarity(+number,-number)`` - ``one``
+
+
+------------
+
+.. index:: centered_normalized_values/2
+.. _similarity_metric_common/0::centered_normalized_values/2:
+
+``centered_normalized_values/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Centers and unit-normalizes numeric values in shifted, scaled coordinates. Empty lists remain empty and exactly constant lists become zeros.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``centered_normalized_values(Values,Normalized)``
+| **Mode and number of proofs:**
+|    ``centered_normalized_values(+list(number),-list(number))`` - ``one``
+
+
+------------
+
+.. index:: split_pairs/3
+.. _similarity_metric_common/0::split_pairs/3:
+
+``split_pairs/3``
+^^^^^^^^^^^^^^^^^
+
+Splits a list of ``Value1-Value2`` pairs into separate, position-aligned lists of first and second values.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``split_pairs(Pairs,Values1,Values2)``
+| **Mode and number of proofs:**
+|    ``split_pairs(+list(pair),-list(number),-list(number))`` - ``one``
+
+
+------------
+
+.. index:: dot_product/3
+.. _similarity_metric_common/0::dot_product/3:
+
+``dot_product/3``
+^^^^^^^^^^^^^^^^^
+
+Computes the dot product of two position-aligned numeric lists of the same length.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dot_product(Values1,Values2,Dot)``
+| **Mode and number of proofs:**
+|    ``dot_product(+list(number),+list(number),-number)`` - ``one``
+
+
+------------
+
+.. index:: sum_of_squares_list/2
+.. _similarity_metric_common/0::sum_of_squares_list/2:
+
+``sum_of_squares_list/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the sum of the squares of a numeric list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sum_of_squares_list(Values,SumSquares)``
+| **Mode and number of proofs:**
+|    ``sum_of_squares_list(+list(number),-number)`` - ``one``
+
+
+------------
+
+.. index:: mean_values/2
+.. _similarity_metric_common/0::mean_values/2:
+
+``mean_values/2``
+^^^^^^^^^^^^^^^^^
+
+Computes the arithmetic mean of a non-empty numeric list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``mean_values(Values,Mean)``
+| **Mode and number of proofs:**
+|    ``mean_values(+list(number),-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Values`` is empty:
+|        ``evaluation_error(zero_divisor)``
+
+
+------------
+
+.. index:: center/3
+.. _similarity_metric_common/0::center/3:
+
+``center/3``
+^^^^^^^^^^^^
+
+Subtracts a value (typically the mean) from every element of a numeric list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``center(Values,Value,Centered)``
+| **Mode and number of proofs:**
+|    ``center(+list(number),+number,-list(number))`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
