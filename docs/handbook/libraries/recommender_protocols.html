@@ -317,6 +317,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#test-datasets">Test datasets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rating-matrix-utilities">Rating-matrix utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#item-content-datasets">Item-content datasets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#similarity-metrics">Similarity metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 </ul>
@@ -355,6 +356,7 @@
 <li class="toctree-l2"><a class="reference internal" href="term_io.html"><code class="docutils literal notranslate"><span class="pre">term_io</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="text_normalization.html"><code class="docutils literal notranslate"><span class="pre">text_normalization</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="text_vectorization.html"><code class="docutils literal notranslate"><span class="pre">text_vectorization</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tfidf_recommender.html"><code class="docutils literal notranslate"><span class="pre">tfidf_recommender</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="theta_forecasting.html"><code class="docutils literal notranslate"><span class="pre">theta_forecasting</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="thurstone_mosteller_ranker.html"><code class="docutils literal notranslate"><span class="pre">thurstone_mosteller_ranker</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="timeout.html"><code class="docutils literal notranslate"><span class="pre">timeout</span></code></a></li>
@@ -431,12 +433,21 @@
 <span id="library-recommender-protocols"></span><h1><code class="docutils literal notranslate"><span class="pre">recommender_protocols</span></code><a class="headerlink" href="#recommender-protocols" title="Link to this heading"></a></h1>
 <p>This library provides protocols used in the implementation of
 recommendation algorithms. Datasets are represented as objects
-implementing the <code class="docutils literal notranslate"><span class="pre">rating_dataset_protocol</span></code> protocol. Recommenders are
-represented as objects importing the <code class="docutils literal notranslate"><span class="pre">recommender_common</span></code> category.
-This category provides shared helpers for dataset validation,
-rating-matrix utilities (user and item rating vectors, mean-rating
-baselines), similarity metrics, top-k retrieval, diagnostics metadata,
-export, and pretty-printing support.</p>
+implementing the <code class="docutils literal notranslate"><span class="pre">rating_dataset_protocol</span></code> protocol. Content-based
+datasets also implement <code class="docutils literal notranslate"><span class="pre">item_content_dataset_protocol</span></code>, declaring the
+full item catalog independently of ratings. Recommenders are represented
+as objects importing the <code class="docutils literal notranslate"><span class="pre">recommender_common</span></code> category. This category
+provides shared helpers for dataset validation, rating-matrix utilities
+(user and item rating vectors, mean-rating baselines), similarity
+metrics, top-k retrieval, diagnostics metadata, export, and
+pretty-printing support.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">recommender_protocol</span></code> protocol declares the generic <code class="docutils literal notranslate"><span class="pre">score/4</span></code>
+predicate for user-item relevance scoring. Score ranges and
+unknown-identifier policies depend on the implementation. All
+recommender implementations import <code class="docutils literal notranslate"><span class="pre">recommender_common</span></code> and implement
+<code class="docutils literal notranslate"><span class="pre">score/4</span></code> directly. Collaborative recommenders return predicted
+ratings in the dataset’s rating units; <code class="docutils literal notranslate"><span class="pre">tfidf_recommender</span></code> returns
+cosine relevance without claiming to estimate ratings.</p>
 <p>Similarity metrics are also exposed as pluggable strategy objects,
 <code class="docutils literal notranslate"><span class="pre">cosine_similarity</span></code>, <code class="docutils literal notranslate"><span class="pre">pearson_similarity</span></code>, <code class="docutils literal notranslate"><span class="pre">jaccard_similarity</span></code>,
 <code class="docutils literal notranslate"><span class="pre">msd_similarity</span></code>, and <code class="docutils literal notranslate"><span class="pre">spearman_similarity</span></code>, implementing the
@@ -476,7 +487,7 @@ directory.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
-<a class="reference external" href="../../apis/library_index.html#collaborative-filtering-protocols">../../apis/library_index.html#collaborative-filtering-protocols</a>
+<a class="reference external" href="../../apis/library_index.html#recommender-protocols">../../apis/library_index.html#recommender-protocols</a>
 link in a web browser.</p>
 </section>
 <section id="loading">
@@ -536,46 +547,59 @@ also exercises variable, compound, and valid numeric identifiers.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">recommender_common</span></code> category provides, among others, the
 following predicates:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">dataset_ratings/2</span></code>: collects a dataset’s ratings as a list of
+<li><p>The <code class="docutils literal notranslate"><span class="pre">dataset_ratings/2</span></code> predicate collects ratings as
 <code class="docutils literal notranslate"><span class="pre">rating(User,</span> <span class="pre">Item,</span> <span class="pre">Rating)</span></code> terms, checking atomic identifiers,
-duplicate user-item pairs, and that the declared rating count matches
-the observed count.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">check_ratings/2</span></code>: validates that ratings are non-empty, have atomic
-identifiers and numeric values, and, when a <code class="docutils literal notranslate"><span class="pre">rating_scale/2</span></code> is
-declared, are within range.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">users/2</span></code> and <code class="docutils literal notranslate"><span class="pre">items/2</span></code>: the sorted list of distinct users or
-items appearing in a list of ratings.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">user_vector/3</span></code> and <code class="docutils literal notranslate"><span class="pre">item_vector/3</span></code>: the sparse rating vector of a
-user or an item, as a list of <code class="docutils literal notranslate"><span class="pre">Item-Rating</span></code> or <code class="docutils literal notranslate"><span class="pre">User-Rating</span></code>
-pairs.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">global_mean_rating/2</span></code>, <code class="docutils literal notranslate"><span class="pre">user_mean_rating/3</span></code>,
-<code class="docutils literal notranslate"><span class="pre">item_mean_rating/3</span></code>: the classic mean-rating baselines, usable both
-as standalone baseline predictors and as building blocks (e.g. for a
-global-plus-bias baseline predictor) in other recommenders.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">cosine_similarity/3</span></code>, <code class="docutils literal notranslate"><span class="pre">pearson_similarity/3</span></code>,
+duplicate user-item pairs, and the declared rating count.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">check_ratings/2</span></code> predicate validates non-empty ratings, atomic
+identifiers, numeric values, and membership in any declared rating
+scale.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">users/2</span></code> and <code class="docutils literal notranslate"><span class="pre">items/2</span></code> predicates return sorted distinct
+identifiers appearing in ratings, not in an independent content
+catalog.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">user_vector/3</span></code> and <code class="docutils literal notranslate"><span class="pre">item_vector/3</span></code> predicates return sparse
+<code class="docutils literal notranslate"><span class="pre">Item-Rating</span></code> or <code class="docutils literal notranslate"><span class="pre">User-Rating</span></code> vectors.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">global_mean_rating/2</span></code>, <code class="docutils literal notranslate"><span class="pre">user_mean_rating/3</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">item_mean_rating/3</span></code> predicates compute mean-rating baselines.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">cosine_similarity/3</span></code>, <code class="docutils literal notranslate"><span class="pre">pearson_similarity/3</span></code>,
 <code class="docutils literal notranslate"><span class="pre">jaccard_similarity/3</span></code>, <code class="docutils literal notranslate"><span class="pre">msd_similarity/3</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">spearman_similarity/3</span></code>: convenience predicates equivalent to
-sending <code class="docutils literal notranslate"><span class="pre">similarity/3</span></code> to the corresponding metric object.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">top_k/3</span></code>: returns the <code class="docutils literal notranslate"><span class="pre">K</span></code> highest-scoring <code class="docutils literal notranslate"><span class="pre">Key-Score</span></code> pairs
-from a list of candidates, sorted by decreasing score; returns every
-pair, still sorted, when fewer than <code class="docutils literal notranslate"><span class="pre">K</span></code> are given.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">check_top_n/1</span></code>: validates a requested recommendation count.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">check_query_identifiers/2</span></code>: checks instantiated atomic user/item
-identifiers.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">dataset_rating_scale/2</span></code>: returns <code class="docutils literal notranslate"><span class="pre">none</span></code> or <code class="docutils literal notranslate"><span class="pre">scale(Min,</span> <span class="pre">Max)</span></code>,
-checking numeric, ordered bounds.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">fallback_rating/5</span></code>: returns the known user’s mean, otherwise the
-known item’s mean, otherwise the supplied global mean.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">clip_rating/3</span></code>: clips to an inclusive validated scale; <code class="docutils literal notranslate"><span class="pre">none</span></code> is
-a no-op.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">recommend_from_ratings/5</span></code>: validates the query and scores unrated
-catalog items through self <code class="docutils literal notranslate"><span class="pre">predict_rating/4</span></code>, returning up to <code class="docutils literal notranslate"><span class="pre">N</span></code>
-results. Equal scores use descending standard item order.</p></li>
+<code class="docutils literal notranslate"><span class="pre">spearman_similarity/3</span></code> predicates send <code class="docutils literal notranslate"><span class="pre">similarity/3</span></code> to the
+corresponding metric object.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">top_k/3</span></code> predicate returns up to <code class="docutils literal notranslate"><span class="pre">K</span></code> highest-scoring
+<code class="docutils literal notranslate"><span class="pre">Key-Score</span></code> pairs in decreasing score order.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">check_top_n/1</span></code> predicate validates a requested recommendation
+count.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">check_query_identifiers/2</span></code> predicate checks instantiated atomic
+user/item identifiers.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">dataset_rating_scale/2</span></code> predicate returns <code class="docutils literal notranslate"><span class="pre">none</span></code> or a
+validated <code class="docutils literal notranslate"><span class="pre">scale(Min,</span> <span class="pre">Max)</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">fallback_rating/5</span></code> predicate returns the user mean, otherwise
+the item mean, otherwise the supplied global mean.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">clip_rating/3</span></code> predicate clips to a validated scale, leaving
+ratings unchanged for <code class="docutils literal notranslate"><span class="pre">none</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">recommend_from_ratings/5</span></code> predicate scores unrated items
+observed in training ratings through self <code class="docutils literal notranslate"><span class="pre">score/4</span></code>. Equal scores
+use descending standard item order. Content-based recommenders use
+their independent catalog instead.</p></li>
 </ul>
 <p>These are declared <code class="docutils literal notranslate"><span class="pre">protected</span></code>, intended to be reused by concrete
 recommender libraries such as <code class="docutils literal notranslate"><span class="pre">knn_user_recommender</span></code>,
-<code class="docutils literal notranslate"><span class="pre">knn_item_recommender</span></code>, and <code class="docutils literal notranslate"><span class="pre">slope_one_recommender</span></code> that import this
-category.</p>
+<code class="docutils literal notranslate"><span class="pre">knn_item_recommender</span></code>, <code class="docutils literal notranslate"><span class="pre">slope_one_recommender</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">tfidf_recommender</span></code> that import this category directly.</p>
+</section>
+<section id="item-content-datasets">
+<h2>Item-content datasets<a class="headerlink" href="#item-content-datasets" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">item_content_dataset_protocol</span></code> protocol declares two predicates.
+The <code class="docutils literal notranslate"><span class="pre">item/1</span></code> predicate enumerates distinct atomic catalog identifiers,
+including unrated items. The <code class="docutils literal notranslate"><span class="pre">item_content/2</span></code> predicate enumerates
+exactly one descriptor per catalog item and returns that descriptor for
+a bound item. Descriptors are <code class="docutils literal notranslate"><span class="pre">features(Occurrences)</span></code> or
+<code class="docutils literal notranslate"><span class="pre">vector(FeatureWeightPairs)</span></code>; a dataset uses one representation
+consistently. Feature occurrences may be arbitrary ground terms.
+Supplied vectors have unique ground keys and finite nonnegative numeric
+weights. Empty content is allowed. Rated items must belong to the
+catalog. The <code class="docutils literal notranslate"><span class="pre">tfidf_recommender</span></code> library validates these requirements,
+learns TF-IDF over the full catalog, and constructs positive-feedback
+profiles.</p>
 </section>
 <section id="similarity-metrics">
 <h2>Similarity metrics<a class="headerlink" href="#similarity-metrics" title="Link to this heading"></a></h2>
@@ -658,9 +682,7 @@ interface cannot infer those means.</p></li>
 elsewhere in this family are <code class="docutils literal notranslate"><span class="pre">O(n)</span></code> per rating against a growing
 list, so <code class="docutils literal notranslate"><span class="pre">O(n^2)</span></code> overall; this is only a concern for very large
 rating datasets.</p></li>
-<li><p>Concrete recommenders are separate libraries:
-<code class="docutils literal notranslate"><span class="pre">knn_user_recommender</span></code>, <code class="docutils literal notranslate"><span class="pre">knn_item_recommender</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">slope_one_recommender</span></code>. Matrix factorization is not provided.</p></li>
+<li><p>Matrix factorization is not provided.</p></li>
 </ul>
 </section>
 </section>

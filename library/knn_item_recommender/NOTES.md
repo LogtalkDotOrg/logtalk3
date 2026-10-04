@@ -23,7 +23,8 @@ ________________________________________________________________________
 
 Item-based k-nearest-neighbor collaborative filtering with similarity-weighted
 raw ratings. The object imports `recommender_common` and implements
-`recommender_protocol`. Datasets implement `rating_dataset_protocol` with
+`recommender_protocol`. The `score/4` predicate returns a predicted rating.
+Datasets implement `rating_dataset_protocol` with
 atomic identifiers, one numeric rating per user/item pair, a matching positive
 count, and an optional numeric ordered rating scale. The user-kNN and Slope
 One libraries are not dependencies.
@@ -57,7 +58,7 @@ Examples
 
     | ?- logtalk_load(recommender_protocols('test_datasets/movie_ratings')).
          knn_item_recommender::learn(movie_ratings, Model),
-         knn_item_recommender::predict_rating(Model, alice, m6, Rating),
+         knn_item_recommender::score(Model, alice, m6, Rating),
          knn_item_recommender::recommend(Model, alice, 3, Recommendations).
 
 

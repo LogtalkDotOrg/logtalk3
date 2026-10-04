@@ -15275,6 +15275,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    ``item/1``
    ----------
 
+   * :ref:`item_content_dataset_protocol <item_content_dataset_protocol/0::item/1>`
    * :ref:`multiplayer_ranking_dataset_protocol <multiplayer_ranking_dataset_protocol/0::item/1>`
    * :ref:`pairwise_measurement_dataset_protocol <pairwise_measurement_dataset_protocol/0::item/1>`
    * :ref:`pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol/0::item/1>`
@@ -15282,7 +15283,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: latex
 
-   * ``item/1`` - :ref:`multiplayer_ranking_dataset_protocol <multiplayer_ranking_dataset_protocol/0::item/1>`, :ref:`pairwise_measurement_dataset_protocol <pairwise_measurement_dataset_protocol/0::item/1>`, :ref:`pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol/0::item/1>`, :ref:`temporal_pairwise_ranking_dataset_protocol <temporal_pairwise_ranking_dataset_protocol/0::item/1>`
+   * ``item/1`` - :ref:`item_content_dataset_protocol <item_content_dataset_protocol/0::item/1>`, :ref:`multiplayer_ranking_dataset_protocol <multiplayer_ranking_dataset_protocol/0::item/1>`, :ref:`pairwise_measurement_dataset_protocol <pairwise_measurement_dataset_protocol/0::item/1>`, :ref:`pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol/0::item/1>`, :ref:`temporal_pairwise_ranking_dataset_protocol <temporal_pairwise_ranking_dataset_protocol/0::item/1>`
 
 .. only:: not latex
 
@@ -15294,6 +15295,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``item/2`` - :ref:`ranking_dataset_protocol <ranking_dataset_protocol/0::item/2>`
+
+.. only:: not latex
+
+   ``item_content/2``
+   ------------------
+
+   * :ref:`item_content_dataset_protocol <item_content_dataset_protocol/0::item_content/2>`
+
+.. only:: latex
+
+   * ``item_content/2`` - :ref:`item_content_dataset_protocol <item_content_dataset_protocol/0::item_content/2>`
 
 .. only:: not latex
 
@@ -24049,17 +24061,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
-   ``predict_rating/4``
-   --------------------
-
-   * :ref:`recommender_protocol <recommender_protocol/0::predict_rating/4>`
-
-.. only:: latex
-
-   * ``predict_rating/4`` - :ref:`recommender_protocol <recommender_protocol/0::predict_rating/4>`
-
-.. only:: not latex
-
    ``predict_scores/3``
    --------------------
 
@@ -28834,6 +28835,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``score/3`` - :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::score/3>`, :ref:`isolation_forest_anomaly_detector <isolation_forest_anomaly_detector/0::score/3>`
+
+.. only:: not latex
+
+   ``score/4``
+   -----------
+
+   * :ref:`recommender_protocol <recommender_protocol/0::score/4>`
+
+.. only:: latex
+
+   * ``score/4`` - :ref:`recommender_protocol <recommender_protocol/0::score/4>`
 
 .. only:: not latex
 

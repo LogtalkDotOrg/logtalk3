@@ -26,13 +26,21 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-02,
+		date is 2026-10-04,
 		comment is 'Smoke tests for the "recommender_protocols" library. Reference values for the movie_ratings dataset were computed independently in Python.'
 	]).
 
 	:- uses(lgtunit, [
 		op(700, xfx, =~=), (=~=)/2, assertion/1
 	]).
+
+	test(recommender_score_self_dispatch, deterministic(Score == 42)) :-
+		sample_score_override::learn(movie_ratings, Model),
+		sample_score_override::shared_recommend(Model, alice, 1, [_-Score]).
+
+	test(common_scoring_contract, deterministic) :-
+		sample_recommender::current_predicate(score/4),
+		validation_recommender::current_predicate(score/4).
 
 	:- uses(list, [
 		length/2, member/2, memberchk/2
@@ -490,24 +498,24 @@
 		copy_term(Recommender, Copy),
 		\+ sample_recommender::valid_recommender(Recommender).
 
-	test(sample_recommender_predict_invalid, error(domain_error(recommender, sample_recommender([garbage], 3.0, global, [model(sample_recommender)])))) :-
-		sample_recommender::predict_rating(sample_recommender([garbage], 3.0, global, [model(sample_recommender)]), alice, m1, _).
+	test(sample_recommender_score_invalid, error(domain_error(recommender, sample_recommender([garbage], 3.0, global, [model(sample_recommender)])))) :-
+		sample_recommender::score(sample_recommender([garbage], 3.0, global, [model(sample_recommender)]), alice, m1, _).
 
-	test(sample_recommender_predict_rating_blend, true(Rating =~= 4.083333333333334)) :-
+	test(sample_recommender_score_blend, true(Rating =~= 4.083333333333334)) :-
 		sample_recommender::learn(movie_ratings, Recommender),
-		sample_recommender::predict_rating(Recommender, alice, m5, Rating).
+		sample_recommender::score(Recommender, alice, m5, Rating).
 
-	test(sample_recommender_predict_rating_global, deterministic(Rating =~= 3.6666666666666665)) :-
+	test(sample_recommender_score_global, deterministic(Rating =~= 3.6666666666666665)) :-
 		sample_recommender::learn(movie_ratings, Recommender, [baseline(global)]),
-		sample_recommender::predict_rating(Recommender, alice, m5, Rating).
+		sample_recommender::score(Recommender, alice, m5, Rating).
 
-	test(sample_recommender_predict_rating_unknown_user, true(Rating =~= 4.0)) :-
+	test(sample_recommender_score_unknown_user, true(Rating =~= 4.0)) :-
 		sample_recommender::learn(movie_ratings, Recommender),
-		sample_recommender::predict_rating(Recommender, nobody, m5, Rating).
+		sample_recommender::score(Recommender, nobody, m5, Rating).
 
-	test(sample_recommender_predict_rating_unknown_item, true(Rating =~= 3.75)) :-
+	test(sample_recommender_score_unknown_item, true(Rating =~= 3.75)) :-
 		sample_recommender::learn(movie_ratings, Recommender),
-		sample_recommender::predict_rating(Recommender, alice, nothing, Rating).
+		sample_recommender::score(Recommender, alice, nothing, Rating).
 
 	test(sample_recommender_recommend_alice, true(Recommendations == [m5-4.083333333333334, m6-3.8333333333333335])) :-
 		sample_recommender::learn(movie_ratings, Recommender),
@@ -571,7 +579,7 @@
 		logtalk_load(File),
 		{recommender_model(Loaded)},
 		sample_recommender::valid_recommender(Loaded),
-		sample_recommender::predict_rating(Loaded, alice, m5, Rating).
+		sample_recommender::score(Loaded, alice, m5, Rating).
 
 	test(sample_recommender_print_recommender_1, true) :-
 		^^suppress_text_output,

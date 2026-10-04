@@ -4665,6 +4665,7 @@ To load an entity, always load the library that includes it using the goal ``log
       :maxdepth: 1
 
       cosine_similarity <cosine_similarity_0>
+      item_content_dataset_protocol <item_content_dataset_protocol_0>
       jaccard_similarity <jaccard_similarity_0>
       msd_similarity <msd_similarity_0>
       pearson_similarity <pearson_similarity_0>
@@ -4678,6 +4679,7 @@ To load an entity, always load the library that includes it using the goal ``log
 .. only:: latex
 
    * :doc:`cosine_similarity <cosine_similarity_0>`
+   * :doc:`item_content_dataset_protocol <item_content_dataset_protocol_0>`
    * :doc:`jaccard_similarity <jaccard_similarity_0>`
    * :doc:`msd_similarity <msd_similarity_0>`
    * :doc:`pearson_similarity <pearson_similarity_0>`
@@ -5421,6 +5423,20 @@ To load an entity, always load the library that includes it using the goal ``log
 
    * :doc:`text_vectorizer <text_vectorizer_0>`
    * :doc:`text_vectorizer_protocol <text_vectorizer_protocol_0>`
+
+``library/tfidf_recommender/``
+------------------------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      tfidf_recommender <tfidf_recommender_0>
+
+.. only:: latex
+
+   * :doc:`tfidf_recommender <tfidf_recommender_0>`
 
 ``library/theta_forecasting/``
 ------------------------------

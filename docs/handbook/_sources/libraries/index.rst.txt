@@ -304,6 +304,7 @@ directory in the ``NOTES.md`` file.
    term_io
    text_normalization
    text_vectorization
+   tfidf_recommender
    theta_forecasting
    thurstone_mosteller_ranker
    timeout

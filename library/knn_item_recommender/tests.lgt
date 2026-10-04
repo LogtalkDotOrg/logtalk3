@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-03,
+		date is 2026-10-04,
 		comment is 'Unit tests for the "knn_item_recommender" library.'
 	]).
 
@@ -39,6 +39,15 @@
 
 	cover(knn_item_recommender).
 
+	test(movie_score, deterministic(Score =~= Expected)) :-
+		knn_item_recommender::learn(movie_ratings, Model),
+		knn_item_recommender::score(Model, alice, m6, Score),
+		Similarity is 63 / sqrt(4154),
+		Expected is (Similarity + 100 / 67) / (Similarity + 20 / 67).
+
+	test(score_implemented_locally, deterministic) :-
+		knn_item_recommender::predicate_property(score(_, _, _, _), defined_in(knn_item_recommender)).
+
 	cleanup :-
 		^^clean_file('item_knn_export.pl').
 
@@ -47,51 +56,51 @@
 
 	test(reference_prediction, deterministic) :-
 		knn_item_recommender::learn(item_knn_ratings, Model),
-		knn_item_recommender::predict_rating(Model, u, c, Rating),
+		knn_item_recommender::score(Model, u, c, Rating),
 		Expected is (2 / sqrt(5) + 3 * 0.8) / (2 / sqrt(5) + 0.8),
 		assertion(Rating =~= Expected).
 
 	test(k_one, deterministic(Rating =~= 1.0)) :-
 		knn_item_recommender::learn(item_knn_ratings, Model, [k(1)]),
-		knn_item_recommender::predict_rating(Model, u, c, Rating).
+		knn_item_recommender::score(Model, u, c, Rating).
 
 	test(overlap_fallback, deterministic(Rating =~= 2.0)) :-
 		knn_item_recommender::learn(item_knn_ratings, Model, [min_overlap(2)]),
-		knn_item_recommender::predict_rating(Model, u, c, Rating).
+		knn_item_recommender::score(Model, u, c, Rating).
 
 	test(threshold_fallback, deterministic(Rating =~= 2.0)) :-
 		knn_item_recommender::learn(item_knn_ratings, Model, [min_similarity(2.0)]),
-		knn_item_recommender::predict_rating(Model, u, c, Rating).
+		knn_item_recommender::score(Model, u, c, Rating).
 
 	test(self_exclusion, deterministic(Rating =~= 3.0)) :-
 		knn_item_recommender::learn(item_knn_ratings, Model),
-		knn_item_recommender::predict_rating(Model, u, a, Rating).
+		knn_item_recommender::score(Model, u, a, Rating).
 
 	test(metrics, true) :-
 		forall(member(Metric-Expected, [pearson_similarity-2.0, spearman_similarity-2.0, jaccard_similarity-2.0, msd_similarity-2.6666666666666665, item_knn_metric(0.5)-2.0]),
 			(knn_item_recommender::learn(item_knn_ratings, Model, [similarity_metric(Metric)]),
-			 knn_item_recommender::predict_rating(Model, u, c, Rating), Rating =~= Expected)).
+			 knn_item_recommender::score(Model, u, c, Rating), Rating =~= Expected)).
 
 	test(nonpositive_metric_fallback, true) :-
 		forall(member(Score, [0.0, -1.0]),
 			(knn_item_recommender::learn(item_knn_ratings, Model, [similarity_metric(item_knn_metric(Score))]),
-			 knn_item_recommender::predict_rating(Model, u, c, Rating), Rating =~= 2.0)).
+			 knn_item_recommender::score(Model, u, c, Rating), Rating =~= 2.0)).
 
 	test(invalid_metric_score, error(domain_error(similarity_score, [bad]))) :-
 		knn_item_recommender::learn(item_knn_ratings, Model, [similarity_metric(item_knn_metric(bad))]),
-		knn_item_recommender::predict_rating(Model, u, c, _).
+		knn_item_recommender::score(Model, u, c, _).
 
 	test(unknown_identifiers, deterministic) :-
 		knn_item_recommender::learn(item_knn_ratings, Model),
-		knn_item_recommender::predict_rating(Model, unknown, c, ItemMean),
-		knn_item_recommender::predict_rating(Model, u, unknown, UserMean),
-		knn_item_recommender::predict_rating(Model, unknown, unknown, GlobalMean),
+		knn_item_recommender::score(Model, unknown, c, ItemMean),
+		knn_item_recommender::score(Model, u, unknown, UserMean),
+		knn_item_recommender::score(Model, unknown, unknown, GlobalMean),
 		assertion(ItemMean =~= 5.0), assertion(UserMean =~= 2.0), assertion(GlobalMean =~= 3.0).
 
 	test(recommendation_matches_prediction, deterministic) :-
 		knn_item_recommender::learn(item_knn_ratings, Model),
 		knn_item_recommender::recommend(Model, u, 10, [c-Score]),
-		knn_item_recommender::predict_rating(Model, u, c, Rating),
+		knn_item_recommender::score(Model, u, c, Rating),
 		assertion(Score =~= Rating).
 
 	test(no_candidates, deterministic(Recommendations == [])) :-
@@ -106,7 +115,7 @@
 
 	test(query_variable, error(instantiation_error)) :-
 		knn_item_recommender::learn(item_knn_ratings, Model),
-		knn_item_recommender::predict_rating(Model, u, _, _).
+		knn_item_recommender::score(Model, u, _, _).
 
 	test(nonpositive_n, error(domain_error(positive_integer, -1))) :-
 		knn_item_recommender::learn(item_knn_ratings, Model),
@@ -134,16 +143,16 @@
 
 	test(filter_before_k, deterministic(Rating =~= 1.0)) :-
 		knn_item_recommender::learn(item_knn_filtered_ratings, Model, [k(1)]),
-		knn_item_recommender::predict_rating(Model, u, c, Rating).
+		knn_item_recommender::score(Model, u, c, Rating).
 
 	test(neighbor_tie_order, deterministic(Rating =~= 3.0)) :-
 		knn_item_recommender::learn(item_knn_ratings, Model, [k(1), similarity_metric(item_knn_metric(0.5))]),
-		knn_item_recommender::predict_rating(Model, u, c, Rating).
+		knn_item_recommender::score(Model, u, c, Rating).
 
 	test(no_scale, deterministic) :-
 		knn_item_recommender::learn(item_knn_unscaled_ratings, Model),
 		Model = knn_item_model(_, _, _, none, _),
-		knn_item_recommender::predict_rating(Model, u, c, Rating),
+		knn_item_recommender::score(Model, u, c, Rating),
 		Expected is (2 / sqrt(5) + 3 * 0.8) / (2 / sqrt(5) + 0.8),
 		assertion(Rating =~= Expected).
 
@@ -155,11 +164,11 @@
 
 	test(nondeterministic_metric, error(domain_error(similarity_score, [0.5, 1.0]))) :-
 		knn_item_recommender::learn(item_knn_ratings, Model, [similarity_metric(item_knn_multiple_metric)]),
-		knn_item_recommender::predict_rating(Model, u, c, _).
+		knn_item_recommender::score(Model, u, c, _).
 
 	test(failing_metric, error(domain_error(similarity_score, []))) :-
 		knn_item_recommender::learn(item_knn_ratings, Model, [similarity_metric(item_knn_failing_metric)]),
-		knn_item_recommender::predict_rating(Model, u, c, _).
+		knn_item_recommender::score(Model, u, c, _).
 
 	test(missing_metric, error(domain_error(option, similarity_metric(missing_item_knn_metric)))) :-
 		knn_item_recommender::learn(item_knn_ratings, _, [similarity_metric(missing_item_knn_metric)]).
@@ -177,6 +186,6 @@
 	test(duplicate_options, deterministic(Rating =~= 1.0)) :-
 		knn_item_recommender::learn(item_knn_ratings, Model, [k(1), k(2)]),
 		knn_item_recommender::valid_recommender(Model),
-		knn_item_recommender::predict_rating(Model, u, c, Rating).
+		knn_item_recommender::score(Model, u, c, Rating).
 
 :- end_object.

@@ -1,0 +1,98 @@
+.. index:: single: item_content_dataset_protocol
+.. _item_content_dataset_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``item_content_dataset_protocol``
+=================================
+
+Protocol for item catalogs with feature occurrences or preweighted sparse content vectors.
+
+| **Availability:** 
+|    ``logtalk_load(recommender_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-04
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: item/1
+.. _item_content_dataset_protocol/0::item/1:
+
+``item/1``
+^^^^^^^^^^
+
+Enumerates distinct instantiated atomic catalog identifiers, including items with no ratings.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``item(Item)``
+| **Mode and number of proofs:**
+|    ``item(-atomic)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: item_content/2
+.. _item_content_dataset_protocol/0::item_content/2:
+
+``item_content/2``
+^^^^^^^^^^^^^^^^^^
+
+Enumerates exactly one content descriptor for each catalog item. Descriptors are ``features(Occurrences)`` with ground feature occurrences or ``vector(Pairs)`` with unique ground feature keys and finite nonnegative weights. Empty lists are allowed. All items use the same descriptor kind.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``item_content(Item,Content)``
+| **Mode and number of proofs:**
+|    ``item_content(-atomic,-compound)`` - ``zero_or_more``
+|    ``item_content(+atomic,-compound)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`rating_dataset_protocol <rating_dataset_protocol/0>`, :ref:`recommender_protocol <recommender_protocol/0>`
+

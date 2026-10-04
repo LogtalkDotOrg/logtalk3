@@ -25,6 +25,7 @@
 	logtalk_load(options(loader)),
 	logtalk_load([
 		rating_dataset_protocol,
+		item_content_dataset_protocol,
 		similarity_metric_protocol,
 		similarity_metric_common,
 		cosine_similarity,

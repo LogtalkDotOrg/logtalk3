@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-02,
+		date is 2026-10-04,
 		comment is 'Shared predicates for recommender diagnostics, rating dataset validation, rating-matrix utilities, similarity metrics, and top-k retrieval.'
 	]).
 
@@ -325,7 +325,7 @@
 	:- protected(recommend_from_ratings/5).
 	:- mode(recommend_from_ratings(+compound, +list(compound), +atomic, +positive_integer, -list(pair)), one_or_error).
 	:- info(recommend_from_ratings/5, [
-		comment is 'Scores unrated catalog items using self ``predict_rating/4`` and returns up to ``N`` descending-score pairs; ties use descending standard item order.',
+		comment is 'Scores unrated catalog items using self ``score/4`` and returns up to ``N`` descending-score pairs; ties use descending standard item order.',
 		argnames is ['Recommender', 'Ratings', 'User', 'N', 'Recommendations'],
 		exceptions is [
 			'A required argument is a variable' - instantiation_error,
@@ -345,7 +345,7 @@
 		findall(Item-Score,
 			(	member(Item, Items),
 				\+ member(rating(User, Item, _), Ratings),
-				::predict_rating(Recommender, User, Item, Score)
+				::score(Recommender, User, Item, Score)
 			),
 			Pairs
 		),

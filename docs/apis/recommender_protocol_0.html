@@ -327,6 +327,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#reader"><span class="xref std std-ref">reader</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#recommender-protocols"><span class="xref std std-ref">recommender_protocols</span></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="cosine_similarity_0.html">cosine_similarity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="item_content_dataset_protocol_0.html">item_content_dataset_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jaccard_similarity_0.html">jaccard_similarity</a></li>
 <li class="toctree-l3"><a class="reference internal" href="msd_similarity_0.html">msd_similarity</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pearson_similarity_0.html">pearson_similarity</a></li>
@@ -374,6 +375,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#term-io"><span class="xref std std-ref">term_io</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#text-normalization"><span class="xref std std-ref">text_normalization</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#text-vectorization"><span class="xref std std-ref">text_vectorization</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#tfidf-recommender"><span class="xref std std-ref">tfidf_recommender</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#theta-forecasting"><span class="xref std std-ref">theta_forecasting</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#thurstone-mosteller-ranker"><span class="xref std std-ref">thurstone_mosteller_ranker</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#time-scales"><span class="xref std std-ref">time_scales</span></a></li>
@@ -460,7 +462,7 @@
   <p class="right" id="recommender-protocol-0"><span id="index-0"></span><strong>protocol</strong></p>
 <section id="recommender-protocol">
 <h1><code class="docutils literal notranslate"><span class="pre">recommender_protocol</span></code><a class="headerlink" href="#recommender-protocol" title="Link to this heading"></a></h1>
-<p>Protocol for collaborative filtering recommendation models.</p>
+<p>Protocol for recommendation models and user-item relevance scoring.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -470,7 +472,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-10-03</div>
+<div class="line"><strong>Date:</strong> 2026-10-04</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -502,7 +504,7 @@
 <ul>
 <li><p><a class="reference internal" href="#learn-3" id="id2"><code class="docutils literal notranslate"><span class="pre">learn/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#learn-2" id="id3"><code class="docutils literal notranslate"><span class="pre">learn/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#predict-rating-4" id="id4"><code class="docutils literal notranslate"><span class="pre">predict_rating/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#score-4" id="id4"><code class="docutils literal notranslate"><span class="pre">score/4</span></code></a></p></li>
 <li><p><a class="reference internal" href="#recommend-4" id="id5"><code class="docutils literal notranslate"><span class="pre">recommend/4</span></code></a></p></li>
 <li><p><a class="reference internal" href="#check-recommender-1" id="id6"><code class="docutils literal notranslate"><span class="pre">check_recommender/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#valid-recommender-1" id="id7"><code class="docutils literal notranslate"><span class="pre">valid_recommender/1</span></code></a></p></li>
@@ -615,6 +617,66 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(rating_scale(Min,Max),Rating)</span></code></div>
 </div>
+<div class="line">A content-based dataset has no catalog items:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_catalog,Dataset)</span></code></div>
+</div>
+<div class="line">A catalog or content item is declared more than once:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(duplicate_item,Item)</span></code></div>
+</div>
+<div class="line">Content declarations do not cover the catalog exactly once:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(item_content_coverage,Dataset)</span></code></div>
+</div>
+<div class="line">A rated item is absent from the content catalog:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(catalog_item,Item)</span></code></div>
+</div>
+<div class="line">A content descriptor is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(item_content,Content)</span></code></div>
+</div>
+<div class="line">Content representations are mixed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(content_representation,Content)</span></code></div>
+</div>
+<div class="line">A content list is not a proper list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,List)</span></code></div>
+</div>
+<div class="line">A content descriptor, list, feature, or weight is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">A vector entry is not a pair:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(pair,Entry)</span></code></div>
+</div>
+<div class="line">A sparse vector repeats a feature key:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(duplicate_feature,Feature)</span></code></div>
+</div>
+<div class="line">A sparse weight is not a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Weight)</span></code></div>
+</div>
+<div class="line">A sparse weight is negative or nonfinite:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_finite_weight,Weight)</span></code></div>
+</div>
+<div class="line">A content-based rating is not finite:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(finite_rating,Rating)</span></code></div>
+</div>
+<div class="line">A selected rating is not positive in rating-weighted profile construction:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_rating_weight,Rating)</span></code></div>
+</div>
+<div class="line">Feature fitting produces no vocabulary:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_vocabulary,Corpus)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -635,14 +697,131 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">learn(+object_identifier,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">learn(+object_identifier,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The dataset contains no ratings:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_ratings,Dataset)</span></code></div>
+</div>
+<div class="line">A user or item identifier is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">A user or item identifier is not atomic:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atomic,Identifier)</span></code></div>
+</div>
+<div class="line">The same <code class="docutils literal notranslate"><span class="pre">User</span></code>-<code class="docutils literal notranslate"><span class="pre">Item</span></code> pair is rated more than once:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(duplicate_rating,User-Item)</span></code></div>
+</div>
+<div class="line">The declared rating count is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The declared rating count is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,DeclaredCount)</span></code></div>
+</div>
+<div class="line">The declared rating count is an integer but is not positive:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,DeclaredCount)</span></code></div>
+</div>
+<div class="line">The declared and observed rating counts differ:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(rating_count,DeclaredCount,ObservedCount)</span></code></div>
+</div>
+<div class="line">A rating value is not a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Rating)</span></code></div>
+</div>
+<div class="line">A scale bound is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">A scale bound is not numeric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Bound)</span></code></div>
+</div>
+<div class="line">Scale bounds are reversed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(rating_scale,Min-Max)</span></code></div>
+</div>
+<div class="line">A rating value falls outside the declared rating scale:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(rating_scale(Min,Max),Rating)</span></code></div>
+</div>
+<div class="line">A content-based dataset has no catalog items:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_catalog,Dataset)</span></code></div>
+</div>
+<div class="line">A catalog or content item is declared more than once:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(duplicate_item,Item)</span></code></div>
+</div>
+<div class="line">Content declarations do not cover the catalog exactly once:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(item_content_coverage,Dataset)</span></code></div>
+</div>
+<div class="line">A rated item is absent from the content catalog:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(catalog_item,Item)</span></code></div>
+</div>
+<div class="line">A content descriptor is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(item_content,Content)</span></code></div>
+</div>
+<div class="line">Content representations are mixed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(content_representation,Content)</span></code></div>
+</div>
+<div class="line">A content list is not a proper list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,List)</span></code></div>
+</div>
+<div class="line">A content descriptor, list, feature, or weight is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">A vector entry is not a pair:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(pair,Entry)</span></code></div>
+</div>
+<div class="line">A sparse vector repeats a feature key:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(duplicate_feature,Feature)</span></code></div>
+</div>
+<div class="line">A sparse weight is not a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Weight)</span></code></div>
+</div>
+<div class="line">A sparse weight is negative or nonfinite:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_finite_weight,Weight)</span></code></div>
+</div>
+<div class="line">A content-based rating is not finite:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(finite_rating,Rating)</span></code></div>
+</div>
+<div class="line">A selected rating is not positive in rating-weighted profile construction:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_rating_weight,Rating)</span></code></div>
+</div>
+<div class="line">Feature fitting produces no vocabulary:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_vocabulary,Corpus)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
-<section id="predict-rating-4">
-<span id="recommender-protocol-0-predict-rating-4"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">predict_rating/4</span></code></a><a class="headerlink" href="#predict-rating-4" title="Link to this heading"></a></h3>
-<p>Predicts the rating <code class="docutils literal notranslate"><span class="pre">User</span></code> would give to <code class="docutils literal notranslate"><span class="pre">Item</span></code> using the learned recommender model. Whether, and how, a prediction is produced for a <code class="docutils literal notranslate"><span class="pre">User</span></code> or <code class="docutils literal notranslate"><span class="pre">Item</span></code> unknown to the training dataset (e.g. by falling back to a baseline) depends on the implementation.</p>
+<section id="score-4">
+<span id="recommender-protocol-0-score-4"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">score/4</span></code></a><a class="headerlink" href="#score-4" title="Link to this heading"></a></h3>
+<p>Scores the relevance of <code class="docutils literal notranslate"><span class="pre">Item</span></code> to <code class="docutils literal notranslate"><span class="pre">User</span></code> using the learned recommender. Higher scores indicate greater relevance. Scores may be predicted ratings or other relevance measures; their ranges and handling of unknown identifiers depend on the implementation.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -652,11 +831,11 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">predict_rating(Recommender,User,Item,Rating)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">score(Recommender,User,Item,Score)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">predict_rating(+compound,+atomic,+atomic,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">score(+compound,+atomic,+atomic,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -669,6 +848,18 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Recommender</span></code> is not a valid recommender:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(recommender,Recommender)</span></code></div>
+</div>
+<div class="line">A user or item identifier is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">A user or item identifier is not atomic:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atomic,Identifier)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Item</span></code> is unknown to an implementation requiring catalog membership:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(catalog_item,Item)</span></code></div>
 </div>
 </div>
 </div>
@@ -715,6 +906,14 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">N</span></code> is an integer but is not positive:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,N)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">User</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">User</span></code> is not atomic:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atomic,User)</span></code></div>
 </div>
 </div>
 </div>

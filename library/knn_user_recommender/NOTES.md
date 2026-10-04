@@ -23,11 +23,10 @@ ________________________________________________________________________
 
 User-based k-nearest-neighbor collaborative filtering with mean-centered
 predictions. The object imports `recommender_common` and implements the
-`recommender_protocol` contract. Training datasets implement
-`rating_dataset_protocol`: atomic user/item identifiers, one numeric rating
-per pair, a matching positive rating count, and an optional numeric ordered
-rating scale. There is no dependency on either of the other recommender
-libraries.
+`recommender_protocol` contract. The `score/4` predicate returns a predicted
+rating. Training datasets implement `rating_dataset_protocol`: atomic
+user/item identifiers, one numeric rating per pair, a matching positive
+rating count, and an optional numeric ordered rating scale.
 
 
 API documentation
@@ -58,7 +57,7 @@ Examples
 
     | ?- logtalk_load(recommender_protocols('test_datasets/movie_ratings')),
          knn_user_recommender::learn(movie_ratings, Model),
-         knn_user_recommender::predict_rating(Model, alice, m6, Rating),
+         knn_user_recommender::score(Model, alice, m6, Rating),
          knn_user_recommender::recommend(Model, alice, 3, Recommendations).
 
 

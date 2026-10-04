@@ -15,7 +15,7 @@ Shared predicates for recommender diagnostics, rating dataset validation, rating
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-10-02
+| **Date:** 2026-10-04
 
 | **Compilation flags:**
 |    ``static``
@@ -40,7 +40,7 @@ Shared predicates for recommender diagnostics, rating dataset validation, rating
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`recommender_protocol/0::check_recommender/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`recommender_protocol/0::diagnostic/2`  :ref:`recommender_protocol/0::diagnostics/2`  :ref:`recommender_protocol/0::export_to_clauses/4`  :ref:`recommender_protocol/0::export_to_file/4`  :ref:`recommender_protocol/0::learn/2`  :ref:`recommender_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`recommender_protocol/0::predict_rating/4`  :ref:`recommender_protocol/0::print_recommender/1`  :ref:`recommender_protocol/0::recommend/4`  :ref:`recommender_protocol/0::recommender_options/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`recommender_protocol/0::valid_recommender/1`  
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`recommender_protocol/0::check_recommender/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`recommender_protocol/0::diagnostic/2`  :ref:`recommender_protocol/0::diagnostics/2`  :ref:`recommender_protocol/0::export_to_clauses/4`  :ref:`recommender_protocol/0::export_to_file/4`  :ref:`recommender_protocol/0::learn/2`  :ref:`recommender_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`recommender_protocol/0::print_recommender/1`  :ref:`recommender_protocol/0::recommend/4`  :ref:`recommender_protocol/0::recommender_options/2`  :ref:`recommender_protocol/0::score/4`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`recommender_protocol/0::valid_recommender/1`  
 
 .. contents::
    :local:
@@ -340,7 +340,7 @@ Clips a rating to a validated ``scale(Min, Max)``; ``none`` leaves it unchanged.
 ``recommend_from_ratings/5``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Scores unrated catalog items using self ``predict_rating/4`` and returns up to ``N`` descending-score pairs; ties use descending standard item order.
+Scores unrated catalog items using self ``score/4`` and returns up to ``N`` descending-score pairs; ties use descending standard item order.
 
 | **Compilation flags:**
 |    ``static``

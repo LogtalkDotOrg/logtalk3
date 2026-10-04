@@ -356,6 +356,7 @@
 <li class="toctree-l2"><a class="reference internal" href="term_io.html"><code class="docutils literal notranslate"><span class="pre">term_io</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="text_normalization.html"><code class="docutils literal notranslate"><span class="pre">text_normalization</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="text_vectorization.html"><code class="docutils literal notranslate"><span class="pre">text_vectorization</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tfidf_recommender.html"><code class="docutils literal notranslate"><span class="pre">tfidf_recommender</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="theta_forecasting.html"><code class="docutils literal notranslate"><span class="pre">theta_forecasting</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="thurstone_mosteller_ranker.html"><code class="docutils literal notranslate"><span class="pre">thurstone_mosteller_ranker</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="timeout.html"><code class="docutils literal notranslate"><span class="pre">timeout</span></code></a></li>
@@ -432,11 +433,11 @@
 <span id="library-knn-user-recommender"></span><h1><code class="docutils literal notranslate"><span class="pre">knn_user_recommender</span></code><a class="headerlink" href="#knn-user-recommender" title="Link to this heading"></a></h1>
 <p>User-based k-nearest-neighbor collaborative filtering with mean-centered
 predictions. The object imports <code class="docutils literal notranslate"><span class="pre">recommender_common</span></code> and implements
-the <code class="docutils literal notranslate"><span class="pre">recommender_protocol</span></code> contract. Training datasets implement
+the <code class="docutils literal notranslate"><span class="pre">recommender_protocol</span></code> contract. The <code class="docutils literal notranslate"><span class="pre">score/4</span></code> predicate returns
+a predicted rating. Training datasets implement
 <code class="docutils literal notranslate"><span class="pre">rating_dataset_protocol</span></code>: atomic user/item identifiers, one numeric
 rating per pair, a matching positive rating count, and an optional
-numeric ordered rating scale. There is no dependency on either of the
-other recommender libraries.</p>
+numeric ordered rating scale.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -461,7 +462,7 @@ link in a web browser.</p>
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(recommender_protocols(<span class="s">&#39;test_datasets/movie_ratings&#39;</span>)),
      knn_user_recommender<span class="o">::</span>learn(movie_ratings, <span class="nv">Model</span>),
-     knn_user_recommender<span class="o">::</span>predict_rating(<span class="nv">Model</span>, alice, m6, <span class="nv">Rating</span>),
+     knn_user_recommender<span class="o">::</span>score(<span class="nv">Model</span>, alice, m6, <span class="nv">Rating</span>),
      knn_user_recommender<span class="o">::</span>recommend(<span class="nv">Model</span>, alice, <span class="m">3</span>, <span class="nv">Recommendations</span>).
 </pre></div>
 </div>

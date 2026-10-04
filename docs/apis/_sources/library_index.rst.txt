@@ -2775,6 +2775,7 @@ To load any library (including developer tools, ports, and contributions), use t
    :maxdepth: 1
 
    cosine_similarity <cosine_similarity_0>
+   item_content_dataset_protocol <item_content_dataset_protocol_0>
    jaccard_similarity <jaccard_similarity_0>
    msd_similarity <msd_similarity_0>
    pearson_similarity <pearson_similarity_0>
@@ -3183,6 +3184,14 @@ To load any library (including developer tools, ports, and contributions), use t
 
    text_vectorizer <text_vectorizer_0>
    text_vectorizer_protocol <text_vectorizer_protocol_0>
+
+:ref:`tfidf_recommender <library_tfidf_recommender>`
+----------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   tfidf_recommender <tfidf_recommender_0>
 
 :ref:`theta_forecasting <library_theta_forecasting>`
 ----------------------------------------------------

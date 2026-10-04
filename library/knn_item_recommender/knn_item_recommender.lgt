@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-03,
+		date is 2026-10-04,
 		comment is 'Item-based k-nearest-neighbor recommender with similarity-weighted ratings and pluggable metrics.',
 		see_also is [recommender_protocol, cosine_similarity]
 	]).
@@ -53,7 +53,7 @@
 		^^base_recommender_diagnostics(knn_item_recommender, Count, Options,
 			[user_count(UserCount), item_count(ItemCount), neighbor_axis(item)], Diagnostics).
 
-	predict_rating(Model, User, Item, Rating) :-
+	score(Model, User, Item, Rating) :-
 		^^check_recommender(Model),
 		^^check_query_identifiers(User, Item),
 		Model = knn_item_model(Ratings, Profiles, GlobalMean, Scale, _),

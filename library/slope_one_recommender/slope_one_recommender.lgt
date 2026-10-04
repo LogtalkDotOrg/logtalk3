@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-03,
+		date is 2026-10-04,
 		comment is 'Weighted Slope One recommender with canonical item-pair deviations and co-rating support counts.',
 		see_also is [recommender_protocol]
 	]).
@@ -57,7 +57,7 @@
 		^^base_recommender_diagnostics(slope_one_recommender, Count, Options,
 			[user_count(UserCount), item_count(ItemCount), deviation_pair_count(PairCount)], Diagnostics).
 
-	predict_rating(Model, User, Item, Rating) :-
+	score(Model, User, Item, Rating) :-
 		^^check_recommender(Model),
 		^^check_query_identifiers(User, Item),
 		Model = slope_one_model(Ratings, Deviations, GlobalMean, Scale, _),

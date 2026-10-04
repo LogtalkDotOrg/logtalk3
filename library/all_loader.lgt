@@ -260,6 +260,7 @@
 		knn_user_recommender(loader),
 		knn_item_recommender(loader),
 		slope_one_recommender(loader),
+		tfidf_recommender(loader),
 		uri_template(loader),
 		url(loader),
 		sqids(loader),

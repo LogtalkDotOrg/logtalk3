@@ -356,6 +356,7 @@
 <li class="toctree-l2"><a class="reference internal" href="term_io.html"><code class="docutils literal notranslate"><span class="pre">term_io</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="text_normalization.html"><code class="docutils literal notranslate"><span class="pre">text_normalization</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="text_vectorization.html"><code class="docutils literal notranslate"><span class="pre">text_vectorization</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tfidf_recommender.html"><code class="docutils literal notranslate"><span class="pre">tfidf_recommender</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="theta_forecasting.html"><code class="docutils literal notranslate"><span class="pre">theta_forecasting</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="thurstone_mosteller_ranker.html"><code class="docutils literal notranslate"><span class="pre">thurstone_mosteller_ranker</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="timeout.html"><code class="docutils literal notranslate"><span class="pre">timeout</span></code></a></li>
@@ -432,8 +433,8 @@
 <span id="library-slope-one-recommender"></span><h1><code class="docutils literal notranslate"><span class="pre">slope_one_recommender</span></code><a class="headerlink" href="#slope-one-recommender" title="Link to this heading"></a></h1>
 <p>Weighted Slope One collaborative filtering using additive item
 deviations and co-rating support counts. The object imports
-<code class="docutils literal notranslate"><span class="pre">recommender_common</span></code> and implements <code class="docutils literal notranslate"><span class="pre">recommender_protocol</span></code>; neither
-kNN library is a dependency. Datasets implement
+<code class="docutils literal notranslate"><span class="pre">recommender_common</span></code> and implements <code class="docutils literal notranslate"><span class="pre">recommender_protocol</span></code>. The
+<code class="docutils literal notranslate"><span class="pre">score/4</span></code> predicate returns a predicted rating. Datasets implement
 <code class="docutils literal notranslate"><span class="pre">rating_dataset_protocol</span></code> with atomic identifiers, unique user/item
 pairs, numeric ratings, a matching positive count, and an optional
 numeric ordered rating scale.</p>
@@ -461,7 +462,7 @@ link in a web browser.</p>
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(recommender_protocols(<span class="s">&#39;test_datasets/movie_ratings&#39;</span>)),
      slope_one_recommender<span class="o">::</span>learn(movie_ratings, <span class="nv">Model</span>),
-     slope_one_recommender<span class="o">::</span>predict_rating(<span class="nv">Model</span>, alice, m6, <span class="nv">Rating</span>),
+     slope_one_recommender<span class="o">::</span>score(<span class="nv">Model</span>, alice, m6, <span class="nv">Rating</span>),
      slope_one_recommender<span class="o">::</span>recommend(<span class="nv">Model</span>, alice, <span class="m">3</span>, <span class="nv">Recommendations</span>).
 </pre></div>
 </div>

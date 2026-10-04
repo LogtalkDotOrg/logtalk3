@@ -20,7 +20,7 @@
 
 
 :- object(sample_recommender,
-	imports([options, recommender_common])).
+	imports(recommender_common)).
 
 	:- info([
 		version is 1:0:0,
@@ -54,7 +54,7 @@
 		length(Ratings, RatingCount),
 		^^base_recommender_diagnostics(sample_recommender, RatingCount, Options, [], Diagnostics).
 
-	predict_rating(Recommender, User, Item, Rating) :-
+	score(Recommender, User, Item, Rating) :-
 		^^check_recommender(Recommender),
 		Recommender = sample_recommender(Ratings, GlobalMean, Baseline, _Diagnostics),
 		predict_with_baseline(Baseline, Ratings, GlobalMean, User, Item, Rating).
@@ -156,6 +156,14 @@
 
 	valid_option(baseline(Baseline)) :-
 		valid_baseline(Baseline).
+
+:- end_object.
+
+
+:- object(sample_score_override,
+	extends(sample_recommender)).
+
+	score(_, _, _, 42).
 
 :- end_object.
 

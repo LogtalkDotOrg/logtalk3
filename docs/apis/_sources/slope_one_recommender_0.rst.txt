@@ -15,7 +15,7 @@ Weighted Slope One recommender with canonical item-pair deviations and co-rating
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-10-03
+| **Date:** 2026-10-04
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -32,7 +32,7 @@ Weighted Slope One recommender with canonical item-pair deviations and co-rating
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`recommender_protocol/0::check_recommender/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`recommender_protocol/0::diagnostic/2`  :ref:`recommender_protocol/0::diagnostics/2`  :ref:`recommender_protocol/0::export_to_clauses/4`  :ref:`recommender_protocol/0::export_to_file/4`  :ref:`recommender_protocol/0::learn/2`  :ref:`recommender_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`recommender_protocol/0::predict_rating/4`  :ref:`recommender_protocol/0::print_recommender/1`  :ref:`recommender_protocol/0::recommend/4`  :ref:`recommender_protocol/0::recommender_options/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`recommender_protocol/0::valid_recommender/1`  
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`recommender_protocol/0::check_recommender/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`recommender_protocol/0::diagnostic/2`  :ref:`recommender_protocol/0::diagnostics/2`  :ref:`recommender_protocol/0::export_to_clauses/4`  :ref:`recommender_protocol/0::export_to_file/4`  :ref:`recommender_protocol/0::learn/2`  :ref:`recommender_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`recommender_protocol/0::print_recommender/1`  :ref:`recommender_protocol/0::recommend/4`  :ref:`recommender_protocol/0::recommender_options/2`  :ref:`recommender_protocol/0::score/4`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`recommender_protocol/0::valid_recommender/1`  
 
 .. contents::
    :local:

@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on October 3, 2026
+##   Last updated on October 4, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -354,6 +354,7 @@ sed '1,19d' ../../../library/tabu_search/NOTES.md | pandoc -f gfm -t rst -o libr
 sed '1,19d' ../../../library/term_io/NOTES.md | pandoc -f gfm -t rst -o libraries/term_io.rst
 sed '1,19d' ../../../library/text_normalization/NOTES.md | pandoc -f gfm -t rst -o libraries/text_normalization.rst
 sed '1,19d' ../../../library/text_vectorization/NOTES.md | pandoc -f gfm -t rst -o libraries/text_vectorization.rst
+sed '1,19d' ../../../library/tfidf_recommender/NOTES.md | pandoc -f gfm -t rst -o libraries/tfidf_recommender.rst
 sed '1,19d' ../../../library/theta_forecasting/NOTES.md | pandoc -f gfm -t rst -o libraries/theta_forecasting.rst
 sed '1,19d' ../../../library/thurstone_mosteller_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/thurstone_mosteller_ranker.rst
 sed '1,19d' ../../../library/time_scales/NOTES.md | pandoc -f gfm -t rst -o libraries/time_scales.rst

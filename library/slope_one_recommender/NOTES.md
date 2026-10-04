@@ -23,10 +23,10 @@ ________________________________________________________________________
 
 Weighted Slope One collaborative filtering using additive item deviations
 and co-rating support counts. The object imports `recommender_common` and
-implements `recommender_protocol`; neither kNN library is a dependency.
-Datasets implement `rating_dataset_protocol` with atomic identifiers,
-unique user/item pairs, numeric ratings, a matching positive count, and
-an optional numeric ordered rating scale.
+implements `recommender_protocol`. The `score/4` predicate returns a predicted
+rating. Datasets implement `rating_dataset_protocol` with atomic identifiers,
+unique user/item pairs, numeric ratings, a matching positive count, and an
+optional numeric ordered rating scale.
 
 
 API documentation
@@ -57,7 +57,7 @@ Examples
 
     | ?- logtalk_load(recommender_protocols('test_datasets/movie_ratings')),
          slope_one_recommender::learn(movie_ratings, Model),
-         slope_one_recommender::predict_rating(Model, alice, m6, Rating),
+         slope_one_recommender::score(Model, alice, m6, Rating),
          slope_one_recommender::recommend(Model, alice, 3, Recommendations).
 
 

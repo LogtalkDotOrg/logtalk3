@@ -1044,6 +1044,7 @@ Objects
       term_io <term_io_0>
       text_normalizer(Representation,Profile) <text_normalizer_2>
       text_vectorizer <text_vectorizer_0>
+      tfidf_recommender <tfidf_recommender_0>
       th_language_profile <th_language_profile_0>
       theta_forecasting <theta_forecasting_0>
       thurstone_mosteller_ranker <thurstone_mosteller_ranker_0>
@@ -1907,6 +1908,7 @@ Objects
    * :doc:`term_io <term_io_0>`
    * :doc:`text_normalizer(Representation,Profile) <text_normalizer_2>`
    * :doc:`text_vectorizer <text_vectorizer_0>`
+   * :doc:`tfidf_recommender <tfidf_recommender_0>`
    * :doc:`th_language_profile <th_language_profile_0>`
    * :doc:`theta_forecasting <theta_forecasting_0>`
    * :doc:`thurstone_mosteller_ranker <thurstone_mosteller_ranker_0>`
@@ -2104,6 +2106,7 @@ Protocols
       iso_4217_protocol <iso_4217_protocol_0>
       iso_639_protocol <iso_639_protocol_0>
       iso_9362_protocol <iso_9362_protocol_0>
+      item_content_dataset_protocol <item_content_dataset_protocol_0>
       java_access_protocol <java_access_protocol_0>
       java_utils_protocol <java_utils_protocol_0>
       json_graph_data_protocol <json_graph_data_protocol_0>
@@ -2323,6 +2326,7 @@ Protocols
    * :doc:`iso_4217_protocol <iso_4217_protocol_0>`
    * :doc:`iso_639_protocol <iso_639_protocol_0>`
    * :doc:`iso_9362_protocol <iso_9362_protocol_0>`
+   * :doc:`item_content_dataset_protocol <item_content_dataset_protocol_0>`
    * :doc:`java_access_protocol <java_access_protocol_0>`
    * :doc:`java_utils_protocol <java_utils_protocol_0>`
    * :doc:`json_graph_data_protocol <json_graph_data_protocol_0>`

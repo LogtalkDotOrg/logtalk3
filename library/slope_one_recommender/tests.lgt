@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-03,
+		date is 2026-10-04,
 		comment is 'Unit tests for the "slope_one_recommender" library.'
 	]).
 
@@ -39,6 +39,14 @@
 
 	cover(slope_one_recommender).
 
+	test(movie_score, deterministic(Score =~= Expected)) :-
+		slope_one_recommender::learn(movie_ratings, Model),
+		slope_one_recommender::score(Model, alice, m6, Score),
+		Expected is 10 / 3.
+
+	test(score_implemented_locally, deterministic) :-
+		slope_one_recommender::predicate_property(score(_, _, _, _), defined_in(slope_one_recommender)).
+
 	cleanup :-
 		^^clean_file('slope_export.pl').
 
@@ -47,11 +55,11 @@
 
 	test(reference_prediction, deterministic(Rating =~= 4.0)) :-
 		slope_one_recommender::learn(slope_ratings, Model),
-		slope_one_recommender::predict_rating(Model, u, c, Rating).
+		slope_one_recommender::score(Model, u, c, Rating).
 
 	test(weighted_prediction, deterministic(Rating =~= 3.6666666666666665)) :-
 		slope_one_recommender::learn(slope_weighted_ratings, Model),
-		slope_one_recommender::predict_rating(Model, u, c, Rating).
+		slope_one_recommender::score(Model, u, c, Rating).
 
 	test(deviation_orientation_and_counts, deterministic(Difference =~= -2.5)) :-
 		slope_one_recommender::learn(slope_weighted_ratings, slope_one_model(_, Deviations, _, _, _)),
@@ -59,34 +67,34 @@
 
 	test(reverse_lookup, deterministic(Rating =~= 1.0)) :-
 		slope_one_recommender::learn(slope_ratings, Model),
-		slope_one_recommender::predict_rating(Model, u, a, Rating).
+		slope_one_recommender::score(Model, u, a, Rating).
 
 	test(support_filter, deterministic(Rating =~= 3.5)) :-
 		slope_one_recommender::learn(slope_weighted_ratings, Model, [min_support(2)]),
-		slope_one_recommender::predict_rating(Model, u, c, Rating).
+		slope_one_recommender::score(Model, u, c, Rating).
 
 	test(support_fallback, deterministic(Rating =~= 2.0)) :-
 		slope_one_recommender::learn(slope_ratings, Model, [min_support(3)]),
-		slope_one_recommender::predict_rating(Model, u, c, Rating).
+		slope_one_recommender::score(Model, u, c, Rating).
 
 	test(no_pair_dataset, deterministic(Rating =~= 1.0)) :-
 		slope_one_recommender::learn(slope_disconnected_ratings, Model),
 		Model = slope_one_model(_, [], _, none, _),
-		slope_one_recommender::predict_rating(Model, u, b, Rating).
+		slope_one_recommender::score(Model, u, b, Rating).
 
 	test(clipping_on, deterministic(Rating == 5)) :-
 		slope_one_recommender::learn(slope_clipped_ratings, Model),
-		slope_one_recommender::predict_rating(Model, u, b, Rating).
+		slope_one_recommender::score(Model, u, b, Rating).
 
 	test(clipping_off, deterministic(Rating =~= 9.0)) :-
 		slope_one_recommender::learn(slope_clipped_ratings, Model, [clip_to_scale(false)]),
-		slope_one_recommender::predict_rating(Model, u, b, Rating).
+		slope_one_recommender::score(Model, u, b, Rating).
 
 	test(unknown_identifiers, deterministic) :-
 		slope_one_recommender::learn(slope_ratings, Model),
-		slope_one_recommender::predict_rating(Model, unknown, c, ItemMean),
-		slope_one_recommender::predict_rating(Model, u, unknown, UserMean),
-		slope_one_recommender::predict_rating(Model, unknown, unknown, GlobalMean),
+		slope_one_recommender::score(Model, unknown, c, ItemMean),
+		slope_one_recommender::score(Model, u, unknown, UserMean),
+		slope_one_recommender::score(Model, unknown, unknown, GlobalMean),
 		assertion(ItemMean =~= 5.0),
 		assertion(UserMean =~= 2.0),
 		assertion(GlobalMean =~= 3.0).
@@ -107,7 +115,7 @@
 
 	test(query_variable, error(instantiation_error)) :-
 		slope_one_recommender::learn(slope_ratings, Model),
-		slope_one_recommender::predict_rating(Model, _, c, _).
+		slope_one_recommender::score(Model, _, c, _).
 
 	test(incomplete_model, variant(Model, Copy)) :-
 		Model = slope_one_model(_, _, _, _, _), copy_term(Model, Copy),
@@ -122,7 +130,7 @@
 		^^file_path('slope_export.pl', File),
 		slope_one_recommender::export_to_file(slope_ratings, Model, slope_saved, File),
 		logtalk_load(File), {slope_saved(Loaded)},
-		slope_one_recommender::predict_rating(Loaded, u, c, Rating), assertion(Rating =~= 4.0).
+		slope_one_recommender::score(Loaded, u, c, Rating), assertion(Rating =~= 4.0).
 
 	test(print, deterministic) :-
 		^^suppress_text_output,
@@ -137,7 +145,7 @@
 	test(duplicate_options, deterministic(Rating =~= 4.0)) :-
 		slope_one_recommender::learn(slope_ratings, Model, [min_support(1), min_support(2)]),
 		slope_one_recommender::valid_recommender(Model),
-		slope_one_recommender::predict_rating(Model, u, c, Rating).
+		slope_one_recommender::score(Model, u, c, Rating).
 
 	test(tampered_counts, fail) :-
 		slope_one_recommender::learn(slope_ratings, slope_one_model(Ratings, Deviations, Mean, Scale, _)),
