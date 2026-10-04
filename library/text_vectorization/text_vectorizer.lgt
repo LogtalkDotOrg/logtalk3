@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-09-07,
+		date is 2026-10-04,
 		comment is 'Binary, count, term-frequency, and TF-IDF sparse text vectorization.',
 		see_also is [text_vectorizer_protocol]
 	]).
@@ -358,7 +358,6 @@
 		valid_features(Features, none, DocumentCount),
 		length(Features, VocabularySize),
 		catch(^^check_options(Options), _, fail),
-		length(Options, 6),
 		memberchk(weighting(_), Options),
 		memberchk(idf(_), Options),
 		memberchk(normalization(_), Options),

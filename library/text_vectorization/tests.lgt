@@ -31,6 +31,12 @@
 
 	cover(text_vectorizer).
 
+	test(repeated_options_first_wins, deterministic(Vector == [a-1,b-1])) :-
+		corpus(Corpus),
+		text_vectorizer::learn(Corpus, Vectorizer, [weighting(binary), weighting(count)]),
+		text_vectorizer::valid_vectorizer(Vectorizer),
+		text_vectorizer::transform(Vectorizer, [a,a,b], Vector).
+
 	:- uses(list, [
 		memberchk/2
 	]).

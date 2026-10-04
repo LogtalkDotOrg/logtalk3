@@ -101,6 +101,9 @@ recommender.
 default socket command (`socat` on POSIX systems and `ncat` on Windows
 systems).
 
+* FIXED: The `text_vectorization` library to allow for repeated options when
+validating vectorizer terms (leftmost options always take precedence).
+
 Tools
 -----
 
