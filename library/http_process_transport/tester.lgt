@@ -34,7 +34,7 @@
 		logtalk_load(http_client_core(loader)),
 		logtalk_load(http_server_core(loader)),
 		logtalk_load(http_socket_transport(loader)),
-		logtalk_load(http_process_transport, [debug(on), source_data(on)]),
+		logtalk_load([http_process_transport, test_objects], [debug(on), source_data(on)]),
 		logtalk_load(lgtunit(loader)),
 		logtalk_load(tests, [hook(lgtunit)]),
 		tests::run

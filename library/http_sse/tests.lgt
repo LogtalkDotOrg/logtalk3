@@ -19,46 +19,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(sse_serve_once_handler,
-	implements(http_sse_service_handler_protocol)).
-
-	:- info([
-		version is 1:0:0,
-		author is 'Paulo Moura',
-		date is 2026-07-29,
-		comment is 'Helper server session handler used by http_sse wrapper tests.'
-	]).
-
-	next([], [sent(greeting)], [event(greeting, hello, none)], continue).
-	next([sent(greeting)], done, [data(bye)], stop).
-
-:- end_object.
-
-
-:- object(sse_open_session_handler,
-	implements(http_sse_service_handler_protocol)).
-
-	:- info([
-		version is 1:0:0,
-		author is 'Paulo Moura',
-		date is 2026-07-29,
-		comment is 'Helper client session handler used by http_sse wrapper tests.'
-	]).
-
-	:- private(events_/1).
-	:- dynamic(events_/1).
-
-	handle(Event, stop) :-
-		retractall(events_(_)),
-		assertz(events_(Event)).
-
-	:- public(last_event/1).
-	last_event(Event) :-
-		events_(Event).
-
-:- end_object.
-
-
 :- object(tests,
 	extends(lgtunit)).
 

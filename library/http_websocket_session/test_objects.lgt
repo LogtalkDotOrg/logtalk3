@@ -19,33 +19,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(types(loader)),
-	logtalk_load(format(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(statistics(loader)),
-	logtalk_load([
-		dataset_protocol,
-		classifier_protocol,
-		probabilistic_classifier_protocol,
-		classifier_common,
-		probabilistic_classifier_common
-	], [
-		source_data(on),
-		debug(on)
-	]),
-	logtalk_load([
-		'test_datasets/play_tennis',
-		'test_datasets/contact_lenses',
-		'test_datasets/mixed',
-		'test_datasets/missing_mixed',
-		test_objects
-	], [
-		source_data(on),
-		debug(on)
-	]),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(fixed_masking_key_http_websocket_client_session,
+	extends(http_websocket_session(client, atom))).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-05-24,
+		comment is 'Test helper object that overrides client masking-key generation with a fixed key.'
+	]).
+
+	:- protected(generate_masking_key/1).
+	:- mode(generate_masking_key(-list(byte)), one).
+	:- info(generate_masking_key/1, [
+		comment is 'Returns the fixed masking key used by the tests.',
+		argnames is ['Key']
+	]).
+
+	generate_masking_key([1, 2, 3, 4]).
+
+:- end_object.

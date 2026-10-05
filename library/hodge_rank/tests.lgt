@@ -19,14 +19,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(singleton_measurements,
-	implements(pairwise_measurement_dataset_protocol)).
-
-	item(alpha).
-
-:- end_object.
-
-
 :- object(tests,
 	extends(lgtunit)).
 

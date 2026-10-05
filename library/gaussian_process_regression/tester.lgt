@@ -34,7 +34,8 @@
 		regression_protocols('test_datasets/mixed_signal'),
 		regression_protocols('test_datasets/sparse_mixed_signal'),
 		regression_protocols('test_datasets/intercept_only'),
-		regression_protocols('test_datasets/invalid_target')
+		regression_protocols('test_datasets/invalid_target'),
+		test_objects
 	], [
 		source_data(on),
 		debug(on)

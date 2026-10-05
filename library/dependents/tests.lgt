@@ -19,37 +19,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(test_subject,
-	imports(subject)).
-
-:- end_object.
-
-
-:- object(test_observer,
-	imports(observer)).
-
-	:- public(notifications/1).
-	:- mode(notifications(-list), one).
-
-	:- public(reset/0).
-	:- mode(reset, one).
-
-	:- private(notification_/1).
-	:- dynamic(notification_/1).
-
-	update(Change) :-
-		^^update(Change),
-		assertz(notification_(Change)).
-
-	notifications(Notifications) :-
-		findall(Notification, notification_(Notification), Notifications).
-
-	reset :-
-		retractall(notification_(_)).
-
-:- end_object.
-
-
 :- object(tests,
 	extends(lgtunit)).
 

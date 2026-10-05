@@ -19,69 +19,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(duplicate_inputs,
-	implements(regression_dataset_protocol)).
-
-	:- info([
-		version is 1:0:0,
-		author is 'Paulo Moura',
-		date is 2026-05-03,
-		comment is 'Regression dataset fixture containing repeated feature vectors to exercise covariance stabilization logic.'
-	]).
-
-	attribute_values(x, continuous).
-
-	target(y).
-
-	example(1, 3, [x-1]).
-	example(2, 3, [x-1]).
-	example(3, 5, [x-2]).
-
-:- end_object.
-
-
-:- object(categorical_only_signal_order1,
-	implements(regression_dataset_protocol)).
-
-	:- info([
-		version is 1:0:0,
-		author is 'Paulo Moura',
-		date is 2026-05-03,
-		comment is 'Categorical-only regression dataset fixture used to test invariance to categorical declaration order.'
-	]).
-
-	attribute_values(plan, [basic, premium, deluxe]).
-
-	target(score).
-
-	example(1, 10, [plan-basic]).
-	example(2, 20, [plan-premium]).
-	example(3, 30, [plan-deluxe]).
-
-:- end_object.
-
-
-:- object(categorical_only_signal_order2,
-	implements(regression_dataset_protocol)).
-
-	:- info([
-		version is 1:0:0,
-		author is 'Paulo Moura',
-		date is 2026-05-03,
-		comment is 'Categorical-only regression dataset fixture with a different declaration order for the same categories.'
-	]).
-
-	attribute_values(plan, [premium, basic, deluxe]).
-
-	target(score).
-
-	example(1, 10, [plan-basic]).
-	example(2, 20, [plan-premium]).
-	example(3, 30, [plan-deluxe]).
-
-:- end_object.
-
-
 :- object(tests,
 	extends(lgtunit)).
 

@@ -19,33 +19,32 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(types(loader)),
-	logtalk_load(format(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(statistics(loader)),
-	logtalk_load([
-		dataset_protocol,
-		classifier_protocol,
-		probabilistic_classifier_protocol,
-		classifier_common,
-		probabilistic_classifier_common
-	], [
-		source_data(on),
-		debug(on)
-	]),
-	logtalk_load([
-		'test_datasets/play_tennis',
-		'test_datasets/contact_lenses',
-		'test_datasets/mixed',
-		'test_datasets/missing_mixed',
-		test_objects
-	], [
-		source_data(on),
-		debug(on)
-	]),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(test_subject,
+	imports(subject)).
+
+:- end_object.
+
+
+:- object(test_observer,
+	imports(observer)).
+
+	:- public(notifications/1).
+	:- mode(notifications(-list), one).
+
+	:- public(reset/0).
+	:- mode(reset, one).
+
+	:- private(notification_/1).
+	:- dynamic(notification_/1).
+
+	update(Change) :-
+		^^update(Change),
+		assertz(notification_(Change)).
+
+	notifications(Notifications) :-
+		findall(Notification, notification_(Notification), Notifications).
+
+	reset :-
+		retractall(notification_(_)).
+
+:- end_object.

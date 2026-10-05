@@ -47,7 +47,8 @@
 		'test_datasets/large_two_blobs',
 		'test_datasets/scaling_bands',
 		'test_datasets/single_blob',
-		'test_datasets/mixed_profiles'
+		'test_datasets/mixed_profiles',
+		test_objects
 	], [
 		source_data(on),
 		debug(on)

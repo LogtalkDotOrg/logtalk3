@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:1,
+		version is 1:2:2,
 		author is 'Paulo Moura',
-		date is 2026-09-08,
+		date is 2026-10-05,
 		comment is 'Unit tests for the "http_websocket_session" library.'
 	]).
 
@@ -140,10 +140,10 @@
 		http_websocket_frames::property(Frame, masking_key(_)).
 
 	test(http_websocket_session_write_message_2_02, deterministic) :-
-		{fixed_masking_key_http_websocket_client_session::message(text, hello, Message)},
+		fixed_masking_key_http_websocket_client_session::message(text, hello, Message),
 		^^file_path('test_http_websocket_session.tmp', File),
 		open(File, write, Output, [type(binary)]),
-		{fixed_masking_key_http_websocket_client_session::write_message(Output, Message)},
+		fixed_masking_key_http_websocket_client_session::write_message(Output, Message),
 		close(Output),
 		read_frames_file('test_http_websocket_session.tmp', [Frame]),
 		http_websocket_frames::opcode(Frame, text),
@@ -395,27 +395,5 @@
 		; 	catch(close(Input), _, true),
 			fail
 		).
-
-:- end_object.
-
-
-:- object(fixed_masking_key_http_websocket_client_session,
-	extends(http_websocket_session(client, atom))).
-
-	:- info([
-		version is 1:0:0,
-		author is 'Paulo Moura',
-		date is 2026-05-24,
-		comment is 'Test helper object that overrides client masking-key generation with a fixed key.'
-	]).
-
-	:- protected(generate_masking_key/1).
-	:- mode(generate_masking_key(-list(byte)), one).
-	:- info(generate_masking_key/1, [
-		comment is 'Returns the fixed masking key used by the tests.',
-		argnames is ['Key']
-	]).
-
-	generate_masking_key([1, 2, 3, 4]).
 
 :- end_object.

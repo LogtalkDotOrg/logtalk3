@@ -33,7 +33,8 @@
 		clustering_protocols('test_datasets/two_blobs_permuted'),
 		clustering_protocols('test_datasets/duplicate_points'),
 		clustering_protocols('test_datasets/iris_unlabeled'),
-		clustering_protocols('test_datasets/mixed_profiles')
+		clustering_protocols('test_datasets/mixed_profiles'),
+		test_objects
 	], [
 		source_data(on),
 		debug(on)

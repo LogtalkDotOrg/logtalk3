@@ -22,7 +22,15 @@
 	set_logtalk_flag(report, warnings),
 	logtalk_load(types(loader)),
 	logtalk_load(json(loader)),
-	logtalk_load([json_graph_protocol, json_graph_data_protocol, json_graph], [source_data(on), debug(on)]),
+	logtalk_load([
+		json_graph_protocol,
+		json_graph_data_protocol,
+		json_graph,
+		test_objects
+	], [
+		source_data(on),
+		debug(on)
+	]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run

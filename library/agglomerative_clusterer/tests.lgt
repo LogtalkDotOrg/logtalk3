@@ -19,18 +19,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(invalid_agglomerative_two_blobs,
-	implements(clustering_dataset_protocol)).
-
-	attribute_values(x, continuous).
-	attribute_values(y, continuous).
-
-	example(1, [x-1.0, x-1.1, y-1.0]).
-	example(2, [x-5.0, y-5.0]).
-
-:- end_object.
-
-
 :- object(tests,
 	extends(lgtunit)).
 
@@ -186,6 +174,8 @@
 
 	test(agglomerative_learn_3_duplicate_training_attribute, error(domain_error(attribute_occurrences(x, 1), 2))) :-
 		learn(invalid_agglomerative_two_blobs, _Clusterer, [feature_scaling(off)]).
+
+	% auxiliary predicates
 
 	training_assignments(Dataset, Clusterer, Assignments) :-
 		findall(

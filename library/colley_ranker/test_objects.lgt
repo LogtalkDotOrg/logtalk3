@@ -19,33 +19,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(types(loader)),
-	logtalk_load(format(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(statistics(loader)),
-	logtalk_load([
-		dataset_protocol,
-		classifier_protocol,
-		probabilistic_classifier_protocol,
-		classifier_common,
-		probabilistic_classifier_common
-	], [
-		source_data(on),
-		debug(on)
-	]),
-	logtalk_load([
-		'test_datasets/play_tennis',
-		'test_datasets/contact_lenses',
-		'test_datasets/mixed',
-		'test_datasets/missing_mixed',
-		test_objects
-	], [
-		source_data(on),
-		debug(on)
-	]),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(singleton_pairwise,
+	implements(pairwise_ranking_dataset_protocol)).
+
+	item(alpha).
+
+:- end_object.

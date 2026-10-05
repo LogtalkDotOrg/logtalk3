@@ -39,7 +39,8 @@
 		'test_datasets/shuttle_anomalies',
 		'test_datasets/sensor_anomalies',
 		'test_datasets/water_potability',
-		'test_datasets/malformed_anomalies'
+		'test_datasets/malformed_anomalies',
+		test_objects
 	], [
 		source_data(on),
 		debug(on)

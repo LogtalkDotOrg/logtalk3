@@ -39,7 +39,8 @@
 	logtalk_load([
 		'test_datasets/correlated_plane',
 		'test_datasets/high_dimensional_measurements',
-		'test_datasets/labeled_measurements'
+		'test_datasets/labeled_measurements',
+		test_objects
 	], [
 		source_data(on),
 		debug(on)

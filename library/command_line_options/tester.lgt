@@ -38,7 +38,14 @@
 	logtalk_load(meta(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(term_io(loader)),
-	logtalk_load([command_line_option, command_line_options], [debug(on), source_data(on)]),
+	logtalk_load([
+		command_line_option,
+		command_line_options,
+		test_objects
+	], [
+		debug(on),
+		source_data(on)
+	]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run

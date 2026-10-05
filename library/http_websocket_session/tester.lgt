@@ -27,7 +27,7 @@
 		logtalk_load(options(loader)),
 		logtalk_load(http_websocket_frames(loader)),
 		logtalk_load(http_websocket_messages(loader)),
-		logtalk_load(http_websocket_session, [
+		logtalk_load([http_websocket_session, test_objects], [
 			debug(on),
 			source_data(on)
 		]),

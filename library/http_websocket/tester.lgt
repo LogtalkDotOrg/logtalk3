@@ -37,7 +37,7 @@
 		logtalk_load(http_client(loader)),
 		logtalk_load(http_server_core(loader)),
 		logtalk_load(http_websocket_service(loader)),
-		logtalk_load(http_websocket, [debug(on), source_data(on)]),
+		logtalk_load([http_websocket, test_objects], [debug(on), source_data(on)]),
 		logtalk_load(lgtunit(loader)),
 		logtalk_load(tests, [hook(lgtunit)]),
 		lgtunit::run_test_sets([

@@ -19,33 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(types(loader)),
-	logtalk_load(format(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(statistics(loader)),
-	logtalk_load([
-		dataset_protocol,
-		classifier_protocol,
-		probabilistic_classifier_protocol,
-		classifier_common,
-		probabilistic_classifier_common
-	], [
-		source_data(on),
-		debug(on)
-	]),
-	logtalk_load([
-		'test_datasets/play_tennis',
-		'test_datasets/contact_lenses',
-		'test_datasets/mixed',
-		'test_datasets/missing_mixed',
-		test_objects
-	], [
-		source_data(on),
-		debug(on)
-	]),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(invalid_agglomerative_two_blobs,
+	implements(clustering_dataset_protocol)).
+
+	attribute_values(x, continuous).
+	attribute_values(y, continuous).
+
+	example(1, [x-1.0, x-1.1, y-1.0]).
+	example(2, [x-5.0, y-5.0]).
+
+:- end_object.

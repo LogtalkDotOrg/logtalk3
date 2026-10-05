@@ -29,7 +29,13 @@
 	logtalk_load(statistics(loader)),
 	logtalk_load(anomaly_detection_protocols(loader)),
 	logtalk_load(cusum_anomaly_detector, [source_data(on), debug(on)]),
-	logtalk_load(anomaly_detection_protocols('test_datasets/mixed_anomalies'), [source_data(on), debug(on)]),
+	logtalk_load([
+		anomaly_detection_protocols('test_datasets/mixed_anomalies'),
+		test_objects
+	], [
+		source_data(on),
+		debug(on)
+	]),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
 )).

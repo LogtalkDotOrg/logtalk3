@@ -32,7 +32,8 @@
 		ranking_protocols('test_datasets/malformed_measurement_duplicate_items'),
 		ranking_protocols('test_datasets/malformed_measurement_self'),
 		ranking_protocols('test_datasets/malformed_measurement_non_numeric'),
-		ranking_protocols('test_datasets/malformed_measurement_non_positive_weight')
+		ranking_protocols('test_datasets/malformed_measurement_non_positive_weight'),
+		test_objects
 	], [
 		source_data(on),
 		debug(on)

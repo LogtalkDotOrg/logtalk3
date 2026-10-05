@@ -19,14 +19,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(singleton_pairwise,
-	implements(pairwise_ranking_dataset_protocol)).
-
-	item(alpha).
-
-:- end_object.
-
-
 :- object(tests,
 	extends(lgtunit)).
 

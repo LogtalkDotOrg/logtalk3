@@ -19,44 +19,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(websocket_echo_session_handler,
-	implements(http_websocket_service_handler_protocol)).
-
-	:- info([
-		version is 1:0:0,
-		author is 'Paulo Moura',
-		date is 2026-07-09,
-		comment is 'Helper session handler used by http_websocket wrapper tests.'
-	]).
-
-	handle(message(text, Text), [message(text, Text)]) :-
-		!.
-	handle(message(close, _Payload), []) :-
-		!.
-	handle(_Message, []).
-
-:- end_object.
-
-
-:- object(websocket_close_after_echo_handler,
-	implements(http_websocket_service_handler_protocol)).
-
-	:- info([
-		version is 1:0:0,
-		author is 'Paulo Moura',
-		date is 2026-07-09,
-		comment is 'Helper client session handler that closes after receiving one text reply.'
-	]).
-
-	handle(message(text, _Text), [message(close, status(1000, done))]) :-
-		!.
-	handle(message(close, _Payload), []) :-
-		!.
-	handle(_Message, []).
-
-:- end_object.
-
-
 :- object(tests(_HTTPTransport_),
 	extends(lgtunit)).
 

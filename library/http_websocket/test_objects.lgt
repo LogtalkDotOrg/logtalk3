@@ -19,33 +19,39 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(types(loader)),
-	logtalk_load(format(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(statistics(loader)),
-	logtalk_load([
-		dataset_protocol,
-		classifier_protocol,
-		probabilistic_classifier_protocol,
-		classifier_common,
-		probabilistic_classifier_common
-	], [
-		source_data(on),
-		debug(on)
-	]),
-	logtalk_load([
-		'test_datasets/play_tennis',
-		'test_datasets/contact_lenses',
-		'test_datasets/mixed',
-		'test_datasets/missing_mixed',
-		test_objects
-	], [
-		source_data(on),
-		debug(on)
-	]),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(websocket_echo_session_handler,
+	implements(http_websocket_service_handler_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-07-09,
+		comment is 'Helper session handler used by http_websocket wrapper tests.'
+	]).
+
+	handle(message(text, Text), [message(text, Text)]) :-
+		!.
+	handle(message(close, _Payload), []) :-
+		!.
+	handle(_Message, []).
+
+:- end_object.
+
+
+:- object(websocket_close_after_echo_handler,
+	implements(http_websocket_service_handler_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-07-09,
+		comment is 'Helper client session handler that closes after receiving one text reply.'
+	]).
+
+	handle(message(text, _Text), [message(close, status(1000, done))]) :-
+		!.
+	handle(message(close, _Payload), []) :-
+		!.
+	handle(_Message, []).
+
+:- end_object.
