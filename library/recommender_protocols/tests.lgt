@@ -21,7 +21,7 @@
 
 :- object(tests,
 	extends(lgtunit),
-	imports(recommender_common)).
+	imports([recommender_common, item_content_dataset_validation])).
 
 	:- info([
 		version is 1:0:0,
@@ -47,6 +47,7 @@
 	]).
 
 	cover(recommender_common).
+	cover(item_content_dataset_validation).
 	cover(similarity_metric_common).
 	cover(cosine_similarity).
 	cover(pearson_similarity).
@@ -54,6 +55,24 @@
 	cover(msd_similarity).
 	cover(spearman_similarity).
 	cover(sample_recommender).
+
+	test(content_occurrences_preserved, deterministic(Contents == [x-features([a,a,b])])) :-
+		^^collect_contents(content_catalog_fixture([x], [x-features([b,a,a])]), Contents, features).
+
+	test(content_zero_weights_removed, deterministic(Contents == [x-vector([a-2])])) :-
+		^^collect_contents(content_catalog_fixture([x], [x-vector([b-0,a-2])]), Contents, vectors).
+
+	test(content_canonical_order, deterministic(Contents == [x-features([a]),y-features([b])])) :-
+		^^canonical_contents([y-features([b]),x-features([a])], Contents, features).
+
+	test(content_empty_canonical_list, fail) :-
+		^^canonical_contents([], _, _).
+
+	test(content_rated_catalog_membership, deterministic) :-
+		^^check_rated_catalog([rating(u,x,1)], [x-features([]),y-features([])]).
+
+	test(content_missing_rated_item, error(domain_error(catalog_item, missing))) :-
+		^^check_rated_catalog([rating(u,missing,1)], [x-features([])]).
 
 	cleanup :-
 		^^clean_file('test_output.pl').

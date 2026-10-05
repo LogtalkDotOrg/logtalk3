@@ -26,6 +26,7 @@
 	logtalk_load([
 		rating_dataset_protocol,
 		item_content_dataset_protocol,
+		item_content_dataset_validation,
 		similarity_metric_protocol,
 		similarity_metric_common,
 		cosine_similarity,

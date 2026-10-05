@@ -222,6 +222,7 @@ Foreach-Object {
 (Get-Content ../../../library/iso_9362/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/iso_9362.rst
 (Get-Content ../../../library/iso_13616/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/iso_13616.rst
 (Get-Content ../../../library/isolation_forest_anomaly_detector/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/isolation_forest_anomaly_detector.rst
+(Get-Content ../../../library/jaccard_recommender/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/jaccard_recommender.rst
 (Get-Content ../../../library/java/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/java.rst
 (Get-Content ../../../library/json/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/json.rst
 (Get-Content ../../../library/json_graph/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/json_graph.rst

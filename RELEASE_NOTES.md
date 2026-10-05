@@ -89,6 +89,10 @@ recommender.
 with TF-IDF or preweighted sparse item vectors, positive-feedback centroid
 profiles, and cosine relevance scores.
 
+* ADDED: New `jaccard_recommender` library implementing content-based filtering
+with categorical or binary item features, positive-feedback union profiles,
+and Jaccard relevance scores.
+
 * IMPROVED: Performance of the `crypto` library.
 
 * IMPROVED: Rewrite predicate definitions as tail-recursive in the

@@ -25,7 +25,8 @@ Classical content-based filtering using sparse item vectors, positive-feedback
 Rocchio-style centroid profiles, and cosine similarity. Feature occurrence
 lists are weighted by TF-IDF through `text_vectorization`; externally weighted
 vectors can also be supplied. The object imports `recommender_common` and
-`similarity_metric_common`, implementing `recommender_protocol`.
+the `item_content_dataset_validation` and `similarity_metric_common`
+categories, implementing `recommender_protocol`.
 The `score/4` predicate returns cosine relevance rather than a predicted rating.
 
 

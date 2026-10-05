@@ -214,6 +214,7 @@
 <li class="toctree-l2"><a class="reference internal" href="iso_4217.html"><code class="docutils literal notranslate"><span class="pre">iso_4217</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="iso_639.html"><code class="docutils literal notranslate"><span class="pre">iso_639</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="iso_9362.html"><code class="docutils literal notranslate"><span class="pre">iso_9362</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jaccard_recommender.html"><code class="docutils literal notranslate"><span class="pre">jaccard_recommender</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="java.html"><code class="docutils literal notranslate"><span class="pre">java</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="json.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="json_graph.html"><code class="docutils literal notranslate"><span class="pre">json_graph</span></code></a></li>
@@ -446,8 +447,9 @@ predicate for user-item relevance scoring. Score ranges and
 unknown-identifier policies depend on the implementation. All
 recommender implementations import <code class="docutils literal notranslate"><span class="pre">recommender_common</span></code> and implement
 <code class="docutils literal notranslate"><span class="pre">score/4</span></code> directly. Collaborative recommenders return predicted
-ratings in the dataset’s rating units; <code class="docutils literal notranslate"><span class="pre">tfidf_recommender</span></code> returns
-cosine relevance without claiming to estimate ratings.</p>
+ratings in the dataset’s rating units; <code class="docutils literal notranslate"><span class="pre">tfidf_recommender</span></code> and
+<code class="docutils literal notranslate"><span class="pre">jaccard_recommender</span></code> return cosine and set-overlap relevance,
+respectively, without claiming to estimate ratings.</p>
 <p>Similarity metrics are also exposed as pluggable strategy objects,
 <code class="docutils literal notranslate"><span class="pre">cosine_similarity</span></code>, <code class="docutils literal notranslate"><span class="pre">pearson_similarity</span></code>, <code class="docutils literal notranslate"><span class="pre">jaccard_similarity</span></code>,
 <code class="docutils literal notranslate"><span class="pre">msd_similarity</span></code>, and <code class="docutils literal notranslate"><span class="pre">spearman_similarity</span></code>, implementing the
@@ -597,9 +599,20 @@ a bound item. Descriptors are <code class="docutils literal notranslate"><span c
 consistently. Feature occurrences may be arbitrary ground terms.
 Supplied vectors have unique ground keys and finite nonnegative numeric
 weights. Empty content is allowed. Rated items must belong to the
-catalog. The <code class="docutils literal notranslate"><span class="pre">tfidf_recommender</span></code> library validates these requirements,
-learns TF-IDF over the full catalog, and constructs positive-feedback
-profiles.</p>
+catalog.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">item_content_dataset_validation</span></code> category provides protected
+<code class="docutils literal notranslate"><span class="pre">collect_contents/3</span></code>, <code class="docutils literal notranslate"><span class="pre">canonical_contents/3</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">check_rated_catalog/2</span></code> predicates for content-based implementations.
+It validates catalog coverage, homogeneous descriptors, identifiers, and
+vector entries, sorts declarations and feature occurrences, preserves
+occurrence multiplicity, and removes zero vector weights. Empty
+canonical declaration lists fail; catalog collection requires a nonempty
+catalog.</p>
+<p>Both <code class="docutils literal notranslate"><span class="pre">tfidf_recommender</span></code> and <code class="docutils literal notranslate"><span class="pre">jaccard_recommender</span></code> import this
+category. TF-IDF learns weighted vectors over the full catalog and
+constructs centroid profiles. Jaccard additionally requires binary
+vectors, collapses feature occurrences to sets, and constructs union
+profiles. Both recommenders can recommend catalog items with no ratings.</p>
 </section>
 <section id="similarity-metrics">
 <h2>Similarity metrics<a class="headerlink" href="#similarity-metrics" title="Link to this heading"></a></h2>

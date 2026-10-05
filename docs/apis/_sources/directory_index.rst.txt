@@ -2788,6 +2788,20 @@ To load an entity, always load the library that includes it using the goal ``log
 
    * :doc:`isolation_forest_anomaly_detector <isolation_forest_anomaly_detector_0>`
 
+``library/jaccard_recommender/``
+--------------------------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      jaccard_recommender <jaccard_recommender_0>
+
+.. only:: latex
+
+   * :doc:`jaccard_recommender <jaccard_recommender_0>`
+
 ``library/java/``
 -----------------
 
@@ -4666,6 +4680,7 @@ To load an entity, always load the library that includes it using the goal ``log
 
       cosine_similarity <cosine_similarity_0>
       item_content_dataset_protocol <item_content_dataset_protocol_0>
+      item_content_dataset_validation <item_content_dataset_validation_0>
       jaccard_similarity <jaccard_similarity_0>
       msd_similarity <msd_similarity_0>
       pearson_similarity <pearson_similarity_0>
@@ -4680,6 +4695,7 @@ To load an entity, always load the library that includes it using the goal ``log
 
    * :doc:`cosine_similarity <cosine_similarity_0>`
    * :doc:`item_content_dataset_protocol <item_content_dataset_protocol_0>`
+   * :doc:`item_content_dataset_validation <item_content_dataset_validation_0>`
    * :doc:`jaccard_similarity <jaccard_similarity_0>`
    * :doc:`msd_similarity <msd_similarity_0>`
    * :doc:`pearson_similarity <pearson_similarity_0>`

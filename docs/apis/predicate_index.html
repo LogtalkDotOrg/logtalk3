@@ -948,6 +948,7 @@
 <li><a class="reference internal" href="#export-2"><code class="docutils literal notranslate"><span class="pre">export/2</span></code></a></li>
 <li><a class="reference internal" href="#export-to-clauses-4"><code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code></a></li>
 <li><a class="reference internal" href="#export-to-file-4"><code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code></a></li>
+<li><a class="reference internal" href="#extend-catalog-3"><code class="docutils literal notranslate"><span class="pre">extend_catalog/3</span></code></a></li>
 <li><a class="reference internal" href="#extension-1"><code class="docutils literal notranslate"><span class="pre">extension/1</span></code></a></li>
 <li><a class="reference internal" href="#extension-type-2"><code class="docutils literal notranslate"><span class="pre">extension_type/2</span></code></a></li>
 <li><a class="reference internal" href="#extension-type-3"><code class="docutils literal notranslate"><span class="pre">extension_type/3</span></code></a></li>
@@ -2463,6 +2464,7 @@
 <li><a class="reference internal" href="#remove-constraints-3"><code class="docutils literal notranslate"><span class="pre">remove_constraints/3</span></code></a></li>
 <li><a class="reference internal" href="#remove-diacritics-2"><code class="docutils literal notranslate"><span class="pre">remove_diacritics/2</span></code></a></li>
 <li><a class="reference internal" href="#remove-duplicates-2"><code class="docutils literal notranslate"><span class="pre">remove_duplicates/2</span></code></a></li>
+<li><a class="reference internal" href="#remove-ratings-3"><code class="docutils literal notranslate"><span class="pre">remove_ratings/3</span></code></a></li>
 <li><a class="reference internal" href="#remove-rule-1"><code class="docutils literal notranslate"><span class="pre">remove_rule/1</span></code></a></li>
 <li><a class="reference internal" href="#remove-time-points-3"><code class="docutils literal notranslate"><span class="pre">remove_time_points/3</span></code></a></li>
 <li><a class="reference internal" href="#rename-4"><code class="docutils literal notranslate"><span class="pre">rename/4</span></code></a></li>
@@ -2470,6 +2472,7 @@
 <li><a class="reference internal" href="#renew-2"><code class="docutils literal notranslate"><span class="pre">renew/2</span></code></a></li>
 <li><a class="reference internal" href="#replace-3"><code class="docutils literal notranslate"><span class="pre">replace/3</span></code></a></li>
 <li><a class="reference internal" href="#replace-5"><code class="docutils literal notranslate"><span class="pre">replace/5</span></code></a></li>
+<li><a class="reference internal" href="#replace-content-3"><code class="docutils literal notranslate"><span class="pre">replace_content/3</span></code></a></li>
 <li><a class="reference internal" href="#replace-sub-atom-4"><code class="docutils literal notranslate"><span class="pre">replace_sub_atom/4</span></code></a></li>
 <li><a class="reference internal" href="#reply-3"><code class="docutils literal notranslate"><span class="pre">reply/3</span></code></a></li>
 <li><a class="reference internal" href="#reply-4"><code class="docutils literal notranslate"><span class="pre">reply/4</span></code></a></li>
@@ -2615,6 +2618,8 @@
 <li><a class="reference internal" href="#score-3"><code class="docutils literal notranslate"><span class="pre">score/3</span></code></a></li>
 <li><a class="reference internal" href="#score-4"><code class="docutils literal notranslate"><span class="pre">score/4</span></code></a></li>
 <li><a class="reference internal" href="#score-all-3"><code class="docutils literal notranslate"><span class="pre">score_all/3</span></code></a></li>
+<li><a class="reference internal" href="#score-all-4"><code class="docutils literal notranslate"><span class="pre">score_all/4</span></code></a></li>
+<li><a class="reference internal" href="#score-content-4"><code class="docutils literal notranslate"><span class="pre">score_content/4</span></code></a></li>
 <li><a class="reference internal" href="#scores-2"><code class="docutils literal notranslate"><span class="pre">scores/2</span></code></a></li>
 <li><a class="reference internal" href="#scores-3"><code class="docutils literal notranslate"><span class="pre">scores/3</span></code></a></li>
 <li><a class="reference internal" href="#script-ratios-2"><code class="docutils literal notranslate"><span class="pre">script_ratios/2</span></code></a></li>
@@ -3048,6 +3053,7 @@
 <li><a class="reference internal" href="#update-hash-state-3"><code class="docutils literal notranslate"><span class="pre">update_hash_state/3</span></code></a></li>
 <li><a class="reference internal" href="#update-in-4"><code class="docutils literal notranslate"><span class="pre">update_in/4</span></code></a></li>
 <li><a class="reference internal" href="#update-in-5"><code class="docutils literal notranslate"><span class="pre">update_in/5</span></code></a></li>
+<li><a class="reference internal" href="#update-ratings-3"><code class="docutils literal notranslate"><span class="pre">update_ratings/3</span></code></a></li>
 <li><a class="reference internal" href="#upper-case-2"><code class="docutils literal notranslate"><span class="pre">upper_case/2</span></code></a></li>
 <li><a class="reference internal" href="#upper-triangular-part-2"><code class="docutils literal notranslate"><span class="pre">upper_triangular_part/2</span></code></a></li>
 <li><a class="reference internal" href="#upper-triangular-part-3"><code class="docutils literal notranslate"><span class="pre">upper_triangular_part/3</span></code></a></li>
@@ -8869,6 +8875,12 @@
 <li><p><a class="reference internal" href="recommender_protocol_0.html#recommender-protocol-0-export-to-file-4"><span class="std std-ref">recommender_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="regressor_protocol_0.html#regressor-protocol-0-export-to-file-4"><span class="std std-ref">regressor_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="theta_forecasting_0.html#theta-forecasting-0-export-to-file-4"><span class="std std-ref">theta_forecasting</span></a></p></li>
+</ul>
+</section>
+<section id="extend-catalog-3">
+<h2><code class="docutils literal notranslate"><span class="pre">extend_catalog/3</span></code><a class="headerlink" href="#extend-catalog-3" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="jaccard_recommender_0.html#jaccard-recommender-0-extend-catalog-3"><span class="std std-ref">jaccard_recommender</span></a></p></li>
 </ul>
 </section>
 <section id="extension-1">
@@ -18434,6 +18446,12 @@
 <li><p><a class="reference internal" href="varlistp_0.html#varlistp-0-remove-duplicates-2"><span class="std std-ref">varlistp</span></a></p></li>
 </ul>
 </section>
+<section id="remove-ratings-3">
+<h2><code class="docutils literal notranslate"><span class="pre">remove_ratings/3</span></code><a class="headerlink" href="#remove-ratings-3" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="jaccard_recommender_0.html#jaccard-recommender-0-remove-ratings-3"><span class="std std-ref">jaccard_recommender</span></a></p></li>
+</ul>
+</section>
 <section id="remove-rule-1">
 <h2><code class="docutils literal notranslate"><span class="pre">remove_rule/1</span></code><a class="headerlink" href="#remove-rule-1" title="Link to this heading"></a></h2>
 <ul class="simple">
@@ -18474,6 +18492,12 @@
 <h2><code class="docutils literal notranslate"><span class="pre">replace/5</span></code><a class="headerlink" href="#replace-5" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="memcached_0.html#memcached-0-replace-5"><span class="std std-ref">memcached</span></a></p></li>
+</ul>
+</section>
+<section id="replace-content-3">
+<h2><code class="docutils literal notranslate"><span class="pre">replace_content/3</span></code><a class="headerlink" href="#replace-content-3" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="jaccard_recommender_0.html#jaccard-recommender-0-replace-content-3"><span class="std std-ref">jaccard_recommender</span></a></p></li>
 </ul>
 </section>
 <section id="replace-sub-atom-4">
@@ -19401,6 +19425,18 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="anomaly_detector_protocol_0.html#anomaly-detector-protocol-0-score-all-3"><span class="std std-ref">anomaly_detector_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="isolation_forest_anomaly_detector_0.html#isolation-forest-anomaly-detector-0-score-all-3"><span class="std std-ref">isolation_forest_anomaly_detector</span></a></p></li>
+</ul>
+</section>
+<section id="score-all-4">
+<h2><code class="docutils literal notranslate"><span class="pre">score_all/4</span></code><a class="headerlink" href="#score-all-4" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="jaccard_recommender_0.html#jaccard-recommender-0-score-all-4"><span class="std std-ref">jaccard_recommender</span></a></p></li>
+</ul>
+</section>
+<section id="score-content-4">
+<h2><code class="docutils literal notranslate"><span class="pre">score_content/4</span></code><a class="headerlink" href="#score-content-4" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="jaccard_recommender_0.html#jaccard-recommender-0-score-content-4"><span class="std std-ref">jaccard_recommender</span></a></p></li>
 </ul>
 </section>
 <section id="scores-2">
@@ -22122,6 +22158,12 @@
 <h2><code class="docutils literal notranslate"><span class="pre">update_in/5</span></code><a class="headerlink" href="#update-in-5" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="nested_dictionary_protocol_0.html#nested-dictionary-protocol-0-update-in-5"><span class="std std-ref">nested_dictionary_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="update-ratings-3">
+<h2><code class="docutils literal notranslate"><span class="pre">update_ratings/3</span></code><a class="headerlink" href="#update-ratings-3" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="jaccard_recommender_0.html#jaccard-recommender-0-update-ratings-3"><span class="std std-ref">jaccard_recommender</span></a></p></li>
 </ul>
 </section>
 <section id="upper-case-2">

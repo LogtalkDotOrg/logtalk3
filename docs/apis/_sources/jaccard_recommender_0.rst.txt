@@ -1,0 +1,563 @@
+.. index:: single: jaccard_recommender
+.. _jaccard_recommender/0:
+
+.. rst-class:: right
+
+**object**
+
+``jaccard_recommender``
+=======================
+
+Content-based recommender using binary item features, support-filtered positive-feedback profiles, and Jaccard relevance scores.
+
+| **Availability:** 
+|    ``logtalk_load(jaccard_recommender(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-04
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`recommender_common <recommender_common/0>`
+|    ``public`` :ref:`item_content_dataset_validation <item_content_dataset_validation/0>`
+| **Uses:**
+|    :ref:`jaccard_similarity <jaccard_similarity/0>`
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`recommender_protocol/0::check_recommender/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`recommender_protocol/0::diagnostic/2`  :ref:`recommender_protocol/0::diagnostics/2`  :ref:`recommender_protocol/0::export_to_clauses/4`  :ref:`recommender_protocol/0::export_to_file/4`  :ref:`recommender_protocol/0::learn/2`  :ref:`recommender_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`recommender_protocol/0::print_recommender/1`  :ref:`recommender_protocol/0::recommend/4`  :ref:`recommender_protocol/0::recommender_options/2`  :ref:`recommender_protocol/0::score/4`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`recommender_protocol/0::valid_recommender/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: score_all/4
+.. _jaccard_recommender/0::score_all/4:
+
+``score_all/4``
+^^^^^^^^^^^^^^^
+
+Scores catalog items in input order, preserving duplicates and validating the model once. An empty list returns an empty list after validating the model and user.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``score_all(Recommender,User,Items,Scores)``
+| **Mode and number of proofs:**
+|    ``score_all(+compound,+atomic,+list(atomic),-list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A required argument or item identifier is a variable:
+|        ``instantiation_error``
+|    The model is invalid:
+|        ``domain_error(recommender,Recommender)``
+|    User or an item identifier is not atomic:
+|        ``type_error(atomic,Identifier)``
+|    Items is not a proper list:
+|        ``type_error(list,Items)``
+|    An item is absent from the learned catalog:
+|        ``domain_error(catalog_item,Item)``
+
+
+------------
+
+.. index:: score_content/4
+.. _jaccard_recommender/0::score_content/4:
+
+``score_content/4``
+^^^^^^^^^^^^^^^^^^^
+
+Scores supplied binary content against a learned user profile without changing the model or catalog. Either descriptor kind is accepted regardless of the training representation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``score_content(Recommender,User,Content,Score)``
+| **Mode and number of proofs:**
+|    ``score_content(+compound,+atomic,+compound,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A required argument, feature, entry, or weight is a variable:
+|        ``instantiation_error``
+|    The model is invalid:
+|        ``domain_error(recommender,Recommender)``
+|    User is not atomic:
+|        ``type_error(atomic,User)``
+|    The content descriptor is invalid:
+|        ``domain_error(item_content,Content)``
+|    A content list is not a proper list:
+|        ``type_error(list,List)``
+|    A vector entry is not a pair:
+|        ``type_error(pair,Entry)``
+|    A vector repeats a feature key:
+|        ``domain_error(duplicate_feature,Feature)``
+|    A vector weight is not numeric:
+|        ``type_error(number,Weight)``
+|    A vector weight is negative or nonfinite:
+|        ``domain_error(non_negative_finite_weight,Weight)``
+|    A vector weight is neither zero nor one:
+|        ``domain_error(binary_weight,Weight)``
+
+
+------------
+
+.. index:: extend_catalog/3
+.. _jaccard_recommender/0::extend_catalog/3:
+
+``extend_catalog/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns a model with additional unrated items of the existing content representation, preserving ratings and profiles. An empty extension returns the validated original model.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``extend_catalog(Recommender,ItemContents,UpdatedRecommender)``
+| **Mode and number of proofs:**
+|    ``extend_catalog(+compound,+list(pair),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A required argument, entry, identifier, feature, or weight is a variable:
+|        ``instantiation_error``
+|    The model is invalid:
+|        ``domain_error(recommender,Recommender)``
+|    A supplied list is not a proper list:
+|        ``type_error(list,List)``
+|    A content declaration or vector entry is not a pair:
+|        ``type_error(pair,Entry)``
+|    An item identifier is not atomic:
+|        ``type_error(atomic,Item)``
+|    An identifier already belongs to the catalog:
+|        ``domain_error(new_catalog_item,Item)``
+|    An identifier occurs more than once in the extension:
+|        ``domain_error(duplicate_item,Item)``
+|    A content descriptor is invalid:
+|        ``domain_error(item_content,Content)``
+|    Content representations are mixed or differ from the catalog:
+|        ``domain_error(content_representation,Content)``
+|    A vector repeats a feature key:
+|        ``domain_error(duplicate_feature,Feature)``
+|    A vector weight is not numeric:
+|        ``type_error(number,Weight)``
+|    A vector weight is negative or nonfinite:
+|        ``domain_error(non_negative_finite_weight,Weight)``
+|    A vector weight is neither zero nor one:
+|        ``domain_error(binary_weight,Weight)``
+
+
+------------
+
+.. index:: replace_content/3
+.. _jaccard_recommender/0::replace_content/3:
+
+``replace_content/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns a model with replaced catalog content and rebuilt profiles. An empty replacement returns the validated original model.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``replace_content(Recommender,ItemContents,UpdatedRecommender)``
+| **Mode and number of proofs:**
+|    ``replace_content(+compound,+list(pair),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A required argument, entry, identifier, feature, or weight is a variable:
+|        ``instantiation_error``
+|    The model is invalid:
+|        ``domain_error(recommender,Recommender)``
+|    A supplied list is not a proper list:
+|        ``type_error(list,List)``
+|    A content declaration or vector entry is not a pair:
+|        ``type_error(pair,Entry)``
+|    An item identifier is not atomic:
+|        ``type_error(atomic,Item)``
+|    An item is absent from the catalog:
+|        ``domain_error(catalog_item,Item)``
+|    An identifier occurs more than once in the replacements:
+|        ``domain_error(duplicate_item,Item)``
+|    A content descriptor is invalid:
+|        ``domain_error(item_content,Content)``
+|    Content representations are mixed or differ from the catalog:
+|        ``domain_error(content_representation,Content)``
+|    A vector repeats a feature key:
+|        ``domain_error(duplicate_feature,Feature)``
+|    A vector weight is not numeric:
+|        ``type_error(number,Weight)``
+|    A vector weight is negative or nonfinite:
+|        ``domain_error(non_negative_finite_weight,Weight)``
+|    A vector weight is neither zero nor one:
+|        ``domain_error(binary_weight,Weight)``
+
+
+------------
+
+.. index:: update_ratings/3
+.. _jaccard_recommender/0::update_ratings/3:
+
+``update_ratings/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns a model with inserted or replaced user-item ratings and rebuilt profiles, accepting new users but requiring catalog items. An empty update returns the validated original model.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``update_ratings(Recommender,Ratings,UpdatedRecommender)``
+| **Mode and number of proofs:**
+|    ``update_ratings(+compound,+list(compound),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A required argument, record, identifier, or value is a variable:
+|        ``instantiation_error``
+|    The model is invalid:
+|        ``domain_error(recommender,Recommender)``
+|    Ratings is not a proper list:
+|        ``type_error(list,Ratings)``
+|    An entry is not a rating record:
+|        ``type_error(rating,Entry)``
+|    A user or item identifier is not atomic:
+|        ``type_error(atomic,Identifier)``
+|    A rating value is not numeric:
+|        ``type_error(number,Rating)``
+|    A rating value is nonfinite:
+|        ``domain_error(finite_rating,Rating)``
+|    A rating value is outside the stored scale:
+|        ``domain_error(rating_scale(Min,Max),Rating)``
+|    An item is absent from the catalog:
+|        ``domain_error(catalog_item,Item)``
+|    A user-item pair occurs more than once in the updates:
+|        ``domain_error(duplicate_rating,User-Item)``
+
+
+------------
+
+.. index:: remove_ratings/3
+.. _jaccard_recommender/0::remove_ratings/3:
+
+``remove_ratings/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns a model with requested user-item ratings removed and profiles rebuilt. Missing and repeated pairs are accepted; no matching ratings returns the validated original model.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``remove_ratings(Recommender,UserItemPairs,UpdatedRecommender)``
+| **Mode and number of proofs:**
+|    ``remove_ratings(+compound,+list(pair),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A required argument, entry, or identifier is a variable:
+|        ``instantiation_error``
+|    The model is invalid:
+|        ``domain_error(recommender,Recommender)``
+|    UserItemPairs is not a proper list:
+|        ``type_error(list,UserItemPairs)``
+|    An entry is not a pair:
+|        ``type_error(pair,Entry)``
+|    A user or item identifier is not atomic:
+|        ``type_error(atomic,Identifier)``
+|    No ratings would remain:
+|        ``domain_error(non_empty_ratings,[])``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: rating_removal_records/3
+.. _jaccard_recommender/0::rating_removal_records/3:
+
+``rating_removal_records/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates user-item pairs and collects matching stored ratings, ignoring missing pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rating_removal_records(UserItemPairs,Ratings,Removals)``
+| **Mode and number of proofs:**
+|    ``rating_removal_records(+list(pair),+list(compound),-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An entry or identifier is a variable:
+|        ``instantiation_error``
+|    An entry is not a pair:
+|        ``type_error(pair,Entry)``
+|    A user or item identifier is not atomic:
+|        ``type_error(atomic,Identifier)``
+
+
+------------
+
+.. index:: check_rating_updates/3
+.. _jaccard_recommender/0::check_rating_updates/3:
+
+``check_rating_updates/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks rating records against the catalog and stored rating scale.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_rating_updates(Ratings,Vectors,Scale)``
+| **Mode and number of proofs:**
+|    ``check_rating_updates(+list(compound),+list(pair),+term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A record, identifier, or value is a variable:
+|        ``instantiation_error``
+|    An entry is not a rating record:
+|        ``type_error(rating,Entry)``
+|    A user or item identifier is not atomic:
+|        ``type_error(atomic,Identifier)``
+|    A rating value is not numeric:
+|        ``type_error(number,Rating)``
+|    A rating value is nonfinite:
+|        ``domain_error(finite_rating,Rating)``
+|    A rating value is outside the stored scale:
+|        ``domain_error(rating_scale(Min,Max),Rating)``
+|    An item is absent from the catalog:
+|        ``domain_error(catalog_item,Item)``
+
+
+------------
+
+.. index:: check_catalog_replacements/2
+.. _jaccard_recommender/0::check_catalog_replacements/2:
+
+``check_catalog_replacements/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that replacement declarations are pairs with atomic catalog identifiers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_catalog_replacements(ItemContents,Vectors)``
+| **Mode and number of proofs:**
+|    ``check_catalog_replacements(+list(pair),+list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An entry or identifier is a variable:
+|        ``instantiation_error``
+|    An entry is not a pair:
+|        ``type_error(pair,Entry)``
+|    An identifier is not atomic:
+|        ``type_error(atomic,Item)``
+|    An identifier is absent from the catalog:
+|        ``domain_error(catalog_item,Item)``
+
+
+------------
+
+.. index:: check_catalog_additions/2
+.. _jaccard_recommender/0::check_catalog_additions/2:
+
+``check_catalog_additions/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that content declarations are pairs with atomic identifiers absent from the existing catalog.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_catalog_additions(ItemContents,Vectors)``
+| **Mode and number of proofs:**
+|    ``check_catalog_additions(+list(pair),+list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An entry or identifier is a variable:
+|        ``instantiation_error``
+|    An entry is not a pair:
+|        ``type_error(pair,Entry)``
+|    An identifier is not atomic:
+|        ``type_error(atomic,Item)``
+|    An identifier already belongs to the catalog:
+|        ``domain_error(new_catalog_item,Item)``
+
+
+------------
+
+.. index:: catalog_score/5
+.. _jaccard_recommender/0::catalog_score/5:
+
+``catalog_score/5``
+^^^^^^^^^^^^^^^^^^^
+
+Scores an instantiated catalog identifier using validated model data.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``catalog_score(Vectors,Profiles,User,Item,Score)``
+| **Mode and number of proofs:**
+|    ``catalog_score(+list(pair),+list(pair),+atomic,+atomic,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The item is absent from the learned catalog:
+|        ``domain_error(catalog_item,Item)``
+
+
+------------
+
+.. index:: score_catalog_items/5
+.. _jaccard_recommender/0::score_catalog_items/5:
+
+``score_catalog_items/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates and scores catalog identifiers in order using validated model data.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``score_catalog_items(Vectors,Profiles,User,Items,Scores)``
+| **Mode and number of proofs:**
+|    ``score_catalog_items(+list(pair),+list(pair),+atomic,+list(atomic),-list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An item identifier is a variable:
+|        ``instantiation_error``
+|    An item identifier is not atomic:
+|        ``type_error(atomic,Item)``
+|    An item is absent from the learned catalog:
+|        ``domain_error(catalog_item,Item)``
+
+
+------------
+
+.. index:: binary_contents/2
+.. _jaccard_recommender/0::binary_contents/2:
+
+``binary_contents/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Converts canonical descriptors into sorted binary feature vectors, ignoring feature multiplicity.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``binary_contents(Contents,Vectors)``
+| **Mode and number of proofs:**
+|    ``binary_contents(+list(pair),-list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A nonzero canonical vector weight is not one:
+|        ``domain_error(binary_weight,Weight)``
+
+
+------------
+
+.. index:: binary_descriptor/2
+.. _jaccard_recommender/0::binary_descriptor/2:
+
+``binary_descriptor/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts a canonical descriptor to a binary feature vector.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``binary_descriptor(Content,Vector)``
+| **Mode and number of proofs:**
+|    ``binary_descriptor(+compound,-list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A nonzero canonical vector weight is not one:
+|        ``domain_error(binary_weight,Weight)``
+
+
+------------
+
+.. index:: binary_pairs/2
+.. _jaccard_recommender/0::binary_pairs/2:
+
+``binary_pairs/2``
+^^^^^^^^^^^^^^^^^^
+
+Checks that nonzero canonical weights are one and replaces them with integer unit weights.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``binary_pairs(Pairs,Vector)``
+| **Mode and number of proofs:**
+|    ``binary_pairs(+list(pair),-list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A nonzero canonical vector weight is not one:
+|        ``domain_error(binary_weight,Weight)``
+
+
+------------
+
+.. index:: check_finite_ratings/1
+.. _jaccard_recommender/0::check_finite_ratings/1:
+
+``check_finite_ratings/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that rating values are finite.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_finite_ratings(Ratings)``
+| **Mode and number of proofs:**
+|    ``check_finite_ratings(+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A rating is not finite:
+|        ``domain_error(finite_rating,Rating)``
+
+
+------------
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`recommender_protocol <recommender_protocol/0>`, :ref:`item_content_dataset_protocol <item_content_dataset_protocol/0>`, :ref:`jaccard_similarity <jaccard_similarity/0>`
+

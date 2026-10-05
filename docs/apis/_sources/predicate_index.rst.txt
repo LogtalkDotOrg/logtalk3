@@ -9994,6 +9994,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``extend_catalog/3``
+   --------------------
+
+   * :ref:`jaccard_recommender <jaccard_recommender/0::extend_catalog/3>`
+
+.. only:: latex
+
+   * ``extend_catalog/3`` - :ref:`jaccard_recommender <jaccard_recommender/0::extend_catalog/3>`
+
+.. only:: not latex
+
    ``extension/1``
    ---------------
 
@@ -27132,6 +27143,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``remove_ratings/3``
+   --------------------
+
+   * :ref:`jaccard_recommender <jaccard_recommender/0::remove_ratings/3>`
+
+.. only:: latex
+
+   * ``remove_ratings/3`` - :ref:`jaccard_recommender <jaccard_recommender/0::remove_ratings/3>`
+
+.. only:: not latex
+
    ``remove_rule/1``
    -----------------
 
@@ -27206,6 +27228,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``replace/5`` - :ref:`memcached <memcached/0::replace/5>`
+
+.. only:: not latex
+
+   ``replace_content/3``
+   ---------------------
+
+   * :ref:`jaccard_recommender <jaccard_recommender/0::replace_content/3>`
+
+.. only:: latex
+
+   * ``replace_content/3`` - :ref:`jaccard_recommender <jaccard_recommender/0::replace_content/3>`
 
 .. only:: not latex
 
@@ -28858,6 +28891,28 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``score_all/3`` - :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::score_all/3>`, :ref:`isolation_forest_anomaly_detector <isolation_forest_anomaly_detector/0::score_all/3>`
+
+.. only:: not latex
+
+   ``score_all/4``
+   ---------------
+
+   * :ref:`jaccard_recommender <jaccard_recommender/0::score_all/4>`
+
+.. only:: latex
+
+   * ``score_all/4`` - :ref:`jaccard_recommender <jaccard_recommender/0::score_all/4>`
+
+.. only:: not latex
+
+   ``score_content/4``
+   -------------------
+
+   * :ref:`jaccard_recommender <jaccard_recommender/0::score_content/4>`
+
+.. only:: latex
+
+   * ``score_content/4`` - :ref:`jaccard_recommender <jaccard_recommender/0::score_content/4>`
 
 .. only:: not latex
 
@@ -33744,6 +33799,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``update_in/5`` - :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::update_in/5>`
+
+.. only:: not latex
+
+   ``update_ratings/3``
+   --------------------
+
+   * :ref:`jaccard_recommender <jaccard_recommender/0::update_ratings/3>`
+
+.. only:: latex
+
+   * ``update_ratings/3`` - :ref:`jaccard_recommender <jaccard_recommender/0::update_ratings/3>`
 
 .. only:: not latex
 

@@ -139,8 +139,8 @@ Library groups
     ``knn_forecasting``, ``theta_forecasting``, and
     ``time_series_regression``.
   - Recommendation: ``recommender_protocols``, ``knn_item_recommender``,
-    ``knn_user_recommender``, ``slope_one_recommender``, and
-    ``tfidf_recommender``.
+    ``knn_user_recommender``, ``slope_one_recommender``,
+    ``tfidf_recommender``, and ``jaccard_recommender``.
 
 In addition to the loader-based libraries, this directory also contains
 a small number of standalone reusable entities, namely ``attributes``,

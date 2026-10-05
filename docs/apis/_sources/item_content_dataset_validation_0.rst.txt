@@ -1,0 +1,171 @@
+.. index:: single: item_content_dataset_validation
+.. _item_content_dataset_validation/0:
+
+.. rst-class:: right
+
+**category**
+
+``item_content_dataset_validation``
+===================================
+
+Shared collection and validation of item catalogs and content descriptors.
+
+| **Availability:** 
+|    ``logtalk_load(recommender_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-04
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`pairs <pairs/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: collect_contents/3
+.. _item_content_dataset_validation/0::collect_contents/3:
+
+``collect_contents/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Collects and validates a nonempty catalog and its content declarations.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``collect_contents(Dataset,Contents,Kind)``
+| **Mode and number of proofs:**
+|    ``collect_contents(+object_identifier,-list(pair),-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The catalog is empty:
+|        ``domain_error(non_empty_catalog,Dataset)``
+|    An item identifier is a variable:
+|        ``instantiation_error``
+|    An item identifier is not atomic:
+|        ``type_error(atomic,Item)``
+|    A catalog item is declared more than once:
+|        ``domain_error(duplicate_item,Item)``
+|    Content declarations do not cover the catalog exactly once:
+|        ``domain_error(item_content_coverage,Dataset)``
+|    A content descriptor is invalid:
+|        ``domain_error(item_content,Content)``
+|    Content representations are mixed:
+|        ``domain_error(content_representation,Content)``
+|    A content list is not a proper list:
+|        ``type_error(list,List)``
+|    A feature or content list is not ground:
+|        ``instantiation_error``
+|    A sparse vector repeats a feature key:
+|        ``domain_error(duplicate_feature,Feature)``
+|    A sparse vector entry is not a pair:
+|        ``type_error(pair,Entry)``
+|    A sparse weight is not numeric:
+|        ``type_error(number,Weight)``
+|    A sparse weight is negative or nonfinite:
+|        ``domain_error(non_negative_finite_weight,Weight)``
+
+
+------------
+
+.. index:: canonical_contents/3
+.. _item_content_dataset_validation/0::canonical_contents/3:
+
+``canonical_contents/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Canonicalizes content declarations, preserving feature occurrences and removing zero vector weights. Fails for an empty list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``canonical_contents(Contents,Canonical,Kind)``
+| **Mode and number of proofs:**
+|    ``canonical_contents(+list(pair),-list(pair),-atom)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    An item identifier or feature is a variable:
+|        ``instantiation_error``
+|    An item identifier is not atomic:
+|        ``type_error(atomic,Item)``
+|    An item is declared more than once:
+|        ``domain_error(duplicate_item,Item)``
+|    A content descriptor is invalid:
+|        ``domain_error(item_content,Content)``
+|    Content representations are mixed:
+|        ``domain_error(content_representation,Content)``
+|    A content list is not a proper list:
+|        ``type_error(list,List)``
+|    A sparse vector repeats a feature key:
+|        ``domain_error(duplicate_feature,Feature)``
+|    A sparse vector entry is not a pair:
+|        ``type_error(pair,Entry)``
+|    A sparse weight is not numeric:
+|        ``type_error(number,Weight)``
+|    A sparse weight is negative or nonfinite:
+|        ``domain_error(non_negative_finite_weight,Weight)``
+
+
+------------
+
+.. index:: check_rated_catalog/2
+.. _item_content_dataset_validation/0::check_rated_catalog/2:
+
+``check_rated_catalog/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that every rated item belongs to the content catalog.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_rated_catalog(Ratings,Contents)``
+| **Mode and number of proofs:**
+|    ``check_rated_catalog(+list(compound),+list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A rated item is absent from the catalog:
+|        ``domain_error(catalog_item,Item)``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`item_content_dataset_protocol <item_content_dataset_protocol/0>`, :ref:`recommender_common <recommender_common/0>`
+

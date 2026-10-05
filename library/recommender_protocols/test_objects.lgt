@@ -19,6 +19,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- object(content_catalog_fixture(_, _),
+	implements(item_content_dataset_protocol)).
+
+	:- uses(list, [member/2]).
+
+	item(Item) :- parameter(1, Items), member(Item, Items).
+	item_content(Item, Content) :- parameter(2, Contents), member(Item-Content, Contents).
+
+:- end_object.
+
+
 :- object(sample_recommender,
 	imports(recommender_common)).
 

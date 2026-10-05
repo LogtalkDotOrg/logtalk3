@@ -23,11 +23,11 @@ Content-based recommender using TF-IDF item vectors, positive-feedback centroid 
 
 | **Imports:**
 |    ``public`` :ref:`recommender_common <recommender_common/0>`
+|    ``public`` :ref:`item_content_dataset_validation <item_content_dataset_validation/0>`
 |    ``public`` :ref:`similarity_metric_common <similarity_metric_common/0>`
 | **Uses:**
 |    :ref:`cosine_similarity <cosine_similarity/0>`
 |    :ref:`list <list/0>`
-|    :ref:`pairs <pairs/0>`
 |    :ref:`text_vectorizer <text_vectorizer/0>`
 |    :ref:`type <type/0>`
 
@@ -53,76 +53,6 @@ Protected predicates
 
 Private predicates
 ------------------
-
-.. index:: collect_contents/3
-.. _tfidf_recommender/0::collect_contents/3:
-
-``collect_contents/3``
-^^^^^^^^^^^^^^^^^^^^^^
-
-Collects and validates a nonempty catalog and its content declarations.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``collect_contents(Dataset,Contents,Kind)``
-| **Mode and number of proofs:**
-|    ``collect_contents(+object_identifier,-list(pair),-atom)`` - ``one_or_error``
-
-| **Exceptions:**
-|    The catalog is empty:
-|        ``domain_error(non_empty_catalog,Dataset)``
-|    An item identifier is a variable:
-|        ``instantiation_error``
-|    An item identifier is not atomic:
-|        ``type_error(atomic,Item)``
-|    A catalog item is declared more than once:
-|        ``domain_error(duplicate_item,Item)``
-|    Content declarations do not cover the catalog exactly once:
-|        ``domain_error(item_content_coverage,Dataset)``
-|    A content descriptor is invalid:
-|        ``domain_error(item_content,Content)``
-|    Content representations are mixed:
-|        ``domain_error(content_representation,Content)``
-|    A content list is not a proper list:
-|        ``type_error(list,List)``
-|    A feature or content list is not ground:
-|        ``instantiation_error``
-|    A sparse vector repeats a feature key:
-|        ``domain_error(duplicate_feature,Feature)``
-|    A sparse vector entry is not a pair:
-|        ``type_error(pair,Entry)``
-|    A sparse weight is not numeric:
-|        ``type_error(number,Weight)``
-|    A sparse weight is negative or nonfinite:
-|        ``domain_error(non_negative_finite_weight,Weight)``
-
-
-------------
-
-.. index:: check_rated_catalog/2
-.. _tfidf_recommender/0::check_rated_catalog/2:
-
-``check_rated_catalog/2``
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Checks that every rated item belongs to the content catalog.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``check_rated_catalog(Ratings,Contents)``
-| **Mode and number of proofs:**
-|    ``check_rated_catalog(+list(compound),+list(pair))`` - ``one_or_error``
-
-| **Exceptions:**
-|    A rated item is absent from the catalog:
-|        ``domain_error(catalog_item,Item)``
-
-
-------------
 
 .. index:: check_finite_ratings/1
 .. _tfidf_recommender/0::check_finite_ratings/1:

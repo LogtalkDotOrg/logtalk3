@@ -251,6 +251,7 @@ logtalk_library_path(iso_4217, library('iso_4217/')).
 logtalk_library_path(iso_9362, library('iso_9362/')).
 logtalk_library_path(iso_13616, library('iso_13616/')).
 logtalk_library_path(isolation_forest_anomaly_detector, library('isolation_forest_anomaly_detector/')).
+logtalk_library_path(jaccard_recommender, library('jaccard_recommender/')).
 logtalk_library_path(java, library('java/')).
 logtalk_library_path(json, library('json/')).
 logtalk_library_path(json_graph, library('json_graph')).

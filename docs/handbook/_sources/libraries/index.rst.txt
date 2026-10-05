@@ -172,6 +172,7 @@ directory in the ``NOTES.md`` file.
    iso_4217
    iso_639
    iso_9362
+   jaccard_recommender
    java
    json
    json_graph

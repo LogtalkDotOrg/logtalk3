@@ -261,6 +261,7 @@
 		knn_item_recommender(loader),
 		slope_one_recommender(loader),
 		tfidf_recommender(loader),
+		jaccard_recommender(loader),
 		uri_template(loader),
 		url(loader),
 		sqids(loader),

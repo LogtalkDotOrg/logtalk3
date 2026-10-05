@@ -222,6 +222,7 @@ sed '1,19d' ../../../library/iso_4217/NOTES.md | pandoc -f gfm -t rst -o librari
 sed '1,19d' ../../../library/iso_9362/NOTES.md | pandoc -f gfm -t rst -o libraries/iso_9362.rst
 sed '1,19d' ../../../library/iso_13616/NOTES.md | pandoc -f gfm -t rst -o libraries/iso_13616.rst
 sed '1,19d' ../../../library/isolation_forest_anomaly_detector/NOTES.md | pandoc -f gfm -t rst -o libraries/isolation_forest_anomaly_detector.rst
+sed '1,19d' ../../../library/jaccard_recommender/NOTES.md | pandoc -f gfm -t rst -o libraries/jaccard_recommender.rst
 sed '1,19d' ../../../library/java/NOTES.md | pandoc -f gfm -t rst -o libraries/java.rst
 sed '1,19d' ../../../library/json/NOTES.md | pandoc -f gfm -t rst -o libraries/json.rst
 sed '1,19d' ../../../library/json_graph/NOTES.md | pandoc -f gfm -t rst -o libraries/json_graph.rst

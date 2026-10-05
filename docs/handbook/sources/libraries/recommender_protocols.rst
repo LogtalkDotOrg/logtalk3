@@ -19,8 +19,9 @@ predicate for user-item relevance scoring. Score ranges and
 unknown-identifier policies depend on the implementation. All
 recommender implementations import ``recommender_common`` and implement
 ``score/4`` directly. Collaborative recommenders return predicted
-ratings in the dataset's rating units; ``tfidf_recommender`` returns
-cosine relevance without claiming to estimate ratings.
+ratings in the dataset's rating units; ``tfidf_recommender`` and
+``jaccard_recommender`` return cosine and set-overlap relevance,
+respectively, without claiming to estimate ratings.
 
 Similarity metrics are also exposed as pluggable strategy objects,
 ``cosine_similarity``, ``pearson_similarity``, ``jaccard_similarity``,
@@ -186,9 +187,22 @@ a bound item. Descriptors are ``features(Occurrences)`` or
 consistently. Feature occurrences may be arbitrary ground terms.
 Supplied vectors have unique ground keys and finite nonnegative numeric
 weights. Empty content is allowed. Rated items must belong to the
-catalog. The ``tfidf_recommender`` library validates these requirements,
-learns TF-IDF over the full catalog, and constructs positive-feedback
-profiles.
+catalog.
+
+The ``item_content_dataset_validation`` category provides protected
+``collect_contents/3``, ``canonical_contents/3``, and
+``check_rated_catalog/2`` predicates for content-based implementations.
+It validates catalog coverage, homogeneous descriptors, identifiers, and
+vector entries, sorts declarations and feature occurrences, preserves
+occurrence multiplicity, and removes zero vector weights. Empty
+canonical declaration lists fail; catalog collection requires a nonempty
+catalog.
+
+Both ``tfidf_recommender`` and ``jaccard_recommender`` import this
+category. TF-IDF learns weighted vectors over the full catalog and
+constructs centroid profiles. Jaccard additionally requires binary
+vectors, collapses feature occurrences to sets, and constructs union
+profiles. Both recommenders can recommend catalog items with no ratings.
 
 Similarity metrics
 ------------------
