@@ -66,6 +66,7 @@
 			'A sparse weight is not a number' - type_error(number, 'Weight'),
 			'A sparse weight is negative or nonfinite' - domain_error(non_negative_finite_weight, 'Weight'),
 			'A vector weight is not binary for an implementation requiring binary features' - domain_error(binary_weight, 'Weight'),
+			'A nonzero vector count is not an integer for an implementation requiring raw term counts' - type_error(integer, 'Count'),
 			'A content-based rating is not finite' - domain_error(finite_rating, 'Rating'),
 			'A selected rating is not positive in rating-weighted profile construction' - domain_error(positive_rating_weight, 'Rating'),
 			'Feature fitting produces no vocabulary' - domain_error(non_empty_vocabulary, 'Corpus')
@@ -104,6 +105,7 @@
 			'A sparse weight is not a number' - type_error(number, 'Weight'),
 			'A sparse weight is negative or nonfinite' - domain_error(non_negative_finite_weight, 'Weight'),
 			'A vector weight is not binary for an implementation requiring binary features' - domain_error(binary_weight, 'Weight'),
+			'A nonzero vector count is not an integer for an implementation requiring raw term counts' - type_error(integer, 'Count'),
 			'A content-based rating is not finite' - domain_error(finite_rating, 'Rating'),
 			'A selected rating is not positive in rating-weighted profile construction' - domain_error(positive_rating_weight, 'Rating'),
 			'Feature fitting produces no vocabulary' - domain_error(non_empty_vocabulary, 'Corpus')

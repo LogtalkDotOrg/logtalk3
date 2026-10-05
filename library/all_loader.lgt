@@ -262,6 +262,7 @@
 		slope_one_recommender(loader),
 		tfidf_recommender(loader),
 		jaccard_recommender(loader),
+		bm25_recommender(loader),
 		uri_template(loader),
 		url(loader),
 		sqids(loader),

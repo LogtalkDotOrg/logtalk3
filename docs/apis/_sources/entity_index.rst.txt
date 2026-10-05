@@ -345,6 +345,7 @@ Objects
       blake2s <blake2s_0>
       blake2s(Key,DigestSize) <blake2s_2>
       blank_grammars(Format) <blank_grammars_1>
+      bm25_recommender <bm25_recommender_0>
       bn_language_profile <bn_language_profile_0>
       body_goal_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <body_goal_negation_5>
       borda_ranker <borda_ranker_0>
@@ -1210,6 +1211,7 @@ Objects
    * :doc:`blake2s <blake2s_0>`
    * :doc:`blake2s(Key,DigestSize) <blake2s_2>`
    * :doc:`blank_grammars(Format) <blank_grammars_1>`
+   * :doc:`bm25_recommender <bm25_recommender_0>`
    * :doc:`bn_language_profile <bn_language_profile_0>`
    * :doc:`body_goal_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <body_goal_negation_5>`
    * :doc:`borda_ranker <borda_ranker_0>`

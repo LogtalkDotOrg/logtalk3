@@ -85,6 +85,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#baseline-forecasting"><span class="xref std std-ref">baseline_forecasting</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#bayesian-ridge-regression"><span class="xref std std-ref">bayesian_ridge_regression</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#block-ciphers"><span class="xref std std-ref">block_ciphers</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#bm25-recommender"><span class="xref std std-ref">bm25_recommender</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#borda-ranker"><span class="xref std std-ref">borda_ranker</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#bradley-terry-ranker"><span class="xref std std-ref">bradley_terry_ranker</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#bson"><span class="xref std std-ref">bson</span></a></li>
@@ -671,6 +672,10 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(binary_weight,Weight)</span></code></div>
 </div>
+<div class="line">A nonzero vector count is not an integer for an implementation requiring raw term counts:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Count)</span></code></div>
+</div>
 <div class="line">A content-based rating is not finite:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(finite_rating,Rating)</span></code></div>
@@ -812,6 +817,10 @@
 <div class="line">A vector weight is not binary for an implementation requiring binary features:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(binary_weight,Weight)</span></code></div>
+</div>
+<div class="line">A nonzero vector count is not an integer for an implementation requiring raw term counts:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Count)</span></code></div>
 </div>
 <div class="line">A content-based rating is not finite:</div>
 <div class="line-block">

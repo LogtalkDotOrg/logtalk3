@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on October 4, 2026
+##   Last updated on October 5, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -100,6 +100,7 @@ sed '1,19d' ../../../library/baseline_forecasting/NOTES.md | pandoc -f gfm -t rs
 sed '1,19d' ../../../library/basic_types/NOTES.md | pandoc -f gfm -t rst -o libraries/basic_types.rst
 sed '1,19d' ../../../library/bayesian_ridge_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/bayesian_ridge_regression.rst
 sed '1,19d' ../../../library/block_ciphers/NOTES.md | pandoc -f gfm -t rst -o libraries/block_ciphers.rst
+sed '1,19d' ../../../library/bm25_recommender/NOTES.md | pandoc -f gfm -t rst -o libraries/bm25_recommender.rst
 sed '1,19d' ../../../library/borda_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/borda_ranker.rst
 sed '1,19d' ../../../library/bradley_terry_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/bradley_terry_ranker.rst
 sed '1,19d' ../../../library/bson/NOTES.md | pandoc -f gfm -t rst -o libraries/bson.rst

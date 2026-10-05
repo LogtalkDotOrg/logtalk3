@@ -91,6 +91,7 @@
 <li class="toctree-l2"><a class="reference internal" href="basic_types.html"><code class="docutils literal notranslate"><span class="pre">basic_types</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="bayesian_ridge_regression.html"><code class="docutils literal notranslate"><span class="pre">bayesian_ridge_regression</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="block_ciphers.html"><code class="docutils literal notranslate"><span class="pre">block_ciphers</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="bm25_recommender.html"><code class="docutils literal notranslate"><span class="pre">bm25_recommender</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="borda_ranker.html"><code class="docutils literal notranslate"><span class="pre">borda_ranker</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="bradley_terry_ranker.html"><code class="docutils literal notranslate"><span class="pre">bradley_terry_ranker</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="bson.html"><code class="docutils literal notranslate"><span class="pre">bson</span></code></a></li>
@@ -327,14 +328,15 @@
 <li class="toctree-l2"><a class="reference internal" href="sets.html"><code class="docutils literal notranslate"><span class="pre">sets</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgd_classifier.html"><code class="docutils literal notranslate"><span class="pre">sgd_classifier</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">simple_temporal_networks</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#metric-model">Metric model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api-overview">API overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#schedules">Schedules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#sources-and-explanations">Sources and explanations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#precedence-and-interval-views">Precedence and interval views</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#relationship-to-interval-constraint-networks">Relationship to interval constraint networks</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 </ul>
@@ -445,6 +447,26 @@ labels are distinct ground terms, compared by term identity; for
 example, <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">1.0</span></code> name different time-points. The reference
 label <code class="docutils literal notranslate"><span class="pre">zero</span></code> is reserved and denotes time zero. It is added
 automatically and must not be supplied to <code class="docutils literal notranslate"><span class="pre">new/2</span></code>.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../apis/library_index.html#simple-temporal-networks">../../apis/library_index.html#simple-temporal-networks</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>To load this library, load its <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(simple_temporal_networks(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library, load its <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(simple_temporal_networks(tester)).
+</pre></div>
+</div>
+</section>
 <section id="metric-model">
 <h2>Metric model<a class="headerlink" href="#metric-model" title="Link to this heading"></a></h2>
 <p>An input <code class="docutils literal notranslate"><span class="pre">constraint(X,</span> <span class="pre">Y,</span> <span class="pre">Delta)</span></code> denotes:</p>
@@ -733,23 +755,6 @@ propagating the two networks does not establish their joint consistency.
 The intended boundary is therefore to keep STN as the metric solver,
 retain its interval predicates as adapters, and investigate shared
 indexing or storage utilities separately.</p>
-</section>
-<section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(simple_temporal_networks(loader)).
-</pre></div>
-</div>
-<p>The loader loads <code class="docutils literal notranslate"><span class="pre">basic_types(loader)</span></code> and <code class="docutils literal notranslate"><span class="pre">intervals(loader)</span></code>,
-followed by the protocol and implementation with optimizations enabled.</p>
-</section>
-<section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(simple_temporal_networks(tester)).
-</pre></div>
-</div>
-<p>Tests include determinism checks, all 13 concrete Allen relations, an
-exhaustive bounded integer-schedule oracle, and generated properties
-using QuickCheck.</p>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>

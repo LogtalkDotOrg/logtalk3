@@ -12,6 +12,13 @@ classical intersection-over-union Jaccard similarity. The object imports
 implementing ``recommender_protocol`` and its ``score/4`` predicate
 directly. Scores are relevance values, not predicted ratings.
 
+API documentation
+-----------------
+
+Open the
+`../../apis/library_index.html#jaccard-recommender <../../apis/library_index.html#jaccard-recommender>`__
+link in a web browser.
+
 Loading
 -------
 

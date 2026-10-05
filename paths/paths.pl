@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on October 4, 2026
+%  Last updated on October 5, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -129,6 +129,7 @@ logtalk_library_path(baseline_forecasting, library('baseline_forecasting/')).
 logtalk_library_path(basic_types, library('basic_types/')).
 logtalk_library_path(bayesian_ridge_regression, library('bayesian_ridge_regression/')).
 logtalk_library_path(block_ciphers, library('block_ciphers/')).
+logtalk_library_path(bm25_recommender, library('bm25_recommender/')).
 logtalk_library_path(borda_ranker, library('borda_ranker/')).
 logtalk_library_path(bradley_terry_ranker, library('bradley_terry_ranker/')).
 logtalk_library_path(bson, library('bson/')).

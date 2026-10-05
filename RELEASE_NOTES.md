@@ -93,6 +93,10 @@ profiles, and cosine relevance scores.
 with categorical or binary item features, positive-feedback union profiles,
 and Jaccard relevance scores.
 
+* ADDED: New `bm25_recommender` library implementing content-based filtering
+with raw term counts, positive-feedback query profiles, and BM25 relevance
+scores.
+
 * IMPROVED: Performance of the `crypto` library.
 
 * IMPROVED: Rewrite predicate definitions as tail-recursive in the

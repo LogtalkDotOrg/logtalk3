@@ -1,0 +1,918 @@
+.. index:: single: bm25_recommender
+.. _bm25_recommender/0:
+
+.. rst-class:: right
+
+**object**
+
+``bm25_recommender``
+====================
+
+Content-based recommender using raw-count query profiles and Okapi BM25 relevance scores.
+
+| **Availability:** 
+|    ``logtalk_load(bm25_recommender(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-05
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`recommender_common <recommender_common/0>`
+|    ``public`` :ref:`item_content_dataset_validation <item_content_dataset_validation/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`recommender_protocol/0::check_recommender/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`recommender_protocol/0::diagnostic/2`  :ref:`recommender_protocol/0::diagnostics/2`  :ref:`recommender_protocol/0::export_to_clauses/4`  :ref:`recommender_protocol/0::export_to_file/4`  :ref:`recommender_protocol/0::learn/2`  :ref:`recommender_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`recommender_protocol/0::print_recommender/1`  :ref:`recommender_protocol/0::recommend/4`  :ref:`recommender_protocol/0::recommender_options/2`  :ref:`recommender_protocol/0::score/4`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`recommender_protocol/0::valid_recommender/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: score_all/4
+.. _bm25_recommender/0::score_all/4:
+
+``score_all/4``
+^^^^^^^^^^^^^^^
+
+Scores catalog items in input order, preserving duplicates and validating the model once. An empty batch validates the model and user.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``score_all(Recommender,User,Items,Scores)``
+| **Mode and number of proofs:**
+|    ``score_all(+compound,+atomic,+list(atomic),-list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A required argument or identifier is a variable:
+|        ``instantiation_error``
+|    The model is invalid:
+|        ``domain_error(recommender,Recommender)``
+|    A user or item identifier is not atomic:
+|        ``type_error(atomic,Identifier)``
+|    Items is not a proper list:
+|        ``type_error(list,Items)``
+|    An item is absent from the catalog:
+|        ``domain_error(catalog_item,Item)``
+
+
+------------
+
+.. index:: score_content/4
+.. _bm25_recommender/0::score_content/4:
+
+``score_content/4``
+^^^^^^^^^^^^^^^^^^^
+
+Scores supplied content of the trained representation using frozen corpus statistics. Unseen terms contribute to document length but not matching relevance.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``score_content(Recommender,User,Content,Score)``
+| **Mode and number of proofs:**
+|    ``score_content(+compound,+atomic,+compound,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A required argument, feature, entry, or count is a variable:
+|        ``instantiation_error``
+|    The model is invalid:
+|        ``domain_error(recommender,Recommender)``
+|    User is not atomic:
+|        ``type_error(atomic,User)``
+|    A descriptor is invalid:
+|        ``domain_error(item_content,Content)``
+|    The descriptor differs from the trained representation:
+|        ``domain_error(content_representation,Content)``
+|    A content list is not a proper list:
+|        ``type_error(list,List)``
+|    A vector entry is not a pair:
+|        ``type_error(pair,Entry)``
+|    A vector repeats a feature key:
+|        ``domain_error(duplicate_feature,Feature)``
+|    A vector count is not numeric:
+|        ``type_error(number,Count)``
+|    A vector count is negative or nonfinite:
+|        ``domain_error(non_negative_finite_weight,Count)``
+|    A nonzero vector count is not an integer:
+|        ``type_error(integer,Count)``
+
+
+------------
+
+.. index:: update_ratings/3
+.. _bm25_recommender/0::update_ratings/3:
+
+``update_ratings/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns a model with inserted or replaced ratings and rebuilt query profiles, retaining fitted corpus weights. New users are accepted but items must belong to the catalog.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``update_ratings(Recommender,Ratings,UpdatedRecommender)``
+| **Mode and number of proofs:**
+|    ``update_ratings(+compound,+list(compound),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A required argument, record, identifier, or value is a variable:
+|        ``instantiation_error``
+|    The model is invalid:
+|        ``domain_error(recommender,Recommender)``
+|    Ratings is not a proper list:
+|        ``type_error(list,Ratings)``
+|    An entry is not a rating record:
+|        ``type_error(rating,Entry)``
+|    A user or item identifier is not atomic:
+|        ``type_error(atomic,Identifier)``
+|    A rating value is not numeric:
+|        ``type_error(number,Rating)``
+|    A rating value is nonfinite:
+|        ``domain_error(finite_rating,Rating)``
+|    A rating value is outside the stored scale:
+|        ``domain_error(rating_scale(Min,Max),Rating)``
+|    An item is absent from the catalog:
+|        ``domain_error(catalog_item,Item)``
+|    A user-item pair occurs more than once in the updates:
+|        ``domain_error(duplicate_rating,User-Item)``
+|    A selected rating is not positive in rating-weighted mode:
+|        ``domain_error(positive_rating_weight,Rating)``
+
+
+------------
+
+.. index:: remove_ratings/3
+.. _bm25_recommender/0::remove_ratings/3:
+
+``remove_ratings/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns a model with requested ratings removed and query profiles rebuilt. Missing and repeated pairs are accepted; no matching ratings returns the validated original model.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``remove_ratings(Recommender,UserItemPairs,UpdatedRecommender)``
+| **Mode and number of proofs:**
+|    ``remove_ratings(+compound,+list(pair),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A required argument, entry, or identifier is a variable:
+|        ``instantiation_error``
+|    The model is invalid:
+|        ``domain_error(recommender,Recommender)``
+|    UserItemPairs is not a proper list:
+|        ``type_error(list,UserItemPairs)``
+|    An entry is not a pair:
+|        ``type_error(pair,Entry)``
+|    A user or item identifier is not atomic:
+|        ``type_error(atomic,Identifier)``
+|    No ratings would remain:
+|        ``domain_error(non_empty_ratings,[])``
+|    A selected rating is not positive in rating-weighted mode:
+|        ``domain_error(positive_rating_weight,Rating)``
+
+
+------------
+
+.. index:: extend_catalog/3
+.. _bm25_recommender/0::extend_catalog/3:
+
+``extend_catalog/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns a model with new catalog items, refitting corpus statistics and all item weights. Descriptors must match the trained representation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``extend_catalog(Recommender,ItemContents,UpdatedRecommender)``
+| **Mode and number of proofs:**
+|    ``extend_catalog(+compound,+list(pair),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A required argument, entry, identifier, feature, or count is a variable:
+|        ``instantiation_error``
+|    The model is invalid:
+|        ``domain_error(recommender,Recommender)``
+|    A supplied list is not proper:
+|        ``type_error(list,List)``
+|    A catalog or vector entry is not a pair:
+|        ``type_error(pair,Entry)``
+|    An item identifier is not atomic:
+|        ``type_error(atomic,Item)``
+|    A batch repeats an item identifier:
+|        ``domain_error(duplicate_item,Item)``
+|    An item already belongs to the catalog:
+|        ``domain_error(new_catalog_item,Item)``
+|    A descriptor is invalid:
+|        ``domain_error(item_content,Content)``
+|    A descriptor differs from the trained representation:
+|        ``domain_error(content_representation,Content)``
+|    A vector repeats a feature key:
+|        ``domain_error(duplicate_feature,Feature)``
+|    A vector count is not numeric:
+|        ``type_error(number,Count)``
+|    A vector count is negative or nonfinite:
+|        ``domain_error(non_negative_finite_weight,Count)``
+|    A nonzero vector count is not an integer:
+|        ``type_error(integer,Count)``
+
+
+------------
+
+.. index:: replace_content/3
+.. _bm25_recommender/0::replace_content/3:
+
+``replace_content/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns a model with replaced catalog descriptors, refitting corpus statistics, all item weights, and raw query profiles. Identifiers must already belong to the catalog.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``replace_content(Recommender,ItemContents,UpdatedRecommender)``
+| **Mode and number of proofs:**
+|    ``replace_content(+compound,+list(pair),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A required argument, entry, identifier, feature, or count is a variable:
+|        ``instantiation_error``
+|    The model is invalid:
+|        ``domain_error(recommender,Recommender)``
+|    A supplied list is not proper:
+|        ``type_error(list,List)``
+|    A catalog or vector entry is not a pair:
+|        ``type_error(pair,Entry)``
+|    An item identifier is not atomic:
+|        ``type_error(atomic,Item)``
+|    A batch repeats an item identifier:
+|        ``domain_error(duplicate_item,Item)``
+|    An item is absent from the catalog:
+|        ``domain_error(catalog_item,Item)``
+|    A descriptor is invalid:
+|        ``domain_error(item_content,Content)``
+|    A descriptor differs from the trained representation:
+|        ``domain_error(content_representation,Content)``
+|    A vector repeats a feature key:
+|        ``domain_error(duplicate_feature,Feature)``
+|    A vector count is not numeric:
+|        ``type_error(number,Count)``
+|    A vector count is negative or nonfinite:
+|        ``domain_error(non_negative_finite_weight,Count)``
+|    A nonzero vector count is not an integer:
+|        ``type_error(integer,Count)``
+
+
+------------
+
+.. index:: remove_catalog/3
+.. _bm25_recommender/0::remove_catalog/3:
+
+``remove_catalog/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Removes catalog items and their ratings, refitting remaining corpus weights and affected profiles. Missing and repeated identifiers are accepted.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``remove_catalog(Recommender,Items,UpdatedRecommender)``
+| **Mode and number of proofs:**
+|    ``remove_catalog(+compound,+list(atomic),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A required argument or identifier is a variable:
+|        ``instantiation_error``
+|    The model is invalid:
+|        ``domain_error(recommender,Recommender)``
+|    Items is not a proper list:
+|        ``type_error(list,Items)``
+|    An item identifier is not atomic:
+|        ``type_error(atomic,Item)``
+|    No catalog items would remain:
+|        ``domain_error(non_empty_catalog,[])``
+|    No ratings would remain:
+|        ``domain_error(non_empty_ratings,[])``
+|    A selected rating is not positive in rating-weighted mode:
+|        ``domain_error(positive_rating_weight,Rating)``
+
+
+------------
+
+.. index:: set_rating_scale/3
+.. _bm25_recommender/0::set_rating_scale/3:
+
+``set_rating_scale/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Changes only the stored rating scale to ``none`` or ``scale(Min,Max)``, requiring finite ordered bounds containing all ratings. Ratings and relevance scores are not rescaled.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``set_rating_scale(Recommender,Scale,UpdatedRecommender)``
+| **Mode and number of proofs:**
+|    ``set_rating_scale(+compound,+term,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A required argument or scale bound is a variable:
+|        ``instantiation_error``
+|    The model is invalid:
+|        ``domain_error(recommender,Recommender)``
+|    A scale bound is not numeric:
+|        ``type_error(number,Bound)``
+|    The scale descriptor is invalid:
+|        ``domain_error(rating_scale,Scale)``
+|    Scale bounds are nonfinite or reversed:
+|        ``domain_error(rating_scale,Min-Max)``
+|    A stored rating is outside the proposed scale:
+|        ``domain_error(rating_scale(Min,Max),Rating)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+.. index:: user_profile/5
+.. _bm25_recommender/0::user_profile/5:
+
+``user_profile/5``
+^^^^^^^^^^^^^^^^^^
+
+Builds one raw-count query profile from the complete user history.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``user_profile(User,Ratings,Documents,Options,Profile)``
+| **Mode and number of proofs:**
+|    ``user_profile(+atomic,+list(compound),+list(pair),+list(compound),-list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A selected rating is not positive in rating-weighted mode:
+|        ``domain_error(positive_rating_weight,Rating)``
+
+
+------------
+
+Private predicates
+------------------
+
+.. index:: check_catalog_identifiers/1
+.. _bm25_recommender/0::check_catalog_identifiers/1:
+
+``check_catalog_identifiers/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks all catalog request identifiers before applying removals.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_catalog_identifiers(Items)``
+| **Mode and number of proofs:**
+|    ``check_catalog_identifiers(+list(term))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An identifier is a variable:
+|        ``instantiation_error``
+|    An identifier is not atomic:
+|        ``type_error(atomic,Item)``
+
+
+------------
+
+.. index:: check_rating_scale/2
+.. _bm25_recommender/0::check_rating_scale/2:
+
+``check_rating_scale/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks a proposed optional finite rating scale against existing ratings.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_rating_scale(Scale,Ratings)``
+| **Mode and number of proofs:**
+|    ``check_rating_scale(+term,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    The scale or a bound is a variable:
+|        ``instantiation_error``
+|    A bound is not numeric:
+|        ``type_error(number,Bound)``
+|    The scale descriptor is invalid:
+|        ``domain_error(rating_scale,Scale)``
+|    Bounds are nonfinite or reversed:
+|        ``domain_error(rating_scale,Min-Max)``
+|    A rating is outside the proposed bounds:
+|        ``domain_error(rating_scale(Min,Max),Rating)``
+
+
+------------
+
+.. index:: check_scale_ratings/3
+.. _bm25_recommender/0::check_scale_ratings/3:
+
+``check_scale_ratings/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks stored ratings against inclusive validated scale bounds.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_scale_ratings(Ratings,Min,Max)``
+| **Mode and number of proofs:**
+|    ``check_scale_ratings(+list(compound),+number,+number)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A rating is outside the proposed bounds:
+|        ``domain_error(rating_scale(Min,Max),Rating)``
+
+
+------------
+
+.. index:: check_catalog_entries/1
+.. _bm25_recommender/0::check_catalog_entries/1:
+
+``check_catalog_entries/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that all supplied catalog entries are pairs before canonicalization.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_catalog_entries(ItemContents)``
+| **Mode and number of proofs:**
+|    ``check_catalog_entries(+list(term))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An entry is a variable:
+|        ``instantiation_error``
+|    An entry is not a pair:
+|        ``type_error(pair,Entry)``
+
+
+------------
+
+.. index:: check_existing_catalog_items/2
+.. _bm25_recommender/0::check_existing_catalog_items/2:
+
+``check_existing_catalog_items/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that replacements use existing catalog identifiers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_existing_catalog_items(Replacements,Contents)``
+| **Mode and number of proofs:**
+|    ``check_existing_catalog_items(+list(pair),+list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An item is absent from the catalog:
+|        ``domain_error(catalog_item,Item)``
+
+
+------------
+
+.. index:: check_catalog_kind/3
+.. _bm25_recommender/0::check_catalog_kind/3:
+
+``check_catalog_kind/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks the canonical catalog descriptor representation against the stored representation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_catalog_kind(ItemContents,Kind,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``check_catalog_kind(+list(pair),+atom,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A descriptor differs from the trained representation:
+|        ``domain_error(content_representation,Content)``
+
+
+------------
+
+.. index:: check_new_catalog_items/2
+.. _bm25_recommender/0::check_new_catalog_items/2:
+
+``check_new_catalog_items/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that additions use new catalog identifiers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_new_catalog_items(Additions,Contents)``
+| **Mode and number of proofs:**
+|    ``check_new_catalog_items(+list(pair),+list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An item already belongs to the catalog:
+|        ``domain_error(new_catalog_item,Item)``
+
+
+------------
+
+.. index:: rebuild_catalog_model/6
+.. _bm25_recommender/0::rebuild_catalog_model/6:
+
+``rebuild_catalog_model/6``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Refits corpus statistics and all item weights using prepared raw-count profiles.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rebuild_catalog_model(Ratings,Contents,Profiles,Scale,Diagnostics,UpdatedRecommender)``
+| **Mode and number of proofs:**
+|    ``rebuild_catalog_model(+list(compound),+list(pair),+list(pair),+term,+list(compound),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A nonzero vector count is not an integer:
+|        ``type_error(integer,Count)``
+
+
+------------
+
+.. index:: rating_removal_records/3
+.. _bm25_recommender/0::rating_removal_records/3:
+
+``rating_removal_records/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates user-item pairs and collects matching stored ratings, ignoring missing pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rating_removal_records(UserItemPairs,Ratings,Removals)``
+| **Mode and number of proofs:**
+|    ``rating_removal_records(+list(pair),+list(compound),-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An entry or identifier is a variable:
+|        ``instantiation_error``
+|    An entry is not a pair:
+|        ``type_error(pair,Entry)``
+|    A user or item identifier is not atomic:
+|        ``type_error(atomic,Identifier)``
+
+
+------------
+
+.. index:: check_rating_updates/3
+.. _bm25_recommender/0::check_rating_updates/3:
+
+``check_rating_updates/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks rating records against the catalog and stored rating scale.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_rating_updates(Ratings,Contents,Scale)``
+| **Mode and number of proofs:**
+|    ``check_rating_updates(+list(compound),+list(pair),+term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A record, identifier, or value is a variable:
+|        ``instantiation_error``
+|    An entry is not a rating record:
+|        ``type_error(rating,Entry)``
+|    A user or item identifier is not atomic:
+|        ``type_error(atomic,Identifier)``
+|    A rating value is not numeric:
+|        ``type_error(number,Rating)``
+|    A rating value is nonfinite:
+|        ``domain_error(finite_rating,Rating)``
+|    A rating value is outside the stored scale:
+|        ``domain_error(rating_scale(Min,Max),Rating)``
+|    An item is absent from the catalog:
+|        ``domain_error(catalog_item,Item)``
+
+
+------------
+
+.. index:: rebuild_feedback_model/9
+.. _bm25_recommender/0::rebuild_feedback_model/9:
+
+``rebuild_feedback_model/9``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Rebuilds affected raw-count profiles and diagnostics, retaining fitted corpus and item weights.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rebuild_feedback_model(Ratings,Contents,ItemWeights,Profiles,Corpus,Scale,Diagnostics,AffectedUsers,UpdatedRecommender)``
+| **Mode and number of proofs:**
+|    ``rebuild_feedback_model(+list(compound),+list(pair),+list(pair),+list(pair),+compound,+term,+list(compound),+list(atomic),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A nonzero vector count is not an integer:
+|        ``type_error(integer,Count)``
+|    A selected rating is not positive in rating-weighted mode:
+|        ``domain_error(positive_rating_weight,Rating)``
+
+
+------------
+
+.. index:: updated_profiles/6
+.. _bm25_recommender/0::updated_profiles/6:
+
+``updated_profiles/6``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Rebuilds affected users from complete history and retains unaffected raw profiles.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``updated_profiles(Ratings,Contents,Options,Profiles,AffectedUsers,UpdatedProfiles)``
+| **Mode and number of proofs:**
+|    ``updated_profiles(+list(compound),+list(pair),+list(compound),+list(pair),+list(atomic),-list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A nonzero vector count is not an integer:
+|        ``type_error(integer,Count)``
+|    A selected rating is not positive in rating-weighted mode:
+|        ``domain_error(positive_rating_weight,Rating)``
+
+
+------------
+
+.. index:: check_content_kind/3
+.. _bm25_recommender/0::check_content_kind/3:
+
+``check_content_kind/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that supplied content matches the stored representation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_content_kind(Kind,Content,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``check_content_kind(+atom,+compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    The descriptor differs from the trained representation:
+|        ``domain_error(content_representation,Content)``
+
+
+------------
+
+.. index:: score_catalog_items/6
+.. _bm25_recommender/0::score_catalog_items/6:
+
+``score_catalog_items/6``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates and scores catalog identifiers in input order using validated model data.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``score_catalog_items(ItemWeights,Profiles,User,Items,Scores,Options)``
+| **Mode and number of proofs:**
+|    ``score_catalog_items(+list(pair),+list(pair),+atomic,+list(atomic),-list(pair),+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An identifier is a variable:
+|        ``instantiation_error``
+|    An identifier is not atomic:
+|        ``type_error(atomic,Item)``
+|    An item is absent from the catalog:
+|        ``domain_error(catalog_item,Item)``
+
+
+------------
+
+.. index:: score_query_items/4
+.. _bm25_recommender/0::score_query_items/4:
+
+``score_query_items/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Restores requested score order, checking identifier errors in original request order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``score_query_items(ResolvedScores,Query,Items,Scores)``
+| **Mode and number of proofs:**
+|    ``score_query_items(+list(pair),+list(pair),+list(atomic),-list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An identifier is a variable:
+|        ``instantiation_error``
+|    An identifier is not atomic:
+|        ``type_error(atomic,Item)``
+|    An item is absent from the catalog:
+|        ``domain_error(catalog_item,Item)``
+
+
+------------
+
+.. index:: catalog_score/6
+.. _bm25_recommender/0::catalog_score/6:
+
+``catalog_score/6``
+^^^^^^^^^^^^^^^^^^^
+
+Scores a catalog identifier using validated model data.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``catalog_score(ItemWeights,Profiles,User,Item,Score,Options)``
+| **Mode and number of proofs:**
+|    ``catalog_score(+list(pair),+list(pair),+atomic,+atomic,-float,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An item is absent from the catalog:
+|        ``domain_error(catalog_item,Item)``
+
+
+------------
+
+.. index:: content_documents/2
+.. _bm25_recommender/0::content_documents/2:
+
+``content_documents/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts canonical descriptors to raw counts and complete document lengths.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``content_documents(Contents,Documents)``
+| **Mode and number of proofs:**
+|    ``content_documents(+list(pair),-list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A nonzero vector count is not an integer:
+|        ``type_error(integer,Count)``
+
+
+------------
+
+.. index:: descriptor_document/2
+.. _bm25_recommender/0::descriptor_document/2:
+
+``descriptor_document/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts a canonical descriptor to its raw-count document.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``descriptor_document(Content,Document)``
+| **Mode and number of proofs:**
+|    ``descriptor_document(+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A nonzero vector count is not an integer:
+|        ``type_error(integer,Count)``
+
+
+------------
+
+.. index:: count_length/3
+.. _bm25_recommender/0::count_length/3:
+
+``count_length/3``
+^^^^^^^^^^^^^^^^^^
+
+Checks canonical nonzero count values and sums the document length.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``count_length(Counts,Length0,Length)``
+| **Mode and number of proofs:**
+|    ``count_length(+list(pair),+integer,-integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A nonzero vector count is not an integer:
+|        ``type_error(integer,Count)``
+
+
+------------
+
+.. index:: profile_weights/3
+.. _bm25_recommender/0::profile_weights/3:
+
+``profile_weights/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Assigns uniform or strictly positive rating weights to selected count vectors.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``profile_weights(Selected,Weighting,Weighted)``
+| **Mode and number of proofs:**
+|    ``profile_weights(+list(pair),+atom,-list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A selected rating is not positive in rating-weighted mode:
+|        ``domain_error(positive_rating_weight,Rating)``
+
+
+------------
+
+.. index:: check_finite_ratings/1
+.. _bm25_recommender/0::check_finite_ratings/1:
+
+``check_finite_ratings/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that rating values are finite.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_finite_ratings(Ratings)``
+| **Mode and number of proofs:**
+|    ``check_finite_ratings(+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A rating value is nonfinite:
+|        ``domain_error(finite_rating,Rating)``
+
+
+------------
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`recommender_protocol <recommender_protocol/0>`, :ref:`item_content_dataset_protocol <item_content_dataset_protocol/0>`, :ref:`tfidf_recommender <tfidf_recommender/0>`
+

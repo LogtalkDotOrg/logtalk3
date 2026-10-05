@@ -494,6 +494,20 @@ To load an entity, always load the library that includes it using the goal ``log
    * :doc:`ctr <ctr_0>`
    * :doc:`ecb <ecb_0>`
 
+``library/bm25_recommender/``
+-----------------------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      bm25_recommender <bm25_recommender_0>
+
+.. only:: latex
+
+   * :doc:`bm25_recommender <bm25_recommender_0>`
+
 ``library/borda_ranker/``
 -------------------------
 

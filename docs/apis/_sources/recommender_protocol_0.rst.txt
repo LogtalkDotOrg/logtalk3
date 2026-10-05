@@ -117,6 +117,8 @@ Learns a recommender model from the given rating dataset object using the specif
 |        ``domain_error(non_negative_finite_weight,Weight)``
 |    A vector weight is not binary for an implementation requiring binary features:
 |        ``domain_error(binary_weight,Weight)``
+|    A nonzero vector count is not an integer for an implementation requiring raw term counts:
+|        ``type_error(integer,Count)``
 |    A content-based rating is not finite:
 |        ``domain_error(finite_rating,Rating)``
 |    A selected rating is not positive in rating-weighted profile construction:
@@ -196,6 +198,8 @@ Learns a recommender model from the given rating dataset object using default op
 |        ``domain_error(non_negative_finite_weight,Weight)``
 |    A vector weight is not binary for an implementation requiring binary features:
 |        ``domain_error(binary_weight,Weight)``
+|    A nonzero vector count is not an integer for an implementation requiring raw term counts:
+|        ``type_error(integer,Count)``
 |    A content-based rating is not finite:
 |        ``domain_error(finite_rating,Rating)``
 |    A selected rating is not positive in rating-weighted profile construction:

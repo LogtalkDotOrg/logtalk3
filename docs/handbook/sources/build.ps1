@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on October 4, 2026
+##   Last updated on October 5, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -100,6 +100,7 @@ Foreach-Object {
 (Get-Content ../../../library/basic_types/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/basic_types.rst
 (Get-Content ../../../library/bayesian_ridge_regression/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/bayesian_ridge_regression.rst
 (Get-Content ../../../library/block_ciphers/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/block_ciphers.rst
+(Get-Content ../../../library/bm25_recommender/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/bm25_recommender.rst
 (Get-Content ../../../library/borda_ranker/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/borda_ranker.rst
 (Get-Content ../../../library/bradley_terry_ranker/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/bradley_terry_ranker.rst
 (Get-Content ../../../library/bson/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/bson.rst
