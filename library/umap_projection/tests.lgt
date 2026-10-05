@@ -150,9 +150,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-10-05,
 		comment is 'Unit tests for the "umap_projection" library.'
 	]).
 
@@ -165,9 +165,6 @@
 	]).
 
 	cover(umap_projection).
-
-	cleanup :-
-		^^clean_file('test_output.pl').
 
 	test(umap_learn_3_structure, deterministic(functor(DimensionReducer, umap_reducer, 6))) :-
 		umap_projection::learn(correlated_plane, DimensionReducer, [n_neighbors(3), maximum_iterations(5)]).

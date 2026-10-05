@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-02,
+		date is 2026-10-05,
 		comment is 'Tests for the "theta_forecasting" library.'
 	]).
 
@@ -131,8 +131,9 @@
 		Series = [_,12,8,12,8,12,_,12,8,12,8,12,8,_], Dataset = theta_series(Series, 2),
 		theta_forecasting::learn(Dataset, Model, [alpha(0.5),initialization(first),seasonal(additive),retain_residuals(true)]),
 		theta_forecasting::export_to_clauses(Dataset, Model, saved, [saved(FactCopy)]), FactCopy == Model,
-		theta_forecasting::export_to_file(Dataset, Model, saved, 'test_output.pl'),
-		open('test_output.pl', read, Stream),
+		^^file_path('test_output.pl', File),
+		theta_forecasting::export_to_file(Dataset, Model, saved, File),
+		open(File, read, Stream),
 		catch(read(Stream, saved(Copy)), Error, (close(Stream), throw(Error))), close(Stream),
 		Copy == Model, ground(Copy), theta_forecasting::check_forecaster(Copy),
 		theta_forecasting::forecast(Model, 8, Forecasts), theta_forecasting::forecast(Copy, 8, Forecasts),
@@ -642,8 +643,9 @@
 	test(theta_forecasting_export_roundtrip, deterministic) :-
 		Dataset = theta_series([8,10,12,8,10,12,8], 3),
 		learn_season([8,10,12,8,10,12,8], 3, additive, Model),
-		theta_forecasting::export_to_file(Dataset, Model, saved, 'test_output.pl'),
-		open('test_output.pl', read, Stream),
+		^^file_path('test_output.pl', File),
+		theta_forecasting::export_to_file(Dataset, Model, saved, File),
+		open(File, read, Stream),
 		catch(read(Stream, saved(Copy)), Error, (close(Stream), throw(Error))), close(Stream),
 		Copy == Model, theta_forecasting::check_forecaster(Copy),
 		theta_forecasting::forecast(Copy, 8, Forecasts), theta_forecasting::forecast(Model, 8, Forecasts).
@@ -752,8 +754,9 @@
 	test(theta_forecasting_missing_seasonal_export_roundtrip, deterministic) :-
 		Dataset = theta_series([_,12,8,12,8,12,_,12,8,12,8,12,8,_], 2),
 		theta_forecasting::learn(Dataset, Model, [alpha(0.5),initialization(first),seasonal(additive)]),
-		theta_forecasting::export_to_file(Dataset, Model, saved, 'test_output.pl'),
-		open('test_output.pl', read, Stream),
+		^^file_path('test_output.pl', File),
+		theta_forecasting::export_to_file(Dataset, Model, saved, File),
+		open(File, read, Stream),
 		catch(read(Stream, saved(Copy)), Error, (close(Stream), throw(Error))), close(Stream),
 		Copy == Model, ground(Copy), theta_forecasting::check_forecaster(Copy),
 		theta_forecasting::forecast(Copy, 8, Forecasts), theta_forecasting::forecast(Model, 8, Forecasts).

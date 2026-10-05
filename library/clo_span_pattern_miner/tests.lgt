@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-18,
+		date is 2026-10-05,
 		comment is 'Unit tests for the "clo_span_pattern_miner" library.'
 	]).
 
@@ -34,9 +34,6 @@
 	]).
 
 	cover(clo_span_pattern_miner).
-
-	cleanup :-
-		^^clean_file('test_output.pl').
 
 	test(clo_span_mine_2_structure, deterministic(functor(PatternMiner, clo_span_pattern_miner, 3))) :-
 		clo_span_pattern_miner::mine(closure_sequences, PatternMiner, [minimum_support_count(2), maximum_pattern_length(3)]).
