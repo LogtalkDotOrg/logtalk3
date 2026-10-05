@@ -19,34 +19,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(invalid_mixed_profiles,
-	implements(clustering_dataset_protocol)).
-
-	attribute_values(age, continuous).
-	attribute_values(income, continuous).
-	attribute_values(channel, [online, retail]).
-	attribute_values(region, [north, south]).
-
-	example(1, [age-23, age-24, income-32000, channel-online, region-north]).
-	example(2, [age-52, income-78000, channel-retail, region-south]).
-
-:- end_object.
-
-
-:- object(invalid_mixed_profile_declarations,
-	implements(clustering_dataset_protocol)).
-
-	attribute_values(age, continuous).
-	attribute_values(age, continuous).
-	attribute_values(channel, [online, retail]).
-	attribute_values(region, [north, south]).
-
-	example(1, [age-23, channel-online, region-north]).
-	example(2, [age-52, channel-retail, region-south]).
-
-:- end_object.
-
-
 :- object(tests,
 	extends(lgtunit)).
 

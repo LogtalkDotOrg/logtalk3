@@ -1,0 +1,178 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
+%
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+:- object(regular_tied_grouped,
+	implements(ranking_dataset_protocol)).
+
+	group(ballot_one).
+	group(ballot_two).
+	group(ballot_three).
+
+	item(ballot_one, alpha).
+	item(ballot_one, beta).
+	item(ballot_one, gamma).
+
+	item(ballot_two, alpha).
+	item(ballot_two, beta).
+	item(ballot_two, gamma).
+
+	item(ballot_three, alpha).
+	item(ballot_three, beta).
+	item(ballot_three, gamma).
+
+	relevance(ballot_one, alpha, 1).
+	relevance(ballot_one, beta, 1).
+	relevance(ballot_one, gamma, 0).
+
+	relevance(ballot_two, alpha, 1).
+	relevance(ballot_two, gamma, 1).
+	relevance(ballot_two, beta, 0).
+
+	relevance(ballot_three, beta, 1).
+	relevance(ballot_three, gamma, 1).
+	relevance(ballot_three, alpha, 0).
+
+:- end_object.
+
+
+:- object(asymmetric_tied_grouped,
+	implements(ranking_dataset_protocol)).
+
+	group(ballot_one).
+	group(ballot_two).
+	group(ballot_three).
+	group(ballot_four).
+
+	item(ballot_one, alpha).
+	item(ballot_one, beta).
+	item(ballot_one, gamma).
+
+	item(ballot_two, alpha).
+	item(ballot_two, beta).
+	item(ballot_two, gamma).
+
+	item(ballot_three, alpha).
+	item(ballot_three, beta).
+	item(ballot_three, gamma).
+
+	item(ballot_four, alpha).
+	item(ballot_four, beta).
+	item(ballot_four, gamma).
+
+	relevance(ballot_one, alpha, 1).
+	relevance(ballot_one, beta, 1).
+	relevance(ballot_one, gamma, 0).
+
+	relevance(ballot_two, alpha, 1).
+	relevance(ballot_two, gamma, 1).
+	relevance(ballot_two, beta, 0).
+
+	relevance(ballot_three, beta, 1).
+	relevance(ballot_three, gamma, 1).
+	relevance(ballot_three, alpha, 0).
+
+	relevance(ballot_four, alpha, 1).
+	relevance(ballot_four, beta, 0).
+	relevance(ballot_four, gamma, 0).
+
+:- end_object.
+
+
+:- object(asymmetric_tied_grouped_three,
+	implements(ranking_dataset_protocol)).
+
+	group(ballot_one).
+	group(ballot_two).
+	group(ballot_three).
+	group(ballot_four).
+	group(ballot_five).
+
+	item(ballot_one, alpha).
+	item(ballot_one, beta).
+	item(ballot_one, gamma).
+
+	item(ballot_two, alpha).
+	item(ballot_two, beta).
+	item(ballot_two, gamma).
+
+	item(ballot_three, alpha).
+	item(ballot_three, beta).
+	item(ballot_three, gamma).
+
+	item(ballot_four, alpha).
+	item(ballot_four, beta).
+	item(ballot_four, gamma).
+
+	item(ballot_five, alpha).
+	item(ballot_five, beta).
+	item(ballot_five, gamma).
+
+	relevance(ballot_one, alpha, 1).
+	relevance(ballot_one, beta, 1).
+	relevance(ballot_one, gamma, 0).
+
+	relevance(ballot_two, alpha, 1).
+	relevance(ballot_two, gamma, 1).
+	relevance(ballot_two, beta, 0).
+
+	relevance(ballot_three, beta, 1).
+	relevance(ballot_three, gamma, 1).
+	relevance(ballot_three, alpha, 0).
+
+	relevance(ballot_four, alpha, 1).
+	relevance(ballot_four, beta, 0).
+	relevance(ballot_four, gamma, 0).
+
+	relevance(ballot_five, alpha, 1).
+	relevance(ballot_five, beta, 1).
+	relevance(ballot_five, gamma, 0).
+
+:- end_object.
+
+
+:- object(singleton_grouped,
+	implements(ranking_dataset_protocol)).
+
+	group(ballot_one).
+
+	item(ballot_one, alpha).
+
+	relevance(ballot_one, alpha, 1).
+
+:- end_object.
+
+
+:- object(singleton_grouped_missing_relevance,
+	implements(ranking_dataset_protocol)).
+
+	group(ballot_one).
+
+	item(ballot_one, alpha).
+
+:- end_object.
+
+
+:- object(plackett_luce_last_empty_grouped,
+	implements(ranking_dataset_protocol)).
+
+	group(ballot_one).
+
+:- end_object.

@@ -19,32 +19,43 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(types(loader)),
-	logtalk_load(dictionaries(loader)),
-	logtalk_load(format(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(ranking_protocols(loader)),
-	logtalk_load([
-		ranking_protocols('test_datasets/ranked_ballots'),
-		ranking_protocols('test_datasets/tied_grouped'),
-		ranking_protocols('test_datasets/sparse_grouped_relevance'),
-		ranking_protocols('test_datasets/reordered_grouped_items'),
-		ranking_protocols('test_datasets/search_results'),
-		ranking_protocols('test_datasets/malformed_grouped')
-	], [
-		source_data(on),
-		debug(on)
-	]),
-	logtalk_load([
-		plackett_luce_last_ranker,
-		test_objects
-	], [
-		source_data(on),
-		debug(on)
-	]),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(knn_identical_query_fixture,
+	implements(anomaly_dataset_protocol)).
+
+	attribute_values(x, continuous).
+
+	class(label).
+
+	class_values([normal, anomaly]).
+
+	example(1, normal, [x-0.00]).
+	example(2, normal, [x-0.10]).
+	example(3, anomaly, [x-10.00]).
+
+:- end_object.
+
+
+:- object(knn_empty_anomalies,
+	implements(anomaly_dataset_protocol)).
+
+	attribute_values(x, continuous).
+
+	class(label).
+
+	class_values([normal, anomaly]).
+
+:- end_object.
+
+
+:- object(knn_singleton_anomalies,
+	implements(anomaly_dataset_protocol)).
+
+	attribute_values(x, continuous).
+
+	class(label).
+
+	class_values([normal, anomaly]).
+
+	example(1, normal, [x-1.00]).
+
+:- end_object.

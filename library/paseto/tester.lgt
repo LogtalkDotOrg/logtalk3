@@ -36,7 +36,8 @@
 			paseto_claims_helpers,
 			paseto_claims,
 			paseto_keys,
-			paseto
+			paseto,
+			test_objects
 		], [
 			debug(on),
 			source_data(on)

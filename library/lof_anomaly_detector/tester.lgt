@@ -34,7 +34,8 @@
 		anomaly_detection_protocols('test_datasets/mixed_anomalies'),
 		anomaly_detection_protocols('test_datasets/shuttle_anomalies'),
 		anomaly_detection_protocols('test_datasets/water_potability'),
-		anomaly_detection_protocols('test_datasets/sensor_anomalies')
+		anomaly_detection_protocols('test_datasets/sensor_anomalies'),
+		test_objects
 	], [
 		source_data(on),
 		debug(on)

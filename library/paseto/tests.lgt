@@ -19,32 +19,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(paseto_v4_test_driver,
-	extends(paseto_v4)).
-
-	:- public(deterministic_local_encrypt/6).
-	:- mode(deterministic_local_encrypt(+list(byte), +list(byte), +list(byte), +list(byte), +list(byte), -atom), one_or_error).
-	:- info(deterministic_local_encrypt/6, [
-		comment is 'Calls the protected explicit-nonce encryption predicate for conformance tests.',
-		argnames is ['Key', 'Nonce', 'Payload', 'Footer', 'ImplicitAssertion', 'Token']
-	]).
-
-	deterministic_local_encrypt(Key, Nonce, Payload, Footer, ImplicitAssertion, Token) :-
-		^^local_encrypt_with_nonce(Key, Nonce, Payload, Footer, ImplicitAssertion, Token).
-
-	:- public(test_pae/2).
-	:- mode(test_pae(+list(list(byte)), -list(byte)), one).
-	:- info(test_pae/2, [
-		comment is 'Exposes PAE for conformance tests.',
-		argnames is ['Pieces', 'Encoding']
-	]).
-
-	test_pae(Pieces, Encoding) :-
-		^^pae(Pieces, Encoding).
-
-:- end_object.
-
-
 :- object(tests,
 	extends(lgtunit)).
 

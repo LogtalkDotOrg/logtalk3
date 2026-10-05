@@ -26,7 +26,8 @@
 	logtalk_load(options(loader)),
 	logtalk_load([
 		pattern_miner_protocol,
-		pattern_miner_common
+		pattern_miner_common,
+		test_objects
 	], [
 		source_data(on),
 		debug(on)

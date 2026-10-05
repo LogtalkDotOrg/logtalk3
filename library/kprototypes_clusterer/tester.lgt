@@ -34,7 +34,13 @@
 		source_data(on),
 		debug(on)
 	]),
-	logtalk_load(kprototypes_clusterer, [source_data(on), debug(on)]),
+	logtalk_load([
+		kprototypes_clusterer,
+		test_objects
+	], [
+		source_data(on),
+		debug(on)
+	]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run

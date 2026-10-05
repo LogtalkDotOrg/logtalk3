@@ -19,68 +19,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(invalid_lda_dataset,
-	implements(supervised_dimension_reduction_dataset_protocol)).
-
-	attribute_values(channel, [online, retail]).
-	attribute_values(score, continuous).
-
-	class(label).
-
-	class_values([positive, negative]).
-
-	example(1, positive, [channel-online, score-1.0]).
-	example(2, negative, [channel-retail, score-2.0]).
-
-:- end_object.
-
-
-:- object(duplicate_attribute_lda_dataset,
-	implements(supervised_dimension_reduction_dataset_protocol)).
-
-	attribute_values(x, continuous).
-	attribute_values(y, continuous).
-
-	class(label).
-	class_values([left, right]).
-
-	example(1, left, [x-1.0, x-1.1, y-2.0]).
-	example(2, right, [x-(-1.0), y-(-2.0)]).
-
-:- end_object.
-
-
-:- object(undeclared_attribute_lda_dataset,
-	implements(supervised_dimension_reduction_dataset_protocol)).
-
-	attribute_values(x, continuous).
-	attribute_values(y, continuous).
-
-	class(label).
-	class_values([left, right]).
-
-	example(1, left, [x-1.0, y-2.0, junk-9.0]).
-	example(2, right, [x-(-1.0), y-(-2.0)]).
-
-:- end_object.
-
-
-:- object(duplicate_attribute_declaration_lda_dataset,
-	implements(supervised_dimension_reduction_dataset_protocol)).
-
-	attribute_values(x, continuous).
-	attribute_values(x, continuous).
-	attribute_values(y, continuous).
-
-	class(label).
-	class_values([left, right]).
-
-	example(1, left, [x-1.0, y-2.0]).
-	example(2, right, [x-(-1.0), y-(-2.0)]).
-
-:- end_object.
-
-
 :- object(tests,
 	extends(lgtunit)).
 

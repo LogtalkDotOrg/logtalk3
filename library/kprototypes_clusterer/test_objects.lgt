@@ -19,32 +19,29 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(types(loader)),
-	logtalk_load(dictionaries(loader)),
-	logtalk_load(format(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(ranking_protocols(loader)),
-	logtalk_load([
-		ranking_protocols('test_datasets/ranked_ballots'),
-		ranking_protocols('test_datasets/tied_grouped'),
-		ranking_protocols('test_datasets/sparse_grouped_relevance'),
-		ranking_protocols('test_datasets/reordered_grouped_items'),
-		ranking_protocols('test_datasets/search_results'),
-		ranking_protocols('test_datasets/malformed_grouped')
-	], [
-		source_data(on),
-		debug(on)
-	]),
-	logtalk_load([
-		plackett_luce_last_ranker,
-		test_objects
-	], [
-		source_data(on),
-		debug(on)
-	]),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(invalid_mixed_profiles,
+	implements(clustering_dataset_protocol)).
+
+	attribute_values(age, continuous).
+	attribute_values(income, continuous).
+	attribute_values(channel, [online, retail]).
+	attribute_values(region, [north, south]).
+
+	example(1, [age-23, age-24, income-32000, channel-online, region-north]).
+	example(2, [age-52, income-78000, channel-retail, region-south]).
+
+:- end_object.
+
+
+:- object(invalid_mixed_profile_declarations,
+	implements(clustering_dataset_protocol)).
+
+	attribute_values(age, continuous).
+	attribute_values(age, continuous).
+	attribute_values(channel, [online, retail]).
+	attribute_values(region, [north, south]).
+
+	example(1, [age-23, channel-online, region-north]).
+	example(2, [age-52, channel-retail, region-south]).
+
+:- end_object.

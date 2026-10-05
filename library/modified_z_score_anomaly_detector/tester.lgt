@@ -32,7 +32,8 @@
 	logtalk_load([
 		anomaly_detection_protocols('test_datasets/gaussian_anomalies'),
 		anomaly_detection_protocols('test_datasets/mixed_anomalies'),
-		anomaly_detection_protocols('test_datasets/sensor_anomalies')
+		anomaly_detection_protocols('test_datasets/sensor_anomalies'),
+		test_objects
 	], [
 		source_data(on),
 		debug(on)

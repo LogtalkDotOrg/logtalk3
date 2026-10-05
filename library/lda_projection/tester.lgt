@@ -29,8 +29,17 @@
 	logtalk_load([
 		dimension_reduction_protocols('test_datasets/anti_diagonal_singletons'),
 		dimension_reduction_protocols('test_datasets/labeled_measurements')
-	], [source_data(on), debug(on)]),
-	logtalk_load(lda_projection, [source_data(on), debug(on)]),
+	], [
+		source_data(on),
+		debug(on)
+	]),
+	logtalk_load([
+		lda_projection,
+		test_objects
+	], [
+		source_data(on),
+		debug(on)
+	]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run

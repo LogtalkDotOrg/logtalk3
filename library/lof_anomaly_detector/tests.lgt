@@ -19,49 +19,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(lof_identical_query_fixture,
-	implements(anomaly_dataset_protocol)).
-
-	attribute_values(x, continuous).
-
-	class(label).
-
-	class_values([normal, anomaly]).
-
-	example(1, normal, [x-0.00]).
-	example(2, normal, [x-10.00]).
-	example(3, normal, [x-10.10]).
-	example(4, normal, [x-10.20]).
-
-:- end_object.
-
-
-:- object(lof_empty_anomalies,
-	implements(anomaly_dataset_protocol)).
-
-	attribute_values(x, continuous).
-
-	class(label).
-
-	class_values([normal, anomaly]).
-
-:- end_object.
-
-
-:- object(lof_singleton_anomalies,
-	implements(anomaly_dataset_protocol)).
-
-	attribute_values(x, continuous).
-
-	class(label).
-
-	class_values([normal, anomaly]).
-
-	example(1, normal, [x-1.00]).
-
-:- end_object.
-
-
 :- object(tests,
 	extends(lgtunit)).
 
