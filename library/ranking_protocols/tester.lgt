@@ -76,7 +76,8 @@
 		'test_datasets/malformed_grouped',
 		'test_datasets/malformed_duplicate_items',
 		'test_datasets/malformed_self_preference',
-		'test_datasets/malformed_non_positive_weight'
+		'test_datasets/malformed_non_positive_weight',
+		test_objects
 	], [
 		source_data(on),
 		debug(on)

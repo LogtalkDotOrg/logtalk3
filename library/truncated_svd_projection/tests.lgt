@@ -19,69 +19,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(invalid_truncated_svd_dataset,
-	implements(dimension_reduction_dataset_protocol)).
-
-	attribute_values(channel, [online, retail]).
-	attribute_values(score, continuous).
-
-	example(1, [channel-online, score-1.0]).
-	example(2, [channel-retail, score-2.0]).
-
-:- end_object.
-
-
-:- object(duplicate_attribute_truncated_svd_dataset,
-	implements(dimension_reduction_dataset_protocol)).
-
-	attribute_values(f1, continuous).
-	attribute_values(f2, continuous).
-
-	example(1, [f1-1.0, f1-1.1, f2-2.0]).
-	example(2, [f1-2.0, f2-4.0]).
-
-:- end_object.
-
-
-:- object(undeclared_attribute_truncated_svd_dataset,
-	implements(dimension_reduction_dataset_protocol)).
-
-	attribute_values(f1, continuous).
-	attribute_values(f2, continuous).
-
-	example(1, [f1-1.0, f2-2.0, junk-9.0]).
-	example(2, [f1-2.0, f2-4.0]).
-
-:- end_object.
-
-
-:- object(duplicate_attribute_declaration_truncated_svd_dataset,
-	implements(dimension_reduction_dataset_protocol)).
-
-	attribute_values(f1, continuous).
-	attribute_values(f1, continuous).
-	attribute_values(f2, continuous).
-
-	example(1, [f1-1.0, f2-2.0]).
-	example(2, [f1-2.0, f2-4.0]).
-
-:- end_object.
-
-
-:- object(leading_zero_feature_measurements,
-	implements(dimension_reduction_dataset_protocol)).
-
-	attribute_values(f1, continuous).
-	attribute_values(f2, continuous).
-	attribute_values(f3, continuous).
-
-	example(1, [f1-0.0, f2-1.0, f3-2.0]).
-	example(2, [f1-0.0, f2-2.0, f3-4.0]).
-	example(3, [f1-0.0, f2-3.0, f3-6.0]).
-
-:- end_object.
-
-
 :- object(tests,
 	extends(lgtunit)).
 

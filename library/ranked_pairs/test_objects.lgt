@@ -19,24 +19,26 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(types(loader)),
-	logtalk_load(statistics(loader)),
-	logtalk_load(format(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(random(loader)),
-	logtalk_load(dimension_reduction_protocols(loader)),
-	logtalk_load([
-		dimension_reduction_protocols('test_datasets/correlated_plane'),
-		dimension_reduction_protocols('test_datasets/high_dimensional_measurements'),
-		dimension_reduction_protocols('test_datasets/singleton_measurement')
-	], [
-		source_data(on),
-		debug(on)
-	]),
-	logtalk_load([tsne_projection, test_objects], [source_data(on), debug(on)]),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(singleton_pairwise,
+	implements(pairwise_ranking_dataset_protocol)).
+
+	item(alpha).
+
+:- end_object.
+
+
+:- object(strong_path_pairwise,
+	implements(pairwise_ranking_dataset_protocol)).
+
+	item(alpha).
+	item(beta).
+	item(gamma).
+
+	preference(alpha, beta, 10).
+	preference(beta, alpha, 1).
+	preference(beta, gamma, 10).
+	preference(gamma, beta, 1).
+	preference(gamma, alpha, 6).
+	preference(alpha, gamma, 5).
+
+:- end_object.

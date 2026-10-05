@@ -42,7 +42,8 @@
 		'test_datasets/plane',
 		'test_datasets/simple_line',
 		'test_datasets/step_signal',
-		'test_datasets/undeclared_attribute_example'
+		'test_datasets/undeclared_attribute_example',
+		test_objects
 	], [
 		source_data(on),
 		debug(on)

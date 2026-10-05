@@ -18,6 +18,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(types(loader)),
@@ -38,7 +39,7 @@
 		source_data(on),
 		debug(on)
 	]),
-	logtalk_load(ranked_pairs, [source_data(on), debug(on)]),
+	logtalk_load([ranked_pairs, test_objects], [source_data(on), debug(on)]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run

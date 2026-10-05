@@ -19,55 +19,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(sample_regressor,
-	imports([options, regressor_common])).
-
-	learn(Dataset, sample_regressor(TargetName, Attributes, Target, Diagnostics), UserOptions) :-
-		^^check_options(UserOptions),
-		^^merge_options(UserOptions, Options),
-		Dataset::target(TargetName),
-		^^dataset_attributes(Dataset, Attributes),
-		^^dataset_examples(Dataset, Examples),
-		^^check_examples(Dataset, Examples),
-		Examples = [example(_Id, Target, _AttributeValues)| _],
-		length(Examples, TrainingExampleCount),
-		build_diagnostics(TargetName, TrainingExampleCount, Options, Diagnostics).
-
-	predict(sample_regressor(_TargetName, _Attributes, Target, _Diagnostics), _Instance, Target).
-
-	build_diagnostics(TargetName, TrainingExampleCount, Options, Diagnostics) :-
-		^^base_regressor_diagnostics(sample_regressor, TargetName, TrainingExampleCount, Options, [], Diagnostics).
-
-	check_regressor(Regressor) :-
-		(	Regressor = sample_regressor(TargetName, Attributes, Target, Diagnostics),
-			atom(TargetName),
-			^^valid_attribute_declarations(Attributes),
-			number(Target),
-			^^valid_regressor_metadata(sample_regressor, Diagnostics) ->
-			true
-		;	domain_error(regressor, Regressor)
-		).
-
-	regressor_export_template(_Dataset, _Regressor, Functor, Template) :-
-		Template =.. [Functor, 'Regressor'].
-
-	regressor_term_template(sample_regressor(_TargetName, _Attributes, _Target, _Diagnostics), sample_regressor('TargetName', 'Attributes', 'Target', 'Diagnostics')).
-
-	export_to_clauses(_Dataset, Regressor, Functor, [Clause]) :-
-		Clause =.. [Functor, Regressor].
-
-	print_regressor(Regressor) :-
-		^^print_regressor_template(Regressor),
-		writeq(Regressor), nl.
-
-	default_option(sample_option(enabled)).
-
-	valid_option(sample_option(Value)) :-
-		once((Value == enabled; Value == disabled)).
-
-:- end_object.
-
-
 :- object(tests,
 	extends(lgtunit)).
 

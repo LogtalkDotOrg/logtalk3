@@ -19,68 +19,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(z_score_empty_anomalies,
-	implements(anomaly_dataset_protocol)).
-
-	attribute_values(x, continuous).
-
-	class(label).
-
-	class_values([normal, anomaly]).
-
-:- end_object.
-
-
-:- object(z_score_singleton_anomalies,
-	implements(anomaly_dataset_protocol)).
-
-	attribute_values(x, continuous).
-
-	class(label).
-
-	class_values([normal, anomaly]).
-
-	example(1, normal, [x-1.00]).
-
-:- end_object.
-
-
-:- object(z_score_featureless_anomalies,
-	implements(anomaly_dataset_protocol)).
-
-	class(label).
-
-	class_values([normal, anomaly]).
-
-	example(1, normal, []).
-
-:- end_object.
-
-
-:- object(z_score_high_dimensional_anomalies,
-	implements(anomaly_dataset_protocol)).
-
-	attribute_values(x1, continuous).
-	attribute_values(x2, continuous).
-	attribute_values(x3, continuous).
-	attribute_values(x4, continuous).
-	attribute_values(x5, continuous).
-	attribute_values(x6, continuous).
-	attribute_values(x7, continuous).
-	attribute_values(x8, continuous).
-	attribute_values(x9, continuous).
-	attribute_values(x10, continuous).
-
-	class(label).
-
-	class_values([normal, anomaly]).
-
-	example(1, normal, [x1- -1.0, x2- -1.0, x3- -1.0, x4- -1.0, x5- -1.0, x6- -1.0, x7- -1.0, x8- -1.0, x9- -1.0, x10- -1.0]).
-	example(2, normal, [x1-1.0, x2-1.0, x3-1.0, x4-1.0, x5-1.0, x6-1.0, x7-1.0, x8-1.0, x9-1.0, x10-1.0]).
-
-:- end_object.
-
-
 :- object(tests,
 	extends(lgtunit)).
 

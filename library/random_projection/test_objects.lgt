@@ -19,24 +19,26 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(types(loader)),
-	logtalk_load(statistics(loader)),
-	logtalk_load(format(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(random(loader)),
-	logtalk_load(dimension_reduction_protocols(loader)),
-	logtalk_load([
-		dimension_reduction_protocols('test_datasets/correlated_plane'),
-		dimension_reduction_protocols('test_datasets/high_dimensional_measurements'),
-		dimension_reduction_protocols('test_datasets/singleton_measurement')
-	], [
-		source_data(on),
-		debug(on)
-	]),
-	logtalk_load([tsne_projection, test_objects], [source_data(on), debug(on)]),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(invalid_random_projection_dataset,
+	implements(dimension_reduction_dataset_protocol)).
+
+	attribute_values(channel, [online, retail]).
+	attribute_values(score, continuous).
+
+	example(1, [channel-online, score-1.0]).
+	example(2, [channel-retail, score-2.0]).
+
+:- end_object.
+
+
+:- object(duplicate_attribute_declaration_random_projection_dataset,
+	implements(dimension_reduction_dataset_protocol)).
+
+	attribute_values(x, continuous).
+	attribute_values(x, continuous).
+	attribute_values(y, continuous).
+
+	example(1, [x-1.0, y-2.0]).
+	example(2, [x-2.0, y-4.0]).
+
+:- end_object.

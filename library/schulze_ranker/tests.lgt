@@ -18,30 +18,6 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-:- object(singleton_pairwise,
-	implements(pairwise_ranking_dataset_protocol)).
-
-	item(alpha).
-
-:- end_object.
-
-
-:- object(strong_path_pairwise,
-	implements(pairwise_ranking_dataset_protocol)).
-
-	item(alpha).
-	item(beta).
-	item(gamma).
-
-	preference(alpha, beta, 10).
-	preference(beta, alpha, 1).
-	preference(beta, gamma, 10).
-	preference(gamma, beta, 1).
-	preference(gamma, alpha, 6).
-	preference(alpha, gamma, 5).
-
-:- end_object.
-
 
 :- object(tests,
 	extends(lgtunit)).

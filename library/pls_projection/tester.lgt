@@ -28,8 +28,10 @@
 	logtalk_load(dimension_reduction_protocols(loader)),
 	logtalk_load([
 		dimension_reduction_protocols('test_datasets/target_latent_measurements')
-	], [source_data(on), debug(on)]),
-	logtalk_load(pls_projection, [source_data(on), debug(on)]),
+	], [
+		source_data(on), debug(on)
+	]),
+	logtalk_load([pls_projection, test_objects], [source_data(on), debug(on)]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
