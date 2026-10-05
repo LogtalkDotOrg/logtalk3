@@ -34,6 +34,29 @@ different time-points. The reference label `zero` is reserved and denotes
 time zero. It is added automatically and must not be supplied to `new/2`.
 
 
+API documentation
+-----------------
+
+Open the [../../apis/library_index.html#simple-temporal-networks](../../apis/library_index.html#simple-temporal-networks)
+link in a web browser.
+
+
+Loading
+-------
+
+To load this library, load its `loader.lgt` file:
+
+	| ?- logtalk_load(simple_temporal_networks(loader)).
+
+
+Testing
+-------
+
+To test this library, load its `tester.lgt` file:
+
+	| ?- logtalk_load(simple_temporal_networks(tester)).
+
+
 Metric model
 ------------
 
@@ -287,25 +310,6 @@ would still require an explicit bridge. Independently propagating the two
 networks does not establish their joint consistency. The intended boundary
 is therefore to keep STN as the metric solver, retain its interval predicates
 as adapters, and investigate shared indexing or storage utilities separately.
-
-
-Loading
--------
-
-    | ?- logtalk_load(simple_temporal_networks(loader)).
-
-The loader loads `basic_types(loader)` and `intervals(loader)`, followed by
-the protocol and implementation with optimizations enabled.
-
-
-Testing
--------
-
-    | ?- logtalk_load(simple_temporal_networks(tester)).
-
-Tests include determinism checks, all 13 concrete Allen relations, an
-exhaustive bounded integer-schedule oracle, and generated properties
-using QuickCheck.
 
 
 Examples

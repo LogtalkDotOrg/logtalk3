@@ -26,7 +26,7 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-10-01,
-		comment is 'Unit tests for the portable ATMS library.',
+		comment is 'Unit tests for the "atms" library.',
 		parameters is [
 			'Representation' - 'ATMS environment representation under test.'
 		]
@@ -46,19 +46,19 @@
 	cover(atms_ordered_list_environment).
 	cover(atms_segmented_bitset_environment).
 
-	test(environment_union_01, deterministic(Union == [node(0), node(1), node(2), node(3)])) :-
+	test(atms_environment_union_01, deterministic(Union == [node(0), node(1), node(2), node(3)])) :-
 		_Representation_::from_list([node(0), node(2), node(3)], Environment1),
 		_Representation_::from_list([node(1), node(2)], Environment2),
 		_Representation_::union(Environment1, Environment2, Environment),
 		_Representation_::to_list(Environment, Union).
 
-	test(environment_union_empty_01, deterministic(Union == [node(0), node(2)])) :-
+	test(atms_environment_union_empty_01, deterministic(Union == [node(0), node(2)])) :-
 		_Representation_::from_list([node(0), node(2)], Environment1),
 		_Representation_::empty(Environment2),
 		_Representation_::union(Environment1, Environment2, Environment),
 		_Representation_::to_list(Environment, Union).
 
-	test(environment_subset_01, deterministic(IsSubset == true)) :-
+	test(atms_environment_subset_01, deterministic(IsSubset == true)) :-
 		_Representation_::from_list([node(0), node(2)], Environment1),
 		_Representation_::from_list([node(0), node(1), node(2), node(3)], Environment2),
 		(	_Representation_::subset(Environment1, Environment2) ->
@@ -66,7 +66,7 @@
 		;	IsSubset = false
 		).
 
-	test(environment_not_subset_01, deterministic(IsSubset == false)) :-
+	test(atms_environment_not_subset_01, deterministic(IsSubset == false)) :-
 		_Representation_::from_list([node(0), node(2)], Environment1),
 		_Representation_::from_list([node(0), node(1), node(3)], Environment2),
 		(	_Representation_::subset(Environment1, Environment2) ->
@@ -74,11 +74,11 @@
 		;	IsSubset = false
 		).
 
-	test(environment_canonicalization_01, deterministic(Nodes == [node(0), node(15), node(16), node(31), node(32)])) :-
+	test(atms_environment_canonicalization_01, deterministic(Nodes == [node(0), node(15), node(16), node(31), node(32)])) :-
 		_Representation_::from_list([node(32), node(15), node(16), node(15), node(31), node(0)], Environment),
 		_Representation_::to_list(Environment, Nodes).
 
-	test(environment_equal_01, deterministic(Equal == true)) :-
+	test(atms_environment_equal_01, deterministic(Equal == true)) :-
 		_Representation_::from_list([node(31), node(15), node(16), node(15)], Environment1),
 		_Representation_::from_list([node(15), node(16), node(31)], Environment2),
 		( 	_Representation_::equal(Environment1, Environment2) ->
@@ -86,7 +86,7 @@
 		; 	Equal = false
 		).
 
-	test(environment_empty_and_exact_subset_01, deterministic(Subset == true)) :-
+	test(atms_environment_empty_and_exact_subset_01, deterministic(Subset == true)) :-
 		_Representation_::empty(Empty),
 		_Representation_::from_list([node(15), node(16), node(31), node(32)], Environment),
 		( 	_Representation_::subset(Empty, Environment),
@@ -95,7 +95,7 @@
 		; 	Subset = false
 		).
 
-	test(environment_cross_block_subset_01, deterministic(Subset == true)) :-
+	test(atms_environment_cross_block_subset_01, deterministic(Subset == true)) :-
 		_Representation_::from_list([node(15), node(31)], Environment1),
 		_Representation_::from_list([node(0), node(15), node(16), node(31), node(32)], Environment2),
 		( 	_Representation_::subset(Environment1, Environment2) ->
@@ -103,28 +103,28 @@
 		; 	Subset = false
 		).
 
-	test(environment_cross_block_union_01, deterministic(Union == [node(15), node(16), node(31), node(32)])) :-
+	test(atms_environment_cross_block_union_01, deterministic(Union == [node(15), node(16), node(31), node(32)])) :-
 		_Representation_::from_list([node(15), node(16), node(31)], Environment1),
 		_Representation_::from_list([node(16), node(32)], Environment2),
 		_Representation_::union(Environment1, Environment2, Environment),
 		_Representation_::to_list(Environment, Union).
 
-	test(environment_sparse_blocks_01, deterministic(Union == [node(0), node(16), node(32), node(48)])) :-
+	test(atms_environment_sparse_blocks_01, deterministic(Union == [node(0), node(16), node(32), node(48)])) :-
 		_Representation_::from_list([node(0), node(48)], Environment1),
 		_Representation_::from_list([node(16), node(32)], Environment2),
 		_Representation_::union(Environment1, Environment2, Environment),
 		_Representation_::to_list(Environment, Union).
 
-	test(empty_system_01, deterministic(Assumptions == [])) :-
+	test(atms_empty_system_01, deterministic(Assumptions == [])) :-
 		new(_Representation_, State),
 		assumptions(State, Assumptions).
 
-	test(assumption_label_01, deterministic(Label == [[node(0)]])) :-
+	test(atms_assumption_label_01, deterministic(Label == [[node(0)]])) :-
 		new(_Representation_, State0),
 		create_assumption(a, State0, _, State),
 		label(node(0), State, Label).
 
-	test(state_collection_order_01, deterministic([EnumeratedNodes, Nodes, Assumptions, Justifications, Why] == [
+	test(atms_state_collection_order_01, deterministic([EnumeratedNodes, Nodes, Assumptions, Justifications, Why] == [
 		[node(0), node(1), node(2)],
 		[node(0)-a, node(1)-b, node(2)-h],
 		[node(0), node(1)],
@@ -143,13 +143,13 @@
 		justifications(State, Justifications),
 		why(H, State, Why).
 
-	test(unconditional_justification_01, deterministic(Label == [[]])) :-
+	test(atms_unconditional_justification_01, deterministic(Label == [[]])) :-
 		new(_Representation_, State0),
 		create_node(fact, State0, Fact, State1),
 		justify(Fact, [], axiom, State1, State),
 		label(Fact, State, Label).
 
-	test(incremental_delta_01, deterministic(Label == [[node(0)], [node(1)]])) :-
+	test(atms_incremental_delta_01, deterministic(Label == [[node(0)], [node(1)]])) :-
 		new(_Representation_, State0),
 		create_assumption(a, State0, A, State1),
 		create_assumption(c, State1, C, State2),
@@ -160,7 +160,7 @@
 		justify(H, [C], alternative, State6, State),
 		label(K, State, Label).
 
-	test(subsumed_label_update_01, deterministic([LabelH, LabelK] == [[[node(0)]], [[node(0)]]])) :-
+	test(atms_subsumed_label_update_01, deterministic([LabelH, LabelK] == [[[node(0)]], [[node(0)]]])) :-
 		new(_Representation_, State0),
 		create_assumption(a, State0, A, State1),
 		create_assumption(b, State1, B, State2),
@@ -172,7 +172,7 @@
 		label(H, State, LabelH),
 		label(K, State, LabelK).
 
-	test(cartesian_products_01, deterministic(Label == [
+	test(atms_cartesian_products_01, deterministic(Label == [
 		[node(0),node(2)], [node(0),node(3)], [node(1),node(2)], [node(1),node(3)]
 	])) :-
 		new(_Representation_, State0),
@@ -190,7 +190,7 @@
 		justify(Z, [X, Y], product, State11, State),
 		label(Z, State, Label).
 
-	test(cartesian_product_minimality_01, deterministic(Label == [[node(0)], [node(1),node(2)]])) :-
+	test(atms_cartesian_product_minimality_01, deterministic(Label == [[node(0)], [node(1),node(2)]])) :-
 		new(_Representation_, State0),
 		create_assumption(a, State0, A, State1),
 		create_assumption(b, State1, B, State2),
@@ -205,7 +205,7 @@
 		justify(Z, [X, Y], product, State10, State),
 		label(Z, State, Label).
 
-	test(cartesian_product_nogood_pruning_01, deterministic(Label == [
+	test(atms_cartesian_product_nogood_pruning_01, deterministic(Label == [
 		[node(0),node(3)], [node(1),node(2)], [node(1),node(3)]
 	])) :-
 		new(_Representation_, State0),
@@ -225,7 +225,7 @@
 		justify(Z, [X, Y], product, State13, State),
 		label(Z, State, Label).
 
-	test(empty_antecedent_product_01, deterministic([LabelX, LabelTarget] == [
+	test(atms_empty_antecedent_product_01, deterministic([LabelX, LabelTarget] == [
 		[[node(1)], [node(2)]], []
 	])) :-
 		new(_Representation_, State0),
@@ -240,7 +240,7 @@
 		label(X, State, LabelX),
 		label(Target, State, LabelTarget).
 
-	test(cyclic_justifications_01, deterministic([LabelB, LabelC] == [[[node(0)]], [[node(0)]]])) :-
+	test(atms_cyclic_justifications_01, deterministic([LabelB, LabelC] == [[[node(0)]], [[node(0)]]])) :-
 		new(_Representation_, State0),
 		create_assumption(a, State0, A, State1),
 		create_node(b, State1, B, State2),
@@ -251,7 +251,7 @@
 		label(B, State, LabelB),
 		label(C, State, LabelC).
 
-	test(minimality_01, deterministic(Label == [[node(0)]])) :-
+	test(atms_minimality_01, deterministic(Label == [[node(0)]])) :-
 		new(_Representation_, State0),
 		create_assumption(a, State0, A, State1),
 		create_assumption(c, State1, C, State2),
@@ -260,7 +260,7 @@
 		justify(H, [A], simpler, State4, State),
 		label(H, State, Label).
 
-	test(nogood_pruning_01, deterministic([Label, IsConsistent, Nogood] == [[], false, [node(0),node(1)]])) :-
+	test(atms_nogood_pruning_01, deterministic([Label, IsConsistent, Nogood] == [[], false, [node(0),node(1)]])) :-
 		new(_Representation_, State0),
 		create_assumption(a, State0, A, State1),
 		create_assumption(c, State1, C, State2),
@@ -275,7 +275,7 @@
 		),
 		findall(Environment, nogood(Environment, State), [Nogood]).
 
-	test(sequential_nogood_pruning_01, deterministic([Label1, Label2] == [
+	test(atms_sequential_nogood_pruning_01, deterministic([Label1, Label2] == [
 		[[node(0),node(2)], [node(1),node(2)]],
 		[[node(0),node(2)]]
 	])) :-
@@ -294,7 +294,7 @@
 		justify(BottomBC, [B, C], clash_bc, State10, State),
 		label(H, State, Label2).
 
-	test(interpretations_01, deterministic(Interpretations == [[node(0)], [node(1)]])) :-
+	test(atms_interpretations_01, deterministic(Interpretations == [[node(0)], [node(1)]])) :-
 		new(_Representation_, State0),
 		create_assumption(a, State0, A, State1),
 		create_assumption(c, State1, C, State2),
@@ -302,24 +302,24 @@
 		justify(Bottom, [A, C], clash, State3, State),
 		interpretations(State, Interpretations).
 
-	test(interpretations_without_nogoods_01, deterministic(Interpretations == [[node(0), node(1), node(2)]])) :-
+	test(atms_interpretations_without_nogoods_01, deterministic(Interpretations == [[node(0), node(1), node(2)]])) :-
 		new(_Representation_, State0),
 		create_assumption(a, State0, _, State1),
 		create_assumption(b, State1, _, State2),
 		create_assumption(c, State2, _, State),
 		interpretations(State, Interpretations).
 
-	test(interpretations_empty_system_01, deterministic(Interpretations == [[]])) :-
+	test(atms_interpretations_empty_system_01, deterministic(Interpretations == [[]])) :-
 		new(_Representation_, State),
 		interpretations(State, Interpretations).
 
-	test(interpretations_inconsistent_system_01, deterministic(Interpretations == [])) :-
+	test(atms_interpretations_inconsistent_system_01, deterministic(Interpretations == [])) :-
 		new(_Representation_, State0),
 		create_contradiction(false, State0, Bottom, State1),
 		justify(Bottom, [], contradiction, State1, State),
 		interpretations(State, Interpretations).
 
-	test(interpretations_multiple_nogoods_01, deterministic(Interpretations == [[node(0),node(2)], [node(1)]])) :-
+	test(atms_interpretations_multiple_nogoods_01, deterministic(Interpretations == [[node(0),node(2)], [node(1)]])) :-
 		new(_Representation_, State0),
 		create_assumption(a, State0, A, State1),
 		create_assumption(b, State1, B, State2),
@@ -330,14 +330,14 @@
 		justify(BottomBC, [B, C], clash_bc, State6, State),
 		interpretations(State, Interpretations).
 
-	test(why_01, deterministic(Why == [justification(node(1),[node(0)],rule)])) :-
+	test(atms_why_01, deterministic(Why == [justification(node(1),[node(0)],rule)])) :-
 		new(_Representation_, State0),
 		create_assumption(a, State0, A, State1),
 		create_node(h, State1, H, State2),
 		justify(H, [A], rule, State2, State),
 		why(H, State, Why).
 
-	test(retract_justification_subsumed_support_01, deterministic([LabelH, LabelK] == [
+	test(atms_retract_justification_subsumed_support_01, deterministic([LabelH, LabelK] == [
 		[[node(0),node(1)]], [[node(0),node(1)]]
 	])) :-
 		new(_Representation_, State0),
@@ -352,13 +352,13 @@
 		label(H, State, LabelH),
 		label(K, State, LabelK).
 
-	test(retract_justification_missing_01, deterministic(State == State1)) :-
+	test(atms_retract_justification_missing_01, deterministic(State == State1)) :-
 		new(_Representation_, State0),
 		create_node(h, State0, H, State1),
 		retract_justification(H, [], missing, State1, State2),
 		retract_justification(node(99), [node(98)], missing, State2, State).
 
-	test(retract_justification_canonicalization_01, deterministic([Label, Rules, SameState] == [[], [], true])) :-
+	test(atms_retract_justification_canonicalization_01, deterministic([Label, Rules, SameState] == [[], [], true])) :-
 		new(_Representation_, State0),
 		create_assumption(a, State0, A, State1),
 		create_assumption(b, State1, B, State2),
@@ -373,7 +373,7 @@
 		;	SameState = false
 		).
 
-	test(retract_node_incident_rules_01, deterministic([Nodes, Rules, Why, Label, OldLabel, NextNode] == [
+	test(atms_retract_node_incident_rules_01, deterministic([Nodes, Rules, Why, Label, OldLabel, NextNode] == [
 		[node(0)-a, node(2)-k], [], [], [], [[node(0)]], node(3)
 	])) :-
 		new(_Representation_, State0),
@@ -393,7 +393,7 @@
 		\+ in_label(H, [A], State6),
 		create_node(next, State6, NextNode, _).
 
-	test(retract_node_assumption_01, deterministic([Assumptions, Label, Interpretations] == [
+	test(atms_retract_node_assumption_01, deterministic([Assumptions, Label, Interpretations] == [
 		[node(1)], [[node(1)]], [[node(1)]]
 	])) :-
 		new(_Representation_, State0),
@@ -408,7 +408,7 @@
 		label(H, State, Label),
 		interpretations(State, Interpretations).
 
-	test(retract_node_contradiction_01, deterministic([Label, Nogoods, Interpretations] == [
+	test(atms_retract_node_contradiction_01, deterministic([Label, Nogoods, Interpretations] == [
 		[[node(0)]], [], [[node(0)]]
 	])) :-
 		new(_Representation_, State0),
@@ -423,14 +423,14 @@
 		findall(Environment, nogood(Environment, State), Nogoods),
 		interpretations(State, Interpretations).
 
-	test(retract_node_missing_01, deterministic([State, State3] == [State0, State2])) :-
+	test(atms_retract_node_missing_01, deterministic([State, State3] == [State0, State2])) :-
 		new(_Representation_, State0),
 		retract_node(node(99), State0, State),
 		create_node(isolated, State0, Node, State1),
 		retract_node(Node, State1, State2),
 		retract_node(Node, State2, State3).
 
-	test(retract_justification_chain_and_product_01, deterministic([LabelH, LabelK, LabelProduct, OldLabel, Representation] == [
+	test(atms_retract_justification_chain_and_product_01, deterministic([LabelH, LabelK, LabelProduct, OldLabel, Representation] == [
 		[], [], [], [[node(0),node(1)]], _Representation_
 	])) :-
 		new(_Representation_, State0),
@@ -449,7 +449,7 @@
 		label(Product, State8, OldLabel),
 		representation(State, Representation).
 
-	test(retract_justification_identity_and_order_01, deterministic([Label, Rules, Why] == [
+	test(atms_retract_justification_identity_and_order_01, deterministic([Label, Rules, Why] == [
 		[[node(0)], [node(1)]],
 		[justification(node(2),[node(0)],first), justification(node(2),[node(1)],third)],
 		[justification(node(2),[node(0)],first), justification(node(2),[node(1)],third)]
@@ -468,7 +468,7 @@
 		justifications(State, Rules),
 		why(H, State, Why).
 
-	test(retract_justification_variable_info_01, deterministic([Label, Rules] == [[], []])) :-
+	test(atms_retract_justification_variable_info_01, deterministic([Label, Rules] == [[], []])) :-
 		new(_Representation_, State0),
 		create_assumption(a, State0, A, State1),
 		create_node(h, State1, H, State2),
@@ -480,7 +480,7 @@
 		label(H, State, Label),
 		justifications(State, Rules).
 
-	test(retract_justification_duplicate_01, deterministic([Label, Rules] == [[], []])) :-
+	test(atms_retract_justification_duplicate_01, deterministic([Label, Rules] == [[], []])) :-
 		new(_Representation_, State0),
 		create_assumption(a, State0, A, State1),
 		create_node(h, State1, H, State2),
@@ -490,7 +490,7 @@
 		label(H, State, Label),
 		justifications(State, Rules).
 
-	test(retract_justification_unconditional_01, deterministic([Label, DependentLabel] == [
+	test(atms_retract_justification_unconditional_01, deterministic([Label, DependentLabel] == [
 		[[node(0)]], [[node(0)]]
 	])) :-
 		new(_Representation_, State0),
@@ -504,7 +504,7 @@
 		label(H, State, Label),
 		label(K, State, DependentLabel).
 
-	test(retract_justification_cycle_01, deterministic([LabelH, LabelK, RestoredH, RestoredK] == [
+	test(atms_retract_justification_cycle_01, deterministic([LabelH, LabelK, RestoredH, RestoredK] == [
 		[], [], [[node(0)]], [[node(0)]]
 	])) :-
 		new(_Representation_, State0),
@@ -522,7 +522,7 @@
 		label(H, State, RestoredH),
 		label(K, State, RestoredK).
 
-	test(retract_justification_cycle_alternative_01, deterministic([LabelH, LabelK] == [
+	test(atms_retract_justification_cycle_alternative_01, deterministic([LabelH, LabelK] == [
 		[[node(1)]], [[node(1)]]
 	])) :-
 		new(_Representation_, State0),
@@ -538,7 +538,7 @@
 		label(H, State, LabelH),
 		label(K, State, LabelK).
 
-	test(retract_justification_nogood_restoration_01, deterministic([Label, Nogoods, Interpretations] == [
+	test(atms_retract_justification_nogood_restoration_01, deterministic([Label, Nogoods, Interpretations] == [
 		[[node(0),node(1)]], [], [[node(0),node(1)]]
 	])) :-
 		new(_Representation_, State0),
@@ -554,7 +554,7 @@
 		findall(Environment, nogood(Environment, State), Nogoods),
 		interpretations(State, Interpretations).
 
-	test(retract_justification_indirect_nogood_01, deterministic([LabelH, LabelK, Nogoods] == [
+	test(atms_retract_justification_indirect_nogood_01, deterministic([LabelH, LabelK, Nogoods] == [
 		[], [[node(0)]], []
 	])) :-
 		new(_Representation_, State0),
@@ -570,7 +570,7 @@
 		label(K, State, LabelK),
 		findall(Environment, nogood(Environment, State), Nogoods).
 
-	test(retract_justification_shared_nogood_01, deterministic([Label, Nogoods, RestoredLabel] == [
+	test(atms_retract_justification_shared_nogood_01, deterministic([Label, Nogoods, RestoredLabel] == [
 		[], [[node(0)]], [[node(0)]]
 	])) :-
 		new(_Representation_, State0),
@@ -586,7 +586,7 @@
 		retract_justification(Bottom, [A], second, State7, State),
 		label(H, State, RestoredLabel).
 
-	test(retract_justification_subsumed_nogood_01, deterministic([Label, Nogoods, Interpretations] == [
+	test(atms_retract_justification_subsumed_nogood_01, deterministic([Label, Nogoods, Interpretations] == [
 		[[node(0)]], [[node(0),node(1)]], [[node(0)], [node(1)]]
 	])) :-
 		new(_Representation_, State0),
@@ -602,7 +602,7 @@
 		findall(Environment, nogood(Environment, State), Nogoods),
 		interpretations(State, Interpretations).
 
-	test(retract_justification_unconditional_contradiction_01, deterministic([Label, Nogoods, Interpretations] == [
+	test(atms_retract_justification_unconditional_contradiction_01, deterministic([Label, Nogoods, Interpretations] == [
 		[[node(0)]], [], [[node(0)]]
 	])) :-
 		new(_Representation_, State0),
@@ -616,7 +616,7 @@
 		findall(Environment, nogood(Environment, State), Nogoods),
 		interpretations(State, Interpretations).
 
-	test(retract_node_shared_nogood_01, deterministic([Nogoods, Interpretations, RestoredLabel] == [
+	test(atms_retract_node_shared_nogood_01, deterministic([Nogoods, Interpretations, RestoredLabel] == [
 		[[node(0)]], [[]], [[node(0)]]
 	])) :-
 		new(_Representation_, State0),
@@ -631,7 +631,7 @@
 		retract_node(Second, State6, State),
 		label(A, State, RestoredLabel).
 
-	test(retract_node_indirect_nogood_01, deterministic([Label, Rules, Nogoods] == [
+	test(atms_retract_node_indirect_nogood_01, deterministic([Label, Rules, Nogoods] == [
 		[[node(0)]], [justification(node(2),[node(0)],independent)], []
 	])) :-
 		new(_Representation_, State0),
@@ -647,7 +647,7 @@
 		justifications(State, Rules),
 		findall(Environment, nogood(Environment, State), Nogoods).
 
-	test(retract_node_assumption_nogood_01, deterministic([Assumptions, Label, Nogoods, Interpretations] == [
+	test(atms_retract_node_assumption_nogood_01, deterministic([Assumptions, Label, Nogoods, Interpretations] == [
 		[node(1)], [[node(1)]], [], [[node(1)]]
 	])) :-
 		new(_Representation_, State0),
@@ -663,7 +663,7 @@
 		findall(Environment, nogood(Environment, State), Nogoods),
 		interpretations(State, Interpretations).
 
-	test(retract_node_cycle_01, deterministic([Label, Rules] == [
+	test(atms_retract_node_cycle_01, deterministic([Label, Rules] == [
 		[], [justification(node(1),[node(2)],backward), justification(node(2),[node(1)],forward)]
 	])) :-
 		new(_Representation_, State0),
@@ -677,14 +677,14 @@
 		label(K, State, Label),
 		justifications(State, Rules).
 
-	test(retract_node_self_justification_01, deterministic(Rules == [])) :-
+	test(atms_retract_node_self_justification_01, deterministic(Rules == [])) :-
 		new(_Representation_, State0),
 		create_assumption(a, State0, A, State1),
 		justify(A, [A], self, State1, State2),
 		retract_node(A, State2, State),
 		justifications(State, Rules).
 
-	test(retract_node_update_and_clear_01, deterministic([Label, NewNode, Nodes, Representation] == [
+	test(atms_retract_node_update_and_clear_01, deterministic([Label, NewNode, Nodes, Representation] == [
 		[[node(3)]], node(0), [], _Representation_
 	])) :-
 		new(_Representation_, State0),
@@ -702,7 +702,7 @@
 		representation(Cleared, Representation),
 		create_node(next, Cleared, NewNode, _).
 
-	test(retract_node_identifier_gaps_01, deterministic([Label, Assumptions, NextNode] == [
+	test(atms_retract_node_identifier_gaps_01, deterministic([Label, Assumptions, NextNode] == [
 		[[node(31),node(32)]], [node(15),node(31),node(32)], node(34)
 	])) :-
 		new(_Representation_, State0),
@@ -721,7 +721,7 @@
 		assumptions(State, Assumptions),
 		create_node(next, State, NextNode, _).
 
-	test(retract_justification_reconstruction_01, deterministic(Snapshot == ExpectedSnapshot)) :-
+	test(atms_retract_justification_reconstruction_01, deterministic(Snapshot == ExpectedSnapshot)) :-
 		new(_Representation_, State0),
 		create_assumption(a, State0, A, State1),
 		create_assumption(b, State1, B, State2),
@@ -745,7 +745,7 @@
 		state_snapshot(State, [], Snapshot),
 		state_snapshot(Expected, [], ExpectedSnapshot).
 
-	test(rebuild_aliased_justifications_01, deterministic([Rules, Why, Label] == [
+	test(atms_rebuild_aliased_justifications_01, deterministic([Rules, Why, Label] == [
 		[justification(node(1),[node(0)],info(Detail)), justification(node(1),[node(0)],info(Detail))],
 		[justification(node(1),[node(0)],info(Detail)), justification(node(1),[node(0)],info(Detail))],
 		[[node(0)]]
@@ -764,13 +764,13 @@
 		why(H, State, Why),
 		label(H, State, Label).
 
-	test(retract_justifications_no_matches_01, deterministic(State == State1)) :-
+	test(atms_retract_justifications_no_matches_01, deterministic(State == State1)) :-
 		new(_Representation_, State0),
 		create_node(h, State0, H, State1),
 		retract_justifications([], State1, State2),
 		retract_justifications([justification(H, [], missing), justification(node(99), [node(98)], missing)], State2, State).
 
-	test(retract_justifications_normalization_01, deterministic([Rules, Label, SameState] == [
+	test(atms_retract_justifications_normalization_01, deterministic([Rules, Label, SameState] == [
 		[justification(node(2),[node(0)],retained)], [[node(0)]], true
 	])) :-
 		new(_Representation_, State0),
@@ -790,7 +790,7 @@
 		;	SameState = false
 		).
 
-	test(retract_justifications_aliased_occurrences_01, deterministic([Before, After, Label, Repeated] == [
+	test(atms_retract_justifications_aliased_occurrences_01, deterministic([Before, After, Label, Repeated] == [
 		[justification(node(1),[node(0)],info(Detail)), justification(node(1),[node(0)],info(Detail))], [], [], true
 	])) :-
 		new(_Representation_, State0),
@@ -812,7 +812,7 @@
 		;	Repeated = false
 		).
 
-	test(retract_justifications_identity_and_order_01, deterministic([Rules, Why, Label] == [
+	test(atms_retract_justifications_identity_and_order_01, deterministic([Rules, Why, Label] == [
 		[justification(node(2),[node(0)],first), justification(node(2),[node(1)],last)],
 		[justification(node(2),[node(0)],first), justification(node(2),[node(1)],last)],
 		[[node(0)], [node(1)]]
@@ -829,13 +829,13 @@
 		why(H, State, Why),
 		label(H, State, Label).
 
-	test(retract_nodes_no_matches_01, deterministic(State == State1)) :-
+	test(atms_retract_nodes_no_matches_01, deterministic(State == State1)) :-
 		new(_Representation_, State0),
 		create_node(h, State0, _, State1),
 		retract_nodes([], State1, State2),
 		retract_nodes([node(99), node(99)], State2, State).
 
-	test(retract_nodes_mixed_roles_01, deterministic([Nodes, Assumptions, Rules, Label, Nogoods, Interpretations, NextNode] == [
+	test(atms_retract_nodes_mixed_roles_01, deterministic([Nodes, Assumptions, Rules, Label, Nogoods, Interpretations, NextNode] == [
 		[node(1)-b, node(3)-k], [node(1)], [justification(node(3),[node(1)],alternative)],
 		[[node(1)]], [], [[node(1)]], node(5)
 	])) :-
@@ -860,7 +860,7 @@
 		interpretations(State, Interpretations),
 		create_node(next, State, NextNode, _).
 
-	test(retract_nodes_all_01, deterministic([Nodes, Assumptions, Rules, Nogoods, Interpretations, NextNode] == [
+	test(atms_retract_nodes_all_01, deterministic([Nodes, Assumptions, Rules, Nogoods, Interpretations, NextNode] == [
 		[], [], [], [], [[]], node(3)
 	])) :-
 		new(_Representation_, State0),
@@ -877,7 +877,7 @@
 		interpretations(State, Interpretations),
 		create_node(next, State, NextNode, _).
 
-	test(rebuild_aliased_justifications_node_01, deterministic(Rules == [
+	test(atms_rebuild_aliased_justifications_node_01, deterministic(Rules == [
 		justification(node(1),[node(0)],info(Detail)), justification(node(1),[node(0)],info(Detail))
 	])) :-
 		new(_Representation_, State0),
@@ -891,7 +891,7 @@
 		retract_node(Unrelated, State6, State),
 		justifications(State, Rules).
 
-	test(retract_nodes_isolated_fast_path_01, deterministic([Rules, Label, Nogoods, Interpretations, OldLabel, NextNode] == [
+	test(atms_retract_nodes_isolated_fast_path_01, deterministic([Rules, Label, Nogoods, Interpretations, OldLabel, NextNode] == [
 		[justification(node(2),[node(0)],support), justification(node(3),[node(0),node(1)],clash)],
 		[[node(0)]], [[node(0),node(1)]], [[node(0)], [node(1)]], [[node(0)]], node(6)
 	])) :-
@@ -915,7 +915,7 @@
 		interpretations(State, Interpretations),
 		create_node(next, State, NextNode, _).
 
-	test(retract_nodes_incoming_axiom_01, deterministic([Rules, Label] == [[], []])) :-
+	test(atms_retract_nodes_incoming_axiom_01, deterministic([Rules, Label] == [[], []])) :-
 		new(_Representation_, State0),
 		create_node(fact, State0, Fact, State1),
 		create_node(dependent, State1, Dependent, State2),
@@ -925,7 +925,7 @@
 		justifications(State, Rules),
 		label(Dependent, State, Label).
 
-	test(retract_nodes_unconditional_contradiction_01, deterministic([Label, Nogoods, Interpretations] == [
+	test(atms_retract_nodes_unconditional_contradiction_01, deterministic([Label, Nogoods, Interpretations] == [
 		[[node(0)]], [], [[node(0)]]
 	])) :-
 		new(_Representation_, State0),
@@ -937,14 +937,14 @@
 		findall(Environment, nogood(Environment, State), Nogoods),
 		interpretations(State, Interpretations).
 
-	test(retract_nodes_isolated_assumption_01, deterministic([Assumptions, Interpretations] == [[], [[]]])) :-
+	test(atms_retract_nodes_isolated_assumption_01, deterministic([Assumptions, Interpretations] == [[], [[]]])) :-
 		new(_Representation_, State0),
 		create_assumption(a, State0, A, State1),
 		retract_nodes([A], State1, State),
 		assumptions(State, Assumptions),
 		interpretations(State, Interpretations).
 
-	test(retract_justification_aliased_single_occurrence_01, deterministic(Rules == [
+	test(atms_retract_justification_aliased_single_occurrence_01, deterministic(Rules == [
 		justification(node(1),[node(0)],info(Detail))
 	])) :-
 		new(_Representation_, State0),
@@ -956,7 +956,7 @@
 		retract_justification(H, [A], info(Detail), State4, State),
 		justifications(State, Rules).
 
-	test(retract_justifications_reconstruction_01, deterministic([BatchSnapshot, SequentialSnapshot] == [
+	test(atms_retract_justifications_reconstruction_01, deterministic([BatchSnapshot, SequentialSnapshot] == [
 		ExpectedSnapshot, ExpectedSnapshot
 	])) :-
 		new(_Representation_, State0),
@@ -992,7 +992,7 @@
 		state_snapshot(Sequential, [], SequentialSnapshot),
 		state_snapshot(Expected, [], ExpectedSnapshot).
 
-	test(retract_nodes_reconstruction_01, deterministic([BatchSnapshot, SequentialSnapshot, NextNode] == [
+	test(atms_retract_nodes_reconstruction_01, deterministic([BatchSnapshot, SequentialSnapshot, NextNode] == [
 		ExpectedSnapshot, ExpectedSnapshot, node(6)
 	])) :-
 		new(_Representation_, State0),
@@ -1026,7 +1026,7 @@
 		\+ node(Isolated, Batch),
 		create_node(next, Batch, NextNode, _).
 
-	test(retract_nodes_batch_identifier_gaps_01, deterministic([Label, Assumptions, NextNode] == [
+	test(atms_retract_nodes_batch_identifier_gaps_01, deterministic([Label, Assumptions, NextNode] == [
 		[[node(31),node(32)]], [node(15),node(31),node(32)], node(34)
 	])) :-
 		new(_Representation_, State0),
@@ -1044,7 +1044,7 @@
 		assumptions(State, Assumptions),
 		create_node(next, State, NextNode, _).
 
-	test(retract_justifications_restored_support_01, deterministic([Label, Nogoods, Interpretations] == [
+	test(atms_retract_justifications_restored_support_01, deterministic([Label, Nogoods, Interpretations] == [
 		[[node(0),node(1)]], [], [[node(0),node(1)]]
 	])) :-
 		new(_Representation_, State0),
@@ -1060,7 +1060,7 @@
 		findall(Environment, nogood(Environment, State), Nogoods),
 		interpretations(State, Interpretations).
 
-	test(counting_environment_reset_01, deterministic([Calls, Singletons, Nodes, ResetCalls, ResetSingletons] == [2, 1, [node(0)], 0, 0])) :-
+	test(atms_counting_environment_reset_01, deterministic([Calls, Singletons, Nodes, ResetCalls, ResetSingletons] == [2, 1, [node(0)], 0, 0])) :-
 		Counter = counting_environment(_Representation_),
 		Counter::reset,
 		Counter::singleton(node(0), Environment),
@@ -1069,42 +1069,42 @@
 		Counter::reset,
 		Counter::counts(ResetCalls, ResetSingletons).
 
-	test(retraction_empty_batches_01, deterministic((State == State0, Calls == 0))) :-
+	test(atms_retraction_empty_batches_01, deterministic((State == State0, Calls == 0))) :-
 		counted_fixture(State0, _, _, _),
 		counting_environment(_Representation_)::reset,
 		retract_justifications([], State0, State1),
 		retract_nodes([], State1, State),
 		counting_environment(_Representation_)::counts(Calls, _).
 
-	test(retraction_empty_state_01, deterministic(State == State0)) :-
+	test(atms_retraction_empty_state_01, deterministic(State == State0)) :-
 		new(_Representation_, State0),
 		retract_justifications([], State0, State1),
 		retract_nodes([node(99), node(99)], State1, State2),
 		retract_justifications([justification(node(99), [], missing)], State2, State).
 
-	test(retraction_missing_batches_01, deterministic((State == State0, Calls == 0, var(Info)))) :-
+	test(atms_retraction_missing_batches_01, deterministic((State == State0, Calls == 0, var(Info)))) :-
 		counted_fixture(State0, Assumption, Head, Info),
 		counting_environment(_Representation_)::reset,
 		retract_justifications([justification(Head, [Assumption], info(_)), justification(node(99), [], missing)], State0, State1),
 		retract_nodes([node(99), node(100), node(99)], State1, State),
 		counting_environment(_Representation_)::counts(Calls, _).
 
-	test(retraction_filter_suffix_01, deterministic((Remaining == [Oldest], Removed == [Newest], var(Info)))) :-
+	test(atms_retraction_filter_suffix_01, deterministic((Remaining == [Oldest], Removed == [Newest], var(Info)))) :-
 		Oldest = justification(node(1), [node(0)], info(Info)),
 		Newest = justification(node(2), [node(0)], newest),
 		atms<<remove_matching_justifications([Newest, Oldest], linear([Newest]), Remaining, Removed).
 
-	test(retraction_filter_middle_01, deterministic((Remaining == [Newest, Oldest], Removed == [Middle]))) :-
+	test(atms_retraction_filter_middle_01, deterministic((Remaining == [Newest, Oldest], Removed == [Middle]))) :-
 		Oldest = justification(node(1), [], oldest),
 		Middle = justification(node(2), [], middle),
 		Newest = justification(node(3), [], newest),
 		atms<<remove_matching_justifications([Newest, Middle, Oldest], linear([Middle]), Remaining, Removed).
 
-	test(retraction_filter_unchanged_01, deterministic((Remaining == Original, Removed == []))) :-
+	test(atms_retraction_filter_unchanged_01, deterministic((Remaining == Original, Removed == []))) :-
 		Original = [justification(node(1), [], first), justification(node(2), [], second)],
 		atms<<remove_matching_justifications(Original, linear([]), Remaining, Removed).
 
-	test(retraction_isolated_no_rebuild_01, deterministic((Calls == 0, Label == [[Assumption]]))) :-
+	test(atms_retraction_isolated_no_rebuild_01, deterministic((Calls == 0, Label == [[Assumption]]))) :-
 		counted_fixture(State0, Assumption, Head, _),
 		create_node(isolated, State0, Isolated, State1),
 		counting_environment(_Representation_)::reset,
@@ -1112,7 +1112,7 @@
 		counting_environment(_Representation_)::counts(Calls, _),
 		label(Head, State, Label).
 
-	test(retraction_index_ground_01, deterministic(Rules == Expected)) :-
+	test(atms_retraction_index_ground_01, deterministic(Rules == Expected)) :-
 		numbered_fixture(240, State0, Assumption, Head),
 		numbered_targets(300, Assumption, Head, Targets),
 		justifications(State0, Original),
@@ -1120,7 +1120,7 @@
 		retract_justifications(Targets, State0, State),
 		justifications(State, Rules).
 
-	test(retraction_index_full_info_01, deterministic(Rules == [justification(Head, [Assumption], retained)])) :-
+	test(atms_retraction_index_full_info_01, deterministic(Rules == [justification(Head, [Assumption], retained)])) :-
 		new(_Representation_, State0),
 		create_assumption(a, State0, Assumption, State1),
 		create_node(h, State1, Head, State2),
@@ -1129,7 +1129,7 @@
 		retract_justifications([justification(Head, [Assumption, Assumption], removed), justification(Head, [Assumption], missing), justification(Head, [Assumption], removed)], State4, State),
 		justifications(State, Rules).
 
-	test(retraction_index_mixed_identity_01, deterministic((Rules == [justification(Head, [Assumption], info(Other))], var(Info), var(Other), Info \== Other))) :-
+	test(atms_retraction_index_mixed_identity_01, deterministic((Rules == [justification(Head, [Assumption], info(Other))], var(Info), var(Other), Info \== Other))) :-
 		new(_Representation_, State0),
 		create_assumption(a, State0, Assumption, State1),
 		create_node(h, State1, Head, State2),
@@ -1139,7 +1139,7 @@
 		retract_justifications([justification(Head, [Assumption], ground), justification(Head, [Assumption], info(Info)), justification(Head, [Assumption], info(_))], State5, State),
 		justifications(State, Rules).
 
-	test(retraction_index_aliased_01, deterministic((Rules == [], var(Info)))) :-
+	test(atms_retraction_index_aliased_01, deterministic((Rules == [], var(Info)))) :-
 		new(_Representation_, State0),
 		create_node(h, State0, Head, State1),
 		justify(Head, [], info(Info), State1, State2),
@@ -1148,7 +1148,7 @@
 		retract_justifications([justification(Head, [], info(Info)), justification(Head, [], info(_))], State3, State),
 		justifications(State, Rules).
 
-	test(retraction_index_nodes_01, deterministic(Snapshot == Expected)) :-
+	test(atms_retraction_index_nodes_01, deterministic(Snapshot == Expected)) :-
 		numbered_fixture(20, State0, Assumption, Head),
 		create_node(isolated, State0, Isolated, State1),
 		retract_nodes([Head, Isolated, Head, node(999)], State1, State),
@@ -1158,7 +1158,7 @@
 		state_snapshot(Sequential, [], Expected),
 		assumptions(State, [Assumption]).
 
-	test(retraction_index_partition_01, deterministic((GroundFound == true, MissingFound == false, VariableFound == true, OtherFound == false, var(Info)))) :-
+	test(atms_retraction_index_partition_01, deterministic((GroundFound == true, MissingFound == false, VariableFound == true, OtherFound == false, var(Info)))) :-
 		Target = justification(node(1), [], info(Info)),
 		atms<<target_index([Target, justification(node(1), [], ground), Target], Index),
 		( atms<<matches_target(justification(node(1), [], ground), Index) -> GroundFound = true; GroundFound = false ),
@@ -1166,14 +1166,14 @@
 		( atms<<matches_target(Target, Index) -> VariableFound = true; VariableFound = false ),
 		( atms<<matches_target(justification(node(1), [], info(_)), Index) -> OtherFound = true; OtherFound = false ).
 
-	test(retract_batch_noop_01, deterministic((State == State0, Calls == 0, var(Info)))) :-
+	test(atms_retract_batch_noop_01, deterministic((State == State0, Calls == 0, var(Info)))) :-
 		counted_fixture(State0, Assumption, Head, Info),
 		counting_environment(_Representation_)::reset,
 		retract_batch([], [], State0, State1),
 		retract_batch([node(999), node(999)], [justification(Head, [Assumption], missing)], State1, State),
 		counting_environment(_Representation_)::counts(Calls, _).
 
-	test(retract_batch_one_rebuild_01, deterministic((Singletons == 1, Label == [], OldLabel == [[Assumption], [Backup]], Next == node(3)))) :-
+	test(atms_retract_batch_one_rebuild_01, deterministic((Singletons == 1, Label == [], OldLabel == [[Assumption], [Backup]], Next == node(3)))) :-
 		counted_fixture(State0, Assumption, Head, Info),
 		create_assumption(b, State0, Backup, State1),
 		justify(Head, [Backup], backup, State1, State2),
@@ -1184,7 +1184,7 @@
 		label(Head, State2, OldLabel),
 		create_node(next, State, Next, _).
 
-	test(retract_batch_isolated_01, deterministic((Calls == 0, Label == [[Assumption]], Roles == []))) :-
+	test(atms_retract_batch_isolated_01, deterministic((Calls == 0, Label == [[Assumption]], Roles == []))) :-
 		counted_fixture(State0, Assumption, Head, _),
 		create_node(isolated, State0, Isolated, State1),
 		create_contradiction(false, State1, Bottom, State2),
@@ -1194,7 +1194,7 @@
 		label(Head, State, Label),
 		findall(Node, contradiction(Node, State), Roles).
 
-	test(retract_batch_overlap_identity_01, deterministic((Rules == [], Nodes == [Assumption-a], var(Info)))) :-
+	test(atms_retract_batch_overlap_identity_01, deterministic((Rules == [], Nodes == [Assumption-a], var(Info)))) :-
 		counted_fixture(State0, Assumption, Head, Info),
 		justify(Head, [Assumption], info(Other), State0, State1),
 		Info = Other,
@@ -1202,7 +1202,7 @@
 		justifications(State, Rules),
 		nodes(State, Nodes).
 
-	test(retract_batch_degenerate_01, deterministic((NodeSnapshot == ExpectedNodes, RuleSnapshot == ExpectedRules))) :-
+	test(atms_retract_batch_degenerate_01, deterministic((NodeSnapshot == ExpectedNodes, RuleSnapshot == ExpectedRules))) :-
 		numbered_fixture(8, State0, Assumption, Head),
 		Target = justification(Head, [Assumption], index(2)),
 		retract_batch([Assumption], [], State0, NodesState),
@@ -1214,7 +1214,7 @@
 		state_snapshot(RulesState, [], RuleSnapshot),
 		state_snapshot(RuleReference, [], ExpectedRules).
 
-	test(retract_batch_reconstruction_01, deterministic((Snapshot == Expected, Snapshot == SequentialSnapshot, Label == [[Assumption]]))) :-
+	test(atms_retract_batch_reconstruction_01, deterministic((Snapshot == Expected, Snapshot == SequentialSnapshot, Label == [[Assumption]]))) :-
 		new(_Representation_, State0),
 		create_assumption(a, State0, Assumption, State1),
 		create_assumption(b, State1, Backup, State2),
@@ -1247,7 +1247,7 @@
 		retract_justification(Head, [NewAssumption], new_support, State12, State13),
 		label(Head, State13, Label).
 
-	test(redundant_single_rule_01, deterministic((Calls == 0, Label == [[Assumption]], Rules == [justification(Head, [Assumption], info(Info))], var(Info)))) :-
+	test(atms_redundant_single_rule_01, deterministic((Calls == 0, Label == [[Assumption]], Rules == [justification(Head, [Assumption], info(Info))], var(Info)))) :-
 		counted_fixture(State0, Assumption, Head, Info),
 		justify(Head, [Assumption], redundant, State0, State1),
 		counting_environment(_Representation_)::reset,
@@ -1256,7 +1256,7 @@
 		label(Head, State, Label),
 		justifications(State, Rules).
 
-	test(redundant_batch_rules_01, deterministic((Calls == 0, Label == [[Assumption]], Rules == [justification(Head, [Assumption], retained)]))) :-
+	test(atms_redundant_batch_rules_01, deterministic((Calls == 0, Label == [[Assumption]], Rules == [justification(Head, [Assumption], retained)]))) :-
 		counted_fixture(State0, Assumption, Head, Info),
 		justify(Head, [Assumption], retained, State0, State1),
 		justify(Head, [Assumption], removed, State1, State2),
@@ -1266,7 +1266,7 @@
 		label(Head, State, Label),
 		justifications(State, Rules).
 
-	test(redundant_last_signature_01, deterministic((Singletons == 1, Label == [], Rules == []))) :-
+	test(atms_redundant_last_signature_01, deterministic((Singletons == 1, Label == [], Rules == []))) :-
 		counted_fixture(State0, Assumption, Head, Info),
 		justify(Head, [Assumption], second, State0, State1),
 		counting_environment(_Representation_)::reset,
@@ -1275,7 +1275,7 @@
 		label(Head, State, Label),
 		justifications(State, Rules).
 
-	test(redundant_equal_labels_fallback_01, deterministic((Singletons == 1, Label == [[Assumption]]))) :-
+	test(atms_redundant_equal_labels_fallback_01, deterministic((Singletons == 1, Label == [[Assumption]]))) :-
 		counted_fixture(State0, Assumption, Head, Info),
 		create_node(bridge, State0, Bridge, State1),
 		justify(Bridge, [Assumption], bridge, State1, State2),
@@ -1285,7 +1285,7 @@
 		counting_environment(_Representation_)::counts(_, Singletons),
 		label(Head, State, Label).
 
-	test(redundant_contradiction_01, deterministic((Calls == 0, Nogoods == [[Assumption]], Label == [], Interpretations == [[]]))) :-
+	test(atms_redundant_contradiction_01, deterministic((Calls == 0, Nogoods == [[Assumption]], Label == [], Interpretations == [[]]))) :-
 		counted_fixture(State0, Assumption, Head, _),
 		create_contradiction(false, State0, Bottom, State1),
 		justify(Bottom, [Assumption], first, State1, State2),
@@ -1297,7 +1297,7 @@
 		label(Head, State, Label),
 		interpretations(State, Interpretations).
 
-	test(redundant_unconditional_01, deterministic((Calls == 0, Label == [[]]))) :-
+	test(atms_redundant_unconditional_01, deterministic((Calls == 0, Label == [[]]))) :-
 		counted_fixture(State0, _, Head, _),
 		justify(Head, [], first, State0, State1),
 		justify(Head, [], second, State1, State2),
@@ -1306,7 +1306,7 @@
 		counting_environment(_Representation_)::counts(Calls, _),
 		label(Head, State, Label).
 
-	test(redundant_cycles_and_assumption_01, deterministic((Calls == 0, Label == [[Assumption]], AssumptionLabel == [[Assumption]]))) :-
+	test(atms_redundant_cycles_and_assumption_01, deterministic((Calls == 0, Label == [[Assumption]], AssumptionLabel == [[Assumption]]))) :-
 		counted_fixture(State0, Assumption, Head, _),
 		justify(Head, [Head], self_first, State0, State1),
 		justify(Head, [Head], self_second, State1, State2),
@@ -1318,7 +1318,7 @@
 		label(Head, State, Label),
 		label(Assumption, State, AssumptionLabel).
 
-	test(redundant_alias_occurrences_01, deterministic((FirstCalls == 0, BatchCalls == 0, Rules == [justification(Head, [Assumption], retained)], var(Info)))) :-
+	test(atms_redundant_alias_occurrences_01, deterministic((FirstCalls == 0, BatchCalls == 0, Rules == [justification(Head, [Assumption], retained)], var(Info)))) :-
 		counted_fixture(State0, Assumption, Head, Info),
 		justify(Head, [Assumption], info(Other), State0, State1),
 		justify(Head, [Assumption], retained, State1, State2),
@@ -1332,7 +1332,7 @@
 		counting_environment(_Representation_)::counts(BatchCalls, _),
 		justifications(State, Rules).
 
-	test(redundant_dependency_occurrences_01, deterministic((Entries == [node(0)-[Rule], node(1)-[Rule]], EmptyEntries == [], var(Info)))) :-
+	test(atms_redundant_dependency_occurrences_01, deterministic((Entries == [node(0)-[Rule], node(1)-[Rule]], EmptyEntries == [], var(Info)))) :-
 		Rule = justification(node(2), [node(0), node(1)], info(Info)),
 		OtherRule = justification(node(2), [node(0), node(1)], info(Other)),
 		avltree::new(Empty),
@@ -1344,7 +1344,7 @@
 		atms<<unindex_justifications([Rule], Index2, Index),
 		avltree::as_list(Index, EmptyEntries).
 
-	test(redundant_future_propagation_01, deterministic((RemovalCalls == 0, ActualCalls == ExpectedCalls, Snapshot == Expected))) :-
+	test(atms_redundant_future_propagation_01, deterministic((RemovalCalls == 0, ActualCalls == ExpectedCalls, Snapshot == Expected))) :-
 		Counter = counting_environment(_Representation_),
 		Counter::reset,
 		new(Counter, State0),
@@ -1366,7 +1366,7 @@
 		state_snapshot(State, [], Snapshot),
 		state_snapshot(Oracle, [], Expected).
 
-	test(redundant_mixed_signature_fallback_01, deterministic((Singletons == 1, FirstLabel == [[Assumption]], SecondLabel == []))) :-
+	test(atms_redundant_mixed_signature_fallback_01, deterministic((Singletons == 1, FirstLabel == [[Assumption]], SecondLabel == []))) :-
 		counted_fixture(State0, Assumption, Head, Info),
 		justify(Head, [Assumption], retained, State0, State1),
 		create_node(other, State1, Other, State2),
@@ -1387,10 +1387,10 @@
 		setup(reset_sequence_seed(Saved)), cleanup(fast_random::set_seed(Saved))
 	]).
 
-	test(edit_sequences_all_operations_01, deterministic) :-
+	test(atms_edit_sequences_all_operations_01, deterministic) :-
 		edit_sequence([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]).
 
-	test(edit_sequences_restored_nogoods_01, deterministic) :-
+	test(atms_edit_sequences_restored_nogoods_01, deterministic) :-
 		verify_edit_history([
 			add(justification(node(2), [node(0), node(1)], larger)),
 			remove_rule(justification(node(2), [node(0)], first)),
@@ -1408,7 +1408,7 @@
 			add(justification(node(2), [node(4)], later))
 		]).
 
-	test(edit_sequences_cycles_and_inconsistency_01, deterministic) :-
+	test(atms_edit_sequences_cycles_and_inconsistency_01, deterministic) :-
 		verify_edit_history([
 			create(ordinary),
 			add(justification(node(4), [node(2)], forward)),
@@ -1427,7 +1427,7 @@
 			add(justification(node(0), [], restarted))
 		]).
 
-	test(edit_sequences_creation_limits_01, deterministic) :-
+	test(atms_edit_sequences_creation_limits_01, deterministic) :-
 		verify_edit_history([
 			create(assumption), create(assumption), create(assumption),
 			create(ordinary), create(contradiction), create(ordinary),

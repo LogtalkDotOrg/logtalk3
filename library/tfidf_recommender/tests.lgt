@@ -43,7 +43,7 @@
 		^^clean_file('tfidf_saved.pl'),
 		^^clean_file('tfidf_updated.pl').
 
-	test(batch_scores, deterministic) :-
+	test(tfidf_recommender_batch_scores, deterministic) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score_all(Model, u, [y,diagonal,x,y], [y-Y,diagonal-D,x-X,y-Repeat]),
@@ -55,22 +55,22 @@
 		tfidf_recommender::score(Model, u, y, Individual),
 		assertion(Individual =~= Y).
 
-	test(batch_empty, deterministic(Scores == [])) :-
+	test(tfidf_recommender_batch_empty, deterministic(Scores == [])) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score_all(Model, u, [], Scores).
 
-	test(batch_unknown_item, error(domain_error(catalog_item, missing))) :-
+	test(tfidf_recommender_batch_unknown_item, error(domain_error(catalog_item, missing))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score_all(Model, unknown, [x,missing], _).
 
-	test(batch_empty_checks_user, error(instantiation_error)) :-
+	test(tfidf_recommender_batch_empty_checks_user, error(instantiation_error)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score_all(Model, _, [], _).
 
-	test(content_feature_score, deterministic) :-
+	test(tfidf_recommender_content_feature_score, deterministic) :-
 		Dataset = tfidf_dataset([rating(u,x,5)], [x,y], [x-features([a,a,b]),y-features([b,c])]),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score(Model, u, x, Individual),
@@ -78,7 +78,7 @@
 		assertion(Individual =~= 1.0),
 		assertion(Content =~= Individual).
 
-	test(content_vector_score, deterministic) :-
+	test(tfidf_recommender_content_vector_score, deterministic) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score_content(Model, u, vector([x-0.5,y-0.5,absent-0]), Score),
@@ -87,92 +87,92 @@
 		Expected is sqrt(2 / 3),
 		assertion(Novel =~= Expected).
 
-	test(content_kind_mismatch, error(domain_error(content_representation, features([])))) :-
+	test(tfidf_recommender_content_kind_mismatch, error(domain_error(content_representation, features([])))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score_content(Model, unknown, features([]), _).
 
-	test(batch_validates_once, deterministic(Count == 1)) :-
+	test(tfidf_recommender_batch_validates_once, deterministic(Count == 1)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_validation_counter::learn(Dataset, Model),
 		tfidf_validation_counter::reset_validation_count,
 		tfidf_validation_counter::score_all(Model, u, [x,y,x], _),
 		tfidf_validation_counter::validation_count(Count).
 
-	test(content_validates_once, deterministic(Count == 1)) :-
+	test(tfidf_recommender_content_validates_once, deterministic(Count == 1)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_validation_counter::learn(Dataset, Model),
 		tfidf_validation_counter::reset_validation_count,
 		tfidf_validation_counter::score_content(Model, u, vector([x-1]), _),
 		tfidf_validation_counter::validation_count(Count).
 
-	test(batch_unknown_user, deterministic(Scores == [x-0.0,y-0.0])) :-
+	test(tfidf_recommender_batch_unknown_user, deterministic(Scores == [x-0.0,y-0.0])) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score_all(Model, unknown, [x,y], Scores).
 
-	test(batch_empty_profile, deterministic(Scores == [x-0.0,diagonal-0.0])) :-
+	test(tfidf_recommender_batch_empty_profile, deterministic(Scores == [x-0.0,diagonal-0.0])) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model, [positive_threshold(5)]),
 		tfidf_recommender::score_all(Model, u, [x,diagonal], Scores).
 
-	test(batch_empty_validates_once, deterministic(Count == 1)) :-
+	test(tfidf_recommender_batch_empty_validates_once, deterministic(Count == 1)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_validation_counter::learn(Dataset, Model),
 		tfidf_validation_counter::reset_validation_count,
 		tfidf_validation_counter::score_all(Model, u, [], []),
 		tfidf_validation_counter::validation_count(Count).
 
-	test(batch_implemented_locally, deterministic) :-
+	test(tfidf_recommender_batch_implemented_locally, deterministic) :-
 		tfidf_recommender::predicate_property(score_all(_,_,_,_), defined_in(tfidf_recommender)).
 
-	test(batch_variable_model, error(instantiation_error)) :-
+	test(tfidf_recommender_batch_variable_model, error(instantiation_error)) :-
 		tfidf_recommender::score_all(_, u, [], _).
 
-	test(batch_invalid_model, error(domain_error(recommender, bad))) :-
+	test(tfidf_recommender_batch_invalid_model, error(domain_error(recommender, bad))) :-
 		tfidf_recommender::score_all(bad, u, [], _).
 
-	test(batch_nonatomic_user, error(type_error(atomic, user(u)))) :-
+	test(tfidf_recommender_batch_nonatomic_user, error(type_error(atomic, user(u)))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score_all(Model, user(u), [], _).
 
-	test(batch_variable_list, error(instantiation_error)) :-
+	test(tfidf_recommender_batch_variable_list, error(instantiation_error)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score_all(Model, u, _, _).
 
-	test(batch_nonlist, error(type_error(list, bad))) :-
+	test(tfidf_recommender_batch_nonlist, error(type_error(list, bad))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score_all(Model, u, bad, _).
 
-	test(batch_open_list, error(instantiation_error)) :-
+	test(tfidf_recommender_batch_open_list, error(instantiation_error)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score_all(Model, u, [x|_], _).
 
-	test(batch_improper_list, error(type_error(list, [x|bad]))) :-
+	test(tfidf_recommender_batch_improper_list, error(type_error(list, [x|bad]))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score_all(Model, u, [x|bad], _).
 
-	test(batch_variable_item, error(instantiation_error)) :-
+	test(tfidf_recommender_batch_variable_item, error(instantiation_error)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score_all(Model, unknown, [x,_], _).
 
-	test(batch_nonatomic_item, error(type_error(atomic, item(x)))) :-
+	test(tfidf_recommender_batch_nonatomic_item, error(type_error(atomic, item(x)))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score_all(Model, u, [item(x)], _).
 
-	test(batch_missing_first, error(domain_error(catalog_item, missing))) :-
+	test(tfidf_recommender_batch_missing_first, error(domain_error(catalog_item, missing))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score_all(Model, u, [missing,x], _).
 
-	test(content_frozen_vocabulary, deterministic) :-
+	test(tfidf_recommender_content_frozen_vocabulary, deterministic) :-
 		Dataset = tfidf_dataset([rating(u,x,5)], [x,y], [x-features([a,a,b]),y-features([b,c])]),
 		tfidf_recommender::learn(Dataset, Model),
 		copy_term(Model, Original),
@@ -184,93 +184,93 @@
 		assertion(Single < 1.0),
 		assertion(lgtunit::variant(Model, Original)).
 
-	test(content_binary_weighting, deterministic(Score =~= 1.0)) :-
+	test(tfidf_recommender_content_binary_weighting, deterministic(Score =~= 1.0)) :-
 		Dataset = tfidf_dataset([rating(u,x,5)], [x], [x-features([genre(a),genre(a),b])]),
 		tfidf_recommender::learn(Dataset, Model, [normalization(none),vectorizer_options([weighting(binary)])]),
 		tfidf_recommender::score_content(Model, u, features([b,genre(a),unknown]), Score).
 
-	test(content_vector_none, deterministic(Score =~= 1.0)) :-
+	test(tfidf_recommender_content_vector_none, deterministic(Score =~= 1.0)) :-
 		Dataset = tfidf_dataset([rating(u,x,5)], [x], [x-vector([a-10,b-1])]),
 		tfidf_recommender::learn(Dataset, Model, [normalization(none)]),
 		tfidf_recommender::score_content(Model, u, vector([b-0.5,a-5]), Score).
 
-	test(content_unknown_user, deterministic(Score =~= 0.0)) :-
+	test(tfidf_recommender_content_unknown_user, deterministic(Score =~= 0.0)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score_content(Model, unknown, vector([x-1]), Score).
 
-	test(content_empty_profile, deterministic(Score =~= 0.0)) :-
+	test(tfidf_recommender_content_empty_profile, deterministic(Score =~= 0.0)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model, [positive_threshold(5)]),
 		tfidf_recommender::score_content(Model, u, vector([x-1]), Score).
 
-	test(content_empty_vector_space, deterministic(Score =~= 0.0)) :-
+	test(tfidf_recommender_content_empty_vector_space, deterministic(Score =~= 0.0)) :-
 		tfidf_recommender::learn(tfidf_dataset([rating(u,x,1)], [x], [x-vector([])]), Model),
 		tfidf_recommender::score_content(Model, u, vector([novel-1]), Score).
 
-	test(content_implemented_locally, deterministic) :-
+	test(tfidf_recommender_content_implemented_locally, deterministic) :-
 		tfidf_recommender::predicate_property(score_content(_,_,_,_), defined_in(tfidf_recommender)).
 
-	test(content_variable_model, error(instantiation_error)) :-
+	test(tfidf_recommender_content_variable_model, error(instantiation_error)) :-
 		tfidf_recommender::score_content(_, u, features([]), _).
 
-	test(content_invalid_model, error(domain_error(recommender, bad))) :-
+	test(tfidf_recommender_content_invalid_model, error(domain_error(recommender, bad))) :-
 		tfidf_recommender::score_content(bad, u, features([]), _).
 
-	test(content_variable_user, error(instantiation_error)) :-
+	test(tfidf_recommender_content_variable_user, error(instantiation_error)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score_content(Model, _, vector([]), _).
 
-	test(content_variable_descriptor, error(instantiation_error)) :-
+	test(tfidf_recommender_content_variable_descriptor, error(instantiation_error)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score_content(Model, u, _, _).
 
-	test(content_bad_descriptor, error(domain_error(item_content, bad))) :-
+	test(tfidf_recommender_content_bad_descriptor, error(domain_error(item_content, bad))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score_content(Model, u, bad, _).
 
-	test(content_feature_model_kind_mismatch, error(domain_error(content_representation, vector([])))) :-
+	test(tfidf_recommender_content_feature_model_kind_mismatch, error(domain_error(content_representation, vector([])))) :-
 		tfidf_recommender::learn(tfidf_dataset([rating(u,x,1)], [x], [x-features([a])]), Model),
 		tfidf_recommender::score_content(Model, u, vector([]), _).
 
-	test(content_nonground_feature, error(instantiation_error)) :-
+	test(tfidf_recommender_content_nonground_feature, error(instantiation_error)) :-
 		tfidf_recommender::learn(tfidf_dataset([rating(u,x,1)], [x], [x-features([a])]), Model),
 		tfidf_recommender::score_content(Model, u, features([genre(_)]), _).
 
-	test(content_nonlist, error(type_error(list, bad))) :-
+	test(tfidf_recommender_content_nonlist, error(type_error(list, bad))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score_content(Model, u, vector(bad), _).
 
-	test(content_duplicate_key, error(domain_error(duplicate_feature, x))) :-
+	test(tfidf_recommender_content_duplicate_key, error(domain_error(duplicate_feature, x))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score_content(Model, u, vector([x-1,x-0]), _).
 
-	test(content_negative_weight, error(domain_error(non_negative_finite_weight, -1))) :-
+	test(tfidf_recommender_content_negative_weight, error(domain_error(non_negative_finite_weight, -1))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score_content(Model, unknown, vector([x- -1]), _).
 
-	test(content_variable_weight, error(instantiation_error)) :-
+	test(tfidf_recommender_content_variable_weight, error(instantiation_error)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score_content(Model, u, vector([x-_]), _).
 
-	test(content_nonnumeric_weight, error(type_error(number, bad))) :-
+	test(tfidf_recommender_content_nonnumeric_weight, error(type_error(number, bad))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score_content(Model, u, vector([x-bad]), _).
 
-	test(content_nonpair, error(type_error(pair, bad))) :-
+	test(tfidf_recommender_content_nonpair, error(type_error(pair, bad))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score_content(Model, u, vector([bad]), _).
 
-	test(update_rating_replacement, deterministic) :-
+	test(tfidf_recommender_update_rating_replacement, deterministic) :-
 		vector_dataset(3, 3, tfidf_dataset(Ratings, Items, Contents)),
 		tfidf_recommender::learn(tfidf_dataset(Ratings, Items, Contents), Model),
 		tfidf_recommender::update_ratings(Model, [rating(u,x,5)], Updated),
@@ -280,7 +280,7 @@
 		assertion(Score =~= 1.0),
 		assertion(tfidf_recommender::valid_recommender(Updated)).
 
-	test(update_rating_insertion, deterministic) :-
+	test(tfidf_recommender_update_rating_insertion, deterministic) :-
 		vector_dataset(3, 3, tfidf_dataset(Ratings, Items, Contents)),
 		tfidf_recommender::learn(tfidf_dataset(Ratings, Items, Contents), Model),
 		tfidf_recommender::update_ratings(Model, [rating(v,diagonal,5)], Updated),
@@ -289,22 +289,22 @@
 		tfidf_recommender::score(Updated, v, diagonal, Score),
 		assertion(Score =~= 1.0).
 
-	test(update_empty, deterministic(Updated == Model)) :-
+	test(tfidf_recommender_update_empty, deterministic(Updated == Model)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::update_ratings(Model, [], Updated).
 
-	test(update_duplicate, error(domain_error(duplicate_rating, u-x))) :-
+	test(tfidf_recommender_update_duplicate, error(domain_error(duplicate_rating, u-x))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::update_ratings(Model, [rating(u,x,1),rating(u,x,5)], _).
 
-	test(update_weighted_mean_shift, error(domain_error(positive_rating_weight, 0))) :-
+	test(tfidf_recommender_update_weighted_mean_shift, error(domain_error(positive_rating_weight, 0))) :-
 		Dataset = tfidf_dataset([rating(u,x,1),rating(u,y,0)], [x,y], [x-vector([a-1]),y-vector([])]),
 		tfidf_recommender::learn(Dataset, Model, [profile_weighting(rating)]),
 		tfidf_recommender::update_ratings(Model, [rating(u,x,-1)], _).
 
-	test(remove_rating_matches_fresh, deterministic) :-
+	test(tfidf_recommender_remove_rating_matches_fresh, deterministic) :-
 		vector_dataset(3, 3, tfidf_dataset(Ratings, Items, Contents)),
 		tfidf_recommender::learn(tfidf_dataset(Ratings, Items, Contents), Model),
 		tfidf_recommender::remove_ratings(Model, [u-x,u-x,missing-item], Updated),
@@ -316,27 +316,27 @@
 		tfidf_recommender::remove_ratings(Updated, [u-x], Retry),
 		assertion(Retry == Updated).
 
-	test(remove_unknown_pairs, deterministic(Updated == Model)) :-
+	test(tfidf_recommender_remove_unknown_pairs, deterministic(Updated == Model)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::remove_ratings(Model, [unknown-x,u-missing,u-diagonal], Updated).
 
-	test(remove_empty, deterministic(Updated == Model)) :-
+	test(tfidf_recommender_remove_empty, deterministic(Updated == Model)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::remove_ratings(Model, [], Updated).
 
-	test(remove_all, error(domain_error(non_empty_ratings, []))) :-
+	test(tfidf_recommender_remove_all, error(domain_error(non_empty_ratings, []))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::remove_ratings(Model, [u-x,u-y], _).
 
-	test(remove_weighted_mean_shift, error(domain_error(positive_rating_weight, 0))) :-
+	test(tfidf_recommender_remove_weighted_mean_shift, error(domain_error(positive_rating_weight, 0))) :-
 		Dataset = tfidf_dataset([rating(u,x,1),rating(u,y,0),rating(v,x,1)], [x,y], [x-vector([a-1]),y-vector([])]),
 		tfidf_recommender::learn(Dataset, Model, [profile_weighting(rating)]),
 		tfidf_recommender::remove_ratings(Model, [u-x], _).
 
-	test(feedback_feature_equivalence, deterministic) :-
+	test(tfidf_recommender_feedback_feature_equivalence, deterministic) :-
 		feature_dataset(tfidf_dataset(Ratings, Items, Contents)),
 		forall(
 			(	member(Normalization, [none,l2]),
@@ -358,7 +358,7 @@
 			)
 		).
 
-	test(feedback_weighted_vectors, deterministic) :-
+	test(tfidf_recommender_feedback_weighted_vectors, deterministic) :-
 		vector_dataset(2, 4, tfidf_dataset(Ratings, Items, Contents)),
 		Options = [profile_weighting(rating),positive_threshold(0),normalization(none)],
 		tfidf_recommender::learn(tfidf_dataset(Ratings, Items, Contents), Model, Options),
@@ -372,7 +372,7 @@
 		tfidf_recommender::score_content(Removed, u, vector([x-3]), Single),
 		assertion(Single =~= 1.0).
 
-	test(feedback_mean_reselects_unchanged_items, deterministic) :-
+	test(tfidf_recommender_feedback_mean_reselects_unchanged_items, deterministic) :-
 		vector_dataset(1, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::update_ratings(Model, [rating(u,diagonal,-10)], Updated),
@@ -382,7 +382,7 @@
 		tfidf_recommender::remove_ratings(Updated, [u-diagonal], Removed),
 		assertion(Removed == Model).
 
-	test(feedback_empty_selected_vectors, deterministic) :-
+	test(tfidf_recommender_feedback_empty_selected_vectors, deterministic) :-
 		Contents = [x-vector([a-1]),y-vector([])],
 		tfidf_recommender::learn(tfidf_dataset([rating(u,x,2)], [x,y], Contents), Model, [positive_threshold(1),profile_weighting(rating)]),
 		tfidf_recommender::update_ratings(Model, [rating(u,y,2)], Updated),
@@ -391,7 +391,7 @@
 		tfidf_recommender::remove_ratings(Updated, [u-y], Removed),
 		assertion(Removed == Model).
 
-	test(feedback_threshold_equality_and_unselected_nonpositive, deterministic) :-
+	test(tfidf_recommender_feedback_threshold_equality_and_unselected_nonpositive, deterministic) :-
 		vector_dataset(2, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model, [positive_threshold(2),profile_weighting(rating)]),
 		tfidf_recommender::update_ratings(Model, [rating(u,y,0),rating(v,y,-1)], Updated),
@@ -401,7 +401,7 @@
 		assertion(Empty =~= 0.0),
 		assertion(tfidf_recommender::valid_recommender(Updated)).
 
-	test(feedback_identity_and_order, deterministic) :-
+	test(tfidf_recommender_feedback_identity_and_order, deterministic) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		copy_term(Model, Original),
@@ -418,7 +418,7 @@
 		assertion(lgtunit::variant(Model, Original)),
 		assertion(ground(Removed)).
 
-	test(feedback_diagnostic_order_and_extras, deterministic) :-
+	test(tfidf_recommender_feedback_diagnostic_order_and_extras, deterministic) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, tfidf_model(Ratings,Contents,Vectors,Profiles,Vectorizer,Scale,Diagnostics)),
 		reverse(Diagnostics, Reversed),
@@ -435,14 +435,14 @@
 		assertion(UpdatedDiagnostics = [note(before)|_]),
 		assertion(append(_, [extra(after)], UpdatedDiagnostics)).
 
-	test(feedback_scale_boundaries, deterministic) :-
+	test(tfidf_recommender_feedback_scale_boundaries, deterministic) :-
 		tfidf_recommender::learn(tfidf_scale_fixture(1,5), Model),
 		tfidf_recommender::update_ratings(Model, [rating(u,x,5),rating(v,x,1)], Updated),
 		tfidf_recommender::remove_ratings(Updated, [u-x], Removed),
 		assertion(Removed = tfidf_model([rating(v,x,1)],_,_,_,_,scale(1,5),_)),
 		assertion(tfidf_recommender::valid_recommender(Removed)).
 
-	test(feedback_disappearing_user, deterministic) :-
+	test(tfidf_recommender_feedback_disappearing_user, deterministic) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::update_ratings(Model, [rating(v,x,2)], Updated),
@@ -457,7 +457,7 @@
 		tfidf_recommender::recommend(Removed, v, 3, Other),
 		assertion(\+ member(x-_, Other)).
 
-	test(feedback_withdrawn_item_scores_normally, deterministic) :-
+	test(tfidf_recommender_feedback_withdrawn_item_scores_normally, deterministic) :-
 		Contents = [x-vector([a-1,b-1]),y-vector([a-1])],
 		tfidf_recommender::learn(tfidf_dataset([rating(u,x,3),rating(u,y,3)], [x,y], Contents), Model),
 		tfidf_recommender::remove_ratings(Model, [u-x], Removed),
@@ -469,7 +469,7 @@
 		tfidf_recommender::update_ratings(Removed, [rating(u,x,3)], Restored),
 		assertion(Restored == Model).
 
-	test(feedback_checks_model_once, deterministic) :-
+	test(tfidf_recommender_feedback_checks_model_once, deterministic) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_validation_counter::learn(Dataset, Model),
 		forall(
@@ -481,7 +481,7 @@
 			)
 		).
 
-	test(feedback_failed_rebuild_preserves_original, deterministic) :-
+	test(tfidf_recommender_feedback_failed_rebuild_preserves_original, deterministic) :-
 		Dataset = tfidf_dataset([rating(u,x,1),rating(u,y,0),rating(v,x,1)], [x,y], [x-vector([a-1]),y-vector([])]),
 		tfidf_recommender::learn(Dataset, Model, [profile_weighting(rating)]),
 		copy_term(Model, Original),
@@ -490,151 +490,151 @@
 		assertion(lgtunit::variant(Model, Original)),
 		assertion(tfidf_recommender::valid_recommender(Model)).
 
-	test(feedback_implemented_locally, deterministic) :-
+	test(tfidf_recommender_feedback_implemented_locally, deterministic) :-
 		tfidf_recommender::predicate_property(update_ratings(_,_,_), defined_in(tfidf_recommender)),
 		tfidf_recommender::predicate_property(remove_ratings(_,_,_), defined_in(tfidf_recommender)).
 
-	test(update_missing_item, error(domain_error(catalog_item, missing))) :-
+	test(tfidf_recommender_update_missing_item, error(domain_error(catalog_item, missing))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::update_ratings(Model, [rating(v,missing,5)], _).
 
-	test(update_identical_duplicates, error(domain_error(duplicate_rating, v-x))) :-
+	test(tfidf_recommender_update_identical_duplicates, error(domain_error(duplicate_rating, v-x))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::update_ratings(Model, [rating(v,x,5),rating(v,x,5)], _).
 
-	test(update_out_of_scale, error(domain_error(rating_scale(1,5), 6))) :-
+	test(tfidf_recommender_update_out_of_scale, error(domain_error(rating_scale(1,5), 6))) :-
 		tfidf_recommender::learn(tfidf_scale_fixture(1,5), Model),
 		tfidf_recommender::update_ratings(Model, [rating(u,x,6)], _).
 
-	test(update_below_scale, error(domain_error(rating_scale(1,5), 0))) :-
+	test(tfidf_recommender_update_below_scale, error(domain_error(rating_scale(1,5), 0))) :-
 		tfidf_recommender::learn(tfidf_scale_fixture(1,5), Model),
 		tfidf_recommender::update_ratings(Model, [rating(v,x,0)], _).
 
-	test(update_variable_model, error(instantiation_error)) :-
+	test(tfidf_recommender_update_variable_model, error(instantiation_error)) :-
 		tfidf_recommender::update_ratings(_, [], _).
 
-	test(update_invalid_model, error(domain_error(recommender, bad))) :-
+	test(tfidf_recommender_update_invalid_model, error(domain_error(recommender, bad))) :-
 		tfidf_recommender::update_ratings(bad, [], _).
 
-	test(update_variable_list, error(instantiation_error)) :-
+	test(tfidf_recommender_update_variable_list, error(instantiation_error)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::update_ratings(Model, _, _).
 
-	test(update_open_list, error(instantiation_error)) :-
+	test(tfidf_recommender_update_open_list, error(instantiation_error)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::update_ratings(Model, [rating(v,x,2)|_], _).
 
-	test(update_nonlist, error(type_error(list, bad))) :-
+	test(tfidf_recommender_update_nonlist, error(type_error(list, bad))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::update_ratings(Model, bad, _).
 
-	test(update_improper_list, error(type_error(list, [rating(v,x,2)|bad]))) :-
+	test(tfidf_recommender_update_improper_list, error(type_error(list, [rating(v,x,2)|bad]))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::update_ratings(Model, [rating(v,x,2)|bad], _).
 
-	test(update_bad_record, error(type_error(rating, u-x))) :-
+	test(tfidf_recommender_update_bad_record, error(type_error(rating, u-x))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::update_ratings(Model, [u-x], _).
 
-	test(update_variable_record, error(instantiation_error)) :-
+	test(tfidf_recommender_update_variable_record, error(instantiation_error)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::update_ratings(Model, [_], _).
 
-	test(update_variable_user, error(instantiation_error)) :-
+	test(tfidf_recommender_update_variable_user, error(instantiation_error)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::update_ratings(Model, [rating(_,x,2)], _).
 
-	test(update_variable_item, error(instantiation_error)) :-
+	test(tfidf_recommender_update_variable_item, error(instantiation_error)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::update_ratings(Model, [rating(u,_,2)], _).
 
-	test(update_nonatomic_user, error(type_error(atomic, user(u)))) :-
+	test(tfidf_recommender_update_nonatomic_user, error(type_error(atomic, user(u)))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::update_ratings(Model, [rating(user(u),x,2)], _).
 
-	test(update_nonatomic_item, error(type_error(atomic, item(x)))) :-
+	test(tfidf_recommender_update_nonatomic_item, error(type_error(atomic, item(x)))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::update_ratings(Model, [rating(u,item(x),2)], _).
 
-	test(update_variable_value, error(instantiation_error)) :-
+	test(tfidf_recommender_update_variable_value, error(instantiation_error)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::update_ratings(Model, [rating(u,x,_)], _).
 
-	test(update_nonnumeric_value, error(type_error(number, bad))) :-
+	test(tfidf_recommender_update_nonnumeric_value, error(type_error(number, bad))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::update_ratings(Model, [rating(u,x,bad)], _).
 
-	test(remove_variable_model, error(instantiation_error)) :-
+	test(tfidf_recommender_remove_variable_model, error(instantiation_error)) :-
 		tfidf_recommender::remove_ratings(_, [], _).
 
-	test(remove_invalid_model, error(domain_error(recommender, bad))) :-
+	test(tfidf_recommender_remove_invalid_model, error(domain_error(recommender, bad))) :-
 		tfidf_recommender::remove_ratings(bad, [], _).
 
-	test(remove_variable_list, error(instantiation_error)) :-
+	test(tfidf_recommender_remove_variable_list, error(instantiation_error)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::remove_ratings(Model, _, _).
 
-	test(remove_nonlist, error(type_error(list, bad))) :-
+	test(tfidf_recommender_remove_nonlist, error(type_error(list, bad))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::remove_ratings(Model, bad, _).
 
-	test(remove_open_list, error(instantiation_error)) :-
+	test(tfidf_recommender_remove_open_list, error(instantiation_error)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::remove_ratings(Model, [u-x|_], _).
 
-	test(remove_improper_list, error(type_error(list, [u-x|bad]))) :-
+	test(tfidf_recommender_remove_improper_list, error(type_error(list, [u-x|bad]))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::remove_ratings(Model, [u-x|bad], _).
 
-	test(remove_nonpair, error(type_error(pair, bad))) :-
+	test(tfidf_recommender_remove_nonpair, error(type_error(pair, bad))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::remove_ratings(Model, [u-x,bad], _).
 
-	test(remove_variable_pair, error(instantiation_error)) :-
+	test(tfidf_recommender_remove_variable_pair, error(instantiation_error)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::remove_ratings(Model, [_], _).
 
-	test(remove_variable_user, error(instantiation_error)) :-
+	test(tfidf_recommender_remove_variable_user, error(instantiation_error)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::remove_ratings(Model, [_-missing], _).
 
-	test(remove_variable_item, error(instantiation_error)) :-
+	test(tfidf_recommender_remove_variable_item, error(instantiation_error)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::remove_ratings(Model, [missing-_], _).
 
-	test(remove_nonatomic_user, error(type_error(atomic, user(u)))) :-
+	test(tfidf_recommender_remove_nonatomic_user, error(type_error(atomic, user(u)))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::remove_ratings(Model, [user(u)-missing], _).
 
-	test(remove_nonatomic_item, error(type_error(atomic, item(x)))) :-
+	test(tfidf_recommender_remove_nonatomic_item, error(type_error(atomic, item(x)))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::remove_ratings(Model, [missing-item(x)], _).
 
-	test(extend_features_refits, deterministic) :-
+	test(tfidf_recommender_extend_features_refits, deterministic) :-
 		feature_dataset(tfidf_dataset(Ratings, Items, Contents)),
 		tfidf_recommender::learn(tfidf_dataset(Ratings, Items, Contents), Model),
 		tfidf_recommender::score(Model, u, second, Before),
@@ -649,7 +649,7 @@
 		tfidf_recommender::recommend(Extended, u, 3, Recommendations),
 		assertion(member(third-_, Recommendations)).
 
-	test(extend_vectors_preserves_profiles, deterministic) :-
+	test(tfidf_recommender_extend_vectors_preserves_profiles, deterministic) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::extend_catalog(Model, [novel-vector([x-0.5,y-0.5,z-0])], Extended),
@@ -659,17 +659,17 @@
 		assertion(Score =~= 1.0),
 		assertion(tfidf_recommender::valid_recommender(Extended)).
 
-	test(extend_empty, deterministic(Extended == Model)) :-
+	test(tfidf_recommender_extend_empty, deterministic(Extended == Model)) :-
 		feature_dataset(Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::extend_catalog(Model, [], Extended).
 
-	test(extend_existing_id, error(domain_error(new_catalog_item, first))) :-
+	test(tfidf_recommender_extend_existing_id, error(domain_error(new_catalog_item, first))) :-
 		feature_dataset(Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::extend_catalog(Model, [first-features([a])], _).
 
-	test(replace_features_refits_unrated_content, deterministic) :-
+	test(tfidf_recommender_replace_features_refits_unrated_content, deterministic) :-
 		feature_dataset(tfidf_dataset(Ratings, Items, Contents)),
 		tfidf_recommender::learn(tfidf_dataset(Ratings, Items, Contents), Model),
 		tfidf_recommender::replace_content(Model, [second-features([a,d])], Replaced),
@@ -680,7 +680,7 @@
 		assertion(UpdatedProfiles \== OriginalProfiles),
 		assertion(tfidf_recommender::valid_recommender(Replaced)).
 
-	test(replace_rated_vectors_rebuilds, deterministic) :-
+	test(tfidf_recommender_replace_rated_vectors_rebuilds, deterministic) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::replace_content(Model, [x-vector([y-0.25])], Replaced),
@@ -688,7 +688,7 @@
 		assertion(Score =~= 1.0),
 		assertion(tfidf_recommender::valid_recommender(Replaced)).
 
-	test(replace_unrated_vectors_preserves_profiles, deterministic) :-
+	test(tfidf_recommender_replace_unrated_vectors_preserves_profiles, deterministic) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::replace_content(Model, [diagonal-vector([novel-2])], Replaced),
@@ -697,17 +697,17 @@
 		tfidf_recommender::score(Replaced, u, diagonal, Score),
 		assertion(Score =~= 0.0).
 
-	test(replace_empty, deterministic(Replaced == Model)) :-
+	test(tfidf_recommender_replace_empty, deterministic(Replaced == Model)) :-
 		feature_dataset(Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::replace_content(Model, [], Replaced).
 
-	test(replace_missing_id, error(domain_error(catalog_item, missing))) :-
+	test(tfidf_recommender_replace_missing_id, error(domain_error(catalog_item, missing))) :-
 		feature_dataset(Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::replace_content(Model, [missing-features([a])], _).
 
-	test(catalog_feature_options_equivalence, deterministic) :-
+	test(tfidf_recommender_catalog_feature_options_equivalence, deterministic) :-
 		feature_dataset(tfidf_dataset(Ratings, Items, Contents)),
 		forall(
 			(	member(Weighting, [binary,count,term_frequency,tf_idf(raw),tf_idf(relative),tf_idf(sublinear)]),
@@ -730,7 +730,7 @@
 			)
 		).
 
-	test(catalog_exact_idf_score_changes, deterministic) :-
+	test(tfidf_recommender_catalog_exact_idf_score_changes, deterministic) :-
 		feature_dataset(Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score(Model, u, second, Before),
@@ -748,7 +748,7 @@
 		ExpectedReplacement is 2 / (sqrt(4 + Rare * Rare) * sqrt(1 + Rare * Rare)),
 		assertion(Replacement =~= ExpectedReplacement).
 
-	test(catalog_empty_document_refits_statistics, deterministic) :-
+	test(tfidf_recommender_catalog_empty_document_refits_statistics, deterministic) :-
 		feature_dataset(tfidf_dataset(Ratings, Items, Contents)),
 		tfidf_recommender::learn(tfidf_dataset(Ratings, Items, Contents), Model),
 		tfidf_recommender::extend_catalog(Model, [empty-features([])], Extended),
@@ -760,7 +760,7 @@
 		tfidf_recommender::score(Extended, u, empty, Score),
 		assertion(Score =~= 0.0).
 
-	test(catalog_recomputes_frequency_filters, deterministic) :-
+	test(tfidf_recommender_catalog_recomputes_frequency_filters, deterministic) :-
 		feature_dataset(tfidf_dataset(Ratings, Items, Contents)),
 		Options = [vectorizer_options([minimum_document_frequency(2),maximum_document_frequency(2),maximum_features(2)])],
 		once(tfidf_recommender::learn(tfidf_dataset(Ratings, Items, Contents), Model, Options)),
@@ -775,7 +775,7 @@
 		tfidf_recommender::learn(tfidf_dataset(Ratings, [third|Items], [third-features([a,a,d])|Contents]), Fresh, Options),
 		assertion(Extended == Fresh).
 
-	test(catalog_recomputes_vocabulary_limit, deterministic) :-
+	test(tfidf_recommender_catalog_recomputes_vocabulary_limit, deterministic) :-
 		feature_dataset(Dataset),
 		tfidf_recommender::learn(Dataset, Model, [vectorizer_options([maximum_features(1)])]),
 		tfidf_recommender::extend_catalog(Model, [third-features([c,c,c])], Extended),
@@ -786,7 +786,7 @@
 		assertion(memberchk(non_empty_profile_count(0), Diagnostics)),
 		assertion(tfidf_recommender::valid_recommender(Extended)).
 
-	test(catalog_classic_zero_weight_feature_count, deterministic) :-
+	test(tfidf_recommender_catalog_classic_zero_weight_feature_count, deterministic) :-
 		Dataset = tfidf_dataset([rating(u,x,1)], [x], [x-features([a])]),
 		tfidf_recommender::learn(Dataset, Model, [vectorizer_options([idf(classic)])]),
 		tfidf_recommender::extend_catalog(Model, [y-features([a])], Extended),
@@ -797,7 +797,7 @@
 		assertion(memberchk(item_count(2), Diagnostics)),
 		assertion(tfidf_recommender::valid_recommender(Extended)).
 
-	test(catalog_preweighted_equivalence, deterministic) :-
+	test(tfidf_recommender_catalog_preweighted_equivalence, deterministic) :-
 		vector_dataset(3, 3, tfidf_dataset(Ratings, Items, Contents)),
 		forall(
 			member(Normalization, [none,l2]),
@@ -813,7 +813,7 @@
 			)
 		).
 
-	test(catalog_empty_preweighted_space, deterministic) :-
+	test(tfidf_recommender_catalog_empty_preweighted_space, deterministic) :-
 		tfidf_recommender::learn(tfidf_dataset([rating(u,x,1)], [x], [x-vector([])]), Model),
 		tfidf_recommender::extend_catalog(Model, [y-vector([zero-0])], Extended),
 		tfidf_recommender::replace_content(Extended, [x-vector([]),y-vector([])], Replaced),
@@ -822,7 +822,7 @@
 		assertion(memberchk(feature_count(0), Diagnostics)),
 		assertion(tfidf_recommender::valid_recommender(Replaced)).
 
-	test(catalog_immutable_and_order_invariant, deterministic) :-
+	test(tfidf_recommender_catalog_immutable_and_order_invariant, deterministic) :-
 		feature_dataset(Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		copy_term(Model, Original),
@@ -836,12 +836,12 @@
 		assertion(lgtunit::variant(Model, Original)),
 		assertion(ground(Replaced)).
 
-	test(catalog_identical_canonical_replacement, deterministic(Replaced == Model)) :-
+	test(tfidf_recommender_catalog_identical_canonical_replacement, deterministic(Replaced == Model)) :-
 		feature_dataset(Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::replace_content(Model, [first-features([b,a,a])], Replaced).
 
-	test(catalog_extra_diagnostics_and_repeated_options, deterministic) :-
+	test(tfidf_recommender_catalog_extra_diagnostics_and_repeated_options, deterministic) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, tfidf_model(Ratings,Contents,Vectors,Profiles,Vectorizer,Scale,Diagnostics), [normalization(none),normalization(l2)]),
 		reverse(Diagnostics, Reversed),
@@ -858,14 +858,14 @@
 		assertion(append(_, [extra(after)], UpdatedDiagnostics)),
 		assertion(tfidf_recommender::valid_recommender(Replaced)).
 
-	test(catalog_scale_preservation, deterministic) :-
+	test(tfidf_recommender_catalog_scale_preservation, deterministic) :-
 		tfidf_recommender::learn(tfidf_scale_fixture(1,5), Model),
 		tfidf_recommender::extend_catalog(Model, [y-vector([a-3])], Extended),
 		tfidf_recommender::replace_content(Extended, [x-vector([a-0.5])], Replaced),
 		assertion(Replaced = tfidf_model([rating(u,x,1)],_,_,_,none,scale(1,5),_)),
 		assertion(tfidf_recommender::valid_recommender(Replaced)).
 
-	test(catalog_validates_once, deterministic) :-
+	test(tfidf_recommender_catalog_validates_once, deterministic) :-
 		feature_dataset(Dataset),
 		tfidf_validation_counter::learn(Dataset, Model),
 		forall(
@@ -877,11 +877,11 @@
 			)
 		).
 
-	test(catalog_implemented_locally, deterministic) :-
+	test(tfidf_recommender_catalog_implemented_locally, deterministic) :-
 		tfidf_recommender::predicate_property(extend_catalog(_,_,_), defined_in(tfidf_recommender)),
 		tfidf_recommender::predicate_property(replace_content(_,_,_), defined_in(tfidf_recommender)).
 
-	test(catalog_inputs_validated, deterministic) :-
+	test(tfidf_recommender_catalog_inputs_validated, deterministic) :-
 		feature_dataset(Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		forall(
@@ -903,7 +903,7 @@
 			)
 		).
 
-	test(extend_content_errors, deterministic) :-
+	test(tfidf_recommender_extend_content_errors, deterministic) :-
 		feature_dataset(Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		forall(
@@ -921,7 +921,7 @@
 			)
 		).
 
-	test(replace_content_errors, deterministic) :-
+	test(tfidf_recommender_replace_content_errors, deterministic) :-
 		feature_dataset(Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		forall(
@@ -939,7 +939,7 @@
 			)
 		).
 
-	test(catalog_vector_validation, deterministic) :-
+	test(tfidf_recommender_catalog_vector_validation, deterministic) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		forall(
@@ -960,7 +960,7 @@
 			)
 		).
 
-	test(catalog_empty_inputs_validate_model, deterministic) :-
+	test(tfidf_recommender_catalog_empty_inputs_validate_model, deterministic) :-
 		forall(
 			member(Goal-Expected, [
 				extend_catalog(_,[],_)-instantiation_error,
@@ -973,28 +973,28 @@
 			)
 		).
 
-	test(extend_empty_vocabulary_error, error(domain_error(non_empty_vocabulary, _))) :-
+	test(tfidf_recommender_extend_empty_vocabulary_error, error(domain_error(non_empty_vocabulary, _))) :-
 		Dataset = tfidf_dataset([rating(u,x,1)], [x], [x-features([a])]),
 		tfidf_recommender::learn(Dataset, Model, [vectorizer_options([maximum_document_frequency(1)])]),
 		tfidf_recommender::extend_catalog(Model, [y-features([a])], _).
 
-	test(replace_empty_vocabulary_error, error(domain_error(non_empty_vocabulary, _))) :-
+	test(tfidf_recommender_replace_empty_vocabulary_error, error(domain_error(non_empty_vocabulary, _))) :-
 		feature_dataset(Dataset),
 		tfidf_recommender::learn(Dataset, Model, [vectorizer_options([minimum_document_frequency(2)])]),
 		tfidf_recommender::replace_content(Model, [second-features([c])], _).
 
-	test(replace_all_empty_features_error, error(domain_error(non_empty_vocabulary, _))) :-
+	test(tfidf_recommender_replace_all_empty_features_error, error(domain_error(non_empty_vocabulary, _))) :-
 		feature_dataset(Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::replace_content(Model, [first-features([]),second-features([])], _).
 
-	test(extended_item_absent_from_original, error(domain_error(catalog_item, third))) :-
+	test(tfidf_recommender_extended_item_absent_from_original, error(domain_error(catalog_item, third))) :-
 		feature_dataset(Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::extend_catalog(Model, [third-features([a])], _),
 		tfidf_recommender::score(Model, u, third, _).
 
-	test(composed_updates_export_restore, deterministic) :-
+	test(tfidf_recommender_composed_updates_export_restore, deterministic) :-
 		feature_dataset(Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::extend_catalog(Model, [third-features([a,d])], Extended),
@@ -1023,7 +1023,7 @@
 		assertion(member(third-_, Recommendations)),
 		assertion(\+ member(first-_, Recommendations)).
 
-	test(catalog_filtered_call_determinism, deterministic) :-
+	test(tfidf_recommender_catalog_filtered_call_determinism, deterministic) :-
 		feature_dataset(Dataset),
 		forall(
 			member(VectorOptions, [[minimum_document_frequency(2),maximum_document_frequency(2),maximum_features(2)],[maximum_features(1)],[weighting(tf_idf(relative)),idf(classic)]]),
@@ -1035,7 +1035,7 @@
 			)
 		).
 
-	test(uniform_centroid, deterministic) :-
+	test(tfidf_recommender_uniform_centroid, deterministic) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score(Model, u, x, Score),
@@ -1044,7 +1044,7 @@
 		tfidf_recommender::score(Model, u, diagonal, Diagonal),
 		assertion(Diagonal =~= 1.0).
 
-	test(weighted_centroid, deterministic) :-
+	test(tfidf_recommender_weighted_centroid, deterministic) :-
 		vector_dataset(2, 4, Dataset),
 		tfidf_recommender::learn(Dataset, Model, [positive_threshold(2), profile_weighting(rating)]),
 		tfidf_recommender::score(Model, u, x, ScoreX),
@@ -1053,7 +1053,7 @@
 		assertion(ScoreX =~= ExpectedX),
 		assertion(ScoreY =~= ExpectedY).
 
-	test(tfidf_weights, deterministic) :-
+	test(tfidf_recommender_tfidf_weights, deterministic) :-
 		Dataset = tfidf_dataset([rating(u, first, 5)], [first, second],
 			[first-features([a,a,b]), second-features([b,c])]),
 		tfidf_recommender::learn(Dataset, tfidf_model(_, _, [first-[a-FirstA,b-FirstB], second-[b-SecondB,c-SecondC]], _, _, _, _),
@@ -1064,16 +1064,16 @@
 		assertion(SecondB =~= 1.0),
 		assertion(SecondC =~= IDF).
 
-	test(unrated_catalog_recommendation, deterministic(Score =~= 1.0)) :-
+	test(tfidf_recommender_unrated_catalog_recommendation, deterministic(Score =~= 1.0)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::recommend(Model, u, 10, [diagonal-Score]).
 
-	test(default_positive_threshold, deterministic(Score =~= 0.0)) :-
+	test(tfidf_recommender_default_positive_threshold, deterministic(Score =~= 0.0)) :-
 		vector_dataset(2, 4, Dataset), tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score(Model, u, x, Score).
 
-	test(per_user_mean_thresholds, deterministic) :-
+	test(tfidf_recommender_per_user_mean_thresholds, deterministic) :-
 		Dataset = tfidf_dataset([rating(u,x,1),rating(u,y,2),rating(v,x,5),rating(v,y,4)],
 			[x,y], [x-vector([x-1]),y-vector([y-1])]),
 		tfidf_recommender::learn(Dataset, Model),
@@ -1084,12 +1084,12 @@
 		assertion(OtherScore =~= 1.0),
 		assertion(RejectedScore =~= 0.0).
 
-	test(threshold_equality, deterministic(Score =~= 1.0)) :-
+	test(tfidf_recommender_threshold_equality, deterministic(Score =~= 1.0)) :-
 		vector_dataset(2, 4, Dataset),
 		tfidf_recommender::learn(Dataset, Model, [positive_threshold(4)]),
 		tfidf_recommender::score(Model, u, y, Score).
 
-	test(no_selected_items, deterministic) :-
+	test(tfidf_recommender_no_selected_items, deterministic) :-
 		vector_dataset(2, 4, Dataset),
 		tfidf_recommender::learn(Dataset, Model, [positive_threshold(5)]),
 		tfidf_recommender::score(Model, u, diagonal, Score),
@@ -1097,7 +1097,7 @@
 		tfidf_recommender::recommend(Model, u, 3, [diagonal-Zero]),
 		assertion(Zero =~= 0.0).
 
-	test(unknown_user_zero_ties, deterministic) :-
+	test(tfidf_recommender_unknown_user_zero_ties, deterministic) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::recommend(Model, unknown, 10, [y-ScoreY,x-ScoreX,diagonal-ScoreDiagonal]),
@@ -1105,25 +1105,25 @@
 		assertion(ScoreX =~= 0.0),
 		assertion(ScoreDiagonal =~= 0.0).
 
-	test(no_candidates, deterministic(Recommendations == [])) :-
+	test(tfidf_recommender_no_candidates, deterministic(Recommendations == [])) :-
 		Dataset = tfidf_dataset([rating(u, x, 5)], [x], [x-vector([x-1])]),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::recommend(Model, u, 5, Recommendations).
 
-	test(unknown_item, error(domain_error(catalog_item, missing))) :-
+	test(tfidf_recommender_unknown_item, error(domain_error(catalog_item, missing))) :-
 		vector_dataset(3, 3, Dataset), tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score(Model, u, missing, _).
 
-	test(empty_content, deterministic(Score =~= 0.0)) :-
+	test(tfidf_recommender_empty_content, deterministic(Score =~= 0.0)) :-
 		Dataset = tfidf_dataset([rating(u, x, 5)], [x,y], [x-vector([]),y-vector([])]),
 		tfidf_recommender::learn(Dataset, Model), tfidf_recommender::score(Model, u, y, Score).
 
-	test(empty_selected_vector_denominator, deterministic) :-
+	test(tfidf_recommender_empty_selected_vector_denominator, deterministic) :-
 		Dataset = tfidf_dataset([rating(u, x, 5),rating(u, y, 5)], [x,y], [x-vector([x-1]), y-vector([])]),
 		tfidf_recommender::learn(Dataset, tfidf_model(_, _, _, [u-[x-Weight]], _, _, _)),
 		assertion(Weight =~= 0.5).
 
-	test(normalization_effect, deterministic) :-
+	test(tfidf_recommender_normalization_effect, deterministic) :-
 		Dataset = tfidf_dataset([rating(u, x, 5),rating(u, y, 5)], [x,y], [x-vector([x-10]), y-vector([y-1])]),
 		tfidf_recommender::learn(Dataset, Normalized),
 		tfidf_recommender::learn(Dataset, Raw, [normalization(none)]),
@@ -1133,16 +1133,16 @@
 		assertion(Equal =~= ExpectedEqual),
 		assertion(Dominant =~= ExpectedDominant).
 
-	test(large_vector_values, deterministic(Score =~= 1.0)) :-
+	test(tfidf_recommender_large_vector_values, deterministic(Score =~= 1.0)) :-
 		Dataset = tfidf_dataset([rating(u, x, 1)], [x], [x-vector([x-1.0e200,y-1.0e200])]),
 		tfidf_recommender::learn(Dataset, Model), tfidf_recommender::score(Model, u, x, Score).
 
-	test(large_unnormalized_centroid, deterministic(Score =~= 1.0)) :-
+	test(tfidf_recommender_large_unnormalized_centroid, deterministic(Score =~= 1.0)) :-
 		Dataset = tfidf_dataset([rating(u, x, 1),rating(u, y, 1)], [x,y], [x-vector([f-1.0e300]),y-vector([f-1.0e300])]),
 		tfidf_recommender::learn(Dataset, Model, [normalization(none)]),
 		tfidf_recommender::score(Model, u, x, Score).
 
-	test(feature_l2_normalization, deterministic) :-
+	test(tfidf_recommender_feature_l2_normalization, deterministic) :-
 		feature_dataset(Dataset), tfidf_recommender::learn(Dataset, Model),
 		Model = tfidf_model(_, _, [first-[a-WeightA,b-WeightB]| _], _, _, _, _),
 		IDF is log(3 / 2) + 1,
@@ -1152,7 +1152,7 @@
 		assertion(WeightA =~= ExpectedA),
 		assertion(WeightB =~= ExpectedB).
 
-	test(unrated_documents_affect_idf, true) :-
+	test(tfidf_recommender_unrated_documents_affect_idf, true) :-
 		Dataset = tfidf_dataset([rating(u, first, 5)], [first,second,third], [first-features([a,a,b]), second-features([b,c]), third-features([a])]),
 		tfidf_recommender::learn(Dataset, tfidf_model(_, _, _, _, Vectorizer, _, _)),
 		Vectorizer = text_vectorizer_model([feature(a,2,IDF)| _], _),
@@ -1160,34 +1160,34 @@
 		assertion(IDF =~= Expected),
 		text_vectorizer::diagnostic(Vectorizer, document_count(3)).
 
-	test(empty_documents_count_in_idf, deterministic) :-
+	test(tfidf_recommender_empty_documents_count_in_idf, deterministic) :-
 		Dataset = tfidf_dataset([rating(u,x,1)], [x,y], [x-features([a]),y-features([])]),
 		tfidf_recommender::learn(Dataset, tfidf_model(_, _, _, _, Vectorizer, _, _)),
 		Vectorizer = text_vectorizer_model([feature(a,1,IDF)], _),
 		Expected is log(3 / 2) + 1,
 		assertion(IDF =~= Expected).
 
-	test(binary_tags, deterministic(Score =~= 1.0)) :-
+	test(tfidf_recommender_binary_tags, deterministic(Score =~= 1.0)) :-
 		Dataset = tfidf_dataset([rating(u, first, 5)], [first,second], [first-features([tag,tag]),second-features([tag])]),
 		tfidf_recommender::learn(Dataset, Model, [vectorizer_options([weighting(binary)])]),
 		tfidf_recommender::score(Model, u, second, Score).
 
-	test(compound_features, deterministic(Score =~= 1.0)) :-
+	test(tfidf_recommender_compound_features, deterministic(Score =~= 1.0)) :-
 		Dataset = tfidf_dataset([rating(u, first, 5)], [first,second], [first-features([genre(action)]),second-features([genre(action)])]),
 		tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score(Model, u, second, Score).
 
-	test(classic_zero_weights_vocabulary, true) :-
+	test(tfidf_recommender_classic_zero_weights_vocabulary, true) :-
 		Dataset = tfidf_dataset([rating(u, first, 5)], [first,second], [first-features([a,b]),second-features([a,c])]),
 		tfidf_recommender::learn(Dataset, Model, [vectorizer_options([idf(classic)])]),
 		tfidf_recommender::diagnostic(Model, feature_count(3)).
 
-	test(repeated_top_level_options, deterministic(Score =~= 0.0)) :-
+	test(tfidf_recommender_repeated_top_level_options, deterministic(Score =~= 0.0)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model, [positive_threshold(9),positive_threshold(1)]),
 		tfidf_recommender::score(Model, u, diagonal, Score).
 
-	test(repeated_nested_options, deterministic) :-
+	test(tfidf_recommender_repeated_nested_options, deterministic) :-
 		feature_dataset(Dataset),
 		tfidf_recommender::learn(Dataset, Model, [normalization(none),vectorizer_options([weighting(binary),weighting(count)])]),
 		Model = tfidf_model(_, _, [first-[a-WeightA,b-WeightB]| _], _, _, _, _),
@@ -1195,7 +1195,7 @@
 		assertion(WeightB =~= 1.0),
 		tfidf_recommender::valid_recommender(Model).
 
-	test(input_order_independence, deterministic(Model == Other)) :-
+	test(tfidf_recommender_input_order_independence, deterministic(Model == Other)) :-
 		vector_dataset(2, 4, tfidf_dataset(Ratings, Items, Contents)),
 		reverse(Ratings, ReversedRatings),
 		reverse(Items, ReversedItems),
@@ -1203,175 +1203,175 @@
 		tfidf_recommender::learn(tfidf_dataset(Ratings, Items, Contents), Model),
 		tfidf_recommender::learn(tfidf_dataset(ReversedRatings, ReversedItems, ReversedContents), Other).
 
-	test(features_order_independence, deterministic(Model == Other)) :-
+	test(tfidf_recommender_features_order_independence, deterministic(Model == Other)) :-
 		feature_dataset(Dataset), tfidf_recommender::learn(Dataset, Model),
 		OtherDataset = tfidf_dataset([rating(u, first, 5)], [second,first], [second-features([c,b]),first-features([b,a,a])]),
 		tfidf_recommender::learn(OtherDataset, Other).
 
-	test(vector_canonicalization, deterministic) :-
+	test(tfidf_recommender_vector_canonicalization, deterministic) :-
 		Dataset = tfidf_dataset([rating(u, x, 5)], [x], [x-vector([z-0,b-2,a-1])]),
 		tfidf_recommender::learn(Dataset, tfidf_model(_, [x-vector([a-1,b-2])], _, _, _, _, _)).
 
-	test(negative_ratings_uniform, deterministic(Score =~= 1.0)) :-
+	test(tfidf_recommender_negative_ratings_uniform, deterministic(Score =~= 1.0)) :-
 		vector_dataset(-4, -2, Dataset), tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::score(Model, u, y, Score).
 
-	test(negative_unselected_rating_weighted, deterministic(Score =~= 1.0)) :-
+	test(tfidf_recommender_negative_unselected_rating_weighted, deterministic(Score =~= 1.0)) :-
 		vector_dataset(-2, 4, Dataset),
 		tfidf_recommender::learn(Dataset, Model, [profile_weighting(rating)]),
 		tfidf_recommender::score(Model, u, y, Score).
 
-	test(selected_nonpositive_rating, error(domain_error(positive_rating_weight, 0))) :-
+	test(tfidf_recommender_selected_nonpositive_rating, error(domain_error(positive_rating_weight, 0))) :-
 		vector_dataset(0, 0, Dataset), tfidf_recommender::learn(Dataset, _, [profile_weighting(rating)]).
 
-	test(empty_catalog, error(domain_error(non_empty_catalog, _))) :-
+	test(tfidf_recommender_empty_catalog, error(domain_error(non_empty_catalog, _))) :-
 		tfidf_recommender::learn(tfidf_dataset([rating(u,x,1)], [], []), _).
 
-	test(missing_all_content, error(domain_error(item_content_coverage, _))) :-
+	test(tfidf_recommender_missing_all_content, error(domain_error(item_content_coverage, _))) :-
 		tfidf_recommender::learn(tfidf_dataset([rating(u,x,1)], [x], []), _).
 
-	test(missing_content, error(domain_error(item_content_coverage, _))) :-
+	test(tfidf_recommender_missing_content, error(domain_error(item_content_coverage, _))) :-
 		tfidf_recommender::learn(tfidf_dataset([rating(u,x,1)], [x,y], [x-vector([])]), _).
 
-	test(extra_content, error(domain_error(item_content_coverage, _))) :-
+	test(tfidf_recommender_extra_content, error(domain_error(item_content_coverage, _))) :-
 		tfidf_recommender::learn(tfidf_dataset([rating(u,x,1)], [x], [x-vector([]),y-vector([])]), _).
 
-	test(duplicate_item, error(domain_error(duplicate_item, x))) :-
+	test(tfidf_recommender_duplicate_item, error(domain_error(duplicate_item, x))) :-
 		tfidf_recommender::learn(tfidf_dataset([rating(u,x,1)], [x,x], [x-vector([])]), _).
 
-	test(duplicate_content, error(domain_error(duplicate_item, x))) :-
+	test(tfidf_recommender_duplicate_content, error(domain_error(duplicate_item, x))) :-
 		tfidf_recommender::learn(tfidf_dataset([rating(u,x,1)], [x], [x-vector([]),x-vector([])]), _).
 
-	test(rated_item_outside_catalog, error(domain_error(catalog_item, y))) :-
+	test(tfidf_recommender_rated_item_outside_catalog, error(domain_error(catalog_item, y))) :-
 		tfidf_recommender::learn(tfidf_dataset([rating(u,y,1)], [x], [x-vector([])]), _).
 
-	test(variable_item, error(instantiation_error)) :-
+	test(tfidf_recommender_variable_item, error(instantiation_error)) :-
 		tfidf_recommender::learn(tfidf_dataset([rating(u,x,1)], [_], [x-vector([])]), _).
 
-	test(compound_item, error(type_error(atomic, item(x)))) :-
+	test(tfidf_recommender_compound_item, error(type_error(atomic, item(x)))) :-
 		tfidf_recommender::learn(tfidf_dataset([rating(u,x,1)], [item(x)], [x-vector([])]), _).
 
-	test(mixed_representations, error(domain_error(content_representation, vector([])))) :-
+	test(tfidf_recommender_mixed_representations, error(domain_error(content_representation, vector([])))) :-
 		tfidf_recommender::learn(tfidf_dataset([rating(u,x,1)], [x,y], [x-features([a]),y-vector([])]), _).
 
-	test(invalid_descriptor, error(domain_error(item_content, bad))) :-
+	test(tfidf_recommender_invalid_descriptor, error(domain_error(item_content, bad))) :-
 		tfidf_recommender::learn(tfidf_dataset([rating(u,x,1)], [x], [x-bad]), _).
 
-	test(variable_descriptor, error(instantiation_error)) :-
+	test(tfidf_recommender_variable_descriptor, error(instantiation_error)) :-
 		tfidf_recommender::learn(tfidf_dataset([rating(u,x,1)], [x], [x-_]), _).
 
-	test(variable_features, error(instantiation_error)) :-
+	test(tfidf_recommender_variable_features, error(instantiation_error)) :-
 		tfidf_recommender::learn(tfidf_dataset([rating(u,x,1)], [x], [x-features([_])]), _).
 
-	test(improper_features, error(type_error(list, [a|bad]))) :-
+	test(tfidf_recommender_improper_features, error(type_error(list, [a|bad]))) :-
 		tfidf_recommender::learn(tfidf_dataset([rating(u,x,1)], [x], [x-features([a|bad])]), _).
 
-	test(no_vocabulary, error(domain_error(non_empty_vocabulary, [[]]))) :-
+	test(tfidf_recommender_no_vocabulary, error(domain_error(non_empty_vocabulary, [[]]))) :-
 		tfidf_recommender::learn(tfidf_dataset([rating(u,x,1)], [x], [x-features([])]), _).
 
-	test(duplicate_feature, error(domain_error(duplicate_feature, a))) :-
+	test(tfidf_recommender_duplicate_feature, error(domain_error(duplicate_feature, a))) :-
 		bad_vector([a-1,a-2], Dataset),
 		tfidf_recommender::learn(Dataset, _).
 
-	test(nonnumeric_weight, error(type_error(number, bad))) :-
+	test(tfidf_recommender_nonnumeric_weight, error(type_error(number, bad))) :-
 		bad_vector([a-bad], Dataset),
 		tfidf_recommender::learn(Dataset, _).
 
-	test(negative_weight, error(domain_error(non_negative_finite_weight, -1))) :-
+	test(tfidf_recommender_negative_weight, error(domain_error(non_negative_finite_weight, -1))) :-
 		bad_vector([a-(-1)], Dataset),
 		tfidf_recommender::learn(Dataset, _).
 
-	test(variable_weight, error(instantiation_error)) :-
+	test(tfidf_recommender_variable_weight, error(instantiation_error)) :-
 		bad_vector([a-_], Dataset),
 		tfidf_recommender::learn(Dataset, _).
 
-	test(variable_feature_key, error(instantiation_error)) :-
+	test(tfidf_recommender_variable_feature_key, error(instantiation_error)) :-
 		bad_vector([_-1], Dataset),
 		tfidf_recommender::learn(Dataset, _).
 
-	test(nonpair_entry, error(type_error(pair, bad))) :-
+	test(tfidf_recommender_nonpair_entry, error(type_error(pair, bad))) :-
 		bad_vector([bad], Dataset),
 		tfidf_recommender::learn(Dataset, _).
 
-	test(variable_entry, error(instantiation_error)) :-
+	test(tfidf_recommender_variable_entry, error(instantiation_error)) :-
 		bad_vector([_], Dataset),
 		tfidf_recommender::learn(Dataset, _).
 
-	test(vectorizer_options_on_vectors, error(domain_error(option, vectorizer_options([idf(classic)])))) :-
+	test(tfidf_recommender_vectorizer_options_on_vectors, error(domain_error(option, vectorizer_options([idf(classic)])))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, _, [vectorizer_options([idf(classic)])]).
 
-	test(nested_normalization, error(domain_error(option, vectorizer_options([normalization(l2)])))) :-
+	test(tfidf_recommender_nested_normalization, error(domain_error(option, vectorizer_options([normalization(l2)])))) :-
 		feature_dataset(Dataset),
 		tfidf_recommender::learn(Dataset, _, [vectorizer_options([normalization(l2)])]).
 
-	test(invalid_option, error(domain_error(option, profile_weighting(bad)))) :-
+	test(tfidf_recommender_invalid_option, error(domain_error(option, profile_weighting(bad)))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, _, [profile_weighting(bad)]).
 
-	test(options_variable, error(instantiation_error)) :-
+	test(tfidf_recommender_options_variable, error(instantiation_error)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, _, _).
 
-	test(query_variable, error(instantiation_error)) :-
+	test(tfidf_recommender_query_variable, error(instantiation_error)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model), tfidf_recommender::score(Model, _, x, _).
 
-	test(query_compound, error(type_error(atomic, user(u)))) :-
+	test(tfidf_recommender_query_compound, error(type_error(atomic, user(u)))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model), tfidf_recommender::score(Model, user(u), x, _).
 
-	test(n_variable, error(instantiation_error)) :-
+	test(tfidf_recommender_n_variable, error(instantiation_error)) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model), tfidf_recommender::recommend(Model, u, _, _).
 
-	test(n_noninteger, error(type_error(integer, bad))) :-
+	test(tfidf_recommender_n_noninteger, error(type_error(integer, bad))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model), tfidf_recommender::recommend(Model, u, bad, _).
 
-	test(n_nonpositive, error(domain_error(positive_integer, 0))) :-
+	test(tfidf_recommender_n_nonpositive, error(domain_error(positive_integer, 0))) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, Model), tfidf_recommender::recommend(Model, u, 0, _).
 
-	test(scale_bounds, error(domain_error(rating_scale, 5-1))) :-
+	test(tfidf_recommender_scale_bounds, error(domain_error(rating_scale, 5-1))) :-
 		tfidf_recommender::learn(tfidf_scale_fixture(5, 1), _).
 
-	test(out_of_scale_rating, error(domain_error(rating_scale(2,5), 1))) :-
+	test(tfidf_recommender_out_of_scale_rating, error(domain_error(rating_scale(2,5), 1))) :-
 		tfidf_recommender::learn(tfidf_scale_fixture(2, 5), _).
 
-	test(valid_scale, deterministic(Score =~= 1.0)) :-
+	test(tfidf_recommender_valid_scale, deterministic(Score =~= 1.0)) :-
 		tfidf_recommender::learn(tfidf_scale_fixture(1, 5), Model),
 		tfidf_recommender::score(Model, u, x, Score).
 
-	test(incomplete_model, variant(Model, Copy)) :-
+	test(tfidf_recommender_incomplete_model, variant(Model, Copy)) :-
 		Model = tfidf_model(_,_,_,_,_,_,_), copy_term(Model, Copy),
 		\+ tfidf_recommender::valid_recommender(Model).
 
-	test(tampered_profiles, fail) :-
+	test(tfidf_recommender_tampered_profiles, fail) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, tfidf_model(Ratings,Contents,Vectors,_,Vectorizer,Scale,Diagnostics)),
 		tfidf_recommender::valid_recommender(tfidf_model(Ratings,Contents,Vectors,[],Vectorizer,Scale,Diagnostics)).
 
-	test(tampered_vectors, fail) :-
+	test(tfidf_recommender_tampered_vectors, fail) :-
 		vector_dataset(3, 3, Dataset),
 		tfidf_recommender::learn(Dataset, tfidf_model(Ratings,Contents,_,Profiles,Vectorizer,Scale,Diagnostics)),
 		tfidf_recommender::valid_recommender(tfidf_model(Ratings,Contents,[],Profiles,Vectorizer,Scale,Diagnostics)).
 
-	test(tampered_vectorizer, fail) :-
+	test(tfidf_recommender_tampered_vectorizer, fail) :-
 		feature_dataset(Dataset), tfidf_recommender::learn(Dataset, tfidf_model(Ratings,Contents,Vectors,Profiles,_,Scale,Diagnostics)),
 		tfidf_recommender::valid_recommender(tfidf_model(Ratings,Contents,Vectors,Profiles,none,Scale,Diagnostics)).
 
-	test(tampered_diagnostics, fail) :-
+	test(tfidf_recommender_tampered_diagnostics, fail) :-
 		vector_dataset(3, 3, Dataset), tfidf_recommender::learn(Dataset, tfidf_model(Ratings,Contents,Vectors,Profiles,Vectorizer,Scale,Diagnostics)),
 		append(Diagnostics, [item_count(99)], Other),
 		tfidf_recommender::valid_recommender(tfidf_model(Ratings,Contents,Vectors,Profiles,Vectorizer,Scale,Other)).
 
-	test(extra_diagnostics, deterministic) :-
+	test(tfidf_recommender_extra_diagnostics, deterministic) :-
 		vector_dataset(3, 3, Dataset), tfidf_recommender::learn(Dataset, tfidf_model(Ratings,Contents,Vectors,Profiles,Vectorizer,Scale,Diagnostics)),
 		append(Diagnostics, [note(extra)], Other),
 		tfidf_recommender::valid_recommender(tfidf_model(Ratings,Contents,Vectors,Profiles,Vectorizer,Scale,Other)).
 
-	test(diagnostics, deterministic(Diagnostics == Enumerated)) :-
+	test(tfidf_recommender_diagnostics, deterministic(Diagnostics == Enumerated)) :-
 		vector_dataset(3, 3, Dataset), tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::diagnostics(Model, Diagnostics),
 		memberchk(item_count(3), Diagnostics),
@@ -1380,7 +1380,7 @@
 		memberchk(non_empty_profile_count(1), Diagnostics),
 		findall(Diagnostic, tfidf_recommender::diagnostic(Model, Diagnostic), Enumerated).
 
-	test(export_round_trip, deterministic) :-
+	test(tfidf_recommender_export_round_trip, deterministic) :-
 		feature_dataset(Dataset), tfidf_recommender::learn(Dataset, Model),
 		^^file_path('tfidf_saved.pl', File),
 		tfidf_recommender::export_to_file(Dataset, Model, tfidf_saved, File),
@@ -1392,52 +1392,52 @@
 		tfidf_recommender::recommend(Model, u, 10, Items),
 		tfidf_recommender::recommend(Loaded, u, 10, Items).
 
-	test(export_clause, deterministic(Clauses == [saved(Model)])) :-
+	test(tfidf_recommender_export_clause, deterministic(Clauses == [saved(Model)])) :-
 		vector_dataset(3, 3, Dataset), tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::export_to_clauses(Dataset, Model, saved, Clauses).
 
-	test(print, deterministic) :-
+	test(tfidf_recommender_print, deterministic) :-
 		^^suppress_text_output,
 		vector_dataset(3, 3, Dataset), tfidf_recommender::learn(Dataset, Model), tfidf_recommender::print_recommender(Model).
 
-	test(score_implemented_locally, deterministic) :-
+	test(tfidf_recommender_score_implemented_locally, deterministic) :-
 		tfidf_recommender::predicate_property(score(_, _, _, _), defined_in(tfidf_recommender)).
 
-	test(variable_model, error(instantiation_error)) :-
+	test(tfidf_recommender_variable_model, error(instantiation_error)) :-
 		tfidf_recommender::score(_, u, x, _).
 
-	test(invalid_model, error(domain_error(recommender, bad))) :-
+	test(tfidf_recommender_invalid_model, error(domain_error(recommender, bad))) :-
 		tfidf_recommender::recommend(bad, u, 1, _).
 
-	test(duplicate_ratings, error(domain_error(duplicate_rating, u-x))) :-
+	test(tfidf_recommender_duplicate_ratings, error(domain_error(duplicate_rating, u-x))) :-
 		tfidf_recommender::learn(tfidf_dataset([rating(u,x,1),rating(u,x,2)], [x], [x-vector([])]), _).
 
-	test(empty_ratings, error(domain_error(non_empty_ratings, _))) :-
+	test(tfidf_recommender_empty_ratings, error(domain_error(non_empty_ratings, _))) :-
 		tfidf_recommender::learn(tfidf_dataset([], [x], [x-vector([])]), _).
 
-	test(nonnumeric_rating, error(type_error(number, bad))) :-
+	test(tfidf_recommender_nonnumeric_rating, error(type_error(number, bad))) :-
 		tfidf_recommender::learn(tfidf_dataset([rating(u,x,bad)], [x], [x-vector([])]), _).
 
-	test(variable_rating_identifier, error(instantiation_error)) :-
+	test(tfidf_recommender_variable_rating_identifier, error(instantiation_error)) :-
 		tfidf_recommender::learn(tfidf_dataset([rating(_,x,1)], [x], [x-vector([])]), _).
 
-	test(compound_rating_identifier, error(type_error(atomic, user(u)))) :-
+	test(tfidf_recommender_compound_rating_identifier, error(type_error(atomic, user(u)))) :-
 		tfidf_recommender::learn(tfidf_dataset([rating(user(u),x,1)], [x], [x-vector([])]), _).
 
-	test(inconsistent_rating_count, error(consistency_error(rating_count, 9, 1))) :-
+	test(tfidf_recommender_inconsistent_rating_count, error(consistency_error(rating_count, 9, 1))) :-
 		tfidf_recommender::learn(tfidf_count_fixture, _).
 
-	test(score_recommend_agreement, deterministic) :-
+	test(tfidf_recommender_score_recommend_agreement, deterministic) :-
 		feature_dataset(Dataset), tfidf_recommender::learn(Dataset, Model),
 		tfidf_recommender::recommend(Model, u, 1, [second-Recommended]),
 		tfidf_recommender::score(Model, u, second, Direct),
 		assertion(Recommended =~= Direct).
 
-	test(inconsistent_frequency_bounds, error(domain_error(option, minimum_document_frequency(2)))) :-
+	test(tfidf_recommender_inconsistent_frequency_bounds, error(domain_error(option, minimum_document_frequency(2)))) :-
 		feature_dataset(Dataset),
 		tfidf_recommender::learn(Dataset, _, [vectorizer_options([minimum_document_frequency(2),maximum_document_frequency(1)])]).
 
-	test(frequency_filter_empty_vocabulary, error(domain_error(non_empty_vocabulary, _))) :-
+	test(tfidf_recommender_frequency_filter_empty_vocabulary, error(domain_error(non_empty_vocabulary, _))) :-
 		Dataset = tfidf_dataset([rating(u,x,1)], [x,y], [x-features([a]),y-features([b])]),
 		tfidf_recommender::learn(Dataset, _, [vectorizer_options([minimum_document_frequency(2)])]).
 

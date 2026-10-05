@@ -42,7 +42,7 @@
 	cleanup :-
 		^^clean_file('test_output.pl').
 
-	test(retained_residuals_complete_oracle, deterministic) :-
+	test(theta_forecasting_retained_residuals_complete_oracle, deterministic) :-
 		theta_forecasting::learn(theta_series([10,12,14,16], none), Model,
 			[alpha(0.5),initialization(first),retain_residuals(true)]),
 		theta_forecasting::diagnostics(Model, Diagnostics),
@@ -51,7 +51,7 @@
 		Second =~= 2.0, Third =~= 3.0, Fourth =~= 3.5,
 		ground(Model), theta_forecasting::check_forecaster(Model).
 
-	test(retained_residuals_gap_oracle, deterministic) :-
+	test(theta_forecasting_retained_residuals_gap_oracle, deterministic) :-
 		Series = [10,Missing,14,16], copy_term(Series, Before),
 		theta_forecasting::learn(theta_series(Series, none), Model,
 			[alpha(0.5),initialization(first),retain_residuals(true)]),
@@ -60,48 +60,48 @@
 		Third =~= 4.0, Fourth =~= 4.0,
 		variant(Series, Before), var(Missing), ground(Model), theta_forecasting::check_forecaster(Model).
 
-	test(retained_residuals_default_off, deterministic) :-
+	test(theta_forecasting_retained_residuals_default_off, deterministic) :-
 		learn_line(0.5, Model), theta_forecasting::diagnostics(Model, Diagnostics),
 		memberchk(residuals(none), Diagnostics), memberchk(residual_indices(none), Diagnostics),
 		theta_forecasting::default_option(retain_residuals(false)).
 
-	test(retained_residuals_explicit_off, deterministic(Default == Explicit)) :-
+	test(theta_forecasting_retained_residuals_explicit_off, deterministic(Default == Explicit)) :-
 		Dataset = theta_series([10,12,14,16], none), Options = [alpha(0.5),initialization(first)],
 		theta_forecasting::learn(Dataset, Default, Options),
 		theta_forecasting::learn(Dataset, Explicit, [retain_residuals(false)| Options]).
 
-	test(retained_residuals_leading, deterministic) :-
+	test(theta_forecasting_retained_residuals_leading, deterministic) :-
 		theta_forecasting::learn(theta_series([_,10,12], none), Model,
 			[alpha(0.5),initialization(first),retain_residuals(true)]),
 		theta_forecasting::diagnostics(Model, Diagnostics),
 		memberchk(residual_indices([3]), Diagnostics), memberchk(residuals([Error]), Diagnostics), Error =~= 2.0.
 
-	test(retained_residuals_trailing, deterministic) :-
+	test(theta_forecasting_retained_residuals_trailing, deterministic) :-
 		theta_forecasting::learn(theta_series([10,12,_], none), Model,
 			[alpha(0.5),initialization(first),retain_residuals(true)]),
 		theta_forecasting::diagnostics(Model, Diagnostics),
 		memberchk(residual_indices([2]), Diagnostics), memberchk(residuals([Error]), Diagnostics), Error =~= 2.0.
 
-	test(retained_residuals_alpha_zero, deterministic) :-
+	test(theta_forecasting_retained_residuals_alpha_zero, deterministic) :-
 		theta_forecasting::learn(theta_series([10,12,14,16], none), Model,
 			[alpha(0),initialization(first),retain_residuals(true)]),
 		theta_forecasting::diagnostics(Model, Diagnostics), memberchk(residuals([Second,Third,Fourth]), Diagnostics),
 		Second =~= 2.0, Third =~= 4.0, Fourth =~= 6.0.
 
-	test(retained_residuals_alpha_one, deterministic) :-
+	test(theta_forecasting_retained_residuals_alpha_one, deterministic) :-
 		theta_forecasting::learn(theta_series([10,12,14,16], none), Model,
 			[alpha(1),initialization(first),retain_residuals(true)]),
 		theta_forecasting::diagnostics(Model, Diagnostics), memberchk(residuals([Second,Third,Fourth]), Diagnostics),
 		Second =~= 2.0, Third =~= 2.0, Fourth =~= 2.0.
 
-	test(retained_residuals_odd_phase, deterministic) :-
+	test(theta_forecasting_retained_residuals_odd_phase, deterministic) :-
 		Series = [8,10,12,8,10,12,8], Dataset = theta_series(Series, 3),
 		Options = [alpha(0.5),initialization(first),seasonal(additive),retain_residuals(true)],
 		theta_forecasting::learn(Dataset, Model, Options),
 		theta_forecasting::diagnostics(Model, Diagnostics), memberchk(residual_indices([2,3,4,5,6,7]), Diagnostics),
 		theta_forecasting::fitted_values(Dataset, Fits, Options), check_retained_diagnostics(Series, Fits, Diagnostics).
 
-	test(retained_residuals_original_multiplicative_scale, deterministic) :-
+	test(theta_forecasting_retained_residuals_original_multiplicative_scale, deterministic) :-
 		Series = [5,15,6,18,7,21,_,24,8,24,9,27], Dataset = theta_series(Series, 2),
 		Options = [alpha(0),initialization(first),seasonal(multiplicative),retain_residuals(true)],
 		theta_forecasting::learn(Dataset, Model, Options),
@@ -114,20 +114,20 @@
 		abs(SSE - Objective) > 1,
 		theta_forecasting::fitted_values(Dataset, Fits, Options), check_retained_diagnostics(Series, Fits, Diagnostics).
 
-	test(retained_residuals_auto_seasonal, deterministic) :-
+	test(theta_forecasting_retained_residuals_auto_seasonal, deterministic) :-
 		Series = [5,15,5,15,_,15,5,15,5,15,5,15,5,15,5,15,5,15,5,15,5,15,5,15], Dataset = theta_series(Series, 2),
 		theta_forecasting::learn(Dataset, Model, [retain_residuals(true)]),
 		theta_forecasting::diagnostics(Model, Diagnostics), memberchk(seasonal_mode(multiplicative), Diagnostics),
 		theta_forecasting::fitted_values(Dataset, Fits, [retain_residuals(true)]),
 		check_retained_diagnostics(Series, Fits, Diagnostics).
 
-	test(retained_residuals_strict_policy, deterministic) :-
+	test(theta_forecasting_retained_residuals_strict_policy, deterministic) :-
 		theta_forecasting::learn(theta_series([10,12,14,16], none), Model,
 			[alpha(0.5),initialization(first),retain_residuals(true),missing_policy(error)]),
 		theta_forecasting::check_forecaster(Model), theta_forecasting::diagnostics(Model, Diagnostics),
 		memberchk(residual_indices([2,3,4]), Diagnostics).
 
-	test(retained_residuals_export_roundtrip, deterministic) :-
+	test(theta_forecasting_retained_residuals_export_roundtrip, deterministic) :-
 		Series = [_,12,8,12,8,12,_,12,8,12,8,12,8,_], Dataset = theta_series(Series, 2),
 		theta_forecasting::learn(Dataset, Model, [alpha(0.5),initialization(first),seasonal(additive),retain_residuals(true)]),
 		theta_forecasting::export_to_clauses(Dataset, Model, saved, [saved(FactCopy)]), FactCopy == Model,
@@ -141,13 +141,13 @@
 		theta_forecasting::fitted_values(Dataset, Fits, [alpha(0.5),initialization(first),seasonal(additive)]),
 		check_retained_diagnostics(Series, Fits, Diagnostics).
 
-	test(retained_residuals_invalid_option, error(domain_error(option, retain_residuals(yes)))) :-
+	test(theta_forecasting_retained_residuals_invalid_option, error(domain_error(option, retain_residuals(yes)))) :-
 		theta_forecasting::learn(theta_series([10,12], none), _, [retain_residuals(yes)]).
 
-	test(retained_residuals_variable_option, deterministic(var(Boolean))) :-
+	test(theta_forecasting_retained_residuals_variable_option, deterministic(var(Boolean))) :-
 		\+ theta_forecasting::valid_option(retain_residuals(Boolean)).
 
-	test(retained_residuals_bad_payloads, deterministic) :-
+	test(theta_forecasting_retained_residuals_bad_payloads, deterministic) :-
 		theta_forecasting::learn(theta_series([10,12,14,16], none), Model,
 			[alpha(0.5),initialization(first),retain_residuals(true)]),
 		check_invalid_gap_fields([residuals(none),residual_indices(none),residuals([]),residual_indices([]),
@@ -158,43 +158,43 @@
 			residual_indices([2,3,bad]),residual_indices([2,3,_]),residual_indices([2,3|_]),
 			residual_indices([2,3|bad])], Model).
 
-	test(retained_residuals_disabled_payloads, deterministic) :-
+	test(theta_forecasting_retained_residuals_disabled_payloads, deterministic) :-
 		learn_line(0.5, Model),
 		check_invalid_gap_fields([residuals([]),residual_indices([]),residuals([2,3,3.5]),residual_indices([2,3,4])], Model).
 
-	test(retained_residuals_missing_metadata, fail) :-
+	test(theta_forecasting_retained_residuals_missing_metadata, fail) :-
 		learn_line(0.5, theta_forecaster(State, Diagnostics)), select(residuals(_), Diagnostics, Partial),
 		theta_forecasting::valid_forecaster(theta_forecaster(State, Partial)).
 
-	test(retained_residuals_missing_indices, fail) :-
+	test(theta_forecasting_retained_residuals_missing_indices, fail) :-
 		learn_line(0.5, theta_forecaster(State, Diagnostics)), select(residual_indices(_), Diagnostics, Partial),
 		theta_forecasting::valid_forecaster(theta_forecaster(State, Partial)).
 
-	test(retained_residuals_duplicate_metadata, fail) :-
+	test(theta_forecasting_retained_residuals_duplicate_metadata, fail) :-
 		learn_line(0.5, theta_forecaster(State, Diagnostics)),
 		theta_forecasting::valid_forecaster(theta_forecaster(State, [residuals(none)| Diagnostics])).
 
-	test(retained_residuals_wrong_arity, fail) :-
+	test(theta_forecasting_retained_residuals_wrong_arity, fail) :-
 		learn_line(0.5, Model), replace_field(Model, residual_indices(_), residual_indices(none,none), Invalid),
 		theta_forecasting::valid_forecaster(Invalid).
 
-	test(retained_residuals_old_options_rejected, fail) :-
+	test(theta_forecasting_retained_residuals_old_options_rejected, fail) :-
 		learn_line(0.5, Model),
 		replace_field(Model, options(_), options([alpha(0.5),initialization(first),seasonal(none),frequency(1),missing_policy(skip_update)]), Invalid),
 		theta_forecasting::valid_forecaster(Invalid).
 
-	test(retained_residuals_no_total_recomputation, deterministic) :-
+	test(theta_forecasting_retained_residuals_no_total_recomputation, deterministic) :-
 		theta_forecasting::learn(theta_series([10,12,14,16], none), Model,
 			[alpha(0.5),initialization(first),retain_residuals(true)]),
 		replace_field(Model, residuals(_), residuals([100,200,300]), Modified), !,
 		theta_forecasting::check_forecaster(Modified).
 
-	test(fitted_values_complete_oracle, deterministic) :-
+	test(theta_forecasting_fitted_values_complete_oracle, deterministic) :-
 		theta_forecasting::fitted_values(theta_series([10,12,14,16], none), [Anchor,Second,Third,Fourth],
 			[alpha(0.5),initialization(first),seasonal(none)]),
 		var(Anchor), Second =~= 10.0, Third =~= 11.0, Fourth =~= 12.5.
 
-	test(fitted_values_gap_oracle, deterministic) :-
+	test(theta_forecasting_fitted_values_gap_oracle, deterministic) :-
 		Series = [10,Missing,14,16], copy_term(Series, Before),
 		theta_forecasting::fitted_values(theta_series(Series, none), [Anchor,Gap,Third,Fourth],
 			[alpha(0.5),initialization(first),seasonal(none)]),
@@ -202,33 +202,33 @@
 		Anchor \== Gap, Anchor \== Missing, Gap \== Missing,
 		Third =~= 10.0, Fourth =~= 12.0.
 
-	test(fitted_values_leading_oracle, deterministic) :-
+	test(theta_forecasting_fitted_values_leading_oracle, deterministic) :-
 		theta_forecasting::fitted_values(theta_series([_,10,12], none), [Leading,Anchor,Third],
 			[alpha(0.5),initialization(first)]),
 		var(Leading), var(Anchor), Leading \== Anchor, Third =~= 10.0.
 
-	test(fitted_values_trailing_oracle, deterministic) :-
+	test(theta_forecasting_fitted_values_trailing_oracle, deterministic) :-
 		theta_forecasting::fitted_values(theta_series([10,12,_], none), [Anchor,Second,Trailing],
 			[alpha(0.5),initialization(first)]),
 		var(Anchor), var(Trailing), Anchor \== Trailing, Second =~= 10.0.
 
-	test(fitted_values_default_options, deterministic) :-
+	test(theta_forecasting_fitted_values_default_options, deterministic) :-
 		Dataset = theta_series([10,12,14,16], none),
 		theta_forecasting::fitted_values(Dataset, Default),
 		theta_forecasting::fitted_values(Dataset, Explicit, []),
 		variant(Default, Explicit).
 
-	test(fitted_values_alpha_zero, deterministic) :-
+	test(theta_forecasting_fitted_values_alpha_zero, deterministic) :-
 		theta_forecasting::fitted_values(theta_series([10,12,14,16], none), [Anchor,Second,Third,Fourth],
 			[alpha(0),initialization(first)]),
 		var(Anchor), Second =~= 10.0, Third =~= 10.0, Fourth =~= 10.0.
 
-	test(fitted_values_alpha_one, deterministic) :-
+	test(theta_forecasting_fitted_values_alpha_one, deterministic) :-
 		theta_forecasting::fitted_values(theta_series([10,12,14,16], none), [Anchor,Second,Third,Fourth],
 			[alpha(1),initialization(first)]),
 		var(Anchor), Second =~= 10.0, Third =~= 12.0, Fourth =~= 14.0.
 
-	test(fitted_values_optimized_anchor, deterministic) :-
+	test(theta_forecasting_fitted_values_optimized_anchor, deterministic) :-
 		Dataset = theta_series([_,10,_,14,16,_], none), Options = [alpha(0.5)],
 		theta_forecasting::learn(Dataset, Model, Options),
 		theta_forecasting::diagnostics(Model, Diagnostics), memberchk(initial_level(Initial), Diagnostics),
@@ -238,14 +238,14 @@
 		First =~= Initial,
 		check_fitted_diagnostics([_,10,_,14,16,_], Values, Diagnostics).
 
-	test(fitted_values_complete_metrics, deterministic) :-
+	test(theta_forecasting_fitted_values_complete_metrics, deterministic) :-
 		Series = [10,12,14,16], learn_line(0.5, Model),
 		theta_forecasting::diagnostics(Model, Diagnostics),
 		theta_forecasting::fitted_values(theta_series(Series, none), Values,
 			[alpha(0.5),initialization(first),seasonal(none)]),
 		check_fitted_diagnostics(Series, Values, Diagnostics).
 
-	test(fitted_values_gap_metrics, deterministic) :-
+	test(theta_forecasting_fitted_values_gap_metrics, deterministic) :-
 		Series = [10,_,14,16], Dataset = theta_series(Series, none),
 		Options = [alpha(0.5),initialization(first)],
 		theta_forecasting::learn(Dataset, Model, Options),
@@ -253,23 +253,23 @@
 		theta_forecasting::fitted_values(Dataset, Values, Options),
 		check_fitted_diagnostics(Series, Values, Diagnostics).
 
-	test(fitted_values_additive_oracle, deterministic) :-
+	test(theta_forecasting_fitted_values_additive_oracle, deterministic) :-
 		theta_forecasting::fitted_values(theta_series([8,12,8,12,8,12], 2), [Anchor,Second,Third,Fourth,Fifth,Sixth],
 			[alpha(0.5),initialization(first),seasonal(additive)]),
 		var(Anchor), Second =~= 12.0, Third =~= 8.0, Fourth =~= 12.0, Fifth =~= 8.0, Sixth =~= 12.0.
 
-	test(fitted_values_multiplicative_oracle, deterministic) :-
+	test(theta_forecasting_fitted_values_multiplicative_oracle, deterministic) :-
 		theta_forecasting::fitted_values(theta_series([5,15,5,15,5,15], 2), [Anchor,Second,Third,Fourth,Fifth,Sixth],
 			[alpha(0.5),initialization(first),seasonal(multiplicative)]),
 		var(Anchor), Second =~= 15.0, Third =~= 5.0, Fourth =~= 15.0, Fifth =~= 5.0, Sixth =~= 15.0.
 
-	test(fitted_values_odd_training_phase, deterministic) :-
+	test(theta_forecasting_fitted_values_odd_training_phase, deterministic) :-
 		theta_forecasting::fitted_values(theta_series([8,10,12,8,10,12,8], 3), [Anchor,Second,Third,Fourth,Fifth,Sixth,Seventh],
 			[alpha(0.5),initialization(first),seasonal(additive)]),
 		var(Anchor), Second =~= 10.0, Third =~= 12.0, Fourth =~= 8.0,
 		Fifth =~= 10.0, Sixth =~= 12.0, Seventh =~= 8.0.
 
-	test(fitted_values_seasonal_independent_placeholders, deterministic) :-
+	test(theta_forecasting_fitted_values_seasonal_independent_placeholders, deterministic) :-
 		Series = [Missing,12,8,12,8,12,Missing,12,8,12,8,12,8,Missing], copy_term(Series, Before),
 		theta_forecasting::fitted_values(theta_series(Series, 2), Values,
 			[alpha(0.5),initialization(first),seasonal(additive)]),
@@ -280,7 +280,7 @@
 		Leading \== Missing, Anchor \== Missing, Gap \== Missing, Trailing \== Missing,
 		Third =~= 8.0, Fourth =~= 12.0.
 
-	test(fitted_values_multiplicative_nonzero_oracle, deterministic) :-
+	test(theta_forecasting_fitted_values_multiplicative_nonzero_oracle, deterministic) :-
 		Series = [5,15,6,18,7,21,_,24,8,24,9,27], Dataset = theta_series(Series, 2),
 		Options = [alpha(0),initialization(first),seasonal(multiplicative)],
 		theta_forecasting::learn(Dataset, Model, Options),
@@ -294,7 +294,7 @@
 		Ninth =~= 5.0, Tenth =~= ExpectedHigh, Eleventh =~= 5.0, Twelfth =~= ExpectedHigh,
 		check_fitted_diagnostics(Series, Values, Diagnostics).
 
-	test(fitted_values_auto_seasonal_multiplicative, deterministic) :-
+	test(theta_forecasting_fitted_values_auto_seasonal_multiplicative, deterministic) :-
 		Series = [5,15,5,15,_,15,5,15,5,15,5,15,5,15,5,15,5,15,5,15,5,15,5,15],
 		Dataset = theta_series(Series, 2),
 		theta_forecasting::learn(Dataset, Model),
@@ -302,7 +302,7 @@
 		theta_forecasting::fitted_values(Dataset, Values),
 		check_fitted_diagnostics(Series, Values, Diagnostics).
 
-	test(fitted_values_auto_seasonal_additive, deterministic) :-
+	test(theta_forecasting_fitted_values_auto_seasonal_additive, deterministic) :-
 		Series = [-2,2,-2,2,_,2,-2,2,-2,2,-2,2,-2,2,-2,2,-2,2,-2,2,-2,2,-2,2],
 		Dataset = theta_series(Series, 2),
 		theta_forecasting::learn(Dataset, Model),
@@ -310,61 +310,61 @@
 		theta_forecasting::fitted_values(Dataset, Values),
 		check_fitted_diagnostics(Series, Values, Diagnostics).
 
-	test(fitted_values_strict_complete, deterministic) :-
+	test(theta_forecasting_fitted_values_strict_complete, deterministic) :-
 		Dataset = theta_series([10,12,14,16], none),
 		theta_forecasting::fitted_values(Dataset, Skip, [alpha(0.5),initialization(first)]),
 		theta_forecasting::fitted_values(Dataset, Strict, [alpha(0.5),initialization(first),missing_policy(error)]),
 		variant(Skip, Strict).
 
-	test(fitted_values_atom_observation, error(type_error(number, missing))) :-
+	test(theta_forecasting_fitted_values_atom_observation, error(type_error(number, missing))) :-
 		theta_forecasting::fitted_values(theta_series([10,missing,14], none), _).
 
-	test(fitted_values_empty, error(domain_error(non_empty_series, theta_series([], none)))) :-
+	test(theta_forecasting_fitted_values_empty, error(domain_error(non_empty_series, theta_series([], none)))) :-
 		theta_forecasting::fitted_values(theta_series([], none), _).
 
-	test(fitted_values_one_known, error(domain_error(insufficient_known_observations, theta_series([_,10,_], none)))) :-
+	test(theta_forecasting_fitted_values_one_known, error(domain_error(insufficient_known_observations, theta_series([_,10,_], none)))) :-
 		theta_forecasting::fitted_values(theta_series([_,10,_], none), _).
 
-	test(fitted_values_all_missing, error(domain_error(insufficient_known_observations, theta_series([_,_], none)))) :-
+	test(theta_forecasting_fitted_values_all_missing, error(domain_error(insufficient_known_observations, theta_series([_,_], none)))) :-
 		theta_forecasting::fitted_values(theta_series([_,_], none), _).
 
-	test(fitted_values_invalid_alpha, error(domain_error(option, alpha(2)))) :-
+	test(theta_forecasting_fitted_values_invalid_alpha, error(domain_error(option, alpha(2)))) :-
 		theta_forecasting::fitted_values(theta_series([10,12], none), _, [alpha(2)]).
 
-	test(fitted_values_variable_options, error(instantiation_error)) :-
+	test(theta_forecasting_fitted_values_variable_options, error(instantiation_error)) :-
 		theta_forecasting::fitted_values(theta_series([10,12], none), _, _).
 
-	test(fitted_values_open_options, error(instantiation_error)) :-
+	test(theta_forecasting_fitted_values_open_options, error(instantiation_error)) :-
 		theta_forecasting::fitted_values(theta_series([10,12], none), _, [alpha(0.5)| _]).
 
-	test(fitted_values_invalid_optimizer, error(domain_error(option, optimizer_options([objective(maximize)])))) :-
+	test(theta_forecasting_fitted_values_invalid_optimizer, error(domain_error(option, optimizer_options([objective(maximize)])))) :-
 		theta_forecasting::fitted_values(theta_series([10,12], none), _, [optimizer_options([objective(maximize)])]).
 
-	test(fitted_values_strict_missing, error(instantiation_error)) :-
+	test(theta_forecasting_fitted_values_strict_missing, error(instantiation_error)) :-
 		theta_forecasting::fitted_values(theta_series([10,_,14], none), _, [missing_policy(error)]).
 
-	test(fitted_values_unestimable_phase, error(domain_error(insufficient_seasonal_phase_observations, 2))) :-
+	test(theta_forecasting_fitted_values_unestimable_phase, error(domain_error(insufficient_seasonal_phase_observations, 2))) :-
 		theta_forecasting::fitted_values(theta_series([8,12,_,12,8,12], 2), _, [seasonal(additive)]).
 
-	test(fitted_values_irrelevant_frequency, error(domain_error(theta_forecasting_option, frequency(2)))) :-
+	test(theta_forecasting_fitted_values_irrelevant_frequency, error(domain_error(theta_forecasting_option, frequency(2)))) :-
 		theta_forecasting::fitted_values(theta_series([10,12], 2), _, [seasonal(none),frequency(2)]).
 
-	test(fitted_values_bad_dataset_frequency, error(type_error(integer, bad))) :-
+	test(theta_forecasting_fitted_values_bad_dataset_frequency, error(type_error(integer, bad))) :-
 		theta_forecasting::fitted_values(theta_series([10,12], bad), _).
 
-	test(fitted_values_nonbinding_invalid_option, deterministic) :-
+	test(theta_forecasting_fitted_values_nonbinding_invalid_option, deterministic) :-
 		Options = [alpha(Alpha)], copy_term(Options, Before),
 		catch((theta_forecasting::fitted_values(theta_series([10,12], none), _, Options), fail),
 			error(domain_error(option,alpha(_)),_), true),
 		var(Alpha), variant(Options, Before).
 
-	test(fixed_oracle, deterministic) :-
+	test(theta_forecasting_fixed_oracle, deterministic) :-
 		learn_line(0.5, Model),
 		theta_forecasting::forecast(Model, 3, [First,Second,Third]),
 		First =~= 16.125, Second =~= 17.125, Third =~= 18.125,
 		theta_forecasting::check_forecaster(Model).
 
-	test(training_errors, deterministic) :-
+	test(theta_forecasting_training_errors, deterministic) :-
 		learn_line(0.5, Model),
 		theta_forecasting::diagnostics(Model, Diagnostics),
 		memberchk(scored_count(3), Diagnostics),
@@ -373,32 +373,32 @@
 		memberchk(mean_absolute_error(MAE), Diagnostics), ExpectedMAE is 8.5/3, MAE =~= ExpectedMAE,
 		memberchk(root_mean_squared_error(RMSE), Diagnostics), ExpectedRMSE is sqrt(25.25/3), RMSE =~= ExpectedRMSE.
 
-	test(alpha_zero, deterministic((First =~= 14.0, Second =~= 15.0, Third =~= 16.0))) :-
+	test(theta_forecasting_alpha_zero, deterministic((First =~= 14.0, Second =~= 15.0, Third =~= 16.0))) :-
 		learn_line(0, Model), theta_forecasting::forecast(Model, 3, [First,Second,Third]).
 
-	test(alpha_one, deterministic((First =~= 17.0, Second =~= 18.0, Third =~= 19.0))) :-
+	test(theta_forecasting_alpha_one, deterministic((First =~= 17.0, Second =~= 18.0, Third =~= 19.0))) :-
 		learn_line(1, Model), theta_forecasting::forecast(Model, 3, [First,Second,Third]).
 
-	test(constant, deterministic((First =~= 7.0, Second =~= 7.0))) :-
+	test(theta_forecasting_constant, deterministic((First =~= 7.0, Second =~= 7.0))) :-
 		theta_forecasting::learn(theta_series([7,7,7,7], none), Model),
 		theta_forecasting::forecast(Model, 2, [First,Second]).
 
-	test(zero_horizon, deterministic(Values == [])) :-
+	test(theta_forecasting_zero_horizon, deterministic(Values == [])) :-
 		learn_line(0.5, Model), theta_forecasting::forecast(Model, 0, Values).
 
-	test(export_fact, deterministic(Copy == Model)) :-
+	test(theta_forecasting_export_fact, deterministic(Copy == Model)) :-
 		learn_line(0.5, Model),
 		theta_forecasting::export_to_clauses(theta_series([10,12,14,16], none), Model, saved, [saved(Copy)]).
 
-	test(invalid_alpha, error(domain_error(option, alpha(2)))) :-
+	test(theta_forecasting_invalid_alpha, error(domain_error(option, alpha(2)))) :-
 		theta_forecasting::learn(theta_series([1,2], none), _, [alpha(2)]).
 
-	test(missing_observation, deterministic) :-
+	test(theta_forecasting_missing_observation, deterministic) :-
 		Series = [1,Missing,3], copy_term(Series, Before),
 		theta_forecasting::learn(theta_series(Series, none), Model),
 		variant(Series, Before), var(Missing), ground(Model), theta_forecasting::check_forecaster(Model).
 
-	test(missing_gap_oracle, deterministic) :-
+	test(theta_forecasting_missing_gap_oracle, deterministic) :-
 		theta_forecasting::learn(theta_series([10,Missing,14,16], none), Model, [alpha(0.5),initialization(first)]),
 		var(Missing), theta_forecasting::forecast(Model, 3, [First,Second,Third]),
 		First =~= 15.875, Second =~= 16.875, Third =~= 17.875,
@@ -410,80 +410,80 @@
 		memberchk(mean_absolute_error(MAE), Diagnostics), MAE =~= 4.0,
 		memberchk(root_mean_squared_error(RMSE), Diagnostics), RMSE =~= 4.0.
 
-	test(missing_leading_oracle, deterministic) :-
+	test(theta_forecasting_missing_leading_oracle, deterministic) :-
 		theta_forecasting::learn(theta_series([_,10,12], none), Model, [alpha(0.5),initialization(first)]),
 		theta_forecasting::forecast(Model, 1, [Forecast]), Forecast =~= 12.75,
 		theta_forecasting::diagnostics(Model, Diagnostics),
 		memberchk(initialization_index(2), Diagnostics), memberchk(scored_count(1), Diagnostics),
 		memberchk(sum_squared_error(SSE), Diagnostics), SSE =~= 4.0.
 
-	test(missing_trailing_oracle, deterministic) :-
+	test(theta_forecasting_missing_trailing_oracle, deterministic) :-
 		theta_forecasting::learn(theta_series([10,12,_], none), Model, [alpha(0.5),initialization(first)]),
 		theta_forecasting::forecast(Model, 1, [Forecast]), Forecast =~= 12.75,
 		theta_forecasting::learn(theta_series([10,12], none), Prefix, [alpha(0.5),initialization(first)]),
 		theta_forecasting::forecast(Prefix, 1, [PrefixForecast]), PrefixForecast =~= 12.5.
 
-	test(missing_optimized_anchor, deterministic) :-
+	test(theta_forecasting_missing_optimized_anchor, deterministic) :-
 		theta_forecasting::learn(theta_series([_,10,12], none), Model, [alpha(0.5)]),
 		theta_forecasting::check_forecaster(Model), theta_forecasting::diagnostics(Model, Diagnostics),
 		memberchk(initialization_index(2), Diagnostics), memberchk(scored_count(1), Diagnostics).
 
-	test(missing_auto_alpha_first, deterministic) :-
+	test(theta_forecasting_missing_auto_alpha_first, deterministic) :-
 		theta_forecasting::learn(theta_series([_,10,_,14,16,_], none), Model, [initialization(first)]),
 		theta_forecasting::check_forecaster(Model), theta_forecasting::diagnostics(Model, Diagnostics),
 		memberchk(scored_count(2), Diagnostics), memberchk(initialization_index(2), Diagnostics).
 
-	test(missing_atom_rejected, error(type_error(number, missing))) :-
+	test(theta_forecasting_missing_atom_rejected, error(type_error(number, missing))) :-
 		theta_forecasting::learn(theta_series([10,missing,14,16], none), _).
-	test(missing_compound_rejected, error(type_error(number, absent(value)))) :-
+	test(theta_forecasting_missing_compound_rejected, error(type_error(number, absent(value)))) :-
 		theta_forecasting::learn(theta_series([10,absent(value),14,16], none), _).
 
-	test(missing_strict_variable, error(instantiation_error)) :-
+	test(theta_forecasting_missing_strict_variable, error(instantiation_error)) :-
 		theta_forecasting::learn(theta_series([1,_,3], none), _, [missing_policy(error)]).
 
-	test(missing_strict_marker, error(type_error(number, missing))) :-
+	test(theta_forecasting_missing_strict_marker, error(type_error(number, missing))) :-
 		theta_forecasting::learn(theta_series([1,missing,3], none), _, [missing_policy(error)]).
 
-	test(missing_all, error(domain_error(insufficient_known_observations, theta_series([_,_], none)))) :-
+	test(theta_forecasting_missing_all, error(domain_error(insufficient_known_observations, theta_series([_,_], none)))) :-
 		theta_forecasting::learn(theta_series([_,_], none), _).
 
-	test(missing_one_known, error(domain_error(insufficient_known_observations, theta_series([_,1,_], none)))) :-
+	test(theta_forecasting_missing_one_known, error(domain_error(insufficient_known_observations, theta_series([_,1,_], none)))) :-
 		theta_forecasting::learn(theta_series([_,1,_], none), _).
 
-	test(missing_marker_option_rejected, error(domain_error(option, missing_value(missing)))) :-
+	test(theta_forecasting_missing_marker_option_rejected, error(domain_error(option, missing_value(missing)))) :-
 		theta_forecasting::learn(theta_series([1,2], none), _, [missing_value(missing)]).
 
-	test(missing_variable_policy, deterministic(var(Policy))) :-
+	test(theta_forecasting_missing_variable_policy, deterministic(var(Policy))) :-
 		\+ theta_forecasting::valid_option(missing_policy(Policy)).
 
-	test(nonnumeric, error(type_error(number, bad))) :-
+	test(theta_forecasting_nonnumeric, error(type_error(number, bad))) :-
 		theta_forecasting::learn(theta_series([1,bad], none), _).
 
-	test(short, error(domain_error(series_length, theta_series([1], none)))) :-
+	test(theta_forecasting_short, error(domain_error(series_length, theta_series([1], none)))) :-
 		theta_forecasting::learn(theta_series([1], none), _).
 
-	test(empty, error(domain_error(non_empty_series, theta_series([], none)))) :-
+	test(theta_forecasting_empty, error(domain_error(non_empty_series, theta_series([], none)))) :-
 		theta_forecasting::learn(theta_series([], none), _).
 
-	test(invalid_model, error(domain_error(forecaster, wrong))) :-
+	test(theta_forecasting_invalid_model, error(domain_error(forecaster, wrong))) :-
 		theta_forecasting::forecast(wrong, 0, _).
 
-	test(variable_model, error(instantiation_error)) :-
+	test(theta_forecasting_variable_model, error(instantiation_error)) :-
 		theta_forecasting::check_forecaster(_).
 
-	test(negative_horizon, error(domain_error(non_negative_integer, -1))) :-
+	test(theta_forecasting_negative_horizon, error(domain_error(non_negative_integer, -1))) :-
 		learn_line(0.5, Model), theta_forecasting::forecast(Model, -1, _).
 
-	test(missing_error_metadata, fail) :-
+	test(theta_forecasting_missing_error_metadata, fail) :-
 		learn_line(0.5, theta_forecaster(State, Diagnostics)),
 		select(scored_count(_), Diagnostics, Partial),
 		theta_forecasting::valid_forecaster(theta_forecaster(State, Partial)).
 
-	test(nonbinding_validation, deterministic) :-
+	test(theta_forecasting_nonbinding_validation, deterministic) :-
 		Partial = theta_forecaster(theta_state(_,_,_,_,none), _), copy_term(Partial, Before),
 		\+ theta_forecasting::valid_forecaster(Partial), variant(Partial, Before).
 
-	test(auto_first_replay, deterministic) :-
+	test(theta_forecasting_auto_first_replay, deterministic) :-
 		Dataset = theta_series([10,12,14,16], none),
 		theta_forecasting::learn(Dataset, Automatic, [initialization(first)]),
 		theta_forecasting::forecaster_options(Automatic, [alpha(Alpha),initialization(first),seasonal(none),frequency(1),missing_policy(skip_update),retain_residuals(false)]),
@@ -492,82 +492,82 @@
 		theta_forecasting::forecast(Fixed, 3, Forecasts),
 		theta_forecasting::check_forecaster(Automatic).
 
-	test(default_auto, deterministic) :-
+	test(theta_forecasting_default_auto, deterministic) :-
 		Dataset = theta_series([10,12,14,16], none),
 		theta_forecasting::learn(Dataset, First), theta_forecasting::learn(Dataset, Second),
 		First == Second, theta_forecasting::check_forecaster(First),
 		theta_forecasting::diagnostics(First, Diagnostics),
 		memberchk(fitting(nelder_mead), Diagnostics), memberchk(scored_count(3), Diagnostics).
 
-	test(fixed_alpha_optimized_level, deterministic) :-
+	test(theta_forecasting_fixed_alpha_optimized_level, deterministic) :-
 		theta_forecasting::learn(theta_series([10,12,14,16], none), Model, [alpha(0.5)]),
 		theta_forecasting::check_forecaster(Model),
 		theta_forecasting::diagnostics(Model, Diagnostics), memberchk(fitting(nelder_mead), Diagnostics).
 
-	test(iteration_limit, deterministic) :-
+	test(theta_forecasting_iteration_limit, deterministic) :-
 		theta_forecasting::learn(theta_series([10,12,14,16], none), Model, [optimizer_options([max_iterations(1)])]),
 		theta_forecasting::check_forecaster(Model),
 		theta_forecasting::diagnostics(Model, Diagnostics), memberchk(convergence(maximum_iterations), Diagnostics).
 
-	test(tiny_alpha, deterministic) :-
+	test(theta_forecasting_tiny_alpha, deterministic) :-
 		learn_line(0.000000000001, Model), theta_forecasting::forecast(Model, 1, [First]), First =~= 14.0.
 
-	test(invalid_optimizer_option, error(domain_error(option, optimizer_options([objective(maximize)])))) :-
+	test(theta_forecasting_invalid_optimizer_option, error(domain_error(option, optimizer_options([objective(maximize)])))) :-
 		theta_forecasting::learn(theta_series([1,2], none), _, [optimizer_options([objective(maximize)])]).
 
-	test(duplicate_optimizer_options, fail) :-
+	test(theta_forecasting_duplicate_optimizer_options, fail) :-
 		theta_forecasting::valid_option(optimizer_options([tol_x(0.1),tol_x(0.2)])).
 
-	test(seasonal_additive, deterministic) :-
+	test(theta_forecasting_seasonal_additive, deterministic) :-
 		learn_season([8,12,8,12,8,12], 2, additive, Model),
 		theta_forecasting::forecast(Model, 4, [First,Second,Third,Fourth]),
 		First =~= 8.0, Second =~= 12.0, Third =~= 8.0, Fourth =~= 12.0,
 		theta_forecasting::check_forecaster(Model).
 
-	test(seasonal_multiplicative, deterministic) :-
+	test(theta_forecasting_seasonal_multiplicative, deterministic) :-
 		learn_season([5,15,5,15,5,15], 2, multiplicative, Model),
 		theta_forecasting::forecast(Model, 3, [First,Second,Third]),
 		First =~= 5.0, Second =~= 15.0, Third =~= 5.0,
 		theta_forecasting::check_forecaster(Model).
 
-	test(seasonal_partial_cycle, deterministic((First =~= 10.0, Second =~= 12.0, Third =~= 8.0, Fourth =~= 10.0))) :-
+	test(theta_forecasting_seasonal_partial_cycle, deterministic((First =~= 10.0, Second =~= 12.0, Third =~= 8.0, Fourth =~= 10.0))) :-
 		learn_season([8,10,12,8,10,12,8], 3, additive, Model),
 		theta_forecasting::forecast(Model, 4, [First,Second,Third,Fourth]).
 
-	test(auto_multiplicative, deterministic) :-
+	test(theta_forecasting_auto_multiplicative, deterministic) :-
 		learn_season([5,15,5,15,5,15,5,15,5,15,5,15], 2, auto, Model),
 		theta_forecasting::forecaster_options(Model, [alpha(_),initialization(first),seasonal(multiplicative),frequency(2),missing_policy(skip_update),retain_residuals(false)]),
 		theta_forecasting::check_forecaster(Model).
 
-	test(auto_additive_signed, deterministic) :-
+	test(theta_forecasting_auto_additive_signed, deterministic) :-
 		learn_season([-2,2,-2,2,-2,2,-2,2,-2,2,-2,2], 2, auto, Model),
 		theta_forecasting::forecaster_options(Model, [alpha(_),initialization(first),seasonal(additive),frequency(2),missing_policy(skip_update),retain_residuals(false)]),
 		theta_forecasting::forecast(Model, 2, [First,Second]), First =~= -2.0, Second =~= 2.0.
 
-	test(auto_two_cycles_nonseasonal, deterministic) :-
+	test(theta_forecasting_auto_two_cycles_nonseasonal, deterministic) :-
 		learn_season([5,15,5,15], 2, auto, Model),
 		theta_forecasting::forecaster_options(Model, [alpha(_),initialization(first),seasonal(none),frequency(1),missing_policy(skip_update),retain_residuals(false)]).
 
-	test(irrelevant_frequency, error(domain_error(theta_forecasting_option, frequency(2)))) :-
+	test(theta_forecasting_irrelevant_frequency, error(domain_error(theta_forecasting_option, frequency(2)))) :-
 		theta_forecasting::learn(theta_series([1,2,3], 2), _, [seasonal(none),frequency(2)]).
 
-	test(forced_missing_frequency, error(domain_error(seasonal_frequency, theta_series([1,2,3,4], none)))) :-
+	test(theta_forecasting_forced_missing_frequency, error(domain_error(seasonal_frequency, theta_series([1,2,3,4], none)))) :-
 		theta_forecasting::learn(theta_series([1,2,3,4], none), _, [seasonal(additive)]).
 
-	test(dataset_bad_frequency, error(type_error(integer, bad))) :-
+	test(theta_forecasting_dataset_bad_frequency, error(type_error(integer, bad))) :-
 		theta_forecasting::learn(theta_series([1,2,3,4], bad), _).
 
-	test(frequency_override, deterministic) :-
+	test(theta_forecasting_frequency_override, deterministic) :-
 		theta_forecasting::learn(theta_series([8,12,8,12,8,12], bad), Model,
 			[alpha(0.5),initialization(first),seasonal(additive),frequency(2)]),
 		theta_forecasting::check_forecaster(Model).
 
-	test(raw_scale_multiplicative_metrics, deterministic) :-
+	test(theta_forecasting_raw_scale_multiplicative_metrics, deterministic) :-
 		learn_season([5,15,5,15,5,15], 2, multiplicative, Model),
 		theta_forecasting::diagnostics(Model, Diagnostics), memberchk(scored_count(5), Diagnostics),
 		memberchk(sum_squared_error(Squared), Diagnostics), Squared =~= 0.0.
 
-	test(multiplicative_nonzero_error_oracle, deterministic) :-
+	test(theta_forecasting_multiplicative_nonzero_error_oracle, deterministic) :-
 		theta_forecasting::learn(theta_series([5,15,6,18,7,21], 2), Model,
 			[alpha(0),initialization(first),seasonal(multiplicative)]),
 		Ratio is ((60/41 + 72/49)/2) / ((8/15 + 28/53)/2),
@@ -581,65 +581,65 @@
 		abs(SSE - Objective) > 1,
 		theta_forecasting::check_forecaster(Model).
 
-	test(seasonal_auto_fitting, deterministic) :-
+	test(theta_forecasting_seasonal_auto_fitting, deterministic) :-
 		theta_forecasting::learn(theta_series([5,15,5,15,5,15,5,15,5,15,5,15], 2), Model),
 		theta_forecasting::check_forecaster(Model), theta_forecasting::forecast(Model, 0, []).
 
-	test(nonseasonal_ignores_dataset_frequency, deterministic) :-
+	test(theta_forecasting_nonseasonal_ignores_dataset_frequency, deterministic) :-
 		theta_forecasting::learn(theta_series([1,2,3], bad), Model, [seasonal(none)]),
 		theta_forecasting::check_forecaster(Model).
 
-	test(forced_short, error(domain_error(series_length, [1,2,3]))) :-
+	test(theta_forecasting_forced_short, error(domain_error(series_length, [1,2,3]))) :-
 		theta_forecasting::learn(theta_series([1,2,3], 2), _, [seasonal(additive)]).
 
-	test(forced_frequency_one, error(domain_error(seasonal_frequency, 1))) :-
+	test(theta_forecasting_forced_frequency_one, error(domain_error(seasonal_frequency, 1))) :-
 		theta_forecasting::learn(theta_series([1,2,3], 1), _, [seasonal(additive)]).
 
-	test(forced_multiplicative_zero, error(domain_error(positive_number, 0))) :-
+	test(theta_forecasting_forced_multiplicative_zero, error(domain_error(positive_number, 0))) :-
 		learn_season([0,2,0,2], 2, multiplicative, _).
 
-	test(auto_frequency_one, deterministic) :-
+	test(theta_forecasting_auto_frequency_one, deterministic) :-
 		learn_season([1,2,3], 1, auto, Model), theta_forecasting::check_forecaster(Model).
 
-	test(variable_option_values, deterministic) :-
+	test(theta_forecasting_variable_option_values, deterministic) :-
 		\+ theta_forecasting::valid_option(initialization(Initialization)), var(Initialization),
 		\+ theta_forecasting::valid_option(seasonal(Mode)), var(Mode),
 		\+ theta_forecasting::valid_option(alpha(Alpha)), var(Alpha),
 		\+ theta_forecasting::valid_option(frequency(Frequency)), var(Frequency),
 		\+ theta_forecasting::valid_option(optimizer_options([adaptive(Adaptive)])), var(Adaptive).
 
-	test(open_optimizer_options, deterministic) :-
+	test(theta_forecasting_open_optimizer_options, deterministic) :-
 		Options = [tol_x(0.1)| Tail], copy_term(Options, Before),
 		\+ theta_forecasting::valid_option(optimizer_options(Options)), var(Tail), variant(Options, Before).
 
-	test(invalid_frequency_option, error(domain_error(option, frequency(0)))) :-
+	test(theta_forecasting_invalid_frequency_option, error(domain_error(option, frequency(0)))) :-
 		theta_forecasting::learn(theta_series([1,2], none), _, [frequency(0)]).
 
-	test(invalid_initialization_option, error(domain_error(option, initialization(bad)))) :-
+	test(theta_forecasting_invalid_initialization_option, error(domain_error(option, initialization(bad)))) :-
 		theta_forecasting::learn(theta_series([1,2], none), _, [initialization(bad)]).
 
-	test(invalid_seasonal_option, error(domain_error(option, seasonal(bad)))) :-
+	test(theta_forecasting_invalid_seasonal_option, error(domain_error(option, seasonal(bad)))) :-
 		theta_forecasting::learn(theta_series([1,2], none), _, [seasonal(bad)]).
 
-	test(variable_options, error(instantiation_error)) :-
+	test(theta_forecasting_variable_options, error(instantiation_error)) :-
 		theta_forecasting::learn(theta_series([1,2], none), _, _).
 
-	test(atom_options, error(type_error(list, bad))) :-
+	test(theta_forecasting_atom_options, error(type_error(list, bad))) :-
 		theta_forecasting::learn(theta_series([1,2], none), _, bad).
 
-	test(atom_option, error(type_error(compound, bad))) :-
+	test(theta_forecasting_atom_option, error(type_error(compound, bad))) :-
 		theta_forecasting::learn(theta_series([1,2], none), _, [bad]).
 
-	test(variable_horizon, error(instantiation_error)) :-
+	test(theta_forecasting_variable_horizon, error(instantiation_error)) :-
 		learn_line(0.5, Model), theta_forecasting::forecast(Model, _, _).
 
-	test(noninteger_horizon, error(type_error(integer, 1.5))) :-
+	test(theta_forecasting_noninteger_horizon, error(type_error(integer, 1.5))) :-
 		learn_line(0.5, Model), theta_forecasting::forecast(Model, 1.5, _).
 
-	test(invalid_functor, error(type_error(atom, 1))) :-
+	test(theta_forecasting_invalid_functor, error(type_error(atom, 1))) :-
 		learn_line(0.5, Model), theta_forecasting::export_to_clauses(any, Model, 1, _).
 
-	test(export_roundtrip, deterministic) :-
+	test(theta_forecasting_export_roundtrip, deterministic) :-
 		Dataset = theta_series([8,10,12,8,10,12,8], 3),
 		learn_season([8,10,12,8,10,12,8], 3, additive, Model),
 		theta_forecasting::export_to_file(Dataset, Model, saved, 'test_output.pl'),
@@ -648,59 +648,59 @@
 		Copy == Model, theta_forecasting::check_forecaster(Copy),
 		theta_forecasting::forecast(Copy, 8, Forecasts), theta_forecasting::forecast(Model, 8, Forecasts).
 
-	test(invalid_zero_horizon, error(domain_error(forecaster, wrong))) :-
+	test(theta_forecasting_invalid_zero_horizon, error(domain_error(forecaster, wrong))) :-
 		theta_forecasting::forecast(wrong, 0, _).
 
-	test(print_model, deterministic) :-
+	test(theta_forecasting_print_model, deterministic) :-
 		^^suppress_text_output, learn_line(0.5, Model), theta_forecasting::print_forecaster(Model).
 
-	test(model_immutability, deterministic) :-
+	test(theta_forecasting_model_immutability, deterministic) :-
 		learn_line(0.5, Model), copy_term(Model, Before),
 		theta_forecasting::forecast(Model, 10, _), theta_forecasting::forecast(Model, 2, _), Model == Before.
 
-	test(each_missing_diagnostic, deterministic) :-
+	test(theta_forecasting_each_missing_diagnostic, deterministic) :-
 		learn_line(0.5, theta_forecaster(State, Diagnostics)),
 		check_missing_fields(Diagnostics, State, Diagnostics).
 
-	test(duplicate_diagnostic, fail) :-
+	test(theta_forecasting_duplicate_diagnostic, fail) :-
 		learn_line(0.5, theta_forecaster(State, Diagnostics)),
 		theta_forecasting::valid_forecaster(theta_forecaster(State, [scored_count(3)| Diagnostics])).
 
-	test(wrong_arity_diagnostic, fail) :-
+	test(theta_forecasting_wrong_arity_diagnostic, fail) :-
 		learn_line(0.5, theta_forecaster(State, Diagnostics)),
 		select(scored_count(_), Diagnostics, Rest),
 		theta_forecasting::valid_forecaster(theta_forecaster(State, [scored_count(3,4)| Rest])).
 
-	test(inconsistent_correction, fail) :-
+	test(theta_forecasting_inconsistent_correction, fail) :-
 		learn_line(0.5, theta_forecaster(theta_state(Level,Slope,Alpha,_,Seasonal), Diagnostics)),
 		theta_forecasting::valid_forecaster(theta_forecaster(theta_state(Level,Slope,Alpha,2,Seasonal), Diagnostics)).
 
-	test(inconsistent_metrics, fail) :-
+	test(theta_forecasting_inconsistent_metrics, fail) :-
 		learn_line(0.5, Model), replace_field(Model, mean_absolute_error(_), mean_absolute_error(0), Invalid),
 		theta_forecasting::valid_forecaster(Invalid).
 
-	test(inconsistent_count, fail) :-
+	test(theta_forecasting_inconsistent_count, fail) :-
 		learn_line(0.5, Model), replace_field(Model, scored_count(_), scored_count(bad), Invalid),
 		theta_forecasting::valid_forecaster(Invalid).
 
-	test(inconsistent_options, fail) :-
+	test(theta_forecasting_inconsistent_options, fail) :-
 		learn_line(0.5, Model), replace_field(Model, options(_), options([alpha(auto)]), Invalid),
 		theta_forecasting::valid_forecaster(Invalid).
 
-	test(invalid_convergence, fail) :-
+	test(theta_forecasting_invalid_convergence, fail) :-
 		learn_line(0.5, Model), replace_field(Model, convergence(_), convergence(converged), Invalid),
 		theta_forecasting::valid_forecaster(Invalid).
 
-	test(invalid_seasonal_phase, fail) :-
+	test(theta_forecasting_invalid_seasonal_phase, fail) :-
 		learn_season([8,12,8,12], 2, additive, theta_forecaster(theta_state(Level,Slope,Alpha,Correction,seasonal(Mode,Period,_,Factors)), Diagnostics)),
 		theta_forecasting::valid_forecaster(theta_forecaster(theta_state(Level,Slope,Alpha,Correction,seasonal(Mode,Period,2,Factors)), Diagnostics)).
 
-	test(invalid_seasonal_factors, fail) :-
+	test(theta_forecasting_invalid_seasonal_factors, fail) :-
 		learn_season([5,15,5,15], 2, multiplicative, theta_forecaster(theta_state(Level,Slope,Alpha,Correction,seasonal(Mode,Period,Phase,_)), Diagnostics)),
 		theta_forecasting::valid_forecaster(theta_forecaster(theta_state(Level,Slope,Alpha,Correction,seasonal(Mode,Period,Phase,[0,1])), Diagnostics)).
 
 	% auxiliary predicates
-	test(missing_seasonal_additive_oracle, deterministic) :-
+	test(theta_forecasting_missing_seasonal_additive_oracle, deterministic) :-
 		learn_season([8,12,8,12,_,12,8,12,8,12,8,12], 2, additive, Model),
 		theta_forecasting::forecast(Model, 3, [First,Second,Third]),
 		First =~= 8.0, Second =~= 12.0, Third =~= 8.0,
@@ -708,40 +708,40 @@
 		memberchk(observed_count(11), Diagnostics), memberchk(scored_count(10), Diagnostics),
 		memberchk(sum_squared_error(SSE), Diagnostics), SSE =~= 0.0.
 
-	test(missing_seasonal_anchor_and_phase, deterministic) :-
+	test(theta_forecasting_missing_seasonal_anchor_and_phase, deterministic) :-
 		learn_season([_,12,8,12,8,12,_,12,8,12,8,12,8,_], 2, additive, Model),
 		theta_forecasting::forecast(Model, 2, [First,Second]), First =~= 8.0, Second =~= 12.0,
 		theta_forecasting::diagnostics(Model, Diagnostics),
 		memberchk(initialization_index(2), Diagnostics), memberchk(scored_count(10), Diagnostics),
 		memberchk(sum_squared_error(SSE), Diagnostics), SSE =~= 0.0.
 
-	test(missing_seasonal_fitting_combinations, deterministic) :-
+	test(theta_forecasting_missing_seasonal_fitting_combinations, deterministic) :-
 		check_gap_fitting([first-0.5,first-auto,optimized-0.5,optimized-auto],
 			[_,15,5,15,5,15,_,15,5,15,5,15,5,_], multiplicative).
-	test(missing_additive_fitting_combinations, deterministic) :-
+	test(theta_forecasting_missing_additive_fitting_combinations, deterministic) :-
 		check_gap_fitting([first-0.5,first-auto,optimized-0.5,optimized-auto],
 			[_,12,8,12,8,12,_,12,8,12,8,12,8,_], additive).
-	test(missing_nonseasonal_fitting_combinations, deterministic) :-
+	test(theta_forecasting_missing_nonseasonal_fitting_combinations, deterministic) :-
 		check_gap_fitting([first-0.5,first-auto,optimized-0.5,optimized-auto],
 			[_,10,14,16,18,20,_,22,24,26,28,30,32,_], none).
 
-	test(missing_auto_multiplicative, deterministic) :-
+	test(theta_forecasting_missing_auto_multiplicative, deterministic) :-
 		learn_season([5,15,5,15,_,15,5,15,5,15,5,15,5,15,5,15,5,15,5,15,5,15,5,15], 2, auto, Model),
 		theta_forecasting::diagnostics(Model, Diagnostics), memberchk(seasonal_mode(multiplicative), Diagnostics),
 		theta_forecasting::forecast(Model, 2, [First,Second]), First =~= 5.0, Second =~= 15.0.
-	test(missing_auto_additive, deterministic) :-
+	test(theta_forecasting_missing_auto_additive, deterministic) :-
 		learn_season([-2,2,-2,2,_,2,-2,2,-2,2,-2,2,-2,2,-2,2,-2,2,-2,2,-2,2,-2,2], 2, auto, Model),
 		theta_forecasting::diagnostics(Model, Diagnostics), memberchk(seasonal_mode(additive), Diagnostics).
-	test(missing_auto_insufficient_evidence, deterministic) :-
+	test(theta_forecasting_missing_auto_insufficient_evidence, deterministic) :-
 		learn_season([8,12,_,_,8,12,_], 2, auto, Model),
 		theta_forecasting::diagnostics(Model, Diagnostics), memberchk(seasonal_mode(none), Diagnostics).
-	test(missing_forced_phase_error, error(domain_error(insufficient_seasonal_phase_observations, 2))) :-
+	test(theta_forecasting_missing_forced_phase_error, error(domain_error(insufficient_seasonal_phase_observations, 2))) :-
 		learn_season([8,12,_,12,8,12], 2, additive, _).
-	test(missing_auto_phase_error, error(domain_error(insufficient_seasonal_phase_observations, 1))) :-
+	test(theta_forecasting_missing_auto_phase_error, error(domain_error(insufficient_seasonal_phase_observations, 1))) :-
 		learn_season([8,12,_,12,8,_,8,12,_,12,8,_,8,12,_,12,8,_,
 			8,12,_,12,8,_,8,12,_,12,8,_,8,12,_,12,8,_], 2, auto, _).
 
-	test(missing_multiplicative_error_alignment, deterministic) :-
+	test(theta_forecasting_missing_multiplicative_error_alignment, deterministic) :-
 		theta_forecasting::learn(theta_series([5,15,6,18,7,21,_,24,8,24,9,27], 2),
 			theta_forecaster(State, Diagnostics), [alpha(0),initialization(first),seasonal(multiplicative)]),
 		State = theta_state(_,_,_,_,seasonal(_,_,_,[Low,High])), Prediction is 5 * High / Low,
@@ -749,7 +749,7 @@
 		memberchk(sum_squared_error(SSE), Diagnostics), SSE =~= Expected,
 		memberchk(scored_count(10), Diagnostics), theta_forecasting::check_forecaster(theta_forecaster(State, Diagnostics)).
 
-	test(missing_seasonal_export_roundtrip, deterministic) :-
+	test(theta_forecasting_missing_seasonal_export_roundtrip, deterministic) :-
 		Dataset = theta_series([_,12,8,12,8,12,_,12,8,12,8,12,8,_], 2),
 		theta_forecasting::learn(Dataset, Model, [alpha(0.5),initialization(first),seasonal(additive)]),
 		theta_forecasting::export_to_file(Dataset, Model, saved, 'test_output.pl'),
@@ -758,15 +758,15 @@
 		Copy == Model, ground(Copy), theta_forecasting::check_forecaster(Copy),
 		theta_forecasting::forecast(Copy, 8, Forecasts), theta_forecasting::forecast(Model, 8, Forecasts).
 
-	test(missing_metadata_validation, deterministic) :-
+	test(theta_forecasting_missing_metadata_validation, deterministic) :-
 		theta_forecasting::learn(theta_series([_,10,_,14,16,_], none), Model, [alpha(0.5),initialization(first)]),
 		check_invalid_gap_fields([observed_count(bad),observed_count(4),missing_count(-1),missing_count(bad),
 			initialization_index(0),initialization_index(5),initialization_index(bad),scored_count(3)], Model).
-	test(missing_strict_model_inconsistent, fail) :-
+	test(theta_forecasting_missing_strict_model_inconsistent, fail) :-
 		theta_forecasting::learn(theta_series([10,_,14,16], none), Model, [alpha(0.5),initialization(first)]),
 		replace_field(Model, options(_), options([alpha(0.5),initialization(first),seasonal(none),frequency(1),missing_policy(error),retain_residuals(false)]), Invalid),
 		theta_forecasting::valid_forecaster(Invalid).
-	test(missing_complete_policy_replay, deterministic(State == StrictState)) :-
+	test(theta_forecasting_missing_complete_policy_replay, deterministic(State == StrictState)) :-
 		theta_forecasting::learn(theta_series([10,12,14,16], none), theta_forecaster(State,_), [alpha(0.5),initialization(first)]),
 		theta_forecasting::learn(theta_series([10,12,14,16], none), Strict, [alpha(0.5),initialization(first),missing_policy(error)]),
 		Strict = theta_forecaster(StrictState,_), theta_forecasting::check_forecaster(Strict).

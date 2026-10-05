@@ -32,16 +32,27 @@ implementing `recommender_protocol`. It has no text-vectorizer or cosine
 dependency.
 
 
-Loading and testing
--------------------
+API documentation
+-----------------
 
-To load the library:
+Open the [../../apis/library_index.html#bm25-recommender](../../apis/library_index.html#bm25-recommender)
+link in a web browser.
 
-    | ?- logtalk_load(bm25_recommender(loader)).
 
-To run its unit tests:
+Loading
+-------
 
-    | ?- logtalk_load(bm25_recommender(tester)).
+To load this library, load its `loader.lgt` file:
+
+	| ?- logtalk_load(bm25_recommender(loader)).
+
+
+Testing
+-------
+
+To test this library, load its `tester.lgt` file:
+
+	| ?- logtalk_load(bm25_recommender(tester)).
 
 
 Datasets and usage
