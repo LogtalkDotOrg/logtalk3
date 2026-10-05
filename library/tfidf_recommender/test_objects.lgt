@@ -55,3 +55,26 @@
 	rating_count(9).
 
 :- end_object.
+
+
+:- object(tfidf_validation_counter,
+	extends(tfidf_recommender)).
+
+	:- public([reset_validation_count/0, validation_count/1]).
+	:- dynamic(validations/1).
+
+	reset_validation_count :-
+		retractall(validations(_)),
+		assertz(validations(0)).
+
+	validation_count(Count) :-
+		once(validations(Count)).
+
+	recommender_valid_data(Model) :-
+		retract(validations(Count)),
+		!,
+		Next is Count + 1,
+		assertz(validations(Next)),
+		^^recommender_valid_data(Model).
+
+:- end_object.

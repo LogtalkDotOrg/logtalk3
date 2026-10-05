@@ -31,11 +31,128 @@
 	]).
 
 	:- uses(list, [
-		length/2, member/2, memberchk/2
+		append/3, length/2, member/2, memberchk/2
 	]).
 
 	:- uses(type, [
 		check/3, valid/2
+	]).
+
+	:- public(score_all/4).
+	:- mode(score_all(+compound, +atomic, +list(atomic), -list(pair)), one_or_error).
+	:- info(score_all/4, [
+		comment is 'Scores catalog items in input order, preserving duplicates and validating the model once. An empty batch validates the model and user.',
+		argnames is ['Recommender', 'User', 'Items', 'Scores'],
+		exceptions is [
+			'A required argument or identifier is a variable' - instantiation_error,
+			'The model is invalid' - domain_error(recommender, 'Recommender'),
+			'A user or item identifier is not atomic' - type_error(atomic, 'Identifier'),
+			'Items is not a proper list' - type_error(list, 'Items'),
+			'An item is absent from the catalog' - domain_error(catalog_item, 'Item')
+		]
+	]).
+
+	:- public(score_content/4).
+	:- mode(score_content(+compound, +atomic, +compound, -number), one_or_error).
+	:- info(score_content/4, [
+		comment is 'Scores supplied content of the trained representation without changing the model. Features use the fitted vocabulary and weighting; vectors use the stored normalization.',
+		argnames is ['Recommender', 'User', 'Content', 'Score'],
+		exceptions is [
+			'A required argument, feature, entry, or weight is a variable' - instantiation_error,
+			'The model is invalid' - domain_error(recommender, 'Recommender'),
+			'User is not atomic' - type_error(atomic, 'User'),
+			'A content descriptor is invalid' - domain_error(item_content, 'Content'),
+			'The descriptor differs from the trained representation' - domain_error(content_representation, 'Content'),
+			'A content list is not a proper list' - type_error(list, 'List'),
+			'A vector entry is not a pair' - type_error(pair, 'Entry'),
+			'A vector repeats a feature key' - domain_error(duplicate_feature, 'Feature'),
+			'A vector weight is not numeric' - type_error(number, 'Weight'),
+			'A vector weight is negative or nonfinite' - domain_error(non_negative_finite_weight, 'Weight')
+		]
+	]).
+
+	:- public(update_ratings/3).
+	:- mode(update_ratings(+compound, +list(compound), -compound), one_or_error).
+	:- info(update_ratings/3, [
+		comment is 'Returns a model with inserted or replaced ratings and rebuilt profiles, accepting new users but requiring catalog items. An empty update returns the validated original model.',
+		argnames is ['Recommender', 'Ratings', 'UpdatedRecommender'],
+		exceptions is [
+			'A required argument, record, identifier, or value is a variable' - instantiation_error,
+			'The model is invalid' - domain_error(recommender, 'Recommender'),
+			'Ratings is not a proper list' - type_error(list, 'Ratings'),
+			'An entry is not a rating record' - type_error(rating, 'Entry'),
+			'A user or item identifier is not atomic' - type_error(atomic, 'Identifier'),
+			'A rating value is not numeric' - type_error(number, 'Rating'),
+			'A rating value is nonfinite' - domain_error(finite_rating, 'Rating'),
+			'A rating value is outside the stored scale' - domain_error(rating_scale('Min', 'Max'), 'Rating'),
+			'An item is absent from the catalog' - domain_error(catalog_item, 'Item'),
+			'A user-item pair occurs more than once in the updates' - domain_error(duplicate_rating, 'User'-'Item'),
+			'A selected rating is not positive in rating-weighted mode' - domain_error(positive_rating_weight, 'Rating')
+		]
+	]).
+
+	:- public(remove_ratings/3).
+	:- mode(remove_ratings(+compound, +list(pair), -compound), one_or_error).
+	:- info(remove_ratings/3, [
+		comment is 'Returns a model with requested ratings removed and profiles rebuilt. Missing and repeated pairs are accepted; no matching ratings returns the validated original model.',
+		argnames is ['Recommender', 'UserItemPairs', 'UpdatedRecommender'],
+		exceptions is [
+			'A required argument, entry, or identifier is a variable' - instantiation_error,
+			'The model is invalid' - domain_error(recommender, 'Recommender'),
+			'UserItemPairs is not a proper list' - type_error(list, 'UserItemPairs'),
+			'An entry is not a pair' - type_error(pair, 'Entry'),
+			'A user or item identifier is not atomic' - type_error(atomic, 'Identifier'),
+			'No ratings would remain' - domain_error(non_empty_ratings, []),
+			'A selected rating is not positive in rating-weighted mode' - domain_error(positive_rating_weight, 'Rating')
+		]
+	]).
+
+	:- public(extend_catalog/3).
+	:- mode(extend_catalog(+compound, +list(pair), -compound), one_or_error).
+	:- info(extend_catalog/3, [
+		comment is 'Returns a model with new catalog items, refitting the full feature corpus and rebuilding profiles. An empty extension returns the validated original model.',
+		argnames is ['Recommender', 'ItemContents', 'UpdatedRecommender'],
+		exceptions is [
+			'A required argument, entry, identifier, feature, or weight is a variable' - instantiation_error,
+			'The model is invalid' - domain_error(recommender, 'Recommender'),
+			'A supplied list is not a proper list' - type_error(list, 'List'),
+			'A content declaration or vector entry is not a pair' - type_error(pair, 'Entry'),
+			'An item identifier is not atomic' - type_error(atomic, 'Item'),
+			'An identifier already belongs to the catalog' - domain_error(new_catalog_item, 'Item'),
+			'An identifier occurs more than once in the extension' - domain_error(duplicate_item, 'Item'),
+			'A content descriptor is invalid' - domain_error(item_content, 'Content'),
+			'Content representations are mixed or differ from the catalog' - domain_error(content_representation, 'Content'),
+			'A vector repeats a feature key' - domain_error(duplicate_feature, 'Feature'),
+			'A vector weight is not numeric' - type_error(number, 'Weight'),
+			'A vector weight is negative or nonfinite' - domain_error(non_negative_finite_weight, 'Weight'),
+			'Feature fitting produces no vocabulary' - domain_error(non_empty_vocabulary, 'Corpus'),
+			'A vectorizer frequency bound is inconsistent with the corpus' - domain_error(option, 'Option'),
+			'A selected rating is not positive in rating-weighted mode' - domain_error(positive_rating_weight, 'Rating')
+		]
+	]).
+
+	:- public(replace_content/3).
+	:- mode(replace_content(+compound, +list(pair), -compound), one_or_error).
+	:- info(replace_content/3, [
+		comment is 'Returns a model with replaced catalog content, refitting the full feature corpus and rebuilding profiles. An empty replacement returns the validated original model.',
+		argnames is ['Recommender', 'ItemContents', 'UpdatedRecommender'],
+		exceptions is [
+			'A required argument, entry, identifier, feature, or weight is a variable' - instantiation_error,
+			'The model is invalid' - domain_error(recommender, 'Recommender'),
+			'A supplied list is not a proper list' - type_error(list, 'List'),
+			'A content declaration or vector entry is not a pair' - type_error(pair, 'Entry'),
+			'An item identifier is not atomic' - type_error(atomic, 'Item'),
+			'An item is absent from the catalog' - domain_error(catalog_item, 'Item'),
+			'An identifier occurs more than once in the replacements' - domain_error(duplicate_item, 'Item'),
+			'A content descriptor is invalid' - domain_error(item_content, 'Content'),
+			'Content representations are mixed or differ from the catalog' - domain_error(content_representation, 'Content'),
+			'A vector repeats a feature key' - domain_error(duplicate_feature, 'Feature'),
+			'A vector weight is not numeric' - type_error(number, 'Weight'),
+			'A vector weight is negative or nonfinite' - domain_error(non_negative_finite_weight, 'Weight'),
+			'Feature fitting produces no vocabulary' - domain_error(non_empty_vocabulary, 'Corpus'),
+			'A vectorizer frequency bound is inconsistent with the corpus' - domain_error(option, 'Option'),
+			'A selected rating is not positive in rating-weighted mode' - domain_error(positive_rating_weight, 'Rating')
+		]
 	]).
 
 	learn(Dataset, tfidf_model(Ratings, Contents, Vectors, Profiles, Vectorizer, Scale, Diagnostics), UserOptions) :-
@@ -56,10 +173,327 @@
 		^^check_recommender(Model),
 		^^check_query_identifiers(User, Item),
 		Model = tfidf_model(_, _, Vectors, Profiles, _, _, _),
+		catalog_score(Vectors, Profiles, User, Item, Score).
+
+	score_all(Model, User, Items, Scores) :-
+		^^check_recommender(Model),
+		context(Context),
+		check(atomic, User, Context),
+		check(list, Items, Context),
+		Model = tfidf_model(_, _, Vectors, Profiles, _, _, _),
+		score_catalog_items(Vectors, Profiles, User, Items, Scores).
+
+	score_content(Model, User, Content, Score) :-
+		^^check_recommender(Model),
+		context(Context),
+		check(atomic, User, Context),
+		^^canonical_contents([content-Content], [content-Canonical], ContentKind),
+		Model = tfidf_model(_, _, _, Profiles, Vectorizer, _, Diagnostics),
+		check_content_kind(ContentKind, Content, Diagnostics),
+		memberchk(options(Options), Diagnostics),
+		content_vector(ContentKind, Canonical, Vectorizer, Options, Vector),
+		profile_score(Profiles, User, Vector, Score).
+
+	:- private(check_content_kind/3).
+	:- mode(check_content_kind(+atom, +compound, +list(compound)), one_or_error).
+	:- info(check_content_kind/3, [
+		comment is 'Checks that supplied content matches the stored representation.',
+		argnames is ['Kind', 'Content', 'Diagnostics'],
+		exceptions is [
+			'The descriptor differs from the trained representation' - domain_error(content_representation, 'Content')
+		]
+	]).
+
+	check_content_kind(Kind, Content, Diagnostics) :-
+		memberchk(content_representation(StoredKind), Diagnostics),
+		(	Kind == StoredKind ->
+			true
+		;	domain_error(content_representation, Content)
+		).
+
+	content_vector(features, features(Document), Vectorizer, _Options, Vector) :-
+		text_vectorizer::transform(Vectorizer, Document, Vector).
+	content_vector(vectors, Content, _Vectorizer, Options, Vector) :-
+		^^option(normalization(Normalization), Options),
+		normalize_contents([content-Content], Normalization, [content-Vector]).
+
+	extend_catalog(Model, ItemContents, UpdatedModel) :-
+		^^check_recommender(Model),
+		context(Context),
+		check(list, ItemContents, Context),
+		(	ItemContents == [] ->
+			UpdatedModel = Model
+		;	Model = tfidf_model(Ratings, Contents, _, _, _, Scale, Diagnostics),
+			check_catalog_additions(ItemContents, Contents),
+			^^canonical_contents(ItemContents, Additions, Kind),
+			ItemContents = [_-Content| _],
+			check_content_kind(Kind, Content, Diagnostics),
+			append(Contents, Additions, AllContents),
+			keysort(AllContents, UpdatedContents),
+			rebuild_catalog_model(Ratings, UpdatedContents, Scale, Diagnostics, UpdatedModel)
+		).
+
+	replace_content(Model, ItemContents, UpdatedModel) :-
+		^^check_recommender(Model),
+		context(Context),
+		check(list, ItemContents, Context),
+		(	ItemContents == [] ->
+			UpdatedModel = Model
+		;	Model = tfidf_model(Ratings, Contents, _, _, _, Scale, Diagnostics),
+			check_catalog_replacements(ItemContents, Contents),
+			^^canonical_contents(ItemContents, Replacements, Kind),
+			ItemContents = [_-Content| _],
+			check_content_kind(Kind, Content, Diagnostics),
+			replace_catalog_contents(Contents, Replacements, UpdatedContents),
+			rebuild_catalog_model(Ratings, UpdatedContents, Scale, Diagnostics, UpdatedModel)
+		).
+
+	:- private(check_catalog_replacements/2).
+	:- mode(check_catalog_replacements(+list(pair), +list(pair)), one_or_error).
+	:- info(check_catalog_replacements/2, [
+		comment is 'Checks that replacement declarations have atomic catalog identifiers.',
+		argnames is ['ItemContents', 'Contents'],
+		exceptions is [
+			'An entry or identifier is a variable' - instantiation_error,
+			'An entry is not a pair' - type_error(pair, 'Entry'),
+			'An identifier is not atomic' - type_error(atomic, 'Item'),
+			'An identifier is absent from the catalog' - domain_error(catalog_item, 'Item')
+		]
+	]).
+
+	check_catalog_replacements([], _).
+	check_catalog_replacements([Entry| Entries], Contents) :-
+		context(Context),
+		check(pair, Entry, Context),
+		Entry = Item-_,
+		check(atomic, Item, Context),
+		(	member(Item-_, Contents) ->
+			true
+		;	domain_error(catalog_item, Item)
+		),
+		check_catalog_replacements(Entries, Contents).
+
+	replace_catalog_contents([], _, []).
+	replace_catalog_contents([Item-Content| Contents], Replacements, [Item-UpdatedContent| Updated]) :-
+		(	member(Item-Replacement, Replacements) ->
+			UpdatedContent = Replacement
+		;	UpdatedContent = Content
+		),
+		replace_catalog_contents(Contents, Replacements, Updated).
+
+	:- private(check_catalog_additions/2).
+	:- mode(check_catalog_additions(+list(pair), +list(pair)), one_or_error).
+	:- info(check_catalog_additions/2, [
+		comment is 'Checks that content declarations have atomic identifiers absent from the catalog.',
+		argnames is ['ItemContents', 'Contents'],
+		exceptions is [
+			'An entry or identifier is a variable' - instantiation_error,
+			'An entry is not a pair' - type_error(pair, 'Entry'),
+			'An identifier is not atomic' - type_error(atomic, 'Item'),
+			'An identifier already belongs to the catalog' - domain_error(new_catalog_item, 'Item')
+		]
+	]).
+
+	check_catalog_additions([], _).
+	check_catalog_additions([Entry| Entries], Contents) :-
+		context(Context),
+		check(pair, Entry, Context),
+		Entry = Item-_,
+		check(atomic, Item, Context),
+		(	member(Item-_, Contents) ->
+			domain_error(new_catalog_item, Item)
+		;	true
+		),
+		check_catalog_additions(Entries, Contents).
+
+	:- private(rebuild_catalog_model/5).
+	:- mode(rebuild_catalog_model(+list(compound), +list(pair), +term, +list(compound), -compound), one_or_error).
+	:- info(rebuild_catalog_model/5, [
+		comment is 'Rebuilds the full catalog fitted state, profiles, and diagnostics using the stored options.',
+		argnames is ['Ratings', 'Contents', 'Scale', 'Diagnostics', 'UpdatedRecommender'],
+		exceptions is [
+			'Feature fitting produces no vocabulary' - domain_error(non_empty_vocabulary, 'Corpus'),
+			'A vectorizer frequency bound is inconsistent with the corpus' - domain_error(option, 'Option'),
+			'Vectorizer options are supplied for preweighted content' - domain_error(option, vectorizer_options('Options')),
+			'A selected rating is not positive in rating-weighted mode' - domain_error(positive_rating_weight, 'Rating')
+		]
+	]).
+
+	rebuild_catalog_model(Ratings, Contents, Scale, Diagnostics, UpdatedModel) :-
+		memberchk(options(Options), Diagnostics),
+		memberchk(content_representation(Kind), Diagnostics),
+		once(build_vectors(Kind, Contents, Options, Vectorizer, Vectors)),
+		rebuild_feedback_model(Ratings, Contents, Vectors, Vectorizer, Scale, Diagnostics, UpdatedModel).
+
+	update_ratings(Model, Updates, UpdatedModel) :-
+		^^check_recommender(Model),
+		context(Context),
+		check(list, Updates, Context),
+		(	Updates == [] ->
+			UpdatedModel = Model
+		;	Model = tfidf_model(Ratings, Contents, Vectors, _, Vectorizer, Scale, Diagnostics),
+			check_rating_updates(Updates, Vectors, Scale),
+			^^check_no_duplicate_ratings(Updates),
+			retain_unchanged_ratings(Ratings, Updates, Retained),
+			append(Retained, Updates, Merged),
+			sort(Merged, UpdatedRatings),
+			rebuild_feedback_model(UpdatedRatings, Contents, Vectors, Vectorizer, Scale, Diagnostics, UpdatedModel)
+		).
+
+	remove_ratings(Model, UserItemPairs, UpdatedModel) :-
+		^^check_recommender(Model),
+		context(Context),
+		check(list, UserItemPairs, Context),
+		Model = tfidf_model(Ratings, Contents, Vectors, _, Vectorizer, Scale, Diagnostics),
+		rating_removal_records(UserItemPairs, Ratings, Removals),
+		retain_unchanged_ratings(Ratings, Removals, Remaining),
+		(	Remaining == Ratings ->
+			UpdatedModel = Model
+		;	(	Remaining == [] ->
+				domain_error(non_empty_ratings, [])
+			;	rebuild_feedback_model(Remaining, Contents, Vectors, Vectorizer, Scale, Diagnostics, UpdatedModel)
+			)
+		).
+
+	:- private(rating_removal_records/3).
+	:- mode(rating_removal_records(+list(pair), +list(compound), -list(compound)), one_or_error).
+	:- info(rating_removal_records/3, [
+		comment is 'Validates user-item pairs and collects matching stored ratings, ignoring missing pairs.',
+		argnames is ['UserItemPairs', 'Ratings', 'Removals'],
+		exceptions is [
+			'An entry or identifier is a variable' - instantiation_error,
+			'An entry is not a pair' - type_error(pair, 'Entry'),
+			'A user or item identifier is not atomic' - type_error(atomic, 'Identifier')
+		]
+	]).
+
+	rating_removal_records([], _, []).
+	rating_removal_records([Entry| Entries], Ratings, Removals) :-
+		context(Context),
+		check(pair, Entry, Context),
+		Entry = User-Item,
+		^^check_query_identifiers(User, Item),
+		(	member(rating(User,Item,Rating), Ratings) ->
+			Removals = [rating(User,Item,Rating)| Rest]
+		;	Removals = Rest
+		),
+		rating_removal_records(Entries, Ratings, Rest).
+
+	:- private(check_rating_updates/3).
+	:- mode(check_rating_updates(+list(compound), +list(pair), +term), one_or_error).
+	:- info(check_rating_updates/3, [
+		comment is 'Checks rating records against the catalog and stored rating scale.',
+		argnames is ['Ratings', 'Vectors', 'Scale'],
+		exceptions is [
+			'A record, identifier, or value is a variable' - instantiation_error,
+			'An entry is not a rating record' - type_error(rating, 'Entry'),
+			'A user or item identifier is not atomic' - type_error(atomic, 'Identifier'),
+			'A rating value is not numeric' - type_error(number, 'Rating'),
+			'A rating value is nonfinite' - domain_error(finite_rating, 'Rating'),
+			'A rating value is outside the stored scale' - domain_error(rating_scale('Min', 'Max'), 'Rating'),
+			'An item is absent from the catalog' - domain_error(catalog_item, 'Item')
+		]
+	]).
+
+	check_rating_updates([], _, _).
+	check_rating_updates([Entry| Entries], Vectors, Scale) :-
+		(	var(Entry) ->
+			instantiation_error
+		;	true
+		),
+		(	Entry = rating(User, Item, Rating) ->
+			^^check_query_identifiers(User, Item),
+			context(Context),
+			check(number, Rating, Context),
+			check_finite_ratings([Entry]),
+			(	member(Item-_, Vectors) ->
+				true
+			;	domain_error(catalog_item, Item)
+			),
+			(	Scale == none ->
+				true
+			;	Scale = scale(Min, Max),
+				(	Rating >= Min,
+					Rating =< Max ->
+					true
+				;	domain_error(rating_scale(Min, Max), Rating)
+				)
+			),
+			check_rating_updates(Entries, Vectors, Scale)
+		;	type_error(rating, Entry)
+		).
+
+	retain_unchanged_ratings([], _, []).
+	retain_unchanged_ratings([rating(User,Item,Rating)| Ratings], Updates, Retained) :-
+		(	member(rating(User,Item,_), Updates) ->
+			Retained = Rest
+		;	Retained = [rating(User,Item,Rating)| Rest]
+		),
+		retain_unchanged_ratings(Ratings, Updates, Rest).
+
+	:- private(rebuild_feedback_model/7).
+	:- mode(rebuild_feedback_model(+list(compound), +list(pair), +list(pair), +term, +term, +list(compound), -compound), one_or_error).
+	:- info(rebuild_feedback_model/7, [
+		comment is 'Rebuilds profiles and diagnostics while retaining the fitted catalog state.',
+		argnames is ['Ratings', 'Contents', 'Vectors', 'Vectorizer', 'Scale', 'Diagnostics', 'UpdatedRecommender'],
+		exceptions is [
+			'A selected rating is not positive in rating-weighted mode' - domain_error(positive_rating_weight, 'Rating')
+		]
+	]).
+
+	rebuild_feedback_model(Ratings, Contents, Vectors, Vectorizer, Scale, Diagnostics, UpdatedModel) :-
+		memberchk(options(Options), Diagnostics),
+		memberchk(content_representation(Kind), Diagnostics),
+		build_profiles(Ratings, Vectors, Options, Profiles),
+		model_diagnostics(Ratings, Vectors, Profiles, Vectorizer, Kind, Options, ExpectedDiagnostics),
+		update_model_diagnostics(Diagnostics, ExpectedDiagnostics, UpdatedDiagnostics),
+		UpdatedModel = tfidf_model(Ratings, Contents, Vectors, Profiles, Vectorizer, Scale, UpdatedDiagnostics).
+
+	update_model_diagnostics([], _, []).
+	update_model_diagnostics([Diagnostic| Diagnostics], Expected, [UpdatedDiagnostic| Updated]) :-
+		functor(Diagnostic, Functor, Arity),
+		functor(Template, Functor, Arity),
+		(	member(Template, Expected) ->
+			UpdatedDiagnostic = Template
+		;	UpdatedDiagnostic = Diagnostic
+		),
+		update_model_diagnostics(Diagnostics, Expected, Updated).
+
+	:- private(catalog_score/5).
+	:- mode(catalog_score(+list(pair), +list(pair), +atomic, +atomic, -number), one_or_error).
+	:- info(catalog_score/5, [
+		comment is 'Scores a catalog identifier using validated model data.',
+		argnames is ['Vectors', 'Profiles', 'User', 'Item', 'Score'],
+		exceptions is [
+			'An item is absent from the catalog' - domain_error(catalog_item, 'Item')
+		]
+	]).
+
+	catalog_score(Vectors, Profiles, User, Item, Score) :-
 		(	member(Item-Vector, Vectors) ->
 			profile_score(Profiles, User, Vector, Score)
 		;	domain_error(catalog_item, Item)
 		).
+
+	:- private(score_catalog_items/5).
+	:- mode(score_catalog_items(+list(pair), +list(pair), +atomic, +list(atomic), -list(pair)), one_or_error).
+	:- info(score_catalog_items/5, [
+		comment is 'Validates and scores catalog identifiers in input order using validated model data.',
+		argnames is ['Vectors', 'Profiles', 'User', 'Items', 'Scores'],
+		exceptions is [
+			'An identifier is a variable' - instantiation_error,
+			'An identifier is not atomic' - type_error(atomic, 'Item'),
+			'An item is absent from the catalog' - domain_error(catalog_item, 'Item')
+		]
+	]).
+
+	score_catalog_items(_, _, _, [], []) :-
+		!.
+	score_catalog_items(Vectors, Profiles, User, [Item| Items], [Item-Score| Scores]) :-
+		context(Context),
+		check(atomic, Item, Context),
+		catalog_score(Vectors, Profiles, User, Item, Score),
+		score_catalog_items(Vectors, Profiles, User, Items, Scores).
 
 	recommend(Model, User, N, Recommendations) :-
 		^^check_recommender(Model),

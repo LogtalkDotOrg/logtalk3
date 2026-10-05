@@ -9998,10 +9998,11 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    --------------------
 
    * :ref:`jaccard_recommender <jaccard_recommender/0::extend_catalog/3>`
+   * :ref:`tfidf_recommender <tfidf_recommender/0::extend_catalog/3>`
 
 .. only:: latex
 
-   * ``extend_catalog/3`` - :ref:`jaccard_recommender <jaccard_recommender/0::extend_catalog/3>`
+   * ``extend_catalog/3`` - :ref:`jaccard_recommender <jaccard_recommender/0::extend_catalog/3>`, :ref:`tfidf_recommender <tfidf_recommender/0::extend_catalog/3>`
 
 .. only:: not latex
 
@@ -27147,10 +27148,11 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    --------------------
 
    * :ref:`jaccard_recommender <jaccard_recommender/0::remove_ratings/3>`
+   * :ref:`tfidf_recommender <tfidf_recommender/0::remove_ratings/3>`
 
 .. only:: latex
 
-   * ``remove_ratings/3`` - :ref:`jaccard_recommender <jaccard_recommender/0::remove_ratings/3>`
+   * ``remove_ratings/3`` - :ref:`jaccard_recommender <jaccard_recommender/0::remove_ratings/3>`, :ref:`tfidf_recommender <tfidf_recommender/0::remove_ratings/3>`
 
 .. only:: not latex
 
@@ -27235,10 +27237,11 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    ---------------------
 
    * :ref:`jaccard_recommender <jaccard_recommender/0::replace_content/3>`
+   * :ref:`tfidf_recommender <tfidf_recommender/0::replace_content/3>`
 
 .. only:: latex
 
-   * ``replace_content/3`` - :ref:`jaccard_recommender <jaccard_recommender/0::replace_content/3>`
+   * ``replace_content/3`` - :ref:`jaccard_recommender <jaccard_recommender/0::replace_content/3>`, :ref:`tfidf_recommender <tfidf_recommender/0::replace_content/3>`
 
 .. only:: not latex
 
@@ -28898,10 +28901,11 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    ---------------
 
    * :ref:`jaccard_recommender <jaccard_recommender/0::score_all/4>`
+   * :ref:`tfidf_recommender <tfidf_recommender/0::score_all/4>`
 
 .. only:: latex
 
-   * ``score_all/4`` - :ref:`jaccard_recommender <jaccard_recommender/0::score_all/4>`
+   * ``score_all/4`` - :ref:`jaccard_recommender <jaccard_recommender/0::score_all/4>`, :ref:`tfidf_recommender <tfidf_recommender/0::score_all/4>`
 
 .. only:: not latex
 
@@ -28909,10 +28913,11 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    -------------------
 
    * :ref:`jaccard_recommender <jaccard_recommender/0::score_content/4>`
+   * :ref:`tfidf_recommender <tfidf_recommender/0::score_content/4>`
 
 .. only:: latex
 
-   * ``score_content/4`` - :ref:`jaccard_recommender <jaccard_recommender/0::score_content/4>`
+   * ``score_content/4`` - :ref:`jaccard_recommender <jaccard_recommender/0::score_content/4>`, :ref:`tfidf_recommender <tfidf_recommender/0::score_content/4>`
 
 .. only:: not latex
 
@@ -33806,10 +33811,11 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    --------------------
 
    * :ref:`jaccard_recommender <jaccard_recommender/0::update_ratings/3>`
+   * :ref:`tfidf_recommender <tfidf_recommender/0::update_ratings/3>`
 
 .. only:: latex
 
-   * ``update_ratings/3`` - :ref:`jaccard_recommender <jaccard_recommender/0::update_ratings/3>`
+   * ``update_ratings/3`` - :ref:`jaccard_recommender <jaccard_recommender/0::update_ratings/3>`, :ref:`tfidf_recommender <tfidf_recommender/0::update_ratings/3>`
 
 .. only:: not latex
 

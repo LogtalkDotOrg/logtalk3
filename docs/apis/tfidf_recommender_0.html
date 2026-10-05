@@ -500,30 +500,801 @@
 </div>
 <nav class="contents local" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p></li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id3">Private predicates</a></p>
+<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#check-finite-ratings-1" id="id4"><code class="docutils literal notranslate"><span class="pre">check_finite_ratings/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#build-vectors-5" id="id5"><code class="docutils literal notranslate"><span class="pre">build_vectors/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#profile-weights-3" id="id6"><code class="docutils literal notranslate"><span class="pre">profile_weights/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#score-all-4" id="id2"><code class="docutils literal notranslate"><span class="pre">score_all/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#score-content-4" id="id3"><code class="docutils literal notranslate"><span class="pre">score_content/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#update-ratings-3" id="id4"><code class="docutils literal notranslate"><span class="pre">update_ratings/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#remove-ratings-3" id="id5"><code class="docutils literal notranslate"><span class="pre">remove_ratings/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#extend-catalog-3" id="id6"><code class="docutils literal notranslate"><span class="pre">extend_catalog/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#replace-content-3" id="id7"><code class="docutils literal notranslate"><span class="pre">replace_content/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#operators" id="id7">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id8">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id9">Private predicates</a></p>
+<ul>
+<li><p><a class="reference internal" href="#check-content-kind-3" id="id10"><code class="docutils literal notranslate"><span class="pre">check_content_kind/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#check-catalog-replacements-2" id="id11"><code class="docutils literal notranslate"><span class="pre">check_catalog_replacements/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#check-catalog-additions-2" id="id12"><code class="docutils literal notranslate"><span class="pre">check_catalog_additions/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rebuild-catalog-model-5" id="id13"><code class="docutils literal notranslate"><span class="pre">rebuild_catalog_model/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rating-removal-records-3" id="id14"><code class="docutils literal notranslate"><span class="pre">rating_removal_records/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#check-rating-updates-3" id="id15"><code class="docutils literal notranslate"><span class="pre">check_rating_updates/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rebuild-feedback-model-7" id="id16"><code class="docutils literal notranslate"><span class="pre">rebuild_feedback_model/7</span></code></a></p></li>
+<li><p><a class="reference internal" href="#catalog-score-5" id="id17"><code class="docutils literal notranslate"><span class="pre">catalog_score/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#score-catalog-items-5" id="id18"><code class="docutils literal notranslate"><span class="pre">score_catalog_items/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#check-finite-ratings-1" id="id19"><code class="docutils literal notranslate"><span class="pre">check_finite_ratings/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#build-vectors-5" id="id20"><code class="docutils literal notranslate"><span class="pre">build_vectors/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#profile-weights-3" id="id21"><code class="docutils literal notranslate"><span class="pre">profile_weights/3</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#operators" id="id22">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
-<p>(no local declarations; see entity ancestors if any)</p>
+<section id="score-all-4">
+<span id="tfidf-recommender-0-score-all-4"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">score_all/4</span></code></a><a class="headerlink" href="#score-all-4" title="Link to this heading"></a></h3>
+<p>Scores catalog items in input order, preserving duplicates and validating the model once. An empty batch validates the model and user.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">score_all(Recommender,User,Items,Scores)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">score_all(+compound,+atomic,+list(atomic),-list(pair))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">A required argument or identifier is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The model is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(recommender,Recommender)</span></code></div>
+</div>
+<div class="line">A user or item identifier is not atomic:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atomic,Identifier)</span></code></div>
+</div>
+<div class="line">Items is not a proper list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Items)</span></code></div>
+</div>
+<div class="line">An item is absent from the catalog:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(catalog_item,Item)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
 </section>
+<section id="score-content-4">
+<span id="tfidf-recommender-0-score-content-4"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">score_content/4</span></code></a><a class="headerlink" href="#score-content-4" title="Link to this heading"></a></h3>
+<p>Scores supplied content of the trained representation without changing the model. Features use the fitted vocabulary and weighting; vectors use the stored normalization.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">score_content(Recommender,User,Content,Score)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">score_content(+compound,+atomic,+compound,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">A required argument, feature, entry, or weight is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The model is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(recommender,Recommender)</span></code></div>
+</div>
+<div class="line">User is not atomic:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atomic,User)</span></code></div>
+</div>
+<div class="line">A content descriptor is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(item_content,Content)</span></code></div>
+</div>
+<div class="line">The descriptor differs from the trained representation:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(content_representation,Content)</span></code></div>
+</div>
+<div class="line">A content list is not a proper list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,List)</span></code></div>
+</div>
+<div class="line">A vector entry is not a pair:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(pair,Entry)</span></code></div>
+</div>
+<div class="line">A vector repeats a feature key:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(duplicate_feature,Feature)</span></code></div>
+</div>
+<div class="line">A vector weight is not numeric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Weight)</span></code></div>
+</div>
+<div class="line">A vector weight is negative or nonfinite:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_finite_weight,Weight)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="update-ratings-3">
+<span id="tfidf-recommender-0-update-ratings-3"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">update_ratings/3</span></code></a><a class="headerlink" href="#update-ratings-3" title="Link to this heading"></a></h3>
+<p>Returns a model with inserted or replaced ratings and rebuilt profiles, accepting new users but requiring catalog items. An empty update returns the validated original model.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">update_ratings(Recommender,Ratings,UpdatedRecommender)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">update_ratings(+compound,+list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">A required argument, record, identifier, or value is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The model is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(recommender,Recommender)</span></code></div>
+</div>
+<div class="line">Ratings is not a proper list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Ratings)</span></code></div>
+</div>
+<div class="line">An entry is not a rating record:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(rating,Entry)</span></code></div>
+</div>
+<div class="line">A user or item identifier is not atomic:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atomic,Identifier)</span></code></div>
+</div>
+<div class="line">A rating value is not numeric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Rating)</span></code></div>
+</div>
+<div class="line">A rating value is nonfinite:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(finite_rating,Rating)</span></code></div>
+</div>
+<div class="line">A rating value is outside the stored scale:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(rating_scale(Min,Max),Rating)</span></code></div>
+</div>
+<div class="line">An item is absent from the catalog:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(catalog_item,Item)</span></code></div>
+</div>
+<div class="line">A user-item pair occurs more than once in the updates:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(duplicate_rating,User-Item)</span></code></div>
+</div>
+<div class="line">A selected rating is not positive in rating-weighted mode:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_rating_weight,Rating)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="remove-ratings-3">
+<span id="tfidf-recommender-0-remove-ratings-3"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">remove_ratings/3</span></code></a><a class="headerlink" href="#remove-ratings-3" title="Link to this heading"></a></h3>
+<p>Returns a model with requested ratings removed and profiles rebuilt. Missing and repeated pairs are accepted; no matching ratings returns the validated original model.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">remove_ratings(Recommender,UserItemPairs,UpdatedRecommender)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">remove_ratings(+compound,+list(pair),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">A required argument, entry, or identifier is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The model is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(recommender,Recommender)</span></code></div>
+</div>
+<div class="line">UserItemPairs is not a proper list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,UserItemPairs)</span></code></div>
+</div>
+<div class="line">An entry is not a pair:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(pair,Entry)</span></code></div>
+</div>
+<div class="line">A user or item identifier is not atomic:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atomic,Identifier)</span></code></div>
+</div>
+<div class="line">No ratings would remain:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_ratings,[])</span></code></div>
+</div>
+<div class="line">A selected rating is not positive in rating-weighted mode:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_rating_weight,Rating)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="extend-catalog-3">
+<span id="tfidf-recommender-0-extend-catalog-3"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">extend_catalog/3</span></code></a><a class="headerlink" href="#extend-catalog-3" title="Link to this heading"></a></h3>
+<p>Returns a model with new catalog items, refitting the full feature corpus and rebuilding profiles. An empty extension returns the validated original model.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">extend_catalog(Recommender,ItemContents,UpdatedRecommender)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">extend_catalog(+compound,+list(pair),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">A required argument, entry, identifier, feature, or weight is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The model is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(recommender,Recommender)</span></code></div>
+</div>
+<div class="line">A supplied list is not a proper list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,List)</span></code></div>
+</div>
+<div class="line">A content declaration or vector entry is not a pair:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(pair,Entry)</span></code></div>
+</div>
+<div class="line">An item identifier is not atomic:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atomic,Item)</span></code></div>
+</div>
+<div class="line">An identifier already belongs to the catalog:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(new_catalog_item,Item)</span></code></div>
+</div>
+<div class="line">An identifier occurs more than once in the extension:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(duplicate_item,Item)</span></code></div>
+</div>
+<div class="line">A content descriptor is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(item_content,Content)</span></code></div>
+</div>
+<div class="line">Content representations are mixed or differ from the catalog:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(content_representation,Content)</span></code></div>
+</div>
+<div class="line">A vector repeats a feature key:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(duplicate_feature,Feature)</span></code></div>
+</div>
+<div class="line">A vector weight is not numeric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Weight)</span></code></div>
+</div>
+<div class="line">A vector weight is negative or nonfinite:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_finite_weight,Weight)</span></code></div>
+</div>
+<div class="line">Feature fitting produces no vocabulary:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_vocabulary,Corpus)</span></code></div>
+</div>
+<div class="line">A vectorizer frequency bound is inconsistent with the corpus:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line">A selected rating is not positive in rating-weighted mode:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_rating_weight,Rating)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="replace-content-3">
+<span id="tfidf-recommender-0-replace-content-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">replace_content/3</span></code></a><a class="headerlink" href="#replace-content-3" title="Link to this heading"></a></h3>
+<p>Returns a model with replaced catalog content, refitting the full feature corpus and rebuilding profiles. An empty replacement returns the validated original model.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">replace_content(Recommender,ItemContents,UpdatedRecommender)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">replace_content(+compound,+list(pair),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">A required argument, entry, identifier, feature, or weight is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The model is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(recommender,Recommender)</span></code></div>
+</div>
+<div class="line">A supplied list is not a proper list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,List)</span></code></div>
+</div>
+<div class="line">A content declaration or vector entry is not a pair:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(pair,Entry)</span></code></div>
+</div>
+<div class="line">An item identifier is not atomic:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atomic,Item)</span></code></div>
+</div>
+<div class="line">An item is absent from the catalog:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(catalog_item,Item)</span></code></div>
+</div>
+<div class="line">An identifier occurs more than once in the replacements:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(duplicate_item,Item)</span></code></div>
+</div>
+<div class="line">A content descriptor is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(item_content,Content)</span></code></div>
+</div>
+<div class="line">Content representations are mixed or differ from the catalog:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(content_representation,Content)</span></code></div>
+</div>
+<div class="line">A vector repeats a feature key:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(duplicate_feature,Feature)</span></code></div>
+</div>
+<div class="line">A vector weight is not numeric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Weight)</span></code></div>
+</div>
+<div class="line">A vector weight is negative or nonfinite:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_finite_weight,Weight)</span></code></div>
+</div>
+<div class="line">Feature fitting produces no vocabulary:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_vocabulary,Corpus)</span></code></div>
+</div>
+<div class="line">A vectorizer frequency bound is inconsistent with the corpus:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line">A selected rating is not positive in rating-weighted mode:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_rating_weight,Rating)</span></code></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
 <section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
 </section>
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
+<section id="check-content-kind-3">
+<span id="tfidf-recommender-0-check-content-kind-3"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_content_kind/3</span></code></a><a class="headerlink" href="#check-content-kind-3" title="Link to this heading"></a></h3>
+<p>Checks that supplied content matches the stored representation.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_content_kind(Kind,Content,Diagnostics)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_content_kind(+atom,+compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The descriptor differs from the trained representation:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(content_representation,Content)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="check-catalog-replacements-2">
+<span id="tfidf-recommender-0-check-catalog-replacements-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_catalog_replacements/2</span></code></a><a class="headerlink" href="#check-catalog-replacements-2" title="Link to this heading"></a></h3>
+<p>Checks that replacement declarations have atomic catalog identifiers.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_catalog_replacements(ItemContents,Contents)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_catalog_replacements(+list(pair),+list(pair))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">An entry or identifier is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An entry is not a pair:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(pair,Entry)</span></code></div>
+</div>
+<div class="line">An identifier is not atomic:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atomic,Item)</span></code></div>
+</div>
+<div class="line">An identifier is absent from the catalog:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(catalog_item,Item)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="check-catalog-additions-2">
+<span id="tfidf-recommender-0-check-catalog-additions-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_catalog_additions/2</span></code></a><a class="headerlink" href="#check-catalog-additions-2" title="Link to this heading"></a></h3>
+<p>Checks that content declarations have atomic identifiers absent from the catalog.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_catalog_additions(ItemContents,Contents)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_catalog_additions(+list(pair),+list(pair))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">An entry or identifier is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An entry is not a pair:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(pair,Entry)</span></code></div>
+</div>
+<div class="line">An identifier is not atomic:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atomic,Item)</span></code></div>
+</div>
+<div class="line">An identifier already belongs to the catalog:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(new_catalog_item,Item)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="rebuild-catalog-model-5">
+<span id="tfidf-recommender-0-rebuild-catalog-model-5"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rebuild_catalog_model/5</span></code></a><a class="headerlink" href="#rebuild-catalog-model-5" title="Link to this heading"></a></h3>
+<p>Rebuilds the full catalog fitted state, profiles, and diagnostics using the stored options.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rebuild_catalog_model(Ratings,Contents,Scale,Diagnostics,UpdatedRecommender)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rebuild_catalog_model(+list(compound),+list(pair),+term,+list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Feature fitting produces no vocabulary:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_vocabulary,Corpus)</span></code></div>
+</div>
+<div class="line">A vectorizer frequency bound is inconsistent with the corpus:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line">Vectorizer options are supplied for preweighted content:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,vectorizer_options(Options))</span></code></div>
+</div>
+<div class="line">A selected rating is not positive in rating-weighted mode:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_rating_weight,Rating)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="rating-removal-records-3">
+<span id="tfidf-recommender-0-rating-removal-records-3"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rating_removal_records/3</span></code></a><a class="headerlink" href="#rating-removal-records-3" title="Link to this heading"></a></h3>
+<p>Validates user-item pairs and collects matching stored ratings, ignoring missing pairs.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rating_removal_records(UserItemPairs,Ratings,Removals)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rating_removal_records(+list(pair),+list(compound),-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">An entry or identifier is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An entry is not a pair:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(pair,Entry)</span></code></div>
+</div>
+<div class="line">A user or item identifier is not atomic:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atomic,Identifier)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="check-rating-updates-3">
+<span id="tfidf-recommender-0-check-rating-updates-3"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_rating_updates/3</span></code></a><a class="headerlink" href="#check-rating-updates-3" title="Link to this heading"></a></h3>
+<p>Checks rating records against the catalog and stored rating scale.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_rating_updates(Ratings,Vectors,Scale)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_rating_updates(+list(compound),+list(pair),+term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">A record, identifier, or value is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An entry is not a rating record:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(rating,Entry)</span></code></div>
+</div>
+<div class="line">A user or item identifier is not atomic:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atomic,Identifier)</span></code></div>
+</div>
+<div class="line">A rating value is not numeric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Rating)</span></code></div>
+</div>
+<div class="line">A rating value is nonfinite:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(finite_rating,Rating)</span></code></div>
+</div>
+<div class="line">A rating value is outside the stored scale:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(rating_scale(Min,Max),Rating)</span></code></div>
+</div>
+<div class="line">An item is absent from the catalog:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(catalog_item,Item)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="rebuild-feedback-model-7">
+<span id="tfidf-recommender-0-rebuild-feedback-model-7"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rebuild_feedback_model/7</span></code></a><a class="headerlink" href="#rebuild-feedback-model-7" title="Link to this heading"></a></h3>
+<p>Rebuilds profiles and diagnostics while retaining the fitted catalog state.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rebuild_feedback_model(Ratings,Contents,Vectors,Vectorizer,Scale,Diagnostics,UpdatedRecommender)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rebuild_feedback_model(+list(compound),+list(pair),+list(pair),+term,+term,+list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">A selected rating is not positive in rating-weighted mode:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_rating_weight,Rating)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="catalog-score-5">
+<span id="tfidf-recommender-0-catalog-score-5"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">catalog_score/5</span></code></a><a class="headerlink" href="#catalog-score-5" title="Link to this heading"></a></h3>
+<p>Scores a catalog identifier using validated model data.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">catalog_score(Vectors,Profiles,User,Item,Score)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">catalog_score(+list(pair),+list(pair),+atomic,+atomic,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">An item is absent from the catalog:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(catalog_item,Item)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="score-catalog-items-5">
+<span id="tfidf-recommender-0-score-catalog-items-5"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">score_catalog_items/5</span></code></a><a class="headerlink" href="#score-catalog-items-5" title="Link to this heading"></a></h3>
+<p>Validates and scores catalog identifiers in input order using validated model data.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">score_catalog_items(Vectors,Profiles,User,Items,Scores)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">score_catalog_items(+list(pair),+list(pair),+atomic,+list(atomic),-list(pair))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">An identifier is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An identifier is not atomic:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atomic,Item)</span></code></div>
+</div>
+<div class="line">An item is absent from the catalog:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(catalog_item,Item)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="check-finite-ratings-1">
-<span id="tfidf-recommender-0-check-finite-ratings-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_finite_ratings/1</span></code></a><a class="headerlink" href="#check-finite-ratings-1" title="Link to this heading"></a></h3>
+<span id="tfidf-recommender-0-check-finite-ratings-1"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_finite_ratings/1</span></code></a><a class="headerlink" href="#check-finite-ratings-1" title="Link to this heading"></a></h3>
 <p>Checks that rating values are finite.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -553,7 +1324,7 @@
 <hr class="docutils" />
 </section>
 <section id="build-vectors-5">
-<span id="tfidf-recommender-0-build-vectors-5"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">build_vectors/5</span></code></a><a class="headerlink" href="#build-vectors-5" title="Link to this heading"></a></h3>
+<span id="tfidf-recommender-0-build-vectors-5"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">build_vectors/5</span></code></a><a class="headerlink" href="#build-vectors-5" title="Link to this heading"></a></h3>
 <p>Fits catalog feature vectors or normalizes supplied vectors using the effective options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -591,7 +1362,7 @@
 <hr class="docutils" />
 </section>
 <section id="profile-weights-3">
-<span id="tfidf-recommender-0-profile-weights-3"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">profile_weights/3</span></code></a><a class="headerlink" href="#profile-weights-3" title="Link to this heading"></a></h3>
+<span id="tfidf-recommender-0-profile-weights-3"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">profile_weights/3</span></code></a><a class="headerlink" href="#profile-weights-3" title="Link to this heading"></a></h3>
 <p>Assigns uniform or strictly positive raw-rating weights to selected item vectors.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

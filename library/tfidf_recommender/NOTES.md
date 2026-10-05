@@ -132,8 +132,9 @@ top-level options; fitted vectorizer diagnostics record its effective options.
 Training and scoring
 --------------------
 
-Vocabulary and document frequencies are fitted once over ALL catalog items,
-including unrated items and empty-content documents. Under default weighting:
+Training and catalog changes fit vocabulary and document frequencies over all
+catalog items, including unrated items and empty-content documents. Under default
+weighting:
 
     IDF(f) = log((1 + catalog_size) / (1 + document_frequency(f))) + 1
     weight(i,f) = occurrence_count(i,f) * IDF(f)
@@ -174,6 +175,132 @@ Evaluation must remove held-out ratings explicitly; catalog content may still
 be available for unrated or held-out items.
 
 
+Batch and supplied-content scoring
+----------------------------------
+
+The implementation-specific `score_all(Model, User, Items, Scores)` predicate
+validates the model once and returns `Item-Score` pairs in input order,
+preserving repeated identifiers. Already-rated items can be included. An empty
+batch returns `[]` after validating the model and user. Every requested item
+must belong to the catalog, even for an unknown user or an empty profile:
+
+  | ?- tfidf_recommender::learn(article_content, Model),
+       tfidf_recommender::score_all(Model, alice, [second,third,second], Scores).
+
+The second item scores approximately `0.948683` both times; the third scores zero.
+
+The implementation-specific `score_content(Model, User, Content, Score)`
+predicate scores a supplied descriptor without assigning an item identifier or
+changing the catalog, fitted state, or profiles. Its representation must match
+the trained model: `features(Occurrences)` for feature-list models or
+`vector(Pairs)` for preweighted models.
+
+Feature lists use the stored vectorizer's vocabulary, weighting, IDF, frequency
+filters, and normalization. Out-of-vocabulary terms are ignored, including in
+relative term-frequency denominators; an empty or entirely unseen list scores
+zero. Repetitions retain their term-count meaning. The candidate is not added
+to the training corpus:
+
+  | ?- tfidf_recommender::learn(article_content, Model),
+       tfidf_recommender::score_content(Model, alice,
+           features([space,science,space,unseen]), Score).
+
+This scores one, matching the first item's content after ignoring `unseen`.
+Preweighted descriptors accept arbitrary finite nonnegative weights and use
+the stored `none` or `l2` normalization, without TF-IDF reweighting. Novel ground
+keys are allowed and contribute to the candidate's cosine magnitude. Exact
+zeros are removed; repeated keys are rejected. Both APIs validate supplied
+identifiers or content before returning zero for an unknown user or empty profile.
+
+
+Feedback changes
+----------------
+
+The implementation-specific `update_ratings(Model, Ratings, UpdatedModel)`
+predicate accepts a proper list of `rating(User, Item, Value)` records. It
+inserts a new user-item pair or replaces its stored value. New users are allowed;
+items must already belong to the catalog, so extend it first when necessary.
+Identifiers must be instantiated atomic terms and values must be finite numbers
+within the stored inclusive rating scale, if any. Repeated batch keys are
+rejected, even if their values agree. An empty update returns the validated
+original model.
+
+The implementation-specific `remove_ratings(Model, UserItemPairs, UpdatedModel)`
+predicate accepts a proper list of instantiated atomic `User-Item` pairs.
+Missing pairs and repeated requests are accepted. Empty input, no matching
+ratings, or a retry returns the validated original model. No catalog membership
+check is needed for missing pairs. At least one global rating must remain.
+Removing a user's last rating removes their profile; scoring then follows the
+unknown-user zero policy. Withdrawn items become recommendation candidates
+again and receive normal cosine scores, not forced zeros:
+
+  | ?- tfidf_recommender::learn(article_content, Model),
+       tfidf_recommender::update_ratings(Model,
+           [rating(alice,first,1),rating(alice,third,5),rating(bob,second,5)], Rated),
+       tfidf_recommender::remove_ratings(Rated,
+           [alice-third,alice-third,unknown-missing], Updated),
+       tfidf_recommender::recommend(Updated, alice, 3, Recommendations).
+
+Alice again receives `second` with score approximately `0.948683`, followed by
+`third` with zero. Bob's feedback remains. Rating count is two and user count
+is two.
+
+Both predicates return immutable model terms, retaining content, item vectors,
+the fitted vectorizer, scale, and effective options. They rebuild profiles from
+the complete resulting history, including user means and threshold selection.
+In rating-weighted mode, a mean shift can newly select a zero or negative rating
+and raise `domain_error(positive_rating_weight, Rating)`, even when the changed
+or removed record had a positive value. Empty selected content does not bypass
+this rule. Failed updates leave the original model unchanged. These are history
+rebuilds, not negative-feedback subtraction or optimized incremental learning.
+
+
+Catalog changes
+---------------
+
+The implementation-specific `extend_catalog(Model, ItemContents, UpdatedModel)`
+predicate adds new, unrated item identifiers. The
+`replace_content(Model, ItemContents, UpdatedModel)` predicate changes content
+for existing identifiers. Both accept proper lists of unique atomic
+`Item-Descriptor` pairs, require the trained representation, and apply the same
+descriptor validation as training. Extension rejects existing identifiers;
+replacement rejects absent identifiers. Empty lists return the validated
+original model:
+
+  | ?- tfidf_recommender::learn(article_content, Model),
+       tfidf_recommender::extend_catalog(Model,
+           [fourth-features([science,newtag])], Extended),
+       tfidf_recommender::replace_content(Extended,
+           [second-features([science,space,space])], Updated),
+       tfidf_recommender::score(Updated, alice, second, Score),
+       tfidf_recommender::recommend(Updated, alice, 4, Recommendations).
+
+The second item now scores one. The fourth item is an unrated recommendation
+candidate; the original model still has only three catalog identifiers.
+
+Unlike `score_content/4`, feature-mode catalog changes refit the FULL corpus,
+including unchanged, unrated, and empty-content items. Stored vocabulary limits,
+frequency filters, IDF, and normalization are reapplied, then all item vectors
+and profiles are rebuilt. Novel features may enter the vocabulary. Old-item
+scores may change, even when only an unrated item's content changes. If fitting
+eliminates the vocabulary, the normal vectorizer error is raised; there is no
+stale-vectorizer fallback or automatic filter relaxation.
+
+Preweighted catalogs do not fit a vectorizer. They rebuild normalized vectors
+and profiles using the stored options. Adding unrated vectors preserves existing
+vectors and profiles; replacing selected content can change profiles. All
+catalog changes retain ratings, scale, and effective options. Replacement retains
+catalog identifiers; extension makes new items available to normal scoring and
+recommendation. Updated models satisfy the same validation and export contracts
+as freshly trained models.
+
+All four update predicates validate the original model once, even for no-op
+requests, and return new terms without reopening the source dataset. Required
+diagnostics are refreshed while additional terms and diagnostic order are
+preserved. Validation itself still refits the original feature model; only
+feedback rebuilding retains its fitted state without another fit.
+
+
 Models, diagnostics, and export
 -------------------------------
 
@@ -188,7 +315,7 @@ contains sorted `Item-Vector` entries. `Profiles` contains sorted `User-Vector`
 entries for every observed user, including users with empty profiles.
 `Vectorizer` is the fitted `text_vectorizer_model(Features, Diagnostics)` term
 or `none` for externally weighted vectors. `Scale` is `none` or `scale(Min,Max)`
-and validates training ratings only.
+and validates training ratings and rating upserts, not relevance scores.
 
 Diagnostics contain `model(tfidf_recommender)`, `rating_count(Count)`,
 `options(Options)`, `user_count(Count)`, `item_count(Count)`,
@@ -221,20 +348,45 @@ descriptors, improper or nonground lists, duplicate vector keys, nonpair vector
 entries, and negative/nonnumeric/nonfinite weights. Empty learned vocabulary
 and inconsistent vectorizer frequency bounds propagate vectorizer errors.
 Rating-weighted training rejects nonpositive selected ratings with
-`domain_error(positive_rating_weight, Rating)`. Query model, identifier and
-recommendation-count errors follow the inherited protocol declarations.
+`domain_error(positive_rating_weight, Rating)`, also applicable after feedback
+changes. Query model, identifier and recommendation-count errors follow the
+inherited protocol declarations. Batch and update inputs must be proper lists;
+variables raise instantiation errors. Supplied-content or catalog representation
+mismatches raise `domain_error(content_representation, Content)`.
+
+Catalog extension rejects existing identifiers with
+`domain_error(new_catalog_item, Item)`; replacement and rating upserts reject
+absent identifiers with `domain_error(catalog_item, Item)`. Repeated catalog
+identifiers raise `domain_error(duplicate_item, Item)` and repeated upsert keys
+raise `domain_error(duplicate_rating, User-Item)`. Malformed feedback records
+raise `type_error(rating, Entry)`; nonfinite values raise
+`domain_error(finite_rating, Value)`. Rating removal validates every pair,
+ignores missing or repeated pairs, and rejects an empty resulting history with
+`domain_error(non_empty_ratings, [])`.
 
 
 Limitations
 -----------
 
-Training and model validation are in-memory. Duplicate checks, sparse lookup,
-and existing cosine overlap use lists and can be quadratic. Public model
-validation refits vectors and recomputes profiles, favoring consistency over
-large-catalog throughput; recommendation validates once before scoring all
-candidates. Weight and magnitude rescaling avoid unnecessary centroid overflow,
-but vectorizer arithmetic and user means retain backend numeric limits.
-There is no epsilon in selection or sparse zero removal. No raw-text pipeline,
-negative-feedback Rocchio subtraction, rating calibration, popularity fallback,
-implicit-only training, incremental update, or post-training new-item API is
-provided. New catalog content requires refitting the model and IDF statistics.
+- Training and model validation are in-memory.
+- Duplicate checks, sparse lookup, and existing cosine overlap use lists and
+  can be quadratic.
+- Public model validation refits vectors and recomputes profiles, favoring
+  consistency over large-catalog throughput. Batch scoring and recommendation
+  validate once before scoring all requested items or candidates; repeated
+  single-item scoring still repeats validation.
+- Weight and magnitude rescaling avoid unnecessary centroid overflow, but
+  vectorizer arithmetic and user means retain backend numeric limits.
+- There is no epsilon in selection or sparse zero removal.
+- No raw-text pipeline is provided.
+- Negative-feedback Rocchio subtraction is not supported.
+- Scores are not calibrated rating predictions.
+- There is no popularity fallback.
+- Implicit-only training is not supported.
+- Feedback edits, retractions, and catalog additions/replacements rebuild derived
+  data; optimized incremental learning is not supported. Feature catalog changes
+  refit the complete corpus and may change old-item scores.
+- Catalog-item removal and rating-scale changes require retraining.
+- Supplied feature-list content uses the fitted vocabulary; new features enter
+  the model only through a catalog refit. Descriptor representations cannot be
+  mixed or switched by an update.

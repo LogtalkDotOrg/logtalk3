@@ -354,6 +354,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#datasets-and-usage">Datasets and usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#training-and-scoring">Training and scoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#batch-and-supplied-content-scoring">Batch and supplied-content scoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#feedback-changes">Feedback changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#catalog-changes">Catalog changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#models-diagnostics-and-export">Models, diagnostics, and export</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#validation-errors">Validation errors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
@@ -545,9 +548,9 @@ options; fitted vectorizer diagnostics record its effective options.</p>
 </section>
 <section id="training-and-scoring">
 <h2>Training and scoring<a class="headerlink" href="#training-and-scoring" title="Link to this heading"></a></h2>
-<p>Vocabulary and document frequencies are fitted once over ALL catalog
-items, including unrated items and empty-content documents. Under
-default weighting:</p>
+<p>Training and catalog changes fit vocabulary and document frequencies
+over all catalog items, including unrated items and empty-content
+documents. Under default weighting:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="nv">IDF</span>(f) <span class="o">=</span> <span class="k">log</span>((<span class="m">1</span> <span class="o">+</span> catalog_size) <span class="o">/</span> (<span class="m">1</span> <span class="o">+</span> document_frequency(f))) <span class="o">+</span> <span class="m">1</span>
 weight(i,f) <span class="o">=</span> occurrence_count(i,f) <span class="o">*</span> <span class="nv">IDF</span>(f)
 </pre></div>
@@ -590,6 +593,126 @@ weighting produce <code class="docutils literal notranslate"><span class="pre">[
 explicitly; catalog content may still be available for unrated or
 held-out items.</p>
 </section>
+<section id="batch-and-supplied-content-scoring">
+<h2>Batch and supplied-content scoring<a class="headerlink" href="#batch-and-supplied-content-scoring" title="Link to this heading"></a></h2>
+<p>The implementation-specific <code class="docutils literal notranslate"><span class="pre">score_all(Model,</span> <span class="pre">User,</span> <span class="pre">Items,</span> <span class="pre">Scores)</span></code>
+predicate validates the model once and returns <code class="docutils literal notranslate"><span class="pre">Item-Score</span></code> pairs in
+input order, preserving repeated identifiers. Already-rated items can be
+included. An empty batch returns <code class="docutils literal notranslate"><span class="pre">[]</span></code> after validating the model and
+user. Every requested item must belong to the catalog, even for an
+unknown user or an empty profile:</p>
+<p>| ?- tfidf_recommender::learn(article_content, Model),
+tfidf_recommender::score_all(Model, alice, [second,third,second],
+Scores).</p>
+<p>The second item scores approximately <code class="docutils literal notranslate"><span class="pre">0.948683</span></code> both times; the third
+scores zero.</p>
+<p>The implementation-specific
+<code class="docutils literal notranslate"><span class="pre">score_content(Model,</span> <span class="pre">User,</span> <span class="pre">Content,</span> <span class="pre">Score)</span></code> predicate scores a
+supplied descriptor without assigning an item identifier or changing the
+catalog, fitted state, or profiles. Its representation must match the
+trained model: <code class="docutils literal notranslate"><span class="pre">features(Occurrences)</span></code> for feature-list models or
+<code class="docutils literal notranslate"><span class="pre">vector(Pairs)</span></code> for preweighted models.</p>
+<p>Feature lists use the stored vectorizer’s vocabulary, weighting, IDF,
+frequency filters, and normalization. Out-of-vocabulary terms are
+ignored, including in relative term-frequency denominators; an empty or
+entirely unseen list scores zero. Repetitions retain their term-count
+meaning. The candidate is not added to the training corpus:</p>
+<p>| ?- tfidf_recommender::learn(article_content, Model),
+tfidf_recommender::score_content(Model, alice,
+features([space,science,space,unseen]), Score).</p>
+<p>This scores one, matching the first item’s content after ignoring
+<code class="docutils literal notranslate"><span class="pre">unseen</span></code>. Preweighted descriptors accept arbitrary finite nonnegative
+weights and use the stored <code class="docutils literal notranslate"><span class="pre">none</span></code> or <code class="docutils literal notranslate"><span class="pre">l2</span></code> normalization, without
+TF-IDF reweighting. Novel ground keys are allowed and contribute to the
+candidate’s cosine magnitude. Exact zeros are removed; repeated keys are
+rejected. Both APIs validate supplied identifiers or content before
+returning zero for an unknown user or empty profile.</p>
+</section>
+<section id="feedback-changes">
+<h2>Feedback changes<a class="headerlink" href="#feedback-changes" title="Link to this heading"></a></h2>
+<p>The implementation-specific
+<code class="docutils literal notranslate"><span class="pre">update_ratings(Model,</span> <span class="pre">Ratings,</span> <span class="pre">UpdatedModel)</span></code> predicate accepts a
+proper list of <code class="docutils literal notranslate"><span class="pre">rating(User,</span> <span class="pre">Item,</span> <span class="pre">Value)</span></code> records. It inserts a new
+user-item pair or replaces its stored value. New users are allowed;
+items must already belong to the catalog, so extend it first when
+necessary. Identifiers must be instantiated atomic terms and values must
+be finite numbers within the stored inclusive rating scale, if any.
+Repeated batch keys are rejected, even if their values agree. An empty
+update returns the validated original model.</p>
+<p>The implementation-specific
+<code class="docutils literal notranslate"><span class="pre">remove_ratings(Model,</span> <span class="pre">UserItemPairs,</span> <span class="pre">UpdatedModel)</span></code> predicate accepts
+a proper list of instantiated atomic <code class="docutils literal notranslate"><span class="pre">User-Item</span></code> pairs. Missing pairs
+and repeated requests are accepted. Empty input, no matching ratings, or
+a retry returns the validated original model. No catalog membership
+check is needed for missing pairs. At least one global rating must
+remain. Removing a user’s last rating removes their profile; scoring
+then follows the unknown-user zero policy. Withdrawn items become
+recommendation candidates again and receive normal cosine scores, not
+forced zeros:</p>
+<p>| ?- tfidf_recommender::learn(article_content, Model),
+tfidf_recommender::update_ratings(Model,
+[rating(alice,first,1),rating(alice,third,5),rating(bob,second,5)],
+Rated), tfidf_recommender::remove_ratings(Rated,
+[alice-third,alice-third,unknown-missing], Updated),
+tfidf_recommender::recommend(Updated, alice, 3, Recommendations).</p>
+<p>Alice again receives <code class="docutils literal notranslate"><span class="pre">second</span></code> with score approximately <code class="docutils literal notranslate"><span class="pre">0.948683</span></code>,
+followed by <code class="docutils literal notranslate"><span class="pre">third</span></code> with zero. Bob’s feedback remains. Rating count is
+two and user count is two.</p>
+<p>Both predicates return immutable model terms, retaining content, item
+vectors, the fitted vectorizer, scale, and effective options. They
+rebuild profiles from the complete resulting history, including user
+means and threshold selection. In rating-weighted mode, a mean shift can
+newly select a zero or negative rating and raise
+<code class="docutils literal notranslate"><span class="pre">domain_error(positive_rating_weight,</span> <span class="pre">Rating)</span></code>, even when the changed
+or removed record had a positive value. Empty selected content does not
+bypass this rule. Failed updates leave the original model unchanged.
+These are history rebuilds, not negative-feedback subtraction or
+optimized incremental learning.</p>
+</section>
+<section id="catalog-changes">
+<h2>Catalog changes<a class="headerlink" href="#catalog-changes" title="Link to this heading"></a></h2>
+<p>The implementation-specific
+<code class="docutils literal notranslate"><span class="pre">extend_catalog(Model,</span> <span class="pre">ItemContents,</span> <span class="pre">UpdatedModel)</span></code> predicate adds
+new, unrated item identifiers. The
+<code class="docutils literal notranslate"><span class="pre">replace_content(Model,</span> <span class="pre">ItemContents,</span> <span class="pre">UpdatedModel)</span></code> predicate changes
+content for existing identifiers. Both accept proper lists of unique
+atomic <code class="docutils literal notranslate"><span class="pre">Item-Descriptor</span></code> pairs, require the trained representation,
+and apply the same descriptor validation as training. Extension rejects
+existing identifiers; replacement rejects absent identifiers. Empty
+lists return the validated original model:</p>
+<p>| ?- tfidf_recommender::learn(article_content, Model),
+tfidf_recommender::extend_catalog(Model,
+[fourth-features([science,newtag])], Extended),
+tfidf_recommender::replace_content(Extended,
+[second-features([science,space,space])], Updated),
+tfidf_recommender::score(Updated, alice, second, Score),
+tfidf_recommender::recommend(Updated, alice, 4, Recommendations).</p>
+<p>The second item now scores one. The fourth item is an unrated
+recommendation candidate; the original model still has only three
+catalog identifiers.</p>
+<p>Unlike <code class="docutils literal notranslate"><span class="pre">score_content/4</span></code>, feature-mode catalog changes refit the FULL
+corpus, including unchanged, unrated, and empty-content items. Stored
+vocabulary limits, frequency filters, IDF, and normalization are
+reapplied, then all item vectors and profiles are rebuilt. Novel
+features may enter the vocabulary. Old-item scores may change, even when
+only an unrated item’s content changes. If fitting eliminates the
+vocabulary, the normal vectorizer error is raised; there is no
+stale-vectorizer fallback or automatic filter relaxation.</p>
+<p>Preweighted catalogs do not fit a vectorizer. They rebuild normalized
+vectors and profiles using the stored options. Adding unrated vectors
+preserves existing vectors and profiles; replacing selected content can
+change profiles. All catalog changes retain ratings, scale, and
+effective options. Replacement retains catalog identifiers; extension
+makes new items available to normal scoring and recommendation. Updated
+models satisfy the same validation and export contracts as freshly
+trained models.</p>
+<p>All four update predicates validate the original model once, even for
+no-op requests, and return new terms without reopening the source
+dataset. Required diagnostics are refreshed while additional terms and
+diagnostic order are preserved. Validation itself still refits the
+original feature model; only feedback rebuilding retains its fitted
+state without another fit.</p>
+</section>
 <section id="models-diagnostics-and-export">
 <h2>Models, diagnostics, and export<a class="headerlink" href="#models-diagnostics-and-export" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">learn/2</span></code> and <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicates return a model with the
@@ -605,7 +728,8 @@ entries. <code class="docutils literal notranslate"><span class="pre">Profiles</
 observed user, including users with empty profiles. <code class="docutils literal notranslate"><span class="pre">Vectorizer</span></code> is
 the fitted <code class="docutils literal notranslate"><span class="pre">text_vectorizer_model(Features,</span> <span class="pre">Diagnostics)</span></code> term or
 <code class="docutils literal notranslate"><span class="pre">none</span></code> for externally weighted vectors. <code class="docutils literal notranslate"><span class="pre">Scale</span></code> is <code class="docutils literal notranslate"><span class="pre">none</span></code> or
-<code class="docutils literal notranslate"><span class="pre">scale(Min,Max)</span></code> and validates training ratings only.</p>
+<code class="docutils literal notranslate"><span class="pre">scale(Min,Max)</span></code> and validates training ratings and rating upserts,
+not relevance scores.</p>
 <p>Diagnostics contain <code class="docutils literal notranslate"><span class="pre">model(tfidf_recommender)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">rating_count(Count)</span></code>, <code class="docutils literal notranslate"><span class="pre">options(Options)</span></code>, <code class="docutils literal notranslate"><span class="pre">user_count(Count)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">item_count(Count)</span></code>, <code class="docutils literal notranslate"><span class="pre">content_representation(features|vectors)</span></code>,
@@ -637,23 +761,51 @@ lists, duplicate vector keys, nonpair vector entries, and
 negative/nonnumeric/nonfinite weights. Empty learned vocabulary and
 inconsistent vectorizer frequency bounds propagate vectorizer errors.
 Rating-weighted training rejects nonpositive selected ratings with
-<code class="docutils literal notranslate"><span class="pre">domain_error(positive_rating_weight,</span> <span class="pre">Rating)</span></code>. Query model,
-identifier and recommendation-count errors follow the inherited protocol
-declarations.</p>
+<code class="docutils literal notranslate"><span class="pre">domain_error(positive_rating_weight,</span> <span class="pre">Rating)</span></code>, also applicable after
+feedback changes. Query model, identifier and recommendation-count
+errors follow the inherited protocol declarations. Batch and update
+inputs must be proper lists; variables raise instantiation errors.
+Supplied-content or catalog representation mismatches raise
+<code class="docutils literal notranslate"><span class="pre">domain_error(content_representation,</span> <span class="pre">Content)</span></code>.</p>
+<p>Catalog extension rejects existing identifiers with
+<code class="docutils literal notranslate"><span class="pre">domain_error(new_catalog_item,</span> <span class="pre">Item)</span></code>; replacement and rating upserts
+reject absent identifiers with <code class="docutils literal notranslate"><span class="pre">domain_error(catalog_item,</span> <span class="pre">Item)</span></code>.
+Repeated catalog identifiers raise
+<code class="docutils literal notranslate"><span class="pre">domain_error(duplicate_item,</span> <span class="pre">Item)</span></code> and repeated upsert keys raise
+<code class="docutils literal notranslate"><span class="pre">domain_error(duplicate_rating,</span> <span class="pre">User-Item)</span></code>. Malformed feedback
+records raise <code class="docutils literal notranslate"><span class="pre">type_error(rating,</span> <span class="pre">Entry)</span></code>; nonfinite values raise
+<code class="docutils literal notranslate"><span class="pre">domain_error(finite_rating,</span> <span class="pre">Value)</span></code>. Rating removal validates every
+pair, ignores missing or repeated pairs, and rejects an empty resulting
+history with <code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_ratings,</span> <span class="pre">[])</span></code>.</p>
 </section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
-<p>Training and model validation are in-memory. Duplicate checks, sparse
-lookup, and existing cosine overlap use lists and can be quadratic.
-Public model validation refits vectors and recomputes profiles, favoring
-consistency over large-catalog throughput; recommendation validates once
-before scoring all candidates. Weight and magnitude rescaling avoid
-unnecessary centroid overflow, but vectorizer arithmetic and user means
-retain backend numeric limits. There is no epsilon in selection or
-sparse zero removal. No raw-text pipeline, negative-feedback Rocchio
-subtraction, rating calibration, popularity fallback, implicit-only
-training, incremental update, or post-training new-item API is provided.
-New catalog content requires refitting the model and IDF statistics.</p>
+<ul class="simple">
+<li><p>Training and model validation are in-memory.</p></li>
+<li><p>Duplicate checks, sparse lookup, and existing cosine overlap use lists
+and can be quadratic.</p></li>
+<li><p>Public model validation refits vectors and recomputes profiles,
+favoring consistency over large-catalog throughput. Batch scoring and
+recommendation validate once before scoring all requested items or
+candidates; repeated single-item scoring still repeats validation.</p></li>
+<li><p>Weight and magnitude rescaling avoid unnecessary centroid overflow,
+but vectorizer arithmetic and user means retain backend numeric
+limits.</p></li>
+<li><p>There is no epsilon in selection or sparse zero removal.</p></li>
+<li><p>No raw-text pipeline is provided.</p></li>
+<li><p>Negative-feedback Rocchio subtraction is not supported.</p></li>
+<li><p>Scores are not calibrated rating predictions.</p></li>
+<li><p>There is no popularity fallback.</p></li>
+<li><p>Implicit-only training is not supported.</p></li>
+<li><p>Feedback edits, retractions, and catalog additions/replacements
+rebuild derived data; optimized incremental learning is not supported.
+Feature catalog changes refit the complete corpus and may change
+old-item scores.</p></li>
+<li><p>Catalog-item removal and rating-scale changes require retraining.</p></li>
+<li><p>Supplied feature-list content uses the fitted vocabulary; new features
+enter the model only through a catalog refit. Descriptor
+representations cannot be mixed or switched by an update.</p></li>
+</ul>
 </section>
 </section>
 

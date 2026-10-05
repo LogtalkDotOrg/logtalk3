@@ -44,7 +44,257 @@ Content-based recommender using TF-IDF item vectors, positive-feedback centroid 
 Public predicates
 -----------------
 
-(no local declarations; see entity ancestors if any)
+.. index:: score_all/4
+.. _tfidf_recommender/0::score_all/4:
+
+``score_all/4``
+^^^^^^^^^^^^^^^
+
+Scores catalog items in input order, preserving duplicates and validating the model once. An empty batch validates the model and user.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``score_all(Recommender,User,Items,Scores)``
+| **Mode and number of proofs:**
+|    ``score_all(+compound,+atomic,+list(atomic),-list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A required argument or identifier is a variable:
+|        ``instantiation_error``
+|    The model is invalid:
+|        ``domain_error(recommender,Recommender)``
+|    A user or item identifier is not atomic:
+|        ``type_error(atomic,Identifier)``
+|    Items is not a proper list:
+|        ``type_error(list,Items)``
+|    An item is absent from the catalog:
+|        ``domain_error(catalog_item,Item)``
+
+
+------------
+
+.. index:: score_content/4
+.. _tfidf_recommender/0::score_content/4:
+
+``score_content/4``
+^^^^^^^^^^^^^^^^^^^
+
+Scores supplied content of the trained representation without changing the model. Features use the fitted vocabulary and weighting; vectors use the stored normalization.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``score_content(Recommender,User,Content,Score)``
+| **Mode and number of proofs:**
+|    ``score_content(+compound,+atomic,+compound,-number)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A required argument, feature, entry, or weight is a variable:
+|        ``instantiation_error``
+|    The model is invalid:
+|        ``domain_error(recommender,Recommender)``
+|    User is not atomic:
+|        ``type_error(atomic,User)``
+|    A content descriptor is invalid:
+|        ``domain_error(item_content,Content)``
+|    The descriptor differs from the trained representation:
+|        ``domain_error(content_representation,Content)``
+|    A content list is not a proper list:
+|        ``type_error(list,List)``
+|    A vector entry is not a pair:
+|        ``type_error(pair,Entry)``
+|    A vector repeats a feature key:
+|        ``domain_error(duplicate_feature,Feature)``
+|    A vector weight is not numeric:
+|        ``type_error(number,Weight)``
+|    A vector weight is negative or nonfinite:
+|        ``domain_error(non_negative_finite_weight,Weight)``
+
+
+------------
+
+.. index:: update_ratings/3
+.. _tfidf_recommender/0::update_ratings/3:
+
+``update_ratings/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns a model with inserted or replaced ratings and rebuilt profiles, accepting new users but requiring catalog items. An empty update returns the validated original model.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``update_ratings(Recommender,Ratings,UpdatedRecommender)``
+| **Mode and number of proofs:**
+|    ``update_ratings(+compound,+list(compound),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A required argument, record, identifier, or value is a variable:
+|        ``instantiation_error``
+|    The model is invalid:
+|        ``domain_error(recommender,Recommender)``
+|    Ratings is not a proper list:
+|        ``type_error(list,Ratings)``
+|    An entry is not a rating record:
+|        ``type_error(rating,Entry)``
+|    A user or item identifier is not atomic:
+|        ``type_error(atomic,Identifier)``
+|    A rating value is not numeric:
+|        ``type_error(number,Rating)``
+|    A rating value is nonfinite:
+|        ``domain_error(finite_rating,Rating)``
+|    A rating value is outside the stored scale:
+|        ``domain_error(rating_scale(Min,Max),Rating)``
+|    An item is absent from the catalog:
+|        ``domain_error(catalog_item,Item)``
+|    A user-item pair occurs more than once in the updates:
+|        ``domain_error(duplicate_rating,User-Item)``
+|    A selected rating is not positive in rating-weighted mode:
+|        ``domain_error(positive_rating_weight,Rating)``
+
+
+------------
+
+.. index:: remove_ratings/3
+.. _tfidf_recommender/0::remove_ratings/3:
+
+``remove_ratings/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns a model with requested ratings removed and profiles rebuilt. Missing and repeated pairs are accepted; no matching ratings returns the validated original model.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``remove_ratings(Recommender,UserItemPairs,UpdatedRecommender)``
+| **Mode and number of proofs:**
+|    ``remove_ratings(+compound,+list(pair),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A required argument, entry, or identifier is a variable:
+|        ``instantiation_error``
+|    The model is invalid:
+|        ``domain_error(recommender,Recommender)``
+|    UserItemPairs is not a proper list:
+|        ``type_error(list,UserItemPairs)``
+|    An entry is not a pair:
+|        ``type_error(pair,Entry)``
+|    A user or item identifier is not atomic:
+|        ``type_error(atomic,Identifier)``
+|    No ratings would remain:
+|        ``domain_error(non_empty_ratings,[])``
+|    A selected rating is not positive in rating-weighted mode:
+|        ``domain_error(positive_rating_weight,Rating)``
+
+
+------------
+
+.. index:: extend_catalog/3
+.. _tfidf_recommender/0::extend_catalog/3:
+
+``extend_catalog/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns a model with new catalog items, refitting the full feature corpus and rebuilding profiles. An empty extension returns the validated original model.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``extend_catalog(Recommender,ItemContents,UpdatedRecommender)``
+| **Mode and number of proofs:**
+|    ``extend_catalog(+compound,+list(pair),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A required argument, entry, identifier, feature, or weight is a variable:
+|        ``instantiation_error``
+|    The model is invalid:
+|        ``domain_error(recommender,Recommender)``
+|    A supplied list is not a proper list:
+|        ``type_error(list,List)``
+|    A content declaration or vector entry is not a pair:
+|        ``type_error(pair,Entry)``
+|    An item identifier is not atomic:
+|        ``type_error(atomic,Item)``
+|    An identifier already belongs to the catalog:
+|        ``domain_error(new_catalog_item,Item)``
+|    An identifier occurs more than once in the extension:
+|        ``domain_error(duplicate_item,Item)``
+|    A content descriptor is invalid:
+|        ``domain_error(item_content,Content)``
+|    Content representations are mixed or differ from the catalog:
+|        ``domain_error(content_representation,Content)``
+|    A vector repeats a feature key:
+|        ``domain_error(duplicate_feature,Feature)``
+|    A vector weight is not numeric:
+|        ``type_error(number,Weight)``
+|    A vector weight is negative or nonfinite:
+|        ``domain_error(non_negative_finite_weight,Weight)``
+|    Feature fitting produces no vocabulary:
+|        ``domain_error(non_empty_vocabulary,Corpus)``
+|    A vectorizer frequency bound is inconsistent with the corpus:
+|        ``domain_error(option,Option)``
+|    A selected rating is not positive in rating-weighted mode:
+|        ``domain_error(positive_rating_weight,Rating)``
+
+
+------------
+
+.. index:: replace_content/3
+.. _tfidf_recommender/0::replace_content/3:
+
+``replace_content/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns a model with replaced catalog content, refitting the full feature corpus and rebuilding profiles. An empty replacement returns the validated original model.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``replace_content(Recommender,ItemContents,UpdatedRecommender)``
+| **Mode and number of proofs:**
+|    ``replace_content(+compound,+list(pair),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A required argument, entry, identifier, feature, or weight is a variable:
+|        ``instantiation_error``
+|    The model is invalid:
+|        ``domain_error(recommender,Recommender)``
+|    A supplied list is not a proper list:
+|        ``type_error(list,List)``
+|    A content declaration or vector entry is not a pair:
+|        ``type_error(pair,Entry)``
+|    An item identifier is not atomic:
+|        ``type_error(atomic,Item)``
+|    An item is absent from the catalog:
+|        ``domain_error(catalog_item,Item)``
+|    An identifier occurs more than once in the replacements:
+|        ``domain_error(duplicate_item,Item)``
+|    A content descriptor is invalid:
+|        ``domain_error(item_content,Content)``
+|    Content representations are mixed or differ from the catalog:
+|        ``domain_error(content_representation,Content)``
+|    A vector repeats a feature key:
+|        ``domain_error(duplicate_feature,Feature)``
+|    A vector weight is not numeric:
+|        ``type_error(number,Weight)``
+|    A vector weight is negative or nonfinite:
+|        ``domain_error(non_negative_finite_weight,Weight)``
+|    Feature fitting produces no vocabulary:
+|        ``domain_error(non_empty_vocabulary,Corpus)``
+|    A vectorizer frequency bound is inconsistent with the corpus:
+|        ``domain_error(option,Option)``
+|    A selected rating is not positive in rating-weighted mode:
+|        ``domain_error(positive_rating_weight,Rating)``
+
+
+------------
 
 Protected predicates
 --------------------
@@ -53,6 +303,251 @@ Protected predicates
 
 Private predicates
 ------------------
+
+.. index:: check_content_kind/3
+.. _tfidf_recommender/0::check_content_kind/3:
+
+``check_content_kind/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that supplied content matches the stored representation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_content_kind(Kind,Content,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``check_content_kind(+atom,+compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    The descriptor differs from the trained representation:
+|        ``domain_error(content_representation,Content)``
+
+
+------------
+
+.. index:: check_catalog_replacements/2
+.. _tfidf_recommender/0::check_catalog_replacements/2:
+
+``check_catalog_replacements/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that replacement declarations have atomic catalog identifiers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_catalog_replacements(ItemContents,Contents)``
+| **Mode and number of proofs:**
+|    ``check_catalog_replacements(+list(pair),+list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An entry or identifier is a variable:
+|        ``instantiation_error``
+|    An entry is not a pair:
+|        ``type_error(pair,Entry)``
+|    An identifier is not atomic:
+|        ``type_error(atomic,Item)``
+|    An identifier is absent from the catalog:
+|        ``domain_error(catalog_item,Item)``
+
+
+------------
+
+.. index:: check_catalog_additions/2
+.. _tfidf_recommender/0::check_catalog_additions/2:
+
+``check_catalog_additions/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that content declarations have atomic identifiers absent from the catalog.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_catalog_additions(ItemContents,Contents)``
+| **Mode and number of proofs:**
+|    ``check_catalog_additions(+list(pair),+list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An entry or identifier is a variable:
+|        ``instantiation_error``
+|    An entry is not a pair:
+|        ``type_error(pair,Entry)``
+|    An identifier is not atomic:
+|        ``type_error(atomic,Item)``
+|    An identifier already belongs to the catalog:
+|        ``domain_error(new_catalog_item,Item)``
+
+
+------------
+
+.. index:: rebuild_catalog_model/5
+.. _tfidf_recommender/0::rebuild_catalog_model/5:
+
+``rebuild_catalog_model/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Rebuilds the full catalog fitted state, profiles, and diagnostics using the stored options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rebuild_catalog_model(Ratings,Contents,Scale,Diagnostics,UpdatedRecommender)``
+| **Mode and number of proofs:**
+|    ``rebuild_catalog_model(+list(compound),+list(pair),+term,+list(compound),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Feature fitting produces no vocabulary:
+|        ``domain_error(non_empty_vocabulary,Corpus)``
+|    A vectorizer frequency bound is inconsistent with the corpus:
+|        ``domain_error(option,Option)``
+|    Vectorizer options are supplied for preweighted content:
+|        ``domain_error(option,vectorizer_options(Options))``
+|    A selected rating is not positive in rating-weighted mode:
+|        ``domain_error(positive_rating_weight,Rating)``
+
+
+------------
+
+.. index:: rating_removal_records/3
+.. _tfidf_recommender/0::rating_removal_records/3:
+
+``rating_removal_records/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates user-item pairs and collects matching stored ratings, ignoring missing pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rating_removal_records(UserItemPairs,Ratings,Removals)``
+| **Mode and number of proofs:**
+|    ``rating_removal_records(+list(pair),+list(compound),-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An entry or identifier is a variable:
+|        ``instantiation_error``
+|    An entry is not a pair:
+|        ``type_error(pair,Entry)``
+|    A user or item identifier is not atomic:
+|        ``type_error(atomic,Identifier)``
+
+
+------------
+
+.. index:: check_rating_updates/3
+.. _tfidf_recommender/0::check_rating_updates/3:
+
+``check_rating_updates/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks rating records against the catalog and stored rating scale.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_rating_updates(Ratings,Vectors,Scale)``
+| **Mode and number of proofs:**
+|    ``check_rating_updates(+list(compound),+list(pair),+term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A record, identifier, or value is a variable:
+|        ``instantiation_error``
+|    An entry is not a rating record:
+|        ``type_error(rating,Entry)``
+|    A user or item identifier is not atomic:
+|        ``type_error(atomic,Identifier)``
+|    A rating value is not numeric:
+|        ``type_error(number,Rating)``
+|    A rating value is nonfinite:
+|        ``domain_error(finite_rating,Rating)``
+|    A rating value is outside the stored scale:
+|        ``domain_error(rating_scale(Min,Max),Rating)``
+|    An item is absent from the catalog:
+|        ``domain_error(catalog_item,Item)``
+
+
+------------
+
+.. index:: rebuild_feedback_model/7
+.. _tfidf_recommender/0::rebuild_feedback_model/7:
+
+``rebuild_feedback_model/7``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Rebuilds profiles and diagnostics while retaining the fitted catalog state.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rebuild_feedback_model(Ratings,Contents,Vectors,Vectorizer,Scale,Diagnostics,UpdatedRecommender)``
+| **Mode and number of proofs:**
+|    ``rebuild_feedback_model(+list(compound),+list(pair),+list(pair),+term,+term,+list(compound),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A selected rating is not positive in rating-weighted mode:
+|        ``domain_error(positive_rating_weight,Rating)``
+
+
+------------
+
+.. index:: catalog_score/5
+.. _tfidf_recommender/0::catalog_score/5:
+
+``catalog_score/5``
+^^^^^^^^^^^^^^^^^^^
+
+Scores a catalog identifier using validated model data.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``catalog_score(Vectors,Profiles,User,Item,Score)``
+| **Mode and number of proofs:**
+|    ``catalog_score(+list(pair),+list(pair),+atomic,+atomic,-number)`` - ``one_or_error``
+
+| **Exceptions:**
+|    An item is absent from the catalog:
+|        ``domain_error(catalog_item,Item)``
+
+
+------------
+
+.. index:: score_catalog_items/5
+.. _tfidf_recommender/0::score_catalog_items/5:
+
+``score_catalog_items/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates and scores catalog identifiers in input order using validated model data.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``score_catalog_items(Vectors,Profiles,User,Items,Scores)``
+| **Mode and number of proofs:**
+|    ``score_catalog_items(+list(pair),+list(pair),+atomic,+list(atomic),-list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An identifier is a variable:
+|        ``instantiation_error``
+|    An identifier is not atomic:
+|        ``type_error(atomic,Item)``
+|    An item is absent from the catalog:
+|        ``domain_error(catalog_item,Item)``
+
+
+------------
 
 .. index:: check_finite_ratings/1
 .. _tfidf_recommender/0::check_finite_ratings/1:
