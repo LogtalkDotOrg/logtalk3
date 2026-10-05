@@ -19,30 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(types(loader)),
-	logtalk_load(linear_algebra(loader)),
-	logtalk_load(statistics(loader)),
-	logtalk_load(format(loader)),
-	logtalk_load(os(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(classification_protocols(loader)),
-	logtalk_load([
-		classification_protocols('test_datasets/weather'),
-		classification_protocols('test_datasets/iris_small')
-	], [
-		source_data(on),
-		debug(on)
-	]),
-	logtalk_load([
-		kernel_svm_classifier,
-		test_objects
-	], [
-		source_data(on),
-		debug(on)
-	]),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(invalid_gaussian_mixture_two_blobs,
+	implements(clustering_dataset_protocol)).
+
+	attribute_values(x, continuous).
+	attribute_values(y, continuous).
+
+	example(1, [x-1.0, x-1.1, y-1.0]).
+	example(2, [x-5.0, y-5.0]).
+
+:- end_object.

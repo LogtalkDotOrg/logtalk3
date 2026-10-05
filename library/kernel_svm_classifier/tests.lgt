@@ -19,39 +19,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(xor_dataset,
-	implements(dataset_protocol)).
-
-	attribute_values(x1, continuous).
-	attribute_values(x2, continuous).
-
-	class(label).
-
-	class_values([negative, positive]).
-
-	example(1, positive, [x1-0.0, x2-0.0]).
-	example(2, negative, [x1-0.0, x2-1.0]).
-	example(3, negative, [x1-1.0, x2-0.0]).
-	example(4, positive, [x1-1.0, x2-1.0]).
-
-:- end_object.
-
-
-:- object(featureless_dataset,
-	implements(dataset_protocol)).
-
-	class(label).
-
-	class_values([negative, positive]).
-
-	example(1, negative, []).
-	example(2, positive, []).
-	example(3, negative, []).
-	example(4, positive, []).
-
-:- end_object.
-
-
 :- object(tests,
 	extends(lgtunit)).
 

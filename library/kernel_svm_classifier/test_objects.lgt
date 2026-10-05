@@ -19,30 +19,34 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(types(loader)),
-	logtalk_load(linear_algebra(loader)),
-	logtalk_load(statistics(loader)),
-	logtalk_load(format(loader)),
-	logtalk_load(os(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(classification_protocols(loader)),
-	logtalk_load([
-		classification_protocols('test_datasets/weather'),
-		classification_protocols('test_datasets/iris_small')
-	], [
-		source_data(on),
-		debug(on)
-	]),
-	logtalk_load([
-		kernel_svm_classifier,
-		test_objects
-	], [
-		source_data(on),
-		debug(on)
-	]),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(xor_dataset,
+	implements(dataset_protocol)).
+
+	attribute_values(x1, continuous).
+	attribute_values(x2, continuous).
+
+	class(label).
+
+	class_values([negative, positive]).
+
+	example(1, positive, [x1-0.0, x2-0.0]).
+	example(2, negative, [x1-0.0, x2-1.0]).
+	example(3, negative, [x1-1.0, x2-0.0]).
+	example(4, positive, [x1-1.0, x2-1.0]).
+
+:- end_object.
+
+
+:- object(featureless_dataset,
+	implements(dataset_protocol)).
+
+	class(label).
+
+	class_values([negative, positive]).
+
+	example(1, negative, []).
+	example(2, positive, []).
+	example(3, negative, []).
+	example(4, positive, []).
+
+:- end_object.

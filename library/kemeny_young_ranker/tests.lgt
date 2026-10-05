@@ -19,28 +19,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(singleton_pairwise,
-	implements(pairwise_ranking_dataset_protocol)).
-
-	item(alpha).
-
-:- end_object.
-
-
-:- object(declaration_tie_pairwise,
-	implements(pairwise_ranking_dataset_protocol)).
-
-	item(gamma).
-	item(alpha).
-	item(beta).
-
-	preference(gamma, alpha, 1).
-	preference(alpha, beta, 1).
-	preference(beta, gamma, 1).
-
-:- end_object.
-
-
 :- object(tests,
 	extends(lgtunit)).
 

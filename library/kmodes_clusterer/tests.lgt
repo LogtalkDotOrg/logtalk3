@@ -19,45 +19,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(invalid_shopping_profiles,
-	implements(clustering_dataset_protocol)).
-
-	attribute_values(channel, [online, retail]).
-	attribute_values(region, [north, south]).
-	attribute_values(loyalty, [basic, premium]).
-	attribute_values(device, [mobile, desktop]).
-
-	example(1, [channel-online, region-north, loyalty-basic, device-mobile, device-desktop]).
-	example(2, [channel-retail, region-south, loyalty-premium, device-desktop]).
-
-:- end_object.
-
-
-:- object(unstable_profiles,
-	implements(clustering_dataset_protocol)).
-
-	attribute_values(segment, [a, b]).
-
-	example(1, [segment-a]).
-	example(2, [segment-b]).
-	example(3, [segment-b]).
-
-:- end_object.
-
-
-:- object(invalid_shopping_profile_declarations,
-	implements(clustering_dataset_protocol)).
-
-	attribute_values(channel, [online, retail]).
-	attribute_values(channel, [online, retail]).
-	attribute_values(region, [north, south]).
-
-	example(1, [channel-online, region-north]).
-	example(2, [channel-retail, region-south]).
-
-:- end_object.
-
-
 :- object(tests,
 	extends(lgtunit)).
 

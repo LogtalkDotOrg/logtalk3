@@ -19,19 +19,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(invalid_two_blobs_declarations,
-	implements(clustering_dataset_protocol)).
-
-	attribute_values(x, continuous).
-	attribute_values(x, continuous).
-	attribute_values(y, continuous).
-
-	example(1, [x-1.0, y-1.0]).
-	example(2, [x-5.0, y-5.0]).
-
-:- end_object.
-
-
 :- object(tests,
 	extends(lgtunit)).
 

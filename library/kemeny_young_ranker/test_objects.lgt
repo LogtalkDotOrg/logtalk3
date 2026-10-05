@@ -19,30 +19,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(types(loader)),
-	logtalk_load(linear_algebra(loader)),
-	logtalk_load(statistics(loader)),
-	logtalk_load(format(loader)),
-	logtalk_load(os(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(classification_protocols(loader)),
-	logtalk_load([
-		classification_protocols('test_datasets/weather'),
-		classification_protocols('test_datasets/iris_small')
-	], [
-		source_data(on),
-		debug(on)
-	]),
-	logtalk_load([
-		kernel_svm_classifier,
-		test_objects
-	], [
-		source_data(on),
-		debug(on)
-	]),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(singleton_pairwise,
+	implements(pairwise_ranking_dataset_protocol)).
+
+	item(alpha).
+
+:- end_object.
+
+
+:- object(declaration_tie_pairwise,
+	implements(pairwise_ranking_dataset_protocol)).
+
+	item(gamma).
+	item(alpha).
+	item(beta).
+
+	preference(gamma, alpha, 1).
+	preference(alpha, beta, 1).
+	preference(beta, gamma, 1).
+
+:- end_object.
