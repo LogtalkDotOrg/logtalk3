@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-151 4310,-151 4310,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol stn_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;10&#45;04, 22:51</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;10&#45;05, 02:16</text>
 <g id="clust1" class="cluster">
 <title>cluster_stn_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="stn_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 4286,-54.25 4286,-54.25 4292,-54.25 4298,-60.25 4298,-66.25 4298,-66.25 4298,-127 4298,-127 4298,-133 4292,-139 4286,-139 4286,-139 20,-139 20,-139 14,-139 8,-133 8,-127 8,-127 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-121.25" font-family="Monospace" font-size="10.00" fill="dimgray">stn_protocol</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>new/2</title>
 <polygon fill="springgreen" stroke="black" points="78.12,-100.25 17.88,-100.25 17.88,-64.25 78.12,-64.25 78.12,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="25.88" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L37">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L37">
 <text xml:space="preserve" text-anchor="start" x="31.12" y="-84.12" font-family="Monospace" font-size="11.00">new/2</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>add_time_points/3</title>
 <polygon fill="springgreen" stroke="black" points="237.62,-100.25 96.38,-100.25 96.38,-64.25 237.62,-64.25 237.62,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="104.38" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L44">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L44">
 <text xml:space="preserve" text-anchor="start" x="109.62" y="-84.12" font-family="Monospace" font-size="11.00">add_time_points/3</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>remove_time_points/3</title>
 <polygon fill="springgreen" stroke="black" points="416.75,-100.25 255.25,-100.25 255.25,-64.25 416.75,-64.25 416.75,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="263.25" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L55">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L55">
 <text xml:space="preserve" text-anchor="start" x="268.5" y="-84.12" font-family="Monospace" font-size="11.00">remove_time_points/3</text>
 </a>
 </g>
@@ -71,7 +71,7 @@
 <title>time_points/2</title>
 <polygon fill="springgreen" stroke="black" points="549.12,-100.25 434.88,-100.25 434.88,-64.25 549.12,-64.25 549.12,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="442.88" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L70">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L70">
 <text xml:space="preserve" text-anchor="start" x="448.12" y="-84.12" font-family="Monospace" font-size="11.00">time_points/2</text>
 </a>
 </g>
@@ -85,7 +85,7 @@
 <title>constraints/2</title>
 <polygon fill="springgreen" stroke="black" points="681.12,-100.25 566.88,-100.25 566.88,-64.25 681.12,-64.25 681.12,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="574.88" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L77" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L77">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L77" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L77">
 <text xml:space="preserve" text-anchor="start" x="580.12" y="-84.12" font-family="Monospace" font-size="11.00">constraints/2</text>
 </a>
 </g>
@@ -99,7 +99,7 @@
 <title>consistent/1</title>
 <polygon fill="springgreen" stroke="black" points="806.75,-100.25 699.25,-100.25 699.25,-64.25 806.75,-64.25 806.75,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="707.25" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L84">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L84">
 <text xml:space="preserve" text-anchor="start" x="712.5" y="-84.12" font-family="Monospace" font-size="11.00">consistent/1</text>
 </a>
 </g>
@@ -113,7 +113,7 @@
 <title>schedule/2</title>
 <polygon fill="springgreen" stroke="black" points="919,-100.25 825,-100.25 825,-64.25 919,-64.25 919,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="833" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L91">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L91">
 <text xml:space="preserve" text-anchor="start" x="838.25" y="-84.12" font-family="Monospace" font-size="11.00">schedule/2</text>
 </a>
 </g>
@@ -127,7 +127,7 @@
 <title>earliest_schedule/2</title>
 <polygon fill="springgreen" stroke="black" points="1091.38,-100.25 936.62,-100.25 936.62,-64.25 1091.38,-64.25 1091.38,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="944.62" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L106">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L106">
 <text xml:space="preserve" text-anchor="start" x="949.88" y="-84.12" font-family="Monospace" font-size="11.00">earliest_schedule/2</text>
 </a>
 </g>
@@ -141,7 +141,7 @@
 <title>add_constraint/5</title>
 <polygon fill="springgreen" stroke="black" points="1244.25,-100.25 1109.75,-100.25 1109.75,-64.25 1244.25,-64.25 1244.25,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="1117.75" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L121">
+<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L121">
 <text xml:space="preserve" text-anchor="start" x="1123" y="-84.12" font-family="Monospace" font-size="11.00">add_constraint/5</text>
 </a>
 </g>
@@ -155,7 +155,7 @@
 <title>add_constraint/6</title>
 <polygon fill="springgreen" stroke="black" points="1397.25,-100.25 1262.75,-100.25 1262.75,-64.25 1397.25,-64.25 1397.25,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="1270.75" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L132">
+<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L132">
 <text xml:space="preserve" text-anchor="start" x="1276" y="-84.12" font-family="Monospace" font-size="11.00">add_constraint/6</text>
 </a>
 </g>
@@ -169,7 +169,7 @@
 <title>add_constraints/3</title>
 <polygon fill="springgreen" stroke="black" points="1556.62,-100.25 1415.38,-100.25 1415.38,-64.25 1556.62,-64.25 1556.62,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="1423.38" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L143">
+<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L143">
 <text xml:space="preserve" text-anchor="start" x="1428.62" y="-84.12" font-family="Monospace" font-size="11.00">add_constraints/3</text>
 </a>
 </g>
@@ -183,7 +183,7 @@
 <title>add_constraints/4</title>
 <polygon fill="springgreen" stroke="black" points="1715.62,-100.25 1574.38,-100.25 1574.38,-64.25 1715.62,-64.25 1715.62,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="1582.38" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L154" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L154">
+<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L154" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L154">
 <text xml:space="preserve" text-anchor="start" x="1587.62" y="-84.12" font-family="Monospace" font-size="11.00">add_constraints/4</text>
 </a>
 </g>
@@ -197,7 +197,7 @@
 <title>try_add_constraints/4</title>
 <polygon fill="springgreen" stroke="black" points="1902.12,-100.25 1733.88,-100.25 1733.88,-64.25 1902.12,-64.25 1902.12,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="1741.88" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L165" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L165">
+<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L165" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L165">
 <text xml:space="preserve" text-anchor="start" x="1747.12" y="-84.12" font-family="Monospace" font-size="11.00">try_add_constraints/4</text>
 </a>
 </g>
@@ -211,7 +211,7 @@
 <title>remove_constraints/3</title>
 <polygon fill="springgreen" stroke="black" points="2081.75,-100.25 1920.25,-100.25 1920.25,-64.25 2081.75,-64.25 2081.75,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="1928.25" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node14_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L180">
+<g id="a_node14_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L180">
 <text xml:space="preserve" text-anchor="start" x="1933.5" y="-84.12" font-family="Monospace" font-size="11.00">remove_constraints/3</text>
 </a>
 </g>
@@ -225,7 +225,7 @@
 <title>distance/4</title>
 <polygon fill="springgreen" stroke="black" points="2194,-100.25 2100,-100.25 2100,-64.25 2194,-64.25 2194,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="2108" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node15_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L191" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L191">
+<g id="a_node15_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L191" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L191">
 <text xml:space="preserve" text-anchor="start" x="2113.25" y="-84.12" font-family="Monospace" font-size="11.00">distance/4</text>
 </a>
 </g>
@@ -239,7 +239,7 @@
 <title>distance/5</title>
 <polygon fill="springgreen" stroke="black" points="2306,-100.25 2212,-100.25 2212,-64.25 2306,-64.25 2306,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="2220" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node16_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L198" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L198">
+<g id="a_node16_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L198" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L198">
 <text xml:space="preserve" text-anchor="start" x="2225.25" y="-84.12" font-family="Monospace" font-size="11.00">distance/5</text>
 </a>
 </g>
@@ -253,7 +253,7 @@
 <title>entails/4</title>
 <polygon fill="springgreen" stroke="black" points="2411.62,-100.25 2324.38,-100.25 2324.38,-64.25 2411.62,-64.25 2411.62,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="2332.38" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node17_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L208">
+<g id="a_node17_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L208">
 <text xml:space="preserve" text-anchor="start" x="2337.62" y="-84.12" font-family="Monospace" font-size="11.00">entails/4</text>
 </a>
 </g>
@@ -267,7 +267,7 @@
 <title>entails/5</title>
 <polygon fill="springgreen" stroke="black" points="2516.62,-100.25 2429.38,-100.25 2429.38,-64.25 2516.62,-64.25 2516.62,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="2437.38" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node18_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L215" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L215">
+<g id="a_node18_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L215" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L215">
 <text xml:space="preserve" text-anchor="start" x="2442.62" y="-84.12" font-family="Monospace" font-size="11.00">entails/5</text>
 </a>
 </g>
@@ -281,7 +281,7 @@
 <title>earliest/3</title>
 <polygon fill="springgreen" stroke="black" points="2629,-100.25 2535,-100.25 2535,-64.25 2629,-64.25 2629,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="2543" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node19_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L225" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L225">
+<g id="a_node19_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L225" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L225">
 <text xml:space="preserve" text-anchor="start" x="2548.25" y="-84.12" font-family="Monospace" font-size="11.00">earliest/3</text>
 </a>
 </g>
@@ -295,7 +295,7 @@
 <title>latest/3</title>
 <polygon fill="springgreen" stroke="black" points="2727.25,-100.25 2646.75,-100.25 2646.75,-64.25 2727.25,-64.25 2727.25,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="2654.75" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node20_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L232" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L232">
+<g id="a_node20_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L232" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L232">
 <text xml:space="preserve" text-anchor="start" x="2660" y="-84.12" font-family="Monospace" font-size="11.00">latest/3</text>
 </a>
 </g>
@@ -309,7 +309,7 @@
 <title>bounds/4</title>
 <polygon fill="springgreen" stroke="black" points="2826.25,-100.25 2745.75,-100.25 2745.75,-64.25 2826.25,-64.25 2826.25,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="2753.75" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node21_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L239" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L239">
+<g id="a_node21_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L239" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L239">
 <text xml:space="preserve" text-anchor="start" x="2759" y="-84.12" font-family="Monospace" font-size="11.00">bounds/4</text>
 </a>
 </g>
@@ -323,7 +323,7 @@
 <title>difference_bounds/5</title>
 <polygon fill="springgreen" stroke="black" points="2999.38,-100.25 2844.62,-100.25 2844.62,-64.25 2999.38,-64.25 2999.38,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="2852.62" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node22_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L246" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L246">
+<g id="a_node22_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L246" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L246">
 <text xml:space="preserve" text-anchor="start" x="2857.88" y="-84.12" font-family="Monospace" font-size="11.00">difference_bounds/5</text>
 </a>
 </g>
@@ -337,7 +337,7 @@
 <title>can_precede/3</title>
 <polygon fill="springgreen" stroke="black" points="3132.12,-100.25 3017.88,-100.25 3017.88,-64.25 3132.12,-64.25 3132.12,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="3025.88" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node23_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L253" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L253">
+<g id="a_node23_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L253" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L253">
 <text xml:space="preserve" text-anchor="start" x="3031.12" y="-84.12" font-family="Monospace" font-size="11.00">can_precede/3</text>
 </a>
 </g>
@@ -351,7 +351,7 @@
 <title>must_precede/3</title>
 <polygon fill="springgreen" stroke="black" points="3271.5,-100.25 3150.5,-100.25 3150.5,-64.25 3271.5,-64.25 3271.5,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="3158.5" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node24_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L260" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L260">
+<g id="a_node24_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L260" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L260">
 <text xml:space="preserve" text-anchor="start" x="3163.75" y="-84.12" font-family="Monospace" font-size="11.00">must_precede/3</text>
 </a>
 </g>
@@ -365,7 +365,7 @@
 <title>can_precede_or_equal/3</title>
 <polygon fill="springgreen" stroke="black" points="3464.5,-100.25 3289.5,-100.25 3289.5,-64.25 3464.5,-64.25 3464.5,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="3297.5" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node25_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L267" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L267">
+<g id="a_node25_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L267" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L267">
 <text xml:space="preserve" text-anchor="start" x="3302.75" y="-84.12" font-family="Monospace" font-size="11.00">can_precede_or_equal/3</text>
 </a>
 </g>
@@ -379,7 +379,7 @@
 <title>must_precede_or_equal/3</title>
 <polygon fill="springgreen" stroke="black" points="3663.88,-100.25 3482.12,-100.25 3482.12,-64.25 3663.88,-64.25 3663.88,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="3490.12" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node26_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L274" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L274">
+<g id="a_node26_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L274" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L274">
 <text xml:space="preserve" text-anchor="start" x="3495.38" y="-84.12" font-family="Monospace" font-size="11.00">must_precede_or_equal/3</text>
 </a>
 </g>
@@ -393,7 +393,7 @@
 <title>window_interval/3</title>
 <polygon fill="springgreen" stroke="black" points="3823.62,-100.25 3682.38,-100.25 3682.38,-64.25 3823.62,-64.25 3823.62,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="3690.38" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node27_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L281" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L281">
+<g id="a_node27_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L281" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L281">
 <text xml:space="preserve" text-anchor="start" x="3695.62" y="-84.12" font-family="Monospace" font-size="11.00">window_interval/3</text>
 </a>
 </g>
@@ -407,7 +407,7 @@
 <title>event_interval/4</title>
 <polygon fill="springgreen" stroke="black" points="3976.25,-100.25 3841.75,-100.25 3841.75,-64.25 3976.25,-64.25 3976.25,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="3849.75" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node28_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L292" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L292">
+<g id="a_node28_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L292" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L292">
 <text xml:space="preserve" text-anchor="start" x="3855" y="-84.12" font-family="Monospace" font-size="11.00">event_interval/4</text>
 </a>
 </g>
@@ -421,7 +421,7 @@
 <title>window_relation/4</title>
 <polygon fill="springgreen" stroke="black" points="4135.62,-100.25 3994.38,-100.25 3994.38,-64.25 4135.62,-64.25 4135.62,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="4002.38" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node29_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L302" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L302">
+<g id="a_node29_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L302" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L302">
 <text xml:space="preserve" text-anchor="start" x="4007.62" y="-84.12" font-family="Monospace" font-size="11.00">window_relation/4</text>
 </a>
 </g>
@@ -435,7 +435,7 @@
 <title>event_relation/6</title>
 <polygon fill="springgreen" stroke="black" points="4288.25,-100.25 4153.75,-100.25 4153.75,-64.25 4288.25,-64.25 4288.25,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="4161.75" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node30_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L312" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ffbc15458d05f61a778f50414f9dc0fc3ab7f973/library/simple_temporal_networks/stn_protocol.lgt#L312">
+<g id="a_node30_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L312" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ce8ec53925db21dbb192540aebfcd9c02c93e02/library/simple_temporal_networks/stn_protocol.lgt#L312">
 <text xml:space="preserve" text-anchor="start" x="4167" y="-84.12" font-family="Monospace" font-size="11.00">event_relation/6</text>
 </a>
 </g>
