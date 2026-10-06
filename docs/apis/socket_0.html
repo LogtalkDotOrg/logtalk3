@@ -463,8 +463,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:13:2</div>
-<div class="line"><strong>Date:</strong> 2026-08-01</div>
+<div class="line"><strong>Version:</strong> 0:13:3</div>
+<div class="line"><strong>Date:</strong> 2026-10-06</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -790,11 +790,20 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">close(+stream,+stream)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Error when trying to close the socket streams:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">socket_error(Error)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="current-host-1">
 <span id="socket-0-current-host-1"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">current_host/1</span></code></a><a class="headerlink" href="#current-host-1" title="Link to this heading"></a></h3>
-<p>Returns the hostname of the current machine.</p>
+<p>Returns the host name of the current machine.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -809,6 +818,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">current_host(-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Error when trying to get the current host name:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">socket_error(Error)</span></code></div>
+</div>
 </div>
 </div>
 </section>

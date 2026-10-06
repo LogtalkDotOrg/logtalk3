@@ -14,8 +14,8 @@ Portable abstraction over TCP sockets. Provides a high-level API for client and 
 |    ``logtalk_load(sockets(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:13:2
-| **Date:** 2026-08-01
+| **Version:** 0:13:3
+| **Date:** 2026-10-06
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -249,6 +249,10 @@ Closes a client or accepted connection by closing both the input and output stre
 | **Mode and number of proofs:**
 |    ``close(+stream,+stream)`` - ``one_or_error``
 
+| **Exceptions:**
+|    Error when trying to close the socket streams:
+|        ``socket_error(Error)``
+
 
 ------------
 
@@ -258,7 +262,7 @@ Closes a client or accepted connection by closing both the input and output stre
 ``current_host/1``
 ^^^^^^^^^^^^^^^^^^
 
-Returns the hostname of the current machine.
+Returns the host name of the current machine.
 
 | **Compilation flags:**
 |    ``static``
@@ -267,6 +271,10 @@ Returns the hostname of the current machine.
 |    ``current_host(Host)``
 | **Mode and number of proofs:**
 |    ``current_host(-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Error when trying to get the current host name:
+|        ``socket_error(Error)``
 
 
 ------------

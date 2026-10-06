@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 0:13:2,
+		version is 0:13:3,
 		author is 'Paulo Moura',
-		date is 2026-08-01,
+		date is 2026-10-06,
 		comment is 'Portable abstraction over TCP sockets. Provides a high-level API for client and server socket operations that works with selected backend Prolog systems.',
 		remarks is [
 			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, and Trealla Prolog.',
@@ -130,14 +130,20 @@
 	:- mode(close(+stream, +stream), one_or_error).
 	:- info(close/2, [
 		comment is 'Closes a client or accepted connection by closing both the input and output streams. If the same stream is used for both, it is closed only once.',
-		argnames is ['InputStream', 'OutputStream']
+		argnames is ['InputStream', 'OutputStream'],
+		exceptions is [
+			'Error when trying to close the socket streams' - socket_error('Error')
+		]
 	]).
 
 	:- public(current_host/1).
 	:- mode(current_host(-atom), one_or_error).
 	:- info(current_host/1, [
-		comment is 'Returns the hostname of the current machine.',
-		argnames is ['Host']
+		comment is 'Returns the host name of the current machine.',
+		argnames is ['Host'],
+		exceptions is [
+			'Error when trying to get the current host name' - socket_error('Error')
+		]
 	]).
 
 	client_open(Host, Port, InputStream, OutputStream, UserOptions) :-

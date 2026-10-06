@@ -15,7 +15,7 @@ Shared predicates for recommender diagnostics, rating dataset validation, rating
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-10-04
+| **Date:** 2026-10-06
 
 | **Compilation flags:**
 |    ``static``
@@ -620,25 +620,6 @@ Returns the ``K`` highest-scoring ``Key-Score`` pairs, sorted by decreasing scor
 |    ``top_k(Pairs,K,TopK)``
 | **Mode and number of proofs:**
 |    ``top_k(+list(pair),+positive_integer,-list(pair))`` - ``one``
-
-
-------------
-
-.. index:: check_top_n/1
-.. _recommender_common/0::check_top_n/1:
-
-``check_top_n/1``
-^^^^^^^^^^^^^^^^^
-
-Checks that a requested recommendation count is a positive integer.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``check_top_n(N)``
-| **Mode and number of proofs:**
-|    ``check_top_n(+positive_integer)`` - ``one_or_error``
 
 
 ------------

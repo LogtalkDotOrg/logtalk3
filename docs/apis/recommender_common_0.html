@@ -475,7 +475,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-10-04</div>
+<div class="line"><strong>Date:</strong> 2026-10-06</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -548,14 +548,13 @@
 <li><p><a class="reference internal" href="#msd-similarity-3" id="id26"><code class="docutils literal notranslate"><span class="pre">msd_similarity/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#spearman-similarity-3" id="id27"><code class="docutils literal notranslate"><span class="pre">spearman_similarity/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#top-k-3" id="id28"><code class="docutils literal notranslate"><span class="pre">top_k/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#check-top-n-1" id="id29"><code class="docutils literal notranslate"><span class="pre">check_top_n/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#base-recommender-diagnostics-5" id="id30"><code class="docutils literal notranslate"><span class="pre">base_recommender_diagnostics/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#valid-recommender-metadata-2" id="id31"><code class="docutils literal notranslate"><span class="pre">valid_recommender_metadata/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#valid-recommender-metadata-3" id="id32"><code class="docutils literal notranslate"><span class="pre">valid_recommender_metadata/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#base-recommender-diagnostics-5" id="id29"><code class="docutils literal notranslate"><span class="pre">base_recommender_diagnostics/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-recommender-metadata-2" id="id30"><code class="docutils literal notranslate"><span class="pre">valid_recommender_metadata/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-recommender-metadata-3" id="id31"><code class="docutils literal notranslate"><span class="pre">valid_recommender_metadata/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#private-predicates" id="id33">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id34">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id32">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id33">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -1271,29 +1270,8 @@
 </div>
 <hr class="docutils" />
 </section>
-<section id="check-top-n-1">
-<span id="recommender-common-0-check-top-n-1"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_top_n/1</span></code></a><a class="headerlink" href="#check-top-n-1" title="Link to this heading"></a></h3>
-<p>Checks that a requested recommendation count is a positive integer.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">check_top_n(N)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">check_top_n(+positive_integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
 <section id="base-recommender-diagnostics-5">
-<span id="recommender-common-0-base-recommender-diagnostics-5"></span><span id="index-28"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">base_recommender_diagnostics/5</span></code></a><a class="headerlink" href="#base-recommender-diagnostics-5" title="Link to this heading"></a></h3>
+<span id="recommender-common-0-base-recommender-diagnostics-5"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">base_recommender_diagnostics/5</span></code></a><a class="headerlink" href="#base-recommender-diagnostics-5" title="Link to this heading"></a></h3>
 <p>Builds the common part of a recommender diagnostics metadata list, combined with implementation-specific extra diagnostics terms.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1314,7 +1292,7 @@
 <hr class="docutils" />
 </section>
 <section id="valid-recommender-metadata-2">
-<span id="recommender-common-0-valid-recommender-metadata-2"></span><span id="index-29"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_recommender_metadata/2</span></code></a><a class="headerlink" href="#valid-recommender-metadata-2" title="Link to this heading"></a></h3>
+<span id="recommender-common-0-valid-recommender-metadata-2"></span><span id="index-28"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_recommender_metadata/2</span></code></a><a class="headerlink" href="#valid-recommender-metadata-2" title="Link to this heading"></a></h3>
 <p>True when diagnostics metadata contains the expected model term, without instantiating the metadata.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1335,7 +1313,7 @@
 <hr class="docutils" />
 </section>
 <section id="valid-recommender-metadata-3">
-<span id="recommender-common-0-valid-recommender-metadata-3"></span><span id="index-30"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_recommender_metadata/3</span></code></a><a class="headerlink" href="#valid-recommender-metadata-3" title="Link to this heading"></a></h3>
+<span id="recommender-common-0-valid-recommender-metadata-3"></span><span id="index-29"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_recommender_metadata/3</span></code></a><a class="headerlink" href="#valid-recommender-metadata-3" title="Link to this heading"></a></h3>
 <p>True when diagnostics metadata contains the expected model term and effective options, without instantiating the metadata.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
