@@ -23,9 +23,9 @@
 	imports([options, http_origin_site_helpers])).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-09-24,
+		date is 2026-10-06,
 		comment is 'Portable MQTT 5 client predicates using ``http_transport_protocol`` implementations.'
 	]).
 
@@ -211,7 +211,7 @@
 	]).
 
 	:- private(append_tls_transport/3).
-	:- mode(append_tls_transport(+atom, +list, -list), one_or_error).
+	:- mode(append_tls_transport(+atom, +list, -list), one).
 	:- info(append_tls_transport/3, [
 		comment is 'Adds ``connection_transport(tls)`` to connection options for MQTT-over-TLS unless already specified.',
 		argnames is ['Scheme', 'Options', 'OptionsWithTransport']

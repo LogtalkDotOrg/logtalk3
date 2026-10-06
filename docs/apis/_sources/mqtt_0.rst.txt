@@ -14,8 +14,8 @@ Portable MQTT 5 client predicates using ``http_transport_protocol`` implementati
 |    ``logtalk_load(mqtt(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:0
-| **Date:** 2026-09-24
+| **Version:** 1:1:1
+| **Date:** 2026-10-06
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -482,7 +482,7 @@ Adds ``connection_transport(tls)`` to connection options for MQTT-over-TLS unles
 | **Template:**
 |    ``append_tls_transport(Scheme,Options,OptionsWithTransport)``
 | **Mode and number of proofs:**
-|    ``append_tls_transport(+atom,+list,-list)`` - ``one_or_error``
+|    ``append_tls_transport(+atom,+list,-list)`` - ``one``
 
 
 ------------
