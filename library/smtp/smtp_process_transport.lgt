@@ -22,9 +22,9 @@
 :- object(smtp_process_transport).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-09-13,
+		date is 2026-10-06,
 		comment is 'Process-backed TLS transport support for the SMTP client.'
 	]).
 
@@ -39,7 +39,10 @@
 	:- mode(streams(+compound, --stream, --stream), one_or_error).
 	:- info(streams/3, [
 		comment is 'Returns the input and output streams for an open process connection.',
-		argnames is ['Connection', 'Input', 'Output']
+		argnames is ['Connection', 'Input', 'Output'],
+		exceptions is [
+			'Either ``Input`` or ``Output`` streams do not exist' - domain_error(smtp_process_connection, 'Connection')
+		]
 	]).
 
 	:- public(failure_details/3).

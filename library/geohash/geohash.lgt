@@ -406,11 +406,12 @@
 	default_option(buffer(0.0)).
 
 	valid_option(compact(Boolean)) :-
-		valid(boolean, Boolean).
+		once((Boolean == true; Boolean == false)).
 	valid_option(min_precision(Precision)) :-
 		valid_precision(Precision).
 	valid_option(buffer(Buffer)) :-
-		valid(non_negative_number, Buffer).
+		number(Buffer),
+		Buffer >= 0.
 
 	reject_buffer_option(Options) :-
 		var(Options),

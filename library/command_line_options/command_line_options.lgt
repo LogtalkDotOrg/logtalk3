@@ -37,9 +37,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Marcus Uneson and Paulo Moura',
-		date is 2026-07-13,
+		date is 2026-10-06,
 		comment is 'Command line options parsing predicates. Uses object-based option specifications with the ``command_line_option`` category.',
 		see_also is [command_line_option]
 	]).
@@ -153,7 +153,7 @@
 	]).
 
 	:- uses(type, [
-		check/2 as type_check/2, valid/2 as type_valid/2
+		check/2 as type_check/2
 	]).
 
 	:- uses(user, [
@@ -589,19 +589,21 @@
 
 	% options validation for parse/5
 	valid_option(output_functor(Functor)) :-
-		type_valid(atom, Functor).
+		atom(Functor).
 	valid_option(duplicated_flags(Keep)) :-
-		type_valid(one_of(atom, [keepfirst, keeplast, keepall]), Keep).
+		once((Keep == keepfirst; Keep == keeplast; Keep == keepall)).
 	valid_option(allow_empty_flag_spec(Boolean)) :-
-		type_valid(boolean, Boolean).
+		once((Boolean == true; Boolean == false)).
 	% options validation for help/3
 	valid_option(line_width(Width)) :-
-		type_valid(positive_integer, Width).
+		integer(Width),
+		Width > 0.
 	valid_option(min_help_width(Width)) :-
-		type_valid(positive_integer, Width).
+		integer(Width),
+		Width > 0.
 	valid_option(break_long_flags(Boolean)) :-
-		type_valid(boolean, Boolean).
+		once((Boolean == true; Boolean == false)).
 	valid_option(suppress_empty_meta(Boolean)) :-
-		type_valid(boolean, Boolean).
+		once((Boolean == true; Boolean == false)).
 
 :- end_object.

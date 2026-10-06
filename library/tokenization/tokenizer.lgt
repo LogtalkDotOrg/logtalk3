@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-09-08,
+		date is 2026-10-06,
 		comment is 'Tokenizer and sentence splitter parameterized by text representation and language provider.',
 		parameters is [
 			'Representation' - 'Text representation. Valid values are ``atom``, ``codes``, and ``chars``.',
@@ -40,7 +40,7 @@
 	]).
 
 	:- uses(type, [
-		check/2, valid/2
+		check/2
 	]).
 
 	tokenize(Text, Tokens) :-
@@ -73,13 +73,13 @@
 	default_option(normalize_dashes(true)).
 
 	valid_option(keep_punctuation(Boolean)) :-
-		valid(boolean, Boolean).
+		once((Boolean == true; Boolean == false)).
 	valid_option(lowercase(Boolean)) :-
-		valid(boolean, Boolean).
+		once((Boolean == true; Boolean == false)).
 	valid_option(normalize_quotes(Boolean)) :-
-		valid(boolean, Boolean).
+		once((Boolean == true; Boolean == false)).
 	valid_option(normalize_dashes(Boolean)) :-
-		valid(boolean, Boolean).
+		once((Boolean == true; Boolean == false)).
 
 	prepare(Text, UserOptions, Codes, Options) :-
 		check_representation,

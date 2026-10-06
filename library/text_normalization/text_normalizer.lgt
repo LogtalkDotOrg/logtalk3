@@ -24,9 +24,9 @@
 	imports((options, text_diacritics, text_case_folding, text_entities, text_whitespace))).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-09-08,
+		date is 2026-10-06,
 		comment is 'Text normalizer parameterized by text representation and normalization profile.',
 		parameters is [
 			'Representation' - 'Text representation. Valid values are ``atom``, ``chars``, and ``codes``.',
@@ -40,7 +40,7 @@
 	]).
 
 	:- uses(type, [
-		check/3, valid/2
+		check/3
 	]).
 
 	normalize_unicode(Form, Text, Normalized) :-
@@ -124,27 +124,27 @@
 	default_option(unknown(preserve)).
 
 	valid_option(unicode(Form)) :-
-		member(Form, [nfc, nfd, nfkc, nfkd]).
+		once((Form == nfc; Form == nfd; Form == nfkc; Form == nfkd)).
 	valid_option(entities(Boolean)) :-
-		valid(boolean, Boolean).
+		once((Boolean == true; Boolean == false)).
 	valid_option(unknown_entities(Policy)) :-
-		member(Policy, [preserve, error]).
+		once((Policy == preserve; Policy == error)).
 	valid_option(diacritics(Mode)) :-
-		member(Mode, [none, remove, fold]).
+		once((Mode == none; Mode == remove; Mode == fold)).
 	valid_option(case(Mode)) :-
-		member(Mode, [preserve, fold, lower, upper, title]).
+		once((Mode == preserve; Mode == fold; Mode == lower; Mode == upper; Mode == title)).
 	valid_option(whitespace(Boolean)) :-
-		valid(boolean, Boolean).
+		once((Boolean == true; Boolean == false)).
 	valid_option(trim(Boolean)) :-
-		valid(boolean, Boolean).
+		once((Boolean == true; Boolean == false)).
 	valid_option(collapse(Mode)) :-
-		member(Mode, [none, horizontal, all]).
+		once((Mode == none; Mode == horizontal; Mode == all)).
 	valid_option(line_endings(Mode)) :-
-		member(Mode, [lf, crlf, cr, preserve]).
+		once((Mode ==lf; Mode == crlf; Mode == cr; Mode == preserve)).
 	valid_option(controls(Mode)) :-
-		member(Mode, [preserve, remove]).
+		once((Mode == preserve; Mode == remove)).
 	valid_option(unknown(Policy)) :-
-		member(Policy, [preserve, error]).
+		once((Policy == preserve; Policy == error)).
 
 	prepare_text(Text, Codes) :-
 		check_representation,

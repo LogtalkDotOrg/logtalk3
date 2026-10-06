@@ -23,9 +23,9 @@
 	imports(probabilistic_classifier_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-11,
+		date is 2026-10-06,
 		comment is 'Stochastic gradient descent classifier supporting one-vs-rest linear models with configurable losses including ``log_loss``, ``hinge``, ``squared_hinge``, ``modified_huber``, and ``perceptron``.',
 		see_also is [dataset_protocol, logistic_regression_classifier, linear_svm_classifier, knn_classifier, nearest_centroid_classifier]
 	]).
@@ -282,10 +282,13 @@
 	valid_option(learning_rate(Rate)) :-
 		number(Rate),
 		Rate > 0.0.
-	valid_option(learning_schedule(constant)).
-	valid_option(learning_schedule(inverse_scaling(Power))) :-
-		number(Power),
-		Power > 0.0.
+	valid_option(learning_schedule(Schedule)) :-
+		(	Schedule == constant ->
+			true
+		;	Schedule = inverse_scaling(Power),
+			number(Power),
+			Power > 0.0
+		).
 	valid_option(maximum_iterations(Iterations)) :-
 		valid(positive_integer, Iterations).
 	valid_option(tolerance(Tolerance)) :-
