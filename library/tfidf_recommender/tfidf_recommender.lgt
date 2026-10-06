@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-04,
+		date is 2026-10-06,
 		comment is 'Content-based recommender using TF-IDF item vectors, positive-feedback centroid profiles, and cosine relevance scores.',
 		see_also is [recommender_protocol, item_content_dataset_protocol, text_vectorizer, cosine_similarity]
 	]).
@@ -496,9 +496,10 @@
 		score_catalog_items(Vectors, Profiles, User, Items, Scores).
 
 	recommend(Model, User, N, Recommendations) :-
+		context(Context),
 		^^check_recommender(Model),
-		context(Context), check(atomic, User, Context),
-		^^check_top_n(N),
+		check(atomic, User, Context),
+		check(positive_integer, N, Context),
 		Model = tfidf_model(Ratings, _, Vectors, Profiles, _, _, _),
 		findall(
 			Item-Score,

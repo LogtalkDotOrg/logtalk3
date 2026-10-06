@@ -36,7 +36,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-01,
+		date is 2026-10-06,
 		comment is 'Minimal baseline-predictor recommender used to exercise the recommender_protocol and recommender_common shared code end-to-end. Predicts ratings using the classic global mean plus user and item bias baseline, or any one of its components alone.'
 	]).
 
@@ -45,7 +45,7 @@
 	]).
 
 	:- uses(type, [
-		valid/2
+		valid/2, check/3
 	]).
 
 	:- public(shared_recommend/4).
@@ -93,8 +93,9 @@
 		Rating is GlobalMean + UserBias + ItemBias.
 
 	recommend(Recommender, User, N, Recommendations) :-
+		context(Context),
 		^^check_recommender(Recommender),
-		^^check_top_n(N),
+		check(positive_integer, N, Context),
 		Recommender = sample_recommender(Ratings, GlobalMean, Baseline, _Diagnostics),
 		^^items(Ratings, AllItems),
 		^^user_vector(Ratings, User, UserVector),

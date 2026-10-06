@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-05,
+		date is 2026-10-06,
 		comment is 'Content-based recommender using raw-count query profiles and Okapi BM25 relevance scores.',
 		see_also is [recommender_protocol, item_content_dataset_protocol, tfidf_recommender]
 	]).
@@ -773,10 +773,10 @@
 		).
 
 	recommend(Model, User, N, Recommendations) :-
-		^^check_recommender(Model),
 		context(Context),
+		^^check_recommender(Model),
 		check(atomic, User, Context),
-		^^check_top_n(N),
+		check(positive_integer, N, Context),
 		Model = bm25_model(Ratings, _, Weights, Profiles, _, _, Diagnostics),
 		memberchk(options(Options), Diagnostics),
 		user_query(Profiles, User, Raw),

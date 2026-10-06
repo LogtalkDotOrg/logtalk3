@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-04,
+		date is 2026-10-06,
 		comment is 'Shared predicates for recommender diagnostics, rating dataset validation, rating-matrix utilities, similarity metrics, and top-k retrieval.'
 	]).
 
@@ -337,10 +337,10 @@
 	]).
 
 	recommend_from_ratings(Recommender, Ratings, User, N, Recommendations) :-
-		::check_recommender(Recommender),
 		context(Context),
+		::check_recommender(Recommender),
 		check(atomic, User, Context),
-		check_top_n(N),
+		check(positive_integer, N, Context),
 		items(Ratings, Items),
 		findall(Item-Score,
 			(	member(Item, Items),
@@ -532,19 +532,6 @@
 		K > 0,
 		K1 is K - 1,
 		take_at_most(K1, Values, Taken).
-
-	% check helper
-
-	:- protected(check_top_n/1).
-	:- mode(check_top_n(+positive_integer), one_or_error).
-	:- info(check_top_n/1, [
-		comment is 'Checks that a requested recommendation count is a positive integer.',
-		argnames is ['N']
-	]).
-
-	check_top_n(N) :-
-		context(Context),
-		check(positive_integer, N, Context).
 
 	% diagnostics helpers
 

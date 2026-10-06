@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-04,
+		date is 2026-10-06,
 		comment is 'Content-based recommender using binary item features, support-filtered positive-feedback profiles, and Jaccard relevance scores.',
 		see_also is [recommender_protocol, item_content_dataset_protocol, jaccard_similarity]
 	]).
@@ -450,10 +450,10 @@
 		score_catalog_items(Vectors, Profiles, User, Items, Scores).
 
 	recommend(Model, User, N, Recommendations) :-
-		^^check_recommender(Model),
 		context(Context),
+		^^check_recommender(Model),
 		check(atomic, User, Context),
-		^^check_top_n(N),
+		check(positive_integer, N, Context),
 		Model = jaccard_model(Ratings, _, Vectors, Profiles, _, _),
 		findall(
 			Item-Score,
