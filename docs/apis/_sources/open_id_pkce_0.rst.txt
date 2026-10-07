@@ -14,8 +14,8 @@ PKCE and authorization-request helpers for OpenID Connect clients.
 |    ``logtalk_load(open_id(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-07-08
+| **Version:** 1:0:1
+| **Date:** 2026-10-07
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -26,7 +26,6 @@ PKCE and authorization-request helpers for OpenID Connect clients.
 | **Uses:**
 |    :ref:`crypto <crypto/0>`
 |    :ref:`sha256 <sha256/0>`
-|    :ref:`user <user/0>`
 
 | **Remarks:**
 |    (none)

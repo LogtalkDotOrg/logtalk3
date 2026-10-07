@@ -57,7 +57,7 @@
 		relevance_candidates(Columns, Candidates, Unsorted),
 		^^sort_by_decreasing_score(Unsorted, Scores),
 		^^option(selection_strategy(top_k(K)), Options),
-		greedy_selection(Candidates, K, 0, Selected, Trace, Evaluations),
+		greedy_selection(Candidates, K, 0, Selected, Trace, 0, Evaluations),
 		length(Examples, ExampleCount),
 		length(Features, CandidateCount),
 		length(Selected, SelectedCount),
@@ -81,12 +81,11 @@
 		^^contingency_score(mutual_information, Counts, Relevance),
 		relevance_candidates(Columns, Candidates, Scores).
 
-	greedy_selection([], _K, _Count, [], [], 0) :-
+	greedy_selection([], _K, _Count, [], [], Evaluations, Evaluations) :-
 		!.
-	greedy_selection(_Candidates, 0, _Count, [], [], 0) :-
+	greedy_selection(_Candidates, 0, _Count, [], [], Evaluations, Evaluations) :-
 		!.
-	greedy_selection([Candidate| Candidates], K, Count, [Feature| Selected],
-		[step(Feature, Relevance, Mean, MID)| Trace], Evaluations) :-
+	greedy_selection([Candidate| Candidates], K, Count, [Feature| Selected], [step(Feature, Relevance, Mean, MID)| Trace], Evaluations0, Evaluations) :-
 		best_candidate(Candidates, Count, Candidate, Best),
 		Best = candidate(Feature, Relevance, Pairs, _Sum),
 		candidate_mid(Best, Count, Mean, MID),
@@ -95,11 +94,11 @@
 		(	NextK =:= 0 ->
 			Selected = [],
 			Trace = [],
-			Evaluations = 0
-		;	update_redundancies(Remaining, Pairs, Updated, Added),
+			Evaluations = Evaluations0
+		;	update_redundancies(Remaining, Pairs, Updated, 0, Added),
 			NextCount is Count + 1,
-			greedy_selection(Updated, NextK, NextCount, Selected, Trace, RestEvaluations),
-			Evaluations is Added + RestEvaluations
+			Evaluations1 is Added + Evaluations0,
+			greedy_selection(Updated, NextK, NextCount, Selected, Trace, Evaluations1, Evaluations)
 		).
 
 	candidate_mid(candidate(_Feature, Relevance, _Pairs, Sum), Count, Mean, MID) :-
@@ -126,13 +125,12 @@
 	remove_candidate([Candidate| Candidates], Selected, [Candidate| Remaining]) :-
 		remove_candidate(Candidates, Selected, Remaining).
 
-	update_redundancies([], _Pairs, [], 0).
-	update_redundancies([candidate(Feature, Relevance, Values, Sum0)| Candidates], Pairs,
-		[candidate(Feature, Relevance, Values, Sum)| Updated], Evaluations) :-
+	update_redundancies([], _Pairs, [], Evaluations, Evaluations).
+	update_redundancies([candidate(Feature, Relevance, Values, Sum0)| Candidates], Pairs, [candidate(Feature, Relevance, Values, Sum)| Updated], Evaluations0, Evaluations) :-
 		^^feature_pair_mutual_information(Pairs, Values, Redundancy),
 		Sum is Sum0 + Redundancy,
-		update_redundancies(Candidates, Pairs, Updated, Rest),
-		Evaluations is Rest + 1.
+		Evaluations1 is Evaluations0 + 1,
+		update_redundancies(Candidates, Pairs, Updated, Evaluations1, Evaluations).
 
 	selected_features(Selector, Features) :-
 		::check_selector(Selector),

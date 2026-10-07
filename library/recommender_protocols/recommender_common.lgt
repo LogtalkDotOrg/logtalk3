@@ -201,7 +201,7 @@
 
 	check_no_duplicate_ratings([], _Seen).
 	check_no_duplicate_ratings([rating(User, Item, _Rating)| Ratings], Seen) :-
-		(	memberchk(User-Item, Seen) ->
+		(	member(User-Item, Seen) ->
 			domain_error(duplicate_rating, User-Item)
 		;	true
 		),

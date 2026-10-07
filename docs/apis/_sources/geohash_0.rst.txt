@@ -14,8 +14,8 @@ Geohash encoder, decoder, adjacency, covering, hierarchy, integer conversion, bi
 |    ``logtalk_load(geohash(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:3:0
-| **Date:** 2026-05-21
+| **Version:** 1:3:1
+| **Date:** 2026-10-07
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -28,7 +28,6 @@ Geohash encoder, decoder, adjacency, covering, hierarchy, integer conversion, bi
 | **Uses:**
 |    :ref:`geospatial <geospatial/0>`
 |    :ref:`list <list/0>`
-|    :ref:`type <type/0>`
 
 | **Remarks:**
 

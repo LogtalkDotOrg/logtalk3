@@ -348,7 +348,7 @@
 	valid_option(beta(Beta)) :-
 		once((Beta == fletcher_reeves ; Beta == polak_ribiere)).
 	valid_option(restart(Restart)) :-
-		once((Restart == dimension ; integer(Restart), Restart >= 0)).
+		once((Restart == dimension; integer(Restart), Restart >= 0)).
 	valid_option(step_size(StepSize)) :-
 		number(StepSize), StepSize > 0.0.
 	valid_option(armijo_c(C)) :-

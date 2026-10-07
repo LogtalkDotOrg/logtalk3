@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-02,
+		date is 2026-10-07,
 		comment is 'Croston, SBA, and TSB intermittent-demand forecasters with causal initialization, configurable missing observations, and immutable online updates.'
 	]).
 
@@ -293,11 +293,14 @@
 			),
 			coefficient_candidates(Alpha, Grid, Alphas),
 			coefficient_candidates(Beta, Grid, Betas),
-			findall(candidate(CandidateMethod,CandidateAlpha,CandidateBeta), (
-				member(CandidateMethod, Methods),
-				member(CandidateAlpha, Alphas),
-				member(CandidateBeta, Betas)
-			), Specifications),
+			findall(
+				candidate(CandidateMethod,CandidateAlpha,CandidateBeta),
+				(	member(CandidateMethod, Methods),
+					member(CandidateAlpha, Alphas),
+					member(CandidateBeta, Betas)
+				),
+				Specifications
+			),
 			learn_candidates(Specifications, Dataset, Series, Policy, Candidates),
 			keysort(Candidates, [_-Forecaster| _])
 		).
@@ -357,9 +360,11 @@
 
 	learn_series(Dataset, Series, Method, parameters(Alpha, Beta, Policy), intermittent_demand_forecaster(Method, State, Diagnostics)) :-
 		Options = [model(Method), alpha(Alpha), beta(Beta), missing(Policy)],
-		learn_state(Series, Method, parameters(Alpha, Beta, Policy),
+		learn_state(
+			Series, Method, parameters(Alpha, Beta, Policy),
 			learning_state(pending_state(0), 0, forecast_error_totals(0,0,0)),
-			learning_state(State, Positive, Totals)),
+			learning_state(State, Positive, Totals)
+		),
 		Totals = forecast_error_totals(Count, Absolute, Squared),
 		(	Count > 0 ->
 			true

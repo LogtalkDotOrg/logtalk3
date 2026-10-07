@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:3:1,
 		author is 'Paulo Moura',
-		date is 2026-05-21,
+		date is 2026-10-07,
 		comment is 'Geohash encoder, decoder, adjacency, covering, hierarchy, integer conversion, bit-precision, and geometry covering predicates for ``geographic(Latitude,Longitude)`` coordinates.',
 		remarks is [
 			'Alphabet' - 'Uses the standard geohash base-32 alphabet ``0123456789bcdefghjkmnpqrstuvwxyz``.',
@@ -48,10 +48,6 @@
 
 	:- uses(list, [
 		append/3, member/2, memberchk/2, reverse/2
-	]).
-
-	:- uses(type, [
-		valid/2
 	]).
 
 	valid_geohash(Geohash) :-

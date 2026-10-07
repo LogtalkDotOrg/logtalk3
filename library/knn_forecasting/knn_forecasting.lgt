@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-02,
+		date is 2026-10-07,
 		comment is 'k-Nearest Neighbors (analog method) time series forecaster: matches the most recent window of observations against historical windows of the same length and predicts by aggregating what followed the most similar ones. Supports multiple distance metrics, neighbor weighting schemes, optional differencing, and missing observations represented as unbound variables.',
 		see_also is [exponential_smoothing, time_series_regression]
 	]).
@@ -55,7 +55,7 @@
 	]).
 
 	:- uses(type, [
-		check/3, valid/2
+		valid/2
 	]).
 
 	% learning
@@ -72,7 +72,7 @@
 		^^dataset_series(Dataset, Series),
 		% missing observations are represented as unbound variables
 		^^check_series(Dataset, Series, [number, var]),
-		missing_count(Series, MissingCount),
+		missing_count(Series, 0, MissingCount),
 		% every candidate order requires more than Order observations to
 		% form even a single row (see lagged_rows/3); requiring K + 1 rows
 		% guarantees enough neighbors for both forecasting (K rows) and the
@@ -128,13 +128,13 @@
 	% with missing observations is otherwise a proper, gap-free list (same
 	% convention as in the time_series_regression library)
 
-	missing_count([], 0).
-	missing_count([Value| Values], Count) :-
-		missing_count(Values, Count0),
+	missing_count([], Count, Count).
+	missing_count([Value| Values], Count0, Count) :-
 		(	var(Value) ->
-			Count is Count0 + 1
-		;	Count = Count0
-		).
+			Count1 is Count0 + 1
+		;	Count1 is Count0
+		),
+		missing_count(Values, Count1, Count).
 
 	% differencing; the levels list holds the last value of the series at
 	% each differencing level, starting with the original series (same

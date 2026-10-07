@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-02,
+		date is 2026-10-07,
 		comment is 'Shared helper predicates for sparse-vector overlap, numeric scaling, normalization, and correlation, reused by the library similarity metric objects.'
 	]).
 
@@ -61,7 +61,7 @@
 
 	vector_norm(Vector, Norm) :-
 		extract_values(Vector, Values),
-		sum_of_squares_list(Values, SumSquares),
+		sum_of_squares_list(Values, 0.0, SumSquares),
 		Norm is sqrt(SumSquares).
 
 	extract_values([], []).
@@ -105,7 +105,7 @@
 
 	normalize_values(Values, Normalized) :-
 		scale_values(Values, Scaled),
-		sum_of_squares_list(Scaled, SumSquares),
+		sum_of_squares_list(Scaled, 0.0, SumSquares),
 		(	SumSquares =:= 0 ->
 			Normalized = Scaled
 		;	Norm is sqrt(SumSquares),
@@ -197,10 +197,13 @@
 		argnames is ['Values1', 'Values2', 'Dot']
 	]).
 
-	dot_product([], [], 0.0).
-	dot_product([Value1| Values1], [Value2| Values2], Dot) :-
-		dot_product(Values1, Values2, Dot0),
-		Dot is Dot0 + Value1 * Value2.
+	dot_product(Values1, Values2, Dot) :-
+		dot_product(Values1, Values2, 0.0, Dot).
+
+	dot_product([], [], Dot, Dot).
+	dot_product([Value1| Values1], [Value2| Values2], Dot0, Dot) :-
+		Dot1 is Dot0 + Value1 * Value2,
+		dot_product(Values1, Values2, Dot1, Dot).
 
 	:- protected(sum_of_squares_list/2).
 	:- mode(sum_of_squares_list(+list(number), -number), one).
@@ -209,10 +212,13 @@
 		argnames is ['Values', 'SumSquares']
 	]).
 
-	sum_of_squares_list([], 0.0).
-	sum_of_squares_list([Value| Values], SumSquares) :-
-		sum_of_squares_list(Values, SumSquares0),
-		SumSquares is SumSquares0 + Value * Value.
+	sum_of_squares_list(Values, SumSquares) :-
+		sum_of_squares_list(Values, 0.0, SumSquares).
+
+	sum_of_squares_list([], SumSquares, SumSquares).
+	sum_of_squares_list([Value| Values], SumSquares0, SumSquares) :-
+		SumSquares1 is SumSquares0 + Value * Value,
+		sum_of_squares_list(Values, SumSquares1, SumSquares).
 
 	:- protected(mean_values/2).
 	:- mode(mean_values(+list(number), -float), one_or_error).

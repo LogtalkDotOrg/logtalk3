@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-09-25,
+		date is 2026-10-07,
 		comment is 'Ant Colony Optimization (Ant System) metaheuristic. Parameterized by a problem object implementing the ``ant_colony_problem_protocol`` protocol and by a random number generator algorithm for the ``fast_random`` library. The algorithm minimizes the solution cost defined by the problem. Classic Ant System pheromone update, optional MAX-MIN pheromone bounds, candidate construction by probabilistic state transition, optional elitist reinforcement, progress reporting, and seed control are supported; suitable defaults are used otherwise.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``ant_colony_problem_protocol``.',
@@ -95,7 +95,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, member/2, select/3, selectchk/3, append/3, nth1/3
+		length/2, member/2, select/3, selectchk/3, nth1/3
 	]).
 
 	run(BestSolution, BestCost) :-

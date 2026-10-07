@@ -189,30 +189,38 @@
 		;	Weighting = uniform
 		).
 
-	valid_option(Option) :-
-		ground(Option),
-		valid_relief_option(Option),
-		!.
-
-	valid_relief_option(selection_strategy(all)).
-	valid_relief_option(selection_strategy(top_k(K))) :-
-		valid(positive_integer, K).
-	valid_relief_option(selection_strategy(threshold(T))) :-
-		number(T).
-	valid_relief_option(sample_size(all)).
-	valid_relief_option(sample_size(M)) :-
-		valid(positive_integer, M).
-	valid_relief_option(random_seed(Seed)) :-
-		valid(positive_integer, Seed).
-	valid_relief_option(missing_values(Mode)) :-
-		valid(one_of(atom, [complete_case, probabilistic]), Mode).
-	valid_relief_option(number_of_neighbors(K)) :-
+	valid_option(selection_strategy(Strategy)) :-
+		(	Strategy == all ->
+			true
+		;	Strategy = top_k(K) ->
+			integer(K),
+			K > 0
+		;	Strategy = threshold(T),
+			number(T)
+		).
+	valid_option(sample_size(Size)) :-
+		(	Size == all ->
+			true
+		;	integer(Size),
+			Size > 0
+		).
+	valid_option(random_seed(Seed)) :-
+		integer(Seed),
+		Seed > 0.
+	valid_option(missing_values(Mode)) :-
+		once((Mode == complete_case; Mode == probabilistic)).
+	valid_option(number_of_neighbors(K)) :-
 		::relief_variant(Variant),
 		Variant \== binary,
-		valid(positive_integer, K).
-	valid_relief_option(neighbor_weighting(uniform)).
-	valid_relief_option(neighbor_weighting(rank(Sigma))) :-
-		valid(positive_integer, Sigma).
+		integer(K),
+		K > 0.
+	valid_option(neighbor_weighting(Weighting)) :-
+		(	Weighting == uniform ->
+			true
+		;	Weighting = rank(Sigma),
+			integer(Sigma),
+			Sigma > 0
+		).
 
 	neighbor_count(binary, _Options, 1).
 	neighbor_count(multiclass, Options, K) :-
@@ -557,7 +565,7 @@
 				;	Group = class(Target),
 					OtherGroup = class(OtherTarget)
 				),
-				differences(Values, OtherValues, Columns, Group, OtherGroup, Differences, Distance)
+				differences(Values, OtherValues, Columns, Group, OtherGroup, Differences, 0.0, Distance)
 			),
 			Keyed
 		),
@@ -568,11 +576,11 @@
 	neighbor_values([_-Neighbor| Keyed], [Neighbor| Neighbors]) :-
 		neighbor_values(Keyed, Neighbors).
 
-	differences([], [], [], _Group, _OtherGroup, [], 0.0).
-	differences([Value| Values], [Other| Others], [Column| Columns], Group, OtherGroup, [Diff| Diffs], Distance) :-
+	differences([], [], [], _Group, _OtherGroup, [], Distance, Distance).
+	differences([Value| Values], [Other| Others], [Column| Columns], Group, OtherGroup, [Diff| Diffs], Distance0, Distance) :-
 		feature_difference(Value, Other, Column, Group, OtherGroup, Diff),
-		differences(Values, Others, Columns, Group, OtherGroup, Diffs, Tail),
-		Distance is Diff + Tail.
+		Distance1 is Distance0 + Diff,
+		differences(Values, Others, Columns, Group, OtherGroup, Diffs, Distance1, Distance).
 
 	feature_difference(known(Value), known(Other), column(Type, _, _), _Group, _OtherGroup, Diff) :-
 		(	Type == numeric ->
@@ -599,11 +607,11 @@
 		take_neighbors(Next, Neighbors, Taken).
 
 	weighted_neighbors(Neighbors, Weighting, Weighted) :-
-		rank_weights(Neighbors, Weighting, 0, Raw, Total),
+		rank_weights(Neighbors, Weighting, 0, Raw, 0.0, Total),
 		normalize_weights(Raw, Total, Weighted).
 
-	rank_weights([], _Weighting, _Rank, [], 0.0).
-	rank_weights([Neighbor| Neighbors], Weighting, Rank, [Weight-Neighbor| Weighted], Total) :-
+	rank_weights([], _Weighting, _Rank, [], Total, Total).
+	rank_weights([Neighbor| Neighbors], Weighting, Rank, [Weight-Neighbor| Weighted], Total0, Total) :-
 		(	Weighting == uniform ->
 			Weight = 1.0
 		;	Weighting = rank(Sigma),
@@ -611,8 +619,8 @@
 			Weight is exp(-(Ratio * Ratio))
 		),
 		Next is Rank + 1,
-		rank_weights(Neighbors, Weighting, Next, Weighted, Tail),
-		Total is Weight + Tail.
+		Total1 is Total0 + Weight,
+		rank_weights(Neighbors, Weighting, Next, Weighted, Total1, Total).
 
 	normalize_weights([], _Total, []).
 	normalize_weights([Weight-Neighbor| Raw], Total, [Normal-Neighbor| Weighted]) :-
@@ -628,7 +636,7 @@
 		(	Class == Target ->
 			Factor = -1.0
 		;	memberchk(Target-AnchorCount, Classes),
-			count_total(Classes, TotalCount),
+			count_total(Classes, 0, TotalCount),
 			Factor is Count / (TotalCount - AnchorCount)
 		),
 		add_neighbors(Weighted, Factor, Totals0, Totals1),
@@ -642,10 +650,10 @@
 		),
 		class_neighbors(Neighbors, Class, Rest).
 
-	count_total([], 0).
-	count_total([_-Count| Counts], Total) :-
-		count_total(Counts, Tail),
-		Total is Count + Tail.
+	count_total([], Total, Total).
+	count_total([_-Count| Counts], Total0, Total) :-
+		Total1 is Count + Total0,
+		count_total(Counts, Total1, Total).
 
 	add_neighbors([], _Factor, Totals, Totals).
 	add_neighbors([Weight-neighbor(_, Diffs)| Neighbors], Factor, Totals0, Totals) :-
@@ -746,7 +754,7 @@
 	valid_declarations([], []).
 	valid_declarations([Feature-Type| Declarations], [Feature| Names]) :-
 		atomic(Feature),
-		valid(one_of(atom, [numeric, categorical]), Type),
+		once((Type == numeric; Type == categorical)),
 		valid_declarations(Declarations, Names),
 		\+ member(Feature, Names).
 
@@ -803,7 +811,7 @@
 		;	Variant == multiclass,
 			Count >= 2
 		),
-		count_total(Counts, Eligible).
+		count_total(Counts, 0, Eligible).
 
 	valid_class_counts([], []).
 	valid_class_counts([Class-Count| Counts], [Class| Keys]) :-

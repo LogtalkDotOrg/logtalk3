@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-01,
+		date is 2026-10-07,
 		comment is 'Portable incremental Assumption-based Truth Maintenance System.',
 		remarks is [
 			'Algorithm' - 'A label is an antichain of minimal environments. New label environments are propagated as deltas through a reverse justification index.',
@@ -577,9 +577,6 @@
 		;	Filtered = Tail
 		),
 		filter_consistent(Environments, Nogoods, Representation, Tail).
-
-	minimal(Environments, Representation, Minimal) :-
-		minimal(Environments, Representation, [], Minimal).
 
 	minimal([], _, Minimal, Minimal).
 	minimal([Environment| Environments], Representation, Minimal0, Minimal) :-

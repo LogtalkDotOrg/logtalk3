@@ -34,7 +34,7 @@
 	]).
 
 	:- uses(type, [
-		check/3, valid/2
+		check/3
 	]).
 
 	:- protected(valid_feature_discretization/1).

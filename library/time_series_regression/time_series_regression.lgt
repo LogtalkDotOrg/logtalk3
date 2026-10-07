@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-02,
+		date is 2026-10-07,
 		comment is 'Autoregressive (AR) time series forecaster fitted by least squares, with optional intercept, optional differencing (ARI models), automatic order selection using information criteria, and support for missing observations represented as unbound variables.',
 		see_also is [forecaster_protocol, time_series_dataset_protocol]
 	]).
@@ -101,7 +101,7 @@
 		^^dataset_series(Dataset, Series),
 		% missing observations are represented as unbound variables
 		^^check_series(Dataset, Series, [number, var]),
-		missing_count(Series, MissingCount),
+		missing_count(Series, 0, MissingCount),
 		intercept_count(Intercept, InterceptCount),
 		minimum_series_length(OrderOption, Differencing, InterceptCount, MinimumLength),
 		^^check_series_length(Dataset, Series, MinimumLength),
@@ -172,13 +172,13 @@
 	% missing observations are represented as unbound variables; a series
 	% with missing observations is otherwise a proper, gap-free list
 
-	missing_count([], 0).
-	missing_count([Value| Values], Count) :-
-		missing_count(Values, Count0),
+	missing_count([], Count, Count).
+	missing_count([Value| Values], Count0, Count) :-
 		(	var(Value) ->
-			Count is Count0 + 1
-		;	Count = Count0
-		).
+			Count1 is Count0 + 1
+		;	Count1 is Count0
+		),
+		missing_count(Values, Count1, Count).
 
 	% differencing; the levels list holds the last value of the series at
 	% each differencing level, starting with the original series; a

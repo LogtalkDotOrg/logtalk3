@@ -1332,7 +1332,8 @@
 	]).
 
 	seasonal_gap_lags(Lag, Frequency, Centered, Variance, Squares0, Squares, Last) :-
-		length(Skip, Lag), append(Skip, Suffix, Centered),
+		length(Skip, Lag),
+		append(Skip, Suffix, Centered),
 		seasonal_gap_covariance(Suffix, Centered, Covariance, Pairs), Pairs >= 2,
 		Score is Covariance / Variance,
 		(	Lag =:= Frequency ->

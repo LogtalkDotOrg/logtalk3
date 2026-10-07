@@ -25,8 +25,10 @@
 	logtalk_load(slope_one_recommender, [source_data(on), debug(on)]),
 	logtalk_load([
 		recommender_protocols('test_datasets/movie_ratings'),
-		recommender_protocols('test_datasets/duplicate_rating'), test_objects
+		recommender_protocols('test_datasets/duplicate_rating'),
+		test_objects
 	]),
 	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]), tests::run
+	logtalk_load(tests, [hook(lgtunit)]),
+	tests::run
 )).

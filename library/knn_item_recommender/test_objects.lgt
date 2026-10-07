@@ -35,11 +35,10 @@
 :- end_object.
 
 
-:- object(item_knn_metric(_),
+:- object(item_knn_metric(_Score_),
 	implements(similarity_metric_protocol)).
 
-	similarity(_, _, Score) :-
-		parameter(1, Score).
+	similarity(_, _, _Score_).
 
 :- end_object.
 
@@ -58,7 +57,7 @@
 :- end_object.
 
 
-:- object(item_knn_scaled_ratings(_, _),
+:- object(item_knn_scaled_ratings(_Min_, _Max_),
 	implements(rating_dataset_protocol)).
 
 	rating(User, Item, Rating) :-
@@ -66,8 +65,7 @@
 
 	rating_count(5).
 
-	rating_scale(Min, Max) :-
-		parameter(1, Min), parameter(2, Max).
+	rating_scale(_Min_, _Max_).
 
 :- end_object.
 

@@ -15,7 +15,7 @@ Shared predicates for recommender diagnostics, rating dataset validation, rating
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-10-06
+| **Date:** 2026-10-07
 
 | **Compilation flags:**
 |    ``static``
@@ -32,6 +32,7 @@ Shared predicates for recommender diagnostics, rating dataset validation, rating
 |    :ref:`list <list/0>`
 |    :ref:`msd_similarity <msd_similarity/0>`
 |    :ref:`numberlist <numberlist/0>`
+|    :ref:`pairs <pairs/0>`
 |    :ref:`pearson_similarity <pearson_similarity/0>`
 |    :ref:`spearman_similarity <spearman_similarity/0>`
 |    :ref:`type <type/0>`

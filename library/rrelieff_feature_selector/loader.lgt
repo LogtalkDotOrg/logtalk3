@@ -22,6 +22,6 @@
 :- initialization((
 	logtalk_load(feature_selection_protocols(loader)),
 	logtalk_load(random(loader)),
-	logtalk_load(feature_selection_protocols(relief_feature_selector_common)),
+	logtalk_load(feature_selection_protocols(relief_feature_selector_common), [optimize(on)]),
 	logtalk_load(rrelieff_feature_selector, [optimize(on)])
 )).

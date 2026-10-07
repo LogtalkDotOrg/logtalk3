@@ -11,9 +11,9 @@
 	imports(open_id_helpers)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-10-07,
 		comment is 'PKCE and authorization-request helpers for OpenID Connect clients.'
 	]).
 
@@ -64,10 +64,6 @@
 
 	:- uses(crypto, [
 		random_bytes/2
-	]).
-
-	:- uses(user, [
-		atomic_list_concat/2
 	]).
 
 	code_verifier(Verifier, Options) :-

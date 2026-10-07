@@ -375,7 +375,7 @@
 	valid_option(armijo_max_backtracks(N)) :-
 		integer(N), N >= 1.
 	valid_option(restart(Restart)) :-
-		once((Restart == none ; Restart == dimension ; integer(Restart), Restart >= 0)).
+		once((Restart == none; Restart == dimension; integer(Restart), Restart >= 0)).
 	valid_option(Option) :-
 		^^valid_option(Option).
 

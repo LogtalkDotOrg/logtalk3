@@ -23,9 +23,9 @@
 	imports(http_json_term_helpers)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-09-24,
+		date is 2026-10-07,
 		comment is 'OpenAPI 3.1.0 document derivation, parsing, generation, and validation built on top of the ``json`` and ``json_schema`` libraries.',
 		see_also is [json, json_schema, application_protocol, open_api_provider_protocol]
 	]).
@@ -266,10 +266,6 @@
 
 	:- uses(list, [
 		append/2, append/3, member/2, memberchk/2, reverse/2
-	]).
-
-	:- uses(user, [
-		atomic_concat/3
 	]).
 
 	% top-level orchestration

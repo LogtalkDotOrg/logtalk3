@@ -155,16 +155,19 @@
 		;	domain_error(non_empty_examples, Dataset)
 		).
 
-	count_numeric_targets([], 0).
-	count_numeric_targets([example(_Id, _Pairs, Target)| Examples], Count) :-
+	count_numeric_targets(Examples, Count) :-
+		count_numeric_targets(Examples, 0, Count).
+
+	count_numeric_targets([], Count, Count).
+	count_numeric_targets([example(_Id, _Pairs, Target)| Examples], Count0, Count) :-
 		(	var(Target) ->
 			Increment = 0
 		;	number(Target) ->
 			Increment = 1
 		;	type_error(number, Target)
 		),
-		count_numeric_targets(Examples, RestCount),
-		Count is RestCount + Increment.
+		Count1 is Count0 + Increment,
+		count_numeric_targets(Examples, Count1, Count).
 
 	group_scores([], [], []).
 	group_scores([Encoder| Encoders], Weights, [Feature-Score| Scores]) :-
