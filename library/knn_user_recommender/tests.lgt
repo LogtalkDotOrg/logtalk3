@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-04,
+		date is 2026-10-07,
 		comment is 'Unit tests for the "knn_user_recommender" library.'
 	]).
 
@@ -39,15 +39,15 @@
 
 	cover(knn_user_recommender).
 
+	cleanup :-
+		^^clean_file('user_knn_export.pl').
+
 	test(knn_user_recommender_movie_score, deterministic(Score =~= 1.5)) :-
 		knn_user_recommender::learn(movie_ratings, Model),
 		knn_user_recommender::score(Model, alice, m6, Score).
 
 	test(knn_user_recommender_score_implemented_locally, deterministic) :-
 		knn_user_recommender::predicate_property(score(_, _, _, _), defined_in(knn_user_recommender)).
-
-	cleanup :-
-		^^clean_file('user_knn_export.pl').
 
 	test(knn_user_recommender_learn, deterministic(ground(Model))) :-
 		knn_user_recommender::learn(user_knn_ratings, Model).
@@ -125,8 +125,8 @@
 		knn_user_recommender::learn(user_knn_ratings, Model),
 		knn_user_recommender::recommend(Model, u, 0, _).
 
-	test(knn_user_recommender_incomplete_model, variant(Model, Copy)) :-
-		Model = knn_user_model(_, _, _, _, _), copy_term(Model, Copy),
+	test(knn_user_recommender_incomplete_model, true) :-
+		Model = knn_user_model(_, _, _, _, _),
 		\+ knn_user_recommender::valid_recommender(Model).
 
 	test(knn_user_recommender_tampered_profiles, fail) :-

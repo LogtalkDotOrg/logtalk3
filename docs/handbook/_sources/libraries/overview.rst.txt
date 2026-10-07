@@ -142,6 +142,12 @@ Library groups
     ``knn_user_recommender``, ``slope_one_recommender``,
     ``tfidf_recommender``, ``jaccard_recommender``, and
     ``bm25_recommender``.
+  - Feature selection: ``feature_selection_protocols``,
+    ``fisher_score_feature_selector``,
+    ``mutual_information_feature_selector``,
+    ``chi_square_feature_selector``, ``relief_feature_selector``,
+    ``relieff_feature_selector``, ``rrelieff_feature_selector``,
+    ``mrmr_feature_selector``, and ``lasso_feature_selector``.
 
 In addition to the loader-based libraries, this directory also contains
 a small number of standalone reusable entities, namely ``attributes``,

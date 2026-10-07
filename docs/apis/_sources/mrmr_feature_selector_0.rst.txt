@@ -1,0 +1,82 @@
+.. index:: single: mrmr_feature_selector
+.. _mrmr_feature_selector/0:
+
+.. rst-class:: right
+
+**object**
+
+``mrmr_feature_selector``
+=========================
+
+Minimum redundancy maximum relevance selection using raw mutual information in bits and the MID difference criterion. Learning requires at least two joint complete observations; otherwise it throws ``domain_error(mrmr_usable_examples,Count)``.
+
+| **Availability:** 
+|    ``logtalk_load(mrmr_feature_selector(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-07
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`feature_selector_common <feature_selector_common/0>`
+|    ``public`` :ref:`feature_redundancy <feature_redundancy/0>`
+| **Uses:**
+|    :ref:`avltree <avltree/0>`
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`feature_selector_protocol/0::check_selector/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`feature_selector_protocol/0::diagnostic/2`  :ref:`feature_selector_protocol/0::diagnostics/2`  :ref:`feature_selector_protocol/0::export_to_clauses/4`  :ref:`feature_selector_protocol/0::export_to_file/4`  :ref:`feature_selector_protocol/0::feature_scores/2`  :ref:`feature_selector_protocol/0::learn/2`  :ref:`feature_selector_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`feature_selector_protocol/0::print_selector/1`  :ref:`feature_selector_protocol/0::selected_features/2`  :ref:`feature_selector_protocol/0::selector_options/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`feature_selector_protocol/0::valid_selector/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: check_usable_examples/1
+.. _mrmr_feature_selector/0::check_usable_examples/1:
+
+``check_usable_examples/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Requires at least two jointly complete observations.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_usable_examples(Count)``
+| **Mode and number of proofs:**
+|    ``check_usable_examples(+non_negative_integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Fewer than two jointly complete observations remain:
+|        ``domain_error(mrmr_usable_examples,Count)``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

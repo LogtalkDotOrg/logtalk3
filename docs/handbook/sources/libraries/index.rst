@@ -103,6 +103,8 @@ directory in the ``NOTES.md`` file.
    expand_library_alias_paths
    expecteds
    exponential_smoothing
+   feature_selection_protocols
+   fisher_score_feature_selector
    format
    fp_growth_pattern_miner
    frequent_pattern_mining_protocols
@@ -202,6 +204,7 @@ directory in the ``NOTES.md`` file.
    kprototypes_clusterer
    ksuid
    language_detection
+   lasso_feature_selector
    lasso_regression
    lda_classifier
    lda_projection
@@ -228,10 +231,11 @@ directory in the ``NOTES.md`` file.
    mlp_classifier
    modified_z_score_anomaly_detector
    mqtt
+   mrmr_feature_selector
    multisets
    multivariate_distributions
    mutations
-   n_grams
+   mutual_information_feature_selector
    naive_bayes_classifier
    nanoid
    nearest_centroid_classifier
@@ -239,6 +243,7 @@ directory in the ``NOTES.md`` file.
    nmea
    nmf_projection
    numerical_analysis
+   n_grams
    one_class_svm_anomaly_detector
    open_ai
    open_api
@@ -277,9 +282,12 @@ directory in the ``NOTES.md`` file.
    regression_protocols
    regression_tree
    regularized_bradley_terry_ranker
+   relieff_feature_selector
+   relief_feature_selector
    rest
    ridge_regression
    ripple_down_rules
+   rrelieff_feature_selector
    s3
    schulze_ranker
    sequential_pattern_mining_protocols

@@ -1,0 +1,104 @@
+.. index:: single: regression_dataset_adapter(Dataset)
+.. _regression_dataset_adapter/1:
+
+.. rst-class:: right
+
+**object**
+
+``regression_dataset_adapter(Dataset)``
+=======================================
+
+* ``Dataset`` - Feature dataset object.
+
+
+Transient regression view of a feature dataset, preserving missing features and excluding unknown targets.
+
+| **Availability:** 
+|    ``logtalk_load(lasso_feature_selector(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-07
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`regression_dataset_protocol <regression_dataset_protocol/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`regression_dataset_protocol/0::attribute_values/2`  :ref:`regression_dataset_protocol/0::example/3`  :ref:`regression_dataset_protocol/0::target/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: check_declarations/1
+.. _regression_dataset_adapter/1::check_declarations/1:
+
+``check_declarations/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks distinct atom feature names and continuous or non-empty, distinct atomic categorical domains.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_declarations(Declarations)``
+| **Mode and number of proofs:**
+|    ``check_declarations(+list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A feature declaration is unsupported:
+|        ``domain_error(feature_type,Feature-Values)``
+|    A feature is declared more than once:
+|        ``domain_error(duplicate_feature,Feature)``
+
+
+------------
+
+.. index:: distinct_values/1
+.. _regression_dataset_adapter/1::distinct_values/1:
+
+``distinct_values/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+True when categorical values are pairwise distinct.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distinct_values(Values)``
+| **Mode and number of proofs:**
+|    ``distinct_values(+list(atomic))`` - ``zero_or_one``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

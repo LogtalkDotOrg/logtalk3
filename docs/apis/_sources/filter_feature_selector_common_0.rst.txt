@@ -1,0 +1,144 @@
+.. index:: single: filter_feature_selector_common
+.. _filter_feature_selector_common/0:
+
+.. rst-class:: right
+
+**category**
+
+``filter_feature_selector_common``
+==================================
+
+Shared learning, validation, selection, and export implementations for univariate feature selectors.
+
+| **Availability:** 
+|    ``logtalk_load(feature_selection_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-07
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`feature_selector_common <feature_selector_common/0>`
+| **Uses:**
+|    :ref:`avltree <avltree/0>`
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`feature_selector_protocol/0::check_selector/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`feature_selector_protocol/0::diagnostic/2`  :ref:`feature_selector_protocol/0::diagnostics/2`  :ref:`feature_selector_protocol/0::export_to_clauses/4`  :ref:`feature_selector_protocol/0::export_to_file/4`  :ref:`feature_selector_protocol/0::feature_scores/2`  :ref:`feature_selector_protocol/0::learn/2`  :ref:`feature_selector_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`feature_selector_protocol/0::print_selector/1`  :ref:`feature_selector_protocol/0::selected_features/2`  :ref:`feature_selector_protocol/0::selector_options/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`feature_selector_protocol/0::valid_selector/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: filter_model/1
+.. _filter_feature_selector_common/0::filter_model/1:
+
+``filter_model/1``
+^^^^^^^^^^^^^^^^^^
+
+Returns the receiving filter implementation model name.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``filter_model(Model)``
+| **Mode and number of proofs:**
+|    ``filter_model(-atom)`` - ``one``
+
+
+------------
+
+.. index:: filter_scoring_metric/2
+.. _filter_feature_selector_common/0::filter_scoring_metric/2:
+
+``filter_scoring_metric/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the scoring metric for the effective options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``filter_scoring_metric(Options,Metric)``
+| **Mode and number of proofs:**
+|    ``filter_scoring_metric(+list(compound),-object_identifier)`` - ``one``
+
+
+------------
+
+.. index:: filter_validate_dataset/3
+.. _filter_feature_selector_common/0::filter_validate_dataset/3:
+
+``filter_validate_dataset/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks algorithm-specific feature declarations. The default accepts all declarations.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``filter_validate_dataset(Dataset,Features,Examples)``
+| **Mode and number of proofs:**
+|    ``filter_validate_dataset(+object_identifier,+list(atomic),+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A feature declaration is unsupported by the receiving filter:
+|        ``domain_error(feature_type,Feature-Declaration)``
+
+
+------------
+
+.. index:: filter_feature_scores/6
+.. _filter_feature_selector_common/0::filter_feature_scores/6:
+
+``filter_feature_scores/6``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Scores all features and reports complete-case counts. Implementations can override preprocessing and scoring.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``filter_feature_scores(Dataset,Features,Examples,Options,Scores,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``filter_feature_scores(+object_identifier,+list(atomic),+list(compound),+list(compound),-list(pair),-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A complete numeric feature value is not numeric:
+|        ``type_error(number,Value)``
+|    A complete categorical target is not atomic:
+|        ``type_error(atomic,Target)``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

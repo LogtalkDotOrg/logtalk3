@@ -50,7 +50,12 @@ Categories
       directory_diagram(Format) <directory_diagram_1>
       ed25519 <ed25519_0>
       exponential_smoothing_common <exponential_smoothing_common_0>
+      feature_discretization <feature_discretization_0>
+      feature_redundancy <feature_redundancy_0>
+      feature_scoring_common <feature_scoring_common_0>
+      feature_selector_common <feature_selector_common_0>
       file_diagram(Format) <file_diagram_1>
+      filter_feature_selector_common <filter_feature_selector_common_0>
       flags <flags_0>
       flatting <flatting_0>
       forecaster_common <forecaster_common_0>
@@ -119,6 +124,7 @@ Categories
       recommender_common <recommender_common_0>
       recorded_database_core <recorded_database_core_0>
       regressor_common <regressor_common_0>
+      relief_feature_selector_common <relief_feature_selector_common_0>
       rest <rest_0>
       root_finder(Function) <root_finder_1>
       score_ranker_common <score_ranker_common_0>
@@ -182,7 +188,12 @@ Categories
    * :doc:`directory_diagram(Format) <directory_diagram_1>`
    * :doc:`ed25519 <ed25519_0>`
    * :doc:`exponential_smoothing_common <exponential_smoothing_common_0>`
+   * :doc:`feature_discretization <feature_discretization_0>`
+   * :doc:`feature_redundancy <feature_redundancy_0>`
+   * :doc:`feature_scoring_common <feature_scoring_common_0>`
+   * :doc:`feature_selector_common <feature_selector_common_0>`
    * :doc:`file_diagram(Format) <file_diagram_1>`
+   * :doc:`filter_feature_selector_common <filter_feature_selector_common_0>`
    * :doc:`flags <flags_0>`
    * :doc:`flatting <flatting_0>`
    * :doc:`forecaster_common <forecaster_common_0>`
@@ -251,6 +262,7 @@ Categories
    * :doc:`recommender_common <recommender_common_0>`
    * :doc:`recorded_database_core <recorded_database_core_0>`
    * :doc:`regressor_common <regressor_common_0>`
+   * :doc:`relief_feature_selector_common <relief_feature_selector_common_0>`
    * :doc:`rest <rest_0>`
    * :doc:`root_finder(Function) <root_finder_1>`
    * :doc:`score_ranker_common <score_ranker_common_0>`
@@ -297,6 +309,7 @@ Objects
       after_event_registry <after_event_registry_0>
       agglomerative_clusterer <agglomerative_clusterer_0>
       amqp <amqp_0>
+      anova_f_score <anova_f_score_0>
       ant_colony(Problem) <ant_colony_1>
       ant_colony(Problem,RandomAlgorithm) <ant_colony_2>
       apriori_pattern_miner <apriori_pattern_miner_0>
@@ -382,6 +395,9 @@ Objects
       ccsds_time_fields <ccsds_time_fields_0>
       ccsds_tm_frames(FrameLength,SecondaryHeaderLength,HasFECF) <ccsds_tm_frames_3>
       character <character_0>
+      chi_square_feature_selector <chi_square_feature_selector_0>
+      chi_square_score <chi_square_score_0>
+      chi_square_score(Discretization) <chi_square_score_1>
       clauses_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <clauses_reordering_5>
       clo_span_pattern_miner <clo_span_pattern_miner_0>
       cmac <cmac_0>
@@ -395,10 +411,13 @@ Objects
       conjugate_gradient(Problem) <conjugate_gradient_1>
       copeland_ranker <copeland_ranker_0>
       coroutining <coroutining_0>
+      correlation_score <correlation_score_0>
       cosine_similarity <cosine_similarity_0>
       counter <counter_0>
       coupling_metric <coupling_metric_0>
       coverage_report <coverage_report_0>
+      cramers_v_score <cramers_v_score_0>
+      cramers_v_score(Discretization) <cramers_v_score_1>
       crc32_non_reflected(Polynomial,Initial,FinalXor,AppendLength) <crc32_non_reflected_4>
       crc32_reflected(Polynomial) <crc32_reflected_1>
       crc32b <crc32b_0>
@@ -498,6 +517,8 @@ Objects
       file_load_diagram(Format) <file_load_diagram_1>
       fips202_fixed_hash(RateBytes,Suffix,OutputBytes) <fips202_fixed_hash_3>
       fips202_hash(RateBytes,Suffix,OutputBytes) <fips202_hash_3>
+      fisher_score <fisher_score_0>
+      fisher_score_feature_selector <fisher_score_feature_selector_0>
       float <float_0>
       fnv1a_32 <fnv1a_32_0>
       fnv1a_64 <fnv1a_64_0>
@@ -715,6 +736,7 @@ Objects
       language_detection_tokenizer <language_detection_tokenizer_0>
       language_detector(Representation,Strategy) <language_detector_2>
       language_profiles <language_profiles_0>
+      lasso_feature_selector <lasso_feature_selector_0>
       lasso_regression <lasso_regression_0>
       lbfgs(Problem) <lbfgs_1>
       lbfgs_b(Problem) <lbfgs_b_1>
@@ -777,6 +799,7 @@ Objects
       modules_diagram_support <modules_diagram_support_0>
       mqtt <mqtt_0>
       mr_language_profile <mr_language_profile_0>
+      mrmr_feature_selector <mrmr_feature_selector_0>
       ms_language_profile <ms_language_profile_0>
       msd_similarity <msd_similarity_0>
       multi_classification_ripple_down_rules <multi_classification_ripple_down_rules_0>
@@ -787,6 +810,9 @@ Objects
       murmurhash3_x86_32 <murmurhash3_x86_32_0>
       mutation_testing <mutation_testing_0>
       mutations_store <mutations_store_0>
+      mutual_information_feature_selector <mutual_information_feature_selector_0>
+      mutual_information_score <mutual_information_score_0>
+      mutual_information_score(Discretization) <mutual_information_score_1>
       n_grams(Representation) <n_grams_1>
       naive_bayes_classifier <naive_bayes_classifier_0>
       nanoid <nanoid_0>
@@ -889,14 +915,18 @@ Objects
       redis <redis_0>
       registries <registries_0>
       registry_loader_hook <registry_loader_hook_0>
+      regression_dataset_adapter(Dataset) <regression_dataset_adapter_1>
       regression_tree <regression_tree_0>
       regularized_bradley_terry_ranker <regularized_bradley_terry_ranker_0>
       relational_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <relational_operator_replacement_5>
+      relief_feature_selector <relief_feature_selector_0>
+      relieff_feature_selector <relieff_feature_selector_0>
       rfc_metric <rfc_metric_0>
       ridge_regression <ridge_regression_0>
       rk45_ode_solver(System) <rk45_ode_solver_1>
       rk4_ode_solver(System) <rk4_ode_solver_1>
       ro_language_profile <ro_language_profile_0>
+      rrelieff_feature_selector <rrelieff_feature_selector_0>
       ru_language_profile <ru_language_profile_0>
       rule_expansion(Mode) <rule_expansion_1>
       s3_client <s3_client_0>
@@ -1040,6 +1070,8 @@ Objects
       sv_language_profile <sv_language_profile_0>
       svr_regression <svr_regression_0>
       sw_language_profile <sw_language_profile_0>
+      symmetrical_uncertainty_score <symmetrical_uncertainty_score_0>
+      symmetrical_uncertainty_score(Discretization) <symmetrical_uncertainty_score_1>
       tabu_search(Problem) <tabu_search_1>
       tabu_search(Problem,RandomAlgorithm) <tabu_search_2>
       tap_output <tap_output_0>
@@ -1115,6 +1147,7 @@ Objects
       validated <validated_0>
       validation <validation_0>
       validation(Validation) <validation_1>
+      variance_score <variance_score_0>
       varlist <varlist_0>
       vi_language_profile <vi_language_profile_0>
       weighted_directed_graph <weighted_directed_graph_0>
@@ -1163,6 +1196,7 @@ Objects
    * :doc:`after_event_registry <after_event_registry_0>`
    * :doc:`agglomerative_clusterer <agglomerative_clusterer_0>`
    * :doc:`amqp <amqp_0>`
+   * :doc:`anova_f_score <anova_f_score_0>`
    * :doc:`ant_colony(Problem) <ant_colony_1>`
    * :doc:`ant_colony(Problem,RandomAlgorithm) <ant_colony_2>`
    * :doc:`apriori_pattern_miner <apriori_pattern_miner_0>`
@@ -1248,6 +1282,9 @@ Objects
    * :doc:`ccsds_time_fields <ccsds_time_fields_0>`
    * :doc:`ccsds_tm_frames(FrameLength,SecondaryHeaderLength,HasFECF) <ccsds_tm_frames_3>`
    * :doc:`character <character_0>`
+   * :doc:`chi_square_feature_selector <chi_square_feature_selector_0>`
+   * :doc:`chi_square_score <chi_square_score_0>`
+   * :doc:`chi_square_score(Discretization) <chi_square_score_1>`
    * :doc:`clauses_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <clauses_reordering_5>`
    * :doc:`clo_span_pattern_miner <clo_span_pattern_miner_0>`
    * :doc:`cmac <cmac_0>`
@@ -1261,10 +1298,13 @@ Objects
    * :doc:`conjugate_gradient(Problem) <conjugate_gradient_1>`
    * :doc:`copeland_ranker <copeland_ranker_0>`
    * :doc:`coroutining <coroutining_0>`
+   * :doc:`correlation_score <correlation_score_0>`
    * :doc:`cosine_similarity <cosine_similarity_0>`
    * :doc:`counter <counter_0>`
    * :doc:`coupling_metric <coupling_metric_0>`
    * :doc:`coverage_report <coverage_report_0>`
+   * :doc:`cramers_v_score <cramers_v_score_0>`
+   * :doc:`cramers_v_score(Discretization) <cramers_v_score_1>`
    * :doc:`crc32_non_reflected(Polynomial,Initial,FinalXor,AppendLength) <crc32_non_reflected_4>`
    * :doc:`crc32_reflected(Polynomial) <crc32_reflected_1>`
    * :doc:`crc32b <crc32b_0>`
@@ -1364,6 +1404,8 @@ Objects
    * :doc:`file_load_diagram(Format) <file_load_diagram_1>`
    * :doc:`fips202_fixed_hash(RateBytes,Suffix,OutputBytes) <fips202_fixed_hash_3>`
    * :doc:`fips202_hash(RateBytes,Suffix,OutputBytes) <fips202_hash_3>`
+   * :doc:`fisher_score <fisher_score_0>`
+   * :doc:`fisher_score_feature_selector <fisher_score_feature_selector_0>`
    * :doc:`float <float_0>`
    * :doc:`fnv1a_32 <fnv1a_32_0>`
    * :doc:`fnv1a_64 <fnv1a_64_0>`
@@ -1581,6 +1623,7 @@ Objects
    * :doc:`language_detection_tokenizer <language_detection_tokenizer_0>`
    * :doc:`language_detector(Representation,Strategy) <language_detector_2>`
    * :doc:`language_profiles <language_profiles_0>`
+   * :doc:`lasso_feature_selector <lasso_feature_selector_0>`
    * :doc:`lasso_regression <lasso_regression_0>`
    * :doc:`lbfgs(Problem) <lbfgs_1>`
    * :doc:`lbfgs_b(Problem) <lbfgs_b_1>`
@@ -1643,6 +1686,7 @@ Objects
    * :doc:`modules_diagram_support <modules_diagram_support_0>`
    * :doc:`mqtt <mqtt_0>`
    * :doc:`mr_language_profile <mr_language_profile_0>`
+   * :doc:`mrmr_feature_selector <mrmr_feature_selector_0>`
    * :doc:`ms_language_profile <ms_language_profile_0>`
    * :doc:`msd_similarity <msd_similarity_0>`
    * :doc:`multi_classification_ripple_down_rules <multi_classification_ripple_down_rules_0>`
@@ -1653,6 +1697,9 @@ Objects
    * :doc:`murmurhash3_x86_32 <murmurhash3_x86_32_0>`
    * :doc:`mutation_testing <mutation_testing_0>`
    * :doc:`mutations_store <mutations_store_0>`
+   * :doc:`mutual_information_feature_selector <mutual_information_feature_selector_0>`
+   * :doc:`mutual_information_score <mutual_information_score_0>`
+   * :doc:`mutual_information_score(Discretization) <mutual_information_score_1>`
    * :doc:`n_grams(Representation) <n_grams_1>`
    * :doc:`naive_bayes_classifier <naive_bayes_classifier_0>`
    * :doc:`nanoid <nanoid_0>`
@@ -1755,14 +1802,18 @@ Objects
    * :doc:`redis <redis_0>`
    * :doc:`registries <registries_0>`
    * :doc:`registry_loader_hook <registry_loader_hook_0>`
+   * :doc:`regression_dataset_adapter(Dataset) <regression_dataset_adapter_1>`
    * :doc:`regression_tree <regression_tree_0>`
    * :doc:`regularized_bradley_terry_ranker <regularized_bradley_terry_ranker_0>`
    * :doc:`relational_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <relational_operator_replacement_5>`
+   * :doc:`relief_feature_selector <relief_feature_selector_0>`
+   * :doc:`relieff_feature_selector <relieff_feature_selector_0>`
    * :doc:`rfc_metric <rfc_metric_0>`
    * :doc:`ridge_regression <ridge_regression_0>`
    * :doc:`rk45_ode_solver(System) <rk45_ode_solver_1>`
    * :doc:`rk4_ode_solver(System) <rk4_ode_solver_1>`
    * :doc:`ro_language_profile <ro_language_profile_0>`
+   * :doc:`rrelieff_feature_selector <rrelieff_feature_selector_0>`
    * :doc:`ru_language_profile <ru_language_profile_0>`
    * :doc:`rule_expansion(Mode) <rule_expansion_1>`
    * :doc:`s3_client <s3_client_0>`
@@ -1906,6 +1957,8 @@ Objects
    * :doc:`sv_language_profile <sv_language_profile_0>`
    * :doc:`svr_regression <svr_regression_0>`
    * :doc:`sw_language_profile <sw_language_profile_0>`
+   * :doc:`symmetrical_uncertainty_score <symmetrical_uncertainty_score_0>`
+   * :doc:`symmetrical_uncertainty_score(Discretization) <symmetrical_uncertainty_score_1>`
    * :doc:`tabu_search(Problem) <tabu_search_1>`
    * :doc:`tabu_search(Problem,RandomAlgorithm) <tabu_search_2>`
    * :doc:`tap_output <tap_output_0>`
@@ -1981,6 +2034,7 @@ Objects
    * :doc:`validated <validated_0>`
    * :doc:`validation <validation_0>`
    * :doc:`validation(Validation) <validation_1>`
+   * :doc:`variance_score <variance_score_0>`
    * :doc:`varlist <varlist_0>`
    * :doc:`vi_language_profile <vi_language_profile_0>`
    * :doc:`weighted_directed_graph <weighted_directed_graph_0>`
@@ -2069,6 +2123,9 @@ Protocols
       directive_mutator_protocol <directive_mutator_protocol_0>
       event_registryp <event_registryp_0>
       expanding <expanding_0>
+      feature_dataset_protocol <feature_dataset_protocol_0>
+      feature_scoring_protocol <feature_scoring_protocol_0>
+      feature_selector_protocol <feature_selector_protocol_0>
       flags_validator <flags_validator_0>
       forecaster_protocol <forecaster_protocol_0>
       forwarding <forwarding_0>
@@ -2289,6 +2346,9 @@ Protocols
    * :doc:`directive_mutator_protocol <directive_mutator_protocol_0>`
    * :doc:`event_registryp <event_registryp_0>`
    * :doc:`expanding <expanding_0>`
+   * :doc:`feature_dataset_protocol <feature_dataset_protocol_0>`
+   * :doc:`feature_scoring_protocol <feature_scoring_protocol_0>`
+   * :doc:`feature_selector_protocol <feature_selector_protocol_0>`
    * :doc:`flags_validator <flags_validator_0>`
    * :doc:`forecaster_protocol <forecaster_protocol_0>`
    * :doc:`forwarding <forwarding_0>`

@@ -331,9 +331,7 @@
 
 	test(bm25_recommender_invalid_model_preserves_variables, deterministic) :-
 		Model = bm25_model(_,_,_,_,_,_,_),
-		copy_term(Model, Original),
-		assertion(\+ bm25_recommender::valid_recommender(Model)),
-		assertion(lgtunit::variant(Model, Original)).
+		assertion(\+ bm25_recommender::valid_recommender(Model)).
 
 	test(bm25_recommender_diagnostic_validation_and_extras, deterministic) :-
 		feature_dataset(Dataset),

@@ -1,0 +1,218 @@
+.. index:: single: relief_feature_selector_common
+.. _relief_feature_selector_common/0:
+
+.. rst-class:: right
+
+**category**
+
+``relief_feature_selector_common``
+==================================
+
+Shared joint nearest-neighbor feature selection for Relief, ReliefF, and RReliefF.
+
+| **Availability:** 
+|    ``logtalk_load(feature_selection_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-07
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`feature_selector_common <feature_selector_common/0>`
+| **Uses:**
+|    :ref:`avltree <avltree/0>`
+|    :ref:`fast_random(Algorithm) <fast_random/1>`
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`feature_selector_protocol/0::check_selector/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`feature_selector_protocol/0::diagnostic/2`  :ref:`feature_selector_protocol/0::diagnostics/2`  :ref:`feature_selector_protocol/0::export_to_clauses/4`  :ref:`feature_selector_protocol/0::export_to_file/4`  :ref:`feature_selector_protocol/0::feature_scores/2`  :ref:`feature_selector_protocol/0::learn/2`  :ref:`feature_selector_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`feature_selector_protocol/0::print_selector/1`  :ref:`feature_selector_protocol/0::selected_features/2`  :ref:`feature_selector_protocol/0::selector_options/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`feature_selector_protocol/0::valid_selector/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: relief_model/1
+.. _relief_feature_selector_common/0::relief_model/1:
+
+``relief_model/1``
+^^^^^^^^^^^^^^^^^^
+
+Returns the receiving selector model functor.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``relief_model(Model)``
+| **Mode and number of proofs:**
+|    ``relief_model(-atom)`` - ``one``
+
+
+------------
+
+.. index:: relief_variant/1
+.. _relief_feature_selector_common/0::relief_variant/1:
+
+``relief_variant/1``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns ``binary``, ``multiclass``, or ``regression``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``relief_variant(Variant)``
+| **Mode and number of proofs:**
+|    ``relief_variant(-atom)`` - ``one``
+
+
+------------
+
+.. index:: anchors/4
+.. _relief_feature_selector_common/0::anchors/4:
+
+``anchors/4``
+^^^^^^^^^^^^^
+
+Processes all rows or samples anchors while restoring RNG state on every exit path.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``anchors(Size,Seed,Rows,Anchors)``
+| **Mode and number of proofs:**
+|    ``anchors(+term,+positive_integer,+list(compound),-list(compound))`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    A sampling size is not evaluable:
+|        ``type_error(evaluable,Size)``
+|    Sampling arithmetic exceeds backend limits:
+|        ``evaluation_error(Reason)``
+
+
+------------
+
+Private predicates
+------------------
+
+.. index:: declarations/3
+.. _relief_feature_selector_common/0::declarations/3:
+
+``declarations/3``
+^^^^^^^^^^^^^^^^^^
+
+Resolves continuous and discrete feature declarations to numeric and categorical types.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``declarations(Features,Dataset,Declarations)``
+| **Mode and number of proofs:**
+|    ``declarations(+list(atomic),+object_identifier,-list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A declaration is unsupported:
+|        ``domain_error(feature_type,Feature-Declaration)``
+
+
+------------
+
+.. index:: check_target/2
+.. _relief_feature_selector_common/0::check_target/2:
+
+``check_target/2``
+^^^^^^^^^^^^^^^^^^
+
+Checks the target type required by the algorithm variant.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_target(Variant,Target)``
+| **Mode and number of proofs:**
+|    ``check_target(+atom,+nonvar)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A regression target is not numeric:
+|        ``type_error(number,Target)``
+|    A classification target is not atomic:
+|        ``type_error(atomic,Target)``
+
+
+------------
+
+.. index:: row_values/4
+.. _relief_feature_selector_common/0::row_values/4:
+
+``row_values/4``
+^^^^^^^^^^^^^^^^
+
+Collects typed row values from an indexed feature dictionary without binding missing values.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``row_values(Declarations,Dictionary,Values,Complete)``
+| **Mode and number of proofs:**
+|    ``row_values(+list(pair),+compound,-list,-boolean)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A known numeric feature is not numeric:
+|        ``type_error(number,Value)``
+|    A known categorical feature is not atomic:
+|        ``type_error(atomic,Value)``
+|    A known categorical value is outside its declared domain:
+|        ``domain_error(feature_value,Feature-Value)``
+
+
+------------
+
+.. index:: population/4
+.. _relief_feature_selector_common/0::population/4:
+
+``population/4``
+^^^^^^^^^^^^^^^^
+
+Checks eligible class counts or regression row count and prepares target normalization.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``population(Variant,Rows,Classes,TargetScale)``
+| **Mode and number of proofs:**
+|    ``population(+atom,+list(compound),-list(pair),-term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The eligible population does not satisfy the variant minimum:
+|        ``domain_error(relief_population,Variant-Counts)``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

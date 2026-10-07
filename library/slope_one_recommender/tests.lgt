@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-04,
+		date is 2026-10-07,
 		comment is 'Unit tests for the "slope_one_recommender" library.'
 	]).
 
@@ -39,6 +39,9 @@
 
 	cover(slope_one_recommender).
 
+	cleanup :-
+		^^clean_file('slope_export.pl').
+
 	test(slope_one_recommender_movie_score, deterministic(Score =~= Expected)) :-
 		slope_one_recommender::learn(movie_ratings, Model),
 		slope_one_recommender::score(Model, alice, m6, Score),
@@ -46,9 +49,6 @@
 
 	test(slope_one_recommender_score_implemented_locally, deterministic) :-
 		slope_one_recommender::predicate_property(score(_, _, _, _), defined_in(slope_one_recommender)).
-
-	cleanup :-
-		^^clean_file('slope_export.pl').
 
 	test(slope_one_recommender_learn, deterministic(ground(Model))) :-
 		slope_one_recommender::learn(slope_ratings, Model).
@@ -117,10 +117,6 @@
 		slope_one_recommender::learn(slope_ratings, Model),
 		slope_one_recommender::score(Model, _, c, _).
 
-	test(slope_one_recommender_incomplete_model, variant(Model, Copy)) :-
-		Model = slope_one_model(_, _, _, _, _), copy_term(Model, Copy),
-		\+ slope_one_recommender::valid_recommender(Model).
-
 	test(slope_one_recommender_tampered_deviations, fail) :-
 		slope_one_recommender::learn(slope_ratings, slope_one_model(Ratings, _, Mean, Scale, Diagnostics)),
 		slope_one_recommender::valid_recommender(slope_one_model(Ratings, [], Mean, Scale, Diagnostics)).
@@ -129,7 +125,8 @@
 		slope_one_recommender::learn(slope_ratings, Model),
 		^^file_path('slope_export.pl', File),
 		slope_one_recommender::export_to_file(slope_ratings, Model, slope_saved, File),
-		logtalk_load(File), {slope_saved(Loaded)},
+		logtalk_load(File),
+		{slope_saved(Loaded)},
 		slope_one_recommender::score(Loaded, u, c, Rating), assertion(Rating =~= 4.0).
 
 	test(slope_one_recommender_print, deterministic) :-

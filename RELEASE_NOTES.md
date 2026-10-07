@@ -97,6 +97,34 @@ and Jaccard relevance scores.
 with raw term counts, positive-feedback query profiles, and BM25 relevance
 scores.
 
+* ADDED: New `feature_selection_protocols` library providing protocols and
+common predicates used in the implementation of (filter- based) feature
+selection algorithms.
+
+* ADDED: New `fisher_score_feature_selector` library implementing feature
+selection using Fisher scores.
+
+* ADDED: New `mutual_information_feature_selector` library implementing
+feature selection using mutual information.
+
+* ADDED: New `chi_square_feature_selector` library implementing feature
+selection using chi-square scores.
+
+* ADDED: New `relief_feature_selector` library implementing Relief feature
+selection for binary classification.
+
+* ADDED: New `relieff_feature_selector` library implementing ReliefF feature
+selection for multiclass classification.
+
+* ADDED: New `rrelieff_feature_selector` library implementing RReliefF feature
+selection for regression.
+
+* ADDED: New `mrmr_feature_selector` library implementing minimum-redundancy
+maximum-relevance feature selection using mutual information differences.
+
+* ADDED: New `lasso_feature_selector` library implementing feature selection
+using Lasso regression coefficients.
+
 * IMPROVED: Performance of the `crypto` library.
 
 * IMPROVED: Rewrite predicate definitions as tail-recursive in the

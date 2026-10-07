@@ -1,0 +1,446 @@
+.. index:: single: feature_scoring_common
+.. _feature_scoring_common/0:
+
+.. rst-class:: right
+
+**category**
+
+``feature_scoring_common``
+==========================
+
+Shared arithmetic, discretization, and sparse contingency helpers for feature scoring.
+
+| **Availability:** 
+|    ``logtalk_load(feature_selection_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-06
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Uses:**
+|    :ref:`avltree <avltree/0>`
+|    :ref:`list <list/0>`
+|    :ref:`numberlist <numberlist/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: class_scatter/5
+.. _feature_scoring_common/0::class_scatter/5:
+
+``class_scatter/5``
+^^^^^^^^^^^^^^^^^^^
+
+Computes scaled between-class and within-class scatter from complete numeric-value and categorical-target pairs. Empty inputs have zero scatter.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``class_scatter(Pairs,ObservationCount,ClassCount,Between,Within)``
+| **Mode and number of proofs:**
+|    ``class_scatter(+list(pair),-non_negative_integer,-non_negative_integer,-float,-float)`` - ``one``
+
+
+------------
+
+.. index:: categorical_pairs/4
+.. _feature_scoring_common/0::categorical_pairs/4:
+
+``categorical_pairs/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates aligned scoring inputs and prepares complete categorical pairs, optionally discretizing numeric features.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``categorical_pairs(Discretization,Values,Targets,Pairs)``
+| **Mode and number of proofs:**
+|    ``categorical_pairs(+term,+list,+list,-list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An input list or discretization parameter is unbound:
+|        ``instantiation_error``
+|    An input is not a list:
+|        ``type_error(list,Input)``
+|    A categorical value or target is not atomic:
+|        ``type_error(atomic,Value)``
+|    A continuous feature value is not numeric:
+|        ``type_error(number,Value)``
+|    A bin count is not an integer:
+|        ``type_error(integer,Count)``
+|    A bin count is not positive:
+|        ``domain_error(positive_integer,Count)``
+|    The discretization specification is invalid:
+|        ``domain_error(discretization,Discretization)``
+|    The input list lengths differ:
+|        ``consistency_error(list_length,ValueCount,TargetCount)``
+
+
+------------
+
+.. index:: contingency_counts/2
+.. _feature_scoring_common/0::contingency_counts/2:
+
+``contingency_counts/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Builds sparse observed cell counts and marginal dictionaries from complete categorical pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``contingency_counts(Pairs,Counts)``
+| **Mode and number of proofs:**
+|    ``contingency_counts(+list(pair),-compound)`` - ``one``
+
+
+------------
+
+.. index:: contingency_score/3
+.. _feature_scoring_common/0::contingency_score/3:
+
+``contingency_score/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes mutual information, Pearson chi-square, symmetrical uncertainty, or Cramer's V from sparse contingency counts. Degenerate tables score 0.0.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``contingency_score(Criterion,Counts,Score)``
+| **Mode and number of proofs:**
+|    ``contingency_score(+atom,+compound,-float)`` - ``one``
+
+
+------------
+
+.. index:: complete_pairs/3
+.. _feature_scoring_common/0::complete_pairs/3:
+
+``complete_pairs/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Collects the ``Value-Target`` pairs for which both the feature value and the target are bound, discarding any example where either is an unbound variable (casewise deletion). ``Values`` and ``Targets`` must have the same length.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``complete_pairs(Values,Targets,Pairs)``
+| **Mode and number of proofs:**
+|    ``complete_pairs(+list,+list,-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: complete_values/2
+.. _feature_scoring_common/0::complete_values/2:
+
+``complete_values/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Collects the bound (non-missing) values of a list, discarding unbound ones.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``complete_values(Values,Complete)``
+| **Mode and number of proofs:**
+|    ``complete_values(+list,-list(number))`` - ``one``
+
+
+------------
+
+.. index:: mean_values/2
+.. _feature_scoring_common/0::mean_values/2:
+
+``mean_values/2``
+^^^^^^^^^^^^^^^^^
+
+Computes the arithmetic mean of a non-empty numeric list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``mean_values(Values,Mean)``
+| **Mode and number of proofs:**
+|    ``mean_values(+list(number),-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Values`` is empty:
+|        ``evaluation_error(zero_divisor)``
+
+
+------------
+
+.. index:: variance_values/2
+.. _feature_scoring_common/0::variance_values/2:
+
+``variance_values/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Computes the population variance of a non-empty numeric list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``variance_values(Values,Variance)``
+| **Mode and number of proofs:**
+|    ``variance_values(+list(number),-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Values`` is empty:
+|        ``evaluation_error(zero_divisor)``
+
+
+------------
+
+.. index:: centered_values/2
+.. _feature_scoring_common/0::centered_values/2:
+
+``centered_values/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Centers non-empty numeric values using offsets from the first value, preserving exact constant inputs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``centered_values(Values,Centered)``
+| **Mode and number of proofs:**
+|    ``centered_values(+list(number),-list(number))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Values`` is empty:
+|        ``evaluation_error(zero_divisor)``
+
+
+------------
+
+.. index:: scale_values/2
+.. _feature_scoring_common/0::scale_values/2:
+
+``scale_values/2``
+^^^^^^^^^^^^^^^^^^
+
+Scales numeric values by their largest absolute value, leaving an all-zero list unchanged.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``scale_values(Values,Scaled)``
+| **Mode and number of proofs:**
+|    ``scale_values(+list(number),-list(number))`` - ``one``
+
+
+------------
+
+.. index:: scale_values/3
+.. _feature_scoring_common/0::scale_values/3:
+
+``scale_values/3``
+^^^^^^^^^^^^^^^^^^
+
+Scales numeric values and returns the divisor, using 1.0 for an all-zero or empty list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``scale_values(Values,Scaled,Scale)``
+| **Mode and number of proofs:**
+|    ``scale_values(+list(number),-list(number),-number)`` - ``one``
+
+
+------------
+
+.. index:: squared_deviations/3
+.. _feature_scoring_common/0::squared_deviations/3:
+
+``squared_deviations/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the squared deviation of every value from a given reference value (typically the mean).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``squared_deviations(Values,Reference,SquaredDeviations)``
+| **Mode and number of proofs:**
+|    ``squared_deviations(+list(number),+number,-list(number))`` - ``one``
+
+
+------------
+
+.. index:: sum_of_squared_deviations/3
+.. _feature_scoring_common/0::sum_of_squared_deviations/3:
+
+``sum_of_squared_deviations/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the sum of the squared deviations of every value from a given reference value (typically the mean); the within-group sum of squares used by anova_f_score is the sum of this over every group.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sum_of_squared_deviations(Values,Reference,SumSquaredDeviations)``
+| **Mode and number of proofs:**
+|    ``sum_of_squared_deviations(+list(number),+number,-float)`` - ``one``
+
+
+------------
+
+.. index:: center/3
+.. _feature_scoring_common/0::center/3:
+
+``center/3``
+^^^^^^^^^^^^
+
+Subtracts a value (typically the mean) from every element of a numeric list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``center(Values,Value,Centered)``
+| **Mode and number of proofs:**
+|    ``center(+list(number),+number,-list(number))`` - ``one``
+
+
+------------
+
+.. index:: dot_product/3
+.. _feature_scoring_common/0::dot_product/3:
+
+``dot_product/3``
+^^^^^^^^^^^^^^^^^
+
+Computes the dot product of two position-aligned numeric lists of the same length.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dot_product(Values1,Values2,Dot)``
+| **Mode and number of proofs:**
+|    ``dot_product(+list(number),+list(number),-number)`` - ``one``
+
+
+------------
+
+.. index:: sum_of_squares_list/2
+.. _feature_scoring_common/0::sum_of_squares_list/2:
+
+``sum_of_squares_list/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the sum of the squares of a numeric list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sum_of_squares_list(Values,SumSquares)``
+| **Mode and number of proofs:**
+|    ``sum_of_squares_list(+list(number),-number)`` - ``one``
+
+
+------------
+
+.. index:: split_pairs/3
+.. _feature_scoring_common/0::split_pairs/3:
+
+``split_pairs/3``
+^^^^^^^^^^^^^^^^^
+
+Splits a list of ``Value1-Value2`` pairs into separate, position-aligned lists of first and second values.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``split_pairs(Pairs,Values1,Values2)``
+| **Mode and number of proofs:**
+|    ``split_pairs(+list(pair),-list(number),-list(number))`` - ``one``
+
+
+------------
+
+.. index:: group_by_target/2
+.. _feature_scoring_common/0::group_by_target/2:
+
+``group_by_target/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Groups ``Value-Target`` pairs into ``Target-Values`` pairs in standard target order, preserving input value order within each group.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``group_by_target(Pairs,Groups)``
+| **Mode and number of proofs:**
+|    ``group_by_target(+list(pair),-list(pair))`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+.. index:: compare_numeric_pairs/3
+.. _feature_scoring_common/0::compare_numeric_pairs/3:
+
+``compare_numeric_pairs/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Compares numeric feature values arithmetically, keeping numerically equal representations together.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``compare_numeric_pairs(Order,Pair1,Pair2)``
+| **Mode and number of proofs:**
+|    ``compare_numeric_pairs(-atom,+pair,+pair)`` - ``one``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

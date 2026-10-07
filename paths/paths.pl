@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on October 5, 2026
+%  Last updated on October 7, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -138,6 +138,7 @@ logtalk_library_path(c45_classifier, library('c45_classifier/')).
 logtalk_library_path(cartesian_products, library('cartesian_products/')).
 logtalk_library_path(cbor, library('cbor/')).
 logtalk_library_path(character_sets, library('character_sets/')).
+logtalk_library_path(chi_square_feature_selector, library('chi_square_feature_selector/')).
 logtalk_library_path(classification_protocols, library('classification_protocols/')).
 logtalk_library_path(clo_span_pattern_miner, library('clo_span_pattern_miner/')).
 logtalk_library_path(clustering_protocols, library('clustering_protocols/')).
@@ -182,6 +183,8 @@ logtalk_library_path(ewma_anomaly_detector, library('ewma_anomaly_detector/')).
 logtalk_library_path(expand_library_alias_paths, library('expand_library_alias_paths/')).
 logtalk_library_path(expecteds, library('expecteds/')).
 logtalk_library_path(exponential_smoothing, library('exponential_smoothing/')).
+logtalk_library_path(feature_selection_protocols, library('feature_selection_protocols/')).
+logtalk_library_path(fisher_score_feature_selector, library('fisher_score_feature_selector/')).
 logtalk_library_path(format, library('format/')).
 logtalk_library_path(fp_growth_pattern_miner, library('fp_growth_pattern_miner/')).
 logtalk_library_path(frequent_pattern_mining_protocols, library('frequent_pattern_mining_protocols/')).
@@ -281,6 +284,7 @@ logtalk_library_path(knn_user_recommender, library('knn_user_recommender/')).
 logtalk_library_path(kprototypes_clusterer, library('kprototypes_clusterer/')).
 logtalk_library_path(ksuid, library('ksuid/')).
 logtalk_library_path(language_detection, library('language_detection/')).
+logtalk_library_path(lasso_feature_selector, library('lasso_feature_selector/')).
 logtalk_library_path(lasso_regression, library('lasso_regression/')).
 logtalk_library_path(lda_classifier, library('lda_classifier/')).
 logtalk_library_path(lda_projection, library('lda_projection/')).
@@ -307,9 +311,11 @@ logtalk_library_path(mime_types, library('mime_types/')).
 logtalk_library_path(mlp_classifier, library('mlp_classifier/')).
 logtalk_library_path(modified_z_score_anomaly_detector, library('modified_z_score_anomaly_detector/')).
 logtalk_library_path(mqtt, library('mqtt/')).
+logtalk_library_path(mrmr_feature_selector, library('mrmr_feature_selector/')).
 logtalk_library_path(multisets, library('multisets/')).
 logtalk_library_path(multivariate_distributions, library('multivariate_distributions/')).
 logtalk_library_path(mutations, library('mutations/')).
+logtalk_library_path(mutual_information_feature_selector, library('mutual_information_feature_selector/')).
 logtalk_library_path(n_grams, library('n_grams/')).
 logtalk_library_path(naive_bayes_classifier, library('naive_bayes_classifier/')).
 logtalk_library_path(nanoid, library('nanoid/')).
@@ -356,9 +362,12 @@ logtalk_library_path(redis, library('redis/')).
 logtalk_library_path(regression_protocols, library('regression_protocols/')).
 logtalk_library_path(regression_tree, library('regression_tree/')).
 logtalk_library_path(regularized_bradley_terry_ranker, library('regularized_bradley_terry_ranker/')).
+logtalk_library_path(relief_feature_selector, library('relief_feature_selector/')).
+logtalk_library_path(relieff_feature_selector, library('relieff_feature_selector/')).
 logtalk_library_path(rest, library('rest/')).
 logtalk_library_path(ridge_regression, library('ridge_regression/')).
 logtalk_library_path(ripple_down_rules, library('ripple_down_rules/')).
+logtalk_library_path(rrelieff_feature_selector, library('rrelieff_feature_selector/')).
 logtalk_library_path(s3, library('s3/')).
 logtalk_library_path(schulze_ranker, library('schulze_ranker/')).
 logtalk_library_path(sequential_pattern_mining_protocols, library('sequential_pattern_mining_protocols/')).

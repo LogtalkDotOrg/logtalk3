@@ -1,0 +1,74 @@
+.. index:: single: mutual_information_feature_selector
+.. _mutual_information_feature_selector/0:
+
+.. rst-class:: right
+
+**object**
+
+``mutual_information_feature_selector``
+=======================================
+
+Selects categorical or discretized continuous features using mutual information or symmetrical uncertainty.
+
+| **Availability:** 
+|    ``logtalk_load(mutual_information_feature_selector(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-07
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`filter_feature_selector_common <filter_feature_selector_common/0>`
+|    ``public`` :ref:`feature_discretization <feature_discretization/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`feature_selector_protocol/0::check_selector/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`feature_selector_protocol/0::diagnostic/2`  :ref:`feature_selector_protocol/0::diagnostics/2`  :ref:`feature_selector_protocol/0::export_to_clauses/4`  :ref:`feature_selector_protocol/0::export_to_file/4`  :ref:`feature_selector_protocol/0::feature_scores/2`  :ref:`feature_selector_protocol/0::learn/2`  :ref:`feature_selector_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`feature_selector_protocol/0::print_selector/1`  :ref:`feature_selector_protocol/0::selected_features/2`  :ref:`feature_selector_protocol/0::selector_options/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`feature_selector_protocol/0::valid_selector/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: score_columns/3
+.. _mutual_information_feature_selector/0::score_columns/3:
+
+``score_columns/3``
+^^^^^^^^^^^^^^^^^^^
+
+Scores prepared columns using sparse contingency counts.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``score_columns(Columns,Criterion,Scores)``
+| **Mode and number of proofs:**
+|    ``score_columns(+list(compound),+atom,-list(pair))`` - ``one``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-06,
+		date is 2026-10-07,
 		comment is 'Shared predicates for recommender diagnostics, rating dataset validation, rating-matrix utilities, similarity metrics, and top-k retrieval.'
 	]).
 
@@ -40,6 +40,10 @@
 
 	:- uses(numberlist, [
 		sum/2
+	]).
+
+	:- uses(pairs, [
+		transpose/2
 	]).
 
 	:- uses(type, [
@@ -111,9 +115,7 @@
 		findall(Count, member(rating_count(Count), Diagnostics), [Count]),
 		valid(positive_integer, Count),
 		findall(Options, member(options(Options), Diagnostics), [Options]),
-		ground(Options),
-		valid(list(compound), Options),
-		::valid_options(Options).
+		^^valid_options(Options).
 
 	diagnostics(Recommender, Diagnostics) :-
 		::recommender_diagnostics_data(Recommender, Diagnostics).
@@ -514,15 +516,11 @@
 	]).
 
 	top_k(Pairs, K, TopK) :-
-		swap_pairs(Pairs, Swapped),
+		transpose(Pairs, Swapped),
 		keysort(Swapped, Sorted),
 		reverse(Sorted, Descending),
 		take_at_most(K, Descending, TopKSwapped),
-		swap_pairs(TopKSwapped, TopK).
-
-	swap_pairs([], []).
-	swap_pairs([Key-Value| Pairs], [Value-Key| Swapped]) :-
-		swap_pairs(Pairs, Swapped).
+		transpose(TopKSwapped, TopK).
 
 	take_at_most(_K, [], []) :-
 		!.

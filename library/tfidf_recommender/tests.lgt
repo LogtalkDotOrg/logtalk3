@@ -1343,8 +1343,8 @@
 		tfidf_recommender::learn(tfidf_scale_fixture(1, 5), Model),
 		tfidf_recommender::score(Model, u, x, Score).
 
-	test(tfidf_recommender_incomplete_model, variant(Model, Copy)) :-
-		Model = tfidf_model(_,_,_,_,_,_,_), copy_term(Model, Copy),
+	test(tfidf_recommender_incomplete_model, true) :-
+		Model = tfidf_model(_,_,_,_,_,_,_),
 		\+ tfidf_recommender::valid_recommender(Model).
 
 	test(tfidf_recommender_tampered_profiles, fail) :-

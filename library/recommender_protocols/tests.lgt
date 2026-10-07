@@ -34,14 +34,6 @@
 		op(700, xfx, =~=), (=~=)/2, assertion/1
 	]).
 
-	test(recommender_protocols_recommender_score_self_dispatch, deterministic(Score == 42)) :-
-		sample_score_override::learn(movie_ratings, Model),
-		sample_score_override::shared_recommend(Model, alice, 1, [_-Score]).
-
-	test(recommender_protocols_common_scoring_contract, deterministic) :-
-		sample_recommender::current_predicate(score/4),
-		validation_recommender::current_predicate(score/4).
-
 	:- uses(list, [
 		length/2, member/2, memberchk/2
 	]).
@@ -55,6 +47,17 @@
 	cover(msd_similarity).
 	cover(spearman_similarity).
 	cover(sample_recommender).
+
+	cleanup :-
+		^^clean_file('test_output.pl').
+
+	test(recommender_protocols_recommender_score_self_dispatch, deterministic(Score == 42)) :-
+		sample_score_override::learn(movie_ratings, Model),
+		sample_score_override::shared_recommend(Model, alice, 1, [_-Score]).
+
+	test(recommender_protocols_common_scoring_contract, deterministic) :-
+		sample_recommender::current_predicate(score/4),
+		validation_recommender::current_predicate(score/4).
 
 	test(recommender_protocols_content_occurrences_preserved, deterministic(Contents == [x-features([a,a,b])])) :-
 		^^collect_contents(content_catalog_fixture([x], [x-features([b,a,a])]), Contents, features).
@@ -73,9 +76,6 @@
 
 	test(recommender_protocols_content_missing_rated_item, error(domain_error(catalog_item, missing))) :-
 		^^check_rated_catalog([rating(u,missing,1)], [x-features([])]).
-
-	cleanup :-
-		^^clean_file('test_output.pl').
 
 	% rating_dataset_protocol tests
 

@@ -1,0 +1,113 @@
+.. index:: single: feature_dataset_protocol
+.. _feature_dataset_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``feature_dataset_protocol``
+============================
+
+Protocol for datasets used with feature selection algorithms. Generalizes classification_protocols::dataset_protocol to also support regression targets and unsupervised use (no target at all), reusing the same attribute_values/2 predicate for familiarity.
+
+| **Availability:** 
+|    ``logtalk_load(feature_selection_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-02
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: attribute_values/2
+.. _feature_dataset_protocol/0::attribute_values/2:
+
+``attribute_values/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Enumerates by backtracking the candidate features and their possible values. Each atomic feature name must be declared once. For discrete features, ``Values`` is a list of possible values. For continuous (numeric) features, ``Values`` is the atom ``continuous``. Never includes the target.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``attribute_values(Feature,Values)``
+| **Mode and number of proofs:**
+|    ``attribute_values(?atomic,-list(atomic))`` - ``zero_or_more``
+|    ``attribute_values(?atomic,-atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: example_count/1
+.. _feature_dataset_protocol/0::example_count/1:
+
+``example_count/1``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the number of examples. The declared count must match the number of examples enumerated by example/3.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``example_count(Count)``
+| **Mode and number of proofs:**
+|    ``example_count(-positive_integer)`` - ``one``
+
+
+------------
+
+.. index:: example/3
+.. _feature_dataset_protocol/0::example/3:
+
+``example/3``
+^^^^^^^^^^^^^
+
+Enumerates by backtracking the examples in the dataset. Each example has an ``Id``, a list of ``Feature-Value`` pairs with distinct declared feature names, and a ``Target`` value. A missing feature is omitted or has an unbound value. ``Target`` is an atom for classification, a number for regression, or an unbound variable when unknown.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``example(Id,Features,Target)``
+| **Mode and number of proofs:**
+|    ``example(-integer,-list(pair),?term)`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

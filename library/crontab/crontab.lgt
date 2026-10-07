@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:1:2,
 		author is 'Paulo Moura',
-		date is 2026-10-06,
+		date is 2026-10-07,
 		comment is 'Parser and generator for user and system crontab files.',
 		parameters is [
 			'Representation' - 'Text representation. Valid values are ``atom``, ``chars``, and ``codes``.'
@@ -572,7 +572,7 @@
 		append(LowCodes, [0'-| HighCodes], Codes).
 	field_codes(step(Base, Step), Kind, Codes) :-
 		integer(Step), Step > 0,
-		(	Base == '*' ->
+		(	Base == ('*') ->
 			BaseCodes = [0'*]
 		;	Base = range(_, _),
 			field_codes(Base, Kind, BaseCodes)

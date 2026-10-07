@@ -1,0 +1,84 @@
+.. index:: single: fisher_score
+.. _fisher_score/0:
+
+.. rst-class:: right
+
+**object**
+
+``fisher_score``
+================
+
+Scores a numeric feature against categorical targets using between-class scatter divided by within-class scatter, capped at 1.0e10.
+
+| **Availability:** 
+|    ``logtalk_load(feature_selection_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-07
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`feature_scoring_protocol <feature_scoring_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`feature_scoring_common <feature_scoring_common/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`feature_scoring_protocol/0::score/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: check_complete_pairs/2
+.. _fisher_score/0::check_complete_pairs/2:
+
+``check_complete_pairs/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks complete numeric feature values and atomic target labels.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_complete_pairs(Pairs,Context)``
+| **Mode and number of proofs:**
+|    ``check_complete_pairs(+list(pair),+term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A feature value is not numeric:
+|        ``type_error(number,Value)``
+|    A target label is not atomic:
+|        ``type_error(atomic,Target)``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

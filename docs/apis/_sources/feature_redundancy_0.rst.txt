@@ -1,0 +1,73 @@
+.. index:: single: feature_redundancy
+.. _feature_redundancy/0:
+
+.. rst-class:: right
+
+**category**
+
+``feature_redundancy``
+======================
+
+Mutual information redundancy in bits between aligned, already prepared categorical feature columns.
+
+| **Availability:** 
+|    ``logtalk_load(feature_selection_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-07
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`feature_discretization <feature_discretization/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: feature_pair_mutual_information/3
+.. _feature_redundancy/0::feature_pair_mutual_information/3:
+
+``feature_pair_mutual_information/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes raw mutual information between the feature values in two same-length, complete ``Value-Target`` columns without refitting discretization.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``feature_pair_mutual_information(LeftPairs,RightPairs,Information)``
+| **Mode and number of proofs:**
+|    ``feature_pair_mutual_information(+list(pair),+list(pair),-float)`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

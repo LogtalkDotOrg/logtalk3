@@ -1,0 +1,459 @@
+.. index:: single: feature_selector_common
+.. _feature_selector_common/0:
+
+.. rst-class:: right
+
+**category**
+
+``feature_selector_common``
+===========================
+
+Shared predicates for selector diagnostics, dataset validation, feature-matrix utilities, and selection strategies (top-k and threshold).
+
+| **Availability:** 
+|    ``logtalk_load(feature_selection_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-06
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Implements:**
+|    ``public`` :ref:`feature_selector_protocol <feature_selector_protocol/0>`
+| **Extends:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`avltree <avltree/0>`
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`feature_selector_protocol/0::check_selector/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`feature_selector_protocol/0::diagnostic/2`  :ref:`feature_selector_protocol/0::diagnostics/2`  :ref:`feature_selector_protocol/0::export_to_clauses/4`  :ref:`feature_selector_protocol/0::export_to_file/4`  :ref:`feature_selector_protocol/0::feature_scores/2`  :ref:`feature_selector_protocol/0::learn/2`  :ref:`feature_selector_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`feature_selector_protocol/0::print_selector/1`  :ref:`feature_selector_protocol/0::selected_features/2`  :ref:`feature_selector_protocol/0::selector_options/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`feature_selector_protocol/0::valid_selector/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: selector_diagnostics_data/2
+.. _feature_selector_common/0::selector_diagnostics_data/2:
+
+``selector_diagnostics_data/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing selector implementations must define in order to expose diagnostics metadata. A default implementation is provided that assumes the diagnostics list is the last argument of the selector term; concrete implementations following that convention do not need to override it.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``selector_diagnostics_data(Selector,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``selector_diagnostics_data(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: selector_export_template/4
+.. _feature_selector_common/0::selector_export_template/4:
+
+``selector_export_template/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing selector implementations must define in order to expose the exported selector template for a given functor.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``selector_export_template(Dataset,Selector,Functor,Template)``
+| **Mode and number of proofs:**
+|    ``selector_export_template(+object_identifier,+compound,+atom,-callable)`` - ``one``
+
+
+------------
+
+.. index:: selector_term_template/2
+.. _feature_selector_common/0::selector_term_template/2:
+
+``selector_term_template/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing selector implementations must define in order to expose the learned selector term template used by pretty-printing helpers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``selector_term_template(Selector,Template)``
+| **Mode and number of proofs:**
+|    ``selector_term_template(+compound,-callable)`` - ``one``
+
+
+------------
+
+.. index:: print_selector_template/1
+.. _feature_selector_common/0::print_selector_template/1:
+
+``print_selector_template/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Pretty-printing helper predicate used by importing selector implementations to show the learned selector term template.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_selector_template(Selector)``
+| **Mode and number of proofs:**
+|    ``print_selector_template(+compound)`` - ``one``
+
+
+------------
+
+.. index:: dataset_examples/2
+.. _feature_selector_common/0::dataset_examples/2:
+
+``dataset_examples/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Collects and validates dataset examples. Rejects duplicate declarations, repeated features within examples, unknown features, and inconsistent example counts.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dataset_examples(Dataset,Examples)``
+| **Mode and number of proofs:**
+|    ``dataset_examples(+object_identifier,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A feature name, feature list, or declared count is a variable:
+|        ``instantiation_error``
+|    The dataset contains no examples:
+|        ``domain_error(non_empty_examples,Dataset)``
+|    An example names a feature not declared by attribute_values/2:
+|        ``domain_error(unknown_feature,Feature)``
+|    A feature is declared or supplied more than once:
+|        ``domain_error(duplicate_feature,Feature)``
+|    A feature name is not atomic:
+|        ``type_error(atomic,Feature)``
+|    An example feature list is not a list:
+|        ``type_error(list,Features)``
+|    An example feature entry is not a pair:
+|        ``type_error(pair,Entry)``
+|    The declared count is not an integer:
+|        ``type_error(integer,DeclaredCount)``
+|    The declared count is not positive:
+|        ``domain_error(positive_integer,DeclaredCount)``
+|    The declared and observed example counts differ:
+|        ``consistency_error(example_count,DeclaredCount,ObservedCount)``
+
+
+------------
+
+.. index:: dataset_examples/3
+.. _feature_selector_common/0::dataset_examples/3:
+
+``dataset_examples/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Collects declared feature names and validated examples in one pass over the dataset predicates. Uses the same validation as dataset_examples/2.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dataset_examples(Dataset,Features,Examples)``
+| **Mode and number of proofs:**
+|    ``dataset_examples(+object_identifier,-list(atomic),-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A feature name, feature list, or declared count is a variable:
+|        ``instantiation_error``
+|    The dataset contains no examples:
+|        ``domain_error(non_empty_examples,Dataset)``
+|    A feature is declared or supplied more than once:
+|        ``domain_error(duplicate_feature,Feature)``
+|    An example names an undeclared feature:
+|        ``domain_error(unknown_feature,Feature)``
+|    A feature name is not atomic:
+|        ``type_error(atomic,Feature)``
+|    An example feature list is not a list:
+|        ``type_error(list,Features)``
+|    An example feature entry is not a pair:
+|        ``type_error(pair,Entry)``
+|    The declared count is not an integer:
+|        ``type_error(integer,DeclaredCount)``
+|    The declared count is not positive:
+|        ``domain_error(positive_integer,DeclaredCount)``
+|    The declared and observed example counts differ:
+|        ``consistency_error(example_count,DeclaredCount,ObservedCount)``
+
+
+------------
+
+.. index:: feature_names/2
+.. _feature_selector_common/0::feature_names/2:
+
+``feature_names/2``
+^^^^^^^^^^^^^^^^^^^
+
+Returns unique, atomic candidate features in declaration order, rejecting invalid or duplicate declarations.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``feature_names(Dataset,FeatureNames)``
+| **Mode and number of proofs:**
+|    ``feature_names(+object_identifier,-list(atomic))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A declared feature name is a variable:
+|        ``instantiation_error``
+|    A declared feature name is not atomic:
+|        ``type_error(atomic,Feature)``
+|    A feature is declared more than once:
+|        ``domain_error(duplicate_feature,Feature)``
+
+
+------------
+
+.. index:: feature_values/3
+.. _feature_selector_common/0::feature_values/3:
+
+``feature_values/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns the value of one feature for every example, in example order. An example that does not mention the feature contributes an unbound variable (a missing value).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``feature_values(Examples,Feature,Values)``
+| **Mode and number of proofs:**
+|    ``feature_values(+list(compound),+atomic,-list)`` - ``one``
+
+
+------------
+
+.. index:: targets/2
+.. _feature_selector_common/0::targets/2:
+
+``targets/2``
+^^^^^^^^^^^^^
+
+Returns the target of every example, in example order (an unbound variable for an example with no known target).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``targets(Examples,Targets)``
+| **Mode and number of proofs:**
+|    ``targets(+list(compound),-list)`` - ``one``
+
+
+------------
+
+.. index:: score_features/4
+.. _feature_selector_common/0::score_features/4:
+
+``score_features/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Scores every feature using score/3 messages to the metric object. Returns ``Feature-Score`` pairs in decreasing score order, preserving input feature order for numeric ties.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``score_features(Metric,Examples,FeatureNames,FeatureScores)``
+| **Mode and number of proofs:**
+|    ``score_features(+object_identifier,+list(compound),+list(atomic),-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: sort_by_decreasing_score/2
+.. _feature_selector_common/0::sort_by_decreasing_score/2:
+
+``sort_by_decreasing_score/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Sorts feature scores numerically in decreasing order, preserving input order for ties.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sort_by_decreasing_score(FeatureScores,Sorted)``
+| **Mode and number of proofs:**
+|    ``sort_by_decreasing_score(+list(pair),-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: select_top_k/3
+.. _feature_selector_common/0::select_top_k/3:
+
+``select_top_k/3``
+^^^^^^^^^^^^^^^^^^
+
+Returns the feature names of the K highest-scoring features (``FeatureScores`` already sorted by decreasing score, as returned by score_features/4), preserving that order. Returns every feature name, still in that order, when fewer than K are given.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``select_top_k(FeatureScores,K,Selected)``
+| **Mode and number of proofs:**
+|    ``select_top_k(+list(pair),+positive_integer,-list(atomic))`` - ``one``
+
+
+------------
+
+.. index:: select_above_threshold/3
+.. _feature_selector_common/0::select_above_threshold/3:
+
+``select_above_threshold/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the feature names of every feature whose score is at least Threshold (``FeatureScores`` already sorted by decreasing score, as returned by score_features/4), preserving that order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``select_above_threshold(FeatureScores,Threshold,Selected)``
+| **Mode and number of proofs:**
+|    ``select_above_threshold(+list(pair),+number,-list(atomic))`` - ``one``
+
+
+------------
+
+.. index:: base_selector_diagnostics/5
+.. _feature_selector_common/0::base_selector_diagnostics/5:
+
+``base_selector_diagnostics/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Builds the common part of a selector diagnostics metadata list, combined with implementation-specific extra diagnostics terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``base_selector_diagnostics(Model,ExampleCount,Options,ExtraDiagnostics,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``base_selector_diagnostics(+atom,+positive_integer,+list(compound),+list(compound),-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: valid_selector_metadata/2
+.. _feature_selector_common/0::valid_selector_metadata/2:
+
+``valid_selector_metadata/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when ground diagnostics metadata contains the expected model, a positive example count, and a list of stored options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_selector_metadata(Model,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``valid_selector_metadata(+atom,+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_selector_metadata/3
+.. _feature_selector_common/0::valid_selector_metadata/3:
+
+``valid_selector_metadata/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when diagnostics metadata contains the expected model term and records the given effective options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_selector_metadata(Model,Options,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``valid_selector_metadata(+atom,+list(compound),+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: check_scoring_metric/1
+.. _feature_selector_common/0::check_scoring_metric/1:
+
+``check_scoring_metric/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that a scoring metric option value names an object implementing score/3 (feature_scoring_protocol).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_scoring_metric(Metric)``
+| **Mode and number of proofs:**
+|    ``check_scoring_metric(@callable)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Metric`` is a variable:
+|        ``instantiation_error``
+|    ``Metric`` is bound but does not implement score/3:
+|        ``domain_error(scoring_metric,Metric)``
+
+
+------------
+
+Private predicates
+------------------
+
+.. index:: compare_feature_scores/3
+.. _feature_selector_common/0::compare_feature_scores/3:
+
+``compare_feature_scores/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Compares numerically decreasing scores, breaking ties by increasing input position.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``compare_feature_scores(Order,ScoredFeature1,ScoredFeature2)``
+| **Mode and number of proofs:**
+|    ``compare_feature_scores(-atom,+compound,+compound)`` - ``one``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

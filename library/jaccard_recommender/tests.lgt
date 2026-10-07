@@ -1843,9 +1843,8 @@
 	test(jaccard_recommender_outside_scale, error(domain_error(rating_scale(2, 5), 1))) :-
 		jaccard_recommender::learn(jaccard_scale_fixture(2, 5), _).
 
-	test(jaccard_recommender_partial_model, variant(Model, Copy)) :-
+	test(jaccard_recommender_partial_model, true) :-
 		Model = jaccard_model(_, _, _, _, _, _),
-		copy_term(Model, Copy),
 		\+ jaccard_recommender::valid_recommender(Model).
 
 	test(jaccard_recommender_tampered_vectors, fail) :-

@@ -1,0 +1,359 @@
+.. index:: single: feature_selector_protocol
+.. _feature_selector_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``feature_selector_protocol``
+=============================
+
+Protocol for feature selection models.
+
+| **Availability:** 
+|    ``logtalk_load(feature_selection_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-06
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: learn/3
+.. _feature_selector_protocol/0::learn/3:
+
+``learn/3``
+^^^^^^^^^^^
+
+Learns a feature selector from the given dataset object using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Selector,Options)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    A feature declaration is unsupported by the receiving selector:
+|        ``domain_error(feature_type,Feature-Declaration)``
+|    A complete feature value required to be numeric is not numeric:
+|        ``type_error(number,Value)``
+|    A complete categorical target is not atomic:
+|        ``type_error(atomic,Target)``
+|    A dataset feature name, feature list, or declared count is a variable:
+|        ``instantiation_error``
+|    A dataset feature name is not atomic:
+|        ``type_error(atomic,Feature)``
+|    An example feature list is not a list:
+|        ``type_error(list,Features)``
+|    An example feature entry is not a pair:
+|        ``type_error(pair,Entry)``
+|    The declared count is not an integer:
+|        ``type_error(integer,DeclaredCount)``
+|    The declared count is not positive:
+|        ``domain_error(positive_integer,DeclaredCount)``
+|    A feature is declared or supplied more than once:
+|        ``domain_error(duplicate_feature,Feature)``
+|    An example names an undeclared feature:
+|        ``domain_error(unknown_feature,Feature)``
+|    The dataset contains no examples:
+|        ``domain_error(non_empty_examples,Dataset)``
+|    The declared and observed example counts differ:
+|        ``consistency_error(example_count,DeclaredCount,ObservedCount)``
+
+
+------------
+
+.. index:: learn/2
+.. _feature_selector_protocol/0::learn/2:
+
+``learn/2``
+^^^^^^^^^^^
+
+Learns a feature selector from the given dataset object using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Selector)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A feature declaration is unsupported by the receiving selector:
+|        ``domain_error(feature_type,Feature-Declaration)``
+|    A complete feature value required to be numeric is not numeric:
+|        ``type_error(number,Value)``
+|    A complete categorical target is not atomic:
+|        ``type_error(atomic,Target)``
+|    A dataset feature name, feature list, or declared count is a variable:
+|        ``instantiation_error``
+|    A dataset feature name is not atomic:
+|        ``type_error(atomic,Feature)``
+|    An example feature list is not a list:
+|        ``type_error(list,Features)``
+|    An example feature entry is not a pair:
+|        ``type_error(pair,Entry)``
+|    The declared count is not an integer:
+|        ``type_error(integer,DeclaredCount)``
+|    The declared count is not positive:
+|        ``domain_error(positive_integer,DeclaredCount)``
+|    A feature is declared or supplied more than once:
+|        ``domain_error(duplicate_feature,Feature)``
+|    An example names an undeclared feature:
+|        ``domain_error(unknown_feature,Feature)``
+|    The dataset contains no examples:
+|        ``domain_error(non_empty_examples,Dataset)``
+|    The declared and observed example counts differ:
+|        ``consistency_error(example_count,DeclaredCount,ObservedCount)``
+
+
+------------
+
+.. index:: selected_features/2
+.. _feature_selector_protocol/0::selected_features/2:
+
+``selected_features/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the features selected by the learned selector.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``selected_features(Selector,Features)``
+| **Mode and number of proofs:**
+|    ``selected_features(+compound,-list(atomic))`` - ``one``
+
+
+------------
+
+.. index:: feature_scores/2
+.. _feature_selector_protocol/0::feature_scores/2:
+
+``feature_scores/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns every candidate feature with its relevance score, as a list of ``Feature-Score`` pairs sorted by decreasing score (not just the selected ones; see selected_features/2). Shared filter implementations preserve declaration order for numeric ties.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``feature_scores(Selector,FeatureScores)``
+| **Mode and number of proofs:**
+|    ``feature_scores(+compound,-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: check_selector/1
+.. _feature_selector_protocol/0::check_selector/1:
+
+``check_selector/1``
+^^^^^^^^^^^^^^^^^^^^
+
+Checks that a learned selector term is structurally valid for the receiving implementation. Throws an exception when the term is not a valid selector representation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_selector(Selector)``
+| **Mode and number of proofs:**
+|    ``check_selector(@compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Selector`` is a variable:
+|        ``instantiation_error``
+|    ``Selector`` is neither a variable nor a valid selector:
+|        ``domain_error(selector,Selector)``
+
+
+------------
+
+.. index:: valid_selector/1
+.. _feature_selector_protocol/0::valid_selector/1:
+
+``valid_selector/1``
+^^^^^^^^^^^^^^^^^^^^
+
+True when a learned selector term is structurally valid for the receiving implementation. Succeeds iff check_selector/1 succeeds without throwing an exception.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_selector(Selector)``
+| **Mode and number of proofs:**
+|    ``valid_selector(@compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: diagnostics/2
+.. _feature_selector_protocol/0::diagnostics/2:
+
+``diagnostics/2``
+^^^^^^^^^^^^^^^^^
+
+Returns diagnostics metadata for a learned selector.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostics(Selector,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``diagnostics(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: diagnostic/2
+.. _feature_selector_protocol/0::diagnostic/2:
+
+``diagnostic/2``
+^^^^^^^^^^^^^^^^
+
+Enumerates individual diagnostics metadata terms for a learned selector.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostic(Selector,Diagnostic)``
+| **Mode and number of proofs:**
+|    ``diagnostic(+compound,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: selector_options/2
+.. _feature_selector_protocol/0::selector_options/2:
+
+``selector_options/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the effective training options recorded in a learned selector diagnostics metadata.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``selector_options(Selector,Options)``
+| **Mode and number of proofs:**
+|    ``selector_options(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: export_to_clauses/4
+.. _feature_selector_protocol/0::export_to_clauses/4:
+
+``export_to_clauses/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts a selector into a list of predicate clauses. ``Functor`` is the functor for the generated predicate clauses.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``export_to_clauses(Dataset,Selector,Functor,Clauses)``
+| **Mode and number of proofs:**
+|    ``export_to_clauses(+object_identifier,+compound,+atom,-list(clause))`` - ``one``
+
+
+------------
+
+.. index:: export_to_file/4
+.. _feature_selector_protocol/0::export_to_file/4:
+
+``export_to_file/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Exports a selector to a file. ``Functor`` is the functor for the generated predicate clauses.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``export_to_file(Dataset,Selector,Functor,File)``
+| **Mode and number of proofs:**
+|    ``export_to_file(+object_identifier,+compound,+atom,+atom)`` - ``one``
+
+
+------------
+
+.. index:: print_selector/1
+.. _feature_selector_protocol/0::print_selector/1:
+
+``print_selector/1``
+^^^^^^^^^^^^^^^^^^^^
+
+Prints a selector to the current output stream in a human-readable format.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_selector(Selector)``
+| **Mode and number of proofs:**
+|    ``print_selector(+compound)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`feature_dataset_protocol <feature_dataset_protocol/0>`, :ref:`feature_scoring_protocol <feature_scoring_protocol/0>`
+

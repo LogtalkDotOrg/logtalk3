@@ -1,0 +1,56 @@
+.. index:: single: chi_square_score
+.. _chi_square_score/0:
+
+.. rst-class:: right
+
+**object**
+
+``chi_square_score``
+====================
+
+Scores categorical feature values against categorical targets using the Pearson contingency-table chi-square statistic. Numeric values are treated as category labels.
+
+| **Availability:** 
+|    ``logtalk_load(feature_selection_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-06
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`chi_square_score(categorical) <chi_square_score/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`feature_scoring_protocol/0::score/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

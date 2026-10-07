@@ -1,0 +1,60 @@
+.. index:: single: variance_score
+.. _variance_score/0:
+
+.. rst-class:: right
+
+**object**
+
+``variance_score``
+==================
+
+Unsupervised feature scoring by population variance: ignores Targets entirely. A near-constant feature (one that takes almost the same value in every example) carries little information for distinguishing examples and so scores low; this is the classic "variance threshold" filter criterion. Scores 0.0 when every value is missing.
+
+| **Availability:** 
+|    ``logtalk_load(feature_selection_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-06
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`feature_scoring_protocol <feature_scoring_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`feature_scoring_common <feature_scoring_common/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`feature_scoring_protocol/0::score/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

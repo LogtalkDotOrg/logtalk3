@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>chi_square_feature_selector &mdash; Logtalk 3.103.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=4823beec"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            The Logtalk Handbook
+              <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.103.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ports/index.html">Ports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributions/index.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../../apis/index.html">APIs</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">chi_square_feature_selector</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/libraries/chi_square_feature_selector.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="chi-square-feature-selector">
+<span id="library-chi-square-feature-selector"></span><h1><code class="docutils literal notranslate"><span class="pre">chi_square_feature_selector</span></code><a class="headerlink" href="#chi-square-feature-selector" title="Link to this heading"></a></h1>
+<p>This library implements a univariate filter selector for categorical and
+continuous features with categorical targets. It reuses the typed
+discretization, sparse contingency arithmetic, stable ranking,
+selection, model validation, and export facilities of
+<code class="docutils literal notranslate"><span class="pre">feature_selection_protocols</span></code>.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../apis/library_index.html#chi-square-feature-selector">../../apis/library_index.html#chi-square-feature-selector</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>To load this library, load its <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(chi_square_feature_selector(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library, load its <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(chi_square_feature_selector(tester)).
+</pre></div>
+</div>
+<p>The tests cover categorical, mixed, and continuous datasets, independent
+binary and multiclass numerical references, both binning methods,
+missing observations, stable ties, options, malformed inputs and models,
+reflection, diagnostics, printing, and clause and file exports.</p>
+</section>
+<section id="scores">
+<h2>Scores<a class="headerlink" href="#scores" title="Link to this heading"></a></h2>
+<p>The default <code class="docutils literal notranslate"><span class="pre">score_variant(raw)</span></code> option computes the uncorrected
+Pearson chi-square statistic <code class="docutils literal notranslate"><span class="pre">sum((Observed-Expected)^2/Expected)</span></code>,
+where <code class="docutils literal notranslate"><span class="pre">Expected</span> <span class="pre">=</span> <span class="pre">RowCount</span> <span class="pre">*</span> <span class="pre">TargetCount</span> <span class="pre">/</span> <span class="pre">CompleteCount</span></code>. Empty cells
+contribute to the statistic; sparse counting does not omit their
+contribution. Only occupied feature categories and target classes define
+the table dimensions.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">score_variant(normalized)</span></code> option computes Cramer’s V:
+<code class="docutils literal notranslate"><span class="pre">sqrt(ChiSquare/(CompleteCount</span> <span class="pre">*</span> <span class="pre">min(CategoryCount-1,</span> <span class="pre">ClassCount-1)))</span></code>.
+It ranges from zero to one and is not chi-square divided by sample size
+alone. The recorded metrics are <code class="docutils literal notranslate"><span class="pre">chi_square_score</span></code> and
+<code class="docutils literal notranslate"><span class="pre">cramers_v_score</span></code>, respectively. Empty complete-case samples, constant
+features, and single-class samples score zero. Numeric target labels are
+class codes, not regression targets.</p>
+</section>
+<section id="preparation-and-options">
+<h2>Preparation and options<a class="headerlink" href="#preparation-and-options" title="Link to this heading"></a></h2>
+<p>The dataset object must implement <code class="docutils literal notranslate"><span class="pre">feature_dataset_protocol</span></code>. It
+declares continuous features with
+<code class="docutils literal notranslate"><span class="pre">attribute_values(Feature,</span> <span class="pre">continuous)</span></code> and categorical features with
+<code class="docutils literal notranslate"><span class="pre">attribute_values(Feature,</span> <span class="pre">Domain)</span></code>, where <code class="docutils literal notranslate"><span class="pre">Domain</span></code> is a non-empty
+list of atomic values. Complete continuous values must be numbers;
+complete categorical values must belong to their declared domains;
+complete targets must be atomic.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">learn/2</span></code> predicate uses the defaults. The <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate
+accepts an options list as its last argument:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">score_variant(raw)</span></code> or <code class="docutils literal notranslate"><span class="pre">score_variant(normalized)</span></code>, default
+<code class="docutils literal notranslate"><span class="pre">raw</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">discretization(equal_frequency(Bins))</span></code> or
+<code class="docutils literal notranslate"><span class="pre">discretization(equal_width(Bins))</span></code>, with a positive integer bin
+count. The default is <code class="docutils literal notranslate"><span class="pre">equal_frequency(10)</span></code>, applied only to
+continuous features.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">discretization(categorical)</span></code> preserves numeric values as category
+codes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">feature_discretization(Feature,</span> <span class="pre">Specification)</span></code> overrides the
+default for one declared feature. The specification can be
+<code class="docutils literal notranslate"><span class="pre">categorical</span></code>, <code class="docutils literal notranslate"><span class="pre">equal_frequency(Bins)</span></code>, or <code class="docutils literal notranslate"><span class="pre">equal_width(Bins)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">selection_strategy(top_k(K))</span></code>, default <code class="docutils literal notranslate"><span class="pre">top_k(10)</span></code>, selects up to
+the positive integer <code class="docutils literal notranslate"><span class="pre">K</span></code> features.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">selection_strategy(all)</span></code> selects every candidate.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">selection_strategy(threshold(T))</span></code> selects scores at least the
+numeric <code class="docutils literal notranslate"><span class="pre">T</span></code>.</p></li>
+</ul>
+<p>Repeated options and repeated overrides are accepted; the first
+applicable occurrence wins. All supplied options are validated,
+including later occurrences. Unknown override feature names are
+rejected. The <code class="docutils literal notranslate"><span class="pre">default_option/1</span></code> and <code class="docutils literal notranslate"><span class="pre">valid_option/1</span></code> predicates
+remain publicly queryable, including the inherited selection options.</p>
+<p>Preparation is per feature: observations with an unbound or absent
+feature value or an unbound target are excluded from that feature
+without imputing values. Binning is fitted to its complete cases only.
+Categorical features retain their declared categories unless explicitly
+overridden. Equal-width bins partition the observed range;
+equal-frequency bins use observed quantile cuts without splitting equal
+values. Occupied category counts can be smaller than requested bin
+counts. Applying numeric binning to an atomic non-numeric category is an
+error, not an implicit category encoding.</p>
+<p>Scores are sorted in decreasing order, preserving declaration order on
+ties. Top-k selection may include zero-scoring features. Thresholds
+should be chosen for the selected score variant.</p>
+</section>
+<section id="models-and-diagnostics">
+<h2>Models and diagnostics<a class="headerlink" href="#models-and-diagnostics" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">learn/2-3</span></code> predicates return selector terms with this
+representation:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>chi_square_feature_selector(<span class="nv">FeatureScores</span>, <span class="nv">SelectedFeatures</span>, <span class="nv">Diagnostics</span>)
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">feature_scores/2</span></code> predicate returns sorted <code class="docutils literal notranslate"><span class="pre">Feature-Score</span></code>
+pairs. The <code class="docutils literal notranslate"><span class="pre">selected_features/2</span></code> predicate returns selected names. The
+<code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code>, <code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">selector_options/2</span></code>
+predicates expose metadata and effective options. Diagnostics contain
+<code class="docutils literal notranslate"><span class="pre">model/1</span></code>, <code class="docutils literal notranslate"><span class="pre">example_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">options/1</span></code>, <code class="docutils literal notranslate"><span class="pre">candidate_count/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">selected_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">scoring_metric/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">complete_cases(FeatureCounts)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">discretization(FeatureSpecifications)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">occupied_categories(FeatureCounts)</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">preparation_mode(per_feature)</span></code>. Counts and specifications follow
+declaration order, not score order.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">check_selector/1</span></code> predicate checks ground structure, unique
+sorted scores, selection consistency, metric identity determined by
+options, valid options, candidate and selected counts, and complete-case
+counts. The <code class="docutils literal notranslate"><span class="pre">valid_selector/1</span></code> predicate fails for malformed models
+without binding partial models. These checks are structural; they do not
+recompute scores from a dataset. The <code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code> and
+<code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code> predicates preserve the complete model. The
+<code class="docutils literal notranslate"><span class="pre">print_selector/1</span></code> predicate prints its template and contents.</p>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
+<p>Univariate scores do not detect interaction-only signals or remove
+redundant features. Raw chi-square depends on sample size and table
+dimensions; normalization does not eliminate sampling bias. Per-feature
+missingness can make samples incomparable. Discretization affects the
+scores. Binning boundaries are not stored as a transformation for future
+examples. No p-values, significance decisions, expected-count rejection,
+Yates or small-sample bias correction, regression scoring, or automatic
+feature-count selection is provided. Arithmetic uses backend
+floating-point precision.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2026, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -380,10 +380,8 @@
 		intermittent_demand_forecasting::update(Forecaster, 0, _).
 
 	test(intermittent_demand_forecasting_auto_partial_coefficient_not_bound, deterministic) :-
-		stored_coefficients([6], Alpha, 0.1, Forecaster),
-		copy_term(Forecaster, Snapshot),
-		\+ intermittent_demand_forecasting::valid_forecaster(Forecaster),
-		var(Alpha), lgtunit::variant(Forecaster, Snapshot).
+		stored_coefficients([6], _Alpha, 0.1, Forecaster),
+		\+ intermittent_demand_forecasting::valid_forecaster(Forecaster).
 
 	test(intermittent_demand_forecasting_auto_coefficient_fitted_replay, deterministic((First =~= 0.0, Second =~= 6.0, Third =~= 10.0))) :-
 		Dataset = intermittent_series([6,10,10]),
@@ -853,10 +851,8 @@
 		intermittent_demand_forecasting::update(_, 6, _).
 
 	test(intermittent_demand_forecasting_partial_forecaster_not_bound, deterministic) :-
-		Forecaster = intermittent_demand_forecaster(sba, State, []),
-		copy_term(Forecaster, Snapshot),
-		\+ intermittent_demand_forecasting::valid_forecaster(Forecaster),
-		var(State), lgtunit::variant(Forecaster, Snapshot).
+		Forecaster = intermittent_demand_forecaster(sba, _State, []),
+		\+ intermittent_demand_forecasting::valid_forecaster(Forecaster).
 
 	test(intermittent_demand_forecasting_invalid_term, fail) :-
 		intermittent_demand_forecasting::valid_forecaster(bad).
@@ -1058,10 +1054,8 @@
 		invalid_error_value(root_mean_squared_error, 0).
 
 	test(intermittent_demand_forecasting_error_metrics_partial_not_bound, deterministic) :-
-		forecaster_with_errors([scored_count(1),sum_absolute_error(Absolute),sum_squared_error(36),mean_absolute_error(6.0),root_mean_squared_error(6.0)], Forecaster),
-		copy_term(Forecaster, Snapshot),
-		\+ intermittent_demand_forecasting::valid_forecaster(Forecaster),
-		var(Absolute), lgtunit::variant(Forecaster, Snapshot).
+		forecaster_with_errors([scored_count(1),sum_absolute_error(_Absolute),sum_squared_error(36),mean_absolute_error(6.0),root_mean_squared_error(6.0)], Forecaster),
+		\+ intermittent_demand_forecasting::valid_forecaster(Forecaster).
 
 	test(intermittent_demand_forecasting_error_metrics_check_rejects_partial, error(domain_error(forecaster, _))) :-
 		forecaster_with_errors([scored_count(1)], Forecaster),
@@ -1134,12 +1128,15 @@
 	check_coefficient_grid(Policy, Grid, GridOptions) :-
 		Dataset = intermittent_series([0,FirstMissing,6,LastMissing,0,10]),
 		copy_term(Dataset, Snapshot),
-		findall(RMSE-Candidate, (
-			member(Method, [sba,croston,tsb]), member(Alpha, Grid), member(Beta, Grid),
-			intermittent_demand_forecasting::learn(Dataset, Candidate, [model(Method),alpha(Alpha),beta(Beta),missing(Policy)]),
-			intermittent_demand_forecasting::diagnostics(Candidate, CandidateDiagnostics),
-			memberchk(root_mean_squared_error(RMSE), CandidateDiagnostics)
-		), Candidates),
+		findall(
+			RMSE-Candidate,
+			(	member(Method, [sba,croston,tsb]), member(Alpha, Grid), member(Beta, Grid),
+				intermittent_demand_forecasting::learn(Dataset, Candidate, [model(Method),alpha(Alpha),beta(Beta),missing(Policy)]),
+				intermittent_demand_forecasting::diagnostics(Candidate, CandidateDiagnostics),
+				memberchk(root_mean_squared_error(RMSE), CandidateDiagnostics)
+			),
+			Candidates
+		),
 		length(Grid, GridLength), CandidateCount is 3 * GridLength * GridLength,
 		length(Candidates, CandidateCount), keysort(Candidates, [_-Expected| _]),
 		Requests = [model(auto),alpha(auto),beta(auto),missing(Policy)| GridOptions],
@@ -1156,7 +1153,8 @@
 		copy_term(Grid, Snapshot),
 		\+ intermittent_demand_forecasting::valid_option(coefficient_grid(Grid)),
 		catch(intermittent_demand_forecasting::learn(intermittent_series([6]), _, [coefficient_grid(Grid)]), LearnError, true),
-		nonvar(LearnError), LearnError = error(domain_error(option, coefficient_grid(Grid)), _),
+		nonvar(LearnError),
+		LearnError = error(domain_error(option, coefficient_grid(Grid)), _),
 		lgtunit::variant(Grid, Snapshot),
 		catch(intermittent_demand_forecasting::fitted_values(intermittent_series([6]), _, [coefficient_grid(Grid)]), FittedError, true),
 		nonvar(FittedError), FittedError = error(domain_error(option, coefficient_grid(Grid)), _),

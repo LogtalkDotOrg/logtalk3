@@ -1,0 +1,116 @@
+.. index:: single: feature_discretization
+.. _feature_discretization/0:
+
+.. rst-class:: right
+
+**category**
+
+``feature_discretization``
+==========================
+
+Typed preparation of categorical columns with per-feature or joint complete-case discretization.
+
+| **Availability:** 
+|    ``logtalk_load(feature_selection_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-07
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`feature_scoring_common <feature_scoring_common/0>`
+| **Uses:**
+|    :ref:`avltree <avltree/0>`
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: valid_feature_discretization/1
+.. _feature_discretization/0::valid_feature_discretization/1:
+
+``valid_feature_discretization/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True for a ground categorical, equal-width, or equal-frequency specification with a positive integer bin count.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_feature_discretization(Specification)``
+| **Mode and number of proofs:**
+|    ``valid_feature_discretization(@term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: prepare_feature_columns/7
+.. _feature_discretization/0::prepare_feature_columns/7:
+
+``prepare_feature_columns/7``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Prepares ``column(Feature,Specification,Pairs,CategoryCount)`` terms in declaration order. Mode is ``per_feature`` or ``joint``; fitting uses only complete observations.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``prepare_feature_columns(Dataset,Features,Examples,Options,Mode,Columns,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``prepare_feature_columns(+object_identifier,+list(atomic),+list(compound),+list(compound),+atom,-list(compound),-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A feature declaration is unsupported:
+|        ``domain_error(feature_type,Feature-Declaration)``
+|    A categorical feature value is outside its declared domain:
+|        ``domain_error(feature_value,Feature-Value)``
+|    An override names an undeclared feature:
+|        ``domain_error(unknown_feature,Feature)``
+|    The preparation mode is unsupported:
+|        ``domain_error(preparation_mode,Mode)``
+|    A continuous feature value is not numeric:
+|        ``type_error(number,Value)``
+|    A categorical value or target is not atomic:
+|        ``type_error(atomic,Value)``
+|    A declaration or configuration is unbound:
+|        ``instantiation_error``
+|    A declaration domain is not a list:
+|        ``type_error(list,Domain)``
+|    A binning specification is invalid:
+|        ``domain_error(discretization,Specification)``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

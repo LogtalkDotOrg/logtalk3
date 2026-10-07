@@ -818,6 +818,20 @@ To load an entity, always load the library that includes it using the goal ``log
    * :doc:`windows_1254 <windows_1254_0>`
    * :doc:`windows_1257 <windows_1257_0>`
 
+``library/chi_square_feature_selector/``
+----------------------------------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      chi_square_feature_selector <chi_square_feature_selector_0>
+
+.. only:: latex
+
+   * :doc:`chi_square_feature_selector <chi_square_feature_selector_0>`
+
 ``library/classification_protocols/``
 -------------------------------------
 
@@ -1445,6 +1459,74 @@ To load an entity, always load the library that includes it using the goal ``log
    * :doc:`exponential_smoothing <exponential_smoothing_0>`
    * :doc:`exponential_smoothing_common <exponential_smoothing_common_0>`
    * :doc:`exponential_smoothing_problem(Method,Series,OptimizationSeries,Frequency,ParameterSpecification,InitializationSpecification) <exponential_smoothing_problem_6>`
+
+``library/feature_selection_protocols/``
+----------------------------------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      anova_f_score <anova_f_score_0>
+      chi_square_score <chi_square_score_0>
+      chi_square_score(Discretization) <chi_square_score_1>
+      correlation_score <correlation_score_0>
+      cramers_v_score <cramers_v_score_0>
+      cramers_v_score(Discretization) <cramers_v_score_1>
+      feature_dataset_protocol <feature_dataset_protocol_0>
+      feature_discretization <feature_discretization_0>
+      feature_redundancy <feature_redundancy_0>
+      feature_scoring_common <feature_scoring_common_0>
+      feature_scoring_protocol <feature_scoring_protocol_0>
+      feature_selector_common <feature_selector_common_0>
+      feature_selector_protocol <feature_selector_protocol_0>
+      filter_feature_selector_common <filter_feature_selector_common_0>
+      fisher_score <fisher_score_0>
+      mutual_information_score <mutual_information_score_0>
+      mutual_information_score(Discretization) <mutual_information_score_1>
+      relief_feature_selector_common <relief_feature_selector_common_0>
+      symmetrical_uncertainty_score <symmetrical_uncertainty_score_0>
+      symmetrical_uncertainty_score(Discretization) <symmetrical_uncertainty_score_1>
+      variance_score <variance_score_0>
+
+.. only:: latex
+
+   * :doc:`anova_f_score <anova_f_score_0>`
+   * :doc:`chi_square_score <chi_square_score_0>`
+   * :doc:`chi_square_score(Discretization) <chi_square_score_1>`
+   * :doc:`correlation_score <correlation_score_0>`
+   * :doc:`cramers_v_score <cramers_v_score_0>`
+   * :doc:`cramers_v_score(Discretization) <cramers_v_score_1>`
+   * :doc:`feature_dataset_protocol <feature_dataset_protocol_0>`
+   * :doc:`feature_discretization <feature_discretization_0>`
+   * :doc:`feature_redundancy <feature_redundancy_0>`
+   * :doc:`feature_scoring_common <feature_scoring_common_0>`
+   * :doc:`feature_scoring_protocol <feature_scoring_protocol_0>`
+   * :doc:`feature_selector_common <feature_selector_common_0>`
+   * :doc:`feature_selector_protocol <feature_selector_protocol_0>`
+   * :doc:`filter_feature_selector_common <filter_feature_selector_common_0>`
+   * :doc:`fisher_score <fisher_score_0>`
+   * :doc:`mutual_information_score <mutual_information_score_0>`
+   * :doc:`mutual_information_score(Discretization) <mutual_information_score_1>`
+   * :doc:`relief_feature_selector_common <relief_feature_selector_common_0>`
+   * :doc:`symmetrical_uncertainty_score <symmetrical_uncertainty_score_0>`
+   * :doc:`symmetrical_uncertainty_score(Discretization) <symmetrical_uncertainty_score_1>`
+   * :doc:`variance_score <variance_score_0>`
+
+``library/fisher_score_feature_selector/``
+------------------------------------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      fisher_score_feature_selector <fisher_score_feature_selector_0>
+
+.. only:: latex
+
+   * :doc:`fisher_score_feature_selector <fisher_score_feature_selector_0>`
 
 ``library/format/``
 -------------------
@@ -3440,6 +3522,22 @@ To load an entity, always load the library that includes it using the goal ``log
    * :doc:`script_language_detector <script_language_detector_0>`
    * :doc:`stopword_language_detector <stopword_language_detector_0>`
 
+``library/lasso_feature_selector/``
+-----------------------------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      lasso_feature_selector <lasso_feature_selector_0>
+      regression_dataset_adapter(Dataset) <regression_dataset_adapter_1>
+
+.. only:: latex
+
+   * :doc:`lasso_feature_selector <lasso_feature_selector_0>`
+   * :doc:`regression_dataset_adapter(Dataset) <regression_dataset_adapter_1>`
+
 ``library/lasso_regression/``
 -----------------------------
 
@@ -3896,6 +3994,20 @@ To load an entity, always load the library that includes it using the goal ``log
 
    * :doc:`mqtt <mqtt_0>`
 
+``library/mrmr_feature_selector/``
+----------------------------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      mrmr_feature_selector <mrmr_feature_selector_0>
+
+.. only:: latex
+
+   * :doc:`mrmr_feature_selector <mrmr_feature_selector_0>`
+
 ``library/multisets/``
 ----------------------
 
@@ -3953,6 +4065,20 @@ To load an entity, always load the library that includes it using the goal ``log
    * :doc:`default_list_mutations <default_list_mutations_0>`
    * :doc:`mutations <mutations_0>`
    * :doc:`mutations_store <mutations_store_0>`
+
+``library/mutual_information_feature_selector/``
+------------------------------------------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      mutual_information_feature_selector <mutual_information_feature_selector_0>
+
+.. only:: latex
+
+   * :doc:`mutual_information_feature_selector <mutual_information_feature_selector_0>`
 
 ``library/n_grams/``
 --------------------
@@ -4796,6 +4922,34 @@ To load an entity, always load the library that includes it using the goal ``log
 
    * :doc:`regularized_bradley_terry_ranker <regularized_bradley_terry_ranker_0>`
 
+``library/relief_feature_selector/``
+------------------------------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      relief_feature_selector <relief_feature_selector_0>
+
+.. only:: latex
+
+   * :doc:`relief_feature_selector <relief_feature_selector_0>`
+
+``library/relieff_feature_selector/``
+-------------------------------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      relieff_feature_selector <relieff_feature_selector_0>
+
+.. only:: latex
+
+   * :doc:`relieff_feature_selector <relieff_feature_selector_0>`
+
 ``library/rest/``
 -----------------
 
@@ -4845,6 +4999,20 @@ To load an entity, always load the library that includes it using the goal ``log
    * :doc:`ripple_down_rules_common_protocol <ripple_down_rules_common_protocol_0>`
    * :doc:`ripple_down_rules_protocol <ripple_down_rules_protocol_0>`
    * :doc:`single_classification_ripple_down_rules <single_classification_ripple_down_rules_0>`
+
+``library/rrelieff_feature_selector/``
+--------------------------------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      rrelieff_feature_selector <rrelieff_feature_selector_0>
+
+.. only:: latex
+
+   * :doc:`rrelieff_feature_selector <rrelieff_feature_selector_0>`
 
 ``library/s3/``
 ---------------

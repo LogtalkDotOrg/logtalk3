@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on October 5, 2026
+##   Last updated on October 7, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -107,12 +107,6 @@ sed '1,19d' ../../../library/bson/NOTES.md | pandoc -f gfm -t rst -o libraries/b
 sed '1,19d' ../../../library/byte_order/NOTES.md | pandoc -f gfm -t rst -o libraries/byte_order.rst
 sed '1,19d' ../../../library/c45_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/c45_classifier.rst
 sed '1,19d' ../../../library/cartesian_products/NOTES.md | pandoc -f gfm -t rst -o libraries/cartesian_products.rst
-sed '1,19d' ../../../library/constrained_optimization/NOTES.md | pandoc -f gfm -t rst -o libraries/constrained_optimization.rst
-sed '1,19d' ../../../library/copeland_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/copeland_ranker.rst
-sed '1,19d' ../../../library/coroutining/NOTES.md | pandoc -f gfm -t rst -o libraries/coroutining.rst
-sed '1,19d' ../../../library/crontab/NOTES.md | pandoc -f gfm -t rst -o libraries/crontab.rst
-sed '1,19d' ../../../library/crs_projections/NOTES.md | pandoc -f gfm -t rst -o libraries/crs_projections.rst
-sed '1,19d' ../../../library/crypto/NOTES.md | pandoc -f gfm -t rst -o libraries/crypto.rst
 sed '1,19d' ../../../library/cbor/NOTES.md | pandoc -f gfm -t rst -o libraries/cbor.rst
 sed '1,19d' ../../../library/ccsds_frames/NOTES.md | pandoc -f gfm -t rst -o libraries/ccsds_frames.rst
 sed '1,19d' ../../../library/ccsds_link_profiles/NOTES.md | pandoc -f gfm -t rst -o libraries/ccsds_link_profiles.rst
@@ -123,6 +117,7 @@ sed '1,19d' ../../../library/ccsds_tc_services/NOTES.md | pandoc -f gfm -t rst -
 sed '1,19d' ../../../library/ccsds_time_codes/NOTES.md | pandoc -f gfm -t rst -o libraries/ccsds_time_codes.rst
 sed '1,19d' ../../../library/ccsds_time_fields/NOTES.md | pandoc -f gfm -t rst -o libraries/ccsds_time_fields.rst
 sed '1,19d' ../../../library/character_sets/NOTES.md | pandoc -f gfm -t rst -o libraries/character_sets.rst
+sed '1,19d' ../../../library/chi_square_feature_selector/NOTES.md | pandoc -f gfm -t rst -o libraries/chi_square_feature_selector.rst
 sed '1,19d' ../../../library/classification_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/classification_protocols.rst
 sed '1,19d' ../../../library/clo_span_pattern_miner/NOTES.md | pandoc -f gfm -t rst -o libraries/clo_span_pattern_miner.rst
 sed '1,19d' ../../../library/clustering_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/clustering_protocols.rst
@@ -130,6 +125,12 @@ sed '1,19d' ../../../library/cmac/NOTES.md | pandoc -f gfm -t rst -o libraries/c
 sed '1,19d' ../../../library/colley_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/colley_ranker.rst
 sed '1,19d' ../../../library/combinations/NOTES.md | pandoc -f gfm -t rst -o libraries/combinations.rst
 sed '1,32d' ../../../library/command_line_options/NOTES.md | pandoc -f gfm -t rst -o libraries/command_line_options.rst
+sed '1,19d' ../../../library/constrained_optimization/NOTES.md | pandoc -f gfm -t rst -o libraries/constrained_optimization.rst
+sed '1,19d' ../../../library/copeland_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/copeland_ranker.rst
+sed '1,19d' ../../../library/coroutining/NOTES.md | pandoc -f gfm -t rst -o libraries/coroutining.rst
+sed '1,19d' ../../../library/crontab/NOTES.md | pandoc -f gfm -t rst -o libraries/crontab.rst
+sed '1,19d' ../../../library/crs_projections/NOTES.md | pandoc -f gfm -t rst -o libraries/crs_projections.rst
+sed '1,19d' ../../../library/crypto/NOTES.md | pandoc -f gfm -t rst -o libraries/crypto.rst
 sed '1,19d' ../../../library/csv/NOTES.md | pandoc -f gfm -t rst -o libraries/csv.rst
 sed '1,19d' ../../../library/cuid2/NOTES.md | pandoc -f gfm -t rst -o libraries/cuid2.rst
 sed '1,19d' ../../../library/cusum_anomaly_detector/NOTES.md | pandoc -f gfm -t rst -o libraries/cusum_anomaly_detector.rst
@@ -153,6 +154,8 @@ sed '1,19d' ../../../library/ewma_anomaly_detector/NOTES.md | pandoc -f gfm -t r
 sed '1,19d' ../../../library/expand_library_alias_paths/NOTES.md | pandoc -f gfm -t rst -o libraries/expand_library_alias_paths.rst
 sed '1,19d' ../../../library/expecteds/NOTES.md | pandoc -f gfm -t rst -o libraries/expecteds.rst
 sed '1,19d' ../../../library/exponential_smoothing/NOTES.md | pandoc -f gfm -t rst -o libraries/exponential_smoothing.rst
+sed '1,19d' ../../../library/feature_selection_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/feature_selection_protocols.rst
+sed '1,19d' ../../../library/fisher_score_feature_selector/NOTES.md | pandoc -f gfm -t rst -o libraries/fisher_score_feature_selector.rst
 sed '1,19d' ../../../library/format/NOTES.md | pandoc -f gfm -t rst -o libraries/format.rst
 sed '1,19d' ../../../library/fp_growth_pattern_miner/NOTES.md | pandoc -f gfm -t rst -o libraries/fp_growth_pattern_miner.rst
 sed '1,19d' ../../../library/frequent_pattern_mining_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/frequent_pattern_mining_protocols.rst
@@ -252,6 +255,7 @@ sed '1,19d' ../../../library/knn_user_recommender/NOTES.md | pandoc -f gfm -t rs
 sed '1,19d' ../../../library/kprototypes_clusterer/NOTES.md | pandoc -f gfm -t rst -o libraries/kprototypes_clusterer.rst
 sed '1,19d' ../../../library/ksuid/NOTES.md | pandoc -f gfm -t rst -o libraries/ksuid.rst
 sed '1,19d' ../../../library/language_detection/NOTES.md | pandoc -f gfm -t rst -o libraries/language_detection.rst
+sed '1,19d' ../../../library/lasso_feature_selector/NOTES.md | pandoc -f gfm -t rst -o libraries/lasso_feature_selector.rst
 sed '1,19d' ../../../library/lasso_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/lasso_regression.rst
 sed '1,19d' ../../../library/lda_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/lda_classifier.rst
 sed '1,19d' ../../../library/lda_projection/NOTES.md | pandoc -f gfm -t rst -o libraries/lda_projection.rst
@@ -278,9 +282,11 @@ sed '1,19d' ../../../library/mime_types/NOTES.md | pandoc -f gfm -t rst -o libra
 sed '1,19d' ../../../library/mlp_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/mlp_classifier.rst
 sed '1,19d' ../../../library/modified_z_score_anomaly_detector/NOTES.md | pandoc -f gfm -t rst -o libraries/modified_z_score_anomaly_detector.rst
 sed '1,19d' ../../../library/mqtt/NOTES.md | pandoc -f gfm -t rst -o libraries/mqtt.rst
+sed '1,19d' ../../../library/mrmr_feature_selector/NOTES.md | pandoc -f gfm -t rst -o libraries/mrmr_feature_selector.rst
 sed '1,19d' ../../../library/multisets/NOTES.md | pandoc -f gfm -t rst -o libraries/multisets.rst
 sed '1,19d' ../../../library/multivariate_distributions/NOTES.md | pandoc -f gfm -t rst -o libraries/multivariate_distributions.rst
 sed '1,19d' ../../../library/mutations/NOTES.md | pandoc -f gfm -t rst -o libraries/mutations.rst
+sed '1,19d' ../../../library/mutual_information_feature_selector/NOTES.md | pandoc -f gfm -t rst -o libraries/mutual_information_feature_selector.rst
 sed '1,19d' ../../../library/n_grams/NOTES.md | pandoc -f gfm -t rst -o libraries/n_grams.rst
 sed '1,19d' ../../../library/nanoid/NOTES.md | pandoc -f gfm -t rst -o libraries/nanoid.rst
 sed '1,19d' ../../../library/naive_bayes_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/naive_bayes_classifier.rst
@@ -324,12 +330,15 @@ sed '1,19d' ../../../library/reader/NOTES.md | pandoc -f gfm -t rst -o libraries
 sed '1,19d' ../../../library/recommender_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/recommender_protocols.rst
 sed '1,19d' ../../../library/recorded_database/NOTES.md | pandoc -f gfm -t rst -o libraries/recorded_database.rst
 sed '1,19d' ../../../library/redis/NOTES.md | pandoc -f gfm -t rst -o libraries/redis.rst
+sed '1,19d' ../../../library/relief_feature_selector/NOTES.md | pandoc -f gfm -t rst -o libraries/relief_feature_selector.rst
+sed '1,19d' ../../../library/relieff_feature_selector/NOTES.md | pandoc -f gfm -t rst -o libraries/relieff_feature_selector.rst
 sed '1,19d' ../../../library/regression_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/regression_protocols.rst
 sed '1,19d' ../../../library/regression_tree/NOTES.md | pandoc -f gfm -t rst -o libraries/regression_tree.rst
 sed '1,19d' ../../../library/regularized_bradley_terry_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/regularized_bradley_terry_ranker.rst
 sed '1,19d' ../../../library/rest/NOTES.md | pandoc -f gfm -t rst -o libraries/rest.rst
 sed '1,19d' ../../../library/ridge_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/ridge_regression.rst
 sed '1,19d' ../../../library/ripple_down_rules/NOTES.md | pandoc -f gfm -t rst -o libraries/ripple_down_rules.rst
+sed '1,19d' ../../../library/rrelieff_feature_selector/NOTES.md | pandoc -f gfm -t rst -o libraries/rrelieff_feature_selector.rst
 sed '1,19d' ../../../library/s3/NOTES.md | pandoc -f gfm -t rst -o libraries/s3.rst
 sed '1,19d' ../../../library/schulze_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/schulze_ranker.rst
 sed '1,19d' ../../../library/sequential_pattern_mining_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/sequential_pattern_mining_protocols.rst

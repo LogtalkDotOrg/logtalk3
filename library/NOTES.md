@@ -121,12 +121,14 @@ Library groups
 	- Clustering:
 		`clustering_protocols`, `agglomerative_clusterer`, `dbscan_clusterer`,
 		`gaussian_mixture_clusterer`, `hdbscan_clusterer`, `hierarchical_clustering`,
-		`kcenters_clusterer`, `kmeans_clusterer`, `kmedians_clusterer`, `kmedoids_clusterer`, `kmodes_clusterer`,
-		`kprototypes_clusterer`, `optics_clusterer`, and `spectral_clusterer`.
+		`kcenters_clusterer`, `kmeans_clusterer`, `kmedians_clusterer`,
+        `kmedoids_clusterer`, `kmodes_clusterer`, `kprototypes_clusterer`,
+        `optics_clusterer`, and `spectral_clusterer`.
 	- Dimension reduction:
-		`dimension_reduction_protocols`, `ica_projection`, `kernel_pca_projection`, `lda_projection`,
-		`nmf_projection`, `pca_projection`, `pls_projection`, `probabilistic_pca_projection`, and
-		`random_projection`, `truncated_svd_projection`, `tsne_projection`, and `umap_projection`.
+		`dimension_reduction_protocols`, `ica_projection`, `kernel_pca_projection`,
+        `lda_projection`, `nmf_projection`, `pca_projection`, `pls_projection`,
+        `probabilistic_pca_projection`, and `random_projection`,
+        `truncated_svd_projection`, `tsne_projection`, and `umap_projection`.
 	- Pattern mining:
 		`pattern_mining_protocols`, `frequent_pattern_mining_protocols`,
 		`sequential_pattern_mining_protocols`, `association_rule_miner`,
@@ -141,6 +143,12 @@ Library groups
 		`recommender_protocols`, `knn_item_recommender`,
 		`knn_user_recommender`, `slope_one_recommender`, `tfidf_recommender`,
 		`jaccard_recommender`, and `bm25_recommender`.
+    - Feature selection:
+        `feature_selection_protocols`, `fisher_score_feature_selector`,
+        `mutual_information_feature_selector`, `chi_square_feature_selector`,
+        `relief_feature_selector`, `relieff_feature_selector`,
+        `rrelieff_feature_selector`, `mrmr_feature_selector`, and
+        `lasso_feature_selector`.
 
 In addition to the loader-based libraries, this directory also contains a
 small number of standalone reusable entities, namely `attributes`, `cloning`,

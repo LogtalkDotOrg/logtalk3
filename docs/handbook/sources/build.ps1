@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on October 5, 2026
+##   Last updated on October 7, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -117,6 +117,7 @@ Foreach-Object {
 (Get-Content ../../../library/ccsds_time_codes/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ccsds_time_codes.rst
 (Get-Content ../../../library/ccsds_time_fields/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ccsds_time_fields.rst
 (Get-Content ../../../library/character_sets/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/character_sets.rst
+(Get-Content ../../../library/chi_square_feature_selector/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/chi_square_feature_selector.rst
 (Get-Content ../../../library/classification_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/classification_protocols.rst
 (Get-Content ../../../library/clo_span_pattern_miner/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/clo_span_pattern_miner.rst
 (Get-Content ../../../library/clustering_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/clustering_protocols.rst
@@ -153,6 +154,8 @@ Foreach-Object {
 (Get-Content ../../../library/expand_library_alias_paths/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/expand_library_alias_paths.rst
 (Get-Content ../../../library/expecteds/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/expecteds.rst
 (Get-Content ../../../library/exponential_smoothing/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/exponential_smoothing.rst
+(Get-Content ../../../library/feature_selection_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/feature_selection_protocols.rst
+(Get-Content ../../../library/fisher_score_feature_selector/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/fisher_score_feature_selector.rst
 (Get-Content ../../../library/format/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/format.rst
 (Get-Content ../../../library/fp_growth_pattern_miner/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/fp_growth_pattern_miner.rst
 (Get-Content ../../../library/frequent_pattern_mining_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/frequent_pattern_mining_protocols.rst
@@ -252,6 +255,7 @@ Foreach-Object {
 (Get-Content ../../../library/kprototypes_clusterer/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/kprototypes_clusterer.rst
 (Get-Content ../../../library/ksuid/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ksuid.rst
 (Get-Content ../../../library/language_detection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/language_detection.rst
+(Get-Content ../../../library/lasso_feature_selector/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/lasso_feature_selector.rst
 (Get-Content ../../../library/lasso_regression/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/lasso_regression.rst
 (Get-Content ../../../library/lda_classifier/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/lda_classifier.rst
 (Get-Content ../../../library/lda_projection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/lda_projection.rst
@@ -278,9 +282,11 @@ Foreach-Object {
 (Get-Content ../../../library/mlp_classifier/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/mlp_classifier.rst
 (Get-Content ../../../library/modified_z_score_anomaly_detector/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/modified_z_score_anomaly_detector.rst
 (Get-Content ../../../library/mqtt/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/mqtt.rst
+(Get-Content ../../../library/mrmr_feature_selector/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/mrmr_feature_selector.rst
 (Get-Content ../../../library/multisets/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/multisets.rst
 (Get-Content ../../../library/multivariate_distributions/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/multivariate_distributions.rst
 (Get-Content ../../../library/mutations/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/mutations.rst
+(Get-Content ../../../library/mutual_information_feature_selector/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/mutual_information_feature_selector.rst
 (Get-Content ../../../library/n_grams/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/n_grams.rst
 (Get-Content ../../../library/nanoid/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/nanoid.rst
 (Get-Content ../../../library/naive_bayes_classifier/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/naive_bayes_classifier.rst
@@ -327,9 +333,12 @@ Foreach-Object {
 (Get-Content ../../../library/regression_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/regression_protocols.rst
 (Get-Content ../../../library/regression_tree/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/regression_tree.rst
 (Get-Content ../../../library/regularized_bradley_terry_ranker/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/regularized_bradley_terry_ranker.rst
+(Get-Content ../../../library/relief_feature_selector/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/relief_feature_selector.rst
+(Get-Content ../../../library/relieff_feature_selector/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/relieff_feature_selector.rst
 (Get-Content ../../../library/rest/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/rest.rst
 (Get-Content ../../../library/ridge_regression/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ridge_regression.rst
 (Get-Content ../../../library/ripple_down_rules/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ripple_down_rules.rst
+(Get-Content ../../../library/rrelieff_feature_selector/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/rrelieff_feature_selector.rst
 (Get-Content ../../../library/s3/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/s3.rst
 (Get-Content ../../../library/schulze_ranker/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/schulze_ranker.rst
 (Get-Content ../../../library/sequential_pattern_mining_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/sequential_pattern_mining_protocols.rst

@@ -879,8 +879,10 @@
 
 	check_invalid_gap_fields([], _) :- !.
 	check_invalid_gap_fields([Field| Fields], Model) :-
-		functor(Field, Name, 1), functor(Old, Name, 1), replace_field(Model, Old, Field, Invalid), !,
-		copy_term(Invalid, Before), \+ theta_forecasting::valid_forecaster(Invalid), variant(Invalid, Before),
+		functor(Field, Name, 1),
+		functor(Old, Name, 1),
+		replace_field(Model, Old, Field, Invalid), !,
+		\+ theta_forecasting::valid_forecaster(Invalid),
 		catch((theta_forecasting::check_forecaster(Invalid), fail), error(domain_error(forecaster,Invalid),_), true),
 		check_invalid_gap_fields(Fields, Model).
 

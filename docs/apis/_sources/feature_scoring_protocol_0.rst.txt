@@ -1,0 +1,92 @@
+.. index:: single: feature_scoring_protocol
+.. _feature_scoring_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``feature_scoring_protocol``
+============================
+
+Protocol for pluggable feature scoring criteria used by filter-based feature selection.
+
+| **Availability:** 
+|    ``logtalk_load(feature_selection_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-06
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: score/3
+.. _feature_scoring_protocol/0::score/3:
+
+``score/3``
+^^^^^^^^^^^
+
+Computes a relevance score from aligned feature values and targets in dataset order. Excludes unbound feature values and, for supervised criteria, unbound targets. Unsupervised criteria ignore targets. Higher scores indicate greater relevance, but score scales and thresholds are criterion-specific.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``score(Values,Targets,Score)``
+| **Mode and number of proofs:**
+|    ``score(+list,+list,-number)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A checked scoring input list or discretization parameter is unbound:
+|        ``instantiation_error``
+|    A checked scoring input is not a list:
+|        ``type_error(list,Input)``
+|    A complete categorical value or target is not atomic:
+|        ``type_error(atomic,Value)``
+|    A complete feature value required to be numeric is not numeric:
+|        ``type_error(number,Value)``
+|    A discretization bin count is not an integer:
+|        ``type_error(integer,Count)``
+|    A discretization bin count is not positive:
+|        ``domain_error(positive_integer,Count)``
+|    A discretization specification is invalid:
+|        ``domain_error(discretization,Discretization)``
+|    Checked scoring input list lengths differ:
+|        ``consistency_error(list_length,ValueCount,TargetCount)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

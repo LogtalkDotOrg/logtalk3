@@ -383,6 +383,14 @@ To load any library (including developer tools, ports, and contributions), use t
    windows_1254 <windows_1254_0>
    windows_1257 <windows_1257_0>
 
+:ref:`chi_square_feature_selector <library_chi_square_feature_selector>`
+------------------------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   chi_square_feature_selector <chi_square_feature_selector_0>
+
 :ref:`classification_protocols <library_classification_protocols>`
 ------------------------------------------------------------------
 
@@ -860,6 +868,42 @@ To load any library (including developer tools, ports, and contributions), use t
    :maxdepth: 1
 
    fcube <fcube_0>
+
+:ref:`feature_selection_protocols <library_feature_selection_protocols>`
+------------------------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   anova_f_score <anova_f_score_0>
+   chi_square_score <chi_square_score_0>
+   chi_square_score(Discretization) <chi_square_score_1>
+   correlation_score <correlation_score_0>
+   cramers_v_score <cramers_v_score_0>
+   cramers_v_score(Discretization) <cramers_v_score_1>
+   feature_dataset_protocol <feature_dataset_protocol_0>
+   feature_discretization <feature_discretization_0>
+   feature_redundancy <feature_redundancy_0>
+   feature_scoring_common <feature_scoring_common_0>
+   feature_scoring_protocol <feature_scoring_protocol_0>
+   feature_selector_common <feature_selector_common_0>
+   feature_selector_protocol <feature_selector_protocol_0>
+   filter_feature_selector_common <filter_feature_selector_common_0>
+   fisher_score <fisher_score_0>
+   mutual_information_score <mutual_information_score_0>
+   mutual_information_score(Discretization) <mutual_information_score_1>
+   relief_feature_selector_common <relief_feature_selector_common_0>
+   symmetrical_uncertainty_score <symmetrical_uncertainty_score_0>
+   symmetrical_uncertainty_score(Discretization) <symmetrical_uncertainty_score_1>
+   variance_score <variance_score_0>
+
+:ref:`fisher_score_feature_selector <library_fisher_score_feature_selector>`
+----------------------------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   fisher_score_feature_selector <fisher_score_feature_selector_0>
 
 :ref:`flags <library_flags>`
 ----------------------------
@@ -1978,6 +2022,15 @@ To load any library (including developer tools, ports, and contributions), use t
    zh_language_profile <zh_language_profile_0>
    zu_language_profile <zu_language_profile_0>
 
+:ref:`lasso_feature_selector <library_lasso_feature_selector>`
+--------------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   lasso_feature_selector <lasso_feature_selector_0>
+   regression_dataset_adapter(Dataset) <regression_dataset_adapter_1>
+
 :ref:`lasso_regression <library_lasso_regression>`
 --------------------------------------------------
 
@@ -2289,6 +2342,14 @@ To load any library (including developer tools, ports, and contributions), use t
 
    mqtt <mqtt_0>
 
+:ref:`mrmr_feature_selector <library_mrmr_feature_selector>`
+------------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   mrmr_feature_selector <mrmr_feature_selector_0>
+
 :ref:`multisets <library_multisets>`
 ------------------------------------
 
@@ -2346,6 +2407,14 @@ To load any library (including developer tools, ports, and contributions), use t
    default_list_mutations <default_list_mutations_0>
    mutations <mutations_0>
    mutations_store <mutations_store_0>
+
+:ref:`mutual_information_feature_selector <library_mutual_information_feature_selector>`
+----------------------------------------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   mutual_information_feature_selector <mutual_information_feature_selector_0>
 
 :ref:`n_grams <library_n_grams>`
 --------------------------------
@@ -2846,6 +2915,22 @@ To load any library (including developer tools, ports, and contributions), use t
 
    regularized_bradley_terry_ranker <regularized_bradley_terry_ranker_0>
 
+:ref:`relief_feature_selector <library_relief_feature_selector>`
+----------------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   relief_feature_selector <relief_feature_selector_0>
+
+:ref:`relieff_feature_selector <library_relieff_feature_selector>`
+------------------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   relieff_feature_selector <relieff_feature_selector_0>
+
 :ref:`rest <library_rest>`
 --------------------------
 
@@ -2873,6 +2958,14 @@ To load any library (including developer tools, ports, and contributions), use t
    ripple_down_rules_common_protocol <ripple_down_rules_common_protocol_0>
    ripple_down_rules_protocol <ripple_down_rules_protocol_0>
    single_classification_ripple_down_rules <single_classification_ripple_down_rules_0>
+
+:ref:`rrelieff_feature_selector <library_rrelieff_feature_selector>`
+--------------------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   rrelieff_feature_selector <rrelieff_feature_selector_0>
 
 :ref:`s3 <library_s3>`
 ----------------------

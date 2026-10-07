@@ -49,7 +49,7 @@ link in a web browser.
 Loading
 -------
 
-To load this library, load the `loader.lgt` file:
+To load this library, load its `loader.lgt` file:
 
 	| ?- logtalk_load(thurstone_mosteller_ranker(loader)).
 
