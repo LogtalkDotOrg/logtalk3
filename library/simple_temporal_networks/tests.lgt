@@ -25,8 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-01,
-		comment is 'Unit tests for the simple_temporal_networks library.'
+		date is 2026-10-07,
+		comment is 'Unit tests for the "simple_temporal_networks" library.'
 	]).
 
 	:- uses(integer, [
@@ -74,7 +74,7 @@
 		stn::add_constraints(STN0, [constraint(a, zero, 1.5), constraint(zero, a, -1.5), constraint(b, zero, -2)], STN),
 		stn::earliest_schedule(STN, [time(zero, 0), time(a, Time), time(b, 2)]).
 
-	test(stn_earliest_schedule_large_integer, deterministic) :-
+	test(stn_earliest_schedule_large_integer, deterministic, [condition(current_prolog_flag(bounded, false))]) :-
 		Start is 2 ^ 60,
 		NegativeStart is -Start,
 		stn::new([a], STN0),
@@ -622,7 +622,7 @@
 		stn::window_interval(STN, a, i(-3, 1)),
 		stn::window_interval(STN, b, i(-2.5, 0.5)).
 
-	test(stn_window_interval_large_integer, deterministic) :-
+	test(stn_window_interval_large_integer, deterministic, [condition(current_prolog_flag(bounded, false))]) :-
 		Start is 2 ^ 60,
 		End is Start + 1,
 		window_network(Start, End, 0, 1, STN),
@@ -666,7 +666,7 @@
 		stn::event_interval(STN, start_a, end_a, i(-3, 1)),
 		stn::event_interval(STN, start_b, end_b, i(-2.5, 0.5)).
 
-	test(stn_event_interval_large_integer, deterministic) :-
+	test(stn_event_interval_large_integer, deterministic, [condition(current_prolog_flag(bounded, false))]) :-
 		Start is 2 ^ 60,
 		Middle is Start + 1,
 		End is Middle + 1,
@@ -735,7 +735,7 @@
 		fixed_events(-3, -2, -1.5, 0.5, STN),
 		stn::event_relation(STN, start_a, end_a, start_b, end_b, Relation).
 
-	test(stn_event_large_integer, deterministic(Relation == meets)) :-
+	test(stn_event_large_integer, deterministic(Relation == meets), [condition(current_prolog_flag(bounded, false))]) :-
 		Start is 2 ^ 60,
 		Middle is Start + 1,
 		End is Middle + 1,
