@@ -1,0 +1,56 @@
+.. index:: single: cramers_v_bias_corrected_score
+.. _cramers_v_bias_corrected_score/0:
+
+.. rst-class:: right
+
+**object**
+
+``cramers_v_bias_corrected_score``
+==================================
+
+Scores categorical feature values using bias-corrected Cramer's V in [0.0, 1.0]. Numeric inputs are category labels; nonpositive corrected dimensions score zero.
+
+| **Availability:** 
+|    ``logtalk_load(feature_selection_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-08
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`cramers_v_bias_corrected_score(categorical) <cramers_v_bias_corrected_score/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`feature_scoring_protocol/0::score/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

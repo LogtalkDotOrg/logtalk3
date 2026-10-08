@@ -1,0 +1,62 @@
+.. index:: single: regression_examples_adapter(Declarations,Examples)
+.. _regression_examples_adapter/2:
+
+.. rst-class:: right
+
+**object**
+
+``regression_examples_adapter(Declarations,Examples)``
+======================================================
+
+* ``Declarations`` - Validated feature declarations.
+* ``Examples`` - Validated feature dataset examples.
+
+
+Transient materialized regression subset with validated declarations and numeric targets.
+
+| **Availability:** 
+|    ``logtalk_load(lasso_feature_selector(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-08
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`regression_dataset_protocol <regression_dataset_protocol/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`regression_dataset_protocol/0::attribute_values/2`  :ref:`regression_dataset_protocol/0::example/3`  :ref:`regression_dataset_protocol/0::target/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
