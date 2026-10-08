@@ -531,19 +531,23 @@ archives. Non-git registries and directory packs are usually development
 sources and are rejected in lock mode; they remain supported by ordinary
 requirements files. The <code class="docutils literal notranslate"><span class="pre">save(all)</span></code> option also requires unused
 registries selected for saving to be git registries. Users must not
-manually modify the managed registry directories.</p>
+manually modify the managed registry directories. Locked saves reject
+managed registry clones with staged or unstaged changes to tracked
+files, including submodule changes. Untracked files are ignored, also
+within submodules.</p>
 <p>Both saving and restoring with <code class="docutils literal notranslate"><span class="pre">lock(true)</span></code> require <code class="docutils literal notranslate"><span class="pre">checksum(true)</span></code>
 (which is the default for this option). Combining lock mode with a
 <code class="docutils literal notranslate"><span class="pre">checksum(false)</span></code> option throws
 <code class="docutils literal notranslate"><span class="pre">consistency_error(compatible_options,</span> <span class="pre">lock(true),</span> <span class="pre">checksum(false))</span></code>.
 Repeated options retain the usual first-occurrence lookup semantics.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">save/2</span></code> predicate validates the complete setup before opening the
-output file. Unsupported sources, missing metadata, or an unsatisfied
-dependency graph throw a <code class="docutils literal notranslate"><span class="pre">domain_error(lock_setup,</span> <span class="pre">Reason)</span></code> exception
-without creating or truncating the destination. Identical setups produce
-identically ordered facts without timestamps. Saving does not re-hash
-archives and does not certify past checksum or signature verification,
-or the current installed directory contents.</p>
+output file. Unsupported sources, dirty registries, missing metadata, or
+an unsatisfied dependency graph throw a
+<code class="docutils literal notranslate"><span class="pre">domain_error(lock_setup,</span> <span class="pre">Reason)</span></code> exception without creating or
+truncating the destination. Identical setups produce identically ordered
+facts without timestamps. Saving does not re-hash archives and does not
+certify past checksum or signature verification, or the current
+installed directory contents.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">restore/2</span></code> predicate validates the lock file before changing the
 setup, restores the exact registry commits, and validates all pack
 identities and dependencies before installing packs. Dependencies are

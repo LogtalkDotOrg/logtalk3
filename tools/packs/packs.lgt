@@ -1689,10 +1689,10 @@
 	:- private(lock_registry_facts/3).
 	:- mode(lock_registry_facts(+list(atom), -list(compound), -list(compound)), one_or_error).
 	:- info(lock_registry_facts/3, [
-		comment is 'Collects the URLs and full commits of all selected git registries.',
+		comment is 'Collects the URLs and full commits of all selected clean git registries.',
 		argnames is ['Registries', 'Terms', 'Commits'],
 		exceptions is [
-			'A selected registry has no usable git commit' - domain_error(lock_setup, registry('Registry'))
+			'A selected registry has no usable git commit or has tracked changes' - domain_error(lock_setup, registry('Registry'))
 		]
 	]).
 
@@ -1700,6 +1700,7 @@
 	lock_registry_facts([Registry| Registries], [registry(Registry, URL)| Terms], [lock_registry_commit(Registry, Commit)| Commits]) :-
 		( 	registries::defined(Registry, URL, git, _),
 			registries::directory(Registry, Directory),
+			git::working_tree_clean(Directory),
 			commit_hash(Directory, Commit),
 			valid(types([atom(hexadecimal,40), atom(hexadecimal,64)]), Commit) ->
 			lock_registry_facts(Registries, Terms, Commits)

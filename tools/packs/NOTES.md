@@ -413,6 +413,9 @@ Non-git registries and directory packs are usually development sources and are
 rejected in lock mode; they remain supported by ordinary requirements files. The
 `save(all)` option also requires unused registries selected for saving to be git
 registries. Users must not manually modify the managed registry directories.
+Locked saves reject managed registry clones with staged or unstaged changes
+to tracked files, including submodule changes. Untracked files are ignored,
+also within submodules.
 
 Both saving and restoring with `lock(true)` require `checksum(true)` (which is
 the default for this option). Combining lock mode with a `checksum(false)` option
@@ -420,11 +423,12 @@ throws `consistency_error(compatible_options, lock(true), checksum(false))`.
 Repeated options retain the usual first-occurrence lookup semantics.
 
 The `save/2` predicate validates the complete setup before opening the output
-file. Unsupported sources, missing metadata, or an unsatisfied dependency graph
-throw a `domain_error(lock_setup, Reason)` exception without creating or
-truncating the destination. Identical setups produce identically ordered facts
-without timestamps. Saving does not re-hash archives and does not certify past
-checksum or signature verification, or the current installed directory contents.
+file. Unsupported sources, dirty registries, missing metadata, or an unsatisfied
+dependency graph throw a `domain_error(lock_setup, Reason)` exception without
+creating or truncating the destination. Identical setups produce identically
+ordered facts without timestamps. Saving does not re-hash archives and does
+not certify past checksum or signature verification, or the current installed
+directory contents.
 
 The `restore/2` predicate validates the lock file before changing the setup,
 restores the exact registry commits, and validates all pack identities and

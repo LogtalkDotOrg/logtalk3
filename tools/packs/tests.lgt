@@ -737,6 +737,47 @@
 		\+ os::file_exists(Setup),
 		packs::save(Setup, [lock(true)]).
 
+	test(packs_lock_save_dirty_registry, deterministic(First == Second)) :-
+		registries::directory(lock_fixture, Directory),
+		git::commit_hash(Directory, Commit),
+		^^file_path('test_files/setup_repo_lock.txt', Setup),
+		read_fixture_bytes(Setup, First),
+		write_fixture_file(Directory, 'loader.lgt', [dirty]),
+		catch(
+			packs::save(Setup, [lock(true)]),
+			error(domain_error(lock_setup, registry(lock_fixture)), _),
+			Rejected = true
+		),
+		fixture_git_command(Directory, 'checkout -- loader.lgt'),
+		^^assertion(Rejected == true),
+		git::commit_hash(Directory, Commit),
+		read_fixture_bytes(Setup, Second).
+
+	test(packs_lock_save_staged_registry, deterministic) :-
+		registries::directory(lock_fixture, Directory),
+		write_fixture_file(Directory, 'loader.lgt', [dirty]),
+		fixture_git_command(Directory, 'add loader.lgt'),
+		^^clean_file('test_files/setup_lock.txt'),
+		^^file_path('test_files/setup_lock.txt', Setup),
+		catch(
+			packs::save(Setup, [lock(true)]),
+			error(domain_error(lock_setup, registry(lock_fixture)), _),
+			Rejected = true
+		),
+		fixture_git_command(Directory, 'reset -q HEAD -- loader.lgt'),
+		fixture_git_command(Directory, 'checkout -- loader.lgt'),
+		^^assertion(Rejected == true),
+		^^assertion(\+ os::file_exists(Setup)).
+
+	test(packs_lock_save_untracked_registry, deterministic) :-
+		registries::directory(lock_fixture, Directory),
+		write_fixture_file(Directory, '.DS_Store', [untracked]),
+		^^file_path('test_files/setup_lock.txt', Setup),
+		packs::save(Setup, [lock(true)]),
+		os::path_concat(Directory, '.DS_Store', Untracked),
+		os::delete_file(Untracked),
+		^^assertion(os::file_exists(Setup)).
+
 	test(packs_lock_save_deterministic, deterministic(First == Second)) :-
 		^^file_path('test_files/setup_lock.txt', Setup),
 		packs::save(Setup, [lock(true)]),
@@ -986,6 +1027,11 @@
 	commit_lock_fixture(Directory) :-
 		os::internal_os_path(Directory, OSDirectory),
 		atomic_list_concat(['git -C "', OSDirectory, '" add . && git -C "', OSDirectory, '" -c user.name=Logtalk -c user.email=tests@logtalk.org -c commit.gpgsign=false commit -q -m fixture'], Command),
+		os::shell(Command).
+
+	fixture_git_command(Directory, Arguments) :-
+		os::internal_os_path(Directory, OSDirectory),
+		atomic_list_concat(['git -C "', OSDirectory, '" ', Arguments], Command),
 		os::shell(Command).
 
 	write_fixture_file(Directory, Basename, Terms) :-
