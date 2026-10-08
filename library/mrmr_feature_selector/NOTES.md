@@ -74,6 +74,8 @@ The `learn/2` predicate uses these defaults. The `learn/3` predicate accepts:
 
 - `selection_strategy(top_k(K))`, default `top_k(10)`, with positive integer
   `K`. Exactly `min(K, CandidateCount)` features are selected.
+- `selection_strategy(positive_mid)` selects features while the best MID
+  is strictly positive, choosing the feature count automatically.
 - `discretization(Specification)`, default `equal_frequency(10)`, for
   continuous features. Specifications are `categorical`, `equal_width(B)`,
   or `equal_frequency(B)`, with positive integer bin counts.
@@ -102,6 +104,12 @@ remaining candidates. Exact numeric ties preserve feature declaration order
 at every step. Zero and negative MID values do not stop top-k selection.
 Constant features and constant targets have zero relevance.
 
+The `positive_mid` strategy stops before a zero or negative winning MID,
+including at the first step. It may select no features. This stopping rule
+is a heuristic, not a significance test or validation-based subset search.
+It stops immediately, even if selecting other features could later change
+the averaging denominator and make a rejected candidate's MID positive.
+
 Relevance is computed once per candidate. Each remaining candidate retains
 a running redundancy sum. Only the pairs between the just-selected feature
 and the remaining candidates needed for another step are evaluated. No
@@ -109,6 +117,9 @@ full pairwise matrix is built and no unordered pair is recomputed. Selecting
 `s` out of `p` candidates performs `(s-1)*p - s*(s-1)/2` redundancy
 evaluations when `s >= 1`, and zero when `s = 0`. At full selection this is
 `p*(p-1)/2`; requesting one feature performs no pair evaluations.
+These counts apply to top-k. Automatic stopping may need one additional
+update round to evaluate the rejected winner. With `r` recorded update
+rounds, the count is `r*p - r*(r+1)/2` for either strategy.
 
 
 Models and diagnostics
@@ -128,7 +139,11 @@ Diagnostics include `model(mrmr_feature_selector)`, `example_count/1`,
 `options/1`, `candidate_count/1`, `selected_count/1`,
 `selection_criterion(mid)`, `scoring_metric(mutual_information)`,
 `redundancy_metric(mutual_information)`, `redundancy_evaluations/1`, and
-`selection_trace/1`. The trace contains these terms in selected order:
+`selection_trace/1`, `redundancy_update_rounds/1`, and `termination/1`.
+Termination is `budget_reached`, `candidates_exhausted`, or
+`non_positive_mid(Step)`; the latter records the rejected winner using
+the same step representation. The trace contains these terms in selected
+order:
 
 	step(Feature, Relevance, MeanRedundancy, MID)
 
@@ -143,7 +158,9 @@ joint usable count.
 The `check_selector/1` predicate checks ground structure, unique and sorted
 scores, candidate membership, selection and trace lengths/order, relevance
 identity, MID formulas, first-step selection, effective options, metrics,
-preparation provenance/counts, and the exact evaluation count. A variable
+preparation provenance/counts, termination, and the exact evaluation count.
+For automatic selection, all selected MID values must be positive and the
+recorded rejected MID must be nonpositive. A variable
 model raises an instantiation error; malformed nonvariable models raise
 `domain_error(selector, Model)`. The `valid_selector/1` predicate fails
 without binding partial models. Validation checks internal consistency;
@@ -162,6 +179,6 @@ The method is a greedy filter, not a globally optimal subset search. Joint
 complete-case filtering can discard many rows. Empirical MI depends on
 sample size and discretization and can miss interaction-only signals.
 Arithmetic and exact tie decisions remain subject to backend floating-point
-precision. There is no automatic feature-count selection, fitted-transform
-export, regression metric, or additional dependency beyond the shared
-feature-selection infrastructure.
+precision. There is no validation-based feature-count selection,
+fitted-transform export, regression metric, or additional dependency beyond
+the shared feature-selection infrastructure.

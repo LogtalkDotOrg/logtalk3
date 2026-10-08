@@ -151,7 +151,10 @@
 <li class="toctree-l3"><a class="reference internal" href="anova_f_score_0.html">anova_f_score</a></li>
 <li class="toctree-l3"><a class="reference internal" href="chi_square_score_0.html">chi_square_score</a></li>
 <li class="toctree-l3"><a class="reference internal" href="chi_square_score_1.html">chi_square_score(Discretization)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chi_square_yates_score_0.html">chi_square_yates_score</a></li>
 <li class="toctree-l3"><a class="reference internal" href="correlation_score_0.html">correlation_score</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cramers_v_bias_corrected_score_0.html">cramers_v_bias_corrected_score</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cramers_v_bias_corrected_score_1.html">cramers_v_bias_corrected_score(Discretization)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cramers_v_score_0.html">cramers_v_score</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cramers_v_score_1.html">cramers_v_score(Discretization)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="feature_dataset_protocol_0.html">feature_dataset_protocol</a></li>
@@ -530,29 +533,30 @@
 <li><p><a class="reference internal" href="#class-scatter-5" id="id3"><code class="docutils literal notranslate"><span class="pre">class_scatter/5</span></code></a></p></li>
 <li><p><a class="reference internal" href="#categorical-pairs-4" id="id4"><code class="docutils literal notranslate"><span class="pre">categorical_pairs/4</span></code></a></p></li>
 <li><p><a class="reference internal" href="#contingency-counts-2" id="id5"><code class="docutils literal notranslate"><span class="pre">contingency_counts/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#contingency-score-3" id="id6"><code class="docutils literal notranslate"><span class="pre">contingency_score/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#complete-pairs-3" id="id7"><code class="docutils literal notranslate"><span class="pre">complete_pairs/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#complete-values-2" id="id8"><code class="docutils literal notranslate"><span class="pre">complete_values/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#mean-values-2" id="id9"><code class="docutils literal notranslate"><span class="pre">mean_values/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#variance-values-2" id="id10"><code class="docutils literal notranslate"><span class="pre">variance_values/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#centered-values-2" id="id11"><code class="docutils literal notranslate"><span class="pre">centered_values/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#scale-values-2" id="id12"><code class="docutils literal notranslate"><span class="pre">scale_values/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#scale-values-3" id="id13"><code class="docutils literal notranslate"><span class="pre">scale_values/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#squared-deviations-3" id="id14"><code class="docutils literal notranslate"><span class="pre">squared_deviations/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#sum-of-squared-deviations-3" id="id15"><code class="docutils literal notranslate"><span class="pre">sum_of_squared_deviations/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#center-3" id="id16"><code class="docutils literal notranslate"><span class="pre">center/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#dot-product-3" id="id17"><code class="docutils literal notranslate"><span class="pre">dot_product/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#sum-of-squares-list-2" id="id18"><code class="docutils literal notranslate"><span class="pre">sum_of_squares_list/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#split-pairs-3" id="id19"><code class="docutils literal notranslate"><span class="pre">split_pairs/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#group-by-target-2" id="id20"><code class="docutils literal notranslate"><span class="pre">group_by_target/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#contingency-min-expected-count-2" id="id6"><code class="docutils literal notranslate"><span class="pre">contingency_min_expected_count/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#contingency-score-3" id="id7"><code class="docutils literal notranslate"><span class="pre">contingency_score/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#complete-pairs-3" id="id8"><code class="docutils literal notranslate"><span class="pre">complete_pairs/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#complete-values-2" id="id9"><code class="docutils literal notranslate"><span class="pre">complete_values/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#mean-values-2" id="id10"><code class="docutils literal notranslate"><span class="pre">mean_values/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#variance-values-2" id="id11"><code class="docutils literal notranslate"><span class="pre">variance_values/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#centered-values-2" id="id12"><code class="docutils literal notranslate"><span class="pre">centered_values/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#scale-values-2" id="id13"><code class="docutils literal notranslate"><span class="pre">scale_values/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#scale-values-3" id="id14"><code class="docutils literal notranslate"><span class="pre">scale_values/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#squared-deviations-3" id="id15"><code class="docutils literal notranslate"><span class="pre">squared_deviations/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#sum-of-squared-deviations-3" id="id16"><code class="docutils literal notranslate"><span class="pre">sum_of_squared_deviations/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#center-3" id="id17"><code class="docutils literal notranslate"><span class="pre">center/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#dot-product-3" id="id18"><code class="docutils literal notranslate"><span class="pre">dot_product/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#sum-of-squares-list-2" id="id19"><code class="docutils literal notranslate"><span class="pre">sum_of_squares_list/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#split-pairs-3" id="id20"><code class="docutils literal notranslate"><span class="pre">split_pairs/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#group-by-target-2" id="id21"><code class="docutils literal notranslate"><span class="pre">group_by_target/2</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#private-predicates" id="id21">Private predicates</a></p>
+<li><p><a class="reference internal" href="#private-predicates" id="id22">Private predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#compare-numeric-pairs-3" id="id22"><code class="docutils literal notranslate"><span class="pre">compare_numeric_pairs/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#compare-numeric-pairs-3" id="id23"><code class="docutils literal notranslate"><span class="pre">compare_numeric_pairs/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#operators" id="id23">Operators</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id24">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -661,9 +665,30 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="contingency-min-expected-count-2">
+<span id="feature-scoring-common-0-contingency-min-expected-count-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">contingency_min_expected_count/2</span></code></a><a class="headerlink" href="#contingency-min-expected-count-2" title="Link to this heading"></a></h3>
+<p>Returns the minimum expectation over occupied marginal categories, including unobserved cells. Empty tables return 0.0.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">contingency_min_expected_count(Counts,Minimum)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">contingency_min_expected_count(+compound,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="contingency-score-3">
-<span id="feature-scoring-common-0-contingency-score-3"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">contingency_score/3</span></code></a><a class="headerlink" href="#contingency-score-3" title="Link to this heading"></a></h3>
-<p>Computes mutual information, Pearson chi-square, symmetrical uncertainty, or Cramer’s V from sparse contingency counts. Degenerate tables score 0.0.</p>
+<span id="feature-scoring-common-0-contingency-score-3"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">contingency_score/3</span></code></a><a class="headerlink" href="#contingency-score-3" title="Link to this heading"></a></h3>
+<p>Computes mutual information, raw or Yates-corrected chi-square, symmetrical uncertainty, or uncorrected or bias-corrected Cramer’s V from sparse contingency counts. Degenerate tables score 0.0.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -683,7 +708,7 @@
 <hr class="docutils" />
 </section>
 <section id="complete-pairs-3">
-<span id="feature-scoring-common-0-complete-pairs-3"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">complete_pairs/3</span></code></a><a class="headerlink" href="#complete-pairs-3" title="Link to this heading"></a></h3>
+<span id="feature-scoring-common-0-complete-pairs-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">complete_pairs/3</span></code></a><a class="headerlink" href="#complete-pairs-3" title="Link to this heading"></a></h3>
 <p>Collects the <code class="docutils literal notranslate"><span class="pre">Value-Target</span></code> pairs for which both the feature value and the target are bound, discarding any example where either is an unbound variable (casewise deletion). <code class="docutils literal notranslate"><span class="pre">Values</span></code> and <code class="docutils literal notranslate"><span class="pre">Targets</span></code> must have the same length.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -704,7 +729,7 @@
 <hr class="docutils" />
 </section>
 <section id="complete-values-2">
-<span id="feature-scoring-common-0-complete-values-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">complete_values/2</span></code></a><a class="headerlink" href="#complete-values-2" title="Link to this heading"></a></h3>
+<span id="feature-scoring-common-0-complete-values-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">complete_values/2</span></code></a><a class="headerlink" href="#complete-values-2" title="Link to this heading"></a></h3>
 <p>Collects the bound (non-missing) values of a list, discarding unbound ones.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -725,7 +750,7 @@
 <hr class="docutils" />
 </section>
 <section id="mean-values-2">
-<span id="feature-scoring-common-0-mean-values-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">mean_values/2</span></code></a><a class="headerlink" href="#mean-values-2" title="Link to this heading"></a></h3>
+<span id="feature-scoring-common-0-mean-values-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">mean_values/2</span></code></a><a class="headerlink" href="#mean-values-2" title="Link to this heading"></a></h3>
 <p>Computes the arithmetic mean of a non-empty numeric list.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -755,7 +780,7 @@
 <hr class="docutils" />
 </section>
 <section id="variance-values-2">
-<span id="feature-scoring-common-0-variance-values-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">variance_values/2</span></code></a><a class="headerlink" href="#variance-values-2" title="Link to this heading"></a></h3>
+<span id="feature-scoring-common-0-variance-values-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">variance_values/2</span></code></a><a class="headerlink" href="#variance-values-2" title="Link to this heading"></a></h3>
 <p>Computes the population variance of a non-empty numeric list.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -785,7 +810,7 @@
 <hr class="docutils" />
 </section>
 <section id="centered-values-2">
-<span id="feature-scoring-common-0-centered-values-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">centered_values/2</span></code></a><a class="headerlink" href="#centered-values-2" title="Link to this heading"></a></h3>
+<span id="feature-scoring-common-0-centered-values-2"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">centered_values/2</span></code></a><a class="headerlink" href="#centered-values-2" title="Link to this heading"></a></h3>
 <p>Centers non-empty numeric values using offsets from the first value, preserving exact constant inputs.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -815,7 +840,7 @@
 <hr class="docutils" />
 </section>
 <section id="scale-values-2">
-<span id="feature-scoring-common-0-scale-values-2"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">scale_values/2</span></code></a><a class="headerlink" href="#scale-values-2" title="Link to this heading"></a></h3>
+<span id="feature-scoring-common-0-scale-values-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">scale_values/2</span></code></a><a class="headerlink" href="#scale-values-2" title="Link to this heading"></a></h3>
 <p>Scales numeric values by their largest absolute value, leaving an all-zero list unchanged.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -836,7 +861,7 @@
 <hr class="docutils" />
 </section>
 <section id="scale-values-3">
-<span id="feature-scoring-common-0-scale-values-3"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">scale_values/3</span></code></a><a class="headerlink" href="#scale-values-3" title="Link to this heading"></a></h3>
+<span id="feature-scoring-common-0-scale-values-3"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">scale_values/3</span></code></a><a class="headerlink" href="#scale-values-3" title="Link to this heading"></a></h3>
 <p>Scales numeric values and returns the divisor, using 1.0 for an all-zero or empty list.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -857,7 +882,7 @@
 <hr class="docutils" />
 </section>
 <section id="squared-deviations-3">
-<span id="feature-scoring-common-0-squared-deviations-3"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">squared_deviations/3</span></code></a><a class="headerlink" href="#squared-deviations-3" title="Link to this heading"></a></h3>
+<span id="feature-scoring-common-0-squared-deviations-3"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">squared_deviations/3</span></code></a><a class="headerlink" href="#squared-deviations-3" title="Link to this heading"></a></h3>
 <p>Computes the squared deviation of every value from a given reference value (typically the mean).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -878,7 +903,7 @@
 <hr class="docutils" />
 </section>
 <section id="sum-of-squared-deviations-3">
-<span id="feature-scoring-common-0-sum-of-squared-deviations-3"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">sum_of_squared_deviations/3</span></code></a><a class="headerlink" href="#sum-of-squared-deviations-3" title="Link to this heading"></a></h3>
+<span id="feature-scoring-common-0-sum-of-squared-deviations-3"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">sum_of_squared_deviations/3</span></code></a><a class="headerlink" href="#sum-of-squared-deviations-3" title="Link to this heading"></a></h3>
 <p>Computes the sum of the squared deviations of every value from a given reference value (typically the mean); the within-group sum of squares used by anova_f_score is the sum of this over every group.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -899,7 +924,7 @@
 <hr class="docutils" />
 </section>
 <section id="center-3">
-<span id="feature-scoring-common-0-center-3"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">center/3</span></code></a><a class="headerlink" href="#center-3" title="Link to this heading"></a></h3>
+<span id="feature-scoring-common-0-center-3"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">center/3</span></code></a><a class="headerlink" href="#center-3" title="Link to this heading"></a></h3>
 <p>Subtracts a value (typically the mean) from every element of a numeric list.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -920,7 +945,7 @@
 <hr class="docutils" />
 </section>
 <section id="dot-product-3">
-<span id="feature-scoring-common-0-dot-product-3"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">dot_product/3</span></code></a><a class="headerlink" href="#dot-product-3" title="Link to this heading"></a></h3>
+<span id="feature-scoring-common-0-dot-product-3"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">dot_product/3</span></code></a><a class="headerlink" href="#dot-product-3" title="Link to this heading"></a></h3>
 <p>Computes the dot product of two position-aligned numeric lists of the same length.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -941,7 +966,7 @@
 <hr class="docutils" />
 </section>
 <section id="sum-of-squares-list-2">
-<span id="feature-scoring-common-0-sum-of-squares-list-2"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">sum_of_squares_list/2</span></code></a><a class="headerlink" href="#sum-of-squares-list-2" title="Link to this heading"></a></h3>
+<span id="feature-scoring-common-0-sum-of-squares-list-2"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">sum_of_squares_list/2</span></code></a><a class="headerlink" href="#sum-of-squares-list-2" title="Link to this heading"></a></h3>
 <p>Computes the sum of the squares of a numeric list.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -962,7 +987,7 @@
 <hr class="docutils" />
 </section>
 <section id="split-pairs-3">
-<span id="feature-scoring-common-0-split-pairs-3"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">split_pairs/3</span></code></a><a class="headerlink" href="#split-pairs-3" title="Link to this heading"></a></h3>
+<span id="feature-scoring-common-0-split-pairs-3"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">split_pairs/3</span></code></a><a class="headerlink" href="#split-pairs-3" title="Link to this heading"></a></h3>
 <p>Splits a list of <code class="docutils literal notranslate"><span class="pre">Value1-Value2</span></code> pairs into separate, position-aligned lists of first and second values.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -983,7 +1008,7 @@
 <hr class="docutils" />
 </section>
 <section id="group-by-target-2">
-<span id="feature-scoring-common-0-group-by-target-2"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">group_by_target/2</span></code></a><a class="headerlink" href="#group-by-target-2" title="Link to this heading"></a></h3>
+<span id="feature-scoring-common-0-group-by-target-2"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">group_by_target/2</span></code></a><a class="headerlink" href="#group-by-target-2" title="Link to this heading"></a></h3>
 <p>Groups <code class="docutils literal notranslate"><span class="pre">Value-Target</span></code> pairs into <code class="docutils literal notranslate"><span class="pre">Target-Values</span></code> pairs in standard target order, preserving input value order within each group.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1007,7 +1032,7 @@
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
 <section id="compare-numeric-pairs-3">
-<span id="feature-scoring-common-0-compare-numeric-pairs-3"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">compare_numeric_pairs/3</span></code></a><a class="headerlink" href="#compare-numeric-pairs-3" title="Link to this heading"></a></h3>
+<span id="feature-scoring-common-0-compare-numeric-pairs-3"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">compare_numeric_pairs/3</span></code></a><a class="headerlink" href="#compare-numeric-pairs-3" title="Link to this heading"></a></h3>
 <p>Compares numeric feature values arithmetically, keeping numerically equal representations together.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

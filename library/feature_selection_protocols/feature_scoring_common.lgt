@@ -29,7 +29,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, last/2, msort/3
+		length/2, last/2, member/2, msort/3
 	]).
 
 	:- uses(numberlist, [
@@ -282,10 +282,32 @@
 		),
 		avltree::insert(Dictionary0, Key, Count, Dictionary).
 
+	:- protected(contingency_min_expected_count/2).
+	:- mode(contingency_min_expected_count(+compound, -float), one).
+	:- info(contingency_min_expected_count/2, [
+		comment is 'Returns the minimum expectation over occupied marginal categories, including unobserved cells. Empty tables return 0.0.',
+		argnames is ['Counts', 'Minimum']
+	]).
+
+	contingency_min_expected_count(contingency(Total, Rows, Columns, _Cells), Minimum) :-
+		(	Total =:= 0 ->
+			Minimum = 0.0
+		;	avltree::as_list(Rows, RowCounts),
+			avltree::as_list(Columns, ColumnCounts),
+			minimum_marginal_count(RowCounts, Total, RowMinimum),
+			minimum_marginal_count(ColumnCounts, Total, ColumnMinimum),
+			Minimum is RowMinimum * (ColumnMinimum / Total)
+		).
+
+	minimum_marginal_count([], Minimum, Minimum).
+	minimum_marginal_count([_-Count| Counts], Minimum0, Minimum) :-
+		Minimum1 is min(Minimum0, Count),
+		minimum_marginal_count(Counts, Minimum1, Minimum).
+
 	:- protected(contingency_score/3).
 	:- mode(contingency_score(+atom, +compound, -float), one).
 	:- info(contingency_score/3, [
-		comment is 'Computes mutual information, Pearson chi-square, symmetrical uncertainty, or Cramer\'s V from sparse contingency counts. Degenerate tables score 0.0.',
+		comment is 'Computes mutual information, raw or Yates-corrected chi-square, symmetrical uncertainty, or uncorrected or bias-corrected Cramer\'s V from sparse contingency counts. Degenerate tables score 0.0.',
 		argnames is ['Criterion', 'Counts', 'Score']
 	]).
 
@@ -305,6 +327,15 @@
 		chi_square_cells(Cells, Total, Rows, Columns, Empty, Covered, 0.0, ObservedScore),
 		avltree::as_list(Rows, RowCounts),
 		chi_square_empty_cells(RowCounts, Covered, Total, ObservedScore, Score).
+	contingency_statistic(chi_square_yates, Cells, Total, Rows, Columns, Score) :-
+		avltree::size(Rows, RowCount),
+		avltree::size(Columns, ColumnCount),
+		(	RowCount =:= 2, ColumnCount =:= 2 ->
+			avltree::as_list(Rows, RowCounts),
+			avltree::as_list(Columns, ColumnCounts),
+			yates_rows(RowCounts, ColumnCounts, Cells, Total, 0.0, Score)
+		;	contingency_statistic(chi_square, Cells, Total, Rows, Columns, Score)
+		).
 	contingency_statistic(symmetrical_uncertainty, Cells, Total, Rows, Columns, Score) :-
 		contingency_statistic(mutual_information, Cells, Total, Rows, Columns, Information),
 		avltree::as_list(Rows, RowCounts),
@@ -322,6 +353,34 @@
 		avltree::size(Columns, ColumnCount),
 		Dimension is min(RowCount - 1, ColumnCount - 1),
 		Score is min(1.0, sqrt(max(0.0, (ChiSquare / Total) / Dimension))).
+	contingency_statistic(cramers_v_bias_corrected, Cells, Total, Rows, Columns, Score) :-
+		contingency_statistic(chi_square, Cells, Total, Rows, Columns, ChiSquare),
+		avltree::size(Rows, RowCount),
+		avltree::size(Columns, ColumnCount),
+		PhiSquared is max(0.0, ChiSquare / Total - (RowCount - 1) * ((ColumnCount - 1) / (Total - 1))),
+		CorrectedRows is RowCount - (RowCount - 1) * ((RowCount - 1) / (Total - 1)),
+		CorrectedColumns is ColumnCount - (ColumnCount - 1) * ((ColumnCount - 1) / (Total - 1)),
+		Dimension is min(CorrectedRows - 1, CorrectedColumns - 1),
+		(	Dimension > 0 ->
+			Score is min(1.0, sqrt(PhiSquared / Dimension))
+		;	Score = 0.0
+		).
+
+	yates_rows([], _Columns, _Cells, _Total, Score, Score).
+	yates_rows([Value-Count| Rows], Columns, Cells, Total, Score0, Score) :-
+		yates_columns(Columns, Value, Count, Cells, Total, Score0, Score1),
+		yates_rows(Rows, Columns, Cells, Total, Score1, Score).
+
+	yates_columns([], _Value, _Count, _Cells, _Total, Score, Score).
+	yates_columns([Target-ColumnCount| Columns], Value, RowCount, Cells, Total, Score0, Score) :-
+		(	member(cell(Value, Target)-Found, Cells) ->
+			Observed = Found
+		;	Observed = 0
+		),
+		Expected is RowCount * (ColumnCount / Total),
+		Deviation is max(0.0, abs(Observed - Expected) - 0.5),
+		Score1 is Score0 + (Deviation / Expected) * Deviation,
+		yates_columns(Columns, Value, RowCount, Cells, Total, Score1, Score).
 
 	marginal_entropy([], _Total, Entropy, Entropy).
 	marginal_entropy([_Category-Count| Counts], Total, Entropy0, Entropy) :-

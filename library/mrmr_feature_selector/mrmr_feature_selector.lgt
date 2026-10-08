@@ -56,15 +56,17 @@
 		check_usable_examples(Usable),
 		relevance_candidates(Columns, Candidates, Unsorted),
 		^^sort_by_decreasing_score(Unsorted, Scores),
-		^^option(selection_strategy(top_k(K)), Options),
-		greedy_selection(Candidates, K, 0, Selected, Trace, 0, Evaluations),
-		length(Examples, ExampleCount),
+		^^option(selection_strategy(Strategy), Options),
 		length(Features, CandidateCount),
+		selection_budget(Strategy, CandidateCount, K),
+		greedy_selection(Candidates, K, Strategy, 0, Selected, Trace, 0, Evaluations, Rounds, Termination),
+		length(Examples, ExampleCount),
 		length(Selected, SelectedCount),
 		Extra = [
 			candidate_count(CandidateCount), selected_count(SelectedCount),
 			selection_criterion(mid), scoring_metric(mutual_information), redundancy_metric(mutual_information),
-			selection_trace(Trace), redundancy_evaluations(Evaluations)| Preparation
+			selection_trace(Trace), redundancy_evaluations(Evaluations),
+			redundancy_update_rounds(Rounds), termination(Termination)| Preparation
 		],
 		^^base_selector_diagnostics(mrmr_feature_selector, ExampleCount, Options, Extra, Diagnostics).
 
@@ -81,24 +83,42 @@
 		^^contingency_score(mutual_information, Counts, Relevance),
 		relevance_candidates(Columns, Candidates, Scores).
 
-	greedy_selection([], _K, _Count, [], [], Evaluations, Evaluations) :-
+	selection_budget(top_k(K), _CandidateCount, K).
+	selection_budget(positive_mid, CandidateCount, CandidateCount).
+
+	greedy_selection([], _K, _Strategy, _Count, [], [], Evaluations, Evaluations, 0, candidates_exhausted) :-
 		!.
-	greedy_selection(_Candidates, 0, _Count, [], [], Evaluations, Evaluations) :-
-		!.
-	greedy_selection([Candidate| Candidates], K, Count, [Feature| Selected], [step(Feature, Relevance, Mean, MID)| Trace], Evaluations0, Evaluations) :-
+	greedy_selection([Candidate| Candidates], K, Strategy, Count, Selected, Trace, Evaluations0, Evaluations, Rounds, Termination) :-
 		best_candidate(Candidates, Count, Candidate, Best),
 		Best = candidate(Feature, Relevance, Pairs, _Sum),
 		candidate_mid(Best, Count, Mean, MID),
-		remove_candidate([Candidate| Candidates], Feature, Remaining),
-		NextK is K - 1,
-		(	NextK =:= 0 ->
+		(	Strategy == positive_mid, MID =< 0 ->
 			Selected = [],
 			Trace = [],
-			Evaluations = Evaluations0
-		;	update_redundancies(Remaining, Pairs, Updated, 0, Added),
-			NextCount is Count + 1,
-			Evaluations1 is Added + Evaluations0,
-			greedy_selection(Updated, NextK, NextCount, Selected, Trace, Evaluations1, Evaluations)
+			Evaluations = Evaluations0,
+			Rounds = Count,
+			Termination = non_positive_mid(step(Feature, Relevance, Mean, MID))
+		;	Selected = [Feature| RestSelected],
+			Trace = [step(Feature, Relevance, Mean, MID)| RestTrace],
+			remove_candidate([Candidate| Candidates], Feature, Remaining),
+			NextK is K - 1,
+			(	Remaining == [] ->
+				RestSelected = [],
+				RestTrace = [],
+				Evaluations = Evaluations0,
+				Rounds = Count,
+				Termination = candidates_exhausted
+			;	NextK =:= 0 ->
+				RestSelected = [],
+				RestTrace = [],
+				Evaluations = Evaluations0,
+				Rounds = Count,
+				Termination = budget_reached
+			;	update_redundancies(Remaining, Pairs, Updated, 0, Added),
+				NextCount is Count + 1,
+				Evaluations1 is Added + Evaluations0,
+				greedy_selection(Updated, NextK, Strategy, NextCount, RestSelected, RestTrace, Evaluations1, Evaluations, Rounds, Termination)
+			)
 		).
 
 	candidate_mid(candidate(_Feature, Relevance, _Pairs, Sum), Count, Mean, MID) :-
@@ -154,7 +174,7 @@
 		^^valid_selector_metadata(mrmr_feature_selector, Diagnostics),
 		memberchk(options(Options), Diagnostics),
 		^^valid_options(Options),
-		^^option(selection_strategy(top_k(K)), Options),
+		^^option(selection_strategy(Strategy), Options),
 		^^option(discretization(_Default), Options),
 		memberchk(candidate_count(CandidateCount), Diagnostics),
 		valid(non_negative_integer, CandidateCount),
@@ -162,7 +182,6 @@
 		memberchk(selected_count(SelectedCount), Diagnostics),
 		valid(non_negative_integer, SelectedCount),
 		length(Selected, SelectedCount),
-		SelectedCount =:= min(K, CandidateCount),
 		memberchk(example_count(Total), Diagnostics),
 		memberchk(usable_example_count(Usable), Diagnostics),
 		valid(positive_integer, Usable),
@@ -194,8 +213,48 @@
 		valid_first_selection(Selected, Scores),
 		memberchk(redundancy_evaluations(Evaluations), Diagnostics),
 		valid(non_negative_integer, Evaluations),
-		Updates is max(0, SelectedCount - 1),
-		Evaluations =:= Updates * CandidateCount - Updates * (Updates + 1) // 2.
+		memberchk(redundancy_update_rounds(Rounds), Diagnostics),
+		valid(non_negative_integer, Rounds),
+		memberchk(termination(Termination), Diagnostics),
+		valid_termination(Strategy, CandidateCount, Selected, Trace, Vocabulary, Rounds, Termination),
+		Evaluations =:= Rounds * CandidateCount - Rounds * (Rounds + 1) // 2.
+
+	valid_termination(top_k(K), CandidateCount, Selected, _Trace, _Vocabulary, Rounds, Termination) :-
+		length(Selected, Count),
+		Count =:= min(K, CandidateCount),
+		Rounds =:= max(0, Count - 1),
+		(	Count =:= CandidateCount ->
+			Termination == candidates_exhausted
+		;	Termination == budget_reached
+		).
+	valid_termination(positive_mid, CandidateCount, Selected, Trace, Vocabulary, Rounds, Termination) :-
+		positive_trace(Trace),
+		length(Selected, Count),
+		(	Termination == candidates_exhausted ->
+			Count =:= CandidateCount,
+			Rounds =:= max(0, Count - 1)
+		;	Termination = non_positive_mid(step(Feature, Relevance, Mean, MID)),
+			Count < CandidateCount,
+			Rounds =:= Count,
+			avltree::lookup(Feature, Score, Vocabulary),
+			\+ member(Feature, Selected),
+			number(Relevance),
+			number(Mean),
+			number(MID),
+			Relevance =:= Score,
+			Mean >= 0,
+			(	Count =:= 0 ->
+				Mean =:= 0
+			;	true
+			),
+			MID =:= Relevance - Mean,
+			MID =< 0
+		).
+
+	positive_trace([]).
+	positive_trace([step(_, _, _, MID)| Trace]) :-
+		MID > 0,
+		positive_trace(Trace).
 
 	valid_score_dictionary([], Vocabulary, Vocabulary).
 	valid_score_dictionary([Feature-Score| Scores], Vocabulary0, Vocabulary) :-
@@ -262,6 +321,8 @@
 		valid_trace(Selected, Trace, Vocabulary, Seen, NextCount).
 
 	valid_first_selection([], []).
+	valid_first_selection([], [_-Score| _]) :-
+		Score =:= 0.
 	valid_first_selection([Feature| _Selected], [Feature-_Score| _Scores]).
 
 	export_to_clauses(_Dataset, Selector, Functor, [Clause]) :-
@@ -282,9 +343,13 @@
 	default_option(selection_strategy(top_k(10))).
 	default_option(discretization(equal_frequency(10))).
 
-	valid_option(selection_strategy(top_k(Count))) :-
-		integer(Count),
-		Count > 0.
+	valid_option(selection_strategy(Strategy)) :-
+		(	Strategy == positive_mid ->
+			true
+		;	Strategy = top_k(Count),
+			integer(Count),
+			Count > 0
+		).
 	valid_option(discretization(Specification)) :-
 		^^valid_feature_discretization(Specification).
 	valid_option(feature_discretization(Feature, Specification)) :-

@@ -252,6 +252,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#dataset-and-adapter">Dataset and adapter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#scoring-and-options">Scoring and options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#regularization-search">Regularization search</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#model-and-diagnostics">Model and diagnostics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
@@ -519,6 +520,15 @@ default. <code class="docutils literal notranslate"><span class="pre">selection_
 and selects at most <code class="docutils literal notranslate"><span class="pre">K</span></code> active groups.
 <code class="docutils literal notranslate"><span class="pre">selection_strategy(threshold(T))</span></code> accepts a number and selects
 active groups whose scores are at least <code class="docutils literal notranslate"><span class="pre">T</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">regularization_search(none)</span></code> is the default. The option
+<code class="docutils literal notranslate"><span class="pre">regularization_search(holdout(Fraction,</span> <span class="pre">Values))</span></code> searches a
+nonempty proper list of non-negative numeric penalties using
+validation MSE. The numeric fraction must be strictly between zero and
+one. Alternatively,
+<code class="docutils literal notranslate"><span class="pre">regularization_search(holdout(Fraction,</span> <span class="pre">linear(Minimum,</span> <span class="pre">Maximum,</span> <span class="pre">Count)))</span></code>
+generates an ascending linear grid. Bounds must be numeric, with a
+non-negative minimum and a greater maximum; <code class="docutils literal notranslate"><span class="pre">Count</span></code> must be an
+integer of at least two.</p></li>
 </ul>
 <p>Selection strategies operate only on active groups. Neither a large
 <code class="docutils literal notranslate"><span class="pre">K</span></code> nor a zero or negative strategy threshold reintroduces
@@ -530,6 +540,45 @@ encoded-column indexes.</p>
 occurrence. The first stored <code class="docutils literal notranslate"><span class="pre">regressor_options/1</span></code> term contains the
 complete effective options reported by the learner; later occurrences
 are preserved. No solver defaults are copied into this implementation.</p>
+<p>The first stored <code class="docutils literal notranslate"><span class="pre">regularization_search/1</span></code> option retains the
+requested linear specification or explicit list; later occurrences are
+preserved.</p>
+</section>
+<section id="regularization-search">
+<h2>Regularization search<a class="headerlink" href="#regularization-search" title="Link to this heading"></a></h2>
+<p>The linear form generates <code class="docutils literal notranslate"><span class="pre">Count</span></code> floating-point penalties, including
+both float-converted endpoints. Interior candidates use
+<code class="docutils literal notranslate"><span class="pre">Minimum</span> <span class="pre">+</span> <span class="pre">(Maximum-Minimum)*Index/(Count-1)</span></code>. For example,
+<code class="docutils literal notranslate"><span class="pre">linear(0,</span> <span class="pre">1,</span> <span class="pre">3)</span></code> produces <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">0.5,</span> <span class="pre">1.0]</span></code>. Floating-point
+rounding can produce repeated values, which are accepted with the
+existing tie policy. Grid generation uses no data or randomness and
+obeys backend arithmetic limits. Users still choose the bounds and
+candidate count.</p>
+<p>Search requires at least two usable numeric-target rows; otherwise it
+raises <code class="docutils literal notranslate"><span class="pre">domain_error(lasso_search_examples,</span> <span class="pre">Count)</span></code>. Unknown targets
+are removed before splitting. For N usable rows, the last
+<code class="docutils literal notranslate"><span class="pre">min(N-1,</span> <span class="pre">max(1,</span> <span class="pre">ceiling(Fraction*N)))</span></code> rows form the validation
+suffix; the preceding rows form the training prefix. Row order is
+preserved, and example identifiers are not used as split keys. There is
+no randomization.</p>
+<p>Each candidate is fitted using only the training prefix. Its encoders
+and continuous scaling therefore exclude validation rows. Predictions on
+the validation suffix determine mean squared error; an intercept-only
+candidate uses its fitted bias. Exact MSE ties prefer stronger
+regularization, and numerically equal penalties retain the first grid
+occurrence. Integer penalties are converted to floats for the solver.</p>
+<p>The candidate penalty replaces the first nested <code class="docutils literal notranslate"><span class="pre">regularization/1</span></code>
+option, or is inserted when absent. Other solver settings and later
+repeated options are preserved and validated. Trial fitting and
+prediction errors propagate; no candidates are silently discarded. The
+winning penalty is refitted from scratch on all usable rows, so the
+retained encoders, coefficients, and scores describe the full-data fit,
+not a trial model.</p>
+<p>The transient <code class="docutils literal notranslate"><span class="pre">regression_examples_adapter(Declarations,</span> <span class="pre">Examples)</span></code>
+object provides materialized subsets in the existing adapter file. It
+receives the validated declarations and rows and creates no dynamic
+objects. Trial data, trial models, and subset handles are not retained
+in the selector.</p>
 </section>
 <section id="model-and-diagnostics">
 <h2>Model and diagnostics<a class="headerlink" href="#model-and-diagnostics" title="Link to this heading"></a></h2>
@@ -556,7 +605,8 @@ returns only selected original names.</p>
     encoded_feature_count(<span class="nv">EncodedCount</span>),
     aggregation(max_abs),
     maximum_absolute_coefficient(<span class="nv">Maximum</span>),
-    regressor_diagnostics(<span class="nv">RegressorDiagnostics</span>)
+    regressor_diagnostics(<span class="nv">RegressorDiagnostics</span>),
+    regularization_search_result(<span class="nv">SearchResult</span>)
 ]
 </pre></div>
 </div>
@@ -567,12 +617,29 @@ delta, encoded count, and effective solver options. The
 <code class="docutils literal notranslate"><span class="pre">selector_options/2</span></code> predicate returns the effective wrapper options.
 Exhausting the solver iteration limit does not discard the fitted
 regressor or conceal its stop status.</p>
+<p>The search result is <code class="docutils literal notranslate"><span class="pre">none</span></code> when search is disabled. When enabled, it
+has the following form, where counts refer to the usable-row split:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>holdout(<span class="nv">TrainingCount</span>, <span class="nv">ValidationCount</span>, <span class="nv">Trials</span>, <span class="nv">SelectedPenalty</span>)
+</pre></div>
+</div>
+<p>The trials follow grid order and contain these summaries:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>trial(<span class="nv">Penalty</span>, <span class="nv">ValidationMSE</span>, <span class="nv">Convergence</span>, <span class="nv">Iterations</span>, <span class="nv">FinalDelta</span>)
+</pre></div>
+</div>
+<p>Convergence and iteration exhaustion are reported for every trial as
+well as the final fit. Search does not imply that these fits converged
+or that the supplied finite grid contains the optimal continuous
+penalty.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">check_selector/1</span></code> predicate requires a ground model with the
 correct name, validates the nested regressor through its existing API,
 and checks encoder names, coefficient lengths, effective options, and
 metadata counts. It recomputes every group score and the selected set
-from the coefficients. A variable selector raises
-<code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code>; a partial or malformed selector raises
+from the coefficients. It also checks split counts, grid/trial alignment
+(reconstructing generated values), non-negative MSE values, convergence
+summaries, the winning penalty and tie policy, and agreement with the
+final solver options. Without training data it cannot recompute the
+recorded validation errors. A nonground selector raises
+<code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code>; a malformed ground selector raises
 <code class="docutils literal notranslate"><span class="pre">domain_error(selector,</span> <span class="pre">Selector)</span></code> without modifying it. The
 <code class="docutils literal notranslate"><span class="pre">valid_selector/1</span></code> predicate fails for invalid models without
 throwing.</p>
@@ -600,18 +667,20 @@ lasso_feature_selector<span class="o">::</span>diagnostics(<span class="nv">Sele
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
 <p>Selection is limited to numeric-target linear regression.
-Classification, automatic regularization search, and group-Lasso
-penalties are not provided.</p>
+Classification, automatic data-dependent penalty bounds,
+cross-validation, and group-Lasso penalties are not provided. Holdout
+search depends on row order, fraction, and the supplied finite grid; a
+single validation suffix can give a noisy estimate. Users must choose an
+ordering suitable for their task, especially for time-dependent data.</p>
 <p>Maximum absolute coefficient aggregation is a reporting heuristic, not a
 group penalty or causal importance measure. Scores depend on feature
 scaling and categorical reference levels. Correlated features can yield
 unstable selections; redundant features are not guaranteed to be
 removed. A selected feature may owe its importance to its missing-value
 indicator rather than its observed values.</p>
-<p>Regularization and coefficient cutoffs require task-specific validation.
-Models returned after the iteration limit may not have converged;
-inspect the retained convergence diagnostics before interpreting their
-selections.</p>
+<p>Coefficient cutoffs still require task-specific validation. Models
+returned after the iteration limit may not have converged; inspect the
+retained convergence diagnostics before interpreting their selections.</p>
 </section>
 </section>
 

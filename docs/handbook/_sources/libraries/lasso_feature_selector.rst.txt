@@ -92,6 +92,15 @@ The ``learn/3`` predicate accepts these wrapper options:
   and selects at most ``K`` active groups.
   ``selection_strategy(threshold(T))`` accepts a number and selects
   active groups whose scores are at least ``T``.
+- ``regularization_search(none)`` is the default. The option
+  ``regularization_search(holdout(Fraction, Values))`` searches a
+  nonempty proper list of non-negative numeric penalties using
+  validation MSE. The numeric fraction must be strictly between zero and
+  one. Alternatively,
+  ``regularization_search(holdout(Fraction, linear(Minimum, Maximum, Count)))``
+  generates an ascending linear grid. Bounds must be numeric, with a
+  non-negative minimum and a greater maximum; ``Count`` must be an
+  integer of at least two.
 
 Selection strategies operate only on active groups. Neither a large
 ``K`` nor a zero or negative strategy threshold reintroduces
@@ -104,6 +113,51 @@ Repeated wrapper and solver options are accepted. Lookup uses the first
 occurrence. The first stored ``regressor_options/1`` term contains the
 complete effective options reported by the learner; later occurrences
 are preserved. No solver defaults are copied into this implementation.
+
+The first stored ``regularization_search/1`` option retains the
+requested linear specification or explicit list; later occurrences are
+preserved.
+
+Regularization search
+---------------------
+
+The linear form generates ``Count`` floating-point penalties, including
+both float-converted endpoints. Interior candidates use
+``Minimum + (Maximum-Minimum)*Index/(Count-1)``. For example,
+``linear(0, 1, 3)`` produces ``[0.0, 0.5, 1.0]``. Floating-point
+rounding can produce repeated values, which are accepted with the
+existing tie policy. Grid generation uses no data or randomness and
+obeys backend arithmetic limits. Users still choose the bounds and
+candidate count.
+
+Search requires at least two usable numeric-target rows; otherwise it
+raises ``domain_error(lasso_search_examples, Count)``. Unknown targets
+are removed before splitting. For N usable rows, the last
+``min(N-1, max(1, ceiling(Fraction*N)))`` rows form the validation
+suffix; the preceding rows form the training prefix. Row order is
+preserved, and example identifiers are not used as split keys. There is
+no randomization.
+
+Each candidate is fitted using only the training prefix. Its encoders
+and continuous scaling therefore exclude validation rows. Predictions on
+the validation suffix determine mean squared error; an intercept-only
+candidate uses its fitted bias. Exact MSE ties prefer stronger
+regularization, and numerically equal penalties retain the first grid
+occurrence. Integer penalties are converted to floats for the solver.
+
+The candidate penalty replaces the first nested ``regularization/1``
+option, or is inserted when absent. Other solver settings and later
+repeated options are preserved and validated. Trial fitting and
+prediction errors propagate; no candidates are silently discarded. The
+winning penalty is refitted from scratch on all usable rows, so the
+retained encoders, coefficients, and scores describe the full-data fit,
+not a trial model.
+
+The transient ``regression_examples_adapter(Declarations, Examples)``
+object provides materialized subsets in the existing adapter file. It
+receives the validated declarations and rows and creates no dynamic
+objects. Trial data, trial models, and subset handles are not retained
+in the selector.
 
 Model and diagnostics
 ---------------------
@@ -137,7 +191,8 @@ The ``diagnostics/2`` predicate returns the following metadata list; the
        encoded_feature_count(EncodedCount),
        aggregation(max_abs),
        maximum_absolute_coefficient(Maximum),
-       regressor_diagnostics(RegressorDiagnostics)
+       regressor_diagnostics(RegressorDiagnostics),
+       regularization_search_result(SearchResult)
    ]
 
 The original count includes unknown-target rows. The usable and excluded
@@ -148,12 +203,34 @@ delta, encoded count, and effective solver options. The
 Exhausting the solver iteration limit does not discard the fitted
 regressor or conceal its stop status.
 
+The search result is ``none`` when search is disabled. When enabled, it
+has the following form, where counts refer to the usable-row split:
+
+::
+
+   holdout(TrainingCount, ValidationCount, Trials, SelectedPenalty)
+
+The trials follow grid order and contain these summaries:
+
+::
+
+   trial(Penalty, ValidationMSE, Convergence, Iterations, FinalDelta)
+
+Convergence and iteration exhaustion are reported for every trial as
+well as the final fit. Search does not imply that these fits converged
+or that the supplied finite grid contains the optimal continuous
+penalty.
+
 The ``check_selector/1`` predicate requires a ground model with the
 correct name, validates the nested regressor through its existing API,
 and checks encoder names, coefficient lengths, effective options, and
 metadata counts. It recomputes every group score and the selected set
-from the coefficients. A variable selector raises
-``instantiation_error``; a partial or malformed selector raises
+from the coefficients. It also checks split counts, grid/trial alignment
+(reconstructing generated values), non-negative MSE values, convergence
+summaries, the winning penalty and tie policy, and agreement with the
+final solver options. Without training data it cannot recompute the
+recorded validation errors. A nonground selector raises
+``instantiation_error``; a malformed ground selector raises
 ``domain_error(selector, Selector)`` without modifying it. The
 ``valid_selector/1`` predicate fails for invalid models without
 throwing.
@@ -185,8 +262,11 @@ Limitations
 -----------
 
 Selection is limited to numeric-target linear regression.
-Classification, automatic regularization search, and group-Lasso
-penalties are not provided.
+Classification, automatic data-dependent penalty bounds,
+cross-validation, and group-Lasso penalties are not provided. Holdout
+search depends on row order, fraction, and the supplied finite grid; a
+single validation suffix can give a noisy estimate. Users must choose an
+ordering suitable for their task, especially for time-dependent data.
 
 Maximum absolute coefficient aggregation is a reporting heuristic, not a
 group penalty or causal importance measure. Scores depend on feature
@@ -195,7 +275,6 @@ unstable selections; redundant features are not guaranteed to be
 removed. A selected feature may owe its importance to its missing-value
 indicator rather than its observed values.
 
-Regularization and coefficient cutoffs require task-specific validation.
-Models returned after the iteration limit may not have converged;
-inspect the retained convergence diagnostics before interpreting their
-selections.
+Coefficient cutoffs still require task-specific validation. Models
+returned after the iteration limit may not have converged; inspect the
+retained convergence diagnostics before interpreting their selections.

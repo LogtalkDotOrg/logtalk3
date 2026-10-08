@@ -60,6 +60,14 @@
 		relief_feature_selector::feature_scores(Second, SecondScores),
 		compare_scores(FirstScores, SecondScores).
 
+	test(relieff_feature_selector_wide_class_buckets, deterministic) :-
+		Dataset = relief_wide_dataset(multiclass, 12),
+		Options = [missing_values(probabilistic), number_of_neighbors(10), neighbor_weighting(rank(2))],
+		relief_test_reference::scores(Dataset, multiclass, Expected, Options),
+		relieff_feature_selector::learn(Dataset, Selector, Options),
+		relieff_feature_selector::feature_scores(Selector, Scores),
+		compare_scores(Scores, Expected).
+
 	test(relieff_feature_selector_missing_reference, deterministic) :-
 		missing(Dataset),
 		Options = [missing_values(probabilistic), number_of_neighbors(10)],

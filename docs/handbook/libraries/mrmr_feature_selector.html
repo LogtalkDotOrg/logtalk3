@@ -490,6 +490,8 @@ accepts:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">selection_strategy(top_k(K))</span></code>, default <code class="docutils literal notranslate"><span class="pre">top_k(10)</span></code>, with positive
 integer <code class="docutils literal notranslate"><span class="pre">K</span></code>. Exactly <code class="docutils literal notranslate"><span class="pre">min(K,</span> <span class="pre">CandidateCount)</span></code> features are
 selected.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">selection_strategy(positive_mid)</span></code> selects features while the best
+MID is strictly positive, choosing the feature count automatically.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">discretization(Specification)</span></code>, default <code class="docutils literal notranslate"><span class="pre">equal_frequency(10)</span></code>,
 for continuous features. Specifications are <code class="docutils literal notranslate"><span class="pre">categorical</span></code>,
 <code class="docutils literal notranslate"><span class="pre">equal_width(B)</span></code>, or <code class="docutils literal notranslate"><span class="pre">equal_frequency(B)</span></code>, with positive integer
@@ -517,6 +519,12 @@ feature maximizes
 remaining candidates. Exact numeric ties preserve feature declaration
 order at every step. Zero and negative MID values do not stop top-k
 selection. Constant features and constant targets have zero relevance.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">positive_mid</span></code> strategy stops before a zero or negative winning
+MID, including at the first step. It may select no features. This
+stopping rule is a heuristic, not a significance test or
+validation-based subset search. It stops immediately, even if selecting
+other features could later change the averaging denominator and make a
+rejected candidate’s MID positive.</p>
 <p>Relevance is computed once per candidate. Each remaining candidate
 retains a running redundancy sum. Only the pairs between the
 just-selected feature and the remaining candidates needed for another
@@ -524,7 +532,10 @@ step are evaluated. No full pairwise matrix is built and no unordered
 pair is recomputed. Selecting <code class="docutils literal notranslate"><span class="pre">s</span></code> out of <code class="docutils literal notranslate"><span class="pre">p</span></code> candidates performs
 <code class="docutils literal notranslate"><span class="pre">(s-1)*p</span> <span class="pre">-</span> <span class="pre">s*(s-1)/2</span></code> redundancy evaluations when <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">&gt;=</span> <span class="pre">1</span></code>, and zero
 when <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">0</span></code>. At full selection this is <code class="docutils literal notranslate"><span class="pre">p*(p-1)/2</span></code>; requesting one
-feature performs no pair evaluations.</p>
+feature performs no pair evaluations. These counts apply to top-k.
+Automatic stopping may need one additional update round to evaluate the
+rejected winner. With <code class="docutils literal notranslate"><span class="pre">r</span></code> recorded update rounds, the count is
+<code class="docutils literal notranslate"><span class="pre">r*p</span> <span class="pre">-</span> <span class="pre">r*(r+1)/2</span></code> for either strategy.</p>
 </section>
 <section id="models-and-diagnostics">
 <h2>Models and diagnostics<a class="headerlink" href="#models-and-diagnostics" title="Link to this heading"></a></h2>
@@ -543,8 +554,11 @@ and effective options.</p>
 <code class="docutils literal notranslate"><span class="pre">selected_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">selection_criterion(mid)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">scoring_metric(mutual_information)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">redundancy_metric(mutual_information)</span></code>, <code class="docutils literal notranslate"><span class="pre">redundancy_evaluations/1</span></code>,
-and <code class="docutils literal notranslate"><span class="pre">selection_trace/1</span></code>. The trace contains these terms in selected
-order:</p>
+and <code class="docutils literal notranslate"><span class="pre">selection_trace/1</span></code>, <code class="docutils literal notranslate"><span class="pre">redundancy_update_rounds/1</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">termination/1</span></code>. Termination is <code class="docutils literal notranslate"><span class="pre">budget_reached</span></code>,
+<code class="docutils literal notranslate"><span class="pre">candidates_exhausted</span></code>, or <code class="docutils literal notranslate"><span class="pre">non_positive_mid(Step)</span></code>; the latter
+records the rejected winner using the same step representation. The
+trace contains these terms in selected order:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>step(<span class="nv">Feature</span>, <span class="nv">Relevance</span>, <span class="nv">MeanRedundancy</span>, <span class="nv">MID</span>)
 </pre></div>
 </div>
@@ -558,13 +572,15 @@ joint usable count.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">check_selector/1</span></code> predicate checks ground structure, unique and
 sorted scores, candidate membership, selection and trace lengths/order,
 relevance identity, MID formulas, first-step selection, effective
-options, metrics, preparation provenance/counts, and the exact
-evaluation count. A variable model raises an instantiation error;
-malformed nonvariable models raise <code class="docutils literal notranslate"><span class="pre">domain_error(selector,</span> <span class="pre">Model)</span></code>.
-The <code class="docutils literal notranslate"><span class="pre">valid_selector/1</span></code> predicate fails without binding partial models.
-Validation checks internal consistency; without training columns it
-cannot reconstruct the pairwise information or prove later greedy
-winners. It does not impose a relevance-prefix rule.</p>
+options, metrics, preparation provenance/counts, termination, and the
+exact evaluation count. For automatic selection, all selected MID values
+must be positive and the recorded rejected MID must be nonpositive. A
+variable model raises an instantiation error; malformed nonvariable
+models raise <code class="docutils literal notranslate"><span class="pre">domain_error(selector,</span> <span class="pre">Model)</span></code>. The <code class="docutils literal notranslate"><span class="pre">valid_selector/1</span></code>
+predicate fails without binding partial models. Validation checks
+internal consistency; without training columns it cannot reconstruct the
+pairwise information or prove later greedy winners. It does not impose a
+relevance-prefix rule.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">print_selector/1</span></code> predicate prints the model and its template.
 The <code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code> and <code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code> predicates export
 the complete model, including the selection trace, in a single fact.</p>
@@ -575,9 +591,9 @@ the complete model, including the selection trace, in a single fact.</p>
 Joint complete-case filtering can discard many rows. Empirical MI
 depends on sample size and discretization and can miss interaction-only
 signals. Arithmetic and exact tie decisions remain subject to backend
-floating-point precision. There is no automatic feature-count selection,
-fitted-transform export, regression metric, or additional dependency
-beyond the shared feature-selection infrastructure.</p>
+floating-point precision. There is no validation-based feature-count
+selection, fitted-transform export, regression metric, or additional
+dependency beyond the shared feature-selection infrastructure.</p>
 </section>
 </section>
 

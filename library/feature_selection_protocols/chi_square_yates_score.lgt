@@ -19,33 +19,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(types(loader)),
-	logtalk_load(format(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(dictionaries(loader)),
-	logtalk_load(random(loader)),
-	logtalk_load([
-		feature_dataset_protocol,
-		feature_scoring_protocol,
-		feature_scoring_common,
-		feature_discretization,
-		feature_redundancy,
-		variance_score,
-		correlation_score,
-		anova_f_score,
-		fisher_score,
-		mutual_information_score,
-		chi_square_score,
-		chi_square_yates_score,
-		symmetrical_uncertainty_score,
-		cramers_v_score,
-		cramers_v_bias_corrected_score,
-		feature_selector_protocol,
-		feature_selector_common,
-		filter_feature_selector_common,
-		relief_feature_selector_common
-	], [
-		optimize(on)
-	])
-)).
+:- object(chi_square_yates_score,
+	imports(feature_scoring_common),
+	implements(feature_scoring_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-10-08,
+		comment is 'Scores categorical features using Yates-corrected chi-square for occupied two-by-two tables and Pearson chi-square otherwise.'
+	]).
+
+	score(Values, Targets, Score) :-
+		^^categorical_pairs(categorical, Values, Targets, Pairs),
+		^^contingency_counts(Pairs, Counts),
+		^^contingency_score(chi_square_yates, Counts, Score).
+
+:- end_object.

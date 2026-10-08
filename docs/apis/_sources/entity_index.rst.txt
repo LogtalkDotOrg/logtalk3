@@ -398,6 +398,7 @@ Objects
       chi_square_feature_selector <chi_square_feature_selector_0>
       chi_square_score <chi_square_score_0>
       chi_square_score(Discretization) <chi_square_score_1>
+      chi_square_yates_score <chi_square_yates_score_0>
       clauses_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <clauses_reordering_5>
       clo_span_pattern_miner <clo_span_pattern_miner_0>
       cmac <cmac_0>
@@ -416,6 +417,8 @@ Objects
       counter <counter_0>
       coupling_metric <coupling_metric_0>
       coverage_report <coverage_report_0>
+      cramers_v_bias_corrected_score <cramers_v_bias_corrected_score_0>
+      cramers_v_bias_corrected_score(Discretization) <cramers_v_bias_corrected_score_1>
       cramers_v_score <cramers_v_score_0>
       cramers_v_score(Discretization) <cramers_v_score_1>
       crc32_non_reflected(Polynomial,Initial,FinalXor,AppendLength) <crc32_non_reflected_4>
@@ -916,6 +919,7 @@ Objects
       registries <registries_0>
       registry_loader_hook <registry_loader_hook_0>
       regression_dataset_adapter(Dataset) <regression_dataset_adapter_1>
+      regression_examples_adapter(Declarations,Examples) <regression_examples_adapter_2>
       regression_tree <regression_tree_0>
       regularized_bradley_terry_ranker <regularized_bradley_terry_ranker_0>
       relational_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <relational_operator_replacement_5>
@@ -1285,6 +1289,7 @@ Objects
    * :doc:`chi_square_feature_selector <chi_square_feature_selector_0>`
    * :doc:`chi_square_score <chi_square_score_0>`
    * :doc:`chi_square_score(Discretization) <chi_square_score_1>`
+   * :doc:`chi_square_yates_score <chi_square_yates_score_0>`
    * :doc:`clauses_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <clauses_reordering_5>`
    * :doc:`clo_span_pattern_miner <clo_span_pattern_miner_0>`
    * :doc:`cmac <cmac_0>`
@@ -1303,6 +1308,8 @@ Objects
    * :doc:`counter <counter_0>`
    * :doc:`coupling_metric <coupling_metric_0>`
    * :doc:`coverage_report <coverage_report_0>`
+   * :doc:`cramers_v_bias_corrected_score <cramers_v_bias_corrected_score_0>`
+   * :doc:`cramers_v_bias_corrected_score(Discretization) <cramers_v_bias_corrected_score_1>`
    * :doc:`cramers_v_score <cramers_v_score_0>`
    * :doc:`cramers_v_score(Discretization) <cramers_v_score_1>`
    * :doc:`crc32_non_reflected(Polynomial,Initial,FinalXor,AppendLength) <crc32_non_reflected_4>`
@@ -1803,6 +1810,7 @@ Objects
    * :doc:`registries <registries_0>`
    * :doc:`registry_loader_hook <registry_loader_hook_0>`
    * :doc:`regression_dataset_adapter(Dataset) <regression_dataset_adapter_1>`
+   * :doc:`regression_examples_adapter(Declarations,Examples) <regression_examples_adapter_2>`
    * :doc:`regression_tree <regression_tree_0>`
    * :doc:`regularized_bradley_terry_ranker <regularized_bradley_terry_ranker_0>`
    * :doc:`relational_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <relational_operator_replacement_5>`

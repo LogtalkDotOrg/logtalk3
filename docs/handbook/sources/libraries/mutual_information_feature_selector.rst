@@ -72,6 +72,9 @@ accepts an options list as its last argument:
 
 - ``score_variant(raw)`` or ``score_variant(normalized)``, default
   ``raw``.
+- ``preparation_mode(per_feature)`` is the default. The ``joint`` mode
+  excludes rows missing the target or any candidate feature before
+  fitting bins, so all features use the same observations.
 - ``discretization(equal_frequency(Bins))`` or
   ``discretization(equal_width(Bins))``, with a positive integer bin
   count. The default is ``equal_frequency(10)``, applied only to
@@ -93,8 +96,8 @@ including later occurrences. Unknown override feature names are
 rejected. The ``default_option/1`` and ``valid_option/1`` predicates
 remain publicly queryable, including the inherited selection options.
 
-Preparation is per feature: observations with an unbound or absent
-feature value or an unbound target are excluded from that feature
+By default, preparation is per feature: observations with an unbound or
+absent feature value or an unbound target are excluded from that feature
 without imputing values. Binning is fitted to its complete cases only.
 Categorical features retain their declared categories unless explicitly
 overridden. Equal-width bins partition the observed range;
@@ -125,9 +128,11 @@ predicates expose metadata and effective options. Diagnostics contain
 ``selected_count/1``, ``scoring_metric/1``,
 ``complete_cases(FeatureCounts)``,
 ``discretization(FeatureSpecifications)``,
-``occupied_categories(FeatureCounts)``, and
-``preparation_mode(per_feature)``. Counts and specifications follow
-declaration order, not score order.
+``occupied_categories(FeatureCounts)``, and ``preparation_mode(Mode)``.
+Joint mode also records ``usable_example_count/1`` and
+``excluded_example_count/1``; every complete-case count equals the
+usable count. Counts and specifications follow declaration order, not
+score order.
 
 The ``check_selector/1`` predicate checks ground structure, unique
 sorted scores, selection consistency, metric identity determined by
@@ -144,8 +149,9 @@ Limitations
 Univariate scores do not detect interaction-only signals or remove
 redundant features. Raw information favors high-cardinality features;
 normalization does not eliminate sampling bias. Per-feature missingness
-can make samples incomparable. Discretization and sample size affect the
-scores. Binning boundaries are not stored as a transformation for future
-examples. No regression scoring, p-values, bias correction, or automatic
-feature-count selection is provided. Arithmetic uses backend
-floating-point precision.
+can make samples incomparable; joint mode aligns samples but can discard
+many rows and does not eliminate missing-data bias. Discretization and
+sample size affect the scores. Binning boundaries are not stored as a
+transformation for future examples. No regression scoring, p-values,
+bias correction, or automatic feature-count selection is provided.
+Arithmetic uses backend floating-point precision.

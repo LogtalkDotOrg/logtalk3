@@ -171,11 +171,13 @@ Limitations
 
 Let N be eligible rows, F candidates, C classes, M anchors, J classes
 with missing entries in a column, and S its largest empirical support.
-Indexed row preparation costs ``O(N F log(F))``; list-position column
-passes can cost ``O(N F^2)``. Without missing values, training costs
-``O(M N (F + log(N) + C))`` beyond preparation. Class-neighborhood
-extraction scans the sorted neighbor list separately per class. All-row
-mode uses M equal to N and is quadratic in N for fixed F and C.
+Indexed row preparation costs ``O(N F log(F))``; sequential column
+extraction and normalization cost ``O(N F)``. Without missing values,
+training costs ``O(M (N (F + log(N) + log(C+1)) + C K F))`` beyond
+preparation, where K is the requested neighbor count. Sorted neighbors
+are bucketed once per anchor in an AVL dictionary; each class retains
+the original distance and row-position order. All-row mode uses M equal
+to N and is quadratic in N for fixed F and C.
 
 Probabilistic preparation additionally scans class populations and sorts
 supports. A conservative bound beyond column passes is

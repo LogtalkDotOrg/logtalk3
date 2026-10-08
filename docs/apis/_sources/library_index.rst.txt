@@ -878,7 +878,10 @@ To load any library (including developer tools, ports, and contributions), use t
    anova_f_score <anova_f_score_0>
    chi_square_score <chi_square_score_0>
    chi_square_score(Discretization) <chi_square_score_1>
+   chi_square_yates_score <chi_square_yates_score_0>
    correlation_score <correlation_score_0>
+   cramers_v_bias_corrected_score <cramers_v_bias_corrected_score_0>
+   cramers_v_bias_corrected_score(Discretization) <cramers_v_bias_corrected_score_1>
    cramers_v_score <cramers_v_score_0>
    cramers_v_score(Discretization) <cramers_v_score_1>
    feature_dataset_protocol <feature_dataset_protocol_0>
@@ -2030,6 +2033,7 @@ To load any library (including developer tools, ports, and contributions), use t
 
    lasso_feature_selector <lasso_feature_selector_0>
    regression_dataset_adapter(Dataset) <regression_dataset_adapter_1>
+   regression_examples_adapter(Declarations,Examples) <regression_examples_adapter_2>
 
 :ref:`lasso_regression <library_lasso_regression>`
 --------------------------------------------------

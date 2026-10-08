@@ -120,13 +120,32 @@ Builds sparse observed cell counts and marginal dictionaries from complete categ
 
 ------------
 
+.. index:: contingency_min_expected_count/2
+.. _feature_scoring_common/0::contingency_min_expected_count/2:
+
+``contingency_min_expected_count/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the minimum expectation over occupied marginal categories, including unobserved cells. Empty tables return 0.0.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``contingency_min_expected_count(Counts,Minimum)``
+| **Mode and number of proofs:**
+|    ``contingency_min_expected_count(+compound,-float)`` - ``one``
+
+
+------------
+
 .. index:: contingency_score/3
 .. _feature_scoring_common/0::contingency_score/3:
 
 ``contingency_score/3``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Computes mutual information, Pearson chi-square, symmetrical uncertainty, or Cramer's V from sparse contingency counts. Degenerate tables score 0.0.
+Computes mutual information, raw or Yates-corrected chi-square, symmetrical uncertainty, or uncorrected or bias-corrected Cramer's V from sparse contingency counts. Degenerate tables score 0.0.
 
 | **Compilation flags:**
 |    ``static``

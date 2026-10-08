@@ -37,9 +37,10 @@ support.
 
 Scoring criteria are exposed as pluggable strategy objects implementing
 the `feature_scoring_protocol` protocol — `variance_score`,
-`correlation_score`, `anova_f_score`, `fisher_score`, `mutual_information_score`, and
-`chi_square_score`, plus `symmetrical_uncertainty_score` and
-`cramers_v_score`, are provided — built on shared arithmetic,
+`correlation_score`, `anova_f_score`, `fisher_score`, `mutual_information_score`,
+and `chi_square_score` and `chi_square_yates_score`, plus
+`symmetrical_uncertainty_score`, `cramers_v_score`, and
+`cramers_v_bias_corrected_score`, are provided. They use shared arithmetic,
 discretization, and sparse contingency helpers in
 the `feature_scoring_common` category, mirroring how
 `recommender_protocols` exposes `cosine_similarity` and
@@ -59,6 +60,8 @@ Concrete filters define the protected `filter_model/1` and
 preprocessing. The default scoring hook records supervised per-feature
 complete-case counts. The default selection option is `top_k(10)`;
 `all` and `threshold(Threshold)` strategies are also supported.
+The protected `filter_selection/3` and `filter_validate_diagnostics/2`
+hooks allow individual filters to extend selection and diagnostic validation.
 
 Production filter terms use `Model(FeatureScores, SelectedFeatures,
 Diagnostics)`, where `Model` is the receiving implementation name. Their
@@ -89,7 +92,11 @@ on a joint complete sample. It exposes static mutual information relevance
 scores separately from its greedy selection order and trace. The
 `lasso_feature_selector` library groups coefficients from the existing
 `lasso_regression` learner by original feature, including missing indicators,
-and retains its trained regressor and convergence diagnostics.
+and retains its trained regressor and convergence diagnostics. Fisher and
+mRMR offer optional automatic feature-count heuristics; mutual information
+and chi-square support joint preparation; chi-square also supports Yates
+correction, corrected Cramer's V, and expected-count rejection, while Lasso
+offers deterministic holdout regularization search.
 
 Unlike the time series and recommender protocol families, there is no
 `update/3-4`-style online update here: feature selection is a one-shot
@@ -124,7 +131,7 @@ To test this library, load its `tester.lgt` file:
 	| ?- logtalk_load(feature_selection_protocols(tester)).
 
 The test suite exercises dataset validation, every feature-matrix
-utility, all eight scoring criteria (including informative-vs-noise-vs-
+utility, all ten scoring criteria (including informative-vs-noise-vs-
 near-constant feature discrimination, and edge cases such as too few
 groups, perfect class separation, and a constant feature or target), the
 top-k and threshold selection strategies, and a minimal filter-based
@@ -200,7 +207,7 @@ other feature's score.
 Scoring criteria
 -----------------
 
-All eight scoring criteria return non-negative scores, with higher scores
+All ten scoring criteria return non-negative scores, with higher scores
 indicating greater feature relevance. The same selection strategies can
 operate on each criterion, but their numeric scales are not interchangeable:
 thresholds must be chosen for the selected criterion, and scores from
@@ -221,6 +228,11 @@ is observed. Categorical values and targets must be atomic. Numeric
 values are category labels by default, including numeric target class
 codes; their presence does not imply continuous features or regression.
 
+The `chi_square_yates_score` object corrects occupied two-by-two tables
+using `max(0, abs(Observed-Expected)-0.5)^2/Expected` for each cell. Larger
+tables use Pearson chi-square; degenerate tables score zero. Numeric inputs
+are categorical labels. The correction does not compute p-values.
+
 Both normalized categorical criteria return scores in `[0.0, 1.0]`.
 Independent empirical tables score zero, and perfect bijective category
 associations score one. A deterministic many-to-one association can score
@@ -231,15 +243,27 @@ and invariant to uniformly replicating observations. A zero entropy sum
 scores `0.0`; endpoint rounding drift is clamped to the documented range.
 
 
+The `cramers_v_bias_corrected_score` metric applies Bergsma's correction:
+`phi2 = max(0, ChiSquare/n - (r-1)*(c-1)/(n-1))`, with dimensions corrected
+to `r - (r-1)^2/(n-1)` and `c - (c-1)^2/(n-1)`. It returns the square root
+of the ratio of `phi2` to the smaller corrected dimension minus one, clamped to
+`[0.0, 1.0]`. Nonpositive corrected denominators score zero as an
+insufficient-sample convention. Unlike uncorrected V, this finite-sample
+correction is not invariant to replicating observations. It uses Pearson,
+not Yates, chi-square and does not provide p-values or general unbiasedness.
+The correction is described by Bergsma (2013), DOI `10.1016/j.jkss.2012.10.002`.
+
+
 Discretization
 --------------
 
 The parametric `mutual_information_score`, `chi_square_score`,
-`symmetrical_uncertainty_score`, and `cramers_v_score` metrics accept
-`categorical`, `equal_width(Count)`, or `equal_frequency(Count)` as their
-configuration. `Count` must be a positive integer. Their non-parametric
-counterparts use `categorical`.
-For example, these options explicitly discretize numeric features:
+`symmetrical_uncertainty_score`, `cramers_v_score`, and
+`cramers_v_bias_corrected_score` metrics accept `categorical`,
+`equal_width(Count)`, or `equal_frequency(Count)` as their configuration.
+`Count` must be a positive integer. Their non-parametric counterparts use
+`categorical`. For example, these options explicitly discretize numeric
+features:
 
   scoring_metric(mutual_information_score(equal_width(10)))
   scoring_metric(chi_square_score(equal_frequency(10)))

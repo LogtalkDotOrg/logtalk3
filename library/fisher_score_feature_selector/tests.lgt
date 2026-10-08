@@ -52,9 +52,47 @@
 		fisher_score_feature_selector::learn(feature_demo, Selector),
 		fisher_score_feature_selector::selected_features(Selector, Selected).
 
+	test(fisher_score_feature_selector_largest_gap, deterministic(Selected == [f1])) :-
+		fisher_score_feature_selector::learn(feature_demo, Selector, [selection_strategy(largest_gap)]),
+		fisher_score_feature_selector::check_selector(Selector),
+		fisher_score_feature_selector::selected_features(Selector, Selected).
+
+	test(fisher_score_feature_selector_largest_gap_ties, deterministic(Selected == [signal, copy])) :-
+		fisher_score_feature_selector::learn(fisher_multiclass_dataset, Selector, [selection_strategy(largest_gap)]),
+		fisher_score_feature_selector::selected_features(Selector, Selected).
+
 	test(fisher_score_feature_selector_threshold, deterministic(Selected == [f1])) :-
 		fisher_score_feature_selector::learn(feature_demo, Selector, [selection_strategy(threshold(10))]),
 		fisher_score_feature_selector::selected_features(Selector, Selected).
+
+	test(fisher_score_feature_selector_gap_empty, deterministic(Selected == [])) :-
+		fisher_selection_probe::select([], Selected).
+
+	test(fisher_score_feature_selector_gap_zero, deterministic(Selected == [])) :-
+		fisher_selection_probe::select([a-0, b-0.0], Selected).
+
+	test(fisher_score_feature_selector_gap_singleton, deterministic(Selected == [a])) :-
+		fisher_selection_probe::select([a-3], Selected).
+
+	test(fisher_score_feature_selector_gap_flat, deterministic(Selected == [a, b])) :-
+		fisher_selection_probe::select([a-3, b-3.0], Selected).
+
+	test(fisher_score_feature_selector_gap_interior, deterministic(Selected == [a, b])) :-
+		fisher_selection_probe::select([a-10, b-9, c-2, d-1], Selected).
+
+	test(fisher_score_feature_selector_gap_earliest, deterministic(Selected == [a])) :-
+		fisher_selection_probe::select([a-10, b-6, c-2], Selected).
+
+	test(fisher_score_feature_selector_gap_zero_boundary, deterministic(Selected == [a, b])) :-
+		fisher_selection_probe::select([a-10, b-9, c-0], Selected).
+
+	test(fisher_score_feature_selector_gap_caps, deterministic(Selected == [a, b])) :-
+		fisher_selection_probe::select([a-1.0e10, b-1.0e10, c-0], Selected).
+
+	test(fisher_score_feature_selector_gap_export, deterministic(Loaded == Selector)) :-
+		fisher_score_feature_selector::learn(feature_demo, Selector, [selection_strategy(largest_gap)]),
+		fisher_score_feature_selector::export_to_clauses(feature_demo, Selector, gap_model, [gap_model(Loaded)]),
+		fisher_score_feature_selector::check_selector(Loaded).
 
 	test(fisher_score_feature_selector_repeated_options, deterministic(Selected == [f1])) :-
 		fisher_score_feature_selector::learn(feature_demo, Selector, [selection_strategy(top_k(1)), selection_strategy(all)]),

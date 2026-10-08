@@ -67,6 +67,14 @@
 		memberchk(degeneracy(constant_target), Diagnostics),
 		rrelieff_feature_selector::check_selector(Selector).
 
+	test(rrelieff_feature_selector_wide_columns, deterministic) :-
+		Dataset = relief_wide_dataset(regression, 12),
+		Options = [missing_values(probabilistic), number_of_neighbors(10), neighbor_weighting(rank(2))],
+		relief_test_reference::scores(Dataset, regression, Expected, Options),
+		rrelieff_feature_selector::learn(Dataset, Selector, Options),
+		rrelieff_feature_selector::feature_scores(Selector, Scores),
+		compare_scores(Scores, Expected).
+
 	test(rrelieff_feature_selector_two_rows, deterministic(Score =~= 0.0)) :-
 		Dataset = relief_test_dataset([signal-continuous], [[signal-0]-0, [signal-1]-1]),
 		rrelieff_feature_selector::learn(Dataset, Selector),

@@ -41,6 +41,51 @@
 
 	filter_model(fisher_score_feature_selector).
 
+	default_option(selection_strategy(top_k(10))).
+
+	valid_option(selection_strategy(Strategy)) :-
+		(	(Strategy == all; Strategy == largest_gap) ->
+			true
+		;	Strategy = top_k(Count) ->
+			integer(Count),
+			Count > 0
+		;	Strategy = threshold(Threshold),
+			number(Threshold)
+		).
+
+	filter_selection(largest_gap, Scores, Selected) :-
+		!,
+		largest_gap_count(Scores, Count),
+		^^select_top_k(Scores, Count, Selected).
+	filter_selection(Strategy, Scores, Selected) :-
+		^^filter_selection(Strategy, Scores, Selected).
+
+	largest_gap_count([], 0).
+	largest_gap_count([_-Score| Scores], Count) :-
+		(	Score > 0 ->
+			gap_boundary(Scores, Score, 1, 0, 0, Count)
+		;	Count = 0
+		).
+
+	gap_boundary([], _Previous, Position, Gap, Boundary, Count) :-
+		(	Gap > 0 ->
+			Count = Boundary
+		;	Count = Position
+		).
+	gap_boundary([_-Score| Scores], Previous, Position, Gap0, Boundary0, Count) :-
+		Difference is Previous - Score,
+		(	Difference > Gap0 ->
+			Gap = Difference,
+			Boundary = Position
+		;	Gap = Gap0,
+			Boundary = Boundary0
+		),
+		(	Score > 0 ->
+			Next is Position + 1,
+			gap_boundary(Scores, Score, Next, Gap, Boundary, Count)
+		;	Count = Boundary
+		).
+
 	filter_scoring_metric(_Options, fisher_score).
 
 	filter_validate_dataset(Dataset, _Features, _Examples) :-

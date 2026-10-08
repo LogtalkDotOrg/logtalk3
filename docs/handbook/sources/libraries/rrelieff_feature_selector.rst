@@ -191,10 +191,10 @@ Limitations
 
 Let N be eligible rows, F candidates, M anchors, and S the largest
 empirical support. Indexed row preparation costs ``O(N F log(F))``;
-list-position column passes can cost ``O(N F^2)``. Complete-case
-neighbor search and scoring cost ``O(M N (F + log(N)))`` beyond
-preparation. All-row mode uses M equal to N and is quadratic in N for
-fixed F.
+sequential column extraction and normalization cost ``O(N F)``.
+Complete-case neighbor search and scoring cost ``O(M N (F + log(N)))``
+beyond preparation. All-row mode uses M equal to N and is quadratic in N
+for fixed F.
 
 Probabilistic support sorting and cached pooled expectations add
 ``O(F N log(N) + F S log(S))`` beyond column passes. Observed/missing

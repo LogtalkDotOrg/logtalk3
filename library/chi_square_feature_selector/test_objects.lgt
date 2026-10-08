@@ -37,18 +37,13 @@
 
 	example_count(Count) :-
 		parameter(1, Kind),
-		( Kind == missing ->
+		(	(Kind == missing; Kind == joint_extremes) ->
 			Count = 6
-		;
-			( Kind == weak ->
-				Count = 8
-			;
-				( Kind == multiclass ->
-					Count = 6
-				;
-					Count = 4
-				)
-			)
+		;	(Kind == weak; Kind == unused_categories) ->
+			Count = 8
+		;	Kind == multiclass ->
+			Count = 6
+		;	Count = 4
 		).
 
 	example(Id, Features, Target) :-
@@ -60,6 +55,7 @@
 	declaration(unbound_domain, _).
 	declaration(mixed, continuous).
 	declaration(missing, continuous).
+	declaration(joint_extremes, continuous).
 	declaration(all_missing, continuous).
 	declaration(bad_number, continuous).
 	declaration(bad_target, continuous).
@@ -67,6 +63,7 @@
 	declaration(unique, [0, 1, 9, 10]).
 	declaration(single_class, continuous).
 	declaration(weak, [0, 1]).
+	declaration(unused_categories, [0, 1, 2, 3]).
 	declaration(multiclass, [0, 1, 2]).
 
 	row(mixed, 1, [signal-0, copy-a, constant-a], x).
@@ -79,6 +76,10 @@
 	row(missing, 4, [signal-10, constant-a], y).
 	row(missing, 5, [signal-_, copy-a, constant-a], x).
 	row(missing, 6, [signal-100, copy-b, constant-a], _).
+	row(joint_extremes, Id, Features, Target) :-
+		row(mixed, Id, Features, Target).
+	row(joint_extremes, 5, [signal-100, copy-_, constant-a], x).
+	row(joint_extremes, 6, [signal-_, copy-b, constant-a], y).
 	row(all_missing, 1, [signal-_, copy-_, constant-_], x).
 	row(all_missing, 2, [], x).
 	row(all_missing, 3, [signal-_, copy-_, constant-_], y).
@@ -111,6 +112,8 @@
 	row(multiclass, 6, [signal-2, copy-b, constant-a], z).
 	row(unique, Id, Features, Target) :-
 		row(mixed, Id, Features, Target).
+	row(unused_categories, Id, Features, Target) :-
+		row(weak, Id, Features, Target).
 	row(single_class, Id, Features, x) :-
 		row(mixed, Id, Features, _).
 	row(empty_domain, Id, Features, Target) :-

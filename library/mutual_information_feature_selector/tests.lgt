@@ -50,6 +50,36 @@
 		assertion(Noise =~= 0.0),
 		assertion(Constant =~= 0.0).
 
+	test(mutual_information_feature_selector_joint_missing, deterministic) :-
+		mutual_information_feature_selector::learn(mutual_information_dataset(missing), Selector, [preparation_mode(joint)]),
+		mutual_information_feature_selector::check_selector(Selector),
+		mutual_information_feature_selector::feature_scores(Selector, [signal-Signal, copy-Copy, constant-Constant]),
+		assertion(Signal =~= 1.0),
+		assertion(Copy =~= 1.0),
+		assertion(Constant =~= 0.0),
+		mutual_information_feature_selector::diagnostics(Selector, Diagnostics),
+		memberchk(complete_cases([signal-2, copy-2, constant-2]), Diagnostics),
+		memberchk(usable_example_count(2), Diagnostics),
+		memberchk(excluded_example_count(4), Diagnostics).
+
+	test(mutual_information_feature_selector_joint_empty, deterministic) :-
+		mutual_information_feature_selector::learn(mutual_information_dataset(all_missing), Selector, [preparation_mode(joint), score_variant(normalized)]),
+		mutual_information_feature_selector::check_selector(Selector),
+		mutual_information_feature_selector::feature_scores(Selector, [signal-Signal, copy-Copy, constant-Constant]),
+		assertion(Signal =~= 0.0),
+		assertion(Copy =~= 0.0),
+		assertion(Constant =~= 0.0).
+
+	test(mutual_information_feature_selector_joint_bad_counts, deterministic) :-
+		mutual_information_feature_selector::learn(mutual_information_dataset(missing), mutual_information_feature_selector(Scores, Selected, Diagnostics), [preparation_mode(joint)]),
+		once(list::select(usable_example_count(2), Diagnostics, Rest)),
+		assertion(\+ mutual_information_feature_selector::valid_selector(mutual_information_feature_selector(Scores, Selected, [usable_example_count(3)| Rest]))).
+
+	test(mutual_information_feature_selector_joint_export, deterministic(Loaded == Selector)) :-
+		mutual_information_feature_selector::learn(mutual_information_dataset(missing), Selector, [preparation_mode(joint)]),
+		mutual_information_feature_selector::export_to_clauses(mutual_information_dataset(missing), Selector, joint_model, [joint_model(Loaded)]),
+		mutual_information_feature_selector::check_selector(Loaded).
+
 	test(mutual_information_feature_selector_normalized_reference, deterministic(Score =~= 1.0)) :-
 		mutual_information_feature_selector::learn(feature_selection_categorical_dataset, Selector, [score_variant(normalized)]),
 		mutual_information_feature_selector::check_selector(Selector),
@@ -105,7 +135,7 @@
 		mutual_information_feature_selector::selected_features(Selector, Selected).
 
 	test(mutual_information_feature_selector_repeated_options, deterministic) :-
-		Options = [score_variant(normalized), score_variant(raw), discretization(equal_width(2)), discretization(equal_frequency(1)), selection_strategy(top_k(1)), selection_strategy(all)],
+		Options = [score_variant(normalized), score_variant(raw), discretization(equal_width(2)), discretization(equal_frequency(1)), selection_strategy(top_k(1)), selection_strategy(all), preparation_mode(per_feature)],
 		mutual_information_feature_selector::learn(mutual_information_dataset(mixed), Selector, Options),
 		mutual_information_feature_selector::selected_features(Selector, [signal]),
 		mutual_information_feature_selector::selector_options(Selector, Options),

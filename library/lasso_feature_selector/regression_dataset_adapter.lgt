@@ -94,3 +94,34 @@
 		distinct_values(Values).
 
 :- end_object.
+
+
+:- object(regression_examples_adapter(_Declarations_, _Examples_),
+	implements(regression_dataset_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-10-08,
+		comment is 'Transient materialized regression subset with validated declarations and numeric targets.',
+		parameters is [
+			'Declarations' - 'Validated feature declarations.',
+			'Examples' - 'Validated feature dataset examples.'
+		]
+	]).
+
+	:- uses(list, [
+		member/2
+	]).
+
+	attribute_values(Feature, Domain) :-
+		parameter(1, Declarations),
+		member(Feature-Domain, Declarations).
+
+	target(target).
+
+	example(Id, Target, Pairs) :-
+		parameter(2, Examples),
+		member(example(Id, Pairs, Target), Examples).
+
+:- end_object.

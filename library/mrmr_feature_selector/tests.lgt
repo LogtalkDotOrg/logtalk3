@@ -43,6 +43,92 @@
 	cleanup :-
 		^^clean_file('test_mrmr_output.pl').
 
+	test(mrmr_feature_selector_positive_mid, deterministic(Selected == [signal, distinct, copy])) :-
+		mrmr_feature_selector::learn(mrmr_toy, Selector, [selection_strategy(positive_mid)]),
+		mrmr_feature_selector::check_selector(Selector),
+		mrmr_feature_selector::selected_features(Selector, Selected),
+		mrmr_feature_selector::diagnostics(Selector, Diagnostics),
+		memberchk(redundancy_update_rounds(3), Diagnostics),
+		memberchk(redundancy_evaluations(6), Diagnostics),
+		memberchk(termination(non_positive_mid(step(constant, _, _, MID))), Diagnostics),
+		assertion(MID =~= 0.0).
+
+	test(mrmr_feature_selector_positive_mid_zero_first, deterministic(Selected == [])) :-
+		Dataset = mrmr_rows([constant-[0]], [example(1, [constant-0], a), example(2, [constant-0], b)]),
+		mrmr_feature_selector::learn(Dataset, Selector, [selection_strategy(positive_mid)]),
+		mrmr_feature_selector::check_selector(Selector),
+		mrmr_feature_selector::selected_features(Selector, Selected),
+		mrmr_feature_selector::diagnostics(Selector, Diagnostics),
+		memberchk(redundancy_evaluations(0), Diagnostics),
+		memberchk(redundancy_update_rounds(0), Diagnostics),
+		memberchk(termination(non_positive_mid(step(constant, _, _, _))), Diagnostics).
+
+	test(mrmr_feature_selector_positive_mid_zero_later, deterministic(Selected == [signal])) :-
+		mrmr_feature_selector::learn(mrmr_negative, Selector, [selection_strategy(positive_mid)]),
+		mrmr_feature_selector::check_selector(Selector),
+		mrmr_feature_selector::selected_features(Selector, Selected),
+		mrmr_feature_selector::diagnostics(Selector, Diagnostics),
+		memberchk(redundancy_evaluations(2), Diagnostics),
+		memberchk(termination(non_positive_mid(step(noise, _, _, _))), Diagnostics).
+
+	test(mrmr_feature_selector_positive_mid_negative, deterministic) :-
+		Dataset = mrmr_rows([strong-[0, 1], weak-[0, 1]], [
+			example(1, [strong-0, weak-0], 0),
+			example(2, [strong-0, weak-0], 0),
+			example(3, [strong-0, weak-1], 0),
+			example(4, [strong-1, weak-1], 1),
+			example(5, [strong-1, weak-1], 1),
+			example(6, [strong-0, weak-0], 1)
+		]),
+		mrmr_feature_selector::learn(Dataset, Selector, [selection_strategy(positive_mid)]),
+		mrmr_feature_selector::check_selector(Selector),
+		mrmr_feature_selector::selected_features(Selector, [strong]),
+		mrmr_feature_selector::diagnostics(Selector, Diagnostics),
+		memberchk(termination(non_positive_mid(step(weak, _, _, MID))), Diagnostics),
+		assertion(MID < 0).
+
+	test(mrmr_feature_selector_positive_mid_exhausted, deterministic) :-
+		Dataset = mrmr_rows([signal-[0, 1]], [example(1, [signal-0], a), example(2, [signal-1], b)]),
+		mrmr_feature_selector::learn(Dataset, Selector, [selection_strategy(positive_mid)]),
+		mrmr_feature_selector::check_selector(Selector),
+		mrmr_feature_selector::selected_features(Selector, [signal]),
+		mrmr_feature_selector::diagnostics(Selector, Diagnostics),
+		memberchk(termination(candidates_exhausted), Diagnostics),
+		memberchk(redundancy_update_rounds(0), Diagnostics).
+
+	test(mrmr_feature_selector_positive_mid_empty, deterministic) :-
+		Dataset = mrmr_rows([], [example(1, [], a), example(2, [], b)]),
+		mrmr_feature_selector::learn(Dataset, Selector, [selection_strategy(positive_mid)]),
+		mrmr_feature_selector::check_selector(Selector),
+		mrmr_feature_selector::selected_features(Selector, []).
+
+	test(mrmr_feature_selector_positive_mid_bad_rounds, deterministic) :-
+		mrmr_feature_selector::learn(mrmr_toy, mrmr_feature_selector(Scores, Selected, Diagnostics), [selection_strategy(positive_mid)]),
+		once(list::select(redundancy_update_rounds(_), Diagnostics, Rest)),
+		Bad = mrmr_feature_selector(Scores, Selected, [redundancy_update_rounds(2)| Rest]),
+		assertion(\+ mrmr_feature_selector::valid_selector(Bad)).
+
+	test(mrmr_feature_selector_positive_mid_bad_stop, deterministic) :-
+		mrmr_feature_selector::learn(mrmr_toy, mrmr_feature_selector(Scores, Selected, Diagnostics), [selection_strategy(positive_mid)]),
+		once(list::select(termination(_), Diagnostics, Rest)),
+		Bad = mrmr_feature_selector(Scores, Selected, [termination(candidates_exhausted)| Rest]),
+		assertion(\+ mrmr_feature_selector::valid_selector(Bad)).
+
+	test(mrmr_feature_selector_positive_mid_repeated, deterministic) :-
+		mrmr_feature_selector::learn(mrmr_toy, First, [selection_strategy(positive_mid), selection_strategy(top_k(1))]),
+		mrmr_feature_selector::learn(mrmr_toy, Second, [selection_strategy(positive_mid)]),
+		mrmr_feature_selector::selected_features(First, [signal, distinct, copy]),
+		mrmr_feature_selector::selected_features(Second, [signal, distinct, copy]),
+		First = mrmr_feature_selector(Scores, Selected, _),
+		Second = mrmr_feature_selector(Scores, Selected, _).
+
+	test(mrmr_feature_selector_positive_mid_export, deterministic) :-
+		mrmr_feature_selector::learn(mrmr_toy, Selector, [selection_strategy(positive_mid)]),
+		mrmr_feature_selector::export_to_clauses(mrmr_toy, Selector, automatic, [Clause]),
+		Clause = automatic(Exported),
+		assertion(Exported == Selector),
+		mrmr_feature_selector::check_selector(Exported).
+
 	test(mrmr_feature_selector_duplicate_signal, deterministic(Selected == [signal, distinct])) :-
 		mrmr_feature_selector::learn(mrmr_toy, Selector, [selection_strategy(top_k(2))]),
 		mrmr_feature_selector::check_selector(Selector),

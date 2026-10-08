@@ -40,6 +40,8 @@
 			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
 			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
 			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
+			'A chi-square expectation is below the requested minimum' - domain_error(chi_square_expected_count, 'Feature-expected(ObservedMinimum,RequiredMinimum)'),
+			'A generated regularization bound exceeds backend floating-point limits' - evaluation_error(float_overflow),
 			'A feature declaration is unsupported by the receiving selector' - domain_error(feature_type, 'Feature-Declaration'),
 			'A complete feature value required to be numeric is not numeric' - type_error(number, 'Value'),
 			'A complete categorical target is not atomic' - type_error(atomic, 'Target'),

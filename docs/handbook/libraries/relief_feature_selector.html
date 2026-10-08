@@ -596,11 +596,11 @@ shared pretty-printing helper.</p>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
 <p>Let N be eligible rows, F candidates, and M anchors (N in all-row mode).
-Indexed row preparation costs <code class="docutils literal notranslate"><span class="pre">O(N</span> <span class="pre">F</span> <span class="pre">log(F))</span></code>; the column-oriented
-passes also use list-position access and can cost <code class="docutils literal notranslate"><span class="pre">O(N</span> <span class="pre">F^2)</span></code>.
-Complete-case neighbor search and scoring cost <code class="docutils literal notranslate"><span class="pre">O(M</span> <span class="pre">N</span> <span class="pre">(F</span> <span class="pre">+</span> <span class="pre">log(N)))</span></code>,
-retaining <code class="docutils literal notranslate"><span class="pre">O(N</span> <span class="pre">F</span> <span class="pre">+</span> <span class="pre">M)</span></code> data. There is no retained all-pairs distance
-matrix.</p>
+Indexed row preparation costs <code class="docutils literal notranslate"><span class="pre">O(N</span> <span class="pre">F</span> <span class="pre">log(F))</span></code>; sequential column
+extraction and normalization cost <code class="docutils literal notranslate"><span class="pre">O(N</span> <span class="pre">F)</span></code> without repeated positional
+scans. Complete-case neighbor search and scoring cost
+<code class="docutils literal notranslate"><span class="pre">O(M</span> <span class="pre">N</span> <span class="pre">(F</span> <span class="pre">+</span> <span class="pre">log(N)))</span></code>, retaining <code class="docutils literal notranslate"><span class="pre">O(N</span> <span class="pre">F</span> <span class="pre">+</span> <span class="pre">M)</span></code> data. There is no
+retained all-pairs distance matrix.</p>
 <p>With probabilistic missing handling, an observed/missing query costs
 <code class="docutils literal notranslate"><span class="pre">O(log(S))</span></code> for support size S, in addition to indexed distribution
 lookup. Support construction includes sorting and missing/missing

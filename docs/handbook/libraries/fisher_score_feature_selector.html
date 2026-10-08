@@ -513,7 +513,14 @@ accepts the following strategies:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">selection_strategy(threshold(T))</span></code>: selects every feature scoring at
 least the numeric threshold <code class="docutils literal notranslate"><span class="pre">T</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">selection_strategy(all)</span></code>: selects every candidate feature.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">selection_strategy(largest_gap)</span></code>: chooses the prefix before the
+largest adjacent score drop, with the earliest boundary winning ties.
+Zero scores are excluded. Empty or all-zero scores select nothing;
+flat positive scores select all positive features. No artificial
+trailing zero is added.</p></li>
 </ul>
+<p>The largest-gap strategy is a data-dependent heuristic, not a
+significance test or a guarantee of an optimal predictive subset.</p>
 <p>Repeated options are accepted and the first occurrence takes precedence.
 Scores are sorted numerically in decreasing order; ties preserve feature
 declaration order. Top-k selection can include zero-scoring features
@@ -550,9 +557,8 @@ complete selector term.</p>
 interaction-only signals or remove redundant features. Scores depend on
 the complete-case samples and are capped rather than representing
 infinity. Arithmetic remains subject to backend floating-point precision
-and range. No automatic choice of feature count or threshold,
-regression-target scoring, or fitted preprocessing transform is
-provided.</p>
+and range. No automatic threshold tuning, regression-target scoring, or
+fitted preprocessing transform is provided.</p>
 </section>
 </section>
 

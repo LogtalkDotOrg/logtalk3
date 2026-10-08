@@ -47,7 +47,8 @@
 		).
 
 	filter_feature_scores(Dataset, Features, Examples, Options, Scores, [scoring_metric(Metric)| Diagnostics]) :-
-		^^prepare_feature_columns(Dataset, Features, Examples, Options, per_feature, Columns, Diagnostics),
+		^^option(preparation_mode(Mode), Options),
+		^^prepare_feature_columns(Dataset, Features, Examples, Options, Mode, Columns, Diagnostics),
 		filter_scoring_metric(Options, Metric),
 		(	Metric == mutual_information_score ->
 			Criterion = mutual_information
@@ -58,12 +59,15 @@
 		^^sort_by_decreasing_score(Unsorted, Scores).
 
 	default_option(score_variant(raw)).
+	default_option(preparation_mode(per_feature)).
 	default_option(discretization(equal_frequency(10))).
 	default_option(Option) :-
 		^^default_option(Option).
 
 	valid_option(score_variant(Variant)) :-
 		once((Variant == raw; Variant == normalized)).
+	valid_option(preparation_mode(Mode)) :-
+		once((Mode == per_feature; Mode == joint)).
 	valid_option(discretization(Specification)) :-
 		^^valid_feature_discretization(Specification).
 	valid_option(feature_discretization(Feature, Specification)) :-
@@ -71,6 +75,10 @@
 		^^valid_feature_discretization(Specification).
 	valid_option(Option) :-
 		^^valid_option(Option).
+
+	filter_validate_diagnostics(Options, Diagnostics) :-
+		^^option(preparation_mode(Mode), Options),
+		^^filter_valid_preparation_diagnostics(Mode, Diagnostics).
 
 	score_columns([], _Criterion, []).
 	score_columns([column(Feature, _Specification, Pairs, _CategoryCount)| Columns], Criterion, [Feature-Score| Scores]) :-

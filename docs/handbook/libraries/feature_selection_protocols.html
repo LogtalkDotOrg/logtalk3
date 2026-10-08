@@ -460,12 +460,13 @@ support.</p>
 <p>Scoring criteria are exposed as pluggable strategy objects implementing
 the <code class="docutils literal notranslate"><span class="pre">feature_scoring_protocol</span></code> protocol — <code class="docutils literal notranslate"><span class="pre">variance_score</span></code>,
 <code class="docutils literal notranslate"><span class="pre">correlation_score</span></code>, <code class="docutils literal notranslate"><span class="pre">anova_f_score</span></code>, <code class="docutils literal notranslate"><span class="pre">fisher_score</span></code>,
-<code class="docutils literal notranslate"><span class="pre">mutual_information_score</span></code>, and <code class="docutils literal notranslate"><span class="pre">chi_square_score</span></code>, plus
-<code class="docutils literal notranslate"><span class="pre">symmetrical_uncertainty_score</span></code> and <code class="docutils literal notranslate"><span class="pre">cramers_v_score</span></code>, are provided
-— built on shared arithmetic, discretization, and sparse contingency
-helpers in the <code class="docutils literal notranslate"><span class="pre">feature_scoring_common</span></code> category, mirroring how
-<code class="docutils literal notranslate"><span class="pre">recommender_protocols</span></code> exposes <code class="docutils literal notranslate"><span class="pre">cosine_similarity</span></code> and
-<code class="docutils literal notranslate"><span class="pre">pearson_similarity</span></code> via <code class="docutils literal notranslate"><span class="pre">similarity_metric_protocol</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">mutual_information_score</span></code>, and <code class="docutils literal notranslate"><span class="pre">chi_square_score</span></code> and
+<code class="docutils literal notranslate"><span class="pre">chi_square_yates_score</span></code>, plus <code class="docutils literal notranslate"><span class="pre">symmetrical_uncertainty_score</span></code>,
+<code class="docutils literal notranslate"><span class="pre">cramers_v_score</span></code>, and <code class="docutils literal notranslate"><span class="pre">cramers_v_bias_corrected_score</span></code>, are
+provided. They use shared arithmetic, discretization, and sparse
+contingency helpers in the <code class="docutils literal notranslate"><span class="pre">feature_scoring_common</span></code> category,
+mirroring how <code class="docutils literal notranslate"><span class="pre">recommender_protocols</span></code> exposes <code class="docutils literal notranslate"><span class="pre">cosine_similarity</span></code>
+and <code class="docutils literal notranslate"><span class="pre">pearson_similarity</span></code> via <code class="docutils literal notranslate"><span class="pre">similarity_metric_protocol</span></code>.</p>
 <p>Learned selectors expose diagnostics using the shared <code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code>,
 <code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">selector_options/2</span></code> predicates. Concrete
 selector implementations store effective training options in the
@@ -479,7 +480,9 @@ validation, and export. Concrete filters define the protected
 allow algorithm-specific validation and preprocessing. The default
 scoring hook records supervised per-feature complete-case counts. The
 default selection option is <code class="docutils literal notranslate"><span class="pre">top_k(10)</span></code>; <code class="docutils literal notranslate"><span class="pre">all</span></code> and
-<code class="docutils literal notranslate"><span class="pre">threshold(Threshold)</span></code> strategies are also supported.</p>
+<code class="docutils literal notranslate"><span class="pre">threshold(Threshold)</span></code> strategies are also supported. The protected
+<code class="docutils literal notranslate"><span class="pre">filter_selection/3</span></code> and <code class="docutils literal notranslate"><span class="pre">filter_validate_diagnostics/2</span></code> hooks allow
+individual filters to extend selection and diagnostic validation.</p>
 <p>Production filter terms use
 <code class="docutils literal notranslate"><span class="pre">Model(FeatureScores,</span> <span class="pre">SelectedFeatures,</span> <span class="pre">Diagnostics)</span></code>, where <code class="docutils literal notranslate"><span class="pre">Model</span></code>
 is the receiving implementation name. Their validation checks score and
@@ -510,7 +513,11 @@ information relevance scores separately from its greedy selection order
 and trace. The <code class="docutils literal notranslate"><span class="pre">lasso_feature_selector</span></code> library groups coefficients
 from the existing <code class="docutils literal notranslate"><span class="pre">lasso_regression</span></code> learner by original feature,
 including missing indicators, and retains its trained regressor and
-convergence diagnostics.</p>
+convergence diagnostics. Fisher and mRMR offer optional automatic
+feature-count heuristics; mutual information and chi-square support
+joint preparation; chi-square also supports Yates correction, corrected
+Cramer’s V, and expected-count rejection, while Lasso offers
+deterministic holdout regularization search.</p>
 <p>Unlike the time series and recommender protocol families, there is no
 <code class="docutils literal notranslate"><span class="pre">update/3-4</span></code>-style online update here: feature selection is a one-shot
 computation over a fixed dataset, not a model that is incrementally
@@ -538,7 +545,7 @@ link in a web browser.</p>
 </pre></div>
 </div>
 <p>The test suite exercises dataset validation, every feature-matrix
-utility, all eight scoring criteria (including informative-vs-noise-vs-
+utility, all ten scoring criteria (including informative-vs-noise-vs-
 near-constant feature discrimination, and edge cases such as too few
 groups, perfect class separation, and a constant feature or target), the
 top-k and threshold selection strategies, and a minimal filter-based
@@ -617,12 +624,11 @@ other feature’s score.</p>
 </section>
 <section id="scoring-criteria">
 <h2>Scoring criteria<a class="headerlink" href="#scoring-criteria" title="Link to this heading"></a></h2>
-<p>All eight scoring criteria return non-negative scores, with higher
-scores indicating greater feature relevance. The same selection
-strategies can operate on each criterion, but their numeric scales are
-not interchangeable: thresholds must be chosen for the selected
-criterion, and scores from different criteria should not be compared
-directly.</p>
+<p>All ten scoring criteria return non-negative scores, with higher scores
+indicating greater feature relevance. The same selection strategies can
+operate on each criterion, but their numeric scales are not
+interchangeable: thresholds must be chosen for the selected criterion,
+and scores from different criteria should not be compared directly.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">variance_score</span></code>: unsupervised; the population variance of the
 feature’s known values. A near-constant feature scores low regardless
@@ -674,6 +680,11 @@ observations remain, or when only one feature category or target class
 is observed. Categorical values and targets must be atomic. Numeric
 values are category labels by default, including numeric target class
 codes; their presence does not imply continuous features or regression.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">chi_square_yates_score</span></code> object corrects occupied two-by-two
+tables using <code class="docutils literal notranslate"><span class="pre">max(0,</span> <span class="pre">abs(Observed-Expected)-0.5)^2/Expected</span></code> for each
+cell. Larger tables use Pearson chi-square; degenerate tables score
+zero. Numeric inputs are categorical labels. The correction does not
+compute p-values.</p>
 <p>Both normalized categorical criteria return scores in <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">1.0]</span></code>.
 Independent empirical tables score zero, and perfect bijective category
 associations score one. A deterministic many-to-one association can
@@ -683,15 +694,26 @@ or interchangeable thresholds. Both criteria are symmetric under
 swapping categorical inputs and invariant to uniformly replicating
 observations. A zero entropy sum scores <code class="docutils literal notranslate"><span class="pre">0.0</span></code>; endpoint rounding drift
 is clamped to the documented range.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">cramers_v_bias_corrected_score</span></code> metric applies Bergsma’s
+correction: <code class="docutils literal notranslate"><span class="pre">phi2</span> <span class="pre">=</span> <span class="pre">max(0,</span> <span class="pre">ChiSquare/n</span> <span class="pre">-</span> <span class="pre">(r-1)*(c-1)/(n-1))</span></code>, with
+dimensions corrected to <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">-</span> <span class="pre">(r-1)^2/(n-1)</span></code> and <code class="docutils literal notranslate"><span class="pre">c</span> <span class="pre">-</span> <span class="pre">(c-1)^2/(n-1)</span></code>.
+It returns the square root of the ratio of <code class="docutils literal notranslate"><span class="pre">phi2</span></code> to the smaller
+corrected dimension minus one, clamped to <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">1.0]</span></code>. Nonpositive
+corrected denominators score zero as an insufficient-sample convention.
+Unlike uncorrected V, this finite-sample correction is not invariant to
+replicating observations. It uses Pearson, not Yates, chi-square and
+does not provide p-values or general unbiasedness. The correction is
+described by Bergsma (2013), DOI <code class="docutils literal notranslate"><span class="pre">10.1016/j.jkss.2012.10.002</span></code>.</p>
 </section>
 <section id="discretization">
 <h2>Discretization<a class="headerlink" href="#discretization" title="Link to this heading"></a></h2>
 <p>The parametric <code class="docutils literal notranslate"><span class="pre">mutual_information_score</span></code>, <code class="docutils literal notranslate"><span class="pre">chi_square_score</span></code>,
-<code class="docutils literal notranslate"><span class="pre">symmetrical_uncertainty_score</span></code>, and <code class="docutils literal notranslate"><span class="pre">cramers_v_score</span></code> metrics
-accept <code class="docutils literal notranslate"><span class="pre">categorical</span></code>, <code class="docutils literal notranslate"><span class="pre">equal_width(Count)</span></code>, or
-<code class="docutils literal notranslate"><span class="pre">equal_frequency(Count)</span></code> as their configuration. <code class="docutils literal notranslate"><span class="pre">Count</span></code> must be a
-positive integer. Their non-parametric counterparts use <code class="docutils literal notranslate"><span class="pre">categorical</span></code>.
-For example, these options explicitly discretize numeric features:</p>
+<code class="docutils literal notranslate"><span class="pre">symmetrical_uncertainty_score</span></code>, <code class="docutils literal notranslate"><span class="pre">cramers_v_score</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">cramers_v_bias_corrected_score</span></code> metrics accept <code class="docutils literal notranslate"><span class="pre">categorical</span></code>,
+<code class="docutils literal notranslate"><span class="pre">equal_width(Count)</span></code>, or <code class="docutils literal notranslate"><span class="pre">equal_frequency(Count)</span></code> as their
+configuration. <code class="docutils literal notranslate"><span class="pre">Count</span></code> must be a positive integer. Their
+non-parametric counterparts use <code class="docutils literal notranslate"><span class="pre">categorical</span></code>. For example, these
+options explicitly discretize numeric features:</p>
 <p>scoring_metric(mutual_information_score(equal_width(10)))
 scoring_metric(chi_square_score(equal_frequency(10)))
 scoring_metric(symmetrical_uncertainty_score(equal_width(10)))

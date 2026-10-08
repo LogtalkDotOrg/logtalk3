@@ -151,6 +151,23 @@ alone. The recorded metrics are <code class="docutils literal notranslate"><span
 <code class="docutils literal notranslate"><span class="pre">cramers_v_score</span></code>, respectively. Empty complete-case samples, constant
 features, and single-class samples score zero. Numeric target labels are
 class codes, not regression targets.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">score_variant(yates)</span></code> option uses <code class="docutils literal notranslate"><span class="pre">chi_square_yates_score</span></code>. For
+occupied two-by-two tables it sums
+<code class="docutils literal notranslate"><span class="pre">max(0,</span> <span class="pre">abs(Observed-Expected)-0.5)^2/Expected</span></code> over all four cells,
+including zero-observation cells. Larger tables retain Pearson scoring
+and degenerate tables score zero. This continuity correction does not
+provide p-values or validate expected-count assumptions.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">score_variant(bias_corrected)</span></code> option uses
+<code class="docutils literal notranslate"><span class="pre">cramers_v_bias_corrected_score</span></code>, applying Bergsma’s correction to
+Pearson chi-square and the occupied table dimensions. With complete-case
+count <code class="docutils literal notranslate"><span class="pre">n</span></code> and occupied dimensions <code class="docutils literal notranslate"><span class="pre">r</span></code> and <code class="docutils literal notranslate"><span class="pre">c</span></code>, it computes:</p>
+<p>PhiSquared = max(0, ChiSquare/n - (r-1)*(c-1)/(n-1)) CorrectedRows = r -
+(r-1)^2/(n-1) CorrectedColumns = c - (c-1)^2/(n-1) V =
+sqrt(PhiSquared/min(CorrectedRows-1, CorrectedColumns-1))</p>
+<p>Scores are clamped to <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">1.0]</span></code>. A nonpositive corrected
+denominator scores zero as an insufficient-sample convention, including
+two perfectly separated observations. This is not Yates-corrected V or a
+p-value, and does not eliminate every source of sampling bias.</p>
 </section>
 <section id="preparation-and-options">
 <h2>Preparation and options<a class="headerlink" href="#preparation-and-options" title="Link to this heading"></a></h2>
@@ -164,8 +181,14 @@ complete targets must be atomic.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">learn/2</span></code> predicate uses the defaults. The <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate
 accepts an options list as its last argument:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">score_variant(raw)</span></code> or <code class="docutils literal notranslate"><span class="pre">score_variant(normalized)</span></code>, default
-<code class="docutils literal notranslate"><span class="pre">raw</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">score_variant(raw)</span></code>, <code class="docutils literal notranslate"><span class="pre">score_variant(normalized)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">score_variant(yates)</span></code>, or <code class="docutils literal notranslate"><span class="pre">score_variant(bias_corrected)</span></code>,
+default <code class="docutils literal notranslate"><span class="pre">raw</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">preparation_mode(per_feature)</span></code>, the default, or
+<code class="docutils literal notranslate"><span class="pre">preparation_mode(joint)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">expected_count_policy(ignore)</span></code>, the default, or
+<code class="docutils literal notranslate"><span class="pre">expected_count_policy(minimum(Minimum))</span></code>, with a positive numeric
+minimum.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">discretization(equal_frequency(Bins))</span></code> or
 <code class="docutils literal notranslate"><span class="pre">discretization(equal_width(Bins))</span></code>, with a positive integer bin
 count. The default is <code class="docutils literal notranslate"><span class="pre">equal_frequency(10)</span></code>, applied only to
@@ -186,8 +209,8 @@ applicable occurrence wins. All supplied options are validated,
 including later occurrences. Unknown override feature names are
 rejected. The <code class="docutils literal notranslate"><span class="pre">default_option/1</span></code> and <code class="docutils literal notranslate"><span class="pre">valid_option/1</span></code> predicates
 remain publicly queryable, including the inherited selection options.</p>
-<p>Preparation is per feature: observations with an unbound or absent
-feature value or an unbound target are excluded from that feature
+<p>Default preparation is per feature: observations with an unbound or
+absent feature value or an unbound target are excluded from that feature
 without imputing values. Binning is fitted to its complete cases only.
 Categorical features retain their declared categories unless explicitly
 overridden. Equal-width bins partition the observed range;
@@ -195,6 +218,20 @@ equal-frequency bins use observed quantile cuts without splitting equal
 values. Occupied category counts can be smaller than requested bin
 counts. Applying numeric binning to an atomic non-numeric category is an
 error, not an implicit category encoding.</p>
+<p>Joint preparation excludes observations missing any candidate value or
+their target before fitting bins. All features are then scored on the
+same rows. An empty common sample produces zero scores. Joint deletion
+aligns samples; it does not remove missing-data bias and can discard
+many observations.</p>
+<p>The minimum expected-count policy checks every cell expectation,
+including unobserved cells, using occupied marginal categories. Equality
+with the minimum is accepted. The <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate throws
+<code class="docutils literal notranslate"><span class="pre">domain_error(chi_square_expected_count,</span> <span class="pre">Feature-expected(Observed,</span> <span class="pre">Required))</span></code>
+when a nondegenerate feature table has a smaller expectation, aborting
+learning rather than omitting that feature. Empty, constant, and
+single-class tables retain zero scores. The policy applies to every
+score variant and does not assert a universal threshold or provide a
+significance test.</p>
 <p>Scores are sorted in decreasing order, preserving declaration order on
 ties. Top-k selection may include zero-scoring features. Thresholds
 should be chosen for the selected score variant.</p>
@@ -214,29 +251,34 @@ predicates expose metadata and effective options. Diagnostics contain
 <code class="docutils literal notranslate"><span class="pre">selected_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">scoring_metric/1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">complete_cases(FeatureCounts)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">discretization(FeatureSpecifications)</span></code>,
-<code class="docutils literal notranslate"><span class="pre">occupied_categories(FeatureCounts)</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">preparation_mode(per_feature)</span></code>. Counts and specifications follow
-declaration order, not score order.</p>
+<code class="docutils literal notranslate"><span class="pre">occupied_categories(FeatureCounts)</span></code>, and <code class="docutils literal notranslate"><span class="pre">preparation_mode(Mode)</span></code>.
+Joint preparation also reports <code class="docutils literal notranslate"><span class="pre">usable_example_count/1</span></code> and
+<code class="docutils literal notranslate"><span class="pre">excluded_example_count/1</span></code>, which partition <code class="docutils literal notranslate"><span class="pre">example_count/1</span></code>.
+Counts and specifications follow declaration order, not score order.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">check_selector/1</span></code> predicate checks ground structure, unique
 sorted scores, selection consistency, metric identity determined by
-options, valid options, candidate and selected counts, and complete-case
-counts. The <code class="docutils literal notranslate"><span class="pre">valid_selector/1</span></code> predicate fails for malformed models
-without binding partial models. These checks are structural; they do not
-recompute scores from a dataset. The <code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code> and
-<code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code> predicates preserve the complete model. The
-<code class="docutils literal notranslate"><span class="pre">print_selector/1</span></code> predicate prints its template and contents.</p>
+options, valid options, candidate and selected counts, complete-case
+counts, and preparation-mode consistency. In joint mode all
+complete-case counts must equal the usable count. The
+<code class="docutils literal notranslate"><span class="pre">valid_selector/1</span></code> predicate fails for malformed models without
+binding partial models. These checks are structural; they do not
+recompute scores from a dataset or recheck expected counts without
+training tables. The <code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code> and <code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code>
+predicates preserve the complete model. The <code class="docutils literal notranslate"><span class="pre">print_selector/1</span></code>
+predicate prints its template and contents.</p>
 </section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
 <p>Univariate scores do not detect interaction-only signals or remove
 redundant features. Raw chi-square depends on sample size and table
-dimensions; normalization does not eliminate sampling bias. Per-feature
-missingness can make samples incomparable. Discretization affects the
+dimensions; ordinary normalization does not eliminate sampling bias, and
+corrected V does not provide a general bias correction. Default
+per-feature missingness can make samples incomparable; joint preparation
+trades alignment for fewer observations. Discretization affects the
 scores. Binning boundaries are not stored as a transformation for future
-examples. No p-values, significance decisions, expected-count rejection,
-Yates or small-sample bias correction, regression scoring, or automatic
-feature-count selection is provided. Arithmetic uses backend
-floating-point precision.</p>
+examples. No p-values, significance decisions, general small-sample bias
+correction, regression scoring, or automatic feature-count selection is
+provided. Arithmetic uses backend floating-point precision.</p>
 </section>
 </section>
 

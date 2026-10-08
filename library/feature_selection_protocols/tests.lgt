@@ -48,10 +48,13 @@
 	cover(mutual_information_score).
 	cover(chi_square_score(_)).
 	cover(chi_square_score).
+	cover(chi_square_yates_score).
 	cover(symmetrical_uncertainty_score(_)).
 	cover(symmetrical_uncertainty_score).
 	cover(cramers_v_score(_)).
 	cover(cramers_v_score).
+	cover(cramers_v_bias_corrected_score(_)).
+	cover(cramers_v_bias_corrected_score).
 	cover(feature_selector_common).
 	cover(sample_selector).
 
@@ -63,6 +66,121 @@
 
 	test(feature_selection_protocols_fisher_score_reference, deterministic(Score =~= 9.0)) :-
 		fisher_score::score([1, 2, 4, 5], [a, a, b, b], Score).
+
+	test(feature_selection_protocols_expected_count_empty, deterministic(Minimum =~= 0.0)) :-
+		^^contingency_counts([], Counts),
+		^^contingency_min_expected_count(Counts, Minimum).
+
+	test(feature_selection_protocols_expected_count_unobserved, deterministic(Minimum =~= 0.2)) :-
+		^^contingency_counts([a-x, a-x, a-x, a-x, b-y], Counts),
+		^^contingency_min_expected_count(Counts, Minimum).
+
+	test(feature_selection_protocols_expected_count_rectangular, deterministic(Minimum =~= Expected)) :-
+		Expected is 2 / 3,
+		^^contingency_counts([a-x, a-x, b-y, b-y, c-y, c-y], Counts),
+		^^contingency_min_expected_count(Counts, Minimum).
+
+	test(feature_selection_protocols_expected_count_constant, deterministic(Minimum =~= 1.0)) :-
+		^^contingency_counts([a-x, a-x, a-y], Counts),
+		^^contingency_min_expected_count(Counts, Minimum).
+
+	test(feature_selection_protocols_cramers_v_corrected_perfect, deterministic(Score =~= 1.0)) :-
+		cramers_v_bias_corrected_score::score([a, a, b, b], [x, x, y, y], Score).
+
+	test(feature_selection_protocols_cramers_v_corrected_rectangular, deterministic(Score =~= Expected)) :-
+		Expected is sqrt(5 / 12),
+		cramers_v_bias_corrected_score::score(
+			[a, a, a, a, a, a, a, a, a, a, b, b, b, b, b, c, c, c, c, c],
+			[x, x, x, x, x, y, y, y, y, y, x, x, x, x, x, y, y, y, y, y], Score).
+
+	test(feature_selection_protocols_cramers_v_corrected_insufficient, deterministic(Score =~= 0.0)) :-
+		cramers_v_bias_corrected_score::score([a, b], [x, y], Score).
+
+	test(feature_selection_protocols_cramers_v_corrected_balanced, deterministic(Score =~= Expected)) :-
+		Expected is sqrt(1 / 8),
+		cramers_v_bias_corrected_score::score([a, a, a, a, b, b, b, b], [x, x, x, y, x, y, y, y], Score).
+
+	test(feature_selection_protocols_cramers_v_corrected_unbalanced, deterministic(Score =~= Expected)) :-
+		Expected is sqrt(7 / 27),
+		cramers_v_bias_corrected_score::score([a, a, a, b, b], [x, x, y, y, y], Score).
+
+	test(feature_selection_protocols_cramers_v_corrected_independent, deterministic(Score =~= 0.0)) :-
+		cramers_v_bias_corrected_score::score([a, a, b, b], [x, y, x, y], Score).
+
+	test(feature_selection_protocols_cramers_v_corrected_empty, deterministic(Score =~= 0.0)) :-
+		cramers_v_bias_corrected_score::score([], [], Score).
+
+	test(feature_selection_protocols_cramers_v_corrected_constant, deterministic(Score =~= 0.0)) :-
+		cramers_v_bias_corrected_score::score([a, a], [x, y], Score).
+
+	test(feature_selection_protocols_cramers_v_corrected_single_class, deterministic(Score =~= 0.0)) :-
+		cramers_v_bias_corrected_score::score([a, b], [x, x], Score).
+
+	test(feature_selection_protocols_cramers_v_corrected_dimension_zero, deterministic(Score =~= 0.0)) :-
+		cramers_v_bias_corrected_score::score([a, b, c], [x, x, y], Score).
+
+	test(feature_selection_protocols_cramers_v_corrected_symmetry, deterministic(Score =~= Other)) :-
+		cramers_v_bias_corrected_score::score([a, a, a, b, b], [x, x, y, y, y], Score),
+		cramers_v_bias_corrected_score::score([x, x, y, y, y], [a, a, a, b, b], Other),
+		assertion(Score >= 0),
+		assertion(Score =< 1).
+
+	test(feature_selection_protocols_cramers_v_corrected_numeric_labels, deterministic(Score =~= 1.0)) :-
+		cramers_v_bias_corrected_score::score([0, 0, 1, 1], [1, 1, 2, 2], Score).
+
+	test(feature_selection_protocols_cramers_v_corrected_missing, deterministic) :-
+		cramers_v_bias_corrected_score::score([a, Missing, a, b, b, c], [x, x, x, y, y, Target], Score),
+		assertion(Score =~= 1.0),
+		assertion(var(Missing)),
+		assertion(var(Target)).
+
+	test(feature_selection_protocols_cramers_v_corrected_width, deterministic(Score =~= 1.0)) :-
+		cramers_v_bias_corrected_score(equal_width(2))::score([0, 1, 9, 10], [x, x, y, y], Score).
+
+	test(feature_selection_protocols_cramers_v_corrected_frequency, deterministic(Score =~= 1.0)) :-
+		cramers_v_bias_corrected_score(equal_frequency(2))::score([0, 1, 9, 10], [x, x, y, y], Score).
+
+	test(feature_selection_protocols_cramers_v_corrected_metric, deterministic) :-
+		^^check_scoring_metric(cramers_v_bias_corrected_score),
+		^^check_scoring_metric(cramers_v_bias_corrected_score(equal_width(2))).
+
+	test(feature_selection_protocols_cramers_v_corrected_invalid_bins, error(domain_error(positive_integer, 0))) :-
+		cramers_v_bias_corrected_score(equal_width(0))::score([1], [x], _).
+
+	test(feature_selection_protocols_cramers_v_corrected_invalid_target, error(type_error(atomic, label(x)))) :-
+		cramers_v_bias_corrected_score::score([a], [label(x)], _).
+
+	test(feature_selection_protocols_cramers_v_corrected_invalid_number, error(type_error(number, bad))) :-
+		cramers_v_bias_corrected_score(equal_frequency(2))::score([bad], [x], _).
+
+	test(feature_selection_protocols_cramers_v_corrected_unaligned, error(consistency_error(list_length, 1, 0))) :-
+		cramers_v_bias_corrected_score::score([a], [], _).
+
+	test(feature_selection_protocols_yates_reference, deterministic(Score =~= 1.0)) :-
+		chi_square_yates_score::score([a, a, b, b], [x, x, y, y], Score).
+
+	test(feature_selection_protocols_yates_clamped, deterministic(Score =~= 0.0)) :-
+		chi_square_yates_score::score([a, a, b], [x, y, y], Score).
+
+	test(feature_selection_protocols_yates_independent, deterministic(Score =~= 0.0)) :-
+		chi_square_yates_score::score([a, a, b, b], [x, y, x, y], Score).
+
+	test(feature_selection_protocols_yates_larger_table, deterministic(Score =~= Pearson)) :-
+		chi_square_yates_score::score([a, b, c, c], [x, x, y, y], Score),
+		chi_square_score::score([a, b, c, c], [x, x, y, y], Pearson).
+
+	test(feature_selection_protocols_yates_empty, deterministic(Score =~= 0.0)) :-
+		chi_square_yates_score::score([], [], Score).
+
+	test(feature_selection_protocols_yates_single_class, deterministic(Score =~= 0.0)) :-
+		chi_square_yates_score::score([a, b], [x, x], Score).
+
+	test(feature_selection_protocols_yates_symmetry, deterministic(Score =~= Other)) :-
+		chi_square_yates_score::score([a, a, a, b, b], [x, x, y, y, y], Score),
+		chi_square_yates_score::score([x, x, y, y, y], [a, a, a, b, b], Other).
+
+	test(feature_selection_protocols_yates_unbalanced, deterministic(Score =~= 0.3125)) :-
+		chi_square_yates_score::score([a, a, a, b, b], [x, x, y, y, y], Score).
 
 	test(feature_selection_protocols_fisher_score_anova_factor, deterministic(Fisher =~= Expected)) :-
 		anova_f_score::score([1, 2, 4, 5], [a, a, b, b], Anova),

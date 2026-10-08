@@ -43,6 +43,31 @@
 :- end_object.
 
 
+:- object(lasso_search_dataset,
+	implements(feature_dataset_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-10-08,
+		comment is 'Orthogonal four-row training prefix with a two-row validation suffix.'
+	]).
+
+	attribute_values(signal, continuous).
+	attribute_values(noise, continuous).
+
+	example_count(6).
+
+	example(1, [signal- -1, noise- -1], -2).
+	example(2, [signal- -1, noise-1], -2).
+	example(3, [signal-1, noise- -1], 2).
+	example(4, [signal-1, noise-1], 2).
+	example(5, [signal-1, noise- -1], 2).
+	example(6, [signal-1, noise-1], 2).
+
+:- end_object.
+
+
 :- object(lasso_fixture(_Declarations_, _Examples_),
 	implements(feature_dataset_protocol)).
 

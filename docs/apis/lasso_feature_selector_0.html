@@ -255,6 +255,7 @@
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#lasso-feature-selector"><span class="xref std std-ref">lasso_feature_selector</span></a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">lasso_feature_selector</a></li>
 <li class="toctree-l3"><a class="reference internal" href="regression_dataset_adapter_1.html">regression_dataset_adapter(Dataset)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="regression_examples_adapter_2.html">regression_examples_adapter(Declarations,Examples)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lasso-regression"><span class="xref std std-ref">lasso_regression</span></a></li>
@@ -464,7 +465,7 @@
   <p class="right" id="lasso-feature-selector-0"><span id="index-0"></span><strong>object</strong></p>
 <section id="lasso-feature-selector">
 <h1><code class="docutils literal notranslate"><span class="pre">lasso_feature_selector</span></code><a class="headerlink" href="#lasso-feature-selector" title="Link to this heading"></a></h1>
-<p>Regression feature selection by maximum absolute Lasso coefficient per original feature, including missing-value indicators.</p>
+<p>Regression feature selection by maximum absolute Lasso coefficient per original feature, with optional deterministic holdout regularization search. Search requires two usable rows.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -492,6 +493,7 @@
 <div class="line"><a class="reference internal" href="format_0.html#format-0"><span class="std std-ref">format</span></a></div>
 <div class="line"><a class="reference internal" href="lasso_regression_0.html#lasso-regression-0"><span class="std std-ref">lasso_regression</span></a></div>
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
+<div class="line"><a class="reference internal" href="regression_dataset_adapter_1.html#regression-dataset-adapter-1"><span class="std std-ref">regression_dataset_adapter(Dataset)</span></a></div>
 <div class="line"><a class="reference internal" href="type_0.html#type-0"><span class="std std-ref">type</span></a></div>
 </div>
 </div>
@@ -515,18 +517,21 @@
 <ul>
 <li><p><a class="reference internal" href="#usable-examples-3" id="id4"><code class="docutils literal notranslate"><span class="pre">usable_examples/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#count-numeric-targets-2" id="id5"><code class="docutils literal notranslate"><span class="pre">count_numeric_targets/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#group-scores-3" id="id6"><code class="docutils literal notranslate"><span class="pre">group_scores/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#encoder-block-3" id="id7"><code class="docutils literal notranslate"><span class="pre">encoder_block/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#block-maximum-5" id="id8"><code class="docutils literal notranslate"><span class="pre">block_maximum/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#select-active-3" id="id9"><code class="docutils literal notranslate"><span class="pre">select_active/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#active-scores-3" id="id10"><code class="docutils literal notranslate"><span class="pre">active_scores/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#model-diagnostics-7" id="id11"><code class="docutils literal notranslate"><span class="pre">model_diagnostics/7</span></code></a></p></li>
-<li><p><a class="reference internal" href="#valid-model-1" id="id12"><code class="docutils literal notranslate"><span class="pre">valid_model/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#store-regressor-options-3" id="id13"><code class="docutils literal notranslate"><span class="pre">store_regressor_options/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#complete-regressor-options-2" id="id14"><code class="docutils literal notranslate"><span class="pre">complete_regressor_options/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#check-search-count-1" id="id6"><code class="docutils literal notranslate"><span class="pre">check_search_count/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#group-scores-3" id="id7"><code class="docutils literal notranslate"><span class="pre">group_scores/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#encoder-block-3" id="id8"><code class="docutils literal notranslate"><span class="pre">encoder_block/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#block-maximum-5" id="id9"><code class="docutils literal notranslate"><span class="pre">block_maximum/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#select-active-3" id="id10"><code class="docutils literal notranslate"><span class="pre">select_active/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#active-scores-3" id="id11"><code class="docutils literal notranslate"><span class="pre">active_scores/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#model-diagnostics-8" id="id12"><code class="docutils literal notranslate"><span class="pre">model_diagnostics/8</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-model-1" id="id13"><code class="docutils literal notranslate"><span class="pre">valid_model/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#store-regressor-options-3" id="id14"><code class="docutils literal notranslate"><span class="pre">store_regressor_options/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#complete-regressor-options-2" id="id15"><code class="docutils literal notranslate"><span class="pre">complete_regressor_options/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-regularization-grid-1" id="id16"><code class="docutils literal notranslate"><span class="pre">valid_regularization_grid/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#regularization-grid-values-2" id="id17"><code class="docutils literal notranslate"><span class="pre">regularization_grid_values/2</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#operators" id="id15">Operators</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id18">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -603,8 +608,38 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="check-search-count-1">
+<span id="lasso-feature-selector-0-check-search-count-1"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_search_count/1</span></code></a><a class="headerlink" href="#check-search-count-1" title="Link to this heading"></a></h3>
+<p>Requires at least two known numeric targets for holdout search.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_search_count(Count)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_search_count(+non_negative_integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Fewer than two usable rows remain:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(lasso_search_examples,Count)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="group-scores-3">
-<span id="lasso-feature-selector-0-group-scores-3"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">group_scores/3</span></code></a><a class="headerlink" href="#group-scores-3" title="Link to this heading"></a></h3>
+<span id="lasso-feature-selector-0-group-scores-3"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">group_scores/3</span></code></a><a class="headerlink" href="#group-scores-3" title="Link to this heading"></a></h3>
 <p>Consumes exact encoder blocks and returns original feature scores in encoder order.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -625,7 +660,7 @@
 <hr class="docutils" />
 </section>
 <section id="encoder-block-3">
-<span id="lasso-feature-selector-0-encoder-block-3"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">encoder_block/3</span></code></a><a class="headerlink" href="#encoder-block-3" title="Link to this heading"></a></h3>
+<span id="lasso-feature-selector-0-encoder-block-3"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">encoder_block/3</span></code></a><a class="headerlink" href="#encoder-block-3" title="Link to this heading"></a></h3>
 <p>Returns an encoder name and its number of coefficient columns.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -646,7 +681,7 @@
 <hr class="docutils" />
 </section>
 <section id="block-maximum-5">
-<span id="lasso-feature-selector-0-block-maximum-5"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">block_maximum/5</span></code></a><a class="headerlink" href="#block-maximum-5" title="Link to this heading"></a></h3>
+<span id="lasso-feature-selector-0-block-maximum-5"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">block_maximum/5</span></code></a><a class="headerlink" href="#block-maximum-5" title="Link to this heading"></a></h3>
 <p>Consumes a coefficient block and computes its maximum absolute weight.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -667,7 +702,7 @@
 <hr class="docutils" />
 </section>
 <section id="select-active-3">
-<span id="lasso-feature-selector-0-select-active-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">select_active/3</span></code></a><a class="headerlink" href="#select-active-3" title="Link to this heading"></a></h3>
+<span id="lasso-feature-selector-0-select-active-3"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">select_active/3</span></code></a><a class="headerlink" href="#select-active-3" title="Link to this heading"></a></h3>
 <p>Applies the selection strategy only to groups strictly above the coefficient cutoff.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -688,7 +723,7 @@
 <hr class="docutils" />
 </section>
 <section id="active-scores-3">
-<span id="lasso-feature-selector-0-active-scores-3"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">active_scores/3</span></code></a><a class="headerlink" href="#active-scores-3" title="Link to this heading"></a></h3>
+<span id="lasso-feature-selector-0-active-scores-3"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">active_scores/3</span></code></a><a class="headerlink" href="#active-scores-3" title="Link to this heading"></a></h3>
 <p>Retains scores strictly above the coefficient cutoff.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -708,8 +743,8 @@
 </div>
 <hr class="docutils" />
 </section>
-<section id="model-diagnostics-7">
-<span id="lasso-feature-selector-0-model-diagnostics-7"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">model_diagnostics/7</span></code></a><a class="headerlink" href="#model-diagnostics-7" title="Link to this heading"></a></h3>
+<section id="model-diagnostics-8">
+<span id="lasso-feature-selector-0-model-diagnostics-8"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">model_diagnostics/8</span></code></a><a class="headerlink" href="#model-diagnostics-8" title="Link to this heading"></a></h3>
 <p>Builds counts, effective options, aggregation metadata, and complete nested learner diagnostics.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -720,17 +755,17 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">model_diagnostics(Regressor,Scores,Selected,OriginalCount,UsableCount,Options,Diagnostics)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">model_diagnostics(Regressor,Scores,Selected,OriginalCount,UsableCount,Options,SearchResult,Diagnostics)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">model_diagnostics(+compound,+list(pair),+list(atom),+positive_integer,+positive_integer,+list(compound),-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">model_diagnostics(+compound,+list(pair),+list(atom),+positive_integer,+positive_integer,+list(compound),+term,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="valid-model-1">
-<span id="lasso-feature-selector-0-valid-model-1"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_model/1</span></code></a><a class="headerlink" href="#valid-model-1" title="Link to this heading"></a></h3>
+<span id="lasso-feature-selector-0-valid-model-1"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_model/1</span></code></a><a class="headerlink" href="#valid-model-1" title="Link to this heading"></a></h3>
 <p>Checks the retained regressor and recomputes scores, selection, and metadata without binding a partial input.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -759,6 +794,10 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
 </div>
+<div class="line">A generated regularization bound exceeds backend floating-point limits:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(float_overflow)</span></code></div>
+</div>
 <div class="line">Stored options are not a list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
@@ -772,7 +811,7 @@
 <hr class="docutils" />
 </section>
 <section id="store-regressor-options-3">
-<span id="lasso-feature-selector-0-store-regressor-options-3"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">store_regressor_options/3</span></code></a><a class="headerlink" href="#store-regressor-options-3" title="Link to this heading"></a></h3>
+<span id="lasso-feature-selector-0-store-regressor-options-3"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">store_regressor_options/3</span></code></a><a class="headerlink" href="#store-regressor-options-3" title="Link to this heading"></a></h3>
 <p>Replaces the first nested options occurrence with the learner effective options, preserving later occurrences.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -793,7 +832,7 @@
 <hr class="docutils" />
 </section>
 <section id="complete-regressor-options-2">
-<span id="lasso-feature-selector-0-complete-regressor-options-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">complete_regressor_options/2</span></code></a><a class="headerlink" href="#complete-regressor-options-2" title="Link to this heading"></a></h3>
+<span id="lasso-feature-selector-0-complete-regressor-options-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">complete_regressor_options/2</span></code></a><a class="headerlink" href="#complete-regressor-options-2" title="Link to this heading"></a></h3>
 <p>Checks that each learner default option indicator has an effective value.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -809,6 +848,57 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">complete_regressor_options(+list(compound),+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="valid-regularization-grid-1">
+<span id="lasso-feature-selector-0-valid-regularization-grid-1"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_regularization_grid/1</span></code></a><a class="headerlink" href="#valid-regularization-grid-1" title="Link to this heading"></a></h3>
+<p>Checks an explicit penalty list or an increasing bounded linear grid with at least two candidates.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_regularization_grid(Grid)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_regularization_grid(&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="regularization-grid-values-2">
+<span id="lasso-feature-selector-0-regularization-grid-values-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">regularization_grid_values/2</span></code></a><a class="headerlink" href="#regularization-grid-values-2" title="Link to this heading"></a></h3>
+<p>Expands a validated linear grid to floating-point penalties or preserves an explicit penalty list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">regularization_grid_values(Grid,Values)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">regularization_grid_values(+term,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">A generated bound exceeds backend floating-point limits:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(float_overflow)</span></code></div>
+</div>
 </div>
 </div>
 </section>

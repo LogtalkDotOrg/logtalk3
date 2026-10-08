@@ -53,9 +53,148 @@
 
 	cover(lasso_feature_selector).
 	cover(regression_dataset_adapter(_)).
+	cover(regression_examples_adapter(_, _)).
 
 	cleanup :-
 		^^clean_file('test_lasso_output.pl').
+
+	test(lasso_feature_selector_search_reference, deterministic) :-
+		Options = [regularization_search(holdout(0.25, [0, 0.5, 3])), regressor_options([feature_scaling(false)])],
+		lasso_feature_selector::learn(lasso_search_dataset, Selector, Options),
+		lasso_feature_selector::check_selector(Selector),
+		lasso_feature_selector::diagnostics(Selector, Diagnostics),
+		memberchk(regularization_search_result(holdout(4, 2, [trial(0, First, _, _, _), trial(0.5, Second, _, _, _), trial(3, Third, _, _, _)], 0)), Diagnostics),
+		assertion(First =~= 0.0),
+		assertion(Second =~= 0.25),
+		assertion(Third =~= 4.0).
+
+	test(lasso_feature_selector_search_refit, deterministic) :-
+		lasso_feature_selector::learn(lasso_search_dataset, Selector, [regularization_search(holdout(0.25, [0, 0.5, 3]))]),
+		lasso_feature_selector::check_selector(Selector),
+		lasso_feature_selector::selector_options(Selector, Options),
+		memberchk(regressor_options(FitOptions), Options),
+		lasso_regression::learn(regression_dataset_adapter(lasso_search_dataset), Direct, FitOptions),
+		Selector = lasso_feature_selector(Regressor, _, _, _),
+		assertion(lgtunit::variant(Regressor, Direct)),
+		lasso_regression::diagnostics(Regressor, Nested),
+		memberchk(training_example_count(6), Nested).
+
+	test(lasso_feature_selector_search_single_candidate, deterministic) :-
+		lasso_feature_selector::learn(lasso_search_dataset, Selector, [regularization_search(holdout(0.25, [0.5])), regressor_options([regularization(100.0), feature_scaling(false)])]),
+		lasso_feature_selector::check_selector(Selector),
+		Selector = lasso_feature_selector(Regressor, _, _, _),
+		lasso_regression::learn(regression_dataset_adapter(lasso_search_dataset), Direct, [regularization(0.5), feature_scaling(false)]),
+		assertion(lgtunit::variant(Regressor, Direct)).
+
+	test(lasso_feature_selector_search_ties, deterministic) :-
+		Dataset = lasso_fixture([constant-continuous], [example(1, [constant-1], 2), example(2, [constant-1], 2), example(3, [constant-1], 2)]),
+		lasso_feature_selector::learn(Dataset, Selector, [regularization_search(holdout(0.2, [1, 3, 3.0, 2]))]),
+		lasso_feature_selector::check_selector(Selector),
+		lasso_feature_selector::diagnostics(Selector, Diagnostics),
+		memberchk(regularization_search_result(holdout(2, 1, _, Winner)), Diagnostics),
+		assertion(Winner == 3).
+
+	test(lasso_feature_selector_search_scaling_no_leakage, deterministic) :-
+		Dataset = lasso_fixture([signal-continuous], [example(1, [signal- -1], -2), example(2, [signal-1], 2), example(3, [signal-100], 200)]),
+		lasso_feature_selector::learn(Dataset, Selector, [regularization_search(holdout(0.2, [1.0]))]),
+		lasso_feature_selector::check_selector(Selector),
+		lasso_feature_selector::diagnostics(Selector, Diagnostics),
+		memberchk(regularization_search_result(holdout(2, 1, [trial(1.0, MSE, _, _, _)], 1.0)), Diagnostics),
+		assertion(MSE =~= 10000.0),
+		Selector = lasso_feature_selector(lasso_regressor([continuous(signal, Mean, _)], _, _, _), _, _, _),
+		ExpectedMean is 100 / 3,
+		assertion(Mean =~= ExpectedMean).
+
+	test(lasso_feature_selector_search_missing_targets, deterministic) :-
+		Dataset = lasso_fixture([signal-continuous], [example(1, [signal- -1], -2), example(2, [signal-1000], Unknown), example(3, [signal-1], 2), example(4, [signal-Missing], 0)]),
+		lasso_feature_selector::learn(Dataset, Selector, [regularization_search(holdout(0.2, [0, 1]))]),
+		lasso_feature_selector::check_selector(Selector),
+		lasso_feature_selector::diagnostics(Selector, Diagnostics),
+		memberchk(usable_example_count(3), Diagnostics),
+		memberchk(excluded_example_count(1), Diagnostics),
+		memberchk(regularization_search_result(holdout(2, 1, _, _)), Diagnostics),
+		assertion(var(Unknown)),
+		assertion(var(Missing)).
+
+	test(lasso_feature_selector_search_mixed_missing, subsumes(lasso_feature_selector(lasso_regressor([continuous(signal,_,_), categorical(category,[base,up,down]), continuous(constant,_,_)], _, _, _), _, _, _), Selector)) :-
+		mixed_dataset(Dataset),
+		lasso_feature_selector::learn(Dataset, Selector, [regularization_search(holdout(0.25, [0.0, 0.5]))]),
+		lasso_feature_selector::check_selector(Selector).
+
+	test(lasso_feature_selector_search_repeated_options, deterministic) :-
+		Options = [regularization_search(holdout(0.25, [0.5])), regularization_search(none), regressor_options([regularization(100.0), regularization(20.0), feature_scaling(false)]), regressor_options([regularization(10.0)])],
+		lasso_feature_selector::learn(lasso_search_dataset, Selector, Options),
+		lasso_feature_selector::check_selector(Selector),
+		lasso_feature_selector::selector_options(Selector, Stored),
+		memberchk(regressor_options([regularization(First), regularization(Second)| _]), Stored),
+		assertion(First =~= 0.5),
+		assertion(Second =~= 20.0),
+		memberchk(regressor_options([regularization(10.0)]), Stored).
+
+	test(lasso_feature_selector_search_none_first, deterministic) :-
+		lasso_feature_selector::learn(lasso_sparse_dataset, Selector, [regularization_search(none), regularization_search(holdout(0.25, [100.0]))]),
+		lasso_feature_selector::check_selector(Selector),
+		lasso_feature_selector::diagnostics(Selector, Diagnostics),
+		memberchk(regularization_search_result(none), Diagnostics),
+		lasso_feature_selector::selected_features(Selector, [signal]).
+
+	test(lasso_feature_selector_search_minimum_split, deterministic) :-
+		Dataset = lasso_fixture([], [example(1, [], 1), example(2, [], 3)]),
+		lasso_feature_selector::learn(Dataset, Selector, [regularization_search(holdout(0.99, [0]))]),
+		lasso_feature_selector::check_selector(Selector),
+		lasso_feature_selector::diagnostics(Selector, Diagnostics),
+		memberchk(regularization_search_result(holdout(1, 1, [trial(0, MSE, _, _, _)], 0)), Diagnostics),
+		assertion(MSE =~= 4.0).
+
+	test(lasso_feature_selector_search_exhaustion, deterministic) :-
+		Dataset = lasso_fixture([signal-continuous], [example(1, [signal-1], 1), example(2, [signal-2], 2), example(3, [signal-3], 3)]),
+		lasso_feature_selector::learn(Dataset, Selector, [regularization_search(holdout(0.2, [0.0])), regressor_options([maximum_iterations(1), tolerance(0.0), feature_scaling(false)])]),
+		lasso_feature_selector::check_selector(Selector),
+		lasso_feature_selector::diagnostics(Selector, Diagnostics),
+		memberchk(regularization_search_result(holdout(2, 1, [trial(0.0, _, maximum_iterations_exhausted, 1, _)], 0.0)), Diagnostics).
+
+	test(lasso_feature_selector_search_bad_fraction, error(domain_error(option, regularization_search(holdout(1, [0]))))) :-
+		lasso_feature_selector::learn(lasso_search_dataset, _, [regularization_search(holdout(1, [0]))]).
+
+	test(lasso_feature_selector_search_empty_grid, error(domain_error(option, regularization_search(holdout(0.2, []))))) :-
+		lasso_feature_selector::learn(lasso_search_dataset, _, [regularization_search(holdout(0.2, []))]).
+
+	test(lasso_feature_selector_search_negative_grid, error(domain_error(option, regularization_search(holdout(0.2, [-1]))))) :-
+		lasso_feature_selector::learn(lasso_search_dataset, _, [regularization_search(holdout(0.2, [-1]))]).
+
+	test(lasso_feature_selector_search_improper_grid, error(domain_error(option, regularization_search(holdout(0.2, [0| bad]))))) :-
+		lasso_feature_selector::learn(lasso_search_dataset, _, [regularization_search(holdout(0.2, [0| bad]))]).
+
+	test(lasso_feature_selector_search_too_few_rows, error(domain_error(lasso_search_examples, 1))) :-
+		Dataset = lasso_fixture([], [example(1, [], 1), example(2, [], _)]),
+		lasso_feature_selector::learn(Dataset, _, [regularization_search(holdout(0.2, [0]))]).
+
+	test(lasso_feature_selector_search_invalid_later_option, error(domain_error(option, regressor_options([regularization(1.0), regularization(-1.0)])))) :-
+		lasso_feature_selector::learn(lasso_search_dataset, _, [regularization_search(holdout(0.2, [0])), regressor_options([regularization(1.0), regularization(-1.0)])]).
+
+	test(lasso_feature_selector_search_bad_counts, deterministic) :-
+		lasso_feature_selector::learn(lasso_search_dataset, lasso_feature_selector(Regressor, Scores, Selected, Diagnostics), [regularization_search(holdout(0.25, [0.0]))]),
+		once(select(regularization_search_result(holdout(_, _, Trials, Winner)), Diagnostics, Rest)),
+		Bad = lasso_feature_selector(Regressor, Scores, Selected, [regularization_search_result(holdout(3, 3, Trials, Winner))| Rest]),
+		assertion(\+ lasso_feature_selector::valid_selector(Bad)).
+
+	test(lasso_feature_selector_search_bad_trial, deterministic) :-
+		lasso_feature_selector::learn(lasso_search_dataset, lasso_feature_selector(Regressor, Scores, Selected, Diagnostics), [regularization_search(holdout(0.25, [0.0]))]),
+		once(select(regularization_search_result(holdout(Train, Validation, [trial(Value, _, Status, Iterations, Delta)], Winner)), Diagnostics, Rest)),
+		Bad = lasso_feature_selector(Regressor, Scores, Selected, [regularization_search_result(holdout(Train, Validation, [trial(Value, -1, Status, Iterations, Delta)], Winner))| Rest]),
+		assertion(\+ lasso_feature_selector::valid_selector(Bad)).
+
+	test(lasso_feature_selector_search_bad_winner, deterministic) :-
+		lasso_feature_selector::learn(lasso_search_dataset, lasso_feature_selector(Regressor, Scores, Selected, Diagnostics), [regularization_search(holdout(0.25, [0.0, 0.5]))]),
+		once(select(regularization_search_result(holdout(Train, Validation, Trials, _)), Diagnostics, Rest)),
+		Bad = lasso_feature_selector(Regressor, Scores, Selected, [regularization_search_result(holdout(Train, Validation, Trials, 0.5))| Rest]),
+		assertion(\+ lasso_feature_selector::valid_selector(Bad)).
+
+	test(lasso_feature_selector_search_export, deterministic) :-
+		lasso_feature_selector::learn(lasso_search_dataset, Selector, [regularization_search(holdout(0.25, [0, 0.5]))]),
+		lasso_feature_selector::export_to_clauses(lasso_search_dataset, Selector, searched, [searched(Loaded)]),
+		assertion(lgtunit::variant(Selector, Loaded)),
+		lasso_feature_selector::check_selector(Loaded).
 
 	test(lasso_feature_selector_sparse_reference, deterministic) :-
 		lasso_feature_selector::learn(lasso_sparse_dataset, Selector, [regressor_options([feature_scaling(false), regularization(0.5)])]),
@@ -100,7 +239,7 @@
 		lasso_feature_selector::selected_features(Selector, Selected).
 
 	test(lasso_feature_selector_defaults, deterministic) :-
-		lasso_feature_selector::default_options([regressor_options([]), coefficient_threshold(Cutoff), selection_strategy(all)]),
+		lasso_feature_selector::default_options([regressor_options([]), coefficient_threshold(Cutoff), selection_strategy(all), regularization_search(none)]),
 		assertion(Cutoff =~= 0.0),
 		lasso_feature_selector::learn(lasso_sparse_dataset, Selector),
 		lasso_feature_selector::check_selector(Selector),
@@ -359,7 +498,7 @@
 
 	test(lasso_feature_selector_export_file, variant(Loaded, Selector)) :-
 		^^file_path('test_lasso_output.pl', File),
-		lasso_feature_selector::learn(lasso_sparse_dataset, Selector),
+		lasso_feature_selector::learn(lasso_sparse_dataset, Selector, [regularization_search(holdout(0.25, linear(0, 1, 3)))]),
 		lasso_feature_selector::export_to_file(lasso_sparse_dataset, Selector, lasso_exported_model, File),
 		logtalk_load(File),
 		{lasso_exported_model(Loaded)},
@@ -367,7 +506,7 @@
 
 	test(lasso_feature_selector_print, true) :-
 		^^suppress_text_output,
-		lasso_feature_selector::learn(lasso_sparse_dataset, Selector),
+		lasso_feature_selector::learn(lasso_sparse_dataset, Selector, [regularization_search(holdout(0.25, linear(0, 1, 3)))]),
 		lasso_feature_selector::print_selector(Selector).
 
 	test(lasso_feature_selector_multiple_categorical_blocks, deterministic) :-
@@ -466,6 +605,139 @@
 		lasso_feature_selector::diagnostics(Selector, Diagnostics),
 		memberchk(candidate_count(0), Diagnostics),
 		memberchk(encoded_feature_count(0), Diagnostics).
+
+	test(lasso_feature_selector_linear_grid_reference, deterministic) :-
+		lasso_feature_selector::learn(lasso_sparse_dataset, Selector, [regularization_search(holdout(0.25, linear(0, 1, 3)))]),
+		lasso_feature_selector::check_selector(Selector),
+		lasso_feature_selector::diagnostics(Selector, Diagnostics),
+		memberchk(regularization_search_result(holdout(3, 1, [trial(First, _, _, _, _), trial(Middle, _, _, _, _), trial(Last, _, _, _, _)], _)), Diagnostics),
+		assertion(First =~= 0.0),
+		assertion(Middle =~= 0.5),
+		assertion(Last =~= 1.0).
+
+	test(lasso_feature_selector_linear_grid_equivalence, deterministic) :-
+		lasso_feature_selector::learn(lasso_search_dataset, Generated, [regularization_search(holdout(0.25, linear(0, 1, 3)))]),
+		lasso_feature_selector::learn(lasso_search_dataset, Explicit, [regularization_search(holdout(0.25, [0.0, 0.5, 1.0]))]),
+		Generated = lasso_feature_selector(Regressor, Scores, Selected, GeneratedDiagnostics),
+		Explicit = lasso_feature_selector(OtherRegressor, OtherScores, OtherSelected, ExplicitDiagnostics),
+		assertion(lgtunit::variant(Regressor, OtherRegressor)),
+		assertion(Scores == OtherScores),
+		assertion(Selected == OtherSelected),
+		memberchk(regularization_search_result(Result), GeneratedDiagnostics),
+		memberchk(regularization_search_result(Result), ExplicitDiagnostics),
+		lasso_feature_selector::selector_options(Generated, Options),
+		memberchk(regularization_search(holdout(0.25, linear(0, 1, 3))), Options).
+
+	test(lasso_feature_selector_linear_grid_mse, deterministic) :-
+		lasso_feature_selector::learn(lasso_search_dataset, Selector, [regularization_search(holdout(0.25, linear(0, 1, 3))), regressor_options([feature_scaling(false)])]),
+		lasso_feature_selector::diagnostics(Selector, Diagnostics),
+		memberchk(regularization_search_result(holdout(4, 2, [trial(_, First, _, _, _), trial(_, Second, _, _, _), trial(_, Third, _, _, _)], Winner)), Diagnostics),
+		assertion(First =~= 0.0),
+		assertion(Second =~= 0.25),
+		assertion(Third =~= 1.0),
+		assertion(Winner =~= 0.0).
+
+	test(lasso_feature_selector_linear_grid_two_endpoints, deterministic) :-
+		lasso_feature_selector::learn(lasso_search_dataset, Selector, [regularization_search(holdout(0.25, linear(0.25, 0.75, 2)))]),
+		lasso_feature_selector::check_selector(Selector),
+		lasso_feature_selector::diagnostics(Selector, Diagnostics),
+		memberchk(regularization_search_result(holdout(4, 2, [trial(Lower, _, _, _, _), trial(Upper, _, _, _, _)], _)), Diagnostics),
+		assertion(Lower =~= 0.25),
+		assertion(Upper =~= 0.75).
+
+	test(lasso_feature_selector_linear_grid_refit, deterministic) :-
+		lasso_feature_selector::learn(lasso_search_dataset, Selector, [regularization_search(holdout(0.25, linear(0, 1, 3)))]),
+		lasso_feature_selector::selector_options(Selector, Options),
+		memberchk(regressor_options(FitOptions), Options),
+		lasso_regression::learn(regression_dataset_adapter(lasso_search_dataset), Direct, FitOptions),
+		Selector = lasso_feature_selector(Regressor, _, _, _),
+		assertion(lgtunit::variant(Regressor, Direct)).
+
+	test(lasso_feature_selector_linear_grid_ties, deterministic(Winner =~= 1.0)) :-
+		Dataset = lasso_fixture([], [example(1, [], 2), example(2, [], 2), example(3, [], 2)]),
+		lasso_feature_selector::learn(Dataset, Selector, [regularization_search(holdout(0.25, linear(0, 1, 3)))]),
+		lasso_feature_selector::check_selector(Selector),
+		lasso_feature_selector::diagnostics(Selector, Diagnostics),
+		memberchk(regularization_search_result(holdout(2, 1, _, Winner)), Diagnostics).
+
+	test(lasso_feature_selector_linear_grid_rounded_duplicates, deterministic) :-
+		Dataset = lasso_fixture([], [example(1, [], 2), example(2, [], 2), example(3, [], 2)]),
+		lasso_feature_selector::learn(Dataset, Selector, [regularization_search(holdout(0.25, linear(1.0, 1.0000000000000002, 3)))]),
+		lasso_feature_selector::check_selector(Selector).
+
+	test(lasso_feature_selector_linear_grid_repeated_options, deterministic) :-
+		Options = [regularization_search(holdout(0.25, linear(0.25, 0.75, 2))), regularization_search(none), regressor_options([regularization(100.0), regularization(20.0), feature_scaling(false)]), regressor_options([regularization(10.0)])],
+		lasso_feature_selector::learn(lasso_search_dataset, Selector, Options),
+		lasso_feature_selector::check_selector(Selector),
+		lasso_feature_selector::selector_options(Selector, Stored),
+		memberchk(regularization_search(holdout(0.25, linear(0.25, 0.75, 2))), Stored),
+		memberchk(regularization_search(none), Stored),
+		memberchk(regressor_options([regularization(First), regularization(Second)| _]), Stored),
+		assertion(First =~= 0.25),
+		assertion(Second =~= 20.0),
+		memberchk(regressor_options([regularization(10.0)]), Stored).
+
+	test(lasso_feature_selector_linear_grid_none_first, deterministic) :-
+		lasso_feature_selector::learn(lasso_search_dataset, Selector, [regularization_search(none), regularization_search(holdout(0.25, linear(0, 1, 3)))]),
+		lasso_feature_selector::check_selector(Selector),
+		lasso_feature_selector::diagnostics(Selector, Diagnostics),
+		memberchk(regularization_search_result(none), Diagnostics).
+
+	test(lasso_feature_selector_linear_grid_missing, deterministic) :-
+		Dataset = lasso_fixture([signal-continuous], [example(1, [signal- -1], -2), example(2, [signal-1000], Unknown), example(3, [signal-1], 2), example(4, [signal-Missing], 0)]),
+		lasso_feature_selector::learn(Dataset, Selector, [regularization_search(holdout(0.2, linear(0, 1, 3)))]),
+		lasso_feature_selector::check_selector(Selector),
+		lasso_feature_selector::diagnostics(Selector, Diagnostics),
+		memberchk(regularization_search_result(holdout(2, 1, _, _)), Diagnostics),
+		memberchk(usable_example_count(3), Diagnostics),
+		assertion(var(Unknown)),
+		assertion(var(Missing)).
+
+	test(lasso_feature_selector_linear_grid_mixed, deterministic) :-
+		mixed_dataset(Dataset),
+		lasso_feature_selector::learn(Dataset, Selector, [regularization_search(holdout(0.25, linear(0, 1, 3)))]),
+		lasso_feature_selector::check_selector(Selector).
+
+	test(lasso_feature_selector_linear_grid_exhaustion, deterministic) :-
+		Dataset = lasso_fixture([signal-continuous], [example(1, [signal-1], 1), example(2, [signal-2], 2), example(3, [signal-3], 3)]),
+		lasso_feature_selector::learn(Dataset, Selector, [regularization_search(holdout(0.2, linear(0, 1, 2))), regressor_options([maximum_iterations(1), tolerance(0.0), feature_scaling(false)])]),
+		lasso_feature_selector::check_selector(Selector),
+		lasso_feature_selector::diagnostics(Selector, Diagnostics),
+		memberchk(regularization_search_result(holdout(2, 1, [trial(0.0, _, maximum_iterations_exhausted, 1, _)| _], _)), Diagnostics).
+
+	test(lasso_feature_selector_linear_grid_invalid_count, error(domain_error(option, regularization_search(holdout(0.25, linear(0, 1, 1)))))) :-
+		lasso_feature_selector::learn(lasso_search_dataset, _, [regularization_search(holdout(0.25, linear(0, 1, 1)))]).
+
+	test(lasso_feature_selector_linear_grid_noninteger_count, error(domain_error(option, regularization_search(holdout(0.25, linear(0, 1, 2.0)))))) :-
+		lasso_feature_selector::learn(lasso_search_dataset, _, [regularization_search(holdout(0.25, linear(0, 1, 2.0)))]).
+
+	test(lasso_feature_selector_linear_grid_negative_bound, error(domain_error(option, regularization_search(holdout(0.25, linear(-1, 1, 3)))))) :-
+		lasso_feature_selector::learn(lasso_search_dataset, _, [regularization_search(holdout(0.25, linear(-1, 1, 3)))]).
+
+	test(lasso_feature_selector_linear_grid_equal_bounds, error(domain_error(option, regularization_search(holdout(0.25, linear(1, 1, 3)))))) :-
+		lasso_feature_selector::learn(lasso_search_dataset, _, [regularization_search(holdout(0.25, linear(1, 1, 3)))]).
+
+	test(lasso_feature_selector_linear_grid_reversed_bounds, error(domain_error(option, regularization_search(holdout(0.25, linear(2, 1, 3)))))) :-
+		lasso_feature_selector::learn(lasso_search_dataset, _, [regularization_search(holdout(0.25, linear(2, 1, 3)))]).
+
+	test(lasso_feature_selector_linear_grid_nonnumeric_bound, error(domain_error(option, regularization_search(holdout(0.25, linear(0, bad, 3)))))) :-
+		lasso_feature_selector::learn(lasso_search_dataset, _, [regularization_search(holdout(0.25, linear(0, bad, 3)))]).
+
+	test(lasso_feature_selector_linear_grid_invalid_later, error(domain_error(option, regularization_search(holdout(0.25, linear(0, 1, 1)))))) :-
+		lasso_feature_selector::learn(lasso_search_dataset, _, [regularization_search(none), regularization_search(holdout(0.25, linear(0, 1, 1)))]).
+
+	test(lasso_feature_selector_linear_grid_bad_alignment, deterministic) :-
+		lasso_feature_selector::learn(lasso_search_dataset, lasso_feature_selector(Regressor, Scores, Selected, Diagnostics), [regularization_search(holdout(0.25, linear(0, 1, 3)))]),
+		once(select(options(Options), Diagnostics, Rest)),
+		once(select(regularization_search(_), Options, OtherOptions)),
+		BadOptions = [regularization_search(holdout(0.25, linear(0, 1, 4)))| OtherOptions],
+		assertion(\+ lasso_feature_selector::valid_selector(lasso_feature_selector(Regressor, Scores, Selected, [options(BadOptions)| Rest]))).
+
+	test(lasso_feature_selector_linear_grid_export, deterministic) :-
+		lasso_feature_selector::learn(lasso_search_dataset, Selector, [regularization_search(holdout(0.25, linear(0, 1, 3)))]),
+		lasso_feature_selector::export_to_clauses(lasso_search_dataset, Selector, linear_model, [linear_model(Loaded)]),
+		assertion(lgtunit::variant(Loaded, Selector)),
+		lasso_feature_selector::check_selector(Loaded).
 
 	% auxiliary predicates
 

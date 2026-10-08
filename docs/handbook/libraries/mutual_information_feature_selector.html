@@ -498,6 +498,9 @@ accepts an options list as its last argument:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">score_variant(raw)</span></code> or <code class="docutils literal notranslate"><span class="pre">score_variant(normalized)</span></code>, default
 <code class="docutils literal notranslate"><span class="pre">raw</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">preparation_mode(per_feature)</span></code> is the default. The <code class="docutils literal notranslate"><span class="pre">joint</span></code> mode
+excludes rows missing the target or any candidate feature before
+fitting bins, so all features use the same observations.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">discretization(equal_frequency(Bins))</span></code> or
 <code class="docutils literal notranslate"><span class="pre">discretization(equal_width(Bins))</span></code>, with a positive integer bin
 count. The default is <code class="docutils literal notranslate"><span class="pre">equal_frequency(10)</span></code>, applied only to
@@ -518,8 +521,8 @@ applicable occurrence wins. All supplied options are validated,
 including later occurrences. Unknown override feature names are
 rejected. The <code class="docutils literal notranslate"><span class="pre">default_option/1</span></code> and <code class="docutils literal notranslate"><span class="pre">valid_option/1</span></code> predicates
 remain publicly queryable, including the inherited selection options.</p>
-<p>Preparation is per feature: observations with an unbound or absent
-feature value or an unbound target are excluded from that feature
+<p>By default, preparation is per feature: observations with an unbound or
+absent feature value or an unbound target are excluded from that feature
 without imputing values. Binning is fitted to its complete cases only.
 Categorical features retain their declared categories unless explicitly
 overridden. Equal-width bins partition the observed range;
@@ -546,9 +549,11 @@ predicates expose metadata and effective options. Diagnostics contain
 <code class="docutils literal notranslate"><span class="pre">selected_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">scoring_metric/1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">complete_cases(FeatureCounts)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">discretization(FeatureSpecifications)</span></code>,
-<code class="docutils literal notranslate"><span class="pre">occupied_categories(FeatureCounts)</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">preparation_mode(per_feature)</span></code>. Counts and specifications follow
-declaration order, not score order.</p>
+<code class="docutils literal notranslate"><span class="pre">occupied_categories(FeatureCounts)</span></code>, and <code class="docutils literal notranslate"><span class="pre">preparation_mode(Mode)</span></code>.
+Joint mode also records <code class="docutils literal notranslate"><span class="pre">usable_example_count/1</span></code> and
+<code class="docutils literal notranslate"><span class="pre">excluded_example_count/1</span></code>; every complete-case count equals the
+usable count. Counts and specifications follow declaration order, not
+score order.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">check_selector/1</span></code> predicate checks ground structure, unique
 sorted scores, selection consistency, metric identity determined by
 options, valid options, candidate and selected counts, and complete-case
@@ -563,11 +568,12 @@ recompute scores from a dataset. The <code class="docutils literal notranslate">
 <p>Univariate scores do not detect interaction-only signals or remove
 redundant features. Raw information favors high-cardinality features;
 normalization does not eliminate sampling bias. Per-feature missingness
-can make samples incomparable. Discretization and sample size affect the
-scores. Binning boundaries are not stored as a transformation for future
-examples. No regression scoring, p-values, bias correction, or automatic
-feature-count selection is provided. Arithmetic uses backend
-floating-point precision.</p>
+can make samples incomparable; joint mode aligns samples but can discard
+many rows and does not eliminate missing-data bias. Discretization and
+sample size affect the scores. Binning boundaries are not stored as a
+transformation for future examples. No regression scoring, p-values,
+bias correction, or automatic feature-count selection is provided.
+Arithmetic uses backend floating-point precision.</p>
 </section>
 </section>
 

@@ -8,7 +8,7 @@
 ``lasso_feature_selector``
 ==========================
 
-Regression feature selection by maximum absolute Lasso coefficient per original feature, including missing-value indicators.
+Regression feature selection by maximum absolute Lasso coefficient per original feature, with optional deterministic holdout regularization search. Search requires two usable rows.
 
 | **Availability:** 
 |    ``logtalk_load(lasso_feature_selector(loader))``
@@ -27,6 +27,7 @@ Regression feature selection by maximum absolute Lasso coefficient per original 
 |    :ref:`format <format/0>`
 |    :ref:`lasso_regression <lasso_regression/0>`
 |    :ref:`list <list/0>`
+|    :ref:`regression_dataset_adapter(Dataset) <regression_dataset_adapter/1>`
 |    :ref:`type <type/0>`
 
 | **Remarks:**
@@ -96,6 +97,29 @@ Counts numeric targets while skipping unbound targets.
 | **Exceptions:**
 |    A known target is not numeric:
 |        ``type_error(number,Target)``
+
+
+------------
+
+.. index:: check_search_count/1
+.. _lasso_feature_selector/0::check_search_count/1:
+
+``check_search_count/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Requires at least two known numeric targets for holdout search.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_search_count(Count)``
+| **Mode and number of proofs:**
+|    ``check_search_count(+non_negative_integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Fewer than two usable rows remain:
+|        ``domain_error(lasso_search_examples,Count)``
 
 
 ------------
@@ -195,10 +219,10 @@ Retains scores strictly above the coefficient cutoff.
 
 ------------
 
-.. index:: model_diagnostics/7
-.. _lasso_feature_selector/0::model_diagnostics/7:
+.. index:: model_diagnostics/8
+.. _lasso_feature_selector/0::model_diagnostics/8:
 
-``model_diagnostics/7``
+``model_diagnostics/8``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 Builds counts, effective options, aggregation metadata, and complete nested learner diagnostics.
@@ -207,9 +231,9 @@ Builds counts, effective options, aggregation metadata, and complete nested lear
 |    ``static``
 
 | **Template:**
-|    ``model_diagnostics(Regressor,Scores,Selected,OriginalCount,UsableCount,Options,Diagnostics)``
+|    ``model_diagnostics(Regressor,Scores,Selected,OriginalCount,UsableCount,Options,SearchResult,Diagnostics)``
 | **Mode and number of proofs:**
-|    ``model_diagnostics(+compound,+list(pair),+list(atom),+positive_integer,+positive_integer,+list(compound),-list(compound))`` - ``one``
+|    ``model_diagnostics(+compound,+list(pair),+list(atom),+positive_integer,+positive_integer,+list(compound),+term,-list(compound))`` - ``one``
 
 
 ------------
@@ -235,6 +259,8 @@ Checks the retained regressor and recomputes scores, selection, and metadata wit
 |        ``domain_error(regressor,Regressor)``
 |    A stored option is invalid:
 |        ``domain_error(option,Option)``
+|    A generated regularization bound exceeds backend floating-point limits:
+|        ``evaluation_error(float_overflow)``
 |    Stored options are not a list:
 |        ``type_error(list,Options)``
 |    A stored option is not compound:
@@ -277,6 +303,48 @@ Checks that each learner default option indicator has an effective value.
 |    ``complete_regressor_options(Defaults,Options)``
 | **Mode and number of proofs:**
 |    ``complete_regressor_options(+list(compound),+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_regularization_grid/1
+.. _lasso_feature_selector/0::valid_regularization_grid/1:
+
+``valid_regularization_grid/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks an explicit penalty list or an increasing bounded linear grid with at least two candidates.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_regularization_grid(Grid)``
+| **Mode and number of proofs:**
+|    ``valid_regularization_grid(@term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: regularization_grid_values/2
+.. _lasso_feature_selector/0::regularization_grid_values/2:
+
+``regularization_grid_values/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Expands a validated linear grid to floating-point penalties or preserves an explicit penalty list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``regularization_grid_values(Grid,Values)``
+| **Mode and number of proofs:**
+|    ``regularization_grid_values(+term,-list(number))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A generated bound exceeds backend floating-point limits:
+|        ``evaluation_error(float_overflow)``
 
 
 ------------

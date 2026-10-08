@@ -116,9 +116,11 @@
 		prepare_rows(Examples, Declarations, Variant, Missing, 1, RawRows),
 		length(RawRows, Eligible),
 		population(Variant, RawRows, Classes, TargetScale),
-		column_ranges(Declarations, RawRows, 1, Ranges),
+		row_columns(Declarations, RawRows, RawColumns),
+		column_ranges(Declarations, RawColumns, Ranges),
 		normalize_rows(RawRows, Ranges, Rows),
-		column_distributions(Ranges, Rows, Classes, 1, Columns),
+		normalize_columns(RawColumns, Ranges, NormalColumns),
+		column_distributions(Ranges, NormalColumns, Classes, Columns),
 		^^option(sample_size(Size), Options),
 		^^option(random_seed(Seed), Options),
 		anchors(Size, Seed, Rows, Anchors),
@@ -348,17 +350,39 @@
 		;	Normalized is (Value / Scale - Low) / Range
 		).
 
-	column_ranges([], _Rows, _Index, []).
-	column_ranges([Feature-Type| Declarations], Rows, Index, [range(Feature, Kind, Scale)| Ranges]) :-
+	row_columns([], _Rows, []).
+	row_columns([_| Declarations], Rows, [Column| Columns]) :-
+		take_row_column(Rows, Column, Remaining),
+		row_columns(Declarations, Remaining, Columns).
+
+	take_row_column([], [], []).
+	take_row_column([row(Position, Target, [Value| Values])| Rows], [Target-Value| Column], [row(Position, Target, Values)| Rest]) :-
+		take_row_column(Rows, Column, Rest).
+
+	column_ranges([], [], []).
+	column_ranges([Feature-Type| Declarations], [Column| Columns], [range(Feature, Kind, Scale)| Ranges]) :-
 		(	Type == numeric ->
 			Kind = numeric,
-			findall(Value, (member(row(_, _, Values), Rows), nth1(Index, Values, known(Value))), Observed),
+			findall(Value, member(_-known(Value), Column), Observed),
 			numeric_scale(Observed, Scale)
 		;	Kind = categorical,
 			Scale = none
 		),
-		Next is Index + 1,
-		column_ranges(Declarations, Rows, Next, Ranges).
+		column_ranges(Declarations, Columns, Ranges).
+
+	normalize_columns([], [], []).
+	normalize_columns([Column| Columns], [Range| Ranges], [Normalized| Rest]) :-
+		normalize_column(Column, Range, Normalized),
+		normalize_columns(Columns, Ranges, Rest).
+
+	normalize_column([], _Range, []).
+	normalize_column([Target-Value| Column], range(Feature, Type, Scale), [Target-Result| Rest]) :-
+		(	Value = known(Number), Type == numeric ->
+			normalized(Number, Scale, Normal),
+			Result = known(Normal)
+		;	Result = Value
+		),
+		normalize_column(Column, range(Feature, Type, Scale), Rest).
 
 	normalize_rows([], _Ranges, []).
 	normalize_rows([row(Position, Target, Values)| Rows], Ranges, [row(Position, Target, Normalized)| Rest]) :-
@@ -375,42 +399,43 @@
 		),
 		normalize_values(Values, Ranges, Results).
 
-	column_distributions([], _Rows, _Classes, _Index, []).
-	column_distributions([range(_Feature, Type, _Scale)| Ranges], Rows, Classes, Index, [column(Type, Distributions, Cache)| Columns]) :-
+	column_distributions([], [], _Classes, []).
+	column_distributions([range(_Feature, Type, _Scale)| Ranges], [Values| Rest], Classes, [column(Type, Distributions, Cache)| Columns]) :-
 		avltree::new(Empty),
-		(	member(row(_, _, Values), Rows), nth1(Index, Values, missing) ->
-			distribution(Rows, Index, pooled, Type, Pooled),
+		(	member(_-missing, Values) ->
+			distribution(Values, pooled, Type, Pooled),
 			findall(
 				Class-Count,
 				(	member(Class-Count, Classes),
-					class_missing(Rows, Class, Index)
+					class_missing(Values, Class)
 				),
 				MissingClasses
 			),
-			class_distributions(MissingClasses, Rows, Index, Type, Pooled, ClassDistributions),
+			class_distributions(MissingClasses, Values, Type, Pooled, ClassDistributions),
 			Pairs = [pooled-Pooled| ClassDistributions],
 			avltree::as_dictionary(Pairs, Distributions),
 			cache_pairs(Pairs, Pairs, Type, Empty, Cache)
 		;	Distributions = Empty,
 			Cache = Empty
 		),
-		Next is Index + 1,
-		column_distributions(Ranges, Rows, Classes, Next, Columns).
+		column_distributions(Ranges, Rest, Classes, Columns).
 
-	class_missing(Rows, Class, Index) :-
-		member(row(_, Target, Values), Rows),
+	class_missing(Values, Class) :-
+		member(Target-missing, Values),
 		Target == Class,
-		nth1(Index, Values, missing),
 		!.
 
-	class_distributions([], _Rows, _Index, _Type, _Pooled, []).
-	class_distributions([Class-_| Classes], Rows, Index, Type, Pooled, [class(Class)-Effective| Distributions]) :-
-		distribution(Rows, Index, class(Class), Type, Distribution),
-		( Distribution = dist(empty, _, _) -> Effective = Pooled; Effective = Distribution ),
-		class_distributions(Classes, Rows, Index, Type, Pooled, Distributions).
+	class_distributions([], _Values, _Type, _Pooled, []).
+	class_distributions([Class-_| Classes], Values, Type, Pooled, [class(Class)-Effective| Distributions]) :-
+		distribution(Values, class(Class), Type, Distribution),
+		(	Distribution = dist(empty, _, _) ->
+			Effective = Pooled
+		;	Effective = Distribution
+		),
+		class_distributions(Classes, Values, Type, Pooled, Distributions).
 
-	distribution(Rows, Index, Group, Type, dist(Tree, Mean, Supports)) :-
-		findall(Value-1, (member(row(_, Target, Values), Rows), group_target(Group, Target), nth1(Index, Values, known(Value))), Pairs),
+	distribution(Values, Group, Type, dist(Tree, Mean, Supports)) :-
+		findall(Value-1, (member(Target-known(Value), Values), group_target(Group, Target)), Pairs),
 		keysort(Pairs, Sorted),
 		histogram(Sorted, Counts),
 		length(Pairs, Total),
@@ -548,7 +573,12 @@
 			Anchor = row(_, Target, _),
 			normalized(Target, Scale, NormalTarget),
 			regression_neighbors(Weighted, NormalTarget, Scale, Totals0, Products0, Mass0, Totals1, Products1, Mass1)
-		;	class_update(Classes, Anchor, Neighbors, K, Weighting, Classes, Totals0, Totals1),
+		;	Anchor = row(_, Target, _),
+			memberchk(Target-AnchorCount, Classes),
+			count_total(Classes, 0, TotalCount),
+			avltree::new(Empty),
+			neighbor_buckets(Neighbors, Empty, Buckets),
+			class_update(Classes, Target, Buckets, K, Weighting, TotalCount, AnchorCount, Totals0, Totals1),
 			Products1 = Products0,
 			Mass1 = Mass0
 		),
@@ -627,28 +657,26 @@
 		Normal is Weight / Total,
 		normalize_weights(Raw, Total, Weighted).
 
-	class_update([], _Anchor, _Neighbors, _K, _Weighting, _Classes, Totals, Totals).
-	class_update([Class-Count| Rest], Anchor, Neighbors, K, Weighting, Classes, Totals0, Totals) :-
-		Anchor = row(_, Target, _),
-		class_neighbors(Neighbors, Class, ClassNeighbors),
+	neighbor_buckets([], Buckets, Buckets).
+	neighbor_buckets([neighbor(Target, Diffs)| Neighbors], Empty, Buckets) :-
+		neighbor_buckets(Neighbors, Empty, Rest),
+		(	avltree::lookup(Target, Previous, Rest) ->
+			true
+		;	Previous = []
+		),
+		avltree::insert(Rest, Target, [neighbor(Target, Diffs)| Previous], Buckets).
+
+	class_update([], _Target, _Buckets, _K, _Weighting, _TotalCount, _AnchorCount, Totals, Totals).
+	class_update([Class-Count| Rest], Target, Buckets, K, Weighting, TotalCount, AnchorCount, Totals0, Totals) :-
+		avltree::lookup(Class, ClassNeighbors, Buckets),
 		take_neighbors(K, ClassNeighbors, Taken),
 		weighted_neighbors(Taken, Weighting, Weighted),
 		(	Class == Target ->
 			Factor = -1.0
-		;	memberchk(Target-AnchorCount, Classes),
-			count_total(Classes, 0, TotalCount),
-			Factor is Count / (TotalCount - AnchorCount)
+		;	Factor is Count / (TotalCount - AnchorCount)
 		),
 		add_neighbors(Weighted, Factor, Totals0, Totals1),
-		class_update(Rest, Anchor, Neighbors, K, Weighting, Classes, Totals1, Totals).
-
-	class_neighbors([], _Class, []).
-	class_neighbors([neighbor(Target, Diffs)| Neighbors], Class, Selected) :-
-		(	Class == Target ->
-			Selected = [neighbor(Target, Diffs)| Rest]
-		;	Selected = Rest
-		),
-		class_neighbors(Neighbors, Class, Rest).
+		class_update(Rest, Target, Buckets, K, Weighting, TotalCount, AnchorCount, Totals1, Totals).
 
 	count_total([], Total, Total).
 	count_total([_-Count| Counts], Total0, Total) :-

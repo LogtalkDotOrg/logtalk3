@@ -19,6 +19,29 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- object(fisher_selection_probe,
+	extends(fisher_score_feature_selector)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-10-08,
+		comment is 'Synthetic score-boundary probe for Fisher largest-gap selection.'
+	]).
+
+	:- public(select/2).
+	:- mode(select(+list(pair), -list(atomic)), one).
+	:- info(select/2, [
+		comment is 'Exposes the largest-gap hook for synthetic score references.',
+		argnames is ['Scores', 'Selected']
+	]).
+
+	select(Scores, Selected) :-
+		^^filter_selection(largest_gap, Scores, Selected).
+
+:- end_object.
+
+
 :- object(fisher_multiclass_dataset,
 	implements(feature_dataset_protocol)).
 

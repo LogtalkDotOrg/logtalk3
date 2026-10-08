@@ -606,10 +606,10 @@ prints the shared template and learned model.</p>
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
 <p>Let N be eligible rows, F candidates, M anchors, and S the largest
 empirical support. Indexed row preparation costs <code class="docutils literal notranslate"><span class="pre">O(N</span> <span class="pre">F</span> <span class="pre">log(F))</span></code>;
-list-position column passes can cost <code class="docutils literal notranslate"><span class="pre">O(N</span> <span class="pre">F^2)</span></code>. Complete-case
-neighbor search and scoring cost <code class="docutils literal notranslate"><span class="pre">O(M</span> <span class="pre">N</span> <span class="pre">(F</span> <span class="pre">+</span> <span class="pre">log(N)))</span></code> beyond
-preparation. All-row mode uses M equal to N and is quadratic in N for
-fixed F.</p>
+sequential column extraction and normalization cost <code class="docutils literal notranslate"><span class="pre">O(N</span> <span class="pre">F)</span></code>.
+Complete-case neighbor search and scoring cost <code class="docutils literal notranslate"><span class="pre">O(M</span> <span class="pre">N</span> <span class="pre">(F</span> <span class="pre">+</span> <span class="pre">log(N)))</span></code>
+beyond preparation. All-row mode uses M equal to N and is quadratic in N
+for fixed F.</p>
 <p>Probabilistic support sorting and cached pooled expectations add
 <code class="docutils literal notranslate"><span class="pre">O(F</span> <span class="pre">N</span> <span class="pre">log(N)</span> <span class="pre">+</span> <span class="pre">F</span> <span class="pre">S</span> <span class="pre">log(S))</span></code> beyond column passes. Observed/missing
 queries cost <code class="docutils literal notranslate"><span class="pre">O(log(S))</span></code>; missing/missing queries use a cached value.

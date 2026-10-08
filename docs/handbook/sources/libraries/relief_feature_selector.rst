@@ -179,11 +179,11 @@ Limitations
 -----------
 
 Let N be eligible rows, F candidates, and M anchors (N in all-row mode).
-Indexed row preparation costs ``O(N F log(F))``; the column-oriented
-passes also use list-position access and can cost ``O(N F^2)``.
-Complete-case neighbor search and scoring cost ``O(M N (F + log(N)))``,
-retaining ``O(N F + M)`` data. There is no retained all-pairs distance
-matrix.
+Indexed row preparation costs ``O(N F log(F))``; sequential column
+extraction and normalization cost ``O(N F)`` without repeated positional
+scans. Complete-case neighbor search and scoring cost
+``O(M N (F + log(N)))``, retaining ``O(N F + M)`` data. There is no
+retained all-pairs distance matrix.
 
 With probabilistic missing handling, an observed/missing query costs
 ``O(log(S))`` for support size S, in addition to indexed distribution

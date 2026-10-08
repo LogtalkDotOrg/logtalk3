@@ -60,6 +60,14 @@
 		relief_feature_selector::learn(Dataset, Selector),
 		relief_feature_selector::feature_scores(Selector, [signal-Score]).
 
+	test(relief_feature_selector_wide_columns, deterministic) :-
+		Dataset = relief_wide_dataset(binary, 12),
+		Options = [missing_values(probabilistic)],
+		relief_test_reference::scores(Dataset, binary, Expected, Options),
+		relief_feature_selector::learn(Dataset, Selector, Options),
+		relief_feature_selector::feature_scores(Selector, Scores),
+		compare_scores(Scores, Expected).
+
 	test(relief_feature_selector_duplicates, deterministic(Score =~= 1.0)) :-
 		Dataset = relief_test_dataset([signal-continuous], [[signal-0]-a, [signal-0]-a, [signal-1]-b, [signal-1]-b]),
 		relief_feature_selector::learn(Dataset, Selector),

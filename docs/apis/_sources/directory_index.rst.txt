@@ -1471,7 +1471,10 @@ To load an entity, always load the library that includes it using the goal ``log
       anova_f_score <anova_f_score_0>
       chi_square_score <chi_square_score_0>
       chi_square_score(Discretization) <chi_square_score_1>
+      chi_square_yates_score <chi_square_yates_score_0>
       correlation_score <correlation_score_0>
+      cramers_v_bias_corrected_score <cramers_v_bias_corrected_score_0>
+      cramers_v_bias_corrected_score(Discretization) <cramers_v_bias_corrected_score_1>
       cramers_v_score <cramers_v_score_0>
       cramers_v_score(Discretization) <cramers_v_score_1>
       feature_dataset_protocol <feature_dataset_protocol_0>
@@ -1495,7 +1498,10 @@ To load an entity, always load the library that includes it using the goal ``log
    * :doc:`anova_f_score <anova_f_score_0>`
    * :doc:`chi_square_score <chi_square_score_0>`
    * :doc:`chi_square_score(Discretization) <chi_square_score_1>`
+   * :doc:`chi_square_yates_score <chi_square_yates_score_0>`
    * :doc:`correlation_score <correlation_score_0>`
+   * :doc:`cramers_v_bias_corrected_score <cramers_v_bias_corrected_score_0>`
+   * :doc:`cramers_v_bias_corrected_score(Discretization) <cramers_v_bias_corrected_score_1>`
    * :doc:`cramers_v_score <cramers_v_score_0>`
    * :doc:`cramers_v_score(Discretization) <cramers_v_score_1>`
    * :doc:`feature_dataset_protocol <feature_dataset_protocol_0>`
@@ -3532,11 +3538,13 @@ To load an entity, always load the library that includes it using the goal ``log
 
       lasso_feature_selector <lasso_feature_selector_0>
       regression_dataset_adapter(Dataset) <regression_dataset_adapter_1>
+      regression_examples_adapter(Declarations,Examples) <regression_examples_adapter_2>
 
 .. only:: latex
 
    * :doc:`lasso_feature_selector <lasso_feature_selector_0>`
    * :doc:`regression_dataset_adapter(Dataset) <regression_dataset_adapter_1>`
+   * :doc:`regression_examples_adapter(Declarations,Examples) <regression_examples_adapter_2>`
 
 ``library/lasso_regression/``
 -----------------------------

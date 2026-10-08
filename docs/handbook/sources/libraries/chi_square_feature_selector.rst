@@ -57,6 +57,27 @@ alone. The recorded metrics are ``chi_square_score`` and
 features, and single-class samples score zero. Numeric target labels are
 class codes, not regression targets.
 
+The ``score_variant(yates)`` option uses ``chi_square_yates_score``. For
+occupied two-by-two tables it sums
+``max(0, abs(Observed-Expected)-0.5)^2/Expected`` over all four cells,
+including zero-observation cells. Larger tables retain Pearson scoring
+and degenerate tables score zero. This continuity correction does not
+provide p-values or validate expected-count assumptions.
+
+The ``score_variant(bias_corrected)`` option uses
+``cramers_v_bias_corrected_score``, applying Bergsma's correction to
+Pearson chi-square and the occupied table dimensions. With complete-case
+count ``n`` and occupied dimensions ``r`` and ``c``, it computes:
+
+PhiSquared = max(0, ChiSquare/n - (r-1)*(c-1)/(n-1)) CorrectedRows = r -
+(r-1)^2/(n-1) CorrectedColumns = c - (c-1)^2/(n-1) V =
+sqrt(PhiSquared/min(CorrectedRows-1, CorrectedColumns-1))
+
+Scores are clamped to ``[0.0, 1.0]``. A nonpositive corrected
+denominator scores zero as an insufficient-sample convention, including
+two perfectly separated observations. This is not Yates-corrected V or a
+p-value, and does not eliminate every source of sampling bias.
+
 Preparation and options
 -----------------------
 
@@ -71,8 +92,14 @@ complete targets must be atomic.
 The ``learn/2`` predicate uses the defaults. The ``learn/3`` predicate
 accepts an options list as its last argument:
 
-- ``score_variant(raw)`` or ``score_variant(normalized)``, default
-  ``raw``.
+- ``score_variant(raw)``, ``score_variant(normalized)``,
+  ``score_variant(yates)``, or ``score_variant(bias_corrected)``,
+  default ``raw``.
+- ``preparation_mode(per_feature)``, the default, or
+  ``preparation_mode(joint)``.
+- ``expected_count_policy(ignore)``, the default, or
+  ``expected_count_policy(minimum(Minimum))``, with a positive numeric
+  minimum.
 - ``discretization(equal_frequency(Bins))`` or
   ``discretization(equal_width(Bins))``, with a positive integer bin
   count. The default is ``equal_frequency(10)``, applied only to
@@ -94,8 +121,8 @@ including later occurrences. Unknown override feature names are
 rejected. The ``default_option/1`` and ``valid_option/1`` predicates
 remain publicly queryable, including the inherited selection options.
 
-Preparation is per feature: observations with an unbound or absent
-feature value or an unbound target are excluded from that feature
+Default preparation is per feature: observations with an unbound or
+absent feature value or an unbound target are excluded from that feature
 without imputing values. Binning is fitted to its complete cases only.
 Categorical features retain their declared categories unless explicitly
 overridden. Equal-width bins partition the observed range;
@@ -103,6 +130,22 @@ equal-frequency bins use observed quantile cuts without splitting equal
 values. Occupied category counts can be smaller than requested bin
 counts. Applying numeric binning to an atomic non-numeric category is an
 error, not an implicit category encoding.
+
+Joint preparation excludes observations missing any candidate value or
+their target before fitting bins. All features are then scored on the
+same rows. An empty common sample produces zero scores. Joint deletion
+aligns samples; it does not remove missing-data bias and can discard
+many observations.
+
+The minimum expected-count policy checks every cell expectation,
+including unobserved cells, using occupied marginal categories. Equality
+with the minimum is accepted. The ``learn/3`` predicate throws
+``domain_error(chi_square_expected_count, Feature-expected(Observed, Required))``
+when a nondegenerate feature table has a smaller expectation, aborting
+learning rather than omitting that feature. Empty, constant, and
+single-class tables retain zero scores. The policy applies to every
+score variant and does not assert a universal threshold or provide a
+significance test.
 
 Scores are sorted in decreasing order, preserving declaration order on
 ties. Top-k selection may include zero-scoring features. Thresholds
@@ -126,28 +169,33 @@ predicates expose metadata and effective options. Diagnostics contain
 ``selected_count/1``, ``scoring_metric/1``,
 ``complete_cases(FeatureCounts)``,
 ``discretization(FeatureSpecifications)``,
-``occupied_categories(FeatureCounts)``, and
-``preparation_mode(per_feature)``. Counts and specifications follow
-declaration order, not score order.
+``occupied_categories(FeatureCounts)``, and ``preparation_mode(Mode)``.
+Joint preparation also reports ``usable_example_count/1`` and
+``excluded_example_count/1``, which partition ``example_count/1``.
+Counts and specifications follow declaration order, not score order.
 
 The ``check_selector/1`` predicate checks ground structure, unique
 sorted scores, selection consistency, metric identity determined by
-options, valid options, candidate and selected counts, and complete-case
-counts. The ``valid_selector/1`` predicate fails for malformed models
-without binding partial models. These checks are structural; they do not
-recompute scores from a dataset. The ``export_to_clauses/4`` and
-``export_to_file/4`` predicates preserve the complete model. The
-``print_selector/1`` predicate prints its template and contents.
+options, valid options, candidate and selected counts, complete-case
+counts, and preparation-mode consistency. In joint mode all
+complete-case counts must equal the usable count. The
+``valid_selector/1`` predicate fails for malformed models without
+binding partial models. These checks are structural; they do not
+recompute scores from a dataset or recheck expected counts without
+training tables. The ``export_to_clauses/4`` and ``export_to_file/4``
+predicates preserve the complete model. The ``print_selector/1``
+predicate prints its template and contents.
 
 Limitations
 -----------
 
 Univariate scores do not detect interaction-only signals or remove
 redundant features. Raw chi-square depends on sample size and table
-dimensions; normalization does not eliminate sampling bias. Per-feature
-missingness can make samples incomparable. Discretization affects the
+dimensions; ordinary normalization does not eliminate sampling bias, and
+corrected V does not provide a general bias correction. Default
+per-feature missingness can make samples incomparable; joint preparation
+trades alignment for fewer observations. Discretization affects the
 scores. Binning boundaries are not stored as a transformation for future
-examples. No p-values, significance decisions, expected-count rejection,
-Yates or small-sample bias correction, regression scoring, or automatic
-feature-count selection is provided. Arithmetic uses backend
-floating-point precision.
+examples. No p-values, significance decisions, general small-sample bias
+correction, regression scoring, or automatic feature-count selection is
+provided. Arithmetic uses backend floating-point precision.

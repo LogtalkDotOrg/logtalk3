@@ -89,6 +89,14 @@ accepts the following strategies:
 - ``selection_strategy(threshold(T))``: selects every feature scoring at
   least the numeric threshold ``T``.
 - ``selection_strategy(all)``: selects every candidate feature.
+- ``selection_strategy(largest_gap)``: chooses the prefix before the
+  largest adjacent score drop, with the earliest boundary winning ties.
+  Zero scores are excluded. Empty or all-zero scores select nothing;
+  flat positive scores select all positive features. No artificial
+  trailing zero is added.
+
+The largest-gap strategy is a data-dependent heuristic, not a
+significance test or a guarantee of an optimal predictive subset.
 
 Repeated options are accepted and the first occurrence takes precedence.
 Scores are sorted numerically in decreasing order; ties preserve feature
@@ -131,6 +139,5 @@ Fisher scores assess each feature independently. They do not capture
 interaction-only signals or remove redundant features. Scores depend on
 the complete-case samples and are capped rather than representing
 infinity. Arithmetic remains subject to backend floating-point precision
-and range. No automatic choice of feature count or threshold,
-regression-target scoring, or fitted preprocessing transform is
-provided.
+and range. No automatic threshold tuning, regression-target scoring, or
+fitted preprocessing transform is provided.

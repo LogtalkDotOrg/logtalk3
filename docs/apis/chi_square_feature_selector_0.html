@@ -463,7 +463,7 @@
   <p class="right" id="chi-square-feature-selector-0"><span id="index-0"></span><strong>object</strong></p>
 <section id="chi-square-feature-selector">
 <h1><code class="docutils literal notranslate"><span class="pre">chi_square_feature_selector</span></code><a class="headerlink" href="#chi-square-feature-selector" title="Link to this heading"></a></h1>
-<p>Selects categorical or discretized continuous features using Pearson chi-square or Cramer V.</p>
+<p>Selects categorical or discretized continuous features using Pearson or Yates chi-square, or uncorrected or bias-corrected Cramer V.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -487,6 +487,10 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="filter_feature_selector_common_0.html#filter-feature-selector-common-0"><span class="std std-ref">filter_feature_selector_common</span></a></div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="feature_discretization_0.html#feature-discretization-0"><span class="std std-ref">feature_discretization</span></a></div>
 </div>
+<div class="line"><strong>Uses:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="avltree_0.html#avltree-0"><span class="std std-ref">avltree</span></a></div>
+</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
@@ -506,10 +510,11 @@
 <li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p></li>
 <li><p><a class="reference internal" href="#private-predicates" id="id3">Private predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#score-columns-3" id="id4"><code class="docutils literal notranslate"><span class="pre">score_columns/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#score-columns-4" id="id4"><code class="docutils literal notranslate"><span class="pre">score_columns/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#check-expected-counts-3" id="id5"><code class="docutils literal notranslate"><span class="pre">check_expected_counts/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#operators" id="id5">Operators</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id6">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -522,8 +527,8 @@
 </section>
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
-<section id="score-columns-3">
-<span id="chi-square-feature-selector-0-score-columns-3"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">score_columns/3</span></code></a><a class="headerlink" href="#score-columns-3" title="Link to this heading"></a></h3>
+<section id="score-columns-4">
+<span id="chi-square-feature-selector-0-score-columns-4"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">score_columns/4</span></code></a><a class="headerlink" href="#score-columns-4" title="Link to this heading"></a></h3>
 <p>Scores prepared columns using sparse contingency counts.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -534,11 +539,50 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">score_columns(Columns,Criterion,Scores)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">score_columns(Columns,Criterion,ExpectedCountPolicy,Scores)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">score_columns(+list(compound),+atom,-list(pair))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">score_columns(+list(compound),+atom,+term,-list(pair))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">A nondegenerate table has an expectation below the requested minimum:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(chi_square_expected_count,Feature-expected(ObservedMinimum,RequiredMinimum))</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="check-expected-counts-3">
+<span id="chi-square-feature-selector-0-check-expected-counts-3"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_expected_counts/3</span></code></a><a class="headerlink" href="#check-expected-counts-3" title="Link to this heading"></a></h3>
+<p>Checks the requested minimum expectation for nondegenerate tables.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_expected_counts(Policy,Feature,Counts)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_expected_counts(+term,+atomic,+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">A nondegenerate table has an expectation below the requested minimum:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(chi_square_expected_count,Feature-expected(ObservedMinimum,RequiredMinimum))</span></code></div>
+</div>
 </div>
 </div>
 </section>

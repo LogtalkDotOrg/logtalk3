@@ -151,7 +151,10 @@
 <li class="toctree-l3"><a class="reference internal" href="anova_f_score_0.html">anova_f_score</a></li>
 <li class="toctree-l3"><a class="reference internal" href="chi_square_score_0.html">chi_square_score</a></li>
 <li class="toctree-l3"><a class="reference internal" href="chi_square_score_1.html">chi_square_score(Discretization)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chi_square_yates_score_0.html">chi_square_yates_score</a></li>
 <li class="toctree-l3"><a class="reference internal" href="correlation_score_0.html">correlation_score</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cramers_v_bias_corrected_score_0.html">cramers_v_bias_corrected_score</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cramers_v_bias_corrected_score_1.html">cramers_v_bias_corrected_score(Discretization)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cramers_v_score_0.html">cramers_v_score</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cramers_v_score_1.html">cramers_v_score(Discretization)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="feature_dataset_protocol_0.html">feature_dataset_protocol</a></li>
@@ -585,6 +588,14 @@
 <div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line">A chi-square expectation is below the requested minimum:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(chi_square_expected_count,Feature-expected(ObservedMinimum,RequiredMinimum))</span></code></div>
+</div>
+<div class="line">A generated regularization bound exceeds backend floating-point limits:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(float_overflow)</span></code></div>
 </div>
 <div class="line">A feature declaration is unsupported by the receiving selector:</div>
 <div class="line-block">

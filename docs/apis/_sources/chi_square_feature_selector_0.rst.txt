@@ -8,7 +8,7 @@
 ``chi_square_feature_selector``
 ===============================
 
-Selects categorical or discretized continuous features using Pearson chi-square or Cramer V.
+Selects categorical or discretized continuous features using Pearson or Yates chi-square, or uncorrected or bias-corrected Cramer V.
 
 | **Availability:** 
 |    ``logtalk_load(chi_square_feature_selector(loader))``
@@ -24,6 +24,8 @@ Selects categorical or discretized continuous features using Pearson chi-square 
 | **Imports:**
 |    ``public`` :ref:`filter_feature_selector_common <filter_feature_selector_common/0>`
 |    ``public`` :ref:`feature_discretization <feature_discretization/0>`
+| **Uses:**
+|    :ref:`avltree <avltree/0>`
 
 | **Remarks:**
 |    (none)
@@ -48,10 +50,10 @@ Protected predicates
 Private predicates
 ------------------
 
-.. index:: score_columns/3
-.. _chi_square_feature_selector/0::score_columns/3:
+.. index:: score_columns/4
+.. _chi_square_feature_selector/0::score_columns/4:
 
-``score_columns/3``
+``score_columns/4``
 ^^^^^^^^^^^^^^^^^^^
 
 Scores prepared columns using sparse contingency counts.
@@ -60,9 +62,36 @@ Scores prepared columns using sparse contingency counts.
 |    ``static``
 
 | **Template:**
-|    ``score_columns(Columns,Criterion,Scores)``
+|    ``score_columns(Columns,Criterion,ExpectedCountPolicy,Scores)``
 | **Mode and number of proofs:**
-|    ``score_columns(+list(compound),+atom,-list(pair))`` - ``one``
+|    ``score_columns(+list(compound),+atom,+term,-list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A nondegenerate table has an expectation below the requested minimum:
+|        ``domain_error(chi_square_expected_count,Feature-expected(ObservedMinimum,RequiredMinimum))``
+
+
+------------
+
+.. index:: check_expected_counts/3
+.. _chi_square_feature_selector/0::check_expected_counts/3:
+
+``check_expected_counts/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks the requested minimum expectation for nondegenerate tables.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_expected_counts(Policy,Feature,Counts)``
+| **Mode and number of proofs:**
+|    ``check_expected_counts(+term,+atomic,+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A nondegenerate table has an expectation below the requested minimum:
+|        ``domain_error(chi_square_expected_count,Feature-expected(ObservedMinimum,RequiredMinimum))``
 
 
 ------------

@@ -588,11 +588,13 @@ the learned model.</p>
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
 <p>Let N be eligible rows, F candidates, C classes, M anchors, J classes
 with missing entries in a column, and S its largest empirical support.
-Indexed row preparation costs <code class="docutils literal notranslate"><span class="pre">O(N</span> <span class="pre">F</span> <span class="pre">log(F))</span></code>; list-position column
-passes can cost <code class="docutils literal notranslate"><span class="pre">O(N</span> <span class="pre">F^2)</span></code>. Without missing values, training costs
-<code class="docutils literal notranslate"><span class="pre">O(M</span> <span class="pre">N</span> <span class="pre">(F</span> <span class="pre">+</span> <span class="pre">log(N)</span> <span class="pre">+</span> <span class="pre">C))</span></code> beyond preparation. Class-neighborhood
-extraction scans the sorted neighbor list separately per class. All-row
-mode uses M equal to N and is quadratic in N for fixed F and C.</p>
+Indexed row preparation costs <code class="docutils literal notranslate"><span class="pre">O(N</span> <span class="pre">F</span> <span class="pre">log(F))</span></code>; sequential column
+extraction and normalization cost <code class="docutils literal notranslate"><span class="pre">O(N</span> <span class="pre">F)</span></code>. Without missing values,
+training costs <code class="docutils literal notranslate"><span class="pre">O(M</span> <span class="pre">(N</span> <span class="pre">(F</span> <span class="pre">+</span> <span class="pre">log(N)</span> <span class="pre">+</span> <span class="pre">log(C+1))</span> <span class="pre">+</span> <span class="pre">C</span> <span class="pre">K</span> <span class="pre">F))</span></code> beyond
+preparation, where K is the requested neighbor count. Sorted neighbors
+are bucketed once per anchor in an AVL dictionary; each class retains
+the original distance and row-position order. All-row mode uses M equal
+to N and is quadratic in N for fixed F and C.</p>
 <p>Probabilistic preparation additionally scans class populations and sorts
 supports. A conservative bound beyond column passes is
 <code class="docutils literal notranslate"><span class="pre">O(F</span> <span class="pre">N</span> <span class="pre">C</span> <span class="pre">+</span> <span class="pre">F</span> <span class="pre">N</span> <span class="pre">log(N)</span> <span class="pre">+</span> <span class="pre">F</span> <span class="pre">J^2</span> <span class="pre">S</span> <span class="pre">log(S))</span></code>. Observed/missing distance

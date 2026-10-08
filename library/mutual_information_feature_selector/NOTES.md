@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `mutual_information_feature_selector`
-=======================================
+=====================================
 
 This library implements a univariate filter selector for categorical and
 continuous features with categorical targets. It reuses the typed
@@ -49,10 +49,10 @@ To test this library, load its `tester.lgt` file:
 
 	| ?- logtalk_load(mutual_information_feature_selector(tester)).
 
-The tests cover categorical, mixed, and continuous datasets, independent binary and
-multiclass numerical references, both binning methods, missing observations,
-stable ties, options, malformed inputs and models, reflection, diagnostics,
-printing, and clause and file exports.
+The tests cover categorical, mixed, and continuous datasets, independent
+binary and multiclass numerical references, both binning methods, missing
+observations, stable ties, options, malformed inputs and models, reflection,
+diagnostics, printing, and clause and file exports.
 
 
 Scores
@@ -84,6 +84,9 @@ The `learn/2` predicate uses the defaults. The `learn/3` predicate accepts an
 options list as its last argument:
 
 - `score_variant(raw)` or `score_variant(normalized)`, default `raw`.
+- `preparation_mode(per_feature)` is the default. The `joint` mode excludes
+  rows missing the target or any candidate feature before fitting bins, so
+  all features use the same observations.
 - `discretization(equal_frequency(Bins))` or
   `discretization(equal_width(Bins))`, with a positive integer bin count.
   The default is `equal_frequency(10)`, applied only to continuous features.
@@ -102,7 +105,7 @@ occurrences. Unknown override feature names are rejected. The
 `default_option/1` and `valid_option/1` predicates remain publicly queryable,
 including the inherited selection options.
 
-Preparation is per feature: observations with an unbound or absent feature
+By default, preparation is per feature: observations with an unbound or absent feature
 value or an unbound target are excluded from that feature without imputing
 values. Binning is fitted to its complete cases only. Categorical features
 retain their declared categories unless explicitly overridden. Equal-width
@@ -129,7 +132,9 @@ The `feature_scores/2` predicate returns sorted `Feature-Score` pairs. The
 effective options. Diagnostics contain `model/1`, `example_count/1`,
 `options/1`, `candidate_count/1`, `selected_count/1`, `scoring_metric/1`,
 `complete_cases(FeatureCounts)`, `discretization(FeatureSpecifications)`,
-`occupied_categories(FeatureCounts)`, and `preparation_mode(per_feature)`.
+`occupied_categories(FeatureCounts)`, and `preparation_mode(Mode)`. Joint mode
+also records `usable_example_count/1` and `excluded_example_count/1`;
+every complete-case count equals the usable count.
 Counts and specifications follow declaration order, not score order.
 
 The `check_selector/1` predicate checks ground structure, unique sorted
@@ -148,7 +153,9 @@ Limitations
 Univariate scores do not detect interaction-only signals or remove redundant
 features. Raw information favors high-cardinality features; normalization
 does not eliminate sampling bias. Per-feature missingness can make samples
-incomparable. Discretization and sample size affect the scores. Binning
-boundaries are not stored as a transformation for future examples. No
-regression scoring, p-values, bias correction, or automatic feature-count
-selection is provided. Arithmetic uses backend floating-point precision.
+incomparable; joint mode aligns samples but can discard many rows and does
+not eliminate missing-data bias. Discretization and sample size affect the
+scores. Binning boundaries are not stored as a transformation for future
+examples. No regression scoring, p-values, bias correction, or automatic
+feature-count selection is provided. Arithmetic uses backend floating-point
+precision.

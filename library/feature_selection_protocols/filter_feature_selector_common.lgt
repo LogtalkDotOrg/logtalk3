@@ -68,8 +68,30 @@
 		argnames is ['Dataset', 'Features', 'Examples', 'Options', 'Scores', 'Diagnostics'],
 		exceptions is [
 			'A complete numeric feature value is not numeric' - type_error(number, 'Value'),
-			'A complete categorical target is not atomic' - type_error(atomic, 'Target')
+			'A complete categorical target is not atomic' - type_error(atomic, 'Target'),
+			'A chi-square expectation is below the requested minimum' - domain_error(chi_square_expected_count, 'Feature-expected(ObservedMinimum,RequiredMinimum)')
 		]
+	]).
+
+	:- protected(filter_validate_diagnostics/2).
+	:- mode(filter_validate_diagnostics(+list(compound), +list(compound)), zero_or_one).
+	:- info(filter_validate_diagnostics/2, [
+		comment is 'Checks implementation-specific preparation metadata against effective options.',
+		argnames is ['Options', 'Diagnostics']
+	]).
+
+	:- protected(filter_valid_preparation_diagnostics/2).
+	:- mode(filter_valid_preparation_diagnostics(+atom, +list(compound)), zero_or_one).
+	:- info(filter_valid_preparation_diagnostics/2, [
+		comment is 'Checks the recorded preparation mode and joint complete-case counts.',
+		argnames is ['Mode', 'Diagnostics']
+	]).
+
+	:- protected(filter_selection/3).
+	:- mode(filter_selection(+term, +list(pair), -list(atomic)), one).
+	:- info(filter_selection/3, [
+		comment is 'Applies the receiving filter selection strategy to sorted feature scores.',
+		argnames is ['Strategy', 'Scores', 'Selected']
 	]).
 
 	learn(Dataset, Selector, UserOptions) :-
@@ -79,7 +101,7 @@
 		::filter_validate_dataset(Dataset, Features, Examples),
 		::filter_feature_scores(Dataset, Features, Examples, Options, Scores, ScoreDiagnostics),
 		^^option(selection_strategy(Strategy), Options),
-		filter_selection(Strategy, Scores, Selected),
+		::filter_selection(Strategy, Scores, Selected),
 		length(Examples, ExampleCount),
 		length(Features, CandidateCount),
 		length(Selected, SelectedCount),
@@ -89,6 +111,30 @@
 		Selector =.. [Model, Scores, Selected, Diagnostics].
 
 	filter_validate_dataset(_Dataset, _Features, _Examples).
+
+	filter_validate_diagnostics(_Options, _Diagnostics).
+
+	filter_valid_preparation_diagnostics(Mode, Diagnostics) :-
+		memberchk(preparation_mode(Recorded), Diagnostics),
+		Recorded == Mode,
+		(	Mode == joint ->
+			memberchk(example_count(Total), Diagnostics),
+			memberchk(usable_example_count(Used), Diagnostics),
+			memberchk(excluded_example_count(Excluded), Diagnostics),
+			integer(Used),
+			Used >= 0,
+			integer(Excluded),
+			Excluded >= 0,
+			Total =:= Used + Excluded,
+			memberchk(complete_cases(Counts), Diagnostics),
+			filter_joint_counts(Counts, Used)
+		;	true
+		).
+
+	filter_joint_counts([], _Used).
+	filter_joint_counts([_-Count| Counts], Used) :-
+		Count =:= Used,
+		filter_joint_counts(Counts, Used).
 
 	filter_feature_scores(_Dataset, Features, Examples, Options, Scores, [scoring_metric(Metric), complete_cases(Counts)]) :-
 		::filter_scoring_metric(Options, Metric),
@@ -119,7 +165,7 @@
 			memberchk(scoring_metric(RecordedMetric), Diagnostics),
 			RecordedMetric == Metric,
 			^^option(selection_strategy(Strategy), Options),
-			filter_selection(Strategy, Scores, Expected),
+			::filter_selection(Strategy, Scores, Expected),
 			Selected == Expected,
 			memberchk(selected_count(SelectedCount), Diagnostics),
 			valid(non_negative_integer, SelectedCount),
@@ -132,7 +178,8 @@
 			valid(list(pair), Counts),
 			length(Counts, CandidateCount),
 			avltree::new(Empty),
-			filter_valid_counts(Counts, Vocabulary, ExampleCount, Empty) ->
+			filter_valid_counts(Counts, Vocabulary, ExampleCount, Empty),
+			::filter_validate_diagnostics(Options, Diagnostics) ->
 			true
 		;	domain_error(selector, Selector)
 		).

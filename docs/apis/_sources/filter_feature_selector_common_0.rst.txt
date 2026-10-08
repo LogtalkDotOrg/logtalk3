@@ -128,6 +128,65 @@ Scores all features and reports complete-case counts. Implementations can overri
 |        ``type_error(number,Value)``
 |    A complete categorical target is not atomic:
 |        ``type_error(atomic,Target)``
+|    A chi-square expectation is below the requested minimum:
+|        ``domain_error(chi_square_expected_count,Feature-expected(ObservedMinimum,RequiredMinimum))``
+
+
+------------
+
+.. index:: filter_validate_diagnostics/2
+.. _filter_feature_selector_common/0::filter_validate_diagnostics/2:
+
+``filter_validate_diagnostics/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks implementation-specific preparation metadata against effective options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``filter_validate_diagnostics(Options,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``filter_validate_diagnostics(+list(compound),+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: filter_valid_preparation_diagnostics/2
+.. _filter_feature_selector_common/0::filter_valid_preparation_diagnostics/2:
+
+``filter_valid_preparation_diagnostics/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks the recorded preparation mode and joint complete-case counts.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``filter_valid_preparation_diagnostics(Mode,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``filter_valid_preparation_diagnostics(+atom,+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: filter_selection/3
+.. _filter_feature_selector_common/0::filter_selection/3:
+
+``filter_selection/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Applies the receiving filter selection strategy to sorted feature scores.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``filter_selection(Strategy,Scores,Selected)``
+| **Mode and number of proofs:**
+|    ``filter_selection(+term,+list(pair),-list(atomic))`` - ``one``
 
 
 ------------

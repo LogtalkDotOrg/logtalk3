@@ -49,6 +49,81 @@
 :- end_object.
 
 
+:- object(relief_wide_dataset(_Variant_, _Width_),
+	implements(feature_dataset_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-10-08,
+		comment is 'Wide mixed-column fixtures with staggered missing observations.',
+		parameters is [
+			'Variant' - 'Binary, multiclass, or regression targets.',
+			'Width' - 'Positive number of features.'
+		]
+	]).
+
+	:- uses(user, [
+		atomic_concat/3
+	]).
+
+	attribute_values(Feature, Declaration) :-
+		parameter(2, Width),
+		index(1, Width, Index),
+		feature_name(Index, Feature),
+		(	Index mod 3 =:= 0 ->
+			Declaration = [left, right]
+		;	Declaration = continuous
+		).
+
+	example_count(6).
+
+	example(Position, Pairs, Target) :-
+		index(1, 6, Position),
+		parameter(1, Variant),
+		parameter(2, Width),
+		(	Variant == regression ->
+			Target = Position
+		;	Variant == binary ->
+			(	Position =< 3 ->
+				Target = a
+			;	Target = b
+			)
+		;	Target is (Position - 1) // 2
+		),
+		feature_pairs(1, Width, Position, Pairs).
+
+	index(Start, Maximum, Start) :-
+		Start =< Maximum.
+	index(Start, Maximum, Index) :-
+		Start < Maximum,
+		Next is Start + 1,
+		index(Next, Maximum, Index).
+
+	feature_name(Index, Feature) :-
+		atomic_concat(f, Index, Feature).
+
+	feature_pairs(Index, Width, Position, Pairs) :-
+		(	Index > Width ->
+			Pairs = []
+		;	Pairs = [Feature-Value| Rest],
+			feature_name(Index, Feature),
+			(	Position =:= 2, Index mod 5 =:= 0 ->
+				true
+			;	Index mod 3 =:= 0 ->
+				(	Position mod 2 =:= 0 ->
+					Value = left
+				;	Value = right
+				)
+			;	Value is Position * (Index + 1)
+			),
+			Next is Index + 1,
+			feature_pairs(Next, Width, Position, Rest)
+		).
+
+:- end_object.
+
+
 :- object(relief_sampling_probe,
 	imports(relief_feature_selector_common)).
 
