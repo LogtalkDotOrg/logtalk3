@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:90:0,
+		version is 0:91:0,
 		author is 'Paulo Moura',
-		date is 2026-05-19,
+		date is 2026-10-08,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -606,7 +606,7 @@
 		comment is 'Saves a list of all installed packs and registries plus pinning status to a file using the given options.',
 		argnames is ['File', 'Options'],
 		remarks is [
-			'``lock(Boolean)`` option' - 'Save lock extension facts (lockfile version, git registry commits, and pack integrity hashes) in addition to the standard requirements facts. Default is ``false``.',
+			'``lock(Boolean)`` option' - 'Save complete version 1 lock facts for git registries and SHA-256 archive packs. Requires ``checksum(true)`` and a satisfiable locked dependency graph. Default is ``false``.',
 			'``save(What)`` option' - 'Save registries without installed packs when ``What`` is ``all`` and skip them when ``What`` is ``installed``. Default is ``installed``.'
 		],
 		exceptions is [
@@ -617,7 +617,9 @@
 			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
 			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
 			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
-			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
+			'Lock mode is requested with checksums disabled' - consistency_error(compatible_options, lock(true), checksum(false)),
+			'The setup cannot be represented by a complete lock file' - domain_error(lock_setup, 'Reason')
 		]
 	]).
 
@@ -640,12 +642,12 @@
 		comment is 'Restores a list of registries and packs plus their pinning status from a file using the given options. Fails if restoring is not possible.',
 		argnames is ['File', 'Options'],
 		remarks is [
-			'``lock(Boolean)`` option' - 'Require lock extension facts and enforce strict restoring (exact versions, git registry commits, and pack integrity hashes). Default is ``false``.',
+			'``lock(Boolean)`` option' - 'Require complete version 1 lock facts, git registries, SHA-256 archive packs, and exact dependency versions. Requires ``checksum(true)``. Restoring or verification failure is fatal; completed changes are not rolled back. Default is ``false``.',
 			'``force(Boolean)`` option' - 'Force restoring if a registry is already defined or a pack is already installed. Default is ``true``.',
 			'``compatible(Boolean)`` option' - 'Restrict installation to compatible packs. Default is ``true``.',
 			'``clean(Boolean)`` option' - 'Clean registry and pack archives after restoring. Default is ``false``.',
 			'``verbose(Boolean)`` option' - 'Verbose restoring steps. Default is ``false``.',
-			'``checksum(Boolean)`` option' - 'Verify pack archive checksums. Default is ``true``.',
+			'``checksum(Boolean)`` option' - 'Verify pack archive checksums. Must be ``true`` in lock mode. Default is ``true``.',
 			'``checksig(Boolean)`` option' - 'Verify pack archive signatures. Default is ``false``.',
 			'``git(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``downloader(Atom)`` option' - 'Downloader utility. Either ``curl`` or ``wget``. Default is ``curl``.',
@@ -663,7 +665,8 @@
 			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
 			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
 			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
-			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
+			'Lock mode is requested with checksums disabled' - consistency_error(compatible_options, lock(true), checksum(false))
 		]
 	]).
 
@@ -749,7 +752,7 @@
 	]).
 
 	:- uses(list, [
-		member/2,  memberchk/2, sort/4
+		append/3, member/2, memberchk/2, sort/4
 	]).
 
 	:- uses(logtalk, [
@@ -1610,65 +1613,118 @@
 		print_message(comment, packs, @'Saving current setup'),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
+		check_lock_options(Options),
+		save_setup_terms(Options, Terms),
 		open(File, write, Stream),
+		catch(
+			write_terms(Terms, Stream),
+			Error,
+			( 	close(Stream),
+				throw(Error)
+			)
+		),
+		close(Stream),
+		print_message(comment, packs, @'Saved current setup').
+
+	:- private(save_setup_terms/2).
+	:- mode(save_setup_terms(+list(compound), -list(compound)), one_or_error).
+	:- info(save_setup_terms/2, [
+		comment is 'Collects the setup facts before opening the destination file.',
+		argnames is ['Options', 'Terms'],
+		exceptions is [
+			'The setup cannot be represented by a complete lock file' - domain_error(lock_setup, 'Reason')
+		]
+	]).
+
+	save_setup_terms(Options, Terms) :-
 		(	^^option(save(all), Options) ->
 			findall(Registry, registries::defined(Registry, _, _, _), Registries)
 		;	findall(Registry, installed_pack(Registry, _, _, _), Registries)
 		),
 		sort(Registries, SortedRegistries),
-		forall(
-			member(Registry, SortedRegistries),
-			(	registries::defined(Registry, URL, _, _),
-				writeq(Stream, registry(Registry, URL)), write(Stream, '.\n')
-			)
-		),
 		findall(
 			pack(Registry, Pack, Version),
 			installed_pack(Registry, Pack, Version, _),
 			PacksData0
 		),
 		sort(PacksData0, PacksData),
-		write_terms(PacksData, Stream),
 		findall(
 			pinned_registry(Registry),
 			(member(Registry, SortedRegistries), registries::defined(Registry, _, _, true)),
 			PinnedRegistries0
 		),
 		sort(PinnedRegistries0, PinnedRegistries),
-		write_terms(PinnedRegistries, Stream),
 		findall(
 			pinned_pack(Pack),
 			installed_pack(_, Pack, _, true),
 			PinnedPacks0
 		),
 		sort(PinnedPacks0, PinnedPacks),
-		write_terms(PinnedPacks, Stream),
 		( 	^^option(lock(true), Options) ->
-			write_terms([lockfile_version(1)], Stream),
-			findall(
-				lock_registry_commit(Registry, Commit),
-				(	member(Registry, SortedRegistries),
-					registries::defined(Registry, _, git, _),
-					registries::directory(Registry, Directory),
-					commit_hash(Directory, Commit)
-				),
-				RegistryCommitFacts0
-			),
-			sort(RegistryCommitFacts0, RegistryCommitFacts),
-			write_terms(RegistryCommitFacts, Stream),
-			findall(
-				lock_integrity(Registry, Pack, Version, Algorithm, Digest),
-				(	member(pack(Registry, Pack, Version), PacksData),
-					lock_pack_integrity(Registry, Pack, Version, Algorithm, Digest)
-				),
-				LockIntegrities0
-			),
-			sort(LockIntegrities0, LockIntegrities),
-			write_terms(LockIntegrities, Stream)
-		; 	true
+			lock_registry_facts(SortedRegistries, RegistryTerms, CommitTerms),
+			lock_pack_facts(PacksData, IntegrityTerms),
+			append([lockfile_version(1)| CommitTerms], IntegrityTerms, LockTerms)
+		; 	setup_registry_facts(SortedRegistries, RegistryTerms),
+			LockTerms = []
 		),
-		close(Stream),
-		print_message(comment, packs, @'Saved current setup').
+		append(RegistryTerms, PacksData, RegistryPackTerms),
+		append(RegistryPackTerms, PinnedRegistries, RegistryPackPinTerms),
+		append(RegistryPackPinTerms, PinnedPacks, SetupTerms),
+		append(SetupTerms, LockTerms, Terms),
+		( 	^^option(lock(true), Options) ->
+			( 	check_lock_terms(Terms, ValidatedTerms),
+				lock_pack_plans(PacksData, ValidatedTerms, Options, Plans),
+				lock_install_order(Plans, [], _) ->
+				true
+			; 	domain_error(lock_setup, dependencies)
+			)
+		; 	true
+		).
+
+	setup_registry_facts([], []).
+	setup_registry_facts([Registry| Registries], [registry(Registry, URL)| Terms]) :-
+		registries::defined(Registry, URL, _, _),
+		setup_registry_facts(Registries, Terms).
+
+	:- private(lock_registry_facts/3).
+	:- mode(lock_registry_facts(+list(atom), -list(compound), -list(compound)), one_or_error).
+	:- info(lock_registry_facts/3, [
+		comment is 'Collects the URLs and full commits of all selected git registries.',
+		argnames is ['Registries', 'Terms', 'Commits'],
+		exceptions is [
+			'A selected registry has no usable git commit' - domain_error(lock_setup, registry('Registry'))
+		]
+	]).
+
+	lock_registry_facts([], [], []).
+	lock_registry_facts([Registry| Registries], [registry(Registry, URL)| Terms], [lock_registry_commit(Registry, Commit)| Commits]) :-
+		( 	registries::defined(Registry, URL, git, _),
+			registries::directory(Registry, Directory),
+			commit_hash(Directory, Commit),
+			valid(types([atom(hexadecimal,40), atom(hexadecimal,64)]), Commit) ->
+			lock_registry_facts(Registries, Terms, Commits)
+		; 	domain_error(lock_setup, registry(Registry))
+		).
+
+	:- private(lock_pack_facts/2).
+	:- mode(lock_pack_facts(+list(compound), -list(compound)), one_or_error).
+	:- info(lock_pack_facts/2, [
+		comment is 'Collects the declared SHA-256 archive identities of all selected packs.',
+		argnames is ['Packs', 'Terms'],
+		exceptions is [
+			'A selected pack has no usable SHA-256 archive identity' - domain_error(lock_setup, pack('Registry', 'Pack', 'Version'))
+		]
+	]).
+
+	lock_pack_facts([], []).
+	lock_pack_facts([pack(Registry, Pack, Version)| Packs], [lock_integrity(Registry, Pack, Version, sha256, Digest)| Terms]) :-
+		( 	registry_pack(Registry, Pack, PackObject),
+			PackObject::version(Version, _, URL, sha256-Digest, _, _),
+			^^supported_url_archive(URL),
+			valid(atom(hexadecimal,64), Digest) ->
+			lock_pack_facts(Packs, Terms)
+		; 	domain_error(lock_setup, pack(Registry, Pack, Version))
+		).
 
 	save(File) :-
 		save(File, [save(installed)]).
@@ -1683,8 +1739,15 @@
 			UpdatedOptions = [force(true)| UserOptions]
 		),
 		^^merge_options(UpdatedOptions, Options),
+		check_lock_options(Options),
 		open(File, read, Stream),
-		read_terms(Stream, Terms),
+		catch(
+			read_terms(Stream, Terms),
+			Error,
+			( 	close(Stream),
+				throw(Error)
+			)
+		),
 		close(Stream),
 		( 	^^option(lock(true), Options) ->
 			restore_locked(Terms, Options)
@@ -1747,29 +1810,41 @@
 
 	restore_locked(Terms, Options) :-
 		check_lockfile_version(Terms),
-		restore_locked_terms(Terms, Terms, Options).
+		check_lock_terms(Terms, LockTerms),
+		findall(registry(Registry, URL), member(registry(Registry, URL), LockTerms), Registries),
+		findall(pack(Registry, Pack, Version), member(pack(Registry, Pack, Version), LockTerms), Packs),
+		findall(
+			Pin,
+			( 	member(Pin, LockTerms),
+				lock_pin_term(Pin)
+			),
+			Pins
+		),
+		restore_locked_terms(Registries, LockTerms, Options),
+		lock_pack_plans(Packs, LockTerms, Options, Plans),
+		lock_install_order(Plans, [], OrderedPlans),
+		lock_install_packs(OrderedPlans, Options),
+		restore_locked_terms(Pins, LockTerms, Options),
+		( 	verify_locked_setup(Registries, Packs, Plans, LockTerms, Options) ->
+			true
+		; 	print_message(error, packs, lock_restore_verification_failed),
+			fail
+		).
+
+	lock_pin_term(pinned_registry(_)).
+	lock_pin_term(pinned_pack(_)).
 
 	restore_locked_terms([], _, _).
 	restore_locked_terms([Term| Terms], LockTerms, Options) :-
-		(	restore_locked_term(Term, LockTerms, Options) ->
-			true
-		;	print_message(error, packs, invalid_requirements_file_term(Term))
-		),
+		restore_locked_term(Term, LockTerms, Options),
 		restore_locked_terms(Terms, LockTerms, Options).
 
 	restore_locked_term(registry(Registry, URL), LockTerms, Options) :-
 		registry_restore_options(Registry, LockTerms, Options, LockRegistryOptions),
 		registries_restore_options(LockRegistryOptions, RegistryOptions),
 		( 	registries::add(Registry, URL, RegistryOptions) ->
-			true
+			verify_locked_registry(Registry, URL, LockTerms)
 		; 	print_message(error, packs, 'Restoring registries/packs setup failed while adding the ~q registry'+[Registry]),
-			fail
-		).
-	restore_locked_term(pack(Registry, Pack, Version), LockTerms, Options) :-
-		check_lock_integrity(Registry, Pack, Version, LockTerms),
-		( 	install(Registry, Pack, Version, Options) ->
-			true
-		; 	print_message(error, packs, 'Restoring registries/packs setup failed while installing the ~q pack'+[Pack]),
 			fail
 		).
 	restore_locked_term(pinned_registry(Registry), _, _) :-
@@ -1784,27 +1859,83 @@
 		; 	print_message(error, packs, 'Restoring registries/packs setup failed while pinning the ~q pack'+[Pack]),
 			fail
 		).
-	restore_locked_term(lockfile_version(_), _, _).
-	restore_locked_term(lock_registry_commit(_, _), _, _).
-	restore_locked_term(lock_integrity(_, _, _, _, _), _, _).
 
 	check_lockfile_version(Terms) :-
 		findall(Version, member(lockfile_version(Version), Terms), Versions),
 		( 	Versions == [] ->
 			print_message(error, packs, missing_lockfile_version),
 			fail
-		; 	forall(member(Version, Versions), Version == 1) ->
+		; 	Versions == [1] ->
 			true
-		; 	member(UnsupportedVersion, Versions),
-			UnsupportedVersion \== 1,
-			print_message(error, packs, unsupported_lockfile_version(UnsupportedVersion)),
+		; 	print_message(error, packs, invalid_lockfile_versions(Versions)),
 			fail
 		).
 
+	:- private(check_lock_options/1).
+	:- mode(check_lock_options(+list(compound)), one_or_error).
+	:- info(check_lock_options/1, [
+		comment is 'Checks that lock mode requires archive checksum verification.',
+		argnames is ['Options'],
+		exceptions is [
+			'Lock mode is requested with checksums disabled' - consistency_error(compatible_options, lock(true), checksum(false))
+		]
+	]).
+
+	check_lock_options(Options) :-
+		( 	^^option(lock(true), Options),
+			^^option(checksum(false), Options) ->
+			consistency_error(compatible_options, lock(true), checksum(false))
+		; 	true
+		).
+
+	check_lock_terms(Terms, LockTerms) :-
+		( 	ground(Terms) ->
+			sort(Terms, LockTerms),
+			check_lock_facts(LockTerms, LockTerms)
+		; 	print_message(error, packs, invalid_lockfile(non_ground)),
+			fail
+		).
+
+	check_lock_facts([], _).
+	check_lock_facts([Term| Terms], LockTerms) :-
+		( 	valid_lock_fact(Term, LockTerms) ->
+			check_lock_facts(Terms, LockTerms)
+		; 	print_message(error, packs, invalid_lockfile(Term)),
+			fail
+		).
+
+	valid_lock_fact(lockfile_version(1), _).
+	valid_lock_fact(registry(Registry, URL), Terms) :-
+		atom(Registry),
+		atom(URL),
+		\+ ^^supported_url_archive(URL),
+		( 	sub_atom(URL, 0, _, _, 'file://')
+		; 	sub_atom(URL, _, _, 0, '.git')
+		),
+		findall(OtherURL, member(registry(Registry, OtherURL), Terms), [URL]),
+		memberchk(lock_registry_commit(Registry, _), Terms).
+	valid_lock_fact(pack(Registry, Pack, Version), Terms) :-
+		atom(Registry),
+		atom(Pack),
+		valid(pack_version, Version),
+		memberchk(registry(Registry, _), Terms),
+		findall(OtherRegistry-OtherVersion, member(pack(OtherRegistry, Pack, OtherVersion), Terms), [Registry-Version]),
+		memberchk(lock_integrity(Registry, Pack, Version, sha256, _), Terms).
+	valid_lock_fact(lock_registry_commit(Registry, Commit), Terms) :-
+		memberchk(registry(Registry, _), Terms),
+		valid(types([atom(hexadecimal,40), atom(hexadecimal,64)]), Commit),
+		findall(OtherCommit, member(lock_registry_commit(Registry, OtherCommit), Terms), [Commit]).
+	valid_lock_fact(lock_integrity(Registry, Pack, Version, sha256, Digest), Terms) :-
+		memberchk(pack(Registry, Pack, Version), Terms),
+		valid(atom(hexadecimal,64), Digest),
+		findall(Algorithm-OtherDigest, member(lock_integrity(Registry, Pack, Version, Algorithm, OtherDigest), Terms), [sha256-Digest]).
+	valid_lock_fact(pinned_registry(Registry), Terms) :-
+		memberchk(registry(Registry, _), Terms).
+	valid_lock_fact(pinned_pack(Pack), Terms) :-
+		memberchk(pack(_, Pack, _), Terms).
+
 	registry_restore_options(Registry, LockTerms, Options, [commit(Commit)| Options]) :-
-		member(lock_registry_commit(Registry, Commit), LockTerms),
-		!.
-	registry_restore_options(_, _, Options, Options).
+		memberchk(lock_registry_commit(Registry, Commit), LockTerms).
 
 	registries_restore_options([], []).
 	registries_restore_options([lock(_)| Options], RegistriesOptions) :-
@@ -1831,16 +1962,159 @@
 			fail
 		).
 
-	lock_pack_integrity(Registry, Pack, Version, Algorithm, Digest) :-
-		registry_pack(Registry, Pack, PackObject),
-		( 	PackObject::version(Version, _, _, CheckSum, _, _) ->
-			lock_checksum(CheckSum, Algorithm, Digest)
-		; 	print_message(error, packs, missing_pack_version_integrity_data(Registry, Pack, Version)),
+	lock_checksum(none, none, '').
+	lock_checksum(sha256-Digest, sha256, Digest).
+
+	verify_locked_registry(Registry, URL, Terms) :-
+		( 	memberchk(lock_registry_commit(Registry, Commit), Terms),
+			registries::defined(Registry, URL, git, _),
+			registries::directory(Registry, Directory),
+			commit_hash(Directory, Commit) ->
+			true
+		; 	print_message(error, packs, lock_registry_mismatch(Registry)),
 			fail
 		).
 
-	lock_checksum(none, none, '').
-	lock_checksum(sha256-Digest, sha256, Digest).
+	lock_pack_plans(Packs, Terms, Options, Plans) :-
+		lock_pack_plans(Packs, Packs, Terms, Options, Plans).
+
+	lock_pack_plans([], _, _, _, []).
+	lock_pack_plans([pack(Registry, Pack, Version)| Packs], LockedPacks, Terms, Options, [plan(pack(Registry, Pack, Version), URL, Checksum, Dependencies, Children)| Plans]) :-
+		check_lock_integrity(Registry, Pack, Version, Terms),
+		pack_object(Registry, Pack, PackObject),
+		once(PackObject::version(Version, _, URL, Checksum, Dependencies, Portability)),
+		( 	ground(version(Version, URL, Checksum, Dependencies, Portability)),
+			valid(list, Dependencies),
+			^^supported_url_archive(URL),
+			Checksum = sha256-Digest,
+			valid(atom(hexadecimal,64), Digest) ->
+			true
+		; 	print_message(error, packs, lock_unsupported_pack(Registry, Pack, Version)),
+			fail
+		),
+		check_portability(Portability, Options),
+		( 	lock_dependencies(Dependencies, LockedPacks, Options, Children0) ->
+			sort(Children0, Children)
+		; 	print_message(error, packs, lock_unsatisfied_dependencies(Registry, Pack, Version)),
+			fail
+		),
+		lock_pack_plans(Packs, LockedPacks, Terms, Options, Plans).
+
+	lock_dependencies([], _, _, []).
+	lock_dependencies([First, Second| Dependencies], Packs, Options, Children) :-
+		range_dependency(First, Second, Resource, Lower, LowerOperator, Upper, UpperOperator),
+		!,
+		valid_dependency(First, _),
+		valid_dependency(Second, _),
+		lock_range_dependency(Resource, Lower, LowerOperator, Upper, UpperOperator, Packs, Options, RangeChildren),
+		lock_dependencies(Dependencies, Packs, Options, RestChildren),
+		append(RangeChildren, RestChildren, Children).
+	lock_dependencies([Dependency| Dependencies], Packs, Options, Children) :-
+		lock_dependency(Dependency, Packs, Options, DependencyChildren),
+		lock_dependencies(Dependencies, Packs, Options, RestChildren),
+		append(DependencyChildren, RestChildren, Children).
+
+	lock_range_dependency(Registry::Pack, Lower, LowerOperator, Upper, UpperOperator, Packs, _, [pack(Registry, Pack, Version)]) :-
+		!,
+		memberchk(pack(Registry, Pack, Version), Packs),
+		fix_version_for_comparison(Lower, Version, FixedLower),
+		fix_version_for_comparison(Upper, Version, FixedUpper),
+		{call(LowerOperator, FixedLower, Lower)},
+		{call(UpperOperator, FixedUpper, Upper)}.
+	lock_range_dependency(Resource, Lower, LowerOperator, Upper, UpperOperator, _, Options, []) :-
+		check_range_dependency(Resource, Lower, LowerOperator, Upper, UpperOperator, _, ['$or'(true)| Options]).
+
+	lock_dependency((First; Rest), Packs, Options, Children) :-
+		!,
+		( 	lock_dependency(First, Packs, Options, Children) ->
+			true
+		; 	lock_dependency(Rest, Packs, Options, Children)
+		).
+	lock_dependency((First, Rest), Packs, Options, Children) :-
+		!,
+		( 	valid(list, Rest) ->
+			lock_dependencies([First| Rest], Packs, Options, Children)
+		; 	lock_dependencies([First, Rest], Packs, Options, Children)
+		).
+	lock_dependency(Dependency, Packs, Options, Children) :-
+		valid_dependency(Dependency, _),
+		Dependency =.. [Operator, Resource, RequiredVersion],
+		lock_dependency_version(Resource, Operator, RequiredVersion, Dependency, Packs, Options, Children).
+
+	lock_dependency_version(Registry::Pack, Operator, RequiredVersion, _, Packs, _, [pack(Registry, Pack, Version)]) :-
+		!,
+		memberchk(pack(Registry, Pack, Version), Packs),
+		fix_version_for_comparison(RequiredVersion, Version, FixedVersion),
+		{call(Operator, FixedVersion, RequiredVersion)}.
+	lock_dependency_version(Resource, Operator, RequiredVersion, Dependency, _, Options, []) :-
+		check_version(Operator, Resource, RequiredVersion, Dependency, _, ['$or'(true)| Options]).
+
+	lock_install_order([], _, []) :-
+		!.
+	lock_install_order(Plans, Installed, [Plan| Ordered]) :-
+		( 	lock_ready_plan(Plans, Installed, Plan, Remaining) ->
+			Plan = plan(Pack, _, _, _, _),
+			lock_install_order(Remaining, [Pack| Installed], Ordered)
+		; 	print_message(error, packs, lock_dependency_cycle),
+			fail
+		).
+
+	lock_ready_plan([Plan| Plans], Installed, Plan, Plans) :-
+		Plan = plan(_, _, _, _, Children),
+		forall(member(Child, Children), memberchk(Child, Installed)),
+		!.
+	lock_ready_plan([Plan| Plans], Installed, Ready, [Plan| Remaining]) :-
+		lock_ready_plan(Plans, Installed, Ready, Remaining).
+
+	lock_install_packs([], _).
+	lock_install_packs([plan(pack(Registry, Pack, Version), URL, Checksum, _, _)| Plans], Options) :-
+		( 	installed_pack(OtherRegistry, Pack, OldVersion, _),
+			^^option(force(false), Options) ->
+			( 	OtherRegistry == Registry ->
+				print_message(error, packs, pack_already_installed(Pack))
+			; 	print_message(error, packs, pack_already_installed_from_different_registry(OtherRegistry, Pack, OldVersion))
+			),
+			fail
+		; 	true
+		),
+		print_message(comment, packs, installing_pack(Registry, Pack, Version)),
+		install_pack(Registry, Pack, Version, URL, Checksum, Options),
+		print_message(comment, packs, pack_installed(Registry, Pack, Version)),
+		print_note(install, Version, Pack),
+		lock_install_packs(Plans, Options).
+
+	verify_locked_setup(Registries, Packs, Plans, Terms, Options) :-
+		forall(member(registry(Registry, URL), Registries), verify_locked_registry(Registry, URL, Terms)),
+		forall(
+			member(pack(Registry, Pack, Version), Packs),
+			( 	installed_pack(Registry, Pack, Version, Pinned),
+				( 	member(pinned_pack(Pack), Terms) ->
+					Pinned == true
+				; 	Pinned == false
+				)
+			)
+		),
+		forall(
+			member(registry(Registry, URL), Registries),
+			( 	registries::defined(Registry, URL, git, Pinned),
+				( 	member(pinned_registry(Registry), Terms) ->
+					Pinned == true
+				; 	Pinned == false
+				)
+			)
+		),
+		forall(
+			member(plan(pack(Registry, Pack, Version), _, _, Dependencies, Children), Plans),
+			( 	lock_dependencies(Dependencies, Packs, Options, FinalChildren0),
+				sort(FinalChildren0, Children),
+				findall(
+					pack(DependencyRegistry, DependencyPack, DependencyVersion),
+					pack_dependency(Registry, Pack, Version, DependencyRegistry, DependencyPack, DependencyVersion),
+					ActualChildren0
+				),
+				sort(ActualChildren0, Children)
+			)
+		).
 
 	% orphaned pack predicates
 

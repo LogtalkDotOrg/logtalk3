@@ -1,0 +1,5 @@
+lockfile_version(1).
+registry(repo, 'file://test_files/logtalk_packs/repo_fixture/repo').
+pack(repo, repo, 1:0:0).
+lock_registry_commit(repo, '95d1f1c90e86f04c0682a2c6fe33e1823eb7bea2').
+lock_integrity(repo, repo, 1:0:0, none, '').

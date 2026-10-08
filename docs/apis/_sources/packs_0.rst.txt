@@ -14,8 +14,8 @@ Pack handling predicates.
 |    ``logtalk_load(packs(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:90:0
-| **Date:** 2026-05-19
+| **Version:** 0:91:0
+| **Date:** 2026-10-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -1299,10 +1299,14 @@ Saves a list of all installed packs and registries plus pinning status to a file
 |        ``type_error(compound,Option)``
 |    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
 |        ``domain_error(option,Option)``
+|    Lock mode is requested with checksums disabled:
+|        ``consistency_error(compatible_options,lock(true),checksum(false))``
+|    The setup cannot be represented by a complete lock file:
+|        ``domain_error(lock_setup,Reason)``
 
 | **Remarks:**
 
-    - ``lock(Boolean)`` option: Save lock extension facts (lockfile version, git registry commits, and pack integrity hashes) in addition to the standard requirements facts. Default is ``false``.
+    - ``lock(Boolean)`` option: Save complete version 1 lock facts for git registries and SHA-256 archive packs. Requires ``checksum(true)`` and a satisfiable locked dependency graph. Default is ``false``.
     - ``save(What)`` option: Save registries without installed packs when ``What`` is ``all`` and skip them when ``What`` is ``installed``. Default is ``installed``.
 
 
@@ -1373,15 +1377,17 @@ Restores a list of registries and packs plus their pinning status from a file us
 |        ``type_error(compound,Option)``
 |    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
 |        ``domain_error(option,Option)``
+|    Lock mode is requested with checksums disabled:
+|        ``consistency_error(compatible_options,lock(true),checksum(false))``
 
 | **Remarks:**
 
-    - ``lock(Boolean)`` option: Require lock extension facts and enforce strict restoring (exact versions, git registry commits, and pack integrity hashes). Default is ``false``.
+    - ``lock(Boolean)`` option: Require complete version 1 lock facts, git registries, SHA-256 archive packs, and exact dependency versions. Requires ``checksum(true)``. Restoring or verification failure is fatal; completed changes are not rolled back. Default is ``false``.
     - ``force(Boolean)`` option: Force restoring if a registry is already defined or a pack is already installed. Default is ``true``.
     - ``compatible(Boolean)`` option: Restrict installation to compatible packs. Default is ``true``.
     - ``clean(Boolean)`` option: Clean registry and pack archives after restoring. Default is ``false``.
     - ``verbose(Boolean)`` option: Verbose restoring steps. Default is ``false``.
-    - ``checksum(Boolean)`` option: Verify pack archive checksums. Default is ``true``.
+    - ``checksum(Boolean)`` option: Verify pack archive checksums. Must be ``true`` in lock mode. Default is ``true``.
     - ``checksig(Boolean)`` option: Verify pack archive signatures. Default is ``false``.
     - ``git(Atom)`` option: Extra command-line options. Default is ``''``.
     - ``downloader(Atom)`` option: Downloader utility. Either ``curl`` or ``wget``. Default is ``curl``.
@@ -1587,7 +1593,97 @@ Protected predicates
 Private predicates
 ------------------
 
-(no local declarations; see entity ancestors if any)
+.. index:: save_setup_terms/2
+.. _packs/0::save_setup_terms/2:
+
+``save_setup_terms/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Collects the setup facts before opening the destination file.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``save_setup_terms(Options,Terms)``
+| **Mode and number of proofs:**
+|    ``save_setup_terms(+list(compound),-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    The setup cannot be represented by a complete lock file:
+|        ``domain_error(lock_setup,Reason)``
+
+
+------------
+
+.. index:: lock_registry_facts/3
+.. _packs/0::lock_registry_facts/3:
+
+``lock_registry_facts/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Collects the URLs and full commits of all selected git registries.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``lock_registry_facts(Registries,Terms,Commits)``
+| **Mode and number of proofs:**
+|    ``lock_registry_facts(+list(atom),-list(compound),-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A selected registry has no usable git commit:
+|        ``domain_error(lock_setup,registry(Registry))``
+
+
+------------
+
+.. index:: lock_pack_facts/2
+.. _packs/0::lock_pack_facts/2:
+
+``lock_pack_facts/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Collects the declared SHA-256 archive identities of all selected packs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``lock_pack_facts(Packs,Terms)``
+| **Mode and number of proofs:**
+|    ``lock_pack_facts(+list(compound),-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A selected pack has no usable SHA-256 archive identity:
+|        ``domain_error(lock_setup,pack(Registry,Pack,Version))``
+
+
+------------
+
+.. index:: check_lock_options/1
+.. _packs/0::check_lock_options/1:
+
+``check_lock_options/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that lock mode requires archive checksum verification.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_lock_options(Options)``
+| **Mode and number of proofs:**
+|    ``check_lock_options(+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    Lock mode is requested with checksums disabled:
+|        ``consistency_error(compatible_options,lock(true),checksum(false))``
+
+
+------------
 
 Operators
 ---------

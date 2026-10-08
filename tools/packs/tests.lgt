@@ -23,15 +23,30 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:39:0,
+		version is 0:40:0,
 		author is 'Paulo Moura',
-		date is 2026-05-19,
+		date is 2026-10-08,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
 	:- uses(list, [
-		msort/2
+		append/3, member/2, msort/2
 	]).
+
+	:- private(lock_install_event/3).
+	:- dynamic(lock_install_event/3).
+
+	:- private(capture_lock_installs/0).
+	:- dynamic(capture_lock_installs/0).
+
+	:- private(lock_message_event/1).
+	:- dynamic(lock_message_event/1).
+
+	:- private(capture_lock_messages/0).
+	:- dynamic(capture_lock_messages/0).
+
+	:- private(lock_version_fault/0).
+	:- dynamic(lock_version_fault/0).
 
 	:- uses(user, [
 		atomic_list_concat/2
@@ -49,6 +64,8 @@
 		% pack installation may not work with all backend Prolog systems
 		object_property(packs, file(_, Directory)),
 		os::change_directory(Directory),
+		% create the required packs directory structure
+		packs::setup,
 		% create a temporary key to test checking of pack signatures
 		os::make_directory_path('.ring'),
 		(	os::operating_system_type(windows) ->
@@ -458,6 +475,7 @@
 		packs::pack_object(local_1_d, foo, PackObject).
 
 	test(packs_packs_pack_metadata_4_01, deterministic(atom(Directory))) :-
+		fixture_loaded_state(foo, ExpectedLoaded),
 		packs::installed(local_1_d, foo, Version, Pinned),
 		packs::pack_metadata(local_1_d, foo, Version, metadata(Name, Description, License, Home, SourceURL, Checksum, Dependencies, Portability, Directory, Pinned, Installed, Loaded)),
 		^^assertion(Name == foo),
@@ -469,15 +487,16 @@
 		^^assertion(Dependencies == [logtalk @>= 3:42:0, local_2_d::baz @>= 1:0:0, local_2_d::baz @< 2:0:0]),
 		^^assertion(Portability == [eclipse, gnu, swi, sicstus, yap, trealla, xsb]),
 		^^assertion(Installed == true),
-		^^assertion(Loaded == false).
+		^^assertion(Loaded == ExpectedLoaded).
 
 	test(packs_packs_pack_property_4_01, deterministic) :-
 		packs::installed(local_1_d, foo, Version, _),
 		packs::pack_property(local_1_d, foo, Version, license('Apache-2.0')).
 
 	test(packs_packs_pack_property_4_02, deterministic) :-
+		fixture_loaded_state(foo, Loaded),
 		packs::installed(local_1_d, foo, Version, _),
-		packs::pack_property(local_1_d, foo, Version, loaded(false)).
+		packs::pack_property(local_1_d, foo, Version, loaded(Loaded)).
 
 	test(packs_packs_loaded_pack_3_01, deterministic) :-
 		packs::directory(foo, Directory),
@@ -590,7 +609,7 @@
 	test(packs_packs_restore_2_08, deterministic(Version-Pinned == (1:0:0)-false)) :-
 		packs::installed(local_2_d, baz, Version, Pinned).
 
-	test(packs_packs_save_2_02, deterministic(os::file_exists(Setup))) :-
+	test(packs_packs_save_2_02, error(domain_error(lock_setup, registry(local_1_d)))) :-
 		^^file_path('test_files/setup_lock.txt', Setup),
 		packs::save(Setup, [lock(true)]).
 
@@ -600,21 +619,49 @@
 		registries::delete,
 		registries::clean.
 
-	test(packs_packs_restore_2_10, deterministic) :-
-		^^file_path('test_files/setup_lock.txt', Setup),
-		packs::restore(Setup, [lock(true), compatible(false)]).
+	test(packs_packs_restore_2_10, false) :-
+		^^file_path('test_files/lock_files/directory_registry.txt', Setup),
+		packs::restore(Setup, [lock(true)]).
 
-	test(packs_packs_restore_2_11, deterministic(HowDefined-Pinned == directory-true)) :-
-		registries::defined(local_1_d, _, HowDefined, Pinned).
+	test(packs_packs_restore_2_11, false) :-
+		registries::defined(local_1_d, _, _, _).
 
-	test(packs_packs_restore_2_12, deterministic(HowDefined-Pinned == archive-true)) :-
-		registries::defined(local_2_d, _, HowDefined, Pinned).
+	test(packs_packs_restore_2_12, false) :-
+		registries::defined(local_2_d, _, _, _).
 
-	test(packs_packs_restore_2_13, deterministic(Version-Pinned == (2:0:0)-false)) :-
-		packs::installed(local_1_d, foo, Version, Pinned).
+	test(packs_packs_restore_2_13, false) :-
+		packs::installed(local_1_d, foo, _, _).
 
-	test(packs_packs_restore_2_14, deterministic(Version-Pinned == (1:0:0)-false)) :-
-		packs::installed(local_2_d, baz, Version, Pinned).
+	test(packs_packs_restore_2_14, false) :-
+		packs::installed(local_2_d, baz, _, _).
+
+	test(packs_lock_checksum_required, error(consistency_error(compatible_options, lock(true), checksum(false)))) :-
+		^^file_path('test_files/lock_files/directory_registry.txt', Setup),
+		packs::restore(Setup, [lock(true), checksum(false)]).
+
+	test(packs_lock_missing_commit, false) :-
+		^^file_path('test_files/lock_files/missing_commit.txt', Setup),
+		packs::restore(Setup, [lock(true)]).
+
+	test(packs_lock_unknown_fact, false) :-
+		^^file_path('test_files/lock_files/unknown_fact.txt', Setup),
+		packs::restore(Setup, [lock(true)]).
+
+	test(packs_lock_non_ground, false) :-
+		^^file_path('test_files/lock_files/non_ground.txt', Setup),
+		packs::restore(Setup, [lock(true)]).
+
+	test(packs_lock_duplicate_version, false) :-
+		^^file_path('test_files/lock_files/duplicate_version.txt', Setup),
+		packs::restore(Setup, [lock(true)]).
+
+	test(packs_lock_dangling_pin, false) :-
+		^^file_path('test_files/lock_files/dangling_pin.txt', Setup),
+		packs::restore(Setup, [lock(true)]).
+
+	test(packs_lock_operation_failure, false) :-
+		^^file_path('test_files/lock_files/unavailable_registry.txt', Setup),
+		packs::restore(Setup, [lock(true)]).
 
 	% git registry lockfile setup and restore
 
@@ -646,7 +693,17 @@
 	test(packs_packs_install_4_13, deterministic(Version-Pinned == (1:0:0)-false)) :-
 		packs::installed(repo, repo, Version, Pinned).
 
-	test(packs_packs_save_2_03, deterministic(os::file_exists(Setup))) :-
+	test(packs_lock_save_preserves_destination, deterministic(Term == existing)) :-
+		^^file_path('test_files/setup_lock.txt', Setup),
+		open(Setup, write, Output),
+		write_lock_terms([existing], Output),
+		close(Output),
+		catch(packs::save(Setup, [lock(true)]), error(domain_error(lock_setup, _), _), true),
+		open(Setup, read, Input),
+		read(Input, Term),
+		close(Input).
+
+	test(packs_packs_save_2_03, error(domain_error(lock_setup, pack(repo, repo, 1:0:0)))) :-
 		^^file_path('test_files/setup_repo_lock.txt', Setup),
 		packs::save(Setup, [lock(true)]).
 
@@ -656,12 +713,143 @@
 		registries::delete,
 		registries::clean.
 
-	test(packs_packs_restore_2_17, deterministic) :-
-		^^file_path('test_files/setup_repo_lock.txt', Setup),
+	test(packs_packs_restore_2_17, false) :-
+		^^file_path('test_files/lock_files/directory_pack.txt', Setup),
 		packs::restore(Setup, [lock(true)]).
 
-	test(packs_packs_restore_2_18, deterministic(Version-Pinned == (1:0:0)-false)) :-
-		packs::installed(repo, repo, Version, Pinned).
+	test(packs_packs_restore_2_18, false) :-
+		packs::installed(repo, repo, _, _).
+
+	test(packs_lock_fixture_setup, deterministic) :-
+		unpack_lock_fixture,
+		^^file_url('test_files/logtalk_packs/lock_fixture', URL),
+		registries::add(lock_fixture, URL),
+		packs::install(lock_fixture, lock_b, 2:0:0).
+
+	test(packs_lock_exact_dependency_versions, deterministic(Installs == [lock_b-(1:0:0), lock_a-(1:0:0), lock_c-(1:0:0), lock_d-(1:0:0)])) :-
+		fixture_lock_terms([lock_a, lock_b, lock_c, lock_d], Terms),
+		advance_lock_fixture,
+		capture_locked_restore(Terms, [], Installs).
+
+	test(packs_lock_save_creates_file, deterministic(os::file_exists(Setup))) :-
+		^^clean_file('test_files/setup_repo_lock.txt'),
+		^^file_path('test_files/setup_repo_lock.txt', Setup),
+		\+ os::file_exists(Setup),
+		packs::save(Setup, [lock(true)]).
+
+	test(packs_lock_save_deterministic, deterministic(First == Second)) :-
+		^^file_path('test_files/setup_lock.txt', Setup),
+		packs::save(Setup, [lock(true)]),
+		read_fixture_bytes(Setup, First),
+		packs::save(Setup, [lock(true)]),
+		read_fixture_bytes(Setup, Second).
+
+	test(packs_lock_saved_round_trip, deterministic) :-
+		^^file_path('test_files/setup_lock.txt', Setup),
+		read_fixture_terms(Setup, Terms),
+		member(lock_registry_commit(lock_fixture, Commit), Terms),
+		!,
+		packs::uninstall,
+		registries::delete(lock_fixture, [force(true)]),
+		packs::restore(Setup, [lock(true)]),
+		registries::directory(lock_fixture, Directory),
+		git::commit_hash(Directory, Commit),
+		packs::installed(lock_fixture, lock_a, 1:0:0),
+		packs::installed(lock_fixture, lock_b, 1:0:0),
+		packs::installed(lock_fixture, lock_c, 1:0:0),
+		packs::installed(lock_fixture, lock_d, 1:0:0).
+
+	test(packs_lock_update_verifies_archives, deterministic(Installs == [lock_b-(1:0:0), lock_a-(1:0:0), lock_c-(1:0:0), lock_d-(1:0:0)])) :-
+		fixture_lock_terms([lock_a, lock_b, lock_c, lock_d], Terms),
+		capture_locked_restore(Terms, [update(true)], Installs).
+
+	test(packs_lock_corrupt_cache, deterministic) :-
+		fixture_lock_terms([lock_b], Terms),
+		packs::logtalk_packs(Storage),
+		os::path_concat(Storage, 'archives/packs/lock_fixture/lock_b/v1.0.0.tar.gz', Cache),
+		open(Cache, write, Stream),
+		write_lock_terms([corrupted], Stream),
+		close(Stream),
+		observe_locked_restore(Terms, [], Outcome, Messages, Installs),
+		Outcome == true,
+		lgtunit::assertion(member(pack_archive_discarded(lock_b), Messages)),
+		Installs == [lock_b-(1:0:0)].
+
+	test(packs_lock_missing_integrity, deterministic) :-
+		^^file_path('test_files/lock_files/missing_integrity.txt', Setup),
+		observe_lock_file(Setup, [], Outcome, Messages, Installs),
+		Outcome == false,
+		Installs == [],
+		lgtunit::assertion(\+ member(@'Restored setup', Messages)).
+
+	test(packs_lock_conflicting_pack_version, false) :-
+		^^file_path('test_files/lock_files/conflicting_versions.txt', Setup),
+		packs::restore(Setup, [lock(true)]).
+
+	test(packs_lock_directive_rejected, false) :-
+		^^file_path('test_files/lock_files/directive.txt', Setup),
+		packs::restore(Setup, [lock(true)]).
+
+	test(packs_lock_missing_dependency, false) :-
+		fixture_lock_terms([lock_a], Terms),
+		restore_lock_terms(Terms).
+
+	test(packs_lock_constraints_not_overridden, false) :-
+		fixture_lock_terms([lock_impossible, lock_b], Terms),
+		restore_lock_terms(Terms, [compatible(false), force(true)]).
+
+	test(packs_lock_dependency_cycle, false) :-
+		fixture_lock_terms([lock_cycle_a, lock_cycle_b], Terms),
+		restore_lock_terms(Terms).
+
+	test(packs_lock_archive_mismatch, deterministic) :-
+		fixture_lock_terms([lock_bad], Terms),
+		observe_locked_restore(Terms, [], Outcome, Messages, _),
+		Outcome == false,
+		lgtunit::assertion(member(pack_archive_checksum_failed(lock_bad, _), Messages)),
+		lgtunit::assertion(\+ member(@'Restored setup', Messages)).
+
+	test(packs_lock_final_verification_failure, deterministic) :-
+		fixture_lock_terms([lock_a, lock_b], Terms),
+		assertz(lock_version_fault),
+		catch(
+			observe_locked_restore(Terms, [], Outcome, Messages, _),
+			Error,
+			( 	retractall(lock_version_fault),
+				throw(Error)
+			)
+		),
+		retractall(lock_version_fault),
+		Outcome == false,
+		lgtunit::assertion(member(lock_restore_verification_failed, Messages)),
+		lgtunit::assertion(\+ member(@'Restored setup', Messages)).
+
+	test(packs_lock_force_false, false) :-
+		fixture_lock_terms([lock_a, lock_b], Terms),
+		restore_lock_terms(Terms, [force(false), update(true)]).
+
+	test(packs_lock_restore_pins, deterministic) :-
+		fixture_lock_terms([lock_a, lock_b], Terms),
+		append(Terms, [pinned_registry(lock_fixture), pinned_pack(lock_a)], PinnedTerms),
+		restore_lock_terms(PinnedTerms, [clean(true)]),
+		registries::pinned(lock_fixture),
+		packs::pinned(lock_a).
+
+	test(packs_lock_save_checksum_required, error(consistency_error(compatible_options, lock(true), checksum(false)))) :-
+		^^file_path('test_files/setup_lock.txt', Setup),
+		packs::save(Setup, [lock(true), checksum(false)]).
+
+	test(packs_lock_checksum_first_occurrence, deterministic) :-
+		^^file_path('test_files/setup_lock.txt', Setup),
+		packs::save(Setup, [lock(true), checksum(true), checksum(false)]).
+
+	test(packs_lock_duplicate_commit, false) :-
+		^^file_path('test_files/lock_files/conflicting_commits.txt', Setup),
+		packs::restore(Setup, [lock(true)]).
+
+	test(packs_lock_sha256_commit_validated, false) :-
+		^^file_path('test_files/lock_files/sha256_commit.txt', Setup),
+		packs::restore(Setup, [lock(true)]).
 
 	% broken registry and pack specs
 
@@ -694,14 +882,149 @@
 		;   true
 		).
 
-	% suppress all packs tool messages to not pollute the unit tests output
+	% capture messages and installation events, inject verification faults,
+	% and suppress packs tool output during tests
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).
 
+	logtalk::message_hook(Message, _, packs, _) :-
+		capture_lock_messages,
+		assertz(lock_message_event(Message)),
+		fail.
+	logtalk::message_hook(pack_installed(lock_fixture, lock_a, _), comment, packs, _) :-
+		retract(lock_version_fault),
+		packs::directory(lock_a, Directory),
+		write_fixture_file(Directory, 'VERSION.packs', [9:0:0]),
+		fail.
+	logtalk::message_hook(pack_installed(Registry, Pack, Version), comment, packs, _) :-
+		capture_lock_installs,
+		assertz(lock_install_event(Registry, Pack, Version)).
 	logtalk::message_hook(_Message, _Kind, packs, _Tokens).
 
 	% auxiliary predicates
+
+	restore_lock_terms(Terms) :-
+		restore_lock_terms(Terms, []).
+
+	restore_lock_terms(Terms, Options) :-
+		write_lock_setup(Terms, Setup),
+		packs::restore(Setup, [lock(true)| Options]).
+
+	write_lock_setup(Terms, Setup) :-
+		^^file_path('test_files/setup_lock.txt', Setup),
+		open(Setup, write, Stream),
+		write_lock_terms(Terms, Stream),
+		close(Stream).
+
+	capture_locked_restore(Terms, Options, Installs) :-
+		observe_locked_restore(Terms, Options, Outcome, _, Installs),
+		Outcome == true.
+
+	observe_locked_restore(Terms, Options, Outcome, Messages, Installs) :-
+		write_lock_setup(Terms, Setup),
+		observe_lock_file(Setup, Options, Outcome, Messages, Installs).
+
+	observe_lock_file(Setup, Options, Outcome, Messages, Installs) :-
+		retractall(lock_install_event(_, _, _)),
+		retractall(lock_message_event(_)),
+		assertz(capture_lock_installs),
+		assertz(capture_lock_messages),
+		catch(
+			( 	packs::restore(Setup, [lock(true)| Options]) ->
+				Outcome = true
+			; 	Outcome = false
+			),
+			Error,
+			( 	retractall(capture_lock_installs),
+				retractall(capture_lock_messages),
+				throw(Error)
+			)
+		),
+		retractall(capture_lock_installs),
+		retractall(capture_lock_messages),
+		findall(Message, lock_message_event(Message), Messages),
+		findall(Pack-Version, lock_install_event(_, Pack, Version), Installs).
+
+	% when re-running tests, pack files are already loaded
+	fixture_loaded_state(Pack, Loaded) :-
+		packs::directory(Pack, Directory),
+		os::path_concat(Directory, 'loader.lgt', Loader),
+		( 	logtalk::loaded_file(Loader) ->
+			Loaded = true
+		; 	Loaded = false
+		).
+
+	unpack_lock_fixture :-
+		^^file_path('test_files/logtalk_packs', Destination),
+		os::make_directory_path(Destination),
+		^^file_path('test_files/lock_fixture.zip', Archive),
+		unzip_archive(Archive, Destination).
+
+	fixture_pack_digest(lock_bad, '0000000000000000000000000000000000000000000000000000000000000000') :- !.
+	fixture_pack_digest(_, '27ddfdb1bfd6efd86f4c1627bd7409ff0f9092551193007ca0d576c1f49fa959').
+
+	fixture_lock_terms(Packs, Terms) :-
+		^^file_path('test_files/logtalk_packs/lock_fixture', Directory),
+		^^file_url('test_files/logtalk_packs/lock_fixture', URL),
+		git::commit_hash(Directory, Commit),
+		findall(pack(lock_fixture, Pack, 1:0:0), member(Pack, Packs), PackTerms),
+		findall(
+			lock_integrity(lock_fixture, Pack, 1:0:0, sha256, Digest),
+			( 	member(Pack, Packs),
+				fixture_pack_digest(Pack, Digest)
+			),
+			Integrities
+		),
+		append([lockfile_version(1), registry(lock_fixture, URL), lock_registry_commit(lock_fixture, Commit)| PackTerms], Integrities, Terms).
+
+	advance_lock_fixture :-
+		^^file_path('test_files/logtalk_packs/lock_fixture', Directory),
+		write_fixture_file(Directory, 'advanced.txt', [advanced]),
+		commit_lock_fixture(Directory).
+
+	commit_lock_fixture(Directory) :-
+		os::internal_os_path(Directory, OSDirectory),
+		atomic_list_concat(['git -C "', OSDirectory, '" add . && git -C "', OSDirectory, '" -c user.name=Logtalk -c user.email=tests@logtalk.org -c commit.gpgsign=false commit -q -m fixture'], Command),
+		os::shell(Command).
+
+	write_fixture_file(Directory, Basename, Terms) :-
+		os::path_concat(Directory, Basename, File),
+		open(File, write, Stream),
+		write_lock_terms(Terms, Stream),
+		close(Stream).
+
+	read_fixture_bytes(File, Bytes) :-
+		open(File, read, Stream, [type(binary)]),
+		read_fixture_byte_stream(Stream, Bytes),
+		close(Stream).
+
+	read_fixture_byte_stream(Stream, Bytes) :-
+		get_byte(Stream, Byte),
+		( 	Byte =:= -1 ->
+			Bytes = []
+		; 	Bytes = [Byte| Rest],
+			read_fixture_byte_stream(Stream, Rest)
+		).
+
+	read_fixture_terms(File, Terms) :-
+		open(File, read, Stream),
+		read_fixture_stream(Stream, Terms),
+		close(Stream).
+
+	read_fixture_stream(Stream, Terms) :-
+		read(Stream, Term),
+		( 	Term == end_of_file ->
+			Terms = []
+		; 	Terms = [Term| Rest],
+			read_fixture_stream(Stream, Rest)
+		).
+
+	write_lock_terms([], _).
+	write_lock_terms([Term| Terms], Stream) :-
+		writeq(Stream, Term),
+		write(Stream, '.\n'),
+		write_lock_terms(Terms, Stream).
 
 	first_repo_commit('95d1f1c90e86f04c0682a2c6fe33e1823eb7bea2').
 

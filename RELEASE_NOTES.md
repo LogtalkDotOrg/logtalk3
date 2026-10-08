@@ -147,6 +147,12 @@ validating vectorizer terms (leftmost options always take precedence).
 Tools
 -----
 
+* CHANGED: The `packs` tool lock file saving and restoring to require complete
+and consistent lock data and reject non-git registries and directory packs.
+Locked restores now resolve dependencies using only locked versions, propagate
+registry restoration and pack installation failures, and verify the final
+setup against the lock file.
+
 * UPDATED: The `logtalk_tester.sh` and `logtalk_tester.ps1` testing
 automation scripts to print the fastest and slowest test set names
 and execution times.

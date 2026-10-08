@@ -507,14 +507,67 @@ virtual environments, the <code class="docutils literal notranslate"><span class
 support a <code class="docutils literal notranslate"><span class="pre">lock(true)</span></code> option. Saving with this option writes lock
 extension facts in addition to the requirements facts:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>lockfile_version(<span class="m">1</span>).
-lock_registry_commit(talkshow, <span class="s">&#39;0123456789abcdef0123456789abcdef01234567&#39;</span>).
-lock_integrity(talkshow, lflat, <span class="m">2</span><span class="o">:</span><span class="m">1</span><span class="o">:</span><span class="m">0</span>, sha256, <span class="s">&#39;8774b3863efc03bb6c85dcf34f69f1156d2496a3&#39;</span>).
+lock_registry_commit(
+    talkshow,
+    <span class="s">&#39;0123456789abcdef0123456789abcdef0123456789&#39;</span>
+).
+lock_integrity(
+    talkshow,
+    lflat,
+    <span class="m">2</span><span class="o">:</span><span class="m">1</span><span class="o">:</span><span class="m">0</span>,
+    sha256,
+    <span class="s">&#39;0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef&#39;</span>
+).
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">lock_registry_commit/2</span></code> facts are generated only for registries
-defined from git URLs. Restoring with <code class="docutils literal notranslate"><span class="pre">lock(true)</span></code> enforces lock
-extension facts, including exact pack versions, integrity hashes, and
-git registry commits.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">lock_registry_commit/2</span></code> predicate records the full commit of
+every selected git registry. The <code class="docutils literal notranslate"><span class="pre">lock_integrity/5</span></code> predicate records
+the declared SHA-256 archive identity of every installed pack. A lock
+file must contain exactly one <code class="docutils literal notranslate"><span class="pre">lockfile_version(1)</span></code> fact, complete
+registry and pack records, and no conflicting or unknown facts.</p>
+<p>Lock mode supports git registries, including local git repositories, and
+packs distributed as archives with SHA-256 checksums, including local
+archives. Non-git registries and directory packs are usually development
+sources and are rejected in lock mode; they remain supported by ordinary
+requirements files. The <code class="docutils literal notranslate"><span class="pre">save(all)</span></code> option also requires unused
+registries selected for saving to be git registries. Users must not
+manually modify the managed registry directories.</p>
+<p>Both saving and restoring with <code class="docutils literal notranslate"><span class="pre">lock(true)</span></code> require <code class="docutils literal notranslate"><span class="pre">checksum(true)</span></code>
+(which is the default for this option). Combining lock mode with a
+<code class="docutils literal notranslate"><span class="pre">checksum(false)</span></code> option throws
+<code class="docutils literal notranslate"><span class="pre">consistency_error(compatible_options,</span> <span class="pre">lock(true),</span> <span class="pre">checksum(false))</span></code>.
+Repeated options retain the usual first-occurrence lookup semantics.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">save/2</span></code> predicate validates the complete setup before opening the
+output file. Unsupported sources, missing metadata, or an unsatisfied
+dependency graph throw a <code class="docutils literal notranslate"><span class="pre">domain_error(lock_setup,</span> <span class="pre">Reason)</span></code> exception
+without creating or truncating the destination. Identical setups produce
+identically ordered facts without timestamps. Saving does not re-hash
+archives and does not certify past checksum or signature verification,
+or the current installed directory contents.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">restore/2</span></code> predicate validates the lock file before changing the
+setup, restores the exact registry commits, and validates all pack
+identities and dependencies before installing packs. Dependencies are
+resolved only against the exact versions in the lock file, including
+ranges, alternatives, and conjunctions. Missing dependencies,
+incompatible locked versions, and dependency cycles cause failure.
+Dependency packs are installed first, and every archive checksum is
+verified even when the requested version is already installed or
+<code class="docutils literal notranslate"><span class="pre">update(true)</span></code> is specified. Existing packs require <code class="docutils literal notranslate"><span class="pre">force(true)</span></code>,
+the restore default, for replacement in lock mode.</p>
+<p>After installation, the <code class="docutils literal notranslate"><span class="pre">restore/2</span></code> predicate applies recorded pins
+and verifies registry commits, installed versions, pinning status, and
+resolved dependency edges. Failures are fatal and never reported as
+successful restoration. Unrelated installed packs and registries are
+preserved but cannot substitute for missing locked dependencies.
+Completed changes are not rolled back if a later step fails. Existing
+version 1 files with incomplete pins or development sources must be
+corrected before they can be restored in lock mode.</p>
+<p>Lock files pin source identities, not availability or build
+environments. Archives or commits may become unavailable, and
+<code class="docutils literal notranslate"><span class="pre">clean(true)</span></code> removes cached archives. Logtalk, backend,
+operating-system, and native toolchain versions are not recorded. The
+<code class="docutils literal notranslate"><span class="pre">compatible/1</span></code> option still controls environment compatibility checks;
+it never relaxes exact pack versions, source pins, or checksums.</p>
 </section>
 <section id="registry-specification">
 <h2>Registry specification<a class="headerlink" href="#registry-specification" title="Link to this heading"></a></h2>

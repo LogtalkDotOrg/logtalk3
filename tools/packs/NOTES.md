@@ -389,12 +389,66 @@ option. Saving with this option writes lock extension facts in addition to the
 requirements facts:
 
 	lockfile_version(1).
-	lock_registry_commit(talkshow, '0123456789abcdef0123456789abcdef01234567').
-	lock_integrity(talkshow, lflat, 2:1:0, sha256, '8774b3863efc03bb6c85dcf34f69f1156d2496a3').
+	lock_registry_commit(
+        talkshow,
+        '0123456789abcdef0123456789abcdef0123456789'
+    ).
+	lock_integrity(
+        talkshow,
+        lflat,
+        2:1:0,
+        sha256,
+        '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
+    ).
 
-The `lock_registry_commit/2` facts are generated only for registries defined
-from git URLs. Restoring with `lock(true)` enforces lock extension facts,
-including exact pack versions, integrity hashes, and git registry commits.
+The `lock_registry_commit/2` predicate records the full commit of every selected
+git registry. The `lock_integrity/5` predicate records the declared SHA-256
+archive identity of every installed pack. A lock file must contain exactly
+one `lockfile_version(1)` fact, complete registry and pack records, and no
+conflicting or unknown facts.
+
+Lock mode supports git registries, including local git repositories, and packs
+distributed as archives with SHA-256 checksums, including local archives.
+Non-git registries and directory packs are usually development sources and are
+rejected in lock mode; they remain supported by ordinary requirements files. The
+`save(all)` option also requires unused registries selected for saving to be git
+registries. Users must not manually modify the managed registry directories.
+
+Both saving and restoring with `lock(true)` require `checksum(true)` (which is
+the default for this option). Combining lock mode with a `checksum(false)` option
+throws `consistency_error(compatible_options, lock(true), checksum(false))`.
+Repeated options retain the usual first-occurrence lookup semantics.
+
+The `save/2` predicate validates the complete setup before opening the output
+file. Unsupported sources, missing metadata, or an unsatisfied dependency graph
+throw a `domain_error(lock_setup, Reason)` exception without creating or
+truncating the destination. Identical setups produce identically ordered facts
+without timestamps. Saving does not re-hash archives and does not certify past
+checksum or signature verification, or the current installed directory contents.
+
+The `restore/2` predicate validates the lock file before changing the setup,
+restores the exact registry commits, and validates all pack identities and
+dependencies before installing packs. Dependencies are resolved only against
+the exact versions in the lock file, including ranges, alternatives, and
+conjunctions. Missing dependencies, incompatible locked versions, and dependency
+cycles cause failure. Dependency packs are installed first, and every archive
+checksum is verified even when the requested version is already installed or
+`update(true)` is specified. Existing packs require `force(true)`, the restore
+default, for replacement in lock mode.
+
+After installation, the `restore/2` predicate applies recorded pins and verifies
+registry commits, installed versions, pinning status, and resolved dependency
+edges. Failures are fatal and never reported as successful restoration.
+Unrelated installed packs and registries are preserved but cannot substitute
+for missing locked dependencies. Completed changes are not rolled back if a
+later step fails. Existing version 1 files with incomplete pins or development
+sources must be corrected before they can be restored in lock mode.
+
+Lock files pin source identities, not availability or build environments.
+Archives or commits may become unavailable, and `clean(true)` removes cached
+archives. Logtalk, backend, operating-system, and native toolchain versions are
+not recorded. The `compatible/1` option still controls environment compatibility
+checks; it never relaxes exact pack versions, source pins, or checksums.
 
 
 Registry specification

@@ -1,0 +1,7 @@
+lockfile_version(1).
+registry(lock_fixture, 'file://test_files/logtalk_packs/lock_fixture').
+lock_registry_commit(lock_fixture, '0123456789abcdef0123456789abcdef0123456789').
+pack(lock_fixture, lock_b, 1:0:0).
+pack(lock_fixture, lock_b, 2:0:0).
+lock_integrity(lock_fixture, lock_b, 1:0:0, sha256, '27ddfdb1bfd6efd86f4c1627bd7409ff0f9092551193007ca0d576c1f49fa959').
+lock_integrity(lock_fixture, lock_b, 2:0:0, sha256, '27ddfdb1bfd6efd86f4c1627bd7409ff0f9092551193007ca0d576c1f49fa959').

@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:42:0,
+		version is 0:43:0,
 		author is 'Paulo Moura',
-		date is 2026-03-02,
+		date is 2026-10-08,
 		comment is 'Packs default message translations.'
 	]).
 
@@ -380,6 +380,27 @@
 
 	message_tokens(unsupported_lockfile_version(Version)) -->
 		['Unsupported lockfile version: ~q'-[Version], nl].
+
+	message_tokens(invalid_lockfile_versions(Versions)) -->
+		['Expected exactly one lockfile_version(1) fact, found: ~q'-[Versions], nl].
+
+	message_tokens(invalid_lockfile(Reason)) -->
+		['Invalid or incomplete lock file: ~q'-[Reason], nl].
+
+	message_tokens(lock_registry_mismatch(Registry)) -->
+		['Registry source or commit does not match the lock: ~q'-[Registry], nl].
+
+	message_tokens(lock_unsupported_pack(Registry, Pack, Version)) -->
+		['Locked packs require a SHA-256 archive source: ~q::~q@~q'-[Registry, Pack, Version], nl].
+
+	message_tokens(lock_unsatisfied_dependencies(Registry, Pack, Version)) -->
+		['Dependencies cannot be satisfied by the locked versions: ~q::~q@~q'-[Registry, Pack, Version], nl].
+
+	message_tokens(lock_dependency_cycle) -->
+		['Cyclic pack dependencies cannot be restored in lock mode.'-[], nl].
+
+	message_tokens(lock_restore_verification_failed) -->
+		['Restored registries, packs, pins, or dependencies do not match the lock.'-[], nl].
 
 	message_tokens(missing_lock_integrity(Registry, Pack, Version)) -->
 		['Missing lock integrity fact for pack: ~q::~q@~q'-[Registry, Pack, Version], nl].
