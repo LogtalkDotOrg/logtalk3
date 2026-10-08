@@ -75,6 +75,15 @@ as the commit author and the commit hash. For example:
    Hash = eccaa1a2a9495fef441915bbace84e0a4b0394a2
    yes
 
+The ``commit_hash/2`` predicate returns the HEAD commit hash, regardless
+of local changes. The ``working_tree_clean/1`` predicate succeeds when
+the repository has no staged or unstaged changes to tracked files,
+including submodule changes. It checks the whole repository even when
+given a sub-directory, ignores untracked files (also within submodules),
+and fails if the Git status command fails. The ``working_tree_status/2``
+predicate returns the underlying porcelain version 1 status output for
+tracked changes as an atom, including submodule changes.
+
 It's also possible to get the name of the current local branch. For
 example:
 

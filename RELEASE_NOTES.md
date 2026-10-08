@@ -125,6 +125,9 @@ maximum-relevance feature selection using mutual information differences.
 * ADDED: New `lasso_feature_selector` library implementing feature selection
 using Lasso regression coefficients.
 
+* ADDED: New `git` library predicates `working_tree_status/2` and
+`working_tree_clean/1`.
+
 * IMPROVED: Performance of the `crypto` library.
 
 * IMPROVED: Rewrite predicate definitions as tail-recursive in the

@@ -35706,6 +35706,28 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``working_tree_clean/1``
+   ------------------------
+
+   * :ref:`git_protocol <git_protocol/0::working_tree_clean/1>`
+
+.. only:: latex
+
+   * ``working_tree_clean/1`` - :ref:`git_protocol <git_protocol/0::working_tree_clean/1>`
+
+.. only:: not latex
+
+   ``working_tree_status/2``
+   -------------------------
+
+   * :ref:`git_protocol <git_protocol/0::working_tree_status/2>`
+
+.. only:: latex
+
+   * ``working_tree_status/2`` - :ref:`git_protocol <git_protocol/0::working_tree_status/2>`
+
+.. only:: not latex
+
    ``write_file/3``
    ----------------
 

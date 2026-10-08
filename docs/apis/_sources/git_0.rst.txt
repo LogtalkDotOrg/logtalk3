@@ -14,8 +14,8 @@ Predicates for accessing a git project current branch and latest commit data.
 |    ``logtalk_load(git(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 2:1:2
-| **Date:** 2024-03-11
+| **Version:** 2:2:0
+| **Date:** 2026-10-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -31,7 +31,7 @@ Predicates for accessing a git project current branch and latest commit data.
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`git_protocol/0::branch/2`  :ref:`git_protocol/0::commit_author/2`  :ref:`git_protocol/0::commit_date/2`  :ref:`git_protocol/0::commit_hash/2`  :ref:`git_protocol/0::commit_hash_abbreviated/2`  :ref:`git_protocol/0::commit_log/3`  :ref:`git_protocol/0::commit_message/2`  
+|     :ref:`git_protocol/0::branch/2`  :ref:`git_protocol/0::commit_author/2`  :ref:`git_protocol/0::commit_date/2`  :ref:`git_protocol/0::commit_hash/2`  :ref:`git_protocol/0::commit_hash_abbreviated/2`  :ref:`git_protocol/0::commit_log/3`  :ref:`git_protocol/0::commit_message/2`  :ref:`git_protocol/0::working_tree_clean/1`  :ref:`git_protocol/0::working_tree_status/2`  
 
 .. contents::
    :local:

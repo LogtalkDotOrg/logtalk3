@@ -23,9 +23,9 @@
 	implements(git_protocol)).
 
 	:- info([
-		version is 2:1:2,
+		version is 2:2:0,
 		author is 'Paulo Moura',
-		date is 2024-03-11,
+		date is 2026-10-08,
 		comment is 'Predicates for accessing a git project current branch and latest commit data.'
 	]).
 
@@ -64,6 +64,16 @@
 				fail
 			).
 
+		working_tree_status(Directory, Output) :-
+			temporary_file(Temporary),
+			internal_os_path(Temporary, NativeTemporary),
+			atomic_list_concat(['git -C "', Directory, '" status --porcelain=v1 --untracked-files=no --ignore-submodules=untracked 2>nul > "', NativeTemporary, '"'], Command),
+			(	shell(Command) ->
+				data_raw(Temporary, Output)
+			;	delete_file(Temporary),
+				fail
+			).
+
 	:- else.
 
 		branch(Directory, Branch) :-
@@ -85,7 +95,20 @@
 				fail
 			).
 
+		working_tree_status(Directory, Output) :-
+			temporary_file(Temporary),
+			atomic_list_concat(['git -C "', Directory, '" status --porcelain=v1 --untracked-files=no --ignore-submodules=untracked 2>/dev/null > "', Temporary, '"'], Command),
+			(	shell(Command) ->
+				data_raw(Temporary, Output)
+			;	delete_file(Temporary),
+				fail
+			).
+
 	:- endif.
+
+	working_tree_clean(Directory) :-
+		working_tree_status(Directory, Output),
+		Output == ''.
 
 	commit_author(Directory, Author) :-
 		commit_log(Directory, '%an', Author).

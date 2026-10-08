@@ -22,9 +22,9 @@
 :- protocol(git_protocol).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2022-01-21,
+		date is 2026-10-08,
 		comment is 'Predicates for accessing a git project current branch and latest commit data.'
 	]).
 
@@ -33,6 +33,20 @@
 	:- info(branch/2, [
 		comment is 'Returns the name of the current git branch. Fails if the directory is not a git repo or a sub-directory of a git repo directory.',
 		argnames is ['Directory', 'Branch']
+	]).
+
+	:- public(working_tree_clean/1).
+	:- mode(working_tree_clean(+atom), zero_or_one).
+	:- info(working_tree_clean/1, [
+		comment is 'Succeeds if tracked files have no staged or unstaged changes, including submodule changes. Untracked files are ignored. Fails if ``git status`` fails.',
+		argnames is ['Directory']
+	]).
+
+	:- public(working_tree_status/2).
+	:- mode(working_tree_status(+atom, -atom), zero_or_one).
+	:- info(working_tree_status/2, [
+		comment is 'Returns ``git status`` porcelain version 1 output for tracked changes, including submodule changes. Untracked files are ignored. Fails if ``git status`` fails.',
+		argnames is ['Directory', 'Status']
 	]).
 
 	:- public(commit_author/2).

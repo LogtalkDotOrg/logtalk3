@@ -23,16 +23,16 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:1,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2023-04-13,
+		date is 2026-10-08,
 		comment is 'Unit tests for the "git" library.'
 	]).
 
 	:- uses(git, [
 		branch/2, commit_log/3,
 		commit_author/2, commit_date/2, commit_message/2,
-		commit_hash/2, commit_hash_abbreviated/2
+		commit_hash/2, commit_hash_abbreviated/2, working_tree_clean/1
 	]).
 
 	:- uses(user, [
@@ -123,7 +123,58 @@
 		test_repo(Repo, _),
 		commit_hash_abbreviated(Repo, Hash).
 
+	test(git_working_tree_clean_1_01, false) :-
+		working_tree_clean('/').
+
+	test(git_working_tree_clean_1_02, deterministic) :-
+		test_repo(Repo, _),
+		working_tree_clean(Repo).
+
+	test(git_working_tree_clean_1_03, deterministic) :-
+		test_repo(Repo, _),
+		os::path_concat(Repo, 'untracked.txt', File),
+		write_dirty_fixture(File),
+		^^assertion(git::working_tree_clean(Repo)),
+		os::delete_file(File),
+		working_tree_clean(Repo).
+
+	test(git_working_tree_clean_1_04, deterministic(Hash == '02a812ed805949d3aaf15240254c27564eff35c5')) :-
+		test_repo(Repo, _),
+		os::path_concat(Repo, 'a.lgt', File),
+		write_dirty_fixture(File),
+		^^assertion(\+ git::working_tree_clean(Repo)),
+		commit_hash(Repo, Hash),
+		fixture_git_command(Repo, 'checkout -- a.lgt'),
+		working_tree_clean(Repo).
+
+	test(git_working_tree_clean_1_05, deterministic) :-
+		test_repo(Repo, _),
+		os::path_concat(Repo, 'a.lgt', File),
+		write_dirty_fixture(File),
+		fixture_git_command(Repo, 'add a.lgt'),
+		^^assertion(\+ git::working_tree_clean(Repo)),
+		fixture_git_command(Repo, 'reset -q HEAD -- a.lgt'),
+		fixture_git_command(Repo, 'checkout -- a.lgt'),
+		working_tree_clean(Repo).
+
+	test(git_working_tree_clean_1_06, deterministic) :-
+		test_repo(Repo, _),
+		os::path_concat(Repo, 'a.lgt', File),
+		os::delete_file(File),
+		^^assertion(\+ git::working_tree_clean(Repo)),
+		fixture_git_command(Repo, 'checkout -- a.lgt'),
+		working_tree_clean(Repo).
+
 	% auxiliary predicates
+
+	write_dirty_fixture(File) :-
+		open(File, write, Stream),
+		write(Stream, dirty),
+		close(Stream).
+
+	fixture_git_command(Repo, Arguments) :-
+		atomic_list_concat(['git -C "', Repo, '" ', Arguments], Command),
+		os::shell(Command).
 
 	test_repo(Repo, Directory) :-
 		this(This),

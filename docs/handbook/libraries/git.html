@@ -496,6 +496,14 @@ yes
 yes
 </pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">commit_hash/2</span></code> predicate returns the HEAD commit hash, regardless
+of local changes. The <code class="docutils literal notranslate"><span class="pre">working_tree_clean/1</span></code> predicate succeeds when
+the repository has no staged or unstaged changes to tracked files,
+including submodule changes. It checks the whole repository even when
+given a sub-directory, ignores untracked files (also within submodules),
+and fails if the Git status command fails. The <code class="docutils literal notranslate"><span class="pre">working_tree_status/2</span></code>
+predicate returns the underlying porcelain version 1 status output for
+tracked changes as an atom, including submodule changes.</p>
 <p>It’s also possible to get the name of the current local branch. For
 example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> git<span class="o">::</span>branch(<span class="s">&#39;/Users/pmoura/Documents/Logtalk/logtalk3&#39;</span>, <span class="nv">Branch</span>).
