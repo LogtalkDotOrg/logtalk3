@@ -471,7 +471,7 @@ link in a web browser.</p>
 <h2>Dataset and adapter<a class="headerlink" href="#dataset-and-adapter" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">learn/2</span></code> and <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicates accept a dataset implementing
 <code class="docutils literal notranslate"><span class="pre">feature_dataset_protocol</span></code>. Shared validation checks all original
-examples, including rows with unknown targets, for duplicate
+examples, including rows with unbound targets, for duplicate
 declarations, undeclared or repeated feature bindings, proper feature
 lists, and consistent example counts. The selector checks that every
 remaining target is numeric and that at least one usable example
@@ -488,8 +488,8 @@ feature values. The <code class="docutils literal notranslate"><span class="pre"
 <code class="docutils literal notranslate"><span class="pre">target</span></code> as named metadata, not as a declaration of a candidate
 feature or of an objective. The adapter uses object parameters directly
 and does not create dynamic objects.</p>
-<p>Unknown targets are excluded before fitting encoders or computing
-scaling statistics. Known non-numeric targets raise
+<p>Rows with an unbound target are excluded before fitting encoders or
+computing scaling statistics. Known non-numeric targets raise
 <code class="docutils literal notranslate"><span class="pre">type_error(number,</span> <span class="pre">Target)</span></code>. An empty dataset or one with no known
 targets raises <code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_examples,</span> <span class="pre">Dataset)</span></code>.
 Unsupported declarations raise
@@ -515,20 +515,20 @@ validation belong to the learner.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">coefficient_threshold(Cutoff)</span></code> accepts a non-negative number and
 defaults to <code class="docutils literal notranslate"><span class="pre">0.0</span></code>. A group is active only when its score is strictly
 greater than this cutoff.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">selection_strategy(all)</span></code> selects all active groups and is the
-default. <code class="docutils literal notranslate"><span class="pre">selection_strategy(top_k(K))</span></code> accepts a positive integer
-and selects at most <code class="docutils literal notranslate"><span class="pre">K</span></code> active groups.
-<code class="docutils literal notranslate"><span class="pre">selection_strategy(threshold(T))</span></code> accepts a number and selects
-active groups whose scores are at least <code class="docutils literal notranslate"><span class="pre">T</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">regularization_search(none)</span></code> is the default. The option
-<code class="docutils literal notranslate"><span class="pre">regularization_search(holdout(Fraction,</span> <span class="pre">Values))</span></code> searches a
+<li><p><code class="docutils literal notranslate"><span class="pre">selection_strategy(Strategy)</span></code> selects <code class="docutils literal notranslate"><span class="pre">all</span></code> (default),
+<code class="docutils literal notranslate"><span class="pre">top_k(K)</span></code>, or <code class="docutils literal notranslate"><span class="pre">threshold(T)</span></code>. The <code class="docutils literal notranslate"><span class="pre">all</span></code> strategy selects all
+active groups; <code class="docutils literal notranslate"><span class="pre">top_k(K)</span></code> requires a positive integer and selects at
+most <code class="docutils literal notranslate"><span class="pre">K</span></code> active groups. The <code class="docutils literal notranslate"><span class="pre">threshold(T)</span></code> strategy accepts a
+number and selects active groups whose scores are at least <code class="docutils literal notranslate"><span class="pre">T</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">regularization_search(Search)</span></code> selects <code class="docutils literal notranslate"><span class="pre">none</span></code> (default) or a
+holdout search. The <code class="docutils literal notranslate"><span class="pre">holdout(Fraction,</span> <span class="pre">Values)</span></code> form searches a
 nonempty proper list of non-negative numeric penalties using
 validation MSE. The numeric fraction must be strictly between zero and
 one. Alternatively,
-<code class="docutils literal notranslate"><span class="pre">regularization_search(holdout(Fraction,</span> <span class="pre">linear(Minimum,</span> <span class="pre">Maximum,</span> <span class="pre">Count)))</span></code>
-generates an ascending linear grid. Bounds must be numeric, with a
-non-negative minimum and a greater maximum; <code class="docutils literal notranslate"><span class="pre">Count</span></code> must be an
-integer of at least two.</p></li>
+<code class="docutils literal notranslate"><span class="pre">holdout(Fraction,</span> <span class="pre">linear(Minimum,</span> <span class="pre">Maximum,</span> <span class="pre">Count))</span></code> generates an
+ascending linear grid. Bounds must be numeric, with a non-negative
+minimum and a greater maximum; <code class="docutils literal notranslate"><span class="pre">Count</span></code> must be an integer of at
+least two.</p></li>
 </ul>
 <p>Selection strategies operate only on active groups. Neither a large
 <code class="docutils literal notranslate"><span class="pre">K</span></code> nor a zero or negative strategy threshold reintroduces
@@ -555,8 +555,8 @@ existing tie policy. Grid generation uses no data or randomness and
 obeys backend arithmetic limits. Users still choose the bounds and
 candidate count.</p>
 <p>Search requires at least two usable numeric-target rows; otherwise it
-raises <code class="docutils literal notranslate"><span class="pre">domain_error(lasso_search_examples,</span> <span class="pre">Count)</span></code>. Unknown targets
-are removed before splitting. For N usable rows, the last
+raises <code class="docutils literal notranslate"><span class="pre">domain_error(lasso_search_examples,</span> <span class="pre">Count)</span></code>. Rows with an
+unbound target are removed before splitting. For N usable rows, the last
 <code class="docutils literal notranslate"><span class="pre">min(N-1,</span> <span class="pre">max(1,</span> <span class="pre">ceiling(Fraction*N)))</span></code> rows form the validation
 suffix; the preceding rows form the training prefix. Row order is
 preserved, and example identifiers are not used as split keys. There is
@@ -582,8 +582,8 @@ in the selector.</p>
 </section>
 <section id="model-and-diagnostics">
 <h2>Model and diagnostics<a class="headerlink" href="#model-and-diagnostics" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">learn/2</span></code> and <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicates return the following selector
-term:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">learn/2</span></code> and <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicates return models using the
+following term representation:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>lasso_feature_selector(<span class="nv">Regressor</span>, <span class="nv">AllSortedFeatureScores</span>, <span class="nv">SelectedOriginalFeatures</span>, <span class="nv">Diagnostics</span>)
 </pre></div>
 </div>
@@ -592,8 +592,9 @@ term:</p>
 The <code class="docutils literal notranslate"><span class="pre">feature_scores/2</span></code> predicate returns all original
 <code class="docutils literal notranslate"><span class="pre">Feature-Score</span></code> pairs, and the <code class="docutils literal notranslate"><span class="pre">selected_features/2</span></code> predicate
 returns only selected original names.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code> predicate returns the following metadata list; the
-<code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code> predicate enumerates its terms:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> argument is a list of diagnostic terms. The
+<code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code> predicate returns this list; the <code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code>
+predicate enumerates its terms:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>[
     model(lasso_feature_selector),
     example_count(<span class="nv">OriginalCount</span>),
@@ -610,15 +611,16 @@ returns only selected original names.</p>
 ]
 </pre></div>
 </div>
-<p>The original count includes unknown-target rows. The usable and excluded
-counts partition that count. The nested diagnostics are retained
-unchanged, including convergence status, completed iterations, final
-delta, encoded count, and effective solver options. The
+<p>The original count includes rows with unbound targets. The usable and
+excluded counts partition that count. The nested diagnostics are
+retained unchanged, including convergence status, completed iterations,
+final delta, encoded count, and effective solver options. The
 <code class="docutils literal notranslate"><span class="pre">selector_options/2</span></code> predicate returns the effective wrapper options.
 Exhausting the solver iteration limit does not discard the fitted
 regressor or conceal its stop status.</p>
-<p>The search result is <code class="docutils literal notranslate"><span class="pre">none</span></code> when search is disabled. When enabled, it
-has the following form, where counts refer to the usable-row split:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">regularization_search_result/1</span></code> diagnostic value is <code class="docutils literal notranslate"><span class="pre">none</span></code> when
+search is disabled. When enabled, it is the following term, where counts
+refer to the usable-row split:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>holdout(<span class="nv">TrainingCount</span>, <span class="nv">ValidationCount</span>, <span class="nv">Trials</span>, <span class="nv">SelectedPenalty</span>)
 </pre></div>
 </div>

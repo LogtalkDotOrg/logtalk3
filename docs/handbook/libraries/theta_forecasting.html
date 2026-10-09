@@ -445,14 +445,14 @@
              
   <section id="theta-forecasting">
 <span id="library-theta-forecasting"></span><h1><code class="docutils literal notranslate"><span class="pre">theta_forecasting</span></code><a class="headerlink" href="#theta-forecasting" title="Link to this heading"></a></h1>
-<p>Standard Theta (theta = 2) forecasting combines simple exponential
-smoothing with half the least-squares linear slope. The library supports
-automatic seasonality detection and classical additive or multiplicative
-seasonal adjustment. It reuses <code class="docutils literal notranslate"><span class="pre">forecaster_common</span></code> for dataset
-validation, seasonal preprocessing, diagnostics, forecast construction,
-and export, and the existing <code class="docutils literal notranslate"><span class="pre">exponential_smoothing</span></code> and
-<code class="docutils literal notranslate"><span class="pre">local_optimization</span></code> libraries for SES fitting and bounded
-deterministic optimization.</p>
+<p>This library provides standard Theta (theta = 2) forecasting. It
+combines simple exponential smoothing (SES) with half the least-squares
+linear slope, with optional automatic seasonality detection and
+classical additive or multiplicative seasonal adjustment. It reuses the
+<code class="docutils literal notranslate"><span class="pre">forecaster_common</span></code> category for dataset validation, seasonal
+preprocessing, diagnostics, forecast construction, and export, and the
+existing <code class="docutils literal notranslate"><span class="pre">exponential_smoothing</span></code> and <code class="docutils literal notranslate"><span class="pre">local_optimization</span></code> libraries
+for SES fitting and bounded deterministic optimization.</p>
 <p>Datasets implement <code class="docutils literal notranslate"><span class="pre">time_series_dataset_protocol</span></code>. Observations are
 numbers or anonymous variables representing missing observations, with
 at least two known observations and complete gap-free 1-based indices.
@@ -486,7 +486,8 @@ link in a web browser.</p>
      theta_forecasting<span class="o">::</span>forecast(<span class="nv">Forecaster</span>, <span class="m">12</span>, <span class="nv">Forecasts</span>).
 </pre></div>
 </div>
-<p>For explicit nonseasonal, fixed-parameter fitting:</p>
+<p>To fit a nonseasonal model with a fixed alpha and first-observation
+initialization, supply these learning options:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> theta_forecasting<span class="o">::</span>learn(
         my_series, <span class="nv">Forecaster</span>,
         [alpha(<span class="m">0.5</span>), initialization(first), seasonal(none)]
@@ -498,36 +499,35 @@ link in a web browser.</p>
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate accepts the following options:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">alpha(auto)</span></code> (default), or <code class="docutils literal notranslate"><span class="pre">alpha(Number)</span></code> with
-<code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">=&lt;</span> <span class="pre">Number</span> <span class="pre">=&lt;</span> <span class="pre">1</span></code>. Automatic fitting minimizes SES training SSE on
-the adjusted scale.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">initialization(optimized)</span></code> (default), or <code class="docutils literal notranslate"><span class="pre">initialization(first)</span></code>.
-Optimized initialization fits the initial level within the existing
-SES fitter’s data-derived bounds. First initialization anchors the
-level at the first known adjusted observation. Both strategies use
-that position as the unscored initialization anchor.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">seasonal(auto)</span></code> (default), <code class="docutils literal notranslate"><span class="pre">seasonal(none)</span></code>,
-<code class="docutils literal notranslate"><span class="pre">seasonal(additive)</span></code>, or <code class="docutils literal notranslate"><span class="pre">seasonal(multiplicative)</span></code>. Explicit
-seasonal methods bypass the test.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">frequency(dataset)</span></code> (default), or <code class="docutils literal notranslate"><span class="pre">frequency(PositiveInteger)</span></code>.
-An explicit integer overrides dataset frequency metadata. Auto uses
-frequency one when the dataset does not supply a frequency. Forced
-seasonal adjustment requires a supplied frequency greater than one.
-With <code class="docutils literal notranslate"><span class="pre">seasonal(none)</span></code>, dataset frequency is not inspected and any
+<li><p><code class="docutils literal notranslate"><span class="pre">alpha(Alpha)</span></code> selects <code class="docutils literal notranslate"><span class="pre">auto</span></code> (default) or a number in <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1]</span></code>.
+Automatic fitting minimizes SES training SSE on the adjusted scale.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">initialization(Strategy)</span></code> selects <code class="docutils literal notranslate"><span class="pre">optimized</span></code> (default) or
+<code class="docutils literal notranslate"><span class="pre">first</span></code>. Optimized initialization fits the initial level within the
+existing SES fitter’s data-derived bounds. First initialization
+anchors the level at the first known adjusted observation. Both
+strategies use that position as the unscored initialization anchor.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">seasonal(Mode)</span></code> selects <code class="docutils literal notranslate"><span class="pre">auto</span></code> (default), <code class="docutils literal notranslate"><span class="pre">none</span></code>, <code class="docutils literal notranslate"><span class="pre">additive</span></code>,
+or <code class="docutils literal notranslate"><span class="pre">multiplicative</span></code>. Explicit seasonal methods bypass the test.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">frequency(Frequency)</span></code> selects <code class="docutils literal notranslate"><span class="pre">dataset</span></code> (default) or a positive
+integer. An explicit integer overrides the dataset’s <code class="docutils literal notranslate"><span class="pre">frequency/1</span></code>
+predicate. With the <code class="docutils literal notranslate"><span class="pre">seasonal(auto)</span></code> option, a dataset without
+frequency metadata uses frequency one. Forced seasonal adjustment
+requires a supplied frequency greater than one. With
+<code class="docutils literal notranslate"><span class="pre">seasonal(none)</span></code>, dataset frequency is not inspected and any
 explicitly supplied frequency option is rejected as irrelevant.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">optimizer_options(List)</span></code> (default <code class="docutils literal notranslate"><span class="pre">[]</span></code>): deterministic
-Nelder-Mead tuning options <code class="docutils literal notranslate"><span class="pre">max_iterations/1</span></code>, <code class="docutils literal notranslate"><span class="pre">tol_x/1</span></code>,
+<li><p><code class="docutils literal notranslate"><span class="pre">optimizer_options(List)</span></code> supplies deterministic Nelder-Mead tuning
+sub-options (default: <code class="docutils literal notranslate"><span class="pre">[]</span></code>): <code class="docutils literal notranslate"><span class="pre">max_iterations/1</span></code>, <code class="docutils literal notranslate"><span class="pre">tol_x/1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">tol_f/1</span></code>, <code class="docutils literal notranslate"><span class="pre">initial_step/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">adaptive/1</span></code>, using their
 existing solver domains and defaults. Duplicate tuning names are
 rejected. Objective, progress output and initial-point overrides are
 not accepted.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">missing_policy(skip_update)</span></code> (default), or
-<code class="docutils literal notranslate"><span class="pre">missing_policy(error)</span></code>. Missing observations leave the SES level
-unchanged and are not scored. The strict policy rejects unbound
-observations without binding them.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">retain_residuals(false)</span></code> (default), or <code class="docutils literal notranslate"><span class="pre">retain_residuals(true)</span></code>.
-Retains numeric training residuals and matching original time indices
-in diagnostics when enabled. Retention does not change fitting,
+<li><p><code class="docutils literal notranslate"><span class="pre">missing_policy(Policy)</span></code> selects <code class="docutils literal notranslate"><span class="pre">skip_update</span></code> (default) or
+<code class="docutils literal notranslate"><span class="pre">error</span></code>. Missing observations leave the SES level unchanged and are
+not scored. The strict policy rejects unbound observations without
+binding them.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">retain_residuals(Boolean)</span></code> selects <code class="docutils literal notranslate"><span class="pre">false</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">true</span></code>.
+Enable it to retain numeric training residuals and matching original
+time indices in diagnostics. Retention does not change fitting,
 forecasts or fitted values.</p></li>
 </ul>
 <p>Fixed alpha with first initialization does not run an optimizer.
@@ -539,9 +539,9 @@ is not silently replaced by an optimizer-selected value.</p>
 </section>
 <section id="theta-formula">
 <h2>Theta formula<a class="headerlink" href="#theta-formula" title="Link to this heading"></a></h2>
-<p>Fit <code class="docutils literal notranslate"><span class="pre">Adjusted(t)</span> <span class="pre">=</span> <span class="pre">Intercept</span> <span class="pre">+</span> <span class="pre">Slope*t</span></code> by ordinary least squares
-using known values and their original positions. Let J be the first
-known position and <code class="docutils literal notranslate"><span class="pre">Level(J)</span></code> the selected initial level. For
+<p>The library fits <code class="docutils literal notranslate"><span class="pre">Adjusted(t)</span> <span class="pre">=</span> <span class="pre">Intercept</span> <span class="pre">+</span> <span class="pre">Slope*t</span></code> by ordinary least
+squares using known values and their original positions. Let J be the
+first known position and <code class="docutils literal notranslate"><span class="pre">Level(J)</span></code> the selected initial level. For
 subsequent known positions through N, SES uses:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="nv">Level</span>(t) <span class="o">=</span> <span class="nv">Alpha</span><span class="o">*</span><span class="nv">Adjusted</span>(t) <span class="o">+</span> (<span class="m">1</span><span class="o">-</span><span class="nv">Alpha</span>)<span class="o">*</span><span class="nv">Level</span>(t<span class="o">-</span><span class="m">1</span>)
 </pre></div>
@@ -595,10 +595,11 @@ attempt to reproduce every reference implementation’s default behavior.</p>
 <p>Forced seasonal adjustment requires at least two elapsed cycles. The
 trend estimate uses a centered m-point moving average for odd m and a
 centered two-by-m moving average for even m. Only interior trend
-estimates with entirely known window support contribute to phase
-averages. An odd period needs m known positions per window; an even
-period needs m+1. Every original phase must have at least one valid
-interior deviation; otherwise learning raises
+estimates calculated from windows with no missing observations
+contribute to phase averages. An odd period requires m consecutive known
+observations per window; an even period requires m+1. For each seasonal
+phase, at least one known observation must have a trend estimate
+calculated from such a window; otherwise learning raises
 <code class="docutils literal notranslate"><span class="pre">domain_error(insufficient_seasonal_phase_observations,</span> <span class="pre">Phase)</span></code>,
 reporting the lowest unestimable phase. This also applies after
 automatic detection; decomposition errors never silently fall back to a
@@ -616,10 +617,10 @@ three and fixed first initialization forecasts <code class="docutils literal not
 </section>
 <section id="fitted-values">
 <h2>Fitted values<a class="headerlink" href="#fitted-values" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">fitted_values(Dataset,</span> <span class="pre">Values)</span></code> predicate uses default learning
-options. The <code class="docutils literal notranslate"><span class="pre">fitted_values(Dataset,</span> <span class="pre">Values,</span> <span class="pre">Options)</span></code> predicate
-accepts the same options as <code class="docutils literal notranslate"><span class="pre">learn/3</span></code>, including automatic alpha,
-optimized initialization, seasonal adjustment and both missing policies.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">fitted_values/2</span></code> predicate uses default learning options. The
+<code class="docutils literal notranslate"><span class="pre">fitted_values/3</span></code> predicate accepts the same learning options as the
+<code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate, including automatic alpha, optimized
+initialization, seasonal adjustment and both missing policies.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> theta_forecasting<span class="o">::</span>fitted_values(
         my_series, <span class="nv">Values</span>,
         [alpha(<span class="m">0.5</span>), initialization(first), seasonal(none)]
@@ -627,8 +628,8 @@ optimized initialization, seasonal adjustment and both missing policies.</p>
 </pre></div>
 </div>
 <p>These are the pre-update SES training fits underlying the existing
-<code class="docutils literal notranslate"><span class="pre">error_basis(ses_training_fit)</span></code> diagnostics, restored to the original
-seasonal scale. They do not include the Theta slope/correction
+<code class="docutils literal notranslate"><span class="pre">error_basis(ses_training_fit)</span></code> diagnostic term, restored to the
+original seasonal scale. They do not include the Theta slope/correction
 combination and are not prefix-wise Theta forecasts or forecasts from
 the terminal model state.</p>
 <p>The output has one position per dataset observation. Missing targets,
@@ -644,15 +645,15 @@ positions agree with the five training-error diagnostics, subject to
 floating-point rounding.</p>
 <p>Automatic parameters and seasonal factors are fitted once using the full
 sample. Thus these are in-sample fits, not holdout predictions or
-evidence of out-of-sample accuracy. No history or fitted values are
-retained in the forecaster. Fitted-value extraction does not bypass
-learning validation or error-total arithmetic; their exceptions
+evidence of out-of-sample accuracy. No observation history or fitted
+values are retained in the forecaster. Fitted-value extraction does not
+bypass learning validation or error-total arithmetic; their exceptions
 propagate even when individual predictions would be representable.</p>
 </section>
 <section id="residual-history">
 <h2>Residual history<a class="headerlink" href="#residual-history" title="Link to this heading"></a></h2>
-<p>Enable <code class="docutils literal notranslate"><span class="pre">retain_residuals(true)</span></code> to retain chronological numeric errors
-and their matching original one-based time positions:</p>
+<p>Enable the <code class="docutils literal notranslate"><span class="pre">retain_residuals(true)</span></code> option to retain chronological
+numeric errors and their matching original one-based time positions:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> theta_forecasting<span class="o">::</span>learn(
         my_series, <span class="nv">Forecaster</span>, [retain_residuals(<span class="k">true</span>)]
      ),
@@ -660,20 +661,21 @@ and their matching original one-based time positions:</p>
      theta_forecasting<span class="o">::</span>diagnostic(<span class="nv">Forecaster</span>, residual_indices(<span class="nv">Indices</span>)).
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">residuals(Errors)</span></code> payload is a list of numbers, following the
-convention used by <code class="docutils literal notranslate"><span class="pre">exponential_smoothing</span></code> and
+<p>The <code class="docutils literal notranslate"><span class="pre">residuals(Errors)</span></code> diagnostic term holds a list of numbers,
+following the convention used by <code class="docutils literal notranslate"><span class="pre">exponential_smoothing</span></code> and
 <code class="docutils literal notranslate"><span class="pre">time_series_regression</span></code>. The separate <code class="docutils literal notranslate"><span class="pre">residual_indices(Indices)</span></code>
-list preserves the original time axis through gaps. Both lists have
-length <code class="docutils literal notranslate"><span class="pre">scored_count(K-1)</span></code> and correspond element for element. They
-omit missing targets, leading and trailing gaps, and the first known
-initialization anchor for either initialization strategy. No
+diagnostic term holds the original time positions, preserving the time
+axis through gaps. Both lists have length <code class="docutils literal notranslate"><span class="pre">K-1</span></code>, the value recorded by
+the <code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code> diagnostic, and correspond element for element.
+They omit missing targets, leading and trailing gaps, and the first
+known initialization anchor for either initialization strategy. No
 observations or caller variables are retained.</p>
 <p>Errors are actual minus pre-update SES fit on the original seasonal
-scale, matching <code class="docutils literal notranslate"><span class="pre">error_basis(ses_training_fit)</span></code>. For <code class="docutils literal notranslate"><span class="pre">[10,12,14,16]</span></code>
-with alpha 0.5, first initialization and no seasonality, the lists are
-<code class="docutils literal notranslate"><span class="pre">residuals([2,3,3.5])</span></code> and <code class="docutils literal notranslate"><span class="pre">residual_indices([2,3,4])</span></code>. For
-<code class="docutils literal notranslate"><span class="pre">[10,_,14,16]</span></code>, they are <code class="docutils literal notranslate"><span class="pre">residuals([4,4])</span></code> and
-<code class="docutils literal notranslate"><span class="pre">residual_indices([3,4])</span></code>.</p>
+scale, matching the <code class="docutils literal notranslate"><span class="pre">error_basis(ses_training_fit)</span></code> diagnostic term.
+For <code class="docutils literal notranslate"><span class="pre">[10,12,14,16]</span></code> with alpha 0.5, first initialization and no
+seasonality, the lists are <code class="docutils literal notranslate"><span class="pre">residuals([2,3,3.5])</span></code> and
+<code class="docutils literal notranslate"><span class="pre">residual_indices([2,3,4])</span></code>. For <code class="docutils literal notranslate"><span class="pre">[10,_,14,16]</span></code>, they are
+<code class="docutils literal notranslate"><span class="pre">residuals([4,4])</span></code> and <code class="docutils literal notranslate"><span class="pre">residual_indices([3,4])</span></code>.</p>
 <p>With retention disabled, both diagnostics contain <code class="docutils literal notranslate"><span class="pre">none</span></code>. Both
 diagnostics and the effective retention option are mandatory in every
 model. Retained histories are ground and included in clause and file
@@ -690,20 +692,20 @@ out-of-sample accuracy.</p>
 </section>
 <section id="representation-and-diagnostics">
 <h2>Representation and diagnostics<a class="headerlink" href="#representation-and-diagnostics" title="Link to this heading"></a></h2>
-<p>Models have the representation:</p>
+<p>Learned models use the following term representation:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>theta_forecaster(
     theta_state(<span class="nv">Level</span>, <span class="nv">Slope</span>, <span class="nv">Alpha</span>, <span class="nv">Correction</span>, <span class="nv">Seasonality</span>),
     <span class="nv">Diagnostics</span>
 )
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">Seasonality</span></code> is <code class="docutils literal notranslate"><span class="pre">none</span></code> or
-<code class="docutils literal notranslate"><span class="pre">seasonal(Method,</span> <span class="pre">Frequency,</span> <span class="pre">NextPhase,</span> <span class="pre">Factors)</span></code>. Models do not
-retain observations or optimizer problem objects. Residual history is
-optional.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Seasonality</span></code> argument is either the atom <code class="docutils literal notranslate"><span class="pre">none</span></code> or a
+<code class="docutils literal notranslate"><span class="pre">seasonal(Method,</span> <span class="pre">Frequency,</span> <span class="pre">NextPhase,</span> <span class="pre">Factors)</span></code> compound term.
+Models do not retain observations or optimizer problem objects. Residual
+history is optional.</p>
 <p>The inherited <code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code>, <code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">forecaster_options/2</span></code> predicates expose complete metadata. Canonical
-effective options are:</p>
+<code class="docutils literal notranslate"><span class="pre">forecaster_options/2</span></code> predicates let you inspect the model’s
+metadata. The canonical list of effective learning options is:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>[
     alpha(<span class="nv">Number</span>), initialization(<span class="nv">Strategy</span>),
     seasonal(<span class="nv">EffectiveMethod</span>), frequency(<span class="nv">EffectiveFrequency</span>),
@@ -715,17 +717,17 @@ effective options are:</p>
 in these options. Nonseasonal models record frequency one. The fitted
 initial level is recorded separately; effective options alone are not a
 promise of identical refitting of an optimized initial level.</p>
-<p>Required metadata includes <code class="docutils literal notranslate"><span class="pre">model(theta)</span></code>,
-<code class="docutils literal notranslate"><span class="pre">training_series_length/1</span></code>, <code class="docutils literal notranslate"><span class="pre">observed_count(K)</span></code>,
-<code class="docutils literal notranslate"><span class="pre">missing_count(N-K)</span></code>, <code class="docutils literal notranslate"><span class="pre">update_count(0)</span></code>, <code class="docutils literal notranslate"><span class="pre">slope/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">seasonal_mode/1</span></code>, <code class="docutils literal notranslate"><span class="pre">frequency/1</span></code>, <code class="docutils literal notranslate"><span class="pre">initial_level/1</span></code>, and the
-first-known <code class="docutils literal notranslate"><span class="pre">initialization_index(J)</span></code>, <code class="docutils literal notranslate"><span class="pre">residuals/1</span></code>, and
+<p>The <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> argument is a list of diagnostic terms. Required
+terms include <code class="docutils literal notranslate"><span class="pre">model(theta)</span></code>, <code class="docutils literal notranslate"><span class="pre">training_series_length/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">observed_count(K)</span></code>, <code class="docutils literal notranslate"><span class="pre">missing_count(N-K)</span></code>, <code class="docutils literal notranslate"><span class="pre">update_count(0)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">slope/1</span></code>, <code class="docutils literal notranslate"><span class="pre">seasonal_mode/1</span></code>, <code class="docutils literal notranslate"><span class="pre">frequency/1</span></code>, <code class="docutils literal notranslate"><span class="pre">initial_level/1</span></code>,
+and the first-known <code class="docutils literal notranslate"><span class="pre">initialization_index(J)</span></code>, <code class="docutils literal notranslate"><span class="pre">residuals/1</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">residual_indices/1</span></code>. Fitting metadata includes
 <code class="docutils literal notranslate"><span class="pre">fitting(fixed_parameters)</span></code> or <code class="docutils literal notranslate"><span class="pre">fitting(nelder_mead)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">optimizer_options/1</span></code>, <code class="docutils literal notranslate"><span class="pre">convergence/1</span></code>, <code class="docutils literal notranslate"><span class="pre">iterations/1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">evaluations/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">optimization_sum_squared_error/1</span></code> on the
 adjusted scale.</p>
-<p>All five error terms are mandatory:</p>
+<p>All five training-error diagnostic terms are mandatory:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">scored_count(K-1)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">sum_absolute_error(Sum)</span></code></p></li>
@@ -734,9 +736,10 @@ adjusted scale.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">root_mean_squared_error(RMSE)</span></code></p></li>
 </ul>
 <p>They describe pre-update SES fits at known positions after J, restored
-to the original seasonal scale. <code class="docutils literal notranslate"><span class="pre">error_basis(ses_training_fit)</span></code> labels
-this convention. The first known observation anchors the reused fitter
-and is not scored, including with optimized initialization.</p>
+to the original seasonal scale. The <code class="docutils literal notranslate"><span class="pre">error_basis(ses_training_fit)</span></code>
+diagnostic term labels this convention. The first known observation
+anchors the reused fitter and is not scored, including with optimized
+initialization.</p>
 <p>These are fitted training diagnostics, not causal prefix-wise Theta
 forecasts or holdout accuracy. Seasonal factors, slope, alpha and the
 optimized initial level use the training sample. For multiplicative
@@ -752,14 +755,26 @@ terms.</p>
 </section>
 <section id="limitations-and-cost">
 <h2>Limitations and cost<a class="headerlink" href="#limitations-and-cost" title="Link to this heading"></a></h2>
-<p>Only standard theta two is implemented. There is no generalized or
-optimized theta, online update, missing-value reconstruction, prediction
-interval, Box-Cox transformation, multiple seasonality, frequency
-estimation or exogenous regression. Incorporating new observations
-requires relearning.</p>
-<p>Very sparse seasonal data can lack a complete centered window or an
-estimable phase. Such data may still support explicit <code class="docutils literal notranslate"><span class="pre">seasonal(none)</span></code>
-fitting; seasonal fitting does not impute missing values.</p>
+<p>The library implements only standard Theta with the Theta coefficient
+fixed at two. Optimizing the SES alpha or initial level does not
+optimize that coefficient. Generalized Theta, online updates,
+missing-value reconstruction, prediction intervals, Box-Cox
+transformations, multiple seasonality, frequency estimation, and
+exogenous regression are not provided. To incorporate new observations,
+learn a new model.</p>
+<p>Learning requires at least two known observations. Very sparse seasonal
+data can lack a complete centered window or an estimable phase. Such
+data may still support fitting with the <code class="docutils literal notranslate"><span class="pre">seasonal(none)</span></code> option;
+seasonal fitting does not impute missing values.</p>
+<p>Automatic SES fitting uses bounded local optimization, not a guaranteed
+global search. The slope, seasonal factors, and automatic SES settings
+use the training sample. Fitted values and retained residuals describe
+the SES training fit, not the complete Theta forecast combination or
+held-out accuracy. Their error diagnostics do not replace out-of-sample
+evaluation.</p>
+<p>Forecasts are not constrained to be positive or integer-valued. A fitted
+negative slope can continue to reduce long-horizon forecasts even when
+the known observations are positive.</p>
 <p>Numerical results need not match other packages with different SES
 initialization, bounds, solver tolerances or seasonal defaults. The
 standard combination formula is shared, but fitting conventions matter.

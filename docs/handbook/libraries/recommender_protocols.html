@@ -441,16 +441,16 @@
              
   <section id="recommender-protocols">
 <span id="library-recommender-protocols"></span><h1><code class="docutils literal notranslate"><span class="pre">recommender_protocols</span></code><a class="headerlink" href="#recommender-protocols" title="Link to this heading"></a></h1>
-<p>This library provides protocols used in the implementation of
-recommendation algorithms. Datasets are represented as objects
+<p>Use this library when implementing a recommendation algorithm or
+providing a test dataset for one. Rating datasets are objects
 implementing the <code class="docutils literal notranslate"><span class="pre">rating_dataset_protocol</span></code> protocol. Content-based
 datasets also implement <code class="docutils literal notranslate"><span class="pre">item_content_dataset_protocol</span></code>, declaring the
 full item catalog independently of ratings. Recommenders are represented
 as objects importing the <code class="docutils literal notranslate"><span class="pre">recommender_common</span></code> category. This category
-provides shared helpers for dataset validation, rating-matrix utilities
-(user and item rating vectors, mean-rating baselines), similarity
-metrics, top-k retrieval, diagnostics metadata, export, and
-pretty-printing support.</p>
+provides common auxiliary predicates for dataset validation,
+rating-matrix utilities (user and item rating vectors, mean-rating
+baselines), similarity metrics, top-k retrieval, diagnostics metadata,
+export, and pretty-printing support.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">recommender_protocol</span></code> protocol declares the generic <code class="docutils literal notranslate"><span class="pre">score/4</span></code>
 predicate for user-item relevance scoring. Score ranges and
 unknown-identifier policies depend on the implementation. All
@@ -473,25 +473,26 @@ predicates. Concrete recommender implementations store effective
 training options in the diagnostics metadata under an
 <code class="docutils literal notranslate"><span class="pre">options(Options)</span></code> term.</p>
 <p>Implementations must define the protected <code class="docutils literal notranslate"><span class="pre">recommender_valid_data/1</span></code>
-hook to validate model data and its consistency with diagnostics without
-instantiating the model. The shared <code class="docutils literal notranslate"><span class="pre">check_recommender/1</span></code> also
-requires a proper diagnostics list of compound terms containing exactly
-one <code class="docutils literal notranslate"><span class="pre">model(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">rating_count(PositiveInteger)</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">options(Options)</span></code>. Effective options must be ground compound terms
-valid for the receiving implementation. Other diagnostics terms are
-allowed. Diagnostics are extracted from the last model argument by
-default; implementations can override <code class="docutils literal notranslate"><span class="pre">recommender_diagnostics_data/2</span></code>
-to use another representation. A printing template alone does not
-establish model validity.</p>
+predicate to validate model data and its consistency with diagnostics
+without instantiating the model. The shared <code class="docutils literal notranslate"><span class="pre">check_recommender/1</span></code>
+predicate also requires a proper diagnostics list of compound terms
+containing exactly one <code class="docutils literal notranslate"><span class="pre">model(Atom)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">rating_count(PositiveInteger)</span></code>, and <code class="docutils literal notranslate"><span class="pre">options(Options)</span></code>. Effective
+options must be ground compound terms valid for the receiving
+implementation. Other diagnostics terms are allowed. Diagnostics are
+extracted from the last model argument by default; implementations can
+override the <code class="docutils literal notranslate"><span class="pre">recommender_diagnostics_data/2</span></code> predicate to use another
+representation. A printing template alone does not establish model
+validity.</p>
 <p>Dataset ratings are a sparse <code class="docutils literal notranslate"><span class="pre">User</span></code>-<code class="docutils literal notranslate"><span class="pre">Item</span></code>-<code class="docutils literal notranslate"><span class="pre">Rating</span></code> relation: at
-most one rating is declared per user-item pair, and the declared
-<code class="docutils literal notranslate"><span class="pre">rating_count/1</span></code> must match the number of ratings enumerated by
-<code class="docutils literal notranslate"><span class="pre">rating/3</span></code>. Unlike the <code class="docutils literal notranslate"><span class="pre">time_series_dataset_protocol</span></code> datasets,
-there is no index-sequence requirement, since users and items are
-identified by arbitrary atomic identifiers rather than positions in a
-sequence. Identifier validation precedes duplicate checking: variables
-cause an instantiation error and non-atomic identifiers cause an atomic
-type error.</p>
+most one rating is declared per user-item pair. The dataset’s
+<code class="docutils literal notranslate"><span class="pre">rating_count/1</span></code> predicate must match the number of ratings enumerated
+by its <code class="docutils literal notranslate"><span class="pre">rating/3</span></code> predicate. Unlike the
+<code class="docutils literal notranslate"><span class="pre">time_series_dataset_protocol</span></code> datasets, there is no index-sequence
+requirement, since users and items are identified by arbitrary atomic
+identifiers rather than positions in a sequence. Identifier validation
+precedes duplicate checking: variables cause an instantiation error and
+non-atomic identifiers cause an atomic type error.</p>
 <p>This library also provides a small MovieLens-style test dataset and a
 handful of invalid dataset fixtures under the <code class="docutils literal notranslate"><span class="pre">test_datasets</span></code>
 directory.</p>
@@ -558,39 +559,36 @@ also exercises variable, compound, and valid numeric identifiers.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">recommender_common</span></code> category provides, among others, the
 following predicates:</p>
 <ul class="simple">
-<li><p>The <code class="docutils literal notranslate"><span class="pre">dataset_ratings/2</span></code> predicate collects ratings as
+<li><p><code class="docutils literal notranslate"><span class="pre">dataset_ratings/2</span></code> collects ratings as
 <code class="docutils literal notranslate"><span class="pre">rating(User,</span> <span class="pre">Item,</span> <span class="pre">Rating)</span></code> terms, checking atomic identifiers,
 duplicate user-item pairs, and the declared rating count.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">check_ratings/2</span></code> predicate validates non-empty ratings, atomic
-identifiers, numeric values, and membership in any declared rating
-scale.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">users/2</span></code> and <code class="docutils literal notranslate"><span class="pre">items/2</span></code> predicates return sorted distinct
-identifiers appearing in ratings, not in an independent content
-catalog.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">user_vector/3</span></code> and <code class="docutils literal notranslate"><span class="pre">item_vector/3</span></code> predicates return sparse
-<code class="docutils literal notranslate"><span class="pre">Item-Rating</span></code> or <code class="docutils literal notranslate"><span class="pre">User-Rating</span></code> vectors.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">global_mean_rating/2</span></code>, <code class="docutils literal notranslate"><span class="pre">user_mean_rating/3</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">item_mean_rating/3</span></code> predicates compute mean-rating baselines.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">cosine_similarity/3</span></code>, <code class="docutils literal notranslate"><span class="pre">pearson_similarity/3</span></code>,
+<li><p><code class="docutils literal notranslate"><span class="pre">check_ratings/2</span></code> validates non-empty ratings, atomic identifiers,
+numeric values, and membership in any declared rating scale.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">users/2</span></code> and <code class="docutils literal notranslate"><span class="pre">items/2</span></code> return sorted distinct identifiers
+appearing in ratings, not in an independent content catalog.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">user_vector/3</span></code> and <code class="docutils literal notranslate"><span class="pre">item_vector/3</span></code> return sparse <code class="docutils literal notranslate"><span class="pre">Item-Rating</span></code>
+or <code class="docutils literal notranslate"><span class="pre">User-Rating</span></code> vectors.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">global_mean_rating/2</span></code>, <code class="docutils literal notranslate"><span class="pre">user_mean_rating/3</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">item_mean_rating/3</span></code> compute mean-rating baselines.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cosine_similarity/3</span></code>, <code class="docutils literal notranslate"><span class="pre">pearson_similarity/3</span></code>,
 <code class="docutils literal notranslate"><span class="pre">jaccard_similarity/3</span></code>, <code class="docutils literal notranslate"><span class="pre">msd_similarity/3</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">spearman_similarity/3</span></code> predicates send <code class="docutils literal notranslate"><span class="pre">similarity/3</span></code> to the
-corresponding metric object.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">top_k/3</span></code> predicate returns up to <code class="docutils literal notranslate"><span class="pre">K</span></code> highest-scoring
-<code class="docutils literal notranslate"><span class="pre">Key-Score</span></code> pairs in decreasing score order.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">check_top_n/1</span></code> predicate validates a requested recommendation
-count.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">check_query_identifiers/2</span></code> predicate checks instantiated atomic
-user/item identifiers.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">dataset_rating_scale/2</span></code> predicate returns <code class="docutils literal notranslate"><span class="pre">none</span></code> or a
-validated <code class="docutils literal notranslate"><span class="pre">scale(Min,</span> <span class="pre">Max)</span></code>.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">fallback_rating/5</span></code> predicate returns the user mean, otherwise
-the item mean, otherwise the supplied global mean.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">clip_rating/3</span></code> predicate clips to a validated scale, leaving
-ratings unchanged for <code class="docutils literal notranslate"><span class="pre">none</span></code>.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">recommend_from_ratings/5</span></code> predicate scores unrated items
-observed in training ratings through self <code class="docutils literal notranslate"><span class="pre">score/4</span></code>. Equal scores
-use descending standard item order. Content-based recommenders use
-their independent catalog instead.</p></li>
+<code class="docutils literal notranslate"><span class="pre">spearman_similarity/3</span></code> send <code class="docutils literal notranslate"><span class="pre">similarity/3</span></code> to the corresponding
+metric object.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">top_k/3</span></code> returns up to <code class="docutils literal notranslate"><span class="pre">K</span></code> highest-scoring <code class="docutils literal notranslate"><span class="pre">Key-Score</span></code> pairs in
+decreasing score order.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">check_top_n/1</span></code> validates a requested recommendation count.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">check_query_identifiers/2</span></code> checks instantiated atomic user/item
+identifiers.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dataset_rating_scale/2</span></code> returns <code class="docutils literal notranslate"><span class="pre">none</span></code> or a validated
+<code class="docutils literal notranslate"><span class="pre">scale(Min,</span> <span class="pre">Max)</span></code> term.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fallback_rating/5</span></code> returns the user mean, otherwise the item mean,
+otherwise the supplied global mean.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">clip_rating/3</span></code> clips to a validated scale, leaving ratings
+unchanged for <code class="docutils literal notranslate"><span class="pre">none</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">recommend_from_ratings/5</span></code> scores unrated items observed in training
+ratings by sending itself a <code class="docutils literal notranslate"><span class="pre">score/4</span></code> message. Equal scores use
+descending standard item order. Content-based recommenders use their
+independent catalog instead.</p></li>
 </ul>
 <p>These are declared <code class="docutils literal notranslate"><span class="pre">protected</span></code>, intended to be reused by concrete
 recommender libraries such as <code class="docutils literal notranslate"><span class="pre">knn_user_recommender</span></code>,
@@ -681,15 +679,15 @@ reflects whether two vectors tend to be large or small together, while
 Pearson similarity reflects whether they vary together around their own
 means; the two can disagree, sometimes sharply, as the test suite’s
 <code class="docutils literal notranslate"><span class="pre">alice</span></code>-<code class="docutils literal notranslate"><span class="pre">bob</span></code> example (cosine <code class="docutils literal notranslate"><span class="pre">0.94</span></code>, Pearson <code class="docutils literal notranslate"><span class="pre">-1.0</span></code>) shows.</p>
-<p>The metrics reuse helpers in <code class="docutils literal notranslate"><span class="pre">similarity_metric_common</span></code>, including
-<code class="docutils literal notranslate"><span class="pre">common_pairs/3</span></code>, <code class="docutils literal notranslate"><span class="pre">split_pairs/3</span></code>, <code class="docutils literal notranslate"><span class="pre">dot_product/3</span></code>,
+<p>The metrics reuse auxiliary predicates in <code class="docutils literal notranslate"><span class="pre">similarity_metric_common</span></code>,
+including <code class="docutils literal notranslate"><span class="pre">common_pairs/3</span></code>, <code class="docutils literal notranslate"><span class="pre">split_pairs/3</span></code>, <code class="docutils literal notranslate"><span class="pre">dot_product/3</span></code>,
 <code class="docutils literal notranslate"><span class="pre">scale_values/2</span></code>, <code class="docutils literal notranslate"><span class="pre">normalize_values/2</span></code>, <code class="docutils literal notranslate"><span class="pre">normalize_vector/2</span></code>,
 <code class="docutils literal notranslate"><span class="pre">centered_normalized_values/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">bounded_similarity/2</span></code>. The
 existing <code class="docutils literal notranslate"><span class="pre">vector_norm/2</span></code>, <code class="docutils literal notranslate"><span class="pre">sum_of_squares_list/2</span></code>,
-<code class="docutils literal notranslate"><span class="pre">mean_values/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">center/3</span></code> helpers retain their original
-arithmetic contracts; custom metrics can reuse the normalized helpers
-when only a similarity score, rather than an original-magnitude norm, is
-needed.</p>
+<code class="docutils literal notranslate"><span class="pre">mean_values/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">center/3</span></code> predicates retain their original
+arithmetic contracts; custom metrics can reuse the normalization
+predicates when only a similarity score, rather than an
+original-magnitude norm, is needed.</p>
 </section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>

@@ -440,11 +440,13 @@
              
   <section id="mrmr-feature-selector">
 <span id="library-mrmr-feature-selector"></span><h1><code class="docutils literal notranslate"><span class="pre">mrmr_feature_selector</span></code><a class="headerlink" href="#mrmr-feature-selector" title="Link to this heading"></a></h1>
-<p>This library implements minimum redundancy maximum relevance feature
-selection using the mutual-information difference (MID) criterion. Both
-relevance and redundancy are raw empirical mutual information in bits.
-MIQ, normalized information measures, thresholds, and alternative
-scoring metrics are not supported.</p>
+<p>Use this library to select features that are informative about a
+categorical target while reducing redundancy between selected features.
+It implements minimum redundancy maximum relevance selection using the
+mutual-information difference (MID) criterion. Both relevance and
+redundancy are raw empirical mutual information in bits. MIQ, normalized
+information measures, thresholds, and alternative scoring metrics are
+not supported.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -484,8 +486,7 @@ them. At least two usable rows are required, even with an empty feature
 vocabulary. Otherwise learning throws
 <code class="docutils literal notranslate"><span class="pre">domain_error(mrmr_usable_examples,</span> <span class="pre">Count)</span></code>. Empty datasets retain the
 shared <code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_examples,</span> <span class="pre">Dataset)</span></code> exception.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">learn/2</span></code> predicate uses these defaults. The <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate
-accepts:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate accepts the following options:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">selection_strategy(top_k(K))</span></code>, default <code class="docutils literal notranslate"><span class="pre">top_k(10)</span></code>, with positive
 integer <code class="docutils literal notranslate"><span class="pre">K</span></code>. Exactly <code class="docutils literal notranslate"><span class="pre">min(K,</span> <span class="pre">CandidateCount)</span></code> features are
@@ -496,9 +497,10 @@ MID is strictly positive, choosing the feature count automatically.</p></li>
 for continuous features. Specifications are <code class="docutils literal notranslate"><span class="pre">categorical</span></code>,
 <code class="docutils literal notranslate"><span class="pre">equal_width(B)</span></code>, or <code class="docutils literal notranslate"><span class="pre">equal_frequency(B)</span></code>, with positive integer
 bin counts.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">feature_discretization(Feature,</span> <span class="pre">Specification)</span></code>, overriding the
+<li><p><code class="docutils literal notranslate"><span class="pre">feature_discretization(Feature,</span> <span class="pre">Specification)</span></code> overrides the
 global specification for that declared feature.</p></li>
 </ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">learn/2</span></code> predicate uses the default option values.</p>
 <p>Categorical declarations preserve their labels unless explicitly
 overridden. Binning specifications on categorical declarations require
 numeric values. Repeated options are accepted; the first occurrence
@@ -539,7 +541,8 @@ rejected winner. With <code class="docutils literal notranslate"><span class="pr
 </section>
 <section id="models-and-diagnostics">
 <h2>Models and diagnostics<a class="headerlink" href="#models-and-diagnostics" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">learn/2-3</span></code> predicates return models of the following form:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">learn/2</span></code> and <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicates return models using the
+following term representation:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>mrmr_feature_selector(<span class="nv">FeatureScores</span>, <span class="nv">SelectedFeatures</span>, <span class="nv">Diagnostics</span>)
 </pre></div>
 </div>
@@ -549,16 +552,17 @@ static target relevance, preserving declaration order for ties. The
 which need not be a prefix of that ranking. The <code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code>,
 <code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">selector_options/2</span></code> predicates expose metadata
 and effective options.</p>
-<p>Diagnostics include <code class="docutils literal notranslate"><span class="pre">model(mrmr_feature_selector)</span></code>,
-<code class="docutils literal notranslate"><span class="pre">example_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">options/1</span></code>, <code class="docutils literal notranslate"><span class="pre">candidate_count/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">selected_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">selection_criterion(mid)</span></code>,
-<code class="docutils literal notranslate"><span class="pre">scoring_metric(mutual_information)</span></code>,
+<p>The <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> argument is a list of diagnostic terms, including
+<code class="docutils literal notranslate"><span class="pre">model(mrmr_feature_selector)</span></code>, <code class="docutils literal notranslate"><span class="pre">example_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">options/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">candidate_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">selected_count/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">selection_criterion(mid)</span></code>, <code class="docutils literal notranslate"><span class="pre">scoring_metric(mutual_information)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">redundancy_metric(mutual_information)</span></code>, <code class="docutils literal notranslate"><span class="pre">redundancy_evaluations/1</span></code>,
 and <code class="docutils literal notranslate"><span class="pre">selection_trace/1</span></code>, <code class="docutils literal notranslate"><span class="pre">redundancy_update_rounds/1</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">termination/1</span></code>. Termination is <code class="docutils literal notranslate"><span class="pre">budget_reached</span></code>,
-<code class="docutils literal notranslate"><span class="pre">candidates_exhausted</span></code>, or <code class="docutils literal notranslate"><span class="pre">non_positive_mid(Step)</span></code>; the latter
-records the rejected winner using the same step representation. The
-trace contains these terms in selected order:</p>
+<code class="docutils literal notranslate"><span class="pre">termination/1</span></code>. The <code class="docutils literal notranslate"><span class="pre">termination/1</span></code> diagnostic value is
+<code class="docutils literal notranslate"><span class="pre">budget_reached</span></code>, <code class="docutils literal notranslate"><span class="pre">candidates_exhausted</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">non_positive_mid(Step)</span></code>; the latter records the rejected winner using
+the same step representation. The trace contains these terms in selected
+order:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>step(<span class="nv">Feature</span>, <span class="nv">Relevance</span>, <span class="nv">MeanRedundancy</span>, <span class="nv">MID</span>)
 </pre></div>
 </div>

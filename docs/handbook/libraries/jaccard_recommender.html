@@ -445,14 +445,16 @@
              
   <section id="jaccard-recommender">
 <span id="library-jaccard-recommender"></span><h1><code class="docutils literal notranslate"><span class="pre">jaccard_recommender</span></code><a class="headerlink" href="#jaccard-recommender" title="Link to this heading"></a></h1>
-<p>Content-based filtering for categorical and binary item features. By
-default, a user’s profile is the union of features from positively
-selected items. An optional minimum-support filter removes features
-occurring in too few selected items. Candidates are scored using
-classical intersection-over-union Jaccard similarity. The object imports
-<code class="docutils literal notranslate"><span class="pre">recommender_common</span></code> and <code class="docutils literal notranslate"><span class="pre">item_content_dataset_validation</span></code>,
-implementing <code class="docutils literal notranslate"><span class="pre">recommender_protocol</span></code> and its <code class="docutils literal notranslate"><span class="pre">score/4</span></code> predicate
-directly. Scores are relevance values, not predicted ratings.</p>
+<p>This library recommends items by comparing categorical or binary
+features with a user’s profile. By default, a user’s profile is the
+union of features from positively selected items. An optional
+minimum-support filter removes features occurring in too few selected
+items. Candidates are scored using classical intersection-over-union
+Jaccard similarity.</p>
+<p>The library object imports <code class="docutils literal notranslate"><span class="pre">item_content_dataset_validation</span></code> and
+<code class="docutils literal notranslate"><span class="pre">recommender_common</span></code>, implementing <code class="docutils literal notranslate"><span class="pre">recommender_protocol</span></code> and its
+<code class="docutils literal notranslate"><span class="pre">score/4</span></code> predicate directly. Scores are relevance values, not
+predicted ratings.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -503,12 +505,13 @@ and <code class="docutils literal notranslate"><span class="pre">item_content_da
 </div>
 <p>The score is <code class="docutils literal notranslate"><span class="pre">1.0</span></code>; recommendations are <code class="docutils literal notranslate"><span class="pre">[second-1.0,third-0.0]</span></code>.
 Repeated <code class="docutils literal notranslate"><span class="pre">space</span></code> occurrences do not change the feature set. Neither
-candidate needs a rating.</p>
+candidate has to appear in the training ratings.</p>
 <p>The catalog is nonempty, with distinct instantiated atomic item
 identifiers. Each item has exactly one content descriptor, and all rated
 items belong to the catalog. Ratings are nonempty, finite numbers with
-distinct user-item pairs and a matching positive <code class="docutils literal notranslate"><span class="pre">rating_count/1</span></code>. An
-optional inclusive <code class="docutils literal notranslate"><span class="pre">rating_scale/2</span></code> is checked but never used to clip
+distinct user-item pairs and a matching positive count from the
+<code class="docutils literal notranslate"><span class="pre">rating_count/1</span></code> predicate. The optional <code class="docutils literal notranslate"><span class="pre">rating_scale/2</span></code> predicate
+supplies inclusive bounds that are checked but never used to clip
 relevance scores.</p>
 <p>Use one descriptor representation consistently throughout the dataset:</p>
 <ul class="simple">
@@ -532,19 +535,19 @@ calling that metric.</p>
 </section>
 <section id="options-and-profiles">
 <h2>Options and profiles<a class="headerlink" href="#options-and-profiles" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">positive_threshold(user_mean)</span></code> default selects ratings at least
-equal to each user’s mean over all their ratings. A finite numeric
-threshold can be supplied instead, for example
-<code class="docutils literal notranslate"><span class="pre">[positive_threshold(4)]</span></code>. Equality is included.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">min_feature_support(1)</span></code> default retains every feature appearing
-in a selected item. A larger positive integer requires that many
-distinct selected items to contain a feature before it is retained in
-the user’s profile. Duplicate occurrences within an item count once,
+<p>The <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate accepts the following options:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">positive_threshold(Threshold)</span></code> selects <code class="docutils literal notranslate"><span class="pre">user_mean</span></code> (default) or a
+finite numeric threshold. Ratings at least equal to the threshold are
+selected; <code class="docutils literal notranslate"><span class="pre">user_mean</span></code> uses the mean of all the user’s ratings.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">min_feature_support(Count)</span></code> sets the minimum number of distinct
+selected items containing a retained feature to a positive integer.
+The default is <code class="docutils literal notranslate"><span class="pre">1</span></code>. Duplicate occurrences within an item count once,
 zero vector weights do not count, and unselected items contribute no
 support. Filtering does not assign weights to retained features. If no
-feature meets the minimum, the profile is empty.</p>
-<p>Repeated valid options are accepted and the first occurrence wins;
-<code class="docutils literal notranslate"><span class="pre">valid_option/1</span></code> and <code class="docutils literal notranslate"><span class="pre">default_option/1</span></code> remain public.</p>
+feature meets the minimum, the profile is empty.</p></li>
+</ul>
+<p>Repeated valid options are accepted and the first occurrence wins.</p>
 <p>The profile contains each retained feature exactly once. Rating
 magnitudes and feature frequencies are not weights. “Positive feedback”
 here means threshold-selected feedback: zero or negative ratings may be
@@ -771,7 +774,7 @@ preserve scoring and recommendation behavior.</p>
 </section>
 <section id="models-diagnostics-and-export">
 <h2>Models, diagnostics, and export<a class="headerlink" href="#models-diagnostics-and-export" title="Link to this heading"></a></h2>
-<p>The learned representation is:</p>
+<p>Learned models use the following term representation:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>jaccard_model(<span class="nv">Ratings</span>, <span class="nv">Contents</span>, <span class="nv">ItemVectors</span>, <span class="nv">Profiles</span>, <span class="nv">Scale</span>, <span class="nv">Diagnostics</span>)
 </pre></div>
 </div>
@@ -780,26 +783,26 @@ scoring. Ratings and content declarations are canonical; content feature
 occurrences are retained in <code class="docutils literal notranslate"><span class="pre">Contents</span></code>, while <code class="docutils literal notranslate"><span class="pre">ItemVectors</span></code> and
 <code class="docutils literal notranslate"><span class="pre">Profiles</span></code> contain sorted unique <code class="docutils literal notranslate"><span class="pre">Feature-1</span></code> pairs. Every learned
 user has a profile, including an empty one when necessary.</p>
-<p>Diagnostics include <code class="docutils literal notranslate"><span class="pre">model(jaccard_recommender)</span></code>, <code class="docutils literal notranslate"><span class="pre">rating_count/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">options/1</span></code>, <code class="docutils literal notranslate"><span class="pre">user_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">item_count/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">content_representation/1</span></code>, <code class="docutils literal notranslate"><span class="pre">feature_count/1</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">non_empty_profile_count/1</span></code>. Feature count is the number of distinct
-present features across the full catalog. Additional diagnostic terms
-are allowed; mandatory diagnostic indicators must be unique and
-consistent. Effective options include both the rating threshold and
-minimum feature support settings.</p>
-<p><code class="docutils literal notranslate"><span class="pre">valid_recommender/1</span></code> and <code class="docutils literal notranslate"><span class="pre">check_recommender/1</span></code> revalidate stored
-content, ratings, options, and scale, reconstruct vectors and profiles,
-and verify diagnostics without instantiating the model. Public scoring
-validates the complete model, so validation may cost more than the
-individual set comparison. Batch scoring and recommendation validate
-once before scoring all requested items or candidates. Supplied-content
-scoring validates the model once and canonicalizes its input descriptor
-separately.</p>
-<p><code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code> and <code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code> serialize the complete
-model under the chosen predicate functor. <code class="docutils literal notranslate"><span class="pre">print_recommender/1</span></code>
-displays its template and data. Exported models preserve scoring and
-recommendation behavior.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> argument is a list of diagnostic terms, including
+<code class="docutils literal notranslate"><span class="pre">model(jaccard_recommender)</span></code>, <code class="docutils literal notranslate"><span class="pre">rating_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">options/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">user_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">item_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">content_representation/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">feature_count/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">non_empty_profile_count/1</span></code>. Feature count is
+the number of distinct present features across the full catalog.
+Additional diagnostic terms are allowed; mandatory diagnostic indicators
+must be unique and consistent. Effective options include both the rating
+threshold and minimum feature support settings.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">valid_recommender/1</span></code> and <code class="docutils literal notranslate"><span class="pre">check_recommender/1</span></code> predicates
+revalidate stored content, ratings, options, and scale, reconstruct
+vectors and profiles, and verify diagnostics without instantiating the
+model. Public scoring validates the complete model, so validation may
+cost more than the individual set comparison. Batch scoring and
+recommendation validate once before scoring all requested items or
+candidates. Supplied-content scoring validates the model once and
+canonicalizes its input descriptor separately.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code> and <code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code> predicates
+serialize the complete model under the chosen predicate functor. The
+<code class="docutils literal notranslate"><span class="pre">print_recommender/1</span></code> predicate displays its template and data.
+Exported models preserve scoring and recommendation behavior.</p>
 </section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>

@@ -21,13 +21,16 @@ ________________________________________________________________________
 `tfidf_recommender`
 ===================
 
-Classical content-based filtering using sparse item vectors, positive-feedback
+Classical content-based filtering, recommending items with content similar
+to a user's positively selected items. It uses sparse item vectors,
 Rocchio-style centroid profiles, and cosine similarity. Feature occurrence
-lists are weighted by TF-IDF through `text_vectorization`; externally weighted
-vectors can also be supplied. The object imports `recommender_common` and
-the `item_content_dataset_validation` and `similarity_metric_common`
-categories, implementing `recommender_protocol`.
-The `score/4` predicate returns cosine relevance rather than a predicted rating.
+lists are weighted by TF-IDF through `text_vectorization`; externally
+weighted vectors can also be supplied.
+
+The library object imports the `recommender_common` category plus the
+`item_content_dataset_validation` and `similarity_metric_common`
+categories, implementing `recommender_protocol`. The main `score/4`
+predicate returns cosine relevance rather than a predicted rating.
 
 
 API documentation
@@ -83,7 +86,8 @@ With the dataset loaded:
          tfidf_recommender::recommend(Model, alice, 3, Recommendations).
 
 The score is approximately `0.948683`; recommendations contain `second`
-followed by `third`, whose score is zero. Neither candidate needs a rating.
+followed by `third`, whose score is zero. Neither candidate has to appear
+in the training ratings.
 
 The `item/1` predicate declares the complete, nonempty catalog, with unique
 atomic identifiers. The `item_content/2` predicate declares exactly one
@@ -109,24 +113,28 @@ Options
 
 The `learn/3` predicate accepts these options:
 
-- `positive_threshold(user_mean)` selects ratings at least equal to the user's
-  mean over all their ratings. A finite numeric threshold can be supplied instead.
-- `profile_weighting(uniform)` averages selected item vectors equally.
+- `positive_threshold(Threshold)` selects `user_mean` (default) or a finite
+  numeric threshold. Ratings at least equal to the threshold are selected;
+  `user_mean` uses the mean of all the user's ratings.
+- `profile_weighting(Weighting)` selects `uniform` (default) or `rating`.
+  Uniform weighting averages selected item vectors equally.
   The alternative `rating` uses raw ratings as weights; every selected rating
   must then be strictly positive, including ratings on empty-content items.
-- `normalization(l2)` unit-normalizes item vectors before averaging them.
+- `normalization(Normalization)` selects `l2` (default) or `none`.
+  L2 normalization unit-normalizes item vectors before averaging them.
   The alternative `none` preserves vector magnitude, allowing longer documents
   or externally larger weights to influence profile direction more strongly.
-- `vectorizer_options([])` forwards options to `text_vectorizer`. Defaults are
+- `vectorizer_options(Options)` forwards options to `text_vectorizer`
+  (default: `[]`). Defaults are
   raw TF-IDF and smoothed IDF. Binary/count weighting, alternative TF-IDF factors,
   IDF rules, frequency bounds and vocabulary limits are available. Nested
   `normalization` options are rejected; use the top-level option instead.
   Nonempty vectorizer options are rejected for preweighted content.
 
 Repeated valid options are accepted; the first occurrence takes precedence,
-including inside `vectorizer_options`. The `valid_option/1` and `default_option/1`
-predicates remain public. The `recommender_options/2` predicate returns effective
-top-level options; fitted vectorizer diagnostics record its effective options.
+including inside `vectorizer_options`. The `recommender_options/2` predicate
+returns effective top-level options; fitted vectorizer diagnostics record its
+effective options.
 
 
 Training and scoring
@@ -152,27 +160,28 @@ separately unit-normalized; cosine normalization happens when scoring:
     score(u,i) = cosine(profile(u), x(i))
 
 The `score/4` predicate returns a relevance value in `[0,1]`, not a rating
-estimate. Missing sparse features contribute zero. Already-rated items can
-be scored normally; observed ratings are not returned directly. Unknown users,
-empty profiles, empty item vectors, and disjoint feature sets score zero.
-An unknown item raises `domain_error(catalog_item, Item)`. Query identifiers
-must be instantiated atomic terms. There is no baseline fallback or clipping
-to the rating scale.
+estimate. Features absent from an item or profile contribute zero. Already-rated
+items can be scored normally; observed ratings are not returned directly.
+Unknown users, empty profiles, empty item vectors, and disjoint feature sets
+score zero. An unknown item raises `domain_error(catalog_item, Item)`. Query
+identifiers must be instantiated atomic terms. There is no baseline fallback
+or clipping to the rating scale.
 
-The `recommend/4` predicate returns up to positive integer `N` unrated catalog
-items as `Item-Score` pairs. It excludes ALL previously rated items, not just
-positive ones, and includes zero-score candidates. Results use decreasing
-score with descending standard item order for ties. Unknown users therefore
-receive zero-score catalog recommendations. No remaining candidates returns
-`[]`; fewer than `N` candidates returns all of them. Scores agree with direct
-`score/4` calls, without repeating full model validation for each candidate.
+The `recommend/4` predicate returns up to `N` unrated catalog items as
+`Item-Score` pairs; `N` must be a positive integer. It excludes all previously
+rated items, not just positive ones, and includes zero-score candidates.
+Results use decreasing score with descending standard item order for ties.
+Unknown users therefore receive zero-score catalog recommendations.
+No remaining candidates returns `[]`; fewer than `N` candidates returns all of
+them. Scores agree with direct `score/4` predicate calls, without repeating
+full model validation for each candidate.
 
 For orthogonal unit vectors `[x-1]` and `[y-1]`, equal selected ratings produce
 `[x-0.5,y-0.5]`, with cosine `1/sqrt(2)` to either axis and one to `[x-1,y-1]`.
-Selected ratings two and four with rating weighting produce
-`[x-1/3,y-2/3]`, scoring `1/sqrt(5)` and `2/sqrt(5)` respectively.
-Evaluation must remove held-out ratings explicitly; catalog content may still
-be available for unrated or held-out items.
+Selected ratings two and four with rating weighting produce `[x-1/3,y-2/3]`,
+scoring `1/sqrt(5)` and `2/sqrt(5)` respectively. Evaluation must remove
+held-out ratings explicitly; catalog content may still be available for
+unrated or held-out items.
 
 
 Batch and supplied-content scoring
@@ -304,7 +313,8 @@ feedback rebuilding retains its fitted state without another fit.
 Models, diagnostics, and export
 -------------------------------
 
-The `learn/2` and `learn/3` predicates return a model with the following structure:
+The `learn/2` and `learn/3` predicates return models using the following term
+representation:
 
     tfidf_model(Ratings, Contents, ItemVectors, Profiles, Vectorizer, Scale, Diagnostics)
 
@@ -317,8 +327,9 @@ entries for every observed user, including users with empty profiles.
 or `none` for externally weighted vectors. `Scale` is `none` or `scale(Min,Max)`
 and validates training ratings and rating upserts, not relevance scores.
 
-Diagnostics contain `model(tfidf_recommender)`, `rating_count(Count)`,
-`options(Options)`, `user_count(Count)`, `item_count(Count)`,
+The `Diagnostics` argument is a list of diagnostic terms, including
+`model(tfidf_recommender)`, `rating_count(Count)`, `options(Options)`,
+`user_count(Count)`, `item_count(Count)`,
 `content_representation(features|vectors)`, `feature_count(Count)`, and
 `non_empty_profile_count(Count)`. Item count covers the full catalog. Feature
 count is fitted vocabulary size in feature mode, including classic-IDF

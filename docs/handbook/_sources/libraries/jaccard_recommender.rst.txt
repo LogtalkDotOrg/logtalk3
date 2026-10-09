@@ -3,14 +3,17 @@
 ``jaccard_recommender``
 =======================
 
-Content-based filtering for categorical and binary item features. By
-default, a user's profile is the union of features from positively
-selected items. An optional minimum-support filter removes features
-occurring in too few selected items. Candidates are scored using
-classical intersection-over-union Jaccard similarity. The object imports
-``recommender_common`` and ``item_content_dataset_validation``,
-implementing ``recommender_protocol`` and its ``score/4`` predicate
-directly. Scores are relevance values, not predicted ratings.
+This library recommends items by comparing categorical or binary
+features with a user's profile. By default, a user's profile is the
+union of features from positively selected items. An optional
+minimum-support filter removes features occurring in too few selected
+items. Candidates are scored using classical intersection-over-union
+Jaccard similarity.
+
+The library object imports ``item_content_dataset_validation`` and
+``recommender_common``, implementing ``recommender_protocol`` and its
+``score/4`` predicate directly. Scores are relevance values, not
+predicted ratings.
 
 API documentation
 -----------------
@@ -72,13 +75,14 @@ With the dataset loaded:
 
 The score is ``1.0``; recommendations are ``[second-1.0,third-0.0]``.
 Repeated ``space`` occurrences do not change the feature set. Neither
-candidate needs a rating.
+candidate has to appear in the training ratings.
 
 The catalog is nonempty, with distinct instantiated atomic item
 identifiers. Each item has exactly one content descriptor, and all rated
 items belong to the catalog. Ratings are nonempty, finite numbers with
-distinct user-item pairs and a matching positive ``rating_count/1``. An
-optional inclusive ``rating_scale/2`` is checked but never used to clip
+distinct user-item pairs and a matching positive count from the
+``rating_count/1`` predicate. The optional ``rating_scale/2`` predicate
+supplies inclusive bounds that are checked but never used to clip
 relevance scores.
 
 Use one descriptor representation consistently throughout the dataset:
@@ -104,21 +108,19 @@ calling that metric.
 Options and profiles
 --------------------
 
-The ``positive_threshold(user_mean)`` default selects ratings at least
-equal to each user's mean over all their ratings. A finite numeric
-threshold can be supplied instead, for example
-``[positive_threshold(4)]``. Equality is included.
+The ``learn/3`` predicate accepts the following options:
 
-The ``min_feature_support(1)`` default retains every feature appearing
-in a selected item. A larger positive integer requires that many
-distinct selected items to contain a feature before it is retained in
-the user's profile. Duplicate occurrences within an item count once,
-zero vector weights do not count, and unselected items contribute no
-support. Filtering does not assign weights to retained features. If no
-feature meets the minimum, the profile is empty.
+- ``positive_threshold(Threshold)`` selects ``user_mean`` (default) or a
+  finite numeric threshold. Ratings at least equal to the threshold are
+  selected; ``user_mean`` uses the mean of all the user's ratings.
+- ``min_feature_support(Count)`` sets the minimum number of distinct
+  selected items containing a retained feature to a positive integer.
+  The default is ``1``. Duplicate occurrences within an item count once,
+  zero vector weights do not count, and unselected items contribute no
+  support. Filtering does not assign weights to retained features. If no
+  feature meets the minimum, the profile is empty.
 
-Repeated valid options are accepted and the first occurrence wins;
-``valid_option/1`` and ``default_option/1`` remain public.
+Repeated valid options are accepted and the first occurrence wins.
 
 The profile contains each retained feature exactly once. Rating
 magnitudes and feature frequencies are not weights. "Positive feedback"
@@ -381,7 +383,7 @@ preserve scoring and recommendation behavior.
 Models, diagnostics, and export
 -------------------------------
 
-The learned representation is:
+Learned models use the following term representation:
 
 ::
 
@@ -393,28 +395,28 @@ occurrences are retained in ``Contents``, while ``ItemVectors`` and
 ``Profiles`` contain sorted unique ``Feature-1`` pairs. Every learned
 user has a profile, including an empty one when necessary.
 
-Diagnostics include ``model(jaccard_recommender)``, ``rating_count/1``,
-``options/1``, ``user_count/1``, ``item_count/1``,
-``content_representation/1``, ``feature_count/1``, and
-``non_empty_profile_count/1``. Feature count is the number of distinct
-present features across the full catalog. Additional diagnostic terms
-are allowed; mandatory diagnostic indicators must be unique and
-consistent. Effective options include both the rating threshold and
-minimum feature support settings.
+The ``Diagnostics`` argument is a list of diagnostic terms, including
+``model(jaccard_recommender)``, ``rating_count/1``, ``options/1``,
+``user_count/1``, ``item_count/1``, ``content_representation/1``,
+``feature_count/1``, and ``non_empty_profile_count/1``. Feature count is
+the number of distinct present features across the full catalog.
+Additional diagnostic terms are allowed; mandatory diagnostic indicators
+must be unique and consistent. Effective options include both the rating
+threshold and minimum feature support settings.
 
-``valid_recommender/1`` and ``check_recommender/1`` revalidate stored
-content, ratings, options, and scale, reconstruct vectors and profiles,
-and verify diagnostics without instantiating the model. Public scoring
-validates the complete model, so validation may cost more than the
-individual set comparison. Batch scoring and recommendation validate
-once before scoring all requested items or candidates. Supplied-content
-scoring validates the model once and canonicalizes its input descriptor
-separately.
+The ``valid_recommender/1`` and ``check_recommender/1`` predicates
+revalidate stored content, ratings, options, and scale, reconstruct
+vectors and profiles, and verify diagnostics without instantiating the
+model. Public scoring validates the complete model, so validation may
+cost more than the individual set comparison. Batch scoring and
+recommendation validate once before scoring all requested items or
+candidates. Supplied-content scoring validates the model once and
+canonicalizes its input descriptor separately.
 
-``export_to_clauses/4`` and ``export_to_file/4`` serialize the complete
-model under the chosen predicate functor. ``print_recommender/1``
-displays its template and data. Exported models preserve scoring and
-recommendation behavior.
+The ``export_to_clauses/4`` and ``export_to_file/4`` predicates
+serialize the complete model under the chosen predicate functor. The
+``print_recommender/1`` predicate displays its template and data.
+Exported models preserve scoring and recommendation behavior.
 
 Limitations
 -----------

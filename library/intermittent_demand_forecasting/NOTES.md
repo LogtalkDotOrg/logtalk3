@@ -21,18 +21,18 @@ ________________________________________________________________________
 `intermittent_demand_forecasting`
 =================================
 
-This library implements Croston, the Syntetos-Boylan approximation (SBA),
-and Teunter-Syntetos-Babai (TSB) forecasting for non-negative demand series
-with periods of zero demand. The object implements `forecaster_protocol`
-and imports `forecaster_common` from `time_series_protocols` for dataset
-collection, options, diagnostics, forecast construction, and export support.
+Use this library to forecast non-negative demand series that include
+periods of zero demand. It provides Croston, the Syntetos-Boylan
+approximation (SBA), and Teunter-Syntetos-Babai (TSB) methods. The library
+object implements `forecaster_protocol` and imports the `forecaster_common`
+category from the `time_series_protocols` library for dataset collection,
+options, diagnostics, forecast construction, and export support.
 
-Datasets implement `time_series_dataset_protocol`. Values can be
-non-negative integers or floats, or unbound variables representing missing
+Datasets are objects implementing `time_series_dataset_protocol`. Values can
+be non-negative integers or floats, or unbound variables representing missing
 observations. Indices must be a complete, gap-free, 1-based sequence, and
 the declared length must match the enumerated observations. Dataset
-frequency metadata is not used. The implementation requires no
-backend-specific facilities.
+frequency metadata from the `frequency/1` predicate is not used.
 
 
 API documentation
@@ -94,32 +94,34 @@ Options
 
 The `learn/3` predicate accepts the following options:
 
-- `model(croston|sba|tsb|auto)`: forecasting method; default `sba`.
-  `auto` selects among the three concrete methods using causal training RMSE.
-- `alpha(Alpha)`: positive-demand size smoothing coefficient or `auto`;
-  default `0.1`.
-- `beta(Beta)`: interarrival-time smoothing coefficient for Croston/SBA,
-  or occurrence-probability smoothing coefficient for TSB, or `auto`;
-  default `0.1`.
-- `missing(skip|elapsed)`: missing-value clock policy; default `skip`.
-- `coefficient_grid(Grid)`: shared candidate grid for coefficients requested
-  as `auto`; default `[0.1,0.2,0.5,0.8,1.0]`.
+- `model(Method)` selects `croston`, `sba`, `tsb`, or `auto`
+	(default: `sba`). The `auto` value selects among the three concrete
+	methods using causal training RMSE.
+- `alpha(Alpha)` sets the positive-demand size smoothing
+	coefficient, or requests fitting with `auto`. The default is `0.1`.
+- `beta(Beta)` sets the interarrival-time smoothing coefficient
+	for Croston/SBA, or the occurrence-probability smoothing coefficient for
+	TSB. Use `auto` to request fitting. The default is `0.1`.
+- `missing(Policy)` selects `skip` or `elapsed` to control how
+	missing observations affect
+	the algorithm clock (default: `skip`). It does not change how missing
+	observations are represented.
+- `coefficient_grid(Grid)` supplies candidate values for
+	coefficients requested as `auto` (default: `[0.1,0.2,0.5,0.8,1.0]`).
 
 Numeric coefficients must be greater than zero and at most one. Each
 coefficient can independently request `auto` for bounded grid fitting.
-Effective options are stored as
+The model stores its effective options as the list
 `[model(Method), alpha(Alpha), beta(Beta), missing(Policy)]`, with the
 selected concrete method and numeric coefficients, never `auto` atoms.
 The request-only grid is not stored in effective options or diagnostics.
 The selected coefficients remain fixed during subsequent updates.
-The public `valid_option/1` and `default_option/1` hooks can be queried
-through the inherited options interface.
 
 
 Automatic method selection
 --------------------------
 
-Use `model(auto)` to fit SBA, Croston, and TSB with the same fixed
+Use the `model(auto)` option to fit SBA, Croston, and TSB with the same fixed
 coefficients and missing policy, selecting the lowest causal one-step
 training RMSE. The default remains SBA; automatic selection is opt-in.
 Exact RMSE ties prefer SBA, then Croston, then TSB, without a tolerance.
@@ -152,8 +154,8 @@ is retained.
 Automatic coefficient fitting
 -----------------------------
 
-Use `alpha(auto)` and/or `beta(auto)` to select coefficients from the
-default grid `[0.1,0.2,0.5,0.8,1.0]`. Only requested `auto` coefficients
+Use the `alpha(auto)` and/or `beta(auto)` options to select coefficients from
+the default grid `[0.1,0.2,0.5,0.8,1.0]`. Only requested `auto` coefficients
 are searched. Supplied numeric values are preserved exactly, including
 off-grid values such as `0.37` and integer coefficients such as `1`.
 Defaults remain numeric `0.1`; fitting is opt-in.
@@ -164,8 +166,8 @@ Defaults remain numeric `0.1`; fitting is opt-in.
 	     ),
 	     intermittent_demand_forecasting::forecaster_options(Forecaster, Options).
 
-Supply `coefficient_grid(Grid)` to customize the candidates shared by
-`alpha(auto)` and `beta(auto)`:
+Supply the `coefficient_grid(Grid)` option to customize the candidates
+shared by the `alpha(auto)` and `beta(auto)` options:
 
 	| ?- intermittent_demand_forecasting::learn(
 	         my_demand_series, Forecaster,
@@ -189,11 +191,11 @@ retained models store only the selected numeric coefficients.
 
 Every concrete method/coefficient combination is fitted using the same
 missing policy and scored by causal one-step training RMSE, including
-initial zero predictions and skipping missing targets. Select the lowest
-RMSE. Exact ties prefer SBA, then Croston, then TSB, then lower alpha and
-lower beta; no comparison tolerance is used. The model stores only the
-winning concrete method and numeric coefficients. Stored `auto` atoms
-are invalid forecaster metadata.
+initial zero predictions and skipping missing targets. The library selects
+the combination with the lowest RMSE. Exact ties prefer SBA, then Croston,
+then TSB, then lower alpha and lower beta; no comparison tolerance is used.
+The model stores only the winning concrete method and numeric coefficients.
+Stored `auto` atoms are invalid forecaster metadata.
 
 For Croston on `[6,10,10]`, `alpha(auto)` with fixed `beta(0.37)` selects
 `alpha(1.0)`. For TSB on `[6,0,0]`, `beta(auto)` with fixed `alpha(0.37)`
@@ -263,12 +265,13 @@ reduces the probability by a factor of `1 - Beta`, allowing forecasts to
 adapt to declining occurrence or obsolescence. Missing values never cause
 probability decay.
 
-Initialization is causal. Before any known positive demand, retain a
-pending clock and forecast zero. At the first positive observation in
-algorithm period `K`, initialize `Size` to that demand, `Interval` to `K`
-for Croston/SBA, and `Probability` to `1 / K` for TSB. Do not additionally
-smooth this initializing observation. No full-series averages or future
-observations are used. All-zero and single-positive series are valid.
+Initialization is causal. Before any known positive demand, the forecaster
+retains a pending clock and forecasts zero. At the first positive
+observation in algorithm period `K`, it initializes `Size` to that demand,
+`Interval` to `K` for Croston/SBA, and `Probability` to `1 / K` for TSB.
+It does not additionally smooth this initializing observation. No full-series
+averages or future observations are used. All-zero and single-positive series
+are valid.
 
 With `[0, 0, 6, 0, 10]` and both coefficients `0.5`, the final forecasts
 are `3.2` for Croston, `2.4` for SBA, and approximately `4.6666666667` for
@@ -294,12 +297,13 @@ rejected; all-missing training series raise
 Every missing position counts in the elapsed training length and missing
 count, regardless of policy:
 
-- `missing(skip)` pauses the algorithm clock. No state estimate changes.
-  Initial period `K` and Croston/SBA gaps count numeric observations only.
-  Estimates therefore use observed-period time; they should not be
-  interpreted as rates from a fully observed calendar-time series.
-- `missing(elapsed)` advances the pending initialization clock or the
-  initialized Croston/SBA age, without smoothing any estimate. Initial
+- With the `missing(skip)` option, the algorithm clock pauses. No state
+  estimate changes. Initial period `K` and Croston/SBA gaps count numeric
+  observations only. Estimates therefore use observed-period time; they
+  should not be interpreted as rates from a fully observed calendar-time
+  series.
+- With the `missing(elapsed)` option, the pending initialization clock or the
+  initialized Croston/SBA age advances without smoothing any estimate. Initial
   period `K` includes missing positions. TSB also uses this `K` for its
   initial probability; after initialization, missing values leave its
   probability and size unchanged.
@@ -314,21 +318,20 @@ missing-data conventions.
 Immutable online updates
 ------------------------
 
-The `update(Forecaster, Observation, UpdatedForecaster)` predicate uses
-exactly the same state transition as learning. It preserves the method,
-coefficients, and missing policy, and returns a new ground model without
-modifying its input model or instantiating missing observation variables.
-No observation history or caller variables are retained. An all-zero
-learned model can be initialized by its first positive update.
+The `update/3` predicate uses exactly the same state transition as learning.
+It preserves the method, coefficients, and missing policy, and returns a new
+ground model without modifying its input model or instantiating missing
+observation variables. No observation history or caller variables are retained.
+An all-zero learned model can be initialized by its first positive update.
 
-Every update advances the elapsed length and update count, including
-missing updates. Numeric updates advance observed count, and positive
-updates also advance positive count. Learning a prefix and appending
-observations through `update/3` produces the same state, forecasts, and
-error diagnostics as learning the full series with the same concrete
-effective options. Only `update_count/1` differs. Relearning the full
-series with `model(auto)` may select another method; updates do not rerun
-selection.
+Every update advances the elapsed length and update count, including missing
+updates. Numeric updates advance observed count, and positive updates also
+advance positive count. Learning a prefix and appending observations through
+the `update/3` predicate produces the same state, forecasts, and error
+diagnostics as learning the full series with the same concrete effective
+options. Only the `update_count/1` diagnostic differs. Relearning the full
+series with the `model(auto)` option may select another method; updates do
+not rerun selection.
 
 
 Training-error diagnostics
@@ -347,13 +350,13 @@ or predicted series. Five diagnostic terms are appended to the existing
 metadata:
 
 - `scored_count(Count)`: number of scored numeric observations; equals
-  `observed_count(Count)` and is positive.
+  the value of the `observed_count/1` diagnostic and is positive.
 - `sum_absolute_error(AbsoluteSum)`: sum of absolute one-step errors.
 - `sum_squared_error(SquaredSum)`: sum of squared one-step errors.
 - `mean_absolute_error(MAE)`: `float(AbsoluteSum / Count)`.
 - `root_mean_squared_error(RMSE)`: `float(sqrt(SquaredSum / Count))`.
 
-Query these through the existing diagnostics interface:
+Use the `diagnostic/2` predicate to inspect these diagnostic terms:
 
 	| ?- intermittent_demand_forecasting::diagnostic(
 	         Forecaster, mean_absolute_error(MAE)
@@ -380,30 +383,31 @@ point forecast alone would be representable; totals are not clamped.
 Fitted values
 -------------
 
-The `fitted_values(Dataset, Values)` predicate uses the default learning
-options. The `fitted_values(Dataset, Values, Options)` predicate accepts
-the same options as the `learn/3` predicate, including `model(auto)`,
-`alpha(auto)`, `beta(auto)`, and `coefficient_grid(Grid)`. Both predicates
-fit the supplied dataset and then replay from the initial state, returning
-the prediction before processing each numeric observation. These are causal
-one-step fitted predictions, not smoothed hindsight estimates or forecasts
-from the final state.
+The `fitted_values/2` predicate uses the default learning options. The
+`fitted_values/3` predicate accepts the same learning options as the
+`learn/3` predicate, including `model(auto)`, `alpha(auto)`, `beta(auto)`,
+and `coefficient_grid(Grid)`. Both predicates fit the supplied dataset and
+then replay from the initial state, returning the prediction before
+processing each numeric observation. These are causal one-step fitted
+predictions, not smoothed hindsight estimates or forecasts from the final
+state.
 
 	| ?- intermittent_demand_forecasting::fitted_values(
 	         my_demand_series, Values,
 	         [model(croston), alpha(0.5), beta(0.5)]
 	     ).
 
-The output has one position per dataset observation, including initial
+The returned list has one position per dataset observation, including initial
 zero predictions. For `[0,6,0,10]` with both coefficients `0.5`, the fitted
 values are `[0,0,3.0,3.0]` for Croston, `[0,0,2.25,2.25]` for SBA, and
 `[0,0,3.0,1.5]` for TSB. A single positive observation `[6]` has fitted
 values `[0]`, not `[6]`.
 
 Missing targets have fresh unbound output placeholders, independent of
-the input variables and other placeholders. They are not predicted or
-scored, but their existing `skip` or `elapsed` state transitions still
-affect later predictions. Numeric fitted-value errors agree with the
+the input variables and other placeholders. The fitted-value predicates
+return no numeric prediction at a missing training position and do not
+score it. They still apply the `skip` or `elapsed` state transition at that
+position, which can affect later predictions. Numeric fitted-value errors agree with the
 model's aggregate training-error diagnostics.
 
 With automatic requests, the method and coefficients are selected using
@@ -437,19 +441,19 @@ retained models remain constant-size.
 Representation and diagnostics
 ------------------------------
 
-Models use a `intermittent_demand_forecaster(Method, State, Diagnostics)`
-term representation where `State` is one of:
+Models use an `intermittent_demand_forecaster(Method, State, Diagnostics)`
+term representation. The `State` argument uses one of the following terms:
 
 - `pending_state(Clock)` before any positive demand.
 - `croston_state(Size, Interval, Age)` for initialized Croston or SBA.
 - `tsb_state(Size, Probability)` for initialized TSB.
 
-Diagnostics contain `model(intermittent_demand_forecasting)`,
-`training_series_length(Length)`, `options(EffectiveOptions)`,
-`method(Method)`, `observed_count(Count)`, `missing_count(Missing)`,
-`positive_count(Positive)`, `effective_period_count(Effective)`, and
-`update_count(Updates)`. Every model must also include the five
-training-error diagnostics listed above.
+The `Diagnostics` argument is a list of diagnostic terms. It contains
+`model(intermittent_demand_forecasting)`, `training_series_length(Length)`,
+`options(EffectiveOptions)`, `method(Method)`, `observed_count(Count)`,
+`missing_count(Missing)`, `positive_count(Positive)`,
+`effective_period_count(Effective)`, and `update_count(Updates)`. Every
+model must also include the five training-error diagnostics listed above.
 
 `Count + Missing = Length`; `Positive` counts known positive observations.
 Effective periods equal `Count` for `skip`, and `Length` for `elapsed`.
@@ -462,9 +466,10 @@ malformed models.
 
 The `valid_forecaster/1` predicate succeeds only when validation succeeds
 without an exception. The inherited `diagnostics/2`, `diagnostic/2`, and
-`forecaster_options/2` predicates expose metadata. Exports serialize the
-model as a single fact, including state required for future updates.
-The `print_forecaster/1` predicate prints method, state, and metadata.
+`forecaster_options/2` predicates let you inspect metadata. The export
+predicates serialize the model as a single fact, including state required
+for future updates. The `print_forecaster/1` predicate prints method,
+state, and metadata.
 
 Retained state is constant-size and each update uses constant-size state
 and metadata. Dataset collection validates and sorts indices; the

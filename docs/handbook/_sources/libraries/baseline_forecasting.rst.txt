@@ -3,12 +3,14 @@
 ``baseline_forecasting``
 ========================
 
-This library implements univariate naive, seasonal naive, mean, and
-drift forecasting. These methods provide reference forecasts for
-evaluating more complex models and are also useful directly. The object
-implements ``forecaster_protocol`` and imports ``forecaster_common``
-from the ``time_series_protocols`` library for dataset collection,
-validation, diagnostics, forecast construction, and export support.
+This library provides four straightforward ways to forecast a single
+time series: naive, seasonal naive, mean, and drift forecasting. Use
+these methods on their own or as reference forecasts when evaluating
+more complex models. The ``baseline_forecasting`` object implements the
+``forecaster_protocol`` protocol and imports the ``forecaster_common``
+category from the ``time_series_protocols`` library for dataset
+collection, validation, diagnostics, forecast construction, and export
+support.
 
 Datasets are objects implementing ``time_series_dataset_protocol``.
 Observations can be numbers or unbound variables representing missing
@@ -55,7 +57,8 @@ Example
 Models and options
 ------------------
 
-``learn/3`` accepts ``model(Method)`` with default ``model(naive)``:
+The ``learn/3`` predicate accepts a ``model(Method)`` option to select
+the forecasting method. The default method is ``naive``. Choose from:
 
 - ``naive``: repeats the final observation. Requires at least one
   position.
@@ -69,25 +72,24 @@ Models and options
   Requires at least two positions. For horizon step ``h``, the forecast
   is ``Last + h * (Last - First) / (Length - 1)``.
 
-For ``seasonal_naive``, an optional ``frequency(Frequency)`` takes
-precedence over the dataset's ``frequency/1`` metadata. The frequency
-must be a positive integer; ``1`` is accepted and gives persistence
-forecasts. Without an explicit option, the dataset must supply a valid
-frequency. Otherwise, learning raises
+For the ``seasonal_naive`` method, a ``frequency(Frequency)`` learning
+option takes precedence over the dataset's ``frequency/1`` predicate.
+The frequency must be a positive integer; ``1`` is accepted and gives
+persistence forecasts. Without an explicit option, the dataset must
+supply a valid frequency. Otherwise, learning raises
 ``domain_error(seasonal_frequency, Dataset)``.
 
-A ``frequency/1`` option supplied for any non-seasonal model raises
+Supplying a ``frequency/1`` option for any non-seasonal model raises
 ``domain_error(baseline_forecasting_option, Option)``. Effective options
 in diagnostics are canonical: ``[model(Method)]``, or
 ``[model(seasonal_naive), frequency(Frequency)]`` with the resolved
-frequency. The public ``valid_option/1`` and ``default_option/1`` hooks
-can be queried through the inherited options interface.
+frequency.
 
-``forecast/3`` accepts a non-negative integer horizon. A zero horizon
-returns an empty list after forecaster validation. Forecasting does not
-mutate the model. Mean and drift forecasts use floating-point
-arithmetic; naive and seasonal naive preserve the numeric values they
-repeat.
+The ``forecast/3`` predicate accepts a non-negative integer horizon. A
+zero horizon returns an empty list after forecaster validation.
+Forecasting does not mutate the model. Mean and drift forecasts use
+floating-point arithmetic; naive and seasonal naive preserve the numeric
+values they repeat.
 
 Missing observations
 --------------------
@@ -109,19 +111,20 @@ learning can succeed even if a model's forecast inputs are missing:
   divisor uses the elapsed series length, not the known-observation
   count. For ``[10, _, 14]``, the next drift forecast is ``16.0``.
 
-If a requested forecast needs a missing observation, ``forecast/3``
-raises ``domain_error(missing_observation, Forecaster)`` instead of
+If an observation required to calculate a forecast is missing, the
+``forecast/3`` predicate raises a
+``domain_error(missing_observation, Forecaster)`` error instead of
 returning unbound forecast values. A zero horizon succeeds even with
 missing state.
 
 Immutable online updates
 ------------------------
 
-``update/3`` appends one numeric or missing observation and returns a
-new forecaster. Neither the original forecaster nor the supplied missing
-observation variable is instantiated. Missing variables in returned
-state are copied rather than shared with the original state or input
-variable.
+The ``update/3`` predicate appends one numeric or missing observation
+and returns a new forecaster. Neither the original forecaster nor a
+supplied missing observation variable is instantiated. Missing variables
+in returned state are copied rather than shared with the original state
+or input variable.
 
 Every update advances the elapsed length and update count. Naive
 replaces its final value; seasonal naive advances its cycle even for
@@ -135,13 +138,14 @@ record updates.
 A numeric update can recover a missing final observation for naive or
 drift. Seasonal slots become known as new numeric observations replace
 them. A missing original first drift observation cannot be repaired by
-appending observations; relearn after correcting the dataset.
+appending observations. In that case, correct the dataset and learn a
+new forecaster.
 
 Representation and diagnostics
 ------------------------------
 
-Models use ``baseline_forecaster(Method, State, Diagnostics)``. State
-is:
+Models use a ``baseline_forecaster(Method, State, Diagnostics)`` term
+representation. The ``State`` argument uses one of the following terms:
 
 - ``naive_state(Last)``
 - ``seasonal_naive_state(Frequency, Cycle)``, with the final cycle in
@@ -149,23 +153,49 @@ is:
 - ``mean_state(Sum, ObservedCount)``
 - ``drift_state(First, Last)``
 
-Diagnostics contain ``model(baseline_forecasting)``, ``method(Method)``,
+The ``Diagnostics`` argument is a list of diagnostic terms. It contains
+``model(baseline_forecasting)``, ``method(Method)``,
 ``training_series_length(Length)``, ``options(EffectiveOptions)``,
 ``observed_count(Count)``, ``missing_count(MissingCount)``, and
-``update_count(UpdateCount)``. Length includes updates and missing
-positions; ``Count + MissingCount = Length``. The original fitted length
-is ``Length - UpdateCount``. Initial models have zero updates.
+``update_count(UpdateCount)`` terms. The ``Length`` argument includes
+updates and missing positions: ``Count + MissingCount = Length``. The
+original fitted length is ``Length - UpdateCount``. Initial models have
+zero updates.
 
-``check_forecaster/1`` validates state, options, and diagnostic
-consistency, including permitted missing variables.
-``valid_forecaster/1`` succeeds only when validation succeeds without an
-exception. The inherited ``diagnostics/2``, ``diagnostic/2``, and
-``forecaster_options/2`` expose metadata. Export predicates serialize
-the model as a single fact; ``print_forecaster/1`` prints its method,
-state, and diagnostics.
+Use the ``check_forecaster/1`` predicate to validate the state, options,
+and diagnostic consistency, including permitted missing variables. The
+``valid_forecaster/1`` predicate succeeds only when validation completes
+without an exception. To inspect metadata, use the inherited
+``diagnostics/2``, ``diagnostic/2``, and ``forecaster_options/2``
+predicates. The export predicates serialize the model as a single fact,
+while the ``print_forecaster/1`` predicate prints its method, state, and
+diagnostics.
 
 Except for the seasonal cycle, state size is constant. Learning is
 linear in series length, and forecasting is linear in horizon for fixed
 frequency. Seasonal updates copy a cycle; other state updates are
-constant-size. Prediction intervals, automatic model selection,
-transformations, and training-error diagnostics are not provided.
+constant-size.
+
+Limitations
+-----------
+
+The library provides only naive, seasonal naive, mean, and drift
+forecasts. It does not fit smoothing parameters or regressors, select a
+method automatically, or estimate seasonal frequency. Choose the
+``model/1`` option explicitly when the default naive method is not
+appropriate. Seasonal naive requires a supplied frequency and at least
+one complete cycle of positions.
+
+Missing observations are not imputed. Learning requires at least one
+known observation, but that alone does not guarantee a positive-horizon
+forecast: naive needs the final value, seasonal naive needs the
+requested cycle slots, and drift needs both endpoints. Appending numeric
+observations cannot repair a missing original first drift observation;
+correct the dataset and relearn.
+
+Prediction intervals, transformations, and training-error diagnostics
+are not provided. Models retain only the state needed by their method,
+not the observation history. Drift extrapolates the line through the
+first and last values, so those endpoints determine its trend; mean
+forecasts use all known values without discounting older observations.
+Forecasts are not constrained to be non-negative or integer-valued.

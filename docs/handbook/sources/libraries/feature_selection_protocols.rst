@@ -3,30 +3,30 @@
 ``feature_selection_protocols``
 ===============================
 
-This library provides protocols used in the implementation of filter,
-nearest-neighbor, and embedded feature selection algorithms: choosing,
-from a dataset's candidate features, the subset most relevant to a
-downstream learning task. Datasets are represented as objects
-implementing the ``feature_dataset_protocol`` protocol, generalizing
+Use this library when implementing a feature selector or providing a
+dataset for one. It supports filter, nearest-neighbor, and embedded
+algorithms that choose the features most relevant to a learning task.
+Datasets are represented as objects implementing
+``feature_dataset_protocol``, generalizing
 ``classification_protocols::dataset_protocol`` (reusing its
 ``attribute_values/2`` predicate) to also support regression targets and
 fully unsupervised use. Selectors are represented as objects importing
 the ``feature_selector_common`` category. This category provides shared
-helpers for dataset validation, feature-matrix utilities, scoring every
-candidate feature via a pluggable metric, two selection strategies
-(top-k and threshold), diagnostics metadata, export, and pretty-printing
-support.
+auxiliary predicates for dataset validation, feature-matrix utilities,
+scoring every candidate feature via a pluggable metric, two selection
+strategies (top-k and threshold), diagnostics metadata, export, and
+pretty-printing support.
 
 Scoring criteria are exposed as pluggable strategy objects implementing
-the ``feature_scoring_protocol`` protocol — ``variance_score``,
-``correlation_score``, ``anova_f_score``, ``fisher_score``,
-``mutual_information_score``, and ``chi_square_score`` and
-``chi_square_yates_score``, plus ``symmetrical_uncertainty_score``,
-``cramers_v_score``, and ``cramers_v_bias_corrected_score``, are
-provided. They use shared arithmetic, discretization, and sparse
-contingency helpers in the ``feature_scoring_common`` category,
-mirroring how ``recommender_protocols`` exposes ``cosine_similarity``
-and ``pearson_similarity`` via ``similarity_metric_protocol``.
+``feature_scoring_protocol``: ``variance_score``, ``correlation_score``,
+``anova_f_score``, ``fisher_score``, ``mutual_information_score``, and
+``chi_square_score`` and ``chi_square_yates_score``, plus
+``symmetrical_uncertainty_score``, ``cramers_v_score``, and
+``cramers_v_bias_corrected_score``, are provided. They use shared
+arithmetic, discretization, and sparse contingency predicates in the
+``feature_scoring_common`` category, mirroring how
+``recommender_protocols`` exposes ``cosine_similarity`` and
+``pearson_similarity`` via ``similarity_metric_protocol``.
 
 Learned selectors expose diagnostics using the shared ``diagnostics/2``,
 ``diagnostic/2``, and ``selector_options/2`` predicates. Concrete
@@ -46,12 +46,13 @@ default selection option is ``top_k(10)``; ``all`` and
 ``filter_selection/3`` and ``filter_validate_diagnostics/2`` hooks allow
 individual filters to extend selection and diagnostic validation.
 
-Production filter terms use
-``Model(FeatureScores, SelectedFeatures, Diagnostics)``, where ``Model``
-is the receiving implementation name. Their validation checks score and
-selection uniqueness, decreasing numeric order, effective options,
-metric identity, selection consistency, and recorded sample and feature
-counts. The standalone ``fisher_score_feature_selector``,
+Production filters use a
+``Model(FeatureScores, SelectedFeatures, Diagnostics)`` term
+representation, where ``Model`` is the receiving implementation name.
+Their validation checks score and selection uniqueness, decreasing
+numeric order, effective options, metric identity, selection
+consistency, and recorded sample and feature counts. The standalone
+``fisher_score_feature_selector``,
 ``mutual_information_feature_selector``, and
 ``chi_square_feature_selector`` libraries implement this contract.
 
@@ -173,10 +174,9 @@ decreasing score, preserving declaration order when scores are
 numerically equal. A selection strategy is then applied to decide the
 final subset:
 
-- The ``select_top_k/3`` predicate selects the ``K`` highest-scoring
-  features.
-- The ``select_above_threshold/3`` predicate selects every feature
-  scoring at least a given threshold.
+- ``select_top_k/3`` selects the ``K`` highest-scoring features.
+- ``select_above_threshold/3`` selects every feature scoring at least a
+  given threshold.
 
 Both preserve the decreasing-score order and are lenient:
 ``select_top_k/3`` returns every feature, not an error, when fewer than
@@ -199,9 +199,10 @@ category-provided. A protocol declaration alone is insufficient.
 A missing feature value or target (an unbound variable; see
 ``feature_dataset_protocol::example/3``) is excluded on a per-feature,
 per-example basis by casewise deletion inside each scoring criterion
-(via the shared ``complete_pairs/3`` or ``complete_values/2`` helpers) —
-an example missing only one feature's value still contributes to every
-other feature's score.
+(via the shared ``complete_pairs/3`` or ``complete_values/2``
+predicates). An example with one missing feature value can still
+contribute to the scores of its other known features, provided any
+required target is also known.
 
 Scoring criteria
 ----------------
@@ -370,10 +371,10 @@ than a clear, dedicated one.
 Selector representation
 -----------------------
 
-This library does not mandate a specific selector term shape (unlike
-``recommender_protocols``, no single shape is suggested in the protocol
-documentation itself), but ``sample_selector``, the test double used by
-this library's own test suite, uses:
+This library does not mandate a specific term representation for
+selector models. Unlike ``recommender_protocols``, it does not suggest
+one in the protocol documentation. The ``sample_selector`` object, used
+by this library's test suite, uses the following term representation:
 
 ::
 
@@ -381,9 +382,10 @@ this library's own test suite, uses:
 
 where ``Metric`` is the scoring metric object used, ``FeatureScores`` is
 the full list of ``Feature-Score`` pairs, and ``SelectedFeatures`` is
-the subset chosen by the configured selection strategy. The diagnostics
-list includes the ``model/1``, ``example_count/1``, and ``options/1``
-terms common to all selectors plus a ``selected_count/1`` term.
+the subset chosen by the configured selection strategy. The
+``Diagnostics`` argument is a list of diagnostic terms: ``model/1``,
+``example_count/1``, and ``options/1``, required for all selectors, plus
+``selected_count/1``.
 
 The ``sample_selector::check_selector/1`` predicate requires a ground
 term with distinct candidate features, numeric scores in decreasing
@@ -435,8 +437,7 @@ Limitations
   target mutual-information estimators, bias corrections, and p-values
   are not provided. The categorical criteria require categorical targets
   and explicit binning for continuous features.
-- No wrapper (e.g. recursive feature elimination) or embedded (e.g.
-  model-coefficient-based) feature selection method is provided or
-  assumed by the protocol; the protocol is written broadly enough that a
-  wrapper method's selector could still implement it, but none of the
-  shared code in this library is wrapper-specific.
+- Wrapper methods, such as recursive feature elimination, and embedded
+  methods, such as coefficient-based selection, are not implemented in
+  this library. Their selectors can implement the protocol; the shared
+  code does not assume either approach.

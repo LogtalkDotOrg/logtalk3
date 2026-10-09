@@ -441,10 +441,11 @@
              
   <section id="knn-user-recommender">
 <span id="library-knn-user-recommender"></span><h1><code class="docutils literal notranslate"><span class="pre">knn_user_recommender</span></code><a class="headerlink" href="#knn-user-recommender" title="Link to this heading"></a></h1>
-<p>User-based k-nearest-neighbor collaborative filtering with mean-centered
-predictions. The object imports <code class="docutils literal notranslate"><span class="pre">recommender_common</span></code> and implements
-the <code class="docutils literal notranslate"><span class="pre">recommender_protocol</span></code> contract. The <code class="docutils literal notranslate"><span class="pre">score/4</span></code> predicate returns
-a predicted rating. Training datasets implement
+<p>This library predicts ratings from users with similar preferences using
+user-based k-nearest-neighbor collaborative filtering and mean-centered
+predictions. The library object imports the <code class="docutils literal notranslate"><span class="pre">recommender_common</span></code>
+category and implements <code class="docutils literal notranslate"><span class="pre">recommender_protocol</span></code>. The <code class="docutils literal notranslate"><span class="pre">score/4</span></code>
+predicate returns a predicted rating. Training datasets implement
 <code class="docutils literal notranslate"><span class="pre">rating_dataset_protocol</span></code>: atomic user/item identifiers, one numeric
 rating per pair, a matching positive rating count, and an optional
 numeric ordered rating scale.</p>
@@ -481,16 +482,21 @@ link in a web browser.</p>
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate accepts the following options:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">k(3)</span></code>: positive maximum number of contributing neighbors.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">similarity_metric(pearson_similarity)</span></code>: ground identifier of a
-loaded object exposing an implemented public <code class="docutils literal notranslate"><span class="pre">similarity/3</span></code>.
-Parametric objects are accepted. Cosine, Pearson, Jaccard, inverse
-MSD, and Spearman strategies are loaded by the dependency loader.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">min_overlap(1)</span></code>: positive minimum number of common observed items.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">min_similarity(0.0)</span></code>: non-negative finite numeric threshold.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">clip_to_scale(true)</span></code>: <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; clips both
-collaborative and fallback estimates to the declared inclusive scale.
-With no scale it is a no-op.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">k(K)</span></code> sets the maximum number of contributing neighbors to a
+positive integer. The default is <code class="docutils literal notranslate"><span class="pre">3</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">similarity_metric(Metric)</span></code> selects a loaded object with a public
+<code class="docutils literal notranslate"><span class="pre">similarity/3</span></code> implementation. Its identifier must be ground; the
+default is <code class="docutils literal notranslate"><span class="pre">pearson_similarity</span></code>. Parametric objects are accepted.
+Cosine, Pearson, Jaccard, inverse MSD, and Spearman strategies are
+loaded by the dependency loader.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">min_overlap(Count)</span></code> sets the minimum number of items rated by both
+users to a positive integer. The default is <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">min_similarity(Threshold)</span></code> sets a non-negative finite numeric
+threshold. The default is <code class="docutils literal notranslate"><span class="pre">0.0</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">clip_to_scale(Boolean)</span></code> selects <code class="docutils literal notranslate"><span class="pre">true</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">false</span></code>.
+When enabled, it clips both collaborative and fallback estimates to
+the declared inclusive scale. Without a declared scale, it leaves
+estimates unchanged.</p></li>
 </ul>
 <p>Custom metrics receive complete sparse profiles, not an already-trimmed
 intersection. They must return exactly one finite numeric score. No
@@ -518,32 +524,35 @@ dataset enumeration order. Predicting an already-rated item still
 estimates it; the target user is excluded from the neighborhood, but
 training observations are not implicitly held out. Evaluation must
 remove held-out ratings.</p>
-<p>If the user is unknown or no eligible evidence remains, the fixed
-fallback is the known user’s mean, otherwise the known item’s mean,
-otherwise the global training mean. Unknown atomic identifiers are valid
-queries. Variables throw <code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code>; compound identifiers
-throw an atomic type error.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">recommend(Model,</span> <span class="pre">User,</span> <span class="pre">N,</span> <span class="pre">Recommendations)</span></code> predicate returns up
-to positive integer <code class="docutils literal notranslate"><span class="pre">N</span></code> unrated training-catalog items as
-<code class="docutils literal notranslate"><span class="pre">Item-Score</span></code> pairs. Scores are the same as direct predictions,
-including fallbacks and clipping. Unknown users see the entire catalog;
-no candidates returns <code class="docutils literal notranslate"><span class="pre">[]</span></code>. Results are ordered by descending score,
-with descending standard item order for ties.</p>
+<p>If the user has no training ratings or no neighbors pass the filters,
+prediction uses a fallback: the user’s training mean if available,
+otherwise the item’s training mean, otherwise the global training mean.
+Unknown atomic identifiers are valid queries. Variables throw
+<code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code>; compound identifiers throw an atomic type
+error.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">recommend/4</span></code> predicate returns up to <code class="docutils literal notranslate"><span class="pre">N</span></code> unrated
+training-catalog items as <code class="docutils literal notranslate"><span class="pre">Item-Score</span></code> pairs; <code class="docutils literal notranslate"><span class="pre">N</span></code> must be a positive
+integer. Scores are the same as direct predictions, including fallbacks
+and clipping. Unknown users have every training-catalog item considered
+as a candidate. If no candidates remain, the result is <code class="docutils literal notranslate"><span class="pre">[]</span></code>. Results
+are ordered by descending score, with descending standard item order for
+ties.</p>
 <p>For <code class="docutils literal notranslate"><span class="pre">u:</span> <span class="pre">a=1,b=3</span></code> and <code class="docutils literal notranslate"><span class="pre">v:</span> <span class="pre">a=2,b=4,c=5</span></code>, Pearson gives a neighbor
 score of one and the prediction for <code class="docutils literal notranslate"><span class="pre">u,c</span></code> is
 <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">(5</span> <span class="pre">-</span> <span class="pre">11/3)</span> <span class="pre">=</span> <span class="pre">10/3</span></code>.</p>
 </section>
 <section id="models-diagnostics-and-export">
 <h2>Models, diagnostics, and export<a class="headerlink" href="#models-diagnostics-and-export" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">learn/2</span></code> and <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicates return the learned
-recommender model as a term with the following structure:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">learn/2</span></code> and <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicates return models using the
+following term representation:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>knn_user_model(<span class="nv">Ratings</span>, <span class="nv">Profiles</span>, <span class="nv">GlobalMean</span>, <span class="nv">Scale</span>, <span class="nv">Diagnostics</span>)
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">Ratings</span></code> contains <code class="docutils literal notranslate"><span class="pre">rating(User,</span> <span class="pre">Item,</span> <span class="pre">Rating)</span></code> terms. <code class="docutils literal notranslate"><span class="pre">Profiles</span></code>
-is sorted by user and contains
-<code class="docutils literal notranslate"><span class="pre">User-profile(SortedItemRatingPairs,</span> <span class="pre">Mean)</span></code> entries. <code class="docutils literal notranslate"><span class="pre">Scale</span></code> is
-<code class="docutils literal notranslate"><span class="pre">none</span></code> or <code class="docutils literal notranslate"><span class="pre">scale(Min,</span> <span class="pre">Max)</span></code>. Diagnostics contain exactly one
+<p>The <code class="docutils literal notranslate"><span class="pre">Ratings</span></code> argument is a list of <code class="docutils literal notranslate"><span class="pre">rating(User,</span> <span class="pre">Item,</span> <span class="pre">Rating)</span></code>
+terms. <code class="docutils literal notranslate"><span class="pre">Profiles</span></code> is sorted by user and contains
+<code class="docutils literal notranslate"><span class="pre">User-profile(SortedItemRatingPairs,</span> <span class="pre">Mean)</span></code> entries. <code class="docutils literal notranslate"><span class="pre">Scale</span></code> is the
+atom <code class="docutils literal notranslate"><span class="pre">none</span></code> or a <code class="docutils literal notranslate"><span class="pre">scale(Min,</span> <span class="pre">Max)</span></code> term. The <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code>
+argument is a list containing exactly one of each diagnostic term:
 <code class="docutils literal notranslate"><span class="pre">model(knn_user_recommender)</span></code>, <code class="docutils literal notranslate"><span class="pre">rating_count(Count)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">options(Options)</span></code>, <code class="docutils literal notranslate"><span class="pre">user_count(Count)</span></code>, <code class="docutils literal notranslate"><span class="pre">item_count(Count)</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">neighbor_axis(user)</span></code>.</p>

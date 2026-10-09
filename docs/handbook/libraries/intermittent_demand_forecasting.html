@@ -448,18 +448,19 @@
              
   <section id="intermittent-demand-forecasting">
 <span id="library-intermittent-demand-forecasting"></span><h1><code class="docutils literal notranslate"><span class="pre">intermittent_demand_forecasting</span></code><a class="headerlink" href="#intermittent-demand-forecasting" title="Link to this heading"></a></h1>
-<p>This library implements Croston, the Syntetos-Boylan approximation
-(SBA), and Teunter-Syntetos-Babai (TSB) forecasting for non-negative
-demand series with periods of zero demand. The object implements
-<code class="docutils literal notranslate"><span class="pre">forecaster_protocol</span></code> and imports <code class="docutils literal notranslate"><span class="pre">forecaster_common</span></code> from
-<code class="docutils literal notranslate"><span class="pre">time_series_protocols</span></code> for dataset collection, options, diagnostics,
-forecast construction, and export support.</p>
-<p>Datasets implement <code class="docutils literal notranslate"><span class="pre">time_series_dataset_protocol</span></code>. Values can be
-non-negative integers or floats, or unbound variables representing
-missing observations. Indices must be a complete, gap-free, 1-based
-sequence, and the declared length must match the enumerated
-observations. Dataset frequency metadata is not used. The implementation
-requires no backend-specific facilities.</p>
+<p>Use this library to forecast non-negative demand series that include
+periods of zero demand. It provides Croston, the Syntetos-Boylan
+approximation (SBA), and Teunter-Syntetos-Babai (TSB) methods. The
+library object implements <code class="docutils literal notranslate"><span class="pre">forecaster_protocol</span></code> and imports the
+<code class="docutils literal notranslate"><span class="pre">forecaster_common</span></code> category from the <code class="docutils literal notranslate"><span class="pre">time_series_protocols</span></code>
+library for dataset collection, options, diagnostics, forecast
+construction, and export support.</p>
+<p>Datasets are objects implementing <code class="docutils literal notranslate"><span class="pre">time_series_dataset_protocol</span></code>.
+Values can be non-negative integers or floats, or unbound variables
+representing missing observations. Indices must be a complete, gap-free,
+1-based sequence, and the declared length must match the enumerated
+observations. Dataset frequency metadata from the <code class="docutils literal notranslate"><span class="pre">frequency/1</span></code>
+predicate is not used.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -514,38 +515,37 @@ of the automatically selected method.</p>
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate accepts the following options:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">model(croston|sba|tsb|auto)</span></code>: forecasting method; default <code class="docutils literal notranslate"><span class="pre">sba</span></code>.
-<code class="docutils literal notranslate"><span class="pre">auto</span></code> selects among the three concrete methods using causal
-training RMSE.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">alpha(Alpha)</span></code>: positive-demand size smoothing coefficient or
-<code class="docutils literal notranslate"><span class="pre">auto</span></code>; default <code class="docutils literal notranslate"><span class="pre">0.1</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">beta(Beta)</span></code>: interarrival-time smoothing coefficient for
-Croston/SBA, or occurrence-probability smoothing coefficient for TSB,
-or <code class="docutils literal notranslate"><span class="pre">auto</span></code>; default <code class="docutils literal notranslate"><span class="pre">0.1</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">missing(skip|elapsed)</span></code>: missing-value clock policy; default
-<code class="docutils literal notranslate"><span class="pre">skip</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">coefficient_grid(Grid)</span></code>: shared candidate grid for coefficients
-requested as <code class="docutils literal notranslate"><span class="pre">auto</span></code>; default <code class="docutils literal notranslate"><span class="pre">[0.1,0.2,0.5,0.8,1.0]</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model(Method)</span></code> selects <code class="docutils literal notranslate"><span class="pre">croston</span></code>, <code class="docutils literal notranslate"><span class="pre">sba</span></code>, <code class="docutils literal notranslate"><span class="pre">tsb</span></code>, or <code class="docutils literal notranslate"><span class="pre">auto</span></code>
+(default: <code class="docutils literal notranslate"><span class="pre">sba</span></code>). The <code class="docutils literal notranslate"><span class="pre">auto</span></code> value selects among the three
+concrete methods using causal training RMSE.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">alpha(Alpha)</span></code> sets the positive-demand size smoothing coefficient,
+or requests fitting with <code class="docutils literal notranslate"><span class="pre">auto</span></code>. The default is <code class="docutils literal notranslate"><span class="pre">0.1</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">beta(Beta)</span></code> sets the interarrival-time smoothing coefficient for
+Croston/SBA, or the occurrence-probability smoothing coefficient for
+TSB. Use <code class="docutils literal notranslate"><span class="pre">auto</span></code> to request fitting. The default is <code class="docutils literal notranslate"><span class="pre">0.1</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">missing(Policy)</span></code> selects <code class="docutils literal notranslate"><span class="pre">skip</span></code> or <code class="docutils literal notranslate"><span class="pre">elapsed</span></code> to control how
+missing observations affect the algorithm clock (default: <code class="docutils literal notranslate"><span class="pre">skip</span></code>).
+It does not change how missing observations are represented.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">coefficient_grid(Grid)</span></code> supplies candidate values for coefficients
+requested as <code class="docutils literal notranslate"><span class="pre">auto</span></code> (default: <code class="docutils literal notranslate"><span class="pre">[0.1,0.2,0.5,0.8,1.0]</span></code>).</p></li>
 </ul>
 <p>Numeric coefficients must be greater than zero and at most one. Each
 coefficient can independently request <code class="docutils literal notranslate"><span class="pre">auto</span></code> for bounded grid fitting.
-Effective options are stored as
+The model stores its effective options as the list
 <code class="docutils literal notranslate"><span class="pre">[model(Method),</span> <span class="pre">alpha(Alpha),</span> <span class="pre">beta(Beta),</span> <span class="pre">missing(Policy)]</span></code>, with the
 selected concrete method and numeric coefficients, never <code class="docutils literal notranslate"><span class="pre">auto</span></code> atoms.
 The request-only grid is not stored in effective options or diagnostics.
-The selected coefficients remain fixed during subsequent updates. The
-public <code class="docutils literal notranslate"><span class="pre">valid_option/1</span></code> and <code class="docutils literal notranslate"><span class="pre">default_option/1</span></code> hooks can be queried
-through the inherited options interface.</p>
+The selected coefficients remain fixed during subsequent updates.</p>
 </section>
 <section id="automatic-method-selection">
 <h2>Automatic method selection<a class="headerlink" href="#automatic-method-selection" title="Link to this heading"></a></h2>
-<p>Use <code class="docutils literal notranslate"><span class="pre">model(auto)</span></code> to fit SBA, Croston, and TSB with the same fixed
-coefficients and missing policy, selecting the lowest causal one-step
-training RMSE. The default remains SBA; automatic selection is opt-in.
-Exact RMSE ties prefer SBA, then Croston, then TSB, without a tolerance.
-Each candidate scores the same numeric targets, including cold-start
-zero predictions, and skips missing targets. <code class="docutils literal notranslate"><span class="pre">Beta</span></code> retains its
-method-specific meaning. Numeric coefficient requests remain fixed;
+<p>Use the <code class="docutils literal notranslate"><span class="pre">model(auto)</span></code> option to fit SBA, Croston, and TSB with the
+same fixed coefficients and missing policy, selecting the lowest causal
+one-step training RMSE. The default remains SBA; automatic selection is
+opt-in. Exact RMSE ties prefer SBA, then Croston, then TSB, without a
+tolerance. Each candidate scores the same numeric targets, including
+cold-start zero predictions, and skips missing targets. <code class="docutils literal notranslate"><span class="pre">Beta</span></code> retains
+its method-specific meaning. Numeric coefficient requests remain fixed;
 <code class="docutils literal notranslate"><span class="pre">alpha(auto)</span></code> or <code class="docutils literal notranslate"><span class="pre">beta(auto)</span></code> enables the grid fitting described
 below.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> intermittent_demand_forecasting<span class="o">::</span>learn(
@@ -570,12 +570,12 @@ model is retained.</p>
 </section>
 <section id="automatic-coefficient-fitting">
 <h2>Automatic coefficient fitting<a class="headerlink" href="#automatic-coefficient-fitting" title="Link to this heading"></a></h2>
-<p>Use <code class="docutils literal notranslate"><span class="pre">alpha(auto)</span></code> and/or <code class="docutils literal notranslate"><span class="pre">beta(auto)</span></code> to select coefficients from
-the default grid <code class="docutils literal notranslate"><span class="pre">[0.1,0.2,0.5,0.8,1.0]</span></code>. Only requested <code class="docutils literal notranslate"><span class="pre">auto</span></code>
-coefficients are searched. Supplied numeric values are preserved
-exactly, including off-grid values such as <code class="docutils literal notranslate"><span class="pre">0.37</span></code> and integer
-coefficients such as <code class="docutils literal notranslate"><span class="pre">1</span></code>. Defaults remain numeric <code class="docutils literal notranslate"><span class="pre">0.1</span></code>; fitting is
-opt-in.</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">alpha(auto)</span></code> and/or <code class="docutils literal notranslate"><span class="pre">beta(auto)</span></code> options to select
+coefficients from the default grid <code class="docutils literal notranslate"><span class="pre">[0.1,0.2,0.5,0.8,1.0]</span></code>. Only
+requested <code class="docutils literal notranslate"><span class="pre">auto</span></code> coefficients are searched. Supplied numeric values
+are preserved exactly, including off-grid values such as <code class="docutils literal notranslate"><span class="pre">0.37</span></code> and
+integer coefficients such as <code class="docutils literal notranslate"><span class="pre">1</span></code>. Defaults remain numeric <code class="docutils literal notranslate"><span class="pre">0.1</span></code>;
+fitting is opt-in.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> intermittent_demand_forecasting<span class="o">::</span>learn(
          my_demand_series, <span class="nv">Forecaster</span>,
          [model(auto), alpha(auto), beta(auto)]
@@ -583,8 +583,8 @@ opt-in.</p>
      intermittent_demand_forecasting<span class="o">::</span>forecaster_options(<span class="nv">Forecaster</span>, <span class="nv">Options</span>).
 </pre></div>
 </div>
-<p>Supply <code class="docutils literal notranslate"><span class="pre">coefficient_grid(Grid)</span></code> to customize the candidates shared by
-<code class="docutils literal notranslate"><span class="pre">alpha(auto)</span></code> and <code class="docutils literal notranslate"><span class="pre">beta(auto)</span></code>:</p>
+<p>Supply the <code class="docutils literal notranslate"><span class="pre">coefficient_grid(Grid)</span></code> option to customize the candidates
+shared by the <code class="docutils literal notranslate"><span class="pre">alpha(auto)</span></code> and <code class="docutils literal notranslate"><span class="pre">beta(auto)</span></code> options:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> intermittent_demand_forecasting<span class="o">::</span>learn(
          my_demand_series, <span class="nv">Forecaster</span>,
          [model(auto), alpha(auto), beta(auto),
@@ -607,11 +607,12 @@ request-only; retained models store only the selected numeric
 coefficients.</p>
 <p>Every concrete method/coefficient combination is fitted using the same
 missing policy and scored by causal one-step training RMSE, including
-initial zero predictions and skipping missing targets. Select the lowest
-RMSE. Exact ties prefer SBA, then Croston, then TSB, then lower alpha
-and lower beta; no comparison tolerance is used. The model stores only
-the winning concrete method and numeric coefficients. Stored <code class="docutils literal notranslate"><span class="pre">auto</span></code>
-atoms are invalid forecaster metadata.</p>
+initial zero predictions and skipping missing targets. The library
+selects the combination with the lowest RMSE. Exact ties prefer SBA,
+then Croston, then TSB, then lower alpha and lower beta; no comparison
+tolerance is used. The model stores only the winning concrete method and
+numeric coefficients. Stored <code class="docutils literal notranslate"><span class="pre">auto</span></code> atoms are invalid forecaster
+metadata.</p>
 <p>For Croston on <code class="docutils literal notranslate"><span class="pre">[6,10,10]</span></code>, <code class="docutils literal notranslate"><span class="pre">alpha(auto)</span></code> with fixed <code class="docutils literal notranslate"><span class="pre">beta(0.37)</span></code>
 selects <code class="docutils literal notranslate"><span class="pre">alpha(1.0)</span></code>. For TSB on <code class="docutils literal notranslate"><span class="pre">[6,0,0]</span></code>, <code class="docutils literal notranslate"><span class="pre">beta(auto)</span></code> with
 fixed <code class="docutils literal notranslate"><span class="pre">alpha(0.37)</span></code> selects <code class="docutils literal notranslate"><span class="pre">beta(1.0)</span></code>. These examples use the
@@ -675,13 +676,13 @@ positive demand and <code class="docutils literal notranslate"><span class="pre"
 reduces the probability by a factor of <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">-</span> <span class="pre">Beta</span></code>, allowing forecasts
 to adapt to declining occurrence or obsolescence. Missing values never
 cause probability decay.</p>
-<p>Initialization is causal. Before any known positive demand, retain a
-pending clock and forecast zero. At the first positive observation in
-algorithm period <code class="docutils literal notranslate"><span class="pre">K</span></code>, initialize <code class="docutils literal notranslate"><span class="pre">Size</span></code> to that demand, <code class="docutils literal notranslate"><span class="pre">Interval</span></code>
-to <code class="docutils literal notranslate"><span class="pre">K</span></code> for Croston/SBA, and <code class="docutils literal notranslate"><span class="pre">Probability</span></code> to <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">/</span> <span class="pre">K</span></code> for TSB. Do
-not additionally smooth this initializing observation. No full-series
-averages or future observations are used. All-zero and single-positive
-series are valid.</p>
+<p>Initialization is causal. Before any known positive demand, the
+forecaster retains a pending clock and forecasts zero. At the first
+positive observation in algorithm period <code class="docutils literal notranslate"><span class="pre">K</span></code>, it initializes <code class="docutils literal notranslate"><span class="pre">Size</span></code>
+to that demand, <code class="docutils literal notranslate"><span class="pre">Interval</span></code> to <code class="docutils literal notranslate"><span class="pre">K</span></code> for Croston/SBA, and
+<code class="docutils literal notranslate"><span class="pre">Probability</span></code> to <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">/</span> <span class="pre">K</span></code> for TSB. It does not additionally smooth
+this initializing observation. No full-series averages or future
+observations are used. All-zero and single-positive series are valid.</p>
 <p>With <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">0,</span> <span class="pre">6,</span> <span class="pre">0,</span> <span class="pre">10]</span></code> and both coefficients <code class="docutils literal notranslate"><span class="pre">0.5</span></code>, the final
 forecasts are <code class="docutils literal notranslate"><span class="pre">3.2</span></code> for Croston, <code class="docutils literal notranslate"><span class="pre">2.4</span></code> for SBA, and approximately
 <code class="docutils literal notranslate"><span class="pre">4.6666666667</span></code> for TSB. These are expected demand per period, not
@@ -703,16 +704,16 @@ rejected; all-missing training series raise
 <p>Every missing position counts in the elapsed training length and missing
 count, regardless of policy:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">missing(skip)</span></code> pauses the algorithm clock. No state estimate
-changes. Initial period <code class="docutils literal notranslate"><span class="pre">K</span></code> and Croston/SBA gaps count numeric
-observations only. Estimates therefore use observed-period time; they
-should not be interpreted as rates from a fully observed calendar-time
-series.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">missing(elapsed)</span></code> advances the pending initialization clock or the
-initialized Croston/SBA age, without smoothing any estimate. Initial
-period <code class="docutils literal notranslate"><span class="pre">K</span></code> includes missing positions. TSB also uses this <code class="docutils literal notranslate"><span class="pre">K</span></code> for
-its initial probability; after initialization, missing values leave
-its probability and size unchanged.</p></li>
+<li><p>With the <code class="docutils literal notranslate"><span class="pre">missing(skip)</span></code> option, the algorithm clock pauses. No
+state estimate changes. Initial period <code class="docutils literal notranslate"><span class="pre">K</span></code> and Croston/SBA gaps
+count numeric observations only. Estimates therefore use
+observed-period time; they should not be interpreted as rates from a
+fully observed calendar-time series.</p></li>
+<li><p>With the <code class="docutils literal notranslate"><span class="pre">missing(elapsed)</span></code> option, the pending initialization clock
+or the initialized Croston/SBA age advances without smoothing any
+estimate. Initial period <code class="docutils literal notranslate"><span class="pre">K</span></code> includes missing positions. TSB also
+uses this <code class="docutils literal notranslate"><span class="pre">K</span></code> for its initial probability; after initialization,
+missing values leave its probability and size unchanged.</p></li>
 </ul>
 <p>Neither policy imputes zero demand. The elapsed policy measures gaps
 between known positive demands; it cannot reconstruct positive demand
@@ -722,20 +723,20 @@ missing-data conventions.</p>
 </section>
 <section id="immutable-online-updates">
 <h2>Immutable online updates<a class="headerlink" href="#immutable-online-updates" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">update(Forecaster,</span> <span class="pre">Observation,</span> <span class="pre">UpdatedForecaster)</span></code> predicate
-uses exactly the same state transition as learning. It preserves the
-method, coefficients, and missing policy, and returns a new ground model
-without modifying its input model or instantiating missing observation
-variables. No observation history or caller variables are retained. An
-all-zero learned model can be initialized by its first positive update.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">update/3</span></code> predicate uses exactly the same state transition as
+learning. It preserves the method, coefficients, and missing policy, and
+returns a new ground model without modifying its input model or
+instantiating missing observation variables. No observation history or
+caller variables are retained. An all-zero learned model can be
+initialized by its first positive update.</p>
 <p>Every update advances the elapsed length and update count, including
 missing updates. Numeric updates advance observed count, and positive
 updates also advance positive count. Learning a prefix and appending
-observations through <code class="docutils literal notranslate"><span class="pre">update/3</span></code> produces the same state, forecasts,
-and error diagnostics as learning the full series with the same concrete
-effective options. Only <code class="docutils literal notranslate"><span class="pre">update_count/1</span></code> differs. Relearning the full
-series with <code class="docutils literal notranslate"><span class="pre">model(auto)</span></code> may select another method; updates do not
-rerun selection.</p>
+observations through the <code class="docutils literal notranslate"><span class="pre">update/3</span></code> predicate produces the same state,
+forecasts, and error diagnostics as learning the full series with the
+same concrete effective options. Only the <code class="docutils literal notranslate"><span class="pre">update_count/1</span></code> diagnostic
+differs. Relearning the full series with the <code class="docutils literal notranslate"><span class="pre">model(auto)</span></code> option may
+select another method; updates do not rerun selection.</p>
 </section>
 <section id="training-error-diagnostics">
 <h2>Training-error diagnostics<a class="headerlink" href="#training-error-diagnostics" title="Link to this heading"></a></h2>
@@ -751,14 +752,14 @@ actual or predicted series. Five diagnostic terms are appended to the
 existing metadata:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">scored_count(Count)</span></code>: number of scored numeric observations; equals
-<code class="docutils literal notranslate"><span class="pre">observed_count(Count)</span></code> and is positive.</p></li>
+the value of the <code class="docutils literal notranslate"><span class="pre">observed_count/1</span></code> diagnostic and is positive.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">sum_absolute_error(AbsoluteSum)</span></code>: sum of absolute one-step errors.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">sum_squared_error(SquaredSum)</span></code>: sum of squared one-step errors.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">mean_absolute_error(MAE)</span></code>: <code class="docutils literal notranslate"><span class="pre">float(AbsoluteSum</span> <span class="pre">/</span> <span class="pre">Count)</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">root_mean_squared_error(RMSE)</span></code>:
 <code class="docutils literal notranslate"><span class="pre">float(sqrt(SquaredSum</span> <span class="pre">/</span> <span class="pre">Count))</span></code>.</p></li>
 </ul>
-<p>Query these through the existing diagnostics interface:</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code> predicate to inspect these diagnostic terms:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> intermittent_demand_forecasting<span class="o">::</span>diagnostic(
          <span class="nv">Forecaster</span>, mean_absolute_error(<span class="nv">MAE</span>)
      ),
@@ -782,31 +783,32 @@ point forecast alone would be representable; totals are not clamped.</p>
 </section>
 <section id="fitted-values">
 <h2>Fitted values<a class="headerlink" href="#fitted-values" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">fitted_values(Dataset,</span> <span class="pre">Values)</span></code> predicate uses the default
-learning options. The <code class="docutils literal notranslate"><span class="pre">fitted_values(Dataset,</span> <span class="pre">Values,</span> <span class="pre">Options)</span></code>
-predicate accepts the same options as the <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate,
-including <code class="docutils literal notranslate"><span class="pre">model(auto)</span></code>, <code class="docutils literal notranslate"><span class="pre">alpha(auto)</span></code>, <code class="docutils literal notranslate"><span class="pre">beta(auto)</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">coefficient_grid(Grid)</span></code>. Both predicates fit the supplied dataset and
-then replay from the initial state, returning the prediction before
-processing each numeric observation. These are causal one-step fitted
-predictions, not smoothed hindsight estimates or forecasts from the
-final state.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">fitted_values/2</span></code> predicate uses the default learning options. The
+<code class="docutils literal notranslate"><span class="pre">fitted_values/3</span></code> predicate accepts the same learning options as the
+<code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate, including <code class="docutils literal notranslate"><span class="pre">model(auto)</span></code>, <code class="docutils literal notranslate"><span class="pre">alpha(auto)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">beta(auto)</span></code>, and <code class="docutils literal notranslate"><span class="pre">coefficient_grid(Grid)</span></code>. Both predicates fit the
+supplied dataset and then replay from the initial state, returning the
+prediction before processing each numeric observation. These are causal
+one-step fitted predictions, not smoothed hindsight estimates or
+forecasts from the final state.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> intermittent_demand_forecasting<span class="o">::</span>fitted_values(
          my_demand_series, <span class="nv">Values</span>,
          [model(croston), alpha(<span class="m">0.5</span>), beta(<span class="m">0.5</span>)]
      ).
 </pre></div>
 </div>
-<p>The output has one position per dataset observation, including initial
-zero predictions. For <code class="docutils literal notranslate"><span class="pre">[0,6,0,10]</span></code> with both coefficients <code class="docutils literal notranslate"><span class="pre">0.5</span></code>, the
-fitted values are <code class="docutils literal notranslate"><span class="pre">[0,0,3.0,3.0]</span></code> for Croston, <code class="docutils literal notranslate"><span class="pre">[0,0,2.25,2.25]</span></code> for
-SBA, and <code class="docutils literal notranslate"><span class="pre">[0,0,3.0,1.5]</span></code> for TSB. A single positive observation
-<code class="docutils literal notranslate"><span class="pre">[6]</span></code> has fitted values <code class="docutils literal notranslate"><span class="pre">[0]</span></code>, not <code class="docutils literal notranslate"><span class="pre">[6]</span></code>.</p>
+<p>The returned list has one position per dataset observation, including
+initial zero predictions. For <code class="docutils literal notranslate"><span class="pre">[0,6,0,10]</span></code> with both coefficients
+<code class="docutils literal notranslate"><span class="pre">0.5</span></code>, the fitted values are <code class="docutils literal notranslate"><span class="pre">[0,0,3.0,3.0]</span></code> for Croston,
+<code class="docutils literal notranslate"><span class="pre">[0,0,2.25,2.25]</span></code> for SBA, and <code class="docutils literal notranslate"><span class="pre">[0,0,3.0,1.5]</span></code> for TSB. A single
+positive observation <code class="docutils literal notranslate"><span class="pre">[6]</span></code> has fitted values <code class="docutils literal notranslate"><span class="pre">[0]</span></code>, not <code class="docutils literal notranslate"><span class="pre">[6]</span></code>.</p>
 <p>Missing targets have fresh unbound output placeholders, independent of
-the input variables and other placeholders. They are not predicted or
-scored, but their existing <code class="docutils literal notranslate"><span class="pre">skip</span></code> or <code class="docutils literal notranslate"><span class="pre">elapsed</span></code> state transitions
-still affect later predictions. Numeric fitted-value errors agree with
-the model’s aggregate training-error diagnostics.</p>
+the input variables and other placeholders. The fitted-value predicates
+return no numeric prediction at a missing training position and do not
+score it. They still apply the <code class="docutils literal notranslate"><span class="pre">skip</span></code> or <code class="docutils literal notranslate"><span class="pre">elapsed</span></code> state transition
+at that position, which can affect later predictions. Numeric
+fitted-value errors agree with the model’s aggregate training-error
+diagnostics.</p>
 <p>With automatic requests, the method and coefficients are selected using
 the full supplied dataset, and that one concrete configuration is
 replayed throughout. There is no per-prefix reselection. Although its
@@ -835,15 +837,16 @@ memory, while retained models remain constant-size.</p>
 </section>
 <section id="representation-and-diagnostics">
 <h2>Representation and diagnostics<a class="headerlink" href="#representation-and-diagnostics" title="Link to this heading"></a></h2>
-<p>Models use a
+<p>Models use an
 <code class="docutils literal notranslate"><span class="pre">intermittent_demand_forecaster(Method,</span> <span class="pre">State,</span> <span class="pre">Diagnostics)</span></code> term
-representation where <code class="docutils literal notranslate"><span class="pre">State</span></code> is one of:</p>
+representation. The <code class="docutils literal notranslate"><span class="pre">State</span></code> argument uses one of the following terms:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">pending_state(Clock)</span></code> before any positive demand.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">croston_state(Size,</span> <span class="pre">Interval,</span> <span class="pre">Age)</span></code> for initialized Croston or SBA.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tsb_state(Size,</span> <span class="pre">Probability)</span></code> for initialized TSB.</p></li>
 </ul>
-<p>Diagnostics contain <code class="docutils literal notranslate"><span class="pre">model(intermittent_demand_forecasting)</span></code>,
+<p>The <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> argument is a list of diagnostic terms. It contains
+<code class="docutils literal notranslate"><span class="pre">model(intermittent_demand_forecasting)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">training_series_length(Length)</span></code>, <code class="docutils literal notranslate"><span class="pre">options(EffectiveOptions)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">method(Method)</span></code>, <code class="docutils literal notranslate"><span class="pre">observed_count(Count)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">missing_count(Missing)</span></code>, <code class="docutils literal notranslate"><span class="pre">positive_count(Positive)</span></code>,
@@ -860,10 +863,10 @@ options, counter consistency, and complete error metadata, without
 completing malformed models.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">valid_forecaster/1</span></code> predicate succeeds only when validation
 succeeds without an exception. The inherited <code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code>,
-<code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">forecaster_options/2</span></code> predicates expose
-metadata. Exports serialize the model as a single fact, including state
-required for future updates. The <code class="docutils literal notranslate"><span class="pre">print_forecaster/1</span></code> predicate prints
-method, state, and metadata.</p>
+<code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">forecaster_options/2</span></code> predicates let you
+inspect metadata. The export predicates serialize the model as a single
+fact, including state required for future updates. The
+<code class="docutils literal notranslate"><span class="pre">print_forecaster/1</span></code> predicate prints method, state, and metadata.</p>
 <p>Retained state is constant-size and each update uses constant-size state
 and metadata. Dataset collection validates and sorts indices; the
 subsequent training pass is linear in series length and tail-recursive.

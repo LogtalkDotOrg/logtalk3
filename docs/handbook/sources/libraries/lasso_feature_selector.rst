@@ -39,7 +39,7 @@ Dataset and adapter
 
 The ``learn/2`` and ``learn/3`` predicates accept a dataset implementing
 ``feature_dataset_protocol``. Shared validation checks all original
-examples, including rows with unknown targets, for duplicate
+examples, including rows with unbound targets, for duplicate
 declarations, undeclared or repeated feature bindings, proper feature
 lists, and consistent example counts. The selector checks that every
 remaining target is numeric and that at least one usable example
@@ -58,8 +58,8 @@ feature values. The ``target/1`` predicate returns the fixed atom
 feature or of an objective. The adapter uses object parameters directly
 and does not create dynamic objects.
 
-Unknown targets are excluded before fitting encoders or computing
-scaling statistics. Known non-numeric targets raise
+Rows with an unbound target are excluded before fitting encoders or
+computing scaling statistics. Known non-numeric targets raise
 ``type_error(number, Target)``. An empty dataset or one with no known
 targets raises ``domain_error(non_empty_examples, Dataset)``.
 Unsupported declarations raise
@@ -87,20 +87,20 @@ The ``learn/3`` predicate accepts these wrapper options:
 - ``coefficient_threshold(Cutoff)`` accepts a non-negative number and
   defaults to ``0.0``. A group is active only when its score is strictly
   greater than this cutoff.
-- ``selection_strategy(all)`` selects all active groups and is the
-  default. ``selection_strategy(top_k(K))`` accepts a positive integer
-  and selects at most ``K`` active groups.
-  ``selection_strategy(threshold(T))`` accepts a number and selects
-  active groups whose scores are at least ``T``.
-- ``regularization_search(none)`` is the default. The option
-  ``regularization_search(holdout(Fraction, Values))`` searches a
+- ``selection_strategy(Strategy)`` selects ``all`` (default),
+  ``top_k(K)``, or ``threshold(T)``. The ``all`` strategy selects all
+  active groups; ``top_k(K)`` requires a positive integer and selects at
+  most ``K`` active groups. The ``threshold(T)`` strategy accepts a
+  number and selects active groups whose scores are at least ``T``.
+- ``regularization_search(Search)`` selects ``none`` (default) or a
+  holdout search. The ``holdout(Fraction, Values)`` form searches a
   nonempty proper list of non-negative numeric penalties using
   validation MSE. The numeric fraction must be strictly between zero and
   one. Alternatively,
-  ``regularization_search(holdout(Fraction, linear(Minimum, Maximum, Count)))``
-  generates an ascending linear grid. Bounds must be numeric, with a
-  non-negative minimum and a greater maximum; ``Count`` must be an
-  integer of at least two.
+  ``holdout(Fraction, linear(Minimum, Maximum, Count))`` generates an
+  ascending linear grid. Bounds must be numeric, with a non-negative
+  minimum and a greater maximum; ``Count`` must be an integer of at
+  least two.
 
 Selection strategies operate only on active groups. Neither a large
 ``K`` nor a zero or negative strategy threshold reintroduces
@@ -131,8 +131,8 @@ obeys backend arithmetic limits. Users still choose the bounds and
 candidate count.
 
 Search requires at least two usable numeric-target rows; otherwise it
-raises ``domain_error(lasso_search_examples, Count)``. Unknown targets
-are removed before splitting. For N usable rows, the last
+raises ``domain_error(lasso_search_examples, Count)``. Rows with an
+unbound target are removed before splitting. For N usable rows, the last
 ``min(N-1, max(1, ceiling(Fraction*N)))`` rows form the validation
 suffix; the preceding rows form the training prefix. Row order is
 preserved, and example identifiers are not used as split keys. There is
@@ -162,8 +162,8 @@ in the selector.
 Model and diagnostics
 ---------------------
 
-The ``learn/2`` and ``learn/3`` predicates return the following selector
-term:
+The ``learn/2`` and ``learn/3`` predicates return models using the
+following term representation:
 
 ::
 
@@ -175,8 +175,9 @@ The ``feature_scores/2`` predicate returns all original
 ``Feature-Score`` pairs, and the ``selected_features/2`` predicate
 returns only selected original names.
 
-The ``diagnostics/2`` predicate returns the following metadata list; the
-``diagnostic/2`` predicate enumerates its terms:
+The ``Diagnostics`` argument is a list of diagnostic terms. The
+``diagnostics/2`` predicate returns this list; the ``diagnostic/2``
+predicate enumerates its terms:
 
 ::
 
@@ -195,16 +196,17 @@ The ``diagnostics/2`` predicate returns the following metadata list; the
        regularization_search_result(SearchResult)
    ]
 
-The original count includes unknown-target rows. The usable and excluded
-counts partition that count. The nested diagnostics are retained
-unchanged, including convergence status, completed iterations, final
-delta, encoded count, and effective solver options. The
+The original count includes rows with unbound targets. The usable and
+excluded counts partition that count. The nested diagnostics are
+retained unchanged, including convergence status, completed iterations,
+final delta, encoded count, and effective solver options. The
 ``selector_options/2`` predicate returns the effective wrapper options.
 Exhausting the solver iteration limit does not discard the fitted
 regressor or conceal its stop status.
 
-The search result is ``none`` when search is disabled. When enabled, it
-has the following form, where counts refer to the usable-row split:
+The ``regularization_search_result/1`` diagnostic value is ``none`` when
+search is disabled. When enabled, it is the following term, where counts
+refer to the usable-row split:
 
 ::
 

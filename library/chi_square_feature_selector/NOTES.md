@@ -21,8 +21,10 @@ ________________________________________________________________________
 `chi_square_feature_selector`
 =============================
 
-This library implements a univariate filter selector for categorical and
-continuous features with categorical targets. It reuses the typed
+Use this library to select features associated with a categorical target.
+It scores categorical and continuous features independently using chi-square
+statistics or their documented variants, discretizing continuous values
+before scoring. It reuses the typed
 discretization, sparse contingency arithmetic, stable ranking, selection,
 model validation, and export facilities of `feature_selection_protocols`.
 
@@ -83,10 +85,10 @@ The `score_variant(bias_corrected)` option uses
 chi-square and the occupied table dimensions. With complete-case count `n`
 and occupied dimensions `r` and `c`, it computes:
 
-  PhiSquared = max(0, ChiSquare/n - (r-1)*(c-1)/(n-1))
-  CorrectedRows = r - (r-1)^2/(n-1)
-  CorrectedColumns = c - (c-1)^2/(n-1)
-  V = sqrt(PhiSquared/min(CorrectedRows-1, CorrectedColumns-1))
+	PhiSquared = max(0, ChiSquare/n - (r-1)*(c-1)/(n-1))
+	CorrectedRows = r - (r-1)^2/(n-1)
+	CorrectedColumns = c - (c-1)^2/(n-1)
+	V = sqrt(PhiSquared/min(CorrectedRows-1, CorrectedColumns-1))
 
 Scores are clamped to `[0.0, 1.0]`. A nonpositive corrected denominator
 scores zero as an insufficient-sample convention, including two perfectly
@@ -100,22 +102,22 @@ Preparation and options
 The dataset object must implement `feature_dataset_protocol`. It declares
 continuous features with `attribute_values(Feature, continuous)` and
 categorical features with `attribute_values(Feature, Domain)`, where `Domain`
-is a non-empty list of atomic values. Complete continuous values must be
-numbers; complete categorical values must belong to their declared domains;
-complete targets must be atomic.
+is a non-empty list of atomic values. Known continuous values must be
+numbers; known categorical values must belong to their declared domains;
+known targets must be atomic.
 
 The `learn/2` predicate uses the defaults. The `learn/3` predicate accepts an
 options list as its last argument:
 
-- `score_variant(raw)`, `score_variant(normalized)`, `score_variant(yates)`,
-  or `score_variant(bias_corrected)`, default `raw`.
-- `preparation_mode(per_feature)`, the default, or `preparation_mode(joint)`.
-- `expected_count_policy(ignore)`, the default, or
-  `expected_count_policy(minimum(Minimum))`, with a positive numeric minimum.
-- `discretization(equal_frequency(Bins))` or
-  `discretization(equal_width(Bins))`, with a positive integer bin count.
-  The default is `equal_frequency(10)`, applied only to continuous features.
-- `discretization(categorical)` preserves numeric values as category codes.
+- `score_variant(Variant)` selects `raw` (default), `normalized`, `yates`,
+  or `bias_corrected`.
+- `preparation_mode(Mode)` selects `per_feature` (default) or `joint`.
+- `expected_count_policy(Policy)` selects `ignore` (default) or
+  `minimum(Minimum)`, with a positive numeric minimum.
+- `discretization(Specification)` selects `equal_frequency(Bins)`,
+  `equal_width(Bins)`, or `categorical`, applied only to continuous features.
+  The default is `equal_frequency(10)`; bin counts must be positive integers.
+  The `categorical` value preserves numeric values as category codes.
 - `feature_discretization(Feature, Specification)` overrides the default for
   one declared feature. The specification can be `categorical`,
   `equal_frequency(Bins)`, or `equal_width(Bins)`.
@@ -126,18 +128,17 @@ options list as its last argument:
 
 Repeated options and repeated overrides are accepted; the first applicable
 occurrence wins. All supplied options are validated, including later
-occurrences. Unknown override feature names are rejected. The
-`default_option/1` and `valid_option/1` predicates remain publicly queryable,
-including the inherited selection options.
+occurrences. Unknown override feature names are rejected.
 
 Default preparation is per feature: observations with an unbound or absent
-feature value or an unbound target are excluded from that feature without
-imputing values. Binning is fitted to its complete cases only. Categorical
-features retain their declared categories unless explicitly overridden.
-Equal-width bins partition the observed range; equal-frequency bins use
-observed quantile cuts without splitting equal values. Occupied category
-counts can be smaller than requested bin counts. Applying numeric binning to
-an atomic non-numeric category is an error, not an implicit category encoding.
+feature value or an unbound target are excluded from that feature's score
+without imputing values. Binning is fitted to its complete cases only.
+Categorical features retain their declared categories unless explicitly
+overridden. Equal-width bins partition the observed range; equal-frequency
+bins use observed quantile cuts without splitting equal values. Occupied
+category counts can be smaller than requested bin counts. Applying numeric
+binning to an atomic non-numeric category is an error, not an implicit
+category encoding.
 
 Joint preparation excludes observations missing any candidate value or their
 target before fitting bins. All features are then scored on the same rows.
@@ -161,14 +162,16 @@ be chosen for the selected score variant.
 Models and diagnostics
 ----------------------
 
-The `learn/2-3` predicates return selector terms with this representation:
+The `learn/2` and `learn/3` predicates return models using the following
+term representation:
 
 	chi_square_feature_selector(FeatureScores, SelectedFeatures, Diagnostics)
 
 The `feature_scores/2` predicate returns sorted `Feature-Score` pairs. The
 `selected_features/2` predicate returns selected names. The `diagnostics/2`,
 `diagnostic/2`, and `selector_options/2` predicates expose metadata and
-effective options. Diagnostics contain `model/1`, `example_count/1`,
+effective options. The `Diagnostics` argument is a list of diagnostic terms,
+including `model/1`, `example_count/1`,
 `options/1`, `candidate_count/1`, `selected_count/1`, `scoring_metric/1`,
 `complete_cases(FeatureCounts)`, `discretization(FeatureSpecifications)`,
 `occupied_categories(FeatureCounts)`, and `preparation_mode(Mode)`.

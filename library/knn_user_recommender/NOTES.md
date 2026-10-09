@@ -21,12 +21,13 @@ ________________________________________________________________________
 `knn_user_recommender`
 ======================
 
-User-based k-nearest-neighbor collaborative filtering with mean-centered
-predictions. The object imports `recommender_common` and implements the
-`recommender_protocol` contract. The `score/4` predicate returns a predicted
-rating. Training datasets implement `rating_dataset_protocol`: atomic
-user/item identifiers, one numeric rating per pair, a matching positive
-rating count, and an optional numeric ordered rating scale.
+This library predicts ratings from users with similar preferences using
+user-based k-nearest-neighbor collaborative filtering and mean-centered
+predictions. The library object imports the `recommender_common` category
+and implements `recommender_protocol`. The `score/4` predicate returns a
+predicted rating. Training datasets implement `rating_dataset_protocol`:
+atomic user/item identifiers, one numeric rating per pair, a matching
+positive rating count, and an optional numeric ordered rating scale.
 
 
 API documentation
@@ -66,16 +67,20 @@ Options
 
 The `learn/3` predicate accepts the following options:
 
-- `k(3)`: positive maximum number of contributing neighbors.
-- `similarity_metric(pearson_similarity)`: ground identifier of a loaded
-  object exposing an implemented public `similarity/3`. Parametric objects
+- `k(K)` sets the maximum number of contributing neighbors to a positive
+  integer. The default is `3`.
+- `similarity_metric(Metric)` selects a loaded object with a public
+  `similarity/3` implementation. Its identifier must be ground; the default
+  is `pearson_similarity`. Parametric objects
   are accepted. Cosine, Pearson, Jaccard, inverse MSD, and Spearman strategies
   are loaded by the dependency loader.
-- `min_overlap(1)`: positive minimum number of common observed items.
-- `min_similarity(0.0)`: non-negative finite numeric threshold.
-- `clip_to_scale(true)`: `true` or `false`; clips both collaborative and
-  fallback estimates to the declared inclusive scale. With no scale it is
-  a no-op.
+- `min_overlap(Count)` sets the minimum number of items rated by both
+  users to a positive integer. The default is `1`.
+- `min_similarity(Threshold)` sets a non-negative finite numeric threshold.
+  The default is `0.0`.
+- `clip_to_scale(Boolean)` selects `true` (default) or `false`. When enabled,
+  it clips both collaborative and fallback estimates to the declared
+  inclusive scale. Without a declared scale, it leaves estimates unchanged.
 
 Custom metrics receive complete sparse profiles, not an already-trimmed
 intersection. They must return exactly one finite numeric score. No result,
@@ -104,16 +109,18 @@ enumeration order. Predicting an already-rated item still estimates it;
 the target user is excluded from the neighborhood, but training observations
 are not implicitly held out. Evaluation must remove held-out ratings.
 
-If the user is unknown or no eligible evidence remains, the fixed fallback
-is the known user's mean, otherwise the known item's mean, otherwise the
-global training mean. Unknown atomic identifiers are valid queries.
+If the user has no training ratings or no neighbors pass the filters,
+prediction uses a fallback: the user's training mean if available,
+otherwise the item's training mean, otherwise the global training mean.
+Unknown atomic identifiers are valid queries.
 Variables throw `instantiation_error`; compound identifiers throw an atomic
 type error.
 
-The `recommend(Model, User, N, Recommendations)` predicate returns up to positive integer
-`N` unrated training-catalog items as `Item-Score` pairs. Scores are the
+The `recommend/4` predicate returns up to `N` unrated training-catalog items
+as `Item-Score` pairs; `N` must be a positive integer. Scores are the
 same as direct predictions, including fallbacks and clipping. Unknown users
-see the entire catalog; no candidates returns `[]`. Results are ordered by
+have every training-catalog item considered as a candidate. If no candidates
+remain, the result is `[]`. Results are ordered by
 descending score, with descending standard item order for ties.
 
 For `u: a=1,b=3` and `v: a=2,b=4,c=5`, Pearson gives a neighbor score of
@@ -123,26 +130,28 @@ one and the prediction for `u,c` is `2 + (5 - 11/3) = 10/3`.
 Models, diagnostics, and export
 -------------------------------
 
-The `learn/2` and `learn/3` predicates return the learned recommender model
-as a term with the following structure:
+The `learn/2` and `learn/3` predicates return models using the following
+term representation:
 
-    knn_user_model(Ratings, Profiles, GlobalMean, Scale, Diagnostics)
+	knn_user_model(Ratings, Profiles, GlobalMean, Scale, Diagnostics)
 
-`Ratings` contains `rating(User, Item, Rating)` terms. `Profiles` is sorted
-by user and contains `User-profile(SortedItemRatingPairs, Mean)` entries.
-`Scale` is `none` or `scale(Min, Max)`. Diagnostics contain exactly one
-`model(knn_user_recommender)`, `rating_count(Count)`, `options(Options)`,
+The `Ratings` argument is a list of `rating(User, Item, Rating)` terms.
+`Profiles` is sorted by user and contains `User-profile(SortedItemRatingPairs, Mean)`
+entries. `Scale` is the atom `none` or a `scale(Min, Max)` term. The
+`Diagnostics` argument is a list containing exactly one of each diagnostic
+term: `model(knn_user_recommender)`, `rating_count(Count)`, `options(Options)`,
 `user_count(Count)`, `item_count(Count)`, and `neighbor_axis(user)`.
 
-The `valid_recommender/1` predicate rejects incomplete or inconsistent models without
-instantiating them. It recomputes profiles, means, and counts from ratings.
-The `check_recommender/1` predicate throws for invalid models. The `diagnostics/2`
-predicate returns the metadata list; the `diagnostic/2` predicate enumerates individual terms.
+The `valid_recommender/1` predicate rejects incomplete or inconsistent models
+without instantiating them. It recomputes profiles, means, and counts from
+ratings. The `check_recommender/1` predicate throws for invalid models. The
+`diagnostics/2` predicate returns the metadata list; the `diagnostic/2`
+predicate enumerates individual terms.
 
-The `export_to_clauses(Dataset, Model, Functor, Clauses)` predicate emits one `Functor(Model)`
-fact. The `export_to_file/4` predicate writes the same fact with the shared export header.
-The `print_recommender/1` predicate prints the template and complete learned term, including
-effective options and summaries.
+The `export_to_clauses(Dataset, Model, Functor, Clauses)` predicate emits one
+`Functor(Model)` fact. The `export_to_file/4` predicate writes the same fact
+with the shared export header. The `print_recommender/1` predicate prints the
+template and complete learned term, including effective options and summaries.
 
 
 Limitations

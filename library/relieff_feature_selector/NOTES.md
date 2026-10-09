@@ -21,10 +21,10 @@ ________________________________________________________________________
 `relieff_feature_selector`
 ==========================
 
-This library implements multiclass ReliefF joint feature selection. All
-candidate features determine nearest neighbors using normalized Manhattan
-differences; the resulting neighborhood updates score each feature.
-Scores are signed and are not clamped.
+Use this library to select features for multiclass classification with
+ReliefF. All candidate features determine nearest neighbors using
+normalized Manhattan differences; the resulting neighborhood updates
+score each feature. Scores are signed and are not clamped.
 
 
 API documentation
@@ -60,20 +60,20 @@ Dataset and score definition
 ----------------------------
 
 The dataset must implement `feature_dataset_protocol`. Feature declarations
-are `continuous` or nonempty ground lists of atomic categorical values. Continuous
-observations must be numbers; categorical observations and known class
-targets must be atomic. Numeric class labels are categorical codes, not
-regression measurements. Categorical differences use term identity.
+are `continuous` or nonempty ground lists of atomic categorical values.
+Continuous observations must be numbers; categorical observations and known
+class targets must be atomic. Numeric class labels are categorical codes,
+not regression measurements. Categorical differences use term identity.
 
-Unknown targets are excluded. The default complete-case policy drops rows
-missing any candidate feature. After exclusions, at least two classes are
-required, with at least two rows in each class. An insufficient population
-raises `domain_error(relief_population, ...)`. Invalid declarations raise
-`domain_error(feature_type, ...)`; invalid known values raise type errors.
-Observed categorical values must belong to their declared domains; an
-unknown category raises `domain_error(feature_value, Feature-Value)`.
-Shared dataset validation rejects duplicate or undeclared features and
-inconsistent example counts.
+Rows with an unbound target are excluded. The default complete-case policy
+drops rows missing any candidate feature. After exclusions, at least two
+classes are required, with at least two rows in each class. An insufficient
+population raises `domain_error(relief_population, ...)`. Invalid declarations
+raise `domain_error(feature_type, ...)`; invalid known values raise type
+errors. Observed categorical values must belong to their declared domains.
+A category outside its declared domain raises a
+`domain_error(feature_value, Feature-Value)` error. Shared dataset validation
+rejects duplicate or undeclared features and inconsistent example counts.
 
 Every anchor uses up to K nearest same-class hits, excluding itself by row
 position, and up to K nearest misses from each other class. Duplicate rows
@@ -92,10 +92,11 @@ For two classes and K equal to one, the scores reduce to binary Relief.
 Missing values
 --------------
 
-The probabilistic policy retains missing features without binding or
-imputing their input variables. Each class uses its empirical observed
-feature distribution, with pooled fallback when a class has no observed
-value for a column. Constant and entirely missing columns contribute zero.
+The probabilistic policy retains rows with missing feature values without
+binding or imputing their input variables. Each class uses its empirical
+observed feature distribution, with pooled fallback when a class has no
+observed value for a column. Constant and entirely missing columns
+contribute zero.
 
 For categorical features, observed/missing differences are `1-P_C(v)` for
 the missing row's class C. Missing/missing differences for classes C and D
@@ -112,27 +113,34 @@ values allocate the corresponding distributions and caches.
 Options
 -------
 
-The `learn/2` predicate uses defaults. The `learn/3` predicate accepts an
-options list as its last argument:
+The `learn/3` predicate accepts the following options:
 
-- `selection_strategy(top_k(10))` is the default. `top_k(K)` requires a
-  positive integer; `all` selects all features, and `threshold(T)` selects
-  scores at least the numeric threshold T.
-- `number_of_neighbors(10)` is the default positive integer K. Larger K
+- `selection_strategy(Strategy)` selects `top_k(K)` (default: `top_k(10)`),
+  `all`, or `threshold(T)`. Top-k selects up to the positive integer `K`
+  features; `all` selects all candidates, and `threshold(T)` selects scores
+  at least the numeric threshold `T`.
+- `number_of_neighbors(K)` sets a positive integer count (default: `10`). Larger K
   than an available class neighborhood is valid.
-- `neighbor_weighting(uniform)` is the default. `rank(Sigma)` requires a
-  positive integer and uses zero-based `exp(-(rank/Sigma)^2)` weights,
+- `neighbor_weighting(Weighting)` selects `uniform` (default) or `rank(Sigma)`.
+  The rank scale `Sigma` must be a positive integer. Rank weighting uses
+  zero-based `exp(-(rank/Sigma)^2)` weights,
   normalized separately for each hit or miss list.
-- `sample_size(all)` processes eligible rows once in dataset order without
+- `sample_size(Size)` selects `all` (default) or a positive integer.
+  With `all`, it processes eligible rows once in dataset order without
   accessing the RNG. A positive integer M samples M anchors uniformly with
   replacement. Neighbors always come from the full eligible pool.
-- `random_seed(1357911)` is the default positive integer seed.
-- `missing_values(complete_case)` is the default; `probabilistic` uses
+- `random_seed(Seed)` sets a positive integer sampling seed (default: `1357911`).
+- `missing_values(Policy)` selects `complete_case` (default) or `probabilistic`.
+  Probabilistic handling uses
   empirical expected differences.
 
+The `learn/2` predicate uses the default option values.
+
+An anchor is an eligible row whose neighbor comparisons contribute to the
+feature scores.
+
 Repeated options are accepted and their first occurrence takes precedence.
-Incomplete and unknown options are rejected. The inherited
-`valid_option/1` and `default_option/1` hooks remain public. Sampling uses
+Incomplete and unknown options are rejected. Sampling uses
 `fast_random(xoshiro128pp)` with catch-based seed restoration on success,
 failure, and exceptions. Concurrent sampled calls sharing this RNG should
 be serialized externally.
@@ -141,7 +149,8 @@ be serialized externally.
 Models and API
 --------------
 
-The `learn/2-3` predicates return ground, exportable models of this shape:
+The `learn/2` and `learn/3` predicates return ground, exportable models using
+the following term representation:
 
     relieff_feature_selector(FeatureScores, SelectedFeatures, Diagnostics)
 
@@ -152,15 +161,15 @@ selection may include zero or negative scores. The `diagnostics/2`,
 `diagnostic/2`, and `selector_options/2` predicates expose metadata and
 effective options. The `diagnostic/2` predicate enumerates matching terms.
 
-Diagnostics include `model/1`, `example_count/1`, `options/1`,
-`variant(multiclass)`, `candidate_count/1`, `selected_count/1`,
-`features(FeatureTypes)`, `eligible_count/1`, `excluded_count/1`,
-`eligible_positions/1`, `samples/1`, `population(classes(ClassCounts))`,
-and `degeneracy(none)`. Feature types are `Feature-numeric` or
-`Feature-categorical` pairs in declaration order. Frozen samples contain
-original row positions, with repetitions allowed. Class counts describe
-the full eligible pool, not sampled frequencies. No training feature
-vectors or empirical supports are retained in the model.
+The `Diagnostics` argument is a list of diagnostic terms, including `model/1`,
+`example_count/1`, `options/1`, `variant(multiclass)`, `candidate_count/1`,
+`selected_count/1`, `features(FeatureTypes)`, `eligible_count/1`,
+`excluded_count/1`, `eligible_positions/1`, `samples/1`,
+`population(classes(ClassCounts))`, and `degeneracy(none)`. Feature types
+are `Feature-numeric` or `Feature-categorical` pairs in declaration order.
+Frozen samples contain original row positions, with repetitions allowed.
+Class counts describe the full eligible pool, not sampled frequencies.
+No training feature vectors or empirical supports are retained in the model.
 
 The `check_selector/1` predicate checks ground structure, the receiving
 model and variant, unique features and numeric scores, stable ordering,

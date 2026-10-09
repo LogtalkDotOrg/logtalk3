@@ -138,8 +138,8 @@ Where:
   indicator features.
 
 Use the ``regression_protocols`` ``diagnostic/2`` and
-``regressor_options/2`` helper predicates when you only need a single
-metadata term or the effective options.
+``regressor_options/2`` predicates when you only need a single metadata
+term or the effective options.
 
 Options
 -------

@@ -3,13 +3,14 @@
 ``slope_one_recommender``
 =========================
 
-Weighted Slope One collaborative filtering using additive item
-deviations and co-rating support counts. The object imports
-``recommender_common`` and implements ``recommender_protocol``. The
-``score/4`` predicate returns a predicted rating. Datasets implement
-``rating_dataset_protocol`` with atomic identifiers, unique user/item
-pairs, numeric ratings, a matching positive count, and an optional
-numeric ordered rating scale.
+This library predicts ratings using weighted Slope One collaborative
+filtering: average rating differences between items, weighted by the
+number of users who rated both. The library object imports the
+``recommender_common`` category and implements ``recommender_protocol``
+protocol. The ``score/4`` predicate returns a predicted rating. Datasets
+implement the ``rating_dataset_protocol`` protocol with atomic
+identifiers, unique user/item pairs, numeric ratings, a matching
+positive count, and an optional numeric ordered rating scale.
 
 API documentation
 -----------------
@@ -51,11 +52,13 @@ Options
 
 The ``learn/3`` predicate accepts the following options:
 
-- ``min_support(1)``: positive minimum co-rating count of a contributing
-  pair.
-- ``clip_to_scale(true)``: ``true`` or ``false``; clips estimates and
-  fallbacks to the inclusive declared scale. With no scale it is a
-  no-op.
+- ``min_support(Count)`` sets the minimum number of users who rated both
+  items in a contributing pair to a positive integer. The default is
+  ``1``.
+- ``clip_to_scale(Boolean)`` selects ``true`` (default) or ``false``.
+  When enabled, it clips estimates and fallbacks to the inclusive
+  declared scale. Without a declared scale, it leaves estimates
+  unchanged.
 
 There are no similarity metric or neighborhood-size options.
 
@@ -92,11 +95,12 @@ identifiers and catalogs with no co-rated item pairs. Query identifiers
 must be instantiated atomic terms. Clipping follows either kind of
 estimate.
 
-The ``recommend(Model, User, N, Recommendations)`` predicate returns up
-to positive integer ``N`` unrated training-catalog items as
-``Item-Score`` pairs. Scores agree with direct predictions; sorting is
-descending by score, with descending standard item order for ties.
-Unknown users see the entire catalog; no candidates returns ``[]``.
+The ``recommend/4`` predicate returns up to ``N`` unrated
+training-catalog items as ``Item-Score`` pairs; ``N`` must be a positive
+integer. Scores agree with direct predictions; sorting is descending by
+score, with descending standard item order for ties. Every
+training-catalog item is a candidate for an unknown user. If no
+candidates remain, the result is ``[]``.
 
 For ``u: a=1,b=3`` and ``v: a=2,b=4,c=5``, the estimate for ``u,c`` is
 four. Adding ``w: a=1,c=3`` gives ``d(c,a)=2.5`` with support two and
@@ -106,20 +110,21 @@ four. Adding ``w: a=1,c=3`` gives ``d(c,a)=2.5`` with support two and
 Models, diagnostics, and export
 -------------------------------
 
-The ``learn/2`` and ``learn/3`` predicates return the learned
-recommender model as a term with the following structure:
+The ``learn/2`` and ``learn/3`` predicates return models using the
+following term representation:
 
 ::
 
    slope_one_model(Ratings, Deviations, GlobalMean, Scale, Diagnostics)
 
-Ratings are ``rating(User, Item, Rating)`` terms. Sorted canonical
-deviations are
+The ``Ratings`` argument is a list of ``rating(User, Item, Rating)``
+terms. Sorted canonical deviations are
 ``deviation(ItemLo, ItemHi, MeanDifference, PositiveCount)`` terms. The
-scale is ``none`` or ``scale(Min, Max)``. Diagnostics contain exactly
-one ``model(slope_one_recommender)``, ``rating_count(Count)``,
-``options(Options)``, ``user_count(Count)``, ``item_count(Count)``, and
-``deviation_pair_count(Count)``.
+``Scale`` argument is the atom ``none`` or a ``scale(Min, Max)`` term.
+The ``Diagnostics`` argument is a list containing exactly one of each
+diagnostic term: ``model(slope_one_recommender)``,
+``rating_count(Count)``, ``options(Options)``, ``user_count(Count)``,
+``item_count(Count)``, and ``deviation_pair_count(Count)``.
 
 The ``valid_recommender/1`` predicate checks records, options, means,
 scale, pair keys, orientation, counts, averages, and diagnostic

@@ -113,7 +113,9 @@ Where:
 - `attribute_count(AttributeCount)` stores the number of dataset attributes available to the ensemble before split-level subsampling.
 - `tree_count(TreeCount)` stores the number of trained regression trees in the ensemble.
 
-Use the `regression_protocols` `diagnostic/2` and `regressor_options/2` helper predicates when you only need a single metadata term or the effective options.
+Use the `regression_protocols` `diagnostic/2` and `regressor_options/2`
+predicates when you only need a single metadata term or the effective
+options.
 
 Options
 -------

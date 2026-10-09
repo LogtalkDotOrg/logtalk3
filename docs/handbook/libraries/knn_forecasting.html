@@ -444,21 +444,21 @@
              
   <section id="knn-forecasting">
 <span id="library-knn-forecasting"></span><h1><code class="docutils literal notranslate"><span class="pre">knn_forecasting</span></code><a class="headerlink" href="#knn-forecasting" title="Link to this heading"></a></h1>
-<p>This library implements univariate time series forecasting using the
-k-Nearest Neighbors (“analog”) method: the most recent window of
-observations is matched, by distance, against historical windows of the
-same length, and the forecast is an aggregate of what actually followed
-the most similar ones. It implements the <code class="docutils literal notranslate"><span class="pre">forecaster_protocol</span></code> and
+<p>Use this library to forecast from similar patterns in a single time
+series. The k-Nearest Neighbors (“analog”) method compares the most
+recent window of observations with historical windows of the same
+length. It combines what followed the closest matches to produce a
+forecast. The library object implements <code class="docutils literal notranslate"><span class="pre">forecaster_protocol</span></code> and
 reuses dataset validation, diagnostics, export, lag construction,
 differencing, and forecast error metric support from the
 <code class="docutils literal notranslate"><span class="pre">time_series_protocols</span></code> library.</p>
 <p>Unlike <code class="docutils literal notranslate"><span class="pre">exponential_smoothing</span></code> and <code class="docutils literal notranslate"><span class="pre">time_series_regression</span></code>, this is
-a lazy (instance-based) learner: <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> does not fit any
-parameters, it memorizes the historical windows themselves, and every
+a lazy (instance-based) learner: the <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate does not fit
+parameters. Instead, it memorizes the historical windows, and every
 forecast is computed by searching those memorized windows.</p>
-<p>Datasets are objects implementing the <code class="docutils literal notranslate"><span class="pre">time_series_dataset_protocol</span></code>
-protocol. Every observation must be a number or a missing observation,
-represented as an unbound variable (see “Missing observations” below).</p>
+<p>Datasets are objects implementing <code class="docutils literal notranslate"><span class="pre">time_series_dataset_protocol</span></code>.
+Every observation must be a number or a missing observation (represented
+as an unbound variable; see the “Missing observations” section below).</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -487,21 +487,24 @@ and updating with missing observations.</p>
 </section>
 <section id="model">
 <h2>Model<a class="headerlink" href="#model" title="Link to this heading"></a></h2>
-<p>Given a window length (<code class="docutils literal notranslate"><span class="pre">order/1</span></code>) <code class="docutils literal notranslate"><span class="pre">p</span></code>, the (optionally differenced)
-training series is turned into <code class="docutils literal notranslate"><span class="pre">Lags-Target</span></code> rows exactly as for
-<code class="docutils literal notranslate"><span class="pre">time_series_regression</span></code> (via the shared <code class="docutils literal notranslate"><span class="pre">lagged_rows/3</span></code> predicate):
-<code class="docutils literal notranslate"><span class="pre">Lags</span></code> is the <code class="docutils literal notranslate"><span class="pre">p</span></code> most recent values before <code class="docutils literal notranslate"><span class="pre">Target</span></code>, most recent
-first. These rows are memorized as-is; there is no fitting step.</p>
+<p>Given a window length <code class="docutils literal notranslate"><span class="pre">p</span></code>, supplied by the <code class="docutils literal notranslate"><span class="pre">order/1</span></code> option, the
+(optionally differenced) training series is turned into <code class="docutils literal notranslate"><span class="pre">Lags-Target</span></code>
+rows exactly as for the <code class="docutils literal notranslate"><span class="pre">time_series_regression</span></code> library (via the
+shared <code class="docutils literal notranslate"><span class="pre">lagged_rows/3</span></code> predicate): <code class="docutils literal notranslate"><span class="pre">Lags</span></code> is the <code class="docutils literal notranslate"><span class="pre">p</span></code> most recent
+values before <code class="docutils literal notranslate"><span class="pre">Target</span></code>, most recent first. These rows are memorized
+as-is; there is no fitting step.</p>
 <p>To forecast one step ahead from a window <code class="docutils literal notranslate"><span class="pre">W</span></code> (the <code class="docutils literal notranslate"><span class="pre">p</span></code> most recent
-values, most recent first), the <code class="docutils literal notranslate"><span class="pre">k(K)</span></code> nearest memorized rows to <code class="docutils literal notranslate"><span class="pre">W</span></code>
-are found (by <code class="docutils literal notranslate"><span class="pre">distance_metric/1</span></code>) and their targets are aggregated
-(weighted by <code class="docutils literal notranslate"><span class="pre">weight_scheme/1</span></code>) into the prediction. Multi-step
-forecasts are computed recursively: each prediction is pushed into the
-window (dropping the oldest value) before finding the next set of
-neighbors, exactly as <code class="docutils literal notranslate"><span class="pre">time_series_regression</span></code> recursively projects AR
-forecasts. When differencing is used, forecasts are integrated back to
-the scale of the original series.</p>
-<p>Typical usage:</p>
+values, most recent first), the library finds the number of nearest
+memorized rows requested by the <code class="docutils literal notranslate"><span class="pre">k(K)</span></code> option. The
+<code class="docutils literal notranslate"><span class="pre">distance_metric/1</span></code> option determines how matches are compared, and
+the <code class="docutils literal notranslate"><span class="pre">weight_scheme/1</span></code> option determines how their targets are combined
+into a prediction. Multi-step forecasts are computed recursively: each
+prediction is pushed into the window (dropping the oldest value) before
+finding the next set of neighbors, exactly as <code class="docutils literal notranslate"><span class="pre">time_series_regression</span></code>
+recursively projects AR forecasts. When differencing is used, forecasts
+are integrated back to the scale of the original series.</p>
+<p>To learn a forecaster with a five-observation window and three
+neighbors, then request twelve forecasts:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> knn_forecasting<span class="o">::</span>learn(my_series, <span class="nv">Forecaster</span>, [order(<span class="m">5</span>), k(<span class="m">3</span>)]),
      knn_forecasting<span class="o">::</span>forecast(<span class="nv">Forecaster</span>, <span class="m">12</span>, <span class="nv">Forecasts</span>).
 </pre></div>
@@ -511,27 +514,28 @@ the scale of the original series.</p>
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate supports the following options:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">order(Order)</span></code>: window length, a positive integer. Default is <code class="docutils literal notranslate"><span class="pre">3</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">k(K)</span></code>: number of nearest neighbors, a positive integer. Default is
-<code class="docutils literal notranslate"><span class="pre">3</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">distance_metric(Metric)</span></code>: one of <code class="docutils literal notranslate"><span class="pre">euclidean</span></code>, <code class="docutils literal notranslate"><span class="pre">manhattan</span></code>,
+<li><p><code class="docutils literal notranslate"><span class="pre">order(Order)</span></code> sets the window length, a positive integer. The
+default is <code class="docutils literal notranslate"><span class="pre">3</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">k(K)</span></code> sets the number of nearest neighbors, a positive integer. The
+default is <code class="docutils literal notranslate"><span class="pre">3</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">distance_metric(Metric)</span></code> selects <code class="docutils literal notranslate"><span class="pre">euclidean</span></code>, <code class="docutils literal notranslate"><span class="pre">manhattan</span></code>,
 <code class="docutils literal notranslate"><span class="pre">chebyshev</span></code>, or <code class="docutils literal notranslate"><span class="pre">minkowski</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">euclidean</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">minkowski_power(Power)</span></code>: the Minkowski distance power, a number no
-smaller than <code class="docutils literal notranslate"><span class="pre">1.0</span></code>. Only used when <code class="docutils literal notranslate"><span class="pre">distance_metric(minkowski)</span></code> is
-selected; accepted (but unused) with every other metric. Default is
+<li><p><code class="docutils literal notranslate"><span class="pre">minkowski_power(Power)</span></code> sets the Minkowski distance power, a number
+no smaller than <code class="docutils literal notranslate"><span class="pre">1.0</span></code>. Only used when <code class="docutils literal notranslate"><span class="pre">distance_metric(minkowski)</span></code>
+is selected; accepted (but unused) with every other metric. Default is
 <code class="docutils literal notranslate"><span class="pre">3.0</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">weight_scheme(Scheme)</span></code>: how neighbors are aggregated; one of
+<li><p><code class="docutils literal notranslate"><span class="pre">weight_scheme(Scheme)</span></code> selects how neighbors are combined:
 <code class="docutils literal notranslate"><span class="pre">uniform</span></code> (plain average), <code class="docutils literal notranslate"><span class="pre">distance</span></code> (inverse-distance weighted),
 or <code class="docutils literal notranslate"><span class="pre">gaussian</span></code> (weighted by <code class="docutils literal notranslate"><span class="pre">exp(-distance^2</span> <span class="pre">/</span> <span class="pre">2)</span></code>). Default is
 <code class="docutils literal notranslate"><span class="pre">uniform</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">differencing(Differencing)</span></code>: number of times the series is
+<li><p><code class="docutils literal notranslate"><span class="pre">differencing(Differencing)</span></code> sets the number of times the series is
 differenced before matching, a non-negative integer. Default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
 </ul>
 <p>The minimum series length is <code class="docutils literal notranslate"><span class="pre">Differencing</span> <span class="pre">+</span> <span class="pre">Order</span> <span class="pre">+</span> <span class="pre">K</span> <span class="pre">+</span> <span class="pre">1</span></code>: enough
 for at least <code class="docutils literal notranslate"><span class="pre">K</span> <span class="pre">+</span> <span class="pre">1</span></code> rows after differencing and windowing, which is
 also enough for the leave-one-out cross-validation described below.
-Below that, <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> throws a
-<code class="docutils literal notranslate"><span class="pre">domain_error(series_length,</span> <span class="pre">Dataset)</span></code> error.</p>
+Below that, the <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate raises
+<code class="docutils literal notranslate"><span class="pre">domain_error(series_length,</span> <span class="pre">Dataset)</span></code>.</p>
 </section>
 <section id="distance-metrics-and-weighting">
 <h2>Distance metrics and weighting<a class="headerlink" href="#distance-metrics-and-weighting" title="Link to this heading"></a></h2>
@@ -540,9 +544,9 @@ option names, and formulas as the <code class="docutils literal notranslate"><sp
 are directly comparable:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">euclidean_distance/3</span></code>, <code class="docutils literal notranslate"><span class="pre">manhattan_distance/3</span></code>,
-<code class="docutils literal notranslate"><span class="pre">chebyshev_distance/3</span></code>, and <code class="docutils literal notranslate"><span class="pre">minkowski_distance/4</span></code> (from the
-<code class="docutils literal notranslate"><span class="pre">numberlist</span></code> library) compute the distance between the query window
-and a memorized window.</p></li>
+<code class="docutils literal notranslate"><span class="pre">chebyshev_distance/3</span></code>, and <code class="docutils literal notranslate"><span class="pre">minkowski_distance/4</span></code> predicates from
+the <code class="docutils literal notranslate"><span class="pre">numberlist</span></code> library compute the distance between the query
+window and a memorized window.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">uniform</span></code> weighting averages the <code class="docutils literal notranslate"><span class="pre">K</span></code> neighbors’ targets equally.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">distance</span></code> weighting weights each neighbor by <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">/</span> <span class="pre">distance</span></code> (a
 very small distance is capped at a large fixed weight instead of
@@ -559,124 +563,138 @@ as is common in time series similarity search) is not implemented; see
 </section>
 <section id="leave-one-out-training-diagnostics">
 <h2>Leave-one-out training diagnostics<a class="headerlink" href="#leave-one-out-training-diagnostics" title="Link to this heading"></a></h2>
-<p>Since this is a lazy learner, there is no fitted in-sample error the way
-there is for <code class="docutils literal notranslate"><span class="pre">time_series_regression</span></code>. Instead, <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> computes a
-leave-one-out (LOO) cross-validation over the memorized rows: each row’s
-target is predicted from the <code class="docutils literal notranslate"><span class="pre">K</span></code> nearest of the <em>other</em> rows (using
-the same distance metric and weighting scheme configured for
-forecasting), and the resulting errors are summarized using the shared
-<code class="docutils literal notranslate"><span class="pre">mean_absolute_error/3</span></code> and <code class="docutils literal notranslate"><span class="pre">root_mean_squared_error/3</span></code> predicates
-from <code class="docutils literal notranslate"><span class="pre">time_series_protocols</span></code>. This is an <code class="docutils literal notranslate"><span class="pre">O(n^2)</span></code> computation (every
-row is compared against every other row), so <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> may be slow for
-very long training series; see “Limitations” below.</p>
+<p>Since this is a lazy learner, there is no fitted in-sample error as in
+the <code class="docutils literal notranslate"><span class="pre">time_series_regression</span></code> library. Instead, the <code class="docutils literal notranslate"><span class="pre">learn/3</span></code>
+predicate computes leave-one-out (LOO) cross-validation over the
+memorized rows: each row’s target is predicted from the <code class="docutils literal notranslate"><span class="pre">K</span></code> nearest of
+the <em>other</em> rows (using the same distance metric and weighting scheme
+configured for forecasting), and the resulting errors are summarized
+using the shared <code class="docutils literal notranslate"><span class="pre">mean_absolute_error/3</span></code> and
+<code class="docutils literal notranslate"><span class="pre">root_mean_squared_error/3</span></code> predicates from <code class="docutils literal notranslate"><span class="pre">time_series_protocols</span></code>.
+Every row is compared against every other row, and each search sorts its
+distances. For fixed order, this takes <code class="docutils literal notranslate"><span class="pre">O(n^2</span> <span class="pre">log</span> <span class="pre">n)</span></code> time, so the
+<code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate may be slow for very long training series; see
+“Limitations” below.</p>
 </section>
 <section id="missing-observations">
 <h2>Missing observations<a class="headerlink" href="#missing-observations" title="Link to this heading"></a></h2>
 <p>A missing observation is represented, following the same convention as
 <code class="docutils literal notranslate"><span class="pre">time_series_regression</span></code>, as an unbound variable:
 <code class="docutils literal notranslate"><span class="pre">observation(Index,</span> <span class="pre">_)</span></code> in a dataset object, or an unbound
-<code class="docutils literal notranslate"><span class="pre">Observation</span></code> argument to <code class="docutils literal notranslate"><span class="pre">update/3</span></code>. A series may freely mix
-numbers and missing observations; only its length and index sequence
-need to be well-formed (checked as usual by <code class="docutils literal notranslate"><span class="pre">dataset_series/2</span></code> and
-<code class="docutils literal notranslate"><span class="pre">check_series_length/3</span></code>).</p>
+<code class="docutils literal notranslate"><span class="pre">Observation</span></code> argument to the <code class="docutils literal notranslate"><span class="pre">update/3</span></code> predicate. A series may
+freely mix numbers and missing observations; only its length and index
+sequence need to be well-formed (checked as usual by the shared
+<code class="docutils literal notranslate"><span class="pre">dataset_series/2</span></code> and <code class="docutils literal notranslate"><span class="pre">check_series_length/3</span></code> predicates).</p>
 <p>Differencing propagates missingness: a difference with a missing operand
 is itself missing. A memorized row (built from <code class="docutils literal notranslate"><span class="pre">Order</span></code> lagged values
 and a target, after differencing) that involves any missing value is
-excluded from the memorized set (casewise deletion); since every
-memorized row is therefore always fully known, this has no effect on the
-leave-one-out cross-validation, which always runs over complete rows.
-The number of raw missing observations in the training series is
-reported in the <code class="docutils literal notranslate"><span class="pre">missing_count/1</span></code> diagnostic; <code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code>
-already reflects the number of complete rows actually memorized. If
-casewise deletion leaves <code class="docutils literal notranslate"><span class="pre">K</span></code> or fewer complete rows, <code class="docutils literal notranslate"><span class="pre">learn/3</span></code>
-raises a <code class="docutils literal notranslate"><span class="pre">consistency_error(k,</span> <span class="pre">K,</span> <span class="pre">RowCount)</span></code> error.</p>
-<p><code class="docutils literal notranslate"><span class="pre">learn/3</span></code> still succeeds when the most recent observations (needed to
-seed the forecaster’s window or, under differencing, its levels) are
-missing; the missing values are simply carried into the learned
-forecaster’s state. <code class="docutils literal notranslate"><span class="pre">forecast/3</span></code> then raises a
-<code class="docutils literal notranslate"><span class="pre">domain_error(missing_observation,</span> <span class="pre">Forecaster)</span></code> error for a positive
-horizon (a zero horizon still trivially succeeds), until <code class="docutils literal notranslate"><span class="pre">update/3</span></code>
-supplies the missing values. Note that a missing window entry is only
-resolved once it has been pushed out of the window by <code class="docutils literal notranslate"><span class="pre">Order</span></code> further
-updates (as for <code class="docutils literal notranslate"><span class="pre">time_series_regression</span></code>), not by the next update
-alone unless <code class="docutils literal notranslate"><span class="pre">Order</span></code> is <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+excluded from the memorized set (casewise deletion). Leave-one-out
+cross-validation uses only the remaining complete rows. Removing
+incomplete rows can change the available neighbors and the resulting
+error diagnostics. The number of raw missing observations in the
+training series is reported in the <code class="docutils literal notranslate"><span class="pre">missing_count/1</span></code> diagnostic;
+<code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code> already reflects the number of complete rows actually
+memorized. If casewise deletion leaves <code class="docutils literal notranslate"><span class="pre">K</span></code> or fewer complete rows, the
+<code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate raises a <code class="docutils literal notranslate"><span class="pre">consistency_error(k,</span> <span class="pre">K,</span> <span class="pre">RowCount)</span></code>
+error.</p>
+<p>Learning can succeed even if some recent past observations are missing,
+provided enough complete rows remain. Those missing values are retained
+in the lag window or in the levels used to undo differencing. If any
+past value required to calculate a forecast is missing, the
+<code class="docutils literal notranslate"><span class="pre">forecast/3</span></code> predicate raises
+<code class="docutils literal notranslate"><span class="pre">domain_error(missing_observation,</span> <span class="pre">Forecaster)</span></code> for a positive
+horizon. A zero horizon still returns an empty list.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">update/3</span></code> predicate appends a new observation; it does not fill
+in a missing historical observation. Forecasting becomes possible once
+enough numeric observations have been appended that every value in the
+current window and levels is known. Without differencing, a missing
+window entry is pushed out after at most <code class="docutils literal notranslate"><span class="pre">Order</span></code> numeric updates.
+Differencing can propagate a gap and require additional numeric updates.</p>
 </section>
 <section id="immutable-online-updates">
 <h2>Immutable online updates<a class="headerlink" href="#immutable-online-updates" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">update/3</span></code> predicate returns a new forecaster after appending one
-observation to the series. Unlike <code class="docutils literal notranslate"><span class="pre">time_series_regression</span></code>, the
-memorized rows (and so the set of possible analogs) are kept unchanged;
-only the forecasting window (and, under differencing, the levels) are
-advanced. This keeps the cost of an update, and of every subsequent
-forecast, independent of how many updates have been applied, at the cost
-of the model never learning from observations seen after <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> was
-called. The original forecaster is not modified. The new <code class="docutils literal notranslate"><span class="pre">Observation</span></code>
-may be left an unbound variable to represent a missing observation (see
-“Missing observations” above).</p>
-<p>When both the new observation and the forecaster’s prior window are
-fully known, the one-step prediction error for the new observation
-(predicted from the prior window using the same neighbor search used for
-forecasting) is added to the <code class="docutils literal notranslate"><span class="pre">sum_squared_error/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">mean_squared_error/1</span></code>, <code class="docutils literal notranslate"><span class="pre">sum_absolute_error/1</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">mean_absolute_error/1</span></code> diagnostics. Otherwise, no prediction error is
-available and only <code class="docutils literal notranslate"><span class="pre">training_series_length/1</span></code>, <code class="docutils literal notranslate"><span class="pre">update_count/1</span></code>,
-and, when <code class="docutils literal notranslate"><span class="pre">Observation</span></code> is a variable, <code class="docutils literal notranslate"><span class="pre">missing_count/1</span></code> are
-updated. In both cases <code class="docutils literal notranslate"><span class="pre">training_series_length/1</span></code> and
-<code class="docutils literal notranslate"><span class="pre">update_count/1</span></code> are incremented, and the observation, known or not,
-is pushed into the window (and used to update the levels).</p>
+observation to the series. The memorized rows, and therefore the set of
+historical patterns available for matching, are kept unchanged; only the
+forecasting window (and, under differencing, the levels) are advanced.
+This keeps the cost of an update, and of every subsequent forecast,
+independent of how many updates have been applied, at the cost of the
+model never learning from observations seen after the <code class="docutils literal notranslate"><span class="pre">learn/3</span></code>
+predicate was called. The original forecaster is not modified. The new
+<code class="docutils literal notranslate"><span class="pre">Observation</span></code> may be left an unbound variable to represent a missing
+observation (see “Missing observations” above).</p>
+<p>When the new observation, its required differences, and the past values
+in the forecaster’s prior window are all numeric, the one-step
+prediction error (predicted from the prior window using the same
+neighbor search used for forecasting) is added to the
+<code class="docutils literal notranslate"><span class="pre">sum_squared_error/1</span></code>, <code class="docutils literal notranslate"><span class="pre">mean_squared_error/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">sum_absolute_error/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">mean_absolute_error/1</span></code> diagnostics.
+Otherwise, no prediction error is available and only
+<code class="docutils literal notranslate"><span class="pre">training_series_length/1</span></code>, <code class="docutils literal notranslate"><span class="pre">update_count/1</span></code>, and, when
+<code class="docutils literal notranslate"><span class="pre">Observation</span></code> is a variable, <code class="docutils literal notranslate"><span class="pre">missing_count/1</span></code> are updated. In both
+cases <code class="docutils literal notranslate"><span class="pre">training_series_length/1</span></code> and <code class="docutils literal notranslate"><span class="pre">update_count/1</span></code> are
+incremented, and the observation, known or not, is pushed into the
+window (and used to update the levels).</p>
 </section>
 <section id="forecaster-representation">
 <h2>Forecaster representation<a class="headerlink" href="#forecaster-representation" title="Link to this heading"></a></h2>
-<p>A learned forecaster is represented as a term with the format:</p>
+<p>A learned forecaster uses the following term representation:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>knn_forecaster(<span class="nv">Model</span>, <span class="nv">State</span>, <span class="nv">Rows</span>, <span class="nv">Diagnostics</span>)
 </pre></div>
 </div>
-<p>where <code class="docutils literal notranslate"><span class="pre">Model</span></code> is
-<code class="docutils literal notranslate"><span class="pre">knn(Order,</span> <span class="pre">Differencing,</span> <span class="pre">K,</span> <span class="pre">DistanceMetric,</span> <span class="pre">MinkowskiPower,</span> <span class="pre">WeightScheme)</span></code>,
-<code class="docutils literal notranslate"><span class="pre">State</span></code> is <code class="docutils literal notranslate"><span class="pre">knn_state(Window,</span> <span class="pre">Levels)</span></code>, and <code class="docutils literal notranslate"><span class="pre">Rows</span></code> is the
-memorized list of <code class="docutils literal notranslate"><span class="pre">Lags-Target</span></code> pairs. The window holds the last
-<code class="docutils literal notranslate"><span class="pre">Order</span></code> values of the differenced series, most recent first. The
-levels list holds the last value of the series at each differencing
-level, starting with the original series (as in
+<p>The <code class="docutils literal notranslate"><span class="pre">Model</span></code> argument is a
+<code class="docutils literal notranslate"><span class="pre">knn(Order,</span> <span class="pre">Differencing,</span> <span class="pre">K,</span> <span class="pre">DistanceMetric,</span> <span class="pre">MinkowskiPower,</span> <span class="pre">WeightScheme)</span></code>
+term, and <code class="docutils literal notranslate"><span class="pre">State</span></code> is a <code class="docutils literal notranslate"><span class="pre">knn_state(Window,</span> <span class="pre">Levels)</span></code> term. The
+<code class="docutils literal notranslate"><span class="pre">Rows</span></code> argument is the memorized list of <code class="docutils literal notranslate"><span class="pre">Lags-Target</span></code> pairs. The
+window holds the last <code class="docutils literal notranslate"><span class="pre">Order</span></code> values of the differenced series, most
+recent first. The levels list holds the last value of the series at each
+differencing level, starting with the original series (as in
 <code class="docutils literal notranslate"><span class="pre">time_series_regression</span></code>).</p>
-<p>The diagnostics list includes the <code class="docutils literal notranslate"><span class="pre">model/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">training_series_length/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">options/1</span></code> terms common to all
-forecasters plus <code class="docutils literal notranslate"><span class="pre">order/1</span></code>, <code class="docutils literal notranslate"><span class="pre">differencing/1</span></code>, <code class="docutils literal notranslate"><span class="pre">missing_count/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">k/1</span></code>, <code class="docutils literal notranslate"><span class="pre">distance_metric/1</span></code>, <code class="docutils literal notranslate"><span class="pre">minkowski_power/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">weight_scheme/1</span></code>, <code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">sum_squared_error/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">mean_squared_error/1</span></code>, <code class="docutils literal notranslate"><span class="pre">sum_absolute_error/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">mean_absolute_error/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">update_count/1</span></code> terms.
-<code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code> is initially the number of memorized rows (the
-leave-one-out sample size) and grows by one with each successful, fully
-known <code class="docutils literal notranslate"><span class="pre">update/3</span></code> call.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> argument is a list of diagnostic terms. It includes
+the <code class="docutils literal notranslate"><span class="pre">model/1</span></code>, <code class="docutils literal notranslate"><span class="pre">training_series_length/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">options/1</span></code> terms
+common to all forecasters plus <code class="docutils literal notranslate"><span class="pre">order/1</span></code>, <code class="docutils literal notranslate"><span class="pre">differencing/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">missing_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">k/1</span></code>, <code class="docutils literal notranslate"><span class="pre">distance_metric/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">minkowski_power/1</span></code>, <code class="docutils literal notranslate"><span class="pre">weight_scheme/1</span></code>, <code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">sum_squared_error/1</span></code>, <code class="docutils literal notranslate"><span class="pre">mean_squared_error/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">sum_absolute_error/1</span></code>, <code class="docutils literal notranslate"><span class="pre">mean_absolute_error/1</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">update_count/1</span></code> terms. <code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code> is initially the number of
+memorized rows (the leave-one-out sample size) and grows by one whenever
+a call to the <code class="docutils literal notranslate"><span class="pre">update/3</span></code> predicate can score a numeric target using a
+window of known past values.</p>
 </section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Missing observations are handled by casewise deletion when memorizing
-rows, which discards an entire row (up to <code class="docutils literal notranslate"><span class="pre">Order</span> <span class="pre">+</span> <span class="pre">1</span></code> consecutive
-rows per missing observation) rather than imputing a value; this
-reduces the pool of analogs available for matching, and can turn an
-otherwise sufficient series into one with too few complete rows for
-the requested <code class="docutils literal notranslate"><span class="pre">k/1</span></code>.</p></li>
-<li><p>Automatic selection of <code class="docutils literal notranslate"><span class="pre">order/1</span></code> or <code class="docutils literal notranslate"><span class="pre">k/1</span></code> is not implemented; both
-must be set explicitly (or left at their defaults). Choosing a good
-window length is a well-known hard problem for analog methods; a
-cross-validation or false-nearest-neighbors-based search could be
-added in the future.</p></li>
+rows, which discards an entire row rather than imputing a value.
+Without differencing, one missing observation can invalidate up to
+<code class="docutils literal notranslate"><span class="pre">Order</span> <span class="pre">+</span> <span class="pre">1</span></code> consecutive rows; differencing can spread the gap
+further. This reduces the pool of analogs available for matching, and
+can turn an otherwise sufficient series into one with too few complete
+rows for the requested <code class="docutils literal notranslate"><span class="pre">k/1</span></code> option.</p></li>
+<li><p>Automatic selection of the <code class="docutils literal notranslate"><span class="pre">order/1</span></code> or <code class="docutils literal notranslate"><span class="pre">k/1</span></code> options is not
+implemented; choose them explicitly or use their defaults. The library
+does not search for a suitable window length or number of neighbors.</p></li>
 <li><p>Matching is done on raw (or differenced) values, not on a per-window
 normalized (e.g. z-scored) shape, so two windows with the same shape
 but a different level or scale are not recognized as similar analogs.</p></li>
 <li><p>Distance search is brute-force (every memorized row is compared
 against the query window), and the leave-one-out training diagnostics
-compare every row against every other row; both are <code class="docutils literal notranslate"><span class="pre">O(n)</span></code> per
-forecast step and <code class="docutils literal notranslate"><span class="pre">O(n^2)</span></code> at <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> time, respectively, which
-may be slow for very long training series.</p></li>
+compare every row against every other row. Each search sorts all
+distances before taking the nearest neighbors. For fixed order, this
+takes <code class="docutils literal notranslate"><span class="pre">O(n</span> <span class="pre">log</span> <span class="pre">n)</span></code> time per forecast step and <code class="docutils literal notranslate"><span class="pre">O(n^2</span> <span class="pre">log</span> <span class="pre">n)</span></code> time
+for leave-one-out diagnostics, where <code class="docutils literal notranslate"><span class="pre">n</span></code> is the number of memorized
+rows. Long training series can therefore be expensive.</p></li>
+<li><p>Leave-one-out diagnostics exclude only the row being scored, not rows
+from later times or overlapping windows. They are not rolling-origin
+validation and should not be treated as out-of-sample forecast
+accuracy.</p></li>
 <li><p>Prediction intervals are not provided.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">update/3</span></code> never grows the memorized set of analogs, so the model’s
-pool of historical patterns is fixed at <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> time; observations
-supplied only through <code class="docutils literal notranslate"><span class="pre">update/3</span></code> extend the forecasting window but
-are never themselves available as future analogs.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">update/3</span></code> predicate never grows the memorized set of analogs,
+so the pool of historical patterns is fixed when the <code class="docutils literal notranslate"><span class="pre">learn/3</span></code>
+predicate runs. Observations supplied only through the <code class="docutils literal notranslate"><span class="pre">update/3</span></code>
+predicate extend the forecasting window but are never themselves
+available as future analogs.</p></li>
 </ul>
 </section>
 </section>

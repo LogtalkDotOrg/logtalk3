@@ -98,10 +98,12 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#datasets-and-usage">Datasets and usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#weighting-and-profiles">Weighting and profiles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#scoring-apis">Scoring APIs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#immutable-feedback-changes">Immutable feedback changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#immutable-catalog-changes">Immutable catalog changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rating-scale-changes">Rating-scale changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#models-diagnostics-and-export">Models, diagnostics, and export</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 </ul>
@@ -450,10 +452,9 @@ and asymmetric Okapi BM25 relevance. The user profile is the weighted
 query; each candidate item is the document. Scores are nonnegative
 floats and can exceed one. They are neither cosine similarities nor
 predicted ratings and are not clipped to a rating scale.</p>
-<p>The object imports <code class="docutils literal notranslate"><span class="pre">recommender_common</span></code> and
-<code class="docutils literal notranslate"><span class="pre">item_content_dataset_validation</span></code>, implementing
-<code class="docutils literal notranslate"><span class="pre">recommender_protocol</span></code>. It has no text-vectorizer or cosine
-dependency.</p>
+<p>The library object imports the <code class="docutils literal notranslate"><span class="pre">item_content_dataset_validation</span></code> and
+<code class="docutils literal notranslate"><span class="pre">recommender_common</span></code> categories, implementing
+<code class="docutils literal notranslate"><span class="pre">recommender_protocol</span></code>.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -505,10 +506,10 @@ example:</p>
 </div>
 <p>The query profile contains <code class="docutils literal notranslate"><span class="pre">science-2.0</span></code>. Recommendations contain
 <code class="docutils literal notranslate"><span class="pre">second</span></code> with positive relevance followed by <code class="docutils literal notranslate"><span class="pre">third</span></code> with <code class="docutils literal notranslate"><span class="pre">0.0</span></code>;
-neither candidate needs a rating. The catalog includes the rated
-<code class="docutils literal notranslate"><span class="pre">first</span></code>, but recommendations exclude every item already rated by the
-querying user, not just positive ones. Scores can still be queried for
-rated items.</p>
+neither candidate has to appear in the training ratings. The catalog
+includes the rated <code class="docutils literal notranslate"><span class="pre">first</span></code>, but recommendations exclude every item
+already rated by the querying user, not just positive ones. Scores can
+still be queried for rated items.</p>
 <p>The catalog is nonempty with unique atomic item identifiers and exactly
 one descriptor per item, without additional content declarations. Every
 rated item must belong to the catalog. Ratings are nonempty, finite
@@ -539,33 +540,38 @@ statistics, empty item weights and profiles, and zero relevance.</p>
 </section>
 <section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate accepts:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate accepts the following options:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">k1(1.2)</span></code> controls term-frequency saturation. Any finite nonnegative
-numeric value is accepted. Zero gives the presence-only, IDF-weighted
-limit.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">b(0.75)</span></code> controls document-length normalization. Accepts finite
-numeric values between zero and one, inclusive. Zero removes length
+<li><p><code class="docutils literal notranslate"><span class="pre">k1(K1)</span></code> controls term-frequency saturation (default: <code class="docutils literal notranslate"><span class="pre">1.2</span></code>). Any
+finite nonnegative numeric value is accepted. Zero gives the
+presence-only, IDF-weighted limit.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">b(B)</span></code> controls document-length normalization (default: <code class="docutils literal notranslate"><span class="pre">0.75</span></code>).
+It accepts finite numbers in <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1]</span></code>. Zero removes length
 adjustment.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">positive_threshold(user_mean)</span></code> selects ratings at least equal to
-the user’s mean over all their ratings. A finite numeric threshold can
-be supplied instead.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">profile_weighting(uniform)</span></code> averages selected raw-count documents
+<li><p><code class="docutils literal notranslate"><span class="pre">positive_threshold(Threshold)</span></code> selects <code class="docutils literal notranslate"><span class="pre">user_mean</span></code> (default) or a
+finite numeric threshold. Ratings at least equal to the threshold are
+selected; <code class="docutils literal notranslate"><span class="pre">user_mean</span></code> uses the mean of all the user’s ratings.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">profile_weighting(Weighting)</span></code> selects <code class="docutils literal notranslate"><span class="pre">uniform</span></code> (default) or
+<code class="docutils literal notranslate"><span class="pre">rating</span></code>. Uniform weighting averages selected raw-count documents
 equally. The alternative <code class="docutils literal notranslate"><span class="pre">rating</span></code> uses raw ratings as weights; every
 selected rating must be strictly positive, including ratings on
 empty-content items.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">query_saturation(none)</span></code> uses raw query coefficients directly,
-preserving default BM25 relevance. A finite nonnegative numeric value
-supplies the query-frequency saturation constant <code class="docutils literal notranslate"><span class="pre">K3</span></code>; zero gives
-presence-only query coefficients. Stored profiles remain raw in all
-modes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">query_saturation(Saturation)</span></code> selects <code class="docutils literal notranslate"><span class="pre">none</span></code> (default) or a
+finite nonnegative number. With <code class="docutils literal notranslate"><span class="pre">none</span></code>, it uses raw query
+coefficients directly. A numeric value supplies the query-frequency
+saturation constant <code class="docutils literal notranslate"><span class="pre">K3</span></code>; zero gives presence-only query
+coefficients. Stored profiles remain raw in all modes.</p></li>
 </ul>
 <p>Repeated valid options are accepted and the first occurrence wins. The
-public <code class="docutils literal notranslate"><span class="pre">valid_option/1</span></code> and <code class="docutils literal notranslate"><span class="pre">default_option/1</span></code> hooks can be queried;
-<code class="docutils literal notranslate"><span class="pre">recommender_options/2</span></code> returns effective options. There are no
-normalization, vectorizer, delta, or alternative-IDF options.</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> bm25_recommender<span class="o">::</span>learn(bm25_article_content, <span class="nv">Model</span>,
-         [k1(<span class="m">2</span>), b(<span class="m">1</span>), positive_threshold(<span class="m">4</span>), profile_weighting(rating)]),
+<code class="docutils literal notranslate"><span class="pre">recommender_options/2</span></code> predicate returns effective options. There are
+no normalization, vectorizer, delta, or alternative-IDF options.</p>
+</section>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h2>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> bm25_recommender<span class="o">::</span>learn(
+         bm25_article_content, <span class="nv">Model</span>,
+         [k1(<span class="m">2</span>), b(<span class="m">1</span>), positive_threshold(<span class="m">4</span>), profile_weighting(rating)]
+     ),
      bm25_recommender<span class="o">::</span>score(<span class="nv">Model</span>, alice, second, <span class="nv">Score</span>).
 </pre></div>
 </div>
@@ -627,32 +633,34 @@ above.</p>
 </section>
 <section id="scoring-apis">
 <h2>Scoring APIs<a class="headerlink" href="#scoring-apis" title="Link to this heading"></a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">score/4</span></code> requires a catalog item. Unknown users, empty profiles,
-empty candidates, and disjoint features score <code class="docutils literal notranslate"><span class="pre">0.0</span></code>. Unknown items
-raise <code class="docutils literal notranslate"><span class="pre">domain_error(catalog_item,</span> <span class="pre">Item)</span></code>, even for unknown users.
-<code class="docutils literal notranslate"><span class="pre">recommend/4</span></code> returns up to a positive integer number of unrated
-candidates, ordered by decreasing score, with descending standard item
-order for ties. Zero-score candidates are included; an unknown user
-receives the whole catalog in zero-score tie order.</p>
-<p><code class="docutils literal notranslate"><span class="pre">score_all/4</span></code> validates the model once and returns <code class="docutils literal notranslate"><span class="pre">Item-Score</span></code>
-pairs in requested order, preserving duplicates and allowing rated
-items. An empty batch still validates the model and atomic user. The
-query is resolved once; unique atomic catalog requests are resolved by
-an ordered merge and duplicate scores are cached within the batch.
-Results and identifier errors retain original request order. All
-requested identifiers are checked, including for unknown users.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">score/4</span></code> predicate requires a catalog item. Unknown users, empty
+profiles, items with empty content, and disjoint features score <code class="docutils literal notranslate"><span class="pre">0.0</span></code>.
+Unknown items raise <code class="docutils literal notranslate"><span class="pre">domain_error(catalog_item,</span> <span class="pre">Item)</span></code>, even for
+unknown users. The <code class="docutils literal notranslate"><span class="pre">recommend/4</span></code> predicate returns up to <code class="docutils literal notranslate"><span class="pre">N</span></code> unrated
+candidates, where <code class="docutils literal notranslate"><span class="pre">N</span></code> must be a positive integer, ordered by
+decreasing score, with descending standard item order for ties.
+Zero-score candidates are included. Every catalog item is a candidate
+for an unknown user; the predicate returns at most <code class="docutils literal notranslate"><span class="pre">N</span></code> of them in
+zero-score tie order.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">score_all/4</span></code> predicate validates the model once and returns
+<code class="docutils literal notranslate"><span class="pre">Item-Score</span></code> pairs in requested order, preserving duplicates and
+allowing rated items. An empty batch still validates the model and
+atomic user. The query is resolved once; unique atomic catalog requests
+are resolved by an ordered merge and duplicate scores are cached within
+the batch. Results and identifier errors retain original request order.
+All requested identifiers are checked, including for unknown users.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> bm25_recommender<span class="o">::</span>learn(bm25_article_content, <span class="nv">Model</span>),
      bm25_recommender<span class="o">::</span>score_all(<span class="nv">Model</span>, alice, [second,first,second,third], <span class="nv">Scores</span>).
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">score_content/4</span></code> scores a supplied descriptor using frozen corpus
-statistics and matching the trained representation. It never fits the
-supplied content as another corpus document or changes the catalog.
-Unseen features contribute no matching weight but <strong>do contribute to
-full candidate length</strong>, so unseen padding penalizes known matches when
-<code class="docutils literal notranslate"><span class="pre">k1</span> <span class="pre">&gt;</span> <span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>. With <code class="docutils literal notranslate"><span class="pre">b(0)</span></code> or <code class="docutils literal notranslate"><span class="pre">k1(0)</span></code>, that length
-penalty disappears. Invalid descriptors are checked even for unknown
-users or empty profiles.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">score_content/4</span></code> predicate scores a supplied descriptor using
+frozen corpus statistics and matching the trained representation. It
+never fits the supplied content as another corpus document or changes
+the catalog. Unseen features contribute no matching weight but <strong>do
+contribute to full candidate length</strong>, so unseen padding penalizes known
+matches when <code class="docutils literal notranslate"><span class="pre">k1</span> <span class="pre">&gt;</span> <span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>. With <code class="docutils literal notranslate"><span class="pre">b(0)</span></code> or <code class="docutils literal notranslate"><span class="pre">k1(0)</span></code>, that
+length penalty disappears. Invalid descriptors are checked even for
+unknown users or empty profiles.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> bm25_recommender<span class="o">::</span>learn(bm25_article_content, <span class="nv">Model</span>),
      bm25_recommender<span class="o">::</span>score_content(<span class="nv">Model</span>, alice,
          features([science,space,space,space]), <span class="nv">SameItemScore</span>),
@@ -666,15 +674,15 @@ after all-empty training.</p>
 </section>
 <section id="immutable-feedback-changes">
 <h2>Immutable feedback changes<a class="headerlink" href="#immutable-feedback-changes" title="Link to this heading"></a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">update_ratings/3</span></code> accepts a proper list of
+<p>The <code class="docutils literal notranslate"><span class="pre">update_ratings/3</span></code> predicate accepts a proper list of
 <code class="docutils literal notranslate"><span class="pre">rating(User,Item,Value)</span></code> records. It inserts or replaces by user-item
 key, allowing new users but requiring catalog items. Values must be
 finite numbers within any stored rating scale. Repeated batch keys raise
 <code class="docutils literal notranslate"><span class="pre">domain_error(duplicate_rating,</span> <span class="pre">User-Item)</span></code>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">remove_ratings/3</span></code> accepts a proper list of atomic <code class="docutils literal notranslate"><span class="pre">User-Item</span></code>
-pairs. Missing and repeated pairs are accepted, including unknown
-identifiers. No matching ratings returns the original validated model.
-Removing the last global rating raises
+<p>The <code class="docutils literal notranslate"><span class="pre">remove_ratings/3</span></code> predicate accepts a proper list of atomic
+<code class="docutils literal notranslate"><span class="pre">User-Item</span></code> pairs. Missing and repeated pairs are accepted, including
+unknown identifiers. No matching ratings returns the original validated
+model. Removing the last global rating raises
 <code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_ratings,</span> <span class="pre">[])</span></code>. A user with no remaining
 history loses their profile and follows unknown-user zero scoring;
 removed items become eligible for recommendations with normal BM25
@@ -701,14 +709,15 @@ eligible again; Bob retains his own profile and rating exclusions.</p>
 </section>
 <section id="immutable-catalog-changes">
 <h2>Immutable catalog changes<a class="headerlink" href="#immutable-catalog-changes" title="Link to this heading"></a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">extend_catalog/3</span></code> accepts unique atomic <strong>new</strong> item identifiers
-paired with descriptors. Existing identifiers raise
-<code class="docutils literal notranslate"><span class="pre">domain_error(new_catalog_item,</span> <span class="pre">Item)</span></code>. <code class="docutils literal notranslate"><span class="pre">replace_content/3</span></code> accepts
-unique atomic <strong>existing</strong> identifiers paired with replacement
-descriptors; missing items raise <code class="docutils literal notranslate"><span class="pre">domain_error(catalog_item,</span> <span class="pre">Item)</span></code>.
-Both require proper lists and the trained representation, canonicalize
-content, and enforce integer retained counts in vector mode. Repeated
-identifiers raise <code class="docutils literal notranslate"><span class="pre">domain_error(duplicate_item,</span> <span class="pre">Item)</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">extend_catalog/3</span></code> predicate accepts unique atomic <strong>new</strong> item
+identifiers paired with descriptors. Existing identifiers raise
+<code class="docutils literal notranslate"><span class="pre">domain_error(new_catalog_item,</span> <span class="pre">Item)</span></code>. The <code class="docutils literal notranslate"><span class="pre">replace_content/3</span></code>
+predicate accepts unique atomic <strong>existing</strong> identifiers paired with
+replacement descriptors; missing items raise
+<code class="docutils literal notranslate"><span class="pre">domain_error(catalog_item,</span> <span class="pre">Item)</span></code>. Both require proper lists and the
+trained representation, canonicalize content, and enforce integer
+retained counts in vector mode. Repeated identifiers raise
+<code class="docutils literal notranslate"><span class="pre">domain_error(duplicate_item,</span> <span class="pre">Item)</span></code>.</p>
 <p>Both operations refit <strong>the entire corpus and every item weight in both
 representations</strong>, refreshing diagnostics while preserving ratings,
 scale, effective options, metadata extras and order. Additions reuse all
@@ -728,45 +737,46 @@ replacements return the original without another refit.</p>
          [fourth<span class="o">-</span>features([space,space])], <span class="nv">Replaced</span>),
      bm25_recommender<span class="o">::</span>remove_ratings(<span class="nv">Replaced</span>, [alice<span class="o">-</span>first], <span class="nv">Final</span>),
      bm25_recommender<span class="o">::</span>recommend(<span class="nv">Final</span>, alice, <span class="m">3</span>, <span class="nv">Recommendations</span>).
-
-<span class="err">`</span>remove_catalog<span class="o">/</span><span class="m">3</span><span class="err">`</span> accepts a proper list of atomic item identifiers, ignoring
-missing and repeated identifiers. <span class="nv">It</span> removes matching items <span class="o">**</span>and all their
-ratings<span class="o">**</span>, refits the remaining corpus and every item weight, and rebuilds
-affected users<span class="s">&#39; profiles. Users with no remaining history disappear. Removing</span>
-an unrated item still changes corpus statistics but retains raw profiles.
-<span class="nv">Empty</span><span class="o">/</span>no<span class="o">-</span>match requests return the validated original, and retries are safe.
-<span class="nv">All</span> identifiers are validated before applying changes or nonempty guards.
-
-<span class="nv">An</span> empty remaining catalog raises <span class="err">`</span><span class="k">domain_error</span>(non_empty_catalog, [])<span class="err">`</span><span class="o">;</span>
-an empty global history raises <span class="err">`</span><span class="k">domain_error</span>(non_empty_ratings, [])<span class="err">`</span>.
-<span class="nv">Mean</span><span class="o">-</span>shift <span class="err">`</span>positive_rating_weight<span class="err">`</span> errors can occur just <span class="o">as</span> for feedback
-removal. <span class="nv">The</span> original model <span class="k">is</span> unchanged on success or failure.
-
-
-<span class="nv">Rating</span><span class="o">-</span>scale changes
-<span class="o">--------------------</span>
-
-<span class="err">`</span>set_rating_scale<span class="o">/</span><span class="m">3</span><span class="err">`</span> accepts <span class="err">`</span>none<span class="err">`</span> or <span class="err">`</span>scale(<span class="nv">Min</span>,<span class="nv">Max</span>)<span class="err">`</span>. <span class="nv">Numeric</span> bounds must be
-finite and ordered, and every stored rating must lie within the inclusive
-bounds. <span class="nv">Removing</span>, widening, or tightening the scale changes only that model
-field<span class="o">;</span> ratings, corpus, item weights, profiles, options, and diagnostics are
-retained exactly. <span class="nv">An</span> unchanged scale returns an identical model.
-
-<span class="nv">Variable</span> scales or bounds raise <span class="err">`</span><span class="k">instantiation_error</span><span class="err">`</span><span class="o">;</span> nonnumeric bounds raise
-<span class="err">`</span><span class="k">type_error</span>(number, <span class="nv">Bound</span>)<span class="err">`</span>. <span class="nv">Invalid</span> descriptors, nonfinite bounds, and reversed
-bounds raise <span class="err">`</span><span class="k">domain_error</span>(rating_scale, ...)<span class="err">`</span>. <span class="nv">An</span> excluded stored rating raises
-<span class="err">`</span><span class="k">domain_error</span>(rating_scale(<span class="nv">Min</span>,<span class="nv">Max</span>), <span class="nv">Rating</span>)<span class="err">`</span>. <span class="nv">Subsequent</span> rating upserts enforce
-the new scale. <span class="nv">This</span> <span class="nv">API</span> never clamps or rescales ratings or <span class="nv">BM25</span> relevance.
-
-<span class="nv">For</span> a composed catalog<span class="o">-</span>removal and scale<span class="o">-</span>edit workflow<span class="o">:</span>
-
-  | <span class="o">?-</span> bm25_recommender<span class="o">::</span>learn(bm25_article_content, <span class="nv">Model</span>),
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">remove_catalog/3</span></code> predicate accepts a proper list of atomic item
+identifiers, ignoring missing and repeated identifiers. It removes
+matching items <strong>and all their ratings</strong>, refits the remaining corpus
+and every item weight, and rebuilds affected users’ profiles. Users with
+no remaining history disappear. Removing an unrated item still changes
+corpus statistics but retains raw profiles. Empty or no-match requests
+return the validated original model, and retries are safe. All
+identifiers are validated before applying changes or checking that the
+catalog and rating history will remain nonempty.</p>
+<p>An empty remaining catalog raises
+<code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_catalog,</span> <span class="pre">[])</span></code>; an empty global history raises
+<code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_ratings,</span> <span class="pre">[])</span></code>. Mean-shift
+<code class="docutils literal notranslate"><span class="pre">positive_rating_weight</span></code> errors can occur just as for feedback
+removal. The original model is unchanged on success or failure.</p>
+</section>
+<section id="rating-scale-changes">
+<h2>Rating-scale changes<a class="headerlink" href="#rating-scale-changes" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">set_rating_scale/3</span></code> predicate accepts the atom <code class="docutils literal notranslate"><span class="pre">none</span></code> or a
+<code class="docutils literal notranslate"><span class="pre">scale(Min,Max)</span></code> term. Numeric bounds must be finite and ordered, and
+every stored rating must lie within the inclusive bounds. Removing,
+widening, or tightening the scale changes only that model field;
+ratings, corpus, item weights, profiles, options, and diagnostics are
+retained exactly. An unchanged scale returns an identical model.</p>
+<p>Variable scales or bounds raise <code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code>; nonnumeric
+bounds raise <code class="docutils literal notranslate"><span class="pre">type_error(number,</span> <span class="pre">Bound)</span></code>. Invalid descriptors,
+nonfinite bounds, and reversed bounds raise
+<code class="docutils literal notranslate"><span class="pre">domain_error(rating_scale,</span> <span class="pre">...)</span></code>. An excluded stored rating raises
+<code class="docutils literal notranslate"><span class="pre">domain_error(rating_scale(Min,Max),</span> <span class="pre">Rating)</span></code>. Subsequent rating
+upserts enforce the new scale. This predicate never clamps or rescales
+ratings or BM25 relevance.</p>
+<p>To remove catalog items and change the rating scale:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> bm25_recommender<span class="o">::</span>learn(bm25_article_content, <span class="nv">Model</span>),
      bm25_recommender<span class="o">::</span>extend_catalog(<span class="nv">Model</span>,
-       [fourth<span class="o">-</span>features([science,space])], <span class="nv">Extended</span>),
+         [fourth<span class="o">-</span>features([science,space])], <span class="nv">Extended</span>),
      bm25_recommender<span class="o">::</span>update_ratings(<span class="nv">Extended</span>,
-       [rating(alice,fourth,<span class="m">4</span>)], <span class="nv">Rated</span>),
+         [rating(alice,fourth,<span class="m">4</span>)], <span class="nv">Rated</span>),
      bm25_recommender<span class="o">::</span>remove_catalog(<span class="nv">Rated</span>,
-       [first,first,missing], <span class="nv">Removed</span>),
+         [first,first,missing], <span class="nv">Removed</span>),
      bm25_recommender<span class="o">::</span>set_rating_scale(<span class="nv">Removed</span>, scale(<span class="m">4</span>,<span class="m">4</span>), <span class="nv">Bounded</span>),
      bm25_recommender<span class="o">::</span>recommend(<span class="nv">Bounded</span>, alice, <span class="m">3</span>, <span class="nv">Recommendations</span>).
 </pre></div>
@@ -775,33 +785,36 @@ the new scale. <span class="nv">This</span> <span class="nv">API</span> never cl
 empty/no-op requests, and return new ground model terms without mutating
 the original or reopening the dataset. Profile rebuilding is selective
 after that validation; validation itself still reconstructs all fitted
-state. Catalog edits retain full corpus/item-weight refitting, not
-optimized incremental BM25 fitting. Unlike catalog changes,
+state. Catalog edits refit the full corpus and all item weights; they
+are not optimized incremental BM25 fitting. Unlike catalog changes,
 supplied-content scoring freezes the trained corpus.</p>
 </section>
 <section id="models-diagnostics-and-export">
 <h2>Models, diagnostics, and export<a class="headerlink" href="#models-diagnostics-and-export" title="Link to this heading"></a></h2>
-<p>The model is
-<code class="docutils literal notranslate"><span class="pre">bm25_model(Ratings,Contents,ItemWeights,Profiles,Corpus,Scale,Diagnostics)</span></code>.
-<code class="docutils literal notranslate"><span class="pre">Corpus</span></code> is
-<code class="docutils literal notranslate"><span class="pre">bm25_corpus(DocumentCount,AverageLength,FeatureStatistics)</span></code> with
+<p>Models use a
+<code class="docutils literal notranslate"><span class="pre">bm25_model(Ratings,Contents,ItemWeights,Profiles,Corpus,Scale,Diagnostics)</span></code>
+term representation. The <code class="docutils literal notranslate"><span class="pre">Corpus</span></code> argument is a
+<code class="docutils literal notranslate"><span class="pre">bm25_corpus(DocumentCount,AverageLength,FeatureStatistics)</span></code> term with
 sorted <code class="docutils literal notranslate"><span class="pre">Feature-statistics(DocumentFrequency,IDF)</span></code> pairs. Canonical
 descriptors retain original counts; document lengths/count vectors are
 derived rather than redundantly stored. Cached item weights and raw user
 profiles are sorted sparse lists. Treat model terms as opaque inputs to
 the public API.</p>
-<p><code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code> reports <code class="docutils literal notranslate"><span class="pre">model(bm25_recommender)</span></code>, <code class="docutils literal notranslate"><span class="pre">rating_count</span></code>,
-effective <code class="docutils literal notranslate"><span class="pre">options</span></code>, <code class="docutils literal notranslate"><span class="pre">user_count</span></code>, <code class="docutils literal notranslate"><span class="pre">item_count</span></code>,
-<code class="docutils literal notranslate"><span class="pre">content_representation(features|vectors)</span></code>, <code class="docutils literal notranslate"><span class="pre">feature_count</span></code>,
-<code class="docutils literal notranslate"><span class="pre">non_empty_profile_count</span></code>, and <code class="docutils literal notranslate"><span class="pre">average_document_length</span></code> terms.
+<p>The <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> argument is a list of diagnostic terms. The
+<code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code> predicate returns this list, including
+<code class="docutils literal notranslate"><span class="pre">model(bm25_recommender)</span></code>, <code class="docutils literal notranslate"><span class="pre">rating_count/1</span></code>, effective
+<code class="docutils literal notranslate"><span class="pre">options/1</span></code>, <code class="docutils literal notranslate"><span class="pre">user_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">item_count/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">content_representation(features|vectors)</span></code>, <code class="docutils literal notranslate"><span class="pre">feature_count/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">non_empty_profile_count/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">average_document_length/1</span></code> terms.
 Feature count is the union of positive-count corpus keys. Required
 diagnostics occur exactly once with exact values; permitted additional
-compound terms are retained. <code class="docutils literal notranslate"><span class="pre">valid_recommender/1</span></code> checks groundness
-and reconstructs corpus, item weights, profiles, scale, options, and
-diagnostics before accepting a model.</p>
+compound terms are retained. The <code class="docutils literal notranslate"><span class="pre">valid_recommender/1</span></code> predicate
+checks groundness and reconstructs corpus, item weights, profiles,
+scale, options, and diagnostics before accepting a model.</p>
 <p>The common clause/file export APIs serialize a self-contained ground
-model fact; no live dataset is needed to restore scoring.
-<code class="docutils literal notranslate"><span class="pre">print_recommender/1</span></code> prints the model and diagnostics. For example:</p>
+model fact; no live dataset is needed to restore scoring. The
+<code class="docutils literal notranslate"><span class="pre">print_recommender/1</span></code> predicate prints the model and diagnostics. For
+example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> bm25_recommender<span class="o">::</span>learn(bm25_article_content, <span class="nv">Model</span>),
      bm25_recommender<span class="o">::</span>export_to_clauses(bm25_article_content, <span class="nv">Model</span>, saved, <span class="nv">Clauses</span>),
      bm25_recommender<span class="o">::</span>export_to_file(bm25_article_content, <span class="nv">Model</span>, saved, <span class="s">&#39;saved.pl&#39;</span>).

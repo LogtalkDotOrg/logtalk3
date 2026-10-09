@@ -21,11 +21,12 @@ ________________________________________________________________________
 `relief_feature_selector`
 =========================
 
-This library implements binary Relief joint feature selection. It scores
-each feature using the mean difference to the nearest miss minus the mean
-difference to the nearest hit. Neighbors are determined jointly from all
-candidate features, not from independent univariate scores. Signed scores
-are preserved; negative scores are not clamped.
+Use this library to select features for binary classification with Relief.
+It scores each feature using the mean difference to the nearest observation
+in the other class (a miss), minus the mean difference to the nearest
+observation in the same class (a hit). Neighbors are determined jointly
+from all candidate features, not from independent univariate scores. Signed
+scores are preserved; negative scores are not clamped.
 
 
 API documentation
@@ -71,15 +72,15 @@ Categorical differences use term identity, so integer and floating-point
 category codes are not interchangeable. Categorical labels need not be
 numeric measurements. Known classification targets must be atomic.
 
-Unknown targets are excluded without binding them. The default complete-case
-policy also excludes rows with any missing candidate feature. After these
-exclusions, exactly two classes, each with at least two rows, are required.
-An invalid eligible population raises `domain_error(relief_population, ...)`.
-Unsupported declarations raise `domain_error(feature_type, ...)`; invalid
-known values raise the corresponding type error. An observed category outside
-its declared domain raises `domain_error(feature_value, Feature-Value)`.
-Shared validation rejects
-undeclared or duplicate features and inconsistent example counts.
+Rows with an unbound target are excluded without binding that variable.
+The default complete-case policy also excludes rows with any missing
+candidate feature. After these exclusions, exactly two classes, each with
+at least two rows, are required. An invalid eligible population raises
+`domain_error(relief_population, ...)`. Unsupported declarations raise
+`domain_error(feature_type, ...)`; invalid known values raise the
+corresponding type error. An observed category outside its declared domain
+raises `domain_error(feature_value, Feature-Value)`. Shared validation
+rejects undeclared or duplicate features and inconsistent example counts.
 
 Row positions, not dataset IDs or feature-vector identity, exclude self
 matches. Duplicate rows remain eligible neighbors. Neighbor ties prefer the
@@ -117,21 +118,29 @@ missing values and classes with missing entries in those columns.
 Options and selection
 ---------------------
 
-The `learn/2` predicate uses default options. The `learn/3` predicate accepts
-an options list as its last argument:
+The `learn/3` predicate accepts the following options:
 
-- `selection_strategy(top_k(10))` selects up to ten features by default.
-  `top_k(K)` requires a positive integer. `all` selects all candidates and
-  `threshold(T)` selects scores at least the numeric threshold T.
-- `sample_size(all)` processes each eligible row once, in dataset order,
+- `selection_strategy(Strategy)` selects `top_k(K)` (default: `top_k(10)`),
+  `all`, or `threshold(T)`. Top-k selects up to the positive integer `K`
+  features; `all` selects all candidates, and `threshold(T)` selects scores
+  at least the numeric threshold `T`.
+- `sample_size(Size)` selects `all` (default) or a positive integer.
+  With `all`, it processes each eligible row once, in dataset order,
   without accessing the random generator. A positive integer M instead
   draws M anchors uniformly with replacement from the eligible pool.
-- `random_seed(1357911)` supplies the default positive integer sampling seed.
-- `missing_values(complete_case)` is the default; `probabilistic` uses the
+- `random_seed(Seed)` sets a positive integer sampling seed (default: `1357911`).
+- `missing_values(Policy)` selects `complete_case` (default) or `probabilistic`.
+  Probabilistic handling uses the
   empirical differences described above.
-- `neighbor_weighting(uniform)` is the default. `rank(Sigma)` requires a
-  positive integer and uses normalized zero-based weights
+- `neighbor_weighting(Weighting)` selects `uniform` (default) or `rank(Sigma)`.
+  The rank scale `Sigma` must be a positive integer. Rank weighting uses
+  normalized zero-based weights
   `exp(-(rank/Sigma)^2)`. With one neighbor per list, both schemes agree.
+
+The `learn/2` predicate uses the default option values.
+
+An anchor is an eligible row whose neighbor comparisons contribute to the
+feature scores.
 
 The number of neighbors is fixed at one hit and one miss; a
 `number_of_neighbors/1` option is not accepted. Every sampled anchor searches
@@ -142,15 +151,15 @@ training calls sharing this generator should be serialized externally.
 
 Repeated options are accepted, with the first occurrence taking precedence.
 Incomplete or unknown options are rejected without filling missing option
-parameters. The inherited `valid_option/1` and `default_option/1` hooks remain
-public. Scores are sorted numerically in decreasing order, with declaration
+parameters. Scores are sorted numerically in decreasing order, with declaration
 order preserved for ties. Top-k can select negative or zero scores.
 
 
 Models and diagnostics
 ----------------------
 
-The `learn/2-3` predicates return ground, exportable terms of this shape:
+The `learn/2` and `learn/3` predicates return ground, exportable models using
+the following term representation:
 
     relief_feature_selector(FeatureScores, SelectedFeatures, Diagnostics)
 
@@ -160,7 +169,8 @@ selected feature names. The `diagnostics/2`, `diagnostic/2`, and
 `selector_options/2` predicates expose metadata and the effective options.
 The `diagnostic/2` predicate enumerates matching metadata terms.
 
-Diagnostics record `model/1`, `example_count/1`, `options/1`, `variant(binary)`,
+The `Diagnostics` argument is a list of diagnostic terms, including
+`model/1`, `example_count/1`, `options/1`, `variant(binary)`,
 `candidate_count/1`, `selected_count/1`, `features(FeatureTypes)`,
 `eligible_count/1`, `excluded_count/1`, `eligible_positions/1`, `samples/1`,
 `population(classes(ClassCounts))`, and `degeneracy(none)`. Feature types are
@@ -176,7 +186,7 @@ sample membership and length, and eligible class counts. The
 `valid_selector/1` predicate fails for malformed models without binding
 partial models. The `export_to_clauses/4` and inherited `export_to_file/4`
 predicates preserve the complete model. The `print_selector/1` predicate
-prints the template and model using the shared pretty-printing helper.
+prints the template and model using the shared printing predicates.
 
 
 Limitations

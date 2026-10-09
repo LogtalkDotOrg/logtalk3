@@ -446,15 +446,14 @@ detectors are represented as objects importing the
 <code class="docutils literal notranslate"><span class="pre">anomaly_detector_protocol</span></code> protocol. The category provides shared
 <code class="docutils literal notranslate"><span class="pre">learn/2</span></code>, <code class="docutils literal notranslate"><span class="pre">predict/3-4</span></code>, <code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code>, <code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code>,
 <code class="docutils literal notranslate"><span class="pre">anomaly_detector_options/2</span></code>, file export, baseline training-selection
-helpers, and dataset helper predicates. It keeps threshold-based
-prediction and export behavior separate from the algorithm-specific
-learning, scoring, clause export, pretty-printing, and diagnostics
-metadata code.</p>
+helpers, and dataset predicates. It keeps threshold-based prediction and
+export behavior separate from the algorithm-specific learning, scoring,
+clause export, pretty-printing, and diagnostics metadata code.</p>
 <p>The shared category also provides reusable protected predicates for
 baseline-only training workflows. Libraries can use the
 <code class="docutils literal notranslate"><span class="pre">baseline_class_values/1</span></code> and <code class="docutils literal notranslate"><span class="pre">baseline_selection_policy/1</span></code> options
-via a single helper instead of reimplementing class-label validation and
-baseline-example filtering or rejection logic locally.</p>
+via a single predicate instead of reimplementing class-label validation
+and baseline-example filtering or rejection logic locally.</p>
 <p>Learned detector terms can be validated explicitly using the shared
 <code class="docutils literal notranslate"><span class="pre">check_anomaly_detector/1</span></code> and <code class="docutils literal notranslate"><span class="pre">valid_anomaly_detector/1</span></code>
 predicates. This validation API is never called implicitly by scoring,

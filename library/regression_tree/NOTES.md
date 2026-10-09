@@ -135,7 +135,9 @@ Where:
 - `options(Options)` stores the effective learning options after merging the user options with the library defaults.
 - `encoded_feature_count(FeatureCount)` stores the number of numeric features induced by the encoder list, including missing-value indicator features.
 
-Use the `regression_protocols` `diagnostic/2` and `regressor_options/2` helper predicates when you only need a single metadata term or the effective options.
+Use the `regression_protocols` `diagnostic/2` and `regressor_options/2`
+predicates when you only need a single metadata term or the effective
+options.
 
 Options
 -------

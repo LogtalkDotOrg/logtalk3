@@ -21,10 +21,11 @@ ________________________________________________________________________
 `rrelieff_feature_selector`
 ===========================
 
-This library implements RReliefF joint feature selection for numeric
-regression targets. Neighbors are determined jointly using all candidate
-features. Scores contrast expected feature differences conditional on
-different versus similar targets. Signed scores are preserved.
+Use this library to select features for numeric regression with RReliefF.
+It implements joint feature selection for numeric regression targets.
+Neighbors are determined jointly using all candidate features. Scores
+contrast expected feature differences conditional on different versus
+similar targets. Signed scores are preserved.
 
 
 API documentation
@@ -62,13 +63,13 @@ Dataset and distance contract
 The dataset must implement `feature_dataset_protocol`. Feature declarations
 are `continuous` or nonempty ground lists of atomic categorical values. Known
 numeric feature values and targets must be numbers; categorical values
-must be atomic. Unknown targets are excluded without binding them.
+must be atomic. Rows with an unbound target are excluded without binding it.
 Complete-case mode also drops rows missing any candidate feature. At least
 two eligible rows are required; otherwise learning raises
 `domain_error(relief_population, regression-Count)`. Invalid declarations
 raise `domain_error(feature_type, ...)`; invalid values raise type errors.
-Observed categorical values must belong to their declared domains; an
-unknown category raises `domain_error(feature_value, Feature-Value)`.
+Observed categorical values must belong to their declared domains. A category
+outside its declared domain raises `domain_error(feature_value, Feature-Value)`.
 Shared dataset validation rejects duplicate or undeclared features and
 inconsistent example counts.
 
@@ -104,8 +105,8 @@ neighbor has the same target as its anchor.
 Probabilistic missing values
 ----------------------------
 
-The probabilistic policy retains missing features without binding or
-imputing input variables. Regression uses pooled empirical observed
+The probabilistic policy retains rows with missing feature values without
+binding or imputing input variables. Regression uses pooled empirical observed
 feature distributions, not target-class distributions. For categorical
 features, observed/missing difference is `1-P(v)` and missing/missing
 difference is `1-sum(P(v)^2)`. Numeric missing differences are expected
@@ -122,27 +123,34 @@ Complete columns allocate no empirical support caches.
 Options
 -------
 
-The `learn/2` predicate uses defaults. The `learn/3` predicate accepts an
-options list as its last argument:
+The `learn/3` predicate accepts the following options:
 
-- `selection_strategy(top_k(10))` is the default. `top_k(K)` requires a
-  positive integer; `all` selects every candidate and `threshold(T)` selects
-  scores at least the numeric threshold T.
-- `number_of_neighbors(10)` is the default positive integer K. K can exceed
+- `selection_strategy(Strategy)` selects `top_k(K)` (default: `top_k(10)`),
+  `all`, or `threshold(T)`. Top-k selects up to the positive integer `K`
+  features; `all` selects all candidates, and `threshold(T)` selects scores
+  at least the numeric threshold `T`.
+- `number_of_neighbors(K)` sets a positive integer count (default: `10`). K can exceed
   the available pool size; the actual list is used and normalized.
-- `neighbor_weighting(rank(2))` is the default. `rank(Sigma)` requires a
-  positive integer and uses zero-based `exp(-(rank/Sigma)^2)` weights.
+- `neighbor_weighting(Weighting)` selects `rank(Sigma)` (default: `rank(2)`)
+  or `uniform`. The rank scale `Sigma` must be a positive integer.
+  Rank weighting uses zero-based `exp(-(rank/Sigma)^2)` weights.
   `uniform` gives equal weights within each actual list.
-- `sample_size(all)` processes eligible rows once in dataset order without
+- `sample_size(Size)` selects `all` (default) or a positive integer.
+  With `all`, it processes eligible rows once in dataset order without
   accessing the RNG. A positive integer M samples M anchors uniformly with
   replacement. Neighbors always come from the full eligible pool.
-- `random_seed(1357911)` is the default positive integer seed.
-- `missing_values(complete_case)` is the default; `probabilistic` uses the
+- `random_seed(Seed)` sets a positive integer sampling seed (default: `1357911`).
+- `missing_values(Policy)` selects `complete_case` (default) or `probabilistic`.
+  Probabilistic handling uses the
   empirical expected differences described above.
 
+The `learn/2` predicate uses the default option values.
+
+An anchor is an eligible row whose neighbor comparisons contribute to the
+feature scores.
+
 Repeated options are accepted, with the first occurrence taking precedence.
-Incomplete and unknown options are rejected. The inherited
-`valid_option/1` and `default_option/1` hooks remain public. Sampling uses
+Incomplete and unknown options are rejected. Sampling uses
 `fast_random(xoshiro128pp)` with portable catch-based seed restoration on
 success, failure, and exceptions. Concurrent sampled calls sharing this
 generator should be serialized externally.
@@ -151,7 +159,8 @@ generator should be serialized externally.
 Models and diagnostics
 ----------------------
 
-The `learn/2-3` predicates return ground, exportable terms of this shape:
+The `learn/2` and `learn/3` predicates return ground, exportable models using
+the following term representation:
 
     rrelieff_feature_selector(FeatureScores, SelectedFeatures, Diagnostics)
 
@@ -162,22 +171,27 @@ top-k can select zero or negative scores. The `diagnostics/2`,
 `diagnostic/2`, and `selector_options/2` predicates expose metadata and
 effective options. The `diagnostic/2` predicate enumerates matching terms.
 
-Diagnostics include `model/1`, `example_count/1`, `options/1`,
-`variant(regression)`, `candidate_count/1`, `selected_count/1`,
-`features(FeatureTypes)`, `eligible_count/1`, `excluded_count/1`,
-`eligible_positions/1`, `samples/1`, and `degeneracy/1`. Feature types are
-`Feature-numeric` or `Feature-categorical` pairs in declaration order.
-Frozen samples contain original row positions, with repetitions allowed.
+The `Diagnostics` argument is a list of diagnostic terms, including
+`model/1`, `example_count/1`, `options/1`, `variant(regression)`,
+`candidate_count/1`, `selected_count/1`, `features(FeatureTypes)`,
+`eligible_count/1`, `excluded_count/1`, `eligible_positions/1`,
+`samples/1`, and `degeneracy/1`. Feature types are `Feature-numeric` or
+`Feature-categorical` pairs in declaration order. Frozen samples contain
+original row positions, with repetitions allowed.
 
 The `diagnostics/2` and `diagnostic/2` predicates return the regression
-population diagnostic with the following representation:
+population diagnostic as the following term:
 
-    population(regression(target_range(Minimum, Maximum),
-                          conditioning_mass(D, Complement)))
+    population(
+        regression(
+            target_range(Minimum, Maximum),
+            conditioning_mass(D, Complement)
+        )
+    )
 
-`Complement` is `M-D`. The degeneracy value is `none`, `constant_target`,
-or `zero_conditioning_mass`. No training feature vectors, empirical
-supports, or fitted preprocessing state are stored in the model.
+`Complement` is `M-D`. The `degeneracy/1` diagnostic value is `none`,
+`constant_target`, or `zero_conditioning_mass`. No training feature vectors,
+empirical supports, or fitted preprocessing state are stored in the model.
 
 The `check_selector/1` predicate verifies ground structure, the receiving
 model and variant, unique features and scores, stable ordering, selection

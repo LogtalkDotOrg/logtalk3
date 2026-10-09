@@ -445,19 +445,19 @@
              
   <section id="time-series-regression">
 <span id="library-time-series-regression"></span><h1><code class="docutils literal notranslate"><span class="pre">time_series_regression</span></code><a class="headerlink" href="#time-series-regression" title="Link to this heading"></a></h1>
-<p>This library implements univariate time series forecasting using
-autoregressive (AR) models fitted by least squares, with an optional
-intercept, optional differencing (ARI models), and optional automatic
-order selection using information criteria, plus analytic prediction
-intervals. It implements the <code class="docutils literal notranslate"><span class="pre">forecaster_protocol</span></code> and reuses dataset
-validation, diagnostics, export, lag construction, and differencing
-support from the <code class="docutils literal notranslate"><span class="pre">time_series_protocols</span></code> library. Least-squares
-problems are solved using the <code class="docutils literal notranslate"><span class="pre">linear_algebra</span></code> library, and prediction
-interval quantiles are computed using the <code class="docutils literal notranslate"><span class="pre">univariate_distributions</span></code>
-library.</p>
-<p>Datasets are objects implementing the <code class="docutils literal notranslate"><span class="pre">time_series_dataset_protocol</span></code>
-protocol. Every observation must be a number or a missing observation,
-represented as an unbound variable (see “Missing observations” below).</p>
+<p>Use this library to forecast a single time series from its previous
+values. It fits autoregressive (AR) models by least squares, with an
+optional intercept and differencing (ARI models). You can also request
+automatic order selection using information criteria and analytic
+prediction intervals. The library object implements
+<code class="docutils literal notranslate"><span class="pre">forecaster_protocol</span></code> and reuses dataset validation, diagnostics,
+export, lag construction, and differencing support from the
+<code class="docutils literal notranslate"><span class="pre">time_series_protocols</span></code> library. Least-squares problems are solved
+using the <code class="docutils literal notranslate"><span class="pre">linear_algebra</span></code> library, and prediction interval quantiles
+are computed using the <code class="docutils literal notranslate"><span class="pre">univariate_distributions</span></code> library.</p>
+<p>Datasets are objects implementing <code class="docutils literal notranslate"><span class="pre">time_series_dataset_protocol</span></code>.
+Every observation must be a number or a missing observation (represented
+as an unbound variable; see the “Missing observations” section below).</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -499,7 +499,7 @@ Least squares is solved using a pivoted orthogonal (QR) method that does
 not form the normal equations. Forecasts are computed recursively and,
 when differencing is used, integrated back to the scale of the original
 series.</p>
-<p>Typical usage:</p>
+<p>To fit an order-two model and request twelve forecasts:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> time_series_regression<span class="o">::</span>learn(my_series, <span class="nv">Forecaster</span>, [order(<span class="m">2</span>)]),
      time_series_regression<span class="o">::</span>forecast(<span class="nv">Forecaster</span>, <span class="m">12</span>, <span class="nv">Forecasts</span>).
 </pre></div>
@@ -509,33 +509,39 @@ series.</p>
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate supports the following options:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">order(Order)</span></code>: autoregressive order, either a positive integer or
-<code class="docutils literal notranslate"><span class="pre">auto</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">max_order(MaxOrder)</span></code>: maximum order considered when <code class="docutils literal notranslate"><span class="pre">order(auto)</span></code>
-is used. Default is <code class="docutils literal notranslate"><span class="pre">10</span></code>. Only valid with <code class="docutils literal notranslate"><span class="pre">order(auto)</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">selection_criterion(Criterion)</span></code>: criterion used by <code class="docutils literal notranslate"><span class="pre">order(auto)</span></code>;
-one of <code class="docutils literal notranslate"><span class="pre">aic</span></code>, <code class="docutils literal notranslate"><span class="pre">aicc</span></code>, or <code class="docutils literal notranslate"><span class="pre">bic</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">aicc</span></code>. Only valid
-with <code class="docutils literal notranslate"><span class="pre">order(auto)</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">intercept(Boolean)</span></code>: whether to estimate an intercept. Default is
-<code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">differencing(Differencing)</span></code>: number of times the series is
-differenced before fitting, a non-negative integer. Default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">retain_residuals(Boolean)</span></code>: whether to keep the one-step training
-residuals in the learned forecaster diagnostics. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">order(Order)</span></code> sets the autoregressive order to a positive integer
+or <code class="docutils literal notranslate"><span class="pre">auto</span></code>. The default is <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_order(MaxOrder)</span></code> limits the orders considered with the
+<code class="docutils literal notranslate"><span class="pre">order(auto)</span></code> option. The default is <code class="docutils literal notranslate"><span class="pre">10</span></code>; it is valid only with
+<code class="docutils literal notranslate"><span class="pre">order(auto)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">selection_criterion(Criterion)</span></code> selects the criterion used with
+<code class="docutils literal notranslate"><span class="pre">order(auto)</span></code>: <code class="docutils literal notranslate"><span class="pre">aic</span></code>, <code class="docutils literal notranslate"><span class="pre">aicc</span></code>, or <code class="docutils literal notranslate"><span class="pre">bic</span></code>. The default is
+<code class="docutils literal notranslate"><span class="pre">aicc</span></code>; it is valid only with <code class="docutils literal notranslate"><span class="pre">order(auto)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">intercept(Boolean)</span></code> controls whether to estimate an intercept. The
+default is <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">differencing(Differencing)</span></code> sets the number of times the series is
+differenced before fitting, a non-negative integer. The default is
+<code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">retain_residuals(Boolean)</span></code> controls whether to keep the one-step
+training residuals in the learned forecaster diagnostics. The default
+is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
 </ul>
-<p>Passing <code class="docutils literal notranslate"><span class="pre">max_order/1</span></code> or <code class="docutils literal notranslate"><span class="pre">selection_criterion/1</span></code> together with an
-explicit integer order raises a
+<p>Passing a <code class="docutils literal notranslate"><span class="pre">max_order/1</span></code> or <code class="docutils literal notranslate"><span class="pre">selection_criterion/1</span></code> option together
+with an explicit integer order raises a
 <code class="docutils literal notranslate"><span class="pre">domain_error(time_series_regression_option,</span> <span class="pre">Option)</span></code> error.</p>
 <p>The minimum series length is <code class="docutils literal notranslate"><span class="pre">Differencing</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">Order</span> <span class="pre">+</span> <span class="pre">Intercept</span></code>,
 where <code class="docutils literal notranslate"><span class="pre">Intercept</span></code> is <code class="docutils literal notranslate"><span class="pre">1</span></code> or <code class="docutils literal notranslate"><span class="pre">0</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">Differencing</span> <span class="pre">+</span> <span class="pre">Intercept</span> <span class="pre">+</span> <span class="pre">4</span></code> for <code class="docutils literal notranslate"><span class="pre">order(auto)</span></code>; otherwise
-<code class="docutils literal notranslate"><span class="pre">learn/3</span></code> throws a <code class="docutils literal notranslate"><span class="pre">domain_error(series_length,</span> <span class="pre">Dataset)</span></code> error.</p>
+<code class="docutils literal notranslate"><span class="pre">Differencing</span> <span class="pre">+</span> <span class="pre">Intercept</span> <span class="pre">+</span> <span class="pre">4</span></code> for the <code class="docutils literal notranslate"><span class="pre">order(auto)</span></code> option. A
+shorter series causes the <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate to raise a
+<code class="docutils literal notranslate"><span class="pre">domain_error(series_length,</span> <span class="pre">Dataset)</span></code> error.</p>
 </section>
 <section id="automatic-order-selection">
 <h2>Automatic order selection<a class="headerlink" href="#automatic-order-selection" title="Link to this heading"></a></h2>
-<p>With <code class="docutils literal notranslate"><span class="pre">order(auto)</span></code>, orders <code class="docutils literal notranslate"><span class="pre">1</span></code> up to <code class="docutils literal notranslate"><span class="pre">max_order/1</span></code> (capped so that
-every candidate has more observations than parameters, plus one) are
-compared using the selected information criterion:</p>
+<p>With the <code class="docutils literal notranslate"><span class="pre">order(auto)</span></code> option, the library compares orders from <code class="docutils literal notranslate"><span class="pre">1</span></code>
+up to the limit supplied by the <code class="docutils literal notranslate"><span class="pre">max_order/1</span></code> option. This limit is
+capped so that every candidate has more observations than parameters,
+plus one. Candidates are compared using the selected information
+criterion:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">aic</span></code>: <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">*</span> <span class="pre">ln(SSE/n)</span> <span class="pre">+</span> <span class="pre">2k</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">aicc</span></code>: <code class="docutils literal notranslate"><span class="pre">aic</span> <span class="pre">+</span> <span class="pre">2k(k+1)/(n-k-1)</span></code></p></li>
@@ -564,10 +570,10 @@ numerical rank of the design matrix.</p>
 <h2>Missing observations<a class="headerlink" href="#missing-observations" title="Link to this heading"></a></h2>
 <p>A missing observation is represented, following common practice, as an
 unbound variable: <code class="docutils literal notranslate"><span class="pre">observation(Index,</span> <span class="pre">_)</span></code> in a dataset object, or an
-unbound <code class="docutils literal notranslate"><span class="pre">Observation</span></code> argument to <code class="docutils literal notranslate"><span class="pre">update/3</span></code>. A series may freely
-mix numbers and missing observations; only its length and index sequence
-need to be well-formed (checked as usual by <code class="docutils literal notranslate"><span class="pre">dataset_series/2</span></code> and
-<code class="docutils literal notranslate"><span class="pre">check_series_length/3</span></code>).</p>
+unbound <code class="docutils literal notranslate"><span class="pre">Observation</span></code> argument to the <code class="docutils literal notranslate"><span class="pre">update/3</span></code> predicate. A series
+may freely mix numbers and missing observations; only its length and
+index sequence need to be well-formed (checked by the shared
+<code class="docutils literal notranslate"><span class="pre">dataset_series/2</span></code> and <code class="docutils literal notranslate"><span class="pre">check_series_length/3</span></code> predicates).</p>
 <p>Differencing propagates missingness: a difference with a missing operand
 is itself missing. Fitting uses casewise deletion: a design matrix row
 (built from <code class="docutils literal notranslate"><span class="pre">Order</span></code> lagged values and a target, after differencing)
@@ -579,15 +585,23 @@ candidate order). The number of raw missing observations in the training
 series is reported in the <code class="docutils literal notranslate"><span class="pre">missing_count/1</span></code> diagnostic;
 <code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code> already reflects the number of complete rows actually
 used for fitting. If casewise deletion leaves no complete row at all,
-<code class="docutils literal notranslate"><span class="pre">learn/3</span></code> raises a
+the <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate raises a
 <code class="docutils literal notranslate"><span class="pre">domain_error(insufficient_observations,</span> <span class="pre">Dataset)</span></code> error.</p>
-<p><code class="docutils literal notranslate"><span class="pre">learn/3</span></code> still succeeds when the most recent observations (needed to
-seed the forecaster’s window or, under differencing, its levels) are
-missing; the missing values are simply carried into the learned
-forecaster’s state. <code class="docutils literal notranslate"><span class="pre">forecast/3</span></code> and <code class="docutils literal notranslate"><span class="pre">forecast_interval/5</span></code> then
-raise a <code class="docutils literal notranslate"><span class="pre">domain_error(missing_observation,</span> <span class="pre">Forecaster)</span></code> error for a
-positive horizon (a zero horizon still trivially succeeds), until
-<code class="docutils literal notranslate"><span class="pre">update/3</span></code> supplies the missing values.</p>
+<p>Learning can succeed even if some recent past observations are missing,
+provided enough complete rows remain. Those missing values are retained
+in the lag window or in the levels used to undo differencing. If any
+past value required to calculate a forecast is missing, the
+<code class="docutils literal notranslate"><span class="pre">forecast/3</span></code> predicate raises
+<code class="docutils literal notranslate"><span class="pre">domain_error(missing_observation,</span> <span class="pre">Forecaster)</span></code> for a positive
+horizon. Missing required past values also prevent positive-horizon
+prediction intervals. A zero horizon still returns empty forecast or
+bound lists.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">update/3</span></code> predicate appends a new observation; it does not fill
+in a missing historical observation. Forecasting becomes possible once
+enough numeric observations have been appended that every value in the
+current window and levels is known. Without differencing, a missing
+window entry is pushed out after at most <code class="docutils literal notranslate"><span class="pre">Order</span></code> numeric updates.
+Differencing can propagate a gap and require additional numeric updates.</p>
 </section>
 <section id="immutable-online-updates">
 <h2>Immutable online updates<a class="headerlink" href="#immutable-online-updates" title="Link to this heading"></a></h2>
@@ -596,44 +610,46 @@ observation to the series while keeping the fitted intercept and
 coefficients unchanged. The original forecaster is not modified. The new
 <code class="docutils literal notranslate"><span class="pre">Observation</span></code> may be left an unbound variable to represent a missing
 observation (see “Missing observations” above).</p>
-<p>When both the new observation and the forecaster’s prior window are
-fully known, the one-step prediction error is added to the
-<code class="docutils literal notranslate"><span class="pre">sum_squared_error/1</span></code>, <code class="docutils literal notranslate"><span class="pre">mean_squared_error/1</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code> diagnostics (and to the retained residuals, if
-enabled), and the information criteria diagnostics keep describing the
-original fit. Otherwise, no prediction error is available and only
-<code class="docutils literal notranslate"><span class="pre">training_series_length/1</span></code>, <code class="docutils literal notranslate"><span class="pre">update_count/1</span></code>, and, when
-<code class="docutils literal notranslate"><span class="pre">Observation</span></code> is a variable, <code class="docutils literal notranslate"><span class="pre">missing_count/1</span></code> are updated. In both
-cases <code class="docutils literal notranslate"><span class="pre">training_series_length/1</span></code> and <code class="docutils literal notranslate"><span class="pre">update_count/1</span></code> are
-incremented, and the observation, known or not, is pushed into the
-window (and used to update the levels).</p>
+<p>When the new observation, its required differences, and the past values
+in the forecaster’s prior window are all numeric, the one-step
+prediction error updates the <code class="docutils literal notranslate"><span class="pre">sum_squared_error/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mean_squared_error/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code> diagnostic values (and
+is appended to the retained residuals, if enabled), and the information
+criteria diagnostics keep describing the original fit. Otherwise, no
+prediction error is available and only <code class="docutils literal notranslate"><span class="pre">training_series_length/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">update_count/1</span></code>, and, when <code class="docutils literal notranslate"><span class="pre">Observation</span></code> is a variable,
+<code class="docutils literal notranslate"><span class="pre">missing_count/1</span></code> are updated. In both cases
+<code class="docutils literal notranslate"><span class="pre">training_series_length/1</span></code> and <code class="docutils literal notranslate"><span class="pre">update_count/1</span></code> are incremented, and
+the observation, known or not, is pushed into the window (and used to
+update the levels).</p>
 </section>
 <section id="forecaster-representation">
 <h2>Forecaster representation<a class="headerlink" href="#forecaster-representation" title="Link to this heading"></a></h2>
-<p>A learned forecaster is represented as a term with the format:</p>
+<p>A learned forecaster uses the following term representation:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>time_series_regression_forecaster(<span class="nv">Model</span>, <span class="nv">State</span>, <span class="nv">Parameters</span>, <span class="nv">Diagnostics</span>)
 </pre></div>
 </div>
-<p>where <code class="docutils literal notranslate"><span class="pre">Model</span></code> is <code class="docutils literal notranslate"><span class="pre">ar(Order,</span> <span class="pre">Differencing)</span></code>, <code class="docutils literal notranslate"><span class="pre">State</span></code> is
-<code class="docutils literal notranslate"><span class="pre">ar_state(Window,</span> <span class="pre">Levels)</span></code>, and <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> is
-<code class="docutils literal notranslate"><span class="pre">ar_parameters(Intercept,</span> <span class="pre">Coefficients)</span></code>. The window holds the last
-<code class="docutils literal notranslate"><span class="pre">Order</span></code> values of the differenced series, most recent first. The
+<p>The <code class="docutils literal notranslate"><span class="pre">Model</span></code> argument is an <code class="docutils literal notranslate"><span class="pre">ar(Order,</span> <span class="pre">Differencing)</span></code> term, <code class="docutils literal notranslate"><span class="pre">State</span></code>
+is an <code class="docutils literal notranslate"><span class="pre">ar_state(Window,</span> <span class="pre">Levels)</span></code> term, and <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> is an
+<code class="docutils literal notranslate"><span class="pre">ar_parameters(Intercept,</span> <span class="pre">Coefficients)</span></code> term. The window holds the
+last <code class="docutils literal notranslate"><span class="pre">Order</span></code> values of the differenced series, most recent first. The
 levels list holds the last value of the series at each differencing
 level, starting with the original series. The intercept is <code class="docutils literal notranslate"><span class="pre">0.0</span></code> when
-<code class="docutils literal notranslate"><span class="pre">intercept(false)</span></code> is used.</p>
-<p>The diagnostics list includes the <code class="docutils literal notranslate"><span class="pre">model/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">training_series_length/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">options/1</span></code> terms common to all
-forecasters plus <code class="docutils literal notranslate"><span class="pre">order/1</span></code>, <code class="docutils literal notranslate"><span class="pre">differencing/1</span></code>, <code class="docutils literal notranslate"><span class="pre">intercept/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">missing_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">parameter_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">design_rank/1</span></code>, <code class="docutils literal notranslate"><span class="pre">sum_squared_error/1</span></code>, <code class="docutils literal notranslate"><span class="pre">mean_squared_error/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">aic/1</span></code>, <code class="docutils literal notranslate"><span class="pre">aicc/1</span></code> (<code class="docutils literal notranslate"><span class="pre">none</span></code> when undefined), <code class="docutils literal notranslate"><span class="pre">bic/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">update_count/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">residuals/1</span></code> (<code class="docutils literal notranslate"><span class="pre">none</span></code> unless retained)
-terms, and <code class="docutils literal notranslate"><span class="pre">order_selection/2</span></code> when <code class="docutils literal notranslate"><span class="pre">order(auto)</span></code> is used.</p>
+the <code class="docutils literal notranslate"><span class="pre">intercept(false)</span></code> option is used.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> argument is a list of diagnostic terms. It includes
+<code class="docutils literal notranslate"><span class="pre">model/1</span></code>, <code class="docutils literal notranslate"><span class="pre">training_series_length/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">options/1</span></code> terms
+common to all forecasters plus <code class="docutils literal notranslate"><span class="pre">order/1</span></code>, <code class="docutils literal notranslate"><span class="pre">differencing/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">intercept/1</span></code>, <code class="docutils literal notranslate"><span class="pre">missing_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">parameter_count/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">design_rank/1</span></code>, <code class="docutils literal notranslate"><span class="pre">sum_squared_error/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mean_squared_error/1</span></code>, <code class="docutils literal notranslate"><span class="pre">aic/1</span></code>, <code class="docutils literal notranslate"><span class="pre">aicc/1</span></code> (with value <code class="docutils literal notranslate"><span class="pre">none</span></code>
+when undefined), <code class="docutils literal notranslate"><span class="pre">bic/1</span></code>, <code class="docutils literal notranslate"><span class="pre">update_count/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">residuals/1</span></code>
+(with value <code class="docutils literal notranslate"><span class="pre">none</span></code> unless retained) terms, and <code class="docutils literal notranslate"><span class="pre">order_selection/2</span></code>
+when the <code class="docutils literal notranslate"><span class="pre">order(auto)</span></code> option is used.</p>
 </section>
 <section id="prediction-intervals">
 <h2>Prediction intervals<a class="headerlink" href="#prediction-intervals" title="Link to this heading"></a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">forecast_interval/5</span></code> computes analytic prediction interval bounds for
-the next <code class="docutils literal notranslate"><span class="pre">Horizon</span></code> forecasts:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">forecast_interval/5</span></code> predicate computes analytic prediction
+interval bounds for the next <code class="docutils literal notranslate"><span class="pre">Horizon</span></code> forecasts:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>time_series_regression<span class="o">::</span>forecast_interval(<span class="nv">Forecaster</span>, <span class="nv">Horizon</span>, <span class="nv">Lower</span>, <span class="nv">Upper</span>, <span class="nv">Options</span>)
 </pre></div>
 </div>
@@ -641,25 +657,27 @@ the next <code class="docutils literal notranslate"><span class="pre">Horizon</s
 Gaussian innovations and treat the fitted intercept and coefficients as
 known. The <code class="docutils literal notranslate"><span class="pre">h</span></code>-step forecast error variance is the residual variance
 times the sum of the squared <code class="docutils literal notranslate"><span class="pre">psi(0)..psi(h-1)</span></code> weights of the model
-(the AR polynomial combined with the differencing polynomial, when
-<code class="docutils literal notranslate"><span class="pre">differencing/1</span></code> is positive), and the bounds are the point forecast
-plus or minus the standard normal quantile for the requested confidence
-times the forecast error standard deviation. The residual variance is
-<code class="docutils literal notranslate"><span class="pre">sum_squared_error/1</span></code> divided by the residual degrees of freedom
-(<code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code> minus <code class="docutils literal notranslate"><span class="pre">design_rank/1</span></code>). A zero <code class="docutils literal notranslate"><span class="pre">Horizon</span></code> returns
-two empty lists.</p>
-<p><code class="docutils literal notranslate"><span class="pre">Options</span></code> is validated independently from <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> options (a
-<code class="docutils literal notranslate"><span class="pre">domain_error(option,</span> <span class="pre">Option)</span></code> is raised for an unsupported option)
-and supports:</p>
+(the AR polynomial combined with the differencing polynomial, when the
+<code class="docutils literal notranslate"><span class="pre">differencing/1</span></code> option is positive), and the bounds are the point
+forecast plus or minus the standard normal quantile for the requested
+confidence times the forecast error standard deviation. The residual
+variance is the value of the <code class="docutils literal notranslate"><span class="pre">sum_squared_error/1</span></code> diagnostic divided
+by the residual degrees of freedom: the <code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code> diagnostic
+value minus the <code class="docutils literal notranslate"><span class="pre">design_rank/1</span></code> diagnostic value. A zero <code class="docutils literal notranslate"><span class="pre">Horizon</span></code>
+returns two empty lists.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Options</span></code> argument accepts interval options, validated
+independently from the learning options of the <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate.
+The interval options are:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">confidence(Level)</span></code>: central interval coverage, a number in the open
-interval <code class="docutils literal notranslate"><span class="pre">]0.0,</span> <span class="pre">1.0[</span></code> (default: <code class="docutils literal notranslate"><span class="pre">0.95</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">method(normal)</span></code>: the only supported interval method (default, and
-currently the only accepted value).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">confidence(Level)</span></code> sets central interval coverage, a number in the
+open interval <code class="docutils literal notranslate"><span class="pre">]0.0,</span> <span class="pre">1.0[</span></code> (default: <code class="docutils literal notranslate"><span class="pre">0.95</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">method(normal)</span></code> selects the only supported interval method
+(default, and currently the only accepted value).</p></li>
 </ul>
 <p>When the residual degrees of freedom are not positive (an exactly
-determined fit, where <code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code> equals <code class="docutils literal notranslate"><span class="pre">design_rank/1</span></code>), a
-positive <code class="docutils literal notranslate"><span class="pre">Horizon</span></code> raises a
+determined fit, where the <code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code> and <code class="docutils literal notranslate"><span class="pre">design_rank/1</span></code>
+diagnostic values are equal), calling the <code class="docutils literal notranslate"><span class="pre">forecast_interval/5</span></code>
+predicate with a positive <code class="docutils literal notranslate"><span class="pre">Horizon</span></code> raises a
 <code class="docutils literal notranslate"><span class="pre">domain_error(residual_degrees_of_freedom,</span> <span class="pre">Forecaster)</span></code> error, since
 the residual variance is then undefined.</p>
 <p>The standard normal quantile is computed by the
@@ -668,20 +686,35 @@ the residual variance is then undefined.</p>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
 <ul class="simple">
+<li><p>The library fits linear autoregressive models with optional
+differencing and an intercept. Moving-average error terms, dedicated
+seasonal models, multivariate series, and exogenous regressors are not
+provided.</p></li>
 <li><p>Missing observations are handled by casewise deletion at fitting time,
-which discards an entire design matrix row (up to <code class="docutils literal notranslate"><span class="pre">Order</span> <span class="pre">+</span> <span class="pre">1</span></code>
-consecutive rows per missing observation) rather than imputing a value
-or modeling the series with a method robust to missing data (such as a
-state-space or Kalman filter formulation); this reduces the effective
+which discards an entire design matrix row rather than imputing a
+value or modeling the series with a method robust to missing data
+(such as a state-space or Kalman filter formulation). Without
+differencing, one gap can invalidate up to <code class="docutils literal notranslate"><span class="pre">Order</span> <span class="pre">+</span> <span class="pre">1</span></code> consecutive
+rows; differencing can spread it further. This reduces the effective
 sample size and, under automatic order selection, can favor a lower
 order than the same series would with no missing observations.</p></li>
 <li><p>Prediction intervals are the analytic normal-theory approximation
 described above. They do not account for uncertainty in the estimated
-intercept and coefficients (only in future innovations), which
-understates interval width, particularly for short training series or
+intercept and coefficients (only in future innovations), which can
+understate interval width, particularly for short training series or
 high orders; no bootstrap or simulation-based alternative is provided.
 They are also unavailable whenever the forecaster’s window or levels
 are not fully known (see “Missing observations” above).</p></li>
+<li><p>Positive-horizon intervals also require a positive residual degrees of
+freedom: the <code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code> diagnostic value must exceed the
+<code class="docutils literal notranslate"><span class="pre">design_rank/1</span></code> diagnostic value. Learning an exactly determined
+model can succeed even though the <code class="docutils literal notranslate"><span class="pre">forecast_interval/5</span></code> predicate
+cannot provide positive-horizon bounds for it.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">update/3</span></code> predicate keeps the fitted intercept, coefficients,
+and selected order fixed. It advances the forecasting state and error
+totals but does not refit the regression or repeat order selection.
+The recorded information criteria remain those from the original fit;
+learn a new model when parameter or order estimates need to change.</p></li>
 </ul>
 </section>
 </section>

@@ -440,11 +440,12 @@
              
   <section id="mutual-information-feature-selector">
 <span id="library-mutual-information-feature-selector"></span><h1><code class="docutils literal notranslate"><span class="pre">mutual_information_feature_selector</span></code><a class="headerlink" href="#mutual-information-feature-selector" title="Link to this heading"></a></h1>
-<p>This library implements a univariate filter selector for categorical and
-continuous features with categorical targets. It reuses the typed
-discretization, sparse contingency arithmetic, stable ranking,
-selection, model validation, and export facilities of
-<code class="docutils literal notranslate"><span class="pre">feature_selection_protocols</span></code>.</p>
+<p>Use this library to select features that carry information about a
+categorical target. It scores categorical and continuous features
+independently, discretizing continuous values before scoring. It reuses
+the typed discretization, sparse contingency arithmetic, stable ranking,
+selection, model validation, and the export facilities of the
+<code class="docutils literal notranslate"><span class="pre">feature_selection_protocols</span></code> library.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -490,23 +491,22 @@ targets.</p>
 declares continuous features with
 <code class="docutils literal notranslate"><span class="pre">attribute_values(Feature,</span> <span class="pre">continuous)</span></code> and categorical features with
 <code class="docutils literal notranslate"><span class="pre">attribute_values(Feature,</span> <span class="pre">Domain)</span></code>, where <code class="docutils literal notranslate"><span class="pre">Domain</span></code> is a non-empty
-list of atomic values. Complete continuous values must be numbers;
-complete categorical values must belong to their declared domains;
-complete targets must be atomic.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">learn/2</span></code> predicate uses the defaults. The <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate
-accepts an options list as its last argument:</p>
+list of atomic values. Known continuous values must be numbers; known
+categorical values must belong to their declared domains; known targets
+must be atomic.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate accepts an options list as its last argument:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">score_variant(raw)</span></code> or <code class="docutils literal notranslate"><span class="pre">score_variant(normalized)</span></code>, default
-<code class="docutils literal notranslate"><span class="pre">raw</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">preparation_mode(per_feature)</span></code> is the default. The <code class="docutils literal notranslate"><span class="pre">joint</span></code> mode
-excludes rows missing the target or any candidate feature before
-fitting bins, so all features use the same observations.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">discretization(equal_frequency(Bins))</span></code> or
-<code class="docutils literal notranslate"><span class="pre">discretization(equal_width(Bins))</span></code>, with a positive integer bin
-count. The default is <code class="docutils literal notranslate"><span class="pre">equal_frequency(10)</span></code>, applied only to
-continuous features.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">discretization(categorical)</span></code> preserves numeric values as category
-codes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">score_variant(Variant)</span></code> selects <code class="docutils literal notranslate"><span class="pre">raw</span></code> (default) or
+<code class="docutils literal notranslate"><span class="pre">normalized</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">preparation_mode(Mode)</span></code> selects <code class="docutils literal notranslate"><span class="pre">per_feature</span></code> (default) or
+<code class="docutils literal notranslate"><span class="pre">joint</span></code>. Joint preparation excludes rows missing the target or any
+candidate feature before fitting bins, so all features use the same
+observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">discretization(Specification)</span></code> selects <code class="docutils literal notranslate"><span class="pre">equal_frequency(Bins)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">equal_width(Bins)</span></code>, or <code class="docutils literal notranslate"><span class="pre">categorical</span></code>, applied only to continuous
+features. The default is <code class="docutils literal notranslate"><span class="pre">equal_frequency(10)</span></code>; bin counts must be
+positive integers. The <code class="docutils literal notranslate"><span class="pre">categorical</span></code> value preserves numeric values
+as category codes.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">feature_discretization(Feature,</span> <span class="pre">Specification)</span></code> overrides the
 default for one declared feature. The specification can be
 <code class="docutils literal notranslate"><span class="pre">categorical</span></code>, <code class="docutils literal notranslate"><span class="pre">equal_frequency(Bins)</span></code>, or <code class="docutils literal notranslate"><span class="pre">equal_width(Bins)</span></code>.</p></li>
@@ -516,36 +516,37 @@ the positive integer <code class="docutils literal notranslate"><span class="pre
 <li><p><code class="docutils literal notranslate"><span class="pre">selection_strategy(threshold(T))</span></code> selects scores at least the
 numeric <code class="docutils literal notranslate"><span class="pre">T</span></code>.</p></li>
 </ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">learn/2</span></code> predicate uses the default option values.</p>
 <p>Repeated options and repeated overrides are accepted; the first
 applicable occurrence wins. All supplied options are validated,
 including later occurrences. Unknown override feature names are
-rejected. The <code class="docutils literal notranslate"><span class="pre">default_option/1</span></code> and <code class="docutils literal notranslate"><span class="pre">valid_option/1</span></code> predicates
-remain publicly queryable, including the inherited selection options.</p>
+rejected.</p>
 <p>By default, preparation is per feature: observations with an unbound or
-absent feature value or an unbound target are excluded from that feature
-without imputing values. Binning is fitted to its complete cases only.
-Categorical features retain their declared categories unless explicitly
-overridden. Equal-width bins partition the observed range;
-equal-frequency bins use observed quantile cuts without splitting equal
-values. Occupied category counts can be smaller than requested bin
-counts. Applying numeric binning to an atomic non-numeric category is an
-error, not an implicit category encoding.</p>
+absent feature value or an unbound target are excluded from that
+feature’s score without imputing values. Binning is fitted to its
+complete cases only. Categorical features retain their declared
+categories unless explicitly overridden. Equal-width bins partition the
+observed range; equal-frequency bins use observed quantile cuts without
+splitting equal values. Occupied category counts can be smaller than
+requested bin counts. Applying numeric binning to an atomic non-numeric
+category is an error, not an implicit category encoding.</p>
 <p>Scores are sorted in decreasing order, preserving declaration order on
 ties. Top-k selection may include zero-scoring features. Thresholds
 should be chosen for the selected score variant.</p>
 </section>
 <section id="models-and-diagnostics">
 <h2>Models and diagnostics<a class="headerlink" href="#models-and-diagnostics" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">learn/2-3</span></code> predicates return selector terms with this
-representation:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">learn/2</span></code> and <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicates return models using the
+following term representation:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>mutual_information_feature_selector(<span class="nv">FeatureScores</span>, <span class="nv">SelectedFeatures</span>, <span class="nv">Diagnostics</span>)
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">feature_scores/2</span></code> predicate returns sorted <code class="docutils literal notranslate"><span class="pre">Feature-Score</span></code>
 pairs. The <code class="docutils literal notranslate"><span class="pre">selected_features/2</span></code> predicate returns selected names. The
 <code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code>, <code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">selector_options/2</span></code>
-predicates expose metadata and effective options. Diagnostics contain
-<code class="docutils literal notranslate"><span class="pre">model/1</span></code>, <code class="docutils literal notranslate"><span class="pre">example_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">options/1</span></code>, <code class="docutils literal notranslate"><span class="pre">candidate_count/1</span></code>,
+predicates expose metadata and effective options. The <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code>
+argument is a list of diagnostic terms, including <code class="docutils literal notranslate"><span class="pre">model/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">example_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">options/1</span></code>, <code class="docutils literal notranslate"><span class="pre">candidate_count/1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">selected_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">scoring_metric/1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">complete_cases(FeatureCounts)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">discretization(FeatureSpecifications)</span></code>,

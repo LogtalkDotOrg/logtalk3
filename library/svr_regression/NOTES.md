@@ -207,8 +207,8 @@ fields follow the same conventions as `lasso_regression`'s diagnostics,
 with `kernel(Kernel)` added to record the kernel used for training.
 
 Use the `regression_protocols` `diagnostic/2` and `regressor_options/2`
-helper predicates when only a single metadata term or the effective
-options are needed.
+predicates when only a single metadata term or the effective options are
+needed.
 
 
 References

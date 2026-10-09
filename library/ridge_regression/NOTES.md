@@ -121,7 +121,9 @@ Where:
 - `penalty_scaling(encoded_feature_standardization)` records that the ridge penalty is scaled as if each penalized encoded feature column had been standardized before applying the L2 penalty.
 - `encoded_feature_count(FeatureCount)` stores the number of numeric features induced by the encoder list, including missing-value indicator features.
 
-Use the `regression_protocols` `diagnostic/2` and `regressor_options/2` helper predicates when you only need a single metadata term or the effective options.
+Use the `regression_protocols` `diagnostic/2` and `regressor_options/2`
+predicates when you only need a single metadata term or the effective
+options.
 
 Options
 -------

@@ -441,10 +441,10 @@
              
   <section id="relieff-feature-selector">
 <span id="library-relieff-feature-selector"></span><h1><code class="docutils literal notranslate"><span class="pre">relieff_feature_selector</span></code><a class="headerlink" href="#relieff-feature-selector" title="Link to this heading"></a></h1>
-<p>This library implements multiclass ReliefF joint feature selection. All
-candidate features determine nearest neighbors using normalized
-Manhattan differences; the resulting neighborhood updates score each
-feature. Scores are signed and are not clamped.</p>
+<p>Use this library to select features for multiclass classification with
+ReliefF. All candidate features determine nearest neighbors using
+normalized Manhattan differences; the resulting neighborhood updates
+score each feature. Scores are signed and are not clamped.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -479,14 +479,14 @@ categorical values. Continuous observations must be numbers; categorical
 observations and known class targets must be atomic. Numeric class
 labels are categorical codes, not regression measurements. Categorical
 differences use term identity.</p>
-<p>Unknown targets are excluded. The default complete-case policy drops
-rows missing any candidate feature. After exclusions, at least two
-classes are required, with at least two rows in each class. An
+<p>Rows with an unbound target are excluded. The default complete-case
+policy drops rows missing any candidate feature. After exclusions, at
+least two classes are required, with at least two rows in each class. An
 insufficient population raises <code class="docutils literal notranslate"><span class="pre">domain_error(relief_population,</span> <span class="pre">...)</span></code>.
 Invalid declarations raise <code class="docutils literal notranslate"><span class="pre">domain_error(feature_type,</span> <span class="pre">...)</span></code>; invalid
 known values raise type errors. Observed categorical values must belong
-to their declared domains; an unknown category raises
-<code class="docutils literal notranslate"><span class="pre">domain_error(feature_value,</span> <span class="pre">Feature-Value)</span></code>. Shared dataset
+to their declared domains. A category outside its declared domain raises
+a <code class="docutils literal notranslate"><span class="pre">domain_error(feature_value,</span> <span class="pre">Feature-Value)</span></code> error. Shared dataset
 validation rejects duplicate or undeclared features and inconsistent
 example counts.</p>
 <p>Every anchor uses up to K nearest same-class hits, excluding itself by
@@ -505,11 +505,11 @@ to binary Relief.</p>
 </section>
 <section id="missing-values">
 <h2>Missing values<a class="headerlink" href="#missing-values" title="Link to this heading"></a></h2>
-<p>The probabilistic policy retains missing features without binding or
-imputing their input variables. Each class uses its empirical observed
-feature distribution, with pooled fallback when a class has no observed
-value for a column. Constant and entirely missing columns contribute
-zero.</p>
+<p>The probabilistic policy retains rows with missing feature values
+without binding or imputing their input variables. Each class uses its
+empirical observed feature distribution, with pooled fallback when a
+class has no observed value for a column. Constant and entirely missing
+columns contribute zero.</p>
 <p>For categorical features, observed/missing differences are <code class="docutils literal notranslate"><span class="pre">1-P_C(v)</span></code>
 for the missing row’s class C. Missing/missing differences for classes C
 and D are <code class="docutils literal notranslate"><span class="pre">1-sum(P_C(v)*P_D(v))</span></code>. For continuous features, both cases
@@ -524,37 +524,41 @@ caches.</p>
 </section>
 <section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">learn/2</span></code> predicate uses defaults. The <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate
-accepts an options list as its last argument:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate accepts the following options:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">selection_strategy(top_k(10))</span></code> is the default. <code class="docutils literal notranslate"><span class="pre">top_k(K)</span></code>
-requires a positive integer; <code class="docutils literal notranslate"><span class="pre">all</span></code> selects all features, and
-<code class="docutils literal notranslate"><span class="pre">threshold(T)</span></code> selects scores at least the numeric threshold T.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">number_of_neighbors(10)</span></code> is the default positive integer K. Larger
-K than an available class neighborhood is valid.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">neighbor_weighting(uniform)</span></code> is the default. <code class="docutils literal notranslate"><span class="pre">rank(Sigma)</span></code>
-requires a positive integer and uses zero-based
-<code class="docutils literal notranslate"><span class="pre">exp(-(rank/Sigma)^2)</span></code> weights, normalized separately for each hit
-or miss list.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">sample_size(all)</span></code> processes eligible rows once in dataset order
-without accessing the RNG. A positive integer M samples M anchors
-uniformly with replacement. Neighbors always come from the full
-eligible pool.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">random_seed(1357911)</span></code> is the default positive integer seed.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">missing_values(complete_case)</span></code> is the default; <code class="docutils literal notranslate"><span class="pre">probabilistic</span></code>
-uses empirical expected differences.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">selection_strategy(Strategy)</span></code> selects <code class="docutils literal notranslate"><span class="pre">top_k(K)</span></code> (default:
+<code class="docutils literal notranslate"><span class="pre">top_k(10)</span></code>), <code class="docutils literal notranslate"><span class="pre">all</span></code>, or <code class="docutils literal notranslate"><span class="pre">threshold(T)</span></code>. Top-k selects up to the
+positive integer <code class="docutils literal notranslate"><span class="pre">K</span></code> features; <code class="docutils literal notranslate"><span class="pre">all</span></code> selects all candidates, and
+<code class="docutils literal notranslate"><span class="pre">threshold(T)</span></code> selects scores at least the numeric threshold <code class="docutils literal notranslate"><span class="pre">T</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">number_of_neighbors(K)</span></code> sets a positive integer count (default:
+<code class="docutils literal notranslate"><span class="pre">10</span></code>). Larger K than an available class neighborhood is valid.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">neighbor_weighting(Weighting)</span></code> selects <code class="docutils literal notranslate"><span class="pre">uniform</span></code> (default) or
+<code class="docutils literal notranslate"><span class="pre">rank(Sigma)</span></code>. The rank scale <code class="docutils literal notranslate"><span class="pre">Sigma</span></code> must be a positive integer.
+Rank weighting uses zero-based <code class="docutils literal notranslate"><span class="pre">exp(-(rank/Sigma)^2)</span></code> weights,
+normalized separately for each hit or miss list.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sample_size(Size)</span></code> selects <code class="docutils literal notranslate"><span class="pre">all</span></code> (default) or a positive integer.
+With <code class="docutils literal notranslate"><span class="pre">all</span></code>, it processes eligible rows once in dataset order without
+accessing the RNG. A positive integer M samples M anchors uniformly
+with replacement. Neighbors always come from the full eligible pool.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">random_seed(Seed)</span></code> sets a positive integer sampling seed (default:
+<code class="docutils literal notranslate"><span class="pre">1357911</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">missing_values(Policy)</span></code> selects <code class="docutils literal notranslate"><span class="pre">complete_case</span></code> (default) or
+<code class="docutils literal notranslate"><span class="pre">probabilistic</span></code>. Probabilistic handling uses empirical expected
+differences.</p></li>
 </ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">learn/2</span></code> predicate uses the default option values.</p>
+<p>An anchor is an eligible row whose neighbor comparisons contribute to
+the feature scores.</p>
 <p>Repeated options are accepted and their first occurrence takes
-precedence. Incomplete and unknown options are rejected. The inherited
-<code class="docutils literal notranslate"><span class="pre">valid_option/1</span></code> and <code class="docutils literal notranslate"><span class="pre">default_option/1</span></code> hooks remain public.
-Sampling uses <code class="docutils literal notranslate"><span class="pre">fast_random(xoshiro128pp)</span></code> with catch-based seed
-restoration on success, failure, and exceptions. Concurrent sampled
-calls sharing this RNG should be serialized externally.</p>
+precedence. Incomplete and unknown options are rejected. Sampling uses
+<code class="docutils literal notranslate"><span class="pre">fast_random(xoshiro128pp)</span></code> with catch-based seed restoration on
+success, failure, and exceptions. Concurrent sampled calls sharing this
+RNG should be serialized externally.</p>
 </section>
 <section id="models-and-api">
 <h2>Models and API<a class="headerlink" href="#models-and-api" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">learn/2-3</span></code> predicates return ground, exportable models of this
-shape:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">learn/2</span></code> and <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicates return ground, exportable
+models using the following term representation:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>relieff_feature_selector(<span class="nv">FeatureScores</span>, <span class="nv">SelectedFeatures</span>, <span class="nv">Diagnostics</span>)
 </pre></div>
 </div>
@@ -565,7 +569,8 @@ selection may include zero or negative scores. The <code class="docutils literal
 <code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">selector_options/2</span></code> predicates expose metadata
 and effective options. The <code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code> predicate enumerates
 matching terms.</p>
-<p>Diagnostics include <code class="docutils literal notranslate"><span class="pre">model/1</span></code>, <code class="docutils literal notranslate"><span class="pre">example_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">options/1</span></code>,
+<p>The <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> argument is a list of diagnostic terms, including
+<code class="docutils literal notranslate"><span class="pre">model/1</span></code>, <code class="docutils literal notranslate"><span class="pre">example_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">options/1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">variant(multiclass)</span></code>, <code class="docutils literal notranslate"><span class="pre">candidate_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">selected_count/1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">features(FeatureTypes)</span></code>, <code class="docutils literal notranslate"><span class="pre">eligible_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">excluded_count/1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">eligible_positions/1</span></code>, <code class="docutils literal notranslate"><span class="pre">samples/1</span></code>,

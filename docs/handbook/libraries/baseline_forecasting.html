@@ -96,6 +96,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#missing-observations">Missing observations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#immutable-online-updates">Immutable online updates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#representation-and-diagnostics">Representation and diagnostics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="basic_types.html"><code class="docutils literal notranslate"><span class="pre">basic_types</span></code></a></li>
@@ -441,12 +442,14 @@
              
   <section id="baseline-forecasting">
 <span id="library-baseline-forecasting"></span><h1><code class="docutils literal notranslate"><span class="pre">baseline_forecasting</span></code><a class="headerlink" href="#baseline-forecasting" title="Link to this heading"></a></h1>
-<p>This library implements univariate naive, seasonal naive, mean, and
-drift forecasting. These methods provide reference forecasts for
-evaluating more complex models and are also useful directly. The object
-implements <code class="docutils literal notranslate"><span class="pre">forecaster_protocol</span></code> and imports <code class="docutils literal notranslate"><span class="pre">forecaster_common</span></code>
-from the <code class="docutils literal notranslate"><span class="pre">time_series_protocols</span></code> library for dataset collection,
-validation, diagnostics, forecast construction, and export support.</p>
+<p>This library provides four straightforward ways to forecast a single
+time series: naive, seasonal naive, mean, and drift forecasting. Use
+these methods on their own or as reference forecasts when evaluating
+more complex models. The <code class="docutils literal notranslate"><span class="pre">baseline_forecasting</span></code> object implements the
+<code class="docutils literal notranslate"><span class="pre">forecaster_protocol</span></code> protocol and imports the <code class="docutils literal notranslate"><span class="pre">forecaster_common</span></code>
+category from the <code class="docutils literal notranslate"><span class="pre">time_series_protocols</span></code> library for dataset
+collection, validation, diagnostics, forecast construction, and export
+support.</p>
 <p>Datasets are objects implementing <code class="docutils literal notranslate"><span class="pre">time_series_dataset_protocol</span></code>.
 Observations can be numbers or unbound variables representing missing
 values. No backend-specific facilities are required.</p>
@@ -483,7 +486,8 @@ diagnostics, and export round-trips.</p>
 </section>
 <section id="models-and-options">
 <h2>Models and options<a class="headerlink" href="#models-and-options" title="Link to this heading"></a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">learn/3</span></code> accepts <code class="docutils literal notranslate"><span class="pre">model(Method)</span></code> with default <code class="docutils literal notranslate"><span class="pre">model(naive)</span></code>:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate accepts a <code class="docutils literal notranslate"><span class="pre">model(Method)</span></code> option to select
+the forecasting method. The default method is <code class="docutils literal notranslate"><span class="pre">naive</span></code>. Choose from:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">naive</span></code>: repeats the final observation. Requires at least one
 position.</p></li>
@@ -497,23 +501,22 @@ Requires at least one position and one known observation.</p></li>
 Requires at least two positions. For horizon step <code class="docutils literal notranslate"><span class="pre">h</span></code>, the forecast
 is <code class="docutils literal notranslate"><span class="pre">Last</span> <span class="pre">+</span> <span class="pre">h</span> <span class="pre">*</span> <span class="pre">(Last</span> <span class="pre">-</span> <span class="pre">First)</span> <span class="pre">/</span> <span class="pre">(Length</span> <span class="pre">-</span> <span class="pre">1)</span></code>.</p></li>
 </ul>
-<p>For <code class="docutils literal notranslate"><span class="pre">seasonal_naive</span></code>, an optional <code class="docutils literal notranslate"><span class="pre">frequency(Frequency)</span></code> takes
-precedence over the dataset’s <code class="docutils literal notranslate"><span class="pre">frequency/1</span></code> metadata. The frequency
-must be a positive integer; <code class="docutils literal notranslate"><span class="pre">1</span></code> is accepted and gives persistence
-forecasts. Without an explicit option, the dataset must supply a valid
-frequency. Otherwise, learning raises
+<p>For the <code class="docutils literal notranslate"><span class="pre">seasonal_naive</span></code> method, a <code class="docutils literal notranslate"><span class="pre">frequency(Frequency)</span></code> learning
+option takes precedence over the dataset’s <code class="docutils literal notranslate"><span class="pre">frequency/1</span></code> predicate.
+The frequency must be a positive integer; <code class="docutils literal notranslate"><span class="pre">1</span></code> is accepted and gives
+persistence forecasts. Without an explicit option, the dataset must
+supply a valid frequency. Otherwise, learning raises
 <code class="docutils literal notranslate"><span class="pre">domain_error(seasonal_frequency,</span> <span class="pre">Dataset)</span></code>.</p>
-<p>A <code class="docutils literal notranslate"><span class="pre">frequency/1</span></code> option supplied for any non-seasonal model raises
+<p>Supplying a <code class="docutils literal notranslate"><span class="pre">frequency/1</span></code> option for any non-seasonal model raises
 <code class="docutils literal notranslate"><span class="pre">domain_error(baseline_forecasting_option,</span> <span class="pre">Option)</span></code>. Effective options
 in diagnostics are canonical: <code class="docutils literal notranslate"><span class="pre">[model(Method)]</span></code>, or
 <code class="docutils literal notranslate"><span class="pre">[model(seasonal_naive),</span> <span class="pre">frequency(Frequency)]</span></code> with the resolved
-frequency. The public <code class="docutils literal notranslate"><span class="pre">valid_option/1</span></code> and <code class="docutils literal notranslate"><span class="pre">default_option/1</span></code> hooks
-can be queried through the inherited options interface.</p>
-<p><code class="docutils literal notranslate"><span class="pre">forecast/3</span></code> accepts a non-negative integer horizon. A zero horizon
-returns an empty list after forecaster validation. Forecasting does not
-mutate the model. Mean and drift forecasts use floating-point
-arithmetic; naive and seasonal naive preserve the numeric values they
-repeat.</p>
+frequency.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">forecast/3</span></code> predicate accepts a non-negative integer horizon. A
+zero horizon returns an empty list after forecaster validation.
+Forecasting does not mutate the model. Mean and drift forecasts use
+floating-point arithmetic; naive and seasonal naive preserve the numeric
+values they repeat.</p>
 </section>
 <section id="missing-observations">
 <h2>Missing observations<a class="headerlink" href="#missing-observations" title="Link to this heading"></a></h2>
@@ -533,18 +536,19 @@ cycle <code class="docutils literal notranslate"><span class="pre">[10,</span> <
 divisor uses the elapsed series length, not the known-observation
 count. For <code class="docutils literal notranslate"><span class="pre">[10,</span> <span class="pre">_,</span> <span class="pre">14]</span></code>, the next drift forecast is <code class="docutils literal notranslate"><span class="pre">16.0</span></code>.</p></li>
 </ul>
-<p>If a requested forecast needs a missing observation, <code class="docutils literal notranslate"><span class="pre">forecast/3</span></code>
-raises <code class="docutils literal notranslate"><span class="pre">domain_error(missing_observation,</span> <span class="pre">Forecaster)</span></code> instead of
+<p>If an observation required to calculate a forecast is missing, the
+<code class="docutils literal notranslate"><span class="pre">forecast/3</span></code> predicate raises a
+<code class="docutils literal notranslate"><span class="pre">domain_error(missing_observation,</span> <span class="pre">Forecaster)</span></code> error instead of
 returning unbound forecast values. A zero horizon succeeds even with
 missing state.</p>
 </section>
 <section id="immutable-online-updates">
 <h2>Immutable online updates<a class="headerlink" href="#immutable-online-updates" title="Link to this heading"></a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">update/3</span></code> appends one numeric or missing observation and returns a
-new forecaster. Neither the original forecaster nor the supplied missing
-observation variable is instantiated. Missing variables in returned
-state are copied rather than shared with the original state or input
-variable.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">update/3</span></code> predicate appends one numeric or missing observation
+and returns a new forecaster. Neither the original forecaster nor a
+supplied missing observation variable is instantiated. Missing variables
+in returned state are copied rather than shared with the original state
+or input variable.</p>
 <p>Every update advances the elapsed length and update count. Naive
 replaces its final value; seasonal naive advances its cycle even for
 missing observations; mean updates its sum and known count only for
@@ -556,12 +560,13 @@ record updates.</p>
 <p>A numeric update can recover a missing final observation for naive or
 drift. Seasonal slots become known as new numeric observations replace
 them. A missing original first drift observation cannot be repaired by
-appending observations; relearn after correcting the dataset.</p>
+appending observations. In that case, correct the dataset and learn a
+new forecaster.</p>
 </section>
 <section id="representation-and-diagnostics">
 <h2>Representation and diagnostics<a class="headerlink" href="#representation-and-diagnostics" title="Link to this heading"></a></h2>
-<p>Models use <code class="docutils literal notranslate"><span class="pre">baseline_forecaster(Method,</span> <span class="pre">State,</span> <span class="pre">Diagnostics)</span></code>. State
-is:</p>
+<p>Models use a <code class="docutils literal notranslate"><span class="pre">baseline_forecaster(Method,</span> <span class="pre">State,</span> <span class="pre">Diagnostics)</span></code> term
+representation. The <code class="docutils literal notranslate"><span class="pre">State</span></code> argument uses one of the following terms:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">naive_state(Last)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">seasonal_naive_state(Frequency,</span> <span class="pre">Cycle)</span></code>, with the final cycle in
@@ -569,24 +574,47 @@ chronological order</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">mean_state(Sum,</span> <span class="pre">ObservedCount)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">drift_state(First,</span> <span class="pre">Last)</span></code></p></li>
 </ul>
-<p>Diagnostics contain <code class="docutils literal notranslate"><span class="pre">model(baseline_forecasting)</span></code>, <code class="docutils literal notranslate"><span class="pre">method(Method)</span></code>,
+<p>The <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> argument is a list of diagnostic terms. It contains
+<code class="docutils literal notranslate"><span class="pre">model(baseline_forecasting)</span></code>, <code class="docutils literal notranslate"><span class="pre">method(Method)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">training_series_length(Length)</span></code>, <code class="docutils literal notranslate"><span class="pre">options(EffectiveOptions)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">observed_count(Count)</span></code>, <code class="docutils literal notranslate"><span class="pre">missing_count(MissingCount)</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">update_count(UpdateCount)</span></code>. Length includes updates and missing
-positions; <code class="docutils literal notranslate"><span class="pre">Count</span> <span class="pre">+</span> <span class="pre">MissingCount</span> <span class="pre">=</span> <span class="pre">Length</span></code>. The original fitted length
-is <code class="docutils literal notranslate"><span class="pre">Length</span> <span class="pre">-</span> <span class="pre">UpdateCount</span></code>. Initial models have zero updates.</p>
-<p><code class="docutils literal notranslate"><span class="pre">check_forecaster/1</span></code> validates state, options, and diagnostic
-consistency, including permitted missing variables.
-<code class="docutils literal notranslate"><span class="pre">valid_forecaster/1</span></code> succeeds only when validation succeeds without an
-exception. The inherited <code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code>, <code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">forecaster_options/2</span></code> expose metadata. Export predicates serialize
-the model as a single fact; <code class="docutils literal notranslate"><span class="pre">print_forecaster/1</span></code> prints its method,
-state, and diagnostics.</p>
+<code class="docutils literal notranslate"><span class="pre">update_count(UpdateCount)</span></code> terms. The <code class="docutils literal notranslate"><span class="pre">Length</span></code> argument includes
+updates and missing positions: <code class="docutils literal notranslate"><span class="pre">Count</span> <span class="pre">+</span> <span class="pre">MissingCount</span> <span class="pre">=</span> <span class="pre">Length</span></code>. The
+original fitted length is <code class="docutils literal notranslate"><span class="pre">Length</span> <span class="pre">-</span> <span class="pre">UpdateCount</span></code>. Initial models have
+zero updates.</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">check_forecaster/1</span></code> predicate to validate the state, options,
+and diagnostic consistency, including permitted missing variables. The
+<code class="docutils literal notranslate"><span class="pre">valid_forecaster/1</span></code> predicate succeeds only when validation completes
+without an exception. To inspect metadata, use the inherited
+<code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code>, <code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">forecaster_options/2</span></code>
+predicates. The export predicates serialize the model as a single fact,
+while the <code class="docutils literal notranslate"><span class="pre">print_forecaster/1</span></code> predicate prints its method, state, and
+diagnostics.</p>
 <p>Except for the seasonal cycle, state size is constant. Learning is
 linear in series length, and forecasting is linear in horizon for fixed
 frequency. Seasonal updates copy a cycle; other state updates are
-constant-size. Prediction intervals, automatic model selection,
-transformations, and training-error diagnostics are not provided.</p>
+constant-size.</p>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
+<p>The library provides only naive, seasonal naive, mean, and drift
+forecasts. It does not fit smoothing parameters or regressors, select a
+method automatically, or estimate seasonal frequency. Choose the
+<code class="docutils literal notranslate"><span class="pre">model/1</span></code> option explicitly when the default naive method is not
+appropriate. Seasonal naive requires a supplied frequency and at least
+one complete cycle of positions.</p>
+<p>Missing observations are not imputed. Learning requires at least one
+known observation, but that alone does not guarantee a positive-horizon
+forecast: naive needs the final value, seasonal naive needs the
+requested cycle slots, and drift needs both endpoints. Appending numeric
+observations cannot repair a missing original first drift observation;
+correct the dataset and relearn.</p>
+<p>Prediction intervals, transformations, and training-error diagnostics
+are not provided. Models retain only the state needed by their method,
+not the observation history. Drift extrapolates the line through the
+first and last values, so those endpoints determine its trend; mean
+forecasts use all known values without discounting older observations.
+Forecasts are not constrained to be non-negative or integer-valued.</p>
 </section>
 </section>
 

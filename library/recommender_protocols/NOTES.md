@@ -21,14 +21,14 @@ ________________________________________________________________________
 `recommender_protocols`
 =======================
 
-This library provides protocols used in the implementation of recommendation
-algorithms. Datasets are represented as objects implementing the
+Use this library when implementing a recommendation algorithm or providing
+a test dataset for one. Rating datasets are objects implementing the
 `rating_dataset_protocol` protocol. Content-based datasets also implement
 `item_content_dataset_protocol`, declaring the full item catalog independently
 of ratings. Recommenders are represented as objects importing the
-`recommender_common` category. This category provides shared
-helpers for dataset validation, rating-matrix utilities (user and item rating
-vectors, mean-rating baselines), similarity metrics, top-k retrieval,
+`recommender_common` category. This category provides common auxiliary
+predicates for dataset validation, rating-matrix utilities (user and item
+rating vectors, mean-rating baselines), similarity metrics, top-k retrieval,
 diagnostics metadata, export, and pretty-printing support.
 
 The `recommender_protocol` protocol declares the generic `score/4` predicate
@@ -54,22 +54,22 @@ recommender implementations store effective training options in the
 diagnostics metadata under an `options(Options)` term.
 
 Implementations must define the protected `recommender_valid_data/1`
-hook to validate model data and its consistency with diagnostics without
-instantiating the model. The shared `check_recommender/1` also requires
-a proper diagnostics list of compound terms containing exactly one
+predicate to validate model data and its consistency with diagnostics without
+instantiating the model. The shared `check_recommender/1` predicate also
+requires a proper diagnostics list of compound terms containing exactly one
 `model(Atom)`, `rating_count(PositiveInteger)`, and `options(Options)`.
 Effective options must be ground compound terms valid for the receiving
 implementation. Other diagnostics terms are allowed. Diagnostics are
 extracted from the last model argument by default; implementations can
-override `recommender_diagnostics_data/2` to use another representation.
-A printing template alone does not establish model validity.
+override the `recommender_diagnostics_data/2` predicate to use another
+representation. A printing template alone does not establish model validity.
 
 Dataset ratings are a sparse ``User``-``Item``-``Rating`` relation: at
-most one rating is declared per user-item pair, and the declared
-`rating_count/1` must match the number of ratings enumerated by
-`rating/3`. Unlike the `time_series_dataset_protocol` datasets, there is
-no index-sequence requirement, since users and items are identified by
-arbitrary atomic identifiers rather than positions in a sequence.
+most one rating is declared per user-item pair. The dataset's
+`rating_count/1` predicate must match the number of ratings enumerated by
+its `rating/3` predicate. Unlike the `time_series_dataset_protocol` datasets,
+there is no index-sequence requirement, since users and items are identified
+by arbitrary atomic identifiers rather than positions in a sequence.
 Identifier validation precedes duplicate checking: variables cause an
 instantiation error and non-atomic identifiers cause an atomic type error.
 
@@ -144,19 +144,19 @@ Rating-matrix utilities
 
 The `recommender_common` category provides, among others, the following predicates:
 
-- The `dataset_ratings/2` predicate collects ratings as `rating(User, Item, Rating)` terms, checking atomic identifiers, duplicate user-item pairs, and the declared rating count.
-- The `check_ratings/2` predicate validates non-empty ratings, atomic identifiers, numeric values, and membership in any declared rating scale.
-- The `users/2` and `items/2` predicates return sorted distinct identifiers appearing in ratings, not in an independent content catalog.
-- The `user_vector/3` and `item_vector/3` predicates return sparse `Item-Rating` or `User-Rating` vectors.
-- The `global_mean_rating/2`, `user_mean_rating/3`, and `item_mean_rating/3` predicates compute mean-rating baselines.
-- The `cosine_similarity/3`, `pearson_similarity/3`, `jaccard_similarity/3`, `msd_similarity/3`, and `spearman_similarity/3` predicates send `similarity/3` to the corresponding metric object.
-- The `top_k/3` predicate returns up to `K` highest-scoring `Key-Score` pairs in decreasing score order.
-- The `check_top_n/1` predicate validates a requested recommendation count.
-- The `check_query_identifiers/2` predicate checks instantiated atomic user/item identifiers.
-- The `dataset_rating_scale/2` predicate returns `none` or a validated `scale(Min, Max)`.
-- The `fallback_rating/5` predicate returns the user mean, otherwise the item mean, otherwise the supplied global mean.
-- The `clip_rating/3` predicate clips to a validated scale, leaving ratings unchanged for `none`.
-- The `recommend_from_ratings/5` predicate scores unrated items observed in training ratings through self `score/4`. Equal scores use descending standard item order. Content-based recommenders use their independent catalog instead.
+- `dataset_ratings/2` collects ratings as `rating(User, Item, Rating)` terms, checking atomic identifiers, duplicate user-item pairs, and the declared rating count.
+- `check_ratings/2` validates non-empty ratings, atomic identifiers, numeric values, and membership in any declared rating scale.
+- `users/2` and `items/2` return sorted distinct identifiers appearing in ratings, not in an independent content catalog.
+- `user_vector/3` and `item_vector/3` return sparse `Item-Rating` or `User-Rating` vectors.
+- `global_mean_rating/2`, `user_mean_rating/3`, and `item_mean_rating/3` compute mean-rating baselines.
+- `cosine_similarity/3`, `pearson_similarity/3`, `jaccard_similarity/3`, `msd_similarity/3`, and `spearman_similarity/3` send `similarity/3` to the corresponding metric object.
+- `top_k/3` returns up to `K` highest-scoring `Key-Score` pairs in decreasing score order.
+- `check_top_n/1` validates a requested recommendation count.
+- `check_query_identifiers/2` checks instantiated atomic user/item identifiers.
+- `dataset_rating_scale/2` returns `none` or a validated `scale(Min, Max)` term.
+- `fallback_rating/5` returns the user mean, otherwise the item mean, otherwise the supplied global mean.
+- `clip_rating/3` clips to a validated scale, leaving ratings unchanged for `none`.
+- `recommend_from_ratings/5` scores unrated items observed in training ratings by sending itself a `score/4` message. Equal scores use descending standard item order. Content-based recommenders use their independent catalog instead.
 
 These are declared `protected`, intended to be reused by concrete
 recommender libraries such as `knn_user_recommender`,
@@ -252,13 +252,13 @@ Pearson similarity reflects whether they vary together around their own
 means; the two can disagree, sometimes sharply, as the test suite's
 `alice`-`bob` example (cosine `0.94`, Pearson `-1.0`) shows.
 
-The metrics reuse helpers in `similarity_metric_common`, including
+The metrics reuse auxiliary predicates in `similarity_metric_common`, including
 `common_pairs/3`, `split_pairs/3`, `dot_product/3`, `scale_values/2`,
 `normalize_values/2`, `normalize_vector/2`,
 `centered_normalized_values/2`, and `bounded_similarity/2`.
 The existing `vector_norm/2`, `sum_of_squares_list/2`, `mean_values/2`,
-and `center/3` helpers retain their original arithmetic contracts;
-custom metrics can reuse the normalized helpers when only a similarity
+and `center/3` predicates retain their original arithmetic contracts;
+custom metrics can reuse the normalization predicates when only a similarity
 score, rather than an original-magnitude norm, is needed.
 
 

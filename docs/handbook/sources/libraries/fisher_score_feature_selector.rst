@@ -3,11 +3,12 @@
 ``fisher_score_feature_selector``
 =================================
 
-This library implements a univariate filter selector for numeric
-features and categorical targets using Fisher scores. The selector
-reuses the ``feature_selection_protocols`` library for dataset
-validation, stable ranking, selection strategies, diagnostics, model
-validation, and export. The ``fisher_score`` object is provided by
+Use this library to rank numeric features by how well they separate
+categorical target classes. It scores each feature independently using
+Fisher scores and selects a subset. The selector reuses the
+``feature_selection_protocols`` library for dataset validation, stable
+ranking, selection strategies, diagnostics, model validation, and
+export. The ``fisher_score`` object is provided by
 ``feature_selection_protocols``, implements the shared scoring protocol,
 and can be used independently of the selector.
 
@@ -51,8 +52,8 @@ Equivalently, the within-class denominator is ``sum(n_c * variance_c)``
 using population class variances. Both sums use the same scaled values;
 their common scaling cancels in the ratio.
 
-The input lists must be proper lists of equal length. Complete feature
-values must be numeric and complete target labels must be atomic. An
+The input lists must be proper lists of equal length. Known feature
+values must be numeric and known target labels must be atomic. An
 observation with an unbound feature value or target is excluded without
 binding that variable. Numeric target labels are categorical class
 codes, not regression targets.
@@ -74,15 +75,16 @@ positive within-class degrees of freedom.
 Selection and options
 ---------------------
 
-The dataset object must implement ``feature_dataset_protocol`` and
-declare each feature with ``attribute_values(Feature, continuous)``.
-Categorical feature declarations are rejected with a
-``domain_error(feature_type, ...)`` exception, rather than silently
-turning category codes into measurements.
+The dataset object must implement ``feature_dataset_protocol``. Its
+``attribute_values/2`` predicate declares each feature as
+``attribute_values(Feature, continuous)``. Categorical feature
+declarations are rejected with a ``domain_error(feature_type, ...)``
+exception, rather than silently turning category codes into
+measurements.
 
 The ``learn/2`` predicate uses the default
 ``selection_strategy(top_k(10))`` option. The ``learn/3`` predicate
-accepts the following strategies:
+accepts the following selection options:
 
 - ``selection_strategy(top_k(K))``: selects up to ``K`` features, where
   ``K`` is a positive integer. Fewer candidates are not an error.
@@ -106,8 +108,8 @@ when the requested count exceeds the number with positive scores.
 Models and diagnostics
 ----------------------
 
-The ``learn/2-3`` predicates return selector terms with the following
-shape:
+The ``learn/2`` and ``learn/3`` predicates return models using the
+following term representation:
 
 ::
 
@@ -117,12 +119,13 @@ The ``feature_scores/2`` predicate returns all sorted ``Feature-Score``
 pairs. The ``selected_features/2`` predicate returns the selected
 feature names. The ``diagnostics/2``, ``diagnostic/2``, and
 ``selector_options/2`` predicates expose metadata and effective options.
-Diagnostics include ``model/1``, ``example_count/1``, ``options/1``,
-``candidate_count/1``, ``selected_count/1``,
-``scoring_metric(fisher_score)``, and ``complete_cases(FeatureCounts)``.
-The latter records a ``Feature-Count`` pair for each declared feature;
-subtracting that count from the example count gives excluded
-observations.
+The ``Diagnostics`` argument is a list of diagnostic terms, including
+``model/1``, ``example_count/1``, ``options/1``, ``candidate_count/1``,
+``selected_count/1``, ``scoring_metric(fisher_score)``, and
+``complete_cases(FeatureCounts)``. The ``complete_cases(FeatureCounts)``
+diagnostic term records a ``Feature-Count`` pair for each declared
+feature. Subtracting that count from the example count gives the number
+of observations excluded from that feature's score.
 
 The ``check_selector/1`` predicate verifies ground model structure,
 unique and decreasing scores, the recorded metric and options, selection

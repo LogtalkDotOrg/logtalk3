@@ -441,13 +441,14 @@
              
   <section id="slope-one-recommender">
 <span id="library-slope-one-recommender"></span><h1><code class="docutils literal notranslate"><span class="pre">slope_one_recommender</span></code><a class="headerlink" href="#slope-one-recommender" title="Link to this heading"></a></h1>
-<p>Weighted Slope One collaborative filtering using additive item
-deviations and co-rating support counts. The object imports
-<code class="docutils literal notranslate"><span class="pre">recommender_common</span></code> and implements <code class="docutils literal notranslate"><span class="pre">recommender_protocol</span></code>. The
-<code class="docutils literal notranslate"><span class="pre">score/4</span></code> predicate returns a predicted rating. Datasets implement
-<code class="docutils literal notranslate"><span class="pre">rating_dataset_protocol</span></code> with atomic identifiers, unique user/item
-pairs, numeric ratings, a matching positive count, and an optional
-numeric ordered rating scale.</p>
+<p>This library predicts ratings using weighted Slope One collaborative
+filtering: average rating differences between items, weighted by the
+number of users who rated both. The library object imports the
+<code class="docutils literal notranslate"><span class="pre">recommender_common</span></code> category and implements <code class="docutils literal notranslate"><span class="pre">recommender_protocol</span></code>
+protocol. The <code class="docutils literal notranslate"><span class="pre">score/4</span></code> predicate returns a predicted rating. Datasets
+implement the <code class="docutils literal notranslate"><span class="pre">rating_dataset_protocol</span></code> protocol with atomic
+identifiers, unique user/item pairs, numeric ratings, a matching
+positive count, and an optional numeric ordered rating scale.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -481,11 +482,13 @@ link in a web browser.</p>
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate accepts the following options:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">min_support(1)</span></code>: positive minimum co-rating count of a contributing
-pair.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">clip_to_scale(true)</span></code>: <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; clips estimates and
-fallbacks to the inclusive declared scale. With no scale it is a
-no-op.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">min_support(Count)</span></code> sets the minimum number of users who rated both
+items in a contributing pair to a positive integer. The default is
+<code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">clip_to_scale(Boolean)</span></code> selects <code class="docutils literal notranslate"><span class="pre">true</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">false</span></code>.
+When enabled, it clips estimates and fallbacks to the inclusive
+declared scale. Without a declared scale, it leaves estimates
+unchanged.</p></li>
 </ul>
 <p>There are no similarity metric or neighborhood-size options.</p>
 <p>The learning options can be retrieved from a learned recommender model
@@ -515,11 +518,12 @@ known item’s mean, otherwise the global mean. This also covers unknown
 identifiers and catalogs with no co-rated item pairs. Query identifiers
 must be instantiated atomic terms. Clipping follows either kind of
 estimate.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">recommend(Model,</span> <span class="pre">User,</span> <span class="pre">N,</span> <span class="pre">Recommendations)</span></code> predicate returns up
-to positive integer <code class="docutils literal notranslate"><span class="pre">N</span></code> unrated training-catalog items as
-<code class="docutils literal notranslate"><span class="pre">Item-Score</span></code> pairs. Scores agree with direct predictions; sorting is
-descending by score, with descending standard item order for ties.
-Unknown users see the entire catalog; no candidates returns <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">recommend/4</span></code> predicate returns up to <code class="docutils literal notranslate"><span class="pre">N</span></code> unrated
+training-catalog items as <code class="docutils literal notranslate"><span class="pre">Item-Score</span></code> pairs; <code class="docutils literal notranslate"><span class="pre">N</span></code> must be a positive
+integer. Scores agree with direct predictions; sorting is descending by
+score, with descending standard item order for ties. Every
+training-catalog item is a candidate for an unknown user. If no
+candidates remain, the result is <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p>
 <p>For <code class="docutils literal notranslate"><span class="pre">u:</span> <span class="pre">a=1,b=3</span></code> and <code class="docutils literal notranslate"><span class="pre">v:</span> <span class="pre">a=2,b=4,c=5</span></code>, the estimate for <code class="docutils literal notranslate"><span class="pre">u,c</span></code> is
 four. Adding <code class="docutils literal notranslate"><span class="pre">w:</span> <span class="pre">a=1,c=3</span></code> gives <code class="docutils literal notranslate"><span class="pre">d(c,a)=2.5</span></code> with support two and
 <code class="docutils literal notranslate"><span class="pre">d(c,b)=1</span></code> with support one. The weighted estimate is
@@ -527,18 +531,19 @@ four. Adding <code class="docutils literal notranslate"><span class="pre">w:</sp
 </section>
 <section id="models-diagnostics-and-export">
 <h2>Models, diagnostics, and export<a class="headerlink" href="#models-diagnostics-and-export" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">learn/2</span></code> and <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicates return the learned
-recommender model as a term with the following structure:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">learn/2</span></code> and <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicates return models using the
+following term representation:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>slope_one_model(<span class="nv">Ratings</span>, <span class="nv">Deviations</span>, <span class="nv">GlobalMean</span>, <span class="nv">Scale</span>, <span class="nv">Diagnostics</span>)
 </pre></div>
 </div>
-<p>Ratings are <code class="docutils literal notranslate"><span class="pre">rating(User,</span> <span class="pre">Item,</span> <span class="pre">Rating)</span></code> terms. Sorted canonical
-deviations are
+<p>The <code class="docutils literal notranslate"><span class="pre">Ratings</span></code> argument is a list of <code class="docutils literal notranslate"><span class="pre">rating(User,</span> <span class="pre">Item,</span> <span class="pre">Rating)</span></code>
+terms. Sorted canonical deviations are
 <code class="docutils literal notranslate"><span class="pre">deviation(ItemLo,</span> <span class="pre">ItemHi,</span> <span class="pre">MeanDifference,</span> <span class="pre">PositiveCount)</span></code> terms. The
-scale is <code class="docutils literal notranslate"><span class="pre">none</span></code> or <code class="docutils literal notranslate"><span class="pre">scale(Min,</span> <span class="pre">Max)</span></code>. Diagnostics contain exactly
-one <code class="docutils literal notranslate"><span class="pre">model(slope_one_recommender)</span></code>, <code class="docutils literal notranslate"><span class="pre">rating_count(Count)</span></code>,
-<code class="docutils literal notranslate"><span class="pre">options(Options)</span></code>, <code class="docutils literal notranslate"><span class="pre">user_count(Count)</span></code>, <code class="docutils literal notranslate"><span class="pre">item_count(Count)</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">deviation_pair_count(Count)</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">Scale</span></code> argument is the atom <code class="docutils literal notranslate"><span class="pre">none</span></code> or a <code class="docutils literal notranslate"><span class="pre">scale(Min,</span> <span class="pre">Max)</span></code> term.
+The <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> argument is a list containing exactly one of each
+diagnostic term: <code class="docutils literal notranslate"><span class="pre">model(slope_one_recommender)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">rating_count(Count)</span></code>, <code class="docutils literal notranslate"><span class="pre">options(Options)</span></code>, <code class="docutils literal notranslate"><span class="pre">user_count(Count)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">item_count(Count)</span></code>, and <code class="docutils literal notranslate"><span class="pre">deviation_pair_count(Count)</span></code>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">valid_recommender/1</span></code> predicate checks records, options, means,
 scale, pair keys, orientation, counts, averages, and diagnostic
 consistency without binding incomplete models. The

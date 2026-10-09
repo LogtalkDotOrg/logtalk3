@@ -440,11 +440,12 @@
              
   <section id="fisher-score-feature-selector">
 <span id="library-fisher-score-feature-selector"></span><h1><code class="docutils literal notranslate"><span class="pre">fisher_score_feature_selector</span></code><a class="headerlink" href="#fisher-score-feature-selector" title="Link to this heading"></a></h1>
-<p>This library implements a univariate filter selector for numeric
-features and categorical targets using Fisher scores. The selector
-reuses the <code class="docutils literal notranslate"><span class="pre">feature_selection_protocols</span></code> library for dataset
-validation, stable ranking, selection strategies, diagnostics, model
-validation, and export. The <code class="docutils literal notranslate"><span class="pre">fisher_score</span></code> object is provided by
+<p>Use this library to rank numeric features by how well they separate
+categorical target classes. It scores each feature independently using
+Fisher scores and selects a subset. The selector reuses the
+<code class="docutils literal notranslate"><span class="pre">feature_selection_protocols</span></code> library for dataset validation, stable
+ranking, selection strategies, diagnostics, model validation, and
+export. The <code class="docutils literal notranslate"><span class="pre">fisher_score</span></code> object is provided by
 <code class="docutils literal notranslate"><span class="pre">feature_selection_protocols</span></code>, implements the shared scoring protocol,
 and can be used independently of the selector.</p>
 <section id="api-documentation">
@@ -479,8 +480,8 @@ are included in the <code class="docutils literal notranslate"><span class="pre"
 Equivalently, the within-class denominator is <code class="docutils literal notranslate"><span class="pre">sum(n_c</span> <span class="pre">*</span> <span class="pre">variance_c)</span></code>
 using population class variances. Both sums use the same scaled values;
 their common scaling cancels in the ratio.</p>
-<p>The input lists must be proper lists of equal length. Complete feature
-values must be numeric and complete target labels must be atomic. An
+<p>The input lists must be proper lists of equal length. Known feature
+values must be numeric and known target labels must be atomic. An
 observation with an unbound feature value or target is excluded without
 binding that variable. Numeric target labels are categorical class
 codes, not regression targets.</p>
@@ -499,14 +500,15 @@ positive within-class degrees of freedom.</p>
 </section>
 <section id="selection-and-options">
 <h2>Selection and options<a class="headerlink" href="#selection-and-options" title="Link to this heading"></a></h2>
-<p>The dataset object must implement <code class="docutils literal notranslate"><span class="pre">feature_dataset_protocol</span></code> and
-declare each feature with <code class="docutils literal notranslate"><span class="pre">attribute_values(Feature,</span> <span class="pre">continuous)</span></code>.
-Categorical feature declarations are rejected with a
-<code class="docutils literal notranslate"><span class="pre">domain_error(feature_type,</span> <span class="pre">...)</span></code> exception, rather than silently
-turning category codes into measurements.</p>
+<p>The dataset object must implement <code class="docutils literal notranslate"><span class="pre">feature_dataset_protocol</span></code>. Its
+<code class="docutils literal notranslate"><span class="pre">attribute_values/2</span></code> predicate declares each feature as
+<code class="docutils literal notranslate"><span class="pre">attribute_values(Feature,</span> <span class="pre">continuous)</span></code>. Categorical feature
+declarations are rejected with a <code class="docutils literal notranslate"><span class="pre">domain_error(feature_type,</span> <span class="pre">...)</span></code>
+exception, rather than silently turning category codes into
+measurements.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">learn/2</span></code> predicate uses the default
 <code class="docutils literal notranslate"><span class="pre">selection_strategy(top_k(10))</span></code> option. The <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate
-accepts the following strategies:</p>
+accepts the following selection options:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">selection_strategy(top_k(K))</span></code>: selects up to <code class="docutils literal notranslate"><span class="pre">K</span></code> features, where
 <code class="docutils literal notranslate"><span class="pre">K</span></code> is a positive integer. Fewer candidates are not an error.</p></li>
@@ -528,8 +530,8 @@ when the requested count exceeds the number with positive scores.</p>
 </section>
 <section id="models-and-diagnostics">
 <h2>Models and diagnostics<a class="headerlink" href="#models-and-diagnostics" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">learn/2-3</span></code> predicates return selector terms with the following
-shape:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">learn/2</span></code> and <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicates return models using the
+following term representation:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>fisher_score_feature_selector(<span class="nv">FeatureScores</span>, <span class="nv">SelectedFeatures</span>, <span class="nv">Diagnostics</span>)
 </pre></div>
 </div>
@@ -537,12 +539,13 @@ shape:</p>
 pairs. The <code class="docutils literal notranslate"><span class="pre">selected_features/2</span></code> predicate returns the selected
 feature names. The <code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code>, <code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">selector_options/2</span></code> predicates expose metadata and effective options.
-Diagnostics include <code class="docutils literal notranslate"><span class="pre">model/1</span></code>, <code class="docutils literal notranslate"><span class="pre">example_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">options/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">candidate_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">selected_count/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">scoring_metric(fisher_score)</span></code>, and <code class="docutils literal notranslate"><span class="pre">complete_cases(FeatureCounts)</span></code>.
-The latter records a <code class="docutils literal notranslate"><span class="pre">Feature-Count</span></code> pair for each declared feature;
-subtracting that count from the example count gives excluded
-observations.</p>
+The <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> argument is a list of diagnostic terms, including
+<code class="docutils literal notranslate"><span class="pre">model/1</span></code>, <code class="docutils literal notranslate"><span class="pre">example_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">options/1</span></code>, <code class="docutils literal notranslate"><span class="pre">candidate_count/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">selected_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">scoring_metric(fisher_score)</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">complete_cases(FeatureCounts)</span></code>. The <code class="docutils literal notranslate"><span class="pre">complete_cases(FeatureCounts)</span></code>
+diagnostic term records a <code class="docutils literal notranslate"><span class="pre">Feature-Count</span></code> pair for each declared
+feature. Subtracting that count from the example count gives the number
+of observations excluded from that feature’s score.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">check_selector/1</span></code> predicate verifies ground model structure,
 unique and decreasing scores, the recorded metric and options, selection
 consistency, candidate and selected counts, and per-feature sample

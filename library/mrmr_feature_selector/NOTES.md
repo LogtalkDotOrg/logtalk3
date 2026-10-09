@@ -21,8 +21,10 @@ ________________________________________________________________________
 `mrmr_feature_selector`
 =======================
 
-This library implements minimum redundancy maximum relevance feature
-selection using the mutual-information difference (MID) criterion. Both
+Use this library to select features that are informative about a categorical
+target while reducing redundancy between selected features. It implements
+minimum redundancy maximum relevance selection using the mutual-information
+difference (MID) criterion. Both
 relevance and redundancy are raw empirical mutual information in bits.
 MIQ, normalized information measures, thresholds, and alternative scoring
 metrics are not supported.
@@ -70,7 +72,7 @@ are required, even with an empty feature vocabulary. Otherwise learning
 throws `domain_error(mrmr_usable_examples, Count)`. Empty datasets retain
 the shared `domain_error(non_empty_examples, Dataset)` exception.
 
-The `learn/2` predicate uses these defaults. The `learn/3` predicate accepts:
+The `learn/3` predicate accepts the following options:
 
 - `selection_strategy(top_k(K))`, default `top_k(10)`, with positive integer
   `K`. Exactly `min(K, CandidateCount)` features are selected.
@@ -79,8 +81,10 @@ The `learn/2` predicate uses these defaults. The `learn/3` predicate accepts:
 - `discretization(Specification)`, default `equal_frequency(10)`, for
   continuous features. Specifications are `categorical`, `equal_width(B)`,
   or `equal_frequency(B)`, with positive integer bin counts.
-- `feature_discretization(Feature, Specification)`, overriding the global
+- `feature_discretization(Feature, Specification)` overrides the global
   specification for that declared feature.
+
+The `learn/2` predicate uses the default option values.
 
 Categorical declarations preserve their labels unless explicitly overridden.
 Binning specifications on categorical declarations require numeric values.
@@ -125,7 +129,8 @@ rounds, the count is `r*p - r*(r+1)/2` for either strategy.
 Models and diagnostics
 ----------------------
 
-The `learn/2-3` predicates return models of the following form:
+The `learn/2` and `learn/3` predicates return models using the following
+term representation:
 
 	mrmr_feature_selector(FeatureScores, SelectedFeatures, Diagnostics)
 
@@ -135,12 +140,13 @@ target relevance, preserving declaration order for ties. The
 need not be a prefix of that ranking. The `diagnostics/2`, `diagnostic/2`,
 and `selector_options/2` predicates expose metadata and effective options.
 
-Diagnostics include `model(mrmr_feature_selector)`, `example_count/1`,
-`options/1`, `candidate_count/1`, `selected_count/1`,
-`selection_criterion(mid)`, `scoring_metric(mutual_information)`,
-`redundancy_metric(mutual_information)`, `redundancy_evaluations/1`, and
-`selection_trace/1`, `redundancy_update_rounds/1`, and `termination/1`.
-Termination is `budget_reached`, `candidates_exhausted`, or
+The `Diagnostics` argument is a list of diagnostic terms, including
+`model(mrmr_feature_selector)`, `example_count/1`, `options/1`,
+`candidate_count/1`, `selected_count/1`, `selection_criterion(mid)`,
+`scoring_metric(mutual_information)`, `redundancy_metric(mutual_information)`,
+`redundancy_evaluations/1`, and `selection_trace/1`,
+`redundancy_update_rounds/1`, and `termination/1`. The `termination/1`
+diagnostic value is `budget_reached`, `candidates_exhausted`, or
 `non_positive_mid(Step)`; the latter records the rejected winner using
 the same step representation. The trace contains these terms in selected
 order:

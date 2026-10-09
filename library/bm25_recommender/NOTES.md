@@ -27,9 +27,8 @@ candidate item is the document. Scores are nonnegative floats and can exceed
 one. They are neither cosine similarities nor predicted ratings and are not
 clipped to a rating scale.
 
-The object imports `recommender_common` and `item_content_dataset_validation`,
-implementing `recommender_protocol`. It has no text-vectorizer or cosine
-dependency.
+The library object imports the `item_content_dataset_validation` and
+`recommender_common` categories, implementing `recommender_protocol`.
 
 
 API documentation
@@ -86,9 +85,9 @@ With the dataset loaded:
 
 The query profile contains `science-2.0`. Recommendations contain `second`
 with positive relevance followed by `third` with `0.0`; neither candidate
-needs a rating. The catalog includes the rated `first`, but recommendations
-exclude every item already rated by the querying user, not just positive ones.
-Scores can still be queried for rated items.
+has to appear in the training ratings. The catalog includes the rated `first`,
+but recommendations exclude every item already rated by the querying user,
+not just positive ones. Scores can still be queried for rated items.
 
 The catalog is nonempty with unique atomic item identifiers and exactly one
 descriptor per item, without additional content declarations. Every rated
@@ -121,29 +120,38 @@ weights and profiles, and zero relevance.
 Options
 -------
 
-The `learn/3` predicate accepts:
+The `learn/3` predicate accepts the following options:
 
-- `k1(1.2)` controls term-frequency saturation. Any finite nonnegative numeric
-  value is accepted. Zero gives the presence-only, IDF-weighted limit.
-- `b(0.75)` controls document-length normalization. Accepts finite numeric
-  values between zero and one, inclusive. Zero removes length adjustment.
-- `positive_threshold(user_mean)` selects ratings at least equal to the user's
-  mean over all their ratings. A finite numeric threshold can be supplied instead.
-- `profile_weighting(uniform)` averages selected raw-count documents equally.
+- `k1(K1)` controls term-frequency saturation (default: `1.2`). Any finite
+  nonnegative numeric value is accepted. Zero gives the presence-only,
+  IDF-weighted limit.
+- `b(B)` controls document-length normalization (default: `0.75`). It accepts
+  finite numbers in `[0, 1]`. Zero removes length adjustment.
+- `positive_threshold(Threshold)` selects `user_mean` (default) or a finite
+  numeric threshold. Ratings at least equal to the threshold are selected;
+  `user_mean` uses the mean of all the user's ratings.
+- `profile_weighting(Weighting)` selects `uniform` (default) or `rating`.
+  Uniform weighting averages selected raw-count documents equally.
   The alternative `rating` uses raw ratings as weights; every selected rating
   must be strictly positive, including ratings on empty-content items.
-- `query_saturation(none)` uses raw query coefficients directly, preserving
-  default BM25 relevance. A finite nonnegative numeric value supplies the
+- `query_saturation(Saturation)` selects `none` (default) or a finite
+  nonnegative number. With `none`, it uses raw query coefficients directly.
+  A numeric value supplies the
   query-frequency saturation constant `K3`; zero gives presence-only query
   coefficients. Stored profiles remain raw in all modes.
 
-Repeated valid options are accepted and the first occurrence wins. The public
-`valid_option/1` and `default_option/1` hooks can be queried;
-`recommender_options/2` returns effective options. There are no normalization,
-vectorizer, delta, or alternative-IDF options.
+Repeated valid options are accepted and the first occurrence wins. The
+`recommender_options/2` predicate returns effective options. There are
+no normalization, vectorizer, delta, or alternative-IDF options.
 
-    | ?- bm25_recommender::learn(bm25_article_content, Model,
-             [k1(2), b(1), positive_threshold(4), profile_weighting(rating)]),
+
+Example
+-------
+
+    | ?- bm25_recommender::learn(
+             bm25_article_content, Model,
+             [k1(2), b(1), positive_threshold(4), profile_weighting(rating)]
+         ),
          bm25_recommender::score(Model, alice, second, Score).
 
 
@@ -217,28 +225,31 @@ handling, and query aggregation is the explicit recommender policy above.
 Scoring APIs
 ------------
 
-`score/4` requires a catalog item. Unknown users, empty profiles, empty
-candidates, and disjoint features score `0.0`. Unknown items raise
-`domain_error(catalog_item, Item)`, even for unknown users. `recommend/4` returns
-up to a positive integer number of unrated candidates, ordered by decreasing
-score, with descending standard item order for ties. Zero-score candidates
-are included; an unknown user receives the whole catalog in zero-score tie order.
+The `score/4` predicate requires a catalog item. Unknown users, empty profiles,
+items with empty content, and disjoint features score `0.0`. Unknown items raise
+`domain_error(catalog_item, Item)`, even for unknown users. The `recommend/4`
+predicate returns up to `N` unrated candidates, where `N` must be a positive
+integer, ordered by decreasing score, with descending standard item order for
+ties. Zero-score candidates are included. Every catalog item is a candidate
+for an unknown user; the predicate returns at most `N` of them in zero-score
+tie order.
 
-`score_all/4` validates the model once and returns `Item-Score` pairs in requested
-order, preserving duplicates and allowing rated items. An empty batch still
-validates the model and atomic user. The query is resolved once; unique atomic
-catalog requests are resolved by an ordered merge and duplicate scores are
-cached within the batch. Results and identifier errors retain original request
-order. All requested identifiers are checked, including for unknown users.
+The `score_all/4` predicate validates the model once and returns `Item-Score`
+pairs in requested order, preserving duplicates and allowing rated items. An
+empty batch still validates the model and atomic user. The query is resolved
+once; unique atomic catalog requests are resolved by an ordered merge and
+duplicate scores are cached within the batch. Results and identifier errors
+retain original request order. All requested identifiers are checked, including
+for unknown users.
 
     | ?- bm25_recommender::learn(bm25_article_content, Model),
          bm25_recommender::score_all(Model, alice, [second,first,second,third], Scores).
 
-`score_content/4` scores a supplied descriptor using frozen corpus statistics
-and matching the trained representation. It never fits the supplied content
-as another corpus document or changes the catalog. Unseen features contribute
-no matching weight but **do contribute to full candidate length**, so unseen
-padding penalizes known matches when `k1 > 0` and `b > 0`. With `b(0)` or
+The `score_content/4` predicate scores a supplied descriptor using frozen
+corpus statistics and matching the trained representation. It never fits the
+supplied content as another corpus document or changes the catalog. Unseen
+features contribute no matching weight but **do contribute to full candidate length**,
+so unseen padding penalizes known matches when `k1 > 0` and `b > 0`. With `b(0)` or
 `k1(0)`, that length penalty disappears. Invalid descriptors are checked even
 for unknown users or empty profiles.
 
@@ -255,13 +266,13 @@ or empty supplied descriptor scores zero, including after all-empty training.
 Immutable feedback changes
 --------------------------
 
-`update_ratings/3` accepts a proper list of `rating(User,Item,Value)` records.
-It inserts or replaces by user-item key, allowing new users but requiring
+The `update_ratings/3` predicate accepts a proper list of `rating(User,Item,Value)`
+records. It inserts or replaces by user-item key, allowing new users but requiring
 catalog items. Values must be finite numbers within any stored rating scale.
 Repeated batch keys raise `domain_error(duplicate_rating, User-Item)`.
 
-`remove_ratings/3` accepts a proper list of atomic `User-Item` pairs. Missing
-and repeated pairs are accepted, including unknown identifiers. No matching
+The `remove_ratings/3` predicate accepts a proper list of atomic `User-Item` pairs.
+Missing and repeated pairs are accepted, including unknown identifiers. No matching
 ratings returns the original validated model. Removing the last global rating
 raises `domain_error(non_empty_ratings, [])`. A user with no remaining history
 loses their profile and follows unknown-user zero scoring; removed items become
@@ -290,10 +301,10 @@ again; Bob retains his own profile and rating exclusions.
 Immutable catalog changes
 -------------------------
 
-`extend_catalog/3` accepts unique atomic **new** item identifiers paired with
-descriptors. Existing identifiers raise `domain_error(new_catalog_item, Item)`.
-`replace_content/3` accepts unique atomic **existing** identifiers paired with
-replacement descriptors; missing items raise `domain_error(catalog_item, Item)`.
+The `extend_catalog/3` predicate accepts unique atomic **new** item identifiers
+paired with descriptors. Existing identifiers raise `domain_error(new_catalog_item, Item)`.
+The `replace_content/3` predicate accepts unique atomic **existing** identifiers
+paired with replacement descriptors; missing items raise `domain_error(catalog_item, Item)`.
 Both require proper lists and the trained representation, canonicalize content,
 and enforce integer retained counts in vector mode. Repeated identifiers raise
 `domain_error(duplicate_item, Item)`.
@@ -318,77 +329,84 @@ identical replacements return the original without another refit.
          bm25_recommender::remove_ratings(Replaced, [alice-first], Final),
          bm25_recommender::recommend(Final, alice, 3, Recommendations).
 
-    `remove_catalog/3` accepts a proper list of atomic item identifiers, ignoring
-    missing and repeated identifiers. It removes matching items **and all their
-    ratings**, refits the remaining corpus and every item weight, and rebuilds
-    affected users' profiles. Users with no remaining history disappear. Removing
-    an unrated item still changes corpus statistics but retains raw profiles.
-    Empty/no-match requests return the validated original, and retries are safe.
-    All identifiers are validated before applying changes or nonempty guards.
+The `remove_catalog/3` predicate accepts a proper list of atomic item identifiers,
+ignoring missing and repeated identifiers. It removes matching items **and all
+their ratings**, refits the remaining corpus and every item weight, and rebuilds
+affected users' profiles. Users with no remaining history disappear. Removing
+an unrated item still changes corpus statistics but retains raw profiles.
+Empty or no-match requests return the validated original model, and retries
+are safe. All identifiers are validated before applying changes or checking
+that the catalog and rating history will remain nonempty.
 
-    An empty remaining catalog raises `domain_error(non_empty_catalog, [])`;
-    an empty global history raises `domain_error(non_empty_ratings, [])`.
-    Mean-shift `positive_rating_weight` errors can occur just as for feedback
-    removal. The original model is unchanged on success or failure.
+An empty remaining catalog raises `domain_error(non_empty_catalog, [])`;
+an empty global history raises `domain_error(non_empty_ratings, [])`.
+Mean-shift `positive_rating_weight` errors can occur just as for feedback
+removal. The original model is unchanged on success or failure.
 
 
-    Rating-scale changes
-    --------------------
+Rating-scale changes
+--------------------
 
-    `set_rating_scale/3` accepts `none` or `scale(Min,Max)`. Numeric bounds must be
-    finite and ordered, and every stored rating must lie within the inclusive
-    bounds. Removing, widening, or tightening the scale changes only that model
-    field; ratings, corpus, item weights, profiles, options, and diagnostics are
-    retained exactly. An unchanged scale returns an identical model.
+The `set_rating_scale/3` predicate accepts the atom `none` or a `scale(Min,Max)`
+term. Numeric bounds must be finite and ordered, and every stored rating must
+lie within the inclusive bounds. Removing, widening, or tightening the scale
+changes only that model field; ratings, corpus, item weights, profiles,
+options, and diagnostics are retained exactly. An unchanged scale returns
+an identical model.
 
-    Variable scales or bounds raise `instantiation_error`; nonnumeric bounds raise
-    `type_error(number, Bound)`. Invalid descriptors, nonfinite bounds, and reversed
-    bounds raise `domain_error(rating_scale, ...)`. An excluded stored rating raises
-    `domain_error(rating_scale(Min,Max), Rating)`. Subsequent rating upserts enforce
-    the new scale. This API never clamps or rescales ratings or BM25 relevance.
+Variable scales or bounds raise `instantiation_error`; nonnumeric bounds raise
+`type_error(number, Bound)`. Invalid descriptors, nonfinite bounds, and reversed
+bounds raise `domain_error(rating_scale, ...)`. An excluded stored rating raises
+`domain_error(rating_scale(Min,Max), Rating)`. Subsequent rating upserts enforce
+the new scale. This predicate never clamps or rescales ratings or BM25 relevance.
 
-    For a composed catalog-removal and scale-edit workflow:
+To remove catalog items and change the rating scale:
 
-      | ?- bm25_recommender::learn(bm25_article_content, Model),
-         bm25_recommender::extend_catalog(Model,
-           [fourth-features([science,space])], Extended),
-         bm25_recommender::update_ratings(Extended,
-           [rating(alice,fourth,4)], Rated),
-         bm25_recommender::remove_catalog(Rated,
-           [first,first,missing], Removed),
-         bm25_recommender::set_rating_scale(Removed, scale(4,4), Bounded),
-         bm25_recommender::recommend(Bounded, alice, 3, Recommendations).
+	| ?- bm25_recommender::learn(bm25_article_content, Model),
+	     bm25_recommender::extend_catalog(Model,
+	         [fourth-features([science,space])], Extended),
+	     bm25_recommender::update_ratings(Extended,
+	         [rating(alice,fourth,4)], Rated),
+	     bm25_recommender::remove_catalog(Rated,
+	         [first,first,missing], Removed),
+	     bm25_recommender::set_rating_scale(Removed, scale(4,4), Bounded),
+	     bm25_recommender::recommend(Bounded, alice, 3, Recommendations).
 
 All update APIs validate the original model once, including for empty/no-op
 requests, and return new ground model terms without mutating the original or
-    reopening the dataset. Profile rebuilding is selective after that validation;
-    validation itself still reconstructs all fitted state. Catalog edits retain
-    full corpus/item-weight refitting, not optimized incremental BM25 fitting.
-    Unlike catalog changes, supplied-content scoring freezes the trained corpus.
+reopening the dataset. Profile rebuilding is selective after that validation;
+validation itself still reconstructs all fitted state. Catalog edits refit the
+full corpus and all item weights; they are not optimized incremental BM25
+fitting. Unlike catalog changes, supplied-content scoring freezes the trained
+corpus.
 
 
 Models, diagnostics, and export
 ------------------------------
 
-The model is
-`bm25_model(Ratings,Contents,ItemWeights,Profiles,Corpus,Scale,Diagnostics)`.
-`Corpus` is `bm25_corpus(DocumentCount,AverageLength,FeatureStatistics)` with
+Models use a
+`bm25_model(Ratings,Contents,ItemWeights,Profiles,Corpus,Scale,Diagnostics)`
+term representation. The `Corpus` argument is a
+`bm25_corpus(DocumentCount,AverageLength,FeatureStatistics)` term with
 sorted `Feature-statistics(DocumentFrequency,IDF)` pairs. Canonical descriptors
 retain original counts; document lengths/count vectors are derived rather than
 redundantly stored. Cached item weights and raw user profiles are sorted sparse
 lists. Treat model terms as opaque inputs to the public API.
 
-`diagnostics/2` reports `model(bm25_recommender)`, `rating_count`, effective
-`options`, `user_count`, `item_count`, `content_representation(features|vectors)`,
-`feature_count`, `non_empty_profile_count`, and `average_document_length` terms.
+The `Diagnostics` argument is a list of diagnostic terms. The `diagnostics/2`
+predicate returns this list, including `model(bm25_recommender)`, `rating_count/1`,
+effective `options/1`, `user_count/1`, `item_count/1`,
+`content_representation(features|vectors)`, `feature_count/1`,
+`non_empty_profile_count/1`, and `average_document_length/1` terms.
 Feature count is the union of positive-count corpus keys. Required diagnostics
 occur exactly once with exact values; permitted additional compound terms are
-retained. `valid_recommender/1` checks groundness and reconstructs corpus, item
-weights, profiles, scale, options, and diagnostics before accepting a model.
+retained. The `valid_recommender/1` predicate checks groundness and reconstructs
+corpus, item weights, profiles, scale, options, and diagnostics before accepting
+a model.
 
 The common clause/file export APIs serialize a self-contained ground model
-fact; no live dataset is needed to restore scoring. `print_recommender/1` prints
-the model and diagnostics. For example:
+fact; no live dataset is needed to restore scoring. The `print_recommender/1`
+predicate prints the model and diagnostics. For example:
 
     | ?- bm25_recommender::learn(bm25_article_content, Model),
          bm25_recommender::export_to_clauses(bm25_article_content, Model, saved, Clauses),

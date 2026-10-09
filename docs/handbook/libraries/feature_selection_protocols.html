@@ -444,29 +444,29 @@
              
   <section id="feature-selection-protocols">
 <span id="library-feature-selection-protocols"></span><h1><code class="docutils literal notranslate"><span class="pre">feature_selection_protocols</span></code><a class="headerlink" href="#feature-selection-protocols" title="Link to this heading"></a></h1>
-<p>This library provides protocols used in the implementation of filter,
-nearest-neighbor, and embedded feature selection algorithms: choosing,
-from a dataset’s candidate features, the subset most relevant to a
-downstream learning task. Datasets are represented as objects
-implementing the <code class="docutils literal notranslate"><span class="pre">feature_dataset_protocol</span></code> protocol, generalizing
+<p>Use this library when implementing a feature selector or providing a
+dataset for one. It supports filter, nearest-neighbor, and embedded
+algorithms that choose the features most relevant to a learning task.
+Datasets are represented as objects implementing
+<code class="docutils literal notranslate"><span class="pre">feature_dataset_protocol</span></code>, generalizing
 <code class="docutils literal notranslate"><span class="pre">classification_protocols::dataset_protocol</span></code> (reusing its
 <code class="docutils literal notranslate"><span class="pre">attribute_values/2</span></code> predicate) to also support regression targets and
 fully unsupervised use. Selectors are represented as objects importing
 the <code class="docutils literal notranslate"><span class="pre">feature_selector_common</span></code> category. This category provides shared
-helpers for dataset validation, feature-matrix utilities, scoring every
-candidate feature via a pluggable metric, two selection strategies
-(top-k and threshold), diagnostics metadata, export, and pretty-printing
-support.</p>
+auxiliary predicates for dataset validation, feature-matrix utilities,
+scoring every candidate feature via a pluggable metric, two selection
+strategies (top-k and threshold), diagnostics metadata, export, and
+pretty-printing support.</p>
 <p>Scoring criteria are exposed as pluggable strategy objects implementing
-the <code class="docutils literal notranslate"><span class="pre">feature_scoring_protocol</span></code> protocol — <code class="docutils literal notranslate"><span class="pre">variance_score</span></code>,
-<code class="docutils literal notranslate"><span class="pre">correlation_score</span></code>, <code class="docutils literal notranslate"><span class="pre">anova_f_score</span></code>, <code class="docutils literal notranslate"><span class="pre">fisher_score</span></code>,
-<code class="docutils literal notranslate"><span class="pre">mutual_information_score</span></code>, and <code class="docutils literal notranslate"><span class="pre">chi_square_score</span></code> and
-<code class="docutils literal notranslate"><span class="pre">chi_square_yates_score</span></code>, plus <code class="docutils literal notranslate"><span class="pre">symmetrical_uncertainty_score</span></code>,
-<code class="docutils literal notranslate"><span class="pre">cramers_v_score</span></code>, and <code class="docutils literal notranslate"><span class="pre">cramers_v_bias_corrected_score</span></code>, are
-provided. They use shared arithmetic, discretization, and sparse
-contingency helpers in the <code class="docutils literal notranslate"><span class="pre">feature_scoring_common</span></code> category,
-mirroring how <code class="docutils literal notranslate"><span class="pre">recommender_protocols</span></code> exposes <code class="docutils literal notranslate"><span class="pre">cosine_similarity</span></code>
-and <code class="docutils literal notranslate"><span class="pre">pearson_similarity</span></code> via <code class="docutils literal notranslate"><span class="pre">similarity_metric_protocol</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">feature_scoring_protocol</span></code>: <code class="docutils literal notranslate"><span class="pre">variance_score</span></code>, <code class="docutils literal notranslate"><span class="pre">correlation_score</span></code>,
+<code class="docutils literal notranslate"><span class="pre">anova_f_score</span></code>, <code class="docutils literal notranslate"><span class="pre">fisher_score</span></code>, <code class="docutils literal notranslate"><span class="pre">mutual_information_score</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">chi_square_score</span></code> and <code class="docutils literal notranslate"><span class="pre">chi_square_yates_score</span></code>, plus
+<code class="docutils literal notranslate"><span class="pre">symmetrical_uncertainty_score</span></code>, <code class="docutils literal notranslate"><span class="pre">cramers_v_score</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">cramers_v_bias_corrected_score</span></code>, are provided. They use shared
+arithmetic, discretization, and sparse contingency predicates in the
+<code class="docutils literal notranslate"><span class="pre">feature_scoring_common</span></code> category, mirroring how
+<code class="docutils literal notranslate"><span class="pre">recommender_protocols</span></code> exposes <code class="docutils literal notranslate"><span class="pre">cosine_similarity</span></code> and
+<code class="docutils literal notranslate"><span class="pre">pearson_similarity</span></code> via <code class="docutils literal notranslate"><span class="pre">similarity_metric_protocol</span></code>.</p>
 <p>Learned selectors expose diagnostics using the shared <code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code>,
 <code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">selector_options/2</span></code> predicates. Concrete
 selector implementations store effective training options in the
@@ -483,12 +483,13 @@ default selection option is <code class="docutils literal notranslate"><span cla
 <code class="docutils literal notranslate"><span class="pre">threshold(Threshold)</span></code> strategies are also supported. The protected
 <code class="docutils literal notranslate"><span class="pre">filter_selection/3</span></code> and <code class="docutils literal notranslate"><span class="pre">filter_validate_diagnostics/2</span></code> hooks allow
 individual filters to extend selection and diagnostic validation.</p>
-<p>Production filter terms use
-<code class="docutils literal notranslate"><span class="pre">Model(FeatureScores,</span> <span class="pre">SelectedFeatures,</span> <span class="pre">Diagnostics)</span></code>, where <code class="docutils literal notranslate"><span class="pre">Model</span></code>
-is the receiving implementation name. Their validation checks score and
-selection uniqueness, decreasing numeric order, effective options,
-metric identity, selection consistency, and recorded sample and feature
-counts. The standalone <code class="docutils literal notranslate"><span class="pre">fisher_score_feature_selector</span></code>,
+<p>Production filters use a
+<code class="docutils literal notranslate"><span class="pre">Model(FeatureScores,</span> <span class="pre">SelectedFeatures,</span> <span class="pre">Diagnostics)</span></code> term
+representation, where <code class="docutils literal notranslate"><span class="pre">Model</span></code> is the receiving implementation name.
+Their validation checks score and selection uniqueness, decreasing
+numeric order, effective options, metric identity, selection
+consistency, and recorded sample and feature counts. The standalone
+<code class="docutils literal notranslate"><span class="pre">fisher_score_feature_selector</span></code>,
 <code class="docutils literal notranslate"><span class="pre">mutual_information_feature_selector</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">chi_square_feature_selector</span></code> libraries implement this contract.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">feature_discretization</span></code> category prepares typed categorical
@@ -595,10 +596,9 @@ decreasing score, preserving declaration order when scores are
 numerically equal. A selection strategy is then applied to decide the
 final subset:</p>
 <ul class="simple">
-<li><p>The <code class="docutils literal notranslate"><span class="pre">select_top_k/3</span></code> predicate selects the <code class="docutils literal notranslate"><span class="pre">K</span></code> highest-scoring
-features.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">select_above_threshold/3</span></code> predicate selects every feature
-scoring at least a given threshold.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">select_top_k/3</span></code> selects the <code class="docutils literal notranslate"><span class="pre">K</span></code> highest-scoring features.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">select_above_threshold/3</span></code> selects every feature scoring at least a
+given threshold.</p></li>
 </ul>
 <p>Both preserve the decreasing-score order and are lenient:
 <code class="docutils literal notranslate"><span class="pre">select_top_k/3</span></code> returns every feature, not an error, when fewer than
@@ -618,9 +618,10 @@ category-provided. A protocol declaration alone is insufficient.</p>
 <p>A missing feature value or target (an unbound variable; see
 <code class="docutils literal notranslate"><span class="pre">feature_dataset_protocol::example/3</span></code>) is excluded on a per-feature,
 per-example basis by casewise deletion inside each scoring criterion
-(via the shared <code class="docutils literal notranslate"><span class="pre">complete_pairs/3</span></code> or <code class="docutils literal notranslate"><span class="pre">complete_values/2</span></code> helpers) —
-an example missing only one feature’s value still contributes to every
-other feature’s score.</p>
+(via the shared <code class="docutils literal notranslate"><span class="pre">complete_pairs/3</span></code> or <code class="docutils literal notranslate"><span class="pre">complete_values/2</span></code>
+predicates). An example with one missing feature value can still
+contribute to the scores of its other known features, provided any
+required target is also known.</p>
 </section>
 <section id="scoring-criteria">
 <h2>Scoring criteria<a class="headerlink" href="#scoring-criteria" title="Link to this heading"></a></h2>
@@ -773,18 +774,19 @@ than a clear, dedicated one.</p>
 </section>
 <section id="selector-representation">
 <h2>Selector representation<a class="headerlink" href="#selector-representation" title="Link to this heading"></a></h2>
-<p>This library does not mandate a specific selector term shape (unlike
-<code class="docutils literal notranslate"><span class="pre">recommender_protocols</span></code>, no single shape is suggested in the protocol
-documentation itself), but <code class="docutils literal notranslate"><span class="pre">sample_selector</span></code>, the test double used by
-this library’s own test suite, uses:</p>
+<p>This library does not mandate a specific term representation for
+selector models. Unlike <code class="docutils literal notranslate"><span class="pre">recommender_protocols</span></code>, it does not suggest
+one in the protocol documentation. The <code class="docutils literal notranslate"><span class="pre">sample_selector</span></code> object, used
+by this library’s test suite, uses the following term representation:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>sample_selector(<span class="nv">Metric</span>, <span class="nv">FeatureScores</span>, <span class="nv">SelectedFeatures</span>, <span class="nv">Diagnostics</span>)
 </pre></div>
 </div>
 <p>where <code class="docutils literal notranslate"><span class="pre">Metric</span></code> is the scoring metric object used, <code class="docutils literal notranslate"><span class="pre">FeatureScores</span></code> is
 the full list of <code class="docutils literal notranslate"><span class="pre">Feature-Score</span></code> pairs, and <code class="docutils literal notranslate"><span class="pre">SelectedFeatures</span></code> is
-the subset chosen by the configured selection strategy. The diagnostics
-list includes the <code class="docutils literal notranslate"><span class="pre">model/1</span></code>, <code class="docutils literal notranslate"><span class="pre">example_count/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">options/1</span></code>
-terms common to all selectors plus a <code class="docutils literal notranslate"><span class="pre">selected_count/1</span></code> term.</p>
+the subset chosen by the configured selection strategy. The
+<code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> argument is a list of diagnostic terms: <code class="docutils literal notranslate"><span class="pre">model/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">example_count/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">options/1</span></code>, required for all selectors, plus
+<code class="docutils literal notranslate"><span class="pre">selected_count/1</span></code>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">sample_selector::check_selector/1</span></code> predicate requires a ground
 term with distinct candidate features, numeric scores in decreasing
 order, distinct selected features drawn from those candidates, and valid
@@ -830,11 +832,10 @@ target-class table even for high-cardinality inputs.</p>
 target mutual-information estimators, bias corrections, and p-values
 are not provided. The categorical criteria require categorical targets
 and explicit binning for continuous features.</p></li>
-<li><p>No wrapper (e.g. recursive feature elimination) or embedded (e.g.
-model-coefficient-based) feature selection method is provided or
-assumed by the protocol; the protocol is written broadly enough that a
-wrapper method’s selector could still implement it, but none of the
-shared code in this library is wrapper-specific.</p></li>
+<li><p>Wrapper methods, such as recursive feature elimination, and embedded
+methods, such as coefficient-based selection, are not implemented in
+this library. Their selectors can implement the protocol; the shared
+code does not assume either approach.</p></li>
 </ul>
 </section>
 </section>

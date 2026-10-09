@@ -157,6 +157,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#transformations">Transformations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#prediction-intervals">Prediction intervals</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#notes">Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="feature_selection_protocols.html"><code class="docutils literal notranslate"><span class="pre">feature_selection_protocols</span></code></a></li>
@@ -445,17 +446,19 @@
              
   <section id="exponential-smoothing">
 <span id="library-exponential-smoothing"></span><h1><code class="docutils literal notranslate"><span class="pre">exponential_smoothing</span></code><a class="headerlink" href="#exponential-smoothing" title="Link to this heading"></a></h1>
-<p>This library implements univariate time series forecasting using simple
-exponential smoothing, Holt linear-trend smoothing, and additive or
-multiplicative Holt-Winters seasonal smoothing. It implements the
-<code class="docutils literal notranslate"><span class="pre">forecaster_protocol</span></code> and reuses dataset validation, diagnostics,
-export, and lifecycle support from the <code class="docutils literal notranslate"><span class="pre">time_series_protocols</span></code>
-library.</p>
-<p>Datasets are objects implementing the <code class="docutils literal notranslate"><span class="pre">time_series_dataset_protocol</span></code>.
-Seasonal models additionally require a <code class="docutils literal notranslate"><span class="pre">frequency/1</span></code> value of at least
-<code class="docutils literal notranslate"><span class="pre">2</span></code>. The library supports explicit smoothing factors or deterministic
-fitting of any combination of automatic factors by bounded Nelder-Mead
-optimization.</p>
+<p>This library forecasts a single time series using simple exponential
+smoothing, Holt linear-trend smoothing, or additive or multiplicative
+Holt-Winters seasonal smoothing. Choose a method to match the level,
+trend, and seasonality in your data. The object implements the
+<code class="docutils literal notranslate"><span class="pre">forecaster_protocol</span></code> protocol and reuses dataset validation,
+diagnostics, export, and lifecycle support from the
+<code class="docutils literal notranslate"><span class="pre">time_series_protocols</span></code> library.</p>
+<p>Datasets are objects implementing <code class="docutils literal notranslate"><span class="pre">time_series_dataset_protocol</span></code>.
+Seasonal models require a frequency of at least <code class="docutils literal notranslate"><span class="pre">2</span></code>. By default, the
+dataset’s <code class="docutils literal notranslate"><span class="pre">frequency/1</span></code> predicate supplies it; the <code class="docutils literal notranslate"><span class="pre">frequency/1</span></code>
+learning option can override this choice. You can supply fixed smoothing
+factors or let the library fit automatic factors using one of the
+optimizer strategies described below.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -494,6 +497,9 @@ a damped trend.</p></li>
 smoothing with a damped trend. All training observations must be
 strictly positive.</p></li>
 </ul>
+<p>Alternatively, supply the <code class="docutils literal notranslate"><span class="pre">model(auto)</span></code> option to compare candidate
+methods using AICc or holdout validation. The default method is
+<code class="docutils literal notranslate"><span class="pre">simple</span></code>.</p>
 <p>Simple smoothing requires at least two observations. Holt smoothing
 requires at least three. Seasonal smoothing requires at least two full
 cycles plus one observation, i.e. <code class="docutils literal notranslate"><span class="pre">2*Frequency</span> <span class="pre">+</span> <span class="pre">1</span></code> observations.</p>
@@ -511,112 +517,135 @@ averaged.</p>
 </section>
 <section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
-<p>The following options are supported by <code class="docutils literal notranslate"><span class="pre">learn/3</span></code>:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate accepts the following learning options:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">model(Method)</span></code>: smoothing method (default: <code class="docutils literal notranslate"><span class="pre">simple</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">alpha(Value)</span></code>: level smoothing factor (default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">beta(Value)</span></code>: trend smoothing factor (default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">gamma(Value)</span></code>: seasonal smoothing factor (default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">phi(Value)</span></code>: damping factor for damped methods (default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>).
-It must satisfy <code class="docutils literal notranslate"><span class="pre">0.0</span> <span class="pre">&lt;</span> <span class="pre">Value</span> <span class="pre">=&lt;</span> <span class="pre">1.0</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">initialization(Strategy)</span></code>: initial-state strategy, one of
+<li><p><code class="docutils literal notranslate"><span class="pre">model(Method)</span></code> selects the smoothing method (default: <code class="docutils literal notranslate"><span class="pre">simple</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">alpha(Value)</span></code> sets the level smoothing factor (default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">beta(Value)</span></code> sets the trend smoothing factor (default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gamma(Value)</span></code> sets the seasonal smoothing factor (default:
+<code class="docutils literal notranslate"><span class="pre">auto</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">phi(Value)</span></code> sets the damping factor (default: <code class="docutils literal notranslate"><span class="pre">auto</span></code>). It must
+satisfy <code class="docutils literal notranslate"><span class="pre">0.0</span> <span class="pre">&lt;</span> <span class="pre">Value</span> <span class="pre">=&lt;</span> <span class="pre">1.0</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">initialization(Strategy)</span></code> selects an initial-state strategy:
 <code class="docutils literal notranslate"><span class="pre">two_cycles</span></code>, <code class="docutils literal notranslate"><span class="pre">regression</span></code>, or <code class="docutils literal notranslate"><span class="pre">optimized</span></code> (default:
 <code class="docutils literal notranslate"><span class="pre">two_cycles</span></code>). <code class="docutils literal notranslate"><span class="pre">optimized</span></code> jointly fits the initial level, trend,
 and seasonal factors with any automatic smoothing parameters.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">initial_cycles(Count)</span></code>: number of complete cycles used by seasonal
-regression initialization (default: <code class="docutils literal notranslate"><span class="pre">2</span></code>; minimum: <code class="docutils literal notranslate"><span class="pre">2</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">optimizer(Strategy)</span></code>: automatic-fitting search strategy, one of
+<li><p><code class="docutils literal notranslate"><span class="pre">initial_cycles(Count)</span></code> sets the number of complete cycles used by
+seasonal regression initialization (default: <code class="docutils literal notranslate"><span class="pre">2</span></code>; minimum: <code class="docutils literal notranslate"><span class="pre">2</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">optimizer(Strategy)</span></code> selects an automatic-fitting search strategy:
 <code class="docutils literal notranslate"><span class="pre">nelder_mead</span></code>, <code class="docutils literal notranslate"><span class="pre">multi_start(Starts)</span></code>, or
 <code class="docutils literal notranslate"><span class="pre">differential_evolution</span></code> (default: <code class="docutils literal notranslate"><span class="pre">nelder_mead</span></code>). See “Optimizer
 strategies” below.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">optimizer_options(Options)</span></code>: options passed to bounded Nelder-Mead
-fitting (default: <code class="docutils literal notranslate"><span class="pre">[]</span></code>). Supported sub-options are
+<li><p><code class="docutils literal notranslate"><span class="pre">optimizer_options(Options)</span></code> supplies sub-options for bounded
+Nelder-Mead fitting (default: <code class="docutils literal notranslate"><span class="pre">[]</span></code>). Supported sub-options are
 <code class="docutils literal notranslate"><span class="pre">max_iterations/1</span></code>, <code class="docutils literal notranslate"><span class="pre">tol_x/1</span></code>, <code class="docutils literal notranslate"><span class="pre">tol_f/1</span></code>, <code class="docutils literal notranslate"><span class="pre">initial_step/1</span></code>,
-and <code class="docutils literal notranslate"><span class="pre">adaptive/1</span></code>. Used directly by <code class="docutils literal notranslate"><span class="pre">nelder_mead</span></code>, per start by
-<code class="docutils literal notranslate"><span class="pre">multi_start/1</span></code>, and, when <code class="docutils literal notranslate"><span class="pre">polish(true)</span></code> is in effect, to refine
-the <code class="docutils literal notranslate"><span class="pre">differential_evolution</span></code> result.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">de_options(Options)</span></code>: options passed to Differential Evolution
-fitting, only relevant when <code class="docutils literal notranslate"><span class="pre">optimizer(differential_evolution)</span></code> is
-selected (default: <code class="docutils literal notranslate"><span class="pre">[]</span></code>). Supported sub-options are <code class="docutils literal notranslate"><span class="pre">seed/1</span></code>
-(default: <code class="docutils literal notranslate"><span class="pre">42</span></code>), <code class="docutils literal notranslate"><span class="pre">population_size/1</span></code>, <code class="docutils literal notranslate"><span class="pre">max_generations/1</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">adaptive/1</span></code>. The <code class="docutils literal notranslate"><span class="pre">nelder_mead</span></code> strategy uses them directly,
+and the <code class="docutils literal notranslate"><span class="pre">multi_start(Starts)</span></code> strategy uses them for each start.
+With the <code class="docutils literal notranslate"><span class="pre">differential_evolution</span></code> strategy, they control refinement
+when the <code class="docutils literal notranslate"><span class="pre">polish(true)</span></code> sub-option is enabled.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">de_options(Options)</span></code> supplies sub-options for Differential
+Evolution fitting, only relevant when
+<code class="docutils literal notranslate"><span class="pre">optimizer(differential_evolution)</span></code> is selected (default: <code class="docutils literal notranslate"><span class="pre">[]</span></code>).
+Supported sub-options are <code class="docutils literal notranslate"><span class="pre">seed/1</span></code> (default: <code class="docutils literal notranslate"><span class="pre">42</span></code>),
+<code class="docutils literal notranslate"><span class="pre">population_size/1</span></code>, <code class="docutils literal notranslate"><span class="pre">max_generations/1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">crossover_probability/1</span></code>, <code class="docutils literal notranslate"><span class="pre">differential_weight/1</span></code>, <code class="docutils literal notranslate"><span class="pre">strategy/1</span></code>
 (one of <code class="docutils literal notranslate"><span class="pre">rand/1/bin</span></code>, <code class="docutils literal notranslate"><span class="pre">rand/1/exp</span></code>, <code class="docutils literal notranslate"><span class="pre">best/1/bin</span></code>, or
 <code class="docutils literal notranslate"><span class="pre">current-to-best/1/bin</span></code>), and <code class="docutils literal notranslate"><span class="pre">polish/1</span></code> (default: <code class="docutils literal notranslate"><span class="pre">true</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">transformation(Transformation)</span></code>: pre-fitting series transformation,
-one of <code class="docutils literal notranslate"><span class="pre">none</span></code>, <code class="docutils literal notranslate"><span class="pre">log</span></code>, or <code class="docutils literal notranslate"><span class="pre">box_cox(Lambda)</span></code> (default: <code class="docutils literal notranslate"><span class="pre">none</span></code>).
-<code class="docutils literal notranslate"><span class="pre">Lambda</span></code> is either a finite number or <code class="docutils literal notranslate"><span class="pre">auto</span></code>. A numeric <code class="docutils literal notranslate"><span class="pre">Lambda</span></code>
-with <code class="docutils literal notranslate"><span class="pre">abs(Lambda)</span> <span class="pre">=&lt;</span> <span class="pre">1.0e-6</span></code> is treated as <code class="docutils literal notranslate"><span class="pre">log</span></code> for numerical
-stability. Training observations must be strictly positive when a
-transformation other than <code class="docutils literal notranslate"><span class="pre">none</span></code> is selected.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">box_cox_bounds(Lower,</span> <span class="pre">Upper)</span></code>: finite open search interval for
-<code class="docutils literal notranslate"><span class="pre">transformation(box_cox(auto))</span></code>, with <code class="docutils literal notranslate"><span class="pre">Lower</span> <span class="pre">&lt;</span> <span class="pre">Upper</span></code> (default:
-<code class="docutils literal notranslate"><span class="pre">box_cox_bounds(-1.0,</span> <span class="pre">2.0)</span></code>). An explicit occurrence is rejected
-unless automatic Box-Cox transformation is selected.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">bias_adjustment(Adjustment)</span></code>: inverse-transform bias correction,
-either <code class="docutils literal notranslate"><span class="pre">none</span></code> or <code class="docutils literal notranslate"><span class="pre">delta</span></code> (default: <code class="docutils literal notranslate"><span class="pre">none</span></code>). <code class="docutils literal notranslate"><span class="pre">delta</span></code> is
-rejected when <code class="docutils literal notranslate"><span class="pre">transformation/1</span></code> is <code class="docutils literal notranslate"><span class="pre">none</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">retain_residuals(Boolean)</span></code>: when <code class="docutils literal notranslate"><span class="pre">true</span></code>, retains the one-step
+<li><p><code class="docutils literal notranslate"><span class="pre">transformation(Transformation)</span></code> selects a pre-fitting
+transformation, one of <code class="docutils literal notranslate"><span class="pre">none</span></code>, <code class="docutils literal notranslate"><span class="pre">log</span></code>, or <code class="docutils literal notranslate"><span class="pre">box_cox(Lambda)</span></code>
+(default: <code class="docutils literal notranslate"><span class="pre">none</span></code>). <code class="docutils literal notranslate"><span class="pre">Lambda</span></code> is either a finite number or <code class="docutils literal notranslate"><span class="pre">auto</span></code>.
+A numeric <code class="docutils literal notranslate"><span class="pre">Lambda</span></code> with <code class="docutils literal notranslate"><span class="pre">abs(Lambda)</span> <span class="pre">=&lt;</span> <span class="pre">1.0e-6</span></code> is treated as
+<code class="docutils literal notranslate"><span class="pre">log</span></code> for numerical stability. Training observations must be
+strictly positive when a transformation other than <code class="docutils literal notranslate"><span class="pre">none</span></code> is
+selected.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">box_cox_bounds(Lower,</span> <span class="pre">Upper)</span></code> sets a finite open search interval
+for <code class="docutils literal notranslate"><span class="pre">transformation(box_cox(auto))</span></code>, with <code class="docutils literal notranslate"><span class="pre">Lower</span> <span class="pre">&lt;</span> <span class="pre">Upper</span></code>
+(default: <code class="docutils literal notranslate"><span class="pre">box_cox_bounds(-1.0,</span> <span class="pre">2.0)</span></code>). An explicit occurrence is
+rejected unless automatic Box-Cox transformation is selected.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bias_adjustment(Adjustment)</span></code> selects inverse-transform bias
+correction, either <code class="docutils literal notranslate"><span class="pre">none</span></code> or <code class="docutils literal notranslate"><span class="pre">delta</span></code> (default: <code class="docutils literal notranslate"><span class="pre">none</span></code>).
+<code class="docutils literal notranslate"><span class="pre">delta</span></code> is rejected when the <code class="docutils literal notranslate"><span class="pre">transformation/1</span></code> option is
+<code class="docutils literal notranslate"><span class="pre">none</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">retain_residuals(Boolean)</span></code>, when <code class="docutils literal notranslate"><span class="pre">true</span></code>, retains the one-step
 training residuals (on the fitted, possibly transformed, scale) in the
-forecaster diagnostics for later use by <code class="docutils literal notranslate"><span class="pre">forecast_interval/5</span></code>
-(default: <code class="docutils literal notranslate"><span class="pre">false</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">missing_policy(Policy)</span></code>: either <code class="docutils literal notranslate"><span class="pre">error</span></code> or <code class="docutils literal notranslate"><span class="pre">skip_update</span></code>
+forecaster diagnostics for use by the <code class="docutils literal notranslate"><span class="pre">forecast_interval/5</span></code>
+predicate (default: <code class="docutils literal notranslate"><span class="pre">false</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">missing_policy(Policy)</span></code> selects <code class="docutils literal notranslate"><span class="pre">error</span></code> or <code class="docutils literal notranslate"><span class="pre">skip_update</span></code>
 (default: <code class="docutils literal notranslate"><span class="pre">error</span></code>). The default preserves the ordinary
 numeric-series validation and rejects unbound observations. See
 “Missing observations” below.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">selection_criterion(Criterion)</span></code> selects <code class="docutils literal notranslate"><span class="pre">aicc</span></code> (the default) or
+<code class="docutils literal notranslate"><span class="pre">validation(Size)</span></code> for automatic model selection. The latter
+reserves a positive number of final observations for holdout scoring.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">candidate_models(Methods)</span></code> supplies a non-empty list of methods to
+compare with <code class="docutils literal notranslate"><span class="pre">model(auto)</span></code>, or <code class="docutils literal notranslate"><span class="pre">default</span></code> (the default value). The
+default candidate set includes seasonal methods when a usable
+frequency is available.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">frequency(Frequency)</span></code> selects <code class="docutils literal notranslate"><span class="pre">dataset</span></code> (the default), an
+explicit integer of at least <code class="docutils literal notranslate"><span class="pre">2</span></code>, or <code class="docutils literal notranslate"><span class="pre">auto</span></code> for a seasonal model.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">frequency_candidates(Candidates)</span></code> supplies the periods to consider
+with <code class="docutils literal notranslate"><span class="pre">frequency(auto)</span></code>, as a list or an inclusive <code class="docutils literal notranslate"><span class="pre">Min-Max</span></code> range.
+Candidate periods must be at least <code class="docutils literal notranslate"><span class="pre">2</span></code>. Its default is <code class="docutils literal notranslate"><span class="pre">none</span></code>;
+supply candidates when requesting automatic frequency selection.</p></li>
 </ul>
 <p>A smoothing factor can be <code class="docutils literal notranslate"><span class="pre">auto</span></code> or a number in the closed interval
 <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">1.0]</span></code>. Automatic factors are optimized by minimizing the
 one-step-ahead sum of squared errors. Explicit factors remain fixed,
 allowing partially constrained models. When all relevant factors are
-explicit, optimization is bypassed.</p>
-<p><code class="docutils literal notranslate"><span class="pre">beta/1</span></code> is relevant only to Holt and Holt-Winters models. <code class="docutils literal notranslate"><span class="pre">gamma/1</span></code>
-is relevant only to Holt-Winters models. Explicit numeric values for an
-irrelevant factor are rejected instead of being silently ignored.</p>
+explicit and initialization is not optimized, fitting bypasses the
+optimizer.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">beta/1</span></code> option is relevant only to Holt and Holt-Winters models.
+The <code class="docutils literal notranslate"><span class="pre">gamma/1</span></code> option is relevant only to Holt-Winters models. Explicit
+numeric values for an irrelevant factor are rejected instead of being
+silently ignored.</p>
 </section>
 <section id="optimizer-strategies">
 <h2>Optimizer strategies<a class="headerlink" href="#optimizer-strategies" title="Link to this heading"></a></h2>
 <p>Automatic factors are fitted by minimizing the one-step-ahead sum of
 squared errors over the <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">1.0]</span></code> box of automatic parameters. The
-<code class="docutils literal notranslate"><span class="pre">optimizer/1</span></code> option selects the search strategy; explicit/fixed
-factors always bypass optimization entirely, regardless of the selected
-strategy, and are reported with <code class="docutils literal notranslate"><span class="pre">convergence(fixed_parameters)</span></code> and
-zero iterations and evaluations.</p>
+<code class="docutils literal notranslate"><span class="pre">optimizer/1</span></code> option selects the search strategy. When all relevant
+factors are fixed and initialization is not optimized, fitting bypasses
+the optimizer. The <code class="docutils literal notranslate"><span class="pre">convergence(fixed_parameters)</span></code> diagnostic term
+records this case, with zero iterations and evaluations. THe following
+strategies are supported:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">nelder_mead</span></code> (default): a single bounded Nelder-Mead run from the
-deterministic initial point described above. Behavior and defaults are
-unchanged from previous releases.</p></li>
+deterministic initial point described under “Notes” below.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">multi_start(Starts)</span></code>: <code class="docutils literal notranslate"><span class="pre">Starts</span></code> (a positive integer) bounded
-Nelder-Mead runs, each using <code class="docutils literal notranslate"><span class="pre">optimizer_options/1</span></code>. The first start
-is the same deterministic initial point used by <code class="docutils literal notranslate"><span class="pre">nelder_mead</span></code>; the
-remaining <code class="docutils literal notranslate"><span class="pre">Starts</span> <span class="pre">-</span> <span class="pre">1</span></code> points are a deterministic Halton
-low-discrepancy sequence (bases <code class="docutils literal notranslate"><span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">5,</span> <span class="pre">...</span></code>, one per automatic
-parameter) mapped onto the parameter box, so the same options always
-produce the same starts. The run with the lowest sum of squared errors
-is selected; exact ties are broken by the lexicographically smallest
-parameter point (standard order of terms). Reported <code class="docutils literal notranslate"><span class="pre">iterations/1</span></code>
-and <code class="docutils literal notranslate"><span class="pre">evaluations/1</span></code> are totals summed over every start;
-<code class="docutils literal notranslate"><span class="pre">convergence/1</span></code> reflects only the winning start’s own termination
-status against <code class="docutils literal notranslate"><span class="pre">optimizer_options/1</span></code> <code class="docutils literal notranslate"><span class="pre">max_iterations/1</span></code>.</p></li>
+Nelder-Mead runs, each using the <code class="docutils literal notranslate"><span class="pre">optimizer_options/1</span></code> option. The
+first start is the same deterministic initial point used by
+<code class="docutils literal notranslate"><span class="pre">nelder_mead</span></code>; the remaining <code class="docutils literal notranslate"><span class="pre">Starts</span> <span class="pre">-</span> <span class="pre">1</span></code> points are a
+deterministic Halton low-discrepancy sequence (bases <code class="docutils literal notranslate"><span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">5,</span> <span class="pre">...</span></code>,
+one per automatic parameter) mapped onto the parameter box, so the
+same options always produce the same starts. The run with the lowest
+sum of squared errors is selected; exact ties are broken by the
+lexicographically smallest parameter point (standard order of terms).
+The <code class="docutils literal notranslate"><span class="pre">iterations/1</span></code> and <code class="docutils literal notranslate"><span class="pre">evaluations/1</span></code> diagnostic terms report
+totals across all starts. The <code class="docutils literal notranslate"><span class="pre">convergence/1</span></code> diagnostic reflects
+only the winning start’s termination status against the
+<code class="docutils literal notranslate"><span class="pre">max_iterations/1</span></code> sub-option supplied through
+<code class="docutils literal notranslate"><span class="pre">optimizer_options/1</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">differential_evolution</span></code>: a single run of the
 <code class="docutils literal notranslate"><span class="pre">differential_evolution</span></code> library’s <code class="docutils literal notranslate"><span class="pre">rand/1/bin</span></code>-family
 metaheuristic over the same bounded objective, using a dedicated
 <code class="docutils literal notranslate"><span class="pre">fast_random(xoshiro128pp)</span></code> generator instance whose seed is saved
 before the run and restored afterward, so fitting neither depends on
-nor mutates any global random state. The <code class="docutils literal notranslate"><span class="pre">de_options/1</span></code> <code class="docutils literal notranslate"><span class="pre">seed/1</span></code>
-sub-option (default <code class="docutils literal notranslate"><span class="pre">42</span></code>) makes runs deterministic. When
-<code class="docutils literal notranslate"><span class="pre">polish/1</span></code> is <code class="docutils literal notranslate"><span class="pre">true</span></code> (the default), the DE result is refined by a
-further bounded Nelder-Mead run (using <code class="docutils literal notranslate"><span class="pre">optimizer_options/1</span></code>)
-starting from the DE best point; <code class="docutils literal notranslate"><span class="pre">iterations/1</span></code> and
-<code class="docutils literal notranslate"><span class="pre">evaluations/1</span></code> report the sum of the DE generations/evaluations
-and, when polishing ran, the polishing iterations/evaluations.
-<code class="docutils literal notranslate"><span class="pre">convergence/1</span></code> reflects whether the DE generation cap
-(<code class="docutils literal notranslate"><span class="pre">max_generations/1</span></code>, default <code class="docutils literal notranslate"><span class="pre">100</span></code>) was reached, independently of
-any subsequent polishing.</p></li>
+nor mutates any global random state. The <code class="docutils literal notranslate"><span class="pre">seed/1</span></code> sub-option of the
+<code class="docutils literal notranslate"><span class="pre">de_options/1</span></code> option (default <code class="docutils literal notranslate"><span class="pre">42</span></code>) makes runs deterministic.
+When the <code class="docutils literal notranslate"><span class="pre">polish/1</span></code> sub-option is <code class="docutils literal notranslate"><span class="pre">true</span></code> (the default), the DE
+result is refined by a further bounded Nelder-Mead run using the
+<code class="docutils literal notranslate"><span class="pre">optimizer_options/1</span></code> option, starting from the DE best point. The
+<code class="docutils literal notranslate"><span class="pre">iterations/1</span></code> and <code class="docutils literal notranslate"><span class="pre">evaluations/1</span></code> diagnostics report the sum of
+the DE generations/evaluations and, when polishing ran, the polishing
+iterations/evaluations. The <code class="docutils literal notranslate"><span class="pre">convergence/1</span></code> diagnostic reflects
+whether the DE generation cap (the <code class="docutils literal notranslate"><span class="pre">max_generations/1</span></code> sub-option,
+default <code class="docutils literal notranslate"><span class="pre">100</span></code>) was reached, independently of any subsequent
+polishing.</p></li>
 </ul>
 <p>None of the three strategies guarantees the global minimum of the
-training objective; <code class="docutils literal notranslate"><span class="pre">multi_start/1</span></code> and <code class="docutils literal notranslate"><span class="pre">differential_evolution</span></code>
-only reduce, but do not eliminate, the risk of a poor local optimum
-found from a single start.</p>
+training objective; the <code class="docutils literal notranslate"><span class="pre">multi_start(Starts)</span></code> and
+<code class="docutils literal notranslate"><span class="pre">differential_evolution</span></code> strategies only reduce, but do not eliminate,
+the risk of a poor local optimum found from a single start.</p>
 <p>With <code class="docutils literal notranslate"><span class="pre">initialization(optimized)</span></code>, optimization is also required when
 all smoothing parameters are explicit. Initial level and trend bounds
 are finite and derived from the observed minimum, maximum, and range.
@@ -648,10 +677,10 @@ rejected. There is no configurable missing-value marker or
 models advance the level by the current trend. Damped models advance by
 the damped trend and decay the trend. Seasonal models also rotate the
 seasonal queue, retaining the factor for that phase. No residual is
-recorded, no error is scored, and no smoothing update is applied.
-Transformations are applied only to known observations. Automatic
-parameter fitting and model or frequency selection evaluate the same
-missing-aware objective.</p>
+recorded, no error is scored, and no correction based on an observed
+value is applied. Transformations are applied only to known
+observations. Automatic parameter fitting and model or frequency
+selection evaluate the same missing-aware objective.</p>
 <p>Initialization never imputes a missing value. Nonseasonal two-point
 initialization uses the first required known observations and their
 original indices. Regression initialization fits only known values
@@ -665,22 +694,25 @@ known observation must remain to score after initialization.</p>
 <section id="immutable-online-updates">
 <h2>Immutable online updates<a class="headerlink" href="#immutable-online-updates" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">update/3</span></code> predicate applies one new observation to a learned
-forecaster and return a new forecaster term; the input forecaster is
+forecaster and returns a new forecaster term; the input forecaster is
 never modified. Updates reuse the fitted parameters and the exact
 per-observation equations used by batch fitting, including transformed
 and damped states and rotation of the current seasonal queue. Parameters
 are not refitted.</p>
 <p>With <code class="docutils literal notranslate"><span class="pre">missing_policy(skip_update)</span></code>, pass an anonymous or unbound
-variable to <code class="docutils literal notranslate"><span class="pre">update/3</span></code> for a missing observation. With
+variable to the <code class="docutils literal notranslate"><span class="pre">update/3</span></code> predicate for a missing observation. With
 <code class="docutils literal notranslate"><span class="pre">missing_policy(error)</span></code>, an unbound update observation raises an
 instantiation error.</p>
 <p>The original effective training options remain unchanged. Each update
-increments <code class="docutils literal notranslate"><span class="pre">training_series_length/1</span></code> and <code class="docutils literal notranslate"><span class="pre">update_count/1</span></code>. Known
-observations also increment <code class="docutils literal notranslate"><span class="pre">observed_count/1</span></code> and <code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code>,
-add their one-step squared error to <code class="docutils literal notranslate"><span class="pre">sum_squared_error/1</span></code>, and
-recompute <code class="docutils literal notranslate"><span class="pre">mean_squared_error/1</span></code>. A skipped missing observation
-instead increments only <code class="docutils literal notranslate"><span class="pre">missing_count/1</span></code> while advancing trend
-prediction and seasonal phase exactly as during batch fitting.</p>
+increments the <code class="docutils literal notranslate"><span class="pre">training_series_length/1</span></code> and <code class="docutils literal notranslate"><span class="pre">update_count/1</span></code>
+diagnostic values. Known observations also increment
+<code class="docutils literal notranslate"><span class="pre">observed_count/1</span></code> and <code class="docutils literal notranslate"><span class="pre">scored_count/1</span></code>, add their one-step squared
+error to <code class="docutils literal notranslate"><span class="pre">sum_squared_error/1</span></code>, and recompute
+<code class="docutils literal notranslate"><span class="pre">mean_squared_error/1</span></code>. A missing observation also increments
+<code class="docutils literal notranslate"><span class="pre">missing_count/1</span></code>, but does not change the observed count, scored
+count, or error totals. Its position still counts toward the elapsed
+length and update count, and trend prediction and seasonal phase advance
+exactly as during batch fitting.</p>
 <p>Residual retention follows the original <code class="docutils literal notranslate"><span class="pre">retain_residuals/1</span></code> learning
 option. When enabled, each known online residual is appended
 chronologically to the retained training residuals; skipped missing
@@ -689,11 +721,11 @@ store <code class="docutils literal notranslate"><span class="pre">residuals(non
 </section>
 <section id="forecaster-representation">
 <h2>Forecaster representation<a class="headerlink" href="#forecaster-representation" title="Link to this heading"></a></h2>
-<p>A learned forecaster is represented as:</p>
+<p>A learned forecaster uses the following term representation:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>exponential_smoothing_forecaster(<span class="nv">Method</span>, <span class="nv">State</span>, <span class="nv">Parameters</span>, <span class="nv">Diagnostics</span>)
 </pre></div>
 </div>
-<p>The state is one of:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">State</span></code> argument uses one of the following terms:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">level(Level)</span></code> for simple exponential smoothing.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">holt(Level,</span> <span class="pre">Trend)</span></code> for Holt smoothing.</p></li>
@@ -704,8 +736,8 @@ forecast.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">holt_winters_damped(Level,</span> <span class="pre">Trend,</span> <span class="pre">Phi,</span> <span class="pre">Frequency,</span> <span class="pre">SeasonalQueue)</span></code>
 for damped seasonal smoothing.</p></li>
 </ul>
-<p>When <code class="docutils literal notranslate"><span class="pre">transformation/1</span></code> is not <code class="docutils literal notranslate"><span class="pre">none</span></code>, the state is instead wrapped
-as:</p>
+<p>When the <code class="docutils literal notranslate"><span class="pre">transformation/1</span></code> option value is not <code class="docutils literal notranslate"><span class="pre">none</span></code>, the state is
+wrapped in the following term:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>transformed(<span class="nv">Transformation</span>, <span class="nv">InnerState</span>, residual_variance(<span class="nv">Variance</span>))
 </pre></div>
 </div>
@@ -720,10 +752,11 @@ unwrapped state shapes above unchanged.</p>
 Setting <code class="docutils literal notranslate"><span class="pre">Phi</span></code> to <code class="docutils literal notranslate"><span class="pre">1.0</span></code> is equivalent to the corresponding undamped
 model; values below <code class="docutils literal notranslate"><span class="pre">1.0</span></code> make the projected trend approach a finite
 limit.</p>
-<p>Diagnostics include the common model, training-series length, and
-options metadata plus the selected method, seasonal frequency when
-applicable, fitted parameters, sum and mean squared one-step errors, the
-selected <code class="docutils literal notranslate"><span class="pre">optimizer(Optimizer)</span></code> strategy, <code class="docutils literal notranslate"><span class="pre">update_count(Count)</span></code>,
+<p>The <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> argument is a list of diagnostic terms. It includes
+the common model, training-series length, and options metadata plus the
+selected method, seasonal frequency when applicable, fitted parameters,
+sum and mean squared one-step errors, the selected strategy in an
+<code class="docutils literal notranslate"><span class="pre">optimizer(Optimizer)</span></code> diagnostic term, <code class="docutils literal notranslate"><span class="pre">update_count(Count)</span></code>,
 convergence status, optimizer iterations, objective evaluations, and
 <code class="docutils literal notranslate"><span class="pre">observed_count(ObservedCount)</span></code>, <code class="docutils literal notranslate"><span class="pre">missing_count(MissingCount)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">scored_count(ScoredCount)</span></code>, and the retained residuals metadata term
@@ -736,7 +769,7 @@ Forecaster validation requires the persisted counts to agree with the
 training length and error statistics. The convergence status is
 <code class="docutils literal notranslate"><span class="pre">fixed_parameters</span></code>, <code class="docutils literal notranslate"><span class="pre">converged</span></code>, or <code class="docutils literal notranslate"><span class="pre">maximum_iterations</span></code>; see
 “Optimizer strategies” above for how iterations, evaluations, and
-convergence are aggregated for <code class="docutils literal notranslate"><span class="pre">multi_start/1</span></code> and
+convergence are aggregated for the <code class="docutils literal notranslate"><span class="pre">multi_start(Starts)</span></code> and
 <code class="docutils literal notranslate"><span class="pre">differential_evolution</span></code>.</p>
 <p>Forecaster validation checks the representation, method/state pairing,
 finite numeric state and diagnostic values, parameter ranges, effective
@@ -758,9 +791,9 @@ statistics.</p>
 </section>
 <section id="transformations">
 <h2>Transformations<a class="headerlink" href="#transformations" title="Link to this heading"></a></h2>
-<p>When <code class="docutils literal notranslate"><span class="pre">transformation/1</span></code> is <code class="docutils literal notranslate"><span class="pre">log</span></code> or <code class="docutils literal notranslate"><span class="pre">box_cox(Lambda)</span></code>, the
-training series is transformed before fitting and forecasts are produced
-on the transformed scale and then inverted:</p>
+<p>When the <code class="docutils literal notranslate"><span class="pre">transformation/1</span></code> option value is <code class="docutils literal notranslate"><span class="pre">log</span></code> or
+<code class="docutils literal notranslate"><span class="pre">box_cox(Lambda)</span></code>, the training series is transformed before fitting
+and forecasts are produced on the transformed scale and then inverted:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">log</span></code>: forward <code class="docutils literal notranslate"><span class="pre">log(Value)</span></code>, inverse <code class="docutils literal notranslate"><span class="pre">exp(Value)</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">box_cox(Lambda)</span></code> with <code class="docutils literal notranslate"><span class="pre">abs(Lambda)</span> <span class="pre">&gt;</span> <span class="pre">1.0e-6</span></code>: forward
@@ -773,28 +806,31 @@ formulas, avoiding numerical instability from dividing by a near-zero
 <code class="docutils literal notranslate"><span class="pre">Lambda</span></code>.</p></li>
 </ul>
 <p>With <code class="docutils literal notranslate"><span class="pre">transformation(box_cox(auto))</span></code>, lambda is selected
-deterministically inside <code class="docutils literal notranslate"><span class="pre">box_cox_bounds/2</span></code> by 24 iterations of
-golden-section search. Each lambda evaluation transforms the series and
-performs a complete fit using the configured smoothing optimizer,
-initialization strategy, model selection, and frequency selection. The
-minimized profile-likelihood criterion uses
+deterministically within the interval supplied by the
+<code class="docutils literal notranslate"><span class="pre">box_cox_bounds/2</span></code> option, using 24 iterations of golden-section
+search. Each lambda evaluation transforms the series and performs a
+complete fit using the configured smoothing optimizer, initialization
+strategy, model selection, and frequency selection. The minimized
+profile-likelihood criterion uses
 <code class="docutils literal notranslate"><span class="pre">N*log(SSE/E)</span> <span class="pre">-</span> <span class="pre">2*(Lambda-1)*sum(log(Y))</span></code>, where <code class="docutils literal notranslate"><span class="pre">N</span></code> is the number
 of known observations and <code class="docutils literal notranslate"><span class="pre">E</span></code> is the number of scored one-step errors,
-including the Box-Cox Jacobian over known observations. Missing markers
-under <code class="docutils literal notranslate"><span class="pre">missing_policy(skip_update)</span></code> are excluded from the transform
-and Jacobian; every known observation must be strictly positive.</p>
-<p>The learned state and effective <code class="docutils literal notranslate"><span class="pre">options/1</span></code> diagnostics always store
-the selected numeric <code class="docutils literal notranslate"><span class="pre">box_cox(Lambda)</span></code> term; <code class="docutils literal notranslate"><span class="pre">auto</span></code> is never
-persisted. Forecasts, bias adjustment, residual intervals, immutable
-updates, validation, and export therefore use the same fixed selected
-lambda. Model and frequency AICc scores count automatic lambda as a
-fitted parameter. If any required transformed fit is infeasible,
-learning propagates the error; it does not fall back to an untransformed
-or fixed-lambda fit.</p>
-<p>Diagnostics <code class="docutils literal notranslate"><span class="pre">sum_squared_error/1</span></code> and <code class="docutils literal notranslate"><span class="pre">mean_squared_error/1</span></code> are
-always computed and reported on the transformed scale.</p>
-<p>When <code class="docutils literal notranslate"><span class="pre">bias_adjustment/1</span></code> is <code class="docutils literal notranslate"><span class="pre">delta</span></code>, the inverse-transform forecast
-is corrected using the stored transformed-scale residual variance <code class="docutils literal notranslate"><span class="pre">V</span></code>:</p>
+including the Box-Cox Jacobian over known observations. Missing
+observations under <code class="docutils literal notranslate"><span class="pre">missing_policy(skip_update)</span></code> are excluded from the
+transform and Jacobian; every known observation must be strictly
+positive.</p>
+<p>The learned state and the <code class="docutils literal notranslate"><span class="pre">options/1</span></code> diagnostic term always store the
+selected numeric <code class="docutils literal notranslate"><span class="pre">box_cox(Lambda)</span></code> term; <code class="docutils literal notranslate"><span class="pre">auto</span></code> is never persisted.
+Forecasts, bias adjustment, residual intervals, immutable updates,
+validation, and export therefore use the same fixed selected lambda.
+Model and frequency AICc scores count automatic lambda as a fitted
+parameter. If any required transformed fit is infeasible, learning
+propagates the error; it does not fall back to an untransformed or
+fixed-lambda fit.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">sum_squared_error/1</span></code> and <code class="docutils literal notranslate"><span class="pre">mean_squared_error/1</span></code> diagnostic term
+arguments are always computed and reported on the transformed scale.</p>
+<p>When the <code class="docutils literal notranslate"><span class="pre">bias_adjustment/1</span></code> option value is <code class="docutils literal notranslate"><span class="pre">delta</span></code>, the
+inverse-transform forecast is corrected using the stored
+transformed-scale residual variance <code class="docutils literal notranslate"><span class="pre">V</span></code>:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">log</span></code>: <code class="docutils literal notranslate"><span class="pre">Forecast</span> <span class="pre">is</span> <span class="pre">exp(Value)</span> <span class="pre">*</span> <span class="pre">exp(V</span> <span class="pre">/</span> <span class="pre">2)</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">box_cox(Lambda)</span></code> with <code class="docutils literal notranslate"><span class="pre">abs(Lambda)</span> <span class="pre">&gt;</span> <span class="pre">1.0e-6</span></code>: the second-order
@@ -804,23 +840,22 @@ with <code class="docutils literal notranslate"><span class="pre">Base</span> <s
 <li><p><code class="docutils literal notranslate"><span class="pre">box_cox(Lambda)</span></code> with <code class="docutils literal notranslate"><span class="pre">abs(Lambda)</span> <span class="pre">=&lt;</span> <span class="pre">1.0e-6</span></code> uses the <code class="docutils literal notranslate"><span class="pre">log</span></code>
 formula.</p></li>
 </ul>
-<p><code class="docutils literal notranslate"><span class="pre">bias_adjustment(delta)</span></code> is rejected when <code class="docutils literal notranslate"><span class="pre">transformation/1</span></code> is
-<code class="docutils literal notranslate"><span class="pre">none</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">bias_adjustment(delta)</span></code> option is rejected when the
+<code class="docutils literal notranslate"><span class="pre">transformation/1</span></code> option is <code class="docutils literal notranslate"><span class="pre">none</span></code>.</p>
 </section>
 <section id="prediction-intervals">
 <h2>Prediction intervals<a class="headerlink" href="#prediction-intervals" title="Link to this heading"></a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">forecast_interval/5</span></code> computes residual-bootstrap prediction interval
-bounds for the next <code class="docutils literal notranslate"><span class="pre">Horizon</span></code> forecasts:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">forecast_interval/5</span></code> predicate computes residual-bootstrap
+prediction interval bounds for the next <code class="docutils literal notranslate"><span class="pre">Horizon</span></code> forecasts:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>exponential_smoothing<span class="o">::</span>forecast_interval(<span class="nv">Forecaster</span>, <span class="nv">Horizon</span>, <span class="nv">Lower</span>, <span class="nv">Upper</span>, <span class="nv">Options</span>)
 </pre></div>
 </div>
-<p>This requires a forecaster learned with <code class="docutils literal notranslate"><span class="pre">retain_residuals(true)</span></code>; a
-<code class="docutils literal notranslate"><span class="pre">domain_error(retained_residuals,</span> <span class="pre">Forecaster)</span></code> is raised for a
-positive <code class="docutils literal notranslate"><span class="pre">Horizon</span></code> otherwise. A zero <code class="docutils literal notranslate"><span class="pre">Horizon</span></code> returns two empty
+<p>This requires a forecaster learned with the <code class="docutils literal notranslate"><span class="pre">retain_residuals(true)</span></code>
+option; a <code class="docutils literal notranslate"><span class="pre">domain_error(retained_residuals,</span> <span class="pre">Forecaster)</span></code> is raised for
+a positive <code class="docutils literal notranslate"><span class="pre">Horizon</span></code> otherwise. A zero <code class="docutils literal notranslate"><span class="pre">Horizon</span></code> returns two empty
 lists and does not require retained residuals.</p>
-<p><code class="docutils literal notranslate"><span class="pre">Options</span></code> is validated independently from <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> options (a
-<code class="docutils literal notranslate"><span class="pre">domain_error(option,</span> <span class="pre">Option)</span></code> is raised for an unsupported option)
-and supports:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Options</span></code> argument accepts interval options, validated
+independently from the learning options of the <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">confidence(Level)</span></code>: central interval coverage, a number in the open
 interval <code class="docutils literal notranslate"><span class="pre">]0.0,</span> <span class="pre">1.0[</span></code> (default: <code class="docutils literal notranslate"><span class="pre">0.95</span></code>).</p></li>
@@ -831,26 +866,27 @@ integer (default: <code class="docutils literal notranslate"><span class="pre">1
 <li><p><code class="docutils literal notranslate"><span class="pre">seed(Seed)</span></code>: positive integer seed for the dedicated bootstrap
 random number generator (default: <code class="docutils literal notranslate"><span class="pre">42</span></code>).</p></li>
 </ul>
-<p>For each of <code class="docutils literal notranslate"><span class="pre">samples/1</span></code> simulated paths and each horizon step, the
-method independently resamples, with replacement, one retained one-step
-training residual and adds it to the deterministic point forecast for
-that step (from <code class="docutils literal notranslate"><span class="pre">forecast_smoothing/4</span></code> on the fitted, possibly
-transformed, scale), thus preserving the seasonal phase of the point
-forecast without re-simulating the level, trend, or seasonal state. Each
-simulated value is then inverse-transformed using the same
-transformation and <code class="docutils literal notranslate"><span class="pre">bias_adjustment/1</span></code> option as <code class="docutils literal notranslate"><span class="pre">forecast/3</span></code>.
-<code class="docutils literal notranslate"><span class="pre">Lower</span></code> and <code class="docutils literal notranslate"><span class="pre">Upper</span></code> are the empirical <code class="docutils literal notranslate"><span class="pre">(1-Confidence)/2</span></code> and
+<p>For each simulated path requested by the <code class="docutils literal notranslate"><span class="pre">samples/1</span></code> option and each
+horizon step, the method independently resamples, with replacement, one
+retained one-step training residual and adds it to the deterministic
+point forecast for that step (from the shared <code class="docutils literal notranslate"><span class="pre">forecast_smoothing/4</span></code>
+predicate on the fitted, possibly transformed, scale), thus preserving
+the seasonal phase of the point forecast without re-simulating the
+level, trend, or seasonal state. Each simulated value is then
+inverse-transformed using the same transformation and
+<code class="docutils literal notranslate"><span class="pre">bias_adjustment/1</span></code> option as the <code class="docutils literal notranslate"><span class="pre">forecast/3</span></code> predicate. <code class="docutils literal notranslate"><span class="pre">Lower</span></code>
+and <code class="docutils literal notranslate"><span class="pre">Upper</span></code> are the empirical <code class="docutils literal notranslate"><span class="pre">(1-Confidence)/2</span></code> and
 <code class="docutils literal notranslate"><span class="pre">(1+Confidence)/2</span></code> quantiles (nearest-rank method) of the simulated
-values for each step, widened when necessary with <code class="docutils literal notranslate"><span class="pre">min/2</span></code> and
-<code class="docutils literal notranslate"><span class="pre">max/2</span></code> against the point forecast so that <code class="docutils literal notranslate"><span class="pre">Lower</span> <span class="pre">=&lt;</span> <span class="pre">Point</span> <span class="pre">=&lt;</span> <span class="pre">Upper</span></code>
-always holds.</p>
+values for each step, widened when necessary with the <code class="docutils literal notranslate"><span class="pre">min/2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">max/2</span></code> arithmetic functions against the point forecast so that
+<code class="docutils literal notranslate"><span class="pre">Lower</span> <span class="pre">=&lt;</span> <span class="pre">Point</span> <span class="pre">=&lt;</span> <span class="pre">Upper</span></code> always holds.</p>
 <p>Sampling uses a dedicated <code class="docutils literal notranslate"><span class="pre">fast_random(as183)</span></code> generator instance,
 isolated from the default <code class="docutils literal notranslate"><span class="pre">fast_random</span></code> and <code class="docutils literal notranslate"><span class="pre">random</span></code> objects. The
-generator seed is saved, deterministically reset from <code class="docutils literal notranslate"><span class="pre">seed/1</span></code> with
-<code class="docutils literal notranslate"><span class="pre">randomize/1</span></code>, used for sampling, and then restored, so
-<code class="docutils literal notranslate"><span class="pre">forecast_interval/5</span></code> neither depends on nor mutates any global random
-state, and repeated calls with the same forecaster, horizon, and options
-are deterministic.</p>
+generator seed is saved, reset from the <code class="docutils literal notranslate"><span class="pre">seed/1</span></code> option using the
+<code class="docutils literal notranslate"><span class="pre">randomize/1</span></code> predicate, used for sampling, and then restored. The
+<code class="docutils literal notranslate"><span class="pre">forecast_interval/5</span></code> predicate neither depends on nor mutates any
+global random state, and repeated calls with the same forecaster,
+horizon, and options are deterministic.</p>
 <p>Because simulated values are point forecasts plus additive residual
 noise rather than full re-simulated forecasting paths, interval bounds
 for multiplicative or transformed models are only an approximation: a
@@ -869,23 +905,24 @@ seasonal-factor list beginning at the next forecast position. Thus,
 fitting a series of length <code class="docutils literal notranslate"><span class="pre">n</span></code> and frequency <code class="docutils literal notranslate"><span class="pre">m</span></code> takes <code class="docutils literal notranslate"><span class="pre">O(n)</span></code> time
 and <code class="docutils literal notranslate"><span class="pre">O(m)</span></code> seasonal state, while preserving the documented and
 exported forecaster representation.</p>
-<p>Model selection is explicit; the library does not compare methods or
-select a seasonal frequency automatically. Missing observations,
-irregular timestamps, exogenous regressors, multivariate series, and
-online state updates are outside the scope of this library. Prediction
-intervals are supported only through the residual-bootstrap
-<code class="docutils literal notranslate"><span class="pre">forecast_interval/5</span></code> approximation described above.</p>
-<p>Initialization is deterministic. The compatibility-default
-<code class="docutils literal notranslate"><span class="pre">two_cycles</span></code> strategy uses the first two complete cycles.
-Multiplicative two-cycle initialization uses cycle means without
-within-cycle detrending, which is robust for stable seasonality but only
-an approximation when a strong trend is present. The <code class="docutils literal notranslate"><span class="pre">regression</span></code>
-strategy estimates non-seasonal level and trend by linear regression.
-For seasonal models, it regresses complete-cycle means, converts the
-slope to a per-observation trend, averages detrended values or ratios by
-phase, and normalizes the seasonal factors. Although the shared
-frequency contract accepts any positive integer, this library rejects
-seasonal frequency <code class="docutils literal notranslate"><span class="pre">1</span></code> as a degenerate seasonal model.</p>
+<p>Automatic selection is opt-in: supply the <code class="docutils literal notranslate"><span class="pre">model(auto)</span></code> option to
+compare methods, or the <code class="docutils literal notranslate"><span class="pre">frequency(auto)</span></code> option with candidate
+periods to select a seasonal frequency. Missing observations and
+immutable online updates are supported as described above. Irregular
+timestamps, exogenous regressors, and multivariate series are not
+supported. For prediction intervals, use the residual-bootstrap
+approximation provided by the <code class="docutils literal notranslate"><span class="pre">forecast_interval/5</span></code> predicate.</p>
+<p>Initialization is deterministic. The default <code class="docutils literal notranslate"><span class="pre">two_cycles</span></code> strategy
+uses the first two complete cycles. Multiplicative two-cycle
+initialization uses cycle means without within-cycle detrending, which
+is robust for stable seasonality but only an approximation when a strong
+trend is present. The <code class="docutils literal notranslate"><span class="pre">regression</span></code> strategy estimates non-seasonal
+level and trend by linear regression. For seasonal models, it regresses
+complete-cycle means, converts the slope to a per-observation trend,
+averages detrended values or ratios by phase, and normalizes the
+seasonal factors. Although the shared frequency contract accepts any
+positive integer, this library rejects seasonal frequency <code class="docutils literal notranslate"><span class="pre">1</span></code> as a
+degenerate seasonal model.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">optimized</span></code> strategy consumes <code class="docutils literal notranslate"><span class="pre">initial_cycles*Frequency</span></code>
 observations for seasonal initialization, just like <code class="docutils literal notranslate"><span class="pre">regression</span></code>, and
 jointly minimizes the subsequent one-step errors over the initial state
@@ -907,13 +944,53 @@ raises a <code class="docutils literal notranslate"><span class="pre">domain_err
 error when the additive trend component would otherwise produce a zero
 or negative forecast.</p>
 <p>Solver objective and update-reporting options are controlled internally
-and cannot be overridden through <code class="docutils literal notranslate"><span class="pre">optimizer_options/1</span></code> or
-<code class="docutils literal notranslate"><span class="pre">de_options/1</span></code>. Nelder-Mead is a local optimizer with one
-deterministic initial simplex; <code class="docutils literal notranslate"><span class="pre">multi_start/1</span></code> and
-<code class="docutils literal notranslate"><span class="pre">differential_evolution</span></code> explore the parameter box more broadly but
-remain deterministic heuristics, so automatic fitting never guarantees
-the global minimum of the training objective under any <code class="docutils literal notranslate"><span class="pre">optimizer/1</span></code>
-strategy.</p>
+and cannot be overridden through the <code class="docutils literal notranslate"><span class="pre">optimizer_options/1</span></code> or
+<code class="docutils literal notranslate"><span class="pre">de_options/1</span></code> options. Nelder-Mead is a local optimizer with one
+deterministic initial simplex. The <code class="docutils literal notranslate"><span class="pre">multi_start(Starts)</span></code> and
+<code class="docutils literal notranslate"><span class="pre">differential_evolution</span></code> strategies explore the parameter box more
+broadly but remain deterministic heuristics, so automatic fitting never
+guarantees the global minimum of the training objective under any
+strategy selected by the <code class="docutils literal notranslate"><span class="pre">optimizer/1</span></code> option.</p>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
+<p>The library forecasts a single series using the seven documented
+smoothing methods and, for seasonal methods, one integer seasonal
+period. It does not support irregular timestamps, multiple seasonal
+periods, multivariate series, or exogenous regressors. Seasonal
+frequency must be at least two.</p>
+<p>Automatic selection compares the configured candidate methods or
+periods; it is not an unrestricted search for a model. Automatic
+frequency selection requires candidates supplied through the
+<code class="docutils literal notranslate"><span class="pre">frequency_candidates/1</span></code> option. With the <code class="docutils literal notranslate"><span class="pre">model(auto)</span></code> option,
+fixed numeric <code class="docutils literal notranslate"><span class="pre">alpha/1</span></code>, <code class="docutils literal notranslate"><span class="pre">beta/1</span></code>, <code class="docutils literal notranslate"><span class="pre">gamma/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">phi/1</span></code>
+options are rejected. Optimizer convergence and selection scores do not
+guarantee a global optimum or out-of-sample forecast accuracy.</p>
+<p>The default <code class="docutils literal notranslate"><span class="pre">missing_policy(error)</span></code> option rejects missing
+observations. The <code class="docutils literal notranslate"><span class="pre">missing_policy(skip_update)</span></code> option preserves their
+positions without imputing values, but initialization must still have
+enough known values and estimable seasonal phases. Learning also
+requires at least one scored known observation after initialization.
+Multiplicative methods require positive values on the fitted scale; log
+and Box-Cox transformations require positive original observations.
+These constraints can exclude a series even when missing observations
+are otherwise permitted.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">update/3</span></code> predicate advances the state and error diagnostics with
+fixed parameters. It does not re-optimize smoothing factors, repeat
+method or frequency selection, or re-estimate a transformation. Learn a
+new model when those choices need to change. Retained residuals grow
+with scored updates when the <code class="docutils literal notranslate"><span class="pre">retain_residuals(true)</span></code> option is
+enabled.</p>
+<p>Positive-horizon prediction intervals require retained residuals. The
+<code class="docutils literal notranslate"><span class="pre">forecast_interval/5</span></code> predicate independently resamples one-step
+training errors around fixed point forecasts; simulated shocks do not
+update future levels, trends, or seasonal factors. This approximation
+does not model serially dependent errors, horizon-dependent error
+accumulation, or parameter uncertainty. Its finite-sample quantiles,
+widened to contain the point forecast, are not a guarantee of nominal
+coverage. Forecasts and interval bounds are not generally constrained to
+non-negative or integer values, although multiplicative point forecasts
+must remain positive.</p>
 </section>
 </section>
 

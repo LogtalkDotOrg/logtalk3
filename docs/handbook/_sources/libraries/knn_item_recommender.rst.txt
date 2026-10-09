@@ -3,10 +3,11 @@
 ``knn_item_recommender``
 ========================
 
-Item-based k-nearest-neighbor collaborative filtering with
-similarity-weighted raw ratings. The object imports
-``recommender_common`` and implements ``recommender_protocol``. The
-``score/4`` predicate returns a predicted rating. Datasets implement
+This library predicts ratings from similar items using item-based
+k-nearest-neighbor collaborative filtering with similarity-weighted raw
+ratings. The library object imports the ``recommender_common`` category
+and implements ``recommender_protocol``. The ``score/4`` predicate
+returns a predicted rating. Datasets implement
 ``rating_dataset_protocol`` with atomic identifiers, one numeric rating
 per user/item pair, a matching positive count, and an optional numeric
 ordered rating scale. The user-kNN and Slope One libraries are not
@@ -52,15 +53,21 @@ Options
 
 The ``learn/3`` predicate accepts the following options:
 
-- ``k(3)``: positive maximum neighborhood size.
-- ``similarity_metric(cosine_similarity)``: ground identifier of a
-  loaded object exposing an implemented public ``similarity/3``,
-  including parametric strategies. The dependency supplies cosine,
-  Pearson, Jaccard, inverse MSD, and Spearman objects.
-- ``min_overlap(1)``: positive minimum co-rater count.
-- ``min_similarity(0.0)``: non-negative finite numeric threshold.
-- ``clip_to_scale(true)``: ``true`` or ``false``; clips estimates and
-  fallbacks to an inclusive declared scale. With no scale it is a no-op.
+- ``k(K)`` sets the maximum neighborhood size to a positive integer. The
+  default is ``3``.
+- ``similarity_metric(Metric)`` selects a loaded object with a public
+  ``similarity/3`` implementation. Its identifier must be ground; the
+  default is ``cosine_similarity``. It accepts parametric strategies.
+  The dependency supplies cosine, Pearson, Jaccard, inverse MSD, and
+  Spearman objects.
+- ``min_overlap(Count)`` sets the minimum number of users who rated both
+  items to a positive integer. The default is ``1``.
+- ``min_similarity(Threshold)`` sets a non-negative finite numeric
+  threshold. The default is ``0.0``.
+- ``clip_to_scale(Boolean)`` selects ``true`` (default) or ``false``.
+  When enabled, it clips estimates and fallbacks to the inclusive
+  declared scale. Without a declared scale, it leaves estimates
+  unchanged.
 
 Metrics receive complete item profiles and retain their own
 sparse-vector semantics. A strategy must produce exactly one finite
@@ -98,11 +105,12 @@ Clipping follows this fallback or the collaborative estimate. Query
 identifiers must be instantiated atomic terms, but need not have
 appeared in training.
 
-The ``recommend(Model, User, N, Recommendations)`` predicate returns up
-to positive integer ``N`` unrated training-catalog ``Item-Score`` pairs,
-descending by score with descending standard identifier order for ties.
-It scores through the same public prediction path. Unknown users see the
-entire catalog; no candidates returns ``[]``.
+The ``recommend/4`` predicate returns up to ``N`` unrated
+training-catalog ``Item-Score`` pairs; ``N`` must be a positive integer.
+Results are ordered by decreasing score with descending standard
+identifier order for ties. It scores through the same public prediction
+path. Every training-catalog item is a candidate for an unknown user. If
+no candidates remain, the result is ``[]``.
 
 For ``u: a=1,b=3`` and ``v: a=2,b=4,c=5``, cosine scores for ``c``
 against ``a`` and ``b`` are ``2/sqrt(5)`` and ``4/5``. The prediction
@@ -117,19 +125,21 @@ With ``k(1)`` only ``a`` contributes and the estimate is one.
 Models, diagnostics, and export
 -------------------------------
 
-The ``learn/2`` and ``learn/3`` predicates return the learned
-recommender model as a term with the following structure:
+The ``learn/2`` and ``learn/3`` predicates return models using the
+following term representation:
 
 ::
 
    knn_item_model(Ratings, Profiles, GlobalMean, Scale, Diagnostics)
 
-Ratings are ``rating(User, Item, Rating)`` terms. Sorted profiles
-contain ``Item-profile(SortedUserRatingPairs, Mean)`` entries. The scale
-is ``none`` or ``scale(Min, Max)``. Diagnostics contain exactly one
-``model(knn_item_recommender)``, ``rating_count(Count)``,
-``options(Options)``, ``user_count(Count)``, ``item_count(Count)``, and
-``neighbor_axis(item)``.
+The ``Ratings`` argument is a list of ``rating(User, Item, Rating)``
+terms. Sorted profiles contain
+``Item-profile(SortedUserRatingPairs, Mean)`` entries. The ``Scale``
+argument is the atom ``none`` or a ``scale(Min, Max)`` term. The
+``Diagnostics`` argument is a list containing exactly one of each
+diagnostic term: ``model(knn_item_recommender)``,
+``rating_count(Count)``, ``options(Options)``, ``user_count(Count)``,
+``item_count(Count)``, and ``neighbor_axis(item)``.
 
 The ``valid_recommender/1`` predicate checks records, effective options,
 profile coverage, means, scale, and diagnostics without binding

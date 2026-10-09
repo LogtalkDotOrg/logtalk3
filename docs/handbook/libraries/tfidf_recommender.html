@@ -445,13 +445,14 @@
              
   <section id="tfidf-recommender">
 <span id="library-tfidf-recommender"></span><h1><code class="docutils literal notranslate"><span class="pre">tfidf_recommender</span></code><a class="headerlink" href="#tfidf-recommender" title="Link to this heading"></a></h1>
-<p>Classical content-based filtering using sparse item vectors,
-positive-feedback Rocchio-style centroid profiles, and cosine
-similarity. Feature occurrence lists are weighted by TF-IDF through
-<code class="docutils literal notranslate"><span class="pre">text_vectorization</span></code>; externally weighted vectors can also be
-supplied. The object imports <code class="docutils literal notranslate"><span class="pre">recommender_common</span></code> and the
+<p>Classical content-based filtering, recommending items with content
+similar to a user’s positively selected items. It uses sparse item
+vectors, Rocchio-style centroid profiles, and cosine similarity. Feature
+occurrence lists are weighted by TF-IDF through <code class="docutils literal notranslate"><span class="pre">text_vectorization</span></code>;
+externally weighted vectors can also be supplied.</p>
+<p>The library object imports the <code class="docutils literal notranslate"><span class="pre">recommender_common</span></code> category plus the
 <code class="docutils literal notranslate"><span class="pre">item_content_dataset_validation</span></code> and <code class="docutils literal notranslate"><span class="pre">similarity_metric_common</span></code>
-categories, implementing <code class="docutils literal notranslate"><span class="pre">recommender_protocol</span></code>. The <code class="docutils literal notranslate"><span class="pre">score/4</span></code>
+categories, implementing <code class="docutils literal notranslate"><span class="pre">recommender_protocol</span></code>. The main <code class="docutils literal notranslate"><span class="pre">score/4</span></code>
 predicate returns cosine relevance rather than a predicted rating.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
@@ -504,7 +505,7 @@ example:</p>
 </div>
 <p>The score is approximately <code class="docutils literal notranslate"><span class="pre">0.948683</span></code>; recommendations contain
 <code class="docutils literal notranslate"><span class="pre">second</span></code> followed by <code class="docutils literal notranslate"><span class="pre">third</span></code>, whose score is zero. Neither candidate
-needs a rating.</p>
+has to appear in the training ratings.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">item/1</span></code> predicate declares the complete, nonempty catalog, with
 unique atomic identifiers. The <code class="docutils literal notranslate"><span class="pre">item_content/2</span></code> predicate declares
 exactly one descriptor per catalog item, with no extra items. All rated
@@ -531,29 +532,31 @@ space.</p>
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate accepts these options:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">positive_threshold(user_mean)</span></code> selects ratings at least equal to
-the user’s mean over all their ratings. A finite numeric threshold can
-be supplied instead.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">profile_weighting(uniform)</span></code> averages selected item vectors equally.
+<li><p><code class="docutils literal notranslate"><span class="pre">positive_threshold(Threshold)</span></code> selects <code class="docutils literal notranslate"><span class="pre">user_mean</span></code> (default) or a
+finite numeric threshold. Ratings at least equal to the threshold are
+selected; <code class="docutils literal notranslate"><span class="pre">user_mean</span></code> uses the mean of all the user’s ratings.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">profile_weighting(Weighting)</span></code> selects <code class="docutils literal notranslate"><span class="pre">uniform</span></code> (default) or
+<code class="docutils literal notranslate"><span class="pre">rating</span></code>. Uniform weighting averages selected item vectors equally.
 The alternative <code class="docutils literal notranslate"><span class="pre">rating</span></code> uses raw ratings as weights; every selected
 rating must then be strictly positive, including ratings on
 empty-content items.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">normalization(l2)</span></code> unit-normalizes item vectors before averaging
-them. The alternative <code class="docutils literal notranslate"><span class="pre">none</span></code> preserves vector magnitude, allowing
-longer documents or externally larger weights to influence profile
-direction more strongly.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">vectorizer_options([])</span></code> forwards options to <code class="docutils literal notranslate"><span class="pre">text_vectorizer</span></code>.
-Defaults are raw TF-IDF and smoothed IDF. Binary/count weighting,
-alternative TF-IDF factors, IDF rules, frequency bounds and vocabulary
-limits are available. Nested <code class="docutils literal notranslate"><span class="pre">normalization</span></code> options are rejected;
-use the top-level option instead. Nonempty vectorizer options are
-rejected for preweighted content.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">normalization(Normalization)</span></code> selects <code class="docutils literal notranslate"><span class="pre">l2</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">none</span></code>.
+L2 normalization unit-normalizes item vectors before averaging them.
+The alternative <code class="docutils literal notranslate"><span class="pre">none</span></code> preserves vector magnitude, allowing longer
+documents or externally larger weights to influence profile direction
+more strongly.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vectorizer_options(Options)</span></code> forwards options to
+<code class="docutils literal notranslate"><span class="pre">text_vectorizer</span></code> (default: <code class="docutils literal notranslate"><span class="pre">[]</span></code>). Defaults are raw TF-IDF and
+smoothed IDF. Binary/count weighting, alternative TF-IDF factors, IDF
+rules, frequency bounds and vocabulary limits are available. Nested
+<code class="docutils literal notranslate"><span class="pre">normalization</span></code> options are rejected; use the top-level option
+instead. Nonempty vectorizer options are rejected for preweighted
+content.</p></li>
 </ul>
 <p>Repeated valid options are accepted; the first occurrence takes
 precedence, including inside <code class="docutils literal notranslate"><span class="pre">vectorizer_options</span></code>. The
-<code class="docutils literal notranslate"><span class="pre">valid_option/1</span></code> and <code class="docutils literal notranslate"><span class="pre">default_option/1</span></code> predicates remain public.
-The <code class="docutils literal notranslate"><span class="pre">recommender_options/2</span></code> predicate returns effective top-level
-options; fitted vectorizer diagnostics record its effective options.</p>
+<code class="docutils literal notranslate"><span class="pre">recommender_options/2</span></code> predicate returns effective top-level options;
+fitted vectorizer diagnostics record its effective options.</p>
 </section>
 <section id="training-and-scoring">
 <h2>Training and scoring<a class="headerlink" href="#training-and-scoring" title="Link to this heading"></a></h2>
@@ -578,22 +581,22 @@ happens when scoring:</p>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">score/4</span></code> predicate returns a relevance value in <code class="docutils literal notranslate"><span class="pre">[0,1]</span></code>, not a
-rating estimate. Missing sparse features contribute zero. Already-rated
-items can be scored normally; observed ratings are not returned
-directly. Unknown users, empty profiles, empty item vectors, and
-disjoint feature sets score zero. An unknown item raises
+rating estimate. Features absent from an item or profile contribute
+zero. Already-rated items can be scored normally; observed ratings are
+not returned directly. Unknown users, empty profiles, empty item
+vectors, and disjoint feature sets score zero. An unknown item raises
 <code class="docutils literal notranslate"><span class="pre">domain_error(catalog_item,</span> <span class="pre">Item)</span></code>. Query identifiers must be
 instantiated atomic terms. There is no baseline fallback or clipping to
 the rating scale.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">recommend/4</span></code> predicate returns up to positive integer <code class="docutils literal notranslate"><span class="pre">N</span></code>
-unrated catalog items as <code class="docutils literal notranslate"><span class="pre">Item-Score</span></code> pairs. It excludes ALL
-previously rated items, not just positive ones, and includes zero-score
-candidates. Results use decreasing score with descending standard item
-order for ties. Unknown users therefore receive zero-score catalog
-recommendations. No remaining candidates returns <code class="docutils literal notranslate"><span class="pre">[]</span></code>; fewer than
-<code class="docutils literal notranslate"><span class="pre">N</span></code> candidates returns all of them. Scores agree with direct
-<code class="docutils literal notranslate"><span class="pre">score/4</span></code> calls, without repeating full model validation for each
-candidate.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">recommend/4</span></code> predicate returns up to <code class="docutils literal notranslate"><span class="pre">N</span></code> unrated catalog items
+as <code class="docutils literal notranslate"><span class="pre">Item-Score</span></code> pairs; <code class="docutils literal notranslate"><span class="pre">N</span></code> must be a positive integer. It excludes
+all previously rated items, not just positive ones, and includes
+zero-score candidates. Results use decreasing score with descending
+standard item order for ties. Unknown users therefore receive zero-score
+catalog recommendations. No remaining candidates returns <code class="docutils literal notranslate"><span class="pre">[]</span></code>; fewer
+than <code class="docutils literal notranslate"><span class="pre">N</span></code> candidates returns all of them. Scores agree with direct
+<code class="docutils literal notranslate"><span class="pre">score/4</span></code> predicate calls, without repeating full model validation for
+each candidate.</p>
 <p>For orthogonal unit vectors <code class="docutils literal notranslate"><span class="pre">[x-1]</span></code> and <code class="docutils literal notranslate"><span class="pre">[y-1]</span></code>, equal selected
 ratings produce <code class="docutils literal notranslate"><span class="pre">[x-0.5,y-0.5]</span></code>, with cosine <code class="docutils literal notranslate"><span class="pre">1/sqrt(2)</span></code> to either
 axis and one to <code class="docutils literal notranslate"><span class="pre">[x-1,y-1]</span></code>. Selected ratings two and four with rating
@@ -724,8 +727,8 @@ state without another fit.</p>
 </section>
 <section id="models-diagnostics-and-export">
 <h2>Models, diagnostics, and export<a class="headerlink" href="#models-diagnostics-and-export" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">learn/2</span></code> and <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicates return a model with the
-following structure:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">learn/2</span></code> and <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicates return models using the
+following term representation:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>tfidf_model(<span class="nv">Ratings</span>, <span class="nv">Contents</span>, <span class="nv">ItemVectors</span>, <span class="nv">Profiles</span>, <span class="nv">Vectorizer</span>, <span class="nv">Scale</span>, <span class="nv">Diagnostics</span>)
 </pre></div>
 </div>
@@ -739,14 +742,14 @@ the fitted <code class="docutils literal notranslate"><span class="pre">text_vec
 <code class="docutils literal notranslate"><span class="pre">none</span></code> for externally weighted vectors. <code class="docutils literal notranslate"><span class="pre">Scale</span></code> is <code class="docutils literal notranslate"><span class="pre">none</span></code> or
 <code class="docutils literal notranslate"><span class="pre">scale(Min,Max)</span></code> and validates training ratings and rating upserts,
 not relevance scores.</p>
-<p>Diagnostics contain <code class="docutils literal notranslate"><span class="pre">model(tfidf_recommender)</span></code>,
-<code class="docutils literal notranslate"><span class="pre">rating_count(Count)</span></code>, <code class="docutils literal notranslate"><span class="pre">options(Options)</span></code>, <code class="docutils literal notranslate"><span class="pre">user_count(Count)</span></code>,
-<code class="docutils literal notranslate"><span class="pre">item_count(Count)</span></code>, <code class="docutils literal notranslate"><span class="pre">content_representation(features|vectors)</span></code>,
-<code class="docutils literal notranslate"><span class="pre">feature_count(Count)</span></code>, and <code class="docutils literal notranslate"><span class="pre">non_empty_profile_count(Count)</span></code>. Item
-count covers the full catalog. Feature count is fitted vocabulary size
-in feature mode, including classic-IDF zero-weight features, or the
-union of nonzero supplied keys in vector mode. Additional diagnostic
-terms are permitted.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> argument is a list of diagnostic terms, including
+<code class="docutils literal notranslate"><span class="pre">model(tfidf_recommender)</span></code>, <code class="docutils literal notranslate"><span class="pre">rating_count(Count)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">options(Options)</span></code>, <code class="docutils literal notranslate"><span class="pre">user_count(Count)</span></code>, <code class="docutils literal notranslate"><span class="pre">item_count(Count)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">content_representation(features|vectors)</span></code>, <code class="docutils literal notranslate"><span class="pre">feature_count(Count)</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">non_empty_profile_count(Count)</span></code>. Item count covers the full
+catalog. Feature count is fitted vocabulary size in feature mode,
+including classic-IDF zero-weight features, or the union of nonzero
+supplied keys in vector mode. Additional diagnostic terms are permitted.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">check_recommender/1</span></code> and <code class="docutils literal notranslate"><span class="pre">valid_recommender/1</span></code> predicates
 verify canonical source data, options, scale, catalog coverage, fitted
 vectorizer statistics, item vectors, profiles and diagnostic counts

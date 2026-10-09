@@ -3,11 +3,12 @@
 ``mutual_information_feature_selector``
 =======================================
 
-This library implements a univariate filter selector for categorical and
-continuous features with categorical targets. It reuses the typed
-discretization, sparse contingency arithmetic, stable ranking,
-selection, model validation, and export facilities of
-``feature_selection_protocols``.
+Use this library to select features that carry information about a
+categorical target. It scores categorical and continuous features
+independently, discretizing continuous values before scoring. It reuses
+the typed discretization, sparse contingency arithmetic, stable ranking,
+selection, model validation, and the export facilities of the
+``feature_selection_protocols`` library.
 
 API documentation
 -----------------
@@ -63,24 +64,23 @@ The dataset object must implement ``feature_dataset_protocol``. It
 declares continuous features with
 ``attribute_values(Feature, continuous)`` and categorical features with
 ``attribute_values(Feature, Domain)``, where ``Domain`` is a non-empty
-list of atomic values. Complete continuous values must be numbers;
-complete categorical values must belong to their declared domains;
-complete targets must be atomic.
+list of atomic values. Known continuous values must be numbers; known
+categorical values must belong to their declared domains; known targets
+must be atomic.
 
-The ``learn/2`` predicate uses the defaults. The ``learn/3`` predicate
-accepts an options list as its last argument:
+The ``learn/3`` predicate accepts an options list as its last argument:
 
-- ``score_variant(raw)`` or ``score_variant(normalized)``, default
-  ``raw``.
-- ``preparation_mode(per_feature)`` is the default. The ``joint`` mode
-  excludes rows missing the target or any candidate feature before
-  fitting bins, so all features use the same observations.
-- ``discretization(equal_frequency(Bins))`` or
-  ``discretization(equal_width(Bins))``, with a positive integer bin
-  count. The default is ``equal_frequency(10)``, applied only to
-  continuous features.
-- ``discretization(categorical)`` preserves numeric values as category
-  codes.
+- ``score_variant(Variant)`` selects ``raw`` (default) or
+  ``normalized``.
+- ``preparation_mode(Mode)`` selects ``per_feature`` (default) or
+  ``joint``. Joint preparation excludes rows missing the target or any
+  candidate feature before fitting bins, so all features use the same
+  observations.
+- ``discretization(Specification)`` selects ``equal_frequency(Bins)``,
+  ``equal_width(Bins)``, or ``categorical``, applied only to continuous
+  features. The default is ``equal_frequency(10)``; bin counts must be
+  positive integers. The ``categorical`` value preserves numeric values
+  as category codes.
 - ``feature_discretization(Feature, Specification)`` overrides the
   default for one declared feature. The specification can be
   ``categorical``, ``equal_frequency(Bins)``, or ``equal_width(Bins)``.
@@ -90,21 +90,22 @@ accepts an options list as its last argument:
 - ``selection_strategy(threshold(T))`` selects scores at least the
   numeric ``T``.
 
+The ``learn/2`` predicate uses the default option values.
+
 Repeated options and repeated overrides are accepted; the first
 applicable occurrence wins. All supplied options are validated,
 including later occurrences. Unknown override feature names are
-rejected. The ``default_option/1`` and ``valid_option/1`` predicates
-remain publicly queryable, including the inherited selection options.
+rejected.
 
 By default, preparation is per feature: observations with an unbound or
-absent feature value or an unbound target are excluded from that feature
-without imputing values. Binning is fitted to its complete cases only.
-Categorical features retain their declared categories unless explicitly
-overridden. Equal-width bins partition the observed range;
-equal-frequency bins use observed quantile cuts without splitting equal
-values. Occupied category counts can be smaller than requested bin
-counts. Applying numeric binning to an atomic non-numeric category is an
-error, not an implicit category encoding.
+absent feature value or an unbound target are excluded from that
+feature's score without imputing values. Binning is fitted to its
+complete cases only. Categorical features retain their declared
+categories unless explicitly overridden. Equal-width bins partition the
+observed range; equal-frequency bins use observed quantile cuts without
+splitting equal values. Occupied category counts can be smaller than
+requested bin counts. Applying numeric binning to an atomic non-numeric
+category is an error, not an implicit category encoding.
 
 Scores are sorted in decreasing order, preserving declaration order on
 ties. Top-k selection may include zero-scoring features. Thresholds
@@ -113,8 +114,8 @@ should be chosen for the selected score variant.
 Models and diagnostics
 ----------------------
 
-The ``learn/2-3`` predicates return selector terms with this
-representation:
+The ``learn/2`` and ``learn/3`` predicates return models using the
+following term representation:
 
 ::
 
@@ -123,8 +124,9 @@ representation:
 The ``feature_scores/2`` predicate returns sorted ``Feature-Score``
 pairs. The ``selected_features/2`` predicate returns selected names. The
 ``diagnostics/2``, ``diagnostic/2``, and ``selector_options/2``
-predicates expose metadata and effective options. Diagnostics contain
-``model/1``, ``example_count/1``, ``options/1``, ``candidate_count/1``,
+predicates expose metadata and effective options. The ``Diagnostics``
+argument is a list of diagnostic terms, including ``model/1``,
+``example_count/1``, ``options/1``, ``candidate_count/1``,
 ``selected_count/1``, ``scoring_metric/1``,
 ``complete_cases(FeatureCounts)``,
 ``discretization(FeatureSpecifications)``,
