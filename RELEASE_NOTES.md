@@ -32,6 +32,10 @@ Logtalk compiler and runtime
 and `variable_names/1` key arguments to be either the term being term-expanded
 or the goal being goal-expanded.
 
+* FIXED: Runtime race condition on multi-threaded backends when cleaning the
+dynamic binding caches. Thanks to Andrew Davison and Arun Majumdar for the
+bug reports and patches.
+
 Documentation
 -------------
 

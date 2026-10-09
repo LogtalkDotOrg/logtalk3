@@ -184,6 +184,10 @@
 % '$lgt_db_lookup_cache_'(Obj, Fact, Sender, TFact, UpdateData)
 :- dynamic('$lgt_db_lookup_cache_'/5).
 
+% the last clause of this cache must always exist to support runtime
+% resolved database messages to the "user" pseudo-object
+'$lgt_db_lookup_cache_'(user, Clause, _, Clause, true).
+
 
 % table of library paths
 
@@ -9098,13 +9102,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_clean_lookup_caches_unguarded' :-
-	retractall('$lgt_send_to_obj_'(_, _, _)),
-	retractall('$lgt_send_to_obj_ne_'(_, _, _)),
-	retractall('$lgt_send_to_self_'(_, _, _)),
-	retractall('$lgt_obj_super_call_'(_, _, _)),
-	retractall('$lgt_ctg_super_call_'(_, _, _)),
-	retractall('$lgt_db_lookup_cache_'(_, _, _, _, _)),
-	'$lgt_reassert_lookup_cache_catchall_clauses'.
+	'$lgt_clean_lookup_caches_unguarded'(_).
 
 
 
@@ -9127,29 +9125,26 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_clean_lookup_caches_unguarded'(Pred) :-
-	retractall('$lgt_send_to_obj_'(_, Pred, _)),
-	retractall('$lgt_send_to_obj_ne_'(_, Pred, _)),
-	retractall('$lgt_send_to_self_'(_, Pred, _)),
-	retractall('$lgt_obj_super_call_'(_, Pred, _)),
-	retractall('$lgt_ctg_super_call_'(_, Pred, _)),
-	retractall('$lgt_db_lookup_cache_'(_, Pred, _, _, _)),
-	'$lgt_reassert_lookup_cache_catchall_clauses'.
+	% only cache entries (whose body starts with a cut) are deleted; the catchall
+	% clauses are never deleted as concurrent callers (which do not acquire the
+	% '$lgt_caches' mutex) would otherwise fail when finding no clauses
+	'$lgt_retract_lookup_cache_entries'('$lgt_send_to_obj_'(_, Pred, _)),
+	'$lgt_retract_lookup_cache_entries'('$lgt_send_to_obj_ne_'(_, Pred, _)),
+	'$lgt_retract_lookup_cache_entries'('$lgt_send_to_self_'(_, Pred, _)),
+	'$lgt_retract_lookup_cache_entries'('$lgt_obj_super_call_'(_, Pred, _)),
+	'$lgt_retract_lookup_cache_entries'('$lgt_ctg_super_call_'(_, Pred, _)),
+	(	clause('$lgt_db_lookup_cache_'(Obj, Pred, Sender, TPred, UpdateData), true),
+		Obj \== user,
+		retract('$lgt_db_lookup_cache_'(Obj, Pred, Sender, TPred, UpdateData)),
+		fail
+	;	true
+	).
 
 
-
-% '$lgt_reassert_lookup_cache_catchall_clauses'
-%
-% reasserts the catchall clauses for the dynamic binding
-% lookup cache predicates that generate the cache entries
-
-'$lgt_reassert_lookup_cache_catchall_clauses' :-
-	assertz(('$lgt_send_to_obj_'(Obj, Pred, ExCtx) :- '$lgt_send_to_obj_nv'(Obj, Pred, ExCtx))),
-	assertz(('$lgt_send_to_obj_ne_'(Obj, Pred, ExCtx) :- '$lgt_send_to_obj_ne_nv'(Obj, Pred, ExCtx))),
-	assertz(('$lgt_send_to_self_'(Obj, Pred, ExCtx) :- '$lgt_send_to_self_nv'(Obj, Pred, ExCtx))),
-	assertz(('$lgt_obj_super_call_'(Super, Pred, ExCtx) :- '$lgt_obj_super_call_nv'(Super, Pred, ExCtx))),
-	assertz(('$lgt_ctg_super_call_'(Ctg, Pred, ExCtx) :- '$lgt_ctg_super_call_nv'(Ctg, Pred, ExCtx))),
-	% support runtime resolved database messages to the "user" pseudo-object
-	assertz('$lgt_db_lookup_cache_'(user, Clause, _, Clause, true)).
+'$lgt_retract_lookup_cache_entries'(Head) :-
+	retract((Head :- !, _)),
+	fail.
+'$lgt_retract_lookup_cache_entries'(_).
 
 
 
