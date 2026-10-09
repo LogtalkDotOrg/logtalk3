@@ -171,3 +171,9 @@ The ``learn/3`` predicate accepts the following options:
 - ``feature_scaling/1``: Controls z-score standardization of continuous
   attributes before tree induction. Accepted values are ``true`` and
   ``false``. The default is ``false``.
+
+References
+----------
+
+- Breiman, L., Friedman, J.H., Olshen, R.A., and Stone, C.J. (1984).
+  *Classification and Regression Trees*. Wadsworth.

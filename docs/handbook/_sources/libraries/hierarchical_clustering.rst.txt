@@ -146,3 +146,10 @@ The ``diagnostics/2`` predicate returns metadata terms including:
 - ``maximum_heap_size(Size)``
 - ``tie_breaking(node_id_order)``
 - ``options(Options)``
+
+References
+----------
+
+- Murtagh, F. and Contreras, P. (2012). Algorithms for Hierarchical
+  Clustering: An Overview. *WIREs Data Mining and Knowledge Discovery*,
+  2(1), 86-97. https://doi.org/10.1002/widm.53

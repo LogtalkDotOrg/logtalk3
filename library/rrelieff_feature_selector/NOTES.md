@@ -221,3 +221,12 @@ subject to backend floating-point precision; scaling cannot recover
 differences already lost in the input numbers. Small conditioning masses
 can amplify rounding effects. The selector neither removes redundant
 features nor fits a regression predictor.
+
+
+References
+----------
+
+- Robnik-Sikonja, M. and Kononenko, I. (2003). Theoretical and
+  Empirical Analysis of ReliefF and RReliefF. *Machine Learning*,
+  53(1-2), 23-69.
+  https://doi.org/10.1023/A:1025667309714

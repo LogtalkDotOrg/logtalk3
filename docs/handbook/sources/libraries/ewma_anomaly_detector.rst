@@ -203,3 +203,10 @@ Attributes with zero observed dispersion are assigned a fallback scale
 of ``1.0``. This keeps the detector well-defined for singleton datasets
 or constant steps while still yielding zero score for matching values
 and positive scores for deviating values.
+
+References
+----------
+
+- Roberts, S.W. (1959). Control Chart Tests Based on Geometric Moving
+  Averages. *Technometrics*, 1(3), 239-250.
+  https://doi.org/10.1080/00401706.1959.10489860

@@ -122,3 +122,13 @@ The `learn/3` predicate accepts the following options:
 - `weight_scheme/1`: Neighbor weighting policy used when averaging targets. Accepted values are `uniform`, `distance`, and `gaussian`. The default is `uniform`.
 - `minkowski_power/1`: Exponent used when `distance_metric(minkowski)` is selected. Larger values increase the influence of larger coordinate differences. The default is `3.0`.
 - `feature_scaling/1`: Controls z-score standardization of continuous attributes before storing rows and encoding prediction requests. Accepted values are `true` and `false`. The default is `true`.
+
+
+References
+----------
+
+- Hastie, T., Tibshirani, R., and Friedman, J. (2009). *The Elements of
+	Statistical Learning: Data Mining, Inference, and Prediction*.
+	2nd edition. Springer. Sections 2.3.2 and 6.3: nearest-neighbor
+	methods and local regression.
+	https://hastie.su.domains/ElemStatLearn/

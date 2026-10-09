@@ -149,3 +149,10 @@ The `learn/3` predicate accepts the following options:
 - `minimum_variance_reduction/1`: Minimum variance-reduction gain required for accepting a split. Higher values make the learner more conservative by pruning weak splits during induction. The default is `0.0`.
 - `maximum_features_per_split/1`: Number of dataset attributes sampled at each split when searching for the best partition. Accepted values are a positive integer or `all`. The default is `all`.
 - `feature_scaling/1`: Controls z-score standardization of continuous attributes before tree induction. Accepted values are `true` and `false`. The default is `false`.
+
+
+References
+----------
+
+- Breiman, L., Friedman, J.H., Olshen, R.A., and Stone, C.J. (1984).
+	*Classification and Regression Trees*. Wadsworth.

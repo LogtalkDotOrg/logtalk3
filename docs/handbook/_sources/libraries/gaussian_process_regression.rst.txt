@@ -261,3 +261,11 @@ The ``learn/3`` predicate accepts the following options:
 - ``jitter_scale_factor/1``: Multiplicative factor used to increase the
   diagonal jitter on each covariance-factorization retry. The default is
   ``2.0``.
+
+References
+----------
+
+- Rasmussen, C.E. and Williams, C.K.I. (2006). *Gaussian Processes for
+  Machine Learning*. MIT Press. Chapters 2, 4, and 5: regression,
+  covariance functions, and model selection.
+  https://gaussianprocess.org/gpml/

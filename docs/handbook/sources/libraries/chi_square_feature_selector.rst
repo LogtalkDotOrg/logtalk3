@@ -200,3 +200,13 @@ scores. Binning boundaries are not stored as a transformation for future
 examples. No p-values, significance decisions, general small-sample bias
 correction, regression scoring, or automatic feature-count selection is
 provided. Arithmetic uses backend floating-point precision.
+
+References
+----------
+
+- Pearson, K. (1900). On the Criterion That a Given System of Deviations
+  from the Probable in the Case of a Correlated System of Variables Is
+  Such That It Can Be Reasonably Supposed to Have Arisen from Random
+  Sampling. *The London, Edinburgh, and Dublin Philosophical Magazine
+  and Journal of Science*, 50(302), 157-175.
+  https://doi.org/10.1080/14786440009463897

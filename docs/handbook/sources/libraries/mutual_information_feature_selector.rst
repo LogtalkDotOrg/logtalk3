@@ -157,3 +157,10 @@ sample size affect the scores. Binning boundaries are not stored as a
 transformation for future examples. No regression scoring, p-values,
 bias correction, or automatic feature-count selection is provided.
 Arithmetic uses backend floating-point precision.
+
+References
+----------
+
+- Cover, T.M. and Thomas, J.A. (2006). *Elements of Information Theory*.
+  2nd edition. Wiley. Chapter 2: entropy and mutual information.
+  https://doi.org/10.1002/047174882X

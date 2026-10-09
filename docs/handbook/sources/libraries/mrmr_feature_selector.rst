@@ -184,3 +184,12 @@ signals. Arithmetic and exact tie decisions remain subject to backend
 floating-point precision. There is no validation-based feature-count
 selection, fitted-transform export, regression metric, or additional
 dependency beyond the shared feature-selection infrastructure.
+
+References
+----------
+
+- Peng, H., Long, F., and Ding, C. (2005). Feature Selection Based on
+  Mutual Information Criteria of Max-Dependency, Max-Relevance, and
+  Min-Redundancy. *IEEE Transactions on Pattern Analysis and Machine
+  Intelligence*, 27(8), 1226-1238.
+  https://doi.org/10.1109/TPAMI.2005.159

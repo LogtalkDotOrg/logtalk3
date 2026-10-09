@@ -118,3 +118,10 @@ Where:
 - ``Clusters``: List of extracted clusters in cluster-id order.
 - ``Noise``: List of extracted noise points.
 - ``Options``: Effective training options used to learn the clusterer.
+
+References
+----------
+
+- Ankerst, M., Breunig, M.M., Kriegel, H.-P., and Sander, J. (1999).
+  OPTICS: Ordering Points to Identify the Clustering Structure. *ACM
+  SIGMOD Record*, 28(2), 49-60. https://doi.org/10.1145/304181.304187

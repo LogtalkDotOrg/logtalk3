@@ -124,3 +124,11 @@ The `learn/3` predicate accepts the following options:
 - `minimum_samples_leaf/1`: Minimum number of training examples required in each leaf of a base learner tree. Increasing this value makes the fitted trees more conservative and can reduce overfitting. The default is `1`.
 - `minimum_variance_reduction/1`: Minimum reduction in target variance required to accept a split when fitting a base learner tree. Larger values make tree growth stricter by rejecting weak splits. The default is `0.0`.
 - `feature_scaling/1`: Controls continuous-feature scaling in the underlying regression-tree learner. The accepted values are `true` and `false`. The default is `false`.
+
+
+References
+----------
+
+- Friedman, J.H. (2001). Greedy Function Approximation: A Gradient
+	Boosting Machine. *The Annals of Statistics*, 29(5), 1189-1232.
+	https://doi.org/10.1214/aos/1013203451

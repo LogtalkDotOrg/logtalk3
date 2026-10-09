@@ -447,3 +447,10 @@ Limitations
   comparison; ``score_all/4`` amortizes validation across a batch, and
   recommendation also performs this validation once per call. Repeated
   separate scoring calls still repeat the full validation.
+
+References
+----------
+
+- Jaccard, P. (1912). The Distribution of the Flora in the Alpine Zone.
+  *New Phytologist*, 11(2), 37-50.
+  https://doi.org/10.1111/j.1469-8137.1912.tb05611.x

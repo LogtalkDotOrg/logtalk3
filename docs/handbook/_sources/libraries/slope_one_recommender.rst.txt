@@ -151,3 +151,11 @@ every candidate. There are no incremental updates, alternative Slope One
 variants, or adjustable fallback policies. Arithmetic uses backend
 numeric precision; count rescaling does not prevent overflow in extreme
 rating differences or sums.
+
+References
+----------
+
+- Lemire, D. and Maclachlan, A. (2005). Slope One Predictors for Online
+  Rating-Based Collaborative Filtering. *Proceedings of the 2005 SIAM
+  International Conference on Data Mining*, 471-475.
+  https://doi.org/10.1137/1.9781611972757.43

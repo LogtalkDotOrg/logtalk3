@@ -120,3 +120,12 @@ Where:
 - `Weights`: List of mixture weights in component-id order.
 - `Options`: Effective training options used to learn the clusterer.
 - `Diagnostics`: Training diagnostics including convergence status, iteration count, average log-likelihood, final delta, and options.
+
+
+References
+----------
+
+- Dempster, A.P., Laird, N.M., and Rubin, D.B. (1977). Maximum
+	Likelihood from Incomplete Data via the EM Algorithm. *Journal of
+	the Royal Statistical Society: Series B*, 39(1), 1-22.
+	https://doi.org/10.1111/j.2517-6161.1977.tb01600.x

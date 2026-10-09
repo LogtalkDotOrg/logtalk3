@@ -128,3 +128,13 @@ Options
 The `learn/3` predicate accepts the following options:
 
 - `feature_scaling/1`: Controls z-score standardization of continuous attributes before training and prediction. Accepted values are `true` and `false`. The default is `true`.
+
+
+References
+----------
+
+- Hastie, T., Tibshirani, R., and Friedman, J. (2009). *The Elements of
+	Statistical Learning: Data Mining, Inference, and Prediction*.
+	2nd edition. Springer. Section 3.2: linear regression models and
+	least squares.
+	https://hastie.su.domains/ElemStatLearn/

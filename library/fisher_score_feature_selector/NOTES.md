@@ -156,3 +156,13 @@ the complete-case samples and are capped rather than representing infinity.
 Arithmetic remains subject to backend floating-point precision and range.
 No automatic threshold tuning, regression-target scoring, or fitted
 preprocessing transform is provided.
+
+
+References
+----------
+
+- Gu, Q., Li, Z., and Han, J. (2011). Generalized Fisher Score for
+	Feature Selection. *Proceedings of the 27th Conference on Uncertainty
+	in Artificial Intelligence (UAI 2011)*, 266-273. Background on
+	classical independent Fisher scores.
+	https://arxiv.org/abs/1202.3725

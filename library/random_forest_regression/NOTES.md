@@ -129,3 +129,10 @@ The `learn/3` predicate accepts the following options:
 - `minimum_variance_reduction/1`: Minimum split gain required by each base learner tree before accepting a partition. The default is `0.0`.
 - `feature_scaling/1`: Controls z-score standardization of continuous attributes inside each regression-tree base learner. Accepted values are `true` and `false`. The default is `false`.
 - `random_seed/1`: Positive integer seed used by the portable `fast_random(xoshiro128pp)` pseudo-random generator when drawing bootstrap samples and split-level random feature subsets. Using the same seed with the same dataset and options reproduces the same learned regressor. The default is `1357911`.
+
+
+References
+----------
+
+- Breiman, L. (2001). Random Forests. *Machine Learning*, 45(1), 5-32.
+	https://doi.org/10.1023/A:1010933404324

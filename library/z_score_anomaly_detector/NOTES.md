@@ -206,3 +206,11 @@ observed queries solely for having fewer known attributes.
 
 Use `score_mode(any_feature_extreme)` when a single extreme feature
 should be sufficient to flag an anomaly in high-dimensional data.
+
+
+References
+----------
+
+- NIST/SEMATECH. *e-Handbook of Statistical Methods*. Section 1.3.5.17:
+  Detection of Outliers (Z-Scores and Modified Z-Scores).
+  https://www.itl.nist.gov/div898/handbook/eda/section3/eda35h.htm

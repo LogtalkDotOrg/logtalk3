@@ -128,3 +128,11 @@ Where:
 - ``Diagnostics``: List of metadata terms, including the effective
   ``victory_strength/1`` option, the labeled strongest paths, and the
   dataset summary.
+
+References
+----------
+
+- Schulze, M. (2011). A New Monotonic, Clone-Independent, Reversal
+  Symmetric, and Condorcet-Consistent Single-Winner Election Method.
+  *Social Choice and Welfare*, 36(2), 267-303.
+  https://doi.org/10.1007/s00355-010-0475-4

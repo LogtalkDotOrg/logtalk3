@@ -424,3 +424,11 @@ Limitations
 - Supplied feature-list content uses the fitted vocabulary; new features
   enter the model only through a catalog refit. Descriptor
   representations cannot be mixed or switched by an update.
+
+References
+----------
+
+- Manning, C.D., Raghavan, P., and Schutze, H. (2008). *Introduction to
+  Information Retrieval*. Cambridge University Press. Chapters 6 and 9:
+  TF-IDF weighting, cosine similarity, and Rocchio relevance feedback.
+  https://nlp.stanford.edu/IR-book/

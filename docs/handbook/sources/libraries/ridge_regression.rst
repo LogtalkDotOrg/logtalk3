@@ -152,3 +152,10 @@ The ``learn/3`` predicate accepts the following options:
 - ``feature_scaling/1``: Controls z-score standardization of continuous
   attributes before training and prediction. Accepted values are
   ``true`` and ``false``. The default is ``true``.
+
+References
+----------
+
+- Hoerl, A.E. and Kennard, R.W. (1970). Ridge Regression: Biased
+  Estimation for Nonorthogonal Problems. *Technometrics*, 12(1), 55-67.
+  https://doi.org/10.1080/00401706.1970.10488634

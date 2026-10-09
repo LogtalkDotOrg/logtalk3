@@ -112,3 +112,17 @@ Where:
 
 - ``Noise``: List of encoded training points classified as noise.
 - ``Options``: Effective training options used to learn the clusterer.
+
+References
+----------
+
+- Campello, R.J.G.B., Moulavi, D., and Sander, J. (2013). Density-Based
+  Clustering Based on Hierarchical Density Estimates. *Advances in
+  Knowledge Discovery and Data Mining (PAKDD 2013)*, Lecture Notes in
+  Computer Science, 7819, 160-172.
+  https://doi.org/10.1007/978-3-642-37456-2_14
+
+- Campello, R.J.G.B., Moulavi, D., Zimek, A., and Sander, J. (2015).
+  Hierarchical Density Estimates for Data Clustering, Visualization, and
+  Outlier Detection. *ACM Transactions on Knowledge Discovery from
+  Data*, 10(1), Article 5, 1-51. https://doi.org/10.1145/2733381

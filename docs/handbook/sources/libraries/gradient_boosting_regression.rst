@@ -148,3 +148,10 @@ The ``learn/3`` predicate accepts the following options:
 - ``feature_scaling/1``: Controls continuous-feature scaling in the
   underlying regression-tree learner. The accepted values are ``true``
   and ``false``. The default is ``false``.
+
+References
+----------
+
+- Friedman, J.H. (2001). Greedy Function Approximation: A Gradient
+  Boosting Machine. *The Annals of Statistics*, 29(5), 1189-1232.
+  https://doi.org/10.1214/aos/1013203451

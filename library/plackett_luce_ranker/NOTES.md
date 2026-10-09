@@ -226,3 +226,18 @@ See also
 
 For the complementary grouped last-choice variant over the same dataset
 protocol, see the `plackett_luce_last_ranker` library.
+
+
+References
+----------
+
+- Plackett, R.L. (1975). The Analysis of Permutations. *Applied
+  Statistics*, 24(2), 193-202.
+  https://doi.org/10.2307/2346567
+
+- Luce, R.D. (1959). *Individual Choice Behavior: A Theoretical
+  Analysis*. Wiley.
+
+- Hunter, D.R. (2004). MM Algorithms for Generalized Bradley-Terry
+  Models. *The Annals of Statistics*, 32(1), 384-406.
+  https://doi.org/10.1214/aos/1079120141

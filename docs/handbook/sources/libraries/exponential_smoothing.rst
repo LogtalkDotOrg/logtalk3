@@ -601,3 +601,20 @@ widened to contain the point forecast, are not a guarantee of nominal
 coverage. Forecasts and interval bounds are not generally constrained to
 non-negative or integer values, although multiplicative point forecasts
 must remain positive.
+
+References
+----------
+
+- Hyndman, R.J. and Athanasopoulos, G. (2021). *Forecasting: Principles
+  and Practice*. 3rd edition. OTexts. Chapter 8: exponential smoothing,
+  including simple, Holt, Holt-Winters, and damped-trend methods.
+  https://otexts.com/fpp3/expsmooth.html
+
+- Holt, C.C. (2004). Forecasting Seasonals and Trends by Exponentially
+  Weighted Moving Averages. *International Journal of Forecasting*,
+  20(1), 5-10. Reprint of the 1957 research memorandum.
+  https://doi.org/10.1016/j.ijforecast.2003.09.015
+
+- Winters, P.R. (1960). Forecasting Sales by Exponentially Weighted
+  Moving Averages. *Management Science*, 6(3), 324-342.
+  https://doi.org/10.1287/mnsc.6.3.324

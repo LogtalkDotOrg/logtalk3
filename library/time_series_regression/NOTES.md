@@ -306,3 +306,12 @@ Limitations
   but does not refit the regression or repeat order selection. The recorded
   information criteria remain those from the original fit; learn a new
   model when parameter or order estimates need to change.
+
+
+References
+----------
+
+- Hyndman, R.J. and Athanasopoulos, G. (2021). *Forecasting: Principles
+  and Practice*. 3rd edition. OTexts. Chapter 9: autoregressive models,
+  differencing, estimation, and order selection.
+  https://otexts.com/fpp3/arima.html

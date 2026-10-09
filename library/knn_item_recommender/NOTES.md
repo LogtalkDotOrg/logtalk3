@@ -166,3 +166,13 @@ in rating count. Public prediction recomputes profiles to validate the
 model, and recommendation repeats validation for each candidate.
 Arithmetic follows backend numeric precision. Rescaled weights avoid
 avoidable weight overflow, not overflow in extreme rating sums.
+
+
+References
+----------
+
+- Sarwar, B., Karypis, G., Konstan, J., and Riedl, J. (2001).
+    Item-Based Collaborative Filtering Recommendation Algorithms.
+    *Proceedings of the 10th International Conference on World Wide Web*,
+    285-295.
+    https://doi.org/10.1145/371920.372071

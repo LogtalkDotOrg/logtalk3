@@ -287,3 +287,11 @@ Limitations
   pool of historical patterns is fixed when the `learn/3` predicate runs.
   Observations supplied only through the `update/3` predicate extend the
   forecasting window but are never themselves available as future analogs.
+
+
+References
+----------
+
+- Yakowitz, S. (1987). Nearest-Neighbour Methods for Time Series
+  Analysis. *Journal of Time Series Analysis*, 8(2), 235-247.
+  https://doi.org/10.1111/j.1467-9892.1987.tb00435.x

@@ -204,3 +204,10 @@ not recover differences already lost in the input numbers. Exhaustive
 nearest-neighbor search is quadratic in N in all-row mode. The method
 can detect joint interactions but does not remove redundant features or
 fit a predictive model.
+
+References
+----------
+
+- Kira, K. and Rendell, L.A. (1992). A Practical Approach to Feature
+  Selection. *Machine Learning Proceedings 1992*, 249-256.
+  https://doi.org/10.1016/B978-1-55860-247-2.50037-1

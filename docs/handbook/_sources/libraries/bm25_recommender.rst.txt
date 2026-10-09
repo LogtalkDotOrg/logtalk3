@@ -469,3 +469,10 @@ Limitations
   implicit-only datasets, managed persistence/out-of-core execution, and
   cross-model score comparability are not provided. Clause/file export
   already supports serialization of self-contained in-memory models.
+
+References
+----------
+
+- Robertson, S. and Zaragoza, H. (2009). The Probabilistic Relevance
+  Framework: BM25 and Beyond. *Foundations and Trends in Information
+  Retrieval*. https://doi.org/10.1561/1500000019

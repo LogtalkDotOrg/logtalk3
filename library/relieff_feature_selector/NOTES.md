@@ -203,3 +203,17 @@ cache construction expensive. Complete-case learning allocates no
 empirical support caches. Floating-point precision remains
 backend-dependent. The algorithm neither removes redundant features nor
 fits a predictive classifier.
+
+
+References
+----------
+
+- Kononenko, I. (1994). Estimating Attributes: Analysis and Extensions
+  of RELIEF. *Machine Learning: ECML-94*, Lecture Notes in Computer
+  Science, 784, 171-182.
+  https://doi.org/10.1007/3-540-57868-4_57
+
+- Robnik-Sikonja, M. and Kononenko, I. (2003). Theoretical and
+  Empirical Analysis of ReliefF and RReliefF. *Machine Learning*,
+  53(1-2), 23-69.
+  https://doi.org/10.1023/A:1025667309714

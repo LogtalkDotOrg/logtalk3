@@ -124,3 +124,17 @@ The `learn/3` predicate accepts the following options:
 - `regularization/1`: Overall penalty coefficient applied during optimization. Higher values increase shrinkage and can reduce overfitting. The default is `0.01`.
 - `l1_ratio/1`: Fraction of the overall penalty assigned to the L1 part of the elastic net penalty. The remaining fraction is assigned to the L2 part. Accepted values are floats in the interval `[0.0, 1.0]`, where `0.0` gives the ridge endpoint and `1.0` gives the lasso endpoint. The default is `0.5`.
 - `feature_scaling/1`: Controls z-score standardization of continuous attributes before training and prediction. Accepted values are `true` and `false`. The default is `true`.
+
+
+References
+----------
+
+- Zou, H. and Hastie, T. (2005). Regularization and Variable Selection
+	via the Elastic Net. *Journal of the Royal Statistical Society:
+	Series B*, 67(2), 301-320.
+	https://doi.org/10.1111/j.1467-9868.2005.00503.x
+
+- Friedman, J., Hastie, T., and Tibshirani, R. (2010). Regularization
+	Paths for Generalized Linear Models via Coordinate Descent.
+	*Journal of Statistical Software*, 33(1), 1-22.
+	https://doi.org/10.18637/jss.v033.i01

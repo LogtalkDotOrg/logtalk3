@@ -179,3 +179,9 @@ The ``learn/3`` predicate accepts the following options:
   the learned weight and noise precisions during evidence maximization
   for numerical stability. The default is
   ``precision_bounds(1.0e-12, 1.0e12)``.
+
+References
+----------
+
+- MacKay, D.J.C. (1992). Bayesian Interpolation. *Neural Computation*,
+  4(3), 415-447. https://doi.org/10.1162/neco.1992.4.3.415

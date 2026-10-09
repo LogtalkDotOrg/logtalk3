@@ -207,3 +207,12 @@ observation history. Drift extrapolates the line through the first and last
 values, so those endpoints determine its trend; mean forecasts use all known
 values without discounting older observations. Forecasts are not constrained
 to be non-negative or integer-valued.
+
+
+References
+----------
+
+- Hyndman, R.J. and Athanasopoulos, G. (2021). *Forecasting: Principles
+  and Practice*. 3rd edition. OTexts. Section 5.2: mean, naive,
+  seasonal naive, and drift forecasting methods.
+  https://otexts.com/fpp3/simple-methods.html

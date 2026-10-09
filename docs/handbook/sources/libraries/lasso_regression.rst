@@ -157,3 +157,15 @@ The ``learn/3`` predicate accepts the following options:
 - ``feature_scaling/1``: Controls z-score standardization of continuous
   attributes before training and prediction. Accepted values are
   ``true`` and ``false``. The default is ``true``.
+
+References
+----------
+
+- Tibshirani, R. (1996). Regression Shrinkage and Selection via the
+  Lasso. *Journal of the Royal Statistical Society: Series B*, 58(1),
+  267-288. https://doi.org/10.1111/j.2517-6161.1996.tb02080.x
+
+- Friedman, J., Hastie, T., and Tibshirani, R. (2010). Regularization
+  Paths for Generalized Linear Models via Coordinate Descent. *Journal
+  of Statistical Software*, 33(1), 1-22.
+  https://doi.org/10.18637/jss.v033.i01

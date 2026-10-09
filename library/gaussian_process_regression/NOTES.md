@@ -189,3 +189,12 @@ The `learn/3` predicate accepts the following options:
 - `maximum_categorical_penalty/1`: Upper bound used when proposing scaled categorical mismatch-penalty candidates during coordinate search. The default is `32.0`.
 - `max_factorization_attempts/1`: Maximum number of covariance-factorization retries performed with progressively increased jitter before training raises a positive-definiteness error. The default is `32`.
 - `jitter_scale_factor/1`: Multiplicative factor used to increase the diagonal jitter on each covariance-factorization retry. The default is `2.0`.
+
+
+References
+----------
+
+- Rasmussen, C.E. and Williams, C.K.I. (2006). *Gaussian Processes for
+	Machine Learning*. MIT Press. Chapters 2, 4, and 5: regression,
+	covariance functions, and model selection.
+	https://gaussianprocess.org/gpml/

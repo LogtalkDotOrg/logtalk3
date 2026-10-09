@@ -135,3 +135,16 @@ Where:
 - `Scores`: List of `Item-Score` pairs.
 - `Diagnostics`: List of metadata terms, including the fitting method,
 	continuity correction, and dataset summary.
+
+
+References
+----------
+
+- Thurstone, L.L. (1927). A Law of Comparative Judgment.
+	*Psychological Review*, 34(4), 273-286.
+	https://doi.org/10.1037/h0070288
+
+- Mosteller, F. (1951). Remarks on the Method of Paired Comparisons:
+	I. The Least Squares Solution Assuming Equal Standard Deviations
+	and Equal Correlations. *Psychometrika*, 16(1), 3-9.
+	https://doi.org/10.1007/BF02313422

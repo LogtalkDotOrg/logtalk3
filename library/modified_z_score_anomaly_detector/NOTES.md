@@ -208,3 +208,10 @@ observed queries solely for having fewer known attributes.
 
 Use `score_mode(any_feature_extreme)` when a single extreme feature
 should be sufficient to flag an anomaly in high-dimensional data.
+
+
+References
+----------
+
+- Iglewicz, B. and Hoaglin, D.C. (1993). *How to Detect and Handle
+  Outliers*. ASQC Quality Press.

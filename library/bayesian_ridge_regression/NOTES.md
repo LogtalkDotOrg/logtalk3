@@ -138,3 +138,11 @@ The `learn/3` predicate accepts the following options:
 - `lambda_2/1`: Non-negative rate hyperparameter of the Gamma prior over the learned coefficient precision. The default is `1.0e-6`.
 - `feature_scaling/1`: Controls z-score standardization of continuous attributes before training and prediction. Accepted values are `true` and `false`. The default is `true`.
 - `precision_bounds/2`: Lower and upper positive bounds used to clamp the learned weight and noise precisions during evidence maximization for numerical stability. The default is `precision_bounds(1.0e-12, 1.0e12)`.
+
+
+References
+----------
+
+- MacKay, D.J.C. (1992). Bayesian Interpolation. *Neural Computation*,
+  4(3), 415-447.
+  https://doi.org/10.1162/neco.1992.4.3.415

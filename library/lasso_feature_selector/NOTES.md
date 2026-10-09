@@ -274,3 +274,12 @@ its observed values.
 Coefficient cutoffs still require task-specific validation.
 Models returned after the iteration limit may not have converged; inspect
 the retained convergence diagnostics before interpreting their selections.
+
+
+References
+----------
+
+- Tibshirani, R. (1996). Regression Shrinkage and Selection via the
+	Lasso. *Journal of the Royal Statistical Society: Series B*,
+	58(1), 267-288.
+	https://doi.org/10.1111/j.2517-6161.1996.tb02080.x

@@ -193,3 +193,9 @@ Attributes with zero observed dispersion are assigned a fallback scale
 of ``1.0``. This keeps the detector well-defined for singleton datasets
 or constant steps while still yielding zero score for matching values
 and positive scores for deviating values.
+
+References
+----------
+
+- Page, E.S. (1954). Continuous Inspection Schemes. *Biometrika*,
+  41(1-2), 100-115. https://doi.org/10.1093/biomet/41.1-2.100

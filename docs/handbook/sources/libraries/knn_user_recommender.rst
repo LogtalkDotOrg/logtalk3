@@ -161,3 +161,11 @@ candidate, repeating this validation. This favors inspectable
 correctness over large-catalog speed. Arithmetic uses backend numeric
 precision; rescaled weights do not prevent overflow in arbitrary extreme
 rating sums or differences.
+
+References
+----------
+
+- Resnick, P., Iacovou, N., Suchak, M., Bergstrom, P., and Riedl, J.
+  (1994). GroupLens: An Open Architecture for Collaborative Filtering of
+  Netnews. *Proceedings of the 1994 ACM Conference on Computer Supported
+  Cooperative Work*, 175-186. https://doi.org/10.1145/192844.192905

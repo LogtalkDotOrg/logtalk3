@@ -242,3 +242,11 @@ See also
 
 For the strongest-path Condorcet-family alternative sharing the same
 `victory_strength(...)` option, see the `schulze_ranker` library.
+
+
+References
+----------
+
+- Tideman, T.N. (1987). Independence of Clones as a Criterion for
+	Voting Rules. *Social Choice and Welfare*, 4(3), 185-206.
+	https://doi.org/10.1007/BF00433944
