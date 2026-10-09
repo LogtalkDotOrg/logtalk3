@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:1,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-08-24,
+		date is 2026-10-09,
 		comment is 'Unit tests for the "mutation_testing" tool.'
 	]).
 
@@ -144,6 +144,7 @@
 	test(mt_report_predicate_4_01, deterministic) :-
 		mutation_testing::report_predicate(mt_other_sample, check/1, report(mt_other_sample, summary(Total, _Killed, _Survived, _Untested, _Timeout, _NoCoverage, _Errors, _Score, _Threshold, _Passed), Results), [
 			mutators([fail_insertion]),
+			max_mutations_per_mutator(1),
 			sampling(count(1)),
 			tester_file_name('subprocess_tester.lgt')
 		]),
@@ -191,6 +192,7 @@
 		mutation_testing::report_library(Library, report(library(Library), [report(mt_other_sample, summary(Total, _Killed, _Survived, _Untested, _Timeout, _NoCoverage, _Errors, _Score, _Threshold, _Passed), Results)]), [
 			include_entities([mt_other_sample]),
 			mutators([fail_insertion]),
+			max_mutations_per_mutator(1),
 			sampling(count(1)),
 			tester_file_name('subprocess_tester.lgt')
 		]),
@@ -204,6 +206,7 @@
 		mutation_testing::report_directory(Directory, report(directory(Directory), [report(mt_other_sample, summary(Total, _Killed, _Survived, _Untested, _Timeout, _NoCoverage, _Errors, _Score, _Threshold, _Passed), Results)]), [
 			include_entities([mt_other_sample]),
 			mutators([fail_insertion]),
+			max_mutations_per_mutator(1),
 			sampling(count(1)),
 			tester_file_name('subprocess_tester.lgt')
 		]),
@@ -221,8 +224,10 @@
 		^^suppress_text_output,
 		mutation_testing::predicate(mt_sample, check/1, [
 			mutators([fail_insertion]),
+			max_mutations_per_mutator(1),
 			sampling(count(1)),
 			threshold(0.0),
+			format(none),
 			tester_file_name('subprocess_tester.lgt')
 		]).
 
@@ -235,8 +240,10 @@
 		^^suppress_text_output,
 		mutation_testing::entity(mt_sample, [
 			mutators([fail_insertion]),
+			max_mutations_per_mutator(1),
 			sampling(count(3)),
 			threshold(0.0),
+			format(none),
 			tester_file_name('subprocess_tester.lgt')
 		]).
 
@@ -554,6 +561,7 @@
 	test(mt_threshold_option_01, deterministic) :-
 		mutation_testing::report_predicate(mt_other_sample, check/1, _, [
 			mutators([fail_insertion]),
+			max_mutations_per_mutator(1),
 			threshold(75.0),
 			tester_file_name('subprocess_tester.lgt')
 		]).
@@ -561,6 +569,7 @@
 	test(mt_verbose_option_01, deterministic) :-
 		mutation_testing::report_predicate(mt_other_sample, check/1, _, [
 			mutators([relational_operator_replacement]),
+			max_mutations_per_mutator(1),
 			verbose(true),
 			tester_file_name('subprocess_tester.lgt')
 		]).
@@ -568,6 +577,7 @@
 	test(mt_format_option_01, deterministic) :-
 		mutation_testing::predicate(mt_sample, check/1, [
 			mutators([fail_insertion]),
+			max_mutations_per_mutator(1),
 			sampling(count(1)),
 			threshold(0.0),
 			format(none),
@@ -579,7 +589,8 @@
 		^^file_path('mutation_text_report.txt', Report),
 		mutation_testing::predicate(mt_sample, check/1, [
 			mutators([fail_insertion]),
-			sampling(count(1)),
+			max_mutations_per_mutator(2),
+			sampling(count(2)),
 			threshold(0.0),
 			format(text),
 			report_file_name('mutation_text_report'),
@@ -591,6 +602,7 @@
 		^^file_path('mutation_json_report.json', Report),
 		mutation_testing::predicate(mt_sample, check/1, [
 			mutators([fail_insertion]),
+			max_mutations_per_mutator(1),
 			sampling(count(1)),
 			threshold(60.0),
 			format(json),
@@ -623,23 +635,12 @@
 		assertion(Mutants \== []),
 		Mutants = [json(MutantPairs)| _],
 		assertion(memberchk('description'-_, MutantPairs)),
-		assertion(memberchk('replacement'-_, MutantPairs)).
-
-	test(mt_format_option_04, deterministic, [condition(report_schema_available(_))]) :-
-		^^suppress_text_output,
-		report_schema_available(SchemaPath),
-		^^file_path('mutation_json_report.json', Report),
-		mutation_testing::predicate(mt_sample, check/1, [
-			mutators([fail_insertion]),
-			sampling(count(1)),
-			threshold(60.0),
-			format(json),
-			report_file_name('mutation_json_report'),
-			tester_file_name('subprocess_tester.lgt')
-		]),
-		json(list, dash, atom)::parse(file(Report), JSON),
-		assertion(json_schema::parse(file(SchemaPath), Schema)),
-		assertion(json_schema::validate(Schema, JSON)).
+		assertion(memberchk('replacement'-_, MutantPairs)),
+		(   report_schema_available(SchemaPath) ->
+			assertion(json_schema::parse(file(SchemaPath), Schema)),
+			assertion(json_schema::validate(Schema, JSON))
+		;   true
+		).
 
 	test(mt_report_file_name_option_01, deterministic(os::file_exists(Report))) :-
 		^^suppress_text_output,
@@ -647,6 +648,7 @@
 		atom_concat(BasePath, '.txt', Report),
 		mutation_testing::predicate(mt_sample, check/1, [
 			mutators([fail_insertion]),
+			max_mutations_per_mutator(1),
 			sampling(count(1)),
 			threshold(0.0),
 			format(text),
@@ -657,6 +659,7 @@
 	test(mt_print_mutation_option_01, deterministic) :-
 		mutation_testing::report_predicate(mt_other_sample, check/1, _, [
 			mutators([relational_operator_replacement]),
+			max_mutations_per_mutator(1),
 			print_mutation(true),
 			tester_file_name('subprocess_tester.lgt')
 		]).
@@ -664,6 +667,7 @@
 	test(mt_timeout_option_01, deterministic) :-
 		mutation_testing::report_predicate(mt_other_sample, check/1, _, [
 			mutators([relational_operator_replacement]),
+			max_mutations_per_mutator(1),
 			timeout(1),
 			tester_file_name('subprocess_tester.lgt')
 		]).
