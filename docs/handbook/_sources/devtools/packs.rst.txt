@@ -438,6 +438,12 @@ the declared SHA-256 archive identity of every installed pack. A lock
 file must contain exactly one ``lockfile_version(1)`` fact, complete
 registry and pack records, and no conflicting or unknown facts.
 
+Without ``lock(true)``, the ``restore/2`` predicate silently ignores the
+``lockfile_version/1``, ``lock_registry_commit/2``, and
+``lock_integrity/5`` facts and restores the remaining facts as an
+ordinary requirements file. The presence of lock facts does not
+automatically enable lock mode.
+
 Lock mode supports git registries, including local git repositories, and
 packs distributed as archives with SHA-256 checksums, including local
 archives. Non-git registries and directory packs are usually development
@@ -471,9 +477,13 @@ resolved only against the exact versions in the lock file, including
 ranges, alternatives, and conjunctions. Missing dependencies,
 incompatible locked versions, and dependency cycles cause failure.
 Dependency packs are installed first, and every archive checksum is
-verified even when the requested version is already installed or
-``update(true)`` is specified. Existing packs require ``force(true)``,
-the restore default, for replacement in lock mode.
+verified even when the requested version is already installed. Existing
+registries and packs require ``force(true)``, the restore default, for
+replacement in lock mode. Registry clones are replaced, and pack
+installation directories are cleared before extracting locked archives,
+removing files left by previous versions. With ``force(false)``,
+existing registries or packs cause restoration to fail without replacing
+them.
 
 After installation, the ``restore/2`` predicate applies recorded pins
 and verifies registry commits, installed versions, pinning status, and

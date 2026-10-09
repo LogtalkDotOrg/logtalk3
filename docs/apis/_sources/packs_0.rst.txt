@@ -15,7 +15,7 @@ Pack handling predicates.
 
 | **Author:** Paulo Moura
 | **Version:** 0:91:0
-| **Date:** 2026-10-08
+| **Date:** 2026-10-09
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -1622,7 +1622,7 @@ Collects the setup facts before opening the destination file.
 ``lock_registry_facts/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Collects the URLs and full commits of all selected git registries.
+Collects the URLs and full commits of all selected clean git registries.
 
 | **Compilation flags:**
 |    ``static``
@@ -1633,7 +1633,7 @@ Collects the URLs and full commits of all selected git registries.
 |    ``lock_registry_facts(+list(atom),-list(compound),-list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    A selected registry has no usable git commit:
+|    A selected registry has no usable git commit or has tracked changes:
 |        ``domain_error(lock_setup,registry(Registry))``
 
 

@@ -525,6 +525,11 @@ every selected git registry. The <code class="docutils literal notranslate"><spa
 the declared SHA-256 archive identity of every installed pack. A lock
 file must contain exactly one <code class="docutils literal notranslate"><span class="pre">lockfile_version(1)</span></code> fact, complete
 registry and pack records, and no conflicting or unknown facts.</p>
+<p>Without <code class="docutils literal notranslate"><span class="pre">lock(true)</span></code>, the <code class="docutils literal notranslate"><span class="pre">restore/2</span></code> predicate silently ignores the
+<code class="docutils literal notranslate"><span class="pre">lockfile_version/1</span></code>, <code class="docutils literal notranslate"><span class="pre">lock_registry_commit/2</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">lock_integrity/5</span></code> facts and restores the remaining facts as an
+ordinary requirements file. The presence of lock facts does not
+automatically enable lock mode.</p>
 <p>Lock mode supports git registries, including local git repositories, and
 packs distributed as archives with SHA-256 checksums, including local
 archives. Non-git registries and directory packs are usually development
@@ -555,9 +560,13 @@ resolved only against the exact versions in the lock file, including
 ranges, alternatives, and conjunctions. Missing dependencies,
 incompatible locked versions, and dependency cycles cause failure.
 Dependency packs are installed first, and every archive checksum is
-verified even when the requested version is already installed or
-<code class="docutils literal notranslate"><span class="pre">update(true)</span></code> is specified. Existing packs require <code class="docutils literal notranslate"><span class="pre">force(true)</span></code>,
-the restore default, for replacement in lock mode.</p>
+verified even when the requested version is already installed. Existing
+registries and packs require <code class="docutils literal notranslate"><span class="pre">force(true)</span></code>, the restore default, for
+replacement in lock mode. Registry clones are replaced, and pack
+installation directories are cleared before extracting locked archives,
+removing files left by previous versions. With <code class="docutils literal notranslate"><span class="pre">force(false)</span></code>,
+existing registries or packs cause restoration to fail without replacing
+them.</p>
 <p>After installation, the <code class="docutils literal notranslate"><span class="pre">restore/2</span></code> predicate applies recorded pins
 and verifies registry commits, installed versions, pinning status, and
 resolved dependency edges. Failures are fatal and never reported as

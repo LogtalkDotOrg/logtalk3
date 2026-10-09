@@ -480,7 +480,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 0:91:0</div>
-<div class="line"><strong>Date:</strong> 2026-10-08</div>
+<div class="line"><strong>Date:</strong> 2026-10-09</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -2835,7 +2835,7 @@
 </section>
 <section id="lock-registry-facts-3">
 <span id="packs-0-lock-registry-facts-3"></span><span id="index-51"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">lock_registry_facts/3</span></code></a><a class="headerlink" href="#lock-registry-facts-3" title="Link to this heading"></a></h3>
-<p>Collects the URLs and full commits of all selected git registries.</p>
+<p>Collects the URLs and full commits of all selected clean git registries.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -2855,7 +2855,7 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">A selected registry has no usable git commit:</div>
+<div class="line">A selected registry has no usable git commit or has tracked changes:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(lock_setup,registry(Registry))</span></code></div>
 </div>

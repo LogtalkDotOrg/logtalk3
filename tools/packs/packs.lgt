@@ -25,7 +25,7 @@
 	:- info([
 		version is 0:91:0,
 		author is 'Paulo Moura',
-		date is 2026-10-08,
+		date is 2026-10-09,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -1843,7 +1843,7 @@
 	restore_locked_term(registry(Registry, URL), LockTerms, Options) :-
 		registry_restore_options(Registry, LockTerms, Options, LockRegistryOptions),
 		registries_restore_options(LockRegistryOptions, RegistryOptions),
-		( 	registries::add(Registry, URL, RegistryOptions) ->
+		( 	registries::add(Registry, URL, [update(false)| RegistryOptions]) ->
 			verify_locked_registry(Registry, URL, LockTerms)
 		; 	print_message(error, packs, 'Restoring registries/packs setup failed while adding the ~q registry'+[Registry]),
 			fail
@@ -2079,6 +2079,7 @@
 		; 	true
 		),
 		print_message(comment, packs, installing_pack(Registry, Pack, Version)),
+		clean_pack_installation_directory(Pack, _, Options, _),
 		install_pack(Registry, Pack, Version, URL, Checksum, Options),
 		print_message(comment, packs, pack_installed(Registry, Pack, Version)),
 		print_note(install, Version, Pack),

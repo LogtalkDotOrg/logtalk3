@@ -25,7 +25,7 @@
 	:- info([
 		version is 0:40:0,
 		author is 'Paulo Moura',
-		date is 2026-10-08,
+		date is 2026-10-09,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -804,6 +804,33 @@
 		fixture_lock_terms([lock_a, lock_b, lock_c, lock_d], Terms),
 		capture_locked_restore(Terms, [update(true)], Installs).
 
+	test(packs_lock_restore_removes_stale_files, deterministic) :-
+		fixture_lock_terms([lock_a, lock_b, lock_c, lock_d], Terms),
+		packs::directory(lock_b, PackDirectory),
+		write_fixture_file(PackDirectory, 'obsolete.txt', [obsolete]),
+		os::path_concat(PackDirectory, 'obsolete.txt', StalePackFile),
+		registries::directory(lock_fixture, RegistryDirectory),
+		write_fixture_file(RegistryDirectory, 'obsolete_pack.lgt', [obsolete]),
+		os::path_concat(RegistryDirectory, 'obsolete_pack.lgt', StaleRegistryFile),
+		write_fixture_file(RegistryDirectory, '.git/lock_restore_marker', [obsolete]),
+		os::path_concat(RegistryDirectory, '.git/lock_restore_marker', RestoreMarker),
+		restore_lock_terms(Terms),
+		^^assertion(\+ os::file_exists(StalePackFile)),
+		^^assertion(\+ os::file_exists(StaleRegistryFile)),
+		^^assertion(\+ os::file_exists(RestoreMarker)),
+		packs::installed(lock_fixture, lock_b, 1:0:0).
+
+	test(packs_lock_restore_replaces_different_version, deterministic) :-
+		fixture_lock_terms([lock_a, lock_b, lock_c, lock_d], Terms),
+		packs::uninstall,
+		packs::install(lock_fixture, lock_b, 2:0:0),
+		packs::directory(lock_b, Directory),
+		write_fixture_file(Directory, 'obsolete.txt', [obsolete]),
+		os::path_concat(Directory, 'obsolete.txt', StaleFile),
+		restore_lock_terms(Terms),
+		^^assertion(\+ os::file_exists(StaleFile)),
+		packs::installed(lock_fixture, lock_b, 1:0:0).
+
 	test(packs_lock_corrupt_cache, deterministic) :-
 		fixture_lock_terms([lock_b], Terms),
 		packs::logtalk_packs(Storage),
@@ -865,9 +892,21 @@
 		lgtunit::assertion(member(lock_restore_verification_failed, Messages)),
 		lgtunit::assertion(\+ member(@'Restored setup', Messages)).
 
-	test(packs_lock_force_false, false) :-
+	test(packs_lock_force_false, deterministic) :-
 		fixture_lock_terms([lock_a, lock_b], Terms),
-		restore_lock_terms(Terms, [force(false), update(true)]).
+		packs::directory(lock_b, Directory),
+		write_fixture_file(Directory, 'obsolete.txt', [obsolete]),
+		os::path_concat(Directory, 'obsolete.txt', StaleFile),
+		observe_locked_restore(Terms, [force(false)], Outcome, _, Installs),
+		^^assertion(Outcome == false),
+		^^assertion(Installs == []),
+		^^assertion(os::file_exists(StaleFile)),
+		os::delete_file(StaleFile),
+		packs::installed(lock_fixture, lock_b, 1:0:0).
+
+	test(packs_lock_force_false_without_update, false) :-
+		fixture_lock_terms([lock_a, lock_b], Terms),
+		restore_lock_terms(Terms, [force(false)]).
 
 	test(packs_lock_restore_pins, deterministic) :-
 		fixture_lock_terms([lock_a, lock_b], Terms),
