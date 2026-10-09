@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-07,
+		date is 2026-10-10,
 		comment is 'Unit tests for the "isolation_forest_anomaly_detector" library.'
 	]).
 
@@ -49,10 +49,10 @@
 	test(isolation_forest_learn_2_gaussian_anomalies_error, error(domain_error(baseline_only_training_data, gaussian_anomalies))) :-
 		isolation_forest_anomaly_detector::learn(gaussian_anomalies, _Model).
 
-	test(isolation_forest_learn_3_gaussian_anomalies_filter, true(ground(Model))) :-
+	test(isolation_forest_learn_3_gaussian_anomalies_filter, deterministic(ground(Model))) :-
 		learn_filtered(gaussian_anomalies, Model).
 
-	test(isolation_forest_learn_2_gaussian_model_structure, true(functor(Model, if_model, 6))) :-
+	test(isolation_forest_learn_2_gaussian_model_structure, deterministic(functor(Model, if_model, 6))) :-
 		learn_filtered(gaussian_anomalies, Model).
 
 	test(isolation_forest_valid_anomaly_detector_1, deterministic(isolation_forest_anomaly_detector::valid_anomaly_detector(Model))) :-
@@ -83,75 +83,75 @@
 	test(isolation_forest_learn_3_empty_dataset_error, error(domain_error(non_empty_dataset, isolation_forest_empty_anomalies))) :-
 		isolation_forest_anomaly_detector::learn(isolation_forest_empty_anomalies, _Model, [number_of_trees(10)]).
 
-	test(isolation_forest_learn_2_gaussian_default_trees, true(NumTrees == 100)) :-
+	test(isolation_forest_learn_2_gaussian_default_trees, deterministic(NumTrees == 100)) :-
 		learn_filtered(gaussian_anomalies, Model),
 		Model = if_model(Trees, _, _, _, _, _),
 		length(Trees, NumTrees).
 
 	% learn/3 tests - with options
 
-	test(isolation_forest_learn_3_custom_trees, true(NumTrees == 20)) :-
+	test(isolation_forest_learn_3_custom_trees, deterministic(NumTrees == 20)) :-
 		learn_filtered(gaussian_anomalies, [number_of_trees(20)], Model),
 		Model = if_model(Trees, _, _, _, _, _),
 		length(Trees, NumTrees).
 
-	test(isolation_forest_learn_3_custom_subsample, true(ground(Model))) :-
+	test(isolation_forest_learn_3_custom_subsample, deterministic(ground(Model))) :-
 		learn_filtered(gaussian_anomalies, [number_of_trees(10), subsample_size(32)], Model).
 
-	test(isolation_forest_learn_3_extension_level_0, true(ground(Model))) :-
+	test(isolation_forest_learn_3_extension_level_0, deterministic(ground(Model))) :-
 		% Extension level 0 should behave like original Isolation Forest
 		learn_filtered(gaussian_anomalies, [number_of_trees(10), extension_level(0)], Model).
 
 	% score/3 tests - gaussian_anomalies dataset
 
-	test(isolation_forest_score_3_gaussian_normal_point, true(Score < 0.65)) :-
+	test(isolation_forest_score_3_gaussian_normal_point, deterministic(Score < 0.65)) :-
 		% A point at the center of the cluster should have a low anomaly score
 		learn_filtered(gaussian_anomalies, [number_of_trees(50)], Model),
 		isolation_forest_anomaly_detector::score(Model, [x-0.12, y-0.34], Score).
 
-	test(isolation_forest_score_3_gaussian_anomaly_point, true(Score > 0.5)) :-
+	test(isolation_forest_score_3_gaussian_anomaly_point, deterministic(Score > 0.5)) :-
 		% A far-away point should have a high anomaly score
 		learn_filtered(gaussian_anomalies, [number_of_trees(50)], Model),
 		isolation_forest_anomaly_detector::score(Model, [x-4.50, y-4.20], Score).
 
-	test(isolation_forest_score_3_gaussian_anomaly_higher_than_normal, true(AnomalyScore > NormalScore)) :-
+	test(isolation_forest_score_3_gaussian_anomaly_higher_than_normal, deterministic(AnomalyScore > NormalScore)) :-
 		% Anomalous points should consistently score higher than normal points
 		learn_filtered(gaussian_anomalies, [number_of_trees(100)], Model),
 		isolation_forest_anomaly_detector::score(Model, [x-0.12, y-0.34], NormalScore),
 		isolation_forest_anomaly_detector::score(Model, [x-4.50, y-4.20], AnomalyScore).
 
-	test(isolation_forest_score_3_gaussian_score_range, true((Score >= 0.0, Score =< 1.0))) :-
+	test(isolation_forest_score_3_gaussian_score_range, deterministic((Score >= 0.0, Score =< 1.0))) :-
 		% Anomaly scores should be in [0, 1]
 		learn_filtered(gaussian_anomalies, [number_of_trees(20)], Model),
 		isolation_forest_anomaly_detector::score(Model, [x-0.12, y-0.34], Score).
 
 	% predict/3 tests - gaussian_anomalies dataset
 
-	test(isolation_forest_predict_3_gaussian_normal, true(Prediction == normal)) :-
+	test(isolation_forest_predict_3_gaussian_normal, deterministic(Prediction == normal)) :-
 		learn_filtered(gaussian_anomalies, [number_of_trees(100)], Model),
 		isolation_forest_anomaly_detector::predict(Model, [x-0.12, y-0.34], Prediction).
 
-	test(isolation_forest_predict_3_gaussian_anomaly, true(Prediction == anomaly)) :-
+	test(isolation_forest_predict_3_gaussian_anomaly, deterministic(Prediction == anomaly)) :-
 		learn_filtered(gaussian_anomalies, [number_of_trees(100)], Model),
 		isolation_forest_anomaly_detector::predict(Model, [x-4.50, y-4.20], Prediction).
 
-	test(isolation_forest_predict_3_gaussian_custom_threshold, true(ground(Prediction))) :-
+	test(isolation_forest_predict_3_gaussian_custom_threshold, deterministic(ground(Prediction))) :-
 		learn_filtered(gaussian_anomalies, [number_of_trees(50), anomaly_threshold(0.6)], Model),
 		isolation_forest_anomaly_detector::predict(Model, [x-0.12, y-0.34], Prediction).
 
 	% score_all/3 tests - gaussian_anomalies dataset
 
-	test(isolation_forest_score_all_3_gaussian, true(length(Scores, 48))) :-
+	test(isolation_forest_score_all_3_gaussian, deterministic(Length == 48)) :-
 		learn_filtered(gaussian_anomalies, [number_of_trees(50)], Model),
 		isolation_forest_anomaly_detector::score_all(gaussian_anomalies, Model, Scores),
-		length(Scores, 48).
+		length(Scores, Length).
 
-	test(isolation_forest_score_all_3_gaussian_sorted_desc, true(FirstScore >= SecondScore)) :-
+	test(isolation_forest_score_all_3_gaussian_sorted_desc, deterministic(FirstScore >= SecondScore)) :-
 		% Scores should be sorted in descending order
 		learn_filtered(gaussian_anomalies, [number_of_trees(50)], Model),
 		isolation_forest_anomaly_detector::score_all(gaussian_anomalies, Model, [_-_-FirstScore, _-_-SecondScore| _]).
 
-	test(isolation_forest_score_all_3_gaussian_top_anomalies, true(AnomalyCount >= 4)) :-
+	test(isolation_forest_score_all_3_gaussian_top_anomalies, deterministic(AnomalyCount >= 4)) :-
 		% Most of the top-scoring instances should be actual anomalies
 		learn_filtered(gaussian_anomalies, [number_of_trees(100)], Model),
 		isolation_forest_anomaly_detector::score_all(gaussian_anomalies, Model, Scores),
@@ -160,25 +160,25 @@
 
 	% learn/2 and score/3 tests - shuttle_anomalies dataset
 
-	test(isolation_forest_learn_2_shuttle_anomalies, true(ground(Model))) :-
+	test(isolation_forest_learn_2_shuttle_anomalies, deterministic(ground(Model))) :-
 		learn_filtered(shuttle_anomalies, Model).
 
-	test(isolation_forest_score_shuttle_anomaly_vs_normal, true(AnomalyScore > NormalScore)) :-
+	test(isolation_forest_score_shuttle_anomaly_vs_normal, deterministic(AnomalyScore > NormalScore)) :-
 		learn_filtered(shuttle_anomalies, [number_of_trees(100)], Model),
 		% Normal instance (typical Rad Flow)
 		isolation_forest_anomaly_detector::score(Model, [a1-55, a2-42, a3-13, a4-42, a5-55, a6-13, a7-0, a8-0, a9-0], NormalScore),
 		% Anomalous instance (Fpv Close)
 		isolation_forest_anomaly_detector::score(Model, [a1-80, a2-37, a3-43, a4-37, a5-43, a6-6, a7-(-37), a8-(-37), a9-0], AnomalyScore).
 
-	test(isolation_forest_predict_shuttle_normal, true(Prediction == normal)) :-
+	test(isolation_forest_predict_shuttle_normal, deterministic(Prediction == normal)) :-
 		learn_filtered(shuttle_anomalies, [number_of_trees(100)], Model),
 		isolation_forest_anomaly_detector::predict(Model, [a1-55, a2-42, a3-13, a4-42, a5-55, a6-13, a7-0, a8-0, a9-0], Prediction).
 
-	test(isolation_forest_predict_shuttle_anomaly, true(Prediction == anomaly)) :-
+	test(isolation_forest_predict_shuttle_anomaly, deterministic(Prediction == anomaly)) :-
 		learn_filtered(shuttle_anomalies, [number_of_trees(100)], Model),
 		isolation_forest_anomaly_detector::predict(Model, [a1-80, a2-37, a3-43, a4-37, a5-43, a6-6, a7-(-37), a8-(-37), a9-0], Prediction).
 
-	test(isolation_forest_score_all_shuttle_top_anomalies, true(AnomalyCount >= 5)) :-
+	test(isolation_forest_score_all_shuttle_top_anomalies, deterministic(AnomalyCount >= 5)) :-
 		% Most of the top-scoring instances should be actual anomalies
 		learn_filtered(shuttle_anomalies, [number_of_trees(100)], Model),
 		isolation_forest_anomaly_detector::score_all(shuttle_anomalies, Model, Scores),
@@ -187,25 +187,25 @@
 
 	% learn/2 and score/3 tests - water_potability dataset
 
-	test(isolation_forest_learn_2_water_potability, true(ground(Model))) :-
+	test(isolation_forest_learn_2_water_potability, deterministic(ground(Model))) :-
 		learn_filtered(water_potability, Model).
 
-	test(isolation_forest_score_water_anomaly_vs_normal, true(AnomalyScore > NormalScore)) :-
+	test(isolation_forest_score_water_anomaly_vs_normal, deterministic(AnomalyScore > NormalScore)) :-
 		learn_filtered(water_potability, [number_of_trees(100)], Model),
 		% Normal water sample
 		isolation_forest_anomaly_detector::score(Model, [ph-7.08, hardness-204.89, solids-20791.32, chloramines-7.30, sulfate-368.52, conductivity-564.31, organic_carbon-10.38, trihalomethanes-86.99, turbidity-2.96], NormalScore),
 		% Anomalous water sample (extreme pH, high hardness and solids)
 		isolation_forest_anomaly_detector::score(Model, [ph-3.20, hardness-320.45, solids-45678.90, chloramines-2.10, sulfate-490.34, conductivity-890.12, organic_carbon-25.67, trihalomethanes-150.23, turbidity-7.89], AnomalyScore).
 
-	test(isolation_forest_predict_water_normal, true(Prediction == normal)) :-
+	test(isolation_forest_predict_water_normal, deterministic(Prediction == normal)) :-
 		learn_filtered(water_potability, [number_of_trees(100)], Model),
 		isolation_forest_anomaly_detector::predict(Model, [ph-7.08, hardness-204.89, solids-20791.32, chloramines-7.30, sulfate-368.52, conductivity-564.31, organic_carbon-10.38, trihalomethanes-86.99, turbidity-2.96], Prediction).
 
-	test(isolation_forest_predict_water_anomaly, true(Prediction == anomaly)) :-
+	test(isolation_forest_predict_water_anomaly, deterministic(Prediction == anomaly)) :-
 		learn_filtered(water_potability, [number_of_trees(100)], Model),
 		isolation_forest_anomaly_detector::predict(Model, [ph-3.20, hardness-320.45, solids-45678.90, chloramines-2.10, sulfate-490.34, conductivity-890.12, organic_carbon-25.67, trihalomethanes-150.23, turbidity-7.89], Prediction).
 
-	test(isolation_forest_score_all_water_top_anomalies, true(AnomalyCount >= 4)) :-
+	test(isolation_forest_score_all_water_top_anomalies, deterministic(AnomalyCount >= 4)) :-
 		% Most of the top-scoring instances should be actual anomalies
 		learn_filtered(water_potability, [number_of_trees(100)], Model),
 		isolation_forest_anomaly_detector::score_all(water_potability, Model, Scores),
@@ -214,43 +214,43 @@
 
 	% predict/4 tests - with options
 
-	test(isolation_forest_predict_4_gaussian_custom_threshold_low, true(Prediction == anomaly)) :-
+	test(isolation_forest_predict_4_gaussian_custom_threshold_low, deterministic(Prediction == anomaly)) :-
 		% A low threshold should make more points classified as anomalies
 		learn_filtered(gaussian_anomalies, [number_of_trees(100)], Model),
 		isolation_forest_anomaly_detector::predict(Model, [x-0.12, y-0.34], Prediction, [anomaly_threshold(0.1)]).
 
-	test(isolation_forest_predict_4_gaussian_custom_threshold_high, true(Prediction == normal)) :-
+	test(isolation_forest_predict_4_gaussian_custom_threshold_high, deterministic(Prediction == normal)) :-
 		% A high threshold should make more points classified as normal
 		learn_filtered(gaussian_anomalies, [number_of_trees(100)], Model),
 		isolation_forest_anomaly_detector::predict(Model, [x-4.50, y-4.20], Prediction, [anomaly_threshold(0.99)]).
 
-	test(isolation_forest_predict_4_overrides_model_threshold, true(Prediction == anomaly)) :-
+	test(isolation_forest_predict_4_overrides_model_threshold, deterministic(Prediction == anomaly)) :-
 		% The options threshold should override the model threshold
 		learn_filtered(gaussian_anomalies, [number_of_trees(100), anomaly_threshold(0.99)], Model),
 		isolation_forest_anomaly_detector::predict(Model, [x-4.50, y-4.20], Prediction, [anomaly_threshold(0.5)]).
 
-	test(isolation_forest_predict_4_sensor_missing_values, true(Prediction == anomaly)) :-
+	test(isolation_forest_predict_4_sensor_missing_values, deterministic(Prediction == anomaly)) :-
 		% predict/4 should work with missing values
 		learn_filtered(sensor_anomalies, [number_of_trees(100)], Model),
 		isolation_forest_anomaly_detector::predict(Model, [temperature-102.0, pressure-45.0, vibration- _], Prediction, [anomaly_threshold(0.5)]).
 
 	% export_to_clauses/4 tests
 
-	test(isolation_forest_export_to_clauses_4_gaussian, true(N == 1)) :-
+	test(isolation_forest_export_to_clauses_4_gaussian, deterministic(N == 1)) :-
 		learn_filtered(gaussian_anomalies, [number_of_trees(10)], Model),
 		isolation_forest_anomaly_detector::export_to_clauses(gaussian_anomalies, Model, iforest, Clauses),
 		length(Clauses, N).
 
-	test(isolation_forest_export_to_clauses_4_clause_is_ground, true(ground(Clauses))) :-
+	test(isolation_forest_export_to_clauses_4_clause_is_ground, deterministic(ground(Clauses))) :-
 		learn_filtered(gaussian_anomalies, [number_of_trees(10)], Model),
 		isolation_forest_anomaly_detector::export_to_clauses(gaussian_anomalies, Model, iforest, Clauses).
 
-	test(isolation_forest_export_to_clauses_4_clause_functor, true(Functor == iforest)) :-
+	test(isolation_forest_export_to_clauses_4_clause_functor, deterministic(Functor == iforest)) :-
 		learn_filtered(gaussian_anomalies, [number_of_trees(10)], Model),
 		isolation_forest_anomaly_detector::export_to_clauses(gaussian_anomalies, Model, iforest, [Clause]),
 		functor(Clause, Functor, _).
 
-	test(isolation_forest_export_to_clauses_4_clause_arity, true(Arity == 1)) :-
+	test(isolation_forest_export_to_clauses_4_clause_arity, deterministic(Arity == 1)) :-
 		learn_filtered(gaussian_anomalies, [number_of_trees(10)], Model),
 		isolation_forest_anomaly_detector::export_to_clauses(gaussian_anomalies, Model, iforest, [Clause]),
 		functor(Clause, _, Arity).
@@ -263,7 +263,7 @@
 		{iforest(LoadedModel)},
 		isolation_forest_anomaly_detector::predict(LoadedModel, [x-4.50, y-4.20], Prediction).
 
-	test(isolation_forest_export_to_clauses_4_sensor, true(N == 1)) :-
+	test(isolation_forest_export_to_clauses_4_sensor, deterministic(N == 1)) :-
 		learn_filtered(sensor_anomalies, [number_of_trees(10)], Model),
 		isolation_forest_anomaly_detector::export_to_clauses(sensor_anomalies, Model, detect, Clauses),
 		length(Clauses, N).
@@ -284,12 +284,12 @@
 
 	% Extension level tests
 
-	test(isolation_forest_extension_level_0_vs_full, true((ground(Model0), ground(ModelFull)))) :-
+	test(isolation_forest_extension_level_0_vs_full, deterministic((ground(Model0), ground(ModelFull)))) :-
 		% Both extension levels should produce valid models
 		learn_filtered(gaussian_anomalies, [number_of_trees(10), extension_level(0)], Model0),
 		learn_filtered(gaussian_anomalies, [number_of_trees(10), extension_level(1)], ModelFull).
 
-	test(isolation_forest_extension_level_0_scores, true(AnomalyScore > NormalScore)) :-
+	test(isolation_forest_extension_level_0_scores, deterministic(AnomalyScore > NormalScore)) :-
 		% Even with extension level 0, anomalies should score higher
 		learn_filtered(gaussian_anomalies, [number_of_trees(100), extension_level(0)], Model),
 		isolation_forest_anomaly_detector::score(Model, [x-0.12, y-0.34], NormalScore),
@@ -297,65 +297,65 @@
 
 	% Missing values tests - sensor_anomalies dataset
 
-	test(isolation_forest_learn_2_sensor_anomalies, true(ground(Model))) :-
+	test(isolation_forest_learn_2_sensor_anomalies, deterministic(ground(Model))) :-
 		% Dataset with missing values should be learnable
 		learn_filtered(sensor_anomalies, Model).
 
-	test(isolation_forest_learn_2_sensor_model_structure, true(functor(Model, if_model, 6))) :-
+	test(isolation_forest_learn_2_sensor_model_structure, deterministic(functor(Model, if_model, 6))) :-
 		% Model should have 6 arguments (includes Ranges)
 		learn_filtered(sensor_anomalies, Model).
 
-	test(isolation_forest_score_sensor_normal_complete, true(Score < 0.65)) :-
+	test(isolation_forest_score_sensor_normal_complete, deterministic(Score < 0.65)) :-
 		% A normal point with all values known should have a low score
 		learn_filtered(sensor_anomalies, [number_of_trees(100)], Model),
 		isolation_forest_anomaly_detector::score(Model, [temperature-71.0, pressure-31.0, vibration-0.30], Score).
 
-	test(isolation_forest_score_sensor_anomaly_complete, true(Score > 0.5)) :-
+	test(isolation_forest_score_sensor_anomaly_complete, deterministic(Score > 0.5)) :-
 		% An anomalous point with all values known should have a high score
 		learn_filtered(sensor_anomalies, [number_of_trees(100)], Model),
 		isolation_forest_anomaly_detector::score(Model, [temperature-102.0, pressure-45.0, vibration-2.20], Score).
 
-	test(isolation_forest_score_sensor_normal_missing_one, true(Score < 0.70)) :-
+	test(isolation_forest_score_sensor_normal_missing_one, deterministic(Score < 0.70)) :-
 		% A normal point with one missing value should still score relatively low
 		learn_filtered(sensor_anomalies, [number_of_trees(100)], Model),
 		isolation_forest_anomaly_detector::score(Model, [temperature-71.0, pressure- _, vibration-0.30], Score).
 
-	test(isolation_forest_score_sensor_anomaly_missing_one, true(AnomalyScore > NormalScore)) :-
+	test(isolation_forest_score_sensor_anomaly_missing_one, deterministic(AnomalyScore > NormalScore)) :-
 		% An anomalous point with one missing value should score higher than a normal one
 		% Use vibration as missing (not involved in most splits for 3D data)
 		learn_filtered(sensor_anomalies, [number_of_trees(100)], Model),
 		isolation_forest_anomaly_detector::score(Model, [temperature-71.0, pressure-31.0, vibration- _], NormalScore),
 		isolation_forest_anomaly_detector::score(Model, [temperature-102.0, pressure-45.0, vibration- _], AnomalyScore).
 
-	test(isolation_forest_predict_sensor_normal_missing, true(Prediction == normal)) :-
+	test(isolation_forest_predict_sensor_normal_missing, deterministic(Prediction == normal)) :-
 		% A normal point with a missing value should still be predicted as normal
 		learn_filtered(sensor_anomalies, [number_of_trees(100)], Model),
 		isolation_forest_anomaly_detector::predict(Model, [temperature-71.0, pressure-31.0, vibration- _], Prediction).
 
-	test(isolation_forest_predict_sensor_anomaly_missing, true(Prediction == anomaly)) :-
+	test(isolation_forest_predict_sensor_anomaly_missing, deterministic(Prediction == anomaly)) :-
 		% An anomalous point with a missing value should still be predicted as anomaly
 		learn_filtered(sensor_anomalies, [number_of_trees(100)], Model),
 		isolation_forest_anomaly_detector::predict(Model, [temperature-102.0, pressure-45.0, vibration- _], Prediction).
 
-	test(isolation_forest_score_all_sensor_with_missing, true(Length == 40)) :-
+	test(isolation_forest_score_all_sensor_with_missing, deterministic(Length == 40)) :-
 		% All instances should be scored, including those with missing values
 		learn_filtered(sensor_anomalies, [number_of_trees(50)], Model),
 		isolation_forest_anomaly_detector::score_all(sensor_anomalies, Model, Scores),
 		length(Scores, Length).
 
-	test(isolation_forest_score_all_sensor_top_anomalies, true(AnomalyCount >= 5)) :-
+	test(isolation_forest_score_all_sensor_top_anomalies, deterministic(AnomalyCount >= 5)) :-
 		% Most of the top-scoring instances should be actual anomalies
 		learn_filtered(sensor_anomalies, [number_of_trees(100)], Model),
 		isolation_forest_anomaly_detector::score_all(sensor_anomalies, Model, Scores),
 		take(10, Scores, TopScores),
 		count_class(TopScores, anomaly, AnomalyCount).
 
-	test(isolation_forest_score_sensor_score_range_with_missing, true((Score >= 0.0, Score =< 1.0))) :-
+	test(isolation_forest_score_sensor_score_range_with_missing, deterministic((Score >= 0.0, Score =< 1.0))) :-
 		% Scores should still be in [0, 1] even with missing values
 		learn_filtered(sensor_anomalies, [number_of_trees(50)], Model),
 		isolation_forest_anomaly_detector::score(Model, [temperature- _, pressure- _, vibration-0.30], Score).
 
-	test(isolation_forest_missing_split_branches_both_ways, true((MissingScore > NormalScore, MissingScore < AnomalyScore))) :-
+	test(isolation_forest_missing_split_branches_both_ways, deterministic((MissingScore > NormalScore, MissingScore < AnomalyScore))) :-
 		learn_filtered(missing_value_branching_fixture, [number_of_trees(256), subsample_size(6), extension_level(0)], Model),
 		isolation_forest_anomaly_detector::score(Model, [x-0.15], NormalScore),
 		isolation_forest_anomaly_detector::score(Model, [x- _], MissingScore),
