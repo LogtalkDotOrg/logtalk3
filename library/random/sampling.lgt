@@ -157,10 +157,10 @@
 
 	circular_uniform_polar(Radius, Rho, Theta) :-
 		Radius >= 0.0,
-		random(Random),
+		random_pair(Random, AngleRandom),
 		Rho is Radius * sqrt(Random),
 		DoublePi is 2 * pi,
-		random(0.0, DoublePi, Theta).
+		Theta is AngleRandom * DoublePi + 0.0.
 
 	circular_uniform_cartesian(Radius, X, Y) :-
 		circular_uniform_polar(Radius, Rho, Theta),
@@ -232,11 +232,10 @@
 		).
 
 	standard_normal(Value) :-
-		random(X1),
+		random_pair(X1, X2),
 		(	X1 =:= 0.0 ->
 			standard_normal(Value)
-		;	random(X2),
-			Value is sqrt(-2.0 * log(X1)) * cos(2.0*pi*X2)
+		;	Value is sqrt(-2.0 * log(X1)) * cos(2.0*pi*X2)
 		).
 
 	fisher(DegreesOfFreedomNumerator, DegreesOfFreedomDenominator, Value) :-
@@ -250,8 +249,7 @@
 		logseries(Shape, Q, Value).
 
 	logseries(Shape, Q, Value) :-
-		random(Uniform1),
-		random(Uniform2),
+		random_pair(Uniform1, Uniform2),
 		(	Uniform2 =:= 0.0 ->
 			logseries(Shape, Q, Value)
 		;	K is truncate(1 + log(Uniform2) / log(1.0 - Shape)),
@@ -272,8 +270,7 @@
 		).
 
 	von_mises(Mode, Concentration, S, R, Value) :-
-		random(Uniform1),
-		random(Uniform2),
+		random_pair(Uniform1, Uniform2),
 		Z is cos(pi * Uniform1),
 		F is (1.0 + R * Z) / (R + Z),
 		C is Concentration * (R - F),

@@ -27,6 +27,8 @@
 	random(Lower, Upper, Random) :-
 		Random is (Lower + Upper) / 2.0.
 
+	random_pair(0.5, 0.5).
+
 	:- include(sampling).
 
 :- end_object.
@@ -36,9 +38,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-09-08,
+		date is 2026-10-10,
 		comment is 'Unit tests for the sampling protocol implementation.'
 	]).
 
@@ -47,6 +49,20 @@
 	]).
 
 	:- set_logtalk_flag(arithmetic_expressions, silent).
+
+	test(sampling_fast_random_standard_normal_seed, deterministic((Actual =~= Expected, ActualSeed == ExpectedSeed))) :-
+		fast_random(xoshiro128pp)::get_seed(Seed),
+		compare_standard_normal(fast_random(xoshiro128pp), Seed, Actual, Expected, ActualSeed, ExpectedSeed).
+
+	test(sampling_fast_random_standard_normal_zero_draw, deterministic((Actual =~= Expected, ActualSeed == ExpectedSeed))) :-
+		compare_standard_normal(fast_random(xoshiro128pp), seed(xoshiro128pp, s(0, 0, 1, 0)), Actual, Expected, ActualSeed, ExpectedSeed).
+
+	test(sampling_random_standard_normal_seed, deterministic((Actual =~= Expected, ActualSeed == ExpectedSeed))) :-
+		random(xoshiro128pp)::get_seed(Seed),
+		compare_standard_normal(random(xoshiro128pp), Seed, Actual, Expected, ActualSeed, ExpectedSeed).
+
+	test(sampling_random_standard_normal_zero_draw, deterministic((Actual =~= Expected, ActualSeed == ExpectedSeed))) :-
+		compare_standard_normal(random(xoshiro128pp), seed(xoshiro128pp, s(0, 0, 1, 0)), Actual, Expected, ActualSeed, ExpectedSeed).
 
 	test(sampling_lognormal_3, deterministic(Value =~= Expected)) :-
 		Normal is 0.7 - 0.2 * sqrt(-2.0 * log(0.5)),
@@ -93,5 +109,20 @@
 
 	test(sampling_standard_cauchy_3_non_positive_scale, fail) :-
 		fixed_sampling_source::standard_cauchy(0.0, 0.0, _).
+
+	compare_standard_normal(Object, Seed, Actual, Expected, ActualSeed, ExpectedSeed) :-
+		Object::get_seed(SavedSeed),
+		Object::set_seed(Seed),
+		repeat,
+			Object::random(X1),
+			Object::random(X2),
+		X1 > 0.0,
+		!,
+		Expected is sqrt(-2.0 * log(X1)) * cos(2.0*pi*X2),
+		Object::get_seed(ExpectedSeed),
+		Object::set_seed(Seed),
+		Object::standard_normal(Actual),
+		Object::get_seed(ActualSeed),
+		Object::set_seed(SavedSeed).
 
 :- end_object.

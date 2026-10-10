@@ -150,6 +150,9 @@ systems).
 
 * IMPROVED: Performance of the `isolation_forest_anomaly_detector` library.
 
+* IMPROVED: Performance of the `random` library `circular_uniform_polar/3`,
+`logseries/2`, `standard_normal/1`, and `von_mises/3` sampling predicates.
+
 * FIXED: The `text_vectorization` library to allow for repeated options when
 validating vectorizer terms (leftmost options always take precedence).
 

@@ -23,9 +23,9 @@
 	implements((pseudo_random_protocol, sampling_protocol))).
 
 	:- info([
-		version is 3:0:0,
+		version is 3:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-23,
+		date is 2026-10-10,
 		comment is 'Fast portable random number generator predicates.',
 		parameters is [
 			'Algorithm' - 'Random number generator algorithm. One of ``as183``, ``splitmix64``, ``xoshiro128pp``, ``xoshiro128ss``, ``xoshiro256pp``, ``xoshiro256ss``, ``well512a``.'
@@ -66,7 +66,7 @@
 
 	:- if(current_logtalk_flag(threads, supported)).
 		:- synchronized([
-			random/1, random/3,
+			random/1, random/3, random_pair/2,
 			sequence/4, set/4, permutation/2,
 			randseq/4, randset/4,
 			reset_seed/0, get_seed/1, set_seed/1, randomize/1
@@ -234,6 +234,16 @@
 		Upper >= Lower,
 		random(_Algorithm_, Float),
 		Random is Float * (Upper-Lower) + Lower.
+
+	random_pair(Random1, Random2) :-
+		random_pair(_Algorithm_, Random1, Random2).
+
+	% SWI-Prolog requires the cut at the end to avoid a spurious choice-point
+	random_pair(_Algorithm_, Random1, Random2) :-
+		retract(seed_(_Algorithm_, Seed0)),
+		random_seeds(_Algorithm_, Seed0, Seed1, Random1),
+		random_seeds(_Algorithm_, Seed1, Seed, Random2),
+		assertz(seed_(_Algorithm_, Seed)), !.
 
 	randseq(Length, Lower, Upper, Sequence) :-
 		integer(Length),
