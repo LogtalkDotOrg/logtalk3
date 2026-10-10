@@ -23,9 +23,9 @@
 	imports(probabilistic_classifier_common)).
 
 	:- info([
-		version is 2:0:1,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2026-09-24,
+		date is 2026-10-10,
 		comment is 'Logistic regression classifier supporting binary and multiclass classification using joint softmax training. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		see_also is [
 			dataset_protocol, c45_classifier, knn_classifier, naive_bayes_classifier,
@@ -190,33 +190,47 @@
 	train_models([], _, _, _, []).
 	train_models([Class| Classes], Rows, NumFeatures, Options, Models) :-
 		initialize_models([Class| Classes], NumFeatures, InitialModels),
-		optimize_models(Rows, Options, 0, InitialModels, Models).
+		zero_gradient_models(InitialModels, InitialGradientModels),
+		prepare_training_rows(Rows, [Class| Classes], TrainingRows),
+		length(Rows, Count),
+		Scale is 1.0 / Count,
+		^^option(maximum_iterations(MaxIterations), Options),
+		^^option(tolerance(Tolerance), Options),
+		^^option(learning_rate(LearningRate), Options),
+		^^option(l2_regularization(Regularization), Options),
+		Settings = training_settings(MaxIterations, Tolerance, Scale, LearningRate, Regularization),
+		optimize_models(TrainingRows, Settings, InitialGradientModels, 0, InitialModels, Models).
+
+	prepare_training_rows([], _, []).
+	prepare_training_rows([Features-Label| Rows], Classes, [Features-Targets| TrainingRows]) :-
+		class_targets(Classes, Label, Targets),
+		prepare_training_rows(Rows, Classes, TrainingRows).
+
+	class_targets([], _, []).
+	class_targets([Class| Classes], Label, [Target| Targets]) :-
+		target_value(Label, Class, Target),
+		class_targets(Classes, Label, Targets).
 
 	initialize_models([], _, []).
 	initialize_models([Class| Classes], NumFeatures, [class_model(Class, 0.0, Weights)| Models]) :-
 		new_vector(NumFeatures, 0.0, Weights),
 		initialize_models(Classes, NumFeatures, Models).
 
-	optimize_models(Rows, Options, Iteration, Models0, Models) :-
-		^^option(maximum_iterations(MaxIterations), Options),
+	optimize_models(Rows, Settings, InitialGradientModels, Iteration, Models0, Models) :-
+		Settings = training_settings(MaxIterations, Tolerance, _Scale, _LearningRate, _Regularization),
 		(	Iteration >= MaxIterations ->
 			Models = Models0
-		;	update_models(Rows, Models0, Options, Models1, MaxDelta),
-			^^option(tolerance(Tolerance), Options),
+		;	update_models(Rows, Models0, Settings, InitialGradientModels, Models1, MaxDelta),
 			(	MaxDelta =< Tolerance ->
 				Models = Models1
 			;	NextIteration is Iteration + 1,
-				optimize_models(Rows, Options, NextIteration, Models1, Models)
+				optimize_models(Rows, Settings, InitialGradientModels, NextIteration, Models1, Models)
 			)
 		).
 
-	update_models(Rows, Models0, Options, Models1, MaxDelta) :-
-		length(Rows, Count),
-		zero_gradient_models(Models0, InitialGradientModels),
+	update_models(Rows, Models0, Settings, InitialGradientModels, Models1, MaxDelta) :-
+		Settings = training_settings(_MaxIterations, _Tolerance, Scale, LearningRate, Regularization),
 		accumulate_model_gradients(Rows, Models0, InitialGradientModels, GradientModels),
-		Scale is 1.0 / Count,
-		^^option(learning_rate(LearningRate), Options),
-		^^option(l2_regularization(Regularization), Options),
 		update_model_weights(Models0, GradientModels, Scale, Regularization, LearningRate, Models1, 0.0, MaxDelta).
 
 	zero_gradient_models([], []).
@@ -225,26 +239,29 @@
 		zero_gradient_models(Models, GradientModels).
 
 	accumulate_model_gradients([], _, GradientModels, GradientModels).
-	accumulate_model_gradients([Features-Label| Rows], Models, GradientModels0, GradientModels) :-
-		class_logits(Models, Features, ClassLogits),
-		stable_softmax(ClassLogits, Probabilities),
-		accumulate_row_gradients(Models, Probabilities, Features, Label, GradientModels0, GradientModels1),
+	accumulate_model_gradients([Features-Targets| Rows], Models, GradientModels0, GradientModels) :-
+		class_logits_maximum(Models, Features, ClassLogits, MaxLogit),
+		accumulate_row_gradients(ClassLogits, MaxLogit, 0.0, _SumExp, Features, Targets, GradientModels0, GradientModels1),
 		accumulate_model_gradients(Rows, Models, GradientModels1, GradientModels).
 
-	accumulate_row_gradients([], [], _, _, [], []).
+	accumulate_row_gradients([], _, SumExp, SumExp, _, [], [], []).
 	accumulate_row_gradients(
-		[class_model(Class, _Bias, _Weights)| Models],
-		[Class-Probability| Probabilities],
+		[Class-Logit| ClassLogits],
+		MaxLogit,
+		SumExp0,
+		SumExp,
 		Features,
-		Label,
+		[Target| Targets],
 		[class_gradient(Class, BiasGradient0, WeightGradients0)| GradientModels0],
 		[class_gradient(Class, BiasGradient, WeightGradients)| GradientModels]
 	) :-
-		target_value(Label, Class, Target),
+		ShiftedExp is exp(Logit - MaxLogit),
+		SumExp1 is SumExp0 + ShiftedExp,
+		accumulate_row_gradients(ClassLogits, MaxLogit, SumExp1, SumExp, Features, Targets, GradientModels0, GradientModels),
+		Probability is ShiftedExp / SumExp,
 		Error is Probability - Target,
 		BiasGradient is BiasGradient0 + Error,
-		add_scaled_vector(Features, Error, WeightGradients0, WeightGradients),
-		accumulate_row_gradients(Models, Probabilities, Features, Label, GradientModels0, GradientModels).
+		add_scaled_vector(Features, Error, WeightGradients0, WeightGradients).
 
 	update_model_weights([], [], _, _, _, [], MaxDelta, MaxDelta).
 	update_model_weights(
@@ -283,6 +300,18 @@
 		dot_product(Weights, Features, Linear),
 		Score is Bias + Linear,
 		class_logits(Models, Features, ClassLogits).
+
+	class_logits_maximum([class_model(Class, Bias, Weights)| Models], Features, [Class-Score| ClassLogits], MaxLogit) :-
+		dot_product(Weights, Features, Linear),
+		Score is Bias + Linear,
+		class_logits_maximum_(Models, Features, ClassLogits, Score, MaxLogit).
+
+	class_logits_maximum_([], _, [], MaxLogit, MaxLogit).
+	class_logits_maximum_([class_model(Class, Bias, Weights)| Models], Features, [Class-Score| ClassLogits], MaxLogit0, MaxLogit) :-
+		dot_product(Weights, Features, Linear),
+		Score is Bias + Linear,
+		MaxLogit1 is max(Score, MaxLogit0),
+		class_logits_maximum_(Models, Features, ClassLogits, MaxLogit1, MaxLogit).
 
 	stable_softmax([ClassLogit| ClassLogits], Probabilities) :-
 		ClassLogit = _-MaxLogit0,

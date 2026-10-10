@@ -132,7 +132,11 @@ using Lasso regression coefficients.
 * ADDED: New `git` library predicates `working_tree_status/2` and
 `working_tree_clean/1`.
 
-* IMPROVED: Performance of the `crypto` library.
+* IMPROVED: Performance of the `crypto`, `isolation_forest_anomaly_detector`,
+and `logistic_regression_classifier` libraries.
+
+* IMPROVED: Performance of the `random` library `circular_uniform_polar/3`,
+`logseries/2`, `standard_normal/1`, and `von_mises/3` sampling predicates.
 
 * IMPROVED: Rewrite predicate definitions as tail-recursive in the
 `ant_colony`, `association_rule_miner`, `ccsds`, `colley_ranker`, `crontab`,
@@ -147,11 +151,6 @@ using Lasso regression coefficients.
 * IMPROVED: The `http_process_transport` library to only warn about a missing
 default socket command (`socat` on POSIX systems and `ncat` on Windows
 systems).
-
-* IMPROVED: Performance of the `isolation_forest_anomaly_detector` library.
-
-* IMPROVED: Performance of the `random` library `circular_uniform_polar/3`,
-`logseries/2`, `standard_normal/1`, and `von_mises/3` sampling predicates.
 
 * FIXED: The `text_vectorization` library to allow for repeated options when
 validating vectorizer terms (leftmost options always take precedence).

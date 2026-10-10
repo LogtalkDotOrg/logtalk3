@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-07,
+		date is 2026-10-10,
 		comment is 'Unit tests for the "logistic_regression_classifier" library.'
 	]).
 
@@ -41,6 +41,35 @@
 
 	cleanup :-
 		^^clean_file('test_output.pl').
+
+	test(logistic_regression_accumulate_gradients, deterministic((Gradients == Expected, Repeated == Expected, Initial == ZeroGradients, TrainingRows == ExpectedRows))) :-
+		Models = [class_model(yes, 0.0, [0.0, 0.0]), class_model(no, 0.0, [0.0, 0.0])],
+		ZeroGradients = [class_gradient(yes, 0.0, [0.0, 0.0]), class_gradient(no, 0.0, [0.0, 0.0])],
+		Expected = [class_gradient(yes, 0.0, [-1.0, 0.5]), class_gradient(no, 0.0, [1.0, -0.5])],
+		Rows = [[1.0, 2.0]-yes, [-1.0, 3.0]-no],
+		ExpectedRows = [[1.0, 2.0]-[1.0, 0.0], [-1.0, 3.0]-[0.0, 1.0]],
+		logistic_regression_classifier << prepare_training_rows(Rows, [yes, no], TrainingRows),
+		logistic_regression_classifier << zero_gradient_models(Models, Initial),
+		logistic_regression_classifier << accumulate_model_gradients(TrainingRows, Models, Initial, Gradients),
+		logistic_regression_classifier << accumulate_model_gradients(TrainingRows, Models, Initial, Repeated).
+
+	test(logistic_regression_multiclass_gradients_match_softmax, deterministic((Actual == Expected, TrainingRows == [Features-[0.0, 1.0, 0.0]]))) :-
+		Models = [class_model(a, -2.0, [0.5, -0.75]), class_model(b, 1.0, [-0.25, 1.0]), class_model(c, -0.5, [1.5, 0.25])],
+		Features = [0.5, -2.0],
+		logistic_regression_classifier << class_logits(Models, Features, Logits),
+		logistic_regression_classifier << stable_softmax(Logits, Probabilities),
+		findall(
+			class_gradient(Class, Error, Weights),
+			( list::member(Class-Probability, Probabilities),
+				logistic_regression_classifier << target_value(b, Class, Target),
+				Error is Probability - Target,
+				linear_algebra::add_scaled_vector(Features, Error, [0.0, 0.0], Weights)
+			),
+			Expected
+		),
+		logistic_regression_classifier << prepare_training_rows([Features-b], [a, b, c], TrainingRows),
+		logistic_regression_classifier << zero_gradient_models(Models, Initial),
+		logistic_regression_classifier << accumulate_model_gradients(TrainingRows, Models, Initial, Actual).
 
 	test(logistic_regression_learn_2_weather, deterministic(ground(Classifier))) :-
 		logistic_regression_classifier::learn(weather, Classifier).
