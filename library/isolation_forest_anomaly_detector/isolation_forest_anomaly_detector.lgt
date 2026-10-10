@@ -23,9 +23,9 @@
 	imports(anomaly_detector_common)).
 
 	:- info([
-		version is 2:0:1,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2026-09-24,
+		date is 2026-10-10,
 		comment is 'Extended Isolation Forest (EIF) algorithm for anomaly detection. Implements the improved version described by Hariri et al. (2019) that uses random hyperplane cuts instead of axis-aligned cuts, eliminating score bias artifacts. Builds an ensemble of isolation trees from baseline training examples selected from a dataset object implementing the ``anomaly_dataset_protocol`` protocol. Missing attribute values are represented using anonymous variables.',
 		see_also is [
 			anomaly_dataset_protocol, anomaly_detector_protocol, knn_distance_anomaly_detector,
@@ -447,7 +447,7 @@
 		length(Data, Size),
 		Size > 1,
 		CurrentDepth < MaxDepth,
-		compute_ranges(Data, NumDimensions, NodeRanges),
+		compute_ranges(Data, NodeRanges),
 		% Generate random normal vector (hyperplane direction)
 		generate_normal_vector(NumDimensions, ExtLevel, Normal),
 		% Generate random intercept point within the data range
@@ -506,25 +506,25 @@
 		I1 is I + 1,
 		fill_normal_vector(N, I1, ActiveIndices, Components, Rest).
 
-	% compute_ranges/3 - compute min/max for each dimension
-	compute_ranges(Data, NumDimensions, Ranges) :-
-		compute_ranges(1, NumDimensions, Data, Ranges).
+	% compute_ranges/2 - compute min/max for each dimension
+	compute_ranges([Vector| Vectors], Ranges) :-
+		initial_ranges(Vector, InitialRanges),
+		compute_ranges_rows(Vectors, InitialRanges, Ranges).
 
-	compute_ranges(I, N, _, []) :-
-		I > N,
-		!.
-	compute_ranges(I, N, Data, [Min-Max| Ranges]) :-
-		I =< N,
-		extract_dimension(Data, I, Values),
-		min(Values, Min),
-		max(Values, Max),
-		I1 is I + 1,
-		compute_ranges(I1, N, Data, Ranges).
+	initial_ranges([], []).
+	initial_ranges([Value| Values], [Value-Value| Ranges]) :-
+		initial_ranges(Values, Ranges).
 
-	extract_dimension([], _, []).
-	extract_dimension([Vector| Vectors], I, [Value| Values]) :-
-		nth1(I, Vector, Value),
-		extract_dimension(Vectors, I, Values).
+	compute_ranges_rows([], Ranges, Ranges).
+	compute_ranges_rows([Vector| Vectors], Ranges0, Ranges) :-
+		update_ranges(Vector, Ranges0, Ranges1),
+		compute_ranges_rows(Vectors, Ranges1, Ranges).
+
+	update_ranges([], [], []).
+	update_ranges([Value| Values], [Min0-Max0| Ranges0], [Min-Max| Ranges]) :-
+		Min is min(Value, Min0),
+		Max is max(Value, Max0),
+		update_ranges(Values, Ranges0, Ranges).
 
 	random_point_in_ranges([], []).
 	random_point_in_ranges([Min-Max| Ranges], [Point| Points]) :-

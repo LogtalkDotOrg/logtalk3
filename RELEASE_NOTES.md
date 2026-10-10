@@ -148,6 +148,8 @@ using Lasso regression coefficients.
 default socket command (`socat` on POSIX systems and `ncat` on Windows
 systems).
 
+* IMPROVED: Performance of the `isolation_forest_anomaly_detector` library.
+
 * FIXED: The `text_vectorization` library to allow for repeated options when
 validating vectorizer terms (leftmost options always take precedence).
 
