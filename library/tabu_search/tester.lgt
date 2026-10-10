@@ -12,18 +12,21 @@
 	logtalk_load(basic_types(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(random(loader)),
+	logtalk_load(os(loader)),
 	logtalk_load([
 		tabu_search_problem_protocol,
 		tabu_search
 	], [
 		debug(on),
-		source_data(on)
+		source_data(on),
+		context_switching_calls(allow)
 	]),
 	logtalk_load([
 		'test_files/quadratic',
 		'test_files/quadratic_delta',
 		'test_files/quadratic_progress',
-		'test_files/tsp'
+		'test_files/tsp',
+		'test_files/regression_problems'
 	], [
 		optimize(on)
 	]),

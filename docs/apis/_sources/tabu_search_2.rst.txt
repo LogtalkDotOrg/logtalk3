@@ -8,18 +8,18 @@
 ``tabu_search(Problem,RandomAlgorithm)``
 ========================================
 
-* ``Problem`` - Problem object implementing ``tabu_search_protocol``.
+* ``Problem`` - Problem object implementing ``tabu_search_problem_protocol``.
 * ``RandomAlgorithm`` - Random number generator algorithm for the ``fast_random`` library (e.g. ``xoshiro128pp``, ``xoshiro256ss``, ``well512a``, ...).
 
 
-Tabu search optimization algorithm. Parameterized by a problem object implementing the ``tabu_search_protocol`` protocol and by a random number generator algorithm for the ``fast_random`` library. The algorithm minimizes the energy (cost) function defined by the problem. Custom stop conditions, delta-energy neighbor generation, full neighborhood enumeration, progress reporting, and restarts can be defined by the problem object or configured via options; suitable defaults are used otherwise.
+Tabu search optimization algorithm. Parameterized by a problem object implementing the ``tabu_search_problem_protocol`` protocol and by a random number generator algorithm for the ``fast_random`` library. Minimizes energy with optional problem-defined tabu keys, tenure, aspiration, restart states, neighbor generation, stopping, and progress reporting.
 
 | **Availability:** 
 |    ``logtalk_load(tabu_search(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-08-15
+| **Version:** 2:0:0
+| **Date:** 2026-10-10
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -33,16 +33,7 @@ Tabu search optimization algorithm. Parameterized by a problem object implementi
 |    :ref:`type <type/0>`
 
 | **Remarks:**
-
-   - Algorithm: Tabu search is a metaheuristic that guides a local search procedure using a short-term memory structure (the tabu list) to avoid cycling and to escape local minima. At each iteration a set of candidate neighbors is examined and the best admissible (non-tabu or aspiration-allowed) neighbor is selected.
-   - Tabu list: A list of recently visited states paired with expiration steps. With fixed tenure the list behaves as a FIFO of maximum length ``tabu_tenure``. With ``tabu_tenure_range(Min, Max)`` each accepted move is assigned a random tenure drawn uniformly from the inclusive range.
-   - Aspiration criterion: A tabu candidate is accepted when its energy is strictly better than the best energy found so far. This is the classic "best-so-far" aspiration criterion.
-   - Candidate generation: By default the algorithm samples ``candidates(N)`` neighbors using ``neighbor_state/2`` (or ``neighbor_state/3`` when defined). If the problem defines ``neighbors/2``, that complete list is used instead (or a random sample of it when larger than the candidate limit).
-   - Delta-energy optimization: If the problem object defines ``neighbor_state/3``, the algorithm uses the returned delta energy directly instead of calling ``state_energy/2`` on the neighbor. This is useful when computing the energy change is cheaper than recomputing the full energy.
-   - Progress reporting: If the problem object defines ``progress/5``, it is called periodically with the current step, best energy, current energy, acceptance rate, and improvement rate. The reporting interval is controlled by the ``updates(N)`` option. A final report is always produced when the loop terminates.
-   - Best state tracking: The algorithm tracks the best state found across all iterations and across all restart cycles, not just the final state.
-   - Seed control: The ``seed(S)`` option initializes the random number generator for reproducible runs.
-   - Restarts: The ``restarts(N)`` option runs N additional tabu search cycles after the first. Each restart begins from the best state found so far with a cleared tabu list, allowing the search to escape deep local minima. Statistics accumulate across all cycles.
+|    (none)
 
 | **Inherited public predicates:**
 |     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
@@ -70,6 +61,10 @@ Runs the tabu search algorithm using default options and returns the best state 
 | **Mode and number of proofs:**
 |    ``run(-nonvar,-number)`` - ``one``
 
+| **Exceptions:**
+|    An implemented output hook fails or returns an invalid value:
+|        ``domain_error(tabu_hook_result,Result)``
+
 
 ------------
 
@@ -89,15 +84,24 @@ Runs the tabu search algorithm using the given options and returns the best stat
 | **Mode and number of proofs:**
 |    ``run(-nonvar,-number,+list(compound))`` - ``one``
 
+| **Exceptions:**
+|    An option is invalid:
+|        ``domain_error(option,Option)``
+|    Exhaustive mode requires implemented enumeration:
+|        ``existence_error(procedure,Problem::neighbors/2)``
+|    An implemented output hook fails or returns an invalid value:
+|        ``domain_error(tabu_hook_result,Result)``
+
 | **Remarks:**
 
     - ``max_steps(N)`` option: Maximum number of iterations per cycle (default: ``10000``).
-    - ``tabu_tenure(T)`` option: Fixed tabu tenure: maximum lifetime (in steps) of each tabu entry (default: ``7``). Ignored when ``tabu_tenure_range/2`` is also present.
-    - ``tabu_tenure_range(Min, Max)`` option: Random tabu tenure: on each accepted move a tenure is drawn uniformly from the inclusive integer range ``Min..Max``. Overrides ``tabu_tenure/1`` when present.
+    - ``tabu_tenure(T)`` option: Fixed lifetime in selection steps (default: ``7``). Ignored when a range or a problem ``tabu_tenure/4`` implementation is present.
+    - ``tabu_tenure_range(Min, Max)`` option: Uniform random tenure in the inclusive integer range. Overrides fixed tenure; ignored when the problem implements ``tabu_tenure/4``.
     - ``candidates(N)`` option: Number of candidate neighbors examined per iteration (default: ``20``).
+    - ``exhaustive(Boolean)`` option: Evaluates the full ``neighbors/2`` list in source order when true, ignoring the candidate limit (default: ``false``). Requires implemented enumeration.
     - ``updates(N)`` option: Number of progress reports during the run. Set to ``0`` to disable. Progress is reported by calling ``progress/5`` on the problem object (default: ``0``).
     - ``seed(S)`` option: Positive integer seed for the random number generator, enabling reproducible runs (default: none).
-    - ``restarts(N)`` option: Number of additional tabu search cycles after the first. Each restart begins from the best state found so far with a cleared tabu list (default: ``0``).
+    - ``restarts(N)`` option: Number of additional cycles (default: ``0``). Clears memory and uses ``restart_state/2`` when implemented, otherwise the global best state.
 
 
 ------------
@@ -118,6 +122,14 @@ Runs the tabu search algorithm using the given options, returns the best state f
 | **Mode and number of proofs:**
 |    ``run(-nonvar,-number,-list(compound),+list(compound))`` - ``one``
 
+| **Exceptions:**
+|    An option is invalid:
+|        ``domain_error(option,Option)``
+|    Exhaustive mode requires implemented enumeration:
+|        ``existence_error(procedure,Problem::neighbors/2)``
+|    An implemented output hook fails or returns an invalid value:
+|        ``domain_error(tabu_hook_result,Result)``
+
 | **Remarks:**
 
     - Statistics list: A list of ``Key(Value)`` pairs: ``steps(N)`` is the number of steps executed, ``acceptances(A)`` is the number of accepted moves, ``improvements(I)`` is the number of moves that improved the best energy, and ``final_tabu_size(S)`` is the number of non-expired tabu entries at termination.
@@ -133,7 +145,122 @@ Protected predicates
 Private predicates
 ------------------
 
-(no local declarations; see entity ancestors if any)
+.. index:: select_candidate/10
+.. _tabu_search/2::select_candidate/10:
+
+``select_candidate/10``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Selects the best admissible candidate using the cached run policy.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``select_candidate(Policy,State,Energy,BestEnergy,Tabu,Step,Candidates,Neighbor,NeighborEnergy,Accepted)``
+| **Mode and number of proofs:**
+|    ``select_candidate(+compound,+nonvar,+number,+number,+list,+non_negative_integer,+positive_integer,-nonvar,-number,-boolean)`` - ``one``
+
+| **Exceptions:**
+|    Enumeration fails in exhaustive mode:
+|        ``domain_error(tabu_hook_result,neighbors/2)``
+|    A key hook returns an invalid result:
+|        ``domain_error(tabu_hook_result,Result)``
+
+
+------------
+
+.. index:: require_neighborhood/2
+.. _tabu_search/2::require_neighborhood/2:
+
+``require_neighborhood/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks the implementation required for exhaustive evaluation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``require_neighborhood(Exhaustive,Problem)``
+| **Mode and number of proofs:**
+|    ``require_neighborhood(+boolean,+object_identifier)`` - ``one``
+
+| **Exceptions:**
+|    Enumeration is not implemented:
+|        ``existence_error(procedure,Problem::neighbors/2)``
+
+
+------------
+
+.. index:: restart_candidate/7
+.. _tabu_search/2::restart_candidate/7:
+
+``restart_candidate/7``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Resolves a restart state and updates the global best independently.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``restart_candidate(Policy,Best,BestEnergy,State,Energy,NewBest,NewBestEnergy)``
+| **Mode and number of proofs:**
+|    ``restart_candidate(+compound,+nonvar,+number,-nonvar,-number,-nonvar,-number)`` - ``one``
+
+| **Exceptions:**
+|    The restart hook fails or returns an invalid state:
+|        ``domain_error(tabu_hook_result,Result)``
+
+
+------------
+
+.. index:: state_key/3
+.. _tabu_search/2::state_key/3:
+
+``state_key/3``
+^^^^^^^^^^^^^^^
+
+Resolves an optional tabu key without copying the state.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``state_key(KeyHook,State,Key)``
+| **Mode and number of proofs:**
+|    ``state_key(+boolean,+nonvar,-nonvar)`` - ``one``
+
+| **Exceptions:**
+|    The key hook fails or returns an unbound key:
+|        ``domain_error(tabu_hook_result,Result)``
+
+
+------------
+
+.. index:: resolve_tenure/6
+.. _tabu_search/2::resolve_tenure/6:
+
+``resolve_tenure/6``
+^^^^^^^^^^^^^^^^^^^^
+
+Resolves tenure with hook, range, then fixed-option precedence.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``resolve_tenure(TenureHook,Specification,Step,BestEnergy,CurrentEnergy,Tenure)``
+| **Mode and number of proofs:**
+|    ``resolve_tenure(+boolean,+compound,+non_negative_integer,+number,+number,-non_negative_integer)`` - ``one``
+
+| **Exceptions:**
+|    The tenure hook fails or returns an invalid value:
+|        ``domain_error(tabu_hook_result,Result)``
+
+
+------------
 
 Operators
 ---------

@@ -152,6 +152,12 @@ and `logistic_regression_classifier` libraries.
 default socket command (`socat` on POSIX systems and `ncat` on Windows
 systems).
 
+* IMPROVED: The `tabu_search` library with optional tabu keys, custom tenure
+and aspiration policies, restart diversification, and exhaustive neighborhood
+evaluation. Optimized candidate sampling and tabu scans; fixed tenure
+expiration, large-energy handling, non-ground state identity, and progress
+reporting. Expanded tests and documentation.
+
 * FIXED: The `text_vectorization` library to allow for repeated options when
 validating vectorizer terms (leftmost options always take precedence).
 

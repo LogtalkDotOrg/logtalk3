@@ -466,10 +466,10 @@
 <section id="tabu-search-problem-randomalgorithm">
 <h1><code class="docutils literal notranslate"><span class="pre">tabu_search(Problem,RandomAlgorithm)</span></code><a class="headerlink" href="#tabu-search-problem-randomalgorithm" title="Link to this heading"></a></h1>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Problem</span></code> - Problem object implementing <code class="docutils literal notranslate"><span class="pre">tabu_search_protocol</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Problem</span></code> - Problem object implementing <code class="docutils literal notranslate"><span class="pre">tabu_search_problem_protocol</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">RandomAlgorithm</span></code> - Random number generator algorithm for the <code class="docutils literal notranslate"><span class="pre">fast_random</span></code> library (e.g. <code class="docutils literal notranslate"><span class="pre">xoshiro128pp</span></code>, <code class="docutils literal notranslate"><span class="pre">xoshiro256ss</span></code>, <code class="docutils literal notranslate"><span class="pre">well512a</span></code>, …).</p></li>
 </ul>
-<p>Tabu search optimization algorithm. Parameterized by a problem object implementing the <code class="docutils literal notranslate"><span class="pre">tabu_search_protocol</span></code> protocol and by a random number generator algorithm for the <code class="docutils literal notranslate"><span class="pre">fast_random</span></code> library. The algorithm minimizes the energy (cost) function defined by the problem. Custom stop conditions, delta-energy neighbor generation, full neighborhood enumeration, progress reporting, and restarts can be defined by the problem object or configured via options; suitable defaults are used otherwise.</p>
+<p>Tabu search optimization algorithm. Parameterized by a problem object implementing the <code class="docutils literal notranslate"><span class="pre">tabu_search_problem_protocol</span></code> protocol and by a random number generator algorithm for the <code class="docutils literal notranslate"><span class="pre">fast_random</span></code> library. Minimizes energy with optional problem-defined tabu keys, tenure, aspiration, restart states, neighbor generation, stopping, and progress reporting.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -478,8 +478,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-08-15</div>
+<div class="line"><strong>Version:</strong> 2:0:0</div>
+<div class="line"><strong>Date:</strong> 2026-10-10</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -501,20 +501,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Tabu search is a metaheuristic that guides a local search procedure using a short-term memory structure (the tabu list) to avoid cycling and to escape local minima. At each iteration a set of candidate neighbors is examined and the best admissible (non-tabu or aspiration-allowed) neighbor is selected.</p></li>
-<li><p>Tabu list: A list of recently visited states paired with expiration steps. With fixed tenure the list behaves as a FIFO of maximum length <code class="docutils literal notranslate"><span class="pre">tabu_tenure</span></code>. With <code class="docutils literal notranslate"><span class="pre">tabu_tenure_range(Min,</span> <span class="pre">Max)</span></code> each accepted move is assigned a random tenure drawn uniformly from the inclusive range.</p></li>
-<li><p>Aspiration criterion: A tabu candidate is accepted when its energy is strictly better than the best energy found so far. This is the classic “best-so-far” aspiration criterion.</p></li>
-<li><p>Candidate generation: By default the algorithm samples <code class="docutils literal notranslate"><span class="pre">candidates(N)</span></code> neighbors using <code class="docutils literal notranslate"><span class="pre">neighbor_state/2</span></code> (or <code class="docutils literal notranslate"><span class="pre">neighbor_state/3</span></code> when defined). If the problem defines <code class="docutils literal notranslate"><span class="pre">neighbors/2</span></code>, that complete list is used instead (or a random sample of it when larger than the candidate limit).</p></li>
-<li><p>Delta-energy optimization: If the problem object defines <code class="docutils literal notranslate"><span class="pre">neighbor_state/3</span></code>, the algorithm uses the returned delta energy directly instead of calling <code class="docutils literal notranslate"><span class="pre">state_energy/2</span></code> on the neighbor. This is useful when computing the energy change is cheaper than recomputing the full energy.</p></li>
-<li><p>Progress reporting: If the problem object defines <code class="docutils literal notranslate"><span class="pre">progress/5</span></code>, it is called periodically with the current step, best energy, current energy, acceptance rate, and improvement rate. The reporting interval is controlled by the <code class="docutils literal notranslate"><span class="pre">updates(N)</span></code> option. A final report is always produced when the loop terminates.</p></li>
-<li><p>Best state tracking: The algorithm tracks the best state found across all iterations and across all restart cycles, not just the final state.</p></li>
-<li><p>Seed control: The <code class="docutils literal notranslate"><span class="pre">seed(S)</span></code> option initializes the random number generator for reproducible runs.</p></li>
-<li><p>Restarts: The <code class="docutils literal notranslate"><span class="pre">restarts(N)</span></code> option runs N additional tabu search cycles after the first. Each restart begins from the best state found so far with a cleared tabu list, allowing the search to escape deep local minima. Statistics accumulate across all cycles.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
@@ -531,8 +521,16 @@
 </ul>
 </li>
 <li><p><a class="reference internal" href="#protected-predicates" id="id5">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id6">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id7">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id6">Private predicates</a></p>
+<ul>
+<li><p><a class="reference internal" href="#select-candidate-10" id="id7"><code class="docutils literal notranslate"><span class="pre">select_candidate/10</span></code></a></p></li>
+<li><p><a class="reference internal" href="#require-neighborhood-2" id="id8"><code class="docutils literal notranslate"><span class="pre">require_neighborhood/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#restart-candidate-7" id="id9"><code class="docutils literal notranslate"><span class="pre">restart_candidate/7</span></code></a></p></li>
+<li><p><a class="reference internal" href="#state-key-3" id="id10"><code class="docutils literal notranslate"><span class="pre">state_key/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#resolve-tenure-6" id="id11"><code class="docutils literal notranslate"><span class="pre">resolve_tenure/6</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#operators" id="id12">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -554,6 +552,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">run(-nonvar,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">An implemented output hook fails or returns an invalid value:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(tabu_hook_result,Result)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -578,17 +585,35 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">An option is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line">Exhaustive mode requires implemented enumeration:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(procedure,Problem::neighbors/2)</span></code></div>
+</div>
+<div class="line">An implemented output hook fails or returns an invalid value:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(tabu_hook_result,Result)</span></code></div>
+</div>
+</div>
+</div>
+<div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
 </div>
 <blockquote>
 <div><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">max_steps(N)</span></code> option: Maximum number of iterations per cycle (default: <code class="docutils literal notranslate"><span class="pre">10000</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tabu_tenure(T)</span></code> option: Fixed tabu tenure: maximum lifetime (in steps) of each tabu entry (default: <code class="docutils literal notranslate"><span class="pre">7</span></code>). Ignored when <code class="docutils literal notranslate"><span class="pre">tabu_tenure_range/2</span></code> is also present.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tabu_tenure_range(Min,</span> <span class="pre">Max)</span></code> option: Random tabu tenure: on each accepted move a tenure is drawn uniformly from the inclusive integer range <code class="docutils literal notranslate"><span class="pre">Min..Max</span></code>. Overrides <code class="docutils literal notranslate"><span class="pre">tabu_tenure/1</span></code> when present.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tabu_tenure(T)</span></code> option: Fixed lifetime in selection steps (default: <code class="docutils literal notranslate"><span class="pre">7</span></code>). Ignored when a range or a problem <code class="docutils literal notranslate"><span class="pre">tabu_tenure/4</span></code> implementation is present.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tabu_tenure_range(Min,</span> <span class="pre">Max)</span></code> option: Uniform random tenure in the inclusive integer range. Overrides fixed tenure; ignored when the problem implements <code class="docutils literal notranslate"><span class="pre">tabu_tenure/4</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">candidates(N)</span></code> option: Number of candidate neighbors examined per iteration (default: <code class="docutils literal notranslate"><span class="pre">20</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exhaustive(Boolean)</span></code> option: Evaluates the full <code class="docutils literal notranslate"><span class="pre">neighbors/2</span></code> list in source order when true, ignoring the candidate limit (default: <code class="docutils literal notranslate"><span class="pre">false</span></code>). Requires implemented enumeration.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">updates(N)</span></code> option: Number of progress reports during the run. Set to <code class="docutils literal notranslate"><span class="pre">0</span></code> to disable. Progress is reported by calling <code class="docutils literal notranslate"><span class="pre">progress/5</span></code> on the problem object (default: <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">seed(S)</span></code> option: Positive integer seed for the random number generator, enabling reproducible runs (default: none).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">restarts(N)</span></code> option: Number of additional tabu search cycles after the first. Each restart begins from the best state found so far with a cleared tabu list (default: <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">restarts(N)</span></code> option: Number of additional cycles (default: <code class="docutils literal notranslate"><span class="pre">0</span></code>). Clears memory and uses <code class="docutils literal notranslate"><span class="pre">restart_state/2</span></code> when implemented, otherwise the global best state.</p></li>
 </ul>
 </div></blockquote>
 <hr class="docutils" />
@@ -613,6 +638,23 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">An option is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line">Exhaustive mode requires implemented enumeration:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(procedure,Problem::neighbors/2)</span></code></div>
+</div>
+<div class="line">An implemented output hook fails or returns an invalid value:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(tabu_hook_result,Result)</span></code></div>
+</div>
+</div>
+</div>
+<div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
 </div>
 <blockquote>
@@ -629,8 +671,161 @@
 </section>
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
-<p>(no local declarations; see entity ancestors if any)</p>
+<section id="select-candidate-10">
+<span id="tabu-search-2-select-candidate-10"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">select_candidate/10</span></code></a><a class="headerlink" href="#select-candidate-10" title="Link to this heading"></a></h3>
+<p>Selects the best admissible candidate using the cached run policy.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">select_candidate(Policy,State,Energy,BestEnergy,Tabu,Step,Candidates,Neighbor,NeighborEnergy,Accepted)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">select_candidate(+compound,+nonvar,+number,+number,+list,+non_negative_integer,+positive_integer,-nonvar,-number,-boolean)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Enumeration fails in exhaustive mode:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(tabu_hook_result,neighbors/2)</span></code></div>
+</div>
+<div class="line">A key hook returns an invalid result:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(tabu_hook_result,Result)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
 </section>
+<section id="require-neighborhood-2">
+<span id="tabu-search-2-require-neighborhood-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">require_neighborhood/2</span></code></a><a class="headerlink" href="#require-neighborhood-2" title="Link to this heading"></a></h3>
+<p>Checks the implementation required for exhaustive evaluation.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">require_neighborhood(Exhaustive,Problem)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">require_neighborhood(+boolean,+object_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Enumeration is not implemented:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(procedure,Problem::neighbors/2)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="restart-candidate-7">
+<span id="tabu-search-2-restart-candidate-7"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">restart_candidate/7</span></code></a><a class="headerlink" href="#restart-candidate-7" title="Link to this heading"></a></h3>
+<p>Resolves a restart state and updates the global best independently.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">restart_candidate(Policy,Best,BestEnergy,State,Energy,NewBest,NewBestEnergy)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">restart_candidate(+compound,+nonvar,+number,-nonvar,-number,-nonvar,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The restart hook fails or returns an invalid state:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(tabu_hook_result,Result)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="state-key-3">
+<span id="tabu-search-2-state-key-3"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">state_key/3</span></code></a><a class="headerlink" href="#state-key-3" title="Link to this heading"></a></h3>
+<p>Resolves an optional tabu key without copying the state.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">state_key(KeyHook,State,Key)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">state_key(+boolean,+nonvar,-nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The key hook fails or returns an unbound key:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(tabu_hook_result,Result)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="resolve-tenure-6">
+<span id="tabu-search-2-resolve-tenure-6"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">resolve_tenure/6</span></code></a><a class="headerlink" href="#resolve-tenure-6" title="Link to this heading"></a></h3>
+<p>Resolves tenure with hook, range, then fixed-option precedence.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resolve_tenure(TenureHook,Specification,Step,BestEnergy,CurrentEnergy,Tenure)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resolve_tenure(+boolean,+compound,+non_negative_integer,+number,+number,-non_negative_integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The tenure hook fails or returns an invalid value:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(tabu_hook_result,Result)</span></code></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
 <section id="operators">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>

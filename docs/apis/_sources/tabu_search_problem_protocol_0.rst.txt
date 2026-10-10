@@ -8,14 +8,14 @@
 ``tabu_search_problem_protocol``
 ================================
 
-Protocol for tabu search problem definitions. A problem object must define the three required predicates and may optionally define predicates to override neighbor generation with delta energy, full neighborhood enumeration, stopping, and progress reporting defaults.
+Protocol for tabu search problems, with optional tabu keys, tenure, aspiration, restart diversification, delta-energy generation, neighborhood enumeration, stopping, and progress reporting.
 
 | **Availability:** 
 |    ``logtalk_load(tabu_search(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-08-15
+| **Version:** 2:0:0
+| **Date:** 2026-10-10
 
 | **Compilation flags:**
 |    ``static``
@@ -101,7 +101,7 @@ Generates a neighboring state and returns the energy change (delta) directly, av
 ``neighbors/2``
 ^^^^^^^^^^^^^^^
 
-Optionally returns the complete list of neighboring states. When defined, the algorithm uses this list (or a random sample of it controlled by the ``candidates(N)`` option) instead of repeated calls to ``neighbor_state/2``. Useful for small, enumerable neighborhoods.
+Optionally returns the complete neighborhood. With ``exhaustive(true)``, an implementation must succeed for every visited state, including empty neighborhoods, and all candidates are evaluated in source order. Otherwise the candidate limit controls sampling and failure falls back to neighbor generation.
 
 | **Compilation flags:**
 |    ``static``
@@ -110,6 +110,106 @@ Optionally returns the complete list of neighboring states. When defined, the al
 |    ``neighbors(State,Neighbors)``
 | **Mode and number of proofs:**
 |    ``neighbors(+nonvar,-list(nonvar))`` - ``zero_or_one``
+
+| **Exceptions:**
+|    Exhaustive mode has no implemented enumeration predicate:
+|        ``existence_error(procedure,Problem::neighbors/2)``
+|    Enumeration fails in exhaustive mode:
+|        ``domain_error(tabu_hook_result,neighbors/2)``
+
+
+------------
+
+.. index:: tabu_key/2
+.. _tabu_search_problem_protocol/0::tabu_key/2:
+
+``tabu_key/2``
+^^^^^^^^^^^^^^
+
+Optionally returns a stable tabu-equivalence key without instantiating the state. Absent implementations use the state itself. Keys are compared using strict term identity; shared variables retain identity, while fresh variables do not provide stable equivalence.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``tabu_key(State,Key)``
+| **Mode and number of proofs:**
+|    ``tabu_key(+nonvar,-nonvar)`` - ``one``
+
+| **Exceptions:**
+|    An implemented hook fails:
+|        ``domain_error(tabu_hook_result,tabu_key/2)``
+|    An implemented hook returns an unbound key:
+|        ``domain_error(tabu_hook_result,tabu_key/2-Key)``
+
+
+------------
+
+.. index:: aspiration/3
+.. _tabu_search_problem_protocol/0::aspiration/3:
+
+``aspiration/3``
+^^^^^^^^^^^^^^^^
+
+Optionally permits an otherwise tabu contender. Success permits the move; failure rejects it even when it improves the global best. Absent implementations use strict best-so-far aspiration. Called only for tabu candidates that could win selection; implementations should be pure and must not instantiate the candidate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``aspiration(CandidateState,CandidateEnergy,BestEnergy)``
+| **Mode and number of proofs:**
+|    ``aspiration(+nonvar,+number,+number)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: tabu_tenure/4
+.. _tabu_search_problem_protocol/0::tabu_tenure/4:
+
+``tabu_tenure/4``
+^^^^^^^^^^^^^^^^^
+
+Optionally returns tenure once per accepted move, using the zero-based global selection step and pre-move best and current energies. Overrides fixed and ranged options. Zero skips insertion without erasing earlier active entries; existing expiration steps never change.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``tabu_tenure(Step,BestEnergy,CurrentEnergy,Tenure)``
+| **Mode and number of proofs:**
+|    ``tabu_tenure(+non_negative_integer,+number,+number,-non_negative_integer)`` - ``one``
+
+| **Exceptions:**
+|    An implemented hook fails:
+|        ``domain_error(tabu_hook_result,tabu_tenure/4)``
+|    An implemented hook returns an invalid tenure:
+|        ``domain_error(tabu_hook_result,tabu_tenure/4-Tenure)``
+
+
+------------
+
+.. index:: restart_state/2
+.. _tabu_search_problem_protocol/0::restart_state/2:
+
+``restart_state/2``
+^^^^^^^^^^^^^^^^^^^
+
+Optionally returns a restart state without instantiating the global best state. Called only between cycles. Its energy is recomputed and may update the best, without incrementing move statistics. Absent implementations restart from the best with its cached energy.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``restart_state(BestState,RestartState)``
+| **Mode and number of proofs:**
+|    ``restart_state(+nonvar,-nonvar)`` - ``one``
+
+| **Exceptions:**
+|    An implemented hook fails:
+|        ``domain_error(tabu_hook_result,restart_state/2)``
+|    An implemented hook returns an unbound state:
+|        ``domain_error(tabu_hook_result,restart_state/2-RestartState)``
 
 
 ------------
@@ -158,7 +258,7 @@ True when the search should stop given the current step, best energy found so fa
 ``progress/5``
 ^^^^^^^^^^^^^^
 
-Called periodically to report optimization progress. Optional. When not defined by the problem, progress reporting is skipped. The acceptance and improvement rates are values between 0.0 and 1.0 computed over the interval since the last progress report.
+Called with completed global steps and the actual current energy. Optional. The acceptance and improvement rates are computed since the preceding report, or since the cycle began for its first report. A zero-step interval has zero rates. When reporting is enabled, each cycle has a final report that replaces any coincident periodic report.
 
 | **Compilation flags:**
 |    ``static``

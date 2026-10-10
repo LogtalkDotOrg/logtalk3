@@ -360,18 +360,24 @@
 <li class="toctree-l3"><a class="reference internal" href="#defining-a-problem">Defining a problem</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#run-statistics">Run statistics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#limitations"><strong>Limitations</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#performance">Performance</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#example-of-a-problem-definiton">Example of a problem definiton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-of-a-problem-definition">Example of a problem definition</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#running-the-algorithm">Running the algorithm</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#running-with-custom-options">Running with custom options</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#random-tabu-tenure">Random tabu tenure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#exhaustive-neighborhoods">Exhaustive neighborhoods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#problem-controlled-tenure">Problem-controlled tenure</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#running-with-statistics">Running with statistics</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#reproducible-runs-with-seed">Reproducible runs with seed</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#restarts">Restarts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#restart-diversification">Restart diversification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#custom-aspiration">Custom aspiration</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#using-a-custom-random-number-generator">Using a custom random number generator</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="term_io.html"><code class="docutils literal notranslate"><span class="pre">term_io</span></code></a></li>
@@ -457,6 +463,8 @@ using a short-term memory structure (the <em>tabu list</em>) to avoid
 revisiting recently explored solutions and to escape local minima. It is
 particularly useful for combinatorial optimization problems such as the
 Traveling Salesman Problem (TSP), graph coloring, and scheduling.</p>
+<p>At each iteration, a set of candidate neighbors is examined and the best
+admissible neighbor (non-tabu or allowed by aspiration) is selected.</p>
 <p>The library provides the parametric object
 <code class="docutils literal notranslate"><span class="pre">tabu_search(Problem,</span> <span class="pre">RandomAlgorithm)</span></code> where <code class="docutils literal notranslate"><span class="pre">Problem</span></code> is an object
 implementing the <code class="docutils literal notranslate"><span class="pre">tabu_search_problem_protocol</span></code> protocol and
@@ -495,61 +503,79 @@ include <code class="docutils literal notranslate"><span class="pre">xoshiro128p
 <code class="docutils literal notranslate"><span class="pre">xoshiro256ss</span></code>, <code class="docutils literal notranslate"><span class="pre">well512a</span></code>, <code class="docutils literal notranslate"><span class="pre">splitmix64</span></code>, and <code class="docutils literal notranslate"><span class="pre">as183</span></code>. The
 convenience object <code class="docutils literal notranslate"><span class="pre">tabu_search(Problem)</span></code> defaults to
 <code class="docutils literal notranslate"><span class="pre">xoshiro128pp</span></code>.</p></li>
-<li><p><strong>Tabu list (short-term memory)</strong> - recently visited states are stored
-with an expiration step. With fixed tenure (<code class="docutils literal notranslate"><span class="pre">tabu_tenure(T)</span></code>) the
-list behaves as a FIFO of maximum length <code class="docutils literal notranslate"><span class="pre">T</span></code>. With
-<code class="docutils literal notranslate"><span class="pre">tabu_tenure_range(Min,</span> <span class="pre">Max)</span></code> each accepted move receives a random
-tenure drawn uniformly from the inclusive range. Candidates that
-appear in the active (non-expired) list are forbidden unless the
-aspiration criterion is met.</p></li>
+<li><p><strong>Tabu list (short-term memory)</strong> - recently visited states or their
+<code class="docutils literal notranslate"><span class="pre">tabu_key/2</span></code> keys are stored with an expiration step. A state left
+by a move is forbidden during the next <code class="docutils literal notranslate"><span class="pre">T</span></code> candidate-selection
+steps. With fixed tenure (<code class="docutils literal notranslate"><span class="pre">tabu_tenure(T)</span></code>) the list behaves as a
+FIFO of maximum length <code class="docutils literal notranslate"><span class="pre">T</span></code>. With <code class="docutils literal notranslate"><span class="pre">tabu_tenure_range(Min,</span> <span class="pre">Max)</span></code>
+each accepted move receives a random tenure drawn uniformly from the
+inclusive range. A problem-defined <code class="docutils literal notranslate"><span class="pre">tabu_tenure/4</span></code> schedule takes
+precedence over both options. Candidates whose keys appear in the
+active list are forbidden unless the aspiration criterion is met.</p></li>
 <li><p><strong>Aspiration criterion</strong> - a tabu candidate is accepted when its
 energy is strictly better than the best energy found so far (classic
-“best-so-far” aspiration).</p></li>
+“best-so-far” aspiration), unless the problem supplies its own
+<code class="docutils literal notranslate"><span class="pre">aspiration/3</span></code> policy.</p></li>
 <li><p><strong>Candidate sampling</strong> - by default the algorithm samples
 <code class="docutils literal notranslate"><span class="pre">candidates(N)</span></code> neighbors per iteration using <code class="docutils literal notranslate"><span class="pre">neighbor_state/2</span></code>
 (or <code class="docutils literal notranslate"><span class="pre">neighbor_state/3</span></code>). If the problem defines <code class="docutils literal notranslate"><span class="pre">neighbors/2</span></code>,
-that complete list is used (or a random sample of it when larger than
-the candidate limit).</p></li>
+that complete list is used in its original order when it fits the
+candidate limit. Otherwise, a uniform subset is selected without
+replacement by position and shuffled using the configured random
+number generator.</p></li>
+<li><p><strong>Exhaustive evaluation</strong> - <code class="docutils literal notranslate"><span class="pre">exhaustive(true)</span></code> evaluates the entire
+<code class="docutils literal notranslate"><span class="pre">neighbors/2</span></code> list in source order, regardless of <code class="docutils literal notranslate"><span class="pre">candidates(N)</span></code>,
+without subset sampling. Enumeration must be implemented and succeed
+for every visited state; an empty list is valid.</p></li>
 <li><p><strong>Delta-energy optimization</strong> - when the problem object defines
 <code class="docutils literal notranslate"><span class="pre">neighbor_state/3</span></code>, the algorithm uses the returned energy delta
-directly instead of recomputing the full energy.</p></li>
+directly instead of calling <code class="docutils literal notranslate"><span class="pre">state_energy/2</span></code> on the neighbor. This
+is useful when computing the energy change is cheaper than recomputing
+the full energy.</p></li>
 <li><p><strong>Best state tracking</strong> - the algorithm tracks the best state found
 across all iterations and across all restart cycles, not just the
 final state.</p></li>
 <li><p><strong>Progress reporting</strong> - if the problem object defines <code class="docutils literal notranslate"><span class="pre">progress/5</span></code>,
-it is called periodically with the current step, best energy, current
-energy, acceptance rate, and improvement rate. A final report is
-always produced when the loop terminates.</p></li>
+it is called periodically with completed global steps, best and
+current energies, and acceptance and improvement rates since the
+preceding report. The <code class="docutils literal notranslate"><span class="pre">updates(N)</span></code> option controls the reporting
+interval. When enabled, each cycle produces a final report instead of
+any coincident periodic report. A zero-step interval has zero rates.</p></li>
 <li><p><strong>Run statistics</strong> - the <code class="docutils literal notranslate"><span class="pre">run/4</span></code> predicate returns a list of
 statistics including the number of steps, acceptances, improvements,
 and the final tabu-list size.</p></li>
 <li><p><strong>Seed control</strong> - the <code class="docutils literal notranslate"><span class="pre">seed(S)</span></code> option initializes the random
-number generator for reproducible runs.</p></li>
+number generator for reproducible runs. A problem using an independent
+generator must also seed that generator; the option only controls the
+configured <code class="docutils literal notranslate"><span class="pre">fast_random</span></code> algorithm.</p></li>
 <li><p><strong>Restarts</strong> - the <code class="docutils literal notranslate"><span class="pre">restarts(N)</span></code> option runs N additional
-tabu-search cycles after the first. Each restart begins from the best
-state found so far with a cleared tabu list, allowing the search to
-escape deep local minima. Statistics accumulate across all cycles.</p></li>
+tabu-search cycles after the first, with a cleared tabu list. The
+problem can supply a diversified state using <code class="docutils literal notranslate"><span class="pre">restart_state/2</span></code>;
+otherwise each restart begins from the global best. Statistics
+accumulate across all cycles.</p></li>
 </ul>
 </section>
 <section id="defining-a-problem">
 <h2>Defining a problem<a class="headerlink" href="#defining-a-problem" title="Link to this heading"></a></h2>
-<p>A problem object must implement the <code class="docutils literal notranslate"><span class="pre">tabu_search_problem_protocol</span></code>
-protocol by defining (at least) the following three predicates:</p>
+<p>A problem object implements the <code class="docutils literal notranslate"><span class="pre">tabu_search_problem_protocol</span></code>
+protocol and defines the following predicates, plus at least one
+neighborhood predicate:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">initial_state(-State)</span></code> - returns the starting state.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">neighbor_state(+State,</span> <span class="pre">-Neighbor)</span></code> - generates a neighboring state.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">state_energy(+State,</span> <span class="pre">-Energy)</span></code> - computes the cost of a state (to
 be minimized).</p></li>
 </ul>
 <p>Optionally, the problem object may also define:</p>
 <ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">neighbor_state(+State,</span> <span class="pre">-Neighbor)</span></code> - generates a neighboring state.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">neighbor_state(+State,</span> <span class="pre">-Neighbor,</span> <span class="pre">-DeltaEnergy)</span></code> - generates a
 neighboring state and returns the energy change directly, avoiding a
 full energy recomputation.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">neighbors(+State,</span> <span class="pre">-Neighbors)</span></code> - returns the complete list of
 neighboring states. When defined, the algorithm uses this list (or a
 random sample controlled by <code class="docutils literal notranslate"><span class="pre">candidates(N)</span></code>) instead of repeated
-calls to <code class="docutils literal notranslate"><span class="pre">neighbor_state/2</span></code>.</p></li>
+neighbor generation. The <code class="docutils literal notranslate"><span class="pre">exhaustive(true)</span></code> option evaluates the
+entire list.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">stop_condition(+Step,</span> <span class="pre">+BestEnergy,</span> <span class="pre">+CurrentEnergy)</span></code> - succeeds when
 the search should terminate early.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">progress(+Step,</span> <span class="pre">+BestEnergy,</span> <span class="pre">+CurrentEnergy,</span> <span class="pre">+AcceptanceRate,</span> <span class="pre">+ImprovementRate)</span></code></p>
@@ -557,7 +583,53 @@ the search should terminate early.</p></li>
 <li><p>called periodically during the optimization to report progress.</p></li>
 </ul>
 </li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tabu_key(+State,</span> <span class="pre">-Key)</span></code> - returns a compact or canonical
+tabu-equivalence key. Without this hook, the state itself is used.
+Keys are compared using <code class="docutils literal notranslate"><span class="pre">==/2</span></code>, without instantiating either key.
+Implementations must return a nonvar key deterministically and must
+not instantiate state variables.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">restart_state(+BestState,</span> <span class="pre">-RestartState)</span></code> - supplies a diversified
+restart state between cycles. Without this hook, the best state and
+its cached energy are reused. The hook must return a nonvar state
+deterministically without instantiating the best state. Its energy is
+recomputed once; a better restart immediately updates the global best,
+while ties preserve the incumbent. Restart construction does not
+increment move statistics.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tabu_tenure(+Step,</span> <span class="pre">+BestEnergy,</span> <span class="pre">+CurrentEnergy,</span> <span class="pre">-Tenure)</span></code> - returns
+a non-negative integer tenure deterministically for each accepted
+move, using the zero-based global selection step and pre-move
+energies. It overrides ranged and fixed options without consuming a
+ranged-tenure random draw. Zero skips insertion while preserving
+earlier active entries. Expiration steps already assigned to entries
+never change.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">aspiration(+CandidateState,</span> <span class="pre">+CandidateEnergy,</span> <span class="pre">+BestEnergy)</span></code> -
+optionally permits an otherwise tabu contender. Success permits the
+move; failure rejects it even when it improves the global best.
+Non-tabu candidates are admissible without this call. The original
+state, not its key, is passed. Implementations must not instantiate
+the candidate and should be pure: candidates unable to win selection
+do not trigger the hook.</p></li>
 </ul>
+<p>For example, a structured state can use only its identifier as a key:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>tabu_key(state(<span class="nv">Identifier</span>, <span class="nv">_Payload</span>), key(<span class="nv">Identifier</span>)).
+</pre></div>
+</div>
+<p>Keys must remain stable throughout a run. Shared input variables retain
+their identity; fresh variables do not produce stable equivalence across
+calls. Energy evaluation and returned best solutions always use the
+original states. An implemented hook that fails raises
+<code class="docutils literal notranslate"><span class="pre">domain_error(tabu_hook_result,</span> <span class="pre">tabu_key/2)</span></code>; an unbound result raises
+<code class="docutils literal notranslate"><span class="pre">domain_error(tabu_hook_result,</span> <span class="pre">tabu_key/2-Key)</span></code>. Exceptions thrown by
+any problem hook propagate unchanged. Availability of the four policy
+hooks is discovered once per run, including inherited and category
+implementations; changing it during a run is not supported. These
+input-preservation rules also apply to <code class="docutils literal notranslate"><span class="pre">restart_state/2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">aspiration/3</span></code>. Failure or an unbound restart raises the corresponding
+<code class="docutils literal notranslate"><span class="pre">domain_error(tabu_hook_result,</span> <span class="pre">restart_state/2)</span></code> or
+<code class="docutils literal notranslate"><span class="pre">domain_error(tabu_hook_result,</span> <span class="pre">restart_state/2-RestartState)</span></code>. The
+same contract applies to <code class="docutils literal notranslate"><span class="pre">tabu_tenure/4</span></code>: failure reports its
+indicator, and an invalid result reports <code class="docutils literal notranslate"><span class="pre">tabu_tenure/4-Tenure</span></code> in the
+domain error.</p>
 </section>
 <section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
@@ -566,21 +638,27 @@ the search should terminate early.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">max_steps(N)</span></code> - maximum number of iterations per cycle (default:
 <code class="docutils literal notranslate"><span class="pre">10000</span></code>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tabu_tenure(T)</span></code> - fixed tabu tenure: lifetime in steps of each tabu
-entry (default: <code class="docutils literal notranslate"><span class="pre">7</span></code>). Ignored when <code class="docutils literal notranslate"><span class="pre">tabu_tenure_range/2</span></code> is also
-present.</p></li>
+entry (default: <code class="docutils literal notranslate"><span class="pre">7</span></code>). Ignored when <code class="docutils literal notranslate"><span class="pre">tabu_tenure_range/2</span></code> or a
+<code class="docutils literal notranslate"><span class="pre">tabu_tenure/4</span></code> implementation is present.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tabu_tenure_range(Min,</span> <span class="pre">Max)</span></code> - random tabu tenure: on each accepted
 move a tenure is drawn uniformly from the inclusive integer range
-<code class="docutils literal notranslate"><span class="pre">Min..Max</span></code>. Overrides <code class="docutils literal notranslate"><span class="pre">tabu_tenure/1</span></code> when present.</p></li>
+<code class="docutils literal notranslate"><span class="pre">Min..Max</span></code>. Overrides <code class="docutils literal notranslate"><span class="pre">tabu_tenure/1</span></code> when present, but is ignored
+when the problem implements <code class="docutils literal notranslate"><span class="pre">tabu_tenure/4</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">candidates(N)</span></code> - number of candidate neighbors examined per
 iteration (default: <code class="docutils literal notranslate"><span class="pre">20</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exhaustive(Boolean)</span></code> - evaluate all enumerated neighbors in source
+order when <code class="docutils literal notranslate"><span class="pre">true</span></code> (default: <code class="docutils literal notranslate"><span class="pre">false</span></code>). Requires an implemented
+<code class="docutils literal notranslate"><span class="pre">neighbors/2</span></code>; its failure is an error. The candidate limit is
+ignored but still validated.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">updates(N)</span></code> - number of progress reports during the run. Progress
 is reported by calling <code class="docutils literal notranslate"><span class="pre">progress/5</span></code> on the problem object. Set to
 <code class="docutils literal notranslate"><span class="pre">0</span></code> to disable (default: <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">seed(S)</span></code> - positive integer seed for the random number generator,
 enabling reproducible runs (default: none).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">restarts(N)</span></code> - number of additional tabu-search cycles after the
-first. Each restart begins from the best state found so far with a
-cleared tabu list (default: <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p></li>
+first. Each restart clears the tabu list and uses <code class="docutils literal notranslate"><span class="pre">restart_state/2</span></code>
+when defined, otherwise starting from the best state found so far
+(default: <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p></li>
 </ul>
 </section>
 <section id="run-statistics">
@@ -591,47 +669,39 @@ run:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">steps(N)</span></code> - total number of steps executed.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">acceptances(A)</span></code> - number of accepted moves.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">improvements(I)</span></code> - number of moves that strictly improved the best
-energy found.</p></li>
+energy found. Better restart states update the best but do not
+increment this move counter.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">final_tabu_size(S)</span></code> - size of the tabu list at termination.</p></li>
 </ul>
 </section>
-<section id="limitations">
-<h2><strong>Limitations</strong><a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p><strong>Solution-based tabu memory only</strong> - the tabu list stores complete
-states rather than move attributes. This is simple and
-problem-agnostic, but can be memory-intensive for large or richly
-structured states, and is often less effective than attribute-based
-tabu for problems where the relevant forbidden features are local
-(e.g. edges in TSP, variable assignments in scheduling).</p></li>
-<li><p><strong>Limited tenure schedules</strong> - fixed tenure and uniform random tenure
-in a static range are supported. Reactive or adaptive tenure schedules
-(e.g. tenure that grows after repeated cycling) are not implemented.</p></li>
-<li><p><strong>Single aspiration criterion</strong> - only the classic “best-so-far” rule
-is implemented (a tabu candidate is accepted when it improves the
-global best energy). Other aspiration strategies are not supported.</p></li>
-<li><p><strong>Neighborhood exploration</strong> - when the problem does not define
-<code class="docutils literal notranslate"><span class="pre">neighbors/2</span></code>, the algorithm samples a fixed number of candidates
-via repeated calls to <code class="docutils literal notranslate"><span class="pre">neighbor_state/2</span></code>. Systematic or exhaustive
-enumeration of large neighborhoods is left to the problem object.</p></li>
-<li><p><strong>Short-term memory only</strong> - there is no intermediate-term or
-long-term memory (frequency-based or elite-set structures) and
-therefore no built-in intensification or diversification beyond the
-optional <code class="docutils literal notranslate"><span class="pre">restarts(N)</span></code> mechanism, which simply clears the tabu list
-and resumes from the best state found so far.</p></li>
-<li><p><strong>State identity</strong> - tabu membership is decided by ordinary term
-equality (<code class="docutils literal notranslate"><span class="pre">member/2</span></code>). States that are semantically equivalent but
-not term-identical (e.g. rotations or reflections of a tour) are
-treated as distinct unless the problem normalizes them.</p></li>
-<li><p><strong>Single trajectory</strong> - the search follows one solution path at a
-time; population-based or multi-threaded variants are not currently
-implemented.</p></li>
-</ul>
+<section id="performance">
+<h2>Performance<a class="headerlink" href="#performance" title="Link to this heading"></a></h2>
+<p>For an enumerated neighborhood of size <code class="docutils literal notranslate"><span class="pre">M</span></code> and candidate limit
+<code class="docutils literal notranslate"><span class="pre">C</span> <span class="pre">&lt;</span> <span class="pre">M</span></code>, sampling uses one list pass and shuffles only the selected
+subset. When at most 20 positions need to be included or excluded,
+uniform random positions are drawn first; other cases use sequential
+selection with inclusion probability equal to the number still needed
+divided by the number remaining. Expected sampling work is
+<code class="docutils literal notranslate"><span class="pre">O(M</span> <span class="pre">+</span> <span class="pre">C</span> <span class="pre">log</span> <span class="pre">C)</span></code>, with <code class="docutils literal notranslate"><span class="pre">O(C)</span></code> auxiliary storage. When the full
+neighborhood fits the limit, its order is preserved.</p>
+<p>Candidates unable to improve an already selected candidate do not incur
+tabu-membership scans. Candidates improving the global best satisfy
+default aspiration without a scan. Custom aspiration first checks
+membership and is called only for tabu contenders. Other candidates
+compare against active keys, so large state terms and long tenures can
+increase membership costs.</p>
+<p>The optional <code class="docutils literal notranslate"><span class="pre">tabu_key/2</span></code> hook can reduce stored-term size and
+membership comparison costs. It is called only for insertion or
+membership checks that are needed; full states remain available for
+energy evaluation and results. Exhaustive mode bypasses subset selection
+but still materializes and evaluates the full list. Long custom tenures
+may retain more entries than a later short tenure; entries expire
+independently rather than by a fixed capacity.</p>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
-<section id="example-of-a-problem-definiton">
-<h3>Example of a problem definiton<a class="headerlink" href="#example-of-a-problem-definiton" title="Link to this heading"></a></h3>
+<section id="example-of-a-problem-definition">
+<h3>Example of a problem definition<a class="headerlink" href="#example-of-a-problem-definition" title="Link to this heading"></a></h3>
 <p>Define an object implementing the <code class="docutils literal notranslate"><span class="pre">tabu_search_problem_protocol</span></code>
 protocol. For example, a simple quadratic minimization problem:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(quadratic,
@@ -639,7 +709,7 @@ protocol. For example, a simple quadratic minimization problem:</p>
 
     initial_state(<span class="m">50.0</span>).
     neighbor_state(<span class="nv">X</span>, <span class="nv">Y</span>) <span class="o">:-</span>
-        random<span class="o">::</span>random(<span class="o">-</span><span class="m">5.0</span>, <span class="m">5.0</span>, <span class="nv">Delta</span>),
+        fast_random(xoshiro128pp)<span class="o">::</span>random(<span class="o">-</span><span class="m">5.0</span>, <span class="m">5.0</span>, <span class="nv">Delta</span>),
         <span class="nv">Y</span> <span class="k">is</span> <span class="nv">X</span> <span class="o">+</span> <span class="nv">Delta</span>.
     state_energy(<span class="nv">X</span>, <span class="nv">E</span>) <span class="o">:-</span>
         <span class="nv">E</span> <span class="k">is</span> (<span class="nv">X</span> <span class="o">-</span> <span class="m">3.0</span>) <span class="o">*</span> (<span class="nv">X</span> <span class="o">-</span> <span class="m">3.0</span>).
@@ -669,6 +739,27 @@ protocol. For example, a simple quadratic minimization problem:</p>
 </pre></div>
 </div>
 </section>
+<section id="exhaustive-neighborhoods">
+<h3>Exhaustive neighborhoods<a class="headerlink" href="#exhaustive-neighborhoods" title="Link to this heading"></a></h3>
+<p>For a problem implementing <code class="docutils literal notranslate"><span class="pre">neighbors/2</span></code>, evaluate all neighbors:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> tabu_search(<span class="nv">Problem</span>)<span class="o">::</span>run(<span class="nv">State</span>, <span class="nv">Energy</span>, [exhaustive(<span class="k">true</span>)]).
+</pre></div>
+</div>
+<p>Missing enumeration raises
+<code class="docutils literal notranslate"><span class="pre">existence_error(procedure,</span> <span class="pre">Problem::neighbors/2)</span></code> before state
+initialization. An implemented enumeration predicate that fails raises
+<code class="docutils literal notranslate"><span class="pre">domain_error(tabu_hook_result,</span> <span class="pre">neighbors/2)</span></code>; its exceptions
+propagate. The full list is materialized, so exhaustive mode can be
+costly for large neighborhoods.</p>
+</section>
+<section id="problem-controlled-tenure">
+<h3>Problem-controlled tenure<a class="headerlink" href="#problem-controlled-tenure" title="Link to this heading"></a></h3>
+<p>A problem can vary tenure according to the global selection step:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>tabu_tenure(<span class="nv">Step</span>, <span class="nv">_BestEnergy</span>, <span class="nv">_CurrentEnergy</span>, <span class="nv">Tenure</span>) <span class="o">:-</span>
+    <span class="nv">Tenure</span> <span class="k">is</span> <span class="m">3</span> <span class="o">+</span> <span class="nv">Step</span> <span class="o">mod</span> <span class="m">5.</span>
+</pre></div>
+</div>
+</section>
 <section id="running-with-statistics">
 <h3>Running with statistics<a class="headerlink" href="#running-with-statistics" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> tabu_search(quadratic)<span class="o">::</span>run(<span class="nv">State</span>, <span class="nv">Energy</span>, <span class="nv">Stats</span>, []).
@@ -694,6 +785,29 @@ the tabu list and begins from the best state found so far:</p>
 </pre></div>
 </div>
 </section>
+<section id="restart-diversification">
+<h3>Restart diversification<a class="headerlink" href="#restart-diversification" title="Link to this heading"></a></h3>
+<p>A problem can diversify each restart, for example by perturbing a
+numeric best state:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>restart_state(<span class="nv">Best</span>, <span class="nv">State</span>) <span class="o">:-</span>
+    <span class="nv">State</span> <span class="k">is</span> <span class="nv">Best</span> <span class="o">+</span> <span class="m">5.</span>
+</pre></div>
+</div>
+<p>The original best remains available even when the perturbation worsens
+energy. Stopping and progress reporting see the recomputed restart
+energy before any move in the next cycle.</p>
+</section>
+<section id="custom-aspiration">
+<h3>Custom aspiration<a class="headerlink" href="#custom-aspiration" title="Link to this heading"></a></h3>
+<p>A problem can permit tabu moves whose energy does not exceed the global
+best:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>aspiration(<span class="nv">_CandidateState</span>, <span class="nv">CandidateEnergy</span>, <span class="nv">BestEnergy</span>) <span class="o">:-</span>
+    <span class="nv">CandidateEnergy</span> <span class="o">=&lt;</span> <span class="nv">BestEnergy</span>.
+</pre></div>
+</div>
+<p>This replaces the default strict-improvement criterion. Failure rejects
+a tabu contender rather than falling back to that default.</p>
+</section>
 <section id="using-a-custom-random-number-generator">
 <h3>Using a custom random number generator<a class="headerlink" href="#using-a-custom-random-number-generator" title="Link to this heading"></a></h3>
 <p>Use the two-parameter version to select a specific <code class="docutils literal notranslate"><span class="pre">fast_random</span></code>
@@ -706,6 +820,64 @@ algorithm:</p>
 </pre></div>
 </div>
 </section>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Solution-based tabu memory only</strong> - the tabu list stores states or
+their problem-defined <code class="docutils literal notranslate"><span class="pre">tabu_key/2</span></code> keys rather than move attributes.
+Compact keys reduce memory use and identify equivalent solutions, but
+solution-based memory can still be large for richly structured states
+and is often less effective than attribute-based tabu for problems
+where the relevant forbidden features are local (e.g. edges in TSP,
+variable assignments in scheduling).</p></li>
+<li><p><strong>No built-in reactive controller</strong> - <code class="docutils literal notranslate"><span class="pre">tabu_tenure/4</span></code> supports
+problem-controlled adaptive schedules, but automatic cycle detection
+and reactive-tenure histories are not provided by the library.</p></li>
+<li><p><strong>No built-in aspiration strategy catalog</strong> - classic best-so-far is
+the default rule. Other strategies can be supplied by
+<code class="docutils literal notranslate"><span class="pre">aspiration/3</span></code>, but the library does not provide additional strategy
+implementations.</p></li>
+<li><p><strong>Neighborhood exploration</strong> - when the problem does not define
+<code class="docutils literal notranslate"><span class="pre">neighbors/2</span></code>, the algorithm samples a fixed number of candidates
+via repeated calls to <code class="docutils literal notranslate"><span class="pre">neighbor_state/2</span></code> or <code class="docutils literal notranslate"><span class="pre">neighbor_state/3</span></code>.
+Exhaustive mode evaluates a problem-provided list, but streaming
+enumeration of large neighborhoods is not supported.</p></li>
+<li><p><strong>Short-term memory only</strong> - there is no intermediate-term or
+long-term memory (frequency-based or elite-set structures) and
+therefore no built-in intensification. Diversification can be supplied
+by <code class="docutils literal notranslate"><span class="pre">restart_state/2</span></code>; the default <code class="docutils literal notranslate"><span class="pre">restarts(N)</span></code> mechanism clears
+the tabu list and resumes from the best state found so far without
+built-in perturbations.</p></li>
+<li><p><strong>Key identity</strong> - tabu membership is decided by strict term identity
+(<code class="docutils literal notranslate"><span class="pre">==/2</span></code>) of states or optional <code class="docutils literal notranslate"><span class="pre">tabu_key/2</span></code> keys, without
+instantiating either. Non-ground states are allowed; distinct
+variables are not identical. States that are semantically equivalent
+but not term-identical (e.g. rotations or reflections of a tour) are
+treated as distinct unless the problem normalizes them or supplies
+canonical keys.</p></li>
+<li><p><strong>Single trajectory</strong> - the search follows one solution path at a
+time; population-based or multi-threaded variants are not currently
+implemented.</p></li>
+</ul>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<p>The following references describe the tabu-search framework, including
+short-term memory, tabu tenure, candidate selection, and aspiration
+criteria used by this library. They also discuss more advanced
+strategies beyond the implemented solution-based short-term memory
+approach.</p>
+<ul class="simple">
+<li><p>Glover, F. (1989). “Tabu Search - Part I.” <em>ORSA Journal on
+Computing</em>, 1(3), 190-206.
+<a class="reference external" href="https://doi.org/10.1287/ijoc.1.3.190">doi:10.1287/ijoc.1.3.190</a>.</p></li>
+<li><p>Glover, F. (1990). “Tabu Search - Part II.” <em>ORSA Journal on
+Computing</em>, 2(1), 4-32.
+<a class="reference external" href="https://doi.org/10.1287/ijoc.2.1.4">doi:10.1287/ijoc.2.1.4</a>.</p></li>
+<li><p>Glover, F., and Laguna, M. (1997). <em>Tabu Search</em>. Springer US.
+<a class="reference external" href="https://doi.org/10.1007/978-1-4615-6089-0">doi:10.1007/978-1-4615-6089-0</a>.</p></li>
+</ul>
 </section>
 </section>
 

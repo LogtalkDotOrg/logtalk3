@@ -22,10 +22,10 @@
 :- protocol(tabu_search_problem_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-15,
-		comment is 'Protocol for tabu search problem definitions. A problem object must define the three required predicates and may optionally define predicates to override neighbor generation with delta energy, full neighborhood enumeration, stopping, and progress reporting defaults.',
+		date is 2026-10-10,
+		comment is 'Protocol for tabu search problems, with optional tabu keys, tenure, aspiration, restart diversification, delta-energy generation, neighborhood enumeration, stopping, and progress reporting.',
 		see_also is [tabu_search(_)]
 	]).
 
@@ -53,8 +53,52 @@
 	:- public(neighbors/2).
 	:- mode(neighbors(+nonvar, -list(nonvar)), zero_or_one).
 	:- info(neighbors/2, [
-		comment is 'Optionally returns the complete list of neighboring states. When defined, the algorithm uses this list (or a random sample of it controlled by the ``candidates(N)`` option) instead of repeated calls to ``neighbor_state/2``. Useful for small, enumerable neighborhoods.',
-		argnames is ['State', 'Neighbors']
+		comment is 'Optionally returns the complete neighborhood. With ``exhaustive(true)``, an implementation must succeed for every visited state, including empty neighborhoods, and all candidates are evaluated in source order. Otherwise the candidate limit controls sampling and failure falls back to neighbor generation.',
+		argnames is ['State', 'Neighbors'],
+		exceptions is [
+			'Exhaustive mode has no implemented enumeration predicate' - existence_error(procedure, 'Problem'::neighbors/2),
+			'Enumeration fails in exhaustive mode' - domain_error(tabu_hook_result, neighbors/2)
+		]
+	]).
+
+	:- public(tabu_key/2).
+	:- mode(tabu_key(+nonvar, -nonvar), one).
+	:- info(tabu_key/2, [
+		comment is 'Optionally returns a stable tabu-equivalence key without instantiating the state. Absent implementations use the state itself. Keys are compared using strict term identity; shared variables retain identity, while fresh variables do not provide stable equivalence.',
+		argnames is ['State', 'Key'],
+		exceptions is [
+			'An implemented hook fails' - domain_error(tabu_hook_result, tabu_key/2),
+			'An implemented hook returns an unbound key' - domain_error(tabu_hook_result, tabu_key/2-'Key')
+		]
+	]).
+
+	:- public(aspiration/3).
+	:- mode(aspiration(+nonvar, +number, +number), zero_or_one).
+	:- info(aspiration/3, [
+		comment is 'Optionally permits an otherwise tabu contender. Success permits the move; failure rejects it even when it improves the global best. Absent implementations use strict best-so-far aspiration. Called only for tabu candidates that could win selection; implementations should be pure and must not instantiate the candidate.',
+		argnames is ['CandidateState', 'CandidateEnergy', 'BestEnergy']
+	]).
+
+	:- public(tabu_tenure/4).
+	:- mode(tabu_tenure(+non_negative_integer, +number, +number, -non_negative_integer), one).
+	:- info(tabu_tenure/4, [
+		comment is 'Optionally returns tenure once per accepted move, using the zero-based global selection step and pre-move best and current energies. Overrides fixed and ranged options. Zero skips insertion without erasing earlier active entries; existing expiration steps never change.',
+		argnames is ['Step', 'BestEnergy', 'CurrentEnergy', 'Tenure'],
+		exceptions is [
+			'An implemented hook fails' - domain_error(tabu_hook_result, tabu_tenure/4),
+			'An implemented hook returns an invalid tenure' - domain_error(tabu_hook_result, tabu_tenure/4-'Tenure')
+		]
+	]).
+
+	:- public(restart_state/2).
+	:- mode(restart_state(+nonvar, -nonvar), one).
+	:- info(restart_state/2, [
+		comment is 'Optionally returns a restart state without instantiating the global best state. Called only between cycles. Its energy is recomputed and may update the best, without incrementing move statistics. Absent implementations restart from the best with its cached energy.',
+		argnames is ['BestState', 'RestartState'],
+		exceptions is [
+			'An implemented hook fails' - domain_error(tabu_hook_result, restart_state/2),
+			'An implemented hook returns an unbound state' - domain_error(tabu_hook_result, restart_state/2-'RestartState')
+		]
 	]).
 
 	:- public(state_energy/2).
@@ -74,7 +118,7 @@
 	:- public(progress/5).
 	:- mode(progress(+non_negative_integer, +number, +number, +number, +number), zero_or_one).
 	:- info(progress/5, [
-		comment is 'Called periodically to report optimization progress. Optional. When not defined by the problem, progress reporting is skipped. The acceptance and improvement rates are values between 0.0 and 1.0 computed over the interval since the last progress report.',
+		comment is 'Called with completed global steps and the actual current energy. Optional. The acceptance and improvement rates are computed since the preceding report, or since the cycle began for its first report. A zero-step interval has zero rates. When reporting is enabled, each cycle has a final report that replaces any coincident periodic report.',
 		argnames is ['Step', 'BestEnergy', 'CurrentEnergy', 'AcceptanceRate', 'ImprovementRate']
 	]).
 

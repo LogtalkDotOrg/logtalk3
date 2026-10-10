@@ -11,9 +11,9 @@
 	implements(tabu_search_problem_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-15,
+		date is 2026-10-10,
 		comment is 'Small TSP instance (regular hexagon with side length 5) for testing tabu search. Distances are computed from coordinates, avoiding a large distance/3 table that would require multi-indexing for acceptable performance on some backends.'
 	]).
 
@@ -41,7 +41,7 @@
 		DY is Y2 - Y1,
 		Distance is sqrt(DX*DX + DY*DY).
 
-	initial_state([a, b, c, d, e, f]).
+	initial_state([a, c, e, b, d, f]).
 
 	% Swap two distinct positions (a simple neighborhood operator)
 	neighbor_state(Tour, Neighbor) :-
