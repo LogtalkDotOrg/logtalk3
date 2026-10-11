@@ -160,7 +160,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#defining-a-problem">Defining a problem</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#run-statistics">Run statistics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#limitations"><strong>Limitations</strong></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#example-of-a-problem-definiton">Example of a problem definiton</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#running-the-algorithm">Running the algorithm</a></li>
@@ -171,6 +170,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#using-a-custom-random-number-generator">Using a custom random number generator</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="genint.html"><code class="docutils literal notranslate"><span class="pre">genint</span></code></a></li>
@@ -610,26 +611,6 @@ best energy found.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">final_population_size(S)</span></code> - size of the final population.</p></li>
 </ul>
 </section>
-<section id="limitations">
-<h2><strong>Limitations</strong><a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p><strong>Single population, generational model</strong> - a classic generational GA
-is implemented. Steady-state replacement, multi-population (island)
-models, and coevolution are not provided.</p></li>
-<li><p><strong>Limited selection schemes</strong> - tournament, roulette-wheel, and linear
-rank selection are implemented. Other schemes (e.g. stochastic
-universal sampling, Boltzmann selection) are not provided.</p></li>
-<li><p><strong>Limited adaptive schedules</strong> - constant, linear, and geometric rate
-schedules are supported, plus optional problem hooks. Other adaptive
-policies (e.g. diversity-triggered rates) require a custom hook.</p></li>
-<li><p><strong>No built-in representation</strong> - chromosomes, real vectors, and other
-encodings must be defined by the problem together with suitable
-crossover and mutation operators.</p></li>
-<li><p><strong>Diversity is optional</strong> - a problem-specific <code class="docutils literal notranslate"><span class="pre">diversity/2</span></code>
-predicate is required for meaningful diversity reporting; otherwise a
-placeholder value of 0.0 is used.</p></li>
-</ul>
-</section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <section id="example-of-a-problem-definiton">
@@ -718,6 +699,38 @@ real line:</p>
 </pre></div>
 </div>
 </section>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Single population, generational model</strong> - a classic generational GA
+is implemented. Steady-state replacement, multi-population (island)
+models, and coevolution are not provided.</p></li>
+<li><p><strong>Limited selection schemes</strong> - tournament, roulette-wheel, and linear
+rank selection are implemented. Other schemes (e.g. stochastic
+universal sampling, Boltzmann selection) are not provided.</p></li>
+<li><p><strong>Limited adaptive schedules</strong> - constant, linear, and geometric rate
+schedules are supported, plus optional problem hooks. Other adaptive
+policies (e.g. diversity-triggered rates) require a custom hook.</p></li>
+<li><p><strong>No built-in representation</strong> - chromosomes, real vectors, and other
+encodings must be defined by the problem together with suitable
+crossover and mutation operators. Feasibility must be maintained by
+these operators or handled in the problem’s energy predicate.</p></li>
+<li><p><strong>Diversity is optional</strong> - a problem-specific <code class="docutils literal notranslate"><span class="pre">diversity/2</span></code>
+predicate is required for meaningful diversity reporting; otherwise a
+placeholder value of 0.0 is used.</p></li>
+<li><p><strong>Single objective only</strong> - Pareto-based multi-objective selection is
+not provided. Finite runs do not guarantee a global optimum.</p></li>
+</ul>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>John H. Holland. Adaptation in Natural and Artificial Systems.
+University of Michigan Press, 1975.</p></li>
+<li><p>David E. Goldberg. Genetic Algorithms in Search, Optimization, and
+Machine Learning. Addison-Wesley, 1989.</p></li>
+</ul>
 </section>
 </section>
 

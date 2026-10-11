@@ -158,24 +158,6 @@ run:
 - `final_best_cost(C)` - cost of the best solution found.
 
 
-**Limitations**
--------------
-
-- **Solution-construction model only** - the library implements the classic
-  constructive ACO paradigm (ants build complete solutions from
-  components). Local-search improvement of constructed solutions is left
-  to the problem object or a surrounding hybrid.
-- **Edge-based pheromone** - pheromone is stored on directed edges of the
-  complete graph induced by `nodes/1`. Attribute-based or set-based
-  pheromone models are not provided.
-- **Single colony, single pheromone matrix** - multi-colony and multi-objective
-  variants are not implemented.
-- **TSP-oriented construction** - the built-in construction procedure
-  assumes a Hamiltonian path/tour over the node set (every node visited
-  exactly once). Problems with different feasibility rules need a custom
-  construction strategy (future extension point).
-
-
 Usage
 -----
 
@@ -225,3 +207,36 @@ For example, a small TSP instance:
 ### Using a custom random number generator
 
 	| ?- ant_colony(tsp6, well512a)::run(Tour, Cost).
+
+
+Limitations
+-----------
+
+- **Solution-construction model only** - the library implements the classic
+  constructive ACO paradigm (ants build complete solutions from
+  components). Local-search improvement of constructed solutions is left
+  to the problem object or a surrounding hybrid.
+- **Edge-based pheromone** - pheromone is stored on directed edges of the
+  complete graph induced by `nodes/1`. Attribute-based or set-based
+  pheromone models are not provided.
+- **Single colony, single pheromone matrix** - multi-colony and multi-objective
+  variants are not implemented.
+- **TSP-oriented construction** - the built-in construction procedure
+  visits every node exactly once. Different feasibility rules require
+  changes to the construction procedure; no custom construction hook is
+  provided.
+- **No global-optimum guarantee** - finite runs may converge prematurely
+  or return suboptimal tours.
+
+
+References
+----------
+
+- Marco Dorigo, Vittorio Maniezzo, and Alberto Colorni. "Ant System:
+  Optimization by a Colony of Cooperating Agents." IEEE Transactions on
+  Systems, Man, and Cybernetics, Part B, 26(1):29-41, 1996.
+  <https://doi.org/10.1109/3477.484436>
+- Thomas Stutzle and Holger H. Hoos. "MAX-MIN Ant System." Future Generation
+  Computer Systems, 16(8):889-914, 2000. Describes the pheromone-bounding
+  approach used alongside the library's Ant System updates.
+  <https://doi.org/10.1016/S0167-739X(00)00043-1>

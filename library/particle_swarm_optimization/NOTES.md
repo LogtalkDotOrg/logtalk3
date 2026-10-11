@@ -155,16 +155,6 @@ predicate. The `objective/1` option only controls which values are considered
 better and the meaning of an improvement.
 
 
-Limitations
------------
-
-- Continuous numeric vectors only.
-- Synchronous global-best topology only.
-- No restarts, discrete particles, or custom topology.
-- Problems supply positions, bounds, and optionally initial velocities. The
-  optimizer owns subsequent velocity updates and cognitive/social randomness.
-
-
 Usage
 -----
 
@@ -232,3 +222,33 @@ Usage
 	| ?- particle_swarm_optimization(sphere, well512a)::run(
 	         Position, Fitness, [seed(42)]
 	     ).
+
+
+Limitations
+-----------
+
+- Continuous numeric vectors only.
+- Synchronous global-best topology only.
+- No restarts, discrete particles, or custom topology.
+- Problems supply positions, bounds, and optionally initial velocities. The
+	optimizer owns subsequent velocity updates and cognitive/social randomness.
+- Bounds are handled by position clamping and zeroing the corresponding
+	velocity component. General constraints require problem-defined handling
+	in `fitness/2`.
+- Inertia and acceleration coefficients are fixed for the whole run.
+- Single-objective optimization only. Finite runs may stagnate and do not
+	guarantee a global optimum.
+
+
+References
+----------
+
+- James Kennedy and Russell Eberhart. "Particle Swarm Optimization."
+	Proceedings of the IEEE International Conference on Neural Networks,
+	volume 4, pages 1942-1948, 1995.
+	<https://doi.org/10.1109/ICNN.1995.488968>
+- Yuhui Shi and Russell Eberhart. "A Modified Particle Swarm Optimizer."
+	Proceedings of the IEEE International Conference on Evolutionary
+	Computation, pages 69-73, 1998. Introduces the inertia-weight formulation
+	used by the library.
+	<https://doi.org/10.1109/ICEC.1998.699146>

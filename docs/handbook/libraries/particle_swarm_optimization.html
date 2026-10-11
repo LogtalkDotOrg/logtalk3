@@ -303,7 +303,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#defining-a-problem">Defining a problem</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#run-statistics">Run statistics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#example-of-a-problem-definiton">Example of a problem definiton</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#running-the-algorithm">Running the algorithm</a></li>
@@ -314,6 +313,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#using-a-custom-random-number-generator">Using a custom random number generator</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="partitions.html"><code class="docutils literal notranslate"><span class="pre">partitions</span></code></a></li>
@@ -584,17 +585,6 @@ by the problem <code class="docutils literal notranslate"><span class="pre">fitn
 controls which values are considered better and the meaning of an
 improvement.</p>
 </section>
-<section id="limitations">
-<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>Continuous numeric vectors only.</p></li>
-<li><p>Synchronous global-best topology only.</p></li>
-<li><p>No restarts, discrete particles, or custom topology.</p></li>
-<li><p>Problems supply positions, bounds, and optionally initial velocities.
-The optimizer owns subsequent velocity updates and cognitive/social
-randomness.</p></li>
-</ul>
-</section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <section id="example-of-a-problem-definiton">
@@ -676,6 +666,37 @@ randomness.</p></li>
 </pre></div>
 </div>
 </section>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Continuous numeric vectors only.</p></li>
+<li><p>Synchronous global-best topology only.</p></li>
+<li><p>No restarts, discrete particles, or custom topology.</p></li>
+<li><p>Problems supply positions, bounds, and optionally initial velocities.
+The optimizer owns subsequent velocity updates and cognitive/social
+randomness.</p></li>
+<li><p>Bounds are handled by position clamping and zeroing the corresponding
+velocity component. General constraints require problem-defined
+handling in <code class="docutils literal notranslate"><span class="pre">fitness/2</span></code>.</p></li>
+<li><p>Inertia and acceleration coefficients are fixed for the whole run.</p></li>
+<li><p>Single-objective optimization only. Finite runs may stagnate and do
+not guarantee a global optimum.</p></li>
+</ul>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>James Kennedy and Russell Eberhart. “Particle Swarm Optimization.”
+Proceedings of the IEEE International Conference on Neural Networks,
+volume 4, pages 1942-1948, 1995.
+<a class="reference external" href="https://doi.org/10.1109/ICNN.1995.488968">https://doi.org/10.1109/ICNN.1995.488968</a></p></li>
+<li><p>Yuhui Shi and Russell Eberhart. “A Modified Particle Swarm Optimizer.”
+Proceedings of the IEEE International Conference on Evolutionary
+Computation, pages 69-73, 1998. Introduces the inertia-weight
+formulation used by the library.
+<a class="reference external" href="https://doi.org/10.1109/ICEC.1998.699146">https://doi.org/10.1109/ICEC.1998.699146</a></p></li>
+</ul>
 </section>
 </section>
 

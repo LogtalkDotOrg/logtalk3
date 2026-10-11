@@ -177,27 +177,6 @@ Fitness values are reported unchanged. The `objective/1` option only
 controls which values are considered better.
 
 
-Limitations
------------
-
-- Continuous numeric vectors only (no discrete, integer, or mixed-integer
-  variables).
-- Box constraints only. Trial vectors that leave the bounds are clamped;
-  there is no support for general equality/inequality constraints or
-  penalty/barrier methods.
-- Static control parameters. The differential weight (`F`) and crossover
-  probability (`CR`) are fixed for the whole run; self-adaptive variants
-  (jDE, SHADE, L-SHADE, ...) are not yet implemented.
-- Only four mutation strategies are provided: `rand/1/bin` `rand/1/exp`,
-- `best/1/bin`, and `current-to-best/1/bin`. Other classic variants
-  (`rand/2`, `best/2`, exponential crossover, ...) are currently absent.
-- Synchronous generational replacement only.
-- No automatic restarts, diversity preservation, or stagnation-triggered
-  population re-initialization beyond the simple `stagnation_generations/1`
-  stopping criterion.
-- Single-objective optimization only.
-
-
 Usage
 -----
 
@@ -250,3 +229,36 @@ Usage
 	| ?- differential_evolution(sphere, well512a)::run(
 	         Position, Fitness, [seed(42)]
 	     ).
+
+
+Limitations
+-----------
+
+- Continuous numeric vectors only (no discrete, integer, or mixed-integer
+  variables).
+- Box constraints only. Trial vectors that leave the bounds are clamped;
+  general constraints require problem-defined handling in `fitness/2`.
+- Static control parameters. The differential weight (`F`) and crossover
+  probability (`CR`) are fixed for the whole run; self-adaptive variants
+  (jDE, SHADE, L-SHADE, ...) are not implemented.
+- Only four strategies are provided: `rand/1/bin`, `rand/1/exp`,
+  `best/1/bin`, and `current-to-best/1/bin`. Other classic variants
+  (`rand/2`, `best/2`, ...) are not provided.
+- Synchronous generational replacement only.
+- No automatic restarts, diversity preservation, or stagnation-triggered
+  population re-initialization beyond the simple `stagnation_generations/1`
+  stopping criterion.
+- Single-objective optimization only. Finite runs do not guarantee a
+  global optimum.
+
+
+References
+----------
+
+- Rainer Storn and Kenneth Price. "Differential Evolution - A Simple and
+  Efficient Heuristic for Global Optimization over Continuous Spaces."
+  Journal of Global Optimization, 11:341-359, 1997.
+  <https://doi.org/10.1023/A:1008202821328>
+- Kenneth V. Price, Rainer M. Storn, and Jouni A. Lampinen. Differential
+  Evolution: A Practical Approach to Global Optimization. Springer, 2005.
+  <https://doi.org/10.1007/3-540-31306-0>

@@ -82,7 +82,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#defining-a-problem">Defining a problem</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#run-statistics">Run statistics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#limitations"><strong>Limitations</strong></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#example-of-a-problem-definiton">Example of a problem definiton</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#running-the-algorithm">Running the algorithm</a></li>
@@ -92,6 +91,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#using-a-custom-random-number-generator">Using a custom random number generator</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="application.html"><code class="docutils literal notranslate"><span class="pre">application</span></code></a></li>
@@ -587,24 +588,6 @@ improved.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">final_best_cost(C)</span></code> - cost of the best solution found.</p></li>
 </ul>
 </section>
-<section id="limitations">
-<h2><strong>Limitations</strong><a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p><strong>Solution-construction model only</strong> - the library implements the
-classic constructive ACO paradigm (ants build complete solutions from
-components). Local-search improvement of constructed solutions is left
-to the problem object or a surrounding hybrid.</p></li>
-<li><p><strong>Edge-based pheromone</strong> - pheromone is stored on directed edges of
-the complete graph induced by <code class="docutils literal notranslate"><span class="pre">nodes/1</span></code>. Attribute-based or
-set-based pheromone models are not provided.</p></li>
-<li><p><strong>Single colony, single pheromone matrix</strong> - multi-colony and
-multi-objective variants are not implemented.</p></li>
-<li><p><strong>TSP-oriented construction</strong> - the built-in construction procedure
-assumes a Hamiltonian path/tour over the node set (every node visited
-exactly once). Problems with different feasibility rules need a custom
-construction strategy (future extension point).</p></li>
-</ul>
-</section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <section id="example-of-a-problem-definiton">
@@ -665,6 +648,39 @@ protocol. For example, a small TSP instance:</p>
 </pre></div>
 </div>
 </section>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Solution-construction model only</strong> - the library implements the
+classic constructive ACO paradigm (ants build complete solutions from
+components). Local-search improvement of constructed solutions is left
+to the problem object or a surrounding hybrid.</p></li>
+<li><p><strong>Edge-based pheromone</strong> - pheromone is stored on directed edges of
+the complete graph induced by <code class="docutils literal notranslate"><span class="pre">nodes/1</span></code>. Attribute-based or
+set-based pheromone models are not provided.</p></li>
+<li><p><strong>Single colony, single pheromone matrix</strong> - multi-colony and
+multi-objective variants are not implemented.</p></li>
+<li><p><strong>TSP-oriented construction</strong> - the built-in construction procedure
+visits every node exactly once. Different feasibility rules require
+changes to the construction procedure; no custom construction hook is
+provided.</p></li>
+<li><p><strong>No global-optimum guarantee</strong> - finite runs may converge prematurely
+or return suboptimal tours.</p></li>
+</ul>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Marco Dorigo, Vittorio Maniezzo, and Alberto Colorni. “Ant System:
+Optimization by a Colony of Cooperating Agents.” IEEE Transactions on
+Systems, Man, and Cybernetics, Part B, 26(1):29-41, 1996.
+<a class="reference external" href="https://doi.org/10.1109/3477.484436">https://doi.org/10.1109/3477.484436</a></p></li>
+<li><p>Thomas Stutzle and Holger H. Hoos. “MAX-MIN Ant System.” Future
+Generation Computer Systems, 16(8):889-914, 2000. Describes the
+pheromone-bounding approach used alongside the library’s Ant System
+updates. <a class="reference external" href="https://doi.org/10.1016/S0167-739X(00)00043-1">https://doi.org/10.1016/S0167-739X(00)00043-1</a></p></li>
+</ul>
 </section>
 </section>
 

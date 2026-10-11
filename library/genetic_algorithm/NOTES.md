@@ -174,26 +174,6 @@ run:
 - `final_population_size(S)` - size of the final population.
 
 
-**Limitations**
--------------
-
-- **Single population, generational model** - a classic generational GA is
-  implemented. Steady-state replacement, multi-population (island) models,
-  and coevolution are not provided.
-- **Limited selection schemes** - tournament, roulette-wheel, and linear
-  rank selection are implemented. Other schemes (e.g. stochastic universal
-  sampling, Boltzmann selection) are not provided.
-- **Limited adaptive schedules** - constant, linear, and geometric rate
-  schedules are supported, plus optional problem hooks. Other adaptive
-  policies (e.g. diversity-triggered rates) require a custom hook.
-- **No built-in representation** - chromosomes, real vectors, and other
-  encodings must be defined by the problem together with suitable crossover
-  and mutation operators.
-- **Diversity is optional** - a problem-specific `diversity/2` predicate is
-  required for meaningful diversity reporting; otherwise a placeholder
-  value of 0.0 is used.
-
-
 Usage
 -----
 
@@ -269,3 +249,35 @@ line:
 
 	| ?- genetic_algorithm(quadratic, well512a)::run(State, Energy).
 	State = 3.00..., Energy = 0.000...
+
+
+Limitations
+-----------
+
+- **Single population, generational model** - a classic generational GA is
+  implemented. Steady-state replacement, multi-population (island) models,
+  and coevolution are not provided.
+- **Limited selection schemes** - tournament, roulette-wheel, and linear
+  rank selection are implemented. Other schemes (e.g. stochastic universal
+  sampling, Boltzmann selection) are not provided.
+- **Limited adaptive schedules** - constant, linear, and geometric rate
+  schedules are supported, plus optional problem hooks. Other adaptive
+  policies (e.g. diversity-triggered rates) require a custom hook.
+- **No built-in representation** - chromosomes, real vectors, and other
+  encodings must be defined by the problem together with suitable crossover
+  and mutation operators. Feasibility must be maintained by these operators
+  or handled in the problem's energy predicate.
+- **Diversity is optional** - a problem-specific `diversity/2` predicate is
+  required for meaningful diversity reporting; otherwise a placeholder
+  value of 0.0 is used.
+- **Single objective only** - Pareto-based multi-objective selection is not
+  provided. Finite runs do not guarantee a global optimum.
+
+
+References
+----------
+
+- John H. Holland. Adaptation in Natural and Artificial Systems.
+  University of Michigan Press, 1975.
+- David E. Goldberg. Genetic Algorithms in Search, Optimization, and
+  Machine Learning. Addison-Wesley, 1989.

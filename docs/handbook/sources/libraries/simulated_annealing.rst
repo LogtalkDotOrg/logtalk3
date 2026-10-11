@@ -262,3 +262,39 @@ algorithm:
 
    | ?- simulated_annealing(quadratic, xoshiro256ss)::run(State, Energy, [seed(42)]).
    State = 3.000..., Energy = 0.000...
+
+Limitations
+-----------
+
+- Single-objective minimization only. Maximization requires a
+  problem-defined transformation of the energy function.
+- A single current state is explored per cycle. Reheating restarts begin
+  from the best state found, not independently generated starting
+  states.
+- State representation, neighborhood generation, and feasibility
+  handling are supplied by the problem; no built-in constraint solver or
+  local-search operators are provided.
+- The default geometric cooling schedule and finite step limit do not
+  guarantee convergence to a global optimum. Results depend on the
+  neighborhood, temperature schedule, and search budget.
+- Temperature estimation samples the problem's neighbor transitions; its
+  target acceptance rate is an estimate, not a guarantee for the full
+  run.
+- Randomness inside problem predicates must be controlled separately if
+  they use a different generator from the optimizer.
+
+References
+----------
+
+- Nicholas Metropolis, Arianna W. Rosenbluth, Marshall N. Rosenbluth,
+  Augusta H. Teller, and Edward Teller. "Equation of State Calculations
+  by Fast Computing Machines." The Journal of Chemical Physics,
+  21(6):1087-1092, 1953. Introduces the acceptance rule used by
+  simulated annealing. https://doi.org/10.1063/1.1699114
+- Scott Kirkpatrick, C. Daniel Gelatt, Jr., and Mario P. Vecchi.
+  "Optimization by Simulated Annealing." Science, 220(4598):671-680,
+  1983. https://doi.org/10.1126/science.220.4598.671
+- Vladimir Cerny. "Thermodynamical Approach to the Traveling Salesman
+  Problem: An Efficient Simulation Algorithm." Journal of Optimization
+  Theory and Applications, 45:41-51, 1985.
+  https://doi.org/10.1007/BF00940812

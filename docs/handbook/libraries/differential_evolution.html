@@ -143,7 +143,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#defining-a-problem">Defining a problem</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#run-statistics">Run statistics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#example-of-a-problem-definiton">Example of a problem definiton</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#running-with-the-default-strategy-rand-1-bin">Running with the default strategy (rand/1/bin)</a></li>
@@ -154,6 +153,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#using-a-custom-random-number-generator">Using a custom random number generator</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="dimension_reduction_protocols.html"><code class="docutils literal notranslate"><span class="pre">dimension_reduction_protocols</span></code></a></li>
@@ -649,30 +650,6 @@ best.</p></li>
 <p>Fitness values are reported unchanged. The <code class="docutils literal notranslate"><span class="pre">objective/1</span></code> option only
 controls which values are considered better.</p>
 </section>
-<section id="limitations">
-<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>Continuous numeric vectors only (no discrete, integer, or
-mixed-integer variables).</p></li>
-<li><p>Box constraints only. Trial vectors that leave the bounds are clamped;
-there is no support for general equality/inequality constraints or
-penalty/barrier methods.</p></li>
-<li><p>Static control parameters. The differential weight (<code class="docutils literal notranslate"><span class="pre">F</span></code>) and
-crossover probability (<code class="docutils literal notranslate"><span class="pre">CR</span></code>) are fixed for the whole run;
-self-adaptive variants (jDE, SHADE, L-SHADE, …) are not yet
-implemented.</p></li>
-<li><p>Only four mutation strategies are provided: <code class="docutils literal notranslate"><span class="pre">rand/1/bin</span></code>
-<code class="docutils literal notranslate"><span class="pre">rand/1/exp</span></code>,</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">best/1/bin</span></code>, and <code class="docutils literal notranslate"><span class="pre">current-to-best/1/bin</span></code>. Other classic variants
-(<code class="docutils literal notranslate"><span class="pre">rand/2</span></code>, <code class="docutils literal notranslate"><span class="pre">best/2</span></code>, exponential crossover, …) are currently
-absent.</p></li>
-<li><p>Synchronous generational replacement only.</p></li>
-<li><p>No automatic restarts, diversity preservation, or stagnation-triggered
-population re-initialization beyond the simple
-<code class="docutils literal notranslate"><span class="pre">stagnation_generations/1</span></code> stopping criterion.</p></li>
-<li><p>Single-objective optimization only.</p></li>
-</ul>
-</section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <section id="example-of-a-problem-definiton">
@@ -739,6 +716,39 @@ population re-initialization beyond the simple
 </pre></div>
 </div>
 </section>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Continuous numeric vectors only (no discrete, integer, or
+mixed-integer variables).</p></li>
+<li><p>Box constraints only. Trial vectors that leave the bounds are clamped;
+general constraints require problem-defined handling in <code class="docutils literal notranslate"><span class="pre">fitness/2</span></code>.</p></li>
+<li><p>Static control parameters. The differential weight (<code class="docutils literal notranslate"><span class="pre">F</span></code>) and
+crossover probability (<code class="docutils literal notranslate"><span class="pre">CR</span></code>) are fixed for the whole run;
+self-adaptive variants (jDE, SHADE, L-SHADE, …) are not implemented.</p></li>
+<li><p>Only four strategies are provided: <code class="docutils literal notranslate"><span class="pre">rand/1/bin</span></code>, <code class="docutils literal notranslate"><span class="pre">rand/1/exp</span></code>,
+<code class="docutils literal notranslate"><span class="pre">best/1/bin</span></code>, and <code class="docutils literal notranslate"><span class="pre">current-to-best/1/bin</span></code>. Other classic variants
+(<code class="docutils literal notranslate"><span class="pre">rand/2</span></code>, <code class="docutils literal notranslate"><span class="pre">best/2</span></code>, …) are not provided.</p></li>
+<li><p>Synchronous generational replacement only.</p></li>
+<li><p>No automatic restarts, diversity preservation, or stagnation-triggered
+population re-initialization beyond the simple
+<code class="docutils literal notranslate"><span class="pre">stagnation_generations/1</span></code> stopping criterion.</p></li>
+<li><p>Single-objective optimization only. Finite runs do not guarantee a
+global optimum.</p></li>
+</ul>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Rainer Storn and Kenneth Price. “Differential Evolution - A Simple and
+Efficient Heuristic for Global Optimization over Continuous Spaces.”
+Journal of Global Optimization, 11:341-359, 1997.
+<a class="reference external" href="https://doi.org/10.1023/A:1008202821328">https://doi.org/10.1023/A:1008202821328</a></p></li>
+<li><p>Kenneth V. Price, Rainer M. Storn, and Jouni A. Lampinen. Differential
+Evolution: A Practical Approach to Global Optimization. Springer,
+2005. <a class="reference external" href="https://doi.org/10.1007/3-540-31306-0">https://doi.org/10.1007/3-540-31306-0</a></p></li>
+</ul>
 </section>
 </section>
 

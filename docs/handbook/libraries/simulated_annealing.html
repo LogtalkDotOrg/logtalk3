@@ -355,6 +355,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#using-a-custom-random-number-generator">Using a custom random number generator</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="slope_one_recommender.html"><code class="docutils literal notranslate"><span class="pre">slope_one_recommender</span></code></a></li>
@@ -691,6 +693,44 @@ algorithm:</p>
 </pre></div>
 </div>
 </section>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Single-objective minimization only. Maximization requires a
+problem-defined transformation of the energy function.</p></li>
+<li><p>A single current state is explored per cycle. Reheating restarts begin
+from the best state found, not independently generated starting
+states.</p></li>
+<li><p>State representation, neighborhood generation, and feasibility
+handling are supplied by the problem; no built-in constraint solver or
+local-search operators are provided.</p></li>
+<li><p>The default geometric cooling schedule and finite step limit do not
+guarantee convergence to a global optimum. Results depend on the
+neighborhood, temperature schedule, and search budget.</p></li>
+<li><p>Temperature estimation samples the problem’s neighbor transitions; its
+target acceptance rate is an estimate, not a guarantee for the full
+run.</p></li>
+<li><p>Randomness inside problem predicates must be controlled separately if
+they use a different generator from the optimizer.</p></li>
+</ul>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Nicholas Metropolis, Arianna W. Rosenbluth, Marshall N. Rosenbluth,
+Augusta H. Teller, and Edward Teller. “Equation of State Calculations
+by Fast Computing Machines.” The Journal of Chemical Physics,
+21(6):1087-1092, 1953. Introduces the acceptance rule used by
+simulated annealing. <a class="reference external" href="https://doi.org/10.1063/1.1699114">https://doi.org/10.1063/1.1699114</a></p></li>
+<li><p>Scott Kirkpatrick, C. Daniel Gelatt, Jr., and Mario P. Vecchi.
+“Optimization by Simulated Annealing.” Science, 220(4598):671-680,
+1983. <a class="reference external" href="https://doi.org/10.1126/science.220.4598.671">https://doi.org/10.1126/science.220.4598.671</a></p></li>
+<li><p>Vladimir Cerny. “Thermodynamical Approach to the Traveling Salesman
+Problem: An Efficient Simulation Algorithm.” Journal of Optimization
+Theory and Applications, 45:41-51, 1985.
+<a class="reference external" href="https://doi.org/10.1007/BF00940812">https://doi.org/10.1007/BF00940812</a></p></li>
+</ul>
 </section>
 </section>
 
