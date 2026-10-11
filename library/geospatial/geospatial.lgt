@@ -23,9 +23,9 @@
 	implements(geospatial_protocol)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-07-27,
+		date is 2026-10-11,
 		comment is 'Geospatial predicates over geographic coordinates represented as ``geographic(Latitude,Longitude)``.',
 		remarks is [
 			'Distance unit' - 'Kilometers.',
@@ -35,7 +35,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, last/2 as last_polygon_coordinate/2, length/2, memberchk/2, reverse/2
+		append/3, last/2 as last_polygon_coordinate/2, length/2, member/2, reverse/2
 	]).
 
 	valid_coordinate(geographic(Latitude, Longitude)) :-
@@ -565,21 +565,21 @@
 		longitude_in_segments(Longitude, Segments).
 
 	longitude_segments_intersect(Segments1, Segments2, inclusive) :-
-		memberchk(Start1-End1, Segments1),
-		memberchk(Start2-End2, Segments2),
+		member(Start1-End1, Segments1),
+		member(Start2-End2, Segments2),
 		Start1 =< End2,
 		Start2 =< End1,
 		!.
 	longitude_segments_intersect(Segments1, Segments2, strict) :-
-		memberchk(Start1-End1, Segments1),
-		memberchk(Start2-End2, Segments2),
+		member(Start1-End1, Segments1),
+		member(Start2-End2, Segments2),
 		Start1 < End2,
 		Start2 < End1,
 		!.
 
 	longitude_segments_contained([], _OuterSegments).
 	longitude_segments_contained([Start-End| Segments], OuterSegments) :-
-		memberchk(OuterStart-OuterEnd, OuterSegments),
+		member(OuterStart-OuterEnd, OuterSegments),
 		OuterStart =< Start,
 		End =< OuterEnd,
 		!,

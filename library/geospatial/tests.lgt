@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-24,
+		date is 2026-10-11,
 		comment is 'Unit tests for the "geospatial" library.'
 	]).
 
@@ -360,6 +360,27 @@
 			bbox(geographic(-0.5, 175.0), geographic(0.5, -175.0))
 		).
 
+	test(geospatial_bbox_antimeridian_relations, deterministic) :-
+		Crossing = bbox(geographic(-1.0, 170.0), geographic(1.0, -170.0)),
+		Western = bbox(geographic(-0.5, -178.0), geographic(0.5, -175.0)),
+		InnerCrossing = bbox(geographic(-0.5, 175.0), geographic(0.5, -175.0)),
+		Touching = bbox(geographic(-0.5, -170.0), geographic(0.5, -160.0)),
+		Disjoint = bbox(geographic(-0.5, -10.0), geographic(0.5, 10.0)),
+		bbox_intersects(Crossing, Western),
+		bbox_intersects(Western, Crossing),
+		bbox_overlaps(Crossing, Western),
+		bbox_overlaps(Western, Crossing),
+		bbox_contains(Crossing, Western),
+		bbox_contains(Crossing, InnerCrossing),
+		bbox_contains(Crossing, Crossing),
+		bbox_contains(bbox(geographic(-90.0, -180.0), geographic(90.0, 180.0)), Crossing),
+		bbox_intersects(Crossing, Touching),
+		bbox_intersects(Touching, Crossing),
+		assertion(\+ geospatial::bbox_overlaps(Crossing, Touching)),
+		assertion(\+ geospatial::bbox_intersects(Crossing, Disjoint)),
+		assertion(\+ geospatial::bbox_contains(Crossing, Disjoint)),
+		assertion(\+ geospatial::bbox_contains(Western, Crossing)).
+
 	test(geospatial_bbox_union_3_01, deterministic) :-
 		bbox_union(bbox(geographic(0.0, 0.0), geographic(1.0, 1.0)), bbox(geographic(-1.0, 0.5), geographic(0.5, 2.0)), bbox(geographic(MinLatitude, MinLongitude), geographic(MaxLatitude, MaxLongitude))),
 		assertion(MinLatitude =~= -1.0),
@@ -388,6 +409,18 @@
 		bbox_intersects_polygon(
 			bbox(geographic(0.0, 0.0), geographic(1.0, 1.0)),
 			[geographic(2.0, 2.0), geographic(2.0, 3.0), geographic(3.0, 3.0), geographic(3.0, 2.0)]
+		).
+
+	test(geospatial_bbox_intersects_polyline_later_segment, deterministic) :-
+		bbox_intersects_polyline(
+			bbox(geographic(-0.5, -0.5), geographic(0.5, 0.5)),
+			[geographic(2.0, 2.0), geographic(3.0, 3.0), geographic(0.0, 0.0)]
+		).
+
+	test(geospatial_bbox_intersects_polyline_later_segment_disjoint, fail) :-
+		bbox_intersects_polyline(
+			bbox(geographic(-0.5, -0.5), geographic(0.5, 0.5)),
+			[geographic(2.0, 2.0), geographic(3.0, 3.0), geographic(4.0, 2.0)]
 		).
 
 	test(geospatial_bbox_contains_polygon_2_01, deterministic) :-

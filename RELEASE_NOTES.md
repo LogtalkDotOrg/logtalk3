@@ -191,6 +191,10 @@ evaluation. Optimized candidate sampling and tabu scans; fixed tenure
 expiration, large-energy handling, non-ground state identity, and progress
 reporting. Expanded tests and documentation.
 
+* FIXED: The `geospatial` library bounding-box intersection, overlap,
+and containment predicates to consider both longitude segments of
+antimeridian-crossing boxes.
+
 * FIXED: The `text_vectorization` library to allow for repeated options when
 validating vectorizer terms (leftmost options always take precedence).
 
