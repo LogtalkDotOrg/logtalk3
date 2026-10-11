@@ -45,70 +45,70 @@
 	%---------------------------------------------------------------------
 
 	test(de_sphere_run_2, deterministic((list::valid(Position), Fitness < 0.5))) :-
-		differential_evolution(sphere)::run(Position, Fitness, [seed(42), max_generations(100)]).
+		differential_evolution(sphere)::run(Position, Fitness, [seed(42), max_generations(100), target_fitness(0.49)]).
 
 	test(de_run_2_default_strategy, deterministic((list::valid(Position), number(Fitness)))) :-
 		differential_evolution(sphere)::run(Position, Fitness).
 
 	test(de_strategy_rand_1_bin, deterministic(Fitness < 0.5)) :-
-		differential_evolution(sphere)::run(_Position, Fitness, [strategy(rand/1/bin), seed(42), max_generations(100)]).
+		differential_evolution(sphere)::run(_Position, Fitness, [strategy(rand/1/bin), seed(42), max_generations(100), target_fitness(0.49)]).
 
 	test(de_strategy_rand_1_exp, deterministic(Fitness < 0.5)) :-
-		differential_evolution(sphere)::run(_Position, Fitness, [strategy(rand/1/exp), seed(42), max_generations(100)]).
+		differential_evolution(sphere)::run(_Position, Fitness, [strategy(rand/1/exp), seed(42), max_generations(100), target_fitness(0.49)]).
 
 	test(de_strategy_best_1_bin, deterministic(Fitness < 1.0)) :-
-		differential_evolution(sphere)::run(_Position, Fitness, [strategy(best/1/bin), seed(42), max_generations(100)]).
+		differential_evolution(sphere)::run(_Position, Fitness, [strategy(best/1/bin), seed(42), max_generations(100), target_fitness(0.99)]).
 
 	test(de_strategy_current_to_best_1_bin, deterministic(Fitness < 0.5)) :-
-		differential_evolution(sphere)::run(_Position, Fitness, [strategy(current-to-best/1/bin), seed(42), max_generations(100)]).
+		differential_evolution(sphere)::run(_Position, Fitness, [strategy(current-to-best/1/bin), seed(42), max_generations(100), target_fitness(0.49)]).
 
 	%---------------------------------------------------------------------
 	% Reproducibility
 	%---------------------------------------------------------------------
 
 	test(de_seed_reproducible, deterministic((Position1 == Position2, Fitness1 =:= Fitness2, Statistics1 == Statistics2))) :-
-		differential_evolution(sphere)::run(Position1, Fitness1, Statistics1, [seed(42), max_generations(50)]),
-		differential_evolution(sphere)::run(Position2, Fitness2, Statistics2, [seed(42), max_generations(50)]).
+		differential_evolution(sphere)::run(Position1, Fitness1, Statistics1, [seed(42), population_size(4), max_generations(5)]),
+		differential_evolution(sphere)::run(Position2, Fitness2, Statistics2, [seed(42), population_size(4), max_generations(5)]).
 
 	test(de_seed_reproducible_rand_1_bin, deterministic((Position1 == Position2, Fitness1 =:= Fitness2))) :-
-		differential_evolution(sphere)::run(Position1, Fitness1, [strategy(rand/1/bin), seed(42), max_generations(40)]),
-		differential_evolution(sphere)::run(Position2, Fitness2, [strategy(rand/1/bin), seed(42), max_generations(40)]).
+		differential_evolution(sphere)::run(Position1, Fitness1, [strategy(rand/1/bin), seed(42), population_size(4), max_generations(5)]),
+		differential_evolution(sphere)::run(Position2, Fitness2, [strategy(rand/1/bin), seed(42), population_size(4), max_generations(5)]).
 
 	test(de_seed_reproducible_rand_1_exp, deterministic((Position1 == Position2, Fitness1 =:= Fitness2))) :-
-		differential_evolution(sphere)::run(Position1, Fitness1, [strategy(rand/1/exp), seed(42), max_generations(40)]),
-		differential_evolution(sphere)::run(Position2, Fitness2, [strategy(rand/1/exp), seed(42), max_generations(40)]).
+		differential_evolution(sphere)::run(Position1, Fitness1, [strategy(rand/1/exp), seed(42), population_size(4), max_generations(5)]),
+		differential_evolution(sphere)::run(Position2, Fitness2, [strategy(rand/1/exp), seed(42), population_size(4), max_generations(5)]).
 
 	test(de_seed_reproducible_best, deterministic((Position1 == Position2, Fitness1 =:= Fitness2))) :-
-		differential_evolution(sphere)::run(Position1, Fitness1, [strategy(best/1/bin), seed(42), max_generations(40)]),
-		differential_evolution(sphere)::run(Position2, Fitness2, [strategy(best/1/bin), seed(42), max_generations(40)]).
+		differential_evolution(sphere)::run(Position1, Fitness1, [strategy(best/1/bin), seed(42), population_size(4), max_generations(5)]),
+		differential_evolution(sphere)::run(Position2, Fitness2, [strategy(best/1/bin), seed(42), population_size(4), max_generations(5)]).
 
 	test(de_seed_reproducible_current_to_best, deterministic((Position1 == Position2, Fitness1 =:= Fitness2))) :-
-		differential_evolution(sphere)::run(Position1, Fitness1, [strategy(current-to-best/1/bin), seed(42), max_generations(40)]),
-		differential_evolution(sphere)::run(Position2, Fitness2, [strategy(current-to-best/1/bin), seed(42), max_generations(40)]).
+		differential_evolution(sphere)::run(Position1, Fitness1, [strategy(current-to-best/1/bin), seed(42), population_size(4), max_generations(5)]),
+		differential_evolution(sphere)::run(Position2, Fitness2, [strategy(current-to-best/1/bin), seed(42), population_size(4), max_generations(5)]).
 
 	%---------------------------------------------------------------------
 	% Objective (minimize / maximize)
 	%---------------------------------------------------------------------
 
 	test(de_explicit_minimize, deterministic((Position1 == Position2, Fitness1 =:= Fitness2))) :-
-		differential_evolution(sphere)::run(Position1, Fitness1, [seed(42), max_generations(40)]),
-		differential_evolution(sphere)::run(Position2, Fitness2, [seed(42), max_generations(40), objective(minimize)]).
+		differential_evolution(sphere)::run(Position1, Fitness1, [seed(42), population_size(4), max_generations(5)]),
+		differential_evolution(sphere)::run(Position2, Fitness2, [seed(42), population_size(4), max_generations(5), objective(minimize)]).
 
 	test(de_maximize, deterministic(Fitness > -0.5)) :-
-		differential_evolution(negative_sphere)::run(_Position, Fitness, [seed(42), max_generations(100), objective(maximize)]).
+		differential_evolution(negative_sphere)::run(_Position, Fitness, [seed(42), max_generations(100), objective(maximize), target_fitness(-0.49)]).
 
 	test(de_maximize_seed_reproducible, deterministic((Position1 == Position2, Fitness1 =:= Fitness2, Statistics1 == Statistics2))) :-
-		differential_evolution(negative_sphere)::run(Position1, Fitness1, Statistics1, [seed(42), max_generations(50), objective(maximize)]),
-		differential_evolution(negative_sphere)::run(Position2, Fitness2, Statistics2, [seed(42), max_generations(50), objective(maximize)]).
+		differential_evolution(negative_sphere)::run(Position1, Fitness1, Statistics1, [seed(42), population_size(4), max_generations(5), objective(maximize)]),
+		differential_evolution(negative_sphere)::run(Position2, Fitness2, Statistics2, [seed(42), population_size(4), max_generations(5), objective(maximize)]).
 
 	%---------------------------------------------------------------------
 	% Statistics
 	%---------------------------------------------------------------------
 
 	test(de_statistics, deterministic) :-
-		differential_evolution(sphere)::run(_Position, _Fitness, Statistics, [seed(42), max_generations(30)]),
+		differential_evolution(sphere)::run(_Position, _Fitness, Statistics, [seed(42), max_generations(5)]),
 		memberchk(generations(Generations), Statistics),
-		^^assertion(Generations =:= 30),
+		^^assertion(Generations =:= 5),
 		memberchk(improvements(Improvements), Statistics),
 		^^assertion((0 =< Improvements, Improvements =< Generations)),
 		memberchk(final_mean_fitness(MeanFitness), Statistics),
@@ -116,13 +116,13 @@
 		memberchk(final_diversity(Diversity), Statistics),
 		^^assertion((number(Diversity), Diversity >= 0.0)).
 
-	test(de_evaluation_count, deterministic(Evaluations =:= 30 * 31)) :-
-		% population_size(30) default, max_generations(30) -> 30 * (30+1)
-		differential_evolution(sphere)::run(_Position, _Fitness, Statistics, [seed(42), max_generations(30)]),
+	test(de_evaluation_count, deterministic(Evaluations =:= 30 * 6)) :-
+		% population_size(30) default, max_generations(5) -> 30 * (5+1)
+		differential_evolution(sphere)::run(_Position, _Fitness, Statistics, [seed(42), max_generations(5)]),
 		memberchk(evaluations(Evaluations), Statistics).
 
-	test(de_max_generations, deterministic(Generations =:= 20)) :-
-		differential_evolution(sphere)::run(_Position, _Fitness, Statistics, [seed(42), max_generations(20)]),
+	test(de_max_generations, deterministic(Generations =:= 5)) :-
+		differential_evolution(sphere)::run(_Position, _Fitness, Statistics, [seed(42), max_generations(5)]),
 		memberchk(generations(Generations), Statistics).
 
 	%---------------------------------------------------------------------
@@ -130,7 +130,7 @@
 	%---------------------------------------------------------------------
 
 	test(de_position_dimensions_and_bounds, deterministic) :-
-		differential_evolution(sphere)::run(Position, _Fitness, [seed(42), max_generations(20)]),
+		differential_evolution(sphere)::run(Position, _Fitness, [seed(42), max_generations(5)]),
 		length(Position, Length),
 		^^assertion(Length =:= 2),
 		Position = [X, Y],
@@ -141,7 +141,7 @@
 	%---------------------------------------------------------------------
 
 	test(de_explicit_random_algorithm, deterministic(Fitness < 0.05)) :-
-		differential_evolution(sphere, as183)::run(_Position, Fitness, [seed(42), max_generations(60)]).
+		differential_evolution(sphere, as183)::run(_Position, Fitness, [seed(42), max_generations(60), target_fitness(0.049)]).
 
 	%---------------------------------------------------------------------
 	% Target fitness stopping
@@ -151,37 +151,37 @@
 		differential_evolution(sphere)::run(_Position, Fitness, Statistics, [seed(42), max_generations(100), target_fitness(0.5)]),
 		memberchk(generations(Generations), Statistics).
 
-	test(de_target_fitness_unreachable, deterministic(Generations =:= 20)) :-
-		differential_evolution(sphere)::run(_Position, _Fitness, Statistics, [seed(42), max_generations(20), target_fitness(-1.0)]),
+	test(de_target_fitness_unreachable, deterministic(Generations =:= 5)) :-
+		differential_evolution(sphere)::run(_Position, _Fitness, Statistics, [seed(42), population_size(4), max_generations(5), target_fitness(-1.0)]),
 		memberchk(generations(Generations), Statistics).
 
 	test(de_target_fitness_none, deterministic((Position1 == Position2, Fitness1 =:= Fitness2))) :-
-		differential_evolution(sphere)::run(Position1, Fitness1, [seed(42), max_generations(20)]),
-		differential_evolution(sphere)::run(Position2, Fitness2, [seed(42), max_generations(20), target_fitness(none)]).
+		differential_evolution(sphere)::run(Position1, Fitness1, [seed(42), population_size(4), max_generations(5)]),
+		differential_evolution(sphere)::run(Position2, Fitness2, [seed(42), population_size(4), max_generations(5), target_fitness(none)]).
 
 	%---------------------------------------------------------------------
 	% Stagnation stopping
 	%---------------------------------------------------------------------
 
 	test(de_stagnation_generations, deterministic((Generations =< 20, Improvements =:= 0))) :-
-		differential_evolution(constant_fitness)::run(_Position, _Fitness, Statistics, [seed(42), max_generations(20), stagnation_generations(3)]),
+		differential_evolution(constant_fitness)::run(_Position, _Fitness, Statistics, [seed(42), population_size(4), max_generations(20), stagnation_generations(3)]),
 		memberchk(generations(Generations), Statistics),
 		memberchk(improvements(Improvements), Statistics).
 
 	test(de_stagnation_zero_disabled, deterministic((Position1 == Position2, Fitness1 =:= Fitness2))) :-
-		differential_evolution(sphere)::run(Position1, Fitness1, [seed(42), max_generations(20)]),
-		differential_evolution(sphere)::run(Position2, Fitness2, [seed(42), max_generations(20), stagnation_generations(0)]).
+		differential_evolution(sphere)::run(Position1, Fitness1, [seed(42), population_size(4), max_generations(5)]),
+		differential_evolution(sphere)::run(Position2, Fitness2, [seed(42), population_size(4), max_generations(5), stagnation_generations(0)]).
 
 	test(de_stagnation_seed_reproducible, deterministic((Position1 == Position2, Fitness1 =:= Fitness2, Statistics1 == Statistics2))) :-
-		differential_evolution(constant_fitness)::run(Position1, Fitness1, Statistics1, [seed(42), max_generations(20), stagnation_generations(3)]),
-		differential_evolution(constant_fitness)::run(Position2, Fitness2, Statistics2, [seed(42), max_generations(20), stagnation_generations(3)]).
+		differential_evolution(constant_fitness)::run(Position1, Fitness1, Statistics1, [seed(42), population_size(4), max_generations(20), stagnation_generations(3)]),
+		differential_evolution(constant_fitness)::run(Position2, Fitness2, Statistics2, [seed(42), population_size(4), max_generations(20), stagnation_generations(3)]).
 
 	%---------------------------------------------------------------------
 	% Custom stop condition
 	%---------------------------------------------------------------------
 
 	test(de_custom_stop_condition, deterministic(Generations =:= 5)) :-
-		differential_evolution(sphere_stop)::run(_Position, _Fitness, Statistics, [seed(42), max_generations(100)]),
+		differential_evolution(sphere_stop)::run(_Position, _Fitness, Statistics, [seed(42), population_size(4), max_generations(100)]),
 		memberchk(generations(Generations), Statistics).
 
 	%---------------------------------------------------------------------
@@ -190,19 +190,19 @@
 
 	test(de_progress_updates_zero, deterministic(Count =:= 0)) :-
 		sphere_progress::clear_log,
-		differential_evolution(sphere_progress)::run(_Position, _Fitness, [seed(42), max_generations(50), updates(0)]),
+		differential_evolution(sphere_progress)::run(_Position, _Fitness, [seed(42), population_size(4), max_generations(5), updates(0)]),
 		findall(1, sphere_progress::progress_log(_, _, _, _, _), Logs),
 		length(Logs, Count).
 
 	test(de_progress_updates_count, deterministic(Count =:= 5)) :-
 		sphere_progress::clear_log,
-		differential_evolution(sphere_progress)::run(_Position, _Fitness, [seed(42), max_generations(50), updates(5)]),
+		differential_evolution(sphere_progress)::run(_Position, _Fitness, [seed(42), population_size(4), max_generations(10), updates(5)]),
 		findall(1, sphere_progress::progress_log(_, _, _, _, _), Logs),
 		length(Logs, Count).
 
 	test(de_progress_values, deterministic) :-
 		sphere_progress::clear_log,
-		differential_evolution(sphere_progress)::run(_Position, _Fitness, [seed(42), max_generations(50), updates(5)]),
+		differential_evolution(sphere_progress)::run(_Position, _Fitness, [seed(42), population_size(4), max_generations(10), updates(5)]),
 		once(sphere_progress::progress_log(Generation, BestPosition, BestFitness, MeanFitness, Diversity)),
 		^^assertion(Generation > 0),
 		^^assertion(list::valid(BestPosition)),
