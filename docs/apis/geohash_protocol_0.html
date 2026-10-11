@@ -473,8 +473,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:2:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-11</div>
+<div class="line"><strong>Version:</strong> 1:3:0</div>
+<div class="line"><strong>Date:</strong> 2026-10-11</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -490,10 +490,14 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
-<div class="line-block">
-<div class="line">(none)</div>
 </div>
-</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Spatial precision: Spatial predicates accept 1 to 12 characters or 1 to 60 bits; greater precision fails to avoid collapsed floating-point cell bounds.</p></li>
+<li><p>Integer capacity: Packed integer predicates additionally require the exclusive upper bound to fit the backend integer range.</p></li>
+<li><p>Hierarchy precision: Text validation, parent, children, common prefix, and compression accept longer hashes.</p></li>
+</ul>
+</div></blockquote>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
@@ -748,14 +752,35 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">covering(+compound,+compound,-list(atom),++list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">covering(+compound,+compound,-list(atom),++list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> or an element of <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of <code class="docutils literal notranslate"><span class="pre">Options</span></code> is not a valid bounding-box covering option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="compress-2">
 <span id="geohash-protocol-0-compress-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">compress/2</span></code></a><a class="headerlink" href="#compress-2" title="Link to this heading"></a></h3>
-<p>Compresses a list of geohashes by replacing complete sibling sets with their parent prefix while preserving the covered area.</p>
+<p>Returns sorted geohashes without duplicates or covered descendants, replacing complete sibling sets with their parent prefix while preserving the covered area.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1147,7 +1172,28 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">polygon_covering(+list(compound),+compound,-list(atom),++list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">polygon_covering(+list(compound),+compound,-list(atom),++list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> or an element of <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of <code class="docutils literal notranslate"><span class="pre">Options</span></code> is not a valid polygon covering option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1168,7 +1214,28 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">polyline_covering(+list(compound),+compound,-list(atom),++list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">polyline_covering(+list(compound),+compound,-list(atom),++list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> or an element of <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of <code class="docutils literal notranslate"><span class="pre">Options</span></code> is not a valid polyline covering option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
 </div>
 </div>
 </section>

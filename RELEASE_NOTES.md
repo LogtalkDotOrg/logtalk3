@@ -191,6 +191,16 @@ evaluation. Optimized candidate sampling and tabu scans; fixed tenure
 expiration, large-energy handling, non-ground state identity, and progress
 reporting. Expanded tests and documentation.
 
+* IMPROVED: The `geohash` library with faster hierarchy compression,
+integer-native encoding and decoding, grid-based adjacency and neighborhoods,
+fused geometry filtering, and hierarchical pruning for adaptive geometry
+covers. Also improved bounded-integer portability and expanded regression
+tests, code coverage, and documentation.
+
+* FIXED: The `geohash` library antimeridian and degenerate bounding-box
+coverage, dateline coordinate handling, zero-buffer semantics, precision
+limits, bit-precision validation, and concave polygon containment.
+
 * FIXED: The `geospatial` library bounding-box intersection, overlap,
 and containment predicates to consider both longitude segments of
 antimeridian-crossing boxes.

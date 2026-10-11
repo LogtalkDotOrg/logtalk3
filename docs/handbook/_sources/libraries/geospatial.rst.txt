@@ -78,6 +78,12 @@ addition to existing spherical and ellipsoidal metrics.
 Notes
 -----
 
+The ``bbox_contains/2``, ``bbox_intersects/2``, and ``bbox_overlaps/2``
+predicates accept antimeridian-crossing boxes, represented by a minimum
+longitude greater than the maximum longitude. Relations consider both
+longitude segments. Intersection includes touching boundaries, while
+overlap requires positive extent in both latitude and longitude.
+
 The generic vector distance predicates already available in the
 ``types`` library (notably in the ``listp`` and ``numberlistp``
 protocols) remain the recommended choice for non-geographic

@@ -505,6 +505,11 @@ addition to existing spherical and ellipsoidal metrics.</p>
 </section>
 <section id="notes">
 <h2>Notes<a class="headerlink" href="#notes" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">bbox_contains/2</span></code>, <code class="docutils literal notranslate"><span class="pre">bbox_intersects/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">bbox_overlaps/2</span></code>
+predicates accept antimeridian-crossing boxes, represented by a minimum
+longitude greater than the maximum longitude. Relations consider both
+longitude segments. Intersection includes touching boundaries, while
+overlap requires positive extent in both latitude and longitude.</p>
 <p>The generic vector distance predicates already available in the
 <code class="docutils literal notranslate"><span class="pre">types</span></code> library (notably in the <code class="docutils literal notranslate"><span class="pre">listp</span></code> and <code class="docutils literal notranslate"><span class="pre">numberlistp</span></code>
 protocols) remain the recommended choice for non-geographic

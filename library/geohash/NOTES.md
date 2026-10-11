@@ -166,36 +166,75 @@ Cover polygons and polylines:
 Notes
 -----
 
+- Spatial encoding, decoding, adjacency, cell dimensions, and covering accept
+	precisions from 1 to 12 characters. Bit-precision operations accept 1 to 60
+	bits. Greater spatial precision is rejected to avoid collapsed floating-point
+	cell bounds. Text validation and hierarchy operations accept longer hashes.
+- Packed integer operations also require the precision to fit the backend
+	integer range, including the exclusive upper bound used for validation.
 - Geohash cell width and height alternate between equal and unequal angular
 	resolution depending on whether the geohash length is even or odd.
 - Encoding canonicalizes longitude `180.0` to `-180.0` so dateline-equivalent
 	coordinates map to the same hash.
-- Neighbor and covering computations use decoded cell dimensions and therefore
-	handle antimeridian wrapping for eastward and westward movement.
+- Point covers at longitude `180.0` use the same canonical cell as encoding.
+	Nearby longitudes remain on their original side of the dateline. Nondegenerate
+	longitude intervals ending at `180.0` retain their eastern extent.
+- Neighbor computations decode integer latitude and longitude cell indices once
+	and apply exact grid offsets. Eastward and westward movement wraps across the
+	antimeridian without floating-point coordinate normalization.
 - Northward adjacency from the northernmost cells and southward adjacency from
 	the southernmost cells fails because there is no cell beyond the poles.
 - Bounding-box covering accepts antimeridian-crossing boxes by allowing the
 	minimum longitude to be greater than the maximum longitude.
+- Fixed covers interleave grid indices directly and return each selected cell
+	once, even when the longitude segments overlap at coarse precision. Rows are
+	visited south to north; longitude segments retain their geographic traversal order.
 - Degenerate point bounding boxes are accepted by `covering/3` and return the
 	single geohash cell containing the point.
+- Adaptive covers of point, zero-height, and zero-width boxes use the maximum
+	precision, including points and lines on cell boundaries. Nondegenerate
+	cell-aligned boxes exclude cells that merely touch their outer boundary.
 - `covering/4` keeps `covering/3` as the fixed-precision shorthand while adding
 	a `CoverSpec` argument with `precision(Precision)` and `max_precision(MaxPrecision)` forms.
-- `geohash` now imports the shared `options` library and uses it to validate and
+- `geohash` imports the shared `options` library and uses it to validate and
 	merge covering options.
+- Repeated options use their first occurrence. Invalid options raise the shared
+	instantiation, type, or domain errors. Bounding-box and polygon covers reject
+	`buffer/1`, which is supported only for polyline covers.
 - `covering/4` and `polygon_covering/4` accept `compact(Boolean)` and
 	`min_precision(PositiveInteger)` options. Compact covers never compress below
 	the selected minimum precision.
 - `polyline_covering/4` also accepts a `buffer(Distance)` option where the
 	distance is expressed in kilometers.
+- Integer and floating-point zero buffers are equivalent to an omitted buffer.
+- The bit-precision predicates fail for noninteger, negative, or out-of-range
+	hashes and invalid bit counts; an empty neighborhood does not mask invalid input.
 - `compress/2` operates on complete sibling sets only, replacing them with
 	parent prefixes while preserving the covered area.
+- Compression removes duplicates and descendants covered by existing prefixes,
+	returns sorted hashes, and collapses nested complete sibling groups bottom-up.
 - Integer-backed predicates mirror the string predicates and keep the precision
 	argument explicit, avoiding any hidden dependence on integer bit width.
+- Integer encoding, decoding, adjacency, and neighborhoods operate directly on
+	packed bits without intermediate geohash atoms. Leading zero groups are
+	preserved by the explicit precision argument.
 - Bit-precision predicates provide the same packed integer representation while
 	measuring precision directly in bits instead of characters.
 - `polygon_covering/4` and `polyline_covering/4` rely on generic `geospatial`
 	geometry predicates and currently do not support antimeridian-crossing input
 	geometries.
+- Fixed geometry covers test grid-derived cell bounds during generation and
+	allocate hashes only for accepted cells, without a separate candidate list.
+- Adaptive polygon and unbuffered polyline covers prune nonintersecting prefix
+	branches and carry child bounds through subdivision. Polygon interiors can
+	be accepted before the maximum precision; boundary cells are refined further.
+	Polygon containment checks include edges, so concave notches are not filled.
+- Buffered adaptive polyline covers use fixed-depth filtering followed by
+	compression. Parent-cell mean-latitude buffer expansion is not a conservative
+	pruning bound for all of its descendants.
+- Adaptive geometry covers are normalized and compressed regardless of
+	`compact/1`; the minimum precision still limits compression. Fixed geometry
+	covers are compressed only when `compact(true)` is selected.
 
 
 References

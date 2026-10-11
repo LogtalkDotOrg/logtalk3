@@ -579,42 +579,93 @@ yes
 <section id="notes">
 <h2>Notes<a class="headerlink" href="#notes" title="Link to this heading"></a></h2>
 <ul class="simple">
+<li><p>Spatial encoding, decoding, adjacency, cell dimensions, and covering
+accept precisions from 1 to 12 characters. Bit-precision operations
+accept 1 to 60 bits. Greater spatial precision is rejected to avoid
+collapsed floating-point cell bounds. Text validation and hierarchy
+operations accept longer hashes.</p></li>
+<li><p>Packed integer operations also require the precision to fit the
+backend integer range, including the exclusive upper bound used for
+validation.</p></li>
 <li><p>Geohash cell width and height alternate between equal and unequal
 angular resolution depending on whether the geohash length is even or
 odd.</p></li>
 <li><p>Encoding canonicalizes longitude <code class="docutils literal notranslate"><span class="pre">180.0</span></code> to <code class="docutils literal notranslate"><span class="pre">-180.0</span></code> so
 dateline-equivalent coordinates map to the same hash.</p></li>
-<li><p>Neighbor and covering computations use decoded cell dimensions and
-therefore handle antimeridian wrapping for eastward and westward
-movement.</p></li>
+<li><p>Point covers at longitude <code class="docutils literal notranslate"><span class="pre">180.0</span></code> use the same canonical cell as
+encoding. Nearby longitudes remain on their original side of the
+dateline. Nondegenerate longitude intervals ending at <code class="docutils literal notranslate"><span class="pre">180.0</span></code> retain
+their eastern extent.</p></li>
+<li><p>Neighbor computations decode integer latitude and longitude cell
+indices once and apply exact grid offsets. Eastward and westward
+movement wraps across the antimeridian without floating-point
+coordinate normalization.</p></li>
 <li><p>Northward adjacency from the northernmost cells and southward
 adjacency from the southernmost cells fails because there is no cell
 beyond the poles.</p></li>
 <li><p>Bounding-box covering accepts antimeridian-crossing boxes by allowing
 the minimum longitude to be greater than the maximum longitude.</p></li>
+<li><p>Fixed covers interleave grid indices directly and return each selected
+cell once, even when the longitude segments overlap at coarse
+precision. Rows are visited south to north; longitude segments retain
+their geographic traversal order.</p></li>
 <li><p>Degenerate point bounding boxes are accepted by <code class="docutils literal notranslate"><span class="pre">covering/3</span></code> and
 return the single geohash cell containing the point.</p></li>
+<li><p>Adaptive covers of point, zero-height, and zero-width boxes use the
+maximum precision, including points and lines on cell boundaries.
+Nondegenerate cell-aligned boxes exclude cells that merely touch their
+outer boundary.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">covering/4</span></code> keeps <code class="docutils literal notranslate"><span class="pre">covering/3</span></code> as the fixed-precision shorthand
 while adding a <code class="docutils literal notranslate"><span class="pre">CoverSpec</span></code> argument with <code class="docutils literal notranslate"><span class="pre">precision(Precision)</span></code>
 and <code class="docutils literal notranslate"><span class="pre">max_precision(MaxPrecision)</span></code> forms.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">geohash</span></code> now imports the shared <code class="docutils literal notranslate"><span class="pre">options</span></code> library and uses it to
+<li><p><code class="docutils literal notranslate"><span class="pre">geohash</span></code> imports the shared <code class="docutils literal notranslate"><span class="pre">options</span></code> library and uses it to
 validate and merge covering options.</p></li>
+<li><p>Repeated options use their first occurrence. Invalid options raise the
+shared instantiation, type, or domain errors. Bounding-box and polygon
+covers reject <code class="docutils literal notranslate"><span class="pre">buffer/1</span></code>, which is supported only for polyline
+covers.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">covering/4</span></code> and <code class="docutils literal notranslate"><span class="pre">polygon_covering/4</span></code> accept <code class="docutils literal notranslate"><span class="pre">compact(Boolean)</span></code>
 and <code class="docutils literal notranslate"><span class="pre">min_precision(PositiveInteger)</span></code> options. Compact covers never
 compress below the selected minimum precision.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">polyline_covering/4</span></code> also accepts a <code class="docutils literal notranslate"><span class="pre">buffer(Distance)</span></code> option
 where the distance is expressed in kilometers.</p></li>
+<li><p>Integer and floating-point zero buffers are equivalent to an omitted
+buffer.</p></li>
+<li><p>The bit-precision predicates fail for noninteger, negative, or
+out-of-range hashes and invalid bit counts; an empty neighborhood does
+not mask invalid input.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">compress/2</span></code> operates on complete sibling sets only, replacing them
 with parent prefixes while preserving the covered area.</p></li>
+<li><p>Compression removes duplicates and descendants covered by existing
+prefixes, returns sorted hashes, and collapses nested complete sibling
+groups bottom-up.</p></li>
 <li><p>Integer-backed predicates mirror the string predicates and keep the
 precision argument explicit, avoiding any hidden dependence on integer
 bit width.</p></li>
+<li><p>Integer encoding, decoding, adjacency, and neighborhoods operate
+directly on packed bits without intermediate geohash atoms. Leading
+zero groups are preserved by the explicit precision argument.</p></li>
 <li><p>Bit-precision predicates provide the same packed integer
 representation while measuring precision directly in bits instead of
 characters.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">polygon_covering/4</span></code> and <code class="docutils literal notranslate"><span class="pre">polyline_covering/4</span></code> rely on generic
 <code class="docutils literal notranslate"><span class="pre">geospatial</span></code> geometry predicates and currently do not support
 antimeridian-crossing input geometries.</p></li>
+<li><p>Fixed geometry covers test grid-derived cell bounds during generation
+and allocate hashes only for accepted cells, without a separate
+candidate list.</p></li>
+<li><p>Adaptive polygon and unbuffered polyline covers prune nonintersecting
+prefix branches and carry child bounds through subdivision. Polygon
+interiors can be accepted before the maximum precision; boundary cells
+are refined further. Polygon containment checks include edges, so
+concave notches are not filled.</p></li>
+<li><p>Buffered adaptive polyline covers use fixed-depth filtering followed
+by compression. Parent-cell mean-latitude buffer expansion is not a
+conservative pruning bound for all of its descendants.</p></li>
+<li><p>Adaptive geometry covers are normalized and compressed regardless of
+<code class="docutils literal notranslate"><span class="pre">compact/1</span></code>; the minimum precision still limits compression. Fixed
+geometry covers are compressed only when <code class="docutils literal notranslate"><span class="pre">compact(true)</span></code> is
+selected.</p></li>
 </ul>
 </section>
 <section id="references">

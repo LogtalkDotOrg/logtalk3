@@ -22,11 +22,16 @@
 :- protocol(geohash_protocol).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-05-11,
+		date is 2026-10-11,
 		comment is 'Geohash predicates protocol.',
-		see_also is [geohash, geospatial]
+		see_also is [geohash, geospatial],
+		remarks is [
+			'Spatial precision' - 'Spatial predicates accept 1 to 12 characters or 1 to 60 bits; greater precision fails to avoid collapsed floating-point cell bounds.',
+			'Integer capacity' - 'Packed integer predicates additionally require the exclusive upper bound to fit the backend integer range.',
+			'Hierarchy precision' - 'Text validation, parent, children, common prefix, and compression accept longer hashes.'
+		]
 	]).
 
 	:- public(valid_geohash/1).
@@ -93,16 +98,22 @@
 	]).
 
 	:- public(covering/4).
-	:- mode(covering(+compound, +compound, -list(atom), ++list(compound)), zero_or_one).
+	:- mode(covering(+compound, +compound, -list(atom), ++list(compound)), zero_or_one_or_error).
 	:- info(covering/4, [
 		comment is 'Returns a geohash cover for a geographic bounding box. ``CoverSpec`` is either ``precision(Precision)`` for a fixed-depth cover or ``max_precision(MaxPrecision)`` for an adaptive mixed-depth cover. ``Options`` may include ``compact(Boolean)`` and ``min_precision(PositiveInteger)``.',
-		argnames is ['BoundingBox', 'CoverSpec', 'Geohashes', 'Options']
+		argnames is ['BoundingBox', 'CoverSpec', 'Geohashes', 'Options'],
+		exceptions is [
+			'``Options`` or an element of ``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of ``Options`` is not a valid bounding-box covering option' - domain_error(option, 'Option')
+		]
 	]).
 
 	:- public(compress/2).
 	:- mode(compress(+list(atom), -list(atom)), zero_or_one).
 	:- info(compress/2, [
-		comment is 'Compresses a list of geohashes by replacing complete sibling sets with their parent prefix while preserving the covered area.',
+		comment is 'Returns sorted geohashes without duplicates or covered descendants, replacing complete sibling sets with their parent prefix while preserving the covered area.',
 		argnames is ['Geohashes', 'CompressedGeohashes']
 	]).
 
@@ -226,17 +237,29 @@
 	]).
 
 	:- public(polygon_covering/4).
-	:- mode(polygon_covering(+list(compound), +compound, -list(atom), ++list(compound)), zero_or_one).
+	:- mode(polygon_covering(+list(compound), +compound, -list(atom), ++list(compound)), zero_or_one_or_error).
 	:- info(polygon_covering/4, [
 		comment is 'Returns a geohash cover for a polygon represented as a list of geographic coordinates. ``CoverSpec`` is either ``precision(Precision)`` for a fixed-depth cover or ``max_precision(MaxPrecision)`` for an adaptive mixed-depth cover. ``Options`` may include ``compact(Boolean)`` and ``min_precision(PositiveInteger)``. Antimeridian-crossing polygons are not supported.',
-		argnames is ['Polygon', 'CoverSpec', 'Geohashes', 'Options']
+		argnames is ['Polygon', 'CoverSpec', 'Geohashes', 'Options'],
+		exceptions is [
+			'``Options`` or an element of ``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of ``Options`` is not a valid polygon covering option' - domain_error(option, 'Option')
+		]
 	]).
 
 	:- public(polyline_covering/4).
-	:- mode(polyline_covering(+list(compound), +compound, -list(atom), ++list(compound)), zero_or_one).
+	:- mode(polyline_covering(+list(compound), +compound, -list(atom), ++list(compound)), zero_or_one_or_error).
 	:- info(polyline_covering/4, [
 		comment is 'Returns a geohash cover for a polyline represented as a list of two or more geographic coordinates. ``CoverSpec`` is either ``precision(Precision)`` for a fixed-depth cover or ``max_precision(MaxPrecision)`` for an adaptive mixed-depth cover. ``Options`` may include ``compact(Boolean)``, ``min_precision(PositiveInteger)``, and ``buffer(Distance)`` where the buffer distance is given in kilometers. Antimeridian-crossing polylines are not supported.',
-		argnames is ['Polyline', 'CoverSpec', 'Geohashes', 'Options']
+		argnames is ['Polyline', 'CoverSpec', 'Geohashes', 'Options'],
+		exceptions is [
+			'``Options`` or an element of ``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of ``Options`` is not a valid polyline covering option' - domain_error(option, 'Option')
+		]
 	]).
 
 :- end_protocol.
