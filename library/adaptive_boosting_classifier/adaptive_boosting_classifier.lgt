@@ -445,6 +445,10 @@
 		valid_tree_metadata(Tree, AttributeNames, ClassValues),
 		valid_weighted_trees(WeightedTrees, ClassValues).
 
+	valid_tree_metadata(c45_model(Tree, Statistics), AttributeNames, ClassValues) :-
+		c45_classifier::diagnostic(c45_model(Tree, Statistics), classes(ModelClasses)),
+		forall(list::member(Class, ModelClasses), list::memberchk(Class, ClassValues)),
+		valid_tree_metadata(Tree, AttributeNames, ClassValues).
 	valid_tree_metadata(leaf(Class), _, ClassValues) :-
 		memberchk(Class, ClassValues).
 	valid_tree_metadata(tree(Attribute, threshold(_), Left, Right), AttributeNames, ClassValues) :-
@@ -483,6 +487,8 @@
 		N1 is N + 1,
 		print_weighted_trees(Rest, N1).
 
+	print_tree_summary(c45_model(Tree, _Statistics)) :-
+		print_tree_summary(Tree).
 	print_tree_summary(leaf(Class)) :-
 		format('    -> leaf(~w)~n', [Class]).
 	print_tree_summary(tree(Attr, _)) :-

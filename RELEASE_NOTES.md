@@ -155,6 +155,24 @@ validation. Fixed singleton-class and attribute-free datasets, empty ensembles,
 perfect-learner handling, and temporary dataset cleanup. Expanded tests and
 documentation.
 
+* CHANGED: The `c45_classifier` library learned model representation to
+`c45_model(Tree, Statistics)` for population-weighted missing-value
+predictions. Raw trees remain accepted. Annotated exports delegate to the
+classifier object; updated the `adaptive_boosting_classifier` and
+`random_forest_classifier` libraries to accept the annotated models.
+
+* IMPROVED: The `c45_classifier` library with histogram-based continuous
+split scoring, shared discrete split statistics, cached node entropy and
+partitions, single-pass model statistics, bottom-up pruning, and
+difference-list raw export. Expanded regression tests, generated property
+checks, and documentation.
+
+* FIXED: The `c45_classifier` library threshold overflow and rounding,
+missing-value mass duplication, split eligibility and gain selection,
+weighted entropy rounding, pruning parameter validation and
+minimum-population semantics, categorical exports, and variable-model
+validation errors.
+
 * IMPROVED: The `http_process_transport` library to only warn about a missing
 default socket command (`socat` on POSIX systems and `ncat` on Windows
 systems).

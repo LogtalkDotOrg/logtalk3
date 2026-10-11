@@ -23,9 +23,9 @@
 	imports(probabilistic_classifier_common)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-11,
+		date is 2026-10-11,
 		comment is 'Random Forest classifier using C4.5 decision trees as base learners. Builds an ensemble of decision trees trained on bootstrap samples with random feature subsets and combines their predictions through majority voting.',
 		see_also is [dataset_protocol, c45_classifier, isolation_forest_anomaly_detector, knn_classifier, naive_bayes_classifier, nearest_centroid_classifier, adaptive_boosting_classifier]
 	]).
@@ -292,6 +292,8 @@
 		N1 is N + 1,
 		print_trees(Trees, N1).
 
+	print_tree_summary(c45_model(Tree, _Statistics)) :-
+		print_tree_summary(Tree).
 	print_tree_summary(leaf(Class)) :-
 		format('    -> leaf(~w)~n', [Class]).
 	print_tree_summary(tree(Attr, _)) :-

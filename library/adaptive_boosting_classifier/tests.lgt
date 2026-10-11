@@ -230,7 +230,7 @@
 		Examples = [weighted_example(1, yes, [], 1.0)],
 		Metadata = [class(label), class_values([yes, no])],
 		adaptive_boosting_classifier<<build_ensemble(2, [], 2, Examples, 1, Metadata, 2, Previous, Trees),
-		assertion(Trees == [weighted_tree(1.0, leaf(yes), [])]),
+		assertion(Trees == [weighted_tree(1.0, c45_model(leaf(yes), leaf_stats([yes-1.0])), [])]),
 		Classifier = ab_classifier(Trees, [yes, no], [number_of_estimators(2)]),
 		adaptive_boosting_classifier::predict(Classifier, [], Class),
 		assertion(Class == yes).

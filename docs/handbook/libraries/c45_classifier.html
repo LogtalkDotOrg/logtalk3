@@ -101,7 +101,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#implemented-features">Implemented features</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#learned-tree-representation">Learned tree representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#learned-model-representation">Learned model representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#export">Export</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#implementation">Implementation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
@@ -453,7 +455,10 @@ to make predictions, and exporting it as a list of predicate clauses or
 to a file.</p>
 <p>Datasets are represented as objects implementing the
 <code class="docutils literal notranslate"><span class="pre">dataset_protocol</span></code> protocol from the <code class="docutils literal notranslate"><span class="pre">classification_protocols</span></code>
-library. See <code class="docutils literal notranslate"><span class="pre">test_files</span></code> directory for examples.</p>
+library. See its <code class="docutils literal notranslate"><span class="pre">test_datasets</span></code> directory for examples. Attribute
+declarations must be unique, datasets must be non-empty, and every
+example must contain all declared attribute bindings. Use an unbound
+variable for a missing attribute value.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -477,30 +482,43 @@ link in a web browser.</p>
 <section id="implemented-features">
 <h2>Implemented features<a class="headerlink" href="#implemented-features" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>Information gain ratio for attribute selection (avoids bias towards
-attributes with many values)</p></li>
+<li><p>Information gain ratio for attribute selection: only usable candidates
+with information gain at least the average usable gain are eligible.
+Usable zero-gain splits remain eligible when all usable gains are
+zero, allowing interactions such as XOR to be learned. Constant and
+all-missing attributes are excluded.</p></li>
 <li><p>Handling of discrete (categorical) attributes with multi-way splits</p></li>
 <li><p>Handling of continuous (numeric) attributes with binary threshold
-splits (selects the threshold with the highest gain ratio from
-midpoints between consecutive sorted values)</p></li>
+splits: each attribute’s threshold maximizes information gain. Values
+are sorted using <code class="docutils literal notranslate"><span class="pre">sort/2</span></code>. Each continuous attribute’s known
+training values should use a consistent representation: all integers
+or all floats. Threshold comparisons use the built-in arithmetic
+operators. Midpoints avoid addition overflow; boundaries without a
+separating float according to those operators are skipped.</p></li>
 <li><p>Handling of missing attribute values (represented using anonymous
-variables): examples with missing values for an attribute are
-distributed to all branches during tree construction; gain ratio
-computation uses only examples with known values for the attribute
-being evaluated; prediction with missing values uses majority voting
-by exploring all possible branches and selecting the most common class</p></li>
+variables): examples are allocated fractionally in proportion to known
+branch populations, preserving their total weight. Information gain is
+discounted by the known population fraction, and split information
+includes the missing population.</p></li>
 <li><p>Tree pruning using pessimistic error pruning (PEP): estimates error
 rates using the upper confidence bound of the binomial distribution
 (Wilson score interval) with a configurable confidence factor (default
-0.25) and minimum instances per leaf (default 2); replaces subtrees
-with leaf nodes when doing so would not increase the estimated error;
-helps reduce overfitting and improve generalization</p></li>
+<code class="docutils literal notranslate"><span class="pre">0.25</span></code>) and minimum weighted node population (default <code class="docutils literal notranslate"><span class="pre">2</span></code>). A
+non-empty internal node below the minimum becomes a majority leaf;
+otherwise a subtree is replaced when the leaf estimate is no worse.
+Existing leaves and empty branches are preserved. The confidence
+factor must be a float in <code class="docutils literal notranslate"><span class="pre">(0.0,</span> <span class="pre">0.5]</span></code>, and the minimum must be a
+positive integer.</p></li>
 <li><p>Export of learned decision trees as predicate clauses</p></li>
 <li><p>Pretty-printing of learned decision trees</p></li>
 </ul>
 </section>
-<section id="learned-tree-representation">
-<h2>Learned tree representation<a class="headerlink" href="#learned-tree-representation" title="Link to this heading"></a></h2>
+<section id="learned-model-representation">
+<h2>Learned model representation<a class="headerlink" href="#learned-model-representation" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">learn/2-3</span></code> predicates return <code class="docutils literal notranslate"><span class="pre">c45_model(Tree,</span> <span class="pre">Statistics)</span></code>. The
+<code class="docutils literal notranslate"><span class="pre">Tree</span></code> argument contains the decision tree, and <code class="docutils literal notranslate"><span class="pre">Statistics</span></code>
+contains weighted class counts and branch populations used for
+missing-value prediction.</p>
 <p>For discrete attributes, the learned decision tree is represented as
 <code class="docutils literal notranslate"><span class="pre">leaf(Class)</span></code> for leaf nodes and <code class="docutils literal notranslate"><span class="pre">tree(Attribute,</span> <span class="pre">Subtrees)</span></code> for
 internal nodes with discrete attributes, where <code class="docutils literal notranslate"><span class="pre">Subtrees</span></code> is a list of
@@ -510,6 +528,57 @@ splits represented as
 <code class="docutils literal notranslate"><span class="pre">tree(Attribute,</span> <span class="pre">threshold(Threshold),</span> <span class="pre">LeftSubtree,</span> <span class="pre">RightSubtree)</span></code>
 where <code class="docutils literal notranslate"><span class="pre">LeftSubtree</span></code> corresponds to values <code class="docutils literal notranslate"><span class="pre">=&lt;</span> <span class="pre">Threshold</span></code> and
 <code class="docutils literal notranslate"><span class="pre">RightSubtree</span></code> to values <code class="docutils literal notranslate"><span class="pre">&gt;</span> <span class="pre">Threshold</span></code>.</p>
+<p>The statistics returned by the <code class="docutils literal notranslate"><span class="pre">learn/2-3</span></code> and <code class="docutils literal notranslate"><span class="pre">prune/3-5</span></code>
+predicates follow the tree structure:</p>
+<p>leaf_stats(Counts) threshold_stats(Counts, LeftMass, LeftStatistics,
+RightMass, RightStatistics) discrete_stats(Counts, Branches)</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Counts</span></code> argument is a list of distinct <code class="docutils literal notranslate"><span class="pre">Class-PositiveFloat</span></code>
+pairs in standard class term order. Each discrete branch is represented
+by <code class="docutils literal notranslate"><span class="pre">branch(Value,</span> <span class="pre">Mass,</span> <span class="pre">Statistics)</span></code>. An empty branch has zero mass
+and inherits its parent’s counts for its fallback leaf. Learned class
+ties use standard term order; equally scored splits retain attribute
+declaration order, and equally scored thresholds retain numeric boundary
+order.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">predict/3</span></code> predicate follows known values directly. An absent or
+unbound attribute aggregates class distributions using branch population
+weights; an unseen categorical value uses the current node’s class
+distribution. Predictions do not instantiate missing values. The
+<code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code> predicate reports the model identifier and sorted root
+classes for annotated models.</p>
+<p>Raw <code class="docutils literal notranslate"><span class="pre">leaf/1</span></code> and <code class="docutils literal notranslate"><span class="pre">tree/2-4</span></code> terms remain accepted for prediction,
+validation, pruning, printing, and export. They do not carry population
+statistics, so missing-value prediction retains legacy branch-majority
+voting and requires the attribute binding to be present. Raw-tree
+pruning returns a raw tree; annotated-model pruning returns an annotated
+model.</p>
+</section>
+<section id="export">
+<h2>Export<a class="headerlink" href="#export" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code> and <code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code> predicates export
+one positional argument per declared attribute, followed by the
+predicted class. Annotated models export a clause delegating to
+<code class="docutils literal notranslate"><span class="pre">c45_classifier::predict/3</span></code>, preserving weighted missing-value
+prediction, unseen-category fallback, and variable sharing. The
+<code class="docutils literal notranslate"><span class="pre">c45_classifier</span></code> object must therefore be loaded when calling the
+exported predicate, and the clause must be compiled as Logtalk source.</p>
+<p>Raw-tree exports contain standalone tree-path clauses and do not require
+the classifier object. Numeric guards use the built-in arithmetic
+comparison operators; categorical values such as <code class="docutils literal notranslate"><span class="pre">=&lt;(2)</span></code> and <code class="docutils literal notranslate"><span class="pre">&gt;(2)</span></code>
+remain categorical values. Raw path exports are intended for known
+attribute values, not legacy missing-value voting.</p>
+</section>
+<section id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Link to this heading"></a></h2>
+<p>Continuous split scoring sorts once per attribute and sweeps grouped
+values with incremental class histograms. Discrete scoring shares
+grouped entropy and population statistics. Node entropy and selected
+partitions are reused, and model statistics are built alongside the
+tree. Pruning returns error estimates and statistics bottom-up instead
+of rescanning descendants. Raw export builds clause lists using
+difference lists.</p>
+<p>Instance lookup retains the list representation. A per-instance balanced
+index was measured but not adopted: its construction overhead outweighs
+lookup savings for small instances and early attribute bindings.</p>
 </section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
@@ -536,30 +605,30 @@ Decision Tree Learning.</p></li>
 </pre></div>
 </div>
 <p>To prune a learned tree with the default parameters (confidence factor
-0.25, minimum instances per leaf 2):</p>
+0.25, minimum weighted node population 2):</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> c45_classifier<span class="o">::</span>learn(breast_cancer, <span class="nv">Tree</span>),
      c45_classifier<span class="o">::</span>prune(breast_cancer, <span class="nv">Tree</span>, <span class="nv">PrunedTree</span>).
 </pre></div>
 </div>
 <p>To prune a learned tree with both custom confidence factor and minimum
-instances per leaf:</p>
+weighted node population:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> c45_classifier<span class="o">::</span>learn(breast_cancer, <span class="nv">Tree</span>),
      c45_classifier<span class="o">::</span>prune(breast_cancer, <span class="nv">Tree</span>, <span class="m">0.1</span>, <span class="m">3</span>, <span class="nv">PrunedTree</span>).
 </pre></div>
 </div>
 <p>To export the tree as a list of predicate clauses:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> c45_classifier<span class="o">::</span>learn(play_tennis, <span class="nv">Tree</span>),
-     c45_classifier<span class="o">::</span>tree_to_clauses(play_tennis, <span class="nv">Tree</span>, classify, <span class="nv">Clauses</span>).
+   c45_classifier<span class="o">::</span>export_to_clauses(play_tennis, <span class="nv">Tree</span>, classify, <span class="nv">Clauses</span>).
 </pre></div>
 </div>
 <p>To export the tree to a file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> c45_classifier<span class="o">::</span>learn(play_tennis, <span class="nv">Tree</span>),
-     c45_classifier<span class="o">::</span>tree_to_file(play_tennis, <span class="nv">Tree</span>, classify, <span class="s">&#39;tree.pl&#39;</span>).
+   c45_classifier<span class="o">::</span>export_to_file(play_tennis, <span class="nv">Tree</span>, classify, <span class="s">&#39;tree.lgt&#39;</span>).
 </pre></div>
 </div>
 <p>To print the tree to the current output:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> c45_classifier<span class="o">::</span>learn(play_tennis, <span class="nv">Tree</span>),
-     c45_classifier<span class="o">::</span>print_tree(<span class="nv">Tree</span>).
+   c45_classifier<span class="o">::</span>print_classifier(<span class="nv">Tree</span>).
 </pre></div>
 </div>
 <p>To predict the class for a new instance (as a list of attribute-value
