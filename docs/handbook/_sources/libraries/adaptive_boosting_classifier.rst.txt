@@ -21,7 +21,7 @@ predicate clauses or to a file.
 
 Datasets are represented as objects implementing the
 ``dataset_protocol`` protocol from the ``classification_protocols``
-library. See ``test_files`` directory for examples.
+library. See that library's ``test_datasets`` directory for examples.
 
 API documentation
 -----------------
@@ -62,7 +62,7 @@ Features
 - **Probability Estimation**: Provides confidence scores based on
   weighted vote proportions
 - **Early Stopping**: Training stops early if a perfect classifier is
-  found or if a base learner is worse than random
+  found or if a base learner is no better than random
 - **Configurable Options**: Number of estimators (boosting rounds)
   configurable via predicate options
 - **Classifier Export**: Learned classifiers can be exported as
@@ -73,8 +73,55 @@ Options
 
 The following options can be passed to the ``learn/3`` predicate:
 
-- ``number_of_estimators(N)``: Number of boosting rounds / weak learners
-  (default: 10)
+- ``number_of_estimators(N)``: Positive integer maximum number of
+  boosting rounds / weak learners (default: 10)
+
+Training behavior
+-----------------
+
+The ``learn/2-3`` predicates require a non-empty dataset with complete
+attribute bindings. Missing values represented by variables are
+supported. Singleton-class datasets produce a constant classifier, and
+datasets without attributes can produce constant leaf trees.
+
+Each round trains an unweighted C4.5 tree on an independent weighted
+sample with replacement. This approximates weighted training through
+resampling; it does not use weighted C4.5 split statistics. Sampling
+preserves draw order and excludes zero-weight examples. Resetting the
+``fast_random(xoshiro128pp)`` seed reproduces a training run for the
+same dataset and options.
+
+A learner with error greater than or equal to ``(K - 1) / K``, where
+``K`` is the number of declared classes, is rejected. If earlier
+learners were accepted, training returns that ensemble. Otherwise,
+learning throws ``domain_error(non_empty_ensemble, Dataset)`` instead of
+returning an empty model. A learner with zero weighted error replaces
+earlier estimators with a single tree of weight ``1.0``, and training
+stops. Temporary sample objects are abolished when tree training
+succeeds, fails, or throws an exception.
+
+The ``predict_probabilities/3`` predicate returns normalized
+weighted-vote proportions, not calibrated posterior probabilities.
+Prediction ties are resolved in favor of the first class in the declared
+class values list.
+
+Performance
+-----------
+
+Bootstrap sampling sorts independent random draws and sweeps the
+cumulative distribution once, requiring ``O(N log N)`` work per round
+for ``N`` examples. Training predictions are computed once per example
+per round and reused for weight updates. Algebraically normalized
+updates avoid exponentiating learner weights and forming potentially
+overflowing error ratios.
+
+Dataset metadata is prepared once, and ensemble construction uses a
+difference list to preserve estimator order without repeatedly copying
+earlier trees. Prediction shares filtered instances across trees with
+matching feature lists. The ``predict/3`` predicate selects directly
+from weighted votes without building a probability distribution. Large
+multiclass ensembles use AVL dictionaries for vote totals; smaller
+ensembles retain a simple scan.
 
 Classifier representation
 -------------------------
@@ -91,6 +138,13 @@ Where:
   ``weighted_tree(Alpha, C45Tree, AttributeNames)`` elements
 - ``ClassValues``: List of possible class values
 - ``Options``: List of options used during learning
+
+The ``check_classifier/1`` and ``valid_classifier/1`` predicates can be
+used to check and validate a model. Ensembles must be non-empty proper
+lists; learner weights must be positive floats; tree leaf classes must
+belong to ``ClassValues``; and each split attribute must occur in that
+tree's distinct attribute names list. Constant leaf trees can have an
+empty attribute names list.
 
 When exported using ``export_to_clauses/4`` or ``export_to_file/4``,
 this classifier term is serialized directly as the single argument of

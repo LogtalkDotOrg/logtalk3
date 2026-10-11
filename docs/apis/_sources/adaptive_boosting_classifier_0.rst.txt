@@ -14,8 +14,8 @@ Adaptive Boosting classifier using C4.5 decision trees as base learners. Impleme
 |    ``logtalk_load(adaptive_boosting_classifier(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 2:0:0
-| **Date:** 2026-05-11
+| **Version:** 3:0:0
+| **Date:** 2026-10-11
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -24,6 +24,7 @@ Adaptive Boosting classifier using C4.5 decision trees as base learners. Impleme
 | **Imports:**
 |    ``public`` :ref:`probabilistic_classifier_common <probabilistic_classifier_common/0>`
 | **Uses:**
+|    :ref:`avltree <avltree/0>`
 |    :ref:`c45_classifier <c45_classifier/0>`
 |    :ref:`fast_random(Algorithm) <fast_random/1>`
 |    :ref:`format <format/0>`
@@ -54,7 +55,51 @@ Protected predicates
 Private predicates
 ------------------
 
-(no local declarations; see entity ancestors if any)
+.. index:: check_ensemble/2
+.. _adaptive_boosting_classifier/0::check_ensemble/2:
+
+``check_ensemble/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Checks that learning accepted at least one estimator.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_ensemble(Dataset,WeightedTrees)``
+| **Mode and number of proofs:**
+|    ``check_ensemble(+object_identifier,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    No estimator was accepted:
+|        ``domain_error(non_empty_ensemble,Dataset)``
+
+
+------------
+
+.. index:: train_with_cleanup/1
+.. _adaptive_boosting_classifier/0::train_with_cleanup/1:
+
+``train_with_cleanup/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Learns a C4.5 tree using a dataset-tree pair and abolishes the temporary dataset on success, failure, or exception.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``train_with_cleanup(DatasetTree)``
+| **Mode and number of proofs:**
+|    ``train_with_cleanup(+pair(object_identifier,term))`` - ``zero_or_one``
+
+| **Exceptions:**
+|    C4.5 learning throws an exception:
+|        ``Exception``
+
+
+------------
 
 Operators
 ---------

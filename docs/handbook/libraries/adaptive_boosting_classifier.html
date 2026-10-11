@@ -76,6 +76,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#training-behavior">Training behavior</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#performance">Performance</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#classifier-representation">Classifier representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
@@ -464,7 +466,7 @@ predictions (with class probabilities), and exporting it as a list of
 predicate clauses or to a file.</p>
 <p>Datasets are represented as objects implementing the
 <code class="docutils literal notranslate"><span class="pre">dataset_protocol</span></code> protocol from the <code class="docutils literal notranslate"><span class="pre">classification_protocols</span></code>
-library. See <code class="docutils literal notranslate"><span class="pre">test_files</span></code> directory for examples.</p>
+library. See that library’s <code class="docutils literal notranslate"><span class="pre">test_datasets</span></code> directory for examples.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -499,7 +501,7 @@ where more accurate learners have higher weight</p></li>
 <li><p><strong>Probability Estimation</strong>: Provides confidence scores based on
 weighted vote proportions</p></li>
 <li><p><strong>Early Stopping</strong>: Training stops early if a perfect classifier is
-found or if a base learner is worse than random</p></li>
+found or if a base learner is no better than random</p></li>
 <li><p><strong>Configurable Options</strong>: Number of estimators (boosting rounds)
 configurable via predicate options</p></li>
 <li><p><strong>Classifier Export</strong>: Learned classifiers can be exported as
@@ -510,9 +512,50 @@ predicate clauses</p></li>
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
 <p>The following options can be passed to the <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">number_of_estimators(N)</span></code>: Number of boosting rounds / weak learners
-(default: 10)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">number_of_estimators(N)</span></code>: Positive integer maximum number of
+boosting rounds / weak learners (default: 10)</p></li>
 </ul>
+</section>
+<section id="training-behavior">
+<h2>Training behavior<a class="headerlink" href="#training-behavior" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">learn/2-3</span></code> predicates require a non-empty dataset with complete
+attribute bindings. Missing values represented by variables are
+supported. Singleton-class datasets produce a constant classifier, and
+datasets without attributes can produce constant leaf trees.</p>
+<p>Each round trains an unweighted C4.5 tree on an independent weighted
+sample with replacement. This approximates weighted training through
+resampling; it does not use weighted C4.5 split statistics. Sampling
+preserves draw order and excludes zero-weight examples. Resetting the
+<code class="docutils literal notranslate"><span class="pre">fast_random(xoshiro128pp)</span></code> seed reproduces a training run for the
+same dataset and options.</p>
+<p>A learner with error greater than or equal to <code class="docutils literal notranslate"><span class="pre">(K</span> <span class="pre">-</span> <span class="pre">1)</span> <span class="pre">/</span> <span class="pre">K</span></code>, where
+<code class="docutils literal notranslate"><span class="pre">K</span></code> is the number of declared classes, is rejected. If earlier
+learners were accepted, training returns that ensemble. Otherwise,
+learning throws <code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_ensemble,</span> <span class="pre">Dataset)</span></code> instead of
+returning an empty model. A learner with zero weighted error replaces
+earlier estimators with a single tree of weight <code class="docutils literal notranslate"><span class="pre">1.0</span></code>, and training
+stops. Temporary sample objects are abolished when tree training
+succeeds, fails, or throws an exception.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">predict_probabilities/3</span></code> predicate returns normalized
+weighted-vote proportions, not calibrated posterior probabilities.
+Prediction ties are resolved in favor of the first class in the declared
+class values list.</p>
+</section>
+<section id="performance">
+<h2>Performance<a class="headerlink" href="#performance" title="Link to this heading"></a></h2>
+<p>Bootstrap sampling sorts independent random draws and sweeps the
+cumulative distribution once, requiring <code class="docutils literal notranslate"><span class="pre">O(N</span> <span class="pre">log</span> <span class="pre">N)</span></code> work per round
+for <code class="docutils literal notranslate"><span class="pre">N</span></code> examples. Training predictions are computed once per example
+per round and reused for weight updates. Algebraically normalized
+updates avoid exponentiating learner weights and forming potentially
+overflowing error ratios.</p>
+<p>Dataset metadata is prepared once, and ensemble construction uses a
+difference list to preserve estimator order without repeatedly copying
+earlier trees. Prediction shares filtered instances across trees with
+matching feature lists. The <code class="docutils literal notranslate"><span class="pre">predict/3</span></code> predicate selects directly
+from weighted votes without building a probability distribution. Large
+multiclass ensembles use AVL dictionaries for vote totals; smaller
+ensembles retain a simple scan.</p>
 </section>
 <section id="classifier-representation">
 <h2>Classifier representation<a class="headerlink" href="#classifier-representation" title="Link to this heading"></a></h2>
@@ -527,6 +570,12 @@ predicate clauses</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ClassValues</span></code>: List of possible class values</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Options</span></code>: List of options used during learning</p></li>
 </ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">check_classifier/1</span></code> and <code class="docutils literal notranslate"><span class="pre">valid_classifier/1</span></code> predicates can be
+used to check and validate a model. Ensembles must be non-empty proper
+lists; learner weights must be positive floats; tree leaf classes must
+belong to <code class="docutils literal notranslate"><span class="pre">ClassValues</span></code>; and each split attribute must occur in that
+tree’s distinct attribute names list. Constant leaf trees can have an
+empty attribute names list.</p>
 <p>When exported using <code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code> or <code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code>,
 this classifier term is serialized directly as the single argument of
 the generated predicate clause so that the exported model can be loaded

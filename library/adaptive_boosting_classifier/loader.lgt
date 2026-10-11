@@ -24,6 +24,7 @@
 	logtalk_load(format(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(random(loader)),
+	logtalk_load(dictionaries(loader)),
 	logtalk_load(classification_protocols(loader)),
 	logtalk_load(c45_classifier(loader)),
 	logtalk_load(adaptive_boosting_classifier, [optimize(on)])

@@ -148,6 +148,13 @@ and `logistic_regression_classifier` libraries.
 `regression_tree`, `spectral_clusterer`, `subsequences`, `tsne_projection`,
 `umap_projection`, `uri_template`, and `wkt_wkb` libraries.
 
+* IMPROVED: The `adaptive_boosting_classifier` library with faster weighted
+sampling, cached training predictions, efficient ensemble construction and
+vote aggregation, numerically stable weight updates, and stronger model
+validation. Fixed singleton-class and attribute-free datasets, empty ensembles,
+perfect-learner handling, and temporary dataset cleanup. Expanded tests and
+documentation.
+
 * IMPROVED: The `http_process_transport` library to only warn about a missing
 default socket command (`socat` on POSIX systems and `ncat` on Windows
 systems).

@@ -23,16 +23,18 @@
 	imports(probabilistic_classifier_common)).
 
 	:- info([
-		version is 2:0:0,
+		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-11,
+		date is 2026-10-11,
 		comment is 'Adaptive Boosting classifier using C4.5 decision trees as base learners. Implements the SAMME (Stagewise Additive Modeling using a Multi-class Exponential loss function) variant, which supports multi-class classification. Builds an ensemble of weighted decision trees where each subsequent tree focuses on the examples misclassified by previous trees.',
-		see_also is [dataset_protocol, c45_classifier, isolation_forest_anomaly_detector, knn_classifier, naive_bayes_classifier, nearest_centroid_classifier, random_forest_classifier]
+		see_also is [
+			dataset_protocol, c45_classifier, isolation_forest_anomaly_detector, knn_classifier,
+			naive_bayes_classifier, nearest_centroid_classifier, random_forest_classifier
+		]
 	]).
 
 	:- uses(c45_classifier, [
-		learn/2 as c45_learn/2,
-		predict/3 as c45_predict/3
+		learn/2 as c45_learn/2, predict/3 as c45_predict/3
 	]).
 
 	:- uses(fast_random(xoshiro128pp), [
@@ -48,11 +50,35 @@
 	]).
 
 	:- uses(pairs, [
-		keys/2
+		keys/2, values/2
 	]).
 
 	:- uses(type, [
 		valid/2
+	]).
+
+	:- uses(avltree, [
+		as_dictionary/2, lookup/3, update/4
+	]).
+
+	:- private(check_ensemble/2).
+	:- mode(check_ensemble(+object_identifier, +list), one_or_error).
+	:- info(check_ensemble/2, [
+		comment is 'Checks that learning accepted at least one estimator.',
+		argnames is ['Dataset', 'WeightedTrees'],
+		exceptions is [
+			'No estimator was accepted' - domain_error(non_empty_ensemble, 'Dataset')
+		]
+	]).
+
+	:- private(train_with_cleanup/1).
+	:- mode(train_with_cleanup(+pair(object_identifier, term)), zero_or_one).
+	:- info(train_with_cleanup/1, [
+		comment is 'Learns a C4.5 tree using a dataset-tree pair and abolishes the temporary dataset on success, failure, or exception.',
+		argnames is ['DatasetTree'],
+		exceptions is [
+			'C4.5 learning throws an exception' - 'Exception'
+		]
 	]).
 
 	% learn/3 - learns a classifier with specified options
@@ -74,12 +100,25 @@
 		InitWeight is 1.0 / N,
 		initialize_weights(Examples, InitWeight, WeightedExamples),
 		% Build the ensemble
-		build_ensemble(
-			Dataset, NumEstimators, Attributes, AttributeNames,
-			NumClasses, WeightedExamples, N, 1, [], WeightedTrees
+		(	ClassValues = [OnlyClass] ->
+			WeightedTrees = [weighted_tree(1.0, leaf(OnlyClass), AttributeNames)]
+		;	Dataset::class(ClassName),
+			build_attribute_clauses(AttributeNames, Attributes, AttributeClauses),
+			Metadata = [class(ClassName), class_values(ClassValues)| AttributeClauses],
+			build_ensemble(
+				NumEstimators, AttributeNames, NumClasses, WeightedExamples,
+				N, Metadata, 1, [], WeightedTrees
+			)
 		),
+		check_ensemble(Dataset, WeightedTrees),
 		% Create classifier term
 		Classifier = ab_classifier(WeightedTrees, ClassValues, Options).
+
+	check_ensemble(Dataset, WeightedTrees) :-
+		(	WeightedTrees == [] ->
+			domain_error(non_empty_ensemble, Dataset)
+		;	true
+		).
 
 	dataset_attributes(Dataset, Attributes) :-
 		findall(
@@ -90,66 +129,72 @@
 
 	% initialize_weights/3 - assign initial weight to each example
 	initialize_weights([], _, []).
-	initialize_weights([Id-Class-AVs| Examples], Weight, [Id-Class-AVs-Weight| WeightedExamples]) :-
+	initialize_weights([Id-Class-AVs| Examples], Weight, [weighted_example(Id, Class, AVs, Weight)| WeightedExamples]) :-
 		initialize_weights(Examples, Weight, WeightedExamples).
 
-	% build_ensemble/10 - iteratively build weighted decision trees
-	build_ensemble(_, NumEstimators, _, _, _, _, _, Round, WeightedTrees0, WeightedTrees) :-
+	build_ensemble(NumEstimators, AttributeNames, NumClasses, WeightedExamples, N, Metadata, Round, Previous, WeightedTrees) :-
+		append(Previous, Tail, Ensemble),
+		build_ensemble_rounds(NumEstimators, AttributeNames, NumClasses, WeightedExamples, N, Metadata, Round, Tail, Ensemble, WeightedTrees).
+
+	build_ensemble_rounds(NumEstimators, _, _, _, _, _, Round, Tail, Ensemble, WeightedTrees) :-
 		Round > NumEstimators,
 		!,
-		WeightedTrees = WeightedTrees0.
-	build_ensemble(
-		Dataset, NumEstimators, Attributes, AttributeNames,
-		NumClasses, WeightedExamples, N, Round, WeightedTrees0, WeightedTrees
+		Tail = [],
+		WeightedTrees = Ensemble.
+	build_ensemble_rounds(
+		NumEstimators, AttributeNames, NumClasses, WeightedExamples,
+		N, Metadata, Round, Tail, Ensemble, WeightedTrees
 	) :-
 		% Create a weighted bootstrap dataset
-		create_weighted_dataset(Dataset, WeightedExamples, AttributeNames, Attributes, WeightedDataset),
+		create_weighted_dataset(WeightedExamples, N, Metadata, WeightedDataset),
 		% Train a C4.5 tree on the weighted sample
-		c45_learn(WeightedDataset, Tree),
-		% Clean up the temporary dataset
-		abolish_object(WeightedDataset),
+		train_with_cleanup(WeightedDataset-Tree),
 		% Compute weighted error
-		compute_weighted_error(WeightedExamples, Tree, AttributeNames, WeightedError),
+		compute_weighted_error(WeightedExamples, Tree, WeightedError, Misclassified),
 		% Check if this learner is useful
 		RandomError is (NumClasses - 1) / NumClasses,
 		(	WeightedError >= RandomError ->
 			% Learner not better than random; stop early
-			WeightedTrees = WeightedTrees0
+			Tail = [],
+			WeightedTrees = Ensemble
 		;	WeightedError =< 0.0 ->
-			% Perfect classifier; add with high weight and stop
-			Alpha is 10.0,
-			append(WeightedTrees0, [weighted_tree(Alpha, Tree, AttributeNames)], WeightedTrees)
+			Tail = [],
+			WeightedTrees = [weighted_tree(1.0, Tree, AttributeNames)]
 		;	% Compute learner weight (SAMME formula)
-			Alpha is log((1.0 - WeightedError) / WeightedError) + log(NumClasses - 1),
+			learner_weight(WeightedError, NumClasses, Alpha),
 			% Update example weights
-			update_weights(WeightedExamples, Tree, AttributeNames, Alpha, UpdatedWeights0),
+			update_weights(WeightedExamples, Misclassified, WeightedError, NumClasses, UpdatedWeights0),
 			% Normalize weights
 			normalize_weights(UpdatedWeights0, UpdatedWeights),
 			% Continue building
 			NextRound is Round + 1,
-			append(WeightedTrees0, [weighted_tree(Alpha, Tree, AttributeNames)], WeightedTrees1),
-			build_ensemble(
-				Dataset, NumEstimators, Attributes, AttributeNames,
-				NumClasses, UpdatedWeights, N, NextRound, WeightedTrees1, WeightedTrees
+			Tail = [weighted_tree(Alpha, Tree, AttributeNames)| NextTail],
+			build_ensemble_rounds(
+				NumEstimators, AttributeNames, NumClasses, UpdatedWeights,
+				N, Metadata, NextRound, NextTail, Ensemble, WeightedTrees
 			)
 		).
 
-	% create_weighted_dataset/5 - creates a weighted sample dataset
-	% Uses weighted random sampling with replacement
-	create_weighted_dataset(Dataset, WeightedExamples, AttributeNames, Attributes, WeightedDataset) :-
-		length(WeightedExamples, N),
+	train_with_cleanup(Dataset-Tree) :-
+		catch(
+			(	c45_learn(Dataset, Tree) ->
+				Result = success
+			;	Result = failure
+			),
+			Error,
+			(	abolish_object(Dataset),
+				throw(Error)
+			)
+		),
+		abolish_object(Dataset),
+		Result == success.
+
+	create_weighted_dataset(WeightedExamples, N, Metadata, WeightedDataset) :-
 		% Build cumulative distribution from weights
 		build_cumulative_distribution(WeightedExamples, CDF),
 		% Sample N examples with replacement according to weights
-		weighted_sample(CDF, WeightedExamples, N, N, SampledExamples),
-		% Get class info from original dataset
-		Dataset::class(ClassName),
-		Dataset::class_values(ClassValues),
-		% Build the temporary dataset object
-		build_attribute_clauses(AttributeNames, Attributes, AttributeClauses),
-		build_example_clauses(SampledExamples, ExampleClauses),
-		append(AttributeClauses, ExampleClauses, DataClauses),
-		AllClauses = [class(ClassName), class_values(ClassValues)| DataClauses],
+		weighted_sample(CDF, N, SampledExamples),
+		append(Metadata, SampledExamples, AllClauses),
 		create_object(
 			WeightedDataset,
 			[implements(dataset_protocol)],
@@ -162,29 +207,39 @@
 		build_cdf_acc(WeightedExamples, 0.0, CDF).
 
 	build_cdf_acc([], _, []).
-	build_cdf_acc([Id-Class-AVs-Weight| Rest], Acc, [CumWeight-Id-Class-AVs| CDFRest]) :-
-		CumWeight is Acc + Weight,
+	build_cdf_acc([weighted_example(_Id, Class, AVs, Weight)| Rest], Acc, CDF) :-
+		(	Weight > 0.0 ->
+			CumWeight is Acc + Weight,
+			CDF = [cdf_entry(CumWeight, Class, AVs)| CDFRest]
+		;	CumWeight = Acc,
+			CDF = CDFRest
+		),
 		build_cdf_acc(Rest, CumWeight, CDFRest).
 
-	% weighted_sample/5 - sample with replacement using CDF
-	weighted_sample(_, _, _, 0, []) :-
-		!.
-	weighted_sample(CDF, WeightedExamples, TotalN, Remaining, [NewId-Class-AVs| Rest]) :-
-		random_float(Random),
-		select_from_cdf(CDF, Random, _-Class-AVs),
-		NewId is TotalN - Remaining + 1,
-		Remaining1 is Remaining - 1,
-		weighted_sample(CDF, WeightedExamples, TotalN, Remaining1, Rest).
+	weighted_sample(CDF, Count, Examples) :-
+		random_draws(Count, 1, Draws),
+		keysort(Draws, SortedDraws),
+		sample_sorted_draws(CDF, SortedDraws, Selections),
+		keysort(Selections, OrderedSelections),
+		values(OrderedSelections, Examples).
 
-	% select_from_cdf/3 - find the first entry in CDF whose cumulative weight >= R
-	select_from_cdf([CumWeight-Id-Class-AVs| _], Random, Id-Class-AVs) :-
-		CumWeight >= Random,
+	random_draws(0, _, []) :-
 		!.
-	% fallback: if R is very close to 1.0, pick last element
-	select_from_cdf([_-Id-Class-AVs], _, Id-Class-AVs) :-
+	random_draws(Remaining, Id, [Random-Id| Draws]) :-
+		random_float(Random),
+		Remaining1 is Remaining - 1,
+		NextId is Id + 1,
+		random_draws(Remaining1, NextId, Draws).
+
+	sample_sorted_draws(_, [], []) :-
 		!.
-	select_from_cdf([_| Rest], Random, Selected) :-
-		select_from_cdf(Rest, Random, Selected).
+	sample_sorted_draws(CDF, [Random-Id| Draws], Selections) :-
+		CDF = [cdf_entry(CumWeight, Class, AVs)| Rest],
+		(	(Random < CumWeight; Rest == []) ->
+			Selections = [Id-example(Id, Class, AVs)| Selected],
+			sample_sorted_draws(CDF, Draws, Selected)
+		;	sample_sorted_draws(Rest, [Random-Id| Draws], Selections)
+		).
 
 	% build_attribute_clauses/3 - build attribute_values/2 clauses for the dynamic dataset
 	build_attribute_clauses([], _, []).
@@ -192,35 +247,37 @@
 		memberchk(Name-Values, Attributes),
 		build_attribute_clauses(Names, Attributes, Clauses).
 
-	% build_example_clauses/2 - build example/3 clauses
-	build_example_clauses([], []).
-	build_example_clauses([Id-Class-AVs| Examples], [example(Id, Class, AVs)| Clauses]) :-
-		build_example_clauses(Examples, Clauses).
-
 	% compute_weighted_error/4 - sum weights of misclassified examples
-	compute_weighted_error(WeightedExamples, Tree, AttributeNames, WeightedError) :-
-		compute_error_acc(WeightedExamples, Tree, AttributeNames, 0.0, WeightedError).
+	compute_weighted_error(WeightedExamples, Tree, WeightedError, Misclassified) :-
+		compute_error_acc(WeightedExamples, Tree, 0.0, WeightedError, Misclassified).
 
-	compute_error_acc([], _, _, Error, Error).
-	compute_error_acc([_Id-Class-AVs-Weight| Rest], Tree, AttributeNames, Error0, Error) :-
-		filter_instance_attrs(AVs, AttributeNames, FilteredAVs),
-		c45_predict(Tree, FilteredAVs, Predicted),
+	compute_error_acc([], _, Error, Error, []).
+	compute_error_acc([weighted_example(_Id, Class, AVs, Weight)| Rest], Tree, Error0, Error, [Incorrect| Misclassified]) :-
+		c45_predict(Tree, AVs, Predicted),
 		(	Predicted == Class ->
-			compute_error_acc(Rest, Tree, AttributeNames, Error0, Error)
+			Incorrect = false,
+			compute_error_acc(Rest, Tree, Error0, Error, Misclassified)
 		;	Error1 is Error0 + Weight,
-			compute_error_acc(Rest, Tree, AttributeNames, Error1, Error)
+			Incorrect = true,
+			compute_error_acc(Rest, Tree, Error1, Error, Misclassified)
 		).
 
-	% update_weights/5 - increase weights for misclassified examples
-	update_weights([], _, _, _, []).
-	update_weights([Id-Class-AVs-Weight| Rest], Tree, AttributeNames, Alpha, [Id-Class-AVs-NewWeight| UpdatedRest]) :-
-		filter_instance_attrs(AVs, AttributeNames, FilteredAVs),
-		c45_predict(Tree, FilteredAVs, Predicted),
-		(	Predicted == Class ->
-			NewWeight = Weight
-		;	NewWeight is Weight * exp(Alpha)
+	learner_weight(Error, NumClasses, Alpha) :-
+		Alpha is log(1.0 - Error) - log(Error) + log(NumClasses - 1).
+
+	update_weights(WeightedExamples, Misclassified, Error, NumClasses, Updated) :-
+		CorrectMass is 1.0 - Error,
+		CorrectShare is 1.0 / NumClasses,
+		IncorrectShare is (NumClasses - 1.0) / NumClasses,
+		update_normalized_weights(WeightedExamples, Misclassified, Error, CorrectMass, CorrectShare, IncorrectShare, Updated).
+
+	update_normalized_weights([], [], _, _, _, _, []).
+	update_normalized_weights([weighted_example(Id, Class, AVs, Weight)| Rest], [Incorrect| Misclassified], Error, CorrectMass, CorrectShare, IncorrectShare, [weighted_example(Id, Class, AVs, NewWeight)| UpdatedRest]) :-
+		(	Incorrect == false ->
+			NewWeight is (Weight / CorrectMass) * CorrectShare
+		;	NewWeight is (Weight / Error) * IncorrectShare
 		),
-		update_weights(Rest, Tree, AttributeNames, Alpha, UpdatedRest).
+		update_normalized_weights(Rest, Misclassified, Error, CorrectMass, CorrectShare, IncorrectShare, UpdatedRest).
 
 	% normalize_weights/2 - normalize weights so they sum to 1.0
 	normalize_weights(WeightedExamples, Normalized) :-
@@ -234,17 +291,17 @@
 		).
 
 	sum_weights([], Sum, Sum).
-	sum_weights([_-_-_-Weight| Rest], Acc, Sum) :-
+	sum_weights([weighted_example(_, _, _, Weight)| Rest], Acc, Sum) :-
 		Acc1 is Acc + Weight,
 		sum_weights(Rest, Acc1, Sum).
 
 	divide_weights([], _, []).
-	divide_weights([Id-Class-AVs-Weight| Rest], Total, [Id-Class-AVs-NormWeight| NormRest]) :-
+	divide_weights([weighted_example(Id, Class, AVs, Weight)| Rest], Total, [weighted_example(Id, Class, AVs, NormWeight)| NormRest]) :-
 		NormWeight is Weight / Total,
 		divide_weights(Rest, Total, NormRest).
 
 	set_uniform_weights([], _, []).
-	set_uniform_weights([Id-Class-AVs-_| Rest], Weight, [Id-Class-AVs-Weight| NormRest]) :-
+	set_uniform_weights([weighted_example(Id, Class, AVs, _)| Rest], Weight, [weighted_example(Id, Class, AVs, Weight)| NormRest]) :-
 		set_uniform_weights(Rest, Weight, NormRest).
 
 	% filter_instance_attrs/3 - filter instance attributes to the given names
@@ -256,7 +313,10 @@
 
 	% predict/3 - predicts the class using weighted majority voting
 	predict(Classifier, Instance, Class) :-
-		^^predict_from_probabilities(Classifier, Instance, Class).
+		classifier_data(Classifier, WeightedTrees, ClassValues, _Options),
+		collect_weighted_predictions(WeightedTrees, Instance, WeightedPredictions),
+		accumulate_weighted_votes(WeightedPredictions, ClassValues, Votes),
+		^^max_probability(Votes, Class, _Weight).
 
 	% predict_probabilities/3 - returns class probabilities based on weighted votes
 	predict_probabilities(Classifier, Instance, Probabilities) :-
@@ -269,14 +329,52 @@
 		sum_vote_weights(Votes, 0.0, TotalWeight),
 		normalize_votes(Votes, TotalWeight, Probabilities).
 
-	collect_weighted_predictions([], _, []).
-	collect_weighted_predictions([weighted_tree(Alpha, Tree, AttributeNames)| Rest], Instance, [Alpha-Prediction| Predictions]) :-
+	collect_weighted_predictions([], _, []) :-
+		!.
+	collect_weighted_predictions(WeightedTrees, Instance, Predictions) :-
+		WeightedTrees = [weighted_tree(_, _, AttributeNames)| _],
 		filter_instance_attrs(Instance, AttributeNames, FilteredInstance),
+		collect_tree_predictions(WeightedTrees, Instance, AttributeNames, FilteredInstance, Predictions).
+
+	collect_tree_predictions([], _, _, _, []).
+	collect_tree_predictions([weighted_tree(Alpha, Tree, AttributeNames)| Rest], Instance, SharedNames, SharedInstance, [Alpha-Prediction| Predictions]) :-
+		(	AttributeNames == SharedNames ->
+			FilteredInstance = SharedInstance
+		;	filter_instance_attrs(Instance, AttributeNames, FilteredInstance)
+		),
 		c45_predict(Tree, FilteredInstance, Prediction),
-		collect_weighted_predictions(Rest, Instance, Predictions).
+		collect_tree_predictions(Rest, Instance, SharedNames, SharedInstance, Predictions).
 
 	accumulate_weighted_votes(WeightedPredictions, ClassValues, Votes) :-
-		accumulate_votes_for_classes(ClassValues, WeightedPredictions, Votes).
+		length(ClassValues, ClassCount),
+		(	ClassCount >= 16,
+			length(WeightedPredictions, EstimatorCount),
+			EstimatorCount >= 64 ->
+			indexed_votes(WeightedPredictions, ClassValues, Votes)
+		;	accumulate_votes_for_classes(ClassValues, WeightedPredictions, Votes)
+		).
+
+	indexed_votes(WeightedPredictions, ClassValues, Votes) :-
+		zero_votes(ClassValues, InitialVotes),
+		as_dictionary(InitialVotes, InitialTotals),
+		add_indexed_votes(WeightedPredictions, InitialTotals, Totals),
+		ordered_votes(ClassValues, Totals, Votes).
+
+	zero_votes([], []).
+	zero_votes([Class| Classes], [Class-0.0| Votes]) :-
+		zero_votes(Classes, Votes).
+
+	add_indexed_votes([], Totals, Totals).
+	add_indexed_votes([Alpha-Class| Predictions], Totals0, Totals) :-
+		lookup(Class, Previous, Totals0),
+		Weight is Previous + Alpha,
+		update(Totals0, Class, Weight, Totals1),
+		add_indexed_votes(Predictions, Totals1, Totals).
+
+	ordered_votes([], _, []).
+	ordered_votes([Class| Classes], Totals, [Class-Weight| Votes]) :-
+		lookup(Class, Weight, Totals),
+		ordered_votes(Classes, Totals, Votes).
 
 	accumulate_votes_for_classes([], _, []).
 	accumulate_votes_for_classes([Class| Classes], WeightedPredictions, [Class-TotalWeight| Votes]) :-
@@ -315,14 +413,17 @@
 		].
 
 	check_classifier(Classifier) :-
-		(	classifier_data(Classifier, WeightedTrees, ClassValues, Options),
+		(	var(Classifier) ->
+			instantiation_error
+		;	classifier_data(Classifier, WeightedTrees, ClassValues, Options),
+			valid(list(compound), WeightedTrees),
 			WeightedTrees \== [],
 			^^valid_class_values(ClassValues),
 			catch(::check_options(Options), _Error, fail),
 			memberchk(number_of_estimators(ExpectedEstimators), Options),
 			length(WeightedTrees, EstimatorCount),
 			EstimatorCount =< ExpectedEstimators,
-			valid_weighted_trees(WeightedTrees) ->
+			valid_weighted_trees(WeightedTrees, ClassValues) ->
 			true
 		;	domain_error(classifier, Classifier)
 		).
@@ -336,13 +437,28 @@
 
 	classifier_term_template(ab_classifier(_WeightedTrees, _ClassValues, _Options), ab_classifier('WeightedTrees', 'ClassValues', 'Options')).
 
-	valid_weighted_trees([]).
-	valid_weighted_trees([weighted_tree(Alpha, Tree, AttributeNames)| WeightedTrees]) :-
+	valid_weighted_trees([], _).
+	valid_weighted_trees([weighted_tree(Alpha, Tree, AttributeNames)| WeightedTrees], ClassValues) :-
 		valid(positive_float, Alpha),
 		^^valid_attribute_names(AttributeNames),
-		AttributeNames \== [],
 		c45_classifier::valid_classifier(Tree),
-		valid_weighted_trees(WeightedTrees).
+		valid_tree_metadata(Tree, AttributeNames, ClassValues),
+		valid_weighted_trees(WeightedTrees, ClassValues).
+
+	valid_tree_metadata(leaf(Class), _, ClassValues) :-
+		memberchk(Class, ClassValues).
+	valid_tree_metadata(tree(Attribute, threshold(_), Left, Right), AttributeNames, ClassValues) :-
+		memberchk(Attribute, AttributeNames),
+		valid_tree_metadata(Left, AttributeNames, ClassValues),
+		valid_tree_metadata(Right, AttributeNames, ClassValues).
+	valid_tree_metadata(tree(Attribute, Subtrees), AttributeNames, ClassValues) :-
+		memberchk(Attribute, AttributeNames),
+		valid_subtree_metadata(Subtrees, AttributeNames, ClassValues).
+
+	valid_subtree_metadata([], _, _).
+	valid_subtree_metadata([_-Tree| Subtrees], AttributeNames, ClassValues) :-
+		valid_tree_metadata(Tree, AttributeNames, ClassValues),
+		valid_subtree_metadata(Subtrees, AttributeNames, ClassValues).
 
 	classifier_data(Classifier, WeightedTrees, ClassValues, Options) :-
 		Classifier =.. [_Functor, WeightedTrees, ClassValues, Options].
