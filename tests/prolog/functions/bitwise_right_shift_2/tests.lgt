@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-11-04,
+		date is 2026-10-11,
 		comment is 'Unit tests for the ISO Prolog standard (>>)/1 built-in function.'
 	]).
 
@@ -91,6 +91,9 @@
 		% try to delay the error to runtime
 		foo(2, Foo),
 		{_X is '>>'(2, Foo)}.
+
+	test(lgt_bitwise_right_shift_2_14, true(X == 0)) :-
+		{X is '>>'(42, 64)}.
 
 	% auxiliary predicates used to delay errors to runtime
 

@@ -219,6 +219,11 @@ Examples
 * ADDED: New `full_adder_diagnosis` example illustrating the new `atms`
 library.
 
+Tests
+-----
+
+* ADDED: Additional test for the ISO Prolog `(>>)/2` arithmetic function.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
