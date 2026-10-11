@@ -37,6 +37,58 @@
 :- end_object.
 
 
+:- object(differential_evolution_fixture(_Case_),
+	implements(differential_evolution_problem_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-10-11,
+		comment is 'Fixed Differential Evolution validation and selection fixtures.',
+		parameters is ['Case' - 'Fixture case.']
+	]).
+
+	position_bounds(Bounds) :-
+		(	bounds(_Case_, Bounds) ->
+			true
+		;	Bounds = [0-1]
+		).
+
+	initial_positions(Positions) :-
+		positions(_Case_, Positions).
+
+	fitness(Position, Fitness) :-
+		(	_Case_ == fitness ->
+			Fitness = invalid
+		;	_Case_ == large_fitness ->
+			Fitness = 1.0e308
+		;	_Case_ == mapped ->
+			Position = [Fitness]
+		;	_Case_ == later_fitness, Position == [1] ->
+			Fitness = invalid
+		;	Fitness = 1
+		).
+
+	bounds(empty, []).
+	bounds(variable, _).
+	bounds(open, [0-1| _]).
+	bounds(improper, [0-1| invalid]).
+	bounds(pair, [invalid]).
+	bounds(numeric, [0-invalid]).
+	bounds(inverted, [0-1, 2-1]).
+
+	positions(supplied, [[0], [1], [0], [1]]).
+	positions(positions_empty, []).
+	positions(positions_count, [[0]]).
+	positions(positions_improper, [[0]| invalid]).
+	positions(positions_variable, [[_], [0], [0], [0]]).
+	positions(positions_dimension, [[0,0], [0], [0], [0]]).
+	positions(positions_numeric, [[invalid], [0], [0], [0]]).
+	positions(positions_bounds, [[2], [0], [0], [0]]).
+
+:- end_object.
+
+
 :- object(negative_sphere,
 	implements(differential_evolution_problem_protocol)).
 
@@ -145,5 +197,82 @@
 
 	fitness([X, Y], Fitness) :-
 		Fitness is X*X + Y*Y.
+
+:- end_object.
+
+
+:- object(differential_evolution_reporting,
+	extends(sphere_progress)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-10-11,
+		comment is 'Differential Evolution constant-fitness early-reporting fixture.'
+	]).
+
+	fitness(_, 1).
+
+	stop_condition(Generation, _, _) :-
+		Generation >= 3.
+
+:- end_object.
+
+
+:- object(differential_evolution_benchmark(_Dimension_, _Cost_),
+	implements(differential_evolution_problem_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-10-11,
+		comment is 'Differential Evolution evaluation-order and performance fixtures.',
+		parameters is ['Dimension' - 'Number of coordinates.', 'Cost' - 'Fitness workload.']
+	]).
+
+	:- public([clear_log/0, evaluations/1]).
+	:- private(evaluation_/2).
+	:- dynamic(evaluation_/2).
+
+	position_bounds(Bounds) :-
+		bounds(_Dimension_, Bounds).
+
+	fitness(Position, Fitness) :-
+		(	_Cost_ == constant ->
+			Fitness = 1
+		;	squares(Position, 0.0, Fitness),
+			(	_Cost_ == counted ->
+				fast_random(xoshiro128pp)::get_seed(State),
+				assertz(evaluation_(Position, State))
+			;	_Cost_ == expensive ->
+				workload(100, Fitness, _)
+			;	true
+			)
+		).
+
+	clear_log :-
+		retractall(evaluation_(_, _)).
+
+	evaluations(Calls) :-
+		findall(Position-State, evaluation_(Position, State), Calls).
+
+	bounds(0, []) :-
+		!.
+	bounds(Dimension, [(-5.0)-5.0| Bounds]) :-
+		Dimension1 is Dimension - 1,
+		bounds(Dimension1, Bounds).
+
+	squares([], Fitness, Fitness) :-
+		!.
+	squares([X| Xs], Sum0, Fitness) :-
+		Sum1 is Sum0 + X*X,
+		squares(Xs, Sum1, Fitness).
+
+	workload(0, Value, Value) :-
+		!.
+	workload(Count, Value0, Value) :-
+		Value1 is sqrt(Value0 + 1.0),
+		Count1 is Count - 1,
+		workload(Count1, Value1, Value).
 
 :- end_object.

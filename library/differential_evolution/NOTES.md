@@ -61,16 +61,21 @@ To test this library, load its `tester.lgt` file:
 Algorithm
 ---------
 
-Differential Evolution maintains a population of real-valued vectors.
-In every generation each target vector \(x_i\) produces a trial vector by
-mutation followed by binomial crossover. The trial replaces the target
-when it has equal or better fitness (according to the selected objective).
+Differential Evolution maintains a population of real-valued vectors. In
+every generation each target vector \(x_i\) produces a trial vector by
+mutation followed by binomial or exponential crossover. The trial replaces
+the target when it has equal or better fitness (according to the selected
+objective). Only strict best-fitness improvements increment the improvement
+count or reset the stagnation counter. All donors come from the preceding
+generation.
 
 Supported mutation strategies (selected with the `strategy/1` option):
 
 - `rand/1/bin` (default)
 
 		v = x_r1 + F * (x_r2 - x_r3)
+
+- `rand/1/exp` uses the same mutation formula with exponential crossover.
 
 - `best/1/bin`
 
@@ -81,8 +86,12 @@ Supported mutation strategies (selected with the `strategy/1` option):
 		v = x_i + F * (x_best - x_i) + F * (x_r1 - x_r2)
 
 Binomial crossover mixes the mutant with the target; at least one
-component is always taken from the mutant. Trial vectors that leave the
-box constraints are clamped to the nearest bound.
+component is always taken from the mutant. Exponential crossover takes a
+consecutive circular segment of mutant components, starting at a uniformly
+chosen coordinate and continuing while random draws are below `CR`.
+Donor and crossover indices use the inclusive `fast_random::between/3`
+predicate. Trial vectors that leave the box constraints are clamped to the
+nearest bound.
 
 
 Convergence speed comparison
@@ -116,7 +125,11 @@ Problem objects must implement `differential_evolution_problem_protocol`
 by defining:
 
 - `position_bounds(-Bounds)` - returns one numeric `Lower-Upper` pair per
-  dimension, with `Lower =< Upper`.
+  dimension in a ground, non-empty proper list, with `Lower =< Upper`.
+  Equal bounds fix the corresponding coordinate at that value throughout
+  the run; for example, `3-3` fixes the coordinate at `3`. Random
+  initialization is continuous for integer, floating-point, and mixed
+  bound endpoints.
 - `fitness(+Position, -Fitness)` - computes a numeric fitness value. The
   optimizer minimizes this value by default; use `objective(maximize)` to
   maximize it instead.
@@ -124,7 +137,8 @@ by defining:
 Optionally, a problem object may also define:
 
 - `initial_positions(-Positions)` - returns a non-empty list of initial
-  positions lying inside the bounds. When not defined, the algorithm
+  positions lying inside the bounds, with exactly `population_size(N)`
+  ground positions of the declared dimension. When not defined, the algorithm
   generates a random initial population.
 - `stop_condition(+Generation, +BestPosition, +BestFitness)` - succeeds
   when the search should terminate early.
@@ -140,7 +154,7 @@ Options
 Options for the `run/3-4` predicates:
 
 - `strategy(Strategy)` - mutation strategy: `rand/1/bin` (default),
-  `best/1/bin`, or `current-to-best/1/bin`.
+  `rand/1/exp`, `best/1/bin`, or `current-to-best/1/bin`.
 - `objective(Objective)` - optimization direction, either `minimize` or
   `maximize` (default: `minimize`).
 - `target_fitness(Fitness)` - numeric target that stops the run when the
@@ -149,15 +163,17 @@ Options for the `run/3-4` predicates:
 - `population_size(N)` - population size; must be at least 4
   (default: `30`).
 - `max_generations(N)` - maximum number of generations (default: `100`).
-- `crossover_probability(CR)` - binomial crossover probability in `[0,1]`
+- `crossover_probability(CR)` - crossover probability in `[0,1]`
   (default: `0.9`).
 - `differential_weight(F)` - positive scale factor for difference vectors
   (default: `0.8`).
 - `stagnation_generations(N)` - number of consecutive generations without
   a strict best-fitness improvement before stopping. Set to `0` to
   disable (default: `0`).
-- `updates(N)` - number of progress reports during the run. Set to `0`
-  to disable progress reporting (default: `0`).
+- `updates(N)` - maximum total number of progress reports, including one
+  final report. Reports are distributed across the maximum generations;
+  early stopping may produce fewer reports. Set to `0` to disable progress
+  reporting (default: `0`).
 - `seed(S)` - positive integer random seed for reproducible runs.
 
 
@@ -172,6 +188,11 @@ The `run/4` predicate returns:
 - `improvements(I)` - number of generations that improved the global best.
 - `final_mean_fitness(M)` - mean fitness of the final population.
 - `final_diversity(D)` - diversity of the final population.
+
+Final population metrics are computed only when requested by the `run/4`
+predicate or required for progress reporting. The final report and returned
+statistics share the same metric values. Every initial and trial position
+is evaluated, including repeated positions; fitness caching is not performed.
 
 Fitness values are reported unchanged. The `objective/1` option only
 controls which values are considered better.

@@ -490,9 +490,11 @@ link in a web browser.</p>
 <h2>Algorithm<a class="headerlink" href="#algorithm" title="Link to this heading"></a></h2>
 <p>Differential Evolution maintains a population of real-valued vectors. In
 every generation each target vector (x_i) produces a trial vector by
-mutation followed by binomial crossover. The trial replaces the target
-when it has equal or better fitness (according to the selected
-objective).</p>
+mutation followed by binomial or exponential crossover. The trial
+replaces the target when it has equal or better fitness (according to
+the selected objective). Only strict best-fitness improvements increment
+the improvement count or reset the stagnation counter. All donors come
+from the preceding generation.</p>
 <p>Supported mutation strategies (selected with the <code class="docutils literal notranslate"><span class="pre">strategy/1</span></code> option):</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">rand/1/bin</span></code> (default)</p>
@@ -500,6 +502,8 @@ objective).</p>
 </pre></div>
 </div>
 </li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rand/1/exp</span></code> uses the same mutation formula with exponential
+crossover.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">best/1/bin</span></code></p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>v <span class="o">=</span> x_best <span class="o">+</span> <span class="nv">F</span> <span class="o">*</span> (x_r1 <span class="o">-</span> x_r2)
 </pre></div>
@@ -512,8 +516,12 @@ objective).</p>
 </li>
 </ul>
 <p>Binomial crossover mixes the mutant with the target; at least one
-component is always taken from the mutant. Trial vectors that leave the
-box constraints are clamped to the nearest bound.</p>
+component is always taken from the mutant. Exponential crossover takes a
+consecutive circular segment of mutant components, starting at a
+uniformly chosen coordinate and continuing while random draws are below
+<code class="docutils literal notranslate"><span class="pre">CR</span></code>. Donor and crossover indices use the inclusive
+<code class="docutils literal notranslate"><span class="pre">fast_random::between/3</span></code> predicate. Trial vectors that leave the box
+constraints are clamped to the nearest bound.</p>
 </section>
 <section id="convergence-speed-comparison">
 <h2>Convergence speed comparison<a class="headerlink" href="#convergence-speed-comparison" title="Link to this heading"></a></h2>
@@ -586,7 +594,11 @@ population or a slightly smaller differential weight (<code class="docutils lite
 <code class="docutils literal notranslate"><span class="pre">differential_evolution_problem_protocol</span></code> by defining:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">position_bounds(-Bounds)</span></code> - returns one numeric <code class="docutils literal notranslate"><span class="pre">Lower-Upper</span></code>
-pair per dimension, with <code class="docutils literal notranslate"><span class="pre">Lower</span> <span class="pre">=&lt;</span> <span class="pre">Upper</span></code>.</p></li>
+pair per dimension in a ground, non-empty proper list, with
+<code class="docutils literal notranslate"><span class="pre">Lower</span> <span class="pre">=&lt;</span> <span class="pre">Upper</span></code>. Equal bounds fix the corresponding coordinate at
+that value throughout the run; for example, <code class="docutils literal notranslate"><span class="pre">3-3</span></code> fixes the
+coordinate at <code class="docutils literal notranslate"><span class="pre">3</span></code>. Random initialization is continuous for integer,
+floating-point, and mixed bound endpoints.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">fitness(+Position,</span> <span class="pre">-Fitness)</span></code> - computes a numeric fitness value.
 The optimizer minimizes this value by default; use
 <code class="docutils literal notranslate"><span class="pre">objective(maximize)</span></code> to maximize it instead.</p></li>
@@ -594,8 +606,9 @@ The optimizer minimizes this value by default; use
 <p>Optionally, a problem object may also define:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">initial_positions(-Positions)</span></code> - returns a non-empty list of
-initial positions lying inside the bounds. When not defined, the
-algorithm generates a random initial population.</p></li>
+initial positions lying inside the bounds, with exactly
+<code class="docutils literal notranslate"><span class="pre">population_size(N)</span></code> ground positions of the declared dimension.
+When not defined, the algorithm generates a random initial population.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">stop_condition(+Generation,</span> <span class="pre">+BestPosition,</span> <span class="pre">+BestFitness)</span></code> -
 succeeds when the search should terminate early.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">progress(+Generation,</span> <span class="pre">+BestPosition,</span> <span class="pre">+BestFitness,</span> <span class="pre">+MeanFitness,</span> <span class="pre">+Diversity)</span></code></p>
@@ -612,7 +625,7 @@ report is produced when progress reporting is enabled.</p></li>
 <p>Options for the <code class="docutils literal notranslate"><span class="pre">run/3-4</span></code> predicates:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">strategy(Strategy)</span></code> - mutation strategy: <code class="docutils literal notranslate"><span class="pre">rand/1/bin</span></code> (default),
-<code class="docutils literal notranslate"><span class="pre">best/1/bin</span></code>, or <code class="docutils literal notranslate"><span class="pre">current-to-best/1/bin</span></code>.</p></li>
+<code class="docutils literal notranslate"><span class="pre">rand/1/exp</span></code>, <code class="docutils literal notranslate"><span class="pre">best/1/bin</span></code>, or <code class="docutils literal notranslate"><span class="pre">current-to-best/1/bin</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">objective(Objective)</span></code> - optimization direction, either <code class="docutils literal notranslate"><span class="pre">minimize</span></code>
 or <code class="docutils literal notranslate"><span class="pre">maximize</span></code> (default: <code class="docutils literal notranslate"><span class="pre">minimize</span></code>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">target_fitness(Fitness)</span></code> - numeric target that stops the run when
@@ -623,15 +636,17 @@ direction. Use <code class="docutils literal notranslate"><span class="pre">none
 <code class="docutils literal notranslate"><span class="pre">30</span></code>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">max_generations(N)</span></code> - maximum number of generations (default:
 <code class="docutils literal notranslate"><span class="pre">100</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">crossover_probability(CR)</span></code> - binomial crossover probability in
-<code class="docutils literal notranslate"><span class="pre">[0,1]</span></code> (default: <code class="docutils literal notranslate"><span class="pre">0.9</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">crossover_probability(CR)</span></code> - crossover probability in <code class="docutils literal notranslate"><span class="pre">[0,1]</span></code>
+(default: <code class="docutils literal notranslate"><span class="pre">0.9</span></code>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">differential_weight(F)</span></code> - positive scale factor for difference
 vectors (default: <code class="docutils literal notranslate"><span class="pre">0.8</span></code>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">stagnation_generations(N)</span></code> - number of consecutive generations
 without a strict best-fitness improvement before stopping. Set to
 <code class="docutils literal notranslate"><span class="pre">0</span></code> to disable (default: <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">updates(N)</span></code> - number of progress reports during the run. Set to
-<code class="docutils literal notranslate"><span class="pre">0</span></code> to disable progress reporting (default: <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">updates(N)</span></code> - maximum total number of progress reports, including
+one final report. Reports are distributed across the maximum
+generations; early stopping may produce fewer reports. Set to <code class="docutils literal notranslate"><span class="pre">0</span></code> to
+disable progress reporting (default: <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">seed(S)</span></code> - positive integer random seed for reproducible runs.</p></li>
 </ul>
 </section>
@@ -647,6 +662,11 @@ best.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">final_mean_fitness(M)</span></code> - mean fitness of the final population.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">final_diversity(D)</span></code> - diversity of the final population.</p></li>
 </ul>
+<p>Final population metrics are computed only when requested by the
+<code class="docutils literal notranslate"><span class="pre">run/4</span></code> predicate or required for progress reporting. The final report
+and returned statistics share the same metric values. Every initial and
+trial position is evaluated, including repeated positions; fitness
+caching is not performed.</p>
 <p>Fitness values are reported unchanged. The <code class="docutils literal notranslate"><span class="pre">objective/1</span></code> option only
 controls which values are considered better.</p>
 </section>

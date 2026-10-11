@@ -155,6 +155,14 @@ validation. Fixed singleton-class and attribute-free datasets, empty ensembles,
 perfect-learner handling, and temporary dataset cleanup. Expanded tests and
 documentation.
 
+* IMPROVED: The `differential_evolution` library with indexed donor lookup,
+fused mutation and binomial crossover, single-pass exponential crossover,
+combined selection and best tracking, and on-demand population statistics.
+Fixed random donor and crossover coordinate selection, continuous population
+initialization, equal-fitness trial replacement, bounds validation, and
+progress reporting. The `updates/1` option limits the total number of reports,
+including the final report. Expanded regression tests and documentation.
+
 * CHANGED: The `c45_classifier` library learned model representation to
 `c45_model(Tree, Statistics)` for population-weighted missing-value
 predictions. Raw trees remain accepted. Annotated exports delegate to the

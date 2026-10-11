@@ -22,9 +22,9 @@
 :- protocol(differential_evolution_problem_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-13,
+		date is 2026-11-11,
 		comment is 'Protocol for continuous bounded Differential Evolution problem definitions.',
 		see_also is [differential_evolution(_), differential_evolution(_, _)]
 	]).
@@ -32,7 +32,7 @@
 	:- public(position_bounds/1).
 	:- mode(position_bounds(-list(pair)), one).
 	:- info(position_bounds/1, [
-		comment is 'Returns one ``Lower-Upper`` numeric bound pair per dimension, with ``Lower =< Upper``.',
+		comment is 'Returns a ground, non-empty proper list of ``Lower-Upper`` numeric bound pairs, with ``Lower =< Upper``. Fixed dimensions are allowed.',
 		argnames is ['Bounds']
 	]).
 
@@ -46,7 +46,7 @@
 	:- public(initial_positions/1).
 	:- mode(initial_positions(-list(list(number))), zero_or_one).
 	:- info(initial_positions/1, [
-		comment is 'Optional. Returns a non-empty list of initial positions. When not defined, the algorithm generates a random initial population inside the position bounds.',
+		comment is 'Optional. Returns exactly the configured population size in ground initial positions inside the bounds. When not defined, the algorithm generates a continuous random initial population.',
 		argnames is ['Positions']
 	]).
 
@@ -60,7 +60,7 @@
 	:- public(progress/5).
 	:- mode(progress(+non_negative_integer, +list(number), +number, +number, +number), zero_or_one).
 	:- info(progress/5, [
-		comment is 'Optional. Called periodically with generation, best position, best fitness, mean population fitness, and population diversity (mean Euclidean distance from the centroid).',
+		comment is 'Optional. Called at most ``updates(N)`` times, including one final report, with generation, best position, best fitness, mean fitness, and mean Euclidean distance from the centroid.',
 		argnames is ['Generation', 'BestPosition', 'BestFitness', 'MeanFitness', 'Diversity']
 	]).
 

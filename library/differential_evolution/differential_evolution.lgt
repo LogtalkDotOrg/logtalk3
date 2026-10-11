@@ -23,12 +23,12 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-19,
+		date is 2026-10-11,
 		comment is 'Differential Evolution (DE/rand/1/bin, DE/rand/1/exp, DE/best/1/bin, and DE/current-to-best/1/bin) metaheuristic for continuous bounded optimization.',
 		parameters is [
-			'Problem' - 'Problem object implementing ``differential_evolution_protocol``.',
+			'Problem' - 'Problem object implementing ``differential_evolution_problem_protocol``.',
 			'RandomAlgorithm' - 'Random number generator algorithm for the ``fast_random`` library.'
 		],
 		remarks is [
@@ -41,24 +41,58 @@
 	]).
 
 	:- public(run/2).
-	:- mode(run(-list(number), -number), one).
+	:- mode(run(-list(number), -number), one_or_error).
 	:- info(run/2, [
 		comment is 'Runs Differential Evolution with default options and returns the best position and fitness found.',
-		argnames is ['BestPosition', 'BestFitness']
+		argnames is ['BestPosition', 'BestFitness'],
+		exceptions is [
+			'``Bounds`` returned by ``Problem::position_bounds/1`` is a variable' - instantiation_error,
+			'``Positions`` returned by ``Problem::initial_positions/1`` is a variable' - instantiation_error,
+			'``Fitness`` returned by ``Problem::fitness/2`` is a variable' - instantiation_error,
+			'``Bounds`` returned by ``Problem::position_bounds/1`` is not a valid list of position bounds' - domain_error(position_bounds, 'Bounds'),
+			'``Positions`` returned by ``Problem::initial_positions/1`` is not a valid initial population' - domain_error(initial_positions, 'Positions'),
+			'``Fitness`` returned by ``Problem::fitness/2`` is not a number' - domain_error(fitness, 'Fitness')
+		]
 	]).
 
 	:- public(run/3).
-	:- mode(run(-list(number), -number, +list(compound)), one).
+	:- mode(run(-list(number), -number, +list(compound)), one_or_error).
 	:- info(run/3, [
 		comment is 'Runs Differential Evolution with the given options and returns the best position and fitness found.',
-		argnames is ['BestPosition', 'BestFitness', 'Options']
+		argnames is ['BestPosition', 'BestFitness', 'Options'],
+		exceptions is [
+			'``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'``Bounds`` returned by ``Problem::position_bounds/1`` is a variable' - instantiation_error,
+			'``Positions`` returned by ``Problem::initial_positions/1`` is a variable' - instantiation_error,
+			'``Fitness`` returned by ``Problem::fitness/2`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
+			'``Bounds`` returned by ``Problem::position_bounds/1`` is not a valid list of position bounds' - domain_error(position_bounds, 'Bounds'),
+			'``Positions`` returned by ``Problem::initial_positions/1`` is not a valid initial population' - domain_error(initial_positions, 'Positions'),
+			'``Fitness`` returned by ``Problem::fitness/2`` is not a number' - domain_error(fitness, 'Fitness')
+		]
 	]).
 
 	:- public(run/4).
-	:- mode(run(-list(number), -number, -list(compound), +list(compound)), one).
+	:- mode(run(-list(number), -number, -list(compound), +list(compound)), one_or_error).
 	:- info(run/4, [
 		comment is 'Runs Differential Evolution with the given options and returns the best position, best fitness, and run statistics.',
 		argnames is ['BestPosition', 'BestFitness', 'Statistics', 'Options'],
+		exceptions is [
+			'``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'``Bounds`` returned by ``Problem::position_bounds/1`` is a variable' - instantiation_error,
+			'``Positions`` returned by ``Problem::initial_positions/1`` is a variable' - instantiation_error,
+			'``Fitness`` returned by ``Problem::fitness/2`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
+			'``Bounds`` returned by ``Problem::position_bounds/1`` is not a valid list of position bounds' - domain_error(position_bounds, 'Bounds'),
+			'``Positions`` returned by ``Problem::initial_positions/1`` is not a valid initial population' - domain_error(initial_positions, 'Positions'),
+			'``Fitness`` returned by ``Problem::fitness/2`` is not a number' - domain_error(fitness, 'Fitness')
+		],
 		remarks is [
 			'Statistics list' - 'Contains ``generations(N)``, ``evaluations(E)``, ``improvements(I)``, ``final_mean_fitness(M)``, and ``final_diversity(D)``.'
 		]
@@ -69,11 +103,7 @@
 	]).
 
 	:- uses(fast_random(_RandomAlgorithm_), [
-		random/1, random/3, randomize/1
-	]).
-
-	:- uses(integer, [
-		between/3
+		random/1, randomize/1, between/3
 	]).
 
 	:- uses(linear_algebra, [
@@ -81,7 +111,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, nth1/3
+		length/2
 	]).
 
 	:- uses(numberlist, [
@@ -95,12 +125,15 @@
 	% public entry points
 
 	run(BestPosition, BestFitness) :-
-		run(BestPosition, BestFitness, _Statistics, []).
+		run_engine(false, BestPosition, BestFitness, _Statistics, []).
 
 	run(BestPosition, BestFitness, UserOptions) :-
-		run(BestPosition, BestFitness, _Statistics, UserOptions).
+		run_engine(false, BestPosition, BestFitness, _Statistics, UserOptions).
 
 	run(BestPosition, BestFitness, Statistics, UserOptions) :-
+		run_engine(true, BestPosition, BestFitness, Statistics, UserOptions).
+
+	run_engine(StatisticsRequired, BestPosition, BestFitness, Statistics, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
 		(	^^option(seed(Seed), Options) ->
@@ -119,27 +152,28 @@
 		^^option(target_fitness(TargetFitness), Options),
 		^^option(stagnation_generations(StagnationGenerations), Options),
 		^^option(updates(Updates), Options),
-		(	Updates > 0 ->
-			UpdateInterval is max(1, (MaxGenerations - 1) // Updates)
-		;	UpdateInterval = 0
-		),
+		ReportCount is min(Updates, MaxGenerations),
+		UpdateInterval = reports(MaxGenerations, ReportCount, StatisticsRequired, FinalMetrics),
 		initial_population(NP, Dimension, Bounds, Population0),
 		evaluate_population(Population0, Objective, Evaluated0, BestPosition0, BestFitness0),
 		loop(
-			0, MaxGenerations, UpdateInterval, Dimension, Bounds,
+			0, MaxGenerations, UpdateInterval, size(NP, Dimension), Bounds,
 			Strategy, CR, F, Objective, TargetFitness, StagnationGenerations, 0,
 			Evaluated0, BestPosition0, BestFitness0, 0,
-			FinalPopulation, BestPosition, BestFitness, Generations, Improvements
+			_FinalPopulation, BestPosition, BestFitness, Generations, Improvements
 		),
-		population_metrics(FinalPopulation, MeanFitness, Diversity),
-		Evaluations is NP * (Generations + 1),
-		Statistics = [
-			generations(Generations),
-			evaluations(Evaluations),
-			improvements(Improvements),
-			final_mean_fitness(MeanFitness),
-			final_diversity(Diversity)
-		].
+		(	StatisticsRequired == true ->
+			FinalMetrics = metrics(MeanFitness, Diversity),
+			Evaluations is NP * (Generations + 1),
+			Statistics = [
+				generations(Generations),
+				evaluations(Evaluations),
+				improvements(Improvements),
+				final_mean_fitness(MeanFitness),
+				final_diversity(Diversity)
+			]
+		;	Statistics = []
+		).
 
 	% main generational loop
 
@@ -190,9 +224,9 @@
 		Population0, BestPosition0, BestFitness0, Improvements0,
 		FinalPopulation, BestPosition, BestFitness, Generations, Improvements
 	) :-
+		report_progress(Generation, UpdateInterval, Population0, BestPosition0, BestFitness0),
 		generation_step(Strategy, Population0, Dimension, Bounds, CR, F, BestPosition0, Trials),
-		select_population(Population0, Trials, Objective, Population1),
-		population_best(Population1, Objective, CandidatePosition, CandidateFitness),
+		select_population(Population0, Trials, Objective, Population1, CandidatePosition, CandidateFitness),
 		(	better_fitness(Objective, CandidateFitness, BestFitness0) ->
 			BestPosition1 = CandidatePosition,
 			BestFitness1 = CandidateFitness,
@@ -204,7 +238,6 @@
 			StagCount1 is StagCount0 + 1
 		),
 		Generation1 is Generation + 1,
-		report_progress(Generation1, UpdateInterval, Population1, BestPosition1, BestFitness1),
 		loop(Generation1, MaxGenerations, UpdateInterval, Dimension, Bounds,
 			Strategy, CR, F, Objective, TargetFitness, StagnationGenerations, StagCount1,
 			Population1, BestPosition1, BestFitness1, Improvements1,
@@ -212,183 +245,168 @@
 
 	% generation step - strategy dispatch
 
-	generation_step(rand/1/bin, Population, Dimension, Bounds, CR, F, _Best, Trials) :-
+	generation_step(Strategy, Population, size(NP, Dimension), Bounds, CR, F, Best, Trials) :-
+		population_index(Population, Index),
+		generate_trials(Strategy, Population, NP, Index, Dimension, Bounds, CR, F, Best, Trials).
+
+	generate_trials(rand/1/bin, Population, NP, Index, Dimension, Bounds, CR, F, _Best, Trials) :-
 		!,
-		length(Population, NP),
-		generation_rand(1, NP, Population, Dimension, Bounds, CR, F, bin, Trials).
-	generation_step(rand/1/exp, Population, Dimension, Bounds, CR, F, _Best, Trials) :-
+		generation_rand(1, NP, Population, Index, Dimension, Bounds, CR, F, bin, Trials).
+	generate_trials(rand/1/exp, Population, NP, Index, Dimension, Bounds, CR, F, _Best, Trials) :-
 		!,
-		length(Population, NP),
-		generation_rand(1, NP, Population, Dimension, Bounds, CR, F, exp, Trials).
-	generation_step(best/1/bin, Population, Dimension, Bounds, CR, F, Best, Trials) :-
+		generation_rand(1, NP, Population, Index, Dimension, Bounds, CR, F, exp, Trials).
+	generate_trials(best/1/bin, Population, NP, Index, Dimension, Bounds, CR, F, Best, Trials) :-
 		!,
-		length(Population, NP),
-		generation_best(1, NP, Population, Dimension, Bounds, CR, F, Best, Trials).
-	generation_step(current-to-best/1/bin, Population, Dimension, Bounds, CR, F, Best, Trials) :-
-		length(Population, NP),
-		generation_current_to_best(1, NP, Population, Dimension, Bounds, CR, F, Best, Trials).
+		generation_best(1, NP, Population, Index, Dimension, Bounds, CR, F, Best, Trials).
+	generate_trials(current-to-best/1/bin, Population, NP, Index, Dimension, Bounds, CR, F, Best, Trials) :-
+		generation_current_to_best(1, NP, Population, Index, Dimension, Bounds, CR, F, Best, Trials).
 
 	% DE/rand/1/bin and DE/rand/1/exp
 
-	generation_rand(I, NP, _Population, _Dimension, _Bounds, _CR, _F, _Xover, []) :-
-		I > NP,
+	generation_rand(_, _, [], _, _, _, _, _, _, []) :-
 		!.
-	generation_rand(I, NP, Population, Dimension, Bounds, CR, F, Xover, [Trial| Trials]) :-
-		nth1(I, Population, Target-_),
+	generation_rand(I, NP, [Target-_| Population], Index, Dimension, Bounds, CR, F, Xover, [Trial| Trials]) :-
 		random_distinct_indices_3(NP, I, R1, R2, R3),
-		nth1(R1, Population, Xr1-_),
-		nth1(R2, Population, Xr2-_),
-		nth1(R3, Population, Xr3-_),
-		mutate_rand(Xr1, Xr2, Xr3, F, Dimension, Mutant0),
-		repair_bounds(Mutant0, Bounds, Mutant),
-		crossover(Xover, Target, Mutant, CR, Dimension, Trial),
+		indexed_position(Index, R1, Xr1),
+		indexed_position(Index, R2, Xr2),
+		indexed_position(Index, R3, Xr3),
+		rand_trial(Xover, Target, Xr1, Xr2, Xr3, Bounds, CR, F, Dimension, Trial),
 		I1 is I + 1,
-		generation_rand(I1, NP, Population, Dimension, Bounds, CR, F, Xover, Trials).
+		generation_rand(I1, NP, Population, Index, Dimension, Bounds, CR, F, Xover, Trials).
 
-	mutate_rand(Xr1, Xr2, Xr3, F, Dimension, Mutant) :-
-		mutate_rand_(1, Dimension, Xr1, Xr2, Xr3, F, Mutant).
+	rand_trial(bin, Target, Xr1, Xr2, Xr3, Bounds, CR, F, Dimension, Trial) :-
+		!,
+		between(1, Dimension, Forced),
+		rand_bin(1, Target, Xr1, Xr2, Xr3, Bounds, CR, F, Forced, Trial).
+	rand_trial(exp, Target, Xr1, Xr2, Xr3, Bounds, CR, F, Dimension, Trial) :-
+		mutate_rand(Xr1, Xr2, Xr3, F, Bounds, Mutant),
+		crossover(exp, Target, Mutant, CR, Dimension, Trial).
 
-	mutate_rand_(J, Dimension, _, _, _, _, []) :-
-		J > Dimension,
+	mutate_rand([], [], [], _, [], []) :-
 		!.
-	mutate_rand_(J, Dimension, Xr1, Xr2, Xr3, F, [V| Vs]) :-
-		nth1(J, Xr1, A),
-		nth1(J, Xr2, B),
-		nth1(J, Xr3, C),
-		V is A + F * (B - C),
+	mutate_rand([A| As], [B| Bs], [C| Cs], F, [Low-High| Bounds], [V| Vs]) :-
+		Value is A + F * (B - C),
+		clamp_coordinate(Value, Low, High, V),
+		mutate_rand(As, Bs, Cs, F, Bounds, Vs).
+
+	rand_bin(_, [], [], [], [], [], _, _, _, []) :-
+		!.
+	rand_bin(J, [X| Target], [A| As], [B| Bs], [C| Cs], [Low-High| Bounds], CR, F, Forced, [U| Trial]) :-
+		Value is A + F * (B - C),
+		clamp_coordinate(Value, Low, High, V),
+		choose_coordinate(J, X, V, CR, Forced, U),
 		J1 is J + 1,
-		mutate_rand_(J1, Dimension, Xr1, Xr2, Xr3, F, Vs).
+		rand_bin(J1, Target, As, Bs, Cs, Bounds, CR, F, Forced, Trial).
 
 	% DE/best/1/bin
 
-	generation_best(I, NP, _Population, _Dimension, _Bounds, _CR, _F, _Best, []) :-
-		I > NP,
+	generation_best(_, _, [], _, _, _, _, _, _, []) :-
 		!.
-	generation_best(I, NP, Population, Dimension, Bounds, CR, F, Best, [Trial| Trials]) :-
-		nth1(I, Population, Target-_),
+	generation_best(I, NP, [Target-_| Population], Index, Dimension, Bounds, CR, F, Best, [Trial| Trials]) :-
 		random_distinct_indices_2(NP, I, R1, R2),
-		nth1(R1, Population, Xr1-_),
-		nth1(R2, Population, Xr2-_),
-		mutate_best(Best, Xr1, Xr2, F, Dimension, Mutant0),
-		repair_bounds(Mutant0, Bounds, Mutant),
-		crossover(bin, Target, Mutant, CR, Dimension, Trial),
+		indexed_position(Index, R1, Xr1),
+		indexed_position(Index, R2, Xr2),
+		between(1, Dimension, Forced),
+		best_bin(1, Target, Best, Xr1, Xr2, Bounds, CR, F, Forced, Trial),
 		I1 is I + 1,
-		generation_best(I1, NP, Population, Dimension, Bounds, CR, F, Best, Trials).
+		generation_best(I1, NP, Population, Index, Dimension, Bounds, CR, F, Best, Trials).
 
-	mutate_best(Best, Xr1, Xr2, F, Dimension, Mutant) :-
-		mutate_best_(1, Dimension, Best, Xr1, Xr2, F, Mutant).
-
-	mutate_best_(J, Dimension, _, _, _, _, []) :-
-		J > Dimension,
+	best_bin(_, [], [], [], [], [], _, _, _, []) :-
 		!.
-	mutate_best_(J, Dimension, Best, Xr1, Xr2, F, [V| Vs]) :-
-		nth1(J, Best, B),
-		nth1(J, Xr1, A),
-		nth1(J, Xr2, C),
-		V is B + F * (A - C),
+	best_bin(J, [X| Target], [B| Best], [A| As], [C| Cs], [Low-High| Bounds], CR, F, Forced, [U| Trial]) :-
+		Value is B + F * (A - C),
+		clamp_coordinate(Value, Low, High, V),
+		choose_coordinate(J, X, V, CR, Forced, U),
 		J1 is J + 1,
-		mutate_best_(J1, Dimension, Best, Xr1, Xr2, F, Vs).
+		best_bin(J1, Target, Best, As, Cs, Bounds, CR, F, Forced, Trial).
 
 	% DE/current-to-best/1/bin
 
-	generation_current_to_best(I, NP, _Population, _Dimension, _Bounds, _CR, _F, _Best, []) :-
-		I > NP,
+	generation_current_to_best(_, _, [], _, _, _, _, _, _, []) :-
 		!.
-	generation_current_to_best(I, NP, Population, Dimension, Bounds, CR, F, Best, [Trial| Trials]) :-
-		nth1(I, Population, Target-_),
+	generation_current_to_best(I, NP, [Target-_| Population], Index, Dimension, Bounds, CR, F, Best, [Trial| Trials]) :-
 		random_distinct_indices_2(NP, I, R1, R2),
-		nth1(R1, Population, Xr1-_),
-		nth1(R2, Population, Xr2-_),
-		mutate_current_to_best(Target, Best, Xr1, Xr2, F, Dimension, Mutant0),
-		repair_bounds(Mutant0, Bounds, Mutant),
-		crossover(bin, Target, Mutant, CR, Dimension, Trial),
+		indexed_position(Index, R1, Xr1),
+		indexed_position(Index, R2, Xr2),
+		between(1, Dimension, Forced),
+		current_bin(1, Target, Best, Xr1, Xr2, Bounds, CR, F, Forced, Trial),
 		I1 is I + 1,
-		generation_current_to_best(I1, NP, Population, Dimension, Bounds, CR, F, Best, Trials).
+		generation_current_to_best(I1, NP, Population, Index, Dimension, Bounds, CR, F, Best, Trials).
 
 	% v = x_i + F*(x_best - x_i) + F*(x_r1 - x_r2)
-	mutate_current_to_best(Xi, Best, Xr1, Xr2, F, Dimension, Mutant) :-
-		mutate_current_to_best_(1, Dimension, Xi, Best, Xr1, Xr2, F, Mutant).
-
-	mutate_current_to_best_(J, Dimension, _, _, _, _, _, []) :-
-		J > Dimension,
+	current_bin(_, [], [], [], [], [], _, _, _, []) :-
 		!.
-	mutate_current_to_best_(J, Dimension, Xi, Best, Xr1, Xr2, F, [V| Vs]) :-
-		nth1(J, Xi,   XiJ),
-		nth1(J, Best, BestJ),
-		nth1(J, Xr1,  R1J),
-		nth1(J, Xr2,  R2J),
-		V is XiJ + F*(BestJ - XiJ) + F*(R1J - R2J),
+	current_bin(J, [X| Target], [B| Best], [A| As], [C| Cs], [Low-High| Bounds], CR, F, Forced, [U| Trial]) :-
+		Value is X + F*(B - X) + F*(A - C),
+		clamp_coordinate(Value, Low, High, V),
+		choose_coordinate(J, X, V, CR, Forced, U),
 		J1 is J + 1,
-		mutate_current_to_best_(J1, Dimension, Xi, Best, Xr1, Xr2, F, Vs).
+		current_bin(J1, Target, Best, As, Cs, Bounds, CR, F, Forced, Trial).
 
 	% Crossover (binomial and exponential)
 
-	crossover(bin, Target, Mutant, CR, Dimension, Trial) :-
-		random(1, Dimension, Jrand),
-		crossover_bin(1, Dimension, Target, Mutant, CR, Jrand, Trial).
-
 	crossover(exp, Target, Mutant, CR, Dimension, Trial) :-
-		random(1, Dimension, Jstart),
-		% copy target first, then overwrite a consecutive segment from the mutant
-		Trial0 = Target,
-		crossover_exp(Jstart, Dimension, Mutant, CR, 0, Trial0, Trial).
-
-	% binomial
-
-	crossover_bin(J, Dimension, _, _, _, _, []) :-
-		J > Dimension,
-		!.
-	crossover_bin(J, Dimension, Target, Mutant, CR, Jrand, [Uj| Ujs]) :-
-		nth1(J, Target, Xj),
-		nth1(J, Mutant, Vj),
-		random(R),
-		(	(R < CR ; J =:= Jrand) ->
-			Uj = Vj
-		;	Uj = Xj
-		),
-		J1 is J + 1,
-		crossover_bin(J1, Dimension, Target, Mutant, CR, Jrand, Ujs).
+		between(1, Dimension, Jstart),
+		crossover_length(1, Dimension, CR, Length),
+		crossover_segment(1, Target, Mutant, Jstart, Length, Dimension, Trial).
 
 	% exponential
 	%
 	% starting at Jstart, take consecutive components from the mutant
 	% while rand < CR (and not a full cycle); at least one component is taken
 
-	crossover_exp(J, Dimension, Mutant, CR, L, Trial0, Trial) :-
-		nth1(J, Mutant, Vj),
-		replace_nth1(J, Trial0, Vj, Trial1),
-		L1 is L + 1,
-		(	L1 >= Dimension ->
-			Trial = Trial1				% whole vector taken from mutant
-		;	random(R),
-			(	R < CR ->
-				J1 is (J mod Dimension) + 1,
-				crossover_exp(J1, Dimension, Mutant, CR, L1, Trial1, Trial)
-			;	Trial = Trial1
-			)
+	crossover_length(Length, Dimension, _, Length) :-
+		Length >= Dimension,
+		!.
+	crossover_length(Length0, Dimension, CR, Length) :-
+		random(R),
+		(	R < CR ->
+			Length1 is Length0 + 1,
+			crossover_length(Length1, Dimension, CR, Length)
+		;	Length = Length0
 		).
 
-	replace_nth1(1, [_|T], V, [V|T]) :-
+	crossover_segment(_, [], [], _, _, _, []) :-
 		!.
-	replace_nth1(N, [H|T], V, [H|T2]) :-
-		N > 1,
-		N1 is N - 1,
-		replace_nth1(N1, T, V, T2).
+	crossover_segment(J, [X| Target], [V| Mutant], Start, Length, Dimension, [U| Trial]) :-
+		Offset is (J - Start + Dimension) mod Dimension,
+		(	Offset < Length ->
+			U = V
+		;	U = X
+		),
+		J1 is J + 1,
+		crossover_segment(J1, Target, Mutant, Start, Length, Dimension, Trial).
 
 	% selection (one-to-one)
 
-	select_population([], [], _Objective, []).
-	select_population([Target-TargetFit| Targets], [Trial| Trials], Objective, [Selected| Selecteds]) :-
+	select_population([Target| Targets], [Trial| Trials], Objective, [Selected| Selecteds], BestPosition, BestFitness) :-
+		select_individual(Target, Trial, Objective, Selected),
+		Selected = Position-Fitness,
+		select_remaining(Targets, Trials, Objective, Selecteds, Position, Fitness, BestPosition, BestFitness).
+
+	select_remaining([], [], _, [], BestPosition, BestFitness, BestPosition, BestFitness) :-
+		!.
+	select_remaining([Target| Targets], [Trial| Trials], Objective, [Selected| Selecteds], BestPosition0, BestFitness0, BestPosition, BestFitness) :-
+		select_individual(Target, Trial, Objective, Selected),
+		Selected = Position-Fitness,
+		(	better_fitness(Objective, Fitness, BestFitness0) ->
+			BestPosition1 = Position,
+			BestFitness1 = Fitness
+		;	BestPosition1 = BestPosition0,
+			BestFitness1 = BestFitness0
+		),
+		select_remaining(Targets, Trials, Objective, Selecteds, BestPosition1, BestFitness1, BestPosition, BestFitness).
+
+	select_individual(Target-TargetFit, Trial, Objective, Selected) :-
 		fitness(Trial, TrialFit),
 		(	number(TrialFit) ->
 			true
 		;	domain_error(fitness, TrialFit)
 		),
-		(	better_fitness(Objective, TrialFit, TargetFit) ->
+		(	acceptable_fitness(Objective, TrialFit, TargetFit) ->
 			Selected = Trial-TrialFit
 		;	Selected = Target-TargetFit
-		),
-		select_population(Targets, Trials, Objective, Selecteds).
+		).
 
 	% population predicates
 
@@ -408,17 +426,15 @@
 		N1 is N - 1,
 		random_population(N1, Dimension, Bounds, Individuals).
 
-	random_individual(Dimension, Bounds, Individual) :-
-		random_individual_(1, Dimension, Bounds, Individual).
+	random_individual(_Dimension, Bounds, Individual) :-
+		random_coordinates(Bounds, Individual).
 
-	random_individual_(J, Dimension, _, []) :-
-		J > Dimension,
-		!.
-	random_individual_(J, Dimension, Bounds, [X| Xs]) :-
-		nth1(J, Bounds, Low-High),
-		random(Low, High, X),
-		J1 is J + 1,
-		random_individual_(J1, Dimension, Bounds, Xs).
+	random_coordinates([], []).
+	random_coordinates([Low-High| Bounds], [X| Xs]) :-
+		random(R),
+		Value is Low + R * (High - Low),
+		X is max(Low, min(High, Value)),
+		random_coordinates(Bounds, Xs).
 
 	evaluate_population([Individual| Individuals], Objective, [Individual-Fitness| Rest], BestPos, BestFit) :-
 		fitness(Individual, Fitness),
@@ -441,37 +457,79 @@
 		),
 		evaluate_remaining(Individuals, Objective, Rest, BestPos1, BestFit1, BestPos, BestFit).
 
-	population_best([Individual-Fitness| Rest], Objective, BestPos, BestFit) :-
-		population_best_(Rest, Objective, Individual, Fitness, BestPos, BestFit).
-
-	population_best_([], _Objective, BestPos, BestFit, BestPos, BestFit).
-	population_best_([Individual-Fitness| Rest], Objective, BestPos0, BestFit0, BestPos, BestFit) :-
-		(	better_fitness(Objective, Fitness, BestFit0) ->
-			population_best_(Rest, Objective, Individual, Fitness, BestPos, BestFit)
-		;	population_best_(Rest, Objective, BestPos0, BestFit0, BestPos, BestFit)
-		).
-
 	% auxiliary predicates
 
-	repair_bounds([], [], []).
-	repair_bounds([X| Xs], [Low-High| Bounds], [Y| Ys]) :-
-		(	X < Low -> Y = Low
-		;	X > High -> Y = High
-		;	Y = X
-		),
-		repair_bounds(Xs, Bounds, Ys).
+	population_index(Population, index(Span, Root)) :-
+		index_level(Population, 1, Span, Root).
+
+	index_level(Entries, Span0, Span, Root) :-
+		index_nodes(Entries, Nodes),
+		(	Nodes = [Root] ->
+			Span = Span0
+		;	Span1 is Span0 * 16,
+			index_level(Nodes, Span1, Span, Root)
+		).
+
+	index_nodes([], []) :-
+		!.
+	index_nodes(Entries, [Node| Nodes]) :-
+		index_chunk(16, Entries, Chunk, Rest),
+		Node =.. [items| Chunk],
+		index_nodes(Rest, Nodes).
+
+	index_chunk(0, Entries, [], Entries) :-
+		!.
+	index_chunk(_, [], [], []) :-
+		!.
+	index_chunk(Count, [Entry| Entries], [Entry| Chunk], Rest) :-
+		Count1 is Count - 1,
+		index_chunk(Count1, Entries, Chunk, Rest).
+
+	indexed_position(index(1, Node), I, Position) :-
+		!,
+		arg(I, Node, Position-_).
+	indexed_position(index(Span, Node), I, Position) :-
+		Slot is (I - 1) // Span + 1,
+		Offset is (I - 1) mod Span + 1,
+		arg(Slot, Node, Child),
+		ChildSpan is Span // 16,
+		indexed_position(index(ChildSpan, Child), Offset, Position).
+
+	clamp_coordinate(Value, Low, High, Clamped) :-
+		(	Value < Low ->
+			Clamped = Low
+		;	Value > High ->
+			Clamped = High
+		;	Clamped = Value
+		).
+
+	choose_coordinate(J, Target, Mutant, CR, Forced, Value) :-
+		random(R),
+		(	(R < CR; J =:= Forced) ->
+			Value = Mutant
+		;	Value = Target
+		).
 
 	random_distinct_indices_3(NP, Forbidden, R1, R2, R3) :-
 		repeat,
-			between(1, NP, R1), R1 =\= Forbidden,
-			between(1, NP, R2), R2 =\= Forbidden, R2 =\= R1,
-			between(1, NP, R3), R3 =\= Forbidden, R3 =\= R1, R3 =\= R2,
+			between(1, NP, R1),
+			R1 =\= Forbidden,
+			between(1, NP, R2),
+			R2 =\= Forbidden,
+			R2 =\= R1,
+			between(1, NP, R3),
+			R3 =\= Forbidden,
+			R3 =\= R1,
+			R3 =\= R2,
 		!.
 
 	random_distinct_indices_2(NP, Forbidden, R1, R2) :-
 		repeat,
-			between(1, NP, R1), R1 =\= Forbidden,
-			between(1, NP, R2), R2 =\= Forbidden, R2 =\= R1,
+			between(1, NP, R1),
+			R1 =\= Forbidden,
+			between(1, NP, R2),
+			R2 =\= Forbidden,
+			R2 =\= R1,
 		!.
 
 	better_fitness(minimize, Fitness, Reference) :-
@@ -479,21 +537,34 @@
 	better_fitness(maximize, Fitness, Reference) :-
 		Fitness > Reference.
 
+	acceptable_fitness(minimize, Fitness, Reference) :-
+		Fitness =< Reference.
+	acceptable_fitness(maximize, Fitness, Reference) :-
+		Fitness >= Reference.
+
 	target_fitness_reached(minimize, Fitness, Target) :-
 		number(Target), Fitness =< Target.
 	target_fitness_reached(maximize, Fitness, Target) :-
 		number(Target), Fitness >= Target.
 
-	validate_bounds([]) :-
-		!.
-	validate_bounds([Low-High| Bounds]) :-
-		number(Low), number(High), Low =< High,
-		!,
-		validate_bounds(Bounds).
 	validate_bounds(Bounds) :-
-		domain_error(position_bounds, Bounds).
+		(	ground(Bounds),
+			Bounds = [_| _],
+			valid_bounds(Bounds) ->
+			true
+		;	domain_error(position_bounds, Bounds)
+		).
+
+	valid_bounds([]).
+	valid_bounds([Low-High| Bounds]) :-
+		number(Low),
+		number(High),
+		Low =< High,
+		valid_bounds(Bounds).
 
 	valid_positions(Positions, Bounds, NP) :-
+		ground(Positions),
+		valid(list, Positions),
 		length(Positions, NP),
 		valid_positions_(Positions, Bounds).
 
@@ -510,26 +581,22 @@
 	% metrics and progress
 
 	population_metrics(Population, MeanFitness, Diversity) :-
-		sum_fitnesses(Population, 0.0, FitSum, 0, Count),
-		MeanFitness is FitSum / Count,
 		Population = [First-_| _],
 		new_vector_like(First, Zeros),
-		sum_positions(Population, Zeros, Sums),
+		sum_population(Population, Zeros, 0.0, 0, Sums, FitSum, Count),
+		MeanFitness is FitSum / Count,
 		Scale is 1.0 / Count,
 		rescale(Sums, Scale, Centroid),
 		sum_distances(Population, Centroid, 0.0, DistSum),
 		Diversity is DistSum / Count.
 
-	sum_fitnesses([], S, S, C, C).
-	sum_fitnesses([_-F| Ps], S0, S, C0, C) :-
-		S1 is S0 + F,
-		C1 is C0 + 1,
-		sum_fitnesses(Ps, S1, S, C1, C).
-
-	sum_positions([], Sums, Sums).
-	sum_positions([Position-_| Positions], Sums0, Sums) :-
+	sum_population([], Sums, FitSum, Count, Sums, FitSum, Count) :-
+		!.
+	sum_population([Position-Fitness| Positions], Sums0, FitSum0, Count0, Sums, FitSum, Count) :-
 		add_vectors(Position, Sums0, Sums1),
-		sum_positions(Positions, Sums1, Sums).
+		FitSum1 is FitSum0 + Fitness,
+		Count1 is Count0 + 1,
+		sum_population(Positions, Sums1, FitSum1, Count1, Sums, FitSum, Count).
 
 	sum_distances([], _, Sum, Sum).
 	sum_distances([Position-_| Positions], Centroid, Sum0, Sum) :-
@@ -544,19 +611,25 @@
 		SquaredDistance1 is SquaredDistance0 + Distance*Distance,
 		squared_distance(As, Bs, SquaredDistance1, SquaredDistance).
 
-	report_progress(Generation, UpdateInterval, Population, BestPos, BestFit) :-
-		UpdateInterval > 0,
+	report_progress(Generation, reports(MaxGenerations, Count, _, _), Population, BestPos, BestFit) :-
+		Count > 0,
 		Generation > 0,
-		Generation mod UpdateInterval =:= 0,
+		Generation < MaxGenerations,
+		Generation * Count // MaxGenerations > (Generation - 1) * Count // MaxGenerations,
 		!,
 		call_progress(Generation, Population, BestPos, BestFit).
 	report_progress(_, _, _, _, _).
 
-	report_final(Generation, UpdateInterval, Population, BestPos, BestFit) :-
-		UpdateInterval > 0,
-		!,
-		call_progress(Generation, Population, BestPos, BestFit).
-	report_final(_, _, _, _, _).
+	report_final(Generation, reports(_, Count, StatisticsRequired, Metrics), Population, BestPos, BestFit) :-
+		(	(Count > 0; StatisticsRequired == true) ->
+			population_metrics(Population, MeanFitness, Diversity),
+			Metrics = metrics(MeanFitness, Diversity),
+			(	Count > 0 ->
+				ignore(progress(Generation, BestPos, BestFit, MeanFitness, Diversity))
+			;	true
+			)
+		;	Metrics = none
+		).
 
 	call_progress(Generation, Population, BestPos, BestFit) :-
 		population_metrics(Population, MeanFitness, Diversity),
@@ -611,7 +684,7 @@
 		date is 2026-08-13,
 		comment is 'Differential Evolution using the Xoshiro128++ random number generator.',
 		parameters is [
-			'Problem' - 'Problem object implementing ``differential_evolution_protocol``.'
+			'Problem' - 'Problem object implementing ``differential_evolution_problem_protocol``.'
 		],
 		see_also is [differential_evolution(_, _), differential_evolution_problem_protocol]
 	]).

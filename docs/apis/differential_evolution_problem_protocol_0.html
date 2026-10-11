@@ -474,8 +474,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-08-13</div>
+<div class="line"><strong>Version:</strong> 2:0:0</div>
+<div class="line"><strong>Date:</strong> 2026-11-11</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -521,7 +521,7 @@
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
 <section id="position-bounds-1">
 <span id="differential-evolution-problem-protocol-0-position-bounds-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">position_bounds/1</span></code></a><a class="headerlink" href="#position-bounds-1" title="Link to this heading"></a></h3>
-<p>Returns one <code class="docutils literal notranslate"><span class="pre">Lower-Upper</span></code> numeric bound pair per dimension, with <code class="docutils literal notranslate"><span class="pre">Lower</span> <span class="pre">=&lt;</span> <span class="pre">Upper</span></code>.</p>
+<p>Returns a ground, non-empty proper list of <code class="docutils literal notranslate"><span class="pre">Lower-Upper</span></code> numeric bound pairs, with <code class="docutils literal notranslate"><span class="pre">Lower</span> <span class="pre">=&lt;</span> <span class="pre">Upper</span></code>. Fixed dimensions are allowed.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -563,7 +563,7 @@
 </section>
 <section id="initial-positions-1">
 <span id="differential-evolution-problem-protocol-0-initial-positions-1"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">initial_positions/1</span></code></a><a class="headerlink" href="#initial-positions-1" title="Link to this heading"></a></h3>
-<p>Optional. Returns a non-empty list of initial positions. When not defined, the algorithm generates a random initial population inside the position bounds.</p>
+<p>Optional. Returns exactly the configured population size in ground initial positions inside the bounds. When not defined, the algorithm generates a continuous random initial population.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -605,7 +605,7 @@
 </section>
 <section id="progress-5">
 <span id="differential-evolution-problem-protocol-0-progress-5"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">progress/5</span></code></a><a class="headerlink" href="#progress-5" title="Link to this heading"></a></h3>
-<p>Optional. Called periodically with generation, best position, best fitness, mean population fitness, and population diversity (mean Euclidean distance from the centroid).</p>
+<p>Optional. Called at most <code class="docutils literal notranslate"><span class="pre">updates(N)</span></code> times, including one final report, with generation, best position, best fitness, mean fitness, and mean Euclidean distance from the centroid.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

@@ -8,7 +8,7 @@
 ``differential_evolution(Problem)``
 ===================================
 
-* ``Problem`` - Problem object implementing ``differential_evolution_protocol``.
+* ``Problem`` - Problem object implementing ``differential_evolution_problem_protocol``.
 
 
 Differential Evolution using the Xoshiro128++ random number generator.

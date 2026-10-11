@@ -466,7 +466,7 @@
 <section id="differential-evolution-problem-randomalgorithm">
 <h1><code class="docutils literal notranslate"><span class="pre">differential_evolution(Problem,RandomAlgorithm)</span></code><a class="headerlink" href="#differential-evolution-problem-randomalgorithm" title="Link to this heading"></a></h1>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Problem</span></code> - Problem object implementing <code class="docutils literal notranslate"><span class="pre">differential_evolution_protocol</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Problem</span></code> - Problem object implementing <code class="docutils literal notranslate"><span class="pre">differential_evolution_problem_protocol</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">RandomAlgorithm</span></code> - Random number generator algorithm for the <code class="docutils literal notranslate"><span class="pre">fast_random</span></code> library.</p></li>
 </ul>
 <p>Differential Evolution (DE/rand/1/bin, DE/rand/1/exp, DE/best/1/bin, and DE/current-to-best/1/bin) metaheuristic for continuous bounded optimization.</p>
@@ -478,8 +478,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-08-19</div>
+<div class="line"><strong>Version:</strong> 2:0:0</div>
+<div class="line"><strong>Date:</strong> 2026-10-11</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -495,7 +495,6 @@
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
 <div class="line"><a class="reference internal" href="fast_random_1.html#fast-random-1"><span class="std std-ref">fast_random(Algorithm)</span></a></div>
-<div class="line"><a class="reference internal" href="integer_0.html#integer-0"><span class="std std-ref">integer</span></a></div>
 <div class="line"><a class="reference internal" href="linear_algebra_0.html#linear-algebra-0"><span class="std std-ref">linear_algebra</span></a></div>
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
 <div class="line"><a class="reference internal" href="numberlist_0.html#numberlist-0"><span class="std std-ref">numberlist</span></a></div>
@@ -551,7 +550,36 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">run(-list(number),-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">run(-list(number),-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Bounds</span></code> returned by <code class="docutils literal notranslate"><span class="pre">Problem::position_bounds/1</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Positions</span></code> returned by <code class="docutils literal notranslate"><span class="pre">Problem::initial_positions/1</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Fitness</span></code> returned by <code class="docutils literal notranslate"><span class="pre">Problem::fitness/2</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Bounds</span></code> returned by <code class="docutils literal notranslate"><span class="pre">Problem::position_bounds/1</span></code> is not a valid list of position bounds:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(position_bounds,Bounds)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Positions</span></code> returned by <code class="docutils literal notranslate"><span class="pre">Problem::initial_positions/1</span></code> is not a valid initial population:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(initial_positions,Positions)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Fitness</span></code> returned by <code class="docutils literal notranslate"><span class="pre">Problem::fitness/2</span></code> is not a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(fitness,Fitness)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -572,7 +600,56 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">run(-list(number),-number,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">run(-list(number),-number,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Bounds</span></code> returned by <code class="docutils literal notranslate"><span class="pre">Problem::position_bounds/1</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Positions</span></code> returned by <code class="docutils literal notranslate"><span class="pre">Problem::initial_positions/1</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Fitness</span></code> returned by <code class="docutils literal notranslate"><span class="pre">Problem::fitness/2</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Bounds</span></code> returned by <code class="docutils literal notranslate"><span class="pre">Problem::position_bounds/1</span></code> is not a valid list of position bounds:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(position_bounds,Bounds)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Positions</span></code> returned by <code class="docutils literal notranslate"><span class="pre">Problem::initial_positions/1</span></code> is not a valid initial population:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(initial_positions,Positions)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Fitness</span></code> returned by <code class="docutils literal notranslate"><span class="pre">Problem::fitness/2</span></code> is not a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(fitness,Fitness)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -593,7 +670,56 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">run(-list(number),-number,-list(compound),+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">run(-list(number),-number,-list(compound),+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Bounds</span></code> returned by <code class="docutils literal notranslate"><span class="pre">Problem::position_bounds/1</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Positions</span></code> returned by <code class="docutils literal notranslate"><span class="pre">Problem::initial_positions/1</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Fitness</span></code> returned by <code class="docutils literal notranslate"><span class="pre">Problem::fitness/2</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Bounds</span></code> returned by <code class="docutils literal notranslate"><span class="pre">Problem::position_bounds/1</span></code> is not a valid list of position bounds:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(position_bounds,Bounds)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Positions</span></code> returned by <code class="docutils literal notranslate"><span class="pre">Problem::initial_positions/1</span></code> is not a valid initial population:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(initial_positions,Positions)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Fitness</span></code> returned by <code class="docutils literal notranslate"><span class="pre">Problem::fitness/2</span></code> is not a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(fitness,Fitness)</span></code></div>
+</div>
 </div>
 </div>
 <div class="line-block">
