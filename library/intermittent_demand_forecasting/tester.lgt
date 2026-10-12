@@ -27,6 +27,7 @@
 		time_series_protocols('test_datasets/non_numeric_value'),
 		time_series_protocols('test_datasets/inconsistent_series_length'),
 		time_series_protocols('test_datasets/malformed_series_lengths'),
+		time_series_protocols('test_datasets/malformed_series_indices'),
 		'test_datasets/intermittent_edge_cases',
 		intermittent_demand_forecasting
 	], [

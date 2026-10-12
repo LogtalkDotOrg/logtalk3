@@ -458,6 +458,10 @@ sequence. The dataset’s <code class="docutils literal notranslate"><span class
 positive length matching the number of enumerated observations. When
 provided, its <code class="docutils literal notranslate"><span class="pre">frequency/1</span></code> predicate must report a positive integer;
 this is dataset metadata, not a learning option.</p>
+<p>Observation indices must be instantiated integers. Variable indices
+raise an instantiation error; other invalid index sequences raise a
+domain error. Collection sorts observations and validates their indices
+without instantiating them or removing duplicates.</p>
 <p>Forecast horizons are non-negative integers. A zero horizon produces an
 empty forecast list. Forecast error metrics require non-empty numeric
 actual and predicted series of equal length.</p>
@@ -496,6 +500,9 @@ declared series length differs from its number of observations.</p></li>
 <code class="docutils literal notranslate"><span class="pre">value</span> <span class="pre">=</span> <span class="pre">2*index</span> <span class="pre">+</span> <span class="pre">8</span></code> (values 10, 12, 14, 16, 18, 20).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">malformed_series_lengths.lgt</span></code>: invalid dataset fixtures declaring
 zero and non-integer series lengths.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">malformed_series_indices.lgt</span></code>: fixed malformed-index and
+variable-length cases, plus valid singleton and out-of-order controls
+with missing observations.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">non_numeric_value.lgt</span></code>: invalid dataset fixture containing a
 non-numeric observation value.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">seasonal_series.lgt</span></code>: two repetitions of a length-4 seasonal cycle
@@ -511,7 +518,10 @@ that include:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">dataset_series/2</span></code> collects a dataset’s observation values. It
 checks that indices form a complete, gap-free, 1-based sequence and
-that the declared length matches the observed length.</p></li>
+that the declared length matches the observed length. After sorting,
+one traversal validates indices, collects values, and counts
+observations without constructing a separate index list or binding
+variable indices.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">check_series/2</span></code> and <code class="docutils literal notranslate"><span class="pre">check_series_length/3</span></code> check that a series
 is non-empty, numeric, and long enough for an algorithm.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">difference_series/2</span></code> and <code class="docutils literal notranslate"><span class="pre">integrate_series/3</span></code> perform first-order

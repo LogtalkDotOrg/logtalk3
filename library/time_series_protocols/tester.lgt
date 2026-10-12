@@ -38,6 +38,7 @@
 		'test_datasets/inconsistent_series_length',
 		'test_datasets/linear_trend',
 		'test_datasets/malformed_series_lengths',
+		'test_datasets/malformed_series_indices',
 		'test_datasets/non_numeric_value',
 		'test_datasets/seasonal_series',
 		'test_datasets/short_series',

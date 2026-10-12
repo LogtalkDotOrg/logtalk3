@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-02,
+		date is 2026-10-12,
 		comment is 'Tests for the intermittent-demand forecasting library.'
 	]).
 
@@ -66,6 +66,14 @@
 
 	test(intermittent_demand_forecasting_fitted_all_zero, deterministic(Values == [0,0,0])) :-
 		intermittent_demand_forecasting::fitted_values(intermittent_series([0,0,0]), Values).
+
+	test(intermittent_demand_forecasting_fitted_error_total_overflow, error(evaluation_error(_))) :-
+		Huge is exp(700),
+		intermittent_demand_forecasting::fitted_values(intermittent_series([Huge]), _).
+
+	test(intermittent_demand_forecasting_fitted_auto_error_total_overflow, error(evaluation_error(_))) :-
+		Huge is exp(700),
+		intermittent_demand_forecasting::fitted_values(intermittent_series([Huge]), _, [model(auto),alpha(auto),beta(auto)]).
 
 	test(intermittent_demand_forecasting_fitted_croston_missing_skip, deterministic) :-
 		check_fitted_missing(croston, skip, 3.0, 3.0).
@@ -133,6 +141,18 @@
 	test(intermittent_demand_forecasting_fitted_gap_indices, error(domain_error(series_index_sequence, gap_index))) :-
 		intermittent_demand_forecasting::fitted_values(gap_index, _).
 
+	test(intermittent_demand_forecasting_variable_index_learn_default, error(instantiation_error)) :-
+		intermittent_demand_forecasting::learn(index_series(variable), _).
+
+	test(intermittent_demand_forecasting_variable_index_learn_auto, error(instantiation_error)) :-
+		intermittent_demand_forecasting::learn(index_series(variable), _, [model(auto)]).
+
+	test(intermittent_demand_forecasting_variable_index_fitted_default, error(instantiation_error)) :-
+		intermittent_demand_forecasting::fitted_values(index_series(variable), _).
+
+	test(intermittent_demand_forecasting_variable_index_fitted_auto, error(instantiation_error)) :-
+		intermittent_demand_forecasting::fitted_values(index_series(variable), _, [model(auto)]).
+
 	test(intermittent_demand_forecasting_fitted_inconsistent_length, error(consistency_error(series_length, 4, 3))) :-
 		intermittent_demand_forecasting::fitted_values(inconsistent_series_length, _).
 
@@ -199,6 +219,40 @@
 	test(intermittent_demand_forecasting_auto_all_zero_parameters_tie, deterministic) :-
 		intermittent_demand_forecasting::learn(intermittent_series([0,0,0]), Forecaster, [model(auto),alpha(auto),beta(auto)]),
 		intermittent_demand_forecasting::forecaster_options(Forecaster, [model(sba),alpha(0.1),beta(0.1),missing(skip)]).
+
+	test(intermittent_demand_forecasting_rounded_rmse_tie_not_squared_total, deterministic(Best == HigherSquared)) :-
+		Squared is 1.0 + 0.0000000000000002220446049250313,
+		Squared > 1,
+		RMSE is float(sqrt(Squared)),
+		RMSE =:= 1,
+		intermittent_demand_forecasting << prepare_parameters(0.1, 0.1, skip, FirstParameters),
+		intermittent_demand_forecasting << prepare_parameters(0.2, 0.1, skip, SecondParameters),
+		HigherSquared = fit(sba,FirstParameters,pending_state(0),forecast_error_totals(1,1,Squared),1.0,RMSE),
+		LowerSquared = fit(sba,SecondParameters,pending_state(0),forecast_error_totals(1,1,1.0),1.0,RMSE),
+		intermittent_demand_forecasting << better_candidate(LowerSquared, HigherSquared, Best).
+
+	test(intermittent_demand_forecasting_losing_candidate_arithmetic_error, error(evaluation_error(_))) :-
+		Large is exp(354.5),
+		Dataset = intermittent_series([1,Large,0,0]),
+		intermittent_demand_forecasting::learn(Dataset, _, [model(croston),alpha(0.1),beta(1)]),
+		intermittent_demand_forecasting::learn(Dataset, _, [model(croston),alpha(auto),beta(1),coefficient_grid([0.1,1.0])]).
+
+	test(intermittent_demand_forecasting_paired_fits_match_explicit, all(check_paired_fits(Series, Policy, Alpha, Beta))) :-
+		member(Series, [[0,0,0],[6],[0,_,6,_,0,10],[6,10,6],[_,0,_]]),
+		member(Policy, [skip,elapsed]),
+		member(Alpha-Beta, [0.1-0.1,0.5-0.5,1-1]).
+
+	test(intermittent_demand_forecasting_paired_croston_error_propagated, error(evaluation_error(_))) :-
+		Large is exp(354.5),
+		Dataset = intermittent_series([1,Large,0,0]),
+		intermittent_demand_forecasting::learn(Dataset, _, [model(auto),alpha(0.1),beta(1)]),
+		intermittent_demand_forecasting::learn(Dataset, _, [model(auto),alpha(auto),beta(1),coefficient_grid([0.1,1.0])]).
+
+	test(intermittent_demand_forecasting_paired_sba_error_propagated, error(evaluation_error(_))) :-
+		Large is exp(354.75),
+		Dataset = intermittent_series([Large,Large,Large]),
+		intermittent_demand_forecasting::learn(Dataset, _, [model(croston),beta(1)]),
+		intermittent_demand_forecasting::learn(Dataset, _, [model(auto),beta(1)]).
 
 	test(intermittent_demand_forecasting_auto_single_positive_parameters_tie, deterministic(Forecaster == Expected)) :-
 		intermittent_demand_forecasting::learn(intermittent_series([6]), Forecaster, [model(auto),alpha(auto),beta(auto)]),
@@ -294,6 +348,12 @@
 
 	test(intermittent_demand_forecasting_custom_grid_more_than_default_candidates, deterministic) :-
 		check_coefficient_grid(skip, [0.01,0.1,0.2,0.5,0.8,1.0], [coefficient_grid([0.01,0.1,0.2,0.5,0.8,1])]).
+
+	test(intermittent_demand_forecasting_joint_auto_replay_skip, deterministic) :-
+		check_grid_replay(skip).
+
+	test(intermittent_demand_forecasting_joint_auto_replay_elapsed, deterministic) :-
+		check_grid_replay(elapsed).
 
 	test(intermittent_demand_forecasting_custom_grid_single_positive_tie, deterministic) :-
 		intermittent_demand_forecasting::learn(intermittent_series([6]), Forecaster, [model(auto),alpha(auto),beta(auto),coefficient_grid([0.8,0.01])]),
@@ -663,6 +723,27 @@
 		intermittent_demand_forecasting::diagnostics(Forecaster, Diagnostics),
 		findall(Diagnostic, intermittent_demand_forecasting::diagnostic(Forecaster, Diagnostic), Enumerated).
 
+	test(intermittent_demand_forecasting_reordered_diagnostics_update, deterministic) :-
+		intermittent_demand_forecasting::learn(intermittent_series([6]), intermittent_demand_forecaster(Method,State,Diagnostics)),
+		list::reverse(Diagnostics, Reversed),
+		Forecaster = intermittent_demand_forecaster(Method,State,Reversed),
+		intermittent_demand_forecasting::check_forecaster(Forecaster),
+		intermittent_demand_forecasting::update(Forecaster, 0, Updated),
+		Updated = intermittent_demand_forecaster(_,_,[root_mean_squared_error(_)| _]),
+		intermittent_demand_forecasting::check_forecaster(Updated).
+
+	test(intermittent_demand_forecasting_extra_metadata_first_occurrence, deterministic) :-
+		intermittent_demand_forecasting::learn(intermittent_series([6]), intermittent_demand_forecaster(Method,State,Diagnostics)),
+		append(Diagnostics, [tag(inventory),training_series_length(999)], Extended),
+		Forecaster = intermittent_demand_forecaster(Method,State,Extended),
+		intermittent_demand_forecasting::check_forecaster(Forecaster),
+		intermittent_demand_forecasting::update(Forecaster, Missing, Updated),
+		var(Missing),
+		Updated = intermittent_demand_forecaster(_,_,UpdatedDiagnostics),
+		memberchk(training_series_length(2), UpdatedDiagnostics),
+		once(append(_, [tag(inventory),training_series_length(999)], UpdatedDiagnostics)),
+		intermittent_demand_forecasting::check_forecaster(Updated).
+
 	test(intermittent_demand_forecasting_public_option_hooks, deterministic) :-
 		intermittent_demand_forecasting::valid_option(missing(elapsed)),
 		intermittent_demand_forecasting::default_option(model(sba)).
@@ -692,8 +773,11 @@
 		intermittent_demand_forecasting::forecast(Forecaster, 1, [0]).
 
 	test(intermittent_demand_forecasting_long_tsb_zero_decay, deterministic(Value =~= 0.0)) :-
-		length(Zeros, 10000), zeros(Zeros),
+		length(Zeros, 1200),
+		zeros(Zeros),
 		intermittent_demand_forecasting::learn(intermittent_series([6| Zeros]), Forecaster, [model(tsb), beta(0.5)]),
+		Forecaster = intermittent_demand_forecaster(tsb,tsb_state(_,Probability),_),
+		Probability =:= 0,
 		intermittent_demand_forecasting::check_forecaster(Forecaster),
 		intermittent_demand_forecasting::forecast(Forecaster, 1, [Value]).
 
@@ -706,6 +790,24 @@
 		intermittent_demand_forecasting::learn(intermittent_series([0.000000001,0,0.000000002]), Forecaster, [model(tsb)]),
 		intermittent_demand_forecasting::check_forecaster(Forecaster),
 		intermittent_demand_forecasting::forecast(Forecaster, 1, [Value]).
+
+	test(intermittent_demand_forecasting_subnormal_positive_smoothing, deterministic, [condition(subnormal_supported)]) :-
+	    Tiny is exp(-745),
+	    intermittent_demand_forecasting << positive_smoothing(weight(0.5,0.5), Tiny, Tiny, Size),
+	    Size > 0,
+	    Size =:= Tiny.
+
+	test(intermittent_demand_forecasting_subnormal_learning_updates, deterministic, [condition(subnormal_arithmetic_supported)]) :-
+		Tiny is exp(-745),
+		forall(member(Method, [croston,sba,tsb]), check_subnormal(Method, Tiny)).
+
+	test(intermittent_demand_forecasting_positive_smoothing_bounds, all((Minimum =< Value, Value =< Maximum))) :-
+		member(Coefficient, [0.000000001,0.5,1]),
+		member(Previous-Observation, [6-6,6-10,10-6]),
+		Complement is 1 - Coefficient,
+		intermittent_demand_forecasting << positive_smoothing(weight(Coefficient,Complement), Observation, Previous, Value),
+		Minimum is min(Previous, Observation),
+		Maximum is max(Previous, Observation).
 
 	test(intermittent_demand_forecasting_missing_input_isolated, deterministic) :-
 		Values = [0,Missing,6], copy_term(Values, Snapshot),
@@ -765,6 +867,18 @@
 
 	test(intermittent_demand_forecasting_negative_demand, error(domain_error(non_negative_number, -1))) :-
 		intermittent_demand_forecasting::learn(intermittent_series([0,-1,2]), _).
+
+	test(intermittent_demand_forecasting_validation_before_arithmetic, error(domain_error(non_negative_number, -1))) :-
+		Huge is exp(700),
+		intermittent_demand_forecasting::learn(intermittent_series([Huge,-1]), _, [model(auto)]).
+
+	test(intermittent_demand_forecasting_single_dataset_collection, deterministic) :-
+		counted_intermittent_series::reset,
+		intermittent_demand_forecasting::learn(counted_intermittent_series, _, [model(auto),alpha(auto),beta(auto)]),
+		counted_intermittent_series::collections(1),
+		counted_intermittent_series::reset,
+		intermittent_demand_forecasting::fitted_values(counted_intermittent_series, _, [model(auto),alpha(auto),beta(auto)]),
+		counted_intermittent_series::collections(1).
 
 	test(intermittent_demand_forecasting_non_numeric_demand, error(type_error(number, bad))) :-
 		intermittent_demand_forecasting::learn(non_numeric_value, _).
@@ -903,6 +1017,18 @@
 
 	test(intermittent_demand_forecasting_invalid_observed_count, fail) :-
 		invalid_counts(1, 0, 1, 0, 0, 0).
+
+	test(intermittent_demand_forecasting_valid_counter_control, deterministic) :-
+		invalid_counts(1, 1, 0, 1, 1, 0).
+
+	test(intermittent_demand_forecasting_noninteger_observed_count, fail) :-
+		invalid_counts(1, 1.0, 0, 1, 1, 0).
+
+	test(intermittent_demand_forecasting_negative_positive_count, fail) :-
+		invalid_counts(1, 1, 0, -1, 1, 0).
+
+	test(intermittent_demand_forecasting_negative_update_count, fail) :-
+		invalid_counts(1, 1, 0, 1, 1, -1).
 
 	test(intermittent_demand_forecasting_invalid_missing_count, fail) :-
 		invalid_counts(1, 1, -1, 1, 1, 0).
@@ -1122,32 +1248,96 @@
 
 	% auxiliary predicates
 
+	check_paired_fits(Series, Policy, Alpha, Beta) :-
+		intermittent_demand_forecasting << demand_summary(Series, summary(0,0,0), Summary),
+		intermittent_demand_forecasting << prepare_parameters(Alpha, Beta, Policy, Parameters),
+		intermittent_demand_forecasting << fit_paired_series(Series, Parameters, SBAFit, CrostonFit),
+		intermittent_demand_forecasting << fitted_model(Summary, SBAFit, SBA),
+		intermittent_demand_forecasting << fitted_model(Summary, CrostonFit, Croston),
+		intermittent_demand_forecasting::learn(intermittent_series(Series), SBA, [model(sba),alpha(Alpha),beta(Beta),missing(Policy)]),
+		intermittent_demand_forecasting::learn(intermittent_series(Series), Croston, [model(croston),alpha(Alpha),beta(Beta),missing(Policy)]).
+
+	subnormal_supported :-
+		catch((Tiny is exp(-745), Tiny > 0), _, fail).
+
+	subnormal_arithmetic_supported :-
+		catch(
+			(	Tiny is exp(-745),
+				Tiny > 0,
+				Half is Tiny / 2,
+				Half >= 0,
+				Squared is Tiny * Tiny,
+				Squared >= 0
+			),
+			_,
+			fail
+		).
+
+	check_subnormal(Method, Tiny) :-
+		Options = [model(Method),alpha(0.5),beta(0.5)],
+		intermittent_demand_forecasting::learn(intermittent_series([Tiny,Tiny]), Learned, Options),
+		intermittent_demand_forecasting::learn(intermittent_series([Tiny]), Original, Options),
+		intermittent_demand_forecasting::update(Original, Tiny, Updated),
+		forall(
+			member(Model, [Learned,Updated]),
+			(	Model = intermittent_demand_forecaster(_, State, _),
+				arg(1, State, Size),
+				Size > 0,
+				Size =:= Tiny,
+				intermittent_demand_forecasting::check_forecaster(Model),
+				intermittent_demand_forecasting::forecast(Model, 1, [_])
+			)
+		),
+		Larger is Tiny * 2,
+		intermittent_demand_forecasting::learn(intermittent_series([Larger,Tiny]), Unequal, Options),
+		Unequal = intermittent_demand_forecaster(_, UnequalState, _),
+		arg(1, UnequalState, UnequalSize),
+		UnequalSize >= Tiny,
+		UnequalSize =< Larger,
+		intermittent_demand_forecasting::check_forecaster(Unequal).
+
 	check_coefficient_grid(Policy) :-
 		check_coefficient_grid(Policy, [0.1,0.2,0.5,0.8,1.0], []).
 
 	check_coefficient_grid(Policy, Grid, GridOptions) :-
 		Dataset = intermittent_series([0,FirstMissing,6,LastMissing,0,10]),
 		copy_term(Dataset, Snapshot),
+		explicit_grid_winner(Dataset, Policy, Grid, Expected),
+		Requests = [model(auto),alpha(auto),beta(auto),missing(Policy)| GridOptions],
+		intermittent_demand_forecasting::learn(Dataset, Forecaster, Requests),
+		Forecaster == Expected,
+		ground(Forecaster),
+		var(FirstMissing),
+		var(LastMissing),
+		lgtunit::variant(Dataset, Snapshot),
+		intermittent_demand_forecasting::check_forecaster(Forecaster).
+
+	explicit_grid_winner(Dataset, Policy, Grid, Expected) :-
 		findall(
 			RMSE-Candidate,
-			(	member(Method, [sba,croston,tsb]), member(Alpha, Grid), member(Beta, Grid),
+			(	member(Method, [sba,croston,tsb]),
+				member(Alpha, Grid),
+				member(Beta, Grid),
 				intermittent_demand_forecasting::learn(Dataset, Candidate, [model(Method),alpha(Alpha),beta(Beta),missing(Policy)]),
 				intermittent_demand_forecasting::diagnostics(Candidate, CandidateDiagnostics),
 				memberchk(root_mean_squared_error(RMSE), CandidateDiagnostics)
 			),
 			Candidates
 		),
-		length(Grid, GridLength), CandidateCount is 3 * GridLength * GridLength,
-		length(Candidates, CandidateCount), keysort(Candidates, [_-Expected| _]),
-		Requests = [model(auto),alpha(auto),beta(auto),missing(Policy)| GridOptions],
-		intermittent_demand_forecasting::learn(Dataset, Forecaster, Requests),
-		Forecaster == Expected, ground(Forecaster),
-		var(FirstMissing), var(LastMissing), lgtunit::variant(Dataset, Snapshot),
-		intermittent_demand_forecasting::forecaster_options(Forecaster, Options),
+		length(Grid, GridLength),
+		CandidateCount is 3 * GridLength * GridLength,
+		length(Candidates, CandidateCount),
+		keysort(Candidates, [_-Expected| _]).
+
+	check_grid_replay(Policy) :-
+		Dataset = intermittent_series([0,_,6,_,0,10]),
+		Grid = [0.2,0.8],
+		explicit_grid_winner(Dataset, Policy, Grid, Expected),
+		intermittent_demand_forecasting::forecaster_options(Expected, Options),
+		Requests = [model(auto),alpha(auto),beta(auto),missing(Policy),coefficient_grid(Grid)],
 		intermittent_demand_forecasting::fitted_values(Dataset, Values, Requests),
 		intermittent_demand_forecasting::fitted_values(Dataset, ExpectedValues, Options),
-		lgtunit::variant(Values, ExpectedValues),
-		intermittent_demand_forecasting::check_forecaster(Forecaster).
+		lgtunit::variant(Values, ExpectedValues).
 
 	check_invalid_grid(Grid) :-
 		copy_term(Grid, Snapshot),
@@ -1333,11 +1523,14 @@
 		zeros(Zeros).
 
 	invalid_counts(Length, Count, Missing, Positive, Effective, Updates) :-
-		intermittent_demand_forecasting::valid_forecaster(intermittent_demand_forecaster(sba, croston_state(6,1,0), [
+		intermittent_demand_forecasting::learn(intermittent_series([6]), Baseline),
+		forecaster_error_terms(Baseline, [scored_count(_)| Metrics]),
+		Diagnostics = [
 			model(intermittent_demand_forecasting), training_series_length(Length),
 			options([model(sba), alpha(0.1), beta(0.1), missing(skip)]), method(sba),
 			observed_count(Count), missing_count(Missing), positive_count(Positive),
-			effective_period_count(Effective), update_count(Updates)
-		])).
+			effective_period_count(Effective), update_count(Updates), scored_count(Count)
+		| Metrics],
+		intermittent_demand_forecasting::valid_forecaster(intermittent_demand_forecaster(sba, croston_state(6,1,0), Diagnostics)).
 
 :- end_object.

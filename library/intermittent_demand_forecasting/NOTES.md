@@ -34,6 +34,11 @@ observations. Indices must be a complete, gap-free, 1-based sequence, and
 the declared length must match the enumerated observations. Dataset
 frequency metadata from the `frequency/1` predicate is not used.
 
+Observation indices must be instantiated integers. Variable indices raise
+`instantiation_error`; other invalid index sequences raise
+`domain_error(series_index_sequence, Dataset)`. Observations may be enumerated
+out of order; collection sorts them without removing duplicate indices.
+
 
 API documentation
 -----------------
@@ -72,6 +77,17 @@ more than 75 candidates, and fitted replay and export continuation.
 Fitted-value tests cover causal predictions, missing-position alignment,
 independent placeholders, agreement with error diagnostics, and replay of
 the automatically selected method.
+
+Regression tests also cover variable indices, complete counter-validation
+controls, equal and unequal subnormal demands, rounded-RMSE ties, and errors
+from losing candidates and either paired score stream. Exhaustive selection
+oracles are separate from small-grid replay checks. The 10,000-period pending
+series exercises long-list handling; the TSB decay test checks exact zero
+probability after 1,200 observed zeros.
+
+The direct subnormal smoothing regression requires positive subnormal values.
+The end-to-end learning/update regression additionally requires underflowing
+division and multiplication to return zero rather than raise an error.
 
 
 Example
@@ -146,9 +162,10 @@ Selection uses the supplied training sequence, not held-out observations.
 It does not guarantee better future forecasts or inventory performance.
 Any candidate fitting or arithmetic exception is propagated rather than
 silently excluding that method. The dataset is collected once, followed
-by three linear fitting passes when both coefficients are numeric;
-coefficient fitting expands the candidate set. Only the winning model
-is retained.
+by one shared Croston/SBA state pass with independent scores and one TSB
+pass when both coefficients are numeric. Coefficient fitting expands the
+candidate set. Every configuration is scored; only the current best fit
+is retained, and public diagnostics are constructed once for the winner.
 
 
 Automatic coefficient fitting
@@ -211,11 +228,17 @@ respectively. For a custom grid with `K` distinct normalized values, one
 automatic coefficient gives `K` fits per method and two give `K * K`;
 `model(auto)` multiplies these counts by three. Custom grids have no
 additional size cap and can exceed 75 candidates. Normalization sorts
-the supplied entries; fitting time and temporary candidate storage grow
-with the candidate count. The dataset is collected once, and each fit
-is linear in its length. Losing models are discarded after selection;
-retained models and online updates remain constant-size. Any candidate
-exception propagates rather than excluding that configuration.
+the supplied entries in `O(G log G)` time for `G` entries. For `C` concrete
+configurations and `N` observations, fitting takes `O(C * N)` time with
+constant retained candidate storage, excluding the collected series and
+normalized grid. Croston/SBA share transitions for matching coefficients
+but keep separate error totals. The dataset is collected and summarized
+once. Retained models and online updates do not store observation history.
+Any candidate exception propagates rather than excluding that configuration.
+
+Selection compares the rounded RMSE values, not squared-error sums.
+Distinct squared-error sums can produce exactly equal RMSE values; the
+documented method and coefficient priority then decides the winner.
 
 This is a finite grid search, not continuous optimization over `(0,1]`.
 The default grid's smallest value is `0.1`; custom grids and explicit
@@ -233,6 +256,11 @@ each positive observation `Demand` updates it:
 	NewSize = Alpha * Demand + (1 - Alpha) * Size
 
 Zero and missing observations do not update `Size`.
+
+Positive size and interval smoothing use the smaller endpoint plus a
+weighted difference. This equivalent formulation avoids rounding both
+weighted subnormal endpoints to zero. Equal positive endpoints remain
+unchanged; no arbitrary lower bound is imposed on positive demand.
 
 **Croston** estimates the interarrival time between known positive demands.
 At a positive observation, `Gap = Age + 1`, where `Age` counts algorithm
@@ -293,6 +321,11 @@ not a missing value. Negative values raise
 `domain_error(non_negative_number, Observation)`. Empty datasets are
 rejected; all-missing training series raise
 `domain_error(insufficient_observations, Dataset)`.
+
+Learning validates options, dataset indices and length, then all demands,
+before fitting any configuration. Observation counts are summarized once
+and coefficients are prepared once per configuration. Invalid demands
+therefore take precedence over candidate arithmetic errors.
 
 Every missing position counts in the elapsed training length and missing
 count, regardless of policy:
@@ -379,6 +412,11 @@ Error arithmetic can overflow, particularly when squaring large errors
 or accumulating totals. Evaluation errors are propagated, even when a
 point forecast alone would be representable; totals are not clamped.
 
+Underflow follows the backend arithmetic policy. Results that round to zero
+are retained; `evaluation_error(underflow)` exceptions are propagated. On
+backends that round underflow to zero, stable smoothing can retain a positive
+subnormal size even when its forecast or squared error rounds to zero.
+
 
 Fitted values
 -------------
@@ -386,9 +424,10 @@ Fitted values
 The `fitted_values/2` predicate uses the default learning options. The
 `fitted_values/3` predicate accepts the same learning options as the
 `learn/3` predicate, including `model(auto)`, `alpha(auto)`, `beta(auto)`,
-and `coefficient_grid(Grid)`. Both predicates fit the supplied dataset and
-then replay from the initial state, returning the prediction before
-processing each numeric observation. These are causal one-step fitted
+and `coefficient_grid(Grid)`. Both predicates return the prediction before
+processing each numeric observation. Concrete requests emit predictions
+during scored fitting; automatic requests replay the winning configuration
+from the initial state. These are causal one-step fitted
 predictions, not smoothed hindsight estimates or forecasts from the final
 state.
 
@@ -432,10 +471,11 @@ rejected as in learning. Fitting and replay exceptions propagate, including
 error-total overflow even when individual predictions are representable.
 
 The dataset is collected once. Concrete method/coefficient requests
-require fitting and replay passes. Automatic requests require one fitting
-pass per candidate (at most 75 with the default grid) plus replay. Custom
-grids can expand this count. The output list uses linear memory, while
-retained models remain constant-size.
+require one combined fitting/output pass after validation. Automatic
+requests score every candidate, sharing Croston/SBA transitions where
+applicable, then perform one winning-configuration replay. Custom grids
+can expand the search. The output list uses linear memory, while retained
+models remain constant-size.
 
 
 Representation and diagnostics
@@ -463,6 +503,13 @@ length is `Length - Updates`; freshly learned models have zero updates.
 The `check_forecaster/1` predicate checks ground state, effective options,
 counter consistency, and complete error metadata, without completing
 malformed models.
+
+Required diagnostic fields are unary terms and may be reordered. Additional
+compound metadata is preserved by updates. Common fields use their first
+occurrence; error fields must occur exactly once. Validation extracts fields
+in one traversal, and updates rebuild the list once, preserving its order
+and later common-field occurrences. Their cost is linear in metadata size,
+which is constant for models produced by learning.
 
 The `valid_forecaster/1` predicate succeeds only when validation succeeds
 without an exception. The inherited `diagnostics/2`, `diagnostic/2`, and

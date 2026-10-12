@@ -42,6 +42,11 @@ length matching the number of enumerated observations. When provided,
 its `frequency/1` predicate must report a positive integer; this is dataset
 metadata, not a learning option.
 
+Observation indices must be instantiated integers. Variable indices raise
+an instantiation error; other invalid index sequences raise a domain error.
+Collection sorts observations and validates their indices without
+instantiating them or removing duplicates.
+
 Forecast horizons are non-negative integers. A zero horizon produces an
 empty forecast list. Forecast error metrics require non-empty numeric
 actual and predicted series of equal length.
@@ -83,6 +88,7 @@ datasets and validation fixtures:
 - `inconsistent_series_length.lgt`: invalid dataset fixture whose declared series length differs from its number of observations.
 - `linear_trend.lgt`: simple non-seasonal series following the line `value = 2*index + 8` (values 10, 12, 14, 16, 18, 20).
 - `malformed_series_lengths.lgt`: invalid dataset fixtures declaring zero and non-integer series lengths.
+- `malformed_series_indices.lgt`: fixed malformed-index and variable-length cases, plus valid singleton and out-of-order controls with missing observations.
 - `non_numeric_value.lgt`: invalid dataset fixture containing a non-numeric observation value.
 - `seasonal_series.lgt`: two repetitions of a length-4 seasonal cycle (10, 20, 15, 5) with a declared `frequency/1` of 4.
 - `short_series.lgt`: two-observation series, too short for most forecaster minimum-length checks.
@@ -96,7 +102,9 @@ include:
 
 - `dataset_series/2` collects a dataset's observation values.
 	It checks that indices form a complete, gap-free, 1-based sequence and
-	that the declared length matches the observed length.
+	that the declared length matches the observed length. After sorting,
+	one traversal validates indices, collects values, and counts observations
+	without constructing a separate index list or binding variable indices.
 - `check_series/2` and `check_series_length/3` check
 	that a series is non-empty, numeric, and long enough for an algorithm.
 - `difference_series/2` and `integrate_series/3` perform

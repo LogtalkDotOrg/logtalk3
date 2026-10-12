@@ -15,7 +15,7 @@ Shared predicates for forecaster diagnostics, dataset validation, differencing, 
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-10-02
+| **Date:** 2026-10-12
 
 | **Compilation flags:**
 |    ``static``
@@ -27,10 +27,8 @@ Shared predicates for forecaster diagnostics, dataset validation, differencing, 
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
 |    :ref:`format <format/0>`
-|    :ref:`integer <integer/0>`
 |    :ref:`list <list/0>`
 |    :ref:`numberlist <numberlist/0>`
-|    :ref:`pairs <pairs/0>`
 |    :ref:`type <type/0>`
 
 | **Remarks:**
@@ -148,7 +146,7 @@ Collects the dataset time-ordered observation values. Checks that the observatio
 |        ``domain_error(non_empty_series,Dataset)``
 |    The observation indices do not form a complete, gap-free, 1-based sequence:
 |        ``domain_error(series_index_sequence,Dataset)``
-|    The declared series length is a variable:
+|    An observation index or the declared series length is a variable:
 |        ``instantiation_error``
 |    The declared series length is neither a variable nor an integer:
 |        ``type_error(integer,DeclaredLength)``
@@ -156,6 +154,8 @@ Collects the dataset time-ordered observation values. Checks that the observatio
 |        ``domain_error(positive_integer,DeclaredLength)``
 |    The declared and observed series lengths differ:
 |        ``consistency_error(series_length,DeclaredLength,ObservedLength)``
+|    Index arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
 
 
 ------------
@@ -1009,6 +1009,33 @@ Adds or multiplies a seasonal cycle, advancing phase through missing positions w
 
 Private predicates
 ------------------
+
+.. index:: sorted_observations/5
+.. _forecaster_common/0::sorted_observations/5:
+
+``sorted_observations/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates sorted indices without binding them while collecting values and counting observations.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sorted_observations(Pairs,Dataset,ExpectedIndex,Length,Series)``
+| **Mode and number of proofs:**
+|    ``sorted_observations(@list(pair),+object_identifier,+positive_integer,-non_negative_integer,-list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    An observation index is a variable:
+|        ``instantiation_error``
+|    The observation indices are not a gap-free 1-based integer sequence:
+|        ``domain_error(series_index_sequence,Dataset)``
+|    Index arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
 
 .. index:: normalize_missing_values/4
 .. _forecaster_common/0::normalize_missing_values/4:

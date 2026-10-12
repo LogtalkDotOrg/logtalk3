@@ -19,7 +19,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(intermittent_series(_Values),
+:- object(intermittent_series(_Values_),
 	implements(time_series_dataset_protocol)).
 
 	:- info([
@@ -33,11 +33,45 @@
 	:- uses(list, [nth1/3, length/2]).
 
 	observation(Index, Value) :-
-		parameter(1, Values),
-		nth1(Index, Values, Value).
+		nth1(Index, _Values_, Value).
 
 	series_length(Length) :-
-		parameter(1, Values),
-		length(Values, Length).
+		length(_Values_, Length).
+
+:- end_object.
+
+
+:- object(counted_intermittent_series,
+	implements(time_series_dataset_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-10-12,
+		comment is 'Counts dataset enumerations for intermittent-demand unit tests.'
+	]).
+
+	:- public([reset/0, collections/1]).
+	:- mode(reset, one).
+	:- info(reset/0, [comment is 'Resets the collection count to zero.']).
+	:- mode(collections(?non_negative_integer), zero_or_one).
+	:- info(collections/1, [
+		comment is 'Returns the current collection count.',
+		argnames is ['Count']
+	]).
+	:- dynamic(collections/1).
+	:- uses(list, [nth1/3]).
+
+	reset :-
+		retractall(collections(_)),
+		assertz(collections(0)).
+
+	observation(Index, Value) :-
+		retract(collections(Count0)),
+		Count is Count0 + 1,
+		assertz(collections(Count)),
+		nth1(Index, [0,6,_,0,10], Value).
+
+	series_length(5).
 
 :- end_object.

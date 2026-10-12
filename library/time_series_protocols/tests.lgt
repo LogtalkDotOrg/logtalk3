@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-02,
+		date is 2026-10-12,
 		comment is 'Smoke tests for the "time_series_protocols" library.'
 	]).
 
@@ -391,6 +391,28 @@
 	test(time_series_protocols_dataset_series_gap_index, error(domain_error(series_index_sequence, gap_index))) :-
 		^^dataset_series(gap_index, _Series).
 
+	test(time_series_protocols_dataset_series_variable_index, error(instantiation_error)) :-
+		^^dataset_series(index_series(variable), _).
+
+	test(time_series_protocols_dataset_series_mixed_index, error(instantiation_error)) :-
+		^^dataset_series(index_series(mixed), _).
+
+	test(time_series_protocols_dataset_series_invalid_indices, all(subsumes_term(error(domain_error(series_index_sequence, index_series(Case)), _), Error))) :-
+		list::member(Case, [float,compound,zero,negative,duplicate,missing_start,gap]),
+		catch(^^dataset_series(index_series(Case), _), Error, true).
+
+	test(time_series_protocols_dataset_series_unordered, deterministic(var(Missing))) :-
+		^^dataset_series(index_series(unordered), [0,Missing,6]).
+
+	test(time_series_protocols_dataset_series_singleton, deterministic(Series == [6])) :-
+		^^dataset_series(index_series(singleton), Series).
+
+	test(time_series_protocols_dataset_series_empty, error(domain_error(non_empty_series, index_series(empty)))) :-
+		^^dataset_series(index_series(empty), _).
+
+	test(time_series_protocols_dataset_series_variable_length, error(instantiation_error)) :-
+		^^dataset_series(index_series(variable_length), _).
+
 	test(time_series_protocols_dataset_series_inconsistent_length, error(consistency_error(series_length, 4, 3))) :-
 		^^dataset_series(inconsistent_series_length, _Series).
 
@@ -454,11 +476,10 @@
 	test(time_series_protocols_accumulate_forecast_error_zero, deterministic(Totals == forecast_error_totals(1,0,0))) :-
 		^^accumulate_forecast_error(0, 0, forecast_error_totals(0,0,0), Totals).
 
-	test(time_series_protocols_forecast_error_metrics_zero, deterministic) :-
-		^^forecast_error_metrics(forecast_error_totals(3,0,0), MAE, RMSE),
-		MAE =~= 0.0, RMSE =~= 0.0.
+	test(time_series_protocols_forecast_error_metrics_zero, deterministic((MAE =~= 0.0, RMSE =~= 0.0))) :-
+		^^forecast_error_metrics(forecast_error_totals(3,0,0), MAE, RMSE).
 
-	test(time_series_protocols_forecast_error_metrics_list_equivalence, deterministic) :-
+	test(time_series_protocols_forecast_error_metrics_list_equivalence, deterministic((MAE =~= ListMAE, RMSE =~= ListRMSE))) :-
 		^^accumulate_forecast_error(0, 0, forecast_error_totals(0,0,0), Totals1),
 		^^accumulate_forecast_error(6, 0, Totals1, Totals2),
 		^^accumulate_forecast_error(0, 3, Totals2, Totals3),
@@ -466,12 +487,10 @@
 		Totals == forecast_error_totals(4,16,94),
 		^^forecast_error_metrics(Totals, MAE, RMSE),
 		^^mean_absolute_error([0,6,0,10], [0,0,3,3], ListMAE),
-		^^root_mean_squared_error([0,6,0,10], [0,0,3,3], ListRMSE),
-		MAE =~= ListMAE, RMSE =~= ListRMSE.
+		^^root_mean_squared_error([0,6,0,10], [0,0,3,3], ListRMSE).
 
-	test(time_series_protocols_accumulate_forecast_error_fractional, deterministic) :-
-		^^accumulate_forecast_error(-1.5, 0.5, forecast_error_totals(0,0,0), forecast_error_totals(1,Absolute,Squared)),
-		Absolute =~= 2.0, Squared =~= 4.0.
+	test(time_series_protocols_accumulate_forecast_error_fractional, deterministic((Absolute =~= 2.0, Squared =~= 4.0))) :-
+		^^accumulate_forecast_error(-1.5, 0.5, forecast_error_totals(0,0,0), forecast_error_totals(1,Absolute,Squared)).
 
 	test(time_series_protocols_accumulate_forecast_error_invalid_actual, error(type_error(number, bad))) :-
 		^^accumulate_forecast_error(bad, 0, forecast_error_totals(0,0,0), _).
@@ -497,10 +516,9 @@
 	test(time_series_protocols_mean_absolute_error_non_numeric, error(type_error(number, bad))) :-
 		^^mean_absolute_error([1, bad], [1, 2], _MAE).
 
-	test(time_series_protocols_root_mean_squared_error_1, true) :-
+	test(time_series_protocols_root_mean_squared_error_1, deterministic(Delta < 0.000001)) :-
 		^^root_mean_squared_error([1, 2, 3, 4], [2, 2, 2, 2], RMSE),
-		Delta is abs(RMSE - 1.224744871391589),
-		Delta < 0.000001.
+		Delta is abs(RMSE - 1.224744871391589).
 
 	test(time_series_protocols_root_mean_squared_error_empty, error(domain_error(non_empty_series, []))) :-
 		^^root_mean_squared_error([1], [], _RMSE).
@@ -556,13 +574,11 @@
 	test(time_series_protocols_observation_summary_empty, deterministic) :-
 		^^series_observation_summary([], 0, 0, 0).
 
-	test(time_series_protocols_observation_summary_missing, deterministic) :-
-		^^series_observation_summary([10, Missing, 14], 3, 2, 24),
-		var(Missing).
+	test(time_series_protocols_observation_summary_missing, deterministic(var(Missing))) :-
+		^^series_observation_summary([10, Missing, 14], 3, 2, 24).
 
-	test(time_series_protocols_observation_summary_all_missing, deterministic) :-
-		^^series_observation_summary([First, Last], 2, 0, 0),
-		var(First), var(Last).
+	test(time_series_protocols_observation_summary_all_missing, deterministic((var(First), var(Last)))) :-
+		^^series_observation_summary([First, Last], 2, 0, 0).
 
 	test(time_series_protocols_observation_summary_fractional, deterministic(Sum =~= -1.5)) :-
 		^^series_observation_summary([-2, 0.5], 2, 2, Sum).

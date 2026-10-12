@@ -26,16 +26,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-02,
+		date is 2026-10-12,
 		comment is 'Shared predicates for forecaster diagnostics, dataset validation, differencing, lag construction, error metrics, seasonal adjustment, and baselines.'
 	]).
 
 	:- uses(format, [
 		format/2, format/3
-	]).
-
-	:- uses(integer, [
-		sequence/3
 	]).
 
 	:- uses(list, [
@@ -44,10 +40,6 @@
 
 	:- uses(numberlist, [
 		sum/2
-	]).
-
-	:- uses(pairs, [
-		keys/2, values/2
 	]).
 
 	:- uses(type, [
@@ -132,10 +124,11 @@
 		exceptions is [
 			'The dataset contains no observations' - domain_error(non_empty_series, 'Dataset'),
 			'The observation indices do not form a complete, gap-free, 1-based sequence' - domain_error(series_index_sequence, 'Dataset'),
-			'The declared series length is a variable' - instantiation_error,
+			'An observation index or the declared series length is a variable' - instantiation_error,
 			'The declared series length is neither a variable nor an integer' - type_error(integer, 'DeclaredLength'),
 			'The declared series length is an integer but is not positive' - domain_error(positive_integer, 'DeclaredLength'),
-			'The declared and observed series lengths differ' - consistency_error(series_length, 'DeclaredLength', 'ObservedLength')
+			'The declared and observed series lengths differ' - consistency_error(series_length, 'DeclaredLength', 'ObservedLength'),
+			'Index arithmetic raises an evaluation error' - evaluation_error('Error')
 		]
 	]).
 
@@ -150,19 +143,41 @@
 		;	true
 		),
 		keysort(Pairs0, Pairs),
-		keys(Pairs, Indices),
-		length(Indices, ObservedLength),
-		(	sequence(1, ObservedLength, Indices) ->
-			true
-		;	domain_error(series_index_sequence, Dataset)
-		),
+		sorted_observations(Pairs, Dataset, 1, ObservedLength, Series),
 		Dataset::series_length(DeclaredLength),
 		context(Context),
 		check(positive_integer, DeclaredLength, Context),
 		(	DeclaredLength =:= ObservedLength ->
-			values(Pairs, Series)
+			true
 		;	consistency_error(series_length, DeclaredLength, ObservedLength)
 		).
+
+	:- private(sorted_observations/5).
+	:- mode(sorted_observations(@list(pair), +object_identifier, +positive_integer, -non_negative_integer, -list), one_or_error).
+	:- info(sorted_observations/5, [
+		comment is 'Validates sorted indices without binding them while collecting values and counting observations.',
+		argnames is ['Pairs', 'Dataset', 'ExpectedIndex', 'Length', 'Series'],
+		exceptions is [
+			'An observation index is a variable' - instantiation_error,
+			'The observation indices are not a gap-free 1-based integer sequence' - domain_error(series_index_sequence, 'Dataset'),
+			'Index arithmetic raises an evaluation error' - evaluation_error('Error')
+		]
+	]).
+
+	sorted_observations(Pairs, _Dataset, _ExpectedIndex, _Length, _Series) :-
+		var(Pairs),
+		instantiation_error.
+	sorted_observations([], _Dataset, Next, Length, []) :-
+		Length is Next - 1.
+	sorted_observations([Index-Value| Pairs], Dataset, Expected, Length, [Value| Series]) :-
+		(	var(Index) ->
+			instantiation_error
+		;	Index == Expected ->
+			true
+		;	domain_error(series_index_sequence, Dataset)
+		),
+		Next is Expected + 1,
+		sorted_observations(Pairs, Dataset, Next, Length, Series).
 
 	:- protected(check_series/2).
 	:- mode(check_series(+object_identifier, +list), one_or_error).

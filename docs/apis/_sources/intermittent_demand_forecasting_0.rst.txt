@@ -15,7 +15,7 @@ Croston, SBA, and TSB intermittent-demand forecasters with causal initialization
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-10-07
+| **Date:** 2026-10-12
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -60,7 +60,7 @@ Learns a forecaster from ``Dataset`` using default options.
 |    ``learn(+object_identifier,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    The declared series length is a variable:
+|    An observation index or the declared series length is a variable:
 |        ``instantiation_error``
 |    The declared series length is not an integer:
 |        ``type_error(integer,DeclaredLength)``
@@ -101,6 +101,8 @@ Learns a forecaster from ``Dataset`` using the specified ``Options``.
 |    ``learn(+object_identifier,-compound,+list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
+|    An observation index or the declared series length is a variable:
+|        ``instantiation_error``
 |    ``Options`` is a variable:
 |        ``instantiation_error``
 |    ``Options`` is neither a variable nor a list:
@@ -150,7 +152,7 @@ Returns aligned one-step fitted values for ``Dataset`` using default options.
 |    ``fitted_values(+object_identifier,-list)`` - ``one_or_error``
 
 | **Exceptions:**
-|    The declared series length is a variable:
+|    An observation index or the declared series length is a variable:
 |        ``instantiation_error``
 |    The declared series length is not an integer:
 |        ``type_error(integer,DeclaredLength)``
@@ -191,6 +193,8 @@ Returns aligned one-step fitted values for ``Dataset`` using the specified ``Opt
 |    ``fitted_values(+object_identifier,-list,+list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
+|    An observation index or the declared series length is a variable:
+|        ``instantiation_error``
 |    ``Options`` is a variable:
 |        ``instantiation_error``
 |    ``Options`` is neither a variable nor a list:
@@ -358,7 +362,7 @@ Exports a validated forecaster as a single fact with dataset and diagnostics com
 |    ``export_to_file(+object_identifier,+compound,+atom,+atom)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Forecaster``, ``Functor``, ``File``, or the declared dataset length is a variable:
+|    ``Forecaster``, ``Functor``, ``File``, an observation index, or the declared dataset length is a variable:
 |        ``instantiation_error``
 |    ``Forecaster`` is not a valid intermittent-demand forecaster:
 |        ``domain_error(forecaster,Forecaster)``
@@ -454,17 +458,19 @@ Replays an already validated series using a concrete method, validated parameter
 ``prepare_learning/4``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Resolves numeric or auto method/coefficient requests, collects the dataset once, and fits the lowest-RMSE concrete configuration, returning the collected series for optional replay. Normalizes the validated coefficient_grid once when a coefficient is auto, default [0.1,0.2,0.5,0.8,1.0], to ascending distinct floats; ties follow method priority and ascending alpha/beta. Numeric requests remain unchanged. Never stores the grid in effective options. Preserves caller grid and missing observation variables.
+Collects and validates once, fits all requested configurations using exact RMSE priority, and optionally returns aligned predictions without retaining history in the model.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``prepare_learning(Dataset,Series,Forecaster,Options)``
+|    ``prepare_learning(Dataset,Forecaster,Options,Output)``
 | **Mode and number of proofs:**
-|    ``prepare_learning(+object_identifier,-list,-compound,+list(compound))`` - ``one_or_error``
+|    ``prepare_learning(+object_identifier,-compound,+list(compound),+compound)`` - ``one_or_error``
 
 | **Exceptions:**
+|    An observation index or the declared series length is a variable:
+|        ``instantiation_error``
 |    ``Options`` is a variable:
 |        ``instantiation_error``
 |    ``Options`` is neither a variable nor a list:
@@ -520,59 +526,514 @@ Normalizes a validated nonempty coefficient grid to ascending distinct floats wi
 
 ------------
 
-.. index:: learn_candidates/5
-.. _intermittent_demand_forecasting/0::learn_candidates/5:
+.. index:: select_methods/7
+.. _intermittent_demand_forecasting/0::select_methods/7:
 
-``learn_candidates/5``
-^^^^^^^^^^^^^^^^^^^^^^
+``select_methods/7``
+^^^^^^^^^^^^^^^^^^^^
 
-Fits concrete candidate(Method,Alpha,Beta) specifications in priority order from an already collected series using the validated missing policy, returning RMSE-Forecaster pairs. Preserves missing variables and propagates candidate errors without skipping configurations.
+Evaluates every method while retaining only the best concrete fit.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``learn_candidates(Specifications,Dataset,Series,Policy,Candidates)``
+|    ``select_methods(Methods,Alphas,Betas,Series,Policy,PreviousBest,Best)``
 | **Mode and number of proofs:**
-|    ``learn_candidates(+list(compound),+object_identifier,@list,+atom,-list)`` - ``one_or_error``
+|    ``select_methods(+list,+list,+list,@list,+atom,+term,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    An observation is neither a variable nor a number:
-|        ``type_error(number,Observation)``
-|    An observation is negative:
-|        ``domain_error(non_negative_number,Observation)``
-|    All observations are missing:
-|        ``domain_error(insufficient_observations,Dataset)``
-|    Candidate fitting or error arithmetic raises an evaluation error:
+|    Candidate arithmetic raises an evaluation error:
 |        ``evaluation_error(Error)``
 
 
 ------------
 
-.. index:: learn_series/5
-.. _intermittent_demand_forecasting/0::learn_series/5:
+.. index:: select_alphas/7
+.. _intermittent_demand_forecasting/0::select_alphas/7:
 
-``learn_series/5``
-^^^^^^^^^^^^^^^^^^
+``select_alphas/7``
+^^^^^^^^^^^^^^^^^^^
 
-Fits a concrete method to an already collected series using validated parameters, preserving missing variables and recording canonical concrete options and causal error diagnostics.
+Evaluates each size coefficient for a concrete method.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``learn_series(Dataset,Series,Method,Parameters,Forecaster)``
+|    ``select_alphas(Alphas,Method,Betas,Series,Policy,PreviousBest,Best)``
 | **Mode and number of proofs:**
-|    ``learn_series(+object_identifier,@list,+atom,+compound,-compound)`` - ``one_or_error``
+|    ``select_alphas(+list,+atom,+list,@list,+atom,+term,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    An observation is neither a variable nor a number:
+|    Candidate arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: select_betas/7
+.. _intermittent_demand_forecasting/0::select_betas/7:
+
+``select_betas/7``
+^^^^^^^^^^^^^^^^^^
+
+Fits every occurrence coefficient without suppressing losing-candidate errors.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``select_betas(Betas,Method,Alpha,Series,Policy,PreviousBest,Best)``
+| **Mode and number of proofs:**
+|    ``select_betas(+list,+atom,+number,@list,+atom,+term,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Candidate arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: fit_paired_series/4
+.. _intermittent_demand_forecasting/0::fit_paired_series/4:
+
+``fit_paired_series/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Fits SBA and Croston with shared transitions and independent error totals and metrics.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fit_paired_series(Series,Parameters,SBA,Croston)``
+| **Mode and number of proofs:**
+|    ``fit_paired_series(@list,+compound,-compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Transition or scoring arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: learn_pair/4
+.. _intermittent_demand_forecasting/0::learn_pair/4:
+
+``learn_pair/4``
+^^^^^^^^^^^^^^^^
+
+Advances one shared Croston state and two causal error streams.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn_pair(Series,Parameters,Accumulator,Result)``
+| **Mode and number of proofs:**
+|    ``learn_pair(@list,+compound,+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Transition or scoring arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: paired_predictions/4
+.. _intermittent_demand_forecasting/0::paired_predictions/4:
+
+``paired_predictions/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes both method predictions from one rate, retaining integer cold-start zeros.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``paired_predictions(State,Parameters,SBA,Croston)``
+| **Mode and number of proofs:**
+|    ``paired_predictions(+compound,+compound,-number,-number)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Prediction arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: better_candidate/3
+.. _intermittent_demand_forecasting/0::better_candidate/3:
+
+``better_candidate/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Chooses the lower rounded RMSE, breaking exact ties by method, alpha, and beta priority.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``better_candidate(Candidate,PreviousBest,Best)``
+| **Mode and number of proofs:**
+|    ``better_candidate(+compound,+term,-compound)`` - ``one``
+
+
+------------
+
+.. index:: candidate_key/2
+.. _intermittent_demand_forecasting/0::candidate_key/2:
+
+``candidate_key/2``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the exact RMSE and deterministic method/coefficient priority key.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``candidate_key(Candidate,Key)``
+| **Mode and number of proofs:**
+|    ``candidate_key(+compound,-compound)`` - ``one``
+
+
+------------
+
+.. index:: method_priority/2
+.. _intermittent_demand_forecasting/0::method_priority/2:
+
+``method_priority/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns the priority of a validated concrete method.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``method_priority(Method,Priority)``
+| **Mode and number of proofs:**
+|    ``method_priority(+atom,-integer)`` - ``one``
+
+
+------------
+
+.. index:: fit_series/4
+.. _intermittent_demand_forecasting/0::fit_series/4:
+
+``fit_series/4``
+^^^^^^^^^^^^^^^^
+
+Fits a validated series, retaining terminal state and error metrics without constructing public diagnostics.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fit_series(Series,Method,Parameters,Fit)``
+| **Mode and number of proofs:**
+|    ``fit_series(@list,+atom,+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Fitting or metric arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: fit_series_output/5
+.. _intermittent_demand_forecasting/0::fit_series_output/5:
+
+``fit_series_output/5``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Fits and scores a validated series, optionally emitting pre-observation predictions in the same traversal.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fit_series_output(Series,Method,Parameters,Output,Fit)``
+| **Mode and number of proofs:**
+|    ``fit_series_output(@list,+atom,+compound,+term,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Fitting or metric arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: fitted_model/3
+.. _intermittent_demand_forecasting/0::fitted_model/3:
+
+``fitted_model/3``
+^^^^^^^^^^^^^^^^^^
+
+Builds canonical public diagnostics once from the winning fit and validated observation summary.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fitted_model(Summary,Fit,Forecaster)``
+| **Mode and number of proofs:**
+|    ``fitted_model(+compound,+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Counter arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: learn_state/6
+.. _intermittent_demand_forecasting/0::learn_state/6:
+
+``learn_state/6``
+^^^^^^^^^^^^^^^^^
+
+Advances causal state and error totals with optional aligned prediction output.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn_state(Series,Method,Parameters,Accumulator,Result,Output)``
+| **Mode and number of proofs:**
+|    ``learn_state(@list,+atom,+compound,+compound,-compound,+term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Prediction, transition, or scoring arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: score_observation/7
+.. _intermittent_demand_forecasting/0::score_observation/7:
+
+``score_observation/7``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Scores a validated numeric target or preserves totals and a fresh prediction placeholder for a missing target.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``score_observation(Method,State,Parameters,Observation,PreviousTotals,Totals,Prediction)``
+| **Mode and number of proofs:**
+|    ``score_observation(+atom,+compound,+compound,@term,+compound,-compound,-term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Prediction or scoring arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: demand_summary/3
+.. _intermittent_demand_forecasting/0::demand_summary/3:
+
+``demand_summary/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Validates demands and summarizes elapsed, observed, and positive counts without binding missing values.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``demand_summary(Series,Accumulator,Summary)``
+| **Mode and number of proofs:**
+|    ``demand_summary(@list,+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    An observation is not a number or variable:
 |        ``type_error(number,Observation)``
 |    An observation is negative:
 |        ``domain_error(non_negative_number,Observation)``
-|    All observations are missing:
-|        ``domain_error(insufficient_observations,Dataset)``
-|    Fitting or error arithmetic raises an evaluation error:
+|    Counter arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: prepare_parameters/4
+.. _intermittent_demand_forecasting/0::prepare_parameters/4:
+
+``prepare_parameters/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Prepares validated coefficients, their complements, and the SBA correction for a fitting pass or public operation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``prepare_parameters(Alpha,Beta,Policy,Parameters)``
+| **Mode and number of proofs:**
+|    ``prepare_parameters(+number,+number,+atom,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Coefficient arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: positive_smoothing/4
+.. _intermittent_demand_forecasting/0::positive_smoothing/4:
+
+``positive_smoothing/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Smooths positive endpoints using their minimum plus a weighted difference, avoiding independent product underflow.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``positive_smoothing(Weight,Observation,Previous,Smoothed)``
+| **Mode and number of proofs:**
+|    ``positive_smoothing(+compound,+number,+number,-number)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Smoothing arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: checked_forecaster/2
+.. _intermittent_demand_forecasting/0::checked_forecaster/2:
+
+``checked_forecaster/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates a model and returns its extracted fields for reuse by public operations.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``checked_forecaster(Forecaster,Data)``
+| **Mode and number of proofs:**
+|    ``checked_forecaster(@term,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Forecaster`` is a variable:
+|        ``instantiation_error``
+|    ``Forecaster`` is invalid:
+|        ``domain_error(forecaster,Forecaster)``
+|    Validation arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: valid_diagnostics/4
+.. _intermittent_demand_forecasting/0::valid_diagnostics/4:
+
+``valid_diagnostics/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Extracts required fields once and validates options, counters, metrics, and state.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_diagnostics(Method,State,Diagnostics,Data)``
+| **Mode and number of proofs:**
+|    ``valid_diagnostics(+atom,+compound,+list,-compound)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    Validation arithmetic raises an evaluation error:
+|        ``evaluation_error(Error)``
+
+
+------------
+
+.. index:: extract_diagnostics/2
+.. _intermittent_demand_forecasting/0::extract_diagnostics/2:
+
+``extract_diagnostics/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Extracts ground diagnostic fields, rejecting malformed arities and duplicate error metrics.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``extract_diagnostics(Diagnostics,Data)``
+| **Mode and number of proofs:**
+|    ``extract_diagnostics(+list,+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: rewrite_diagnostics/4
+.. _intermittent_demand_forecasting/0::rewrite_diagnostics/4:
+
+``rewrite_diagnostics/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Rebuilds diagnostic values in one traversal, preserving order, extra metadata, and later common-field occurrences.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rewrite_diagnostics(Diagnostics,Data,Seen,UpdatedDiagnostics)``
+| **Mode and number of proofs:**
+|    ``rewrite_diagnostics(+list,+compound,+non_negative_integer,-list)`` - ``one``
+
+
+------------
+
+.. index:: diagnostic_position/2
+.. _intermittent_demand_forecasting/0::diagnostic_position/2:
+
+``diagnostic_position/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Maps required diagnostic names to their compact field positions.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostic_position(Name,Position)``
+| **Mode and number of proofs:**
+|    ``diagnostic_position(+atom,-positive_integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_error_metrics/5
+.. _intermittent_demand_forecasting/0::valid_error_metrics/5:
+
+``valid_error_metrics/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks numeric error totals and exact consistency of their derived metrics.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_error_metrics(Count,Absolute,Squared,MAE,RMSE)``
+| **Mode and number of proofs:**
+|    ``valid_error_metrics(+positive_integer,@term,@term,@term,@term)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    Metric arithmetic raises an evaluation error:
 |        ``evaluation_error(Error)``
 
 
