@@ -134,6 +134,16 @@ using Lasso regression coefficients.
 
 * ADDED: New `linear_algebra` library predicate `symmetric_eigen_partial/7`.
 
+* CHANGED: The `umap_projection` library to use self-inclusive neighbor
+counts, introducing backwards incompatible neighborhood semantics. Fixed
+duplicate-row self neighborhoods, fractional local connectivity,
+endpoint-biased negative sampling, zero-weight transform scheduling, and
+reducer and metric-option validation. Improved performance with sparse fuzzy
+graph merging, AVL graph and row indexes, partial spectral initialization
+with residual checks, bounded exact neighbor selection, and cached
+curve-fitting samples. Expanded coverage and reduced repeated training in
+the tests. Updated documentation.
+
 * IMPROVED: Performance of the `crypto`, `isolation_forest_anomaly_detector`,
 and `logistic_regression_classifier` libraries.
 

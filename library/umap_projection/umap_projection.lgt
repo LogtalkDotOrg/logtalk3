@@ -23,9 +23,9 @@
 	imports(dimension_reducer_common)).
 
 	:- info([
-		version is 1:1:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-24,
+		date is 2026-10-12,
 		comment is 'Uniform Manifold Approximation and Projection dimension reducer for continuous, categorical, and mixed datasets.',
 		see_also is [tsne_projection, spectral_clusterer]
 	]).
@@ -41,7 +41,8 @@
 	]).
 
 	:- uses(linear_algebra, [
-		symmetric_eigen/5, transpose_matrix/2
+		symmetric_eigen_partial/7, transpose_matrix/2, matrix_vector_product/3,
+		add_scaled_outer_product/4, difference_norm/3
 	]).
 
 	:- uses(assignvars, [
@@ -55,7 +56,7 @@
 	]).
 
 	:- uses(numberlist, [
-		euclidean_distance/3, manhattan_distance/3
+		euclidean_distance/3, manhattan_distance/3, sum/2, scalar_product/3
 	]).
 
 	:- uses(pairs, [
@@ -83,7 +84,8 @@
 		keys(Attributes, AttributeNames),
 		findall(Id-AttributeValues, Dataset::example(Id, AttributeValues), Examples),
 		check_examples(Dataset, Attributes, AttributeNames, Examples),
-		build_encoders(Attributes, Examples, Options, Encoders),
+		build_attribute_observations(AttributeNames, Examples, Observations),
+		build_encoders(Attributes, Observations, Options, Encoders),
 		examples_to_rows(Examples, Encoders, TrainingRows),
 		keys(Examples, ExampleIds),
 		encoded_feature_count(Encoders, EncodedFeatureCount),
@@ -119,10 +121,12 @@
 		coordinate_pairs(Coordinates, 1, ReducedInstance).
 
 	check_dimension_reducer(DimensionReducer) :-
-		(	var(DimensionReducer) ->
+		( 	\+ ground(DimensionReducer) ->
 			instantiation_error
 		;	DimensionReducer = umap_reducer(Encoders, ExampleIds, TrainingRows, EmbeddingRows, FuzzyGraph, Diagnostics),
 			valid_mixed_encoders(Encoders),
+			encoder_attribute_names(Encoders, AttributeNames),
+			memberchk(attribute_names(AttributeNames), Diagnostics),
 			valid_example_ids(ExampleIds),
 			length(Encoders, FeatureCount),
 			encoded_feature_count(Encoders, EncodedFeatureCount),
@@ -264,32 +268,54 @@
 		;	existence_error(attribute, Attribute)
 		).
 
-	build_encoders([], _Examples, _Options, []).
-	build_encoders([Attribute-continuous| Attributes], Examples, Options, [continuous(Attribute, Mean, Scale)| Encoders]) :-
+	build_encoders([], _Observations, _Options, []).
+	build_encoders([Attribute-continuous| Attributes], Observations, Options, [continuous(Attribute, Mean, Scale)| Encoders]) :-
 		!,
-		observed_attribute_values(Examples, Attribute, Values),
+		avltree::lookup(Attribute, Values, Observations),
 		(	Values == [] ->
 			domain_error(observed_attribute_values, Attribute)
 		;	arithmetic_mean(Values, Mean),
 			continuous_scale(Values, Options, Scale)
 		),
-		build_encoders(Attributes, Examples, Options, Encoders).
-	build_encoders([Attribute-Values| Attributes], Examples, Options, [categorical(Attribute, Values)| Encoders]) :-
-		observed_attribute_values(Examples, Attribute, ObservedValues),
+		build_encoders(Attributes, Observations, Options, Encoders).
+	build_encoders([Attribute-Values| Attributes], Observations, Options, [categorical(Attribute, Values)| Encoders]) :-
+		avltree::lookup(Attribute, ObservedValues, Observations),
 		(	ObservedValues == [] ->
 			domain_error(observed_attribute_values, Attribute)
 		;	true
 		),
-		build_encoders(Attributes, Examples, Options, Encoders).
+		build_encoders(Attributes, Observations, Options, Encoders).
 
-	observed_attribute_values([], _Attribute, []).
-	observed_attribute_values([_-AttributeValues| Examples], Attribute, Values) :-
-		attribute_value(Attribute, AttributeValues, Value),
-		(	nonvar(Value) ->
-			Values = [Value| Rest]
-		;	Values = Rest
+	build_attribute_observations(Attributes, Examples, Observations) :-
+		observation_slots(Attributes, Pairs),
+		avltree::as_dictionary(Pairs, Initial),
+		collect_example_observations(Examples, Initial, Collected),
+		avltree::as_list(Collected, Slots),
+		close_observation_slots(Slots, Values),
+		avltree::as_dictionary(Values, Observations).
+
+	observation_slots([], []).
+	observation_slots([Attribute| Attributes], [Attribute-observations(Tail, Tail)| Pairs]) :-
+		observation_slots(Attributes, Pairs).
+
+	collect_example_observations([], Index, Index).
+	collect_example_observations([_-Bindings| Examples], Index0, Index) :-
+		collect_binding_observations(Bindings, Index0, Index1),
+		collect_example_observations(Examples, Index1, Index).
+
+	collect_binding_observations([], Index, Index).
+	collect_binding_observations([Attribute-Value| Bindings], Index0, Index) :-
+		( 	var(Value) ->
+			Index1 = Index0
+		;	avltree::lookup(Attribute, observations(Values, Tail0), Index0),
+			Tail0 = [Value| Tail],
+			avltree::update(Index0, Attribute, observations(Values, Tail), Index1)
 		),
-		observed_attribute_values(Examples, Attribute, Rest).
+		collect_binding_observations(Bindings, Index1, Index).
+
+	close_observation_slots([], []).
+	close_observation_slots([Attribute-observations(Values, [])| Slots], [Attribute-Values| Pairs]) :-
+		close_observation_slots(Slots, Pairs).
 
 	continuous_scale(Values, Options, Scale) :-
 		^^option(feature_scaling(FeatureScaling), Options),
@@ -308,7 +334,7 @@
 
 	examples_to_rows([], _Encoders, []).
 	examples_to_rows([_-AttributeValues| Examples], Encoders, [Row| Rows]) :-
-		encode_instance(Encoders, AttributeValues, Row),
+		encode_instance_values(Encoders, AttributeValues, Row),
 		examples_to_rows(Examples, Encoders, Rows).
 
 	encode_instance(Encoders, AttributeValues, Features) :-
@@ -389,39 +415,130 @@
 
 	resolve_neighbor_count(Options, SampleCount, NeighborCount) :-
 		^^option(n_neighbors(RequestedNeighborCount), Options),
-		NeighborCount is min(RequestedNeighborCount, SampleCount - 1).
+		NeighborCount is min(RequestedNeighborCount, SampleCount).
 
 	exact_nearest_neighbors(Rows, Metric, NeighborCount, NeighborRows) :-
-		exact_nearest_neighbors(Rows, Rows, Metric, NeighborCount, 0, NeighborRows).
+		prepare_metric_rows(Rows, Metric, Prepared),
+		length(Rows, SampleCount),
+		( 	SampleCount =< 32 ->
+			full_sort_training_neighbors(Prepared, Prepared, Metric, NeighborCount, 0, NeighborRows)
+		;	indexed_neighbor_heaps(Prepared, Metric, NeighborCount, NeighborRows)
+		).
 
-	exact_nearest_neighbors([], _AllRows, _Metric, _NeighborCount, _Index, []).
-	exact_nearest_neighbors([Row| Rows], AllRows, Metric, NeighborCount, Index, [Neighbors| NeighborRows]) :-
-		indexed_distances(AllRows, Row, Metric, 0, -1, Distances),
-		keysort(Distances, SortedDistances),
-		take_neighbors(NeighborCount, SortedDistances, Neighbors),
-		NextIndex is Index + 1,
-		exact_nearest_neighbors(Rows, AllRows, Metric, NeighborCount, NextIndex, NeighborRows).
+	full_sort_training_neighbors([], _All, _Metric, _Count, _Index, []).
+	full_sort_training_neighbors([Row| Rows], All, Metric, Count, Index, [[neighbor(Index, 0.0)| Neighbors]| Rest]) :-
+		prepared_distances(All, Row, Metric, 0, Index, Pairs),
+		keysort(Pairs, Sorted),
+		OtherCount is Count - 1,
+		take_sorted_neighbors(OtherCount, Sorted, Neighbors),
+		Next is Index + 1,
+		full_sort_training_neighbors(Rows, All, Metric, Count, Next, Rest).
+
+	prepared_distances([], _Row, _Metric, _Index, _Excluded, []).
+	prepared_distances([Other| Rows], Row, Metric, Index, Excluded, Pairs) :-
+		( 	Index =:= Excluded ->
+			Pairs = Rest
+		;	prepared_distance(Metric, Row, Other, Distance),
+			Pairs = [Distance-Index| Rest]
+		),
+		Next is Index + 1,
+		prepared_distances(Rows, Row, Metric, Next, Excluded, Rest).
+
+	take_sorted_neighbors(0, _Pairs, []) :-
+		!.
+	take_sorted_neighbors(Count, [Distance-Index| Pairs], [neighbor(Index, Distance)| Neighbors]) :-
+		Next is Count - 1,
+		take_sorted_neighbors(Next, Pairs, Neighbors).
+
+	indexed_neighbor_heaps(Prepared, Metric, NeighborCount, NeighborRows) :-
+		indexed_row_pairs(Prepared, 0, IndexedRows),
+		empty_neighbor_heaps(IndexedRows, HeapPairs),
+		avltree::as_dictionary(HeapPairs, Initial),
+		OtherNeighborCount is NeighborCount - 1,
+		pairwise_neighbor_heaps(IndexedRows, Metric, OtherNeighborCount, Initial, Index),
+		avltree::as_list(Index, FinalHeaps),
+		training_heap_neighbors(FinalHeaps, NeighborRows).
 
 	nearest_neighbors(Rows, Row, Metric, NeighborCount, Neighbors) :-
-		indexed_distances(Rows, Row, Metric, 0, -1, Distances),
-		keysort(Distances, SortedDistances),
-		take_neighbors(NeighborCount, SortedDistances, Neighbors).
+		prepare_metric_row(Row, Metric, Prepared),
+		binary_heap(>)::new(Initial),
+		transform_neighbor_heap(Rows, Prepared, Metric, NeighborCount, 0, Initial, Heap),
+		heap_neighbors(Heap, Neighbors).
 
-	indexed_distances([], _Row, _Metric, _Index, _ExcludedIndex, []).
-	indexed_distances([OtherRow| Rows], Row, Metric, Index, ExcludedIndex, Distances) :-
-		(	Index =:= ExcludedIndex ->
-			Distances = Rest
-		;	metric_distance(Metric, Row, OtherRow, Distance),
-			Distances = [Distance-Index| Rest]
-		),
-		NextIndex is Index + 1,
-		indexed_distances(Rows, Row, Metric, NextIndex, ExcludedIndex, Rest).
+	prepare_metric_rows([], _Metric, []).
+	prepare_metric_rows([Row| Rows], Metric, [Prepared| PreparedRows]) :-
+		prepare_metric_row(Row, Metric, Prepared),
+		prepare_metric_rows(Rows, Metric, PreparedRows).
 
-	take_neighbors(0, _Distances, []) :-
+	prepare_metric_row(Row, Metric, prepared(Row, NormSquared)) :-
+		( 	Metric == cosine ->
+			scalar_product(Row, Row, NormSquared)
+		;	NormSquared = 0.0
+		).
+
+	prepared_distance(cosine, prepared(Left, LeftNorm), prepared(Right, RightNorm), Distance) :-
+		!,
+		scalar_product(Left, Right, Dot),
+		cosine_distance(Dot, LeftNorm, RightNorm, Distance).
+	prepared_distance(Metric, prepared(Left, _), prepared(Right, _), Distance) :-
+		metric_distance(Metric, Left, Right, Distance).
+
+	empty_neighbor_heaps([], []).
+	empty_neighbor_heaps([Index-_Row| Rows], [Index-Heap| Heaps]) :-
+		binary_heap(>)::new(Heap),
+		empty_neighbor_heaps(Rows, Heaps).
+
+	pairwise_neighbor_heaps([], _Metric, _Count, Index, Index).
+	pairwise_neighbor_heaps([Source-Row| Rows], Metric, Count, Index0, Index) :-
+		neighbor_heap_pairs(Rows, Source, Row, Metric, Count, Index0, Index1),
+		pairwise_neighbor_heaps(Rows, Metric, Count, Index1, Index).
+
+	neighbor_heap_pairs([], _Source, _Row, _Metric, _Count, Index, Index).
+	neighbor_heap_pairs([Target-Other| Rows], Source, Row, Metric, Count, Index0, Index) :-
+		prepared_distance(Metric, Row, Other, Distance),
+		avltree::lookup(Source, SourceHeap, Index0),
+		bounded_heap_insert(Count, key(Distance, Target), SourceHeap, UpdatedSource),
+		avltree::lookup(Target, TargetHeap, Index0),
+		bounded_heap_insert(Count, key(Distance, Source), TargetHeap, UpdatedTarget),
+		avltree::update(Index0, Source, UpdatedSource, Index1),
+		avltree::update(Index1, Target, UpdatedTarget, Index2),
+		neighbor_heap_pairs(Rows, Source, Row, Metric, Count, Index2, Index).
+
+	bounded_heap_insert(0, _Key, Heap, Heap) :-
 		!.
-	take_neighbors(Count, [Distance-Index| Distances], [neighbor(Index, Distance)| Neighbors]) :-
-		NextCount is Count - 1,
-		take_neighbors(NextCount, Distances, Neighbors).
+	bounded_heap_insert(Count, Key, Heap0, Heap) :-
+		binary_heap(>)::size(Heap0, Size),
+		( 	Size < Count ->
+			binary_heap(>)::insert(Key, true, Heap0, Heap)
+		;	binary_heap(>)::top(Heap0, Worst, _),
+			( 	Key @< Worst ->
+				binary_heap(>)::delete(Heap0, _, _, Reduced),
+				binary_heap(>)::insert(Key, true, Reduced, Heap)
+			;	Heap = Heap0
+			)
+		).
+
+	training_heap_neighbors([], []).
+	training_heap_neighbors([Index-Heap| Heaps], [[neighbor(Index, 0.0)| Neighbors]| Rows]) :-
+		heap_neighbors(Heap, Neighbors),
+		training_heap_neighbors(Heaps, Rows).
+
+	heap_neighbors(Heap, Neighbors) :-
+		binary_heap(>)::as_list(Heap, Pairs),
+		keysort(Pairs, Sorted),
+		heap_neighbor_pairs(Sorted, Neighbors).
+
+	heap_neighbor_pairs([], []).
+	heap_neighbor_pairs([key(Distance, Index)-_| Pairs], [neighbor(Index, Distance)| Neighbors]) :-
+		heap_neighbor_pairs(Pairs, Neighbors).
+
+	transform_neighbor_heap([], _Row, _Metric, _Count, _Index, Heap, Heap).
+	transform_neighbor_heap([Other| Rows], Row, Metric, Count, Index, Heap0, Heap) :-
+		prepare_metric_row(Other, Metric, PreparedOther),
+		prepared_distance(Metric, Row, PreparedOther, Distance),
+		bounded_heap_insert(Count, key(Distance, Index), Heap0, Heap1),
+		Next is Index + 1,
+		transform_neighbor_heap(Rows, Row, Metric, Count, Next, Heap1, Heap).
 
 	metric_distance(euclidean, Left, Right, Distance) :-
 		euclidean_distance(Left, Right, Distance).
@@ -429,6 +546,9 @@
 		manhattan_distance(Left, Right, Distance).
 	metric_distance(cosine, Left, Right, Distance) :-
 		cosine_products(Left, Right, 0.0, 0.0, 0.0, DotProduct, LeftNormSquared, RightNormSquared),
+		cosine_distance(DotProduct, LeftNormSquared, RightNormSquared, Distance).
+
+	cosine_distance(DotProduct, LeftNormSquared, RightNormSquared, Distance) :-
 		(	LeftNormSquared =< 0.0 ->
 			(	RightNormSquared =< 0.0 ->
 				Distance = 0.0
@@ -506,7 +626,10 @@
 		length(PositiveDistances, Count),
 		IntegerPart is floor(LocalConnectivity),
 		Interpolation is LocalConnectivity - IntegerPart,
-		(	Count >= IntegerPart, IntegerPart > 0 ->
+		( 	IntegerPart =:= 0,
+			PositiveDistances = [First| _] ->
+			Rho is Interpolation * First
+		;	Count >= IntegerPart, IntegerPart > 0 ->
 			Position is IntegerPart - 1,
 			nth0(Position, PositiveDistances, Base),
 			(	Interpolation > 1.0e-5, Count > IntegerPart ->
@@ -570,22 +693,25 @@
 		),
 		directed_memberships(Neighbors, Source, Rho, Sigma, Rest).
 
-	merge_directed_memberships(Source, Count, _DirectedMemberships, _MixRatio, []) :-
-		Source >= Count,
-		!.
-	merge_directed_memberships(Source, Count, DirectedMemberships, MixRatio, FuzzyGraph) :-
-		Target is Source + 1,
-		merge_source_memberships(Source, Target, Count, DirectedMemberships, MixRatio, SourceEdges),
-		NextSource is Source + 1,
-		append(SourceEdges, RestEdges, FuzzyGraph),
-		merge_directed_memberships(NextSource, Count, DirectedMemberships, MixRatio, RestEdges).
+	merge_directed_memberships(_Source, _Count, DirectedMemberships, MixRatio, FuzzyGraph) :-
+		canonical_memberships(DirectedMemberships, Pairs),
+		keysort(Pairs, Sorted),
+		merge_membership_pairs(Sorted, MixRatio, FuzzyGraph).
 
-	merge_source_memberships(_Source, Target, Count, _DirectedMemberships, _MixRatio, []) :-
-		Target >= Count,
-		!.
-	merge_source_memberships(Source, Target, Count, DirectedMemberships, MixRatio, Edges) :-
-		directed_weight(Source, Target, DirectedMemberships, Forward),
-		directed_weight(Target, Source, DirectedMemberships, Reverse),
+	canonical_memberships([], []).
+	canonical_memberships([directed(Source, Target, Weight)| Memberships], [Key-Direction| Pairs]) :-
+		( 	Source < Target ->
+			Key = Source-Target,
+			Direction = forward(Weight)
+		;	Key = Target-Source,
+			Direction = reverse(Weight)
+		),
+		canonical_memberships(Memberships, Pairs).
+
+	merge_membership_pairs([], _MixRatio, []).
+	merge_membership_pairs([Key-Direction| Pairs], MixRatio, Edges) :-
+		membership_pair_weights([Key-Direction| Pairs], Key, 0.0, 0.0, Forward, Reverse, Remaining),
+		Key = Source-Target,
 		Union is Forward + Reverse - Forward * Reverse,
 		Intersection is Forward * Reverse,
 		Weight is MixRatio * Union + (1.0 - MixRatio) * Intersection,
@@ -593,14 +719,20 @@
 			Edges = [edge(Source, Target, Weight)| Rest]
 		;	Edges = Rest
 		),
-		NextTarget is Target + 1,
-		merge_source_memberships(Source, NextTarget, Count, DirectedMemberships, MixRatio, Rest).
+		merge_membership_pairs(Remaining, MixRatio, Rest).
 
-	directed_weight(Source, Target, DirectedMemberships, Weight) :-
-		(	member(directed(Source, Target, Found), DirectedMemberships) ->
-			Weight = Found
-		;	Weight = 0.0
-		).
+	membership_pair_weights([Key-Direction| Pairs], PairKey, Forward0, Reverse0, Forward, Reverse, Remaining) :-
+		Key == PairKey,
+		!,
+		( 	Direction = forward(Weight) ->
+			Forward1 = Weight,
+			Reverse1 = Reverse0
+		;	Direction = reverse(Weight),
+			Forward1 = Forward0,
+			Reverse1 = Weight
+		),
+		membership_pair_weights(Pairs, PairKey, Forward1, Reverse1, Forward, Reverse, Remaining).
+	membership_pair_weights(Pairs, _PairKey, Forward, Reverse, Forward, Reverse, Pairs).
 
 	arithmetic_mean_or_zero([], 0.0).
 	arithmetic_mean_or_zero([Value| Values], Mean) :-
@@ -609,14 +741,29 @@
 	fit_curve_parameters(Options, CurveA, CurveB) :-
 		^^option(spread(Spread), Options),
 		^^option(min_dist(MinDist), Options),
-		fit_curve_iterations(0, Spread, MinDist, 0.0, 0.0, LogA, LogB),
+		curve_samples(0, Spread, MinDist, Samples),
+		fit_curve_iterations(0, Samples, 0.0, 0.0, LogA, LogB),
 		CurveA is exp(LogA),
 		CurveB is exp(LogB).
 
-	fit_curve_iterations(25, _Spread, _MinDist, LogA, LogB, LogA, LogB) :-
+	curve_samples(300, _Spread, _MinDist, []) :-
 		!.
-	fit_curve_iterations(Iteration, Spread, MinDist, LogA0, LogB0, LogA, LogB) :-
-		curve_normal_equations(0, Spread, MinDist, LogA0, LogB0, 0.0, 0.0, 0.0, 0.0, 0.0, H11, H12, H22, G1, G2),
+	curve_samples(Index, Spread, MinDist, [sample(Distance, LogDistance, Target)| Samples]) :-
+		Distance is Index * (3.0 * Spread / 299.0),
+		curve_target(Distance, Spread, MinDist, Target),
+		( 	Distance > 0.0 ->
+			LogDistance is log(Distance)
+		;	LogDistance = 0.0
+		),
+		Next is Index + 1,
+		curve_samples(Next, Spread, MinDist, Samples).
+
+	fit_curve_iterations(25, _Samples, LogA, LogB, LogA, LogB) :-
+		!.
+	fit_curve_iterations(Iteration, Samples, LogA0, LogB0, LogA, LogB) :-
+		CurveA is exp(LogA0),
+		CurveB is exp(LogB0),
+		curve_normal_equations(Samples, CurveA, CurveB, 0.0, 0.0, 0.0, 0.0, 0.0, H11, H12, H22, G1, G2),
 		DampedH11 is H11 + 1.0e-6,
 		DampedH22 is H22 + 1.0e-6,
 		Determinant is DampedH11 * DampedH22 - H12 * H12,
@@ -632,30 +779,25 @@
 				LogA = LogA1,
 				LogB = LogB1
 			;	NextIteration is Iteration + 1,
-				fit_curve_iterations(NextIteration, Spread, MinDist, LogA1, LogB1, LogA, LogB)
+				fit_curve_iterations(NextIteration, Samples, LogA1, LogB1, LogA, LogB)
 			)
 		).
 
-	curve_normal_equations(300, _Spread, _MinDist, _LogA, _LogB, H110, H120, H220, G10, G20, H11, H12, H22, G1, G2) :-
-		!,
+	curve_normal_equations([], _CurveA, _CurveB, H110, H120, H220, G10, G20, H11, H12, H22, G1, G2) :-
 		H11 = H110,
 		H12 = H120,
 		H22 = H220,
 		G1 = G10,
 		G2 = G20.
-	curve_normal_equations(Index, Spread, MinDist, LogA, LogB, H110, H120, H220, G10, G20, H11, H12, H22, G1, G2) :-
-		Index < 300,
-		Distance is Index * (3.0 * Spread / 299.0),
-		curve_target(Distance, Spread, MinDist, Target),
-		curve_value_and_jacobian(Distance, LogA, LogB, Value, JacobianA, JacobianB),
+	curve_normal_equations([sample(Distance, LogDistance, Target)| Samples], CurveA, CurveB, H110, H120, H220, G10, G20, H11, H12, H22, G1, G2) :-
+		curve_value_and_jacobian(Distance, LogDistance, CurveA, CurveB, Value, JacobianA, JacobianB),
 		Residual is Value - Target,
 		H111 is H110 + JacobianA * JacobianA,
 		H121 is H120 + JacobianA * JacobianB,
 		H221 is H220 + JacobianB * JacobianB,
 		G11 is G10 + JacobianA * Residual,
 		G21 is G20 + JacobianB * Residual,
-		NextIndex is Index + 1,
-		curve_normal_equations(NextIndex, Spread, MinDist, LogA, LogB, H111, H121, H221, G11, G21, H11, H12, H22, G1, G2).
+		curve_normal_equations(Samples, CurveA, CurveB, H111, H121, H221, G11, G21, H11, H12, H22, G1, G2).
 
 	curve_target(Distance, Spread, MinDist, Target) :-
 		(	Distance < MinDist ->
@@ -663,9 +805,7 @@
 		;	Target is exp(-((Distance - MinDist) / Spread))
 		).
 
-	curve_value_and_jacobian(Distance, LogA, LogB, Value, JacobianA, JacobianB) :-
-		CurveA is exp(LogA),
-		CurveB is exp(LogB),
+	curve_value_and_jacobian(Distance, LogDistance, CurveA, CurveB, Value, JacobianA, JacobianB) :-
 		(	Distance =< 0.0 ->
 			Value = 1.0,
 			JacobianA = 0.0,
@@ -675,7 +815,7 @@
 			Value is 1.0 / (1.0 + Term),
 			Common is -Value * (1.0 - Value),
 			JacobianA = Common,
-			JacobianB is Common * 2.0 * CurveB * log(Distance)
+			JacobianB is Common * 2.0 * CurveB * LogDistance
 		).
 
 	initialize_embedding(FuzzyGraph, SampleCount, ComponentCount, Options, InitializationUsed, Embedding) :-
@@ -719,96 +859,154 @@
 	graph_connected(_FuzzyGraph, 1) :-
 		!.
 	graph_connected(FuzzyGraph, SampleCount) :-
-		reachable_vertices([0], FuzzyGraph, [], Reachable),
-		length(Reachable, SampleCount).
+		build_graph_index(FuzzyGraph, SampleCount, Index),
+		avltree::as_dictionary([], Visited),
+		reachable_vertices([0], Index, Visited, 0, SampleCount).
 
-	reachable_vertices([], _FuzzyGraph, Reachable, Reachable).
-	reachable_vertices([Vertex| Pending], FuzzyGraph, Visited, Reachable) :-
-		(	member(Vertex, Visited) ->
-			reachable_vertices(Pending, FuzzyGraph, Visited, Reachable)
-		;	graph_neighbors(FuzzyGraph, Vertex, Neighbors),
-			append(Pending, Neighbors, NextPending),
-			reachable_vertices(NextPending, FuzzyGraph, [Vertex| Visited], Reachable)
+	build_graph_index(Edges, SampleCount, Index) :-
+		empty_graph_vertices(0, SampleCount, Pairs),
+		avltree::as_dictionary(Pairs, Initial),
+		index_graph_edges(Edges, Initial, Unsorted),
+		avltree::as_list(Unsorted, UnsortedPairs),
+		sort_graph_neighbors(UnsortedPairs, SortedPairs),
+		avltree::as_dictionary(SortedPairs, Index).
+
+	empty_graph_vertices(Vertex, Count, []) :-
+		Vertex >= Count,
+		!.
+	empty_graph_vertices(Vertex, Count, [Vertex-vertex(0.0, [])| Pairs]) :-
+		Next is Vertex + 1,
+		empty_graph_vertices(Next, Count, Pairs).
+
+	index_graph_edges([], Index, Index).
+	index_graph_edges([edge(Source, Target, Weight)| Edges], Index0, Index) :-
+		index_graph_endpoint(Source, Target, Weight, Index0, Index1),
+		index_graph_endpoint(Target, Source, Weight, Index1, Index2),
+		index_graph_edges(Edges, Index2, Index).
+
+	index_graph_endpoint(Source, Target, Weight, Index0, Index) :-
+		avltree::lookup(Source, vertex(Degree0, Neighbors), Index0),
+		Degree is Degree0 + Weight,
+		avltree::update(Index0, Source, vertex(Degree, [Target-Weight| Neighbors]), Index).
+
+	sort_graph_neighbors([], []).
+	sort_graph_neighbors([Vertex-vertex(Degree, Neighbors)| Pairs], [Vertex-vertex(Degree, Sorted)| SortedPairs]) :-
+		keysort(Neighbors, Sorted),
+		sort_graph_neighbors(Pairs, SortedPairs).
+
+	reachable_vertices([], _Index, _Visited, Count, Count).
+	reachable_vertices([Vertex| Pending], Index, Visited0, Count0, Count) :-
+		( 	avltree::lookup(Vertex, _, Visited0) ->
+			reachable_vertices(Pending, Index, Visited0, Count0, Count)
+		;	avltree::lookup(Vertex, vertex(_Degree, Neighbors), Index),
+			keys(Neighbors, NeighborIds),
+			append(NeighborIds, Pending, NextPending),
+			avltree::insert(Visited0, Vertex, true, Visited),
+			Count1 is Count0 + 1,
+			reachable_vertices(NextPending, Index, Visited, Count1, Count)
 		).
 
-	graph_neighbors([], _Vertex, []).
-	graph_neighbors([edge(Source, Target, _Weight)| Edges], Vertex, Neighbors) :-
-		(	Vertex =:= Source ->
-			Neighbors = [Target| Rest]
-		;	Vertex =:= Target ->
-			Neighbors = [Source| Rest]
-		;	Neighbors = Rest
-		),
-		graph_neighbors(Edges, Vertex, Rest).
-
 	spectral_embedding(FuzzyGraph, SampleCount, ComponentCount, Embedding) :-
-		graph_degrees(0, SampleCount, FuzzyGraph, Degrees),
+		build_graph_index(FuzzyGraph, SampleCount, Index),
+		indexed_degrees(0, SampleCount, Index, Degrees),
 		positive_degrees(Degrees),
-		normalized_adjacency(0, SampleCount, FuzzyGraph, Degrees, Matrix),
-		symmetric_eigen(Matrix, 1.0e-8, 1000, [_Trivial| Eigenvectors], _Eigenvalues),
-		take_vectors(ComponentCount, Eigenvectors, Components),
-		length(Components, ComponentCount),
+		avltree::as_list(Index, Vertices),
+		inverse_degree_roots(Degrees, Inverses),
+		normalized_graph_rows(Vertices, Inverses, Inverses, Matrix),
+		spectral_components(Matrix, Degrees, ComponentCount, Components),
 		transpose_matrix(Components, Rows0),
 		scale_embedding(Rows0, Rows1),
 		add_embedding_noise(Rows1, Embedding).
 
-	graph_degrees(Index, SampleCount, _FuzzyGraph, []) :-
-		Index >= SampleCount,
-		!.
-	graph_degrees(Index, SampleCount, FuzzyGraph, [Degree| Degrees]) :-
-		vertex_degree(FuzzyGraph, Index, 0.0, Degree),
-		NextIndex is Index + 1,
-		graph_degrees(NextIndex, SampleCount, FuzzyGraph, Degrees).
+	spectral_components(Matrix, Degrees, Count, Components) :-
+		sum(Degrees, TotalDegree),
+		perron_vector(Degrees, TotalDegree, Perron),
+		shift_spectral_matrix(Matrix, 0, Shifted),
+		add_scaled_outer_product(Perron, -3.0, Shifted, Deflated),
+		symmetric_eigen_partial(Deflated, Count, 1.0e-9, 1000, Components, _Values, Diagnostics),
+		memberchk(convergence(tolerance), Diagnostics),
+		valid_spectral_components(Matrix, Perron, Components, 1.0e-8).
 
-	vertex_degree([], _Index, Degree, Degree).
-	vertex_degree([edge(Source, Target, Weight)| Edges], Index, Degree0, Degree) :-
-		(	Index =:= Source ->
-			Degree1 is Degree0 + Weight
-		;	Index =:= Target ->
-			Degree1 is Degree0 + Weight
-		;	Degree1 = Degree0
+	perron_vector([], _Total, []).
+	perron_vector([Degree| Degrees], Total, [Value| Values]) :-
+		Value is sqrt(Degree / Total),
+		perron_vector(Degrees, Total, Values).
+
+	shift_spectral_matrix([], _Index, []).
+	shift_spectral_matrix([Row| Rows], Index, [Shifted| ShiftedRows]) :-
+		shift_spectral_row(Row, 0, Index, Shifted),
+		Next is Index + 1,
+		shift_spectral_matrix(Rows, Next, ShiftedRows).
+
+	shift_spectral_row([], _Column, _Index, []).
+	shift_spectral_row([Value| Values], Column, Index, [Shifted| ShiftedValues]) :-
+		( 	Column =:= Index ->
+			Shifted is Value + 2.0
+		;	Shifted = Value
 		),
-		vertex_degree(Edges, Index, Degree1, Degree).
+		Next is Column + 1,
+		shift_spectral_row(Values, Next, Index, ShiftedValues).
+
+	valid_spectral_components(Matrix, Perron, Components, Tolerance) :-
+		valid_spectral_vectors(Components, Matrix, [Perron], Tolerance).
+
+	valid_spectral_vectors([], _Matrix, _Selected, _Tolerance).
+	valid_spectral_vectors([Vector| Vectors], Matrix, Selected, Tolerance) :-
+		scalar_product(Vector, Vector, NormSquared),
+		abs(NormSquared - 1.0) =< Tolerance,
+		orthogonal_spectral_vectors(Selected, Vector, Tolerance),
+		matrix_vector_product(Matrix, Vector, Product),
+		scalar_product(Vector, Product, Eigenvalue),
+		scale_row(Vector, Eigenvalue, Expected),
+		difference_norm(Product, Expected, Residual),
+		Residual =< Tolerance,
+		valid_spectral_vectors(Vectors, Matrix, [Vector| Selected], Tolerance).
+
+	orthogonal_spectral_vectors([], _Vector, _Tolerance).
+	orthogonal_spectral_vectors([Other| Others], Vector, Tolerance) :-
+		scalar_product(Vector, Other, Product),
+		abs(Product) =< Tolerance,
+		orthogonal_spectral_vectors(Others, Vector, Tolerance).
+
+	indexed_degrees(Vertex, SampleCount, _Index, []) :-
+		Vertex >= SampleCount,
+		!.
+	indexed_degrees(Vertex, SampleCount, Index, [Degree| Degrees]) :-
+		avltree::lookup(Vertex, vertex(Degree, _Neighbors), Index),
+		Next is Vertex + 1,
+		indexed_degrees(Next, SampleCount, Index, Degrees).
 
 	positive_degrees([]).
 	positive_degrees([Degree| Degrees]) :-
 		Degree > 0.0,
 		positive_degrees(Degrees).
 
-	normalized_adjacency(Index, SampleCount, _FuzzyGraph, _Degrees, []) :-
-		Index >= SampleCount,
-		!.
-	normalized_adjacency(Index, SampleCount, FuzzyGraph, Degrees, [Row| Rows]) :-
-		normalized_adjacency_row(0, SampleCount, Index, FuzzyGraph, Degrees, Row),
-		NextIndex is Index + 1,
-		normalized_adjacency(NextIndex, SampleCount, FuzzyGraph, Degrees, Rows).
+	normalized_adjacency(0, SampleCount, FuzzyGraph, Degrees, Matrix) :-
+		build_graph_index(FuzzyGraph, SampleCount, Index),
+		avltree::as_list(Index, Vertices),
+		inverse_degree_roots(Degrees, Inverses),
+		normalized_graph_rows(Vertices, Inverses, Inverses, Matrix).
 
-	normalized_adjacency_row(Column, SampleCount, _Row, _FuzzyGraph, _Degrees, []) :-
-		Column >= SampleCount,
-		!.
-	normalized_adjacency_row(Column, SampleCount, Row, FuzzyGraph, Degrees, [Value| Values]) :-
-		graph_weight(Row, Column, FuzzyGraph, Weight),
-		nth0(Row, Degrees, RowDegree),
-		nth0(Column, Degrees, ColumnDegree),
-		Value is Weight / sqrt(RowDegree * ColumnDegree),
-		NextColumn is Column + 1,
-		normalized_adjacency_row(NextColumn, SampleCount, Row, FuzzyGraph, Degrees, Values).
+	inverse_degree_roots([], []).
+	inverse_degree_roots([Degree| Degrees], [Inverse| Inverses]) :-
+		Degree > 0.0,
+		Inverse is 1.0 / sqrt(Degree),
+		inverse_degree_roots(Degrees, Inverses).
 
-	graph_weight(Row, Column, FuzzyGraph, Weight) :-
-		(	Row < Column ->
-			Source = Row, Target = Column
-		;	Source = Column, Target = Row
+	normalized_graph_rows([], [], _Inverses, []).
+	normalized_graph_rows([_Vertex-vertex(_Degree, Neighbors)| Vertices], [Inverse| RowInverses], Inverses, [Row| Rows]) :-
+		normalized_graph_row(Inverses, 0, Neighbors, Inverse, Row),
+		normalized_graph_rows(Vertices, RowInverses, Inverses, Rows).
+
+	normalized_graph_row([], _Column, _Neighbors, _RowInverse, []).
+	normalized_graph_row([ColumnInverse| Inverses], Column, Neighbors, RowInverse, [Value| Values]) :-
+		( 	Neighbors = [Column-Weight| Rest] ->
+			Value is Weight * RowInverse * ColumnInverse
+		;	Value = 0.0,
+			Rest = Neighbors
 		),
-		(	member(edge(Source, Target, Found), FuzzyGraph) ->
-			Weight = Found
-		;	Weight = 0.0
-		).
-
-	take_vectors(0, _Vectors, []) :-
-		!.
-	take_vectors(Count, [Vector| Vectors], [Vector| Selected]) :-
-		NextCount is Count - 1,
-		take_vectors(NextCount, Vectors, Selected).
+		Next is Column + 1,
+		normalized_graph_row(Inverses, Next, Rest, RowInverse, Values).
 
 	scale_embedding(Rows, ScaledRows) :-
 		maximum_absolute_rows(Rows, 0.0, Maximum),
@@ -886,8 +1084,27 @@
 		^^option(negative_sample_rate(NegativeSampleRate), Options),
 		build_edge_schedules(FuzzyGraph, MaximumIterations, NegativeSampleRate, Schedules0),
 		assignable_rows(Embedding0, AssignableRows),
-		optimize_epochs(0, MaximumIterations, SampleCount, CurveA, CurveB, Options, AssignableRows, Schedules0, _Schedules),
+		index_rows(AssignableRows, RowIndex),
+		bind_edge_schedules(Schedules0, RowIndex, BoundSchedules),
+		^^option(learning_rate(LearningRate), Options),
+		^^option(repulsion_strength(RepulsionStrength), Options),
+		optimize_epochs(0, MaximumIterations, SampleCount, CurveA, CurveB, LearningRate, RepulsionStrength, RowIndex, BoundSchedules, _Schedules),
 		assigned_rows(AssignableRows, Embedding).
+
+	index_rows(Rows, Index) :-
+		indexed_row_pairs(Rows, 0, Pairs),
+		avltree::as_dictionary(Pairs, Index).
+
+	indexed_row_pairs([], _Index, []).
+	indexed_row_pairs([Row| Rows], Index, [Index-Row| Pairs]) :-
+		Next is Index + 1,
+		indexed_row_pairs(Rows, Next, Pairs).
+
+	bind_edge_schedules([], _Index, []).
+	bind_edge_schedules([schedule(Source, Target, Period, Positive, NegativePeriod, Negative)| Schedules], Index, [schedule(endpoint(Source, SourceHandle), endpoint(Target, TargetHandle), Period, Positive, NegativePeriod, Negative)| Bound]) :-
+		avltree::lookup(Source, SourceHandle, Index),
+		avltree::lookup(Target, TargetHandle, Index),
+		bind_edge_schedules(Schedules, Index, Bound).
 
 	assignable_rows([], []).
 	assignable_rows([Row| Rows], [Assignable| Assignables]) :-
@@ -918,23 +1135,24 @@
 		),
 		build_edge_schedules(Edges, MaximumWeight, MaximumIterations, NegativeSampleRate, Rest).
 
-	optimize_epochs(Epoch, MaximumIterations, _SampleCount, _CurveA, _CurveB, _Options, _AssignableRows, Schedules, Schedules) :-
+	optimize_epochs(Epoch, MaximumIterations, _SampleCount, _CurveA, _CurveB, _LearningRate, _RepulsionStrength, _AssignableRows, Schedules, Schedules) :-
 		Epoch >= MaximumIterations,
 		!.
-	optimize_epochs(Epoch, MaximumIterations, SampleCount, CurveA, CurveB, Options, AssignableRows, Schedules0, Schedules) :-
-		^^option(learning_rate(LearningRate), Options),
+	optimize_epochs(Epoch, MaximumIterations, SampleCount, CurveA, CurveB, LearningRate, RepulsionStrength, AssignableRows, Schedules0, Schedules) :-
 		Alpha is LearningRate * (1.0 - Epoch / MaximumIterations),
-		^^option(repulsion_strength(RepulsionStrength), Options),
 		process_schedules(Schedules0, Epoch, SampleCount, CurveA, CurveB, Alpha, RepulsionStrength, AssignableRows, Schedules1),
 		NextEpoch is Epoch + 1,
-		optimize_epochs(NextEpoch, MaximumIterations, SampleCount, CurveA, CurveB, Options, AssignableRows, Schedules1, Schedules).
+		optimize_epochs(NextEpoch, MaximumIterations, SampleCount, CurveA, CurveB, LearningRate, RepulsionStrength, AssignableRows, Schedules1, Schedules).
 
 	process_schedules([], _Epoch, _SampleCount, _CurveA, _CurveB, _Alpha, _RepulsionStrength, _AssignableRows, []).
 	process_schedules([schedule(Source, Target, EpochsPerSample, NextPositive0, EpochsPerNegativeSample, NextNegative0)| Schedules], Epoch, SampleCount, CurveA, CurveB, Alpha, RepulsionStrength, AssignableRows, [schedule(Source, Target, EpochsPerSample, NextPositive, EpochsPerNegativeSample, NextNegative)| UpdatedSchedules]) :-
 		(	NextPositive0 =< Epoch ->
-			attractive_update(Source, Target, AssignableRows, CurveA, CurveB, Alpha),
+			Source = endpoint(_SourceIndex, SourceHandle),
+			Target = endpoint(_TargetIndex, TargetHandle),
+			attractive_update(SourceHandle, TargetHandle, CurveA, CurveB, Alpha),
 			negative_sample_count(Epoch, NextNegative0, EpochsPerNegativeSample, NegativeCount),
 			negative_updates(NegativeCount, Source, SampleCount, AssignableRows, CurveA, CurveB, Alpha, RepulsionStrength),
+			negative_updates(NegativeCount, Target, SampleCount, AssignableRows, CurveA, CurveB, Alpha, RepulsionStrength),
 			NextPositive is NextPositive0 + EpochsPerSample,
 			NextNegative is NextNegative0 + NegativeCount * EpochsPerNegativeSample
 		;	NextPositive = NextPositive0,
@@ -948,9 +1166,7 @@
 		;	Count = 0
 		).
 
-	attractive_update(Source, Target, AssignableRows, CurveA, CurveB, Alpha) :-
-		nth0(Source, AssignableRows, SourceAssignable),
-		nth0(Target, AssignableRows, TargetAssignable),
+	attractive_update(SourceAssignable, TargetAssignable, CurveA, CurveB, Alpha) :-
 		SourceAssignable => SourceRow,
 		TargetAssignable => TargetRow,
 		squared_row_distance(SourceRow, TargetRow, 0.0, DistanceSquared),
@@ -968,19 +1184,18 @@
 
 	negative_updates(0, _Source, _SampleCount, _AssignableRows, _CurveA, _CurveB, _Alpha, _RepulsionStrength) :-
 		!.
-	negative_updates(Count, Source, SampleCount, AssignableRows, CurveA, CurveB, Alpha, RepulsionStrength) :-
+	negative_updates(Count, endpoint(Source, SourceHandle), SampleCount, AssignableRows, CurveA, CurveB, Alpha, RepulsionStrength) :-
 		random_float(Random),
 		Target is floor(Random * SampleCount),
 		(	Target =:= Source ->
 			true
-		;	repulsive_update(Source, Target, AssignableRows, CurveA, CurveB, Alpha, RepulsionStrength)
+		;	avltree::lookup(Target, TargetHandle, AssignableRows),
+			repulsive_update(SourceHandle, TargetHandle, CurveA, CurveB, Alpha, RepulsionStrength)
 		),
 		NextCount is Count - 1,
-		negative_updates(NextCount, Source, SampleCount, AssignableRows, CurveA, CurveB, Alpha, RepulsionStrength).
+		negative_updates(NextCount, endpoint(Source, SourceHandle), SampleCount, AssignableRows, CurveA, CurveB, Alpha, RepulsionStrength).
 
-	repulsive_update(Source, Target, AssignableRows, CurveA, CurveB, Alpha, RepulsionStrength) :-
-		nth0(Source, AssignableRows, SourceAssignable),
-		nth0(Target, AssignableRows, TargetAssignable),
+	repulsive_update(SourceAssignable, TargetAssignable, CurveA, CurveB, Alpha, RepulsionStrength) :-
 		SourceAssignable => SourceRow,
 		TargetAssignable => TargetRow,
 		squared_row_distance(SourceRow, TargetRow, 0.0, DistanceSquared),
@@ -1022,32 +1237,29 @@
 		).
 
 	embedding_cross_entropy(FuzzyGraph, Embedding, CurveA, CurveB, CrossEntropy) :-
-		length(Embedding, SampleCount),
-		cross_entropy_rows(0, SampleCount, FuzzyGraph, Embedding, CurveA, CurveB, 0.0, CrossEntropy).
+		cross_entropy_rows(Embedding, 0, FuzzyGraph, CurveA, CurveB, 0.0, CrossEntropy).
 
-	cross_entropy_rows(Source, SampleCount, _FuzzyGraph, _Embedding, _CurveA, _CurveB, CrossEntropy, CrossEntropy) :-
-		Source >= SampleCount,
-		!.
-	cross_entropy_rows(Source, SampleCount, FuzzyGraph, Embedding, CurveA, CurveB, CrossEntropy0, CrossEntropy) :-
+	cross_entropy_rows([], _Source, _Edges, _CurveA, _CurveB, CrossEntropy, CrossEntropy).
+	cross_entropy_rows([SourceRow| Rows], Source, Edges0, CurveA, CurveB, CrossEntropy0, CrossEntropy) :-
 		Target is Source + 1,
-		cross_entropy_targets(Target, SampleCount, Source, FuzzyGraph, Embedding, CurveA, CurveB, CrossEntropy0, CrossEntropy1),
+		cross_entropy_targets(Rows, Target, Source, SourceRow, Edges0, Edges, CurveA, CurveB, CrossEntropy0, CrossEntropy1),
 		NextSource is Source + 1,
-		cross_entropy_rows(NextSource, SampleCount, FuzzyGraph, Embedding, CurveA, CurveB, CrossEntropy1, CrossEntropy).
+		cross_entropy_rows(Rows, NextSource, Edges, CurveA, CurveB, CrossEntropy1, CrossEntropy).
 
-	cross_entropy_targets(Target, SampleCount, _Source, _FuzzyGraph, _Embedding, _CurveA, _CurveB, CrossEntropy, CrossEntropy) :-
-		Target >= SampleCount,
-		!.
-	cross_entropy_targets(Target, SampleCount, Source, FuzzyGraph, Embedding, CurveA, CurveB, CrossEntropy0, CrossEntropy) :-
-		graph_weight(Source, Target, FuzzyGraph, Weight),
-		nth0(Source, Embedding, SourceRow),
-		nth0(Target, Embedding, TargetRow),
+	cross_entropy_targets([], _Target, _Source, _SourceRow, Edges, Edges, _CurveA, _CurveB, CrossEntropy, CrossEntropy).
+	cross_entropy_targets([TargetRow| Rows], Target, Source, SourceRow, Edges0, Edges, CurveA, CurveB, CrossEntropy0, CrossEntropy) :-
+		( 	Edges0 = [edge(Source, Target, Weight)| RestEdges] ->
+			true
+		;	Weight = 0.0,
+			RestEdges = Edges0
+		),
 		squared_row_distance(SourceRow, TargetRow, 0.0, DistanceSquared),
 		Probability0 is 1.0 / (1.0 + CurveA * DistanceSquared ** CurveB),
 		Probability is min(1.0 - 1.0e-12, max(1.0e-12, Probability0)),
 		Contribution is -(Weight * log(Probability) + (1.0 - Weight) * log(1.0 - Probability)),
 		CrossEntropy1 is CrossEntropy0 + Contribution,
 		NextTarget is Target + 1,
-		cross_entropy_targets(NextTarget, SampleCount, Source, FuzzyGraph, Embedding, CurveA, CurveB, CrossEntropy1, CrossEntropy).
+		cross_entropy_targets(Rows, NextTarget, Source, SourceRow, RestEdges, Edges, CurveA, CurveB, CrossEntropy1, CrossEntropy).
 
 	transform_memberships(Neighbors, Memberships) :-
 		neighbor_distances(Neighbors, Distances),
@@ -1120,8 +1332,17 @@
 		transform_schedules(Memberships, 100, NegativeSampleRate, Schedules0),
 		assignable(CoordinatesAssignable, Coordinates0),
 		length(EmbeddingRows, SampleCount),
-		optimize_transform_epochs(0, 100, SampleCount, CurveA, CurveB, Options, EmbeddingRows, CoordinatesAssignable, Schedules0, _Schedules),
+		index_rows(EmbeddingRows, RowIndex),
+		bind_transform_schedules(Schedules0, RowIndex, BoundSchedules),
+		^^option(learning_rate(LearningRate), Options),
+		^^option(repulsion_strength(RepulsionStrength), Options),
+		optimize_transform_epochs(0, 100, SampleCount, CurveA, CurveB, LearningRate, RepulsionStrength, RowIndex, CoordinatesAssignable, BoundSchedules, _Schedules),
 		CoordinatesAssignable => Coordinates.
+
+	bind_transform_schedules([], _Index, []).
+	bind_transform_schedules([transform_schedule(Target, Period, Positive, NegativePeriod, Negative)| Schedules], Index, [transform_schedule(Row, Period, Positive, NegativePeriod, Negative)| Bound]) :-
+		avltree::lookup(Target, Row, Index),
+		bind_transform_schedules(Schedules, Index, Bound).
 
 	transform_schedules(Memberships, MaximumIterations, NegativeSampleRate, Schedules) :-
 		maximum_membership_weight(Memberships, 0.0, MaximumWeight),
@@ -1133,6 +1354,10 @@
 		maximum_membership_weight(Memberships, Maximum1, Maximum).
 
 	transform_schedules([], _MaximumWeight, _MaximumIterations, _NegativeSampleRate, []).
+	transform_schedules([membership(_Target, Weight)| Memberships], MaximumWeight, MaximumIterations, NegativeSampleRate, Schedules) :-
+		Weight =< 0.0,
+		!,
+		transform_schedules(Memberships, MaximumWeight, MaximumIterations, NegativeSampleRate, Schedules).
 	transform_schedules([membership(Target, Weight)| Memberships], MaximumWeight, MaximumIterations, NegativeSampleRate, Schedules) :-
 		EpochsPerSample is MaximumWeight / Weight,
 		(	EpochsPerSample =< MaximumIterations ->
@@ -1142,21 +1367,19 @@
 		),
 		transform_schedules(Memberships, MaximumWeight, MaximumIterations, NegativeSampleRate, Rest).
 
-	optimize_transform_epochs(Epoch, MaximumIterations, _SampleCount, _CurveA, _CurveB, _Options, _EmbeddingRows, _CoordinatesAssignable, Schedules, Schedules) :-
+	optimize_transform_epochs(Epoch, MaximumIterations, _SampleCount, _CurveA, _CurveB, _LearningRate, _RepulsionStrength, _EmbeddingRows, _CoordinatesAssignable, Schedules, Schedules) :-
 		Epoch >= MaximumIterations,
 		!.
-	optimize_transform_epochs(Epoch, MaximumIterations, SampleCount, CurveA, CurveB, Options, EmbeddingRows, CoordinatesAssignable, Schedules0, Schedules) :-
-		^^option(learning_rate(LearningRate), Options),
+	optimize_transform_epochs(Epoch, MaximumIterations, SampleCount, CurveA, CurveB, LearningRate, RepulsionStrength, EmbeddingRows, CoordinatesAssignable, Schedules0, Schedules) :-
 		Alpha is LearningRate * (1.0 - Epoch / MaximumIterations),
-		^^option(repulsion_strength(RepulsionStrength), Options),
 		process_transform_schedules(Schedules0, Epoch, SampleCount, CurveA, CurveB, Alpha, RepulsionStrength, EmbeddingRows, CoordinatesAssignable, Schedules1),
 		NextEpoch is Epoch + 1,
-		optimize_transform_epochs(NextEpoch, MaximumIterations, SampleCount, CurveA, CurveB, Options, EmbeddingRows, CoordinatesAssignable, Schedules1, Schedules).
+		optimize_transform_epochs(NextEpoch, MaximumIterations, SampleCount, CurveA, CurveB, LearningRate, RepulsionStrength, EmbeddingRows, CoordinatesAssignable, Schedules1, Schedules).
 
 	process_transform_schedules([], _Epoch, _SampleCount, _CurveA, _CurveB, _Alpha, _RepulsionStrength, _EmbeddingRows, _CoordinatesAssignable, []).
 	process_transform_schedules([transform_schedule(Target, EpochsPerSample, NextPositive0, EpochsPerNegativeSample, NextNegative0)| Schedules], Epoch, SampleCount, CurveA, CurveB, Alpha, RepulsionStrength, EmbeddingRows, CoordinatesAssignable, [transform_schedule(Target, EpochsPerSample, NextPositive, EpochsPerNegativeSample, NextNegative)| UpdatedSchedules]) :-
 		(	NextPositive0 =< Epoch ->
-			transform_attractive_update(Target, EmbeddingRows, CoordinatesAssignable, CurveA, CurveB, Alpha),
+			transform_attractive_update(Target, CoordinatesAssignable, CurveA, CurveB, Alpha),
 			negative_sample_count(Epoch, NextNegative0, EpochsPerNegativeSample, NegativeCount),
 			transform_negative_updates(NegativeCount, SampleCount, EmbeddingRows, CoordinatesAssignable, CurveA, CurveB, Alpha, RepulsionStrength),
 			NextPositive is NextPositive0 + EpochsPerSample,
@@ -1166,9 +1389,8 @@
 		),
 		process_transform_schedules(Schedules, Epoch, SampleCount, CurveA, CurveB, Alpha, RepulsionStrength, EmbeddingRows, CoordinatesAssignable, UpdatedSchedules).
 
-	transform_attractive_update(Target, EmbeddingRows, CoordinatesAssignable, CurveA, CurveB, Alpha) :-
+	transform_attractive_update(TargetRow, CoordinatesAssignable, CurveA, CurveB, Alpha) :-
 		CoordinatesAssignable => Coordinates0,
-		nth0(Target, EmbeddingRows, TargetRow),
 		squared_row_distance(Coordinates0, TargetRow, 0.0, DistanceSquared),
 		attractive_coefficient(DistanceSquared, CurveA, CurveB, Coefficient),
 		update_source_row(Coordinates0, TargetRow, Coefficient, Alpha, Coordinates),
@@ -1180,7 +1402,7 @@
 		random_float(Random),
 		Target is floor(Random * SampleCount),
 		CoordinatesAssignable => Coordinates0,
-		nth0(Target, EmbeddingRows, TargetRow),
+		avltree::lookup(Target, TargetRow, EmbeddingRows),
 		squared_row_distance(Coordinates0, TargetRow, 0.0, DistanceSquared),
 		(	DistanceSquared > 0.0 ->
 			Coefficient is 2.0 * RepulsionStrength * CurveB / ((0.001 + DistanceSquared) * (CurveA * DistanceSquared ** CurveB + 1.0)),
@@ -1281,6 +1503,16 @@
 
 	valid_umap_diagnostics(Diagnostics, FeatureCount, EncodedFeatureCount, SampleCount, ComponentCount, NeighborCount) :-
 		^^valid_dimension_reducer_metadata(Diagnostics),
+		memberchk(options(Options), Diagnostics),
+		valid_stored_options(Options),
+		^^option(n_components(ComponentCount), Options),
+		ComponentCount =< EncodedFeatureCount,
+		ComponentCount < SampleCount,
+		valid(positive_integer, NeighborCount),
+		NeighborCount >= 2,
+		resolve_neighbor_count(Options, SampleCount, NeighborCount),
+		^^option(local_connectivity(LocalConnectivity), Options),
+		LocalConnectivity =< NeighborCount,
 		memberchk(model(umap_projection), Diagnostics),
 		memberchk(feature_count(FeatureCount), Diagnostics),
 		memberchk(encoded_feature_count(EncodedFeatureCount), Diagnostics),
@@ -1291,6 +1523,7 @@
 		valid(non_negative_integer, EdgeCount),
 		memberchk(distance_metric(Metric), Diagnostics),
 		valid_metric(Metric),
+		^^option(distance_metric(Metric), Options),
 		memberchk(curve_parameters(CurveA, CurveB), Diagnostics),
 		valid(positive_number, CurveA),
 		valid(positive_number, CurveB),
@@ -1298,13 +1531,25 @@
 		valid_initialization_used(InitializationUsed),
 		memberchk(iterations(Iterations), Diagnostics),
 		valid(positive_integer, Iterations),
+		^^option(maximum_iterations(Iterations), Options),
 		memberchk(initial_cross_entropy(InitialCrossEntropy), Diagnostics),
 		valid(non_negative_number, InitialCrossEntropy),
 		memberchk(final_cross_entropy(FinalCrossEntropy), Diagnostics),
 		valid(non_negative_number, FinalCrossEntropy),
 		memberchk(preprocessing([center(true), feature_scaling(FeatureScaling), continuous_missing_values(mean_imputation), categorical_encoding(one_hot_with_missing_indicator)]), Diagnostics),
 		valid(boolean, FeatureScaling),
+		^^option(feature_scaling(FeatureScaling), Options),
 		memberchk(implementation_stage(optimized), Diagnostics).
+
+	valid_stored_options(Options) :-
+		forall(
+			default_option(Default),
+			( 	functor(Default, Name, Arity),
+				functor(Option, Name, Arity),
+				^^option(Option, Options)
+			)
+		),
+		catch(check_option_relations(Options), _Error, fail).
 
 	check_option_relations(Options) :-
 		^^option(min_dist(MinDist), Options),
@@ -1321,9 +1566,8 @@
 		;	domain_error(local_connectivity, LocalConnectivity)
 		).
 
-	valid_metric(euclidean).
-	valid_metric(manhattan).
-	valid_metric(cosine).
+	valid_metric(Metric) :-
+		once((Metric == euclidean; Metric == manhattan; Metric == cosine)).
 
 	valid_initialization_used(spectral).
 	valid_initialization_used(random).

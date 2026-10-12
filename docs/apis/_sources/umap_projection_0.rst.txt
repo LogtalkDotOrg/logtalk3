@@ -14,8 +14,8 @@ Uniform Manifold Approximation and Projection dimension reducer for continuous, 
 |    ``logtalk_load(umap_projection(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:0
-| **Date:** 2026-09-24
+| **Version:** 2:0:0
+| **Date:** 2026-10-12
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -25,6 +25,8 @@ Uniform Manifold Approximation and Projection dimension reducer for continuous, 
 |    ``public`` :ref:`dimension_reducer_common <dimension_reducer_common/0>`
 | **Uses:**
 |    :ref:`assignvars <assignvars/0>`
+|    :ref:`avltree <avltree/0>`
+|    :ref:`binary_heap(Order) <binary_heap/1>`
 |    :ref:`fast_random(Algorithm) <fast_random/1>`
 |    :ref:`format <format/0>`
 |    :ref:`linear_algebra <linear_algebra/0>`

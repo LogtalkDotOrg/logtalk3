@@ -381,10 +381,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#implementation">Implementation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#dimension-reducer-representation">Dimension reducer representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
@@ -443,7 +444,7 @@
   <section id="umap-projection">
 <span id="library-umap-projection"></span><h1><code class="docutils literal notranslate"><span class="pre">umap_projection</span></code><a class="headerlink" href="#umap-projection" title="Link to this heading"></a></h1>
 <p>Portable Uniform Manifold Approximation and Projection for continuous,
-categorical, and mixed datasets. The library implements the
+categorical, and mixed datasets. The library implements
 <code class="docutils literal notranslate"><span class="pre">dimension_reducer_protocol</span></code> using exact neighbor discovery, a fuzzy
 simplicial graph, spectral initialization, and stochastic layout
 optimization.</p>
@@ -466,6 +467,11 @@ link in a web browser.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(umap_projection(tester)).
 </pre></div>
 </div>
+<p>The tests build shared fixtures during setup for metadata and
+transformation checks. Learning determinism, initialization, and
+random-state tests learn fresh reducers. Fixed reference calculations
+check graph memberships, neighbor ordering, spectral components,
+gradients, and exact cross-entropy.</p>
 </section>
 <section id="features">
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
@@ -477,41 +483,49 @@ components and a dedicated missing-value indicator.</p></li>
 <li><p>Computes exact nearest neighbors and canonical smooth k-NN
 memberships.</p></li>
 <li><p>Uses fuzzy union/intersection mixing to construct the training graph.</p></li>
-<li><p>Uses normalized spectral initialization with reproducible random
-fallback.</p></li>
+<li><p>Uses partial normalized spectral initialization with residual and
+orthogonality checks and reproducible random fallback.</p></li>
 <li><p>Fits the low-dimensional UMAP curve parameters from <code class="docutils literal notranslate"><span class="pre">min_dist</span></code> and
 <code class="docutils literal notranslate"><span class="pre">spread</span></code>.</p></li>
 <li><p>Uses scheduled stochastic attractive and negative-sampling updates.</p></li>
+<li><p>Samples negative targets for both endpoints of each training edge. A
+self draw consumes one sampling attempt without moving the point.</p></li>
 <li><p>Preserves caller random-generator state during training and
 transformation.</p></li>
 <li><p>Supports missing continuous values represented by variables using mean
 imputation.</p></li>
 <li><p>Transforms new instances by optimizing each point against the fixed
 training embedding.</p></li>
+<li><p>Excludes zero-weight memberships from transform optimization
+schedules, including weights that underflow to zero.</p></li>
+<li><p>Uses AVL dictionaries for graph and row indexes and bounded max heaps
+for larger exact-neighbor searches.</p></li>
 </ul>
 </section>
-<section id="limitations">
-<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>Exact neighbor discovery and dense spectral initialization require
-quadratic time and memory, making this implementation suitable for
-small and medium datasets.</p></li>
-<li><p>Approximate nearest-neighbor indexes, sparse eigensolvers, supervised
-UMAP, inverse transformation, and backend-specific acceleration are
-not implemented.</p></li>
-<li><p>Training is non-convex. Different seeds can produce different valid
-embeddings; identical data, options, and seeds produce reproducible
-results.</p></li>
-<li><p>Embedding axes, orientation, and absolute scale have no standalone
-meaning.</p></li>
-<li><p>Out-of-sample points are transformed independently and do not update
-the training embedding or interact with each other.</p></li>
-<li><p>High-cardinality categorical attributes expand the encoded row width
-and increase exact-neighbor and dense-spectral costs.</p></li>
-<li><p>Missing values must be variables in present <code class="docutils literal notranslate"><span class="pre">Attribute-Value</span></code>
-bindings. Omitted, duplicate, undeclared, invalid observed, and
-all-missing attributes are rejected.</p></li>
-</ul>
+<section id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Link to this heading"></a></h2>
+<p>Training sets with at most 32 examples use sorted exact distances to
+avoid small-input heap overhead. Larger sets compute each unordered
+distance once and retain bounded per-row heaps. Both paths place self
+first and use sample indexes to break other distance ties. Cosine norms
+are computed once per row. Transformation streams distances through a
+bounded heap.</p>
+<p>Directed memberships are sorted by canonical endpoint pair and merged
+once. AVL-indexed adjacency and weighted degrees support graph traversal
+and dense normalized matrix construction. Cross-entropy diagnostics
+remain exact: sorted graph edges are consumed alongside all unordered
+embedding pairs, including pairs without a graph edge.</p>
+<p>Spectral initialization shifts normalized adjacency by twice the
+identity and deflates the known degree-derived trivial component. This
+makes partial eigenvalue selection follow algebraic order, including for
+bipartite graphs. Eigenpair residuals and orthogonality are checked
+against the original matrix. Disconnected graphs and unsuccessful
+spectral results use seeded random initialization.</p>
+<p>Positive edge schedules bind both endpoint handles before optimization.
+Negative targets use AVL row lookup. Transformation leaves training rows
+fixed and optimizes the new coordinates for 100 epochs. Curve-fitting
+sample targets and logarithms are precomputed; training attribute
+observations are collected once before encoding.</p>
 </section>
 <section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
@@ -519,8 +533,10 @@ all-missing attributes are rejected.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">n_components/1</span></code>: Embedding dimensions. The default is <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">feature_scaling/1</span></code>: Standardize continuous attributes when
 <code class="docutils literal notranslate"><span class="pre">true</span></code>. The default is <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">n_neighbors/1</span></code>: Requested local neighborhood size. The default is
-<code class="docutils literal notranslate"><span class="pre">15</span></code>; it is clamped to the sample count.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_neighbors/1</span></code>: Requested self-inclusive training neighborhood
+size. The default is <code class="docutils literal notranslate"><span class="pre">15</span></code>; it is clamped to the sample count.
+Training uses the self point followed by the nearest other points;
+transformation uses that many nearest training points.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">distance_metric/1</span></code>: Input metric: <code class="docutils literal notranslate"><span class="pre">euclidean</span></code>, <code class="docutils literal notranslate"><span class="pre">manhattan</span></code>, or
 <code class="docutils literal notranslate"><span class="pre">cosine</span></code>. The default is <code class="docutils literal notranslate"><span class="pre">euclidean</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">initialization/1</span></code>: <code class="docutils literal notranslate"><span class="pre">spectral</span></code> or <code class="docutils literal notranslate"><span class="pre">random</span></code>. The default is
@@ -530,15 +546,18 @@ is <code class="docutils literal notranslate"><span class="pre">0.1</span></code
 <li><p><code class="docutils literal notranslate"><span class="pre">spread/1</span></code>: Positive embedding scale and an upper bound for
 <code class="docutils literal notranslate"><span class="pre">min_dist</span></code>. The default is <code class="docutils literal notranslate"><span class="pre">1.0</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">local_connectivity/1</span></code>: Positive local-connectivity adjustment. The
-default is <code class="docutils literal notranslate"><span class="pre">1.0</span></code>.</p></li>
+default is <code class="docutils literal notranslate"><span class="pre">1.0</span></code>. Fractional values interpolate between positive
+distance ranks; values below one interpolate from zero to the first
+positive distance.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">set_op_mix_ratio/1</span></code>: Fuzzy union/intersection mix in the interval
 <code class="docutils literal notranslate"><span class="pre">[0,1]</span></code>. The default is <code class="docutils literal notranslate"><span class="pre">1.0</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">learning_rate/1</span></code>: Positive initial learning rate. The default is
 <code class="docutils literal notranslate"><span class="pre">1.0</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">repulsion_strength/1</span></code>: Non-negative negative-sampling repulsion
 multiplier. The default is <code class="docutils literal notranslate"><span class="pre">1.0</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">negative_sample_rate/1</span></code>: Positive number of negative samples per
-positive update. The default is <code class="docutils literal notranslate"><span class="pre">5</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">negative_sample_rate/1</span></code>: Positive number of negative sampling
+attempts per endpoint of a positive training update, or per positive
+transform update. The default is <code class="docutils literal notranslate"><span class="pre">5</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">maximum_iterations/1</span></code>: Positive number of training epochs. The
 default is <code class="docutils literal notranslate"><span class="pre">500</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">random_seed/1</span></code>: Positive training seed. The default is <code class="docutils literal notranslate"><span class="pre">1357911</span></code>.</p></li>
@@ -576,7 +595,7 @@ on the resulting numeric rows.</p>
 </section>
 <section id="dimension-reducer-representation">
 <h2>Dimension reducer representation<a class="headerlink" href="#dimension-reducer-representation" title="Link to this heading"></a></h2>
-<p>Learned reducers use this representation:</p>
+<p>Learned reducers use the following term representation:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>umap_reducer(<span class="nv">Encoders</span>, <span class="nv">ExampleIds</span>, <span class="nv">TrainingRows</span>, <span class="nv">EmbeddingRows</span>, <span class="nv">FuzzyGraph</span>, <span class="nv">Diagnostics</span>)
 </pre></div>
 </div>
@@ -584,6 +603,47 @@ on the resulting numeric rows.</p>
 terms with zero-based sample indexes. Diagnostics record options, fitted
 curve parameters, initialization mode, source and encoded feature
 counts, graph size, iteration count, and initial/final cross-entropy.</p>
+<p>Reducer validation requires the complete effective options. Effective
+neighbor counts equal the minimum of the requested neighborhood size and
+the sample count. Internal AVL dictionaries and optimization handles are
+not serialized.</p>
+<p>Training neighborhoods place self first by index, even for duplicate
+rows. Other equal-distance neighbors are ordered by their sample
+indexes.</p>
+<p>Reducers must be ground. The <code class="docutils literal notranslate"><span class="pre">check_dimension_reducer/1</span></code> predicate
+rejects insufficiently instantiated reducers with an instantiation error
+and rejects inconsistent dimensions, diagnostics, or effective options
+with a domain error. Repeated options are accepted; the first occurrence
+determines the value.</p>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Exact neighbor discovery requires all pairwise training distances;
+bounded selection and AVL lookup add logarithmic overhead. Dense
+spectral matrices require quadratic memory, and partial eigensolver
+cost depends on the requested dimensions and convergence. This
+implementation is suitable for small and medium datasets.</p></li>
+<li><p>Exact cross-entropy diagnostics require all unordered embedding pairs.
+Sparse graph merging avoids scanning every possible pair against the
+full edge list, but does not remove this quadratic diagnostic work.</p></li>
+<li><p>Approximate nearest-neighbor indexes, sparse eigensolvers, supervised
+UMAP, inverse transformation, and backend-specific acceleration are
+not implemented.</p></li>
+<li><p>Training is non-convex. Different seeds can produce different valid
+embeddings; identical data, options, and seeds produce reproducible
+results within a backend. Floating-point and eigensolver behavior can
+differ across backends.</p></li>
+<li><p>Embedding axes, orientation, and absolute scale have no standalone
+meaning.</p></li>
+<li><p>Out-of-sample points are transformed independently and do not update
+the training embedding or interact with each other.</p></li>
+<li><p>High-cardinality categorical attributes expand the encoded row width
+and increase exact-neighbor and dense-spectral costs.</p></li>
+<li><p>Missing values must be variables in present <code class="docutils literal notranslate"><span class="pre">Attribute-Value</span></code>
+bindings. Omitted, duplicate, undeclared, invalid observed, and
+all-missing attributes are rejected.</p></li>
+</ul>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>

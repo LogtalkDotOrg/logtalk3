@@ -144,3 +144,17 @@
 	example(3, [channel-_]).
 
 :- end_object.
+
+
+:- object(duplicate_outlier_umap_dataset,
+	implements(dimension_reduction_dataset_protocol)).
+
+	attribute_values(x, continuous).
+
+	example(1, [x-0.0]).
+	example(2, [x-0.0]).
+	example(3, [x-1.0]).
+	example(4, [x-100.0]).
+	example(5, [x-200.0]).
+
+:- end_object.

@@ -26,6 +26,8 @@
 	logtalk_load(options(loader)),
 	logtalk_load(random(loader)),
 	logtalk_load(assignvars(loader)),
+	logtalk_load(dictionaries(loader)),
+	logtalk_load(heaps(loader)),
 	logtalk_load(linear_algebra(loader)),
 	logtalk_load(dimension_reduction_protocols(loader)),
 	logtalk_load(umap_projection, [optimize(on)])
