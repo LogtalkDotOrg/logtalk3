@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-07,
+		date is 2026-10-13,
 		comment is 'Unit tests for the "sgd_classifier" library.'
 	]).
 
@@ -37,52 +37,59 @@
 		op(700, xfx, =~=), (=~=)/2
 	]).
 
+	:- private(dataset_classifier_/2).
+	:- dynamic(dataset_classifier_/2).
+
 	cover(sgd_classifier).
 
 	cleanup :-
+		retractall(dataset_classifier_(_, _)),
 		^^clean_file('test_output.pl').
 
 	test(sgd_classifier_learn_2_weather, deterministic(ground(Classifier))) :-
-		sgd_classifier::learn(weather, Classifier).
+		sgd_classifier::learn(weather, Classifier),
+		assertz(dataset_classifier_(weather, Classifier)).
 
 	test(sgd_classifier_valid_classifier_1, deterministic(sgd_classifier::valid_classifier(Classifier))) :-
-		sgd_classifier::learn(weather, Classifier).
+		dataset_classifier(weather, Classifier).
 
 	test(sgd_classifier_predict_3_weather_yes, deterministic(Prediction == yes)) :-
-		sgd_classifier::learn(weather, Classifier),
+		dataset_classifier(weather, Classifier),
 		sgd_classifier::predict(Classifier, [outlook-overcast, temperature-hot, humidity-normal, wind-weak], Prediction).
 
 	test(sgd_classifier_predict_3_weather_no, deterministic(Prediction == no)) :-
-		sgd_classifier::learn(weather, Classifier),
+		dataset_classifier(weather, Classifier),
 		sgd_classifier::predict(Classifier, [outlook-sunny, temperature-hot, humidity-high, wind-strong], Prediction).
 
 	test(sgd_classifier_predict_probabilities_3_weather, deterministic((Total =~= 1.0, Yes > No))) :-
-		sgd_classifier::learn(weather, Classifier),
+		dataset_classifier(weather, Classifier),
 		sgd_classifier::predict_probabilities(Classifier, [outlook-overcast, temperature-hot, humidity-normal, wind-weak], Probabilities),
 		memberchk(yes-Yes, Probabilities),
 		memberchk(no-No, Probabilities),
 		Total is Yes + No.
 
 	test(sgd_classifier_learn_2_mixed, deterministic(ground(Classifier))) :-
-		sgd_classifier::learn(mixed, Classifier).
+		sgd_classifier::learn(mixed, Classifier),
+		assertz(dataset_classifier_(mixed, Classifier)).
 
 	test(sgd_classifier_predict_3_mixed_yes, deterministic(Prediction == yes)) :-
-		sgd_classifier::learn(mixed, Classifier),
+		dataset_classifier(mixed, Classifier),
 		sgd_classifier::predict(Classifier, [age-45, income-75000, student-no, credit_rating-fair], Prediction).
 
 	test(sgd_classifier_predict_3_mixed_no, deterministic(Prediction == no)) :-
-		sgd_classifier::learn(mixed, Classifier),
+		dataset_classifier(mixed, Classifier),
 		sgd_classifier::predict(Classifier, [age-26, income-36000, student-yes, credit_rating-fair], Prediction).
 
 	test(sgd_classifier_learn_2_iris_small, deterministic(ground(Classifier))) :-
-		sgd_classifier::learn(iris_small, Classifier).
+		sgd_classifier::learn(iris_small, Classifier),
+		assertz(dataset_classifier_(iris_small, Classifier)).
 
 	test(sgd_classifier_predict_3_iris_setosa, deterministic(Prediction == setosa)) :-
-		sgd_classifier::learn(iris_small, Classifier),
+		dataset_classifier(iris_small, Classifier),
 		sgd_classifier::predict(Classifier, [sepal_length-5.0, sepal_width-3.4, petal_length-1.4, petal_width-0.2], Prediction).
 
 	test(sgd_classifier_predict_3_iris_virginica, deterministic(Prediction == virginica)) :-
-		sgd_classifier::learn(iris_small, Classifier),
+		dataset_classifier(iris_small, Classifier),
 		sgd_classifier::predict(Classifier, [sepal_length-6.4, sepal_width-3.0, petal_length-5.8, petal_width-2.2], Prediction).
 
 	test(sgd_classifier_learn_3_custom_options, deterministic([Loss, LearningRate, LearningSchedule, L2Regularization] == [hinge, 0.02, inverse_scaling(0.5), 0.001])) :-
@@ -93,25 +100,25 @@
 		memberchk(l2_regularization(L2Regularization), Options).
 
 	test(sgd_classifier_export_to_clauses_4, deterministic(Prediction == yes)) :-
-		sgd_classifier::learn(weather, Classifier),
+		dataset_classifier(weather, Classifier),
 		sgd_classifier::export_to_clauses(weather, Classifier, classifier, [classifier(ExportedClassifier)]),
 		sgd_classifier::predict(ExportedClassifier, [outlook-overcast, temperature-hot, humidity-normal, wind-weak], Prediction).
 
 	test(sgd_classifier_export_to_file_4_written, deterministic(os::file_exists(File))) :-
 		^^file_path('test_output.pl', File),
-		sgd_classifier::learn(weather, Classifier),
+		dataset_classifier(weather, Classifier),
 		sgd_classifier::export_to_file(weather, Classifier, classify, File).
 
 	test(sgd_classifier_export_to_file_4_loaded, deterministic(Prediction == yes)) :-
 		^^file_path('test_output.pl', File),
-		sgd_classifier::learn(weather, Classifier),
+		dataset_classifier(weather, Classifier),
 		sgd_classifier::export_to_file(weather, Classifier, classifier, File),
 		logtalk_load(File),
 		{classifier(LoadedClassifier)},
 		sgd_classifier::predict(LoadedClassifier, [outlook-overcast, temperature-hot, humidity-normal, wind-weak], Prediction).
 
 	test(sgd_classifier_diagnostics_2, deterministic((Model == sgd_classifier, Loss == log_loss, ground(Options)))) :-
-		sgd_classifier::learn(weather, Classifier),
+		dataset_classifier(weather, Classifier),
 		sgd_classifier::diagnostics(Classifier, Diagnostics),
 		memberchk(model(Model), Diagnostics),
 		memberchk(loss(Loss), Diagnostics),
@@ -119,7 +126,16 @@
 
 	test(sgd_classifier_print_classifier_1, deterministic) :-
 		^^suppress_text_output,
-		sgd_classifier::learn(mixed, Classifier),
+		dataset_classifier(mixed, Classifier),
 		sgd_classifier::print_classifier(Classifier).
+
+	% auxiliary predicates
+
+	dataset_classifier(Dataset, Classifier) :-
+		(	dataset_classifier_(Dataset, Classifier) ->
+			true
+		;	sgd_classifier::learn(Dataset, Classifier),
+			assertz(dataset_classifier_(Dataset, Classifier))
+		).
 
 :- end_object.
