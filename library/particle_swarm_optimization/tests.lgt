@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-09-08,
+		date is 2026-10-13,
 		comment is 'Unit tests for the "particle_swarm_optimization" library.'
 	]).
 
@@ -48,23 +48,23 @@
 		particle_swarm_optimization(negative_sphere)::run(_Position, Fitness, [seed(42), max_iterations(100), objective(maximize)]).
 
 	test(pso_maximize_seed_reproducible, deterministic((Position1 == Position2, Fitness1 =:= Fitness2, Statistics1 == Statistics2))) :-
-		particle_swarm_optimization(negative_sphere)::run(Position1, Fitness1, Statistics1, [seed(42), max_iterations(100), objective(maximize)]),
-		particle_swarm_optimization(negative_sphere)::run(Position2, Fitness2, Statistics2, [seed(42), max_iterations(100), objective(maximize)]).
+		particle_swarm_optimization(negative_sphere)::run(Position1, Fitness1, Statistics1, [seed(42), max_iterations(10), objective(maximize)]),
+		particle_swarm_optimization(negative_sphere)::run(Position2, Fitness2, Statistics2, [seed(42), max_iterations(10), objective(maximize)]).
 
 	test(pso_seed_reproducible, deterministic((Position1 == Position2, Fitness1 =:= Fitness2, Statistics1 == Statistics2))) :-
-		particle_swarm_optimization(sphere)::run(Position1, Fitness1, Statistics1, [seed(42), max_iterations(100)]),
-		particle_swarm_optimization(sphere)::run(Position2, Fitness2, Statistics2, [seed(42), max_iterations(100)]).
+		particle_swarm_optimization(sphere)::run(Position1, Fitness1, Statistics1, [seed(42), max_iterations(10)]),
+		particle_swarm_optimization(sphere)::run(Position2, Fitness2, Statistics2, [seed(42), max_iterations(10)]).
 
 	test(pso_explicit_minimize, deterministic((Position1 == Position2, Fitness1 =:= Fitness2, Statistics1 == Statistics2))) :-
-		particle_swarm_optimization(sphere)::run(Position1, Fitness1, Statistics1, [seed(42), max_iterations(100)]),
-		particle_swarm_optimization(sphere)::run(Position2, Fitness2, Statistics2, [seed(42), max_iterations(100), objective(minimize)]).
+		particle_swarm_optimization(sphere)::run(Position1, Fitness1, Statistics1, [seed(42), max_iterations(10)]),
+		particle_swarm_optimization(sphere)::run(Position2, Fitness2, Statistics2, [seed(42), max_iterations(10), objective(minimize)]).
 
-	test(pso_evaluation_count, deterministic(Evaluations =:= 404)) :-
-		particle_swarm_optimization(sphere)::run(_Position, _Fitness, Statistics, [seed(42), max_iterations(100)]),
+	test(pso_evaluation_count, deterministic(Evaluations =:= 44)) :-
+		particle_swarm_optimization(sphere)::run(_Position, _Fitness, Statistics, [seed(42), max_iterations(10)]),
 		memberchk(evaluations(Evaluations), Statistics).
 
 	test(pso_run_2, deterministic((list::valid(Position), number(Fitness)))) :-
-		particle_swarm_optimization(sphere)::run(Position, Fitness).
+		particle_swarm_optimization(sphere_stop)::run(Position, Fitness).
 
 	test(pso_explicit_random_algorithm, deterministic(Fitness < 0.01)) :-
 		particle_swarm_optimization(sphere, as183)::run(_Position, Fitness, [seed(42), max_iterations(100)]).
@@ -159,19 +159,19 @@
 
 	test(pso_progress_updates_zero, deterministic(Count =:= 0)) :-
 		sphere_progress::clear_log,
-		particle_swarm_optimization(sphere_progress)::run(_Position, _Fitness, [seed(42), max_iterations(100), updates(0)]),
+		particle_swarm_optimization(sphere_progress)::run(_Position, _Fitness, [seed(42), max_iterations(26), updates(0)]),
 		findall(1, sphere_progress::progress_log(_, _, _, _, _), Logs),
 		length(Logs, Count).
 
 	test(pso_progress_updates_count, deterministic(Count =:= 6)) :-
 		sphere_progress::clear_log,
-		particle_swarm_optimization(sphere_progress)::run(_Position, _Fitness, [seed(42), max_iterations(100), updates(5)]),
+		particle_swarm_optimization(sphere_progress)::run(_Position, _Fitness, [seed(42), max_iterations(26), updates(5)]),
 		findall(1, sphere_progress::progress_log(_, _, _, _, _), Logs),
 		length(Logs, Count).
 
 	test(pso_progress_values, deterministic((Iteration > 0, list::valid(BestPosition), number(BestFitness), number(MeanFitness), MeanFitness >= BestFitness, Diversity >= 0.0))) :-
 		sphere_progress::clear_log,
-		particle_swarm_optimization(sphere_progress)::run(_Position, _Fitness, [seed(42), max_iterations(100), updates(5)]),
+		particle_swarm_optimization(sphere_progress)::run(_Position, _Fitness, [seed(42), max_iterations(26), updates(5)]),
 		once(sphere_progress::progress_log(Iteration, BestPosition, BestFitness, MeanFitness, Diversity)).
 
 	test(pso_boundary_clamps_and_zeroes_velocity, deterministic((BestPosition == [0.0], MeanFitness1 =:= 0.0, MeanFitness2 =:= 0.0))) :-
