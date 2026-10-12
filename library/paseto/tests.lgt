@@ -102,28 +102,23 @@
 		paseto::verify(Token, PublicKey, Decoded, [now(1700000001), implicit_assertion([1,2,3]), claim_policy([claim(iss, expected('https://issuer.example')), claim(aud, contains('client'))])]).
 
 	test(paseto_claims_requires_exp, error(domain_error(paseto_claims, missing(exp)))) :-
-		hex_bytes('b4cbfb43df4ce210727d953e4a713307fa19bb7d9f85041438d9e11b942a3774', Seed),
 		hex_bytes('1eb9dbbbbc047c03fd70604e0071f0987e16b28b757225c11f00415d0e20b1a2', PublicKey),
-		paseto::sign({sub-'123'}, Seed, Token, []),
+		Token = 'v4.public.eyJzdWIiOiIxMjMifbHnOnhnuWp0kFHyybM1QLLRiLUhUQMtPy-9HyXkN1eGZ60lxDXUO5_8KlmoU2AM4iPIjsI5pYe0Sw-ZYdnTkwY',
 		paseto::verify(Token, PublicKey, _, [now(1700000001)]).
 
 	test(paseto_claims_unsafe_public_inspection, deterministic(Decoded == Claims)) :-
-		hex_bytes('b4cbfb43df4ce210727d953e4a713307fa19bb7d9f85041438d9e11b942a3774', Seed),
 		Claims = {sub-'123', exp-4102444800},
-		paseto::sign(Claims, Seed, Token, []),
+		Token = 'v4.public.eyJzdWIiOiIxMjMiLCJleHAiOjQxMDI0NDQ4MDB9TSAKdau1uye6Yd56TsgLCpeg5mAYSgpmm1yNgd0jyAm1kTR0grA4kZkD2ySk0MgJVNJOaYhri-YoNbw3G2LmAg',
 		paseto::claims(Token, Decoded).
 
 	test(paseto_claims_wrong_implicit_assertion, fail) :-
-		hex_bytes('b4cbfb43df4ce210727d953e4a713307fa19bb7d9f85041438d9e11b942a3774', Seed),
 		hex_bytes('1eb9dbbbbc047c03fd70604e0071f0987e16b28b757225c11f00415d0e20b1a2', PublicKey),
-		paseto::sign({sub-'123', exp-4102444800}, Seed, Token, [implicit_assertion([1,2,3])]),
+		Token = 'v4.public.eyJzdWIiOiIxMjMiLCJleHAiOjQxMDI0NDQ4MDB9LGyNIwb8WsZVcp6PPRdOZ8k9dR01dQ2gthH5rnKDyhTV3V_4_wEG43IEl3Mbd6jYGkuI-UK74RL_w_Yr6BtVBg',
 		paseto::verify(Token, PublicKey, _, [now(1700000001), implicit_assertion([1,2,4])]).
 
 	test(paseto_claims_duplicate_member, error(domain_error(paseto_json_object, _))) :-
-		hex_bytes('b4cbfb43df4ce210727d953e4a713307fa19bb7d9f85041438d9e11b942a3774', Seed),
 		hex_bytes('1eb9dbbbbc047c03fd70604e0071f0987e16b28b757225c11f00415d0e20b1a2', PublicKey),
-		atom_codes('{"sub":"123","sub":"456","exp":4102444800}', Payload),
-		paseto_v4::public_sign(Seed, Payload, Token),
+		Token = 'v4.public.eyJzdWIiOiIxMjMiLCJzdWIiOiI0NTYiLCJleHAiOjQxMDI0NDQ4MDB9AQOS5HnzaWaEqL7pnfBABCKuCVUGK9CbwRWulTKAXu0wtUu_fk5X50SjzdB_DdZt138Oc-iSseIkYHmi6_jQBQ',
 		paseto::verify(Token, PublicKey, _, [now(1700000001)]).
 
 	test(paseto_v4_key_generation, deterministic((LocalLength == 32, SeedLength == 32, PublicLength == 32))) :-
@@ -207,10 +202,9 @@
 		paseto::decrypt(Token, Key, Decoded, Footer, [now(1700000001)]).
 
 	test(paseto_public_key_set_without_key_id, deterministic(Decoded == Claims)) :-
-		hex_bytes('b4cbfb43df4ce210727d953e4a713307fa19bb7d9f85041438d9e11b942a3774', Seed),
 		hex_bytes('1eb9dbbbbc047c03fd70604e0071f0987e16b28b757225c11f00415d0e20b1a2', PublicKey),
 		Claims = {exp-4102444800},
-		paseto::sign(Claims, Seed, Token, []),
+		Token = 'v4.public.eyJleHAiOjQxMDI0NDQ4MDB9rWo6sq9iAGsHn9qjjgbaq6P0LszsiFB8UGI783DeE_R_Rr-rq8V5-ovXJv7xJD62zAjvN_RVf-pycgzUVEftBQ',
 		paseto::verify(Token, key_set([public('public-1', PublicKey)]), Decoded, [now(1700000001)]).
 
 	test(paseto_validate_key_set, deterministic) :-
