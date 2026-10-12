@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-09-24,
+		date is 2026-10-12,
 		comment is 'Transport-neutral cryptographic helper predicates.'
 	]).
 
@@ -1125,10 +1125,23 @@
 
 	bcrypt_initial_state(state(P, S0, S1, S2, S3)) :-
 		bcrypt_initial_p(P),
-		bcrypt_initial_s0(S0),
-		bcrypt_initial_s1(S1),
-		bcrypt_initial_s2(S2),
-		bcrypt_initial_s3(S3).
+		bcrypt_initial_s0(Rows0),
+		bcrypt_initial_s1(Rows1),
+		bcrypt_initial_s2(Rows2),
+		bcrypt_initial_s3(Rows3),
+		bcrypt_sbox_rows(Rows0, IndexedRows0),
+		bcrypt_sbox_rows(Rows1, IndexedRows1),
+		bcrypt_sbox_rows(Rows2, IndexedRows2),
+		bcrypt_sbox_rows(Rows3, IndexedRows3),
+		S0 =.. [sbox| IndexedRows0],
+		S1 =.. [sbox| IndexedRows1],
+		S2 =.. [sbox| IndexedRows2],
+		S3 =.. [sbox| IndexedRows3].
+
+	bcrypt_sbox_rows([], []).
+	bcrypt_sbox_rows([Values| Rows], [Row| IndexedRows]) :-
+		Row =.. [row| Values],
+		bcrypt_sbox_rows(Rows, IndexedRows).
 
 	bcrypt_expand_key(Key, Salt, state(P0, S00, S10, S20, S30), State) :-
 		bcrypt_xor_key(P0, Key, 0, P1, _),
@@ -1221,10 +1234,10 @@
 		F = Sum2.
 
 	bcrypt_sbox_word(Rows, Index, Word) :-
-		RowIndex is Index >> 4,
-		ColumnIndex is Index /\ 15,
-		nth0(RowIndex, Rows, Row),
-		nth0(ColumnIndex, Row, Word).
+		RowIndex is (Index >> 4) + 1,
+		ColumnIndex is (Index /\ 15) + 1,
+		arg(RowIndex, Rows, Row),
+		arg(ColumnIndex, Row, Word).
 
 	bcrypt_set_pair(p, Index, Left, Right, state(P0, S0, S1, S2, S3), state(P, S0, S1, S2, S3)) :-
 		bcrypt_replace_pair(Index, Left, Right, P0, P).
@@ -1242,9 +1255,14 @@
 	bcrypt_replace_sbox_pair(Index, Left, Right, Rows0, Rows) :-
 		RowIndex is Index >> 4,
 		ColumnIndex is Index /\ 15,
-		nth0(RowIndex, Rows0, Row0),
-		bcrypt_replace_pair(ColumnIndex, Left, Right, Row0, Row),
-		bcrypt_replace_at(RowIndex, Row, Rows0, Rows).
+		RowArgument is RowIndex + 1,
+		arg(RowArgument, Rows0, Row0),
+		Row0 =.. [row| Values0],
+		bcrypt_replace_pair(ColumnIndex, Left, Right, Values0, Values),
+		Row =.. [row| Values],
+		Rows0 =.. [sbox| IndexedRows0],
+		bcrypt_replace_at(RowIndex, Row, IndexedRows0, IndexedRows),
+		Rows =.. [sbox| IndexedRows].
 
 	bcrypt_replace_pair(0, Left, Right, [_OldLeft, _OldRight| Values], [Left, Right| Values]) :-
 		!.
