@@ -225,6 +225,19 @@ limits, bit-precision validation, and concave polygon containment.
 and containment predicates to consider both longitude segments of
 antimeridian-crossing boxes.
 
+* CHANGED: The `spectral_clusterer` library learned model representation from
+`spectral_clusterer/9` to `spectral_clusterer/10`, adding prepared projection
+coefficients before the centroids argument. The previous representation is
+not accepted. Added independent eigensolver tolerance, iteration budget, and
+eigenvalue cutoff options, with residual and orthogonality diagnostics and
+explicit rejection of insufficient spectral accuracy. Improved performance
+with an analytical leading eigenpair, partial eigendecomposition, symmetric
+affinity reuse, cached degree scaling, exact median selection, single-pass
+centroid aggregation, and prepared prediction coefficients. Fixed model
+validation, empty attribute declarations, extreme bandwidth arithmetic,
+embedding normalization, and prediction underflow. Expanded regression tests,
+improved test performance, and documented algorithm limitations.
+
 * FIXED: The `text_vectorization` library to allow for repeated options when
 validating vectorizer terms (leftmost options always take precedence).
 

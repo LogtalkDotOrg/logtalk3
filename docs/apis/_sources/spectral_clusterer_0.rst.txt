@@ -14,8 +14,8 @@ Normalized spectral clusterer for continuous datasets using a Gaussian RBF affin
 |    ``logtalk_load(spectral_clusterer(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:0
-| **Date:** 2026-09-25
+| **Version:** 2:0:0
+| **Date:** 2026-10-12
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -24,6 +24,7 @@ Normalized spectral clusterer for continuous datasets using a Gaussian RBF affin
 | **Imports:**
 |    ``public`` :ref:`clusterer_common <clusterer_common/0>`
 | **Uses:**
+|    :ref:`avltree <avltree/0>`
 |    :ref:`format <format/0>`
 |    :ref:`linear_algebra <linear_algebra/0>`
 |    :ref:`list <list/0>`

@@ -352,6 +352,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#algorithm">Algorithm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#clusterer-representation">Clusterer representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#complexity">Complexity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
@@ -469,6 +470,13 @@ link in a web browser.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(spectral_clusterer(tester)).
 </pre></div>
 </div>
+<p>Common learned models are cached only within a test run, after coverage
+is reset. Dedicated learning, numerical, option, and convergence tests
+still train their own models. The suite checks the complete ring
+fixture, numerical residuals, malformed models, exact median selection,
+empty clusters, and prepared prediction against an independent Nyström
+formula. Individually selected tests also build their required fixtures;
+cleanup removes the cache.</p>
 </section>
 <section id="features">
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
@@ -497,10 +505,16 @@ files and reused later.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">sigma(Sigma)</span></code>: Gaussian RBF scale. It can be <code class="docutils literal notranslate"><span class="pre">auto</span></code> (default) or
 a positive number. Automatic estimation uses the median positive
 pairwise distance.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">maximum_iterations(Iterations)</span></code>: Maximum number of eigensolver and
-centroid optimization iterations. Default is <code class="docutils literal notranslate"><span class="pre">1000</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tolerance(Tolerance)</span></code>: Numerical and centroid-shift convergence
-tolerance. Default is <code class="docutils literal notranslate"><span class="pre">1.0e-8</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">maximum_iterations(Iterations)</span></code>: Maximum number of centroid
+optimization iterations. Default is <code class="docutils literal notranslate"><span class="pre">1000</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tolerance(Tolerance)</span></code>: Centroid-shift convergence tolerance.
+Default is <code class="docutils literal notranslate"><span class="pre">1.0e-8</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eigensolver_maximum_iterations(Iterations)</span></code>: Maximum power
+iterations per initial candidate and component. Default is <code class="docutils literal notranslate"><span class="pre">1000</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eigensolver_tolerance(Tolerance)</span></code>: Non-negative residual and
+orthogonality tolerance. Default is <code class="docutils literal notranslate"><span class="pre">1.0e-8</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eigenvalue_cutoff(Cutoff)</span></code>: Non-negative cutoff for usable positive
+eigenvalues. Default is <code class="docutils literal notranslate"><span class="pre">1.0e-8</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">initialization(Initialization)</span></code>: Embedding centroid initialization
 strategy. Options: <code class="docutils literal notranslate"><span class="pre">spread</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">first_k</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">feature_scaling(FeatureScaling)</span></code>: Whether to standardize continuous
@@ -520,7 +534,21 @@ attributes before clustering. Options: <code class="docutils literal notranslate
 <li><p><code class="docutils literal notranslate"><span class="pre">iterations(Count)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">final_shift(Shift)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">options(Options)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eigensolver_convergence(tolerance)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eigensolver_iterations(Counts)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eigenpair_residuals(Residuals)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">maximum_eigenpair_residual(Residual)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">orthogonality_error(Error)</span></code></p></li>
 </ul>
+<p>The convergence, iterations, and final shift entries describe centroid
+optimization only. Spectral residuals are measured against the original
+normalized adjacency and bounded by eigensolver tolerance times the
+greater of one and its infinity norm; orthogonality error is bounded by
+that tolerance. Insufficient accuracy raises an error. Too few
+eigenvalues above the cutoff raise a component count domain error. The
+analytical leading component has zero iterative work. Other counts refer
+to the selected initial candidates; all candidates contribute to
+execution cost.</p>
 </section>
 <section id="algorithm">
 <h2>Algorithm<a class="headerlink" href="#algorithm" title="Link to this heading"></a></h2>
@@ -537,6 +565,18 @@ d_i  <span class="o">=</span> sum_j <span class="nv">W_ij</span>
 eigenvectors of the corresponding symmetric normalized Laplacian. Their
 transposed rows are normalized to unit length and clustered using
 deterministic k-means.</p>
+<p>The leading eigenvalue is one, with eigenvector proportional to
+square-root degrees. This eigenpair is constructed directly; a bounded
+partial solver extracts only the remaining <code class="docutils literal notranslate"><span class="pre">K-1</span></code> components after
+deflation. Components are reorthogonalized and checked against the
+original matrix before use. Repeated eigenvalues admit different valid
+bases, so cluster labels have no intrinsic order.</p>
+<p>Automatic sigma excludes zero pairwise distances and uses exact
+median-of-medians selection. Squared-distance keys avoid taking square
+roots of every pair; overflow or underflow switches the entire selection
+to scaled ordinary-distance keys. For an even number of distances, sigma
+averages the two middle distances, not the two squared keys. Difference
+lists avoid copying pairwise segments.</p>
 <p>For a new instance <code class="docutils literal notranslate"><span class="pre">x</span></code>, the Nyström embedding coordinate for component
 <code class="docutils literal notranslate"><span class="pre">j</span></code> is computed as:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>z_j(x) <span class="o">=</span> (<span class="m">1</span><span class="o">/</span>mu_j) <span class="o">*</span> sum_i <span class="nv">A</span>(x,x_i) <span class="o">*</span> v_j(i)
@@ -548,19 +588,101 @@ The resulting row is normalized before nearest-centroid assignment.</p>
 <section id="clusterer-representation">
 <h2>Clusterer representation<a class="headerlink" href="#clusterer-representation" title="Link to this heading"></a></h2>
 <p>The learned clusterer is represented as a compound term with the functor
-chosen by the user when exporting the clusterer and arity 9:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>spectral_clusterer(<span class="nv">Encoders</span>, <span class="nv">TrainingRows</span>, <span class="nv">Degrees</span>, <span class="nv">Components</span>, <span class="nv">Eigenvalues</span>, <span class="nv">Centroids</span>, <span class="nv">ResolvedSigma</span>, <span class="nv">Options</span>, <span class="nv">Diagnostics</span>)
+chosen by the user when exporting the clusterer and arity 10:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>spectral_clusterer(<span class="nv">Encoders</span>, <span class="nv">TrainingRows</span>, <span class="nv">Degrees</span>, <span class="nv">Components</span>, <span class="nv">Eigenvalues</span>, <span class="nv">ProjectionCoefficients</span>, <span class="nv">Centroids</span>, <span class="nv">ResolvedSigma</span>, <span class="nv">Options</span>, <span class="nv">Diagnostics</span>)
 </pre></div>
 </div>
 <p>The training rows, degrees, components, eigenvalues, and resolved sigma
 are retained to support Nyström prediction.</p>
+<p>Projection coefficients are prepared once during learning:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="nv">B_ji</span> <span class="o">=</span> v_j(i) <span class="o">/</span> (mu_j <span class="o">*</span> <span class="k">sqrt</span>(d_i))
+</pre></div>
+</div>
+<p>Prediction rescales raw Gaussian affinities by their maximum before
+projection to avoid underflow in coefficient products. Both this common
+scale and the query-degree factor cancel when normalizing the embedding
+row; zero query degree is still rejected. The current representation
+requires the prepared coefficients and complete spectral diagnostics.
+Arity-nine terms are invalid.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">check_clusterer/1</span></code> predicate requires a ground model with
+positive feature, training-example, and cluster counts, consistent
+dimensions and diagnostics, and an effective <code class="docutils literal notranslate"><span class="pre">k(K)</span></code> matching the
+stored cluster count. An explicit sigma must match the resolved sigma.
+Repeated options use their first occurrence. Insufficiently instantiated
+models raise an instantiation error; invalid ground models raise a
+clusterer domain error. The <code class="docutils literal notranslate"><span class="pre">valid_clusterer/1</span></code> predicate fails for
+either kind of invalid model. Exported model functors remain
+unrestricted. Training requires at least one declared continuous
+attribute and one example; empty declarations raise a
+<code class="docutils literal notranslate"><span class="pre">non_empty_attributes</span></code> domain error. The cluster count ranges from one
+to the number of training examples, including singleton datasets when
+sigma is explicit. Automatic sigma requires a positive pairwise distance
+and therefore rejects a singleton or entirely identical dataset.</p>
+<p>Gaussian affinities use sigma-scaled differences instead of forming
+sigma squared or its inverse. A logarithmic fallback avoids overflowing
+intermediate distances for extreme finite bandwidths. Affinities may
+legitimately round to zero or one; a large bandwidth can leave too few
+positive components. A query with zero affinity to every training
+example raises a positive spectral value domain error rather than
+receiving an arbitrary cluster. Feature values must remain representable
+after encoding. Embedding normalization uses scaled norms.</p>
 </section>
 <section id="complexity">
 <h2>Complexity<a class="headerlink" href="#complexity" title="Link to this heading"></a></h2>
 <p>The implementation uses dense matrices. Affinity construction and
 storage require quadratic time and space in the number of training
-examples. The full portable symmetric eigendecomposition is intended for
-small and medium datasets rather than large sparse graphs.</p>
+examples. The portable partial symmetric eigendecomposition is intended
+for small and medium datasets rather than large sparse graphs.</p>
+<p>Each unordered pair contributes one Gaussian evaluation; diagonal
+entries are one and symmetric entries share the same value. Reciprocal
+square-root degrees are computed once per training example rather than
+once per matrix entry.</p>
+<p>Centroid assignment accumulates per-cluster sums and counts in an AVL
+dictionary, preserving training-row order. Empty clusters retain their
+previous centroids and distance ties select the first centroid.
+Assignment costs <code class="docutils literal notranslate"><span class="pre">O(N*K^2)</span></code> for <code class="docutils literal notranslate"><span class="pre">K</span></code>-dimensional embedding rows;
+aggregation avoids rescanning all rows for each cluster and does not
+retain an intermediate assignment list.</p>
+<p>For <code class="docutils literal notranslate"><span class="pre">N</span></code> examples, <code class="docutils literal notranslate"><span class="pre">D</span></code> encoded features, <code class="docutils literal notranslate"><span class="pre">K</span></code> components, and <code class="docutils literal notranslate"><span class="pre">M</span></code>
+positive unordered distances, pairwise distance work costs <code class="docutils literal notranslate"><span class="pre">O(N^2*D)</span></code>.
+Exact median selection costs <code class="docutils literal notranslate"><span class="pre">O(M)</span></code> time and storage, with
+<code class="docutils literal notranslate"><span class="pre">M</span> <span class="pre">&lt;=</span> <span class="pre">N*(N-1)/2</span></code>. Peak dense matrix storage remains <code class="docutils literal notranslate"><span class="pre">O(N^2)</span></code>; the
+retained model costs <code class="docutils literal notranslate"><span class="pre">O(N*D</span> <span class="pre">+</span> <span class="pre">N*K</span> <span class="pre">+</span> <span class="pre">K^2)</span></code> space. Prediction costs
+<code class="docutils literal notranslate"><span class="pre">O(N*D</span> <span class="pre">+</span> <span class="pre">N*K</span> <span class="pre">+</span> <span class="pre">K^2)</span></code> and reuses prepared coefficients. The bounded
+eigensolver extracts only <code class="docutils literal notranslate"><span class="pre">K-1</span></code> iterative components but still tries
+multiple initial vectors; its cost depends on the iteration budget,
+matrix size, and spectral gaps.</p>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Only continuous attributes are supported. Encoded feature values and
+the distances required for automatic sigma estimation must remain
+representable.</p></li>
+<li><p>Dense affinity matrices require quadratic storage, limiting practical
+use to small and medium datasets. Sparse graphs and approximate
+affinity construction are not supported.</p></li>
+<li><p>The cluster count is configured rather than inferred. Results depend
+on sigma, feature scaling, and centroid initialization. Deterministic
+k-means can converge to a local optimum rather than the globally best
+partition.</p></li>
+<li><p>The bounded eigensolver can fail to reach the requested accuracy,
+particularly when spectral gaps are small. Learning rejects
+insufficient spectral accuracy or too few eigenvalues above the
+configured cutoff.</p></li>
+<li><p>Automatic sigma requires a positive pairwise distance, so singleton
+and entirely identical datasets require an explicit sigma. Extreme
+bandwidths can produce numerically rank-deficient affinities or zero
+query affinity.</p></li>
+<li><p>Nyström prediction is an approximate out-of-sample extension of the
+fixed training embedding. It does not add the instance to the training
+graph or recompute its degrees, eigenvectors, or partition, and need
+not match clustering the augmented dataset from scratch. Instances
+with zero affinity to every training example are rejected.</p></li>
+<li><p>Cluster labels have no intrinsic order. Repeated eigenvalues allow
+different valid spectral bases, and small data changes can alter the
+resulting partition.</p></li>
+</ul>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>

@@ -76,3 +76,35 @@
 	example(2, [x-5.0, y-5.0]).
 
 :- end_object.
+
+
+:- object(empty_attributes,
+	implements(clustering_dataset_protocol)).
+
+	attribute_values(_, _) :-
+		fail.
+
+	example(1, []).
+
+:- end_object.
+
+
+:- object(single_point,
+	implements(clustering_dataset_protocol)).
+
+	attribute_values(x, continuous).
+
+	example(1, [x-1.0]).
+
+:- end_object.
+
+
+:- object(two_points,
+	implements(clustering_dataset_protocol)).
+
+	attribute_values(x, continuous).
+
+	example(1, [x-0.0]).
+	example(2, [x-1.0]).
+
+:- end_object.

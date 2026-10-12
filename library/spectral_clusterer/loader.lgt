@@ -24,6 +24,7 @@
 	logtalk_load(statistics(loader)),
 	logtalk_load(format(loader)),
 	logtalk_load(options(loader)),
+	logtalk_load(dictionaries(loader)),
 	logtalk_load(linear_algebra(loader)),
 	logtalk_load(clustering_protocols(loader)),
 	logtalk_load(spectral_clusterer, [optimize(on)])
