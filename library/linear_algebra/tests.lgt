@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:0:1,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2026-09-08,
+		date is 2026-10-12,
 		comment is 'Unit tests for the "linear_algebra" library.'
 	]).
 
@@ -332,5 +332,87 @@
 	test(linear_algebra_solve_cholesky_3, deterministic((X =~= 1.0, Y =~= 2.0))) :-
 		linear_algebra::cholesky_decomposition([[4.0, 2.0], [2.0, 2.0]], CholeskyFactor),
 		linear_algebra::solve_cholesky(CholeskyFactor, [8.0, 6.0], [X, Y]).
+
+	test(linear_algebra_partial_diagonal, deterministic(Values =~= [3.0, 1.0])) :-
+		linear_algebra::symmetric_eigen_partial([[3.0, 0.0], [0.0, 1.0]], 2, 1.0e-10, 100, _, Values, Diagnostics),
+		list::memberchk(convergence(tolerance), Diagnostics).
+
+	test(linear_algebra_partial_indefinite, deterministic(Values =~= [-4.0])) :-
+		linear_algebra::symmetric_eigen_partial([[1.0, 0.0], [0.0, -4.0]], 1, 1.0e-10, 100, _, Values, Diagnostics),
+		list::memberchk(convergence(tolerance), Diagnostics).
+
+	test(linear_algebra_partial_zero_count, deterministic((Vectors == [], Values == []))) :-
+		linear_algebra::symmetric_eigen_partial([], 0, 0.0, 1, Vectors, Values, _).
+
+	test(linear_algebra_partial_repeated, deterministic(Values =~= [1.0, 1.0])) :-
+		linear_algebra::symmetric_eigen_partial([[1.0, 0.0], [0.0, 1.0]], 2, 1.0e-10, 100, _, Values, Diagnostics),
+		list::memberchk(convergence(tolerance), Diagnostics).
+
+	test(linear_algebra_partial_null, deterministic(Values =~= [0.0, 0.0])) :-
+		linear_algebra::symmetric_eigen_partial([[0.0, 0.0], [0.0, 0.0]], 2, 1.0e-10, 10, _, Values, Diagnostics),
+		list::memberchk(convergence(tolerance), Diagnostics).
+
+	test(linear_algebra_partial_nonconvergence, deterministic) :-
+		linear_algebra::symmetric_eigen_partial([[2.0, 1.0], [1.0, 3.0]], 1, 1.0e-12, 1, _, _, Diagnostics),
+		list::memberchk(convergence(maximum_iterations), Diagnostics),
+		list::memberchk(component_iterations([1]), Diagnostics).
+
+	test(linear_algebra_partial_residuals, deterministic) :-
+		linear_algebra::symmetric_eigen_partial([[2.0, 1.0], [1.0, 3.0]], 2, 1.0e-10, 100, Vectors, Values, Diagnostics),
+		list::memberchk(convergence(tolerance), Diagnostics),
+		list::memberchk(maximum_residual(Residual), Diagnostics),
+		Residual =< 4.0e-10,
+		linear_algebra::symmetric_eigen_partial([[2.0, 1.0], [1.0, 3.0]], 2, 1.0e-10, 100, Vectors, Values, Diagnostics).
+
+	test(linear_algebra_partial_projected_null, deterministic(Value =~= 0.0)) :-
+		linear_algebra<<partial_iterate([[0.0, 1.0], [1.0, 0.0]], [[1.0, 0.0]], 0.0, 1, 0, [0.0, 1.0], Value, _, _).
+
+	test(linear_algebra_partial_rank_deficient, deterministic(Values =~= [2.0, 0.0])) :-
+		linear_algebra::symmetric_eigen_partial([[2.0, 0.0], [0.0, 0.0]], 2, 1.0e-10, 100, _, Values, Diagnostics),
+		list::memberchk(convergence(tolerance), Diagnostics).
+
+	test(linear_algebra_partial_equal_magnitude, deterministic(Values =~= [1.0, -1.0])) :-
+		linear_algebra::symmetric_eigen_partial([[0.0, 1.0], [1.0, 0.0]], 2, 1.0e-10, 100, _, Values, Diagnostics),
+		list::memberchk(convergence(tolerance), Diagnostics).
+
+	test(linear_algebra_partial_exact_tolerance, deterministic(Values =~= [2.0])) :-
+		linear_algebra::symmetric_eigen_partial([[2.0]], 1, 0.0, 1, _, Values, Diagnostics),
+		list::memberchk(convergence(tolerance), Diagnostics).
+
+	test(linear_algebra_partial_budget_type, error(type_error(integer, x))) :-
+		linear_algebra::symmetric_eigen_partial([[1.0]], 1, 1.0e-8, x, _, _, _).
+
+	test(linear_algebra_partial_budget_variable, error(instantiation_error)) :-
+		linear_algebra::symmetric_eigen_partial([[1.0]], 1, 1.0e-8, _, _, _, _).
+
+	test(linear_algebra_partial_tolerance_type, error(type_error(number, x))) :-
+		linear_algebra::symmetric_eigen_partial([[1.0]], 1, x, 1, _, _, _).
+
+	test(linear_algebra_partial_tolerance_variable, error(instantiation_error)) :-
+		linear_algebra::symmetric_eigen_partial([[1.0]], 1, _, 1, _, _, _).
+
+	test(linear_algebra_partial_count_bounds, error(domain_error(component_count(0, 1), 2))) :-
+		linear_algebra::symmetric_eigen_partial([[1.0]], 2, 1.0e-8, 1, _, _, _).
+
+	test(linear_algebra_partial_negative_count, error(domain_error(non_negative_integer, -1))) :-
+		linear_algebra::symmetric_eigen_partial([[1.0]], -1, 1.0e-8, 1, _, _, _).
+
+	test(linear_algebra_partial_count_type, error(type_error(integer, x))) :-
+		linear_algebra::symmetric_eigen_partial([[1.0]], x, 1.0e-8, 1, _, _, _).
+
+	test(linear_algebra_partial_count_variable, error(instantiation_error)) :-
+		linear_algebra::symmetric_eigen_partial([[1.0]], _, 1.0e-8, 1, _, _, _).
+
+	test(linear_algebra_partial_budget, error(domain_error(positive_integer, 0))) :-
+		linear_algebra::symmetric_eigen_partial([[1.0]], 1, 1.0e-8, 0, _, _, _).
+
+	test(linear_algebra_partial_tolerance, error(domain_error(non_negative_number, -1.0))) :-
+		linear_algebra::symmetric_eigen_partial([[1.0]], 1, -1.0, 1, _, _, _).
+
+	test(linear_algebra_partial_nonsymmetric, error(domain_error(symmetric_matrix, _))) :-
+		linear_algebra::symmetric_eigen_partial([[1.0, 2.0], [0.0, 1.0]], 1, 1.0e-8, 10, _, _, _).
+
+	test(linear_algebra_partial_nonsquare, error(domain_error(square_matrix, _))) :-
+		linear_algebra::symmetric_eigen_partial([[1.0, 2.0]], 1, 1.0e-8, 10, _, _, _).
 
 :- end_object.

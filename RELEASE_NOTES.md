@@ -132,6 +132,8 @@ using Lasso regression coefficients.
 * ADDED: New `git` library predicates `working_tree_status/2` and
 `working_tree_clean/1`.
 
+* ADDED: New `linear_algebra` library predicate `symmetric_eigen_partial/7`.
+
 * IMPROVED: Performance of the `crypto`, `isolation_forest_anomaly_detector`,
 and `logistic_regression_classifier` libraries.
 

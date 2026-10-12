@@ -23,9 +23,9 @@
 	implements(linear_algebra_protocol)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-09,
+		date is 2026-10-12,
 		comment is 'Linear algebra predicates for numeric vectors and matrices implemented without dependencies on machine learning libraries.'
 	]).
 
@@ -104,7 +104,6 @@
 			Norm = 0.0
 		;	numberlist_chebyshev_norm(Vector, Norm)
 		).
-
 	vector_norm(Vector, Order, Norm) :-
 		context(Context),
 		check(number, Order, Context),
@@ -560,6 +559,120 @@
 			sort_eigenpairs_descending(Eigenvectors0, Eigenvalues0, Eigenvectors, Eigenvalues)
 		).
 
+	symmetric_eigen_partial(Matrix, Count, Tolerance, MaximumIterations, Eigenvectors, Eigenvalues, Diagnostics) :-
+		context(Context),
+		check(non_negative_integer, Count, Context),
+		check(non_negative_number, Tolerance, Context),
+		check(positive_integer, MaximumIterations, Context),
+		require_square_matrix(Matrix, Size),
+		require_symmetric_matrix(Matrix, Tolerance),
+		(	Count =< Size ->
+			true
+		;	domain_error(component_count(0, Size), Count)
+		),
+		partial_matrix_scale(Matrix, 1.0, MatrixScale),
+		Threshold is Tolerance * MatrixScale,
+		(	Count =:= 0 ->
+			Pairs = []
+		;	initial_vectors(Size, InitialVectors),
+			partial_extract(Matrix, Count, InitialVectors, Threshold, MaximumIterations, [], Pairs)
+		),
+		partial_sort(Pairs, [], Sorted),
+		partial_outputs(Sorted, Matrix, Eigenvectors, Eigenvalues, Iterations, Residuals, 0.0, MaximumResidual),
+		partial_orthogonality(Eigenvectors, 0.0, Orthogonality),
+		(	MaximumResidual =< Threshold,
+			Orthogonality =< Tolerance ->
+			Convergence = tolerance
+		;	Convergence = maximum_iterations
+		),
+		Diagnostics = [convergence(Convergence), component_iterations(Iterations), component_residuals(Residuals), maximum_residual(MaximumResidual), orthogonality_error(Orthogonality)].
+
+	partial_matrix_scale([], Scale, Scale).
+	partial_matrix_scale([Row| Rows], Scale0, Scale) :-
+		vector_norm(Row, 1, Sum),
+		Scale1 is max(Scale0, Sum),
+		partial_matrix_scale(Rows, Scale1, Scale).
+
+	partial_extract(_Matrix, 0, _InitialVectors, _Threshold, _MaximumIterations, _Selected, []) :-
+		!.
+	partial_extract(Matrix, Count, InitialVectors, Threshold, MaximumIterations, Selected, [component(Value, Vector, Iterations)| Pairs]) :-
+		partial_candidates(InitialVectors, Matrix, Selected, Threshold, MaximumIterations, none, component(Value, Vector, Iterations)),
+		Negative is -Value,
+		add_scaled_outer_product(Vector, Negative, Matrix, Deflated),
+		Remaining is Count - 1,
+		partial_extract(Deflated, Remaining, InitialVectors, Threshold, MaximumIterations, [Vector| Selected], Pairs).
+
+	partial_candidates([], _Matrix, _Selected, _Threshold, _MaximumIterations, Best, Best).
+	partial_candidates([Initial| Initials], Matrix, Selected, Threshold, MaximumIterations, Best0, Best) :-
+		(	orthogonal_initial_vector(Initial, Selected, 1.0e-12, Start) ->
+			partial_iterate(Matrix, Selected, Threshold, MaximumIterations, 0, Start, Value, Vector, Iterations),
+			(	Best0 = component(Previous, _, _),
+				abs(Previous) >= abs(Value) ->
+				Best1 = Best0
+			;	Best1 = component(Value, Vector, Iterations)
+			)
+		;	Best1 = Best0
+		),
+		partial_candidates(Initials, Matrix, Selected, Threshold, MaximumIterations, Best1, Best).
+
+	partial_iterate(Matrix, Selected, Threshold, MaximumIterations, Iteration, Vector0, Value, Vector, Iterations) :-
+		matrix_vector_product(Matrix, Vector0, Product0),
+		dot_product(Vector0, Product0, Value0),
+		scale_vector(Vector0, Value0, Expected),
+		difference_norm(Product0, Expected, Residual),
+		(	(Residual =< Threshold; Iteration >= MaximumIterations) ->
+			Value = Value0,
+			Vector = Vector0,
+			Iterations = Iteration
+		;	orthogonalize_against_basis(Selected, Product0, Product1),
+			orthogonalize_against_basis(Selected, Product1, Product),
+			euclidean_norm(Product, Norm),
+			(	Norm > 0.0 ->
+				Scale is 1.0 / Norm,
+				scale_vector(Product, Scale, Vector1),
+				stabilize_vector_sign(Vector1, 0.0, Stable),
+				Next is Iteration + 1,
+				partial_iterate(Matrix, Selected, Threshold, MaximumIterations, Next, Stable, Value, Vector, Iterations)
+			;	Value = Value0,
+				Vector = Vector0,
+				Iterations = Iteration
+			)
+		).
+
+	partial_sort([], Sorted, Sorted).
+	partial_sort([Pair| Pairs], Sorted0, Sorted) :-
+		partial_insert(Sorted0, Pair, Sorted1),
+		partial_sort(Pairs, Sorted1, Sorted).
+
+	partial_insert([], Pair, [Pair]).
+	partial_insert([component(NextValue, NextVector, NextIterations)| Pairs], component(Value, Vector, Iterations), Sorted) :-
+		(	Value >= NextValue ->
+			Sorted = [component(Value, Vector, Iterations), component(NextValue, NextVector, NextIterations)| Pairs]
+		;	Sorted = [component(NextValue, NextVector, NextIterations)| Tail],
+			partial_insert(Pairs, component(Value, Vector, Iterations), Tail)
+		).
+
+	partial_outputs([], _Matrix, [], [], [], [], Maximum, Maximum).
+	partial_outputs([component(Value, Vector, Count)| Pairs], Matrix, [Vector| Vectors], [Value| Values], [Count| Counts], [Residual| Residuals], Maximum0, Maximum) :-
+		matrix_vector_product(Matrix, Vector, Product),
+		scale_vector(Vector, Value, Expected),
+		difference_norm(Product, Expected, Residual),
+		Maximum1 is max(Maximum0, Residual),
+		partial_outputs(Pairs, Matrix, Vectors, Values, Counts, Residuals, Maximum1, Maximum).
+
+	partial_orthogonality([], Error, Error).
+	partial_orthogonality([Vector| Vectors], Error0, Error) :-
+		dot_product(Vector, Vector, SquaredNorm),
+		Error1 is max(Error0, abs(SquaredNorm - 1.0)),
+		partial_cross_error(Vectors, Vector, Error1, Error2),
+		partial_orthogonality(Vectors, Error2, Error).
+
+	partial_cross_error([], _Vector, Error, Error).
+	partial_cross_error([Other| Vectors], Vector, Error0, Error) :-
+		dot_product(Vector, Other, Product),
+		Error1 is max(Error0, abs(Product)),
+		partial_cross_error(Vectors, Vector, Error1, Error).
+
 	pseudo_inverse(Matrix, PseudoInverse) :-
 		default_numerical_tolerance(Tolerance),
 		pseudo_inverse(Matrix, Tolerance, PseudoInverse).
@@ -999,7 +1112,8 @@
 		nth1(Index, Column, Value),
 		column_values_at(Columns, Index, Values).
 
-	require_rectangular_matrix([], 0, 0).
+	require_rectangular_matrix([], 0, 0) :-
+		!.
 	require_rectangular_matrix(Matrix, RowCount, ColumnCount) :-
 		Matrix = [Row| Rows],
 		length(Matrix, RowCount),

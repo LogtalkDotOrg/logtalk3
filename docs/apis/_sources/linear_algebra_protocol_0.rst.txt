@@ -14,8 +14,8 @@ Linear algebra protocol.
 |    ``logtalk_load(linear_algebra(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 2:0:0
-| **Date:** 2026-08-09
+| **Version:** 2:1:0
+| **Date:** 2026-10-12
 
 | **Compilation flags:**
 |    ``static``
@@ -1280,6 +1280,47 @@ Computes an orthonormal eigendecomposition of a real symmetric dense matrix usin
 |    ``MaximumIterations`` is an integer that is less than one:
 |        ``domain_error(positive_integer,MaximumIterations)``
 |    ``Matrix`` is not a square matrix:
+|        ``domain_error(square_matrix,Matrix)``
+|    ``Matrix`` is not symmetric within ``Tolerance``:
+|        ``domain_error(symmetric_matrix,Matrix)``
+
+
+------------
+
+.. index:: symmetric_eigen_partial/7
+.. _linear_algebra_protocol/0::symmetric_eigen_partial/7:
+
+``symmetric_eigen_partial/7``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes a bounded partial largest-magnitude symmetric eigendecomposition with residual and orthogonality diagnostics. Returns eigenpairs in descending algebraic order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``symmetric_eigen_partial(Matrix,Count,Tolerance,MaximumIterations,Eigenvectors,Eigenvalues,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``symmetric_eigen_partial(+list(list(number)),+integer,+number,+integer,-list(list(float)),-list(float),-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Count``, ``Tolerance``, or ``MaximumIterations`` is a variable:
+|        ``instantiation_error``
+|    ``Count`` is neither a variable nor an integer:
+|        ``type_error(integer,Count)``
+|    ``Tolerance`` is neither a variable nor a number:
+|        ``type_error(number,Tolerance)``
+|    ``MaximumIterations`` is neither a variable nor an integer:
+|        ``type_error(integer,MaximumIterations)``
+|    ``Count`` is an integer less than zero:
+|        ``domain_error(non_negative_integer,Count)``
+|    ``Count`` exceeds the matrix dimension:
+|        ``domain_error(component_count(0,Size),Count)``
+|    ``Tolerance`` is a negative number:
+|        ``domain_error(non_negative_number,Tolerance)``
+|    ``MaximumIterations`` is an integer less than one:
+|        ``domain_error(positive_integer,MaximumIterations)``
+|    ``Matrix`` is not square:
 |        ``domain_error(square_matrix,Matrix)``
 |    ``Matrix`` is not symmetric within ``Tolerance``:
 |        ``domain_error(symmetric_matrix,Matrix)``

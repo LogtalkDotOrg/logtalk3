@@ -63,6 +63,24 @@ The ``symmetric_eigen/5`` predicate can be used when callers need to
 control the power-iteration budget explicitly instead of relying on the
 default iteration bound.
 
+The ``symmetric_eigen_partial/7`` predicate computes a requested number
+of largest-magnitude eigenpairs, returned in descending algebraic order.
+The count ranges from zero to the matrix dimension. Largest magnitude is
+not largest algebraic value for an indefinite matrix. Existing
+full-spectrum predicates retain their interfaces and behavior.
+
+The returned diagnostics contain ``convergence/1``,
+``component_iterations/1``, ``component_residuals/1``,
+``maximum_residual/1``, and ``orthogonality_error/1``. Residuals are
+measured against the original matrix and compared with tolerance times
+the greater of one and the matrix infinity norm. Orthogonality error
+includes squared unit-norm error and pairwise inner products. Component
+iteration counts describe selected candidates and never exceed the
+budget; other initial candidates also consume work. Completing the
+requested count does not imply convergence. A zero tolerance requires
+exact residuals and orthogonality. Exhaustion returns diagnostics rather
+than raising an error.
+
 API documentation
 -----------------
 

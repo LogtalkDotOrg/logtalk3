@@ -1,9 +1,9 @@
 :- protocol(linear_algebra_protocol).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-09,
+		date is 2026-10-12,
 		comment is 'Linear algebra protocol.'
 	]).
 
@@ -536,6 +536,25 @@
 			'``MaximumIterations`` is neither a variable nor an integer' - type_error(integer, 'MaximumIterations'),
 			'``MaximumIterations`` is an integer that is less than one' - domain_error(positive_integer, 'MaximumIterations'),
 			'``Matrix`` is not a square matrix' - domain_error(square_matrix, 'Matrix'),
+			'``Matrix`` is not symmetric within ``Tolerance``' - domain_error(symmetric_matrix, 'Matrix')
+		]
+	]).
+
+	:- public(symmetric_eigen_partial/7).
+	:- mode(symmetric_eigen_partial(+list(list(number)), +integer, +number, +integer, -list(list(float)), -list(float), -list(compound)), one_or_error).
+	:- info(symmetric_eigen_partial/7, [
+		comment is 'Computes a bounded partial largest-magnitude symmetric eigendecomposition with residual and orthogonality diagnostics. Returns eigenpairs in descending algebraic order.',
+		argnames is ['Matrix', 'Count', 'Tolerance', 'MaximumIterations', 'Eigenvectors', 'Eigenvalues', 'Diagnostics'],
+		exceptions is [
+			'``Count``, ``Tolerance``, or ``MaximumIterations`` is a variable' - instantiation_error,
+			'``Count`` is neither a variable nor an integer' - type_error(integer, 'Count'),
+			'``Tolerance`` is neither a variable nor a number' - type_error(number, 'Tolerance'),
+			'``MaximumIterations`` is neither a variable nor an integer' - type_error(integer, 'MaximumIterations'),
+			'``Count`` is an integer less than zero' - domain_error(non_negative_integer, 'Count'),
+			'``Count`` exceeds the matrix dimension' - domain_error(component_count(0, 'Size'), 'Count'),
+			'``Tolerance`` is a negative number' - domain_error(non_negative_number, 'Tolerance'),
+			'``MaximumIterations`` is an integer less than one' - domain_error(positive_integer, 'MaximumIterations'),
+			'``Matrix`` is not square' - domain_error(square_matrix, 'Matrix'),
 			'``Matrix`` is not symmetric within ``Tolerance``' - domain_error(symmetric_matrix, 'Matrix')
 		]
 	]).
