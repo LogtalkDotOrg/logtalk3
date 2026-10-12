@@ -185,6 +185,16 @@ validation errors.
 default socket command (`socat` on POSIX systems and `ncat` on Windows
 systems).
 
+* CHANGED: The `lof_anomaly_detector` library learned detector term from
+`lof_detector/7` to `lof_detector/8`, adding an immutable cache argument
+before the diagnostics argument. The previous detector representation is
+not accepted. Improved performance with cached neighborhoods, k-distances,
+and densities, indexed reference lookups, shared normalization statistics,
+compact bounded neighbor selection, and symmetric distance reuse. Fixed
+neighbor reference populations, boundary ties, insufficient comparable
+neighbors, feature validation, and instantiation errors. Expanded regression
+tests, achieved full clause coverage, and updated documentation.
+
 * IMPROVED: The `tabu_search` library with optional tabu keys, custom tenure
 and aspiration policies, restart diversification, and exhaustive neighborhood
 evaluation. Optimized candidate sampling and tabu scans; fixed tenure

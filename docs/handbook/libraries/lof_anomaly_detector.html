@@ -263,8 +263,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#validation">Validation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#detector-representation">Detector representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
@@ -446,11 +448,11 @@ The detector memorizes the training instances and computes Local Outlier
 Factor values by comparing the local reachability density of a query to
 the densities of its neighbors.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">anomaly_detector_protocol</span></code> defined in the
-<code class="docutils literal notranslate"><span class="pre">anomaly_detection_protocols</span></code> library. It learns a compact detector
-from a dataset by selecting baseline training examples from the declared
-class labels, computes normalized anomaly scores for new instances,
-predicts <code class="docutils literal notranslate"><span class="pre">normal</span></code> or <code class="docutils literal notranslate"><span class="pre">anomaly</span></code>, and exports learned detectors as
-clauses or files.</p>
+<code class="docutils literal notranslate"><span class="pre">anomaly_detection_protocols</span></code> library. It learns a detector from a
+dataset by selecting baseline training examples from the declared class
+labels, computes normalized anomaly scores for new instances, predicts
+<code class="docutils literal notranslate"><span class="pre">normal</span></code> or <code class="docutils literal notranslate"><span class="pre">anomaly</span></code>, and exports learned detectors as clauses or
+files.</p>
 <p>Datasets are represented as objects implementing the
 <code class="docutils literal notranslate"><span class="pre">anomaly_dataset_protocol</span></code> protocol from the
 <code class="docutils literal notranslate"><span class="pre">anomaly_detection_protocols</span></code> library. See the
@@ -479,7 +481,12 @@ link in a web browser.</p>
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><strong>Density-based anomaly scoring</strong>: computes Local Outlier Factor
-scores from local reachability densities.</p></li>
+scores from local reachability densities on a fixed training
+population. Each training point is excluded only from its own neighbor
+candidates, not from the reference population used for other points.
+Every neighbor tied at the kth distance is included. Density and score
+averages use the actual number of comparable neighbors, which can
+differ from <code class="docutils literal notranslate"><span class="pre">k</span></code>.</p></li>
 <li><p><strong>Normalized scores</strong>: Raw LOF values are normalized to the interval
 <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">1.0]</span></code> by mapping the ideal baseline value <code class="docutils literal notranslate"><span class="pre">1.0</span></code> to <code class="docutils literal notranslate"><span class="pre">0.0</span></code>
 and scaling larger values against the largest training raw score.</p></li>
@@ -487,25 +494,43 @@ and scaling larger values against the largest training raw score.</p></li>
 features declared by the dataset.</p></li>
 <li><p><strong>Missing values</strong>: ignores missing dimensions while normalizing
 distances (distances are normalized by the number of comparable
-dimensions).</p></li>
+dimensions). A neighborhood can contain fewer than <code class="docutils literal notranslate"><span class="pre">k</span></code> comparable
+instances. A query with no comparable neighbors has raw score <code class="docutils literal notranslate"><span class="pre">1.0</span></code>.
+Every declared attribute must occur in the input pairs. An unbound
+attribute value represents missing data; <code class="docutils literal notranslate"><span class="pre">'$missing'</span></code> is reserved
+internally.</p></li>
 <li><p><strong>Baseline training selection</strong>: <code class="docutils literal notranslate"><span class="pre">baseline_class_values/1</span></code> declares
 which class labels are admissible for fitting the detector, while
 <code class="docutils literal notranslate"><span class="pre">baseline_selection_policy/1</span></code> controls whether non-baseline examples
 are rejected (default) or filtered before training.</p></li>
 <li><p><strong>Multiple metrics</strong>: supports Euclidean, Manhattan, Chebyshev, and
-Minkowski distance metrics.</p></li>
+Minkowski distance metrics. Minkowski uses power <code class="docutils literal notranslate"><span class="pre">3</span></code>. Numeric
+differences are divided by the training range; constant or wholly
+missing features use scale <code class="docutils literal notranslate"><span class="pre">1.0</span></code>. Euclidean, Manhattan, and
+Minkowski sums are divided by the number of comparable dimensions
+before applying any root.</p></li>
 <li><p><strong>Detector export</strong>: learned detectors can be exported as predicate
 clauses.</p></li>
 <li><p><strong>Dataset validation</strong>: learning rejects empty datasets with a
 <code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_dataset,</span> <span class="pre">Dataset)</span></code> exception.</p></li>
 </ul>
 </section>
+<section id="validation">
+<h2>Validation<a class="headerlink" href="#validation" title="Link to this heading"></a></h2>
+<p>Continuous feature values must be numbers, and categorical feature
+values must be atoms. An unbound feature value is accepted as missing.
+Validation occurs during learning and fresh-query preparation.</p>
+</section>
 <section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
 <p>The following options can be passed to the <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> and <code class="docutils literal notranslate"><span class="pre">predict/4</span></code>
 predicates:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">k(K)</span></code>: Number of neighbors to consider (default: 5)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">k(K)</span></code>: Positive target neighbor count (default: 5). Training clamps
+it to the number of other training points. Fresh queries clamp it to
+the full training count. Missing dimensions can reduce the comparable
+count, while boundary ties can increase the retained neighborhood
+size.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">distance_metric(Metric)</span></code>: Distance metric to use. Options:
 <code class="docutils literal notranslate"><span class="pre">euclidean</span></code> (default), <code class="docutils literal notranslate"><span class="pre">manhattan</span></code>, <code class="docutils literal notranslate"><span class="pre">chebyshev</span></code>, <code class="docutils literal notranslate"><span class="pre">minkowski</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">anomaly_threshold(Threshold)</span></code>: Threshold for <code class="docutils literal notranslate"><span class="pre">predict/3-4</span></code>
@@ -519,8 +544,9 @@ non-baseline examples. Supported values are <code class="docutils literal notran
 </section>
 <section id="detector-representation">
 <h2>Detector representation<a class="headerlink" href="#detector-representation" title="Link to this heading"></a></h2>
-<p>The learned detector is represented by default as:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>lof_detector(<span class="nv">TrainingDataset</span>, <span class="nv">AttributeNames</span>, <span class="nv">FeatureTypes</span>, <span class="nv">AttributeScales</span>, <span class="nv">Instances</span>, <span class="nv">ReferenceScores</span>, <span class="nv">Diagnostics</span>)
+<p>The <code class="docutils literal notranslate"><span class="pre">learn/2-3</span></code> predicates return the following detector
+representation:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>lof_detector(<span class="nv">TrainingDataset</span>, <span class="nv">AttributeNames</span>, <span class="nv">FeatureTypes</span>, <span class="nv">AttributeScales</span>, <span class="nv">Instances</span>, <span class="nv">ReferenceScores</span>, <span class="nv">Cache</span>, <span class="nv">Diagnostics</span>)
 </pre></div>
 </div>
 <p>Where:</p>
@@ -531,23 +557,88 @@ non-baseline examples. Supported values are <code class="docutils literal notran
 <li><p><code class="docutils literal notranslate"><span class="pre">AttributeScales</span></code>: Normalization scales for numeric features</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Instances</span></code>: List of retained baseline training <code class="docutils literal notranslate"><span class="pre">Id-Class-Values</span></code>
 triples</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ReferenceScores</span></code>: Cached leave-one-out raw training scores for the
+<li><p><code class="docutils literal notranslate"><span class="pre">ReferenceScores</span></code>: Cached self-excluded raw training scores for the
 retained baseline training instances</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Cache</span></code>: Ground immutable
+<code class="docutils literal notranslate"><span class="pre">lof_cache(K,</span> <span class="pre">Metric,</span> <span class="pre">Graph,</span> <span class="pre">ReferenceIndex,</span> <span class="pre">Maximum)</span></code> term
+containing effective training <code class="docutils literal notranslate"><span class="pre">k</span></code>, resolved metric, balanced
+dictionaries of neighborhoods/densities and reference scores, and the
+normalization maximum</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code>: Learned metadata terms including <code class="docutils literal notranslate"><span class="pre">model/1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">training_dataset/1</span></code>, <code class="docutils literal notranslate"><span class="pre">attribute_names/1</span></code>, <code class="docutils literal notranslate"><span class="pre">feature_types/1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">example_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">reference_score_count/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">options/1</span></code></p></li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">score/3</span></code> predicate always treats its input as a fresh query. Only
 <code class="docutils literal notranslate"><span class="pre">score_all/3</span></code> on the original training dataset with the <code class="docutils literal notranslate"><span class="pre">reject</span></code>
-baseline selection policy reuses the cached leave-one-out
+baseline selection policy reuses the cached self-excluded
 <code class="docutils literal notranslate"><span class="pre">ReferenceScores</span></code> for all examples. With the <code class="docutils literal notranslate"><span class="pre">filter</span></code> policy,
-retained baseline training examples reuse the cached leave-one-out
+retained baseline training examples reuse the cached self-excluded
 scores while excluded examples are scored as fresh queries against the
 learned baseline detector.</p>
 <p>When exported using <code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code> or <code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code>,
 this detector term is serialized directly as the single argument of the
 generated predicate clause so that the exported model can be loaded and
 reused as-is.</p>
+<p>Training example identifiers must be distinct integers. The cache is a
+snapshot of the retained training population. Fresh-query scoring
+searches for neighbors once and reads their k-distances and densities
+from the cache. It does not rebuild training neighborhoods. Tie-heavy
+datasets can require quadratic graph storage.</p>
+<p>Graph neighborhoods contain compact <code class="docutils literal notranslate"><span class="pre">Distance-Id</span></code> pairs. Neighbor
+selection uses a bounded maximum heap for small <code class="docutils literal notranslate"><span class="pre">k</span></code>, followed by an
+exact scan to retain every boundary tie. Small populations and larger
+neighborhoods use compact full sorting. The heap requires space
+proportional to <code class="docutils literal notranslate"><span class="pre">k</span></code>; retained boundary ties can exceed <code class="docutils literal notranslate"><span class="pre">k</span></code>.</p>
+<p>For training populations of at most 256 examples, each unordered
+pairwise distance is calculated once and reused in both directions. The
+temporary distance rows require quadratic storage and are discarded
+after graph construction. Larger populations build rows independently to
+avoid that additional temporary quadratic table.</p>
+<p>Candidate selection uses actual metric distances, not squared or cubed
+keys. Different powered values can round to the same rooted
+floating-point distance; ranking only their powered values would
+incorrectly discard boundary ties. Spatial indexing is not used.
+Pair-dependent missing-dimension normalization does not generally
+satisfy the metric assumptions needed for safe pruning, and no generic
+exact index dependency is required by this library.</p>
+<p>An isolated training point has density <code class="docutils literal notranslate"><span class="pre">1.0</span></code>. A nonempty neighborhood
+with zero summed reachability uses the finite density <code class="docutils literal notranslate"><span class="pre">1.0e12</span></code>. These
+conventions keep duplicate-point and singleton scores finite. A query
+without comparable neighbors has raw score <code class="docutils literal notranslate"><span class="pre">1.0</span></code> and normalized score
+<code class="docutils literal notranslate"><span class="pre">0.0</span></code>; that fallback does not indicate evidence that the query is
+normal.</p>
+<p>The graph caches training densities once, avoiding nested neighbor
+searches for every query. Balanced dictionary lookups cost logarithmic
+time. For <code class="docutils literal notranslate"><span class="pre">n</span></code> training points, <code class="docutils literal notranslate"><span class="pre">d</span></code> features, and <code class="docutils literal notranslate"><span class="pre">t</span></code> retained
+neighbors, full-sort query selection costs approximately
+<code class="docutils literal notranslate"><span class="pre">O(n*d</span> <span class="pre">+</span> <span class="pre">n*log(n))</span></code>; the bounded-heap path costs
+<code class="docutils literal notranslate"><span class="pre">O(n*d</span> <span class="pre">+</span> <span class="pre">n*log(k)</span> <span class="pre">+</span> <span class="pre">t*log(t))</span></code> with two distance scans. Density lookup
+adds <code class="docutils literal notranslate"><span class="pre">O(t*log(n))</span></code>. Large tie groups can eliminate the
+small-neighborhood benefit.</p>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Learning requires pairwise distance calculations, and fresh queries
+scan the retained training population. No approximate neighbor search
+or spatial index is provided.</p></li>
+<li><p>Boundary ties can produce neighborhoods much larger than <code class="docutils literal notranslate"><span class="pre">k</span></code> and
+require quadratic graph storage. Small <code class="docutils literal notranslate"><span class="pre">k</span></code> does not guarantee small
+neighborhoods.</p></li>
+<li><p>Distances with missing values depend on the dimensions comparable for
+each pair and need not satisfy the triangle inequality. A query with
+no comparable neighbors receives score <code class="docutils literal notranslate"><span class="pre">0.0</span></code>, which is a fallback
+rather than evidence of normality.</p></li>
+<li><p>Isolated points and zero-reachability neighborhoods use finite density
+conventions rather than infinite densities. Scores for degenerate
+datasets should be interpreted with these conventions in mind.</p></li>
+<li><p>Normalized scores are relative to the learned baseline, not calibrated
+anomaly probabilities. Clamping can give different raw LOF values the
+same normalized score.</p></li>
+<li><p>Detectors are immutable training snapshots. Changes to the training
+data require learning another detector; incremental updates are not
+supported.</p></li>
+</ul>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>

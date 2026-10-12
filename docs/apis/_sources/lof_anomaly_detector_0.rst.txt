@@ -14,8 +14,8 @@ Local Outlier Factor anomaly detector with multiple distance metrics, mixed-feat
 |    ``logtalk_load(lof_anomaly_detector(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-05-07
+| **Version:** 2:0:0
+| **Date:** 2026-10-12
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -24,6 +24,8 @@ Local Outlier Factor anomaly detector with multiple distance metrics, mixed-feat
 | **Imports:**
 |    ``public`` :ref:`anomaly_detector_common <anomaly_detector_common/0>`
 | **Uses:**
+|    :ref:`avltree <avltree/0>`
+|    :ref:`binary_heap_max <binary_heap_max/0>`
 |    :ref:`format <format/0>`
 |    :ref:`list <list/0>`
 |    :ref:`numberlist <numberlist/0>`
@@ -53,7 +55,82 @@ Protected predicates
 Private predicates
 ------------------
 
-(no local declarations; see entity ancestors if any)
+.. index:: extract_values/3
+.. _lof_anomaly_detector/0::extract_values/3:
+
+``extract_values/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Extracts feature values in the declared attribute order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``extract_values(Attributes,AttributeValues,Values)``
+| **Mode and number of proofs:**
+|    ``extract_values(+list(atom),+list(pair),-list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A declared attribute is absent from ``AttributeValues``:
+|        ``existence_error(attribute,Attribute)``
+
+
+------------
+
+.. index:: check_feature_values/2
+.. _lof_anomaly_detector/0::check_feature_values/2:
+
+``check_feature_values/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks prepared numeric, categorical, and missing feature values.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_feature_values(FeatureTypes,Values)``
+| **Mode and number of proofs:**
+|    ``check_feature_values(+list(atom),+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A bound feature value in ``Values`` is not ground:
+|        ``instantiation_error``
+|    A numeric feature value is not a number:
+|        ``type_error(number,Value)``
+|    A categorical feature value is not an atom:
+|        ``type_error(atom,Value)``
+
+
+------------
+
+.. index:: check_instance_ids/2
+.. _lof_anomaly_detector/0::check_instance_ids/2:
+
+``check_instance_ids/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks distinct integer identities for training examples.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_instance_ids(Instances,Seen)``
+| **Mode and number of proofs:**
+|    ``check_instance_ids(+list,+list(integer))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An example identifier in ``Instances`` is not ground:
+|        ``instantiation_error``
+|    An example identifier is not an integer:
+|        ``type_error(integer,Id)``
+|    An example identifier occurs more than once:
+|        ``domain_error(unique_example_id,Id)``
+
+
+------------
 
 Operators
 ---------

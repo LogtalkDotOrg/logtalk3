@@ -26,6 +26,8 @@
 	logtalk_load(format(loader)),
 	logtalk_load(os(loader)),
 	logtalk_load(options(loader)),
+	logtalk_load(dictionaries(loader)),
+	logtalk_load(heaps(loader)),
 	logtalk_load(anomaly_detection_protocols(loader)),
 	logtalk_load(lof_anomaly_detector, [source_data(on), debug(on)]),
 	logtalk_load([
