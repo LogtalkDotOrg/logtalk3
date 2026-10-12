@@ -172,6 +172,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#performance-measurements">Performance measurements</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#supported-hash-algorithms">Supported hash algorithms</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hmac-compatibility">HMAC compatibility</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#segmented-hashing">Segmented hashing</a></li>
@@ -464,6 +465,51 @@ link in a web browser.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(hashes(tester)).
 </pre></div>
 </div>
+<p>The tests measure clause coverage for the algorithm objects, their
+shared base objects and categories, and the common arithmetic and
+encoding objects. Clause coverage is complemented by tests of input
+lengths, padding boundaries, incremental chunk boundaries, and
+independently verified digest values.</p>
+<p>The fixed padding, BLAKE2, SHA3, and SHAKE boundary digests were
+verified with Python’s <code class="docutils literal notranslate"><span class="pre">hashlib</span></code>. The MurmurHash3 tail vectors were
+generated using the upstream <a class="reference external" href="https://github.com/aappleby/smhasher">SMHasher reference
+implementation</a>. SipHash
+includes all 64 published <a class="reference external" href="https://github.com/veorq/SipHash">reference
+vectors</a>, with little-endian output
+bytes converted to numeric hexadecimal order, plus independently
+generated zero-key and length-rollover cases. POSIX CRC rollover values
+were checked with <code class="docutils literal notranslate"><span class="pre">cksum</span></code>; custom-polynomial values were calculated
+with an independent bit-at-a-time recurrence. These references are
+fixture-generation tools, not runtime or test dependencies.</p>
+</section>
+<section id="performance-measurements">
+<h2>Performance measurements<a class="headerlink" href="#performance-measurements" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">hashes_benchmarks</span></code> object measures one-shot and incremental
+hashing separately from the instrumented tests. Load it after the
+optimized library loader and the <code class="docutils literal notranslate"><span class="pre">os</span></code> library:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(hashes(loader)),
+     <span class="k">logtalk_load</span>(os(loader)),
+     <span class="k">logtalk_load</span>(hashes(benchmarks)).
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">run/3</span></code> predicate takes a hash object, a nonnegative byte count,
+and a positive chunk size. It constructs cyclic byte input and chunks
+before timing, checks one-shot and incremental agreement, warms up both
+paths, and prints five CPU-time samples and their medians. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> hashes_benchmarks<span class="o">::</span>run(sha256, <span class="m">16384</span>, <span class="m">16384</span>).
+</pre></div>
+</div>
+<p>Use fresh processes and identical inputs when comparing implementations.
+Small inputs can be below the clock’s resolution; increase the input
+size rather than drawing conclusions from zero-duration samples. The
+benchmark does not replace independent digest vectors or the
+debug-enabled clause coverage tests.</p>
+<p>Vary the byte count to measure input-size scaling. For incremental
+hashing, compare a single large chunk, block- or rate-aligned chunks,
+unaligned chunks (e.g. 7 or 9 bytes), and bytewise updates. The
+benchmark measures complete hash operations, including finalization and
+hexadecimal encoding; it does not measure loading, input construction,
+allocation, or peak memory usage.</p>
 </section>
 <section id="supported-hash-algorithms">
 <h2>Supported hash algorithms<a class="headerlink" href="#supported-hash-algorithms" title="Link to this heading"></a></h2>
@@ -516,7 +562,10 @@ supporting unbounded integer arithmetic.</p>
 and SHA-512, respectively, differing only in their initial hash values
 and in truncating the output to 224 or 384 bits.</p>
 <p>The SHAKE objects are parametric extensible-output functions. Pass the
-number of output bytes to generate when constructing the object.</p>
+number of output bytes to generate when constructing the object. The
+output length must be a nonnegative integer; zero produces an empty
+hash. Input validation occurs when hashing, creating a state, and
+finalizing a state.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">blake2s</span></code> and <code class="docutils literal notranslate"><span class="pre">blake2b</span></code> objects are unkeyed default instances of
 the parametric <code class="docutils literal notranslate"><span class="pre">blake2s(Key,DigestSize)</span></code> and
 <code class="docutils literal notranslate"><span class="pre">blake2b(Key,DigestSize)</span></code> objects, respectively. For
@@ -528,9 +577,20 @@ for unkeyed hashing. Following RFC 7693, both the key length and the
 requested digest size are folded into the initial hash state, so a
 shorter BLAKE2 digest is an independent digest value and not a
 truncation of the default full digest.</p>
+<p>The shared BLAKE2 category uses the protected scalar <code class="docutils literal notranslate"><span class="pre">blake2_g/10</span></code>
+hook: four working words and two message words are inputs, followed by
+four mixed-word outputs. Both variants implement the same contract using
+their own word-width arithmetic. Public digest and incremental-state
+representations are unchanged.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">crc32_reflected(Polynomial)</span></code> object implements a reflected CRC-32
 family using initial value <code class="docutils literal notranslate"><span class="pre">0xFFFFFFFF</span></code> and final xor value
 <code class="docutils literal notranslate"><span class="pre">0xFFFFFFFF</span></code>, where <code class="docutils literal notranslate"><span class="pre">Polynomial</span></code> is the reflected CRC-32 polynomial.</p>
+<p>The standard reflected polynomials and the canonical <code class="docutils literal notranslate"><span class="pre">0x04C11DB7</span></code> and
+<code class="docutils literal notranslate"><span class="pre">0x814141AB</span></code> polynomials use immutable 256-entry tables, selected
+through small fixed-arity rows. Other polynomial values retain the
+bitwise recurrence; parametric CRC support is not restricted to the
+standard instances. Tests compare every standard table entry with that
+recurrence and also check independent custom-polynomial digests.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">crc32_non_reflected(Polynomial,</span> <span class="pre">Initial,</span> <span class="pre">FinalXor,</span> <span class="pre">AppendLength)</span></code>
 object implements a non-reflected CRC-32 family using a canonical
 polynomial, configurable initial and final xor values, and an
@@ -564,11 +624,13 @@ initial value <code class="docutils literal notranslate"><span class="pre">0x000
 value <code class="docutils literal notranslate"><span class="pre">0x00000000</span></code>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">siphash_2_4</span></code> object uses the standard reference key
 <code class="docutils literal notranslate"><span class="pre">00</span> <span class="pre">01</span> <span class="pre">02</span> <span class="pre">...</span> <span class="pre">0f</span></code>. For custom keys, use the parametric object
-<code class="docutils literal notranslate"><span class="pre">siphash_2_4(Key)</span></code> where <code class="docutils literal notranslate"><span class="pre">Key</span></code> is a list of 16 bytes.</p>
+<code class="docutils literal notranslate"><span class="pre">siphash_2_4(Key)</span></code> where <code class="docutils literal notranslate"><span class="pre">Key</span></code> is a list of 16 bytes. Input
+validation occurs when hashing, creating a state, and finalizing a
+state.</p>
 <p>The implementations of the hashing algorithms make no attempt to
-validate that the input is a list of bytes. When necessary, use the
-<code class="docutils literal notranslate"><span class="pre">types</span></code> library <code class="docutils literal notranslate"><span class="pre">type::check(list(byte),</span> <span class="pre">Input)</span></code> goal before calling
-the <code class="docutils literal notranslate"><span class="pre">hash/2</span></code> predicate.</p>
+validate that the message input is a list of bytes. When necessary, use
+the <code class="docutils literal notranslate"><span class="pre">types</span></code> library <code class="docutils literal notranslate"><span class="pre">type::check(list(byte),</span> <span class="pre">Input)</span></code> goal before
+calling the <code class="docutils literal notranslate"><span class="pre">hash/2</span></code> predicate.</p>
 </section>
 <section id="hmac-compatibility">
 <h2>HMAC compatibility<a class="headerlink" href="#hmac-compatibility" title="Link to this heading"></a></h2>
@@ -590,10 +652,13 @@ genuine incremental hash computation. Unlike computing a hash from a
 single, fully materialized message, these predicates let the caller feed
 the message to the hash function one chunk at a time (e.g. as each chunk
 is read from a file or a network stream), discarding each chunk as soon
-as it has been folded into the state. Only the current chunk and a
-small, bounded amount of algorithm state (for block-padded and
-rate-limited algorithms, a leftover buffer smaller than one block or
-rate) are ever resident at once, regardless of the total message length.</p>
+as it has been folded into the state. The retained state contains a
+bounded leftover buffer, normally smaller than one block or rate. BLAKE2
+holds back its final block, so its buffer can contain one complete
+block. Processing a chunk may allocate temporary lists proportional to
+that chunk; callers must release processed chunks and old states to
+obtain bounded retained memory. The library cannot release input lists
+or states that the caller still references.</p>
 <p>All hashing algorithms in this library implement
 <code class="docutils literal notranslate"><span class="pre">hash_state_protocol</span></code>.</p>
 <p>Example, hashing a message fed in three chunks:</p>

@@ -191,6 +191,14 @@ evaluation. Optimized candidate sampling and tabu scans; fixed tenure
 expiration, large-energy handling, non-ground state identity, and progress
 reporting. Expanded tests and documentation.
 
+* IMPROVED: The `hashes` library with linear block processing, bounded-tail
+MD5 and SHA padding, sequential SHA message schedules, batched SipHash
+blocks, indexed CRC tables, and fixed-position BLAKE2 and Keccak mixing.
+Fixed BLAKE2 non-ground key validation and MurmurHash3 tail determinism.
+Added explicit exceptions for invalid SipHash keys and SHAKE output lengths.
+Expanded regression tests and code coverage, improved test performance,
+and added benchmarks and documentation.
+
 * IMPROVED: The `geohash` library with faster hierarchy compression,
 integer-native encoding and decoding, grid-based adjacency and neighborhoods,
 fused geometry filtering, and hierarchical pruning for adaptive geometry

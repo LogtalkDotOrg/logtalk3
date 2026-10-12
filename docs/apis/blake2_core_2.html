@@ -519,8 +519,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:1:0</div>
-<div class="line"><strong>Date:</strong> 2026-09-25</div>
+<div class="line"><strong>Version:</strong> 1:2:0</div>
+<div class="line"><strong>Date:</strong> 2026-10-12</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -564,14 +564,13 @@
 <li><p><a class="reference internal" href="#blake2-initial-state-2" id="id7"><code class="docutils literal notranslate"><span class="pre">blake2_initial_state/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#blake2-working-vector-4" id="id8"><code class="docutils literal notranslate"><span class="pre">blake2_working_vector/4</span></code></a></p></li>
 <li><p><a class="reference internal" href="#blake2-block-words-2" id="id9"><code class="docutils literal notranslate"><span class="pre">blake2_block_words/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#blake2-g-8" id="id10"><code class="docutils literal notranslate"><span class="pre">blake2_g/8</span></code></a></p></li>
+<li><p><a class="reference internal" href="#blake2-g-10" id="id10"><code class="docutils literal notranslate"><span class="pre">blake2_g/10</span></code></a></p></li>
 <li><p><a class="reference internal" href="#blake2-finalize-4" id="id11"><code class="docutils literal notranslate"><span class="pre">blake2_finalize/4</span></code></a></p></li>
 <li><p><a class="reference internal" href="#blake2-state-bytes-2" id="id12"><code class="docutils literal notranslate"><span class="pre">blake2_state_bytes/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#replace-nth0-4" id="id13"><code class="docutils literal notranslate"><span class="pre">replace_nth0/4</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#private-predicates" id="id14">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id15">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id13">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id14">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -727,9 +726,9 @@
 </div>
 <hr class="docutils" />
 </section>
-<section id="blake2-g-8">
-<span id="blake2-core-2-blake2-g-8"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">blake2_g/8</span></code></a><a class="headerlink" href="#blake2-g-8" title="Link to this heading"></a></h3>
-<p>Applies the BLAKE2 G mixing function to four indexed words of the working vector and two message words.</p>
+<section id="blake2-g-10">
+<span id="blake2-core-2-blake2-g-10"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">blake2_g/10</span></code></a><a class="headerlink" href="#blake2-g-10" title="Link to this heading"></a></h3>
+<p>Applies the BLAKE2 G mixing function to four scalar working words and two message words.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -739,11 +738,11 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">blake2_g(WorkingVector0,AIndex,BIndex,CIndex,DIndex,X,Y,WorkingVector)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">blake2_g(A0,B0,C0,D0,X,Y,A,B,C,D)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">blake2_g(+list(integer),+integer,+integer,+integer,+integer,+integer,+integer,--list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">blake2_g(+integer,+integer,+integer,+integer,+integer,+integer,--integer,--integer,--integer,--integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -786,27 +785,6 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">blake2_state_bytes(+list(integer),--list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="replace-nth0-4">
-<span id="blake2-core-2-replace-nth0-4"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">replace_nth0/4</span></code></a><a class="headerlink" href="#replace-nth0-4" title="Link to this heading"></a></h3>
-<p>Replaces the element at the zero-based index in a list.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">replace_nth0(Index,List0,Element,List)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">replace_nth0(+integer,+list,+term,--list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 </section>

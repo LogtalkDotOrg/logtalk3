@@ -14,8 +14,8 @@ Protocol for fixed-size cryptographic hash functions exposing raw digests and di
 |    ``logtalk_load(hashes(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-04-16
+| **Version:** 1:1:0
+| **Date:** 2026-10-12
 
 | **Compilation flags:**
 |    ``static``
@@ -51,7 +51,15 @@ Computes the digest for a list of bytes and returns it as a list of bytes.
 | **Template:**
 |    ``digest(Bytes,Digest)``
 | **Mode and number of proofs:**
-|    ``digest(+list(byte),--list(byte))`` - ``one``
+|    ``digest(+list(byte),--list(byte))`` - ``one_or_error``
+
+| **Exceptions:**
+|    The key or digest size is not sufficiently instantiated::
+|        ``instantiation_error``
+|    The digest size is invalid for BLAKE2::
+|        ``domain_error(blake2_digest_size,DigestSize)``
+|    The key is ground but invalid for BLAKE2::
+|        ``domain_error(blake2_key,Key)``
 
 
 ------------
@@ -70,7 +78,15 @@ Returns the digest size in bytes.
 | **Template:**
 |    ``digest_size(DigestSize)``
 | **Mode and number of proofs:**
-|    ``digest_size(--integer)`` - ``one``
+|    ``digest_size(--integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The key or digest size is not sufficiently instantiated::
+|        ``instantiation_error``
+|    The digest size is invalid for BLAKE2::
+|        ``domain_error(blake2_digest_size,DigestSize)``
+|    The key is ground but invalid for BLAKE2::
+|        ``domain_error(blake2_key,Key)``
 
 
 ------------
@@ -89,7 +105,15 @@ Returns the hash block size in bytes.
 | **Template:**
 |    ``block_size(BlockSize)``
 | **Mode and number of proofs:**
-|    ``block_size(--integer)`` - ``one``
+|    ``block_size(--integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The key or digest size is not sufficiently instantiated::
+|        ``instantiation_error``
+|    The digest size is invalid for BLAKE2::
+|        ``domain_error(blake2_digest_size,DigestSize)``
+|    The key is ground but invalid for BLAKE2::
+|        ``domain_error(blake2_key,Key)``
 
 
 ------------

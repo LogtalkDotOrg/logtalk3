@@ -22,17 +22,24 @@
 :- protocol(hash_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-04,
+		date is 2026-10-12,
 		comment is 'Hashing protocol. Hash values are returned as lowercase hexadecimal atoms using the output width of each algorithm or extensible-output function instance.'
 	]).
 
 	:- public(hash/2).
-	:- mode(hash(+list(byte), --atom), one).
+	:- mode(hash(+list(byte), --atom), one_or_error).
 	:- info(hash/2, [
 		comment is 'Computes the hash for a list of bytes.',
-		argnames is ['Bytes', 'Hash']
+		argnames is ['Bytes', 'Hash'],
+		exceptions is [
+			'The key, digest size, or output length is not sufficiently instantiated:' - instantiation_error,
+			'The digest size is invalid for BLAKE2:' - domain_error(blake2_digest_size, 'DigestSize'),
+			'The key is ground but invalid for BLAKE2:' - domain_error(blake2_key, 'Key'),
+			'The key is ground but not a list of 16 bytes for SipHash:' - domain_error(siphash_key, 'Key'),
+			'The output length is ground but not a nonnegative integer for SHAKE:' - domain_error(shake_output_size, 'OutputBytes')
+		]
 	]).
 
 :- end_protocol.

@@ -49,6 +49,51 @@ To test this library, load its `tester.lgt` file:
 
 	| ?- logtalk_load(hashes(tester)).
 
+The tests measure clause coverage for the algorithm objects, their shared
+base objects and categories, and the common arithmetic and encoding objects.
+Clause coverage is complemented by tests of input lengths, padding boundaries,
+incremental chunk boundaries, and independently verified digest values.
+
+The fixed padding, BLAKE2, SHA3, and SHAKE boundary digests were verified
+with Python's `hashlib`. The MurmurHash3 tail vectors were generated using
+the upstream [SMHasher reference implementation](https://github.com/aappleby/smhasher).
+SipHash includes all 64 published [reference vectors](https://github.com/veorq/SipHash),
+with little-endian output bytes converted to numeric hexadecimal order,
+plus independently generated zero-key and length-rollover cases. POSIX CRC
+rollover values were checked with `cksum`; custom-polynomial values were
+calculated with an independent bit-at-a-time recurrence. These references
+are fixture-generation tools, not runtime or test dependencies.
+
+
+Performance measurements
+------------------------
+
+The `hashes_benchmarks` object measures one-shot and incremental hashing
+separately from the instrumented tests. Load it after the optimized library
+loader and the `os` library:
+
+	| ?- logtalk_load(hashes(loader)),
+	     logtalk_load(os(loader)),
+	     logtalk_load(hashes(benchmarks)).
+
+The `run/3` predicate takes a hash object, a nonnegative byte count, and a
+positive chunk size. It constructs cyclic byte input and chunks before timing,
+checks one-shot and incremental agreement, warms up both paths, and prints five
+CPU-time samples and their medians. For example:
+
+	| ?- hashes_benchmarks::run(sha256, 16384, 16384).
+
+Use fresh processes and identical inputs when comparing implementations. Small
+inputs can be below the clock's resolution; increase the input size rather than
+drawing conclusions from zero-duration samples. The benchmark does not replace
+independent digest vectors or the debug-enabled clause coverage tests.
+
+Vary the byte count to measure input-size scaling. For incremental hashing,
+compare a single large chunk, block- or rate-aligned chunks, unaligned chunks
+(e.g. 7 or 9 bytes), and bytewise updates. The benchmark measures complete hash
+operations, including finalization and hexadecimal encoding; it does not
+measure loading, input construction, allocation, or peak memory usage.
+
 
 Supported hash algorithms
 -------------------------
@@ -101,7 +146,9 @@ SHA-512, respectively, differing only in their initial hash values and in
 truncating the output to 224 or 384 bits.
 
 The SHAKE objects are parametric extensible-output functions. Pass the number
-of output bytes to generate when constructing the object.
+of output bytes to generate when constructing the object. The output length
+must be a nonnegative integer; zero produces an empty hash. Input validation
+occurs when hashing, creating a state, and finalizing a state.
 
 The `blake2s` and `blake2b` objects are unkeyed default instances of the
 parametric `blake2s(Key,DigestSize)` and `blake2b(Key,DigestSize)` objects,
@@ -113,9 +160,21 @@ Following RFC 7693, both the key length and the requested digest size are
 folded into the initial hash state, so a shorter BLAKE2 digest is an
 independent digest value and not a truncation of the default full digest.
 
+The shared BLAKE2 category uses the protected scalar `blake2_g/10` hook: four
+working words and two message words are inputs, followed by four mixed-word
+outputs. Both variants implement the same contract using their own word-width
+arithmetic. Public digest and incremental-state representations are unchanged.
+
 The `crc32_reflected(Polynomial)` object implements a reflected CRC-32 family
 using initial value `0xFFFFFFFF` and final xor value `0xFFFFFFFF`, where
 `Polynomial` is the reflected CRC-32 polynomial.
+
+The standard reflected polynomials and the canonical `0x04C11DB7` and
+`0x814141AB` polynomials use immutable 256-entry tables, selected through small
+fixed-arity rows. Other polynomial values retain the bitwise recurrence;
+parametric CRC support is not restricted to the standard instances. Tests
+compare every standard table entry with that recurrence and also check
+independent custom-polynomial digests.
 
 The `crc32_non_reflected(Polynomial, Initial, FinalXor, AppendLength)` object
 implements a non-reflected CRC-32 family using a canonical polynomial,
@@ -154,10 +213,11 @@ formats, using the canonical polynomial `0x814141AB`, initial value
 
 The `siphash_2_4` object uses the standard reference key `00 01 02 ... 0f`.
 For custom keys, use the parametric object `siphash_2_4(Key)` where `Key`
-is a list of 16 bytes.
+is a list of 16 bytes. Input validation occurs when hashing, creating a state,
+and finalizing a state.
 
 The implementations of the hashing algorithms make no attempt to validate
-that the input is a list of bytes. When necessary, use the `types` library
+that the message input is a list of bytes. When necessary, use the `types` library
 `type::check(list(byte), Input)` goal before calling the `hash/2` predicate.
 
 
@@ -181,11 +241,13 @@ and `final_hash_state/2` predicates for genuine incremental hash computation.
 Unlike computing a hash from a single, fully materialized message, these
 predicates let the caller feed the message to the hash function one chunk at
 a time (e.g. as each chunk is read from a file or a network stream),
-discarding each chunk as soon as it has been folded into the state. Only the
-current chunk and a small, bounded amount of algorithm state (for
-block-padded and rate-limited algorithms, a leftover buffer smaller than one
-block or rate) are ever resident at once, regardless of the total message
-length.
+discarding each chunk as soon as it has been folded into the state. The
+retained state contains a bounded leftover buffer, normally smaller than
+one block or rate. BLAKE2 holds back its final block, so its buffer can
+contain one complete block. Processing a chunk may allocate temporary lists
+proportional to that chunk; callers must release processed chunks and old
+states to obtain bounded retained memory. The library cannot release input
+lists or states that the caller still references.
 
 All hashing algorithms in this library implement `hash_state_protocol`.
 

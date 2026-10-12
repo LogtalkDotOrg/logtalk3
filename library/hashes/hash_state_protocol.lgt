@@ -23,17 +23,24 @@
 	extends(hash_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-16,
-		comment is 'Protocol for hash functions supporting genuine incremental hash computation via an explicit, caller-driven hashing state. Unlike computing a hash from a single, fully materialized message, this protocol lets the caller feed the message to the hash function one chunk at a time (e.g. as each chunk is read from a file or a network stream), discarding each chunk as soon as it has been folded into the state. Only the current chunk and a small, bounded amount of algorithm state (for block-padded and rate-limited algorithms, a leftover buffer smaller than one block or rate) are ever resident at once, regardless of the total message length.'
+		date is 2026-10-12,
+		comment is 'Protocol for genuine incremental hashing via an opaque caller-driven state. Retained state is bounded independently of total message length. Leftover buffers are smaller than one block or rate, except BLAKE2 may retain one full final block. Processing may allocate temporary lists proportional to the current chunk. Callers must release processed chunks and old states to obtain bounded retained memory.'
 	]).
 
 	:- public(new_hash_state/1).
-	:- mode(new_hash_state(--nonvar), one).
+	:- mode(new_hash_state(--nonvar), one_or_error).
 	:- info(new_hash_state/1, [
 		comment is 'Creates a fresh hashing state, equivalent to having hashed the empty message so far. The state is an opaque, algorithm-specific term; callers should only pass it to update_hash_state/3 and final_hash_state/2, never inspect or construct it directly.',
-		argnames is ['State']
+		argnames is ['State'],
+		exceptions is [
+			'The key, digest size, or output length is not sufficiently instantiated:' - instantiation_error,
+			'The digest size is invalid for BLAKE2:' - domain_error(blake2_digest_size, 'DigestSize'),
+			'The key is ground but invalid for BLAKE2:' - domain_error(blake2_key, 'Key'),
+			'The key is ground but not a list of 16 bytes for SipHash:' - domain_error(siphash_key, 'Key'),
+			'The output length is ground but not a nonnegative integer for SHAKE:' - domain_error(shake_output_size, 'OutputBytes')
+		]
 	]).
 
 	:- public(update_hash_state/3).
@@ -44,10 +51,17 @@
 	]).
 
 	:- public(final_hash_state/2).
-	:- mode(final_hash_state(+nonvar, --atom), one).
+	:- mode(final_hash_state(+nonvar, --atom), one_or_error).
 	:- info(final_hash_state/2, [
 		comment is 'Finalizes a hashing state and returns the resulting hash, in the same representation as hash/2. The state must not be reused after finalization.',
-		argnames is ['State', 'Hash']
+		argnames is ['State', 'Hash'],
+		exceptions is [
+			'The key, digest size, or output length is not sufficiently instantiated:' - instantiation_error,
+			'The digest size is invalid for BLAKE2:' - domain_error(blake2_digest_size, 'DigestSize'),
+			'The key is ground but invalid for BLAKE2:' - domain_error(blake2_key, 'Key'),
+			'The key is ground but not a list of 16 bytes for SipHash:' - domain_error(siphash_key, 'Key'),
+			'The output length is ground but not a nonnegative integer for SHAKE:' - domain_error(shake_output_size, 'OutputBytes')
+		]
 	]).
 
 :- end_protocol.

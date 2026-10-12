@@ -506,7 +506,7 @@
   <p class="right" id="hash-state-protocol-0"><span id="index-0"></span><strong>protocol</strong></p>
 <section id="hash-state-protocol">
 <h1><code class="docutils literal notranslate"><span class="pre">hash_state_protocol</span></code><a class="headerlink" href="#hash-state-protocol" title="Link to this heading"></a></h1>
-<p>Protocol for hash functions supporting genuine incremental hash computation via an explicit, caller-driven hashing state. Unlike computing a hash from a single, fully materialized message, this protocol lets the caller feed the message to the hash function one chunk at a time (e.g. as each chunk is read from a file or a network stream), discarding each chunk as soon as it has been folded into the state. Only the current chunk and a small, bounded amount of algorithm state (for block-padded and rate-limited algorithms, a leftover buffer smaller than one block or rate) are ever resident at once, regardless of the total message length.</p>
+<p>Protocol for genuine incremental hashing via an opaque caller-driven state. Retained state is bounded independently of total message length. Leftover buffers are smaller than one block or rate, except BLAKE2 may retain one full final block. Processing may allocate temporary lists proportional to the current chunk. Callers must release processed chunks and old states to obtain bounded retained memory.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -515,8 +515,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-07-16</div>
+<div class="line"><strong>Version:</strong> 1:1:0</div>
+<div class="line"><strong>Date:</strong> 2026-10-12</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -574,7 +574,32 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">new_hash_state(--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">new_hash_state(--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The key, digest size, or output length is not sufficiently instantiated::</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The digest size is invalid for BLAKE2::</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(blake2_digest_size,DigestSize)</span></code></div>
+</div>
+<div class="line">The key is ground but invalid for BLAKE2::</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(blake2_key,Key)</span></code></div>
+</div>
+<div class="line">The key is ground but not a list of 16 bytes for SipHash::</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(siphash_key,Key)</span></code></div>
+</div>
+<div class="line">The output length is ground but not a nonnegative integer for SHAKE::</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(shake_output_size,OutputBytes)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -616,7 +641,32 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">final_hash_state(+nonvar,--atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">final_hash_state(+nonvar,--atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The key, digest size, or output length is not sufficiently instantiated::</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The digest size is invalid for BLAKE2::</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(blake2_digest_size,DigestSize)</span></code></div>
+</div>
+<div class="line">The key is ground but invalid for BLAKE2::</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(blake2_key,Key)</span></code></div>
+</div>
+<div class="line">The key is ground but not a list of 16 bytes for SipHash::</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(siphash_key,Key)</span></code></div>
+</div>
+<div class="line">The output length is ground but not a nonnegative integer for SHAKE::</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(shake_output_size,OutputBytes)</span></code></div>
+</div>
 </div>
 </div>
 </section>

@@ -129,9 +129,9 @@
 	implements(hash_state_protocol)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-07-16,
+		date is 2026-10-12,
 		comment is 'SipHash-2-4 keyed hash function.',
 		parameters is [
 			'Key' - 'A list of 16 bytes.'
@@ -148,7 +148,7 @@
 	]).
 
 	hash(Bytes, Hash) :-
-		length(_Key_, 16),
+		valid_key,
 		siphash(Bytes, Value),
 		word64_hex(Value, Hash).
 
@@ -156,7 +156,7 @@
 	% complete 8-byte block; Length is the total number of bytes seen so
 	% far, needed only for the final block at finalization
 	new_hash_state(state([], 0, V0_0, V1_0, V2_0, V3_0)) :-
-		length(_Key_, 16),
+		valid_key,
 		key_words(_Key_, K0, K1),
 		xor64(0x736F6D6570736575, K0, V0_0),
 		xor64(0x646F72616E646F6D, K1, V1_0),
@@ -169,6 +169,7 @@
 		process_blocks(Bytes, Buffer0, V0_0, V1_0, V2_0, V3_0, V0_1, V1_1, V2_1, V3_1, Buffer1).
 
 	final_hash_state(state(Buffer, Length, V0_1, V1_1, V2_1, V3_1), Hash) :-
+		valid_key,
 		last_word_length(Length, Buffer, FinalM),
 		xor64(V3_1, FinalM, V3_2),
 		sip_rounds(2, V0_1, V1_1, V2_1, V3_2, V0_3, V1_3, V2_3, V3_3),
@@ -203,19 +204,17 @@
 		xor64(T01, T23, Hash).
 
 	process_blocks(Bytes, V0, V1, V2, V3, FV0, FV1, FV2, FV3, Last) :-
-		process_blocks(Bytes, [], V0, V1, V2, V3, FV0, FV1, FV2, FV3, Last).
+		byte_order::bytes_to_integer(little, 8, Bytes, M, Rest),
+		!,
+		xor64(V3, M, V3_0),
+		sip_rounds(2, V0, V1, V2, V3_0, V0_1, V1_1, V2_1, V3_1),
+		xor64(V0_1, M, V0_2),
+		process_blocks(Rest, V0_2, V1_1, V2_1, V3_1, FV0, FV1, FV2, FV3, Last).
+	process_blocks(Bytes, V0, V1, V2, V3, V0, V1, V2, V3, Bytes).
 
-	process_blocks([], Acc, V0, V1, V2, V3, V0, V1, V2, V3, Acc).
-	process_blocks([Byte| Bytes], Acc0, V0, V1, V2, V3, FV0, FV1, FV2, FV3, Last) :-
-		append(Acc0, [Byte], Acc1),
-		(	Acc1 = [B0, B1, B2, B3, B4, B5, B6, B7] ->
-			little_endian_word64([B0, B1, B2, B3, B4, B5, B6, B7], M),
-			xor64(V3, M, V3_0),
-			sip_rounds(2, V0, V1, V2, V3_0, V0_1, V1_1, V2_1, V3_1),
-			xor64(V0_1, M, V0_2),
-			process_blocks(Bytes, [], V0_2, V1_1, V2_1, V3_1, FV0, FV1, FV2, FV3, Last)
-		;	process_blocks(Bytes, Acc1, V0, V1, V2, V3, FV0, FV1, FV2, FV3, Last)
-		).
+	process_blocks(Bytes, Buffer, V0, V1, V2, V3, FV0, FV1, FV2, FV3, Last) :-
+		append(Buffer, Bytes, Combined),
+		process_blocks(Combined, V0, V1, V2, V3, FV0, FV1, FV2, FV3, Last).
 
 	last_word(Bytes, Acc, Word) :-
 		length(Bytes, Length),
@@ -228,7 +227,8 @@
 
 	partial_word([], _, 0).
 	partial_word([Byte| Bytes], Shift, Word) :-
-		partial_word(Bytes, Shift + 8, Rest),
+		NextShift is Shift + 8,
+		partial_word(Bytes, NextShift, Rest),
 		shl64(Byte, Shift, ShiftedByte),
 		or64(ShiftedByte, Rest, Word).
 
@@ -255,6 +255,24 @@
 	key_words([K0, K1, K2, K3, K4, K5, K6, K7, K8, K9, K10, K11, K12, K13, K14, K15], Word0, Word1) :-
 		little_endian_word64([K0, K1, K2, K3, K4, K5, K6, K7], Word0),
 		little_endian_word64([K8, K9, K10, K11, K12, K13, K14, K15], Word1).
+
+	valid_key :-
+		\+ ground(_Key_),
+		instantiation_error.
+	valid_key :-
+		key_bytes(_Key_, 16),
+		!.
+	valid_key :-
+		domain_error(siphash_key, _Key_).
+
+	key_bytes([], 0).
+	key_bytes([Byte| Bytes], Count) :-
+		Count > 0,
+		integer(Byte),
+		Byte >= 0,
+		Byte =< 255,
+		NextCount is Count - 1,
+		key_bytes(Bytes, NextCount).
 
 :- end_object.
 
@@ -609,9 +627,9 @@
 	implements(hash_state_protocol)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-07-16,
+		date is 2026-10-12,
 		comment is 'Common implementation of the standardized FIPS 202 SHA-3 and SHAKE variants using the Keccak-f[1600] permutation.',
 		parnames is ['RateBytes', 'Suffix', 'OutputBytes']
 	]).
@@ -642,8 +660,7 @@
 	]).
 
 	hash(Bytes, Hash) :-
-		integer(_OutputBytes_),
-		_OutputBytes_ >= 0,
+		valid_output_size,
 		absorb(Bytes, State),
 		squeeze(State, _OutputBytes_, DigestBytes),
 		bytes_hex(DigestBytes, Hash).
@@ -653,6 +670,7 @@
 	% many bytes are in that final tail (not on the total message length),
 	% so no running length needs to be tracked, unlike the MD-style hashes
 	new_hash_state(state([], State0)) :-
+		valid_output_size,
 		initial_state(State0).
 
 	update_hash_state(state(Buffer0, State0), Bytes, state(Buffer1, State1)) :-
@@ -660,13 +678,22 @@
 		absorb_full_blocks(Combined, State0, State1, Buffer1).
 
 	final_hash_state(state(Buffer, State0), Hash) :-
-		integer(_OutputBytes_),
-		_OutputBytes_ >= 0,
+		valid_output_size,
 		padding_block(Buffer, Block),
 		xor_block(Block, State0, State1),
 		keccak_f1600(State1, State),
 		squeeze(State, _OutputBytes_, DigestBytes),
 		bytes_hex(DigestBytes, Hash).
+
+	valid_output_size :-
+		\+ ground(_OutputBytes_),
+		instantiation_error.
+	valid_output_size :-
+		integer(_OutputBytes_),
+		_OutputBytes_ >= 0,
+		!.
+	valid_output_size :-
+		domain_error(shake_output_size, _OutputBytes_).
 
 	absorb(Bytes, State) :-
 		initial_state(State0),
@@ -703,34 +730,28 @@
 			squeeze(NextState, Remaining, RestBytes)
 		).
 
-	xor_block(Bytes, State0, State) :-
-		xor_block(Bytes, 0, State0, State).
-
-	xor_block([], _, State, State).
-	xor_block([Byte| Bytes], Offset, State0, State) :-
-		LaneIndex is Offset >> 3,
-		Shift is (Offset /\ 7) << 3,
-		state_lane(State0, LaneIndex, Lane0),
-		shl64(Byte, Shift, ShiftedByte),
-		xor64(Lane0, ShiftedByte, Lane1),
-		set_lane(State0, LaneIndex, Lane1, State1),
-		NextOffset is Offset + 1,
-		xor_block(Bytes, NextOffset, State1, State).
-
-	state_prefix_bytes(State, Count, Bytes) :-
-		state_prefix_bytes(0, Count, State, Bytes).
-
-	state_prefix_bytes(_, 0, _, []) :-
+	xor_block([], State, State) :-
 		!.
-	state_prefix_bytes(Offset, Count, State, [Byte| Bytes]) :-
-		LaneIndex is Offset >> 3,
-		Shift is (Offset /\ 7) << 3,
-		state_lane(State, LaneIndex, Lane),
-		shr64(Lane, Shift, ShiftedLane),
-		Byte is ShiftedLane /\ 0xFF,
-		NextOffset is Offset + 1,
-		NextCount is Count - 1,
-		state_prefix_bytes(NextOffset, NextCount, State, Bytes).
+	xor_block(Bytes, [Lane0| Lanes0], [Lane| Lanes]) :-
+		byte_order::bytes_to_integer(little, 8, Bytes, Word, Rest),
+		!,
+		xor64(Lane0, Word, Lane),
+		xor_block(Rest, Lanes0, Lanes).
+	xor_block(Bytes, [Lane0| Lanes], [Lane| Lanes]) :-
+		length(Bytes, Count),
+		byte_order::bytes_to_integer(little, Count, Bytes, Word, []),
+		xor64(Lane0, Word, Lane).
+
+	state_prefix_bytes(_, 0, []) :-
+		!.
+	state_prefix_bytes([Lane| Lanes], Count, Bytes) :-
+		Count >= 8,
+		!,
+		byte_order::integer_to_bytes(little, 8, Lane, Bytes, Rest),
+		Remaining is Count - 8,
+		state_prefix_bytes(Lanes, Remaining, Rest).
+	state_prefix_bytes([Lane| _], Count, Bytes) :-
+		byte_order::integer_to_bytes(little, Count, Lane, Bytes, []).
 
 	keccak_f1600(State0, State) :-
 		round_constants(RoundConstants),
@@ -745,11 +766,18 @@
 		keccak_rounds(RoundConstants, State4, State).
 
 	theta(State0, State) :-
-		column_parity(0, State0, C0),
-		column_parity(1, State0, C1),
-		column_parity(2, State0, C2),
-		column_parity(3, State0, C3),
-		column_parity(4, State0, C4),
+		State0 = [
+			A00, A10, A20, A30, A40,
+			A01, A11, A21, A31, A41,
+			A02, A12, A22, A32, A42,
+			A03, A13, A23, A33, A43,
+			A04, A14, A24, A34, A44
+		],
+		column_parity(A00, A01, A02, A03, A04, C0),
+		column_parity(A10, A11, A12, A13, A14, C1),
+		column_parity(A20, A21, A22, A23, A24, C2),
+		column_parity(A30, A31, A32, A33, A34, C3),
+		column_parity(A40, A41, A42, A43, A44, C4),
 		rol64(C1, 1, RC1),
 		rol64(C2, 1, RC2),
 		rol64(C3, 1, RC3),
@@ -760,69 +788,70 @@
 		xor64(C1, RC3, D2),
 		xor64(C2, RC4, D3),
 		xor64(C3, RC0, D4),
-		apply_theta(0, State0, [D0, D1, D2, D3, D4], State).
+		apply_theta(State0, [D0, D1, D2, D3, D4], State).
 
-	column_parity(X, State, Parity) :-
-		X5 is X + 5,
-		X10 is X + 10,
-		X15 is X + 15,
-		X20 is X + 20,
-		state_lane(State, X, A0),
-		state_lane(State, X5, A1),
-		state_lane(State, X10, A2),
-		state_lane(State, X15, A3),
-		state_lane(State, X20, A4),
+	column_parity(A0, A1, A2, A3, A4, Parity) :-
 		xor64(A3, A4, P34),
 		xor64(A2, P34, P234),
 		xor64(A1, P234, P1234),
 		xor64(A0, P1234, Parity).
 
-	apply_theta(25, _, _, []) :-
+	apply_theta([], _, []) :-
 		!.
-	apply_theta(Index, State0, Deltas, [Lane| State]) :-
-		X is Index mod 5,
-		state_lane(State0, Index, Lane0),
-		state_lane(Deltas, X, Delta),
-		xor64(Lane0, Delta, Lane),
-		NextIndex is Index + 1,
-		apply_theta(NextIndex, State0, Deltas, State).
+	apply_theta([A0, A1, A2, A3, A4| Rest0], Deltas, [B0, B1, B2, B3, B4| Rest]) :-
+		Deltas = [D0, D1, D2, D3, D4],
+		xor64(A0, D0, B0),
+		xor64(A1, D1, B1),
+		xor64(A2, D2, B2),
+		xor64(A3, D3, B3),
+		xor64(A4, D4, B4),
+		apply_theta(Rest0, Deltas, Rest).
 
-	rho_pi(State0, State) :-
-		rho_offsets(Offsets),
-		initial_state(BlankState),
-		rho_pi(0, Offsets, State0, BlankState, State).
-
-	rho_pi(25, [], _, State, State) :-
-		!.
-	rho_pi(Index, [Offset| Offsets], State0, Acc0, State) :-
-		state_lane(State0, Index, Lane),
-		rol64(Lane, Offset, Rotated),
-		X is Index mod 5,
-		Y is Index // 5,
-		NewX is Y,
-		NewY is (2 * X + 3 * Y) mod 5,
-		NewIndex is NewX + 5 * NewY,
-		set_lane(Acc0, NewIndex, Rotated, Acc1),
-		NextIndex is Index + 1,
-		rho_pi(NextIndex, Offsets, State0, Acc1, State).
+	rho_pi([
+		Lane0, Lane1, Lane2, Lane3, Lane4,
+		Lane5, Lane6, Lane7, Lane8, Lane9,
+		Lane10, Lane11, Lane12, Lane13, Lane14,
+		Lane15, Lane16, Lane17, Lane18, Lane19,
+		Lane20, Lane21, Lane22, Lane23, Lane24
+	], [
+		Lane0, Rotated6, Rotated12, Rotated18, Rotated24,
+		Rotated3, Rotated9, Rotated10, Rotated16, Rotated22,
+		Rotated1, Rotated7, Rotated13, Rotated19, Rotated20,
+		Rotated4, Rotated5, Rotated11, Rotated17, Rotated23,
+		Rotated2, Rotated8, Rotated14, Rotated15, Rotated21
+	]) :-
+		rol64(Lane1, 1, Rotated1),
+		rol64(Lane2, 62, Rotated2),
+		rol64(Lane3, 28, Rotated3),
+		rol64(Lane4, 27, Rotated4),
+		rol64(Lane5, 36, Rotated5),
+		rol64(Lane6, 44, Rotated6),
+		rol64(Lane7, 6, Rotated7),
+		rol64(Lane8, 55, Rotated8),
+		rol64(Lane9, 20, Rotated9),
+		rol64(Lane10, 3, Rotated10),
+		rol64(Lane11, 10, Rotated11),
+		rol64(Lane12, 43, Rotated12),
+		rol64(Lane13, 25, Rotated13),
+		rol64(Lane14, 39, Rotated14),
+		rol64(Lane15, 41, Rotated15),
+		rol64(Lane16, 45, Rotated16),
+		rol64(Lane17, 15, Rotated17),
+		rol64(Lane18, 21, Rotated18),
+		rol64(Lane19, 8, Rotated19),
+		rol64(Lane20, 18, Rotated20),
+		rol64(Lane21, 2, Rotated21),
+		rol64(Lane22, 61, Rotated22),
+		rol64(Lane23, 56, Rotated23),
+		rol64(Lane24, 14, Rotated24).
 
 	chi(State0, State) :-
 		mask64(Mask),
-		chi_rows(0, State0, Mask, State).
+		chi_rows(State0, Mask, State).
 
-	chi_rows(5, _, _, []) :-
+	chi_rows([], _, []) :-
 		!.
-	chi_rows(Y, State0, Mask, [N0, N1, N2, N3, N4| Rest]) :-
-		Base is Y * 5,
-		I1 is Base + 1,
-		I2 is Base + 2,
-		I3 is Base + 3,
-		I4 is Base + 4,
-		state_lane(State0, Base, B0),
-		state_lane(State0, I1, B1),
-		state_lane(State0, I2, B2),
-		state_lane(State0, I3, B3),
-		state_lane(State0, I4, B4),
+	chi_rows([B0, B1, B2, B3, B4| Rest0], Mask, [N0, N1, N2, N3, N4| Rest]) :-
 		not64(B1, NB1),
 		not64(B2, NB2),
 		not64(B3, NB3),
@@ -843,8 +872,7 @@
 		N2 is N2_0 /\ Mask,
 		N3 is N3_0 /\ Mask,
 		N4 is N4_0 /\ Mask,
-		NextY is Y + 1,
-		chi_rows(NextY, State0, Mask, Rest).
+		chi_rows(Rest0, Mask, Rest).
 
 	iota([Lane| Lanes], RoundConstant, [UpdatedLane| Lanes]) :-
 		xor64(Lane, RoundConstant, UpdatedLane).
@@ -872,14 +900,6 @@
 		0x0000000080000001, 0x8000000080008008
 	]).
 
-	rho_offsets([
-		0, 1, 62, 28, 27,
-		36, 44, 6, 55, 20,
-		3, 10, 43, 25, 39,
-		41, 45, 15, 21, 8,
-		18, 2, 61, 56, 14
-	]).
-
 	take_exact_prefix(0, Rest, [], Rest) :-
 		!.
 	take_exact_prefix(_, [], _, _) :-
@@ -900,18 +920,6 @@
 		UpdatedByte is xor(Byte, Value).
 	xor_last_byte([Byte| Bytes], Value, [Byte| UpdatedBytes]) :-
 		xor_last_byte(Bytes, Value, UpdatedBytes).
-
-	state_lane([Lane| _], 0, Lane) :-
-		!.
-	state_lane([_| Lanes], Index, Lane) :-
-		NextIndex is Index - 1,
-		state_lane(Lanes, NextIndex, Lane).
-
-	set_lane([_| Lanes], 0, UpdatedLane, [UpdatedLane| Lanes]) :-
-		!.
-	set_lane([Lane| Lanes], Index, UpdatedLane, [Lane| UpdatedLanes]) :-
-		NextIndex is Index - 1,
-		set_lane(Lanes, NextIndex, UpdatedLane, UpdatedLanes).
 
 :- end_object.
 
@@ -1035,9 +1043,9 @@
 	imports(blake2_core(_Key_, _DigestSize_))).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-08-10,
+		date is 2026-10-12,
 		comment is 'BLAKE2b hash function.',
 		parameters is [
 			'Key' - 'A list of 0 to 64 key bytes. Use the empty list for unkeyed hashing.',
@@ -1080,11 +1088,7 @@
 		),
 		xor64(0x1F83D9ABFB41BD6B, FinalFlag, V14).
 
-	blake2_g(Working0, AIndex, BIndex, CIndex, DIndex, X, Y, Working) :-
-		nth0(AIndex, Working0, A0),
-		nth0(BIndex, Working0, B0),
-		nth0(CIndex, Working0, C0),
-		nth0(DIndex, Working0, D0),
+	blake2_g(A0, B0, C0, D0, X, Y, A2, B4, C2, D4) :-
 		add64(A0, B0, T0),
 		add64(T0, X, A1),
 		xor64(D0, A1, D1),
@@ -1098,11 +1102,7 @@
 		blake2b_ror64(D3, 16, D4),
 		add64(C1, D4, C2),
 		xor64(B2, C2, B3),
-		blake2b_ror64(B3, 63, B4),
-		^^replace_nth0(AIndex, Working0, A2, Working1),
-		^^replace_nth0(BIndex, Working1, B4, Working2),
-		^^replace_nth0(CIndex, Working2, C2, Working3),
-		^^replace_nth0(DIndex, Working3, D4, Working).
+		blake2b_ror64(B3, 63, B4).
 
 	blake2b_ror64(Value, Shift, Rotated) :-
 		LeftShift is 64 - (Shift /\ 63),
@@ -1152,9 +1152,9 @@
 	implements([hash_digest_protocol, hash_state_protocol])).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2026-08-04,
+		date is 2026-10-12,
 		comment is 'SHA-1 hash function.',
 		see_also is [md5, sha256, sha224]
 	]).
@@ -1164,7 +1164,7 @@
 	]).
 
 	:- uses(hash_common_32, [
-		pad_md/4, pad_md_tail/5, bytes_hex/2, add32/3, rol32/3
+		pad_md_tail/5, bytes_hex/2, add32/3, rol32/3
 	]).
 
 	:- uses(list, [
@@ -1172,8 +1172,10 @@
 	]).
 
 	digest(Bytes, DigestBytes) :-
-		pad_md(big, Bytes, 8, PaddedBytes),
-		sha1_blocks(PaddedBytes, 0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476, 0xC3D2E1F0, H0, H1, H2, H3, H4),
+		length(Bytes, Length),
+		sha1_consume_blocks(Bytes, 0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476, 0xC3D2E1F0, S0, S1, S2, S3, S4, Tail),
+		pad_md_tail(big, Tail, Length, 8, PaddedTail),
+		sha1_blocks(PaddedTail, S0, S1, S2, S3, S4, H0, H1, H2, H3, H4),
 		integer_to_bytes(big, 4, H0, DigestBytes, B1),
 		integer_to_bytes(big, 4, H1, B1, B2),
 		integer_to_bytes(big, 4, H2, B2, B3),
@@ -1210,28 +1212,26 @@
 		integer_to_bytes(big, 4, FH4, B4, []),
 		bytes_hex(DigestBytes, Hash).
 
-	sha1_consume_blocks(Bytes, H0, H1, H2, H3, H4, H0, H1, H2, H3, H4, Bytes) :-
-		length(Bytes, Length),
-		Length < 64,
-		!.
 	sha1_consume_blocks(Bytes, H0_0, H1_0, H2_0, H3_0, H4_0, H0, H1, H2, H3, H4, Tail) :-
 		take(64, Bytes, Block, Rest),
+		!,
 		block_words_be(Block, Words0, Tail0),
-		extend_sha1_words(16, Words0, Tail0, Words),
-		sha1_rounds(0, Words, H0_0, H1_0, H2_0, H3_0, H4_0, A, B, C, D, E),
+		extend_sha1_words(64, Words0, Tail0),
+		sha1_rounds(0, Words0, H0_0, H1_0, H2_0, H3_0, H4_0, A, B, C, D, E),
 		add32(H0_0, A, H0_1),
 		add32(H1_0, B, H1_1),
 		add32(H2_0, C, H2_1),
 		add32(H3_0, D, H3_1),
 		add32(H4_0, E, H4_1),
 		sha1_consume_blocks(Rest, H0_1, H1_1, H2_1, H3_1, H4_1, H0, H1, H2, H3, H4, Tail).
+	sha1_consume_blocks(Bytes, H0, H1, H2, H3, H4, H0, H1, H2, H3, H4, Bytes).
 
 	sha1_blocks([], H0, H1, H2, H3, H4, H0, H1, H2, H3, H4).
 	sha1_blocks([Byte| Bytes], H0_0, H1_0, H2_0, H3_0, H4_0, H0, H1, H2, H3, H4) :-
 		take(64, [Byte| Bytes], Block, Rest),
 		block_words_be(Block, Words0, Tail0),
-		extend_sha1_words(16, Words0, Tail0, Words),
-		sha1_rounds(0, Words, H0_0, H1_0, H2_0, H3_0, H4_0, A, B, C, D, E),
+		extend_sha1_words(64, Words0, Tail0),
+		sha1_rounds(0, Words0, H0_0, H1_0, H2_0, H3_0, H4_0, A, B, C, D, E),
 		add32(H0_0, A, H0_1),
 		add32(H1_0, B, H1_1),
 		add32(H2_0, C, H2_1),
@@ -1241,8 +1241,7 @@
 
 	sha1_rounds(80, _, A, B, C, D, E, A, B, C, D, E) :-
 		!.
-	sha1_rounds(I, W, A0, B0, C0, D0, E0, A, B, C, D, E) :-
-		nth0(I, W, WI),
+	sha1_rounds(I, [WI| W], A0, B0, C0, D0, E0, A, B, C, D, E) :-
 		sha1_f_k(I, B0, C0, D0, F, K),
 		rol32(A0, 5, RA),
 		T is (RA + F + E0 + K + WI) /\ 0xFFFFFFFF,
@@ -1264,21 +1263,14 @@
 			K = 0xCA62C1D6
 		).
 
-	extend_sha1_words(80, Words, [], Words) :-
+	extend_sha1_words(0, _, []) :-
 		!.
-	extend_sha1_words(Index, Words0, [Word| Tail1], Words) :-
-		I3 is Index - 3,
-		I8 is Index - 8,
-		I14 is Index - 14,
-		I16 is Index - 16,
-		nth0(I3, Words0, W3),
-		nth0(I8, Words0, W8),
-		nth0(I14, Words0, W14),
-		nth0(I16, Words0, W16),
+	extend_sha1_words(Count, [W16| Window], [Word| Tail]) :-
+		Window = [_, W14, _, _, _, _, _, W8, _, _, _, _, W3| _],
 		Temp is xor(W3, xor(W8, xor(W14, W16))),
 		rol32(Temp, 1, Word),
-		NextIndex is Index + 1,
-		extend_sha1_words(NextIndex, Words0, Tail1, Words).
+		NextCount is Count - 1,
+		extend_sha1_words(NextCount, Window, Tail).
 
 	block_words_be([], Tail, Tail).
 	block_words_be([B0, B1, B2, B3| Bytes], [Word| Words], Tail) :-
@@ -1292,9 +1284,9 @@
 	implements([hash_digest_protocol, hash_state_protocol])).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-08-10,
+		date is 2026-10-12,
 		comment is 'SHA-512 hash function.',
 		see_also is [sha512_256, sha384, sha256, sha1]
 	]).
@@ -1317,8 +1309,10 @@
 	]).
 
 	digest(Bytes, DigestBytes) :-
-		sha512_pad(Bytes, PaddedBytes),
-		sha512_blocks(PaddedBytes, [0x6A09E667F3BCC908,0xBB67AE8584CAA73B,0x3C6EF372FE94F82B,0xA54FF53A5F1D36F1,0x510E527FADE682D1,0x9B05688C2B3E6C1F,0x1F83D9ABFB41BD6B,0x5BE0CD19137E2179], State),
+		length(Bytes, Length),
+		sha512_consume_blocks(Bytes, [0x6A09E667F3BCC908,0xBB67AE8584CAA73B,0x3C6EF372FE94F82B,0xA54FF53A5F1D36F1,0x510E527FADE682D1,0x9B05688C2B3E6C1F,0x1F83D9ABFB41BD6B,0x5BE0CD19137E2179], State0, Tail),
+		pad_md_tail(Tail, Length, PaddedTail),
+		sha512_blocks(PaddedTail, State0, State),
 		sha512_state_bytes(State, DigestBytes).
 
 	digest_size(64).
@@ -1347,44 +1341,21 @@
 		sha512_state_bytes(FinalState, DigestBytes),
 		bytes_hex(DigestBytes, Hash).
 
-	sha512_consume_blocks(Bytes, State, State, Bytes) :-
-		length(Bytes, Length),
-		Length < 128,
-		!.
 	sha512_consume_blocks(Bytes, State0, State, Tail) :-
 		take(128, Bytes, Block, Rest),
+		!,
 		sha512_block_words(Block, Words0, Tail0),
-		extend_sha512_words(16, Words0, Tail0, Words),
-		sha512_compress(Words, State0, State1),
+		extend_sha512_words(64, Words0, Tail0),
+		sha512_compress(Words0, State0, State1),
 		sha512_consume_blocks(Rest, State1, State, Tail).
-
-	sha512_pad(Bytes, PaddedBytes) :-
-		length(Bytes, Length),
-		BitLength is Length * 8,
-		Zeros is (112 - ((Length + 1) mod 128) + 128) mod 128,
-		sha512_zeros(Zeros, ZeroBytes, LengthBytes),
-		sha512_length_bytes(BitLength, LengthBytes),
-		append(Bytes, [0x80| ZeroBytes], PaddedBytes).
-
-	sha512_zeros(0, Tail, Tail) :-
-		!.
-	sha512_zeros(Count, [0| Zeros], Tail) :-
-		NextCount is Count - 1,
-		sha512_zeros(NextCount, Zeros, Tail).
-
-	sha512_length_bytes(BitLength, LengthBytes) :-
-		Two64 is 0x10000000000000000,
-		High is (BitLength // Two64) mod Two64,
-		Low is BitLength mod Two64,
-		integer_to_bytes(big, 8, High, LengthBytes, LowBytes),
-		integer_to_bytes(big, 8, Low, LowBytes, []).
+	sha512_consume_blocks(Bytes, State, State, Bytes).
 
 	sha512_blocks([], State, State).
 	sha512_blocks([Byte| Bytes], State0, State) :-
 		take(128, [Byte| Bytes], Block, Rest),
 		sha512_block_words(Block, Words0, Tail0),
-		extend_sha512_words(16, Words0, Tail0, Words),
-		sha512_compress(Words, State0, State1),
+		extend_sha512_words(64, Words0, Tail0),
+		sha512_compress(Words0, State0, State1),
 		sha512_blocks(Rest, State1, State).
 
 	sha512_compress(W, [A0,B0,C0,D0,E0,F0,G0,H0], [A,B,C,D,E,F,G,H]) :-
@@ -1393,8 +1364,7 @@
 
 	sha512_rounds(80, _, A, B, C, D, E, F, G, H, A, B, C, D, E, F, G, H) :-
 		!.
-	sha512_rounds(I, W, A0, B0, C0, D0, E0, F0, G0, H0, A, B, C, D, E, F, G, H) :-
-		nth0(I, W, WI),
+	sha512_rounds(I, [WI| W], A0, B0, C0, D0, E0, F0, G0, H0, A, B, C, D, E, F, G, H) :-
 		sha512_k(I, KI),
 		sha512_sigma1(E0, S1),
 		and64(E0, F0, EF),
@@ -1454,24 +1424,17 @@
 		LeftShift is 64 - (Shift /\ 63),
 		rol64(Value, LeftShift, Rotated).
 
-	extend_sha512_words(80, Words, [], Words) :-
+	extend_sha512_words(0, _, []) :-
 		!.
-	extend_sha512_words(Index, Words0, [Word| Tail1], Words) :-
-		I2 is Index - 2,
-		I7 is Index - 7,
-		I15 is Index - 15,
-		I16 is Index - 16,
-		nth0(I2, Words0, W2),
-		nth0(I7, Words0, W7),
-		nth0(I15, Words0, W15),
-		nth0(I16, Words0, W16),
+	extend_sha512_words(Count, [W16| Window], [Word| Tail]) :-
+		Window = [W15, _, _, _, _, _, _, _, W7, _, _, _, _, W2| _],
 		sha512_gamma1(W2, G1),
 		sha512_gamma0(W15, G0),
 		add64(G1, W7, T0),
 		add64(T0, G0, T1),
 		add64(T1, W16, Word),
-		NextIndex is Index + 1,
-		extend_sha512_words(NextIndex, Words0, Tail1, Words).
+		NextCount is Count - 1,
+		extend_sha512_words(NextCount, Window, Tail).
 
 	sha512_state_bytes([W0, W1, W2, W3, W4, W5, W6, W7], DigestBytes) :-
 		integer_to_bytes(big, 8, W0, DigestBytes, B1),
@@ -1576,9 +1539,9 @@
 	implements([hash_digest_protocol, hash_state_protocol])).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2026-08-10,
+		date is 2026-10-12,
 		comment is 'SHA-512/256 hash function.',
 		see_also is [sha256, sha1, sha384]
 	]).
@@ -1601,8 +1564,10 @@
 	]).
 
 	digest(Bytes, DigestBytes) :-
-		sha512_256_pad(Bytes, PaddedBytes),
-		sha512_256_blocks(PaddedBytes, [0x22312194FC2BF72C,0x9F555FA3C84C64C2,0x2393B86B6F53B151,0x963877195940EABD,0x96283EE2A88EFFE3,0xBE5E1E2553863992,0x2B0199FC2C85B8AA,0x0EB72DDC81C52CA2], State),
+		length(Bytes, Length),
+		sha512_256_consume_blocks(Bytes, [0x22312194FC2BF72C,0x9F555FA3C84C64C2,0x2393B86B6F53B151,0x963877195940EABD,0x96283EE2A88EFFE3,0xBE5E1E2553863992,0x2B0199FC2C85B8AA,0x0EB72DDC81C52CA2], State0, Tail),
+		pad_md_tail(Tail, Length, PaddedTail),
+		sha512_256_blocks(PaddedTail, State0, State),
 		sha512_256_state_bytes(State, DigestBytes).
 
 	digest_size(32).
@@ -1631,44 +1596,21 @@
 		sha512_256_state_bytes(FinalState, DigestBytes),
 		bytes_hex(DigestBytes, Hash).
 
-	sha512_256_consume_blocks(Bytes, State, State, Bytes) :-
-		length(Bytes, Length),
-		Length < 128,
-		!.
 	sha512_256_consume_blocks(Bytes, State0, State, Tail) :-
 		take(128, Bytes, Block, Rest),
+		!,
 		sha512_256_block_words(Block, Words0, Tail0),
-		extend_sha512_256_words(16, Words0, Tail0, Words),
-		sha512_256_compress(Words, State0, State1),
+		extend_sha512_256_words(64, Words0, Tail0),
+		sha512_256_compress(Words0, State0, State1),
 		sha512_256_consume_blocks(Rest, State1, State, Tail).
-
-	sha512_256_pad(Bytes, PaddedBytes) :-
-		length(Bytes, Length),
-		BitLength is Length * 8,
-		Zeros is (112 - ((Length + 1) mod 128) + 128) mod 128,
-		sha512_256_zeros(Zeros, ZeroBytes, LengthBytes),
-		sha512_256_length_bytes(BitLength, LengthBytes),
-		append(Bytes, [0x80| ZeroBytes], PaddedBytes).
-
-	sha512_256_zeros(0, Tail, Tail) :-
-		!.
-	sha512_256_zeros(Count, [0| Zeros], Tail) :-
-		NextCount is Count - 1,
-		sha512_256_zeros(NextCount, Zeros, Tail).
-
-	sha512_256_length_bytes(BitLength, LengthBytes) :-
-		Two64 is 0x10000000000000000,
-		High is (BitLength // Two64) mod Two64,
-		Low is BitLength mod Two64,
-		integer_to_bytes(big, 8, High, LengthBytes, LowBytes),
-		integer_to_bytes(big, 8, Low, LowBytes, []).
+	sha512_256_consume_blocks(Bytes, State, State, Bytes).
 
 	sha512_256_blocks([], State, State).
 	sha512_256_blocks([Byte| Bytes], State0, State) :-
 		take(128, [Byte| Bytes], Block, Rest),
 		sha512_256_block_words(Block, Words0, Tail0),
-		extend_sha512_256_words(16, Words0, Tail0, Words),
-		sha512_256_compress(Words, State0, State1),
+		extend_sha512_256_words(64, Words0, Tail0),
+		sha512_256_compress(Words0, State0, State1),
 		sha512_256_blocks(Rest, State1, State).
 
 	sha512_256_compress(W, [A0,B0,C0,D0,E0,F0,G0,H0], [A,B,C,D,E,F,G,H]) :-
@@ -1677,8 +1619,7 @@
 
 	sha512_256_rounds(80, _, A, B, C, D, E, F, G, H, A, B, C, D, E, F, G, H) :-
 		!.
-	sha512_256_rounds(I, W, A0, B0, C0, D0, E0, F0, G0, H0, A, B, C, D, E, F, G, H) :-
-		nth0(I, W, WI),
+	sha512_256_rounds(I, [WI| W], A0, B0, C0, D0, E0, F0, G0, H0, A, B, C, D, E, F, G, H) :-
 		sha512_256_k(I, KI),
 		sha512_256_sigma1(E0, S1),
 		and64(E0, F0, EF),
@@ -1738,24 +1679,17 @@
 		LeftShift is 64 - (Shift /\ 63),
 		rol64(Value, LeftShift, Rotated).
 
-	extend_sha512_256_words(80, Words, [], Words) :-
+	extend_sha512_256_words(0, _, []) :-
 		!.
-	extend_sha512_256_words(Index, Words0, [Word| Tail1], Words) :-
-		I2 is Index - 2,
-		I7 is Index - 7,
-		I15 is Index - 15,
-		I16 is Index - 16,
-		nth0(I2, Words0, W2),
-		nth0(I7, Words0, W7),
-		nth0(I15, Words0, W15),
-		nth0(I16, Words0, W16),
+	extend_sha512_256_words(Count, [W16| Window], [Word| Tail]) :-
+		Window = [W15, _, _, _, _, _, _, _, W7, _, _, _, _, W2| _],
 		sha512_256_gamma1(W2, G1),
 		sha512_256_gamma0(W15, G0),
 		add64(G1, W7, T0),
 		add64(T0, G0, T1),
 		add64(T1, W16, Word),
-		NextIndex is Index + 1,
-		extend_sha512_256_words(NextIndex, Words0, Tail1, Words).
+		NextCount is Count - 1,
+		extend_sha512_256_words(NextCount, Window, Tail).
 
 	sha512_256_state_bytes([W0, W1, W2, W3| _], DigestBytes) :-
 		integer_to_bytes(big, 8, W0, DigestBytes, B1),
@@ -1856,9 +1790,9 @@
 	implements([hash_digest_protocol, hash_state_protocol])).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-08-10,
+		date is 2026-10-12,
 		comment is 'SHA-384 hash function.',
 		see_also is [sha512, sha512_256, sha256, sha224]
 	]).
@@ -1881,8 +1815,10 @@
 	]).
 
 	digest(Bytes, DigestBytes) :-
-		sha384_pad(Bytes, PaddedBytes),
-		sha384_blocks(PaddedBytes, [0xCBBB9D5DC1059ED8,0x629A292A367CD507,0x9159015A3070DD17,0x152FECD8F70E5939,0x67332667FFC00B31,0x8EB44A8768581511,0xDB0C2E0D64F98FA7,0x47B5481DBEFA4FA4], State),
+		length(Bytes, Length),
+		sha384_consume_blocks(Bytes, [0xCBBB9D5DC1059ED8,0x629A292A367CD507,0x9159015A3070DD17,0x152FECD8F70E5939,0x67332667FFC00B31,0x8EB44A8768581511,0xDB0C2E0D64F98FA7,0x47B5481DBEFA4FA4], State0, Tail),
+		pad_md_tail(Tail, Length, PaddedTail),
+		sha384_blocks(PaddedTail, State0, State),
 		sha384_state_bytes(State, DigestBytes).
 
 	digest_size(48).
@@ -1911,44 +1847,21 @@
 		sha384_state_bytes(FinalState, DigestBytes),
 		bytes_hex(DigestBytes, Hash).
 
-	sha384_consume_blocks(Bytes, State, State, Bytes) :-
-		length(Bytes, Length),
-		Length < 128,
-		!.
 	sha384_consume_blocks(Bytes, State0, State, Tail) :-
 		take(128, Bytes, Block, Rest),
+		!,
 		sha384_block_words(Block, Words0, Tail0),
-		extend_sha384_words(16, Words0, Tail0, Words),
-		sha384_compress(Words, State0, State1),
+		extend_sha384_words(64, Words0, Tail0),
+		sha384_compress(Words0, State0, State1),
 		sha384_consume_blocks(Rest, State1, State, Tail).
-
-	sha384_pad(Bytes, PaddedBytes) :-
-		length(Bytes, Length),
-		BitLength is Length * 8,
-		Zeros is (112 - ((Length + 1) mod 128) + 128) mod 128,
-		sha384_zeros(Zeros, ZeroBytes, LengthBytes),
-		sha384_length_bytes(BitLength, LengthBytes),
-		append(Bytes, [0x80| ZeroBytes], PaddedBytes).
-
-	sha384_zeros(0, Tail, Tail) :-
-		!.
-	sha384_zeros(Count, [0| Zeros], Tail) :-
-		NextCount is Count - 1,
-		sha384_zeros(NextCount, Zeros, Tail).
-
-	sha384_length_bytes(BitLength, LengthBytes) :-
-		Two64 is 0x10000000000000000,
-		High is (BitLength // Two64) mod Two64,
-		Low is BitLength mod Two64,
-		integer_to_bytes(big, 8, High, LengthBytes, LowBytes),
-		integer_to_bytes(big, 8, Low, LowBytes, []).
+	sha384_consume_blocks(Bytes, State, State, Bytes).
 
 	sha384_blocks([], State, State).
 	sha384_blocks([Byte| Bytes], State0, State) :-
 		take(128, [Byte| Bytes], Block, Rest),
 		sha384_block_words(Block, Words0, Tail0),
-		extend_sha384_words(16, Words0, Tail0, Words),
-		sha384_compress(Words, State0, State1),
+		extend_sha384_words(64, Words0, Tail0),
+		sha384_compress(Words0, State0, State1),
 		sha384_blocks(Rest, State1, State).
 
 	sha384_compress(W, [A0,B0,C0,D0,E0,F0,G0,H0], [A,B,C,D,E,F,G,H]) :-
@@ -1957,8 +1870,7 @@
 
 	sha384_rounds(80, _, A, B, C, D, E, F, G, H, A, B, C, D, E, F, G, H) :-
 		!.
-	sha384_rounds(I, W, A0, B0, C0, D0, E0, F0, G0, H0, A, B, C, D, E, F, G, H) :-
-		nth0(I, W, WI),
+	sha384_rounds(I, [WI| W], A0, B0, C0, D0, E0, F0, G0, H0, A, B, C, D, E, F, G, H) :-
 		sha384_k(I, KI),
 		sha384_sigma1(E0, S1),
 		and64(E0, F0, EF),
@@ -2018,24 +1930,17 @@
 		LeftShift is 64 - (Shift /\ 63),
 		rol64(Value, LeftShift, Rotated).
 
-	extend_sha384_words(80, Words, [], Words) :-
+	extend_sha384_words(0, _, []) :-
 		!.
-	extend_sha384_words(Index, Words0, [Word| Tail1], Words) :-
-		I2 is Index - 2,
-		I7 is Index - 7,
-		I15 is Index - 15,
-		I16 is Index - 16,
-		nth0(I2, Words0, W2),
-		nth0(I7, Words0, W7),
-		nth0(I15, Words0, W15),
-		nth0(I16, Words0, W16),
+	extend_sha384_words(Count, [W16| Window], [Word| Tail]) :-
+		Window = [W15, _, _, _, _, _, _, _, W7, _, _, _, _, W2| _],
 		sha384_gamma1(W2, G1),
 		sha384_gamma0(W15, G0),
 		add64(G1, W7, T0),
 		add64(T0, G0, T1),
 		add64(T1, W16, Word),
-		NextIndex is Index + 1,
-		extend_sha384_words(NextIndex, Words0, Tail1, Words).
+		NextCount is Count - 1,
+		extend_sha384_words(NextCount, Window, Tail).
 
 	% SHA-384 truncates the final hash value to the first six 64-bit
 	% words (48 bytes), omitting H(N)6 and H(N)7
@@ -2140,9 +2045,9 @@
 	implements([hash_digest_protocol, hash_state_protocol])).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2026-08-04,
+		date is 2026-10-12,
 		comment is 'SHA-256 hash function.',
 		see_also is [md5, sha1, sha224]
 	]).
@@ -2152,7 +2057,7 @@
 	]).
 
 	:- uses(hash_common_32, [
-		pad_md/4, pad_md_tail/5, bytes_hex/2, add32/3, ror32/3
+		pad_md_tail/5, bytes_hex/2, add32/3, ror32/3
 	]).
 
 	:- uses(list, [
@@ -2160,8 +2065,10 @@
 	]).
 
 	digest(Bytes, DigestBytes) :-
-		pad_md(big, Bytes, 8, PaddedBytes),
-		sha256_blocks(PaddedBytes, [0x6A09E667,0xBB67AE85,0x3C6EF372,0xA54FF53A,0x510E527F,0x9B05688C,0x1F83D9AB,0x5BE0CD19], State),
+		length(Bytes, Length),
+		sha256_consume_blocks(Bytes, [0x6A09E667,0xBB67AE85,0x3C6EF372,0xA54FF53A,0x510E527F,0x9B05688C,0x1F83D9AB,0x5BE0CD19], State0, Tail),
+		pad_md_tail(big, Tail, Length, 8, PaddedTail),
+		sha256_blocks(PaddedTail, State0, State),
 		state_bytes(State, DigestBytes).
 
 	digest_size(32).
@@ -2190,23 +2097,21 @@
 		state_bytes(FinalState, DigestBytes),
 		bytes_hex(DigestBytes, Hash).
 
-	sha256_consume_blocks(Bytes, State, State, Bytes) :-
-		length(Bytes, Length),
-		Length < 64,
-		!.
 	sha256_consume_blocks(Bytes, State0, State, Tail) :-
 		take(64, Bytes, Block, Rest),
+		!,
 		block_words_be(Block, Words0, Tail0),
-		extend_sha256_words(16, Words0, Tail0, Words),
-		sha256_compress(Words, State0, State1),
+		extend_sha256_words(48, Words0, Tail0),
+		sha256_compress(Words0, State0, State1),
 		sha256_consume_blocks(Rest, State1, State, Tail).
+	sha256_consume_blocks(Bytes, State, State, Bytes).
 
 	sha256_blocks([], State, State).
 	sha256_blocks([Byte| Bytes], State0, State) :-
 		take(64, [Byte| Bytes], Block, Rest),
 		block_words_be(Block, Words0, Tail0),
-		extend_sha256_words(16, Words0, Tail0, Words),
-		sha256_compress(Words, State0, State1),
+		extend_sha256_words(48, Words0, Tail0),
+		sha256_compress(Words0, State0, State1),
 		sha256_blocks(Rest, State1, State).
 
 	sha256_compress(W, [A0,B0,C0,D0,E0,F0,G0,H0], [A,B,C,D,E,F,G,H]) :-
@@ -2222,8 +2127,7 @@
 
 	sha256_rounds(64, _, A, B, C, D, E, F, G, H, A, B, C, D, E, F, G, H) :-
 		!.
-	sha256_rounds(I, W, A0, B0, C0, D0, E0, F0, G0, H0, A, B, C, D, E, F, G, H) :-
-		nth0(I, W, WI),
+	sha256_rounds(I, [WI| W], A0, B0, C0, D0, E0, F0, G0, H0, A, B, C, D, E, F, G, H) :-
 		sha256_k(I, KI),
 		sha256_sigma1(E0, S1),
 		Ch is xor((E0 /\ F0), ((\ E0) /\ G0)) /\ 0xFFFFFFFF,
@@ -2260,22 +2164,15 @@
 		C is X >> 10,
 		Gamma is xor(A, xor(B, C)) /\ 0xFFFFFFFF.
 
-	extend_sha256_words(64, Words, [], Words) :-
+	extend_sha256_words(0, _, []) :-
 		!.
-	extend_sha256_words(Index, Words0, [Word| Tail1], Words) :-
-		I2 is Index - 2,
-		I7 is Index - 7,
-		I15 is Index - 15,
-		I16 is Index - 16,
-		nth0(I2, Words0, W2),
-		nth0(I7, Words0, W7),
-		nth0(I15, Words0, W15),
-		nth0(I16, Words0, W16),
+	extend_sha256_words(Count, [W16| Window], [Word| Tail]) :-
+		Window = [W15, _, _, _, _, _, _, _, W7, _, _, _, _, W2| _],
 		sha256_gamma1(W2, G1),
 		sha256_gamma0(W15, G0),
 		Word is (G1 + W7 + G0 + W16) /\ 0xFFFFFFFF,
-		NextIndex is Index + 1,
-		extend_sha256_words(NextIndex, Words0, Tail1, Words).
+		NextCount is Count - 1,
+		extend_sha256_words(NextCount, Window, Tail).
 
 	state_bytes([], []).
 	state_bytes([Word| Words], Bytes) :-
@@ -2359,9 +2256,9 @@
 	implements([hash_digest_protocol, hash_state_protocol])).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-08-04,
+		date is 2026-10-12,
 		comment is 'SHA-224 hash function.',
 		see_also is [sha256, sha1, sha384]
 	]).
@@ -2371,7 +2268,7 @@
 	]).
 
 	:- uses(hash_common_32, [
-		pad_md/4, pad_md_tail/5, bytes_hex/2, add32/3, ror32/3
+		pad_md_tail/5, bytes_hex/2, add32/3, ror32/3
 	]).
 
 	:- uses(list, [
@@ -2379,8 +2276,10 @@
 	]).
 
 	digest(Bytes, DigestBytes) :-
-		pad_md(big, Bytes, 8, PaddedBytes),
-		sha224_blocks(PaddedBytes, [0xC1059ED8,0x367CD507,0x3070DD17,0xF70E5939,0xFFC00B31,0x68581511,0x64F98FA7,0xBEFA4FA4], State),
+		length(Bytes, Length),
+		sha224_consume_blocks(Bytes, [0xC1059ED8,0x367CD507,0x3070DD17,0xF70E5939,0xFFC00B31,0x68581511,0x64F98FA7,0xBEFA4FA4], State0, Tail),
+		pad_md_tail(big, Tail, Length, 8, PaddedTail),
+		sha224_blocks(PaddedTail, State0, State),
 		sha224_state_bytes(State, DigestBytes).
 
 	digest_size(28).
@@ -2409,23 +2308,21 @@
 		sha224_state_bytes(FinalState, DigestBytes),
 		bytes_hex(DigestBytes, Hash).
 
-	sha224_consume_blocks(Bytes, State, State, Bytes) :-
-		length(Bytes, Length),
-		Length < 64,
-		!.
 	sha224_consume_blocks(Bytes, State0, State, Tail) :-
 		take(64, Bytes, Block, Rest),
+		!,
 		block_words_be(Block, Words0, Tail0),
-		extend_sha224_words(16, Words0, Tail0, Words),
-		sha224_compress(Words, State0, State1),
+		extend_sha224_words(48, Words0, Tail0),
+		sha224_compress(Words0, State0, State1),
 		sha224_consume_blocks(Rest, State1, State, Tail).
+	sha224_consume_blocks(Bytes, State, State, Bytes).
 
 	sha224_blocks([], State, State).
 	sha224_blocks([Byte| Bytes], State0, State) :-
 		take(64, [Byte| Bytes], Block, Rest),
 		block_words_be(Block, Words0, Tail0),
-		extend_sha224_words(16, Words0, Tail0, Words),
-		sha224_compress(Words, State0, State1),
+		extend_sha224_words(48, Words0, Tail0),
+		sha224_compress(Words0, State0, State1),
 		sha224_blocks(Rest, State1, State).
 
 	sha224_compress(W, [A0,B0,C0,D0,E0,F0,G0,H0], [A,B,C,D,E,F,G,H]) :-
@@ -2441,8 +2338,7 @@
 
 	sha224_rounds(64, _, A, B, C, D, E, F, G, H, A, B, C, D, E, F, G, H) :-
 		!.
-	sha224_rounds(I, W, A0, B0, C0, D0, E0, F0, G0, H0, A, B, C, D, E, F, G, H) :-
-		nth0(I, W, WI),
+	sha224_rounds(I, [WI| W], A0, B0, C0, D0, E0, F0, G0, H0, A, B, C, D, E, F, G, H) :-
 		sha224_k(I, KI),
 		sha224_sigma1(E0, S1),
 		Ch is xor((E0 /\ F0), ((\ E0) /\ G0)) /\ 0xFFFFFFFF,
@@ -2479,22 +2375,15 @@
 		C is X >> 10,
 		Gamma is xor(A, xor(B, C)) /\ 0xFFFFFFFF.
 
-	extend_sha224_words(64, Words, [], Words) :-
+	extend_sha224_words(0, _, []) :-
 		!.
-	extend_sha224_words(Index, Words0, [Word| Tail1], Words) :-
-		I2 is Index - 2,
-		I7 is Index - 7,
-		I15 is Index - 15,
-		I16 is Index - 16,
-		nth0(I2, Words0, W2),
-		nth0(I7, Words0, W7),
-		nth0(I15, Words0, W15),
-		nth0(I16, Words0, W16),
+	extend_sha224_words(Count, [W16| Window], [Word| Tail]) :-
+		Window = [W15, _, _, _, _, _, _, _, W7, _, _, _, _, W2| _],
 		sha224_gamma1(W2, G1),
 		sha224_gamma0(W15, G0),
 		Word is (G1 + W7 + G0 + W16) /\ 0xFFFFFFFF,
-		NextIndex is Index + 1,
-		extend_sha224_words(NextIndex, Words0, Tail1, Words).
+		NextCount is Count - 1,
+		extend_sha224_words(NextCount, Window, Tail).
 
 	% SHA-224 truncates the final hash value to the first seven 32-bit
 	% words (28 bytes), omitting H(N)7

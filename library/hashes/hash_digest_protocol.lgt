@@ -23,31 +23,46 @@
 	extends(hash_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-16,
+		date is 2026-10-12,
 		comment is 'Protocol for fixed-size cryptographic hash functions exposing raw digests and digest metadata.'
 	]).
 
 	:- public(digest/2).
-	:- mode(digest(+list(byte), --list(byte)), one).
+	:- mode(digest(+list(byte), --list(byte)), one_or_error).
 	:- info(digest/2, [
 		comment is 'Computes the digest for a list of bytes and returns it as a list of bytes.',
-		argnames is ['Bytes', 'Digest']
+		argnames is ['Bytes', 'Digest'],
+		exceptions is [
+			'The key or digest size is not sufficiently instantiated:' - instantiation_error,
+			'The digest size is invalid for BLAKE2:' - domain_error(blake2_digest_size, 'DigestSize'),
+			'The key is ground but invalid for BLAKE2:' - domain_error(blake2_key, 'Key')
+		]
 	]).
 
 	:- public(digest_size/1).
-	:- mode(digest_size(--integer), one).
+	:- mode(digest_size(--integer), one_or_error).
 	:- info(digest_size/1, [
 		comment is 'Returns the digest size in bytes.',
-		argnames is ['DigestSize']
+		argnames is ['DigestSize'],
+		exceptions is [
+			'The key or digest size is not sufficiently instantiated:' - instantiation_error,
+			'The digest size is invalid for BLAKE2:' - domain_error(blake2_digest_size, 'DigestSize'),
+			'The key is ground but invalid for BLAKE2:' - domain_error(blake2_key, 'Key')
+		]
 	]).
 
 	:- public(block_size/1).
-	:- mode(block_size(--integer), one).
+	:- mode(block_size(--integer), one_or_error).
 	:- info(block_size/1, [
 		comment is 'Returns the hash block size in bytes.',
-		argnames is ['BlockSize']
+		argnames is ['BlockSize'],
+		exceptions is [
+			'The key or digest size is not sufficiently instantiated:' - instantiation_error,
+			'The digest size is invalid for BLAKE2:' - domain_error(blake2_digest_size, 'DigestSize'),
+			'The key is ground but invalid for BLAKE2:' - domain_error(blake2_key, 'Key')
+		]
 	]).
 
 :- end_protocol.

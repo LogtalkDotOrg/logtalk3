@@ -18,8 +18,8 @@ Common BLAKE2 hash function core.
 |    ``logtalk_load(hashes(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:0
-| **Date:** 2026-09-25
+| **Version:** 1:2:0
+| **Date:** 2026-10-12
 
 | **Compilation flags:**
 |    ``static``
@@ -183,21 +183,21 @@ Decodes a block of bytes into the message words used by the compression function
 
 ------------
 
-.. index:: blake2_g/8
-.. _blake2_core/2::blake2_g/8:
+.. index:: blake2_g/10
+.. _blake2_core/2::blake2_g/10:
 
-``blake2_g/8``
-^^^^^^^^^^^^^^
+``blake2_g/10``
+^^^^^^^^^^^^^^^
 
-Applies the BLAKE2 G mixing function to four indexed words of the working vector and two message words.
+Applies the BLAKE2 G mixing function to four scalar working words and two message words.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``blake2_g(WorkingVector0,AIndex,BIndex,CIndex,DIndex,X,Y,WorkingVector)``
+|    ``blake2_g(A0,B0,C0,D0,X,Y,A,B,C,D)``
 | **Mode and number of proofs:**
-|    ``blake2_g(+list(integer),+integer,+integer,+integer,+integer,+integer,+integer,--list(integer))`` - ``one``
+|    ``blake2_g(+integer,+integer,+integer,+integer,+integer,+integer,--integer,--integer,--integer,--integer)`` - ``one``
 
 
 ------------
@@ -236,25 +236,6 @@ Encodes the hash state words as little-endian bytes.
 |    ``blake2_state_bytes(State,Bytes)``
 | **Mode and number of proofs:**
 |    ``blake2_state_bytes(+list(integer),--list(byte))`` - ``one``
-
-
-------------
-
-.. index:: replace_nth0/4
-.. _blake2_core/2::replace_nth0/4:
-
-``replace_nth0/4``
-^^^^^^^^^^^^^^^^^^
-
-Replaces the element at the zero-based index in a list.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``replace_nth0(Index,List0,Element,List)``
-| **Mode and number of proofs:**
-|    ``replace_nth0(+integer,+list,+term,--list)`` - ``one``
 
 
 ------------

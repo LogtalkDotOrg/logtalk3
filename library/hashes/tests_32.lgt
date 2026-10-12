@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2026-09-04,
+		date is 2026-10-12,
 		comment is 'Unit tests for the "hashes" library 32-bit algorithms.'
 	]).
 
@@ -34,7 +34,11 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, take/4
+		append/3, length/2, member/2, take/4
+	]).
+
+	:- uses(lgtunit, [
+		assertion/1
 	]).
 
 	:- uses(integer, [
@@ -56,6 +60,8 @@
 	cover(blake2s).
 	cover(blake2s(_, _)).
 	cover(md5).
+	cover(hash_common_32).
+	cover(blake2_core(_, _)).
 
 	test(djb2_32_empty, deterministic(Hash == '00001505')) :-
 		djb2_32::hash([], Hash).
@@ -161,9 +167,6 @@
 	test(blake2s_parametric_digest_size_31, deterministic(Hash == '1f57c56334f1ba2d62275430fdc2d2301017ba6be19864dac5a5eca012da4d')) :-
 		blake2s([], 31)::hash([], Hash).
 
-	test(blake2s_parametric_digest_size_is_domain_separated, deterministic(Hash \== '69217a3079908094e11121d042354a7c')) :-
-		blake2s([], 16)::hash([], Hash).
-
 	test(blake2s_parametric_keyed_empty_16, deterministic(Hash == '01d7f4cea32638032b156c74aec7e87a')) :-
 		blake2s([0], 16)::hash([], Hash).
 
@@ -178,6 +181,7 @@
 	test(blake2s_parametric_hash_digest_protocol, deterministic(Info == info('64550d6ffe2c0a01a14aba1eade0200c', 16, 64))) :-
 		blake2s([], 16)::digest([], Digest),
 		bytes_hex(Digest, Hex),
+		assertion(Hex \== '69217a3079908094e11121d042354a7c1f'),
 		blake2s([], 16)::digest_size(DigestSize),
 		blake2s([], 16)::block_size(BlockSize),
 		Info = info(Hex, DigestSize, BlockSize).
@@ -378,18 +382,225 @@
 		md5::final_hash_state(StateA1, HashA),
 		md5::final_hash_state(StateB1, HashB).
 
+	test(hashes_blake2s_parameter_errors, deterministic) :-
+		check_blake2_errors(blake2s, 32, 32).
+
+	test(hashes_murmurhash3_x86_32_one_byte_tail, deterministic(Hash == '3c2569b2')) :-
+		murmurhash3_x86_32::hash([0'a], Hash).
+
+	test(hashes_murmurhash3_x86_32_two_byte_tail, deterministic(Hash == '9bbfd75f')) :-
+		murmurhash3_x86_32::hash([0'a, 0'b], Hash).
+
+	test(hashes_common_32_mask, deterministic(Mask == 0xFFFFFFFF)) :-
+		hash_common_32::mask32(Mask).
+
+	test(hashes_common_32_three_addends, deterministic(Sum == 2)) :-
+		hash_common_32::add32(0xFFFFFFFF, 1, 2, Sum).
+
+	test(hashes_32_independent_boundaries, deterministic) :-
+		findall(Object-Count-Expected, boundary_vector(Object, Count, Expected), Cases),
+		Cases = [_| _],
+		forall(member(Object-Count-Expected, Cases), check_boundary(Object, Count, Expected)).
+
+	test(hashes_crc_posix_length_rollover, all(check_boundary(crc32posix, Count, Expected))) :-
+		member(Count-Expected, [0-'ffffffff', 255-'53eb78da', 256-'4e4dc3a1']).
+
+	test(hashes_32_chunks_boundaries, deterministic(Results == [[], [[0], [1], [2]], [[0, 1], [2, 3]], [[0, 1], [2]]])) :-
+		chunks(7, [], Empty),
+		chunks(1, [0, 1, 2], Singletons),
+		chunks(2, [0, 1, 2, 3], Exact),
+		chunks(2, [0, 1, 2], Partial),
+		Results = [Empty, Singletons, Exact, Partial].
+
+	test(hashes_32_interleaved_families, all(check_sessions(Object))) :-
+		member(Object, [md5, blake2s, crc32b, crc32posix, murmurhash3_x86_32]).
+
+	test(hashes_common_32_arithmetic_edges, deterministic) :-
+		hash_common_32::bytes_hex([], Empty),
+		assertion(Empty == ''),
+		hash_common_32::bytes_hex([0, 1, 35, 69, 103, 137, 171, 205, 239], Hex),
+		assertion(Hex == '000123456789abcdef'),
+		hash_common_32::mul32(0xFFFFFFFF, 0xFFFFFFFF, Product),
+		assertion(Product == 1),
+		hash_common_32::add32(0xFFFFFFFF, 1, Sum),
+		assertion(Sum == 0),
+		hash_common_32::add32(0xFFFFFFFF, 1, 0xFFFFFFFF, 1, Sum4),
+		assertion(Sum4 == 0).
+
+	test(hashes_common_32_rotation_counts, deterministic) :-
+		sequence(0, 32, Counts),
+		forall(member(Count, Counts), check_rotation32(Count)).
+
+	test(hashes_common_32_padding_boundaries, all(check_padding32(Count, Blocks))) :-
+		member(Count-Blocks, [55-1, 56-2, 63-2, 64-2, 65-2]).
+
+	test(hashes_crc_generic_polynomials, deterministic) :-
+		check_boundary(crc32_reflected(0xEB31D82E), 65, '25090a59'),
+		check_boundary(crc32_non_reflected(0x1EDC6F41, 0xFFFFFFFF, 0xFFFFFFFF, false), 65, 'e3bdc867').
+
+	test(hashes_crc_reflected_tables, deterministic) :-
+		sequence(0, 255, Indices),
+		forall(
+			member(Polynomial, [0xEDB88320, 0x82F63B78]),
+			forall(member(Index, Indices), check_crc_reflected_entry(Polynomial, Index))
+		).
+
+	test(hashes_crc_non_reflected_tables, deterministic) :-
+		sequence(0, 255, Indices),
+		forall(
+			member(Polynomial, [0x04C11DB7, 0x814141AB]),
+			forall(member(Index, Indices), check_crc_non_reflected_entry(Polynomial, Index))
+		).
+
 	% auxiliary predicates
+
+	check_crc_non_reflected_entry(Polynomial, Index) :-
+		crc32_non_reflected(Polynomial, 0, 0, false)<<step_byte(0, Index, Actual),
+		Start is Index << 24,
+		crc32_non_reflected(Polynomial, 0, 0, false)<<step_bits(8, Start, Expected),
+		assertion(Actual == Expected).
+
+	check_crc_reflected_entry(Polynomial, Index) :-
+		crc32_reflected(Polynomial)<<crc32_table_value(Index, Actual),
+		crc32_reflected(Polynomial)<<crc32_table_value(8, Index, Expected),
+		assertion(Actual == Expected).
+
+	check_rotation32(Count) :-
+		Shift is Count mod 32,
+		Expected is 1 << Shift,
+		hash_common_32::rol32(1, Count, Rotated),
+		assertion(Rotated == Expected),
+		hash_common_32::ror32(Rotated, Count, Restored),
+		assertion(Restored == 1).
+
+	check_padding32(Count, Blocks) :-
+		byte_sequence(Count, 0, Bytes),
+		Low is (Count * 8) mod 256,
+		High is (Count * 8) // 256,
+		ExpectedLength is Blocks * 64,
+		forall(
+			member(Endian-Field, [little-[Low, High, 0, 0, 0, 0, 0, 0], big-[0, 0, 0, 0, 0, 0, High, Low]]),
+			check_padding32(Endian, Bytes, Count, ExpectedLength, Field)
+		).
+
+	check_padding32(Endian, Bytes, Count, ExpectedLength, Field) :-
+		hash_common_32::pad_md(Endian, Bytes, 8, Padded),
+		length(Padded, ExpectedLength),
+		append(Bytes, [128| _], Padded),
+		append(_, Field, Padded),
+		TailLength is Count mod 64,
+		PrefixLength is Count - TailLength,
+		take(PrefixLength, Bytes, Prefix, Tail),
+		hash_common_32::pad_md_tail(Endian, Tail, Count, 8, PaddedTail),
+		append(Prefix, PaddedTail, Padded),
+		!.
+
+	check_sessions(Object) :-
+		Object::hash([0, 1, 2], ExpectedA),
+		Object::hash([3, 4, 5], ExpectedB),
+		Object::new_hash_state(StateA0),
+		Object::new_hash_state(StateB0),
+		Object::update_hash_state(StateA0, [0], StateA1),
+		Object::update_hash_state(StateB0, [3, 4], StateB1),
+		Object::update_hash_state(StateA1, [], StateA2),
+		Object::update_hash_state(StateB1, [5], StateB2),
+		Object::update_hash_state(StateA2, [1, 2], StateA3),
+		Object::final_hash_state(StateB2, HashB),
+		Object::final_hash_state(StateA3, HashA),
+		assertion(HashA == ExpectedA),
+		assertion(HashB == ExpectedB).
+
+	check_boundary(Object, Count, Expected) :-
+		byte_sequence(Count, 0, Bytes),
+		Object::hash(Bytes, Hash),
+		assertion(Hash == Expected),
+		chunks(7, Bytes, Chunks),
+		run_incremental(Object, [[], []| Chunks], Incremental),
+		assertion(Incremental == Expected).
+
+	byte_sequence(0, _, []) :-
+		!.
+	byte_sequence(Count, Byte, [Byte| Bytes]) :-
+		NextCount is Count - 1,
+		NextByte is (Byte + 1) mod 256,
+		byte_sequence(NextCount, NextByte, Bytes).
+
+	boundary_vector(md5, 55, '6912ee65fff2d9f9ce2508cddf8bcda0').
+	boundary_vector(murmurhash3_x86_32, 0, '00000000').
+	boundary_vector(murmurhash3_x86_32, 1, '514e28b7').
+	boundary_vector(murmurhash3_x86_32, 2, '70e1a2c0').
+	boundary_vector(murmurhash3_x86_32, 3, '51d4d0d7').
+	boundary_vector(murmurhash3_x86_32, 4, 'f4c0ec39').
+	boundary_vector(murmurhash3_x86_32, 5, 'cca4dccb').
+	boundary_vector(murmurhash3_x86_32, 6, '901cc302').
+	boundary_vector(murmurhash3_x86_32, 7, '8d7e4914').
+	boundary_vector(md5, 56, '51fdd1acda72405dfdfa03fcb85896d7').
+	boundary_vector(md5, 63, '48a6295221902e8e0938f773a7185e72').
+	boundary_vector(md5, 64, 'b2d3f56bc197fd985d5965079b5e7148').
+	boundary_vector(md5, 65, '8bd7053801c768420faf816fadba971c').
+	boundary_vector(blake2s, 63, 'e57cb79487dd57902432b250733813bd96a84efce59f650fac26e6696aefafc3').
+	boundary_vector(blake2s, 64, '56f34e8b96557e90c1f24b52d0c89d51086acf1b00f634cf1dde9233b8eaaa3e').
+	boundary_vector(blake2s, 65, '1b53ee94aaf34e4b159d48de352c7f0661d0a40edff95a0b1639b4090e974472').
+	boundary_vector(blake2s, 128, '1fa877de67259d19863a2a34bcc6962a2b25fcbf5cbecd7ede8f1fa36688a796').
+	boundary_vector(blake2s, 129, '5bd169e67c82c2c2e98ef7008bdf261f2ddf30b1c00f9e7f275bb3e8a28dc9a2').
+	boundary_vector(blake2s([0], 16), 63, '0d17d154c1c5854e73326d928a1105ce').
+	boundary_vector(blake2s([0], 16), 64, '2ba2b6488a75dba441264fb7e2aec115').
+	boundary_vector(blake2s([0], 16), 65, '0fa18e1c3172182230710a4d6bc7b7c4').
+	boundary_vector(blake2s([0], 16), 128, '7a98059d4f84767322a894e040e8b284').
+	boundary_vector(blake2s([0], 16), 129, 'ff5ac60aeb64b7ff754bb16af1543f07').
+
+	check_blake2_errors(Variant, MaxKey, MaxSize) :-
+		check_blake2_error(Variant, [0| Tail], MaxSize, instantiation_error),
+		assertion(var(Tail)),
+		check_blake2_error(Variant, [Byte], MaxSize, instantiation_error),
+		assertion(var(Byte)),
+		check_blake2_error(Variant, Key, MaxSize, instantiation_error),
+		assertion(var(Key)),
+		check_blake2_error(Variant, [], Size, instantiation_error),
+		assertion(var(Size)),
+		TooMany is MaxKey + 1,
+		zero_bytes(TooMany, LongKey),
+		forall(
+			member(BadKey, [invalid, [0| invalid], [-1], [256], [1.5], [byte], LongKey]),
+			check_blake2_error(Variant, BadKey, MaxSize, domain_error(blake2_key, BadKey))
+		),
+		TooLarge is MaxSize + 1,
+		forall(
+			member(BadSize, [0, -1, TooLarge, 1.5, invalid]),
+			check_blake2_error(Variant, [], BadSize, domain_error(blake2_digest_size, BadSize))
+		).
+
+	check_blake2_error(Variant, Key, Size, Expected) :-
+		Object =.. [Variant, Key, Size],
+		Valid =.. [Variant, [], 1],
+		Valid::new_hash_state(State),
+		forall(
+			member(Goal, [hash([], _), digest([], _), new_hash_state(_), digest_size(_), block_size(_), final_hash_state(State, _)]),
+			check_error(Object, Goal, Expected)
+		).
+
+	check_error(Object, Goal, Expected) :-
+		catch(Object::Goal, Error, true),
+		nonvar(Error),
+		Error = error(Formal, _),
+		assertion(lgtunit::variant(Formal, Expected)).
+
+	zero_bytes(0, []) :-
+		!.
+	zero_bytes(Count, [0| Bytes]) :-
+		NextCount is Count - 1,
+		zero_bytes(NextCount, Bytes).
 
 	% splits List into a list of Chunks of (at most) N elements each,
 	% used to drive update_hash_state/3 one chunk at a time
 	chunks(_, [], []) :-
 		!.
 	chunks(N, List, [Chunk| Chunks]) :-
-		(	length(List, Length),
-			Length =< N ->
+		(	take(N, List, Chunk, Rest) ->
+			true
+		;
 			Chunk = List,
 			Rest = []
-		;	take(N, List, Chunk, Rest)
 		),
 		chunks(N, Rest, Chunks).
 

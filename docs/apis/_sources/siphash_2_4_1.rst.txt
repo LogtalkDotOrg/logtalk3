@@ -17,8 +17,8 @@ SipHash-2-4 keyed hash function.
 |    ``logtalk_load(hashes(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:0
-| **Date:** 2026-07-16
+| **Version:** 1:2:0
+| **Date:** 2026-10-12
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -27,6 +27,7 @@ SipHash-2-4 keyed hash function.
 | **Implements:**
 |    ``public`` :ref:`hash_state_protocol <hash_state_protocol/0>`
 | **Uses:**
+|    :ref:`byte_order <byte_order/0>`
 |    :ref:`hash_common_64 <hash_common_64/0>`
 |    :ref:`list <list/0>`
 

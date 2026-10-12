@@ -14,8 +14,8 @@ Common implementation of the standardized FIPS 202 SHA-3 and SHAKE variants usin
 |    ``logtalk_load(hashes(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:2:0
-| **Date:** 2026-07-16
+| **Version:** 1:3:0
+| **Date:** 2026-10-12
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -24,6 +24,7 @@ Common implementation of the standardized FIPS 202 SHA-3 and SHAKE variants usin
 | **Implements:**
 |    ``public`` :ref:`hash_state_protocol <hash_state_protocol/0>`
 | **Uses:**
+|    :ref:`byte_order <byte_order/0>`
 |    :ref:`hash_common_32 <hash_common_32/0>`
 |    :ref:`hash_common_64 <hash_common_64/0>`
 |    :ref:`list <list/0>`

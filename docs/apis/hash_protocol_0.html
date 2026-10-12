@@ -515,8 +515,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-04</div>
+<div class="line"><strong>Version:</strong> 1:1:0</div>
+<div class="line"><strong>Date:</strong> 2026-10-12</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -572,7 +572,32 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">hash(+list(byte),--atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">hash(+list(byte),--atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The key, digest size, or output length is not sufficiently instantiated::</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The digest size is invalid for BLAKE2::</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(blake2_digest_size,DigestSize)</span></code></div>
+</div>
+<div class="line">The key is ground but invalid for BLAKE2::</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(blake2_key,Key)</span></code></div>
+</div>
+<div class="line">The key is ground but not a list of 16 bytes for SipHash::</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(siphash_key,Key)</span></code></div>
+</div>
+<div class="line">The output length is ground but not a nonnegative integer for SHAKE::</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(shake_output_size,OutputBytes)</span></code></div>
+</div>
 </div>
 </div>
 </section>
