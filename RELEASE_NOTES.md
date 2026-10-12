@@ -134,6 +134,19 @@ using Lasso regression coefficients.
 
 * ADDED: New `linear_algebra` library predicate `symmetric_eigen_partial/7`.
 
+* CHANGED: The `one_class_svm_anomaly_detector` library learned detector term
+to `one_class_svm_detector/7`, adding an immutable cache argument before the
+diagnostics argument. The previous detector representation is not accepted.
+Added an optimality tolerance option, convergence and decision-geometry
+diagnostics, and spectral step-size safeguards. Fixed large-offset
+capped-simplex projection, unstable learning rates, premature convergence,
+detector and coefficient validation, and non-ground kernel-option handling.
+Improved performance with matrix-free linear training and cached weights,
+symmetric kernel matrices and reused training references, fused kernel scoring,
+scalar-only projection passes, and indexed empirical ranks. Expanded regression
+tests and code coverage, reduced repeated training in the tests, and added
+benchmarks and documentation, including linear-kernel limitations.
+
 * CHANGED: The `umap_projection` library to use self-inclusive neighbor
 counts, introducing backwards incompatible neighborhood semantics. Fixed
 duplicate-row self neighborhoods, fractional local connectivity,

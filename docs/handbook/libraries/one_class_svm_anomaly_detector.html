@@ -292,9 +292,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#detector-representation">Detector representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#benchmarks">Benchmarks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
@@ -448,10 +449,10 @@ same linear, polynomial, and radial basis function kernel specifications
 as the <code class="docutils literal notranslate"><span class="pre">kernel_svm_classifier</span></code> library.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">anomaly_detector_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">anomaly_detection_protocols</span></code> library. Training examples are selected
-using the shared baseline class options. The learned dual coefficients
-satisfy the one-class SVM capped-simplex constraints. Decision values
-are converted to bounded anomaly scores using their empirical rank among
-the training values.</p>
+using the shared baseline class options. Optimization enforces the
+one-class SVM capped-simplex constraints before optional coefficient
+pruning. Decision values are converted to bounded anomaly scores using
+their empirical rank among the training values.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -471,6 +472,12 @@ link in a web browser.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(one_class_svm_anomaly_detector(tester)).
 </pre></div>
 </div>
+<p>The tests train shared Gaussian and mixed-feature fixtures once per test
+run, while retaining a separate deterministic learning test. Fixture
+training takes place after the coverage counters are reset and
+contributes to code coverage. Reported per-test runtime excludes global
+fixture setup; compare complete test run times when measuring test
+performance.</p>
 </section>
 <section id="features">
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
@@ -485,9 +492,33 @@ corresponding missing-value indicator.</p></li>
 <li><p><strong>Bounded Scores</strong>: Returns empirical anomaly scores in the interval
 <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">1.0]</span></code>.</p></li>
 <li><p><strong>Support-Vector Pruning</strong>: Omits zero and optionally negligible
-coefficients from learned detectors.</p></li>
-<li><p><strong>Model Export</strong>: Learned detectors can be exported as predicate
-clauses or written to a file.</p></li>
+coefficients from learned detectors without renormalization. Pruned
+coefficients are replaced by zero in training order; fallback
+selection retains the first largest coefficient when values tie.</p></li>
+<li><p><strong>Model Validation</strong>: Requires the exact ground detector
+representation, consistent dimensions and diagnostics, and nonnegative
+coefficients within their learned bounds. Retained coefficient mass
+must be positive and at most one. Nonground models raise an
+instantiation error; ground malformed models raise an anomaly-detector
+domain error. Kernel options must be fully specified and invalid
+values use the shared option-domain errors.</p></li>
+<li><p><strong>Numerical Projection</strong>: Uses cap-quantile-relative thresholds and
+scalar-only bisection passes. The threshold bracket is no wider than
+the effective coefficient cap, avoiding loss of precision from distant
+tails or excessively large caps. Termination checks the sum-to-one
+residual; numerical stagnation is corrected at the nearest adjustable
+boundary while preserving bounds.</p></li>
+<li><p><strong>Efficient Scoring</strong>: Accumulates weighted kernel values directly
+without constructing a temporary kernel vector. RBF squared distances
+are accumulated directly from feature pairs without constructing
+difference vectors.</p></li>
+<li><p><strong>Symmetric Kernel Matrix</strong>: Computes each diagonal or unordered pair
+once for polynomial and RBF training, requiring <code class="docutils literal notranslate"><span class="pre">N*(N+1)/2</span></code> kernel
+evaluations and quadratic list construction. The full matrix is reused
+to compute reference values for every baseline example using the
+retained coefficients.</p></li>
+<li><p><strong>Model Export</strong>: Exports learned detectors as predicate clauses or
+writes them to a file.</p></li>
 </ul>
 </section>
 <section id="options">
@@ -508,6 +539,8 @@ always retained (default: <code class="docutils literal notranslate"><span class
 (default: <code class="docutils literal notranslate"><span class="pre">100</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tolerance/1</span></code> - convergence threshold for the maximum coefficient
 update (default: <code class="docutils literal notranslate"><span class="pre">1.0e-6</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">optimality_tolerance/1</span></code> - positive convergence threshold for the
+feasible gradient-exchange residual (default: <code class="docutils literal notranslate"><span class="pre">1.0e-6</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">feature_scaling/1</span></code> - whether to standardize continuous attributes
 (default: <code class="docutils literal notranslate"><span class="pre">true</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">anomaly_threshold/1</span></code> - score threshold used by prediction (default:
@@ -516,28 +549,6 @@ update (default: <code class="docutils literal notranslate"><span class="pre">1.
 examples (default: <code class="docutils literal notranslate"><span class="pre">[normal]</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">baseline_selection_policy/1</span></code> - either <code class="docutils literal notranslate"><span class="pre">reject</span></code> or <code class="docutils literal notranslate"><span class="pre">filter</span></code>
 (default: <code class="docutils literal notranslate"><span class="pre">reject</span></code>)</p></li>
-</ul>
-</section>
-<section id="limitations">
-<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>Training materializes the full kernel Gram matrix. For <code class="docutils literal notranslate"><span class="pre">N</span></code> baseline
-examples, memory use is quadratic in <code class="docutils literal notranslate"><span class="pre">N</span></code> and each optimization
-iteration is also quadratic. Prediction evaluates the kernel against
-every retained support vector. The implementation is therefore
-intended for small and medium-sized datasets rather than large-scale
-or streaming use.</p></li>
-<li><p>Anomaly scores are empirical ranks of raw kernel decision values. They
-are discrete with resolution <code class="docutils literal notranslate"><span class="pre">1/N</span></code>, are not calibrated
-probabilities, and should not be compared directly across detectors
-trained on different datasets. The <code class="docutils literal notranslate"><span class="pre">anomaly_threshold/1</span></code> option
-controls prediction independently of the <code class="docutils literal notranslate"><span class="pre">nu/1</span></code> constraint.</p></li>
-<li><p>The projected-gradient optimizer can stop at <code class="docutils literal notranslate"><span class="pre">maximum_iterations/1</span></code>
-before satisfying <code class="docutils literal notranslate"><span class="pre">tolerance/1</span></code>. The <code class="docutils literal notranslate"><span class="pre">iterations/1</span></code> and
-<code class="docutils literal notranslate"><span class="pre">final_delta/1</span></code> diagnostics should be inspected when tuning
-difficult datasets.</p></li>
-<li><p>Results can be sensitive to the kernel parameters, feature scaling,
-and contamination of the selected baseline examples.</p></li>
 </ul>
 </section>
 <section id="usage">
@@ -557,7 +568,7 @@ and contamination of the selected baseline examples.</p></li>
 <section id="detector-representation">
 <h2>Detector representation<a class="headerlink" href="#detector-representation" title="Link to this heading"></a></h2>
 <p>The learned detector is represented by:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>one_class_svm_detector(<span class="nv">Encoders</span>, <span class="nv">Kernel</span>, <span class="nv">SupportVectors</span>, <span class="nv">Coefficients</span>, <span class="nv">ReferenceScores</span>, <span class="nv">Diagnostics</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>one_class_svm_detector(<span class="nv">Encoders</span>, <span class="nv">Kernel</span>, <span class="nv">SupportVectors</span>, <span class="nv">Coefficients</span>, <span class="nv">ReferenceScores</span>, <span class="nv">Cache</span>, <span class="nv">Diagnostics</span>)
 </pre></div>
 </div>
 <p>Where:</p>
@@ -572,15 +583,101 @@ feature vectors</p></li>
 retained support vectors</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ReferenceScores</span></code>: raw decision values for all baseline training
 examples, used to compute empirical anomaly scores</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Cache</span></code>: the serialized
+<code class="docutils literal notranslate"><span class="pre">svm_cache(Scorer,</span> <span class="pre">ReferenceCount,</span> <span class="pre">RankIndex)</span></code> term. The scorer is
+<code class="docutils literal notranslate"><span class="pre">linear_weights(Weights)</span></code> for linear models or <code class="docutils literal notranslate"><span class="pre">kernel_sum</span></code> for
+polynomial and RBF models. The reference count and rank index are
+stored with the scorer and validated against the model data.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code>: learned metadata terms including <code class="docutils literal notranslate"><span class="pre">model/1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">training_dataset/1</span></code>, <code class="docutils literal notranslate"><span class="pre">kernel/1</span></code>, <code class="docutils literal notranslate"><span class="pre">example_count/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">support_vectors/1</span></code>, <code class="docutils literal notranslate"><span class="pre">iterations/1</span></code>, <code class="docutils literal notranslate"><span class="pre">final_delta/1</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">options/1</span></code></p></li>
+<code class="docutils literal notranslate"><span class="pre">support_vectors/1</span></code>, <code class="docutils literal notranslate"><span class="pre">iterations/1</span></code>, <code class="docutils literal notranslate"><span class="pre">final_delta/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">decision_geometry/1</span></code>, <code class="docutils literal notranslate"><span class="pre">converged/1</span></code>, <code class="docutils literal notranslate"><span class="pre">stopping_reason/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">optimality_residual/1</span></code>, <code class="docutils literal notranslate"><span class="pre">step_limit/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">options/1</span></code></p></li>
 </ul>
-<p>When exported using <code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code> or <code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code>,
-this detector term is serialized directly as the single argument of the
+<p>When exported using <code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code> or <code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code>, thw
+detector term is serialized directly as the single argument of the
 generated predicate clause so that the exported model can be loaded and
 reused as-is.</p>
+<p>The complete seven-argument representation is required. Linear
+references and queries use the same cached-weight dot-product path.
+Reassociating floating-point operations can change ranks near numerical
+ties compared with dual kernel sums; rank comparisons remain strict,
+without tolerance-based tie grouping.</p>
+<p>The rank index is an immutable balanced tree with <code class="docutils literal notranslate"><span class="pre">rank_empty</span></code> leaves
+and <code class="docutils literal notranslate"><span class="pre">rank_node(Score,</span> <span class="pre">Multiplicity,</span> <span class="pre">SubtreeCount,</span> <span class="pre">Left,</span> <span class="pre">Right)</span></code> nodes.
+Multiplicities retain duplicate reference values. A query counts
+strictly greater reference scores using subtree counts along one tree
+path. Explicit model validation checks the complete canonical index and
+scorer against the stored model data; ordinary scoring neither rebuilds
+nor revalidates these caches.</p>
+</section>
+<section id="benchmarks">
+<h2>Benchmarks<a class="headerlink" href="#benchmarks" title="Link to this heading"></a></h2>
+<p>To run the opt-in production benchmarks, load the library normally and
+then load the local benchmark objects:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(one_class_svm_anomaly_detector(loader)),
+     <span class="k">logtalk_load</span>(os(loader)),
+     <span class="k">logtalk_load</span>(one_class_svm_anomaly_detector(benchmarks), [optimize(on)]),
+     svm_benchmarks<span class="o">::</span>run.
+</pre></div>
+</div>
+<p>The benchmarks report warmed five-run CPU medians for 40, 100, and 250
+training examples, two and ten attributes, and all three kernels.
+Training uses a fixed 30-iteration budget, unscaled features, and tight
+stopping criteria. Query batches contain 1000 fresh instances and
+include instance preparation and encoding. Primitive comparisons isolate
+the original and optimized Gram, weighted-score, projection, and rank
+paths. These are local timing probes, not calibrated throughput or
+peak-memory measurements; fixed-budget training does not imply identical
+convergence quality across kernels.</p>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Polynomial and RBF training materialize the full kernel Gram matrix.
+For <code class="docutils literal notranslate"><span class="pre">N</span></code> baseline examples and <code class="docutils literal notranslate"><span class="pre">D</span></code> encoded dimensions, matrix
+construction costs <code class="docutils literal notranslate"><span class="pre">O(N*N*D)</span></code> time and <code class="docutils literal notranslate"><span class="pre">O(N*N)</span></code> memory; each
+optimization iteration costs <code class="docutils literal notranslate"><span class="pre">O(N*N)</span></code>. Raw prediction costs
+<code class="docutils literal notranslate"><span class="pre">O(S*D)</span></code> for <code class="docutils literal notranslate"><span class="pre">S</span></code> retained support vectors.</p></li>
+<li><p>Linear training uses a matrix-free weight vector with <code class="docutils literal notranslate"><span class="pre">O(N*D)</span></code>
+gradient evaluation without quadratic matrix storage. The common
+cap-quantile projection adds <code class="docutils literal notranslate"><span class="pre">O(N*log(N))</span></code> work per iteration.
+Cached linear raw prediction costs <code class="docutils literal notranslate"><span class="pre">O(D)</span></code>. Empirical ranking costs
+<code class="docutils literal notranslate"><span class="pre">O(log(N))</span></code> per query for all kernels. Building the rank index costs
+<code class="docutils literal notranslate"><span class="pre">O(N*log(N))</span></code> time and <code class="docutils literal notranslate"><span class="pre">O(U)</span></code> additional storage for <code class="docutils literal notranslate"><span class="pre">U</span></code>
+distinct reference scores.</p></li>
+<li><p>Anomaly scores are empirical ranks of raw kernel decision values. They
+are discrete with resolution <code class="docutils literal notranslate"><span class="pre">1/N</span></code>, are not calibrated
+probabilities, and should not be compared directly across detectors
+trained on different datasets. The <code class="docutils literal notranslate"><span class="pre">anomaly_threshold/1</span></code> option
+controls prediction independently of the <code class="docutils literal notranslate"><span class="pre">nu/1</span></code> constraint.</p></li>
+<li><p>The projected-gradient optimizer can stop at <code class="docutils literal notranslate"><span class="pre">maximum_iterations/1</span></code>
+before satisfying the coefficient-update and optimality tolerances.
+The scheduled learning rate is bounded by a safe inverse spectral
+bound of the kernel matrix. Recorded options retain the requested
+rate; <code class="docutils literal notranslate"><span class="pre">step_limit/1</span></code> reports the safeguard. The optimality residual
+compares the largest removable coefficient gradient with the smallest
+gradient that can receive mass, treating coefficients within
+<code class="docutils literal notranslate"><span class="pre">1.0e-12</span></code> of a bound as active at that bound. Inspect the
+<code class="docutils literal notranslate"><span class="pre">iterations/1</span></code>, <code class="docutils literal notranslate"><span class="pre">final_delta/1</span></code>, <code class="docutils literal notranslate"><span class="pre">converged/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">stopping_reason/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">optimality_residual/1</span></code> diagnostics when
+tuning difficult datasets to distinguish convergence from
+iteration-budget exhaustion.</p></li>
+<li><p>Centered complete continuous features can make the linear kernel’s
+optimal decision function identically zero. Such detectors cannot
+distinguish central and distant observations. The
+<code class="docutils literal notranslate"><span class="pre">decision_geometry/1</span></code> diagnostic distinguishes <code class="docutils literal notranslate"><span class="pre">zero_linear</span></code>,
+<code class="docutils literal notranslate"><span class="pre">constant_reference</span></code>, and <code class="docutils literal notranslate"><span class="pre">varying_reference</span></code> cases. Constant
+reference scores do not by themselves imply a zero decision function.
+Use a nonlinear kernel when a two-sided boundary is required;
+uncentered linear kernels also cannot express arbitrary two-sided
+anomaly boundaries.</p></li>
+<li><p>The theoretical <code class="docutils literal notranslate"><span class="pre">nu/1</span></code> guarantees concern the constrained SVM
+optimization, not the independent empirical prediction threshold or a
+pruned approximation.</p></li>
+<li><p>Results can be sensitive to the kernel parameters, feature scaling,
+and contamination of the selected baseline examples.</p></li>
+</ul>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>

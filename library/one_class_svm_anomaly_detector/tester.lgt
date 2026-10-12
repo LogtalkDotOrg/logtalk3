@@ -31,6 +31,7 @@
 	logtalk_load(anomaly_detection_protocols(loader)),
 	logtalk_load(one_class_svm_anomaly_detector, [source_data(on), debug(on)]),
 	logtalk_load([
+		test_fixtures,
 		anomaly_detection_protocols('test_datasets/gaussian_anomalies'),
 		anomaly_detection_protocols('test_datasets/mixed_anomalies')
 	], [
