@@ -273,6 +273,8 @@ Locked restores now resolve dependencies using only locked versions, propagate
 registry restoration and pack installation failures, and verify the final
 setup against the lock file.
 
+* IMPROVED: The performance of the `logtalk_tester.sh` Bash shell script.
+
 * UPDATED: The `logtalk_tester.sh` and `logtalk_tester.ps1` testing
 automation scripts to print the fastest and slowest test set names
 and execution times.

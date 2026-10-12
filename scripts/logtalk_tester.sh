@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on September 26, 2026
+##   Last updated on October 12, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -23,7 +23,6 @@
 ##
 #############################################################################
 
-# loosely based on a unit test automation script contributed by Parker Jones
 
 set -o pipefail
 
@@ -33,7 +32,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 31.0"
+	echo "$(basename "$0") 32.0"
 	exit 0
 }
 
@@ -128,7 +127,7 @@ format_decimal() {
 	printf "%.${places}f" "$num"
 }
 
-# Return the decimal magnitude and significand for a non-negative decimal number.
+# Return the decimal magnitude and significand in the named output variables.
 # Scientific notation is accepted (e.g. "3.45e-05").
 decimal_components() {
 	local number="$1" mantissa exponent integer fraction digits magnitude
@@ -150,7 +149,8 @@ decimal_components() {
 		digits=${digits#0}
 	done
 	if [ "$digits" == "0" ] ; then
-		printf '0\t0\n'
+		printf -v "$2" '%s' 0
+		printf -v "$3" '%s' 0
 		return
 	fi
 	case "$exponent" in
@@ -159,17 +159,16 @@ decimal_components() {
 		*)  exponent=$((10#$exponent)) ;;
 	esac
 	magnitude=$((${#digits} + exponent - ${#fraction}))
-	printf '%s\t%s\n' "$magnitude" "$digits"
+	printf -v "$2" '%s' "$magnitude"
+	printf -v "$3" '%s' "$digits"
 }
 
 # Compare two non-negative decimal numbers without shelling out to awk/bc.
 # Succeeds (returns 0) when num1 <= num2.
 decimal_le() {
-	local a_components b_components a_magnitude a_digits b_magnitude b_digits length
-	a_components=$(decimal_components "$1") || return 1
-	b_components=$(decimal_components "$2") || return 1
-	IFS=$'\t' read -r a_magnitude a_digits <<< "$a_components"
-	IFS=$'\t' read -r b_magnitude b_digits <<< "$b_components"
+	local a_magnitude a_digits b_magnitude b_digits length
+	decimal_components "$1" a_magnitude a_digits || return 1
+	decimal_components "$2" b_magnitude b_digits || return 1
 	if [ "$a_digits" == "0" ] ; then
 		return 0
 	elif [ "$b_digits" == "0" ] ; then
@@ -210,7 +209,10 @@ notify_completion() {
 }
 
 run_testset() {
-	unit=$(dirname "$1")
+	unit=${1%/*}
+	unit=${unit:-/}
+	unit_basename=${unit##*/}
+	unit_basename=${unit_basename:-/}
 	unit_short=${unit#$prefix}
 	cd "$unit" || exit 1
 	if [ "$wipe" == 'true' ] ; then
@@ -273,20 +275,20 @@ run_testset() {
 		echo "%         not applicable"
 	elif [ "$tests_exit" -eq 0 ] && [ -f "$results/$name.totals" ] && [ "$output" == 'verbose' ] ; then
 		while read -r line ; do
+			IFS=$'\t' read -r row_kind row_object row_total row_skipped row_passed row_failed row_flaky duration row_extra <<< "$line"
 			echo -n "$mode_prefix"
-			echo -n "$(cut -f 3 <<< "$line")"
+			echo -n "$row_total"
 			echo -n ' tests: '
-			echo -n "$(cut -f 4 <<< "$line")"
+			echo -n "$row_skipped"
 			echo -n ' skipped, '
-			echo -n "$(cut -f 5 <<< "$line")"
+			echo -n "$row_passed"
 			echo -n ' passed, '
-			echo -n "$(cut -f 6 <<< "$line")"
+			echo -n "$row_failed"
 			echo -n ' failed ('
-			echo -n "$(cut -f 7 <<< "$line")"
+			echo -n "$row_flaky"
 			echo ' flaky)'
-			duration="$(cut -f 8 <<< "$line")"
 			echo -n '%         completed tests from object '
-			echo -n "$(cut -f 2 <<< "$line")"
+			echo -n "$row_object"
 			echo " in $(format_decimal "$duration" 3) seconds"
 		done < <(grep '^object' "$results/$name.totals")
 		clause_coverage="$(grep "^coverage" "$results/$name.totals" | cut -f 2)"
@@ -299,19 +301,19 @@ run_testset() {
 		if [ "$output" == 'verbose' ] ; then
 			echo "%         broken"
 		fi
-		ensure_format_report "$unit" "$(basename "$unit")" "Broken"
+		ensure_format_report "$unit" "$unit_basename" "Broken"
 	elif [ "$tests_exit" -eq 137 ] || [ "$tests_exit" -eq 124 ] ; then
 		if [ "$output" == 'verbose' ] ; then
 			echo "%         timeout"
 		fi
 		echo "LOGTALK_TIMEOUT" >> "$results/$name.errors"
-		ensure_format_report "$unit" "$(basename "$unit")" "Timeout"
+		ensure_format_report "$unit" "$unit_basename" "Timeout"
 	elif [ "$tests_exit" -ne 0 ] ; then
 		if [ "$output" == 'verbose' ] ; then
 			echo "%         crash"
 		fi
 		echo "LOGTALK_CRASH" >> "$results/$name.errors"
-		ensure_format_report "$unit" "$(basename "$unit")" "Crash"
+		ensure_format_report "$unit" "$unit_basename" "Crash"
 	fi
 	if [ $coverage == 'xml' ] ; then
 		if [ -d "$LOGTALKUSER" ] ; then
@@ -780,7 +782,7 @@ if [ "$exclude" == "" ] ; then
 	find -L "$base" $level -type f \( -name "$driver.lgt" -or -name "$driver.logtalk" \) | LC_ALL=C sort > "$drivers_file"
 	find_exit=$?
 elif [ "$include_only" == "true" ] ; then
-	if [ "$(uname)" == "Darwin" ] ; then
+	if [ "$operating_system" == "Darwin" ] ; then
 		drivers_file=$(mktemp)
 		find -L -E "$base" $level -type f -regex "$exclude" \( -name "$driver.lgt" -or -name "$driver.logtalk" \) | LC_ALL=C sort > "$drivers_file"
 		find_exit=$?
@@ -789,7 +791,7 @@ elif [ "$include_only" == "true" ] ; then
 		find -L "$base" $level -type f -regextype posix-extended -regex "$exclude" \( -name "$driver.lgt" -or -name "$driver.logtalk" \) | LC_ALL=C sort > "$drivers_file"
 		find_exit=$?
 	fi
-elif [ "$(uname)" == "Darwin" ] ; then
+elif [ "$operating_system" == "Darwin" ] ; then
 	drivers_file=$(mktemp)
 	find -L -E "$base" $level -type f -not -regex "$exclude" \( -name "$driver.lgt" -or -name "$driver.logtalk" \) | LC_ALL=C sort > "$drivers_file"
 	find_exit=$?
@@ -840,6 +842,7 @@ else
 	declare -a job_pids
 	declare -a job_names
 	completed=0
+	active_jobs=0
 
 	reap_completed_jobs() {
 		local any_reaped=0
@@ -862,6 +865,7 @@ else
 
 				job_pids[$i]=""
 				((completed++))
+				((active_jobs--))
 				any_reaped=1
 
 				if [ "$output" == 'minimal' ] ; then
@@ -875,12 +879,15 @@ else
 	}
 	counter=1
 	while read -r file && [ "$file" != "" ]; do
-		unit=$(dirname "$file")
+		unit=${file%/*}
+		unit=${unit:-/}
 		name=${unit////__}
 		name=${name/:/__}
-		while [ "$(jobs -pr | wc -l | tr -d ' ')" -ge "$jobs" ]; do
+		while [ "$active_jobs" -ge "$jobs" ]; do
 			reap_completed_jobs
-			sleep 0.05
+			if [ "$active_jobs" -ge "$jobs" ] ; then
+				sleep 0.05
+			fi
 		done
 		reap_completed_jobs
 		if [ "$output" == 'minimal' ] ; then
@@ -890,12 +897,15 @@ else
 		(run_testset "$file") > "$results/$name.console" 2>&1 &
 		job_pids+=("$!")
 		job_names+=("$name")
+		((active_jobs++))
 		((counter++))
 	done < "$drivers_file"
 
 	while [ "$completed" -lt "$testsets" ]; do
 		reap_completed_jobs
-		sleep 0.05
+		if [ "$completed" -lt "$testsets" ] ; then
+			sleep 0.05
+		fi
 	done
 
 	if [ "$output" == 'minimal' ] ; then
@@ -906,11 +916,19 @@ fi
 rm -f "$drivers_file"
 
 cd "$results" || exit 1
-testsetskipped=$(cat -- *.results | grep -c 'tests skipped')
-testsetskipped=$((testsetskipped+$(cat -- *.results | grep -c '(not applicable)')))
-timeouts=$(cat -- *.errors | grep -c 'LOGTALK_TIMEOUT')
-crashed=$(cat -- *.errors | grep -c 'LOGTALK_CRASH')
-broken=$(cat -- *.errors | grep -c 'LOGTALK_BROKEN')
+read -r testsetskipped timeouts crashed broken < <(awk '
+	kind == "results" {
+		if (/tests skipped/) skipped++
+		if (/\(not applicable\)/) skipped++
+		next
+	}
+	{
+		if (/LOGTALK_TIMEOUT/) timeouts++
+		if (/LOGTALK_CRASH/) crashed++
+		if (/LOGTALK_BROKEN/) broken++
+	}
+	END { printf "%.0f %.0f %.0f %.0f\n", skipped, timeouts, crashed, broken }
+' kind=results <(cat -- *.results) kind=errors <(cat -- *.errors))
 testsetruns=$((testsets-testsetskipped-timeouts-crashed-broken))
 
 skipped=0
@@ -928,21 +946,23 @@ while read -r line ; do
 	# line format: ./name.totals:object\tObject\tTotal\tSkipped\tPassed\tFailed\tFlaky\tWallTime
 	file_part=${line%%:*}
 	data_part=${line#*:}
-	skipped=$((skipped+$(cut -f 4 <<< "$data_part")))
-	passed=$((passed+$(cut -f 5 <<< "$data_part")))
-	failed=$((failed+$(cut -f 6 <<< "$data_part")))
-	flaky=$((flaky+$(cut -f 7 <<< "$data_part")))
-	duration=$(cut -f 8 <<< "$data_part")
+	IFS=$'\t' read -r row_kind row_object row_total row_skipped row_passed row_failed row_flaky duration row_extra <<< "$data_part"
+	skipped=$((skipped+row_skipped))
+	passed=$((passed+row_passed))
+	failed=$((failed+row_failed))
+	flaky=$((flaky+row_flaky))
 	if [ -n "$duration" ] && { [ -z "$min_duration" ] || decimal_le "$duration" "$min_duration" ; } ; then
 		min_duration="$duration"
-		unit_name=$(basename "$file_part" .totals)
+		unit_name=${file_part##*/}
+		unit_name=${unit_name%.totals}
 		# restore path separators used when deriving the results file name
 		unit_name=${unit_name//__//}
 		fastest_unit=$(echo "$unit_name" | $sed "s|^$prefix||")
 	fi
 	if [ -n "$duration" ] && { [ -z "$max_duration" ] || decimal_le "$max_duration" "$duration" ; } ; then
 		max_duration="$duration"
-		unit_name=$(basename "$file_part" .totals)
+		unit_name=${file_part##*/}
+		unit_name=${unit_name%.totals}
 		# restore path separators used when deriving the results file name
 		unit_name=${unit_name//__//}
 		slowest_unit=$(echo "$unit_name" | $sed "s|^$prefix||")
