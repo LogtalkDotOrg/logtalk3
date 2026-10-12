@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-07,
+		date is 2026-10-12,
 		comment is 'Transient regression view of a feature dataset, preserving missing features and excluding unknown targets.',
 		parameters is [
 			'Dataset' - 'Feature dataset object.'
@@ -59,16 +59,14 @@
 	]).
 
 	attribute_values(Feature, Values) :-
-		parameter(1, Dataset),
-		findall(Name-Domain, Dataset::attribute_values(Name, Domain), Declarations),
+		findall(Name-Domain, _Dataset_::attribute_values(Name, Domain), Declarations),
 		check_declarations(Declarations),
 		member(Feature-Values, Declarations).
 
 	target(target).
 
 	example(Id, Target, Pairs) :-
-		parameter(1, Dataset),
-		Dataset::example(Id, Pairs, Target),
+		_Dataset_::example(Id, Pairs, Target),
 		nonvar(Target).
 
 	check_declarations([]).
@@ -102,7 +100,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-08,
+		date is 2026-10-12,
 		comment is 'Transient materialized regression subset with validated declarations and numeric targets.',
 		parameters is [
 			'Declarations' - 'Validated feature declarations.',
@@ -115,13 +113,11 @@
 	]).
 
 	attribute_values(Feature, Domain) :-
-		parameter(1, Declarations),
-		member(Feature-Domain, Declarations).
+		member(Feature-Domain, _Declarations_).
 
 	target(target).
 
 	example(Id, Target, Pairs) :-
-		parameter(2, Examples),
-		member(example(Id, Pairs, Target), Examples).
+		member(example(Id, Pairs, Target), _Examples_).
 
 :- end_object.

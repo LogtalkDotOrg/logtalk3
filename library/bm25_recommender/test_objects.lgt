@@ -19,14 +19,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(bm25_dataset(_,_,_),
+:- object(bm25_dataset(_Ratings_, _Items_, _Contents_),
 	implements([rating_dataset_protocol, item_content_dataset_protocol])).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-05,
-		comment is 'Parametric rating and content fixtures for the BM25 recommender tests.'
+		date is 2026-10-12,
+		comment is 'Parametric rating and content fixtures for the BM25 recommender tests.',
+		parnames is ['Rating', 'Items', 'Contents']
 	]).
 
 	:- uses(list, [
@@ -34,33 +35,27 @@
 	]).
 
 	rating(User, Item, Rating) :-
-		parameter(1, Ratings),
-		member(rating(User,Item,Rating), Ratings).
+		member(rating(User,Item,Rating), _Ratings_).
 
 	rating_count(Count) :-
-		parameter(1, Ratings),
-		length(Ratings, Count).
+		length(_Ratings_, Count).
 
 	rating_scale(_, _) :-
 		fail.
 
 	item(Item) :-
-		parameter(2, Items),
-		member(Item, Items).
+		member(Item, _Items_).
 
 	item_content(Item, Content) :-
-		parameter(3, Contents),
-		member(Item-Content, Contents).
+		member(Item-Content, _Contents_).
 
 :- end_object.
 
 
-:- object(bm25_scale_fixture(_,_),
+:- object(bm25_scale_fixture(_Min_, _Max_),
 	extends(bm25_dataset([rating(u,x,1)], [x], [x-vector([a-2])]))).
 
-	rating_scale(Min, Max) :-
-		parameter(1, Min),
-		parameter(2, Max).
+	rating_scale(_Min_, _Max_).
 
 :- end_object.
 

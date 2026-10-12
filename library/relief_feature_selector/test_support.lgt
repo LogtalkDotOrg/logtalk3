@@ -68,8 +68,7 @@
 	]).
 
 	attribute_values(Feature, Declaration) :-
-		parameter(2, Width),
-		index(1, Width, Index),
+		index(1, _Width_, Index),
 		feature_name(Index, Feature),
 		(	Index mod 3 =:= 0 ->
 			Declaration = [left, right]
@@ -80,18 +79,16 @@
 
 	example(Position, Pairs, Target) :-
 		index(1, 6, Position),
-		parameter(1, Variant),
-		parameter(2, Width),
-		(	Variant == regression ->
+		(	_Variant_ == regression ->
 			Target = Position
-		;	Variant == binary ->
+		;	_Variant_ == binary ->
 			(	Position =< 3 ->
 				Target = a
 			;	Target = b
 			)
 		;	Target is (Position - 1) // 2
 		),
-		feature_pairs(1, Width, Position, Pairs).
+		feature_pairs(1, _Width_, Position, Pairs).
 
 	index(Start, Maximum, Start) :-
 		Start =< Maximum.

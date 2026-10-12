@@ -25,30 +25,28 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-07,
-		comment is 'Mixed, missing, degenerate, and malformed dataset fixtures for chi-square selection.'
+		date is 2026-10-12,
+		comment is 'Mixed, missing, degenerate, and malformed dataset fixtures for chi-square selection.',
+		parnames is ['Kind']
 	]).
 
 	attribute_values(signal, Declaration) :-
-		parameter(1, Kind),
-		declaration(Kind, Declaration).
+		declaration(_Kind_, Declaration).
 	attribute_values(copy, [a, b]).
 	attribute_values(constant, [a]).
 
 	example_count(Count) :-
-		parameter(1, Kind),
-		(	(Kind == missing; Kind == joint_extremes) ->
+		(	(_Kind_ == missing; _Kind_ == joint_extremes) ->
 			Count = 6
-		;	(Kind == weak; Kind == unused_categories) ->
+		;	(_Kind_ == weak; _Kind_ == unused_categories) ->
 			Count = 8
-		;	Kind == multiclass ->
+		;	_Kind_ == multiclass ->
 			Count = 6
 		;	Count = 4
 		).
 
 	example(Id, Features, Target) :-
-		parameter(1, Kind),
-		row(Kind, Id, Features, Target).
+		row(_Kind_, Id, Features, Target).
 
 	declaration(empty_domain, []).
 	declaration(compound_domain, [a, label(b)]).

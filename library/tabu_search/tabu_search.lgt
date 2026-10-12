@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-10,
+		date is 2026-10-12,
 		comment is 'Tabu search optimization algorithm. Parameterized by a problem object implementing the ``tabu_search_problem_protocol`` protocol and by a random number generator algorithm for the ``fast_random`` library. Minimizes energy with optional problem-defined tabu keys, tenure, aspiration, restart states, neighbor generation, stopping, and progress reporting.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``tabu_search_problem_protocol``.',
@@ -158,13 +158,12 @@
 	run(BestState, BestEnergy, Statistics, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		parameter(1, Problem),
-		hook_available(Problem, tabu_key(_, _), KeyHook),
-		hook_available(Problem, restart_state(_, _), RestartHook),
-		hook_available(Problem, tabu_tenure(_, _, _, _), TenureHook),
-		hook_available(Problem, aspiration(_, _, _), AspirationHook),
+		hook_available(_Problem_, tabu_key(_, _), KeyHook),
+		hook_available(_Problem_, restart_state(_, _), RestartHook),
+		hook_available(_Problem_, tabu_tenure(_, _, _, _), TenureHook),
+		hook_available(_Problem_, aspiration(_, _, _), AspirationHook),
 		^^option(exhaustive(Exhaustive), Options),
-		require_neighborhood(Exhaustive, Problem),
+		require_neighborhood(Exhaustive, _Problem_),
 		Policy = policy(KeyHook, RestartHook, TenureHook, AspirationHook, Exhaustive),
 		% handle seed option
 		(	^^option(seed(Seed), Options) ->
@@ -375,8 +374,7 @@
 		Policy = policy(_, _, _, true, _),
 		!,
 		(	candidate_tabu(Policy, Candidate, Tabu, Step) ->
-			parameter(1, Problem),
-			Problem::aspiration(Candidate, CandEnergy, BestEnergy)
+			_Problem_::aspiration(Candidate, CandEnergy, BestEnergy)
 		;	true
 		).
 
@@ -405,8 +403,7 @@
 		!.
 	restart_candidate(policy(_, true, _, _, _), Best, BestE, State, Energy, NewBest, NewBestE) :-
 		!,
-		parameter(1, Problem),
-		(	Problem::restart_state(Best, State) ->
+		(	_Problem_::restart_state(Best, State) ->
 			(	nonvar(State) ->
 				true
 			;	domain_error(tabu_hook_result, restart_state/2-State)
@@ -425,8 +422,7 @@
 		!.
 	state_key(true, State, Key) :-
 		!,
-		parameter(1, Problem),
-		(	Problem::tabu_key(State, Key) ->
+		(	_Problem_::tabu_key(State, Key) ->
 			(	nonvar(Key) ->
 				true
 			;	domain_error(tabu_hook_result, tabu_key/2-Key)
@@ -476,8 +472,7 @@
 		between(Min, Max, Tenure).
 	resolve_tenure(true, _Spec, Step, BestEnergy, CurrentEnergy, Tenure) :-
 		!,
-		parameter(1, Problem),
-		(	Problem::tabu_tenure(Step, BestEnergy, CurrentEnergy, Tenure) ->
+		(	_Problem_::tabu_tenure(Step, BestEnergy, CurrentEnergy, Tenure) ->
 			(	valid(non_negative_integer, Tenure) ->
 				true
 			;	domain_error(tabu_hook_result, tabu_tenure/4-Tenure)

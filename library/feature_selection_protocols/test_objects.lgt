@@ -245,27 +245,25 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-06,
-		comment is 'Invalid feature dataset fixtures for feature and count validation.'
+		date is 2026-10-12,
+		comment is 'Invalid feature dataset fixtures for feature and count validation.',
+		parnames is ['Kind']
 	]).
 
 	attribute_values(f1, continuous).
 	attribute_values(f1, continuous) :-
-		parameter(1, duplicate_declaration).
+		_Kind_ = duplicate_declaration.
 
 	example_count(Count) :-
-		parameter(1, Kind),
-		(	Kind == zero_count ->
+		(	_Kind_ == zero_count ->
 			Count = 0
-		;	(	Kind == non_integer_count ->
-				Count = bad
-			;	Count = 1
-			)
+		;	_Kind_ == non_integer_count ->
+			Count = bad
+		;	Count = 1
 		).
 
 	example(1, Features, _Target) :-
-		parameter(1, Kind),
-		fixture_features(Kind, Features).
+		fixture_features(_Kind_, Features).
 
 	fixture_features(duplicate_declaration, [f1-1.0]).
 	fixture_features(duplicate_example, [f1-1.0, f1-100.0]).

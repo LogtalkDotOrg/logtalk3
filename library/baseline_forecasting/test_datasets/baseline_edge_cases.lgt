@@ -19,7 +19,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(baseline_series(_Values, _Frequency),
+:- object(baseline_series(_Values_, _Frequency_),
 	implements(time_series_dataset_protocol)).
 
 	:- info([
@@ -27,21 +27,23 @@
 		author is 'Paulo Moura',
 		date is 2026-10-01,
 		comment is 'Parametric baseline forecasting fixture. The frequency atom none denotes absent seasonal metadata.',
-		parameters is ['Values' - 'Time-ordered numeric or missing observations.', 'Frequency' - 'Seasonal frequency or none.']
+		parameters is [
+			'Values' - 'Time-ordered numeric or missing observations.',
+			'Frequency' - 'Seasonal frequency or none.'
+		]
 	]).
 
-	:- uses(list, [nth1/3, length/2]).
+	:- uses(list, [
+		nth1/3, length/2
+	]).
 
 	observation(Index, Value) :-
-		parameter(1, Values),
-		nth1(Index, Values, Value).
+		nth1(Index, _Values_, Value).
 
 	series_length(Length) :-
-		parameter(1, Values),
-		length(Values, Length).
+		length(_Values_, Length).
 
-	frequency(Frequency) :-
-		parameter(2, Frequency),
-		Frequency \== none.
+	frequency(_Frequency_) :-
+		_Frequency_ \== none.
 
 :- end_object.

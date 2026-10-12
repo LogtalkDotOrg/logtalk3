@@ -19,13 +19,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(content_catalog_fixture(_, _),
+:- object(content_catalog_fixture(_Items_, _Contents_),
 	implements(item_content_dataset_protocol)).
 
-	:- uses(list, [member/2]).
+	:- uses(list, [
+		member/2
+	]).
 
-	item(Item) :- parameter(1, Items), member(Item, Items).
-	item_content(Item, Content) :- parameter(2, Contents), member(Item-Content, Contents).
+	item(Item) :-
+		member(Item, _Items_).
+
+	item_content(Item, Content) :-
+		member(Item-Content, _Contents_).
 
 :- end_object.
 
@@ -180,13 +185,11 @@
 :- end_object.
 
 
-:- object(identifier_ratings(_, _),
+:- object(identifier_ratings(_User_, _Item_),
 	implements(rating_dataset_protocol)).
 
 	rating(alice, m1, 5).
-	rating(User, Item, 4) :-
-		parameter(1, User),
-		parameter(2, Item).
+	rating(_User_, _Item_, 4).
 
 	rating_count(2).
 
@@ -222,7 +225,9 @@
 :- object(similarity_helpers,
 	imports(similarity_metric_common)).
 
-	:- public([normalize/2, centered/2, bound/2]).
+	:- public([
+		normalize/2, centered/2, bound/2
+	]).
 
 	normalize(Values, Normalized) :-
 		^^normalize_values(Values, Normalized).
@@ -236,14 +241,14 @@
 :- end_object.
 
 
-:- object(rating_scale_fixture(_, _),
+:- object(rating_scale_fixture(_Min_, _Max_),
 	implements(rating_dataset_protocol)).
 
 	rating(u, a, 1).
+
 	rating_count(1).
-	rating_scale(Min, Max) :-
-		parameter(1, Min),
-		parameter(2, Max).
+
+	rating_scale(_Min_, _Max_).
 
 :- end_object.
 
@@ -252,7 +257,10 @@
 	implements(rating_dataset_protocol)).
 
 	rating(u, a, 1).
+
 	rating_count(1).
-	rating_scale(_, _) :- fail.
+
+	rating_scale(_, _) :-
+		fail.
 
 :- end_object.

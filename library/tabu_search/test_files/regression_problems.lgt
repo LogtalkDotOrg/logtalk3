@@ -39,54 +39,47 @@
 	:- dynamic(event_/1).
 
 	initial_state(State) :-
-		parameter(2, [State-_| _]).
+		_States_ = [State-_| _].
 
 	state_energy(State, Energy) :-
 		record_event(energy),
-		parameter(2, States),
-		energy(State, States, Energy).
+		energy(State, _States_, Energy).
 
 	neighbor_state(State, Neighbor) :-
-		parameter(1, Mode),
-		Mode \== no_neighbor,
+		_Mode_ \== no_neighbor,
 		record_event(neighbor),
-		parameter(2, States),
-		States = [First-_| _],
-		next(State, States, First, Neighbor).
+		_States_ = [First-_| _],
+		next(State, _States_, First, Neighbor).
 
 	neighbor_state(State, Neighbor, Delta) :-
-		parameter(1, Mode),
-		Mode == delta,
+		_Mode_ == delta,
 		neighbor_state(State, Neighbor),
-		parameter(2, States),
-		energy(State, States, Current),
-		energy(Neighbor, States, Next),
+		energy(State, _States_, Current),
+		energy(Neighbor, _States_, Next),
 		Delta is Next - Current.
 
 	neighbors(State, Neighbors) :-
-		parameter(1, Mode),
-		( Mode == empty ->
+		(	_Mode_ == empty ->
 			Neighbors = []
-		; ( Mode == enumerated ->
-				parameter(2, States),
-				findall(Candidate, (
-					list::member(Candidate-_, States),
+		;	_Mode_ == enumerated ->
+			findall(
+				Candidate,
+				(	list::member(Candidate-_, _States_),
 					Candidate \== State
-				), Neighbors)
-			; Mode == full,
-				neighbor_state(State, Neighbor),
-				Neighbors = [Neighbor]
+				),
+				Neighbors
 			)
+		;	_Mode_ == full,
+			neighbor_state(State, Neighbor),
+			Neighbors = [Neighbor]
 		).
 
 	stop_condition(Step, _, _) :-
-		parameter(3, Stop),
-		integer(Stop),
-		Step >= Stop.
+		integer(_Stop_),
+		Step >= _Stop_.
 
 	progress(Step, Best, Current, Acceptance, Improvement) :-
-		parameter(1, Mode),
-		Mode \== no_progress,
+		_Mode_ \== no_progress,
 		assertz(report_(Step, Best, Current, Acceptance, Improvement)).
 
 	clear_log :-
@@ -125,10 +118,9 @@
 		Seconds is End - Start.
 
 	record_event(Kind) :-
-		parameter(1, Mode),
-		( (Mode == counted; Mode == delta) ->
+		(	(_Mode_ == counted; _Mode_ == delta) ->
 			assertz(event_(Kind))
-		; true
+		;	true
 		).
 
 	energy(State, [Candidate-Energy| _], Energy) :-
@@ -174,20 +166,16 @@
 	extends(tabu_search_fixture(_Mode_, _States_, _Stop_))).
 
 	tabu_key(State, Key) :-
-		parameter(1, Mode),
-		( Mode == fail ->
+		(	_KeyMode_ == fail ->
 			fail
-		; ( Mode == invalid ->
-				true
-			; ( Mode == throw ->
-					throw(key_error)
-				; ( Mode == identity ->
-						Key = State
-					; arg(1, State, Value),
-						Key = key(Value)
-					)
-				)
-			)
+		;	_KeyMode_ == invalid ->
+			true
+		;	_KeyMode_ == throw ->
+			throw(key_error)
+		;	_KeyMode_ == identity ->
+			Key = State
+		;	arg(1, State, Value),
+			Key = key(Value)
 		).
 
 :- end_object.
@@ -207,24 +195,18 @@
 
 	restart_state(Best, State) :-
 		assertz(restart_(Best)),
-		parameter(1, Mode),
-		( Mode == fail ->
+		(	_RestartMode_ == fail ->
 			fail
-		; ( Mode == invalid ->
-				true
-			; ( Mode == throw ->
-					throw(restart_error)
-				; ( Mode == identity ->
-						State = Best
-					; ( Mode == random ->
-							fast_random(as183)::between(1, 2, Index),
-							parameter(2, States),
-							list::nth1(Index, States, State-_)
-						; Mode = value(State)
-						)
-					)
-				)
-			)
+		;	_RestartMode_ == invalid ->
+			true
+		;	_RestartMode_ == throw ->
+			throw(restart_error)
+		;	_RestartMode_ == identity ->
+			State = Best
+		;	_RestartMode_ == random ->
+			fast_random(as183)::between(1, 2, Index),
+			list::nth1(Index, _States_, State-_)
+		;	_RestartMode_ = value(State)
 		).
 
 	clear_log :-
@@ -251,17 +233,14 @@
 
 	tabu_tenure(Step, Best, Current, Tenure) :-
 		assertz(tenure_(Step, Best, Current)),
-		parameter(1, Mode),
-		( Mode == fail ->
+		(	_TenureMode_ == fail ->
 			fail
-		; ( Mode == throw ->
-				throw(tenure_error)
-			; ( Mode = schedule(Tenures) ->
-					Index is Step + 1,
-					list::nth1(Index, Tenures, Tenure)
-				; Mode = value(Tenure)
-				)
-			)
+		;	_TenureMode_ == throw ->
+			throw(tenure_error)
+		;	_TenureMode_ = schedule(Tenures) ->
+			Index is Step + 1,
+			list::nth1(Index, Tenures, Tenure)
+		;	_TenureMode_ = value(Tenure)
 		).
 
 	clear_log :-
@@ -288,10 +267,9 @@
 
 	aspiration(State, Energy, Best) :-
 		assertz(aspiration_(State, Energy, Best)),
-		parameter(1, Mode),
-		( Mode == throw ->
+		(	_AspirationMode_ == throw ->
 			throw(aspiration_error)
-		; Mode == permit
+		;	_AspirationMode_ == permit
 		).
 
 	clear_log :-
@@ -359,9 +337,9 @@
 		arg(1, State, Value).
 
 	tabu_tenure(Step, _, _, Tenure) :-
-		( Step mod 2 =:= 0 ->
+		(	Step mod 2 =:= 0 ->
 			Tenure = 3
-		; Tenure = 0
+		;	Tenure = 0
 		).
 
 	restart_state(_, s(b,1)).
@@ -373,9 +351,9 @@
 	extends(tabu_search_restart_fixture(value(b), [a-0,b-1], 0))).
 
 	state_energy(State, Energy) :-
-		( State == b ->
+		(	State == b ->
 			throw(restart_energy_error)
-		; ^^state_energy(State, Energy)
+		;	^^state_energy(State, Energy)
 		).
 
 :- end_object.

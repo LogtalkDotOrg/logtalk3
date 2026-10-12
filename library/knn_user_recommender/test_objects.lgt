@@ -100,11 +100,10 @@
 :- end_object.
 
 
-:- object(user_knn_metric(_),
+:- object(user_knn_metric(_Score_),
 	implements(similarity_metric_protocol)).
 
-	similarity(_, _, Score) :-
-		parameter(1, Score).
+	similarity(_, _, _Score_).
 
 :- end_object.
 

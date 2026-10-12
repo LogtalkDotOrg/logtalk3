@@ -41,7 +41,7 @@
 :- end_object.
 
 
-:- object(mrmr_rows(_Declarations, _Rows),
+:- object(mrmr_rows(_Declarations_, _Rows_),
 	implements(feature_dataset_protocol)).
 
 	:- uses(list, [
@@ -49,20 +49,17 @@
 	]).
 
 	attribute_values(Feature, Declaration) :-
-		parameter(1, Declarations),
-		member(Feature-Declaration, Declarations).
+		member(Feature-Declaration, _Declarations_).
 
 	class(label).
 
 	class_values([0, 1, 2, 3]).
 
 	example_count(Count) :-
-		parameter(2, Rows),
-		length(Rows, Count).
+		length(_Rows_, Count).
 
 	example(Id, Features, Target) :-
-		parameter(2, Rows),
-		member(example(Id, Features, Target), Rows).
+		member(example(Id, Features, Target), _Rows_).
 
 :- end_object.
 

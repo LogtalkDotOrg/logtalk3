@@ -25,26 +25,23 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-07,
+		date is 2026-10-12,
 		comment is 'Mixed, missing, degenerate, and malformed dataset fixtures for mutual information selection.'
 	]).
 
 	attribute_values(signal, Declaration) :-
-		parameter(1, Kind),
-		declaration(Kind, Declaration).
+		declaration(_Kind_, Declaration).
 	attribute_values(copy, [a, b]).
 	attribute_values(constant, [a]).
 
 	example_count(Count) :-
 		(	_Kind_ == missing ->
 			Count = 6
-		;	(	_Kind_ == weak ->
-				Count = 8
-			;	(	_Kind_ == multiclass ->
-					Count = 6
-				;	Count = 4
-				)
-			)
+		;	_Kind_ == weak ->
+			Count = 8
+		;	_Kind_ == multiclass ->
+			Count = 6
+		;	Count = 4
 		).
 
 	example(Id, Features, Target) :-
