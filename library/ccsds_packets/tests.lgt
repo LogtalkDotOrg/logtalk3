@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-07-20,
+		date is 2026-10-13,
 		comment is 'Unit tests for the "ccsds_packets" library.'
 	]).
 
@@ -43,6 +43,15 @@
 	cover(ccsds_packets).
 	cover(ccsds_packets(_)).
 	cover(ccsds_packets_types).
+
+	:- private(cached_packets_/2).
+	:- dynamic(cached_packets_/2).
+
+	setup :-
+		retractall(cached_packets_(_, _)).
+
+	cleanup :-
+		retractall(cached_packets_(_, _)).
 
 	% Test packet structure (without secondary header parsing):
 	% - Version: 0 (3 bits)
@@ -283,46 +292,39 @@
 	% Contains 10 variable-length packets with APIDs 0x20E2 (8418)
 
 	test(ccsds_file_var_length_01, deterministic(N == 10)) :-
-		^^file_path('test_files/var_length_packets.bin', Path),
-		ccsds_packets::parse(file(Path), Packets),
+		fixture_packets('test_files/var_length_packets.bin', Packets),
 		length(Packets, N).
 
 	test(ccsds_file_var_length_02, deterministic(APID == 226)) :-
 		% First packet APID (0x00E2 from first two bytes 0x20E2 with version/type bits)
-		^^file_path('test_files/var_length_packets.bin', Path),
-		ccsds_packets::parse(file(Path), [Packet| _]),
+		fixture_packets('test_files/var_length_packets.bin', [Packet| _]),
 		apid(Packet, APID).
 
 	test(ccsds_file_var_length_03, true) :-
 		% All packets have the same APID
-		^^file_path('test_files/var_length_packets.bin', Path),
-		ccsds_packets::parse(file(Path), Packets),
+		fixture_packets('test_files/var_length_packets.bin', Packets),
 		forall(member(Packet, Packets), apid(Packet, 226)).
 
 	test(ccsds_file_var_length_04, deterministic(Counts == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])) :-
 		% Sequence counts increment from 0 to 9
-		^^file_path('test_files/var_length_packets.bin', Path),
-		ccsds_packets::parse(file(Path), Packets),
+		fixture_packets('test_files/var_length_packets.bin', Packets),
 		findall(Count, (member(Packet, Packets), sequence_count(Packet, Count)), Counts).
 
 	% --- apid01217.tlm tests (Europa Clipper) ---
 	% Small file with 4 packets, APID 1217 (0x04C1)
 
 	test(ccsds_file_europa_clipper_01, deterministic(N > 0)) :-
-		^^file_path('test_files/apid01217.tlm', Path),
-		ccsds_packets::parse(file(Path), Packets),
+		fixture_packets('test_files/apid01217.tlm', Packets),
 		length(Packets, N).
 
 	test(ccsds_file_europa_clipper_02, deterministic(APID == 1217)) :-
 		% First packet should have APID 1217
-		^^file_path('test_files/apid01217.tlm', Path),
-		ccsds_packets::parse(file(Path), [Packet| _]),
+		fixture_packets('test_files/apid01217.tlm', [Packet| _]),
 		apid(Packet, APID).
 
 	test(ccsds_file_europa_clipper_03, deterministic(Type == telemetry)) :-
 		% Packets should be telemetry
-		^^file_path('test_files/apid01217.tlm', Path),
-		ccsds_packets::parse(file(Path), [Packet| _]),
+		fixture_packets('test_files/apid01217.tlm', [Packet| _]),
 		type(Packet, Type).
 
 	% --- SSAT1 telemetry tests ---
@@ -330,20 +332,17 @@
 
 	test(ccsds_file_ssat1_01, deterministic(N > 100)) :-
 		% File should contain many packets
-		^^file_path('test_files/SSAT1_2015-180-00-00-00_2015-180-01-59-58_1_1_sim.tlm', Path),
-		ccsds_packets::parse(file(Path), Packets),
+		fixture_packets('test_files/SSAT1_2015-180-00-00-00_2015-180-01-59-58_1_1_sim.tlm', Packets),
 		length(Packets, N).
 
 	test(ccsds_file_ssat1_02, deterministic(APID == 1)) :-
 		% First packet should have APID 1
-		^^file_path('test_files/SSAT1_2015-180-00-00-00_2015-180-01-59-58_1_1_sim.tlm', Path),
-		ccsds_packets::parse(file(Path), [Packet| _]),
+		fixture_packets('test_files/SSAT1_2015-180-00-00-00_2015-180-01-59-58_1_1_sim.tlm', [Packet| _]),
 		apid(Packet, APID).
 
 	test(ccsds_file_ssat1_03, deterministic(Flag == present)) :-
 		% Packets should have secondary header
-		^^file_path('test_files/SSAT1_2015-180-00-00-00_2015-180-01-59-58_1_1_sim.tlm', Path),
-		ccsds_packets::parse(file(Path), [Packet| _]),
+		fixture_packets('test_files/SSAT1_2015-180-00-00-00_2015-180-01-59-58_1_1_sim.tlm', [Packet| _]),
 		secondary_header_flag(Packet, Flag).
 
 	% --- Roundtrip tests with real data ---
@@ -361,8 +360,7 @@
 
 	test(ccsds_file_roundtrip_02, deterministic(Packets == ParsedAgain)) :-
 		% Parse all packets, regenerate all bytes, parse again
-		^^file_path('test_files/var_length_packets.bin', Path),
-		ccsds_packets::parse(file(Path), Packets),
+		fixture_packets('test_files/var_length_packets.bin', Packets),
 		ccsds_packets::generate(bytes(AllBytes), Packets),
 		ccsds_packets::parse(bytes(AllBytes), ParsedAgain).
 
@@ -410,7 +408,15 @@
 		[n(100)]
 	).
 
-	% Auxiliary predicates for QuickCheck tests
+	% Auxiliary predicates
+
+	fixture_packets(File, Packets) :-
+		(	cached_packets_(File, Packets) ->
+			true
+		;   ^^file_path(File, Path),
+			ccsds_packets::parse(file(Path), Packets),
+			assertz(cached_packets_(File, Packets))
+		).
 
 	roundtrip_property(Bytes) :-
 		ccsds_packets::parse(bytes(Bytes), Packets),
