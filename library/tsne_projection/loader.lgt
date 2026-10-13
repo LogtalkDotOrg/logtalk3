@@ -25,6 +25,7 @@
 	logtalk_load(format(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(random(loader)),
+	logtalk_load(dictionaries(loader)),
 	logtalk_load(dimension_reduction_protocols(loader)),
 	logtalk_load(tsne_projection, [optimize(on)])
 )).

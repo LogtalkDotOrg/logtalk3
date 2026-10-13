@@ -169,6 +169,19 @@ with residual checks, bounded exact neighbor selection, and cached
 curve-fitting samples. Expanded coverage and reduced repeated training in
 the tests. Updated documentation.
 
+* CHANGED: The `tsne_projection` library to require ground identifiers and
+reducer terms, complete effective options, and consistent model diagnostics.
+Training perplexity is bounded by one and the sample count minus one,
+inclusively; affinity diagnostics report tie-limited and search-budget-limited
+matching, and transformations warn when matching is incomplete. Fixed the
+conditional transform gradient and negative KL roundoff. Improved exact dense
+optimization with quadratic symmetrization, cached Gaussian search inputs,
+direct weight normalization, symmetric pair reuse, scalar gradient accumulation,
+aligned preprocessing, AVL validation, row-wise centering, and hoisted optimizer
+settings. Expanded numerical and regression tests to full clause coverage,
+reduced repeated training in tests, added focused benchmarks, and updated
+documentation.
+
 * IMPROVED: Performance of the `crypto`, `isolation_forest_anomaly_detector`,
 and `logistic_regression_classifier` libraries.
 

@@ -26,6 +26,7 @@
 	logtalk_load(format(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(random(loader)),
+	logtalk_load(dictionaries(loader)),
 	logtalk_load(dimension_reduction_protocols(loader)),
 	logtalk_load([
 		dimension_reduction_protocols('test_datasets/correlated_plane'),
@@ -35,7 +36,13 @@
 		source_data(on),
 		debug(on)
 	]),
-	logtalk_load([tsne_projection, test_objects], [source_data(on), debug(on)]),
+	logtalk_load([
+		tsne_projection,
+		test_objects
+	], [
+		source_data(on),
+		debug(on)
+	]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run

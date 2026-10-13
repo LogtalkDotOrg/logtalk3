@@ -23,9 +23,9 @@
 	imports(dimension_reducer_common)).
 
 	:- info([
-		version is 1:1:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-28,
+		date is 2026-10-13,
 		comment is 'Exact t-distributed Stochastic Neighbor Embedding dimension reducer for continuous datasets.',
 		see_also is [kernel_pca_projection, pca_projection, random_projection]
 	]).
@@ -45,7 +45,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, member/2, memberchk/2, nth1/3
+		length/2, memberchk/2
 	]).
 
 	:- uses(pairs, [
@@ -72,9 +72,11 @@
 		^^check_continuous_attributes(Attributes),
 		keys(Attributes, AttributeNames),
 		findall(Id-AttributeValues, Dataset::example(Id, AttributeValues), Examples),
-		check_examples(Dataset, AttributeNames, Examples),
-		build_encoders(AttributeNames, Examples, Options, Encoders),
-		examples_to_rows(Examples, Encoders, TrainingRows),
+		check_examples(Dataset, AttributeNames, Examples, AlignedExamples),
+		pairs::values(AlignedExamples, ValueRows),
+		transpose_matrix(ValueRows, ValueColumns),
+		build_encoders(AttributeNames, ValueColumns, Options, Encoders),
+		examples_to_rows(AlignedExamples, Encoders, TrainingRows),
 		keys(Examples, ExampleIds),
 		length(AttributeNames, FeatureCount),
 		length(TrainingRows, SampleCount),
@@ -84,13 +86,13 @@
 		check_perplexity(Options, SampleCount),
 		squared_distance_matrix(TrainingRows, DistanceMatrix),
 		^^option(perplexity(Perplexity), Options),
-		conditional_probability_matrix(DistanceMatrix, Perplexity, ConditionalProbabilities),
+		conditional_probability_matrix(DistanceMatrix, Perplexity, ConditionalProbabilities, AffinitySearch),
 		joint_probability_matrix(ConditionalProbabilities, JointProbabilities),
 		initialize_embedding(SampleCount, ComponentCount, Options, InitialEmbedding),
 		kl_divergence(JointProbabilities, InitialEmbedding, InitialKLDivergence),
 		optimize_embedding(JointProbabilities, InitialEmbedding, Options, Convergence, Iterations, FinalDelta, EmbeddingRows),
 		kl_divergence(JointProbabilities, EmbeddingRows, FinalKLDivergence),
-		build_diagnostics(AttributeNames, SampleCount, ComponentCount, Options, Convergence, Iterations, FinalDelta, InitialKLDivergence, FinalKLDivergence, Diagnostics),
+		build_diagnostics(AttributeNames, SampleCount, ComponentCount, Options, Convergence, Iterations, FinalDelta, InitialKLDivergence, FinalKLDivergence, AffinitySearch, Diagnostics),
 		DimensionReducer = tsne_reducer(Encoders, ExampleIds, TrainingRows, EmbeddingRows, Diagnostics).
 
 	transform(DimensionReducer, Instance, ReducedInstance) :-
@@ -100,13 +102,17 @@
 		instance_distances(TrainingRows, Features, Distances),
 		::dimension_reducer_options(DimensionReducer, Options),
 		^^option(perplexity(Perplexity), Options),
-		conditional_probabilities(Distances, 0, Perplexity, Probabilities),
+		conditional_probabilities(Distances, 0, Perplexity, Probabilities, Achieved, Status),
+		(	Status == matched ->
+			true
+		;	logtalk::print_message(warning, tsne_projection, perplexity_mismatch(Perplexity, Achieved, Status))
+		),
 		weighted_embedding_mean(Probabilities, EmbeddingRows, InitialCoordinates),
 		optimize_new_coordinates(Probabilities, EmbeddingRows, Options, InitialCoordinates, Coordinates),
 		coordinate_pairs(Coordinates, 1, ReducedInstance).
 
 	check_dimension_reducer(DimensionReducer) :-
-		(	var(DimensionReducer) ->
+		(	\+ ground(DimensionReducer) ->
 			instantiation_error
 		;	DimensionReducer = tsne_reducer(Encoders, ExampleIds, TrainingRows, EmbeddingRows, Diagnostics),
 			^^valid_linear_encoders(Encoders),
@@ -118,6 +124,8 @@
 			memberchk(component_count(ComponentCount), Diagnostics),
 			valid(positive_integer, ComponentCount),
 			valid_numeric_rows(EmbeddingRows, ComponentCount, SampleCount),
+			encoder_attribute_names(Encoders, AttributeNames),
+			memberchk(attribute_names(AttributeNames), Diagnostics),
 			valid_tsne_diagnostics(Diagnostics, FeatureCount, SampleCount, ComponentCount) ->
 			true
 		;	domain_error(dimension_reducer, DimensionReducer)
@@ -138,88 +146,90 @@
 		length(FirstEmbeddingRow, ComponentCount),
 		format('Embedding dimensions: ~w~n', [ComponentCount]).
 
-	check_examples(Dataset, AttributeNames, Examples) :-
+	check_examples(Dataset, AttributeNames, Examples, AlignedExamples) :-
 		^^check_examples_non_empty(Dataset, Examples),
 		length(Examples, SampleCount),
 		(	SampleCount >= 2 ->
 			true
 		;	domain_error(minimum_number_of_examples, SampleCount)
 		),
-		check_distinct_example_ids(Examples, []),
-		check_example_values(Examples, AttributeNames).
+		avltree::new(SeenIds),
+		check_distinct_example_ids(Examples, SeenIds),
+		avltree::new(EmptySlots),
+		attribute_slots(AttributeNames, EmptySlots, Slots),
+		align_examples(Examples, AttributeNames, Slots, AlignedExamples).
 
-	check_example_values([], _AttributeNames).
-	check_example_values([_-AttributeValues| Examples], AttributeNames) :-
-		check_attribute_bindings(AttributeNames, AttributeValues),
-		check_attribute_values(AttributeNames, AttributeValues),
-		check_example_values(Examples, AttributeNames).
+	align_examples([], _AttributeNames, _Slots, []).
+	align_examples([Id-AttributeValues| Examples], AttributeNames, Slots, [Id-Values| AlignedExamples]) :-
+		prepare_instance(AttributeNames, Slots, AttributeValues, Values),
+		align_examples(Examples, AttributeNames, Slots, AlignedExamples).
 
-	check_attribute_bindings(AttributeNames, AttributeValues) :-
-		check_declared_attribute_bindings(AttributeNames, AttributeValues),
-		check_undeclared_attribute_bindings(AttributeValues, AttributeNames).
+	attribute_slots([], Slots, Slots).
+	attribute_slots([Attribute| Attributes], Slots0, Slots) :-
+		avltree::insert(Slots0, Attribute, binding(0, _), Slots1),
+		attribute_slots(Attributes, Slots1, Slots).
 
-	check_declared_attribute_bindings([], _AttributeValues).
-	check_declared_attribute_bindings([Attribute| Attributes], AttributeValues) :-
-		attribute_occurrences(AttributeValues, Attribute, 0, Count),
+	prepare_instance(AttributeNames, Slots0, AttributeValues, Values) :-
+		collect_bindings(AttributeValues, Slots0, Slots, Undeclared),
+		declared_values(AttributeNames, Slots, Values),
+		(	Undeclared = [Attribute| _] ->
+			domain_error(declared_attribute, Attribute)
+		;	true
+		),
+		check_observed_values(Values).
+
+	collect_bindings([], Slots, Slots, []).
+	collect_bindings([Attribute-Value| Bindings], Slots0, Slots, Undeclared) :-
+		(	avltree::lookup(Attribute, binding(Count0, FirstValue), Slots0) ->
+			Count is Count0 + 1,
+			(	Count0 =:= 0 ->
+				StoredValue = Value
+			;	StoredValue = FirstValue
+			),
+			avltree::insert(Slots0, Attribute, binding(Count, StoredValue), Slots1),
+			collect_bindings(Bindings, Slots1, Slots, Undeclared)
+		;	Undeclared = [Attribute| Remaining],
+			collect_bindings(Bindings, Slots0, Slots, Remaining)
+		).
+
+	declared_values([], _Slots, []).
+	declared_values([Attribute| Attributes], Slots, [Value| Values]) :-
+		avltree::lookup(Attribute, binding(Count, Value), Slots),
 		(	Count == 1 ->
 			true
 		;	Count == 0 ->
 			existence_error(attribute, Attribute)
 		;	domain_error(attribute_occurrences, Attribute)
 		),
-		check_declared_attribute_bindings(Attributes, AttributeValues).
+		declared_values(Attributes, Slots, Values).
 
-	check_undeclared_attribute_bindings([], _AttributeNames).
-	check_undeclared_attribute_bindings([Attribute-_Value| AttributeValues], AttributeNames) :-
-		(	member(Attribute, AttributeNames) ->
-			true
-		;	domain_error(declared_attribute, Attribute)
-		),
-		check_undeclared_attribute_bindings(AttributeValues, AttributeNames).
-
-	attribute_occurrences([], _Attribute, Count, Count).
-	attribute_occurrences([Attribute-_Value| AttributeValues], Attribute, Count0, Count) :-
-		!,
-		Count1 is Count0 + 1,
-		attribute_occurrences(AttributeValues, Attribute, Count1, Count).
-	attribute_occurrences([_OtherAttribute-_Value| AttributeValues], Attribute, Count0, Count) :-
-		attribute_occurrences(AttributeValues, Attribute, Count0, Count).
-
-	check_attribute_values([], _AttributeValues).
-	check_attribute_values([Attribute| Attributes], AttributeValues) :-
-		attribute_value(Attribute, AttributeValues, Value),
+	check_observed_values([]).
+	check_observed_values([Value| Values]) :-
 		(	var(Value) ->
 			true
 		;	number(Value) ->
 			true
 		;	type_error(number, Value)
 		),
-		check_attribute_values(Attributes, AttributeValues).
+		check_observed_values(Values).
 
-	attribute_value(Attribute, AttributeValues, Value) :-
-		(	member(Attribute-Value, AttributeValues) ->
-			true
-		;	existence_error(attribute, Attribute)
-		).
-
-	build_encoders([], _Examples, _Options, []).
-	build_encoders([Attribute| Attributes], Examples, Options, [continuous(Attribute, Mean, Scale)| Encoders]) :-
-		observed_attribute_values(Examples, Attribute, Values),
+	build_encoders([], [], _Options, []).
+	build_encoders([Attribute| Attributes], [Column| Columns], Options, [continuous(Attribute, Mean, Scale)| Encoders]) :-
+		observed_values(Column, Values),
 		(	Values == [] ->
 			domain_error(observed_attribute_values, Attribute)
 		;	arithmetic_mean(Values, Mean),
 			continuous_scale(Values, Options, Scale)
 		),
-		build_encoders(Attributes, Examples, Options, Encoders).
+		build_encoders(Attributes, Columns, Options, Encoders).
 
-	observed_attribute_values([], _Attribute, []).
-	observed_attribute_values([_-AttributeValues| Examples], Attribute, Values) :-
-		attribute_value(Attribute, AttributeValues, Value),
+	observed_values([], []).
+	observed_values([Value| Observations], Values) :-
 		(	nonvar(Value) ->
 			Values = [Value| Rest]
 		;	Values = Rest
 		),
-		observed_attribute_values(Examples, Attribute, Rest).
+		observed_values(Observations, Rest).
 
 	continuous_scale(Values, Options, Scale) :-
 		^^option(feature_scaling(FeatureScaling), Options),
@@ -237,34 +247,37 @@
 		).
 
 	examples_to_rows([], _Encoders, []).
-	examples_to_rows([_-AttributeValues| Examples], Encoders, [Row| Rows]) :-
-		encode_instance(Encoders, AttributeValues, Row),
+	examples_to_rows([_-Values| Examples], Encoders, [Row| Rows]) :-
+		encode_instance_values(Encoders, Values, Row),
 		examples_to_rows(Examples, Encoders, Rows).
 
 	encode_instance(Encoders, AttributeValues, Features) :-
 		encoder_attribute_names(Encoders, AttributeNames),
-		check_attribute_bindings(AttributeNames, AttributeValues),
-		check_attribute_values(AttributeNames, AttributeValues),
-		encode_instance_values(Encoders, AttributeValues, Features).
+		avltree::new(EmptySlots),
+		attribute_slots(AttributeNames, EmptySlots, Slots),
+		prepare_instance(AttributeNames, Slots, AttributeValues, Values),
+		encode_instance_values(Encoders, Values, Features).
 
 	encoder_attribute_names([], []).
 	encoder_attribute_names([continuous(Attribute, _Mean, _Scale)| Encoders], [Attribute| Attributes]) :-
 		encoder_attribute_names(Encoders, Attributes).
 
-	encode_instance_values([], _AttributeValues, []).
-	encode_instance_values([continuous(Attribute, Mean, Scale)| Encoders], AttributeValues, [Feature| Features]) :-
-		attribute_value(Attribute, AttributeValues, Value),
-		( var(Value) ->
+	encode_instance_values([], [], []).
+	encode_instance_values([continuous(_Attribute, Mean, Scale)| Encoders], [Value| Values], [Feature| Features]) :-
+		(	var(Value) ->
 			Feature = 0.0
-		; Feature is (Value - Mean) / Scale
+		;	Feature is (Value - Mean) / Scale
 		),
-		encode_instance_values(Encoders, AttributeValues, Features).
+		encode_instance_values(Encoders, Values, Features).
 
 	check_distinct_example_ids([], _SeenIds).
 	check_distinct_example_ids([Id-_AttributeValues| Examples], SeenIds) :-
-		(	member(Id, SeenIds) ->
+		(	\+ ground(Id) ->
+			instantiation_error
+		;	avltree::lookup(Id, _, SeenIds) ->
 			domain_error(example_identifier, Id)
-		;	check_distinct_example_ids(Examples, [Id| SeenIds])
+		;	avltree::insert(SeenIds, Id, true, UpdatedIds),
+			check_distinct_example_ids(Examples, UpdatedIds)
 		).
 
 	check_iteration_options(Options) :-
@@ -277,19 +290,49 @@
 
 	check_perplexity(Options, SampleCount) :-
 		^^option(perplexity(Perplexity), Options),
-		(	Perplexity < SampleCount ->
+		(	Perplexity =< SampleCount - 1 ->
 			true
 		;	domain_error(perplexity, Perplexity-SampleCount)
 		).
 
 	squared_distance_matrix([], []).
 	squared_distance_matrix([Row| Rows], Matrix) :-
-		squared_distance_rows([Row| Rows], [Row| Rows], Matrix).
+		symmetric_matrix([Row| Rows], distance, Matrix).
 
-	squared_distance_rows([], _AllRows, []).
-	squared_distance_rows([Row| Rows], AllRows, [DistanceRow| DistanceRows]) :-
-		instance_distances(AllRows, Row, DistanceRow),
-		squared_distance_rows(Rows, AllRows, DistanceRows).
+	symmetric_matrix(Rows, Kind, Matrix) :-
+		length(Rows, Count),
+		matrix_cells(Count, Count, Matrix),
+		transpose_matrix(Matrix, Transposed),
+		symmetric_pair_rows(Rows, Rows, Matrix, Transposed, 1, Kind).
+
+	matrix_cells(0, _Width, []) :-
+		!.
+	matrix_cells(Count, Width, [Row| Rows]) :-
+		length(Row, Width),
+		Next is Count - 1,
+		matrix_cells(Next, Width, Rows).
+
+	symmetric_pair_rows([], _AllRows, [], [], _Index, _Kind).
+	symmetric_pair_rows([Row| Rows], AllRows, [Cells| Matrix], [ReverseCells| Transposed], Index, Kind) :-
+		symmetric_pair_row(AllRows, Row, Cells, ReverseCells, Index, 1, Kind),
+		Next is Index + 1,
+		symmetric_pair_rows(Rows, AllRows, Matrix, Transposed, Next, Kind).
+
+	symmetric_pair_row([], _Row, [], [], _RowIndex, _ColumnIndex, _Kind).
+	symmetric_pair_row([OtherRow| Rows], Row, [Cell| Cells], [ReverseCell| ReverseCells], RowIndex, ColumnIndex, Kind) :-
+		(	RowIndex =:= ColumnIndex ->
+			Cell = 0.0
+		;	RowIndex < ColumnIndex ->
+			squared_distance(Row, OtherRow, 0.0, Distance),
+			(	Kind == distance ->
+				Cell = Distance
+			;	Cell is 1.0 / (1.0 + Distance)
+			),
+			ReverseCell = Cell
+		;	true
+		),
+		Next is ColumnIndex + 1,
+		symmetric_pair_row(Rows, Row, Cells, ReverseCells, RowIndex, Next, Kind).
 
 	instance_distances([], _Row, []).
 	instance_distances([OtherRow| Rows], Row, [Distance| Distances]) :-
@@ -302,19 +345,79 @@
 		Distance1 is Distance0 + Difference * Difference,
 		squared_distance(Lefts, Rights, Distance1, Distance).
 
-	conditional_probability_matrix(DistanceMatrix, Perplexity, ProbabilityMatrix) :-
-		conditional_probability_rows(DistanceMatrix, Perplexity, 1, ProbabilityMatrix).
+	conditional_probability_matrix(DistanceMatrix, Perplexity, ProbabilityMatrix, AffinitySearch) :-
+		conditional_probability_rows(DistanceMatrix, Perplexity, 1, ProbabilityMatrix, Outcomes),
+		Outcomes = [First-_| _],
+		affinity_summary(Outcomes, summary(0, 0, 0), First, First, AffinitySearch).
 
-	conditional_probability_rows([], _Perplexity, _Index, []).
-	conditional_probability_rows([Distances| DistanceRows], Perplexity, Index, [Probabilities| ProbabilityRows]) :-
-		conditional_probabilities(Distances, Index, Perplexity, Probabilities),
+	conditional_probability_rows([], _Perplexity, _Index, [], []).
+	conditional_probability_rows([Distances| DistanceRows], Perplexity, Index, [Probabilities| ProbabilityRows], [Achieved-Status| Outcomes]) :-
+		conditional_probabilities(Distances, Index, Perplexity, Probabilities, Achieved, Status),
 		NextIndex is Index + 1,
-		conditional_probability_rows(DistanceRows, Perplexity, NextIndex, ProbabilityRows).
+		conditional_probability_rows(DistanceRows, Perplexity, NextIndex, ProbabilityRows, Outcomes).
 
-	conditional_probabilities(Distances, ExcludedIndex, Perplexity, Probabilities) :-
-		TargetEntropy is log(Perplexity),
+	conditional_probabilities(Distances, ExcludedIndex, Perplexity, Probabilities, Achieved, Status) :-
 		minimum_distance(Distances, ExcludedIndex, MinimumDistance),
-		search_precision(Distances, ExcludedIndex, MinimumDistance, TargetEntropy, 0.0, unbounded, 1.0, 0, Probabilities).
+		nearest_count(Distances, ExcludedIndex, MinimumDistance, 1, 0, NearestCount),
+		length(Distances, Count),
+		(	ExcludedIndex > 0 ->
+			EligibleCount is Count - 1
+		;	EligibleCount = Count
+		),
+		(	Perplexity =< NearestCount ->
+			limiting_probabilities(Distances, ExcludedIndex, nearest(MinimumDistance), NearestCount, 1, Probabilities),
+			Achieved is float(NearestCount),
+			(	Perplexity =:= NearestCount ->
+				Status = matched
+			;	Status = tie_limited
+			)
+		;	Perplexity =:= EligibleCount ->
+			limiting_probabilities(Distances, ExcludedIndex, all, EligibleCount, 1, Probabilities),
+			Achieved is float(EligibleCount),
+			Status = matched
+		;	TargetEntropy is log(Perplexity),
+			search_precision(Distances, ExcludedIndex, MinimumDistance, TargetEntropy, 0.0, unbounded, 1.0, 0, Probabilities, Achieved, Status)
+		).
+
+	nearest_count([], _Excluded, _Minimum, _Index, Count, Count).
+	nearest_count([Distance| Distances], Excluded, Minimum, Index, Count0, Count) :-
+		(	Index =\= Excluded, Distance =:= Minimum ->
+			Count1 is Count0 + 1
+		;	Count1 = Count0
+		),
+		Next is Index + 1,
+		nearest_count(Distances, Excluded, Minimum, Next, Count1, Count).
+
+	limiting_probabilities([], _Excluded, _Mode, _Count, _Index, []).
+	limiting_probabilities([Distance| Distances], Excluded, Mode, Count, Index, [Probability| Probabilities]) :-
+		(	Index =:= Excluded ->
+			Probability = 0.0
+		;	Mode == all ->
+			Probability is 1.0 / Count
+		;	Mode = nearest(Minimum), Distance =:= Minimum ->
+			Probability is 1.0 / Count
+		;	Probability = 0.0
+		),
+		Next is Index + 1,
+		limiting_probabilities(Distances, Excluded, Mode, Count, Next, Probabilities).
+
+	affinity_summary([], Summary, Minimum, Maximum, affinity_search(Summary, achieved_perplexity_range(Minimum, Maximum))).
+	affinity_summary([Achieved-Status| Outcomes], summary(Matched0, Tied0, Limited0), Minimum0, Maximum0, Summary) :-
+		(	Status == matched ->
+			Matched is Matched0 + 1,
+			Tied = Tied0,
+			Limited = Limited0
+		;	Status == tie_limited ->
+			Matched = Matched0,
+			Tied is Tied0 + 1,
+			Limited = Limited0
+		;	Matched = Matched0,
+			Tied = Tied0,
+			Limited is Limited0 + 1
+		),
+		Minimum is min(Minimum0, Achieved),
+		Maximum is max(Maximum0, Achieved),
+		affinity_summary(Outcomes, summary(Matched, Tied, Limited), Minimum, Maximum, Summary).
 
 	minimum_distance(Distances, ExcludedIndex, MinimumDistance) :-
 		minimum_distance(Distances, ExcludedIndex, 1, none, MinimumDistance).
@@ -331,16 +434,25 @@
 		NextIndex is Index + 1,
 		minimum_distance(Distances, ExcludedIndex, NextIndex, Minimum1, Minimum).
 
-	search_precision(Distances, ExcludedIndex, MinimumDistance, TargetEntropy, Lower, Upper, Precision, Iteration, Probabilities) :-
-		probability_row(Distances, ExcludedIndex, MinimumDistance, Precision, Probabilities0, Entropy),
+	search_precision(Distances, ExcludedIndex, MinimumDistance, TargetEntropy, Lower, Upper, Precision, Iteration, Probabilities, Achieved, Status) :-
+		shift_distances(Distances, ExcludedIndex, MinimumDistance, 1, Shifted),
+		search_adjusted_precision(Shifted, TargetEntropy, Lower, Upper, Precision, Iteration, Probabilities, Achieved, Status).
+
+	search_adjusted_precision(Shifted, TargetEntropy, Lower, Upper, Precision, Iteration, Probabilities, Achieved, Status) :-
+		precision_weights(Shifted, Precision, Weights, 0.0, Sum, 0.0, WeightedSum),
+		Entropy is log(Sum) + Precision * WeightedSum / Sum,
 		EntropyDifference is Entropy - TargetEntropy,
 		(	abs(EntropyDifference) =< 1.0e-5 ->
-			Probabilities = Probabilities0
+			normalize_values(Weights, Sum, Probabilities),
+			Achieved is exp(Entropy),
+			Status = matched
 		;	Iteration >= 60 ->
-			Probabilities = Probabilities0
+			normalize_values(Weights, Sum, Probabilities),
+			Achieved is exp(Entropy),
+			Status = iteration_limit
 		;	next_precision(EntropyDifference, Lower, Upper, Precision, NextLower, NextUpper, NextPrecision),
 			NextIteration is Iteration + 1,
-			search_precision(Distances, ExcludedIndex, MinimumDistance, TargetEntropy, NextLower, NextUpper, NextPrecision, NextIteration, Probabilities)
+			search_adjusted_precision(Shifted, TargetEntropy, NextLower, NextUpper, NextPrecision, NextIteration, Probabilities, Achieved, Status)
 		).
 
 	next_precision(EntropyDifference, _Lower, Upper, Precision, Precision, Upper, NextPrecision) :-
@@ -356,24 +468,26 @@
 		;	NextPrecision is (Precision + Lower) / 2.0
 		).
 
-	probability_row(Distances, ExcludedIndex, MinimumDistance, Precision, Probabilities, Entropy) :-
-		unnormalized_probabilities(Distances, ExcludedIndex, MinimumDistance, Precision, 1, Unnormalized, 0.0, Sum, 0.0, WeightedDistanceSum),
-		normalize_values(Unnormalized, Sum, Probabilities),
-		Entropy is log(Sum) + Precision * WeightedDistanceSum / Sum.
+	shift_distances([], _Excluded, _Minimum, _Index, []).
+	shift_distances([Distance| Distances], Excluded, Minimum, Index, [Adjusted| Shifted]) :-
+		(	Index =:= Excluded ->
+			Adjusted = excluded
+		;	Adjusted is Distance - Minimum
+		),
+		Next is Index + 1,
+		shift_distances(Distances, Excluded, Minimum, Next, Shifted).
 
-	unnormalized_probabilities([], _ExcludedIndex, _MinimumDistance, _Precision, _Index, [], Sum, Sum, WeightedSum, WeightedSum).
-	unnormalized_probabilities([Distance| Distances], ExcludedIndex, MinimumDistance, Precision, Index, [Probability| Probabilities], Sum0, Sum, WeightedSum0, WeightedSum) :-
-		(	Index =:= ExcludedIndex ->
+	precision_weights([], _Precision, [], Sum, Sum, WeightedSum, WeightedSum).
+	precision_weights([AdjustedDistance| Distances], Precision, [Probability| Probabilities], Sum0, Sum, WeightedSum0, WeightedSum) :-
+		(	AdjustedDistance == excluded ->
 			Probability = 0.0,
 			Sum1 = Sum0,
 			WeightedSum1 = WeightedSum0
-		;	AdjustedDistance is Distance - MinimumDistance,
-			Probability is exp(-Precision * AdjustedDistance),
+		;	Probability is exp(-Precision * AdjustedDistance),
 			Sum1 is Sum0 + Probability,
 			WeightedSum1 is WeightedSum0 + Probability * AdjustedDistance
 		),
-		NextIndex is Index + 1,
-		unnormalized_probabilities(Distances, ExcludedIndex, MinimumDistance, Precision, NextIndex, Probabilities, Sum1, Sum, WeightedSum1, WeightedSum).
+		precision_weights(Distances, Precision, Probabilities, Sum1, Sum, WeightedSum1, WeightedSum).
 
 	normalize_values([], _Sum, []).
 	normalize_values([Value| Values], Sum, [Normalized| NormalizedValues]) :-
@@ -382,24 +496,23 @@
 
 	joint_probability_matrix(ConditionalProbabilities, JointProbabilities) :-
 		length(ConditionalProbabilities, SampleCount),
-		joint_probability_rows(ConditionalProbabilities, ConditionalProbabilities, SampleCount, 1, JointProbabilities).
+		transpose_matrix(ConditionalProbabilities, Transposed),
+		joint_probability_rows(ConditionalProbabilities, Transposed, SampleCount, 1, JointProbabilities).
 
-	joint_probability_rows([], _Matrix, _SampleCount, _Index, []).
-	joint_probability_rows([Row| Rows], Matrix, SampleCount, Index, [JointRow| JointRows]) :-
-		joint_probability_row(Row, Matrix, SampleCount, Index, 1, JointRow),
+	joint_probability_rows([], [], _SampleCount, _Index, []).
+	joint_probability_rows([Row| Rows], [Column| Columns], SampleCount, Index, [JointRow| JointRows]) :-
+		joint_probability_row(Row, Column, SampleCount, Index, 1, JointRow),
 		NextIndex is Index + 1,
-		joint_probability_rows(Rows, Matrix, SampleCount, NextIndex, JointRows).
+		joint_probability_rows(Rows, Columns, SampleCount, NextIndex, JointRows).
 
-	joint_probability_row([], _Matrix, _SampleCount, _RowIndex, _ColumnIndex, []).
-	joint_probability_row([Probability| Probabilities], Matrix, SampleCount, RowIndex, ColumnIndex, [JointProbability| JointProbabilities]) :-
+	joint_probability_row([], [], _SampleCount, _RowIndex, _ColumnIndex, []).
+	joint_probability_row([Probability| Probabilities], [ReverseProbability| ReverseProbabilities], SampleCount, RowIndex, ColumnIndex, [JointProbability| JointProbabilities]) :-
 		(	RowIndex =:= ColumnIndex ->
 			JointProbability = 0.0
-		;	nth1(ColumnIndex, Matrix, OtherRow),
-			nth1(RowIndex, OtherRow, ReverseProbability),
-			JointProbability is (Probability + ReverseProbability) / (2.0 * SampleCount)
+		;	JointProbability is (Probability + ReverseProbability) / (2.0 * SampleCount)
 		),
 		NextColumnIndex is ColumnIndex + 1,
-		joint_probability_row(Probabilities, Matrix, SampleCount, RowIndex, NextColumnIndex, JointProbabilities).
+		joint_probability_row(Probabilities, ReverseProbabilities, SampleCount, RowIndex, NextColumnIndex, JointProbabilities).
 
 	initialize_embedding(SampleCount, ComponentCount, Options, Embedding) :-
 		get_random_seed(OriginalSeed),
@@ -440,19 +553,22 @@
 	optimize_embedding(Probabilities, Embedding0, Options, Convergence, Iterations, FinalDelta, Embedding) :-
 		zero_matrix_like(Embedding0, PreviousUpdates),
 		constant_matrix_like(Embedding0, 1.0, Gains),
-		iterate_embedding(Probabilities, Options, 0, Embedding0, PreviousUpdates, Gains, Convergence, Iterations, FinalDelta, Embedding).
-
-	iterate_embedding(Probabilities, Options, Iteration0, Embedding0, PreviousUpdates0, Gains0, Convergence, Iterations, FinalDelta, Embedding) :-
-		low_dimensional_probabilities(Embedding0, QProbabilities, Weights),
-		Iteration is Iteration0 + 1,
-		optimization_phase(Iteration, Options, ProbabilityScale, Momentum),
-		gradient_matrix(Probabilities, QProbabilities, Weights, Embedding0, ProbabilityScale, Gradients),
 		^^option(learning_rate(LearningRate), Options),
-		update_embedding(Embedding0, Gradients, PreviousUpdates0, Gains0, LearningRate, Momentum, Embedding1, PreviousUpdates, Gains, 0.0, Delta),
-		center_embedding(Embedding1, CenteredEmbedding),
+		^^option(early_exaggeration(EarlyScale), Options),
 		^^option(early_exaggeration_iterations(EarlyIterations), Options),
 		^^option(maximum_iterations(MaximumIterations), Options),
 		^^option(tolerance(Tolerance), Options),
+		Configuration = training_config(LearningRate, EarlyScale, EarlyIterations, MaximumIterations, Tolerance),
+		iterate_embedding(Probabilities, Configuration, 0, Embedding0, PreviousUpdates, Gains, Convergence, Iterations, FinalDelta, Embedding).
+
+	iterate_embedding(Probabilities, Configuration, Iteration0, Embedding0, PreviousUpdates0, Gains0, Convergence, Iterations, FinalDelta, Embedding) :-
+		Configuration = training_config(LearningRate, EarlyScale, EarlyIterations, MaximumIterations, Tolerance),
+		low_dimensional_weights(Embedding0, Weights, WeightSum),
+		Iteration is Iteration0 + 1,
+		optimization_phase(Iteration, EarlyIterations, EarlyScale, ProbabilityScale, Momentum),
+		gradient_matrix(Probabilities, Weights, WeightSum, Embedding0, ProbabilityScale, Gradients),
+		update_embedding(Embedding0, Gradients, PreviousUpdates0, Gains0, LearningRate, Momentum, Embedding1, PreviousUpdates, Gains, 0.0, Delta),
+		center_embedding(Embedding1, CenteredEmbedding),
 		(	Iteration > EarlyIterations, Delta =< Tolerance ->
 			Convergence = tolerance,
 			Iterations = Iteration,
@@ -463,59 +579,55 @@
 			Iterations = Iteration,
 			FinalDelta = Delta,
 			Embedding = CenteredEmbedding
-		;	iterate_embedding(Probabilities, Options, Iteration, CenteredEmbedding, PreviousUpdates, Gains, Convergence, Iterations, FinalDelta, Embedding)
+		;	iterate_embedding(Probabilities, Configuration, Iteration, CenteredEmbedding, PreviousUpdates, Gains, Convergence, Iterations, FinalDelta, Embedding)
 		).
 
-	optimization_phase(Iteration, Options, ProbabilityScale, Momentum) :-
-		^^option(early_exaggeration_iterations(EarlyIterations), Options),
+	optimization_phase(Iteration, EarlyIterations, EarlyScale, ProbabilityScale, Momentum) :-
 		(	Iteration =< EarlyIterations ->
-			^^option(early_exaggeration(ProbabilityScale), Options),
+			ProbabilityScale = EarlyScale,
 			Momentum = 0.5
 		;	ProbabilityScale = 1.0,
 			Momentum = 0.8
 		).
 
-	low_dimensional_probabilities(Embedding, Probabilities, Weights) :-
-		low_dimensional_weight_rows(Embedding, Embedding, 1, Weights, 0.0, WeightSum),
-		normalize_matrix(Weights, WeightSum, Probabilities).
+	low_dimensional_weights(Embedding, Weights, WeightSum) :-
+		symmetric_matrix(Embedding, weight, Weights),
+		matrix_sum(Weights, 0.0, WeightSum).
 
-	low_dimensional_weight_rows([], _Embedding, _Index, [], Sum, Sum).
-	low_dimensional_weight_rows([Row| Rows], Embedding, Index, [WeightRow| WeightRows], Sum0, Sum) :-
-		low_dimensional_weight_row(Embedding, Row, Index, 1, WeightRow, Sum0, Sum1),
-		NextIndex is Index + 1,
-		low_dimensional_weight_rows(Rows, Embedding, NextIndex, WeightRows, Sum1, Sum).
+	matrix_sum([], Sum, Sum).
+	matrix_sum([Row| Rows], Sum0, Sum) :-
+		row_sum(Row, Sum0, Sum1),
+		matrix_sum(Rows, Sum1, Sum).
 
-	low_dimensional_weight_row([], _Row, _RowIndex, _ColumnIndex, [], Sum, Sum).
-	low_dimensional_weight_row([OtherRow| Rows], Row, RowIndex, ColumnIndex, [Weight| Weights], Sum0, Sum) :-
-		(	RowIndex =:= ColumnIndex ->
-			Weight = 0.0,
-			Sum1 = Sum0
-		;	squared_distance(Row, OtherRow, 0.0, Distance),
-			Weight is 1.0 / (1.0 + Distance),
-			Sum1 is Sum0 + Weight
-		),
-		NextColumnIndex is ColumnIndex + 1,
-		low_dimensional_weight_row(Rows, Row, RowIndex, NextColumnIndex, Weights, Sum1, Sum).
+	row_sum([], Sum, Sum).
+	row_sum([Value| Values], Sum0, Sum) :-
+		Sum1 is Sum0 + Value,
+		row_sum(Values, Sum1, Sum).
 
-	normalize_matrix([], _Sum, []).
-	normalize_matrix([Row| Rows], Sum, [NormalizedRow| NormalizedRows]) :-
-		normalize_values(Row, Sum, NormalizedRow),
-		normalize_matrix(Rows, Sum, NormalizedRows).
+	gradient_matrix(Probabilities, Weights, WeightSum, Embedding, ProbabilityScale, Gradients) :-
+		transpose_matrix(Embedding, Columns),
+		gradient_rows(Probabilities, Weights, WeightSum, Embedding, Columns, ProbabilityScale, Gradients).
 
-	gradient_matrix(Probabilities, QProbabilities, Weights, Embedding, ProbabilityScale, Gradients) :-
-		gradient_rows(Probabilities, QProbabilities, Weights, Embedding, Embedding, ProbabilityScale, Gradients).
+	gradient_rows([], [], _WeightSum, [], _Columns, _ProbabilityScale, []).
+	gradient_rows([ProbabilityRow| ProbabilityRows], [WeightRow| WeightRows], WeightSum, [Coordinates| CoordinateRows], Columns, ProbabilityScale, [Gradient| Gradients]) :-
+		gradient_coefficients(ProbabilityRow, WeightRow, WeightSum, ProbabilityScale, 4.0, Coefficients),
+		gradient_coordinates(Coordinates, Columns, Coefficients, Gradient),
+		gradient_rows(ProbabilityRows, WeightRows, WeightSum, CoordinateRows, Columns, ProbabilityScale, Gradients).
 
-	gradient_rows([], [], [], [], _Embedding, _ProbabilityScale, []).
-	gradient_rows([ProbabilityRow| ProbabilityRows], [QRow| QRows], [WeightRow| WeightRows], [Coordinates| CoordinateRows], Embedding, ProbabilityScale, [Gradient| Gradients]) :-
-		new_vector_like(Coordinates, ZeroGradient),
-		gradient_row(ProbabilityRow, QRow, WeightRow, Embedding, Coordinates, ProbabilityScale, ZeroGradient, Gradient),
-		gradient_rows(ProbabilityRows, QRows, WeightRows, CoordinateRows, Embedding, ProbabilityScale, Gradients).
+	gradient_coefficients([], [], _WeightSum, _ProbabilityScale, _DerivativeScale, []).
+	gradient_coefficients([Probability| Probabilities], [Weight| Weights], WeightSum, ProbabilityScale, DerivativeScale, [Factor| Factors]) :-
+		Factor is DerivativeScale * (ProbabilityScale * Probability - Weight / WeightSum) * Weight,
+		gradient_coefficients(Probabilities, Weights, WeightSum, ProbabilityScale, DerivativeScale, Factors).
 
-	gradient_row([], [], [], [], _Coordinates, _ProbabilityScale, Gradient, Gradient).
-	gradient_row([Probability| Probabilities], [QProbability| QProbabilities], [Weight| Weights], [OtherCoordinates| OtherRows], Coordinates, ProbabilityScale, Gradient0, Gradient) :-
-		Factor is 4.0 * (ProbabilityScale * Probability - QProbability) * Weight,
-		add_scaled_difference(Coordinates, OtherCoordinates, Factor, Gradient0, Gradient1),
-		gradient_row(Probabilities, QProbabilities, Weights, OtherRows, Coordinates, ProbabilityScale, Gradient1, Gradient).
+	gradient_coordinates([], [], _Coefficients, []).
+	gradient_coordinates([Coordinate| Coordinates], [Column| Columns], Coefficients, [Gradient| Gradients]) :-
+		coordinate_gradient(Column, Coefficients, Coordinate, 0.0, Gradient),
+		gradient_coordinates(Coordinates, Columns, Coefficients, Gradients).
+
+	coordinate_gradient([], [], _Coordinate, Gradient, Gradient).
+	coordinate_gradient([Other| Others], [Factor| Factors], Coordinate, Gradient0, Gradient) :-
+		Gradient1 is Gradient0 + Factor * (Coordinate - Other),
+		coordinate_gradient(Others, Factors, Coordinate, Gradient1, Gradient).
 
 	zero_matrix_like([], []).
 	zero_matrix_like([Row| Rows], [ZeroRow| ZeroRows]) :-
@@ -530,11 +642,6 @@
 	constant_vector([], _Constant, []).
 	constant_vector([_Value| Values], Constant, [Constant| Constants]) :-
 		constant_vector(Values, Constant, Constants).
-
-	add_scaled_difference([], [], _Factor, [], []).
-	add_scaled_difference([Left| Lefts], [Right| Rights], Factor, [Accumulator| Accumulators], [Result| Results]) :-
-		Result is Accumulator + Factor * (Left - Right),
-		add_scaled_difference(Lefts, Rights, Factor, Accumulators, Results).
 
 	update_embedding([], [], [], [], _LearningRate, _Momentum, [], [], [], Delta, Delta).
 	update_embedding([Row| Rows], [Gradient| Gradients], [PreviousUpdate| PreviousUpdates0], [Gain| Gains0], LearningRate, Momentum, [UpdatedRow| UpdatedRows], [Update| Updates], [UpdatedGain| UpdatedGains], Delta0, Delta) :-
@@ -553,39 +660,52 @@
 		Delta1 is max(abs(Update), Delta0),
 		update_row(Coordinates, Gradients, PreviousUpdates, Gains, LearningRate, Momentum, UpdatedCoordinates, Updates, UpdatedGains, Delta1, Delta).
 
-	center_embedding(Embedding, CenteredEmbedding) :-
-		transpose_matrix(Embedding, Columns),
-		center_columns(Columns, CenteredColumns),
-		transpose_matrix(CenteredColumns, CenteredEmbedding).
+	center_embedding([], []).
+	center_embedding([First| Rows], CenteredEmbedding) :-
+		new_vector_like(First, Zero),
+		coordinate_sums([First| Rows], Zero, Sums),
+		length([First| Rows], Count),
+		normalize_values(Sums, Count, Means),
+		center_rows([First| Rows], Means, CenteredEmbedding).
 
-	center_columns([], []).
-	center_columns([Column| Columns], [CenteredColumn| CenteredColumns]) :-
-		arithmetic_mean(Column, Mean),
-		subtract_scalar(Column, Mean, CenteredColumn),
-		center_columns(Columns, CenteredColumns).
+	coordinate_sums([], Sums, Sums).
+	coordinate_sums([Row| Rows], Sums0, Sums) :-
+		add_coordinates(Row, Sums0, Sums1),
+		coordinate_sums(Rows, Sums1, Sums).
 
-	subtract_scalar([], _Scalar, []).
-	subtract_scalar([Value| Values], Scalar, [Result| Results]) :-
-		Result is Value - Scalar,
-		subtract_scalar(Values, Scalar, Results).
+	add_coordinates([], [], []).
+	add_coordinates([Value| Values], [Sum| Sums], [Result| Results]) :-
+		Result is Sum + Value,
+		add_coordinates(Values, Sums, Results).
+
+	center_rows([], _Means, []).
+	center_rows([Row| Rows], Means, [Centered| CenteredRows]) :-
+		subtract_means(Row, Means, Centered),
+		center_rows(Rows, Means, CenteredRows).
+
+	subtract_means([], [], []).
+	subtract_means([Value| Values], [Mean| Means], [Centered| CenteredValues]) :-
+		Centered is Value - Mean,
+		subtract_means(Values, Means, CenteredValues).
 
 	kl_divergence(Probabilities, Embedding, KLDivergence) :-
-		low_dimensional_probabilities(Embedding, QProbabilities, _Weights),
-		kl_rows(Probabilities, QProbabilities, 0.0, KLDivergence).
+		low_dimensional_weights(Embedding, Weights, WeightSum),
+		kl_rows(Probabilities, Weights, WeightSum, 0.0, RawDivergence),
+		KLDivergence is max(0.0, RawDivergence).
 
-	kl_rows([], [], KLDivergence, KLDivergence).
-	kl_rows([ProbabilityRow| ProbabilityRows], [QRow| QRows], KLDivergence0, KLDivergence) :-
-		kl_row(ProbabilityRow, QRow, KLDivergence0, KLDivergence1),
-		kl_rows(ProbabilityRows, QRows, KLDivergence1, KLDivergence).
+	kl_rows([], [], _WeightSum, KLDivergence, KLDivergence).
+	kl_rows([ProbabilityRow| ProbabilityRows], [WeightRow| WeightRows], WeightSum, KLDivergence0, KLDivergence) :-
+		kl_row(ProbabilityRow, WeightRow, WeightSum, KLDivergence0, KLDivergence1),
+		kl_rows(ProbabilityRows, WeightRows, WeightSum, KLDivergence1, KLDivergence).
 
-	kl_row([], [], KLDivergence, KLDivergence).
-	kl_row([Probability| Probabilities], [QProbability| QProbabilities], KLDivergence0, KLDivergence) :-
+	kl_row([], [], _WeightSum, KLDivergence, KLDivergence).
+	kl_row([Probability| Probabilities], [Weight| Weights], WeightSum, KLDivergence0, KLDivergence) :-
 		(	Probability > 0.0 ->
-			SafeQ is max(QProbability, 1.0e-12),
+			SafeQ is max(Weight / WeightSum, 1.0e-12),
 			KLDivergence1 is KLDivergence0 + Probability * log(Probability / SafeQ)
 		;	KLDivergence1 = KLDivergence0
 		),
-		kl_row(Probabilities, QProbabilities, KLDivergence1, KLDivergence).
+		kl_row(Probabilities, Weights, WeightSum, KLDivergence1, KLDivergence).
 
 	weighted_embedding_mean(Probabilities, EmbeddingRows, Mean) :-
 		EmbeddingRows = [FirstRow| _],
@@ -604,27 +724,29 @@
 
 	optimize_new_coordinates(Probabilities, EmbeddingRows, Options, Coordinates0, Coordinates) :-
 		new_vector_like(Coordinates0, PreviousUpdate),
-		iterate_new_coordinates(Probabilities, EmbeddingRows, Options, 0, Coordinates0, PreviousUpdate, Coordinates).
-
-	iterate_new_coordinates(Probabilities, EmbeddingRows, Options, Iteration0, Coordinates0, PreviousUpdate0, Coordinates) :-
-		new_point_gradient(Probabilities, EmbeddingRows, Coordinates0, Gradient),
+		transpose_matrix(EmbeddingRows, Columns),
 		^^option(learning_rate(LearningRate), Options),
-		update_new_coordinates(Coordinates0, Gradient, PreviousUpdate0, LearningRate, 0.5, Coordinates1, PreviousUpdate, 0.0, Delta),
-		Iteration is Iteration0 + 1,
 		^^option(maximum_iterations(MaximumIterations), Options),
 		^^option(tolerance(Tolerance), Options),
+		Configuration = new_point_config(LearningRate, MaximumIterations, Tolerance),
+		iterate_new_coordinates(Probabilities, EmbeddingRows, Columns, Configuration, 0, Coordinates0, PreviousUpdate, Coordinates).
+
+	iterate_new_coordinates(Probabilities, EmbeddingRows, Columns, Configuration, Iteration0, Coordinates0, PreviousUpdate0, Coordinates) :-
+		Configuration = new_point_config(LearningRate, MaximumIterations, Tolerance),
+		new_point_gradient_columns(Probabilities, EmbeddingRows, Columns, Coordinates0, Gradient),
+		update_new_coordinates(Coordinates0, Gradient, PreviousUpdate0, LearningRate, 0.5, Coordinates1, PreviousUpdate, 0.0, Delta),
+		Iteration is Iteration0 + 1,
 		(	Delta =< Tolerance ->
 			Coordinates = Coordinates1
 		;	Iteration >= MaximumIterations ->
 			Coordinates = Coordinates1
-		;	iterate_new_coordinates(Probabilities, EmbeddingRows, Options, Iteration, Coordinates1, PreviousUpdate, Coordinates)
+		;	iterate_new_coordinates(Probabilities, EmbeddingRows, Columns, Configuration, Iteration, Coordinates1, PreviousUpdate, Coordinates)
 		).
 
-	new_point_gradient(Probabilities, EmbeddingRows, Coordinates, Gradient) :-
+	new_point_gradient_columns(Probabilities, EmbeddingRows, Columns, Coordinates, Gradient) :-
 		new_point_weights(EmbeddingRows, Coordinates, Weights, 0.0, WeightSum),
-		normalize_values(Weights, WeightSum, QProbabilities),
-		new_vector_like(Coordinates, ZeroGradient),
-		gradient_row(Probabilities, QProbabilities, Weights, EmbeddingRows, Coordinates, 1.0, ZeroGradient, Gradient).
+		gradient_coefficients(Probabilities, Weights, WeightSum, 1.0, 2.0, Coefficients),
+		gradient_coordinates(Coordinates, Columns, Coefficients, Gradient).
 
 	new_point_weights([], _Coordinates, [], Sum, Sum).
 	new_point_weights([Row| Rows], Coordinates, [Weight| Weights], Sum0, Sum) :-
@@ -646,7 +768,7 @@
 		NextIndex is Index + 1,
 		coordinate_pairs(Coordinates, NextIndex, Pairs).
 
-	build_diagnostics(AttributeNames, SampleCount, ComponentCount, Options, Convergence, Iterations, FinalDelta, InitialKLDivergence, FinalKLDivergence, Diagnostics) :-
+	build_diagnostics(AttributeNames, SampleCount, ComponentCount, Options, Convergence, Iterations, FinalDelta, InitialKLDivergence, FinalKLDivergence, AffinitySearch, Diagnostics) :-
 		length(AttributeNames, FeatureCount),
 		^^option(feature_scaling(FeatureScaling), Options),
 		Preprocessing = [center(true), feature_scaling(FeatureScaling), missing_values(mean_imputation)],
@@ -662,18 +784,21 @@
 			final_delta(FinalDelta),
 			initial_kl_divergence(InitialKLDivergence),
 			final_kl_divergence(FinalKLDivergence),
+			AffinitySearch,
 			preprocessing(Preprocessing)
 		].
 
 	valid_example_ids(ExampleIds) :-
 		valid(list, ExampleIds),
-		valid_example_ids(ExampleIds, []).
+		avltree::new(SeenIds),
+		valid_example_ids(ExampleIds, SeenIds).
 
 	valid_example_ids([], _SeenIds).
 	valid_example_ids([Id| Ids], SeenIds) :-
 		ground(Id),
-		\+ member(Id, SeenIds),
-		valid_example_ids(Ids, [Id| SeenIds]).
+		\+ avltree::lookup(Id, _, SeenIds),
+		avltree::insert(SeenIds, Id, true, UpdatedIds),
+		valid_example_ids(Ids, UpdatedIds).
 
 	valid_numeric_rows(Rows, Width, RowCount) :-
 		valid(list, Rows),
@@ -687,6 +812,22 @@
 
 	valid_tsne_diagnostics(Diagnostics, FeatureCount, SampleCount, ComponentCount) :-
 		^^valid_dimension_reducer_metadata(Diagnostics),
+		memberchk(options(Options), Diagnostics),
+		forall(
+			default_option(Default),
+			(	functor(Default, Name, Arity),
+				functor(Required, Name, Arity),
+				^^option(Required, Options)
+			)
+		),
+		^^option(n_components(ComponentCount), Options),
+		ComponentCount =< FeatureCount,
+		ComponentCount < SampleCount,
+		^^option(early_exaggeration_iterations(EarlyIterations), Options),
+		^^option(maximum_iterations(MaximumIterations), Options),
+		EarlyIterations =< MaximumIterations,
+		^^option(perplexity(Perplexity), Options),
+		Perplexity =< SampleCount - 1,
 		memberchk(model(tsne_projection), Diagnostics),
 		memberchk(feature_count(FeatureCount), Diagnostics),
 		memberchk(sample_count(SampleCount), Diagnostics),
@@ -698,14 +839,27 @@
 		)),
 		memberchk(iterations(Iterations), Diagnostics),
 		valid(positive_integer, Iterations),
+		Iterations =< MaximumIterations,
 		memberchk(final_delta(FinalDelta), Diagnostics),
 		valid(non_negative_number, FinalDelta),
 		memberchk(initial_kl_divergence(InitialKLDivergence), Diagnostics),
 		valid(non_negative_number, InitialKLDivergence),
 		memberchk(final_kl_divergence(FinalKLDivergence), Diagnostics),
 		valid(non_negative_number, FinalKLDivergence),
+		memberchk(affinity_search(summary(Matched, Tied, Limited), achieved_perplexity_range(Minimum, Maximum)), Diagnostics),
+		valid(non_negative_integer, Matched),
+		valid(non_negative_integer, Tied),
+		valid(non_negative_integer, Limited),
+		SampleCount =:= Matched + Tied + Limited,
+		valid(positive_number, Minimum),
+		valid(positive_number, Maximum),
+		Minimum >= 1.0,
+		Minimum =< Maximum,
+		Maximum =< SampleCount - 1,
 		memberchk(preprocessing([center(true), feature_scaling(FeatureScaling), missing_values(mean_imputation)]), Diagnostics),
-		valid(boolean, FeatureScaling).
+		^^option(feature_scaling(FeatureScaling), Options),
+		memberchk(attribute_names(AttributeNames), Diagnostics),
+		valid(list(atom, FeatureCount), AttributeNames).
 
 	default_option(n_components(2)).
 	default_option(feature_scaling(true)).
@@ -722,7 +876,8 @@
 	valid_option(feature_scaling(FeatureScaling)) :-
 		valid(boolean, FeatureScaling).
 	valid_option(perplexity(Perplexity)) :-
-		valid(positive_float, Perplexity).
+		valid(positive_float, Perplexity),
+		Perplexity >= 1.0.
 	valid_option(learning_rate(LearningRate)) :-
 		valid(positive_float, LearningRate).
 	valid_option(early_exaggeration(EarlyExaggeration)) :-
@@ -735,5 +890,11 @@
 		valid(positive_float, Tolerance).
 	valid_option(random_seed(RandomSeed)) :-
 		valid(positive_integer, RandomSeed).
+
+	:- multifile(logtalk::message_tokens//2).
+	:- dynamic(logtalk::message_tokens//2).
+
+	logtalk::message_tokens(perplexity_mismatch(Requested, Achieved, Status), tsne_projection) -->
+		['Requested perplexity ~w; achieved ~w (~w).'-[Requested, Achieved, Status], nl].
 
 :- end_object.

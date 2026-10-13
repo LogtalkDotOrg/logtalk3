@@ -14,8 +14,8 @@ Exact t-distributed Stochastic Neighbor Embedding dimension reducer for continuo
 |    ``logtalk_load(tsne_projection(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:0
-| **Date:** 2026-09-28
+| **Version:** 2:0:0
+| **Date:** 2026-10-13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -23,11 +23,15 @@ Exact t-distributed Stochastic Neighbor Embedding dimension reducer for continuo
 
 | **Imports:**
 |    ``public`` :ref:`dimension_reducer_common <dimension_reducer_common/0>`
+| **Provides:**
+|    :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
 | **Uses:**
+|    :ref:`avltree <avltree/0>`
 |    :ref:`fast_random(Algorithm) <fast_random/1>`
 |    :ref:`format <format/0>`
 |    :ref:`linear_algebra <linear_algebra/0>`
 |    :ref:`list <list/0>`
+|    :ref:`logtalk <logtalk/0>`
 |    :ref:`pairs <pairs/0>`
 |    :ref:`population <population/0>`
 |    :ref:`type <type/0>`

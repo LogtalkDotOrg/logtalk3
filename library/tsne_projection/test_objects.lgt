@@ -59,6 +59,36 @@
 :- end_object.
 
 
+:- object(variable_id_tsne_dataset,
+	implements(dimension_reduction_dataset_protocol)).
+
+	attribute_values(x, continuous).
+	example(_, [x-0.0]).
+	example(b, [x-1.0]).
+
+:- end_object.
+
+
+:- object(partial_id_tsne_dataset,
+	implements(dimension_reduction_dataset_protocol)).
+
+	attribute_values(x, continuous).
+	example(id(_), [x-0.0]).
+	example(b, [x-1.0]).
+
+:- end_object.
+
+
+:- object(two_points_tsne_dataset,
+	implements(dimension_reduction_dataset_protocol)).
+
+	attribute_values(x, continuous).
+	example(id(a), [x-0.0]).
+	example(id(b), [x-1.0]).
+
+:- end_object.
+
+
 :- object(all_missing_attribute_tsne_dataset,
 	implements(dimension_reduction_dataset_protocol)).
 
@@ -87,6 +117,17 @@
 :- end_object.
 
 
+:- object(tied_points_tsne_dataset,
+	implements(dimension_reduction_dataset_protocol)).
+
+	attribute_values(x, continuous).
+	example(a, [x-1.0]).
+	example(b, [x-1.0]).
+	example(c, [x-1.0]).
+
+:- end_object.
+
+
 :- object(omitted_attribute_tsne_dataset,
 	implements(dimension_reduction_dataset_protocol)).
 
@@ -95,5 +136,41 @@
 
 	example(1, [x-1.0]).
 	example(2, [x-2.0, y-2.0]).
+
+:- end_object.
+
+
+:- object(duplicate_attribute_tsne_dataset,
+	implements(dimension_reduction_dataset_protocol)).
+
+	attribute_values(x, continuous).
+	attribute_values(y, continuous).
+
+	example(a, [x-invalid, x-2.0, z-3.0]).
+	example(b, [x-2.0, y-2.0]).
+
+:- end_object.
+
+
+:- object(undeclared_attribute_tsne_dataset,
+	implements(dimension_reduction_dataset_protocol)).
+
+	attribute_values(x, continuous).
+	attribute_values(y, continuous).
+
+	example(a, [x-invalid, y-2.0, z-3.0]).
+	example(b, [x-2.0, y-2.0]).
+
+:- end_object.
+
+
+:- object(single_observed_tsne_dataset,
+	implements(dimension_reduction_dataset_protocol)).
+
+	attribute_values(x, continuous).
+
+	example(a, [x-8.0]).
+	example(b, [x-_]).
+	example(c, [x-_]).
 
 :- end_object.

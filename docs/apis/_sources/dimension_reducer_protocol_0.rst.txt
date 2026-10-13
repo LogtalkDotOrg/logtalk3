@@ -112,9 +112,9 @@ Checks that a learned dimension reducer term is structurally valid for the recei
 |    ``check_dimension_reducer(@compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``DimensionReducer`` is a variable:
+|    ``DimensionReducer`` is insufficiently instantiated for the receiving implementation:
 |        ``instantiation_error``
-|    ``DimensionReducer`` is neither a variable nor a valid dimension reducer:
+|    ``DimensionReducer`` is sufficiently instantiated but is not a valid dimension reducer:
 |        ``domain_error(dimension_reducer,DimensionReducer)``
 
 

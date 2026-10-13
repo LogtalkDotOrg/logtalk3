@@ -375,10 +375,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#dimension-reducer-representation">Dimension reducer representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#complexity-and-benchmarks">Complexity and benchmarks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
@@ -470,7 +471,8 @@ link in a web browser.</p>
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Accepts datasets containing only continuous attributes.</p></li>
-<li><p>Computes exact perplexity-matched Gaussian affinities.</p></li>
+<li><p>Computes exact Gaussian affinities with reported perplexity matching
+outcomes.</p></li>
 <li><p>Uses exact Student-t affinities and full-batch gradient optimization.</p></li>
 <li><p>Supports early exaggeration, momentum, and adaptive coordinate gains.</p></li>
 <li><p>Provides reproducible Gaussian initialization without changing caller
@@ -482,56 +484,32 @@ imputation.</p></li>
 fixed training embedding.</p></li>
 </ul>
 </section>
-<section id="limitations">
-<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>The implementation computes all pairwise affinities exactly and
-therefore requires quadratic time and memory in the number of training
-examples. It is intended for small and medium datasets.</p></li>
-<li><p>Barnes-Hut, FFT-based interpolation, approximate nearest-neighbor
-search, sparse affinities, and backend-specific numerical acceleration
-are not currently implemented.</p></li>
-<li><p>Training is a non-convex optimization. Different random seeds can
-produce different valid embeddings, and convergence does not guarantee
-a global optimum. Using the same seed and options produces a
-reproducible embedding.</p></li>
-<li><p>Coordinate values, axis order, orientation, and scale have no
-standalone meaning. Interpret local neighborhoods instead of comparing
-coordinate signs or expecting global distances and densities to be
-preserved.</p></li>
-<li><p>t-SNE does not learn a parametric projection function. <code class="docutils literal notranslate"><span class="pre">transform/3</span></code>
-independently optimizes each new point against the fixed training
-embedding and is only an approximation; it does not update existing
-coordinates or model interactions among multiple new points.</p></li>
-<li><p>No inverse transformation from embedding coordinates to original
-attributes is provided.</p></li>
-<li><p>Categorical attributes are not supported.</p></li>
-<li><p>Missing continuous values must be represented by variables in present
-<code class="docutils literal notranslate"><span class="pre">Attribute-Value</span></code> bindings. Omitted, duplicate, or undeclared
-bindings are rejected, as are attributes with no observed training
-values.</p></li>
-</ul>
-</section>
 <section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">n_components/1</span></code>: Embedding dimensions. The default is <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_components/1</span></code>: Positive integer embedding dimensions, no greater
+than the feature count and less than the sample count. The default is
+<code class="docutils literal notranslate"><span class="pre">2</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">feature_scaling/1</span></code>: Standardize continuous attributes when
 <code class="docutils literal notranslate"><span class="pre">true</span></code>. The default is <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">perplexity/1</span></code>: Positive float strictly smaller than the sample
-count. The default is <code class="docutils literal notranslate"><span class="pre">5.0</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">learning_rate/1</span></code>: Positive optimization learning rate. The default
-is <code class="docutils literal notranslate"><span class="pre">200.0</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">early_exaggeration/1</span></code>: Positive affinity multiplier used during the
-initial optimization phase. The default is <code class="docutils literal notranslate"><span class="pre">12.0</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">early_exaggeration_iterations/1</span></code>: Non-negative number of initial
-exaggerated iterations. The default is <code class="docutils literal notranslate"><span class="pre">250</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">maximum_iterations/1</span></code>: Positive optimization iteration limit. The
-default is <code class="docutils literal notranslate"><span class="pre">1000</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tolerance/1</span></code>: Positive stopping tolerance for the maximum
-coordinate update. The default is <code class="docutils literal notranslate"><span class="pre">1.0e-7</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">random_seed/1</span></code>: Positive seed for reproducible initialization. The
-default is <code class="docutils literal notranslate"><span class="pre">1357911</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">perplexity/1</span></code>: Float between <code class="docutils literal notranslate"><span class="pre">1.0</span></code> and the sample count minus
+one, inclusive. The default is <code class="docutils literal notranslate"><span class="pre">5.0</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">learning_rate/1</span></code>: Positive float optimization learning rate. The
+default is <code class="docutils literal notranslate"><span class="pre">200.0</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">early_exaggeration/1</span></code>: Positive float affinity multiplier used
+during the initial training optimization phase. The default is
+<code class="docutils literal notranslate"><span class="pre">12.0</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">early_exaggeration_iterations/1</span></code>: Non-negative integer number of
+initial exaggerated iterations, no greater than the maximum iteration
+count. The default is <code class="docutils literal notranslate"><span class="pre">250</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">maximum_iterations/1</span></code>: Positive integer optimization iteration
+limit. The default is <code class="docutils literal notranslate"><span class="pre">1000</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tolerance/1</span></code>: Positive float stopping tolerance for the maximum raw
+coordinate update before centering. Training tolerance stopping is
+enabled only after the early exaggeration phase. The default is
+<code class="docutils literal notranslate"><span class="pre">1.0e-7</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">random_seed/1</span></code>: Positive integer seed for reproducible
+initialization. The default is <code class="docutils literal notranslate"><span class="pre">1357911</span></code>.</p></li>
 </ul>
 </section>
 <section id="usage">
@@ -551,9 +529,12 @@ imputing the observed training mean:</p>
 </pre></div>
 </div>
 <p>The out-of-sample transformation is an approximate independent
-extension. Transforming several new instances separately is not
-equivalent to jointly refitting t-SNE with those instances included in
-the training dataset.</p>
+extension. It minimizes conditional KL divergence against the fixed
+embedding. Its conditional gradient uses a factor of two, while the
+symmetric training objective uses a factor of four; both use the
+configured learning rate. Transforming several new instances separately
+is not equivalent to jointly refitting t-SNE with those instances
+included in the training dataset.</p>
 </section>
 <section id="dimension-reducer-representation">
 <h2>Dimension reducer representation<a class="headerlink" href="#dimension-reducer-representation" title="Link to this heading"></a></h2>
@@ -561,11 +542,108 @@ the training dataset.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>tsne_reducer(<span class="nv">Encoders</span>, <span class="nv">ExampleIds</span>, <span class="nv">TrainingRows</span>, <span class="nv">EmbeddingRows</span>, <span class="nv">Diagnostics</span>)
 </pre></div>
 </div>
+<p>Example identifiers must be ground and distinct. Insufficiently
+instantiated identifiers or reducer terms raise an instantiation error.
+Reducer validation requires complete effective training options and
+diagnostics consistent with the stored dimensions, iteration count, and
+preprocessing. Repeated options are accepted; the first occurrence
+determines the effective value.</p>
 <p>The reducer stores encoded training rows because t-SNE does not learn a
 linear projection matrix. Diagnostics include convergence information
 and the initial and final unexaggerated Kullback-Leibler divergences.
 The preprocessing diagnostics include
 <code class="docutils literal notranslate"><span class="pre">missing_values(mean_imputation)</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code> and <code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code> predicates return the
+affinity-search summary and achieved training perplexity range using
+this term:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>affinity_search(
+    summary(<span class="nv">MatchedCount</span>, <span class="nv">TieLimitedCount</span>, <span class="nv">IterationLimitCount</span>),
+    achieved_perplexity_range(<span class="nv">Minimum</span>, <span class="nv">Maximum</span>)
+)
+</pre></div>
+</div>
+<p>The counts sum to the number of training examples. Tied nearest
+distances can make a requested perplexity unattainable; the limiting
+distribution is then used and reported as tie-limited. A precision
+search that reaches its bounded iteration budget is reported separately.
+New instances use all training points as their eligible neighbors. The
+<code class="docutils literal notranslate"><span class="pre">transform/3</span></code> predicate emits one structured warning when its achieved
+perplexity does not match the request, while still returning best-effort
+coordinates.</p>
+</section>
+<section id="complexity-and-benchmarks">
+<h2>Complexity and benchmarks<a class="headerlink" href="#complexity-and-benchmarks" title="Link to this heading"></a></h2>
+<p>Let <code class="docutils literal notranslate"><span class="pre">n</span></code> be the number of training examples, <code class="docutils literal notranslate"><span class="pre">d</span></code> the number of
+original attributes, <code class="docutils literal notranslate"><span class="pre">m</span></code> the number of embedding coordinates, <code class="docutils literal notranslate"><span class="pre">B</span></code>
+the bounded number of Gaussian precision-search steps, and <code class="docutils literal notranslate"><span class="pre">T</span></code> the
+optimizer iteration count. The numerical training work is
+<code class="docutils literal notranslate"><span class="pre">O(n^2*d</span> <span class="pre">+</span> <span class="pre">B*n^2</span> <span class="pre">+</span> <span class="pre">T*n^2*m)</span></code> and memory is <code class="docutils literal notranslate"><span class="pre">O(n^2</span> <span class="pre">+</span> <span class="pre">n*(d+m))</span></code>.
+Indexed input preparation adds <code class="docutils literal notranslate"><span class="pre">O(n*d*log(d)</span> <span class="pre">+</span> <span class="pre">n*log(n))</span></code> work,
+excluding identifier term-comparison costs. These remain exact dense
+methods, not sparse or approximate algorithms.</p>
+<p>Probability symmetrization traverses the conditional matrix and its
+transpose in quadratic time. Distances and Student-t weights reuse
+symmetric pairs. Gradients and KL diagnostics consume weights and their
+normalization sum without materializing a normalized probability matrix.
+Gaussian search reuses shifted distances and normalizes only its
+terminal weights. Attribute values are validated and aligned once during
+training; AVL indexes check identifiers and binding occurrences.
+Centering uses row-wise sums and subtraction, and optimizer settings are
+resolved once before iteration.</p>
+<p>The numerical work for one new point is <code class="docutils literal notranslate"><span class="pre">O(n*d</span> <span class="pre">+</span> <span class="pre">B*n</span> <span class="pre">+</span> <span class="pre">T*n*m)</span></code>. Each
+public transformation also validates the complete stored reducer,
+including <code class="docutils literal notranslate"><span class="pre">O(n*log(n))</span></code> identifier checks and <code class="docutils literal notranslate"><span class="pre">O(n*(d+m))</span></code>
+stored-row checks, excluding identifier term-comparison costs. The fixed
+embedding columns are prepared once for the new-point optimizer.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">tsne_projection_benchmarks::run/0</span></code> predicate prints median CPU
+and wall times from five measurements after one warm-up. Load the
+optimized library and benchmark dependencies before running it:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(tsne_projection(loader)),
+     <span class="k">logtalk_load</span>(os(loader)),
+     <span class="k">logtalk_load</span>(dimension_reduction_protocols(<span class="s">&#39;test_datasets/correlated_plane&#39;</span>)),
+     <span class="k">logtalk_load</span>(tsne_projection(test_benchmarks_objects), [optimize(on)]),
+     tsne_projection_benchmarks<span class="o">::</span>run.
+</pre></div>
+</div>
+<p>Fixed workloads cover 100-example affinity matrices, gradients and
+centering, 100-by-50 preprocessing, 1,000-identifier validation,
+1,000-by-20 centering, optimizer option dispatch, eight-example
+training, and repeated transformations. The wider centering, larger
+identifier, and option-dispatch workloads include benchmark-only
+reference methods. Timings are informative measurements, not unit-test
+thresholds; instrumented test timings are not production benchmarks.</p>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The implementation computes all pairwise affinities exactly and
+therefore requires quadratic time and memory in the number of training
+examples. It is intended for small and medium datasets.</p></li>
+<li><p>Barnes-Hut, FFT-based interpolation, approximate nearest-neighbor
+search, sparse affinities, and backend-specific numerical acceleration
+are not currently implemented.</p></li>
+<li><p>Training is a non-convex optimization. Different random seeds can
+produce different valid embeddings, and convergence does not guarantee
+a global optimum. Using the same seed and options with the same
+implementation and backend produces a reproducible embedding.
+Floating-point operation reordering can change embeddings between
+implementations.</p></li>
+<li><p>Coordinate values, axis order, orientation, and scale have no
+standalone meaning. Interpret local neighborhoods instead of comparing
+coordinate signs or expecting global distances and densities to be
+preserved.</p></li>
+<li><p>t-SNE does not learn a parametric projection function. <code class="docutils literal notranslate"><span class="pre">transform/3</span></code>
+independently optimizes each new point against the fixed training
+embedding and is only an approximation; it does not update existing
+coordinates or model interactions among multiple new points.</p></li>
+<li><p>No inverse transformation from embedding coordinates to original
+attributes is provided.</p></li>
+<li><p>Categorical attributes are not supported.</p></li>
+<li><p>Missing continuous values must be represented by variables in present
+<code class="docutils literal notranslate"><span class="pre">Attribute-Value</span></code> bindings. Omitted, duplicate, or undeclared
+bindings are rejected, as are attributes with no observed training
+values.</p></li>
+</ul>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
