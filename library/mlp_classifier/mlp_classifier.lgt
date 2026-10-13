@@ -23,9 +23,9 @@
 	imports(probabilistic_classifier_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-19,
+		date is 2026-10-13,
 		comment is 'Multi-layer perceptron classifier with configurable hidden layers and activation function, softmax output, and backpropagation training.',
 		see_also is [dataset_protocol, logistic_regression_classifier, sgd_classifier]
 	]).
@@ -39,11 +39,11 @@
 	]).
 
 	:- uses(linear_algebra, [
-		matrix_vector_product/3, new_vector/3, new_vector_like/2, outer_product/3, transpose_matrix/2
+		dot_product/3, new_vector/3, new_vector_like/2
 	]).
 
 	:- uses(list, [
-		append/3, length/2, member/2, memberchk/2
+		append/3, length/2, member/2, memberchk/2, nth1/3
 	]).
 
 	:- uses(type, [
@@ -62,6 +62,7 @@
 		^^option(feature_scaling(FeatureScaling), Options),
 		^^build_linear_encoders(Attributes, Examples, FeatureScaling, Encoders),
 		^^examples_to_linear_rows(Examples, Encoders, Rows),
+		prepare_training_rows(Rows, Classes, ClassWeights, TrainingRows),
 		^^linear_encoders_feature_count(Encoders, FeatureCount),
 		length(Classes, ClassCount),
 		^^option(hidden_layers(HiddenLayers), Options),
@@ -70,8 +71,13 @@
 		randomize(RandomSeed),
 		append([FeatureCount| HiddenLayers], [ClassCount], LayerSizes),
 		initialize_layers(LayerSizes, Activation, Layers0),
-		initialize_velocities(Layers0, Velocities0),
-		optimize(Rows, Classes, Activation, Options, 0, none, Layers0, Velocities0, Layers, Iterations),
+		training_configuration(Options, Configuration),
+		Configuration = training(_, _, _, _, _, _, _, Momentum),
+		(	Momentum =:= 0 ->
+			Velocities0 = none
+		;	initialize_velocities(Layers0, Velocities0)
+		),
+		optimize(TrainingRows, Activation, Configuration, 0, none, Layers0, Velocities0, Layers, Iterations),
 		Diagnostics = [
 			model(mlp_classifier),
 			classes(Classes),
@@ -86,9 +92,10 @@
 	predict(Classifier, Instance, Class) :-
 		^^predict_from_probabilities(Classifier, Instance, Class).
 
-	predict_probabilities(mlp_classifier(Classes, Encoders, Activation, Layers, _Diagnostics), Instance, Probabilities) :-
+	predict_probabilities(Classifier, Instance, Probabilities) :-
+		classifier_data(Classifier, Classes, Encoders, Activation, Layers, _Diagnostics),
 		^^encode_linear_instance(Encoders, Instance, Features),
-		forward(Layers, Activation, Features, _Inputs, Output),
+		forward_only(Layers, Activation, Features, Output),
 		softmax(Output, Values),
 		pair_probabilities(Classes, Values, Probabilities).
 
@@ -100,6 +107,8 @@
 		new_vector(OutputSize, 0.0, Biases),
 		initialize_layers([OutputSize| Sizes], Activation, Layers).
 
+	initialization_scale(_Activation, 0, 0.0) :-
+		!.
 	initialization_scale(relu, InputSize, Scale) :-
 		Scale is sqrt(2.0 / InputSize).
 	initialization_scale(tanh, InputSize, Scale) :-
@@ -134,33 +143,45 @@
 		new_vector_like(Row, ZeroRow),
 		zero_matrix_like(Rows, ZeroRows).
 
-	optimize(Rows, Classes, Activation, Options, Epoch, PreviousLoss, Layers0, Velocities0, Layers, Iterations) :-
+	training_configuration(Options, training(MaximumIterations, Criterion, Tolerance, Rate, Schedule, Shuffle, Regularization, Momentum)) :-
 		^^option(maximum_iterations(MaximumIterations), Options),
+		^^option(convergence_criterion(Criterion), Options),
+		^^option(tolerance(Tolerance), Options),
+		^^option(learning_rate(Rate), Options),
+		^^option(learning_schedule(Schedule), Options),
+		^^option(shuffle(Shuffle), Options),
+		^^option(l2_regularization(Regularization), Options),
+		^^option(momentum(Momentum), Options).
+
+	optimize(Rows, Activation, Configuration, Epoch, PreviousLoss, Layers0, Velocities0, Layers, Iterations) :-
+		Configuration = training(MaximumIterations, Criterion, Tolerance, Rate, Schedule, Shuffle, Regularization, Momentum),
 		(	Epoch >= MaximumIterations ->
 			Layers = Layers0,
 			Iterations = Epoch
-		;	learning_rate(Options, Epoch, Step),
-			training_rows(Options, Rows, EpochRows),
-			train_epoch(EpochRows, Classes, Activation, Options, Step, Layers0, Velocities0, Layers1, Velocities1, 0.0, MaxDelta),
+		;	learning_rate(Rate, Schedule, Epoch, Step),
+			training_rows(Shuffle, Rows, EpochRows),
+			(	Criterion == loss ->
+				InitialDelta = none
+			;	InitialDelta = 0.0
+			),
+			train_epoch(EpochRows, Activation, Step, Regularization, Momentum, Layers0, Velocities0, Layers1, Velocities1, InitialDelta, MaxDelta),
 			NextEpoch is Epoch + 1,
-			convergence_status(Options, Rows, Classes, Activation, Layers1, PreviousLoss, MaxDelta, LossState, Converged),
+			convergence_status(Criterion, Tolerance, Rows, Activation, Layers1, PreviousLoss, MaxDelta, LossState, Converged),
 			(	Converged == true ->
 				Layers = Layers1,
 				Iterations = NextEpoch
-			;	optimize(Rows, Classes, Activation, Options, NextEpoch, LossState, Layers1, Velocities1, Layers, Iterations)
+			;	optimize(Rows, Activation, Configuration, NextEpoch, LossState, Layers1, Velocities1, Layers, Iterations)
 			)
 		).
 
-	convergence_status(Options, Rows, Classes, Activation, Layers, PreviousLoss, MaxDelta, LossState, Converged) :-
-		^^option(convergence_criterion(Criterion), Options),
-		^^option(tolerance(Tolerance), Options),
+	convergence_status(Criterion, Tolerance, Rows, Activation, Layers, PreviousLoss, MaxDelta, LossState, Converged) :-
 		(	Criterion == parameter_update ->
 			LossState = none,
 			(	MaxDelta =< Tolerance ->
 				Converged = true
 			;	Converged = false
 			)
-		;	mean_loss(Rows, Classes, Activation, Options, Layers, Loss),
+		;	mean_loss(Rows, Activation, Layers, Loss),
 			LossState = loss(Loss),
 			(	PreviousLoss = loss(PreviousLossValue) ->
 				Difference is abs(PreviousLossValue - Loss),
@@ -172,55 +193,65 @@
 			)
 		).
 
-	mean_loss(Rows, Classes, Activation, Options, Layers, Loss) :-
-		mean_loss(Rows, Classes, Activation, Options, Layers, 0.0, TotalLoss),
+	mean_loss(Rows, Activation, Layers, Loss) :-
+		mean_loss(Rows, Activation, Layers, 0.0, TotalLoss),
 		length(Rows, Count),
 		Loss is TotalLoss / Count.
 
-	mean_loss([], _Classes, _Activation, _Options, _Layers, TotalLoss, TotalLoss).
-	mean_loss([Features-Label| Rows], Classes, Activation, Options, Layers, TotalLoss0, TotalLoss) :-
-		forward(Layers, Activation, Features, _Inputs, Output),
-		softmax(Output, Probabilities),
-		class_probability(Classes, Label, Probabilities, Probability),
-		class_weight(Options, Label, ClassWeight),
-		SafeProbability is max(Probability, 1.0e-15),
-		TotalLoss1 is TotalLoss0 - ClassWeight * log(SafeProbability),
-		mean_loss(Rows, Classes, Activation, Options, Layers, TotalLoss1, TotalLoss).
+	mean_loss([], _Activation, _Layers, TotalLoss, TotalLoss).
+	mean_loss([row(Features, Index, ClassWeight)| Rows], Activation, Layers, TotalLoss0, TotalLoss) :-
+		forward_only(Layers, Activation, Features, Output),
+		nth1(Index, Output, TargetLogit),
+		Output = [First| Rest],
+		maximum(Rest, First, Maximum),
+		exponential_sum(Output, Maximum, 0.0, Sum),
+		TotalLoss1 is TotalLoss0 + ClassWeight * ((Maximum - TargetLogit) + log(Sum)),
+		mean_loss(Rows, Activation, Layers, TotalLoss1, TotalLoss).
 
-	class_probability([Class| _Classes], Label, [Probability| _Probabilities], Probability) :-
+	exponential_sum([], _Maximum, Sum, Sum).
+	exponential_sum([Value| Values], Maximum, Sum0, Sum) :-
+		Sum1 is Sum0 + exp(Value - Maximum),
+		exponential_sum(Values, Maximum, Sum1, Sum).
+
+	prepare_training_rows([], _Classes, _ClassWeights, []).
+	prepare_training_rows([Features-Label| Rows], Classes, ClassWeights, [row(Features, Index, Weight)| Prepared]) :-
+		class_index(Label, Classes, Index),
+		row_class_weight(ClassWeights, Label, Weight),
+		prepare_training_rows(Rows, Classes, ClassWeights, Prepared).
+
+	class_index(Label, [Class| _], 1) :-
 		Class == Label,
 		!.
-	class_probability([_Class| Classes], Label, [_Probability| Probabilities], Probability) :-
-		class_probability(Classes, Label, Probabilities, Probability).
+	class_index(Label, [_| Classes], Index) :-
+		class_index(Label, Classes, Previous),
+		Index is Previous + 1.
 
-	training_rows(Options, Rows, EpochRows) :-
-		^^option(shuffle(Shuffle), Options),
+	training_rows(Shuffle, Rows, EpochRows) :-
 		(	Shuffle == true ->
 			permutation(Rows, EpochRows)
 		;	EpochRows = Rows
 		).
 
-	learning_rate(Options, Epoch, Step) :-
-		^^option(learning_rate(Rate), Options),
-		^^option(learning_schedule(Schedule), Options),
+	learning_rate(Rate, Schedule, Epoch, Step) :-
 		(	Schedule == constant ->
 			Step = Rate
 		;	Schedule = inverse_scaling(Power),
 			Step is Rate / ((Epoch + 1.0) ** Power)
 		).
 
-	train_epoch([], _Classes, _Activation, _Options, _Step, Layers, Velocities, Layers, Velocities, MaxDelta, MaxDelta).
-	train_epoch([Features-Label| Rows], Classes, Activation, Options, Step, Layers0, Velocities0, Layers, Velocities, MaxDelta0, MaxDelta) :-
+	train_epoch([], _Activation, _Step, _Regularization, _Momentum, Layers, Velocities, Layers, Velocities, MaxDelta, MaxDelta).
+	train_epoch([row(Features, Index, ClassWeight)| Rows], Activation, Step, Regularization, Momentum, Layers0, Velocities0, Layers, Velocities, MaxDelta0, MaxDelta) :-
 		forward(Layers0, Activation, Features, Inputs, Output),
 		softmax(Output, Probabilities),
-		class_weight(Options, Label, ClassWeight),
-		output_delta(Classes, Label, Probabilities, ClassWeight, OutputDelta),
+		output_delta(Index, Probabilities, ClassWeight, OutputDelta),
 		layer_deltas(Layers0, Activation, Inputs, OutputDelta, Deltas),
-		^^option(l2_regularization(Regularization), Options),
-		^^option(momentum(Momentum), Options),
-		update_layers(Layers0, Velocities0, Inputs, Deltas, Step, Regularization, Momentum, Layers1, Velocities1, 0.0, RowDelta),
-		MaxDelta1 is max(MaxDelta0, RowDelta),
-		train_epoch(Rows, Classes, Activation, Options, Step, Layers1, Velocities1, Layers, Velocities, MaxDelta1, MaxDelta).
+		(	MaxDelta0 == none ->
+			update_layers(Layers0, Velocities0, Inputs, Deltas, Step, Regularization, Momentum, Layers1, Velocities1, none, none),
+			MaxDelta1 = none
+		;	update_layers(Layers0, Velocities0, Inputs, Deltas, Step, Regularization, Momentum, Layers1, Velocities1, 0.0, RowDelta),
+			MaxDelta1 is max(MaxDelta0, RowDelta)
+		),
+		train_epoch(Rows, Activation, Step, Regularization, Momentum, Layers1, Velocities1, Layers, Velocities, MaxDelta1, MaxDelta).
 
 	forward([layer(Weights, Biases)], _Activation, Input, [Input], Output) :-
 		!,
@@ -230,14 +261,19 @@
 		activate_vector(Linear, Activation, Activated),
 		forward(Layers, Activation, Activated, Inputs, Output).
 
-	linear_output(Weights, Biases, Input, Output) :-
-		matrix_vector_product(Weights, Input, Products),
-		add_vectors(Products, Biases, Output).
+	forward_only([layer(Weights, Biases)], _Activation, Input, Output) :-
+		!,
+		linear_output(Weights, Biases, Input, Output).
+	forward_only([layer(Weights, Biases)| Layers], Activation, Input, Output) :-
+		linear_output(Weights, Biases, Input, Linear),
+		activate_vector(Linear, Activation, Activated),
+		forward_only(Layers, Activation, Activated, Output).
 
-	add_vectors([], [], []).
-	add_vectors([Value1| Values1], [Value2| Values2], [Value| Values]) :-
-		Value is Value1 + Value2,
-		add_vectors(Values1, Values2, Values).
+	linear_output([], [], _Input, []).
+	linear_output([Row| Rows], [Bias| Biases], Input, [Value| Values]) :-
+		dot_product(Row, Input, Product),
+		Value is Product + Bias,
+		linear_output(Rows, Biases, Input, Values).
 
 	activate_vector([], _Activation, []).
 	activate_vector([Value| Values], Activation, [Activated| ActivatedValues]) :-
@@ -265,21 +301,22 @@
 	activation_derivative(sigmoid, Activated, Derivative) :-
 		Derivative is Activated * (1.0 - Activated).
 
-	class_weight(Options, Label, ClassWeight) :-
-		^^option(class_weights(ClassWeights), Options),
+	row_class_weight(ClassWeights, Label, ClassWeight) :-
 		(	member(Label-ClassWeight, ClassWeights) ->
 			true
 		;	ClassWeight = 1.0
 		).
 
-	output_delta([], _Label, [], _ClassWeight, []).
-	output_delta([Class| Classes], Label, [Probability| Probabilities], ClassWeight, [Delta| Deltas]) :-
-		(	Class == Label ->
+	output_delta(_Index, [], _ClassWeight, []) :-
+		!.
+	output_delta(Index, [Probability| Probabilities], ClassWeight, [Delta| Deltas]) :-
+		(	Index =:= 1 ->
 			Target = 1.0
 		;	Target = 0.0
 		),
 		Delta is ClassWeight * (Probability - Target),
-		output_delta(Classes, Label, Probabilities, ClassWeight, Deltas).
+		Next is Index - 1,
+		output_delta(Next, Probabilities, ClassWeight, Deltas).
 
 	layer_deltas([_OutputLayer], _Activation, [_OutputInput], OutputDelta, [OutputDelta]) :-
 		!.
@@ -287,9 +324,22 @@
 		layer_deltas([NextLayer| Layers], Activation, [Activated| Inputs], OutputDelta, Deltas),
 		Deltas = [NextDelta| _],
 		NextLayer = layer(NextWeights, _NextBiases),
-		transpose_matrix(NextWeights, Transpose),
-		matrix_vector_product(Transpose, NextDelta, Propagated),
+		transpose_product(NextWeights, NextDelta, Propagated),
 		activation_delta(Activated, Activation, Propagated, Delta).
+
+	transpose_product([], _Vector, []) :-
+		!.
+	transpose_product([[]| _], _Vector, []) :-
+		!.
+	transpose_product([[Value| Row]| Rows], [Factor| Factors], [Product| Products]) :-
+		First is Value * Factor,
+		column_product(Rows, Factors, First, Product, Tails),
+		transpose_product([Row| Tails], [Factor| Factors], Products).
+
+	column_product([], [], Product, Product, []).
+	column_product([[Value| Row]| Rows], [Factor| Factors], Product0, Product, [Row| Tails]) :-
+		Product1 is Product0 + Value * Factor,
+		column_product(Rows, Factors, Product1, Product, Tails).
 
 	activation_delta([], _Activation, [], []).
 	activation_delta([Activated| ActivatedValues], Activation, [Value| Values], [Delta| Deltas]) :-
@@ -297,33 +347,112 @@
 		Delta is Value * Derivative,
 		activation_delta(ActivatedValues, Activation, Values, Deltas).
 
+	update_layers(Layers0, none, Inputs, Deltas, Step, Regularization, _Momentum, Layers, none, MaxDelta0, MaxDelta) :-
+		!,
+		update_plain_layers(Layers0, Inputs, Deltas, Step, Regularization, Layers, MaxDelta0, MaxDelta).
 	update_layers([], [], [], [], _Step, _Regularization, _Momentum, [], [], MaxDelta, MaxDelta).
 	update_layers([layer(Weights0, Biases0)| Layers0], [layer(WeightVelocities0, BiasVelocities0)| Velocities0], [Input| Inputs], [Delta| Deltas], Step, Regularization, Momentum, [layer(Weights, Biases)| Layers], [layer(WeightVelocities, BiasVelocities)| Velocities], MaxDelta0, MaxDelta) :-
-		outer_product(Delta, Input, WeightGradients),
-		update_matrix(Weights0, WeightVelocities0, WeightGradients, Step, Regularization, Momentum, Weights, WeightVelocities, MaxDelta0, MaxDelta1),
+		update_matrix(Weights0, WeightVelocities0, Delta, Input, Step, Regularization, Momentum, Weights, WeightVelocities, MaxDelta0, MaxDelta1),
 		update_biases(Biases0, BiasVelocities0, Delta, Step, Momentum, Biases, BiasVelocities, MaxDelta1, MaxDelta2),
 		update_layers(Layers0, Velocities0, Inputs, Deltas, Step, Regularization, Momentum, Layers, Velocities, MaxDelta2, MaxDelta).
 
-	update_matrix([], [], [], _Step, _Regularization, _Momentum, [], [], MaxDelta, MaxDelta).
-	update_matrix([Row0| Rows0], [VelocityRow0| VelocityRows0], [GradientRow| GradientRows], Step, Regularization, Momentum, [Row| Rows], [VelocityRow| VelocityRows], MaxDelta0, MaxDelta) :-
-		update_weights(Row0, VelocityRow0, GradientRow, Step, Regularization, Momentum, Row, VelocityRow, MaxDelta0, MaxDelta1),
-		update_matrix(Rows0, VelocityRows0, GradientRows, Step, Regularization, Momentum, Rows, VelocityRows, MaxDelta1, MaxDelta).
+	update_plain_layers([], [], [], _Step, _Regularization, [], MaxDelta, MaxDelta).
+	update_plain_layers([layer(Weights0, Biases0)| Layers0], [Input| Inputs], [Delta| Deltas], Step, Regularization, [layer(Weights, Biases)| Layers], MaxDelta0, MaxDelta) :-
+		update_plain_matrix(Weights0, Delta, Input, Step, Regularization, Weights, MaxDelta0, MaxDelta1),
+		update_plain_biases(Biases0, Delta, Step, Biases, MaxDelta1, MaxDelta2),
+		update_plain_layers(Layers0, Inputs, Deltas, Step, Regularization, Layers, MaxDelta2, MaxDelta).
 
-	update_weights([], [], [], _Step, _Regularization, _Momentum, [], [], MaxDelta, MaxDelta).
-	update_weights([Weight0| Weights0], [Velocity0| Velocities0], [Gradient| Gradients], Step, Regularization, Momentum, [Weight| Weights], [Velocity| Velocities], MaxDelta0, MaxDelta) :-
+	update_plain_matrix([], [], _Input, _Step, _Regularization, [], MaxDelta, MaxDelta).
+	update_plain_matrix([Row0| Rows0], [Delta| Deltas], Input, Step, Regularization, [Row| Rows], MaxDelta0, MaxDelta) :-
+		update_plain_weights(Row0, Input, Delta, Step, Regularization, Row, MaxDelta0, MaxDelta1),
+		update_plain_matrix(Rows0, Deltas, Input, Step, Regularization, Rows, MaxDelta1, MaxDelta).
+
+	update_plain_weights(Weights0, Features, OutputDelta, Step, Regularization, Weights, MaxDelta0, MaxDelta) :-
+		(	Regularization =:= 0 ->
+			update_plain_weights_unregularized(Weights0, Features, OutputDelta, Step, Weights, MaxDelta0, MaxDelta)
+		;	update_plain_weights_regularized(Weights0, Features, OutputDelta, Step, Regularization, Weights, MaxDelta0, MaxDelta)
+		).
+
+	update_plain_weights_regularized([], [], _OutputDelta, _Step, _Regularization, [], MaxDelta, MaxDelta).
+	update_plain_weights_regularized([Weight0| Weights0], [Feature| Features], OutputDelta, Step, Regularization, [Weight| Weights], MaxDelta0, MaxDelta) :-
+		Gradient is OutputDelta * Feature,
+		Change is -Step * (Gradient + Regularization * Weight0),
+		Weight is Weight0 + Change,
+		(	MaxDelta0 == none ->
+			MaxDelta1 = none
+		;	MaxDelta1 is max(MaxDelta0, abs(Change))
+		),
+		update_plain_weights_regularized(Weights0, Features, OutputDelta, Step, Regularization, Weights, MaxDelta1, MaxDelta).
+
+	update_plain_weights_unregularized([], [], _OutputDelta, _Step, [], MaxDelta, MaxDelta).
+	update_plain_weights_unregularized([Weight0| Weights0], [Feature| Features], OutputDelta, Step, [Weight| Weights], MaxDelta0, MaxDelta) :-
+		Gradient is OutputDelta * Feature,
+		Change is -Step * Gradient,
+		Weight is Weight0 + Change,
+		(	MaxDelta0 == none ->
+			MaxDelta1 = none
+		;	MaxDelta1 is max(MaxDelta0, abs(Change))
+		),
+		update_plain_weights_unregularized(Weights0, Features, OutputDelta, Step, Weights, MaxDelta1, MaxDelta).
+
+	update_plain_biases([], [], _Step, [], MaxDelta, MaxDelta).
+	update_plain_biases([Bias0| Biases0], [Gradient| Gradients], Step, [Bias| Biases], MaxDelta0, MaxDelta) :-
+		Change is -Step * Gradient,
+		Bias is Bias0 + Change,
+		(	MaxDelta0 == none ->
+			MaxDelta1 = none
+		;	MaxDelta1 is max(MaxDelta0, abs(Change))
+		),
+		update_plain_biases(Biases0, Gradients, Step, Biases, MaxDelta1, MaxDelta).
+
+	update_matrix([], [], [], _Input, _Step, _Regularization, _Momentum, [], [], MaxDelta, MaxDelta).
+	update_matrix([Row0| Rows0], [VelocityRow0| VelocityRows0], [Delta| Deltas], Input, Step, Regularization, Momentum, [Row| Rows], [VelocityRow| VelocityRows], MaxDelta0, MaxDelta) :-
+		update_weights(Row0, VelocityRow0, Input, Delta, Step, Regularization, Momentum, Row, VelocityRow, MaxDelta0, MaxDelta1),
+		update_matrix(Rows0, VelocityRows0, Deltas, Input, Step, Regularization, Momentum, Rows, VelocityRows, MaxDelta1, MaxDelta).
+
+	update_weights(Weights0, Velocities0, Features, OutputDelta, Step, Regularization, Momentum, Weights, Velocities, MaxDelta0, MaxDelta) :-
+		(	MaxDelta0 == none ->
+			MaxDelta = none,
+			update_weights_untracked(Weights0, Velocities0, Features, OutputDelta, Step, Regularization, Momentum, Weights, Velocities)
+		;	update_weights_tracked(Weights0, Velocities0, Features, OutputDelta, Step, Regularization, Momentum, Weights, Velocities, MaxDelta0, MaxDelta)
+		).
+
+	update_weights_tracked([], [], [], _OutputDelta, _Step, _Regularization, _Momentum, [], [], MaxDelta, MaxDelta).
+	update_weights_tracked([Weight0| Weights0], [Velocity0| Velocities0], [Feature| Features], OutputDelta, Step, Regularization, Momentum, [Weight| Weights], [Velocity| Velocities], MaxDelta0, MaxDelta) :-
+		Gradient is OutputDelta * Feature,
 		Velocity is Momentum * Velocity0 - Step * (Gradient + Regularization * Weight0),
 		Weight is Weight0 + Velocity,
 		Delta is abs(Velocity),
 		MaxDelta1 is max(MaxDelta0, Delta),
-		update_weights(Weights0, Velocities0, Gradients, Step, Regularization, Momentum, Weights, Velocities, MaxDelta1, MaxDelta).
+		update_weights_tracked(Weights0, Velocities0, Features, OutputDelta, Step, Regularization, Momentum, Weights, Velocities, MaxDelta1, MaxDelta).
 
-	update_biases([], [], [], _Step, _Momentum, [], [], MaxDelta, MaxDelta).
-	update_biases([Bias0| Biases0], [Velocity0| Velocities0], [Gradient| Gradients], Step, Momentum, [Bias| Biases], [Velocity| Velocities], MaxDelta0, MaxDelta) :-
+	update_weights_untracked([], [], [], _OutputDelta, _Step, _Regularization, _Momentum, [], []).
+	update_weights_untracked([Weight0| Weights0], [Velocity0| Velocities0], [Feature| Features], OutputDelta, Step, Regularization, Momentum, [Weight| Weights], [Velocity| Velocities]) :-
+		Gradient is OutputDelta * Feature,
+		Velocity is Momentum * Velocity0 - Step * (Gradient + Regularization * Weight0),
+		Weight is Weight0 + Velocity,
+		update_weights_untracked(Weights0, Velocities0, Features, OutputDelta, Step, Regularization, Momentum, Weights, Velocities).
+
+	update_biases(Biases0, Velocities0, Gradients, Step, Momentum, Biases, Velocities, MaxDelta0, MaxDelta) :-
+		(	MaxDelta0 == none ->
+			MaxDelta = none,
+			update_biases_untracked(Biases0, Velocities0, Gradients, Step, Momentum, Biases, Velocities)
+		;	update_biases_tracked(Biases0, Velocities0, Gradients, Step, Momentum, Biases, Velocities, MaxDelta0, MaxDelta)
+		).
+
+	update_biases_tracked([], [], [], _Step, _Momentum, [], [], MaxDelta, MaxDelta).
+	update_biases_tracked([Bias0| Biases0], [Velocity0| Velocities0], [Gradient| Gradients], Step, Momentum, [Bias| Biases], [Velocity| Velocities], MaxDelta0, MaxDelta) :-
 		Velocity is Momentum * Velocity0 - Step * Gradient,
 		Bias is Bias0 + Velocity,
 		Delta is abs(Velocity),
 		MaxDelta1 is max(MaxDelta0, Delta),
-		update_biases(Biases0, Velocities0, Gradients, Step, Momentum, Biases, Velocities, MaxDelta1, MaxDelta).
+		update_biases_tracked(Biases0, Velocities0, Gradients, Step, Momentum, Biases, Velocities, MaxDelta1, MaxDelta).
+
+	update_biases_untracked([], [], [], _Step, _Momentum, [], []).
+	update_biases_untracked([Bias0| Biases0], [Velocity0| Velocities0], [Gradient| Gradients], Step, Momentum, [Bias| Biases], [Velocity| Velocities]) :-
+		Velocity is Momentum * Velocity0 - Step * Gradient,
+		Bias is Bias0 + Velocity,
+		update_biases_untracked(Biases0, Velocities0, Gradients, Step, Momentum, Biases, Velocities).
 
 	softmax([Value| Values], Probabilities) :-
 		maximum(Values, Value, Maximum),
@@ -350,20 +479,34 @@
 	pair_probabilities([Class| Classes], [Probability| Values], [Class-Probability| Probabilities]) :-
 		pair_probabilities(Classes, Values, Probabilities).
 
-	classifier_diagnostics_data(mlp_classifier(_Classes, _Encoders, _Activation, _Layers, Diagnostics), Diagnostics).
+	classifier_diagnostics_data(Classifier, Diagnostics) :-
+		classifier_data(Classifier, _Classes, _Encoders, _Activation, _Layers, Diagnostics).
 
 	check_classifier(Classifier) :-
-		(	classifier_data(Classifier, Classes, Encoders, Activation, Layers, Diagnostics),
+		(	\+ ground(Classifier) ->
+			instantiation_error
+		;	classifier_data(Classifier, Classes, Encoders, Activation, Layers, Diagnostics),
 			^^valid_class_values(Classes),
 			^^valid_linear_encoders(Encoders),
 			valid_activation(Activation),
+			valid(list(compound), Diagnostics),
+			^^option(model(mlp_classifier), Diagnostics),
+			^^option(classes(Classes), Diagnostics),
+			^^option(activation(Activation), Diagnostics),
 			memberchk(options(Options), Diagnostics),
 			catch(::check_options(Options), _Error, fail),
-			memberchk(class_weights(ClassWeights), Options),
+			^^option(class_weights(ClassWeights), Options),
 			valid_class_weight_classes(ClassWeights, Classes),
 			^^linear_encoders_feature_count(Encoders, FeatureCount),
+			^^option(encoded_features(FeatureCount), Diagnostics),
 			length(Classes, ClassCount),
-			memberchk(hidden_layers(HiddenLayers), Diagnostics),
+			^^option(hidden_layers(HiddenLayers), Options),
+			^^option(activation(Activation), Options),
+			^^option(hidden_layers(HiddenLayers), Diagnostics),
+			memberchk(iterations(Iterations), Diagnostics),
+			valid(positive_integer, Iterations),
+			^^option(maximum_iterations(MaximumIterations), Options),
+			Iterations =< MaximumIterations,
 			valid_layers(Layers, [FeatureCount| HiddenLayers], ClassCount) ->
 			true
 		;	domain_error(classifier, Classifier)
@@ -386,7 +529,9 @@
 	classifier_export_template(_Dataset, _Classifier, Functor, Template) :-
 		Template =.. [Functor, 'Classifier'].
 
-	classifier_term_template(mlp_classifier(_Classes, _Encoders, _Activation, _Layers, _Diagnostics), mlp_classifier('Classes', 'Encoders', 'Activation', 'Layers', 'Diagnostics')).
+	classifier_term_template(Classifier, Template) :-
+		functor(Classifier, Functor, 5),
+		Template =.. [Functor, 'Classes', 'Encoders', 'Activation', 'Layers', 'Diagnostics'].
 
 	classifier_data(Classifier, Classes, Encoders, Activation, Layers, Diagnostics) :-
 		Classifier =.. [_Functor, Classes, Encoders, Activation, Layers, Diagnostics].

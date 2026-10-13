@@ -112,9 +112,9 @@ Checks that a learned classifier term is structurally valid for the receiving im
 |    ``check_classifier(@compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Classifier`` is a variable:
+|    ``Classifier`` is insufficiently instantiated for the receiving implementation:
 |        ``instantiation_error``
-|    ``Classifier`` is neither a variable nor a valid classifier:
+|    ``Classifier`` is sufficiently instantiated but is not a valid classifier:
 |        ``domain_error(classifier,Classifier)``
 
 

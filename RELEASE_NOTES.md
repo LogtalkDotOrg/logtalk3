@@ -134,6 +134,18 @@ using Lasso regression coefficients.
 
 * ADDED: New `linear_algebra` library predicate `symmetric_eigen_partial/7`.
 
+* CHANGED: The `mlp_classifier` library to require ground classifier terms,
+complete diagnostics, and consistency between model fields, diagnostics, and
+effective training options. Previously accepted incomplete or inconsistent
+terms are now rejected. Improved performance with cached training configuration,
+prepared class indices and weights, trace-free forward evaluation, fused affine
+evaluation and parameter updates, direct transpose-vector products, and
+specialized zero-momentum, zero-L2, and loss-convergence paths. Fixed bias-only
+learning for datasets without attributes, saturated cross-entropy loss and
+premature loss convergence, and custom-functor prediction, diagnostics, and
+printing. Expanded regression and numerical tests and code coverage, reduced
+repeated training in the tests, added benchmarks, and updated documentation.
+
 * CHANGED: The `one_class_svm_anomaly_detector` library learned detector term
 to `one_class_svm_detector/7`, adding an immutable cache argument before the
 diagnostics argument. The previous detector representation is not accepted.
@@ -144,8 +156,8 @@ detector and coefficient validation, and non-ground kernel-option handling.
 Improved performance with matrix-free linear training and cached weights,
 symmetric kernel matrices and reused training references, fused kernel scoring,
 scalar-only projection passes, and indexed empirical ranks. Expanded regression
-tests and code coverage, reduced repeated training in the tests, and added
-benchmarks and documentation, including linear-kernel limitations.
+tests and code coverage, reduced repeated training in the tests, added
+benchmarks, and updated documentation, including linear-kernel limitations.
 
 * CHANGED: The `umap_projection` library to use self-inclusive neighbor
 counts, introducing backwards incompatible neighborhood semantics. Fixed

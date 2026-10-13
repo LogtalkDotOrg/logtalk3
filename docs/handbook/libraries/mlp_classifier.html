@@ -276,6 +276,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#classifier-representation">Classifier representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#performance">Performance</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
 </ul>
@@ -467,6 +468,63 @@ link in a web browser.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(mlp_classifier(tester)).
 </pre></div>
 </div>
+<p>The test suite covers malformed and incomplete models, bias-only
+datasets, stable cross-entropy and convergence branches, activation
+boundaries, and multiclass probability ordering and normalization.
+Central finite differences check every weight and bias in small networks
+with zero, one, and two hidden layers across all three activations. The
+perturbation is <code class="docutils literal notranslate"><span class="pre">1.0e-6</span></code>; comparisons use relative tolerance
+<code class="docutils literal notranslate"><span class="pre">1.0e-5</span></code> and absolute tolerance <code class="docutils literal notranslate"><span class="pre">1.0e-7</span></code>. ReLU gradient checks avoid
+its nondifferentiable point, which has a separate boundary test.</p>
+<p>Two-step numerical references cover momentum, L2 regularization, bias
+updates, tracked and untracked convergence policies, and integer and
+float zero options. The XOR model is trained once per test run for 50
+epochs and reused for prediction, validation, export, and printing. The
+independent <code class="docutils literal notranslate"><span class="pre">learn/2</span></code> test still exercises default training. Clause
+coverage and these explicit behavioral checks are complementary; full
+clause coverage does not imply full branch or numerical coverage.</p>
+<p>The principal regression groups are:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Contract</p></th>
+<th class="head"><p>Tests</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Model validation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mlp_classifier_validation_fixtures</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mlp_classifier_check_incomplete_fixture</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mlp_classifier_duplicate_option_precedence</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Zero-feature learning</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mlp_classifier_bias_only_configurations</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mlp_classifier_bias_only_update</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mlp_classifier_empty_dataset</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Stable loss and stopping</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mlp_classifier_saturated_loss</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mlp_classifier_loss_shift_weight_average</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mlp_classifier_convergence_branches</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Gradients and activations</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mlp_classifier_finite_difference_gradients</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mlp_classifier_activation_boundaries</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mlp_classifier_softmax_shift</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Optimized evaluation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mlp_classifier_prepared_rows</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mlp_classifier_forward_only_equivalence</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mlp_classifier_affine_reference</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mlp_classifier_transpose_product_reference</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Optimizer policies</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mlp_classifier_optimizer_reference</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mlp_classifier_training_option_equivalence</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mlp_classifier_update_policy_equivalence</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mlp_classifier_tiny_parameter_update</span></code></p></td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
@@ -479,8 +537,9 @@ selects a linear softmax model (default: <code class="docutils literal notransla
 positive loss weights to selected classes; omitted classes use <code class="docutils literal notranslate"><span class="pre">1.0</span></code>
 (default: <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">convergence_criterion/1</span></code> - <code class="docutils literal notranslate"><span class="pre">parameter_update</span></code> to compare the
-largest parameter update or <code class="docutils literal notranslate"><span class="pre">loss</span></code> to compare successive mean
-weighted cross-entropy losses (default: <code class="docutils literal notranslate"><span class="pre">parameter_update</span></code>)</p></li>
+largest absolute individual parameter update in an epoch, not its net
+displacement, or <code class="docutils literal notranslate"><span class="pre">loss</span></code> to compare successive mean weighted
+cross-entropy losses (default: <code class="docutils literal notranslate"><span class="pre">parameter_update</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">learning_rate/1</span></code> - positive base learning rate (default: <code class="docutils literal notranslate"><span class="pre">0.05</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">learning_schedule/1</span></code> - <code class="docutils literal notranslate"><span class="pre">constant</span></code> or <code class="docutils literal notranslate"><span class="pre">inverse_scaling(Power)</span></code>
 (default: <code class="docutils literal notranslate"><span class="pre">inverse_scaling(0.25)</span></code>)</p></li>
@@ -508,6 +567,65 @@ and less than one (default: <code class="docutils literal notranslate"><span cla
 <code class="docutils literal notranslate"><span class="pre">Weights</span></code> is a row-major matrix and <code class="docutils literal notranslate"><span class="pre">Biases</span></code> is a vector. Hidden
 layers use the configured activation and the output layer uses softmax
 probabilities.</p>
+<p>The learned model uses a <code class="docutils literal notranslate"><span class="pre">mlp_classifier/5</span></code> term representation by
+default. Users can choose any outer functor while preserving the five
+arguments and their order. Validation, prediction, diagnostics, export,
+and printing support these custom functors; the diagnostics
+<code class="docutils literal notranslate"><span class="pre">model(mlp_classifier)</span></code> entry identifies the algorithm, not the outer
+functor.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">check_classifier/1</span></code> predicate requires a ground five-argument
+compound term with valid layer dimensions and diagnostics consistent
+with its classes, encoders, activation, hidden layers, and effective
+training options. It raises an instantiation error for insufficiently
+instantiated terms and a classifier domain error for ground invalid
+terms. The <code class="docutils literal notranslate"><span class="pre">valid_classifier/1</span></code> predicate fails for either case.
+Validation does not fill in missing model fields. Repeated options
+remain valid, with the first occurrence determining the effective value.</p>
+<p>Datasets with no declared attributes produce bias-only models with empty
+encoders and zero-width first-layer weight rows. Both linear softmax
+models and models with hidden layers support this case. Training
+examples must still be nonempty.</p>
+<p>Loss convergence monitors mean weighted cross-entropy computed directly
+from logits using shifted log-sum-exp. Very small target probabilities
+are not clipped, so confidently incorrect predictions retain their loss
+differences. The mean divides by the number of training examples, not
+the sum of class weights. L2 regularization affects weight updates but
+is not included in this convergence metric; biases are not regularized.</p>
+</section>
+<section id="performance">
+<h2>Performance<a class="headerlink" href="#performance" title="Link to this heading"></a></h2>
+<p>Training settings, row class indices, and effective class weights are
+prepared once before the epoch loop. Weight gradients are computed
+within the update loop rather than materialized as outer-product
+matrices. Backpropagation computes transpose-vector products without
+storing complete transposes and preserves the algebra library’s column
+summation order. Affine evaluation produces each dot product plus its
+bias without an intermediate product vector. Prediction and loss
+evaluation do not construct the backpropagation input trace.</p>
+<p>Zero momentum avoids velocity matrices, and the zero-momentum update
+path omits L2 arithmetic when regularization is zero. Loss convergence
+omits unused parameter-update magnitude tracking. These internal paths
+retain online SGD, the public model representation, class ordering, and
+the existing random initialization and shuffling behavior for
+positive-width inputs.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">mlp_classifier_benchmarks::run/0</span></code> predicate prints five CPU and
+wall time samples per workload after a warm-up. From this library
+directory, load the optimized implementation, the XOR dataset, the
+operating-system library, and the benchmarks:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(loader),
+     <span class="k">logtalk_load</span>(os(loader)),
+     <span class="k">logtalk_load</span>([<span class="s">&#39;test_datasets/xor&#39;</span>, benchmarks], [optimize(on)]),
+     mlp_classifier_benchmarks<span class="o">::</span>run.
+</pre></div>
+</div>
+<p>Training workloads use four XOR examples, hidden layers <code class="docutils literal notranslate"><span class="pre">[16,</span> <span class="pre">8]</span></code>, 200
+epochs, seed 42, constant learning rate, and zero convergence tolerance.
+They separate positive momentum, zero momentum, zero momentum with zero
+regularization, and loss convergence. Prediction evaluates the same
+instance 2000 times. Compare medians and variability with identical
+workloads, independently of debug and coverage instrumentation.
+Allocation reductions do not guarantee the same runtime gains for every
+dataset or backend.</p>
 </section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>

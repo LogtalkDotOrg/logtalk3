@@ -31,6 +31,7 @@
 	logtalk_load(classification_protocols(loader)),
 	logtalk_load([
 		'test_datasets/xor',
+		'test_datasets/fixtures',
 		classification_protocols('test_datasets/weather'),
 		classification_protocols('test_datasets/iris_small')
 	], [

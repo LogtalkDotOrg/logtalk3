@@ -56,8 +56,8 @@
 		comment is 'Checks that a learned classifier term is structurally valid for the receiving implementation. Throws an exception when the term is not a valid classifier representation.',
 		argnames is ['Classifier'],
 		exceptions is [
-			'``Classifier`` is a variable' - instantiation_error,
-			'``Classifier`` is neither a variable nor a valid classifier' - domain_error(classifier, 'Classifier')
+			'``Classifier`` is insufficiently instantiated for the receiving implementation' - instantiation_error,
+			'``Classifier`` is sufficiently instantiated but is not a valid classifier' - domain_error(classifier, 'Classifier')
 		]
 	]).
 
