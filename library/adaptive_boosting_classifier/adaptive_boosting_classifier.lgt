@@ -23,9 +23,9 @@
 	imports(probabilistic_classifier_common)).
 
 	:- info([
-		version is 3:0:0,
+		version is 3:0:1,
 		author is 'Paulo Moura',
-		date is 2026-10-11,
+		date is 2026-10-13,
 		comment is 'Adaptive Boosting classifier using C4.5 decision trees as base learners. Implements the SAMME (Stagewise Additive Modeling using a Multi-class Exponential loss function) variant, which supports multi-class classification. Builds an ensemble of weighted decision trees where each subsequent tree focuses on the examples misclassified by previous trees.',
 		see_also is [
 			dataset_protocol, c45_classifier, isolation_forest_anomaly_detector, knn_classifier,
@@ -320,7 +320,7 @@
 
 	% predict_probabilities/3 - returns class probabilities based on weighted votes
 	predict_probabilities(Classifier, Instance, Probabilities) :-
-		Classifier =.. [_, WeightedTrees, ClassValues, _Options],
+		classifier_data(Classifier, WeightedTrees, ClassValues, _Options),
 		% Collect weighted predictions from all trees
 		collect_weighted_predictions(WeightedTrees, Instance, WeightedPredictions),
 		% Accumulate weighted votes for each class
@@ -435,7 +435,9 @@
 	classifier_export_template(_Dataset, _Classifier, Functor, Template) :-
 		Template =.. [Functor, 'Classifier'].
 
-	classifier_term_template(ab_classifier(_WeightedTrees, _ClassValues, _Options), ab_classifier('WeightedTrees', 'ClassValues', 'Options')).
+	classifier_term_template(Classifier, Template) :-
+		functor(Classifier, Functor, 3),
+		Template =.. [Functor, 'WeightedTrees', 'ClassValues', 'Options'].
 
 	valid_weighted_trees([], _).
 	valid_weighted_trees([weighted_tree(Alpha, Tree, AttributeNames)| WeightedTrees], ClassValues) :-

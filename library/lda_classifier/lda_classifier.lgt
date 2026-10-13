@@ -23,9 +23,9 @@
 	imports(classifier_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-11,
+		date is 2026-10-13,
 		comment is 'Linear Discriminant Analysis classifier for continuous datasets using a pooled regularized covariance model.',
 		see_also is [dataset_protocol, qda_classifier, nearest_centroid_classifier, lda_projection]
 	]).
@@ -78,7 +78,7 @@
 		max_score(Scores, Class, _).
 
 	predict_scores(Classifier, Instance, Scores) :-
-		Classifier = lda_classifier(Encoders, Models, _Options),
+		classifier_data(Classifier, Encoders, Models, _Options),
 		encode_instance(Encoders, Instance, Features),
 		model_scores(Models, Features, Scores).
 
@@ -188,7 +188,7 @@
 		).
 
 	classifier_diagnostics_data(Classifier, Diagnostics) :-
-		Classifier = lda_classifier(Encoders, Models, Options),
+		classifier_data(Classifier, Encoders, Models, Options),
 		classes_from_models(Models, Classes),
 		length(Encoders, FeatureCount),
 		Diagnostics = [
@@ -203,7 +203,7 @@
 		classes_from_models(Models, Classes).
 
 	check_classifier(Classifier) :-
-		(	Classifier = lda_classifier(Encoders, Models, Options),
+		(	classifier_data(Classifier, Encoders, Models, Options),
 			^^valid_linear_encoders(Encoders),
 			valid_continuous_encoders(Encoders),
 			catch(::check_options(Options), _Error, fail),
@@ -232,10 +232,15 @@
 	classifier_export_template(_Dataset, _Classifier, Functor, Template) :-
 		Template =.. [Functor, 'Classifier'].
 
-	classifier_term_template(lda_classifier(_Encoders, _Models, _Options), lda_classifier('Encoders', 'Models', 'Options')).
+	classifier_term_template(Classifier, Template) :-
+		functor(Classifier, Functor, 3),
+		Template =.. [Functor, 'Encoders', 'Models', 'Options'].
+
+	classifier_data(Classifier, Encoders, Models, Options) :-
+		Classifier =.. [_Functor, Encoders, Models, Options].
 
 	print_classifier(Classifier) :-
-		Classifier = lda_classifier(Encoders, Models, Options),
+		classifier_data(Classifier, Encoders, Models, Options),
 		format('LDA Classifier~n', []),
 		format('==============~n~n', []),
 		^^print_classifier_template(Classifier),

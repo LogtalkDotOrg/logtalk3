@@ -23,9 +23,9 @@
 	imports(probabilistic_classifier_common)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-11,
+		date is 2026-10-13,
 		comment is 'Naive Bayes classifier with Laplace smoothing and Gaussian distribution support. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		see_also is [dataset_protocol, isolation_forest_anomaly_detector, c45_classifier, knn_classifier, nearest_centroid_classifier, random_forest_classifier, adaptive_boosting_classifier]
 	]).
@@ -164,7 +164,7 @@
 		^^predict_from_probabilities(Classifier, Instance, Class).
 
 	predict_probabilities(Classifier, Instance, Probabilities) :-
-		Classifier =.. [_, Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams],
+		classifier_data(Classifier, Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams),
 		extract_values(AttributeNames, Instance, Values),
 		compute_posteriors(Values, Classes, ClassPriors, FeatureTypes, FeatureParams, Probabilities).
 
@@ -269,7 +269,9 @@
 	classifier_export_template(_Dataset, _Classifier, Functor, Template) :-
 		Template =.. [Functor, 'Classifier'].
 
-	classifier_term_template(nb_classifier(_Classes, _ClassPriors, _AttributeNames, _FeatureTypes, _FeatureParams), nb_classifier('Classes', 'ClassPriors', 'AttributeNames', 'FeatureTypes', 'FeatureParams')).
+	classifier_term_template(Classifier, Template) :-
+		functor(Classifier, Functor, 5),
+		Template =.. [Functor, 'Classes', 'ClassPriors', 'AttributeNames', 'FeatureTypes', 'FeatureParams'].
 
 	valid_class_priors(ClassPriors, Classes) :-
 		length(ClassPriors, Count),

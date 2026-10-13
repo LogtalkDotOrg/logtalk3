@@ -24,7 +24,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-11,
+		date is 2026-10-11,
 		comment is 'Protocol for continuous bounded Differential Evolution problem definitions.',
 		see_also is [differential_evolution(_), differential_evolution(_, _)]
 	]).

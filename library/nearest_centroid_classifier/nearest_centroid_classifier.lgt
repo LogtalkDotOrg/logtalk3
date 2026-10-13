@@ -23,9 +23,9 @@
 	imports(probabilistic_classifier_common)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-11,
+		date is 2026-10-13,
 		comment is 'Nearest Centroid classifier with multiple distance metrics. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		see_also is [dataset_protocol, isolation_forest_anomaly_detector, c45_classifier, knn_classifier, naive_bayes_classifier, random_forest_classifier, adaptive_boosting_classifier]
 	]).
@@ -189,7 +189,7 @@
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
 		^^option(distance_metric(DistanceMetric), Options),
-		Classifier =.. [_, AttributeNames, FeatureTypes, Centroids],
+		classifier_data(Classifier, AttributeNames, FeatureTypes, Centroids),
 		% Extract values from instance in correct order
 		extract_values(AttributeNames, Instance, Values),
         findall(
@@ -208,7 +208,7 @@
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
 		^^option(distance_metric(DistanceMetric), Options),
-		Classifier =.. [_, AttributeNames, FeatureTypes, Centroids],
+		classifier_data(Classifier, AttributeNames, FeatureTypes, Centroids),
 		% Extract values from instance in correct order
 		extract_values(AttributeNames, Instance, Values),
         findall(
@@ -281,7 +281,9 @@
 	classifier_export_template(_Dataset, _Classifier, Functor, Template) :-
 		Template =.. [Functor, 'Classifier'].
 
-	classifier_term_template(nc_classifier(_AttributeNames, _FeatureTypes, _Centroids), nc_classifier('AttributeNames', 'FeatureTypes', 'Centroids')).
+	classifier_term_template(Classifier, Template) :-
+		functor(Classifier, Functor, 3),
+		Template =.. [Functor, 'AttributeNames', 'FeatureTypes', 'Centroids'].
 
 	valid_centroids(Centroids, FeatureTypes) :-
 		valid(list(compound), Centroids),

@@ -23,9 +23,9 @@
 	imports(classifier_common)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-11,
+		date is 2026-10-13,
 		comment is 'Linear support vector machine classifier supporting binary and multiclass classification using one-vs-rest margin models. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		see_also is [dataset_protocol, logistic_regression_classifier, c45_classifier, knn_classifier, naive_bayes_classifier, nearest_centroid_classifier, random_forest_classifier, adaptive_boosting_classifier]
 	]).
@@ -73,7 +73,7 @@
 		Classifier = linear_svm_classifier(Classes, Encoders, Models, Options).
 
 	predict(Classifier, Instance, Class) :-
-		Classifier =.. [_, _Classes, Encoders, Models, _Options],
+		classifier_data(Classifier, _Classes, Encoders, Models, _Options),
 		encode_instance(Encoders, Instance, Features),
 		class_scores(Models, Features, ClassScores),
 		max_score(ClassScores, Class, _).
@@ -290,7 +290,9 @@
 	classifier_export_template(_Dataset, _Classifier, Functor, Template) :-
 		Template =.. [Functor, 'Classifier'].
 
-	classifier_term_template(linear_svm_classifier(_Classes, _Encoders, _Models, _Options), linear_svm_classifier('Classes', 'Encoders', 'Models', 'Options')).
+	classifier_term_template(Classifier, Template) :-
+		functor(Classifier, Functor, 4),
+		Template =.. [Functor, 'Classes', 'Encoders', 'Models', 'Options'].
 
 	valid_models([], _Classes, _EncodedFeatures, _SeenClasses).
 	valid_models([class_model(Class, Bias, Weights)| Models], Classes, EncodedFeatures, SeenClasses) :-

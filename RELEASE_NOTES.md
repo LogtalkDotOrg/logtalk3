@@ -276,6 +276,8 @@ validation, empty attribute declarations, extreme bandwidth arithmetic,
 embedding normalization, and prediction underflow. Expanded regression tests,
 improved test performance, and documented algorithm limitations.
 
+* FIXED: Classifier libraries handling of classifiers with custom functors.
+
 * FIXED: The `text_vectorization` library to allow for repeated options when
 validating vectorizer terms (leftmost options always take precedence).
 

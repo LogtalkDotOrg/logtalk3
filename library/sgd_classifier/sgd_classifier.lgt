@@ -23,9 +23,9 @@
 	imports(probabilistic_classifier_common)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:0:2,
 		author is 'Paulo Moura',
-		date is 2026-10-06,
+		date is 2026-10-13,
 		comment is 'Stochastic gradient descent classifier supporting one-vs-rest linear models with configurable losses including ``log_loss``, ``hinge``, ``squared_hinge``, ``modified_huber``, and ``perceptron``.',
 		see_also is [dataset_protocol, logistic_regression_classifier, linear_svm_classifier, knn_classifier, nearest_centroid_classifier]
 	]).
@@ -69,7 +69,7 @@
 		^^predict_from_probabilities(Classifier, Instance, Class).
 
 	predict_probabilities(Classifier, Instance, Probabilities) :-
-		Classifier = sgd_classifier(Classes, Encoders, _Loss, Models, _Options),
+		classifier_data(Classifier, Classes, Encoders, _Loss, Models, _Options),
 		^^encode_linear_instance(Encoders, Instance, Features),
 		class_scores(Models, Features, Scores),
 		score_pairs(Classes, Scores, ClassScores),
@@ -239,7 +239,9 @@
 	classifier_export_template(_Dataset, _Classifier, Functor, Template) :-
 		Template =.. [Functor, 'Classifier'].
 
-	classifier_term_template(sgd_classifier(_Classes, _Encoders, _Loss, _Models, _Options), sgd_classifier('Classes', 'Encoders', 'Loss', 'Models', 'Options')).
+	classifier_term_template(Classifier, Template) :-
+		functor(Classifier, Functor, 5),
+		Template =.. [Functor, 'Classes', 'Encoders', 'Loss', 'Models', 'Options'].
 
 	valid_models([], _Classes, _EncodedFeatures, _SeenClasses).
 	valid_models([class_model(Class, Bias, Weights)| Models], Classes, EncodedFeatures, SeenClasses) :-

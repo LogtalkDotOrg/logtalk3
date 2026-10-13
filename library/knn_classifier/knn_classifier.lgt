@@ -114,7 +114,7 @@
 	predict_probabilities(Classifier, Instance, Probabilities, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		Classifier =.. [_, AttributeNames, FeatureTypes, Instances],
+		classifier_data(Classifier, AttributeNames, FeatureTypes, Instances),
 		% Extract values from instance in correct order
 		extract_values(AttributeNames, Instance, Values),
 		% Get k value
@@ -245,7 +245,9 @@
 	classifier_export_template(_Dataset, _Classifier, Functor, Template) :-
 		Template =.. [Functor, 'Classifier'].
 
-	classifier_term_template(knn_classifier(_AttributeNames, _FeatureTypes, _Instances), knn_classifier('AttributeNames', 'FeatureTypes', 'Instances')).
+	classifier_term_template(Classifier, Template) :-
+		functor(Classifier, Functor, 3),
+		Template =.. [Functor, 'AttributeNames', 'FeatureTypes', 'Instances'].
 
 	valid_instances(Instances, FeatureTypes) :-
 		valid(list(compound), Instances),

@@ -23,9 +23,9 @@
 	imports(probabilistic_classifier_common)).
 
 	:- info([
-		version is 2:1:0,
+		version is 2:1:1,
 		author is 'Paulo Moura',
-		date is 2026-10-11,
+		date is 2026-10-13,
 		comment is 'Random Forest classifier using C4.5 decision trees as base learners. Builds an ensemble of decision trees trained on bootstrap samples with random feature subsets and combines their predictions through majority voting.',
 		see_also is [dataset_protocol, c45_classifier, isolation_forest_anomaly_detector, knn_classifier, naive_bayes_classifier, nearest_centroid_classifier, adaptive_boosting_classifier]
 	]).
@@ -186,7 +186,7 @@
 
 	% predict_probabilities/3 - returns class probabilities based on tree votes
 	predict_probabilities(Classifier, Instance, Probabilities) :-
-		Classifier =.. [_, Trees, ClassValues, _Options],
+		classifier_data(Classifier, Trees, ClassValues, _Options),
 		% Collect predictions from all trees
 		collect_predictions(Trees, Instance, Predictions),
 		% Count votes for each class
@@ -262,7 +262,9 @@
 	classifier_export_template(_Dataset, _Classifier, Functor, Template) :-
 		Template =.. [Functor, 'Classifier'].
 
-	classifier_term_template(rf_classifier(_Trees, _ClassValues, _Options), rf_classifier('Trees', 'ClassValues', 'Options')).
+	classifier_term_template(Classifier, Template) :-
+		functor(Classifier, Functor, 3),
+		Template =.. [Functor, 'Trees', 'ClassValues', 'Options'].
 
 	valid_trees([]).
 	valid_trees([tree(Tree, AttributeNames)| Trees]) :-

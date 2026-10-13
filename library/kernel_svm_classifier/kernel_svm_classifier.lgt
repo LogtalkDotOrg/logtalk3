@@ -23,9 +23,9 @@
 	imports(probabilistic_classifier_common)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:0:2,
 		author is 'Paulo Moura',
-		date is 2026-10-06,
+		date is 2026-10-13,
 		comment is 'Kernel support vector machine classifier using one-vs-rest dual margin models with linear, polynomial, and radial basis function kernels.',
 		see_also is [dataset_protocol, linear_svm_classifier, logistic_regression_classifier, kernel_pca_projection]
 	]).
@@ -74,7 +74,7 @@
 		^^predict_from_probabilities(Classifier, Instance, Class).
 
 	predict_probabilities(Classifier, Instance, Probabilities) :-
-		Classifier = kernel_svm_classifier(Classes, Encoders, Kernel, TrainingRows, Models, _Options),
+		classifier_data(Classifier, Classes, Encoders, Kernel, TrainingRows, Models, _Options),
 		^^encode_linear_instance(Encoders, Instance, Features),
 		kernel_vector(TrainingRows, Features, Kernel, KernelValues),
 		class_scores(Models, KernelValues, Scores),
@@ -247,7 +247,9 @@
 	classifier_export_template(_Dataset, _Classifier, Functor, Template) :-
 		Template =.. [Functor, 'Classifier'].
 
-	classifier_term_template(kernel_svm_classifier(_Classes, _Encoders, _Kernel, _TrainingRows, _Models, _Options), kernel_svm_classifier('Classes', 'Encoders', 'Kernel', 'TrainingRows', 'Models', 'Options')).
+	classifier_term_template(Classifier, Template) :-
+		functor(Classifier, Functor, 6),
+		Template =.. [Functor, 'Classes', 'Encoders', 'Kernel', 'TrainingRows', 'Models', 'Options'].
 
 	valid_training_rows([], _EncodedFeatures).
 	valid_training_rows([TrainingRow| TrainingRows], EncodedFeatures) :-

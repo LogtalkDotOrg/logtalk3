@@ -23,9 +23,9 @@
 	imports(probabilistic_classifier_common)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-06-06,
+		date is 2026-10-13,
 		comment is 'Gradient boosting classifier using multinomial additive models fitted by regression trees to softmax residuals.',
 		see_also is [dataset_protocol, regression_tree, gradient_boosting_regression, adaptive_boosting_classifier, random_forest_classifier]
 	]).
@@ -69,7 +69,7 @@
 		^^predict_from_probabilities(Classifier, Instance, Class).
 
 	predict_probabilities(Classifier, Instance, Probabilities) :-
-		Classifier = gradient_boosting_classifier(Classes, InitialScores, StageTrees, _Options),
+		classifier_data(Classifier, Classes, InitialScores, StageTrees, _Options),
 		predict_scores(StageTrees, Instance, InitialScores, FinalScores),
 		softmax(FinalScores, Probabilities0),
 		zip_probabilities(Classes, Probabilities0, Probabilities).
@@ -196,8 +196,11 @@
 	zip_probabilities([Class| Classes], [Probability| Probabilities0], [Class-Probability| Probabilities]) :-
 		zip_probabilities(Classes, Probabilities0, Probabilities).
 
+	classifier_data(Classifier, Classes, InitialScores, StageTrees, Options) :-
+		Classifier =.. [_Functor, Classes, InitialScores, StageTrees, Options].
+
 	classifier_diagnostics_data(Classifier, Diagnostics) :-
-		Classifier = gradient_boosting_classifier(Classes, InitialScores, StageTrees, Options),
+		classifier_data(Classifier, Classes, InitialScores, StageTrees, Options),
 		length(StageTrees, StageCount),
 		Diagnostics = [
 			model(gradient_boosting_classifier),
@@ -208,7 +211,7 @@
 		].
 
 	check_classifier(Classifier) :-
-		(	Classifier = gradient_boosting_classifier(Classes, InitialScores, StageTrees, Options),
+		(	classifier_data(Classifier, Classes, InitialScores, StageTrees, Options),
 			^^valid_class_values(Classes),
 			length(Classes, ClassCount),
 			valid(list(float, ClassCount), InitialScores),
@@ -236,10 +239,12 @@
 	classifier_export_template(_Dataset, _Classifier, Functor, Template) :-
 		Template =.. [Functor, 'Classifier'].
 
-	classifier_term_template(gradient_boosting_classifier(_Classes, _InitialScores, _StageTrees, _Options), gradient_boosting_classifier('Classes', 'InitialScores', 'StageTrees', 'Options')).
+	classifier_term_template(Classifier, Template) :-
+		functor(Classifier, Functor, 4),
+		Template =.. [Functor, 'Classes', 'InitialScores', 'StageTrees', 'Options'].
 
 	print_classifier(Classifier) :-
-		Classifier = gradient_boosting_classifier(Classes, InitialScores, StageTrees, Options),
+		classifier_data(Classifier, Classes, InitialScores, StageTrees, Options),
 		format('Gradient Boosting Classifier~n', []),
 		format('===========================~n~n', []),
 		^^print_classifier_template(Classifier),

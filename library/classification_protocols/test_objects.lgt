@@ -89,7 +89,9 @@
 	classifier_export_template(_Dataset, _Classifier, Functor, Template) :-
 		Template =.. [Functor, 'Classifier'].
 
-	classifier_term_template(sample_classifier(_DefaultClass, _Diagnostics), sample_classifier('DefaultClass', 'Diagnostics')).
+	classifier_term_template(Classifier, Template) :-
+		functor(Classifier, Functor, 2),
+		Template =.. [Functor, 'DefaultClass', 'Diagnostics'].
 
 	validate_attributes(Dataset) :-
 		^^dataset_attributes(Dataset, _).

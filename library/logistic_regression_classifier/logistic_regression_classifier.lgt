@@ -23,9 +23,9 @@
 	imports(probabilistic_classifier_common)).
 
 	:- info([
-		version is 2:1:0,
+		version is 2:1:1,
 		author is 'Paulo Moura',
-		date is 2026-10-10,
+		date is 2026-10-13,
 		comment is 'Logistic regression classifier supporting binary and multiclass classification using joint softmax training. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		see_also is [
 			dataset_protocol, c45_classifier, knn_classifier, naive_bayes_classifier,
@@ -79,7 +79,7 @@
 		^^predict_from_probabilities(Classifier, Instance, Class).
 
 	predict_probabilities(Classifier, Instance, Probabilities) :-
-		Classifier =.. [_, _Classes, Encoders, Models, _Options],
+		classifier_data(Classifier, _Classes, Encoders, Models, _Options),
 		encode_instance(Encoders, Instance, Features),
 		class_logits(Models, Features, ClassLogits),
 		stable_softmax(ClassLogits, Probabilities).
@@ -366,7 +366,9 @@
 	classifier_export_template(_Dataset, _Classifier, Functor, Template) :-
 		Template =.. [Functor, 'Classifier'].
 
-	classifier_term_template(lr_classifier(_Classes, _Encoders, _Models, _Options), lr_classifier('Classes', 'Encoders', 'Models', 'Options')).
+	classifier_term_template(Classifier, Template) :-
+		functor(Classifier, Functor, 4),
+		Template =.. [Functor, 'Classes', 'Encoders', 'Models', 'Options'].
 
 	valid_models([], _Classes, _EncodedFeatures, _SeenClasses).
 	valid_models([class_model(Class, Bias, Weights)| Models], Classes, EncodedFeatures, SeenClasses) :-
