@@ -254,6 +254,14 @@ evaluation. Optimized candidate sampling and tabu scans; fixed tenure
 expiration, large-energy handling, non-ground state identity, and progress
 reporting. Expanded tests and documentation.
 
+* IMPROVED: The `linear_svm_classifier` library with binary model symmetry,
+cached optimizer settings, direct-tail categorical encoding, and fused
+prediction scoring and class selection. Fixed non-ground classifier
+validation and bias-only learning and prediction for datasets without
+attributes. Expanded regression and numerical tests to full clause coverage,
+reduced repeated training in the tests, added focused benchmarks, and updated
+documentation, including algorithm limitations.
+
 * IMPROVED: The `hashes` library with linear block processing, bounded-tail
 MD5 and SHA padding, sequential SHA message schedules, batched SipHash
 blocks, indexed CRC tables, and fixed-position BLAKE2 and Keccak mixing.

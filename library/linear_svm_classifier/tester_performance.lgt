@@ -23,6 +23,7 @@
 	set_logtalk_flag(report, warnings),
 	logtalk_load(linear_algebra(loader)),
 	logtalk_load(loader),
+	logtalk_load(test_fixtures, [optimize(on)]),
 	logtalk_load([
 		classification_protocols('test_datasets/weather'),
 		classification_protocols('test_datasets/iris_small'),

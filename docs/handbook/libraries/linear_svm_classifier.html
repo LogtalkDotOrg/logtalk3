@@ -268,6 +268,9 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#classifier-representation">Classifier representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#validation">Validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#performance-measurements">Performance measurements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
@@ -450,6 +453,11 @@
 multiclass classification. Multiclass classification is implemented
 using a one-vs-rest scheme with one linear margin model per class, and
 training uses batch subgradient descent to fit each hinge-loss model.</p>
+<p>For binary classification, the second margin model is the negation of
+the first model, avoiding a second optimization run. Both models are
+stored in the declared class order. Single-class and multiclass datasets
+use ordinary per-class training. Training minimizes mean hinge loss with
+an L2 penalty on the weights; the bias is not regularized.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">classifier_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">classification_protocols</span></code> library. It provides predicates for
 learning a classifier from a dataset object, using it to make
@@ -484,6 +492,8 @@ link in a web browser.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(linear_svm_classifier(tester_performance)).
 </pre></div>
 </div>
+<p>The unit suite retains fresh deterministic learning tests and caches
+their models for downstream tests, with lazy loading for isolated tests.</p>
 </section>
 <section id="features">
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
@@ -492,6 +502,9 @@ link in a web browser.</p>
 margin models and predicts the class with the highest score.</p></li>
 <li><p><strong>Continuous Features</strong>: Standardizes numeric attributes using z-score
 scaling derived from the training data.</p></li>
+<li><p><strong>Scaling Defaults</strong>: Uses population variance over known values.
+All-missing continuous attributes use mean <code class="docutils literal notranslate"><span class="pre">0.0</span></code> and scale <code class="docutils literal notranslate"><span class="pre">1.0</span></code>;
+singleton and constant attributes use scale <code class="docutils literal notranslate"><span class="pre">1.0</span></code>.</p></li>
 <li><p><strong>Categorical Features</strong>: Expands discrete attributes using one-hot
 encoding based on the declared dataset attribute values and rejects
 unseen values with a domain error.</p></li>
@@ -500,6 +513,9 @@ represented using anonymous variables using explicit missing-value
 indicator features.</p></li>
 <li><p><strong>Unknown values</strong>: Prediction requests containing categorical values
 that are not declared by the dataset raise a domain error.</p></li>
+<li><p><strong>Bias-Only Models</strong>: Non-empty datasets without attributes produce
+models with empty weight vectors. Prediction compares their biases.</p></li>
+<li><p><strong>Tie Handling</strong>: Equal scores select the first stored margin model.</p></li>
 <li><p><strong>Classifier Export</strong>: Learned classifiers can be exported as
 predicate clauses or written to a file.</p></li>
 <li><p><strong>Pretty Printing</strong>: Prints a compact summary of classes, encoders,
@@ -514,15 +530,22 @@ training time and training accuracy.</p></li>
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate supports these options:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">learning_rate/1</span></code> - base gradient descent learning rate (default:
-<code class="docutils literal notranslate"><span class="pre">0.1</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">maximum_iterations/1</span></code> - maximum number of optimization iterations
-(default: <code class="docutils literal notranslate"><span class="pre">1000</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tolerance/1</span></code> - convergence threshold for the maximum parameter
-update (default: <code class="docutils literal notranslate"><span class="pre">1.0e-6</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">l2_regularization/1</span></code> - L2 penalty factor applied to weights
-(default: <code class="docutils literal notranslate"><span class="pre">0.01</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">learning_rate(Rate)</span></code> - Positive numeric base learning rate
+(default: <code class="docutils literal notranslate"><span class="pre">0.1</span></code>). The step at zero-based iteration <code class="docutils literal notranslate"><span class="pre">Iteration</span></code> is
+<code class="docutils literal notranslate"><span class="pre">Rate</span> <span class="pre">/</span> <span class="pre">sqrt(Iteration</span> <span class="pre">+</span> <span class="pre">1.0)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">maximum_iterations(Count)</span></code> - Positive integer iteration limit per
+margin model (default: <code class="docutils literal notranslate"><span class="pre">1000</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tolerance(Tolerance)</span></code> - Non-negative numeric threshold for the
+maximum absolute bias or weight update (default: <code class="docutils literal notranslate"><span class="pre">1.0e-6</span></code>). This
+criterion depends on the learning rate and does not establish
+objective convergence.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">l2_regularization(Regularization)</span></code> - Non-negative numeric L2 factor
+applied to weights, not biases (default: <code class="docutils literal notranslate"><span class="pre">0.01</span></code>). Zero disables it.</p></li>
 </ul>
+<p>Repeated options are accepted; the first occurrence determines the
+value. Training examples must contain each declared attribute exactly
+once. Unbound values denote missing observations; omitted prediction
+attributes are also treated as missing.</p>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
@@ -570,6 +593,63 @@ value lists</p></li>
 this classifier term is serialized directly as the single argument of
 the generated predicate clause so that the exported model can be loaded
 and reused as-is.</p>
+<p>The outer functor can be user-chosen when constructing or restoring a
+classifier. Validation, prediction, diagnostics, printing, and export
+use its four positional arguments rather than its name. Encoders and
+coefficients retain the same dense representation for binary,
+multiclass, and bias-only models.</p>
+</section>
+<section id="validation">
+<h2>Validation<a class="headerlink" href="#validation" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">check_classifier/1</span></code> predicate raises an instantiation error for
+an unbound or non-ground classifier, without completing partial model
+labels, weights, encoders, or options. Ground terms with invalid
+classes, encoders, model dimensions, coefficients, or options raise
+<code class="docutils literal notranslate"><span class="pre">domain_error(classifier,</span> <span class="pre">Classifier)</span></code>. The <code class="docutils literal notranslate"><span class="pre">valid_classifier/1</span></code>
+predicate fails for both kinds of invalid input. Stored options follow
+the shared <code class="docutils literal notranslate"><span class="pre">options</span></code> validation rules; a ground list is not rejected
+solely because it omits defaults.</p>
+</section>
+<section id="performance-measurements">
+<h2>Performance measurements<a class="headerlink" href="#performance-measurements" title="Link to this heading"></a></h2>
+<p>The reference-fit benchmarks time one fit and evaluate that same model.
+Reported accuracy is training accuracy, not held-out generalization
+accuracy. Additional benchmarks cover categorical workloads with 66 and
+258 encoded features, encoding, prediction, and continuous
+preprocessing. Repeated measurements use a separate warm-up and the
+median of five samples; fixture construction and learning are excluded
+from timed encoding and prediction batches.</p>
+<p>The implementation resolves training options and row-count scaling once,
+reuses immutable zero-gradient vectors, constructs categorical feature
+vectors directly, and selects the predicted class while scoring models.
+Sparse training remains a separate optimization requiring portable
+indexed weight access and dense-model equivalence checks. The benchmark
+suite retains a multi-pass reference for future comparisons.</p>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Decision boundaries are linear in the encoded feature space. Kernel
+methods and automatic feature interactions are not supported.</p></li>
+<li><p>Encoded examples and model weights use dense lists. High-cardinality
+categorical attributes increase memory use and training cost even when
+most encoded features are zero.</p></li>
+<li><p>Training is batch-based and keeps all encoded examples in memory. Each
+optimization iteration scans the training rows; multiclass training
+performs a separate optimization for each class. Incremental and
+mini-batch learning are not supported.</p></li>
+<li><p>Batch subgradient descent is sensitive to the learning rate,
+regularization, tolerance, and iteration limit. A small parameter
+update or an exhausted iteration budget does not certify that the
+objective has reached its minimum.</p></li>
+<li><p>Categorical domains and continuous scaling statistics are fixed at
+training time. Unseen categorical values are rejected; adapting to
+changed domains or distributions requires retraining.</p></li>
+<li><p>Margin scores are not calibrated class probabilities. Class-specific
+penalties and per-example weights are not supported.</p></li>
+<li><p>The reference-fit benchmarks measure training accuracy only. They do
+not establish generalization performance on unseen examples.</p></li>
+</ul>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>

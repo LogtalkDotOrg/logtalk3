@@ -23,11 +23,15 @@
 	imports(classifier_common)).
 
 	:- info([
-		version is 2:0:1,
+		version is 2:1:0,
 		author is 'Paulo Moura',
 		date is 2026-10-13,
 		comment is 'Linear support vector machine classifier supporting binary and multiclass classification using one-vs-rest margin models. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
-		see_also is [dataset_protocol, logistic_regression_classifier, c45_classifier, knn_classifier, naive_bayes_classifier, nearest_centroid_classifier, random_forest_classifier, adaptive_boosting_classifier]
+		see_also is [
+			dataset_protocol, logistic_regression_classifier, c45_classifier, knn_classifier,
+			naive_bayes_classifier, nearest_centroid_classifier, random_forest_classifier,
+			adaptive_boosting_classifier
+		]
 	]).
 
 	:- uses(format, [
@@ -35,19 +39,15 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, member/2, memberchk/2
+		length/2, member/2, memberchk/2
 	]).
 
 	:- uses(linear_algebra, [
-		add_scaled_vector/4, new_vector/3, new_vector_like/2
+		add_scaled_vector/4, dot_product/3, new_vector/3
 	]).
 
 	:- uses(numberlist, [
-		scalar_product/3
-	]).
-
-	:- uses(pairs, [
-		keys/2
+		rescale/3
 	]).
 
 	:- uses(population, [
@@ -62,7 +62,6 @@
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
 		^^dataset_attributes(Dataset, Attributes),
-		keys(Attributes, _AttributeNames),
 		^^dataset_examples(Dataset, Examples),
 		^^check_complete_examples(Dataset, Examples),
 		Dataset::class_values(Classes),
@@ -75,8 +74,7 @@
 	predict(Classifier, Instance, Class) :-
 		classifier_data(Classifier, _Classes, Encoders, Models, _Options),
 		encode_instance(Encoders, Instance, Features),
-		class_scores(Models, Features, ClassScores),
-		max_score(ClassScores, Class, _).
+		best_class(Models, Features, Class).
 
 	dataset_attributes(Dataset, Attributes) :-
 		findall(
@@ -140,10 +138,9 @@
 		(	memberchk(Attribute-Value, AttributeValues),
 			nonvar(Value) ->
 			check_categorical_value(Attribute, Values, Value),
-			one_hot_encode(Values, Value, Encoded)
-		;	missing_one_hot_encode(Values, Encoded)
+			one_hot_encode(Values, Value, Features, RestFeatures)
+		;	missing_one_hot_encode(Values, Features, RestFeatures)
 		),
-		append(Encoded, RestFeatures, Features),
 		encode_instance(Encoders, AttributeValues, RestFeatures).
 
 	normalize_continuous(Value, Mean, Scale, Feature) :-
@@ -153,17 +150,17 @@
 		),
 		Feature is (Value - Mean) / Scale.
 
-	one_hot_encode([], _, [0.0]).
-	one_hot_encode([Category| Categories], Value, [Feature| Features]) :-
+	one_hot_encode([], _, [0.0| Tail], Tail).
+	one_hot_encode([Category| Categories], Value, [Feature| Features], Tail) :-
 		(	Value == Category ->
 			Feature = 1.0
 		;	Feature = 0.0
 		),
-		one_hot_encode(Categories, Value, Features).
+		one_hot_encode(Categories, Value, Features, Tail).
 
-	missing_one_hot_encode([], [1.0]).
-	missing_one_hot_encode([_| Values], [0.0| Zeroes]) :-
-		missing_one_hot_encode(Values, Zeroes).
+	missing_one_hot_encode([], [1.0| Tail], Tail).
+	missing_one_hot_encode([_| Values], [0.0| Zeroes], Tail) :-
+		missing_one_hot_encode(Values, Zeroes, Tail).
 
 	check_categorical_value(Attribute, Values, Value) :-
 		(	member(Value, Values) ->
@@ -181,46 +178,54 @@
 		encoders_feature_count(Encoders, RestCount),
 		Count is RestCount + ValueCount + 1.
 
-	train_models([], _, _, _, []).
-	train_models([Class| Classes], Rows, NumFeatures, Options, [Model| Models]) :-
-		initialize_model(Class, NumFeatures, InitialModel),
-		optimize_model(Rows, Class, Options, 0, InitialModel, Model),
-		train_models(Classes, Rows, NumFeatures, Options, Models).
-
-	initialize_model(Class, NumFeatures, class_model(Class, 0.0, Weights)) :-
-		new_vector(NumFeatures, 0.0, Weights).
-
-	optimize_model(Rows, PositiveClass, Options, Iteration, Model0, Model) :-
+	train_models(Classes, Rows, NumFeatures, Options, Models) :-
 		^^option(maximum_iterations(MaximumIterations), Options),
+		^^option(learning_rate(LearningRate), Options),
+		^^option(tolerance(Tolerance), Options),
+		^^option(l2_regularization(Regularization), Options),
+		length(Rows, Count),
+		Scale is 1.0 / Count,
+		new_vector(NumFeatures, 0.0, Zeroes),
+		Settings = training(MaximumIterations, LearningRate, Tolerance, Regularization, Scale, Zeroes),
+		(	Classes = [First, Second] ->
+			train_class_models([First], Rows, Settings, [class_model(First, Bias, Weights)]),
+			NegativeBias is -Bias,
+			rescale(Weights, -1.0, NegativeWeights),
+			Models = [class_model(First, Bias, Weights), class_model(Second, NegativeBias, NegativeWeights)]
+		;	train_class_models(Classes, Rows, Settings, Models)
+		).
+
+	train_class_models([], _, _, []).
+	train_class_models([Class| Classes], Rows, Settings, [Model| Models]) :-
+		Settings = training(_, _, _, _, _, Zeroes),
+		optimize_model(Rows, Class, Settings, 0, class_model(Class, 0.0, Zeroes), Model),
+		train_class_models(Classes, Rows, Settings, Models).
+
+	optimize_model(Rows, PositiveClass, Settings, Iteration, Model0, Model) :-
+		Settings = training(MaximumIterations, LearningRate, Tolerance, _, _, _),
 		(	Iteration >= MaximumIterations ->
 			Model = Model0
-		;	^^option(learning_rate(LearningRate), Options),
-			Step is LearningRate / sqrt(Iteration + 1.0),
-			update_model(Rows, PositiveClass, Model0, Step, Options, Model1, MaxDelta),
-			^^option(tolerance(Tolerance), Options),
+		;	Step is LearningRate / sqrt(Iteration + 1.0),
+			update_model(Rows, PositiveClass, Model0, Step, Settings, Model1, MaxDelta),
 			(	MaxDelta =< Tolerance ->
 				Model = Model1
 			;	NextIteration is Iteration + 1,
-				optimize_model(Rows, PositiveClass, Options, NextIteration, Model1, Model)
+				optimize_model(Rows, PositiveClass, Settings, NextIteration, Model1, Model)
 			)
 		).
 
-	update_model(Rows, PositiveClass, class_model(Class, Bias0, Weights0), Step, Options, class_model(Class, Bias1, Weights1), MaxDelta) :-
-		length(Rows, Count),
-		new_vector_like(Weights0, ZeroGradients),
+	update_model(Rows, PositiveClass, class_model(Class, Bias0, Weights0), Step, training(_, _, _, Regularization, Scale, ZeroGradients), class_model(Class, Bias1, Weights1), MaxDelta) :-
 		accumulate_binary_gradients(Rows, PositiveClass, Bias0, Weights0, 0.0, BiasGradient, ZeroGradients, WeightGradients),
-		Scale is 1.0 / Count,
 		MeanBiasGradient is BiasGradient * Scale,
 		Bias1 is Bias0 - Step * MeanBiasGradient,
 		BiasDelta is abs(Bias1 - Bias0),
-		^^option(l2_regularization(Regularization), Options),
 		update_weights(Weights0, WeightGradients, Scale, Regularization, Step, Weights1, 0.0, MaxWeightDelta),
 		MaxDelta is max(BiasDelta, MaxWeightDelta).
 
 	accumulate_binary_gradients([], _PositiveClass, _Bias, _Weights, BiasGradient, BiasGradient, WeightGradients, WeightGradients).
 	accumulate_binary_gradients([Features-Label| Rows], PositiveClass, Bias, Weights, BiasGradient0, BiasGradient, WeightGradients0, WeightGradients) :-
 		target_sign(Label, PositiveClass, Sign),
-		scalar_product(Weights, Features, Linear),
+		dot_product(Weights, Features, Linear),
 		Score is Bias + Linear,
 		Margin is Sign * Score,
 		(	Margin >= 1.0 ->
@@ -245,18 +250,18 @@
 		MaxDelta1 is max(Delta, MaxDelta0),
 		update_weights(Weights0, Gradients, Scale, Regularization, Step, Weights1, MaxDelta1, MaxDelta).
 
-	class_scores([], _, []).
-	class_scores([class_model(Class, Bias, Weights)| Models], Features, [Class-Score| Scores]) :-
-		scalar_product(Weights, Features, Linear),
+	best_class([class_model(Class0, Bias, Weights)| Models], Features, Class) :-
+		dot_product(Weights, Features, Linear),
 		Score is Bias + Linear,
-		class_scores(Models, Features, Scores).
+		best_class(Models, Features, Class0, Score, Class).
 
-	max_score([Class-Score], Class, Score) :-
-		!.
-	max_score([Class1-Score1, Class2-Score2| Scores], Class, Score) :-
-		(	Score1 >= Score2 ->
-			max_score([Class1-Score1| Scores], Class, Score)
-		;	max_score([Class2-Score2| Scores], Class, Score)
+	best_class([], _, Class, _, Class).
+	best_class([class_model(Candidate, Bias, Weights)| Models], Features, Class0, Score0, Class) :-
+		dot_product(Weights, Features, Linear),
+		Score is Bias + Linear,
+		(	Score > Score0 ->
+			best_class(Models, Features, Candidate, Score, Class)
+		;	best_class(Models, Features, Class0, Score0, Class)
 		).
 
 	classifier_diagnostics_data(Classifier, Diagnostics) :-
@@ -272,7 +277,9 @@
 		].
 
 	check_classifier(Classifier) :-
-		(	classifier_data(Classifier, Classes, Encoders, Models, Options),
+		(	\+ ground(Classifier) ->
+			instantiation_error
+		;	classifier_data(Classifier, Classes, Encoders, Models, Options),
 			^^valid_class_values(Classes),
 			^^valid_linear_encoders(Encoders),
 			catch(::check_options(Options), _Error, fail),
