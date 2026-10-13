@@ -23,10 +23,10 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-09,
-		comment is 'Unit tests for the svr_regression library, exercised against the real regression_protocols test dataset fixtures.'
+		date is 2026-10-13,
+		comment is 'Unit tests for the "svr_regression" library.'
 	]).
 
 	:- uses(svr_regression, [
@@ -127,11 +127,11 @@
 		predict(Regressor, [age-10, student-no], Prediction),
 		number(Prediction).
 
-	% learn/3, custom options: demonstrates that the harder mixed-feature
-	% datasets above reach a tight fit given a larger iteration budget
+	% learn/3, custom options: a larger learning rate reaches a tight fit
+	% on the mixed-feature dataset within a smaller iteration budget
 
 	test(svr_regression_learn_3_custom_options_mixed_signal, true(Error < 1.0)) :-
-		learn(mixed_signal, Regressor, [maximum_iterations(3000)]),
+		learn(mixed_signal, Regressor, [learning_rate(2.0), maximum_iterations(500)]),
 		predict(Regressor, [age-10, student-no, plan-basic], Prediction),
 		mixed_signal::example(_, Target, [age-10, student-no, plan-basic]),
 		Error is abs(Prediction - Target).
@@ -141,13 +141,13 @@
 	% fit it substantially better, over the same iteration budget
 
 	test(svr_regression_learn_3_kernel_linear_vs_rbf_step_signal, true(RmseRbf < RmseLinear)) :-
-		learn(step_signal, LinearRegressor, [maximum_iterations(500)]),
-		learn(step_signal, RbfRegressor, [kernel(rbf(1.0)), maximum_iterations(500)]),
+		learn(step_signal, LinearRegressor, [maximum_iterations(100)]),
+		learn(step_signal, RbfRegressor, [kernel(rbf(1.0)), maximum_iterations(100)]),
 		dataset_rmse(step_signal, LinearRegressor, RmseLinear),
 		dataset_rmse(step_signal, RbfRegressor, RmseRbf).
 
 	test(svr_regression_learn_3_kernel_polynomial, deterministic) :-
-		learn(plane, Regressor, [kernel(polynomial(2, 0.5, 1.0)), maximum_iterations(300)]),
+		learn(plane, Regressor, [kernel(polynomial(2, 0.5, 1.0)), maximum_iterations(1)]),
 		valid_regressor(Regressor),
 		predict(Regressor, [x1-2, x2-1], Prediction),
 		number(Prediction).
@@ -155,7 +155,7 @@
 	% validity checks
 
 	test(svr_regression_valid_regressor_1, deterministic) :-
-		learn(simple_line, Regressor),
+		learn(simple_line, Regressor, [maximum_iterations(1)]),
 		valid_regressor(Regressor).
 
 	test(svr_regression_invalid_regressor_1, fail) :-
@@ -164,7 +164,7 @@
 	% diagnostics
 
 	test(svr_regression_diagnostics_2, deterministic(Model-Target-Kernel == svr_regression-y-linear)) :-
-		learn(simple_line, Regressor),
+		learn(simple_line, Regressor, [maximum_iterations(1)]),
 		diagnostics(Regressor, Diagnostics),
 		memberchk(model(Model), Diagnostics),
 		memberchk(target(Target), Diagnostics),
@@ -186,20 +186,20 @@
 	% prediction
 
 	test(svr_regression_predict_3_simple_line, deterministic) :-
-		learn(simple_line, Regressor),
+		learn(simple_line, Regressor, [maximum_iterations(1)]),
 		predict(Regressor, [x-0], Prediction),
 		number(Prediction).
 
 	% export
 
 	test(svr_regression_export_to_clauses_4, deterministic(Functor-Arity == svr_predict-6)) :-
-		learn(simple_line, Regressor),
+		learn(simple_line, Regressor, [maximum_iterations(1)]),
 		export_to_clauses(simple_line, Regressor, svr_predict, [Clause]),
 		functor(Clause, Functor, Arity).
 
 	test(svr_regression_export_to_file_4_written, deterministic) :-
 		^^file_path('svr_regression_test_export.lgt', Path),
-		learn(simple_line, Regressor),
+		learn(simple_line, Regressor, [maximum_iterations(1)]),
 		export_to_file(simple_line, Regressor, svr_predict, Path),
 		file_exists(Path).
 
@@ -214,7 +214,7 @@
 
 	test(svr_regression_print_regressor_1, deterministic) :-
 		^^suppress_text_output,
-		learn(simple_line, Regressor),
+		learn(simple_line, Regressor, [maximum_iterations(1)]),
 		print_regressor(Regressor).
 
 	% schema- and example-level negative tests (learn/2)
@@ -234,15 +234,15 @@
 	% prediction-time negative tests (predict/3)
 
 	test(svr_regression_predict_3_undeclared_attribute, error(domain_error(declared_attribute, typo))) :-
-		learn(simple_line, Regressor),
+		learn(simple_line, Regressor, [maximum_iterations(1)]),
 		predict(Regressor, [x-1, typo-9], _).
 
 	test(svr_regression_predict_3_duplicate_attribute, error(domain_error(attribute_occurrences, x))) :-
-		learn(simple_line, Regressor),
+		learn(simple_line, Regressor, [maximum_iterations(1)]),
 		predict(Regressor, [x-1, x-2], _).
 
 	test(svr_regression_predict_3_unknown_category, error(domain_error(attribute_value(plan, [basic, premium]), ultra))) :-
-		learn(mixed_signal, Regressor),
+		learn(mixed_signal, Regressor, [maximum_iterations(1)]),
 		predict(Regressor, [age-10, student-no, plan-ultra], _).
 
 	% auxiliary predicates
