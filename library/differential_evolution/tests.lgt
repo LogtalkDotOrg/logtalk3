@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2026-10-11,
+		date is 2026-10-13,
 		comment is 'Unit tests for the "differential_evolution" library.'
 	]).
 
@@ -48,7 +48,7 @@
 		differential_evolution(sphere)::run(Position, Fitness, [seed(42), max_generations(100), target_fitness(0.49)]).
 
 	test(de_run_2_default_strategy, deterministic((list::valid(Position), number(Fitness)))) :-
-		differential_evolution(sphere)::run(Position, Fitness).
+		differential_evolution(sphere_stop)::run(Position, Fitness).
 
 	test(de_strategy_rand_1_bin, deterministic(Fitness < 0.5)) :-
 		differential_evolution(sphere)::run(_Position, Fitness, [strategy(rand/1/bin), seed(42), max_generations(100), target_fitness(0.49)]).
@@ -500,8 +500,8 @@
 		assertion(SameDiversity =~= 0).
 
 	test(differential_evolution_no_discarded_metrics, deterministic) :-
-		differential_evolution(differential_evolution_fixture(large_fitness))::run(_, _),
-		differential_evolution(differential_evolution_fixture(large_fitness))::run(_, _, [target_fitness(1.0e308)]).
+		differential_evolution(differential_evolution_fixture(large_fitness))::run(_, _, [population_size(4), max_generations(1)]),
+		differential_evolution(differential_evolution_fixture(large_fitness))::run(_, _, [population_size(4), target_fitness(1.0e308)]).
 
 	test(differential_evolution_final_metrics_shared, deterministic) :-
 		sphere_progress::clear_log,
