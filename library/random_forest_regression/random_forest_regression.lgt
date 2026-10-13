@@ -23,9 +23,9 @@
 	imports(regressor_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-05,
+		date is 2026-10-13,
 		comment is 'Random Forest regression using regression trees as base learners trained on bootstrap samples and per-split random feature subsets.',
 		see_also is [linear_regression, knn_regression, regression_tree, gradient_boosting_regression]
 	]).
@@ -79,7 +79,7 @@
 		Regressor = rf_regressor(Trees, Diagnostics).
 
 	predict(Regressor, Instance, Target) :-
-		Regressor =.. [_, Trees, _Diagnostics],
+		regressor_data(Regressor, Trees, _Diagnostics),
 		collect_predictions(Trees, Instance, Predictions),
 		(	Predictions == [] ->
 			domain_error(non_empty_predictions, Regressor)
@@ -152,13 +152,18 @@
 		),
 		collect_predictions(Trees, Instance, RestPredictions).
 
+	regressor_data(Regressor, Trees, Diagnostics) :-
+		Regressor =.. [_, Trees, Diagnostics].
+
 	regressor_export_template(_Dataset, _Regressor, Functor, Template) :-
 		Template =.. [Functor, 'Trees', 'Diagnostics'].
 
-	regressor_term_template(rf_regressor(_Trees, _Diagnostics), rf_regressor('Trees', 'Diagnostics')).
+	regressor_term_template(Regressor, Template) :-
+		functor(Regressor, Functor, 2),
+		Template =.. [Functor, 'Trees', 'Diagnostics'].
 
 	check_regressor(Regressor) :-
-		(	Regressor = rf_regressor(Trees, Diagnostics),
+		(	regressor_data(Regressor, Trees, Diagnostics),
 			Trees \== [],
 			^^valid_regressor_metadata(random_forest_regression, Diagnostics),
 			^^regressor_options(Regressor, Options),
@@ -171,11 +176,11 @@
 		).
 
 	export_to_clauses(_Dataset, Regressor, Functor, [Clause]) :-
-		Regressor =.. [_, Trees, Diagnostics],
+		regressor_data(Regressor, Trees, Diagnostics),
 		Clause =.. [Functor, Trees, Diagnostics].
 
 	print_regressor(Regressor) :-
-		Regressor = rf_regressor(Trees, Diagnostics),
+		regressor_data(Regressor, Trees, Diagnostics),
 		format('Random Forest Regressor~n', []),
 		format('=======================~n~n', []),
 		^^print_regressor_template(Regressor),

@@ -23,9 +23,9 @@
 	imports(regressor_common)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-09-24,
+		date is 2026-10-13,
 		comment is 'Regression tree regressor supporting continuous and mixed-feature datasets using recursive variance-reduction splits.',
 		see_also is [linear_regression, knn_regression, random_forest_regression, gradient_boosting_regression]
 	]).
@@ -285,13 +285,18 @@
 		;	Target = Fallback
 		).
 
+	regressor_data(Regressor, Encoders, FeatureLabels, Tree, Diagnostics) :-
+		Regressor =.. [_, Encoders, FeatureLabels, Tree, Diagnostics].
+
 	regressor_export_template(_Dataset, _Regressor, Functor, Template) :-
 		Template =.. [Functor, 'Encoders', 'FeatureLabels', 'Tree', 'Diagnostics'].
 
-	regressor_term_template(regression_tree_regressor(_Encoders, _FeatureLabels, _Tree, _Diagnostics), regression_tree_regressor('Encoders', 'FeatureLabels', 'Tree', 'Diagnostics')).
+	regressor_term_template(Regressor, Template) :-
+		functor(Regressor, Functor, 4),
+		Template =.. [Functor, 'Encoders', 'FeatureLabels', 'Tree', 'Diagnostics'].
 
 	check_regressor(Regressor) :-
-		(	Regressor = regression_tree_regressor(Encoders, FeatureLabels, Tree, Diagnostics),
+		(	regressor_data(Regressor, Encoders, FeatureLabels, Tree, Diagnostics),
 			^^valid_regression_encoders(Encoders),
 			^^valid_feature_labels(FeatureLabels),
 			^^encoded_feature_count(Encoders, FeatureCount),
@@ -304,11 +309,11 @@
 		).
 
 	export_to_clauses(_Dataset, Regressor, Functor, [Clause]) :-
-		Regressor = regression_tree_regressor(Encoders, FeatureLabels, Tree, Diagnostics),
+		regressor_data(Regressor, Encoders, FeatureLabels, Tree, Diagnostics),
 		Clause =.. [Functor, Encoders, FeatureLabels, Tree, Diagnostics].
 
 	print_regressor(Regressor) :-
-		Regressor = regression_tree_regressor(_Encoders, FeatureLabels, Tree, Diagnostics),
+		regressor_data(Regressor, _Encoders, FeatureLabels, Tree, Diagnostics),
 		format('Regression Tree Regressor~n', []),
 		format('=======================~n~n', []),
 		^^print_regressor_template(Regressor),

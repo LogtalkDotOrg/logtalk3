@@ -23,9 +23,9 @@
 	imports(regressor_common)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-06-16,
+		date is 2026-10-13,
 		comment is 'Lasso regression regressor supporting continuous and mixed-feature datasets using coordinate descent with coefficient-wise L1 shrinkage. Learns from a dataset object implementing the ``regression_dataset_protocol`` protocol and returns a regressor term that can be used for prediction and exported as predicate clauses.',
 		see_also is [
 			linear_regression, ridge_regression, knn_regression, regression_tree, random_forest_regression,
@@ -58,7 +58,7 @@
 		Regressor = lasso_regressor(Encoders, Bias, Weights, Diagnostics).
 
 	predict(Regressor, Instance, Target) :-
-		Regressor =.. [_, Encoders, Bias, Weights, _Diagnostics],
+		regressor_data(Regressor, Encoders, Bias, Weights, _Diagnostics),
 		^^encode_instance(Encoders, Instance, Features),
 		dot_product(Weights, Features, Linear),
 		Target is Bias + Linear.
@@ -257,13 +257,18 @@
 		Residual1 is Residual0 - Feature * WeightDelta,
 		update_residuals(Column, Residuals0, WeightDelta, Residuals1).
 
+	regressor_data(Regressor, Encoders, Bias, Weights, Diagnostics) :-
+		Regressor =.. [_, Encoders, Bias, Weights, Diagnostics].
+
 	regressor_export_template(_Dataset, _Regressor, Functor, Template) :-
 		Template =.. [Functor, 'Encoders', 'Bias', 'Weights', 'Diagnostics'].
 
-	regressor_term_template(lasso_regressor(_Encoders, _Bias, _Weights, _Diagnostics), lasso_regressor('Encoders', 'Bias', 'Weights', 'Diagnostics')).
+	regressor_term_template(Regressor, Template) :-
+		functor(Regressor, Functor, 4),
+		Template =.. [Functor, 'Encoders', 'Bias', 'Weights', 'Diagnostics'].
 
 	check_regressor(Regressor) :-
-		(	Regressor = lasso_regressor(Encoders, Bias, Weights, Diagnostics),
+		(	regressor_data(Regressor, Encoders, Bias, Weights, Diagnostics),
 			^^valid_regression_encoders(Encoders),
 			valid(float, Bias),
 			^^encoded_feature_count(Encoders, FeatureCount),
@@ -276,11 +281,11 @@
 		).
 
 	export_to_clauses(_Dataset, Regressor, Functor, [Clause]) :-
-		Regressor = lasso_regressor(Encoders, Bias, Weights, Diagnostics),
+		regressor_data(Regressor, Encoders, Bias, Weights, Diagnostics),
 		Clause =.. [Functor, Encoders, Bias, Weights, Diagnostics].
 
 	print_regressor(Regressor) :-
-		Regressor = lasso_regressor(Encoders, Bias, Weights, Diagnostics),
+		regressor_data(Regressor, Encoders, Bias, Weights, Diagnostics),
 		format('Lasso Regression Regressor~n', []),
 		format('==========================~n~n', []),
 		^^print_regressor_template(Regressor),

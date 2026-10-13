@@ -23,9 +23,9 @@
 	imports(regressor_common)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:0:2,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-10-13,
 		comment is 'Bayesian ridge regression regressor supporting continuous and mixed-feature datasets using evidence maximization and posterior uncertainty over coefficients. Learns from a dataset object implementing the ``regression_dataset_protocol`` protocol and returns a regressor term that can be used for prediction, predictive-distribution queries, and export as predicate clauses.',
 		see_also is [
 			linear_regression, ridge_regression, lasso_regression, elastic_net_regression, gaussian_process_regression,
@@ -83,13 +83,13 @@
 		Regressor = bayesian_ridge_regressor(Encoders, Bias, Weights, ActiveFlags, PosteriorCovariance, NoiseVariance, Diagnostics).
 
 	predict(Regressor, Instance, Target) :-
-		Regressor =.. [_, Encoders, Bias, Weights, _ActiveFlags, _PosteriorCovariance, _NoiseVariance, _Diagnostics],
+		regressor_data(Regressor, Encoders, Bias, Weights, _ActiveFlags, _PosteriorCovariance, _NoiseVariance, _Diagnostics),
 		^^encode_instance(Encoders, Instance, Features),
 		linear_response(Weights, Features, Linear),
 		Target is Bias + Linear.
 
 	predict_distribution(Regressor, Instance, gaussian(Mean, Variance)) :-
-		Regressor =.. [_, Encoders, Bias, Weights, ActiveFlags, PosteriorCovariance, NoiseVariance, _Diagnostics],
+		regressor_data(Regressor, Encoders, Bias, Weights, ActiveFlags, PosteriorCovariance, NoiseVariance, _Diagnostics),
 		^^encode_instance(Encoders, Instance, Features),
 		linear_response(Weights, Features, Linear),
 		Mean is Bias + Linear,
@@ -104,7 +104,7 @@
 		).
 
 	weight_variances(Regressor, Variances) :-
-		Regressor =.. [_, _Encoders, _Bias, _Weights, ActiveFlags, PosteriorCovariance, _NoiseVariance, _Diagnostics],
+		regressor_data(Regressor, _Encoders, _Bias, _Weights, ActiveFlags, PosteriorCovariance, _NoiseVariance, _Diagnostics),
 		posterior_weight_variances(PosteriorCovariance, ActiveFlags, Variances).
 
 	build_diagnostics(Target, Encoders, TrainingExampleCount, Options, TrainingDiagnostics, Diagnostics) :-
@@ -392,16 +392,18 @@
 
 	stabilization_metrics(stabilization(Attempts, Jitter), Attempts, Jitter).
 
+	regressor_data(Regressor, Encoders, Bias, Weights, ActiveFlags, PosteriorCovariance, NoiseVariance, Diagnostics) :-
+		Regressor =.. [_, Encoders, Bias, Weights, ActiveFlags, PosteriorCovariance, NoiseVariance, Diagnostics].
+
 	regressor_export_template(_Dataset, _Regressor, Functor, Template) :-
 		Template =.. [Functor, 'Encoders', 'Bias', 'Weights', 'ActiveFlags', 'PosteriorCovariance', 'NoiseVariance', 'Diagnostics'].
 
-	regressor_term_template(
-		bayesian_ridge_regressor(_Encoders, _Bias, _Weights, _ActiveFlags, _PosteriorCovariance, _NoiseVariance, _Diagnostics),
-		bayesian_ridge_regressor('Encoders', 'Bias', 'Weights', 'ActiveFlags', 'PosteriorCovariance', 'NoiseVariance', 'Diagnostics')
-	).
+	regressor_term_template(Regressor, Template) :-
+		functor(Regressor, Functor, 7),
+		Template =.. [Functor, 'Encoders', 'Bias', 'Weights', 'ActiveFlags', 'PosteriorCovariance', 'NoiseVariance', 'Diagnostics'].
 
 	check_regressor(Regressor) :-
-		(	Regressor = bayesian_ridge_regressor(Encoders, Bias, Weights, ActiveFlags, PosteriorCovariance, NoiseVariance, Diagnostics),
+		(	regressor_data(Regressor, Encoders, Bias, Weights, ActiveFlags, PosteriorCovariance, NoiseVariance, Diagnostics),
 			^^valid_regression_encoders(Encoders),
 			valid(float, Bias),
 			^^encoded_feature_count(Encoders, FeatureCount),
@@ -484,7 +486,7 @@
 		Clause =.. [Functor, Encoders, Bias, Weights, ActiveFlags, PosteriorCovariance, NoiseVariance, Diagnostics].
 
 	print_regressor(Regressor) :-
-		Regressor = bayesian_ridge_regressor(Encoders, Bias, Weights, ActiveFlags, PosteriorCovariance, NoiseVariance, Diagnostics),
+		regressor_data(Regressor, Encoders, Bias, Weights, ActiveFlags, PosteriorCovariance, NoiseVariance, Diagnostics),
 		length(PosteriorCovariance, CovarianceSize),
 		format('Bayesian Ridge Regression Regressor~n', []),
 		format('===================================~n~n', []),

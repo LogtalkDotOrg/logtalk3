@@ -23,9 +23,9 @@
 	imports(regressor_common)).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:1:2,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-10-13,
 		comment is 'Gaussian process regression regressor supporting continuous and mixed-feature datasets using an exact mixed Gaussian process with posterior uncertainty estimates. Learns from a dataset object implementing the ``regression_dataset_protocol`` protocol and returns a regressor term that can be used for prediction, predictive-distribution queries, and export as predicate clauses.',
 		see_also is [
 			linear_regression, ridge_regression, lasso_regression, elastic_net_regression, regression_tree,
@@ -80,7 +80,7 @@
 		predict_distribution(Regressor, Instance, gaussian(Target, _Variance)).
 
 	predict_distribution(Regressor, Instance, gaussian(Mean, Variance)) :-
-		Regressor =.. [_, Encoders, TrainingFeatures, TargetMean, Alpha, CholeskyFactor, Kernel, _Diagnostics],
+		regressor_data(Regressor, Encoders, TrainingFeatures, TargetMean, Alpha, CholeskyFactor, Kernel, _Diagnostics),
 		^^encode_instance(Encoders, Instance, Features),
 		kernel_vector(TrainingFeatures, Features, Kernel, KernelVector),
 		dot_product(Alpha, KernelVector, CenteredMean),
@@ -587,13 +587,18 @@
 		latent_covariance(Kernel, TrainingFeature, Features, Value),
 		kernel_vector(TrainingFeatures, Features, Kernel, Values).
 
+	regressor_data(Regressor, Encoders, TrainingFeatures, TargetMean, Alpha, CholeskyFactor, Kernel, Diagnostics) :-
+		Regressor =.. [_, Encoders, TrainingFeatures, TargetMean, Alpha, CholeskyFactor, Kernel, Diagnostics].
+
 	regressor_export_template(_Dataset, _Regressor, Functor, Template) :-
 		Template =.. [Functor, 'Encoders', 'TrainingFeatures', 'TargetMean', 'Alpha', 'CholeskyFactor', 'Kernel', 'Diagnostics'].
 
-	regressor_term_template(gaussian_process_regressor(_Encoders, _TrainingFeatures, _TargetMean, _Alpha, _CholeskyFactor, _Kernel, _Diagnostics), gaussian_process_regressor('Encoders', 'TrainingFeatures', 'TargetMean', 'Alpha', 'CholeskyFactor', 'Kernel', 'Diagnostics')).
+	regressor_term_template(Regressor, Template) :-
+		functor(Regressor, Functor, 7),
+		Template =.. [Functor, 'Encoders', 'TrainingFeatures', 'TargetMean', 'Alpha', 'CholeskyFactor', 'Kernel', 'Diagnostics'].
 
 	check_regressor(Regressor) :-
-		(	Regressor = gaussian_process_regressor(Encoders, TrainingFeatures, TargetMean, Alpha, CholeskyFactor, Kernel, Diagnostics),
+		(	regressor_data(Regressor, Encoders, TrainingFeatures, TargetMean, Alpha, CholeskyFactor, Kernel, Diagnostics),
 			^^valid_regression_encoders(Encoders),
 			valid(float, TargetMean),
 			build_feature_layout(Encoders, FeatureLayout, ContinuousFeatureCount, CategoricalFeatureCount),
@@ -708,11 +713,11 @@
 	valid_gaussian_process_convergence(maximum_iterations_exhausted).
 
 	export_to_clauses(_Dataset, Regressor, Functor, [Clause]) :-
-		Regressor = gaussian_process_regressor(Encoders, TrainingFeatures, TargetMean, Alpha, CholeskyFactor, Kernel, Diagnostics),
+		regressor_data(Regressor, Encoders, TrainingFeatures, TargetMean, Alpha, CholeskyFactor, Kernel, Diagnostics),
 		Clause =.. [Functor, Encoders, TrainingFeatures, TargetMean, Alpha, CholeskyFactor, Kernel, Diagnostics].
 
 	print_regressor(Regressor) :-
-		Regressor = gaussian_process_regressor(Encoders, TrainingFeatures, TargetMean, _Alpha, _CholeskyFactor, Kernel, Diagnostics),
+		regressor_data(Regressor, Encoders, TrainingFeatures, TargetMean, _Alpha, _CholeskyFactor, Kernel, Diagnostics),
 		Kernel = squared_exponential_kernel(_FeatureLayout, LengthScales, CategoricalPenalties, SignalVariance, NoiseVariance, Jitter),
 		length(TrainingFeatures, TrainingExampleCount),
 		format('Gaussian Process Regression Regressor~n', []),

@@ -51,7 +51,9 @@
 	regressor_export_template(_Dataset, _Regressor, Functor, Template) :-
 		Template =.. [Functor, 'Regressor'].
 
-	regressor_term_template(sample_regressor(_TargetName, _Attributes, _Target, _Diagnostics), sample_regressor('TargetName', 'Attributes', 'Target', 'Diagnostics')).
+	regressor_term_template(Regressor, Template) :-
+		functor(Regressor, Functor, 4),
+		Template =.. [Functor, 'TargetName', 'Attributes', 'Target', 'Diagnostics'].
 
 	export_to_clauses(_Dataset, Regressor, Functor, [Clause]) :-
 		Clause =.. [Functor, Regressor].
@@ -64,7 +66,5 @@
 
 	valid_option(sample_option(Value)) :-
 		once((Value == enabled; Value == disabled)).
-
-
 
 :- end_object.

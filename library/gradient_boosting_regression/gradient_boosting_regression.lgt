@@ -23,9 +23,9 @@
 	imports(regressor_common)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-05-21,
+		date is 2026-10-13,
 		comment is 'Gradient boosting regression using regression trees as additive base learners fitted to successive residuals.',
 		see_also is [linear_regression, knn_regression, regression_tree, random_forest_regression]
 	]).
@@ -68,7 +68,7 @@
 		Regressor = gradient_boosting_regressor(InitialPrediction, WeightedTrees, Diagnostics).
 
 	predict(Regressor, Instance, Target) :-
-		Regressor =.. [_, InitialPrediction, WeightedTrees, _Diagnostics],
+		regressor_data(Regressor, InitialPrediction, WeightedTrees, _Diagnostics),
 		predict_stages(WeightedTrees, Instance, 0.0, Increment),
 		Target is InitialPrediction + Increment.
 
@@ -142,13 +142,18 @@
 		Increment1 is Increment0 + LearningRate * TreePrediction,
 		predict_stages(WeightedTrees, Instance, Increment1, Increment).
 
+	regressor_data(Regressor, InitialPrediction, WeightedTrees, Diagnostics) :-
+		Regressor =.. [_, InitialPrediction, WeightedTrees, Diagnostics].
+
 	regressor_export_template(_Dataset, _Regressor, Functor, Template) :-
 		Template =.. [Functor, 'InitialPrediction', 'WeightedTrees', 'Diagnostics'].
 
-	regressor_term_template(gradient_boosting_regressor(_InitialPrediction, _WeightedTrees, _Diagnostics), gradient_boosting_regressor('InitialPrediction', 'WeightedTrees', 'Diagnostics')).
+	regressor_term_template(Regressor, Template) :-
+		functor(Regressor, Functor, 3),
+		Template =.. [Functor, 'InitialPrediction', 'WeightedTrees', 'Diagnostics'].
 
 	check_regressor(Regressor) :-
-		(	Regressor = gradient_boosting_regressor(InitialPrediction, WeightedTrees, Diagnostics),
+		(	regressor_data(Regressor, InitialPrediction, WeightedTrees, Diagnostics),
 			number(InitialPrediction),
 			^^valid_regressor_metadata(gradient_boosting_regression, Diagnostics),
 			^^regressor_options(Regressor, Options),
@@ -162,11 +167,11 @@
 		).
 
 	export_to_clauses(_Dataset, Regressor, Functor, [Clause]) :-
-		Regressor = gradient_boosting_regressor(InitialPrediction, WeightedTrees, Diagnostics),
+		regressor_data(Regressor, InitialPrediction, WeightedTrees, Diagnostics),
 		Clause =.. [Functor, InitialPrediction, WeightedTrees, Diagnostics].
 
 	print_regressor(Regressor) :-
-		Regressor = gradient_boosting_regressor(InitialPrediction, WeightedTrees, Diagnostics),
+		regressor_data(Regressor, InitialPrediction, WeightedTrees, Diagnostics),
 		format('Gradient Boosting Regression~n', []),
 		format('============================~n~n', []),
 		^^print_regressor_template(Regressor),

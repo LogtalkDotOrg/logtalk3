@@ -23,9 +23,9 @@
 	imports(regressor_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-10-13,
 		comment is 'k-Nearest Neighbors regressor with multiple distance metrics, weighting schemes, optional feature scaling, and mixed-feature support.',
 		see_also is [linear_regression, regression_tree, random_forest_regression, gradient_boosting_regression]
 	]).
@@ -60,7 +60,7 @@
 		Regressor = knn_regressor(Encoders, Rows, Diagnostics).
 
 	predict(Regressor, Instance, Target) :-
-		Regressor =.. [_, Encoders, Rows, _Diagnostics],
+		regressor_data(Regressor, Encoders, Rows, _Diagnostics),
 		^^regressor_options(Regressor, Options),
 		^^encode_instance(Encoders, Instance, Features),
 		^^option(k(K), Options),
@@ -145,13 +145,18 @@
 		TotalWeight1 is TotalWeight0 + Weight,
 		accumulate_weighted_targets(WeightedNeighbors, WeightedSum1, WeightedSum, TotalWeight1, TotalWeight).
 
+	regressor_data(Regressor, Encoders, Rows, Diagnostics) :-
+		Regressor =.. [_, Encoders, Rows, Diagnostics].
+
 	regressor_export_template(_Dataset, _Regressor, Functor, Template) :-
 		Template =.. [Functor, 'Encoders', 'Rows', 'Diagnostics'].
 
-	regressor_term_template(knn_regressor(_Encoders, _Rows, _Diagnostics), knn_regressor('Encoders', 'Rows', 'Diagnostics')).
+	regressor_term_template(Regressor, Template) :-
+		functor(Regressor, Functor, 3),
+		Template =.. [Functor, 'Encoders', 'Rows', 'Diagnostics'].
 
 	check_regressor(Regressor) :-
-		(	Regressor = knn_regressor(Encoders, Rows, Diagnostics),
+		(	regressor_data(Regressor, Encoders, Rows, Diagnostics),
 			^^valid_regression_encoders(Encoders),
 			^^valid_encoded_rows(Encoders, Rows),
 			^^valid_regressor_metadata(knn_regression, Diagnostics),
@@ -162,11 +167,11 @@
 		).
 
 	export_to_clauses(_Dataset, Regressor, Functor, [Clause]) :-
-		Regressor = knn_regressor(Encoders, Rows, Diagnostics),
+		regressor_data(Regressor, Encoders, Rows, Diagnostics),
 		Clause =.. [Functor, Encoders, Rows, Diagnostics].
 
 	print_regressor(Regressor) :-
-		Regressor = knn_regressor(Encoders, Rows, Diagnostics),
+		regressor_data(Regressor, Encoders, Rows, Diagnostics),
 		format('k-Nearest Neighbors Regressor~n', []),
 		format('=============================~n~n', []),
 		^^print_regressor_template(Regressor),

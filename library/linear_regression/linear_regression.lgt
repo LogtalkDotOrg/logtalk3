@@ -23,9 +23,9 @@
 	imports(regressor_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-05,
+		date is 2026-10-13,
 		comment is 'Linear regression regressor supporting continuous and mixed-feature datasets using a direct ordinary least-squares solve. Learns from a dataset object implementing the ``regression_dataset_protocol`` protocol and returns a regressor term that can be used for prediction and exported as predicate clauses.',
 		see_also is [ridge_regression, knn_regression, regression_tree, random_forest_regression, gradient_boosting_regression]
 	]).
@@ -55,7 +55,7 @@
 		Regressor = linear_regressor(Encoders, Bias, Weights, Diagnostics).
 
 	predict(Regressor, Instance, Target) :-
-		Regressor =.. [_, Encoders, Bias, Weights, _Diagnostics],
+		regressor_data(Regressor, Encoders, Bias, Weights, _Diagnostics),
 		^^encode_instance(Encoders, Instance, Features),
 		dot_product(Weights, Features, Linear),
 		Target is Bias + Linear.
@@ -65,13 +65,18 @@
 		append(TrainingDiagnostics, [encoded_feature_count(FeatureCount)], ExtraDiagnostics),
 		^^base_regressor_diagnostics(linear_regression, Target, TrainingExampleCount, Options, ExtraDiagnostics, Diagnostics).
 
+	regressor_data(Regressor, Encoders, Bias, Weights, Diagnostics) :-
+		Regressor =.. [_, Encoders, Bias, Weights, Diagnostics].
+
 	regressor_export_template(_Dataset, _Regressor, Functor, Template) :-
 		Template =.. [Functor, 'Encoders', 'Bias', 'Weights', 'Diagnostics'].
 
-	regressor_term_template(linear_regressor(_Encoders, _Bias, _Weights, _Diagnostics), linear_regressor('Encoders', 'Bias', 'Weights', 'Diagnostics')).
+	regressor_term_template(Regressor, Template) :-
+		functor(Regressor, Functor, 4),
+		Template =.. [Functor, 'Encoders', 'Bias', 'Weights', 'Diagnostics'].
 
 	check_regressor(Regressor) :-
-		(	Regressor = linear_regressor(Encoders, Bias, Weights, Diagnostics),
+		(	regressor_data(Regressor, Encoders, Bias, Weights, Diagnostics),
 			^^valid_regression_encoders(Encoders),
 			valid(float, Bias),
 			^^encoded_feature_count(Encoders, FeatureCount),
@@ -95,11 +100,11 @@
 		ActiveFeatureCount >= 0.
 
 	export_to_clauses(_Dataset, Regressor, Functor, [Clause]) :-
-		Regressor = linear_regressor(Encoders, Bias, Weights, Diagnostics),
+		regressor_data(Regressor, Encoders, Bias, Weights, Diagnostics),
 		Clause =.. [Functor, Encoders, Bias, Weights, Diagnostics].
 
 	print_regressor(Regressor) :-
-		Regressor = linear_regressor(Encoders, Bias, Weights, Diagnostics),
+		regressor_data(Regressor, Encoders, Bias, Weights, Diagnostics),
 		format('Linear Regression Regressor~n', []),
 		format('===========================~n~n', []),
 		^^print_regressor_template(Regressor),

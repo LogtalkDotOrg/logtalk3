@@ -23,9 +23,9 @@
 	imports(regressor_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-08-09,
+		date is 2026-10-13,
 		comment is 'Support vector regression (SVR) using an epsilon-insensitive dual margin model with linear, polynomial, and radial basis function kernels, trained with a Pegasos-style dual subgradient descent loop. Learns from a dataset object implementing the ``regression_dataset_protocol`` protocol and returns a regressor term that can be used for prediction and exported as predicate clauses.',
 		see_also is [
 			regression_dataset_protocol, kernel_svm_classifier, linear_svm_classifier, linear_regression, ridge_regression, lasso_regression
@@ -61,7 +61,7 @@
 		Regressor = svr_regressor(Encoders, Kernel, TrainingRows, Bias, Coefficients, Diagnostics).
 
 	predict(Regressor, Instance, Prediction) :-
-		Regressor =.. [_, Encoders, Kernel, TrainingRows, Bias, Coefficients, _Diagnostics],
+		regressor_data(Regressor, Encoders, Kernel, TrainingRows, Bias, Coefficients, _Diagnostics),
 		^^encode_instance(Encoders, Instance, Features),
 		kernel_vector(TrainingRows, Features, Kernel, KernelValues),
 		dot_product(Coefficients, KernelValues, DualScore),
@@ -222,7 +222,7 @@
 	% validation, export, pretty-printing
 
 	check_regressor(Regressor) :-
-		(	Regressor = svr_regressor(Encoders, Kernel, TrainingRows, Bias, Coefficients, Diagnostics),
+		(	regressor_data(Regressor, Encoders, Kernel, TrainingRows, Bias, Coefficients, Diagnostics),
 			^^valid_regression_encoders(Encoders),
 			valid_kernel(Kernel),
 			^^encoded_feature_count(Encoders, FeatureCount),
@@ -252,16 +252,21 @@
 		valid(positive_number, Gamma).
 
 	export_to_clauses(_Dataset, Regressor, Functor, [Clause]) :-
-		Regressor = svr_regressor(Encoders, Kernel, TrainingRows, Bias, Coefficients, Diagnostics),
+		regressor_data(Regressor, Encoders, Kernel, TrainingRows, Bias, Coefficients, Diagnostics),
 		Clause =.. [Functor, Encoders, Kernel, TrainingRows, Bias, Coefficients, Diagnostics].
+
+	regressor_data(Regressor, Encoders, Kernel, TrainingRows, Bias, Coefficients, Diagnostics) :-
+		Regressor =.. [_, Encoders, Kernel, TrainingRows, Bias, Coefficients, Diagnostics].
 
 	regressor_export_template(_Dataset, _Regressor, Functor, Template) :-
 		Template =.. [Functor, 'Encoders', 'Kernel', 'TrainingRows', 'Bias', 'Coefficients', 'Diagnostics'].
 
-	regressor_term_template(svr_regressor(_Encoders, _Kernel, _TrainingRows, _Bias, _Coefficients, _Diagnostics), svr_regressor('Encoders', 'Kernel', 'TrainingRows', 'Bias', 'Coefficients', 'Diagnostics')).
+	regressor_term_template(Regressor, Template) :-
+		functor(Regressor, Functor, 6),
+		Template =.. [Functor, 'Encoders', 'Kernel', 'TrainingRows', 'Bias', 'Coefficients', 'Diagnostics'].
 
 	print_regressor(Regressor) :-
-		Regressor = svr_regressor(Encoders, Kernel, TrainingRows, Bias, Coefficients, Diagnostics),
+		regressor_data(Regressor, Encoders, Kernel, TrainingRows, Bias, Coefficients, Diagnostics),
 		format('Support Vector Regression Regressor~n', []),
 		format('====================================~n~n', []),
 		^^print_regressor_template(Regressor),
