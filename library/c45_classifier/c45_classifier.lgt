@@ -25,7 +25,7 @@
 	:- info([
 		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-11,
+		date is 2026-10-13,
 		comment is 'C4.5 decision tree learning algorithm. Builds a decision tree from a dataset object implementing the ``dataset_protocol`` protocol and provides predicates for exporting the learned tree as a list of predicate clauses or to a file. Supports both discrete and continuous attributes, handles missing values, and supports tree pruning.',
 		see_also is [dataset_protocol, isolation_forest_anomaly_detector, knn_classifier, naive_bayes_classifier, nearest_centroid_classifier, random_forest_classifier, adaptive_boosting_classifier]
 	]).
@@ -43,8 +43,7 @@
 			'Dataset is empty' - domain_error(non_empty_dataset, 'Dataset'),
 			'Dataset class values are invalid' - domain_error(class_values, 'ClassValues'),
 			'Dataset attribute declarations are invalid' - domain_error(attribute_declarations, 'Attribute'),
-			'A required attribute binding is missing' - existence_error(attribute, 'Attribute'),
-			'Other dataset validation error' - 'Exception'
+			'A required attribute binding is missing' - existence_error(attribute, 'Attribute')
 		],
 		remarks is [
 			'Confidence factor' - 'The confidence factor must be a float in ``(0.0, 0.5]`` so that the error estimate is an upper confidence bound. Lower values increase the estimated uncertainty. The default value is ``0.25``.',
@@ -64,8 +63,7 @@
 			'Dataset is empty' - domain_error(non_empty_dataset, 'Dataset'),
 			'Dataset class values are invalid' - domain_error(class_values, 'ClassValues'),
 			'Dataset attribute declarations are invalid' - domain_error(attribute_declarations, 'Attribute'),
-			'A required attribute binding is missing' - existence_error(attribute, 'Attribute'),
-			'Other dataset validation error' - 'Exception'
+			'A required attribute binding is missing' - existence_error(attribute, 'Attribute')
 		],
 		remarks is [
 			'Default parameters' - 'Uses a confidence factor of ``0.25`` and minimum weighted node population of ``2``. Existing leaves and empty branches are preserved.'
@@ -609,7 +607,8 @@
 			true
 		;	domain_error(confidence_factor, ConfidenceFactor)
 		),
-		(	valid(positive_integer, MinInstances) ->
+		(	integer(MinInstances),
+			MinInstances > 0 ->
 			true
 		;	domain_error(positive_integer, MinInstances)
 		),

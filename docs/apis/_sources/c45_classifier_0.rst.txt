@@ -15,7 +15,7 @@ C4.5 decision tree learning algorithm. Builds a decision tree from a dataset obj
 
 | **Author:** Paulo Moura
 | **Version:** 3:0:0
-| **Date:** 2026-10-11
+| **Date:** 2026-10-13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -76,8 +76,6 @@ Prunes a decision tree using pessimistic error pruning (PEP). This post-pruning 
 |        ``domain_error(attribute_declarations,Attribute)``
 |    A required attribute binding is missing:
 |        ``existence_error(attribute,Attribute)``
-|    Other dataset validation error:
-|        ``Exception``
 
 | **Remarks:**
 
@@ -117,8 +115,6 @@ Prunes a decision tree using pessimistic error pruning (PEP) with default parame
 |        ``domain_error(attribute_declarations,Attribute)``
 |    A required attribute binding is missing:
 |        ``existence_error(attribute,Attribute)``
-|    Other dataset validation error:
-|        ``Exception``
 
 | **Remarks:**
 
