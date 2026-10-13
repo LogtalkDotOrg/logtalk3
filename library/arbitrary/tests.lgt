@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:16:0,
+		version is 0:17:0,
 		author is 'Paulo Moura',
-		date is 2024-03-07,
+		date is 2024-10-13,
 		comment is 'Unit tests for the "arbitrary" library.'
 	]).
 
@@ -41,7 +41,7 @@
 				ground(Type),
 				type::arbitrary(Type)
 			),
-			(	lgtunit::quick_check(type::arbitrary({Type}, -Type), Result, [n(25)]),
+			(	lgtunit::quick_check(type::arbitrary({Type}, -Type), Result, [n(15)]),
 				^^assertion(type(Type,Result), subsumes_term(passed(_,_,_), Result))
 			)
 		).
@@ -53,7 +53,7 @@
 	test(arbitrary_arbitrary_2_02) :-
 		forall(
 			list::member(CharSet, [ascii_full, ascii_printable, ascii_identifier, byte]),
-			(	lgtunit::quick_check(type::arbitrary({atom(CharSet)}, -atom(CharSet)), Result, [n(25)]),
+			(	lgtunit::quick_check(type::arbitrary({atom(CharSet)}, -atom(CharSet)), Result, [n(15)]),
 				^^assertion(type(atom(CharSet),Result), subsumes_term(passed(_,_,_), Result))
 			)
 		).
@@ -61,7 +61,7 @@
 	test(arbitrary_arbitrary_2_03) :-
 		forall(
 			list::member(CharSet, [ascii_full, ascii_printable, ascii_identifier, byte]),
-			(	lgtunit::quick_check(type::arbitrary({atom(CharSet,10)}, -atom(CharSet,10)), Result, [n(25)]),
+			(	lgtunit::quick_check(type::arbitrary({atom(CharSet,10)}, -atom(CharSet,10)), Result, [n(15)]),
 				^^assertion(type(atom(CharSet,10),Result), subsumes_term(passed(_,_,_), Result))
 			)
 		).
@@ -69,7 +69,7 @@
 	test(arbitrary_arbitrary_2_04) :-
 		forall(
 			list::member(CharSet, [ascii_full, ascii_printable, ascii_identifier, byte]),
-			(	lgtunit::quick_check(type::arbitrary({non_empty_atom(CharSet)}, -non_empty_atom(CharSet)), Result, [n(25)]),
+			(	lgtunit::quick_check(type::arbitrary({non_empty_atom(CharSet)}, -non_empty_atom(CharSet)), Result, [n(15)]),
 				^^assertion(type(non_empty_atom(CharSet),Result), subsumes_term(passed(_,_,_), Result))
 			)
 		).
@@ -77,7 +77,7 @@
 	test(arbitrary_arbitrary_2_05) :-
 		forall(
 			list::member(CharSet, [ascii_full, ascii_printable, ascii_identifier, byte]),
-			(	lgtunit::quick_check(type::arbitrary({code(CharSet)}, -code(CharSet)), Result, [n(25)]),
+			(	lgtunit::quick_check(type::arbitrary({code(CharSet)}, -code(CharSet)), Result, [n(15)]),
 				^^assertion(type(character(CharSet),Result), subsumes_term(passed(_,_,_), Result))
 			)
 		).
@@ -87,7 +87,7 @@
 	test(arbitrary_arbitrary_2_02) :-
 		forall(
 			list::member(CharSet, [ascii_full, ascii_printable, ascii_identifier, byte, unicode_bmp, unicode_full]),
-			(	lgtunit::quick_check(type::arbitrary({atom(CharSet)}, -atom(CharSet)), Result, [n(25)]),
+			(	lgtunit::quick_check(type::arbitrary({atom(CharSet)}, -atom(CharSet)), Result, [n(15)]),
 				^^assertion(type(atom(CharSet),Result), subsumes_term(passed(_,_,_), Result))
 			)
 		).
@@ -95,7 +95,7 @@
 	test(arbitrary_arbitrary_2_03) :-
 		forall(
 			list::member(CharSet, [ascii_full, ascii_printable, ascii_identifier, byte, unicode_bmp, unicode_full]),
-			(	lgtunit::quick_check(type::arbitrary({atom(CharSet,10)}, -atom(CharSet,10)), Result, [n(25)]),
+			(	lgtunit::quick_check(type::arbitrary({atom(CharSet,10)}, -atom(CharSet,10)), Result, [n(15)]),
 				^^assertion(type(atom(CharSet,10),Result), subsumes_term(passed(_,_,_), Result))
 			)
 		).
@@ -103,7 +103,7 @@
 	test(arbitrary_arbitrary_2_04) :-
 		forall(
 			list::member(CharSet, [ascii_full, ascii_printable, ascii_identifier, byte, unicode_bmp, unicode_full]),
-			(	lgtunit::quick_check(type::arbitrary({non_empty_atom(CharSet)}, -non_empty_atom(CharSet)), Result, [n(25)]),
+			(	lgtunit::quick_check(type::arbitrary({non_empty_atom(CharSet)}, -non_empty_atom(CharSet)), Result, [n(15)]),
 				^^assertion(type(non_empty_atom(CharSet),Result), subsumes_term(passed(_,_,_), Result))
 			)
 		).
@@ -111,7 +111,7 @@
 	test(arbitrary_arbitrary_2_05) :-
 		forall(
 			list::member(CharSet, [ascii_full, ascii_printable, ascii_identifier, byte, unicode_bmp, unicode_full]),
-			(	lgtunit::quick_check(type::arbitrary({code(CharSet)}, -code(CharSet)), Result, [n(25)]),
+			(	lgtunit::quick_check(type::arbitrary({code(CharSet)}, -code(CharSet)), Result, [n(15)]),
 				^^assertion(type(character(CharSet),Result), subsumes_term(passed(_,_,_), Result))
 			)
 		).
@@ -123,7 +123,7 @@
 	test(arbitrary_arbitrary_2_06) :-
 		forall(
 			list::member(CharSet, [ascii_full, ascii_printable, ascii_identifier, byte, unicode_bmp, unicode_full]),
-			(	lgtunit::quick_check(type::arbitrary({character_code(CharSet)}, -character_code(CharSet)), Result, [n(25)]),
+			(	lgtunit::quick_check(type::arbitrary({character_code(CharSet)}, -character_code(CharSet)), Result, [n(15)]),
 				^^assertion(type(character_code(CharSet),Result), subsumes_term(passed(_,_,_), Result))
 			)
 		).
@@ -133,7 +133,7 @@
 	test(arbitrary_arbitrary_2_07) :-
 		forall(
 			list::member(Type, [var, atom, integer, float]),
-			(	lgtunit::quick_check(type::arbitrary({list(Type)}, -list(Type)), Result, [n(25)]),
+			(	lgtunit::quick_check(type::arbitrary({list(Type)}, -list(Type)), Result, [n(15)]),
 				^^assertion(type(list(Type),Result), subsumes_term(passed(_,_,_), Result))
 			)
 		).
@@ -141,7 +141,7 @@
 	test(arbitrary_arbitrary_2_08) :-
 		forall(
 			list::member(Type, [var, atom, integer, float]),
-			(	lgtunit::quick_check(type::arbitrary({non_empty_list(Type)}, -non_empty_list(Type)), Result, [n(25)]),
+			(	lgtunit::quick_check(type::arbitrary({non_empty_list(Type)}, -non_empty_list(Type)), Result, [n(15)]),
 				^^assertion(type(non_empty_list(Type),Result), subsumes_term(passed(_,_,_), Result))
 			)
 		).
@@ -151,7 +151,7 @@
 	test(arbitrary_arbitrary_2_09) :-
 		forall(
 			list::member(Type, [var, atom, integer, float]),
-			(	lgtunit::quick_check(type::arbitrary({difference_list(Type)}, -difference_list(Type)), Result, [n(25)]),
+			(	lgtunit::quick_check(type::arbitrary({difference_list(Type)}, -difference_list(Type)), Result, [n(15)]),
 				^^assertion(type(difference_list(Type),Result), subsumes_term(passed(_,_,_), Result))
 			)
 		).
@@ -159,25 +159,25 @@
 	test(arbitrary_arbitrary_2_10) :-
 		forall(
 			list::member(Type, [var, atom, integer, float]),
-			(	lgtunit::quick_check(type::arbitrary({list(Type,10)}, -list(Type,10)), Result, [n(25)]),
+			(	lgtunit::quick_check(type::arbitrary({list(Type,10)}, -list(Type,10)), Result, [n(15)]),
 				^^assertion(type(list(Type,10),Result), subsumes_term(passed(_,_,_), Result))
 			)
 		).
 
 	test(arbitrary_arbitrary_2_11) :-
-		lgtunit::quick_check(type::arbitrary({list(integer,-10,10)}, -list(integer,-10,10)), Result, [n(25)]),
+		lgtunit::quick_check(type::arbitrary({list(integer,-10,10)}, -list(integer,-10,10)), Result, [n(15)]),
 		^^assertion(type(list(integer,-10,10),Result), subsumes_term(passed(_,_,_), Result)).
 
 	test(arbitrary_arbitrary_2_12) :-
-		lgtunit::quick_check(type::arbitrary({list(float,-10.0,10.0)}, -list(float,-10.0,10.0)), Result, [n(25)]),
+		lgtunit::quick_check(type::arbitrary({list(float,-10.0,10.0)}, -list(float,-10.0,10.0)), Result, [n(15)]),
 		^^assertion(type(list(float,-10.0,10.0),Result), subsumes_term(passed(_,_,_), Result)).
 
 	test(arbitrary_arbitrary_2_13) :-
-		lgtunit::quick_check(type::arbitrary({list(integer,10,-10,10)}, -list(integer,10,-10,10)), Result, [n(25)]),
+		lgtunit::quick_check(type::arbitrary({list(integer,10,-10,10)}, -list(integer,10,-10,10)), Result, [n(15)]),
 		^^assertion(type(list(integer,10,-10,10),Result), subsumes_term(passed(_,_,_), Result)).
 
 	test(arbitrary_arbitrary_2_14) :-
-		lgtunit::quick_check(type::arbitrary({list(float,10,-10.0,10.0)}, -list(float,10,-10.0,10.0)), Result, [n(25)]),
+		lgtunit::quick_check(type::arbitrary({list(float,10,-10.0,10.0)}, -list(float,10,-10.0,10.0)), Result, [n(15)]),
 		^^assertion(type(list(float,10,-10.0,10.0),Result), subsumes_term(passed(_,_,_), Result)).
 
 	% parametric pair type
@@ -187,7 +187,7 @@
 			(	list::member(KeyType, [atom, integer]),
 				list::member(ValueType, [integer, float])
 			),
-			(	lgtunit::quick_check(type::arbitrary({pair(KeyType,ValueType)}, -pair(KeyType,ValueType)), Result, [n(25)]),
+			(	lgtunit::quick_check(type::arbitrary({pair(KeyType,ValueType)}, -pair(KeyType,ValueType)), Result, [n(15)]),
 				^^assertion(type(pair(KeyType,ValueType),Result), subsumes_term(passed(_,_,_), Result))
 			)
 		).
@@ -195,15 +195,15 @@
 	% between/3 parametric type
 
 	test(arbitrary_arbitrary_2_16) :-
-		lgtunit::quick_check(type::arbitrary({between(integer,-10,10)}, -between(integer,-10,10)), Result, [n(25)]),
+		lgtunit::quick_check(type::arbitrary({between(integer,-10,10)}, -between(integer,-10,10)), Result, [n(15)]),
 		^^assertion(type(between(integer,-10,10),Result), subsumes_term(passed(_,_,_), Result)).
 
 	test(arbitrary_arbitrary_2_17) :-
-		lgtunit::quick_check(type::arbitrary({between(float,-10.0,10.0)}, -between(float,-10.0,10.0)), Result, [n(25)]),
+		lgtunit::quick_check(type::arbitrary({between(float,-10.0,10.0)}, -between(float,-10.0,10.0)), Result, [n(15)]),
 		^^assertion(type(between(float,-10.0,10.0),Result), subsumes_term(passed(_,_,_), Result)).
 
 	test(arbitrary_arbitrary_2_18) :-
-		lgtunit::quick_check(type::arbitrary({between(character,a,z)}, -between(character,a,z)), Result, [n(25)]),
+		lgtunit::quick_check(type::arbitrary({between(character,a,z)}, -between(character,a,z)), Result, [n(15)]),
 		^^assertion(type(between(character,a,z),Result), subsumes_term(passed(_,_,_), Result)).
 
 	% other types
@@ -211,46 +211,46 @@
 	test(arbitrary_arbitrary_2_19) :-
 		forall(
 			list::member(Type, [var, atom, integer, float]),
-			(	lgtunit::quick_check(type::arbitrary({var_or(Type)}, -var_or(Type)), Result, [n(25)]),
+			(	lgtunit::quick_check(type::arbitrary({var_or(Type)}, -var_or(Type)), Result, [n(15)]),
 				^^assertion(type(var_or(Type),Result), subsumes_term(passed(_,_,_), Result))
 			)
 		).
 
 	test(arbitrary_arbitrary_2_20) :-
-		lgtunit::quick_check(type::arbitrary({ground(list(var_or(integer),3))}, -ground(list(var_or(integer),3))), Result, [n(25)]),
+		lgtunit::quick_check(type::arbitrary({ground(list(var_or(integer),3))}, -ground(list(var_or(integer),3))), Result, [n(15)]),
 		^^assertion(type(ground(list(var_or(integer),3)),Result), subsumes_term(passed(_,_,_), Result)).
 
 	test(arbitrary_arbitrary_2_21) :-
 		Types = [var, atom, integer, compound],
-		lgtunit::quick_check(type::arbitrary({types(Types)}, -types(Types)), Result, [n(25)]),
+		lgtunit::quick_check(type::arbitrary({types(Types)}, -types(Types)), Result, [n(15)]),
 		^^assertion(type(types(Types),Result), subsumes_term(passed(_,_,_), Result)).
 
 	test(arbitrary_arbitrary_2_22) :-
 		Pairs = [var-2, atom-4, integer-3, compound-1],
-		lgtunit::quick_check(type::arbitrary({types_frequency(Pairs)}, -types([var,atom,integer,compound])), Result, [n(25)]),
+		lgtunit::quick_check(type::arbitrary({types_frequency(Pairs)}, -types([var,atom,integer,compound])), Result, [n(15)]),
 		^^assertion(type(types_frequency(Pairs),Result), subsumes_term(passed(_,_,_), Result)).
 
 	test(arbitrary_arbitrary_2_23) :-
 		Type = compound(node,[atom,integer]),
-		lgtunit::quick_check(type::arbitrary({Type}, -Type), Result, [n(25)]),
+		lgtunit::quick_check(type::arbitrary({Type}, -Type), Result, [n(15)]),
 		^^assertion(type(Type,Result), subsumes_term(passed(_,_,_), Result)).
 
 	test(arbitrary_arbitrary_2_24) :-
 		Type = one_of(non_negative_integer,[0,1,2,3,4,5,6,7,8,9]),
-		lgtunit::quick_check(type::arbitrary({Type}, -Type), Result, [n(25)]),
+		lgtunit::quick_check(type::arbitrary({Type}, -Type), Result, [n(15)]),
 		^^assertion(type(Type,Result), subsumes_term(passed(_,_,_), Result)).
 
 	test(arbitrary_arbitrary_2_25) :-
 		Type = scoped::custom,
-		lgtunit::quick_check(type::arbitrary({Type}, -term), Result, [n(25)]),
+		lgtunit::quick_check(type::arbitrary({Type}, -term), Result, [n(15)]),
 		^^assertion(type(Type,Result), subsumes_term(passed(_,_,_), Result)).
 
 	test(arbitrary_arbitrary_2_26) :-
-		lgtunit::quick_check(type::arbitrary({transform(list,sort)}, -list), Result, [n(25)]),
+		lgtunit::quick_check(type::arbitrary({transform(list,sort)}, -list), Result, [n(15)]),
 		^^assertion(type(transform(list,sort),Result), subsumes_term(passed(_,_,_), Result)).
 
 	test(arbitrary_arbitrary_2_27) :-
-		lgtunit::quick_check(type::arbitrary({constrain(integer, [A]>>((A > 2, A < 9)))}, -between(integer,2,9)), Result, [n(25)]),
+		lgtunit::quick_check(type::arbitrary({constrain(integer, [A]>>((A > 2, A < 9)))}, -between(integer,2,9)), Result, [n(15)]),
 		^^assertion(type(constrain(integer, [A]>>((A > 2, A < 9))),Result), subsumes_term(passed(_,_,_), Result)).
 
 	test(arbitrary_arbitrary_2_28) :-
@@ -274,7 +274,7 @@
 			(	type::shrinker(Type),
 				ground(Type)
 			),
-			(	lgtunit::quick_check(shrink_value({Type}, -Type), Result, [n(25)]),
+			(	lgtunit::quick_check(shrink_value({Type}, -Type), Result, [n(15)]),
 				^^assertion(type(Type,Result), subsumes_term(passed(_,_,_), Result))
 			)
 		).
@@ -285,7 +285,7 @@
 			(	type::shrinker(Type),
 				ground(Type)
 			),
-			(	lgtunit::quick_check(shrink_sequence({Type}, -list(Type)), Result, [n(25)]),
+			(	lgtunit::quick_check(shrink_sequence({Type}, -list(Type)), Result, [n(15)]),
 				^^assertion(type(Type,Result), subsumes_term(passed(_,_,_), Result))
 			)
 		).
