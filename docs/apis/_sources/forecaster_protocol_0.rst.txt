@@ -15,7 +15,7 @@ Protocol for time series forecasting models.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-09-27
+| **Date:** 2026-10-14
 
 | **Compilation flags:**
 |    ``static``
@@ -52,7 +52,25 @@ Learns a forecasting model from the given time series dataset object using the s
 | **Template:**
 |    ``learn(Dataset,Forecaster,Options)``
 | **Mode and number of proofs:**
-|    ``learn(+object_identifier,-compound,+list(compound))`` - ``one``
+|    ``learn(+object_identifier,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Dataset`` is a variable:
+|        ``instantiation_error``
+|    ``Dataset`` is neither a variable nor a valid object identifier:
+|        ``type_error(object_identifier,Dataset)``
+|    ``Dataset`` is a valid object identifier but not an existing object:
+|        ``existence_error(object,Dataset)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
 
 
 ------------
@@ -71,7 +89,15 @@ Learns a forecasting model from the given time series dataset object using defau
 | **Template:**
 |    ``learn(Dataset,Forecaster)``
 | **Mode and number of proofs:**
-|    ``learn(+object_identifier,-compound)`` - ``one``
+|    ``learn(+object_identifier,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Dataset`` is a variable:
+|        ``instantiation_error``
+|    ``Dataset`` is neither a variable nor a valid object identifier:
+|        ``type_error(object_identifier,Dataset)``
+|    ``Dataset`` is a valid object identifier but not an existing object:
+|        ``existence_error(object,Dataset)``
 
 
 ------------
@@ -93,6 +119,10 @@ Forecasts the next ``Horizon`` values beyond the training series using the learn
 |    ``forecast(+compound,+non_negative_integer,-list(number))`` - ``one_or_error``
 
 | **Exceptions:**
+|    ``Forecaster`` is a variable:
+|        ``instantiation_error``
+|    ``Forecaster`` is not a valid forecaster:
+|        ``domain_error(forecaster,Forecaster)``
 |    ``Horizon`` is a variable:
 |        ``instantiation_error``
 |    ``Horizon`` is neither a variable nor an integer:
@@ -218,7 +248,15 @@ Converts a forecaster into a list of predicate clauses. ``Functor`` is the funct
 | **Template:**
 |    ``export_to_clauses(Dataset,Forecaster,Functor,Clauses)``
 | **Mode and number of proofs:**
-|    ``export_to_clauses(+object_identifier,+compound,+atom,-list(clause))`` - ``one``
+|    ``export_to_clauses(+object_identifier,+compound,+atom,-list(clause))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Forecaster`` or ``Functor`` is a variable:
+|        ``instantiation_error``
+|    ``Forecaster`` is not a valid baseline forecaster:
+|        ``domain_error(forecaster,Forecaster)``
+|    ``Functor`` is neither a variable nor an atom:
+|        ``type_error(atom,Functor)``
 
 
 ------------
@@ -237,7 +275,23 @@ Exports a forecaster to a file. ``Functor`` is the functor for the generated pre
 | **Template:**
 |    ``export_to_file(Dataset,Forecaster,Functor,File)``
 | **Mode and number of proofs:**
-|    ``export_to_file(+object_identifier,+compound,+atom,+atom)`` - ``one``
+|    ``export_to_file(+object_identifier,+compound,+atom,+atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Forecaster``, ``Functor``, or ``File``:
+|        ``instantiation_error``
+|    ``Forecaster`` is not a valid forecaster:
+|        ``domain_error(forecaster,Forecaster)``
+|    ``Functor`` is neither a variable nor an atom:
+|        ``type_error(atom,Functor)``
+|    ``File`` is not a valid file specification:
+|        ``type_error(source_sink,File)``
+|    The output location does not exist:
+|        ``existence_error(source_sink,File)``
+|    The output file cannot be opened:
+|        ``permission_error(open,source_sink,File)``
+|    The output stream cannot be written to:
+|        ``permission_error(output,stream,Stream)``
 
 
 ------------
@@ -256,7 +310,15 @@ Prints a forecaster to the current output stream in a human-readable format.
 | **Template:**
 |    ``print_forecaster(Forecaster)``
 | **Mode and number of proofs:**
-|    ``print_forecaster(+compound)`` - ``one``
+|    ``print_forecaster(+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Forecaster`` is a variable:
+|        ``instantiation_error``
+|    ``Forecaster`` is not a valid baseline forecaster:
+|        ``domain_error(forecaster,Forecaster)``
+|    The current stream cannot be written to:
+|        ``permission_error(output,stream,Stream)``
 
 
 ------------

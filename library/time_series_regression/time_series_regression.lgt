@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-07,
+		date is 2026-10-14,
 		comment is 'Autoregressive (AR) time series forecaster fitted by least squares, with optional intercept, optional differencing (ARI models), automatic order selection using information criteria, and support for missing observations represented as unbound variables.',
 		see_also is [forecaster_protocol, time_series_dataset_protocol]
 	]).
@@ -593,14 +593,13 @@
 	check_forecaster(Forecaster) :-
 		(	var(Forecaster) ->
 			instantiation_error
-		;	(	Forecaster = time_series_regression_forecaster(Model, State, Parameters, Diagnostics),
-				valid_model(Model, Order, Differencing),
-				valid_parameters(Order, Parameters),
-				valid_state(Order, Differencing, State),
-				valid_diagnostics(Order, Differencing, Parameters, Diagnostics) ->
-				true
-			;	domain_error(forecaster, Forecaster)
-			)
+		;	forecaster_data(Forecaster, Model, State, Parameters, Diagnostics),
+			valid_model(Model, Order, Differencing),
+			valid_parameters(Order, Parameters),
+			valid_state(Order, Differencing, State),
+			valid_diagnostics(Order, Differencing, Parameters, Diagnostics) ->
+			true
+		;	domain_error(forecaster, Forecaster)
 		).
 
 	valid_model(ar(Order, Differencing), Order, Differencing) :-
@@ -670,13 +669,15 @@
 			length(Residuals, ScoredCount)
 		).
 
+	forecaster_data(Forecaster, Model, State, Parameters, Diagnostics) :-
+		Forecaster =.. [_, Model, State, Parameters, Diagnostics].
+
 	forecaster_export_template(_Dataset, _Forecaster, Functor, Template) :-
 		Template =.. [Functor, 'Forecaster'].
 
-	forecaster_term_template(
-		time_series_regression_forecaster(_Model, _State, _Parameters, _Diagnostics),
-		time_series_regression_forecaster('Model', 'State', 'Parameters', 'Diagnostics')
-	).
+	forecaster_term_template(Forecaster, Template) :-
+		functor(Forecaster, Functor, 4),
+		Template =.. [Functor, 'Model', 'State', 'Parameters', 'Diagnostics'].
 
 	export_to_clauses(_Dataset, Forecaster, Functor, [Clause]) :-
 		check_forecaster(Forecaster),
@@ -684,7 +685,9 @@
 
 	print_forecaster(Forecaster) :-
 		check_forecaster(Forecaster),
-		Forecaster = time_series_regression_forecaster(ar(Order, Differencing), State, ar_parameters(InterceptValue, Coefficients), Diagnostics),
+		forecaster_data(Forecaster, Model, State, Parameters, Diagnostics),
+		Model = ar(Order, Differencing),
+		Parameters = ar_parameters(InterceptValue, Coefficients),
 		^^print_forecaster_template(Forecaster),
 		format('Order: ~w~n', [Order]),
 		format('Differencing: ~w~n', [Differencing]),

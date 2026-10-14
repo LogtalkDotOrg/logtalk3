@@ -473,7 +473,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-10-12</div>
+<div class="line"><strong>Date:</strong> 2026-10-14</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -482,10 +482,6 @@
 </div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Implements:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="forecaster_protocol_0.html#forecaster-protocol-0"><span class="std std-ref">forecaster_protocol</span></a></div>
-</div>
 <div class="line"><strong>Imports:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="forecaster_common_0.html#forecaster-common-0"><span class="std std-ref">forecaster_common</span></a></div>
@@ -506,215 +502,56 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line"> <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-option-1"><span class="std std-ref">check_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-options-1"><span class="std std-ref">check_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-option-1"><span class="std std-ref">default_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-options-1"><span class="std std-ref">default_options/1</span></a>  <a class="reference internal" href="forecaster_protocol_0.html#forecaster-protocol-0-diagnostic-2"><span class="std std-ref">diagnostic/2</span></a>  <a class="reference internal" href="forecaster_protocol_0.html#forecaster-protocol-0-diagnostics-2"><span class="std std-ref">diagnostics/2</span></a>  <a class="reference internal" href="forecaster_protocol_0.html#forecaster-protocol-0-forecaster-options-2"><span class="std std-ref">forecaster_options/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-2"><span class="std std-ref">option/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-3"><span class="std std-ref">option/3</span></a>  <a class="reference internal" href="forecaster_protocol_0.html#forecaster-protocol-0-valid-forecaster-1"><span class="std std-ref">valid_forecaster/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-option-1"><span class="std std-ref">valid_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-options-1"><span class="std std-ref">valid_options/1</span></a></div>
+<div class="line"> <a class="reference internal" href="forecaster_protocol_0.html#forecaster-protocol-0-check-forecaster-1"><span class="std std-ref">check_forecaster/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-option-1"><span class="std std-ref">check_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-options-1"><span class="std std-ref">check_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-option-1"><span class="std std-ref">default_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-options-1"><span class="std std-ref">default_options/1</span></a>  <a class="reference internal" href="forecaster_protocol_0.html#forecaster-protocol-0-diagnostic-2"><span class="std std-ref">diagnostic/2</span></a>  <a class="reference internal" href="forecaster_protocol_0.html#forecaster-protocol-0-diagnostics-2"><span class="std std-ref">diagnostics/2</span></a>  <a class="reference internal" href="forecaster_protocol_0.html#forecaster-protocol-0-export-to-clauses-4"><span class="std std-ref">export_to_clauses/4</span></a>  <a class="reference internal" href="forecaster_protocol_0.html#forecaster-protocol-0-export-to-file-4"><span class="std std-ref">export_to_file/4</span></a>  <a class="reference internal" href="forecaster_protocol_0.html#forecaster-protocol-0-forecast-3"><span class="std std-ref">forecast/3</span></a>  <a class="reference internal" href="forecaster_protocol_0.html#forecaster-protocol-0-forecaster-options-2"><span class="std std-ref">forecaster_options/2</span></a>  <a class="reference internal" href="forecaster_protocol_0.html#forecaster-protocol-0-learn-2"><span class="std std-ref">learn/2</span></a>  <a class="reference internal" href="forecaster_protocol_0.html#forecaster-protocol-0-learn-3"><span class="std std-ref">learn/3</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-2"><span class="std std-ref">option/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-3"><span class="std std-ref">option/3</span></a>  <a class="reference internal" href="forecaster_protocol_0.html#forecaster-protocol-0-print-forecaster-1"><span class="std std-ref">print_forecaster/1</span></a>  <a class="reference internal" href="forecaster_protocol_0.html#forecaster-protocol-0-valid-forecaster-1"><span class="std std-ref">valid_forecaster/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-option-1"><span class="std std-ref">valid_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-options-1"><span class="std std-ref">valid_options/1</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#learn-2" id="id2"><code class="docutils literal notranslate"><span class="pre">learn/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#learn-3" id="id3"><code class="docutils literal notranslate"><span class="pre">learn/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#fitted-values-2" id="id4"><code class="docutils literal notranslate"><span class="pre">fitted_values/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#fitted-values-3" id="id5"><code class="docutils literal notranslate"><span class="pre">fitted_values/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#forecast-3" id="id6"><code class="docutils literal notranslate"><span class="pre">forecast/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#update-3" id="id7"><code class="docutils literal notranslate"><span class="pre">update/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#check-forecaster-1" id="id8"><code class="docutils literal notranslate"><span class="pre">check_forecaster/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#export-to-clauses-4" id="id9"><code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#export-to-file-4" id="id10"><code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#print-forecaster-1" id="id11"><code class="docutils literal notranslate"><span class="pre">print_forecaster/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#fitted-values-2" id="id2"><code class="docutils literal notranslate"><span class="pre">fitted_values/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#fitted-values-3" id="id3"><code class="docutils literal notranslate"><span class="pre">fitted_values/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#update-3" id="id4"><code class="docutils literal notranslate"><span class="pre">update/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id12">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id13">Private predicates</a></p>
+<li><p><a class="reference internal" href="#protected-predicates" id="id5">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id6">Private predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#replay-series-5" id="id14"><code class="docutils literal notranslate"><span class="pre">replay_series/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#prepare-learning-4" id="id15"><code class="docutils literal notranslate"><span class="pre">prepare_learning/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#normalize-coefficient-grid-2" id="id16"><code class="docutils literal notranslate"><span class="pre">normalize_coefficient_grid/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#select-methods-7" id="id17"><code class="docutils literal notranslate"><span class="pre">select_methods/7</span></code></a></p></li>
-<li><p><a class="reference internal" href="#select-alphas-7" id="id18"><code class="docutils literal notranslate"><span class="pre">select_alphas/7</span></code></a></p></li>
-<li><p><a class="reference internal" href="#select-betas-7" id="id19"><code class="docutils literal notranslate"><span class="pre">select_betas/7</span></code></a></p></li>
-<li><p><a class="reference internal" href="#fit-paired-series-4" id="id20"><code class="docutils literal notranslate"><span class="pre">fit_paired_series/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#learn-pair-4" id="id21"><code class="docutils literal notranslate"><span class="pre">learn_pair/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#paired-predictions-4" id="id22"><code class="docutils literal notranslate"><span class="pre">paired_predictions/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#better-candidate-3" id="id23"><code class="docutils literal notranslate"><span class="pre">better_candidate/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#candidate-key-2" id="id24"><code class="docutils literal notranslate"><span class="pre">candidate_key/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#method-priority-2" id="id25"><code class="docutils literal notranslate"><span class="pre">method_priority/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#fit-series-4" id="id26"><code class="docutils literal notranslate"><span class="pre">fit_series/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#fit-series-output-5" id="id27"><code class="docutils literal notranslate"><span class="pre">fit_series_output/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#fitted-model-3" id="id28"><code class="docutils literal notranslate"><span class="pre">fitted_model/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#learn-state-6" id="id29"><code class="docutils literal notranslate"><span class="pre">learn_state/6</span></code></a></p></li>
-<li><p><a class="reference internal" href="#score-observation-7" id="id30"><code class="docutils literal notranslate"><span class="pre">score_observation/7</span></code></a></p></li>
-<li><p><a class="reference internal" href="#demand-summary-3" id="id31"><code class="docutils literal notranslate"><span class="pre">demand_summary/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#prepare-parameters-4" id="id32"><code class="docutils literal notranslate"><span class="pre">prepare_parameters/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#positive-smoothing-4" id="id33"><code class="docutils literal notranslate"><span class="pre">positive_smoothing/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#checked-forecaster-2" id="id34"><code class="docutils literal notranslate"><span class="pre">checked_forecaster/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#valid-diagnostics-4" id="id35"><code class="docutils literal notranslate"><span class="pre">valid_diagnostics/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#extract-diagnostics-2" id="id36"><code class="docutils literal notranslate"><span class="pre">extract_diagnostics/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#rewrite-diagnostics-4" id="id37"><code class="docutils literal notranslate"><span class="pre">rewrite_diagnostics/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#diagnostic-position-2" id="id38"><code class="docutils literal notranslate"><span class="pre">diagnostic_position/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#valid-error-metrics-5" id="id39"><code class="docutils literal notranslate"><span class="pre">valid_error_metrics/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#replay-series-5" id="id7"><code class="docutils literal notranslate"><span class="pre">replay_series/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#prepare-learning-4" id="id8"><code class="docutils literal notranslate"><span class="pre">prepare_learning/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#normalize-coefficient-grid-2" id="id9"><code class="docutils literal notranslate"><span class="pre">normalize_coefficient_grid/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#select-methods-7" id="id10"><code class="docutils literal notranslate"><span class="pre">select_methods/7</span></code></a></p></li>
+<li><p><a class="reference internal" href="#select-alphas-7" id="id11"><code class="docutils literal notranslate"><span class="pre">select_alphas/7</span></code></a></p></li>
+<li><p><a class="reference internal" href="#select-betas-7" id="id12"><code class="docutils literal notranslate"><span class="pre">select_betas/7</span></code></a></p></li>
+<li><p><a class="reference internal" href="#fit-paired-series-4" id="id13"><code class="docutils literal notranslate"><span class="pre">fit_paired_series/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#learn-pair-4" id="id14"><code class="docutils literal notranslate"><span class="pre">learn_pair/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#paired-predictions-4" id="id15"><code class="docutils literal notranslate"><span class="pre">paired_predictions/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#better-candidate-3" id="id16"><code class="docutils literal notranslate"><span class="pre">better_candidate/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#candidate-key-2" id="id17"><code class="docutils literal notranslate"><span class="pre">candidate_key/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#method-priority-2" id="id18"><code class="docutils literal notranslate"><span class="pre">method_priority/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#fit-series-4" id="id19"><code class="docutils literal notranslate"><span class="pre">fit_series/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#fit-series-output-5" id="id20"><code class="docutils literal notranslate"><span class="pre">fit_series_output/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#fitted-model-3" id="id21"><code class="docutils literal notranslate"><span class="pre">fitted_model/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#learn-state-6" id="id22"><code class="docutils literal notranslate"><span class="pre">learn_state/6</span></code></a></p></li>
+<li><p><a class="reference internal" href="#score-observation-7" id="id23"><code class="docutils literal notranslate"><span class="pre">score_observation/7</span></code></a></p></li>
+<li><p><a class="reference internal" href="#demand-summary-3" id="id24"><code class="docutils literal notranslate"><span class="pre">demand_summary/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#prepare-parameters-4" id="id25"><code class="docutils literal notranslate"><span class="pre">prepare_parameters/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#positive-smoothing-4" id="id26"><code class="docutils literal notranslate"><span class="pre">positive_smoothing/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#checked-forecaster-2" id="id27"><code class="docutils literal notranslate"><span class="pre">checked_forecaster/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-diagnostics-4" id="id28"><code class="docutils literal notranslate"><span class="pre">valid_diagnostics/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#extract-diagnostics-2" id="id29"><code class="docutils literal notranslate"><span class="pre">extract_diagnostics/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rewrite-diagnostics-4" id="id30"><code class="docutils literal notranslate"><span class="pre">rewrite_diagnostics/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#diagnostic-position-2" id="id31"><code class="docutils literal notranslate"><span class="pre">diagnostic_position/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-error-metrics-5" id="id32"><code class="docutils literal notranslate"><span class="pre">valid_error_metrics/5</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#operators" id="id40">Operators</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id33">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
-<section id="learn-2">
-<span id="intermittent-demand-forecasting-0-learn-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">learn/2</span></code></a><a class="headerlink" href="#learn-2" title="Link to this heading"></a></h3>
-<p>Learns a forecaster from <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> using default options.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">learn(Dataset,Forecaster)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">learn(+object_identifier,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line">An observation index or the declared series length is a variable:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
-</div>
-<div class="line">The declared series length is not an integer:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,DeclaredLength)</span></code></div>
-</div>
-<div class="line">The declared series length is not positive:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,DeclaredLength)</span></code></div>
-</div>
-<div class="line">The dataset contains no observations:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_series,Dataset)</span></code></div>
-</div>
-<div class="line">The indices are not a gap-free 1-based sequence:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(series_index_sequence,Dataset)</span></code></div>
-</div>
-<div class="line">The declared and observed lengths differ:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(series_length,DeclaredLength,ObservedLength)</span></code></div>
-</div>
-<div class="line">An observation is neither a variable nor a number:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Observation)</span></code></div>
-</div>
-<div class="line">An observation is negative:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_number,Observation)</span></code></div>
-</div>
-<div class="line">All observations are missing:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(insufficient_observations,Dataset)</span></code></div>
-</div>
-<div class="line">Learning or error-total arithmetic raises an evaluation error:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="learn-3">
-<span id="intermittent-demand-forecasting-0-learn-3"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">learn/3</span></code></a><a class="headerlink" href="#learn-3" title="Link to this heading"></a></h3>
-<p>Learns a forecaster from <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> using the specified <code class="docutils literal notranslate"><span class="pre">Options</span></code>.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">learn(Dataset,Forecaster,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">learn(+object_identifier,-compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line">An observation index or the declared series length is a variable:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
-</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
-</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
-</div>
-<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
-</div>
-<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
-</div>
-<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
-</div>
-<div class="line">The declared series length is not an integer:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,DeclaredLength)</span></code></div>
-</div>
-<div class="line">The declared series length is not positive:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,DeclaredLength)</span></code></div>
-</div>
-<div class="line">The dataset contains no observations:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_series,Dataset)</span></code></div>
-</div>
-<div class="line">The indices are not a gap-free 1-based sequence:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(series_index_sequence,Dataset)</span></code></div>
-</div>
-<div class="line">The declared and observed lengths differ:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(series_length,DeclaredLength,ObservedLength)</span></code></div>
-</div>
-<div class="line">An observation is neither a variable nor a number:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Observation)</span></code></div>
-</div>
-<div class="line">An observation is negative:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_number,Observation)</span></code></div>
-</div>
-<div class="line">All observations are missing:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(insufficient_observations,Dataset)</span></code></div>
-</div>
-<div class="line">Learning or error-total arithmetic raises an evaluation error:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
 <section id="fitted-values-2">
-<span id="intermittent-demand-forecasting-0-fitted-values-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">fitted_values/2</span></code></a><a class="headerlink" href="#fitted-values-2" title="Link to this heading"></a></h3>
+<span id="intermittent-demand-forecasting-0-fitted-values-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">fitted_values/2</span></code></a><a class="headerlink" href="#fitted-values-2" title="Link to this heading"></a></h3>
 <p>Returns aligned one-step fitted values for <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> using default options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -780,7 +617,7 @@
 <hr class="docutils" />
 </section>
 <section id="fitted-values-3">
-<span id="intermittent-demand-forecasting-0-fitted-values-3"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">fitted_values/3</span></code></a><a class="headerlink" href="#fitted-values-3" title="Link to this heading"></a></h3>
+<span id="intermittent-demand-forecasting-0-fitted-values-3"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">fitted_values/3</span></code></a><a class="headerlink" href="#fitted-values-3" title="Link to this heading"></a></h3>
 <p>Returns aligned one-step fitted values for <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> using the specified <code class="docutils literal notranslate"><span class="pre">Options</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -865,54 +702,8 @@
 </div>
 <hr class="docutils" />
 </section>
-<section id="forecast-3">
-<span id="intermittent-demand-forecasting-0-forecast-3"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">forecast/3</span></code></a><a class="headerlink" href="#forecast-3" title="Link to this heading"></a></h3>
-<p>Returns <code class="docutils literal notranslate"><span class="pre">Horizon</span></code> constant per-period expected-demand forecasts from <code class="docutils literal notranslate"><span class="pre">Forecaster</span></code>.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">forecast(Forecaster,Horizon,Forecasts)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">forecast(+compound,+non_negative_integer,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Forecaster</span></code> or <code class="docutils literal notranslate"><span class="pre">Horizon</span></code> is a variable:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
-</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Forecaster</span></code> is not a valid intermittent-demand forecaster:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(forecaster,Forecaster)</span></code></div>
-</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Horizon</span></code> is not an integer:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Horizon)</span></code></div>
-</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Horizon</span></code> is negative:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Horizon)</span></code></div>
-</div>
-<div class="line">Forecast or diagnostic validation arithmetic raises an evaluation error:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
 <section id="update-3">
-<span id="intermittent-demand-forecasting-0-update-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">update/3</span></code></a><a class="headerlink" href="#update-3" title="Link to this heading"></a></h3>
+<span id="intermittent-demand-forecasting-0-update-3"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">update/3</span></code></a><a class="headerlink" href="#update-3" title="Link to this heading"></a></h3>
 <p>Returns a new forecaster incorporating <code class="docutils literal notranslate"><span class="pre">Observation</span></code> without modifying <code class="docutils literal notranslate"><span class="pre">Forecaster</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -955,206 +746,6 @@
 </div>
 </div>
 </div>
-<hr class="docutils" />
-</section>
-<section id="check-forecaster-1">
-<span id="intermittent-demand-forecasting-0-check-forecaster-1"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_forecaster/1</span></code></a><a class="headerlink" href="#check-forecaster-1" title="Link to this heading"></a></h3>
-<p>Checks whether <code class="docutils literal notranslate"><span class="pre">Forecaster</span></code> is a valid model.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">check_forecaster(Forecaster)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">check_forecaster(&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Forecaster</span></code> is a variable:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
-</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Forecaster</span></code> is not a valid intermittent-demand forecaster:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(forecaster,Forecaster)</span></code></div>
-</div>
-<div class="line">Counter or metric validation arithmetic raises an evaluation error:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="export-to-clauses-4">
-<span id="intermittent-demand-forecasting-0-export-to-clauses-4"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code></a><a class="headerlink" href="#export-to-clauses-4" title="Link to this heading"></a></h3>
-<p>Exports the validated forecaster as a single fact with the specified functor.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">export_to_clauses(Dataset,Forecaster,Functor,Clauses)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">export_to_clauses(+object_identifier,+compound,+atom,-list(clause))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Forecaster</span></code> or <code class="docutils literal notranslate"><span class="pre">Functor</span></code> is a variable:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
-</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Forecaster</span></code> is not a valid intermittent-demand forecaster:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(forecaster,Forecaster)</span></code></div>
-</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Functor</span></code> is not an atom:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Functor)</span></code></div>
-</div>
-<div class="line">Counter validation arithmetic raises an evaluation error:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="export-to-file-4">
-<span id="intermittent-demand-forecasting-0-export-to-file-4"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code></a><a class="headerlink" href="#export-to-file-4" title="Link to this heading"></a></h3>
-<p>Exports a validated forecaster as a single fact with dataset and diagnostics comments. The shared implementation closes the stream on writing exceptions.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">export_to_file(Dataset,Forecaster,Functor,File)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">export_to_file(+object_identifier,+compound,+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Forecaster</span></code>, <code class="docutils literal notranslate"><span class="pre">Functor</span></code>, <code class="docutils literal notranslate"><span class="pre">File</span></code>, an observation index, or the declared dataset length is a variable:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
-</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Forecaster</span></code> is not a valid intermittent-demand forecaster:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(forecaster,Forecaster)</span></code></div>
-</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Functor</span></code> is not an atom:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Functor)</span></code></div>
-</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is not a valid file specification:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(source_sink,File)</span></code></div>
-</div>
-<div class="line">The output location does not exist:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(source_sink,File)</span></code></div>
-</div>
-<div class="line">The output file cannot be opened:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(open,source_sink,File)</span></code></div>
-</div>
-<div class="line">The output stream cannot be written to:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(output,stream,Stream)</span></code></div>
-</div>
-<div class="line">The dataset contains no observations:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_series,Dataset)</span></code></div>
-</div>
-<div class="line">The observation indices are not a gap-free 1-based sequence:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(series_index_sequence,Dataset)</span></code></div>
-</div>
-<div class="line">The declared length is not an integer:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,DeclaredLength)</span></code></div>
-</div>
-<div class="line">The declared length is not positive:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,DeclaredLength)</span></code></div>
-</div>
-<div class="line">The declared and observed lengths differ:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(series_length,DeclaredLength,ObservedLength)</span></code></div>
-</div>
-<div class="line">Counter validation arithmetic raises an evaluation error:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="print-forecaster-1">
-<span id="intermittent-demand-forecasting-0-print-forecaster-1"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">print_forecaster/1</span></code></a><a class="headerlink" href="#print-forecaster-1" title="Link to this heading"></a></h3>
-<p>Prints the method, state, and diagnostics of <code class="docutils literal notranslate"><span class="pre">Forecaster</span></code> to the current output stream.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">print_forecaster(Forecaster)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">print_forecaster(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Forecaster</span></code> is a variable:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
-</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Forecaster</span></code> is not a valid intermittent-demand forecaster:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(forecaster,Forecaster)</span></code></div>
-</div>
-<div class="line">Counter validation arithmetic raises an evaluation error:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(Error)</span></code></div>
-</div>
-<div class="line">The current stream cannot be written to:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(output,stream,Stream)</span></code></div>
-</div>
-</div>
-</div>
 </section>
 </section>
 <hr class="docutils" />
@@ -1165,7 +756,7 @@
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
 <section id="replay-series-5">
-<span id="intermittent-demand-forecasting-0-replay-series-5"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">replay_series/5</span></code></a><a class="headerlink" href="#replay-series-5" title="Link to this heading"></a></h3>
+<span id="intermittent-demand-forecasting-0-replay-series-5"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">replay_series/5</span></code></a><a class="headerlink" href="#replay-series-5" title="Link to this heading"></a></h3>
 <p>Replays an already validated series using a concrete method, validated parameters, and valid starting state. Emits pre-observation predictions for numeric targets and fresh placeholders for missing targets, preserving order and all input variables.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1195,7 +786,7 @@
 <hr class="docutils" />
 </section>
 <section id="prepare-learning-4">
-<span id="intermittent-demand-forecasting-0-prepare-learning-4"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">prepare_learning/4</span></code></a><a class="headerlink" href="#prepare-learning-4" title="Link to this heading"></a></h3>
+<span id="intermittent-demand-forecasting-0-prepare-learning-4"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">prepare_learning/4</span></code></a><a class="headerlink" href="#prepare-learning-4" title="Link to this heading"></a></h3>
 <p>Collects and validates once, fits all requested configurations using exact RMSE priority, and optionally returns aligned predictions without retaining history in the model.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1281,7 +872,7 @@
 <hr class="docutils" />
 </section>
 <section id="normalize-coefficient-grid-2">
-<span id="intermittent-demand-forecasting-0-normalize-coefficient-grid-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">normalize_coefficient_grid/2</span></code></a><a class="headerlink" href="#normalize-coefficient-grid-2" title="Link to this heading"></a></h3>
+<span id="intermittent-demand-forecasting-0-normalize-coefficient-grid-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">normalize_coefficient_grid/2</span></code></a><a class="headerlink" href="#normalize-coefficient-grid-2" title="Link to this heading"></a></h3>
 <p>Normalizes a validated nonempty coefficient grid to ascending distinct floats without modifying the supplied list. Integer 1 and float 1.0 become one candidate. No comparison tolerance is used.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1311,7 +902,7 @@
 <hr class="docutils" />
 </section>
 <section id="select-methods-7">
-<span id="intermittent-demand-forecasting-0-select-methods-7"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">select_methods/7</span></code></a><a class="headerlink" href="#select-methods-7" title="Link to this heading"></a></h3>
+<span id="intermittent-demand-forecasting-0-select-methods-7"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">select_methods/7</span></code></a><a class="headerlink" href="#select-methods-7" title="Link to this heading"></a></h3>
 <p>Evaluates every method while retaining only the best concrete fit.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1341,7 +932,7 @@
 <hr class="docutils" />
 </section>
 <section id="select-alphas-7">
-<span id="intermittent-demand-forecasting-0-select-alphas-7"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">select_alphas/7</span></code></a><a class="headerlink" href="#select-alphas-7" title="Link to this heading"></a></h3>
+<span id="intermittent-demand-forecasting-0-select-alphas-7"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">select_alphas/7</span></code></a><a class="headerlink" href="#select-alphas-7" title="Link to this heading"></a></h3>
 <p>Evaluates each size coefficient for a concrete method.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1371,7 +962,7 @@
 <hr class="docutils" />
 </section>
 <section id="select-betas-7">
-<span id="intermittent-demand-forecasting-0-select-betas-7"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">select_betas/7</span></code></a><a class="headerlink" href="#select-betas-7" title="Link to this heading"></a></h3>
+<span id="intermittent-demand-forecasting-0-select-betas-7"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">select_betas/7</span></code></a><a class="headerlink" href="#select-betas-7" title="Link to this heading"></a></h3>
 <p>Fits every occurrence coefficient without suppressing losing-candidate errors.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1401,7 +992,7 @@
 <hr class="docutils" />
 </section>
 <section id="fit-paired-series-4">
-<span id="intermittent-demand-forecasting-0-fit-paired-series-4"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">fit_paired_series/4</span></code></a><a class="headerlink" href="#fit-paired-series-4" title="Link to this heading"></a></h3>
+<span id="intermittent-demand-forecasting-0-fit-paired-series-4"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">fit_paired_series/4</span></code></a><a class="headerlink" href="#fit-paired-series-4" title="Link to this heading"></a></h3>
 <p>Fits SBA and Croston with shared transitions and independent error totals and metrics.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1431,7 +1022,7 @@
 <hr class="docutils" />
 </section>
 <section id="learn-pair-4">
-<span id="intermittent-demand-forecasting-0-learn-pair-4"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">learn_pair/4</span></code></a><a class="headerlink" href="#learn-pair-4" title="Link to this heading"></a></h3>
+<span id="intermittent-demand-forecasting-0-learn-pair-4"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">learn_pair/4</span></code></a><a class="headerlink" href="#learn-pair-4" title="Link to this heading"></a></h3>
 <p>Advances one shared Croston state and two causal error streams.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1461,7 +1052,7 @@
 <hr class="docutils" />
 </section>
 <section id="paired-predictions-4">
-<span id="intermittent-demand-forecasting-0-paired-predictions-4"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">paired_predictions/4</span></code></a><a class="headerlink" href="#paired-predictions-4" title="Link to this heading"></a></h3>
+<span id="intermittent-demand-forecasting-0-paired-predictions-4"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">paired_predictions/4</span></code></a><a class="headerlink" href="#paired-predictions-4" title="Link to this heading"></a></h3>
 <p>Computes both method predictions from one rate, retaining integer cold-start zeros.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1491,7 +1082,7 @@
 <hr class="docutils" />
 </section>
 <section id="better-candidate-3">
-<span id="intermittent-demand-forecasting-0-better-candidate-3"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">better_candidate/3</span></code></a><a class="headerlink" href="#better-candidate-3" title="Link to this heading"></a></h3>
+<span id="intermittent-demand-forecasting-0-better-candidate-3"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">better_candidate/3</span></code></a><a class="headerlink" href="#better-candidate-3" title="Link to this heading"></a></h3>
 <p>Chooses the lower rounded RMSE, breaking exact ties by method, alpha, and beta priority.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1512,7 +1103,7 @@
 <hr class="docutils" />
 </section>
 <section id="candidate-key-2">
-<span id="intermittent-demand-forecasting-0-candidate-key-2"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">candidate_key/2</span></code></a><a class="headerlink" href="#candidate-key-2" title="Link to this heading"></a></h3>
+<span id="intermittent-demand-forecasting-0-candidate-key-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">candidate_key/2</span></code></a><a class="headerlink" href="#candidate-key-2" title="Link to this heading"></a></h3>
 <p>Returns the exact RMSE and deterministic method/coefficient priority key.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1533,7 +1124,7 @@
 <hr class="docutils" />
 </section>
 <section id="method-priority-2">
-<span id="intermittent-demand-forecasting-0-method-priority-2"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">method_priority/2</span></code></a><a class="headerlink" href="#method-priority-2" title="Link to this heading"></a></h3>
+<span id="intermittent-demand-forecasting-0-method-priority-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">method_priority/2</span></code></a><a class="headerlink" href="#method-priority-2" title="Link to this heading"></a></h3>
 <p>Returns the priority of a validated concrete method.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1554,7 +1145,7 @@
 <hr class="docutils" />
 </section>
 <section id="fit-series-4">
-<span id="intermittent-demand-forecasting-0-fit-series-4"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">fit_series/4</span></code></a><a class="headerlink" href="#fit-series-4" title="Link to this heading"></a></h3>
+<span id="intermittent-demand-forecasting-0-fit-series-4"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">fit_series/4</span></code></a><a class="headerlink" href="#fit-series-4" title="Link to this heading"></a></h3>
 <p>Fits a validated series, retaining terminal state and error metrics without constructing public diagnostics.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1584,7 +1175,7 @@
 <hr class="docutils" />
 </section>
 <section id="fit-series-output-5">
-<span id="intermittent-demand-forecasting-0-fit-series-output-5"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">fit_series_output/5</span></code></a><a class="headerlink" href="#fit-series-output-5" title="Link to this heading"></a></h3>
+<span id="intermittent-demand-forecasting-0-fit-series-output-5"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">fit_series_output/5</span></code></a><a class="headerlink" href="#fit-series-output-5" title="Link to this heading"></a></h3>
 <p>Fits and scores a validated series, optionally emitting pre-observation predictions in the same traversal.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1614,7 +1205,7 @@
 <hr class="docutils" />
 </section>
 <section id="fitted-model-3">
-<span id="intermittent-demand-forecasting-0-fitted-model-3"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">fitted_model/3</span></code></a><a class="headerlink" href="#fitted-model-3" title="Link to this heading"></a></h3>
+<span id="intermittent-demand-forecasting-0-fitted-model-3"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">fitted_model/3</span></code></a><a class="headerlink" href="#fitted-model-3" title="Link to this heading"></a></h3>
 <p>Builds canonical public diagnostics once from the winning fit and validated observation summary.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1644,7 +1235,7 @@
 <hr class="docutils" />
 </section>
 <section id="learn-state-6">
-<span id="intermittent-demand-forecasting-0-learn-state-6"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">learn_state/6</span></code></a><a class="headerlink" href="#learn-state-6" title="Link to this heading"></a></h3>
+<span id="intermittent-demand-forecasting-0-learn-state-6"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">learn_state/6</span></code></a><a class="headerlink" href="#learn-state-6" title="Link to this heading"></a></h3>
 <p>Advances causal state and error totals with optional aligned prediction output.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1674,7 +1265,7 @@
 <hr class="docutils" />
 </section>
 <section id="score-observation-7">
-<span id="intermittent-demand-forecasting-0-score-observation-7"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">score_observation/7</span></code></a><a class="headerlink" href="#score-observation-7" title="Link to this heading"></a></h3>
+<span id="intermittent-demand-forecasting-0-score-observation-7"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">score_observation/7</span></code></a><a class="headerlink" href="#score-observation-7" title="Link to this heading"></a></h3>
 <p>Scores a validated numeric target or preserves totals and a fresh prediction placeholder for a missing target.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1704,7 +1295,7 @@
 <hr class="docutils" />
 </section>
 <section id="demand-summary-3">
-<span id="intermittent-demand-forecasting-0-demand-summary-3"></span><span id="index-28"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">demand_summary/3</span></code></a><a class="headerlink" href="#demand-summary-3" title="Link to this heading"></a></h3>
+<span id="intermittent-demand-forecasting-0-demand-summary-3"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">demand_summary/3</span></code></a><a class="headerlink" href="#demand-summary-3" title="Link to this heading"></a></h3>
 <p>Validates demands and summarizes elapsed, observed, and positive counts without binding missing values.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1742,7 +1333,7 @@
 <hr class="docutils" />
 </section>
 <section id="prepare-parameters-4">
-<span id="intermittent-demand-forecasting-0-prepare-parameters-4"></span><span id="index-29"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">prepare_parameters/4</span></code></a><a class="headerlink" href="#prepare-parameters-4" title="Link to this heading"></a></h3>
+<span id="intermittent-demand-forecasting-0-prepare-parameters-4"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">prepare_parameters/4</span></code></a><a class="headerlink" href="#prepare-parameters-4" title="Link to this heading"></a></h3>
 <p>Prepares validated coefficients, their complements, and the SBA correction for a fitting pass or public operation.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1772,7 +1363,7 @@
 <hr class="docutils" />
 </section>
 <section id="positive-smoothing-4">
-<span id="intermittent-demand-forecasting-0-positive-smoothing-4"></span><span id="index-30"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">positive_smoothing/4</span></code></a><a class="headerlink" href="#positive-smoothing-4" title="Link to this heading"></a></h3>
+<span id="intermittent-demand-forecasting-0-positive-smoothing-4"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">positive_smoothing/4</span></code></a><a class="headerlink" href="#positive-smoothing-4" title="Link to this heading"></a></h3>
 <p>Smooths positive endpoints using their minimum plus a weighted difference, avoiding independent product underflow.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1802,7 +1393,7 @@
 <hr class="docutils" />
 </section>
 <section id="checked-forecaster-2">
-<span id="intermittent-demand-forecasting-0-checked-forecaster-2"></span><span id="index-31"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">checked_forecaster/2</span></code></a><a class="headerlink" href="#checked-forecaster-2" title="Link to this heading"></a></h3>
+<span id="intermittent-demand-forecasting-0-checked-forecaster-2"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">checked_forecaster/2</span></code></a><a class="headerlink" href="#checked-forecaster-2" title="Link to this heading"></a></h3>
 <p>Validates a model and returns its extracted fields for reuse by public operations.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1840,7 +1431,7 @@
 <hr class="docutils" />
 </section>
 <section id="valid-diagnostics-4">
-<span id="intermittent-demand-forecasting-0-valid-diagnostics-4"></span><span id="index-32"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_diagnostics/4</span></code></a><a class="headerlink" href="#valid-diagnostics-4" title="Link to this heading"></a></h3>
+<span id="intermittent-demand-forecasting-0-valid-diagnostics-4"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_diagnostics/4</span></code></a><a class="headerlink" href="#valid-diagnostics-4" title="Link to this heading"></a></h3>
 <p>Extracts required fields once and validates options, counters, metrics, and state.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1870,7 +1461,7 @@
 <hr class="docutils" />
 </section>
 <section id="extract-diagnostics-2">
-<span id="intermittent-demand-forecasting-0-extract-diagnostics-2"></span><span id="index-33"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">extract_diagnostics/2</span></code></a><a class="headerlink" href="#extract-diagnostics-2" title="Link to this heading"></a></h3>
+<span id="intermittent-demand-forecasting-0-extract-diagnostics-2"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">extract_diagnostics/2</span></code></a><a class="headerlink" href="#extract-diagnostics-2" title="Link to this heading"></a></h3>
 <p>Extracts ground diagnostic fields, rejecting malformed arities and duplicate error metrics.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1891,7 +1482,7 @@
 <hr class="docutils" />
 </section>
 <section id="rewrite-diagnostics-4">
-<span id="intermittent-demand-forecasting-0-rewrite-diagnostics-4"></span><span id="index-34"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rewrite_diagnostics/4</span></code></a><a class="headerlink" href="#rewrite-diagnostics-4" title="Link to this heading"></a></h3>
+<span id="intermittent-demand-forecasting-0-rewrite-diagnostics-4"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rewrite_diagnostics/4</span></code></a><a class="headerlink" href="#rewrite-diagnostics-4" title="Link to this heading"></a></h3>
 <p>Rebuilds diagnostic values in one traversal, preserving order, extra metadata, and later common-field occurrences.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1912,7 +1503,7 @@
 <hr class="docutils" />
 </section>
 <section id="diagnostic-position-2">
-<span id="intermittent-demand-forecasting-0-diagnostic-position-2"></span><span id="index-35"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">diagnostic_position/2</span></code></a><a class="headerlink" href="#diagnostic-position-2" title="Link to this heading"></a></h3>
+<span id="intermittent-demand-forecasting-0-diagnostic-position-2"></span><span id="index-28"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">diagnostic_position/2</span></code></a><a class="headerlink" href="#diagnostic-position-2" title="Link to this heading"></a></h3>
 <p>Maps required diagnostic names to their compact field positions.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1933,7 +1524,7 @@
 <hr class="docutils" />
 </section>
 <section id="valid-error-metrics-5">
-<span id="intermittent-demand-forecasting-0-valid-error-metrics-5"></span><span id="index-36"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_error_metrics/5</span></code></a><a class="headerlink" href="#valid-error-metrics-5" title="Link to this heading"></a></h3>
+<span id="intermittent-demand-forecasting-0-valid-error-metrics-5"></span><span id="index-29"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_error_metrics/5</span></code></a><a class="headerlink" href="#valid-error-metrics-5" title="Link to this heading"></a></h3>
 <p>Checks numeric error totals and exact consistency of their derived metrics.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

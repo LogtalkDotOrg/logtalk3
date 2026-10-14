@@ -20,13 +20,12 @@
 
 
 :- object(baseline_forecasting,
-	implements(forecaster_protocol),
 	imports(forecaster_common)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-02,
+		date is 2026-10-14,
 		comment is 'Naive, seasonal naive, mean, and drift time series forecasters with missing observations and immutable online updates.'
 	]).
 
@@ -40,127 +39,6 @@
 			'``Forecaster`` is not a valid baseline forecaster' - domain_error(forecaster, 'Forecaster'),
 			'``Observation`` is neither a variable nor a number' - type_error(number, 'Observation'),
 			'Updating the numeric sum raises an arithmetic evaluation error' - evaluation_error('Error')
-		]
-	]).
-
-	:- public(learn/3).
-	:- mode(learn(+object_identifier, -compound, +list(compound)), one_or_error).
-	:- info(learn/3, [
-		comment is 'Learns a baseline forecaster. The default model is naive; seasonal naive uses an explicit frequency option ahead of dataset metadata. Unbound observations remain missing and retain their time positions.',
-		argnames is ['Dataset', 'Forecaster', 'Options'],
-		exceptions is [
-			'``Options`` is a variable' - instantiation_error,
-			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
-			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
-			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
-			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
-			'A frequency option is supplied for a non-seasonal model' - domain_error(baseline_forecasting_option, 'Option'),
-			'The seasonal model has no explicit or dataset frequency' - domain_error(seasonal_frequency, 'Dataset'),
-			'The dataset frequency or declared length is a variable' - instantiation_error,
-			'The dataset frequency is neither a variable nor an integer' - type_error(integer, 'Frequency'),
-			'The dataset frequency is not positive' - domain_error(positive_integer, 'Frequency'),
-			'The declared length is neither a variable nor an integer' - type_error(integer, 'DeclaredLength'),
-			'The declared length is not positive' - domain_error(positive_integer, 'DeclaredLength'),
-			'The dataset has no observations' - domain_error(non_empty_series, 'Dataset'),
-			'The observation indices are not a gap-free 1-based sequence' - domain_error(series_index_sequence, 'Dataset'),
-			'The declared and observed lengths differ' - consistency_error(series_length, 'DeclaredLength', 'ObservedLength'),
-			'An observation is neither a variable nor a number' - type_error(number, 'Observation'),
-			'The series is shorter than the model minimum' - domain_error(series_length, 'Dataset'),
-			'All observations are missing' - domain_error(insufficient_observations, 'Dataset'),
-			'Numeric summation raises an arithmetic evaluation error' - evaluation_error('Error')
-		]
-	]).
-
-	:- public(learn/2).
-	:- mode(learn(+object_identifier, -compound), one_or_error).
-	:- info(learn/2, [
-		comment is 'Learns a naive baseline forecaster using default options. Equivalent to learn/3 with an empty options list, propagating its dataset validation and numeric summation exceptions.',
-		argnames is ['Dataset', 'Forecaster'],
-		exceptions is [
-			'The declared series length is a variable' - instantiation_error,
-			'The declared length is neither a variable nor an integer' - type_error(integer, 'DeclaredLength'),
-			'The declared length is not positive' - domain_error(positive_integer, 'DeclaredLength'),
-			'The dataset has no observations' - domain_error(non_empty_series, 'Dataset'),
-			'The observation indices are not a gap-free 1-based sequence' - domain_error(series_index_sequence, 'Dataset'),
-			'The declared and observed lengths differ' - consistency_error(series_length, 'DeclaredLength', 'ObservedLength'),
-			'An observation is neither a variable nor a number' - type_error(number, 'Observation'),
-			'All observations are missing' - domain_error(insufficient_observations, 'Dataset'),
-			'Numeric summation raises an arithmetic evaluation error' - evaluation_error('Error')
-		]
-	]).
-
-	:- public(forecast/3).
-	:- mode(forecast(+compound, +non_negative_integer, -list(number)), one_or_error).
-	:- info(forecast/3, [
-		comment is 'Forecasts the next horizon values. A zero horizon returns an empty list even with missing state. A positive horizon requires only the values actually used by the selected model.',
-		argnames is ['Forecaster', 'Horizon', 'Forecasts'],
-		exceptions is [
-			'``Forecaster`` or ``Horizon`` is a variable' - instantiation_error,
-			'``Forecaster`` is not a valid baseline forecaster' - domain_error(forecaster, 'Forecaster'),
-			'``Horizon`` is neither a variable nor an integer' - type_error(integer, 'Horizon'),
-			'``Horizon`` is negative' - domain_error(non_negative_integer, 'Horizon'),
-			'A requested forecast needs a missing observation' - domain_error(missing_observation, 'Forecaster'),
-			'Forecast arithmetic raises an evaluation error' - evaluation_error('Error')
-		]
-	]).
-
-	:- public(check_forecaster/1).
-	:- mode(check_forecaster(@compound), one_or_error).
-	:- info(check_forecaster/1, [
-		comment is 'Checks model-specific state, effective options, and diagnostic count consistency without instantiating missing observations.',
-		argnames is ['Forecaster'],
-		exceptions is [
-			'``Forecaster`` is a variable' - instantiation_error,
-			'``Forecaster`` is not a valid baseline forecaster' - domain_error(forecaster, 'Forecaster'),
-			'Checking retained numeric observations raises an arithmetic evaluation error' - evaluation_error('Error')
-		]
-	]).
-
-	:- public(export_to_clauses/4).
-	:- mode(export_to_clauses(+object_identifier, +compound, +atom, -list(clause)), one_or_error).
-	:- info(export_to_clauses/4, [
-		comment is 'Exports the validated forecaster as a single fact with the specified functor.',
-		argnames is ['Dataset', 'Forecaster', 'Functor', 'Clauses'],
-		exceptions is [
-			'``Forecaster`` or ``Functor`` is a variable' - instantiation_error,
-			'``Forecaster`` is not a valid baseline forecaster' - domain_error(forecaster, 'Forecaster'),
-			'``Functor`` is neither a variable nor an atom' - type_error(atom, 'Functor'),
-			'Checking retained numeric observations raises an arithmetic evaluation error' - evaluation_error('Error')
-		]
-	]).
-
-	:- public(print_forecaster/1).
-	:- mode(print_forecaster(+compound), one_or_error).
-	:- info(print_forecaster/1, [
-		comment is 'Prints the validated method, state, and diagnostics to the current output stream.',
-		argnames is ['Forecaster'],
-		exceptions is [
-			'``Forecaster`` is a variable' - instantiation_error,
-			'``Forecaster`` is not a valid baseline forecaster' - domain_error(forecaster, 'Forecaster'),
-			'Checking retained numeric observations raises an arithmetic evaluation error' - evaluation_error('Error'),
-			'The current stream cannot be written to' - permission_error(output, stream, 'Stream')
-		]
-	]).
-
-	:- public(export_to_file/4).
-	:- mode(export_to_file(+object_identifier, +compound, +atom, +atom), one_or_error).
-	:- info(export_to_file/4, [
-		comment is 'Exports a validated forecaster as a single fact, with dataset and diagnostics comments. The shared export implementation closes the output stream if writing raises an exception.',
-		argnames is ['Dataset', 'Forecaster', 'Functor', 'File'],
-		exceptions is [
-			'``Forecaster``, ``Functor``, ``File``, or the declared dataset length is a variable' - instantiation_error,
-			'``Forecaster`` is not a valid baseline forecaster' - domain_error(forecaster, 'Forecaster'),
-			'``Functor`` is neither a variable nor an atom' - type_error(atom, 'Functor'),
-			'``File`` is not a valid file specification' - type_error(source_sink, 'File'),
-			'The output location does not exist' - existence_error(source_sink, 'File'),
-			'The output file cannot be opened' - permission_error(open, source_sink, 'File'),
-			'The output stream cannot be written to' - permission_error(output, stream, 'Stream'),
-			'The dataset has no observations' - domain_error(non_empty_series, 'Dataset'),
-			'The observation indices are not a gap-free 1-based sequence' - domain_error(series_index_sequence, 'Dataset'),
-			'The declared length is neither a variable nor an integer' - type_error(integer, 'DeclaredLength'),
-			'The declared length is not positive' - domain_error(positive_integer, 'DeclaredLength'),
-			'The declared and observed lengths differ' - consistency_error(series_length, 'DeclaredLength', 'ObservedLength'),
-			'Checking retained numeric observations raises an arithmetic evaluation error' - evaluation_error('Error')
 		]
 	]).
 
@@ -284,14 +162,13 @@
 	check_forecaster(Forecaster) :-
 		(	var(Forecaster) ->
 			instantiation_error
-		;	(	Forecaster = baseline_forecaster(Method, State, Diagnostics),
-				valid_option(model(Method)),
-				nonvar(State),
-				ground(Diagnostics),
-				valid_diagnostics(Method, State, Diagnostics) ->
-				true
-			;	domain_error(forecaster, Forecaster)
-			)
+		;	forecaster_data(Forecaster, Method, State, Diagnostics),
+			valid_option(model(Method)),
+			nonvar(State),
+			ground(Diagnostics),
+			valid_diagnostics(Method, State, Diagnostics) ->
+			true
+		;	domain_error(forecaster, Forecaster)
 		).
 
 	valid_diagnostics(Method, State, Diagnostics) :-
@@ -342,7 +219,12 @@
 		!.
 	minimum_length(_, _, 1).
 
-	forecaster_term_template(baseline_forecaster(_, _, _), baseline_forecaster('Method', 'State', 'Diagnostics')).
+	forecaster_data(Forecaster, Method, State, Diagnostics) :-
+		Forecaster =.. [_, Method, State, Diagnostics].
+
+	forecaster_term_template(Forecaster, Template) :-
+		functor(Forecaster, Functor, 3),
+		Template =.. [Functor, 'Method', 'State', 'Diagnostics'].
 
 	forecaster_export_template(_Dataset, _Forecaster, Functor, Template) :-
 		Template =.. [Functor, 'Forecaster'].
@@ -353,13 +235,10 @@
 		check(atom, Functor, Context),
 		Clause =.. [Functor, Forecaster].
 
-	export_to_file(Dataset, Forecaster, Functor, File) :-
-		^^export_to_file(Dataset, Forecaster, Functor, File).
-
 	print_forecaster(Forecaster) :-
 		check_forecaster(Forecaster),
 		^^print_forecaster_template(Forecaster),
-		Forecaster = baseline_forecaster(Method, State, Diagnostics),
+		forecaster_data(Forecaster, Method, State, Diagnostics),
 		format('Method: ~w~nState: ~q~nDiagnostics: ~q~n', [Method, State, Diagnostics]).
 
 	default_option(model(naive)).

@@ -20,13 +20,12 @@
 
 
 :- object(theta_forecasting,
-	implements(forecaster_protocol),
 	imports([forecaster_common, exponential_smoothing_common])).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-02,
+		date is 2026-10-14,
 		comment is 'Standard Theta forecasting combining simple exponential smoothing and linear trend extrapolation.'
 	]).
 
@@ -44,61 +43,6 @@
 
 	:- uses(type, [
 		valid/2, check/3
-	]).
-
-	:- public(learn/3).
-	:- mode(learn(+object_identifier, -compound, +list(compound)), one_or_error).
-	:- info(learn/3, [
-		comment is 'Learns a standard Theta forecaster using the given options.',
-		argnames is ['Dataset', 'Forecaster', 'Options'],
-		exceptions is [
-			'An option, length, or strict-policy observation is unbound' - instantiation_error,
-			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
-			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
-			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
-			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
-			'An observation is not numeric' - type_error(number, 'Observation'),
-			'The declared length is not an integer' - type_error(integer, 'DeclaredLength'),
-			'The declared length is not positive' - domain_error(positive_integer, 'DeclaredLength'),
-			'The dataset has no observations' - domain_error(non_empty_series, 'Dataset'),
-			'Indices are not gap-free and 1-based' - domain_error(series_index_sequence, 'Dataset'),
-			'Declared and observed lengths differ' - consistency_error(series_length, 'DeclaredLength', 'ObservedLength'),
-			'There are fewer than two observations' - domain_error(series_length, 'Dataset'),
-			'There are fewer than two known observations' - domain_error(insufficient_known_observations, 'Dataset'),
-			'The frequency is not an integer' - type_error(integer, 'Frequency'),
-			'The frequency is not positive' - domain_error(positive_integer, 'Frequency'),
-			'Forced seasonality needs a frequency greater than one' - domain_error(seasonal_frequency, 'Frequency'),
-			'Forced seasonality has no dataset frequency' - domain_error(seasonal_frequency, 'Dataset'),
-			'An explicit frequency accompanies no seasonality' - domain_error(theta_forecasting_option, 'Option'),
-			'The series has fewer than two seasonal cycles' - domain_error(series_length, 'Series'),
-			'A seasonal phase has no valid centered-window deviation' - domain_error(insufficient_seasonal_phase_observations, 'Phase'),
-			'Multiplicative data or factors are not positive' - domain_error(positive_number, 'Value'),
-			'Fitting arithmetic fails' - evaluation_error('Error')
-		]
-	]).
-
-	:- public(learn/2).
-	:- mode(learn(+object_identifier, -compound), one_or_error).
-	:- info(learn/2, [
-		comment is 'Learns a standard Theta forecaster using default options.',
-		argnames is ['Dataset', 'Forecaster'],
-		exceptions is [
-			'A length or frequency is unbound' - instantiation_error,
-			'An observation is not numeric' - type_error(number, 'Observation'),
-			'The declared length is not an integer' - type_error(integer, 'DeclaredLength'),
-			'The declared length is not positive' - domain_error(positive_integer, 'DeclaredLength'),
-			'The dataset has no observations' - domain_error(non_empty_series, 'Dataset'),
-			'Indices are not gap-free and 1-based' - domain_error(series_index_sequence, 'Dataset'),
-			'Declared and observed lengths differ' - consistency_error(series_length, 'DeclaredLength', 'ObservedLength'),
-			'There are fewer than two observations' - domain_error(series_length, 'Dataset'),
-			'There are fewer than two known observations' - domain_error(insufficient_known_observations, 'Dataset'),
-			'The dataset frequency is not an integer' - type_error(integer, 'Frequency'),
-			'The dataset frequency is not positive' - domain_error(positive_integer, 'Frequency'),
-			'Seasonal decomposition has fewer than two cycles' - domain_error(series_length, 'Series'),
-			'A seasonal phase has no valid centered-window deviation' - domain_error(insufficient_seasonal_phase_observations, 'Phase'),
-			'Multiplicative factors are not positive' - domain_error(positive_number, 'Value'),
-			'Fitting arithmetic fails' - evaluation_error('Error')
-		]
 	]).
 
 	:- public(fitted_values/2).
@@ -154,80 +98,6 @@
 			'Multiplicative data or factors are not positive' - domain_error(positive_number, 'Value'),
 			'The residual count is inconsistent' - domain_error(residual_count, 'Residuals'),
 			'Fitting or fit restoration arithmetic fails' - evaluation_error('Error')
-		]
-	]).
-
-	:- public(forecast/3).
-	:- mode(forecast(+compound, +non_negative_integer, -list(number)), one_or_error).
-	:- info(forecast/3, [
-		comment is 'Forecasts the next ``Horizon`` observations. A zero horizon returns an empty list after validation.',
-		argnames is ['Forecaster', 'Horizon', 'Forecasts'],
-		exceptions is [
-			'Forecaster or horizon is unbound' - instantiation_error,
-			'The forecaster is invalid' - domain_error(forecaster, 'Forecaster'),
-			'The horizon is not an integer' - type_error(integer, 'Horizon'),
-			'The horizon is negative' - domain_error(non_negative_integer, 'Horizon'),
-			'Forecast or validation arithmetic fails' - evaluation_error('Error')
-		]
-	]).
-
-	:- public(check_forecaster/1).
-	:- mode(check_forecaster(@compound), one_or_error).
-	:- info(check_forecaster/1, [
-		comment is 'Checks the complete state and diagnostics without binding the argument.',
-		argnames is ['Forecaster'],
-		exceptions is [
-			'The forecaster is unbound' - instantiation_error,
-			'The forecaster is invalid' - domain_error(forecaster, 'Forecaster'),
-			'Validation arithmetic fails' - evaluation_error('Error')
-		]
-	]).
-
-	:- public(export_to_clauses/4).
-	:- mode(export_to_clauses(+object_identifier, +compound, +atom, -list(clause)), one_or_error).
-	:- info(export_to_clauses/4, [
-		comment is 'Exports a validated forecaster as one fact.',
-		argnames is ['Dataset', 'Forecaster', 'Functor', 'Clauses'],
-		exceptions is [
-			'Forecaster or functor is unbound' - instantiation_error,
-			'The forecaster is invalid' - domain_error(forecaster, 'Forecaster'),
-			'The functor is not an atom' - type_error(atom, 'Functor'),
-			'Validation arithmetic fails' - evaluation_error('Error')
-		]
-	]).
-
-	:- public(print_forecaster/1).
-	:- mode(print_forecaster(+compound), one_or_error).
-	:- info(print_forecaster/1, [
-		comment is 'Prints a validated forecaster and its diagnostics.',
-		argnames is ['Forecaster'],
-		exceptions is [
-			'The forecaster is unbound' - instantiation_error,
-			'The forecaster is invalid' - domain_error(forecaster, 'Forecaster'),
-			'Validation arithmetic fails' - evaluation_error('Error'),
-			'The current stream cannot be written' - permission_error(output, stream, 'Stream')
-		]
-	]).
-
-	:- public(export_to_file/4).
-	:- mode(export_to_file(+object_identifier, +compound, +atom, +atom), one_or_error).
-	:- info(export_to_file/4, [
-		comment is 'Exports a validated forecaster with dataset and diagnostics comments.',
-		argnames is ['Dataset', 'Forecaster', 'Functor', 'File'],
-		exceptions is [
-			'A forecaster, functor, file, or dataset length is unbound' - instantiation_error,
-			'The forecaster is invalid' - domain_error(forecaster, 'Forecaster'),
-			'The functor is not an atom' - type_error(atom, 'Functor'),
-			'The file specification is invalid' - type_error(source_sink, 'File'),
-			'The output location does not exist' - existence_error(source_sink, 'File'),
-			'The file cannot be opened' - permission_error(open, source_sink, 'File'),
-			'The stream cannot be written' - permission_error(output, stream, 'Stream'),
-			'The dataset has no observations' - domain_error(non_empty_series, 'Dataset'),
-			'Indices are not gap-free and 1-based' - domain_error(series_index_sequence, 'Dataset'),
-			'The declared length is not an integer' - type_error(integer, 'DeclaredLength'),
-			'The declared length is not positive' - domain_error(positive_integer, 'DeclaredLength'),
-			'Declared and observed lengths differ' - consistency_error(series_length, 'DeclaredLength', 'ObservedLength'),
-			'Validation arithmetic fails' - evaluation_error('Error')
 		]
 	]).
 
@@ -778,7 +648,12 @@
 		nelder_mead(no_problem)::valid_option(Option),
 		valid_optimizer_entries(Options, [Name| Seen]).
 
-	forecaster_term_template(theta_forecaster(_, _), theta_forecaster('State','Diagnostics')).
+	forecaster_data(Forecaster, State, Diagnostics) :-
+		Forecaster =.. [_, State, Diagnostics].
+
+	forecaster_term_template(Forecaster, Template) :-
+		functor(Forecaster, Functor, 2),
+		Template =.. [Functor, 'State', 'Diagnostics'].
 
 	forecaster_export_template(_Dataset, Forecaster, Functor, Template) :-
 		Template =.. [Functor, Forecaster].
@@ -788,12 +663,10 @@
 		context(Context), check(atom, Functor, Context),
 		Clause =.. [Functor, Forecaster].
 
-	export_to_file(Dataset, Forecaster, Functor, File) :-
-		^^export_to_file(Dataset, Forecaster, Functor, File).
-
 	print_forecaster(Forecaster) :-
 		check_forecaster(Forecaster),
 		^^print_forecaster_template(Forecaster),
-		format('~q~n', [Forecaster]).
+		forecaster_data(Forecaster, State, Diagnostics),
+		format('State: ~q~nDiagnostics: ~q~n', [State, Diagnostics]).
 
 :- end_object.

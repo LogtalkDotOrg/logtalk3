@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-27,
+		date is 2026-10-14,
 		comment is 'Minimal naive-forecast forecaster used to exercise the forecaster_protocol and forecaster_common shared code end-to-end.'
 	]).
 
@@ -66,12 +66,15 @@
 	forecaster_export_template(_Dataset, _Forecaster, Functor, Template) :-
 		Template =.. [Functor, 'Forecaster'].
 
-	forecaster_term_template(sample_forecaster(_Series, _Diagnostics), sample_forecaster('Series', 'Diagnostics')).
+	forecaster_term_template(Forecaster, Template) :-
+		functor(Forecaster, Functor, 2),
+		Template =.. [Functor, 'Series', 'Diagnostics'].
 
 	export_to_clauses(_Dataset, Forecaster, Functor, [Clause]) :-
 		Clause =.. [Functor, Forecaster].
 
 	print_forecaster(Forecaster) :-
+		check_forecaster(Forecaster),
 		^^print_forecaster_template(Forecaster),
 		writeq(Forecaster), nl.
 

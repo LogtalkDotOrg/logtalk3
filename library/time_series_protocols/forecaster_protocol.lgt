@@ -24,23 +24,38 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-27,
+		date is 2026-10-14,
 		comment is 'Protocol for time series forecasting models.',
 		see_also is [time_series_dataset_protocol]
 	]).
 
 	:- public(learn/3).
-	:- mode(learn(+object_identifier, -compound, +list(compound)), one).
+	:- mode(learn(+object_identifier, -compound, +list(compound)), one_or_error).
 	:- info(learn/3, [
 		comment is 'Learns a forecasting model from the given time series dataset object using the specified options.',
-		argnames is ['Dataset', 'Forecaster', 'Options']
+		argnames is ['Dataset', 'Forecaster', 'Options'],
+		exceptions is [
+			'``Dataset`` is a variable' - instantiation_error,
+			'``Dataset`` is neither a variable nor a valid object identifier' - type_error(object_identifier, 'Dataset'),
+			'``Dataset`` is a valid object identifier but not an existing object' - existence_error(object, 'Dataset'),
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
+		]
 	]).
 
 	:- public(learn/2).
-	:- mode(learn(+object_identifier, -compound), one).
+	:- mode(learn(+object_identifier, -compound), one_or_error).
 	:- info(learn/2, [
 		comment is 'Learns a forecasting model from the given time series dataset object using default options.',
-		argnames is ['Dataset', 'Forecaster']
+		argnames is ['Dataset', 'Forecaster'],
+		exceptions is [
+			'``Dataset`` is a variable' - instantiation_error,
+			'``Dataset`` is neither a variable nor a valid object identifier' - type_error(object_identifier, 'Dataset'),
+			'``Dataset`` is a valid object identifier but not an existing object' - existence_error(object, 'Dataset')
+		]
 	]).
 
 	:- public(forecast/3).
@@ -49,6 +64,8 @@
 		comment is 'Forecasts the next ``Horizon`` values beyond the training series using the learned forecasting model. A zero horizon returns an empty list.',
 		argnames is ['Forecaster', 'Horizon', 'Forecasts'],
 		exceptions is [
+			'``Forecaster`` is a variable' - instantiation_error,
+			'``Forecaster`` is not a valid forecaster' - domain_error(forecaster, 'Forecaster'),
 			'``Horizon`` is a variable' - instantiation_error,
 			'``Horizon`` is neither a variable nor an integer' - type_error(integer, 'Horizon'),
 			'``Horizon`` is an integer but is negative' - domain_error(non_negative_integer, 'Horizon')
@@ -95,24 +112,43 @@
 	]).
 
 	:- public(export_to_clauses/4).
-	:- mode(export_to_clauses(+object_identifier, +compound, +atom, -list(clause)), one).
+	:- mode(export_to_clauses(+object_identifier, +compound, +atom, -list(clause)), one_or_error).
 	:- info(export_to_clauses/4, [
 		comment is 'Converts a forecaster into a list of predicate clauses. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized forecaster term, a noun such as ``forecaster`` or ``model`` is usually clearer than a verb such as ``forecast``.',
-		argnames is ['Dataset', 'Forecaster', 'Functor', 'Clauses']
+		argnames is ['Dataset', 'Forecaster', 'Functor', 'Clauses'],
+		exceptions is [
+			'``Forecaster`` or ``Functor`` is a variable' - instantiation_error,
+			'``Forecaster`` is not a valid baseline forecaster' - domain_error(forecaster, 'Forecaster'),
+			'``Functor`` is neither a variable nor an atom' - type_error(atom, 'Functor')
+		]
 	]).
 
 	:- public(export_to_file/4).
-	:- mode(export_to_file(+object_identifier, +compound, +atom, +atom), one).
+	:- mode(export_to_file(+object_identifier, +compound, +atom, +atom), one_or_error).
 	:- info(export_to_file/4, [
 		comment is 'Exports a forecaster to a file. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized forecaster term, a noun such as ``forecaster`` or ``model`` is usually clearer than a verb such as ``forecast``.',
-		argnames is ['Dataset', 'Forecaster', 'Functor', 'File']
+		argnames is ['Dataset', 'Forecaster', 'Functor', 'File'],
+		exceptions is [
+			'``Forecaster``, ``Functor``, or ``File``' - instantiation_error,
+			'``Forecaster`` is not a valid forecaster' - domain_error(forecaster, 'Forecaster'),
+			'``Functor`` is neither a variable nor an atom' - type_error(atom, 'Functor'),
+			'``File`` is not a valid file specification' - type_error(source_sink, 'File'),
+			'The output location does not exist' - existence_error(source_sink, 'File'),
+			'The output file cannot be opened' - permission_error(open, source_sink, 'File'),
+			'The output stream cannot be written to' - permission_error(output, stream, 'Stream')
+		]
 	]).
 
 	:- public(print_forecaster/1).
-	:- mode(print_forecaster(+compound), one).
+	:- mode(print_forecaster(+compound), one_or_error).
 	:- info(print_forecaster/1, [
 		comment is 'Prints a forecaster to the current output stream in a human-readable format.',
-		argnames is ['Forecaster']
+		argnames is ['Forecaster'],
+		exceptions is [
+			'``Forecaster`` is a variable' - instantiation_error,
+			'``Forecaster`` is not a valid baseline forecaster' - domain_error(forecaster, 'Forecaster'),
+			'The current stream cannot be written to' - permission_error(output, stream, 'Stream')
+		]
 	]).
 
 :- end_protocol.

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-02,
+		date is 2026-10-14,
 		comment is 'Simple, Holt linear-trend, and additive or multiplicative Holt-Winters exponential smoothing forecaster.',
 		see_also is [forecaster_protocol, time_series_dataset_protocol]
 	]).
@@ -496,14 +496,13 @@
 	check_forecaster(Forecaster) :-
 		(	var(Forecaster) ->
 			instantiation_error
-		;	(	Forecaster = exponential_smoothing_forecaster(Method, State, Parameters, Diagnostics),
-				valid_method(Method),
-				valid_model_state(Method, State),
-				valid_parameters(Method, Parameters),
-				valid_diagnostics(Method, State, Parameters, Diagnostics) ->
-				true
-			;	domain_error(forecaster, Forecaster)
-			)
+		;	forecaster_data(Forecaster, Method, State, Parameters, Diagnostics),
+			valid_method(Method),
+			valid_model_state(Method, State),
+			valid_parameters(Method, Parameters),
+			valid_diagnostics(Method, State, Parameters, Diagnostics) ->
+			true
+		;	domain_error(forecaster, Forecaster)
 		).
 
 	valid_diagnostics(Method, State, Parameters, Diagnostics) :-
@@ -736,13 +735,15 @@
 		),
 		Difference =< 1.0e-12 * Scale.
 
+	forecaster_data(Forecaster, Model, State, Parameters, Diagnostics) :-
+		Forecaster =.. [_, Model, State, Parameters, Diagnostics].
+
 	forecaster_export_template(_Dataset, _Forecaster, Functor, Template) :-
 		Template =.. [Functor, 'Forecaster'].
 
-	forecaster_term_template(
-		exponential_smoothing_forecaster(_Method, _State, _Parameters, _Diagnostics),
-		exponential_smoothing_forecaster('Method', 'State', 'Parameters', 'Diagnostics')
-	).
+	forecaster_term_template(Forecaster, Template) :-
+		functor(Forecaster, Functor, 4),
+		Template =.. [Functor, 'Model', 'State', 'Parameters', 'Diagnostics'].
 
 	export_to_clauses(_Dataset, Forecaster, Functor, [Clause]) :-
 		check_forecaster(Forecaster),
@@ -750,9 +751,9 @@
 
 	print_forecaster(Forecaster) :-
 		check_forecaster(Forecaster),
-		Forecaster = exponential_smoothing_forecaster(Method, State, Parameters, Diagnostics),
+		forecaster_data(Forecaster, Model, State, Parameters, Diagnostics),
 		^^print_forecaster_template(Forecaster),
-		format('Method: ~w~n', [Method]),
+		format('Model: ~w~n', [Model]),
 		format('State: ~w~n', [State]),
 		format('Parameters: ~w~n', [Parameters]),
 		memberchk(sum_squared_error(SumSquaredError), Diagnostics),

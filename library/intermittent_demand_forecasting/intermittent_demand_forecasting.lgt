@@ -20,57 +20,13 @@
 
 
 :- object(intermittent_demand_forecasting,
-	implements(forecaster_protocol),
 	imports(forecaster_common)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-12,
+		date is 2026-10-14,
 		comment is 'Croston, SBA, and TSB intermittent-demand forecasters with causal initialization, configurable missing observations, and immutable online updates.'
-	]).
-
-	:- public(learn/2).
-	:- mode(learn(+object_identifier, -compound), one_or_error).
-	:- info(learn/2, [
-		comment is 'Learns a forecaster from ``Dataset`` using default options.',
-		argnames is ['Dataset', 'Forecaster'],
-		exceptions is [
-			'An observation index or the declared series length is a variable' - instantiation_error,
-			'The declared series length is not an integer' - type_error(integer, 'DeclaredLength'),
-			'The declared series length is not positive' - domain_error(positive_integer, 'DeclaredLength'),
-			'The dataset contains no observations' - domain_error(non_empty_series, 'Dataset'),
-			'The indices are not a gap-free 1-based sequence' - domain_error(series_index_sequence, 'Dataset'),
-			'The declared and observed lengths differ' - consistency_error(series_length, 'DeclaredLength', 'ObservedLength'),
-			'An observation is neither a variable nor a number' - type_error(number, 'Observation'),
-			'An observation is negative' - domain_error(non_negative_number, 'Observation'),
-			'All observations are missing' - domain_error(insufficient_observations, 'Dataset'),
-			'Learning or error-total arithmetic raises an evaluation error' - evaluation_error('Error')
-		]
-	]).
-
-	:- public(learn/3).
-	:- mode(learn(+object_identifier, -compound, +list(compound)), one_or_error).
-	:- info(learn/3, [
-		comment is 'Learns a forecaster from ``Dataset`` using the specified ``Options``.',
-		argnames is ['Dataset', 'Forecaster', 'Options'],
-		exceptions is [
-			'An observation index or the declared series length is a variable' - instantiation_error,
-			'``Options`` is a variable' - instantiation_error,
-			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
-			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
-			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
-			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
-			'The declared series length is not an integer' - type_error(integer, 'DeclaredLength'),
-			'The declared series length is not positive' - domain_error(positive_integer, 'DeclaredLength'),
-			'The dataset contains no observations' - domain_error(non_empty_series, 'Dataset'),
-			'The indices are not a gap-free 1-based sequence' - domain_error(series_index_sequence, 'Dataset'),
-			'The declared and observed lengths differ' - consistency_error(series_length, 'DeclaredLength', 'ObservedLength'),
-			'An observation is neither a variable nor a number' - type_error(number, 'Observation'),
-			'An observation is negative' - domain_error(non_negative_number, 'Observation'),
-			'All observations are missing' - domain_error(insufficient_observations, 'Dataset'),
-			'Learning or error-total arithmetic raises an evaluation error' - evaluation_error('Error')
-		]
 	]).
 
 	:- public(fitted_values/2).
@@ -116,20 +72,6 @@
 		]
 	]).
 
-	:- public(forecast/3).
-	:- mode(forecast(+compound, +non_negative_integer, -list(number)), one_or_error).
-	:- info(forecast/3, [
-		comment is 'Returns ``Horizon`` constant per-period expected-demand forecasts from ``Forecaster``.',
-		argnames is ['Forecaster', 'Horizon', 'Forecasts'],
-		exceptions is [
-			'``Forecaster`` or ``Horizon`` is a variable' - instantiation_error,
-			'``Forecaster`` is not a valid intermittent-demand forecaster' - domain_error(forecaster, 'Forecaster'),
-			'``Horizon`` is not an integer' - type_error(integer, 'Horizon'),
-			'``Horizon`` is negative' - domain_error(non_negative_integer, 'Horizon'),
-			'Forecast or diagnostic validation arithmetic raises an evaluation error' - evaluation_error('Error')
-		]
-	]).
-
 	:- public(update/3).
 	:- mode(update(+compound, @term, -compound), one_or_error).
 	:- info(update/3, [
@@ -141,66 +83,6 @@
 			'``Observation`` is neither a variable nor a number' - type_error(number, 'Observation'),
 			'``Observation`` is negative' - domain_error(non_negative_number, 'Observation'),
 			'Update, error-total, or diagnostic validation arithmetic raises an evaluation error' - evaluation_error('Error')
-		]
-	]).
-
-	:- public(check_forecaster/1).
-	:- mode(check_forecaster(@term), one_or_error).
-	:- info(check_forecaster/1, [
-		comment is 'Checks whether ``Forecaster`` is a valid model.',
-		argnames is ['Forecaster'],
-		exceptions is [
-			'``Forecaster`` is a variable' - instantiation_error,
-			'``Forecaster`` is not a valid intermittent-demand forecaster' - domain_error(forecaster, 'Forecaster'),
-			'Counter or metric validation arithmetic raises an evaluation error' - evaluation_error('Error')
-		]
-	]).
-
-	:- public(export_to_clauses/4).
-	:- mode(export_to_clauses(+object_identifier, +compound, +atom, -list(clause)), one_or_error).
-	:- info(export_to_clauses/4, [
-		comment is 'Exports the validated forecaster as a single fact with the specified functor.',
-		argnames is ['Dataset', 'Forecaster', 'Functor', 'Clauses'],
-		exceptions is [
-			'``Forecaster`` or ``Functor`` is a variable' - instantiation_error,
-			'``Forecaster`` is not a valid intermittent-demand forecaster' - domain_error(forecaster, 'Forecaster'),
-			'``Functor`` is not an atom' - type_error(atom, 'Functor'),
-			'Counter validation arithmetic raises an evaluation error' - evaluation_error('Error')
-		]
-	]).
-
-	:- public(export_to_file/4).
-	:- mode(export_to_file(+object_identifier, +compound, +atom, +atom), one_or_error).
-	:- info(export_to_file/4, [
-		comment is 'Exports a validated forecaster as a single fact with dataset and diagnostics comments. The shared implementation closes the stream on writing exceptions.',
-		argnames is ['Dataset', 'Forecaster', 'Functor', 'File'],
-		exceptions is [
-			'``Forecaster``, ``Functor``, ``File``, an observation index, or the declared dataset length is a variable' - instantiation_error,
-			'``Forecaster`` is not a valid intermittent-demand forecaster' - domain_error(forecaster, 'Forecaster'),
-			'``Functor`` is not an atom' - type_error(atom, 'Functor'),
-			'``File`` is not a valid file specification' - type_error(source_sink, 'File'),
-			'The output location does not exist' - existence_error(source_sink, 'File'),
-			'The output file cannot be opened' - permission_error(open, source_sink, 'File'),
-			'The output stream cannot be written to' - permission_error(output, stream, 'Stream'),
-			'The dataset contains no observations' - domain_error(non_empty_series, 'Dataset'),
-			'The observation indices are not a gap-free 1-based sequence' - domain_error(series_index_sequence, 'Dataset'),
-			'The declared length is not an integer' - type_error(integer, 'DeclaredLength'),
-			'The declared length is not positive' - domain_error(positive_integer, 'DeclaredLength'),
-			'The declared and observed lengths differ' - consistency_error(series_length, 'DeclaredLength', 'ObservedLength'),
-			'Counter validation arithmetic raises an evaluation error' - evaluation_error('Error')
-		]
-	]).
-
-	:- public(print_forecaster/1).
-	:- mode(print_forecaster(+compound), one_or_error).
-	:- info(print_forecaster/1, [
-		comment is 'Prints the method, state, and diagnostics of ``Forecaster`` to the current output stream.',
-		argnames is ['Forecaster'],
-		exceptions is [
-			'``Forecaster`` is a variable' - instantiation_error,
-			'``Forecaster`` is not a valid intermittent-demand forecaster' - domain_error(forecaster, 'Forecaster'),
-			'Counter validation arithmetic raises an evaluation error' - evaluation_error('Error'),
-			'The current stream cannot be written to' - permission_error(output, stream, 'Stream')
 		]
 	]).
 
@@ -730,12 +612,10 @@
 	checked_forecaster(Forecaster, Data) :-
 		(	var(Forecaster) ->
 			instantiation_error
-		;	(	ground(Forecaster),
-				Forecaster = intermittent_demand_forecaster(Method, State, Diagnostics),
-				valid_diagnostics(Method, State, Diagnostics, Data) ->
-				true
-			;	domain_error(forecaster, Forecaster)
-			)
+		;	forecaster_data(Forecaster, Method, State, Diagnostics),
+			valid_diagnostics(Method, State, Diagnostics, Data) ->
+			true
+		;	domain_error(forecaster, Forecaster)
 		).
 
 	:- private(valid_diagnostics/4).
@@ -866,7 +746,12 @@
 		number(Size), Size > 0,
 		number(Probability), Probability >= 0, Probability =< 1.
 
-	forecaster_term_template(intermittent_demand_forecaster(_, _, _), intermittent_demand_forecaster('Method', 'State', 'Diagnostics')).
+	forecaster_data(Forecaster, Method, State, Diagnostics) :-
+		Forecaster =.. [_, Method, State, Diagnostics].
+
+	forecaster_term_template(Forecaster, Template) :-
+		functor(Forecaster, Functor, 3),
+		Template =.. [Functor, 'Method', 'State', 'Diagnostics'].
 
 	forecaster_export_template(_Dataset, _Forecaster, Functor, Template) :-
 		Template =.. [Functor, 'Forecaster'].
@@ -877,13 +762,10 @@
 		check(atom, Functor, Context),
 		Clause =.. [Functor, Forecaster].
 
-	export_to_file(Dataset, Forecaster, Functor, File) :-
-		^^export_to_file(Dataset, Forecaster, Functor, File).
-
 	print_forecaster(Forecaster) :-
 		check_forecaster(Forecaster),
 		^^print_forecaster_template(Forecaster),
-		Forecaster = intermittent_demand_forecaster(Method, State, Diagnostics),
+		forecaster_data(Forecaster, Method, State, Diagnostics),
 		format('Method: ~w~nState: ~q~nDiagnostics: ~q~n', [Method, State, Diagnostics]).
 
 	default_option(model(sba)).

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-07,
+		date is 2026-10-14,
 		comment is 'k-Nearest Neighbors (analog method) time series forecaster: matches the most recent window of observations against historical windows of the same length and predicts by aggregating what followed the most similar ones. Supports multiple distance metrics, neighbor weighting schemes, optional differencing, and missing observations represented as unbound variables.',
 		see_also is [exponential_smoothing, time_series_regression]
 	]).
@@ -388,14 +388,13 @@
 	check_forecaster(Forecaster) :-
 		(	var(Forecaster) ->
 			instantiation_error
-		;	(	Forecaster = knn_forecaster(Model, State, Rows, Diagnostics),
-				valid_model(Model, Order, Differencing, K, DistanceMetric, MinkowskiPower, WeightScheme),
-				valid_state(Order, Differencing, State),
-				valid_rows(Order, K, Rows),
-				valid_diagnostics(Order, Differencing, K, DistanceMetric, MinkowskiPower, WeightScheme, Diagnostics) ->
-				true
-			;	domain_error(forecaster, Forecaster)
-			)
+		;	forecaster_data(Forecaster, Model, State, Rows, Diagnostics),
+			valid_model(Model, Order, Differencing, K, DistanceMetric, MinkowskiPower, WeightScheme),
+			valid_state(Order, Differencing, State),
+			valid_rows(Order, K, Rows),
+			valid_diagnostics(Order, Differencing, K, DistanceMetric, MinkowskiPower, WeightScheme, Diagnostics) ->
+			true
+		;	domain_error(forecaster, Forecaster)
 		).
 
 	valid_model(knn(Order, Differencing, K, DistanceMetric, MinkowskiPower, WeightScheme), Order, Differencing, K, DistanceMetric, MinkowskiPower, WeightScheme) :-
@@ -460,13 +459,15 @@
 		integer(UpdateCount),
 		UpdateCount >= 0.
 
+	forecaster_data(Forecaster, Model, State, Rows, Diagnostics) :-
+		Forecaster =.. [_, Model, State, Rows, Diagnostics].
+
 	forecaster_export_template(_Dataset, _Forecaster, Functor, Template) :-
 		Template =.. [Functor, 'Forecaster'].
 
-	forecaster_term_template(
-		knn_forecaster(_Model, _State, _Rows, _Diagnostics),
-		knn_forecaster('Model', 'State', 'Rows', 'Diagnostics')
-	).
+	forecaster_term_template(Forecaster, Template) :-
+		functor(Forecaster, Functor, 4),
+		Template =.. [Functor, 'Model', 'State', 'Rows', 'Diagnostics'].
 
 	export_to_clauses(_Dataset, Forecaster, Functor, [Clause]) :-
 		check_forecaster(Forecaster),
@@ -474,7 +475,8 @@
 
 	print_forecaster(Forecaster) :-
 		check_forecaster(Forecaster),
-		Forecaster = knn_forecaster(knn(Order, Differencing, K, DistanceMetric, MinkowskiPower, WeightScheme), State, Rows, Diagnostics),
+		forecaster_data(Forecaster, Model, State, Rows, Diagnostics),
+		Model = knn(Order, Differencing, K, DistanceMetric, MinkowskiPower, WeightScheme),
 		^^print_forecaster_template(Forecaster),
 		format('Order: ~w~n', [Order]),
 		format('Differencing: ~w~n', [Differencing]),
