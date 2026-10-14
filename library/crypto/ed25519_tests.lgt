@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-01,
+		date is 2026-10-15,
 		comment is 'Unit tests for the "crypto" library implementation of Ed25519.'
 	]).
 
@@ -105,16 +105,12 @@
 
 	test(crypto_ed25519_verify_3_02, fail) :-
 		% signature over a different message must not verify
-		hex_bytes('9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60', Seed),
-		ed25519_public_key(Seed, PublicKey),
-		ed25519_sign(Seed, [], Signature),
+		ed25519_test_vector(PublicKey, Signature),
 		ed25519_verify(PublicKey, [1], Signature).
 
 	test(crypto_ed25519_verify_3_03, fail) :-
 		% tampered signature (last byte flipped) must not verify
-		hex_bytes('9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60', Seed),
-		ed25519_public_key(Seed, PublicKey),
-		ed25519_sign(Seed, [], Signature),
+		ed25519_test_vector(PublicKey, Signature),
 		append(Prefix, [Last], Signature),
 		LastFlipped is xor(Last, 1),
 		append(Prefix, [LastFlipped], Tampered),
@@ -122,9 +118,7 @@
 
 	test(crypto_ed25519_verify_3_04, fail) :-
 		% non-canonical S (S = L, the group order itself; must satisfy 0 <= S < L)
-		hex_bytes('9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60', Seed),
-		ed25519_public_key(Seed, PublicKey),
-		ed25519_sign(Seed, [], Signature),
+		ed25519_test_vector(PublicKey, Signature),
 		length(RBytes, 32),
 		append(RBytes, _, Signature),
 		GroupOrder is (1<<252) + 27742317777372353535851937790883648493,
@@ -171,17 +165,17 @@
 
 	test(crypto_ed25519_verify_3_19, fail) :-
 		% malformed length is simply not a valid signature
-		hex_bytes('9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60', Seed),
-		ed25519_public_key(Seed, PublicKey),
+		ed25519_test_vector(PublicKey, _),
 		ed25519_verify(PublicKey, [], [1,2,3]).
 
 	% auxiliary predicates
 
+	ed25519_test_vector(PublicKey, Signature) :-
+		hex_bytes('d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a', PublicKey),
+		hex_bytes('e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b', Signature).
+
 	ed25519_check_bad_r(BadPointHex) :-
-		hex_bytes('9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60', Seed),
-		ed25519_public_key(Seed, PublicKey),
-		ed25519_sign(Seed, [], Signature),
-		length(_, 32),
+		ed25519_test_vector(PublicKey, Signature),
 		length(GoodR, 32),
 		append(GoodR, SBytes, Signature),
 		hex_bytes(BadPointHex, BadR),
@@ -189,8 +183,7 @@
 		\+ ed25519_verify(PublicKey, [], BadSignature).
 
 	ed25519_check_bad_a(BadPointHex) :-
-		hex_bytes('9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60', Seed),
-		ed25519_sign(Seed, [], Signature),
+		ed25519_test_vector(_, Signature),
 		hex_bytes(BadPointHex, BadPublicKey),
 		\+ ed25519_verify(BadPublicKey, [], Signature).
 

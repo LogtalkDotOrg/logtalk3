@@ -23,15 +23,15 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-03,
+		date is 2026-10-15,
 		comment is 'Unit tests for the "crypto" library implementation of X25519.'
 	]).
 
 	:- uses(crypto, [
 		hkdf/5, hex_bytes/2,
-		ed25519_keypair/2, ed25519_sign/3, ed25519_verify/3,
+		ed25519_sign/3, ed25519_verify/3,
 		x25519_keypair/2, x25519_public_key/2, x25519_shared_secret/3,
 		xchacha20_poly1305_encrypt/5, xchacha20_poly1305_decrypt/5
 	]).
@@ -99,8 +99,10 @@
 	% bidirectional XChaCha20-Poly1305 messaging with derived key material.
 
 	test(crypto_x25519_authenticated_exchange_01, deterministic(AlicePlaintext-BobPlaintext == [98,111,98]-[97,108,105,99,101])) :-
-		ed25519_keypair(AliceIdentitySeed, AliceIdentityPublicKey),
-		ed25519_keypair(BobIdentitySeed, BobIdentityPublicKey),
+		hex_bytes('9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60', AliceIdentitySeed),
+		hex_bytes('d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a', AliceIdentityPublicKey),
+		hex_bytes('4ccd089b28ff96da9db6c346ec114e0f5b8a319f35aba624da8cf6ed4fb8a6fb', BobIdentitySeed),
+		hex_bytes('3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c', BobIdentityPublicKey),
 		x25519_keypair(AliceEphemeralPrivateKey, AliceEphemeralPublicKey),
 		x25519_keypair(BobEphemeralPrivateKey, BobEphemeralPublicKey),
 		ed25519_sign(AliceIdentitySeed, AliceEphemeralPublicKey, AliceSignature),
@@ -123,19 +125,17 @@
 	% RFC 7748 requires masking the most significant input bit and accepting
 	% non-canonical u-coordinates as if reduced modulo the field prime.
 
-	test(crypto_x25519_shared_secret_3_06, deterministic(Secret1 == Secret2)) :-
+	test(crypto_x25519_shared_secret_3_06, deterministic(Hex == '8520f0098930a754748b7ddcb43ef75a0dbf3a0d26381af4eba4a98eaa9b4e6a')) :-
 		hex_bytes('77076d0a7318a57d3c16c17251b26645df4c2f87ebc0992ab177fba51db92c2a', PrivateKey),
-		hex_bytes('0900000000000000000000000000000000000000000000000000000000000000', PublicKey1),
-		hex_bytes('0900000000000000000000000000000000000000000000000000000000000080', PublicKey2),
-		x25519_shared_secret(PrivateKey, PublicKey1, Secret1),
-		x25519_shared_secret(PrivateKey, PublicKey2, Secret2).
+		hex_bytes('0900000000000000000000000000000000000000000000000000000000000080', PublicKey),
+		x25519_shared_secret(PrivateKey, PublicKey, Secret),
+		hex_bytes(Hex, Secret).
 
-	test(crypto_x25519_shared_secret_3_07, deterministic(Secret1 == Secret2)) :-
+	test(crypto_x25519_shared_secret_3_07, deterministic(Hex == '8520f0098930a754748b7ddcb43ef75a0dbf3a0d26381af4eba4a98eaa9b4e6a')) :-
 		hex_bytes('77076d0a7318a57d3c16c17251b26645df4c2f87ebc0992ab177fba51db92c2a', PrivateKey),
-		hex_bytes('0900000000000000000000000000000000000000000000000000000000000000', PublicKey1),
-		hex_bytes('f6ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff7f', PublicKey2),
-		x25519_shared_secret(PrivateKey, PublicKey1, Secret1),
-		x25519_shared_secret(PrivateKey, PublicKey2, Secret2).
+		hex_bytes('f6ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff7f', PublicKey),
+		x25519_shared_secret(PrivateKey, PublicKey, Secret),
+		hex_bytes(Hex, Secret).
 
 	test(crypto_x25519_shared_secret_3_08, fail) :-
 		hex_bytes('77076d0a7318a57d3c16c17251b26645df4c2f87ebc0992ab177fba51db92c2a', PrivateKey),
