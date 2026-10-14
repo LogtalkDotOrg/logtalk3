@@ -23,9 +23,9 @@
 	imports((options, http_authentication_helpers))).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2026-09-24,
+		date is 2026-10-14,
 		comment is 'HTTP Digest authentication parsing, generation, request decoration, and verification helpers.'
 	]).
 
@@ -278,6 +278,10 @@
 		date_time/7
 	]).
 
+	:- uses(type, [
+		valid/2
+	]).
+
 	:- uses(user, [
 		atomic_list_concat/2, atomic_list_concat/3
 	]).
@@ -447,7 +451,7 @@
 	valid_option(realm(Realm)) :-
 		valid_non_empty_atom(Realm).
 	valid_option(domains(Domains)) :-
-		valid_domain_list(Domains).
+		valid(list(non_empty_atom), Domains).
 	valid_option(algorithm(Algorithm)) :-
 		valid_algorithm(Algorithm).
 	valid_option(accepted_algorithms(Algorithms)) :-
@@ -460,11 +464,9 @@
 		;	valid_non_empty_atom(Opaque)
 		).
 	valid_option(stale(Boolean)) :-
-		atom(Boolean),
-		valid_boolean(Boolean).
+		once((Boolean == true; Boolean == false)).
 	valid_option(userhash(Boolean)) :-
-		atom(Boolean),
-		valid_boolean(Boolean).
+		once((Boolean == true; Boolean == false)).
 	valid_option(charset(Charset)) :-
 		atom(Charset),
 		valid_charset(Charset).
@@ -485,10 +487,10 @@
 		Code =< 999,
 		atom(Reason).
 	valid_option(headers(Headers)) :-
-		valid_header_list(Headers).
+		valid(list(pair(atom, ground)), Headers).
 	valid_option(body(_Body)).
 	valid_option(properties(Properties)) :-
-		valid_property_list(Properties).
+		valid(list(compound), Properties).
 	valid_option(nextnonce(Nonce)) :-
 		(	Nonce == false ->
 			true
@@ -1732,17 +1734,8 @@
 		atom(Atom),
 		Atom \== ''.
 
-	valid_domain_list(Domains) :-
-		proper_list(Domains),
-		valid_domain_items(Domains).
-
-	valid_domain_items([]).
-	valid_domain_items([Domain| Domains]) :-
-		valid_non_empty_atom(Domain),
-		valid_domain_items(Domains).
-
 	valid_domain_list_or_error(Domains) :-
-		(	valid_domain_list(Domains) ->
+		(	valid(list(non_empty_atom), Domains) ->
 			true
 		;	domain_error(http_digest_term(challenge), invalid(domains))
 		).
@@ -1789,38 +1782,15 @@
 	valid_charset(none).
 	valid_charset(utf_8).
 
-	valid_boolean(true).
-	valid_boolean(false).
-
-	valid_header_list(Headers) :-
-		proper_list(Headers),
-		valid_header_items(Headers).
-
-	valid_header_items([]).
-	valid_header_items([Header| Headers]) :-
-		Header = Name-Value,
-		atom(Name),
-		ground(Value),
-		valid_header_items(Headers).
-
-	valid_property_list(Properties) :-
-		proper_list(Properties),
-		valid_property_items(Properties).
-
-	valid_property_items([]).
-	valid_property_items([Property| Properties]) :-
-		compound(Property),
-		valid_property_items(Properties).
-
 	overlay_headers(Overrides, Headers0, Headers) :-
 		filter_overridden_headers(Headers0, Overrides, FilteredHeaders),
 		append(Overrides, FilteredHeaders, Headers).
 
 	filter_overridden_headers([], _Overrides, []).
 	filter_overridden_headers([Header| Headers0], Overrides, Headers) :-
-		( overridden_header(Header, Overrides) ->
+		(	overridden_header(Header, Overrides) ->
 			Headers = Tail
-		; Headers = [Header| Tail]
+		;	Headers = [Header| Tail]
 		),
 		filter_overridden_headers(Headers0, Overrides, Tail).
 
