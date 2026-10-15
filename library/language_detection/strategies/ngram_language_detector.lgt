@@ -18,14 +18,15 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 :- object(ngram_language_detector,
 	implements(language_detection_strategy_protocol),
 	imports(language_detection_scoring)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-09-06,
+		date is 2026-10-15,
 		comment is 'Language detection strategy using character-trigram cosine similarity.',
 		see_also is [language_detector(_, _)]
 	]).
@@ -34,14 +35,15 @@
 		atom_codes(Text, Codes),
 		n_grams(atom)::character_n_grams(3, Text, Trigrams),
 		n_grams(atom)::count(standard, Trigrams, InputCounts),
-		candidate_scores(Candidates, InputCounts, RawScores),
+		^^squared_norm(InputCounts, InputSquareSum),
+		candidate_scores(Candidates, InputCounts, InputSquareSum, RawScores),
 		^^normalize_scores(RawScores, Scores).
 
-	candidate_scores([], _, []).
-	candidate_scores([Language| Languages], InputCounts, [Language-Score| Scores]) :-
+	candidate_scores([], _, _, []).
+	candidate_scores([Language| Languages], InputCounts, InputSquareSum, [Language-Score| Scores]) :-
 		language_profiles::profile(Language, Profile),
-		Profile::trigram_counts(ProfileCounts),
-		^^cosine_similarity(InputCounts, ProfileCounts, Score),
-		candidate_scores(Languages, InputCounts, Scores).
+		Profile::trigram_counts(ProfileCounts, ProfileSquareSum),
+		^^cosine_similarity(InputCounts, InputSquareSum, ProfileCounts, ProfileSquareSum, Score),
+		candidate_scores(Languages, InputCounts, InputSquareSum, Scores).
 
 :- end_object.

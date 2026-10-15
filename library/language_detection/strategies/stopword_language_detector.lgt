@@ -23,57 +23,69 @@
 	implements(language_detection_strategy_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-09-06,
+		date is 2026-10-15,
 		comment is 'Language detection strategy using discriminative stop-word evidence.',
 		see_also is [language_detector(_, _), language_detection_tokenizer]
 	]).
 
 	:- uses(list, [
-		length/2, member/2
+		length/2
+	]).
+
+	:- uses(avltree, [
+		new/1, lookup/3, insert/4
 	]).
 
 	scores(Codes, Candidates, Scores) :-
 		tokenizer(codes, language_detection_tokenizer)::tokenize(Codes, Tokens, [keep_punctuation(false), lowercase(true)]),
-		initial_scores(Candidates, InitialScores),
-		score_tokens(Tokens, Candidates, InitialScores, RawScores),
+		candidate_profiles(Candidates, Profiles, InitialScores),
+		new(Cache),
+		score_tokens(Tokens, Profiles, Cache, InitialScores, RawScores),
 		normalize_scores(RawScores, Scores).
 
-	initial_scores([], []).
-	initial_scores([Language| Languages], [Language-0.0| Scores]) :-
-		initial_scores(Languages, Scores).
+	candidate_profiles([], [], []).
+	candidate_profiles([Language| Languages], [Language-Profile| Profiles], [Language-0.0| Scores]) :-
+		language_profiles::profile(Language, Profile),
+		candidate_profiles(Languages, Profiles, Scores).
 
-	score_tokens([], _, Scores, Scores).
-	score_tokens([Token| Tokens], Candidates, Scores0, Scores) :-
+	score_tokens([], _, _, Scores, Scores).
+	score_tokens([Token| Tokens], Profiles, Cache0, Scores0, Scores) :-
 		atom_codes(Word, Token),
-		matching_languages(Candidates, Word, MatchingLanguages),
-		add_evidence(MatchingLanguages, Scores0, Scores1),
-		score_tokens(Tokens, Candidates, Scores1, Scores).
+		(	lookup(Word, MatchingLanguages-Weight, Cache0) ->
+			Cache1 = Cache0
+		;	matching_languages(Profiles, Word, MatchingLanguages),
+			evidence_weight(MatchingLanguages, Weight),
+			insert(Cache0, Word, MatchingLanguages-Weight, Cache1)
+		),
+		add_language_evidence(Scores0, MatchingLanguages, Weight, Scores1),
+		score_tokens(Tokens, Profiles, Cache1, Scores1, Scores).
 
 	matching_languages([], _, []).
-	matching_languages([Language| Languages], Word, MatchingLanguages) :-
-		language_profiles::profile(Language, Profile),
+	matching_languages([Language-Profile| Profiles], Word, MatchingLanguages) :-
 		(	Profile::stop_word(Word) ->
 			MatchingLanguages = [Language| Rest]
 		;	MatchingLanguages = Rest
 		),
-		matching_languages(Languages, Word, Rest).
+		matching_languages(Profiles, Word, Rest).
 
-	add_evidence([], Scores, Scores) :-
+	evidence_weight([], 0.0) :-
 		!.
-	add_evidence(MatchingLanguages, Scores0, Scores) :-
+	evidence_weight(MatchingLanguages, Weight) :-
 		length(MatchingLanguages, Count),
-		Weight is 1.0 / Count,
-		add_language_evidence(Scores0, MatchingLanguages, Weight, Scores).
+		Weight is 1.0 / Count.
 
-	add_language_evidence([], _, _, []).
-	add_language_evidence([Language-Score0| Scores0], MatchingLanguages, Weight, [Language-Score| Scores]) :-
-		(	member(Language, MatchingLanguages) ->
-			Score is Score0 + Weight
-		;	Score = Score0
+	add_language_evidence(Scores, [], _, Scores) :-
+		!.
+	add_language_evidence([Language-Score0| Scores0], [Match| Matches], Weight, [Language-Score| Scores]) :-
+		(	Language == Match ->
+			Score is Score0 + Weight,
+			Remaining = Matches
+		;	Score = Score0,
+			Remaining = [Match| Matches]
 		),
-		add_language_evidence(Scores0, MatchingLanguages, Weight, Scores).
+		add_language_evidence(Scores0, Remaining, Weight, Scores).
 
 	normalize_scores(Scores0, Scores) :-
 		sum_scores(Scores0, 0.0, Total),

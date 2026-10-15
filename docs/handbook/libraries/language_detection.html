@@ -467,8 +467,10 @@ link in a web browser.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(language_detection(tester)).
 </pre></div>
 </div>
-<p>Tests cover all included languages and detection strategies using the
-<code class="docutils literal notranslate"><span class="pre">atom</span></code>, <code class="docutils literal notranslate"><span class="pre">chars</span></code>, and <code class="docutils literal notranslate"><span class="pre">codes</span></code> text representations.</p>
+<p>Tests cover profile registration and script mappings for all included
+languages, detection accuracy for six languages, all detection
+strategies, and equivalent scores using the <code class="docutils literal notranslate"><span class="pre">atom</span></code>, <code class="docutils literal notranslate"><span class="pre">chars</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">codes</span></code> text representations.</p>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
@@ -476,9 +478,11 @@ link in a web browser.</p>
 accepts the <code class="docutils literal notranslate"><span class="pre">atom</span></code>, <code class="docutils literal notranslate"><span class="pre">chars</span></code>, and <code class="docutils literal notranslate"><span class="pre">codes</span></code> representations. The
 strategy parameter must be an object implementing the
 <code class="docutils literal notranslate"><span class="pre">language_detection_strategy_protocol</span></code> protocol.</p>
-<p>To detect the most likely language:</p>
+<p>To detect the most likely language when choosing between English and
+Italian:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> language_detector(atom, ngram_language_detector)<span class="o">::</span>detect(
-         <span class="s">&#39;The quick brown fox jumps over the lazy dog.&#39;</span>, <span class="nv">Language</span>
+         <span class="s">&#39;The quick brown fox jumps over the lazy dog.&#39;</span>, <span class="nv">Language</span>, <span class="nv">_</span>,
+         [candidates([en, it])]
      ).
 <span class="nv">Language</span> <span class="o">=</span> en
 yes
@@ -487,7 +491,7 @@ yes
 <p>To also return a relative detection score:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> language_detector(atom, hybrid_language_detector)<span class="o">::</span>detect(
          <span class="s">&#39;Questo testo è scritto in italiano.&#39;</span>, <span class="nv">Language</span>, <span class="nv">Score</span>,
-         [min_length(<span class="m">10</span>)]
+         [min_length(<span class="m">10</span>), candidates([en, it])]
      ).
 <span class="nv">Language</span> <span class="o">=</span> it,
 <span class="nv">Score</span> <span class="o">=</span> ...
@@ -568,8 +572,9 @@ relative score.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">min_margin(Margin)</span></code>, defaulting to <code class="docutils literal notranslate"><span class="pre">0.05</span></code>, sets the minimum
 difference between the two highest scores.</p></li>
 </ul>
-<p>Duplicate candidate codes, unsupported candidate codes, duplicate
-options, and invalid option values are rejected.</p>
+<p>Duplicate candidate codes, unsupported candidate codes, and invalid
+options are rejected. In case of duplicated options, the left-most
+option takes precedence.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">detect/2-4</span></code> predicates fail when the normalized input is shorter
 than the configured minimum or when the available evidence does not
 satisfy the score and margin thresholds. The <code class="docutils literal notranslate"><span class="pre">detect_all/2-3</span></code>
@@ -585,6 +590,36 @@ vendored stop-word inventories. Words are padded with spaces before
 trigram extraction so that word boundaries contribute evidence. The
 stop-word source files record their upstream repositories, commits,
 licenses, and generated entry counts.</p>
+<p>When the built-in language profile resources are loaded, a compilation
+hook computes their trigram vectors and squared norms from the loaded
+stop-word inventories. The results are stored as static clauses in each
+profile object, using the active backend’s atom representation and
+ordering. No separate data generation step is required. The
+<code class="docutils literal notranslate"><span class="pre">language_profile_common</span></code> category provides the <code class="docutils literal notranslate"><span class="pre">trigram_counts/2</span></code>
+predicate, which returns cached counts and their squared norm when
+available and computes them at runtime otherwise. Custom profiles retain
+runtime derivation unless they provide their own <code class="docutils literal notranslate"><span class="pre">trigram_counts/1</span></code>
+implementation; the runtime norm computation respects that
+implementation.</p>
+<p>The n-gram strategy computes the input norm once per request and reuses
+the built-in profile norms. The stop-word strategy resolves candidate
+profiles once per request and memoizes repeated token matches and
+weights. The cache is request-local, and evidence is accumulated in the
+original token order.</p>
+<p>After updating the authoritative stop-word inventories, load the library
+in a fresh process to compute the profiles from the updated inventories.
+To check the stored data against direct derivation, run the following
+query from this library directory:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(loader),
+     <span class="k">logtalk_load</span>(<span class="s">&#39;scripts/check_profiles&#39;</span>),
+     language_profile_checker<span class="o">::</span>check.
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">check/0</span></code> predicate verifies exact vector and norm equality for
+every built-in profile on the active backend. This exhaustive
+maintenance check is separate from the routine tests, which check all
+stored vector structures and norms and use focused numerical and
+accuracy fixtures to keep repeated test runs short.</p>
 </section>
 <section id="adding-strategies-and-profiles">
 <h2>Adding strategies and profiles<a class="headerlink" href="#adding-strategies-and-profiles" title="Link to this heading"></a></h2>

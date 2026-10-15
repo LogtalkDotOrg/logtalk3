@@ -25,11 +25,13 @@
 		set_logtalk_flag(report, warnings),
 		logtalk_load(types(loader)),
 		logtalk_load(options(loader)),
+		logtalk_load(dictionaries(loader)),
 		logtalk_load(stop_words(loader_all)),
 		logtalk_load(tokenization(loader)),
 		logtalk_load(text_normalization(loader)),
 		logtalk_load(n_grams(loader)),
 		logtalk_load(unicode_data(unicode_range_scripts), [reload(skip)]),
+		logtalk_load(language_profile_expansion, [optimize(on)]),
 		logtalk_load([
 			language_detector_protocol,
 			language_detection_strategy_protocol,
@@ -39,7 +41,11 @@
 			language_profiles,
 			language_detection_scripts,
 			'profiles/loader',
-			'strategies/loader',
+			'strategies/language_detection_tokenizer',
+			'strategies/ngram_language_detector',
+			'strategies/stopword_language_detector',
+			'strategies/script_language_detector',
+			'strategies/hybrid_language_detector',
 			language_detector,
 			'test_files/test_objects'
 		], [

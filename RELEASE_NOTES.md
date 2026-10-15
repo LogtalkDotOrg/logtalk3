@@ -255,6 +255,12 @@ evaluation. Optimized candidate sampling and tabu scans; fixed tenure
 expiration, large-energy handling, non-ground state identity, and progress
 reporting. Expanded tests and documentation.
 
+* IMPROVED: The `language_detection` library with load-time caching of built-in
+trigram vectors and squared norms, reused input norms, per-request candidate
+profile resolution, and memoized stop-word matching. Expanded regression tests
+and code coverage, improved test performance, and corrected documentation
+examples.
+
 * IMPROVED: The `linear_svm_classifier` library with binary model symmetry,
 cached optimizer settings, direct-tail categorical encoding, and fused
 prediction scoring and class selection. Fixed non-ground classifier

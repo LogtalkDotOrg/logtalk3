@@ -79,6 +79,7 @@
 		zh_language_profile,
 		zu_language_profile
 	], [
+		hook(language_profile_expansion),
 		optimize(on)
 	])
 )).

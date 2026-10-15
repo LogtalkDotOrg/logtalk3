@@ -21,9 +21,9 @@
 :- category(language_detection_scoring).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-09-06,
+		date is 2026-10-15,
 		comment is 'Shared portable language detection scoring predicates.'
 	]).
 
@@ -41,15 +41,35 @@
 		argnames is ['RawScores', 'Scores']
 	]).
 
+	:- protected(squared_norm/2).
+	:- mode(squared_norm(+list(pair(atom,positive_integer)), -float), one).
+	:- info(squared_norm/2, [
+		comment is 'Computes the squared norm of a sparse count vector.',
+		argnames is ['Counts', 'SquareSum']
+	]).
+
+	:- protected(cosine_similarity/5).
+	:- mode(cosine_similarity(+list, +float, +list, +float, -float), one).
+	:- info(cosine_similarity/5, [
+		comment is 'Computes cosine similarity using precomputed squared norms.',
+		argnames is ['Counts1', 'SquareSum1', 'Counts2', 'SquareSum2', 'Similarity']
+	]).
+
 	cosine_similarity(Counts1, Counts2, Similarity) :-
+		squared_norm(Counts1, SquareSum1),
+		squared_norm(Counts2, SquareSum2),
+		cosine_similarity(Counts1, SquareSum1, Counts2, SquareSum2, Similarity).
+
+	cosine_similarity(Counts1, SquareSum1, Counts2, SquareSum2, Similarity) :-
 		dot_product(Counts1, Counts2, 0.0, DotProduct),
-		square_sum(Counts1, 0.0, SquareSum1),
-		square_sum(Counts2, 0.0, SquareSum2),
 		Denominator is sqrt(SquareSum1) * sqrt(SquareSum2),
 		(	Denominator =< 0.0 ->
 			Similarity = 0.0
 		;	Similarity is DotProduct / Denominator
 		).
+
+	squared_norm(Counts, SquareSum) :-
+		square_sum(Counts, 0.0, SquareSum).
 
 	dot_product([], _, DotProduct, DotProduct) :-
 		!.

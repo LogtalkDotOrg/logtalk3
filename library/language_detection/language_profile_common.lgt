@@ -23,9 +23,9 @@
 	implements(language_profile_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-09-09,
+		date is 2026-10-15,
 		comment is 'Shared predicates for language detection profiles.'
 	]).
 
@@ -34,6 +34,20 @@
 	:- info(trigram_counts/1, [
 		comment is 'Returns trigram counts derived from the profile stop-word inventory.',
 		argnames is ['Counts']
+	]).
+
+	:- public(trigram_counts/2).
+	:- mode(trigram_counts(-list(pair(atom,positive_integer)), -float), one).
+	:- info(trigram_counts/2, [
+		comment is 'Returns the profile trigram counts and their squared norm, using cached values when available.',
+		argnames is ['Counts', 'SquareSum']
+	]).
+
+	:- private(trigram_counts_/2).
+	:- mode(trigram_counts_(-list(pair(atom,positive_integer)), -float), zero_or_one).
+	:- info(trigram_counts_/2, [
+		comment is 'Returns cached profile trigram counts and their squared norm when available.',
+		argnames is ['Counts', 'SquareSum']
 	]).
 
 	:- uses(list, [
@@ -45,6 +59,19 @@
 	]).
 
 	trigram_counts(Counts) :-
+		(	::trigram_counts_(Counts, _) ->
+			true
+		;	derive_trigram_counts(Counts)
+		).
+
+	trigram_counts(Counts, SquareSum) :-
+		(	::trigram_counts_(Counts, SquareSum) ->
+			true
+		;	::trigram_counts(Counts),
+			square_sum(Counts, 0.0, SquareSum)
+		).
+
+	derive_trigram_counts(Counts) :-
 		findall(Word, ::stop_word(Word), Words),
 		word_trigrams(Words, TrigramLists),
 		append(TrigramLists, Trigrams),
@@ -55,5 +82,10 @@
 		atomic_list_concat([' ', Word, ' '], PaddedWord),
 		n_grams(atom)::character_n_grams(3, PaddedWord, Trigrams),
 		word_trigrams(Words, TrigramLists).
+
+	square_sum([], Sum, Sum).
+	square_sum([_-Count| Counts], Sum0, Sum) :-
+		Sum1 is Sum0 + Count * Count,
+		square_sum(Counts, Sum1, Sum).
 
 :- end_category.

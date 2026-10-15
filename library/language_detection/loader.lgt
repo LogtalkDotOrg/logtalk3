@@ -24,11 +24,13 @@
 	:- initialization((
 		logtalk_load(types(loader)),
 		logtalk_load(options(loader)),
+		logtalk_load(dictionaries(loader)),
 		logtalk_load(stop_words(loader_all)),
 		logtalk_load(tokenization(loader)),
 		logtalk_load(text_normalization(loader)),
 		logtalk_load(n_grams(loader)),
 		logtalk_load(unicode_data(unicode_range_scripts), [reload(skip)]),
+		logtalk_load(language_profile_expansion, [optimize(on)]),
 		logtalk_load([
 			language_detector_protocol,
 			language_detection_strategy_protocol,
@@ -47,6 +49,6 @@
 
 :- else.
 
-	:- initialization((write('(the "langiage_detection" library requires a backend with Unicode support)'), nl)).
+	:- initialization((write('(the "language_detection" library requires a backend with Unicode support)'), nl)).
 
 :- endif.

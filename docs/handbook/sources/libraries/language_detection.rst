@@ -34,8 +34,10 @@ To test this library, load its ``tester.lgt`` file:
 
    | ?- logtalk_load(language_detection(tester)).
 
-Tests cover all included languages and detection strategies using the
-``atom``, ``chars``, and ``codes`` text representations.
+Tests cover profile registration and script mappings for all included
+languages, detection accuracy for six languages, all detection
+strategies, and equivalent scores using the ``atom``, ``chars``, and
+``codes`` text representations.
 
 Usage
 -----
@@ -45,12 +47,14 @@ accepts the ``atom``, ``chars``, and ``codes`` representations. The
 strategy parameter must be an object implementing the
 ``language_detection_strategy_protocol`` protocol.
 
-To detect the most likely language:
+To detect the most likely language when choosing between English and
+Italian:
 
 ::
 
    | ?- language_detector(atom, ngram_language_detector)::detect(
-            'The quick brown fox jumps over the lazy dog.', Language
+            'The quick brown fox jumps over the lazy dog.', Language, _,
+            [candidates([en, it])]
         ).
    Language = en
    yes
@@ -61,7 +65,7 @@ To also return a relative detection score:
 
    | ?- language_detector(atom, hybrid_language_detector)::detect(
             'Questo testo è scritto in italiano.', Language, Score,
-            [min_length(10)]
+            [min_length(10), candidates([en, it])]
         ).
    Language = it,
    Score = ...
@@ -149,8 +153,9 @@ The ``detect/4`` and ``detect_all/3`` predicates accept:
 - ``min_margin(Margin)``, defaulting to ``0.05``, sets the minimum
   difference between the two highest scores.
 
-Duplicate candidate codes, unsupported candidate codes, duplicate
-options, and invalid option values are rejected.
+Duplicate candidate codes, unsupported candidate codes, and invalid
+options are rejected. In case of duplicated options, the left-most
+option takes precedence.
 
 The ``detect/2-4`` predicates fail when the normalized input is shorter
 than the configured minimum or when the available evidence does not
@@ -169,6 +174,41 @@ vendored stop-word inventories. Words are padded with spaces before
 trigram extraction so that word boundaries contribute evidence. The
 stop-word source files record their upstream repositories, commits,
 licenses, and generated entry counts.
+
+When the built-in language profile resources are loaded, a compilation
+hook computes their trigram vectors and squared norms from the loaded
+stop-word inventories. The results are stored as static clauses in each
+profile object, using the active backend's atom representation and
+ordering. No separate data generation step is required. The
+``language_profile_common`` category provides the ``trigram_counts/2``
+predicate, which returns cached counts and their squared norm when
+available and computes them at runtime otherwise. Custom profiles retain
+runtime derivation unless they provide their own ``trigram_counts/1``
+implementation; the runtime norm computation respects that
+implementation.
+
+The n-gram strategy computes the input norm once per request and reuses
+the built-in profile norms. The stop-word strategy resolves candidate
+profiles once per request and memoizes repeated token matches and
+weights. The cache is request-local, and evidence is accumulated in the
+original token order.
+
+After updating the authoritative stop-word inventories, load the library
+in a fresh process to compute the profiles from the updated inventories.
+To check the stored data against direct derivation, run the following
+query from this library directory:
+
+::
+
+   | ?- logtalk_load(loader),
+        logtalk_load('scripts/check_profiles'),
+        language_profile_checker::check.
+
+The ``check/0`` predicate verifies exact vector and norm equality for
+every built-in profile on the active backend. This exhaustive
+maintenance check is separate from the routine tests, which check all
+stored vector structures and norms and use focused numerical and
+accuracy fixtures to keep repeated test runs short.
 
 Adding strategies and profiles
 ------------------------------

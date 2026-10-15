@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-09-06,
+		date is 2026-10-15,
 		comment is 'Language detector parameterized by text representation and detection strategy.',
 		parameters is [
 			'Representation' - 'Text representation. Valid values are ``atom``, ``chars``, and ``codes``.',
@@ -122,7 +122,7 @@
 			instantiation_error
 		;	conforms_to_protocol(_Strategy_, language_detection_strategy_protocol) ->
 			true
-		;	domain_error(language_detection_strategy, _Strategy_)
+		;	domain_error(language_detection_strategy_protocol, _Strategy_)
 		).
 
 	check_text(Text) :-
