@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2026-10-13,
+		date is 2026-10-15,
 		comment is 'Unit tests for the "linear_svm_classifier" library.'
 	]).
 
@@ -101,7 +101,7 @@
 		linear_svm_classifier::predict(Classifier, [age-40, income-50000, student-yes, credit_rating-poor], _Prediction).
 
 	test(linear_svm_learn_3_custom_options, deterministic([LearningRate, MaximumIterations, Tolerance, L2Regularization] == [0.05, 1500, 1.0e-6, 0.02])) :-
-		linear_svm_classifier::learn(weather, linear_svm_classifier(_Classes, _Encoders, _Models, Options), [learning_rate(0.05), maximum_iterations(1500), l2_regularization(0.02)]),
+		linear_svm_classifier::learn(svm_bias_only([yes, no], [yes, no]), linear_svm_classifier(_Classes, _Encoders, _Models, Options), [learning_rate(0.05), maximum_iterations(1500), l2_regularization(0.02)]),
 		memberchk(learning_rate(LearningRate), Options),
 		memberchk(maximum_iterations(MaximumIterations), Options),
 		memberchk(tolerance(Tolerance), Options),
@@ -160,10 +160,11 @@
 		findall(Model, dataset_classifier_(weather, Model), Stored).
 
 	test(linear_svm_classifier_fixture_cache_miss, deterministic(Stored == [Classifier])) :-
-		retractall(dataset_classifier_(weather, _)),
-		dataset_classifier(weather, Classifier),
-		dataset_classifier(weather, Classifier),
-		findall(Model, dataset_classifier_(weather, Model), Stored).
+		Dataset = svm_bias_only([yes, no], [yes, no]),
+		retractall(dataset_classifier_(Dataset, _)),
+		dataset_classifier(Dataset, Classifier),
+		dataset_classifier(Dataset, Classifier),
+		findall(Model, dataset_classifier_(Dataset, Model), Stored).
 
 	test(linear_svm_classifier_incomplete_models, all(check_incomplete_classifier(Classifier))) :-
 		Cases = [
