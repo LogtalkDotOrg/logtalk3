@@ -302,6 +302,10 @@ improved test performance, and documented algorithm limitations.
 
 * FIXED: Regression libraries handling of regressors with custom functors.
 
+* FIXED: The `cbor` library encoding of floats to account for backends not
+outputting the plus sign when writing floats in scientific notation. Thanks
+to Andrew Davison for the bug report and patch.
+
 * FIXED: The `text_vectorization` library to allow for repeated options when
 validating vectorizer terms (leftmost options always take precedence).
 

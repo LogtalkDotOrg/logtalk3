@@ -22,9 +22,9 @@
 :- object(cbor(_StringRepresentation_)).
 
 	:- info([
-		version is 0:12:1,
+		version is 0:12:2,
 		author is 'Paulo Moura',
-		date is 2026-06-14,
+		date is 2026-10-15,
 		comment is 'Concise Binary Object Representation (CBOR) format exporter and importer.',
 		parameters is [
 			'StringRepresentation' - 'Text representation to be used when decoding CBOR strings. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
@@ -648,14 +648,18 @@
 		float_codes_to_mantissa_and_exponent(Codes, Mantissa, Exponent).
 
 	float_codes_to_mantissa_and_exponent([], [], Exponent, Exponent).
-	float_codes_to_mantissa_and_exponent([Code, Sign| Codes], [], Exponent0, Exponent) :-
+	float_codes_to_mantissa_and_exponent([Code| Codes0], [], Exponent0, Exponent) :-
 		(Code == 0'e; Code == 0'E),
 		!,
+		(	Codes0 = [0'-| Codes] ->
+			Sign = -1
+		;	Codes0 = [0'+| Codes] ->
+			Sign = 1
+		;	Codes = Codes0,
+			Sign = 1
+		),
 		number_codes(Exponent1, Codes),
-		(	Sign == 0'- ->
-			Exponent is Exponent0 - Exponent1
-		;	Exponent is Exponent0 + Exponent1
-		).
+		Exponent is Exponent0 + Sign * Exponent1.
 	float_codes_to_mantissa_and_exponent([Code| Codes], [Code| Mantissa], Exponent0, Exponent) :-
 		Exponent1 is Exponent0 - 1,
 		float_codes_to_mantissa_and_exponent(Codes, Mantissa, Exponent1, Exponent).
