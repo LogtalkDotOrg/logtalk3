@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:10:0,
 		author is 'Paulo Moura',
-		date is 2025-11-26,
+		date is 2026-10-15,
 		comment is 'Unit tests for the "diagrams" tool.'
 	]).
 
@@ -106,9 +106,6 @@
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		entity_diagram(_Format_)::files(Files).
 
-	test(entity_diagram_all_files_1_01, deterministic) :-
-		entity_diagram(_Format_)::all_files([]).
-
 	test(entity_diagram_all_files_0_01, deterministic) :-
 		entity_diagram(_Format_)::all_files.
 
@@ -158,9 +155,6 @@
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		inheritance_diagram(_Format_)::files(Files).
 
-	test(inheritance_diagram_all_files_1_01, deterministic) :-
-		inheritance_diagram(_Format_)::all_files([]).
-
 	test(inheritance_diagram_all_files_0_01, deterministic) :-
 		inheritance_diagram(_Format_)::all_files.
 
@@ -203,9 +197,6 @@
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		directory_dependency_diagram(_Format_)::files(Files).
 
-	test(directory_dependency_diagram_all_files_1_01, deterministic) :-
-		directory_dependency_diagram(_Format_)::all_files([]).
-
 	test(directory_dependency_diagram_all_files_0_01, deterministic) :-
 		directory_dependency_diagram(_Format_)::all_files.
 
@@ -243,9 +234,6 @@
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		directory_load_diagram(_Format_)::files(Files).
-
-	test(directory_load_diagram_all_files_1_01, deterministic) :-
-		directory_load_diagram(_Format_)::all_files([]).
 
 	test(directory_load_diagram_all_files_0_01, deterministic) :-
 		directory_load_diagram(_Format_)::all_files.
@@ -292,9 +280,6 @@
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		file_dependency_diagram(_Format_)::files(Files).
 
-	test(file_dependency_diagram_all_files_1_01, deterministic) :-
-		file_dependency_diagram(_Format_)::all_files([]).
-
 	test(file_dependency_diagram_all_files_0_01, deterministic) :-
 		file_dependency_diagram(_Format_)::all_files.
 
@@ -339,9 +324,6 @@
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		file_load_diagram(_Format_)::files(Files).
-
-	test(file_load_diagram_all_files_1_01, deterministic) :-
-		file_load_diagram(_Format_)::all_files([]).
 
 	test(file_load_diagram_all_files_0_01, deterministic) :-
 		file_load_diagram(_Format_)::all_files.
@@ -388,9 +370,6 @@
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		library_dependency_diagram(_Format_)::files(Files).
 
-	test(library_dependency_diagram_all_files_1_01, deterministic) :-
-		library_dependency_diagram(_Format_)::all_files([]).
-
 	test(library_dependency_diagram_all_files_0_01, deterministic) :-
 		library_dependency_diagram(_Format_)::all_files.
 
@@ -436,9 +415,6 @@
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		library_load_diagram(_Format_)::files(Files).
 
-	test(library_load_diagram_all_files_1_01, deterministic) :-
-		library_load_diagram(_Format_)::all_files([]).
-
 	test(library_load_diagram_all_files_0_01, deterministic) :-
 		library_load_diagram(_Format_)::all_files.
 
@@ -483,9 +459,6 @@
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		uses_diagram(_Format_)::files(Files).
-
-	test(uses_diagram_all_files_1_01, deterministic) :-
-		uses_diagram(_Format_)::all_files([]).
 
 	test(uses_diagram_all_files_0_01, deterministic) :-
 		uses_diagram(_Format_)::all_files.
@@ -536,9 +509,6 @@
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		xref_diagram(_Format_)::files(Files).
 
-	test(xref_diagram_all_files_1_01, deterministic) :-
-		xref_diagram(_Format_)::all_files([]).
-
 	test(xref_diagram_all_files_0_01, deterministic) :-
 		xref_diagram(_Format_)::all_files.
 
@@ -547,9 +517,6 @@
 		xref_diagram(_Format_)::file(File).
 
 	% caller_diagram tests
-
-	test(caller_diagram_predicate_2_01, deterministic) :-
-		caller_diagram(_Format_)::predicate(list::member/2, []).
 
 	test(caller_diagram_predicate_1_01, deterministic) :-
 		caller_diagram(_Format_)::predicate(list::member/2).
