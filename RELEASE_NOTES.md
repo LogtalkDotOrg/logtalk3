@@ -324,7 +324,8 @@ Locked restores now resolve dependencies using only locked versions, propagate
 registry restoration and pack installation failures, and verify the final
 setup against the lock file.
 
-* IMPROVED: The `diagrams` tool tests performance by removing redundant tests.
+* IMPROVED: The `diagrams` and `lgtdoc` tool tests performance by removing
+redundant tests.
 
 * IMPROVED: The performance of the `logtalk_tester.sh` Bash shell script.
 
