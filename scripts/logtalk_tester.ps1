@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on September 25, 2026
+##   Last updated on October 15, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -56,7 +56,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
-	Write-Output "$myName 24.0"
+	Write-Output "$myName 25.0"
 }
 
 Function Format-Decimal {
@@ -966,6 +966,7 @@ $min_duration = $null
 $max_duration = $null
 $fastest_unit = ""
 $slowest_unit = ""
+$durations = [System.Collections.Generic.List[double]]::new()
 
 Get-ChildItem -Path . -Filter *.totals |
 Foreach-Object {
@@ -980,6 +981,7 @@ Foreach-Object {
 		$flaky =   $flaky   + [int]$line[6]
 		if ($line.Length -gt 7 -and $line[7] -ne "") {
 			$duration = [double]$line[7]
+			$durations.Add($duration)
 			if ($null -eq $min_duration -or $duration -le $min_duration) {
 				$min_duration = $duration
 				# recover test set path from .totals basename (matches how names are derived when writing logs)
@@ -999,6 +1001,19 @@ Foreach-Object {
 }
 
 $total = $skipped + $passed + $failed
+
+$mean_duration = $null
+$median_duration = $null
+if ($durations.Count -gt 0) {
+	$mean_duration = ($durations | Measure-Object -Average).Average
+	$sorted = $durations | Sort-Object
+	$n = $sorted.Count
+	if ($n % 2 -eq 1) {
+		$median_duration = $sorted[[int]($n / 2)]
+	} else {
+		$median_duration = ($sorted[$n / 2 - 1] + $sorted[$n / 2]) / 2
+	}
+}
 
 $quiet_report = {
 	if ($o -eq "minimal") {
@@ -1102,6 +1117,12 @@ $quiet_report = {
 		Write-Output "%"
 		Write-Output "% Fastest test set: $fastest_unit ($fastest_str seconds)"
 		Write-Output "% Slowest test set: $slowest_unit ($slowest_str seconds)"
+		if ($null -ne $mean_duration) {
+			$mean_str = Format-Decimal -Number $mean_duration -DecimalPlaces 3
+			$median_str = Format-Decimal -Number $median_duration -DecimalPlaces 3
+			Write-Output "% Mean test set running time: $mean_str seconds"
+			Write-Output "% Median test set running time: $median_str seconds"
+		}
 	}
 }
 

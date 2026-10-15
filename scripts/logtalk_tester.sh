@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on October 12, 2026
+##   Last updated on October 15, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -32,7 +32,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 32.0"
+	echo "$(basename "$0") 33.0"
 	exit 0
 }
 
@@ -939,6 +939,7 @@ min_duration=""
 max_duration=""
 fastest_unit=""
 slowest_unit=""
+durations_file=$(mktemp)
 temp_file=$(mktemp)
 # Include source filename so we can recover the test set path from the .totals basename
 grep -s -H '^object' ./*.totals > "$temp_file" 2>/dev/null || true
@@ -951,25 +952,65 @@ while read -r line ; do
 	passed=$((passed+row_passed))
 	failed=$((failed+row_failed))
 	flaky=$((flaky+row_flaky))
-	if [ -n "$duration" ] && { [ -z "$min_duration" ] || decimal_le "$duration" "$min_duration" ; } ; then
-		min_duration="$duration"
-		unit_name=${file_part##*/}
-		unit_name=${unit_name%.totals}
-		# restore path separators used when deriving the results file name
-		unit_name=${unit_name//__//}
-		fastest_unit=$(echo "$unit_name" | $sed "s|^$prefix||")
-	fi
-	if [ -n "$duration" ] && { [ -z "$max_duration" ] || decimal_le "$max_duration" "$duration" ; } ; then
-		max_duration="$duration"
-		unit_name=${file_part##*/}
-		unit_name=${unit_name%.totals}
-		# restore path separators used when deriving the results file name
-		unit_name=${unit_name//__//}
-		slowest_unit=$(echo "$unit_name" | $sed "s|^$prefix||")
+	if [ -n "$duration" ] ; then
+		echo "$duration" >> "$durations_file"
+		if [ -z "$min_duration" ] || decimal_le "$duration" "$min_duration" ; then
+			min_duration="$duration"
+			unit_name=${file_part##*/}
+			unit_name=${unit_name%.totals}
+			# restore path separators used when deriving the results file name
+			unit_name=${unit_name//__//}
+			fastest_unit=$(echo "$unit_name" | $sed "s|^$prefix||")
+		fi
+		if [ -z "$max_duration" ] || decimal_le "$max_duration" "$duration" ; then
+			max_duration="$duration"
+			unit_name=${file_part##*/}
+			unit_name=${unit_name%.totals}
+			# restore path separators used when deriving the results file name
+			unit_name=${unit_name//__//}
+			slowest_unit=$(echo "$unit_name" | $sed "s|^$prefix||")
+		fi
 	fi
 done < "$temp_file"
 rm -f "$temp_file"
 total=$((skipped+passed+failed))
+
+mean_duration=""
+median_duration=""
+if [ -s "$durations_file" ] ; then
+	# mean and median of collected test-set (object) wall times
+	read -r mean_duration median_duration < <(awk '
+		{
+			sum += $1
+			vals[NR] = $1 + 0
+		}
+		END {
+			n = NR
+			if (n == 0) {
+				print "0 0"
+				exit
+			}
+			mean = sum / n
+			# insertion sort (stable enough for small n)
+			for (i = 2; i <= n; i++) {
+				key = vals[i]
+				j = i - 1
+				while (j >= 1 && vals[j] > key) {
+					vals[j + 1] = vals[j]
+					j--
+				}
+				vals[j + 1] = key
+			}
+			if (n % 2 == 1) {
+				median = vals[int(n / 2) + 1]
+			} else {
+				median = (vals[n / 2] + vals[n / 2 + 1]) / 2
+			}
+			printf "%.10f %.10f\n", mean, median
+		}
+	' "$durations_file")
+fi
+rm -f "$durations_file"
 
 if [ "$output" == 'quiet' ] ; then
 	exec 4>&1 1>/dev/null
@@ -1044,6 +1085,10 @@ if [ "$testsets" -gt 1 ] && [ -n "$fastest_unit" ] ; then
 	echo "%"
 	echo "% Fastest test set: $fastest_unit ($(format_decimal "$min_duration" 3) seconds)"
 	echo "% Slowest test set: $slowest_unit ($(format_decimal "$max_duration" 3) seconds)"
+	if [ -n "$mean_duration" ] ; then
+		echo "% Mean test set running time: $(format_decimal "$mean_duration" 3) seconds"
+		echo "% Median test set running time: $(format_decimal "$median_duration" 3) seconds"
+	fi
 fi
 
 if [ "$output" == 'quiet' ] ; then

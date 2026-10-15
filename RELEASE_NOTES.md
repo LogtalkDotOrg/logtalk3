@@ -327,8 +327,8 @@ setup against the lock file.
 * IMPROVED: The performance of the `logtalk_tester.sh` Bash shell script.
 
 * UPDATED: The `logtalk_tester.sh` and `logtalk_tester.ps1` testing
-automation scripts to print the fastest and slowest test set names
-and execution times.
+automation scripts to print the fastest and slowest test set names and
+execution times plus the mean and median test set running times.
 
 * FIXED: The `help` tool inline opening of documentation pages when their file
 paths contain spaces.
