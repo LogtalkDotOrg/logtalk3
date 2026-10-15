@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-07,
+		date is 2026-10-15,
 		comment is 'Portable incremental Assumption-based Truth Maintenance System.',
 		remarks is [
 			'Algorithm' - 'A label is an antichain of minimal environments. New label environments are propagated as deltas through a reverse justification index.',
@@ -44,7 +44,7 @@
 	]).
 
 	:- uses(list, [
-		member/2, reverse/2
+		member/2, reverse/2, length/2
 	]).
 
 	% State is deliberately opaque to clients. It contains the representation,
@@ -204,13 +204,16 @@
 		sort(NodeTargets0, NodeTargets),
 		normalize_justification_targets(RuleTargets0, RuleTargets),
 		remove_node_entries(NodeTargets, State0, State1, RemovedNodes),
-		target_index(RemovedNodes, NodeIndex),
-		target_index(RuleTargets, RuleIndex),
-		State1 = atms_state(_, _, _, _, _, Justifications0, _, _, _),
-		remove_batch_justifications(Justifications0, NodeIndex, RuleIndex, Justifications, RemovedRules),
-		(	RemovedNodes == [] ->
-			finish_rule_retraction(State0, Justifications, RemovedRules, State)
-		;	finish_node_retraction(RemovedNodes, State0, State1, Justifications, State)
+		(	RemovedNodes == [], RuleTargets == [] ->
+			State = State0
+		;	target_index(RemovedNodes, NodeIndex),
+			target_index(RuleTargets, RuleIndex),
+			State1 = atms_state(_, _, _, _, _, Justifications0, _, _, _),
+			remove_batch_justifications(Justifications0, NodeIndex, RuleIndex, Justifications, RemovedRules),
+			(	RemovedNodes == [] ->
+				finish_rule_retraction(State0, Justifications, RemovedRules, State)
+			;	finish_node_retraction(RemovedNodes, State0, State1, Justifications, State)
+			)
 		).
 
 	finish_rule_retraction(State0, Justifications, Removed, State) :-
@@ -248,21 +251,36 @@
 		dictionary_lookup(signature(Consequent, Antecedents), _, Index),
 		all_signatures_present(Rules, Index).
 
-	unindex_justifications([], Dependents, Dependents).
-	unindex_justifications([Justification| Justifications], Dependents0, Dependents) :-
-		Justification = justification(_, Antecedents, _),
-		remove_rule_dependencies(Antecedents, Justification, Dependents0, Dependents1),
-		unindex_justifications(Justifications, Dependents1, Dependents).
+	unindex_justifications(Justifications, Dependents0, Dependents) :-
+		dictionary_new(Empty),
+		group_removed_rules(Justifications, Empty, Grouped),
+		dictionary_as_list(Grouped, Entries),
+		remove_grouped_dependencies(Entries, Dependents0, Dependents).
 
-	remove_rule_dependencies([], _, Dependents, Dependents).
-	remove_rule_dependencies([Node| Nodes], Justification, Dependents0, Dependents) :-
+	group_removed_rules([], Grouped, Grouped).
+	group_removed_rules([Justification| Justifications], Grouped0, Grouped) :-
+		group_removed_rules(Justifications, Grouped0, Grouped1),
+		Justification = justification(_, Antecedents, _),
+		index_justification(Antecedents, Justification, Grouped1, Grouped).
+
+	remove_grouped_dependencies([], Dependents, Dependents).
+	remove_grouped_dependencies([Node-Removed| Entries], Dependents0, Dependents) :-
 		dictionary_lookup(Node, Rules0, Dependents0),
-		remove_justification(Justification, Rules0, Rules, _),
+		remove_dependency_occurrences(Rules0, Removed, Rules),
 		(	Rules == [] ->
 			dictionary_delete(Dependents0, Node, _, Dependents1)
 		;	dictionary_update(Dependents0, Node, Rules, Dependents1)
 		),
-		remove_rule_dependencies(Nodes, Justification, Dependents1, Dependents).
+		remove_grouped_dependencies(Entries, Dependents1, Dependents).
+
+	remove_dependency_occurrences(Rules, [], Rules) :-
+		!.
+	remove_dependency_occurrences([Rule| Rules], [Removed| Removals], Remaining) :-
+		(	Rule == Removed ->
+			remove_dependency_occurrences(Rules, Removals, Remaining)
+		;	Remaining = [Rule| Tail],
+			remove_dependency_occurrences(Rules, [Removed| Removals], Tail)
+		).
 
 	remove_node_entries([], State, State, []).
 	remove_node_entries([Node| Targets], State0, State, Removed) :-
@@ -394,7 +412,19 @@
 			Interpretations = [AssumptionNodes]
 		; 	Representation::empty(Empty),
 			( 	consistent_environment(Empty, Nogoods, Representation) ->
-				maximal_consistent_environments(AssumptionNodes, Empty, Nogoods, Representation, [], MaximalEnvironments)
+				findall(
+					Assumption,
+					(	member(Nogood, Nogoods),
+						Representation::to_list(Nogood, List),
+						member(Assumption, List)
+					),
+					Mentioned0
+				),
+				sort(Mentioned0, Mentioned),
+				partition_assumptions(AssumptionNodes, Mentioned, Relevant, Free),
+				Representation::from_list(Free, Base),
+				interpretation_suffixes(Relevant, Representation, Choices, _),
+				maximal_consistent_environments(Choices, Base, Nogoods, Representation, [], MaximalEnvironments)
 			; 	MaximalEnvironments = []
 			),
 			external_environments(MaximalEnvironments, Representation, ExternalInterpretations),
@@ -405,11 +435,15 @@
 	% reverse index lets later label changes evaluate only the affected product.
 
 	add_justification(Justification, State, State, false) :-
-		State = atms_state(_, _, _, _, _, Justifications, _, _, _),
+		duplicate_candidates(Justification, State, Justifications),
 		member_term(Justification, Justifications),
 		!.
 	add_justification(Justification, State0, State, true) :-
 		insert_stored_justification(Justification, State0, State).
+
+	duplicate_candidates(justification(_, [], _), atms_state(_, _, _, _, _, Justifications, _, _, _), Justifications).
+	duplicate_candidates(justification(_, [First| _], _), State, Justifications) :-
+		dependents(First, State, Justifications).
 
 	insert_stored_justification(Justification, atms_state(Representation, NextId, Nodes, Assumptions, Contradictions, Justifications0, Labels, Nogoods, Dependents0), State) :-
 		Justification = justification(_, Antecedents, _),
@@ -436,26 +470,39 @@
 		State0 = atms_state(Representation, NextId, Nodes, Assumptions, Contradictions, Justifications, Labels0, Nogoods0, Dependents),
 		dictionary_lookup(Node, OldLabel, Labels0),
 		filter_consistent(Candidates, Nogoods0, Representation, ConsistentCandidates),
-		minimal(ConsistentCandidates, Representation, OldLabel, NewLabel),
-		new_environments(NewLabel, OldLabel, Representation, Delta),
-		(	Delta == [] ->
-			State = State0
-		;	dictionary_update(Labels0, Node, NewLabel, Labels1),
-			State1 = atms_state(Representation, NextId, Nodes, Assumptions, Contradictions, Justifications, Labels1, Nogoods0, Dependents),
-			(	dictionary_lookup(Node, _, Contradictions) ->
-				record_nogoods(Delta, State1, State)
-			;	State = State1
+		(	ConsistentCandidates == [] ->
+			State = State0,
+			Delta = []
+		;	minimal(ConsistentCandidates, Representation, OldLabel, NewLabel),
+			(	NewLabel == OldLabel ->
+				State = State0,
+				Delta = []
+			;	new_environments(NewLabel, OldLabel, Representation, Delta),
+				(	Delta == [] ->
+					State = State0
+				;	dictionary_update(Labels0, Node, NewLabel, Labels1),
+					State1 = atms_state(Representation, NextId, Nodes, Assumptions, Contradictions, Justifications, Labels1, Nogoods0, Dependents),
+					(	dictionary_lookup(Node, _, Contradictions) ->
+						record_nogoods(Delta, State1, State)
+					;	State = State1
+					)
+				)
 			)
 		).
 
-	record_nogoods([], State, State).
-	record_nogoods([Environment| Environments], State0, State) :-
-		add_nogood(Environment, State0, State1, Added),
-		(	Added == true ->
-			prune_labels_for_nogood(Environment, State1, State2)
-		;	State2 = State1
-		),
-		record_nogoods(Environments, State2, State).
+	record_nogoods(Environments, State0, State) :-
+		accumulate_nogoods(Environments, State0, State1),
+		State0 = atms_state(_, _, _, _, _, _, _, Nogoods0, _),
+		State1 = atms_state(_, _, _, _, _, _, _, Nogoods, _),
+		(	Nogoods == Nogoods0 ->
+			State = State0
+		;	prune_labels_for_nogoods(Nogoods, State1, State)
+		).
+
+	accumulate_nogoods([], State, State).
+	accumulate_nogoods([Environment| Environments], State0, State) :-
+		add_nogood(Environment, State0, State1, _),
+		accumulate_nogoods(Environments, State1, State).
 
 	add_nogood(Environment, State, State, false) :-
 		State = atms_state(Representation, _, _, _, _, _, _, Nogoods, _),
@@ -467,12 +514,12 @@
 		Nogoods = [Environment| RemainingNogoods],
 		State = atms_state(Representation, NextId, Nodes, Assumptions, Contradictions, Justifications, Labels, Nogoods, Dependents).
 
-	prune_labels_for_nogood(Nogood, atms_state(Representation, NextId, Nodes, Assumptions, Contradictions, Justifications, Labels0, Nogoods, Dependents), State) :-
-		dictionary_map(prune_label(Nogood, Representation), Labels0, Labels),
+	prune_labels_for_nogoods(Nogoods, atms_state(Representation, NextId, Nodes, Assumptions, Contradictions, Justifications, Labels0, Nogoods, Dependents), State) :-
+		dictionary_map(prune_label(Nogoods, Representation), Labels0, Labels),
 		State = atms_state(Representation, NextId, Nodes, Assumptions, Contradictions, Justifications, Labels, Nogoods, Dependents).
 
-	prune_label(Nogood, Representation, Node-Label0, Node-Label) :-
-		filter_consistent(Label0, [Nogood], Representation, Label).
+	prune_label(Nogoods, Representation, Node-Label0, Node-Label) :-
+		filter_consistent(Label0, Nogoods, Representation, Label).
 
 	% Delta propagation uses a worklist. Cycles terminate because every queued
 	% delta adds a previously absent member of a finite label antichain.
@@ -511,42 +558,71 @@
 		environment_lists(Antecedents, State, Lists),
 		combine_state_environment_lists(Lists, State, Candidates).
 
-	candidates_with_delta([], _, _, State, Candidates) :-
-		State = atms_state(Representation, _, _, _, _, _, _, Nogoods, _),
-		Representation::empty(Empty),
-		(	consistent_environment(Empty, Nogoods, Representation) ->
-			Candidates = [Empty]
-		;	Candidates = []
-		).
-	candidates_with_delta([Antecedent| Antecedents], Node, Delta, State, Candidates) :-
+	candidates_with_delta(Antecedents, Node, Delta, State, Candidates) :-
+		delta_environment_lists(Antecedents, Node, Delta, State, Lists),
+		combine_state_environment_lists(Lists, State, Candidates).
+
+	delta_environment_lists([], _, _, _, []).
+	delta_environment_lists([Antecedent| Antecedents], Node, Delta, State, [First| Rest]) :-
 		(	Antecedent == Node ->
 			First = Delta
 		;	raw_label(Antecedent, State, First)
 		),
 		( 	First == [] ->
-			Candidates = []
-		; 	candidates_with_delta(Antecedents, Node, Delta, State, Rest),
-			State = atms_state(Representation, _, _, _, _, _, _, Nogoods, _),
-			combine_environment_sets(First, Rest, Nogoods, Representation, Candidates)
+			Rest = []
+		; 	delta_environment_lists(Antecedents, Node, Delta, State, Rest)
 		).
 
 	environment_lists([], _, []).
 	environment_lists([Node| Nodes], State, [Label| Labels]) :-
 		raw_label(Node, State, Label),
-		environment_lists(Nodes, State, Labels).
+		(	Label == [] ->
+			Labels = []
+		;	environment_lists(Nodes, State, Labels)
+		).
 
 	combine_state_environment_lists(Lists, State, Environments) :-
 		State = atms_state(Representation, _, _, _, _, _, _, Nogoods, _),
-		Representation::empty(Empty),
-		combine_environment_lists(Lists, [Empty], Nogoods, Representation, Environments).
+		(	member([], Lists) ->
+			Environments = []
+		;	Representation::empty(Empty),
+			(	consistent_environment(Empty, Nogoods, Representation) ->
+				size_environment_lists(Lists, Sized),
+				keysort(Sized, Sorted),
+				unsize_environment_lists(Sorted, Ordered),
+				combine_environment_lists(Ordered, [Empty], Nogoods, Representation, Environments)
+			;	Environments = []
+			)
+		).
+
+	size_environment_lists([], []).
+	size_environment_lists([List| Lists], [Size-List| Sized]) :-
+		length(List, Size),
+		size_environment_lists(Lists, Sized).
+
+	unsize_environment_lists([], []).
+	unsize_environment_lists([_-List| Sized], [List| Lists]) :-
+		unsize_environment_lists(Sized, Lists).
 
 	combine_environment_lists([], Environments, _, _, Environments).
 	combine_environment_lists([First| Rest], Environments0, Nogoods, Representation, Environments) :-
-		combine_environment_sets(Environments0, First, Nogoods, Representation, Environments1),
-		combine_environment_lists(Rest, Environments1, Nogoods, Representation, Environments).
+		(	Environments0 == [] ->
+			Environments = []
+		;	combine_environment_sets(Environments0, First, Nogoods, Representation, Environments1),
+			combine_environment_lists(Rest, Environments1, Nogoods, Representation, Environments)
+		).
 
 	combine_environment_sets(First, Second, Nogoods, Representation, Environments) :-
-		accumulate_environment_products(First, Second, Nogoods, Representation, [], Environments).
+		Representation::empty(Empty),
+		(	First = [FirstEnvironment], Representation::equal(FirstEnvironment, Empty) ->
+			filter_consistent(Second, Nogoods, Representation, Consistent),
+			minimal(Consistent, Representation, [], Environments)
+		;	(	Second = [SecondEnvironment], Representation::equal(SecondEnvironment, Empty) ->
+				filter_consistent(First, Nogoods, Representation, Consistent),
+				minimal(Consistent, Representation, [], Environments)
+			;	accumulate_environment_products(First, Second, Nogoods, Representation, [], Environments)
+			)
+		).
 
 	accumulate_environment_products([], _, _, _, Environments, Environments).
 	accumulate_environment_products([Environment| Environments], Second, Nogoods, Representation, Accumulator0, Accumulator) :-
@@ -619,16 +695,36 @@
 		Representation::to_list(Environment, List),
 		external_environments(Environments, Representation, Lists).
 
+	partition_assumptions([], _, [], []).
+	partition_assumptions([Assumption| Assumptions], Mentioned, Relevant, Free) :-
+		(	member(Assumption, Mentioned) ->
+			Relevant = [Assumption| RelevantTail],
+			Free = FreeTail
+		;	Relevant = RelevantTail,
+			Free = [Assumption| FreeTail]
+		),
+		partition_assumptions(Assumptions, Mentioned, RelevantTail, FreeTail).
+
+	interpretation_suffixes([], Representation, [], Empty) :-
+		Representation::empty(Empty).
+	interpretation_suffixes([Assumption| Assumptions], Representation, [choice(Singleton, Remaining)| Choices], Remaining) :-
+		interpretation_suffixes(Assumptions, Representation, Choices, Tail),
+		Representation::singleton(Assumption, Singleton),
+		Representation::union(Singleton, Tail, Remaining).
+
 	maximal_consistent_environments([], Environment, _, Representation, Maximal0, Maximal) :-
 		add_maximal_environment(Environment, Maximal0, Representation, Maximal).
-	maximal_consistent_environments([Assumption| Assumptions], Environment0, Nogoods, Representation, Maximal0, Maximal) :-
-		Representation::singleton(Assumption, Singleton),
-		Representation::union(Environment0, Singleton, Environment1),
-		(	consistent_environment(Environment1, Nogoods, Representation) ->
-			maximal_consistent_environments(Assumptions, Environment1, Nogoods, Representation, Maximal0, Maximal1)
-		;	Maximal1 = Maximal0
-		),
-		maximal_consistent_environments(Assumptions, Environment0, Nogoods, Representation, Maximal1, Maximal).
+	maximal_consistent_environments([choice(Singleton, Remaining)| Choices], Environment0, Nogoods, Representation, Maximal0, Maximal) :-
+		Representation::union(Environment0, Remaining, Upper),
+		(	member(Other, Maximal0), Representation::subset(Upper, Other) ->
+			Maximal = Maximal0
+		;	Representation::union(Environment0, Singleton, Environment1),
+			(	consistent_environment(Environment1, Nogoods, Representation) ->
+				maximal_consistent_environments(Choices, Environment1, Nogoods, Representation, Maximal0, Maximal1)
+			;	Maximal1 = Maximal0
+			),
+			maximal_consistent_environments(Choices, Environment0, Nogoods, Representation, Maximal1, Maximal)
+		).
 
 	add_maximal_environment(Environment, Maximal, Representation, Maximal) :-
 		member(Other, Maximal),

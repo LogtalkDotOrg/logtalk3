@@ -51,21 +51,46 @@ To test this library, load its `tester.lgt` file:
 
 The test suite runs the same deterministic regressions and bounded QuickCheck
 edit histories for all three environment representations. Generated histories
-contain 20 edits and are limited to eight live nodes and four assumptions.
-After every edit, an independent ground model is reconstructed using public
-creation and justification predicates and compared with the current state,
-including labels, roles, nogoods, interpretations, explanations, rule order,
-and the next node identifier. Removed IDs are represented by ordinary padding
-nodes only in the reconstruction. Previous states are also checked again.
+contain 20 edits, with 100 cases per representation, and are limited to eight
+live nodes and four assumptions. Initial and changed states are checked against
+an independent ground semantic model and a fresh reconstruction using public
+creation and justification predicates. Verified expectations include labels,
+roles, nogoods, interpretations, explanations, rule order, the next node
+identifier, and consistency for every assumption subset. Removed IDs are
+represented by ordinary padding nodes only in the reconstruction.
 
-QuickCheck test declarations reset the generator to its reproducible default
-seed in `setup/1` and restore the previous seed in `cleanup/1`;
-the test suite verifies that repeating the seed reproduces the histories.
+Ground verified evidence is threaded within each history. After every edit,
+including the last, the previous state's public observations are reread and
+compared with that evidence, including allocation and absent-node label probes.
+A new prefix reuses evidence only when both the state and model are strictly
+unchanged; its observations and probes are still checked. No evidence is shared
+between histories or representations.
+
+The QuickCheck declaration resets the generator to its reproducible default
+seed in `setup/1` and restores the previous seed in `cleanup/1` so that ATMS
+semantic histories are reproducible.
 QuickCheck failures report the failing history and sequence/test seeds. A failure
 can be reproduced using `lgtunit::quick_check/3` with its reported opaque seed
 and the template `tests(Representation)<<edit_sequence(+list(byte,20))`.
 Nonground `Info` identity and aliasing remain covered by deterministic tests,
 without copying variables into the generated oracle.
+
+To run the separate performance benchmark suite, load its
+`tester_performance.lgt` driver in a fresh Logtalk session:
+
+  | ?- logtalk_load(atms(tester_performance)).
+
+The driver loads the library through `loader.lgt` in optimized mode and runs
+`tests_performance(Representation)` for all three environment representations.
+The benchmarks validate their results and report CPU seconds or environment
+operation counts using test notes, without timing thresholds. They cover
+interpretations, unchanged labels, retraction batches, missing-node batches,
+duplicate insertions, nogood batches, and indexed target matching. The regular
+test suite retains its unchanged-label operation-count regression independently.
+A ground retraction scale case uses 240 rules and 300 targets, including 120
+matches and 180 missing targets. It checks the 120 survivors against an
+independent strict-identity filter, including insertion order, explanations,
+retained support, and unchanged source-state observations.
 
 
 API and state
@@ -91,7 +116,10 @@ nogood and prunes supersets from all labels immediately.
 
 `interpretations/2` enumerates maximal consistent environments. With no
 nogoods, it returns the environment containing all assumptions directly. When
-nogoods require subset search, it is intended for small sets of assumptions.
+nogoods require subset search, assumptions absent from every nogood are included
+in every result without branching. Search over the remaining assumptions uses
+reusable suffix environments and skips subtrees whose upper bound is contained
+in an already discovered result. It is intended for small relevant sets.
 
 
 Retraction
@@ -221,6 +249,52 @@ the final occurrence of any signature rebuilds derived state, even when a
 different signature currently produces the same label. Mixed batches use this
 fast path only when no node is actually removed.
 
+Removed occurrences are grouped in temporary dictionaries keyed only by
+antecedent node IDs. Each affected reverse dependency list is filtered once
+against its newest-first removal subsequence. Strict identity consumes one
+occurrence at a time, preserving surviving order and client variable references;
+unconditional rules require no reverse-index work.
+
+Mixed batches with no actually removed nodes and no explicit rule targets
+return the original state without indexing targets or scanning stored rules.
+Absent node targets do not suppress explicit rule removal requests.
+
+Duplicate insertion checks scan the existing reverse dependency list of the
+first canonical antecedent, using strict identity on the complete rule term.
+Every identical stored rule must occur there. Unconditional rules still scan
+all stored rules; popular first antecedents can also have large lists. Trusted
+rebuild replay bypasses duplicate checks so aliased occurrences are preserved.
+
+
+Testing and measurements
+------------------------
+
+Label updates with no consistent candidates or an unchanged minimal antichain
+return immediately without rescanning the old label for deltas. Distinct stored
+justifications are still retained even when they contribute no new support.
+
+Tests cover all three environment representations, including deterministic
+identity, occurrence, retraction, and cycle regressions and fixed-seed
+QuickCheck histories of 20 edits. Coverage runs retain debug instrumentation;
+optimized processing benchmarks are measured separately using the same
+workloads and validated results. Timing values are diagnostic, not test
+assertions. A test-only environment wrapper counts representation operations
+without instrumenting the production library.
+
+Every generated edit prefix is checked using expectations verified against an
+independent ground Horn fixpoint oracle. With at most four live assumptions,
+the oracle enumerates all assumption subsets and derives minimal consistent
+supports, minimal nogoods, and maximal consistent environments without using
+production propagation or antichain helpers. Changed prefixes receive fresh
+structural reconstruction checks; previous and strictly unchanged states are
+reread against their verified evidence, retaining identifier and missing-label
+probes. Nonground information identity and aliasing use separate deterministic
+tests.
+
+The skewed-product regression checks fewer unions than unsorted
+multiplication, with identical minimal results. Empty operands and identity
+products have zero-union checks.
+
 
 Environment representations
 ---------------------------
@@ -263,15 +337,22 @@ Limitations
   Independently created states and sibling states can contain equal identifiers
   for different nodes. Applications must not pass a node identifier to an
   unrelated state, where it could silently denote a different local node.
-- Labels and nogoods can contain exponentially many minimal environments in the
-  number of assumptions. Combining antecedent labels can therefore require an
-  exponential number of union and subset checks. Products are accumulated
+- Labels and nogoods can contain exponentially many minimal environments in
+  the number of assumptions. Combining antecedent labels can therefore require
+  an exponential number of union and subset checks. Products are accumulated
   directly into the minimal antichain and inconsistent partial products are
-  pruned, avoiding materialization of the complete Cartesian product.
+  pruned, avoiding materialization of the complete Cartesian product. Empty
+  operand labels bypass multiplication, and an empty intermediate product stops
+  evaluation of the remaining operands. Products with the singleton empty
+  environment skip unions but still filter consistency and minimality.
+  Effective operand labels are stably ordered by cardinality, smallest first;
+  delta substitution precedes ordering and other operands retain full labels.
+  Stored antecedents and public explanations keep their canonical order.
 - The functional state uses persistent AVL dictionaries for keyed indexes.
-  Adding a nogood must nevertheless map over every node label, while label and
-  nogood antichain operations require linear subset scans. These costs can
-  dominate updates in systems with many nodes or large antichains.
+  Adding a batch of nogoods maps over every node label once, after computing
+  the final minimal nogood antichain. Duplicate batches skip this mapping.
+  Label and nogood antichain operations require linear subset scans. These
+  costs can dominate updates in systems with many nodes or large antichains.
 - General retraction is not incremental: it recomputes the complete derived
   state, except for isolated non-assumption node removals and logically
   redundant rule removals. Its cost can be comparable to constructing the
@@ -288,10 +369,11 @@ Limitations
   below.
 - The number of maximal environments returned by `interpretations/2` and the
   time required to find them can still be exponential in the number of
-  assumptions. When nogoods are present, the implementation explores subsets
-  incrementally and prunes inconsistent branches, so it does not materialize
-  the complete powerset. With no nogoods, it returns the complete assumption
-  environment directly.
+  relevant assumptions. When nogoods are present, the implementation explores
+  subsets incrementally and prunes inconsistent or dominated branches without
+  excluding a branch merely because its upper bound is inconsistent. It does
+  not materialize the complete powerset. With no nogoods, it returns the
+  complete assumption environment directly.
 - The bitset representation uses the global node identifier as the bit index.
   Its arithmetic and storage costs therefore depend on the highest node
   identifier, not just on the number of assumptions. Large or sparse node

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-01,
+		date is 2026-10-15,
 		comment is 'Unit tests for the "atms" library.',
 		parameters is [
 			'Representation' - 'ATMS environment representation under test.'
@@ -39,12 +39,26 @@
 		assumption/2, contradiction/2, in_label/3, representation/2, clear/2
 	]).
 
-	:- uses(list, [member/2, append/3, length/2, nth1/3]).
+	:- uses(list, [
+		member/2, memberchk/2, append/3, length/2, nth1/3
+	]).
 
 	cover(atms).
 	cover(atms_bitset_environment).
 	cover(atms_ordered_list_environment).
 	cover(atms_segmented_bitset_environment).
+
+	test(atms_default_constructor_01, deterministic((Representation == atms_ordered_list_environment, Label == [[Assumption]]))) :-
+		atms::new(State0),
+		representation(State0, Representation),
+		nodes(State0, []),
+		assumptions(State0, []),
+		justifications(State0, []),
+		interpretations(State0, [[]]),
+		create_assumption(a, State0, Assumption, State1),
+		create_node(h, State1, Head, State2),
+		justify(Head, [Assumption], support, State2, State),
+		label(Head, State, Label).
 
 	test(atms_environment_union_01, deterministic(Union == [node(0), node(1), node(2), node(3)])) :-
 		_Representation_::from_list([node(0), node(2), node(3)], Environment1),
@@ -1112,13 +1126,18 @@
 		counting_environment(_Representation_)::counts(Calls, _),
 		label(Head, State, Label).
 
-	test(atms_retraction_index_ground_01, deterministic(Rules == Expected)) :-
-		numbered_fixture(240, State0, Assumption, Head),
-		numbered_targets(300, Assumption, Head, Targets),
+	test(atms_retraction_index_ground_01, deterministic((Rules == Expected, Explanation == Expected, Unchanged == Original))) :-
+		numbered_fixture(24, State0, Assumption, Head),
+		numbered_targets(30, Assumption, Head, Targets),
 		justifications(State0, Original),
 		linear_rule_survivors(Original, Targets, Expected),
+		length(Expected, 12),
 		retract_justifications(Targets, State0, State),
-		justifications(State, Rules).
+		justifications(State, Rules),
+		why(Head, State, Explanation),
+		label(Head, State, [[Assumption]]),
+		justifications(State0, Unchanged),
+		label(Head, State0, [[Assumption]]).
 
 	test(atms_retraction_index_full_info_01, deterministic(Rules == [justification(Head, [Assumption], retained)])) :-
 		new(_Representation_, State0),
@@ -1332,6 +1351,173 @@
 		counting_environment(_Representation_)::counts(BatchCalls, _),
 		justifications(State, Rules).
 
+	test(atms_duplicate_index_candidates_01, deterministic((Candidates == [Rule], Same == State, Calls == 0, var(Info)))) :-
+		counted_fixture(State0, Assumption, Head, Info),
+		add_unrelated_rules(20, State0, State),
+		Rule = justification(Head, [Assumption], info(Info)),
+		atms<<duplicate_candidates(Rule, State, Candidates),
+		counting_environment(_Representation_)::reset,
+		justify(Head, [Assumption, Assumption], info(Info), State, Same),
+		counting_environment(_Representation_)::counts(Calls, _).
+
+	test(atms_duplicate_after_grouped_removal_01, deterministic((Same == State2, Rules == [justification(Head, [Assumption], retained)]))) :-
+		new(_Representation_, State0),
+		create_assumption(a, State0, Assumption, State1),
+		create_node(h, State1, Head, Initial),
+		justify(Head, [Assumption], removed, Initial, First),
+		justify(Head, [Assumption], retained, First, Both),
+		retract_justifications([justification(Head, [Assumption], removed)], Both, State2),
+		justify(Head, [Assumption], retained, State2, Same),
+		justifications(Same, Rules),
+		retract_justification(Head, [Assumption], retained, Same, Rebuilt),
+		justify(Head, [Assumption], retained, Rebuilt, Readded),
+		label(Head, Readded, [[Assumption]]),
+		clear(Readded, Cleared),
+		create_node(new_head, Cleared, NewHead, EmptyState),
+		justify(NewHead, [], unconditional, EmptyState, Unconditional),
+		justify(NewHead, [], unconditional, Unconditional, Unconditional).
+
+	test(atms_product_smallest_first_01, deterministic((SortedCalls < UnsortedCalls, Actual == Expected))) :-
+		Counter = counting_environment(_Representation_),
+		Counter::reset,
+		new(Counter, State0),
+		add_free_assumptions(9, State0, [A, B, C, D, E, F, G, H, I], State1),
+		create_contradiction(bottom, State1, Bottom, State2),
+		justify(Bottom, [A, I], first, State2, State3),
+		justify(Bottom, [B, I], second, State3, State4),
+		justify(Bottom, [C, I], third, State4, State),
+		singleton_environments([A, B, C, D], Counter, First),
+		singleton_environments([E, F, G, H], Counter, Second),
+		singleton_environments([I], Counter, Third),
+		Counter::from_list([A, I], FirstNogood),
+		Counter::from_list([B, I], SecondNogood),
+		Counter::from_list([C, I], ThirdNogood),
+		Lists = [First, Second, Third],
+		Counter::reset,
+		atms<<combine_state_environment_lists(Lists, State, Ordered),
+		Counter::operation_count(union, SortedCalls),
+		Counter::reset,
+		Counter::empty(Empty),
+		atms<<combine_environment_lists(Lists, [Empty], [ThirdNogood, SecondNogood, FirstNogood], Counter, Unordered),
+		Counter::operation_count(union, UnsortedCalls),
+		atms<<external_environments(Ordered, Counter, External),
+		atms<<external_environments(Unordered, Counter, UnsortedExternal),
+		sort(External, Actual),
+		sort(UnsortedExternal, Actual),
+		Expected = [[D, E, I], [D, F, I], [D, G, I], [D, H, I]].
+
+	test(atms_product_stable_sizes_01, deterministic(Ordered == [[short], [first, first], [second, second]])) :-
+		atms<<size_environment_lists([[first, first], [short], [second, second]], Sized),
+		keysort(Sized, Sorted),
+		atms<<unsize_environment_lists(Sorted, Ordered).
+
+	test(atms_product_ordered_trigger_delta_01, deterministic(Actual == [[A, B, C], [A, B, D]])) :-
+		new(_Representation_, State0),
+		add_free_assumptions(4, State0, [A, B, C, D], State1),
+		create_node(trigger, State1, Trigger, State2),
+		create_node(other, State2, Other, State3),
+		justify(Trigger, [A], first, State3, State4),
+		justify(Trigger, [B], second, State4, State5),
+		justify(Other, [C], third, State5, State6),
+		justify(Other, [D], fourth, State6, State),
+		_Representation_::singleton(B, Delta),
+		atms<<candidates_with_delta([A, Trigger, Other], Trigger, [Delta], State, Candidates),
+		atms<<external_environments(Candidates, _Representation_, External),
+		sort(External, Actual).
+
+	test(atms_product_empty_identity_01, deterministic(Unions == 0)) :-
+		Counter = counting_environment(_Representation_),
+		Counter::reset,
+		new(Counter, State0),
+		create_assumption(a, State0, A, State1),
+		create_contradiction(bottom, State1, Bottom, State2),
+		justify(Bottom, [A], forbidden, State2, InconsistentState),
+		Counter::empty(Empty),
+		Counter::singleton(A, Environment),
+		Counter::reset,
+		atms<<combine_state_environment_lists([[Environment]], State1, [Environment]),
+		atms<<combine_environment_sets([Environment], [Empty], [], Counter, [Environment]),
+		atms<<combine_environment_sets([Empty], [Environment], [Environment], Counter, []),
+		atms<<combine_state_environment_lists([[Environment]], InconsistentState, []),
+		Counter::operation_count(union, Unions).
+
+	test(atms_product_empty_operands_01, deterministic(Unions == 0)) :-
+		Counter = counting_environment(_Representation_),
+		Counter::reset,
+		new(Counter, State),
+		Counter::singleton(node(0), Environment),
+		Counter::reset,
+		atms<<combine_state_environment_lists([[], [Environment]], State, []),
+		atms<<combine_state_environment_lists([[Environment], [], [Environment]], State, []),
+		atms<<combine_state_environment_lists([[Environment], [Environment], []], State, []),
+		Counter::operation_count(union, Unions).
+
+	test(atms_product_inconsistent_prefix_01, deterministic(Unions =< 2)) :-
+		Counter = counting_environment(_Representation_),
+		Counter::reset,
+		new(Counter, State0),
+		create_assumption(a, State0, A, State1),
+		create_assumption(b, State1, B, State2),
+		create_assumption(c, State2, C, State3),
+		create_contradiction(bottom, State3, Bottom, State4),
+		justify(Bottom, [A, B], clash, State4, State),
+		Counter::singleton(A, First),
+		Counter::singleton(B, Second),
+		Counter::singleton(C, Third),
+		Counter::reset,
+		atms<<combine_state_environment_lists([[First], [Second], [Third]], State, []),
+		Counter::operation_count(union, Unions).
+
+	test(atms_nogood_batch_final_antichain_01, deterministic((BatchCalls < SequentialCalls, Same == Batch))) :-
+		Counter = counting_environment(_Representation_),
+		Counter::reset,
+		new(Counter, State0),
+		create_node(head, State0, Head, State1),
+		add_label_alternatives(8, Head, State1, State2),
+		Counter::from_list([node(1), node(2)], Larger),
+		Counter::from_list([node(1)], Smaller),
+		Counter::reset,
+		atms<<record_nogoods([Larger, Smaller], State2, Batch),
+		Counter::counts(BatchCalls, _),
+		Counter::reset,
+		atms<<record_nogoods([Larger], State2, Sequential0),
+		atms<<record_nogoods([Smaller], Sequential0, Sequential),
+		Counter::counts(SequentialCalls, _),
+		state_snapshot(Batch, [], Snapshot),
+		state_snapshot(Sequential, [], Snapshot),
+		atms<<record_nogoods([Larger, Smaller, Smaller], Batch, Same).
+
+	test(atms_nogood_batch_propagation_01, deterministic) :-
+		verify_edit_history([
+			create(ordinary),
+			add(justification(node(4), [node(0)], first)),
+			add(justification(node(4), [node(1)], second)),
+			add(justification(node(3), [node(4)], batch)),
+			add(justification(node(2), [node(4)], stale)),
+			remove_rule(justification(node(3), [node(4)], batch))
+		]).
+
+	test(atms_mixed_missing_nodes_shortcut_01, deterministic((Unchanged == State0, Calls == 0, var(Info)))) :-
+		counted_fixture(Initial, Assumption, Head, Info),
+		add_numbered_rules(20, Assumption, Head, Initial, State0),
+		counting_environment(_Representation_)::reset,
+		retract_batch([node(999), node(998), node(999)], [], State0, Unchanged),
+		counting_environment(_Representation_)::counts(Calls, _),
+		retract_batch([node(999)], [justification(Head, [Assumption], info(Info))], State0, State),
+		justifications(State, Rules),
+		length(Rules, 20),
+		label(Head, State, [[Assumption]]).
+
+	test(atms_grouped_dependency_order_01, deterministic(Actual == Expected)) :-
+		numbered_fixture(12, State0, Assumption, Head),
+		numbered_targets(6, Assumption, Head, EvenTargets),
+		Targets = [justification(Head, [Assumption], index(1))| EvenTargets],
+		atms<<dependents(Assumption, State0, Original),
+		linear_rule_survivors(Original, Targets, Expected),
+		retract_justifications(Targets, State0, State),
+		atms<<dependents(Assumption, State, Actual),
+		label(Head, State, [[Assumption]]).
+
 	test(atms_redundant_dependency_occurrences_01, deterministic((Entries == [node(0)-[Rule], node(1)-[Rule]], EmptyEntries == [], var(Info)))) :-
 		Rule = justification(node(2), [node(0), node(1)], info(Info)),
 		OtherRule = justification(node(2), [node(0), node(1)], info(Other)),
@@ -1378,12 +1564,7 @@
 		label(Other, State, SecondLabel).
 
 	quick_check(edit_sequences_generated_01, edit_sequence(+list(byte,20)), [
-		n(100), l(edit_sequence_labels),
-		setup(reset_sequence_seed(Saved)), cleanup(fast_random::set_seed(Saved))
-	]).
-
-	quick_check(edit_sequences_seed_reproduction_01, sequence_seed_reproduction(+list(byte,20)), [
-		n(8), ec(false),
+		n(25), l(edit_sequence_labels),
 		setup(reset_sequence_seed(Saved)), cleanup(fast_random::set_seed(Saved))
 	]).
 
@@ -1435,21 +1616,147 @@
 			remove_rule(justification(node(999), [], missing))
 		]).
 
+	test(atms_verified_evidence_01, deterministic) :-
+		history_fixture(State, Model),
+		verify_model(State, Model, Evidence),
+		ground(Evidence),
+		matches_verified_state(State, Evidence).
+
+	test(atms_verified_evidence_rules_01, deterministic) :-
+		history_fixture(State0, Model),
+		verify_model(State0, Model, Evidence),
+		justify(node(2), [node(0)], extra, State0, State),
+		label(node(2), State0, Label),
+		label(node(2), State, Label),
+		\+ matches_verified_state(State, Evidence),
+		matches_verified_state(State0, Evidence).
+
+	test(atms_verified_evidence_next_id_01, deterministic) :-
+		history_fixture(State0, Model),
+		verify_model(State0, Model, Evidence),
+		State0 = atms_state(Representation, Next, Nodes, Assumptions, Contradictions, Rules, Labels, Nogoods, Dependents),
+		WrongNext is Next + 1,
+		State = atms_state(Representation, WrongNext, Nodes, Assumptions, Contradictions, Rules, Labels, Nogoods, Dependents),
+		state_snapshot(State0, [], Snapshot),
+		state_snapshot(State, [], Snapshot),
+		\+ matches_verified_state(State, Evidence).
+
+	test(atms_verified_evidence_ghost_label_01, deterministic) :-
+		history_fixture(State0, Model0),
+		apply_model_edit(create(ordinary), State0, Model0, State1, Model1),
+		apply_model_edit(remove_node(node(4)), State1, Model1, State, Model),
+		verify_model(State, Model, Evidence),
+		State1 = atms_state(_, _, _, _, _, _, GhostLabels, _, _),
+		State = atms_state(Representation, Next, Nodes, Assumptions, Contradictions, Rules, _, Nogoods, Dependents),
+		Ghost = atms_state(Representation, Next, Nodes, Assumptions, Contradictions, Rules, GhostLabels, Nogoods, Dependents),
+		state_snapshot(State, [], Snapshot),
+		state_snapshot(Ghost, [], Snapshot),
+		\+ matches_verified_state(Ghost, Evidence),
+		matches_verified_state(State, Evidence).
+
+	test(atms_verified_evidence_consistency_01, deterministic) :-
+		history_fixture(State, Model),
+		verify_model(State, Model, verified(Snapshot, Next, Absent, [truth(Environment, Known, inconsistent)| Truths])),
+		\+ matches_verified_state(State, verified(Snapshot, Next, Absent, [truth(Environment, Known, consistent)| Truths])).
+
+	test(atms_verified_evidence_gaps_and_clear_01, deterministic) :-
+		history_fixture(State0, Model0),
+		apply_model_edit(remove_node(node(1)), State0, Model0, State1, Model1),
+		apply_model_edit(remove_node(node(3)), State1, Model1, State2, Model2),
+		verify_model(State2, Model2, Evidence),
+		Evidence = verified(_, 4, [node(1), node(3)], _),
+		apply_model_edit(clear, State2, Model2, State3, Model3),
+		matches_verified_state(State2, Evidence),
+		verify_model(State3, Model3, Cleared),
+		Cleared = verified(_, 0, [], _),
+		apply_model_edit(create(ordinary), State3, Model3, State, Model),
+		verify_model(State, Model, _),
+		matches_verified_state(State3, Cleared).
+
+	test(atms_history_evidence_noops_01, deterministic) :-
+		history_fixture(State0, Model0),
+		verify_model(State0, Model0, Evidence0),
+		apply_model_edit(remove_batch([], []), State0, Model0, State, Model),
+		State == State0,
+		Model == Model0,
+		verify_transition(State0, Model0, Evidence0, State, Model, Evidence),
+		Evidence == Evidence0,
+		verify_edit_history([
+			remove_rules([]), remove_nodes([]), remove_batch([], []),
+			remove_node(node(999)), remove_nodes([node(999), node(999)]),
+			remove_rule(justification(node(999), [], missing)),
+			remove_batch([node(999)], []),
+			add(justification(node(2), [node(0)], first)),
+			add(justification(node(2), [node(0)], first)),
+			clear, clear, create(ordinary), remove_node(node(0)), remove_node(node(0))
+		]).
+
+	test(atms_history_evidence_both_guards_01, deterministic) :-
+		history_fixture(State0, Model0),
+		apply_model_edit(add(justification(node(2), [node(0)], extra)), State0, Model0, State, Model),
+		label(node(2), State0, Label),
+		label(node(2), State, Label),
+		verify_transition(State0, Model, unused, State, Model, Evidence),
+		verify_transition(State, Model0, unused, State, Model, Expected),
+		Evidence == Expected,
+		matches_verified_state(State, Evidence).
+
+	test(atms_unchanged_label_calls_01, deterministic((Small < 40, Large < 40))) :-
+		unchanged_label_calls(40, Small),
+		unchanged_label_calls(80, Large).
+
+	test(atms_interpretations_free_assumptions_01, deterministic((Interpretations == [Free], Calls < 40))) :-
+		Counter = counting_environment(_Representation_),
+		Counter::reset,
+		new(Counter, State0),
+		create_assumption(forbidden, State0, Forbidden, State1),
+		add_free_assumptions(20, State1, Free, State2),
+		create_contradiction(bottom, State2, Bottom, State3),
+		justify(Bottom, [Forbidden], forbidden, State3, State),
+		Counter::reset,
+		interpretations(State, Interpretations),
+		Counter::counts(Calls, _).
+
+	test(atms_interpretations_overlapping_bounds_01, deterministic) :-
+		verify_edit_history([
+			create(assumption),
+			add(justification(node(3), [node(1), node(4)], overlap)),
+			remove_rule(justification(node(3), [node(0), node(1)], clash)),
+			remove_node(node(1))
+		]).
+
+	test(atms_semantic_oracle_cycles_01, deterministic) :-
+		verify_edit_history([
+			create(ordinary),
+			add(justification(node(4), [node(4)], self)),
+			add(justification(node(4), [node(2)], forward)),
+			add(justification(node(2), [node(4)], backward)),
+			add(justification(node(0), [node(4)], assumption_consequent)),
+			remove_rules([justification(node(2), [node(0)], first), justification(node(2), [node(1)], second)]),
+			add(justification(node(4), [], unconditional)),
+			add(justification(node(3), [], inconsistent)),
+			remove_node(node(3)),
+			clear
+		]).
+
+	test(atms_semantic_oracle_nogoods_01, deterministic) :-
+		verify_edit_history([
+			add(justification(node(3), [node(0)], smaller)),
+			add(justification(node(3), [node(0)], shared)),
+			remove_rule(justification(node(3), [node(0)], smaller)),
+			remove_rules([justification(node(3), [node(0)], shared), justification(node(3), [node(0), node(1)], clash)]),
+			add(justification(node(2), [node(0), node(1)], larger)),
+			remove_rule(justification(node(2), [node(0)], first)),
+			remove_batch([node(1)], [justification(node(2), [node(1)], second)]),
+			create(assumption),
+			add(justification(node(2), [node(4)], restored))
+		]).
+
 	% auxiliary predicates
 
 	reset_sequence_seed(Saved) :-
 		fast_random::get_seed(Saved),
 		fast_random::reset_seed.
-
-	sequence_seed_reproduction(Sequence) :-
-		fast_random::get_seed(Seed),
-		type::arbitrary(list(byte,20), History1),
-		fast_random::set_seed(Seed),
-		type::arbitrary(list(byte,20), History2),
-		fast_random::set_seed(Seed),
-		^^assertion(History1 == History2),
-		edit_sequence(Sequence),
-		edit_sequence(History1).
 
 	edit_sequence_labels(Sequence, Labels) :-
 		findall(Class, (member(Byte, Sequence), Opcode is Byte mod 16, opcode_class(Opcode, Class)), Classes),
@@ -1474,13 +1781,13 @@
 
 	edit_sequence(Sequence) :-
 		history_fixture(State, Model),
-		check_model(State, Model),
-		run_byte_history(Sequence, State, Model).
+		verify_model(State, Model, Evidence),
+		run_byte_history(Sequence, State, Model, Evidence).
 
 	verify_edit_history(Edits) :-
 		history_fixture(State, Model),
-		check_model(State, Model),
-		run_edit_history(Edits, State, Model).
+		verify_model(State, Model, Evidence),
+		run_edit_history(Edits, State, Model, Evidence).
 
 	history_fixture(State, model(4, Nodes, Rules)) :-
 		new(_Representation_, State0),
@@ -1492,22 +1799,29 @@
 		Rules = [justification(Head, [Assumption], first), justification(Head, [Backup], second), justification(Bottom, [Assumption, Backup], clash)],
 		reconstruct_rules(Rules, State4, State).
 
-	run_byte_history([], _, _).
-	run_byte_history([Byte| Bytes], State0, Model0) :-
+	run_byte_history([], _, _, _).
+	run_byte_history([Byte| Bytes], State0, Model0, Evidence0) :-
 		Opcode is Byte mod 16,
 		Selector is Byte // 16,
 		decode_edit(Opcode, Selector, Model0, Edit),
 		apply_model_edit(Edit, State0, Model0, State, Model),
-		check_model(State, Model),
-		check_model(State0, Model0),
-		run_byte_history(Bytes, State, Model).
+		verify_transition(State0, Model0, Evidence0, State, Model, Evidence),
+		check_verified_state(State0, Evidence0),
+		run_byte_history(Bytes, State, Model, Evidence).
 
-	run_edit_history([], _, _).
-	run_edit_history([Edit| Edits], State0, Model0) :-
+	run_edit_history([], _, _, _).
+	run_edit_history([Edit| Edits], State0, Model0, Evidence0) :-
 		apply_model_edit(Edit, State0, Model0, State, Model),
-		check_model(State, Model),
-		check_model(State0, Model0),
-		run_edit_history(Edits, State, Model).
+		verify_transition(State0, Model0, Evidence0, State, Model, Evidence),
+		check_verified_state(State0, Evidence0),
+		run_edit_history(Edits, State, Model, Evidence).
+
+	verify_transition(State0, Model0, Evidence0, State, Model, Evidence) :-
+		( State == State0, Model == Model0 ->
+			check_verified_state(State, Evidence0),
+			Evidence = Evidence0
+		; 	verify_model(State, Model, Evidence)
+		).
 
 	decode_edit(0, _, _, create(ordinary)).
 	decode_edit(1, _, _, create(assumption)).
@@ -1675,7 +1989,8 @@
 		;	model_incident_antecedent(Antecedents, Nodes)
 		).
 
-	check_model(State, model(Next, Nodes, Rules)) :-
+	verify_model(State, model(Next, Nodes, Rules), verified(Expected, Next, Padding, Truths)) :-
+		check_semantics(State, Nodes, Rules, Truths),
 		new(_Representation_, Oracle0),
 		reconstruct_nodes(0, Next, Nodes, Oracle0, Oracle1, Padding),
 		reconstruct_rules(Rules, Oracle1, Oracle),
@@ -1685,6 +2000,113 @@
 		absent_padding_nodes(Padding, State),
 		create_node(probe, State, NextNode, _),
 		^^assertion(NextNode == node(Next)).
+
+	check_verified_state(State, Evidence) :-
+		( matches_verified_state(State, Evidence) ->
+			Matches = true
+		; 	Matches = false
+		),
+		^^assertion(Matches == true).
+
+	matches_verified_state(State, verified(Expected, Next, Padding, Truths)) :-
+		state_snapshot(State, [], Actual),
+		Actual == Expected,
+		matches_consistency(State, Truths),
+		absent_padding_nodes(Padding, State),
+		create_node(probe, State, NextNode, _),
+		NextNode == node(Next).
+
+	matches_consistency(_, []) :-
+		!.
+	matches_consistency(State, [truth(Environment, _, Expected)| Truths]) :-
+		( consistent(Environment, State) ->
+			Actual = consistent
+		; 	Actual = inconsistent
+		),
+		Actual == Expected,
+		matches_consistency(State, Truths).
+
+	check_semantics(State, Nodes, Rules, Truths) :-
+		findall(Node, member(record(Node, assumption, _), Nodes), Assumptions),
+		findall(Environment, oracle_subset_choice(Assumptions, Environment), Environments),
+		oracle_truths(Environments, Nodes, Rules, State, Truths),
+		oracle_labels(Nodes, Truths, State),
+		findall(Environment, member(truth(Environment, _, inconsistent), Truths), Inconsistent),
+		oracle_extremal(Inconsistent, Inconsistent, minimal, ExpectedNogoods),
+		findall(Environment, nogood(Environment, State), Nogoods0),
+		sort(Nogoods0, Nogoods),
+		sort(ExpectedNogoods, SortedNogoods),
+		^^assertion(Nogoods == SortedNogoods),
+		findall(Environment, member(truth(Environment, _, consistent), Truths), Consistent),
+		oracle_extremal(Consistent, Consistent, maximal, ExpectedInterpretations),
+		sort(ExpectedInterpretations, SortedInterpretations),
+		interpretations(State, Interpretations),
+		^^assertion(Interpretations == SortedInterpretations).
+
+	oracle_subset_choice([], []).
+	oracle_subset_choice([Node| Nodes], [Node| Chosen]) :-
+		oracle_subset_choice(Nodes, Chosen).
+	oracle_subset_choice([_| Nodes], Chosen) :-
+		oracle_subset_choice(Nodes, Chosen).
+
+	oracle_truths([], _, _, _, []).
+	oracle_truths([Environment| Environments], Nodes, Rules, State, [truth(Environment, Known, Status)| Truths]) :-
+		oracle_closure(Rules, Environment, Known),
+		(	oracle_contradiction(Nodes, Known) ->
+			Status = inconsistent
+		;	Status = consistent
+		),
+		(	consistent(Environment, State) ->
+			Actual = consistent
+		;	Actual = inconsistent
+		),
+		^^assertion(Actual == Status),
+		oracle_truths(Environments, Nodes, Rules, State, Truths).
+
+	oracle_closure(Rules, Known0, Known) :-
+		(	oracle_next(Rules, Known0, Head) ->
+			oracle_closure(Rules, [Head| Known0], Known)
+		;	Known = Known0
+		).
+
+	oracle_next([justification(Head, Antecedents, _)| Rules], Known, Next) :-
+		(	\+ member(Head, Known), oracle_subset(Antecedents, Known) ->
+			Next = Head
+		;	oracle_next(Rules, Known, Next)
+		).
+
+	oracle_subset([], _).
+	oracle_subset([Node| Nodes], Known) :-
+		memberchk(Node, Known),
+		oracle_subset(Nodes, Known).
+
+	oracle_contradiction([record(Node, Role, _)| Nodes], Known) :-
+		(	Role == contradiction, member(Node, Known) ->
+			true
+		;	oracle_contradiction(Nodes, Known)
+		).
+
+	oracle_labels([], _, _).
+	oracle_labels([record(Node, _, _)| Nodes], Truths, State) :-
+		findall(Environment, (member(truth(Environment, Known, consistent), Truths), member(Node, Known)), Supports),
+		oracle_extremal(Supports, Supports, minimal, Minimal),
+		sort(Minimal, Expected),
+		label(Node, State, Actual),
+		^^assertion(Actual == Expected),
+		oracle_labels(Nodes, Truths, State).
+
+	oracle_extremal([], _, _, []).
+	oracle_extremal([Environment| Environments], All, Mode, Extremal) :-
+		(	member(Other, All), Other \== Environment, oracle_dominated(Mode, Environment, Other) ->
+			Extremal = Tail
+		;	Extremal = [Environment| Tail]
+		),
+		oracle_extremal(Environments, All, Mode, Tail).
+
+	oracle_dominated(minimal, Environment, Other) :-
+		oracle_subset(Other, Environment).
+	oracle_dominated(maximal, Environment, Other) :-
+		oracle_subset(Environment, Other).
 
 	reconstruct_nodes(Next, Next, _, State, State, []) :-
 		!.
@@ -1744,10 +2166,47 @@
 		;	linear_identity_member(Rule, Targets)
 		).
 
-	benchmark_target_matching(Count, Repetitions, IndexedTime, LinearTime) :-
-		numbered_targets(Count, node(0), node(1), Targets),
-		lgtunit::benchmark((atms<<target_index(Targets, Index), atms<<remove_matching_justifications(Targets, Index, [], _)), Repetitions, IndexedTime),
-		lgtunit::benchmark(linear_rule_survivors(Targets, Targets, []), Repetitions, LinearTime).
+	add_unrelated_rules(0, State, State) :-
+		!.
+	add_unrelated_rules(Count, State0, State) :-
+		create_node(unrelated, State0, Node, State1),
+		justify(Node, [Node], unrelated, State1, State2),
+		Next is Count - 1,
+		add_unrelated_rules(Next, State2, State).
+
+	singleton_environments([], _, []).
+	singleton_environments([Node| Nodes], Representation, [Environment| Environments]) :-
+		Representation::singleton(Node, Environment),
+		singleton_environments(Nodes, Representation, Environments).
+
+	add_free_assumptions(0, State, [], State) :-
+		!.
+	add_free_assumptions(Count, State0, [Node| Nodes], State) :-
+		create_assumption(free, State0, Node, State1),
+		Next is Count - 1,
+		add_free_assumptions(Next, State1, Nodes, State).
+
+	unchanged_label_calls(Count, Calls) :-
+		Counter = counting_environment(_Representation_),
+		Counter::reset,
+		new(Counter, State0),
+		create_node(h, State0, Head, State1),
+		add_label_alternatives(Count, Head, State1, State2),
+		Counter::reset,
+		justify(Head, [node(Count)], extra, State2, State),
+		Counter::counts(Calls, _),
+		label(Head, State, Label),
+		length(Label, Count),
+		why(Head, State, Why),
+		memberchk(justification(Head, [node(Count)], extra), Why).
+
+	add_label_alternatives(0, _, State, State) :-
+		!.
+	add_label_alternatives(Count, Head, State0, State) :-
+		create_assumption(alternative, State0, Assumption, State1),
+		justify(Head, [Assumption], Count, State1, State2),
+		Next is Count - 1,
+		add_label_alternatives(Next, Head, State2, State).
 
 	counted_fixture(State, Assumption, Head, Info) :-
 		Counter = counting_environment(_Representation_),

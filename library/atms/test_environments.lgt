@@ -22,17 +22,29 @@
 :- object(counting_environment(_Representation_),
 	implements(atms_environment_protocol)).
 
-	:- public([reset/0, counts/2]).
-	:- dynamic(counts_/2).
+	:- public([reset/0, counts/2, operation_count/2]).
+	:- dynamic([counts_/2, operation_calls_/2]).
 
 	reset :-
 		retractall(counts_(_, _)),
+		retractall(operation_calls_(_, _)),
 		assertz(counts_(0, 0)).
 
 	counts(Calls, Singletons) :-
 		once(counts_(Calls, Singletons)).
 
+	operation_count(Operation, Count) :-
+		(	operation_calls_(Operation, Count0) ->
+			Count = Count0
+		;	Count = 0
+		).
+
 	record(Operation) :-
+		(	retract(operation_calls_(Operation, Count0)) ->
+			Count is Count0 + 1
+		;	Count = 1
+		),
+		assertz(operation_calls_(Operation, Count)),
 		once(retract(counts_(Calls0, Singletons0))),
 		Calls is Calls0 + 1,
 		(	Operation == singleton ->
