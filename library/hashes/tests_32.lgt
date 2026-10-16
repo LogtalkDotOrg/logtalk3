@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2026-10-12,
+		date is 2026-10-16,
 		comment is 'Unit tests for the "hashes" library 32-bit algorithms.'
 	]).
 
@@ -598,8 +598,7 @@
 	chunks(N, List, [Chunk| Chunks]) :-
 		(	take(N, List, Chunk, Rest) ->
 			true
-		;
-			Chunk = List,
+		;	Chunk = List,
 			Rest = []
 		),
 		chunks(N, Rest, Chunks).
@@ -609,13 +608,12 @@
 	% the message to the hash function one chunk at a time
 	run_incremental(Object, Chunks, Hash) :-
 		Object::new_hash_state(State0),
-		fold_update(Object, Chunks, State0, State),
+		fold_update(Chunks, Object, State0, State),
 		Object::final_hash_state(State, Hash).
 
-	fold_update(_, [], State, State) :-
-		!.
-	fold_update(Object, [Chunk| Chunks], State0, State) :-
+	fold_update([], _, State, State).
+	fold_update([Chunk| Chunks], Object, State0, State) :-
 		Object::update_hash_state(State0, Chunk, State1),
-		fold_update(Object, Chunks, State1, State).
+		fold_update(Chunks, Object, State1, State).
 
 :- end_object.
