@@ -191,8 +191,8 @@ and `logistic_regression_classifier` libraries.
 `logseries/2`, `standard_normal/1`, and `von_mises/3` sampling predicates.
 
 * IMPROVED: Performance of the `ccsds_packets`, `crypto`, `genetic_algorithm`,
-`gradient_boosting_classifier`, `sgd_classifier`, `particle_swarm_optimization`,
-`paseto`, and `svr_regression` library tests.
+`gradient_boosting_classifier`, `sgd_classifier`, `knn_distance_anomaly_detector`,
+`particle_swarm_optimization`, `paseto`, and `svr_regression` library tests.
 
 * IMPROVED: Rewrite predicate definitions as tail-recursive in the
 `ant_colony`, `association_rule_miner`, `ccsds`, `colley_ranker`, `crontab`,

@@ -34,36 +34,33 @@
 	]).
 
 	:- uses(knn_distance_anomaly_detector, [
-		anomaly_detector_options/2,
-		check_anomaly_detector/1,
-		diagnostic/2, diagnostics/2,
-		export_to_clauses/4, export_to_file/4,
-		learn/2, learn/3, predict/3, predict/4,
-		print_anomaly_detector/1, score/3, score_all/3,
-		valid_anomaly_detector/1
+		anomaly_detector_options/2, check_anomaly_detector/1, diagnostic/2, diagnostics/2, export_to_clauses/4,
+		export_to_file/4, learn/2, learn/3, predict/3, predict/4, print_anomaly_detector/1, score/3,
+		score_all/3, valid_anomaly_detector/1
 	]).
 
 	:- set_logtalk_flag(arithmetic_expressions, silent).
 
+	:- private(cached_detector_/3).
+	:- dynamic(cached_detector_/3).
+
 	cover(knn_distance_anomaly_detector).
 
+	setup :-
+		retractall(cached_detector_(_, _, _)).
+
 	cleanup :-
+		retractall(cached_detector_(_, _, _)),
 		^^clean_file('test_output.pl').
-
-	learn_filtered(Dataset, Detector) :-
-		learn(Dataset, Detector, [baseline_selection_policy(filter)]).
-
-	learn_filtered(Dataset, ExtraOptions, Detector) :-
-		learn(Dataset, Detector, [baseline_selection_policy(filter)| ExtraOptions]).
 
 	test(knn_distance_learn_2_gaussian_error, error(domain_error(baseline_only_training_data, gaussian_anomalies))) :-
 		learn(gaussian_anomalies, _Detector).
 
 	test(knn_distance_learn_3_gaussian_filter, true(ground(Detector))) :-
-		learn_filtered(gaussian_anomalies, Detector).
+		learn(gaussian_anomalies, Detector, [baseline_selection_policy(filter)]).
 
 	test(knn_distance_learn_2_mixed, true(ground(Detector))) :-
-		learn_filtered(mixed_anomalies, Detector).
+		learn(mixed_anomalies, Detector, [baseline_selection_policy(filter)]).
 
 	test(knn_distance_score_3_gaussian_anomaly_higher_than_normal, true(AnomalyScore > NormalScore)) :-
 		learn_filtered(gaussian_anomalies, [k(5)], Detector),
@@ -195,6 +192,13 @@
 		print_anomaly_detector(Detector).
 
 	% auxiliary predicates
+
+	learn_filtered(Dataset, ExtraOptions, Detector) :-
+		( 	cached_detector_(Dataset, ExtraOptions, Cached) ->
+			Detector = Cached
+		;	learn(Dataset, Detector, [baseline_selection_policy(filter)| ExtraOptions]),
+			assertz(cached_detector_(Dataset, ExtraOptions, Detector))
+		).
 
 	count_class([], _Class, 0).
 	count_class([_-Class-_| Scores], Class, Count) :-
