@@ -13,7 +13,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-10,
+		date is 2026-10-16,
 		comment is 'Unit tests for the "tabu_search" library.'
 	]).
 
@@ -27,9 +27,6 @@
 
 	cover(tabu_search(_, _)).
 	cover(tabu_search(_)).
-
-	test(tabu_search_private_test_access, deterministic) :-
-		tabu_search(quadratic, xoshiro128pp)<<sample_list([a], 1, 1, [a]).
 
 	% quadratic problem - modest step budgets keep CI fast while still
 	% exercising the core search loop and energy improvement
@@ -291,48 +288,6 @@
 		assertion(var(Variable)),
 		assertion(Statistics == [steps(2),acceptances(2),improvements(0),final_tabu_size(2)]).
 
-	test(tabu_search_sampling_preserves_variables, deterministic) :-
-		forall(list::member(Seed, [1,2,3,42,55,2147483647]), (
-			fast_random(xoshiro128pp)::randomize(Seed),
-			Input = [s(Variable),s(a),s(b)],
-			tabu_search(quadratic, xoshiro128pp)<<sample_list(Input, 3, 2, Sample),
-			assertion(var(Variable)),
-			length(Sample, 2),
-			identity_subset(Sample, Input)
-		)).
-
-	test(tabu_search_sampling_boundaries, deterministic) :-
-		tabu_search(quadratic, xoshiro128pp)<<sample_list([], 0, 1, []),
-		tabu_search(quadratic, xoshiro128pp)<<sample_list([a], 1, 0, []),
-		tabu_search(quadratic, xoshiro128pp)<<sample_list([a], 1, 1, [a]),
-		tabu_search(quadratic, xoshiro128pp)<<sample_list([a,b], 2, 2, [a,b]),
-		tabu_search(quadratic, xoshiro128pp)<<sample_list([a,b], 2, 3, [a,b]).
-
-	test(tabu_search_sampling_repeated_values, deterministic) :-
-		fast_random(xoshiro128pp)::randomize(42),
-		tabu_search(quadratic, xoshiro128pp)<<sample_list([a,a,b], 3, 2, Sample),
-		length(Sample, 2),
-		identity_subset(Sample, [a,a,b]).
-
-	test(tabu_search_sampling_repeatable, deterministic(First == Second)) :-
-		fast_random(xoshiro128pp)::randomize(42),
-		tabu_search(quadratic, xoshiro128pp)<<sample_list([a,b,c,d], 4, 2, First),
-		fast_random(xoshiro128pp)::randomize(42),
-		tabu_search(quadratic, xoshiro128pp)<<sample_list([a,b,c,d], 4, 2, Second).
-
-	test(tabu_search_sampling_excluded_positions, deterministic) :-
-		tabu_search(quadratic, xoshiro128pp)<<excluded_subset([a,b,c,d,e], 1, [1,3,5], [b,d]),
-		tabu_search(quadratic, xoshiro128pp)<<excluded_subset([a,b,c,d,e], 1, [2,3], [a,d,e]),
-		tabu_search(quadratic, xoshiro128pp)<<excluded_subset([s(Variable),a,s(Variable),b], 1, [2], Sample),
-		assertion(var(Variable)),
-		assertion(Sample == [s(Variable),s(Variable),b]).
-
-	test(tabu_search_sampling_dense_repeatable, deterministic(First == Second)) :-
-		fast_random(xoshiro128pp)::randomize(42),
-		tabu_search(quadratic, xoshiro128pp)<<sample_list([a,b,c,d], 4, 3, First),
-		fast_random(xoshiro128pp)::randomize(42),
-		tabu_search(quadratic, xoshiro128pp)<<sample_list([a,b,c,d], 4, 3, Second).
-
 	test(tabu_search_progress_completed_steps, deterministic) :-
 		Problem = tabu_search_fixture(full, [a-0,b-1,c-2,d-3], none),
 		Problem::clear_log,
@@ -397,15 +352,9 @@
 		Problem::reports(Reports),
 		assert_reports(Reports, [report(1,0,1,1,0)]).
 
-	quick_check(tabu_search_sampling_properties,
-		sampling_properties(+between(integer, 0, 100), +between(integer, 0, 100), +between(integer, 1, 2147483647)), [n(50)]).
-
 	test(tabu_search_enumerated_candidate_limit, deterministic) :-
 		tabu_search(tabu_search_fixture(enumerated, [a-10,b-4,c-3,d-2], none))::run(_, Energy, [max_steps(2), candidates(2), seed(2147483647)]),
 		assertion(Energy < 10).
-
-	test(tabu_search_sampling_sparse_dense_middle, deterministic) :-
-		forall(list::member(Count, [2,50,98]), sampling_properties(100, Count, 2147483647)).
 
 	test(tabu_search_aspiration_boundaries, deterministic) :-
 		tabu_search(quadratic, xoshiro128pp)<<is_admissible(policy(false, false, false, false, false), a, -1, 0, [a-5], 1, true),
@@ -803,17 +752,6 @@
 
 	% auxiliary predicates
 
-	identity_subset([], _).
-	identity_subset([Head| Tail], Input) :-
-		remove_identical(Head, Input, Rest),
-		identity_subset(Tail, Rest).
-
-	remove_identical(Element, [Head| Tail], Tail) :-
-		Element == Head,
-		!.
-	remove_identical(Element, [Head| Tail], [Head| Rest]) :-
-		remove_identical(Element, Tail, Rest).
-
 	assert_reports([], []).
 	assert_reports([report(Step,Best,Current,Acceptance,Improvement)| Reports], [report(ExpectedStep,ExpectedBest,ExpectedCurrent,ExpectedAcceptance,ExpectedImprovement)| Expected]) :-
 		assertion(Step == ExpectedStep),
@@ -823,26 +761,15 @@
 		assertion(lgtunit::(Improvement =~= ExpectedImprovement)),
 		assert_reports(Reports, Expected).
 
-	sampling_properties(Size, Count, Seed) :-
-		tabu_search_fixture(full, [a-0], none)::numbers(Size, Input),
-		fast_random(xoshiro128pp)::randomize(Seed),
-		tabu_search(quadratic, xoshiro128pp)<<sample_list(Input, Size, Count, First),
-		Expected is min(Size, Count),
-		length(First, Expected),
-		identity_subset(First, Input),
-		fast_random(xoshiro128pp)::randomize(Seed),
-		tabu_search(quadratic, xoshiro128pp)<<sample_list(Input, Size, Count, Second),
-		First == Second.
-
 	check_tenure_capacity(Limit, Limit, _, _, _) :-
 		!.
 	check_tenure_capacity(Step, Limit, Spec, Tabu, Tenure) :-
 		tabu_search(quadratic, xoshiro128pp)<<update_tabu(policy(false, false, false, false, false), Step, Step, 0, 0, Spec, Tabu, NextTabu),
 		length(NextTabu, Size),
 		assertion(Size =< Tenure),
-		( Step >= Tenure - 1 ->
+		(	Step >= Tenure - 1 ->
 			assertion(Size == Tenure)
-		; true
+		;	true
 		),
 		Next is Step + 1,
 		check_tenure_capacity(Next, Limit, Spec, NextTabu, Tenure).

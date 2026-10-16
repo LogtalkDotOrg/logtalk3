@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-12,
+		date is 2026-10-16,
 		comment is 'Tabu search optimization algorithm. Parameterized by a problem object implementing the ``tabu_search_problem_protocol`` protocol and by a random number generator algorithm for the ``fast_random`` library. Minimizes energy with optional problem-defined tabu keys, tenure, aspiration, restart states, neighbor generation, stopping, and progress reporting.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``tabu_search_problem_protocol``.',
@@ -87,7 +87,7 @@
 	]).
 
 	:- uses(fast_random(_RandomAlgorithm_), [
-		between/3, randomize/1, permutation/2, set/4
+		between/3, randomize/1, permutation/2, sample/4
 	]).
 
 	:- uses(type, [
@@ -321,7 +321,8 @@
 			( 	Length =< Cands ->
 				Candidates = AllNeighbors
 			;	% random sample of size Candidates
-				sample_list(AllNeighbors, Length, Cands, Candidates)
+				sample(AllNeighbors, Length, Cands, Subset),
+				permutation(Subset, Candidates)
 			),
 			evaluate_candidates(Policy, Candidates, BestEnergy, Tabu, Step, BestNeighbor, BestNeighborEnergy, Accepted)
 		;	% sample via repeated neighbor_state calls
@@ -498,43 +499,6 @@
 		;	Next = Count
 		),
 		active_tabu_size(Rest, Step, Next, Size).
-
-	% random sample of a list (without replacement)
-
-	sample_list(List, Length, N, Sample) :-
-		(	N >= Length ->
-			Sample = List
-		;	Excluded is Length - N,
-			(	N =< Excluded ->
-				set(N, 1, Length, Indices),
-				indexed_subset(List, 1, Indices, Subset)
-			;	set(Excluded, 1, Length, Indices),
-				excluded_subset(List, 1, Indices, Subset)
-			),
-			permutation(Subset, Sample)
-		).
-
-	indexed_subset(_, _, [], []) :-
-		!.
-	indexed_subset([Head| Tail], Position, [Index| Indices], Sample) :-
-		(	Position =:= Index ->
-			Sample = [Head| Rest],
-			NextIndices = Indices
-		; Sample = Rest,
-			NextIndices = [Index| Indices]
-		),
-		Next is Position + 1,
-		indexed_subset(Tail, Next, NextIndices, Rest).
-
-	excluded_subset(List, _, [], List) :-
-		!.
-	excluded_subset([Head| Tail], Position, [Index| Indices], Sample) :-
-		Next is Position + 1,
-		(	Position =:= Index ->
-			excluded_subset(Tail, Next, Indices, Sample)
-		;	Sample = [Head| Rest],
-			excluded_subset(Tail, Next, [Index| Indices], Rest)
-		).
 
 	% progress reporting
 

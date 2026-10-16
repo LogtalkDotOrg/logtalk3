@@ -231,10 +231,12 @@ Performance
 -----------
 
 For an enumerated neighborhood of size `M` and candidate limit `C < M`,
-sampling generates `min(C, M - C)` distinct random indices. When at most half
+the random library's `sample/4` predicate generates `min(C, M - C)` distinct
+random indices. When at most half
 the neighborhood is requested, these identify values to include; otherwise,
 they identify values to exclude. One list pass extracts the selected subset,
-which is then shuffled. Extraction takes `O(M)` time and shuffling takes
+which the tabu search object then shuffles using `permutation/2` for random
+tie-breaking. Extraction takes `O(M)` time and shuffling takes
 `O(C log C)` time, with `O(C)` auxiliary storage. Index generation adds
 duplicate-rejection and membership-check costs, but never selects more than
 half the available positions. When the full neighborhood fits the limit,

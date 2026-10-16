@@ -35,7 +35,11 @@
 	:- mode(numbers(+non_negative_integer, -list(integer)), one).
 	:- mode(sampling_benchmark(+positive_integer, +positive_integer, +positive_integer, -number), one).
 	:- mode(candidate_benchmark(+positive_integer, +positive_integer, +positive_integer, -number), one).
+
+	:- private(report_/5).
 	:- dynamic(report_/5).
+
+	:- private(event_/1).
 	:- dynamic(event_/1).
 
 	initial_state(State) :-
@@ -102,7 +106,8 @@
 	sampling_benchmark(Size, Count, Repeats, Seconds) :-
 		numbers(Size, List),
 		fast_random(xoshiro128pp)::randomize(42),
-		tabu_search(quadratic, xoshiro128pp)<<sample_list(List, Size, Count, _),
+		fast_random(xoshiro128pp)::sample(List, Size, Count, Subset),
+		fast_random(xoshiro128pp)::permutation(Subset, _),
 		os::cpu_time(Start),
 		repeat_sample(Repeats, List, Size, Count),
 		os::cpu_time(End),
@@ -132,9 +137,9 @@
 	next(State, [Candidate-_| Rest], First, Neighbor) :-
 		State == Candidate,
 		!,
-		( Rest = [Neighbor-_| _] ->
+		(	Rest = [Neighbor-_| _] ->
 			true
-		; Neighbor = First
+		;	Neighbor = First
 		).
 	next(State, [_| Rest], First, Neighbor) :-
 		next(State, Rest, First, Neighbor).
@@ -142,7 +147,8 @@
 	repeat_sample(0, _, _, _) :-
 		!.
 	repeat_sample(Repeats, List, Size, Count) :-
-		tabu_search(quadratic, xoshiro128pp)<<sample_list(List, Size, Count, _),
+		fast_random(xoshiro128pp)::sample(List, Size, Count, Subset),
+		fast_random(xoshiro128pp)::permutation(Subset, _),
 		Next is Repeats - 1,
 		repeat_sample(Next, List, Size, Count).
 
@@ -183,6 +189,7 @@
 
 :- object(tabu_search_inherited_key_fixture,
 	extends(tabu_search_key_fixture(canonical, full, [s(a,1)-0,s(b,1)-1,s(a,2)-0], none))).
+
 :- end_object.
 
 
@@ -191,6 +198,8 @@
 
 	:- public(restart_inputs/1).
 	:- mode(restart_inputs(-list), one).
+
+	:- private(restart_/1).
 	:- dynamic(restart_/1).
 
 	restart_state(Best, State) :-
@@ -229,6 +238,8 @@
 
 	:- public(tenure_inputs/1).
 	:- mode(tenure_inputs(-list), one).
+
+	:- private(tenure_/3).
 	:- dynamic(tenure_/3).
 
 	tabu_tenure(Step, Best, Current, Tenure) :-
@@ -370,4 +381,5 @@
 :- object(tabu_search_category_key_fixture,
 	imports(tabu_search_key_fixture_category),
 	extends(tabu_search_fixture(full, [a-0,b-1], none))).
+
 :- end_object.

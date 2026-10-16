@@ -677,15 +677,17 @@ increment this move counter.</p></li>
 <section id="performance">
 <h2>Performance<a class="headerlink" href="#performance" title="Link to this heading"></a></h2>
 <p>For an enumerated neighborhood of size <code class="docutils literal notranslate"><span class="pre">M</span></code> and candidate limit
-<code class="docutils literal notranslate"><span class="pre">C</span> <span class="pre">&lt;</span> <span class="pre">M</span></code>, sampling generates <code class="docutils literal notranslate"><span class="pre">min(C,</span> <span class="pre">M</span> <span class="pre">-</span> <span class="pre">C)</span></code> distinct random indices.
-When at most half the neighborhood is requested, these identify values
-to include; otherwise, they identify values to exclude. One list pass
-extracts the selected subset, which is then shuffled. Extraction takes
-<code class="docutils literal notranslate"><span class="pre">O(M)</span></code> time and shuffling takes <code class="docutils literal notranslate"><span class="pre">O(C</span> <span class="pre">log</span> <span class="pre">C)</span></code> time, with <code class="docutils literal notranslate"><span class="pre">O(C)</span></code>
-auxiliary storage. Index generation adds duplicate-rejection and
-membership-check costs, but never selects more than half the available
-positions. When the full neighborhood fits the limit, its order is
-preserved without sampling.</p>
+<code class="docutils literal notranslate"><span class="pre">C</span> <span class="pre">&lt;</span> <span class="pre">M</span></code>, the random library’s <code class="docutils literal notranslate"><span class="pre">sample/4</span></code> predicate generates
+<code class="docutils literal notranslate"><span class="pre">min(C,</span> <span class="pre">M</span> <span class="pre">-</span> <span class="pre">C)</span></code> distinct random indices. When at most half the
+neighborhood is requested, these identify values to include; otherwise,
+they identify values to exclude. One list pass extracts the selected
+subset, which the tabu search object then shuffles using
+<code class="docutils literal notranslate"><span class="pre">permutation/2</span></code> for random tie-breaking. Extraction takes <code class="docutils literal notranslate"><span class="pre">O(M)</span></code>
+time and shuffling takes <code class="docutils literal notranslate"><span class="pre">O(C</span> <span class="pre">log</span> <span class="pre">C)</span></code> time, with <code class="docutils literal notranslate"><span class="pre">O(C)</span></code> auxiliary
+storage. Index generation adds duplicate-rejection and membership-check
+costs, but never selects more than half the available positions. When
+the full neighborhood fits the limit, its order is preserved without
+sampling.</p>
 <p>Candidates unable to improve an already selected candidate do not incur
 tabu-membership scans. Candidates improving the global best satisfy
 default aspiration without a scan. Custom aspiration first checks
