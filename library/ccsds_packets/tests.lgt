@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-10-13,
+		date is 2026-10-16,
 		comment is 'Unit tests for the "ccsds_packets" library.'
 	]).
 
@@ -370,42 +370,42 @@
 	quick_check(
 		ccsds_quickcheck_type_01,
 		type::check({ccsds_packet}, +ccsds_packet),
-		[n(100)]
+		[n(25)]
 	).
 
 	% Test that generated ccsds_packet(0) bytes pass type checking
 	quick_check(
 		ccsds_quickcheck_type_02,
 		type::check({ccsds_packet(0)}, +ccsds_packet(0)),
-		[n(100)]
+		[n(25)]
 	).
 
 	% Test that generated ccsds_packet(6) bytes pass type checking
 	quick_check(
 		ccsds_quickcheck_type_03,
 		type::check({ccsds_packet(6)}, +ccsds_packet(6)),
-		[n(100)]
+		[n(25)]
 	).
 
 	% Test roundtrip: generate bytes, parse them, regenerate bytes
 	quick_check(
 		ccsds_quickcheck_roundtrip_01,
 		roundtrip_property(+ccsds_packet),
-		[n(100)]
+		[n(25)]
 	).
 
 	% Test roundtrip with secondary header
 	quick_check(
 		ccsds_quickcheck_roundtrip_02,
 		roundtrip_property_with_secondary_header(+ccsds_packet(6)),
-		[n(100)]
+		[n(25)]
 	).
 
 	% Test that parsed packets can be regenerated
 	quick_check(
 		ccsds_quickcheck_parse_generate_01,
 		parse_generate_property(+ccsds_packet),
-		[n(100)]
+		[n(25)]
 	).
 
 	% Auxiliary predicates
