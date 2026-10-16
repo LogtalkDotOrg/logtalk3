@@ -29,6 +29,10 @@
 		comment is 'Unit tests for the "block_ciphers" library.'
 	]).
 
+	:- uses(list, [
+		append/3
+	]).
+
 	cover(aes128).
 	cover(aes192).
 	cover(aes256).
@@ -390,7 +394,5 @@
 	hex_nibble(0'4, 4). hex_nibble(0'5, 5). hex_nibble(0'6, 6). hex_nibble(0'7, 7).
 	hex_nibble(0'8, 8). hex_nibble(0'9, 9). hex_nibble(0'a, 10). hex_nibble(0'b, 11).
 	hex_nibble(0'c, 12). hex_nibble(0'd, 13). hex_nibble(0'e, 14). hex_nibble(0'f, 15).
-
-	:- uses(list, [append/3]).
 
 :- end_object.

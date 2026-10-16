@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-10-16,
 		comment is 'Unit tests for the "bson" library.'
 	]).
 
@@ -178,26 +178,19 @@
 	test(bson_integer_overflow, error(domain_error(bson_term, {n-9223372036854775808}))) :-
 		bson::generate({n-9223372036854775808}, _).
 
-	test(bson_corpus_canonical_bson, true) :-
+	test(bson_corpus_canonical_bson, all(test_canonical_bson(File))) :-
 		corpus_files(Files),
-		forall(
-			member(File, Files),
-			assertion(File, test_canonical_bson(File))
-		).
+		member(File, Files).
 
-	test(bson_corpus_generate_canonical_bson, true) :-
+	test(bson_corpus_generate_canonical_bson, all(test_generate_canonical_bson(File))) :-
 		corpus_files(Files),
-		forall(
-			member(File, Files),
-			assertion(File, test_generate_canonical_bson(File))
-		).
+		member(File, Files).
 
-	test(bson_corpus_decode_errors, true) :-
+	test(bson_corpus_decode_errors, all(test_decode_errors(File))) :-
 		corpus_files(Files),
-		forall(
-			member(File, Files),
-			assertion(File, test_decode_errors(File))
-		).
+		member(File, Files).
+
+	% auxiliary predicates
 
 	corpus_files(Files) :-
 		^^file_path('test_files', Directory),
