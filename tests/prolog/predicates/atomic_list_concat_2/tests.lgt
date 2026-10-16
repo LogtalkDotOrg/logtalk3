@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paul Brown and Paulo Moura',
-		date is 2022-05-29,
+		date is 2022-10-16,
 		comment is 'Unit tests for the atomic_list_concat/2 predicate.'
 	]).
 
@@ -33,7 +33,7 @@
 		atomic_list_concat/2
 	]).
 
-	quick_check(atomic_list_concat_2_property, atomic_list_concat(+list(atomic), -atom)).
+	quick_check(atomic_list_concat_2_property, atomic_list_concat(+list(atomic), -atom), [n(25)]).
 
 	test(atomic_list_concat_2_empty, deterministic(Res == '')) :-
 		atomic_list_concat([], Res).

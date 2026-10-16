@@ -376,6 +376,8 @@
 	test(sarif_error_02, error(type_error(object_identifier, 42))) :-
 		sarif::generate([tool_spec(dead_code_scanner, entity(42), [])], atom(_)).
 
+	% auxiliary predicates
+
 	prepare_linter_run(Explanations) :-
 		^^file_path('linter_warnings.sarif', ReportFile),
 		^^clean_file(ReportFile),

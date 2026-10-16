@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paul Brown and Paulo Moura',
-		date is 2022-05-29,
+		date is 2022-10-16,
 		comment is 'Unit tests for the atomic_list_concat/3 predicate.'
 	]).
 
@@ -33,7 +33,7 @@
 		atomic_list_concat/3
 	]).
 
-	quick_check(atomic_list_concat_3_property, atomic_list_concat(+list(atomic), +atomic, -atom)).
+	quick_check(atomic_list_concat_3_property, atomic_list_concat(+list(atomic), +atomic, -atom), [n(25)]).
 
 	test(atomic_list_concat_3_three_elements, deterministic(Atom == 'a_42_c')) :-
 		atomic_list_concat([a, 42, c], '_', Atom).
