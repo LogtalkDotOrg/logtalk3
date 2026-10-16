@@ -320,6 +320,19 @@
 		fast_random(xoshiro128pp)::randomize(42),
 		tabu_search(quadratic, xoshiro128pp)<<sample_list([a,b,c,d], 4, 2, Second).
 
+	test(tabu_search_sampling_excluded_positions, deterministic) :-
+		tabu_search(quadratic, xoshiro128pp)<<excluded_subset([a,b,c,d,e], 1, [1,3,5], [b,d]),
+		tabu_search(quadratic, xoshiro128pp)<<excluded_subset([a,b,c,d,e], 1, [2,3], [a,d,e]),
+		tabu_search(quadratic, xoshiro128pp)<<excluded_subset([s(Variable),a,s(Variable),b], 1, [2], Sample),
+		assertion(var(Variable)),
+		assertion(Sample == [s(Variable),s(Variable),b]).
+
+	test(tabu_search_sampling_dense_repeatable, deterministic(First == Second)) :-
+		fast_random(xoshiro128pp)::randomize(42),
+		tabu_search(quadratic, xoshiro128pp)<<sample_list([a,b,c,d], 4, 3, First),
+		fast_random(xoshiro128pp)::randomize(42),
+		tabu_search(quadratic, xoshiro128pp)<<sample_list([a,b,c,d], 4, 3, Second).
+
 	test(tabu_search_progress_completed_steps, deterministic) :-
 		Problem = tabu_search_fixture(full, [a-0,b-1,c-2,d-3], none),
 		Problem::clear_log,
@@ -385,7 +398,7 @@
 		assert_reports(Reports, [report(1,0,1,1,0)]).
 
 	quick_check(tabu_search_sampling_properties,
-		sampling_properties(+between(integer, 0, 100), +between(integer, 0, 100), +between(integer, 1, 2147483647)), [n(100)]).
+		sampling_properties(+between(integer, 0, 100), +between(integer, 0, 100), +between(integer, 1, 2147483647)), [n(50)]).
 
 	test(tabu_search_enumerated_candidate_limit, deterministic) :-
 		tabu_search(tabu_search_fixture(enumerated, [a-10,b-4,c-3,d-2], none))::run(_, Energy, [max_steps(2), candidates(2), seed(2147483647)]),

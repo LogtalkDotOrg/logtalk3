@@ -504,51 +504,37 @@
 	sample_list(List, Length, N, Sample) :-
 		(	N >= Length ->
 			Sample = List
-		;	Sparse is min(N, Length - N),
-			(	Sparse =< 20 ->
-				set(Sparse, 1, Length, Indices),
-				(	N =< Length - N ->
-					Include = true
-				;	Include = false
-				),
-				indexed_subset(List, 1, Indices, Include, Subset)
-			;	sample_list_(N, Length, List, Subset)
+		;	Excluded is Length - N,
+			(	N =< Excluded ->
+				set(N, 1, Length, Indices),
+				indexed_subset(List, 1, Indices, Subset)
+			;	set(Excluded, 1, Length, Indices),
+				excluded_subset(List, 1, Indices, Subset)
 			),
 			permutation(Subset, Sample)
 		).
 
-	indexed_subset(List, _, [], false, List) :-
+	indexed_subset(_, _, [], []) :-
 		!.
-	indexed_subset(_, _, [], true, []) :-
-		!.
-	indexed_subset([Head| Tail], Position, [Index| Indices], Include, Sample) :-
+	indexed_subset([Head| Tail], Position, [Index| Indices], Sample) :-
 		(	Position =:= Index ->
-			Match = true,
+			Sample = [Head| Rest],
 			NextIndices = Indices
-		;	Match = false,
+		; Sample = Rest,
 			NextIndices = [Index| Indices]
 		),
-		(	Match == Include ->
-			Sample = [Head| Rest]
-		;	Sample = Rest
-		),
 		Next is Position + 1,
-		indexed_subset(Tail, Next, NextIndices, Include, Rest).
+		indexed_subset(Tail, Next, NextIndices, Rest).
 
-	sample_list_(0, _, _, []) :-
+	excluded_subset(List, _, [], List) :-
 		!.
-	sample_list_(N, N, List, List) :-
-		!.
-	sample_list_(N, Length, [Head| Tail], Sample) :-
-		between(1, Length, Draw),
-		Length1 is Length - 1,
-		(	Draw =< N ->
-			Sample = [Head| Rest],
-			N1 is N - 1
-		;	Sample = Rest,
-			N1 = N
-		),
-		sample_list_(N1, Length1, Tail, Rest).
+	excluded_subset([Head| Tail], Position, [Index| Indices], Sample) :-
+		Next is Position + 1,
+		(	Position =:= Index ->
+			excluded_subset(Tail, Next, Indices, Sample)
+		;	Sample = [Head| Rest],
+			excluded_subset(Tail, Next, [Index| Indices], Rest)
+		).
 
 	% progress reporting
 

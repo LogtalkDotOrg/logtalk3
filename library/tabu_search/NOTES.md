@@ -231,12 +231,14 @@ Performance
 -----------
 
 For an enumerated neighborhood of size `M` and candidate limit `C < M`,
-sampling uses one list pass and shuffles only the selected subset. When at
-most 20 positions need to be included or excluded, uniform random positions
-are drawn first; other cases use sequential selection with inclusion
-probability equal to the number still needed divided by the number remaining.
-Expected sampling work is `O(M + C log C)`, with `O(C)` auxiliary storage.
-When the full neighborhood fits the limit, its order is preserved.
+sampling generates `min(C, M - C)` distinct random indices. When at most half
+the neighborhood is requested, these identify values to include; otherwise,
+they identify values to exclude. One list pass extracts the selected subset,
+which is then shuffled. Extraction takes `O(M)` time and shuffling takes
+`O(C log C)` time, with `O(C)` auxiliary storage. Index generation adds
+duplicate-rejection and membership-check costs, but never selects more than
+half the available positions. When the full neighborhood fits the limit,
+its order is preserved without sampling.
 
 Candidates unable to improve an already selected candidate do not incur
 tabu-membership scans. Candidates improving the global best satisfy default
