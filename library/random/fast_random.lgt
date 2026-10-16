@@ -23,9 +23,9 @@
 	implements((pseudo_random_protocol, sampling_protocol))).
 
 	:- info([
-		version is 3:1:0,
+		version is 3:2:0,
 		author is 'Paulo Moura',
-		date is 2026-10-10,
+		date is 2026-10-16,
 		comment is 'Fast portable random number generator predicates.',
 		parameters is [
 			'Algorithm' - 'Random number generator algorithm. One of ``as183``, ``splitmix64``, ``xoshiro128pp``, ``xoshiro128ss``, ``xoshiro256pp``, ``xoshiro256ss``, ``well512a``.'
@@ -386,6 +386,7 @@
 		:- include(fast_random_algorithms_32_bits).
 	:- endif.
 
+	:- include(list_sampling).
 	:- include(sampling).
 
 :- end_object.

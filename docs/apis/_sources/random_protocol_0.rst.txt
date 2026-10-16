@@ -14,8 +14,8 @@ Random number generator protocol. The predicates are declared as synchronized wh
 |    ``logtalk_load(random(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 3:3:0
-| **Date:** 2023-11-24
+| **Version:** 3:4:0
+| **Date:** 2026-10-16
 
 | **Compilation flags:**
 |    ``static``
@@ -186,6 +186,44 @@ Enumerates the elements of a list in random order. Fails if the list is empty.
 |    ``enumerate(List,Random)``
 | **Mode and number of proofs:**
 |    ``enumerate(+list(term),--term)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: sample/3
+.. _random_protocol/0::sample/3:
+
+``sample/3``
+^^^^^^^^^^^^
+
+Returns a random sample without replacement, preserving source order and element identity. Returns the whole list when the requested size is at least its length.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sample(List,Size,Sample)``
+| **Mode and number of proofs:**
+|    ``sample(+list,+non_negative_integer,-list)`` - ``one``
+
+
+------------
+
+.. index:: sample/4
+.. _random_protocol/0::sample/4:
+
+``sample/4``
+^^^^^^^^^^^^
+
+Returns a random sample without replacement using the supplied list length, preserving source order and element identity. The supplied length must equal the actual list length and is not verified. Returns the whole list when the requested size is at least its length.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sample(List,Length,Size,Sample)``
+| **Mode and number of proofs:**
+|    ``sample(+list,+non_negative_integer,+non_negative_integer,-list)`` - ``one``
 
 
 ------------

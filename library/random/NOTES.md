@@ -124,4 +124,4 @@ All random objects implement the `sampling_protocol` protocol. To maximize
 performance, the shared implementations of the sampling predicates is defined
 in the `sampling.lgt` file that's included in the random objects. This allows
 these predicates to call the basic `random/1` and `random/3` predicates as
-locally defined predicates.
+locally defined predicates. Similar for the `list_sampling.lgt` file.

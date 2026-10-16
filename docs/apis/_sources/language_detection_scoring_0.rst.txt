@@ -14,8 +14,8 @@ Shared portable language detection scoring predicates.
 |    ``logtalk_load(language_detection(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-09-06
+| **Version:** 1:1:0
+| **Date:** 2026-10-15
 
 | **Compilation flags:**
 |    ``static``
@@ -77,6 +77,44 @@ Normalizes non-negative scores to sum to one or returns an empty list when their
 |    ``normalize_scores(RawScores,Scores)``
 | **Mode and number of proofs:**
 |    ``normalize_scores(+list(pair(atom,number)),-list(pair(atom,float)))`` - ``one``
+
+
+------------
+
+.. index:: squared_norm/2
+.. _language_detection_scoring/0::squared_norm/2:
+
+``squared_norm/2``
+^^^^^^^^^^^^^^^^^^
+
+Computes the squared norm of a sparse count vector.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``squared_norm(Counts,SquareSum)``
+| **Mode and number of proofs:**
+|    ``squared_norm(+list(pair(atom,positive_integer)),-float)`` - ``one``
+
+
+------------
+
+.. index:: cosine_similarity/5
+.. _language_detection_scoring/0::cosine_similarity/5:
+
+``cosine_similarity/5``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes cosine similarity using precomputed squared norms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cosine_similarity(Counts1,SquareSum1,Counts2,SquareSum2,Similarity)``
+| **Mode and number of proofs:**
+|    ``cosine_similarity(+list,+float,+list,+float,-float)`` - ``one``
 
 
 ------------

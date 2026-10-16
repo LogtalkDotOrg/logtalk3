@@ -14,8 +14,8 @@ Shared predicates for language detection profiles.
 |    ``logtalk_load(language_detection(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-09-09
+| **Version:** 1:1:0
+| **Date:** 2026-10-15
 
 | **Compilation flags:**
 |    ``static``
@@ -60,6 +60,25 @@ Returns trigram counts derived from the profile stop-word inventory.
 
 ------------
 
+.. index:: trigram_counts/2
+.. _language_profile_common/0::trigram_counts/2:
+
+``trigram_counts/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns the profile trigram counts and their squared norm, using cached values when available.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``trigram_counts(Counts,SquareSum)``
+| **Mode and number of proofs:**
+|    ``trigram_counts(-list(pair(atom,positive_integer)),-float)`` - ``one``
+
+
+------------
+
 Protected predicates
 --------------------
 
@@ -68,7 +87,24 @@ Protected predicates
 Private predicates
 ------------------
 
-(no local declarations; see entity ancestors if any)
+.. index:: trigram_counts_/2
+.. _language_profile_common/0::trigram_counts_/2:
+
+``trigram_counts_/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns cached profile trigram counts and their squared norm when available.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``trigram_counts_(Counts,SquareSum)``
+| **Mode and number of proofs:**
+|    ``trigram_counts_(-list(pair(atom,positive_integer)),-float)`` - ``zero_or_one``
+
+
+------------
 
 Operators
 ---------

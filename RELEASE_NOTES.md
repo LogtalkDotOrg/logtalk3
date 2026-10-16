@@ -134,6 +134,8 @@ using Lasso regression coefficients.
 
 * ADDED: New `linear_algebra` library predicate `symmetric_eigen_partial/7`.
 
+* ADDED: New `random` library `sample/3-4` predicates.
+
 * CHANGED: The `mlp_classifier` library to require ground classifier terms,
 complete diagnostics, and consistency between model fields, diagnostics, and
 effective training options. Previously accepted incomplete or inconsistent

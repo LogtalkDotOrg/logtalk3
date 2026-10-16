@@ -23,17 +23,26 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:15:0,
+		version is 0:16:0,
 		author is 'Paulo Moura',
-		date is 2026-01-26,
+		date is 2026-10-16,
 		comment is 'Unit tests for the "random" library.',
 		parnames is ['RandomObject']
 	]).
 
 	cover(_RandomObject_).
 
-	:- uses(list, [length/2, min/2, max/2]).
-	:- uses(integer, [between/3]).
+	:- uses(list, [
+		length/2, min/2, max/2
+	]).
+
+	:- uses(integer, [
+		between/3
+	]).
+
+	:- uses(lgtunit, [
+		assertion/1
+	]).
 
 	% random/1 tests
 
@@ -175,6 +184,63 @@
 		% 2% margin for checking for an even distribution
 		length(List, Length).
 
+	% sample/3-4 tests
+
+	test(random_sample_boundaries, deterministic) :-
+		_RandomObject_::sample([], 0, []),
+		_RandomObject_::sample([], 1, []),
+		_RandomObject_::sample([a], 0, []),
+		_RandomObject_::sample([a,b], 2, [a,b]),
+		_RandomObject_::sample([a,b], 3, [a,b]),
+		_RandomObject_::sample([], 0, 0, []),
+		_RandomObject_::sample([], 0, 1, []),
+		_RandomObject_::sample([a], 1, 0, []),
+		_RandomObject_::sample([a,b], 2, 2, [a,b]),
+		_RandomObject_::sample([a,b], 2, 3, [a,b]).
+
+	test(random_sample_invalid_size, fail) :-
+		_RandomObject_::sample([a,b], -1, _).
+
+	test(random_sample_invalid_length, fail) :-
+		_RandomObject_::sample([a,b], -1, 1, _).
+
+	test(random_sample_preserves_positions, deterministic) :-
+		forall(
+			between(0, 7, Count),
+			(	Input = [s(Variable),s(a),a,a,s(Other),s(Variable),b],
+				_RandomObject_::sample(Input, 7, Count, Sample),
+				length(Sample, Count),
+				assertion(var(Variable)),
+				assertion(var(Other)),
+				identity_subsequence(Input, Sample),
+				_RandomObject_::sample(Input, Count, SampleWithoutLength),
+				length(SampleWithoutLength, Count),
+				assertion(var(Variable)),
+				assertion(var(Other)),
+				identity_subsequence(Input, SampleWithoutLength)
+			)
+		).
+
+	test(random_sample_repeatable, deterministic, [condition(not_backend_random_object)]) :-
+		forall(
+			between(0, 5, Count),
+			(	_RandomObject_::get_seed(Seed),
+				_RandomObject_::sample([a,b,c,d], Count, First),
+				_RandomObject_::get_seed(FirstSeed),
+				_RandomObject_::set_seed(Seed),
+				_RandomObject_::sample([a,b,c,d], 4, Count, Second),
+				_RandomObject_::get_seed(SecondSeed),
+				assertion(First == Second),
+				assertion(FirstSeed == SecondSeed)
+			)
+		).
+
+	quick_check(random_sample_properties,
+		sample_properties(+between(integer, 0, 100), +between(integer, 0, 100)), [n(50)]).
+
+	test(random_sample_sparse_dense_middle, all(sample_properties(100, Count))) :-
+		list::member(Count, [1,2,49,50,51,98,99]).
+
 	% auxiliary predicates
 
 	random_between_3_positive(Random) :-
@@ -222,5 +288,23 @@
 
 	not_backend_random_object :-
 		_RandomObject_ \== backend_random.
+
+	identity_subsequence(_, []) :-
+		!.
+	identity_subsequence([Head| Tail], [Element| Rest]) :-
+		(	Head == Element ->
+			identity_subsequence(Tail, Rest)
+		;	identity_subsequence(Tail, [Element| Rest])
+		).
+
+	sample_properties(Size, Count) :-
+		findall(Number, between(1, Size, Number), Input),
+		Expected is min(Size, Count),
+		_RandomObject_::sample(Input, Size, Count, WithLength),
+		length(WithLength, Expected),
+		identity_subsequence(Input, WithLength),
+		_RandomObject_::sample(Input, Count, WithoutLength),
+		length(WithoutLength, Expected),
+		identity_subsequence(Input, WithoutLength).
 
 :- end_object.

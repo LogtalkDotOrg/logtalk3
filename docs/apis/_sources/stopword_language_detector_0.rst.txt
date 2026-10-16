@@ -14,8 +14,8 @@ Language detection strategy using discriminative stop-word evidence.
 |    ``logtalk_load(language_detection(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-09-06
+| **Version:** 1:1:0
+| **Date:** 2026-10-15
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -24,6 +24,7 @@ Language detection strategy using discriminative stop-word evidence.
 | **Implements:**
 |    ``public`` :ref:`language_detection_strategy_protocol <language_detection_strategy_protocol/0>`
 | **Uses:**
+|    :ref:`avltree <avltree/0>`
 |    :ref:`language_profiles <language_profiles/0>`
 |    :ref:`list <list/0>`
 |    :ref:`tokenizer(Representation,Language) <tokenizer/2>`

@@ -22,9 +22,9 @@
 :- protocol(random_protocol).
 
 	:- info([
-		version is 3:3:0,
+		version is 3:4:0,
 		author is 'Paulo Moura',
-		date is 2023-11-24,
+		date is 2026-10-16,
 		comment is 'Random number generator protocol. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.',
 		see_also is [random, backend_random, fast_random]
 	]).
@@ -83,6 +83,20 @@
 	:- info(enumerate/2, [
 		comment is 'Enumerates the elements of a list in random order. Fails if the list is empty.',
 		argnames is ['List', 'Random']
+	]).
+
+	:- public(sample/3).
+	:- mode(sample(+list, +non_negative_integer, -list), one).
+	:- info(sample/3, [
+		comment is 'Returns a random sample without replacement, preserving source order and element identity. Returns the whole list when the requested size is at least its length.',
+		argnames is ['List', 'Size', 'Sample']
+	]).
+
+	:- public(sample/4).
+	:- mode(sample(+list, +non_negative_integer, +non_negative_integer, -list), one).
+	:- info(sample/4, [
+		comment is 'Returns a random sample without replacement using the supplied list length, preserving source order and element identity. The supplied length must equal the actual list length and is not verified. Returns the whole list when the requested size is at least its length.',
+		argnames is ['List', 'Length', 'Size', 'Sample']
 	]).
 
 	:- public(permutation/2).
