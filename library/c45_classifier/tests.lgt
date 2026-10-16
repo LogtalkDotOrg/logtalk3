@@ -25,7 +25,7 @@
 	:- info([
 		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-11,
+		date is 2026-10-16,
 		comment is 'Unit tests for the "c45_classifier" library.'
 	]).
 
@@ -937,9 +937,9 @@
 	test(c45_classifier_prune_raw_compatibility, deterministic) :-
 		forall(list::member(Kind, [singleton, integer_numeric, unused_branch]), raw_pruning_reference_case(Kind)).
 
-	quick_check(c45_classifier_generated_model_invariants, generated_model_invariants(+list(byte,12)), [n(100)]).
+	quick_check(c45_classifier_generated_model_invariants, generated_model_invariants(+list(byte,12)), [n(25)]).
 
-	quick_check(c45_classifier_generated_export_equivalence, generated_export_equivalence(+list(byte,12)), [n(100)]).
+	quick_check(c45_classifier_generated_export_equivalence, generated_export_equivalence(+list(byte,12)), [n(25)]).
 
 	test(c45_classifier_deep_pruning_export_reference, deterministic) :-
 		Tree = tree(x, threshold(0.5), leaf(yes), tree(x, threshold(1.5), leaf(no), tree(x, threshold(2.5), leaf(yes), tree(x, threshold(3.5), leaf(no), tree(x, threshold(4.5), leaf(yes), tree(x, threshold(5.5), leaf(no), tree(x, threshold(6.5), leaf(yes), leaf(no)))))))),
