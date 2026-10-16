@@ -29,8 +29,13 @@
 		comment is 'Shared joint nearest-neighbor feature selection for Relief, ReliefF, and RReliefF.'
 	]).
 
-	:- uses(list, [length/2, member/2, memberchk/2, nth1/3]).
-	:- uses(type, [valid/2, check/3]).
+	:- uses(list, [
+		length/2, member/2, memberchk/2, nth1/3
+	]).
+
+	:- uses(type, [
+		valid/2, check/3
+	]).
 
 	:- protected(relief_model/1).
 	:- mode(relief_model(-atom), one).

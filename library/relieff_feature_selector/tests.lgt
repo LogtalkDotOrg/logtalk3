@@ -19,16 +19,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tests, extends(lgtunit)).
+:- object(tests,
+	extends(lgtunit)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-07,
-		comment is 'Unit tests for the multiclass ReliefF feature selector library.'
+		date is 2026-10-16,
+		comment is 'Unit tests for the "relieff_feature_selector" library.'
 	]).
-	:- uses(lgtunit, [op(700, xfx, =~=), (=~=)/2, assertion/1]).
-	:- uses(list, [memberchk/2]).
+
+	:- uses(lgtunit, [
+		op(700, xfx, =~=), (=~=)/2, assertion/1
+	]).
+
+	:- uses(list, [
+		memberchk/2
+	]).
 
 	cover(relieff_feature_selector).
 	cover(relief_feature_selector_common).
@@ -93,12 +100,11 @@
 		relieff_feature_selector::learn(Dataset, Second, [sample_size(20)]),
 		assertion(First == Second).
 
-	test(relieff_feature_selector_all_no_rng, deterministic) :-
+	test(relieff_feature_selector_all_no_rng, deterministic(Before == After)) :-
 		multiclass(Dataset),
 		fast_random(xoshiro128pp)::get_seed(Before),
 		relieff_feature_selector::learn(Dataset, _),
-		fast_random(xoshiro128pp)::get_seed(After),
-		assertion(Before == After).
+		fast_random(xoshiro128pp)::get_seed(After).
 
 	test(relieff_feature_selector_repeated_options, deterministic) :-
 		multiclass(Dataset),
@@ -209,15 +215,14 @@
 		assertion(Position >= 1),
 		assertion(Position =< 7).
 
-	test(relieff_feature_selector_sampling_with_replacement, deterministic) :-
+	test(relieff_feature_selector_sampling_with_replacement, deterministic(Count =< 7)) :-
 		multiclass(Dataset),
 		relieff_feature_selector::learn(Dataset, Selector, [sample_size(100)]),
 		relieff_feature_selector::diagnostics(Selector, Diagnostics),
 		memberchk(samples(Samples), Diagnostics),
 		list::length(Samples, 100),
 		sort(Samples, Unique),
-		list::length(Unique, Count),
-		assertion(Count =< 7).
+		list::length(Unique, Count).
 
 	test(relieff_feature_selector_rng_failure, deterministic) :-
 		multiclass(Dataset),
@@ -355,7 +360,7 @@
 		relieff_feature_selector::predicate_property(learn(_, _, _), defined_in(relief_feature_selector_common)),
 		relieff_feature_selector::predicate_property(valid_option(_), declared_in(options_protocol)).
 
-	test(relieff_feature_selector_default_top_ten_all_scores, deterministic) :-
+	test(relieff_feature_selector_default_top_ten_all_scores, deterministic(Selected == [z, a, b, c, d, e, f, g, h, i])) :-
 		Names = [z, a, b, c, d, e, f, g, h, i, j, k],
 		findall(Name-continuous, list::member(Name, Names), Declarations),
 		findall(Name-0, list::member(Name, Names), Zero),
@@ -364,12 +369,13 @@
 		relieff_feature_selector::learn(Dataset, Selector),
 		relieff_feature_selector::feature_scores(Selector, Scores),
 		list::length(Scores, 12),
-		relieff_feature_selector::selected_features(Selector, Selected),
-		assertion(Selected == [z, a, b, c, d, e, f, g, h, i]).
+		relieff_feature_selector::selected_features(Selector, Selected).
 
 	test(relieff_feature_selector_unknown_category, error(domain_error(feature_value, color-green))) :-
 		Dataset = relief_test_dataset([color-[red, blue]], [[color-red]-a, [color-red]-a, [color-blue]-b, [color-green]-b]),
 		relieff_feature_selector::learn(Dataset, _, [missing_values(probabilistic)]).
+
+	% auziliary predicates
 
 	multiclass(relief_test_dataset([signal-continuous], [
 		[signal-0]-a, [signal-1]-a, [signal-3]-b, [signal-4]-b, [signal-5]-b, [signal-8]-c, [signal-9]-c])).
