@@ -23,24 +23,24 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-06,
+		date is 2026-10-16,
 		comment is 'Unit tests for the "uuid" library.'
 	]).
 
 	cover(uuid).
 	cover(uuid(_)).
 
-	quick_check(uuid_v1_valid, uuid_v1_valid(+list(byte,6), -chars)).
-	quick_check(uuid_v1_offset_valid, uuid_v1_offset_valid(+list(byte,6), -chars)).
-	quick_check(uuid_v3_valid, uuid_v3_valid(+list(byte), -chars)).
-	quick_check(uuid_v4_valid, uuid_v4_valid(-chars)).
+	quick_check(uuid_v1_valid, uuid_v1_valid(+list(byte,6), -chars), [n(50)]).
+	quick_check(uuid_v1_offset_valid, uuid_v1_offset_valid(+list(byte,6), -chars), [n(50)]).
+	quick_check(uuid_v3_valid, uuid_v3_valid(+list(byte), -chars), [n(50)]).
+	quick_check(uuid_v4_valid, uuid_v4_valid(-chars), [n(50)]).
 	:- if(current_prolog_flag(bounded, false)).
-		quick_check(uuid_v5_valid, uuid_v5_valid(+list(byte), -chars)).
+		quick_check(uuid_v5_valid, uuid_v5_valid(+list(byte), -chars), [n(50)]).
 	:- endif.
-	quick_check(uuid_v7_valid, uuid_v7_valid(-chars)).
-	quick_check(uuid_v7_offset_valid, uuid_v7_offset_valid(-chars)).
+	quick_check(uuid_v7_valid, uuid_v7_valid(-chars), [n(50)]).
+	quick_check(uuid_v7_offset_valid, uuid_v7_offset_valid(-chars), [n(50)]).
 
 	test(uuid_nil_atom, true(atom(UUID))) :-
 		uuid(atom)::uuid_nil(UUID).

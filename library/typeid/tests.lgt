@@ -23,18 +23,18 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-24,
+		date is 2026-10-16,
 		comment is 'Unit tests for the "typeid" library.'
 	]).
 
 	cover(typeid).
 	cover(typeid(_)).
 
-	quick_check(typeid_valid, typeid_valid(-chars)).
-	quick_check(typeid_prefixed_valid, typeid_prefixed_valid(-chars)).
-	quick_check(typeid_round_trip, typeid_round_trip(-chars)).
+	quick_check(typeid_valid, typeid_valid(-chars), [n(50)]).
+	quick_check(typeid_prefixed_valid, typeid_prefixed_valid(-chars), [n(50)]).
+	quick_check(typeid_round_trip, typeid_round_trip(-chars), [n(50)]).
 
 	% TypeID specification example (README "Type-safe" example):
 	% typeid: prefix_01h2xcejqtf2nbrexx3vqjhp41

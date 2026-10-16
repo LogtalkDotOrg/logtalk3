@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:1:0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-26,
+		date is 2026-10-16,
 		comment is 'Unit tests for the "snowflakeid" library.'
 	]).
 
@@ -81,10 +81,10 @@
 	test(snowflakeid_generate_1_error_epoch_future, error(domain_error(snowflakeid_epoch, 9999999999999))) :-
 		snowflakeid(atom, 9999999999999, 1, 41, 10, 12, 1)::generate(_).
 
-	quick_check(snowflakeid_default_valid, snowflakeid(-atom)).
-	quick_check(snowflakeid_twitter_integer_valid, snowflakeid_twitter({integer}, -integer)).
-	quick_check(snowflakeid_sonyflake_atom_valid, snowflakeid_sonyflake({atom}, -atom)).
-	quick_check(snowflakeid_instagram_codes_valid, snowflakeid_instagram({codes}, -codes)).
+	quick_check(snowflakeid_default_valid, snowflakeid(-atom), [n(50)]).
+	quick_check(snowflakeid_twitter_integer_valid, snowflakeid_twitter({integer}, -integer), [n(50)]).
+	quick_check(snowflakeid_sonyflake_atom_valid, snowflakeid_sonyflake({atom}, -atom), [n(50)]).
+	quick_check(snowflakeid_instagram_codes_valid, snowflakeid_instagram({codes}, -codes), [n(50)]).
 
 	snowflakeid(ID) :-
 		snowflakeid::generate(ID).

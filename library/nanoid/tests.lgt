@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-26,
+		date is 2026-10-16,
 		comment is 'Unit tests for the "nanoid" library.'
 	]).
 
@@ -79,10 +79,10 @@
 	test(nanoid_generate_1_error_alphabet_domain_duplicates, error(domain_error(nanoid_alphabet, 'aabc'))) :-
 		nanoid(atom, 10, 'aabc')::generate(_).
 
-	quick_check(nanoid_default_valid, nanoid(-atom)).
-	quick_check(nanoid_atom_valid, nanoid({atom}, +between(integer,1,64), {'_-0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'}, -atom)).
-	quick_check(nanoid_chars_valid, nanoid({chars}, +between(integer,1,64), {[a,b,c,d,e,f,'0','1','2','3']}, -chars)).
-	quick_check(nanoid_codes_valid, nanoid({codes}, +between(integer,1,64), {[97,98,99,100,101,102,48,49,50,51]}, -codes)).
+	quick_check(nanoid_default_valid, nanoid(-atom), [n(50)]).
+	quick_check(nanoid_atom_valid, nanoid({atom}, +between(integer,1,64), {'_-0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'}, -atom), [n(50)]).
+	quick_check(nanoid_chars_valid, nanoid({chars}, +between(integer,1,64), {[a,b,c,d,e,f,'0','1','2','3']}, -chars), [n(50)]).
+	quick_check(nanoid_codes_valid, nanoid({codes}, +between(integer,1,64), {[97,98,99,100,101,102,48,49,50,51]}, -codes), [n(50)]).
 
 	nanoid(NanoID) :-
 		nanoid::generate(NanoID).

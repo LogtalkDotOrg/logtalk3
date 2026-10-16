@@ -23,19 +23,19 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2022-11-23,
+		date is 2026-10-16,
 		comment is 'Unit tests for the "ids" library.'
 	]).
 
 	cover(ids).
 	cover(ids(_, _)).
 
-	quick_check(id_default_valid, ids(-atom)).
-	quick_check(id_valid(atom),  ids({atom},  +between(integer,1,30), -atom)).
-	quick_check(id_valid(chars), ids({chars}, +between(integer,1,30), -chars)).
-	quick_check(id_valid(codes), ids({codes}, +between(integer,1,30), -codes)).
+	quick_check(id_default_valid, ids(-atom), [n(50)]).
+	quick_check(id_valid(atom),  ids({atom},  +between(integer,1,30), -atom), [n(50)]).
+	quick_check(id_valid(chars), ids({chars}, +between(integer,1,30), -chars), [n(50)]).
+	quick_check(id_valid(codes), ids({codes}, +between(integer,1,30), -codes), [n(50)]).
 
 	ids(Identifier) :-
 		ids::generate(Identifier).

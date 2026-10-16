@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-26,
+		date is 2026-10-16,
 		comment is 'Unit tests for the "cuid2" library.'
 	]).
 
@@ -88,10 +88,10 @@
 	test(cuid2_generate_1_error_alphabet_domain_no_letter, error(domain_error(cuid2_alphabet, '0123456789'))) :-
 		cuid2(atom, 10, '0123456789')::generate(_).
 
-	quick_check(cuid2_default_valid, cuid2(-atom)).
-	quick_check(cuid2_atom_valid, cuid2({atom}, +between(integer,1,64), {'abcdefghijklmnopqrstuvwxyz0123456789'}, -atom)).
-	quick_check(cuid2_chars_valid, cuid2({chars}, +between(integer,1,64), {'abcdef012345'}, -chars)).
-	quick_check(cuid2_codes_valid, cuid2({codes}, +between(integer,1,64), {'abcdef012345'}, -codes)).
+	quick_check(cuid2_default_valid, cuid2(-atom), [n(50)]).
+	quick_check(cuid2_atom_valid, cuid2({atom}, +between(integer,1,64), {'abcdefghijklmnopqrstuvwxyz0123456789'}, -atom), [n(50)]).
+	quick_check(cuid2_chars_valid, cuid2({chars}, +between(integer,1,64), {'abcdef012345'}, -chars), [n(50)]).
+	quick_check(cuid2_codes_valid, cuid2({codes}, +between(integer,1,64), {'abcdef012345'}, -codes), [n(50)]).
 
 	cuid2(Cuid2) :-
 		cuid2::generate(Cuid2).
