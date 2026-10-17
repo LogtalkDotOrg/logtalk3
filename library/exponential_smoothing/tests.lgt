@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-02,
+		date is 2026-10-17,
 		comment is 'Unit tests for the "exponential_smoothing" library.'
 	]).
 
@@ -41,10 +41,17 @@
 		sum/2
 	]).
 
+	:- private(cached_forecaster_/3).
+	:- dynamic(cached_forecaster_/3).
+
 	cover(exponential_smoothing).
 	cover(exponential_smoothing_common).
 
+	setup :-
+		retractall(cached_forecaster_(_, _, _)).
+
 	cleanup :-
+		retractall(cached_forecaster_(_, _, _)),
 		^^clean_file('test_output.pl'),
 		^^clean_file('test_output_transformed.pl'),
 		^^clean_file('test_output_box_cox_auto.pl'),
@@ -57,10 +64,10 @@
 		exponential_smoothing::forecast(Forecaster, 3, Forecasts).
 
 	test(exponential_smoothing_simple_linear_state, deterministic(Level =~= 18.0625)) :-
-		exponential_smoothing::learn(linear_trend, exponential_smoothing_forecaster(simple, level(Level), [0.5], _Diagnostics), [model(simple), alpha(0.5)]).
+		cached_forecaster(linear_trend, exponential_smoothing_forecaster(simple, level(Level), [0.5], _Diagnostics), [model(simple), alpha(0.5)]).
 
 	test(exponential_smoothing_simple_linear_diagnostics, deterministic) :-
-		exponential_smoothing::learn(linear_trend, Forecaster, [model(simple), alpha(0.5)]),
+		cached_forecaster(linear_trend, Forecaster, [model(simple), alpha(0.5)]),
 		exponential_smoothing::diagnostics(Forecaster, Diagnostics),
 		assertion(memberchk(sum_squared_error(54.328125), Diagnostics)),
 		assertion(memberchk(mean_squared_error(10.865625), Diagnostics)),
@@ -69,7 +76,7 @@
 		assertion(memberchk(evaluations(0), Diagnostics)).
 
 	test(exponential_smoothing_holt_linear, deterministic(Forecasts == [22.0, 24.0, 26.0])) :-
-		exponential_smoothing::learn(linear_trend, Forecaster, [model(holt), alpha(0.2), beta(0.1)]),
+		cached_forecaster(linear_trend, Forecaster, [model(holt), alpha(0.2), beta(0.1)]),
 		exponential_smoothing::forecast(Forecaster, 3, Forecasts).
 
 	test(exponential_smoothing_holt_regression_initialization, deterministic(Forecasts == [22.0, 24.0, 26.0])) :-
@@ -77,7 +84,7 @@
 		exponential_smoothing::forecast(Forecaster, 3, Forecasts).
 
 	test(exponential_smoothing_holt_damped_phi_one, deterministic(DampedForecasts == HoltForecasts)) :-
-		exponential_smoothing::learn(linear_trend, Holt, [model(holt), alpha(0.2), beta(0.1)]),
+		cached_forecaster(linear_trend, Holt, [model(holt), alpha(0.2), beta(0.1)]),
 		exponential_smoothing::learn(linear_trend, Damped, [model(holt_damped), alpha(0.2), beta(0.1), phi(1.0)]),
 		exponential_smoothing::forecast(Holt, 5, HoltForecasts),
 		exponential_smoothing::forecast(Damped, 5, DampedForecasts).
@@ -94,17 +101,17 @@
 		assertion(Phi =< 1.0).
 
 	test(exponential_smoothing_additive_cycle, deterministic(Forecasts == [10.0, 20.0, 15.0, 5.0, 10.0, 20.0])) :-
-		exponential_smoothing::learn(seasonal_additive, Forecaster, [model(holt_winters_additive), alpha(0.2), beta(0.1), gamma(0.1)]),
+		cached_forecaster(seasonal_additive, Forecaster, [model(holt_winters_additive), alpha(0.2), beta(0.1), gamma(0.1)]),
 		exponential_smoothing::forecast(Forecaster, 6, Forecasts).
 
 	test(exponential_smoothing_additive_damped_phi_one, deterministic(DampedForecasts == Forecasts)) :-
-		exponential_smoothing::learn(seasonal_additive, Forecaster, [model(holt_winters_additive), alpha(0.2), beta(0.1), gamma(0.1)]),
+		cached_forecaster(seasonal_additive, Forecaster, [model(holt_winters_additive), alpha(0.2), beta(0.1), gamma(0.1)]),
 		exponential_smoothing::learn(seasonal_additive, DampedForecaster, [model(holt_winters_additive_damped), alpha(0.2), beta(0.1), gamma(0.1), phi(1.0)]),
 		exponential_smoothing::forecast(Forecaster, 8, Forecasts),
 		exponential_smoothing::forecast(DampedForecaster, 8, DampedForecasts).
 
 	test(exponential_smoothing_multiplicative_cycle, deterministic) :-
-		exponential_smoothing::learn(seasonal_multiplicative, Forecaster, [model(holt_winters_multiplicative), alpha(0.2), beta(0.1), gamma(0.1)]),
+		cached_forecaster(seasonal_multiplicative, Forecaster, [model(holt_winters_multiplicative), alpha(0.2), beta(0.1), gamma(0.1)]),
 		exponential_smoothing::forecast(Forecaster, 4, [First, Second, Third, Fourth]),
 		assertion(First =~= 100.0),
 		assertion(Second =~= 200.0),
@@ -112,7 +119,7 @@
 		assertion(Fourth =~= 50.0).
 
 	test(exponential_smoothing_multiplicative_damped_phi_one, deterministic(DampedForecasts == Forecasts)) :-
-		exponential_smoothing::learn(seasonal_multiplicative, Forecaster, [model(holt_winters_multiplicative), alpha(0.2), beta(0.1), gamma(0.1)]),
+		cached_forecaster(seasonal_multiplicative, Forecaster, [model(holt_winters_multiplicative), alpha(0.2), beta(0.1), gamma(0.1)]),
 		exponential_smoothing::learn(seasonal_multiplicative, DampedForecaster, [model(holt_winters_multiplicative_damped), alpha(0.2), beta(0.1), gamma(0.1), phi(1.0)]),
 		exponential_smoothing::forecast(Forecaster, 8, Forecasts),
 		exponential_smoothing::forecast(DampedForecaster, 8, DampedForecasts).
@@ -222,7 +229,7 @@
 	% automatic and partially fixed fitting
 
 	test(exponential_smoothing_simple_automatic, deterministic) :-
-		exponential_smoothing::learn(linear_trend, Forecaster, [model(simple), optimizer_options([max_iterations(100)])]),
+		cached_forecaster(linear_trend, Forecaster, [model(simple), optimizer_options([max_iterations(100)])]),
 		Forecaster = exponential_smoothing_forecaster(simple, _State, [Alpha], Diagnostics),
 		assertion(Alpha >= 0.0),
 		assertion(Alpha =< 1.0),
@@ -295,7 +302,7 @@
 		exponential_smoothing::learn(linear_trend, Forecaster2, Options).
 
 	test(exponential_smoothing_multi_start_not_worse_than_default, deterministic) :-
-		exponential_smoothing::learn(linear_trend, DefaultForecaster, [model(simple), optimizer_options([max_iterations(100)])]),
+		cached_forecaster(linear_trend, DefaultForecaster, [model(simple), optimizer_options([max_iterations(100)])]),
 		exponential_smoothing::learn(linear_trend, MultiStartForecaster, [model(simple), optimizer(multi_start(5)), optimizer_options([max_iterations(100)])]),
 		exponential_smoothing::diagnostics(DefaultForecaster, DefaultDiagnostics),
 		exponential_smoothing::diagnostics(MultiStartForecaster, MultiStartDiagnostics),
@@ -395,14 +402,14 @@
 		exponential_smoothing::learn(constant_series, Forecaster).
 
 	test(exponential_smoothing_valid_forecaster, deterministic(exponential_smoothing::valid_forecaster(Forecaster))) :-
-		exponential_smoothing::learn(constant_series, Forecaster, [alpha(0.5)]).
+		cached_forecaster(constant_series, Forecaster, [alpha(0.5)]).
 
 	test(exponential_smoothing_forecast_zero_horizon, deterministic(Forecasts == [])) :-
-		exponential_smoothing::learn(constant_series, Forecaster, [alpha(0.5)]),
+		cached_forecaster(constant_series, Forecaster, [alpha(0.5)]),
 		exponential_smoothing::forecast(Forecaster, 0, Forecasts).
 
 	test(exponential_smoothing_diagnostics, deterministic) :-
-		exponential_smoothing::learn(linear_trend, Forecaster, [model(holt), alpha(0.2), beta(0.1)]),
+		cached_forecaster(linear_trend, Forecaster, [model(holt), alpha(0.2), beta(0.1)]),
 		findall(Diagnostic, exponential_smoothing::diagnostic(Forecaster, Diagnostic), Diagnostics),
 		assertion(memberchk(model(exponential_smoothing), Diagnostics)),
 		assertion(memberchk(method(holt), Diagnostics)),
@@ -411,13 +418,13 @@
 		assertion(memberchk(model(holt), Options)).
 
 	test(exponential_smoothing_export_to_clauses, deterministic(LoadedForecaster == Forecaster)) :-
-		exponential_smoothing::learn(constant_series, Forecaster, [alpha(0.5)]),
+		cached_forecaster(constant_series, Forecaster, [alpha(0.5)]),
 		exponential_smoothing::export_to_clauses(constant_series, Forecaster, forecast_model, [Clause]),
 		Clause = forecast_model(LoadedForecaster).
 
 	test(exponential_smoothing_export_to_file, deterministic(Forecasts == [5.0, 5.0])) :-
 		^^file_path('test_output.pl', File),
-		exponential_smoothing::learn(constant_series, Forecaster, [alpha(0.5)]),
+		cached_forecaster(constant_series, Forecaster, [alpha(0.5)]),
 		exponential_smoothing::export_to_file(constant_series, Forecaster, forecast_model_1, File),
 		logtalk_load(File),
 		{forecast_model_1(LoadedForecaster)},
@@ -425,7 +432,7 @@
 
 	test(exponential_smoothing_print_forecaster, deterministic) :-
 		^^suppress_text_output,
-		exponential_smoothing::learn(constant_series, Forecaster, [alpha(0.5)]),
+		cached_forecaster(constant_series, Forecaster, [alpha(0.5)]),
 		exponential_smoothing::print_forecaster(Forecaster).
 
 	% immutable online updates
@@ -752,7 +759,7 @@
 	% transformations
 
 	test(exponential_smoothing_log_transformation_forecast, deterministic) :-
-		exponential_smoothing::learn(constant_series, Forecaster, [model(simple), alpha(0.5), transformation(log)]),
+		cached_forecaster(constant_series, Forecaster, [model(simple), alpha(0.5), transformation(log)]),
 		Forecaster = exponential_smoothing_forecaster(simple, transformed(log, level(Level), residual_variance(Variance)), [0.5], _Diagnostics),
 		ExpectedLevel is log(5.0),
 		assertion(Level =~= ExpectedLevel),
@@ -764,7 +771,7 @@
 		assertion(Third =~= 5.0).
 
 	test(exponential_smoothing_box_cox_lambda_zero_equivalence, deterministic(LogForecasts == BoxCoxForecasts)) :-
-		exponential_smoothing::learn(constant_series, LogForecaster, [model(simple), alpha(0.5), transformation(log)]),
+		cached_forecaster(constant_series, LogForecaster, [model(simple), alpha(0.5), transformation(log)]),
 		exponential_smoothing::learn(constant_series, BoxCoxForecaster, [model(simple), alpha(0.5), transformation(box_cox(0.0))]),
 		exponential_smoothing::forecast(LogForecaster, 3, LogForecasts),
 		exponential_smoothing::forecast(BoxCoxForecaster, 3, BoxCoxForecasts).
@@ -796,7 +803,7 @@
 		assertion(exponential_smoothing::valid_forecaster(Forecaster)).
 
 	test(exponential_smoothing_box_cox_auto_aicc_counts_lambda, deterministic) :-
-		Options = [model(auto), candidate_models([simple]), transformation(box_cox(auto)), box_cox_bounds(0.25, 0.75), optimizer_options([max_iterations(30)])],
+		Options = [model(auto), candidate_models([simple]), transformation(box_cox(auto)), box_cox_bounds(0.25, 0.75), optimizer_options([max_iterations(10)])],
 		exponential_smoothing::learn(linear_trend, exponential_smoothing_forecaster(simple, _State, _Parameters, Diagnostics), Options),
 		memberchk(sum_squared_error(SumSquaredError), Diagnostics),
 		memberchk(model_selection(criterion(aicc), candidates([candidate(simple, ok, Score, _)]), selected(simple)), Diagnostics),
@@ -812,7 +819,7 @@
 		exponential_smoothing::learn(non_positive_seasonal_series, _Forecaster, [model(simple), transformation(box_cox(auto))]).
 
 	test(exponential_smoothing_box_cox_auto_model_selection_update, deterministic) :-
-		Options = [model(auto), candidate_models([simple, holt]), transformation(box_cox(auto)), box_cox_bounds(-0.5, 1.0), optimizer_options([max_iterations(30)]), retain_residuals(true)],
+		Options = [model(auto), candidate_models([simple, holt]), transformation(box_cox(auto)), box_cox_bounds(-0.5, 1.0), optimizer_options([max_iterations(10)]), retain_residuals(true)],
 		exponential_smoothing::learn(linear_trend, Forecaster, Options),
 		exponential_smoothing::update(Forecaster, 22, UpdatedForecaster),
 		assertion(exponential_smoothing::valid_forecaster(UpdatedForecaster)),
@@ -826,7 +833,7 @@
 		assertion(exponential_smoothing::valid_forecaster(Forecaster)).
 
 	test(exponential_smoothing_box_cox_auto_optimized_initial_state_and_bias, deterministic) :-
-		Options = [model(simple), alpha(0.5), initialization(optimized), transformation(box_cox(auto)), box_cox_bounds(0.25, 0.75), bias_adjustment(delta), optimizer_options([max_iterations(30)]), retain_residuals(true)],
+		Options = [model(simple), alpha(0.5), initialization(optimized), transformation(box_cox(auto)), box_cox_bounds(0.25, 0.75), bias_adjustment(delta), optimizer_options([max_iterations(10)]), retain_residuals(true)],
 		exponential_smoothing::learn(linear_trend, Forecaster, Options),
 		exponential_smoothing::forecast(Forecaster, 2, Forecasts),
 		assertion(length(Forecasts, 2)),
@@ -871,7 +878,7 @@
 		assertion(DeltaSecond =~= ExpectedSecond).
 
 	test(exponential_smoothing_valid_transformed_forecaster, deterministic(exponential_smoothing::valid_forecaster(Forecaster))) :-
-		exponential_smoothing::learn(constant_series, Forecaster, [model(simple), alpha(0.5), transformation(log)]).
+		cached_forecaster(constant_series, Forecaster, [model(simple), alpha(0.5), transformation(log)]).
 
 	test(exponential_smoothing_inconsistent_transformation_wrapper, fail) :-
 		Options = [model(simple), alpha(0.5), beta(auto), gamma(auto), phi(auto), initialization(two_cycles), initial_cycles(2), optimizer_options([]), transformation(log), bias_adjustment(none)],
@@ -887,7 +894,7 @@
 
 	test(exponential_smoothing_transformed_export_reload, deterministic) :-
 		^^file_path('test_output_transformed.pl', File),
-		exponential_smoothing::learn(constant_series, Forecaster, [model(simple), alpha(0.5), transformation(log)]),
+		cached_forecaster(constant_series, Forecaster, [model(simple), alpha(0.5), transformation(log)]),
 		exponential_smoothing::export_to_file(constant_series, Forecaster, forecast_model_2, File),
 		logtalk_load(File),
 		{forecast_model_2(LoadedForecaster)},
@@ -899,33 +906,33 @@
 	% prediction intervals
 
 	test(exponential_smoothing_interval_deterministic_repeat, deterministic(Lower1-Upper1 == Lower2-Upper2)) :-
-		exponential_smoothing::learn(adverse_multiplicative_trajectory, Forecaster, [model(holt_winters_multiplicative), optimizer_options([max_iterations(100)]), retain_residuals(true)]),
+		cached_forecaster(adverse_multiplicative_trajectory, Forecaster, [model(holt_winters_multiplicative), optimizer_options([max_iterations(100)]), retain_residuals(true)]),
 		IntervalOptions = [samples(200), seed(123)],
 		exponential_smoothing::forecast_interval(Forecaster, 3, Lower1, Upper1, IntervalOptions),
 		exponential_smoothing::forecast_interval(Forecaster, 3, Lower2, Upper2, IntervalOptions).
 
 	test(exponential_smoothing_interval_confidence_option_error, error(domain_error(option, confidence(1.5)))) :-
-		exponential_smoothing::learn(constant_series, Forecaster, [alpha(0.5), retain_residuals(true)]),
+		cached_forecaster(constant_series, Forecaster, [alpha(0.5), retain_residuals(true)]),
 		exponential_smoothing::forecast_interval(Forecaster, 1, _Lower, _Upper, [confidence(1.5)]).
 
 	test(exponential_smoothing_interval_method_option_error, error(domain_error(option, method(holt)))) :-
-		exponential_smoothing::learn(constant_series, Forecaster, [alpha(0.5), retain_residuals(true)]),
+		cached_forecaster(constant_series, Forecaster, [alpha(0.5), retain_residuals(true)]),
 		exponential_smoothing::forecast_interval(Forecaster, 1, _Lower, _Upper, [method(holt)]).
 
 	test(exponential_smoothing_interval_samples_option_error, error(domain_error(option, samples(0)))) :-
-		exponential_smoothing::learn(constant_series, Forecaster, [alpha(0.5), retain_residuals(true)]),
+		cached_forecaster(constant_series, Forecaster, [alpha(0.5), retain_residuals(true)]),
 		exponential_smoothing::forecast_interval(Forecaster, 1, _Lower, _Upper, [samples(0)]).
 
 	test(exponential_smoothing_interval_seed_option_error, error(domain_error(option, seed(-1)))) :-
-		exponential_smoothing::learn(constant_series, Forecaster, [alpha(0.5), retain_residuals(true)]),
+		cached_forecaster(constant_series, Forecaster, [alpha(0.5), retain_residuals(true)]),
 		exponential_smoothing::forecast_interval(Forecaster, 1, _Lower, _Upper, [seed(-1)]).
 
 	test(exponential_smoothing_interval_horizon_zero, deterministic(Lower-Upper == []-[])) :-
-		exponential_smoothing::learn(constant_series, Forecaster, [alpha(0.5)]),
+		cached_forecaster(constant_series, Forecaster, [alpha(0.5)]),
 		exponential_smoothing::forecast_interval(Forecaster, 0, Lower, Upper, []).
 
 	test(exponential_smoothing_interval_residuals_not_retained, error(domain_error(retained_residuals, Forecaster))) :-
-		exponential_smoothing::learn(constant_series, Forecaster, [alpha(0.5)]),
+		cached_forecaster(constant_series, Forecaster, [alpha(0.5)]),
 		exponential_smoothing::forecast_interval(Forecaster, 2, _Lower, _Upper, []).
 
 	test(exponential_smoothing_interval_transformed_model, deterministic) :-
@@ -945,7 +952,7 @@
 		assert_bounds_bracket_point(Lower, PointForecasts, Upper).
 
 	test(exponential_smoothing_interval_bounds_bracket_point, deterministic) :-
-		exponential_smoothing::learn(adverse_multiplicative_trajectory, Forecaster, [model(holt_winters_multiplicative), optimizer_options([max_iterations(100)]), retain_residuals(true)]),
+		cached_forecaster(adverse_multiplicative_trajectory, Forecaster, [model(holt_winters_multiplicative), optimizer_options([max_iterations(100)]), retain_residuals(true)]),
 		exponential_smoothing::forecast(Forecaster, 4, PointForecasts),
 		exponential_smoothing::forecast_interval(Forecaster, 4, Lower, Upper, [samples(300), seed(99)]),
 		assertion(length(Lower, 4)),
@@ -953,6 +960,15 @@
 		assert_bounds_bracket_point(Lower, PointForecasts, Upper).
 
 	% auxiliary predicates
+
+	cached_forecaster(Dataset, Forecaster, Options) :-
+		(	cached_forecaster_(Dataset, Options, CachedForecaster) ->
+			Forecaster = CachedForecaster
+		;
+			exponential_smoothing::learn(Dataset, LearnedForecaster, Options),
+			assertz(cached_forecaster_(Dataset, Options, LearnedForecaster)),
+			Forecaster = LearnedForecaster
+		).
 
 	missing_method_options(simple, missing_nonseasonal, [alpha(0.2)]).
 	missing_method_options(holt, missing_nonseasonal, [alpha(0.2), beta(0.1)]).

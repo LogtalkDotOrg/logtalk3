@@ -137,6 +137,8 @@
 		live_test_model(Model, Options),
 		ollama_client::ask(Model, 'Say OK.', Answer, Options).
 
+	% auxiliary predicates
+
 	live_available :-
 		live_test_options(Options),
 		ollama_client::available(Options).
