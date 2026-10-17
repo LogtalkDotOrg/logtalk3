@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-12,
+		date is 2026-10-17,
 		comment is 'Unit tests for the "lof_anomaly_detector" library.'
 	]).
 
@@ -43,27 +43,37 @@
 		score_all/3, valid_anomaly_detector/1
 	]).
 
+	:- uses(numberlist, [
+		sum/2
+	]).
+
 	:- set_logtalk_flag(arithmetic_expressions, silent).
+
+	:- private(cached_detector_/3).
+	:- dynamic(cached_detector_/3).
+
+	:- private(cached_oracle_/4).
+	:- dynamic(cached_oracle_/4).
 
 	cover(lof_anomaly_detector).
 
+	setup :-
+		retractall(cached_detector_(_, _, _)),
+		retractall(cached_oracle_(_, _, _, _)).
+
 	cleanup :-
+		retractall(cached_detector_(_, _, _)),
+		retractall(cached_oracle_(_, _, _, _)),
 		^^clean_file('test_output.pl').
-
-	learn_filtered(Dataset, Detector) :-
-		learn(Dataset, Detector, [baseline_selection_policy(filter)]).
-
-	learn_filtered(Dataset, ExtraOptions, Detector) :-
-		learn(Dataset, Detector, [baseline_selection_policy(filter)| ExtraOptions]).
 
 	test(lof_learn_2_gaussian_error, error(domain_error(baseline_only_training_data, gaussian_anomalies))) :-
 		learn(gaussian_anomalies, _Detector).
 
 	test(lof_learn_3_gaussian_filter, true(ground(Detector))) :-
-		learn_filtered(gaussian_anomalies, Detector).
+		learn(gaussian_anomalies, Detector, [baseline_selection_policy(filter)]).
 
 	test(lof_learn_2_mixed, true(ground(Detector))) :-
-		learn_filtered(mixed_anomalies, Detector).
+		learn(mixed_anomalies, Detector, [baseline_selection_policy(filter)]).
 
 	test(lof_score_3_gaussian_anomaly_higher_than_normal, true(AnomalyScore > NormalScore)) :-
 		learn_filtered(gaussian_anomalies, [k(5)], Detector),
@@ -98,12 +108,12 @@
 		learn(lof_empty_anomalies, _Detector, [k(1)]).
 
 	test(lof_score_3_singleton_dataset_bounded_and_consistent, true((FreshScore =:= TrainingScore, FreshScore >= 0.0, FreshScore =< 1.0))) :-
-		learn(lof_singleton_anomalies, Detector, [k(3)]),
+		cached_learn(lof_singleton_anomalies, [k(3)], Detector),
 		score(Detector, [x-1.00], FreshScore),
 		score_all(lof_singleton_anomalies, Detector, [1-normal-TrainingScore]).
 
 	test(lof_valid_anomaly_detector_1, deterministic(valid_anomaly_detector(Detector))) :-
-		learn(lof_singleton_anomalies, Detector, [k(3)]).
+		cached_learn(lof_singleton_anomalies, [k(3)], Detector).
 
 	test(lof_invalid_anomaly_detector_1, error(domain_error(anomaly_detector, lof_detector(lof_singleton_anomalies, [x], [numeric], [1.0], [1-normal-[1.0]], [], [model(lof_anomaly_detector), training_dataset(lof_singleton_anomalies), attribute_names([x]), feature_types([numeric]), example_count(1), reference_score_count(0), options([k(1)])])))) :-
 		check_anomaly_detector(lof_detector(lof_singleton_anomalies, [x], [numeric], [1.0], [1-normal-[1.0]], [], [model(lof_anomaly_detector), training_dataset(lof_singleton_anomalies), attribute_names([x]), feature_types([numeric]), example_count(1), reference_score_count(0), options([k(1)])])).
@@ -190,7 +200,7 @@
 		print_anomaly_detector(Detector).
 
 	test(lof_anomaly_detector_missing_training_complete, deterministic) :-
-		learn(lof_missing_anomalies, Detector, [k(3)]),
+		cached_learn(lof_missing_anomalies, [k(3)], Detector),
 		assertion(lof_anomaly_detector::valid_anomaly_detector(Detector)),
 		Detector = lof_detector(_, _, _, _, Instances, References, _, _),
 		length(Instances, 4),
@@ -199,19 +209,19 @@
 		length(Scores, 4).
 
 	test(lof_anomaly_detector_missing_query, deterministic) :-
-		learn(lof_missing_anomalies, Detector, [k(3)]),
+		cached_learn(lof_missing_anomalies, [k(3)], Detector),
 		score(Detector, [x-_, y-_], Score),
 		assertion(Score >= 0.0),
 		assertion(Score =< 1.0).
 
 	test(lof_anomaly_detector_short_neighborhood, deterministic) :-
-		learn(lof_missing_anomalies, Detector, [k(20)]),
+		cached_learn(lof_missing_anomalies, [k(20)], Detector),
 		score(Detector, [x-0.5, y-_], Score),
 		assertion(Score >= 0.0),
 		assertion(Score =< 1.0).
 
 	test(lof_anomaly_detector_missing_attribute, error(existence_error(attribute, y))) :-
-		learn(lof_missing_anomalies, Detector, [k(3)]),
+		cached_learn(lof_missing_anomalies, [k(3)], Detector),
 		score(Detector, [x-0.5], _).
 
 	test(lof_anomaly_detector_unbound_model, error(instantiation_error)) :-
@@ -221,31 +231,31 @@
 		check_anomaly_detector(lof_detector(_, [x], [numeric], [1.0], [], [], [])).
 
 	test(lof_anomaly_detector_numeric_model_rejected, deterministic) :-
-		learn(lof_singleton_anomalies, Detector),
+		cached_learn(lof_singleton_anomalies, [], Detector),
 		Detector = lof_detector(Dataset, Names, Types, Scales, _, References, Cache, Diagnostics),
 		Malformed = lof_detector(Dataset, Names, Types, Scales, [1-normal-[oops]], References, Cache, Diagnostics),
 		assertion(\+ lof_anomaly_detector::valid_anomaly_detector(Malformed)).
 
 	test(lof_anomaly_detector_numeric_query_rejected, error(type_error(number, oops))) :-
-		learn(lof_singleton_anomalies, Detector),
+		cached_learn(lof_singleton_anomalies, [], Detector),
 		score(Detector, [x-oops], _).
 
 	test(lof_anomaly_detector_partial_query_rejected, error(instantiation_error)) :-
-		learn(lof_singleton_anomalies, Detector),
+		cached_learn(lof_singleton_anomalies, [], Detector),
 		score(Detector, [x-value(_)], _).
 
 	test(lof_anomaly_detector_unbound_model_invalid, false) :-
 		valid_anomaly_detector(_).
 
 	test(lof_anomaly_detector_standard_training_scores, deterministic) :-
-		learn(lof_line_anomalies, Detector, [k(1)]),
+		cached_learn(lof_line_anomalies, [k(1)], Detector),
 		Detector = lof_detector(_, _, _, _, _, [First, Second, Third], _, _),
 		assertion(First =~= 1.0),
 		assertion(Second =~= 1.0),
 		assertion(Third =~= 2.0).
 
 	test(lof_anomaly_detector_standard_fresh_density, deterministic(Raw =~= 1.0)) :-
-		learn(lof_line_anomalies, Detector, [k(1)]),
+		cached_learn(lof_line_anomalies, [k(1)], Detector),
 		Detector = lof_detector(_, _, Types, Scales, Instances, _, _, _),
 		lof_anomaly_detector << raw_lof([1.2], Types, Scales, Instances, [k(1), distance_metric(euclidean)], Raw).
 
@@ -263,7 +273,7 @@
 		assertion(Clamped =~= 1.0).
 
 	test(lof_anomaly_detector_attribute_order, deterministic(First =~= Second)) :-
-		learn(lof_missing_anomalies, Detector, [k(1)]),
+		cached_learn(lof_missing_anomalies, [k(1)], Detector),
 		score(Detector, [x-0.5, y-2.0], First),
 		score(Detector, [y-2.0, x-0.5], Second).
 
@@ -271,7 +281,7 @@
 		member(Dataset, [lof_line_anomalies, lof_tied_anomalies(false), lof_missing_anomalies, lof_singleton_anomalies, lof_identical_query_fixture]).
 
 	test(lof_anomaly_detector_large_heap_and_scan_equivalence, deterministic) :-
-		learn(lof_scaling_anomalies(130), Detector, [k(3)]),
+		cached_learn(lof_scaling_anomalies(257), [k(3)], Detector),
 		Detector = lof_detector(_, _, Types, Scales, Instances, _, _, _),
 		lof_anomaly_detector << compact_neighbors([0.0, 2.0], Types, Scales, Instances, euclidean, 3, Compact),
 		lof_anomaly_detector << k_nearest_neighbors([0.0, 2.0], Types, Scales, Instances, [distance_metric(euclidean)], 3, Full),
@@ -291,7 +301,7 @@
 		member(Metric, [euclidean, manhattan, chebyshev, minkowski]).
 
 	test(lof_anomaly_detector_external_dataset_all_scores, all(Score =~= Expected)) :-
-		learn(lof_line_anomalies, Detector, [k(1)]),
+		cached_learn(lof_line_anomalies, [k(1)], Detector),
 		score_all(lof_tied_anomalies(false), Detector, Scores),
 		length(Scores, 3),
 		member(Id-Class-Score, Scores),
@@ -309,13 +319,13 @@
 		score(Detector, [size-10.0, weight-100.0, color-42, shape-round], _).
 
 	test(lof_anomaly_detector_malformed_cache_rejected, deterministic(\+ lof_anomaly_detector::valid_anomaly_detector(Malformed))) :-
-		learn(lof_line_anomalies, Detector),
+		cached_learn(lof_line_anomalies, [], Detector),
 		Detector = lof_detector(Dataset, Names, Types, Scales, Instances, References, lof_cache(K, Metric, Graph, Index, _), Diagnostics),
 		BadCache = lof_cache(K, Metric, Graph, Index, -1.0),
 		Malformed = lof_detector(Dataset, Names, Types, Scales, Instances, References, BadCache, Diagnostics).
 
 	test(lof_anomaly_detector_distinct_detectors_independent, deterministic) :-
-		learn(lof_line_anomalies, First, [k(1)]),
+		cached_learn(lof_line_anomalies, [k(1)], First),
 		score(First, [x-2.5], Before),
 		learn(lof_duplicate_points, Second, [k(2)]),
 		score(Second, [x-1.0], Duplicate),
@@ -324,7 +334,7 @@
 		assertion(Duplicate =~= 0.0).
 
 	test(lof_anomaly_detector_large_training_fallback, deterministic) :-
-		learn(lof_scaling_anomalies(257), Detector, [k(3)]),
+		cached_learn(lof_scaling_anomalies(257), [k(3)], Detector),
 		assertion(lof_anomaly_detector::valid_anomaly_detector(Detector)),
 		score(Detector, [x-0.0, y-2.0], Score),
 		assertion(Score >= 0.0),
@@ -335,25 +345,53 @@
 
 	% auxiliary predicates
 
+	learn_filtered(Dataset, Detector) :-
+		learn_filtered(Dataset, [], Detector).
+
+	learn_filtered(Dataset, ExtraOptions, Detector) :-
+		cached_learn(Dataset, [baseline_selection_policy(filter)| ExtraOptions], Detector).
+
+	cached_learn(Dataset, Options, Detector) :-
+		(	cached_detector_(Dataset, Options, Cached) ->
+			Detector = Cached
+		;	learn(Dataset, Detector, Options),
+			assertz(cached_detector_(Dataset, Options, Detector))
+		).
+
 	check_independent_oracle(Dataset, K, Metric) :-
-		findall(Id-X, Dataset::example(Id, _, [x-X]), Points),
-		learn(Dataset, Detector, [k(K), distance_metric(Metric)]),
-		findall(
-			Raw,
-			(	member(Id-X, Points),
-				oracle_lof(X, Id, Points, K, Raw)
-			),
-			Expected
-		),
+		cached_oracle(Dataset, K, Expected, QueryScores),
+		cached_learn(Dataset, [k(K), distance_metric(Metric)], Detector),
 		Detector = lof_detector(_, _, Types, Scales, Instances, References, Cache, OptionsData),
 		assertion(References =~= Expected),
 		memberchk(options(Options), OptionsData),
 		forall(
-			member(Query, [0.0, 1.0, 1.2, 2.5, 5.0]),
-			(	oracle_lof(Query, query, Points, K, Oracle),
-				lof_anomaly_detector << cached_raw_score([Query], Types, Scales, Instances, Options, Cache, Actual),
+			member(Query-Oracle, QueryScores),
+			(	lof_anomaly_detector << cached_raw_score([Query], Types, Scales, Instances, Options, Cache, Actual),
 				assertion(Actual =~= Oracle)
 			)
+		).
+
+	cached_oracle(Dataset, K, Expected, QueryScores) :-
+		(	cached_oracle_(Dataset, K, CachedExpected, CachedQueries) ->
+			Expected = CachedExpected,
+			QueryScores = CachedQueries
+		;	findall(Id-X, Dataset::example(Id, _, [x-X]), Points),
+			findall(
+				Raw,
+				(	member(Id-X, Points),
+					oracle_lof(X, Id, Points, K, Raw)
+				),
+				Expected
+			),
+			findall(
+				Query-Oracle,
+				(	member(Query, [0.0, 1.0, 1.2, 2.5, 5.0]),
+					oracle_lof(Query, query, Points, K, Oracle)
+				),
+				QueryScores
+			),
+			length(QueryScores, 5),
+			assertz(cached_oracle_(Dataset, K, Expected, QueryScores))
 		).
 
 	oracle_lof(Query, Exclude, Points, K, Raw) :-
@@ -371,7 +409,7 @@
 				),
 				Ratios
 			),
-			oracle_sum(Ratios, 0.0, Sum),
+			sum(Ratios, Sum),
 			length(Neighbors, Count),
 			Raw is Sum / Count
 		).
@@ -417,20 +455,15 @@
 			),
 			Distances
 		),
-		oracle_sum(Distances, 0.0, Sum),
+		sum(Distances, Sum),
 		length(Neighbors, Count),
 		(	Sum =< 0.0 ->
 			Density = 1.0e12
 		;	Density is Count / Sum
 		).
 
-	oracle_sum([], Sum, Sum).
-	oracle_sum([Number| Numbers], Sum0, Sum) :-
-		Sum1 is Sum0 + Number,
-		oracle_sum(Numbers, Sum1, Sum).
-
 	check_cached_dataset(Dataset) :-
-		learn(Dataset, Detector, [k(1)]),
+		cached_learn(Dataset, [k(1)], Detector),
 		Detector = lof_detector(_, Names, Types, Scales, Instances, References, Cache, Diagnostics),
 		memberchk(options(Options), Diagnostics),
 		lof_anomaly_detector << training_raw_scores(Types, Scales, Instances, Options, Expected),
@@ -448,8 +481,8 @@
 		assertion(Actual =~= Expected).
 
 	check_tied_metric(Metric) :-
-		learn(lof_tied_anomalies(false), First, [k(1), distance_metric(Metric)]),
-		learn(lof_tied_anomalies(true), Second, [k(1), distance_metric(Metric)]),
+		cached_learn(lof_tied_anomalies(false), [k(1), distance_metric(Metric)], First),
+		cached_learn(lof_tied_anomalies(true), [k(1), distance_metric(Metric)], Second),
 		score(First, [x-1.0], FirstScore),
 		score(Second, [x-1.0], SecondScore),
 		assertion(FirstScore =~= 0.125),
