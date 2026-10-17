@@ -11,9 +11,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-16,
+		date is 2026-10-17,
 		comment is 'Unit tests for the "ant_colony" library.'
 	]).
 
@@ -21,21 +21,30 @@
 		msort/2, length/2, memberchk/2
 	]).
 
+	:- private(run_result_/6).
+	:- dynamic(run_result_/6).
+
 	cover(ant_colony(_, _)).
 	cover(ant_colony(_)).
+
+	setup :-
+		retractall(run_result_(_, _, _, _, _, _)).
+
+	cleanup :-
+		retractall(run_result_(_, _, _, _, _, _)).
 
 	% basic TSP run
 
 	test(aco_tsp_run_2, deterministic((list::valid(Tour), number(Cost)))) :-
-		ant_colony(tsp)::run(Tour, Cost, [max_iterations(30), ants(8)]).
+		cached_run(tsp, Tour, Cost, [max_iterations(30), ants(8)]).
 
 	test(aco_tsp_tour_is_permutation, deterministic(Sorted == Expected)) :-
-		ant_colony(tsp)::run(Tour, _Cost, [max_iterations(20), ants(6)]),
+		cached_run(tsp, Tour, _Cost, [max_iterations(30), ants(8)]),
 		msort(Tour, Sorted),
 		msort([a, b, c, d, e, f], Expected).
 
 	test(aco_tsp_tour_has_six_cities, deterministic(Length == 6)) :-
-		ant_colony(tsp)::run(Tour, _Cost, [max_iterations(15), ants(5)]),
+		cached_run(tsp, Tour, _Cost, [max_iterations(30), ants(8)]),
 		length(Tour, Length).
 
 	test(aco_tsp_cost_reasonable, deterministic(Cost =< 35.0)) :-
@@ -44,15 +53,15 @@
 	% asymmetric TSP
 
 	test(aco_atsp_run_2, deterministic((list::valid(Tour), number(Cost)))) :-
-		ant_colony(atsp)::run(Tour, Cost, [max_iterations(30), ants(8)]).
+		cached_run(atsp, Tour, Cost, [max_iterations(30), ants(8)]).
 
 	test(aco_atsp_tour_is_permutation, deterministic(Sorted == Expected)) :-
-		ant_colony(atsp)::run(Tour, _Cost, [max_iterations(20), ants(6)]),
+		cached_run(atsp, Tour, _Cost, [max_iterations(30), ants(8)]),
 		msort(Tour, Sorted),
 		msort([a, b, c, d, e, f], Expected).
 
 	test(aco_atsp_cost_positive, deterministic(Cost > 0.0)) :-
-		ant_colony(atsp)::run(_Tour, Cost, [max_iterations(25), ants(6)]).
+		cached_run(atsp, _Tour, Cost, [max_iterations(30), ants(8)]).
 
 	% option validation (no search work)
 
@@ -98,7 +107,7 @@
 	% run/4 statistics
 
 	test(aco_run_4_returns_statistics, deterministic) :-
-		ant_colony(tsp)::run(_Tour, _Cost, Statistics, [max_iterations(20), ants(5)]),
+		cached_run(tsp, _Tour, _Cost, Statistics, [max_iterations(25), ants(5)]),
 		memberchk(iterations(Iters), Statistics),
 		^^assertion((integer(Iters), Iters > 0)),
 		memberchk(solutions(Sols), Statistics),
@@ -109,15 +118,15 @@
 		^^assertion(number(C)).
 
 	test(aco_run_4_iterations_match, deterministic(Iters =:= 25)) :-
-		ant_colony(tsp)::run(_Tour, _Cost, Statistics, [max_iterations(25), ants(4)]),
+		cached_run(tsp, _Tour, _Cost, Statistics, [max_iterations(25), ants(5)]),
 		memberchk(iterations(Iters), Statistics).
 
-	test(aco_run_4_solutions_accumulate, deterministic(Sols =:= 100)) :-
-		ant_colony(tsp)::run(_Tour, _Cost, Statistics, [max_iterations(20), ants(5)]),
+	test(aco_run_4_solutions_accumulate, deterministic(Sols =:= 125)) :-
+		cached_run(tsp, _Tour, _Cost, Statistics, [max_iterations(25), ants(5)]),
 		memberchk(solutions(Sols), Statistics).
 
 	test(aco_run_4_improvements_bounded, deterministic((Imp >= 0, Imp =< Sols))) :-
-		ant_colony(tsp)::run(_Tour, _Cost, Statistics, [max_iterations(20), ants(5)]),
+		cached_run(tsp, _Tour, _Cost, Statistics, [max_iterations(25), ants(5)]),
 		memberchk(solutions(Sols), Statistics),
 		memberchk(improvements(Imp), Statistics).
 
@@ -188,5 +197,19 @@
 		ant_colony(tsp_progress)::run(_Tour, _Cost, [updates(0), max_iterations(10), ants(3)]),
 		findall(1, tsp_progress::progress_log(_, _, _, _, _), List),
 		length(List, Count).
+
+	cached_run(Problem, Tour, Cost, Options) :-
+		(	run_result_(3, Problem, Options, Tour, Cost, _) ->
+			true
+		;	ant_colony(Problem)::run(Tour, Cost, Options),
+			assertz(run_result_(3, Problem, Options, Tour, Cost, none))
+		).
+
+	cached_run(Problem, Tour, Cost, Statistics, Options) :-
+		(	run_result_(4, Problem, Options, Tour, Cost, Statistics) ->
+			true
+		;	ant_colony(Problem)::run(Tour, Cost, Statistics, Options),
+			assertz(run_result_(4, Problem, Options, Tour, Cost, Statistics))
+		).
 
 :- end_object.
