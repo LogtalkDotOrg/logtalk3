@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-26,
+		date is 2026-10-18,
 		comment is 'ATMS environments represented by non-negative integer bitsets. Best suited to a modest number of assumptions.'
 	]).
 
@@ -58,13 +58,17 @@
 		Environment >= 0,
 		to_list(Environment, 0, Nodes).
 
-	to_list(0, _, []) :- !.
+	to_list(0, _, []) :-
+		!.
 	to_list(Environment, Id, Nodes) :-
 		Environment > 0,
 		Bit is Environment /\ 1,
 		NextEnvironment is Environment >> 1,
 		NextId is Id + 1,
-		to_list(NextEnvironment, NextId, Tail),
-		( Bit =:= 1 -> Nodes = [node(Id)| Tail]; Nodes = Tail ).
+		(	Bit =:= 1 ->
+			Nodes = [node(Id)| Tail]
+		;	Nodes = Tail
+		),
+		to_list(NextEnvironment, NextId, Tail).
 
 :- end_object.

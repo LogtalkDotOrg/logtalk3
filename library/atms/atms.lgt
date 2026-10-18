@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-15,
+		date is 2026-10-18,
 		comment is 'Portable incremental Assumption-based Truth Maintenance System.',
 		remarks is [
 			'Algorithm' - 'A label is an antichain of minimal environments. New label environments are propagated as deltas through a reverse justification index.',
@@ -163,17 +163,27 @@
 	remove_matching_justifications(Original, Targets, Remaining, Removed) :-
 		remove_batch_justifications(Original, linear([]), Targets, Remaining, Removed).
 
-	remove_batch_justifications([], _, _, [], []) :-
-		!.
 	remove_batch_justifications(Original, Nodes, Targets, Remaining, Removed) :-
-		Original = [Justification| Justifications],
-		remove_batch_justifications(Justifications, Nodes, Targets, Tail, RemovedTail),
+		reversed_justification_suffixes(Original, [], Suffixes),
+		remove_batch_justifications(Suffixes, Nodes, Targets, [], [], Remaining, Removed).
+
+	reversed_justification_suffixes([], Suffixes, Suffixes) :-
+		!.
+	reversed_justification_suffixes(Original, Suffixes0, Suffixes) :-
+		Original = [_| Justifications],
+		reversed_justification_suffixes(Justifications, [Original| Suffixes0], Suffixes).
+
+	remove_batch_justifications([], _, _, Remaining, Removed, Remaining, Removed) :-
+		!.
+	remove_batch_justifications([Original| Suffixes], Nodes, Targets, Tail, RemovedTail, Remaining, Removed) :-
+		Original = [Justification| _],
 		(	(matches_target(Justification, Targets); incident_justification(Justification, Nodes)) ->
-			Remaining = Tail,
-			Removed = [Justification| RemovedTail]
-		;	Removed = RemovedTail,
-			retain_justification(Original, Tail, RemovedTail, Remaining)
-		).
+			Remaining1 = Tail,
+			Removed1 = [Justification| RemovedTail]
+		;	Removed1 = RemovedTail,
+			retain_justification(Original, Tail, RemovedTail, Remaining1)
+		),
+		remove_batch_justifications(Suffixes, Nodes, Targets, Remaining1, Removed1, Remaining, Removed).
 
 	retain_justification(Original, Tail, Removed, Remaining) :-
 		(	Removed == [] ->
@@ -257,11 +267,15 @@
 		dictionary_as_list(Grouped, Entries),
 		remove_grouped_dependencies(Entries, Dependents0, Dependents).
 
-	group_removed_rules([], Grouped, Grouped).
-	group_removed_rules([Justification| Justifications], Grouped0, Grouped) :-
-		group_removed_rules(Justifications, Grouped0, Grouped1),
+	group_removed_rules(Justifications, Grouped0, Grouped) :-
+		reverse(Justifications, Reversed),
+		group_reversed_removed_rules(Reversed, Grouped0, Grouped).
+
+	group_reversed_removed_rules([], Grouped, Grouped).
+	group_reversed_removed_rules([Justification| Justifications], Grouped0, Grouped) :-
 		Justification = justification(_, Antecedents, _),
-		index_justification(Antecedents, Justification, Grouped1, Grouped).
+		index_justification(Antecedents, Justification, Grouped0, Grouped1),
+		group_reversed_removed_rules(Justifications, Grouped1, Grouped).
 
 	remove_grouped_dependencies([], Dependents, Dependents).
 	remove_grouped_dependencies([Node-Removed| Entries], Dependents0, Dependents) :-
@@ -705,12 +719,16 @@
 		),
 		partition_assumptions(Assumptions, Mentioned, RelevantTail, FreeTail).
 
-	interpretation_suffixes([], Representation, [], Empty) :-
-		Representation::empty(Empty).
-	interpretation_suffixes([Assumption| Assumptions], Representation, [choice(Singleton, Remaining)| Choices], Remaining) :-
-		interpretation_suffixes(Assumptions, Representation, Choices, Tail),
+	interpretation_suffixes(Assumptions, Representation, Choices, Remaining) :-
+		reverse(Assumptions, Reversed),
+		Representation::empty(Empty),
+		interpretation_suffixes(Reversed, Representation, [], Empty, Choices, Remaining).
+
+	interpretation_suffixes([], _, Choices, Remaining, Choices, Remaining).
+	interpretation_suffixes([Assumption| Assumptions], Representation, Choices0, Tail, Choices, Remaining) :-
 		Representation::singleton(Assumption, Singleton),
-		Representation::union(Singleton, Tail, Remaining).
+		Representation::union(Singleton, Tail, Remaining1),
+		interpretation_suffixes(Assumptions, Representation, [choice(Singleton, Remaining1)| Choices0], Remaining1, Choices, Remaining).
 
 	maximal_consistent_environments([], Environment, _, Representation, Maximal0, Maximal) :-
 		add_maximal_environment(Environment, Maximal0, Representation, Maximal).

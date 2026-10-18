@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-12,
+		date is 2026-10-18,
 		comment is 'Shared predicates for forecaster diagnostics, dataset validation, differencing, lag construction, error metrics, seasonal adjustment, and baselines.'
 	]).
 
@@ -1326,15 +1326,18 @@
 		]
 	]).
 
-	seasonal_gap_centered([], _, [], 0.0) :-
+	seasonal_gap_centered(Series, Mean, Centered, Variance) :-
+		seasonal_gap_centered(Series, Mean, Centered, 0.0, Variance).
+
+	seasonal_gap_centered([], _, [], Variance, Variance) :-
 		!.
-	seasonal_gap_centered([Value| Values], Mean, [Centered| Rest], Variance) :-
-		seasonal_gap_centered(Values, Mean, Rest, Variance0),
+	seasonal_gap_centered([Value| Values], Mean, [Centered| Rest], Variance0, Variance) :-
 		(	var(Value) ->
-			Variance = Variance0
+			Variance1 = Variance0
 		;	Centered is Value - Mean,
-			Variance is Variance0 + Centered * Centered
-		).
+			Variance1 is Variance0 + Centered * Centered
+		),
+		seasonal_gap_centered(Values, Mean, Rest, Variance1, Variance).
 
 	:- private(seasonal_gap_lags/7).
 	:- mode(seasonal_gap_lags(+positive_integer, +positive_integer, +list, +number, +number, -number, -number), zero_or_one_or_error).
@@ -1369,16 +1372,19 @@
 		]
 	]).
 
-	seasonal_gap_covariance([], _, 0.0, 0) :-
+	seasonal_gap_covariance(Suffix, Series, Covariance, Pairs) :-
+		seasonal_gap_covariance(Suffix, Series, 0.0, 0, Covariance, Pairs).
+
+	seasonal_gap_covariance([], _, Covariance, Pairs, Covariance, Pairs) :-
 		!.
-	seasonal_gap_covariance([First| Firsts], [Second| Seconds], Covariance, Pairs) :-
-		seasonal_gap_covariance(Firsts, Seconds, Covariance0, Pairs0),
+	seasonal_gap_covariance([First| Firsts], [Second| Seconds], Covariance0, Pairs0, Covariance, Pairs) :-
 		(	(var(First); var(Second)) ->
-			Covariance = Covariance0,
-			Pairs = Pairs0
-		;	Covariance is Covariance0 + First * Second,
-			Pairs is Pairs0 + 1
-		).
+			Covariance1 = Covariance0,
+			Pairs1 = Pairs0
+		;	Covariance1 is Covariance0 + First * Second,
+			Pairs1 is Pairs0 + 1
+		),
+		seasonal_gap_covariance(Firsts, Seconds, Covariance1, Pairs1, Covariance, Pairs).
 
 	classical_seasonal_adjustment(Series, Frequency, Method, Adjusted, Factors) :-
 		series_observation_summary(Series, Length, KnownCount, _Sum),

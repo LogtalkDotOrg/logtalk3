@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-01,
+		date is 2026-10-18,
 		comment is 'Immutable Simple Temporal Networks with retained source constraints and cached all-pairs bounds.',
 		see_also is [interval, interval_constraint_network]
 	]).
@@ -236,23 +236,21 @@
 
 	ranked_relation(Start1, End1, Start2, End2, Relation) :-
 		Values = [Start1, End1, Start2, End2],
-		numeric_rank(Start1, Values, StartRank1),
-		numeric_rank(End1, Values, EndRank1),
-		numeric_rank(Start2, Values, StartRank2),
-		numeric_rank(End2, Values, EndRank2),
+		numeric_rank(Values, Start1, 0, StartRank1),
+		numeric_rank(Values, End1, 0, EndRank1),
+		numeric_rank(Values, Start2, 0, StartRank2),
+		numeric_rank(Values, End2, 0, EndRank2),
 		interval_new(StartRank1, EndRank1, Interval1),
 		interval_new(StartRank2, EndRank2, Interval2),
 		interval_relation(Interval1, Interval2, Relation).
 
-	numeric_rank(_Value, [], 0) :-
-		!.
-	numeric_rank(Value, [Head| Values], Rank) :-
-		numeric_rank(Value, Values, Rest),
+	numeric_rank([], _Value, Rank, Rank).
+	numeric_rank([Head| Values], Value, Rank0, Rank) :-
 		(	Head < Value ->
-			Rank is Rest + 1
-		;
-			Rank = Rest
-		).
+			Rank1 is Rank0 + 1
+		;	Rank1 is Rank0
+		),
+		numeric_rank(Values, Value, Rank1, Rank).
 
 	state(STN, Nodes, NextId, Sources, Matrix) :-
 		ground(STN),
