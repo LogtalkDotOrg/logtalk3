@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-07,
+		date is 2026-10-18,
 		comment is 'Unit tests for the "simple_temporal_networks" library.'
 	]).
 
@@ -41,7 +41,21 @@
 		op(700, xfx, =~=), (=~=)/2
 	]).
 
+	:- private(cached_network_/2).
+	:- dynamic(cached_network_/2).
+
+	:- private(cached_oracle_/5).
+	:- dynamic(cached_oracle_/5).
+
 	cover(stn).
+
+	setup :-
+		retractall(cached_network_(_, _)),
+		retractall(cached_oracle_(_, _, _, _, _)).
+
+	cleanup :-
+		retractall(cached_network_(_, _)),
+		retractall(cached_oracle_(_, _, _, _, _)).
 
 	test(stn_earliest_schedule_correlated_bounds, deterministic) :-
 		stn::new([a, b, c], STN0),
@@ -867,7 +881,26 @@
 	% auxiliary predicates
 
 	fixed_events(Start1, End1, Start2, End2, STN) :-
-		stn::new([start_a, end_a, start_b, end_b], STN0),
+		cached_network(fixed_events(Start1, End1, Start2, End2), STN).
+
+	window_network(Start1, End1, Start2, End2, STN) :-
+		cached_network(window_network(Start1, End1, Start2, End2), STN).
+
+	deletion_network(STN) :-
+		cached_network(deletion_network, STN).
+
+	cached_network(Key, STN) :-
+		(	cached_network_(Key, Cached) ->
+			STN = Cached
+		;
+			build_fixture(Key, STN),
+			assertz(cached_network_(Key, STN))
+		).
+
+	build_fixture(new(Points), STN) :-
+		stn::new(Points, STN).
+	build_fixture(fixed_events(Start1, End1, Start2, End2), STN) :-
+		cached_network(new([start_a, end_a, start_b, end_b]), STN0),
 		NegativeStart1 is -Start1,
 		NegativeEnd1 is -End1,
 		NegativeStart2 is -Start2,
@@ -878,6 +911,27 @@
 			constraint(zero, start_b, Start2), constraint(start_b, zero, NegativeStart2),
 			constraint(zero, end_b, End2), constraint(end_b, zero, NegativeEnd2)
 		], STN).
+	build_fixture(window_network(Start1, End1, Start2, End2), STN) :-
+		cached_network(new([a, b]), STN0),
+		NegativeStart1 is -Start1,
+		NegativeStart2 is -Start2,
+		stn::add_constraints(STN0, [
+			constraint(zero, a, End1), constraint(a, zero, NegativeStart1),
+			constraint(zero, b, End2), constraint(b, zero, NegativeStart2)
+		], STN).
+	build_fixture(deletion_network, STN) :-
+		cached_network(new([a, b, c, d]), STN0),
+		stn::add_constraints(STN0, [
+			constraint(a, b, 3), constraint(b, c, 2), constraint(b, b, 0),
+			constraint(b, c, 9), constraint(zero, b, 5), constraint(b, zero, 0),
+			constraint(a, c, 10), constraint(zero, zero, 0), constraint(d, a, 7)
+		], STN).
+	build_fixture(chain(Weight1), STN) :-
+		cached_network(new([a, b, c, d]), STN0),
+		stn::add_constraint(STN0, a, b, Weight1, STN).
+	build_fixture(chain(Weight1, Weight2), STN) :-
+		cached_network(chain(Weight1), STN0),
+		stn::add_constraint(STN0, b, c, Weight2, STN).
 
 	check_event_cases([]) :-
 		!.
@@ -888,17 +942,8 @@
 		stn::event_relation(STN, start_a, end_a, start_b, end_b, Relation),
 		check_event_cases(Cases).
 
-	window_network(Start1, End1, Start2, End2, STN) :-
-		stn::new([a, b], STN0),
-		NegativeStart1 is -Start1,
-		NegativeStart2 is -Start2,
-		stn::add_constraints(STN0, [
-			constraint(zero, a, End1), constraint(a, zero, NegativeStart1),
-			constraint(zero, b, End2), constraint(b, zero, NegativeStart2)
-		], STN).
-
 	difference_network(Lower, Upper, STN) :-
-		stn::new([a, b], STN0),
+		cached_network(new([a, b]), STN0),
 		Reverse is -Lower,
 		stn::add_constraints(STN0, [constraint(a, b, Upper), constraint(b, a, Reverse)], STN).
 
@@ -924,6 +969,32 @@
 		).
 
 	verify_oracle(Upper, Reverse) :-
+		oracle_case(Upper, Reverse, Schedules, Known, Outcome),
+		(	Schedules == [] ->
+			Outcome = inconsistent(cycle(Cycle, Weight)),
+			verify_cycle(Cycle, Weight, Known)
+		;	Outcome = consistent(STN),
+			check_pair_rows([zero, a, b], STN, Schedules, Known),
+			stn::schedule(STN, [time(zero, 0), time(a, TimeA), time(b, TimeB)]),
+			memberchk(schedule(TimeA, TimeB), Schedules),
+			stn::earliest_schedule(STN, [time(zero, 0), time(a, EarliestA), time(b, EarliestB)]),
+			memberchk(schedule(EarliestA, EarliestB), Schedules),
+			oracle_differences(Schedules, zero, a, ValuesA),
+			oracle_differences(Schedules, zero, b, ValuesB),
+			sort(ValuesA, [EarliestA| _]),
+			sort(ValuesB, [EarliestB| _])
+		).
+
+	oracle_case(Upper, Reverse, Schedules, Known, Outcome) :-
+		(	cached_oracle_(Upper, Reverse, CachedSchedules, CachedKnown, CachedOutcome) ->
+			Schedules = CachedSchedules,
+			Known = CachedKnown,
+			Outcome = CachedOutcome
+		;	build_oracle_case(Upper, Reverse, Schedules, Known, Outcome),
+			assertz(cached_oracle_(Upper, Reverse, Schedules, Known, Outcome))
+		).
+
+	build_oracle_case(Upper, Reverse, Schedules, Known, Outcome) :-
 		findall(schedule(TimeA, TimeB), (
 			between(-2, 2, TimeA),
 			between(-2, 2, TimeB),
@@ -940,22 +1011,8 @@
 			constraint(3, zero, b, 2), constraint(4, b, zero, 2),
 			constraint(5, a, b, Upper), constraint(6, b, a, Reverse)
 		],
-		stn::new([a, b], STN0),
-		stn::try_add_constraints(STN0, Batch, [1, 2, 3, 4, 5, 6], Outcome),
-		(	Schedules == [] ->
-			Outcome = inconsistent(cycle(Cycle, Weight)),
-			verify_cycle(Cycle, Weight, Known)
-		;	Outcome = consistent(STN),
-			check_pair_rows([zero, a, b], STN, Schedules, Known),
-			stn::schedule(STN, [time(zero, 0), time(a, TimeA), time(b, TimeB)]),
-			memberchk(schedule(TimeA, TimeB), Schedules),
-			stn::earliest_schedule(STN, [time(zero, 0), time(a, EarliestA), time(b, EarliestB)]),
-			memberchk(schedule(EarliestA, EarliestB), Schedules),
-			oracle_differences(Schedules, zero, a, ValuesA),
-			oracle_differences(Schedules, zero, b, ValuesB),
-			sort(ValuesA, [EarliestA| _]),
-			sort(ValuesB, [EarliestB| _])
-		).
+		cached_network(new([a, b]), STN0),
+		stn::try_add_constraints(STN0, Batch, [1, 2, 3, 4, 5, 6], Outcome).
 
 	check_pair_rows([], _STN, _Schedules, _Known) :-
 		!.
@@ -1007,10 +1064,9 @@
 		Weight2 is Byte2 mod 9 - 4,
 		Weight3 is Byte3 mod 9 - 4,
 		Batch = [constraint(a, b, Weight1), constraint(b, c, Weight2), constraint(c, d, Weight3)],
-		stn::new([a, b, c, d], STN0),
+		cached_network(new([a, b, c, d]), STN0),
 		stn::add_constraints(STN0, Batch, STN1),
-		stn::add_constraint(STN0, a, b, Weight1, Sequential1),
-		stn::add_constraint(Sequential1, b, c, Weight2, Sequential2),
+		cached_network(chain(Weight1, Weight2), Sequential2),
 		stn::add_constraint(Sequential2, c, d, Weight3, Sequential),
 		stn::constraints(STN1, Sources),
 		stn::constraints(Sequential, Sources),
@@ -1058,14 +1114,6 @@
 		stn::difference_bounds(Shifted, a, b, Lower, Upper),
 		stn::window_relation(Base, a, b, Relation),
 		stn::window_relation(Shifted, a, b, Relation).
-
-	deletion_network(STN) :-
-		stn::new([a, b, c, d], STN0),
-		stn::add_constraints(STN0, [
-			constraint(a, b, 3), constraint(b, c, 2), constraint(b, b, 0),
-			constraint(b, c, 9), constraint(zero, b, 5), constraint(b, zero, 0),
-			constraint(a, c, 10), constraint(zero, zero, 0), constraint(d, a, 7)
-		], STN).
 
 	compare_deletion_rows([], _Nodes, _Batch, _Sequential) :-
 		!.

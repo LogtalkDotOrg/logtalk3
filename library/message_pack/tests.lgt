@@ -455,6 +455,8 @@
 		parse([0xca, 0x00, 0x00, 0x00, 0x01], Float),
 		generate(Float, Bytes).
 
+	% auxiliary predicates
+
 	repeated_byte_list(Length, Byte, Bytes) :-
 		repeated_byte_list(Length, Byte, Bytes, []).
 
