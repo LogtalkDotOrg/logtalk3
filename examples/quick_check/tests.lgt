@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2019-04-01,
+		date is 2026-10-18,
 		comment is 'Unit tests for the "quick_check" example.'
 	]).
 
@@ -36,29 +36,29 @@
 	% tests
 
 	% run the default number of random tests
-	quick_check(qc1, reverse_2_twice_prop(+list)).
-	quick_check(qc2, same_length_2_prop(+list)).
-	% run 25 random tests
-	quick_check(qc3, same_length_3_prop(+list), [n(25)]).
-	% limit the maximum number of shrink operations to 16
-	quick_check(qc4, same_length_3_prop(+list), [s(16)]).
+	quick_check(qc3, same_length_3_prop(+list)).
+	% run only 12 random tests
+	quick_check(qc2, same_length_2_prop(+list), [n(12)]).
+	quick_check(qc1, reverse_2_twice_prop(+list), [n(12)]).
+	% limit also the maximum number of shrink operations to 8
+	quick_check(qc4, same_length_3_prop(+list), [n(12), s(8)]).
 
 	% properties (must be defined as local predicates but can, of course,
 	% call any predicate defined elsewhere)
+
+	% the length of two lists of the same length must be an non-negative integer
+	same_length_3_prop(List) :-
+		same_length(List, _, Length),
+		Length >= 0.
+
+	% same_length/2 must be true when using the same list for both arguments
+	same_length_2_prop(List) :-
+		same_length(List, List).
 
 	% reversing a list twice must give the original list
 	reverse_2_twice_prop(List) :-
 		reverse(List, Reverse),
 		reverse(Reverse, ReverseReverse),
 		List == ReverseReverse.
-
-	% same_length/2 must be true when using the same list for both arguments
-	same_length_2_prop(List) :-
-		same_length(List, List).
-
-	% the length of two lists of the same length must be an non-negative integer
-	same_length_3_prop(List) :-
-		same_length(List, _, Length),
-		Length >= 0.
 
 :- end_object.
