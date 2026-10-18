@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on October 15, 2026
+##   Last updated on October 18, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -56,7 +56,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
-	Write-Output "$myName 25.0"
+	Write-Output "$myName 26.0"
 }
 
 Function Format-Decimal {
@@ -429,7 +429,7 @@ Function Write-Usage-Help() {
 	Write-Output "  -b bug report server (valid values are github and gitlab; no default; requires -u option)"
 	Write-Output "  -u base URL to generate links to test files (no default)"
 	Write-Output "  -c code coverage report (default is $c)"
-	Write-Output "     (valid values are none, xml, cobertura, and lcov)"
+	Write-Output "     (valid values are none, xml, cobertura, lcov, and sonar)"
 	Write-Output "  -l directory depth level to look for test sets (default is to recurse into all sub-directories)"
 	Write-Output "     (level 1 means current directory only)"
 	Write-Output "  -e exclude directories matching a regular expression"
@@ -590,6 +590,8 @@ Function Confirm-Parameters() {
 		$script:coverage_goal = $coverage_cobertura_goal
 	} elseif ($c -eq "lcov") {
 		$script:coverage_goal = $coverage_lcov_goal
+	} elseif ($c -eq "sonar") {
+		$script:coverage_goal = $coverage_sonar_goal
 	} else {
 		Write-Error "Error! Unknown coverage report: $c"
 		Write-Usage-Help
@@ -714,6 +716,7 @@ $coverage_default_goal = "true"
 $coverage_xml_goal = "logtalk_load(lgtunit(coverage_report))"
 $coverage_cobertura_goal = "logtalk_load(lgtunit(cobertura_report))"
 $coverage_lcov_goal = "logtalk_load(lgtunit(lcov_report))"
+$coverage_sonar_goal = "logtalk_load(lgtunit(sonar_report))"
 $coverage_goal = $coverage_default_goal
 
 $results = (Join-Path $pwd "logtalk_tester_logs") -replace '\\', '/'

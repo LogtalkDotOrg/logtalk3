@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for viewing code coverage report XML files in a browser
-%  Last updated on May 2, 2022
+%  Last updated on October 18, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -154,10 +154,16 @@
 			<th style="width:55%;">Covered Clause/Rule Indexes</th>
 		</tr>
 		<xsl:for-each select="predicate">
+			<xsl:variable name="file">
+				<xsl:choose>
+					<xsl:when test="file"><xsl:value-of select="file"/></xsl:when>
+					<xsl:otherwise><xsl:value-of select="../../file"/></xsl:otherwise>
+				</xsl:choose>
+			</xsl:variable>
 			<tr>
 				<td style="width:30%;">
 					<xsl:call-template name="link">
-						<xsl:with-param name="file" select="substring-after(../../file, $prefix)"/>
+						<xsl:with-param name="file" select="substring-after($file, $prefix)"/>
 						<xsl:with-param name="line" select="line"/>
 						<xsl:with-param name="name" select="name"/>
 					</xsl:call-template>

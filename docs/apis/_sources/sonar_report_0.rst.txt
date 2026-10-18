@@ -1,0 +1,82 @@
+.. index:: single: sonar_report
+.. _sonar_report/0:
+
+.. rst-class:: right
+
+**object**
+
+``sonar_report``
+================
+
+Intercepts unit test execution messages and generates a ``sonar.xml`` file with code coverage results using the SonarQube and SonarCloud Generic Test Coverage XML format.
+
+| **Availability:** 
+|    ``logtalk_load(lgtunit(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-10-18
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Provides:**
+|    :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
+| **Uses:**
+|    :ref:`logtalk <logtalk/0>`
+|    :ref:`user <user/0>`
+
+| **Remarks:**
+
+   - Usage: Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(sonar_report))``.
+   - Analysis parameter: Pass the generated report to the Sonar scanner using the ``sonar.coverageReportPaths`` analysis parameter.
+   - File paths: Sonar requires file paths to be either absolute or relative to the project root. Use the ``suppress_path_prefix`` flag to strip the prefix of the source file paths when necessary.
+   - Lines to cover: Each predicate is reported as a single line to cover, the line of its first clause. The line is reported as covered when at least one of the predicate clauses is covered. Predicates without line information and with lines outside the source file are not reported.
+   - Branches to cover: Predicates with two or more clauses also report the number of clauses as the number of branches to cover and the number of covered clauses as the number of covered branches.
+   - Shared lines and files: Entities defined in the same source file are reported under a single file element. Predicates that share the same line are reported as a single line to cover.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: predicate_coverage_/4
+.. _sonar_report/0::predicate_coverage_/4:
+
+``predicate_coverage_/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of predicate coverage data.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``predicate_coverage_(File,Line,Covered,Total)``
+| **Mode and number of proofs:**
+|    ``predicate_coverage_(?atom,?integer,?integer,?integer)`` - ``zero_or_more``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

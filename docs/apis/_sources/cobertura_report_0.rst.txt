@@ -14,8 +14,8 @@ Intercepts unit test execution messages and generates a ``cobertura.xml`` file w
 |    ``logtalk_load(lgtunit(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-03-13
+| **Version:** 1:0:1
+| **Date:** 2026-10-18
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -88,10 +88,10 @@ Table of entity coverage data.
 
 ------------
 
-.. index:: method_/7
-.. _cobertura_report/0::method_/7:
+.. index:: method_/8
+.. _cobertura_report/0::method_/8:
 
-``method_/7``
+``method_/8``
 ^^^^^^^^^^^^^
 
 Table of predicate coverage data.
@@ -100,9 +100,9 @@ Table of predicate coverage data.
 |    ``dynamic``
 
 | **Template:**
-|    ``method_(Entity,Predicate,Line,Covered,Total,Percentage,Clauses)``
+|    ``method_(Entity,File,Predicate,Line,Covered,Total,Percentage,Clauses)``
 | **Mode and number of proofs:**
-|    ``method_(?entity_identifier,?predicate_indicator,?integer,?integer,?integer,?float,?list)`` - ``zero_or_more``
+|    ``method_(?entity_identifier,?atom,?predicate_indicator,?integer,?integer,?integer,?float,?list)`` - ``zero_or_more``
 
 
 ------------

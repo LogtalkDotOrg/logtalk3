@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on October 15, 2026
+##   Last updated on October 18, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -32,7 +32,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 33.0"
+	echo "$(basename "$0") 34.0"
 	exit 0
 }
 
@@ -118,6 +118,7 @@ coverage_default_goal="true"
 coverage_xml_goal="logtalk_load(lgtunit(coverage_report))"
 coverage_cobertura_goal="logtalk_load(lgtunit(cobertura_report))"
 coverage_lcov_goal="logtalk_load(lgtunit(lcov_report))"
+coverage_sonar_goal="logtalk_load(lgtunit(sonar_report))"
 coverage_goal=$coverage_default_goal
 
 format_decimal() {
@@ -461,7 +462,7 @@ usage_help() {
 	echo "  -b bug report server (valid values are github and gitlab; no default; requires -u option)"
 	echo "  -u base URL to generate links to test files (no default)"
 	echo "  -c code coverage report (default is $coverage)"
-	echo "     (valid values are none, xml, cobertura, and lcov)"
+	echo "     (valid values are none, xml, cobertura, lcov, and sonar)"
 	echo "  -l directory depth level to look for test sets (default is to recurse into all sub-directories)"
 	echo "     (level 1 means current directory only)"
 	echo "  -e exclude directories matching a POSIX-extended regular expression"
@@ -654,6 +655,9 @@ elif [ "$c_arg" == "cobertura" ] ; then
 elif [ "$c_arg" == "lcov" ] ; then
 	coverage='lcov'
 	coverage_goal=$coverage_lcov_goal
+elif [ "$c_arg" == "sonar" ] ; then
+	coverage='sonar'
+	coverage_goal=$coverage_sonar_goal
 elif [ "$c_arg" != "" ] ; then
 	echo "Error! Unknown coverage report: $c_arg" >&2
 	usage_help

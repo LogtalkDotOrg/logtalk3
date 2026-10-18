@@ -33,9 +33,9 @@
 :- object(lcov_report).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-03-13,
+		date is 2026-10-18,
 		comment is 'Intercepts unit test execution messages and generates a ``lcov.info`` file with code coverage results.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(lcov_report))``.'
@@ -50,12 +50,12 @@
 		argnames is ['Entity', 'File']
 	]).
 
-	:- private(predicate_coverage_/7).
-	:- dynamic(predicate_coverage_/7).
-	:- mode(predicate_coverage_(?entity_identifier, ?predicate_indicator, ?integer, ?integer, ?integer, ?float, ?list), zero_or_more).
-	:- info(predicate_coverage_/7, [
+	:- private(predicate_coverage_/8).
+	:- dynamic(predicate_coverage_/8).
+	:- mode(predicate_coverage_(?entity_identifier, ?atom, ?predicate_indicator, ?integer, ?integer, ?integer, ?float, ?list), zero_or_more).
+	:- info(predicate_coverage_/8, [
 		comment is 'Table of predicate coverage data.',
-		argnames is ['Entity', 'Predicate', 'Line', 'Covered', 'Total', 'Percentage', 'Clauses']
+		argnames is ['Entity', 'File', 'Predicate', 'Line', 'Covered', 'Total', 'Percentage', 'Clauses']
 	]).
 
 	% intercept all messages from the "lgtunit" object while running tests
@@ -72,7 +72,7 @@
 
 	message_hook(tests_started) :-
 		retractall(entity_file_(_, _)),
-		retractall(predicate_coverage_(_, _, _, _, _, _, _)).
+		retractall(predicate_coverage_(_, _, _, _, _, _, _, _)).
 
 	message_hook(running_tests_from_object_file(_Object, File)) :-
 		stream_property(_, alias(lcov_report)),
@@ -92,8 +92,12 @@
 		assertz(entity_file_(Entity, File)).
 
 	message_hook(entity_predicate_coverage(Entity, Predicate, Covered, Total, Percentage, Clauses)) :-
-		entity_predicate_line(Predicate, Entity, Line),
-		assertz(predicate_coverage_(Entity, Predicate, Line, Covered, Total, Percentage, Clauses)).
+		entity_predicate_location(Predicate, Entity, File, Line),
+		(	entity_file_(Entity, File) ->
+			true
+		;	assertz(entity_file_(Entity, File))
+		),
+		assertz(predicate_coverage_(Entity, File, Predicate, Line, Covered, Total, Percentage, Clauses)).
 
 	message_hook(tests_ended) :-
 		forall(
@@ -107,7 +111,7 @@
 		write(lcov_report, 'SF:'),
 		write(lcov_report, File), nl(lcov_report),
 		forall(
-			predicate_coverage_(Entity, Predicate, Line, _Covered, _Total, _Percentage, _Clauses),
+			predicate_coverage_(Entity, File, Predicate, Line, _Covered, _Total, _Percentage, _Clauses),
 			( 	write(lcov_report, 'FN:'),
 				write(lcov_report, Line),
 				write(lcov_report, ','),
@@ -115,46 +119,46 @@
 			)
 		),
 		forall(
-			predicate_coverage_(Entity, Predicate, _Line, Covered, _Total, _Percentage, _Clauses),
+			predicate_coverage_(Entity, File, Predicate, _Line, Covered, _Total, _Percentage, _Clauses),
 			( 	write(lcov_report, 'FNDA:'),
 				write(lcov_report, Covered),
 				write(lcov_report, ','),
 				write(lcov_report, Predicate), nl(lcov_report)
 			)
 		),
-		count_functions(Entity, FunctionTotal, FunctionCovered),
+		count_functions(Entity, File, FunctionTotal, FunctionCovered),
 		write(lcov_report, 'FNF:'), write(lcov_report, FunctionTotal), nl(lcov_report),
 		write(lcov_report, 'FNH:'), write(lcov_report, FunctionCovered), nl(lcov_report),
 		forall(
-			predicate_coverage_(Entity, _Predicate, Line, Covered, _Total, _Percentage, _Clauses),
+			predicate_coverage_(Entity, File, _Predicate, Line, Covered, _Total, _Percentage, _Clauses),
 			( 	write(lcov_report, 'DA:'),
 				write(lcov_report, Line),
 				write(lcov_report, ','),
 				write(lcov_report, Covered), nl(lcov_report)
 			)
 		),
-		count_lines(Entity, LinesTotal, LinesCovered),
+		count_lines(Entity, File, LinesTotal, LinesCovered),
 		write(lcov_report, 'LF:'), write(lcov_report, LinesTotal), nl(lcov_report),
 		write(lcov_report, 'LH:'), write(lcov_report, LinesCovered), nl(lcov_report),
 		write(lcov_report, 'end_of_record'), nl(lcov_report).
 
-	count_functions(Entity, Total, Covered) :-
+	count_functions(Entity, File, Total, Covered) :-
 		findall(Predicate,
-			predicate_coverage_(Entity, Predicate, _Line, _Hits, _Total, _Percentage, _Clauses),
+			predicate_coverage_(Entity, File, Predicate, _Line, _Hits, _Total, _Percentage, _Clauses),
 			Predicates
 		),
 		list_length(Predicates, Total),
 		findall(Predicate,
-			( 	predicate_coverage_(Entity, Predicate, _Line, Hits, _Total, _Percentage, _Clauses),
+			( 	predicate_coverage_(Entity, File, Predicate, _Line, Hits, _Total, _Percentage, _Clauses),
 				Hits > 0
 			),
 			CoveredPredicates
 		),
 		list_length(CoveredPredicates, Covered).
 
-	count_lines(Entity, Total, Covered) :-
+	count_lines(Entity, File, Total, Covered) :-
 		findall(Hits,
-			predicate_coverage_(Entity, _Predicate, _Line, Hits, _Total, _Percentage, _Clauses),
+			predicate_coverage_(Entity, File, _Predicate, _Line, Hits, _Total, _Percentage, _Clauses),
 			HitsList
 		),
 		list_length(HitsList, Total),
@@ -182,40 +186,46 @@
 			protocol_property(Entity, file(File0))
 		;	File0 = ''
 		),
-		% bypass the compiler as the flag is only created after loading this file
-		{current_logtalk_flag(suppress_path_prefix, Prefix)},
-		( 	atom_concat(Prefix, File, File0) ->
-			true
-		;	File = File0
-		).
+		suppress_path_prefix(File0, File).
 
-	entity_predicate_line(Other::Functor//Arity, Entity, Line) :-
+	entity_predicate_location(Other::Functor//Arity, Entity, File, Line) :-
 		ExtendedArity is Arity + 2,
-		entity_predicate_line(Other::Functor/ExtendedArity, Entity, Line).
-	entity_predicate_line(Other::Functor/Arity, Entity, Line) :-
+		entity_predicate_location(Other::Functor/ExtendedArity, Entity, File, Line).
+	entity_predicate_location(Other::Functor/Arity, Entity, File, Line) :-
 		( 	current_object(Entity) ->
 			object_property(Entity, provides(Functor/Arity, Other, Properties))
 		;	current_category(Entity) ->
 			category_property(Entity, provides(Functor/Arity, Other, Properties))
 		;	Properties = []
 		),
-		( 	member(line_count(Line), Properties) ->
-			true
-		;	Line = -1
-		).
-	entity_predicate_line(Functor//Arity, Entity, Line) :-
+		predicate_source_location(Entity, Properties, File, Line).
+	entity_predicate_location(Functor//Arity, Entity, File, Line) :-
 		ExtendedArity is Arity + 2,
-		entity_predicate_line(Functor/ExtendedArity, Entity, Line).
-	entity_predicate_line(Functor/Arity, Entity, Line) :-
+		entity_predicate_location(Functor/ExtendedArity, Entity, File, Line).
+	entity_predicate_location(Functor/Arity, Entity, File, Line) :-
 		( 	current_object(Entity) ->
 			object_property(Entity, defines(Functor/Arity, Properties))
 		;	current_category(Entity) ->
 			category_property(Entity, defines(Functor/Arity, Properties))
 		;	Properties = []
 		),
+		predicate_source_location(Entity, Properties, File, Line).
+
+	predicate_source_location(Entity, Properties, File, Line) :-
+		(	member(include(File0), Properties) ->
+			suppress_path_prefix(File0, File)
+		;	entity_file(Entity, File)
+		),
 		( 	member(line_count(Line), Properties) ->
 			true
 		;	Line = -1
+		).
+
+	suppress_path_prefix(Path, ShortPath) :-
+		{current_logtalk_flag(suppress_path_prefix, Prefix)},
+		(	atom_concat(Prefix, ShortPath, Path) ->
+			true
+		;	ShortPath = Path
 		).
 
 	member(Element, [Element| _]).

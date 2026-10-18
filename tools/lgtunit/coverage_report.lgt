@@ -33,9 +33,9 @@
 :- object(coverage_report).
 
 	:- info([
-		version is 3:2:1,
+		version is 3:2:2,
 		author is 'Paulo Moura',
-		date is 2026-02-06,
+		date is 2026-10-18,
 		comment is 'Intercepts unit test execution messages and generates a ``coverage_report.xml`` file with a test suite code coverage results.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(coverage_report))``.'
@@ -128,7 +128,8 @@
 		write_xml_element(covered, Covered),
 		write_xml_element(total, Total),
 		write_xml_element(percentage, Percentage),
-		entity_predicate_line(Predicate, Entity, Line),
+		entity_predicate_location(Predicate, Entity, File, Line),
+		write_xml_element(file, File),
 		write_xml_element(line, Line),
 		write_xml_close_tag(predicate).
 
@@ -256,40 +257,46 @@
 		;	File0 = '',
 			Line = -1
 		),
-		% bypass the compiler as the flag is only created after loading this file
-		{current_logtalk_flag(suppress_path_prefix, Prefix)},
-		(	atom_concat(Prefix, File, File0) ->
-			true
-		;	File = File0
-		).
+		suppress_path_prefix(File0, File).
 
-	entity_predicate_line(Other::Functor//Arity, Entity, Line) :-
+	entity_predicate_location(Other::Functor//Arity, Entity, File, Line) :-
 		ExtendedArity is Arity + 2,
-		entity_predicate_line(Other::Functor/ExtendedArity, Entity, Line).
-	entity_predicate_line(Other::Functor/Arity, Entity, Line) :-
+		entity_predicate_location(Other::Functor/ExtendedArity, Entity, File, Line).
+	entity_predicate_location(Other::Functor/Arity, Entity, File, Line) :-
 		(	current_object(Entity) ->
 			object_property(Entity, provides(Functor/Arity, Other, Properties))
 		;	current_category(Entity) ->
 			category_property(Entity, provides(Functor/Arity, Other, Properties))
 		;	Properties = []
 		),
-		(	member(line_count(Line), Properties) ->
-			true
-		;	Line = -1
-		).
-	entity_predicate_line(Functor//Arity, Entity, Line) :-
+		predicate_source_location(Entity, Properties, File, Line).
+	entity_predicate_location(Functor//Arity, Entity, File, Line) :-
 		ExtendedArity is Arity + 2,
-		entity_predicate_line(Functor/ExtendedArity, Entity, Line).
-	entity_predicate_line(Functor/Arity, Entity, Line) :-
+		entity_predicate_location(Functor/ExtendedArity, Entity, File, Line).
+	entity_predicate_location(Functor/Arity, Entity, File, Line) :-
 		(	current_object(Entity) ->
 			object_property(Entity, defines(Functor/Arity, Properties))
 		;	current_category(Entity) ->
 			category_property(Entity, defines(Functor/Arity, Properties))
 		;	Properties = []
 		),
+		predicate_source_location(Entity, Properties, File, Line).
+
+	predicate_source_location(Entity, Properties, File, Line) :-
+		(	member(include(File0), Properties) ->
+			suppress_path_prefix(File0, File)
+		;	entity_file(Entity, File, _)
+		),
 		(	member(line_count(Line), Properties) ->
 			true
 		;	Line = -1
+		).
+
+	suppress_path_prefix(Path, ShortPath) :-
+		{current_logtalk_flag(suppress_path_prefix, Prefix)},
+		(	atom_concat(Prefix, ShortPath, Path) ->
+			true
+		;	ShortPath = Path
 		).
 
 	member(Element, [Element| _]).

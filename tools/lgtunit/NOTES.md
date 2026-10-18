@@ -1843,6 +1843,7 @@ the corresponding report object before running tests:
 - `coverage_report.lgt` for a simple XML report (`coverage_report.xml`)
 - `cobertura_report.lgt` for a Cobertura XML report (`cobertura.xml`)
 - `lcov_report.lgt` for an LCOV report (`lcov.info`)
+- `sonar_report.lgt` for a Sonar Generic Coverage XML report (`sonar.xml`)
 
 When using the `logtalk_tester` automation scripts, select the report format
 using the `-c` option with one of the values `xml`, `cobertura`, or `lcov`

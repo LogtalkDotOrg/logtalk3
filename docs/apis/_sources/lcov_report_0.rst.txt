@@ -14,8 +14,8 @@ Intercepts unit test execution messages and generates a ``lcov.info`` file with 
 |    ``logtalk_load(lgtunit(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-03-13
+| **Version:** 1:0:1
+| **Date:** 2026-10-18
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -69,10 +69,10 @@ Table of entity source files.
 
 ------------
 
-.. index:: predicate_coverage_/7
-.. _lcov_report/0::predicate_coverage_/7:
+.. index:: predicate_coverage_/8
+.. _lcov_report/0::predicate_coverage_/8:
 
-``predicate_coverage_/7``
+``predicate_coverage_/8``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Table of predicate coverage data.
@@ -81,9 +81,9 @@ Table of predicate coverage data.
 |    ``dynamic``
 
 | **Template:**
-|    ``predicate_coverage_(Entity,Predicate,Line,Covered,Total,Percentage,Clauses)``
+|    ``predicate_coverage_(Entity,File,Predicate,Line,Covered,Total,Percentage,Clauses)``
 | **Mode and number of proofs:**
-|    ``predicate_coverage_(?entity_identifier,?predicate_indicator,?integer,?integer,?integer,?float,?list)`` - ``zero_or_more``
+|    ``predicate_coverage_(?entity_identifier,?atom,?predicate_indicator,?integer,?integer,?integer,?float,?list)`` - ``zero_or_more``
 
 
 ------------

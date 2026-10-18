@@ -326,6 +326,12 @@ Locked restores now resolve dependencies using only locked versions, propagate
 registry restoration and pack installation failures, and verify the final
 setup against the lock file.
 
+* CHANGED: The `lgtunit` tool linter warning for misuse of `^^assertion/1-2`
+goals to print the original variable names.
+
+* ADDED: Support to the `lgtunit` tool for exporting code coverage stats in
+the Sonar Generic Coverage XML format.
+
 * IMPROVED: The `diagrams` and `lgtdoc` tool tests performance by removing
 redundant tests.
 
@@ -335,11 +341,12 @@ redundant tests.
 automation scripts to print the fastest and slowest test set names and
 execution times plus the mean and median test set running times.
 
+* FIXED: The `lgtunit` tool XML, Cobertura, and LCOV code coverage exporters
+to correctly report source locations for predicates defined in included files.
+Also fixed missing element declarations in the XML code coverage report DTD.
+
 * FIXED: The `help` tool inline opening of documentation pages when their file
 paths contain spaces.
-
-* CHANGED: The `lgtunit` tool linter warning for misuse of `^^assertion/1-2`
-goals to print the original variable names.
 
 Examples
 --------

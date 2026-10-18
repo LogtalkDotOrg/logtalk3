@@ -40,9 +40,15 @@
 <!ELEMENT line (#PCDATA)>
 
 
-<!ELEMENT predicate (name, clauses, covered, total, percentage, line)>
+<!ELEMENT predicate (name, clauses, covered, total, percentage, file?, line)>
 
 <!ELEMENT clauses (#PCDATA)>
+
+<!ELEMENT covered (#PCDATA)>
+
+<!ELEMENT total (#PCDATA)>
+
+<!ELEMENT percentage (#PCDATA)>
 
 
 <!ELEMENT entities_covered (#PCDATA)>
