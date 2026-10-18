@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-26,
+		date is 2026-10-18,
 		comment is 'Unit tests for the "ksuid" library.'
 	]).
 
@@ -67,10 +67,10 @@
 	test(ksuid_generate_1_error_alphabet_duplicates, error(domain_error(ksuid_alphabet, '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyy'))) :-
 		ksuid(atom, '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyy')::generate(_).
 
-	quick_check(ksuid_default_valid, ksuid(-atom)).
-	quick_check(ksuid_atom_valid, ksuid({atom}, {'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'}, -atom)).
-	quick_check(ksuid_chars_valid, ksuid({chars}, {'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'}, -chars)).
-	quick_check(ksuid_codes_valid, ksuid({codes}, {'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'}, -codes)).
+	quick_check(ksuid_default_valid, ksuid(-atom), [n(50)]).
+	quick_check(ksuid_atom_valid, ksuid({atom}, {'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'}, -atom), [n(50)]).
+	quick_check(ksuid_chars_valid, ksuid({chars}, {'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'}, -chars), [n(50)]).
+	quick_check(ksuid_codes_valid, ksuid({codes}, {'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'}, -codes), [n(50)]).
 
 	ksuid(KSUID) :-
 		ksuid::generate(KSUID).
