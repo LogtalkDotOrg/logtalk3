@@ -408,8 +408,8 @@
 :- dynamic('$lgt_pp_predicate_definition_location_'/4).
 % '$lgt_pp_defines_predicate_'(Head, Functor/Arity, ExCtx, THead, Mode, Origin)
 :- dynamic('$lgt_pp_defines_predicate_'/6).
-% '$lgt_pp_inline_predicate_'(Functor/Arity)
-:- dynamic('$lgt_pp_inline_predicate_'/1).
+% '$lgt_pp_inline_predicate_'(Functor, Arity)
+:- dynamic('$lgt_pp_inline_predicate_'/2).
 
 % '$lgt_pp_predicate_definition_location_'(Other, Functor, Arity, File, Lines)
 :- dynamic('$lgt_pp_predicate_definition_location_'/5).
@@ -418,12 +418,12 @@
 :- dynamic('$lgt_pp_non_tail_recursive_predicate_'/4).
 % '$lgt_pp_predicate_recursive_calls_'(Functor, Arity, Counter)
 :- dynamic('$lgt_pp_predicate_recursive_calls_'/3).
-% '$lgt_pp_calls_predicate_'(Functor/Arity, TFunctor/TArity, HeadFunctor/HeadArity, File, Lines)
-:- dynamic('$lgt_pp_calls_predicate_'/5).
-% '$lgt_pp_calls_self_predicate_'(Functor/Arity, HeadFunctor/HeadArity, File, Lines)
-:- dynamic('$lgt_pp_calls_self_predicate_'/4).
-% '$lgt_pp_calls_super_predicate_'(Functor/Arity, HeadFunctor/HeadArity, File, Lines)
-:- dynamic('$lgt_pp_calls_super_predicate_'/4).
+% '$lgt_pp_calls_predicate_'(Functor, Arity, TFunctor/TArity, HeadFunctor/HeadArity, File, Lines)
+:- dynamic('$lgt_pp_calls_predicate_'/6).
+% '$lgt_pp_calls_self_predicate_'(Functor, Arity, HeadFunctor/HeadArity, File, Lines)
+:- dynamic('$lgt_pp_calls_self_predicate_'/5).
+% '$lgt_pp_calls_super_predicate_'(Functor, Arity, HeadFunctor/HeadArity, File, Lines)
+:- dynamic('$lgt_pp_calls_super_predicate_'/5).
 
 % '$lgt_pp_updates_predicate_'(Dynamic, HeadFunctor/HeadArity, File, Lines)
 :- dynamic('$lgt_pp_updates_predicate_'/4).
@@ -8310,21 +8310,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity, MainFile) :-
-	'$lgt_pp_calls_self_predicate_'(Predicate, Caller, File, Lines),
+	'$lgt_pp_calls_self_predicate_'(Functor, Arity, Caller, File, Lines),
 	'$lgt_property_location'(MainFile, File, Lines, Location),
-	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, calls(::Predicate, Caller, no, no, Location)))),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, calls(::Functor/Arity, Caller, no, no, Location)))),
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity, MainFile) :-
-	'$lgt_pp_calls_super_predicate_'(Predicate, Caller, File, Lines),
+	'$lgt_pp_calls_super_predicate_'(Functor, Arity, Caller, File, Lines),
 	'$lgt_property_location'(MainFile, File, Lines, Location),
-	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, calls(^^Predicate, Caller, no, no, Location)))),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, calls(^^Functor/Arity, Caller, no, no, Location)))),
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity, MainFile) :-
-	'$lgt_pp_calls_predicate_'(Predicate, _, Caller, File, Lines),
+	'$lgt_pp_calls_predicate_'(Functor, Arity, _, Caller, File, Lines),
 	'$lgt_property_location'(MainFile, File, Lines, Location),
-	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, calls(Predicate, Caller, no, no, Location)))),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, calls(Functor/Arity, Caller, no, no, Location)))),
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity, MainFile) :-
@@ -8467,7 +8467,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Flags0 is 8
 	;	Flags0 is 0
 	),
-	(	'$lgt_pp_inline_predicate_'(Functor/Arity) ->
+	(	'$lgt_pp_inline_predicate_'(Functor, Arity) ->
 		Flags1 is Flags0 + 4
 	;	Flags1 is Flags0
 	),
@@ -9022,12 +9022,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_predicate_definition_location_'(_, _, _, _, _)),
 	retractall('$lgt_pp_redefined_built_in_'(_, _, _)),
 	retractall('$lgt_pp_defines_predicate_'(_, _, _, _, _, _)),
-	retractall('$lgt_pp_inline_predicate_'(_)),
+	retractall('$lgt_pp_inline_predicate_'(_, _)),
 	retractall('$lgt_pp_non_tail_recursive_predicate_'(_, _, _, _)),
 	retractall('$lgt_pp_predicate_recursive_calls_'(_, _, _)),
-	retractall('$lgt_pp_calls_predicate_'(_, _, _, _, _)),
-	retractall('$lgt_pp_calls_self_predicate_'(_, _, _, _)),
-	retractall('$lgt_pp_calls_super_predicate_'(_, _, _, _)),
+	retractall('$lgt_pp_calls_predicate_'(_, _, _, _, _, _)),
+	retractall('$lgt_pp_calls_self_predicate_'(_, _, _, _, _)),
+	retractall('$lgt_pp_calls_super_predicate_'(_, _, _, _, _)),
 	retractall('$lgt_pp_updates_predicate_'(_, _, _, _)),
 	retractall('$lgt_pp_references_'(_, _, _, _)),
 	retractall('$lgt_pp_non_portable_predicate_'(_, _, _)),
@@ -13323,10 +13323,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 % is defined can be accessed through simple unification at the clause head
 
 '$lgt_compile_clause'((Head :- Body), _, _, _, Ctx) :-
-	(	'$lgt_variant'(Body, Head) ->
-		true
-	;	Body = (Goal, _),
+	(	Body = (Goal, _) ->
 		'$lgt_variant'(Goal, Head)
+	;	'$lgt_variant'(Body, Head)
 	),
 	'$lgt_comp_ctx_term'(Ctx, Term),
 	callable(Term),
@@ -14132,8 +14131,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(\+ Pred, _, _, _, Ctx) :-
 	callable(Pred),
-	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_negated_goal_alternative'(Pred, Alt),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_increment_compiling_warnings_counter',
@@ -18117,10 +18116,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 			assertz('$lgt_pp_predicate_recursive_calls_'(Functor, Arity, Count))
 		;	assertz('$lgt_pp_predicate_recursive_calls_'(Functor, Arity, 1))
 		)
-	;	'$lgt_pp_calls_predicate_'(Functor/Arity, _, Caller, File, Lines) ->
+	;	'$lgt_pp_calls_predicate_'(Functor, Arity, _, Caller, File, Lines) ->
 		% already recorded for the current clause being compiled
 		true
-	;	assertz('$lgt_pp_calls_predicate_'(Functor/Arity, TFunctor/TArity, Caller, File, Lines))
+	;	assertz('$lgt_pp_calls_predicate_'(Functor, Arity, TFunctor/TArity, Caller, File, Lines))
 	).
 
 
@@ -18148,10 +18147,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	functor(Predicate, HeadFunctor, HeadArity),
 	'$lgt_source_file_context'(File, Lines),
-	(	'$lgt_pp_calls_self_predicate_'(Functor/Arity, Caller, File, Lines) ->
+	(	'$lgt_pp_calls_self_predicate_'(Functor, Arity, Caller, File, Lines) ->
 		% already recorded for the current clause being compiled (however unlikely!)
 		true
-	;	assertz('$lgt_pp_calls_self_predicate_'(Functor/Arity, Caller, File, Lines))
+	;	assertz('$lgt_pp_calls_self_predicate_'(Functor, Arity, Caller, File, Lines))
 	).
 
 
@@ -18179,10 +18178,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	functor(Predicate, HeadFunctor, HeadArity),
 	'$lgt_source_file_context'(File, Lines),
-	(	'$lgt_pp_calls_super_predicate_'(Functor/Arity, Caller, File, Lines) ->
+	(	'$lgt_pp_calls_super_predicate_'(Functor, Arity, Caller, File, Lines) ->
 		% already recorded for the current clause being compiled (however unlikely!)
 		true
-	;	assertz('$lgt_pp_calls_super_predicate_'(Functor/Arity, Caller, File, Lines))
+	;	assertz('$lgt_pp_calls_super_predicate_'(Functor, Arity, Caller, File, Lines))
 	).
 
 
@@ -21178,7 +21177,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_def_'(DefClauseOld)),
 	DefClauseNew =.. [Def, Head, ExCtx, TBody],
 	asserta('$lgt_pp_def_'(DefClauseNew)),
-	assertz('$lgt_pp_inline_predicate_'(Functor/Arity)),
+	assertz('$lgt_pp_inline_predicate_'(Functor, Arity)),
 	% next candidate predicate
 	fail.
 
@@ -26420,11 +26419,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	Body = (Goal1, Goal2).
 
 '$lgt_dcg_rule'((NonTerminal, Terminals --> GRBody), _, Ctx) :-
-	once((
-		'$lgt_variant'(GRBody, NonTerminal)
-	;	GRBody = (GRFirst, _),
+	(	GRBody = (GRFirst, _) ->
 		'$lgt_variant'(GRFirst, NonTerminal)
-	)),
+	;	'$lgt_variant'(GRBody, NonTerminal)
+	),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_compiler_flag'(left_recursion, warning),
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
@@ -26473,11 +26471,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_dcg_body'(GRBody, S0, S, Body, Ctx).
 
 '$lgt_dcg_rule'((NonTerminal --> GRBody), _, Ctx) :-
-	once((
-		'$lgt_variant'(GRBody, NonTerminal)
-	;	GRBody = (GRFirst, _),
+	(	GRBody = (GRFirst, _) ->
 		'$lgt_variant'(GRFirst, NonTerminal)
-	)),
+	;	'$lgt_variant'(GRBody, NonTerminal)
+	),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_compiler_flag'(left_recursion, warning),
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
