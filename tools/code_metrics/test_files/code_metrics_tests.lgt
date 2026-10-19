@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:6:1,
+		version is 0:7:0,
 		author is 'Ebrahim Azarisooreh',
-		date is 2020-04-13,
+		date is 2026-10-19,
 		comment is 'Unit tests for code metrics framework.'
 	]).
 
@@ -48,21 +48,21 @@
 		entity(obj_c).
 
 	test(code_metrics_file, deterministic) :-
-		object_property(lgtunit, file(File)),
+		object_property(logtalk, file(File)),
 		file(File).
 
 	test(code_metrics_library, deterministic) :-
-		library(lgtunit).
+		library(core).
 
 	test(code_metrics_rlibrary, deterministic) :-
-		rlibrary(lgtunit).
+		rlibrary(core).
 
 	test(code_metrics_directory, deterministic) :-
-		logtalk::expand_library_path(lgtunit, Directory),
+		logtalk::expand_library_path(core, Directory),
 		directory(Directory).
 
 	test(code_metrics_rdirectory, deterministic) :-
-		logtalk::expand_library_path(lgtunit, Directory),
+		logtalk::expand_library_path(core, Directory),
 		rdirectory(Directory).
 
 	test(code_metrics_all, deterministic) :-
