@@ -25,7 +25,7 @@
 	:- info([
 		version is 0:10:0,
 		author is 'Paulo Moura',
-		date is 2026-10-16,
+		date is 2026-10-19,
 		comment is 'Unit tests for the "lgtdoc" tool.'
 	]).
 
@@ -89,13 +89,13 @@
 		all.
 
 	test(lgtdoc_libraries_1_01, deterministic) :-
-		libraries([lgtunit,packs]).
+		libraries([lgtunit,lgtdoc]).
 
 	test(lgtdoc_library_1_01, deterministic) :-
 		library(lgtunit).
 
 	test(lgtdoc_rlibraries_1_01, deterministic) :-
-		rlibraries([lgtunit,packs]).
+		rlibraries([lgtunit,lgtdoc]).
 
 	test(lgtdoc_rlibrary_1_01, deterministic) :-
 		rlibrary(lgtunit).
