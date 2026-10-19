@@ -14130,40 +14130,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_body'(Pred1, meta, TPred1, DPred1, Ctx),
 	'$lgt_compile_body'(Pred2, Caller, TPred2, DPred2, Ctx).
 
-'$lgt_compile_body'(not(Pred), Caller, TPred, DPred, Ctx) :-
-	'$lgt_prolog_built_in_predicate'(not(_)),
-	\+ '$lgt_pp_defines_predicate_'(not(_), _, _, _, _, _),
-	!,
-	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-		'$lgt_compiler_flag'(deprecated, warning),
-		'$lgt_source_file_context'(File, Lines),
-		'$lgt_pp_entity_'(Type, Entity, _) ->
-		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(
-			warning(deprecated),
-			deprecated_predicate(File, Lines, Type, Entity, (not)/1, (\+)/1)
-		)
-	;	true
-	),
-	'$lgt_compile_body'(\+ Pred, Caller, TPred, DPred, Ctx).
-
-'$lgt_compile_body'(fail_if(Pred), Caller, TPred, DPred, Ctx) :-
-	'$lgt_prolog_built_in_predicate'(fail_if(_)),
-	\+ '$lgt_pp_defines_predicate_'(fail_if(_), _, _, _, _, _),
-	!,
-	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-		'$lgt_compiler_flag'(deprecated, warning),
-		'$lgt_source_file_context'(File, Lines),
-		'$lgt_pp_entity_'(Type, Entity, _) ->
-		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(
-			warning(deprecated),
-			deprecated_predicate(File, Lines, Type, Entity, fail_if/1, (\+)/1)
-		)
-	;	true
-	),
-	'$lgt_compile_body'(\+ Pred, Caller, TPred, DPred, Ctx).
-
 '$lgt_compile_body'(\+ Pred, _, _, _, Ctx) :-
 	callable(Pred),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
@@ -15910,23 +15876,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % database handling built-in predicates
 
-'$lgt_compile_body'(abolish(Functor, Arity), Caller, TCond, DCond, Ctx) :-
-	'$lgt_prolog_built_in_predicate'(abolish(_, _)),
-	\+ '$lgt_pp_defines_predicate_'(abolish(_, _), _, _, _, _, _),
-	!,
-	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-		'$lgt_compiler_flag'(deprecated, warning),
-		'$lgt_source_file_context'(File, Lines),
-		'$lgt_pp_entity_'(Type, Entity, _) ->
-		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(
-			warning(deprecated),
-			deprecated_predicate(File, Lines, Type, Entity, abolish/2, abolish/1)
-		)
-	;	true
-	),
-	'$lgt_compile_body'(abolish(Functor/Arity), Caller, TCond, DCond, Ctx).
-
 '$lgt_compile_body'(abolish(Term), Caller, TCond, DCond, Ctx) :-
 	nonvar(Term),
 	Term = ':'(Module, Pred),
@@ -15979,23 +15928,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 		TCond = '$lgt_abolish'(Database, Pred, Database, p(_), ExCtx)
 	),
 	DCond = '$lgt_debug'(goal(abolish(Pred), TCond), ExCtx).
-
-'$lgt_compile_body'(assert(Clause), Caller, TCond, DCond, Ctx) :-
-	'$lgt_prolog_built_in_predicate'(assert(_)),
-	\+ '$lgt_pp_defines_predicate_'(assert(_), _, _, _, _, _),
-	!,
-	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-		'$lgt_compiler_flag'(deprecated, warning),
-		'$lgt_source_file_context'(File, Lines),
-		'$lgt_pp_entity_'(Type, Entity, _) ->
-		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(
-			warning(deprecated),
-			deprecated_predicate(File, Lines, Type, Entity, assert/1, assertz/1)
-		)
-	;	true
-	),
-	'$lgt_compile_body'(assertz(Clause), Caller, TCond, DCond, Ctx).
 
 '$lgt_compile_body'(asserta(QClause), Caller, TCond, DCond, Ctx) :-
 	nonvar(QClause),
@@ -16373,23 +16305,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % database handling built-in predicates that take a clause reference
 % if supported as built-in predicates by the backend Prolog compiler
-
-'$lgt_compile_body'(assert(Clause, Ref), Caller, TCond, DCond, Ctx) :-
-	'$lgt_prolog_built_in_predicate'(assert(_, _)),
-	\+ '$lgt_pp_defines_predicate_'(assert(_, _), _, _, _, _, _),
-	!,
-	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-		'$lgt_compiler_flag'(deprecated, warning),
-		'$lgt_source_file_context'(File, Lines),
-		'$lgt_pp_entity_'(Type, Entity, _) ->
-		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(
-			warning(deprecated),
-			deprecated_predicate(File, Lines, Type, Entity, assert/2, assertz/2)
-		)
-	;	true
-	),
-	'$lgt_compile_body'(assertz(Clause, Ref), Caller, TCond, DCond, Ctx).
 
 '$lgt_compile_body'(asserta(QClause, Ref), Caller, TCond, DCond, Ctx) :-
 	'$lgt_prolog_built_in_predicate'(asserta(_, _)),
@@ -24875,6 +24790,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 % standard predicate; callers must check that the predicate is a
 % built-in predicate that is not being locally redefined
 
+'$lgt_prolog_deprecated_built_in_predicate'(abolish(Functor, Arity), abolish(Functor/Arity)).
+'$lgt_prolog_deprecated_built_in_predicate'(assert(Clause), assertz(Clause)).
+'$lgt_prolog_deprecated_built_in_predicate'(assert(Clause, Ref), assertz(Clause, Ref)).
 '$lgt_prolog_deprecated_built_in_predicate'(current_predicate(Name, Template), current_predicate(Name/Arity)) :-
 	callable(Template),
 	Template \= ':'(_, _),
