@@ -19484,10 +19484,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_message_to_object'(Pred, Obj, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-	'$lgt_current_object_'(Obj, _, Dcl, _, _, _, _, _, _, _, _),
-	\+ call(Dcl, forward(_), _, _, _, _, _),
-	\+ call(Dcl, Pred, _, _, _, _, _),
 	'$lgt_compiler_flag'(unknown_predicates, warning),
+	'$lgt_current_object_'(Obj, _, Dcl, _, _, _, _, _, _, _, _),
+	\+ call(Dcl, Pred, _, _, _, _, _),
+	\+ call(Dcl, forward(_), _, _, _, _, _),
 	'$lgt_source_file_context'(File, Lines),
 	'$lgt_increment_compiling_warnings_counter',
 	(	'$lgt_pp_entity_'(Type, Entity, _) ->
