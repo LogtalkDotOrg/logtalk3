@@ -36,6 +36,8 @@
 :- object(invalid_mixed_profile_declarations,
 	implements(clustering_dataset_protocol)).
 
+	:- set_logtalk_flag(duplicated_clauses, silent).
+
 	attribute_values(age, continuous).
 	attribute_values(age, continuous).
 	attribute_values(channel, [online, retail]).

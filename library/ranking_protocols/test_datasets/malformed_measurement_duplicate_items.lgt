@@ -18,8 +18,11 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 :- object(malformed_measurement_duplicate_items,
 	implements(pairwise_measurement_dataset_protocol)).
+
+	:- set_logtalk_flag(duplicated_clauses, silent).
 
 	item(alpha).
 	item(alpha).

@@ -36,8 +36,6 @@
 		porter_stemmer(chars) as porter_stemmer
 	]).
 
-	cover(porter_stemmer(_)).
-
 	:- include(tests_porter).
 
 :- end_object.

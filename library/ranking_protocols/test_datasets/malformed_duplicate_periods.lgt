@@ -18,8 +18,11 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 :- object(malformed_duplicate_periods,
 	implements(temporal_pairwise_ranking_dataset_protocol)).
+
+	:- set_logtalk_flag(duplicated_clauses, silent).
 
 	item(alpha).
 	item(beta).

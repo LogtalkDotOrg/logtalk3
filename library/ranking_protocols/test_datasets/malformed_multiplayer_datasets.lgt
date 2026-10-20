@@ -6,8 +6,11 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 :- object(multiplayer_duplicate_matches,
 	implements(multiplayer_ranking_dataset_protocol)).
+
+	:- set_logtalk_flag(duplicated_clauses, silent).
 
 	item(alpha).
 	item(beta).

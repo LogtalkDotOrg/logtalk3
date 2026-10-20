@@ -36,8 +36,6 @@
 		lovins_stemmer(codes) as lovins_stemmer
 	]).
 
-	cover(lovins_stemmer(_)).
-
 	:- include(tests_lovins).
 
 :- end_object.

@@ -23,9 +23,9 @@
 	implements(stemmer_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-02-05,
+		date is 2026-10-20,
 		comment is 'Lovins stemmer algorithm implementation for English words.',
 		parameters is [
 			'Representation' - 'Word representation. Valid values are ``atom``, ``codes``, and ``chars``.'
@@ -251,19 +251,15 @@
 	ending([i,f,i,e,r], none).
 	ending([i,f,i,e,s], none).
 	ending([i,l,i,t,y], none).
-	ending([i,n,g,l,y], none).
 	ending([i,o,u,s,e], none).
 	ending([i,s,h,e,d], none).
 	ending([i,s,h,e,r], none).
-	ending([i,s,h,e,s], none).
 	ending([i,t,i,e,s], none).
 	ending([i,t,i,n,g], none).
 	ending([i,t,o,r,s], none).
 	ending([i,t,o,r,y], none).
-	ending([i,v,e,l,y], none).
 	ending([i,v,i,s,m], none).
 	ending([i,v,i,s,t], none).
-	ending([i,v,i,t,y], none).
 	ending([i,z,e,r,s], none).
 	ending([l,e,s,s,l], none).
 	ending([m,e,n,t,s], none).
@@ -359,8 +355,6 @@
 	ending([a,l,s], b).
 	ending([a,n,t], b).
 	ending([a,r,s], none).
-	ending([a,r,y], none).
-	ending([a,t,a], none).
 	ending([a,t,e], none).
 	ending([e,a,l], none).
 	ending([e,a,r], none).
@@ -377,7 +371,6 @@
 	ending([i,b,l], none).
 	ending([i,c,a], none).
 	ending([i,c,e], none).
-	ending([i,c,s], none).
 	ending([i,d,e], none).
 	ending([i,e,d], none).
 	ending([i,e,r], none).
@@ -389,7 +382,6 @@
 	ending([i,n,g], none).
 	ending([i,o,n], q).
 	ending([i,s,e], none).
-	ending([i,s,h], none).
 	ending([i,s,m], b).
 	ending([i,s,t], none).
 	ending([i,t,e], none).

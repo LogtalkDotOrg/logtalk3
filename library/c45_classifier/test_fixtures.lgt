@@ -23,11 +23,13 @@
 	implements(dataset_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-10-11,
+		date is 2026-10-20,
 		comment is 'Fixed edge-case and generated datasets for the "c45_classifier" library unit tests.'
 	]).
+
+	:- set_logtalk_flag(duplicated_clauses, silent).
 
 	class(label).
 

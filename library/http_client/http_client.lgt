@@ -23,9 +23,9 @@
 	imports([options, http_message_helpers, http_text_helpers, http_origin_site_helpers])).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-07-28,
+		date is 2026-10-20,
 		comment is 'Request-oriented HTTP client facade built on top of the URL and HTTP transport libraries.'
 	]).
 
@@ -637,13 +637,9 @@
 		proper_list(Properties).
 	valid_option(connection_options(ConnectionOptions)) :-
 		proper_list(ConnectionOptions).
-
 	valid_option(protocols(Protocols)) :-
 		proper_list(Protocols).
 	valid_option(key(_Key)).
-	valid_option(connection_options(ConnectionOptions)) :-
-		proper_list(ConnectionOptions).
-
 	valid_option(last_event_id(LastEventId)) :-
 		(	LastEventId == none ->
 			true

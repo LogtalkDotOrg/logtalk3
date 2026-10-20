@@ -23,11 +23,13 @@
 	implements(regression_dataset_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-02,
+		date is 2026-10-20,
 		comment is 'Regression dataset fixture containing a duplicated attribute declaration in the dataset schema.'
 	]).
+
+	:- set_logtalk_flag(duplicated_clauses, silent).
 
 	attribute_values(x, continuous).
 	attribute_values(x, continuous).

@@ -41,10 +41,13 @@
 	]).
 
 	cluster(sample_clusterer(_Attributes), Instance, Cluster) :-
-		(\+ member(x-_, Instance) ->
+		(	\+ member(x-_, Instance) ->
 			Cluster = categorical
-		; memberchk(x-X, Instance),
-		  (X < 3 -> Cluster = left ; Cluster = right)
+		;	memberchk(x-X, Instance),
+		  	(	X < 3 ->
+				Cluster = left
+			;	Cluster = right
+			)
 		).
 
 	print_clusterer(Clusterer) :-
@@ -184,6 +187,8 @@
 
 
 :- object(duplicate_attribute_declarations).
+
+	:- set_logtalk_flag(duplicated_clauses, silent).
 
 	:- public(attribute_values/2).
 

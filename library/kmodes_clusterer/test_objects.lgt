@@ -48,6 +48,8 @@
 :- object(invalid_shopping_profile_declarations,
 	implements(clustering_dataset_protocol)).
 
+	:- set_logtalk_flag(duplicated_clauses, silent).
+
 	attribute_values(channel, [online, retail]).
 	attribute_values(channel, [online, retail]).
 	attribute_values(region, [north, south]).

@@ -23,9 +23,9 @@
 	implements(json_ld_protocol)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:4:1,
 		author is 'Paulo Moura',
-		date is 2026-09-25,
+		date is 2026-10-20,
 		comment is 'JSON-LD 1.1 parser, generator, and processor. Builds on top of the ``json`` library for JSON parsing and generation.',
 		parameters is [
 			'ObjectRepresentation' - 'Object representation to be used when decoding JSON objects. Possible values are ``curly`` (default) and ``list``.',
@@ -1505,7 +1505,8 @@
 		curly_pairs_to_list(Rest, RestList).
 	curly_pairs_to_list(Pair, [Pair]).
 
-	list_to_curly_pairs([Pair], Pair) :- !.
+	list_to_curly_pairs([Pair], Pair) :-
+		!.
 	list_to_curly_pairs([Pair| Pairs], (Pair, Rest)) :-
 		list_to_curly_pairs(Pairs, Rest).
 
@@ -1518,13 +1519,18 @@
 		;	Pair = ':'(Key, Value)
 		).
 
-	pair_key_value(Key-Value, Key, Value) :- _PairRepresentation_ == dash, !.
-	pair_key_value(Key=Value, Key, Value) :- _PairRepresentation_ == equal, !.
-	pair_key_value(':'(Key, Value), Key, Value) :- !.
+	pair_key_value(Key-Value, Key, Value) :-
+		_PairRepresentation_ == dash,
+		!.
+	pair_key_value(Key=Value, Key, Value) :-
+		_PairRepresentation_ == equal,
+		!.
+	pair_key_value(':'(Key, Value), Key, Value) :-
+		!.
 	% Fallback for mixed representations (e.g. reading from JSON library)
-	pair_key_value(Key-Value, Key, Value) :- !.
-	pair_key_value(Key=Value, Key, Value) :- !.
-	pair_key_value(':'(Key, Value), Key, Value) :- !.
+	pair_key_value(Key-Value, Key, Value).
+	pair_key_value(Key=Value, Key, Value).
+	% pair_key_value(':'(Key, Value), Key, Value).
 
 	json_ld_string_atom(Value, Atom) :-
 		atom(Value),

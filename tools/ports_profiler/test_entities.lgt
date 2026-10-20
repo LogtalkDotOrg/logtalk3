@@ -21,6 +21,8 @@
 
 :- object(bar).
 
+	:- set_logtalk_flag(duplicated_clauses, silent).
+
 	:- public(bar/2).
 	:- mode(bar(-integer, -atom), one).
 
