@@ -34,6 +34,8 @@
 :- object(duplicate_attribute_declaration_random_projection_dataset,
 	implements(dimension_reduction_dataset_protocol)).
 
+	:- set_logtalk_flag(duplicated_clauses, silent).
+
 	attribute_values(x, continuous).
 	attribute_values(x, continuous).
 	attribute_values(y, continuous).

@@ -70,6 +70,8 @@
 :- object(duplicate_attribute_declaration_nmf_dataset,
 	implements(dimension_reduction_dataset_protocol)).
 
+	:- set_logtalk_flag(duplicated_clauses, silent).
+
 	attribute_values(f1, continuous).
 	attribute_values(f1, continuous).
 	attribute_values(f2, continuous).
