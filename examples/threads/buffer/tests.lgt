@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2025-04-24,
+		date is 2026-10-20,
 		comment is 'Unit tests for the "threads/buffer" example.'
 	]).
 
@@ -38,9 +38,9 @@
 	test(buffer_slower_consumer, true, [setup(clean)]) :-
 		^^suppress_text_output,
 		threaded_once(producer(4,0.3)::run(13)),
-		threaded_once(consumer(4,0.8)::run(13)),
+		threaded_once(consumer(4,0.7)::run(13)),
 		threaded_exit(producer(4,0.3)::run(13)),
-		threaded_exit(consumer(4,0.8)::run(13)),
+		threaded_exit(consumer(4,0.7)::run(13)),
 		setof(PItem, buffer(4)::produced(PItem), PItems),
 		^^assertion(PItems == [0,1,2,3,4,5,6,7,8,9,10,11,12]),
 		setof(CItem, buffer(4)::consumed(CItem), CItems),
@@ -48,9 +48,9 @@
 
 	test(buffer_slower_producer, true, [setup(clean)]) :-
 		^^suppress_text_output,
-		threaded_once(producer(4,0.8)::run(13)),
+		threaded_once(producer(4,0.7)::run(13)),
 		threaded_once(consumer(4,0.3)::run(13)),
-		threaded_exit(producer(4,0.8)::run(13)),
+		threaded_exit(producer(4,0.7)::run(13)),
 		threaded_exit(consumer(4,0.3)::run(13)),
 		setof(PItem, buffer(4)::produced(PItem), PItems),
 		^^assertion(PItems == [0,1,2,3,4,5,6,7,8,9,10,11,12]),
