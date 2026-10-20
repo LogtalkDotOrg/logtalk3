@@ -13513,6 +13513,58 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(callable, Head),
 	functor(Head, Functor, Arity).
 
+% compile the head of a clause of another entity predicate (which we check if declared multifile)
+
+'$lgt_compile_head'(Other::Head, _, _, _) :-
+	'$lgt_check'(entity_identifier, Other),
+	'$lgt_check'(callable, Head),
+	fail.
+
+'$lgt_compile_head'(user::Head, user::Functor/Arity, Head, _) :-
+	!,
+	functor(Head, Functor, Arity),
+	(	'$lgt_pp_directive_'(multifile(Functor/Arity)) ->
+		true
+	;	'$lgt_pp_missing_multifile_directive_'(user::Functor/Arity, _, _) ->
+		true
+	;	'$lgt_source_file_context'(File, Lines),
+		assertz('$lgt_pp_missing_multifile_directive_'(user::Functor/Arity, File, Lines))
+	).
+
+'$lgt_compile_head'(Other::Head, Other::Functor/Arity, THead, Ctx) :-
+	!,
+	functor(Head, Functor, Arity),
+	'$lgt_entity_to_prefix'(Other, Prefix),
+	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
+	(	'$lgt_pp_directive_'(multifile(TFunctor/TArity)) ->
+		true
+	;	throw(existence_error(directive, multifile(Other::Functor/Arity)))
+	),
+	functor(THead, TFunctor, TArity),
+	'$lgt_unify_head_thead_arguments'(Head, THead, ExCtx),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
+
+% compile the head of a clause of a module predicate (which we check if declared multifile)
+
+'$lgt_compile_head'(':'(Module, Head), ':'(Module, Functor/Arity), THead, _) :-
+	!,
+	'$lgt_check'(callable, Head),
+	functor(Head, Functor, Arity),
+	(	Module == user ->
+		THead = Head
+	;	'$lgt_check'(module_identifier, Module),
+		THead = ':'(Module, Head)
+	),
+	(	Module == user, '$lgt_pp_directive_'(multifile(Functor/Arity)) ->
+		true
+	;	'$lgt_pp_directive_'(multifile(':'(Module, Functor/Arity))) ->
+		true
+	;	'$lgt_pp_missing_multifile_directive_'(':'(Module,Functor/Arity), _, _) ->
+		true
+	;	'$lgt_source_file_context'(File, Lines),
+		assertz('$lgt_pp_missing_multifile_directive_'(':'(Module,Functor/Arity), File, Lines))
+	).
+
 % not the first clause for this predicate; reuse the compiled head template
 %
 % we must ensure that Mode is the same to prevent that the auxiliary clauses
@@ -13581,58 +13633,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 		missing_reference_to_built_in_protocol(File, Lines, Type, Entity, Protocol)
 	),
 	fail.
-
-% compile the head of a clause of another entity predicate (which we check if declared multifile)
-
-'$lgt_compile_head'(Other::Head, _, _, _) :-
-	'$lgt_check'(entity_identifier, Other),
-	'$lgt_check'(callable, Head),
-	fail.
-
-'$lgt_compile_head'(user::Head, user::Functor/Arity, Head, _) :-
-	!,
-	functor(Head, Functor, Arity),
-	(	'$lgt_pp_directive_'(multifile(Functor/Arity)) ->
-		true
-	;	'$lgt_pp_missing_multifile_directive_'(user::Functor/Arity, _, _) ->
-		true
-	;	'$lgt_source_file_context'(File, Lines),
-		assertz('$lgt_pp_missing_multifile_directive_'(user::Functor/Arity, File, Lines))
-	).
-
-'$lgt_compile_head'(Other::Head, Other::Functor/Arity, THead, Ctx) :-
-	!,
-	functor(Head, Functor, Arity),
-	'$lgt_entity_to_prefix'(Other, Prefix),
-	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
-	(	'$lgt_pp_directive_'(multifile(TFunctor/TArity)) ->
-		true
-	;	throw(existence_error(directive, multifile(Other::Functor/Arity)))
-	),
-	functor(THead, TFunctor, TArity),
-	'$lgt_unify_head_thead_arguments'(Head, THead, ExCtx),
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
-
-% compile the head of a clause of a module predicate (which we check if declared multifile)
-
-'$lgt_compile_head'(':'(Module, Head), ':'(Module, Functor/Arity), THead, _) :-
-	!,
-	'$lgt_check'(callable, Head),
-	functor(Head, Functor, Arity),
-	(	Module == user ->
-		THead = Head
-	;	'$lgt_check'(module_identifier, Module),
-		THead = ':'(Module, Head)
-	),
-	(	Module == user, '$lgt_pp_directive_'(multifile(Functor/Arity)) ->
-		true
-	;	'$lgt_pp_directive_'(multifile(':'(Module, Functor/Arity))) ->
-		true
-	;	'$lgt_pp_missing_multifile_directive_'(':'(Module,Functor/Arity), _, _) ->
-		true
-	;	'$lgt_source_file_context'(File, Lines),
-		assertz('$lgt_pp_missing_multifile_directive_'(':'(Module,Functor/Arity), File, Lines))
-	).
 
 % compile the head of a clause of a user defined predicate
 
@@ -23311,7 +23311,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	SourceData = sd(Original, _, _, OriginalFile, OriginalLines),
 		% exclude directives
 		Original \= (:- _),
-		'$lgt_pp_entity_'(Type, Entity, _),
 		'$lgt_internal_term_template'(Term, Template),
 		'$lgt_pp_entity_term_'(Template, sd(Duplicate, _, _, File, Lines), _),
 		% logical update semantics can enumerate the entity clause we just retracted
@@ -23321,6 +23320,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		),
 		'$lgt_variant'(Original, Duplicate) ->
 		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_pp_entity_'(Type, Entity, _),
 		(	Original = (_ --> _) ->
 			'$lgt_print_message'(
 				warning(duplicated_clauses),
