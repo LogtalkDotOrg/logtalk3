@@ -23314,6 +23314,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_pp_entity_'(Type, Entity, _),
 		'$lgt_internal_term_template'(Term, Template),
 		'$lgt_pp_entity_term_'(Template, sd(Duplicate, _, _, File, Lines), _),
+		% logical update semantics can enumerate the entity clause we just retracted
+		File \== OriginalFile,
+		Lines \== OriginalLines,
 		'$lgt_variant'(Original, Duplicate) ->
 		'$lgt_increment_compiling_warnings_counter',
 		(	Original = (_ --> _) ->

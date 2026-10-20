@@ -38,6 +38,9 @@ or the goal being goal-expanded.
 dynamic binding caches. Thanks to Andrew Davison and Arun Majumdar for the
 bug reports and patches.
 
+* FIXED: The linter check for duplicated clauses could report false positives
+due to logical update semantics.
+
 Documentation
 -------------
 
