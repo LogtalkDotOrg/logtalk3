@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2026-10-10,
+		date is 2026-10-21,
 		comment is 'Unit tests for the "logistic_regression_classifier" library.'
 	]).
 
@@ -37,9 +37,16 @@
 		memberchk/2
 	]).
 
+	:- private(dataset_classifier_/2).
+	:- dynamic(dataset_classifier_/2).
+
 	cover(logistic_regression_classifier).
 
+	setup :-
+		retractall(dataset_classifier_(_, _)).
+
 	cleanup :-
+		retractall(dataset_classifier_(_, _)),
 		^^clean_file('test_output.pl').
 
 	test(logistic_regression_accumulate_gradients, deterministic((Gradients == Expected, Repeated == Expected, Initial == ZeroGradients, TrainingRows == ExpectedRows))) :-
@@ -72,54 +79,60 @@
 		logistic_regression_classifier << accumulate_model_gradients(TrainingRows, Models, Initial, Actual).
 
 	test(logistic_regression_learn_2_weather, deterministic(ground(Classifier))) :-
-		logistic_regression_classifier::learn(weather, Classifier).
+		logistic_regression_classifier::learn(weather, Classifier),
+		retractall(dataset_classifier_(weather, _)),
+		assertz(dataset_classifier_(weather, Classifier)).
 
 	test(logistic_regression_valid_classifier_1, deterministic(logistic_regression_classifier::valid_classifier(Classifier))) :-
-		logistic_regression_classifier::learn(weather, Classifier).
+		dataset_classifier(weather, Classifier).
 
 	test(logistic_regression_invalid_classifier_1, fail) :-
-		logistic_regression_classifier::learn(weather, lr_classifier(Classes, Encoders, _Models, Options)),
+		dataset_classifier(weather, lr_classifier(Classes, Encoders, _Models, Options)),
 		logistic_regression_classifier::valid_classifier(lr_classifier(Classes, Encoders, [class_model(yes, 0.0, [0.0]), class_model(no, 0.0, [0.0])], Options)).
 
 	test(logistic_regression_predict_3_weather_yes, deterministic(Prediction == yes)) :-
-		logistic_regression_classifier::learn(weather, Classifier),
+		dataset_classifier(weather, Classifier),
 		logistic_regression_classifier::predict(Classifier, [outlook-overcast, temperature-hot, humidity-normal, wind-weak], Prediction).
 
 	test(logistic_regression_predict_3_weather_no, deterministic(Prediction == no)) :-
-		logistic_regression_classifier::learn(weather, Classifier),
+		dataset_classifier(weather, Classifier),
 		logistic_regression_classifier::predict(Classifier, [outlook-sunny, temperature-hot, humidity-high, wind-strong], Prediction).
 
 	test(logistic_regression_probability_3_weather, deterministic((ProbabilityYes > ProbabilityNo, Total =~= 1.0))) :-
-		logistic_regression_classifier::learn(weather, Classifier),
+		dataset_classifier(weather, Classifier),
 		logistic_regression_classifier::predict_probabilities(Classifier, [outlook-overcast, temperature-hot, humidity-normal, wind-weak], Probabilities),
 		memberchk(yes-ProbabilityYes, Probabilities),
 		memberchk(no-ProbabilityNo, Probabilities),
 		Total is ProbabilityYes + ProbabilityNo.
 
 	test(logistic_regression_learn_2_mixed, deterministic(ground(Classifier))) :-
-		logistic_regression_classifier::learn(mixed, Classifier).
+		logistic_regression_classifier::learn(mixed, Classifier),
+		retractall(dataset_classifier_(mixed, _)),
+		assertz(dataset_classifier_(mixed, Classifier)).
 
 	test(logistic_regression_predict_3_mixed_no, deterministic(Prediction == no)) :-
-		logistic_regression_classifier::learn(mixed, Classifier),
+		dataset_classifier(mixed, Classifier),
 		logistic_regression_classifier::predict(Classifier, [age-26, income-36000, student-yes, credit_rating-fair], Prediction).
 
 	test(logistic_regression_predict_3_mixed_yes, deterministic(Prediction == yes)) :-
-		logistic_regression_classifier::learn(mixed, Classifier),
+		dataset_classifier(mixed, Classifier),
 		logistic_regression_classifier::predict(Classifier, [age-45, income-75000, student-no, credit_rating-fair], Prediction).
 
 	test(logistic_regression_learn_2_missing_mixed, deterministic(ground(Classifier))) :-
-		logistic_regression_classifier::learn(missing_mixed, Classifier).
+		logistic_regression_classifier::learn(missing_mixed, Classifier),
+		retractall(dataset_classifier_(missing_mixed, _)),
+		assertz(dataset_classifier_(missing_mixed, Classifier)).
 
 	test(logistic_regression_predict_3_missing_mixed_yes, deterministic(Prediction == yes)) :-
-		logistic_regression_classifier::learn(missing_mixed, Classifier),
+		dataset_classifier(missing_mixed, Classifier),
 		logistic_regression_classifier::predict(Classifier, [age-_, income-70500, student-no, credit_rating-fair], Prediction).
 
 	test(logistic_regression_predict_3_missing_mixed_no, deterministic(Prediction == no)) :-
-		logistic_regression_classifier::learn(missing_mixed, Classifier),
+		dataset_classifier(missing_mixed, Classifier),
 		logistic_regression_classifier::predict(Classifier, [age-28, income-_, student-yes, credit_rating-excellent], Prediction).
 
 	test(logistic_regression_predict_3_unseen_categorical_value, error(domain_error(attribute_value(credit_rating, [fair, excellent]), poor))) :-
-		logistic_regression_classifier::learn(mixed, Classifier),
+		dataset_classifier(mixed, Classifier),
 		logistic_regression_classifier::predict(Classifier, [age-40, income-50000, student-yes, credit_rating-poor], _Prediction).
 
 	test(logistic_regression_learn_3_custom_options, deterministic([LearningRate, MaximumIterations, Tolerance, L2Regularization] == [0.05, 1500, 1.0e-6, 0.01])) :-
@@ -130,45 +143,47 @@
 		memberchk(l2_regularization(L2Regularization), Options).
 
 	test(logistic_regression_learn_2_iris_small, deterministic(ground(Classifier))) :-
-		logistic_regression_classifier::learn(iris_small, Classifier).
+		logistic_regression_classifier::learn(iris_small, Classifier),
+		retractall(dataset_classifier_(iris_small, _)),
+		assertz(dataset_classifier_(iris_small, Classifier)).
 
 	test(logistic_regression_predict_3_iris_setosa, deterministic(Prediction == setosa)) :-
-		logistic_regression_classifier::learn(iris_small, Classifier),
+		dataset_classifier(iris_small, Classifier),
 		logistic_regression_classifier::predict(Classifier, [sepal_length-5.0, sepal_width-3.4, petal_length-1.4, petal_width-0.2], Prediction).
 
 	test(logistic_regression_predict_3_iris_versicolor, deterministic(Prediction == versicolor)) :-
-		logistic_regression_classifier::learn(iris_small, Classifier),
+		dataset_classifier(iris_small, Classifier),
 		logistic_regression_classifier::predict(Classifier, [sepal_length-6.7, sepal_width-3.1, petal_length-4.7, petal_width-1.5], Prediction).
 
 	test(logistic_regression_predict_3_iris_virginica, deterministic(Prediction == virginica)) :-
-		logistic_regression_classifier::learn(iris_small, Classifier),
+		dataset_classifier(iris_small, Classifier),
 		logistic_regression_classifier::predict(Classifier, [sepal_length-6.4, sepal_width-3.0, petal_length-5.8, petal_width-2.2], Prediction).
 
 	test(logistic_regression_probability_3_iris_small_sum, deterministic(Total =~= 1.0)) :-
-		logistic_regression_classifier::learn(iris_small, Classifier),
+		dataset_classifier(iris_small, Classifier),
 		logistic_regression_classifier::predict_probabilities(Classifier, [sepal_length-6.4, sepal_width-3.0, petal_length-5.8, petal_width-2.2], Probabilities),
 		sum_probabilities(Probabilities, 0.0, Total).
 
 	test(logistic_regression_export_to_clauses_4, deterministic(Prediction == yes)) :-
-		logistic_regression_classifier::learn(weather, Classifier),
+		dataset_classifier(weather, Classifier),
 		logistic_regression_classifier::export_to_clauses(_Dataset, Classifier, classifier, [classifier(ExportedClassifier)]),
 		logistic_regression_classifier::predict(ExportedClassifier, [outlook-overcast, temperature-hot, humidity-normal, wind-weak], Prediction).
 
 	test(logistic_regression_export_to_file_4_written, deterministic(os::file_exists(File))) :-
 		^^file_path('test_output.pl', File),
-		logistic_regression_classifier::learn(weather, Classifier),
+		dataset_classifier(weather, Classifier),
 		logistic_regression_classifier::export_to_file(weather, Classifier, classify, File).
 
 	test(logistic_regression_export_to_file_4_loaded, deterministic(Prediction == yes)) :-
 		^^file_path('test_output.pl', File),
-		logistic_regression_classifier::learn(weather, Classifier),
+		dataset_classifier(weather, Classifier),
 		logistic_regression_classifier::export_to_file(weather, Classifier, classifier, File),
 		logtalk_load(File),
 		{classifier(LoadedClassifier)},
 		logistic_regression_classifier::predict(LoadedClassifier, [outlook-overcast, temperature-hot, humidity-normal, wind-weak], Prediction).
 
 	test(logistic_regression_diagnostics_2, deterministic((Model == logistic_regression_classifier, Options1 == Options2))) :-
-		logistic_regression_classifier::learn(weather, Classifier),
+		dataset_classifier(weather, Classifier),
 		logistic_regression_classifier::diagnostics(Classifier, Diagnostics),
 		logistic_regression_classifier::classifier_options(Classifier, Options1),
 		memberchk(model(Model), Diagnostics),
@@ -176,10 +191,17 @@
 
 	test(logistic_regression_print_classifier_1, deterministic) :-
 		^^suppress_text_output,
-		logistic_regression_classifier::learn(mixed, Classifier),
+		dataset_classifier(mixed, Classifier),
 		logistic_regression_classifier::print_classifier(Classifier).
 
 	% auxiliary predicates
+
+	dataset_classifier(Dataset, Classifier) :-
+		( dataset_classifier_(Dataset, Classifier) ->
+			true
+		; logistic_regression_classifier::learn(Dataset, Classifier),
+			assertz(dataset_classifier_(Dataset, Classifier))
+		).
 
 	sum_probabilities([], Total, Total).
 	sum_probabilities([_-Probability| Probabilities], Total0, Total) :-

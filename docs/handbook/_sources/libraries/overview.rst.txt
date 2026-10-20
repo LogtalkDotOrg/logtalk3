@@ -154,7 +154,7 @@ a small number of standalone reusable entities, namely ``attributes``,
 ``cloning``, ``counters``, and ``streamvars``.
 
 See also the libraries provided in the "Contributions" and "Ports"
-sections.
+sections:
 
 - Contributions: ``flags``, ``iso8601``, ``pddl_parser``,
   ``verdi_neruda``, and ``xml_parser``.

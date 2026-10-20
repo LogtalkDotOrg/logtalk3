@@ -195,9 +195,13 @@ and `logistic_regression_classifier` libraries.
 * IMPROVED: Performance of the `random` library `circular_uniform_polar/3`,
 `logseries/2`, `standard_normal/1`, and `von_mises/3` sampling predicates.
 
-* IMPROVED: Performance of the `ccsds_packets`, `crypto`, `genetic_algorithm`,
-`gradient_boosting_classifier`, `sgd_classifier`, `knn_distance_anomaly_detector`,
-`particle_swarm_optimization`, `paseto`, and `svr_regression` library tests.
+* IMPROVED: Performance of the `ant_colony`, `arbitrary`, `ccsds_packets`,
+`c45_classifier`, `crypto`, `cuid2`, `differential_evolution`,
+`genetic_algorithm`, `gradient_boosting_classifier`, `ids`, `sgd_classifier`,
+`knn_distance_anomaly_detector`, `ksuid`, `linear_svm_classifier`,
+`lof_anomaly_detector`, `logistic_regression_classifier`, `nanoid`,
+`particle_swarm_optimization`, `paseto`, `snowflakeid`, `svr_regression`,
+`typeid`, and `uuid` library tests.
 
 * IMPROVED: Rewrite predicate definitions as tail-recursive in the
 `ant_colony`, `association_rule_miner`, `ccsds`, `colley_ranker`, `crontab`,
@@ -337,8 +341,8 @@ goals to print the original variable names.
 * ADDED: Support to the `lgtunit` tool for exporting code coverage stats in
 the Sonar Generic Coverage XML format.
 
-* IMPROVED: The `diagrams` and `lgtdoc` tool tests performance by removing
-redundant tests.
+* IMPROVED: The performance of the `code_metrics`, `diagrams`, and `lgtdoc`
+tool tests.
 
 * IMPROVED: The performance of the `logtalk_tester.sh` Bash shell script.
 
