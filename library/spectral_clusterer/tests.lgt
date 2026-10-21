@@ -344,7 +344,7 @@
 		Model = spectral_clusterer(_, Rows, Degrees, Components, Eigenvalues, Projection, Centroids, Sigma, _, _),
 		forall(
 			member(Features, [[1.0, 1.0], [1.2, 0.9], [5.0, 5.0], [5.2, 4.9]]),
-			(	spectral_clusterer<<affinity_vector(Rows, Features, Sigma, Affinities),
+			(	spectral_clusterer<<affinity_vector(Rows, Features, Sigma, Affinities, 0.0, _),
 				numberlist::sum(Affinities, Degree),
 				reference_affinities(Affinities, Degrees, Degree, NormalizedAffinities),
 				reference_projection(Components, Eigenvalues, NormalizedAffinities, Reference0),
