@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-10-21,
 		comment is 'Unit tests for the "simulated_annealing" library.'
 	]).
 
@@ -36,10 +36,20 @@
 	cover(simulated_annealing(_, _)).
 	cover(simulated_annealing(_)).
 
+	:- private(cached_result_/2).
+	:- dynamic(cached_result_/2).
+
+	setup :-
+		retractall(cached_result_(_, _)).
+
+	cleanup :-
+		retractall(cached_result_(_, _)),
+		quadratic_progress::clear_log.
+
 	% quadratic problem with default options
 
 	test(sa_quadratic_run_2, true((number(Energy), Energy < 5.0))) :-
-		simulated_annealing(quadratic)::run(_State, Energy).
+		cached_run(quadratic, _State, Energy).
 
 	test(sa_quadratic_run_3_default, true((number(Energy), Energy < 5.0))) :-
 		simulated_annealing(quadratic)::run(_State, Energy, []).
@@ -48,10 +58,10 @@
 		simulated_annealing(quadratic)::run(_State, Energy, [max_steps(50000)]).
 
 	test(sa_quadratic_state_is_number, true(number(State))) :-
-		simulated_annealing(quadratic)::run(State, _Energy).
+		cached_run(quadratic, State, _Energy).
 
 	test(sa_quadratic_energy_non_negative, true(Energy >= 0.0)) :-
-		simulated_annealing(quadratic)::run(_State, Energy).
+		cached_run(quadratic, _State, Energy).
 
 	% quadratic problem with custom stop condition
 
@@ -61,16 +71,16 @@
 	% TSP problem
 
 	test(sa_tsp_run_2, true((list::valid(State), number(Energy)))) :-
-		simulated_annealing(tsp)::run(State, Energy).
+		cached_run(tsp, State, Energy).
 
 	test(sa_tsp_tour_is_permutation, true) :-
-		simulated_annealing(tsp)::run(Tour, _Energy),
+		cached_run(tsp, Tour, _Energy),
 		msort(Tour, Sorted),
 		msort([a, b, c, d, e, f], Expected),
 		Sorted == Expected.
 
 	test(sa_tsp_tour_has_six_cities, true(Length == 6)) :-
-		simulated_annealing(tsp)::run(Tour, _Energy),
+		cached_run(tsp, Tour, _Energy),
 		length(Tour, Length).
 
 	test(sa_tsp_energy_below_naive, true(Energy < 50.0)) :-
@@ -80,7 +90,7 @@
 
 	test(sa_tsp_custom_cooling_schedule, true(Energy < 50.0)) :-
 		% TSP defines a custom cooling_schedule/3 (0.999 factor)
-		simulated_annealing(tsp)::run(_Tour, Energy).
+		cached_run(tsp, _Tour, Energy).
 
 	% option validation
 
@@ -102,7 +112,7 @@
 	% run/4 returns statistics
 
 	test(sa_run_4_returns_statistics, true) :-
-		simulated_annealing(quadratic)::run(_State, _Energy, Statistics, []),
+		cached_run(quadratic, [], _State, _Energy, Statistics),
 		member(steps(Steps), Statistics), integer(Steps), Steps > 0,
 		member(acceptances(Acc), Statistics), integer(Acc), Acc >= 0,
 		member(improvements(Imp), Statistics), integer(Imp), Imp >= 0,
@@ -114,7 +124,7 @@
 		member(steps(Steps), Statistics).
 
 	test(sa_run_4_acceptances_bounded, true((Acc >= 0, Acc =< Steps))) :-
-		simulated_annealing(quadratic)::run(_State, _Energy, Statistics, []),
+		cached_run(quadratic, [], _State, _Energy, Statistics),
 		member(steps(Steps), Statistics),
 		member(acceptances(Acc), Statistics).
 
@@ -129,22 +139,16 @@
 		% With default geometric cooling (0.995) from initial_temperature(100),
 		% the default min_temperature(0.001) is reached at around step 2300,
 		% well before max_steps(10000)
-		simulated_annealing(quadratic)::run(_State, _Energy, Statistics, []),
+		cached_run(quadratic, [], _State, _Energy, Statistics),
 		member(steps(Steps), Statistics).
 
 	% seed option for reproducibility
 
 	test(sa_seed_reproducible_results, true(Energy1 =:= Energy2)) :-
-		quadratic::reset_seed,
-		simulated_annealing(quadratic)::run(_State1, Energy1, [seed(42)]),
-		quadratic::reset_seed,
-		simulated_annealing(quadratic)::run(_State2, Energy2, [seed(42)]).
+		cached_seed_runs(_State1, Energy1, _State2, Energy2).
 
 	test(sa_seed_reproducible_state, true(State1 =:= State2)) :-
-		quadratic::reset_seed,
-		simulated_annealing(quadratic)::run(State1, _Energy1, [seed(42)]),
-		quadratic::reset_seed,
-		simulated_annealing(quadratic)::run(State2, _Energy2, [seed(42)]).
+		cached_seed_runs(State1, _Energy1, State2, _Energy2).
 
 	% neighbor_state/3 delta-energy variant
 
@@ -163,9 +167,7 @@
 	% progress reporting
 
 	test(sa_progress_updates_called, true(Count > 0)) :-
-		quadratic_progress::clear_log,
-		simulated_annealing(quadratic_progress)::run(_State, _Energy, [updates(5)]),
-		findall(1, quadratic_progress::progress_log(_, _, _, _, _), List),
+		cached_progress(List),
 		length(List, Count).
 
 	test(sa_progress_updates_count, true(Count =:= 6)) :-
@@ -183,9 +185,8 @@
 		length(List, Count).
 
 	test(sa_progress_log_values, true((number(Step), Step > 0, number(Temp), Temp > 0.0, number(BestE), AccRate >= 0.0, AccRate =< 1.0, ImpRate >= 0.0, ImpRate =< 1.0))) :-
-		quadratic_progress::clear_log,
-		simulated_annealing(quadratic_progress)::run(_State, _Energy, [updates(5)]),
-		quadratic_progress::progress_log(Step, Temp, BestE, AccRate, ImpRate).
+		cached_progress(Log),
+		member(progress(Step, Temp, BestE, AccRate, ImpRate), Log).
 
 	% reheating restarts
 
@@ -218,7 +219,7 @@
 	% auto-temperature estimation
 
 	test(sa_estimate_temperature_1, true((float(T), T > 0.0))) :-
-		simulated_annealing(quadratic)::estimate_temperature(T).
+		cached_temperature(T).
 
 	test(sa_estimate_temperature_2, true((float(T), T > 0.0))) :-
 		simulated_annealing(quadratic)::estimate_temperature(T, [samples(100), acceptance_rate(80)]).
@@ -233,16 +234,61 @@
 
 	test(sa_estimate_temperature_usable, true(Energy < 5.0)) :-
 		% The estimated temperature should work well in an actual run
-		simulated_annealing(quadratic)::estimate_temperature(T),
+		cached_temperature(T),
 		% Use it (quadratic ignores initial_temperature when we pass it
 		% but the estimated T confirms it's a reasonable positive float)
 		T > 0.0,
-		simulated_annealing(quadratic)::run(_State, Energy).
+		cached_run(quadratic, _State, Energy).
 
 	test(sa_invalid_option_samples, error(domain_error(option, samples(-1)))) :-
 		simulated_annealing(quadratic)::estimate_temperature(_T, [samples(-1)]).
 
 	test(sa_invalid_option_acceptance_rate, error(domain_error(option, acceptance_rate(100)))) :-
 		simulated_annealing(quadratic)::estimate_temperature(_T, [acceptance_rate(100)]).
+
+	cached_run(Problem, State, Energy) :-
+		(	cached_result_(run(Problem), Result) ->
+			Result = result(State, Energy)
+		;	simulated_annealing(Problem)::run(State, Energy),
+			assertz(cached_result_(run(Problem), result(State, Energy)))
+		).
+
+	cached_run(Problem, Options, State, Energy, Statistics) :-
+		(	cached_result_(run(Problem, Options), Result) ->
+			Result = result(State, Energy, Statistics)
+		;	simulated_annealing(Problem)::run(State, Energy, Statistics, Options),
+			assertz(cached_result_(run(Problem, Options), result(State, Energy, Statistics)))
+		).
+
+	cached_seed_runs(State1, Energy1, State2, Energy2) :-
+		(	cached_result_(seed_runs, Result) ->
+			Result = result(State1, Energy1, State2, Energy2)
+		;	quadratic::reset_seed,
+			simulated_annealing(quadratic)::run(State1, Energy1, [seed(42)]),
+			quadratic::reset_seed,
+			simulated_annealing(quadratic)::run(State2, Energy2, [seed(42)]),
+			assertz(cached_result_(seed_runs, result(State1, Energy1, State2, Energy2)))
+		).
+
+	cached_progress(Log) :-
+		(	cached_result_(progress, Result) ->
+			Log = Result
+		;	quadratic_progress::clear_log,
+			simulated_annealing(quadratic_progress)::run(_State, _Energy, [updates(5)]),
+			findall(
+				progress(Step, Temp, BestE, AccRate, ImpRate),
+				quadratic_progress::progress_log(Step, Temp, BestE, AccRate, ImpRate),
+				Log
+			),
+			assertz(cached_result_(progress, Log))
+		).
+
+	cached_temperature(Temperature) :-
+		(	cached_result_(temperature, Result) ->
+			Temperature = Result
+		;
+			simulated_annealing(quadratic)::estimate_temperature(Temperature),
+			assertz(cached_result_(temperature, Temperature))
+		).
 
 :- end_object.

@@ -201,8 +201,8 @@ and `logistic_regression_classifier` libraries.
 `gaussian_process_regression`, `ids`, `sgd_classifier`,
 `knn_distance_anomaly_detector`, `ksuid`, `linear_svm_classifier`,
 `lof_anomaly_detector`, `logistic_regression_classifier`, `nanoid`,
-`particle_swarm_optimization`, `paseto`, `snowflakeid`, `svr_regression`,
-`tabu_search`, `typeid`, and `uuid` library tests.
+`particle_swarm_optimization`, `paseto`, `simulated_annealing`, `snowflakeid`,
+`svr_regression`, `tabu_search`, `typeid`, and `uuid` library tests.
 
 * IMPROVED: Rewrite predicate definitions as tail-recursive in the
 `ant_colony`, `association_rule_miner`, `ccsds`, `colley_ranker`, `crontab`,
