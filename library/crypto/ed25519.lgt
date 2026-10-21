@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-09-25,
+		date is 2026-10-21,
 		comment is 'Ed25519 (RFC 8032) public-key signature implementation. Requires exact, unbounded integer arithmetic for arithmetic modulo the 255-bit field prime and modulo the group order.'
 	]).
 
@@ -205,10 +205,7 @@
 	ed25519_q(Q) :-
 		Q is (1 << 252) + 27742317777372353535851937790883648493.
 
-	ed25519_d(D) :-
-		ed25519_p(P),
-		ed25519_modp_inv(121666, Inv),
-		D is (-121665 * Inv) mod P.
+	ed25519_d(37095705934669439343138083508754565189542113879843219016388785533085940283555).
 
 	ed25519_modp_inv(X, R) :-
 		ed25519_p(P),
@@ -232,10 +229,7 @@
 		E1 is E >> 1,
 		ed25519_modexp(E1, B1, M, Acc1, R).
 
-	ed25519_modp_sqrt_m1(R) :-
-		ed25519_p(P),
-		Exponent is (P-1)//4,
-		ed25519_modexp(2, Exponent, P, R).
+	ed25519_modp_sqrt_m1(19681161376707505956807079304988542015446066515923890162744021073123829784752).
 
 	% -- Ed25519 point arithmetic, extended coordinates (X,Y,Z,T) --
 	% Complete (exception-free) unified addition formula for twisted Edwards curves,
@@ -298,13 +292,12 @@
 			)
 		).
 
-	ed25519_base_point(G) :-
-		ed25519_p(P),
-		ed25519_modp_inv(5, Inv5),
-		GY is (4 * Inv5) mod P,
-		ed25519_recover_x(GY, 0, GX),
-		GT is (GX*GY) mod P,
-		G = pt(GX,GY,1,GT).
+	ed25519_base_point(pt(
+		15112221349535400772501151409588531511454012693041857206046113283949847762202,
+		46316835694926478169428394003475163141307993866256225615783033603165251855960,
+		1,
+		46827403850823179245072216630277197565144205554125654976674165829533817101731
+	)).
 
 	ed25519_point_compress(pt(X,Y,Z,_), Bytes) :-
 		ed25519_p(P),

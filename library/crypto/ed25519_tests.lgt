@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-10-15,
+		date is 2026-10-21,
 		comment is 'Unit tests for the "crypto" library implementation of Ed25519.'
 	]).
 
@@ -37,8 +37,25 @@
 		append/3, length/2
 	]).
 
+	:- private(ed25519_test_vector_/2).
+	:- dynamic(ed25519_test_vector_/2).
+	:- mode(ed25519_test_vector_(?list(byte), ?list(byte)), zero_or_one).
+	:- info(ed25519_test_vector_/2, [
+		comment is 'Stores the decoded RFC 8032 public key and signature for reuse by the test set.',
+		argnames is ['PublicKey', 'Signature']
+	]).
+
 	cover(crypto).
 	cover(ed25519).
+
+	setup :-
+		retractall(ed25519_test_vector_(_, _)),
+		hex_bytes('d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a', PublicKey),
+		hex_bytes('e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b', Signature),
+		assertz(ed25519_test_vector_(PublicKey, Signature)).
+
+	cleanup :-
+		retractall(ed25519_test_vector_(_, _)).
 
 	% ed25519_keypair/2, ed25519_public_key/2 tests
 
@@ -98,9 +115,7 @@
 		ed25519_sign([1,2,3], [], _).
 
 	test(crypto_ed25519_verify_3_01, deterministic) :-
-		hex_bytes('9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60', Seed),
-		ed25519_public_key(Seed, PublicKey),
-		ed25519_sign(Seed, [], Signature),
+		ed25519_test_vector(PublicKey, Signature),
 		ed25519_verify(PublicKey, [], Signature).
 
 	test(crypto_ed25519_verify_3_02, fail) :-
@@ -168,11 +183,21 @@
 		ed25519_test_vector(PublicKey, _),
 		ed25519_verify(PublicKey, [], [1,2,3]).
 
+	test(crypto_ed25519_verify_3_20, deterministic) :-
+		hex_bytes('3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c', PublicKey),
+		hex_bytes('92a009a9f0d4cab8720e820b5f642540a2b27b5416503f8fb3762223ebdb69da085ac1e43e15996e458f3613d0f11d8c387b2eaeb4302aeeb00d291612bb0c00', Signature),
+		ed25519_verify(PublicKey, [0x72], Signature).
+
+	test(crypto_ed25519_verify_3_21, deterministic) :-
+		hex_bytes('fc51cd8e6218a1a38da47ed00230f0580816ed13ba3303ac5deb911548908025', PublicKey),
+		hex_bytes('6291d657deec24024827e69c3abe01a30ce548a284743a445e3680d7db5ac3ac18ff9b538d16f290ae67f760984dc6594a7c15e9716ed28dc027beceea1ec40a', Signature),
+		ed25519_verify(PublicKey, [0xaf,0x82], Signature).
+
 	% auxiliary predicates
 
 	ed25519_test_vector(PublicKey, Signature) :-
-		hex_bytes('d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a', PublicKey),
-		hex_bytes('e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b', Signature).
+		ed25519_test_vector_(PublicKey, Signature),
+		!.
 
 	ed25519_check_bad_r(BadPointHex) :-
 		ed25519_test_vector(PublicKey, Signature),

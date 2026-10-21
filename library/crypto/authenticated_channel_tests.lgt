@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-03,
+		date is 2026-10-21,
 		comment is 'Unit tests for the "crypto" library authenticated channel implementation.'
 	]).
 
@@ -48,14 +48,27 @@
 		argnames is ['Offer', 'PendingState', 'Response', 'AliceChannel', 'BobChannel']
 	]).
 
+	:- private(message_fixture_/2).
+	:- dynamic(message_fixture_/2).
+	:- mode(message_fixture_(?compound, ?compound), zero_or_one).
+	:- info(message_fixture_/2, [
+		comment is 'Stores an initial channel message and the resulting sender state for reuse by the test set.',
+		argnames is ['Message', 'AliceChannel']
+	]).
+
 	cover(authenticated_channel).
 
 	setup :-
+		retractall(channel_fixture_(_, _, _, _, _)),
+		retractall(message_fixture_(_, _)),
 		build_channels(Offer, PendingState, Response, AliceChannel, BobChannel),
-		assertz(channel_fixture_(Offer, PendingState, Response, AliceChannel, BobChannel)).
+		assertz(channel_fixture_(Offer, PendingState, Response, AliceChannel, BobChannel)),
+		authenticated_channel_encrypt(AliceChannel, [], [1], Message, AliceChannel1),
+		assertz(message_fixture_(Message, AliceChannel1)).
 
 	cleanup :-
-		retractall(channel_fixture_(_, _, _, _, _)).
+		retractall(channel_fixture_(_, _, _, _, _)),
+		retractall(message_fixture_(_, _)).
 
 	test(crypto_authenticated_channel_01, deterministic(Plaintext == [72,105])) :-
 		setup_channels(AliceChannel0, BobChannel0),
@@ -77,14 +90,14 @@
 		authenticated_channel_encrypt(AliceChannel1, [], [1,2,3], Message2, _AliceChannel2).
 
 	test(crypto_authenticated_channel_04, fail) :-
-		setup_channels(AliceChannel0, BobChannel0),
-		authenticated_channel_encrypt(AliceChannel0, [], [1], Message, _AliceChannel1),
+		setup_channels(_AliceChannel0, BobChannel0),
+		message_fixture_(Message, _AliceChannel1),
 		authenticated_channel_decrypt(BobChannel0, [], Message, _Plaintext, BobChannel1),
 		authenticated_channel_decrypt(BobChannel1, [], Message, _ReplayPlaintext, _BobChannel2).
 
 	test(crypto_authenticated_channel_05, fail) :-
-		setup_channels(AliceChannel0, BobChannel0),
-		authenticated_channel_encrypt(AliceChannel0, [], [1], _Message0, AliceChannel1),
+		setup_channels(_AliceChannel0, BobChannel0),
+		message_fixture_(_Message0, AliceChannel1),
 		authenticated_channel_encrypt(AliceChannel1, [], [2], Message1, _AliceChannel2),
 		authenticated_channel_decrypt(BobChannel0, [], Message1, _Plaintext, _BobChannel1).
 
@@ -113,8 +126,8 @@
 		authenticated_channel_finalize(PendingState1, Response2, _AliceChannel).
 
 	test(crypto_authenticated_channel_10, fail) :-
-		setup_channels(AliceChannel0, BobChannel0),
-		authenticated_channel_encrypt(AliceChannel0, [], [1], authenticated_channel_message(1, Counter, CiphertextAndTag), _AliceChannel1),
+		setup_channels(_AliceChannel0, BobChannel0),
+		message_fixture_(authenticated_channel_message(1, Counter, CiphertextAndTag), _AliceChannel1),
 		flip_last_byte(CiphertextAndTag, TamperedCiphertextAndTag),
 		TamperedMessage = authenticated_channel_message(1, Counter, TamperedCiphertextAndTag),
 		authenticated_channel_decrypt(BobChannel0, [], TamperedMessage, _Plaintext, _BobChannel1).

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-09-24,
+		date is 2026-10-21,
 		comment is 'XChaCha20 stream cipher and XChaCha20-Poly1305 authenticated encryption with associated data algorithm implementation. Requires exact, unbounded integer arithmetic for the Poly1305 130-bit accumulator.'
 	]).
 
@@ -215,19 +215,25 @@
 	poly1305_clamp(R0, R) :-
 		R is R0 /\ 0x0ffffffc0ffffffc0ffffffc0fffffff.
 
-	poly1305_blocks([], _, _, Accumulator, Accumulator) :-
-		!.
 	poly1305_blocks(Message, R, PolyPrime, Accumulator0, Accumulator) :-
 		length(Message, Length),
+		poly1305_blocks_loop(Message, Length, R, PolyPrime, Accumulator0, Accumulator).
+
+	poly1305_blocks_loop([], _, _, _, Accumulator, Accumulator) :-
+		!.
+	poly1305_blocks_loop(Message, Length, R, PolyPrime, Accumulator0, Accumulator) :-
 		(	Length >= 16 ->
 			length(Block, 16),
-			append(Block, Rest, Message)
-		;	Block = Message, Rest = []
+			append(Block, Rest, Message),
+			RestLength is Length - 16
+		; 	Block = Message,
+			Rest = [],
+			RestLength = 0
 		),
 		append(Block, [0x01], BlockPadded),
 		le_bytes_to_int(BlockPadded, N),
 		Accumulator1 is ((Accumulator0 + N) * R) mod PolyPrime,
-		poly1305_blocks(Rest, R, PolyPrime, Accumulator1, Accumulator).
+		poly1305_blocks_loop(Rest, RestLength, R, PolyPrime, Accumulator1, Accumulator).
 
 	% Little-endian byte list <-> non-negative integer, arbitrary length.
 
@@ -273,21 +279,28 @@
 	chacha20_encrypt(_, _, _, [], []) :-
 		!.
 	chacha20_encrypt(KeyWords, Counter, NonceWords, Input, Output) :-
-		chacha20_block(KeyWords, Counter, NonceWords, Keystream),
 		length(Input, Length),
-		( Length >= 64 ->
+		chacha20_encrypt_loop(KeyWords, Counter, NonceWords, Input, Length, Output).
+
+	chacha20_encrypt_loop(_, _, _, [], _, []) :-
+		!.
+	chacha20_encrypt_loop(KeyWords, Counter, NonceWords, Input, Length, Output) :-
+		chacha20_block(KeyWords, Counter, NonceWords, Keystream),
+		(	Length >= 64 ->
 			length(Block, 64),
 			append(Block, Rest, Input),
-			KeystreamBlock = Keystream
+			KeystreamBlock = Keystream,
+			RestLength is Length - 64
 		;	Block = Input,
 			Rest = [],
+			RestLength = 0,
 			length(KeystreamBlock, Length),
 			append(KeystreamBlock, _, Keystream)
 		),
 		xor_bytes(Block, KeystreamBlock, OutputBlock),
 		Counter1 is Counter + 1,
 		append(OutputBlock, OutputRest, Output),
-		chacha20_encrypt(KeyWords, Counter1, NonceWords, Rest, OutputRest).
+		chacha20_encrypt_loop(KeyWords, Counter1, NonceWords, Rest, RestLength, OutputRest).
 
 	chacha20_block(KeyWords, Counter, NonceWords, OutBytes) :-
 		chacha20_constants(C0, C1, C2, C3),

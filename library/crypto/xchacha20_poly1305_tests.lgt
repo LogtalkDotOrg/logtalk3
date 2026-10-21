@@ -25,16 +25,20 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-01,
+		date is 2026-10-21,
 		comment is 'Unit tests for the "crypto" library implementation of XChaCha20-Poly1305.'
 	]).
 
 	:- uses(crypto, [
-		hex_bytes/2, xchacha20_poly1305_encrypt/5, xchacha20_poly1305_decrypt/5
+		chacha20_encrypt/5, hex_bytes/2, xchacha20_poly1305_encrypt/5, xchacha20_poly1305_decrypt/5
 	]).
 
 	:- uses(list, [
-		length/2
+		append/3, length/2, member/2
+	]).
+
+	:- uses(lgtunit, [
+		assertion/1
 	]).
 
 	:- uses(integer, [
@@ -153,5 +157,71 @@
 		sequence(0, 31, Key),
 		sequence(0, 23, Nonce),
 		xchacha20_poly1305_decrypt(Key, Nonce, [], [1,2,3], _).
+
+	test(crypto_xchacha20_poly1305_block_boundaries, all(check_boundary(Key, Nonce, Length, AADLength))) :-
+		sequence(0, 31, Key),
+		sequence(0, 23, Nonce),
+		member(Length, [0,1,15,16,17,63,64,65,127,128,129,200]),
+		member(AADLength, [0,15,16,17]).
+
+	test(crypto_xchacha20_poly1305_boundary_vectors, all(check_boundary_vector(Key, Nonce, AAD, Length, Hex))) :-
+		sequence(0, 31, Key),
+		sequence(0, 23, Nonce),
+		sequence(0, 16, AAD),
+		boundary_vector(Length, Hex).
+
+	test(crypto_chacha20_encrypt_5_rfc8439, deterministic) :-
+		KeyWords = [50462976,117835012,185207048,252579084,319951120,387323156,454695192,522067228],
+		NonceWords = [0,1241513984,0],
+		atom_codes('Ladies and Gentlemen of the class of \'99: If I could offer you only one tip for the future, sunscreen would be it.', Plaintext),
+		hex_bytes('6e2e359a2568f98041ba0728dd0d6981e97e7aec1d4360c20a27afccfd9fae0bf91b65c5524733ab8f593dabcd62b3571639d624e65152ab8f530c359f0861d807ca0dbf500d6a6156a38e088a22b65e52bc514d16ccf806818ce91ab77937365af90bbf74a35be6b40b8eedf2785e42874d', Expected),
+		chacha20_encrypt(KeyWords, 1, NonceWords, Plaintext, Ciphertext),
+		assertion(Ciphertext == Expected),
+		chacha20_encrypt(KeyWords, 1, NonceWords, Ciphertext, Decrypted),
+		assertion(Decrypted == Plaintext),
+		forall(
+			member(Length, [0,1,63,64,65,114]),
+			assertion(check_chacha_prefix(KeyWords, NonceWords, Length, Plaintext, Expected))
+		).
+
+	% auxiliary predicates
+
+	check_boundary(Key, Nonce, Length, AADLength) :-
+		input_bytes(Length, Plaintext),
+		input_bytes(AADLength, AAD),
+		xchacha20_poly1305_encrypt(Key, Nonce, AAD, Plaintext, Ciphertext),
+		CiphertextLength is Length + 16,
+		length(Ciphertext, CiphertextLength),
+		xchacha20_poly1305_decrypt(Key, Nonce, AAD, Ciphertext, Decrypted),
+		assertion(Decrypted == Plaintext),
+		append(Prefix, [Last], Ciphertext),
+		TamperedLast is xor(Last, 1),
+		append(Prefix, [TamperedLast], Tampered),
+		assertion(\+ crypto::xchacha20_poly1305_decrypt(Key, Nonce, AAD, Tampered, _)).
+
+	check_boundary_vector(Key, Nonce, AAD, Length, Hex) :-
+		input_bytes(Length, Plaintext),
+		hex_bytes(Hex, Expected),
+		xchacha20_poly1305_encrypt(Key, Nonce, AAD, Plaintext, Ciphertext),
+		assertion(Ciphertext == Expected).
+
+	check_chacha_prefix(KeyWords, NonceWords, Length, Plaintext, Expected) :-
+		length(Input, Length),
+		append(Input, _, Plaintext),
+		length(Prefix, Length),
+		append(Prefix, _, Expected),
+		chacha20_encrypt(KeyWords, 1, NonceWords, Input, Output),
+		assertion(Output == Prefix).
+
+	input_bytes(0, []) :-
+		!.
+	input_bytes(Length, Bytes) :-
+		Last is Length - 1,
+		sequence(0, Last, Bytes).
+
+	boundary_vector(16, '9ec30d7c94d78ba93b4d2cc5c75fa6e7d9c4d0cb6292473b8ca691bf18accf09').
+	boundary_vector(17, '9ec30d7c94d78ba93b4d2cc5c75fa6e75b7a59e994cb5c4db5d2631137e13431df').
+	boundary_vector(64, '9ec30d7c94d78ba93b4d2cc5c75fa6e75b563ab6e9c30bfc670325ad21b0eb467e2794c765422f43fdbc8472e30c7d4d418bd06a7341cd2e3fa2a906b3da7acb01ce3cc2b1929807ec2b168dbfbe0f81').
+	boundary_vector(65, '9ec30d7c94d78ba93b4d2cc5c75fa6e75b563ab6e9c30bfc670325ad21b0eb467e2794c765422f43fdbc8472e30c7d4d418bd06a7341cd2e3fa2a906b3da7acbf2833d8c73f4bad93b6dddbcc3e49953bd').
 
 :- end_object.
