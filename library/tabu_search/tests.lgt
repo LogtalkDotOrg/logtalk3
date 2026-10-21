@@ -13,7 +13,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-16,
+		date is 2026-10-21,
 		comment is 'Unit tests for the "tabu_search" library.'
 	]).
 
@@ -28,40 +28,48 @@
 	cover(tabu_search(_, _)).
 	cover(tabu_search(_)).
 
+	:- dynamic(search_result/5).
+
+	setup :-
+		retractall(search_result(_, _, _, _, _)).
+
+	cleanup :-
+		retractall(search_result(_, _, _, _, _)).
+
 	% quadratic problem - modest step budgets keep CI fast while still
 	% exercising the core search loop and energy improvement
 
 	test(ts_quadratic_run_2, deterministic((number(Energy), Energy < 5.0))) :-
-		tabu_search(quadratic)::run(_State, Energy, [max_steps(500)]).
+		cached_run(quadratic, [max_steps(500)], _State, Energy).
 
 	test(ts_quadratic_run_3_default, deterministic((number(Energy), Energy < 5.0))) :-
-		tabu_search(quadratic)::run(_State, Energy, [max_steps(500)]).
+		cached_run(quadratic, [max_steps(500)], _State, Energy).
 
 	test(ts_quadratic_run_3_more_steps, deterministic((number(Energy), Energy < 1.0))) :-
 		tabu_search(quadratic)::run(_State, Energy, [max_steps(2000), candidates(30)]).
 
 	test(ts_quadratic_state_is_number, deterministic(number(State))) :-
-		tabu_search(quadratic)::run(State, _Energy, [max_steps(200)]).
+		cached_run(quadratic, [max_steps(200)], State, _Energy).
 
 	test(ts_quadratic_energy_non_negative, deterministic(Energy >= 0.0)) :-
-		tabu_search(quadratic)::run(_State, Energy, [max_steps(200)]).
+		cached_run(quadratic, [max_steps(200)], _State, Energy).
 
 	% TSP problem
 
 	test(ts_tsp_run_2, deterministic((list::valid(State), number(Energy)))) :-
-		tabu_search(tsp)::run(State, Energy, [max_steps(300), candidates(15)]).
+		cached_run(tsp, [max_steps(800), candidates(20)], State, Energy).
 
 	test(ts_tsp_tour_is_permutation, deterministic(Sorted == Expected)) :-
-		tabu_search(tsp)::run(Tour, _Energy, [max_steps(200), candidates(10)]),
+		cached_run(tsp, [max_steps(800), candidates(20)], Tour, _Energy),
 		msort(Tour, Sorted),
 		msort([a, b, c, d, e, f], Expected).
 
 	test(ts_tsp_tour_has_six_cities, deterministic(Length == 6)) :-
-		tabu_search(tsp)::run(Tour, _Energy, [max_steps(100), candidates(8)]),
+		cached_run(tsp, [max_steps(800), candidates(20)], Tour, _Energy),
 		length(Tour, Length).
 
 	test(ts_tsp_energy_below_naive, deterministic(Energy < 50.0)) :-
-		tabu_search(tsp)::run(_Tour, Energy, [max_steps(800), candidates(20)]).
+		cached_run(tsp, [max_steps(800), candidates(20)], _Tour, Energy).
 
 	% option validation (no search work)
 
@@ -80,7 +88,7 @@
 	% run/4 returns statistics
 
 	test(ts_run_4_returns_statistics, deterministic) :-
-		tabu_search(quadratic)::run(_State, _Energy, Statistics, [max_steps(200)]),
+		cached_run(quadratic, [max_steps(200)], _State, _Energy, Statistics),
 		memberchk(steps(Steps), Statistics),
 		assertion((integer(Steps), Steps > 0)),
 		memberchk(acceptances(Acc), Statistics),
@@ -95,7 +103,7 @@
 		memberchk(steps(Steps), Statistics).
 
 	test(ts_run_4_acceptances_bounded, deterministic((Acc >= 0, Acc =< Steps))) :-
-		tabu_search(quadratic)::run(_State, _Energy, Statistics, [max_steps(200)]),
+		cached_run(quadratic, [max_steps(200)], _State, _Energy, Statistics),
 		memberchk(steps(Steps), Statistics),
 		memberchk(acceptances(Acc), Statistics).
 
@@ -134,16 +142,10 @@
 	% seed option for reproducibility
 
 	test(ts_seed_reproducible_results, deterministic(Energy1 =:= Energy2)) :-
-		quadratic::reset_seed,
-		tabu_search(quadratic)::run(_State1, Energy1, [seed(42), max_steps(300)]),
-		quadratic::reset_seed,
-		tabu_search(quadratic)::run(_State2, Energy2, [seed(42), max_steps(300)]).
+		cached_repeated_run(quadratic, [seed(42), max_steps(300)], _State1-_State2, Energy1-Energy2).
 
 	test(ts_seed_reproducible_state, deterministic(State1 =:= State2)) :-
-		quadratic::reset_seed,
-		tabu_search(quadratic)::run(State1, _Energy1, [seed(42), max_steps(300)]),
-		quadratic::reset_seed,
-		tabu_search(quadratic)::run(State2, _Energy2, [seed(42), max_steps(300)]).
+		cached_repeated_run(quadratic, [seed(42), max_steps(300)], State1-State2, _Energy1-_Energy2).
 
 	% neighbor_state/3 delta-energy variant
 
@@ -751,6 +753,38 @@
 		assertion(Statistics == [steps(0),acceptances(0),improvements(0),final_tabu_size(0)]).
 
 	% auxiliary predicates
+
+	cached_repeated_run(Problem, Options, States, Energies) :-
+		( 	search_result(repeated_run(Problem), Options, CachedStates, CachedEnergies, _) ->
+			States = CachedStates,
+			Energies = CachedEnergies
+		;	quadratic::reset_seed,
+			tabu_search(Problem)::run(State1, Energy1, Options),
+			quadratic::reset_seed,
+			tabu_search(Problem)::run(State2, Energy2, Options),
+			States = State1-State2,
+			Energies = Energy1-Energy2,
+			assertz(search_result(repeated_run(Problem), Options, States, Energies, none))
+		).
+
+	cached_run(Problem, Options, State, Energy) :-
+		( 	search_result(run(Problem), Options, CachedState, CachedEnergy, _) ->
+			State = CachedState,
+			Energy = CachedEnergy
+		;	quadratic::reset_seed,
+			tabu_search(Problem)::run(State, Energy, Options),
+			assertz(search_result(run(Problem), Options, State, Energy, none))
+		).
+
+	cached_run(Problem, Options, State, Energy, Statistics) :-
+		( 	search_result(run_statistics(Problem), Options, CachedState, CachedEnergy, CachedStatistics) ->
+			State = CachedState,
+			Energy = CachedEnergy,
+			Statistics = CachedStatistics
+		;	quadratic::reset_seed,
+			tabu_search(Problem)::run(State, Energy, Statistics, Options),
+			assertz(search_result(run_statistics(Problem), Options, State, Energy, Statistics))
+		).
 
 	assert_reports([], []).
 	assert_reports([report(Step,Best,Current,Acceptance,Improvement)| Reports], [report(ExpectedStep,ExpectedBest,ExpectedCurrent,ExpectedAcceptance,ExpectedImprovement)| Expected]) :-
