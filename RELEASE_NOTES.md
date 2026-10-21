@@ -316,10 +316,12 @@ eigenvalue cutoff options, with residual and orthogonality diagnostics and
 explicit rejection of insufficient spectral accuracy. Improved performance
 with an analytical leading eigenpair, partial eigendecomposition, symmetric
 affinity reuse, cached degree scaling, exact median selection, single-pass
-centroid aggregation, and prepared prediction coefficients. Fixed model
-validation, empty attribute declarations, extreme bandwidth arithmetic,
-embedding normalization, and prediction underflow. Expanded regression tests,
-improved test performance, and documented algorithm limitations.
+centroid aggregation, cached minimum distances for spread initialization,
+prepared prediction coefficients, and fused prediction affinity generation
+and maximum tracking. Fixed model validation, empty attribute declarations,
+extreme bandwidth arithmetic, embedding normalization, and prediction
+underflow. Expanded regression tests, added focused benchmarks, and documented
+algorithm limitations.
 
 * FIXED: Classifier libraries handling of classifiers with custom functors.
 

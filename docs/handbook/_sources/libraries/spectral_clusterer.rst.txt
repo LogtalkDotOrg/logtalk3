@@ -45,6 +45,23 @@ empty clusters, and prepared prediction against an independent Nyström
 formula. Individually selected tests also build their required fixtures;
 cleanup removes the cache.
 
+To run the performance tests, load the ``tester_performance.lgt`` file:
+
+::
+
+   | ?- logtalk_load(spectral_clusterer(tester_performance)).
+
+The performance tests measure partial eigendecomposition, spread
+initialization, complete learning, and prediction on fixed datasets.
+Each workload is warmed up before seven CPU-time samples are collected.
+Output includes the repetitions per sample, median, minimum, maximum,
+per-call median, and individual samples. A prediction call for a named
+dataset processes all its examples; a prediction call labeled with a
+training-example count processes one query. Input construction and model
+preparation for prediction are outside the timed goals. Run captures
+sequentially using identical settings when comparing implementations;
+small differences can reflect measurement variation.
+
 Features
 --------
 
@@ -184,9 +201,11 @@ Projection coefficients are prepared once during learning:
 Prediction rescales raw Gaussian affinities by their maximum before
 projection to avoid underflow in coefficient products. Both this common
 scale and the query-degree factor cancel when normalizing the embedding
-row; zero query degree is still rejected. The current representation
-requires the prepared coefficients and complete spectral diagnostics.
-Arity-nine terms are invalid.
+row; zero query degree is still rejected. The maximum is tracked while
+computing affinities and also establishes whether the query degree is
+positive, avoiding separate sum and maximum passes. The current
+representation requires the prepared coefficients and complete spectral
+diagnostics. Arity-nine terms are invalid.
 
 The ``check_clusterer/1`` predicate requires a ground model with
 positive feature, training-example, and cluster counts, consistent
@@ -232,6 +251,13 @@ Assignment costs ``O(N*K^2)`` for ``K``-dimensional embedding rows;
 aggregation avoids rescanning all rows for each cluster and does not
 retain an intermediate assignment list.
 
+Spread initialization caches each remaining candidate's minimum squared
+distance to the selected centroids. Selecting a centroid updates these
+minima using only that centroid. Initialization costs ``O(N*K^2)`` for
+``K``-dimensional embedding rows and uses ``O(N)`` auxiliary storage.
+Candidate order, first-on-tie selection, and duplicate occurrences are
+preserved. No cache update is needed after selecting the final centroid.
+
 For ``N`` examples, ``D`` encoded features, ``K`` components, and ``M``
 positive unordered distances, pairwise distance work costs ``O(N^2*D)``.
 Exact median selection costs ``O(M)`` time and storage, with
@@ -240,7 +266,9 @@ retained model costs ``O(N*D + N*K + K^2)`` space. Prediction costs
 ``O(N*D + N*K + K^2)`` and reuses prepared coefficients. The bounded
 eigensolver extracts only ``K-1`` iterative components but still tries
 multiple initial vectors; its cost depends on the iteration budget,
-matrix size, and spectral gaps.
+matrix size, and spectral gaps. Deflation is performed only when another
+component remains to be extracted, avoiding an unused dense matrix
+update after the final component.
 
 Limitations
 -----------

@@ -108,6 +108,7 @@
 <li class="toctree-l2"><a class="reference internal" href="ccsds_time_codes.html"><code class="docutils literal notranslate"><span class="pre">ccsds_time_codes</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ccsds_time_fields.html"><code class="docutils literal notranslate"><span class="pre">ccsds_time_fields</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="character_sets.html"><code class="docutils literal notranslate"><span class="pre">character_sets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="chi_square_feature_selector.html"><code class="docutils literal notranslate"><span class="pre">chi_square_feature_selector</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="classification_protocols.html"><code class="docutils literal notranslate"><span class="pre">classification_protocols</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="clo_span_pattern_miner.html"><code class="docutils literal notranslate"><span class="pre">clo_span_pattern_miner</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="clustering_protocols.html"><code class="docutils literal notranslate"><span class="pre">clustering_protocols</span></code></a></li>
@@ -477,6 +478,20 @@ fixture, numerical residuals, malformed models, exact median selection,
 empty clusters, and prepared prediction against an independent Nyström
 formula. Individually selected tests also build their required fixtures;
 cleanup removes the cache.</p>
+<p>To run the performance tests, load the <code class="docutils literal notranslate"><span class="pre">tester_performance.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(spectral_clusterer(tester_performance)).
+</pre></div>
+</div>
+<p>The performance tests measure partial eigendecomposition, spread
+initialization, complete learning, and prediction on fixed datasets.
+Each workload is warmed up before seven CPU-time samples are collected.
+Output includes the repetitions per sample, median, minimum, maximum,
+per-call median, and individual samples. A prediction call for a named
+dataset processes all its examples; a prediction call labeled with a
+training-example count processes one query. Input construction and model
+preparation for prediction are outside the timed goals. Run captures
+sequentially using identical settings when comparing implementations;
+small differences can reflect measurement variation.</p>
 </section>
 <section id="features">
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
@@ -601,9 +616,11 @@ are retained to support Nyström prediction.</p>
 <p>Prediction rescales raw Gaussian affinities by their maximum before
 projection to avoid underflow in coefficient products. Both this common
 scale and the query-degree factor cancel when normalizing the embedding
-row; zero query degree is still rejected. The current representation
-requires the prepared coefficients and complete spectral diagnostics.
-Arity-nine terms are invalid.</p>
+row; zero query degree is still rejected. The maximum is tracked while
+computing affinities and also establishes whether the query degree is
+positive, avoiding separate sum and maximum passes. The current
+representation requires the prepared coefficients and complete spectral
+diagnostics. Arity-nine terms are invalid.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">check_clusterer/1</span></code> predicate requires a ground model with
 positive feature, training-example, and cluster counts, consistent
 dimensions and diagnostics, and an effective <code class="docutils literal notranslate"><span class="pre">k(K)</span></code> matching the
@@ -643,6 +660,12 @@ previous centroids and distance ties select the first centroid.
 Assignment costs <code class="docutils literal notranslate"><span class="pre">O(N*K^2)</span></code> for <code class="docutils literal notranslate"><span class="pre">K</span></code>-dimensional embedding rows;
 aggregation avoids rescanning all rows for each cluster and does not
 retain an intermediate assignment list.</p>
+<p>Spread initialization caches each remaining candidate’s minimum squared
+distance to the selected centroids. Selecting a centroid updates these
+minima using only that centroid. Initialization costs <code class="docutils literal notranslate"><span class="pre">O(N*K^2)</span></code> for
+<code class="docutils literal notranslate"><span class="pre">K</span></code>-dimensional embedding rows and uses <code class="docutils literal notranslate"><span class="pre">O(N)</span></code> auxiliary storage.
+Candidate order, first-on-tie selection, and duplicate occurrences are
+preserved. No cache update is needed after selecting the final centroid.</p>
 <p>For <code class="docutils literal notranslate"><span class="pre">N</span></code> examples, <code class="docutils literal notranslate"><span class="pre">D</span></code> encoded features, <code class="docutils literal notranslate"><span class="pre">K</span></code> components, and <code class="docutils literal notranslate"><span class="pre">M</span></code>
 positive unordered distances, pairwise distance work costs <code class="docutils literal notranslate"><span class="pre">O(N^2*D)</span></code>.
 Exact median selection costs <code class="docutils literal notranslate"><span class="pre">O(M)</span></code> time and storage, with
@@ -651,7 +674,9 @@ retained model costs <code class="docutils literal notranslate"><span class="pre
 <code class="docutils literal notranslate"><span class="pre">O(N*D</span> <span class="pre">+</span> <span class="pre">N*K</span> <span class="pre">+</span> <span class="pre">K^2)</span></code> and reuses prepared coefficients. The bounded
 eigensolver extracts only <code class="docutils literal notranslate"><span class="pre">K-1</span></code> iterative components but still tries
 multiple initial vectors; its cost depends on the iteration budget,
-matrix size, and spectral gaps.</p>
+matrix size, and spectral gaps. Deflation is performed only when another
+component remains to be extracted, avoiding an unused dense matrix
+update after the final component.</p>
 </section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>

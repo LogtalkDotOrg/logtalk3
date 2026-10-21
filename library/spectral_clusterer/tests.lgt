@@ -398,7 +398,75 @@
 	test(spectral_clusterer_projection_underflow_scaling, deterministic(Embedding =~= [1.0])) :-
 		spectral_clusterer<<projection_embedding([[1.0e-200]], [1.0e-200], Embedding).
 
+	test(spectral_clusterer_spread_reference, all(Actual == Expected)) :-
+		member(Rows, [[[0.0], [1.0], [-1.0], [1.0]], [[2.0], [2.0], [2.0], [2.0]], [[0], [0.0], [1], [1.0]], [[0.0, 0.0], [1.0, 2.0], [3.0, -1.0], [-2.0, 1.0], [4.0, 3.0]]]),
+		list::nth1(Count, Rows, _),
+		reference_spread(Count, Rows, Expected),
+		spectral_clusterer<<initialize_centroids(spread, Count, Rows, Actual).
+
+	test(spectral_clusterer_spread_tie_order, deterministic(Centroids == [[0.0], [1.0], [-1.0], [1.0]])) :-
+		spectral_clusterer<<initialize_centroids(spread, 4, [[0.0], [1.0], [-1.0], [1.0]], Centroids).
+
+	test(spectral_clusterer_first_k_order, deterministic(Centroids == [[0.0], [1.0], [-1.0]])) :-
+		spectral_clusterer<<initialize_centroids(first_k, 3, [[0.0], [1.0], [-1.0], [1.0]], Centroids).
+
+	test(spectral_clusterer_affinity_maximum_reference, all((Actual == Expected, ActualMaximum == ExpectedMaximum))) :-
+		member(case(Rows, Features, Sigma), [case([[0.0], [1.0], [2.0]], [0.0], 1.0), case([[0.0], [1.0], [2.0]], [1.25], 1.0), case([[0.0], [1.0], [2.0]], [2.0], 1.0e-200), case([[0.0], [1.0]], [10000.0], 1.0)]),
+		findall(
+			Affinity,
+			(	member(Row, Rows),
+				spectral_clusterer<<rbf_affinity(Row, Features, Sigma, Affinity)
+			),
+			Expected
+		),
+		spectral_clusterer<<maximum_absolute(Expected, 0.0, ExpectedMaximum),
+		spectral_clusterer<<affinity_vector(Rows, Features, Sigma, Actual, 0.0, ActualMaximum).
+
+	test(spectral_clusterer_prediction_single_positive_affinity, deterministic(Cluster == 1)) :-
+		learn(two_points, Model, [k(1), sigma(1.0e-200), feature_scaling(off)]),
+		cluster(Model, [x-1.0], Cluster).
+
+	test(spectral_clusterer_prediction_underflow_projection, deterministic(Cluster == 1)) :-
+		learn(single_point, Model, [k(1), sigma(1.0), feature_scaling(off)]),
+		replace_model_argument(Model, 6, [[1.0e-200]], Prepared),
+		Query is 1.0 + sqrt(2.0 * log(1.0e200)),
+		cluster(Prepared, [x-Query], Cluster).
+
 	% auxiliary predicates
+
+	reference_spread(Count, [First| Rows], [First| Centroids]) :-
+		Remaining is Count - 1,
+		reference_spread_select(Remaining, Rows, [First], Centroids).
+
+	reference_spread_select(0, _Rows, _Selected, []) :-
+		!.
+	reference_spread_select(Count, [First| Rows], Selected, [Best| Centroids]) :-
+		reference_nearest_distance(Selected, First, Distance),
+		reference_farthest(Rows, Selected, First, Distance, Best),
+		list::selectchk(Best, [First| Rows], RemainingRows),
+		Remaining is Count - 1,
+		reference_spread_select(Remaining, RemainingRows, [Best| Selected], Centroids).
+
+	reference_farthest([], _Selected, Best, _Distance, Best).
+	reference_farthest([Row| Rows], Selected, Best0, Distance0, Best) :-
+		reference_nearest_distance(Selected, Row, Distance),
+		(	Distance > Distance0 ->
+			Best1 = Row,
+			Distance1 = Distance
+		;	Best1 = Best0,
+			Distance1 = Distance0
+		),
+		reference_farthest(Rows, Selected, Best1, Distance1, Best).
+
+	reference_nearest_distance([Centroid| Centroids], Row, Minimum) :-
+		spectral_clusterer<<squared_euclidean_distance(Row, Centroid, 0.0, Distance),
+		reference_minimum_distance(Centroids, Row, Distance, Minimum).
+
+	reference_minimum_distance([], _Row, Minimum, Minimum).
+	reference_minimum_distance([Centroid| Centroids], Row, Minimum0, Minimum) :-
+		spectral_clusterer<<squared_euclidean_distance(Row, Centroid, 0.0, Distance),
+		Minimum1 is min(Minimum0, Distance),
+		reference_minimum_distance(Centroids, Row, Minimum1, Minimum).
 
 	model_fixture(Key, Model) :-
 		(	cached_model_(Key, Model) ->

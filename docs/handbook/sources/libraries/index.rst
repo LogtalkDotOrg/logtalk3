@@ -66,6 +66,7 @@ directory in the ``NOTES.md`` file.
    ccsds_time_codes
    ccsds_time_fields
    character_sets
+   chi_square_feature_selector
    classification_protocols
    clo_span_pattern_miner
    clustering_protocols

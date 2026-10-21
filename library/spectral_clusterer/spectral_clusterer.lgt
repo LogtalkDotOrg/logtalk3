@@ -101,10 +101,9 @@
 	cluster(Clusterer, Instance, Cluster) :-
 		clusterer_data(Clusterer, Encoders, TrainingRows, _Degrees, _Components, _Eigenvalues, Projection, Centroids, ResolvedSigma, _Options, _Diagnostics),
 		^^encode_instance(Encoders, Instance, Features),
-		affinity_vector(TrainingRows, Features, ResolvedSigma, Affinities),
-		sum(Affinities, Degree),
-		check_positive_value(instance_degree, Degree, 0.0),
-		projection_embedding(Projection, Affinities, Embedding),
+		affinity_vector(TrainingRows, Features, ResolvedSigma, Affinities, 0.0, Maximum),
+		check_positive_value(instance_degree, Maximum, 0.0),
+		projection_embedding(Projection, Affinities, Maximum, Embedding),
 		nearest_centroid(Centroids, Embedding, Cluster, _DistanceSquared).
 
 	clusterer_data(Clusterer, Encoders, TrainingRows, Degrees, Components, Eigenvalues, Projection, Centroids, ResolvedSigma, Options, Diagnostics) :-
@@ -543,6 +542,9 @@
 
 	projection_embedding(Projection, Affinities, Embedding) :-
 		maximum_absolute(Affinities, 0.0, Maximum),
+		projection_embedding(Projection, Affinities, Maximum, Embedding).
+
+	projection_embedding(Projection, Affinities, Maximum, Embedding) :-
 		(	Maximum >= 1.0 ->
 			ScaledAffinities = Affinities
 		;	divide_vector(Affinities, Maximum, ScaledAffinities)
@@ -555,10 +557,11 @@
 		dot_product(Row, Affinities, 0.0, Coordinate),
 		project_prepared(Rows, Affinities, Coordinates).
 
-	affinity_vector([], _Features, _Sigma, []).
-	affinity_vector([TrainingRow| TrainingRows], Features, Sigma, [Affinity| Affinities]) :-
+	affinity_vector([], _Features, _Sigma, [], Maximum, Maximum).
+	affinity_vector([TrainingRow| TrainingRows], Features, Sigma, [Affinity| Affinities], Maximum0, Maximum) :-
 		rbf_affinity(TrainingRow, Features, Sigma, Affinity),
-		affinity_vector(TrainingRows, Features, Sigma, Affinities).
+		Maximum1 is max(Maximum0, Affinity),
+		affinity_vector(TrainingRows, Features, Sigma, Affinities, Maximum1, Maximum).
 
 	dot_product([], [], Product, Product).
 	dot_product([Left| Lefts], [Right| Rights], Product0, Product) :-
@@ -579,7 +582,11 @@
 		take_vectors(K, Rows, Centroids).
 	initialize_centroids(spread, K, [First| Rows], [First| Centroids]) :-
 		Remaining is K - 1,
-		select_spread_centroids(Remaining, Rows, [First], Centroids).
+		(	Remaining =:= 0 ->
+			Centroids = []
+		;	prepare_spread_candidates(Rows, First, Candidates),
+			select_spread_centroids(Remaining, Candidates, Centroids)
+		).
 
 	take_vectors(0, _Rows, []) :-
 		!.
@@ -587,35 +594,43 @@
 		Remaining is K - 1,
 		take_vectors(Remaining, Rows, Selected).
 
-	select_spread_centroids(0, _Candidates, _Selected, []) :-
-		!.
-	select_spread_centroids(Count, Candidates, Selected, [Vector| Centroids]) :-
-		farthest_candidate(Candidates, Selected, Vector, RemainingCandidates),
-		NextCount is Count - 1,
-		select_spread_centroids(NextCount, RemainingCandidates, [Vector| Selected], Centroids).
+	prepare_spread_candidates([], _Centroid, []).
+	prepare_spread_candidates([Row| Rows], Centroid, [Row-Distance| Candidates]) :-
+		squared_euclidean_distance(Row, Centroid, 0.0, Distance),
+		prepare_spread_candidates(Rows, Centroid, Candidates).
 
-	farthest_candidate([Candidate| Candidates], Selected, BestCandidate, RemainingCandidates) :-
-		closest_centroid_distance_squared(Candidate, Selected, Distance),
-		farthest_candidate(Candidates, Selected, Candidate, Distance, BestCandidate),
-		remove_vector(BestCandidate, [Candidate| Candidates], RemainingCandidates).
+	select_spread_centroids(Count, [Candidate-Distance| Candidates], [Vector| Centroids]) :-
+		farthest_cached_candidate(Candidates, Candidate, Distance, Vector),
+		(	Count =:= 1 ->
+			Centroids = []
+		;	remove_spread_candidate(Vector, [Candidate-Distance| Candidates], RemainingCandidates),
+			update_spread_candidates(RemainingCandidates, Vector, UpdatedCandidates),
+			NextCount is Count - 1,
+			select_spread_centroids(NextCount, UpdatedCandidates, Centroids)
+		).
 
-	farthest_candidate([], _Selected, BestCandidate, _BestDistance, BestCandidate).
-	farthest_candidate([Candidate| Candidates], Selected, BestCandidate0, BestDistance0, BestCandidate) :-
-		closest_centroid_distance_squared(Candidate, Selected, Distance),
+	farthest_cached_candidate([], BestCandidate, _BestDistance, BestCandidate).
+	farthest_cached_candidate([Candidate-Distance| Candidates], BestCandidate0, BestDistance0, BestCandidate) :-
 		(	Distance > BestDistance0 ->
 			BestCandidate1 = Candidate,
 			BestDistance1 = Distance
 		;	BestCandidate1 = BestCandidate0,
 			BestDistance1 = BestDistance0
 		),
-		farthest_candidate(Candidates, Selected, BestCandidate1, BestDistance1, BestCandidate).
+		farthest_cached_candidate(Candidates, BestCandidate1, BestDistance1, BestCandidate).
 
-	remove_vector(Vector, [Candidate| Candidates], Remaining) :-
+	remove_spread_candidate(Vector, [Candidate-Distance| Candidates], Remaining) :-
 		(	Vector == Candidate ->
 			Remaining = Candidates
-		;	Remaining = [Candidate| Tail],
-			remove_vector(Vector, Candidates, Tail)
+		;	Remaining = [Candidate-Distance| Tail],
+			remove_spread_candidate(Vector, Candidates, Tail)
 		).
+
+	update_spread_candidates([], _Centroid, []).
+	update_spread_candidates([Row-Previous| Candidates], Centroid, [Row-Minimum| Updated]) :-
+		squared_euclidean_distance(Row, Centroid, 0.0, Distance),
+		Minimum is min(Previous, Distance),
+		update_spread_candidates(Candidates, Centroid, Updated).
 
 	optimize_centroids(Rows, Options, Iteration, PreviousShift, Centroids0, Centroids, Convergence, Iterations, FinalShift) :-
 		^^option(maximum_iterations(MaximumIterations), Options),
@@ -675,16 +690,6 @@
 		),
 		NextIndex is Index + 1,
 		nearest_centroid(Centroids, Vector, NextIndex, BestCluster1, BestDistance1, BestCluster, BestDistance).
-
-	closest_centroid_distance_squared(Vector, [Centroid| Centroids], DistanceSquared) :-
-		squared_euclidean_distance(Vector, Centroid, 0.0, InitialDistance),
-		closest_centroid_distance_squared(Centroids, Vector, InitialDistance, DistanceSquared).
-
-	closest_centroid_distance_squared([], _Vector, BestDistance, BestDistance).
-	closest_centroid_distance_squared([Centroid| Centroids], Vector, BestDistance0, BestDistance) :-
-		squared_euclidean_distance(Vector, Centroid, 0.0, Distance),
-		BestDistance1 is min(BestDistance0, Distance),
-		closest_centroid_distance_squared(Centroids, Vector, BestDistance1, BestDistance).
 
 	squared_euclidean_distance([], [], DistanceSquared, DistanceSquared).
 	squared_euclidean_distance([Left| Lefts], [Right| Rights], DistanceSquared0, DistanceSquared) :-
