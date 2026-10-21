@@ -23,9 +23,9 @@
 	implements(linear_algebra_protocol)).
 
 	:- info([
-		version is 2:1:0,
+		version is 2:2:0,
 		author is 'Paulo Moura',
-		date is 2026-10-12,
+		date is 2026-10-21,
 		comment is 'Linear algebra predicates for numeric vectors and matrices implemented without dependencies on machine learning libraries.'
 	]).
 
@@ -597,10 +597,13 @@
 		!.
 	partial_extract(Matrix, Count, InitialVectors, Threshold, MaximumIterations, Selected, [component(Value, Vector, Iterations)| Pairs]) :-
 		partial_candidates(InitialVectors, Matrix, Selected, Threshold, MaximumIterations, none, component(Value, Vector, Iterations)),
-		Negative is -Value,
-		add_scaled_outer_product(Vector, Negative, Matrix, Deflated),
-		Remaining is Count - 1,
-		partial_extract(Deflated, Remaining, InitialVectors, Threshold, MaximumIterations, [Vector| Selected], Pairs).
+		(	Count =:= 1 ->
+			Pairs = []
+		;	Negative is -Value,
+			add_scaled_outer_product(Vector, Negative, Matrix, Deflated),
+			Remaining is Count - 1,
+			partial_extract(Deflated, Remaining, InitialVectors, Threshold, MaximumIterations, [Vector| Selected], Pairs)
+		).
 
 	partial_candidates([], _Matrix, _Selected, _Threshold, _MaximumIterations, Best, Best).
 	partial_candidates([Initial| Initials], Matrix, Selected, Threshold, MaximumIterations, Best0, Best) :-

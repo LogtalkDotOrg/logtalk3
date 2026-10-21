@@ -23,14 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:1:0,
+		version is 2:2:0,
 		author is 'Paulo Moura',
-		date is 2026-10-12,
+		date is 2026-10-21,
 		comment is 'Unit tests for the "linear_algebra" library.'
 	]).
 
 	:- uses(lgtunit, [
-		op(700, xfx, =~=), (=~=)/2
+		op(700, xfx, =~=), (=~=)/2, assertion/1
 	]).
 
 	:- set_logtalk_flag(arithmetic_expressions, silent).
@@ -340,6 +340,15 @@
 	test(linear_algebra_partial_indefinite, deterministic(Values =~= [-4.0])) :-
 		linear_algebra::symmetric_eigen_partial([[1.0, 0.0], [0.0, -4.0]], 1, 1.0e-10, 100, _, Values, Diagnostics),
 		list::memberchk(convergence(tolerance), Diagnostics).
+
+	test(linear_algebra_partial_single_nondiagonal, deterministic) :-
+		linear_algebra::symmetric_eigen_partial([[2.0, 1.0], [1.0, 2.0]], 1, 1.0e-10, 100, [Vector], [Value], Diagnostics),
+		Expected is sqrt(0.5),
+		assertion(Value =~= 3.0),
+		assertion(Vector =~= [Expected, Expected]),
+		list::memberchk(convergence(tolerance), Diagnostics),
+		list::memberchk(maximum_residual(Residual), Diagnostics),
+		Residual =< 3.0e-10.
 
 	test(linear_algebra_partial_zero_count, deterministic((Vectors == [], Values == []))) :-
 		linear_algebra::symmetric_eigen_partial([], 0, 0.0, 1, Vectors, Values, _).

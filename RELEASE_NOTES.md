@@ -303,6 +303,11 @@ limits, bit-precision validation, and concave polygon containment.
 and containment predicates to consider both longitude segments of
 antimeridian-crossing boxes.
 
+* IMPROVED: The `linear_algebra` library `symmetric_eigen_partial/7`
+predicate by skipping the unused matrix deflation after extracting the final
+requested eigenpair, avoiding a quadratic-time matrix update and allocation.
+Expanded regression tests.
+
 * CHANGED: The `spectral_clusterer` library learned model representation from
 `spectral_clusterer/9` to `spectral_clusterer/10`, adding prepared projection
 coefficients before the centroids argument. The previous representation is
