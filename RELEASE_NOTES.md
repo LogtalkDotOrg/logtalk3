@@ -197,7 +197,8 @@ and `logistic_regression_classifier` libraries.
 
 * IMPROVED: Performance of the `ant_colony`, `arbitrary`, `ccsds_packets`,
 `c45_classifier`, `crypto`, `cuid2`, `differential_evolution`,
-`genetic_algorithm`, `gradient_boosting_classifier`, `ids`, `sgd_classifier`,
+`genetic_algorithm`, `gradient_boosting_classifier`,
+`gaussian_process_regression`, `ids`, `sgd_classifier`,
 `knn_distance_anomaly_detector`, `ksuid`, `linear_svm_classifier`,
 `lof_anomaly_detector`, `logistic_regression_classifier`, `nanoid`,
 `particle_swarm_optimization`, `paseto`, `snowflakeid`, `svr_regression`,

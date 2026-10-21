@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-03,
+		date is 2026-10-21,
 		comment is 'Unit tests for the "gaussian_process_regression" library.'
 	]).
 
@@ -37,30 +37,35 @@
 		length/2, member/2, memberchk/2
 	]).
 
+	:- dynamic(cached_regressor_/3).
+
 	cover(gaussian_process_regression).
 
+	setup :-
+		retractall(cached_regressor_(_, _, _)).
+
 	cleanup :-
+		retractall(cached_regressor_(_, _, _)),
 		^^clean_file('test_output.pl').
 
-	gp_exact_options([feature_scaling(false), optimize_hyperparameters(false), length_scale(2.0), signal_variance(16.0), noise_variance(1.0e-6), jitter(1.0e-8)]).
-
 	test(gaussian_process_regression_learn_2_simple_line, deterministic(ground(Regressor))) :-
-		gaussian_process_regression::learn(simple_line, Regressor).
+		gaussian_process_regression::learn(simple_line, Regressor),
+		assertz(cached_regressor_(simple_line, [], Regressor)).
 
 	test(gaussian_process_regression_valid_regressor_1, deterministic(gaussian_process_regression::valid_regressor(Regressor))) :-
-		gaussian_process_regression::learn(simple_line, Regressor).
+		cached_regressor(simple_line, [], Regressor).
 
 	test(gaussian_process_regression_invalid_regressor_1, fail) :-
-		gaussian_process_regression::learn(simple_line, gaussian_process_regressor(Encoders, TrainingFeatures, TargetMean, _Alpha, CholeskyFactor, Kernel, Diagnostics)),
+		cached_regressor(simple_line, [], gaussian_process_regressor(Encoders, TrainingFeatures, TargetMean, _Alpha, CholeskyFactor, Kernel, Diagnostics)),
 		gaussian_process_regression::valid_regressor(gaussian_process_regressor(Encoders, TrainingFeatures, TargetMean, [1.0], CholeskyFactor, Kernel, Diagnostics)).
 
 	test(gaussian_process_regression_invalid_regressor_1_kernel_length_scale_dimensions, fail) :-
-		gaussian_process_regression::learn(simple_line, gaussian_process_regressor(Encoders, TrainingFeatures, TargetMean, Alpha, CholeskyFactor, squared_exponential_kernel(FeatureLayout, _LengthScales, CategoricalPenalties, SignalVariance, NoiseVariance, Jitter), Diagnostics)),
+		cached_regressor(simple_line, [], gaussian_process_regressor(Encoders, TrainingFeatures, TargetMean, Alpha, CholeskyFactor, squared_exponential_kernel(FeatureLayout, _LengthScales, CategoricalPenalties, SignalVariance, NoiseVariance, Jitter), Diagnostics)),
 		Kernel = squared_exponential_kernel(FeatureLayout, [1.0], CategoricalPenalties, SignalVariance, NoiseVariance, Jitter),
 		gaussian_process_regression::valid_regressor(gaussian_process_regressor(Encoders, TrainingFeatures, TargetMean, Alpha, CholeskyFactor, Kernel, Diagnostics)).
 
 	test(gaussian_process_regression_invalid_regressor_1_diagnostics_length_scale_dimensions, fail) :-
-		gaussian_process_regression::learn(simple_line, gaussian_process_regressor(Encoders, TrainingFeatures, TargetMean, Alpha, CholeskyFactor, Kernel, Diagnostics0)),
+		cached_regressor(simple_line, [], gaussian_process_regressor(Encoders, TrainingFeatures, TargetMean, Alpha, CholeskyFactor, Kernel, Diagnostics0)),
 		replace_diagnostic(length_scales, Diagnostics0, length_scales([1.0]), Diagnostics),
 		gaussian_process_regression::valid_regressor(gaussian_process_regressor(Encoders, TrainingFeatures, TargetMean, Alpha, CholeskyFactor, Kernel, Diagnostics)).
 
@@ -69,12 +74,12 @@
 
 	test(gaussian_process_regression_predict_3_simple_line_training_point, deterministic(abs(Prediction - 7.0) < 1.0e-4)) :-
 		gp_exact_options(Options),
-		gaussian_process_regression::learn(simple_line, Regressor, Options),
+		cached_regressor(simple_line, Options, Regressor),
 		gaussian_process_regression::predict(Regressor, [x-3], Prediction).
 
 	test(gaussian_process_regression_predict_distribution_3_simple_line_uncertainty, deterministic) :-
 		gp_exact_options(Options),
-		gaussian_process_regression::learn(simple_line, Regressor, Options),
+		cached_regressor(simple_line, Options, Regressor),
 		gaussian_process_regression::predict_distribution(Regressor, [x-3], gaussian(Mean, TrainingVariance)),
 		gaussian_process_regression::predict_distribution(Regressor, [x-20], gaussian(_FarMean, FarVariance)),
 		assertion(abs(Mean - 7.0) < 1.0e-4),
@@ -129,7 +134,7 @@
 		assertion(member(kernel(squared_exponential), Options)).
 
 	test(gaussian_process_regression_diagnostics_2, deterministic) :-
-		gaussian_process_regression::learn(simple_line, Regressor),
+		cached_regressor(simple_line, [], Regressor),
 		gaussian_process_regression::diagnostics(Regressor, Diagnostics),
 		memberchk(length_scales(LengthScales), Diagnostics),
 		assertion(length(LengthScales, 2)),
@@ -176,19 +181,19 @@
 
 	test(gaussian_process_regression_export_to_clauses_4, deterministic(abs(Prediction - 7.0) < 1.0e-4)) :-
 		gp_exact_options(Options),
-		gaussian_process_regression::learn(simple_line, Regressor, Options),
+		cached_regressor(simple_line, Options, Regressor),
 		gaussian_process_regression::export_to_clauses(simple_line, Regressor, regressor, [Clause]),
 		gaussian_process_regression::predict(Clause, [x-3], Prediction).
 
 	test(gaussian_process_regression_export_to_file_4_written, deterministic(os::file_exists(File))) :-
 		^^file_path('test_output.pl', File),
-		gaussian_process_regression::learn(simple_line, Regressor),
+		cached_regressor(simple_line, [], Regressor),
 		gaussian_process_regression::export_to_file(simple_line, Regressor, regressor, File).
 
 	test(gaussian_process_regression_export_to_file_4_loaded, deterministic(abs(Prediction - 7.0) < 1.0e-4)) :-
 		^^file_path('test_output.pl', File),
 		gp_exact_options(Options),
-		gaussian_process_regression::learn(simple_line, Regressor, Options),
+		cached_regressor(simple_line, Options, Regressor),
 		gaussian_process_regression::export_to_file(simple_line, Regressor, regressor, File),
 		logtalk_load(File),
 		{regressor(Encoders, TrainingFeatures, TargetMean, Alpha, CholeskyFactor, Kernel, Diagnostics)},
@@ -196,7 +201,7 @@
 
 	test(gaussian_process_regression_print_regressor_1, deterministic) :-
 		^^suppress_text_output,
-		gaussian_process_regression::learn(simple_line, Regressor),
+		cached_regressor(simple_line, [], Regressor),
 		gaussian_process_regression::print_regressor(Regressor).
 
 	test(gaussian_process_regression_learn_2_invalid_target, error(type_error(number, bad))) :-
@@ -206,11 +211,11 @@
 		gaussian_process_regression::learn(duplicate_attribute_declaration, _Regressor).
 
 	test(gaussian_process_regression_predict_3_undeclared_attribute, error(domain_error(declared_attribute, typo))) :-
-		gaussian_process_regression::learn(simple_line, Regressor),
+		cached_regressor(simple_line, [], Regressor),
 		gaussian_process_regression::predict(Regressor, [x-3, typo-1], _Prediction).
 
 	test(gaussian_process_regression_predict_3_duplicate_attribute, error(domain_error(attribute_occurrences, x))) :-
-		gaussian_process_regression::learn(simple_line, Regressor),
+		cached_regressor(simple_line, [], Regressor),
 		gaussian_process_regression::predict(Regressor, [x-3, x-4], _Prediction).
 
 	test(gaussian_process_regression_predict_3_unknown_category, error(domain_error(attribute_value(plan, [basic, premium]), deluxe))) :-
@@ -218,6 +223,16 @@
 		gaussian_process_regression::predict(Regressor, [age-20, student-yes, plan-deluxe], _Prediction).
 
 	% auxiliary predicates
+
+	gp_exact_options([feature_scaling(false), optimize_hyperparameters(false), length_scale(2.0), signal_variance(16.0), noise_variance(1.0e-6), jitter(1.0e-8)]).
+
+	cached_regressor(Dataset, Options, Regressor) :-
+		(	cached_regressor_(Dataset, Options, CachedRegressor) ->
+			true
+		;	gaussian_process_regression::learn(Dataset, CachedRegressor, Options),
+			assertz(cached_regressor_(Dataset, Options, CachedRegressor))
+		),
+		Regressor = CachedRegressor.
 
 	replace_diagnostic(Functor, [Diagnostic| Diagnostics], Replacement, [Replacement| Diagnostics]) :-
 		functor(Diagnostic, Functor, 1),
