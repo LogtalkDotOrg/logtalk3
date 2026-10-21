@@ -14,8 +14,8 @@ Uniform Manifold Approximation and Projection dimension reducer for continuous, 
 |    ``logtalk_load(umap_projection(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 2:0:0
-| **Date:** 2026-10-12
+| **Version:** 2:1:0
+| **Date:** 2026-10-22
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -60,7 +60,43 @@ Protected predicates
 Private predicates
 ------------------
 
-(no local declarations; see entity ancestors if any)
+.. index:: graph_connected/2
+.. _umap_projection/0::graph_connected/2:
+
+``graph_connected/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Checks fuzzy graph connectivity. Intended for use in testing.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``graph_connected(FuzzyGraph,SampleCount)``
+| **Mode and number of proofs:**
+|    ``graph_connected(+list,+positive_integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: normalized_adjacency/5
+.. _umap_projection/0::normalized_adjacency/5:
+
+``normalized_adjacency/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the normalized adjacency matrix for a starting vertex of zero and positive vertex degrees. Intended for use in testing.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normalized_adjacency(StartVertex,SampleCount,FuzzyGraph,Degrees,Matrix)``
+| **Mode and number of proofs:**
+|    ``normalized_adjacency(+integer,+positive_integer,+list,+list,-list)`` - ``zero_or_one``
+
+
+------------
 
 Operators
 ---------

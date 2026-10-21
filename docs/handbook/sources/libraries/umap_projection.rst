@@ -75,8 +75,9 @@ Training sets with at most 32 examples use sorted exact distances to
 avoid small-input heap overhead. Larger sets compute each unordered
 distance once and retain bounded per-row heaps. Both paths place self
 first and use sample indexes to break other distance ties. Cosine norms
-are computed once per row. Transformation streams distances through a
-bounded heap.
+are computed once per row. Rejected heap candidates leave the
+corresponding AVL dictionary entries unchanged. Transformation streams
+distances through a bounded heap.
 
 Directed memberships are sorted by canonical endpoint pair and merged
 once. AVL-indexed adjacency and weighted degrees support graph traversal
@@ -84,18 +85,29 @@ and dense normalized matrix construction. Cross-entropy diagnostics
 remain exact: sorted graph edges are consumed alongside all unordered
 embedding pairs, including pairs without a graph edge.
 
-Spectral initialization shifts normalized adjacency by twice the
-identity and deflates the known degree-derived trivial component. This
-makes partial eigenvalue selection follow algebraic order, including for
-bipartite graphs. Eigenpair residuals and orthogonality are checked
-against the original matrix. Disconnected graphs and unsuccessful
-spectral results use seeded random initialization.
+Spectral initialization builds the graph index once for connectivity
+checks and embedding construction. It shifts normalized adjacency by
+twice the identity and deflates the known degree-derived trivial
+component. This makes partial eigenvalue selection follow algebraic
+order, including for bipartite graphs. Eigenpair residuals and
+orthogonality are checked against the original matrix. Disconnected
+graphs and unsuccessful spectral results use seeded random
+initialization.
 
 Positive edge schedules bind both endpoint handles before optimization.
 Negative targets use AVL row lookup. Transformation leaves training rows
 fixed and optimizes the new coordinates for 100 epochs. Curve-fitting
 sample targets and logarithms are precomputed; training attribute
 observations are collected once before encoding.
+
+Proper attribute binding lists with ground keys are indexed once per
+example or transformation input. Validation and encoding reuse the index
+while preserving declaration order, binding error precedence, and
+missing-value variables. Other binding forms retain list-based
+processing. Reducer validation uses an AVL set to check ground example
+identifier uniqueness in logarithmic time per identifier, excluding term
+comparison costs. Indexes remain internal and are not stored in learned
+reducers.
 
 Options
 -------

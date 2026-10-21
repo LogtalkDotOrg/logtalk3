@@ -172,9 +172,11 @@ duplicate-row self neighborhoods, fractional local connectivity,
 endpoint-biased negative sampling, zero-weight transform scheduling, and
 reducer and metric-option validation. Improved performance with sparse fuzzy
 graph merging, AVL graph and row indexes, partial spectral initialization
-with residual checks, bounded exact neighbor selection, and cached
-curve-fitting samples. Expanded coverage and reduced repeated training in
-the tests. Updated documentation.
+with residual checks, bounded exact neighbor selection, cached curve-fitting
+samples, indexed identifier validation and attribute bindings, skipped
+redundant heap-index updates, and reused spectral graph indexes. Expanded
+regression tests and coverage and reduced repeated training in the tests.
+Updated documentation.
 
 * CHANGED: The `tsne_projection` library to require ground identifiers and
 reducer terms, complete effective options, and consistent model diagnostics.
@@ -183,11 +185,14 @@ inclusively; affinity diagnostics report tie-limited and search-budget-limited
 matching, and transformations warn when matching is incomplete. Fixed the
 conditional transform gradient and negative KL roundoff. Improved exact dense
 optimization with quadratic symmetrization, cached Gaussian search inputs,
-direct weight normalization, symmetric pair reuse, scalar gradient accumulation,
-aligned preprocessing, AVL validation, row-wise centering, and hoisted optimizer
-settings. Expanded numerical and regression tests to full clause coverage,
-reduced repeated training in tests, added focused benchmarks, and updated
-documentation.
+direct weight normalization, triangular symmetric matrix construction, fused
+row-major weight summation, scalar gradient accumulation, fused gradient-row
+computation and coordinate updates, aligned preprocessing, AVL validation,
+row-wise centering, and hoisted optimizer settings. The fused operations
+preserve floating-point accumulation order. Expanded numerical and regression
+tests to full clause coverage, including exact comparisons with unfused
+references, reduced repeated training in tests, added focused and
+larger-workload benchmarks, and updated documentation.
 
 * IMPROVED: Performance of the `crypto`, `isolation_forest_anomaly_detector`,
 and `logistic_regression_classifier` libraries.

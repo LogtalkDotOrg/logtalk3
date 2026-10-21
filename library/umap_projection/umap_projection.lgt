@@ -23,11 +23,25 @@
 	imports(dimension_reducer_common)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2026-10-12,
+		date is 2026-10-22,
 		comment is 'Uniform Manifold Approximation and Projection dimension reducer for continuous, categorical, and mixed datasets.',
 		see_also is [tsne_projection, spectral_clusterer]
+	]).
+
+	:- private(graph_connected/2).
+	:- mode(graph_connected(+list, +positive_integer), zero_or_one).
+	:- info(graph_connected/2, [
+		comment is 'Checks fuzzy graph connectivity. Intended for use in testing.',
+		argnames is ['FuzzyGraph', 'SampleCount']
+	]).
+
+	:- private(normalized_adjacency/5).
+	:- mode(normalized_adjacency(+integer, +positive_integer, +list, +list, -list), zero_or_one).
+	:- info(normalized_adjacency/5, [
+		comment is 'Computes the normalized adjacency matrix for a starting vertex of zero and positive vertex degrees. Intended for use in testing.',
+		argnames is ['StartVertex', 'SampleCount', 'FuzzyGraph', 'Degrees', 'Matrix']
 	]).
 
 	:- uses(format, [
@@ -35,20 +49,17 @@
 	]).
 
 	:- uses(fast_random(xoshiro128pp), [
-		get_seed/1 as get_random_seed/1, set_seed/1 as set_random_seed/1,
-		randomize/1 as randomize_seed/1, normal/3 as random_normal/3,
-		random/1 as random_float/1
+		get_seed/1 as get_random_seed/1, set_seed/1 as set_random_seed/1, randomize/1 as randomize_seed/1,
+		normal/3 as random_normal/3, random/1 as random_float/1
 	]).
 
 	:- uses(linear_algebra, [
-		symmetric_eigen_partial/7, transpose_matrix/2, matrix_vector_product/3,
-		add_scaled_outer_product/4, difference_norm/3
+		symmetric_eigen_partial/7, transpose_matrix/2, matrix_vector_product/3, add_scaled_outer_product/4,
+		difference_norm/3
 	]).
 
 	:- uses(assignvars, [
-		assignable/2,
-		op(100, xfx, '<='), ('<=')/2,
-		op(100, xfx, '=>'), ('=>')/2
+		assignable/2, op(100, xfx, '<='), ('<=')/2, op(100, xfx, '=>'), ('=>')/2
 	]).
 
 	:- uses(list, [
@@ -83,10 +94,10 @@
 		check_mixed_attributes(Attributes),
 		keys(Attributes, AttributeNames),
 		findall(Id-AttributeValues, Dataset::example(Id, AttributeValues), Examples),
-		check_examples(Dataset, Attributes, AttributeNames, Examples),
+		check_examples(Dataset, Attributes, AttributeNames, Examples, PreparedExamples),
 		build_attribute_observations(AttributeNames, Examples, Observations),
 		build_encoders(Attributes, Observations, Options, Encoders),
-		examples_to_rows(Examples, Encoders, TrainingRows),
+		examples_to_rows(PreparedExamples, Encoders, TrainingRows),
 		keys(Examples, ExampleIds),
 		encoded_feature_count(Encoders, EncodedFeatureCount),
 		length(TrainingRows, SampleCount),
@@ -187,7 +198,7 @@
 		\+ member(Value, Values),
 		distinct_values(Values).
 
-	check_examples(Dataset, Attributes, AttributeNames, Examples) :-
+	check_examples(Dataset, Attributes, AttributeNames, Examples, PreparedExamples) :-
 		^^check_examples_non_empty(Dataset, Examples),
 		length(Examples, SampleCount),
 		(	SampleCount >= 3 ->
@@ -195,7 +206,7 @@
 		;	domain_error(minimum_number_of_examples, SampleCount)
 		),
 		check_distinct_example_ids(Examples, []),
-		check_example_values(Examples, Attributes, AttributeNames).
+		check_example_values(Examples, Attributes, AttributeNames, PreparedExamples).
 
 	check_distinct_example_ids([], _SeenIds).
 	check_distinct_example_ids([Id-_AttributeValues| Examples], SeenIds) :-
@@ -204,11 +215,78 @@
 		;	check_distinct_example_ids(Examples, [Id| SeenIds])
 		).
 
-	check_example_values([], _Attributes, _AttributeNames).
-	check_example_values([_-AttributeValues| Examples], Attributes, AttributeNames) :-
-		check_attribute_bindings(AttributeNames, AttributeValues),
-		check_attribute_values(Attributes, AttributeValues),
-		check_example_values(Examples, Attributes, AttributeNames).
+	check_example_values([], _Attributes, _AttributeNames, []).
+	check_example_values([Id-AttributeValues| Examples], Attributes, AttributeNames, [Id-Prepared| PreparedExamples]) :-
+		prepare_attribute_bindings(AttributeNames, AttributeValues, Prepared),
+		check_attribute_values(Attributes, Prepared),
+		check_example_values(Examples, Attributes, AttributeNames, PreparedExamples).
+
+	prepare_attribute_bindings(AttributeNames, AttributeValues, Prepared) :-
+		( 	ground(AttributeNames),
+			ground_binding_keys(AttributeValues) ->
+			declared_binding_slots(AttributeNames, Pairs),
+			avltree::as_dictionary(Pairs, Initial),
+			index_attribute_bindings(AttributeValues, Initial, Index),
+			check_indexed_binding_counts(AttributeNames, Index),
+			check_indexed_binding_names(AttributeValues, Index),
+			Prepared = indexed(Index)
+		;	check_attribute_bindings(AttributeNames, AttributeValues),
+			Prepared = bindings(AttributeValues)
+		).
+
+	ground_binding_keys(Bindings) :-
+		nonvar(Bindings),
+		( 	Bindings == [] ->
+			true
+		;	Bindings = [Binding| Rest],
+			nonvar(Binding),
+			Binding = Attribute-_Value,
+			ground(Attribute),
+			ground_binding_keys(Rest)
+		).
+
+	declared_binding_slots([], []).
+	declared_binding_slots([Attribute| Attributes], [Attribute-binding(0, _Value, true)| Pairs]) :-
+		declared_binding_slots(Attributes, Pairs).
+
+	index_attribute_bindings([], Index, Index).
+	index_attribute_bindings([Attribute-Value| Bindings], Index0, Index) :-
+		( 	avltree::lookup(Attribute, binding(Count0, First0, Declared), Index0) ->
+			Count is Count0 + 1,
+			( 	Count0 =:= 0 ->
+				First = Value
+			;	First = First0
+			),
+			avltree::update(Index0, Attribute, binding(Count, First, Declared), Index1)
+		;	avltree::insert(Index0, Attribute, binding(1, Value, false), Index1)
+		),
+		index_attribute_bindings(Bindings, Index1, Index).
+
+	check_indexed_binding_counts([], _Index).
+	check_indexed_binding_counts([Attribute| Attributes], Index) :-
+		avltree::lookup(Attribute, binding(Count, _Value, _Declared), Index),
+		( 	Count =:= 1 ->
+			true
+		;	Count =:= 0 ->
+			existence_error(attribute, Attribute)
+		;	domain_error(attribute_occurrences, Attribute)
+		),
+		check_indexed_binding_counts(Attributes, Index).
+
+	check_indexed_binding_names([], _Index).
+	check_indexed_binding_names([Attribute-_Value| Bindings], Index) :-
+		avltree::lookup(Attribute, binding(_Count, _First, Declared), Index),
+		( 	Declared == true ->
+			true
+		;	domain_error(declared_attribute, Attribute)
+		),
+		check_indexed_binding_names(Bindings, Index).
+
+	prepared_attribute_value(Attribute, indexed(Index), Value) :-
+		!,
+		avltree::lookup(Attribute, binding(_Count, Value, _Declared), Index).
+	prepared_attribute_value(Attribute, bindings(Bindings), Value) :-
+		attribute_value(Attribute, Bindings, Value).
 
 	check_attribute_bindings(AttributeNames, AttributeValues) :-
 		check_declared_attribute_bindings(AttributeNames, AttributeValues),
@@ -244,7 +322,7 @@
 	check_attribute_values([], _AttributeValues).
 	check_attribute_values([Attribute-continuous| Attributes], AttributeValues) :-
 		!,
-		attribute_value(Attribute, AttributeValues, Value),
+		prepared_attribute_value(Attribute, AttributeValues, Value),
 		(	var(Value) ->
 			true
 		;	number(Value) ->
@@ -253,7 +331,7 @@
 		),
 		check_attribute_values(Attributes, AttributeValues).
 	check_attribute_values([Attribute-Values| Attributes], AttributeValues) :-
-		attribute_value(Attribute, AttributeValues, Value),
+		prepared_attribute_value(Attribute, AttributeValues, Value),
 		(	var(Value) ->
 			true
 		;	member(Value, Values) ->
@@ -339,9 +417,9 @@
 
 	encode_instance(Encoders, AttributeValues, Features) :-
 		encoder_attribute_names(Encoders, AttributeNames),
-		check_attribute_bindings(AttributeNames, AttributeValues),
-		check_encoded_attribute_values(Encoders, AttributeValues),
-		encode_instance_values(Encoders, AttributeValues, Features).
+		prepare_attribute_bindings(AttributeNames, AttributeValues, Prepared),
+		check_encoded_attribute_values(Encoders, Prepared),
+		encode_instance_values(Encoders, Prepared, Features).
 
 	encoder_attribute_names([], []).
 	encoder_attribute_names([continuous(Attribute, _Mean, _Scale)| Encoders], [Attribute| Attributes]) :-
@@ -353,7 +431,7 @@
 	check_encoded_attribute_values([], _AttributeValues).
 	check_encoded_attribute_values([continuous(Attribute, _Mean, _Scale)| Encoders], AttributeValues) :-
 		!,
-		attribute_value(Attribute, AttributeValues, Value),
+		prepared_attribute_value(Attribute, AttributeValues, Value),
 		(	var(Value) ->
 			true
 		;	number(Value) ->
@@ -362,7 +440,7 @@
 		),
 		check_encoded_attribute_values(Encoders, AttributeValues).
 	check_encoded_attribute_values([categorical(Attribute, Values)| Encoders], AttributeValues) :-
-		attribute_value(Attribute, AttributeValues, Value),
+		prepared_attribute_value(Attribute, AttributeValues, Value),
 		(	var(Value) ->
 			true
 		;	member(Value, Values) ->
@@ -374,14 +452,14 @@
 	encode_instance_values([], _AttributeValues, []).
 	encode_instance_values([continuous(Attribute, Mean, Scale)| Encoders], AttributeValues, [Feature| Features]) :-
 		!,
-		attribute_value(Attribute, AttributeValues, Value),
+		prepared_attribute_value(Attribute, AttributeValues, Value),
 		(	var(Value) ->
 			Feature = 0.0
 		;	Feature is (Value - Mean) / Scale
 		),
 		encode_instance_values(Encoders, AttributeValues, Features).
 	encode_instance_values([categorical(Attribute, Values)| Encoders], AttributeValues, Features) :-
-		attribute_value(Attribute, AttributeValues, Value),
+		prepared_attribute_value(Attribute, AttributeValues, Value),
 		(	var(Value) ->
 			missing_one_hot_encode(Values, Features, RestFeatures)
 		;	one_hot_encode(Values, Value, Features, [0.0| RestFeatures])
@@ -497,24 +575,33 @@
 	neighbor_heap_pairs([Target-Other| Rows], Source, Row, Metric, Count, Index0, Index) :-
 		prepared_distance(Metric, Row, Other, Distance),
 		avltree::lookup(Source, SourceHeap, Index0),
-		bounded_heap_insert(Count, key(Distance, Target), SourceHeap, UpdatedSource),
+		bounded_heap_insert(Count, key(Distance, Target), SourceHeap, UpdatedSource, SourceChanged),
 		avltree::lookup(Target, TargetHeap, Index0),
-		bounded_heap_insert(Count, key(Distance, Source), TargetHeap, UpdatedTarget),
-		avltree::update(Index0, Source, UpdatedSource, Index1),
-		avltree::update(Index1, Target, UpdatedTarget, Index2),
+		bounded_heap_insert(Count, key(Distance, Source), TargetHeap, UpdatedTarget, TargetChanged),
+		( 	SourceChanged == true ->
+			avltree::update(Index0, Source, UpdatedSource, Index1)
+		;	Index1 = Index0
+		),
+		( 	TargetChanged == true ->
+			avltree::update(Index1, Target, UpdatedTarget, Index2)
+		;	Index2 = Index1
+		),
 		neighbor_heap_pairs(Rows, Source, Row, Metric, Count, Index2, Index).
 
-	bounded_heap_insert(0, _Key, Heap, Heap) :-
+	bounded_heap_insert(0, _Key, Heap, Heap, false) :-
 		!.
-	bounded_heap_insert(Count, Key, Heap0, Heap) :-
+	bounded_heap_insert(Count, Key, Heap0, Heap, Changed) :-
 		binary_heap(>)::size(Heap0, Size),
 		( 	Size < Count ->
-			binary_heap(>)::insert(Key, true, Heap0, Heap)
+			binary_heap(>)::insert(Key, true, Heap0, Heap),
+			Changed = true
 		;	binary_heap(>)::top(Heap0, Worst, _),
 			( 	Key @< Worst ->
 				binary_heap(>)::delete(Heap0, _, _, Reduced),
-				binary_heap(>)::insert(Key, true, Reduced, Heap)
-			;	Heap = Heap0
+				binary_heap(>)::insert(Key, true, Reduced, Heap),
+				Changed = true
+			;	Heap = Heap0,
+				Changed = false
 			)
 		).
 
@@ -536,7 +623,7 @@
 	transform_neighbor_heap([Other| Rows], Row, Metric, Count, Index, Heap0, Heap) :-
 		prepare_metric_row(Other, Metric, PreparedOther),
 		prepared_distance(Metric, Row, PreparedOther, Distance),
-		bounded_heap_insert(Count, key(Distance, Index), Heap0, Heap1),
+		bounded_heap_insert(Count, key(Distance, Index), Heap0, Heap1, _Changed),
 		Next is Index + 1,
 		transform_neighbor_heap(Rows, Row, Metric, Count, Next, Heap1, Heap).
 
@@ -838,9 +925,10 @@
 		(	Initialization == random ->
 			random_embedding(SampleCount, ComponentCount, Embedding),
 			InitializationUsed = random
-		;	graph_connected(FuzzyGraph, SampleCount),
+		;	build_graph_index(FuzzyGraph, SampleCount, Index),
+			graph_index_connected(Index, SampleCount),
 			catch(
-				spectral_embedding(FuzzyGraph, SampleCount, ComponentCount, Embedding),
+				spectral_embedding_from_index(Index, SampleCount, ComponentCount, Embedding),
 				_Error,
 				fail
 			) ->
@@ -860,6 +948,9 @@
 		!.
 	graph_connected(FuzzyGraph, SampleCount) :-
 		build_graph_index(FuzzyGraph, SampleCount, Index),
+		graph_index_connected(Index, SampleCount).
+
+	graph_index_connected(Index, SampleCount) :-
 		avltree::as_dictionary([], Visited),
 		reachable_vertices([0], Index, Visited, 0, SampleCount).
 
@@ -906,8 +997,7 @@
 			reachable_vertices(NextPending, Index, Visited, Count1, Count)
 		).
 
-	spectral_embedding(FuzzyGraph, SampleCount, ComponentCount, Embedding) :-
-		build_graph_index(FuzzyGraph, SampleCount, Index),
+	spectral_embedding_from_index(Index, SampleCount, ComponentCount, Embedding) :-
 		indexed_degrees(0, SampleCount, Index, Degrees),
 		positive_degrees(Degrees),
 		avltree::as_list(Index, Vertices),
@@ -1446,13 +1536,15 @@
 
 	valid_example_ids(ExampleIds) :-
 		valid(list, ExampleIds),
-		valid_example_ids(ExampleIds, []).
+		avltree::as_dictionary([], SeenIds),
+		valid_example_ids(ExampleIds, SeenIds).
 
 	valid_example_ids([], _SeenIds).
-	valid_example_ids([Id| Ids], SeenIds) :-
+	valid_example_ids([Id| Ids], SeenIds0) :-
 		ground(Id),
-		\+ member(Id, SeenIds),
-		valid_example_ids(Ids, [Id| SeenIds]).
+		\+ avltree::lookup(Id, _, SeenIds0),
+		avltree::insert(SeenIds0, Id, true, SeenIds),
+		valid_example_ids(Ids, SeenIds).
 
 	valid_mixed_encoders(Encoders) :-
 		valid(list, Encoders),

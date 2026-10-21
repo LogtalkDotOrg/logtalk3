@@ -158,3 +158,51 @@
 	example(5, [x-200.0]).
 
 :- end_object.
+
+
+:- object(wide_umap_dataset,
+	implements(dimension_reduction_dataset_protocol)).
+
+	attribute_values(x1, continuous).
+	attribute_values(x2, continuous).
+	attribute_values(x3, continuous).
+	attribute_values(x4, continuous).
+	attribute_values(x5, continuous).
+	attribute_values(x6, continuous).
+	attribute_values(x7, continuous).
+	attribute_values(x8, continuous).
+	attribute_values(x9, continuous).
+	attribute_values(x10, continuous).
+	attribute_values(x11, continuous).
+	attribute_values(x12, continuous).
+	attribute_values(x13, continuous).
+	attribute_values(x14, continuous).
+	attribute_values(x15, continuous).
+	attribute_values(x16, continuous).
+
+	example(1, [
+		x16-16.0, x15-15.0, x14-14.0, x13-13.0,
+		x12-12.0, x11-11.0, x10-10.0, x9-9.0,
+		x8-8.0, x7-7.0, x6-6.0, x5-5.0,
+		x4-4.0, x3-3.0, x2-2.0, x1-1.0
+	]).
+	example(2, [
+		x8-16.0, x7-14.0, x6-12.0, x5-10.0,
+		x4-8.0, x3-6.0, x2-4.0, x1-2.0,
+		x16-32.0, x15-30.0, x14-28.0, x13-26.0,
+		x12-24.0, x11-22.0, x10-20.0, x9-18.0
+	]).
+	example(3, [
+		x1-3.0, x2-6.0, x3-9.0, x4-12.0,
+		x5-15.0, x6-18.0, x7-21.0, x8-24.0,
+		x9-27.0, x10-30.0, x11-33.0, x12-36.0,
+		x13-39.0, x14-42.0, x15-45.0, x16-48.0
+	]).
+	example(4, [
+		x9-36.0, x10-40.0, x11-44.0, x12-48.0,
+		x13-52.0, x14-56.0, x15-60.0, x16-64.0,
+		x1-4.0, x2-8.0, x3-12.0, x4-16.0,
+		x5-20.0, x6-24.0, x7-28.0, x8-32.0
+	]).
+
+:- end_object.

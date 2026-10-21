@@ -23,14 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2026-10-12,
+		date is 2026-10-22,
 		comment is 'Unit tests for the "umap_projection" library.'
 	]).
 
 	:- uses(list, [
-		length/2, member/2, memberchk/2, select/3
+		length/2, member/2, memberchk/2, nth1/3, select/3
 	]).
 
 	:- uses(lgtunit, [
@@ -438,19 +438,34 @@
 		umap_projection<<nearest_neighbors(Rows, [0.0, 0.0], euclidean, 0, Empty),
 		assertion(Empty == []).
 
-	test(umap_projection_large_neighbors_full_sort_reference, deterministic) :-
+	test(umap_projection_large_neighbors_full_sort_reference, all(check_neighbor_reference(Rows, Metric, Count))) :-
 		neighbor_fixture_rows(0, 33, Rows),
-		forall(member(Metric, [euclidean, manhattan, cosine]), check_neighbor_reference(Rows, Metric, 3)).
+		member(Metric, [euclidean, manhattan, cosine]),
+		member(Count, [2, 3, 15, 33]).
+
+	test(umap_projection_bounded_heap_changes, deterministic) :-
+		binary_heap(>)::new(Initial),
+		umap_projection<<bounded_heap_insert(0, key(2.0, 2), Initial, Empty, false),
+		assertion(Empty == Initial),
+		umap_projection<<bounded_heap_insert(1, key(2.0, 2), Empty, First, true),
+		umap_projection<<bounded_heap_insert(1, key(2.0, 1), First, Replaced, true),
+		umap_projection<<bounded_heap_insert(1, key(2.0, 1), Replaced, Equal, false),
+		assertion(Equal == Replaced),
+		umap_projection<<bounded_heap_insert(1, key(3.0, 0), Equal, Worse, false),
+		assertion(Worse == Equal),
+		umap_projection<<bounded_heap_insert(1, key(1.0, 3), Worse, Better, true),
+		umap_projection<<heap_neighbors(Better, Neighbors),
+		assertion(Neighbors == [neighbor(3, 1.0)]).
 
 	test(umap_projection_cached_curve_boundaries, deterministic) :-
 		forall(member(MinDist-Spread, [0.0-1.0, 0.1-1.0, 1.0-1.0, 0.2-2.0]), check_curve_fit(MinDist, Spread)),
 		umap_projection<<fit_curve_iterations(25, [], 0.0, 0.0, LogA, LogB),
-		LogA =~= 0.0,
-		LogB =~= 0.0,
+		assertion(LogA =~= 0.0),
+		assertion(LogB =~= 0.0),
 		umap_projection<<curve_value_and_jacobian(0.0, 0.0, 1.0, 1.0, Value, JacobianA, JacobianB),
-		Value =~= 1.0,
-		JacobianA =~= 0.0,
-		JacobianB =~= 0.0.
+		assertion(Value =~= 1.0),
+		assertion(JacobianA =~= 0.0),
+		assertion(JacobianB =~= 0.0).
 
 	test(umap_projection_observations_binding_order, deterministic) :-
 		umap_projection<<build_attribute_observations([x, y], [1-[y-2.0, x-1.0], 2-[x-_, y-4.0], 3-[y-_, x-3.0]], Observations),
@@ -459,7 +474,7 @@
 
 	test(umap_projection_mean_empty_and_example_hook, deterministic) :-
 		umap_projection<<arithmetic_mean_or_zero([], Mean),
-		Mean =~= 0.0,
+		assertion(Mean =~= 0.0),
 		umap_projection<<example_attribute_values(id-[x-1.0], Bindings),
 		assertion(Bindings == [x-1.0]).
 
@@ -484,7 +499,74 @@
 		cached_model(validation, umap_reducer(Encoders, Ids, Rows, Embedding, _Graph, Diagnostics)),
 		forall(member(Graph, [[edge(0, 0, 1.0)], [edge(0, 4, 1.0)], [edge(0, 1, 0.0)], [edge(0, 1, 1.1)], [edge(1, 2, 0.5), edge(0, 1, 0.5)]]), assertion(\+ umap_projection::valid_dimension_reducer(umap_reducer(Encoders, Ids, Rows, Embedding, Graph, Diagnostics)))).
 
+	test(umap_projection_reducer_identifier_set, deterministic) :-
+		cached_model(validation, umap_reducer(Encoders, _Ids, Rows, Embedding, Graph, Diagnostics)),
+		umap_projection::check_dimension_reducer(umap_reducer(Encoders, [1, 1.0, sample(a), sample(b)], Rows, Embedding, Graph, Diagnostics)),
+		assertion(\+ umap_projection::valid_dimension_reducer(umap_reducer(Encoders, [sample(a), 1, sample(b), sample(a)], Rows, Embedding, Graph, Diagnostics))).
+
+	test(umap_projection_binding_error_precedence, all(check_binding_error(Reducer, Bindings, Expected))) :-
+		cached_model(mixed, Reducer),
+		Cases = [
+			[age-20.0, age-30.0, unknown-0]-domain_error(attribute_occurrences, age),
+			[channel-retail, unknown-0]-existence_error(attribute, age),
+			[age-invalid, channel-retail, unknown-0]-domain_error(declared_attribute, unknown),
+			[age-invalid, channel-online, channel-retail]-domain_error(attribute_occurrences, channel),
+			[channel-retail, age-invalid]-type_error(number, invalid),
+			[age-35.0, channel-phone]-domain_error(attribute_value(channel, [online, retail]), phone)
+		],
+		member(Bindings-Expected, Cases).
+
+	test(umap_projection_binding_order_and_missing_values, deterministic) :-
+		cached_model(mixed, umap_reducer(Encoders, _Ids, _Rows, _Embedding, _Graph, _Diagnostics)),
+		umap_projection<<encode_instance(Encoders, [channel-MissingChannel, age-MissingAge], Features),
+		assertion(Features == [0.0, 0.0, 0.0, 1.0]),
+		assertion(var(MissingChannel)),
+		assertion(var(MissingAge)),
+		umap_projection<<encode_instance(Encoders, [channel-retail, age-35.0], Observed),
+		assertion(Observed == [0.0, 0.0, 1.0, 0.0]).
+
+	test(umap_projection_binding_variable_key, deterministic(Attribute == age)) :-
+		cached_model(mixed, umap_reducer(Encoders, _Ids, _Rows, _Embedding, _Graph, _Diagnostics)),
+		umap_projection<<encode_instance(Encoders, [Attribute-35.0, channel-retail], _Features).
+
+	test(umap_projection_binding_open_tail, true(Tail == [])) :-
+		cached_model(mixed, umap_reducer(Encoders, _Ids, _Rows, _Embedding, _Graph, _Diagnostics)),
+		umap_projection<<encode_instance(Encoders, [age-35.0, channel-retail| Tail], _Features).
+
+	test(umap_projection_binding_improper_list, false) :-
+		cached_model(mixed, Reducer),
+		umap_projection::transform(Reducer, [age-35.0, channel-retail| invalid], _Reduced).
+
+	test(umap_projection_wide_reordered_training, deterministic(length(Reduced, 2))) :-
+		umap_projection::learn(wide_umap_dataset, Reducer, [feature_scaling(false), n_neighbors(3), initialization(random), maximum_iterations(2), negative_sample_rate(1)]),
+		umap_projection::check_dimension_reducer(Reducer),
+		Reducer = umap_reducer(_Encoders, _Ids, [First, Second, Third, Fourth], _Embedding, _Graph, _Diagnostics),
+		forall(member(Scale-Row, [-1.5-First, -0.5-Second, 0.5-Third, 1.5-Fourth]), check_scaled_row(Row, 16, Scale)),
+		wide_umap_dataset::example(2, Instance),
+		umap_projection::transform(Reducer, Instance, Reduced).
+
 	% auxiliary predicates
+
+	check_scaled_row(Row, Width, Scale) :-
+		length(Row, Width),
+		findall(
+			Expected,
+			( 	nth1(Index, Row, _Value),
+				Expected is Index * Scale
+			),
+			ExpectedRow
+		),
+		assertion(Row =~= ExpectedRow).
+
+	check_binding_error(Reducer, Bindings, Expected) :-
+		catch(
+			( 	umap_projection::transform(Reducer, Bindings, _Reduced),
+				Outcome = success
+			),
+			error(Formal, _Context),
+			Outcome = error(Formal)
+		),
+		assertion(Outcome == error(Expected)).
 
 	neighbor_fixture_rows(Index, Count, []) :-
 		Index >= Count,
