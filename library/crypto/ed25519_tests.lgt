@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2026-10-21,
 		comment is 'Unit tests for the "crypto" library implementation of Ed25519.'

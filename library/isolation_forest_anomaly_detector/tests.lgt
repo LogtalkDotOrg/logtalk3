@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2026-10-10,
+		date is 2026-10-21,
 		comment is 'Unit tests for the "isolation_forest_anomaly_detector" library.'
 	]).
 
@@ -33,16 +33,17 @@
 		length/2, take/3, memberchk/2
 	]).
 
+	:- private(cached_model_/3).
+	:- dynamic(cached_model_/3).
+
 	cover(isolation_forest_anomaly_detector).
 
+	setup :-
+		retractall(cached_model_(_, _, _)).
+
 	cleanup :-
+		retractall(cached_model_(_, _, _)),
 		^^clean_file('test_output.pl').
-
-	learn_filtered(Dataset, Model) :-
-		isolation_forest_anomaly_detector::learn(Dataset, Model, [baseline_selection_policy(filter)]).
-
-	learn_filtered(Dataset, ExtraOptions, Model) :-
-		isolation_forest_anomaly_detector::learn(Dataset, Model, [baseline_selection_policy(filter)| ExtraOptions]).
 
 	% learn/2 tests - gaussian_anomalies dataset
 
@@ -362,6 +363,17 @@
 		isolation_forest_anomaly_detector::score(Model, [x-5.10], AnomalyScore).
 
 	% auxiliary predicates
+
+	learn_filtered(Dataset, Model) :-
+		learn_filtered(Dataset, [], Model).
+
+	learn_filtered(Dataset, ExtraOptions, Model) :-
+		Options = [baseline_selection_policy(filter)| ExtraOptions],
+		(	cached_model_(Dataset, Options, Cached) ->
+			Model = Cached
+		;	isolation_forest_anomaly_detector::learn(Dataset, Model, Options),
+			assertz(cached_model_(Dataset, Options, Model))
+		).
 
 	count_class([], _, 0).
 	count_class([_-Class-_| Rest], Class, Count) :-
