@@ -159,14 +159,31 @@ excluding identifier term-comparison costs. These remain exact dense
 methods, not sparse or approximate algorithms.
 
 Probability symmetrization traverses the conditional matrix and its
-transpose in quadratic time. Distances and Student-t weights reuse
-symmetric pairs. Gradients and KL diagnostics consume weights and their
-normalization sum without materializing a normalized probability matrix.
-Gaussian search reuses shifted distances and normalizes only its
-terminal weights. Attribute values are validated and aligned once during
-training; AVL indexes check identifiers and binding occurrences.
-Centering uses row-wise sums and subtraction, and optimizer settings are
-resolved once before iteration.
+transpose in quadratic time. Distances and Student-t weights use
+triangular pair traversals with shared row-tail cursors instead of
+allocating a matrix transpose. Each pair is computed once and fills both
+mirrored cells. Weight normalization sums are accumulated during
+construction in row-major order, including the already-filled lower row
+prefixes, without doubling triangular subtotals or performing a separate
+whole-matrix summation pass.
+
+Training computes and applies one gradient row at a time against the
+unchanged old embedding, without retaining a complete gradient matrix.
+Centering still follows all coordinate updates, and stopping uses the
+maximum raw update before centering. Gradients and KL diagnostics
+consume weights and their normalization sum without materializing a
+normalized probability matrix. Gaussian search reuses shifted distances
+and normalizes only its terminal weights. Attribute values are validated
+and aligned once during training; AVL indexes check identifiers and
+binding occurrences. Centering uses row-wise sums and subtraction, and
+optimizer settings are resolved once before iteration.
+
+The row-tail cursor lists still require quadratic allocation, and the
+dense matrices retain quadratic storage. These optimizations reduce
+temporary structures and repeated traversals without changing the
+asymptotic bounds. The matrix, sum, and optimizer regression tests
+compare results with independent unfused references, including
+floating-point accumulation order.
 
 The numerical work for one new point is ``O(n*d + B*n + T*n*m)``. Each
 public transformation also validates the complete stored reducer,
@@ -189,10 +206,18 @@ optimized library and benchmark dependencies before running it:
 Fixed workloads cover 100-example affinity matrices, gradients and
 centering, 100-by-50 preprocessing, 1,000-identifier validation,
 1,000-by-20 centering, optimizer option dispatch, eight-example
-training, and repeated transformations. The wider centering, larger
-identifier, and option-dispatch workloads include benchmark-only
-reference methods. Timings are informative measurements, not unit-test
-thresholds; instrumented test timings are not production benchmarks.
+training, and repeated transformations. Additional paired workloads
+compare matrix construction, weight construction with summation, and
+complete gradient/update steps against benchmark-only unfused reference
+methods for 100 and 300 examples with two and five coordinates. Inputs,
+weights, and optimizer states are prepared outside timed sections. The
+synthetic rows do not repeat on a fixed 97-example cycle. A
+deterministic 100-example dataset measures public training with a
+100-iteration limit and reports the achieved iteration count. The wider
+centering, larger identifier, and option-dispatch workloads also include
+benchmark-only reference methods. Timings are informative measurements,
+not unit-test thresholds; instrumented test timings are not production
+benchmarks.
 
 Limitations
 -----------

@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-10-13,
+		date is 2026-10-21,
 		comment is 'Focused portable benchmarks for the "tsne_projection" library.'
 	]).
 
@@ -53,11 +53,19 @@
 	]).
 
 	:- uses(list, [
-		nth1/3, msort/2, member/2
+		length/2, nth1/3, msort/2, member/2
 	]).
 
 	:- uses(user, [
 		atomic_concat/3
+	]).
+
+	:- uses(linear_algebra, [
+		transpose_matrix/2
+	]).
+
+	:- uses(pairs, [
+		values/2
 	]).
 
 	run :-
@@ -87,7 +95,105 @@
 		measure(optimizer_option_dispatch, repeat_goal(20000, configured_phase(Configuration))),
 		measure(training_8, train),
 		tsne_projection::learn(correlated_plane, Reducer, [perplexity(2.0), maximum_iterations(100), early_exaggeration_iterations(20), learning_rate(20.0)]),
-		measure(transform_8, repeat_goal(20, transform(Reducer))).
+		measure(transform_8, repeat_goal(20, transform(Reducer))),
+		matrix_workload(100, 2),
+		matrix_workload(100, 5),
+		matrix_workload(300, 2),
+		matrix_workload(300, 5),
+		measure(training_100, train_large),
+		large_model(tsne_reducer(_Encoders, _Ids, _Training, _Embedding, Diagnostics)),
+		member(iterations(Iterations), Diagnostics),
+		!,
+		format('training_100 iterations: ~w~n', [Iterations]).
+
+	matrix_workload(Count, Width) :-
+		rows(Count, Width, Rows),
+		reference_matrix(Rows, weight, Weights),
+		reference_matrix_sum(Weights, 0.0, Sum),
+		tsne_projection << joint_probability_matrix(Weights, Probabilities),
+		tsne_projection << zero_matrix_like(Rows, Updates),
+		tsne_projection << constant_matrix_like(Rows, 1.0, Gains),
+		format('~nMatrix workload: ~w examples, ~w coordinates~n', [Count, Width]),
+		measure(matrix_reference, repeat_goal(5, reference_matrix(Rows, weight, _))),
+		measure(matrix_candidate, repeat_goal(5, tsne_projection << symmetric_matrix(Rows, weight, _))),
+		measure(weights_reference, repeat_goal(5, reference_weights(Rows))),
+		measure(weights_candidate, repeat_goal(5, weights(Rows))),
+		measure(step_reference, repeat_goal(5, reference_step(Probabilities, Weights, Sum, Rows, Updates, Gains))),
+		measure(step_candidate, repeat_goal(5, candidate_step(Probabilities, Weights, Sum, Rows, Updates, Gains))).
+
+	reference_weights(Rows) :-
+		reference_matrix(Rows, weight, Weights),
+		reference_matrix_sum(Weights, 0.0, _Sum).
+
+	reference_matrix(Rows, Kind, Matrix) :-
+		length(Rows, Count),
+		reference_cells(Count, Count, Matrix),
+		transpose_matrix(Matrix, Transposed),
+		reference_pair_rows(Rows, Rows, Matrix, Transposed, 1, Kind).
+
+	reference_cells(0, _Width, []) :-
+		!.
+	reference_cells(Count, Width, [Row| Rows]) :-
+		length(Row, Width),
+		Next is Count - 1,
+		reference_cells(Next, Width, Rows).
+
+	reference_pair_rows([], _AllRows, [], [], _Index, _Kind).
+	reference_pair_rows([Row| Rows], AllRows, [Cells| Matrix], [Reverse| Transposed], Index, Kind) :-
+		reference_pair_row(AllRows, Row, Cells, Reverse, Index, 1, Kind),
+		Next is Index + 1,
+		reference_pair_rows(Rows, AllRows, Matrix, Transposed, Next, Kind).
+
+	reference_pair_row([], _Row, [], [], _RowIndex, _ColumnIndex, _Kind).
+	reference_pair_row([Other| Rows], Row, [Cell| Cells], [Reverse| Reverses], RowIndex, ColumnIndex, Kind) :-
+		(	RowIndex =:= ColumnIndex ->
+			Cell = 0.0
+		;	RowIndex < ColumnIndex ->
+			reference_distance(Row, Other, 0.0, Distance),
+			(	Kind == distance ->
+				Cell = Distance
+			;	Cell is 1.0 / (1.0 + Distance)
+			),
+			Reverse = Cell
+		;	true
+		),
+		Next is ColumnIndex + 1,
+		reference_pair_row(Rows, Row, Cells, Reverses, RowIndex, Next, Kind).
+
+	reference_distance([], [], Distance, Distance).
+	reference_distance([Left| Lefts], [Right| Rights], Distance0, Distance) :-
+		Difference is Left - Right,
+		Distance1 is Distance0 + Difference * Difference,
+		reference_distance(Lefts, Rights, Distance1, Distance).
+
+	reference_matrix_sum([], Sum, Sum).
+	reference_matrix_sum([Row| Rows], Sum0, Sum) :-
+		reference_row_sum(Row, Sum0, Sum1),
+		reference_matrix_sum(Rows, Sum1, Sum).
+
+	reference_row_sum([], Sum, Sum).
+	reference_row_sum([Value| Values], Sum0, Sum) :-
+		Sum1 is Sum0 + Value,
+		reference_row_sum(Values, Sum1, Sum).
+
+	reference_step(Probabilities, Weights, Sum, Rows, Updates, Gains) :-
+		tsne_projection << gradient_matrix(Probabilities, Weights, Sum, Rows, 1.0, Gradients),
+		reference_update(Rows, Gradients, Updates, Gains, _Updated, _NextUpdates, _NextGains, 0.0, _Delta).
+
+	reference_update([], [], [], [], [], [], [], Delta, Delta).
+	reference_update([Row| Rows], [Gradient| Gradients], [Previous| PreviousRows], [Gain| Gains0], [Updated| UpdatedRows], [Update| Updates], [UpdatedGain| Gains], Delta0, Delta) :-
+		tsne_projection << update_row(Row, Gradient, Previous, Gain, 0.1, 0.8, Updated, Update, UpdatedGain, 0.0, RowDelta),
+		Delta1 is max(RowDelta, Delta0),
+		reference_update(Rows, Gradients, PreviousRows, Gains0, UpdatedRows, Updates, Gains, Delta1, Delta).
+
+	candidate_step(Probabilities, Weights, Sum, Rows, Updates, Gains) :-
+		tsne_projection << training_step(Probabilities, Weights, Sum, Rows, 1.0, Updates, Gains, 0.1, 0.8, _Updated, _NextUpdates, _NextGains, _Delta).
+
+	train_large :-
+		large_model(_Reducer).
+
+	large_model(Reducer) :-
+		tsne_projection::learn(tsne_projection_benchmark_dataset, Reducer, [perplexity(5.0), maximum_iterations(100), early_exaggeration_iterations(20), learning_rate(20.0), tolerance(1.0e-20)]).
 
 	measure(Name, Goal) :-
 		call(Goal),
@@ -136,8 +242,8 @@
 
 	preprocess(Attributes, Examples) :-
 		tsne_projection << check_examples(benchmark, Attributes, Examples, Aligned),
-		pairs::values(Aligned, ValueRows),
-		linear_algebra::transpose_matrix(ValueRows, Columns),
+		values(Aligned, ValueRows),
+		transpose_matrix(ValueRows, Columns),
 		tsne_projection << build_encoders(Attributes, Columns, [feature_scaling(true)], Encoders),
 		tsne_projection << examples_to_rows(Aligned, Encoders, _Rows).
 
@@ -151,9 +257,9 @@
 		reference_ids(Ids, [Id| Seen]).
 
 	reference_center(Rows) :-
-		linear_algebra::transpose_matrix(Rows, Columns),
+		transpose_matrix(Rows, Columns),
 		reference_center_columns(Columns, CenteredColumns),
-		linear_algebra::transpose_matrix(CenteredColumns, _Centered).
+		transpose_matrix(CenteredColumns, _Centered).
 
 	reference_center_columns([], []).
 	reference_center_columns([Column| Columns], [Centered| CenteredColumns]) :-
@@ -196,14 +302,14 @@
 	row(0, _Index, []) :-
 		!.
 	row(Count, Index, [Value| Values]) :-
-		Value is ((Index * Count) mod 97) / 97.0,
+		Value is sin(Index * Count * 0.13) + Index / (Count + 100.0),
 		Next is Count - 1,
 		row(Next, Index, Values).
 
 	attributes(0, []) :-
 		!.
 	attributes(Count, [Name| Names]) :-
-		atomic_concat(feature_, Count, Name)x,
+		atomic_concat(feature_, Count, Name),
 		Next is Count - 1,
 		attributes(Next, Names).
 
@@ -222,5 +328,35 @@
 	ids(Count, [Count| Ids]) :-
 		Next is Count - 1,
 		ids(Next, Ids).
+
+:- end_object.
+
+
+:- object(tsne_projection_benchmark_dataset,
+	implements(dimension_reduction_dataset_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-10-21,
+		comment is 'Deterministic 100-example continuous dataset for t-SNE benchmarks.'
+	]).
+
+	attribute_values(x, continuous).
+	attribute_values(y, continuous).
+	attribute_values(z, continuous).
+
+	example(Id, [x-XValue, y-YValue, z-ZValue]) :-
+		identifier(1, Id),
+		XValue is Id / 100.0,
+		YValue is sin(Id * 0.13),
+		ZValue is cos(Id * 0.07).
+
+	identifier(Id, Id) :-
+		Id =< 100.
+	identifier(Index, Id) :-
+		Index < 100,
+		Next is Index + 1,
+		identifier(Next, Id).
 
 :- end_object.

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2026-10-13,
+		date is 2026-10-21,
 		comment is 'Unit tests for the "tsne_projection" library.'
 	]).
 
@@ -443,7 +443,126 @@
 		tsne_projection << optimize_new_coordinates([0.8, 0.2], [[0.0], [2.0]], [learning_rate(0.1), maximum_iterations(1), tolerance(1.0e-7)], [0.5], Coordinates),
 		conditional_loss([0.8, 0.2], [[0.0], [2.0]], Coordinates, After).
 
+	test(tsne_projection_matrix_builder_equivalence, all(check_matrix_equivalence(Rows))) :-
+		member(Rows, [[], [[0.0]], [[0.0], [2.0]], [[1.0], [1.0], [1.0]], [[0.5, 2.0], [2.0, -1.0], [-1.0, 3.0], [0.5, 2.0]], [[0.0], [0.000001], [1.0], [10000.0]]]).
+
+	test(tsne_projection_optimizer_equivalence, all(check_optimizer_equivalence(Probabilities, Embedding, Configuration))) :-
+		Probabilities = [[0.0, 0.2, 0.1], [0.2, 0.0, 0.2], [0.1, 0.2, 0.0]],
+		Embedding = [[0.5, 2.0], [2.0, -1.0], [-1.0, 3.0]],
+		member(Configuration, [training_config(0.1, 12.0, 2, 6, 1.0e-20), training_config(0.1, 12.0, 0, 4, 1.0e-20), training_config(0.1, 12.0, 2, 6, 1000.0), training_config(0.1, 12.0, 4, 4, 1.0e-20)]).
+
+	test(tsne_projection_training_step_equivalence, all(check_training_step(Probabilities, Embedding, Previous, Gains, Scale, Momentum))) :-
+		Probabilities = [[0.0, 0.2, 0.1], [0.2, 0.0, 0.2], [0.1, 0.2, 0.0]],
+		Previous = [[-0.3, 0.0], [0.2, -0.1], [0.0, 0.5]],
+		Gains = [[1.0, 0.01], [0.01, 2.0], [0.001, 1.0]],
+		member(Embedding, [[[0.5, 2.0], [2.0, -1.0], [-1.0, 3.0]], [[1.0, 1.0], [1.0, 1.0], [1.0, 1.0]]]),
+		member(Scale-Momentum, [1.0-0.8, 12.0-0.5]).
+
+	test(tsne_projection_matrix_builder_determinism, deterministic) :-
+		check_matrix_equivalence([[0.5, 2.0], [2.0, -1.0], [-1.0, 3.0]]).
+
+	test(tsne_projection_row_major_sum_equivalence, deterministic(check_matrix_equivalence(Rows))) :-
+		findall(
+			[Value],
+			(	member(Index, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
+				Value is sin(Index * 0.13) + Index / 100.0
+			),
+			Rows
+		).
+
+	test(tsne_projection_training_step_determinism, deterministic) :-
+		check_training_step([[0.0, 0.5], [0.5, 0.0]], [[0.0], [2.0]], [[0.0], [-0.3]], [[0.01], [1.0]], 1.0, 0.8).
+
 	% auxiliary predicates
+
+	check_matrix_equivalence(Rows) :-
+		reference_matrix(Rows, distance, ExpectedDistances),
+		tsne_projection << squared_distance_matrix(Rows, Distances),
+		assertion(Distances == ExpectedDistances),
+		reference_matrix(Rows, weight, ExpectedWeights),
+		tsne_projection << symmetric_matrix(Rows, weight, ConstructedWeights),
+		assertion(ConstructedWeights == ExpectedWeights),
+		reference_matrix_sum(ExpectedWeights, 0.0, ExpectedSum),
+		tsne_projection << low_dimensional_weights(Rows, Weights, Sum),
+		assertion(Weights-Sum == ExpectedWeights-ExpectedSum),
+		assertion(ground(Distances-Weights-Sum)).
+
+	check_training_step(Probabilities, Embedding, Previous, Gains, Scale, Momentum) :-
+		reference_matrix(Embedding, weight, Weights),
+		reference_matrix_sum(Weights, 0.0, Sum),
+		tsne_projection << gradient_matrix(Probabilities, Weights, Sum, Embedding, Scale, Gradients),
+		reference_update(Embedding, Gradients, Previous, Gains, 0.1, Momentum, ExpectedEmbedding, ExpectedUpdates, ExpectedGains, 0.0, ExpectedDelta),
+		tsne_projection << training_step(Probabilities, Weights, Sum, Embedding, Scale, Previous, Gains, 0.1, Momentum, UpdatedEmbedding, Updates, UpdatedGains, Delta),
+		assertion(state(UpdatedEmbedding, Updates, UpdatedGains, Delta) == state(ExpectedEmbedding, ExpectedUpdates, ExpectedGains, ExpectedDelta)).
+
+	reference_matrix(Rows, Kind, Matrix) :-
+		reference_matrix_rows(Rows, Rows, Kind, 1, Matrix).
+
+	reference_matrix_rows([], _AllRows, _Kind, _Index, []).
+	reference_matrix_rows([Row| Rows], AllRows, Kind, Index, [Cells| Matrix]) :-
+		reference_matrix_row(AllRows, Row, Kind, Index, 1, Cells),
+		Next is Index + 1,
+		reference_matrix_rows(Rows, AllRows, Kind, Next, Matrix).
+
+	reference_matrix_row([], _Row, _Kind, _RowIndex, _ColumnIndex, []).
+	reference_matrix_row([Other| Rows], Row, Kind, RowIndex, ColumnIndex, [Cell| Cells]) :-
+		(	RowIndex =:= ColumnIndex ->
+			Cell = 0.0
+		;	baseline_distance(Row, Other, 0.0, Distance),
+			(	Kind == distance ->
+				Cell = Distance
+			;	Cell is 1.0 / (1.0 + Distance)
+			)
+		),
+		Next is ColumnIndex + 1,
+		reference_matrix_row(Rows, Row, Kind, RowIndex, Next, Cells).
+
+	baseline_distance([], [], Distance, Distance).
+	baseline_distance([Left| Lefts], [Right| Rights], Distance0, Distance) :-
+		Difference is Left - Right,
+		Distance1 is Distance0 + Difference * Difference,
+		baseline_distance(Lefts, Rights, Distance1, Distance).
+
+	reference_matrix_sum([], Sum, Sum).
+	reference_matrix_sum([Row| Rows], Sum0, Sum) :-
+		reference_row_sum(Row, Sum0, Sum1),
+		reference_matrix_sum(Rows, Sum1, Sum).
+
+	reference_row_sum([], Sum, Sum).
+	reference_row_sum([Value| Values], Sum0, Sum) :-
+		Sum1 is Sum0 + Value,
+		reference_row_sum(Values, Sum1, Sum).
+
+	check_optimizer_equivalence(Probabilities, Embedding, Configuration) :-
+		Configuration = training_config(Rate, Scale, Early, Maximum, Tolerance),
+		Options = [learning_rate(Rate), early_exaggeration(Scale), early_exaggeration_iterations(Early), maximum_iterations(Maximum), tolerance(Tolerance)],
+		tsne_projection << zero_matrix_like(Embedding, Updates),
+		tsne_projection << constant_matrix_like(Embedding, 1.0, Gains),
+		reference_iterate(Probabilities, Configuration, 0, Embedding, Updates, Gains, Expected),
+		tsne_projection << optimize_embedding(Probabilities, Embedding, Options, Convergence, Iterations, Delta, Final),
+		assertion(result(Convergence, Iterations, Delta, Final) == Expected).
+
+	reference_iterate(Probabilities, Configuration, Iteration0, Embedding0, Updates0, Gains0, Result) :-
+		Configuration = training_config(Rate, Scale, Early, Maximum, Tolerance),
+		reference_matrix(Embedding0, weight, Weights),
+		reference_matrix_sum(Weights, 0.0, Sum),
+		Iteration is Iteration0 + 1,
+		tsne_projection << optimization_phase(Iteration, Early, Scale, ProbabilityScale, Momentum),
+		tsne_projection << gradient_matrix(Probabilities, Weights, Sum, Embedding0, ProbabilityScale, Gradients),
+		reference_update(Embedding0, Gradients, Updates0, Gains0, Rate, Momentum, Embedding1, Updates, Gains, 0.0, Delta),
+		tsne_projection << center_embedding(Embedding1, Embedding),
+		(	Iteration > Early, Delta =< Tolerance ->
+			Result = result(tolerance, Iteration, Delta, Embedding)
+		;	Iteration >= Maximum ->
+			Result = result(maximum_iterations_exhausted, Iteration, Delta, Embedding)
+		;	reference_iterate(Probabilities, Configuration, Iteration, Embedding, Updates, Gains, Result)
+		).
+
+	reference_update([], [], [], [], _Rate, _Momentum, [], [], [], Delta, Delta).
+	reference_update([Row| Rows], [Gradient| Gradients], [Previous| PreviousRows], [Gain| Gains0], Rate, Momentum, [Updated| UpdatedRows], [Update| Updates], [UpdatedGain| Gains], Delta0, Delta) :-
+		tsne_projection << update_row(Row, Gradient, Previous, Gain, Rate, Momentum, Updated, Update, UpdatedGain, 0.0, RowDelta),
+		Delta1 is max(RowDelta, Delta0),
+		reference_update(Rows, Gradients, PreviousRows, Gains0, Rate, Momentum, UpdatedRows, Updates, Gains, Delta1, Delta).
 
 	quick_options([
 		perplexity(2.0),

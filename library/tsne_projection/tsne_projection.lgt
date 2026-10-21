@@ -23,11 +23,18 @@
 	imports(dimension_reducer_common)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2026-10-13,
+		date is 2026-10-21,
 		comment is 'Exact t-distributed Stochastic Neighbor Embedding dimension reducer for continuous datasets.',
 		see_also is [kernel_pca_projection, pca_projection, random_projection]
+	]).
+
+	:- private(gradient_matrix/6).
+	:- mode(gradient_matrix(+list(list(number)), +list(list(number)), +number, +list(list(number)), +number, -list(list(number))), one).
+	:- info(gradient_matrix/6, [
+		comment is 'Computes the unfused training gradient matrix as a utility for tests and benchmarks.',
+		argnames is ['Probabilities', 'Weights', 'WeightSum', 'Embedding', 'ProbabilityScale', 'Gradients']
 	]).
 
 	:- uses(format, [
@@ -301,38 +308,27 @@
 
 	symmetric_matrix(Rows, Kind, Matrix) :-
 		length(Rows, Count),
-		matrix_cells(Count, Count, Matrix),
-		transpose_matrix(Matrix, Transposed),
-		symmetric_pair_rows(Rows, Rows, Matrix, Transposed, 1, Kind).
+		length(Matrix, Count),
+		symmetric_pair_rows(Rows, Matrix, Kind).
 
-	matrix_cells(0, _Width, []) :-
-		!.
-	matrix_cells(Count, Width, [Row| Rows]) :-
-		length(Row, Width),
-		Next is Count - 1,
-		matrix_cells(Next, Width, Rows).
-
-	symmetric_pair_rows([], _AllRows, [], [], _Index, _Kind).
-	symmetric_pair_rows([Row| Rows], AllRows, [Cells| Matrix], [ReverseCells| Transposed], Index, Kind) :-
-		symmetric_pair_row(AllRows, Row, Cells, ReverseCells, Index, 1, Kind),
-		Next is Index + 1,
-		symmetric_pair_rows(Rows, AllRows, Matrix, Transposed, Next, Kind).
-
-	symmetric_pair_row([], _Row, [], [], _RowIndex, _ColumnIndex, _Kind).
-	symmetric_pair_row([OtherRow| Rows], Row, [Cell| Cells], [ReverseCell| ReverseCells], RowIndex, ColumnIndex, Kind) :-
-		(	RowIndex =:= ColumnIndex ->
-			Cell = 0.0
-		;	RowIndex < ColumnIndex ->
-			squared_distance(Row, OtherRow, 0.0, Distance),
-			(	Kind == distance ->
-				Cell = Distance
-			;	Cell is 1.0 / (1.0 + Distance)
-			),
-			ReverseCell = Cell
-		;	true
+	symmetric_pair_rows([], [], _Kind).
+	symmetric_pair_rows([Row| Rows], [[0.0| Cells]| Cursors], Kind) :-
+		(	Kind == distance ->
+			distance_pairs(Rows, Row, Cells, Cursors, NextCursors)
+		;	weight_pairs(Rows, Row, Cells, Cursors, NextCursors)
 		),
-		Next is ColumnIndex + 1,
-		symmetric_pair_row(Rows, Row, Cells, ReverseCells, RowIndex, Next, Kind).
+		symmetric_pair_rows(Rows, NextCursors, Kind).
+
+	distance_pairs([], _Row, [], [], []).
+	distance_pairs([Other| Rows], Row, [Distance| Cells], [[Distance| Tail]| Cursors], [Tail| NextCursors]) :-
+		squared_distance(Row, Other, 0.0, Distance),
+		distance_pairs(Rows, Row, Cells, Cursors, NextCursors).
+
+	weight_pairs([], _Row, [], [], []).
+	weight_pairs([Other| Rows], Row, [Weight| Cells], [[Weight| Tail]| Cursors], [Tail| NextCursors]) :-
+		squared_distance(Row, Other, 0.0, Distance),
+		Weight is 1.0 / (1.0 + Distance),
+		weight_pairs(Rows, Row, Cells, Cursors, NextCursors).
 
 	instance_distances([], _Row, []).
 	instance_distances([OtherRow| Rows], Row, [Distance| Distances]) :-
@@ -566,8 +562,7 @@
 		low_dimensional_weights(Embedding0, Weights, WeightSum),
 		Iteration is Iteration0 + 1,
 		optimization_phase(Iteration, EarlyIterations, EarlyScale, ProbabilityScale, Momentum),
-		gradient_matrix(Probabilities, Weights, WeightSum, Embedding0, ProbabilityScale, Gradients),
-		update_embedding(Embedding0, Gradients, PreviousUpdates0, Gains0, LearningRate, Momentum, Embedding1, PreviousUpdates, Gains, 0.0, Delta),
+		training_step(Probabilities, Weights, WeightSum, Embedding0, ProbabilityScale, PreviousUpdates0, Gains0, LearningRate, Momentum, Embedding1, PreviousUpdates, Gains, Delta),
 		center_embedding(Embedding1, CenteredEmbedding),
 		(	Iteration > EarlyIterations, Delta =< Tolerance ->
 			Convergence = tolerance,
@@ -591,18 +586,31 @@
 		).
 
 	low_dimensional_weights(Embedding, Weights, WeightSum) :-
-		symmetric_matrix(Embedding, weight, Weights),
-		matrix_sum(Weights, 0.0, WeightSum).
+		length(Embedding, Count),
+		length(Weights, Count),
+		weight_sum_rows(Embedding, Weights, Weights, 0, 0.0, WeightSum).
 
-	matrix_sum([], Sum, Sum).
-	matrix_sum([Row| Rows], Sum0, Sum) :-
-		row_sum(Row, Sum0, Sum1),
-		matrix_sum(Rows, Sum1, Sum).
+	weight_sum_rows([], [], [], _PrefixCount, Sum, Sum).
+	weight_sum_rows([Row| Rows], [FullRow| FullRows], [[0.0| Cells]| Cursors], PrefixCount, Sum0, Sum) :-
+		weight_prefix_sum(PrefixCount, FullRow, Sum0, PrefixSum),
+		DiagonalSum is PrefixSum + 0.0,
+		weight_sum_pairs(Rows, Row, Cells, Cursors, NextCursors, DiagonalSum, Sum1),
+		NextPrefixCount is PrefixCount + 1,
+		weight_sum_rows(Rows, FullRows, NextCursors, NextPrefixCount, Sum1, Sum).
 
-	row_sum([], Sum, Sum).
-	row_sum([Value| Values], Sum0, Sum) :-
-		Sum1 is Sum0 + Value,
-		row_sum(Values, Sum1, Sum).
+	weight_prefix_sum(0, _Row, Sum, Sum) :-
+		!.
+	weight_prefix_sum(Count, [Weight| Weights], Sum0, Sum) :-
+		Sum1 is Sum0 + Weight,
+		Next is Count - 1,
+		weight_prefix_sum(Next, Weights, Sum1, Sum).
+
+	weight_sum_pairs([], _Row, [], [], [], Sum, Sum).
+	weight_sum_pairs([Other| Rows], Row, [Weight| Cells], [[Weight| Tail]| Cursors], [Tail| NextCursors], Sum0, Sum) :-
+		squared_distance(Row, Other, 0.0, Distance),
+		Weight is 1.0 / (1.0 + Distance),
+		Sum1 is Sum0 + Weight,
+		weight_sum_pairs(Rows, Row, Cells, Cursors, NextCursors, Sum1, Sum).
 
 	gradient_matrix(Probabilities, Weights, WeightSum, Embedding, ProbabilityScale, Gradients) :-
 		transpose_matrix(Embedding, Columns),
@@ -643,11 +651,17 @@
 	constant_vector([_Value| Values], Constant, [Constant| Constants]) :-
 		constant_vector(Values, Constant, Constants).
 
-	update_embedding([], [], [], [], _LearningRate, _Momentum, [], [], [], Delta, Delta).
-	update_embedding([Row| Rows], [Gradient| Gradients], [PreviousUpdate| PreviousUpdates0], [Gain| Gains0], LearningRate, Momentum, [UpdatedRow| UpdatedRows], [Update| Updates], [UpdatedGain| UpdatedGains], Delta0, Delta) :-
+	training_step(Probabilities, Weights, WeightSum, Embedding, ProbabilityScale, PreviousUpdates, Gains, LearningRate, Momentum, UpdatedEmbedding, Updates, UpdatedGains, Delta) :-
+		transpose_matrix(Embedding, Columns),
+		gradient_update_rows(Probabilities, Weights, WeightSum, Embedding, Columns, ProbabilityScale, PreviousUpdates, Gains, LearningRate, Momentum, UpdatedEmbedding, Updates, UpdatedGains, 0.0, Delta).
+
+	gradient_update_rows([], [], _WeightSum, [], _Columns, _ProbabilityScale, [], [], _LearningRate, _Momentum, [], [], [], Delta, Delta).
+	gradient_update_rows([ProbabilityRow| ProbabilityRows], [WeightRow| WeightRows], WeightSum, [Row| Rows], Columns, ProbabilityScale, [PreviousUpdate| PreviousUpdates0], [Gain| Gains0], LearningRate, Momentum, [UpdatedRow| UpdatedRows], [Update| Updates], [UpdatedGain| UpdatedGains], Delta0, Delta) :-
+		gradient_coefficients(ProbabilityRow, WeightRow, WeightSum, ProbabilityScale, 4.0, Coefficients),
+		gradient_coordinates(Row, Columns, Coefficients, Gradient),
 		update_row(Row, Gradient, PreviousUpdate, Gain, LearningRate, Momentum, UpdatedRow, Update, UpdatedGain, 0.0, RowDelta),
 		Delta1 is max(RowDelta, Delta0),
-		update_embedding(Rows, Gradients, PreviousUpdates0, Gains0, LearningRate, Momentum, UpdatedRows, Updates, UpdatedGains, Delta1, Delta).
+		gradient_update_rows(ProbabilityRows, WeightRows, WeightSum, Rows, Columns, ProbabilityScale, PreviousUpdates0, Gains0, LearningRate, Momentum, UpdatedRows, Updates, UpdatedGains, Delta1, Delta).
 
 	update_row([], [], [], [], _LearningRate, _Momentum, [], [], [], Delta, Delta).
 	update_row([Coordinate| Coordinates], [Gradient| Gradients], [PreviousUpdate| PreviousUpdates], [Gain| Gains], LearningRate, Momentum, [UpdatedCoordinate| UpdatedCoordinates], [Update| Updates], [UpdatedGain| UpdatedGains], Delta0, Delta) :-
