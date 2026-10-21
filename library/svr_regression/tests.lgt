@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-10-13,
+		date is 2026-10-22,
 		comment is 'Unit tests for the "svr_regression" library.'
 	]).
 
@@ -46,9 +46,16 @@
 		delete_file/1, file_exists/1
 	]).
 
+	:- private(cached_regressor_/3).
+	:- dynamic(cached_regressor_/3).
+
 	cover(svr_regression).
 
+	setup :-
+		retractall(cached_regressor_(_, _, _)).
+
 	cleanup :-
+		retractall(cached_regressor_(_, _, _)),
 		^^clean_file('svr_regression_test_export.lgt').
 
 	% learn/2, default options: datasets where the default schedule already
@@ -155,7 +162,7 @@
 	% validity checks
 
 	test(svr_regression_valid_regressor_1, deterministic) :-
-		learn(simple_line, Regressor, [maximum_iterations(1)]),
+		cached_regressor(simple_line, [maximum_iterations(1)], Regressor),
 		valid_regressor(Regressor).
 
 	test(svr_regression_invalid_regressor_1, fail) :-
@@ -164,7 +171,7 @@
 	% diagnostics
 
 	test(svr_regression_diagnostics_2, deterministic(Model-Target-Kernel == svr_regression-y-linear)) :-
-		learn(simple_line, Regressor, [maximum_iterations(1)]),
+		cached_regressor(simple_line, [maximum_iterations(1)], Regressor),
 		diagnostics(Regressor, Diagnostics),
 		memberchk(model(Model), Diagnostics),
 		memberchk(target(Target), Diagnostics),
@@ -186,20 +193,20 @@
 	% prediction
 
 	test(svr_regression_predict_3_simple_line, deterministic) :-
-		learn(simple_line, Regressor, [maximum_iterations(1)]),
+		cached_regressor(simple_line, [maximum_iterations(1)], Regressor),
 		predict(Regressor, [x-0], Prediction),
 		number(Prediction).
 
 	% export
 
 	test(svr_regression_export_to_clauses_4, deterministic(Functor-Arity == svr_predict-6)) :-
-		learn(simple_line, Regressor, [maximum_iterations(1)]),
+		cached_regressor(simple_line, [maximum_iterations(1)], Regressor),
 		export_to_clauses(simple_line, Regressor, svr_predict, [Clause]),
 		functor(Clause, Functor, Arity).
 
 	test(svr_regression_export_to_file_4_written, deterministic) :-
 		^^file_path('svr_regression_test_export.lgt', Path),
-		learn(simple_line, Regressor, [maximum_iterations(1)]),
+		cached_regressor(simple_line, [maximum_iterations(1)], Regressor),
 		export_to_file(simple_line, Regressor, svr_predict, Path),
 		file_exists(Path).
 
@@ -214,7 +221,7 @@
 
 	test(svr_regression_print_regressor_1, deterministic) :-
 		^^suppress_text_output,
-		learn(simple_line, Regressor, [maximum_iterations(1)]),
+		cached_regressor(simple_line, [maximum_iterations(1)], Regressor),
 		print_regressor(Regressor).
 
 	% schema- and example-level negative tests (learn/2)
@@ -234,11 +241,11 @@
 	% prediction-time negative tests (predict/3)
 
 	test(svr_regression_predict_3_undeclared_attribute, error(domain_error(declared_attribute, typo))) :-
-		learn(simple_line, Regressor, [maximum_iterations(1)]),
+		cached_regressor(simple_line, [maximum_iterations(1)], Regressor),
 		predict(Regressor, [x-1, typo-9], _).
 
 	test(svr_regression_predict_3_duplicate_attribute, error(domain_error(attribute_occurrences, x))) :-
-		learn(simple_line, Regressor, [maximum_iterations(1)]),
+		cached_regressor(simple_line, [maximum_iterations(1)], Regressor),
 		predict(Regressor, [x-1, x-2], _).
 
 	test(svr_regression_predict_3_unknown_category, error(domain_error(attribute_value(plan, [basic, premium]), ultra))) :-
@@ -246,6 +253,14 @@
 		predict(Regressor, [age-10, student-no, plan-ultra], _).
 
 	% auxiliary predicates
+
+	cached_regressor(Dataset, Options, Regressor) :-
+		(	cached_regressor_(Dataset, Options, CachedRegressor) ->
+			true
+		;	learn(Dataset, CachedRegressor, Options),
+			assertz(cached_regressor_(Dataset, Options, CachedRegressor))
+		),
+		Regressor = CachedRegressor.
 
 	dataset_rmse(Dataset, Regressor, RMSE) :-
 		findall(
