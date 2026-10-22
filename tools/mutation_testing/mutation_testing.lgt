@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-07-22,
+		date is 2026-10-22,
 		comment is 'Mutation testing tool.'
 	]).
 
@@ -284,7 +284,7 @@
 		loaded_library_entities(Library, Entities0),
 		apply_entity_filters(Entities0, Options, Entities),
 		reports_for_entities(Entities, Options, Reports),
-		maybe_format_report(report(library(Library), Reports), Options),
+		maybe_format_report_checked(report(library(Library), Reports), Options),
 		reports_passed(Reports, true, Passed),
 		Passed == true,
 		!.
@@ -298,7 +298,7 @@
 		loaded_directory_entities(Directory, Entities0),
 		apply_entity_filters(Entities0, Options, Entities),
 		reports_for_entities(Entities, Options, Reports),
-		maybe_format_report(report(directory(Directory), Reports), Options),
+		maybe_format_report_checked(report(directory(Directory), Reports), Options),
 		reports_passed(Reports, true, Passed),
 		Passed == true,
 		!.
@@ -398,10 +398,12 @@
 	report_for_predicates(Entity, Predicates, Options, report(Entity, Summary, Results)) :-
 		print_message(comment, mutation_testing, phase_mutations_discovery),
 		mutants_for_predicates(Entity, Predicates, Options, Mutants0),
-		apply_sample_mutants(Mutants0, Options, Mutants),
+		^^option(sampling(Sampling), Options),
+		apply_sample_mutants(Sampling, Mutants0, Options, Mutants),
 		collect_baseline_coverage(Entity, Predicates, Options, CoverageAvailable),
 		print_message(comment, mutation_testing, phase_mutations_testing),
-		run_mutants(Mutants, Options, CoverageAvailable, 1, [], Results0),
+		^^option(verbose(Verbose), Options),
+		run_mutants(Mutants, Verbose, Options, CoverageAvailable, 1, [], Results0),
 		reverse(Results0, Results),
 		summary(Results, Options, Summary).
 
@@ -443,7 +445,11 @@
 		reports_passed(Reports, false, Passed).
 
 	maybe_format_report(Report, UserOptions) :-
+		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
+		maybe_format_report_checked(Report, Options).
+
+	maybe_format_report_checked(Report, Options) :-
 		^^option(format(Format), Options),
 		(   Format == none ->
 			true
@@ -775,13 +781,9 @@
 			false
 		).
 
-	apply_sample_mutants(Mutants, Options, SelectedMutants) :-
-		^^option(sampling(all), Options),
-		!,
+	apply_sample_mutants(all, Mutants, _Options, SelectedMutants) :-
 		SelectedMutants = Mutants.
-	apply_sample_mutants(Mutants, Options, SelectedMutants) :-
-		^^option(sampling(count(Count)), Options),
-		!,
+	apply_sample_mutants(count(Count), Mutants, Options, SelectedMutants) :-
 		length(Mutants, Total),
 		(   Count >= Total ->
 			Max = Total
@@ -790,8 +792,7 @@
 		^^option(seed(Seed), Options),
 		seeded_shuffle(Mutants, Seed, Shuffled),
 		take(Max, Shuffled, SelectedMutants).
-	apply_sample_mutants(Mutants, Options, SelectedMutants) :-
-		^^option(sampling(rate(Rate)), Options),
+	apply_sample_mutants(rate(Rate), Mutants, Options, SelectedMutants) :-
 		length(Mutants, Total),
 		Max0 is round(Rate * Total),
 		(   Max0 >= Total ->
@@ -815,10 +816,10 @@
 		),
 		set_seed(PreviousSeed).
 
-	run_mutants([], _, _, _, Results, Results).
-	run_mutants([Mutant| Mutants], Options, CoverageAvailable, Index, Results0, Results) :-
+	run_mutants([], _, _, _, _, Results, Results).
+	run_mutants([Mutant| Mutants], Verbose, Options, CoverageAvailable, Index, Results0, Results) :-
 		print_message(comment, mutation_testing, testing_mutation(Mutant)),
-		(   ^^option(verbose(true), Options) ->
+		(   Verbose == true ->
 			print_message(comment, mutation_testing, running_mutant(Index, Mutant)),
 			print_mutant_reproduction(Mutant)
 		;   true
@@ -829,12 +830,12 @@
 		;   execute_mutant(Mutant, Options, Status)
 		),
 		Result = mutant_result(Index, Mutant, Status),
-		(   ^^option(verbose(true), Options) ->
+		(   Verbose == true ->
 			print_message(comment, mutation_testing, mutant_result(Index, Mutant, Status))
 		;   true
 		),
 		NextIndex is Index + 1,
-		run_mutants(Mutants, Options, CoverageAvailable, NextIndex, [Result| Results0], Results).
+		run_mutants(Mutants, Verbose, Options, CoverageAvailable, NextIndex, [Result| Results0], Results).
 
 	mutant_not_covered(mutant(Entity, Predicate, clause(ClauseIndex), Mutator, Occurrence)) :-
 		mutator_hook(Mutator, Entity, Predicate, clause(ClauseIndex), Occurrence, false, Hook),
@@ -1478,8 +1479,7 @@
 	container_thresholds(Reports, High, 0) :-
 		findall(
 			Rounded,
-			(
-				member(report(_Entity, summary(_, _, _, _, _, _, _, _, Threshold, _), _), Reports),
+			(	member(report(_Entity, summary(_, _, _, _, _, _, _, _, Threshold, _), _), Reports),
 				Rounded is max(0, min(100, round(Threshold)))
 			),
 			Thresholds

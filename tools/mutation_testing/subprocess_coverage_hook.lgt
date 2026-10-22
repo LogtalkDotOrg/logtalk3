@@ -25,9 +25,9 @@
 :- object(subprocess_coverage_hook).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-03-07,
+		date is 2026-10-22,
 		comment is 'Subprocess coverage hook object. Loaded in baseline coverage subprocesses to capture lgtunit coverage and persist it to a file.'
 	]).
 
@@ -82,8 +82,7 @@
 		forall(
 			coverage_entry_(Entity, Predicate, Clauses, Total),
 			(	writeq(Stream, baseline_coverage(Entity, Predicate, Clauses, Total)),
-				write(Stream, '.'),
-				nl(Stream)
+				write(Stream, '.\n')
 			)
 		),
 		close(Stream).

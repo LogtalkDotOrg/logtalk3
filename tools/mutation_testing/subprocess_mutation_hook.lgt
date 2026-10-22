@@ -25,9 +25,9 @@
 :- object(subprocess_mutation_hook).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-03-20,
+		date is 2026-10-22,
 		comment is 'Subprocess mutation hook object. Loaded in mutation testing subprocesses to set up the mutator hook and record test results to a status file.'
 	]).
 
@@ -82,21 +82,15 @@
 		% reset the random seed to ensure the mutation matches
 		% the one printed by the main process
 		reset_seed,
-		target_index(Target, TargetIndex),
+		arg(1, Target, TargetIndex),
 		Hook =.. [Mutator, Entity, Predicate, TargetIndex, Occurrence, false],
 		Hook::reset,
 		set_logtalk_flag(hook, Hook).
-
-	target_index(clause(Index), Index) :-
-		!.
-	target_index(directive(Index), Index) :-
-		!.
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).
 
 	logtalk::message_hook(tests_results_summary(_, _, _, _, Failed, _, _), _, lgtunit, _) :-
-		integer(Failed),
 		Failed > 0,
 		retract(failed_count_(N0)),
 		N is N0 + Failed,
@@ -104,10 +98,6 @@
 		fail.
 
 	logtalk::message_hook(tests_ended, _, lgtunit, _) :-
-		write_status_file,
-		fail.
-
-	write_status_file :-
 		status_file_(StatusFile),
 		failed_count_(Failed),
 		(	Failed > 0 ->
@@ -116,8 +106,8 @@
 		),
 		open(StatusFile, write, Stream),
 		write(Stream, Status),
-		write(Stream, '.'),
-		nl(Stream),
-		close(Stream).
+		write(Stream, '.\n'),
+		close(Stream),
+		fail.
 
 :- end_object.
