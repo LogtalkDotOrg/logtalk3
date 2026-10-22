@@ -356,8 +356,8 @@ goals to print the original variable names.
 * ADDED: Support to the `lgtunit` tool for exporting code coverage stats in
 the Sonar Generic Coverage XML format.
 
-* IMPROVED: The performance of the `code_metrics`, `diagrams`, and `lgtdoc`
-tool tests.
+* IMPROVED: The performance of the `code_metrics`, `dead_code_scanner`,
+`diagrams`, and `lgtdoc` tool tests.
 
 * IMPROVED: The performance of the `logtalk_tester.sh` Bash shell script.
 

@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:9:2,
+		version is 0:10:0,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2026-08-24,
+		date is 2026-10-22,
 		comment is 'Unit tests for the "dead_code_scanner" tool.'
 	]).
 
@@ -322,36 +322,36 @@
 	% predicates succeed as expected and are deterministic
 
 	test(dcs_predicates_2_01, deterministic) :-
-		predicates(lgtunit, _).
+		predicates(stand_alone_prototype, _).
 
 	test(dcs_entity_1_01, deterministic) :-
-		entity(lgtunit).
+		entity(stand_alone_prototype).
+
+	test(dcs_entity_1_02, deterministic) :-
+		entity(category).
 
 	test(dcs_entity_2_01, deterministic) :-
 		entity(category, [exclude_predicates([dead_predicate/0])]).
-
-	test(dcs_entity_1_02, deterministic) :-
-		entity(lgtunit_messages).
 
 	test(dcs_all_0_01, deterministic) :-
 		all.
 
 	test(dcs_library_1_01, deterministic) :-
-		library(lgtunit).
+		library(options).
 
 	test(dcs_rlibrary_1_01, deterministic) :-
-		rlibrary(lgtunit).
+		rlibrary(options).
 
 	test(dcs_file_1_01, deterministic) :-
-		object_property(lgtunit, file(File)),
+		object_property(stand_alone_prototype, file(File)),
 		file(File).
 
 	test(dcs_directory_1_01, deterministic) :-
-		logtalk::expand_library_path(lgtunit, Directory),
+		logtalk::expand_library_path(options, Directory),
 		directory(Directory).
 
 	test(dcs_rdirectory_1_01, deterministic) :-
-		logtalk::expand_library_path(lgtunit, Directory),
+		logtalk::expand_library_path(options, Directory),
 		rdirectory(Directory).
 
 	% tests for non-called predicates listed in uses/2 and use_module/2 directives
@@ -387,27 +387,27 @@
 	% tests for option validation
 
 	test(dcs_exclude_directories_option_01, deterministic) :-
-		logtalk::expand_library_path(lgtunit, Directory),
+		logtalk::expand_library_path(options, Directory),
 		rdirectory(Directory, [exclude_directories([foo, bar])]).
 
 	test(dcs_exclude_files_option_01, deterministic) :-
-		logtalk::expand_library_path(lgtunit, Directory),
+		logtalk::expand_library_path(options, Directory),
 		rdirectory(Directory, [exclude_files([foo, bar])]).
 
 	test(dcs_exclude_libraries_option_01, deterministic) :-
-		logtalk::expand_library_path(lgtunit, Directory),
+		logtalk::expand_library_path(options, Directory),
 		rdirectory(Directory, [exclude_libraries([foo, bar])]).
 
 	test(dcs_exclude_entities_option_01, deterministic) :-
-		logtalk::expand_library_path(lgtunit, Directory),
+		logtalk::expand_library_path(options, Directory),
 		rdirectory(Directory, [exclude_entities([foo, bar])]).
 
 	test(dcs_exclude_predicates_option_01, deterministic) :-
-		logtalk::expand_library_path(lgtunit, Directory),
+		logtalk::expand_library_path(options, Directory),
 		rdirectory(Directory, [exclude_predicates([foo/1, bar//2])]).
 
 	test(dcs_waive_findings_option_01, deterministic) :-
-		logtalk::expand_library_path(lgtunit, Directory),
+		logtalk::expand_library_path(options, Directory),
 		rdirectory(Directory, [waive_findings([dead_predicate(local_dead_code, medium, _, object, foo, bar/1, _, _)])]).
 
 	test(dcs_preflight_01, deterministic) :-
