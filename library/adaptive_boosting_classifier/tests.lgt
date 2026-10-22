@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 3:0:0,
+		version is 3:1:0,
 		author is 'Paulo Moura',
-		date is 2026-10-11,
+		date is 2026-10-22,
 		comment is 'Unit tests for the "adaptive_boosting_classifier" library.'
 	]).
 
@@ -37,9 +37,16 @@
 		op(700, xfx, =~=), (=~=)/2, assertion/1
 	]).
 
+	:- private(classifier_cache/3).
+	:- dynamic(classifier_cache/3).
+
 	cover(adaptive_boosting_classifier).
 
+	setup :-
+		retractall(classifier_cache(_, _, _)).
+
 	cleanup :-
+		retractall(classifier_cache(_, _, _)),
 		^^clean_file('test_output.pl').
 
 	% learn/2 tests - verify classifier structure
@@ -48,7 +55,7 @@
 		adaptive_boosting_classifier::learn(play_tennis, Classifier).
 
 	test(adaptive_boosting_classifier_valid_classifier_1, deterministic(adaptive_boosting_classifier::valid_classifier(Classifier))) :-
-		adaptive_boosting_classifier::learn(play_tennis, Classifier).
+		cached_classifier(play_tennis, Classifier).
 
 	test(adaptive_boosting_classifier_invalid_classifier_1, fail) :-
 		adaptive_boosting_classifier::valid_classifier(ab_classifier([weighted_tree(0.5, leaf(yes), [outlook, outlook])], [yes, no], [number_of_estimators(1)])).
@@ -89,38 +96,38 @@
 	% predict/3 tests - ensemble predictions
 
 	test(adaptive_boosting_classifier_predict_3_play_tennis, deterministic(ground(Class))) :-
-		adaptive_boosting_classifier::learn(play_tennis, Classifier),
+		cached_classifier(play_tennis, Classifier),
 		adaptive_boosting_classifier::predict(Classifier, [outlook-sunny, temperature-hot, humidity-high, wind-weak], Class).
 
 	test(adaptive_boosting_classifier_predict_3_play_tennis_overcast_yes, deterministic(Class == yes)) :-
-		adaptive_boosting_classifier::learn(play_tennis, Classifier, [number_of_estimators(5)]),
+		cached_classifier(play_tennis, Classifier, [number_of_estimators(5)]),
 		adaptive_boosting_classifier::predict(Classifier, [outlook-overcast, temperature-hot, humidity-high, wind-weak], Class).
 
 	test(adaptive_boosting_classifier_predict_3_contact_lenses, deterministic(ground(Class))) :-
-		adaptive_boosting_classifier::learn(contact_lenses, Classifier),
+		cached_classifier(contact_lenses, Classifier),
 		adaptive_boosting_classifier::predict(Classifier, [age-young, spectacle_prescription-myope, astigmatism-no, tear_production_rate-reduced], Class).
 
 	test(adaptive_boosting_classifier_predict_3_iris_setosa, deterministic(Class == setosa)) :-
-		adaptive_boosting_classifier::learn(iris, Classifier, [number_of_estimators(5)]),
+		cached_classifier(iris, Classifier, [number_of_estimators(5)]),
 		adaptive_boosting_classifier::predict(Classifier, [sepal_length-5.0, sepal_width-3.5, petal_length-1.4, petal_width-0.2], Class).
 
 	test(adaptive_boosting_classifier_predict_3_iris_virginica, deterministic(Class == virginica)) :-
-		adaptive_boosting_classifier::learn(iris, Classifier, [number_of_estimators(5)]),
+		cached_classifier(iris, Classifier, [number_of_estimators(5)]),
 		adaptive_boosting_classifier::predict(Classifier, [sepal_length-6.5, sepal_width-3.0, petal_length-5.5, petal_width-2.0], Class).
 
 	% predict_probabilities/3 tests
 
 	test(adaptive_boosting_classifier_predict_probabilities_3_structure, deterministic(type::check(list(pair(atom, probability)), Probabilities))) :-
-		adaptive_boosting_classifier::learn(play_tennis, Classifier),
+		cached_classifier(play_tennis, Classifier),
 		adaptive_boosting_classifier::predict_probabilities(Classifier, [outlook-sunny, temperature-hot, humidity-high, wind-weak], Probabilities).
 
 	test(adaptive_boosting_classifier_predict_probabilities_3_sum_to_one, deterministic(abs(Sum - 1.0) < 0.001)) :-
-		adaptive_boosting_classifier::learn(play_tennis, Classifier),
+		cached_classifier(play_tennis, Classifier),
 		adaptive_boosting_classifier::predict_probabilities(Classifier, [outlook-overcast, temperature-mild, humidity-normal, wind-weak], Probabilities),
 		sum_probabilities(Probabilities, 0, Sum).
 
 	test(adaptive_boosting_classifier_predict_probabilities_3_all_classes_present, deterministic) :-
-		adaptive_boosting_classifier::learn(play_tennis, Classifier),
+		cached_classifier(play_tennis, Classifier),
 		adaptive_boosting_classifier::predict_probabilities(Classifier, [outlook-sunny, temperature-hot, humidity-high, wind-weak], Probabilities),
 		memberchk(yes-YesProbability, Probabilities),
 		memberchk(no-NoProbability, Probabilities),
@@ -128,21 +135,21 @@
 		assertion(number(NoProbability)).
 
 	test(adaptive_boosting_classifier_predict_probabilities_3_iris, deterministic(type::check(list(pair(atom, probability)), Probabilities))) :-
-		adaptive_boosting_classifier::learn(iris, Classifier),
+		cached_classifier(iris, Classifier),
 		adaptive_boosting_classifier::predict_probabilities(Classifier, [sepal_length-5.0, sepal_width-3.5, petal_length-1.4, petal_width-0.2], Probabilities).
 
 	% export_to_clauses/4 tests
 
 	test(adaptive_boosting_classifier_export_to_clauses_4, deterministic(length(Clauses, 1))) :-
-		adaptive_boosting_classifier::learn(play_tennis, Classifier),
+		cached_classifier(play_tennis, Classifier),
 		adaptive_boosting_classifier::export_to_clauses(play_tennis, Classifier, classify, Clauses).
 
 	test(adaptive_boosting_classifier_export_to_clauses_4_structure, deterministic(functor(Clause, my_boost, 1))) :-
-		adaptive_boosting_classifier::learn(play_tennis, Classifier),
+		cached_classifier(play_tennis, Classifier),
 		adaptive_boosting_classifier::export_to_clauses(play_tennis, Classifier, my_boost, [Clause]).
 
 	test(adaptive_boosting_classifier_export_to_clauses_4_usable, deterministic(ground(Prediction))) :-
-		adaptive_boosting_classifier::learn(play_tennis, Classifier),
+		cached_classifier(play_tennis, Classifier),
 		adaptive_boosting_classifier::export_to_clauses(_Dataset, Classifier, classifier, [classifier(ExportedClassifier)]),
 		adaptive_boosting_classifier::predict(ExportedClassifier, [outlook-overcast, temperature-hot, humidity-high, wind-weak], Prediction).
 
@@ -150,19 +157,19 @@
 
 	test(adaptive_boosting_classifier_export_to_file_4_written, deterministic(os::file_exists(File))) :-
 		^^file_path('test_output.pl', File),
-		adaptive_boosting_classifier::learn(play_tennis, Classifier),
+		cached_classifier(play_tennis, Classifier),
 		adaptive_boosting_classifier::export_to_file(play_tennis, Classifier, classify, File).
 
 	test(adaptive_boosting_classifier_export_to_file_4_loadable, deterministic(ground(Prediction))) :-
 		^^file_path('test_output.pl', File),
-		adaptive_boosting_classifier::learn(play_tennis, Classifier),
+		cached_classifier(play_tennis, Classifier),
 		adaptive_boosting_classifier::export_to_file(play_tennis, Classifier, classifier, File),
 		logtalk_load(File),
 		{classifier(LoadedClassifier)},
 		adaptive_boosting_classifier::predict(LoadedClassifier, [outlook-overcast, temperature-hot, humidity-high, wind-weak], Prediction).
 
 	test(adaptive_boosting_classifier_diagnostics_2, deterministic((list::memberchk(model(adaptive_boosting_classifier), Diagnostics), list::memberchk(options(Options), Diagnostics)))) :-
-		adaptive_boosting_classifier::learn(play_tennis, Classifier),
+		cached_classifier(play_tennis, Classifier),
 		adaptive_boosting_classifier::diagnostics(Classifier, Diagnostics),
 		adaptive_boosting_classifier::classifier_options(Classifier, Options).
 
@@ -170,12 +177,12 @@
 
 	test(adaptive_boosting_classifier_print_classifier_1, deterministic) :-
 		^^suppress_text_output,
-		adaptive_boosting_classifier::learn(play_tennis, Classifier),
+		cached_classifier(play_tennis, Classifier),
 		adaptive_boosting_classifier::print_classifier(Classifier).
 
 	test(adaptive_boosting_classifier_print_classifier_1_iris, deterministic) :-
 		^^suppress_text_output,
-		adaptive_boosting_classifier::learn(iris, Classifier),
+		cached_classifier(iris, Classifier),
 		adaptive_boosting_classifier::print_classifier(Classifier).
 
 	% Robustness tests with different datasets
@@ -192,7 +199,7 @@
 	% Prediction consistency tests
 
 	test(adaptive_boosting_classifier_predict_consistent_with_probabilities, deterministic(PredictedClass == MaxProbClass)) :-
-		adaptive_boosting_classifier::learn(play_tennis, Classifier),
+		cached_classifier(play_tennis, Classifier),
 		Instance = [outlook-sunny, temperature-cool, humidity-normal, wind-weak],
 		adaptive_boosting_classifier::predict(Classifier, Instance, PredictedClass),
 		adaptive_boosting_classifier::predict_probabilities(Classifier, Instance, Probabilities),
@@ -439,6 +446,16 @@
 		assertion(Probabilities == [yes-0.0, no-0.0]).
 
 	% auxiliary predicates
+
+	cached_classifier(Dataset, Classifier) :-
+		cached_classifier(Dataset, Classifier, []).
+
+	cached_classifier(Dataset, Classifier, Options) :-
+		(	classifier_cache(Dataset, Options, Cached) ->
+			Classifier = Cached
+		;	adaptive_boosting_classifier::learn(Dataset, Classifier, Options),
+			assertz(classifier_cache(Dataset, Options, Classifier))
+		).
 
 	benchmark_classes(0, []) :-
 		!.

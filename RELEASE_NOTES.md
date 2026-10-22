@@ -201,9 +201,9 @@ libraries.
 * IMPROVED: Performance of the `random` library `circular_uniform_polar/3`,
 `logseries/2`, `standard_normal/1`, and `von_mises/3` sampling predicates.
 
-* IMPROVED: Performance of the `ant_colony`, `arbitrary`, `ccsds_packets`,
-`c45_classifier`, `crypto`, `cuid2`, `differential_evolution`,
-`genetic_algorithm`, `gradient_boosting_classifier`,
+* IMPROVED: Performance of the `adaptive_boosting_classifier`, `ant_colony`,
+`arbitrary`, `ccsds_packets`, `c45_classifier`, `crypto`, `cuid2`,
+`differential_evolution`, `genetic_algorithm`, `gradient_boosting_classifier`,
 `gaussian_process_regression`, `ids`, `sgd_classifier`,
 `knn_distance_anomaly_detector`, `ksuid`, `linear_svm_classifier`,
 `lof_anomaly_detector`, `logistic_regression_classifier`, `nanoid`,
