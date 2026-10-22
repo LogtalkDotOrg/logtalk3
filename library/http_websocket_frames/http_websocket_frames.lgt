@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-10-22,
 		comment is 'Transport-neutral WebSocket frame predicates for constructing, parsing, generating, reading, and writing normalized frame terms.'
 	]).
 
@@ -223,8 +223,8 @@
 		).
 
 	generate(Sink, Frame) :-
-		normalize_frame(Frame, NormalizedFrame, _MaskingKey, _ReservedBits),
-		phrase(encode_frame(NormalizedFrame), Bytes),
+		normalize_frame(Frame, NormalizedFrame, MaskingKey, ReservedBits, PayloadLength),
+		phrase(encode_frame(NormalizedFrame, MaskingKey, ReservedBits, PayloadLength), Bytes),
 		bytes_to_sink(Sink, Bytes).
 
 	read_frame(Stream, Frame) :-
@@ -233,7 +233,7 @@
 	read_frame(Stream, Frame, Options) :-
 		(	var(Stream) ->
 			instantiation_error
-		;	parse_read_frame_options(Options, MaxPayloadLength),
+		; 	parse_read_frame_options(Options, MaxPayloadLength),
 			get_byte(Stream, Byte0),
 			(	Byte0 =:= -1 ->
 				Frame = end_of_file
@@ -267,8 +267,8 @@
 	write_frame(Stream, Frame) :-
 		(	var(Stream) ->
 			instantiation_error
-		;	normalize_frame(Frame, NormalizedFrame, _MaskingKey, _ReservedBits),
-			phrase(encode_frame(NormalizedFrame), Bytes),
+		; 	normalize_frame(Frame, NormalizedFrame, MaskingKey, ReservedBits, PayloadLength),
+			phrase(encode_frame(NormalizedFrame, MaskingKey, ReservedBits, PayloadLength), Bytes),
 			write_bytes(Bytes, Stream),
 			flush_output(Stream)
 		).
@@ -301,20 +301,24 @@
 	parse_valid_bytes([], end_of_file) :-
 		!.
 	parse_valid_bytes(Bytes, Frame) :-
-		phrase(decode_frame(Frame), Bytes),
+		decode_frame(Frame, Bytes, Rest),
+		Rest = [],
 		!.
 	parse_valid_bytes(Bytes, _Frame) :-
 		domain_error(http_websocket_byte_sequence, Bytes).
 
 	normalize_frame(Frame0, Frame, MaskingKey, ReservedBits) :-
+		normalize_frame(Frame0, Frame, MaskingKey, ReservedBits, none).
+
+	normalize_frame(Frame0, Frame, MaskingKey, ReservedBits, PayloadLength) :-
 		(	var(Frame0) ->
 			instantiation_error
 		;	Frame0 = frame(Final, Opcode, Payload, Properties0) ->
 			validate_final(Final),
 			validate_opcode(Opcode),
-			validate_payload(Payload),
+			validate_payload(Payload, PayloadLength),
 			normalize_properties(Properties0, Properties, MaskingKey, ReservedBits),
-			validate_frame_semantics(Final, Opcode, Payload),
+			validate_frame_semantics(Final, Opcode, Payload, PayloadLength),
 			Frame = frame(Final, Opcode, Payload, Properties)
 		;	domain_error(http_websocket_frame, Frame0)
 		).
@@ -341,13 +345,28 @@
 	validate_opcode(Opcode) :-
 		domain_error(http_websocket_opcode, Opcode).
 
-	validate_payload(Payload) :-
+	validate_payload(Payload, PayloadLength) :-
 		(	var(Payload) ->
 			instantiation_error
-		;	valid_byte_list(Payload) ->
+		; 	valid_payload_bytes(Payload, PayloadLength) ->
 			true
 		;	domain_error(http_websocket_payload, Payload)
 		).
+
+	valid_payload_bytes(Payload, PayloadLength) :-
+		PayloadLength == none,
+		!,
+		valid_byte_list(Payload).
+	valid_payload_bytes(Payload, PayloadLength) :-
+		valid_byte_list_length(Payload, 0, PayloadLength).
+
+	valid_byte_list_length([], Length, Length).
+	valid_byte_list_length([Byte| Bytes], Length0, Length) :-
+		integer(Byte),
+		Byte >= 0,
+		Byte =< 255,
+		Length1 is Length0 + 1,
+		valid_byte_list_length(Bytes, Length1, Length).
 
 	normalize_properties(Properties0, Properties, MaskingKey, ReservedBits) :-
 		(	\+ ground(Properties0) ->
@@ -420,16 +439,19 @@
 		),
 		Bits3 = [].
 
-	validate_frame_semantics(Final, Opcode, Payload) :-
+	validate_frame_semantics(Final, Opcode, Payload, PayloadLength) :-
 		(	control_opcode(Opcode) ->
 			Final == final,
-			length(Payload, PayloadLength),
-			PayloadLength =< 125,
+			( 	PayloadLength == none ->
+				length(Payload, Length)
+			; 	Length = PayloadLength
+			),
+			Length =< 125,
 			validate_close_payload(Opcode, Payload)
 		;	true
 		),
 		!.
-	validate_frame_semantics(Final, Opcode, Payload) :-
+	validate_frame_semantics(Final, Opcode, Payload, _PayloadLength) :-
 		domain_error(http_websocket_frame, frame(Final, Opcode, Payload, _)).
 
 	control_opcode(close).
@@ -469,26 +491,19 @@
 		;	Properties0 = [masking_key(MaskingKey)]
 		).
 
-	decode_frame(Frame) -->
-		[Byte0, Byte1],
-		{ 	decode_first_byte(Byte0, Final, Opcode, ReservedBits),
-			MaskFlag is (Byte1 >> 7) /\ 0x01,
-			LengthCode is Byte1 /\ 0x7F
-		},
-		decode_payload_length(LengthCode, PayloadLength),
-		decode_masking_key(MaskFlag, MaskingKey),
-		{ 	length(PayloadBytes0, PayloadLength)
-		},
-		bytes(PayloadBytes0),
-		{ 	mask_or_unmask_payload(MaskingKey, PayloadBytes0, PayloadBytes),
-			properties_from_components(ReservedBits, MaskingKey, Properties),
-			frame(Final, Opcode, PayloadBytes, Properties, Frame)
-		}.
+	decode_frame(Frame, [Byte0, Byte1| Input], Rest) :-
+		decode_first_byte(Byte0, Final, Opcode, ReservedBits),
+		MaskFlag is (Byte1 >> 7) /\ 0x01,
+		LengthCode is Byte1 /\ 0x7F,
+		phrase(decode_payload_length(LengthCode, PayloadLength), Input, AfterLength),
+		phrase(decode_masking_key(MaskFlag, MaskingKey), AfterLength, AfterKey),
+		payload_bytes(PayloadLength, PayloadBytes0, AfterKey, Rest),
+		mask_or_unmask_payload(MaskingKey, PayloadBytes0, PayloadBytes),
+		properties_from_components(ReservedBits, MaskingKey, Properties),
+		frame(Final, Opcode, PayloadBytes, Properties, Frame).
 
-	encode_frame(Frame) -->
-		{ 	normalize_frame(Frame, frame(Final, Opcode, PayloadBytes, _Properties), MaskingKey, ReservedBits),
-			length(PayloadBytes, PayloadLength),
-			payload_length_encoding(PayloadLength, LengthCode, ExtendedLengthBytes),
+	encode_frame(frame(Final, Opcode, PayloadBytes, _Properties), MaskingKey, ReservedBits, PayloadLength) -->
+		{ 	payload_length_encoding(PayloadLength, LengthCode, ExtendedLengthBytes),
 			first_byte(Final, Opcode, ReservedBits, Byte0),
 			masking_encoding(MaskingKey, PayloadBytes, MaskBytes, EncodedPayloadBytes),
 			Byte1 is MaskBytes /\ 0x80 \/ LengthCode
@@ -519,6 +534,12 @@
 		[].
 	decode_masking_key(1, [Byte0, Byte1, Byte2, Byte3]) -->
 		[Byte0, Byte1, Byte2, Byte3].
+
+	payload_bytes(0, [], Rest, Rest) :-
+		!.
+	payload_bytes(Count, [Byte| Bytes], [Byte| Input], Rest) :-
+		NextCount is Count - 1,
+		payload_bytes(NextCount, Bytes, Input, Rest).
 
 	bytes([]) -->
 		[].
