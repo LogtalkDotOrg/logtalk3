@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:10:0,
+		version is 0:11:0,
 		author is 'Paulo Moura',
-		date is 2026-10-15,
+		date is 2026-10-22,
 		comment is 'Unit tests for the "diagrams" tool.'
 	]).
 
@@ -67,23 +67,23 @@
 	% entity_diagram tests
 
 	test(entity_diagram_libraries_2_01, deterministic) :-
-		entity_diagram(_Format_)::libraries(test, [assertions,lgtunit]).
+		entity_diagram(_Format_)::libraries(test, [assertions,options]).
 
 	test(entity_diagram_libraries_1_01, deterministic) :-
-		entity_diagram(_Format_)::libraries([assertions,lgtunit]).
+		entity_diagram(_Format_)::libraries([assertions,options]).
 
 	test(entity_diagram_all_libraries_0_01, deterministic) :-
 		entity_diagram(_Format_)::all_libraries.
 
 	test(entity_diagram_rlibrary_1_01, deterministic) :-
-		entity_diagram(_Format_)::rlibrary(lgtunit).
+		entity_diagram(_Format_)::rlibrary(options).
 
 	test(entity_diagram_library_1_01, deterministic) :-
-		entity_diagram(_Format_)::library(lgtunit).
+		entity_diagram(_Format_)::library(options).
 
 	test(entity_diagram_directories_2_01, deterministic) :-
 		logtalk::expand_library_path(assertions, CodeMetricsDirectory),
-		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
+		logtalk::expand_library_path(options, LgtunitDirectory),
 		entity_diagram(_Format_)::directories(test, [CodeMetricsDirectory,LgtunitDirectory]).
 
 	test(entity_diagram_directory_2_01, deterministic) :-
@@ -116,23 +116,23 @@
 	% inheritance_diagram tests
 
 	test(inheritance_diagram_libraries_2_01, deterministic) :-
-		inheritance_diagram(_Format_)::libraries(test, [assertions,lgtunit]).
+		inheritance_diagram(_Format_)::libraries(test, [assertions,options]).
 
 	test(inheritance_diagram_libraries_1_01, deterministic) :-
-		inheritance_diagram(_Format_)::libraries([assertions,lgtunit]).
+		inheritance_diagram(_Format_)::libraries([assertions,options]).
 
 	test(inheritance_diagram_all_libraries_0_01, deterministic) :-
 		inheritance_diagram(_Format_)::all_libraries.
 
 	test(inheritance_diagram_rlibrary_1_01, deterministic) :-
-		inheritance_diagram(_Format_)::rlibrary(lgtunit).
+		inheritance_diagram(_Format_)::rlibrary(options).
 
 	test(inheritance_diagram_library_1_01, deterministic) :-
-		inheritance_diagram(_Format_)::library(lgtunit).
+		inheritance_diagram(_Format_)::library(options).
 
 	test(inheritance_diagram_directories_2_01, deterministic) :-
 		logtalk::expand_library_path(assertions, CodeMetricsDirectory),
-		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
+		logtalk::expand_library_path(options, LgtunitDirectory),
 		inheritance_diagram(_Format_)::directories(test, [CodeMetricsDirectory,LgtunitDirectory]).
 
 	test(inheritance_diagram_directory_2_01, deterministic) :-
@@ -165,16 +165,16 @@
 	% directory_dependency_diagram tests
 
 	test(directory_dependency_diagram_rdirectory_2_01, deterministic) :-
-		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
+		logtalk::expand_library_path(options, LgtunitDirectory),
 		directory_dependency_diagram(_Format_)::rdirectory(test, LgtunitDirectory).
 
 	test(directory_dependency_diagram_rdirectory_1_01, deterministic) :-
-		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
+		logtalk::expand_library_path(options, LgtunitDirectory),
 		directory_dependency_diagram(_Format_)::rdirectory(LgtunitDirectory).
 
 	test(directory_dependency_diagram_directories_2_01, deterministic) :-
 		logtalk::expand_library_path(assertions, CodeMetricsDirectory),
-		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
+		logtalk::expand_library_path(options, LgtunitDirectory),
 		directory_dependency_diagram(_Format_)::directories(test, [CodeMetricsDirectory,LgtunitDirectory]).
 
 	test(directory_dependency_diagram_directory_2_01, deterministic) :-
@@ -203,16 +203,16 @@
 	% directory_load_diagram tests
 
 	test(directory_load_diagram_rdirectory_2_01, deterministic) :-
-		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
+		logtalk::expand_library_path(options, LgtunitDirectory),
 		directory_load_diagram(_Format_)::rdirectory(test, LgtunitDirectory).
 
 	test(directory_load_diagram_rdirectory_1_01, deterministic) :-
-		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
+		logtalk::expand_library_path(options, LgtunitDirectory),
 		directory_load_diagram(_Format_)::rdirectory(LgtunitDirectory).
 
 	test(directory_load_diagram_directories_2_01, deterministic) :-
 		logtalk::expand_library_path(assertions, CodeMetricsDirectory),
-		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
+		logtalk::expand_library_path(options, LgtunitDirectory),
 		directory_load_diagram(_Format_)::directories(test, [CodeMetricsDirectory,LgtunitDirectory]).
 
 	test(directory_load_diagram_directory_2_01, deterministic) :-
@@ -241,23 +241,23 @@
 	% file_dependency_diagram tests
 
 	test(file_dependency_diagram_libraries_2_01, deterministic) :-
-		file_dependency_diagram(_Format_)::libraries(test, [assertions,lgtunit]).
+		file_dependency_diagram(_Format_)::libraries(test, [assertions,options]).
 
 	test(file_dependency_diagram_libraries_1_01, deterministic) :-
-		file_dependency_diagram(_Format_)::libraries([assertions,lgtunit]).
+		file_dependency_diagram(_Format_)::libraries([assertions,options]).
 
 	test(file_dependency_diagram_all_libraries_0_01, deterministic) :-
 		file_dependency_diagram(_Format_)::all_libraries.
 
 	test(file_dependency_diagram_rlibrary_1_01, deterministic) :-
-		file_dependency_diagram(_Format_)::rlibrary(lgtunit).
+		file_dependency_diagram(_Format_)::rlibrary(options).
 
 	test(file_dependency_diagram_library_1_01, deterministic) :-
-		file_dependency_diagram(_Format_)::library(lgtunit).
+		file_dependency_diagram(_Format_)::library(options).
 
 	test(file_dependency_diagram_directories_2_01, deterministic) :-
 		logtalk::expand_library_path(assertions, CodeMetricsDirectory),
-		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
+		logtalk::expand_library_path(options, LgtunitDirectory),
 		file_dependency_diagram(_Format_)::directories(test, [CodeMetricsDirectory,LgtunitDirectory]).
 
 	test(file_dependency_diagram_directory_2_01, deterministic) :-
@@ -286,23 +286,23 @@
 	% file_load_diagram tests
 
 	test(file_load_diagram_libraries_2_01, deterministic) :-
-		file_load_diagram(_Format_)::libraries(test, [assertions,lgtunit]).
+		file_load_diagram(_Format_)::libraries(test, [assertions,options]).
 
 	test(file_load_diagram_libraries_1_01, deterministic) :-
-		file_load_diagram(_Format_)::libraries([assertions,lgtunit]).
+		file_load_diagram(_Format_)::libraries([assertions,options]).
 
 	test(file_load_diagram_all_libraries_0_01, deterministic) :-
 		file_load_diagram(_Format_)::all_libraries.
 
 	test(file_load_diagram_rlibrary_1_01, deterministic) :-
-		file_load_diagram(_Format_)::rlibrary(lgtunit).
+		file_load_diagram(_Format_)::rlibrary(options).
 
 	test(file_load_diagram_library_1_01, deterministic) :-
-		file_load_diagram(_Format_)::library(lgtunit).
+		file_load_diagram(_Format_)::library(options).
 
 	test(file_load_diagram_directories_2_01, deterministic) :-
 		logtalk::expand_library_path(assertions, CodeMetricsDirectory),
-		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
+		logtalk::expand_library_path(options, LgtunitDirectory),
 		file_load_diagram(_Format_)::directories(test, [CodeMetricsDirectory,LgtunitDirectory]).
 
 	test(file_load_diagram_directory_2_01, deterministic) :-
@@ -331,23 +331,23 @@
 	% library_dependency_diagram tests
 
 	test(library_dependency_diagram_libraries_2_01, deterministic) :-
-		library_dependency_diagram(_Format_)::libraries(test, [assertions,lgtunit]).
+		library_dependency_diagram(_Format_)::libraries(test, [assertions,options]).
 
 	test(library_dependency_diagram_libraries_1_01, deterministic) :-
-		library_dependency_diagram(_Format_)::libraries([assertions,lgtunit]).
+		library_dependency_diagram(_Format_)::libraries([assertions,options]).
 
 	test(library_dependency_diagram_all_libraries_0_01, deterministic) :-
 		library_dependency_diagram(_Format_)::all_libraries.
 
 	test(library_dependency_diagram_rlibrary_1_01, deterministic) :-
-		library_dependency_diagram(_Format_)::rlibrary(lgtunit).
+		library_dependency_diagram(_Format_)::rlibrary(options).
 
 	test(library_dependency_diagram_library_1_01, deterministic) :-
-		library_dependency_diagram(_Format_)::library(lgtunit).
+		library_dependency_diagram(_Format_)::library(options).
 
 	test(library_dependency_diagram_directories_2_01, deterministic) :-
 		logtalk::expand_library_path(assertions, CodeMetricsDirectory),
-		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
+		logtalk::expand_library_path(options, LgtunitDirectory),
 		library_dependency_diagram(_Format_)::directories(test, [CodeMetricsDirectory,LgtunitDirectory]).
 
 	test(library_dependency_diagram_directory_2_01, deterministic) :-
@@ -376,23 +376,23 @@
 	% library_load_diagram tests
 
 	test(library_load_diagram_libraries_2_01, deterministic) :-
-		library_load_diagram(_Format_)::libraries(test, [assertions,lgtunit]).
+		library_load_diagram(_Format_)::libraries(test, [assertions,options]).
 
 	test(library_load_diagram_libraries_1_01, deterministic) :-
-		library_load_diagram(_Format_)::libraries([assertions,lgtunit]).
+		library_load_diagram(_Format_)::libraries([assertions,options]).
 
 	test(library_load_diagram_all_libraries_0_01, deterministic) :-
 		library_load_diagram(_Format_)::all_libraries.
 
 	test(library_load_diagram_rlibrary_1_01, deterministic) :-
-		library_load_diagram(_Format_)::rlibrary(lgtunit).
+		library_load_diagram(_Format_)::rlibrary(options).
 
 	test(library_load_diagram_library_1_01, deterministic) :-
-		library_load_diagram(_Format_)::library(lgtunit).
+		library_load_diagram(_Format_)::library(options).
 
 	test(library_load_diagram_directories_2_01, deterministic) :-
 		logtalk::expand_library_path(assertions, CodeMetricsDirectory),
-		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
+		logtalk::expand_library_path(options, LgtunitDirectory),
 		library_load_diagram(_Format_)::directories(test, [CodeMetricsDirectory,LgtunitDirectory]).
 
 	test(library_load_diagram_directory_2_01, deterministic) :-
@@ -421,23 +421,23 @@
 	% uses_diagram tests
 
 	test(uses_diagram_libraries_2_01, deterministic) :-
-		uses_diagram(_Format_)::libraries(test, [assertions,lgtunit]).
+		uses_diagram(_Format_)::libraries(test, [assertions,options]).
 
 	test(uses_diagram_libraries_1_01, deterministic) :-
-		uses_diagram(_Format_)::libraries([assertions,lgtunit]).
+		uses_diagram(_Format_)::libraries([assertions,options]).
 
 	test(uses_diagram_all_libraries_0_01, deterministic) :-
 		uses_diagram(_Format_)::all_libraries.
 
 	test(uses_diagram_rlibrary_1_01, deterministic) :-
-		uses_diagram(_Format_)::rlibrary(lgtunit).
+		uses_diagram(_Format_)::rlibrary(options).
 
 	test(uses_diagram_library_1_01, deterministic) :-
-		uses_diagram(_Format_)::library(lgtunit).
+		uses_diagram(_Format_)::library(options).
 
 	test(uses_diagram_directories_2_01, deterministic) :-
 		logtalk::expand_library_path(assertions, CodeMetricsDirectory),
-		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
+		logtalk::expand_library_path(options, LgtunitDirectory),
 		uses_diagram(_Format_)::directories(test, [CodeMetricsDirectory,LgtunitDirectory]).
 
 	test(uses_diagram_directory_2_01, deterministic) :-
@@ -470,23 +470,23 @@
 	% xref_diagram tests
 
 	test(xref_diagram_libraries_2_01, deterministic) :-
-		xref_diagram(_Format_)::libraries(test, [assertions,lgtunit]).
+		xref_diagram(_Format_)::libraries(test, [assertions,options]).
 
 	test(xref_diagram_libraries_1_01, deterministic) :-
-		xref_diagram(_Format_)::libraries([assertions,lgtunit]).
+		xref_diagram(_Format_)::libraries([assertions,options]).
 
 	test(xref_diagram_all_libraries_0_01, deterministic) :-
 		xref_diagram(_Format_)::all_libraries.
 
 	test(xref_diagram_rlibrary_1_01, deterministic) :-
-		xref_diagram(_Format_)::rlibrary(lgtunit).
+		xref_diagram(_Format_)::rlibrary(options).
 
 	test(xref_diagram_library_1_01, deterministic) :-
-		xref_diagram(_Format_)::library(lgtunit).
+		xref_diagram(_Format_)::library(options).
 
 	test(xref_diagram_directories_2_01, deterministic) :-
 		logtalk::expand_library_path(assertions, CodeMetricsDirectory),
-		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
+		logtalk::expand_library_path(options, LgtunitDirectory),
 		xref_diagram(_Format_)::directories(test, [CodeMetricsDirectory,LgtunitDirectory]).
 
 	test(xref_diagram_directory_2_01, deterministic) :-
