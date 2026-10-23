@@ -43,6 +43,7 @@
 	logtalk_load(sarif, [debug(on), source_data(on)]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(lgtunit('test_files/diagnostics_fixture'), [hook(lgtunit), report(off)]),
-	logtalk_load(tests, [hook(lgtunit), optimize(on)]),
+	logtalk_load(test_objects),
+	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
 )).

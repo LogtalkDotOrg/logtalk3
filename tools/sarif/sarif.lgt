@@ -22,9 +22,9 @@
 :- object(sarif).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-07-19,
+		date is 2026-10-23,
 		comment is 'Shared SARIF report generator for tools implementing the diagnostics protocol.'
 	]).
 
@@ -70,6 +70,10 @@
 
 	:- uses(list, [
 		append/2, append/3, length/2, member/2, memberchk/2
+	]).
+
+	:- uses(logtalk, [
+		expand_library_path/2
 	]).
 
 	:- uses(type, [
@@ -153,8 +157,8 @@
 		rules_json(Rules, RulesJSON),
 		BasePairs = [name-Name, fullName-Name, informationUri-InformationURI, version-Version],
 		(	member(guid(Guid), Properties) ->
-			append(BasePairs, [guid-Guid, rules-RulesJSON], Pairs)
-		;	append(BasePairs, [rules-RulesJSON], Pairs)
+			Pairs = [guid-Guid, rules-RulesJSON| BasePairs]
+		;	Pairs = [rules-RulesJSON| BasePairs]
 		).
 
 	rules_json([], []).
@@ -191,8 +195,8 @@
 		original_uri_base_ids_pairs(NormalizationContext, BaseIdPairs),
 		invocations_pairs(Properties, Notifications, InvocationPairs),
 		version_control_pairs(Properties, Diagnostics, NormalizationContext, VersionControlPairs),
-		BasePairs = [tool-json([driver-Driver]), automationDetails-json([id-AutomationId, guid-RunGUID])],
-		append([BasePairs, BaseIdPairs, InvocationPairs, VersionControlPairs, [properties-RunProperties, results-Results]], Pairs).
+		BasePairs = [tool-json([driver-Driver]), automationDetails-json([id-AutomationId, guid-RunGUID])| BaseIdPairs],
+		append([BasePairs, InvocationPairs, VersionControlPairs, [properties-RunProperties, results-Results]], Pairs).
 
 	automation_id(Target, ToolId, Properties, AutomationId) :-
 		(	member(automation_id(target), Properties) ->
@@ -295,9 +299,9 @@
 	target_application_root(rdirectories(Directories), Directory) :-
 		common_directory_root(Directories, Directory).
 	target_application_root(library(Library), Directory) :-
-		logtalk::expand_library_path(Library, Directory).
+		expand_library_path(Library, Directory).
 	target_application_root(rlibrary(Library), Directory) :-
-		logtalk::expand_library_path(Library, Directory).
+		expand_library_path(Library, Directory).
 	target_application_root(libraries(Libraries), Directory) :-
 		expanded_library_paths(Libraries, Directories),
 		common_directory_root(Directories, Directory).
@@ -307,7 +311,7 @@
 
 	expanded_library_paths([], []).
 	expanded_library_paths([Library| Libraries], [Directory| Directories]) :-
-		logtalk::expand_library_path(Library, Directory),
+		expand_library_path(Library, Directory),
 		expanded_library_paths(Libraries, Directories).
 
 	diagnostic_file([diagnostic(_RuleId, _Severity, _Confidence, _Message, _Context, File0, _Lines, _Properties)| _], File) :-
@@ -369,7 +373,6 @@
 
 	sarif_result(diagnostic(RuleId, Severity, Confidence, Message, Context, File, Lines, Properties), Rules, ToolInfo, NormalizationContext, json(Pairs)) :-
 		rule_index(RuleId, Rules, 0, RuleIndex),
-		message_pairs(Message, MessagePairs),
 		location_pairs(File, Lines, NormalizationContext, LocationPairs),
 		fingerprint_pairs(RuleId, File, Lines, Context, Properties, ToolInfo, NormalizationContext, FingerprintPairs),
 		diagnostic_result_properties(RuleId, Confidence, Context, Properties, NormalizationContext, PropertiesJSON),
@@ -377,12 +380,10 @@
 			ruleId-RuleId,
 			ruleIndex-RuleIndex,
 			level-Severity,
-			message-json(MessagePairs)| LocationPairs
+			message-json([text-Message])| LocationPairs
 		],
 		append(Pairs0, FingerprintPairs, Pairs1),
 		append(Pairs1, [properties-PropertiesJSON], Pairs).
-
-	message_pairs(Message, [text-Message]).
 
 	location_pairs('', _Lines, _NormalizationContext, []).
 	location_pairs(File, 0-0, NormalizationContext, [locations-[json([physicalLocation-json([artifactLocation-json(ArtifactLocationPairs)])])]]) :-
@@ -444,10 +445,10 @@
 		stable_identity_properties(Properties, StableProperties).
 
 	finding_diagnostic_properties(Properties, EntityKind, Entity, Predicate, FindingProperties) :-
-		member(finding_properties(FindingProperties), Properties),
-		member(entity_kind(EntityKind), Properties),
-		member(entity(Entity), Properties),
-		member(predicate(Predicate), Properties).
+		memberchk(finding_properties(FindingProperties), Properties),
+		memberchk(entity_kind(EntityKind), Properties),
+		memberchk(entity(Entity), Properties),
+		memberchk(predicate(Predicate), Properties).
 
 	stable_identity_properties([], []).
 	stable_identity_properties([details(Details)| Properties], StableProperties) :-
@@ -540,11 +541,9 @@
 		sarif_notifications(Issues, NormalizationContext, Notifications).
 
 	sarif_notification(preflight_issue(Id, Severity, Message, _Context, File, Lines, Properties), NormalizationContext, json(Pairs)) :-
-		message_pairs(Message, MessagePairs),
 		location_pairs(File, Lines, NormalizationContext, LocationPairs),
 		preflight_notification_properties(Id, Severity, File, Properties, NormalizationContext, PropertiesJSON),
-		Pairs0 = [level-Severity, message-json(MessagePairs)| LocationPairs],
-		append(Pairs0, [properties-PropertiesJSON], Pairs).
+		Pairs = [level-Severity, message-json([text-Message]), properties-PropertiesJSON| LocationPairs].
 
 	preflight_notification_properties(Id, Severity, File, Properties, NormalizationContext, json(Pairs)) :-
 		normalized_file_atom(File, NormalizationContext, FileAtom),
