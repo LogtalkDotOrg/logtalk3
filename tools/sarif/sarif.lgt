@@ -61,7 +61,7 @@
 	]).
 
 	:- uses(git, [
-		branch/2 as git_branch/2, commit_hash/2 as git_commit_hash/2
+		branch/2 as git_branch/2, root/2 as git_root/2, remote/3 as git_remote/3, commit_hash/2 as git_commit_hash/2
 	]).
 
 	:- uses(json(curly, dash, atom), [
@@ -273,14 +273,14 @@
 		decompose_file_name(File, Directory, _BaseName),
 		git_branch(Directory, Branch),
 		git_commit_hash(Directory, CommitHash),
-		git_repository_root(Directory, RepositoryRoot0),
+		git_root(Directory, RepositoryRoot0),
 		normalized_directory_prefix(RepositoryRoot0, RepositoryRoot).
 
 	same_git_context([], _RepositoryRoot, _CommitHash).
 	same_git_context([File| Files], RepositoryRoot, CommitHash) :-
 		decompose_file_name(File, Directory, _BaseName),
 		git_commit_hash(Directory, CommitHash),
-		git_repository_root(Directory, RepositoryRoot0),
+		git_root(Directory, RepositoryRoot0),
 		normalized_directory_prefix(RepositoryRoot0, RepositoryRoot),
 		same_git_context(Files, RepositoryRoot, CommitHash).
 
@@ -339,7 +339,7 @@
 		common_directory_root(Directories, Prefix, Root).
 
 	common_directory_prefix(Prefix, Directory, Prefix) :-
-		atom_concat(Prefix, _, Directory),
+		sub_atom(Directory, 0, _, _, Prefix),
 		!.
 	common_directory_prefix(Prefix0, Directory, Prefix) :-
 		parent_directory_prefix(Prefix0, Parent),
@@ -583,10 +583,9 @@
 	sarif_version_control_details([Directory| Directories], NormalizationContext, [json(Pairs)| VersionControlProvenance]) :-
 		git_branch(Directory, Branch),
 		git_commit_hash(Directory, CommitHash),
-		git_repository_root(Directory, RepositoryRoot0),
-		git_repository_uri(Directory, RepositoryURI),
-		RepositoryRoot0 \== '',
+		git_root(Directory, RepositoryRoot0),
 		normalized_directory_prefix(RepositoryRoot0, RepositoryRoot),
+		git_remote_uri(Directory, RepositoryURI),
 		version_control_mapped_to_pairs(NormalizationContext, RepositoryRoot, MappedToPairs),
 		Pairs = [repositoryUri-RepositoryURI, revisionId-CommitHash, branch-Branch| MappedToPairs],
 		!,
@@ -598,14 +597,9 @@
 		!.
 	version_control_mapped_to_pairs(_NormalizationContext, _RepositoryRoot, []).
 
-	git_repository_root(Directory, RepositoryRoot) :-
-		git_command_clean_output(Directory, 'rev-parse --show-toplevel', RepositoryRoot),
-		RepositoryRoot \== ''.
-
-	git_repository_uri(Directory, RepositoryURI) :-
-		git_command_clean_output(Directory, 'config --get remote.origin.url', RemoteURI),
-		RemoteURI \== '',
-		normalize_git_repository_uri(RemoteURI, RepositoryURI).
+	git_remote_uri(Directory, RepositoryURI) :-
+		git_remote(Directory, origin, OriginURI),
+		normalize_git_repository_uri(OriginURI, RepositoryURI).
 
 	normalize_git_repository_uri(RemoteURI, RepositoryURI) :-
 		(	scp_like_git_repository_uri(RemoteURI, URI) ->
@@ -655,45 +649,6 @@
 		normalize_path_separator_codes(Codes0, Codes).
 	normalize_path_separator_codes([Code| Codes0], [Code| Codes]) :-
 		normalize_path_separator_codes(Codes0, Codes).
-
-	:- if(os::operating_system_type(windows)).
-
-		git_command_clean_output(Directory, GitCommand, Output) :-
-			temporary_file(Temporary),
-			internal_os_path(Temporary, NativeTemporary),
-			atomic_list_concat(['git -C "', Directory, '" ', GitCommand, ' 2>nul > "', NativeTemporary, '"'], Command),
-			(	shell(Command) ->
-				open(Temporary, read, Stream),
-				line_to_codes(Stream, OutputCodes),
-				close(Stream),
-				atom_codes(Output, OutputCodes),
-				delete_file(Temporary)
-			;	delete_file(Temporary),
-				fail
-			).
-
-	:- else.
-
-		git_command_clean_output(Directory, GitCommand, Output) :-
-			temporary_file(Temporary),
-			atomic_list_concat(['git -C "', Directory, '" ', GitCommand, ' 2>/dev/null > "', Temporary, '"'], Command),
-			(	shell(Command) ->
-				open(Temporary, read, Stream),
-				line_to_codes(Stream, OutputCodes),
-				close(Stream),
-				atom_codes(Output, OutputCodes),
-				delete_file(Temporary)
-			;	delete_file(Temporary),
-				fail
-			).
-
-	:- endif.
-
-	temporary_file(Temporary) :-
-		pid(PID),
-		atomic_list_concat([logtalk_sarif_git_, PID], Basename),
-		temporary_directory(Directory),
-		path_concat(Directory, Basename, Temporary).
 
 	terms_to_atoms([], []).
 	terms_to_atoms([Term| Terms], [Atom| Atoms]) :-
