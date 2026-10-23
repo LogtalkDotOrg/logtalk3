@@ -89,7 +89,7 @@
 	test(git_root_2_01, false) :-
 		root('/', _).
 
-	test(git_root, true(Root == Path)) :-
+	test(git_root_2_02, true(Root == Path)) :-
 		^^file_path(repo, Path),
 		test_repo(Repo, _),
 		root(Repo, Root).
