@@ -22,9 +22,9 @@
 :- protocol(git_protocol).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-10-08,
+		date is 2026-10-23,
 		comment is 'Predicates for accessing a git project current branch and latest commit data.'
 	]).
 
@@ -33,6 +33,20 @@
 	:- info(branch/2, [
 		comment is 'Returns the name of the current git branch. Fails if the directory is not a git repo or a sub-directory of a git repo directory.',
 		argnames is ['Directory', 'Branch']
+	]).
+
+	:- public(root/2).
+	:- mode(root(+atom, ?atom), zero_or_one).
+	:- info(root/2, [
+		comment is 'Returns the absolute file path for the git repo root. Fails if the directory is not a git repo or a sub-directory of a git repo directory.',
+		argnames is ['Directory', 'Root']
+	]).
+
+	:- public(remote/3).
+	:- mode(remote(+atom, +atom, ?atom), zero_or_one).
+	:- info(remote/3, [
+		comment is 'Returns the git repo remote URI. Fails if the directory is not a git repo or a sub-directory of a git repo directory.',
+		argnames is ['Directory', 'Remote', 'URI']
 	]).
 
 	:- public(working_tree_clean/1).

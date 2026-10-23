@@ -23,16 +23,17 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2026-10-08,
+		date is 2026-10-23,
 		comment is 'Unit tests for the "git" library.'
 	]).
 
 	:- uses(git, [
-		branch/2, commit_log/3,
-		commit_author/2, commit_date/2, commit_message/2,
-		commit_hash/2, commit_hash_abbreviated/2, working_tree_clean/1
+		branch/2, root/2, remote/3,
+		commit_log/3, commit_author/2, commit_date/2, commit_message/2,
+		commit_hash/2, commit_hash_abbreviated/2,
+		working_tree_clean/1
 	]).
 
 	:- uses(user, [
@@ -84,6 +85,17 @@
 	test(git_branch_2_02, true(Branch == master)) :-
 		test_repo(Repo, _),
 		branch(Repo, Branch).
+
+	test(git_root_2_01, false) :-
+		root('/', _).
+
+	test(git_root, true(Root == Path)) :-
+		^^file_path(repo, Path),
+		test_repo(Repo, _),
+		root(Repo, Root).
+
+	test(git_remote_3, false) :-
+		remote('/', origin, _).
 
 	test(git_commit_log_3_01, false) :-
 		commit_log('/', '%h', _).

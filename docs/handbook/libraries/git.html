@@ -438,10 +438,10 @@
              
   <section id="git">
 <span id="library-git"></span><h1><code class="docutils literal notranslate"><span class="pre">git</span></code><a class="headerlink" href="#git" title="Link to this heading"></a></h1>
-<p>This library provides access to a git project current branch and latest
-commit data (e.g., commit hash). Support for using this library on
-Windows operating-systems is experimental and may or may not work
-depending on the used Prolog backend.</p>
+<p>This library provides access to a git repo root, remotes, current
+branch, and latest commit data (e.g., commit hash). Support for using
+this library on Windows operating-systems is experimental and may or may
+not work depending on the used Prolog backend.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -486,12 +486,12 @@ details:</p>
 <p><a class="reference external" href="https://git-scm.com/docs/pretty-formats">https://git-scm.com/docs/pretty-formats</a></p>
 <p>Convenient predicates are also provided for commonly used formats such
 as the commit author and the commit hash. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> git<span class="o">::</span>commit_author(<span class="s">&#39;/Users/pmoura/Documents/Logtalk/logtalk3&#39;</span>, <span class="nv">Author</span>).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> git<span class="o">::</span>commit_author(<span class="s">&#39;/Users/pmoura/logtalk3&#39;</span>, <span class="nv">Author</span>).
 
 <span class="nv">Author</span> <span class="o">=</span> <span class="s">&#39;Paulo Moura&#39;</span>
 yes
 
-| <span class="o">?-</span> git<span class="o">::</span>commit_hash(<span class="s">&#39;/Users/pmoura/Documents/Logtalk/logtalk3&#39;</span>, <span class="nv">Hash</span>).
+| <span class="o">?-</span> git<span class="o">::</span>commit_hash(<span class="s">&#39;/Users/pmoura/logtalk3&#39;</span>, <span class="nv">Hash</span>).
 
 <span class="nv">Hash</span> <span class="o">=</span> eccaa1a2a9495fef441915bbace84e0a4b0394a2
 yes
@@ -505,11 +505,17 @@ given a sub-directory, ignores untracked files (also within submodules),
 and fails if the Git status command fails. The <code class="docutils literal notranslate"><span class="pre">working_tree_status/2</span></code>
 predicate returns the underlying porcelain version 1 status output for
 tracked changes as an atom, including submodule changes.</p>
-<p>It’s also possible to get the name of the current local branch. For
-example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> git<span class="o">::</span>branch(<span class="s">&#39;/Users/pmoura/Documents/Logtalk/logtalk3&#39;</span>, <span class="nv">Branch</span>).
+<p>To get the name of the current local branch:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> git<span class="o">::</span>branch(<span class="s">&#39;/Users/pmoura/logtalk3&#39;</span>, <span class="nv">Branch</span>).
 
 <span class="nv">Branch</span> <span class="o">=</span> master
+yes
+</pre></div>
+</div>
+<p>Or the <code class="docutils literal notranslate"><span class="pre">origin</span></code> remote URI:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> git<span class="o">::</span>remote(<span class="s">&#39;/Users/pmoura/logtalk3&#39;</span>, origin, <span class="nv">URI</span>).
+
+<span class="nv">URI</span> <span class="o">=</span> <span class="s">&#39;git@github.com:LogtalkDotOrg/logtalk3.git&#39;</span>
 yes
 </pre></div>
 </div>

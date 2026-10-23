@@ -21,10 +21,10 @@ ________________________________________________________________________
 `git`
 =====
 
-This library provides access to a git project current branch and latest
-commit data (e.g., commit hash). Support for using this library on Windows
-operating-systems is experimental and may or may not work depending on
-the used Prolog backend.
+This library provides access to a git repo root, remotes, current branch,
+and latest commit data (e.g., commit hash). Support for using this library
+on Windows operating-systems is experimental and may or may not work
+depending on the used Prolog backend.
 
 
 API documentation
@@ -76,12 +76,12 @@ https://git-scm.com/docs/pretty-formats
 Convenient predicates are also provided for commonly used formats such as the
 commit author and the commit hash. For example:
 
-	| ?- git::commit_author('/Users/pmoura/Documents/Logtalk/logtalk3', Author).
+	| ?- git::commit_author('/Users/pmoura/logtalk3', Author).
 
 	Author = 'Paulo Moura'
 	yes
 
-	| ?- git::commit_hash('/Users/pmoura/Documents/Logtalk/logtalk3', Hash).
+	| ?- git::commit_hash('/Users/pmoura/logtalk3', Hash).
 
 	Hash = eccaa1a2a9495fef441915bbace84e0a4b0394a2
 	yes
@@ -90,13 +90,22 @@ The `commit_hash/2` predicate returns the HEAD commit hash, regardless of local
 changes. The `working_tree_clean/1` predicate succeeds when the repository has
 no staged or unstaged changes to tracked files, including submodule changes.
 It checks the whole repository even when given a sub-directory, ignores
-untracked files (also within submodules), and fails if the Git status command fails.
-The `working_tree_status/2` predicate returns the underlying porcelain version
-1 status output for tracked changes as an atom, including submodule changes.
+untracked files (also within submodules), and fails if the Git status command
+fails. The `working_tree_status/2` predicate returns the underlying porcelain
+version 1 status output for tracked changes as an atom, including submodule
+changes.
 
-It's also possible to get the name of the current local branch. For example:
+To get the name of the current local branch:
 
-	| ?- git::branch('/Users/pmoura/Documents/Logtalk/logtalk3', Branch).
+	| ?- git::branch('/Users/pmoura/logtalk3', Branch).
 
 	Branch = master
 	yes
+
+Or the `origin` remote URI:
+
+	| ?- git::remote('/Users/pmoura/logtalk3', origin, URI).
+
+	URI = 'git@github.com:LogtalkDotOrg/logtalk3.git'
+	yes
+

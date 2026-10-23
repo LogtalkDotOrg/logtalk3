@@ -23,9 +23,9 @@
 	implements(git_protocol)).
 
 	:- info([
-		version is 2:2:0,
+		version is 2:3:0,
 		author is 'Paulo Moura',
-		date is 2026-10-08,
+		date is 2026-10-23,
 		comment is 'Predicates for accessing a git project current branch and latest commit data.'
 	]).
 
@@ -50,6 +50,28 @@
 			(	shell(Command) ->
 				data_clean(Temporary, Branch),
 				Branch \== ''
+			;	delete_file(Temporary),
+				fail
+			).
+
+		root(Directory, Root) :-
+			temporary_file(Temporary),
+			internal_os_path(Temporary, NativeTemporary),
+			atomic_list_concat(['git -C "', Directory, '" rev-parse --show-toplevel 2>nul > "', NativeTemporary, '"'], Command),
+			(	shell(Command) ->
+				data_clean(Temporary, Root),
+				Root \== ''
+			;	delete_file(Temporary),
+				fail
+			).
+
+		remote(Directory, Remote, URI) :-
+			temporary_file(Temporary),
+			internal_os_path(Temporary, NativeTemporary),
+			atomic_list_concat(['git -C "', Directory, '" config --get remote.', Remote, '.url 2>nul > "', NativeTemporary, '"'], Command),
+			(	shell(Command) ->
+				data_clean(Temporary, URI),
+				URI \== ''
 			;	delete_file(Temporary),
 				fail
 			).
@@ -82,6 +104,26 @@
 			(	shell(Command) ->
 				data_clean(Temporary, Branch),
 				Branch \== ''
+			;	delete_file(Temporary),
+				fail
+			).
+
+		root(Directory, Root) :-
+			temporary_file(Temporary),
+			atomic_list_concat(['git -C "', Directory, '" rev-parse --show-toplevel 2>/dev/null > "', Temporary, '"'], Command),
+			(	shell(Command) ->
+				data_clean(Temporary, Root),
+				Root \== ''
+			;	delete_file(Temporary),
+				fail
+			).
+
+		remote(Directory, Remote, URI) :-
+			temporary_file(Temporary),
+			atomic_list_concat(['git -C "', Directory, '" config --get remote.', Remote, '.url 2>/dev/null > "', Temporary, '"'], Command),
+			(	shell(Command) ->
+				data_clean(Temporary, URI),
+				URI \== ''
 			;	delete_file(Temporary),
 				fail
 			).
