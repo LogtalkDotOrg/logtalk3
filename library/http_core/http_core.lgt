@@ -23,9 +23,9 @@
 	imports(http_text_helpers)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2026-09-24,
+		date is 2026-10-23,
 		comment is 'Transport-independent normalized HTTP request and response constructors, validators, wire parsers and generators, and body codec dispatch.'
 	]).
 
@@ -1267,30 +1267,30 @@
 		maybe_add_content_type_header(Body, Properties, Headers0, Headers).
 
 	multipart_open_marker_codes(BoundaryCodes, Codes) :-
-		append([[0'-, 0'-], BoundaryCodes, [0'\r, 0'\n]], Codes).
+		append([0'-, 0'-| BoundaryCodes], [0'\r, 0'\n], Codes).
 
 	multipart_close_marker_codes(BoundaryCodes, Codes) :-
-		append([[0'-, 0'-], BoundaryCodes, [0'-, 0'-, 0'\r, 0'\n]], Codes).
+		append([0'-, 0'-| BoundaryCodes], [0'-, 0'-, 0'\r, 0'\n], Codes).
 
 	multipart_continue_separator_codes(BoundaryCodes, Codes) :-
-		append([[0'\r, 0'\n, 0'-, 0'-], BoundaryCodes, [0'\r, 0'\n]], Codes).
+		append([0'\r, 0'\n, 0'-, 0'-| BoundaryCodes], [0'\r, 0'\n], Codes).
 
 	multipart_final_separator_codes(BoundaryCodes, Codes) :-
-		append([[0'\r, 0'\n, 0'-, 0'-], BoundaryCodes, [0'-, 0'-, 0'\r, 0'\n]], Codes).
+		append([0'\r, 0'\n, 0'-, 0'-| BoundaryCodes], [0'-, 0'-, 0'\r, 0'\n], Codes).
 
 	multipart_final_separator_no_crlf_codes(BoundaryCodes, Codes) :-
-		append([[0'\r, 0'\n, 0'-, 0'-], BoundaryCodes, [0'-, 0'-]], Codes).
+		append([0'\r, 0'\n, 0'-, 0'-| BoundaryCodes], [0'-, 0'-], Codes).
 
 	generate_chunked_body(BodyBytes, Trailers, Bytes) :-
 		chunk_bytes_block(BodyBytes, ChunkBytes),
 		headers_codes(Trailers, TrailerBytes),
-		append([ChunkBytes, [0'0, 0'\r, 0'\n], TrailerBytes, [0'\r, 0'\n]], Bytes).
+		append([ChunkBytes, [0'0, 0'\r, 0'\n| TrailerBytes], [0'\r, 0'\n]], Bytes).
 
 	chunk_bytes_block([], []).
 	chunk_bytes_block(Bytes, ChunkBytes) :-
 		length(Bytes, Length),
 		hex_number_codes(Length, LengthCodes),
-		append([LengthCodes, [0'\r, 0'\n], Bytes, [0'\r, 0'\n]], ChunkBytes).
+		append([LengthCodes, [0'\r, 0'\n| Bytes], [0'\r, 0'\n]], ChunkBytes).
 
 	chunked_body_bytes([Chunk| Chunks], Trailers) -->
 		chunk_header(Size),

@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-08-12,
+		date is 2026-10-23,
 		comment is 'This tool generates a Software Bill of Materials (SBOM) for an application.'
 	]).
 
@@ -267,16 +267,16 @@
 		cyclonedx_license_json('CC0-1.0', BomLicense).
 
 	cyclonedx_bom_external_references(Options, References) :-
-		DefaultReferences = [
+		References0 = [
 			{type-vcs, url-'https://github.com/LogtalkDotOrg/logtalk3'},
-			{type-website, url-'https://logtalk.org/'}
+			{type-website, url-'https://logtalk.org/'}|
+			CustomReferences
 		],
 		findall(
 			{type-Type, url-URL},
 			member(bom_external_reference(Type, URL), Options),
 			CustomReferences
 		),
-		append(DefaultReferences, CustomReferences, References0),
 		sort(References0, References).
 
 	cyclonedx_application_component_json(package(Reference, Name, Version, License, Checksum, Metadata, Purpose, Description), Options, JSON) :-

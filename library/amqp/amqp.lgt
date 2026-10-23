@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:3:1,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2026-09-08,
+		date is 2026-10-23,
 		comment is 'Portable AMQP 0-9-1 (Advanced Message Queuing Protocol) client. Uses the sockets library for TCP communication.',
 		remarks is [
 			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM (same as the sockets library).',
@@ -2553,7 +2553,7 @@
 		encode_short(Channel, ChannelBytes),
 		encode_long(PayloadSize, SizeBytes),
 		frame_end(FrameEnd),
-		append([[Type], ChannelBytes, SizeBytes, PayloadBytes, [FrameEnd]], FrameBytes),
+		append([[Type| ChannelBytes], SizeBytes, PayloadBytes, [FrameEnd]], FrameBytes),
 		write_bytes(FrameBytes, Stream),
 		flush_output(Stream).
 

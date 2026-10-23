@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-10-22,
+		date is 2026-10-23,
 		comment is 'Mutation testing tool.'
 	]).
 
@@ -403,8 +403,7 @@
 		collect_baseline_coverage(Entity, Predicates, Options, CoverageAvailable),
 		print_message(comment, mutation_testing, phase_mutations_testing),
 		^^option(verbose(Verbose), Options),
-		run_mutants(Mutants, Verbose, Options, CoverageAvailable, 1, [], Results0),
-		reverse(Results0, Results),
+		run_mutants(Mutants, Verbose, Options, CoverageAvailable, 1, Results),
 		summary(Results, Options, Summary).
 
 	collect_baseline_coverage(Entity, Predicates, Options, CoverageAvailable) :-
@@ -504,9 +503,8 @@
 		close(Stream).
 
 	loaded_entities(Entities) :-
-		findall(Entity, (current_object(Entity), \+ extends_object(Entity, lgtunit)), Objects),
+		findall(Entity, (current_object(Entity), \+ extends_object(Entity, lgtunit)), Unsorted, Categories),
 		findall(Entity, (current_category(Entity), atom(Entity)), Categories),
-		append(Objects, Categories, Unsorted),
 		sort(Unsorted, Entities).
 
 	loaded_library_entities(Library, Entities) :-
@@ -710,7 +708,7 @@
 			true
 		;   entity_declares(Entity, Predicate, Properties)
 		),
-		(   memberchk(number_of_clauses(NumberOfClauses), Properties) ->
+		(   member(number_of_clauses(NumberOfClauses), Properties) ->
 			true
 		;   NumberOfClauses = 0
 		),
@@ -816,8 +814,8 @@
 		),
 		set_seed(PreviousSeed).
 
-	run_mutants([], _, _, _, _, Results, Results).
-	run_mutants([Mutant| Mutants], Verbose, Options, CoverageAvailable, Index, Results0, Results) :-
+	run_mutants([], _, _, _, _, []).
+	run_mutants([Mutant| Mutants], Verbose, Options, CoverageAvailable, Index, [Result| Results]) :-
 		print_message(comment, mutation_testing, testing_mutation(Mutant)),
 		(   Verbose == true ->
 			print_message(comment, mutation_testing, running_mutant(Index, Mutant)),
@@ -835,7 +833,7 @@
 		;   true
 		),
 		NextIndex is Index + 1,
-		run_mutants(Mutants, Verbose, Options, CoverageAvailable, NextIndex, [Result| Results0], Results).
+		run_mutants(Mutants, Verbose, Options, CoverageAvailable, NextIndex, Results).
 
 	mutant_not_covered(mutant(Entity, Predicate, clause(ClauseIndex), Mutator, Occurrence)) :-
 		mutator_hook(Mutator, Entity, Predicate, clause(ClauseIndex), Occurrence, false, Hook),
