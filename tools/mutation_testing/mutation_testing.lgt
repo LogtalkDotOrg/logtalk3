@@ -286,8 +286,7 @@
 		reports_for_entities(Entities, Options, Reports),
 		maybe_format_report_checked(report(library(Library), Reports), Options),
 		reports_passed(Reports, true, Passed),
-		Passed == true,
-		!.
+		Passed == true.
 
 	directory(Directory) :-
 		directory(Directory, []).
@@ -300,8 +299,7 @@
 		reports_for_entities(Entities, Options, Reports),
 		maybe_format_report_checked(report(directory(Directory), Reports), Options),
 		reports_passed(Reports, true, Passed),
-		Passed == true,
-		!.
+		Passed == true.
 
 	entity(Entity) :-
 		entity(Entity, []).
@@ -310,8 +308,7 @@
 		report_entity(Entity, Report, UserOptions),
 		maybe_format_report(Report, UserOptions),
 		Report = report(_, summary(_, _, _, _, _, _, _, _, _, Passed), _),
-		Passed == true,
-		!.
+		Passed == true.
 
 	predicate(Entity, Predicate) :-
 		predicate(Entity, Predicate, []).
@@ -320,40 +317,35 @@
 		report_predicate(Entity, Predicate, Report, UserOptions),
 		maybe_format_report(Report, UserOptions),
 		Report = report(_, summary(_, _, _, _, _, _, _, _, _, Passed), _),
-		Passed == true,
-		!.
+		Passed == true.
 
 	report_entity(Entity, Report, UserOptions) :-
 		entity_exists(Entity),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
 		entity_predicates(Entity, Predicates),
-		report_for_predicates(Entity, Predicates, Options, Report),
-		!.
+		report_for_predicates(Entity, Predicates, Options, Report).
 
 	report_predicate(Entity, Predicate, Report, UserOptions) :-
 		entity_exists(Entity),
 		entity_has_predicate(Entity, Predicate),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		report_for_predicates(Entity, [Predicate], Options, Report),
-		!.
+		report_for_predicates(Entity, [Predicate], Options, Report).
 
 	report_library(Library, report(library(Library), Reports), UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
 		loaded_library_entities(Library, Entities0),
 		apply_entity_filters(Entities0, Options, Entities),
-		reports_for_entities(Entities, Options, Reports),
-		!.
+		reports_for_entities(Entities, Options, Reports).
 
 	report_directory(Directory, report(directory(Directory), Reports), UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
 		loaded_directory_entities(Directory, Entities0),
 		apply_entity_filters(Entities0, Options, Entities),
-		reports_for_entities(Entities, Options, Reports),
-		!.
+		reports_for_entities(Entities, Options, Reports).
 
 	entity_mutants(Entity, Mutants) :-
 		entity_mutants(Entity, Mutants, []).
@@ -438,10 +430,11 @@
 		reports_for_entities(Entities, Options, Reports).
 
 	reports_passed([], Passed, Passed).
-	reports_passed([report(_, summary(_, _, _, _, _, _, _, _, _, true), _)| Reports], Passed0, Passed) :-
-		reports_passed(Reports, Passed0, Passed).
-	reports_passed([report(_, summary(_, _, _, _, _, _, _, _, _, false), _)| Reports], _Passed0, Passed) :-
-		reports_passed(Reports, false, Passed).
+	reports_passed([report(_, summary(_, _, _, _, _, _, _, _, _, Result), _)| Reports], Passed0, Passed) :-
+		(	Result == true ->
+			reports_passed(Reports, Passed0, Passed)
+		;	reports_passed(Reports, false, Passed)
+		).
 
 	maybe_format_report(Report, UserOptions) :-
 		^^check_options(UserOptions),
@@ -562,12 +555,13 @@
 		NormalizedDirectory1 == NormalizedDirectory2.
 
 	entity_file(Entity, File) :-
-		object_property(Entity, file(File)).
-	entity_file(Entity, File) :-
-		category_property(Entity, file(File)).
-	entity_file(Entity, File) :-
-		atom(Entity),
-		protocol_property(Entity, file(File)).
+		(	current_object(Entity) ->
+			object_property(Entity, file(File))
+		;	current_category(Entity) ->
+			category_property(Entity, file(File))
+		;	atom(Entity),
+			protocol_property(Entity, file(File))
+		).
 
 	apply_entity_filters(Entities0, Options, Entities) :-
 		^^option(include_entities(IncludedEntities), Options),
@@ -901,10 +895,9 @@
 		;	catch(logtalk_load(File, [report(off)| RevertOptions]), _, true)
 		).
 
-	mutator_hook(Mutator, Entity, Predicate, clause(ClauseIndex), Occurrence, PrintMutation, Hook) :-
-		Hook =.. [Mutator, Entity, Predicate, ClauseIndex, Occurrence, PrintMutation].
-	mutator_hook(Mutator, Entity, Predicate, directive(DirectiveIndex), Occurrence, PrintMutation, Hook) :-
-		Hook =.. [Mutator, Entity, Predicate, DirectiveIndex, Occurrence, PrintMutation].
+	mutator_hook(Mutator, Entity, Predicate, Target, Occurrence, PrintMutation, Hook) :-
+		arg(1, Target, Index),
+		Hook =.. [Mutator, Entity, Predicate, Index, Occurrence, PrintMutation].
 
 	prepare_mutator_hook(Hook) :-
 		catch(Hook::reset, _, true).
