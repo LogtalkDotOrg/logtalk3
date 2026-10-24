@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2026-10-22,
+		date is 2026-10-24,
 		comment is 'Uniform Manifold Approximation and Projection dimension reducer for continuous, categorical, and mixed datasets.',
 		see_also is [tsne_projection, spectral_clusterer]
 	]).
@@ -1554,8 +1554,9 @@
 	valid_mixed_encoders([continuous(Attribute, Mean, Scale)| Encoders], SeenAttributes) :-
 		!,
 		atom(Attribute),
-		valid(number, Mean),
-		valid(positive_number, Scale),
+		number(Mean),
+		number(Scale),
+		Scale > 0,
 		\+ member(Attribute, SeenAttributes),
 		valid_mixed_encoders(Encoders, [Attribute| SeenAttributes]).
 	valid_mixed_encoders([categorical(Attribute, Values)| Encoders], SeenAttributes) :-
@@ -1580,12 +1581,14 @@
 
 	valid_fuzzy_edges([], _SampleCount, _PreviousSource, _PreviousTarget).
 	valid_fuzzy_edges([edge(Source, Target, Weight)| Edges], SampleCount, PreviousSource, PreviousTarget) :-
-		valid(non_negative_integer, Source),
-		valid(non_negative_integer, Target),
+		integer(Source),
+		Source >= 0,
+		integer(Target),
+		Target >= 0,
 		Source < Target,
 		Target < SampleCount,
-		valid(positive_number, Weight),
-		Weight =< 1.0,
+		number(Weight),
+		0.0 < Weight, Weight =< 1.0,
 		(	Source > PreviousSource ->
 			true
 		;	Source =:= PreviousSource,
@@ -1600,8 +1603,8 @@
 		^^option(n_components(ComponentCount), Options),
 		ComponentCount =< EncodedFeatureCount,
 		ComponentCount < SampleCount,
-		valid(positive_integer, NeighborCount),
-		NeighborCount >= 2,
+		integer(NeighborCount),
+		0 < NeighborCount, NeighborCount >= 2,
 		resolve_neighbor_count(Options, SampleCount, NeighborCount),
 		^^option(local_connectivity(LocalConnectivity), Options),
 		LocalConnectivity =< NeighborCount,
@@ -1612,24 +1615,30 @@
 		memberchk(component_count(ComponentCount), Diagnostics),
 		memberchk(effective_n_neighbors(NeighborCount), Diagnostics),
 		memberchk(graph_edge_count(EdgeCount), Diagnostics),
-		valid(non_negative_integer, EdgeCount),
+		integer(EdgeCount),
+		EdgeCount >= 0,
 		memberchk(distance_metric(Metric), Diagnostics),
 		valid_metric(Metric),
 		^^option(distance_metric(Metric), Options),
 		memberchk(curve_parameters(CurveA, CurveB), Diagnostics),
-		valid(positive_number, CurveA),
-		valid(positive_number, CurveB),
+		number(CurveA),
+		CurveA > 0,
+		number(CurveB),
+		CurveB > 0,
 		memberchk(initialization_used(InitializationUsed), Diagnostics),
 		valid_initialization_used(InitializationUsed),
 		memberchk(iterations(Iterations), Diagnostics),
-		valid(positive_integer, Iterations),
+		integer(Iterations),
+		Iterations > 0,
 		^^option(maximum_iterations(Iterations), Options),
 		memberchk(initial_cross_entropy(InitialCrossEntropy), Diagnostics),
-		valid(non_negative_number, InitialCrossEntropy),
+		number(InitialCrossEntropy),
+		InitialCrossEntropy >= 0,
 		memberchk(final_cross_entropy(FinalCrossEntropy), Diagnostics),
-		valid(non_negative_number, FinalCrossEntropy),
+		number(FinalCrossEntropy),
+		FinalCrossEntropy >= 0,
 		memberchk(preprocessing([center(true), feature_scaling(FeatureScaling), continuous_missing_values(mean_imputation), categorical_encoding(one_hot_with_missing_indicator)]), Diagnostics),
-		valid(boolean, FeatureScaling),
+		once((FeatureScaling == true; FeatureScaling == false)),
 		^^option(feature_scaling(FeatureScaling), Options),
 		memberchk(implementation_stage(optimized), Diagnostics).
 
@@ -1682,36 +1691,46 @@
 	default_option(transform_seed(42)).
 
 	valid_option(n_components(Components)) :-
-		valid(positive_integer, Components).
+		integer(Components),
+		Components > 0.
 	valid_option(feature_scaling(FeatureScaling)) :-
 		valid(boolean, FeatureScaling).
 	valid_option(n_neighbors(NeighborCount)) :-
-		valid(positive_integer, NeighborCount),
+		integer(NeighborCount),
 		NeighborCount > 1.
 	valid_option(distance_metric(Metric)) :-
 		valid_metric(Metric).
 	valid_option(initialization(Initialization)) :-
 		once((Initialization == spectral; Initialization == random)).
 	valid_option(min_dist(MinDist)) :-
-		valid(non_negative_number, MinDist).
+		number(MinDist),
+		MinDist >= 0.
 	valid_option(spread(Spread)) :-
-		valid(positive_number, Spread).
+		number(Spread),
+		Spread > 0.
 	valid_option(local_connectivity(LocalConnectivity)) :-
-		valid(positive_number, LocalConnectivity).
+		number(LocalConnectivity),
+		LocalConnectivity > 0.
 	valid_option(set_op_mix_ratio(SetOpMixRatio)) :-
-		valid(non_negative_number, SetOpMixRatio),
-		SetOpMixRatio =< 1.0.
+		number(SetOpMixRatio),
+		0.0 =< SetOpMixRatio, SetOpMixRatio =< 1.0.
 	valid_option(learning_rate(LearningRate)) :-
-		valid(positive_number, LearningRate).
+		number(LearningRate),
+		LearningRate > 0.
 	valid_option(repulsion_strength(RepulsionStrength)) :-
-		valid(non_negative_number, RepulsionStrength).
+		number(RepulsionStrength),
+		RepulsionStrength >= 0.
 	valid_option(negative_sample_rate(NegativeSampleRate)) :-
-		valid(positive_integer, NegativeSampleRate).
+		integer(NegativeSampleRate),
+		NegativeSampleRate > 0.
 	valid_option(maximum_iterations(MaximumIterations)) :-
-		valid(positive_integer, MaximumIterations).
+		integer(MaximumIterations),
+		MaximumIterations > 0.
 	valid_option(random_seed(RandomSeed)) :-
-		valid(positive_integer, RandomSeed).
+		integer(RandomSeed),
+		RandomSeed > 0.
 	valid_option(transform_seed(TransformSeed)) :-
-		valid(positive_integer, TransformSeed).
+		integer(TransformSeed),
+		TransformSeed > 0.
 
 :- end_object.

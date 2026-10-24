@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2026-10-22,
+		date is 2026-10-24,
 		comment is 'Unit tests for the "umap_projection" library.'
 	]).
 
@@ -393,8 +393,8 @@
 			assigned_rows(Handles, Rows)
 		),
 		Rows = [Changed, OtherRow],
-		check_numeric_row(OtherRow, [1.92]),
-		check_numeric_row(Changed, [0.08]).
+		OtherRow =~= [1.92],
+		Changed =~= [0.08].
 
 	test(umap_projection_transform_preserves_embedding, deterministic) :-
 		cached_model(validation, Reducer),
@@ -636,13 +636,8 @@
 
 	check_numeric_matrix([], []).
 	check_numeric_matrix([Row| Rows], [Expected| Expecteds]) :-
-		check_numeric_row(Row, Expected),
+		Row =~= Expected,
 		check_numeric_matrix(Rows, Expecteds).
-
-	check_numeric_row([], []).
-	check_numeric_row([Value| Values], [Expected| Expecteds]) :-
-		Value =~= Expected,
-		check_numeric_row(Values, Expecteds).
 
 	check_entropy_reference(Graph) :-
 		umap_projection<<embedding_cross_entropy(Graph, [[0.0], [1.0], [3.0]], 1.0, 1.0, Actual),
