@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-23,
+		date is 2026-10-24,
 		comment is 'Simulated annealing optimization algorithm. Parameterized by a problem object implementing the ``simulated_annealing_protocol`` protocol and by a random number generator algorithm for the ``fast_random`` library. The algorithm minimizes the energy (cost) function defined by the problem. Custom cooling schedules, stop conditions, delta-energy neighbor generation, progress reporting, and reheating restarts can be defined by the problem object or configured via options; suitable defaults are used otherwise.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``simulated_annealing_protocol``.',
@@ -119,7 +119,8 @@
 		AcceptanceRate is Percentage / 100.0,
 		initial_state(State0),
 		state_energy(State0, Energy0),
-		sample_deltas(Samples, State0, Energy0, 0, 0.0, Count, SumDelta),
+		hook_enabled(neighbor_state(_, _, _), DeltaHook),
+		sample_deltas(Samples, DeltaHook, State0, Energy0, 0, 0.0, Count, SumDelta),
 		% Compute T = -mean_delta / ln(acceptance_rate)
 		(	Count > 0 ->
 			MeanDelta is SumDelta / Count,
@@ -131,10 +132,10 @@
 	% Sample random neighbor transitions and collect absolute deltas
 	% of uphill (worsening) moves. Walk follows the random neighbors
 	% to explore the landscape.
-	sample_deltas(0, _State, _Energy, Count, Sum, Count, Sum) :-
+	sample_deltas(0, _DeltaHook, _State, _Energy, Count, Sum, Count, Sum) :-
 		!.
-	sample_deltas(N, State, Energy, Count0, Sum0, Count, Sum) :-
-		generate_neighbor(State, Energy, Neighbor, NeighborEnergy, DeltaE),
+	sample_deltas(N, DeltaHook, State, Energy, Count0, Sum0, Count, Sum) :-
+		generate_neighbor(DeltaHook, State, Energy, Neighbor, NeighborEnergy, DeltaE),
 		(	DeltaE > 0 ->
 			% Uphill move: accumulate the delta
 			Count1 is Count0 + 1,
@@ -143,7 +144,7 @@
 			Sum1 is Sum0
 		),
 		N1 is N - 1,
-		sample_deltas(N1, Neighbor, NeighborEnergy, Count1, Sum1, Count, Sum).
+		sample_deltas(N1, DeltaHook, Neighbor, NeighborEnergy, Count1, Sum1, Count, Sum).
 
 	run(BestState, BestEnergy) :-
 		run(BestState, BestEnergy, _Statistics, []).
@@ -172,8 +173,12 @@
 			UpdateInterval is max(1, (TotalMaxSteps - 1) // Updates)
 		;	UpdateInterval is 0
 		),
+		hook_enabled(neighbor_state(_, _, _), DeltaHook),
+		hook_enabled(cooling_schedule(_, _, _), CoolingHook),
+		hook_enabled(stop_condition(_, _, _), StopHook),
+		Settings = settings(UpdateInterval, DeltaHook, CoolingHook, StopHook),
 		restart_loop(
-			Restarts, MaxSteps, MinTemp, UpdateInterval,
+			Restarts, MaxSteps, MinTemp, Settings,
 			Temp0, State0, Energy0,
 			State0, Energy0,
 			0, 0, 0,
@@ -192,7 +197,7 @@
 	% When Restarts > 0, run a cycle, then restart from the best
 	% state found with the initial temperature.
 
-	restart_loop(0, MaxSteps, MinTemp, UpdInt,
+	restart_loop(0, MaxSteps, MinTemp, Settings,
 				Temp, State, Energy,
 				BestState, BestEnergy,
 				StepOffset, AccIn, ImpIn,
@@ -200,29 +205,29 @@
 				FinalStep, FinalAccepts, FinalImproves, FinalTemp) :-
 		!,
 		EndStep is StepOffset + MaxSteps,
-		loop(StepOffset, EndStep, MinTemp, UpdInt,
+		loop(StepOffset, EndStep, MinTemp, Settings,
 				Temp, State, Energy,
 				BestState, BestEnergy,
-				StepOffset, AccIn, ImpIn,
+				AccIn, ImpIn,
 				FinalBest, FinalBestE,
 				FinalStep, FinalAccepts, FinalImproves, FinalTemp).
-	restart_loop(Restarts, MaxSteps, MinTemp, UpdInt,
+	restart_loop(Restarts, MaxSteps, MinTemp, Settings,
 				Temp, State, Energy,
 				BestState, BestEnergy,
 				StepOffset, AccIn, ImpIn,
 				FinalBest, FinalBestE,
 				FinalStep, FinalAccepts, FinalImproves, FinalTemp) :-
 		EndStep is StepOffset + MaxSteps,
-		loop(StepOffset, EndStep, MinTemp, UpdInt,
+		loop(StepOffset, EndStep, MinTemp, Settings,
 				Temp, State, Energy,
 				BestState, BestEnergy,
-				StepOffset, AccIn, ImpIn,
+				AccIn, ImpIn,
 				CycleBest, CycleBestE,
 				CycleStep, CycleAccepts, CycleImproves, _CycleTemp),
 		% Restart from best state with reset temperature
 		Restarts1 is Restarts - 1,
 		initial_temperature(NewTemp),
-		restart_loop(Restarts1, MaxSteps, MinTemp, UpdInt,
+		restart_loop(Restarts1, MaxSteps, MinTemp, Settings,
 					NewTemp, CycleBest, CycleBestE,
 					CycleBest, CycleBestE,
 					CycleStep, CycleAccepts, CycleImproves,
@@ -230,89 +235,107 @@
 					FinalStep, FinalAccepts, FinalImproves, FinalTemp).
 
 	% --- Main loop ---
-	% Arguments: Step, MaxSteps, MinTemp, UpdateInterval,
+	% Arguments: Step, MaxSteps, MinTemp, Settings,
 	%            Temp, State, Energy,
 	%            BestState, BestEnergy,
-	%            Trials, Accepts, Improves,
+	%            Accepts, Improves,
 	%            OutBest, OutBestE,
 	%            OutStep, OutAccepts, OutImproves, OutTemp
 
-	loop(Step, MaxSteps, _MinTemp, UpdInt,
+	loop(Step, MaxSteps, _MinTemp, settings(UpdInt, _, _, _),
 			Temp, _State, _Energy,
 			Best, BestE,
-			Trials, Accepts, Improves,
+			Accepts, Improves,
 			Best, BestE,
 			Step, Accepts, Improves, Temp) :-
 		% Stop: maximum steps reached
 		Step >= MaxSteps,
 		!,
-		report_final(Step, UpdInt, Trials, Accepts, Improves, Temp, BestE).
-	loop(Step, _MaxSteps, _MinTemp, UpdInt,
+		report_final(Step, UpdInt, Accepts, Improves, Temp, BestE).
+	loop(Step, _MaxSteps, _MinTemp, settings(UpdInt, _, _, true),
 			Temp, _State, _Energy,
 			Best, BestE,
-			Trials, Accepts, Improves,
+			Accepts, Improves,
 			Best, BestE,
 			Step, Accepts, Improves, Temp) :-
 		% Stop: problem-defined stop condition
 		stop_condition(Step, Temp, BestE),
 		!,
-		report_final(Step, UpdInt, Trials, Accepts, Improves, Temp, BestE).
-	loop(Step, _MaxSteps, MinTemp, UpdInt,
+		report_final(Step, UpdInt, Accepts, Improves, Temp, BestE).
+	loop(Step, _MaxSteps, MinTemp, settings(UpdInt, _, _, _),
 			Temp, _State, _Energy,
 			Best, BestE,
-			Trials, Accepts, Improves,
+			Accepts, Improves,
 			Best, BestE,
 			Step, Accepts, Improves, Temp) :-
 		% Stop: temperature below minimum
 		Temp =< MinTemp,
 		!,
-		report_final(Step, UpdInt, Trials, Accepts, Improves, Temp, BestE).
-	loop(Step, MaxSteps, MinTemp, UpdInt,
+		report_final(Step, UpdInt, Accepts, Improves, Temp, BestE).
+	loop(Step, MaxSteps, MinTemp, Settings,
 			Temp, State, Energy,
 			BestState, BestEnergy,
-			Trials, Accepts, Improves,
+			Accepts, Improves,
 			FinalBest, FinalBestE,
 			FinalStep, FinalAccepts, FinalImproves, FinalTemp) :-
+		Settings = settings(UpdInt, DeltaHook, CoolingHook, _),
 		% Generate neighbor (prefer delta-energy variant)
-		generate_neighbor(State, Energy, Neighbor, NeighborEnergy, DeltaE),
+		generate_neighbor(DeltaHook, State, Energy, Neighbor, NeighborEnergy, DeltaE),
 		% Accept or reject
-		Trials1 is Trials + 1,
 		(	accept(DeltaE, Temp) ->
-			NextState = Neighbor, NextEnergy = NeighborEnergy,
-			Accepts1 is Accepts + 1
-		;	NextState = State, NextEnergy = Energy,
-			Accepts1 is Accepts
-		),
-		% Track best
-		(	NeighborEnergy < BestEnergy ->
-			NewBest = Neighbor, NewBestE = NeighborEnergy,
-			Improves1 is Improves + 1
-		;	NewBest = BestState, NewBestE = BestEnergy,
+			NextState = Neighbor,
+			NextEnergy = NeighborEnergy,
+			Accepts1 is Accepts + 1,
+			(	NeighborEnergy < BestEnergy ->
+				NewBest = Neighbor,
+				NewBestE = NeighborEnergy,
+				Improves1 is Improves + 1
+			;	NewBest = BestState,
+				NewBestE = BestEnergy,
+				Improves1 is Improves
+			)
+		;	NextState = State,
+			NextEnergy = Energy,
+			Accepts1 is Accepts,
+			NewBest = BestState,
+			NewBestE = BestEnergy,
 			Improves1 is Improves
 		),
 		% Cool
-		cool(Temp, Step, NextTemp),
+		cool(CoolingHook, Temp, Step, NextTemp),
 		% Progress reporting
-		report_progress(Step, UpdInt, Trials1, Accepts1, Improves1, NextTemp, NewBestE),
-		% Next step
 		Step1 is Step + 1,
-		loop(Step1, MaxSteps, MinTemp, UpdInt,
+		report_progress(Step, UpdInt, Step1, Accepts1, Improves1, NextTemp, NewBestE),
+		% Next step
+		loop(Step1, MaxSteps, MinTemp, Settings,
 				NextTemp, NextState, NextEnergy,
 				NewBest, NewBestE,
-				Trials1, Accepts1, Improves1,
+				Accepts1, Improves1,
 				FinalBest, FinalBestE,
 				FinalStep, FinalAccepts, FinalImproves, FinalTemp).
 
 	% --- Neighbor generation ---
 	% Try neighbor_state/3 (with delta-E) first, fall back to neighbor_state/2
 
-	generate_neighbor(State, Energy, Neighbor, NeighborEnergy, DeltaE) :-
+	generate_neighbor(true, State, Energy, Neighbor, NeighborEnergy, DeltaE) :-
+		!,
 		(	neighbor_state(State, Neighbor, DeltaE) ->
 			NeighborEnergy is Energy + DeltaE
-		;	neighbor_state(State, Neighbor) ->
+		;	generate_neighbor(false, State, Energy, Neighbor, NeighborEnergy, DeltaE)
+		).
+	generate_neighbor(false, State, Energy, Neighbor, NeighborEnergy, DeltaE) :-
+		(	neighbor_state(State, Neighbor) ->
 			state_energy(Neighbor, NeighborEnergy),
 			DeltaE is NeighborEnergy - Energy
 		;	fail
+		).
+
+	hook_enabled(Head, Enabled) :-
+		(	(	_Problem_::predicate_property(Head, dynamic)
+			;	_Problem_::predicate_property(Head, defined_in(_))
+			) ->
+			Enabled = true
+		;	Enabled = false
 		).
 
 	% --- Boltzmann acceptance criterion ---
@@ -328,7 +351,9 @@
 
 	% --- Custom or default cooling schedule ---
 
-	cool(Temp, Step, NewTemp) :-
+	cool(false, Temp, _Step, NewTemp) :-
+		NewTemp is Temp * 0.995.
+	cool(true, Temp, Step, NewTemp) :-
 		(	cooling_schedule(Temp, Step, NewTemp) ->
 			true
 		;	% Default geometric cooling
@@ -338,19 +363,19 @@
 	% --- Progress reporting ---
 
 	report_progress(Step, UpdInt, Trials, Accepts, Improves, Temp, BestE) :-
-		UpdInt > 0,
-		Step > 0,
-		Step mod UpdInt =:= 0,
-		!,
-		call_progress(Step, Trials, Accepts, Improves, Temp, BestE).
-	report_progress(_Step, _UpdInt, _Trials, _Accepts, _Improves, _Temp, _BestE).
+		(	UpdInt > 0,
+			Step > 0,
+			Step mod UpdInt =:= 0 ->
+			call_progress(Step, Trials, Accepts, Improves, Temp, BestE)
+		;	true
+		).
 
 	% Final progress report on termination
-	report_final(Step, UpdInt, Trials, Accepts, Improves, Temp, BestE) :-
+	report_final(Step, UpdInt, Accepts, Improves, Temp, BestE) :-
 		UpdInt > 0,
 		!,
-		call_progress(Step, Trials, Accepts, Improves, Temp, BestE).
-	report_final(_Step, _UpdInt, _Trials, _Accepts, _Improves, _Temp, _BestE).
+		call_progress(Step, Step, Accepts, Improves, Temp, BestE).
+	report_final(_Step, _UpdInt, _Accepts, _Improves, _Temp, _BestE).
 
 	call_progress(Step, Trials, Accepts, Improves, Temp, BestE) :-
 		(	Trials > 0 ->

@@ -23,14 +23,18 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-10-21,
+		date is 2026-10-24,
 		comment is 'Unit tests for the "simulated_annealing" library.'
 	]).
 
 	:- uses(list, [
 		msort/2, length/2, member/2
+	]).
+
+	:- uses(lgtunit, [
+		op(700, xfx, =~=), (=~=)/2, assertion/1
 	]).
 
 	cover(simulated_annealing(_, _)).
@@ -164,6 +168,31 @@
 		quadratic_delta::reset_seed,
 		simulated_annealing(quadratic_delta)::run(_State, Energy, [seed(123)]).
 
+	test(simulated_annealing_failing_hooks_fallback, true) :-
+		quadratic::reset_seed,
+		simulated_annealing(quadratic)::run(State, Energy, Statistics, [seed(99), max_steps(100)]),
+		quadratic::reset_seed,
+		simulated_annealing(simulated_annealing_failing_hooks)::run(State, Energy, Statistics, [seed(99), max_steps(100)]).
+
+	test(simulated_annealing_failing_delta_temperature_fallback, true(Actual =~= Expected)) :-
+		quadratic::reset_seed,
+		simulated_annealing(quadratic)::estimate_temperature(Expected, [samples(100)]),
+		quadratic::reset_seed,
+		simulated_annealing(simulated_annealing_failing_hooks)::estimate_temperature(Actual, [samples(100)]).
+
+	test(simulated_annealing_inherited_delta_hook, true) :-
+		quadratic_delta::reset_seed,
+		simulated_annealing(quadratic_delta)::run(State, Energy, Statistics, [seed(99), max_steps(100)]),
+		quadratic_delta::reset_seed,
+		simulated_annealing(simulated_annealing_inherited_hooks)::run(State, Energy, Statistics, [seed(99), max_steps(100)]).
+
+	test(simulated_annealing_dynamic_hooks_added_during_run, true) :-
+		simulated_annealing(simulated_annealing_dynamic_hooks)::run(State, Energy, Statistics, [max_steps(10)]),
+		assertion(State == 0),
+		assertion(Energy == 0),
+		Statistics = [steps(2), acceptances(2), improvements(2), final_temperature(Temp)],
+		assertion(Temp =~= 5.0).
+
 	% progress reporting
 
 	test(sa_progress_updates_called, true(Count > 0)) :-
@@ -187,6 +216,33 @@
 	test(sa_progress_log_values, true((number(Step), Step > 0, number(Temp), Temp > 0.0, number(BestE), AccRate >= 0.0, AccRate =< 1.0, ImpRate >= 0.0, ImpRate =< 1.0))) :-
 		cached_progress(Log),
 		member(progress(Step, Temp, BestE, AccRate, ImpRate), Log).
+
+	test(simulated_annealing_progress_completed_steps, true([AccRate, ImpRate] =~= [ExpectedAccRate, ExpectedImpRate])) :-
+		quadratic_progress::clear_log,
+		quadratic_progress::reset_seed,
+		simulated_annealing(quadratic_progress)::run(_State, Energy, Statistics, [seed(99), max_steps(5), updates(1)]),
+		Statistics = [steps(5), acceptances(Accepts), improvements(Improves), final_temperature(Temp)],
+		findall(progress(Step, Temperature, Best, Acc, Imp), quadratic_progress::progress_log(Step, Temperature, Best, Acc, Imp), Log),
+		Log = [progress(4, Temp, Energy, AccRate, ImpRate), progress(5, Temp, Energy, AccRate, ImpRate)],
+		ExpectedAccRate is Accepts / 5,
+		ExpectedImpRate is Improves / 5.
+
+	test(simulated_annealing_progress_restart_cumulative_rates, true([AccRate, ImpRate] =~= [ExpectedAccRate, ExpectedImpRate])) :-
+		quadratic_progress::clear_log,
+		quadratic_progress::reset_seed,
+		simulated_annealing(quadratic_progress)::run(_State, Energy, Statistics, [seed(99), max_steps(5), restarts(1), updates(1)]),
+		Statistics = [steps(10), acceptances(Accepts), improvements(Improves), final_temperature(Temp)],
+		findall(progress(Step, Temperature, Best, Acc, Imp), quadratic_progress::progress_log(Step, Temperature, Best, Acc, Imp), Log),
+		Log = [progress(5, _, _, _, _), progress(9, Temp, Energy, AccRate, ImpRate), progress(10, Temp, Energy, AccRate, ImpRate)],
+		ExpectedAccRate is Accepts / 10,
+		ExpectedImpRate is Improves / 10.
+
+	test(simulated_annealing_progress_zero_step_restarts, true([AccRate, ImpRate] =~= [0.0, 0.0])) :-
+		quadratic_progress::clear_log,
+		simulated_annealing(quadratic_progress)::run(_State, Energy, Statistics, [seed(99), min_temperature(2000.0), restarts(2), updates(1)]),
+		Statistics = [steps(0), acceptances(0), improvements(0), final_temperature(Temp)],
+		findall(progress(Step, Temperature, Best, Acc, Imp), quadratic_progress::progress_log(Step, Temperature, Best, Acc, Imp), Log),
+		Log = [progress(0, Temp, Energy, AccRate, ImpRate), progress(0, Temp, Energy, AccRate, ImpRate), progress(0, Temp, Energy, AccRate, ImpRate)].
 
 	% reheating restarts
 

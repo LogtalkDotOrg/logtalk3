@@ -36,7 +36,8 @@
 		'test_files/quadratic_stop',
 		'test_files/quadratic_delta',
 		'test_files/quadratic_progress',
-		'test_files/tsp'
+		'test_files/tsp',
+		'test_files/hooks'
 	], [
 		optimize(on)
 	]),

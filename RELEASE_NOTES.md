@@ -195,8 +195,8 @@ references, reduced repeated training in tests, added focused and
 larger-workload benchmarks, and updated documentation.
 
 * IMPROVED: Performance of the `crypto`, `http_websocket_frames`,
-`isolation_forest_anomaly_detector`, and `logistic_regression_classifier`
-libraries.
+`isolation_forest_anomaly_detector`, `logistic_regression_classifier`, and
+`simulated_annealing` libraries.
 
 * IMPROVED: Performance of the `random` library `circular_uniform_polar/3`,
 `logseries/2`, `standard_normal/1`, and `von_mises/3` sampling predicates.
