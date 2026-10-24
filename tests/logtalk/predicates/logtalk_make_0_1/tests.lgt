@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:7:0,
+		version is 0:8:0,
 		author is 'Paulo Moura',
-		date is 2023-04-10,
+		date is 2026-10-24,
 		comment is 'Unit tests for the logtalk_make/0-1 built-in predicates.'
 	]).
 
@@ -136,30 +136,26 @@
 		main_file(Main),
 		open(Main, write, Stream),
 		included_file(Included),
-		writeq(Stream, (:- include(Included))), write(Stream, '.\n\n'),
-		write(Stream, foo(1)), write(Stream, '.\n'),
-		write(Stream, foo(2)), write(Stream, '.\n'),
-		write(Stream, foo(3)), write(Stream, '.\n'),
+		writeq(Stream, (:- include(Included))),
+		write(Stream, '.\n\nfoo(1).\nfoo(2).\nfoo(3).\n'),
 		close(Stream).
 
 	update_main_file(Main) :-
 		main_file(Main),
 		open(Main, append, Stream),
-		write(Stream, foo(4)), write(Stream, '.\n'),
+		write(Stream, 'foo(4).\n'),
 		close(Stream).
 
 	create_included_file(Included) :-
 		included_file(Included),
 		open(Included, write, Stream),
-		write(Stream, bar(1)), write(Stream, '.\n'),
-		write(Stream, bar(2)), write(Stream, '.\n'),
-		write(Stream, bar(3)), write(Stream, '.\n'),
+		write(Stream, 'bar(1).\nbar(2).\nbar(3).\n'),
 		close(Stream).
 
 	update_included_file(Included) :-
 		included_file(Included),
 		open(Included, append, Stream),
-		write(Stream, bar(4)), write(Stream, '.\n'),
+		write(Stream, 'bar(4).\n'),
 		close(Stream).
 
 	% define target actions for the tests
