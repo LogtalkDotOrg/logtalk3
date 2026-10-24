@@ -66,6 +66,14 @@ Alternatively, supply the ``model(auto)`` option to compare candidate
 methods using AICc or holdout validation. The default method is
 ``simple``.
 
+Automatic AICc model selection and automatic frequency selection reuse
+the winning candidate's fitted state and parameters without repeating
+its optimizer run. Holdout model selection fits the selected method on
+the full series after scoring candidates on the training prefix.
+Candidate diagnostics retain their original order, with model-score ties
+resolved by candidate order and frequency-score ties resolved by
+shortlist order.
+
 Simple smoothing requires at least two observations. Holt smoothing
 requires at least three. Seasonal smoothing requires at least two full
 cycles plus one observation, i.e. ``2*Frequency + 1`` observations.

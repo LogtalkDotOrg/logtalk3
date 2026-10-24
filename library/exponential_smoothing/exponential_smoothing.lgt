@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-14,
+		date is 2026-10-24,
 		comment is 'Simple, Holt linear-trend, and additive or multiplicative Holt-Winters exponential smoothing forecaster.',
 		see_also is [forecaster_protocol, time_series_dataset_protocol]
 	]).
@@ -79,7 +79,7 @@
 		^^option(missing_policy(MissingPolicy), Options),
 		^^dataset_series(Dataset, RawSeries),
 		check_series_policy(Dataset, RawSeries, MissingPolicy),
-		check_observations(RawSeries, MissingPolicy, ObservedCount, MissingCount),
+		check_observations(MissingPolicy, RawSeries, ObservedCount, MissingCount),
 		fit_transformation(
 			Transformation, Dataset, Method, RawSeries, MissingPolicy, UserOptions, Options,
 			EffectiveTransformation, EffectiveOptions, SelectedMethod, SelectionDiagnostic, FitResult
@@ -103,11 +103,12 @@
 			EffectiveOptions, ResidualsDiagnostic,
 			SelectionDiagnostic, FreqDiag, Diagnostics
 		),
-		Forecaster = exponential_smoothing_forecaster(SelectedMethod, State, Parameters, Diagnostics),
-		!.
+		Forecaster = exponential_smoothing_forecaster(SelectedMethod, State, Parameters, Diagnostics).
 
-	fit_transformation(box_cox(auto), Dataset, Method, RawSeries, MissingPolicy, UserOptions, Options,
-			box_cox(Lambda), EffectiveOptions, SelectedMethod, SelectionDiagnostic, FitResult) :-
+	fit_transformation(
+		box_cox(auto), Dataset, Method, RawSeries, MissingPolicy, UserOptions, Options,
+		box_cox(Lambda), EffectiveOptions, SelectedMethod, SelectionDiagnostic, FitResult
+	) :-
 		!,
 		check_positive_transformation_series(RawSeries, MissingPolicy),
 		^^option(box_cox_bounds(Lower, Upper), Options),
@@ -115,8 +116,10 @@
 			Lower, Upper, Dataset, Method, RawSeries, MissingPolicy, UserOptions, Options,
 			Lambda, EffectiveOptions, SelectedMethod, SelectionDiagnostic, FitResult
 		).
-	fit_transformation(Transformation, Dataset, Method, RawSeries, MissingPolicy, UserOptions, Options,
-			Transformation, Options, SelectedMethod, SelectionDiagnostic, FitResult) :-
+	fit_transformation(
+		Transformation, Dataset, Method, RawSeries, MissingPolicy, UserOptions, Options,
+		Transformation, Options, SelectedMethod, SelectionDiagnostic, FitResult
+	) :-
 		prepare_series(Transformation, RawSeries, MissingPolicy, Series),
 		fit_selected_model(Dataset, Method, RawSeries, Series, UserOptions, Options, false, SelectedMethod, SelectionDiagnostic, FitResult).
 
@@ -128,8 +131,10 @@
 		check_relevant_parameter_options(Method, UserOptions),
 		fit_forecaster_core(Dataset, Method, Series, Options, LambdaAutomatic, FitResult).
 
-	optimize_box_cox(Lower, Upper, Dataset, Method, RawSeries, MissingPolicy, UserOptions, Options,
-			Lambda, EffectiveOptions, SelectedMethod, SelectionDiagnostic, FitResult) :-
+	optimize_box_cox(
+		Lower, Upper, Dataset, Method, RawSeries, MissingPolicy, UserOptions, Options,
+		Lambda, EffectiveOptions, SelectedMethod, SelectionDiagnostic, FitResult
+	) :-
 		GoldenRatio is (sqrt(5.0) - 1.0) / 2.0,
 		LeftLambda is Upper - GoldenRatio * (Upper - Lower),
 		RightLambda is Lower + GoldenRatio * (Upper - Lower),
@@ -141,12 +146,16 @@
 		),
 		BestCandidate = box_cox_candidate(Lambda, _Objective, EffectiveOptions, SelectedMethod, SelectionDiagnostic, FitResult).
 
-	golden_section_box_cox(0, _Lower, _Upper, LeftCandidate, RightCandidate, _GoldenRatio,
-			_Dataset, _Method, _RawSeries, _MissingPolicy, _UserOptions, _Options, BestCandidate) :-
+	golden_section_box_cox(
+		0, _Lower, _Upper, LeftCandidate, RightCandidate, _GoldenRatio,
+		_Dataset, _Method, _RawSeries, _MissingPolicy, _UserOptions, _Options, BestCandidate
+	) :-
 		!,
 		better_box_cox_candidate(LeftCandidate, RightCandidate, BestCandidate).
-	golden_section_box_cox(Iterations, Lower, Upper, LeftCandidate, RightCandidate, GoldenRatio,
-			Dataset, Method, RawSeries, MissingPolicy, UserOptions, Options, BestCandidate) :-
+	golden_section_box_cox(
+		Iterations, Lower, Upper, LeftCandidate, RightCandidate, GoldenRatio,
+		Dataset, Method, RawSeries, MissingPolicy, UserOptions, Options, BestCandidate
+	) :-
 		LeftCandidate = box_cox_candidate(LeftLambda, LeftObjective, _LeftOptions, _LeftMethod, _LeftSelection, _LeftFit),
 		RightCandidate = box_cox_candidate(RightLambda, RightObjective, _RightOptions, _RightMethod, _RightSelection, _RightFit),
 		NextIterations is Iterations - 1,
@@ -167,10 +176,12 @@
 			)
 		).
 
-	evaluate_box_cox_lambda(Lambda, Dataset, Method, RawSeries, MissingPolicy, UserOptions, Options,
-			box_cox_candidate(Lambda, Objective, EffectiveOptions, SelectedMethod, SelectionDiagnostic, FitResult)) :-
+	evaluate_box_cox_lambda(
+		Lambda, Dataset, Method, RawSeries, MissingPolicy, UserOptions, Options,
+		box_cox_candidate(Lambda, Objective, EffectiveOptions, SelectedMethod, SelectionDiagnostic, FitResult)
+	) :-
 		Transformation = box_cox(Lambda),
-		transform_series(Transformation, RawSeries, MissingPolicy, Series),
+		transform_series(RawSeries, Transformation, MissingPolicy, Series),
 		replace_option(transformation, transformation(Transformation), Options, EffectiveOptions),
 		fit_selected_model(Dataset, Method, RawSeries, Series, UserOptions, EffectiveOptions, true, SelectedMethod, SelectionDiagnostic, FitResult),
 		FitResult = fit_result(
@@ -219,8 +230,7 @@
 		^^update_smoothing(Method, InnerState, Parameters, UpdateObservation, UpdatedInnerState, SumSquaredErrorIncrement, StepResiduals),
 		updated_forecaster_diagnostics(Diagnostics, Missing, SumSquaredErrorIncrement, StepResiduals, UpdatedDiagnostics, MeanSquaredError),
 		wrap_state(Transformation, UpdatedInnerState, MeanSquaredError, UpdatedState),
-		UpdatedForecaster = exponential_smoothing_forecaster(Method, UpdatedState, Parameters, UpdatedDiagnostics),
-		!.
+		UpdatedForecaster = exponential_smoothing_forecaster(Method, UpdatedState, Parameters, UpdatedDiagnostics).
 
 	prepare_update_observation(Method, State, Observation, MissingPolicy, UpdateObservation, Missing) :-
 		check_update_observation(Observation, MissingPolicy, Missing),
@@ -408,9 +418,11 @@
 		Level < 1.0.
 	valid_interval_option(method(residual_bootstrap)).
 	valid_interval_option(samples(Count)) :-
-		valid(positive_integer, Count).
+		integer(Count),
+		Count > 0.
 	valid_interval_option(seed(Seed)) :-
-		valid(positive_integer, Seed).
+		integer(Seed),
+		Seed > 0.
 
 	default_interval_option(confidence(0.95)).
 	default_interval_option(method(residual_bootstrap)).
@@ -420,13 +432,17 @@
 	bootstrap_quantile_bounds(InnerPointForecasts, Residuals, Samples, Seed, Transformation, BiasAdjustment, Variance, Confidence, PointForecasts, Lower, Upper) :-
 		length(InnerPointForecasts, Horizon),
 		empty_columns(Horizon, Columns0),
-		run_with_isolated_seed(
-			Seed,
-			collect_bootstrap_columns(Samples, InnerPointForecasts, Residuals, Transformation, BiasAdjustment, Variance, Columns0, Columns)
-		),
-		LowerQuantile is (1.0 - Confidence) / 2.0,
-		UpperQuantile is 1.0 - LowerQuantile,
-		quantile_bounds(Columns, LowerQuantile, UpperQuantile, PointForecasts, Lower, Upper).
+		% run with isolated random seed
+		fast_random(as183)::get_seed(SavedSeed),
+		fast_random(as183)::randomize(Seed),
+		catch(once(collect_bootstrap_columns(Samples, InnerPointForecasts, Residuals, Transformation, BiasAdjustment, Variance, Columns0, Columns)), Error, true),
+		fast_random(as183)::set_seed(SavedSeed),
+		(	var(Error) ->
+			LowerQuantile is (1.0 - Confidence) / 2.0,
+			UpperQuantile is 1.0 - LowerQuantile,
+			quantile_bounds(Columns, LowerQuantile, UpperQuantile, PointForecasts, Lower, Upper)
+		;	throw(Error)
+		).
 
 	empty_columns(0, []) :-
 		!.
@@ -481,18 +497,6 @@
 		!.
 	clamp_index(Index, _Count, Index).
 
-	:- meta_predicate(run_with_isolated_seed(*, 0)).
-
-	run_with_isolated_seed(Seed, Goal) :-
-		fast_random(as183)::get_seed(SavedSeed),
-		fast_random(as183)::randomize(Seed),
-		catch(once(Goal), Error, true),
-		fast_random(as183)::set_seed(SavedSeed),
-		(	var(Error) ->
-			true
-		;	throw(Error)
-		).
-
 	check_forecaster(Forecaster) :-
 		(	var(Forecaster) ->
 			instantiation_error
@@ -511,17 +515,21 @@
 		valid_transformation_diagnostics(State, Options),
 		unwrap_state(State, InnerState),
 		memberchk(training_series_length(TrainingSeriesLength), Diagnostics),
-		valid(positive_integer, TrainingSeriesLength),
+		integer(TrainingSeriesLength),
+		TrainingSeriesLength > 0,
 		memberchk(observed_count(ObservedCount), Diagnostics),
-		valid(positive_integer, ObservedCount),
+		integer(ObservedCount),
+		ObservedCount > 0,
 		memberchk(missing_count(MissingCount), Diagnostics),
-		valid(non_negative_integer, MissingCount),
+		integer(MissingCount),
+		MissingCount >= 0,
 		TrainingSeriesLength =:= ObservedCount + MissingCount,
 		memberchk(scored_count(ScoredCount), Diagnostics),
-		valid(positive_integer, ScoredCount),
-		ScoredCount =< ObservedCount,
+		integer(ScoredCount),
+		0 < ScoredCount, ScoredCount =< ObservedCount,
 		memberchk(update_count(UpdateCount), Diagnostics),
-		valid(non_negative_integer, UpdateCount),
+		integer(UpdateCount),
+		UpdateCount >= 0,
 		memberchk(method(Method), Diagnostics),
 		valid_frequency_diagnostics(Method, InnerState, Diagnostics),
 		valid_frequency_selection_diagnostics(Method, Options, Diagnostics),
@@ -535,9 +543,11 @@
 		memberchk(optimizer(Optimizer), Diagnostics),
 		memberchk(convergence(Convergence), Diagnostics),
 		memberchk(iterations(Iterations), Diagnostics),
-		valid(non_negative_integer, Iterations),
+		integer(Iterations),
+		Iterations >= 0,
 		memberchk(evaluations(Evaluations), Diagnostics),
-		valid(non_negative_integer, Evaluations),
+		integer(Evaluations),
+		Evaluations >= 0,
 		valid_convergence(AutomaticParameters, Optimizer, Convergence, Iterations, Evaluations, OptimizerOptions).
 
 	valid_diagnostic_options(Method, Parameters, Options, Diagnostics, AutomaticParameters, Optimizer, OptimizerOptions) :-
@@ -598,15 +608,15 @@
 
 	valid_frequency_candidate(candidate(Frequency, ok, Score)) :-
 		!,
-		valid(positive_integer, Frequency),
+		integer(Frequency),
 		Frequency >= 2,
 		^^finite_number(Score).
 	valid_frequency_candidate(candidate(Frequency, rejected(insufficient_observations), none)) :-
 		!,
-		valid(positive_integer, Frequency),
+		integer(Frequency),
 		Frequency >= 2.
 	valid_frequency_candidate(candidate(Frequency, rejected(non_positive_autocorrelation), Score)) :-
-		valid(positive_integer, Frequency),
+		integer(Frequency),
 		Frequency >= 2,
 		^^finite_number(Score).
 
@@ -697,7 +707,8 @@
 		optimizer_maximum_iterations(OptimizerOptions, MaximumIterations),
 		Iterations >= MaximumIterations.
 	valid_convergence(automatic, multi_start(Starts), Convergence, Iterations, Evaluations, _OptimizerOptions) :-
-		valid(positive_integer, Starts),
+		integer(Starts),
+		Starts > 0,
 		Evaluations > 0,
 		Iterations >= 0,
 		memberchk(Convergence, [converged, maximum_iterations]).
@@ -810,6 +821,12 @@
 	% model- and frequency-selection candidate evaluation
 
 	fit_forecaster_core(Dataset, Method, Series, Options, LambdaAutomatic, FitResult) :-
+		seasonal_method(Method),
+		^^option(frequency(FrequencyOption), Options),
+		FrequencyOption == auto,
+		!,
+		select_frequency_auto(Dataset, Method, Series, Options, LambdaAutomatic, _Frequency, _FreqDiag, FitResult).
+	fit_forecaster_core(Dataset, Method, Series, Options, LambdaAutomatic, FitResult) :-
 		(	seasonal_method(Method) ->
 			resolve_seasonal_frequency(Dataset, Method, Series, Options, LambdaAutomatic, Frequency, FreqDiag)
 		;	Frequency = none,
@@ -843,9 +860,6 @@
 			Frequency = Frequency0
 		;	domain_error(seasonal_frequency, Dataset)
 		).
-	resolve_seasonal_frequency_(auto, Dataset, Method, Series, Options, LambdaAutomatic, Frequency, FreqDiag) :-
-		!,
-		select_frequency_auto(Dataset, Method, Series, Options, LambdaAutomatic, Frequency, FreqDiag).
 	resolve_seasonal_frequency_(Frequency, _Dataset, _Method, _Series, _Options, _LambdaAutomatic, Frequency, none) :-
 		integer(Frequency).
 
@@ -854,7 +868,7 @@
 	% autocorrelation-ranked shortlist is then evaluated through an AICc fit (not
 	% autocorrelation alone) so the final choice reflects actual model fit quality
 
-	select_frequency_auto(Dataset, Method, Series, Options, LambdaAutomatic, SelectedFrequency, FreqDiag) :-
+	select_frequency_auto(Dataset, Method, Series, Options, LambdaAutomatic, SelectedFrequency, FreqDiag, FitResult) :-
 		^^option(frequency_candidates(RawCandidates), Options),
 		(	RawCandidates == none ->
 			domain_error(missing_frequency_candidates, Method)
@@ -868,10 +882,11 @@
 			domain_error(no_viable_frequency_candidate, Method)
 		;	true
 		),
-		evaluate_frequency_shortlist(ShortList, Dataset, Method, Series, Options, LambdaAutomatic, EvaluatedShortlist),
-		select_best_frequency(EvaluatedShortlist, SelectedFrequency, Found),
-		(	Found == yes ->
-			FreqDiag = frequency_selection(candidates(CandidateTerms), selected(SelectedFrequency))
+		evaluate_frequency_shortlist(ShortList, Dataset, Method, Series, Options, LambdaAutomatic, none, Best),
+		(	Best = selection(candidate(SelectedFrequency, ok, _Score), BestFit) ->
+			FreqDiag = frequency_selection(candidates(CandidateTerms), selected(SelectedFrequency)),
+			BestFit = fit_result(State, Parameters, SumSquaredError, ErrorCount, Convergence, Iterations, Evaluations, Residuals, ParameterSpecification, SelectedFrequency, _),
+			FitResult = fit_result(State, Parameters, SumSquaredError, ErrorCount, Convergence, Iterations, Evaluations, Residuals, ParameterSpecification, SelectedFrequency, FreqDiag)
 		;	domain_error(no_viable_frequency_candidate, Method)
 		).
 
@@ -994,47 +1009,41 @@
 		N1 is N - 1,
 		top_n(Values, N1, Result).
 
-	evaluate_frequency_shortlist([], _Dataset, _Method, _Series, _Options, _LambdaAutomatic, []).
-	evaluate_frequency_shortlist([Frequency| Frequencies], Dataset, Method, Series, Options, LambdaAutomatic, [Term| Terms]) :-
-		evaluate_frequency_candidate(Dataset, Method, Series, Options, LambdaAutomatic, Frequency, Term),
-		evaluate_frequency_shortlist(Frequencies, Dataset, Method, Series, Options, LambdaAutomatic, Terms).
+	evaluate_frequency_shortlist([], _Dataset, _Method, _Series, _Options, _LambdaAutomatic, Best, Best).
+	evaluate_frequency_shortlist([Frequency| Frequencies], Dataset, Method, Series, Options, LambdaAutomatic, Best0, Best) :-
+		evaluate_frequency_candidate(Dataset, Method, Series, Options, LambdaAutomatic, Frequency, Candidate, FitResult),
+		(	Best0 == none ->
+			Best1 = selection(Candidate, FitResult)
+		;	Best0 = selection(BestCandidate, _),
+			(	better_frequency_candidate(Candidate, BestCandidate) ->
+				Best1 = selection(Candidate, FitResult)
+			;	Best1 = Best0
+			)
+		),
+		evaluate_frequency_shortlist(Frequencies, Dataset, Method, Series, Options, LambdaAutomatic, Best1, Best).
 
-	evaluate_frequency_candidate(Dataset, Method, Series, Options, LambdaAutomatic, Frequency, candidate(Frequency, Status, Score)) :-
+	evaluate_frequency_candidate(Dataset, Method, Series, Options, LambdaAutomatic, Frequency, candidate(Frequency, Status, Score), FitResult) :-
 		replace_option(frequency, frequency(Frequency), Options, FrequencyOptions),
 		catch(
-			(	fit_forecaster_core(Dataset, Method, Series, FrequencyOptions, LambdaAutomatic, FitResult) ->
-				FitResult = fit_result(
+			(	fit_forecaster_core(Dataset, Method, Series, FrequencyOptions, LambdaAutomatic, CandidateFit) ->
+				CandidateFit = fit_result(
 					_State, _Parameters, SumSquaredError, ErrorCount, _Convergence, _Iterations, _Evaluations,
 					_Residuals, ParameterSpecification, _ResultFrequency, _FitFreqDiag
 				),
 				^^option(initialization(Initialization), Options),
 				aicc_score(Method, Frequency, Initialization, SumSquaredError, ErrorCount, ParameterSpecification, LambdaAutomatic, Score0),
 				Status = ok,
-				Score = Score0
+				Score = Score0,
+				FitResult = CandidateFit
 			;	Status = rejected(evaluation_failed),
-				Score = none
+				Score = none,
+				FitResult = none
 			),
 			Error,
 			(	Status = rejected(Error),
-				Score = none
+				Score = none,
+				FitResult = none
 			)
-		).
-
-	select_best_frequency([], none, no).
-	select_best_frequency([First| Rest], SelectedFrequency, Found) :-
-		select_best_frequency_(Rest, First, Best),
-		(	Best = candidate(BestFrequency, ok, _Score) ->
-			SelectedFrequency = BestFrequency,
-			Found = yes
-		;	Found = no,
-			SelectedFrequency = none
-		).
-
-	select_best_frequency_([], Best, Best).
-	select_best_frequency_([Candidate| Candidates], Best0, Best) :-
-		(	better_frequency_candidate(Candidate, Best0) ->
-			select_best_frequency_(Candidates, Candidate, Best)
-		;	select_best_frequency_(Candidates, Best0, Best)
 		).
 
 	better_frequency_candidate(candidate(_Frequency, ok, Score), candidate(_BestFrequency, ok, BestScore)) :-
@@ -1055,11 +1064,13 @@
 			domain_error(no_viable_candidate, Dataset)
 		;	true
 		),
-		evaluate_candidates(CandidateMethods, Dataset, RawSeries, Series, Options, LambdaAutomatic, Criterion, CandidateTerms),
-		select_best_candidate(CandidateTerms, BestCandidate),
-		(	BestCandidate = candidate(SelectedMethod, ok, _Score, _Parameters) ->
+		evaluate_candidates(CandidateMethods, Dataset, RawSeries, Series, Options, LambdaAutomatic, Criterion, none, CandidateTerms, Best),
+		(	Best = selection(candidate(SelectedMethod, ok, _Score, _Parameters), BestFit) ->
 			SelectionDiagnostic = model_selection(criterion(Criterion), candidates(CandidateTerms), selected(SelectedMethod)),
-			fit_forecaster_core(Dataset, SelectedMethod, Series, Options, LambdaAutomatic, FitResult)
+			(	Criterion == aicc ->
+				FitResult = BestFit
+			;	fit_forecaster_core(Dataset, SelectedMethod, Series, Options, LambdaAutomatic, FitResult)
+			)
 		;	domain_error(no_viable_candidate, Dataset)
 		).
 
@@ -1098,27 +1109,38 @@
 		;	integer(FrequencyOption)
 		).
 
-	evaluate_candidates([], _Dataset, _RawSeries, _Series, _Options, _LambdaAutomatic, _Criterion, []).
-	evaluate_candidates([Method| Methods], Dataset, RawSeries, Series, Options, LambdaAutomatic, Criterion, [Term| Terms]) :-
+	evaluate_candidates([], _Dataset, _RawSeries, _Series, _Options, _LambdaAutomatic, _Criterion, Best, [], Best).
+	evaluate_candidates([Method| Methods], Dataset, RawSeries, Series, Options, LambdaAutomatic, Criterion, Best0, [Candidate| Terms], Best) :-
 		replace_option(model, model(Method), Options, CandidateOptions),
-		evaluate_candidate(Dataset, Method, RawSeries, Series, CandidateOptions, LambdaAutomatic, Criterion, Term),
-		evaluate_candidates(Methods, Dataset, RawSeries, Series, Options, LambdaAutomatic, Criterion, Terms).
+		evaluate_candidate(Dataset, Method, RawSeries, Series, CandidateOptions, LambdaAutomatic, Criterion, Candidate, FitResult),
+		(	Best0 == none ->
+			Best1 = selection(Candidate, FitResult)
+		;	Best0 = selection(BestCandidate, _),
+			(	better_candidate(Candidate, BestCandidate) ->
+				Best1 = selection(Candidate, FitResult)
+			;	Best1 = Best0
+			)
+		),
+		evaluate_candidates(Methods, Dataset, RawSeries, Series, Options, LambdaAutomatic, Criterion, Best1, Terms, Best).
 
-	evaluate_candidate(Dataset, Method, RawSeries, Series, Options, LambdaAutomatic, Criterion, candidate(Method, Status, Score, Parameters)) :-
+	evaluate_candidate(Dataset, Method, RawSeries, Series, Options, LambdaAutomatic, Criterion, candidate(Method, Status, Score, Parameters), FitResult) :-
 		catch(
-			(	evaluate_candidate_ok(Dataset, Method, RawSeries, Series, Options, LambdaAutomatic, Criterion, Score0, Parameters0) ->
+			(	evaluate_candidate_ok(Dataset, Method, RawSeries, Series, Options, LambdaAutomatic, Criterion, Score0, Parameters0, CandidateFit) ->
 				Status = ok,
 				Score = Score0,
-				Parameters = Parameters0
+				Parameters = Parameters0,
+				FitResult = CandidateFit
 			;	Status = rejected(evaluation_failed),
 				Score = none,
-				Parameters = none
+				Parameters = none,
+				FitResult = none
 			),
 			Error,
 			(	candidate_rejection_reason(Error, Reason),
 				Status = rejected(Reason),
 				Score = none,
-				Parameters = none
+				Parameters = none,
+				FitResult = none
 			)
 		).
 
@@ -1126,7 +1148,7 @@
 		!.
 	candidate_rejection_reason(Error, Error).
 
-	evaluate_candidate_ok(Dataset, Method, _RawSeries, Series, Options, LambdaAutomatic, aicc, Score, Parameters) :-
+	evaluate_candidate_ok(Dataset, Method, _RawSeries, Series, Options, LambdaAutomatic, aicc, Score, Parameters, FitResult) :-
 		!,
 		fit_forecaster_core(Dataset, Method, Series, Options, LambdaAutomatic, FitResult),
 		FitResult = fit_result(
@@ -1135,7 +1157,7 @@
 		),
 		^^option(initialization(Initialization), Options),
 		aicc_score(Method, Frequency, Initialization, SumSquaredError, ErrorCount, ParameterSpecification, LambdaAutomatic, Score).
-	evaluate_candidate_ok(Dataset, Method, RawSeries, Series, Options, LambdaAutomatic, validation(ValidationSize), Score, Parameters) :-
+	evaluate_candidate_ok(Dataset, Method, RawSeries, Series, Options, LambdaAutomatic, validation(ValidationSize), Score, Parameters, none) :-
 		validation_score(Dataset, Method, RawSeries, Series, Options, LambdaAutomatic, ValidationSize, Score, Parameters).
 
 	validation_score(Dataset, Method, RawSeries, Series, Options, LambdaAutomatic, ValidationSize, Score, Parameters) :-
@@ -1222,16 +1244,6 @@
 		!,
 		Count is Frequency + 1.
 	count_optimized_initial_parameters(_Initialization, _Method, _Frequency, 0).
-
-	select_best_candidate([First| Rest], Best) :-
-		select_best_candidate_(Rest, First, Best).
-
-	select_best_candidate_([], Best, Best).
-	select_best_candidate_([Candidate| Candidates], Best0, Best) :-
-		(	better_candidate(Candidate, Best0) ->
-			select_best_candidate_(Candidates, Candidate, Best)
-		;	select_best_candidate_(Candidates, Best0, Best)
-		).
 
 	better_candidate(candidate(_Method, ok, Score, _Parameters), candidate(_BestMethod, ok, BestScore, _BestParameters)) :-
 		!,
@@ -1536,10 +1548,10 @@
 		;	domain_error(finite_number, Value)
 		).
 
-	check_observations(Series, error, ObservedCount, 0) :-
+	check_observations(error, Series, ObservedCount, 0) :-
 		check_finite_series(Series),
 		length(Series, ObservedCount).
-	check_observations(Series, skip_update, ObservedCount, MissingCount) :-
+	check_observations(skip_update, Series, ObservedCount, MissingCount) :-
 		check_observations_(Series, 0, 0, ObservedCount, MissingCount).
 
 	check_observations_([], ObservedCount, MissingCount, ObservedCount, MissingCount).
@@ -1556,7 +1568,8 @@
 		check_observations_(Values, ObservedCount1, MissingCount1, ObservedCount, MissingCount).
 
 	check_series_policy(Dataset, Series, error) :-
-		^^check_series(Dataset, Series).
+		^^check_series(Dataset, Series),
+		!.
 	check_series_policy(_Dataset, _Series, skip_update).
 
 	% transformations
@@ -1583,7 +1596,7 @@
 		!.
 	prepare_series(Transformation, Series, MissingPolicy, TransformedSeries) :-
 		check_positive_transformation_series(Series, MissingPolicy),
-		transform_series(Transformation, Series, MissingPolicy, TransformedSeries).
+		transform_series(Series, Transformation, MissingPolicy, TransformedSeries).
 
 	check_positive_transformation_series([], _MissingPolicy).
 	check_positive_transformation_series([Value| Values], skip_update) :-
@@ -1596,17 +1609,16 @@
 		;	domain_error(positive_transformation_series, Value)
 		).
 
-	transform_series(_Transformation, [], _MissingPolicy, []).
-	transform_series(Transformation, [Value| Values], skip_update, [Value| Transformeds]) :-
+	transform_series([], _Transformation, _MissingPolicy, []).
+	transform_series([Value| Values], Transformation, skip_update, [Value| Transformeds]) :-
 		var(Value),
 		!,
-		transform_series(Transformation, Values, skip_update, Transformeds).
-	transform_series(Transformation, [Value| Values], MissingPolicy, [Transformed| Transformeds]) :-
+		transform_series(Values, Transformation, skip_update, Transformeds).
+	transform_series([Value| Values], Transformation, MissingPolicy, [Transformed| Transformeds]) :-
 		apply_transform(Transformation, Value, Transformed),
-		transform_series(Transformation, Values, MissingPolicy, Transformeds).
+		transform_series(Values, Transformation, MissingPolicy, Transformeds).
 
 	apply_transform(log, Value, Transformed) :-
-		!,
 		Transformed is log(Value).
 	apply_transform(box_cox(Lambda), Value, Transformed) :-
 		(	near_zero_lambda(Lambda) ->
@@ -1697,7 +1709,7 @@
 		\+ damped_seasonal_method(Method),
 		^^finite_number(Level),
 		^^finite_number(Trend),
-		valid(positive_integer, Frequency),
+		integer(Frequency),
 		Frequency >= 2,
 		valid(list(number), SeasonalQueue),
 		length(SeasonalQueue, Frequency),
@@ -1711,7 +1723,7 @@
 		^^finite_number(Level),
 		^^finite_number(Trend),
 		valid_damping_parameter(Phi),
-		valid(positive_integer, Frequency),
+		integer(Frequency),
 		Frequency >= 2,
 		valid(list(number), SeasonalQueue),
 		length(SeasonalQueue, Frequency),
@@ -1807,7 +1819,7 @@
 	valid_option(initialization(Initialization)) :-
 		once((Initialization == two_cycles; Initialization == regression; Initialization == optimized)).
 	valid_option(initial_cycles(InitialCycles)) :-
-		valid(positive_integer, InitialCycles),
+		integer(InitialCycles),
 		InitialCycles >= 2.
 	valid_option(optimizer(Optimizer)) :-
 		(	Optimizer == nelder_mead ->
@@ -1815,7 +1827,8 @@
 		;	Optimizer == differential_evolution ->
 			true
 		;	Optimizer = multi_start(Starts),
-			valid(positive_integer, Starts)
+			integer(Starts),
+			Starts > 0
 		).
 	valid_option(optimizer_options(Options)) :-
 		valid(list(compound), Options),
@@ -1845,7 +1858,8 @@
 		(	SelectionCriterion == aicc ->
 			true
 		;	SelectionCriterion = validation(ValidationSize),
-			valid(positive_integer, ValidationSize)
+			integer(ValidationSize),
+			ValidationSize > 0
 		).
 	valid_option(candidate_models(Methods)) :-
 		(	Methods == default ->
@@ -1896,7 +1910,8 @@
 		valid_optimizer_options(Options).
 
 	valid_optimizer_option(max_iterations(Iterations)) :-
-		valid(positive_integer, Iterations).
+		integer(Iterations),
+		Iterations > 0.
 	valid_optimizer_option(tol_x(Tolerance)) :-
 		^^finite_number(Tolerance),
 		Tolerance >= 0.0.
@@ -1915,12 +1930,14 @@
 		valid_de_options(Options).
 
 	valid_de_option(seed(Seed)) :-
-		valid(positive_integer, Seed).
+		integer(Seed),
+		Seed > 0.
 	valid_de_option(population_size(Size)) :-
 		integer(Size),
 		Size >= 4.
 	valid_de_option(max_generations(Generations)) :-
-		valid(positive_integer, Generations).
+		integer(Generations),
+		Generations > 0.
 	valid_de_option(crossover_probability(Probability)) :-
 		^^finite_number(Probability),
 		Probability >= 0.0,
@@ -1929,6 +1946,7 @@
 		^^finite_number(Weight),
 		Weight > 0.0.
 	valid_de_option(strategy(Strategy)) :-
+		ground(Strategy),
 		valid_de_strategy(Strategy).
 	valid_de_option(polish(Boolean)) :-
 		once((Boolean == true; Boolean == false)).

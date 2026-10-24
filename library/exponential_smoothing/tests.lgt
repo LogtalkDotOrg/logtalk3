@@ -381,6 +381,33 @@
 		Forecaster = exponential_smoothing_forecaster(Method, _State, _Parameters, Diagnostics),
 		assertion(memberchk(model_selection(criterion(validation(2)), _Candidates, selected(holt)), Diagnostics)).
 
+	test(exponential_smoothing_model_auto_reused_fit_matches_explicit, deterministic) :-
+		FitOptions = [optimizer_options([max_iterations(50)]), retain_residuals(true)],
+		exponential_smoothing::learn(long_linear_trend, Selected, [model(auto), candidate_models([simple, holt])| FitOptions]),
+		exponential_smoothing::learn(long_linear_trend, Explicit, [model(holt)| FitOptions]),
+		assert_same_selection_fit(Selected, Explicit).
+
+	test(exponential_smoothing_model_auto_rejected_first_candidate, deterministic) :-
+		FitOptions = [optimizer_options([max_iterations(50)]), retain_residuals(true)],
+		exponential_smoothing::learn(long_linear_trend, Selected, [model(auto), candidate_models([holt_winters_additive, holt])| FitOptions]),
+		Selected = exponential_smoothing_forecaster(holt, _State, _Parameters, Diagnostics),
+		assertion(memberchk(model_selection(criterion(aicc), candidates([candidate(holt_winters_additive, rejected(_Reason), none, none), candidate(holt, ok, _Score, _CandidateParameters)]), selected(holt)), Diagnostics)),
+		exponential_smoothing::learn(long_linear_trend, Explicit, [model(holt)| FitOptions]),
+		assert_same_selection_fit(Selected, Explicit).
+
+	test(exponential_smoothing_model_auto_validation_fits_full_series, deterministic) :-
+		FitOptions = [optimizer_options([max_iterations(50)]), retain_residuals(true)],
+		exponential_smoothing::learn(long_linear_trend, Selected, [model(auto), candidate_models([simple, holt]), selection_criterion(validation(2))| FitOptions]),
+		exponential_smoothing::learn(long_linear_trend, Explicit, [model(holt)| FitOptions]),
+		assert_same_selection_fit(Selected, Explicit).
+
+	test(exponential_smoothing_model_auto_validation_tie_order, deterministic) :-
+		FitOptions = [model(auto), selection_criterion(validation(2)), optimizer_options([max_iterations(50)])],
+		exponential_smoothing::learn(constant_series, First, [candidate_models([simple, holt])| FitOptions]),
+		exponential_smoothing::learn(constant_series, Second, [candidate_models([holt, simple])| FitOptions]),
+		assertion(subsumes_term(exponential_smoothing_forecaster(simple, _FirstState, _FirstParameters, _FirstDiagnostics), First)),
+		assertion(subsumes_term(exponential_smoothing_forecaster(holt, _SecondState, _SecondParameters, _SecondDiagnostics), Second)).
+
 	test(exponential_smoothing_explicit_frequency_override, deterministic) :-
 		exponential_smoothing::learn(seasonal_additive_many_cycles, Forecaster, [model(holt_winters_additive), frequency(2), alpha(0.2), beta(0.1), gamma(0.1)]),
 		Forecaster = exponential_smoothing_forecaster(holt_winters_additive, holt_winters(_Level, _Trend, 2, _Seasonals), _Parameters, _Diagnostics).
@@ -389,6 +416,24 @@
 		exponential_smoothing::learn(seasonal_additive_many_cycles, Forecaster, [model(holt_winters_additive), frequency(auto), frequency_candidates([2, 3]), alpha(0.2), beta(0.1), gamma(0.1)]),
 		Forecaster = exponential_smoothing_forecaster(holt_winters_additive, holt_winters(_Level, _Trend, Frequency, _Seasonals), _Parameters, Diagnostics),
 		assertion(memberchk(frequency_selection(_Candidates, selected(2)), Diagnostics)).
+
+	test(exponential_smoothing_automatic_frequency_reused_fit_matches_explicit, deterministic) :-
+		FitOptions = [model(holt_winters_additive), optimizer_options([max_iterations(50)]), retain_residuals(true)],
+		exponential_smoothing::learn(seasonal_additive_many_cycles, Selected, [frequency(auto), frequency_candidates([2, 3])| FitOptions]),
+		exponential_smoothing::learn(seasonal_additive_many_cycles, Explicit, [frequency(2)| FitOptions]),
+		assert_same_selection_fit(Selected, Explicit).
+
+	test(exponential_smoothing_automatic_frequency_first_option, deterministic) :-
+		FitOptions = [model(holt_winters_additive), alpha(0.2), beta(0.1), gamma(0.1)],
+		exponential_smoothing::learn(seasonal_additive_many_cycles, Selected, [frequency(2), frequency(auto)| FitOptions]),
+		exponential_smoothing::learn(seasonal_additive_many_cycles, Explicit, [frequency(2)| FitOptions]),
+		assert_same_selection_fit(Selected, Explicit).
+
+	test(exponential_smoothing_nested_selection_reused_fit_matches_explicit, deterministic) :-
+		FitOptions = [optimizer_options([max_iterations(50)]), retain_residuals(true)],
+		exponential_smoothing::learn(seasonal_additive_many_cycles, Selected, [model(auto), candidate_models([simple, holt_winters_additive]), frequency(auto), frequency_candidates([2, 3])| FitOptions]),
+		exponential_smoothing::learn(seasonal_additive_many_cycles, Explicit, [model(holt_winters_additive), frequency(2)| FitOptions]),
+		assert_same_selection_fit(Selected, Explicit).
 
 	test(exponential_smoothing_model_auto_invalid_candidates, error(domain_error(option, candidate_models([simple, unknown])))) :-
 		exponential_smoothing::learn(linear_trend, _Forecaster, [model(auto), candidate_models([simple, unknown])]).
@@ -960,6 +1005,29 @@
 		assert_bounds_bracket_point(Lower, PointForecasts, Upper).
 
 	% auxiliary predicates
+
+	assert_same_selection_fit(Selected, Explicit) :-
+		Selected = exponential_smoothing_forecaster(SelectedMethod, SelectedState, SelectedParameters, SelectedDiagnostics),
+		Explicit = exponential_smoothing_forecaster(ExplicitMethod, ExplicitState, ExplicitParameters, ExplicitDiagnostics),
+		selection_fit_diagnostics(SelectedDiagnostics, SelectedFitDiagnostics),
+		selection_fit_diagnostics(ExplicitDiagnostics, ExplicitFitDiagnostics),
+		assertion(fit(SelectedMethod, SelectedState, SelectedParameters, SelectedFitDiagnostics) == fit(ExplicitMethod, ExplicitState, ExplicitParameters, ExplicitFitDiagnostics)),
+		exponential_smoothing::forecast(Selected, 4, SelectedForecasts),
+		exponential_smoothing::forecast(Explicit, 4, ExplicitForecasts),
+		assertion(SelectedForecasts == ExplicitForecasts).
+
+	selection_fit_diagnostics([], []).
+	selection_fit_diagnostics([options(_)| Diagnostics], FitDiagnostics) :-
+		!,
+		selection_fit_diagnostics(Diagnostics, FitDiagnostics).
+	selection_fit_diagnostics([model_selection(_, _, _)| Diagnostics], FitDiagnostics) :-
+		!,
+		selection_fit_diagnostics(Diagnostics, FitDiagnostics).
+	selection_fit_diagnostics([frequency_selection(_, _)| Diagnostics], FitDiagnostics) :-
+		!,
+		selection_fit_diagnostics(Diagnostics, FitDiagnostics).
+	selection_fit_diagnostics([Diagnostic| Diagnostics], [Diagnostic| FitDiagnostics]) :-
+		selection_fit_diagnostics(Diagnostics, FitDiagnostics).
 
 	cached_forecaster(Dataset, Forecaster, Options) :-
 		(	cached_forecaster_(Dataset, Options, CachedForecaster) ->
