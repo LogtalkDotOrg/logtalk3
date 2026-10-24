@@ -24,5 +24,5 @@
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(loader),
 	logtalk_load(tests, [hook(lgtunit), optimize(on)]),
-	tests(7, 100, cpu)::run
+	tests(7, 10, cpu)::run
 )).

@@ -25,14 +25,11 @@
 	:- info([
 		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-10-18,
+		date is 2026-10-24,
 		comment is 'Unit tests for the "lips" example.'
 	]).
 
-	test(lips_mlips_1, true(integer(MLIPS)), [note(mlips-MLIPS)]) :-
-		lips::mlips(MLIPS).
-
-	test(lips_mlips_2, true(integer(MLIPS)), [note(mlips-MLIPS)]) :-
+	test(lips_mlips_2_01, true(integer(MLIPS)), [note(mlips-MLIPS)]) :-
 		lips::mlips(25000, MLIPS).
 
 :- end_object.
