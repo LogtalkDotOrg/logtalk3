@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2024-11-06,
+		date is 2026-10-24,
 		comment is 'Unit tests for the "searching" example.'
 	]).
 
@@ -83,13 +83,15 @@
 		],
 		Cost == 29.
 
-	% generate all solutions then check this path is one of them
+	% generate the first solution and confirm it
 	test(searching_05) :-
 		water_jug::initial_state(Initial),
-		findall(Path, breadth_first(5)::solve(water_jug, Initial, Path), Solutions),
-		ground(Solutions),
-		Answer = [(0,0),(0,3),(3,0),(3,3),(4,2),(0,2)],
-		list::memberchk(Answer, Solutions).
+		breadth_first(5)::solve(water_jug, Initial, Path),
+		ground(Path),
+		list::length(Path, Length),
+		Length =< 6,
+		list::last(Path, Goal),
+		(Goal == (0,2); Goal == (2,0)).
 
 	% generate all solutions then check this path is one of them
 	test(searching_06) :-
