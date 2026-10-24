@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-05,
+		date is 2026-10-24,
 		comment is 'Unit tests for the "bm25_recommender" library.'
 	]).
 
@@ -39,12 +39,19 @@
 
 	cover(bm25_recommender).
 
+	:- private(cached_model/2).
+	:- dynamic(cached_model/2).
+
+	setup :-
+		retractall(cached_model(_, _)).
+
 	cleanup :-
+		retractall(cached_model(_, _)),
 		^^clean_file('bm25_saved.pl').
 
 	test(bm25_recommender_numerical_bm25_scores, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		bm25_recommender::score(Model, u, x, Same),
 		bm25_recommender::score(Model, u, y, Other),
 		ExpectedSame is 2 * log(1.6) * 4.4 / 3.2,
@@ -56,7 +63,7 @@
 
 	test(bm25_recommender_corpus_counts, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, bm25_model(_,_,_,[u-[a-Query]],bm25_corpus(3,Average,Statistics),none,_)),
+		trained_model(Dataset, bm25_model(_,_,_,[u-[a-Query]],bm25_corpus(3,Average,Statistics),none,_)),
 		assertion(Query =~= 2.0),
 		assertion(Average =~= 2.0),
 		memberchk(a-statistics(2,IDF), Statistics),
@@ -66,8 +73,8 @@
 	test(bm25_recommender_count_vector_equivalence, deterministic) :-
 		feature_dataset(Features),
 		vector_dataset(Vectors),
-		bm25_recommender::learn(Features, FeatureModel),
-		bm25_recommender::learn(Vectors, VectorModel),
+		trained_model(Features, FeatureModel),
+		trained_model(Vectors, VectorModel),
 		bm25_recommender::score(FeatureModel, u, y, First),
 		bm25_recommender::score(VectorModel, u, y, Second),
 		assertion(First =~= Second).
@@ -98,7 +105,7 @@
 
 	test(bm25_recommender_recommendation_exclusion, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		bm25_recommender::recommend(Model, u, 10, [y-Score,empty-Zero]),
 		assertion(Score > 0),
 		assertion(Zero =~= 0.0).
@@ -108,7 +115,7 @@
 
 	test(bm25_recommender_missing_item, error(domain_error(catalog_item, missing))) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		bm25_recommender::score(Model, unknown, missing, _).
 
 	test(bm25_recommender_parameter_formula_matrix, deterministic) :-
@@ -161,7 +168,7 @@
 
 	test(bm25_recommender_unknown_user_zero_ties, deterministic(Recommendations == [y-0.0,x-0.0,empty-0.0])) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		bm25_recommender::recommend(Model, unknown, 10, Recommendations).
 
 	test(bm25_recommender_empty_profile, deterministic) :-
@@ -280,7 +287,7 @@
 		).
 
 	test(bm25_recommender_scale_and_ratings, deterministic) :-
-		bm25_recommender::learn(bm25_scale_fixture(1,5), Model),
+		trained_model(bm25_scale_fixture(1,5), Model),
 		assertion(Model = bm25_model(_,_,_,_,_,scale(1,5),_)),
 		assertion(bm25_recommender::valid_recommender(Model)).
 
@@ -292,7 +299,7 @@
 
 	test(bm25_recommender_query_validation, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		forall(
 			member(Goal-Expected, [
 				score(_,u,x,_)-instantiation_error,
@@ -312,7 +319,7 @@
 
 	test(bm25_recommender_model_tampering, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, bm25_model(Ratings,Contents,Weights,Profiles,Corpus,Scale,Diagnostics)),
+		trained_model(Dataset, bm25_model(Ratings,Contents,Weights,Profiles,Corpus,Scale,Diagnostics)),
 		Corpus = bm25_corpus(N,Average,Statistics),
 		forall(
 			member(Bad, [
@@ -335,7 +342,7 @@
 
 	test(bm25_recommender_diagnostic_validation_and_extras, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, bm25_model(Ratings,Contents,Weights,Profiles,Corpus,Scale,Diagnostics)),
+		trained_model(Dataset, bm25_model(Ratings,Contents,Weights,Profiles,Corpus,Scale,Diagnostics)),
 		Model = bm25_model(Ratings,Contents,Weights,Profiles,Corpus,Scale,[note(custom)|Diagnostics]),
 		assertion(bm25_recommender::valid_recommender(Model)),
 		assertion(\+ bm25_recommender::valid_recommender(bm25_model(Ratings,Contents,Weights,Profiles,Corpus,Scale,[item_count(3)|Diagnostics]))),
@@ -344,7 +351,7 @@
 
 	test(bm25_recommender_export_round_trip, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		bm25_recommender::export_to_clauses(Dataset, Model, saved, Clauses),
 		assertion(Clauses == [saved(Model)]),
 		^^file_path('bm25_saved.pl', File),
@@ -357,7 +364,7 @@
 	test(bm25_recommender_print_model, deterministic) :-
 		^^suppress_text_output,
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		bm25_recommender::print_recommender(Model).
 
 	test(bm25_recommender_core_predicate_ownership, deterministic) :-
@@ -366,7 +373,7 @@
 
 	test(bm25_recommender_batch_scores, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		bm25_recommender::score_all(Model, u, [y,x,y,empty], [y-Other,x-Same,y-Repeat,empty-Zero]),
 		ExpectedOther is 2 * log(1.6) * 2.2 / 3.1,
 		ExpectedSame is 2 * log(1.6) * 4.4 / 3.2,
@@ -379,12 +386,12 @@
 
 	test(bm25_recommender_batch_empty, deterministic(Scores == [])) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		bm25_recommender::score_all(Model, u, [], Scores).
 
 	test(bm25_recommender_batch_unknown_user, deterministic(Scores == [x-0.0,y-0.0])) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		bm25_recommender::score_all(Model, unknown, [x,y], Scores).
 
 	test(bm25_recommender_batch_validates_once, deterministic) :-
@@ -401,7 +408,7 @@
 
 	test(bm25_recommender_batch_validation, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		forall(
 			member(Goal-Expected, [
 				score_all(_,u,[],_)-instantiation_error,
@@ -427,14 +434,14 @@
 
 	test(bm25_recommender_content_known_item_agreement, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		bm25_recommender::score(Model, u, y, Catalog),
 		bm25_recommender::score_content(Model, u, features([z,a,z,z]), Supplied),
 		assertion(Supplied =~= Catalog).
 
 	test(bm25_recommender_content_unseen_padding_penalty, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		copy_term(Model, Original),
 		bm25_recommender::score_content(Model, u, features([a,z,z,z]), Unpadded),
 		bm25_recommender::score_content(Model, u, features([a,z,z,z,novel,novel,novel]), Padded),
@@ -452,14 +459,14 @@
 
 	test(bm25_recommender_content_count_vector_length, deterministic) :-
 		vector_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		bm25_recommender::score_content(Model, u, vector([unseen-3,z-3,a-1,zero-0.0]), Score),
 		Expected is 2 * log(1.6) * 2.2 / (1 + 1.2 * (0.25 + 0.75 * 7 / 2)),
 		assertion(Score =~= Expected).
 
 	test(bm25_recommender_content_empty_and_unknown, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		bm25_recommender::score_content(Model, u, features([]), Empty),
 		bm25_recommender::score_content(Model, u, features([novel]), Unseen),
 		bm25_recommender::score_content(Model, unknown, features([a]), Unknown),
@@ -482,7 +489,7 @@
 
 	test(bm25_recommender_content_query_validation, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		forall(
 			member(Goal-Expected, [
 				score_content(_,u,features([]),_)-instantiation_error,
@@ -503,7 +510,7 @@
 
 	test(bm25_recommender_content_vector_validation, deterministic) :-
 		vector_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		forall(
 			member(Content-Expected, [
 				features([])-domain_error(content_representation,features([])),
@@ -526,7 +533,7 @@
 
 	test(bm25_recommender_update_matches_fresh_training, deterministic) :-
 		feature_dataset(bm25_dataset(Ratings,Items,Contents)),
-		bm25_recommender::learn(bm25_dataset(Ratings,Items,Contents), Model),
+		trained_model(bm25_dataset(Ratings,Items,Contents), Model),
 		bm25_recommender::update_ratings(Model, [rating(u,x,1),rating(u,y,5),rating(v,x,4)], Updated),
 		bm25_recommender::learn(bm25_dataset([rating(u,x,1),rating(u,y,5),rating(v,x,4)], Items, Contents), Fresh),
 		assertion(Updated == Fresh),
@@ -536,12 +543,12 @@
 
 	test(bm25_recommender_update_empty, deterministic(Updated == Model)) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		bm25_recommender::update_ratings(Model, [], Updated).
 
 	test(bm25_recommender_update_duplicate, error(domain_error(duplicate_rating, u-x))) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		bm25_recommender::update_ratings(Model, [rating(u,x,1),rating(u,x,5)], _).
 
 	test(bm25_recommender_update_mean_shift_weight_error, error(domain_error(positive_rating_weight, 0))) :-
@@ -563,17 +570,17 @@
 
 	test(bm25_recommender_removal_missing_pairs, deterministic(Removed == Model)) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		bm25_recommender::remove_ratings(Model, [u-y,unknown-x,unknown-missing], Removed).
 
 	test(bm25_recommender_removal_empty, deterministic(Removed == Model)) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		bm25_recommender::remove_ratings(Model, [], Removed).
 
 	test(bm25_recommender_removal_last_global_rating, error(domain_error(non_empty_ratings, []))) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		bm25_recommender::remove_ratings(Model, [u-x,u-x], _).
 
 	test(bm25_recommender_removal_weighted_mean_shift, error(domain_error(positive_rating_weight, 0))) :-
@@ -617,7 +624,7 @@
 
 	test(bm25_recommender_feedback_diagnostics_and_extras, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, bm25_model(Ratings,Contents,Weights,Profiles,Corpus,Scale,Diagnostics)),
+		trained_model(Dataset, bm25_model(Ratings,Contents,Weights,Profiles,Corpus,Scale,Diagnostics)),
 		reverse(Diagnostics, Reversed),
 		append([note(before)|Reversed], [extra(after)], Extras),
 		Model = bm25_model(Ratings,Contents,Weights,Profiles,Corpus,Scale,Extras),
@@ -634,7 +641,7 @@
 
 	test(bm25_recommender_feedback_order_and_immutability, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		copy_term(Model, Original),
 		bm25_recommender::update_ratings(Model, [rating(u,x,5)], Identical),
 		assertion(Identical == Model),
@@ -662,7 +669,7 @@
 		).
 
 	test(bm25_recommender_feedback_scale_boundaries, deterministic) :-
-		bm25_recommender::learn(bm25_scale_fixture(1,5), Model),
+		trained_model(bm25_scale_fixture(1,5), Model),
 		bm25_recommender::update_ratings(Model, [rating(u,x,5),rating(v,x,1)], Updated),
 		bm25_recommender::remove_ratings(Updated, [u-x], Removed),
 		assertion(Removed = bm25_model([rating(v,x,1)],_,_,_,_,scale(1,5),_)),
@@ -676,7 +683,7 @@
 
 	test(bm25_recommender_feedback_model_and_list_validation, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		forall(
 			(	member(Method, [update_ratings,remove_ratings]),
 				member(Input-Expected, [
@@ -705,7 +712,7 @@
 
 	test(bm25_recommender_update_record_validation, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		forall(
 			member(Updates-Expected, [
 				[_]-instantiation_error,
@@ -726,7 +733,7 @@
 
 	test(bm25_recommender_removal_pair_validation, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		forall(
 			member(Pairs-Expected, [
 				[_]-instantiation_error,
@@ -757,7 +764,7 @@
 
 	test(bm25_recommender_extension_refits_features, deterministic) :-
 		feature_dataset(bm25_dataset(Ratings,Items,Contents)),
-		bm25_recommender::learn(bm25_dataset(Ratings,Items,Contents), Model),
+		trained_model(bm25_dataset(Ratings,Items,Contents), Model),
 		bm25_recommender::score(Model, u, x, Before),
 		bm25_recommender::extend_catalog(Model, [new-features([a,new,new])], Extended),
 		append(Items, [new], NewItems),
@@ -779,10 +786,10 @@
 
 	test(bm25_recommender_extension_refits_count_vectors, deterministic) :-
 		vector_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		bm25_recommender::extend_catalog(Model, [new-vector([a-1,new-2,zero-0.0])], Extended),
 		feature_dataset(FeatureDataset),
-		bm25_recommender::learn(FeatureDataset, FeatureModel),
+		trained_model(FeatureDataset, FeatureModel),
 		bm25_recommender::extend_catalog(FeatureModel, [new-features([a,new,new])], FeatureExtended),
 		Extended = bm25_model(_,_,Weights,Profiles,Corpus,_,_),
 		FeatureExtended = bm25_model(_,_,Weights,Profiles,Corpus,_,_),
@@ -792,23 +799,23 @@
 
 	test(bm25_recommender_extension_empty, deterministic(Extended == Model)) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		bm25_recommender::extend_catalog(Model, [], Extended).
 
 	test(bm25_recommender_extension_existing_id, error(domain_error(new_catalog_item, x))) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		bm25_recommender::extend_catalog(Model, [x-features([])], _).
 
 	test(bm25_recommender_extension_duplicate_id, error(domain_error(duplicate_item, new))) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		bm25_recommender::extend_catalog(Model, [new-features([a]),new-features([z])], _).
 
 	test(bm25_recommender_replacement_rated_fresh_equivalence, deterministic) :-
 		feature_dataset(bm25_dataset(Ratings,Items,_)),
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		bm25_recommender::replace_content(Model, [x-features([z,z,z])], Replaced),
 		bm25_recommender::learn(bm25_dataset(Ratings,Items,[x-features([z,z,z]),y-features([a,z,z,z]),empty-features([])]), Fresh),
 		assertion(Replaced == Fresh),
@@ -826,7 +833,7 @@
 		vector_dataset(VectorDataset),
 		forall(
 			member(Dataset-Descriptor, [FeatureDataset-features([a,a]),VectorDataset-vector([a-2])]),
-			(	bm25_recommender::learn(Dataset, Model),
+			(	trained_model(Dataset, Model),
 				bm25_recommender::score(Model, u, x, Before),
 				bm25_recommender::replace_content(Model, [y-Descriptor], Replaced),
 				Model = bm25_model(Ratings,_,OldWeights,Profiles,OldCorpus,Scale,_),
@@ -843,7 +850,7 @@
 
 	test(bm25_recommender_replacement_empty_and_identical, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		bm25_recommender::replace_content(Model, [], Empty),
 		assertion(Empty == Model),
 		bm25_recommender::replace_content(Model, [y-features([z,a,z,z])], Identical),
@@ -851,12 +858,12 @@
 
 	test(bm25_recommender_replacement_missing_id, error(domain_error(catalog_item, missing))) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		bm25_recommender::replace_content(Model, [missing-features([])], _).
 
 	test(bm25_recommender_replacement_duplicate_id, error(domain_error(duplicate_item, x))) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		bm25_recommender::replace_content(Model, [x-features([a]),x-features([z])], _).
 
 	test(bm25_recommender_catalog_fresh_equivalence_matrix, deterministic) :-
@@ -891,7 +898,7 @@
 
 	test(bm25_recommender_extension_empty_document_statistics, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		bm25_recommender::extend_catalog(Model, [new-features([])], Extended),
 		Model = bm25_model(Ratings,_,_,Profiles,_,Scale,_),
 		Extended = bm25_model(Ratings,_,_,Profiles,bm25_corpus(4,Average,Statistics),Scale,_),
@@ -926,7 +933,7 @@
 
 	test(bm25_recommender_catalog_order_sequential_and_compound_features, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		copy_term(Model, Original),
 		Additions = [one-features([term(a),term(a),7]),two-features([a])],
 		reverse(Additions, Reversed),
@@ -974,7 +981,7 @@
 
 	test(bm25_recommender_catalog_model_and_list_validation, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		forall(
 			(	member(Method, [extend_catalog,replace_content]),
 				member(Input-Expected, [_-instantiation_error,bad-type_error(list,bad),[_|_]-instantiation_error,[x|bad]-type_error(list,[x|bad])])
@@ -993,7 +1000,7 @@
 
 	test(bm25_recommender_catalog_descriptor_validation, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		forall(
 			(	member(Method-Item, [extend_catalog-new,replace_content-x]),
 				member(Contents-Expected, [
@@ -1018,7 +1025,7 @@
 
 	test(bm25_recommender_catalog_count_validation, deterministic) :-
 		vector_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		forall(
 			(	member(Method-Item, [extend_catalog-new,replace_content-x]),
 				member(Content-Expected, [
@@ -1044,7 +1051,7 @@
 
 	test(bm25_recommender_catalog_failed_update_preserves_original, deterministic) :-
 		vector_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		copy_term(Model, Original),
 		catch(bm25_recommender::extend_catalog(Model, [new-vector([a-1]),other-vector([b-1.5])], _), error(type_error(integer,1.5),_), Caught = yes),
 		assertion(Caught == yes),
@@ -1055,7 +1062,7 @@
 
 	test(bm25_recommender_composed_updates_and_export_restoration, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		bm25_recommender::extend_catalog(Model, [new-features([a,z])], Extended),
 		bm25_recommender::update_ratings(Extended, [rating(u,new,4),rating(v,y,3)], Rated),
 		bm25_recommender::replace_content(Rated, [new-features([z,z])], Replaced),
@@ -1098,7 +1105,7 @@
 
 	test(bm25_recommender_batch_original_error_order, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		forall(
 			member(Items-Expected, [[missing,item(x)]-domain_error(catalog_item,missing),[item(x),missing]-type_error(atomic,item(x)),[y,missing,_]-domain_error(catalog_item,missing),[y,_,missing]-instantiation_error]),
 			(	catch(bm25_recommender::score_all(Model, u, Items, _), error(Error,_), Caught = Error),
@@ -1108,7 +1115,7 @@
 
 	test(bm25_recommender_duplicate_batch_workload, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		list::length(Seeds, 100),
 		findall(y, member(_,Seeds), Items),
 		bm25_recommender::score(Model, u, y, Score),
@@ -1175,7 +1182,7 @@
 
 	test(bm25_recommender_catalog_removal_unrated_refit, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		Model = bm25_model(Ratings,_,_,Profiles,_,Scale,_),
 		bm25_recommender::remove_catalog(Model, [empty], Removed),
 		Removed = bm25_model(Ratings,_,_,Profiles,bm25_corpus(2,Average,_),Scale,Diagnostics),
@@ -1201,7 +1208,7 @@
 
 	test(bm25_recommender_catalog_removal_nonempty_and_mean_guards, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		forall(
 			member(Items-Expected, [[x,y,empty]-domain_error(non_empty_catalog,[]),[x]-domain_error(non_empty_ratings,[]),[x,y,empty,bad(id)]-type_error(atomic,bad(id))]),
 			(	catch(bm25_recommender::remove_catalog(Model, Items, _), error(Error,_), Caught = Error),
@@ -1216,7 +1223,7 @@
 
 	test(bm25_recommender_catalog_removal_input_validation, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Model),
+		trained_model(Dataset, Model),
 		forall(
 			member(Goal-Expected, [remove_catalog(_,[],_)-instantiation_error,remove_catalog(bad,[],_)-domain_error(recommender,bad),remove_catalog(Model,_,_)-instantiation_error,remove_catalog(Model,bad,_)-type_error(list,bad),remove_catalog(Model,[_|_],_)-instantiation_error,remove_catalog(Model,[missing,_],_)-instantiation_error,remove_catalog(Model,[item(x)],_)-type_error(atomic,item(x))]),
 			(	catch(bm25_recommender::Goal, error(Error,_), Caught = Error),
@@ -1236,7 +1243,7 @@
 		).
 
 	test(bm25_recommender_scale_edit_preserves_fitted_state_and_scores, deterministic) :-
-		bm25_recommender::learn(bm25_scale_fixture(1,5), Model),
+		trained_model(bm25_scale_fixture(1,5), Model),
 		copy_term(Model, Original),
 		Model = bm25_model(Ratings,Contents,Weights,Profiles,Corpus,_,Diagnostics),
 		bm25_recommender::score(Model, u, x, Score),
@@ -1253,7 +1260,7 @@
 		assertion(lgtunit::variant(Model, Original)).
 
 	test(bm25_recommender_scale_edit_followup_updates, deterministic) :-
-		bm25_recommender::learn(bm25_scale_fixture(1,5), Model),
+		trained_model(bm25_scale_fixture(1,5), Model),
 		bm25_recommender::set_rating_scale(Model, scale(1,1), Tightened),
 		catch(bm25_recommender::update_ratings(Tightened, [rating(v,x,2)], _), error(domain_error(rating_scale(1,1),2),_), Failed = yes),
 		assertion(Failed == yes),
@@ -1262,7 +1269,7 @@
 		assertion(bm25_recommender::valid_recommender(Updated)).
 
 	test(bm25_recommender_scale_edit_input_validation, deterministic) :-
-		bm25_recommender::learn(bm25_scale_fixture(1,5), Model),
+		trained_model(bm25_scale_fixture(1,5), Model),
 		forall(
 			member(Goal-Expected, [
 				set_rating_scale(_,none,_)-instantiation_error,
@@ -1320,7 +1327,7 @@
 
 	test(bm25_recommender_query_saturation_default_none_exact, deterministic) :-
 		feature_dataset(Dataset),
-		bm25_recommender::learn(Dataset, Default),
+		trained_model(Dataset, Default),
 		bm25_recommender::learn(Dataset, Explicit, [query_saturation(none)]),
 		Default = bm25_model(Ratings,Contents,Weights,Profiles,Corpus,Scale,_),
 		Explicit = bm25_model(Ratings,Contents,Weights,Profiles,Corpus,Scale,_),
@@ -1435,6 +1442,13 @@
 		bm25_recommender::predicate_property(set_rating_scale(_,_,_), defined_in(bm25_recommender)).
 
 	% auxiliary predicates
+
+	trained_model(Dataset, Model) :-
+		(	cached_model(Dataset, Cached) ->
+			Model = Cached
+		;	bm25_recommender::learn(Dataset, Model),
+			assertz(cached_model(Dataset, Model))
+		).
 
 	feature_dataset(bm25_dataset([rating(u,x,5)], [x,y,empty], [x-features([a,a]),y-features([a,z,z,z]),empty-features([])])).
 
