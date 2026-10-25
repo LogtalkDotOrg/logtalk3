@@ -22,17 +22,27 @@ ________________________________________________________________________
 ===============
 
 This is a complementary tool for the `lgtunit` tool for automatically
-creating bug report issues for failed tests in GitHub or GitLab servers.
+creating bug report issues for failed tests in GitHub, GitLab, Azure DevOps,
+Gitea, or Jira servers.
 
 
 Requirements
 ------------
 
-This tool requires that the GitHub `gh` and GitLab `glab` CLIs be installed.
+This tool requires that the GitHub `gh`, GitLab `glab`, Azure `az`, Gitea `tea`,
+or Jira `jira` ([jira-cli](https://github.com/ankitpokhrel/jira-cli)) CLIs be
+installed (depending on the issue tracker used). For Azure DevOps, the `az`
+CLI must also have the `azure-devops` extension installed:
+
+	$ az extension add --name azure-devops
+
 For the installation instructions see:
 
 - GitHub: https://cli.github.com
 - GitLab: https://glab.readthedocs.io
+- Azure DevOps: https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
+- Gitea: https://gitea.com/gitea/tea
+- Jira: https://github.com/ankitpokhrel/jira-cli
 
 
 Loading
@@ -51,7 +61,8 @@ Usage
 
 The `logtalk_tester` automation script accepts a `-b` option for automatically
 using this tool (see the script man page for details). In the most simple case,
-this option possible values are `github` and `gitlab`. For example:
+this option possible values are `github`, `gitlab`, `azure`, `gitea`, and
+`jira`. For example:
 
 	$ logtalk_tester \
 		-p gnu \
@@ -66,6 +77,11 @@ and login to the server where the bug report issues will be created:
 
 - GitHub: `gh auth login --hostname <string> --with-token < token.txt`
 - GitLab: `glab auth login --hostname <string> --token <string>`
+- Azure DevOps: `az login` or `echo $TOKEN | az devops login --organization <url>`
+  (alternatively, set the `AZURE_DEVOPS_EXT_PAT` environment variable)
+- Gitea: `tea login add --name <string> --url <string> --token <string>`
+- Jira: set the `JIRA_API_TOKEN` environment variable and run `jira init`
+  (see the `jira-cli` documentation for the other authentication types)
 
 The access token must have the necessary scopes that allow bug reports to be
 created. See the CLIs documentation for details. Typically, the `auth` command
@@ -83,10 +99,69 @@ to use both `bug` and `auto` labels:
 		-s "/home/jdoe/foo/" \
 		-u https://github.com/jdoe/foo/tree/55aa900775befa135e0d5b48ea63098df8b97f5c/
 
-Note that the labels **must** be predefined in the issue tracker server for
-the bug report to be successfully created. The `auto` label can be used to
-simplify filtering of auto-generated bug reports when browsing the issue
-tracker.
+For Azure DevOps (`-b azure`), the organization and project are detected from
+the git remote when possible. Otherwise, set them as defaults using:
+
+	$ az devops configure --defaults organization=<url> project=<name>
+
+Bug reports are created as work items of type `Bug` (using the `Repro Steps`
+field for the description, which is HTML in Azure DevOps) and the labels are
+set as work item tags. The work item is assigned to the author of the latest
+commit using the author email, if that email matches a user in the Azure
+DevOps organization; otherwise, the work item is created unassigned. The
+base URL (`-u` option) should be the Azure Repos repository URL, optionally
+including the version, to allow generating links to the test files. For
+example:
+
+	$ logtalk_tester \
+		-p gnu \
+		-b azure:bug,auto \
+		-s "/home/jdoe/foo/" \
+		-u "https://dev.azure.com/jdoe/foo/_git/foo?version=GC55aa900775befa135e0d5b48ea63098df8b97f5c"
+
+Duplicated bug reports are detected using a WIQL query that looks for work
+items of type `Bug`, in a state category other than `Completed` or `Removed`,
+with the same title and tags. This requires a process template where the `Bug`
+work item type exists (i.e. Agile, Scrum, or CMMI; not Basic).
+
+For Gitea (`-b gitea`), the `tea` CLI detects the repository and login from
+the git remote of the current directory, so a matching login must have been
+added using `tea login add`. The labels **must** exist in the repository and
+bug reports are assigned to the author of the latest commit using the local
+part of the author email as the Gitea user name; if that assignment is
+rejected, the bug report is created unassigned. The base URL (`-u` option)
+should be the commit URL for the repository. For example:
+
+	$ logtalk_tester \
+		-p gnu \
+		-b gitea:bug,auto \
+		-s "/home/jdoe/foo/" \
+		-u https://gitea.example.com/jdoe/foo/src/commit/55aa900775befa135e0d5b48ea63098df8b97f5c/
+
+For Jira (`-b jira`), the `jira` CLI must have been configured (using
+`jira init`) with the server, the project, and the authentication type. Bug
+reports are created as issues of type `Bug` in the configured project (so
+that type must exist and the project must not require other fields to be
+set when creating issues), with the labels set as Jira labels (which, unlike
+in GitHub and GitLab, don't need to be predefined). The issue is assigned to
+the author of the latest commit using the author email, if that email matches
+a Jira user; otherwise, the issue is created unassigned. Jira is not a code
+host, so the base URL (`-u` option) is the URL of the server hosting the
+repository, e.g. GitHub, GitLab, or Gitea, in order to generate links to the
+test files. Duplicated bug reports are detected using a JQL query that looks
+for issues of type `Bug`, not in the `Done` status category, with the same
+labels and a matching summary. For example:
+
+	$ logtalk_tester \
+		-p gnu \
+		-b jira:bug,auto \
+		-s "/home/jdoe/foo/" \
+		-u https://github.com/jdoe/foo/tree/55aa900775befa135e0d5b48ea63098df8b97f5c/
+
+Note that, except for Jira, the labels **must** be predefined in the issue
+tracker server for the bug report to be successfully created. The `auto`
+label can be used to simplify filtering of auto-generated bug reports when
+browsing the issue tracker.
 
 The bug reports use Markdown formatting, which is the default in GitHub and
 GitLab issue trackers.

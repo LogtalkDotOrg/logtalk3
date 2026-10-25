@@ -37,23 +37,21 @@
 :- object(issue_creator).
 
 	:- info([
-		version is 0:12:1,
+		version is 0:13:0,
 		author is 'Paulo Moura',
-		date is 2025-03-03,
-		comment is 'Support for automatically creating bug report issues for failed tests in GitHub or GitLab servers.',
+		date is 2026-10-25,
+		comment is 'Support for automatically creating bug report issues for failed tests in GitHub, GitLab, Azure DevOps, Gitea, or Jira servers.',
 		remarks is [
 			'Usage' - 'This tool is automatically loaded and used from the ``logtalk_tester`` automation script when using its ``-b`` option. See the script man page for details.'
 		]
 	]).
 
 	:- uses(git, [
-		branch/2, commit_hash_abbreviated/2, commit_author/2,
-		commit_date/2, commit_message/2, commit_log/3
+		branch/2, commit_hash_abbreviated/2, commit_author/2, commit_date/2, commit_message/2, commit_log/3
 	]).
 
 	:- uses(os, [
-		decompose_file_name/3, operating_system_type/1, shell/1,
-		environment_variable/2
+		decompose_file_name/3, operating_system_type/1, shell/1, environment_variable/2
 	]).
 
 	:- uses(term_io, [
@@ -99,7 +97,6 @@
 		commit_author(Directory, Author),
 		commit_date(Directory, Date),
 		commit_message(Directory, Message),
-		commit_log(Directory, '%aL', Assignee),
 		% bypass the compiler as the flags are only created after loading this file
 		{current_logtalk_flag(suppress_path_prefix, Prefix)},
 		(	atom_concat(Prefix, ShortFile, File) ->
@@ -111,13 +108,15 @@
 		;	ShortDirectory = Directory
 		),
 		issue_server(Server),
+		assignee(Server, Directory, Assignee),
 		operating_system_type(OperatingSystem),
 		title(Test, ShortDirectory, Title),
 		% bypass the compiler as the flags are only created after loading this file
 		{current_logtalk_flag(issue_labels, Labels)},
 		is_new_issue(Server, OperatingSystem, Title, Labels),
 		escape_double_quotes(Title, EscapedTitle),
-		description(Object, ShortFile, Position, Reason, Note, Time, Branch, Hash, Author, Date, Message, Description),
+		description(Server, Object, ShortFile, Position, Reason, Note, Time, Branch, Hash, Author, Date, Message, Description0),
+		description_format(Server, Description0, Description),
 		escape_double_quotes(Description, EscapedDescription),
 		create_bug_report(Server, OperatingSystem, EscapedTitle, EscapedDescription, Labels, Assignee).
 
@@ -137,6 +136,46 @@
 		atomic_list_concat(['glab issue list --label ', Labels, ' --in title --search "', Title, '" | grep -q -s "No open issues match your search" >/dev/null 2>&1'], Command),
 		shell(Command).
 
+	% Jira: list the summaries of the open bugs with the given labels that match the
+	% title (using a phrase search) and look for the title; the "jira" CLI uses the
+	% server, project, and credentials from its configuration (see "jira init")
+	is_new_issue(jira, windows, Title, Labels) :-
+		!,
+		jira_list_command(windows, Title, Labels, ListCommand),
+		shell_quote(windows, Title, QuotedTitle),
+		atomic_list_concat([ListCommand, ' 2>nul | findstr /l /c:', QuotedTitle, ' > nul'], Command),
+		\+ shell(Command).
+	is_new_issue(jira, OperatingSystem, Title, Labels) :-
+		jira_list_command(OperatingSystem, Title, Labels, ListCommand),
+		shell_quote(OperatingSystem, Title, QuotedTitle),
+		atomic_list_concat([ListCommand, ' 2>/dev/null | grep -q -s -F ', QuotedTitle, ' >/dev/null 2>&1'], Command),
+		\+ shell(Command).
+
+	% Gitea: list the titles of the open issues with the given labels that match the
+	% title as a keyword and look for an exact title match (the "tea" CLI detects the
+	% repository and login from the git remote of the current directory)
+	is_new_issue(gitea, windows, Title, Labels) :-
+		!,
+		atomic_list_concat(['tea issues list --state open --labels ', Labels, ' --keyword "', Title, '" --fields title --output tsv 2>nul | findstr /x /l /c:"', Title, '" > nul'], Command),
+		\+ shell(Command).
+	is_new_issue(gitea, _, Title, Labels) :-
+		atomic_list_concat(['tea issues list --state open --labels ', Labels, ' --keyword "', Title, '" --fields title --output tsv 2>/dev/null | grep -q -s -x -F "', Title, '" >/dev/null 2>&1'], Command),
+		\+ shell(Command).
+
+	% Azure DevOps: count the open (i.e. neither completed nor removed) bugs with
+	% the same title that also have all the labels (which are Azure DevOps tags);
+	% a new issue is reported only when the count is exactly zero; any failure
+	% of the "az" command (e.g. not logged in) thus prevents creating issues
+	is_new_issue(azure, windows, Title, Labels) :-
+		!,
+		azure_wiql(Title, Labels, WIQL),
+		atomic_list_concat(['az boards query --wiql "', WIQL, '" --query "length(@)" --output tsv 2>nul | findstr /x "0" > nul'], Command),
+		shell(Command).
+	is_new_issue(azure, _, Title, Labels) :-
+		azure_wiql(Title, Labels, WIQL),
+		atomic_list_concat(['az boards query --wiql "', WIQL, '" --query "length(@)" --output tsv 2>/dev/null | grep -q -s -x 0 >/dev/null 2>&1'], Command),
+		shell(Command).
+
 	create_bug_report(github, windows, Title, Description, Labels, Assignee) :-
 		!,
 		atomic_list_concat(['gh issue create --title \'', Title, '\' --body \'', Description, '\' --label ', Labels, ' --assignee ', Assignee, ' >/dev/null 2>&1'], Command),
@@ -153,13 +192,267 @@
 		atomic_list_concat(['glab issue create --title \'', Title, '\' --description \'', Description, '\' --label ', Labels, ' --assignee ', Assignee, ' >/dev/null 2>&1'], Command),
 		shell(Command).
 
+	create_bug_report(jira, OperatingSystem, Title, Description, Labels, Assignee) :-
+		% the assignee must be a user known to the Jira server; if assigning
+		% the issue fails, retry without an assignee
+		null_redirect(OperatingSystem, Redirect),
+		(	jira_create_command(Title, Description, Labels, Assignee, Redirect, Command),
+			shell(Command) ->
+			true
+		;	jira_create_command(Title, Description, Labels, '', Redirect, Command),
+			shell(Command)
+		).
+
+	create_bug_report(gitea, OperatingSystem, Title, Description, Labels, Assignee) :-
+		% the assignee must be a user with access to the repository; if
+		% assigning the issue fails, retry without an assignee
+		null_redirect(OperatingSystem, Redirect),
+		(	gitea_create_command(Title, Description, Labels, Assignee, Redirect, Command),
+			shell(Command) ->
+			true
+		;	gitea_create_command(Title, Description, Labels, '', Redirect, Command),
+			shell(Command)
+		).
+
+	create_bug_report(azure, OperatingSystem, Title, Description, Labels, Assignee) :-
+		% the assignee must be a known user in the organization; if
+		% assigning the work item fails, retry without an assignee
+		null_redirect(OperatingSystem, Redirect),
+		labels_to_tags(Labels, Tags),
+		(	azure_create_command(Title, Description, Tags, Assignee, Redirect, Command),
+			shell(Command) ->
+			true
+		;	azure_create_command(Title, Description, Tags, '', Redirect, Command),
+			shell(Command)
+		).
+
+	jira_create_command(Title, Description, Labels, Assignee, Redirect, Command) :-
+		atom_chars(Labels, LabelsChars),
+		split_labels(LabelsChars, LabelList),
+		jira_label_options(LabelList, LabelOptions),
+		(	Assignee == '' ->
+			AssigneeOption = ''
+		;	atomic_list_concat([' -a ', Assignee], AssigneeOption)
+		),
+		atomic_list_concat([
+			'jira issue create -tBug -s \'', Title, '\' -b \'', Description, '\'',
+			LabelOptions, AssigneeOption, ' --no-input ', Redirect
+		], Command).
+
+	jira_label_options([], '').
+	jira_label_options([Label| Labels], Options) :-
+		jira_label_options(Labels, Options0),
+		atomic_list_concat([' -l ', Label, Options0], Options).
+
+	jira_label_conditions([], '').
+	jira_label_conditions([Label| Labels], Conditions) :-
+		jira_label_conditions(Labels, Conditions0),
+		atomic_list_concat([' AND labels = "', Label, '"', Conditions0], Conditions).
+
+	% issue listing command using a JQL query (run by "jira" in the context of the
+	% configured project) and printing only the summary column in plain mode
+	jira_list_command(OperatingSystem, Title, Labels, Command) :-
+		backslash_escape(Title, EscapedTitle),
+		atom_chars(Labels, LabelsChars),
+		split_labels(LabelsChars, LabelList),
+		jira_label_conditions(LabelList, Conditions),
+		atomic_list_concat([
+			'issuetype = Bug AND statusCategory != Done', Conditions,
+			' AND summary ~ "\\"', EscapedTitle, '\\""'
+		], JQL),
+		shell_quote(OperatingSystem, JQL, QuotedJQL),
+		atomic_list_concat(['jira issue list --plain --no-headers --no-truncate --columns summary -q ', QuotedJQL], Command).
+
+	shell_quote(windows, Text, Quoted) :-
+		!,
+		backslash_escape(Text, Escaped),
+		atomic_list_concat(['"', Escaped, '"'], Quoted).
+	shell_quote(_, Text, Quoted) :-
+		escape_double_quotes(Text, Escaped),
+		atomic_list_concat(['\'', Escaped, '\''], Quoted).
+
+	% escape backslashes and double quotes with a backslash
+	backslash_escape(Atom, Escaped) :-
+		atom_chars(Atom, Chars),
+		backslash_escape_chars(Chars, EscapedChars),
+		atom_chars(Escaped, EscapedChars).
+
+	backslash_escape_chars([], []).
+	backslash_escape_chars([Char| Chars], Escaped) :-
+		(	(Char == '\\' ; Char == '"') ->
+			Escaped = ['\\', Char| Escaped0]
+		;	Escaped = [Char| Escaped0]
+		),
+		backslash_escape_chars(Chars, Escaped0).
+
+	gitea_create_command(Title, Description, Labels, Assignee, Redirect, Command) :-
+		(	Assignee == '' ->
+			AssigneeOption = ''
+		;	atomic_list_concat([' --assignees ', Assignee], AssigneeOption)
+		),
+		atomic_list_concat([
+			'tea issues create --title \'', Title, '\' --description \'', Description, '\' --labels ', Labels,
+			AssigneeOption, ' ', Redirect
+		], Command).
+
+	azure_create_command(Title, Description, Tags, Assignee, Redirect, Command) :-
+		(	Assignee == '' ->
+			AssigneeOption = ''
+		;	atomic_list_concat([' --assigned-to ', Assignee], AssigneeOption)
+		),
+		atomic_list_concat([
+			'az boards work-item create --type Bug --title \'', Title, '\'',
+			' --fields \'Microsoft.VSTS.TCM.ReproSteps=', Description, '\' \'System.Tags=', Tags, '\'',
+			AssigneeOption, ' --output none ', Redirect
+		], Command).
+
+	null_redirect(windows, '> nul 2>&1') :-
+		!.
+	null_redirect(_, '>/dev/null 2>&1').
+
+	% Azure DevOps tags are separated by semicolons
+	labels_to_tags(Labels, Tags) :-
+		atom_chars(Labels, Chars),
+		commas_to_semicolons(Chars, TagsChars),
+		atom_chars(Tags, TagsChars).
+
+	commas_to_semicolons([], []).
+	commas_to_semicolons([Char0| Chars0], [Char| Chars]) :-
+		(	Char0 == (',') ->
+			Char = (';')
+		;	Char = Char0
+		),
+		commas_to_semicolons(Chars0, Chars).
+
+	% WIQL query for open bugs with a given title and given tags
+	azure_wiql(Title, Labels, WIQL) :-
+		double_single_quotes(Title, WIQLTitle),
+		atom_chars(Labels, LabelsChars),
+		split_labels(LabelsChars, LabelList),
+		azure_tag_conditions(LabelList, Conditions),
+		atomic_list_concat([
+			'SELECT [System.Id] FROM WorkItems WHERE [System.WorkItemType] = \'Bug\'',
+			' AND [System.StateCategory] NOT IN (\'Completed\', \'Removed\')',
+			' AND [System.Title] = \'', WIQLTitle, '\'', Conditions
+		], WIQL).
+
+	azure_tag_conditions([], '').
+	azure_tag_conditions([Label| Labels], Conditions) :-
+		double_single_quotes(Label, WIQLLabel),
+		azure_tag_conditions(Labels, Conditions0),
+		atomic_list_concat([' AND [System.Tags] CONTAINS \'', WIQLLabel, '\'', Conditions0], Conditions).
+
+	split_labels(Chars, [Label| Labels]) :-
+		label_chars(Chars, LabelChars, Rest),
+		atom_chars(Label, LabelChars),
+		(	Rest == [] ->
+			Labels = []
+		;	split_labels(Rest, Labels)
+		).
+
+	label_chars([], [], []).
+	label_chars([Char| Chars], LabelChars, Rest) :-
+		(	Char == (',') ->
+			LabelChars = [],
+			Rest = Chars
+		;	LabelChars = [Char| LabelChars0],
+			label_chars(Chars, LabelChars0, Rest)
+		).
+
+	double_single_quotes(Atom, Doubled) :-
+		atom_chars(Atom, Chars),
+		double_single_quotes_in_chars(Chars, DoubledChars),
+		atom_chars(Doubled, DoubledChars).
+
+	double_single_quotes_in_chars([], []).
+	double_single_quotes_in_chars([Char| Chars], Doubled) :-
+		(	Char == '\'' ->
+			Doubled = ['\'', '\''| Doubled0]
+		;	Doubled = [Char| Doubled0]
+		),
+		double_single_quotes_in_chars(Chars, Doubled0).
+
+	% Azure DevOps work item fields are HTML (not Markdown); convert the
+	% (small) subset of Markdown used by the bug report description
+	description_format(azure, Markdown, HTML) :-
+		!,
+		atom_chars(Markdown, Chars),
+		html_chars(Chars, closed, HTMLChars),
+		atom_chars(HTML, HTMLChars).
+	% Jira: the "&emsp;" HTML entities used for indentation in the Markdown
+	% descriptions are not supported
+	description_format(jira, Markdown, Description) :-
+		!,
+		atom_chars(Markdown, Chars),
+		strip_emsp(Chars, StrippedChars),
+		atom_chars(Description, StrippedChars).
+	description_format(_, Description, Description).
+
+	strip_emsp([], []).
+	strip_emsp(['&', 'e', 'm', 's', 'p', ';'| Chars], Stripped) :-
+		!,
+		strip_emsp(Chars, Stripped).
+	strip_emsp([Char| Chars], [Char| Stripped]) :-
+		strip_emsp(Chars, Stripped).
+
+	html_chars([], closed, []).
+	html_chars([], open, Chars) :-
+		atom_chars('</code>', Chars).
+	html_chars(['\n', '\n'| Chars], Code, HTMLChars) :-
+		!,
+		atom_chars('<br><br>', Prefix),
+		html_chars(Chars, Code, HTMLChars0),
+		append_chars(Prefix, HTMLChars0, HTMLChars).
+	html_chars(['\n'| Chars], Code, HTMLChars) :-
+		!,
+		atom_chars('<br>', Prefix),
+		html_chars(Chars, Code, HTMLChars0),
+		append_chars(Prefix, HTMLChars0, HTMLChars).
+	html_chars(['<'| Chars], Code, HTMLChars) :-
+		!,
+		atom_chars('&lt;', Prefix),
+		html_chars(Chars, Code, HTMLChars0),
+		append_chars(Prefix, HTMLChars0, HTMLChars).
+	html_chars(['>'| Chars], Code, HTMLChars) :-
+		!,
+		atom_chars('&gt;', Prefix),
+		html_chars(Chars, Code, HTMLChars0),
+		append_chars(Prefix, HTMLChars0, HTMLChars).
+	html_chars(['`'| Chars], closed, HTMLChars) :-
+		!,
+		atom_chars('<code>', Prefix),
+		html_chars(Chars, open, HTMLChars0),
+		append_chars(Prefix, HTMLChars0, HTMLChars).
+	html_chars(['`'| Chars], open, HTMLChars) :-
+		!,
+		atom_chars('</code>', Prefix),
+		html_chars(Chars, closed, HTMLChars0),
+		append_chars(Prefix, HTMLChars0, HTMLChars).
+	html_chars([Char| Chars], Code, [Char| HTMLChars]) :-
+		html_chars(Chars, Code, HTMLChars).
+
+	append_chars([], Chars, Chars).
+	append_chars([Char| Chars0], Chars, [Char| Chars1]) :-
+		append_chars(Chars0, Chars, Chars1).
+
+	% GitHub and GitLab users are best identified by their login (as inferred
+	% from the commit author email); Azure DevOps and Jira users by their email
+	assignee(Server, Directory, Assignee) :-
+		(	Server == azure
+		;	Server == jira
+		),
+		!,
+		commit_log(Directory, '%ae', Assignee).
+	assignee(_, Directory, Assignee) :-
+		commit_log(Directory, '%aL', Assignee).
+
 	title(Test, TestSet, Title) :-
 		to_atom(Test, TestAtom),
 		atomic_list_concat(['Test ', TestAtom, ' of test set ', TestSet, ' failed'], Title).
 
-	description(Object, File, Position, Reason, Note, Time, Branch, Hash, Author, Date, Message, Description) :-
+	description(Server, Object, File, Position, Reason, Note, Time, Branch, Hash, Author, Date, Message, Description) :-
 		to_atom(Object, ObjectAtom),
-		(	tests_url(File, Position, URL) ->
+		(	tests_url(Server, File, Position, URL) ->
 			true
 		;	to_atom(Position, PositionAtom),
 			atomic_list_concat([File, ':', PositionAtom], URL)
@@ -194,7 +487,25 @@
 		{current_logtalk_flag(issue_server, Server0)},
 		server(Server0, Server).
 
-	tests_url(Short, Position, URL) :-
+	% Azure Repos links use query parameters instead of a line anchor; the
+	% base URL is expected to be the repository URL, optionally including the
+	% version, e.g. https://dev.azure.com/org/project/_git/repo?version=GC<hash>
+	tests_url(azure, Short, Position, URL) :-
+		!,
+		% bypass the compiler as the flag is only created after loading this file
+		{current_logtalk_flag(tests_base_url, BaseURL)},
+		BaseURL \== '',
+		Position = Line-_,
+		(	sub_atom(BaseURL, _, _, _, '?') ->
+			Separator = '&'
+		;	Separator = '?'
+		),
+		(	sub_atom(Short, 0, 1, _, '/') ->
+			Path = Short
+		;	atom_concat('/', Short, Path)
+		),
+		atomic_list_concat([BaseURL, Separator, 'path=', Path, '&line=', Line], URL).
+	tests_url(_, Short, Position, URL) :-
 		% bypass the compiler as the flag is only created after loading this file
 		{current_logtalk_flag(tests_base_url, BaseURL)},
 		BaseURL \== '',
@@ -204,6 +515,9 @@
 	server('',     github).  % default
 	server(github, github).
 	server(gitlab, gitlab).
+	server(azure, azure).
+	server(gitea, gitea).
+	server(jira, jira).
 
 	to_atom(Term, Atom) :-
 		(	atom(Term) ->
