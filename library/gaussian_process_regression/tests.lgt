@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-10-21,
+		date is 2026-10-26,
 		comment is 'Unit tests for the "gaussian_process_regression" library.'
 	]).
 
@@ -37,6 +37,7 @@
 		length/2, member/2, memberchk/2
 	]).
 
+	:- private(cached_regressor_/3).
 	:- dynamic(cached_regressor_/3).
 
 	cover(gaussian_process_regression).
