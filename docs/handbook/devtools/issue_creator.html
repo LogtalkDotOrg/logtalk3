@@ -81,6 +81,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">issue_creator</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
 </ul>
@@ -174,6 +175,27 @@ installed (depending on the issue tracker used). For Azure DevOps, the
 </div>
 <p>But, in the most common usage scenario, this tool is automatically
 loaded by the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> automation script.</p>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this tool, load its <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(issue_creator(tester)).
+</pre></div>
+</div>
+<p>The tests cover failure descriptions, tracker-specific formatting, query
+and command construction, source links, report content, flaky-test
+filtering, and server selection. The test goals do not execute tracker
+commands or require issue tracker CLIs, credentials, or access to an
+issue tracker server. Git metadata collection, duplicate detection,
+assignment retries, and actual issue creation are not tested.</p>
+<p>When the tool is not already loaded, the test runner uses a compilation
+hook to omit its reporting callback, allowing the tests to run offline.
+When the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> script loads the tool using its <code class="docutils literal notranslate"><span class="pre">-b</span></code>
+option, the test runner preserves the loaded reporter and its
+configuration. Temporary flag values used by individual tests are
+restored before test results are reported, including when a test goal
+fails or throws an exception. Automatic reporting retains its normal
+CLI, authentication, and server requirements.</p>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
@@ -289,8 +311,10 @@ issue tracker server for the bug report to be successfully created. The
 reports when browsing the issue tracker.</p>
 <p>The bug reports use Markdown formatting, which is the default in GitHub
 and GitLab issue trackers.</p>
-<p>But reports are only created for non-flaky tests. The bug report title
-and labels are used to prevent creating duplicated bug reports.
+<p>Reports are only created for non-flaky tests, honoring both the
+<code class="docutils literal notranslate"><span class="pre">flaky</span></code> test option and notes containing <code class="docutils literal notranslate"><span class="pre">flaky</span></code>. The reported
+execution time is CPU time in seconds, not wall time. The bug report
+title and labels are used to prevent creating duplicated bug reports.
 Therefore, the title should not be manually edited and the same labels
 should be used for multiple runs of the same tests and preserved when
 editing the bug reports.</p>

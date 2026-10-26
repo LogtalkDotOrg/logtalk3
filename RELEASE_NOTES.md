@@ -359,6 +359,8 @@ the Sonar Generic Coverage XML format.
 * ADDED: Support to the `issue_creator` tool and the `logtalk_tester` scripts
 for creating bug reports at Azure DevOps, Gitea, and Jira servers.
 
+* ADDED: Tests for the `issue_creator` tool.
+
 * IMPROVED: The performance of the `code_metrics`, `dead_code_scanner`,
 `diagrams`, and `lgtdoc` tool tests.
 
@@ -374,6 +376,9 @@ Also fixed missing element declarations in the XML code coverage report DTD.
 
 * FIXED: The `help` tool inline opening of documentation pages when their file
 paths contain spaces.
+
+* FIXED: The `issue_creator` tool creation of bug reports for recent changes
+to the `lgtunit` tool representation of test failure reasons.
 
 Examples
 --------

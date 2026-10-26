@@ -37,9 +37,9 @@
 :- object(issue_creator).
 
 	:- info([
-		version is 0:13:0,
+		version is 0:13:1,
 		author is 'Paulo Moura',
-		date is 2026-10-25,
+		date is 2026-10-26,
 		comment is 'Support for automatically creating bug report issues for failed tests in GitHub, GitLab, Azure DevOps, Gitea, or Jira servers.',
 		remarks is [
 			'Usage' - 'This tool is automatically loaded and used from the ``logtalk_tester`` automation script when using its ``-b`` option. See the script man page for details.'
@@ -73,12 +73,13 @@
 		fail.
 
 	% failed tests
-	message_hook(failed_test(Object, Test, File, Position, Reason, Note, Time)) :-
-		\+ flaky_test_failure(Note),
+	message_hook(Message) :-
+		failure_details(Message, Object, Test, File, Position, Reason, Note, Time),
 		create_bug_report(Object, Test, File, Position, Reason, Note, Time).
-	message_hook(non_deterministic_success(Object, Test, File, Position, Note, Time)) :-
-		\+ flaky_test_failure(Note),
-		create_bug_report(Object, Test, File, Position, non_deterministic_success, Note, Time).
+
+	failure_details(failed_test(Object, Test, File, Position, Reason, Flaky, Note, CPUTime, _WallTime), Object, Test, File, Position, Reason, Note, CPUTime) :-
+		Flaky == false,
+		\+ flaky_test_failure(Note).
 
 	flaky_test_failure(Note) :-
 		atom(Note),
@@ -279,7 +280,7 @@
 
 	backslash_escape_chars([], []).
 	backslash_escape_chars([Char| Chars], Escaped) :-
-		(	(Char == '\\' ; Char == '"') ->
+		(	(Char == ('\\') ; Char == '"') ->
 			Escaped = ['\\', Char| Escaped0]
 		;	Escaped = [Char| Escaped0]
 		),
@@ -395,7 +396,8 @@
 	strip_emsp([Char| Chars], [Char| Stripped]) :-
 		strip_emsp(Chars, Stripped).
 
-	html_chars([], closed, []).
+	html_chars([], closed, []) :-
+		!.
 	html_chars([], open, Chars) :-
 		atom_chars('</code>', Chars).
 	html_chars(['\n', '\n'| Chars], Code, HTMLChars) :-
@@ -497,8 +499,8 @@
 		BaseURL \== '',
 		Position = Line-_,
 		(	sub_atom(BaseURL, _, _, _, '?') ->
-			Separator = '&'
-		;	Separator = '?'
+			Separator = ('&')
+		;	Separator = ('?')
 		),
 		(	sub_atom(Short, 0, 1, _, '/') ->
 			Path = Short
@@ -554,12 +556,16 @@
 		to_atom(Error, ErrorAtom),
 		atomic_list_concat(['&emsp;test goal throws an error but should have failed: `', ErrorAtom, '`'], ReasonAtom).
 	failure_reason_to_atom(error_instead_of_success(assertion_error(Assertion, error(Error,_))), ReasonAtom) :-
+		!,
 		failure_reason_to_atom(error_instead_of_success(assertion_error(Assertion, Error)), ReasonAtom).
 	failure_reason_to_atom(error_instead_of_success(assertion_error(Assertion, Error)), ReasonAtom) :-
+		!,
+		numbervars((Assertion, Error), 0, _),
 		to_atom(Assertion, AssertionAtom),
 		to_atom(Error, ErrorAtom),
 		atomic_list_concat(['&emsp;test assertion throws an error: `', AssertionAtom, '` - `', ErrorAtom, '`'], ReasonAtom).
 	failure_reason_to_atom(error_instead_of_success(assertion_failure(Assertion)), ReasonAtom) :-
+		!,
 		to_atom(Assertion, AssertionAtom),
 		atomic_list_concat(['&emsp;test assertion failed: `', AssertionAtom, '`'], ReasonAtom).
 	failure_reason_to_atom(error_instead_of_success(Error), ReasonAtom) :-
@@ -567,30 +573,44 @@
 		atomic_list_concat(['&emsp;test goal throws an error but should have succeeded: `', ErrorAtom, '`'], ReasonAtom).
 
 	failure_reason_to_atom(wrong_error(ExpectedError, Error), ReasonAtom) :-
+		numbervars((ExpectedError, Error), 0, _),
 		to_atom(ExpectedError, ExpectedErrorAtom),
 		to_atom(Error, ErrorAtom),
 		atomic_list_concat(['&emsp;test goal throws the wrong error:  \n', '&emsp;&emsp;expected `', ExpectedErrorAtom, '`  \n&emsp;&emsp;but got `', ErrorAtom, '`'], ReasonAtom).
 
-	failure_reason_to_atom(quick_check_failed(Goal, Test, Shrinks, Seed), ReasonAtom) :-
+	failure_reason_to_atom(quick_check_failed(Goal, Test, Shrinks, Seed, TestSeed), ReasonAtom) :-
 		to_atom(Goal, GoalAtom),
 		to_atom(Test, TestAtom),
 		to_atom(Seed, SeedAtom),
+		to_atom(TestSeed, TestSeedAtom),
 		(	Shrinks == 1 ->
-			atomic_list_concat(['&emsp;quick check test failure (at test `', TestAtom, '` after ', Shrinks, ' shrink with starting seed `', SeedAtom, '`): `', GoalAtom], ReasonAtom)
-		;	atomic_list_concat(['&emsp;quick check test failure (at test `', TestAtom, '` after ', Shrinks, ' shrinks with starting seed `', SeedAtom, '`): `', GoalAtom], ReasonAtom)
+			atomic_list_concat(['&emsp;quick check test failure (at test `', TestAtom, '` after ', Shrinks, ' shrink with starting seed `', SeedAtom, '` and test seed `', TestSeedAtom, '`): `', GoalAtom, '`'], ReasonAtom)
+		;	atomic_list_concat(['&emsp;quick check test failure (at test `', TestAtom, '` after ', Shrinks, ' shrinks with starting seed `', SeedAtom, '` and test seed `', TestSeedAtom, '`): `', GoalAtom, '`'], ReasonAtom)
 		).
 
-	failure_reason_to_atom(quick_check_error(error(Error,_), Goal, Test, Seed), ReasonAtom) :-
-		failure_reason_to_atom(quick_check_error(Error, Goal, Test, Seed), ReasonAtom).
-	failure_reason_to_atom(quick_check_error(Error, _Goal, Test, Seed), ReasonAtom) :-
+	failure_reason_to_atom(quick_check_error(error(Error,_), Goal, Test, Seed, TestSeed), ReasonAtom) :-
+		!,
+		failure_reason_to_atom(quick_check_error(Error, Goal, Test, Seed, TestSeed), ReasonAtom).
+	failure_reason_to_atom(quick_check_error(Error, _Goal, Test, Seed, TestSeed), ReasonAtom) :-
 		to_atom(Test, TestAtom),
 		to_atom(Seed, SeedAtom),
+		to_atom(TestSeed, TestSeedAtom),
 		to_atom(Error, ErrorAtom),
-		atomic_list_concat(['&emsp;quick check test error (at test `', TestAtom, '` with starting seed `', SeedAtom, '`): `', ErrorAtom, '`'], ReasonAtom).
+		atomic_list_concat(['&emsp;quick check test error (at test `', TestAtom, '` with starting seed `', SeedAtom, '` and test seed `', TestSeedAtom, '`): `', ErrorAtom, '`'], ReasonAtom).
 	failure_reason_to_atom(quick_check_error(Error, Culprit), ReasonAtom) :-
+		numbervars((Error, Culprit), 0, _),
 		to_atom(Error, ErrorAtom),
 		to_atom(Culprit, CulpritAtom),
 		atomic_list_concat(['&emsp;quick check test error (caused by ', ErrorAtom, '): `', CulpritAtom, '`'], ReasonAtom).
+
+	failure_reason_to_atom(quick_check_broken(Why, Error), ReasonAtom) :-
+		numbervars((Why, Error), 0, _),
+		to_atom(Why, WhyAtom),
+		to_atom(Error, ErrorAtom),
+		atomic_list_concat(['&emsp;quick check test broken (caused by `', WhyAtom, '`): `', ErrorAtom, '`'], ReasonAtom).
+	failure_reason_to_atom(quick_check_broken(Why), ReasonAtom) :-
+		to_atom(Why, WhyAtom),
+		atomic_list_concat(['&emsp;quick check test broken (caused by `', WhyAtom, '`)'], ReasonAtom).
 
 	failure_reason_to_atom(step_error(Step, Error), ReasonAtom) :-
 		to_atom(Error, ErrorAtom),

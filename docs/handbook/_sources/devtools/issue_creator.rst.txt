@@ -41,6 +41,31 @@ To load this tool, load its ``loader.lgt`` file:
 But, in the most common usage scenario, this tool is automatically
 loaded by the ``logtalk_tester`` automation script.
 
+Testing
+-------
+
+To test this tool, load its ``tester.lgt`` file:
+
+::
+
+   | ?- logtalk_load(issue_creator(tester)).
+
+The tests cover failure descriptions, tracker-specific formatting, query
+and command construction, source links, report content, flaky-test
+filtering, and server selection. The test goals do not execute tracker
+commands or require issue tracker CLIs, credentials, or access to an
+issue tracker server. Git metadata collection, duplicate detection,
+assignment retries, and actual issue creation are not tested.
+
+When the tool is not already loaded, the test runner uses a compilation
+hook to omit its reporting callback, allowing the tests to run offline.
+When the ``logtalk_tester`` script loads the tool using its ``-b``
+option, the test runner preserves the loaded reporter and its
+configuration. Temporary flag values used by individual tests are
+restored before test results are reported, including when a test goal
+fails or throws an exception. Automatic reporting retains its normal
+CLI, authentication, and server requirements.
+
 Usage
 -----
 
@@ -172,8 +197,10 @@ reports when browsing the issue tracker.
 The bug reports use Markdown formatting, which is the default in GitHub
 and GitLab issue trackers.
 
-But reports are only created for non-flaky tests. The bug report title
-and labels are used to prevent creating duplicated bug reports.
+Reports are only created for non-flaky tests, honoring both the
+``flaky`` test option and notes containing ``flaky``. The reported
+execution time is CPU time in seconds, not wall time. The bug report
+title and labels are used to prevent creating duplicated bug reports.
 Therefore, the title should not be manually edited and the same labels
 should be used for multiple runs of the same tests and preserved when
 editing the bug reports.
