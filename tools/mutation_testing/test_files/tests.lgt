@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2026-10-09,
+		date is 2026-10-26,
 		comment is 'Unit tests for the "mutation_testing" tool.'
 	]).
 
@@ -239,7 +239,7 @@
 	test(mt_entity_2_01, deterministic) :-
 		^^suppress_text_output,
 		mutation_testing::entity(mt_sample, [
-			mutators([fail_insertion]),
+			mutators([head_arguments_reordering]),
 			max_mutations_per_mutator(1),
 			sampling(count(3)),
 			threshold(0.0),
@@ -545,17 +545,17 @@
 
 	test(mt_max_mutations_per_mutator_option_02, deterministic) :-
 		mutation_testing::entity_mutants(mt_sample, Mutants, [
-			mutators([fail_insertion]),
+			mutators([head_arguments_reordering]),
 			max_mutations_per_mutator(all)
 		]),
-		assertion(member(mutant(mt_sample, multi_clause/1, clause(2), fail_insertion, 2), Mutants)).
+		assertion(member(mutant(mt_sample, head_bound_atom_integer/2, clause(1), head_arguments_reordering, 1), Mutants)).
 
 	test(mt_max_mutations_per_mutator_option_03, deterministic) :-
 		mutation_testing::entity_mutants(mt_sample, Mutants, [
-			mutators([fail_insertion, body_goal_negation]),
+			mutators([head_arguments_reordering, body_goal_negation]),
 			max_mutations_per_mutator(1)
 		]),
-		once(member(mutant(mt_sample, check/1, clause(1), fail_insertion, 1), Mutants)),
+		once(member(mutant(mt_sample, head_bound_atom_integer/2, clause(1), head_arguments_reordering, 1), Mutants)),
 		once(member(mutant(mt_sample, check/1, clause(1), body_goal_negation, 1), Mutants)).
 
 	test(mt_threshold_option_01, deterministic) :-
@@ -575,7 +575,7 @@
 		]).
 
 	test(mt_format_option_01, deterministic) :-
-		mutation_testing::predicate(mt_sample, check/1, [
+		mutation_testing::predicate(mt_sample, head_bound_atom_integer/2, [
 			mutators([fail_insertion]),
 			max_mutations_per_mutator(1),
 			sampling(count(1)),
@@ -587,8 +587,8 @@
 	test(mt_format_option_02, deterministic(os::file_exists(Report))) :-
 		^^suppress_text_output,
 		^^file_path('mutation_text_report.txt', Report),
-		mutation_testing::predicate(mt_sample, check/1, [
-			mutators([fail_insertion]),
+		mutation_testing::predicate(mt_sample, head_bound_atom_integer/2, [
+			mutators([head_arguments_reordering]),
 			max_mutations_per_mutator(2),
 			sampling(count(2)),
 			threshold(0.0),
