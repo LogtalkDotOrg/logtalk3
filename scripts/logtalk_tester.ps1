@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on October 18, 2026
+##   Last updated on October 27, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -56,7 +56,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
-	Write-Output "$myName 27.0"
+	Write-Output "$myName 28.0"
 }
 
 Function Format-Decimal {
@@ -426,7 +426,7 @@ Function Write-Usage-Help() {
 	Write-Output "  -j maximum number of concurrent test set processes (default is $j)"
 	Write-Output "  -n name of the test driver and sourced files (minus file name extensions; default is $n)"
 	Write-Output "  -s suppress path prefix (default is $prefix)"
-	Write-Output "  -b bug report server (valid values are github, gitlab, azure, gitea, and jira; no default; requires -u option)"
+	Write-Output "  -b bug report server (valid values are azure, gitea, github, gitlab, jira, and linear; no default; requires -u option)"
 	Write-Output "  -u base URL to generate links to test files (no default)"
 	Write-Output "  -c code coverage report (default is $c)"
 	Write-Output "     (valid values are none, xml, cobertura, lcov, and sonar)"
@@ -616,8 +616,8 @@ Function Confirm-Parameters() {
 		} else {
 			$script:issue_server = $b
 		}
-		if ($script:issue_server -ne "github" -and $script:issue_server -ne "gitlab" -and $script:issue_server -ne "azure" -and $script:issue_server -ne "gitea" -and $script:issue_server -ne "jira") {
-			Write-Error "Error! Issue tracker server must be either github, gitlab, azure, gitea, or jira: $b"
+		if ($script:issue_server -ne "azure" -and $script:issue_server -ne "gitea" -and $script:issue_server -ne "github" -and $script:issue_server -ne "gitlab" -and $script:issue_server -ne "jira" -and $script:issue_server -ne "linear") {
+			Write-Error "Error! Issue tracker server must be either github, gitlab, azure, gitea, jira, or linear: $b"
 			Write-Usage-Help
 			Exit 1
 		}

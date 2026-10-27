@@ -83,6 +83,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#azure-devops-notes">Azure DevOps notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gitea-notes">Gitea notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#jira-notes">Jira notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#linear-notes">Linear notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#suspending-creation-of-bug-reports">Suspending creation of bug reports</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
 </ul>
 </li>
@@ -145,27 +150,28 @@
   <section id="issue-creator">
 <span id="library-issue-creator"></span><h1><code class="docutils literal notranslate"><span class="pre">issue_creator</span></code><a class="headerlink" href="#issue-creator" title="Link to this heading"></a></h1>
 <p>This is a complementary tool for the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool for automatically
-creating bug report issues for failed tests in GitHub, GitLab, Azure
-DevOps, Gitea, or Jira servers.</p>
+creating bug reports for failed tests in Azure DevOps, Gitea, GitHub,
+GitLab, Jira, or Linear issue tracker servers.</p>
 <section id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
-<p>This tool requires that the GitHub <code class="docutils literal notranslate"><span class="pre">gh</span></code>, GitLab <code class="docutils literal notranslate"><span class="pre">glab</span></code>, Azure
-<code class="docutils literal notranslate"><span class="pre">az</span></code>, Gitea <code class="docutils literal notranslate"><span class="pre">tea</span></code>, or Jira <code class="docutils literal notranslate"><span class="pre">jira</span></code>
-(<a class="reference external" href="https://github.com/ankitpokhrel/jira-cli">jira-cli</a>) CLIs be
-installed (depending on the issue tracker used). For Azure DevOps, the
-<code class="docutils literal notranslate"><span class="pre">az</span></code> CLI must also have the <code class="docutils literal notranslate"><span class="pre">azure-devops</span></code> extension installed:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> az extension add <span class="o">--</span>name azure<span class="o">-</span>devops
-</pre></div>
-</div>
-<p>For the installation instructions see:</p>
+<p>This tool requires that the Azure <code class="docutils literal notranslate"><span class="pre">az</span></code>, Gitea <code class="docutils literal notranslate"><span class="pre">tea</span></code>, GitHub <code class="docutils literal notranslate"><span class="pre">gh</span></code>,
+GitLab <code class="docutils literal notranslate"><span class="pre">glab</span></code>, Jira <code class="docutils literal notranslate"><span class="pre">jira</span></code>, or Linear <code class="docutils literal notranslate"><span class="pre">linear</span></code> CLIs be installed
+(depending on the issue tracker used). For the installation instructions
+see:</p>
 <ul class="simple">
-<li><p>GitHub: <a class="reference external" href="https://cli.github.com">https://cli.github.com</a></p></li>
-<li><p>GitLab: <a class="reference external" href="https://glab.readthedocs.io">https://glab.readthedocs.io</a></p></li>
 <li><p>Azure DevOps:
 <a class="reference external" href="https://learn.microsoft.com/en-us/cli/azure/install-azure-cli">https://learn.microsoft.com/en-us/cli/azure/install-azure-cli</a></p></li>
 <li><p>Gitea: <a class="reference external" href="https://gitea.com/gitea/tea">https://gitea.com/gitea/tea</a></p></li>
+<li><p>GitHub: <a class="reference external" href="https://cli.github.com">https://cli.github.com</a></p></li>
+<li><p>GitLab: <a class="reference external" href="https://glab.readthedocs.io">https://glab.readthedocs.io</a></p></li>
 <li><p>Jira: <a class="reference external" href="https://github.com/ankitpokhrel/jira-cli">https://github.com/ankitpokhrel/jira-cli</a></p></li>
+<li><p>Linear: <a class="reference external" href="https://github.com/schpet/linear-cli">https://github.com/schpet/linear-cli</a></p></li>
 </ul>
+<p>For Azure DevOps, the <code class="docutils literal notranslate"><span class="pre">az</span></code> CLI must also have the <code class="docutils literal notranslate"><span class="pre">azure-devops</span></code>
+extension installed:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> az extension add <span class="o">--</span>name azure<span class="o">-</span>devops
+</pre></div>
+</div>
 </section>
 <section id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
@@ -182,12 +188,14 @@ loaded by the <code class="docutils literal notranslate"><span class="pre">logta
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(issue_creator(tester)).
 </pre></div>
 </div>
-<p>The tests cover failure descriptions, tracker-specific formatting, query
-and command construction, source links, report content, flaky-test
-filtering, and server selection. The test goals do not execute tracker
-commands or require issue tracker CLIs, credentials, or access to an
-issue tracker server. Git metadata collection, duplicate detection,
-assignment retries, and actual issue creation are not tested.</p>
+<p>The tests cover failure descriptions, tracker-specific formatting, title
+identity, search and creation arguments, existence commands, source
+links, report content, flaky-test filtering, and server selection.
+Harmless local commands check argument preservation and command
+outcomes. The test goals do not execute tracker commands or require
+issue tracker CLIs, credentials, or access to an issue tracker server.
+Git metadata collection, live searches, assignment retries, and actual
+issue creation are not tested.</p>
 <p>When the tool is not already loaded, the test runner uses a compilation
 hook to omit its reporting callback, allowing the tests to run offline.
 When the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> script loads the tool using its <code class="docutils literal notranslate"><span class="pre">-b</span></code>
@@ -200,9 +208,11 @@ CLI, authentication, and server requirements.</p>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> automation script accepts a <code class="docutils literal notranslate"><span class="pre">-b</span></code> option for
-automatically using this tool (see the script man page for details). In
-the most simple case, this option possible values are <code class="docutils literal notranslate"><span class="pre">github</span></code>,
-<code class="docutils literal notranslate"><span class="pre">gitlab</span></code>, <code class="docutils literal notranslate"><span class="pre">azure</span></code>, <code class="docutils literal notranslate"><span class="pre">gitea</span></code>, and <code class="docutils literal notranslate"><span class="pre">jira</span></code>. For example:</p>
+automatically using this tool (see the script man page for details). As
+custom labels are optional, in the most simple case this option
+specifies only the issue tracker (possible values are <code class="docutils literal notranslate"><span class="pre">azure</span></code>,
+<code class="docutils literal notranslate"><span class="pre">gitea</span></code>, <code class="docutils literal notranslate"><span class="pre">github</span></code>, <code class="docutils literal notranslate"><span class="pre">gitlab</span></code>, <code class="docutils literal notranslate"><span class="pre">jira</span></code>, and <code class="docutils literal notranslate"><span class="pre">linear</span></code>). For
+example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> logtalk_tester <span class="o">\</span>
     <span class="o">-</span>p gnu <span class="o">\</span>
     <span class="o">-</span>b github <span class="o">\</span>
@@ -210,22 +220,29 @@ the most simple case, this option possible values are <code class="docutils lite
     <span class="o">-</span>u https<span class="o">://</span>github.com<span class="o">/</span>jdoe<span class="o">/</span>foo<span class="o">/</span>tree<span class="o">/</span><span class="m">55</span>aa900775befa135e0d5b48ea63098df8b97f5c<span class="o">/</span>
 </pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">-u</span></code> option is used by the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> automation scripts
+to set the <code class="docutils literal notranslate"><span class="pre">tests_base_url</span></code> flag value. This tool uses this flag to
+construct working test-file links by appending the test file path and
+line fragment to the <code class="docutils literal notranslate"><span class="pre">-u</span></code> option value (except for Azure DevOps; see
+notes below).</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> script <strong>must</strong> be called from a git repo
 directory or one of its sub-directories, which is a common setup in
 CI/CD pipelines. Moreover, prior to running the tests, the CLI must be
 used, if required, to authenticate and login to the server where the bug
-report issues will be created:</p>
+reports will be created:</p>
 <ul class="simple">
-<li><p>GitHub: <code class="docutils literal notranslate"><span class="pre">gh</span> <span class="pre">auth</span> <span class="pre">login</span> <span class="pre">--hostname</span> <span class="pre">&lt;string&gt;</span> <span class="pre">--with-token</span> <span class="pre">&lt;</span> <span class="pre">token.txt</span></code></p></li>
-<li><p>GitLab: <code class="docutils literal notranslate"><span class="pre">glab</span> <span class="pre">auth</span> <span class="pre">login</span> <span class="pre">--hostname</span> <span class="pre">&lt;string&gt;</span> <span class="pre">--token</span> <span class="pre">&lt;string&gt;</span></code></p></li>
 <li><p>Azure DevOps: <code class="docutils literal notranslate"><span class="pre">az</span> <span class="pre">login</span></code> or
 <code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">$TOKEN</span> <span class="pre">|</span> <span class="pre">az</span> <span class="pre">devops</span> <span class="pre">login</span> <span class="pre">--organization</span> <span class="pre">&lt;url&gt;</span></code> (alternatively,
 set the <code class="docutils literal notranslate"><span class="pre">AZURE_DEVOPS_EXT_PAT</span></code> environment variable)</p></li>
 <li><p>Gitea:
 <code class="docutils literal notranslate"><span class="pre">tea</span> <span class="pre">login</span> <span class="pre">add</span> <span class="pre">--name</span> <span class="pre">&lt;string&gt;</span> <span class="pre">--url</span> <span class="pre">&lt;string&gt;</span> <span class="pre">--token</span> <span class="pre">&lt;string&gt;</span></code></p></li>
+<li><p>GitHub: <code class="docutils literal notranslate"><span class="pre">gh</span> <span class="pre">auth</span> <span class="pre">login</span> <span class="pre">--hostname</span> <span class="pre">&lt;string&gt;</span> <span class="pre">--with-token</span> <span class="pre">&lt;</span> <span class="pre">token.txt</span></code></p></li>
+<li><p>GitLab: <code class="docutils literal notranslate"><span class="pre">glab</span> <span class="pre">auth</span> <span class="pre">login</span> <span class="pre">--hostname</span> <span class="pre">&lt;string&gt;</span> <span class="pre">--token</span> <span class="pre">&lt;string&gt;</span></code></p></li>
 <li><p>Jira: set the <code class="docutils literal notranslate"><span class="pre">JIRA_API_TOKEN</span></code> environment variable and run
 <code class="docutils literal notranslate"><span class="pre">jira</span> <span class="pre">init</span></code> (see the <code class="docutils literal notranslate"><span class="pre">jira-cli</span></code> documentation for the other
 authentication types)</p></li>
+<li><p>Linear: see the <code class="docutils literal notranslate"><span class="pre">linear-cli</span></code> documentation (the credential can be
+selected using the <code class="docutils literal notranslate"><span class="pre">linear</span></code> global option <code class="docutils literal notranslate"><span class="pre">--workspace</span></code>)</p></li>
 </ul>
 <p>The access token must have the necessary scopes that allow bug reports
 to be created. See the CLIs documentation for details. Typically, the
@@ -234,8 +251,15 @@ However, depending on the CI/CD workflow, the authentication may be done
 implicitly.</p>
 <p>The bug reports are created using by default the label <code class="docutils literal notranslate"><span class="pre">bug</span></code> and
 assigned to the author of the latest commit of the git repo. The <code class="docutils literal notranslate"><span class="pre">-b</span></code>
-option can also be used to override the label with a comma separated set
-of labels. For example, to use both <code class="docutils literal notranslate"><span class="pre">bug</span></code> and <code class="docutils literal notranslate"><span class="pre">auto</span></code> labels:</p>
+option can also be used to override the default label with a comma
+separated set of labels. The syntax is <code class="docutils literal notranslate"><span class="pre">-b</span> <span class="pre">SERVER:LABELS</span></code>. For every
+server, labels must be a comma-separated list of nonempty names. Each
+name must start with an ASCII letter or digit and contain only ASCII
+letters, digits, underscores (<code class="docutils literal notranslate"><span class="pre">_</span></code>), or hyphens (<code class="docutils literal notranslate"><span class="pre">-</span></code>). Spaces,
+quotes, and other characters are not supported. The scripts use this
+option to set the <code class="docutils literal notranslate"><span class="pre">issue_labels</span></code> flag. Invalid labels suppress
+automatic reporting before any Git metadata or tracker command is run.
+For example, to use both <code class="docutils literal notranslate"><span class="pre">bug</span></code> and <code class="docutils literal notranslate"><span class="pre">auto</span></code> labels:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> logtalk_tester <span class="o">\</span>
     <span class="o">-</span>p gnu <span class="o">\</span>
     <span class="o">-</span>b github<span class="o">:</span>bug,auto <span class="o">\</span>
@@ -243,72 +267,10 @@ of labels. For example, to use both <code class="docutils literal notranslate"><
     <span class="o">-</span>u https<span class="o">://</span>github.com<span class="o">/</span>jdoe<span class="o">/</span>foo<span class="o">/</span>tree<span class="o">/</span><span class="m">55</span>aa900775befa135e0d5b48ea63098df8b97f5c<span class="o">/</span>
 </pre></div>
 </div>
-<p>For Azure DevOps (<code class="docutils literal notranslate"><span class="pre">-b</span> <span class="pre">azure</span></code>), the organization and project are
-detected from the git remote when possible. Otherwise, set them as
-defaults using:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> az devops configure <span class="o">--</span>defaults organization<span class="o">=&lt;</span>url<span class="o">&gt;</span> project<span class="o">=&lt;</span>name<span class="o">&gt;</span>
-</pre></div>
-</div>
-<p>Bug reports are created as work items of type <code class="docutils literal notranslate"><span class="pre">Bug</span></code> (using the
-<code class="docutils literal notranslate"><span class="pre">Repro</span> <span class="pre">Steps</span></code> field for the description, which is HTML in Azure
-DevOps) and the labels are set as work item tags. The work item is
-assigned to the author of the latest commit using the author email, if
-that email matches a user in the Azure DevOps organization; otherwise,
-the work item is created unassigned. The base URL (<code class="docutils literal notranslate"><span class="pre">-u</span></code> option) should
-be the Azure Repos repository URL, optionally including the version, to
-allow generating links to the test files. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> logtalk_tester <span class="o">\</span>
-    <span class="o">-</span>p gnu <span class="o">\</span>
-    <span class="o">-</span>b azure<span class="o">:</span>bug,auto <span class="o">\</span>
-    <span class="o">-</span>s <span class="s">&quot;/home/jdoe/foo/&quot;</span> <span class="o">\</span>
-    <span class="o">-</span>u <span class="s">&quot;https://dev.azure.com/jdoe/foo/_git/foo?version=GC55aa900775befa135e0d5b48ea63098df8b97f5c&quot;</span>
-</pre></div>
-</div>
-<p>Duplicated bug reports are detected using a WIQL query that looks for
-work items of type <code class="docutils literal notranslate"><span class="pre">Bug</span></code>, in a state category other than <code class="docutils literal notranslate"><span class="pre">Completed</span></code>
-or <code class="docutils literal notranslate"><span class="pre">Removed</span></code>, with the same title and tags. This requires a process
-template where the <code class="docutils literal notranslate"><span class="pre">Bug</span></code> work item type exists (i.e. Agile, Scrum, or
-CMMI; not Basic).</p>
-<p>For Gitea (<code class="docutils literal notranslate"><span class="pre">-b</span> <span class="pre">gitea</span></code>), the <code class="docutils literal notranslate"><span class="pre">tea</span></code> CLI detects the repository and
-login from the git remote of the current directory, so a matching login
-must have been added using <code class="docutils literal notranslate"><span class="pre">tea</span> <span class="pre">login</span> <span class="pre">add</span></code>. The labels <strong>must</strong> exist
-in the repository and bug reports are assigned to the author of the
-latest commit using the local part of the author email as the Gitea user
-name; if that assignment is rejected, the bug report is created
-unassigned. The base URL (<code class="docutils literal notranslate"><span class="pre">-u</span></code> option) should be the commit URL for
-the repository. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> logtalk_tester <span class="o">\</span>
-    <span class="o">-</span>p gnu <span class="o">\</span>
-    <span class="o">-</span>b gitea<span class="o">:</span>bug,auto <span class="o">\</span>
-    <span class="o">-</span>s <span class="s">&quot;/home/jdoe/foo/&quot;</span> <span class="o">\</span>
-    <span class="o">-</span>u https<span class="o">://</span>gitea.example.com<span class="o">/</span>jdoe<span class="o">/</span>foo<span class="o">/</span>src<span class="o">/</span>commit<span class="o">/</span><span class="m">55</span>aa900775befa135e0d5b48ea63098df8b97f5c<span class="o">/</span>
-</pre></div>
-</div>
-<p>For Jira (<code class="docutils literal notranslate"><span class="pre">-b</span> <span class="pre">jira</span></code>), the <code class="docutils literal notranslate"><span class="pre">jira</span></code> CLI must have been configured
-(using <code class="docutils literal notranslate"><span class="pre">jira</span> <span class="pre">init</span></code>) with the server, the project, and the
-authentication type. Bug reports are created as issues of type <code class="docutils literal notranslate"><span class="pre">Bug</span></code>
-in the configured project (so that type must exist and the project must
-not require other fields to be set when creating issues), with the
-labels set as Jira labels (which, unlike in GitHub and GitLab, don’t
-need to be predefined). The issue is assigned to the author of the
-latest commit using the author email, if that email matches a Jira user;
-otherwise, the issue is created unassigned. Jira is not a code host, so
-the base URL (<code class="docutils literal notranslate"><span class="pre">-u</span></code> option) is the URL of the server hosting the
-repository, e.g. GitHub, GitLab, or Gitea, in order to generate links to
-the test files. Duplicated bug reports are detected using a JQL query
-that looks for issues of type <code class="docutils literal notranslate"><span class="pre">Bug</span></code>, not in the <code class="docutils literal notranslate"><span class="pre">Done</span></code> status
-category, with the same labels and a matching summary. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> logtalk_tester <span class="o">\</span>
-    <span class="o">-</span>p gnu <span class="o">\</span>
-    <span class="o">-</span>b jira<span class="o">:</span>bug,auto <span class="o">\</span>
-    <span class="o">-</span>s <span class="s">&quot;/home/jdoe/foo/&quot;</span> <span class="o">\</span>
-    <span class="o">-</span>u https<span class="o">://</span>github.com<span class="o">/</span>jdoe<span class="o">/</span>foo<span class="o">/</span>tree<span class="o">/</span><span class="m">55</span>aa900775befa135e0d5b48ea63098df8b97f5c<span class="o">/</span>
-</pre></div>
-</div>
 <p>Note that, except for Jira, the labels <strong>must</strong> be predefined in the
-issue tracker server for the bug report to be successfully created. The
-<code class="docutils literal notranslate"><span class="pre">auto</span></code> label can be used to simplify filtering of auto-generated bug
-reports when browsing the issue tracker.</p>
+issue tracker for the bug report to be successfully created. The
+<code class="docutils literal notranslate"><span class="pre">auto</span></code> label can be used to filter auto-generated bug reports when
+browsing the issue tracker.</p>
 <p>The bug reports use Markdown formatting, which is the default in GitHub
 and GitLab issue trackers.</p>
 <p>Reports are only created for non-flaky tests, honoring both the
@@ -317,7 +279,133 @@ execution time is CPU time in seconds, not wall time. The bug report
 title and labels are used to prevent creating duplicated bug reports.
 Therefore, the title should not be manually edited and the same labels
 should be used for multiple runs of the same tests and preserved when
-editing the bug reports.</p>
+editing the bug reports. Titles identify the test name and the test set
+path after suppressing the configured prefix. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="nv">Test</span> invoice_creation of test set library<span class="o">/</span>invoices<span class="o">/</span> failed
+</pre></div>
+</div>
+<p>GitHub, GitLab, Gitea, and Linear duplicate checks search for this title
+and the configured labels. For other issue trackers, see the notes
+below.</p>
+</section>
+<section id="azure-devops-notes">
+<h2>Azure DevOps notes<a class="headerlink" href="#azure-devops-notes" title="Link to this heading"></a></h2>
+<p>For Azure DevOps (<code class="docutils literal notranslate"><span class="pre">-b</span> <span class="pre">azure</span></code>), the organization and project are
+detected from the git remote when possible. Otherwise, set them as
+defaults using:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> az devops configure <span class="o">--</span>defaults organization<span class="o">=&lt;</span>url<span class="o">&gt;</span> project<span class="o">=&lt;</span>name<span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Bug reports are created as work items of type <code class="docutils literal notranslate"><span class="pre">Bug</span></code> (using the
+<code class="docutils literal notranslate"><span class="pre">Repro</span> <span class="pre">Steps</span></code> field for the description, which is HTML in Azure
+DevOps) and the labels are set as work item tags. The tool attempts to
+assign the work item to the author of the latest commit using the author
+email. If the creation command fails with a nonempty assignee, the tool
+retries without an assignee, regardless of the cause of failure. The
+retry can also fail; unassigned creation is not guaranteed. The base URL
+(<code class="docutils literal notranslate"><span class="pre">-u</span></code> option) should be the Azure Repos repository URL, optionally
+including the version, to allow generating links to the test files. The
+tool appends <code class="docutils literal notranslate"><span class="pre">path</span></code> and <code class="docutils literal notranslate"><span class="pre">line</span></code> query parameters instead of a file
+path and line fragment. The <code class="docutils literal notranslate"><span class="pre">path</span></code> value is the test file path after
+suppressing the configured prefix, with a leading <code class="docutils literal notranslate"><span class="pre">/</span></code> added when
+needed. The <code class="docutils literal notranslate"><span class="pre">line</span></code> value is the first line of the reported test
+position. The parameters are introduced by <code class="docutils literal notranslate"><span class="pre">?</span></code> or, if the base URL
+already contains a query, by <code class="docutils literal notranslate"><span class="pre">&amp;</span></code>. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> logtalk_tester <span class="o">\</span>
+    <span class="o">-</span>p gnu <span class="o">\</span>
+    <span class="o">-</span>b azure<span class="o">:</span>bug,auto <span class="o">\</span>
+    <span class="o">-</span>s <span class="s">&quot;/home/jdoe/foo/&quot;</span> <span class="o">\</span>
+    <span class="o">-</span>u <span class="s">&quot;https://dev.azure.com/jdoe/foo/_git/foo?version=GC55aa900775befa135e0d5b48ea63098df8b97f5c&quot;</span>
+</pre></div>
+</div>
+<p>Duplicated bug reports are detected using a WIQL query for work items of
+type <code class="docutils literal notranslate"><span class="pre">Bug</span></code>, in the selected project, with the same title and tags. The
+tool reads the project’s Bug workflow using <code class="docutils literal notranslate"><span class="pre">az</span> <span class="pre">devops</span> <span class="pre">invoke</span></code> and
+queries the actual state names whose categories are neither
+<code class="docutils literal notranslate"><span class="pre">Completed</span></code> nor <code class="docutils literal notranslate"><span class="pre">Removed</span></code>. This supports custom workflow state names
+and requires permission to read project and work item type metadata, in
+addition to querying and creating work items. A project lookup, workflow
+lookup, or issue query failure suppresses creation. An empty or invalid
+workflow response also suppresses creation. This requires a process
+template where the <code class="docutils literal notranslate"><span class="pre">Bug</span></code> work item type exists (i.e. Agile, Scrum, or
+CMMI; not Basic).</p>
+<p>On Windows, the Azure duplicate check requires <code class="docutils literal notranslate"><span class="pre">powershell</span></code> on the
+executable search path. The query program is passed as a UTF-16LE Base64
+encoded command to avoid <code class="docutils literal notranslate"><span class="pre">cmd.exe</span></code> expansion. Offline tests verify
+command construction and encoding; execution on Windows and against a
+live Azure server is not tested.</p>
+</section>
+<section id="gitea-notes">
+<h2>Gitea notes<a class="headerlink" href="#gitea-notes" title="Link to this heading"></a></h2>
+<p>For Gitea (<code class="docutils literal notranslate"><span class="pre">-b</span> <span class="pre">gitea</span></code>), the <code class="docutils literal notranslate"><span class="pre">tea</span></code> CLI detects the repository and
+login from the git remote of the current directory, so a matching login
+must have been added using <code class="docutils literal notranslate"><span class="pre">tea</span> <span class="pre">login</span> <span class="pre">add</span></code>. The tool attempts to
+assign bug reports to the author of the latest commit using the local
+part of the author email as the Gitea user name. If the creation command
+fails with a nonempty assignee, the tool retries without an assignee,
+regardless of the cause of failure. The retry can also fail; unassigned
+creation is not guaranteed. The base URL (<code class="docutils literal notranslate"><span class="pre">-u</span></code> option) should be the
+commit URL for the repository. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> logtalk_tester <span class="o">\</span>
+    <span class="o">-</span>p gnu <span class="o">\</span>
+    <span class="o">-</span>b gitea<span class="o">:</span>bug,auto <span class="o">\</span>
+    <span class="o">-</span>s <span class="s">&quot;/home/jdoe/foo/&quot;</span> <span class="o">\</span>
+    <span class="o">-</span>u https<span class="o">://</span>gitea.example.com<span class="o">/</span>jdoe<span class="o">/</span>foo<span class="o">/</span>src<span class="o">/</span>commit<span class="o">/</span><span class="m">55</span>aa900775befa135e0d5b48ea63098df8b97f5c<span class="o">/</span>
+</pre></div>
+</div>
+</section>
+<section id="jira-notes">
+<h2>Jira notes<a class="headerlink" href="#jira-notes" title="Link to this heading"></a></h2>
+<p>For Jira (<code class="docutils literal notranslate"><span class="pre">-b</span> <span class="pre">jira</span></code>), the <code class="docutils literal notranslate"><span class="pre">jira</span></code> CLI must have been configured
+(using <code class="docutils literal notranslate"><span class="pre">jira</span> <span class="pre">init</span></code>) with the server, the project, and the
+authentication type. Bug reports are created as issues of type <code class="docutils literal notranslate"><span class="pre">Bug</span></code>
+in the configured project (so that type must exist and the project must
+not require other fields to be set when creating issues), with the
+labels set as Jira labels (which, unlike in GitHub and GitLab, don’t
+need to be predefined). The tool attempts to assign the issue to the
+author of the latest commit using the author email. If the creation
+command fails with a nonempty assignee, the tool retries without an
+assignee, regardless of the cause of failure. The retry can also fail;
+unassigned creation is not guaranteed. Jira is not a code host, so the
+base URL (<code class="docutils literal notranslate"><span class="pre">-u</span></code> option) is the URL of the server hosting the
+repository, e.g. GitHub, GitLab, or Gitea, in order to generate links to
+the test files. Duplicated bug reports are detected using a JQL query
+that looks for issues of type <code class="docutils literal notranslate"><span class="pre">Bug</span></code>, not in the <code class="docutils literal notranslate"><span class="pre">Done</span></code> status
+category, with the same labels and a matching summary. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> logtalk_tester <span class="o">\</span>
+    <span class="o">-</span>p gnu <span class="o">\</span>
+    <span class="o">-</span>b jira<span class="o">:</span>bug,auto <span class="o">\</span>
+    <span class="o">-</span>s <span class="s">&quot;/home/jdoe/foo/&quot;</span> <span class="o">\</span>
+    <span class="o">-</span>u https<span class="o">://</span>git.example.com<span class="o">/</span>jdoe<span class="o">/</span>foo<span class="o">/</span>src<span class="o">/</span>commit<span class="o">/</span><span class="m">55</span>aa900775befa135e0d5b48ea63098df8b97f5c<span class="o">/</span>
+</pre></div>
+</div>
+</section>
+<section id="linear-notes">
+<h2>Linear notes<a class="headerlink" href="#linear-notes" title="Link to this heading"></a></h2>
+<p>For Linear (<code class="docutils literal notranslate"><span class="pre">-b</span> <span class="pre">linear</span></code>), the <code class="docutils literal notranslate"><span class="pre">linear</span></code> CLI must be authenticated and
+have a default team configured (the team is not selected by this tool).
+Bug reports are created in that team using the default workflow state
+and template, with the labels set as Linear labels (which must exist).
+The tool attempts to assign the issue to the author of the latest commit
+using the author email. If the creation command fails with a nonempty
+assignee, the tool retries without an assignee, regardless of the cause
+of failure. The retry can also fail; unassigned creation is not
+guaranteed. Linear descriptions are Markdown. As for Jira, the base URL
+(<code class="docutils literal notranslate"><span class="pre">-u</span></code> option) is the URL of the server hosting the repository.
+Duplicated bug reports are detected by searching for the constructed
+title in team issues, assigned to anyone, in the triage, backlog,
+unstarted, or started state with the same labels. The query requests at
+most one match. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> logtalk_tester <span class="o">\</span>
+    <span class="o">-</span>p gnu <span class="o">\</span>
+    <span class="o">-</span>b linear<span class="o">:</span>bug,auto <span class="o">\</span>
+    <span class="o">-</span>s <span class="s">&quot;/home/jdoe/foo/&quot;</span> <span class="o">\</span>
+    <span class="o">-</span>u https<span class="o">://</span>git.example.com<span class="o">/</span>jdoe<span class="o">/</span>foo<span class="o">/</span>src<span class="o">/</span>commit<span class="o">/</span><span class="m">55</span>aa900775befa135e0d5b48ea63098df8b97f5c<span class="o">/</span>
+</pre></div>
+</div>
+</section>
+<section id="suspending-creation-of-bug-reports">
+<h2>Suspending creation of bug reports<a class="headerlink" href="#suspending-creation-of-bug-reports" title="Link to this heading"></a></h2>
 <p>There are cases where we may want to postpone or temporarily disable the
 automatic creation of bug reports. E.g. a WIP branch that’s known to
 break multiple tests. A solution is to define a pull/merge request

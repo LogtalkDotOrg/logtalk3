@@ -8,14 +8,14 @@
 ``issue_creator``
 =================
 
-Support for automatically creating bug report issues for failed tests in GitHub, GitLab, Azure DevOps, Gitea, or Jira servers.
+Support for automatically creating bug report issues for failed tests in GitHub, GitLab, Azure DevOps, Gitea, Jira, or Linear servers.
 
 | **Availability:** 
 |    ``logtalk_load(issue_creator(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:13:1
-| **Date:** 2026-10-26
+| **Version:** 0:14:0
+| **Date:** 2026-10-27
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -24,10 +24,13 @@ Support for automatically creating bug report issues for failed tests in GitHub,
 | **Provides:**
 |    :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
 | **Uses:**
+|    :ref:`base64 <base64/0>`
 |    :ref:`git <git/0>`
+|    :ref:`list <list/0>`
 |    :ref:`os <os/0>`
 |    :ref:`term_io <term_io/0>`
 |    :ref:`user <user/0>`
+|    :ref:`utf_16le <utf_16le/0>`
 
 | **Remarks:**
 
@@ -53,7 +56,446 @@ Protected predicates
 Private predicates
 ------------------
 
-(no local declarations; see entity ancestors if any)
+.. index:: command_text/4
+.. _issue_creator/0::command_text/4:
+
+``command_text/4``
+^^^^^^^^^^^^^^^^^^
+
+Renders an executable and literal arguments for the given operating system.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``command_text(OperatingSystem,Executable,Arguments,Command)``
+| **Mode and number of proofs:**
+|    ``command_text(+atom,+atom,+list(atom),-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: title/3
+.. _issue_creator/0::title/3:
+
+``title/3``
+^^^^^^^^^^^
+
+Constructs a stable title identifying the test and test set directory.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``title(Test,Directory,Title)``
+| **Mode and number of proofs:**
+|    ``title(+term,+atom,-atom)`` - ``one``
+
+
+------------
+
+.. index:: search_arguments/5
+.. _issue_creator/0::search_arguments/5:
+
+``search_arguments/5``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Constructs a title and label search requesting at most one matching issue.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``search_arguments(Server,Title,Labels,Executable,Arguments)``
+| **Mode and number of proofs:**
+|    ``search_arguments(+atom,+atom,+atom,-atom,-list(atom))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: search_command/4
+.. _issue_creator/0::search_command/4:
+
+``search_command/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Constructs a command that succeeds only when the query succeeds and reports no matching issue.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``search_command(OperatingSystem,Server,Query,Command)``
+| **Mode and number of proofs:**
+|    ``search_command(+atom,+atom,+atom,-atom)`` - ``one``
+
+
+------------
+
+.. index:: empty_search/2
+.. _issue_creator/0::empty_search/2:
+
+``empty_search/2``
+^^^^^^^^^^^^^^^^^^
+
+Returns the CLI output for a successful search with no matching issue.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``empty_search(Server,Output)``
+| **Mode and number of proofs:**
+|    ``empty_search(+atom,-atom)`` - ``one``
+
+
+------------
+
+.. index:: jira_search_command/3
+.. _issue_creator/0::jira_search_command/3:
+
+``jira_search_command/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Constructs a command accepting only the Jira CLI no-result diagnostic after an unsuccessful search.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``jira_search_command(OperatingSystem,Query,Command)``
+| **Mode and number of proofs:**
+|    ``jira_search_command(+atom,+atom,-atom)`` - ``one``
+
+
+------------
+
+.. index:: jira_list_command/4
+.. _issue_creator/0::jira_list_command/4:
+
+``jira_list_command/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Constructs a command searching for at most one matching Jira bug.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``jira_list_command(OperatingSystem,Title,Labels,Command)``
+| **Mode and number of proofs:**
+|    ``jira_list_command(+atom,+atom,+atom,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: jira_jql/3
+.. _issue_creator/0::jira_jql/3:
+
+``jira_jql/3``
+^^^^^^^^^^^^^^
+
+Constructs a JQL phrase search with an escaped title and validated labels.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``jira_jql(Title,Labels,Query)``
+| **Mode and number of proofs:**
+|    ``jira_jql(+atom,+atom,-atom)`` - ``one``
+
+
+------------
+
+.. index:: jira_label_conditions/2
+.. _issue_creator/0::jira_label_conditions/2:
+
+``jira_label_conditions/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Constructs a conjunction requiring every Jira label.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``jira_label_conditions(Labels,Conditions)``
+| **Mode and number of proofs:**
+|    ``jira_label_conditions(+list(atom),-atom)`` - ``one``
+
+
+------------
+
+.. index:: azure_list_command/4
+.. _issue_creator/0::azure_list_command/4:
+
+``azure_list_command/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Constructs an Azure duplicate check using the configured project and its Bug workflow states.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``azure_list_command(OperatingSystem,Title,Labels,Command)``
+| **Mode and number of proofs:**
+|    ``azure_list_command(+atom,+atom,+atom,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: azure_search_command/6
+.. _issue_creator/0::azure_search_command/6:
+
+``azure_search_command/6``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Accepts absence only after successful project, workflow, and issue queries.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``azure_search_command(Shell,ProjectQuery,StatesQuery,IssueQuery,QuotedWIQL,Program)``
+| **Mode and number of proofs:**
+|    ``azure_search_command(+atom,+atom,+atom,+atom,+atom,-atom)`` - ``one``
+
+
+------------
+
+.. index:: azure_states_query/1
+.. _issue_creator/0::azure_states_query/1:
+
+``azure_states_query/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a native Azure CLI query selecting nonterminal Bug state names as double-quoted WIQL literals.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``azure_states_query(Query)``
+| **Mode and number of proofs:**
+|    ``azure_states_query(-atom)`` - ``one``
+
+
+------------
+
+.. index:: azure_wiql/3
+.. _issue_creator/0::azure_wiql/3:
+
+``azure_wiql/3``
+^^^^^^^^^^^^^^^^
+
+Constructs the title and tag portion of an Azure Bug query; project and workflow constraints are appended at execution.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``azure_wiql(Title,Labels,Query)``
+| **Mode and number of proofs:**
+|    ``azure_wiql(+atom,+atom,-atom)`` - ``one``
+
+
+------------
+
+.. index:: powershell_command/2
+.. _issue_creator/0::powershell_command/2:
+
+``powershell_command/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Encodes a PowerShell program to avoid cmd.exe expansion of query data.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``powershell_command(Program,Command)``
+| **Mode and number of proofs:**
+|    ``powershell_command(+atom,-atom)`` - ``one``
+
+
+------------
+
+.. index:: valid_labels/1
+.. _issue_creator/0::valid_labels/1:
+
+``valid_labels/1``
+^^^^^^^^^^^^^^^^^^
+
+Checks for comma-separated nonempty ASCII labels starting with a letter or digit and containing only letters, digits, underscores, or hyphens.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_labels(Labels)``
+| **Mode and number of proofs:**
+|    ``valid_labels(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_label_code/1
+.. _issue_creator/0::valid_label_code/1:
+
+``valid_label_code/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Checks for an ASCII letter, digit, underscore, or hyphen.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_label_code(Code)``
+| **Mode and number of proofs:**
+|    ``valid_label_code(+character_code)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: command_arguments/3
+.. _issue_creator/0::command_arguments/3:
+
+``command_arguments/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Renders individually quoted command arguments.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``command_arguments(OperatingSystem,Arguments,Text)``
+| **Mode and number of proofs:**
+|    ``command_arguments(+atom,+list(atom),-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: run_cli/3
+.. _issue_creator/0::run_cli/3:
+
+``run_cli/3``
+^^^^^^^^^^^^^
+
+Runs a command, discarding its output and succeeding only on a successful exit status.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run_cli(OperatingSystem,Executable,Arguments)``
+| **Mode and number of proofs:**
+|    ``run_cli(+atom,+atom,+list(atom))`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    An operating-system operation raises an error:
+|        ``error(system_error,Context)``
+
+
+------------
+
+.. index:: null_redirect/2
+.. _issue_creator/0::null_redirect/2:
+
+``null_redirect/2``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the operating-system redirection for discarding standard output and standard error.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``null_redirect(OperatingSystem,Redirect)``
+| **Mode and number of proofs:**
+|    ``null_redirect(+atom,-atom)`` - ``one``
+
+
+------------
+
+.. index:: create_arguments/7
+.. _issue_creator/0::create_arguments/7:
+
+``create_arguments/7``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Constructs literal issue creation arguments for a tracker.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``create_arguments(Server,Title,Description,Labels,Assignee,Executable,Arguments)``
+| **Mode and number of proofs:**
+|    ``create_arguments(+atom,+atom,+atom,+atom,+atom,-atom,-list(atom))`` - ``one``
+
+
+------------
+
+.. index:: option_arguments/3
+.. _issue_creator/0::option_arguments/3:
+
+``option_arguments/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Omits an option when its value is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``option_arguments(Option,Value,Arguments)``
+| **Mode and number of proofs:**
+|    ``option_arguments(+atom,+atom,-list(atom))`` - ``one``
+
+
+------------
+
+.. index:: label_arguments/2
+.. _issue_creator/0::label_arguments/2:
+
+``label_arguments/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Constructs repeated label arguments from comma-separated labels.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``label_arguments(Labels,Arguments)``
+| **Mode and number of proofs:**
+|    ``label_arguments(+atom,-list(atom))`` - ``one``
+
+
+------------
+
+.. index:: repeated_labels/2
+.. _issue_creator/0::repeated_labels/2:
+
+``repeated_labels/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Pairs each label with its command option.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``repeated_labels(Labels,Arguments)``
+| **Mode and number of proofs:**
+|    ``repeated_labels(+list(atom),-list(atom))`` - ``one``
+
+
+------------
 
 Operators
 ---------

@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on October 24, 2026
+##   Last updated on October 27, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -32,7 +32,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 35.0"
+	echo "$(basename "$0") 36.0"
 	exit 0
 }
 
@@ -459,7 +459,7 @@ usage_help() {
 	echo "  -j maximum number of concurrent test set processes (default is $jobs)"
 	echo "  -n name of the test driver and sourced files (minus file name extensions; default is $driver)"
 	echo "  -s suppress path prefix (default is $prefix)"
-	echo "  -b bug report server (valid values are github, gitlab, azure, gitea, and jira; no default; requires -u option)"
+	echo "  -b bug report server (valid values are azure, gitea, github, gitlab, jira, and linear; no default; requires -u option)"
 	echo "  -u base URL to generate links to test files (no default)"
 	echo "  -c code coverage report (default is $coverage)"
 	echo "     (valid values are none, xml, cobertura, lcov, and sonar)"
@@ -693,8 +693,8 @@ if [ "$b_arg" != "" ] ; then
 		exit 1
 	fi
 	issue_server="$(echo "$b_arg" | cut -d':' -f1)"
-	if [ "$issue_server" != "github" ] && [ "$issue_server" != "gitlab" ] && [ "$issue_server" != "azure" ] && [ "$issue_server" != "gitea" ] && [ "$issue_server" != "jira" ] ; then
-		echo "Error! Issue tracker server must be either github, gitlab, azure, gitea, or jira: $b_arg" >&2
+	if [ [ "$issue_server" != "azure" ] && [ "$issue_server" != "gitea" ] && "$issue_server" != "github" ] && [ "$issue_server" != "gitlab" ] && [ "$issue_server" != "jira" ] && [ "$issue_server" != "linear" ] ; then
+		echo "Error! Issue tracker server must be either github, gitlab, azure, gitea, jira, or linear: $b_arg" >&2
 		usage_help
 		exit 1
 	fi
