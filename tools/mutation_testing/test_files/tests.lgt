@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2026-10-26,
+		date is 2026-10-27,
 		comment is 'Unit tests for the "mutation_testing" tool.'
 	]).
 
@@ -65,10 +65,10 @@
 
 	% predicate_mutants/3 tests
 
-	test(mt_predicate_mutants_3_01, deterministic) :-
-		mutation_testing::predicate_mutants(mt_sample, check/1, Mutants),
+	test(mt_predicate_mutants_3_01, all(Object-Predicate == mt_other_sample-(check/1))) :-
+		mutation_testing::predicate_mutants(mt_other_sample, check/1, Mutants),
 		assertion(Mutants \== []),
-		forall(member(mutant(mt_sample, check/1, _, _, _), Mutants), true).
+		member(mutant(Object, Predicate, _, _, _), Mutants).
 
 	% predicate_mutants/4 tests
 
@@ -112,9 +112,9 @@
 		memberchk(mutant(mt_other_sample, check/1, clause(1), body_goal_negation, 1), Mutants),
 		memberchk(mutant(mt_other_sample, check/1, clause(1), relational_operator_replacement, 1), Mutants).
 
-	test(mt_entity_mutants_head_arguments_mutation_occurrence_01, deterministic) :-
-		mutation_testing::entity_mutants(mt_sample, Mutants, [mutators([head_arguments_mutation])]),
-		memberchk(mutant(mt_sample, head_bound_atom_integer/2, _ClauseIndex, head_arguments_mutation, _Occurrence), Mutants).
+	test(mt_entity_mutants_head_arguments_reordering_occurrence_01, deterministic) :-
+		mutation_testing::entity_mutants(mt_code_coverage, Mutants, [mutators([head_arguments_reordering])]),
+		memberchk(mutant(mt_code_coverage, p/2, _ClauseIndex, head_arguments_reordering, _Occurrence), Mutants).
 
 	test(mt_entity_mutants_scope_directive_replacement_occurrence_01, deterministic(Mutants == [mutant(mt_other_sample, check/1, directive(1), scope_directive_replacement, 1), mutant(mt_other_sample, check/1, directive(1), scope_directive_replacement, 2)])) :-
 		mutation_testing::entity_mutants(mt_other_sample, Mutants, [mutators([scope_directive_replacement])]).
