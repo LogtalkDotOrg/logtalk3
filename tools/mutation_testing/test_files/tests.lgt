@@ -238,7 +238,7 @@
 
 	test(mt_entity_2_01, deterministic) :-
 		^^suppress_text_output,
-		mutation_testing::entity(mt_sample, [
+		mutation_testing::entity(mt_code_coverage, [
 			mutators([head_arguments_reordering]),
 			max_mutations_per_mutator(1),
 			sampling(count(3)),
@@ -537,26 +537,26 @@
 		mutation_testing::predicate_mutants(mt_predicate_directives_sample, resource/1, _, [mutators([uses_directive_resource_deletion])]).
 
 	test(mt_max_mutations_per_mutator_option_01, deterministic) :-
-		mutation_testing::entity_mutants(mt_sample, Mutants, [
+		mutation_testing::entity_mutants(mt_body_goal_negation, Mutants, [
 			mutators([fail_insertion]),
 			max_mutations_per_mutator(1)
 		]),
-		assertion(\+ member(mutant(mt_sample, multi_clause/1, clause(2), fail_insertion, 2), Mutants)).
+		assertion(\+ member(mutant(mt_body_goal_negation, a/0, clause(1), fail_insertion, 2), Mutants)).
 
 	test(mt_max_mutations_per_mutator_option_02, deterministic) :-
-		mutation_testing::entity_mutants(mt_sample, Mutants, [
-			mutators([head_arguments_reordering]),
+		mutation_testing::entity_mutants(mt_body_goal_negation, Mutants, [
+			mutators([fail_insertion]),
 			max_mutations_per_mutator(all)
 		]),
-		assertion(member(mutant(mt_sample, head_bound_atom_integer/2, clause(1), head_arguments_reordering, 1), Mutants)).
+		assertion(member(mutant(mt_body_goal_negation, a/0, clause(1), fail_insertion, 3), Mutants)).
 
 	test(mt_max_mutations_per_mutator_option_03, deterministic) :-
-		mutation_testing::entity_mutants(mt_sample, Mutants, [
-			mutators([head_arguments_reordering, body_goal_negation]),
+		mutation_testing::entity_mutants(mt_body_goal_negation, Mutants, [
+			mutators([fail_insertion, body_goal_negation]),
 			max_mutations_per_mutator(1)
 		]),
-		once(member(mutant(mt_sample, head_bound_atom_integer/2, clause(1), head_arguments_reordering, 1), Mutants)),
-		once(member(mutant(mt_sample, check/1, clause(1), body_goal_negation, 1), Mutants)).
+		once(member(mutant(mt_body_goal_negation, a/0, clause(1), fail_insertion, 1), Mutants)),
+		once(member(mutant(mt_body_goal_negation, a/0, clause(1), body_goal_negation, 1), Mutants)).
 
 	test(mt_threshold_option_01, deterministic) :-
 		mutation_testing::report_predicate(mt_other_sample, check/1, _, [
@@ -705,8 +705,8 @@
 		]).
 
 	test(mt_sampling_option_01, deterministic) :-
-		mutation_testing::report_entity(mt_sample, report(mt_sample, summary(Total, Killed, Survived, Untested, Timeout, NoCoverage, Errors, _Score, _Threshold, _Passed), Results), [
-			mutators([arithmetic_operator_replacement, relational_operator_replacement]),
+		mutation_testing::report_entity(mt_other_sample, report(mt_other_sample, summary(Total, Killed, Survived, Untested, Timeout, NoCoverage, Errors, _Score, _Threshold, _Passed), Results), [
+			mutators([fail_insertion, relational_operator_replacement]),
 			sampling(count(3)),
 			seed(1234),
 			tester_file_name('subprocess_tester.lgt')
