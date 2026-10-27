@@ -24,9 +24,9 @@
 	imports((tool_diagnostics_common, options))).
 
 	:- info([
-		version is 11:5:0,
+		version is 11:6:0,
 		author is 'Paulo Moura',
-		date is 2026-09-08,
+		date is 2026-10-27,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -2067,9 +2067,10 @@
 
 	warn_on_missing_punctuation(Text, Type, Entity) :-
 		(	current_logtalk_flag(lgtdoc_missing_punctuation, warning),
-			\+ sub_atom(Text, _, 1, 0, '.'),
-			\+ sub_atom(Text, _, 1, 0, '!'),
-			\+ sub_atom(Text, _, 1, 0, '?'),
+			sub_atom(Text, _, 1, 0, LastChar),
+			LastChar \== ('.'),
+			LastChar \== ('!'),
+			LastChar \== ('?'),
 			\+ sub_atom(Text, 0, _, _, 'http'),
 			\+ sub_atom(Text, 0, _, _, 'ftp') ->
 			entity_file_line(Entity, File, Line),
@@ -2080,9 +2081,10 @@
 
 	warn_on_missing_punctuation(Indicator, Text, Type, Entity) :-
 		(	current_logtalk_flag(lgtdoc_missing_punctuation, warning),
-			\+ sub_atom(Text, _, 1, 0, '.'),
-			\+ sub_atom(Text, _, 1, 0, '!'),
-			\+ sub_atom(Text, _, 1, 0, '?'),
+			sub_atom(Text, _, 1, 0, LastChar),
+			LastChar \== ('.'),
+			LastChar \== ('!'),
+			LastChar \== ('?'),
 			\+ sub_atom(Text, 0, _, _, 'http'),
 			\+ sub_atom(Text, 0, _, _, 'ftp') ->
 			entity_predicate_file_line(Entity, Indicator, File, Line),
