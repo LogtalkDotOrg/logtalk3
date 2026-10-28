@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2026-10-11,
+		date is 2026-10-28,
 		comment is 'Geohash encoder, decoder, adjacency, covering, hierarchy, integer conversion, bit-precision, and geometry covering predicates for ``geographic(Latitude,Longitude)`` coordinates.',
 		remarks is [
 			'Alphabet' - 'Uses the standard geohash base-32 alphabet ``0123456789bcdefghjkmnpqrstuvwxyz``.',
@@ -47,7 +47,7 @@
 	]).
 
 	:- uses(list, [
-		member/2, reverse/2
+		last/2, member/2, reverse/2
 	]).
 
 	valid_geohash(Geohash) :-
@@ -270,7 +270,7 @@
 		).
 
 	prepare_geometry(polygon(Polygon), polygon(Polygon, Edges)) :-
-		list::last(Polygon, Last),
+		last(Polygon, Last),
 		polygon_edges(Polygon, Last, Edges).
 	prepare_geometry(polyline(Polyline, Buffer), polyline(Polyline, Buffer)).
 

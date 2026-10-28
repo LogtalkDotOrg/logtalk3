@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-10-11,
+		date is 2026-10-28,
 		comment is 'Unit tests for the "geohash" library.'
 	]).
 
@@ -42,7 +42,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, member/2, memberchk/2, reverse/2
+		append/3, length/2, member/2, memberchk/2, reverse/2
 	]).
 
 	cover(geohash).
@@ -523,7 +523,7 @@
 		Polygon = [geographic(MinLatitude, MinLongitude), geographic(MaxLatitude, MinLongitude), geographic(MaxLatitude, LeftLongitude), geographic(MiddleLatitude, LeftLongitude), geographic(MiddleLatitude, RightLongitude), geographic(MaxLatitude, RightLongitude), geographic(MaxLatitude, MaxLongitude), geographic(MinLatitude, MaxLongitude)],
 		check_geometry_cover(polygon(Polygon), 4),
 		polygon_covering(Polygon, max_precision(4), Cover, []),
-		assertion(\+ list::member(s00, Cover)).
+		assertion(\+ member(s00, Cover)).
 
 	test(geohash_polygon_reserved_buffer, error(domain_error(option, buffer(0)))) :-
 		polygon_covering([geographic(0.0, 0.0), geographic(1.0, 0.0), geographic(1.0, 1.0)], precision(3), _, [buffer(0)]).
@@ -536,6 +536,8 @@
 		bounding_box_polygon(Box, Polygon),
 		children('ezs42', Children),
 		polygon_covering(Polygon, max_precision(7), Cover, [min_precision(6), compact(false)]).
+
+	% auxiliary predicates
 
 	all_valid_hashes([]).
 	all_valid_hashes([Geohash| Geohashes]) :-
@@ -625,7 +627,7 @@
 			expand_cover_leaves(Children, Precision, Head)
 		;	Head = [Hash]
 		),
-		expand_cover_leaves(Hashes, Precision, Tail),
-		list::append(Head, Tail, Leaves).
+		append(Head, Tail, Leaves),
+		expand_cover_leaves(Hashes, Precision, Tail).
 
 :- end_object.
