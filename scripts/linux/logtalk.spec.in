@@ -84,6 +84,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/local/bin/xvmlgt
 /usr/local/bin/quintuslgt
 /usr/local/bin/sicstuslgt
+/usr/local/bin/shumwaylgt
 /usr/local/bin/swilgt
 /usr/local/bin/taulgt
 /usr/local/bin/tplgt
@@ -116,6 +117,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/local/share/man/man1/xvmlgt.1.gz
 /usr/local/share/man/man1/quintuslgt.1.gz
 /usr/local/share/man/man1/sicstuslgt.1.gz
+/usr/local/share/man/man1/shumwaylgt.1.gz
 /usr/local/share/man/man1/swilgt.1.gz
 /usr/local/share/man/man1/taulgt.1.gz
 /usr/local/share/man/man1/tplgt.1.gz
@@ -146,6 +148,7 @@ echo "* GNU Prolog (1.4.5 or later):       gplgt"
 echo "* JIProlog (4.1.7.1 or later):       jiplgt      (first run may require sudo)"
 echo "* Quintus Prolog (3.3 or later):     quintuslgt  (experimental)"
 echo "* SICStus Prolog (4.1.0 or later):   sicstuslgt"
+echo "* Shumway Prolog (0.9.3 or later):   shumwaylgt"
 echo "* SWI-Prolog (6.6.0 or later):       swilgt"
 echo "* Tau Prolog (0.3.2 or later):       taulgt"
 echo "* Trealla Prolog (3.9.64 or later):  tplgt"

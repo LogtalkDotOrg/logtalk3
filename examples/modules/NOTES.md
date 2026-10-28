@@ -36,11 +36,11 @@ ________________________________________________________________________
 # modules
 
 This example illustrates compilation of Prolog module files as objects.
-It doesn't require that the Prolgo backend supports modules.
+It doesn't require that the Prolog backend supports modules.
 
 Due to the lack of standardization of Prolog module systems, the module 
-files can only a common subset of Prolog module directives. Consult the
-"Prolog Integration and Migration Guide" in the Logtalk documentation 
+files can only use a common subset of Prolog module directives. Consult
+the "Prolog Integration and Migration Guide" in the Logtalk documentation 
 for details.
 
 Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):

@@ -14,8 +14,8 @@ Provides dif/2 and derived predicates.
 |    ``logtalk_load(dif(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:3:0
-| **Date:** 2023-10-02
+| **Version:** 1:4:0
+| **Date:** 2026-10-28
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -27,7 +27,7 @@ Provides dif/2 and derived predicates.
 
 | **Remarks:**
 
-   - Supported backend Prolog systems: B-Prolog, ECLiPSe, SICStus Prolog, SWI-Prolog, Trealla Prolog, and YAP.
+   - Supported backend Prolog systems: B-Prolog, ECLiPSe, SICStus Prolog, Shumway Prolog, SWI-Prolog, Trealla Prolog, and YAP.
 
 | **Inherited public predicates:**
 |    (none)

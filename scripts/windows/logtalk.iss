@@ -1,5 +1,5 @@
 ﻿; Logtalk Inno Setup script for generating Windows installers
-; Last updated on September 13, 2026
+; Last updated on October 28, 2026
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -76,6 +76,7 @@ Name: "prolog\gprolog"; Description: "GNU Prolog integration (1.4.5 or later)"; 
 Name: "prolog\ji"; Description: "JIProlog integration (4.1.7.1 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\quintus"; Description: "Quintus Prolog (experimental) integration (3.3 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\sicstus"; Description: "SICStus Prolog integration (4.1.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
+Name: "prolog\shumway"; Description: "Shumway Prolog integration (0.9.3 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\swicon"; Description: "SWI-Prolog (console) integration (6.6.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\swiwin"; Description: "SWI-Prolog (window) integration (6.6.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\tau"; Description: "Tau Prolog integration (0.3.2 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
@@ -166,6 +167,8 @@ Name: "{group}\Logtalk - JIProlog"; Filename: "{code:GetJIPExePath}"; Parameters
 Name: "{group}\Logtalk - Quintus Prolog"; Filename: "{code:GetQuintusExePath}"; Parameters: "+l ""{code:GetQuintusIntegrationFilePath}"" +z ""%LOGTALKHOME%"""; Comment: "Runs Logtalk with Quintus Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\quintus; Flags: createonlyiffileexists
 
 Name: "{group}\Logtalk - SICStus Prolog"; Filename: "{code:GetSICStusExePath}"; Parameters: "-l ""%LOGTALKHOME%\integration\logtalk_sicstus.pl"""; Comment: "Runs Logtalk with SICStus Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\sicstus; Flags: createonlyiffileexists
+
+Name: "{group}\Logtalk - Shumway Prolog"; Filename: "{code:GetShumwayExePath}"; Parameters: """%LOGTALKHOME%\integration\logtalk_shumway.pl"""; Comment: "Runs Logtalk with Shumway Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\shumway; Flags: createonlyiffileexists
 
 Name: "{group}\Logtalk - SWI-Prolog (console)"; Filename: "{code:GetSWIConExePath}"; Parameters: "-s ""%LOGTALKHOME%\integration\logtalk_swi.pl"""; Comment: "Runs Logtalk with SWI-Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\swicon; Flags: createonlyiffileexists
 
@@ -546,6 +549,32 @@ begin
                'Logtalk integration shortcut not created.' + Chr(13) + Chr(13) +
                'You can manually create the shortcut by finding the full path to the SICStus Prolog executable and defining the shortcut target as:' + Chr(13) + Chr(13) +
                'executable full path -l "%LOGTALKHOME%\integration\logtalk_sicstus.pl"';
+    MsgBox(Warning, mbError, MB_OK);
+  end
+end;
+
+function ShumwayExePath: String;
+var
+  Path: String;
+begin
+  Path := FileSearch('shumway.exe', ExpandConstant('{sd}\Shumway-main\dist\Release'));
+  if Path = '' then
+    Result := 'prolog_compiler_not_installed'
+  else
+    Result := Path
+end;
+
+function GetShumwayExePath(Param: String): String;
+var
+  Warning: String;
+begin
+  Result := ShumwayExePath;
+  if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
+  begin
+    Warning := 'Failed to detect Shumway Prolog installation.' + Chr(13) +
+               'Logtalk integration shortcut not created.' + Chr(13) + Chr(13) +
+               'You can manually create the shortcut by finding the full path to the Shumway Prolog executable and defining the shortcut target as:' + Chr(13) + Chr(13) +
+               'executable full path "%LOGTALKHOME%\integration\logtalk_shumway.pl"';
     MsgBox(Warning, mbError, MB_OK);
   end
 end;

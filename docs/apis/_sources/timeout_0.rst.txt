@@ -14,8 +14,8 @@ Predicates for calling goal with a time limit.
 |    ``logtalk_load(timeout(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:10:0
-| **Date:** 2022-06-15
+| **Version:** 0:11:0
+| **Date:** 2026-10-28
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -27,7 +27,7 @@ Predicates for calling goal with a time limit.
 
 | **Remarks:**
 
-   - Supported backend Prolog systems: B-Prolog, ECLiPSe, SICStus Prolog, SWI-Prolog, Trealla Prolog, XSB, XVM, and YAP.
+   - Supported backend Prolog systems: B-Prolog, ECLiPSe, SICStus Prolog, Shumway Prolog, SWI-Prolog, Trealla Prolog, XSB, XVM, and YAP.
 
 | **Inherited public predicates:**
 |    (none)

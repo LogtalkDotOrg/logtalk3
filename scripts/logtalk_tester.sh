@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on October 27, 2026
+##   Last updated on October 28, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -32,7 +32,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 36.0"
+	echo "$(basename "$0") 37.0"
 	exit 0
 }
 
@@ -445,7 +445,7 @@ usage_help() {
 	echo
 	echo "Required arguments:"
 	echo "  -p backend Prolog compiler"
-	echo "     (valid values are b, ciao, cx, eclipse, gnu, gnunc, ji, xvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	echo "     (valid values are b, ciao, cx, eclipse, gnu, gnunc, ji, xvm, sicstus, shumway, swi, swipack, tau, trealla, xsb, and yap)"
 	echo
 	echo "Optional arguments:"
 	echo "  -v print version of $(basename "$0")"
@@ -554,6 +554,10 @@ elif [ "$p_arg" == "sicstus" ] ; then
 	logtalk=sicstuslgt$extension
 	logtalk_call="$logtalk $i_arg --goal"
 	dot="."
+elif [ "$p_arg" == "shumway" ] ; then
+	prolog='Shumway Prolog'
+	logtalk=shumwaylgt$extension
+	logtalk_call="$logtalk $i_arg -g"
 elif [ "$p_arg" == "swi" ] ; then
 	prolog='SWI-Prolog'
 	logtalk=swilgt$extension

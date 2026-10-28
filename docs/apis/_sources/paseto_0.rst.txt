@@ -14,8 +14,8 @@ Facade for PASETO v4 JSON claims encryption, signing, authentication, validation
 |    ``logtalk_load(paseto(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-08-08
+| **Version:** 1:0:1
+| **Date:** 2026-10-28
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -221,7 +221,7 @@ Authenticates and validates a v4.public claims token using a public key or key s
 |    ``KeyOrKeySet`` is an invalid key set:
 |        ``domain_error(paseto_key_set,KeyOrKeySet)``
 |    No key can be selected from ``KeyOrKeySet``:
-|        ``existence_error(paseto_key,(public -KeyId))``
+|        ``existence_error(paseto_key,(public)-KeyId)``
 |    The authenticated payload is not a JSON object:
 |        ``domain_error(paseto_json_object,Claims)``
 |    The claims do not satisfy the validation policy:
@@ -262,7 +262,7 @@ Authenticates and validates a v4.public claims token and returns its authenticat
 |    ``KeyOrKeySet`` is an invalid key set:
 |        ``domain_error(paseto_key_set,KeyOrKeySet)``
 |    No key can be selected from ``KeyOrKeySet``:
-|        ``existence_error(paseto_key,(public -KeyId))``
+|        ``existence_error(paseto_key,(public)-KeyId)``
 |    The authenticated payload or footer is not a JSON object:
 |        ``domain_error(paseto_json_object,JSON)``
 |    The claims do not satisfy the validation policy:

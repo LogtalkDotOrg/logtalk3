@@ -22,9 +22,9 @@
 :- object(paseto_keys).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-08-08,
+		date is 2026-10-28,
 		comment is 'Validation and selection for native PASETO v4 key sets.'
 	]).
 
@@ -64,7 +64,7 @@
 
 	select_keys(KeySet, Purpose, KeyId, Keys) :-
 		validate(KeySet),
-		once((Purpose == local; Purpose == public)),
+		once((Purpose == (local); Purpose == (public))),
 		once((KeyId == none; atom(KeyId))),
 		KeySet = key_set(Records),
 		select_records(Records, Purpose, KeyId, Keys),

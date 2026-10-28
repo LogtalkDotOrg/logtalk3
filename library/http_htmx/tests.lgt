@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-07-07,
+		date is 2026-10-28,
 		comment is 'Unit tests for the ``http_htmx`` library.'
 	]).
 
@@ -315,7 +315,7 @@
 
 	test(http_htmx_add_response_headers_4_05, deterministic) :-
 		request(get, origin('/items/1'), http(1, 1), [], empty, [], Request),
-		response(http(1, 1), status(200, 'OK'), [cache_control-'public'], content('text/html', text('<div>ok</div>')), [], Response0),
+		response(http(1, 1), status(200, 'OK'), [cache_control-(public)], content('text/html', text('<div>ok</div>')), [], Response0),
 		http_htmx::add_response_headers(Request, Response0, Response, [vary_hx_request(true)]),
 		header(Response, vary, 'HX-Request'),
 		header(Response, cache_control, 'public'),

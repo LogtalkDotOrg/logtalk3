@@ -1296,6 +1296,7 @@ some backend Prolog compilers provide this functionality:
 - ECLiPSe: ``timeout/3`` and ``timeout/7`` library predicates
 - XVM: ``call_with_timeout/2-3`` built-in predicates
 - SICStus Prolog: ``time_out/3`` library predicate
+- Shumway Prolog: ``time_out/3`` built-in predicate
 - SWI-Prolog: ``call_with_time_limit/2`` library predicate
 - Trealla Prolog: ``call_with_time_limit/2`` and ``time_out/3`` library
   predicates

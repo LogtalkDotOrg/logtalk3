@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:91:0,
+		version is 0:92:0,
 		author is 'Paulo Moura',
-		date is 2026-10-09,
+		date is 2026-10-28,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -2431,6 +2431,7 @@
 	valid_backend(xvm).
 	valid_backend(quintus).
 	valid_backend(sicstus).
+	valid_backend(shumway).
 	valid_backend(swi).
 	valid_backend(tau).
 	valid_backend(trealla).
@@ -3263,6 +3264,7 @@
 	backend(ji,      'JIProlog').
 	backend(quintus, 'Quintus Prolog').
 	backend(sicstus, 'SICStus Prolog').
+	backend(shumway, 'Shumway Prolog').
 	backend(swi,     'SWI-Prolog').
 	backend(tau,     'Tau Prolog').
 	backend(trealla, 'Trealla Prolog').

@@ -1,0 +1,76 @@
+.TH shumwaylgt 1 "October 28, 2026" "Logtalk 3.103.0" "Logtalk Documentation"
+
+.SH NAME
+shumwaylgt \- Logtalk integration script for Shumway Prolog
+
+.SH SYNOPSIS
+.B shumwaylgt
+[\fB-g \fIgoal\fR]
+
+.SH DESCRIPTION
+\fBshumwaylgt\fR is a Logtalk integration script for Shumway Prolog. It automatically loads the Shumway Prolog adapter file, the Logtalk compiler and runtime, the Logtalk default table of library names and paths, and any existing settings file found on the lookup directories. It passes any options to the \fBshumway\fR executable; see the Shumway Prolog documentation for the available options.
+
+.SH OPTIONS
+The two most common options are:
+.TP
+.B \-q
+Silence Logtalk default startup messages and compilation messages by setting the \fBreport\fR flag to \fBwarnings\fR.
+.TP
+.B \-g
+.I goal
+Initialization goal, written between double quotes, to be executed after Logtalk startup.
+
+.SH REQUIREMENTS
+Shumway Prolog 0.9.3 or later is required. This integration script looks for a \fBshumway\fR executable in the system path.
+
+.SH ENVIRONMENT
+.TP
+.B LOGTALKHOME
+Specifies the location of the Logtalk installation.
+.TP
+.B LOGTALKUSER
+Specifies the location of the Logtalk user directory.
+
+.SH FILES
+.TP
+.BI $LOGTALKHOME/integration/logtalk_shumway.pl
+Prolog file used for loading the necessary files for starting Logtalk using Shumway Prolog as the backend compiler.
+.TP
+.BI $LOGTALKHOME/adapters/shumway.pl
+The Shumway Prolog adapter file.
+.TP
+.BI $LOGTALKHOME/core/core.pl
+The Logtalk core compiler and runtime file.
+.TP
+.BI $LOGTALKHOME/paths/paths.pl
+The default table of library names and paths.
+.TP
+.BI ./settings.lgt
+Logtalk settings file (for overriding default settings in the adapter files). It may not exist.
+.TP
+.BI $LOGTALKUSER/settings.lgt
+Logtalk settings file (for overriding default settings in the adapter files). It may not exist.
+.TP
+.BI $HOME/settings.lgt
+Logtalk settings file (for overriding default settings in the adapter files). It may not exist.
+.TP
+.BI $XDG_CONFIG_HOME/logtalk/settings.lgt
+Logtalk settings file (for overriding default settings in the adapter files). It may not exist.
+.TP
+.BI $HOME/.config/logtalk/settings.lgt
+Logtalk settings file (for overriding default settings in the adapter files). It may not exist.
+
+.SH "SEE ALSO"
+The Logtalk website at https://logtalk.org/
+.PP
+The Logtalk Handbook at \fB$LOGTALKHOME/docs/handbook/index.html\fR
+.PP
+The Shumway Prolog website at https://github.com/gusbro/Shumway
+.PP
+logtalk_user_setup(1),\ logtalk_version_select(1),\ logtalk_backend_select(1)
+
+.SH AUTHOR
+Paulo Moura <pmoura@logtalk.org>
+
+.SH COPYRIGHT
+Copyright (c) 1998-2026 Paulo Moura.

@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation automation script
-##   Last updated on April 28, 2026
+##   Last updated on October 28, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -41,7 +41,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output "$myName 4.0"
+	Write-Output "$myName 4.1"
 }
 
 Function Invoke-CompletionNotification {
@@ -154,7 +154,7 @@ Function Write-Usage-Help() {
 	Write-Output ""
 	Write-Output "Required arguments:"
 	Write-Output "  -p backend Prolog compiler"
-	Write-Output "     (possible values are b, ciao, cx, eclipse, gnu, gnunc, ji, xvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	Write-Output "     (possible values are b, ciao, cx, eclipse, gnu, gnunc, ji, xvm, sicstus, shumway, swi, swipack, tau, trealla, xsb, and yap)"
 	Write-Output ""
 	Write-Output "Optional arguments:"
 	Write-Output "  -d directory to store the doclet logs (default is ./logtalk_doclet_logs)"
@@ -221,6 +221,10 @@ Function Confirm-Parameters() {
 		$script:logtalk="sicstuslgt"
 		$script:logtalk_option="--goal"
 		$script:dot="."
+	} elseif ($p -eq "shumway") {
+		$script:prolog='Shumway Prolog'
+		$script:logtalk="shumwaygt"
+		$script:logtalk_option="-g"
 	} elseif ($p -eq "swi") {
 		$script:prolog='SWI-Prolog'
 		$script:logtalk="swilgt"

@@ -91,6 +91,7 @@ following table summarizes the availability of these features:
 |  JIProlog        |      no     |       no      |     yes     |      no     |       no      |       no      |       no     |      no     |   
 |  Quintus Prolog  |      no     |       no      |      no     |      no     |       no      |       no      |      yes     |      no     |   
 |  SICStus Prolog  |      no     |      yes      |     yes     |      no     |       no      |      yes      |      yes     |     yes     |   
+|  Shumway Prolog  |      no     |       no      |     yes     |      no     |       no      |      yes      |      yes     |      no     |   
 |  SWI-Prolog      |     yes     |      yes      |     yes     |     yes     |      yes      |      yes      |      yes     |     yes     |   
 |  Tau Prolog      |      no     |       no      |     yes     |      no     |       no      |       no      |       no     |      no     |   
 |  Trealla Prolog  |     yes     |       no      |     yes     |     yes     |      yes      |      yes      |      yes     |     yes     |   
@@ -279,6 +280,15 @@ Please report any problem found (with a solution if possible).
 
 See the `scripts/embedding/sicstus` directory for a sample shell script
 that can help in pre-compiling Logtalk and Logtalk applications.
+
+
+Shumway Prolog 0.9.3 and later versions
+---------------------------------------
+
+	shumway.pl
+
+Based on initial work by Gustavo Brown, Shumway Prolog author.
+Experimental. Please report any problem found (with a solution if possible).
 
 
 SWI-Prolog 6.6.0 and later versions

@@ -23,9 +23,9 @@
 	imports([paseto_helpers, paseto_claims_helpers])).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-08-08,
+		date is 2026-10-28,
 		comment is 'Facade for PASETO v4 JSON claims encryption, signing, authentication, validation, and key selection.'
 	]).
 
@@ -54,7 +54,7 @@
 		exceptions is [
 			'``Token`` is not a canonical v4.local token' - domain_error(paseto_v4_token, 'Token'),
 			'``KeyOrKeySet`` is an invalid key set' - domain_error(paseto_key_set, 'KeyOrKeySet'),
-			'No key can be selected from ``KeyOrKeySet``' - existence_error(paseto_key, local-'KeyId'),
+			'No key can be selected from ``KeyOrKeySet``' - existence_error(paseto_key, (local)-'KeyId'),
 			'The authenticated payload is not a JSON object' - domain_error(paseto_json_object, 'Claims'),
 			'The claims do not satisfy the validation policy' - domain_error(paseto_claims, 'Reason'),
 			'``Options`` is a variable' - instantiation_error,
@@ -73,7 +73,7 @@
 		exceptions is [
 			'``Token`` is not a canonical v4.local token' - domain_error(paseto_v4_token, 'Token'),
 			'``KeyOrKeySet`` is an invalid key set' - domain_error(paseto_key_set, 'KeyOrKeySet'),
-			'No key can be selected from ``KeyOrKeySet``' - existence_error(paseto_key, local-'KeyId'),
+			'No key can be selected from ``KeyOrKeySet``' - existence_error(paseto_key, (local)-'KeyId'),
 			'The authenticated payload or footer is not a JSON object' - domain_error(paseto_json_object, 'JSON'),
 			'The claims do not satisfy the validation policy' - domain_error(paseto_claims, 'Reason'),
 			'``Options`` is a variable' - instantiation_error,
@@ -109,7 +109,7 @@
 		exceptions is [
 			'``Token`` is not a canonical v4.public token' - domain_error(paseto_v4_token, 'Token'),
 			'``KeyOrKeySet`` is an invalid key set' - domain_error(paseto_key_set, 'KeyOrKeySet'),
-			'No key can be selected from ``KeyOrKeySet``' - existence_error(paseto_key, public-'KeyId'),
+			'No key can be selected from ``KeyOrKeySet``' - existence_error(paseto_key, (public)-'KeyId'),
 			'The authenticated payload is not a JSON object' - domain_error(paseto_json_object, 'Claims'),
 			'The claims do not satisfy the validation policy' - domain_error(paseto_claims, 'Reason'),
 			'``Options`` is a variable' - instantiation_error,
@@ -128,7 +128,7 @@
 		exceptions is [
 			'``Token`` is not a canonical v4.public token' - domain_error(paseto_v4_token, 'Token'),
 			'``KeyOrKeySet`` is an invalid key set' - domain_error(paseto_key_set, 'KeyOrKeySet'),
-			'No key can be selected from ``KeyOrKeySet``' - existence_error(paseto_key, public-'KeyId'),
+			'No key can be selected from ``KeyOrKeySet``' - existence_error(paseto_key, (public)-'KeyId'),
 			'The authenticated payload or footer is not a JSON object' - domain_error(paseto_json_object, 'JSON'),
 			'The claims do not satisfy the validation policy' - domain_error(paseto_claims, 'Reason'),
 			'``Options`` is a variable' - instantiation_error,

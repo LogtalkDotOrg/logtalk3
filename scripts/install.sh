@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Logtalk installation script
-##   Last updated on September 13, 2026
+##   Last updated on October 28, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -42,7 +42,7 @@ default_directory=logtalk-$version
 
 print_version() {
 	echo "Current $(basename "$0") version:"
-	echo "  0.16"
+	echo "  0.17"
 	exit 0
 }
 
@@ -154,6 +154,7 @@ ln -sf ../share/logtalk/integration/gplgt.sh gplgt
 ln -sf ../share/logtalk/integration/jiplgt.sh jiplgt
 ln -sf ../share/logtalk/integration/quintuslgt.sh quintuslgt
 ln -sf ../share/logtalk/integration/sicstuslgt.sh sicstuslgt
+ln -sf ../share/logtalk/integration/shumwaylgt.sh shumwaylgt
 ln -sf ../share/logtalk/integration/swilgt.sh swilgt
 ln -sf ../share/logtalk/integration/taulgt.sh taulgt
 ln -sf ../share/logtalk/integration/tplgt.sh tplgt
@@ -209,6 +210,7 @@ echo "* GNU Prolog (1.4.5 or later):       gplgt"
 echo "* JIProlog (4.1.7.1 or later):       jiplgt      (first run may require sudo)"
 echo "* Quintus Prolog (3.3 or later):     quintuslgt  (experimental)"
 echo "* SICStus Prolog (4.1.0 or later):   sicstuslgt"
+echo "* Shumway Prolog (0.9.3 or later):   shumwaylgt"
 echo "* SWI-Prolog (6.6.0 or later):       swilgt"
 echo "* Tau Prolog (0.3.2 or later):       taulgt"
 echo "* Trealla Prolog (3.9.64 or later):  tplgt"

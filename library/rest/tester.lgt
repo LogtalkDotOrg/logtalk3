@@ -19,7 +19,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(current_prolog_flag(bounded, false)).
+:- if((
+	current_logtalk_flag(sockets, supported),
+	current_prolog_flag(bounded, false)
+)).
 
 	:- initialization((
 		set_logtalk_flag(report, warnings),

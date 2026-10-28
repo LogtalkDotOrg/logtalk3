@@ -989,6 +989,7 @@ identifiers (atoms):
 - JIProlog: ``ji``
 - Quintus Prolog: ``quintus``
 - SICStus Prolog: ``sicstus``
+- Shumway Prolog: ``shumway``
 - SWI-Prolog: ``swi``
 - Tau Prolog: ``tau``
 - Trealla Prolog: ``trealla``

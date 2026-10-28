@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-08-31,
+		date is 2026-10-28,
 		comment is 'Unit tests for the MCP 2026-07-28 adapter.'
 	]).
 
@@ -89,7 +89,7 @@
 		has_pair(Meta, 'io.modelcontextprotocol/serverInfo', ServerInfo),
 		has_pair(ServerInfo, name, 'test-server-2026').
 
-	test(mcp26_discover_cache_override_01, deterministic(TTL-Scope == 5000-public)) :-
+	test(mcp26_discover_cache_override_01, deterministic(TTL-Scope == 5000-(public))) :-
 		run_2026(
 			test_tools_2026,
 			[discover_request(1)],

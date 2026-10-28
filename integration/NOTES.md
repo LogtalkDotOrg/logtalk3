@@ -35,6 +35,7 @@ your system path):
 * JIProlog (4.1.7.1 or later):       `jiplgt`     (first run may require `sudo`)
 * Quintus Prolog (3.3 or later):     `quintuslgt`
 * SICStus Prolog (4.1.0 or later):   `sicstuslgt`
+* Shumway Prolog (0.9.3 or later):   `sumwaylgt`
 * SWI-Prolog (6.6.0 or later):       `swilgt`
 * Tau Prolog (0.3.2 or later):       `taulgt`
 * Trealla Prolog (2.84.29 or later): `tplgt`

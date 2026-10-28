@@ -41,6 +41,11 @@ bug reports and patches.
 * FIXED: The linter check for duplicated clauses could report false positives
 due to logical update semantics.
 
+Prolog adapter and integration files
+------------------------------------
+
+* ADDED: Support for Shumway (Prolog on .NET) 0.9.3 and later versions.
+
 Documentation
 -------------
 

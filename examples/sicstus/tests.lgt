@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:12:0,
+		version is 1:12:1,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2020-02-02,
+		date is 2026-10-28,
 		comment is 'Unit tests for the "sicstus" example.'
 	]).
 
@@ -76,7 +76,7 @@
 		findall(Prop, square(_)::predicate_property(side(_), Prop), Props),
 		msort(Props,PropsSorted),
 		nth1(1, PropsSorted, Logtalk),    assertion(Logtalk == logtalk),
-		nth1(2, PropsSorted, Public),     assertion(Public == public),
+		nth1(2, PropsSorted, Public),     assertion(Public == (public)),
 		nth1(3, PropsSorted, Static),     assertion(Static == static),
 		nth1(4, PropsSorted, DeclaredIn), variant(DeclaredIn, declared_in(square(_))),
 		nth1(5, PropsSorted, DefinedIn),  variant(DefinedIn, defined_in(square(_))).

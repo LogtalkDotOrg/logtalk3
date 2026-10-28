@@ -21,13 +21,15 @@
 
 :- if((
 	current_logtalk_flag(prolog_dialect, Dialect),
-	(	Dialect == eclipse; Dialect == xvm; Dialect == sicstus; Dialect == swi;
-		Dialect == trealla; Dialect == xsb; Dialect == yap
+	(	Dialect == eclipse; Dialect == xvm; Dialect == sicstus; Dialect == shumway;
+		Dialect == swi; Dialect == trealla; Dialect == xsb; Dialect == yap
 	)
 )).
 
 	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
 		:- ensure_loaded(library(sicstus)).
+	:- elif(current_logtalk_flag(prolog_dialect, shumway)).
+		:- use_module(library(coroutining)).
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 		:- use_module(library(dif), []).
 		:- use_module(library(when), []).

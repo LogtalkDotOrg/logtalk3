@@ -898,6 +898,7 @@ argument of the `version/6` predicate is a list of backend identifiers
 - JIProlog: `ji`
 - Quintus Prolog: `quintus`
 - SICStus Prolog: `sicstus`
+- Shumway Prolog: `shumway`
 - SWI-Prolog: `swi`
 - Tau Prolog: `tau`
 - Trealla Prolog: `trealla`

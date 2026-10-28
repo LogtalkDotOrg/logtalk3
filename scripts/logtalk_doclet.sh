@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation automation script
-##   Last updated on April 28, 2026
+##   Last updated on October 28, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -31,7 +31,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 4.0"
+	echo "$(basename "$0") 4.1"
 	exit 0
 }
 
@@ -147,7 +147,7 @@ usage_help() {
 	echo
 	echo "Required arguments:"
 	echo "  -p backend Prolog compiler"
-	echo "     (possible values are b, ciao, cx, eclipse, gnu, gnunc, ji, xvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	echo "     (possible values are b, ciao, cx, eclipse, gnu, gnunc, ji, xvm, sicstus, shumway, swi, swipack, tau, trealla, xsb, and yap)"
 	echo
 	echo "Optional arguments:"
 	echo "  -d directory to store the doclet logs (default is ./logtalk_doclet_logs)"
@@ -217,6 +217,10 @@ elif [ "$p_arg" == "sicstus" ] ; then
 	logtalk=sicstuslgt$extension
 	logtalk_call="$logtalk --goal"
 	dot="."
+elif [ "$p_arg" == "shumway" ] ; then
+	prolog='Shumway Prolog'
+	logtalk=shumwaylgt$extension
+	logtalk_call="$logtalk -g"
 elif [ "$p_arg" == "swi" ] ; then
 	prolog='SWI-Prolog'
 	logtalk=swilgt$extension

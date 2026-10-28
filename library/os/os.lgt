@@ -51,9 +51,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:104:0,
+		version is 1:105:0,
 		author is 'Paulo Moura',
-		date is 2026-06-10,
+		date is 2026-10-28,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -2004,6 +2004,120 @@
 			(	{getenv('COMSPEC', _)} ->
 				Type = windows
 			;	Type = unix
+			).
+
+		command_line_arguments(Arguments) :-
+			current_prolog_flag(argv, Arguments).
+
+		sleep(Seconds) :-
+			{sleep(Seconds)}.
+
+	:- elif(current_logtalk_flag(prolog_dialect, shumway)).
+
+		pid(PID) :-
+			{pid(PID)}.
+
+		shell(Command, Status) :-
+			(	current_prolog_flag(windows, true) ->
+				atom_concat('cmd.exe /C ', Command, ExtendedCommand)
+			;	ExtendedCommand = Command
+			),
+			{shell(ExtendedCommand, Status)}.
+
+		shell(Command) :-
+			shell(Command, 0).
+
+		absolute_file_name(Path, ExpandedPath) :-
+			{absolute_file_name(Path, ExpandedPath)}.
+
+		internal_os_path(Path, Path).
+
+		make_directory(Directory) :-
+			absolute_file_name(Directory, ExpandedPath),
+			(	{exists_directory(ExpandedPath)} ->
+				true
+			;	{mkdir(ExpandedPath)}
+			).
+
+		make_directory_path(Directory) :-
+			absolute_file_name(Directory, ExpandedPath),
+			{mkdir(ExpandedPath)}.
+
+		delete_directory(Directory) :-
+			absolute_file_name(Directory, ExpandedPath),
+			{rmdir(ExpandedPath)}.
+
+		change_directory(Directory) :-
+			absolute_file_name(Directory, ExpandedPath),
+			{working_directory(_, ExpandedPath)}.
+
+		working_directory(Directory) :-
+			{working_directory(Directory, Directory)}.
+
+		directory_files(Directory, Files) :-
+			absolute_file_name(Directory, Path),
+			{directory_files(Path, Files)}.
+
+		directory_exists(Directory) :-
+			absolute_file_name(Directory, ExpandedPath),
+			{exists_directory(ExpandedPath)}.
+
+		file_exists(File) :-
+			absolute_file_name(File, ExpandedPath),
+			{exists_file(ExpandedPath)}.
+
+		file_modification_time(File, Time) :-
+			absolute_file_name(File, ExpandedPath),
+			{file_modification_time(ExpandedPath, Time)}.
+
+		file_size(File, Size) :-
+			absolute_file_name(File, ExpandedPath),
+			{file_size(ExpandedPath, Size)}.
+
+		file_permission(File, Permission) :-
+			absolute_file_name(File, ExpandedPath),
+			{file_permission(ExpandedPath, Permission)}.
+
+		copy_file(File, Copy) :-
+			absolute_file_name(File, FilePath),
+			absolute_file_name(Copy, CopyPath),
+			{copy_file(FilePath, CopyPath)}.
+
+		rename_file(Old, New) :-
+			absolute_file_name(Old, OldExpandedPath),
+			absolute_file_name(New, NewExpandedPath),
+			{rename(OldExpandedPath, NewExpandedPath)}.
+
+		delete_file(File) :-
+			absolute_file_name(File, ExpandedPath),
+			{delete(ExpandedPath)}.
+
+		environment_variable(Variable, Value) :-
+			{getenv(Variable, Value)}.
+
+		time_stamp(Time) :-
+			{get_time(Time)}.
+
+		date_time(Year, Month, Day, Hours, Minutes, Seconds, Milliseconds) :-
+			{	get_time(TimeStamp),
+				stamp_date_time(TimeStamp, date(Year,Month,Day,Hours,Minutes,Seconds0,_,_,_), local),
+				Seconds is truncate(float_integer_part(Seconds0)),
+				Milliseconds is round(float_fractional_part(Seconds0)*1000)
+			}.
+
+		cpu_time(Seconds) :-
+			{get_cpu_time(Milliseconds)},
+			Seconds is Milliseconds / 1000.
+
+		wall_time(Seconds) :-
+			{get_time(Seconds)}.
+
+		operating_system_type(Type) :-
+			(	current_prolog_flag(windows, true) ->
+				Type = windows
+			;	current_prolog_flag(unix, true) ->
+				Type = unix
+			;	Type = unknown
 			).
 
 		command_line_arguments(Arguments) :-

@@ -22,9 +22,9 @@
 :- object(format).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2025-11-18,
+		date is 2026-10-28,
 		comment is 'Formatted output predicates.'
 	]).
 
@@ -69,6 +69,14 @@
 
 		format(Format, Arguments) :-
 			{format:format(Format, Arguments)}.
+
+	:- elif(current_logtalk_flag(prolog_dialect, shumway)).
+
+		format(Stream, Format, Arguments) :-
+			{format(Stream, Format, Arguments)}.
+
+		format(Format, Arguments) :-
+			{format(Format, Arguments)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, tau)).
 

@@ -23,11 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:3:1,
 		author is 'Paulo Moura',
-		date is 2024-09-23,
+		date is 2026-10-28,
 		comment is 'Unit tests for the ISO Prolog standard nl/0-1 built-in predicates.'
 	]).
+
+	cleanup :-
+		^^clean_binary_output.
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.12.3.4
 
