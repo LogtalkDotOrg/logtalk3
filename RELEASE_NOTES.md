@@ -41,6 +41,13 @@ bug reports and patches.
 * FIXED: The linter check for duplicated clauses could report false positives
 due to logical update semantics.
 
+* FIXED: Duplicated float comparison using unification linter warning for a
+`(\=)/2` goal as the condition in a if-then-else control construct. Thanks to
+Lindsey Spratt for the bug report.
+
+* FIXED: Missing duplicated float comparison using unification linter warning
+for `(=)/2` goals as conditions in soft-cut control constructs.
+
 Prolog adapter and integration files
 ------------------------------------
 

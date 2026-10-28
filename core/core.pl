@@ -13848,7 +13848,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'((If -> _; _), _, _, _, Ctx) :-
 	nonvar(If),
-	once((If = (Term1 = Term2); If = (Term1 \= Term2))),
+	If = (Term1 = Term2),
 	once((number(Term1); number(Term2))),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
@@ -13909,18 +13909,28 @@ create_logtalk_flag(Flag, Value, Options) :-
 	nonvar(If),
 	'$lgt_predicate_property'('*->'(_, _), built_in),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-	'$lgt_compiler_flag'(conditionals, warning),
-	(	If == ! ->
-		Message = suspicious_cut_in_soft_cut(File, Lines, Type, Entity, Head)
-	;	If = (Goal, _), Goal == ! ->
-		Message = suspicious_cut_in_soft_cut(File, Lines, Type, Entity, Head, If)
-	;	If = once(_),
-		Message = suspicious_once_in_soft_cut(File, Lines, Type, Entity, Head, If)
+	(	'$lgt_compiler_flag'(conditionals, warning),
+		(	If == ! ->
+			Message = suspicious_cut_in_soft_cut(File, Lines, Type, Entity, Head)
+		;	If = (Goal, _), Goal == ! ->
+			Message = suspicious_cut_in_soft_cut(File, Lines, Type, Entity, Head, If)
+		;	If = once(_),
+			Message = suspicious_once_in_soft_cut(File, Lines, Type, Entity, Head, If)
+		),
+		'$lgt_source_file_context'(File, Lines, Type, Entity),
+		'$lgt_comp_ctx_head'(Ctx, Head),
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_print_message'(warning(conditionals), Message)
+	;	'$lgt_compiler_flag'(suspicious_calls, warning),
+		If = (Term1 = Term2),
+		once((number(Term1); number(Term2))),
+		'$lgt_source_file_context'(File, Lines, Type, Entity),
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_print_message'(
+			warning(arithmetic_expressions),
+			suspicious_call(File, Lines, Type, Entity, If, reason(comparing_numbers_using_unification))
+		)
 	),
-	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_comp_ctx_head'(Ctx, Head),
-	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_print_message'(warning(conditionals), Message),
 	fail.
 
 '$lgt_compile_body'((SoftCut; _), _, _, _, Ctx) :-
