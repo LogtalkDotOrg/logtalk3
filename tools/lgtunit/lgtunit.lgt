@@ -2267,7 +2267,7 @@
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		(Dialect == b; Dialect == shumway; Dialect == swi; Dialect == tau; Dialect == trealla; Dialect == yap)
+		(Dialect == b; Dialect == swi; Dialect == tau; Dialect == trealla; Dialect == yap)
 	)).
 
 		% avoid portability warnings
@@ -2342,7 +2342,10 @@
 			{deterministic(Deterministic)},
 			!.
 
-	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
+	:- elif((
+		current_logtalk_flag(prolog_dialect, Dialect),
+		(Dialect == gnu; Dialect == shumway)
+	)).
 
 		% avoid portability warnings
 		:- uses(user, [call_det/2]).
