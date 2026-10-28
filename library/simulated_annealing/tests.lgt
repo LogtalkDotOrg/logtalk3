@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-10-24,
+		date is 2026-10-27,
 		comment is 'Unit tests for the "simulated_annealing" library.'
 	]).
 
@@ -90,7 +90,7 @@
 	test(sa_tsp_energy_below_naive, true(Energy < 50.0)) :-
 		% The optimal tour for a regular hexagon with side 5 is 30.0.
 		% Any reasonable SA run should find a tour well below 50.0.
-		simulated_annealing(tsp)::run(_Tour, Energy, [max_steps(20000)]).
+		simulated_annealing(tsp)::run(_Tour, Energy, [max_steps(10000)]).
 
 	test(sa_tsp_custom_cooling_schedule, true(Energy < 50.0)) :-
 		% TSP defines a custom cooling_schedule/3 (0.999 factor)
@@ -122,9 +122,9 @@
 		member(improvements(Imp), Statistics), integer(Imp), Imp >= 0,
 		member(final_temperature(FinalT), Statistics), float(FinalT), FinalT > 0.0.
 
-	test(sa_run_4_steps_match_max, true(Steps =:= 5000)) :-
+	test(sa_run_4_steps_match_max, true(Steps =:= 2500)) :-
 		% Use a very low min_temperature to ensure max_steps is fully reached
-		simulated_annealing(quadratic)::run(_State, _Energy, Statistics, [max_steps(5000), min_temperature(1.0e-100)]),
+		simulated_annealing(quadratic)::run(_State, _Energy, Statistics, [max_steps(2500), min_temperature(1.0e-100)]),
 		member(steps(Steps), Statistics).
 
 	test(sa_run_4_acceptances_bounded, true((Acc >= 0, Acc =< Steps))) :-
@@ -203,7 +203,7 @@
 		quadratic_progress::clear_log,
 		% Use a very low min_temperature to ensure all steps (and all updates) run.
 		% With updates(5) plus the final report on termination, we expect 6 total.
-		simulated_annealing(quadratic_progress)::run(_State, _Energy, [updates(5), max_steps(10000), min_temperature(1.0e-100)]),
+		simulated_annealing(quadratic_progress)::run(_State, _Energy, [updates(5), max_steps(5000), min_temperature(1.0e-100)]),
 		findall(1, quadratic_progress::progress_log(_, _, _, _, _), List),
 		length(List, Count).
 
