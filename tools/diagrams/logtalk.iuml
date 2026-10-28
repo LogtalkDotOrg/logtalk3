@@ -1,0 +1,106 @@
+' Logtalk PlantUML include file
+' Defines skinparams, stereotype styles, and legend for Logtalk diagrams
+'
+' SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+' SPDX-License-Identifier: Apache-2.0
+
+' =========================================================================
+' Skinparams: per-stereotype colors for entities
+' =========================================================================
+
+skinparam classBackgroundColor<<object>>              #D6EAF8
+skinparam classBorderColor<<object>>                  #2980B9
+skinparam classBackgroundColor<<protocol>>            #D5F5E3
+skinparam classBorderColor<<protocol>>                #1E8449
+skinparam classBackgroundColor<<category>>            #FDEBD0
+skinparam classBorderColor<<category>>                #CA6F1E
+skinparam classBackgroundColor<<module>>              #E8DAEF
+skinparam classBorderColor<<module>>                  #7D3C98
+skinparam classBackgroundColor<<file>>                #D4E6F1
+skinparam classBorderColor<<file>>                    #2471A3
+skinparam classBackgroundColor<<directory>>            #FADBD8
+skinparam classBorderColor<<directory>>                #C0392B
+skinparam classBackgroundColor<<library>>              #FADBD8
+skinparam classBorderColor<<library>>                  #C0392B
+skinparam classBackgroundColor<<external_object>>     #EBF5FB
+skinparam classBorderColor<<external_object>>         #85C1E9
+skinparam classFontColor<<external_object>>           #5D6D7E
+skinparam classBackgroundColor<<external_protocol>>   #EAFAF1
+skinparam classBorderColor<<external_protocol>>       #82E0AA
+skinparam classFontColor<<external_protocol>>         #5D6D7E
+skinparam classBackgroundColor<<external_category>>   #FEF5E7
+skinparam classBorderColor<<external_category>>       #F0B27A
+skinparam classFontColor<<external_category>>         #5D6D7E
+skinparam classBackgroundColor<<external_module>>     #F4ECF7
+skinparam classBorderColor<<external_module>>         #BB8FCE
+skinparam classFontColor<<external_module>>           #5D6D7E
+skinparam classBackgroundColor<<external_file>>       #EBF5FB
+skinparam classBorderColor<<external_file>>           #85C1E9
+skinparam classFontColor<<external_file>>             #5D6D7E
+skinparam classBackgroundColor<<external_directory>>  #FDEDEC
+skinparam classBorderColor<<external_directory>>      #F1948A
+skinparam classFontColor<<external_directory>>        #5D6D7E
+skinparam classBackgroundColor<<external_library>>    #FDEDEC
+skinparam classBorderColor<<external_library>>        #F1948A
+skinparam classFontColor<<external_library>>          #5D6D7E
+skinparam classBackgroundColor<<directive>>           #FDEBD0
+skinparam classBorderColor<<directive>>               #E67E22
+skinparam classBackgroundColor<<predicate>>           #F2F3F4
+skinparam classBorderColor<<predicate>>               #BDC3C7
+skinparam classBackgroundColor<<public_predicate>>    #D5F5E3
+skinparam classBorderColor<<public_predicate>>        #27AE60
+skinparam classBackgroundColor<<protected_predicate>> #FCF3CF
+skinparam classBorderColor<<protected_predicate>>     #F1C40F
+skinparam classBackgroundColor<<private_predicate>>   #FADBD8
+skinparam classBorderColor<<private_predicate>>       #E74C3C
+skinparam classBackgroundColor<<local_predicate>>     #F2F3F4
+skinparam classBorderColor<<local_predicate>>         #BDC3C7
+skinparam classBackgroundColor<<multifile_predicate>> #D4E6F1
+skinparam classBorderColor<<multifile_predicate>>     #2980B9
+skinparam classBackgroundColor<<exported_predicate>>  #D5F5E3
+skinparam classBorderColor<<exported_predicate>>      #27AE60
+skinparam classBackgroundColor<<external_predicate>>  #F2F4F4
+skinparam classBorderColor<<external_predicate>>      #D5DBDB
+skinparam classFontColor<<external_predicate>>        #5D6D7E
+skinparam classFontName Monospace
+skinparam classFontSize 10
+
+skinparam RoundCorner<<category>> 15
+skinparam RoundCorner<<external_category>> 15
+
+' =========================================================================
+' Package styles
+' =========================================================================
+
+skinparam packageBackgroundColor<<rlibrary>>    #D3D3D3
+skinparam packageBorderColor<<rlibrary>>        #A9A9A9
+skinparam packageBackgroundColor<<libraries>>   #D3D3D3
+skinparam packageBorderColor<<libraries>>       #A9A9A9
+skinparam packageBackgroundColor<<library>>     #F5F5F5
+skinparam packageBorderColor<<library>>         #A9A9A9
+skinparam packageBackgroundColor<<rdirectory>>  #D3D3D3
+skinparam packageBorderColor<<rdirectory>>      #A9A9A9
+skinparam packageBackgroundColor<<directories>> #D3D3D3
+skinparam packageBorderColor<<directories>>     #A9A9A9
+skinparam packageBackgroundColor<<directory>>   #F5F5F5
+skinparam packageBorderColor<<directory>>       #A9A9A9
+skinparam packageBackgroundColor<<files>>       #F5F5F5
+skinparam packageBorderColor<<files>>           #A9A9A9
+skinparam packageBackgroundColor<<file>>        #FFFAFA
+skinparam packageBorderColor<<file>>            #A9A9A9
+skinparam packageBackgroundColor<<external>>    #FFFFFF
+skinparam packageBorderColor<<external>>        #D3D3D3
+skinparam packageBackgroundColor<<entity>>      #FFFAFA
+skinparam packageBorderColor<<entity>>          #A9A9A9
+skinparam packageFontName Monospace
+skinparam packageFontSize 10
+skinparam packageStyle rectangle
+
+' =========================================================================
+' General settings
+' =========================================================================
+
+skinparam defaultFontName Monospace
+skinparam defaultFontSize 10
+
+hide stereotype
