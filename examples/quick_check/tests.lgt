@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2026-10-18,
+		date is 2026-10-28,
 		comment is 'Unit tests for the "quick_check" example.'
 	]).
 
@@ -36,12 +36,12 @@
 	% tests
 
 	% run the default number of random tests
-	quick_check(qc3, same_length_3_prop(+list)).
+	quick_check(qc3, same_length_3_prop(+list(integer,30))).
 	% run only 12 random tests
-	quick_check(qc2, same_length_2_prop(+list), [n(12)]).
-	quick_check(qc1, reverse_2_twice_prop(+list), [n(12)]).
+	quick_check(qc2, same_length_2_prop(+list(integer,30)), [n(12)]).
+	quick_check(qc1, reverse_2_twice_prop(+list(integer,30)), [n(12)]).
 	% limit also the maximum number of shrink operations to 8
-	quick_check(qc4, same_length_3_prop(+list), [n(12), s(8)]).
+	quick_check(qc4, same_length_3_prop(+list(integer,30)), [n(12), s(8)]).
 
 	% properties (must be defined as local predicates but can, of course,
 	% call any predicate defined elsewhere)
