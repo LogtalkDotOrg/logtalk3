@@ -124,14 +124,17 @@
 % the third argument, which must be either "predicate" or "control_construct",
 % is used to guide the compilation of these meta-predicates in debug mode
 
-'$lgt_prolog_meta_predicate'(consult(_), consult(*), predicate).
 '$lgt_prolog_meta_predicate'(freeze(_, _), freeze(*, 0), predicate).
 '$lgt_prolog_meta_predicate'(when(_, _), when(*, 0), predicate).
-'$lgt_prolog_meta_predicate'(call_with_time_limit(_, _), call_with_time_limit(*, 0), predicate).
+'$lgt_prolog_meta_predicate'(call_cleanup(_, _), call_cleanup(0, 0), predicate).
+'$lgt_prolog_meta_predicate'(call_det(_, _), call_det(0, *), predicate).
+'$lgt_prolog_meta_predicate'(call_nth(_, _), call_det(0, *), predicate).
+'$lgt_prolog_meta_predicate'(call_with_error_context(_, _), call_with_error_context(0, *), predicate).
+'$lgt_prolog_meta_predicate'(call_with_limit(_, _), call_with_limit(*, 0), predicate).
+'$lgt_prolog_meta_predicate'(call_with_offset(_, _), call_with_limit(*, 0), predicate).
+'$lgt_prolog_meta_predicate'(setup_call_cleanup(_, _, _), setup_call_cleanup(0, 0, 0), predicate).
+'$lgt_prolog_meta_predicate'(time(_), time(0), predicate).
 '$lgt_prolog_meta_predicate'(time_out(_, _, _), time_out(0, *, *), predicate).
-'$lgt_prolog_meta_predicate'(timed_call(_, _), timed_call(0, *), predicate).
-'$lgt_prolog_meta_predicate'(call_with_timeout(_, _), call_with_timeout(0, *), predicate).
-'$lgt_prolog_meta_predicate'(call_with_timeout(_, _, _), call_with_timeout(0, *, *), predicate).
 
 
 % '$lgt_prolog_meta_directive'(@callable, -callable)
@@ -782,6 +785,7 @@ atomic_concat(A, B, Atom) :-
 		Atom = Atomic
 	;	term_to_atom(Atomic, Atom)
 	).
+
 
 % atomic_list_concat(@list(atomic), ?atom) -- built-in
 
