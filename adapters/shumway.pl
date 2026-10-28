@@ -328,7 +328,8 @@
 %
 % converts between Prolog internal file paths and operating-system paths
 
-'$lgt_prolog_os_file_name'(Path, Path).
+'$lgt_prolog_os_file_name'(PrologPath, OSPath) :-
+	prolog_to_os_filename(PrologPath, OSPath).
 
 
 % '$lgt_expand_path'(+atom, -atom)
