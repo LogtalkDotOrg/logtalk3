@@ -34,7 +34,7 @@ These should hold for almost every edit:
 - **Predicate names**: `snake_case`, descriptive, avoid abbreviations, avoid CamelCase and mid-name digits. Prefer reuse of established API names (`member/2`, `size/2`, …).
 - **Variable names**: `CamelCase`, descriptive, avoid abbreviations. Singletons: `_` or `_Name`.
 - **Dynamic predicates**: trailing underscore convention (e.g. `state_`) is common in Logtalk.
-- **Goals**: one goal per line in clause bodies (small exceptions: green cuts, `nl` after write). Red cuts on their own line.
+- **Goals**: one goal per line, including tests, fixtures, and command-line queries (small exceptions: green cuts, `nl` after write). Red cuts on their own line.
 - **Disjunctions**: always parenthesized; `;` at the start of the line; prefer separate clauses when the disjunction is the whole body (with noted exceptions).
 - **If-then-else**: always parenthesized; always include the else branch; consistent vertical alignment of `(`, `->` / `;`, `)`.
 - **Operators and lists**: spaces around binary operators; space after commas and after `|` in lists.
@@ -67,6 +67,17 @@ These should hold for almost every edit:
 ## Sequences and accumulators
 
 Represent successive states as `S0`, `S1`, …, `S` (with a meaningful base name), e.g. `Sum0`, `Sum1`, `Sum`. Avoid generic names such as `Acc`.
+
+## Control flow and dispatch
+
+- Prefer `memberchk/2` for deterministic membership checks, except under `\+/1`, as the sole if-then-else condition, or immediately before a cut; use `member/2` in those cases. Never write `\+ memberchk(...)`.
+- Do not use `member/2` to check duplicates against an unbound list tail: it can instantiate that tail. Use a seen list or wait until the list is ground.
+- Give public predicates and their auxiliaries distinct predicate indicators to avoid accidental recursion or dispatch errors.
+- Access parametric object/category arguments using the parameter variables in the object/category opening directive; variables in the object declaration are not shared with separately written clauses.
+- Send a self message (`::hook(...)`) for overridable hooks; a plain local call may bypass descendant overrides.
+- In categories, reuse other categories with `extends/1`, not `imports/1`.
+- Call imported or inherited category predicates using `^^/1`. Only public or protected category predicates can be called this way; expose shared helpers as protected when needed.
+- Do not add private declarations for local helpers unless required for correctness, tooling, or an established documentation convention.
 
 ## What not to put in source files
 

@@ -93,6 +93,17 @@ Conditional lambdas run in `user`, must be side-effect free, and may use forms l
 - Exceptions: leash `exception` (e.g. `tight` or `full`) and spy the predicate that should throw or catch.
 - Log points and advanced features are described in the handbook; use them when you need trace output without stopping.
 
+## Local checks before broad tracing
+
+- For missing predicates after moving code into a category, check `^^/1` qualification and public/protected scope first. In specializations, inherited helpers likewise need appropriate scope and delegation.
+- For missing inherited implementations after a documentation change, check whether a local declaration hid the category implementation; explicit delegation may be required.
+- For unexpected hook behavior, check that the caller sends a self message rather than making a plain local call.
+- For malformed branching, inspect explicit nesting of mixed `->` and `;` before changing the algorithm.
+- If duplicate detection changes the input list, check for `member/2` against an unbound tail.
+- For parametric objects and parametric categories, verify that clauses obtain parameters usign the parameter vatiables in the entity opening directive.
+- Follow the testing skill's execution policy for checkout environment variables and test gates.
+- In backend command-line goals, curly terms are Logtalk loader shorthand; reserve `{Goal}` for native calls inside Logtalk source.
+
 ## What to avoid
 
 - Expecting to trace entities compiled in normal or optimized mode

@@ -10,6 +10,8 @@ metadata:
 
 Write code that runs on any supported Prolog backend. Prefer Logtalk built-ins and ISO Prolog; isolate anything else behind a portable interface.
 
+Portability across all supported backends is a hard requirement unless the user explicitly narrows it. Do not introduce backend-only solutions even as temporary experiments without that approval.
+
 ## Authoritative documentation
 
 - Portable applications: https://logtalk.org/handbook/userman/programming.html#portable-applications
@@ -55,6 +57,14 @@ Enable portability checking while developing portable code:
 ```
 
 (or pass `portability(warning)` in `logtalk_load/2`). Treat non-portable built-in / arithmetic warnings as issues to fix or encapsulate.
+
+## Resource, numeric, and text portability
+
+- Avoid `call_cleanup/2` and `setup_call_cleanup/3` in portable libraries and tests. Prefer catch-based deterministic resource helpers that close resources on success, failure, and exceptions.
+- Do not shift right by 64 bits or more when packing bytes; backend behavior differs. Use division/modulo by 256 or smaller fixed-width words.
+- Use standard character-code notation (`0'X`) or decimal numbers instead of `16'...` numeric notation.
+- Use `number_codes/2` for numeric wire serialization; do not rely on a backend accepting numbers in `atom_codes/2`.
+- For cross-backend fixtures containing curly Unicode quotes or dashes, construct the required representation from decimal character codes rather than embedding those characters in double-quoted literals; SICStus can report `layout_inside_quotes`.
 
 ## Patterns to prefer
 

@@ -37,6 +37,8 @@ Do not paste large API extracts into source files or comments. Link or use `uses
 2. **Load the library**
    - Typical form: `logtalk_load(lists(loader))` (replace `lists` with the library name).
    - Prefer loading libraries from the application or library `loader.lgt`, not ad-hoc in every file.
+   - Load external library dependencies using library notation rather than relative filesystem paths.
+   - If a change requires updated dependencies to be installed or reloaded, stop and ask the user to install/reload them; do not add workaround wrappers.
 
 3. **Use, don’t copy**
    - Prefer `uses/2` for readable calls:
@@ -69,6 +71,18 @@ Names and loaders are indicative; confirm in the API index for your Logtalk vers
 
 Always prefer the exact entity and predicate names from the official docs over guessed names.
 
+## Shared API contracts
+
+- Follow the shared `options` API: validate with `check_options/1`, merge with `merge_options/2`, accept repeated options, and use the first occurrence. Do not add duplicate rejection or fixed-size effective-option validators, including for options stored in models.
+- Do not redeclare the `valid_option/1` and `default_option/1` predicates.
+- An explicit options-list argument must be last, including in provider protocols.
+- Do not introduce compatibility branches for new, unreleased libraries unless requested; enforce the complete current model representation.
+- For forecasting data, represent missing observations with anonymous or unbound variables (`_`), not configurable atoms or compound markers.
+- In descriptor DSLs that generate JSON, use ordinary `true`/`false` in descriptors and reserve `@true`/`@false` for generated JSON. In curly JSON terms, use a space before literals on the right of a pair: `flag- @true`, `value- @null`.
+- Use `create_object/4` for dynamic object creation; group protocols in one `implements([Protocols])` relation.
+- `current_predicate/1` sees protocol declarations. Use `predicate_property(Head, defined_in(Entity))` when distinguishing declaration from implementation is necessary; avoid redundant checks for declared optional hooks whose calls already fail cleanly when undefined.
+- When an API accepts either a compound handle or an integer port, discriminate by structure or exclude integers; `nonvar/1` alone hides the port branch.
+
 ## Context7
 
 When Context7 (CLI, skill, or MCP) is configured:
@@ -82,15 +96,15 @@ If Context7 is unavailable, use the official API index and handbook links above.
 ## What to avoid
 
 - Local `member/2`, `append/3`, `reverse/2`, `map`-style helpers that duplicate libraries
-- New “utils" objects that mirror standard library APIs without need
+- New "utils" objects that mirror standard library APIs without need
 - Guessing predicate names or arities instead of looking them up
-- Loading libraries only in interactive sessions and forgetting them in `loader.lgt`
+- Loading libraries only in interactive sessions and forgetting to add them to `loader.lgt` and `tester.lgt` files
 - Copying large documentation blocks into source files
 
 ## Verification checklist
 
 - [ ] Searched APIs / Context7 before adding any general-purpose helper
-- [ ] Required libraries listed in the appropriate `loader.lgt`
+- [ ] Required libraries listed in the appropriate `loader.lgt` and `tester.lgt` files
 - [ ] Application code uses `uses/2` or documented public APIs
 - [ ] No unjustified duplicate of a library predicate
 - [ ] Backend-portable usage unless the library itself is backend-specific and documented as such

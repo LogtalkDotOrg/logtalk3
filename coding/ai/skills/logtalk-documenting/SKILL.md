@@ -31,7 +31,7 @@ Do not duplicate the handbook content. Prefer linking to specific sections when 
 1. Turn `source_data` on when you want the compiler to retain documenting information for `lgtdoc`.
 2. Use the standard directives; they are visible to reflection and to `lgtdoc`.
 3. Prefer short, precise comments. Put longer explanations under `remarks` or `fails_if`.
-4. Follow the handbook style for comments (third-person singular, “True iff …", “Enumerates, by backtracking, …", “Fails if …").
+4. Follow the handbook style for comments (third-person singular, "True iff …", "Enumerates, by backtracking, …", "Fails if …").
 5. Use controlled language for exceptions: https://logtalk.org/handbook/userman/documenting.html#documenting-predicate-exceptions
 
 ## Entity documentation (`info/1`)
@@ -66,20 +66,39 @@ Also document modes with `mode/2` and meta-predicates with `meta_predicate/1` wh
 
 ### Style guidelines for comments
 
-- Start with a verb in third-person singular (“Runs …", “Converts …") or with “True iff …" / “True if …".
-- Multi-solution predicates: “Enumerates, by backtracking, all/the …".
-- Failure conditions: “Fails if …" / “Fails when …".
+- Start with a verb in third-person singular ("Runs …", "Converts …") or with "True iff …" / "True if …".
+- Multi-solution predicates: "Enumerates, by backtracking, all/the …".
+- Failure conditions: "Fails if …" / "Fails when …".
 - Keep the main `comment` concise; move detail to `remarks` or `fails_if`.
+- Focus `comment` values on the contract rather than repeating library notes; wrap inline code in double backquotes.
 
 ### Exceptions
 
-List exceptions with the `exceptions` key. Prefer standard error terms. Typical order: instantiation → type → domain → others. Use the same argument names as in `arguments`/`argnames`. Follow the controlled phrasing in the handbook.
+List exceptions with the `exceptions` key. Prefer standard error terms. Typical order: instantiation → type → domain → others. Use the same argument names as in `arguments`/`argnames`. Follow the controlled phrasing in the handbook section on documentating exceptions.
+
+Every predicate that can throw exceptions must document them using `exceptions is [...]`, including exceptions propagated from validation or delegated calls.
+
+### Declarations and inherited metadata
+
+- Genuinely new locally declared predicates need explicit `mode/2` directives.
+- Do not redeclare inherited protocol predicates just to repeat `public/1`, `mode/2`, or `info/2`; inherit the shared declarations and metadata.
+- A local redeclaration of an inherited predicate hides its inherited definition. When a definition specialization is necessary, call the inherited definition using `^^/1`.
+- A documented local validation helper only used in tests needs an explicit scope (normally private) to avoid dead code lint warnings. Use protected scope for helpers needed by specializations.
+- Document each protected predicate declaration immediately with `mode/2` and `info/2` directives. In the `info/2` directive, use concise `comment` and `argnames`.
+- New library unit-test objects need `info/1` directive with version, author, date, and a library-specific unit-test comment.
+
+## Library notes and distribution files
+
+- Describe predicates in complete sentences: "The `print_recommender/1` predicate prints ...". Use "predicates" for grouped descriptions rather than terse predicate-label fragments.
+- Introduce displayed model or data terms with a sentence identifying what they represent and which predicates return them; a section heading alone is insufficient.
+- In the Logtalk distribution, edit source documentation only. Do not regenerate or edit generated Handbook pages unless explicitly requested.
+- New distribution source and documentation files must retain the complete standard Apache 2.0 header, including the license text; do not replace it with abbreviated SPDX-only lines.
 
 ## Generating documentation
 
 1. Compile the code with `source_data(on)` (often already set for libraries).
-2. Load and run `lgtdoc` to produce per-entity XML files (and optional indexes).
-3. Convert XML to the desired final format (HTML, PDF, reStructuredText, Markdown, …) using the scripts and stylesheets under `lgtdoc/xml` (see the `lgtdoc` tool documentation).
+2. Load and run `lgtdoc` to produce per-entity XML files (and optional indexes) only when explicitly asked.
+3. Convert XML to the desired final format (HTML, PDF, reStructuredText, Markdown, ...) using the scripts and stylesheets under `lgtdoc/xml` (see the `lgtdoc` tool documentation).
 
 ## What to avoid
 
@@ -95,7 +114,7 @@ List exceptions with the `exceptions` key. Prefer standard error terms. Typical 
 - [ ] Public (and other documented) predicates have `info/2` and appropriate `mode/2`
 - [ ] Comments follow the handbook style and end with a period where required
 - [ ] Exceptions use standard terms and consistent argument names
-- [ ] `lgtdoc` successfully generates XML (and downstream formats) for the library or application
+- [ ] When generation is requested, `lgtdoc` successfully generates XML (and requested downstream formats)
 - [ ] Cross-references (`see_also`) point to real entities/predicates
 
 ## Further reading

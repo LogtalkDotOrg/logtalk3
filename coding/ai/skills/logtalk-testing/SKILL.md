@@ -35,6 +35,7 @@ Do not duplicate the handbook content. Prefer linking to specific sections when 
 
 2. **Define tests in objects that extend `lgtunit`**
    - Prefer one primary test object named `tests` for simple cases.
+   - For new library test objects, include `info/1` metadata with version, author, date, and a library-specific unit-test comment.
    - Use descriptive, unique, ground test identifiers (usually atoms).
    - Keep test objects focused; put supporting code in separate entities/files (e.g., `test_objects.lgt`).
    - Add `cover/1` facts before the tests for each tested object and category to collect code coverage stats.
@@ -63,6 +64,14 @@ Do not duplicate the handbook content. Prefer linking to specific sections when 
 
 Always give tests clear, intention-revealing identifiers. Duplicate or non-ground identifiers are errors.
 
+## Assertions and fixtures
+
+- Use `lgtunit::variant/2` for variant comparisons, not backend-specific `=@=/2` or `term::variant/2`.
+- For floating-point comparisons (including lists of floats), import `op(700, xfx, =~=), (=~=)/2` from `lgtunit` and use `=~=/2`. Avoid `=:=/2` or `==/2` against float literals, which trigger suspicious-call lint warnings. Test tolerance does not imply tolerance in library arithmetic.
+- Write property tests using `quick_check(Test, Template, Options)` or `quick_check(Test, Template)` rather than calling `^^quick_check` in test bodies.
+- Keep one goal per line in tests and fixtures. Reuse existing test objects and helpers instead of adding unnecessary files or custom assertion infrastructure.
+- Resource helpers and text fixtures must follow the portability skill; do not use backend-only cleanup predicates in portable tests.
+
 ## Parametric and multi-set tests
 
 - Use parametric test objects (e.g. `tests(_Implementation_)`) to run the same suite against multiple implementations of a protocol.
@@ -80,9 +89,18 @@ Always give tests clear, intention-revealing identifiers. Duplicate or non-groun
 - Respect its exit status conventions (failed tests, broken sets, timeouts, crashes).
 - Prefer a dedicated fast driver (no coverage, optimized compilation) and a coverage driver when both are useful.
 
+### Test execution policy
+
+- When the task defines an explicit test gate, run it after each step without asking again. Otherwise, ask before running tests after making changes.
+- Never run the repository-wide test suite. Run the tester from the relevant library's own directory; do not rely on a directory-selection flag from the repository root.
+- Use `logtalk_tester -p <backend> -t <seconds>` to detect hangs. If the installed shim is broken, use the checkout's `scripts/logtalk_tester.sh`.
+- For checkout runs, first change to the repository root and export `LOGTALKUSER` as its absolute path in the same terminal command, then change to the library directory. Also export `LOGTALKHOME` as the checkout's absolute path when testing library aliases or `paths/paths.pl`.
+- Do not set `LOGTALKUSER=$PWD` after earlier directory changes; terminals preserve their working directory and may point at a nested library.
+- Leave generated `.lgt_tmp` and `logtalk_tester_logs` directories in place; never delete them after testing.
+
 ## What to avoid
 
-- Putting non-test entities in the same source file as the test object (term-expansion applies to the whole file).
+- Putting non-test entities in the same source file as the test object (term-expansion applies to the whole file); use instead a separate file, e.g, `test_entities.lgt`.
 - Relying on test order or shared mutable state without explicit `setup/1` / `cleanup/1`.
 - Using overly generic test names (`test1`, `check`, …).
 - Ignoring non-determinism when the predicate under test should be deterministic.
@@ -95,7 +113,7 @@ Always give tests clear, intention-revealing identifiers. Duplicate or non-groun
 - [ ] `tests::run` (or `logtalk_tester`) reports the expected results
 - [ ] Failing tests have been minimized and debugged
 - [ ] Driver file loads dependencies in a sensible order (libraries → code under test → tests)
-- [ ] Coverage (when requested) is collected from the relevant entities
+- [ ] Collecting code coverage is the default except for performance tests
 
 ## Further reading
 

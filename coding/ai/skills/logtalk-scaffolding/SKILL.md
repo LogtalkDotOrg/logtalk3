@@ -65,8 +65,10 @@ Use the `LOGTALKUSER` environment variable to locate the sample files in the use
 ### 4. Add source files
 
 - Create entities in `.lgt` / `.logtalk` files following the coding-style and documenting skills.
+- For new distribution source and documentation files, use the complete repository-standard Apache 2.0 header from a neighboring file, not abbreviated SPDX-only lines.
 - Register new files in `loader.lgt` (and ensure tests cover them via `tester.lgt`).
 - Prefer Logtalk standard libraries over reimplementing utilities (libraries skill).
+- Keep changes within the requested scope. Reuse suitable files and helpers; do not add compatibility branches for new, unreleased libraries unless requested.
 
 ## Minimal tree (typical)
 

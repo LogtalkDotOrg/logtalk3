@@ -1,6 +1,6 @@
 ---
 name: logtalk-performance
-description: Write efficient Logtalk and Prolog predicates—first-argument indexing, avoid defaulty representations, no reverse/2 after head-to-tail accumulation, fix non-determinism without cuts on main APIs, prefer tail recursion. Use when optimizing code, reviewing hot paths, or fixing spurious choice-points.
+description: Write efficient Logtalk and Prolog predicates—first-argument indexing, avoid defaulty representations and unnecessary accumulator-plus-reverse patterns, fix non-determinism at its source, use tail recursion when justified. Use when optimizing code, reviewing hot paths, or fixing spurious choice-points.
 license: Apache-2.0
 metadata:
   copyright: "2026 Paulo Moura <pmoura@logtalk.org>"
@@ -39,7 +39,7 @@ Most Prolog systems index primarily (or only reliably) on the **first** argument
 A **defaulty** representation encodes the common case as a bare term and the exceptional case with a wrapper (or the reverse), which forces a final catchall clause and hurts clarity and indexing.
 
 - Prefer **non-defaulty** representations: every alternative has an explicit functor (e.g. `none` / `just(Value)`, `leaf` / `node(...)`, tagged unions).
-- Structure data so clause heads can match explicit functors instead of “anything else."
+- Structure data so clause heads can match explicit functors instead of "anything else."
 - **Avoid catchall clauses** on main predicates when a better representation or argument order eliminates them.
 
 ### 3. Never accumulate with reverse/2 for head-to-tail lists
@@ -53,15 +53,16 @@ When recursively **constructing a list from head to tail**, do **not** push elem
 
 When tests expose **unwanted non-determinism**:
 
-- **Do not** “fix" the public or main predicate by adding cuts as the first response.
+- **Do not** "fix" the public or main predicate by adding cuts as the first response.
 - Find **exactly** what leaves the choice-point (extra clause match, unintended second solution, missing commit in a helper, soft-cut vs disjunction, etc.).
 - Prefer: tighter heads, non-defaulty data, helper predicates that are deterministic by construction, explicit failure, or localized green cuts only where the logic is truly committed and documented.
 - Use the debugger / `deterministic` outcomes in `lgtunit` (see testing and debugging skills) to locate the `redo`.
+- Check determinism: empty/singleton dispatch clauses can retain choice-points when later heads overlap or discriminate only in their bodies. Commit those cases locally when the declared mode requires it.
 
-### 5. Prefer tail-recursive definitions
+### 5. Choose recursion for the actual workload
 
-- Write **tail-recursive** predicates whenever possible (recursive call in tail position, constant stack under last-call optimization).
-- Prefer accumulating parameters and a single recursive loop over deep non-tail recursion on large data.
+- Prefer the simplest recursion that preserves order; do not add accumulators or a final `reverse/2` without a demonstrated performance or control-flow need.
+- Use **tail-recursive** loops when large inputs or stack usage justify them (recursive call in tail position, constant stack under last-call optimization).
 - Combine with first-argument indexing so the recursive clause is selected efficiently.
 
 ## Quick patterns
