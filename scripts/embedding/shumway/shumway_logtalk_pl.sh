@@ -6,7 +6,7 @@
 ##   compiler and runtime and optionally an application.pl file with
 ##   a Logtalk application
 ##
-##   Last updated on October 28, 2026
+##   Last updated on October 29, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -30,6 +30,25 @@
 print_version() {
 	echo "$(basename "$0") 0.1"
 	exit 0
+}
+
+write_discontiguous_directives() {
+	echo ":- discontiguous('\$lgt_current_protocol_'/5)."
+	echo ":- discontiguous('\$lgt_current_category_'/6)."
+	echo ":- discontiguous('\$lgt_current_object_'/11)."
+	echo ":- discontiguous('\$lgt_entity_property_'/2)."
+	echo ":- discontiguous('\$lgt_predicate_property_'/3)."
+	echo ":- discontiguous('\$lgt_implements_protocol_'/3)."
+	echo ":- discontiguous('\$lgt_imports_category_'/3)."
+	echo ":- discontiguous('\$lgt_instantiates_class_'/3)."
+	echo ":- discontiguous('\$lgt_specializes_class_'/3)."
+	echo ":- discontiguous('\$lgt_extends_category_'/3)."
+	echo ":- discontiguous('\$lgt_extends_object_'/3)."
+	echo ":- discontiguous('\$lgt_extends_protocol_'/3)."
+	echo ":- discontiguous('\$lgt_uses_predicate_'/5)."
+	echo ":- discontiguous('\$lgt_use_module_predicate_'/5)."
+	echo ":- discontiguous('\$lgt_loaded_file_'/7)."
+	echo ":- discontiguous('\$lgt_included_file_'/5)."
 }
 
 logtalk_version_is_older() {
@@ -273,22 +292,7 @@ if [ "$settings" != "" ] && [ "$settings" != "none" ] ; then
 		shumwaylgt$extension -g "logtalk_compile('$settings',[optimize(on),scratch_directory('$temporary')]),halt"
 	fi
 	sed_i "s/settings_file, allow/settings_file, deny/" shumway.pl
-	echo ":- discontiguous('\$lgt_current_protocol_'/5)." > "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_current_category_'/6)." >> "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_current_object_'/11)." >> "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_entity_property_'/2)." >> "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_predicate_property_'/3)." >> "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_implements_protocol_'/3)." >> "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_imports_category_'/3)." >> "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_instantiates_class_'/3)." >> "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_specializes_class_'/3)." >> "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_extends_category_'/3)." >> "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_extends_object_'/3)." >> "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_extends_protocol_'/3)." >> "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_uses_predicate_'/5)." >> "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_use_module_predicate_'/5)." >> "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_loaded_file_'/7)." >> "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_included_file_'/5)." >> "$directory"/logtalk.pl
+	write_discontiguous_directives > "$directory"/logtalk.pl
 	cat \
 		shumway.pl \
 		paths*.pl \
@@ -302,22 +306,7 @@ if [ "$settings" != "" ] && [ "$settings" != "none" ] ; then
 		core.pl \
 		>> "$directory"/logtalk.pl
 else
-	echo ":- discontiguous('\$lgt_current_protocol_'/5)." > "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_current_category_'/6)." >> "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_current_object_'/11)." >> "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_entity_property_'/2)." >> "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_predicate_property_'/3)." >> "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_implements_protocol_'/3)." >> "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_imports_category_'/3)." >> "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_instantiates_class_'/3)." >> "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_specializes_class_'/3)." >> "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_extends_category_'/3)." >> "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_extends_object_'/3)." >> "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_extends_protocol_'/3)." >> "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_uses_predicate_'/5)." >> "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_use_module_predicate_'/5)." >> "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_loaded_file_'/7)." >> "$directory"/logtalk.pl
-	echo ":- discontiguous('\$lgt_included_file_'/5)." >> "$directory"/logtalk.pl
+	write_discontiguous_directives > "$directory"/logtalk.pl
 	cat \
 		shumway.pl \
 		paths*.pl \
@@ -337,22 +326,7 @@ if [ "$loader" != "" ] ; then
 	shumwaylgt$extension -g "set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$temporary/application'),logtalk_load('$loader'),halt"
 	if test -n "$(find . -maxdepth 1 -name '*.pl' -print -quit)" ; then
 		files="$(ls -rt ./*.pl)"
-		echo ":- discontiguous('\$lgt_current_protocol_'/5)." > "$directory"/application.pl
-		echo ":- discontiguous('\$lgt_current_category_'/6)." >> "$directory"/application.pl
-		echo ":- discontiguous('\$lgt_current_object_'/11)." >> "$directory"/application.pl
-		echo ":- discontiguous('\$lgt_entity_property_'/2)." >> "$directory"/application.pl
-		echo ":- discontiguous('\$lgt_predicate_property_'/3)." >> "$directory"/application.pl
-		echo ":- discontiguous('\$lgt_implements_protocol_'/3)." >> "$directory"/application.pl
-		echo ":- discontiguous('\$lgt_imports_category_'/3)." >> "$directory"/application.pl
-		echo ":- discontiguous('\$lgt_instantiates_class_'/3)." >> "$directory"/application.pl
-		echo ":- discontiguous('\$lgt_specializes_class_'/3)." >> "$directory"/application.pl
-		echo ":- discontiguous('\$lgt_extends_category_'/3)." >> "$directory"/application.pl
-		echo ":- discontiguous('\$lgt_extends_object_'/3)." >> "$directory"/application.pl
-		echo ":- discontiguous('\$lgt_extends_protocol_'/3)." >> "$directory"/application.pl
-		echo ":- discontiguous('\$lgt_uses_predicate_'/5)." >> "$directory"/application.pl
-		echo ":- discontiguous('\$lgt_use_module_predicate_'/5)." >> "$directory"/application.pl
-		echo ":- discontiguous('\$lgt_loaded_file_'/7)." >> "$directory"/application.pl
-		echo ":- discontiguous('\$lgt_included_file_'/5)." >> "$directory"/application.pl
+		write_discontiguous_directives > "$directory"/application.pl
 		for a in $files ; do cat "$a" >> "$directory"/application.pl ; done
 	else
 		echo
