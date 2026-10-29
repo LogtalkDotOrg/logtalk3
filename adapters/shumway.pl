@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Shumway (Prolog on .NET) 0.9.3 and later versions
-%  Last updated on October 28, 2026
+%  Last updated on October 29, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 2026 Gustavo Brown
@@ -366,6 +366,10 @@
 	;	sub_atom(Path, 0, _, _, '$LOGTALKUSER/'),
 		getenv('LOGTALKUSER', Value) ->
 		sub_atom(Path, 13, _, 0, Tail),
+		atomic_list_concat([Value, '/', Tail], Substituted)
+	;	sub_atom(Path, 0, _, _, '$LOGTALK_STARTUP_DIRECTORY/'),
+		getenv('LOGTALK_STARTUP_DIRECTORY', Value) ->
+		sub_atom(Path, 27, _, 0, Tail),
 		atomic_list_concat([Value, '/', Tail], Substituted)
 	;	Substituted = Path
 	).
