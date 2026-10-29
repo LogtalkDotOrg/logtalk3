@@ -353,6 +353,10 @@ to Andrew Davison for the bug report and patch.
 * FIXED: The `text_vectorization` library to allow for repeated options when
 validating vectorizer terms (leftmost options always take precedence).
 
+* FIXED: The `types` library definition of the `entity` type would fail to
+recognize a parametric category as a valid entity and would throw the wrong
+exception for an invalid entity identifier.
+
 Tools
 -----
 

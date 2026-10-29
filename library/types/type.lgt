@@ -27,9 +27,9 @@
 :- object(type).
 
 	:- info([
-		version is 2:9:1,
+		version is 2:9:2,
 		author is 'Paulo Moura',
-		date is 2026-09-10,
+		date is 2026-10-29,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the ``type/1`` and ``check/2`` multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``.',
@@ -269,17 +269,18 @@
 	check(entity, Term) :-
 		(	var(Term) ->
 			throw(instantiation_error)
+		;	\+ callable(Term) ->
+			throw(type_error(entity_identifier, Term))
 		;	current_object(Term) ->
 			true
-		;	current_protocol(Term) ->
+		;	atom(Term),
+			current_protocol(Term) ->
 			true
 		;	current_category(Term) ->
 			true
 		;	{current_module(Term)} ->
 			true
-		;	callable(Term) ->
-			throw(existence_error(entity, Term))
-		;	throw(type_error(entity_identifier, Term))
+		;	throw(existence_error(entity, Term))
 		).
 
 	:- else.
@@ -287,27 +288,30 @@
 	check(entity, Term) :-
 		(	var(Term) ->
 			throw(instantiation_error)
+		;	\+ callable(Term) ->
+			throw(type_error(entity_identifier, Term))
 		;	current_object(Term) ->
 			true
-		;	current_protocol(Term) ->
+		;	atom(Term),
+			current_protocol(Term) ->
 			true
 		;	current_category(Term) ->
 			true
-		;	callable(Term) ->
-			throw(existence_error(entity, Term))
-		;	throw(type_error(entity_identifier, Term))
+		;	throw(existence_error(entity, Term))
 		).
 
 	:- endif.
+
+	% the current_object/1, current_category/1, and current_protocol/1
+	% built-in predicates perform type-checking on a ground argument
+	% throwing the expected type error when not valid
 
 	check(object, Term) :-
 		(	var(Term) ->
 			throw(instantiation_error)
 		;	current_object(Term) ->
 			true
-		;	callable(Term) ->
-			throw(existence_error(object, Term))
-		;	throw(type_error(object_identifier, Term))
+		;	throw(existence_error(object, Term))
 		).
 
 	check(protocol, Term) :-
@@ -315,9 +319,7 @@
 			throw(instantiation_error)
 		;	current_protocol(Term) ->
 			true
-		;	atom(Term) ->
-			throw(existence_error(protocol, Term))
-		;	throw(type_error(protocol_identifier, Term))
+		;	throw(existence_error(protocol, Term))
 		).
 
 	check(category, Term) :-
@@ -325,9 +327,7 @@
 			throw(instantiation_error)
 		;	current_category(Term) ->
 			true
-		;	callable(Term) ->
-			throw(existence_error(category, Term))
-		;	throw(type_error(category_identifier, Term))
+		;	throw(existence_error(category, Term))
 		).
 
 	:- if(current_logtalk_flag(modules, supported)).
