@@ -25,7 +25,7 @@
 	:- info([
 		version is 3:1:0,
 		author is 'Paulo Moura',
-		date is 2026-10-22,
+		date is 2026-10-29,
 		comment is 'Unit tests for the "adaptive_boosting_classifier" library.'
 	]).
 
@@ -61,14 +61,14 @@
 		adaptive_boosting_classifier::valid_classifier(ab_classifier([weighted_tree(0.5, leaf(yes), [outlook, outlook])], [yes, no], [number_of_estimators(1)])).
 
 	test(adaptive_boosting_classifier_learn_2_classifier_structure, true(functor(Classifier, ab_classifier, 3))) :-
-		adaptive_boosting_classifier::learn(play_tennis, Classifier).
+		cached_classifier(play_tennis, Classifier).
 
 	test(adaptive_boosting_classifier_learn_2_class_values, true(ClassValues == [yes, no])) :-
-		adaptive_boosting_classifier::learn(play_tennis, Classifier),
+		cached_classifier(play_tennis, Classifier),
 		Classifier = ab_classifier(_, ClassValues, _).
 
 	test(adaptive_boosting_classifier_learn_2_has_weighted_trees, true(NumTrees > 0)) :-
-		adaptive_boosting_classifier::learn(play_tennis, Classifier),
+		cached_classifier(play_tennis, Classifier),
 		Classifier = ab_classifier(WeightedTrees, _, _),
 		length(WeightedTrees, NumTrees).
 
@@ -78,20 +78,17 @@
 		adaptive_boosting_classifier::learn(play_tennis, Classifier, [number_of_estimators(5)]).
 
 	test(adaptive_boosting_classifier_learn_3_estimator_count, deterministic(NumTrees =< 5)) :-
-		adaptive_boosting_classifier::learn(play_tennis, Classifier, [number_of_estimators(5)]),
+		cached_classifier(play_tennis, Classifier, [number_of_estimators(5)]),
 		Classifier = ab_classifier(WeightedTrees, _, _),
 		length(WeightedTrees, NumTrees).
 
 	% Ensemble behavior tests
 
-	test(adaptive_boosting_classifier_trees_have_positive_alpha, all(Alpha > 0.0)) :-
-		adaptive_boosting_classifier::learn(play_tennis, Classifier, [number_of_estimators(3)]),
+	test(adaptive_boosting_classifier_trees_have_positive_alpha, deterministic) :-
+		cached_classifier(play_tennis, Classifier, [number_of_estimators(5)]),
 		Classifier = ab_classifier(WeightedTrees, _, _),
-		member(weighted_tree(Alpha, _, _), WeightedTrees).
-
-	test(adaptive_boosting_classifier_weight_traversal, deterministic(Weights == [0.5, 1.0, 2.0])) :-
-		Trees = [weighted_tree(0.5, leaf(yes), []), weighted_tree(1.0, leaf(no), []), weighted_tree(2.0, leaf(yes), [])],
-		findall(Alpha, member(weighted_tree(Alpha, _, _), Trees), Weights).
+		assertion(WeightedTrees \== []),
+		forall(member(weighted_tree(Alpha, _, _), WeightedTrees), assertion(Alpha > 0.0)).
 
 	% predict/3 tests - ensemble predictions
 
@@ -232,6 +229,39 @@
 		Metadata = [class(label), class_values([yes, no]), attribute_values(feature, [a])],
 		adaptive_boosting_classifier<<build_ensemble(2, [feature], 2, Examples, 2, Metadata, 2, Previous, Trees).
 
+	test(adaptive_boosting_classifier_final_learner_accepted, deterministic) :-
+		fast_random(xoshiro128pp)::get_seed(SavedSeed),
+		Previous = weighted_tree(0.5, leaf(no), []),
+		Examples = [weighted_example(1, yes, [], 0.75), weighted_example(2, no, [], 0.25)],
+		Metadata = [class(label), class_values([yes, no])],
+		catch(
+			(	fast_random(xoshiro128pp)::randomize(1),
+				fast_random(xoshiro128pp)::random(_),
+				fast_random(xoshiro128pp)::get_seed(ExpectedSeed),
+				fast_random(xoshiro128pp)::randomize(1),
+				(	adaptive_boosting_classifier<<build_ensemble(2, [], 2, Examples, 1, Metadata, 2, [Previous], Trees) ->
+					Result = success
+				;	Result = failure
+				),
+				fast_random(xoshiro128pp)::get_seed(ActualSeed)
+			),
+			Error,
+			(	fast_random(xoshiro128pp)::set_seed(SavedSeed),
+				throw(Error)
+			)
+		),
+		fast_random(xoshiro128pp)::set_seed(SavedSeed),
+		assertion(Result == success),
+		assertion(ActualSeed == ExpectedSeed),
+		Trees = [Previous, weighted_tree(Alpha, Tree, [])],
+		ExpectedAlpha is log(3.0),
+		assertion(Alpha =~= ExpectedAlpha),
+		adaptive_boosting_classifier<<compute_weighted_error(Examples, Tree, WeightedError, Flags),
+		assertion(WeightedError =~= 0.25),
+		assertion(Flags == [false, true]),
+		Classifier = ab_classifier(Trees, [yes, no], [number_of_estimators(2)]),
+		assertion(adaptive_boosting_classifier::valid_classifier(Classifier)).
+
 	test(adaptive_boosting_classifier_perfect_supersedes_previous, deterministic) :-
 		Previous = [weighted_tree(20.0, leaf(no), [])],
 		Examples = [weighted_example(1, yes, [], 1.0)],
@@ -295,16 +325,27 @@
 	test(adaptive_boosting_classifier_check_invalid, error(domain_error(classifier, invalid))) :-
 		adaptive_boosting_classifier::check_classifier(invalid).
 
+	test(adaptive_boosting_classifier_attribute_clauses_empty, deterministic(Clauses == [])) :-
+		adaptive_boosting_classifier<<build_attribute_clauses([], Clauses).
+
+	test(adaptive_boosting_classifier_attribute_clauses_order, deterministic) :-
+		Attributes = [zeta-[b, a], alpha-continuous, middle-[x, y]],
+		adaptive_boosting_classifier<<build_attribute_clauses(Attributes, Clauses),
+		assertion(Clauses == [attribute_values(zeta, [b, a]), attribute_values(alpha, continuous), attribute_values(middle, [x, y])]).
+
 	test(adaptive_boosting_classifier_cached_misclassification, deterministic) :-
 		Examples = [weighted_example(1, yes, [feature-a], 0.75), weighted_example(2, no, [feature-b], 0.25)],
 		adaptive_boosting_classifier<<compute_weighted_error(Examples, leaf(yes), Error, Flags),
 		assertion(Error =~= 0.25),
 		assertion(Flags == [false, true]),
-		adaptive_boosting_classifier<<update_weights(Examples, Flags, Error, 2, Updated),
-		adaptive_boosting_classifier<<normalize_weights(Updated, Normalized),
+		adaptive_boosting_classifier<<update_weights(Examples, Flags, Error, 2, Updated, Total),
+		assertion(Total =~= 1.0),
+		adaptive_boosting_classifier<<normalize_weights(Updated, Total, Normalized),
 		Normalized = [weighted_example(1, yes, [feature-a], Weight1), weighted_example(2, no, [feature-b], Weight2)],
 		assertion(Weight1 =~= 0.5),
-		assertion(Weight2 =~= 0.5).
+		assertion(Weight2 =~= 0.5),
+		Sum is Weight1 + Weight2,
+		assertion(Sum =~= 1.0).
 
 	test(adaptive_boosting_classifier_missing_training_value, deterministic(var(Value))) :-
 		Tree = tree(feature, threshold(0.5), leaf(yes), leaf(no)),
@@ -362,12 +403,6 @@
 		length(First, Count),
 		assertion(Count == 20).
 
-	test(adaptive_boosting_classifier_sampling_draw_order, deterministic) :-
-		Selections = [3-example(3, yes, [feature-a]), 1-example(1, no, [feature-b]), 2-example(2, yes, [feature-a])],
-		keysort(Selections, Ordered),
-		pairs::values(Ordered, Examples),
-		assertion(Examples == [example(1, no, [feature-b]), example(2, yes, [feature-a]), example(3, yes, [feature-a])]).
-
 	test(adaptive_boosting_classifier_sampling_reference, deterministic) :-
 		CDF = [cdf_entry(0.1, yes, [feature-a]), cdf_entry(0.8, no, [feature-b]), cdf_entry(1.0, yes, [feature-c])],
 		adaptive_boosting_classifier<<random_draws(50, 1, Draws),
@@ -419,13 +454,30 @@
 
 	test(adaptive_boosting_classifier_multiclass_weight_update, deterministic) :-
 		Examples = [weighted_example(1, yes, [], 0.8), weighted_example(2, no, [], 0.1), weighted_example(3, other, [], 0.1)],
-		adaptive_boosting_classifier<<update_weights(Examples, [false, true, true], 0.2, 3, Updated),
-		adaptive_boosting_classifier<<normalize_weights(Updated, Normalized),
+		adaptive_boosting_classifier<<update_weights(Examples, [false, true, true], 0.2, 3, Updated, Total),
+		assertion(Total =~= 1.0),
+		adaptive_boosting_classifier<<normalize_weights(Updated, Total, Normalized),
 		Expected is 1.0 / 3.0,
 		forall(member(weighted_example(_, _, _, Weight), Normalized), assertion(Weight =~= Expected)),
+		findall(Class-Weight, member(weighted_example(_, Class, _, Weight), Normalized), Pairs),
+		sum_probabilities(Pairs, 0.0, Sum),
+		assertion(Sum =~= 1.0),
 		adaptive_boosting_classifier<<learner_weight(0.2, 3, Alpha),
 		ExpectedAlpha is log(4.0) + log(2.0),
 		assertion(Alpha =~= ExpectedAlpha).
+
+	test(adaptive_boosting_classifier_uneven_weight_update, deterministic) :-
+		Examples = [weighted_example(1, yes, [], 0.45), weighted_example(2, yes, [], 0.3), weighted_example(3, no, [], 0.05), weighted_example(4, no, [], 0.2), weighted_example(5, yes, [], 0.0), weighted_example(6, no, [], 0.0)],
+		adaptive_boosting_classifier<<update_weights(Examples, [false, false, true, true, false, true], 0.25, 2, Updated, Total),
+		findall(Id-Weight, member(weighted_example(Id, _, _, Weight), Updated), Pairs),
+		sum_probabilities(Pairs, 0.0, ExpectedTotal),
+		assertion(Total == ExpectedTotal),
+		assertion(Total =~= 1.0),
+		adaptive_boosting_classifier<<normalize_weights(Updated, Total, Normalized),
+		findall(Id, member(weighted_example(Id, _, _, _), Normalized), Ids),
+		assertion(Ids == [1, 2, 3, 4, 5, 6]),
+		findall(Weight, member(weighted_example(_, _, _, Weight), Normalized), Weights),
+		assertion(Weights =~= [0.3, 0.2, 0.1, 0.4, 0.0, 0.0]).
 
 	test(adaptive_boosting_classifier_tiny_error_update, deterministic) :-
 		Error is 1.0e-300,
@@ -433,12 +485,17 @@
 		adaptive_boosting_classifier<<learner_weight(Error, 2, Alpha),
 		assertion(Alpha > 600.0),
 		assertion(Alpha < 800.0),
-		adaptive_boosting_classifier<<update_weights(Examples, [false, true], Error, 2, [weighted_example(1, yes, [], Correct), weighted_example(2, no, [], Incorrect)]),
+		adaptive_boosting_classifier<<update_weights(Examples, [false, true], Error, 2, Updated, Total),
+		assertion(Total =~= 1.0),
+		Updated = [weighted_example(1, yes, [], Correct), weighted_example(2, no, [], Incorrect)],
 		assertion(Correct =~= 0.5),
-		assertion(Incorrect =~= 0.5).
+		assertion(Incorrect =~= 0.5),
+		adaptive_boosting_classifier<<normalize_weights(Updated, Total, Normalized),
+		findall(Weight, member(weighted_example(_, _, _, Weight), Normalized), Weights),
+		assertion(Weights =~= [0.5, 0.5]).
 
 	test(adaptive_boosting_classifier_uniform_fallback, deterministic) :-
-		adaptive_boosting_classifier<<normalize_weights([weighted_example(1, yes, [], 0.0), weighted_example(2, no, [], 0.0)], Normalized),
+		adaptive_boosting_classifier<<normalize_weights([weighted_example(1, yes, [], 0.0), weighted_example(2, no, [], 0.0)], 0.0, Normalized),
 		assertion(Normalized == [weighted_example(1, yes, [], 0.5), weighted_example(2, no, [], 0.5)]).
 
 	test(adaptive_boosting_classifier_zero_vote_normalization, deterministic) :-
