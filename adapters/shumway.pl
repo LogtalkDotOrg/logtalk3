@@ -155,8 +155,10 @@
 % table of predicates that call non-terminals
 % (other than the de facto standard phrase/2-3 predicates)
 
-'$lgt_prolog_phrase_predicate'(_) :-
-	fail.
+'$lgt_prolog_phrase_predicate'(phrase_from_file(_, _)).
+'$lgt_prolog_phrase_predicate'(phrase_from_file(_, _, _)).
+'$lgt_prolog_phrase_predicate'(phrase_from_stream(_, _)).
+'$lgt_prolog_phrase_predicate'(phrase_from_stream(_, _, _)).
 
 
 
