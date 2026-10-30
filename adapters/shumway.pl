@@ -387,6 +387,10 @@
 		getenv('LOGTALK_STARTUP_DIRECTORY', Value) ->
 		sub_atom(Path, 27, _, 0, Tail),
 		atomic_list_concat([Value, '/', Tail], Substituted)
+	;	sub_atom(Path, 0, _, _, '$HOME/'),
+		getenv('HOME', Value) ->
+		sub_atom(Path, 6, _, 0, Tail),
+		atomic_list_concat([Value, '/', Tail], Substituted)
 	;	Substituted = Path
 	).
 

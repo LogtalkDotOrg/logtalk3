@@ -290,6 +290,10 @@ Shumway Prolog 0.9.3 and later versions
 Based on initial work by Gustavo Brown, Shumway Prolog author.
 Experimental. Please report any problem found (with a solution if possible).
 
+Known issue: the internal `'$lgt_expand_path'/2` predicate currently only
+expands the `LOGTALKHOME`, `LOGTALKUSER`, `LOGTALK_STARTUP_DIRECTORY`, and
+`HOME` environment variables.
+
 
 SWI-Prolog 6.6.0 and later versions
 -----------------------------------
