@@ -275,7 +275,7 @@
 '$lgt_prolog_feature'(engines, unsupported).
 '$lgt_prolog_feature'(threads, unsupported).
 '$lgt_prolog_feature'(modules, unsupported).
-'$lgt_prolog_feature'(coinduction, unsupported).
+'$lgt_prolog_feature'(coinduction, supported).
 '$lgt_prolog_feature'(unicode, full).
 
 % startup flags:
