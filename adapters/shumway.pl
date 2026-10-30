@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Shumway (Prolog on .NET) 0.9.3 and later versions
-%  Last updated on October 29, 2026
+%  Last updated on October 30, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 2026 Gustavo Brown
@@ -484,7 +484,8 @@
 %
 % gets a file modification time, assumed to be an opaque term but comparable
 
-'$lgt_file_modification_time'(_File, 0).
+'$lgt_file_modification_time'(File, Time) :-
+	file_modification_time(File, Time).
 
 
 % '$lgt_environment_variable'(?atom, ?atom)
