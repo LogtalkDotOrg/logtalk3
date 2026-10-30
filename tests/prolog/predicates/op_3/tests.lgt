@@ -30,9 +30,9 @@ o(3).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:9:0,
+		version is 1:10:0,
 		author is 'Paulo Moura',
-		date is 2024-09-24,
+		date is 2026-10-30,
 		comment is 'Unit tests for the ISO Prolog standard op/3 built-in predicate.'
 	]).
 
@@ -120,6 +120,7 @@ o(3).
 		\+ current_logtalk_flag(prolog_dialect, gnu),
 		\+ current_logtalk_flag(prolog_dialect, ji),
 		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, shumway),
 		\+ current_logtalk_flag(prolog_dialect, swi),
 		\+ current_logtalk_flag(prolog_dialect, xsb)
 	)).
