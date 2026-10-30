@@ -22,9 +22,9 @@
 :- object(coroutining).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:6:1,
 		author is 'Paulo Moura',
-		date is 2026-10-28,
+		date is 2026-10-30,
 		comment is 'Coroutining predicates.',
 		remarks is [
 			'Supported backend Prolog systems' - 'ECLiPSe, SICStus Prolog, Shumway Prolog, SWI-Prolog, Trealla Prolog, XVM, and YAP.'
@@ -115,17 +115,22 @@
 
 	:- elif(current_logtalk_flag(prolog_dialect, shumway)).
 
+		:- set_logtalk_flag(suspicious_calls, silent).
+
+		:- meta_predicate(coroutining:freeze(*, 0)).
+		:- meta_predicate(coroutining:when(*, 0)).
+
 		dif(Term1, Term2) :-
-			{dif(Term1, Term2)}.
+			coroutining:dif(Term1, Term2).
 
 		freeze(Variable, Goal) :-
-			{freeze(Variable, Goal)}.
+			coroutining:freeze(Variable, Goal).
 
 		frozen(Variable, Goal) :-
-			{frozen(Variable, Goal)}.
+			coroutining:frozen(Variable, Goal).
 
 		when(Condition, Goal) :-
-			{when(Condition, Goal)}.
+			coroutining:when(Condition, Goal).
 
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 
