@@ -607,10 +607,18 @@
 
 % '$lgt_prolog_term_expansion'(@callable, -callable)
 
-'$lgt_prolog_term_expansion'((:- use_module(constraintLib, _)), []) :- !.
-'$lgt_prolog_term_expansion'((:- use_module(Library)), Expansion) :- !,
+'$lgt_prolog_term_expansion'((:- use_module(Module, _)), _) :-
+	atom(Module),
+	logtalk_load_context(entity_type, module),
+	!,
+	fail.
+'$lgt_prolog_term_expansion'((:- use_module(constraintLib, _)), []) :-
+	!.
+'$lgt_prolog_term_expansion'((:- use_module(Library)), Expansion) :-
+	!,
 	'$shumway_expand_use_module'(Library, Expansion).
-'$lgt_prolog_term_expansion'((:- use_module(Library, Imports)), Expansion) :- !,
+'$lgt_prolog_term_expansion'((:- use_module(Library, Imports)), Expansion) :-
+	!,
 	(	'$shumway_provided_library'(Library) ->
 		Expansion = []
 	;	catch(use_module(Library), _, fail) ->
