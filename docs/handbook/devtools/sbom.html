@@ -197,29 +197,21 @@ declared by the object are combined with any
 <code class="docutils literal notranslate"><span class="pre">metadata.tools.components</span></code>. The BOM document license is exported as
 <code class="docutils literal notranslate"><span class="pre">metadata.licenses</span></code> with the SPDX identifier <code class="docutils literal notranslate"><span class="pre">CC0-1.0</span></code>. The
 CycloneDX BOM itself also exports top-level <code class="docutils literal notranslate"><span class="pre">externalReferences</span></code> for
-the Logtalk website and the Logtalk git repository.</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">bom_external_reference(Type,</span> <span class="pre">URL)</span></code> Adds a top-level CycloneDX
-<code class="docutils literal notranslate"><span class="pre">externalReferences</span></code> entry to the generated BOM. This option is
-ignored for SPDX exports. It can be repeated to export multiple
-references. The built-in Logtalk website and git repository references
-are still exported by default. Runtime components are exported with
-explicit CycloneDX <code class="docutils literal notranslate"><span class="pre">scope</span></code> <code class="docutils literal notranslate"><span class="pre">required</span></code>, while the <code class="docutils literal notranslate"><span class="pre">sbom</span></code>
-generator listed under <code class="docutils literal notranslate"><span class="pre">metadata.tools.components</span></code> is exported with
-<code class="docutils literal notranslate"><span class="pre">scope</span></code> <code class="docutils literal notranslate"><span class="pre">excluded</span></code>. When available from existing metadata,
-CycloneDX components also export <code class="docutils literal notranslate"><span class="pre">externalReferences</span></code>: Logtalk and
-the <code class="docutils literal notranslate"><span class="pre">sbom</span></code> tool export a website reference, the backend component
-exports a website reference from the bundled backend table, and loaded
-packs export their <code class="docutils literal notranslate"><span class="pre">home/1</span></code> and version source URL values as website
-and distribution references. For SPDX exports, the default
+the Logtalk website and the Logtalk git repository. Runtime components
+are exported with explicit CycloneDX <code class="docutils literal notranslate"><span class="pre">scope</span></code> <code class="docutils literal notranslate"><span class="pre">required</span></code>, while the
+<code class="docutils literal notranslate"><span class="pre">sbom</span></code> generator listed under <code class="docutils literal notranslate"><span class="pre">metadata.tools.components</span></code> is
+exported with <code class="docutils literal notranslate"><span class="pre">scope</span></code> <code class="docutils literal notranslate"><span class="pre">excluded</span></code>. When available from existing
+metadata, CycloneDX components also export <code class="docutils literal notranslate"><span class="pre">externalReferences</span></code>:
+Logtalk and the <code class="docutils literal notranslate"><span class="pre">sbom</span></code> tool export a website reference, the backend
+component exports a website reference from the bundled backend table,
+and loaded packs export their <code class="docutils literal notranslate"><span class="pre">home/1</span></code> and version source URL values
+as website and distribution references. For SPDX exports, the default
 <code class="docutils literal notranslate"><span class="pre">creationInfo.creators</span></code> entry is a versioned tool identifier derived
 from the <code class="docutils literal notranslate"><span class="pre">sbom</span></code> tool version. When URL metadata is available, SPDX
-packages also export <code class="docutils literal notranslate"><span class="pre">externalRefs</span></code>: the Logtalk and backend
-packages export website references, loaded packs export website and
-distribution references, and <code class="docutils literal notranslate"><span class="pre">application_external_reference/2</span></code>
-options are mapped to SPDX package external references for the
-application package.</p></li>
-</ul>
+packages also export <code class="docutils literal notranslate"><span class="pre">externalRefs</span></code>: the Logtalk and backend packages
+export website references, loaded packs export website and distribution
+references, and <code class="docutils literal notranslate"><span class="pre">application_external_reference/2</span></code> options are mapped
+to SPDX package external references for the application package.</p>
 <p>The public predicates are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">document/1</span></code></p></li>
@@ -239,7 +231,7 @@ application package name and as the CycloneDX
 <code class="docutils literal notranslate"><span class="pre">application_protocol</span></code> is loaded and declares <code class="docutils literal notranslate"><span class="pre">name/1</span></code>, that value
 is used by default. Otherwise, the default is <code class="docutils literal notranslate"><span class="pre">loaded-application</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">format(Format)</span></code> Selects the export format. Possible values are
-<code class="docutils literal notranslate"><span class="pre">spdx</span></code> and <code class="docutils literal notranslate"><span class="pre">cyclonedx</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">spdx</span></code>.</p></li>
+<code class="docutils literal notranslate"><span class="pre">spdx</span></code> and <code class="docutils literal notranslate"><span class="pre">cdx</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">spdx</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">version(Version)</span></code> Sets the application version. Exported as the
 SPDX application package <code class="docutils literal notranslate"><span class="pre">versionInfo</span></code> and as the CycloneDX
 <code class="docutils literal notranslate"><span class="pre">metadata.component.version</span></code>. When exactly one object conforming to
@@ -326,6 +318,11 @@ for CycloneDX exports is <code class="docutils literal notranslate"><span class=
 <li><p><code class="docutils literal notranslate"><span class="pre">validate_export(Boolean)</span></code> When <code class="docutils literal notranslate"><span class="pre">true</span></code>, validates the generated
 document against the bundled schema for the selected format before
 exporting it. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bom_external_reference(Type,</span> <span class="pre">URL)</span></code> Adds a top-level CycloneDX
+<code class="docutils literal notranslate"><span class="pre">externalReferences</span></code> entry to the generated BOM. This option is
+ignored for SPDX exports. It can be repeated to export multiple
+references. The built-in Logtalk website and git repository references
+are still exported by default.</p></li>
 </ul>
 <p>Logtalk options:</p>
 <ul class="simple">

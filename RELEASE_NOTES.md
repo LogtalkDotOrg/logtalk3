@@ -396,6 +396,8 @@ paths contain spaces.
 * FIXED: The `issue_creator` tool creation of bug reports for recent changes
 to the `lgtunit` tool representation of test failure reasons.
 
+* FIXED: Duplicated work in the `sbom` tool and documentation typos.
+
 Examples
 --------
 

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-02,
+		date is 2026-10-30,
 		comment is 'Unit tests for the "sbom" tool.'
 	]).
 
@@ -960,6 +960,14 @@
 			components-_,
 			dependencies-_
 		}.
+
+	test(sbom_creators_01, deterministic) :-
+		sbom<<creators(spdx, [SPDXCreator], [format(spdx)]),
+		^^assertion(sub_atom(SPDXCreator, 0, _, _, 'Tool: Logtalk SBOM generator-')).
+
+	test(sbom_creators_02, deterministic) :-
+		sbom<<creators(cdx, [CDXCreator], [format(cdx)]),
+		^^assertion(CDXCreator == 'Logtalk SBOM generator').
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).

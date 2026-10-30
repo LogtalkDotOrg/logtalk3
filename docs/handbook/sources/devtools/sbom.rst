@@ -68,28 +68,21 @@ For CycloneDX exports, the generated BOM also includes a
 ``metadata.tools.components``. The BOM document license is exported as
 ``metadata.licenses`` with the SPDX identifier ``CC0-1.0``. The
 CycloneDX BOM itself also exports top-level ``externalReferences`` for
-the Logtalk website and the Logtalk git repository.
-
-- ``bom_external_reference(Type, URL)`` Adds a top-level CycloneDX
-  ``externalReferences`` entry to the generated BOM. This option is
-  ignored for SPDX exports. It can be repeated to export multiple
-  references. The built-in Logtalk website and git repository references
-  are still exported by default. Runtime components are exported with
-  explicit CycloneDX ``scope`` ``required``, while the ``sbom``
-  generator listed under ``metadata.tools.components`` is exported with
-  ``scope`` ``excluded``. When available from existing metadata,
-  CycloneDX components also export ``externalReferences``: Logtalk and
-  the ``sbom`` tool export a website reference, the backend component
-  exports a website reference from the bundled backend table, and loaded
-  packs export their ``home/1`` and version source URL values as website
-  and distribution references. For SPDX exports, the default
-  ``creationInfo.creators`` entry is a versioned tool identifier derived
-  from the ``sbom`` tool version. When URL metadata is available, SPDX
-  packages also export ``externalRefs``: the Logtalk and backend
-  packages export website references, loaded packs export website and
-  distribution references, and ``application_external_reference/2``
-  options are mapped to SPDX package external references for the
-  application package.
+the Logtalk website and the Logtalk git repository. Runtime components
+are exported with explicit CycloneDX ``scope`` ``required``, while the
+``sbom`` generator listed under ``metadata.tools.components`` is
+exported with ``scope`` ``excluded``. When available from existing
+metadata, CycloneDX components also export ``externalReferences``:
+Logtalk and the ``sbom`` tool export a website reference, the backend
+component exports a website reference from the bundled backend table,
+and loaded packs export their ``home/1`` and version source URL values
+as website and distribution references. For SPDX exports, the default
+``creationInfo.creators`` entry is a versioned tool identifier derived
+from the ``sbom`` tool version. When URL metadata is available, SPDX
+packages also export ``externalRefs``: the Logtalk and backend packages
+export website references, loaded packs export website and distribution
+references, and ``application_external_reference/2`` options are mapped
+to SPDX package external references for the application package.
 
 The public predicates are:
 
@@ -111,7 +104,7 @@ Global/application options:
   ``application_protocol`` is loaded and declares ``name/1``, that value
   is used by default. Otherwise, the default is ``loaded-application``.
 - ``format(Format)`` Selects the export format. Possible values are
-  ``spdx`` and ``cyclonedx``. Default is ``spdx``.
+  ``spdx`` and ``cdx``. Default is ``spdx``.
 - ``version(Version)`` Sets the application version. Exported as the
   SPDX application package ``versionInfo`` and as the CycloneDX
   ``metadata.component.version``. When exactly one object conforming to
@@ -198,6 +191,11 @@ Global/application options:
 - ``validate_export(Boolean)`` When ``true``, validates the generated
   document against the bundled schema for the selected format before
   exporting it. Default is ``false``.
+- ``bom_external_reference(Type, URL)`` Adds a top-level CycloneDX
+  ``externalReferences`` entry to the generated BOM. This option is
+  ignored for SPDX exports. It can be repeated to export multiple
+  references. The built-in Logtalk website and git repository references
+  are still exported by default.
 
 Logtalk options:
 

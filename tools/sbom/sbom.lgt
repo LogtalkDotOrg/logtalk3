@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Paulo Moura',
-		date is 2026-10-23,
+		date is 2026-10-30,
 		comment is 'This tool generates a Software Bill of Materials (SBOM) for an application.'
 	]).
 
@@ -137,7 +137,8 @@
 		^^option(logtalk_license(LogtalkLicense), Options),
 		^^option(backend_license(BackendLicense), Options),
 		creation_timestamp(Created),
-		creators(Creators, Options),
+		^^option(format(Format), Options),
+		creators(Format, Creators, Options),
 		document_namespace(DocumentNamespace, Options),
 		logtalk_metadata_options(Options, LogtalkMetadata),
 		backend_metadata_options(Options, BackendMetadata),
@@ -146,8 +147,8 @@
 		backend_package(BackendLicense, BackendMetadata, BackendPackage),
 		loaded_pack_packages(Options, PackPackages, PackRecords).
 
-	spdx_document(Document, data(Name, Created, _, DocumentNamespace, ApplicationPackage, LogtalkPackage, BackendPackage, PackPackages, PackRecords), Options) :-
-		spdx_creation_info(CreationInfo, Created, Options),
+	spdx_document(Document, data(Name, Created, Creators, DocumentNamespace, ApplicationPackage, LogtalkPackage, BackendPackage, PackPackages, PackRecords), Options) :-
+		spdx_creation_info(CreationInfo, Created, Creators),
 		packages_json([ApplicationPackage, LogtalkPackage, BackendPackage| PackPackages], Packages, Options),
 		relationships_json(PackRecords, Relationships),
 		Document = {
@@ -179,17 +180,13 @@
 			dependencies-Dependencies
 		}.
 
-	spdx_creation_info(CreationInfo, Created, Options) :-
-		creators(Creators, Options, spdx),
+	spdx_creation_info(CreationInfo, Created, Creators) :-
 		CreationInfo = {
 			created-Created,
 			creators-Creators
 		}.
 
-	creators(Creators, Options) :-
-		creators(Creators, Options, cyclonedx).
-
-	creators(Creators, Options, Format) :-
+	creators(Format, Creators, Options) :-
 		custom_creators(Options, CustomCreators),
 		(   CustomCreators == [] ->
 			(   application_creators(Creators) ->
@@ -217,7 +214,7 @@
 
 	default_creator(spdx, Creator) :-
 		spdx_default_creator(Creator).
-	default_creator(cyclonedx, Creator) :-
+	default_creator(cdx, Creator) :-
 		cyclonedx_default_creator(Creator).
 
 	spdx_default_creator(Creator) :-

@@ -85,11 +85,6 @@ The BOM document license is exported as `metadata.licenses` with the SPDX
 identifier `CC0-1.0`.
 The CycloneDX BOM itself also exports top-level `externalReferences` for the
 Logtalk website and the Logtalk git repository.
-- `bom_external_reference(Type, URL)`
-	Adds a top-level CycloneDX `externalReferences` entry to the generated BOM.
-	This option is ignored for SPDX exports. It can be repeated to export
-	multiple references. The built-in Logtalk website and git repository
-	references are still exported by default.
 Runtime components are exported with explicit CycloneDX `scope` `required`,
 while the `sbom` generator listed under `metadata.tools.components` is exported
 with `scope` `excluded`.
@@ -125,7 +120,7 @@ Global/application options:
 	conforming to `application_protocol` is loaded and declares `name/1`, that
 	value is used by default. Otherwise, the default is `loaded-application`.
 - `format(Format)`
-	Selects the export format. Possible values are `spdx` and `cyclonedx`.
+	Selects the export format. Possible values are `spdx` and `cdx`.
 	Default is `spdx`.
 - `version(Version)`
     Sets the application version. Exported as the SPDX application package
@@ -208,6 +203,11 @@ Global/application options:
 - `validate_export(Boolean)`
 	When `true`, validates the generated document against the bundled schema for
 	the selected format before exporting it. Default is `false`.
+- `bom_external_reference(Type, URL)`
+	Adds a top-level CycloneDX `externalReferences` entry to the generated BOM.
+	This option is ignored for SPDX exports. It can be repeated to export
+	multiple references. The built-in Logtalk website and git repository
+	references are still exported by default.
 
 Logtalk options:
 
