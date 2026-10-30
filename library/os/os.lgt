@@ -51,9 +51,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:105:0,
+		version is 1:105:1,
 		author is 'Paulo Moura',
-		date is 2026-10-28,
+		date is 2026-10-30,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -2028,7 +2028,7 @@
 			shell(Command, 0).
 
 		absolute_file_name(Path, ExpandedPath) :-
-			{absolute_file_name(Path, ExpandedPath)}.
+			{'$lgt_expand_path'(Path, ExpandedPath)}.
 
 		internal_os_path(Path, Path).
 

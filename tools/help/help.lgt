@@ -23,9 +23,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0:43:1,
+		version is 0:44:0,
 		author is 'Paulo Moura',
-		date is 2026-09-30,
+		date is 2026-10-30,
 		comment is 'Command-line help for Logtalk tools, libraries, entities, predicates, and non-terminals.'
 	]).
 
@@ -293,7 +293,8 @@
 		sub_atom(Name, 0, _, _, Prefix),
 		atom_concat('$LOGTALKHOME', Path, Page0),
 		atom_concat(Page0, File, Page1),
-		absolute_file_name(Page1, Page).
+		absolute_file_name(Page1, Page),
+		writeq(completion(Prefix, Completion-Page)), nl.
 
 	completions(Prefix, Completions) :-
 		findall(Completion, completion(Prefix, Completion), Completions).
@@ -761,6 +762,7 @@
 	man_page_url(jiplgt,                 'https://logtalk.org/man/jiplgt.html').
 	man_page_url(quintuslgt,             'https://logtalk.org/man/quintuslgt.html').
 	man_page_url(sicstuslgt,             'https://logtalk.org/man/sicstuslgt.html').
+	man_page_url(shumwaylgt,             'https://logtalk.org/man/shumwaylgt.html').
 	man_page_url(swilgt,                 'https://logtalk.org/man/swilgt.html').
 	man_page_url(taulgt,                 'https://logtalk.org/man/taulgt.html').
 	man_page_url(tplgt,                  'https://logtalk.org/man/tplgt.html').
