@@ -23,7 +23,7 @@
 	imports(options)).
 
 	:- info([
-		version is 1:2:1,
+		version is 1:3:0,
 		author is 'Paulo Moura',
 		date is 2026-10-30,
 		comment is 'This tool generates a Software Bill of Materials (SBOM) for an application.'
@@ -495,20 +495,21 @@
 		current_logtalk_flag(prolog_version, BackendVersion),
 		version_atom(BackendVersion, Version).
 
-	backend(b,       'B-Prolog',       'NOASSERTION',      'http://www.picat-lang.org/bprolog/').
-	backend(ciao,    'Ciao Prolog',    'LGPL-2.1',         'http://ciao-lang.org/').
-	backend(cx,      'CxProlog',       'GPL-2.0-or-later', 'http://ctp.di.fct.unl.pt/~amd/cxprolog/').
-	backend(eclipse, 'ECLiPSe',        'MPL-1.1',          'https://eclipseclp.org/').
-	backend(gnu,     'GNU Prolog',     'LGPL-3.0-or-later','https://www.gprolog.org/').
-	backend(ji,      'JIProlog',       'NOASSERTION',      'http://www.jiprolog.com/').
-	backend(quintus, 'Quintus Prolog', 'NOASSERTION',      'https://quintus.sics.se/').
-	backend(sicstus, 'SICStus Prolog', 'NOASSERTION',      'https://sicstus.sics.se/').
-	backend(swi,     'SWI-Prolog',     'BSD-2-Clause',     'https://www.swi-prolog.org/').
-	backend(tau,     'Tau Prolog',     'BSD-3-Clause',     'http://tau-prolog.org/').
-	backend(trealla, 'Trealla Prolog', 'MIT',              'https://github.com/trealla-prolog/trealla').
-	backend(xsb,     'XSB',            'LGPL-2.0',         'https://xsb.sourceforge.net/').
-	backend(xvm,     'XVM',            'NOASSERTION',      'https://permion.ai/').
-	backend(yap,     'YAP',            'Artistic-2.0',     'https://github.com/vscosta').
+	backend(b,       'B-Prolog',       'NOASSERTION',       'http://www.picat-lang.org/bprolog/').
+	backend(ciao,    'Ciao Prolog',    'LGPL-2.1',          'http://ciao-lang.org/').
+	backend(cx,      'CxProlog',       'GPL-2.0-or-later',  'http://ctp.di.fct.unl.pt/~amd/cxprolog/').
+	backend(eclipse, 'ECLiPSe',        'MPL-1.1',           'https://eclipseclp.org/').
+	backend(gnu,     'GNU Prolog',     'LGPL-3.0-or-later', 'https://www.gprolog.org/').
+	backend(ji,      'JIProlog',       'NOASSERTION',       'http://www.jiprolog.com/').
+	backend(quintus, 'Quintus Prolog', 'NOASSERTION',       'https://quintus.sics.se/').
+	backend(sicstus, 'SICStus Prolog', 'NOASSERTION',       'https://sicstus.sics.se/').
+	backend(shumway, 'Shumway Prolog', 'MIT',               'https://github.com/gusbro/Shumway').
+	backend(swi,     'SWI-Prolog',     'BSD-2-Clause',      'https://www.swi-prolog.org/').
+	backend(tau,     'Tau Prolog',     'BSD-3-Clause',      'http://tau-prolog.org/').
+	backend(trealla, 'Trealla Prolog', 'MIT',               'https://github.com/trealla-prolog/trealla').
+	backend(xsb,     'XSB',            'LGPL-2.0',          'https://xsb.sourceforge.net/').
+	backend(xvm,     'XVM',            'NOASSERTION',       'https://permion.ai/').
+	backend(yap,     'YAP',            'Artistic-2.0',      'https://github.com/vscosta').
 
 	loaded_pack_packages(Options, PackPackages, PackRecords) :-
 		findall(

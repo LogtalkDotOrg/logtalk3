@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 3:0:0,
+		version is 3:1:0,
 		author is 'Paulo Moura',
-		date is 2026-09-04,
+		date is 2026-10-30,
 		comment is 'Predicate execution box model port profiler.'
 	]).
 
@@ -869,7 +869,9 @@
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		(Dialect == b; Dialect == swi; Dialect == tau; Dialect == trealla; Dialect == yap)
+		(	Dialect == b; Dialect == shumway; Dialect == swi;
+			Dialect == tau; Dialect == trealla; Dialect == yap
+		)
 	)).
 
 		call_goal(TGoal, Deterministic) :-

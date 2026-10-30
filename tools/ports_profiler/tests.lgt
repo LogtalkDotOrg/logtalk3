@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-09-04,
+		date is 2026-10-30,
 		comment is 'Unit tests for the "ports_profiler" tool.'
 	]).
 
@@ -98,7 +98,7 @@
 		setof(Functor/Arity-Count, port(redo, bar, Functor, Arity, Count), Data).
 
 	test(ports_profiler_diagnostics_tool_5_01, deterministic) :-
-		diagnostics_tool(ports_profiler, ports_profiler, '3.0.0', 'https://logtalk.org/', Properties),
+		diagnostics_tool(ports_profiler, ports_profiler, '3.1.0', 'https://logtalk.org/', Properties),
 		assertion(member(guid(_), Properties)),
 		assertion(member(fingerprint_algorithm(canonical_finding_v1), Properties)).
 
