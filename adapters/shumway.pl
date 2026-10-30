@@ -557,7 +557,8 @@
 
 % '$lgt_stream_current_line_number'(@stream, -integer)
 
-'$lgt_stream_current_line_number'(_Stream, 0).
+'$lgt_stream_current_line_number'(Stream, Line) :-
+	line_count(Stream, Line).
 
 
 
@@ -593,8 +594,8 @@
 
 % '$lgt_read_term'(@stream, -term, +list, -pair(integer,integer))
 
-'$lgt_read_term'(Stream, Term, Options, 0-0) :-
-	read_term(Stream, Term, Options).
+'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
+	read_term(Stream, Term, [line_counts(Begin, End)| Options]).
 
 
 
@@ -793,27 +794,7 @@ term_hash(Term, _Depth, _Range, Hash) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% atomic_concat(+atomic, +atomic, ?atom)
-
-atomic_concat(A, B, Atom) :-
-	(	var(A) ->
-		throw(error(instantiation_error, atomic_concat/3))
-	;	var(B) ->
-		throw(error(instantiation_error, atomic_concat/3))
-	;	\+ atomic(A) ->
-		throw(error(type_error(atomic, A), atomic_concat/3))
-	;	\+ atomic(B) ->
-		throw(error(type_error(atomic, B), atomic_concat/3))
-	;	'$shumway_as_atom'(A, AtomA),
-		'$shumway_as_atom'(B, AtomB),
-		atom_concat(AtomA, AtomB, Atom)
-	).
-
-'$shumway_as_atom'(Atomic, Atom) :-
-	(	atom(Atomic) ->
-		Atom = Atomic
-	;	term_to_atom(Atomic, Atom)
-	).
+% atomic_concat(+atomic, +atomic, ?atom) -- built-in
 
 
 % atomic_list_concat(@list(atomic), ?atom) -- built-in
