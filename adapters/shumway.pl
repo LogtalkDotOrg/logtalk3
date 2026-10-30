@@ -594,7 +594,7 @@
 
 % '$lgt_read_term'(@stream, -term, +list, -pair(integer,integer))
 
-'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
+'$lgt_read_term'(Stream, Term, Options, Begin-End) :-
 	read_term(Stream, Term, [line_counts(Begin, End)| Options]).
 
 
