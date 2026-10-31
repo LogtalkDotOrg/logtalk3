@@ -396,6 +396,13 @@ paths contain spaces.
 * FIXED: The `issue_creator` tool creation of bug reports for recent changes
 to the `lgtunit` tool representation of test failure reasons.
 
+* FIXED: The `os` library ECLiPSe definition for the `absolute_file_name/2`
+predicate to not add an ending slash to the expanded path if not present in
+the original path.
+
+* FIXED: Bug in the `packs` tool when calling the `registries::defined/4` with
+a bound URL argument would leak an open stream handle on failure.
+
 * FIXED: Duplicated work in the `sbom` tool and documentation typos.
 
 Examples

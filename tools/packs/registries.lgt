@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:65:0,
+		version is 0:65:1,
 		author is 'Paulo Moura',
-		date is 2026-05-19,
+		date is 2026-10-31,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -328,7 +328,9 @@
 		;	memberchk(Registry, Registries)
 		),
 		path_concat(Directory, Registry, Path),
-		read_url(Path, URL),
+		% URL may be bound; prevent leaking an open stream
+		read_url(Path, URL0),
+		URL0 = URL,
 		(	decompose_file_name(URL, _, _, '.git') ->
 			HowDefined = git
 		;	sub_atom(URL, 0, _, _, 'file://'),
