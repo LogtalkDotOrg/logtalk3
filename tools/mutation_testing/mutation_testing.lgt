@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2026-10-23,
+		date is 2026-10-31,
 		comment is 'Mutation testing tool.'
 	]).
 
@@ -1057,7 +1057,7 @@
 
 	logtalk_tester_script_name(LogtalkTester) :-
 		(	operating_system_type(windows) ->
-			LogtalkTester = 'pwsh -File "%SystemRoot%/logtalk_tester.ps1"'
+			LogtalkTester = 'pwsh -File "%LOGTALKHOME%/scripts/logtalk_tester.ps1"'
 		;	environment_variable('LOGTALKHOME', LOGTALKHOME),
 			environment_variable('LOGTALKUSER', LOGTALKUSER),
 			LOGTALKHOME == LOGTALKUSER ->
@@ -1318,6 +1318,7 @@
 	dialect_prolog_name(ji,      'JIProlog').
 	dialect_prolog_name(quintus, 'Quintus Prolog').
 	dialect_prolog_name(sicstus, 'SICStus Prolog').
+	dialect_prolog_name(shumway, 'Shumway Prolog').
 	dialect_prolog_name(swi,     'SWI-Prolog').
 	dialect_prolog_name(tau,     'Tau Prolog').
 	dialect_prolog_name(trealla, 'Trealla Prolog').
