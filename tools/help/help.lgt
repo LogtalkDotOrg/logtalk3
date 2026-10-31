@@ -293,8 +293,7 @@
 		sub_atom(Name, 0, _, _, Prefix),
 		atom_concat('$LOGTALKHOME', Path, Page0),
 		atom_concat(Page0, File, Page1),
-		absolute_file_name(Page1, Page),
-		writeq(completion(Prefix, Completion-Page)), nl.
+		absolute_file_name(Page1, Page).
 
 	completions(Prefix, Completions) :-
 		findall(Completion, completion(Prefix, Completion), Completions).
