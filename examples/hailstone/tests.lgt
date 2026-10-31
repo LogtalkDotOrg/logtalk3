@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:3,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2021-07-26,
+		date is 2026-10-31,
 		comment is 'Unit tests for the "hailstone" example.'
 	]).
 
@@ -40,6 +40,7 @@
 		\+ current_logtalk_flag(prolog_dialect, gnu),
 		\+ current_logtalk_flag(prolog_dialect, ji),
 		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, shumway),
 		\+ current_logtalk_flag(prolog_dialect, swi),
 		\+ current_logtalk_flag(prolog_dialect, xsb)
 	)).

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:2:1,
+		version is 0:3:0,
 		author is 'Paulo Moura',
-		date is 2026-03-22,
+		date is 2026-10-31,
 		comment is 'Unit tests for the "format" library.'
 	]).
 
@@ -41,6 +41,7 @@
 		\+ current_logtalk_flag(prolog_dialect, gnu),
 		\+ current_logtalk_flag(prolog_dialect, ji),
 		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, shumway),
 		\+ current_logtalk_flag(prolog_dialect, swi),
 		\+ current_logtalk_flag(prolog_dialect, xsb)
 	)).
