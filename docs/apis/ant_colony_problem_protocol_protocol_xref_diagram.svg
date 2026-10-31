@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 512,-140 512,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol ant_colony_problem_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;10&#45;31, 00:58</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;10&#45;31, 16:03</text>
 <g id="clust1" class="cluster">
 <title>cluster_ant_colony_problem_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="ant_colony_problem_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 488,-46 488,-46 494,-46 500,-52 500,-58 500,-58 500,-116 500,-116 500,-122 494,-128 488,-128 488,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/ant_colony/ant_colony_problem_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/ant_colony/ant_colony_problem_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/ant_colony/ant_colony_problem_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/ant_colony/ant_colony_problem_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.3" font-family="Monospace" font-size="10.00" fill="dimgray">ant_colony_problem_protocol</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>nodes/1</title>
 <polygon fill="springgreen" stroke="black" points="78.07,-92 17.93,-92 17.93,-56 78.07,-56 78.07,-92"/>
 <text xml:space="preserve" text-anchor="start" x="25.93" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/ant_colony/ant_colony_problem_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/ant_colony/ant_colony_problem_protocol.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/ant_colony/ant_colony_problem_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/ant_colony/ant_colony_problem_protocol.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="28.43" y="-75.53" font-family="Monospace" font-size="11.00">nodes/1</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>heuristic/3</title>
 <polygon fill="springgreen" stroke="black" points="167.57,-92 96.43,-92 96.43,-56 167.57,-56 167.57,-92"/>
 <text xml:space="preserve" text-anchor="start" x="104.43" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/ant_colony/ant_colony_problem_protocol.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/ant_colony/ant_colony_problem_protocol.lgt#L39">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/ant_colony/ant_colony_problem_protocol.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/ant_colony/ant_colony_problem_protocol.lgt#L39">
 <text xml:space="preserve" text-anchor="start" x="106.93" y="-75.53" font-family="Monospace" font-size="11.00">heuristic/3</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>solution_cost/2</title>
 <polygon fill="springgreen" stroke="black" points="280.19,-92 185.81,-92 185.81,-56 280.19,-56 280.19,-92"/>
 <text xml:space="preserve" text-anchor="start" x="193.81" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/ant_colony/ant_colony_problem_protocol.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/ant_colony/ant_colony_problem_protocol.lgt#L46">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/ant_colony/ant_colony_problem_protocol.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/ant_colony/ant_colony_problem_protocol.lgt#L46">
 <text xml:space="preserve" text-anchor="start" x="196.31" y="-75.53" font-family="Monospace" font-size="11.00">solution_cost/2</text>
 </a>
 </g>
@@ -71,7 +71,7 @@
 <title>stop_condition/3</title>
 <polygon fill="springgreen" stroke="black" points="399.56,-92 298.44,-92 298.44,-56 399.56,-56 399.56,-92"/>
 <text xml:space="preserve" text-anchor="start" x="306.44" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/ant_colony/ant_colony_problem_protocol.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/ant_colony/ant_colony_problem_protocol.lgt#L53">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/ant_colony/ant_colony_problem_protocol.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/ant_colony/ant_colony_problem_protocol.lgt#L53">
 <text xml:space="preserve" text-anchor="start" x="308.94" y="-75.53" font-family="Monospace" font-size="11.00">stop_condition/3</text>
 </a>
 </g>
@@ -85,7 +85,7 @@
 <title>progress/5</title>
 <polygon fill="springgreen" stroke="black" points="490.49,-92 417.51,-92 417.51,-56 490.49,-56 490.49,-92"/>
 <text xml:space="preserve" text-anchor="start" x="425.51" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/ant_colony/ant_colony_problem_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/ant_colony/ant_colony_problem_protocol.lgt#L60">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/ant_colony/ant_colony_problem_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/ant_colony/ant_colony_problem_protocol.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="428.01" y="-75.53" font-family="Monospace" font-size="11.00">progress/5</text>
 </a>
 </g>

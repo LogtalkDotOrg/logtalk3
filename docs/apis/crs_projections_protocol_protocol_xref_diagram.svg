@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 1884,-140 1884,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol crs_projections_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;10&#45;31, 00:58</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;10&#45;31, 16:03</text>
 <g id="clust1" class="cluster">
 <title>cluster_crs_projections_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="crs_projections_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1860,-46 1860,-46 1866,-46 1872,-52 1872,-58 1872,-58 1872,-116 1872,-116 1872,-122 1866,-128 1860,-128 1860,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.3" font-family="Monospace" font-size="10.00" fill="dimgray">crs_projections_protocol</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>valid_crs/1</title>
 <polygon fill="springgreen" stroke="black" points="91.79,-92 18.21,-92 18.21,-56 91.79,-56 91.79,-92"/>
 <text xml:space="preserve" text-anchor="start" x="26.21" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="28.71" y="-75.53" font-family="Monospace" font-size="11.00">valid_crs/1</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>crs_name/2</title>
 <polygon fill="springgreen" stroke="black" points="188.24,-92 109.76,-92 109.76,-56 188.24,-56 188.24,-92"/>
 <text xml:space="preserve" text-anchor="start" x="117.76" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L39">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L39">
 <text xml:space="preserve" text-anchor="start" x="120.26" y="-75.53" font-family="Monospace" font-size="11.00">crs_name/2</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>crs_kind/2</title>
 <polygon fill="springgreen" stroke="black" points="277.57,-92 206.43,-92 206.43,-56 277.57,-56 277.57,-92"/>
 <text xml:space="preserve" text-anchor="start" x="214.43" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L46">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L46">
 <text xml:space="preserve" text-anchor="start" x="216.93" y="-75.53" font-family="Monospace" font-size="11.00">crs_kind/2</text>
 </a>
 </g>
@@ -71,7 +71,7 @@
 <title>crs_units/2</title>
 <polygon fill="springgreen" stroke="black" points="370.1,-92 295.9,-92 295.9,-56 370.1,-56 370.1,-92"/>
 <text xml:space="preserve" text-anchor="start" x="303.9" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L53">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L53">
 <text xml:space="preserve" text-anchor="start" x="306.41" y="-75.53" font-family="Monospace" font-size="11.00">crs_units/2</text>
 </a>
 </g>
@@ -85,7 +85,7 @@
 <title>crs_dimensions/2</title>
 <polygon fill="springgreen" stroke="black" points="494.3,-92 387.7,-92 387.7,-56 494.3,-56 494.3,-92"/>
 <text xml:space="preserve" text-anchor="start" x="395.7" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L60">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="398.2" y="-75.53" font-family="Monospace" font-size="11.00">crs_dimensions/2</text>
 </a>
 </g>
@@ -99,7 +99,7 @@
 <title>crs_epsg/2</title>
 <polygon fill="springgreen" stroke="black" points="587.4,-92 512.6,-92 512.6,-56 587.4,-56 587.4,-92"/>
 <text xml:space="preserve" text-anchor="start" x="520.6" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L67">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="523.1" y="-75.53" font-family="Monospace" font-size="11.00">crs_epsg/2</text>
 </a>
 </g>
@@ -113,7 +113,7 @@
 <title>epsg_crs/2</title>
 <polygon fill="springgreen" stroke="black" points="680.4,-92 605.6,-92 605.6,-56 680.4,-56 680.4,-92"/>
 <text xml:space="preserve" text-anchor="start" x="613.6" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L74">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="616.1" y="-75.53" font-family="Monospace" font-size="11.00">epsg_crs/2</text>
 </a>
 </g>
@@ -127,7 +127,7 @@
 <title>valid_coordinate/2</title>
 <polygon fill="springgreen" stroke="black" points="809.14,-92 698.86,-92 698.86,-56 809.14,-56 809.14,-92"/>
 <text xml:space="preserve" text-anchor="start" x="706.86" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L81">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L81">
 <text xml:space="preserve" text-anchor="start" x="709.36" y="-75.53" font-family="Monospace" font-size="11.00">valid_coordinate/2</text>
 </a>
 </g>
@@ -141,7 +141,7 @@
 <title>local_tangent_plane/3</title>
 <polygon fill="springgreen" stroke="black" points="955.32,-92 826.68,-92 826.68,-56 955.32,-56 955.32,-92"/>
 <text xml:space="preserve" text-anchor="start" x="834.68" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L88">
+<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L88">
 <text xml:space="preserve" text-anchor="start" x="837.18" y="-75.53" font-family="Monospace" font-size="11.00">local_tangent_plane/3</text>
 </a>
 </g>
@@ -155,7 +155,7 @@
 <title>local_tangent_plane_inverse/3</title>
 <polygon fill="springgreen" stroke="black" points="1143.11,-92 972.89,-92 972.89,-56 1143.11,-56 1143.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="980.89" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L95">
+<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="983.39" y="-75.53" font-family="Monospace" font-size="11.00">local_tangent_plane_inverse/3</text>
 </a>
 </g>
@@ -169,7 +169,7 @@
 <title>lambert_azimuthal_equal_area/3</title>
 <polygon fill="springgreen" stroke="black" points="1342.61,-92 1161.39,-92 1161.39,-56 1342.61,-56 1342.61,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1169.39" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L102">
+<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L102">
 <text xml:space="preserve" text-anchor="start" x="1171.89" y="-75.53" font-family="Monospace" font-size="11.00">lambert_azimuthal_equal_area/3</text>
 </a>
 </g>
@@ -183,7 +183,7 @@
 <title>lambert_azimuthal_equal_area_inverse/3</title>
 <polygon fill="springgreen" stroke="black" points="1583.4,-92 1360.6,-92 1360.6,-56 1583.4,-56 1583.4,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1368.6" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L109">
+<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L109">
 <text xml:space="preserve" text-anchor="start" x="1371.1" y="-75.53" font-family="Monospace" font-size="11.00">lambert_azimuthal_equal_area_inverse/3</text>
 </a>
 </g>
@@ -197,7 +197,7 @@
 <title>utm_zone/2</title>
 <polygon fill="springgreen" stroke="black" points="1680.24,-92 1601.76,-92 1601.76,-56 1680.24,-56 1680.24,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1609.76" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L116">
+<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L116">
 <text xml:space="preserve" text-anchor="start" x="1612.26" y="-75.53" font-family="Monospace" font-size="11.00">utm_zone/2</text>
 </a>
 </g>
@@ -211,7 +211,7 @@
 <title>utm_crs/2</title>
 <polygon fill="springgreen" stroke="black" points="1767.65,-92 1698.35,-92 1698.35,-56 1767.65,-56 1767.65,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1706.35" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node14_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L123" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L123">
+<g id="a_node14_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L123" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L123">
 <text xml:space="preserve" text-anchor="start" x="1708.85" y="-75.53" font-family="Monospace" font-size="11.00">utm_crs/2</text>
 </a>
 </g>
@@ -225,7 +225,7 @@
 <title>transform/4</title>
 <polygon fill="springgreen" stroke="black" points="1862.31,-92 1785.69,-92 1785.69,-56 1862.31,-56 1862.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1793.69" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node15_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d4a5ef8c3328a37ac8a1b6db69c4df593cb7bea8/library/crs_projections/crs_projections_protocol.lgt#L130">
+<g id="a_node15_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/crs_projections/crs_projections_protocol.lgt#L130">
 <text xml:space="preserve" text-anchor="start" x="1796.19" y="-75.53" font-family="Monospace" font-size="11.00">transform/4</text>
 </a>
 </g>
