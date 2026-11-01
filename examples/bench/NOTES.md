@@ -140,12 +140,12 @@ Time = ...
 true.
 -->
 
-Some Prolog compilers such as SWI-Prolog, Trealla Prolog, XVM, and YAP
-provide a handy `time/1` predicate that may also be used in alternative
-to the `lgtunit` benchmark predicates. The adapter files for SWI-Prolog
-and YAP ensure that `(::)/2` goals in the argument of the `time/1`
-meta-predicate are fully compiled prior to calling them so that we
-benchmark the code instead of the Logtalk compiler.
+Some Prolog compilers such as Shumway Prolog, SWI-Prolog, Trealla Prolog, XVM,
+and YAP provide a handy `time/1` predicate that may also be used in alternative
+to the `lgtunit` benchmark predicates. The adapter files for SWI-Prolog and YAP
+ensure that `(::)/2` goals in the argument of the `time/1` meta-predicate are
+fully compiled prior to calling them so that we benchmark the code instead of
+the Logtalk compiler.
 
 Confirm that the `time/1` predicate is available:
 
