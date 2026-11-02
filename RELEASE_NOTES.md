@@ -417,6 +417,9 @@ library.
 Tests
 -----
 
+* CHANGED: The Prolog conformance tests for unbound integers support for
+the `functor/3` and `arg/3` to use practical values.
+
 * ADDED: Additional test for the ISO Prolog `(>>)/2` arithmetic function.
 
 IDEs, text editors, and syntax highlighters support

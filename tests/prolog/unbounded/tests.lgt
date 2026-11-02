@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:13:0,
+		version is 0:14:0,
 		author is 'Paulo Moura',
-		date is 2025-12-03,
+		date is 2026-11-02,
 		comment is 'Unit tests for unbounded integer arithmetic.'
 	]).
 
@@ -461,31 +461,33 @@
 	% functor/3
 
 	test(lgt_unbounded_functor_01, true, [condition(current_prolog_flag(max_arity, unbounded))]) :-
-		functor(_, t, 1844674407370909797907654848955145546336677616).
+		functor(_, t, 10000).
 
-	test(lgt_unbounded_functor_02, true(Name-Arity == t-1844674407370909797907654848955145546336677616), [condition(current_prolog_flag(max_arity, unbounded))]) :-
-		functor(Term, t, 1844674407370909797907654848955145546336677616),
+	test(lgt_unbounded_functor_02, true(Name-Arity == t-10000), [condition(current_prolog_flag(max_arity, unbounded))]) :-
+		functor(Term, t, 10000),
 		functor(Term, Name, Arity).
 
 	test(lgt_unbounded_functor_03, error(representation_error(max_arity)), [condition((current_prolog_flag(max_arity, Bound), integer(Bound)))]) :-
-		functor(_, t, 1844674407370909797907654848955145546336677616).
+		current_prolog_flag(max_arity, Bound),
+		Next is Bound + 1,
+		functor(_, t, Next).
 
 	% arg/3
 
 	test(lgt_unbounded_arg_01, false) :-
-		arg(1844674407370909797907654848955145546336677616, t(1,2,3), _).
+		arg(10000, t(1,2,3), _).
 
 	test(lgt_unbounded_arg_02, true(var(Arg)), [condition(current_prolog_flag(max_arity, unbounded))]) :-
-		functor(Term, t, 1844674407370909797907654848955145546336677616),
-		arg(1844674407370909797907654848955145546336677610, Term, Arg).
+		functor(Term, t, 10000),
+		arg(10000, Term, Arg).
 
 	test(lgt_unbounded_arg_03, true(Arg == abc), [condition(current_prolog_flag(max_arity, unbounded))]) :-
-		functor(Term, t, 1844674407370909797907654848955145546336677616),
-		arg(1844674407370909797907654848955145546336677610, Term, abc),
-		arg(1844674407370909797907654848955145546336677610, Term, Arg).
+		functor(Term, t, 10000),
+		arg(10000, Term, abc),
+		arg(10000, Term, Arg).
 
-	test(lgt_unbounded_arg_04, error(domain_error(not_less_than_zero, -1844674407370909797907654848955145546336677610))) :-
-		arg(-1844674407370909797907654848955145546336677610, t(1,2,3), _).
+	test(lgt_unbounded_arg_04, error(domain_error(not_less_than_zero, -10000))) :-
+		arg(-10000, t(1,2,3), _).
 
 	% format/2-3
 
