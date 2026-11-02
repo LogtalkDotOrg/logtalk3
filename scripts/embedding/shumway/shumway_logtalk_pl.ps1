@@ -5,7 +5,7 @@
 ##   compiler and runtime and optionally an application.pl file with
 ##   a Logtalk application
 ##
-##   Last updated on October 28, 2026
+##   Last updated on November 2, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   Copyright 2022-2026 Paulo Moura <pmoura@logtalk.org>
@@ -35,7 +35,7 @@ param(
 	[Switch]$x,
 	[String]$d = $pwd,
 	[String]$t,
-	[String]$n = "application",
+	[String]$n = "logtalk",
 	[String]$p = "$env:LOGTALKHOME\paths\paths.pl",
 	[String]$s = "$env:LOGTALKHOME\scripts\embedding\settings-embedding-sample.lgt",
 	[String]$l,
@@ -47,7 +47,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output "$myName 0.1"
+	Write-Output "$myName 0.2"
 }
 
 function Test-LogtalkVersionIsOlder {
@@ -136,7 +136,7 @@ function Write-Usage-Help() {
 	Write-Output "  -c compile library alias paths in paths and settings files"
 	Write-Output "  -d directory for generated QLF files (absolute path; default is current directory)"
 	Write-Output "  -t temporary directory for intermediate files (absolute path; default is an auto-created directory)"
-	Write-Output "  -n name of the generated saved state (default is application)"
+	Write-Output "  -n name of the generated saved state (default is $n)"
 	Write-Output "  -p library paths file (absolute path; default is $p)"
 	Write-Output "  -s settings file (absolute path or 'none'; default is $s)"
 	Write-Output "  -l loader file for the application (absolute path)"
@@ -329,16 +329,15 @@ if ($l -ne "") {
 		Get-Content |
 		Add-Content "$d/application.pl"
 
-	Set-Content -Path "$d/loader.pl" -Value ":- initialization(("
-	Add-Content -Path "$d/loader.pl" -Value  "	consult(logtalk),"
-	if ($g -eq "true") {
-		Add-Content -Path "$d/loader.pl" -Value  "	consult(application)"
-	} else {
-		Add-Content -Path "$d/loader.pl" -Value  "	consult(application),"
-		Add-Content -Path "$d/loader.pl" -Value  "	($g)"
-	}
-	Add-Content -Path "$d/loader.pl" -Value  "))."
-
+	Set-Content -Path "$d/$name.pl" -Value ":- include(logtalk)."
+	Add-Content -Path "$d/$name.pl" -Value ":- include(application)."
+	shumway-compile --release "$d/$name.pl"
+	Set-Location "$d"
+	shumway-link --strip --consult -o "$name.shum" --exe "$name" --goal "$goal" "$name.pl"
+	Pop-Location
+} else {
+	Set-Location "$d"
+	shumway-link --strip --allow-undefined --consult --library -o logtalk.shum logtalk.pl
 	Pop-Location
 }
 

@@ -18,8 +18,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-This directory contains example scripts for creating Shumway Prolog files
-from Logtalk core files and Logtalk source files.
+This directory contains example scripts for creating Shumway Prolog
+executables from Logtalk core files and Logtalk source files.
 
 The following scripts are provided:
 
@@ -30,8 +30,8 @@ The following scripts are provided:
 
 Both scripts create a `logtalk.pl` file with the Logtalk compiler and
 runtime and an optional `application.pl` file for an application plus
-an optional application startup goal. When a loader option is used, a
-`loader.pl` file is also created.
+an optional application startup goal. For applications, an executable
+is created.
 
 Usage
 -----

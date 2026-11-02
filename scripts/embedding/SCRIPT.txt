@@ -98,9 +98,15 @@ $ cd ~/collect/
 $ eclipse -L iso -t user -f loader.eco
 
 
-% create Shumway Prolog files for embedding the "wumpus" text adventure example:
+% create a Shumway Prolog executable with the Logtalk compiler/runtime:
 
 $ cd "$LOGTALKHOME/scripts/embedding/shumway/"
-$ ./shumway_logtalk_pl.sh -c -d "$HOME"/collect -l "$LOGTALKUSER/examples/adventure/wumpus.lgt" -g "('::'(wumpus,main),halt)"
-$ cd ~/collect/
-$ shumway loader.pl
+$ ./shumway_logtalk_pl.sh -c -d "$HOME"/collect -s none
+$ shumway ~/collect/logtalk.shum
+
+
+% create Shumway Prolog executable for the "wumpus" text adventure example:
+
+$ cd "$LOGTALKHOME/scripts/embedding/shumway/"
+$ ./shumway_logtalk_pl.sh -c -d "$HOME"/collect -n wumpus -l "$LOGTALKUSER/examples/adventure/wumpus.lgt" -g "('::'(wumpus,main),halt)"
+$ ~/collect/wumpus

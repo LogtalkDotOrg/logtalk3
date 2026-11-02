@@ -6,7 +6,7 @@
 ##   compiler and runtime and optionally an application.pl file with
 ##   a Logtalk application
 ##
-##   Last updated on October 29, 2026
+##   Last updated on November 2, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -28,7 +28,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.1"
+	echo "$(basename "$0") 0.2"
 	exit 0
 }
 
@@ -154,6 +154,7 @@ fi
 # default values
 directory="$(pwd -P)"
 temporary=""
+name="logtalk"
 paths="$LOGTALKHOME/paths/paths.pl"
 settings="$LOGTALKHOME/scripts/embedding/settings-embedding-sample.lgt"
 compile="false"
@@ -174,6 +175,7 @@ usage_help() {
 	echo "  -c compile library alias paths in paths and settings files"
 	echo "  -d directory for generated Prolog files (absolute path; default is current directory)"
 	echo "  -t temporary directory for intermediate files (absolute path; default is an auto-created directory)"
+	echo "  -n name of the generated top-level (default is logtalk)"
 	echo "  -p library paths file (absolute path; default is $paths)"
 	echo "  -s settings file (absolute path or 'none'; default is $settings)"
 	echo "  -l loader file for the application (absolute path)"
@@ -183,12 +185,13 @@ usage_help() {
 	echo
 }
 
-while getopts "cd:t:p:s:l:g:vh" option
+while getopts "cd:t:n:p:s:l:g:vh" option
 do
 	case $option in
 		c) compile="true";;
 		d) d_arg="$OPTARG";;
 		t) t_arg="$OPTARG";;
+		n) n_arg="$OPTARG";;
 		p) p_arg="$OPTARG";;
 		s) s_arg="$OPTARG";;
 		l) l_arg="$OPTARG";;
@@ -205,6 +208,10 @@ fi
 
 if [ "$t_arg" != "" ] ; then
 	temporary="$t_arg"
+fi
+
+if [ "$n_arg" != "" ] ; then
+	name="$n_arg"
 fi
 
 if [ "$p_arg" != "" ] ; then
@@ -334,15 +341,14 @@ if [ "$loader" != "" ] ; then
 		echo
 		exit 1
 	fi
-	echo ":- initialization((" > "$directory"/loader.pl
-	echo "	consult(logtalk)," >> "$directory"/loader.pl
-	if [ "$goal" = "true" ] ; then
-		echo "	consult(application)" >> "$directory"/loader.pl
-	else
-		echo "	consult(application)," >> "$directory"/loader.pl
-		echo "	$goal" >> "$directory"/loader.pl
-	fi
-	echo "))." >> "$directory"/loader.pl
+	echo ":- include(logtalk)." > "$directory"/"$name.pl"
+	echo ":- include(application)." >> "$directory"/"$name.pl"
+	shumway-compile --release "$directory"/"$name.pl"
+	cd "$directory"
+	shumway-link --strip --consult -o "$name.shum" --exe "$name" --goal "$goal" "$name.pl"
+else
+	cd "$directory"
+	shumway-link --strip --allow-undefined --consult --library -o logtalk.shum logtalk.pl
 fi
 
 function cleanup {
