@@ -440,7 +440,7 @@
 % plus the the directory hash and PID as an atom with the format _hash_pid
 
 '$lgt_directory_hashes'(Directory, HashDialect, HashPid) :-
-	'$shumway_hash_term'(Term, Hash),
+	'$shumway_hash_term'(Directory, Hash),
 	pid(PID),
 	atomic_list_concat(['_', Hash, '_', shumway], HashDialect),
 	atomic_list_concat(['_', Hash, '_', PID], HashPid).
