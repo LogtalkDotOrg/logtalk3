@@ -137,17 +137,24 @@
 
 	:- end_object.
 
-:- elif((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == sicstus; Dialect == swi; Dialect == yap))).
+:- elif((
+	current_logtalk_flag(prolog_dialect, Dialect),
+	(Dialect == sicstus; Dialect == shumway; Dialect == swi; Dialect == yap)
+)).
 
 	:- use_module(library(clpr), []).
 
 	:- object(cotrain).
 
 		:- info([
-			version is 0:2:0,
+			version is 0:3:0,
 			author is 'Neda Saeedloei and Gopal Gupta. Adapted to Logtalk by Paulo Moura.',
-			date is 2013-03-06,
+			date is 2016-11-02,
 			comment is 'Timed automata coroutining example.'
+		]).
+
+		:- uses(coroutining, [
+			freeze/2
 		]).
 
 		:- uses(streamvars, [
