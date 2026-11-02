@@ -250,9 +250,8 @@ https://logtalk.org/man/logtalk_tester.html
 
 On POSIX systems, the `logtalk_tester.sh` Bash script timeout option requires
 either a `timeout` or a `gtimeout` command (provided by the GNU coreutils
-package). The `logtalk_tester.ps1` PowerShell script timeout option requires
-that Git for Windows is also installed, as it requires the GNU timeout command
-bundled with it.
+package). The `logtalk_tester.ps1` PowerShell script timeout option doesn't
+require any external command.
 
 In addition to using the `logtalk_tester.ps1` PowerShell script, the Bash
 shell version of the automation script can also be used in Windows

@@ -80,9 +80,10 @@ also available in the Logtalk website.
 	with the computation of the test/skipped/passed/failed totals;
 	it can export code coverage reports in simple XML, Cobertura XML, and LCOV
 	formats using the `-c xml`, `-c cobertura`, and `-c lcov` options;
-	if the script detects either a `timeout` or a `gtimeout` command (provided
-	by the GNU `coreutils` package), it will use it to run each test set if the
-	`timeout` option is set to a value greater than zero;
+	if the Bash script detects either a `timeout` or a `gtimeout` command
+    (provided by the GNU `coreutils` package), it will use it to run each
+    test set if the `timeout` option is set to a value greater than zero;
+    the PowerShell script timeout support doesn't depend on external commands;
 	installation of the GNU `sed` command, when not available by default, is
 	strongly recommended
 
