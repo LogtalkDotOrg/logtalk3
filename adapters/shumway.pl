@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Shumway (Prolog on .NET) 0.9.3 and later versions
-%  Last updated on October 30, 2026
+%  Last updated on November 2, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 2026 Gustavo Brown
@@ -274,7 +274,7 @@
 '$lgt_prolog_feature'(tabling, supported).
 '$lgt_prolog_feature'(engines, unsupported).
 '$lgt_prolog_feature'(threads, unsupported).
-'$lgt_prolog_feature'(modules, unsupported).
+'$lgt_prolog_feature'(modules, supported).
 '$lgt_prolog_feature'(coinduction, supported).
 '$lgt_prolog_feature'(unicode, full).
 
@@ -599,53 +599,8 @@
 
 % '$lgt_prolog_term_expansion'(@callable, -callable)
 
-'$lgt_prolog_term_expansion'((:- use_module(Module, _)), _) :-
-	atom(Module),
-	logtalk_load_context(entity_type, module),
-	!,
+'$lgt_prolog_term_expansion'(_, _) :-
 	fail.
-'$lgt_prolog_term_expansion'((:- use_module(constraintLib, _)), []) :-
-	!.
-'$lgt_prolog_term_expansion'((:- use_module(Library)), Expansion) :-
-	!,
-	'$shumway_expand_use_module'(Library, Expansion).
-'$lgt_prolog_term_expansion'((:- use_module(Library, Imports)), Expansion) :-
-	!,
-	(	'$shumway_provided_library'(Library) ->
-		Expansion = []
-	;	catch(use_module(Library), _, fail) ->
-		Expansion = {:- use_module(Library)}
-	;	nonvar(Imports), Imports = [_| _] ->
-		% A module we cannot resolve, imported for SPECIFIC predicates
-		% (json_path/types import unicode_property/2 from SWI's `unicode`):
-		% route those names to `user`, where this adapter or the engine may
-		% supply them. On this module-less backend that is what the import
-		% MEANS; a predicate genuinely absent still raises a clear
-		% existence_error at its call site, instead of the confusing
-		% object-local '$obj#0.name#arity' one that dropping the directive
-		% produced.
-		Expansion = (:- uses(user, Imports))
-	;	Expansion = []
-	).
-
-'$shumway_expand_use_module'(Library, []) :-
-	'$shumway_provided_library'(Library),
-	!.
-'$shumway_expand_use_module'(Library, Expansion) :-
-	(	catch(use_module(Library), _, fail) ->
-		Expansion = {:- use_module(Library)}
-	;	Expansion = []
-	).
-
-% Libraries whose predicates this adapter already supplies. These must be
-% DROPPED rather than resolved: the engine's search path can carry another
-% dialect's copy (the Scryer collection ships dif.pl), and loading it on top
-% of ours collides on the shared public names.
-'$shumway_provided_library'(library(dif)).      % library(coroutining), above
-'$shumway_provided_library'(library(when)).
-'$shumway_provided_library'(library(freeze)).
-'$shumway_provided_library'(library(atts)).
-'$shumway_provided_library'(library(time)).     % call_with_time_limit/2, below
 
 
 % '$lgt_prolog_goal_expansion'(@callable, -callable)
