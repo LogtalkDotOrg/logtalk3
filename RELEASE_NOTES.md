@@ -385,6 +385,9 @@ for creating bug reports at Azure DevOps, Gitea, and Jira servers.
 
 * IMPROVED: The performance of the `logtalk_tester.sh` Bash shell script.
 
+* IMPROVED: The `logtalk_tester.ps1` testing automation script no longer
+depends on external commands for timeout support.
+
 * UPDATED: The `logtalk_tester.sh` and `logtalk_tester.ps1` testing
 automation scripts to print the fastest and slowest test set names and
 execution times plus the mean and median test set running times.

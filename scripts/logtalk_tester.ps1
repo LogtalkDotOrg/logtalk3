@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on October 28, 2026
+##   Last updated on November 2, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -56,7 +56,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
-	Write-Output "$myName 29.0"
+	Write-Output "$myName 30.0"
 }
 
 Function Format-Decimal {
@@ -272,6 +272,59 @@ param(
 	Pop-Location
 }
 
+Function Invoke-WithTimeout() {
+param(
+	[Parameter(Position = 0)]
+	[Int]$seconds,
+	[Parameter(Position = 1)]
+	[String[]]$arguments,
+	[Parameter(Position = 2)]
+	[String]$stdout_file,
+	[Parameter(Position = 3)]
+	[String]$stderr_file
+)
+	# Run pwsh with the given arguments, saving its standard output and error
+	# streams to files. If the process doesn't exit within the given number of
+	# seconds, it and its child processes are killed and the exit status is 124
+	# (the same status used by the GNU timeout command). Using ArgumentList
+	# lets .NET quote each argument correctly, so no argument (e.g. a goal
+	# containing single quotes and paths with spaces) is mangled.
+	$psi = [System.Diagnostics.ProcessStartInfo]::new((Get-Command pwsh).Source)
+	$psi.UseShellExecute = $false
+	$psi.RedirectStandardOutput = $true
+	$psi.RedirectStandardError = $true
+	# the .NET current directory doesn't follow PowerShell's Push-Location
+	$psi.WorkingDirectory = (Get-Location -PSProvider FileSystem).ProviderPath
+	foreach ($argument in $arguments) {
+		$psi.ArgumentList.Add($argument)
+	}
+	$stdout_path = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath($stdout_file)
+	$stderr_path = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath($stderr_file)
+	$stdout_stream = [System.IO.File]::Create($stdout_path)
+	$stderr_stream = [System.IO.File]::Create($stderr_path)
+	try {
+		$process = [System.Diagnostics.Process]::Start($psi)
+		# copy the raw bytes asynchronously to avoid pipe buffer deadlocks
+		$stdout_task = $process.StandardOutput.BaseStream.CopyToAsync($stdout_stream)
+		$stderr_task = $process.StandardError.BaseStream.CopyToAsync($stderr_stream)
+		if ($process.WaitForExit($seconds * 1000)) {
+			$process.WaitForExit()
+			$exit_code = $process.ExitCode
+		} else {
+			$process.Kill($true)
+			$process.WaitForExit()
+			$exit_code = 124
+		}
+		[void]$stdout_task.Wait(5000)
+		[void]$stderr_task.Wait(5000)
+		$process.Dispose()
+	} finally {
+		$stdout_stream.Dispose()
+		$stderr_stream.Dispose()
+	}
+	$global:LASTEXITCODE = $exit_code
+}
+
 Function Invoke-Tests() {
 param(
 	[Parameter(Position = 0)]
@@ -279,18 +332,19 @@ param(
 	[Parameter(Position = 1)]
 	[String]$goal
 )
-	if ($a -eq "") {
-		if ($t -ne 0) {
-			& $timeout_command $t pwsh (where.exe "$logtalk.ps1") $backend_options $logtalk_option $goal > "$results/$name.results" 2> "$results/$name.errors"
-		} else {
-			& $logtalk $backend_options $logtalk_option $goal > "$results/$name.results" 2> "$results/$name.errors"
-		}
+	if ($t -ne 0) {
+		$logtalk_script = @(where.exe "$logtalk.ps1")[0]
+		$logtalk_arguments = @('-NoProfile', '-File', $logtalk_script)
+		if ($backend_options) { $logtalk_arguments += $backend_options }
+		$logtalk_arguments += $logtalk_option
+		$logtalk_arguments += $goal
+		if (-not ($a -eq "")) { $logtalk_arguments += '--' }
+		if ($a) { $logtalk_arguments += $a }
+		Invoke-WithTimeout ([Int]$t) $logtalk_arguments "$results/$name.results" "$results/$name.errors"
+	} elseif ($a -eq "") {
+		& $logtalk $backend_options $logtalk_option $goal > "$results/$name.results" 2> "$results/$name.errors"
 	} else {
-		if ($t -ne 0) {
-			& $timeout_command $t pwsh (where.exe "$logtalk.ps1") $backend_options $logtalk_option $goal '--' @a > "$results/$name.results" 2> "$results/$name.errors"
-		} else {
-			& $logtalk $backend_options $logtalk_option $goal '--' @a > "$results/$name.results" 2> "$results/$name.errors"
-		}
+		& $logtalk $backend_options $logtalk_option $goal '--' @a > "$results/$name.results" 2> "$results/$name.errors"
 	}
 	if (Select-String -Path "$results/$name.errors" -Pattern "Likely bug in the backend Prolog compiler. Please file a bug report." -SimpleMatch -Quiet) {
 		Add-Content -Path "$results/$name.errors" -Value "LOGTALK_BROKEN"
@@ -693,13 +747,6 @@ $base = $pwd
 $level = 999
 $exclude = ""
 $include_only = $false
-
-if (Test-Path "$env:Programfiles/Git/usr/bin/timeout.exe") {
-	$timeout_command = "$env:Programfiles/Git/usr/bin/timeout.exe"
-} else {
-	$timeout_command = ""
-	Write-Output "Warning! Timeout support not available. The timeout option will be ignored."
-}
 
 $flag_goal = "true"
 $backend_options = $null
