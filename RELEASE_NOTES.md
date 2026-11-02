@@ -53,6 +53,9 @@ Prolog adapter and integration files
 
 * ADDED: Support for Shumway (Prolog on .NET) 0.9.3 and later versions.
 
+* UPDATED: The Trealla Prolog file to set the `coinduction` flag to `supported`
+for 3.14.42 and later versions.
+
 Documentation
 -------------
 
