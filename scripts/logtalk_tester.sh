@@ -733,7 +733,7 @@ if [ "$b_arg" != "" ] ; then
 		exit 1
 	fi
 	issue_server="$(echo "$b_arg" | cut -d':' -f1)"
-	if [ [ "$issue_server" != "azure" ] && [ "$issue_server" != "gitea" ] && "$issue_server" != "github" ] && [ "$issue_server" != "gitlab" ] && [ "$issue_server" != "jira" ] && [ "$issue_server" != "linear" ] ; then
+	if [ "$issue_server" != "azure" ] && [ "$issue_server" != "gitea" ] && [ "$issue_server" != "github" ] && [ "$issue_server" != "gitlab" ] && [ "$issue_server" != "jira" ] && [ "$issue_server" != "linear" ] ; then
 		echo "Error! Issue tracker server must be either github, gitlab, azure, gitea, jira, or linear: $b_arg" >&2
 		usage_help
 		exit 1
