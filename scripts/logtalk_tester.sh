@@ -32,7 +32,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 39.1"
+	echo "$(basename "$0") 40.0"
 	exit 0
 }
 
@@ -184,6 +184,44 @@ decimal_le() {
 	while [ ${#b_digits} -lt "$length" ] ; do b_digits="${b_digits}0" ; done
 	[[ "$a_digits" == "$b_digits" || "$a_digits" < "$b_digits" ]]
 }
+
+# with mode=count, counts the "kind<TAB>entry" actual lines not listed in the expected failures file
+expected_failures_awk='
+	{
+		sub(/[ \t\r]+$/, "")
+	}
+	kind == "expected" {
+		if ($0 == "" || $0 == "%" || substr($0, 1, 1) == "#") next
+		if (substr($0, 1, 1) == "%") {
+			if ($0 == "% Broken") section = "broken"
+			else if ($0 == "% Timedout") section = "timedout"
+			else if ($0 == "% Crashed") section = "crashed"
+			else if ($0 == "% Failed tests") section = "failed"
+			else {
+				print "Error! Unknown section header in expected failures file: " $0
+				error = 1
+				exit
+			}
+			next
+		}
+		if (section == "") {
+			print "Error! Expected failures file entry before any section header: " $0
+			error = 1
+			exit
+		}
+		if (section == "failed") sub(/ \[flaky\]$/, "")
+		expected[section "\t" $0] = 1
+		next
+	}
+	!($0 in seen) {
+		seen[$0] = 1
+		if (!($0 in expected)) unexpected[substr($0, 1, index($0, "\t") - 1)]++
+	}
+	END {
+		if (error) exit 1
+		if (mode == "count") printf "%d %d %d %d\n", unexpected["crashed"], unexpected["broken"], unexpected["timedout"], unexpected["failed"]
+	}
+'
 
 notify_completion() {
 	status="$1"
@@ -435,7 +473,7 @@ usage_help() {
 	echo "The timeout option requires availability of the GNU coreutils timeout command."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") -p prolog [-o output] [-m mode] [-f format] [-d results] [-t timeout] [-j jobs] [-n driver] [-s prefix] [-b tracker] [-u url] [-c report] [-l level] [-e exclude] [-i options] [-g goal] [-r seed] [-w] [-z] [-- arguments]"
+	echo "  $(basename "$0") -p prolog [-o output] [-m mode] [-f format] [-d results] [-t timeout] [-j jobs] [-n driver] [-s prefix] [-b tracker] [-u url] [-c report] [-l level] [-e exclude] [-i options] [-g goal] [-r seed] [-k file] [-w] [-z] [-- arguments]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
@@ -466,6 +504,8 @@ usage_help() {
 	echo "  -i integration script command-line options (no default)"
 	echo "  -g initialization goal (default is $initialization_goal)"
 	echo "  -r random generator starting seed (no default)"
+	echo "  -k file listing expected failed tests and broken, timedout, and crashed test sets"
+	echo "     (expected issues ignored when computing the exit status; no default)"
 	echo "  -w wipe default scratch directories (.lgt_tmp and lgt_tmp) once before running any test sets"
 	echo "  -z audible completion notification (two chimes on exit 0, five otherwise; default is off)"
 	echo "  -- arguments to be passed to the tests (no default)"
@@ -473,7 +513,7 @@ usage_help() {
 	echo
 }
 
-while getopts "vzp:o:m:f:d:t:j:n:s:b:u:c:l:e:g:r:i:wh" option; do
+while getopts "vzp:o:m:f:d:t:j:n:s:b:u:c:l:e:g:r:i:k:wh" option; do
 	case $option in
 		z) audible_completion='true';;
 		v) print_version;;
@@ -494,6 +534,7 @@ while getopts "vzp:o:m:f:d:t:j:n:s:b:u:c:l:e:g:r:i:wh" option; do
 		i) i_arg="$OPTARG";;
 		g) g_arg="$OPTARG";;
 		r) r_arg="$OPTARG";;
+		k) k_arg="$OPTARG";;
 		w) wipe='true';;
 		h) usage_help; exit 0;;
 		*) usage_help; exit 1;;
@@ -742,6 +783,25 @@ if [ "$r_arg" != "" ] ; then
 	seed_goal="logtalk_load(arbitrary(loader)),type::set_seed($r_arg)"
 else
 	seed_goal="true"
+fi
+
+expected_failures=""
+if [ "$k_arg" != "" ] ; then
+	if [[ "$k_arg" == /* || "$k_arg" =~ ^[A-Za-z]:[/\\] ]] ; then
+		expected_failures="$k_arg"
+	else
+		expected_failures="$base/$k_arg"
+	fi
+	if [ ! -f "$expected_failures" ] || [ ! -r "$expected_failures" ] ; then
+		echo "Error! Expected failures file not found or not readable: $k_arg" >&2
+		usage_help
+		exit 1
+	fi
+	if ! expected_failures_error=$(awk "$expected_failures_awk" kind=expected "$expected_failures") ; then
+		echo "$expected_failures_error" >&2
+		usage_help
+		exit 1
+	fi
 fi
 
 if [ "$p_arg" == "swipack" ] ; then
@@ -1114,13 +1174,29 @@ if [ "$output" == 'quiet' ] ; then
 	exec 1>&4 4>&-
 fi
 
-if [ "$crashed" -gt 0 ] ; then
+unexpected_crashed=$crashed
+unexpected_broken=$broken
+unexpected_timeouts=$timeouts
+unexpected_failures=$((failed - flaky))
+if [ "$expected_failures" != "" ] ; then
+	# entries must be generated exactly as printed in the report sections above
+	read -r unexpected_crashed unexpected_broken unexpected_timeouts unexpected_failures < <(
+		{
+			grep -s -h '^failed' -- *.totals | grep -v ' \[flaky\]$' | cut -f 2,3 | $sed "s|^$prefix||" | $sed "s|\t| - |" | awk '{ print "failed\t" $0 }'
+			grep -s -a -H 'LOGTALK_BROKEN' -- *.errors | $sed 's/LOGTALK_BROKEN//' | $sed 's/.errors://' | $sed 's|__|/|g' | $sed "s|^$prefix||" | awk '{ print "broken\t" $0 }'
+			grep -s -a -H 'LOGTALK_TIMEOUT' -- *.errors | $sed 's/LOGTALK_TIMEOUT//' | $sed 's/.errors://' | $sed 's|__|/|g' | $sed "s|^$prefix||" | awk '{ print "timedout\t" $0 }'
+			grep -s -a -H 'LOGTALK_CRASH' -- *.errors | $sed 's/LOGTALK_CRASH//' | $sed 's/.errors://' | $sed 's|__|/|g' | $sed "s|^$prefix||" | awk '{ print "crashed\t" $0 }'
+		} | awk -v mode=count "$expected_failures_awk" kind=expected "$expected_failures" kind=actual -
+	)
+fi
+
+if [ "$unexpected_crashed" -gt 0 ] ; then
 	exit_code=7
-elif [ "$broken" -gt 0 ] ; then
+elif [ "$unexpected_broken" -gt 0 ] ; then
 	exit_code=5
-elif [ "$timeouts" -gt 0 ] ; then
+elif [ "$unexpected_timeouts" -gt 0 ] ; then
 	exit_code=3
-elif [ "$((failed - flaky))" -gt 0 ] ; then
+elif [ "$unexpected_failures" -gt 0 ] ; then
 	exit_code=1
 else
 	exit_code=0

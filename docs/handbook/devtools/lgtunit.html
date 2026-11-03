@@ -1475,7 +1475,11 @@ atom containing the sub-atom <code class="docutils literal notranslate"><span cl
 <p>The testing automation support outputs the text <code class="docutils literal notranslate"><span class="pre">[flaky]</span></code> when
 reporting failed flaky tests. Moreover, the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code>
 automation script will ignore failed flaky tests when setting its exit
-status.</p>
+status. It also accepts a <code class="docutils literal notranslate"><span class="pre">-k</span></code> option for passing a file listing
+expected test failures (plus broken, crashed, and timedout test sets)
+that are likewise ignored when setting its exit status. A file with the
+expected issues can be easily creating by simply copying the relevant
+output of the automation scripts.</p>
 </section>
 <section id="mocking">
 <h2>Mocking<a class="headerlink" href="#mocking" title="Link to this heading"></a></h2>

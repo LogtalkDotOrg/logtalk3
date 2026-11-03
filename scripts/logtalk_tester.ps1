@@ -45,6 +45,7 @@ param(
 	[String]$i,
 	[String]$g = "true",
 	[String]$r,
+	[String]$k,
 	[String]$testset,
 	[Switch]$w,
 	[Switch]$z,
@@ -56,7 +57,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
-	Write-Output "$myName 32.1"
+	Write-Output "$myName 33.0"
 }
 
 Function Format-Decimal {
@@ -453,7 +454,7 @@ Function Write-Usage-Help() {
 	Write-Output "The `"tester.sh`" file is sourced with all the parameters passed to the script."
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output "  $myName -p prolog [-o output] [-m mode] [-f format] [-d results] [-t timeout] [-j jobs] [-n driver] [-s prefix] [-b tracker] [-u url] [-c report] [-l level] [-e exclude] [-i options] [-g goal] [-r seed] [-w] [-z] [-a arguments]"
+	Write-Output "  $myName -p prolog [-o output] [-m mode] [-f format] [-d results] [-t timeout] [-j jobs] [-n driver] [-s prefix] [-b tracker] [-u url] [-c report] [-l level] [-e exclude] [-i options] [-g goal] [-r seed] [-k file] [-w] [-z] [-a arguments]"
 	Write-Output "  $myName -v"
 	Write-Output "  $myName -h"
 	Write-Output ""
@@ -483,6 +484,8 @@ Function Write-Usage-Help() {
 	Write-Output "  -i integration script command-line options (no default)"
 	Write-Output "  -g initialization goal (default is $initialization_goal)"
 	Write-Output "  -r random generator starting seed (no default)"
+	Write-Output "  -k file listing expected failed tests and broken, timedout, and crashed test sets"
+	Write-Output "     (expected issues ignored when computing the exit status; no default)"
 	Write-Output "  -w wipe default scratch directories (.lgt_tmp and lgt_tmp) once before running any test sets"
 	Write-Output "  -z audible completion notification (two chimes on exit 0, five otherwise; default is off)"
 	Write-Output "  -a arguments as an array (i.e., comma separated) to be passed to the tests (no default)"
@@ -716,6 +719,48 @@ Function Confirm-Parameters() {
 		Write-Usage-Help
 		Exit 1
 	}
+
+	if ($k -ne "") {
+		$expected_path = [System.IO.Path]::GetFullPath($k, $base.Path)
+		if (-not (Test-Path -LiteralPath $expected_path -PathType Leaf)) {
+			Write-Error "Error! Expected failures file not found or not readable: $k"
+			Write-Usage-Help
+			Exit 1
+		}
+		$script:expected_failures = [System.Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+		$section = ""
+		foreach ($entry in Get-Content -LiteralPath $expected_path) {
+			$entry = $entry.TrimEnd()
+			if ($entry -eq "" -or $entry -eq "%" -or $entry.StartsWith("#")) {
+				continue
+			}
+			if ($entry.StartsWith("%")) {
+				if ($entry -ceq "% Broken") {
+					$section = "broken"
+				} elseif ($entry -ceq "% Timedout") {
+					$section = "timedout"
+				} elseif ($entry -ceq "% Crashed") {
+					$section = "crashed"
+				} elseif ($entry -ceq "% Failed tests") {
+					$section = "failed"
+				} else {
+					Write-Error "Error! Unknown section header in expected failures file: $entry"
+					Write-Usage-Help
+					Exit 1
+				}
+				continue
+			}
+			if ($section -eq "") {
+				Write-Error "Error! Expected failures file entry before any section header: $entry"
+				Write-Usage-Help
+				Exit 1
+			}
+			if ($section -eq "failed" -and $entry.EndsWith(" [flaky]")) {
+				$entry = $entry.Substring(0, $entry.Length - 8)
+			}
+			[void]$script:expected_failures.Add("$section`t$entry")
+		}
+	}
 }
 
 ###################### here it starts ############################
@@ -734,6 +779,7 @@ $logtalk = "swilgt"
 $logtalk_option = "-g"
 $dot = ""
 $base = $pwd
+$expected_failures = $null
 
 $level = 999
 $exclude = ""
@@ -1213,15 +1259,53 @@ if ($o -eq "quiet") {
 	& $quiet_report
 }
 
+$unexpected = @{
+	crashed = $crashed
+	broken = $broken
+	timedout = $timeouts
+	failed = $failed - $flaky
+}
+if ($null -ne $expected_failures) {
+	$unexpected = @{ crashed = 0; broken = 0; timedout = 0; failed = 0 }
+	# entries must be generated exactly as printed in the report sections above
+	$actual = [System.Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+	Get-ChildItem -Path . -Filter *.totals |
+	Foreach-Object {
+		Get-Content -Path $_ |
+		Foreach-Object {
+			if ($_ -match '^failed' -and -not $_.EndsWith(' [flaky]')) {
+				$entry = (($_.split("`t")[1] + " - " + $_.split("`t")[2]) -replace $prefix, "").TrimEnd()
+				[void]$actual.Add("failed`t$entry")
+			}
+		}
+	}
+	$markers = [ordered]@{ broken = 'LOGTALK_BROKEN'; timedout = 'LOGTALK_TIMEOUT'; crashed = 'LOGTALK_CRASH' }
+	Get-ChildItem -Path . -Filter *.errors |
+	Foreach-Object {
+		$errors_file = $_
+		$entry = ((($errors_file.BaseName -replace '___', ':') -replace '__', '/') -replace $prefix, "").TrimEnd()
+		foreach ($kind in $markers.Keys) {
+			if (Select-String -Path $errors_file.FullName -Pattern $markers[$kind] -CaseSensitive -SimpleMatch -Quiet) {
+				[void]$actual.Add("$kind`t$entry")
+			}
+		}
+	}
+	foreach ($entry in $actual) {
+		if (-not $expected_failures.Contains($entry)) {
+			$unexpected[$entry.Split("`t", 2)[0]]++
+		}
+	}
+}
+
 Pop-Location
 
-if ($crashed -gt 0) {
+if ($unexpected.crashed -gt 0) {
 	$exit_code = 7
-} elseif ($broken -gt 0) {
+} elseif ($unexpected.broken -gt 0) {
 	$exit_code = 5
-} elseif ($timeouts -gt 0) {
+} elseif ($unexpected.timedout -gt 0) {
 	$exit_code = 3
-} elseif (($failed - $flaky) -gt 0) {
+} elseif ($unexpected.failed -gt 0) {
 	$exit_code = 1
 } else {
 	$exit_code = 0

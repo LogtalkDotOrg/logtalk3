@@ -384,6 +384,11 @@ for creating bug reports at Azure DevOps, Gitea, and Jira servers.
 
 * ADDED: Tests for the `issue_creator` tool.
 
+* ADDED: Support to the `logtalk_tester.sh` and `logtalk_tester.ps1` testing
+automation scripts for a `-k` option for passing a file listing expected
+failed tests and broken, timedout, and crashed test sets, which are ignored
+when computing the scripts exit status.
+
 * IMPROVED: The performance of the `code_metrics`, `dead_code_scanner`,
 `diagrams`, and `lgtdoc` tool tests.
 

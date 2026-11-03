@@ -1465,7 +1465,11 @@ atom containing the sub-atom ``flaky``.
 The testing automation support outputs the text ``[flaky]`` when
 reporting failed flaky tests. Moreover, the ``logtalk_tester``
 automation script will ignore failed flaky tests when setting its exit
-status.
+status. It also accepts a ``-k`` option for passing a file listing
+expected test failures (plus broken, crashed, and timedout test sets)
+that are likewise ignored when setting its exit status. A file with the
+expected issues can be easily creating by simply copying the relevant
+output of the automation scripts.
 
 Mocking
 -------
