@@ -372,6 +372,10 @@ setup against the lock file.
 * CHANGED: The `lgtunit` tool linter warning for misuse of `^^assertion/1-2`
 goals to print the original variable names.
 
+* CHANGED: The `logtalk_tester.sh` and `logtalk_tester.ps1` testing automation
+scripts handing of the `-w` option to wipe the default scratch directives once
+before running any test sets.
+
 * ADDED: Support to the `lgtunit` tool for exporting code coverage stats in
 the Sonar Generic Coverage XML format.
 

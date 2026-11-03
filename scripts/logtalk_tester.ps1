@@ -56,7 +56,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
-	Write-Output "$myName 30.0"
+	Write-Output "$myName 31.0"
 }
 
 Function Format-Decimal {
@@ -155,14 +155,6 @@ param(
 	$unit = (Split-Path -Path $path) -replace '\\', '/'
 	$unit_short = $unit -replace $prefix, ""
 	Push-Location "$unit"
-	if ($w -eq $true) {
-		if (Test-Path .\.lgt_tmp) {
-			Remove-Item -Path .\.lgt_tmp -Recurse -Force
-		}
-		if (Test-Path .\lgt_tmp) {
-			Remove-Item -Path .\lgt_tmp  -Recurse -Force
-		}
-	}
 	if ($o -eq "verbose") {
 		if (Test-Path -Path "$unit/VERSION.packs") {
 			$version_packs = Get-Content -Path "$unit/VERSION.packs"
@@ -491,8 +483,7 @@ Function Write-Usage-Help() {
 	Write-Output "  -i integration script command-line options (no default)"
 	Write-Output "  -g initialization goal (default is $initialization_goal)"
 	Write-Output "  -r random generator starting seed (no default)"
-	Write-Output "  -w wipe default scratch directories (./.lgt_tmp and ./lgt_tmp) before running a test set"
-	Write-Output "     (this option should not be used when running parallel processes that use the same test sets)"
+	Write-Output "  -w wipe default scratch directories (.lgt_tmp and lgt_tmp) once before running any test sets"
 	Write-Output "  -z audible completion notification (two chimes on exit 0, five otherwise; default is off)"
 	Write-Output "  -a arguments as an array (i.e., comma separated) to be passed to the tests (no default)"
 	Write-Output "  -v print version"
@@ -858,6 +849,22 @@ if ($testsets -eq 0) {
 		Write-Output "% 0 tests: 0 skipped, 0 passed, 0 failed"
 	}
 	Exit 0
+}
+
+# Single top-level wipe of scratch directories. Respects -l depth limit.
+if ($w -eq $true) {
+	$scratch_search = @{
+		Path = "$base/*"
+		Directory = $true
+		Recurse = $true
+		Force = $true
+	}
+	if ($l -ne "") {
+		$scratch_search.Depth = $level
+	}
+	Get-ChildItem @scratch_search |
+		Where-Object { $_.Name -eq ".lgt_tmp" -or $_.Name -eq "lgt_tmp" } |
+		Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
 }
 
 if ($max_jobs -eq 1) {

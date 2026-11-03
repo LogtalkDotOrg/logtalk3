@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on October 28, 2026
+##   Last updated on November 2, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -32,7 +32,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 37.0"
+	echo "$(basename "$0") 38.0"
 	exit 0
 }
 
@@ -216,10 +216,6 @@ run_testset() {
 	unit_basename=${unit_basename:-/}
 	unit_short=${unit#$prefix}
 	cd "$unit" || exit 1
-	if [ "$wipe" == 'true' ] ; then
-		rm -rf ./.lgt_tmp
-		rm -rf ./lgt_tmp
-	fi
 	if [ "$output" == 'verbose' ] ; then
 		if [ -f "$unit/VERSION.packs" ] ; then
 			echo -n "% $unit_short (pack version "
@@ -470,8 +466,7 @@ usage_help() {
 	echo "  -i integration script command-line options (no default)"
 	echo "  -g initialization goal (default is $initialization_goal)"
 	echo "  -r random generator starting seed (no default)"
-	echo "  -w wipe default scratch directories (./.lgt_tmp and ./lgt_tmp) before running a test set"
-	echo "     (this option should not be used when running parallel processes that use the same test sets)"
+	echo "  -w wipe default scratch directories (.lgt_tmp and lgt_tmp) once before running any test sets"
 	echo "  -z audible completion notification (two chimes on exit 0, five otherwise; default is off)"
 	echo "  -- arguments to be passed to the tests (no default)"
 	echo "  -h help"
@@ -824,6 +819,11 @@ if  [ "$testsets" -eq 0 ] ; then
 		echo "% 0 tests: 0 skipped, 0 passed, 0 failed"
 	fi
 	exit 0
+fi
+
+# Single top-level wipe of scratch directories. Respects -l depth limit.
+if [ "$wipe" == 'true' ] ; then
+	find -L "$base" $level -type d \( -name '.lgt_tmp' -o -name 'lgt_tmp' \) -prune -exec rm -rf {} + 2>/dev/null || true
 fi
 
 if [ "$jobs" -eq 1 ] ; then
