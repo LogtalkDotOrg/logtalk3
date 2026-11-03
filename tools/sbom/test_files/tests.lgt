@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-30,
+		date is 2026-11-03,
 		comment is 'Unit tests for the "sbom" tool.'
 	]).
 
@@ -399,7 +399,7 @@
 		sbom<<backend(Backend, _, BackendLicense, BackendWebsite),
 		Document = {
 			bomFormat-'CycloneDX',
-			specVersion-'1.6',
+			specVersion-'1.7',
 			serialNumber-SerialNumber,
 			version-1,
 			metadata-Metadata,
@@ -517,7 +517,7 @@
 		^^assertion(ground(JSON)),
 		JSON = {
 			bomFormat-'CycloneDX',
-			specVersion-'1.6',
+			specVersion-'1.7',
 			serialNumber-_,
 			version-1,
 			metadata-_,
@@ -525,7 +525,7 @@
 			components-_,
 			dependencies-_
 		},
-		^^file_path('cyclonedx-1.6.schema.json', Path),
+		^^file_path('cyclonedx-1.7.schema.json', Path),
 		json_schema_parse(file(Path), Schema),
 		json_schema_validate(Schema, JSON).
 
@@ -537,7 +537,7 @@
 		^^assertion(ground(Document)),
 		Document = {
 			bomFormat-'CycloneDX',
-			specVersion-'1.6',
+			specVersion-'1.7',
 			serialNumber-_,
 			version-1,
 			metadata-Metadata,
@@ -569,7 +569,7 @@
 		^^assertion(ground(Document)),
 		Document = {
 			bomFormat-'CycloneDX',
-			specVersion-'1.6',
+			specVersion-'1.7',
 			serialNumber-_,
 			version-1,
 			metadata-Metadata,
@@ -602,7 +602,7 @@
 		^^assertion(ground(Document)),
 		Document = {
 			bomFormat-'CycloneDX',
-			specVersion-'1.6',
+			specVersion-'1.7',
 			serialNumber-_,
 			version-1,
 			metadata-Metadata,
@@ -637,7 +637,7 @@
 		^^assertion(ground(Document)),
 		Document = {
 			bomFormat-'CycloneDX',
-			specVersion-'1.6',
+			specVersion-'1.7',
 			serialNumber-_,
 			version-1,
 			metadata-_,
@@ -707,7 +707,7 @@
 		^^assertion(ground(Document)),
 		Document = {
 			bomFormat-'CycloneDX',
-			specVersion-'1.6',
+			specVersion-'1.7',
 			serialNumber-_,
 			version-1,
 			metadata-{
@@ -814,7 +814,7 @@
 		^^assertion(ground(Document)),
 		Document = {
 			bomFormat-'CycloneDX',
-			specVersion-'1.6',
+			specVersion-'1.7',
 			serialNumber-_,
 			version-1,
 			metadata-{
@@ -936,7 +936,7 @@
 		^^assertion(ground(Document)),
 		Document = {
 			bomFormat-'CycloneDX',
-			specVersion-'1.6',
+			specVersion-'1.7',
 			serialNumber-_,
 			version-1,
 			metadata-{

@@ -699,11 +699,11 @@
             }
           },
           "snippetFromFile" : {
-            "description" : "SPDX ID for File.  File containing the SPDX element (e.g., the file contaning a snippet).",
+            "description" : "SPDX ID for File.  File containing the SPDX element (e.g. the file contaning a snippet).",
             "type" : "string"
           }
         },
-        "required" : [ "SPDXID", "name", "ranges", "snippetFromFile" ],
+        "required" : [ "SPDXID", "ranges", "snippetFromFile" ],
         "additionalProperties" : false
       }
     },

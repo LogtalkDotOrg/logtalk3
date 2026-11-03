@@ -408,6 +408,11 @@ for reproducible ordering across locales.
 automation scripts to print the fastest and slowest test set names and
 execution times plus the mean and median test set running times.
 
+* UPDATED: The `sbom` tool to export CycloneDX 1.7 documents using schemas
+from the official 1.7.2 release and SPDX License List 3.29.0. Refreshed the
+SPDX 2.3 schema and patched license descriptions for compatibility with
+backends without Unicode support. Updated tests, examples, and documentation.
+
 * FIXED: The `lgtunit` tool XML, Cobertura, and LCOV code coverage exporters
 to correctly report source locations for predicates defined in included files.
 Also fixed missing element declarations in the XML code coverage report DTD.

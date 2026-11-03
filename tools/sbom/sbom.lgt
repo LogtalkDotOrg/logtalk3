@@ -23,16 +23,16 @@
 	imports(options)).
 
 	:- info([
-		version is 1:3:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-30,
+		date is 2026-11-03,
 		comment is 'This tool generates a Software Bill of Materials (SBOM) for an application.'
 	]).
 
 	:- public(document/2).
 	:- mode(document(-compound, +list(compound)), one).
 	:- info(document/2, [
-		comment is 'Returns an SPDX 2.3 or a CycloneDX 1.6 JSON term describing the currently loaded application using the given options. The JSON term represents objects using curly terms, pairs using a dash, and strings using atoms.',
+		comment is 'Returns an SPDX 2.3 or a CycloneDX 1.7 JSON term describing the currently loaded application using the given options. The JSON term represents objects using curly terms, pairs using a dash, and strings using atoms.',
 		argnames is ['Document', 'Options']
 	]).
 
@@ -46,7 +46,7 @@
 	:- public((export)/2).
 	:- mode(export(++compound, +list(compound)), one).
 	:- info((export)/2, [
-		comment is 'Exports an SPDX 2.3 or a CycloneDX 1.6 JSON document describing the currently loaded application to the specified sink using the given options. Valid sinks are ``codes(List)``, ``stream(Stream)``, ``file(Path)``, ``chars(List)``, and ``atom(Atom)``.',
+		comment is 'Exports an SPDX 2.3 or a CycloneDX 1.7 JSON document describing the currently loaded application to the specified sink using the given options. Valid sinks are ``codes(List)``, ``stream(Stream)``, ``file(Path)``, ``chars(List)``, and ``atom(Atom)``.',
 		argnames is ['Sink', 'Options']
 	]).
 
@@ -171,7 +171,7 @@
 		cyclonedx_dependencies_json([ApplicationPackage, LogtalkPackage, BackendPackage| PackPackages], PackRecords, Dependencies),
 		Document = {
 			bomFormat-'CycloneDX',
-			specVersion-'1.6',
+			specVersion-'1.7',
 			serialNumber-SerialNumber,
 			version-1,
 			metadata-Metadata,
@@ -1040,7 +1040,7 @@
 	schema_path(cdx, Path) :-
 		object_property(sbom, file(File)),
 		decompose_file_name(File, Directory, _),
-		path_concat(Directory, 'test_files/cyclonedx-1.6.schema.json', Path).
+		path_concat(Directory, 'test_files/cyclonedx-1.7.schema.json', Path).
 	schema_path(cdx_spdx_license, Path) :-
 		object_property(sbom, file(File)),
 		decompose_file_name(File, Directory, _),

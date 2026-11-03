@@ -23,11 +23,16 @@ ________________________________________________________________________
 
 This tool generates a Software Bill of Materials (SBOM) for an application,
 exported as a JSON file in either the ISO/IEC 5962:2021 standard SPDX 2.3
-JSON format or the CycloneDX 1.6 JSON format:
+JSON format or the CycloneDX 1.7 JSON format:
 
 https://www.iso.org/standard/81870.html
 
 https://cyclonedx.org/specification/overview/
+
+The bundled CycloneDX schemas are from the official 1.7.2 release and include
+SPDX License List 3.29.0. The bundled SPDX document schema is the latest
+official revision for the supported 2.3 format. SPDX 3.0.1 uses a different
+document model and is not supported by this tool.
 
 
 API documentation
@@ -358,10 +363,12 @@ See the `sbom-example.spdx.json` file for a representative SPDX export.
 See the `sbom-example.cdx.json` file for a representative CycloneDX export.
 
 
-Known issues
-------------
+Schema portability
+------------------
 
-The ECLiPSe and GNU Prolog backends fail several `sbom` tests and cannot be
-used for CycloneDX exports. The root cause is that both backends are limited
-to the US-ASCII charset, which prevents processing the SPDX/CycloneDX schema
-data required for CycloneDX license validation and export validation.
+The bundled CycloneDX SPDX license schema replaces Unicode en-dash escapes
+(`\u2013`) with ASCII hyphens in seven license descriptions so that it can be
+parsed on backends without Unicode support, including ECLiPSe and GNU Prolog.
+License identifiers and validation rules are unchanged. The CycloneDX schema
+also uses the local license schema filename `spdx.schema.json.cdx` to avoid
+confusion with the SPDX document schema.

@@ -94,7 +94,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#schema-portability">Schema portability</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="tool_diagnostics.html"><code class="docutils literal notranslate"><span class="pre">tool_diagnostics</span></code></a></li>
@@ -146,9 +146,13 @@
 <span id="library-sbom"></span><h1><code class="docutils literal notranslate"><span class="pre">sbom</span></code><a class="headerlink" href="#sbom" title="Link to this heading"></a></h1>
 <p>This tool generates a Software Bill of Materials (SBOM) for an
 application, exported as a JSON file in either the ISO/IEC 5962:2021
-standard SPDX 2.3 JSON format or the CycloneDX 1.6 JSON format:</p>
+standard SPDX 2.3 JSON format or the CycloneDX 1.7 JSON format:</p>
 <p><a class="reference external" href="https://www.iso.org/standard/81870.html">https://www.iso.org/standard/81870.html</a></p>
 <p><a class="reference external" href="https://cyclonedx.org/specification/overview/">https://cyclonedx.org/specification/overview/</a></p>
+<p>The bundled CycloneDX schemas are from the official 1.7.2 release and
+include SPDX License List 3.29.0. The bundled SPDX document schema is
+the latest official revision for the supported 2.3 format. SPDX 3.0.1
+uses a different document model and is not supported by this tool.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>This tool API documentation is available at:</p>
@@ -479,13 +483,15 @@ extension for CycloneDX exports.</p>
 export. See the <code class="docutils literal notranslate"><span class="pre">sbom-example.cdx.json</span></code> file for a representative
 CycloneDX export.</p>
 </section>
-<section id="known-issues">
-<h2>Known issues<a class="headerlink" href="#known-issues" title="Link to this heading"></a></h2>
-<p>The ECLiPSe and GNU Prolog backends fail several <code class="docutils literal notranslate"><span class="pre">sbom</span></code> tests and
-cannot be used for CycloneDX exports. The root cause is that both
-backends are limited to the US-ASCII charset, which prevents processing
-the SPDX/CycloneDX schema data required for CycloneDX license validation
-and export validation.</p>
+<section id="schema-portability">
+<h2>Schema portability<a class="headerlink" href="#schema-portability" title="Link to this heading"></a></h2>
+<p>The bundled CycloneDX SPDX license schema replaces Unicode en-dash
+escapes (<code class="docutils literal notranslate"><span class="pre">\u2013</span></code>) with ASCII hyphens in seven license descriptions so
+that it can be parsed on backends without Unicode support, including
+ECLiPSe and GNU Prolog. License identifiers and validation rules are
+unchanged. The CycloneDX schema also uses the local license schema
+filename <code class="docutils literal notranslate"><span class="pre">spdx.schema.json.cdx</span></code> to avoid confusion with the SPDX
+document schema.</p>
 </section>
 </section>
 
