@@ -56,7 +56,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
-	Write-Output "$myName 32.0"
+	Write-Output "$myName 32.1"
 }
 
 Function Format-Decimal {
@@ -1049,6 +1049,9 @@ $durations = [System.Collections.Generic.List[double]]::new()
 Get-ChildItem -Path . -Filter *.totals |
 Foreach-Object {
 	$totals_file = $_
+	# a test set may run several test objects or a parametric test object;
+	# its duration is the sum of their durations
+	$duration = $null
 	Get-Content -Path $totals_file |
 	Select-String -Pattern '^object' -CaseSensitive |
 	ForEach-Object {
@@ -1058,22 +1061,22 @@ Foreach-Object {
 		$failed =  $failed  + [int]$line[5]
 		$flaky =   $flaky   + [int]$line[6]
 		if ($line.Length -gt 7 -and $line[7] -ne "") {
-			$duration = [double]$line[7]
-			$durations.Add($duration)
-			if ($null -eq $min_duration -or $duration -le $min_duration) {
-				$min_duration = $duration
-				# recover test set path from .totals basename (matches how names are derived when writing logs)
-				$unit_name = $totals_file.BaseName
-				$unit_name = ($unit_name -replace '___', ':') -replace '__', '/'
-				$fastest_unit = $unit_name -replace [regex]::Escape($prefix), ""
-			}
-			if ($null -eq $max_duration -or $duration -ge $max_duration) {
-				$max_duration = $duration
-				# recover test set path from .totals basename (matches how names are derived when writing logs)
-				$unit_name = $totals_file.BaseName
-				$unit_name = ($unit_name -replace '___', ':') -replace '__', '/'
-				$slowest_unit = $unit_name -replace [regex]::Escape($prefix), ""
-			}
+			$duration = $duration + [double]$line[7]
+		}
+	}
+	if ($null -ne $duration) {
+		$durations.Add($duration)
+		# recover test set path from .totals basename (matches how names are derived when writing logs)
+		$unit_name = $totals_file.BaseName
+		$unit_name = ($unit_name -replace '___', ':') -replace '__', '/'
+		$unit_name = $unit_name -replace [regex]::Escape($prefix), ""
+		if ($null -eq $min_duration -or $duration -le $min_duration) {
+			$min_duration = $duration
+			$fastest_unit = $unit_name
+		}
+		if ($null -eq $max_duration -or $duration -ge $max_duration) {
+			$max_duration = $duration
+			$slowest_unit = $unit_name
 		}
 	}
 }

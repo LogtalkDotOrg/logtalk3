@@ -32,7 +32,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 39.0"
+	echo "$(basename "$0") 39.1"
 	exit 0
 }
 
@@ -960,24 +960,35 @@ while read -r line ; do
 	passed=$((passed+row_passed))
 	failed=$((failed+row_failed))
 	flaky=$((flaky+row_flaky))
-	if [ -n "$duration" ] ; then
-		echo "$duration" >> "$durations_file"
-		if [ -z "$min_duration" ] || decimal_le "$duration" "$min_duration" ; then
-			min_duration="$duration"
-			unit_name=${file_part##*/}
-			unit_name=${unit_name%.totals}
-			# restore path separators used when deriving the results file name
-			unit_name=${unit_name//__//}
-			fastest_unit=$(echo "$unit_name" | $sed "s|^$prefix||")
-		fi
-		if [ -z "$max_duration" ] || decimal_le "$max_duration" "$duration" ; then
-			max_duration="$duration"
-			unit_name=${file_part##*/}
-			unit_name=${unit_name%.totals}
-			# restore path separators used when deriving the results file name
-			unit_name=${unit_name//__//}
-			slowest_unit=$(echo "$unit_name" | $sed "s|^$prefix||")
-		fi
+done < "$temp_file"
+# a test set may run several test objects or a parametric test object;
+# its duration is the sum of their durations
+awk -F'\t' '
+	$1 == "object" && $8 != "" {
+		if (!(FILENAME in sum)) order[++n] = FILENAME
+		sum[FILENAME] += $8
+	}
+	END {
+		for (i = 1; i <= n; i++) printf "%.9f\t%s\n", sum[order[i]], order[i]
+	}
+' ./*.totals > "$temp_file" 2>/dev/null
+while IFS=$'\t' read -r duration file_part ; do
+	echo "$duration" >> "$durations_file"
+	if [ -z "$min_duration" ] || decimal_le "$duration" "$min_duration" ; then
+		min_duration="$duration"
+		unit_name=${file_part##*/}
+		unit_name=${unit_name%.totals}
+		# restore path separators used when deriving the results file name
+		unit_name=${unit_name//__//}
+		fastest_unit=$(echo "$unit_name" | $sed "s|^$prefix||")
+	fi
+	if [ -z "$max_duration" ] || decimal_le "$max_duration" "$duration" ; then
+		max_duration="$duration"
+		unit_name=${file_part##*/}
+		unit_name=${unit_name%.totals}
+		# restore path separators used when deriving the results file name
+		unit_name=${unit_name//__//}
+		slowest_unit=$(echo "$unit_name" | $sed "s|^$prefix||")
 	fi
 done < "$temp_file"
 rm -f "$temp_file"
@@ -986,7 +997,7 @@ total=$((skipped+passed+failed))
 mean_duration=""
 median_duration=""
 if [ -s "$durations_file" ] ; then
-	# mean and median of collected test-set (object) wall times
+	# mean and median of collected test-set wall times
 	read -r mean_duration median_duration < <(awk '
 		{
 			sum += $1
