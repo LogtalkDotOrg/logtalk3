@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on November 2, 2026
+##   Last updated on November 3, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -56,7 +56,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
-	Write-Output "$myName 31.0"
+	Write-Output "$myName 32.0"
 }
 
 Function Format-Decimal {
@@ -840,7 +840,23 @@ if ($exclude -ne "") {
 	}
 }
 
-$driver_files = $driver_files | Sort-Object -Property FullName
+$sorted_driver_files = [System.Collections.Generic.List[System.IO.FileSystemInfo]]::new()
+foreach ($driver_file in $driver_files) {
+	$sorted_driver_files.Add($driver_file)
+}
+$sorted_driver_files.Sort([System.Comparison[System.IO.FileSystemInfo]]{
+	param($left, $right)
+	$comparison = [StringComparer]::Ordinal.Compare($left.FullName, $right.FullName)
+	if ($comparison -ne 0) {
+		return $comparison
+	}
+	$comparison = [StringComparer]::Ordinal.Compare($left.Name, $right.Name)
+	if ($comparison -ne 0) {
+		return $comparison
+	}
+	return [StringComparer]::Ordinal.Compare($left.Extension, $right.Extension)
+})
+$driver_files = $sorted_driver_files.ToArray()
 $testsets = ($driver_files | Measure-Object).Count
 
 if ($testsets -eq 0) {

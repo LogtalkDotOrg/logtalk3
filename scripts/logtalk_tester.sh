@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on November 2, 2026
+##   Last updated on November 3, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -32,7 +32,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 38.0"
+	echo "$(basename "$0") 39.0"
 	exit 0
 }
 
@@ -782,25 +782,25 @@ declare drivers_file
 declare testsets
 if [ "$exclude" == "" ] ; then
 	drivers_file=$(mktemp)
-	find -L "$base" $level -type f \( -name "$driver.lgt" -or -name "$driver.logtalk" \) | LC_ALL=C sort > "$drivers_file"
+	find -L "$base" $level -type f \( -name "$driver.lgt" -or -name "$driver.logtalk" \) -print0 | LC_ALL=C sort -z > "$drivers_file"
 	find_exit=$?
 elif [ "$include_only" == "true" ] ; then
 	if [ "$operating_system" == "Darwin" ] ; then
 		drivers_file=$(mktemp)
-		find -L -E "$base" $level -type f -regex "$exclude" \( -name "$driver.lgt" -or -name "$driver.logtalk" \) | LC_ALL=C sort > "$drivers_file"
+		find -L -E "$base" $level -type f -regex "$exclude" \( -name "$driver.lgt" -or -name "$driver.logtalk" \) -print0 | LC_ALL=C sort -z > "$drivers_file"
 		find_exit=$?
 	else
 		drivers_file=$(mktemp)
-		find -L "$base" $level -type f -regextype posix-extended -regex "$exclude" \( -name "$driver.lgt" -or -name "$driver.logtalk" \) | LC_ALL=C sort > "$drivers_file"
+		find -L "$base" $level -type f -regextype posix-extended -regex "$exclude" \( -name "$driver.lgt" -or -name "$driver.logtalk" \) -print0 | LC_ALL=C sort -z > "$drivers_file"
 		find_exit=$?
 	fi
 elif [ "$operating_system" == "Darwin" ] ; then
 	drivers_file=$(mktemp)
-	find -L -E "$base" $level -type f -not -regex "$exclude" \( -name "$driver.lgt" -or -name "$driver.logtalk" \) | LC_ALL=C sort > "$drivers_file"
+	find -L -E "$base" $level -type f -not -regex "$exclude" \( -name "$driver.lgt" -or -name "$driver.logtalk" \) -print0 | LC_ALL=C sort -z > "$drivers_file"
 	find_exit=$?
 else
 	drivers_file=$(mktemp)
-	find -L "$base" $level -type f -regextype posix-extended -not -regex "$exclude" \( -name "$driver.lgt" -or -name "$driver.logtalk" \) | LC_ALL=C sort > "$drivers_file"
+	find -L "$base" $level -type f -regextype posix-extended -not -regex "$exclude" \( -name "$driver.lgt" -or -name "$driver.logtalk" \) -print0 | LC_ALL=C sort -z > "$drivers_file"
 	find_exit=$?
 fi
 
@@ -810,7 +810,7 @@ if [ "$find_exit" -gt 0 ] ; then
 	exit 11
 fi
 
-testsets=$(wc -l < "$drivers_file" | tr -d ' ')
+testsets=$(tr -cd '\0' < "$drivers_file" | wc -c | tr -d ' ')
 
 if  [ "$testsets" -eq 0 ] ; then
 	rm -f "$drivers_file"
@@ -828,13 +828,13 @@ fi
 
 if [ "$jobs" -eq 1 ] ; then
 	if [ "$output" == 'verbose' ] ; then
-		while read -r file && [ "$file" != "" ]; do
+		while IFS= read -r -d '' file; do
 			run_testset "$file"
 			echo "%"
 		done < "$drivers_file"
 	elif [ "$output" == 'minimal' ] ; then
 		counter=1
-		while read -r file && [ "$file" != "" ]; do
+		while IFS= read -r -d '' file; do
 			echo -ne "% Running $testsets test sets: "
 			echo -ne "$counter"'\r'
 			run_testset "$file"
@@ -842,7 +842,7 @@ if [ "$jobs" -eq 1 ] ; then
 		done < "$drivers_file"
 		echo
 	else
-		while read -r file && [ "$file" != "" ]; do
+		while IFS= read -r -d '' file; do
 			run_testset "$file"
 		done < "$drivers_file"
 	fi
@@ -886,7 +886,7 @@ else
 		return $any_reaped
 	}
 	counter=1
-	while read -r file && [ "$file" != "" ]; do
+	while IFS= read -r -d '' file; do
 		unit=${file%/*}
 		unit=${unit:-/}
 		name=${unit////__}
