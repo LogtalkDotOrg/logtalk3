@@ -57,7 +57,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
-	Write-Output "$myName 33.0"
+	Write-Output "$myName 34.0"
 }
 
 Function Format-Decimal {
@@ -1034,8 +1034,25 @@ if ($max_jobs -eq 1) {
 			$console_file = "$results/$name.console"
 			$error_file = "$results/$name.console.err"
 			$arguments = @($worker_arguments + @('-testset', $_.FullName))
-			$argument_string = ConvertTo-ArgumentString -Arguments $arguments
-			$process = Start-Process -FilePath $pwsh_executable -ArgumentList $argument_string -NoNewWindow -RedirectStandardOutput $console_file -RedirectStandardError $error_file -RedirectStandardInput $stdin_null_file -PassThru
+			if ($o -eq 'verbose') {
+				$argument_string = ConvertTo-ArgumentString -Arguments $arguments
+				$process = Start-Process -FilePath $pwsh_executable -ArgumentList $argument_string -NoNewWindow -RedirectStandardOutput $console_file -RedirectStandardError $error_file -RedirectStandardInput $stdin_null_file -PassThru
+			} else {
+				$psi = [System.Diagnostics.ProcessStartInfo]::new($pwsh_executable)
+				$psi.UseShellExecute = $false
+				$psi.RedirectStandardInput = $true
+				$psi.RedirectStandardOutput = $true
+				$psi.RedirectStandardError = $true
+				$psi.WorkingDirectory = (Get-Location -PSProvider FileSystem).ProviderPath
+				foreach ($argument in $arguments) {
+					$psi.ArgumentList.Add([string]$argument)
+				}
+				$process = [System.Diagnostics.Process]::Start($psi)
+				$process.StandardInput.Close()
+				# without event handlers, the asynchronously read output is discarded
+				$process.BeginOutputReadLine()
+				$process.BeginErrorReadLine()
+			}
 			$workers += [PSCustomObject]@{ Process = $process; Name = $name; Done = $false }
 			$counter++
 		}

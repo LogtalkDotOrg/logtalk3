@@ -32,7 +32,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 40.0"
+	echo "$(basename "$0") 41.0"
 	exit 0
 }
 
@@ -925,11 +925,13 @@ else
 					fi
 				fi
 
-				if [ "$output" == 'verbose' ] && [ -f "$results/${job_names[$i]}.console" ] ; then
-					cat "$results/${job_names[$i]}.console"
-					echo "%"
+				if [ "$output" == 'verbose' ] ; then
+					if [ -f "$results/${job_names[$i]}.console" ] ; then
+						cat "$results/${job_names[$i]}.console"
+						echo "%"
+						rm -f "$results/${job_names[$i]}.console"
+					fi
 				fi
-				rm -f "$results/${job_names[$i]}.console"
 
 				job_pids[$i]=""
 				((completed++))
@@ -962,7 +964,11 @@ else
 			echo -ne "% Running $testsets test sets: "
 			echo -ne "$counter"'\r'
 		fi
-		(run_testset "$file") > "$results/$name.console" 2>&1 &
+		if [ "$output" == 'verbose' ] ; then
+			(run_testset "$file") > "$results/$name.console" 2>&1 &
+		else
+			(run_testset "$file") > /dev/null 2>&1 &
+		fi
 		job_pids+=("$!")
 		job_names+=("$name")
 		((active_jobs++))
