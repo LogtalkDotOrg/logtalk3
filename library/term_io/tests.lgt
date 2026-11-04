@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2022-10-04,
+		date is 2026-11-04,
 		comment is 'Unit tests for the "term_io" library.'
 	]).
 
@@ -162,6 +162,9 @@
 		read_term_from_chars(Tail1, Term2, Tail2, []),
 		read_term_from_chars(Tail2, Term3, Tail3, []).
 
+	test(read_term_from_chars_4_03, true(r(Term, Tail) == r(end_of_file, []))) :-
+		read_term_from_chars([' ',' ','\n'], Term, Tail, []).
+
 	% read_term_from_codes/3 tests
 
 	test(read_term_from_codes_3_01, true(var(Term))) :-
@@ -231,6 +234,9 @@
 		read_term_from_codes(Codes, Term1, Tail1, []),
 		read_term_from_codes(Tail1, Term2, Tail2, []),
 		read_term_from_codes(Tail2, Term3, Tail3, []).
+
+	test(read_term_from_codes_4_03, true(r(Term, Tail) == r(end_of_file, []))) :-
+		read_term_from_codes([32,32,10], Term, Tail, []).
 
 	% write_term_to_atom/3 tests
 

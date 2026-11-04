@@ -353,6 +353,10 @@ algorithm limitations.
 outputting the plus sign when writing floats in scientific notation. Thanks
 to Andrew Davison for the bug report and patch.
 
+* FIXED: bug in the `term_io` library `read_term_from_chars/4` and
+`read_term_from_codes/4` predicates with backends using as default the
+`eof_action(error)` stream option.
+
 * FIXED: The `text_vectorization` library to allow for repeated options when
 validating vectorizer terms (leftmost options always take precedence).
 

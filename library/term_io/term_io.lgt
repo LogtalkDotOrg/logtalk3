@@ -23,9 +23,9 @@
 	implements(term_io_protocol)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:3:1,
 		author is 'Paulo Moura',
-		date is 2023-11-14,
+		date is 2026-11-04,
 		comment is 'Term input/output from/to atom, chars, and codes.'
 	]).
 
@@ -89,7 +89,7 @@
 			open(Path, write, Output),
 			put_chars_raw(Chars, Output),
 			close(Output),
-			open(Path, read, Input),
+			open(Path, read, Input, [eof_action(eof_code)]),
 			catch(read_term(Input, Term, Options), Error, (close(Input),throw(Error))),
 			get_chars(Input, Tail, []),
 			close(Input)
@@ -115,7 +115,7 @@
 			open(Path, write, Output),
 			put_codes_raw(Codes, Output),
 			close(Output),
-			open(Path, read, Input),
+			open(Path, read, Input, [eof_action(eof_code)]),
 			catch(read_term(Input, Term, Options), Error, (close(Input),throw(Error))),
 			get_codes(Input, Tail, []),
 			close(Input)

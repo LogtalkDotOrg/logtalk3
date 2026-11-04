@@ -19,11 +19,22 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% to avoid problems with backend Prolog compilers such as ECLiPSe where
+% reloading a file defining clauses for a multifile predicate results in
+% the duplication of the clauses, below we load the required libraries
+% for the "lgtunit" tool separately so that we can load the "term_io"
+% library under testing in debug mode
+
 :- initialization((
 	set_logtalk_flag(report, warnings),
-	logtalk_load(lgtunit(loader)),
+	logtalk_load(arbitrary(loader)),
+	logtalk_load(options(loader)),
 	logtalk_load(os(loader)),
+	logtalk_load(random(loader)),
+	logtalk_load(tool_diagnostics(loader)),
+	logtalk_load(tutor(tutor_explanations), [optimize(on)]),
 	logtalk_load([term_io_protocol, term_io], [debug(on), source_data(on)]),
+	logtalk_load([lgtunit(lgtunit_messages), lgtunit(lgtunit)], [optimize(on)]),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
 )).
