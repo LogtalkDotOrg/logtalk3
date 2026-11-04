@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 3:14:0,
+		version is 3:15:0,
 		author is 'Paulo Moura',
-		date is 2026-03-14,
+		date is 2026-11-04,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -125,6 +125,7 @@
 	backend(ji,      'JIProlog').
 	backend(quintus, 'Quintus Prolog').
 	backend(sicstus, 'SICStus Prolog').
+	backend(shumway, 'Shumway Prolog').
 	backend(swi,     'SWI-Prolog').
 	backend(tau,     'Tau Prolog').
 	backend(trealla, 'Trealla Prolog').
