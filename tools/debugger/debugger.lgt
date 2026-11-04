@@ -23,9 +23,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 8:0:1,
+		version is 8:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-07,
+		date is 2026-11-04,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -1044,7 +1044,7 @@
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		(Dialect == b; Dialect == swi; Dialect == tau; Dialect == trealla; Dialect == yap)
+		(Dialect == b; Dialect == shumway; Dialect == swi; Dialect == tau; Dialect == trealla; Dialect == yap)
 	)).
 
 		call_goal(TGoal, Deterministic) :-
