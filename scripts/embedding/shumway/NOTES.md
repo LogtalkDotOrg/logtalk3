@@ -30,8 +30,9 @@ The following scripts are provided:
 
 Both scripts create a `logtalk.pl` file with the Logtalk compiler and
 runtime and an optional `application.pl` file for an application plus
-an optional application startup goal. For applications, an executable
-is created.
+an optional application startup goal. Self-contained executables are
+also created for the application and for a new top-level that includes
+Logtalk.
 
 Usage
 -----

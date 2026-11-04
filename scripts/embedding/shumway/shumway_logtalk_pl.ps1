@@ -2,10 +2,11 @@
 #############################################################################
 ##
 ##   This script creates a Shumway Prolog logtalk.pl file with the Logtalk
-##   compiler and runtime and optionally an application.pl file with
-##   a Logtalk application
+##   compiler and runtime and optionally an application.pl file with a
+##   Logtalk application; creates also application and logtalk self-contained
+##   executables
 ##
-##   Last updated on November 2, 2026
+##   Last updated on November 4, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   Copyright 2022-2026 Paulo Moura <pmoura@logtalk.org>
@@ -333,11 +334,13 @@ if ($l -ne "") {
 	Add-Content -Path "$d/$name.pl" -Value ":- include(application)."
 	shumway-compile --release "$d/$name.pl"
 	Set-Location "$d"
-	shumway-link --strip --consult -o "$name.shum" --exe "$name" --goal "$goal" "$name.pl"
+	shumway-link --strip --allow-undefined --consult --library -o "$name.shum" "$name.pl"
+	shumway --save-toplevel "$name" --self-contained --goal "$goal" -t halt "$name.shum"
 	Pop-Location
 } else {
 	Set-Location "$d"
 	shumway-link --strip --allow-undefined --consult --library -o logtalk.shum logtalk.pl
+	shumway --save-toplevel logtalk --self-contained --goal "'$lgt_print_message'(banner, banner), '$lgt_print_message'(comment(settings), default_flags), '$lgt_report_settings_file'(Result), '$lgt_print_message'(comment(help), help)" logtalk.shum
 	Pop-Location
 }
 

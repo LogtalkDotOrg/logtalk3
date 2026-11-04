@@ -102,7 +102,7 @@ $ eclipse -L iso -t user -f loader.eco
 
 $ cd "$LOGTALKHOME/scripts/embedding/shumway/"
 $ ./shumway_logtalk_pl.sh -c -d "$HOME"/collect -s none
-$ shumway ~/collect/logtalk.shum
+$ ~/collect/logtalk
 
 
 % create Shumway Prolog executable for the "wumpus" text adventure example:
