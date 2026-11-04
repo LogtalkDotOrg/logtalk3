@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on November 3, 2026
+##   Last updated on November 4, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -32,7 +32,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 41.0"
+	echo "$(basename "$0") 42.0"
 	exit 0
 }
 
@@ -126,63 +126,6 @@ format_decimal() {
     local places=$2
     LC_NUMERIC=C
 	printf "%.${places}f" "$num"
-}
-
-# Return the decimal magnitude and significand in the named output variables.
-# Scientific notation is accepted (e.g. "3.45e-05").
-decimal_components() {
-	local number="$1" mantissa exponent integer fraction digits magnitude
-	if [[ "$number" =~ ^([0-9]+\.?[0-9]*|\.[0-9]+)([eE]([+-]?[0-9]+))?$ ]] ; then
-		mantissa=${BASH_REMATCH[1]}
-		exponent=${BASH_REMATCH[3]:-0}
-	else
-		return 1
-	fi
-	if [[ "$mantissa" == *.* ]] ; then
-		integer=${mantissa%%.*}
-		fraction=${mantissa#*.}
-	else
-		integer=$mantissa
-		fraction=""
-	fi
-	digits=${integer}${fraction}
-	while [ "${#digits}" -gt 1 ] && [[ "$digits" == 0* ]] ; do
-		digits=${digits#0}
-	done
-	if [ "$digits" == "0" ] ; then
-		printf -v "$2" '%s' 0
-		printf -v "$3" '%s' 0
-		return
-	fi
-	case "$exponent" in
-		-*) exponent=$((-10#${exponent#-})) ;;
-		+*) exponent=$((10#${exponent#+})) ;;
-		*)  exponent=$((10#$exponent)) ;;
-	esac
-	magnitude=$((${#digits} + exponent - ${#fraction}))
-	printf -v "$2" '%s' "$magnitude"
-	printf -v "$3" '%s' "$digits"
-}
-
-# Compare two non-negative decimal numbers without shelling out to awk/bc.
-# Succeeds (returns 0) when num1 <= num2.
-decimal_le() {
-	local a_magnitude a_digits b_magnitude b_digits length
-	decimal_components "$1" a_magnitude a_digits || return 1
-	decimal_components "$2" b_magnitude b_digits || return 1
-	if [ "$a_digits" == "0" ] ; then
-		return 0
-	elif [ "$b_digits" == "0" ] ; then
-		return 1
-	elif [ "$a_magnitude" -ne "$b_magnitude" ] ; then
-		[ "$a_magnitude" -lt "$b_magnitude" ]
-		return
-	fi
-	length=${#a_digits}
-	[ ${#b_digits} -gt "$length" ] && length=${#b_digits}
-	while [ ${#a_digits} -lt "$length" ] ; do a_digits="${a_digits}0" ; done
-	while [ ${#b_digits} -lt "$length" ] ; do b_digits="${b_digits}0" ; done
-	[[ "$a_digits" == "$b_digits" || "$a_digits" < "$b_digits" ]]
 }
 
 # with mode=count, counts the "kind<TAB>entry" actual lines not listed in the expected failures file
@@ -1005,97 +948,56 @@ read -r testsetskipped timeouts crashed broken < <(awk '
 ' kind=results <(cat -- *.results) kind=errors <(cat -- *.errors))
 testsetruns=$((testsets-testsetskipped-timeouts-crashed-broken))
 
-skipped=0
-passed=0
-failed=0
-flaky=0
-min_duration=""
-max_duration=""
-fastest_unit=""
-slowest_unit=""
-durations_file=$(mktemp)
-temp_file=$(mktemp)
-# Include source filename so we can recover the test set path from the .totals basename
-grep -s -H '^object' ./*.totals > "$temp_file" 2>/dev/null || true
-while read -r line ; do
-	# line format: ./name.totals:object\tObject\tTotal\tSkipped\tPassed\tFailed\tFlaky\tWallTime
-	file_part=${line%%:*}
-	data_part=${line#*:}
-	IFS=$'\t' read -r row_kind row_object row_total row_skipped row_passed row_failed row_flaky duration row_extra <<< "$data_part"
-	skipped=$((skipped+row_skipped))
-	passed=$((passed+row_passed))
-	failed=$((failed+row_failed))
-	flaky=$((flaky+row_flaky))
-done < "$temp_file"
-# a test set may run several test objects or a parametric test object;
-# its duration is the sum of their durations
-awk -F'\t' '
-	$1 == "object" && $8 != "" {
-		if (!(FILENAME in sum)) order[++n] = FILENAME
-		sum[FILENAME] += $8
-	}
-	END {
-		for (i = 1; i <= n; i++) printf "%.9f\t%s\n", sum[order[i]], order[i]
-	}
-' ./*.totals > "$temp_file" 2>/dev/null
-while IFS=$'\t' read -r duration file_part ; do
-	echo "$duration" >> "$durations_file"
-	if [ -z "$min_duration" ] || decimal_le "$duration" "$min_duration" ; then
-		min_duration="$duration"
-		unit_name=${file_part##*/}
-		unit_name=${unit_name%.totals}
-		# restore path separators used when deriving the results file name
-		unit_name=${unit_name//__//}
-		fastest_unit=$(echo "$unit_name" | $sed "s|^$prefix||")
-	fi
-	if [ -z "$max_duration" ] || decimal_le "$max_duration" "$duration" ; then
-		max_duration="$duration"
-		unit_name=${file_part##*/}
-		unit_name=${unit_name%.totals}
-		# restore path separators used when deriving the results file name
-		unit_name=${unit_name//__//}
-		slowest_unit=$(echo "$unit_name" | $sed "s|^$prefix||")
-	fi
-done < "$temp_file"
-rm -f "$temp_file"
-total=$((skipped+passed+failed))
-
-mean_duration=""
-median_duration=""
-if [ -s "$durations_file" ] ; then
-	# mean and median of collected test-set wall times
-	read -r mean_duration median_duration < <(awk '
-		{
-			sum += $1
-			vals[NR] = $1 + 0
+totals_files=(./*.totals)
+[ -e "${totals_files[0]}" ] || totals_files=(/dev/null)
+# duration fields are only printed when there are durations; unit names come last as they may contain spaces
+IFS=$'\t' read -r skipped passed failed flaky min_duration max_duration mean_duration median_duration fastest_unit slowest_unit < <(
+	stats_prefix="$prefix" awk -F'\t' '
+		function unit_name(file,    name, prefix) {
+			name = file
+			sub(/.*\//, "", name)
+			sub(/\.totals$/, "", name)
+			gsub(/__/, "/", name)
+			prefix = ENVIRON["stats_prefix"]
+			if (prefix != "" && index(name, prefix) == 1) name = substr(name, length(prefix) + 1)
+			return name
+		}
+		$1 == "object" {
+			skipped += $4
+			passed += $5
+			failed += $6
+			flaky += $7
+			# a test set may run several test objects or a parametric test object
+			if ($8 != "") {
+				if (!(FILENAME in sum)) order[++n] = FILENAME
+				sum[FILENAME] += $8
+			}
 		}
 		END {
-			n = NR
-			if (n == 0) {
-				print "0 0"
-				exit
-			}
-			mean = sum / n
-			# insertion sort (stable enough for small n)
-			for (i = 2; i <= n; i++) {
-				key = vals[i]
-				j = i - 1
-				while (j >= 1 && vals[j] > key) {
-					vals[j + 1] = vals[j]
-					j--
+			printf "%d\t%d\t%d\t%d", skipped, passed, failed, flaky
+			if (n > 0) {
+				total = 0
+				for (i = 1; i <= n; i++) {
+					d = sum[order[i]]
+					total += d
+					if (i == 1 || d <= min) { min = d; fastest = order[i] }
+					if (i == 1 || d >= max) { max = d; slowest = order[i] }
+					j = i - 1
+					while (j >= 1 && vals[j] > d) {
+						vals[j + 1] = vals[j]
+						j--
+					}
+					vals[j + 1] = d
 				}
-				vals[j + 1] = key
+				if (n % 2 == 1) median = vals[int(n / 2) + 1]
+				else median = (vals[n / 2] + vals[n / 2 + 1]) / 2
+				printf "\t%.10f\t%.10f\t%.10f\t%.10f\t%s\t%s", min, max, total / n, median, unit_name(fastest), unit_name(slowest)
 			}
-			if (n % 2 == 1) {
-				median = vals[int(n / 2) + 1]
-			} else {
-				median = (vals[n / 2] + vals[n / 2 + 1]) / 2
-			}
-			printf "%.10f %.10f\n", mean, median
+			printf "\n"
 		}
-	' "$durations_file")
-fi
-rm -f "$durations_file"
+	' "${totals_files[@]}" 2>/dev/null
+)
+total=$((skipped+passed+failed))
 
 if [ "$output" == 'quiet' ] ; then
 	exec 4>&1 1>/dev/null

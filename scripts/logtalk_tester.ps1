@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on November 3, 2026
+##   Last updated on November 4, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -57,7 +57,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
-	Write-Output "$myName 34.0"
+	Write-Output "$myName 35.0"
 }
 
 Function Format-Decimal {
@@ -1109,16 +1109,15 @@ $fastest_unit = ""
 $slowest_unit = ""
 $durations = [System.Collections.Generic.List[double]]::new()
 
-Get-ChildItem -Path . -Filter *.totals |
-Foreach-Object {
-	$totals_file = $_
+foreach ($totals_file in Get-ChildItem -Path . -Filter *.totals) {
 	# a test set may run several test objects or a parametric test object;
 	# its duration is the sum of their durations
 	$duration = $null
-	Get-Content -Path $totals_file |
-	Select-String -Pattern '^object' -CaseSensitive |
-	ForEach-Object {
-		$line = $_.Line.Split("`t")
+	foreach ($totals_line in [System.IO.File]::ReadLines($totals_file.FullName)) {
+		if (-not $totals_line.StartsWith("object`t", [StringComparison]::Ordinal)) {
+			continue
+		}
+		$line = $totals_line.Split("`t")
 		$skipped = $skipped + [int]$line[3]
 		$passed =  $passed  + [int]$line[4]
 		$failed =  $failed  + [int]$line[5]
@@ -1132,7 +1131,9 @@ Foreach-Object {
 		# recover test set path from .totals basename (matches how names are derived when writing logs)
 		$unit_name = $totals_file.BaseName
 		$unit_name = ($unit_name -replace '___', ':') -replace '__', '/'
-		$unit_name = $unit_name -replace [regex]::Escape($prefix), ""
+		if ($unit_name.StartsWith($prefix, [StringComparison]::OrdinalIgnoreCase)) {
+			$unit_name = $unit_name.Substring($prefix.Length)
+		}
 		if ($null -eq $min_duration -or $duration -le $min_duration) {
 			$min_duration = $duration
 			$fastest_unit = $unit_name
@@ -1148,14 +1149,19 @@ $total = $skipped + $passed + $failed
 
 $mean_duration = $null
 $median_duration = $null
-if ($durations.Count -gt 0) {
-	$mean_duration = ($durations | Measure-Object -Average).Average
-	$sorted = $durations | Sort-Object
-	$n = $sorted.Count
-	if ($n % 2 -eq 1) {
-		$median_duration = $sorted[[int]($n / 2)]
+$durations_count = $durations.Count
+if ($durations_count -gt 0) {
+	$durations_sum = 0.0
+	foreach ($duration in $durations) {
+		$durations_sum += $duration
+	}
+	$mean_duration = $durations_sum / $durations_count
+	$durations.Sort()
+	$middle = [Math]::Floor($durations_count / 2)
+	if ($durations_count % 2 -eq 1) {
+		$median_duration = $durations[$middle]
 	} else {
-		$median_duration = ($sorted[$n / 2 - 1] + $sorted[$n / 2]) / 2
+		$median_duration = ($durations[$middle - 1] + $durations[$middle]) / 2
 	}
 }
 
