@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 359,-140 359,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk development tools</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol mutator_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;10&#45;31, 16:04</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;04, 19:19</text>
 <g id="clust1" class="cluster">
 <title>cluster_mutator_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="mutator_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 335,-46 335,-46 341,-46 347,-52 347,-58 347,-58 347,-116 347,-116 347,-122 341,-128 335,-128 335,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/tools/mutation_testing/mutator_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/tools/mutation_testing/mutator_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/tools/mutation_testing/mutator_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/tools/mutation_testing/mutator_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.3" font-family="Monospace" font-size="10.00" fill="dimgray">mutator_protocol</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>reset/0</title>
 <polygon fill="springgreen" stroke="black" points="72.31,-92 17.69,-92 17.69,-56 72.31,-56 72.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="25.69" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/tools/mutation_testing/mutator_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/tools/mutation_testing/mutator_protocol.lgt#L31">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/tools/mutation_testing/mutator_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/tools/mutation_testing/mutator_protocol.lgt#L31">
 <text xml:space="preserve" text-anchor="start" x="28.19" y="-75.53" font-family="Monospace" font-size="11.00">reset/0</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>mutation/2</title>
 <polygon fill="springgreen" stroke="black" points="162.18,-92 89.82,-92 89.82,-56 162.18,-56 162.18,-92"/>
 <text xml:space="preserve" text-anchor="start" x="97.82" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/tools/mutation_testing/mutator_protocol.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/tools/mutation_testing/mutator_protocol.lgt#L37">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/tools/mutation_testing/mutator_protocol.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/tools/mutation_testing/mutator_protocol.lgt#L37">
 <text xml:space="preserve" text-anchor="start" x="100.32" y="-75.53" font-family="Monospace" font-size="11.00">mutation/2</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>coverage_clause_mutator/0</title>
 <polygon fill="springgreen" stroke="black" points="337.38,-92 180.62,-92 180.62,-56 337.38,-56 337.38,-92"/>
 <text xml:space="preserve" text-anchor="start" x="188.62" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/tools/mutation_testing/mutator_protocol.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/tools/mutation_testing/mutator_protocol.lgt#L44">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/tools/mutation_testing/mutator_protocol.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/tools/mutation_testing/mutator_protocol.lgt#L44">
 <text xml:space="preserve" text-anchor="start" x="191.13" y="-75.53" font-family="Monospace" font-size="11.00">coverage_clause_mutator/0</text>
 </a>
 </g>

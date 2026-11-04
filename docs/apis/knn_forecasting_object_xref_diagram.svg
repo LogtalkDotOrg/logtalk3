@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-842 2365.07,-842 2365.07,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object knn_forecasting</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;10&#45;31, 16:03</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;04, 19:18</text>
 <g id="clust1" class="cluster">
 <title>cluster_knn_forecasting_object</title>
 <g id="a_clust1"><a xlink:title="knn_forecasting">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 2270,-46 2270,-46 2276,-46 2282,-52 2282,-58 2282,-58 2282,-818 2282,-818 2282,-824 2276,-830 2270,-830 2270,-830 20,-830 20,-830 14,-830 8,-824 8,-818 8,-818 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-814.3" font-family="Monospace" font-size="10.00" fill="dimgray">knn_forecasting</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>update/3</title>
 <polygon fill="springgreen" stroke="black" points="776.91,-560 713.09,-560 713.09,-524 776.91,-524 776.91,-560"/>
 <text xml:space="preserve" text-anchor="start" x="721.09" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L33">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L33">
 <text xml:space="preserve" text-anchor="start" x="723.59" y="-543.53" font-family="Monospace" font-size="11.00">update/3</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>find_k_nearest/6</title>
 <polygon fill="cornsilk" stroke="black" points="798.17,-443 695.83,-443 695.83,-407 798.17,-407 798.17,-443"/>
 <text xml:space="preserve" text-anchor="start" x="703.83" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node17_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L223" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L223">
+<g id="a_node17_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L223" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L223">
 <text xml:space="preserve" text-anchor="start" x="706.33" y="-426.53" font-family="Monospace" font-size="11.00">find_k_nearest/6</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- update/3&#45;&gt;find_k_nearest/6 -->
 <g id="edge33" class="edge">
 <title>update/3&#45;&gt;find_k_nearest/6</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L331" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L331" xlink:title="calls">
 <path fill="none" stroke="black" d="M745.3,-523.53C745.62,-505.28 746.12,-476.33 746.5,-454.7"/>
 <polygon fill="black" stroke="black" points="750,-454.83 746.67,-444.77 743,-454.7 750,-454.83"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L331">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L331">
 <text xml:space="preserve" text-anchor="start" x="746.06" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>predict_from_neighbors/3</title>
 <polygon fill="cornsilk" stroke="black" points="528.87,-443 383.13,-443 383.13,-407 528.87,-407 528.87,-443"/>
 <text xml:space="preserve" text-anchor="start" x="391.13" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node19_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L244" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L244">
+<g id="a_node19_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L244" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L244">
 <text xml:space="preserve" text-anchor="start" x="393.63" y="-426.53" font-family="Monospace" font-size="11.00">predict_from_neighbors/3</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- update/3&#45;&gt;predict_from_neighbors/3 -->
 <g id="edge34" class="edge">
 <title>update/3&#45;&gt;predict_from_neighbors/3</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L331" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L331" xlink:title="calls">
 <path fill="none" stroke="black" d="M712.79,-527.59C709.82,-526.37 706.86,-525.16 704,-524 638.04,-497.29 561.87,-467.32 511.54,-447.64"/>
 <polygon fill="black" stroke="black" points="512.89,-444.41 502.3,-444.03 510.34,-450.93 512.89,-444.41"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L331">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L331">
 <text xml:space="preserve" text-anchor="start" x="608.72" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -97,7 +97,7 @@
 <title>push_window/3</title>
 <polygon fill="cornsilk" stroke="black" points="913.42,-443 816.58,-443 816.58,-407 913.42,-407 913.42,-443"/>
 <text xml:space="preserve" text-anchor="start" x="824.58" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node30_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L321">
+<g id="a_node30_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L321">
 <text xml:space="preserve" text-anchor="start" x="827.09" y="-426.53" font-family="Monospace" font-size="11.00">push_window/3</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- update/3&#45;&gt;push_window/3 -->
 <g id="edge35" class="edge">
 <title>update/3&#45;&gt;push_window/3</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L331" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L331" xlink:title="calls">
 <path fill="none" stroke="black" d="M777.07,-525.17C793.62,-515.92 813.36,-503.09 828,-488 837.76,-477.94 846.05,-464.85 852.29,-453.29"/>
 <polygon fill="black" stroke="black" points="855.31,-455.07 856.75,-444.58 849.08,-451.89 855.31,-455.07"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L331">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L331">
 <text xml:space="preserve" text-anchor="start" x="835.7" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -124,7 +124,7 @@
 <title>update_levels/4</title>
 <polygon fill="cornsilk" stroke="black" points="1180.03,-443 1081.97,-443 1081.97,-407 1180.03,-407 1180.03,-443"/>
 <text xml:space="preserve" text-anchor="start" x="1089.97" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node32_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L349" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L349">
+<g id="a_node32_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L349" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L349">
 <text xml:space="preserve" text-anchor="start" x="1092.47" y="-426.53" font-family="Monospace" font-size="11.00">update_levels/4</text>
 </a>
 </g>
@@ -136,12 +136,12 @@
 <!-- update/3&#45;&gt;update_levels/4 -->
 <g id="edge32" class="edge">
 <title>update/3&#45;&gt;update_levels/4</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L331" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L331" xlink:title="calls">
 <path fill="none" stroke="black" d="M777.09,-527.27C780.09,-526.12 783.09,-525.01 786,-524 907.79,-481.73 943.68,-479.72 1070.71,-443.63"/>
 <polygon fill="black" stroke="black" points="1071.54,-447.03 1080.19,-440.92 1069.62,-440.3 1071.54,-447.03"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L331">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L331">
 <text xml:space="preserve" text-anchor="start" x="933.51" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -151,7 +151,7 @@
 <title>updated_diagnostics/4</title>
 <polygon fill="cornsilk" stroke="black" points="677.54,-443 546.46,-443 546.46,-407 677.54,-407 677.54,-443"/>
 <text xml:space="preserve" text-anchor="start" x="554.46" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node33_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L354">
+<g id="a_node33_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L354">
 <text xml:space="preserve" text-anchor="start" x="556.96" y="-426.53" font-family="Monospace" font-size="11.00">updated_diagnostics/4</text>
 </a>
 </g>
@@ -163,12 +163,12 @@
 <!-- update/3&#45;&gt;updated_diagnostics/4 -->
 <g id="edge36" class="edge">
 <title>update/3&#45;&gt;updated_diagnostics/4</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L331" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L331" xlink:title="calls">
 <path fill="none" stroke="black" d="M723.08,-523.63C710.36,-513.42 694.11,-500.17 680,-488 666.14,-476.05 651.06,-462.38 638.64,-450.92"/>
 <polygon fill="black" stroke="black" points="641.33,-448.64 631.62,-444.42 636.58,-453.78 641.33,-448.64"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L331">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L331">
 <text xml:space="preserve" text-anchor="start" x="680" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -178,7 +178,7 @@
 <title>check_forecaster/1</title>
 <polygon fill="cornsilk" stroke="black" points="1831.97,-443 1718.03,-443 1718.03,-407 1831.97,-407 1831.97,-443"/>
 <text xml:space="preserve" text-anchor="start" x="1726.03" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node35_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L388" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L388">
+<g id="a_node35_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L388" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L388">
 <text xml:space="preserve" text-anchor="start" x="1728.53" y="-426.53" font-family="Monospace" font-size="11.00">check_forecaster/1</text>
 </a>
 </g>
@@ -190,12 +190,12 @@
 <!-- update/3&#45;&gt;check_forecaster/1 -->
 <g id="edge31" class="edge">
 <title>update/3&#45;&gt;check_forecaster/1</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L331" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L331" xlink:title="calls">
 <path fill="none" stroke="black" d="M777.34,-526.39C780.23,-525.45 783.14,-524.63 786,-524 1148.66,-443.64 1257.93,-566.49 1621,-488 1631.57,-485.71 1682.68,-464.8 1723.16,-447.88"/>
 <polygon fill="black" stroke="black" points="1724.45,-451.14 1732.33,-444.04 1721.75,-444.68 1724.45,-451.14"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L331">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L331">
 <text xml:space="preserve" text-anchor="start" x="1643.94" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -214,12 +214,12 @@
 <!-- update/3&#45;&gt;^^check_observation/1 -->
 <g id="edge61" class="edge">
 <title>update/3&#45;&gt;^^check_observation/1</title>
-<g id="a_edge61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L331" xlink:title="calls">
+<g id="a_edge61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L331" xlink:title="calls">
 <path fill="none" stroke="black" d="M777.3,-526.32C820.83,-506.53 898.69,-471.14 949.33,-448.12"/>
 <polygon fill="black" stroke="black" points="950.67,-451.36 958.32,-444.04 947.77,-444.99 950.67,-451.36"/>
 </a>
 </g>
-<g id="a_edge61&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L331">
+<g id="a_edge61&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L331">
 <text xml:space="preserve" text-anchor="start" x="879.09" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -229,7 +229,7 @@
 <title>forecaster_export_template/4</title>
 <polygon fill="cornsilk" stroke="black" points="691.04,-794 526.96,-794 526.96,-758 691.04,-758 691.04,-794"/>
 <text xml:space="preserve" text-anchor="start" x="534.96" y="-778.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L465" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L465">
+<g id="a_node2_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L465" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L465">
 <text xml:space="preserve" text-anchor="start" x="537.46" y="-777.53" font-family="Monospace" font-size="11.00">forecaster_export_template/4</text>
 </a>
 </g>
@@ -243,7 +243,7 @@
 <title>exclude_index/3</title>
 <polygon fill="cornsilk" stroke="black" points="365.25,-443 264.75,-443 264.75,-407 365.25,-407 365.25,-443"/>
 <text xml:space="preserve" text-anchor="start" x="272.75" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L209">
+<g id="a_node3_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L209">
 <text xml:space="preserve" text-anchor="start" x="275.25" y="-426.53" font-family="Monospace" font-size="11.00">exclude_index/3</text>
 </a>
 </g>
@@ -257,7 +257,7 @@
 <title>exclude_index/4</title>
 <polygon fill="cornsilk" stroke="black" points="211.25,-326 110.75,-326 110.75,-290 211.25,-290 211.25,-326"/>
 <text xml:space="preserve" text-anchor="start" x="118.75" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node16_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L212" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L212">
+<g id="a_node16_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L212" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L212">
 <text xml:space="preserve" text-anchor="start" x="121.25" y="-309.53" font-family="Monospace" font-size="11.00">exclude_index/4</text>
 </a>
 </g>
@@ -269,12 +269,12 @@
 <!-- exclude_index/3&#45;&gt;exclude_index/4 -->
 <g id="edge15" class="edge">
 <title>exclude_index/3&#45;&gt;exclude_index/4</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L209" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L209" xlink:title="calls">
 <path fill="none" stroke="black" d="M291.61,-406.53C265.42,-386.97 222.79,-355.14 193.4,-333.19"/>
 <polygon fill="black" stroke="black" points="195.68,-330.53 185.57,-327.35 191.49,-336.13 195.68,-330.53"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L209">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L209">
 <text xml:space="preserve" text-anchor="start" x="242.62" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -284,7 +284,7 @@
 <title>leave_one_out/7</title>
 <polygon fill="cornsilk" stroke="black" points="490.18,-677 387.82,-677 387.82,-641 490.18,-641 490.18,-677"/>
 <text xml:space="preserve" text-anchor="start" x="395.82" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L198" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L198">
+<g id="a_node4_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L198" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L198">
 <text xml:space="preserve" text-anchor="start" x="398.32" y="-660.53" font-family="Monospace" font-size="11.00">leave_one_out/7</text>
 </a>
 </g>
@@ -298,7 +298,7 @@
 <title>leave_one_out/9</title>
 <polygon fill="cornsilk" stroke="black" points="495.18,-560 392.82,-560 392.82,-524 495.18,-524 495.18,-560"/>
 <text xml:space="preserve" text-anchor="start" x="400.82" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node15_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L201" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L201">
+<g id="a_node15_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L201" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L201">
 <text xml:space="preserve" text-anchor="start" x="403.32" y="-543.53" font-family="Monospace" font-size="11.00">leave_one_out/9</text>
 </a>
 </g>
@@ -310,12 +310,12 @@
 <!-- leave_one_out/7&#45;&gt;leave_one_out/9 -->
 <g id="edge11" class="edge">
 <title>leave_one_out/7&#45;&gt;leave_one_out/9</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L198" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L198" xlink:title="calls">
 <path fill="none" stroke="black" d="M439.76,-640.53C440.55,-622.28 441.81,-593.33 442.75,-571.7"/>
 <polygon fill="black" stroke="black" points="446.25,-571.91 443.18,-561.77 439.25,-571.6 446.25,-571.91"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L198" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L198">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L198" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L198">
 <text xml:space="preserve" text-anchor="start" x="441.65" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -325,7 +325,7 @@
 <title>learn/3</title>
 <polygon fill="cornsilk" stroke="black" points="1218.32,-794 1163.68,-794 1163.68,-758 1218.32,-758 1218.32,-794"/>
 <text xml:space="preserve" text-anchor="start" x="1171.68" y="-778.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63">
+<g id="a_node5_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="1174.18" y="-777.53" font-family="Monospace" font-size="11.00">learn/3</text>
 </a>
 </g>
@@ -337,12 +337,12 @@
 <!-- learn/3&#45;&gt;leave_one_out/7 -->
 <g id="edge5" class="edge">
 <title>learn/3&#45;&gt;leave_one_out/7</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
 <path fill="none" stroke="black" d="M1163.38,-772.56C1070.81,-764.08 763.09,-733.42 501.84,-677.49"/>
 <polygon fill="black" stroke="black" points="502.6,-674.07 492.09,-675.38 501.12,-680.91 502.6,-674.07"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="744.66" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -352,7 +352,7 @@
 <title>missing_count/3</title>
 <polygon fill="cornsilk" stroke="black" points="370.24,-677 269.76,-677 269.76,-641 370.24,-641 370.24,-677"/>
 <text xml:space="preserve" text-anchor="start" x="277.76" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L131">
+<g id="a_node6_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L131">
 <text xml:space="preserve" text-anchor="start" x="280.26" y="-660.53" font-family="Monospace" font-size="11.00">missing_count/3</text>
 </a>
 </g>
@@ -364,12 +364,12 @@
 <!-- learn/3&#45;&gt;missing_count/3 -->
 <g id="edge1" class="edge">
 <title>learn/3&#45;&gt;missing_count/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
 <path fill="none" stroke="black" d="M1163.35,-773.53C1060.59,-767.7 691.03,-743.25 381.72,-677.45"/>
 <polygon fill="black" stroke="black" points="382.73,-674.09 372.22,-675.41 381.26,-680.93 382.73,-674.09"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="622.27" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -379,7 +379,7 @@
 <title>difference_levels/4</title>
 <polygon fill="cornsilk" stroke="black" points="620.26,-677 507.74,-677 507.74,-641 620.26,-641 620.26,-677"/>
 <text xml:space="preserve" text-anchor="start" x="515.74" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L144">
+<g id="a_node7_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L144">
 <text xml:space="preserve" text-anchor="start" x="518.24" y="-660.53" font-family="Monospace" font-size="11.00">difference_levels/4</text>
 </a>
 </g>
@@ -391,12 +391,12 @@
 <!-- learn/3&#45;&gt;difference_levels/4 -->
 <g id="edge2" class="edge">
 <title>learn/3&#45;&gt;difference_levels/4</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
 <path fill="none" stroke="black" d="M1163.36,-771.01C1082.84,-759.23 841.41,-722.64 631.87,-677.54"/>
 <polygon fill="black" stroke="black" points="632.65,-674.13 622.13,-675.43 631.17,-680.97 632.65,-674.13"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="859.65" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -406,7 +406,7 @@
 <title>initial_window/3</title>
 <polygon fill="cornsilk" stroke="black" points="824.02,-677 725.98,-677 725.98,-641 824.02,-641 824.02,-677"/>
 <text xml:space="preserve" text-anchor="start" x="733.98" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L168">
+<g id="a_node11_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L168">
 <text xml:space="preserve" text-anchor="start" x="736.48" y="-660.53" font-family="Monospace" font-size="11.00">initial_window/3</text>
 </a>
 </g>
@@ -418,12 +418,12 @@
 <!-- learn/3&#45;&gt;initial_window/3 -->
 <g id="edge4" class="edge">
 <title>learn/3&#45;&gt;initial_window/3</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
 <path fill="none" stroke="black" d="M1163.56,-767.67C1105.17,-752.03 964.06,-714.03 835.18,-677.6"/>
 <polygon fill="black" stroke="black" points="836.38,-674.3 825.8,-674.94 834.47,-681.03 836.38,-674.3"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="989.97" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -433,7 +433,7 @@
 <title>filter_complete_rows/2</title>
 <polygon fill="cornsilk" stroke="black" points="249.52,-677 118.48,-677 118.48,-641 249.52,-641 249.52,-677"/>
 <text xml:space="preserve" text-anchor="start" x="126.48" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L176">
+<g id="a_node12_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L176">
 <text xml:space="preserve" text-anchor="start" x="128.98" y="-660.53" font-family="Monospace" font-size="11.00">filter_complete_rows/2</text>
 </a>
 </g>
@@ -445,12 +445,12 @@
 <!-- learn/3&#45;&gt;filter_complete_rows/2 -->
 <g id="edge3" class="edge">
 <title>learn/3&#45;&gt;filter_complete_rows/2</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
 <path fill="none" stroke="black" d="M1163.35,-773.38C1074.69,-768.03 789.65,-749.7 555,-722 427.18,-706.91 392.74,-701.55 260.82,-676.89"/>
 <polygon fill="black" stroke="black" points="261.85,-673.52 251.38,-675.12 260.56,-680.4 261.85,-673.52"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="555" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -472,12 +472,12 @@
 <!-- learn/3&#45;&gt;list::length/2 -->
 <g id="edge66" class="edge">
 <title>learn/3&#45;&gt;list::length/2</title>
-<g id="a_edge66"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
+<g id="a_edge66"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
 <path fill="none" stroke="black" d="M1218.58,-773.52C1382.71,-764.58 2224.8,-716.89 2261,-677 2411.57,-511.08 2332.22,-381.42 2250,-173 2234.46,-133.61 2192.78,-107.84 2158.57,-92.66"/>
 <polygon fill="black" stroke="black" points="2160.19,-89.54 2149.62,-88.87 2157.46,-95.99 2160.19,-89.54"/>
 </a>
 </g>
-<g id="a_edge66&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63">
+<g id="a_edge66&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="2343.06" y="-422.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -496,12 +496,12 @@
 <!-- learn/3&#45;&gt;^^check_options/1 -->
 <g id="edge49" class="edge">
 <title>learn/3&#45;&gt;^^check_options/1</title>
-<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
+<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
 <path fill="none" stroke="black" d="M1163.34,-764.18C1115.17,-745.34 1015.02,-706.16 952.19,-681.59"/>
 <polygon fill="black" stroke="black" points="953.68,-678.41 943.09,-678.03 951.13,-684.93 953.68,-678.41"/>
 </a>
 </g>
-<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63">
+<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="1052.82" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -520,12 +520,12 @@
 <!-- learn/3&#45;&gt;^^merge_options/2 -->
 <g id="edge50" class="edge">
 <title>learn/3&#45;&gt;^^merge_options/2</title>
-<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
+<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
 <path fill="none" stroke="black" d="M1166.09,-757.53C1138.08,-737.89 1092.41,-705.87 1061.1,-683.91"/>
 <polygon fill="black" stroke="black" points="1063.31,-681.19 1053.11,-678.31 1059.29,-686.92 1063.31,-681.19"/>
 </a>
 </g>
-<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63">
+<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="1113.92" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -544,12 +544,12 @@
 <!-- learn/3&#45;&gt;^^option/2 -->
 <g id="edge51" class="edge">
 <title>learn/3&#45;&gt;^^option/2</title>
-<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
+<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
 <path fill="none" stroke="black" d="M1182.8,-757.53C1174.07,-738.94 1160.12,-709.24 1149.91,-687.5"/>
 <polygon fill="black" stroke="black" points="1153.16,-686.19 1145.75,-678.62 1146.83,-689.16 1153.16,-686.19"/>
 </a>
 </g>
-<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63">
+<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="1165.62" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -568,12 +568,12 @@
 <!-- learn/3&#45;&gt;^^dataset_series/2 -->
 <g id="edge52" class="edge">
 <title>learn/3&#45;&gt;^^dataset_series/2</title>
-<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
+<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
 <path fill="none" stroke="black" d="M1199.35,-757.53C1208.25,-738.94 1222.45,-709.24 1232.85,-687.5"/>
 <polygon fill="black" stroke="black" points="1235.94,-689.15 1237.1,-678.62 1229.62,-686.13 1235.94,-689.15"/>
 </a>
 </g>
-<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63">
+<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="1220.15" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -592,12 +592,12 @@
 <!-- learn/3&#45;&gt;^^check_series/3 -->
 <g id="edge53" class="edge">
 <title>learn/3&#45;&gt;^^check_series/3</title>
-<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
+<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
 <path fill="none" stroke="black" d="M1218.49,-757.53C1249.68,-737.72 1300.68,-705.31 1335.26,-683.34"/>
 <polygon fill="black" stroke="black" points="1336.71,-686.57 1343.27,-678.25 1332.95,-680.66 1336.71,-686.57"/>
 </a>
 </g>
-<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63">
+<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="1286.93" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -616,12 +616,12 @@
 <!-- learn/3&#45;&gt;^^check_series_length/3 -->
 <g id="edge54" class="edge">
 <title>learn/3&#45;&gt;^^check_series_length/3</title>
-<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
+<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
 <path fill="none" stroke="black" d="M1218.73,-765.1C1270.64,-746.56 1383.54,-706.24 1453.43,-681.28"/>
 <polygon fill="black" stroke="black" points="1454.59,-684.58 1462.83,-677.92 1452.24,-677.98 1454.59,-684.58"/>
 </a>
 </g>
-<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63">
+<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="1361.65" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -640,12 +640,12 @@
 <!-- learn/3&#45;&gt;^^lagged_rows/3 -->
 <g id="edge55" class="edge">
 <title>learn/3&#45;&gt;^^lagged_rows/3</title>
-<g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
+<g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
 <path fill="none" stroke="black" d="M1218.79,-768.53C1282.48,-753.64 1444.14,-715.46 1590.18,-677.44"/>
 <polygon fill="black" stroke="black" points="1590.86,-680.88 1599.65,-674.96 1589.09,-674.1 1590.86,-680.88"/>
 </a>
 </g>
-<g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63">
+<g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="1448.96" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -664,12 +664,12 @@
 <!-- learn/3&#45;&gt;^^mean_absolute_error/3 -->
 <g id="edge56" class="edge">
 <title>learn/3&#45;&gt;^^mean_absolute_error/3</title>
-<g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
+<g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
 <path fill="none" stroke="black" d="M1218.76,-769.98C1295.3,-756.09 1515.99,-715.79 1711.1,-677.36"/>
 <polygon fill="black" stroke="black" points="1711.52,-680.84 1720.65,-675.47 1710.16,-673.97 1711.52,-680.84"/>
 </a>
 </g>
-<g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63">
+<g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="1512.3" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -688,12 +688,12 @@
 <!-- learn/3&#45;&gt;^^root_mean_squared_error/3 -->
 <g id="edge57" class="edge">
 <title>learn/3&#45;&gt;^^root_mean_squared_error/3</title>
-<g id="a_edge57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
+<g id="a_edge57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
 <path fill="none" stroke="black" d="M1218.51,-771.46C1310.05,-759.6 1612.96,-719.71 1874.15,-677.44"/>
 <polygon fill="black" stroke="black" points="1874.57,-680.91 1883.88,-675.86 1873.45,-674 1874.57,-680.91"/>
 </a>
 </g>
-<g id="a_edge57&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63">
+<g id="a_edge57&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="1632.15" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -712,12 +712,12 @@
 <!-- learn/3&#45;&gt;^^base_forecaster_diagnostics/5 -->
 <g id="edge58" class="edge">
 <title>learn/3&#45;&gt;^^base_forecaster_diagnostics/5</title>
-<g id="a_edge58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
+<g id="a_edge58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="calls">
 <path fill="none" stroke="black" d="M1218.56,-772.49C1325.44,-762.64 1722.88,-724.87 2060.42,-677.33"/>
 <polygon fill="black" stroke="black" points="2060.49,-680.85 2069.9,-675.99 2059.51,-673.92 2060.49,-680.85"/>
 </a>
 </g>
-<g id="a_edge58&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L63">
+<g id="a_edge58&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="1775.85" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -727,7 +727,7 @@
 <title>difference_series_with_missing/2</title>
 <polygon fill="cornsilk" stroke="black" points="977.42,-560 794.58,-560 794.58,-524 977.42,-524 977.42,-560"/>
 <text xml:space="preserve" text-anchor="start" x="802.58" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L153">
+<g id="a_node8_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L153">
 <text xml:space="preserve" text-anchor="start" x="805.08" y="-543.53" font-family="Monospace" font-size="11.00">difference_series_with_missing/2</text>
 </a>
 </g>
@@ -739,12 +739,12 @@
 <!-- difference_levels/4&#45;&gt;difference_series_with_missing/2 -->
 <g id="edge6" class="edge">
 <title>difference_levels/4&#45;&gt;difference_series_with_missing/2</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L146" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L146" xlink:title="calls">
 <path fill="none" stroke="black" d="M582.03,-640.68C597.72,-626.58 621.69,-607.22 646,-596 670.55,-584.67 729.61,-571.57 783,-561.23"/>
 <polygon fill="black" stroke="black" points="783.64,-564.67 792.8,-559.35 782.32,-557.79 783.64,-564.67"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L146" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L146">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L146" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L146">
 <text xml:space="preserve" text-anchor="start" x="646" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -766,12 +766,12 @@
 <!-- difference_levels/4&#45;&gt;list::last/2 -->
 <g id="edge67" class="edge">
 <title>difference_levels/4&#45;&gt;list::last/2</title>
-<g id="a_edge67"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L146" xlink:title="calls">
+<g id="a_edge67"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L146" xlink:title="calls">
 <path fill="none" stroke="black" d="M564,-640.53C564,-622.28 564,-593.33 564,-571.7"/>
 <polygon fill="black" stroke="black" points="567.5,-571.77 564,-561.77 560.5,-571.77 567.5,-571.77"/>
 </a>
 </g>
-<g id="a_edge67&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L146" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L146">
+<g id="a_edge67&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L146" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L146">
 <text xml:space="preserve" text-anchor="start" x="564" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -781,7 +781,7 @@
 <title>difference_series_with_missing_/3</title>
 <polygon fill="cornsilk" stroke="black" points="1387.47,-443 1198.53,-443 1198.53,-407 1387.47,-407 1387.47,-443"/>
 <text xml:space="preserve" text-anchor="start" x="1206.53" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L156" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L156">
+<g id="a_node9_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L156" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L156">
 <text xml:space="preserve" text-anchor="start" x="1209.03" y="-426.53" font-family="Monospace" font-size="11.00">difference_series_with_missing_/3</text>
 </a>
 </g>
@@ -793,12 +793,12 @@
 <!-- difference_series_with_missing/2&#45;&gt;difference_series_with_missing_/3 -->
 <g id="edge7" class="edge">
 <title>difference_series_with_missing/2&#45;&gt;difference_series_with_missing_/3</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L153" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L153" xlink:title="calls">
 <path fill="none" stroke="black" d="M947.81,-523.53C1021.09,-502.83 1143.01,-468.38 1220.62,-446.45"/>
 <polygon fill="black" stroke="black" points="1221.14,-449.94 1229.82,-443.85 1219.24,-443.2 1221.14,-449.94"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L153">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L153">
 <text xml:space="preserve" text-anchor="start" x="1101.7" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -808,7 +808,7 @@
 <title>subtract_or_missing/3</title>
 <polygon fill="cornsilk" stroke="black" points="1374.3,-326 1245.7,-326 1245.7,-290 1374.3,-290 1374.3,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1253.7" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L161">
+<g id="a_node10_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L161">
 <text xml:space="preserve" text-anchor="start" x="1256.2" y="-309.53" font-family="Monospace" font-size="11.00">subtract_or_missing/3</text>
 </a>
 </g>
@@ -820,12 +820,12 @@
 <!-- difference_series_with_missing_/3&#45;&gt;subtract_or_missing/3 -->
 <g id="edge8" class="edge">
 <title>difference_series_with_missing_/3&#45;&gt;subtract_or_missing/3</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L157" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L157" xlink:title="calls">
 <path fill="none" stroke="black" d="M1295.58,-406.53C1298.29,-388.19 1302.6,-359.06 1305.8,-337.4"/>
 <polygon fill="black" stroke="black" points="1309.23,-338.16 1307.23,-327.75 1302.3,-337.13 1309.23,-338.16"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L157">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L157">
 <text xml:space="preserve" text-anchor="start" x="1302.01" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -847,12 +847,12 @@
 <!-- initial_window/3&#45;&gt;list::reverse/2 -->
 <g id="edge68" class="edge">
 <title>initial_window/3&#45;&gt;list::reverse/2</title>
-<g id="a_edge68"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L168" xlink:title="calls">
+<g id="a_edge68"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L168" xlink:title="calls">
 <path fill="none" stroke="black" d="M824.5,-642.67C827.36,-642.04 830.21,-641.48 833,-641 906.92,-628.37 1444.55,-646.52 1507,-605 1518.59,-597.3 1525.84,-583.78 1530.3,-571.34"/>
 <polygon fill="black" stroke="black" points="1533.63,-572.43 1533.22,-561.85 1526.94,-570.38 1533.63,-572.43"/>
 </a>
 </g>
-<g id="a_edge68&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L168">
+<g id="a_edge68&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L168">
 <text xml:space="preserve" text-anchor="start" x="1516.52" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -874,12 +874,12 @@
 <!-- initial_window/3&#45;&gt;list::take/3 -->
 <g id="edge69" class="edge">
 <title>initial_window/3&#45;&gt;list::take/3</title>
-<g id="a_edge69"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L168" xlink:title="calls">
+<g id="a_edge69"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L168" xlink:title="calls">
 <path fill="none" stroke="black" d="M824.5,-642.66C827.36,-642.04 830.21,-641.47 833,-641 987.88,-614.73 1393.82,-665 1539,-605 1566.63,-593.58 1576.84,-587.31 1589,-560 1614.08,-503.69 1541.79,-414.34 1533,-407 1431.07,-321.88 1369.99,-365.68 1238.59,-326.25"/>
 <polygon fill="black" stroke="black" points="1239.79,-322.95 1229.2,-323.31 1237.7,-329.63 1239.79,-322.95"/>
 </a>
 </g>
-<g id="a_edge69&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L168">
+<g id="a_edge69&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L168">
 <text xml:space="preserve" text-anchor="start" x="1583.88" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -889,7 +889,7 @@
 <title>complete_row/1</title>
 <polygon fill="cornsilk" stroke="black" points="232.33,-560 133.67,-560 133.67,-524 232.33,-524 232.33,-560"/>
 <text xml:space="preserve" text-anchor="start" x="141.67" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node13_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L184">
+<g id="a_node13_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L184">
 <text xml:space="preserve" text-anchor="start" x="144.18" y="-543.53" font-family="Monospace" font-size="11.00">complete_row/1</text>
 </a>
 </g>
@@ -901,12 +901,12 @@
 <!-- filter_complete_rows/2&#45;&gt;complete_row/1 -->
 <g id="edge9" class="edge">
 <title>filter_complete_rows/2&#45;&gt;complete_row/1</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L177" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L177" xlink:title="calls">
 <path fill="none" stroke="black" d="M183.85,-640.53C183.69,-622.28 183.44,-593.33 183.25,-571.7"/>
 <polygon fill="black" stroke="black" points="186.75,-571.74 183.16,-561.77 179.75,-571.8 186.75,-571.74"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L177">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L177">
 <text xml:space="preserve" text-anchor="start" x="183.53" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -916,7 +916,7 @@
 <title>ground_number_list/1</title>
 <polygon fill="cornsilk" stroke="black" points="246.7,-443 119.3,-443 119.3,-407 246.7,-407 246.7,-443"/>
 <text xml:space="preserve" text-anchor="start" x="127.3" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node14_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L188">
+<g id="a_node14_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L188">
 <text xml:space="preserve" text-anchor="start" x="129.8" y="-426.53" font-family="Monospace" font-size="11.00">ground_number_list/1</text>
 </a>
 </g>
@@ -928,12 +928,12 @@
 <!-- complete_row/1&#45;&gt;ground_number_list/1 -->
 <g id="edge10" class="edge">
 <title>complete_row/1&#45;&gt;ground_number_list/1</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L184" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L184" xlink:title="calls">
 <path fill="none" stroke="black" d="M183,-523.53C183,-505.28 183,-476.33 183,-454.7"/>
 <polygon fill="black" stroke="black" points="186.5,-454.77 183,-444.77 179.5,-454.77 186.5,-454.77"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L184">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L184">
 <text xml:space="preserve" text-anchor="start" x="183" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -941,12 +941,12 @@
 <!-- leave_one_out/9&#45;&gt;exclude_index/3 -->
 <g id="edge12" class="edge">
 <title>leave_one_out/9&#45;&gt;exclude_index/3</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L202" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L202" xlink:title="calls">
 <path fill="none" stroke="black" d="M424.41,-523.53C402.69,-504.17 367.48,-472.79 342.89,-450.86"/>
 <polygon fill="black" stroke="black" points="345.28,-448.3 335.48,-444.26 340.62,-453.53 345.28,-448.3"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L202" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L202">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L202" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L202">
 <text xml:space="preserve" text-anchor="start" x="383.37" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -954,12 +954,12 @@
 <!-- leave_one_out/9&#45;&gt;find_k_nearest/6 -->
 <g id="edge13" class="edge">
 <title>leave_one_out/9&#45;&gt;find_k_nearest/6</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L202" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L202" xlink:title="calls">
 <path fill="none" stroke="black" d="M476.79,-523.52C502.5,-510.24 539.43,-492.09 573,-479 593.59,-470.97 643.69,-455.87 684.87,-443.84"/>
 <polygon fill="black" stroke="black" points="685.6,-447.27 694.22,-441.12 683.64,-440.55 685.6,-447.27"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L202" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L202">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L202" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L202">
 <text xml:space="preserve" text-anchor="start" x="573" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -967,12 +967,12 @@
 <!-- leave_one_out/9&#45;&gt;predict_from_neighbors/3 -->
 <g id="edge14" class="edge">
 <title>leave_one_out/9&#45;&gt;predict_from_neighbors/3</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L202" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L202" xlink:title="calls">
 <path fill="none" stroke="black" d="M445.82,-523.53C447.73,-505.28 450.75,-476.33 453.01,-454.7"/>
 <polygon fill="black" stroke="black" points="456.49,-455.07 454.04,-444.76 449.52,-454.34 456.49,-455.07"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L202" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L202">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L202" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L202">
 <text xml:space="preserve" text-anchor="start" x="450.36" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -982,7 +982,7 @@
 <title>compute_distance/5</title>
 <polygon fill="cornsilk" stroke="black" points="882.73,-326 763.27,-326 763.27,-290 882.73,-290 882.73,-326"/>
 <text xml:space="preserve" text-anchor="start" x="771.27" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node18_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L234">
+<g id="a_node18_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L234">
 <text xml:space="preserve" text-anchor="start" x="773.77" y="-309.53" font-family="Monospace" font-size="11.00">compute_distance/5</text>
 </a>
 </g>
@@ -994,12 +994,12 @@
 <!-- find_k_nearest/6&#45;&gt;compute_distance/5 -->
 <g id="edge16" class="edge">
 <title>find_k_nearest/6&#45;&gt;compute_distance/5</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L223" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L223" xlink:title="calls">
 <path fill="none" stroke="black" d="M758.54,-406.53C771,-387.68 790.99,-357.43 805.41,-335.61"/>
 <polygon fill="black" stroke="black" points="808.17,-337.79 810.76,-327.52 802.33,-333.93 808.17,-337.79"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L223" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L223">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L223" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L223">
 <text xml:space="preserve" text-anchor="start" x="787.28" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1007,12 +1007,12 @@
 <!-- find_k_nearest/6&#45;&gt;list::take/3 -->
 <g id="edge71" class="edge">
 <title>find_k_nearest/6&#45;&gt;list::take/3</title>
-<g id="a_edge71"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L223" xlink:title="calls">
+<g id="a_edge71"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L223" xlink:title="calls">
 <path fill="none" stroke="black" d="M798.55,-409.49C801.74,-408.63 804.91,-407.8 808,-407 954.88,-369.05 997.66,-371.94 1145.76,-326.5"/>
 <polygon fill="black" stroke="black" points="1146.64,-329.89 1155.16,-323.6 1144.57,-323.21 1146.64,-329.89"/>
 </a>
 </g>
-<g id="a_edge71&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L223" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L223">
+<g id="a_edge71&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L223" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L223">
 <text xml:space="preserve" text-anchor="start" x="1007.55" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1034,12 +1034,12 @@
 <!-- find_k_nearest/6&#45;&gt;list::member/2 -->
 <g id="edge70" class="edge">
 <title>find_k_nearest/6&#45;&gt;list::member/2</title>
-<g id="a_edge70"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L223" xlink:title="calls">
+<g id="a_edge70"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L223" xlink:title="calls">
 <path fill="none" stroke="black" d="M785.43,-406.53C829.86,-386.34 903.06,-353.06 951.41,-331.09"/>
 <polygon fill="black" stroke="black" points="952.6,-334.39 960.25,-327.07 949.7,-328.02 952.6,-334.39"/>
 </a>
 </g>
-<g id="a_edge70&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L223" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L223">
+<g id="a_edge70&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L223" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L223">
 <text xml:space="preserve" text-anchor="start" x="881.09" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1061,12 +1061,12 @@
 <!-- compute_distance/5&#45;&gt;numberlist::euclidean_distance/3 -->
 <g id="edge72" class="edge">
 <title>compute_distance/5&#45;&gt;numberlist::euclidean_distance/3</title>
-<g id="a_edge72"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L234" xlink:title="calls">
+<g id="a_edge72"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L234" xlink:title="calls">
 <path fill="none" stroke="black" d="M800.19,-289.52C787.4,-277.47 775.41,-260.82 783,-245 788.44,-233.64 797.65,-223.94 807.48,-216.07"/>
 <polygon fill="black" stroke="black" points="809.4,-219 815.38,-210.25 805.25,-213.36 809.4,-219"/>
 </a>
 </g>
-<g id="a_edge72&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L234">
+<g id="a_edge72&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L234">
 <text xml:space="preserve" text-anchor="start" x="783" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1088,12 +1088,12 @@
 <!-- compute_distance/5&#45;&gt;numberlist::manhattan_distance/3 -->
 <g id="edge73" class="edge">
 <title>compute_distance/5&#45;&gt;numberlist::manhattan_distance/3</title>
-<g id="a_edge73"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L234" xlink:title="calls">
+<g id="a_edge73"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L234" xlink:title="calls">
 <path fill="none" stroke="black" d="M817.98,-289.55C815.21,-275.93 814.06,-257.32 824,-245 832.27,-234.74 890.94,-221.19 946.56,-210.36"/>
 <polygon fill="black" stroke="black" points="946.98,-213.84 956.14,-208.52 945.66,-206.97 946.98,-213.84"/>
 </a>
 </g>
-<g id="a_edge73&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L234">
+<g id="a_edge73&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L234">
 <text xml:space="preserve" text-anchor="start" x="824" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1115,12 +1115,12 @@
 <!-- compute_distance/5&#45;&gt;numberlist::chebyshev_distance/3 -->
 <g id="edge74" class="edge">
 <title>compute_distance/5&#45;&gt;numberlist::chebyshev_distance/3</title>
-<g id="a_edge74"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L234" xlink:title="calls">
+<g id="a_edge74"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L234" xlink:title="calls">
 <path fill="none" stroke="black" d="M840.77,-289.52C856.54,-275.11 880.91,-255.4 906,-245 1005.17,-203.87 1041.07,-224.67 1150.2,-209.34"/>
 <polygon fill="black" stroke="black" points="1150.48,-212.84 1159.86,-207.91 1149.45,-205.91 1150.48,-212.84"/>
 </a>
 </g>
-<g id="a_edge74&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L234">
+<g id="a_edge74&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L234">
 <text xml:space="preserve" text-anchor="start" x="906" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1142,12 +1142,12 @@
 <!-- compute_distance/5&#45;&gt;numberlist::minkowski_distance/4 -->
 <g id="edge75" class="edge">
 <title>compute_distance/5&#45;&gt;numberlist::minkowski_distance/4</title>
-<g id="a_edge75"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L234" xlink:title="calls">
+<g id="a_edge75"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L234" xlink:title="calls">
 <path fill="none" stroke="black" d="M854.42,-289.59C884.66,-273.15 928.47,-250.24 947,-245 1119.49,-196.21 1173.38,-230.61 1354.92,-209.16"/>
 <polygon fill="black" stroke="black" points="1355.2,-212.66 1364.7,-207.96 1354.35,-205.71 1355.2,-212.66"/>
 </a>
 </g>
-<g id="a_edge75&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L234">
+<g id="a_edge75&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L234">
 <text xml:space="preserve" text-anchor="start" x="947" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1157,7 +1157,7 @@
 <title>apply_weighting/3</title>
 <polygon fill="cornsilk" stroke="black" points="510.53,-326 401.47,-326 401.47,-290 510.53,-290 510.53,-326"/>
 <text xml:space="preserve" text-anchor="start" x="409.47" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node20_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L248" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L248">
+<g id="a_node20_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L248" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L248">
 <text xml:space="preserve" text-anchor="start" x="411.97" y="-309.53" font-family="Monospace" font-size="11.00">apply_weighting/3</text>
 </a>
 </g>
@@ -1169,12 +1169,12 @@
 <!-- predict_from_neighbors/3&#45;&gt;apply_weighting/3 -->
 <g id="edge17" class="edge">
 <title>predict_from_neighbors/3&#45;&gt;apply_weighting/3</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L244" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L244" xlink:title="calls">
 <path fill="none" stroke="black" d="M456,-406.53C456,-388.28 456,-359.33 456,-337.7"/>
 <polygon fill="black" stroke="black" points="459.5,-337.77 456,-327.77 452.5,-337.77 459.5,-337.77"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L244" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L244">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L244" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L244">
 <text xml:space="preserve" text-anchor="start" x="456" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1184,7 +1184,7 @@
 <title>weighted_average_target/4</title>
 <polygon fill="cornsilk" stroke="black" points="383.16,-326 228.84,-326 228.84,-290 383.16,-290 383.16,-326"/>
 <text xml:space="preserve" text-anchor="start" x="236.84" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node24_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L273" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L273">
+<g id="a_node24_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L273" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L273">
 <text xml:space="preserve" text-anchor="start" x="239.34" y="-309.53" font-family="Monospace" font-size="11.00">weighted_average_target/4</text>
 </a>
 </g>
@@ -1196,12 +1196,12 @@
 <!-- predict_from_neighbors/3&#45;&gt;weighted_average_target/4 -->
 <g id="edge18" class="edge">
 <title>predict_from_neighbors/3&#45;&gt;weighted_average_target/4</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L244" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L244" xlink:title="calls">
 <path fill="none" stroke="black" d="M433.22,-406.53C407.63,-386.92 365.94,-354.96 337.31,-333"/>
 <polygon fill="black" stroke="black" points="339.77,-330.48 329.71,-327.17 335.51,-336.04 339.77,-330.48"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L244" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L244">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L244" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L244">
 <text xml:space="preserve" text-anchor="start" x="385.5" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1211,7 +1211,7 @@
 <title>uniform_weights/2</title>
 <polygon fill="cornsilk" stroke="black" points="322.13,-209 211.87,-209 211.87,-173 322.13,-173 322.13,-209"/>
 <text xml:space="preserve" text-anchor="start" x="219.87" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node21_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L255" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L255">
+<g id="a_node21_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L255" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L255">
 <text xml:space="preserve" text-anchor="start" x="222.37" y="-192.53" font-family="Monospace" font-size="11.00">uniform_weights/2</text>
 </a>
 </g>
@@ -1223,12 +1223,12 @@
 <!-- apply_weighting/3&#45;&gt;uniform_weights/2 -->
 <g id="edge19" class="edge">
 <title>apply_weighting/3&#45;&gt;uniform_weights/2</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L248" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L248" xlink:title="calls">
 <path fill="none" stroke="black" d="M427.29,-289.53C394.73,-269.72 341.47,-237.31 305.36,-215.34"/>
 <polygon fill="black" stroke="black" points="307.32,-212.44 296.96,-210.23 303.68,-218.42 307.32,-212.44"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L248" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L248">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L248" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L248">
 <text xml:space="preserve" text-anchor="start" x="367.17" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1238,7 +1238,7 @@
 <title>distance_weights/2</title>
 <polygon fill="cornsilk" stroke="black" points="454.28,-209 339.72,-209 339.72,-173 454.28,-173 454.28,-209"/>
 <text xml:space="preserve" text-anchor="start" x="347.72" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node22_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L259" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L259">
+<g id="a_node22_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L259" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L259">
 <text xml:space="preserve" text-anchor="start" x="350.22" y="-192.53" font-family="Monospace" font-size="11.00">distance_weights/2</text>
 </a>
 </g>
@@ -1250,12 +1250,12 @@
 <!-- apply_weighting/3&#45;&gt;distance_weights/2 -->
 <g id="edge20" class="edge">
 <title>apply_weighting/3&#45;&gt;distance_weights/2</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L250" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L250" xlink:title="calls">
 <path fill="none" stroke="black" d="M447.04,-289.53C437.45,-270.85 422.13,-240.97 410.96,-219.2"/>
 <polygon fill="black" stroke="black" points="414.22,-217.9 406.54,-210.6 407.99,-221.1 414.22,-217.9"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L250" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L250">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L250" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L250">
 <text xml:space="preserve" text-anchor="start" x="428.27" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1265,7 +1265,7 @@
 <title>gaussian_weights/2</title>
 <polygon fill="cornsilk" stroke="black" points="589.81,-209 472.19,-209 472.19,-173 589.81,-173 589.81,-209"/>
 <text xml:space="preserve" text-anchor="start" x="480.19" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node23_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L267" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L267">
+<g id="a_node23_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L267" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L267">
 <text xml:space="preserve" text-anchor="start" x="482.69" y="-192.53" font-family="Monospace" font-size="11.00">gaussian_weights/2</text>
 </a>
 </g>
@@ -1277,12 +1277,12 @@
 <!-- apply_weighting/3&#45;&gt;gaussian_weights/2 -->
 <g id="edge21" class="edge">
 <title>apply_weighting/3&#45;&gt;gaussian_weights/2</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L252" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L252" xlink:title="calls">
 <path fill="none" stroke="black" d="M467.39,-289.53C479.69,-270.68 499.42,-240.43 513.64,-218.61"/>
 <polygon fill="black" stroke="black" points="516.39,-220.81 518.92,-210.52 510.53,-216.99 516.39,-220.81"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L252" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L252">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L252" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L252">
 <text xml:space="preserve" text-anchor="start" x="495.75" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1292,7 +1292,7 @@
 <title>accumulate_weighted_targets/5</title>
 <polygon fill="cornsilk" stroke="black" points="194.16,-209 17.84,-209 17.84,-173 194.16,-173 194.16,-209"/>
 <text xml:space="preserve" text-anchor="start" x="25.84" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node25_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L280" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L280">
+<g id="a_node25_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L280" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L280">
 <text xml:space="preserve" text-anchor="start" x="28.34" y="-192.53" font-family="Monospace" font-size="11.00">accumulate_weighted_targets/5</text>
 </a>
 </g>
@@ -1304,12 +1304,12 @@
 <!-- weighted_average_target/4&#45;&gt;accumulate_weighted_targets/5 -->
 <g id="edge22" class="edge">
 <title>weighted_average_target/4&#45;&gt;accumulate_weighted_targets/5</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L273" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L273" xlink:title="calls">
 <path fill="none" stroke="black" d="M275.62,-289.53C241.02,-269.63 184.32,-237.04 146.11,-215.06"/>
 <polygon fill="black" stroke="black" points="148.06,-212.15 137.65,-210.2 144.57,-218.22 148.06,-212.15"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L273" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L273">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L273" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L273">
 <text xml:space="preserve" text-anchor="start" x="212" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1319,7 +1319,7 @@
 <title>forecast/3</title>
 <polygon fill="cornsilk" stroke="black" points="707.65,-677 638.35,-677 638.35,-641 707.65,-641 707.65,-677"/>
 <text xml:space="preserve" text-anchor="start" x="646.35" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node26_39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L288" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L288">
+<g id="a_node26_39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L288" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L288">
 <text xml:space="preserve" text-anchor="start" x="648.85" y="-660.53" font-family="Monospace" font-size="11.00">forecast/3</text>
 </a>
 </g>
@@ -1333,7 +1333,7 @@
 <title>check_known_state/3</title>
 <polygon fill="cornsilk" stroke="black" points="1422.4,-560 1295.6,-560 1295.6,-524 1422.4,-524 1422.4,-560"/>
 <text xml:space="preserve" text-anchor="start" x="1303.6" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node27_40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L300" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L300">
+<g id="a_node27_40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L300" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L300">
 <text xml:space="preserve" text-anchor="start" x="1306.11" y="-543.53" font-family="Monospace" font-size="11.00">check_known_state/3</text>
 </a>
 </g>
@@ -1345,12 +1345,12 @@
 <!-- forecast/3&#45;&gt;check_known_state/3 -->
 <g id="edge24" class="edge">
 <title>forecast/3&#45;&gt;check_known_state/3</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L288" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L288" xlink:title="calls">
 <path fill="none" stroke="black" d="M707.83,-643.72C710.9,-642.71 713.99,-641.79 717,-641 776.14,-625.58 1185.74,-576.25 1284.07,-560.13"/>
 <polygon fill="black" stroke="black" points="1284.62,-563.58 1293.88,-558.42 1283.42,-556.69 1284.62,-563.58"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L288" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L288">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L288" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L288">
 <text xml:space="preserve" text-anchor="start" x="1016.33" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1360,7 +1360,7 @@
 <title>project/8</title>
 <polygon fill="cornsilk" stroke="black" points="694.6,-560 631.4,-560 631.4,-524 694.6,-524 694.6,-560"/>
 <text xml:space="preserve" text-anchor="start" x="639.4" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node28_41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L307" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L307">
+<g id="a_node28_41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L307" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L307">
 <text xml:space="preserve" text-anchor="start" x="641.91" y="-543.53" font-family="Monospace" font-size="11.00">project/8</text>
 </a>
 </g>
@@ -1372,12 +1372,12 @@
 <!-- forecast/3&#45;&gt;project/8 -->
 <g id="edge25" class="edge">
 <title>forecast/3&#45;&gt;project/8</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L288" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L288" xlink:title="calls">
 <path fill="none" stroke="black" d="M671.48,-640.53C669.89,-622.28 667.38,-593.33 665.5,-571.7"/>
 <polygon fill="black" stroke="black" points="668.98,-571.42 664.63,-561.76 662.01,-572.03 668.98,-571.42"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L288" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L288">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L288" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L288">
 <text xml:space="preserve" text-anchor="start" x="668.3" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1387,7 +1387,7 @@
 <title>integrate_levels/3</title>
 <polygon fill="cornsilk" stroke="black" points="1102.61,-560 995.39,-560 995.39,-524 1102.61,-524 1102.61,-560"/>
 <text xml:space="preserve" text-anchor="start" x="1003.39" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node29_42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L316" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L316">
+<g id="a_node29_42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L316" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L316">
 <text xml:space="preserve" text-anchor="start" x="1005.89" y="-543.53" font-family="Monospace" font-size="11.00">integrate_levels/3</text>
 </a>
 </g>
@@ -1399,12 +1399,12 @@
 <!-- forecast/3&#45;&gt;integrate_levels/3 -->
 <g id="edge26" class="edge">
 <title>forecast/3&#45;&gt;integrate_levels/3</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L288" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L288" xlink:title="calls">
 <path fill="none" stroke="black" d="M707.97,-644.19C711.01,-643.08 714.05,-642 717,-641 766.57,-624.14 902.46,-584.83 984.21,-561.44"/>
 <polygon fill="black" stroke="black" points="985.02,-564.85 993.67,-558.74 983.09,-558.12 985.02,-564.85"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L288" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L288">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L288" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L288">
 <text xml:space="preserve" text-anchor="start" x="856.3" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1412,12 +1412,12 @@
 <!-- forecast/3&#45;&gt;check_forecaster/1 -->
 <g id="edge23" class="edge">
 <title>forecast/3&#45;&gt;check_forecaster/1</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L288" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L288" xlink:title="calls">
 <path fill="none" stroke="black" d="M707.8,-643.62C710.88,-642.64 713.98,-641.74 717,-641 856.44,-606.85 895.35,-621.17 1038,-605 1212.69,-585.2 1272.67,-636.43 1431,-560 1451.38,-550.16 1446.95,-534.49 1467,-524 1546.63,-482.32 1581.51,-518.66 1666,-488 1692.38,-478.43 1719.83,-462.78 1740.59,-449.59"/>
 <polygon fill="black" stroke="black" points="1742.45,-452.56 1748.93,-444.18 1738.64,-446.69 1742.45,-452.56"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L288" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L288">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L288" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L288">
 <text xml:space="preserve" text-anchor="start" x="1467" y="-539.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1425,12 +1425,12 @@
 <!-- forecast/3&#45;&gt;list::reverse/2 -->
 <g id="edge76" class="edge">
 <title>forecast/3&#45;&gt;list::reverse/2</title>
-<g id="a_edge76"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L288" xlink:title="calls">
+<g id="a_edge76"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L288" xlink:title="calls">
 <path fill="none" stroke="black" d="M707.76,-643.41C710.85,-642.47 713.96,-641.64 717,-641 879.38,-606.65 1308.43,-665.45 1463,-605 1482.78,-597.27 1501.1,-582 1514.57,-568.55"/>
 <polygon fill="black" stroke="black" points="1516.85,-571.23 1521.25,-561.59 1511.8,-566.38 1516.85,-571.23"/>
 </a>
 </g>
-<g id="a_edge76&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L288" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L288">
+<g id="a_edge76&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L288" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L288">
 <text xml:space="preserve" text-anchor="start" x="1479.36" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1449,12 +1449,12 @@
 <!-- forecast/3&#45;&gt;^^check_forecast_horizon/1 -->
 <g id="edge59" class="edge">
 <title>forecast/3&#45;&gt;^^check_forecast_horizon/1</title>
-<g id="a_edge59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L288" xlink:title="calls">
+<g id="a_edge59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L288" xlink:title="calls">
 <path fill="none" stroke="black" d="M707.88,-643.91C710.94,-642.86 714.01,-641.87 717,-641 735.78,-635.5 974.9,-587.61 1109.11,-560.87"/>
 <polygon fill="black" stroke="black" points="1109.56,-564.35 1118.68,-558.96 1108.19,-557.49 1109.56,-564.35"/>
 </a>
 </g>
-<g id="a_edge59&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L288" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L288">
+<g id="a_edge59&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L288" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L288">
 <text xml:space="preserve" text-anchor="start" x="925.68" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1462,12 +1462,12 @@
 <!-- project/8&#45;&gt;find_k_nearest/6 -->
 <g id="edge27" class="edge">
 <title>project/8&#45;&gt;find_k_nearest/6</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L309" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L309" xlink:title="calls">
 <path fill="none" stroke="black" d="M675.76,-523.53C689.59,-504.6 711.83,-474.16 727.78,-452.32"/>
 <polygon fill="black" stroke="black" points="730.43,-454.62 733.5,-444.48 724.78,-450.49 730.43,-454.62"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L309" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L309">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L309" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L309">
 <text xml:space="preserve" text-anchor="start" x="707.52" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1475,12 +1475,12 @@
 <!-- project/8&#45;&gt;predict_from_neighbors/3 -->
 <g id="edge28" class="edge">
 <title>project/8&#45;&gt;predict_from_neighbors/3</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L309" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L309" xlink:title="calls">
 <path fill="none" stroke="black" d="M631.12,-530.14C596.63,-518.14 544.13,-499.04 526,-488 509.28,-477.82 492.78,-463.47 480,-451.14"/>
 <polygon fill="black" stroke="black" points="482.82,-449.01 473.25,-444.46 477.9,-453.99 482.82,-449.01"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L309" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L309">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L309" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L309">
 <text xml:space="preserve" text-anchor="start" x="526" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1488,12 +1488,12 @@
 <!-- project/8&#45;&gt;push_window/3 -->
 <g id="edge29" class="edge">
 <title>project/8&#45;&gt;push_window/3</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L309" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L309" xlink:title="calls">
 <path fill="none" stroke="black" d="M694.68,-526.05C715.75,-515.85 743.87,-501.75 768,-488 788.95,-476.06 811.7,-461.6 829.9,-449.65"/>
 <polygon fill="black" stroke="black" points="831.83,-452.57 838.24,-444.14 827.97,-446.73 831.83,-452.57"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L309" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L309">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L309" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L309">
 <text xml:space="preserve" text-anchor="start" x="781.52" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1512,12 +1512,12 @@
 <!-- integrate_levels/3&#45;&gt;^^integrate_series/3 -->
 <g id="edge60" class="edge">
 <title>integrate_levels/3&#45;&gt;^^integrate_series/3</title>
-<g id="a_edge60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L317" xlink:title="calls">
+<g id="a_edge60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L317" xlink:title="calls">
 <path fill="none" stroke="black" d="M1102.96,-526.08C1177.47,-505.49 1311.97,-468.3 1394.4,-445.52"/>
 <polygon fill="black" stroke="black" points="1395.26,-448.91 1403.96,-442.87 1393.39,-442.16 1395.26,-448.91"/>
 </a>
 </g>
-<g id="a_edge60&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L317" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L317">
+<g id="a_edge60&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L317" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L317">
 <text xml:space="preserve" text-anchor="start" x="1269.47" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1527,7 +1527,7 @@
 <title>drop_last/2</title>
 <polygon fill="cornsilk" stroke="black" points="1138.71,-326 1063.29,-326 1063.29,-290 1138.71,-290 1138.71,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1071.29" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node31_43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L324" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L324">
+<g id="a_node31_43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L324" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L324">
 <text xml:space="preserve" text-anchor="start" x="1073.79" y="-309.53" font-family="Monospace" font-size="11.00">drop_last/2</text>
 </a>
 </g>
@@ -1539,12 +1539,12 @@
 <!-- push_window/3&#45;&gt;drop_last/2 -->
 <g id="edge30" class="edge">
 <title>push_window/3&#45;&gt;drop_last/2</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L321" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L321" xlink:title="calls">
 <path fill="none" stroke="black" d="M913.7,-409.6C916.85,-408.71 919.97,-407.84 923,-407 984.52,-390.02 1010.49,-408.67 1062,-371 1073.91,-362.29 1083.03,-348.74 1089.45,-336.53"/>
 <polygon fill="black" stroke="black" points="1092.54,-338.19 1093.74,-327.66 1086.24,-335.14 1092.54,-338.19"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L321">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L321">
 <text xml:space="preserve" text-anchor="start" x="1070.88" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1552,12 +1552,12 @@
 <!-- update_levels/4&#45;&gt;subtract_or_missing/3 -->
 <g id="edge37" class="edge">
 <title>update_levels/4&#45;&gt;subtract_or_missing/3</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L350" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L350" xlink:title="calls">
 <path fill="none" stroke="black" d="M1158.19,-406.53C1188.9,-386.8 1239.04,-354.59 1273.23,-332.62"/>
 <polygon fill="black" stroke="black" points="1275.06,-335.61 1281.58,-327.26 1271.27,-329.72 1275.06,-335.61"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L350" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L350">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L350" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L350">
 <text xml:space="preserve" text-anchor="start" x="1225.87" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1567,7 +1567,7 @@
 <title>apply_outcome/3</title>
 <polygon fill="cornsilk" stroke="black" points="745.39,-326 640.61,-326 640.61,-290 745.39,-290 745.39,-326"/>
 <text xml:space="preserve" text-anchor="start" x="648.61" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node34_44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L369" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L369">
+<g id="a_node34_44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L369" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L369">
 <text xml:space="preserve" text-anchor="start" x="651.11" y="-309.53" font-family="Monospace" font-size="11.00">apply_outcome/3</text>
 </a>
 </g>
@@ -1579,12 +1579,12 @@
 <!-- updated_diagnostics/4&#45;&gt;apply_outcome/3 -->
 <g id="edge38" class="edge">
 <title>updated_diagnostics/4&#45;&gt;apply_outcome/3</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L354" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L354" xlink:title="calls">
 <path fill="none" stroke="black" d="M624.3,-406.53C637.58,-387.68 658.89,-357.43 674.26,-335.61"/>
 <polygon fill="black" stroke="black" points="677.08,-337.68 679.98,-327.49 671.36,-333.65 677.08,-337.68"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L354">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L354">
 <text xml:space="preserve" text-anchor="start" x="654.93" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1606,12 +1606,12 @@
 <!-- updated_diagnostics/4&#45;&gt;list::memberchk/2 -->
 <g id="edge77" class="edge">
 <title>updated_diagnostics/4&#45;&gt;list::memberchk/2</title>
-<g id="a_edge77"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L354" xlink:title="calls">
+<g id="a_edge77"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L354" xlink:title="calls">
 <path fill="none" stroke="black" d="M671.78,-406.51C742.31,-385.29 854.72,-349.43 892,-326 911.16,-313.96 907.69,-299.97 928,-290 1178.84,-166.82 1279.54,-261.45 1557.9,-209.22"/>
 <polygon fill="black" stroke="black" points="1558.52,-212.67 1567.67,-207.33 1557.19,-205.79 1558.52,-212.67"/>
 </a>
 </g>
-<g id="a_edge77&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L354">
+<g id="a_edge77&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L354">
 <text xml:space="preserve" text-anchor="start" x="928" y="-305.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1630,12 +1630,12 @@
 <!-- updated_diagnostics/4&#45;&gt;^^replace_diagnostic/4 -->
 <g id="edge62" class="edge">
 <title>updated_diagnostics/4&#45;&gt;^^replace_diagnostic/4</title>
-<g id="a_edge62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L354" xlink:title="calls">
+<g id="a_edge62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L354" xlink:title="calls">
 <path fill="none" stroke="black" d="M609.39,-406.65C606.13,-380.69 602.27,-330.45 614,-290 621.66,-263.57 638.49,-237.16 652.38,-218.43"/>
 <polygon fill="black" stroke="black" points="655.09,-220.65 658.39,-210.58 649.53,-216.39 655.09,-220.65"/>
 </a>
 </g>
-<g id="a_edge62&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L354">
+<g id="a_edge62&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L354">
 <text xml:space="preserve" text-anchor="start" x="614" y="-305.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1643,12 +1643,12 @@
 <!-- apply_outcome/3&#45;&gt;list::memberchk/2 -->
 <g id="edge78" class="edge">
 <title>apply_outcome/3&#45;&gt;list::memberchk/2</title>
-<g id="a_edge78"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L370" xlink:title="calls">
+<g id="a_edge78"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L370" xlink:title="calls">
 <path fill="none" stroke="black" d="M742.74,-289.55C771.74,-279.31 808.99,-266.06 842,-254 852.7,-250.09 854.84,-247.32 866,-245 1164.83,-182.76 1252.91,-255.75 1558.25,-209.03"/>
 <polygon fill="black" stroke="black" points="1558.37,-212.56 1567.71,-207.55 1557.29,-205.64 1558.37,-212.56"/>
 </a>
 </g>
-<g id="a_edge78&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L370" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L370">
+<g id="a_edge78&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L370" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L370">
 <text xml:space="preserve" text-anchor="start" x="866" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1656,12 +1656,12 @@
 <!-- apply_outcome/3&#45;&gt;^^replace_diagnostic/4 -->
 <g id="edge63" class="edge">
 <title>apply_outcome/3&#45;&gt;^^replace_diagnostic/4</title>
-<g id="a_edge63"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L370" xlink:title="calls">
+<g id="a_edge63"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L370" xlink:title="calls">
 <path fill="none" stroke="black" d="M690.11,-289.53C687.08,-271.19 682.27,-242.06 678.69,-220.4"/>
 <polygon fill="black" stroke="black" points="682.18,-220.04 677.1,-210.75 675.27,-221.18 682.18,-220.04"/>
 </a>
 </g>
-<g id="a_edge63&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L370" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L370">
+<g id="a_edge63&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L370" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L370">
 <text xml:space="preserve" text-anchor="start" x="684.07" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1671,7 +1671,7 @@
 <title>valid_model/7</title>
 <polygon fill="cornsilk" stroke="black" points="2073.44,-326 1984.56,-326 1984.56,-290 2073.44,-290 2073.44,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1992.56" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node36_46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L400" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L400">
+<g id="a_node36_46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L400" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L400">
 <text xml:space="preserve" text-anchor="start" x="1995.06" y="-309.53" font-family="Monospace" font-size="11.00">valid_model/7</text>
 </a>
 </g>
@@ -1683,12 +1683,12 @@
 <!-- check_forecaster/1&#45;&gt;valid_model/7 -->
 <g id="edge40" class="edge">
 <title>check_forecaster/1&#45;&gt;valid_model/7</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L388" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L388" xlink:title="calls">
 <path fill="none" stroke="black" d="M1813.58,-406.53C1858.18,-386.34 1931.68,-353.06 1980.22,-331.09"/>
 <polygon fill="black" stroke="black" points="1981.43,-334.38 1989.1,-327.07 1978.54,-328 1981.43,-334.38"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L388" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L388">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L388" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L388">
 <text xml:space="preserve" text-anchor="start" x="1909.62" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1698,7 +1698,7 @@
 <title>valid_state/3</title>
 <polygon fill="cornsilk" stroke="black" points="1965.38,-209 1882.62,-209 1882.62,-173 1965.38,-173 1965.38,-209"/>
 <text xml:space="preserve" text-anchor="start" x="1890.62" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node37_47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L408" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L408">
+<g id="a_node37_47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L408" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L408">
 <text xml:space="preserve" text-anchor="start" x="1893.12" y="-192.53" font-family="Monospace" font-size="11.00">valid_state/3</text>
 </a>
 </g>
@@ -1710,12 +1710,12 @@
 <!-- check_forecaster/1&#45;&gt;valid_state/3 -->
 <g id="edge41" class="edge">
 <title>check_forecaster/1&#45;&gt;valid_state/3</title>
-<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L388" xlink:title="calls">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L388" xlink:title="calls">
 <path fill="none" stroke="black" d="M1785.08,-406.91C1800.29,-381.27 1830.17,-331.44 1857,-290 1872.9,-265.43 1891.78,-237.96 1905.43,-218.37"/>
 <polygon fill="black" stroke="black" points="1908.14,-220.61 1911,-210.41 1902.4,-216.6 1908.14,-220.61"/>
 </a>
 </g>
-<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L388" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L388">
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L388" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L388">
 <text xml:space="preserve" text-anchor="start" x="1857" y="-305.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1725,7 +1725,7 @@
 <title>valid_rows/3</title>
 <polygon fill="cornsilk" stroke="black" points="1966.07,-326 1883.93,-326 1883.93,-290 1966.07,-290 1966.07,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1891.93" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node38_48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L414" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L414">
+<g id="a_node38_48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L414" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L414">
 <text xml:space="preserve" text-anchor="start" x="1894.43" y="-309.53" font-family="Monospace" font-size="11.00">valid_rows/3</text>
 </a>
 </g>
@@ -1737,12 +1737,12 @@
 <!-- check_forecaster/1&#45;&gt;valid_rows/3 -->
 <g id="edge42" class="edge">
 <title>check_forecaster/1&#45;&gt;valid_rows/3</title>
-<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L388" xlink:title="calls">
+<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L388" xlink:title="calls">
 <path fill="none" stroke="black" d="M1802.25,-406.59C1817.47,-396.58 1836.63,-383.55 1853,-371 1868.11,-359.42 1884.22,-345.69 1897.37,-334.09"/>
 <polygon fill="black" stroke="black" points="1899.67,-336.73 1904.81,-327.46 1895.02,-331.5 1899.67,-336.73"/>
 </a>
 </g>
-<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L388" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L388">
+<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L388" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L388">
 <text xml:space="preserve" text-anchor="start" x="1863.16" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1752,7 +1752,7 @@
 <title>valid_diagnostics/7</title>
 <polygon fill="cornsilk" stroke="black" points="1811.97,-326 1698.03,-326 1698.03,-290 1811.97,-290 1811.97,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1706.03" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node40_49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L429" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L429">
+<g id="a_node40_49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L429" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L429">
 <text xml:space="preserve" text-anchor="start" x="1708.53" y="-309.53" font-family="Monospace" font-size="11.00">valid_diagnostics/7</text>
 </a>
 </g>
@@ -1764,12 +1764,12 @@
 <!-- check_forecaster/1&#45;&gt;valid_diagnostics/7 -->
 <g id="edge43" class="edge">
 <title>check_forecaster/1&#45;&gt;valid_diagnostics/7</title>
-<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L388" xlink:title="calls">
+<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L388" xlink:title="calls">
 <path fill="none" stroke="black" d="M1771.96,-406.53C1768.77,-388.19 1763.71,-359.06 1759.94,-337.4"/>
 <polygon fill="black" stroke="black" points="1763.42,-337 1758.26,-327.74 1756.53,-338.2 1763.42,-337"/>
 </a>
 </g>
-<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L388" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L388">
+<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L388" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L388">
 <text xml:space="preserve" text-anchor="start" x="1765.6" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1779,7 +1779,7 @@
 <title>forecaster_data/5</title>
 <polygon fill="cornsilk" stroke="black" points="2198.31,-326 2091.69,-326 2091.69,-290 2198.31,-290 2198.31,-326"/>
 <text xml:space="preserve" text-anchor="start" x="2099.69" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node41_50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L462" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L462">
+<g id="a_node41_50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L462" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L462">
 <text xml:space="preserve" text-anchor="start" x="2102.2" y="-309.53" font-family="Monospace" font-size="11.00">forecaster_data/5</text>
 </a>
 </g>
@@ -1791,12 +1791,12 @@
 <!-- check_forecaster/1&#45;&gt;forecaster_data/5 -->
 <g id="edge39" class="edge">
 <title>check_forecaster/1&#45;&gt;forecaster_data/5</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L388" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L388" xlink:title="calls">
 <path fill="none" stroke="black" d="M1831.2,-406.53C1898.17,-385.72 2009.85,-351.01 2080.34,-329.1"/>
 <polygon fill="black" stroke="black" points="2081.33,-332.45 2089.84,-326.14 2079.25,-325.77 2081.33,-332.45"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L388" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L388">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L388" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L388">
 <text xml:space="preserve" text-anchor="start" x="1971.09" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1806,7 +1806,7 @@
 <title>valid_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="2232.44,-209 2143.56,-209 2143.56,-173 2232.44,-173 2232.44,-209"/>
 <text xml:space="preserve" text-anchor="start" x="2151.56" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node46_51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L507" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L507">
+<g id="a_node46_51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L507" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L507">
 <text xml:space="preserve" text-anchor="start" x="2154.06" y="-192.53" font-family="Monospace" font-size="11.00">valid_option/1</text>
 </a>
 </g>
@@ -1818,12 +1818,12 @@
 <!-- valid_model/7&#45;&gt;valid_option/1 -->
 <g id="edge44" class="edge">
 <title>valid_model/7&#45;&gt;valid_option/1</title>
-<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L400" xlink:title="calls">
+<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L400" xlink:title="calls">
 <path fill="none" stroke="black" d="M2058.76,-289.5C2075.11,-279.58 2095.54,-266.64 2113,-254 2129.05,-242.38 2146.14,-228.39 2159.94,-216.64"/>
 <polygon fill="black" stroke="black" points="2162.04,-219.45 2167.35,-210.28 2157.48,-214.14 2162.04,-219.45"/>
 </a>
 </g>
-<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L400" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L400">
+<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L400" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L400">
 <text xml:space="preserve" text-anchor="start" x="2123.61" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1831,12 +1831,12 @@
 <!-- valid_state/3&#45;&gt;list::length/2 -->
 <g id="edge80" class="edge">
 <title>valid_state/3&#45;&gt;list::length/2</title>
-<g id="a_edge80"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L408" xlink:title="calls">
+<g id="a_edge80"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L408" xlink:title="calls">
 <path fill="none" stroke="black" d="M1936.04,-172.51C1946.18,-158.87 1961.75,-140.25 1979,-128 2002.56,-111.27 2032.18,-98.62 2057.1,-89.88"/>
 <polygon fill="black" stroke="black" points="2058.04,-93.26 2066.39,-86.74 2055.79,-86.63 2058.04,-93.26"/>
 </a>
 </g>
-<g id="a_edge80&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L408" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L408">
+<g id="a_edge80&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L408" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L408">
 <text xml:space="preserve" text-anchor="start" x="1979" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1858,12 +1858,12 @@
 <!-- valid_state/3&#45;&gt;type::valid/2 -->
 <g id="edge79" class="edge">
 <title>valid_state/3&#45;&gt;type::valid/2</title>
-<g id="a_edge79"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L408" xlink:title="calls">
+<g id="a_edge79"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L408" xlink:title="calls">
 <path fill="none" stroke="black" d="M1926.77,-172.74C1929.14,-160.07 1933.11,-142.58 1939,-128 1942.53,-119.24 1947.33,-110.2 1952.1,-102.11"/>
 <polygon fill="black" stroke="black" points="1954.97,-104.12 1957.23,-93.77 1949.01,-100.46 1954.97,-104.12"/>
 </a>
 </g>
-<g id="a_edge79&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L408" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L408">
+<g id="a_edge79&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L408" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L408">
 <text xml:space="preserve" text-anchor="start" x="1939" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1873,7 +1873,7 @@
 <title>valid_rows_/2</title>
 <polygon fill="cornsilk" stroke="black" points="2072.13,-209 1983.87,-209 1983.87,-173 2072.13,-173 2072.13,-209"/>
 <text xml:space="preserve" text-anchor="start" x="1991.87" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node39_53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L422" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L422">
+<g id="a_node39_53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L422" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L422">
 <text xml:space="preserve" text-anchor="start" x="1994.37" y="-192.53" font-family="Monospace" font-size="11.00">valid_rows_/2</text>
 </a>
 </g>
@@ -1885,12 +1885,12 @@
 <!-- valid_rows/3&#45;&gt;valid_rows_/2 -->
 <g id="edge45" class="edge">
 <title>valid_rows/3&#45;&gt;valid_rows_/2</title>
-<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L417" xlink:title="calls">
+<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L417" xlink:title="calls">
 <path fill="none" stroke="black" d="M1940.64,-289.53C1957.76,-270.43 1985.36,-239.61 2004.95,-217.73"/>
 <polygon fill="black" stroke="black" points="2007.47,-220.17 2011.54,-210.38 2002.26,-215.49 2007.47,-220.17"/>
 </a>
 </g>
-<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L417" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L417">
+<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L417" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L417">
 <text xml:space="preserve" text-anchor="start" x="1979.59" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1898,12 +1898,12 @@
 <!-- valid_rows/3&#45;&gt;list::length/2 -->
 <g id="edge81" class="edge">
 <title>valid_rows/3&#45;&gt;list::length/2</title>
-<g id="a_edge81"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L417" xlink:title="calls">
+<g id="a_edge81"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L417" xlink:title="calls">
 <path fill="none" stroke="black" d="M1966.23,-292.03C2002.24,-276.76 2053.01,-249.53 2081,-209 2102.71,-177.56 2107.79,-132.67 2108.57,-103.68"/>
 <polygon fill="black" stroke="black" points="2112.07,-103.86 2108.67,-93.82 2105.07,-103.79 2112.07,-103.86"/>
 </a>
 </g>
-<g id="a_edge81&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L417" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L417">
+<g id="a_edge81&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L417" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L417">
 <text xml:space="preserve" text-anchor="start" x="2097.71" y="-188.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1911,12 +1911,12 @@
 <!-- valid_rows_/2&#45;&gt;list::length/2 -->
 <g id="edge83" class="edge">
 <title>valid_rows_/2&#45;&gt;list::length/2</title>
-<g id="a_edge83"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L423" xlink:title="calls">
+<g id="a_edge83"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L423" xlink:title="calls">
 <path fill="none" stroke="black" d="M2040.15,-172.53C2053.27,-153.68 2074.31,-123.43 2089.49,-101.61"/>
 <polygon fill="black" stroke="black" points="2092.3,-103.7 2095.13,-93.5 2086.55,-99.71 2092.3,-103.7"/>
 </a>
 </g>
-<g id="a_edge83&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L423" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L423">
+<g id="a_edge83&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L423" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L423">
 <text xml:space="preserve" text-anchor="start" x="2070.4" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1924,12 +1924,12 @@
 <!-- valid_rows_/2&#45;&gt;type::valid/2 -->
 <g id="edge82" class="edge">
 <title>valid_rows_/2&#45;&gt;type::valid/2</title>
-<g id="a_edge82"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L423" xlink:title="calls">
+<g id="a_edge82"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L423" xlink:title="calls">
 <path fill="none" stroke="black" d="M2021.09,-172.64C2015.93,-160.07 2008.5,-142.76 2001,-128 1996.66,-119.45 1991.53,-110.36 1986.72,-102.16"/>
 <polygon fill="black" stroke="black" points="1989.78,-100.46 1981.64,-93.68 1983.77,-104.05 1989.78,-100.46"/>
 </a>
 </g>
-<g id="a_edge82&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L423" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L423">
+<g id="a_edge82&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L423" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L423">
 <text xml:space="preserve" text-anchor="start" x="2005.06" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1937,12 +1937,12 @@
 <!-- valid_diagnostics/7&#45;&gt;list::memberchk/2 -->
 <g id="edge84" class="edge">
 <title>valid_diagnostics/7&#45;&gt;list::memberchk/2</title>
-<g id="a_edge84"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L429" xlink:title="calls">
+<g id="a_edge84"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L429" xlink:title="calls">
 <path fill="none" stroke="black" d="M1734.95,-289.53C1712.63,-270.09 1676.38,-238.51 1651.21,-216.57"/>
 <polygon fill="black" stroke="black" points="1653.78,-214.18 1643.95,-210.25 1649.19,-219.46 1653.78,-214.18"/>
 </a>
 </g>
-<g id="a_edge84&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L429" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L429">
+<g id="a_edge84&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L429" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L429">
 <text xml:space="preserve" text-anchor="start" x="1692.96" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1961,12 +1961,12 @@
 <!-- valid_diagnostics/7&#45;&gt;^^valid_forecaster_metadata/3 -->
 <g id="edge64" class="edge">
 <title>valid_diagnostics/7&#45;&gt;^^valid_forecaster_metadata/3</title>
-<g id="a_edge64"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L429" xlink:title="calls">
+<g id="a_edge64"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L429" xlink:title="calls">
 <path fill="none" stroke="black" d="M1758.8,-289.53C1762.78,-271.19 1769.12,-242.06 1773.83,-220.4"/>
 <polygon fill="black" stroke="black" points="1777.22,-221.25 1775.93,-210.73 1770.38,-219.76 1777.22,-221.25"/>
 </a>
 </g>
-<g id="a_edge64&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L429" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L429">
+<g id="a_edge64&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L429" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L429">
 <text xml:space="preserve" text-anchor="start" x="1768.25" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1976,7 +1976,7 @@
 <title>forecaster_term_template/2</title>
 <polygon fill="cornsilk" stroke="black" points="1799.75,-794 1644.25,-794 1644.25,-758 1799.75,-758 1799.75,-794"/>
 <text xml:space="preserve" text-anchor="start" x="1652.25" y="-778.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node42_54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L468" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L468">
+<g id="a_node42_54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L468" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L468">
 <text xml:space="preserve" text-anchor="start" x="1654.75" y="-777.53" font-family="Monospace" font-size="11.00">forecaster_term_template/2</text>
 </a>
 </g>
@@ -1990,7 +1990,7 @@
 <title>export_to_clauses/4</title>
 <polygon fill="cornsilk" stroke="black" points="1834.73,-560 1715.27,-560 1715.27,-524 1834.73,-524 1834.73,-560"/>
 <text xml:space="preserve" text-anchor="start" x="1723.27" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node43_55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L472" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L472">
+<g id="a_node43_55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L472" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L472">
 <text xml:space="preserve" text-anchor="start" x="1725.77" y="-543.53" font-family="Monospace" font-size="11.00">export_to_clauses/4</text>
 </a>
 </g>
@@ -2002,12 +2002,12 @@
 <!-- export_to_clauses/4&#45;&gt;check_forecaster/1 -->
 <g id="edge46" class="edge">
 <title>export_to_clauses/4&#45;&gt;check_forecaster/1</title>
-<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L472" xlink:title="calls">
+<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L472" xlink:title="calls">
 <path fill="none" stroke="black" d="M1775,-523.53C1775,-505.28 1775,-476.33 1775,-454.7"/>
 <polygon fill="black" stroke="black" points="1778.5,-454.77 1775,-444.77 1771.5,-454.77 1778.5,-454.77"/>
 </a>
 </g>
-<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L472" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L472">
+<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L472" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L472">
 <text xml:space="preserve" text-anchor="start" x="1775" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -2017,7 +2017,7 @@
 <title>print_forecaster/1</title>
 <polygon fill="cornsilk" stroke="black" points="2030.3,-560 1923.7,-560 1923.7,-524 2030.3,-524 2030.3,-560"/>
 <text xml:space="preserve" text-anchor="start" x="1931.7" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node44_56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L476" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L476">
+<g id="a_node44_56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L476" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L476">
 <text xml:space="preserve" text-anchor="start" x="1934.2" y="-543.53" font-family="Monospace" font-size="11.00">print_forecaster/1</text>
 </a>
 </g>
@@ -2029,12 +2029,12 @@
 <!-- print_forecaster/1&#45;&gt;check_forecaster/1 -->
 <g id="edge47" class="edge">
 <title>print_forecaster/1&#45;&gt;check_forecaster/1</title>
-<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L476" xlink:title="calls">
+<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L476" xlink:title="calls">
 <path fill="none" stroke="black" d="M1946.32,-523.53C1911.37,-503.63 1854.11,-471.04 1815.51,-449.06"/>
 <polygon fill="black" stroke="black" points="1817.37,-446.1 1806.95,-444.19 1813.91,-452.18 1817.37,-446.1"/>
 </a>
 </g>
-<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L476" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L476">
+<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L476" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L476">
 <text xml:space="preserve" text-anchor="start" x="1882.06" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -2042,12 +2042,12 @@
 <!-- print_forecaster/1&#45;&gt;forecaster_data/5 -->
 <g id="edge48" class="edge">
 <title>print_forecaster/1&#45;&gt;forecaster_data/5</title>
-<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L476" xlink:title="calls">
+<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L476" xlink:title="calls">
 <path fill="none" stroke="black" d="M2030.61,-524.48C2068.62,-509.69 2116.98,-483.9 2141,-443 2159.98,-410.69 2156.67,-366.02 2151.6,-337.31"/>
 <polygon fill="black" stroke="black" points="2155.04,-336.69 2149.67,-327.56 2148.17,-338.05 2155.04,-336.69"/>
 </a>
 </g>
-<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L476" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L476">
+<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L476" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L476">
 <text xml:space="preserve" text-anchor="start" x="2153.35" y="-422.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -2055,12 +2055,12 @@
 <!-- print_forecaster/1&#45;&gt;list::length/2 -->
 <g id="edge86" class="edge">
 <title>print_forecaster/1&#45;&gt;list::length/2</title>
-<g id="a_edge86"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L476" xlink:title="calls">
+<g id="a_edge86"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L476" xlink:title="calls">
 <path fill="none" stroke="black" d="M2030.35,-529.49C2076.42,-516.6 2140.79,-490.91 2175,-443 2210.89,-392.73 2268.86,-228.13 2241,-173 2223.68,-138.73 2188.11,-113.5 2158.11,-97.23"/>
 <polygon fill="black" stroke="black" points="2160.01,-94.28 2149.52,-92.76 2156.77,-100.49 2160.01,-94.28"/>
 </a>
 </g>
-<g id="a_edge86&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L476" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L476">
+<g id="a_edge86&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L476" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L476">
 <text xml:space="preserve" text-anchor="start" x="2237.02" y="-305.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -2068,12 +2068,12 @@
 <!-- print_forecaster/1&#45;&gt;list::memberchk/2 -->
 <g id="edge87" class="edge">
 <title>print_forecaster/1&#45;&gt;list::memberchk/2</title>
-<g id="a_edge87"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L476" xlink:title="calls">
+<g id="a_edge87"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L476" xlink:title="calls">
 <path fill="none" stroke="black" d="M1923.38,-533.76C1826.73,-520.58 1632.84,-493.54 1628,-488 1593.76,-448.84 1610.54,-286.57 1619.06,-220.34"/>
 <polygon fill="black" stroke="black" points="1622.5,-221.02 1620.35,-210.65 1615.56,-220.1 1622.5,-221.02"/>
 </a>
 </g>
-<g id="a_edge87&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L476" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L476">
+<g id="a_edge87&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L476" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L476">
 <text xml:space="preserve" text-anchor="start" x="1607.53" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -2095,12 +2095,12 @@
 <!-- print_forecaster/1&#45;&gt;format::format/2 -->
 <g id="edge85" class="edge">
 <title>print_forecaster/1&#45;&gt;format::format/2</title>
-<g id="a_edge85"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L476" xlink:title="calls">
+<g id="a_edge85"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L476" xlink:title="calls">
 <path fill="none" stroke="black" d="M1965.15,-523.53C1952.37,-504.68 1931.85,-474.43 1917.05,-452.61"/>
 <polygon fill="black" stroke="black" points="1920.06,-450.82 1911.55,-444.51 1914.27,-454.75 1920.06,-450.82"/>
 </a>
 </g>
-<g id="a_edge85&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L476" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L476">
+<g id="a_edge85&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L476" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L476">
 <text xml:space="preserve" text-anchor="start" x="1940.34" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -2119,12 +2119,12 @@
 <!-- print_forecaster/1&#45;&gt;^^print_forecaster_template/1 -->
 <g id="edge65" class="edge">
 <title>print_forecaster/1&#45;&gt;^^print_forecaster_template/1</title>
-<g id="a_edge65"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L476" xlink:title="calls">
+<g id="a_edge65"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L476" xlink:title="calls">
 <path fill="none" stroke="black" d="M1987.94,-523.53C1999.69,-504.77 2018.51,-474.7 2032.15,-452.91"/>
 <polygon fill="black" stroke="black" points="2035.05,-454.87 2037.39,-444.54 2029.12,-451.15 2035.05,-454.87"/>
 </a>
 </g>
-<g id="a_edge65&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L476" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L476">
+<g id="a_edge65&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L476" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L476">
 <text xml:space="preserve" text-anchor="start" x="2015.16" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -2134,7 +2134,7 @@
 <title>default_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="2120.65,-794 2021.35,-794 2021.35,-758 2120.65,-758 2120.65,-794"/>
 <text xml:space="preserve" text-anchor="start" x="2029.35" y="-778.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node45_58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L500" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/knn_forecasting/knn_forecasting.lgt#L500">
+<g id="a_node45_58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L500" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/knn_forecasting/knn_forecasting.lgt#L500">
 <text xml:space="preserve" text-anchor="start" x="2031.86" y="-777.53" font-family="Monospace" font-size="11.00">default_option/1</text>
 </a>
 </g>

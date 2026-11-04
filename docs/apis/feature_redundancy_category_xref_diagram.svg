@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-257 482,-257 482,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for category feature_redundancy</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;10&#45;31, 16:03</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;04, 19:18</text>
 <g id="clust1" class="cluster">
 <title>cluster_feature_redundancy_category</title>
 <g id="a_clust1"><a xlink:title="feature_redundancy">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 458,-46 458,-46 464,-46 470,-52 470,-58 470,-58 470,-233 470,-233 470,-239 464,-245 458,-245 458,-245 20,-245 20,-245 14,-245 8,-239 8,-233 8,-233 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/feature_selection_protocols/feature_redundancy.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/feature_selection_protocols/feature_redundancy.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/feature_selection_protocols/feature_redundancy.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/feature_selection_protocols/feature_redundancy.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-229.3" font-family="Monospace" font-size="10.00" fill="dimgray">feature_redundancy</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>feature_pair_mutual_information/3</title>
 <polygon fill="yellow" stroke="black" points="335.27,-209 146.73,-209 146.73,-173 335.27,-173 335.27,-209"/>
 <text xml:space="preserve" text-anchor="start" x="154.73" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/feature_selection_protocols/feature_redundancy.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/feature_selection_protocols/feature_redundancy.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/feature_selection_protocols/feature_redundancy.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/feature_selection_protocols/feature_redundancy.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="157.23" y="-192.53" font-family="Monospace" font-size="11.00">feature_pair_mutual_information/3</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>aligned_feature_pairs/3</title>
 <polygon fill="cornsilk" stroke="black" points="153.99,-92 18.01,-92 18.01,-56 153.99,-56 153.99,-92"/>
 <text xml:space="preserve" text-anchor="start" x="26.01" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/feature_selection_protocols/feature_redundancy.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/feature_selection_protocols/feature_redundancy.lgt#L44">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/feature_selection_protocols/feature_redundancy.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/feature_selection_protocols/feature_redundancy.lgt#L44">
 <text xml:space="preserve" text-anchor="start" x="28.51" y="-75.53" font-family="Monospace" font-size="11.00">aligned_feature_pairs/3</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- feature_pair_mutual_information/3&#45;&gt;aligned_feature_pairs/3 -->
 <g id="edge1" class="edge">
 <title>feature_pair_mutual_information/3&#45;&gt;aligned_feature_pairs/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/feature_selection_protocols/feature_redundancy.lgt#L39" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/feature_selection_protocols/feature_redundancy.lgt#L39" xlink:title="calls">
 <path fill="none" stroke="black" d="M217.46,-172.53C191.09,-152.97 148.19,-121.14 118.61,-99.19"/>
 <polygon fill="black" stroke="black" points="120.84,-96.49 110.72,-93.34 116.67,-102.11 120.84,-96.49"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/feature_selection_protocols/feature_redundancy.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/feature_selection_protocols/feature_redundancy.lgt#L39">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/feature_selection_protocols/feature_redundancy.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/feature_selection_protocols/feature_redundancy.lgt#L39">
 <text xml:space="preserve" text-anchor="start" x="168.15" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -79,12 +79,12 @@
 <!-- feature_pair_mutual_information/3&#45;&gt;^^contingency_counts/2 -->
 <g id="edge2" class="edge">
 <title>feature_pair_mutual_information/3&#45;&gt;^^contingency_counts/2</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/feature_selection_protocols/feature_redundancy.lgt#L39" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/feature_selection_protocols/feature_redundancy.lgt#L39" xlink:title="calls">
 <path fill="none" stroke="black" d="M241,-172.53C241,-154.28 241,-125.33 241,-103.7"/>
 <polygon fill="black" stroke="black" points="244.5,-103.77 241,-93.77 237.5,-103.77 244.5,-103.77"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/feature_selection_protocols/feature_redundancy.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/feature_selection_protocols/feature_redundancy.lgt#L39">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/feature_selection_protocols/feature_redundancy.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/feature_selection_protocols/feature_redundancy.lgt#L39">
 <text xml:space="preserve" text-anchor="start" x="241" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -103,12 +103,12 @@
 <!-- feature_pair_mutual_information/3&#45;&gt;^^contingency_score/3 -->
 <g id="edge3" class="edge">
 <title>feature_pair_mutual_information/3&#45;&gt;^^contingency_score/3</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/feature_selection_protocols/feature_redundancy.lgt#L39" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/feature_selection_protocols/feature_redundancy.lgt#L39" xlink:title="calls">
 <path fill="none" stroke="black" d="M264.24,-172.53C290.34,-152.92 332.86,-120.96 362.07,-99"/>
 <polygon fill="black" stroke="black" points="363.94,-101.97 369.84,-93.16 359.74,-96.37 363.94,-101.97"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/feature_selection_protocols/feature_redundancy.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d91dfc58de363952a88079a7a5b91090dc029e62/library/feature_selection_protocols/feature_redundancy.lgt#L39">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/feature_selection_protocols/feature_redundancy.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/feature_selection_protocols/feature_redundancy.lgt#L39">
 <text xml:space="preserve" text-anchor="start" x="322.09" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
