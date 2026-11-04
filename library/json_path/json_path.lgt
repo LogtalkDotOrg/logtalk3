@@ -23,9 +23,9 @@
 	implements(json_path_protocol)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-09-24,
+		date is 2026-11-04,
 		comment is 'Initial JSONPath implementation supporting child and descendant navigation, names, wildcards, indexes, and slices.',
 		parameters is [
 			'StringRepresentation' - 'Text representation to be used for query member names and normalized paths. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
@@ -36,12 +36,12 @@
 		append/3, length/2, nth0/3, valid/1 as proper_list/1
 	]).
 
-	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == xvm; Dialect == swi))).
-		:- if(current_logtalk_flag(prolog_dialect, swi)).
-			:- use_module(unicode, [unicode_property/2]).
-		:- elif(current_logtalk_flag(prolog_dialect, xvm)).
-			:- uses(user, [unicode_property/2]).
-		:- endif.
+	:- if(current_logtalk_flag(prolog_dialect, shumway)).
+		:- uses(user, [unicode_property/2]).
+	:- elif(current_logtalk_flag(prolog_dialect, swi)).
+		:- use_module(unicode, [unicode_property/2]).
+	:- elif(current_logtalk_flag(prolog_dialect, xvm)).
+		:- uses(user, [unicode_property/2]).
 	:- endif.
 
 	parse(Source, Query) :-
@@ -1057,17 +1057,24 @@
 		!.
 	iregexp_property_category_codes([ClassCode, SubcategoryCode], [ClassCode, SubcategoryCode]).
 
-	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == xvm; Dialect == swi))).
+	:- if((
+		current_logtalk_flag(prolog_dialect, Dialect),
+		(Dialect == shumway; Dialect == swi; Dialect == xvm)
+	)).
+
 		iregexp_property_support_available.
 
 		iregexp_unicode_category(Code, Category) :-
 			unicode_property(Code, category(Category)).
+
 	:- else.
+
 		iregexp_property_support_available :-
 			fail.
 
 		iregexp_unicode_category(_, _) :-
 			fail.
+
 	:- endif.
 
 	compare_filter_values(eq, Left, Right, Result) :-

@@ -23,9 +23,9 @@
 	implements(iso_13616_protocol)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-06-07,
+		date is 2026-11-04,
 		comment is 'ISO 13616 IBAN parser and normalizer based on the public ISO and SWIFT registry structure definitions and MOD-97 checksum algorithm.'
 	]).
 
@@ -196,7 +196,10 @@
 		grouped_characters(Characters, GroupedCharacters).
 	grouped_characters(Characters, Characters).
 
-	:- if(current_logtalk_flag(prolog_dialect, swi)).
+	:- if((
+		current_logtalk_flag(prolog_dialect, Dialect),
+		(Dialect == shumway; Dialect == swi)
+	)).
 
 		downcase_atom(Atom, LoweredAtom) :-
 			{downcase_atom(Atom, LoweredAtom)}.

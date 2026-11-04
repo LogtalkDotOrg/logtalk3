@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-03,
+		date is 2026-11-04,
 		comment is 'Tests for the "json_path" library initial implementation.'
 	]).
 
@@ -194,7 +194,10 @@
 		JSON = [{b-abbbabbb}, {b-abbb}],
 		query(atom('$[?match(@.b, ''(ab{2,3}){2,3}'')]'), JSON, Values).
 
-	:- if((current_logtalk_flag(prolog_dialect, swi); current_logtalk_flag(prolog_dialect, xvm))).
+	:- if((
+		current_logtalk_flag(prolog_dialect, Dialect),
+		(Dialect == shumway; Dialect == swi; Dialect == xvm)
+	)).
 
 		test(evaluate_filter_property_match_function, deterministic(Values == [{b-'5'}])) :-
 			JSON = [{b-'5'}, {b-'A'}, {b-abc}],

@@ -23,9 +23,9 @@
 	implements(json_ld_protocol)).
 
 	:- info([
-		version is 1:4:1,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2026-10-20,
+		date is 2026-11-04,
 		comment is 'JSON-LD 1.1 parser, generator, and processor. Builds on top of the ``json`` library for JSON parsing and generation.',
 		parameters is [
 			'ObjectRepresentation' - 'Object representation to be used when decoding JSON objects. Possible values are ``curly`` (default) and ``list``.',
@@ -1819,7 +1819,10 @@
 		;	last_slash_position(Codes, NextPos, LastPos)
 		).
 
-	:- if(current_logtalk_flag(prolog_dialect, swi)).
+	:- if((
+		current_logtalk_flag(prolog_dialect, Dialect),
+		(Dialect == shumway; Dialect == swi)
+	)).
 
 		downcase_atom(Atom, LoweredAtom) :-
 			{downcase_atom(Atom, LoweredAtom)}.

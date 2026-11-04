@@ -23,9 +23,9 @@
 	implements(iso_9362_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-05,
+		date is 2026-11-04,
 		comment is 'ISO 9362 BIC parser and normalizer based on the public Swift and ISO 9362 structure definitions.'
 	]).
 
@@ -80,7 +80,10 @@
 		;	'0' @=< Character, Character @=< '9'
 		).
 
-	:- if(current_logtalk_flag(prolog_dialect, swi)).
+	:- if((
+		current_logtalk_flag(prolog_dialect, Dialect),
+		(Dialect == shumway; Dialect == swi)
+	)).
 
 		downcase_atom(Atom, LoweredAtom) :-
 			{downcase_atom(Atom, LoweredAtom)}.
