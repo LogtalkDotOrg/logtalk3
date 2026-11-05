@@ -395,10 +395,7 @@
 			integer(Status),
 			Status >= 0,
 			!,
-			{get_flag(hostarch, HostArch)},
-			(	(	{atom_string(i386_nt, HostArch)}
-				;	{atom_string(x86_64_nt, HostArch)}
-				) ->
+			(	{getenv('COMSPEC', _)} ->
 				ExitStatus = exit(Status)
 			;	LowByte is Status mod 256,
 				Signal is Status mod 128,
@@ -412,16 +409,9 @@
 				)
 			).
 	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
-		normalize_status(0, ExitStatus) :-
-			!,
-			ExitStatus = exit(0).
 		normalize_status(Status, ExitStatus) :-
 			integer(Status),
 			Status >= 0,
-			current_prolog_flag(host_os, HostOS),
-			(	HostOS == win32
-			;	sub_atom(HostOS, 0, 5, _, mingw)
-			),
 			!,
 			ExitStatus = exit(Status).
 	:- endif.

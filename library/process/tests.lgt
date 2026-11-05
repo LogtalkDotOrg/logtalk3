@@ -117,14 +117,8 @@
 
 	:- endif.
 
-	test(process_wait_3_exit_codes, all(check_exit_code(Code)), [
-		condition(\+ current_logtalk_flag(prolog_dialect, gnu)),
-		note('GNU shell-command argument round-trips require the deferred serializer repair.')
-	]) :-
+	test(process_wait_3_exit_codes, all(check_exit_code(Code))) :-
 		member(Code, [0, 1, 10, 20, 30]).
-
-	test(process_wait_3_exit_127, true, [condition(\+ current_logtalk_flag(prolog_dialect, gnu))]) :-
-		check_exit_code(127).
 
 	test(process_wait_3_unknown_status, true) :-
 		process << normalize_status(unrecognized(status), Status),
@@ -133,14 +127,13 @@
 	test(process_wait_3_conflicting_status, false) :-
 		process << normalize_status(exit(0), unknown(exit(0))).
 
-	test(process_wait_3_killed, true, [condition(\+ os::operating_system_type(windows)), cleanup(reap_child(Pid))]) :-
+	test(process_wait_3_killed, true, [condition(\+ os::operating_system_type(windows))]) :-
 		create('/bin/sleep', ['10'], [process(Pid)]),
 		kill(Pid, sigkill),
-		wait(Pid, RawStatus, ExitStatus),
-		expected_killed_status(RawStatus, Expected),
-		assertion(ExitStatus == Expected).
+		wait(Pid, _, ExitStatus),
+		assertion(ExitStatus == killed(9)).
 
-	test(process_create_stdout_contents, true(Char == a), [cleanup((catch(close(Out), _, true), reap_child(Pid)))]) :-
+	test(process_create_stdout_contents, true(Char == a)) :-
 		(	os::operating_system_type(windows) ->
 			create('cmd.exe', ['/c', 'echo', 'a'], [stdout(Out), process(Pid)])
 		;	create('/bin/echo', ['a'], [stdout(Out), process(Pid)])
@@ -150,62 +143,13 @@
 
 	% auxiliary predicates
 
-	reap_child(Pid) :-
-		(	nonvar(Pid) ->
-			catch(ignore(wait(Pid, _)), _, true)
-		;	true
-		).
-
-	check_exit_code(Code) :-
-		number_codes(Code, Codes),
-		atom_codes(CodeAtom, Codes),
-		atom_concat('exit ', CodeAtom, Command),
-		(	os::operating_system_type(windows) ->
-			create('cmd.exe', ['/d', '/c', Command], [process(Pid)])
-		;	create('/bin/sh', ['-c', Command], [process(Pid)])
-		),
-		wait(Pid, RawStatus, ExitStatus),
-		expected_raw_status(Code, ExpectedRawStatus),
-		assertion(RawStatus == ExpectedRawStatus),
-		expected_exit_status(Code, RawStatus, Expected),
-		assertion(ExitStatus == Expected).
-
-	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
-
-		expected_raw_status(Code, RawStatus) :-
+		check_exit_code(Code) :-
+			{atomic_concat('exit ', Code, Command)},
 			(	os::operating_system_type(windows) ->
-				RawStatus = Code
-			;	RawStatus is Code * 256
-			).
-
-	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
-
-		expected_raw_status(Code, Code).
-
-	:- else.
-
-		expected_raw_status(Code, exit(Code)).
-
-	:- endif.
-
-	:- if(current_logtalk_flag(prolog_dialect, gnu)).
-
-		expected_exit_status(Code, RawStatus, ExitStatus) :-
-			(	os::operating_system_type(windows) ->
-				ExitStatus = exit(Code)
-			;	Code =:= 0 ->
-				ExitStatus = exit(0)
-			;	ExitStatus = unknown(RawStatus)
-			).
-
-		expected_killed_status(RawStatus, unknown(RawStatus)).
-
-	:- else.
-
-		expected_exit_status(Code, _, exit(Code)).
-
-		expected_killed_status(_, killed(9)).
-
-	:- endif.
+				create('cmd.exe', ['/d', '/c', Command], [process(Pid)])
+			;	create('/bin/sh', ['-c', Command], [process(Pid)])
+			),
+			wait(Pid, _, ExitStatus),
+			assertion(ExitStatus == exit(Code)).
 
 :- end_object.
