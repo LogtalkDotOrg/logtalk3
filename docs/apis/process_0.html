@@ -553,11 +553,11 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">wait(Process,Status)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">wait(Pid,Status)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">wait(+process_or_pid,-integer_or_compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">wait(+integer,-integer_or_compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -565,7 +565,6 @@
 <section id="wait-3">
 <span id="process-0-wait-3"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">wait/3</span></code></a><a class="headerlink" href="#wait-3" title="Link to this heading"></a></h3>
 <p>Waits once for a process to terminate, returning the backend-specific status in <code class="docutils literal notranslate"><span class="pre">RawStatus</span></code> and its normalized form in <code class="docutils literal notranslate"><span class="pre">NormalizedStatus</span></code>.</p>
-<p>The backend wait predicate fails.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -575,36 +574,11 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">wait(Process,RawStatus,NormalizedStatus)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">wait(Pid,RawStatus,NormalizedStatus)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">wait(+process_or_pid,-integer_or_compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line">Process is a variable:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
-</div>
-<div class="line">Process is not an integer on a backend using integer process identifiers:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Process)</span></code></div>
-</div>
-<div class="line">Process is not a valid backend process reference:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(process,Process)</span></code></div>
-</div>
-<div class="line">Process does not identify a child process:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(process,Process)</span></code></div>
-</div>
-<div class="line">Waiting for the process raises an operating system error:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">system_error(Error)</span></code></div>
-</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">wait(+integer,-integer_or_compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -613,7 +587,7 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>Normalized status: Either <code class="docutils literal notranslate"><span class="pre">exit(Code)</span></code>, <code class="docutils literal notranslate"><span class="pre">killed(Signal)</span></code>, or <code class="docutils literal notranslate"><span class="pre">unknown(RawStatus)</span></code> when native information is insufficient.</p></li>
-<li><p>GNU Prolog limitation: Nonzero POSIX integer statuses can be ambiguous. Native waiting errors, including those for exit codes 126 and 127, are propagated.</p></li>
+<li><p>GNU Prolog limitation: No distinction between processes that exited on their own with non-zero status and processes that were killed.</p></li>
 </ul>
 </div></blockquote>
 <hr class="docutils" />
@@ -630,11 +604,11 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">kill(Process,Signal)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">kill(Pid,Signal)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">kill(+process_or_pid,+atom_or_integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">kill(+integer,+atom_or_integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -651,11 +625,11 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">kill(Process)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">kill(Pid)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">kill(+process_or_pid)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">kill(+integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 </section>

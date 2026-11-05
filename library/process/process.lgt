@@ -41,43 +41,35 @@
 	]).
 
 	:- public(wait/2).
-	:- mode(wait(+process_or_pid, -integer_or_compound), one).
+	:- mode(wait(+integer, -integer_or_compound), one).
 	:- info(wait/2, [
 		comment is 'Waits for a process to terminate and retrieves its exit status. The value of ``Status`` depends on the backend. For a successfully terminated process, ``Status`` is either ``0`` or ``exit(0)``.',
-		argnames is ['Process', 'Status']
+		argnames is ['Pid', 'Status']
 	]).
 
 	:- public(wait/3).
-	:- mode(wait(+process_or_pid, -integer_or_compound, -compound), zero_or_one_or_error).
+	:- mode(wait(+integer, -integer_or_compound, -compound), one).
 	:- info(wait/3, [
 		comment is 'Waits once for a process to terminate, returning the backend-specific status in ``RawStatus`` and its normalized form in ``NormalizedStatus``.',
-		argnames is ['Process', 'RawStatus', 'NormalizedStatus'],
+		argnames is ['Pid', 'RawStatus', 'NormalizedStatus'],
 		remarks is [
 			'Normalized status' - 'Either ``exit(Code)``, ``killed(Signal)``, or ``unknown(RawStatus)`` when native information is insufficient.',
-			'GNU Prolog limitation' - 'Nonzero POSIX integer statuses can be ambiguous. Native waiting errors, including those for exit codes 126 and 127, are propagated.'
-		],
-		fails_if is 'The backend wait predicate fails.',
-		exceptions is [
-			'Process is a variable' - instantiation_error,
-			'Process is not an integer on a backend using integer process identifiers' - type_error(integer, 'Process'),
-			'Process is not a valid backend process reference' - domain_error(process, 'Process'),
-			'Process does not identify a child process' - existence_error(process, 'Process'),
-			'Waiting for the process raises an operating system error' - system_error('Error')
+			'GNU Prolog limitation' - 'No distinction between processes that exited on their own with non-zero status and processes that were killed.'
 		]
 	]).
 
 	:- public(kill/2).
-	:- mode(kill(+process_or_pid, +atom_or_integer), zero_or_one).
+	:- mode(kill(+integer, +atom_or_integer), zero_or_one).
 	:- info(kill/2, [
 		comment is 'Kills the given process with the specified signal (an integer or one of the following atoms: ``sighup``, ``sigint``, ``sigkill``, or ``sigterm``).',
-		argnames is ['Process', 'Signal']
+		argnames is ['Pid', 'Signal']
 	]).
 
 	:- public(kill/1).
-	:- mode(kill(+process_or_pid), zero_or_one).
+	:- mode(kill(+integer), zero_or_one).
 	:- info(kill/1, [
 		comment is 'Kills the given process using the default signal (``sigkill``).',
-		argnames is ['Process']
+		argnames is ['Pid']
 	]).
 
 	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
@@ -410,8 +402,7 @@
 			).
 	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
 		normalize_status(Status, ExitStatus) :-
-			integer(Status),
-			Status >= 0,
+			Status == 0,
 			!,
 			ExitStatus = exit(Status).
 	:- endif.
