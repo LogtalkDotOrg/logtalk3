@@ -114,7 +114,7 @@
 			(	{getenv('COMSPEC', _)} ->
 				{integer_atom(Pid, PidAtom)},
 				atom_concat('taskkill /F /PID ', PidAtom, Command),
-				{sh(Command)}
+				ignore({sh(Command)})
 			;	atom(Signal) ->
 				signal_number(Signal, Number),
 				{kill(Pid, Number)}
@@ -125,7 +125,7 @@
 			(	{getenv('COMSPEC', _)} ->
 				{integer_atom(Pid, PidAtom)},
 				atom_concat('taskkill /F /PID ', PidAtom, Command),
-				{sh(Command)}
+				ignore({sh(Command)})
 			;	{kill(Pid, 9)}
 			).
 
@@ -162,7 +162,7 @@
 			(	{environ('COMSPEC', _)} ->
 				{write_to_atom(PidAtom, Pid)},
 				atom_concat('taskkill /F /PID ', PidAtom, Command),
-				{shell(Command)}
+				{shell(Command, _)}
 			;	atom(Signal) ->
 				signal_number(Signal, Number),
 				{send_signal(Pid, Number)}
@@ -173,7 +173,7 @@
 			(	{environ('COMSPEC', _)} ->
 				{write_to_atom(PidAtom, Pid)},
 				atom_concat('taskkill /F /PID ', PidAtom, Command),
-				{shell(Command)}
+				{shell(Command, _)}
 			;	{send_signal(Pid, 9)}
 			).
 

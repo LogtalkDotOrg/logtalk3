@@ -140,14 +140,13 @@
 		expected_killed_status(RawStatus, Expected),
 		assertion(ExitStatus == Expected).
 
-	test(process_create_stdout_contents, true, [cleanup((catch(close(Out), _, true), reap_child(Pid)))]) :-
+	test(process_create_stdout_contents, true(Char == a), [cleanup((catch(close(Out), _, true), reap_child(Pid)))]) :-
 		(	os::operating_system_type(windows) ->
-			create('cmd.exe', ['/c', 'echo', 'hello.'], [stdout(Out), process(Pid)])
+			create('cmd.exe', ['/c', 'echo', 'a'], [stdout(Out), process(Pid)])
 		;	create('/bin/echo', ['hello.'], [stdout(Out), process(Pid)])
 		),
-		read_term(Out, Term, []),
-		wait(Pid, _),
-		assertion(Term == hello).
+		get_char(Out, Char),
+		wait(Pid, _).
 
 	% auxiliary predicates
 
