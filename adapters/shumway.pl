@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Shumway (Prolog on .NET) 0.9.3 and later versions
-%  Last updated on November 3, 2026
+%  Last updated on November 5, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 2026 Gustavo Brown
@@ -623,33 +623,18 @@
 
 % '$lgt_logtalk_prolog_encoding'(?atom, ?atom, +stream)
 
-'$lgt_logtalk_prolog_encoding'('US-ASCII', ascii, _).
-'$lgt_logtalk_prolog_encoding'('ISO-8859-1', iso_latin_1, _).
-'$lgt_logtalk_prolog_encoding'('UTF-8', utf8, _).
-'$lgt_logtalk_prolog_encoding'('UCS-2', Encoding, Stream) :-  % BOM mandatory
-	(	stream_property(Stream, encoding(utf16le)) ->
-		Encoding = utf16le
-	;	stream_property(Stream, encoding(utf16be)) ->
-		Encoding = utf16be
-	).
-'$lgt_logtalk_prolog_encoding'('UCS-2BE', utf16be, _).
-'$lgt_logtalk_prolog_encoding'('UCS-2LE', utf16le, _).
-'$lgt_logtalk_prolog_encoding'('UTF-16', Encoding, Stream) :-  % BOM expected
-	(	stream_property(Stream, encoding(utf16le)) ->
-		Encoding = utf16le
-	;	stream_property(Stream, encoding(utf16be)) ->
-		Encoding = utf16be
-	).
-'$lgt_logtalk_prolog_encoding'('UTF-16BE', utf16be, _).
-'$lgt_logtalk_prolog_encoding'('UTF-16LE', utf16le, _).
-'$lgt_logtalk_prolog_encoding'('UTF-32', Encoding, Stream) :-  % BOM expected
-	(	stream_property(Stream, encoding(utf32le)) ->
-		Encoding = utf32le
-	;	stream_property(Stream, encoding(utf32be)) ->
-		Encoding = utf32be
-	).
-'$lgt_logtalk_prolog_encoding'('UTF-32BE', utf32be, _).
-'$lgt_logtalk_prolog_encoding'('UTF-32LE', utf32le, _).
+'$lgt_logtalk_prolog_encoding'('US-ASCII', 'US-ASCII', _).
+'$lgt_logtalk_prolog_encoding'('ISO-8859-1', 'ISO-8859-1', _).
+'$lgt_logtalk_prolog_encoding'('UTF-8', 'UTF-8', _).
+'$lgt_logtalk_prolog_encoding'('UCS-2', 'UTF-16', _).
+'$lgt_logtalk_prolog_encoding'('UCS-2BE', 'UTF-16BE', _).
+'$lgt_logtalk_prolog_encoding'('UCS-2LE', 'UTF-16LE', _).
+'$lgt_logtalk_prolog_encoding'('UTF-16', 'UTF-16', _).
+'$lgt_logtalk_prolog_encoding'('UTF-16BE', 'UTF-16BE', _).
+'$lgt_logtalk_prolog_encoding'('UTF-16LE', 'UTF-16LE', _).
+'$lgt_logtalk_prolog_encoding'('UTF-32', 'UTF-32', _).
+'$lgt_logtalk_prolog_encoding'('UTF-32BE', 'UTF-32BE', _).
+'$lgt_logtalk_prolog_encoding'('UTF-32LE', 'UTF-32LE', _).
 
 
 
