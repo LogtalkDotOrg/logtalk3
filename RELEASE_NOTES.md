@@ -154,6 +154,9 @@ using Lasso regression coefficients.
 
 * ADDED: New `linear_algebra` library predicate `symmetric_eigen_partial/7`.
 
+* ADDED: New `process` library `wait/3` predicate providing access to both raw
+and normalized process exit status.
+
 * ADDED: New `random` library `sample/3-4` predicates.
 
 * CHANGED: The `mlp_classifier` library to require ground classifier terms,

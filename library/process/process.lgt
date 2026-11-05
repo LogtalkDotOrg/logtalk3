@@ -22,9 +22,9 @@
 :- object(process).
 
 	:- info([
-		version is 2:1:0,
+		version is 2:2:0,
 		author is 'Paulo Moura',
-		date is 2026-09-13,
+		date is 2026-11-05,
 		comment is 'Portable process handling predicates.',
 		remarks is [
 			'Supported backend Prolog systems' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.',
@@ -45,6 +45,25 @@
 	:- info(wait/2, [
 		comment is 'Waits for a process to terminate and retrieves its exit status. The value of ``Status`` depends on the backend. For a successfully terminated process, ``Status`` is either ``0`` or ``exit(0)``.',
 		argnames is ['Process', 'Status']
+	]).
+
+	:- public(wait/3).
+	:- mode(wait(+process_or_pid, -integer_or_compound, -compound), zero_or_one_or_error).
+	:- info(wait/3, [
+		comment is 'Waits once for a process to terminate, returning the backend-specific status in ``RawStatus`` and its normalized form in ``NormalizedStatus``.',
+		argnames is ['Process', 'RawStatus', 'NormalizedStatus'],
+		remarks is [
+			'Normalized status' - 'Either ``exit(Code)``, ``killed(Signal)``, or ``unknown(RawStatus)`` when native information is insufficient.',
+			'GNU Prolog limitation' - 'Nonzero POSIX integer statuses can be ambiguous. Native waiting errors, including those for exit codes 126 and 127, are propagated.'
+		],
+		fails_if is 'The backend wait predicate fails.',
+		exceptions is [
+			'Process is a variable' - instantiation_error,
+			'Process is not an integer on a backend using integer process identifiers' - type_error(integer, 'Process'),
+			'Process is not a valid backend process reference' - domain_error(process, 'Process'),
+			'Process does not identify a child process' - existence_error(process, 'Process'),
+			'Waiting for the process raises an operating system error' - system_error('Error')
+		]
 	]).
 
 	:- public(kill/2).
@@ -353,6 +372,60 @@
 			).
 
 	:- endif.
+
+	wait(Process, RawStatus, NormalizedStatus) :-
+		wait(Process, RawStatus),
+		normalize_status(RawStatus, NormalizedStatus).
+
+	normalize_status(exit(Code), ExitStatus) :-
+		integer(Code),
+		!,
+		ExitStatus = exit(Code).
+	normalize_status(killed(Signal), ExitStatus) :-
+		ground(Signal),
+		!,
+		ExitStatus = killed(Signal).
+	:- if(current_logtalk_flag(prolog_dialect, xvm)).
+		normalize_status(signal(Signal), ExitStatus) :-
+			integer(Signal),
+			!,
+			ExitStatus = killed(Signal).
+	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
+		normalize_status(Status, ExitStatus) :-
+			integer(Status),
+			Status >= 0,
+			!,
+			{get_flag(hostarch, HostArch)},
+			(	(	{atom_string(i386_nt, HostArch)}
+				;	{atom_string(x86_64_nt, HostArch)}
+				) ->
+				ExitStatus = exit(Status)
+			;	LowByte is Status mod 256,
+				Signal is Status mod 128,
+				(	LowByte =:= 0 ->
+					Code is (Status // 256) mod 256,
+					ExitStatus = exit(Code)
+				;	Signal > 0,
+					Signal < 127 ->
+					ExitStatus = killed(Signal)
+				;	ExitStatus = unknown(Status)
+				)
+			).
+	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
+		normalize_status(0, ExitStatus) :-
+			!,
+			ExitStatus = exit(0).
+		normalize_status(Status, ExitStatus) :-
+			integer(Status),
+			Status >= 0,
+			current_prolog_flag(host_os, HostOS),
+			(	HostOS == win32
+			;	sub_atom(HostOS, 0, 5, _, mingw)
+			),
+			!,
+			ExitStatus = exit(Status).
+	:- endif.
+	normalize_status(Status, unknown(Status)).
 
 	signal_number(sighup,   1).
 	signal_number(sigint,   2).

@@ -14,8 +14,8 @@ Portable process handling predicates.
 |    ``logtalk_load(process(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 2:1:0
-| **Date:** 2026-09-13
+| **Version:** 2:2:0
+| **Date:** 2026-11-05
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -74,6 +74,44 @@ Waits for a process to terminate and retrieves its exit status. The value of ``S
 |    ``wait(Process,Status)``
 | **Mode and number of proofs:**
 |    ``wait(+process_or_pid,-integer_or_compound)`` - ``one``
+
+
+------------
+
+.. index:: wait/3
+.. _process/0::wait/3:
+
+``wait/3``
+^^^^^^^^^^
+
+Waits once for a process to terminate, returning the backend-specific status in ``RawStatus`` and its normalized form in ``NormalizedStatus``.
+
+The backend wait predicate fails.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``wait(Process,RawStatus,NormalizedStatus)``
+| **Mode and number of proofs:**
+|    ``wait(+process_or_pid,-integer_or_compound,-compound)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    Process is a variable:
+|        ``instantiation_error``
+|    Process is not an integer on a backend using integer process identifiers:
+|        ``type_error(integer,Process)``
+|    Process is not a valid backend process reference:
+|        ``domain_error(process,Process)``
+|    Process does not identify a child process:
+|        ``existence_error(process,Process)``
+|    Waiting for the process raises an operating system error:
+|        ``system_error(Error)``
+
+| **Remarks:**
+
+    - Normalized status: Either ``exit(Code)``, ``killed(Signal)``, or ``unknown(RawStatus)`` when native information is insufficient.
+    - GNU Prolog limitation: Nonzero POSIX integer statuses can be ambiguous. Native waiting errors, including those for exit codes 126 and 127, are propagated.
 
 
 ------------
