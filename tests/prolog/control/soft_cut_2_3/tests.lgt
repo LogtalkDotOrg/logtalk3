@@ -48,14 +48,11 @@ condition_opaque_to_cut_3(2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2022-05-29,
+		date is 2026-11-06,
 		comment is 'Unit tests for the soft-cut (*->)/2 control construct that is becoming a de facto standard.'
 	]).
-
-	condition :-
-		predicate_property('*->'(_,_), built_in).
 
 	test(commons_soft_cut_2_3_01, true) :-
 		{'*->'(true, true)}.

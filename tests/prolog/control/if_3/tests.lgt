@@ -42,12 +42,9 @@ condition_opaque_to_cut(2).
 	:- info([
 		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2022-05-29,
+		date is 2026-11-06,
 		comment is 'Unit tests for the soft-cut if/3 built-in predicate.'
 	]).
-
-	condition :-
-		predicate_property(if(_,_,_), built_in).
 
 	test(if_3_01, true) :-
 		{if(true, true, fail)}.
