@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-07-09,
+		date is 2026-11-06,
 		comment is 'Endpoint and canonical-URI helpers for S3-compatible services.'
 	]).
 
@@ -220,7 +220,7 @@
 	canonical_path(BasePath, [], BasePath).
 	canonical_path(BasePath, Segments, Path) :-
 		atomic_list_concat(Segments, '/', Joined),
-		(	BasePath == '/' ->
+		(	BasePath == ('/') ->
 			atomic_list_concat(['/', Joined], Path)
 		;	atomic_list_concat([BasePath, '/', Joined], Path)
 		).
@@ -241,7 +241,7 @@
 		atom_concat('/', Path, WithSlash).
 
 	strip_trailing_slash(Path, Path) :-
-		Path == '/',
+		Path == ('/'),
 		!.
 	strip_trailing_slash(Path, Stripped) :-
 		sub_atom(Path, _, 1, 0, '/'),
