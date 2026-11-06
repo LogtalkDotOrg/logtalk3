@@ -139,7 +139,9 @@
 
 :- if((
 	current_logtalk_flag(prolog_dialect, Dialect),
-	(Dialect == b; Dialect == swi; Dialect == trealla; Dialect == xsb; Dialect == xvm; Dialect == yap)
+	(	Dialect == b; Dialect == shumway; Dialect == swi; Dialect == trealla;
+		Dialect == xsb; Dialect == xvm; Dialect == yap
+	)
 )).
 
 	:- object(lambda_benchmarks).
