@@ -25,7 +25,8 @@
 	logtalk_load([exports, lists, metapreds, test], [debug(on), source_data(on)]),
 	% also test parsing of use_module/1 directives, which
 	% is only supported by some backend Prolog compilers
-	(	current_logtalk_flag(modules, supported) ->
+	(	current_logtalk_flag(modules, supported),
+		\+ current_logtalk_flag(prolog_dialect, shumway) ->
 		logtalk_load(client, [debug(on), source_data(on)])
 	;	true
 	),
