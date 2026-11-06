@@ -23,9 +23,9 @@
 	imports(http_router)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-07-29,
+		date is 2026-11-06,
 		comment is 'HTTP handler for the multipart form example.'
 	]).
 
@@ -145,7 +145,7 @@
 							dt('Email'),
 							dd(Email)
 						]),
-						p(a([href='/'], 'Submit another form'))
+						p(a([href=('/')], 'Submit another form'))
 					]),
 					EnvironmentCard
 				])
@@ -169,7 +169,7 @@
 						p([class='eyebrow'], 'Bad request'),
 						h1('Missing multipart form fields'),
 						p('The server expected a multipart/form-data request containing both the name and email fields.'),
-						p(a([href='/'], 'Return to the form'))
+						p(a([href=('/')], 'Return to the form'))
 					]),
 					EnvironmentCard
 				])
@@ -216,6 +216,7 @@
 	backend(ji, 'JIProlog').
 	backend(quintus, 'Quintus Prolog').
 	backend(sicstus, 'SICStus Prolog').
+	backend(shumway, 'Shumway Prolog').
 	backend(swi, 'SWI-Prolog').
 	backend(tau, 'Tau Prolog').
 	backend(trealla, 'Trealla Prolog').

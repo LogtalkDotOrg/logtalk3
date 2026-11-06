@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-09,
+		date is 2026-11-06,
 		comment is 'Unit tests for the "http_multipart_form" example.'
 	]).
 
@@ -147,6 +147,7 @@
 	backend(ji, 'JIProlog').
 	backend(quintus, 'Quintus Prolog').
 	backend(sicstus, 'SICStus Prolog').
+	backend(shumway, 'Shumway Prolog').
 	backend(swi, 'SWI-Prolog').
 	backend(tau, 'Tau Prolog').
 	backend(trealla, 'Trealla Prolog').
