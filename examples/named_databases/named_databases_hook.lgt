@@ -23,9 +23,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-09-03,
+		date is 2026-11-06,
 		comment is 'Hook object for the named database predicates.'
 	]).
 
@@ -43,7 +43,7 @@
 		goal_expansion(db_once(Database, Goal), once('@'(Goal, Database))).
 		goal_expansion(db_load(Database, File), '@'(compile(File), Database)).
 
-	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
+	:- elif((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == sicstus; Dialect == shumway))).
 
 		goal_expansion(db_create(_), true).
 		goal_expansion(db_abolish(Database, Predicate), abolish(Database:Predicate)).

@@ -181,7 +181,7 @@
 		fail}.
 	db_clear(_).
 
-:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
+:- elif((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == sicstus; Dialect == shumway))).
 
 	db_create(Database) :-
 		(	{current_module(Database)} ->
