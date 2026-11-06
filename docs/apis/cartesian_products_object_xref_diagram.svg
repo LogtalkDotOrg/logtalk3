@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-842 2025,-842 2025,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object cartesian_products</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;04, 19:18</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;06, 14:44</text>
 <g id="clust1" class="cluster">
 <title>cluster_cartesian_products_object</title>
 <g id="a_clust1"><a xlink:title="cartesian_products">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 2001,-46 2001,-46 2007,-46 2013,-52 2013,-58 2013,-58 2013,-818 2013,-818 2013,-824 2007,-830 2001,-830 2001,-830 20,-830 20,-830 14,-830 8,-824 8,-818 8,-818 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-814.3" font-family="Monospace" font-size="10.00" fill="dimgray">cartesian_products</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>canonical_lexicographic_factors/2</title>
 <polygon fill="cornsilk" stroke="black" points="2003.05,-560 1816.95,-560 1816.95,-524 2003.05,-524 2003.05,-560"/>
 <text xml:space="preserve" text-anchor="start" x="1824.95" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L184">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L184">
 <text xml:space="preserve" text-anchor="start" x="1827.45" y="-543.53" font-family="Monospace" font-size="11.00">canonical_lexicographic_factors/2</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>distinct_generator_order_source/3</title>
 <polygon fill="cornsilk" stroke="black" points="1312.27,-443 1123.73,-443 1123.73,-407 1312.27,-407 1312.27,-443"/>
 <text xml:space="preserve" text-anchor="start" x="1131.73" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node30_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L191" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L191">
+<g id="a_node30_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L191" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L191">
 <text xml:space="preserve" text-anchor="start" x="1134.23" y="-426.53" font-family="Monospace" font-size="11.00">distinct_generator_order_source/3</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- canonical_lexicographic_factors/2&#45;&gt;distinct_generator_order_source/3 -->
 <g id="edge40" class="edge">
 <title>canonical_lexicographic_factors/2&#45;&gt;distinct_generator_order_source/3</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L184" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L184" xlink:title="calls">
 <path fill="none" stroke="black" d="M1863.43,-523.53C1823.35,-509.23 1763.66,-489.68 1710,-479 1543.29,-445.82 1495.22,-464.33 1323.74,-443.28"/>
 <polygon fill="black" stroke="black" points="1324.4,-439.84 1314.04,-442.06 1323.52,-446.78 1324.4,-439.84"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L184">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L184">
 <text xml:space="preserve" text-anchor="start" x="1749.01" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>cartesian_tuple_index/3</title>
 <polygon fill="cornsilk" stroke="black" points="1445.6,-560 1308.4,-560 1308.4,-524 1445.6,-524 1445.6,-560"/>
 <text xml:space="preserve" text-anchor="start" x="1316.4" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L106">
+<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L106">
 <text xml:space="preserve" text-anchor="start" x="1318.9" y="-543.53" font-family="Monospace" font-size="11.00">cartesian_tuple_index/3</text>
 </a>
 </g>
@@ -84,7 +84,7 @@
 <title>cartesian_tuple_index_/4</title>
 <polygon fill="cornsilk" stroke="black" points="1473.66,-443 1330.34,-443 1330.34,-407 1473.66,-407 1473.66,-443"/>
 <text xml:space="preserve" text-anchor="start" x="1338.34" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node20_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L124">
+<g id="a_node20_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L124">
 <text xml:space="preserve" text-anchor="start" x="1340.84" y="-426.53" font-family="Monospace" font-size="11.00">cartesian_tuple_index_/4</text>
 </a>
 </g>
@@ -96,12 +96,12 @@
 <!-- cartesian_tuple_index/3&#45;&gt;cartesian_tuple_index_/4 -->
 <g id="edge20" class="edge">
 <title>cartesian_tuple_index/3&#45;&gt;cartesian_tuple_index_/4</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L106" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L106" xlink:title="calls">
 <path fill="none" stroke="black" d="M1380.8,-523.53C1384.78,-505.19 1391.12,-476.06 1395.83,-454.4"/>
 <polygon fill="black" stroke="black" points="1399.22,-455.25 1397.93,-444.73 1392.38,-453.76 1399.22,-455.25"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L106">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L106">
 <text xml:space="preserve" text-anchor="start" x="1390.25" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -111,7 +111,7 @@
 <title>count_cartesian_product/2</title>
 <polygon fill="cornsilk" stroke="black" points="1606.32,-326 1455.68,-326 1455.68,-290 1606.32,-290 1606.32,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1463.68" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L70">
+<g id="a_node3_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L70">
 <text xml:space="preserve" text-anchor="start" x="1466.18" y="-309.53" font-family="Monospace" font-size="11.00">count_cartesian_product/2</text>
 </a>
 </g>
@@ -125,7 +125,7 @@
 <title>count_cartesian_product/3</title>
 <polygon fill="cornsilk" stroke="black" points="1550.32,-209 1399.68,-209 1399.68,-173 1550.32,-173 1550.32,-209"/>
 <text xml:space="preserve" text-anchor="start" x="1407.68" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L73">
+<g id="a_node12_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L73">
 <text xml:space="preserve" text-anchor="start" x="1410.18" y="-192.53" font-family="Monospace" font-size="11.00">count_cartesian_product/3</text>
 </a>
 </g>
@@ -137,12 +137,12 @@
 <!-- count_cartesian_product/2&#45;&gt;count_cartesian_product/3 -->
 <g id="edge12" class="edge">
 <title>count_cartesian_product/2&#45;&gt;count_cartesian_product/3</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L70" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L70" xlink:title="calls">
 <path fill="none" stroke="black" d="M1522.49,-289.53C1513.44,-270.94 1498.98,-241.24 1488.39,-219.5"/>
 <polygon fill="black" stroke="black" points="1491.59,-218.07 1484.06,-210.61 1485.3,-221.14 1491.59,-218.07"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L70">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L70">
 <text xml:space="preserve" text-anchor="start" x="1504.68" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -152,7 +152,7 @@
 <title>distinct_cartesian_tuple/2</title>
 <polygon fill="cornsilk" stroke="black" points="163.57,-677 18.43,-677 18.43,-641 163.57,-641 163.57,-677"/>
 <text xml:space="preserve" text-anchor="start" x="26.43" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L59">
+<g id="a_node4_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="28.93" y="-660.53" font-family="Monospace" font-size="11.00">distinct_cartesian_tuple/2</text>
 </a>
 </g>
@@ -166,7 +166,7 @@
 <title>distinct_cartesian_tuple/3</title>
 <polygon fill="cornsilk" stroke="black" points="214.57,-560 69.43,-560 69.43,-524 214.57,-524 214.57,-560"/>
 <text xml:space="preserve" text-anchor="start" x="77.43" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L66">
+<g id="a_node11_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L66">
 <text xml:space="preserve" text-anchor="start" x="79.93" y="-543.53" font-family="Monospace" font-size="11.00">distinct_cartesian_tuple/3</text>
 </a>
 </g>
@@ -178,12 +178,12 @@
 <!-- distinct_cartesian_tuple/2&#45;&gt;distinct_cartesian_tuple/3 -->
 <g id="edge7" class="edge">
 <title>distinct_cartesian_tuple/2&#45;&gt;distinct_cartesian_tuple/3</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L59" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L59" xlink:title="calls">
 <path fill="none" stroke="black" d="M98.75,-640.53C106.99,-621.94 120.16,-592.24 129.8,-570.5"/>
 <polygon fill="black" stroke="black" points="132.88,-572.2 133.73,-561.64 126.48,-569.36 132.88,-572.2"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L59">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="118.03" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -193,7 +193,7 @@
 <title>distinct_cartesian_product/2</title>
 <polygon fill="cornsilk" stroke="black" points="597.98,-794 440.02,-794 440.02,-758 597.98,-758 597.98,-794"/>
 <text xml:space="preserve" text-anchor="start" x="448.02" y="-778.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L56">
+<g id="a_node5_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L56">
 <text xml:space="preserve" text-anchor="start" x="450.52" y="-777.53" font-family="Monospace" font-size="11.00">distinct_cartesian_product/2</text>
 </a>
 </g>
@@ -207,7 +207,7 @@
 <title>distinct_cartesian_product/3</title>
 <polygon fill="cornsilk" stroke="black" points="597.98,-677 440.02,-677 440.02,-641 597.98,-641 597.98,-677"/>
 <text xml:space="preserve" text-anchor="start" x="448.02" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L62">
+<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L62">
 <text xml:space="preserve" text-anchor="start" x="450.52" y="-660.53" font-family="Monospace" font-size="11.00">distinct_cartesian_product/3</text>
 </a>
 </g>
@@ -219,12 +219,12 @@
 <!-- distinct_cartesian_product/2&#45;&gt;distinct_cartesian_product/3 -->
 <g id="edge6" class="edge">
 <title>distinct_cartesian_product/2&#45;&gt;distinct_cartesian_product/3</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L56" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L56" xlink:title="calls">
 <path fill="none" stroke="black" d="M519,-757.53C519,-739.28 519,-710.33 519,-688.7"/>
 <polygon fill="black" stroke="black" points="522.5,-688.77 519,-678.77 515.5,-688.77 522.5,-688.77"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L56">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L56">
 <text xml:space="preserve" text-anchor="start" x="519" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -234,7 +234,7 @@
 <title>cartesian_product/2</title>
 <polygon fill="cornsilk" stroke="black" points="421.81,-560 304.19,-560 304.19,-524 421.81,-524 421.81,-560"/>
 <text xml:space="preserve" text-anchor="start" x="312.19" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L40">
+<g id="a_node6_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L40">
 <text xml:space="preserve" text-anchor="start" x="314.69" y="-543.53" font-family="Monospace" font-size="11.00">cartesian_product/2</text>
 </a>
 </g>
@@ -248,7 +248,7 @@
 <title>cartesian_tuple/2</title>
 <polygon fill="cornsilk" stroke="black" points="303.39,-443 198.61,-443 198.61,-407 303.39,-407 303.39,-443"/>
 <text xml:space="preserve" text-anchor="start" x="206.61" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L43" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L43">
+<g id="a_node7_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L43" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L43">
 <text xml:space="preserve" text-anchor="start" x="209.11" y="-426.53" font-family="Monospace" font-size="11.00">cartesian_tuple/2</text>
 </a>
 </g>
@@ -260,12 +260,12 @@
 <!-- cartesian_product/2&#45;&gt;cartesian_tuple/2 -->
 <g id="edge1" class="edge">
 <title>cartesian_product/2&#45;&gt;cartesian_tuple/2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L40" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L40" xlink:title="calls">
 <path fill="none" stroke="black" d="M345.99,-523.53C327.3,-504.34 297.1,-473.33 275.78,-451.44"/>
 <polygon fill="black" stroke="black" points="278.34,-449.06 268.86,-444.34 273.33,-453.94 278.34,-449.06"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L40">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L40">
 <text xml:space="preserve" text-anchor="start" x="310.36" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -287,12 +287,12 @@
 <!-- cartesian_tuple/2&#45;&gt;list::member/2 -->
 <g id="edge44" class="edge">
 <title>cartesian_tuple/2&#45;&gt;list::member/2</title>
-<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L44" xlink:title="calls">
+<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L44" xlink:title="calls">
 <path fill="none" stroke="black" d="M251,-406.53C251,-388.28 251,-359.33 251,-337.7"/>
 <polygon fill="black" stroke="black" points="254.5,-337.77 251,-327.77 247.5,-337.77 254.5,-337.77"/>
 </a>
 </g>
-<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L44">
+<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L44">
 <text xml:space="preserve" text-anchor="start" x="251" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -302,7 +302,7 @@
 <title>cartesian_product/3</title>
 <polygon fill="cornsilk" stroke="black" points="421.81,-677 304.19,-677 304.19,-641 421.81,-641 421.81,-677"/>
 <text xml:space="preserve" text-anchor="start" x="312.19" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L48">
+<g id="a_node8_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L48">
 <text xml:space="preserve" text-anchor="start" x="314.69" y="-660.53" font-family="Monospace" font-size="11.00">cartesian_product/3</text>
 </a>
 </g>
@@ -314,12 +314,12 @@
 <!-- cartesian_product/3&#45;&gt;cartesian_product/2 -->
 <g id="edge3" class="edge">
 <title>cartesian_product/3&#45;&gt;cartesian_product/2</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L48" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L48" xlink:title="calls">
 <path fill="none" stroke="black" d="M363,-640.53C363,-622.28 363,-593.33 363,-571.7"/>
 <polygon fill="black" stroke="black" points="366.5,-571.77 363,-561.77 359.5,-571.77 366.5,-571.77"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L48">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L48">
 <text xml:space="preserve" text-anchor="start" x="363" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -329,7 +329,7 @@
 <title>generator_order_source/3</title>
 <polygon fill="cornsilk" stroke="black" points="703.1,-560 554.9,-560 554.9,-524 703.1,-524 703.1,-560"/>
 <text xml:space="preserve" text-anchor="start" x="562.9" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node29_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L187" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L187">
+<g id="a_node29_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L187" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L187">
 <text xml:space="preserve" text-anchor="start" x="565.4" y="-543.53" font-family="Monospace" font-size="11.00">generator_order_source/3</text>
 </a>
 </g>
@@ -341,12 +341,12 @@
 <!-- cartesian_product/3&#45;&gt;generator_order_source/3 -->
 <g id="edge2" class="edge">
 <title>cartesian_product/3&#45;&gt;generator_order_source/3</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L48" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L48" xlink:title="calls">
 <path fill="none" stroke="black" d="M380.46,-640.72C395.4,-626.82 418.05,-607.75 441,-596 472.86,-579.68 510.42,-567.81 543.55,-559.49"/>
 <polygon fill="black" stroke="black" points="544.24,-562.93 553.13,-557.17 542.59,-556.13 544.24,-562.93"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L48">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L48">
 <text xml:space="preserve" text-anchor="start" x="441" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -356,7 +356,7 @@
 <title>cartesian_tuple/3</title>
 <polygon fill="cornsilk" stroke="black" points="286.39,-677 181.61,-677 181.61,-641 286.39,-641 286.39,-677"/>
 <text xml:space="preserve" text-anchor="start" x="189.61" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L52">
+<g id="a_node9_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L52">
 <text xml:space="preserve" text-anchor="start" x="192.11" y="-660.53" font-family="Monospace" font-size="11.00">cartesian_tuple/3</text>
 </a>
 </g>
@@ -368,12 +368,12 @@
 <!-- cartesian_tuple/3&#45;&gt;cartesian_tuple/2 -->
 <g id="edge5" class="edge">
 <title>cartesian_tuple/3&#45;&gt;cartesian_tuple/2</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L52" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L52" xlink:title="calls">
 <path fill="none" stroke="black" d="M235.28,-640.56C238.19,-600.83 245.34,-503.26 248.91,-454.58"/>
 <polygon fill="black" stroke="black" points="252.38,-455.06 249.62,-444.83 245.4,-454.55 252.38,-455.06"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L52">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L52">
 <text xml:space="preserve" text-anchor="start" x="243.63" y="-539.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -381,12 +381,12 @@
 <!-- cartesian_tuple/3&#45;&gt;generator_order_source/3 -->
 <g id="edge4" class="edge">
 <title>cartesian_tuple/3&#45;&gt;generator_order_source/3</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L52" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L52" xlink:title="calls">
 <path fill="none" stroke="black" d="M258.3,-640.65C279.24,-626.52 310.78,-607.15 341,-596 406.61,-571.78 484.88,-558.29 543.25,-550.98"/>
 <polygon fill="black" stroke="black" points="543.64,-554.46 553.15,-549.79 542.8,-547.51 543.64,-554.46"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L52">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L52">
 <text xml:space="preserve" text-anchor="start" x="341" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -394,12 +394,12 @@
 <!-- distinct_cartesian_product/3&#45;&gt;cartesian_product/2 -->
 <g id="edge9" class="edge">
 <title>distinct_cartesian_product/3&#45;&gt;cartesian_product/2</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L62" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L62" xlink:title="calls">
 <path fill="none" stroke="black" d="M506.12,-640.7C495.57,-627.35 479.71,-609.01 463,-596 447.98,-584.3 430.01,-573.87 413.46,-565.41"/>
 <polygon fill="black" stroke="black" points="415.26,-562.4 404.74,-561.09 412.15,-568.67 415.26,-562.4"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L62">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L62">
 <text xml:space="preserve" text-anchor="start" x="473.39" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -407,12 +407,12 @@
 <!-- distinct_cartesian_product/3&#45;&gt;distinct_generator_order_source/3 -->
 <g id="edge8" class="edge">
 <title>distinct_cartesian_product/3&#45;&gt;distinct_generator_order_source/3</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L62" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L62" xlink:title="calls">
 <path fill="none" stroke="black" d="M562.62,-640.58C603.26,-623.29 664.55,-594.43 712,-560 730.31,-546.71 728.23,-535.01 748,-524 779.52,-506.43 983.53,-467.78 1112.2,-444.61"/>
 <polygon fill="black" stroke="black" points="1112.54,-448.1 1121.76,-442.89 1111.3,-441.21 1112.54,-448.1"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L62">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L62">
 <text xml:space="preserve" text-anchor="start" x="748" y="-539.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -420,12 +420,12 @@
 <!-- distinct_cartesian_tuple/3&#45;&gt;cartesian_tuple/2 -->
 <g id="edge11" class="edge">
 <title>distinct_cartesian_tuple/3&#45;&gt;cartesian_tuple/2</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L66" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L66" xlink:title="calls">
 <path fill="none" stroke="black" d="M148.95,-523.63C154.81,-510.41 164.14,-492.28 176,-479 185.88,-467.92 198.5,-457.89 210.55,-449.61"/>
 <polygon fill="black" stroke="black" points="212.35,-452.62 218.77,-444.19 208.49,-446.78 212.35,-452.62"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L66">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L66">
 <text xml:space="preserve" text-anchor="start" x="176" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -433,12 +433,12 @@
 <!-- distinct_cartesian_tuple/3&#45;&gt;distinct_generator_order_source/3 -->
 <g id="edge10" class="edge">
 <title>distinct_cartesian_tuple/3&#45;&gt;distinct_generator_order_source/3</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L66" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L66" xlink:title="calls">
 <path fill="none" stroke="black" d="M172.25,-523.62C199.85,-508.74 242.27,-488.3 282,-479 458.96,-437.55 912.97,-461.18 1112.18,-443.15"/>
 <polygon fill="black" stroke="black" points="1112.36,-446.65 1121.98,-442.2 1111.69,-439.68 1112.36,-446.65"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L66">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L66">
 <text xml:space="preserve" text-anchor="start" x="282" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -460,12 +460,12 @@
 <!-- count_cartesian_product/3&#45;&gt;list::length/2 -->
 <g id="edge45" class="edge">
 <title>count_cartesian_product/3&#45;&gt;list::length/2</title>
-<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L75" xlink:title="calls">
+<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L75" xlink:title="calls">
 <path fill="none" stroke="black" d="M1436.73,-172.53C1392.47,-152.34 1319.55,-119.06 1271.4,-97.09"/>
 <polygon fill="black" stroke="black" points="1273.15,-94.04 1262.6,-93.07 1270.24,-100.41 1273.15,-94.04"/>
 </a>
 </g>
-<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L75">
+<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L75">
 <text xml:space="preserve" text-anchor="start" x="1356.56" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -475,7 +475,7 @@
 <title>count_distinct_cartesian_product/2</title>
 <polygon fill="cornsilk" stroke="black" points="1654.5,-560 1463.5,-560 1463.5,-524 1654.5,-524 1654.5,-560"/>
 <text xml:space="preserve" text-anchor="start" x="1471.5" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node13_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L80">
+<g id="a_node13_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="1474" y="-543.53" font-family="Monospace" font-size="11.00">count_distinct_cartesian_product/2</text>
 </a>
 </g>
@@ -487,12 +487,12 @@
 <!-- count_distinct_cartesian_product/2&#45;&gt;count_cartesian_product/2 -->
 <g id="edge14" class="edge">
 <title>count_distinct_cartesian_product/2&#45;&gt;count_cartesian_product/2</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L80" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L80" xlink:title="calls">
 <path fill="none" stroke="black" d="M1554.98,-523.76C1550.59,-504.27 1543.7,-471.53 1540,-443 1535.3,-406.91 1532.99,-365.01 1531.9,-337.81"/>
 <polygon fill="black" stroke="black" points="1535.4,-337.79 1531.53,-327.93 1528.4,-338.05 1535.4,-337.79"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L80">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="1540" y="-422.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -500,12 +500,12 @@
 <!-- count_distinct_cartesian_product/2&#45;&gt;distinct_generator_order_source/3 -->
 <g id="edge13" class="edge">
 <title>count_distinct_cartesian_product/2&#45;&gt;distinct_generator_order_source/3</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L80" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L80" xlink:title="calls">
 <path fill="none" stroke="black" d="M1521.46,-523.54C1492.08,-510.27 1449.96,-492.12 1412,-479 1376.27,-466.65 1336.06,-455.26 1301.55,-446.23"/>
 <polygon fill="black" stroke="black" points="1302.58,-442.89 1292.02,-443.77 1300.82,-449.66 1302.58,-442.89"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L80">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="1436.52" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -515,7 +515,7 @@
 <title>nth_cartesian_tuple/3</title>
 <polygon fill="cornsilk" stroke="black" points="1799.09,-560 1672.91,-560 1672.91,-524 1799.09,-524 1799.09,-560"/>
 <text xml:space="preserve" text-anchor="start" x="1680.91" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node14_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L84">
+<g id="a_node14_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L84">
 <text xml:space="preserve" text-anchor="start" x="1683.41" y="-543.53" font-family="Monospace" font-size="11.00">nth_cartesian_tuple/3</text>
 </a>
 </g>
@@ -527,12 +527,12 @@
 <!-- nth_cartesian_tuple/3&#45;&gt;count_cartesian_product/2 -->
 <g id="edge15" class="edge">
 <title>nth_cartesian_tuple/3&#45;&gt;count_cartesian_product/2</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L84" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L84" xlink:title="calls">
 <path fill="none" stroke="black" d="M1736.76,-523.51C1737.07,-496.02 1733.96,-442.19 1708,-407 1681.13,-370.57 1636.45,-345.98 1598.71,-330.55"/>
 <polygon fill="black" stroke="black" points="1600.26,-327.4 1589.67,-326.99 1597.69,-333.91 1600.26,-327.4"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L84">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L84">
 <text xml:space="preserve" text-anchor="start" x="1725.45" y="-422.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -542,7 +542,7 @@
 <title>nth_cartesian_tuple_/3</title>
 <polygon fill="cornsilk" stroke="black" points="1699.15,-443 1566.85,-443 1566.85,-407 1699.15,-407 1699.15,-443"/>
 <text xml:space="preserve" text-anchor="start" x="1574.85" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node16_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L97">
+<g id="a_node16_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L97">
 <text xml:space="preserve" text-anchor="start" x="1577.35" y="-426.53" font-family="Monospace" font-size="11.00">nth_cartesian_tuple_/3</text>
 </a>
 </g>
@@ -554,12 +554,12 @@
 <!-- nth_cartesian_tuple/3&#45;&gt;nth_cartesian_tuple_/3 -->
 <g id="edge16" class="edge">
 <title>nth_cartesian_tuple/3&#45;&gt;nth_cartesian_tuple_/3</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L84" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L84" xlink:title="calls">
 <path fill="none" stroke="black" d="M1720.36,-523.53C1703.24,-504.43 1675.64,-473.61 1656.05,-451.73"/>
 <polygon fill="black" stroke="black" points="1658.74,-449.49 1649.46,-444.38 1653.53,-454.17 1658.74,-449.49"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L84">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L84">
 <text xml:space="preserve" text-anchor="start" x="1687.59" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -569,7 +569,7 @@
 <title>nth_cartesian_tuple/4</title>
 <polygon fill="cornsilk" stroke="black" points="1499.09,-677 1372.91,-677 1372.91,-641 1499.09,-641 1499.09,-677"/>
 <text xml:space="preserve" text-anchor="start" x="1380.91" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node15_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L90">
+<g id="a_node15_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L90">
 <text xml:space="preserve" text-anchor="start" x="1383.41" y="-660.53" font-family="Monospace" font-size="11.00">nth_cartesian_tuple/4</text>
 </a>
 </g>
@@ -581,12 +581,12 @@
 <!-- nth_cartesian_tuple/4&#45;&gt;nth_cartesian_tuple/3 -->
 <g id="edge17" class="edge">
 <title>nth_cartesian_tuple/4&#45;&gt;nth_cartesian_tuple/3</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L90" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L90" xlink:title="calls">
 <path fill="none" stroke="black" d="M1481.56,-640.53C1534.69,-620.17 1622.51,-586.5 1679.82,-564.54"/>
 <polygon fill="black" stroke="black" points="1681,-567.83 1689.09,-560.98 1678.5,-561.29 1681,-567.83"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L90">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L90">
 <text xml:space="preserve" text-anchor="start" x="1595" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -594,12 +594,12 @@
 <!-- nth_cartesian_tuple/4&#45;&gt;generator_order_source/3 -->
 <g id="edge18" class="edge">
 <title>nth_cartesian_tuple/4&#45;&gt;generator_order_source/3</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L93" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L93" xlink:title="calls">
 <path fill="none" stroke="black" d="M1402.56,-640.55C1372.64,-625.85 1327.11,-605.7 1285,-596 1038.51,-539.21 967.91,-592.05 717,-560 716.16,-559.89 715.32,-559.78 714.47,-559.67"/>
 <polygon fill="black" stroke="black" points="715.21,-556.24 704.81,-558.26 714.2,-563.17 715.21,-556.24"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L93">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L93">
 <text xml:space="preserve" text-anchor="start" x="1315.01" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -607,12 +607,12 @@
 <!-- nth_cartesian_tuple_/3&#45;&gt;count_cartesian_product/2 -->
 <g id="edge19" class="edge">
 <title>nth_cartesian_tuple_/3&#45;&gt;count_cartesian_product/2</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L99" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L99" xlink:title="calls">
 <path fill="none" stroke="black" d="M1621.27,-406.54C1612.4,-393.76 1599.63,-376.24 1587,-362 1578.52,-352.44 1568.57,-342.64 1559.44,-334.1"/>
 <polygon fill="black" stroke="black" points="1561.85,-331.57 1552.11,-327.38 1557.11,-336.72 1561.85,-331.57"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L99" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L99">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L99" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L99">
 <text xml:space="preserve" text-anchor="start" x="1593.82" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -634,12 +634,12 @@
 <!-- nth_cartesian_tuple_/3&#45;&gt;list::nth0/3 -->
 <g id="edge46" class="edge">
 <title>nth_cartesian_tuple_/3&#45;&gt;list::nth0/3</title>
-<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L99" xlink:title="calls">
+<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L99" xlink:title="calls">
 <path fill="none" stroke="black" d="M1597.92,-406.53C1557.6,-386.47 1491.35,-353.48 1447.2,-331.5"/>
 <polygon fill="black" stroke="black" points="1448.9,-328.44 1438.39,-327.12 1445.78,-334.71 1448.9,-328.44"/>
 </a>
 </g>
-<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L99" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L99">
+<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L99" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L99">
 <text xml:space="preserve" text-anchor="start" x="1524.43" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -649,7 +649,7 @@
 <title>cartesian_tuple_index/4</title>
 <polygon fill="cornsilk" stroke="black" points="1159.6,-677 1022.4,-677 1022.4,-641 1159.6,-641 1159.6,-677"/>
 <text xml:space="preserve" text-anchor="start" x="1030.4" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node17_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L109">
+<g id="a_node17_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L109">
 <text xml:space="preserve" text-anchor="start" x="1032.9" y="-660.53" font-family="Monospace" font-size="11.00">cartesian_tuple_index/4</text>
 </a>
 </g>
@@ -661,12 +661,12 @@
 <!-- cartesian_tuple_index/4&#45;&gt;cartesian_tuple_index/3 -->
 <g id="edge21" class="edge">
 <title>cartesian_tuple_index/4&#45;&gt;cartesian_tuple_index/3</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L109" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L109" xlink:title="calls">
 <path fill="none" stroke="black" d="M1132.61,-640.53C1162.66,-627.98 1204.26,-610.75 1241,-596 1267.22,-585.47 1296.4,-574.06 1320.98,-564.53"/>
 <polygon fill="black" stroke="black" points="1322.1,-567.86 1330.16,-560.98 1319.57,-561.33 1322.1,-567.86"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L109">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L109">
 <text xml:space="preserve" text-anchor="start" x="1241" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -674,12 +674,12 @@
 <!-- cartesian_tuple_index/4&#45;&gt;generator_order_source/3 -->
 <g id="edge22" class="edge">
 <title>cartesian_tuple_index/4&#45;&gt;generator_order_source/3</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L112" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L112" xlink:title="calls">
 <path fill="none" stroke="black" d="M1069.62,-640.78C1050.47,-626.32 1021.01,-606.42 992,-596 875.99,-554.33 838.68,-579.7 717,-560 716.16,-559.86 715.33,-559.73 714.48,-559.59"/>
 <polygon fill="black" stroke="black" points="715.3,-556.18 704.85,-557.95 714.12,-563.08 715.3,-556.18"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L112">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L112">
 <text xml:space="preserve" text-anchor="start" x="1012.46" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -689,7 +689,7 @@
 <title>nth_distinct_cartesian_tuple/3</title>
 <polygon fill="cornsilk" stroke="black" points="1683.27,-677 1516.73,-677 1516.73,-641 1683.27,-641 1683.27,-677"/>
 <text xml:space="preserve" text-anchor="start" x="1524.73" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node18_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L116">
+<g id="a_node18_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L116">
 <text xml:space="preserve" text-anchor="start" x="1527.23" y="-660.53" font-family="Monospace" font-size="11.00">nth_distinct_cartesian_tuple/3</text>
 </a>
 </g>
@@ -701,12 +701,12 @@
 <!-- nth_distinct_cartesian_tuple/3&#45;&gt;nth_cartesian_tuple/3 -->
 <g id="edge24" class="edge">
 <title>nth_distinct_cartesian_tuple/3&#45;&gt;nth_cartesian_tuple/3</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L116" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L116" xlink:title="calls">
 <path fill="none" stroke="black" d="M1607.92,-640.54C1614.69,-627.1 1625.47,-608.72 1639,-596 1651.84,-583.92 1667.96,-573.69 1683.35,-565.53"/>
 <polygon fill="black" stroke="black" points="1684.63,-568.8 1691.96,-561.15 1681.46,-562.56 1684.63,-568.8"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L116">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L116">
 <text xml:space="preserve" text-anchor="start" x="1639" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -714,12 +714,12 @@
 <!-- nth_distinct_cartesian_tuple/3&#45;&gt;distinct_generator_order_source/3 -->
 <g id="edge23" class="edge">
 <title>nth_distinct_cartesian_tuple/3&#45;&gt;distinct_generator_order_source/3</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L116" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L116" xlink:title="calls">
 <path fill="none" stroke="black" d="M1533.14,-640.56C1445.44,-617.22 1300.36,-576.8 1281,-560 1248.94,-532.19 1232.03,-484.52 1224.06,-454.17"/>
 <polygon fill="black" stroke="black" points="1227.49,-453.44 1221.71,-444.56 1220.69,-455.11 1227.49,-453.44"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L116">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L116">
 <text xml:space="preserve" text-anchor="start" x="1281" y="-539.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -729,7 +729,7 @@
 <title>distinct_cartesian_tuple_index/3</title>
 <polygon fill="cornsilk" stroke="black" points="1354.77,-677 1177.23,-677 1177.23,-641 1354.77,-641 1354.77,-677"/>
 <text xml:space="preserve" text-anchor="start" x="1185.23" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node19_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L120">
+<g id="a_node19_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L120">
 <text xml:space="preserve" text-anchor="start" x="1187.73" y="-660.53" font-family="Monospace" font-size="11.00">distinct_cartesian_tuple_index/3</text>
 </a>
 </g>
@@ -741,12 +741,12 @@
 <!-- distinct_cartesian_tuple_index/3&#45;&gt;cartesian_tuple_index/3 -->
 <g id="edge26" class="edge">
 <title>distinct_cartesian_tuple_index/3&#45;&gt;cartesian_tuple_index/3</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L120" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L120" xlink:title="calls">
 <path fill="none" stroke="black" d="M1261.66,-640.56C1259.38,-627.29 1258.59,-609.15 1267,-596 1275.36,-582.92 1287.94,-572.99 1301.64,-565.47"/>
 <polygon fill="black" stroke="black" points="1303.03,-568.69 1310.41,-561.09 1299.9,-562.43 1303.03,-568.69"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L120">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L120">
 <text xml:space="preserve" text-anchor="start" x="1267" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -754,12 +754,12 @@
 <!-- distinct_cartesian_tuple_index/3&#45;&gt;distinct_generator_order_source/3 -->
 <g id="edge25" class="edge">
 <title>distinct_cartesian_tuple_index/3&#45;&gt;distinct_generator_order_source/3</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L120" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L120" xlink:title="calls">
 <path fill="none" stroke="black" d="M1258.61,-640.65C1250.71,-621.33 1238.45,-589 1232,-560 1224.02,-524.16 1220.56,-481.9 1219.08,-454.56"/>
 <polygon fill="black" stroke="black" points="1222.58,-454.46 1218.6,-444.64 1215.59,-454.79 1222.58,-454.46"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L120">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L120">
 <text xml:space="preserve" text-anchor="start" x="1232" y="-539.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -767,12 +767,12 @@
 <!-- cartesian_tuple_index_/4&#45;&gt;count_cartesian_product/2 -->
 <g id="edge27" class="edge">
 <title>cartesian_tuple_index_/4&#45;&gt;count_cartesian_product/2</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L126" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L126" xlink:title="calls">
 <path fill="none" stroke="black" d="M1421.59,-406.53C1443.31,-387.17 1478.52,-355.79 1503.11,-333.86"/>
 <polygon fill="black" stroke="black" points="1505.38,-336.53 1510.52,-327.26 1500.72,-331.3 1505.38,-336.53"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L126">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L126">
 <text xml:space="preserve" text-anchor="start" x="1470.37" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -780,12 +780,12 @@
 <!-- cartesian_tuple_index_/4&#45;&gt;list::nth0/3 -->
 <g id="edge47" class="edge">
 <title>cartesian_tuple_index_/4&#45;&gt;list::nth0/3</title>
-<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L126" xlink:title="calls">
+<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L126" xlink:title="calls">
 <path fill="none" stroke="black" d="M1402,-406.53C1402,-388.28 1402,-359.33 1402,-337.7"/>
 <polygon fill="black" stroke="black" points="1405.5,-337.77 1402,-327.77 1398.5,-337.77 1405.5,-337.77"/>
 </a>
 </g>
-<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L126">
+<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L126">
 <text xml:space="preserve" text-anchor="start" x="1402" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -795,7 +795,7 @@
 <title>random_cartesian_tuple/2</title>
 <polygon fill="cornsilk" stroke="black" points="1106.1,-443 957.9,-443 957.9,-407 1106.1,-407 1106.1,-443"/>
 <text xml:space="preserve" text-anchor="start" x="965.9" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node21_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L133" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L133">
+<g id="a_node21_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L133" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L133">
 <text xml:space="preserve" text-anchor="start" x="968.4" y="-426.53" font-family="Monospace" font-size="11.00">random_cartesian_tuple/2</text>
 </a>
 </g>
@@ -807,12 +807,12 @@
 <!-- random_cartesian_tuple/2&#45;&gt;list::length/2 -->
 <g id="edge48" class="edge">
 <title>random_cartesian_tuple/2&#45;&gt;list::length/2</title>
-<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L135" xlink:title="calls">
+<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L135" xlink:title="calls">
 <path fill="none" stroke="black" d="M1052.94,-406.72C1073.4,-388.69 1103.88,-358.55 1121,-326 1153.52,-264.17 1129.03,-237.01 1157,-173 1168.45,-146.79 1187.01,-120.06 1201.53,-101.15"/>
 <polygon fill="black" stroke="black" points="1204.14,-103.49 1207.56,-93.46 1198.64,-99.17 1204.14,-103.49"/>
 </a>
 </g>
-<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L135">
+<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L135">
 <text xml:space="preserve" text-anchor="start" x="1141.04" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -820,12 +820,12 @@
 <!-- random_cartesian_tuple/2&#45;&gt;list::nth0/3 -->
 <g id="edge50" class="edge">
 <title>random_cartesian_tuple/2&#45;&gt;list::nth0/3</title>
-<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L135" xlink:title="calls">
+<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L135" xlink:title="calls">
 <path fill="none" stroke="black" d="M1065.29,-406.52C1099.2,-388.76 1147.45,-363.62 1152,-362 1188.87,-348.83 1293.75,-328.63 1355.33,-317.35"/>
 <polygon fill="black" stroke="black" points="1355.59,-320.86 1364.8,-315.62 1354.34,-313.97 1355.59,-320.86"/>
 </a>
 </g>
-<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L135">
+<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L135">
 <text xml:space="preserve" text-anchor="start" x="1152" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -847,12 +847,12 @@
 <!-- random_cartesian_tuple/2&#45;&gt;fast_random(Algorithm)::between/3 -->
 <g id="edge49" class="edge">
 <title>random_cartesian_tuple/2&#45;&gt;fast_random(Algorithm)::between/3</title>
-<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L135" xlink:title="calls">
+<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L135" xlink:title="calls">
 <path fill="none" stroke="black" d="M1010.13,-406.53C985.67,-387 945.89,-355.23 918.41,-333.29"/>
 <polygon fill="black" stroke="black" points="920.79,-330.7 910.79,-327.2 916.42,-336.17 920.79,-330.7"/>
 </a>
 </g>
-<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L135">
+<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L135">
 <text xml:space="preserve" text-anchor="start" x="964.32" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -862,7 +862,7 @@
 <title>sample_cartesian_tuples/3</title>
 <polygon fill="cornsilk" stroke="black" points="767.93,-677 616.07,-677 616.07,-641 767.93,-641 767.93,-677"/>
 <text xml:space="preserve" text-anchor="start" x="624.07" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node22_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L143">
+<g id="a_node22_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L143">
 <text xml:space="preserve" text-anchor="start" x="626.57" y="-660.53" font-family="Monospace" font-size="11.00">sample_cartesian_tuples/3</text>
 </a>
 </g>
@@ -876,7 +876,7 @@
 <title>sample_cartesian_tuples_loop/3</title>
 <polygon fill="cornsilk" stroke="black" points="953.39,-560 774.61,-560 774.61,-524 953.39,-524 953.39,-560"/>
 <text xml:space="preserve" text-anchor="start" x="782.61" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node23_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L147" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L147">
+<g id="a_node23_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L147" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L147">
 <text xml:space="preserve" text-anchor="start" x="785.11" y="-543.53" font-family="Monospace" font-size="11.00">sample_cartesian_tuples_loop/3</text>
 </a>
 </g>
@@ -888,12 +888,12 @@
 <!-- sample_cartesian_tuples/3&#45;&gt;sample_cartesian_tuples_loop/3 -->
 <g id="edge28" class="edge">
 <title>sample_cartesian_tuples/3&#45;&gt;sample_cartesian_tuples_loop/3</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L143" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L143" xlink:title="calls">
 <path fill="none" stroke="black" d="M718.12,-640.53C747.63,-620.8 795.81,-588.59 828.67,-566.62"/>
 <polygon fill="black" stroke="black" points="830.29,-569.75 836.66,-561.28 826.4,-563.93 830.29,-569.75"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L143">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L143">
 <text xml:space="preserve" text-anchor="start" x="783.16" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -901,12 +901,12 @@
 <!-- sample_cartesian_tuples_loop/3&#45;&gt;random_cartesian_tuple/2 -->
 <g id="edge29" class="edge">
 <title>sample_cartesian_tuples_loop/3&#45;&gt;random_cartesian_tuple/2</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L149" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L149" xlink:title="calls">
 <path fill="none" stroke="black" d="M889.52,-523.53C918.21,-503.89 965,-471.87 997.07,-449.91"/>
 <polygon fill="black" stroke="black" points="999,-452.83 1005.27,-444.3 995.04,-447.06 999,-452.83"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L149" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L149">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L149" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L149">
 <text xml:space="preserve" text-anchor="start" x="953.04" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -916,7 +916,7 @@
 <title>random_distinct_cartesian_tuple/2</title>
 <polygon fill="cornsilk" stroke="black" points="1160.27,-560 971.73,-560 971.73,-524 1160.27,-524 1160.27,-560"/>
 <text xml:space="preserve" text-anchor="start" x="979.73" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node24_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L155">
+<g id="a_node24_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="982.23" y="-543.53" font-family="Monospace" font-size="11.00">random_distinct_cartesian_tuple/2</text>
 </a>
 </g>
@@ -928,12 +928,12 @@
 <!-- random_distinct_cartesian_tuple/2&#45;&gt;random_cartesian_tuple/2 -->
 <g id="edge31" class="edge">
 <title>random_distinct_cartesian_tuple/2&#45;&gt;random_cartesian_tuple/2</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L155" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L155" xlink:title="calls">
 <path fill="none" stroke="black" d="M1060.84,-523.53C1055.39,-505.11 1046.72,-475.79 1040.31,-454.1"/>
 <polygon fill="black" stroke="black" points="1043.72,-453.3 1037.53,-444.71 1037.01,-455.29 1043.72,-453.3"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L155">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="1050.02" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -941,12 +941,12 @@
 <!-- random_distinct_cartesian_tuple/2&#45;&gt;distinct_generator_order_source/3 -->
 <g id="edge30" class="edge">
 <title>random_distinct_cartesian_tuple/2&#45;&gt;distinct_generator_order_source/3</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L155" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L155" xlink:title="calls">
 <path fill="none" stroke="black" d="M1089.09,-523.53C1115.01,-503.92 1157.26,-471.96 1186.28,-450"/>
 <polygon fill="black" stroke="black" points="1188.13,-452.99 1193.99,-444.17 1183.9,-447.41 1188.13,-452.99"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L155">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="1146.56" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -956,7 +956,7 @@
 <title>sample_distinct_cartesian_tuples/3</title>
 <polygon fill="cornsilk" stroke="black" points="991.1,-794 798.9,-794 798.9,-758 991.1,-758 991.1,-794"/>
 <text xml:space="preserve" text-anchor="start" x="806.9" y="-778.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node25_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L159">
+<g id="a_node25_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L159">
 <text xml:space="preserve" text-anchor="start" x="809.4" y="-777.53" font-family="Monospace" font-size="11.00">sample_distinct_cartesian_tuples/3</text>
 </a>
 </g>
@@ -970,7 +970,7 @@
 <title>sample_distinct_cartesian_tuples_loop/3</title>
 <polygon fill="cornsilk" stroke="black" points="1004.56,-677 785.44,-677 785.44,-641 1004.56,-641 1004.56,-677"/>
 <text xml:space="preserve" text-anchor="start" x="793.44" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node26_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L163">
+<g id="a_node26_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L163">
 <text xml:space="preserve" text-anchor="start" x="795.94" y="-660.53" font-family="Monospace" font-size="11.00">sample_distinct_cartesian_tuples_loop/3</text>
 </a>
 </g>
@@ -982,12 +982,12 @@
 <!-- sample_distinct_cartesian_tuples/3&#45;&gt;sample_distinct_cartesian_tuples_loop/3 -->
 <g id="edge32" class="edge">
 <title>sample_distinct_cartesian_tuples/3&#45;&gt;sample_distinct_cartesian_tuples_loop/3</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L159" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L159" xlink:title="calls">
 <path fill="none" stroke="black" d="M895,-757.53C895,-739.28 895,-710.33 895,-688.7"/>
 <polygon fill="black" stroke="black" points="898.5,-688.77 895,-678.77 891.5,-688.77 898.5,-688.77"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L159">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L159">
 <text xml:space="preserve" text-anchor="start" x="895" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -995,12 +995,12 @@
 <!-- sample_distinct_cartesian_tuples_loop/3&#45;&gt;random_distinct_cartesian_tuple/2 -->
 <g id="edge33" class="edge">
 <title>sample_distinct_cartesian_tuples_loop/3&#45;&gt;random_distinct_cartesian_tuple/2</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L165" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L165" xlink:title="calls">
 <path fill="none" stroke="black" d="M915.51,-640.58C931.11,-627.66 953.34,-609.95 974,-596 989.66,-585.42 1007.54,-574.81 1023.34,-565.9"/>
 <polygon fill="black" stroke="black" points="1025.03,-568.96 1032.06,-561.04 1021.62,-562.85 1025.03,-568.96"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L165" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L165">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L165" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L165">
 <text xml:space="preserve" text-anchor="start" x="974" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1010,7 +1010,7 @@
 <title>next_cartesian_tuple/3</title>
 <polygon fill="cornsilk" stroke="black" points="1832.84,-677 1701.16,-677 1701.16,-641 1832.84,-641 1832.84,-677"/>
 <text xml:space="preserve" text-anchor="start" x="1709.16" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node27_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L171">
+<g id="a_node27_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L171">
 <text xml:space="preserve" text-anchor="start" x="1711.66" y="-660.53" font-family="Monospace" font-size="11.00">next_cartesian_tuple/3</text>
 </a>
 </g>
@@ -1022,12 +1022,12 @@
 <!-- next_cartesian_tuple/3&#45;&gt;canonical_lexicographic_factors/2 -->
 <g id="edge34" class="edge">
 <title>next_cartesian_tuple/3&#45;&gt;canonical_lexicographic_factors/2</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L171" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L171" xlink:title="calls">
 <path fill="none" stroke="black" d="M1770.94,-640.55C1774.8,-626.93 1781.9,-608.31 1794,-596 1806.84,-582.92 1823.52,-572.75 1840.2,-564.99"/>
 <polygon fill="black" stroke="black" points="1841.41,-568.28 1849.17,-561.07 1838.6,-561.87 1841.41,-568.28"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L171">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L171">
 <text xml:space="preserve" text-anchor="start" x="1794" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1035,12 +1035,12 @@
 <!-- next_cartesian_tuple/3&#45;&gt;cartesian_tuple_index/3 -->
 <g id="edge35" class="edge">
 <title>next_cartesian_tuple/3&#45;&gt;cartesian_tuple_index/3</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L171" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L171" xlink:title="calls">
 <path fill="none" stroke="black" d="M1741.96,-640.63C1720.39,-626.49 1687.95,-607.11 1657,-596 1574.53,-566.38 1546.63,-576.8 1457.11,-560.31"/>
 <polygon fill="black" stroke="black" points="1457.84,-556.89 1447.36,-558.44 1456.52,-563.76 1457.84,-556.89"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L171">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L171">
 <text xml:space="preserve" text-anchor="start" x="1676.1" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1048,12 +1048,12 @@
 <!-- next_cartesian_tuple/3&#45;&gt;nth_cartesian_tuple/3 -->
 <g id="edge36" class="edge">
 <title>next_cartesian_tuple/3&#45;&gt;nth_cartesian_tuple/3</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L171" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L171" xlink:title="calls">
 <path fill="none" stroke="black" d="M1759.98,-640.55C1756.06,-630.32 1751.31,-617.07 1748,-605 1745.02,-594.17 1742.51,-582.08 1740.56,-571.47"/>
 <polygon fill="black" stroke="black" points="1744.04,-571.01 1738.87,-561.76 1737.14,-572.21 1744.04,-571.01"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L171">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L171">
 <text xml:space="preserve" text-anchor="start" x="1748" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1063,7 +1063,7 @@
 <title>previous_cartesian_tuple/3</title>
 <polygon fill="cornsilk" stroke="black" points="2003.24,-677 1850.76,-677 1850.76,-641 2003.24,-641 2003.24,-677"/>
 <text xml:space="preserve" text-anchor="start" x="1858.76" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node28_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L177">
+<g id="a_node28_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L177">
 <text xml:space="preserve" text-anchor="start" x="1861.26" y="-660.53" font-family="Monospace" font-size="11.00">previous_cartesian_tuple/3</text>
 </a>
 </g>
@@ -1075,12 +1075,12 @@
 <!-- previous_cartesian_tuple/3&#45;&gt;canonical_lexicographic_factors/2 -->
 <g id="edge37" class="edge">
 <title>previous_cartesian_tuple/3&#45;&gt;canonical_lexicographic_factors/2</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L177" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L177" xlink:title="calls">
 <path fill="none" stroke="black" d="M1924.42,-640.53C1921.71,-622.19 1917.4,-593.06 1914.2,-571.4"/>
 <polygon fill="black" stroke="black" points="1917.7,-571.13 1912.77,-561.75 1910.77,-572.16 1917.7,-571.13"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L177">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L177">
 <text xml:space="preserve" text-anchor="start" x="1919.01" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1088,12 +1088,12 @@
 <!-- previous_cartesian_tuple/3&#45;&gt;cartesian_tuple_index/3 -->
 <g id="edge38" class="edge">
 <title>previous_cartesian_tuple/3&#45;&gt;cartesian_tuple_index/3</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L177" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L177" xlink:title="calls">
 <path fill="none" stroke="black" d="M1896.28,-640.63C1865.31,-623.25 1820.86,-598.72 1812,-596 1662.96,-550.31 1614.66,-583.46 1456.88,-560.14"/>
 <polygon fill="black" stroke="black" points="1457.73,-556.73 1447.32,-558.68 1456.67,-563.65 1457.73,-556.73"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L177">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L177">
 <text xml:space="preserve" text-anchor="start" x="1829.29" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1101,12 +1101,12 @@
 <!-- previous_cartesian_tuple/3&#45;&gt;nth_cartesian_tuple/3 -->
 <g id="edge39" class="edge">
 <title>previous_cartesian_tuple/3&#45;&gt;nth_cartesian_tuple/3</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L177" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L177" xlink:title="calls">
 <path fill="none" stroke="black" d="M1909.81,-640.64C1895.9,-627.25 1875.34,-608.89 1855,-596 1836.14,-584.04 1814.12,-573.42 1794.19,-564.89"/>
 <polygon fill="black" stroke="black" points="1795.65,-561.71 1785.07,-561.08 1792.95,-568.17 1795.65,-561.71"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L177">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L177">
 <text xml:space="preserve" text-anchor="start" x="1867.81" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1116,7 +1116,7 @@
 <title>sort_factor_lists/2</title>
 <polygon fill="cornsilk" stroke="black" points="1111.6,-326 1004.4,-326 1004.4,-290 1111.6,-290 1111.6,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1012.4" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node31_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L197" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L197">
+<g id="a_node31_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L197" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L197">
 <text xml:space="preserve" text-anchor="start" x="1014.9" y="-309.53" font-family="Monospace" font-size="11.00">sort_factor_lists/2</text>
 </a>
 </g>
@@ -1128,12 +1128,12 @@
 <!-- generator_order_source/3&#45;&gt;sort_factor_lists/2 -->
 <g id="edge41" class="edge">
 <title>generator_order_source/3&#45;&gt;sort_factor_lists/2</title>
-<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L188" xlink:title="calls">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L188" xlink:title="calls">
 <path fill="none" stroke="black" d="M657.78,-523.58C678.78,-510.97 707.99,-493.65 734,-479 829.81,-425.03 854.37,-412.59 952,-362 971.73,-351.78 993.68,-340.75 1012.46,-331.41"/>
 <polygon fill="black" stroke="black" points="1013.78,-334.66 1021.18,-327.08 1010.67,-328.39 1013.78,-334.66"/>
 </a>
 </g>
-<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L188">
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L188">
 <text xml:space="preserve" text-anchor="start" x="864.86" y="-422.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1141,12 +1141,12 @@
 <!-- distinct_generator_order_source/3&#45;&gt;sort_factor_lists/2 -->
 <g id="edge43" class="edge">
 <title>distinct_generator_order_source/3&#45;&gt;sort_factor_lists/2</title>
-<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L193" xlink:title="calls">
+<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L193" xlink:title="calls">
 <path fill="none" stroke="black" d="M1208.99,-406.58C1201.24,-392.97 1188.95,-374.37 1174,-362 1158.67,-349.32 1139.81,-339.01 1121.78,-330.97"/>
 <polygon fill="black" stroke="black" points="1123.26,-327.8 1112.69,-327.09 1120.52,-334.23 1123.26,-327.8"/>
 </a>
 </g>
-<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L193" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L193">
+<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L193" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L193">
 <text xml:space="preserve" text-anchor="start" x="1183.01" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1156,7 +1156,7 @@
 <title>distinct_factor_lists/2</title>
 <polygon fill="cornsilk" stroke="black" points="1298.55,-326 1175.45,-326 1175.45,-290 1298.55,-290 1298.55,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1183.45" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node32_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L202" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L202">
+<g id="a_node32_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L202" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L202">
 <text xml:space="preserve" text-anchor="start" x="1185.95" y="-309.53" font-family="Monospace" font-size="11.00">distinct_factor_lists/2</text>
 </a>
 </g>
@@ -1168,12 +1168,12 @@
 <!-- distinct_generator_order_source/3&#45;&gt;distinct_factor_lists/2 -->
 <g id="edge42" class="edge">
 <title>distinct_generator_order_source/3&#45;&gt;distinct_factor_lists/2</title>
-<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L191" xlink:title="calls">
+<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L191" xlink:title="calls">
 <path fill="none" stroke="black" d="M1220.89,-406.53C1223.92,-388.19 1228.73,-359.06 1232.31,-337.4"/>
 <polygon fill="black" stroke="black" points="1235.73,-338.18 1233.9,-327.75 1228.82,-337.04 1235.73,-338.18"/>
 </a>
 </g>
-<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L191" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L191">
+<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L191" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L191">
 <text xml:space="preserve" text-anchor="start" x="1228.07" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1195,12 +1195,12 @@
 <!-- sort_factor_lists/2&#45;&gt;list::msort/2 -->
 <g id="edge51" class="edge">
 <title>sort_factor_lists/2&#45;&gt;list::msort/2</title>
-<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L198" xlink:title="calls">
+<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L198" xlink:title="calls">
 <path fill="none" stroke="black" d="M1058,-289.53C1058,-271.28 1058,-242.33 1058,-220.7"/>
 <polygon fill="black" stroke="black" points="1061.5,-220.77 1058,-210.77 1054.5,-220.77 1061.5,-220.77"/>
 </a>
 </g>
-<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L198" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L198">
+<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L198" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L198">
 <text xml:space="preserve" text-anchor="start" x="1058" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1222,12 +1222,12 @@
 <!-- distinct_factor_lists/2&#45;&gt;list::remove_duplicates/2 -->
 <g id="edge52" class="edge">
 <title>distinct_factor_lists/2&#45;&gt;list::remove_duplicates/2</title>
-<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L203" xlink:title="calls">
+<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L203" xlink:title="calls">
 <path fill="none" stroke="black" d="M1237,-289.53C1237,-271.28 1237,-242.33 1237,-220.7"/>
 <polygon fill="black" stroke="black" points="1240.5,-220.77 1237,-210.77 1233.5,-220.77 1240.5,-220.77"/>
 </a>
 </g>
-<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L203" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/cartesian_products/cartesian_products.lgt#L203">
+<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L203" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/cartesian_products/cartesian_products.lgt#L203">
 <text xml:space="preserve" text-anchor="start" x="1237" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>

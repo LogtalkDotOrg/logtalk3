@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 3370,-140 3370,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol http_transport_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;04, 19:18</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;06, 14:45</text>
 <g id="clust1" class="cluster">
 <title>cluster_http_transport_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="http_transport_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 3346,-46 3346,-46 3352,-46 3358,-52 3358,-58 3358,-58 3358,-116 3358,-116 3358,-122 3352,-128 3346,-128 3346,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.3" font-family="Monospace" font-size="10.00" fill="dimgray">http_transport_protocol</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>open_listener/4</title>
 <polygon fill="springgreen" stroke="black" points="114.11,-92 17.89,-92 17.89,-56 114.11,-56 114.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="25.89" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L31">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L31">
 <text xml:space="preserve" text-anchor="start" x="28.39" y="-75.53" font-family="Monospace" font-size="11.00">open_listener/4</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>close_listener/1</title>
 <polygon fill="springgreen" stroke="black" points="229.72,-92 132.28,-92 132.28,-56 229.72,-56 229.72,-92"/>
 <text xml:space="preserve" text-anchor="start" x="140.28" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L52">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L52">
 <text xml:space="preserve" text-anchor="start" x="142.78" y="-75.53" font-family="Monospace" font-size="11.00">close_listener/1</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>request_listener_shutdown/1</title>
 <polygon fill="springgreen" stroke="black" points="409.82,-92 248.18,-92 248.18,-56 409.82,-56 409.82,-92"/>
 <text xml:space="preserve" text-anchor="start" x="256.18" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L64">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L64">
 <text xml:space="preserve" text-anchor="start" x="258.68" y="-75.53" font-family="Monospace" font-size="11.00">request_listener_shutdown/1</text>
 </a>
 </g>
@@ -71,7 +71,7 @@
 <title>open_connection/4</title>
 <polygon fill="springgreen" stroke="black" points="541.98,-92 428.02,-92 428.02,-56 541.98,-56 541.98,-92"/>
 <text xml:space="preserve" text-anchor="start" x="436.02" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L76">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L76">
 <text xml:space="preserve" text-anchor="start" x="438.52" y="-75.53" font-family="Monospace" font-size="11.00">open_connection/4</text>
 </a>
 </g>
@@ -85,7 +85,7 @@
 <title>close_connection/1</title>
 <polygon fill="springgreen" stroke="black" points="675.59,-92 560.41,-92 560.41,-56 675.59,-56 675.59,-92"/>
 <text xml:space="preserve" text-anchor="start" x="568.41" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L92">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L92">
 <text xml:space="preserve" text-anchor="start" x="570.91" y="-75.53" font-family="Monospace" font-size="11.00">close_connection/1</text>
 </a>
 </g>
@@ -99,7 +99,7 @@
 <title>connection_streams/3</title>
 <polygon fill="springgreen" stroke="black" points="822.31,-92 693.69,-92 693.69,-56 822.31,-56 822.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="701.69" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L103" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L103">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L103" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L103">
 <text xml:space="preserve" text-anchor="start" x="704.19" y="-75.53" font-family="Monospace" font-size="11.00">connection_streams/3</text>
 </a>
 </g>
@@ -113,7 +113,7 @@
 <title>open_connection_pool/4</title>
 <polygon fill="springgreen" stroke="black" points="981.44,-92 840.56,-92 840.56,-56 981.44,-56 981.44,-92"/>
 <text xml:space="preserve" text-anchor="start" x="848.56" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L114" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L114">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L114" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L114">
 <text xml:space="preserve" text-anchor="start" x="851.06" y="-75.53" font-family="Monospace" font-size="11.00">open_connection_pool/4</text>
 </a>
 </g>
@@ -127,7 +127,7 @@
 <title>close_connection_pool/1</title>
 <polygon fill="springgreen" stroke="black" points="1141.05,-92 998.95,-92 998.95,-56 1141.05,-56 1141.05,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1006.95" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L139" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L139">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L139" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L139">
 <text xml:space="preserve" text-anchor="start" x="1009.45" y="-75.53" font-family="Monospace" font-size="11.00">close_connection_pool/1</text>
 </a>
 </g>
@@ -141,7 +141,7 @@
 <title>connection_pool_stats/2</title>
 <polygon fill="springgreen" stroke="black" points="1298.82,-92 1159.18,-92 1159.18,-56 1298.82,-56 1298.82,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1167.18" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L152" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L152">
+<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L152" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L152">
 <text xml:space="preserve" text-anchor="start" x="1169.68" y="-75.53" font-family="Monospace" font-size="11.00">connection_pool_stats/2</text>
 </a>
 </g>
@@ -155,7 +155,7 @@
 <title>exchange/3</title>
 <polygon fill="springgreen" stroke="black" points="1394.94,-92 1317.06,-92 1317.06,-56 1394.94,-56 1394.94,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1325.06" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L164">
+<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L164">
 <text xml:space="preserve" text-anchor="start" x="1327.56" y="-75.53" font-family="Monospace" font-size="11.00">exchange/3</text>
 </a>
 </g>
@@ -169,7 +169,7 @@
 <title>exchange_sequence/3</title>
 <polygon fill="springgreen" stroke="black" points="1544.85,-92 1413.15,-92 1413.15,-56 1544.85,-56 1544.85,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1421.15" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L180">
+<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L180">
 <text xml:space="preserve" text-anchor="start" x="1423.65" y="-75.53" font-family="Monospace" font-size="11.00">exchange_sequence/3</text>
 </a>
 </g>
@@ -183,7 +183,7 @@
 <title>exchange/4</title>
 <polygon fill="springgreen" stroke="black" points="1640.94,-92 1563.06,-92 1563.06,-56 1640.94,-56 1640.94,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1571.06" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L196">
+<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L196">
 <text xml:space="preserve" text-anchor="start" x="1573.56" y="-75.53" font-family="Monospace" font-size="11.00">exchange/4</text>
 </a>
 </g>
@@ -197,7 +197,7 @@
 <title>exchange/5</title>
 <polygon fill="springgreen" stroke="black" points="1736.94,-92 1659.06,-92 1659.06,-56 1736.94,-56 1736.94,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1667.06" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L209">
+<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L209">
 <text xml:space="preserve" text-anchor="start" x="1669.56" y="-75.53" font-family="Monospace" font-size="11.00">exchange/5</text>
 </a>
 </g>
@@ -211,7 +211,7 @@
 <title>exchange_sequence/4</title>
 <polygon fill="springgreen" stroke="black" points="1886.85,-92 1755.15,-92 1755.15,-56 1886.85,-56 1886.85,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1763.15" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node14_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L227">
+<g id="a_node14_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L227">
 <text xml:space="preserve" text-anchor="start" x="1765.65" y="-75.53" font-family="Monospace" font-size="11.00">exchange_sequence/4</text>
 </a>
 </g>
@@ -225,7 +225,7 @@
 <title>serve_once/3</title>
 <polygon fill="springgreen" stroke="black" points="1991.52,-92 1904.48,-92 1904.48,-56 1991.52,-56 1991.52,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1912.48" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node15_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L240" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L240">
+<g id="a_node15_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L240" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L240">
 <text xml:space="preserve" text-anchor="start" x="1914.98" y="-75.53" font-family="Monospace" font-size="11.00">serve_once/3</text>
 </a>
 </g>
@@ -239,7 +239,7 @@
 <title>serve_websocket_once/5</title>
 <polygon fill="springgreen" stroke="black" points="2154.57,-92 2009.43,-92 2009.43,-56 2154.57,-56 2154.57,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2017.43" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node16_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L251" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L251">
+<g id="a_node16_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L251" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L251">
 <text xml:space="preserve" text-anchor="start" x="2019.93" y="-75.53" font-family="Monospace" font-size="11.00">serve_websocket_once/5</text>
 </a>
 </g>
@@ -253,7 +253,7 @@
 <title>serve_sse_once/5</title>
 <polygon fill="springgreen" stroke="black" points="2283.14,-92 2172.86,-92 2172.86,-56 2283.14,-56 2283.14,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2180.86" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node17_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L264" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L264">
+<g id="a_node17_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L264" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L264">
 <text xml:space="preserve" text-anchor="start" x="2183.36" y="-75.53" font-family="Monospace" font-size="11.00">serve_sse_once/5</text>
 </a>
 </g>
@@ -267,7 +267,7 @@
 <title>serve_listener/4</title>
 <polygon fill="springgreen" stroke="black" points="2399.33,-92 2300.67,-92 2300.67,-56 2399.33,-56 2399.33,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2308.67" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node18_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L277" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L277">
+<g id="a_node18_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L277" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L277">
 <text xml:space="preserve" text-anchor="start" x="2311.18" y="-75.53" font-family="Monospace" font-size="11.00">serve_listener/4</text>
 </a>
 </g>
@@ -281,7 +281,7 @@
 <title>serve_listener/5</title>
 <polygon fill="springgreen" stroke="black" points="2516.33,-92 2417.67,-92 2417.67,-56 2516.33,-56 2516.33,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2425.67" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node19_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L291" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L291">
+<g id="a_node19_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L291" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L291">
 <text xml:space="preserve" text-anchor="start" x="2428.18" y="-75.53" font-family="Monospace" font-size="11.00">serve_listener/5</text>
 </a>
 </g>
@@ -295,7 +295,7 @@
 <title>serve_until_shutdown/4</title>
 <polygon fill="springgreen" stroke="black" points="2671.29,-92 2534.71,-92 2534.71,-56 2671.29,-56 2671.29,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2542.71" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node20_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L318" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L318">
+<g id="a_node20_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L318" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L318">
 <text xml:space="preserve" text-anchor="start" x="2545.21" y="-75.53" font-family="Monospace" font-size="11.00">serve_until_shutdown/4</text>
 </a>
 </g>
@@ -309,7 +309,7 @@
 <title>serve_until_shutdown/5</title>
 <polygon fill="springgreen" stroke="black" points="2826.29,-92 2689.71,-92 2689.71,-56 2826.29,-56 2826.29,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2697.71" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node21_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L343" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L343">
+<g id="a_node21_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L343" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L343">
 <text xml:space="preserve" text-anchor="start" x="2700.21" y="-75.53" font-family="Monospace" font-size="11.00">serve_until_shutdown/5</text>
 </a>
 </g>
@@ -323,7 +323,7 @@
 <title>request_shutdown/1</title>
 <polygon fill="springgreen" stroke="black" points="2964.04,-92 2843.96,-92 2843.96,-56 2964.04,-56 2964.04,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2851.96" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node22_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L366" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L366">
+<g id="a_node22_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L366" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L366">
 <text xml:space="preserve" text-anchor="start" x="2854.47" y="-75.53" font-family="Monospace" font-size="11.00">request_shutdown/1</text>
 </a>
 </g>
@@ -337,7 +337,7 @@
 <title>supported_request_scheme/1</title>
 <polygon fill="springgreen" stroke="black" points="3148.27,-92 2981.73,-92 2981.73,-56 3148.27,-56 3148.27,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2989.73" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node23_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L378" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L378">
+<g id="a_node23_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L378" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L378">
 <text xml:space="preserve" text-anchor="start" x="2992.23" y="-75.53" font-family="Monospace" font-size="11.00">supported_request_scheme/1</text>
 </a>
 </g>
@@ -351,7 +351,7 @@
 <title>supported_websocket_scheme/1</title>
 <polygon fill="springgreen" stroke="black" points="3347.91,-92 3166.09,-92 3166.09,-56 3347.91,-56 3347.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3174.09" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node24_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L385" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/http_socket_transport/http_transport_protocol.lgt#L385">
+<g id="a_node24_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L385" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/http_socket_transport/http_transport_protocol.lgt#L385">
 <text xml:space="preserve" text-anchor="start" x="3176.59" y="-75.53" font-family="Monospace" font-size="11.00">supported_websocket_scheme/1</text>
 </a>
 </g>

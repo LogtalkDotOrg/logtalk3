@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-374 879,-374 879,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object secant_root_finder/1</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;04, 19:18</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;06, 14:45</text>
 <g id="clust1" class="cluster">
 <title>cluster_secant_root_finder_1_object</title>
 <g id="a_clust1"><a xlink:title="secant_root_finder(Function)">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 855,-46 855,-46 861,-46 867,-52 867,-58 867,-58 867,-350 867,-350 867,-356 861,-362 855,-362 855,-362 20,-362 20,-362 14,-362 8,-356 8,-350 8,-350 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-346.3" font-family="Monospace" font-size="10.00" fill="dimgray">secant_root_finder(Function)</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>find_root/4</title>
 <polygon fill="cornsilk" stroke="black" points="373.49,-326 300.51,-326 300.51,-290 373.49,-290 373.49,-326"/>
 <text xml:space="preserve" text-anchor="start" x="308.51" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L36">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="311.01" y="-309.53" font-family="Monospace" font-size="11.00">find_root/4</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>secant/15</title>
 <polygon fill="cornsilk" stroke="black" points="86.35,-209 17.65,-209 17.65,-173 86.35,-173 86.35,-209"/>
 <text xml:space="preserve" text-anchor="start" x="25.65" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L70">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L70">
 <text xml:space="preserve" text-anchor="start" x="28.15" y="-192.53" font-family="Monospace" font-size="11.00">secant/15</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- find_root/4&#45;&gt;secant/15 -->
 <g id="edge2" class="edge">
 <title>find_root/4&#45;&gt;secant/15</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L36" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L36" xlink:title="calls">
 <path fill="none" stroke="black" d="M300.03,-292.08C247.96,-271.07 153.12,-232.8 97.01,-210.16"/>
 <polygon fill="black" stroke="black" points="98.66,-207.05 88.07,-206.56 96.04,-213.54 98.66,-207.05"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L36">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="203.05" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>check_guesses/3</title>
 <polygon fill="cornsilk" stroke="black" points="210,-209 104,-209 104,-173 210,-173 210,-209"/>
 <text xml:space="preserve" text-anchor="start" x="112" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L98" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L98">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L98" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L98">
 <text xml:space="preserve" text-anchor="start" x="114.5" y="-192.53" font-family="Monospace" font-size="11.00">check_guesses/3</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- find_root/4&#45;&gt;check_guesses/3 -->
 <g id="edge1" class="edge">
 <title>find_root/4&#45;&gt;check_guesses/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L36" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L36" xlink:title="calls">
 <path fill="none" stroke="black" d="M309.66,-289.53C278.78,-269.8 228.36,-237.59 193.98,-215.62"/>
 <polygon fill="black" stroke="black" points="195.89,-212.69 185.58,-210.26 192.12,-218.59 195.89,-212.69"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L36">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="252.4" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -106,12 +106,12 @@
 <!-- find_root/4&#45;&gt;^^check_options/1 -->
 <g id="edge3" class="edge">
 <title>find_root/4&#45;&gt;^^check_options/1</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L36" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L36" xlink:title="calls">
 <path fill="none" stroke="black" d="M328.8,-289.53C320.07,-270.94 306.12,-241.24 295.91,-219.5"/>
 <polygon fill="black" stroke="black" points="299.16,-218.19 291.75,-210.62 292.83,-221.16 299.16,-218.19"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L36">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="311.62" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -130,12 +130,12 @@
 <!-- find_root/4&#45;&gt;^^merge_options/2 -->
 <g id="edge4" class="edge">
 <title>find_root/4&#45;&gt;^^merge_options/2</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L36" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L36" xlink:title="calls">
 <path fill="none" stroke="black" d="M348.54,-289.53C361,-270.68 380.99,-240.43 395.41,-218.61"/>
 <polygon fill="black" stroke="black" points="398.17,-220.79 400.76,-210.52 392.33,-216.93 398.17,-220.79"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L36">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="377.28" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -154,12 +154,12 @@
 <!-- find_root/4&#45;&gt;^^option/2 -->
 <g id="edge5" class="edge">
 <title>find_root/4&#45;&gt;^^option/2</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L36" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L36" xlink:title="calls">
 <path fill="none" stroke="black" d="M365.25,-289.53C397.3,-269.72 449.71,-237.31 485.25,-215.34"/>
 <polygon fill="black" stroke="black" points="486.84,-218.47 493.5,-210.24 483.16,-212.52 486.84,-218.47"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L36">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="435.58" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -178,12 +178,12 @@
 <!-- find_root/4&#45;&gt;^^evaluate_function/2 -->
 <g id="edge6" class="edge">
 <title>find_root/4&#45;&gt;^^evaluate_function/2</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L36" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L36" xlink:title="calls">
 <path fill="none" stroke="black" d="M373.94,-303.51C427.18,-296.27 523.8,-274.36 567,-209 610.16,-143.69 495.11,-106.04 412.87,-88.11"/>
 <polygon fill="black" stroke="black" points="413.75,-84.72 403.24,-86.07 412.3,-91.56 413.75,-84.72"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L36">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="576.39" y="-188.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -191,12 +191,12 @@
 <!-- secant/15&#45;&gt;^^evaluate_function/2 -->
 <g id="edge7" class="edge">
 <title>secant/15&#45;&gt;^^evaluate_function/2</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L76" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L76" xlink:title="calls">
 <path fill="none" stroke="black" d="M86.78,-176.01C135.97,-156.23 226.31,-119.91 284.19,-96.64"/>
 <polygon fill="black" stroke="black" points="285.22,-99.99 293.2,-93.02 282.61,-93.5 285.22,-99.99"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L76">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L76">
 <text xml:space="preserve" text-anchor="start" x="203.58" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -206,7 +206,7 @@
 <title>default_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="734.65,-326 635.35,-326 635.35,-290 734.65,-290 734.65,-326"/>
 <text xml:space="preserve" text-anchor="start" x="643.35" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L107">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L107">
 <text xml:space="preserve" text-anchor="start" x="645.86" y="-309.53" font-family="Monospace" font-size="11.00">default_option/1</text>
 </a>
 </g>
@@ -229,12 +229,12 @@
 <!-- default_option/1&#45;&gt;^^default_option/1 -->
 <g id="edge8" class="edge">
 <title>default_option/1&#45;&gt;^^default_option/1</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L107" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L107" xlink:title="calls">
 <path fill="none" stroke="black" d="M685,-289.53C685,-271.28 685,-242.33 685,-220.7"/>
 <polygon fill="black" stroke="black" points="688.5,-220.77 685,-210.77 681.5,-220.77 688.5,-220.77"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L107">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L107">
 <text xml:space="preserve" text-anchor="start" x="685" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -244,7 +244,7 @@
 <title>valid_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="851.44,-326 762.56,-326 762.56,-290 851.44,-290 851.44,-326"/>
 <text xml:space="preserve" text-anchor="start" x="770.56" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L110" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L110">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L110" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L110">
 <text xml:space="preserve" text-anchor="start" x="773.06" y="-309.53" font-family="Monospace" font-size="11.00">valid_option/1</text>
 </a>
 </g>
@@ -267,12 +267,12 @@
 <!-- valid_option/1&#45;&gt;^^valid_option/1 -->
 <g id="edge9" class="edge">
 <title>valid_option/1&#45;&gt;^^valid_option/1</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L110" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L110" xlink:title="calls">
 <path fill="none" stroke="black" d="M807,-289.53C807,-271.28 807,-242.33 807,-220.7"/>
 <polygon fill="black" stroke="black" points="810.5,-220.77 807,-210.77 803.5,-220.77 810.5,-220.77"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L110" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/numerical_analysis/secant_root_finder.lgt#L110">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L110" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/numerical_analysis/secant_root_finder.lgt#L110">
 <text xml:space="preserve" text-anchor="start" x="807" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>

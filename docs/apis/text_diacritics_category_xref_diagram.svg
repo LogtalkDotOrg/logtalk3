@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-491 431,-491 431,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for category text_diacritics</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;04, 19:18</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;06, 14:45</text>
 <g id="clust1" class="cluster">
 <title>cluster_text_diacritics_category</title>
 <g id="a_clust1"><a xlink:title="text_diacritics">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 407,-46 407,-46 413,-46 419,-52 419,-58 419,-58 419,-467 419,-467 419,-473 413,-479 407,-479 407,-479 20,-479 20,-479 14,-479 8,-473 8,-467 8,-467 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-463.3" font-family="Monospace" font-size="10.00" fill="dimgray">text_diacritics</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>remove_diacritics_codes/2</title>
 <polygon fill="yellow" stroke="black" points="201.61,-443 50.39,-443 50.39,-407 201.61,-407 201.61,-443"/>
 <text xml:space="preserve" text-anchor="start" x="58.39" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="60.89" y="-426.53" font-family="Monospace" font-size="11.00">remove_diacritics_codes/2</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>remove_marks/2</title>
 <polygon fill="cornsilk" stroke="black" points="120.46,-326 17.54,-326 17.54,-290 120.46,-290 120.46,-326"/>
 <text xml:space="preserve" text-anchor="start" x="25.54" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L70">
+<g id="a_node3_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L70">
 <text xml:space="preserve" text-anchor="start" x="28.04" y="-309.53" font-family="Monospace" font-size="11.00">remove_marks/2</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- remove_diacritics_codes/2&#45;&gt;remove_marks/2 -->
 <g id="edge1" class="edge">
 <title>remove_diacritics_codes/2&#45;&gt;remove_marks/2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L60" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L60" xlink:title="calls">
 <path fill="none" stroke="black" d="M117.34,-406.53C108.12,-387.94 93.41,-358.24 82.63,-336.5"/>
 <polygon fill="black" stroke="black" points="85.8,-335.02 78.22,-327.61 79.53,-338.12 85.8,-335.02"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L60">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="99.21" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -79,12 +79,12 @@
 <!-- remove_diacritics_codes/2&#45;&gt;^^normalize_unicode_codes/3 -->
 <g id="edge5" class="edge">
 <title>remove_diacritics_codes/2&#45;&gt;^^normalize_unicode_codes/3</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L60" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L60" xlink:title="calls">
 <path fill="none" stroke="black" d="M140.73,-406.53C156.78,-387.51 182.61,-356.88 201.05,-335.02"/>
 <polygon fill="black" stroke="black" points="203.7,-337.31 207.47,-327.41 198.35,-332.8 203.7,-337.31"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L60">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="177.41" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -94,7 +94,7 @@
 <title>fold_diacritics_codes/3</title>
 <polygon fill="yellow" stroke="black" points="357.14,-443 224.86,-443 224.86,-407 357.14,-407 357.14,-443"/>
 <text xml:space="preserve" text-anchor="start" x="232.86" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L42">
+<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L42">
 <text xml:space="preserve" text-anchor="start" x="235.36" y="-426.53" font-family="Monospace" font-size="11.00">fold_diacritics_codes/3</text>
 </a>
 </g>
@@ -108,7 +108,7 @@
 <title>fold_codes/3</title>
 <polygon fill="cornsilk" stroke="black" points="408.69,-326 325.31,-326 325.31,-290 408.69,-290 408.69,-326"/>
 <text xml:space="preserve" text-anchor="start" x="333.31" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L78" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L78">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L78" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L78">
 <text xml:space="preserve" text-anchor="start" x="335.81" y="-309.53" font-family="Monospace" font-size="11.00">fold_codes/3</text>
 </a>
 </g>
@@ -120,12 +120,12 @@
 <!-- fold_diacritics_codes/3&#45;&gt;fold_codes/3 -->
 <g id="edge2" class="edge">
 <title>fold_diacritics_codes/3&#45;&gt;fold_codes/3</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L65" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L65" xlink:title="calls">
 <path fill="none" stroke="black" d="M302.54,-406.53C315,-387.68 334.99,-357.43 349.41,-335.61"/>
 <polygon fill="black" stroke="black" points="352.17,-337.79 354.76,-327.52 346.33,-333.93 352.17,-337.79"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L65">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L65">
 <text xml:space="preserve" text-anchor="start" x="331.28" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -133,12 +133,12 @@
 <!-- fold_diacritics_codes/3&#45;&gt;^^normalize_unicode_codes/3 -->
 <g id="edge6" class="edge">
 <title>fold_diacritics_codes/3&#45;&gt;^^normalize_unicode_codes/3</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L65" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L65" xlink:title="calls">
 <path fill="none" stroke="black" d="M280.67,-406.53C269.57,-387.77 251.8,-357.7 238.91,-335.91"/>
 <polygon fill="black" stroke="black" points="242.08,-334.38 233.97,-327.56 236.05,-337.95 242.08,-334.38"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L65">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L65">
 <text xml:space="preserve" text-anchor="start" x="259.04" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -148,7 +148,7 @@
 <title>mark/1</title>
 <polygon fill="cornsilk" stroke="black" points="192.31,-209 137.69,-209 137.69,-173 192.31,-173 192.31,-209"/>
 <text xml:space="preserve" text-anchor="start" x="145.69" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L88">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L88">
 <text xml:space="preserve" text-anchor="start" x="148.19" y="-192.53" font-family="Monospace" font-size="11.00">mark/1</text>
 </a>
 </g>
@@ -160,12 +160,12 @@
 <!-- remove_marks/2&#45;&gt;mark/1 -->
 <g id="edge3" class="edge">
 <title>remove_marks/2&#45;&gt;mark/1</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L71" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L71" xlink:title="calls">
 <path fill="none" stroke="black" d="M83.58,-289.53C99.46,-270.51 125.03,-239.88 143.27,-218.02"/>
 <polygon fill="black" stroke="black" points="145.91,-220.34 149.63,-210.42 140.53,-215.85 145.91,-220.34"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L71">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L71">
 <text xml:space="preserve" text-anchor="start" x="119.88" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -173,12 +173,12 @@
 <!-- fold_codes/3&#45;&gt;mark/1 -->
 <g id="edge4" class="edge">
 <title>fold_codes/3&#45;&gt;mark/1</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L79" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L79" xlink:title="calls">
 <path fill="none" stroke="black" d="M336.32,-289.53C300.45,-269.12 241.1,-235.33 202.53,-213.36"/>
 <polygon fill="black" stroke="black" points="204.45,-210.43 194.03,-208.53 200.99,-216.52 204.45,-210.43"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L79">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L79">
 <text xml:space="preserve" text-anchor="start" x="272.06" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -200,12 +200,12 @@
 <!-- fold_codes/3&#45;&gt;list::append/3 -->
 <g id="edge7" class="edge">
 <title>fold_codes/3&#45;&gt;list::append/3</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L79" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L79" xlink:title="calls">
 <path fill="none" stroke="black" d="M366.85,-289.53C366.69,-271.28 366.44,-242.33 366.25,-220.7"/>
 <polygon fill="black" stroke="black" points="369.75,-220.74 366.16,-210.77 362.75,-220.8 369.75,-220.74"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L79">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L79">
 <text xml:space="preserve" text-anchor="start" x="366.53" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -224,12 +224,12 @@
 <!-- mark/1&#45;&gt;user::unicode_data_mark_range/2 -->
 <g id="edge8" class="edge">
 <title>mark/1&#45;&gt;user::unicode_data_mark_range/2</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L88" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L88" xlink:title="calls">
 <path fill="none" stroke="black" d="M165,-172.53C165,-154.28 165,-125.33 165,-103.7"/>
 <polygon fill="black" stroke="black" points="168.5,-103.77 165,-93.77 161.5,-103.77 168.5,-103.77"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d3fd93a01deef5511cd05f9b37663b3bdc116c9f/library/text_normalization/diacritics.lgt#L88">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/text_normalization/diacritics.lgt#L88">
 <text xml:space="preserve" text-anchor="start" x="165" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
