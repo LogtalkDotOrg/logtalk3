@@ -22,13 +22,16 @@
 :- if((
 	current_logtalk_flag(prolog_dialect, Dialect),
 	(	Dialect == eclipse; Dialect == gnu; Dialect == sicstus;
-		Dialect == swi; Dialect == tau; Dialect == trealla; Dialect == yap
+		Dialect == shumway; Dialect == swi; Dialect == tau;
+		Dialect == trealla; Dialect == yap
 	)
 )).
 
 	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
 		:- use_module(library(lists)).
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
+		:- use_module(library(lists), []).
+	:- elif(current_logtalk_flag(prolog_dialect, shumway)).
 		:- use_module(library(lists), []).
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 		:- use_module(library(apply), []).
