@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-09,
+		date is 2026-11-06,
 		comment is 'Unit tests for the "http_digest" library.'
 	]).
 
@@ -329,12 +329,8 @@
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		(	Dialect == eclipse; Dialect == gnu;
-			Dialect == sicstus; Dialect == swi;
-			Dialect == trealla,
-			current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)),
-			v(Major, Minor, Patch) @>= v(2, 90, 3);
-			Dialect == xvm
+		(	Dialect == eclipse; Dialect == gnu; Dialect == sicstus; Dialect == shumway;
+			Dialect == swi; Dialect == trealla; Dialect == xvm
 		)
 	)).
 
