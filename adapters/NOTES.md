@@ -91,7 +91,7 @@ following table summarizes the availability of these features:
 |  JIProlog        |      no     |       no      |     yes     |      no     |       no      |       no      |       no     |      no     |   
 |  Quintus Prolog  |      no     |       no      |      no     |      no     |       no      |       no      |      yes     |      no     |   
 |  SICStus Prolog  |      no     |      yes      |     yes     |      no     |       no      |      yes      |      yes     |     yes     |   
-|  Shumway Prolog  |      no     |       no      |     yes     |      no     |       no      |      yes      |      yes     |      no     |   
+|  Shumway Prolog  |     yes     |      yes      |     yes     |      no     |       no      |      yes      |      yes     |     yes     |   
 |  SWI-Prolog      |     yes     |      yes      |     yes     |     yes     |      yes      |      yes      |      yes     |     yes     |   
 |  Tau Prolog      |      no     |       no      |     yes     |      no     |       no      |       no      |       no     |      no     |   
 |  Trealla Prolog  |     yes     |       no      |     yes     |     yes     |      yes      |      yes      |      yes     |     yes     |   

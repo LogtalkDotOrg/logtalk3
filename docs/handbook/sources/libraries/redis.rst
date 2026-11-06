@@ -4,7 +4,7 @@
 =========
 
 Redis client library. Supports ECLiPSe, GNU Prolog, SICStus Prolog,
-SWI-Prolog, Trealla Prolog, and XVM.
+Shumway Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 
 For general information on Redis, including a list of the available
 commands, visit:

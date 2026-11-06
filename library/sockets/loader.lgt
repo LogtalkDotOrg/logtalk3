@@ -23,6 +23,8 @@
 
 	:- if(current_logtalk_flag(prolog_dialect, sicstus)).
 		:- use_module(library(sockets), []).
+	:- elif(current_logtalk_flag(prolog_dialect, shumway)).
+		:- use_module(library(sockets), []).
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 		:- use_module(library(socket), []).
 	:- elif(current_logtalk_flag(prolog_dialect, trealla)).

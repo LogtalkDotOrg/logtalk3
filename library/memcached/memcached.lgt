@@ -22,12 +22,12 @@
 :- object(memcached).
 
 	:- info([
-		version is 1:0:2,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-11-06,
 		comment is 'Portable Memcached client implementing the text (ASCII) protocol. Uses the sockets library for TCP communication.',
 		remarks is [
-			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, and Trealla Prolog (same as the sockets library).',
+			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, Shumway Prolog, SWI-Prolog, and Trealla Prolog (same as the sockets library).',
 			'Protocol version' - 'Implements the Memcached text (ASCII) protocol as documented in the official protocol.txt specification.',
 			'Connection' - 'The default Memcached port is 11211. Connections are represented as opaque handles that should be passed to all other predicates.',
 			'Keys' - 'Keys are atoms up to 250 characters. They must not include control characters or whitespace.',

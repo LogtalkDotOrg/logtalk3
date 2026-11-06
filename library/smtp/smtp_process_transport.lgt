@@ -22,9 +22,9 @@
 :- object(smtp_process_transport).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-10-06,
+		date is 2026-11-06,
 		comment is 'Process-backed TLS transport support for the SMTP client.'
 	]).
 
@@ -186,6 +186,10 @@
 			{set_stream_type(Output, binary)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
+
+		setup_streams(_Input, _Output).
+
+	:- elif(current_logtalk_flag(prolog_dialect, shumway)).
 
 		setup_streams(_Input, _Output).
 

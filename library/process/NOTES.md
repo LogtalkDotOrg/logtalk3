@@ -23,7 +23,7 @@ ________________________________________________________________________
 
 This library provides a portable abstraction over process handling predicates
 found in some backend Prolog systems. Currently supports ECLiPSe, GNU Prolog,
-SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.
+SICStus Prolog, Shumway Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 
 
 API documentation

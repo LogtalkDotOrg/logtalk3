@@ -25,6 +25,7 @@
 	;	Dialect == eclipse
 	;	Dialect == gnu
 	;	Dialect == sicstus
+	;	Dialect == shumway
 	;	Dialect == swi
 	;	Dialect == trealla
 	;	Dialect == xvm
@@ -33,9 +34,11 @@
 
 	:- if(current_logtalk_flag(prolog_dialect, ciao)).
 		:- use_module(library(process), []).
-	:- elif(current_logtalk_flag(prolog_dialect, swi)).
-		:- use_module(library(process), []).
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
+		:- use_module(library(process), []).
+	:- elif(current_logtalk_flag(prolog_dialect, shumway)).
+		:- use_module(library(process), []).
+	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 		:- use_module(library(process), []).
 	:- endif.
 

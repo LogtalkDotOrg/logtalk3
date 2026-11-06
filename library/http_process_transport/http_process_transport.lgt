@@ -24,9 +24,9 @@
 	imports([options, http_message_helpers, http_text_helpers])).
 
 	:- info([
-		version is 1:3:1,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2026-09-29,
+		date is 2026-11-06,
 		comment is 'Process-backed HTTP transport predicates using the process library and helper processes.'
 	]).
 
@@ -605,6 +605,10 @@
 			{set_stream_type(Output, Type)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
+
+		setup_process_connection_streams(_Type, _Input, _Output).
+
+	:- elif(current_logtalk_flag(prolog_dialect, shumway)).
 
 		setup_process_connection_streams(_Type, _Input, _Output).
 

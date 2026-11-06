@@ -23,12 +23,12 @@
 	imports(options)).
 
 	:- info([
-		version is 0:13:3,
+		version is 0:14:0,
 		author is 'Paulo Moura',
-		date is 2026-10-06,
+		date is 2026-11-06,
 		comment is 'Portable abstraction over TCP sockets. Provides a high-level API for client and server socket operations that works with selected backend Prolog systems.',
 		remarks is [
-			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, and Trealla Prolog.',
+			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, Shumway Prolog, SWI-Prolog, Trealla Prolog, and XVM.',
 			'Design rationale' - 'Some backends (notably SICStus Prolog) do not provide low-level socket creation predicates that can be separated from binding or connecting. This library therefore provides a higher-level API with ``client_open/5`` and ``server_open/3`` that abstracts over these differences.',
 			'Stream handling' - 'Predicates ``client_open/5`` and ``server_accept/5`` return separate input and output streams opened in binary mode. For backends where the same stream is used for bidirectional communication, the same stream handle is returned in both arguments. Use standard stream predicates (``put_byte/2``, ``get_byte/2``, ``read/2``, ``write/2``, etc.) to communicate.',
 			'Options' - 'Currently options are only defined for the ``server_open/3`` predicate. This is expected to change in future versions for the other predicates that have an options argument.'
@@ -314,6 +314,68 @@
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 
 	% SICStus Prolog: higher-level API with socket_client_open/3 and socket_server_open/[2,3]
+
+	:- uses(list, [
+		memberchk/2
+	]).
+
+	client_open_(Host, Port, Stream, Stream, Options) :-
+		memberchk(type(Type), Options),
+		sockets:socket_client_open(inet(Host, Port), Stream, [type(Type)]).
+
+	server_open_(Host, Port, server_socket(ServerSocket, Host:PortInt), Options) :-
+		memberchk(backlog(_N), Options),
+		(	% Use internal variable for socket_server_open
+			(	var(Port) ->
+				sockets:socket_server_open(Host:Port0, ServerSocket, [reuseaddr(true)])
+			;	Port0 = Port,
+				sockets:socket_server_open(Host:Port0, ServerSocket, [reuseaddr(true)])
+			),
+			% SICStus may return the port as an atom, convert to integer
+			(	atom(Port0) ->
+				{atom_codes(Port0, Codes), number_codes(PortInt, Codes)}
+			;	PortInt = Port0
+			),
+			% Unify Port with the integer value if it was a variable
+			(	var(Port) ->
+				Port = PortInt
+			;	true
+			)
+		).
+
+	server_open_(Port, server_socket(ServerSocket, PortInt), Options) :-
+		memberchk(backlog(_N), Options),
+		(	% Use internal variable for socket_server_open
+			(	var(Port) ->
+				sockets:socket_server_open(Port0, ServerSocket, [reuseaddr(true)])
+			;	Port0 = Port,
+				sockets:socket_server_open(Port0, ServerSocket, [reuseaddr(true)])
+			),
+			% SICStus may return the port as an atom, convert to integer
+			(	atom(Port0) ->
+				{atom_codes(Port0, Codes), number_codes(PortInt, Codes)}
+			;	PortInt = Port0
+			),
+			% Unify Port with the integer value if it was a variable
+			(	var(Port) ->
+				Port = PortInt
+			;	true
+			)
+		).
+
+	server_accept_(server_socket(ServerSocket, _), Stream, Stream, client(Client), Options) :-
+		memberchk(type(Type), Options),
+		sockets:socket_server_accept(ServerSocket, Client, Stream, [type(Type)]).
+
+	server_close_(server_socket(ServerSocket, _)) :-
+		sockets:socket_server_close(ServerSocket).
+
+	current_host_(Host) :-
+		sockets:current_host(Host).
+
+	:- elif(current_logtalk_flag(prolog_dialect, shumway)).
+
+	% Shumway Prolog: higher-level API with socket_client_open/3 and socket_server_open/[2,3]
 
 	:- uses(list, [
 		memberchk/2

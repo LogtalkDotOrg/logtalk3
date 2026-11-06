@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Shumway (Prolog on .NET) 0.9.3 and later versions
-%  Last updated on November 5, 2026
+%  Last updated on November 6, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 2026 Gustavo Brown
@@ -270,7 +270,7 @@
 	current_prolog_flag(version_data, shumway(Major, Minor, Patch, _)).
 '$lgt_prolog_feature'(prolog_compatible_version, @>=(v(0, 9, 3))).
 '$lgt_prolog_feature'(encoding_directive, full).
-'$lgt_prolog_feature'(sockets, unsupported).
+'$lgt_prolog_feature'(sockets, supported).
 '$lgt_prolog_feature'(tabling, supported).
 '$lgt_prolog_feature'(engines, unsupported).
 '$lgt_prolog_feature'(threads, unsupported).

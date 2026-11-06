@@ -23,12 +23,12 @@
 	imports(options)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-06-16,
+		date is 2026-11-06,
 		comment is 'Portable STOMP 1.2 (Simple Text Orientated Messaging Protocol) client. Uses the sockets library for TCP communication.',
 		remarks is [
-			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, and SWI-Prolog (same as the sockets library).',
+			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, Shumway Prolog, and SWI-Prolog (same as the sockets library).',
 			'Protocol version' - 'Implements STOMP 1.2 specification.',
 			'Heartbeat' - 'Supports heartbeat negotiation. Automatic heartbeat sending is not implemented; use send_heartbeat/1 manually if needed.',
 			'Subscriptions' - 'Supports multiple concurrent subscriptions with unique IDs.',

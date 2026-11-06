@@ -11,7 +11,7 @@ existing stream core and server layers.
 
 This library can be used with backend Prolog systems that support
 unbound integer arithmetic and the ``sockets`` library: ECLiPSe, SICStus
-Prolog, SWI-Prolog, Trealla Prolog, and XVM.
+Prolog, Shumway Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 
 API documentation
 -----------------

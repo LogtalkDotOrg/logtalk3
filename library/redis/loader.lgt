@@ -19,24 +19,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if((
-	current_logtalk_flag(prolog_dialect, Dialect),
-	(	Dialect == eclipse; Dialect == gnu;
-		Dialect == sicstus; Dialect == swi;
-		Dialect == trealla,
-		current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)),
-		v(Major, Minor, Patch) @>= v(2, 90, 3);
-		Dialect == xvm
-	)
-)).
-
-	:- if(current_logtalk_flag(prolog_dialect, ciao)).
-		:- use_module(library(sockets), []).
-	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
-		:- use_module(library(sockets), []).
-	:- elif(current_logtalk_flag(prolog_dialect, swi)).
-		:- use_module(library(socket), []).
-	:- endif.
+:- if(current_logtalk_flag(sockets, supported)).
 
 	:- initialization((
 		logtalk_load(basic_types(loader)),

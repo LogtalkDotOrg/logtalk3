@@ -22,12 +22,12 @@
 :- object(process).
 
 	:- info([
-		version is 2:2:0,
+		version is 2:3:0,
 		author is 'Paulo Moura',
-		date is 2026-11-05,
+		date is 2026-11-06,
 		comment is 'Portable process handling predicates.',
 		remarks is [
-			'Supported backend Prolog systems' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.',
+			'Supported backend Prolog systems' - 'ECLiPSe, GNU Prolog, SICStus Prolog, Shumway Prolog, SWI-Prolog, Trealla Prolog, and XVM.',
 			'Option ``type/1`` limitation' - 'This option is ignored on ECLiPSe, GNU Prolog, and XVM.'
 		],
 		see_also is [os]
@@ -205,6 +205,52 @@
 
 		kill(Process, Signal) :-
 			(	{environ('COMSPEC', _)} ->
+				catch({process:process_kill(Process)}, _, true)
+			;	atom(Signal) ->
+				signal_number(Signal, Number),
+				{process:process_kill(Process, Number)}
+			;	{process:process_kill(Process, Signal)}
+			).
+
+		kill(Process) :-
+			{process:process_kill(Process)}.
+
+	:- elif(current_logtalk_flag(prolog_dialect, shumway)).
+
+		create(Executable, Arguments, Options) :-
+			(	{absolute_file_name(Executable, Executable)} ->
+				Path = Executable
+			;	Path = path(Executable)
+			),
+			translate_options(Options, Options, NativeOptions),
+			{process:process_create(Path, Arguments, NativeOptions)}.
+
+		translate_options([], _, []).
+		translate_options([Option| Options], AllOptions, NativeOptions) :-
+			(	translate_option(Option, AllOptions, NativeOption) ->
+				NativeOptions = [NativeOption| NativeOptionsTail]
+			;	NativeOptions = NativeOptionsTail
+			),
+			translate_options(Options, AllOptions, NativeOptionsTail).
+
+		translate_option(process(Pid), _, process(Pid)).
+		translate_option(stdin(Stream), Options, NativeOption) :-
+			(	{member(type(Type), Options)} ->
+				NativeOption = stdin(pipe(Stream, [type(Type)]))
+			;	NativeOption = stdin(pipe(Stream))
+			).
+		translate_option(stdout(Stream), Options, NativeOption) :-
+			(	{member(type(Type), Options)} ->
+				NativeOption = stdout(pipe(Stream, [type(Type)]))
+			;	NativeOption = stdout(pipe(Stream))
+			).
+		translate_option(stderr(Stream), _, stderr(pipe(Stream))).
+
+		wait(Process, Status) :-
+			{process:process_wait(Process, Status)}.
+
+		kill(Process, Signal) :-
+			(	{getenv('COMSPEC', _)} ->
 				catch({process:process_kill(Process)}, _, true)
 			;	atom(Signal) ->
 				signal_number(Signal, Number),

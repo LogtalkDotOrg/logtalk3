@@ -7,6 +7,9 @@ Portable SMTP/ESMTP client using the ``sockets`` library for plaintext
 connections and the ``process`` library with OpenSSL for implicit TLS
 and STARTTLS connections. Requires a backend supporting sockets.
 
+Currently supports ECLiPSe, GNU Prolog, SICStus Prolog, Shumway Prolog,
+SWI-Prolog, Trealla Prolog, and XVM.
+
 Requirements
 ------------
 

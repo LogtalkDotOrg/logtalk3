@@ -5,8 +5,8 @@
 
 Portable abstraction over TCP sockets. Provides a high-level API for
 client and server socket operations that works across all supported
-backend Prolog systems: ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog,
-Trealla Prolog, and XVM.
+backend Prolog systems: ECLiPSe, GNU Prolog, SICStus Prolog, Shumway
+Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 
 Design rationale
 ----------------

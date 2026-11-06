@@ -440,8 +440,8 @@
 <span id="library-process"></span><h1><code class="docutils literal notranslate"><span class="pre">process</span></code><a class="headerlink" href="#process" title="Link to this heading"></a></h1>
 <p>This library provides a portable abstraction over process handling
 predicates found in some backend Prolog systems. Currently supports
-ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and
-XVM.</p>
+ECLiPSe, GNU Prolog, SICStus Prolog, Shumway Prolog, SWI-Prolog, Trealla
+Prolog, and XVM.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -469,15 +469,33 @@ process handling:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">create(Executable,</span> <span class="pre">Arguments,</span> <span class="pre">Options)</span></code> - Creates a new process</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">wait(Process,</span> <span class="pre">Status)</span></code> - Waits for a process to terminate</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wait(Process,</span> <span class="pre">RawStatus,</span> <span class="pre">NormalizedStatus)</span></code> - Waits once and
+returns both raw and normalized status</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">kill(Process,</span> <span class="pre">Signal)</span></code> - Terminates a process with a specific
 signal</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">kill(Process)</span></code> - Terminates a process using the default signal
 (SIGKILL)</p></li>
 </ul>
-<p>Exit status depends on the backend. For a successfully terminated
-process, <code class="docutils literal notranslate"><span class="pre">Status</span></code> is either <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">exit(0)</span></code>. For unsuccessful
-processes, <code class="docutils literal notranslate"><span class="pre">Status</span></code> cannot be sensibly abstracted. Consult the backens
-documentation for the details.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">wait/2</span></code> predicate returns the backend’s native status unchanged.
+For a successfully terminated process, <code class="docutils literal notranslate"><span class="pre">Status</span></code> is either <code class="docutils literal notranslate"><span class="pre">0</span></code> or
+<code class="docutils literal notranslate"><span class="pre">exit(0)</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">wait/3</span></code> predicate reaps the process once and returns the
+backend-specific result in <code class="docutils literal notranslate"><span class="pre">RawStatus</span></code> and its normalized form in
+<code class="docutils literal notranslate"><span class="pre">NormalizedStatus</span></code>. The latter is <code class="docutils literal notranslate"><span class="pre">exit(Code)</span></code>, <code class="docutils literal notranslate"><span class="pre">killed(Signal)</span></code>,
+or <code class="docutils literal notranslate"><span class="pre">unknown(RawStatus)</span></code>. Nonzero application exit codes are returned
+as results when the native API reports them normally. Native waiting
+errors and failures are propagated. The normalized status does not
+separately report core-dump information.</p>
+<p>On POSIX, ECLiPSe returns encoded wait words; on Windows it returns
+direct exit codes. GNU Prolog’s POSIX API converts normal exits to
+integers but retains encoded signal statuses, making nonzero results
+ambiguous. These results are returned as <code class="docutils literal notranslate"><span class="pre">unknown(RawStatus)</span></code>, not
+guessed to be normal exits or signals. GNU Prolog also reports normal
+exit codes 126 and 127 as native errors; <code class="docutils literal notranslate"><span class="pre">wait/3</span></code> does not hide this
+limitation. Structured native <code class="docutils literal notranslate"><span class="pre">exit/1</span></code> and <code class="docutils literal notranslate"><span class="pre">killed/1</span></code> statuses are
+preserved. Other unrecognized native statuses remain
+<code class="docutils literal notranslate"><span class="pre">unknown(RawStatus)</span></code>. XVM’s native <code class="docutils literal notranslate"><span class="pre">signal(Signal)</span></code> status is
+normalized to <code class="docutils literal notranslate"><span class="pre">killed(Signal)</span></code>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">create/3</span></code> predicate supports the following options:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">process(Pid)</span></code> - Unifies Pid with the process identifier (an opaque
@@ -490,14 +508,20 @@ ground term)</p></li>
 </ul>
 <p>Process identifiers (PIDs) should be treated as opaque ground terms.
 Their internal representation varies between backend Prolog systems.</p>
+<p>Close requested pipes and wait for every process returned through
+<code class="docutils literal notranslate"><span class="pre">process/1</span></code>, including after calling <code class="docutils literal notranslate"><span class="pre">kill/1</span></code> or <code class="docutils literal notranslate"><span class="pre">kill/2</span></code>. Drain a
+child’s output while it is running, before waiting for termination.
+Waiting first can deadlock on a full pipe. Sequentially draining
+independent, unbounded stdout and stderr pipes can also deadlock.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">type/1</span></code> option is ignored on ECLiPSe, GNU Prolog, Trealla Prolog,
 and XVM as these systems don’t provide the necessary support to set the
 streams type at process creation.</p>
 <p>Example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> process<span class="o">::</span>create(<span class="s">&#39;/bin/echo&#39;</span>, [<span class="s">&#39;hello.&#39;</span>], [stdout(<span class="nv">Out</span>), process(<span class="nv">PID</span>)]),
      <span class="k">read_term</span>(<span class="nv">Out</span>, <span class="nv">Term</span>, []),
-     <span class="k">close</span>(<span class="nv">Out</span>).
-<span class="nv">Out</span> <span class="o">=</span> ..., <span class="nv">PID</span> <span class="o">=</span> ..., <span class="nv">Term</span> <span class="o">=</span> hello.
+     <span class="k">close</span>(<span class="nv">Out</span>),
+        process<span class="o">::</span>wait(<span class="nv">PID</span>, <span class="nv">RawStatus</span>, <span class="nv">NormalizedStatus</span>).
+    <span class="nv">Out</span> <span class="o">=</span> ..., <span class="nv">PID</span> <span class="o">=</span> ..., <span class="nv">Term</span> <span class="o">=</span> hello, <span class="nv">RawStatus</span> <span class="o">=</span> ..., <span class="nv">NormalizedStatus</span> <span class="o">=</span> exit(<span class="m">0</span>).
 </pre></div>
 </div>
 </section>
