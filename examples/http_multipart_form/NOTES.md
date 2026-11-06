@@ -69,10 +69,10 @@ The returned `Result` term contains two normalized responses:
 2. the confirmation page returned by the multipart form submission to `/submit`
 
 When backend threads are not available, run the server and client in separate
-sessions. In the first session start the server for two client connections:
+sessions. In the first session start the server for twenty client connections:
 
 ```logtalk
-multipart_form_server::serve(8080, 2).
+multipart_form_server::serve(8080, 20).
 ```
 
 Then, in a second session, fetch the form and submit it:
