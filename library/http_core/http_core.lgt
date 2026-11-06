@@ -23,9 +23,9 @@
 	imports(http_text_helpers)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:4:1,
 		author is 'Paulo Moura',
-		date is 2026-10-23,
+		date is 2026-11-06,
 		comment is 'Transport-independent normalized HTTP request and response constructors, validators, wire parsers and generators, and body codec dispatch.'
 	]).
 
@@ -2072,6 +2072,10 @@
 		catch(body_term_to_bytes(Body, [], Bytes), _, fail),
 		length(Bytes, Length).
 
+	body_length_if_known(_Headers, Properties, _Body, Length) :-
+		member(entity_body_bytes(Bytes), Properties),
+		!,
+		length(Bytes, Length).
 	body_length_if_known(Headers, Properties, Body, Length) :-
 		catch(
 			(	wire_body_serialization_options(Headers, Properties, Body, Options),

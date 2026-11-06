@@ -356,6 +356,13 @@ algorithm limitations.
 outputting the plus sign when writing floats in scientific notation. Thanks
 to Andrew Davison for the bug report and patch.
 
+* FIXED: The `http_core` library strict request and response validation could
+spuriously reject a `multipart/form-data` body whose parts omit an optional
+per-part `Content-Type` header (as commonly sent by web browsers) by
+recomputing its length from a re-generated wire representation that restores
+the omitted header. The validation now reuses the original parsed body bytes
+when available.
+
 * FIXED: Operator standard conformance issue in the `s3` library.
 
 * FIXED: bug in the `term_io` library `read_term_from_chars/4` and

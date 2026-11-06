@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-07,
+		date is 2026-11-06,
 		comment is 'Unit tests for the "http_core" library.'
 	]).
 
@@ -33,6 +33,10 @@
 		append/3,
 		member/2,
 		memberchk/2
+	]).
+
+	:- uses(user, [
+		atomic_list_concat/2, atomic_list_concat/3
 	]).
 
 	:- uses(http_core, [
@@ -156,6 +160,23 @@
 
 	test(http_request_7_06, deterministic(Request == request(get, origin('/users'), http(1, 1), ['foo!bar'-'baz'], empty, []))) :-
 		request(get, origin('/users'), http(1, 1), ['foo!bar'-'baz'], empty, [], Request).
+
+	test(http_request_7_12, deterministic) :-
+		% a parsed multipart/form-data part omitting the optional per-part "Content-Type"
+		% header (as sent by some browsers) must not be rejected when the request is
+		% re-validated to attach additional properties (as done by the "http_router"
+		% library when annotating a matched route)
+		Body = '--abc\r\ncontent-disposition: form-data; name="field"\r\n\r\nhello\r\n--abc--\r\n',
+		atom_codes(Body, BodyCodes),
+		length(BodyCodes, Length),
+		atomic_list_concat([
+			'POST /upload HTTP/1.1\r\nhost: example.com\r\ncontent-type: multipart/form-data; boundary=abc\r\ncontent-length: ',
+			Length,
+			'\r\n\r\n',
+			Body
+		], Message),
+		parse_request(atom(Message), request(Method, Target, Version, Headers, ParsedBody, Properties)),
+		request(Method, Target, Version, Headers, ParsedBody, [route(upload), path_params([])| Properties], _).
 
 	test(http_request_7_11, deterministic(Request == request(query, origin('/contacts'), http(1, 1), [host-'example.com'], content('application/x-www-form-urlencoded', form([limit-'10'])), []))) :-
 		request(query, origin('/contacts'), http(1, 1), [host-'example.com'], content('application/x-www-form-urlencoded', form([limit-'10'])), [], Request).
