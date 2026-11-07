@@ -23,13 +23,15 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-09,
+		date is 2026-11-07,
 		comment is 'Unit tests for the "http_static_site_digest" example.'
 	]).
 
-	:- uses(http_core, [body/2, header/3, request/7, status/2]).
+	:- uses(http_core, [
+		body/2, header/3, request/7, status/2
+	]).
 
 	:- uses(list, [
 		memberchk/2
@@ -134,95 +136,85 @@
 		os::path_concat(DocumentRoot, 'assets', AssetsDirectory),
 		os::path_concat(AssetsDirectory, 'listing.css', File).
 
-	:- if((
-		current_logtalk_flag(prolog_dialect, Dialect),
-		(	Dialect == eclipse; Dialect == gnu;
-			Dialect == sicstus; Dialect == swi;
-			Dialect == trealla,
-			current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)),
-			v(Major, Minor, Patch) @>= v(2, 90, 3);
-			Dialect == xvm
-		)
-	)).
 
-		:- if(current_logtalk_flag(threads, supported)).
+	:- if(current_logtalk_flag(threads, supported)).
 
-			:- threaded.
+		:- threaded.
 
-			test(http_static_site_digest_client_01, deterministic) :-
-				static_site_digest_fixture::prepare(DocumentRoot),
-				http_server::open('127.0.0.1', Port, Server, []),
-				threaded_once(static_site_digest_server::serve_listener(Server, DocumentRoot, 7), Tag),
-				catch(
-					static_site_digest_client::run(Port, result(ChallengeResponse, HomeResponse, GuideResponse, ListingResponse)),
-					Error,
-					( 	cleanup_server_thread(DocumentRoot, Server, Tag, 7),
-						throw(Error)
-					)
-				),
-				http_server::request_listener_shutdown(Server),
-				threaded_exit(static_site_digest_server::serve_listener(Server, DocumentRoot, 7), Tag),
-				catch(http_server::close(Server), _, true),
-				status(ChallengeResponse, status(401, 'Unauthorized')),
-				digest_challenge_fields(ChallengeResponse, ChallengeFields),
-				static_site_digest_fixture::realm(Realm),
-				memberchk(realm(Realm), ChallengeFields),
-				status(HomeResponse, status(200, 'OK')),
-				body(HomeResponse, content('text/html', text(HomeHTML))),
-				once(sub_atom(HomeHTML, _, _, _, 'Digest-authenticated static site example')),
-				http_digest::authentication_info(HomeResponse, digest_authentication_info(HomeFields)),
-				memberchk(nextnonce(none), HomeFields),
-				status(GuideResponse, status(200, 'OK')),
-				body(GuideResponse, content('text/plain', text('Guide for the digest-authenticated static site example.'))),
-				status(ListingResponse, status(200, 'OK')),
-				body(ListingResponse, content('text/html', text(ListingHTML))),
-				once(sub_atom(ListingHTML, _, _, _, '<a href="guide.txt">guide.txt</a>')),
-				once(sub_atom(ListingHTML, _, _, _, 'class="http-directory-listing theme-ocean"')),
-				once(sub_atom(ListingHTML, _, _, _, 'text/plain')).
+		test(http_static_site_digest_client_01, deterministic) :-
+			static_site_digest_fixture::prepare(DocumentRoot),
+			http_server::open('127.0.0.1', Port, Server, []),
+			threaded_once(static_site_digest_server::serve_listener(Server, DocumentRoot, 7), Tag),
+			catch(
+				static_site_digest_client::run(Port, result(ChallengeResponse, HomeResponse, GuideResponse, ListingResponse)),
+				Error,
+				( 	cleanup_server_thread(DocumentRoot, Server, Tag, 7),
+					throw(Error)
+				)
+			),
+			http_server::request_listener_shutdown(Server),
+			threaded_exit(static_site_digest_server::serve_listener(Server, DocumentRoot, 7), Tag),
+			catch(http_server::close(Server), _, true),
+			status(ChallengeResponse, status(401, 'Unauthorized')),
+			digest_challenge_fields(ChallengeResponse, ChallengeFields),
+			static_site_digest_fixture::realm(Realm),
+			memberchk(realm(Realm), ChallengeFields),
+			status(HomeResponse, status(200, 'OK')),
+			body(HomeResponse, content('text/html', text(HomeHTML))),
+			once(sub_atom(HomeHTML, _, _, _, 'Digest-authenticated static site example')),
+			http_digest::authentication_info(HomeResponse, digest_authentication_info(HomeFields)),
+			memberchk(nextnonce(none), HomeFields),
+			status(GuideResponse, status(200, 'OK')),
+			body(GuideResponse, content('text/plain', text('Guide for the digest-authenticated static site example.'))),
+			status(ListingResponse, status(200, 'OK')),
+			body(ListingResponse, content('text/html', text(ListingHTML))),
+			once(sub_atom(ListingHTML, _, _, _, '<a href="guide.txt">guide.txt</a>')),
+			once(sub_atom(ListingHTML, _, _, _, 'class="http-directory-listing theme-ocean"')),
+			once(sub_atom(ListingHTML, _, _, _, 'text/plain')).
 
-			test(http_static_site_digest_client_02, deterministic) :-
-				static_site_digest_fixture::prepare(DocumentRoot),
-				http_server::open('127.0.0.1', Port, Server, []),
-				threaded_once(static_site_digest_server::serve_listener(Server, DocumentRoot, 2), Tag),
-				catch(
-					static_site_digest_client::fetch_guide(Port, Response),
-					Error,
-					( 	cleanup_server_thread(DocumentRoot, Server, Tag, 2),
-						throw(Error)
-					)
-				),
-				http_server::request_listener_shutdown(Server),
-				threaded_exit(static_site_digest_server::serve_listener(Server, DocumentRoot, 2), Tag),
-				catch(http_server::close(Server), _, true),
-				status(Response, status(200, 'OK')),
-				body(Response, content('text/plain', text('Guide for the digest-authenticated static site example.'))).
+		test(http_static_site_digest_client_02, deterministic) :-
+			static_site_digest_fixture::prepare(DocumentRoot),
+			http_server::open('127.0.0.1', Port, Server, []),
+			threaded_once(static_site_digest_server::serve_listener(Server, DocumentRoot, 2), Tag),
+			catch(
+				static_site_digest_client::fetch_guide(Port, Response),
+				Error,
+				( 	cleanup_server_thread(DocumentRoot, Server, Tag, 2),
+					throw(Error)
+				)
+			),
+			http_server::request_listener_shutdown(Server),
+			threaded_exit(static_site_digest_server::serve_listener(Server, DocumentRoot, 2), Tag),
+			catch(http_server::close(Server), _, true),
+			status(Response, status(200, 'OK')),
+			body(Response, content('text/plain', text('Guide for the digest-authenticated static site example.'))).
 
-			test(http_static_site_digest_demo_01, deterministic) :-
-				http_static_site_digest_demo::run(result(ChallengeResponse, HomeResponse, GuideResponse, ListingResponse)),
-				status(ChallengeResponse, status(401, 'Unauthorized')),
-				digest_challenge_fields(ChallengeResponse, ChallengeFields),
-				static_site_digest_fixture::realm(Realm),
-				memberchk(realm(Realm), ChallengeFields),
-				status(HomeResponse, status(200, 'OK')),
-				body(HomeResponse, content('text/html', text(HomeHTML))),
-				once(sub_atom(HomeHTML, _, _, _, 'Digest-authenticated static site example')),
-				status(GuideResponse, status(200, 'OK')),
-				body(GuideResponse, content('text/plain', text('Guide for the digest-authenticated static site example.'))),
-				status(ListingResponse, status(200, 'OK')),
-				body(ListingResponse, content('text/html', text(ListingHTML))),
-				once(sub_atom(ListingHTML, _, _, _, '<a href="api/">api/</a>')),
-				once(sub_atom(ListingHTML, _, _, _, 'class="directory-listing-table theme-ocean columns-name-type-modified"')).
+		test(http_static_site_digest_demo_01, deterministic) :-
+			http_static_site_digest_demo::run(result(ChallengeResponse, HomeResponse, GuideResponse, ListingResponse)),
+			status(ChallengeResponse, status(401, 'Unauthorized')),
+			digest_challenge_fields(ChallengeResponse, ChallengeFields),
+			static_site_digest_fixture::realm(Realm),
+			memberchk(realm(Realm), ChallengeFields),
+			status(HomeResponse, status(200, 'OK')),
+			body(HomeResponse, content('text/html', text(HomeHTML))),
+			once(sub_atom(HomeHTML, _, _, _, 'Digest-authenticated static site example')),
+			status(GuideResponse, status(200, 'OK')),
+			body(GuideResponse, content('text/plain', text('Guide for the digest-authenticated static site example.'))),
+			status(ListingResponse, status(200, 'OK')),
+			body(ListingResponse, content('text/html', text(ListingHTML))),
+			once(sub_atom(ListingHTML, _, _, _, '<a href="api/">api/</a>')),
+			once(sub_atom(ListingHTML, _, _, _, 'class="directory-listing-table theme-ocean columns-name-type-modified"')).
 
-			cleanup_server_thread(DocumentRoot, Server, Tag, Count) :-
-				http_server::request_listener_shutdown(Server),
-				catch(threaded_exit(static_site_digest_server::serve_listener(Server, DocumentRoot, Count), Tag), _, true),
-				catch(http_server::close(Server), _, true),
-				static_site_digest_fixture::workspace_root(Root),
-				catch(static_site_digest_fixture::cleanup(Root), _, true).
-
-		:- endif.
+		cleanup_server_thread(DocumentRoot, Server, Tag, Count) :-
+			http_server::request_listener_shutdown(Server),
+			catch(threaded_exit(static_site_digest_server::serve_listener(Server, DocumentRoot, Count), Tag), _, true),
+			catch(http_server::close(Server), _, true),
+			static_site_digest_fixture::workspace_root(Root),
+			catch(static_site_digest_fixture::cleanup(Root), _, true).
 
 	:- endif.
+
+	% auxiliary predicates
 
 	protected_handler(DocumentRoot, CurrentTime, Handler) :-
 		static_site_digest_fixture::protect_options(CurrentTime, ProtectOptions),
