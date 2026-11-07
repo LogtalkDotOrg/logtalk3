@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Shumway (Prolog on .NET) 0.9.3 and later versions
-%  Last updated on November 6, 2026
+%  Last updated on November 7, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 2026 Gustavo Brown
@@ -795,8 +795,8 @@ term_hash(Term, _Depth, _Range, Hash) :-
 %
 % succeeds when Module defines Predicate
 
-'$lgt_current_module_predicate'(_, _) :-
-	fail.
+'$lgt_current_module_predicate'(Module, Predicate) :-
+	current_predicate(Module:Predicate).
 
 
 
