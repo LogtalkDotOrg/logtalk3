@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on November 7, 2026
+##   Last updated on November 8, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -241,8 +241,8 @@ sed '1,19d' ../../../library/json_schema/NOTES.md | pandoc -f gfm -t rst -o libr
 sed '1,19d' ../../../library/jwt/NOTES.md | pandoc -f gfm -t rst -o libraries/jwt.rst
 sed '1,19d' ../../../library/kcenters_clusterer/NOTES.md | pandoc -f gfm -t rst -o libraries/kcenters_clusterer.rst
 sed '1,19d' ../../../library/kemeny_young_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/kemeny_young_ranker.rst
-sed '1,19d' ../../../library/kernel_svm_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/kernel_svm_classifier.rst
 sed '1,19d' ../../../library/kernel_pca_projection/NOTES.md | pandoc -f gfm -t rst -o libraries/kernel_pca_projection.rst
+sed '1,19d' ../../../library/kernel_svm_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/kernel_svm_classifier.rst
 sed '1,19d' ../../../library/kmeans_clusterer/NOTES.md | pandoc -f gfm -t rst -o libraries/kmeans_clusterer.rst
 sed '1,19d' ../../../library/kmedians_clusterer/NOTES.md | pandoc -f gfm -t rst -o libraries/kmedians_clusterer.rst
 sed '1,19d' ../../../library/kmedoids_clusterer/NOTES.md | pandoc -f gfm -t rst -o libraries/kmedoids_clusterer.rst
@@ -341,6 +341,7 @@ sed '1,19d' ../../../library/ridge_regression/NOTES.md | pandoc -f gfm -t rst -o
 sed '1,19d' ../../../library/ripple_down_rules/NOTES.md | pandoc -f gfm -t rst -o libraries/ripple_down_rules.rst
 sed '1,19d' ../../../library/rrelieff_feature_selector/NOTES.md | pandoc -f gfm -t rst -o libraries/rrelieff_feature_selector.rst
 sed '1,19d' ../../../library/s3/NOTES.md | pandoc -f gfm -t rst -o libraries/s3.rst
+sed '1,19d' ../../../library/sat/NOTES.md | pandoc -f gfm -t rst -o libraries/sat.rst
 sed '1,19d' ../../../library/schulze_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/schulze_ranker.rst
 sed '1,19d' ../../../library/sequential_pattern_mining_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/sequential_pattern_mining_protocols.rst
 sed '1,19d' ../../../library/sets/NOTES.md | pandoc -f gfm -t rst -o libraries/sets.rst

@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on November 7, 2026
+##   Last updated on November 8, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -241,9 +241,9 @@ Foreach-Object {
 (Get-Content ../../../library/jwt/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/jwt.rst
 (Get-Content ../../../library/kcenters_clusterer/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/kcenters_clusterer.rst
 (Get-Content ../../../library/kemeny_young_ranker/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/kemeny_young_ranker.rst
+(Get-Content ../../../library/kernel_pca_projection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/kernel_pca_projection.rst
 (Get-Content ../../../library/kernel_svm_classifier/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/kernel_svm_classifier.rst
 (Get-Content ../../../library/kmeans_clusterer/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/kmeans_clusterer.rst
-(Get-Content ../../../library/kernel_pca_projection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/kernel_pca_projection.rst
 (Get-Content ../../../library/kmedians_clusterer/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/kmedians_clusterer.rst
 (Get-Content ../../../library/kmedoids_clusterer/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/kmedoids_clusterer.rst
 (Get-Content ../../../library/kmodes_clusterer/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/kmodes_clusterer.rst
@@ -341,6 +341,7 @@ Foreach-Object {
 (Get-Content ../../../library/ripple_down_rules/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ripple_down_rules.rst
 (Get-Content ../../../library/rrelieff_feature_selector/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/rrelieff_feature_selector.rst
 (Get-Content ../../../library/s3/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/s3.rst
+(Get-Content ../../../library/sat/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/sat.rst
 (Get-Content ../../../library/schulze_ranker/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/schulze_ranker.rst
 (Get-Content ../../../library/sequential_pattern_mining_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/sequential_pattern_mining_protocols.rst
 (Get-Content ../../../library/sets/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/sets.rst

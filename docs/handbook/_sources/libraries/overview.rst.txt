@@ -70,7 +70,8 @@ Library groups
 - Coordination and data stores: ``linda``, ``memcached``, and ``redis``.
 - System and external integration: ``crontab``, ``git``, ``java``,
   ``os``, and ``sockets``.
-- Logic and symbolic computing: ``atms`` and ``datalog``.
+- Logic and symbolic computing: ``atms``, ``clingo``, ``datalog``, and
+  ``sat``.
 - Security and integrity: ``block_ciphers``, ``cmac``, ``crypto``,
   ``hashes``, ``hmac``, ``jwt``, ``otp``, and ``paseto``.
 - Randomness: ``arbitrary``, ``mutations``, and ``random``.

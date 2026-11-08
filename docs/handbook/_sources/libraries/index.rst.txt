@@ -291,6 +291,7 @@ directory in the ``NOTES.md`` file.
    ripple_down_rules
    rrelieff_feature_selector
    s3
+   sat
    schulze_ranker
    sequential_pattern_mining_protocols
    sets

@@ -5080,6 +5080,32 @@ To load an entity, always load the library that includes it using the goal ``log
    * :doc:`s3_signing <s3_signing_0>`
    * :doc:`s3_xml <s3_xml_0>`
 
+``library/sat/``
+----------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      sat <sat_0>
+      sat_expansion <sat_expansion_0>
+      sat_output <sat_output_0>
+      sat_problem_protocol <sat_problem_protocol_0>
+      sat_process <sat_process_0>
+      sat_program <sat_program_0>
+      sat_protocol <sat_protocol_0>
+
+.. only:: latex
+
+   * :doc:`sat <sat_0>`
+   * :doc:`sat_expansion <sat_expansion_0>`
+   * :doc:`sat_output <sat_output_0>`
+   * :doc:`sat_problem_protocol <sat_problem_protocol_0>`
+   * :doc:`sat_process <sat_process_0>`
+   * :doc:`sat_program <sat_program_0>`
+   * :doc:`sat_protocol <sat_protocol_0>`
+
 ``library/schulze_ranker/``
 ---------------------------
 

@@ -69,6 +69,10 @@ Library
 problems as Logtalk objects, invoking the Clingo command-line solver through
 the `process` library, and inspecting collected models and diagnostics.
 
+* ADDED: New `sat` library for representing SAT problems as Logtalk
+objects, invoking the Kissat (default), CaDiCaL, Glucose, or Z3 command-line
+solvers through the `process` library, and inspecting collected results.
+
 * ADDED: New `simple_temporal_networks` library implementing Simple Temporal
 Networks (STNs).
 

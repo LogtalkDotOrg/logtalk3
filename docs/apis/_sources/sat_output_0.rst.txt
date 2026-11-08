@@ -1,0 +1,94 @@
+.. index:: single: sat_output
+.. _sat_output/0:
+
+.. rst-class:: right
+
+**object**
+
+``sat_output``
+==============
+
+Whole-document Kissat, CaDiCaL, Glucose, and Z3 plain-text output decoding.
+
+| **Availability:** 
+|    ``logtalk_load(sat(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-08
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: decode/8
+.. _sat_output/0::decode/8:
+
+``decode/8``
+^^^^^^^^^^^^
+
+Decodes captured stdout and process metadata into a collected ``sat_result(Status, Model, Properties)`` term, mapping reported literals back through an optional ``Variables`` table.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode(Solver,Codes,RawStatus,NormalizedStatus,Diagnostics,SourceMap,Variables,Result)``
+| **Mode and number of proofs:**
+|    ``decode(+atom,+list(integer),+term,+compound,+list(integer),+list(compound),+term,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    An input is insufficiently instantiated:
+|        ``instantiation_error``
+|    ``Solver`` is not an atom:
+|        ``type_error(atom,Solver)``
+|    A code-list input is not a character-code list:
+|        ``type_error(codes,Input)``
+|    ``SourceMap`` is not a list:
+|        ``type_error(list,SourceMap)``
+|    ``Variables`` is neither ``none`` nor a list of pairs:
+|        ``type_error(list(pair),Variables)``
+|    ``Codes`` has no status line or an unsupported status label:
+|        ``domain_error(sat_output,Field-Value)``
+|    The witness line is missing its zero terminator:
+|        ``domain_error(sat_output,witness_terminator_missing)``
+|    A witness literal number has no entry in the variable table:
+|        ``domain_error(sat_output,variable(Number))``
+|    The process status is fatal or inconsistent with the solver result:
+|        ``domain_error(sat_process_status,NormalizedStatus)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

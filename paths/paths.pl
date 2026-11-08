@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on November 7, 2026
+%  Last updated on November 8, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -270,8 +270,8 @@ logtalk_library_path(json_schema, library('json_schema/')).
 logtalk_library_path(jwt, library('jwt/')).
 logtalk_library_path(kcenters_clusterer, library('kcenters_clusterer/')).
 logtalk_library_path(kemeny_young_ranker, library('kemeny_young_ranker/')).
-logtalk_library_path(kernel_svm_classifier, library('kernel_svm_classifier/')).
 logtalk_library_path(kernel_pca_projection, library('kernel_pca_projection/')).
+logtalk_library_path(kernel_svm_classifier, library('kernel_svm_classifier/')).
 logtalk_library_path(kmeans_clusterer, library('kmeans_clusterer/')).
 logtalk_library_path(kmedians_clusterer, library('kmedians_clusterer/')).
 logtalk_library_path(kmedoids_clusterer, library('kmedoids_clusterer/')).
@@ -370,6 +370,7 @@ logtalk_library_path(ridge_regression, library('ridge_regression/')).
 logtalk_library_path(ripple_down_rules, library('ripple_down_rules/')).
 logtalk_library_path(rrelieff_feature_selector, library('rrelieff_feature_selector/')).
 logtalk_library_path(s3, library('s3/')).
+logtalk_library_path(sat, library('sat/')).
 logtalk_library_path(schulze_ranker, library('schulze_ranker/')).
 logtalk_library_path(sequential_pattern_mining_protocols, library('sequential_pattern_mining_protocols/')).
 logtalk_library_path(sets, library('sets/')).

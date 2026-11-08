@@ -1,0 +1,78 @@
+.. index:: single: sat_problem_protocol
+.. _sat_problem_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``sat_problem_protocol``
+========================
+
+Protocol for ordered, ground CNF statement providers.
+
+| **Availability:** 
+|    ``logtalk_load(sat(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-08
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: cnf_statement/2
+.. _sat_problem_protocol/0::cnf_statement/2:
+
+``cnf_statement/2``
+^^^^^^^^^^^^^^^^^^^
+
+Enumerates, by backtracking, canonical CNF statements in source order and their origins.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cnf_statement(Statement,Origin)``
+| **Mode and number of proofs:**
+|    ``cnf_statement(-compound,-term)`` - ``zero_or_more``
+
+| **Remarks:**
+
+    - Origin: Either ``source(File, Start, End)`` or ``unknown``.
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

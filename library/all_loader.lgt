@@ -273,6 +273,7 @@
 		mrmr_feature_selector(loader),
 		lasso_feature_selector(loader),
 		clingo(loader),
+		sat(loader),
 		uri_template(loader),
 		url(loader),
 		sqids(loader),

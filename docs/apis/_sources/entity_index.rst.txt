@@ -949,6 +949,11 @@ Objects
       s3_xml <s3_xml_0>
       sample <sample_0>
       sarif <sarif_0>
+      sat <sat_0>
+      sat_expansion <sat_expansion_0>
+      sat_output <sat_output_0>
+      sat_process <sat_process_0>
+      sat_program <sat_program_0>
       sbom <sbom_0>
       schulze_ranker <schulze_ranker_0>
       scope_directive_replacement(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation) <scope_directive_replacement_5>
@@ -1848,6 +1853,11 @@ Objects
    * :doc:`s3_xml <s3_xml_0>`
    * :doc:`sample <sample_0>`
    * :doc:`sarif <sarif_0>`
+   * :doc:`sat <sat_0>`
+   * :doc:`sat_expansion <sat_expansion_0>`
+   * :doc:`sat_output <sat_output_0>`
+   * :doc:`sat_process <sat_process_0>`
+   * :doc:`sat_program <sat_program_0>`
    * :doc:`sbom <sbom_0>`
    * :doc:`schulze_ranker <schulze_ranker_0>`
    * :doc:`scope_directive_replacement(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation) <scope_directive_replacement_5>`
@@ -2277,6 +2287,8 @@ Protocols
       root_finder_protocol <root_finder_protocol_0>
       s3_protocol <s3_protocol_0>
       sampling_protocol <sampling_protocol_0>
+      sat_problem_protocol <sat_problem_protocol_0>
+      sat_protocol <sat_protocol_0>
       sentence_splitter_protocol <sentence_splitter_protocol_0>
       sequence_dataset_protocol <sequence_dataset_protocol_0>
       setp <setp_0>
@@ -2502,6 +2514,8 @@ Protocols
    * :doc:`root_finder_protocol <root_finder_protocol_0>`
    * :doc:`s3_protocol <s3_protocol_0>`
    * :doc:`sampling_protocol <sampling_protocol_0>`
+   * :doc:`sat_problem_protocol <sat_problem_protocol_0>`
+   * :doc:`sat_protocol <sat_protocol_0>`
    * :doc:`sentence_splitter_protocol <sentence_splitter_protocol_0>`
    * :doc:`sequence_dataset_protocol <sequence_dataset_protocol_0>`
    * :doc:`setp <setp_0>`
