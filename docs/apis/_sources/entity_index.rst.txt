@@ -400,6 +400,12 @@ Objects
       chi_square_score(Discretization) <chi_square_score_1>
       chi_square_yates_score <chi_square_yates_score_0>
       clauses_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <clauses_reordering_5>
+      clingo <clingo_0>
+      clingo_expansion <clingo_expansion_0>
+      clingo_output <clingo_output_0>
+      clingo_process <clingo_process_0>
+      clingo_program <clingo_program_0>
+      clingo_symbols <clingo_symbols_0>
       clo_span_pattern_miner <clo_span_pattern_miner_0>
       cmac <cmac_0>
       cobertura_report <cobertura_report_0>
@@ -1293,6 +1299,12 @@ Objects
    * :doc:`chi_square_score(Discretization) <chi_square_score_1>`
    * :doc:`chi_square_yates_score <chi_square_yates_score_0>`
    * :doc:`clauses_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <clauses_reordering_5>`
+   * :doc:`clingo <clingo_0>`
+   * :doc:`clingo_expansion <clingo_expansion_0>`
+   * :doc:`clingo_output <clingo_output_0>`
+   * :doc:`clingo_process <clingo_process_0>`
+   * :doc:`clingo_program <clingo_program_0>`
+   * :doc:`clingo_symbols <clingo_symbols_0>`
    * :doc:`clo_span_pattern_miner <clo_span_pattern_miner_0>`
    * :doc:`cmac <cmac_0>`
    * :doc:`cobertura_report <cobertura_report_0>`
@@ -2109,6 +2121,8 @@ Protocols
       class_hierarchyp <class_hierarchyp_0>
       classifier_protocol <classifier_protocol_0>
       clause_mutator_protocol <clause_mutator_protocol_0>
+      clingo_problem_protocol <clingo_problem_protocol_0>
+      clingo_protocol <clingo_protocol_0>
       cloning <cloning_0>
       clusterer_protocol <clusterer_protocol_0>
       clustering_dataset_protocol <clustering_dataset_protocol_0>
@@ -2332,6 +2346,8 @@ Protocols
    * :doc:`class_hierarchyp <class_hierarchyp_0>`
    * :doc:`classifier_protocol <classifier_protocol_0>`
    * :doc:`clause_mutator_protocol <clause_mutator_protocol_0>`
+   * :doc:`clingo_problem_protocol <clingo_problem_protocol_0>`
+   * :doc:`clingo_protocol <clingo_protocol_0>`
    * :doc:`cloning <cloning_0>`
    * :doc:`clusterer_protocol <clusterer_protocol_0>`
    * :doc:`clustering_dataset_protocol <clustering_dataset_protocol_0>`

@@ -1,0 +1,16 @@
+{
+  "Solver": "clingo version 5.8.3",
+  "Input": ["-"],
+  "Call": [{
+    "Start": 0.000,
+    "Witnesses": [
+      {"Time": 0.000, "Value": []},
+      {"Time": 0.000, "Value": ["p"]}
+    ],
+    "Stop": 0.001
+  }],
+  "Result": "SATISFIABLE",
+  "Models": {"Number": 2, "More": "no"},
+  "Calls": 1,
+  "Time": {"Total": 0.000, "Solve": 0.000, "Model": 0.000, "Unsat": 0.000, "CPU": 0.000}
+}

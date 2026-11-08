@@ -1,0 +1,16 @@
+{
+  "Solver": "clingo version 5.8.3",
+  "Input": ["-"],
+  "Call": [{
+    "Start": 0.000,
+    "Witnesses": [
+      {"Time": 0.001, "Value": ["p(2)"], "Costs": [2]},
+      {"Time": 0.001, "Value": ["p(1)"], "Costs": [1]}
+    ],
+    "Stop": 0.001
+  }],
+  "Result": "OPTIMUM FOUND",
+  "Models": {"Number": 2, "More": "no", "Optimum": "yes", "Optimal": 1, "Costs": [1]},
+  "Calls": 1,
+  "Time": {"Total": 0.001, "Solve": 0.000, "Model": 0.000, "Unsat": 0.000, "CPU": 0.001}
+}

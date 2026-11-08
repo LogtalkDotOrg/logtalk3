@@ -1,0 +1,96 @@
+.. index:: single: clingo_output
+.. _clingo_output/0:
+
+.. rst-class:: right
+
+**object**
+
+``clingo_output``
+=================
+
+Whole-document Clingo JSON output decoding.
+
+| **Availability:** 
+|    ``logtalk_load(clingo(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-08
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`clingo_symbols <clingo_symbols/0>`
+|    :ref:`json(ObjectRepresentation,PairRepresentation,StringRepresentation) <json/3>`
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: decode/6
+.. _clingo_output/0::decode/6:
+
+``decode/6``
+^^^^^^^^^^^^
+
+Decodes CLI JSON and process metadata into a collected ``clingo_result(Status, Models, Properties)`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode(Codes,RawStatus,NormalizedStatus,Diagnostics,SourceMap,Result)``
+| **Mode and number of proofs:**
+|    ``decode(+list(integer),+term,+compound,+list(integer),+list(compound),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    An input is insufficiently instantiated:
+|        ``instantiation_error``
+|    A code-list input is not a character-code list:
+|        ``type_error(codes,Input)``
+|    ``SourceMap`` is not a list:
+|        ``type_error(list,SourceMap)``
+|    ``Codes`` does not contain parsable JSON:
+|        ``domain_error(json,codes(Codes))``
+|    A JSON field has an invalid type or value:
+|        ``domain_error(clingo_output,Field-Value)``
+|    The JSON simultaneously reports a time limit and another interruption:
+|        ``domain_error(clingo_output,interruption_flags)``
+|    The process status is fatal or inconsistent with the solver result:
+|        ``domain_error(clingo_process_status,NormalizedStatus)``
+|    A shown value is not a supported symbol:
+|        ``domain_error(clingo_symbol,Codes)``
+|    A numeric symbol cannot be represented as an integer:
+|        ``representation_error(clingo_integer)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

@@ -68,6 +68,7 @@ directory in the ``NOTES.md`` file.
    character_sets
    chi_square_feature_selector
    classification_protocols
+   clingo
    clo_span_pattern_miner
    clustering_protocols
    cmac

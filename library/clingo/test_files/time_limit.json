@@ -1,0 +1,10 @@
+{
+  "Solver": "clingo version 5.8.3",
+  "Input": ["-"],
+  "Call": [{"Start": 0.000, "Stop": 1.001}],
+  "Result": "UNKNOWN",
+  "TIME LIMIT": 1,
+  "Models": {"Number": 0, "More": "yes"},
+  "Calls": 1,
+  "Time": {"Total": 1.001, "Solve": 0.996, "Model": 0.000, "Unsat": 0.000, "CPU": 0.999}
+}

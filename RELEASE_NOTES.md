@@ -65,6 +65,10 @@ compact styling, adding internal links, and reducing the number of pages.
 Library
 -------
 
+* ADDED: New `clingo` library for representing Answer Set Programming (ASP)
+problems as Logtalk objects, invoking the Clingo command-line solver through
+the `process` library, and inspecting collected models and diagnostics.
+
 * ADDED: New `simple_temporal_networks` library implementing Simple Temporal
 Networks (STNs).
 

@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on October 7, 2026
+##   Last updated on November 7, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -119,6 +119,7 @@ sed '1,19d' ../../../library/ccsds_time_fields/NOTES.md | pandoc -f gfm -t rst -
 sed '1,19d' ../../../library/character_sets/NOTES.md | pandoc -f gfm -t rst -o libraries/character_sets.rst
 sed '1,19d' ../../../library/chi_square_feature_selector/NOTES.md | pandoc -f gfm -t rst -o libraries/chi_square_feature_selector.rst
 sed '1,19d' ../../../library/classification_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/classification_protocols.rst
+sed '1,19d' ../../../library/clingo/NOTES.md | pandoc -f gfm -t rst -o libraries/clingo.rst
 sed '1,19d' ../../../library/clo_span_pattern_miner/NOTES.md | pandoc -f gfm -t rst -o libraries/clo_span_pattern_miner.rst
 sed '1,19d' ../../../library/clustering_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/clustering_protocols.rst
 sed '1,19d' ../../../library/cmac/NOTES.md | pandoc -f gfm -t rst -o libraries/cmac.rst

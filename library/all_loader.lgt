@@ -272,6 +272,7 @@
 		rrelieff_feature_selector(loader),
 		mrmr_feature_selector(loader),
 		lasso_feature_selector(loader),
+		clingo(loader),
 		uri_template(loader),
 		url(loader),
 		sqids(loader),

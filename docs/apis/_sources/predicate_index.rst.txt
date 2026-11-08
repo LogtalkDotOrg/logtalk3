@@ -1328,6 +1328,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``asp_statement/2``
+   -------------------
+
+   * :ref:`clingo_problem_protocol <clingo_problem_protocol/0::asp_statement/2>`
+
+.. only:: latex
+
+   * ``asp_statement/2`` - :ref:`clingo_problem_protocol <clingo_problem_protocol/0::asp_statement/2>`
+
+.. only:: not latex
+
    ``aspiration/3``
    ----------------
 
@@ -5996,6 +6007,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``decode/5`` - :ref:`jwt <jwt/0::decode/5>`, :ref:`jwt_compact <jwt_compact/0::decode/5>`
+
+.. only:: not latex
+
+   ``decode/6``
+   ------------
+
+   * :ref:`clingo_output <clingo_output/0::decode/6>`
+
+.. only:: latex
+
+   * ``decode/6`` - :ref:`clingo_output <clingo_output/0::decode/6>`
 
 .. only:: not latex
 
@@ -19154,6 +19176,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``model/2``
+   -----------
+
+   * :ref:`clingo_protocol <clingo_protocol/0::model/2>`
+
+.. only:: latex
+
+   * ``model/2`` - :ref:`clingo_protocol <clingo_protocol/0::model/2>`
+
+.. only:: not latex
+
    ``modes/2``
    -----------
 
@@ -22602,6 +22635,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    * :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0::parse/2>`
    * :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::parse/2>`
    * :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::parse/2>`
+   * :ref:`clingo_symbols <clingo_symbols/0::parse/2>`
    * :ref:`crontab(Representation) <crontab/1::parse/2>`
    * :ref:`geojson_protocol <geojson_protocol/0::parse/2>`
    * :ref:`gpx_protocol <gpx_protocol/0::parse/2>`
@@ -22628,7 +22662,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: latex
 
-   * ``parse/2`` - :ref:`avro <avro/0::parse/2>`, :ref:`base32 <base32/0::parse/2>`, :ref:`base58 <base58/0::parse/2>`, :ref:`base64 <base64/0::parse/2>`, :ref:`base64url <base64url/0::parse/2>`, :ref:`base64url_no_padding <base64url_no_padding/0::parse/2>`, :ref:`base85 <base85/0::parse/2>`, :ref:`bson(StringRepresentation) <bson/1::parse/2>`, :ref:`cbor(StringRepresentation) <cbor/1::parse/2>`, :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0::parse/2>`, :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::parse/2>`, :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::parse/2>`, :ref:`crontab(Representation) <crontab/1::parse/2>`, :ref:`geojson_protocol <geojson_protocol/0::parse/2>`, :ref:`gpx_protocol <gpx_protocol/0::parse/2>`, :ref:`http_websocket_frames <http_websocket_frames/0::parse/2>`, :ref:`ieee_754_protocol <ieee_754_protocol/0::parse/2>`, :ref:`json_graph_protocol <json_graph_protocol/0::parse/2>`, :ref:`json_ld_protocol <json_ld_protocol/0::parse/2>`, :ref:`json_lines_protocol <json_lines_protocol/0::parse/2>`, :ref:`json_path_protocol <json_path_protocol/0::parse/2>`, :ref:`json_pointer_protocol <json_pointer_protocol/0::parse/2>`, :ref:`json_protocol <json_protocol/0::parse/2>`, :ref:`json_schema_protocol <json_schema_protocol/0::parse/2>`, :ref:`message_pack(StringRepresentation) <message_pack/1::parse/2>`, :ref:`nmea_protocol <nmea_protocol/0::parse/2>`, :ref:`open_api <open_api/0::parse/2>`, :ref:`protobuf <protobuf/0::parse/2>`, :ref:`tle_orbits_protocol <tle_orbits_protocol/0::parse/2>`, :ref:`toml_protocol <toml_protocol/0::parse/2>`, :ref:`toon_protocol <toon_protocol/0::parse/2>`, :ref:`url(Representation) <url/1::parse/2>`, :ref:`wkt_wkb_protocol <wkt_wkb_protocol/0::parse/2>`, :ref:`xml <xml/0::parse/2>`, :ref:`yaml_protocol <yaml_protocol/0::parse/2>`
+   * ``parse/2`` - :ref:`avro <avro/0::parse/2>`, :ref:`base32 <base32/0::parse/2>`, :ref:`base58 <base58/0::parse/2>`, :ref:`base64 <base64/0::parse/2>`, :ref:`base64url <base64url/0::parse/2>`, :ref:`base64url_no_padding <base64url_no_padding/0::parse/2>`, :ref:`base85 <base85/0::parse/2>`, :ref:`bson(StringRepresentation) <bson/1::parse/2>`, :ref:`cbor(StringRepresentation) <cbor/1::parse/2>`, :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0::parse/2>`, :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::parse/2>`, :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::parse/2>`, :ref:`clingo_symbols <clingo_symbols/0::parse/2>`, :ref:`crontab(Representation) <crontab/1::parse/2>`, :ref:`geojson_protocol <geojson_protocol/0::parse/2>`, :ref:`gpx_protocol <gpx_protocol/0::parse/2>`, :ref:`http_websocket_frames <http_websocket_frames/0::parse/2>`, :ref:`ieee_754_protocol <ieee_754_protocol/0::parse/2>`, :ref:`json_graph_protocol <json_graph_protocol/0::parse/2>`, :ref:`json_ld_protocol <json_ld_protocol/0::parse/2>`, :ref:`json_lines_protocol <json_lines_protocol/0::parse/2>`, :ref:`json_path_protocol <json_path_protocol/0::parse/2>`, :ref:`json_pointer_protocol <json_pointer_protocol/0::parse/2>`, :ref:`json_protocol <json_protocol/0::parse/2>`, :ref:`json_schema_protocol <json_schema_protocol/0::parse/2>`, :ref:`message_pack(StringRepresentation) <message_pack/1::parse/2>`, :ref:`nmea_protocol <nmea_protocol/0::parse/2>`, :ref:`open_api <open_api/0::parse/2>`, :ref:`protobuf <protobuf/0::parse/2>`, :ref:`tle_orbits_protocol <tle_orbits_protocol/0::parse/2>`, :ref:`toml_protocol <toml_protocol/0::parse/2>`, :ref:`toon_protocol <toon_protocol/0::parse/2>`, :ref:`url(Representation) <url/1::parse/2>`, :ref:`wkt_wkb_protocol <wkt_wkb_protocol/0::parse/2>`, :ref:`xml <xml/0::parse/2>`, :ref:`yaml_protocol <yaml_protocol/0::parse/2>`
 
 .. only:: not latex
 
@@ -24643,6 +24677,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``print_program/1``
+   -------------------
+
+   * :ref:`clingo_protocol <clingo_protocol/0::print_program/1>`
+
+.. only:: latex
+
+   * ``print_program/1`` - :ref:`clingo_protocol <clingo_protocol/0::print_program/1>`
+
+.. only:: not latex
+
    ``print_ranker/1``
    ------------------
 
@@ -24673,6 +24718,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``print_regressor/1`` - :ref:`regressor_protocol <regressor_protocol/0::print_regressor/1>`
+
+.. only:: not latex
+
+   ``print_result/1``
+   ------------------
+
+   * :ref:`clingo_protocol <clingo_protocol/0::print_result/1>`
+
+.. only:: latex
+
+   * ``print_result/1`` - :ref:`clingo_protocol <clingo_protocol/0::print_result/1>`
 
 .. only:: not latex
 
@@ -24818,6 +24874,28 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``profile_url/2`` - :ref:`gravatar <gravatar/0::profile_url/2>`
+
+.. only:: not latex
+
+   ``program/1``
+   -------------
+
+   * :ref:`clingo_protocol <clingo_protocol/0::program/1>`
+
+.. only:: latex
+
+   * ``program/1`` - :ref:`clingo_protocol <clingo_protocol/0::program/1>`
+
+.. only:: not latex
+
+   ``program/2``
+   -------------
+
+   * :ref:`clingo_protocol <clingo_protocol/0::program/2>`
+
+.. only:: latex
+
+   * ``program/2`` - :ref:`clingo_protocol <clingo_protocol/0::program/2>`
 
 .. only:: not latex
 
@@ -25553,6 +25631,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``quick_check/3`` - :ref:`lgtunit <lgtunit/0::quick_check/3>`
+
+.. only:: not latex
+
+   ``quote/3``
+   -----------
+
+   * :ref:`clingo_process <clingo_process/0::quote/3>`
+
+.. only:: latex
+
+   * ``quote/3`` - :ref:`clingo_process <clingo_process/0::quote/3>`
 
 .. only:: not latex
 
@@ -28009,6 +28098,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``result_property/2``
+   ---------------------
+
+   * :ref:`clingo_protocol <clingo_protocol/0::result_property/2>`
+
+.. only:: latex
+
+   * ``result_property/2`` - :ref:`clingo_protocol <clingo_protocol/0::result_property/2>`
+
+.. only:: not latex
+
    ``retract_batch/4``
    -------------------
 
@@ -28496,6 +28596,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``run/4`` - :ref:`ant_colony(Problem,RandomAlgorithm) <ant_colony/2::run/4>`, :ref:`differential_evolution(Problem,RandomAlgorithm) <differential_evolution/2::run/4>`, :ref:`genetic_algorithm(Problem,RandomAlgorithm) <genetic_algorithm/2::run/4>`, :ref:`local_optimization_solver(Problem) <local_optimization_solver/1::run/4>`, :ref:`particle_swarm_optimization(Problem,RandomAlgorithm) <particle_swarm_optimization/2::run/4>`, :ref:`simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing/2::run/4>`, :ref:`tabu_search(Problem,RandomAlgorithm) <tabu_search/2::run/4>`
+
+.. only:: not latex
+
+   ``run/7``
+   ---------
+
+   * :ref:`clingo_process <clingo_process/0::run/7>`
+
+.. only:: latex
+
+   * ``run/7`` - :ref:`clingo_process <clingo_process/0::run/7>`
 
 .. only:: not latex
 
@@ -29632,6 +29743,28 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``serialize/2``
+   ---------------
+
+   * :ref:`clingo_program <clingo_program/0::serialize/2>`
+
+.. only:: latex
+
+   * ``serialize/2`` - :ref:`clingo_program <clingo_program/0::serialize/2>`
+
+.. only:: not latex
+
+   ``serialize/4``
+   ---------------
+
+   * :ref:`clingo_program <clingo_program/0::serialize/4>`
+
+.. only:: latex
+
+   * ``serialize/4`` - :ref:`clingo_program <clingo_program/0::serialize/4>`
+
+.. only:: not latex
+
    ``series_length/1``
    -------------------
 
@@ -30518,22 +30651,24 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    ``solve/2``
    -----------
 
+   * :ref:`clingo_protocol <clingo_protocol/0::solve/2>`
    * :ref:`linear_programming_protocol <linear_programming_protocol/0::solve/2>`
 
 .. only:: latex
 
-   * ``solve/2`` - :ref:`linear_programming_protocol <linear_programming_protocol/0::solve/2>`
+   * ``solve/2`` - :ref:`clingo_protocol <clingo_protocol/0::solve/2>`, :ref:`linear_programming_protocol <linear_programming_protocol/0::solve/2>`
 
 .. only:: not latex
 
    ``solve/3``
    -----------
 
+   * :ref:`clingo_protocol <clingo_protocol/0::solve/3>`
    * :ref:`linear_programming_protocol <linear_programming_protocol/0::solve/3>`
 
 .. only:: latex
 
-   * ``solve/3`` - :ref:`linear_programming_protocol <linear_programming_protocol/0::solve/3>`
+   * ``solve/3`` - :ref:`clingo_protocol <clingo_protocol/0::solve/3>`, :ref:`linear_programming_protocol <linear_programming_protocol/0::solve/3>`
 
 .. only:: not latex
 
@@ -34476,6 +34611,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``valid_geohash/1`` - :ref:`geohash_protocol <geohash_protocol/0::valid_geohash/1>`
+
+.. only:: not latex
+
+   ``valid_identifier/1``
+   ----------------------
+
+   * :ref:`clingo_program <clingo_program/0::valid_identifier/1>`
+
+.. only:: latex
+
+   * ``valid_identifier/1`` - :ref:`clingo_program <clingo_program/0::valid_identifier/1>`
 
 .. only:: not latex
 
