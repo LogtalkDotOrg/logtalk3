@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-842 1270,-842 1270,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for category sequential_pattern_mining_common</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;06, 14:45</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;08, 11:30</text>
 <g id="clust1" class="cluster">
 <title>cluster_sequential_pattern_mining_common_category</title>
 <g id="a_clust1"><a xlink:title="sequential_pattern_mining_common">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1246,-46 1246,-46 1252,-46 1258,-52 1258,-58 1258,-58 1258,-818 1258,-818 1258,-824 1252,-830 1246,-830 1246,-830 20,-830 20,-830 14,-830 8,-824 8,-818 8,-818 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-814.3" font-family="Monospace" font-size="10.00" fill="dimgray">sequential_pattern_mining_common</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>check_sequences/4</title>
 <polygon fill="yellow" stroke="black" points="748.12,-794 629.88,-794 629.88,-758 748.12,-758 748.12,-794"/>
 <text xml:space="preserve" text-anchor="start" x="637.88" y="-778.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="640.38" y="-777.53" font-family="Monospace" font-size="11.00">check_sequences/4</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>check_unique_sequence_ids/1</title>
 <polygon fill="cornsilk" stroke="black" points="663.03,-443 490.97,-443 490.97,-407 663.03,-407 663.03,-443"/>
 <text xml:space="preserve" text-anchor="start" x="498.97" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L102">
+<g id="a_node9_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L102">
 <text xml:space="preserve" text-anchor="start" x="501.47" y="-426.53" font-family="Monospace" font-size="11.00">check_unique_sequence_ids/1</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- check_sequences/4&#45;&gt;check_unique_sequence_ids/1 -->
 <g id="edge1" class="edge">
 <title>check_sequences/4&#45;&gt;check_unique_sequence_ids/1</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L98" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L98" xlink:title="calls">
 <path fill="none" stroke="black" d="M661.66,-757.82C637.15,-740.69 602.71,-711.94 587,-677 553.53,-602.57 563.65,-502.83 571.52,-454.55"/>
 <polygon fill="black" stroke="black" points="574.93,-455.38 573.18,-444.93 568.03,-454.19 574.93,-455.38"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L98" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L98">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L98" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L98">
 <text xml:space="preserve" text-anchor="start" x="567.23" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>check_sequences_list/4</title>
 <polygon fill="cornsilk" stroke="black" points="903.9,-677 766.1,-677 766.1,-641 903.9,-641 903.9,-677"/>
 <text xml:space="preserve" text-anchor="start" x="774.1" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L112">
+<g id="a_node10_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L112">
 <text xml:space="preserve" text-anchor="start" x="776.6" y="-660.53" font-family="Monospace" font-size="11.00">check_sequences_list/4</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- check_sequences/4&#45;&gt;check_sequences_list/4 -->
 <g id="edge2" class="edge">
 <title>check_sequences/4&#45;&gt;check_sequences_list/4</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L98" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L98" xlink:title="calls">
 <path fill="none" stroke="black" d="M711.17,-757.53C735.97,-738 776.3,-706.23 804.17,-684.29"/>
 <polygon fill="black" stroke="black" points="806.22,-687.13 811.91,-678.19 801.89,-681.63 806.22,-687.13"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L98" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L98">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L98" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L98">
 <text xml:space="preserve" text-anchor="start" x="766.38" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -97,7 +97,7 @@
 <title>pattern_length/2</title>
 <polygon fill="yellow" stroke="black" points="403.25,-560 302.75,-560 302.75,-524 403.25,-524 403.25,-560"/>
 <text xml:space="preserve" text-anchor="start" x="310.75" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L39">
+<g id="a_node2_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L39">
 <text xml:space="preserve" text-anchor="start" x="313.25" y="-543.53" font-family="Monospace" font-size="11.00">pattern_length/2</text>
 </a>
 </g>
@@ -111,7 +111,7 @@
 <title>pattern_length/3</title>
 <polygon fill="cornsilk" stroke="black" points="438.25,-443 337.75,-443 337.75,-407 438.25,-407 438.25,-443"/>
 <text xml:space="preserve" text-anchor="start" x="345.75" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node18_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L185">
+<g id="a_node18_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L185">
 <text xml:space="preserve" text-anchor="start" x="348.25" y="-426.53" font-family="Monospace" font-size="11.00">pattern_length/3</text>
 </a>
 </g>
@@ -123,12 +123,12 @@
 <!-- pattern_length/2&#45;&gt;pattern_length/3 -->
 <g id="edge10" class="edge">
 <title>pattern_length/2&#45;&gt;pattern_length/3</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L182" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L182" xlink:title="calls">
 <path fill="none" stroke="black" d="M358.32,-523.53C363.92,-505.11 372.85,-475.79 379.45,-454.1"/>
 <polygon fill="black" stroke="black" points="382.74,-455.29 382.31,-444.7 376.05,-453.25 382.74,-455.29"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L182">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L182">
 <text xml:space="preserve" text-anchor="start" x="371.55" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -138,7 +138,7 @@
 <title>sort_patterns/2</title>
 <polygon fill="yellow" stroke="black" points="200.19,-794 105.81,-794 105.81,-758 200.19,-758 200.19,-794"/>
 <text xml:space="preserve" text-anchor="start" x="113.81" y="-778.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L46">
+<g id="a_node3_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L46">
 <text xml:space="preserve" text-anchor="start" x="116.31" y="-777.53" font-family="Monospace" font-size="11.00">sort_patterns/2</text>
 </a>
 </g>
@@ -152,7 +152,7 @@
 <title>decorate_patterns/2</title>
 <polygon fill="cornsilk" stroke="black" points="286.42,-677 167.58,-677 167.58,-641 286.42,-641 286.42,-677"/>
 <text xml:space="preserve" text-anchor="start" x="175.58" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node19_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L196">
+<g id="a_node19_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L196">
 <text xml:space="preserve" text-anchor="start" x="178.08" y="-660.53" font-family="Monospace" font-size="11.00">decorate_patterns/2</text>
 </a>
 </g>
@@ -164,12 +164,12 @@
 <!-- sort_patterns/2&#45;&gt;decorate_patterns/2 -->
 <g id="edge11" class="edge">
 <title>sort_patterns/2&#45;&gt;decorate_patterns/2</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L191" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L191" xlink:title="calls">
 <path fill="none" stroke="black" d="M164.24,-757.53C176.32,-738.77 195.66,-708.7 209.69,-686.91"/>
 <polygon fill="black" stroke="black" points="212.61,-688.83 215.08,-678.53 206.72,-685.04 212.61,-688.83"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L191" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L191">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L191" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L191">
 <text xml:space="preserve" text-anchor="start" x="192.22" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -179,7 +179,7 @@
 <title>undecorate_patterns/2</title>
 <polygon fill="cornsilk" stroke="black" points="149.54,-677 18.46,-677 18.46,-641 149.54,-641 149.54,-677"/>
 <text xml:space="preserve" text-anchor="start" x="26.46" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node20_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L201" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L201">
+<g id="a_node20_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L201" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L201">
 <text xml:space="preserve" text-anchor="start" x="28.96" y="-660.53" font-family="Monospace" font-size="11.00">undecorate_patterns/2</text>
 </a>
 </g>
@@ -191,12 +191,12 @@
 <!-- sort_patterns/2&#45;&gt;undecorate_patterns/2 -->
 <g id="edge12" class="edge">
 <title>sort_patterns/2&#45;&gt;undecorate_patterns/2</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L191" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L191" xlink:title="calls">
 <path fill="none" stroke="black" d="M142.52,-757.53C131.26,-738.77 113.22,-708.7 100.14,-686.91"/>
 <polygon fill="black" stroke="black" points="103.28,-685.33 95.13,-678.55 97.27,-688.93 103.28,-685.33"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L191" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L191">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L191" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L191">
 <text xml:space="preserve" text-anchor="start" x="120.57" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -206,7 +206,7 @@
 <title>filter_patterns/3</title>
 <polygon fill="yellow" stroke="black" points="401.41,-677 304.59,-677 304.59,-641 401.41,-641 401.41,-677"/>
 <text xml:space="preserve" text-anchor="start" x="312.59" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L53">
+<g id="a_node4_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L53">
 <text xml:space="preserve" text-anchor="start" x="315.09" y="-660.53" font-family="Monospace" font-size="11.00">filter_patterns/3</text>
 </a>
 </g>
@@ -218,12 +218,12 @@
 <!-- filter_patterns/3&#45;&gt;pattern_length/2 -->
 <g id="edge14" class="edge">
 <title>filter_patterns/3&#45;&gt;pattern_length/2</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L206" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L206" xlink:title="calls">
 <path fill="none" stroke="black" d="M353,-640.53C353,-622.28 353,-593.33 353,-571.7"/>
 <polygon fill="black" stroke="black" points="356.5,-571.77 353,-561.77 349.5,-571.77 356.5,-571.77"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L206" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L206">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L206" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L206">
 <text xml:space="preserve" text-anchor="start" x="353" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -233,7 +233,7 @@
 <title>count_items/4</title>
 <polygon fill="yellow" stroke="black" points="533.74,-794 444.26,-794 444.26,-758 533.74,-758 533.74,-794"/>
 <text xml:space="preserve" text-anchor="start" x="452.26" y="-778.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L60">
+<g id="a_node5_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="454.76" y="-777.53" font-family="Monospace" font-size="11.00">count_items/4</text>
 </a>
 </g>
@@ -247,7 +247,7 @@
 <title>increment_item_count/4</title>
 <polygon fill="cornsilk" stroke="black" points="558.2,-677 419.8,-677 419.8,-641 558.2,-641 558.2,-677"/>
 <text xml:space="preserve" text-anchor="start" x="427.8" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node15_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L153">
+<g id="a_node15_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L153">
 <text xml:space="preserve" text-anchor="start" x="430.3" y="-660.53" font-family="Monospace" font-size="11.00">increment_item_count/4</text>
 </a>
 </g>
@@ -259,12 +259,12 @@
 <!-- count_items/4&#45;&gt;increment_item_count/4 -->
 <g id="edge7" class="edge">
 <title>count_items/4&#45;&gt;increment_item_count/4</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L149" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L149" xlink:title="calls">
 <path fill="none" stroke="black" d="M489,-757.53C489,-739.28 489,-710.33 489,-688.7"/>
 <polygon fill="black" stroke="black" points="492.5,-688.77 489,-678.77 485.5,-688.77 492.5,-688.77"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L149" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L149">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L149" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L149">
 <text xml:space="preserve" text-anchor="start" x="489" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -274,7 +274,7 @@
 <title>select_frequent_item_supports/3</title>
 <polygon fill="yellow" stroke="black" points="993.3,-794 812.7,-794 812.7,-758 993.3,-758 993.3,-794"/>
 <text xml:space="preserve" text-anchor="start" x="820.7" y="-778.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L67">
+<g id="a_node6_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="823.2" y="-777.53" font-family="Monospace" font-size="11.00">select_frequent_item_supports/3</text>
 </a>
 </g>
@@ -288,7 +288,7 @@
 <title>sort_item_supports/2</title>
 <polygon fill="yellow" stroke="black" points="1158.86,-794 1035.14,-794 1035.14,-758 1158.86,-758 1158.86,-794"/>
 <text xml:space="preserve" text-anchor="start" x="1043.14" y="-778.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L74">
+<g id="a_node7_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="1045.64" y="-777.53" font-family="Monospace" font-size="11.00">sort_item_supports/2</text>
 </a>
 </g>
@@ -302,7 +302,7 @@
 <title>decorate_item_supports/2</title>
 <polygon fill="cornsilk" stroke="black" points="1248.09,-677 1099.91,-677 1099.91,-641 1248.09,-641 1248.09,-677"/>
 <text xml:space="preserve" text-anchor="start" x="1107.91" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node16_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L174" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L174">
+<g id="a_node16_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L174" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L174">
 <text xml:space="preserve" text-anchor="start" x="1110.41" y="-660.53" font-family="Monospace" font-size="11.00">decorate_item_supports/2</text>
 </a>
 </g>
@@ -314,12 +314,12 @@
 <!-- sort_item_supports/2&#45;&gt;decorate_item_supports/2 -->
 <g id="edge8" class="edge">
 <title>sort_item_supports/2&#45;&gt;decorate_item_supports/2</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L169" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L169" xlink:title="calls">
 <path fill="none" stroke="black" d="M1108.69,-757.53C1121.32,-738.68 1141.57,-708.43 1156.18,-686.61"/>
 <polygon fill="black" stroke="black" points="1158.95,-688.77 1161.61,-678.51 1153.13,-684.87 1158.95,-688.77"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L169" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L169">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L169" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L169">
 <text xml:space="preserve" text-anchor="start" x="1137.81" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -329,7 +329,7 @@
 <title>undecorate_item_supports/2</title>
 <polygon fill="cornsilk" stroke="black" points="1082.21,-677 921.79,-677 921.79,-641 1082.21,-641 1082.21,-677"/>
 <text xml:space="preserve" text-anchor="start" x="929.79" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node17_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L178">
+<g id="a_node17_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L178">
 <text xml:space="preserve" text-anchor="start" x="932.29" y="-660.53" font-family="Monospace" font-size="11.00">undecorate_item_supports/2</text>
 </a>
 </g>
@@ -341,12 +341,12 @@
 <!-- sort_item_supports/2&#45;&gt;undecorate_item_supports/2 -->
 <g id="edge9" class="edge">
 <title>sort_item_supports/2&#45;&gt;undecorate_item_supports/2</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L169" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L169" xlink:title="calls">
 <path fill="none" stroke="black" d="M1082.57,-757.53C1066.86,-738.51 1041.56,-707.88 1023.5,-686.02"/>
 <polygon fill="black" stroke="black" points="1026.28,-683.9 1017.22,-678.42 1020.89,-688.36 1026.28,-683.9"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L169" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L169">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L169" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L169">
 <text xml:space="preserve" text-anchor="start" x="1052.35" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -356,7 +356,7 @@
 <title>valid_sequence_patterns/2</title>
 <polygon fill="yellow" stroke="black" points="748.24,-677 595.76,-677 595.76,-641 748.24,-641 748.24,-677"/>
 <text xml:space="preserve" text-anchor="start" x="603.76" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L81">
+<g id="a_node8_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L81">
 <text xml:space="preserve" text-anchor="start" x="606.26" y="-660.53" font-family="Monospace" font-size="11.00">valid_sequence_patterns/2</text>
 </a>
 </g>
@@ -370,7 +370,7 @@
 <title>check_sequence/3</title>
 <polygon fill="cornsilk" stroke="black" points="836.37,-560 723.63,-560 723.63,-524 836.37,-524 836.37,-560"/>
 <text xml:space="preserve" text-anchor="start" x="731.63" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L118" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L118">
+<g id="a_node11_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L118" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L118">
 <text xml:space="preserve" text-anchor="start" x="734.13" y="-543.53" font-family="Monospace" font-size="11.00">check_sequence/3</text>
 </a>
 </g>
@@ -382,12 +382,12 @@
 <!-- valid_sequence_patterns/2&#45;&gt;check_sequence/3 -->
 <g id="edge15" class="edge">
 <title>valid_sequence_patterns/2&#45;&gt;check_sequence/3</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L216" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L216" xlink:title="calls">
 <path fill="none" stroke="black" d="M688.4,-640.53C706.43,-621.34 735.55,-590.33 756.11,-568.44"/>
 <polygon fill="black" stroke="black" points="758.47,-571.04 762.76,-561.36 753.36,-566.25 758.47,-571.04"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L216" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L216">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L216" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L216">
 <text xml:space="preserve" text-anchor="start" x="729.24" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -409,12 +409,12 @@
 <!-- valid_sequence_patterns/2&#45;&gt;type::valid/2 -->
 <g id="edge21" class="edge">
 <title>valid_sequence_patterns/2&#45;&gt;type::valid/2</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L216" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L216" xlink:title="calls">
 <path fill="none" stroke="black" d="M671.09,-640.53C670.14,-622.28 668.63,-593.33 667.5,-571.7"/>
 <polygon fill="black" stroke="black" points="671,-571.57 666.98,-561.77 664,-571.93 671,-571.57"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L216" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L216">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L216" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L216">
 <text xml:space="preserve" text-anchor="start" x="669.18" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -436,12 +436,12 @@
 <!-- check_unique_sequence_ids/1&#45;&gt;list::member/2 -->
 <g id="edge16" class="edge">
 <title>check_unique_sequence_ids/1&#45;&gt;list::member/2</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L102" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L102" xlink:title="calls">
 <path fill="none" stroke="black" d="M577.06,-406.62C577.29,-381.03 578.22,-331.73 582,-290 588.07,-222.97 600.74,-144.91 607.86,-103.78"/>
 <polygon fill="black" stroke="black" points="611.3,-104.43 609.58,-93.97 604.4,-103.22 611.3,-104.43"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L102">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L102">
 <text xml:space="preserve" text-anchor="start" x="586.57" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -463,12 +463,12 @@
 <!-- check_unique_sequence_ids/1&#45;&gt;list::length/2 -->
 <g id="edge17" class="edge">
 <title>check_unique_sequence_ids/1&#45;&gt;list::length/2</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L102" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L102" xlink:title="calls">
 <path fill="none" stroke="black" d="M585.2,-406.53C593.93,-387.94 607.88,-358.24 618.09,-336.5"/>
 <polygon fill="black" stroke="black" points="621.17,-338.16 622.25,-327.62 614.84,-335.19 621.17,-338.16"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L102">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L102">
 <text xml:space="preserve" text-anchor="start" x="605.62" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -476,12 +476,12 @@
 <!-- check_sequences_list/4&#45;&gt;check_sequence/3 -->
 <g id="edge3" class="edge">
 <title>check_sequences_list/4&#45;&gt;check_sequence/3</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L113" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L113" xlink:title="calls">
 <path fill="none" stroke="black" d="M826.65,-640.53C817.75,-621.94 803.55,-592.24 793.15,-570.5"/>
 <polygon fill="black" stroke="black" points="796.38,-569.13 788.9,-561.62 790.06,-572.15 796.38,-569.13"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L113">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L113">
 <text xml:space="preserve" text-anchor="start" x="809.15" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -491,7 +491,7 @@
 <title>check_sequence_itemsets/4</title>
 <polygon fill="cornsilk" stroke="black" points="845.9,-443 686.1,-443 686.1,-407 845.9,-407 845.9,-443"/>
 <text xml:space="preserve" text-anchor="start" x="694.1" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L123" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L123">
+<g id="a_node12_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L123" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L123">
 <text xml:space="preserve" text-anchor="start" x="696.6" y="-426.53" font-family="Monospace" font-size="11.00">check_sequence_itemsets/4</text>
 </a>
 </g>
@@ -503,12 +503,12 @@
 <!-- check_sequence/3&#45;&gt;check_sequence_itemsets/4 -->
 <g id="edge4" class="edge">
 <title>check_sequence/3&#45;&gt;check_sequence_itemsets/4</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L120" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L120" xlink:title="calls">
 <path fill="none" stroke="black" d="M777.87,-523.53C775.64,-505.19 772.09,-476.06 769.46,-454.4"/>
 <polygon fill="black" stroke="black" points="772.97,-454.26 768.28,-444.76 766.02,-455.11 772.97,-454.26"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L120">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L120">
 <text xml:space="preserve" text-anchor="start" x="773.42" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -518,7 +518,7 @@
 <title>check_sequence_itemset/2</title>
 <polygon fill="cornsilk" stroke="black" points="843.15,-326 688.85,-326 688.85,-290 843.15,-290 843.15,-326"/>
 <text xml:space="preserve" text-anchor="start" x="696.85" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node13_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L130">
+<g id="a_node13_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L130">
 <text xml:space="preserve" text-anchor="start" x="699.35" y="-309.53" font-family="Monospace" font-size="11.00">check_sequence_itemset/2</text>
 </a>
 </g>
@@ -530,12 +530,12 @@
 <!-- check_sequence_itemsets/4&#45;&gt;check_sequence_itemset/2 -->
 <g id="edge5" class="edge">
 <title>check_sequence_itemsets/4&#45;&gt;check_sequence_itemset/2</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L124" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L124" xlink:title="calls">
 <path fill="none" stroke="black" d="M766,-406.53C766,-388.28 766,-359.33 766,-337.7"/>
 <polygon fill="black" stroke="black" points="769.5,-337.77 766,-327.77 762.5,-337.77 769.5,-337.77"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L124">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L124">
 <text xml:space="preserve" text-anchor="start" x="766" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -543,12 +543,12 @@
 <!-- check_sequence_itemsets/4&#45;&gt;list::length/2 -->
 <g id="edge18" class="edge">
 <title>check_sequence_itemsets/4&#45;&gt;list::length/2</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L124" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L124" xlink:title="calls">
 <path fill="none" stroke="black" d="M745.5,-406.53C722.67,-387.09 685.6,-355.51 659.85,-333.57"/>
 <polygon fill="black" stroke="black" points="662.29,-331.06 652.41,-327.24 657.75,-336.38 662.29,-331.06"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L124">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L124">
 <text xml:space="preserve" text-anchor="start" x="702.55" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -558,7 +558,7 @@
 <title>check_itemset_items/2</title>
 <polygon fill="cornsilk" stroke="black" points="777.44,-209 644.56,-209 644.56,-173 777.44,-173 777.44,-209"/>
 <text xml:space="preserve" text-anchor="start" x="652.56" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node14_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L140">
+<g id="a_node14_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L140">
 <text xml:space="preserve" text-anchor="start" x="655.06" y="-192.53" font-family="Monospace" font-size="11.00">check_itemset_items/2</text>
 </a>
 </g>
@@ -570,12 +570,12 @@
 <!-- check_sequence_itemset/2&#45;&gt;check_itemset_items/2 -->
 <g id="edge6" class="edge">
 <title>check_sequence_itemset/2&#45;&gt;check_itemset_items/2</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L132" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L132" xlink:title="calls">
 <path fill="none" stroke="black" d="M757.65,-289.53C748.75,-270.94 734.55,-241.24 724.15,-219.5"/>
 <polygon fill="black" stroke="black" points="727.38,-218.13 719.9,-210.62 721.06,-221.15 727.38,-218.13"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L132">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L132">
 <text xml:space="preserve" text-anchor="start" x="740.15" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -583,12 +583,12 @@
 <!-- check_itemset_items/2&#45;&gt;list::member/2 -->
 <g id="edge19" class="edge">
 <title>check_itemset_items/2&#45;&gt;list::member/2</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L141" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L141" xlink:title="calls">
 <path fill="none" stroke="black" d="M696.12,-172.53C679.83,-153.43 653.57,-122.61 634.93,-100.73"/>
 <polygon fill="black" stroke="black" points="637.83,-98.75 628.68,-93.41 632.51,-103.29 637.83,-98.75"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L141" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L141">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L141" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L141">
 <text xml:space="preserve" text-anchor="start" x="664.94" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -596,12 +596,12 @@
 <!-- pattern_length/3&#45;&gt;list::length/2 -->
 <g id="edge20" class="edge">
 <title>pattern_length/3&#45;&gt;list::length/2</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L186" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L186" xlink:title="calls">
 <path fill="none" stroke="black" d="M424.91,-406.53C467.4,-386.42 537.31,-353.34 583.74,-331.36"/>
 <polygon fill="black" stroke="black" points="585.24,-334.53 592.78,-327.09 582.24,-328.2 585.24,-334.53"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L186" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L186">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L186" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L186">
 <text xml:space="preserve" text-anchor="start" x="516.79" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -609,12 +609,12 @@
 <!-- decorate_patterns/2&#45;&gt;pattern_length/2 -->
 <g id="edge13" class="edge">
 <title>decorate_patterns/2&#45;&gt;pattern_length/2</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L197" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L197" xlink:title="calls">
 <path fill="none" stroke="black" d="M246.14,-640.53C267.35,-621.17 301.74,-589.79 325.76,-567.86"/>
 <polygon fill="black" stroke="black" points="327.95,-570.6 332.98,-561.27 323.23,-565.43 327.95,-570.6"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L197" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L197">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L197" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/sequential_pattern_mining_protocols/sequential_pattern_mining_common.lgt#L197">
 <text xml:space="preserve" text-anchor="start" x="293.78" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>

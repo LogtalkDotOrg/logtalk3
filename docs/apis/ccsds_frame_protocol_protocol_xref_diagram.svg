@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 1235,-140 1235,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol ccsds_frame_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;06, 14:44</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;08, 11:29</text>
 <g id="clust1" class="cluster">
 <title>cluster_ccsds_frame_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="ccsds_frame_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1211,-46 1211,-46 1217,-46 1223,-52 1223,-58 1223,-58 1223,-116 1223,-116 1223,-122 1217,-128 1211,-128 1211,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_frames/ccsds_frame_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_frames/ccsds_frame_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_frames/ccsds_frame_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_frames/ccsds_frame_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.3" font-family="Monospace" font-size="10.00" fill="dimgray">ccsds_frame_protocol</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>parse/2</title>
 <polygon fill="springgreen" stroke="black" points="75.85,-92 18.15,-92 18.15,-56 75.85,-56 75.85,-92"/>
 <text xml:space="preserve" text-anchor="start" x="26.15" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_frames/ccsds_frame_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_frames/ccsds_frame_protocol.lgt#L31">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_frames/ccsds_frame_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_frames/ccsds_frame_protocol.lgt#L31">
 <text xml:space="preserve" text-anchor="start" x="28.66" y="-75.53" font-family="Monospace" font-size="11.00">parse/2</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>generate/2</title>
 <polygon fill="springgreen" stroke="black" points="167.8,-92 94.2,-92 94.2,-56 167.8,-56 167.8,-92"/>
 <text xml:space="preserve" text-anchor="start" x="102.2" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_frames/ccsds_frame_protocol.lgt#L43" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_frames/ccsds_frame_protocol.lgt#L43">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_frames/ccsds_frame_protocol.lgt#L43" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_frames/ccsds_frame_protocol.lgt#L43">
 <text xml:space="preserve" text-anchor="start" x="104.7" y="-75.53" font-family="Monospace" font-size="11.00">generate/2</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>generate/3</title>
 <polygon fill="springgreen" stroke="black" points="259.8,-92 186.2,-92 186.2,-56 259.8,-56 259.8,-92"/>
 <text xml:space="preserve" text-anchor="start" x="194.2" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_frames/ccsds_frame_protocol.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_frames/ccsds_frame_protocol.lgt#L55">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_frames/ccsds_frame_protocol.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_frames/ccsds_frame_protocol.lgt#L55">
 <text xml:space="preserve" text-anchor="start" x="196.7" y="-75.53" font-family="Monospace" font-size="11.00">generate/3</text>
 </a>
 </g>
@@ -71,7 +71,7 @@
 <title>valid/1</title>
 <polygon fill="springgreen" stroke="black" points="332,-92 278,-92 278,-56 332,-56 332,-92"/>
 <text xml:space="preserve" text-anchor="start" x="286.6" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_frames/ccsds_frame_protocol.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_frames/ccsds_frame_protocol.lgt#L66">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_frames/ccsds_frame_protocol.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_frames/ccsds_frame_protocol.lgt#L66">
 <text xml:space="preserve" text-anchor="start" x="289.1" y="-75.53" font-family="Monospace" font-size="11.00">valid/1</text>
 </a>
 </g>
@@ -85,7 +85,7 @@
 <title>update_fecf/2</title>
 <polygon fill="springgreen" stroke="black" points="437.83,-92 350.17,-92 350.17,-56 437.83,-56 437.83,-92"/>
 <text xml:space="preserve" text-anchor="start" x="358.17" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_frames/ccsds_frame_protocol.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_frames/ccsds_frame_protocol.lgt#L73">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_frames/ccsds_frame_protocol.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_frames/ccsds_frame_protocol.lgt#L73">
 <text xml:space="preserve" text-anchor="start" x="360.67" y="-75.53" font-family="Monospace" font-size="11.00">update_fecf/2</text>
 </a>
 </g>
@@ -99,7 +99,7 @@
 <title>verify_fecf/1</title>
 <polygon fill="springgreen" stroke="black" points="536.15,-92 455.85,-92 455.85,-56 536.15,-56 536.15,-92"/>
 <text xml:space="preserve" text-anchor="start" x="463.85" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_frames/ccsds_frame_protocol.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_frames/ccsds_frame_protocol.lgt#L84">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_frames/ccsds_frame_protocol.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_frames/ccsds_frame_protocol.lgt#L84">
 <text xml:space="preserve" text-anchor="start" x="466.35" y="-75.53" font-family="Monospace" font-size="11.00">verify_fecf/1</text>
 </a>
 </g>
@@ -113,7 +113,7 @@
 <title>frame_type/2</title>
 <polygon fill="springgreen" stroke="black" points="639.6,-92 554.4,-92 554.4,-56 639.6,-56 639.6,-92"/>
 <text xml:space="preserve" text-anchor="start" x="562.4" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_frames/ccsds_frame_protocol.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_frames/ccsds_frame_protocol.lgt#L91">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_frames/ccsds_frame_protocol.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_frames/ccsds_frame_protocol.lgt#L91">
 <text xml:space="preserve" text-anchor="start" x="564.9" y="-75.53" font-family="Monospace" font-size="11.00">frame_type/2</text>
 </a>
 </g>
@@ -127,7 +127,7 @@
 <title>version/2</title>
 <polygon fill="springgreen" stroke="black" points="722.82,-92 657.18,-92 657.18,-56 722.82,-56 722.82,-92"/>
 <text xml:space="preserve" text-anchor="start" x="665.18" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_frames/ccsds_frame_protocol.lgt#L98" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_frames/ccsds_frame_protocol.lgt#L98">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_frames/ccsds_frame_protocol.lgt#L98" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_frames/ccsds_frame_protocol.lgt#L98">
 <text xml:space="preserve" text-anchor="start" x="667.68" y="-75.53" font-family="Monospace" font-size="11.00">version/2</text>
 </a>
 </g>
@@ -141,7 +141,7 @@
 <title>spacecraft_id/2</title>
 <polygon fill="springgreen" stroke="black" points="836.8,-92 741.2,-92 741.2,-56 836.8,-56 836.8,-92"/>
 <text xml:space="preserve" text-anchor="start" x="749.2" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_frames/ccsds_frame_protocol.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_frames/ccsds_frame_protocol.lgt#L105">
+<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_frames/ccsds_frame_protocol.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_frames/ccsds_frame_protocol.lgt#L105">
 <text xml:space="preserve" text-anchor="start" x="751.7" y="-75.53" font-family="Monospace" font-size="11.00">spacecraft_id/2</text>
 </a>
 </g>
@@ -155,7 +155,7 @@
 <title>virtual_channel_id/2</title>
 <polygon fill="springgreen" stroke="black" points="973.42,-92 854.58,-92 854.58,-56 973.42,-56 973.42,-92"/>
 <text xml:space="preserve" text-anchor="start" x="862.58" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_frames/ccsds_frame_protocol.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_frames/ccsds_frame_protocol.lgt#L112">
+<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_frames/ccsds_frame_protocol.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_frames/ccsds_frame_protocol.lgt#L112">
 <text xml:space="preserve" text-anchor="start" x="865.08" y="-75.53" font-family="Monospace" font-size="11.00">virtual_channel_id/2</text>
 </a>
 </g>
@@ -169,7 +169,7 @@
 <title>data_field/2</title>
 <polygon fill="springgreen" stroke="black" points="1068.94,-92 991.06,-92 991.06,-56 1068.94,-56 1068.94,-92"/>
 <text xml:space="preserve" text-anchor="start" x="999.06" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_frames/ccsds_frame_protocol.lgt#L119" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_frames/ccsds_frame_protocol.lgt#L119">
+<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_frames/ccsds_frame_protocol.lgt#L119" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_frames/ccsds_frame_protocol.lgt#L119">
 <text xml:space="preserve" text-anchor="start" x="1001.56" y="-75.53" font-family="Monospace" font-size="11.00">data_field/2</text>
 </a>
 </g>
@@ -183,7 +183,7 @@
 <title>ocf/2</title>
 <polygon fill="springgreen" stroke="black" points="1141,-92 1087,-92 1087,-56 1141,-56 1141,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1099.58" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_frames/ccsds_frame_protocol.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_frames/ccsds_frame_protocol.lgt#L126">
+<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_frames/ccsds_frame_protocol.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_frames/ccsds_frame_protocol.lgt#L126">
 <text xml:space="preserve" text-anchor="start" x="1102.08" y="-75.53" font-family="Monospace" font-size="11.00">ocf/2</text>
 </a>
 </g>
@@ -197,7 +197,7 @@
 <title>fecf/2</title>
 <polygon fill="springgreen" stroke="black" points="1213,-92 1159,-92 1159,-56 1213,-56 1213,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1170.05" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_frames/ccsds_frame_protocol.lgt#L133" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_frames/ccsds_frame_protocol.lgt#L133">
+<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_frames/ccsds_frame_protocol.lgt#L133" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_frames/ccsds_frame_protocol.lgt#L133">
 <text xml:space="preserve" text-anchor="start" x="1172.55" y="-75.53" font-family="Monospace" font-size="11.00">fecf/2</text>
 </a>
 </g>

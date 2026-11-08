@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-374 944,-374 944,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object spearman_similarity</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;06, 14:45</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;08, 11:30</text>
 <g id="clust1" class="cluster">
 <title>cluster_spearman_similarity_object</title>
 <g id="a_clust1"><a xlink:title="spearman_similarity">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 920,-46 920,-46 926,-46 932,-52 932,-58 932,-58 932,-350 932,-350 932,-356 926,-362 920,-362 920,-362 20,-362 20,-362 14,-362 8,-356 8,-350 8,-350 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-346.3" font-family="Monospace" font-size="10.00" fill="dimgray">spearman_similarity</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>similarity/3</title>
 <polygon fill="cornsilk" stroke="black" points="447.48,-326 374.52,-326 374.52,-290 447.48,-290 447.48,-326"/>
 <text xml:space="preserve" text-anchor="start" x="382.52" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L37">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L37">
 <text xml:space="preserve" text-anchor="start" x="385.03" y="-309.53" font-family="Monospace" font-size="11.00">similarity/3</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>average_ranks/3</title>
 <polygon fill="cornsilk" stroke="black" points="120.47,-209 17.53,-209 17.53,-173 120.47,-173 120.47,-209"/>
 <text xml:space="preserve" text-anchor="start" x="25.53" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L51">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L51">
 <text xml:space="preserve" text-anchor="start" x="28.03" y="-192.53" font-family="Monospace" font-size="11.00">average_ranks/3</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- similarity/3&#45;&gt;average_ranks/3 -->
 <g id="edge1" class="edge">
 <title>similarity/3&#45;&gt;average_ranks/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="calls">
 <path fill="none" stroke="black" d="M374.08,-294.58C315.92,-275.03 202.31,-236.83 131.34,-212.96"/>
 <polygon fill="black" stroke="black" points="132.79,-209.76 122.19,-209.89 130.56,-216.39 132.79,-209.76"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L37">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L37">
 <text xml:space="preserve" text-anchor="start" x="250.25" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- similarity/3&#45;&gt;list::length/2 -->
 <g id="edge8" class="edge">
 <title>similarity/3&#45;&gt;list::length/2</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="calls">
 <path fill="none" stroke="black" d="M375.61,-289.53C334.95,-269.47 268.12,-236.48 223.59,-214.5"/>
 <polygon fill="black" stroke="black" points="225.21,-211.4 214.7,-210.11 222.11,-217.68 225.21,-211.4"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L37">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L37">
 <text xml:space="preserve" text-anchor="start" x="301.49" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -106,12 +106,12 @@
 <!-- similarity/3&#45;&gt;^^common_pairs/3 -->
 <g id="edge3" class="edge">
 <title>similarity/3&#45;&gt;^^common_pairs/3</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="calls">
 <path fill="none" stroke="black" d="M392.93,-289.53C372.98,-270.26 340.7,-239.06 318.03,-217.15"/>
 <polygon fill="black" stroke="black" points="320.57,-214.74 310.94,-210.31 315.7,-219.77 320.57,-214.74"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L37">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L37">
 <text xml:space="preserve" text-anchor="start" x="355.07" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -130,12 +130,12 @@
 <!-- similarity/3&#45;&gt;^^split_pairs/3 -->
 <g id="edge4" class="edge">
 <title>similarity/3&#45;&gt;^^split_pairs/3</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="calls">
 <path fill="none" stroke="black" d="M411,-289.53C411,-271.28 411,-242.33 411,-220.7"/>
 <polygon fill="black" stroke="black" points="414.5,-220.77 411,-210.77 407.5,-220.77 414.5,-220.77"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L37">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L37">
 <text xml:space="preserve" text-anchor="start" x="411" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -154,12 +154,12 @@
 <!-- similarity/3&#45;&gt;^^centered_normalized_values/2 -->
 <g id="edge5" class="edge">
 <title>similarity/3&#45;&gt;^^centered_normalized_values/2</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="calls">
 <path fill="none" stroke="black" d="M434.39,-289.53C460.58,-269.97 503.21,-238.14 532.6,-216.19"/>
 <polygon fill="black" stroke="black" points="534.51,-219.13 540.43,-210.35 530.32,-213.53 534.51,-219.13"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L37">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L37">
 <text xml:space="preserve" text-anchor="start" x="492.62" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -178,12 +178,12 @@
 <!-- similarity/3&#45;&gt;^^dot_product/3 -->
 <g id="edge6" class="edge">
 <title>similarity/3&#45;&gt;^^dot_product/3</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="calls">
 <path fill="none" stroke="black" d="M447.71,-293.47C501.31,-273.71 601.51,-236.78 665.11,-213.34"/>
 <polygon fill="black" stroke="black" points="666.17,-216.68 674.34,-209.93 663.75,-210.11 666.17,-216.68"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L37">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L37">
 <text xml:space="preserve" text-anchor="start" x="576.36" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -202,12 +202,12 @@
 <!-- similarity/3&#45;&gt;^^bounded_similarity/2 -->
 <g id="edge7" class="edge">
 <title>similarity/3&#45;&gt;^^bounded_similarity/2</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="calls">
 <path fill="none" stroke="black" d="M447.79,-297.49C520.08,-278.81 681.98,-236.97 778.76,-211.96"/>
 <polygon fill="black" stroke="black" points="779.38,-215.42 788.18,-209.53 777.62,-208.64 779.38,-215.42"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L37">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L37">
 <text xml:space="preserve" text-anchor="start" x="646.84" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -217,7 +217,7 @@
 <title>rank_counts/6</title>
 <polygon fill="cornsilk" stroke="black" points="114.05,-92 23.95,-92 23.95,-56 114.05,-56 114.05,-92"/>
 <text xml:space="preserve" text-anchor="start" x="31.95" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L57">
+<g id="a_node3_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="34.45" y="-75.53" font-family="Monospace" font-size="11.00">rank_counts/6</text>
 </a>
 </g>
@@ -229,12 +229,12 @@
 <!-- average_ranks/3&#45;&gt;rank_counts/6 -->
 <g id="edge2" class="edge">
 <title>average_ranks/3&#45;&gt;rank_counts/6</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L52" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L52" xlink:title="calls">
 <path fill="none" stroke="black" d="M69,-172.53C69,-154.28 69,-125.33 69,-103.7"/>
 <polygon fill="black" stroke="black" points="72.5,-103.77 69,-93.77 65.5,-103.77 72.5,-103.77"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/recommender_protocols/spearman_similarity.lgt#L52">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/recommender_protocols/spearman_similarity.lgt#L52">
 <text xml:space="preserve" text-anchor="start" x="69" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>

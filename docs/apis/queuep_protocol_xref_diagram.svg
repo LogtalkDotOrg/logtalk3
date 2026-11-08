@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 1071,-140 1071,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol queuep</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;06, 14:45</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;08, 11:30</text>
 <g id="clust1" class="cluster">
 <title>cluster_queuep_protocol</title>
 <g id="a_clust1"><a xlink:title="queuep">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1047,-46 1047,-46 1053,-46 1059,-52 1059,-58 1059,-58 1059,-116 1059,-116 1059,-122 1053,-128 1047,-128 1047,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/queues/queuep.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/queues/queuep.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/queues/queuep.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/queues/queuep.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.3" font-family="Monospace" font-size="10.00" fill="dimgray">queuep</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>empty/1</title>
 <polygon fill="springgreen" stroke="black" points="78.06,-92 17.94,-92 17.94,-56 78.06,-56 78.06,-92"/>
 <text xml:space="preserve" text-anchor="start" x="25.94" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/queues/queuep.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/queues/queuep.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/queues/queuep.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/queues/queuep.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="28.44" y="-75.53" font-family="Monospace" font-size="11.00">empty/1</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>head/2</title>
 <polygon fill="springgreen" stroke="black" points="150.32,-92 95.68,-92 95.68,-56 150.32,-56 150.32,-92"/>
 <text xml:space="preserve" text-anchor="start" x="103.68" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/queues/queuep.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/queues/queuep.lgt#L39">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/queues/queuep.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/queues/queuep.lgt#L39">
 <text xml:space="preserve" text-anchor="start" x="106.18" y="-75.53" font-family="Monospace" font-size="11.00">head/2</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>join/3</title>
 <polygon fill="springgreen" stroke="black" points="222,-92 168,-92 168,-56 222,-56 222,-92"/>
 <text xml:space="preserve" text-anchor="start" x="179.35" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/queues/queuep.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/queues/queuep.lgt#L46">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/queues/queuep.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/queues/queuep.lgt#L46">
 <text xml:space="preserve" text-anchor="start" x="181.85" y="-75.53" font-family="Monospace" font-size="11.00">join/3</text>
 </a>
 </g>
@@ -71,7 +71,7 @@
 <title>join_all/3</title>
 <polygon fill="springgreen" stroke="black" points="304.21,-92 239.79,-92 239.79,-56 304.21,-56 304.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="247.79" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/queues/queuep.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/queues/queuep.lgt#L53">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/queues/queuep.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/queues/queuep.lgt#L53">
 <text xml:space="preserve" text-anchor="start" x="250.29" y="-75.53" font-family="Monospace" font-size="11.00">join_all/3</text>
 </a>
 </g>
@@ -85,7 +85,7 @@
 <title>jump/3</title>
 <polygon fill="springgreen" stroke="black" points="376.01,-92 321.99,-92 321.99,-56 376.01,-56 376.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="329.99" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/queues/queuep.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/queues/queuep.lgt#L60">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/queues/queuep.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/queues/queuep.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="332.49" y="-75.53" font-family="Monospace" font-size="11.00">jump/3</text>
 </a>
 </g>
@@ -99,7 +99,7 @@
 <title>jump_all/3</title>
 <polygon fill="springgreen" stroke="black" points="465.57,-92 394.43,-92 394.43,-56 465.57,-56 465.57,-92"/>
 <text xml:space="preserve" text-anchor="start" x="402.43" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/queues/queuep.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/queues/queuep.lgt#L67">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/queues/queuep.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/queues/queuep.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="404.93" y="-75.53" font-family="Monospace" font-size="11.00">jump_all/3</text>
 </a>
 </g>
@@ -113,7 +113,7 @@
 <title>jump_all_block/3</title>
 <polygon fill="springgreen" stroke="black" points="586.47,-92 483.53,-92 483.53,-56 586.47,-56 586.47,-92"/>
 <text xml:space="preserve" text-anchor="start" x="491.53" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/queues/queuep.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/queues/queuep.lgt#L74">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/queues/queuep.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/queues/queuep.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="494.03" y="-75.53" font-family="Monospace" font-size="11.00">jump_all_block/3</text>
 </a>
 </g>
@@ -127,7 +127,7 @@
 <title>append/3</title>
 <polygon fill="springgreen" stroke="black" points="671.44,-92 604.56,-92 604.56,-56 671.44,-56 671.44,-92"/>
 <text xml:space="preserve" text-anchor="start" x="612.56" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/queues/queuep.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/queues/queuep.lgt#L81">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/queues/queuep.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/queues/queuep.lgt#L81">
 <text xml:space="preserve" text-anchor="start" x="615.06" y="-75.53" font-family="Monospace" font-size="11.00">append/3</text>
 </a>
 </g>
@@ -141,7 +141,7 @@
 <title>length/2</title>
 <polygon fill="springgreen" stroke="black" points="750.07,-92 689.93,-92 689.93,-56 750.07,-56 750.07,-92"/>
 <text xml:space="preserve" text-anchor="start" x="697.93" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/queues/queuep.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/queues/queuep.lgt#L88">
+<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/queues/queuep.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/queues/queuep.lgt#L88">
 <text xml:space="preserve" text-anchor="start" x="700.43" y="-75.53" font-family="Monospace" font-size="11.00">length/2</text>
 </a>
 </g>
@@ -155,7 +155,7 @@
 <title>serve/3</title>
 <polygon fill="springgreen" stroke="black" points="825.54,-92 768.46,-92 768.46,-56 825.54,-56 825.54,-92"/>
 <text xml:space="preserve" text-anchor="start" x="776.46" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/queues/queuep.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/queues/queuep.lgt#L95">
+<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/queues/queuep.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/queues/queuep.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="778.96" y="-75.53" font-family="Monospace" font-size="11.00">serve/3</text>
 </a>
 </g>
@@ -169,7 +169,7 @@
 <title>as_list/2</title>
 <polygon fill="springgreen" stroke="black" points="904.68,-92 843.32,-92 843.32,-56 904.68,-56 904.68,-92"/>
 <text xml:space="preserve" text-anchor="start" x="851.32" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/queues/queuep.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/queues/queuep.lgt#L102">
+<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/queues/queuep.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/queues/queuep.lgt#L102">
 <text xml:space="preserve" text-anchor="start" x="853.82" y="-75.53" font-family="Monospace" font-size="11.00">as_list/2</text>
 </a>
 </g>
@@ -183,7 +183,7 @@
 <title>map/2</title>
 <polygon fill="springgreen" stroke="black" points="977,-92 923,-92 923,-56 977,-56 977,-92"/>
 <text xml:space="preserve" text-anchor="start" x="932.21" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/queues/queuep.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/queues/queuep.lgt#L109">
+<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/queues/queuep.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/queues/queuep.lgt#L109">
 <text xml:space="preserve" text-anchor="start" x="934.71" y="-75.53" font-family="Monospace" font-size="11.00">map/2</text>
 </a>
 </g>
@@ -197,7 +197,7 @@
 <title>map/3</title>
 <polygon fill="springgreen" stroke="black" points="1049,-92 995,-92 995,-56 1049,-56 1049,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1004.21" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/queues/queuep.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/queues/queuep.lgt#L117">
+<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/queues/queuep.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/queues/queuep.lgt#L117">
 <text xml:space="preserve" text-anchor="start" x="1006.71" y="-75.53" font-family="Monospace" font-size="11.00">map/3</text>
 </a>
 </g>

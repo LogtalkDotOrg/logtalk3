@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 772,-140 772,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol ccsds_time_code_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;06, 14:44</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;08, 11:29</text>
 <g id="clust1" class="cluster">
 <title>cluster_ccsds_time_code_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="ccsds_time_code_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 748,-46 748,-46 754,-46 760,-52 760,-58 760,-58 760,-116 760,-116 760,-122 754,-128 748,-128 748,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.3" font-family="Monospace" font-size="10.00" fill="dimgray">ccsds_time_code_protocol</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>parse/2</title>
 <polygon fill="springgreen" stroke="black" points="75.85,-92 18.15,-92 18.15,-56 75.85,-56 75.85,-92"/>
 <text xml:space="preserve" text-anchor="start" x="26.15" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L31">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L31">
 <text xml:space="preserve" text-anchor="start" x="28.66" y="-75.53" font-family="Monospace" font-size="11.00">parse/2</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>generate/2</title>
 <polygon fill="springgreen" stroke="black" points="167.8,-92 94.2,-92 94.2,-56 167.8,-56 167.8,-92"/>
 <text xml:space="preserve" text-anchor="start" x="102.2" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L43" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L43">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L43" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L43">
 <text xml:space="preserve" text-anchor="start" x="104.7" y="-75.53" font-family="Monospace" font-size="11.00">generate/2</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>generate/3</title>
 <polygon fill="springgreen" stroke="black" points="259.8,-92 186.2,-92 186.2,-56 259.8,-56 259.8,-92"/>
 <text xml:space="preserve" text-anchor="start" x="194.2" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L55">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L55">
 <text xml:space="preserve" text-anchor="start" x="196.7" y="-75.53" font-family="Monospace" font-size="11.00">generate/3</text>
 </a>
 </g>
@@ -71,7 +71,7 @@
 <title>valid/1</title>
 <polygon fill="springgreen" stroke="black" points="332,-92 278,-92 278,-56 332,-56 332,-92"/>
 <text xml:space="preserve" text-anchor="start" x="286.6" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L66">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L66">
 <text xml:space="preserve" text-anchor="start" x="289.1" y="-75.53" font-family="Monospace" font-size="11.00">valid/1</text>
 </a>
 </g>
@@ -85,7 +85,7 @@
 <title>format/1</title>
 <polygon fill="springgreen" stroke="black" points="411.67,-92 350.33,-92 350.33,-56 411.67,-56 411.67,-92"/>
 <text xml:space="preserve" text-anchor="start" x="358.33" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L73">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L73">
 <text xml:space="preserve" text-anchor="start" x="360.83" y="-75.53" font-family="Monospace" font-size="11.00">format/1</text>
 </a>
 </g>
@@ -99,7 +99,7 @@
 <title>epoch/1</title>
 <polygon fill="springgreen" stroke="black" points="490.07,-92 429.93,-92 429.93,-56 490.07,-56 490.07,-92"/>
 <text xml:space="preserve" text-anchor="start" x="437.93" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L80">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="440.43" y="-75.53" font-family="Monospace" font-size="11.00">epoch/1</text>
 </a>
 </g>
@@ -113,7 +113,7 @@
 <title>unix_seconds/2</title>
 <polygon fill="springgreen" stroke="black" points="605.72,-92 508.28,-92 508.28,-56 605.72,-56 605.72,-92"/>
 <text xml:space="preserve" text-anchor="start" x="516.28" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L87">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L87">
 <text xml:space="preserve" text-anchor="start" x="518.78" y="-75.53" font-family="Monospace" font-size="11.00">unix_seconds/2</text>
 </a>
 </g>
@@ -127,7 +127,7 @@
 <title>from_unix_seconds/2</title>
 <polygon fill="springgreen" stroke="black" points="749.78,-92 624.22,-92 624.22,-56 749.78,-56 749.78,-92"/>
 <text xml:space="preserve" text-anchor="start" x="632.22" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L98" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L98">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L98" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/ccsds_time_codes/ccsds_time_code_protocol.lgt#L98">
 <text xml:space="preserve" text-anchor="start" x="634.72" y="-75.53" font-family="Monospace" font-size="11.00">from_unix_seconds/2</text>
 </a>
 </g>

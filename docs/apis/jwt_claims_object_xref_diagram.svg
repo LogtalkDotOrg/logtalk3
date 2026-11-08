@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-725 1174,-725 1174,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object jwt_claims</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;06, 14:45</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;08, 11:30</text>
 <g id="clust1" class="cluster">
 <title>cluster_jwt_claims_object</title>
 <g id="a_clust1"><a xlink:title="jwt_claims">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1150,-46 1150,-46 1156,-46 1162,-52 1162,-58 1162,-58 1162,-701 1162,-701 1162,-707 1156,-713 1150,-713 1150,-713 20,-713 20,-713 14,-713 8,-707 8,-701 8,-701 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L10" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L10">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L10" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L10">
 <text xml:space="preserve" text-anchor="start" x="20" y="-697.3" font-family="Monospace" font-size="10.00" fill="dimgray">jwt_claims</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>validate_claims/3</title>
 <polygon fill="springgreen" stroke="black" points="923.69,-677 818.31,-677 818.31,-641 923.69,-641 923.69,-677"/>
 <text xml:space="preserve" text-anchor="start" x="826.31" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L20" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L20">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L20" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L20">
 <text xml:space="preserve" text-anchor="start" x="828.81" y="-660.53" font-family="Monospace" font-size="11.00">validate_claims/3</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>validate_required_exp/2</title>
 <polygon fill="cornsilk" stroke="black" points="794.21,-560 655.79,-560 655.79,-524 794.21,-524 794.21,-560"/>
 <text xml:space="preserve" text-anchor="start" x="663.79" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L111">
+<g id="a_node4_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L111">
 <text xml:space="preserve" text-anchor="start" x="666.29" y="-543.53" font-family="Monospace" font-size="11.00">validate_required_exp/2</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- validate_claims/3&#45;&gt;validate_required_exp/2 -->
 <g id="edge1" class="edge">
 <title>validate_claims/3&#45;&gt;validate_required_exp/2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L68" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L68" xlink:title="calls">
 <path fill="none" stroke="black" d="M848.83,-640.53C824.03,-621 783.7,-589.23 755.83,-567.29"/>
 <polygon fill="black" stroke="black" points="758.11,-564.63 748.09,-561.19 753.78,-570.13 758.11,-564.63"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L68">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L68">
 <text xml:space="preserve" text-anchor="start" x="802.38" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>validate_required_claims/2</title>
 <polygon fill="cornsilk" stroke="black" points="1034.93,-326 883.07,-326 883.07,-290 1034.93,-290 1034.93,-326"/>
 <text xml:space="preserve" text-anchor="start" x="891.07" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L121">
+<g id="a_node5_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L121">
 <text xml:space="preserve" text-anchor="start" x="893.57" y="-309.53" font-family="Monospace" font-size="11.00">validate_required_claims/2</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- validate_claims/3&#45;&gt;validate_required_claims/2 -->
 <g id="edge2" class="edge">
 <title>validate_claims/3&#45;&gt;validate_required_claims/2</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L68" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L68" xlink:title="calls">
 <path fill="none" stroke="black" d="M870.79,-640.87C870.81,-615.18 872.15,-565.29 881,-524 895.92,-454.44 928.16,-376.94 946.17,-336.68"/>
 <polygon fill="black" stroke="black" points="949.28,-338.29 950.22,-327.73 942.91,-335.4 949.28,-338.29"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L68">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L68">
 <text xml:space="preserve" text-anchor="start" x="892.32" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -97,7 +97,7 @@
 <title>validate_claim_policy/3</title>
 <polygon fill="cornsilk" stroke="black" points="522.06,-560 387.94,-560 387.94,-524 522.06,-524 522.06,-560"/>
 <text xml:space="preserve" text-anchor="start" x="395.94" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L132">
+<g id="a_node7_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L132">
 <text xml:space="preserve" text-anchor="start" x="398.44" y="-543.53" font-family="Monospace" font-size="11.00">validate_claim_policy/3</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- validate_claims/3&#45;&gt;validate_claim_policy/3 -->
 <g id="edge3" class="edge">
 <title>validate_claims/3&#45;&gt;validate_claim_policy/3</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L68" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L68" xlink:title="calls">
 <path fill="none" stroke="black" d="M817.89,-643.32C744.52,-623.04 611.83,-586.36 528.84,-563.41"/>
 <polygon fill="black" stroke="black" points="530,-560.1 519.43,-560.81 528.14,-566.85 530,-560.1"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L68">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L68">
 <text xml:space="preserve" text-anchor="start" x="675.47" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -133,12 +133,12 @@
 <!-- validate_claims/3&#45;&gt;^^check_options/1 -->
 <g id="edge14" class="edge">
 <title>validate_claims/3&#45;&gt;^^check_options/1</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L68" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L68" xlink:title="calls">
 <path fill="none" stroke="black" d="M882.24,-640.53C894.32,-621.77 913.66,-591.7 927.69,-569.91"/>
 <polygon fill="black" stroke="black" points="930.61,-571.83 933.08,-561.53 924.72,-568.04 930.61,-571.83"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L68">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L68">
 <text xml:space="preserve" text-anchor="start" x="910.22" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -157,12 +157,12 @@
 <!-- validate_claims/3&#45;&gt;^^merge_options/2 -->
 <g id="edge15" class="edge">
 <title>validate_claims/3&#45;&gt;^^merge_options/2</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L68" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L68" xlink:title="calls">
 <path fill="none" stroke="black" d="M901.98,-640.53C937.28,-620.63 995.11,-588.04 1034.09,-566.06"/>
 <polygon fill="black" stroke="black" points="1035.75,-569.14 1042.74,-561.18 1032.31,-563.05 1035.75,-569.14"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L68">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L68">
 <text xml:space="preserve" text-anchor="start" x="979.12" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -172,7 +172,7 @@
 <title>validate_claim/3</title>
 <polygon fill="springgreen" stroke="black" points="489.94,-443 390.06,-443 390.06,-407 489.94,-407 489.94,-443"/>
 <text xml:space="preserve" text-anchor="start" x="398.06" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L38" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L38">
+<g id="a_node2_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L38" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L38">
 <text xml:space="preserve" text-anchor="start" x="400.56" y="-426.53" font-family="Monospace" font-size="11.00">validate_claim/3</text>
 </a>
 </g>
@@ -186,7 +186,7 @@
 <title>required_claim/3</title>
 <polygon fill="cornsilk" stroke="black" points="828.16,-209 725.84,-209 725.84,-173 828.16,-173 828.16,-209"/>
 <text xml:space="preserve" text-anchor="start" x="733.84" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L137">
+<g id="a_node8_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L137">
 <text xml:space="preserve" text-anchor="start" x="736.34" y="-192.53" font-family="Monospace" font-size="11.00">required_claim/3</text>
 </a>
 </g>
@@ -198,12 +198,12 @@
 <!-- validate_claim/3&#45;&gt;required_claim/3 -->
 <g id="edge4" class="edge">
 <title>validate_claim/3&#45;&gt;required_claim/3</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L75" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L75" xlink:title="calls">
 <path fill="none" stroke="black" d="M484.64,-406.59C526.25,-389.3 589.07,-360.44 638,-326 683.71,-293.83 728.84,-246.71 754.76,-217.77"/>
 <polygon fill="black" stroke="black" points="757.15,-220.35 761.16,-210.55 751.91,-215.71 757.15,-220.35"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L75">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L75">
 <text xml:space="preserve" text-anchor="start" x="681.63" y="-305.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -213,7 +213,7 @@
 <title>validate_contains/3</title>
 <polygon fill="cornsilk" stroke="black" points="187.59,-326 72.41,-326 72.41,-290 187.59,-290 187.59,-326"/>
 <text xml:space="preserve" text-anchor="start" x="80.41" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L143">
+<g id="a_node9_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L143">
 <text xml:space="preserve" text-anchor="start" x="82.91" y="-309.53" font-family="Monospace" font-size="11.00">validate_contains/3</text>
 </a>
 </g>
@@ -225,12 +225,12 @@
 <!-- validate_claim/3&#45;&gt;validate_contains/3 -->
 <g id="edge5" class="edge">
 <title>validate_claim/3&#45;&gt;validate_contains/3</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L92" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L92" xlink:title="calls">
 <path fill="none" stroke="black" d="M389.98,-420.17C339.87,-414.71 261.68,-401.68 201,-371 183.03,-361.92 165.93,-347.24 153.02,-334.45"/>
 <polygon fill="black" stroke="black" points="155.71,-332.2 146.22,-327.48 150.69,-337.08 155.71,-332.2"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L92">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L92">
 <text xml:space="preserve" text-anchor="start" x="201" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -240,7 +240,7 @@
 <title>current_time/2</title>
 <polygon fill="cornsilk" stroke="black" points="441.65,-326 350.35,-326 350.35,-290 441.65,-290 441.65,-326"/>
 <text xml:space="preserve" text-anchor="start" x="358.35" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L157">
+<g id="a_node10_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L157">
 <text xml:space="preserve" text-anchor="start" x="360.85" y="-309.53" font-family="Monospace" font-size="11.00">current_time/2</text>
 </a>
 </g>
@@ -252,12 +252,12 @@
 <!-- validate_claim/3&#45;&gt;current_time/2 -->
 <g id="edge6" class="edge">
 <title>validate_claim/3&#45;&gt;current_time/2</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L96" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L96" xlink:title="calls">
 <path fill="none" stroke="black" d="M433.32,-406.53C426.23,-388.02 414.94,-358.52 406.64,-336.8"/>
 <polygon fill="black" stroke="black" points="409.98,-335.76 403.14,-327.67 403.45,-338.26 409.98,-335.76"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L96">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L96">
 <text xml:space="preserve" text-anchor="start" x="419.32" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -267,7 +267,7 @@
 <title>validate_time_claim/6</title>
 <polygon fill="cornsilk" stroke="black" points="629.39,-326 502.61,-326 502.61,-290 629.39,-290 629.39,-326"/>
 <text xml:space="preserve" text-anchor="start" x="510.61" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L163">
+<g id="a_node11_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L163">
 <text xml:space="preserve" text-anchor="start" x="513.11" y="-309.53" font-family="Monospace" font-size="11.00">validate_time_claim/6</text>
 </a>
 </g>
@@ -279,12 +279,12 @@
 <!-- validate_claim/3&#45;&gt;validate_time_claim/6 -->
 <g id="edge7" class="edge">
 <title>validate_claim/3&#45;&gt;validate_time_claim/6</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L96" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L96" xlink:title="calls">
 <path fill="none" stroke="black" d="M459.14,-406.53C480.35,-387.17 514.74,-355.79 538.76,-333.86"/>
 <polygon fill="black" stroke="black" points="540.95,-336.6 545.98,-327.27 536.23,-331.43 540.95,-336.6"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L96">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L96">
 <text xml:space="preserve" text-anchor="start" x="506.78" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -306,12 +306,12 @@
 <!-- validate_claim/3&#45;&gt;list::member/2 -->
 <g id="edge25" class="edge">
 <title>validate_claim/3&#45;&gt;list::member/2</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L85" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L85" xlink:title="calls">
 <path fill="none" stroke="black" d="M389.74,-420.81C349.4,-415.81 293.48,-403.12 256,-371 209.68,-331.31 187.64,-260.22 178.51,-220.62"/>
 <polygon fill="black" stroke="black" points="181.94,-219.93 176.4,-210.89 175.1,-221.41 181.94,-219.93"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L85">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L85">
 <text xml:space="preserve" text-anchor="start" x="218.67" y="-305.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -330,12 +330,12 @@
 <!-- validate_claim/3&#45;&gt;^^option/2 -->
 <g id="edge16" class="edge">
 <title>validate_claim/3&#45;&gt;^^option/2</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L96" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L96" xlink:title="calls">
 <path fill="none" stroke="black" d="M414.79,-406.68C370.11,-374.18 278.72,-299.13 247,-209 227.37,-153.24 299.44,-112.47 350.13,-91.35"/>
 <polygon fill="black" stroke="black" points="351.2,-94.69 359.17,-87.71 348.59,-88.2 351.2,-94.69"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L96">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L96">
 <text xml:space="preserve" text-anchor="start" x="267.16" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -345,7 +345,7 @@
 <title>claim/3</title>
 <polygon fill="springgreen" stroke="black" points="975.92,-209 920.08,-209 920.08,-173 975.92,-173 975.92,-209"/>
 <text xml:space="preserve" text-anchor="start" x="928.08" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L53">
+<g id="a_node3_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L53">
 <text xml:space="preserve" text-anchor="start" x="930.58" y="-192.53" font-family="Monospace" font-size="11.00">claim/3</text>
 </a>
 </g>
@@ -368,12 +368,12 @@
 <!-- claim/3&#45;&gt;^^json_member/3 -->
 <g id="edge17" class="edge">
 <title>claim/3&#45;&gt;^^json_member/3</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L108" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L108" xlink:title="calls">
 <path fill="none" stroke="black" d="M940.25,-172.53C932.01,-153.94 918.84,-124.24 909.2,-102.5"/>
 <polygon fill="black" stroke="black" points="912.52,-101.36 905.27,-93.64 906.12,-104.2 912.52,-101.36"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L108">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L108">
 <text xml:space="preserve" text-anchor="start" x="924.03" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -381,12 +381,12 @@
 <!-- validate_required_exp/2&#45;&gt;validate_claim/3 -->
 <g id="edge8" class="edge">
 <title>validate_required_exp/2&#45;&gt;validate_claim/3</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L111" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L111" xlink:title="calls">
 <path fill="none" stroke="black" d="M681.71,-523.53C631.35,-503.21 548.16,-469.64 493.71,-447.67"/>
 <polygon fill="black" stroke="black" points="495.21,-444.5 484.63,-444.01 492.59,-451 495.21,-444.5"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L111">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L111">
 <text xml:space="preserve" text-anchor="start" x="591.05" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -394,12 +394,12 @@
 <!-- validate_required_exp/2&#45;&gt;^^option/2 -->
 <g id="edge18" class="edge">
 <title>validate_required_exp/2&#45;&gt;^^option/2</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L111" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L111" xlink:title="calls">
 <path fill="none" stroke="black" d="M655.42,-531.9C597.77,-523.42 514.09,-508.92 443,-488 259.78,-434.09 162.1,-476.87 45,-326 3.07,-271.99 -12.64,-227.22 29,-173 68.06,-122.14 259.57,-92 349.36,-80.45"/>
 <polygon fill="black" stroke="black" points="349.58,-83.95 359.06,-79.23 348.7,-77 349.58,-83.95"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L111">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L111">
 <text xml:space="preserve" text-anchor="start" x="45" y="-305.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -407,12 +407,12 @@
 <!-- validate_required_exp/2&#45;&gt;^^json_member/3 -->
 <g id="edge19" class="edge">
 <title>validate_required_exp/2&#45;&gt;^^json_member/3</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L111" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L111" xlink:title="calls">
 <path fill="none" stroke="black" d="M764.95,-523.56C800.53,-505.02 847,-471.99 847,-426 847,-426 847,-426 847,-248.5 847,-195.27 869,-136.32 883.81,-102.66"/>
 <polygon fill="black" stroke="black" points="886.96,-104.19 887.89,-93.64 880.58,-101.3 886.96,-104.19"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L111">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L111">
 <text xml:space="preserve" text-anchor="start" x="847" y="-305.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -422,7 +422,7 @@
 <title>validate_required_claims_/2</title>
 <polygon fill="cornsilk" stroke="black" points="1151.98,-209 994.02,-209 994.02,-173 1151.98,-173 1151.98,-209"/>
 <text xml:space="preserve" text-anchor="start" x="1002.02" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L125">
+<g id="a_node6_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L125">
 <text xml:space="preserve" text-anchor="start" x="1004.52" y="-192.53" font-family="Monospace" font-size="11.00">validate_required_claims_/2</text>
 </a>
 </g>
@@ -434,12 +434,12 @@
 <!-- validate_required_claims/2&#45;&gt;validate_required_claims_/2 -->
 <g id="edge9" class="edge">
 <title>validate_required_claims/2&#45;&gt;validate_required_claims_/2</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L121" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L121" xlink:title="calls">
 <path fill="none" stroke="black" d="M976.31,-289.53C995.42,-270.26 1026.35,-239.06 1048.07,-217.15"/>
 <polygon fill="black" stroke="black" points="1050.28,-219.89 1054.83,-210.33 1045.31,-214.97 1050.28,-219.89"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L121">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L121">
 <text xml:space="preserve" text-anchor="start" x="1019.42" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -447,12 +447,12 @@
 <!-- validate_required_claims/2&#45;&gt;^^option/2 -->
 <g id="edge20" class="edge">
 <title>validate_required_claims/2&#45;&gt;^^option/2</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L121" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L121" xlink:title="calls">
 <path fill="none" stroke="black" d="M946.29,-289.78C932.39,-270.58 909.83,-238.36 893,-209 873.12,-174.34 886.55,-151.17 854,-128 788.78,-81.57 545.83,-75.34 442.74,-74.83"/>
 <polygon fill="black" stroke="black" points="442.98,-71.34 432.97,-74.8 442.96,-78.34 442.98,-71.34"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L121">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L121">
 <text xml:space="preserve" text-anchor="start" x="893" y="-188.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -460,12 +460,12 @@
 <!-- validate_required_claims_/2&#45;&gt;^^json_member/3 -->
 <g id="edge21" class="edge">
 <title>validate_required_claims_/2&#45;&gt;^^json_member/3</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L126" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L126" xlink:title="calls">
 <path fill="none" stroke="black" d="M1046.27,-172.53C1016.07,-152.8 966.77,-120.59 933.16,-98.62"/>
 <polygon fill="black" stroke="black" points="935.25,-95.81 924.96,-93.27 931.42,-101.67 935.25,-95.81"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L126">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L126">
 <text xml:space="preserve" text-anchor="start" x="990.28" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -473,12 +473,12 @@
 <!-- validate_claim_policy/3&#45;&gt;validate_claim/3 -->
 <g id="edge10" class="edge">
 <title>validate_claim_policy/3&#45;&gt;validate_claim/3</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L133" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L133" xlink:title="calls">
 <path fill="none" stroke="black" d="M452.72,-523.53C450.33,-505.19 446.53,-476.06 443.7,-454.4"/>
 <polygon fill="black" stroke="black" points="447.21,-454.22 442.45,-444.75 440.27,-455.12 447.21,-454.22"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L133" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L133">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L133" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L133">
 <text xml:space="preserve" text-anchor="start" x="447.95" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -486,12 +486,12 @@
 <!-- required_claim/3&#45;&gt;^^json_member/3 -->
 <g id="edge22" class="edge">
 <title>required_claim/3&#45;&gt;^^json_member/3</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L137" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L137" xlink:title="calls">
 <path fill="none" stroke="black" d="M795.23,-172.53C815.34,-153.26 847.89,-122.06 870.76,-100.15"/>
 <polygon fill="black" stroke="black" points="873.11,-102.75 877.9,-93.3 868.26,-97.69 873.11,-102.75"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L137">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L137">
 <text xml:space="preserve" text-anchor="start" x="840.6" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -499,12 +499,12 @@
 <!-- validate_contains/3&#45;&gt;list::member/2 -->
 <g id="edge27" class="edge">
 <title>validate_contains/3&#45;&gt;list::member/2</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L150" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L150" xlink:title="calls">
 <path fill="none" stroke="black" d="M136.53,-289.53C143.45,-271.02 154.49,-241.52 162.61,-219.8"/>
 <polygon fill="black" stroke="black" points="165.79,-221.26 166.02,-210.67 159.24,-218.81 165.79,-221.26"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L150" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L150">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L150" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L150">
 <text xml:space="preserve" text-anchor="start" x="152.79" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -526,12 +526,12 @@
 <!-- validate_contains/3&#45;&gt;list::valid/1 -->
 <g id="edge26" class="edge">
 <title>validate_contains/3&#45;&gt;list::valid/1</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L150" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L150" xlink:title="calls">
 <path fill="none" stroke="black" d="M121.49,-289.53C112.44,-270.94 97.98,-241.24 87.39,-219.5"/>
 <polygon fill="black" stroke="black" points="90.59,-218.07 83.06,-210.61 84.3,-221.14 90.59,-218.07"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L150" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L150">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L150" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L150">
 <text xml:space="preserve" text-anchor="start" x="103.68" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -553,12 +553,12 @@
 <!-- current_time/2&#45;&gt;os::time_stamp/1 -->
 <g id="edge28" class="edge">
 <title>current_time/2&#45;&gt;os::time_stamp/1</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L157" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L157" xlink:title="calls">
 <path fill="none" stroke="black" d="M382.63,-289.53C368.14,-270.6 344.85,-240.16 328.14,-218.32"/>
 <polygon fill="black" stroke="black" points="330.98,-216.27 322.12,-210.46 325.42,-220.52 330.98,-216.27"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L157">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L157">
 <text xml:space="preserve" text-anchor="start" x="354.64" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -566,12 +566,12 @@
 <!-- current_time/2&#45;&gt;^^option/2 -->
 <g id="edge23" class="edge">
 <title>current_time/2&#45;&gt;^^option/2</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L157" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L157" xlink:title="calls">
 <path fill="none" stroke="black" d="M396,-289.56C396,-249.83 396,-152.26 396,-103.58"/>
 <polygon fill="black" stroke="black" points="399.5,-103.84 396,-93.84 392.5,-103.84 399.5,-103.84"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L157">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L157">
 <text xml:space="preserve" text-anchor="start" x="396" y="-188.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -579,12 +579,12 @@
 <!-- validate_time_claim/6&#45;&gt;required_claim/3 -->
 <g id="edge11" class="edge">
 <title>validate_time_claim/6&#45;&gt;required_claim/3</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L163" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L163" xlink:title="calls">
 <path fill="none" stroke="black" d="M598.05,-289.53C634.64,-269.59 694.62,-236.9 734.94,-214.92"/>
 <polygon fill="black" stroke="black" points="736.56,-218.02 743.67,-210.17 733.21,-211.88 736.56,-218.02"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L163">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L163">
 <text xml:space="preserve" text-anchor="start" x="677.83" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -594,7 +594,7 @@
 <title>validate_max_age/4</title>
 <polygon fill="cornsilk" stroke="black" points="551.73,-209 432.27,-209 432.27,-173 551.73,-173 551.73,-209"/>
 <text xml:space="preserve" text-anchor="start" x="440.27" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L190" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L190">
+<g id="a_node12_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L190" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L190">
 <text xml:space="preserve" text-anchor="start" x="442.77" y="-192.53" font-family="Monospace" font-size="11.00">validate_max_age/4</text>
 </a>
 </g>
@@ -606,12 +606,12 @@
 <!-- validate_time_claim/6&#45;&gt;validate_max_age/4 -->
 <g id="edge13" class="edge">
 <title>validate_time_claim/6&#45;&gt;validate_max_age/4</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L179" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L179" xlink:title="calls">
 <path fill="none" stroke="black" d="M554.76,-289.53C542.68,-270.77 523.34,-240.7 509.31,-218.91"/>
 <polygon fill="black" stroke="black" points="512.28,-217.04 503.92,-210.53 506.39,-220.83 512.28,-217.04"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L179" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L179">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L179" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L179">
 <text xml:space="preserve" text-anchor="start" x="531.22" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -621,7 +621,7 @@
 <title>validate_time_number/2</title>
 <polygon fill="cornsilk" stroke="black" points="708.2,-209 569.8,-209 569.8,-173 708.2,-173 708.2,-209"/>
 <text xml:space="preserve" text-anchor="start" x="577.8" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node13_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L199" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L199">
+<g id="a_node13_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L199" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L199">
 <text xml:space="preserve" text-anchor="start" x="580.3" y="-192.53" font-family="Monospace" font-size="11.00">validate_time_number/2</text>
 </a>
 </g>
@@ -633,12 +633,12 @@
 <!-- validate_time_claim/6&#45;&gt;validate_time_number/2 -->
 <g id="edge12" class="edge">
 <title>validate_time_claim/6&#45;&gt;validate_time_number/2</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L163" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L163" xlink:title="calls">
 <path fill="none" stroke="black" d="M577.09,-289.53C589,-270.77 608.09,-240.7 621.92,-218.91"/>
 <polygon fill="black" stroke="black" points="624.83,-220.85 627.24,-210.53 618.92,-217.1 624.83,-220.85"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L163">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L163">
 <text xml:space="preserve" text-anchor="start" x="604.69" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -646,12 +646,12 @@
 <!-- validate_max_age/4&#45;&gt;^^option/2 -->
 <g id="edge24" class="edge">
 <title>validate_max_age/4&#45;&gt;^^option/2</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L190" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L190" xlink:title="calls">
 <path fill="none" stroke="black" d="M477.42,-172.53C461.54,-153.51 435.97,-122.88 417.73,-101.02"/>
 <polygon fill="black" stroke="black" points="420.47,-98.85 411.37,-93.42 415.09,-103.34 420.47,-98.85"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L190" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6b1392faef0cd462c61450cc0c99d42cfbb38abb/library/jwt/jwt_claims.lgt#L190">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L190" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/jwt/jwt_claims.lgt#L190">
 <text xml:space="preserve" text-anchor="start" x="446.88" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
