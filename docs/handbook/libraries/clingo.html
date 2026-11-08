@@ -456,10 +456,9 @@ Prolog, Shumway Prolog, SWI-Prolog, Trealla Prolog, and XVM.</p>
 <section id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
 <p>Solving requires the <code class="docutils literal notranslate"><span class="pre">clingo</span></code> executable, available on PATH or
-selected using the <code class="docutils literal notranslate"><span class="pre">executable(Path)</span></code> option. The library is expected
-to work with Clingo 5.x. Source generation and result inspection do not
-require the executable.</p>
-<p>Clingo is available from its <a class="reference external" href="https://potassco.org/clingo/">official
+selected using the <code class="docutils literal notranslate"><span class="pre">executable(Path)</span></code> option. Clingo 5.5.2 or a later
+version is required. Source generation and result inspection do not
+require the executable. Clingo is available from its <a class="reference external" href="https://potassco.org/clingo/">official
 website</a>.</p>
 <p>On POSIX systems, solving also requires <code class="docutils literal notranslate"><span class="pre">/bin/sh</span></code>, with <code class="docutils literal notranslate"><span class="pre">mktemp</span></code>
 available on PATH. On Windows, solving requires PowerShell 7.3 or later
@@ -914,8 +913,8 @@ user-owned temporary base.</p>
 <p>The problem tests cover the syntax represented by the library; they do
 not certify all native extensions, embedded scripting, custom theories,
 or multi-shot controller workflows.</p>
-<p>Compatibility with older Clingo 5.x versions has not been
-runtime-verified. Raw ASP supplied through these escape hatches may
+<p>Compatibility with supported Clingo versions other than 5.8.3 has not
+been runtime-verified. Raw ASP supplied through these escape hatches may
 require a newer Clingo version than the generated ASP.</p>
 </section>
 </section>

@@ -15,11 +15,9 @@ Requirements
 ------------
 
 Solving requires the ``clingo`` executable, available on PATH or
-selected using the ``executable(Path)`` option. The library is expected
-to work with Clingo 5.x. Source generation and result inspection do not
-require the executable.
-
-Clingo is available from its `official
+selected using the ``executable(Path)`` option. Clingo 5.5.2 or a later
+version is required. Source generation and result inspection do not
+require the executable. Clingo is available from its `official
 website <https://potassco.org/clingo/>`__.
 
 On POSIX systems, solving also requires ``/bin/sh``, with ``mktemp``
@@ -547,6 +545,6 @@ The problem tests cover the syntax represented by the library; they do
 not certify all native extensions, embedded scripting, custom theories,
 or multi-shot controller workflows.
 
-Compatibility with older Clingo 5.x versions has not been
-runtime-verified. Raw ASP supplied through these escape hatches may
+Compatibility with supported Clingo versions other than 5.8.3 has not
+been runtime-verified. Raw ASP supplied through these escape hatches may
 require a newer Clingo version than the generated ASP.
