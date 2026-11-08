@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 618,-140 618,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol geojson_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;08, 11:29</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;08, 19:53</text>
 <g id="clust1" class="cluster">
 <title>cluster_geojson_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="geojson_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 594,-46 594,-46 600,-46 606,-52 606,-58 606,-58 606,-116 606,-116 606,-122 600,-128 594,-128 594,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/geojson/geojson_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/geojson/geojson_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/geojson/geojson_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/geojson/geojson_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.3" font-family="Monospace" font-size="10.00" fill="dimgray">geojson_protocol</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>parse/2</title>
 <polygon fill="springgreen" stroke="black" points="75.85,-92 18.15,-92 18.15,-56 75.85,-56 75.85,-92"/>
 <text xml:space="preserve" text-anchor="start" x="26.15" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/geojson/geojson_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/geojson/geojson_protocol.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/geojson/geojson_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/geojson/geojson_protocol.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="28.66" y="-75.53" font-family="Monospace" font-size="11.00">parse/2</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>generate/2</title>
 <polygon fill="springgreen" stroke="black" points="167.8,-92 94.2,-92 94.2,-56 167.8,-56 167.8,-92"/>
 <text xml:space="preserve" text-anchor="start" x="102.2" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/geojson/geojson_protocol.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/geojson/geojson_protocol.lgt#L44">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/geojson/geojson_protocol.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/geojson/geojson_protocol.lgt#L44">
 <text xml:space="preserve" text-anchor="start" x="104.7" y="-75.53" font-family="Monospace" font-size="11.00">generate/2</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>validate/1</title>
 <polygon fill="springgreen" stroke="black" points="254.04,-92 185.96,-92 185.96,-56 254.04,-56 254.04,-92"/>
 <text xml:space="preserve" text-anchor="start" x="193.96" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/geojson/geojson_protocol.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/geojson/geojson_protocol.lgt#L56">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/geojson/geojson_protocol.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/geojson/geojson_protocol.lgt#L56">
 <text xml:space="preserve" text-anchor="start" x="196.46" y="-75.53" font-family="Monospace" font-size="11.00">validate/1</text>
 </a>
 </g>
@@ -71,7 +71,7 @@
 <title>validate/2</title>
 <polygon fill="springgreen" stroke="black" points="340.04,-92 271.96,-92 271.96,-56 340.04,-56 340.04,-92"/>
 <text xml:space="preserve" text-anchor="start" x="279.96" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/geojson/geojson_protocol.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/geojson/geojson_protocol.lgt#L63">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/geojson/geojson_protocol.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/geojson/geojson_protocol.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="282.46" y="-75.53" font-family="Monospace" font-size="11.00">validate/2</text>
 </a>
 </g>
@@ -85,7 +85,7 @@
 <title>json_to_geojson/2</title>
 <polygon fill="springgreen" stroke="black" points="468.15,-92 357.85,-92 357.85,-56 468.15,-56 468.15,-92"/>
 <text xml:space="preserve" text-anchor="start" x="365.85" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/geojson/geojson_protocol.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/geojson/geojson_protocol.lgt#L109">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/geojson/geojson_protocol.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/geojson/geojson_protocol.lgt#L109">
 <text xml:space="preserve" text-anchor="start" x="368.35" y="-75.53" font-family="Monospace" font-size="11.00">json_to_geojson/2</text>
 </a>
 </g>
@@ -99,7 +99,7 @@
 <title>geojson_to_json/2</title>
 <polygon fill="springgreen" stroke="black" points="596.15,-92 485.85,-92 485.85,-56 596.15,-56 596.15,-92"/>
 <text xml:space="preserve" text-anchor="start" x="493.85" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/geojson/geojson_protocol.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/geojson/geojson_protocol.lgt#L120">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/geojson/geojson_protocol.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/geojson/geojson_protocol.lgt#L120">
 <text xml:space="preserve" text-anchor="start" x="496.35" y="-75.53" font-family="Monospace" font-size="11.00">geojson_to_json/2</text>
 </a>
 </g>

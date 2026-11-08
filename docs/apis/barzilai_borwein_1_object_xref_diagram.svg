@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-608 1423,-608 1423,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object barzilai_borwein/1</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;08, 11:30</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;08, 19:54</text>
 <g id="clust1" class="cluster">
 <title>cluster_barzilai_borwein_1_object</title>
 <g id="a_clust1"><a xlink:title="barzilai_borwein(Problem)">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1399,-46 1399,-46 1405,-46 1411,-52 1411,-58 1411,-58 1411,-584 1411,-584 1411,-590 1405,-596 1399,-596 1399,-596 20,-596 20,-596 14,-596 8,-590 8,-584 8,-584 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-580.3" font-family="Monospace" font-size="10.00" fill="dimgray">barzilai_borwein(Problem)</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>run/4</title>
 <polygon fill="cornsilk" stroke="black" points="631,-560 577,-560 577,-524 631,-524 631,-560"/>
 <text xml:space="preserve" text-anchor="start" x="588.96" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="591.46" y="-543.53" font-family="Monospace" font-size="11.00">run/4</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>loop/33</title>
 <polygon fill="cornsilk" stroke="black" points="129.54,-443 72.46,-443 72.46,-407 129.54,-407 129.54,-443"/>
 <text xml:space="preserve" text-anchor="start" x="80.46" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L126">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L126">
 <text xml:space="preserve" text-anchor="start" x="82.96" y="-426.53" font-family="Monospace" font-size="11.00">loop/33</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- run/4&#45;&gt;loop/33 -->
 <g id="edge4" class="edge">
 <title>run/4&#45;&gt;loop/33</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="calls">
 <path fill="none" stroke="black" d="M576.74,-537.33C505.74,-527.34 309.5,-496.96 140.62,-443.14"/>
 <polygon fill="black" stroke="black" points="141.83,-439.85 131.24,-440.11 139.68,-446.51 141.83,-439.85"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="302.75" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>direction_sign/2</title>
 <polygon fill="cornsilk" stroke="black" points="974.02,-443 875.98,-443 875.98,-407 974.02,-407 974.02,-443"/>
 <text xml:space="preserve" text-anchor="start" x="883.98" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L230" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L230">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L230" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L230">
 <text xml:space="preserve" text-anchor="start" x="886.48" y="-426.53" font-family="Monospace" font-size="11.00">direction_sign/2</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- run/4&#45;&gt;direction_sign/2 -->
 <g id="edge3" class="edge">
 <title>run/4&#45;&gt;direction_sign/2</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="calls">
 <path fill="none" stroke="black" d="M631.32,-540.4C680.36,-538.28 785.34,-528.89 862,-488 878.61,-479.14 893.77,-464.53 905.05,-451.72"/>
 <polygon fill="black" stroke="black" points="907.47,-454.29 911.24,-444.39 902.12,-449.77 907.47,-454.29"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="874.17" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -97,7 +97,7 @@
 <title>require_gradient/0</title>
 <polygon fill="cornsilk" stroke="black" points="1102.14,-443 991.86,-443 991.86,-407 1102.14,-407 1102.14,-443"/>
 <text xml:space="preserve" text-anchor="start" x="999.86" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L364" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L364">
+<g id="a_node11_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L364" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L364">
 <text xml:space="preserve" text-anchor="start" x="1002.36" y="-426.53" font-family="Monospace" font-size="11.00">require_gradient/0</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- run/4&#45;&gt;require_gradient/0 -->
 <g id="edge1" class="edge">
 <title>run/4&#45;&gt;require_gradient/0</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="calls">
 <path fill="none" stroke="black" d="M631.41,-537.97C683.67,-531.78 800.81,-515.85 896,-488 931.97,-477.48 971.08,-461.28 1000.48,-448.08"/>
 <polygon fill="black" stroke="black" points="1001.82,-451.32 1009.47,-443.99 998.92,-444.94 1001.82,-451.32"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="921.41" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -124,7 +124,7 @@
 <title>validate_gradient/2</title>
 <polygon fill="cornsilk" stroke="black" points="1269.98,-326 1156.02,-326 1156.02,-290 1269.98,-290 1269.98,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1164.02" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L370" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L370">
+<g id="a_node12_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L370" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L370">
 <text xml:space="preserve" text-anchor="start" x="1166.52" y="-309.53" font-family="Monospace" font-size="11.00">validate_gradient/2</text>
 </a>
 </g>
@@ -136,12 +136,12 @@
 <!-- run/4&#45;&gt;validate_gradient/2 -->
 <g id="edge2" class="edge">
 <title>run/4&#45;&gt;validate_gradient/2</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="calls">
 <path fill="none" stroke="black" d="M631.38,-538.52C724.93,-529.63 1030.6,-496.94 1111,-443 1132.32,-428.69 1172.41,-370.93 1195.47,-336.08"/>
 <polygon fill="black" stroke="black" points="1198.37,-338.04 1200.93,-327.76 1192.52,-334.2 1198.37,-338.04"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="1143.75" y="-422.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -163,12 +163,12 @@
 <!-- run/4&#45;&gt;linear_algebra::scale_vector/3 -->
 <g id="edge28" class="edge">
 <title>run/4&#45;&gt;linear_algebra::scale_vector/3</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="calls">
 <path fill="none" stroke="black" d="M631.21,-536.23C679.74,-526.49 782.22,-500.22 847,-443 860.72,-430.88 852.2,-417.77 867,-407 1017.91,-297.22 1150.37,-461.2 1279,-326 1326.16,-276.43 1341.38,-224.21 1296,-173 1251.91,-123.24 1064.29,-149.54 999,-137 942.26,-126.1 878.98,-109.03 832.54,-95.55"/>
 <polygon fill="black" stroke="black" points="833.74,-92.26 823.16,-92.81 831.78,-98.98 833.74,-92.26"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="1306.61" y="-305.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -190,12 +190,12 @@
 <!-- run/4&#45;&gt;linear_algebra::euclidean_norm/2 -->
 <g id="edge29" class="edge">
 <title>run/4&#45;&gt;linear_algebra::euclidean_norm/2</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="calls">
 <path fill="none" stroke="black" d="M576.64,-540.67C473.89,-538.81 113.5,-526.35 45,-443 17.5,-409.55 53.8,-362.52 82.19,-333.99"/>
 <polygon fill="black" stroke="black" points="84.48,-336.65 89.21,-327.17 79.6,-331.63 84.48,-336.65"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="45" y="-422.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -214,12 +214,12 @@
 <!-- run/4&#45;&gt;^^check_options/1 -->
 <g id="edge15" class="edge">
 <title>run/4&#45;&gt;^^check_options/1</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="calls">
 <path fill="none" stroke="black" d="M576.75,-533.19C514.23,-515.25 358.95,-470.72 269.45,-445.06"/>
 <polygon fill="black" stroke="black" points="270.64,-441.76 260.06,-442.36 268.71,-448.48 270.64,-441.76"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="415.52" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -238,12 +238,12 @@
 <!-- run/4&#45;&gt;^^merge_options/2 -->
 <g id="edge16" class="edge">
 <title>run/4&#45;&gt;^^merge_options/2</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="calls">
 <path fill="none" stroke="black" d="M576.52,-529.34C531.55,-510.26 441.53,-472.06 384.44,-447.83"/>
 <polygon fill="black" stroke="black" points="386.14,-444.75 375.57,-444.06 383.41,-451.19 386.14,-444.75"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="476.63" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -262,12 +262,12 @@
 <!-- run/4&#45;&gt;^^option/2 -->
 <g id="edge17" class="edge">
 <title>run/4&#45;&gt;^^option/2</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="calls">
 <path fill="none" stroke="black" d="M579.55,-523.53C552.04,-503.89 507.21,-471.87 476.47,-449.91"/>
 <polygon fill="black" stroke="black" points="478.82,-447.29 468.65,-444.32 474.75,-452.98 478.82,-447.29"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="528.33" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -286,12 +286,12 @@
 <!-- run/4&#45;&gt;^^initial_point/2 -->
 <g id="edge18" class="edge">
 <title>run/4&#45;&gt;^^initial_point/2</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="calls">
 <path fill="none" stroke="black" d="M594.89,-523.53C585.14,-504.85 569.55,-474.97 558.19,-453.2"/>
 <polygon fill="black" stroke="black" points="561.43,-451.84 553.7,-444.6 555.22,-455.08 561.43,-451.84"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="575.8" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -310,12 +310,12 @@
 <!-- run/4&#45;&gt;^^check_bounds/1 -->
 <g id="edge19" class="edge">
 <title>run/4&#45;&gt;^^check_bounds/1</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="calls">
 <path fill="none" stroke="black" d="M613.26,-523.53C623.17,-504.85 639.02,-474.97 650.57,-453.2"/>
 <polygon fill="black" stroke="black" points="653.54,-455.06 655.14,-444.59 647.36,-451.78 653.54,-455.06"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="636.33" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -334,12 +334,12 @@
 <!-- run/4&#45;&gt;^^check_point/2 -->
 <g id="edge20" class="edge">
 <title>run/4&#45;&gt;^^check_point/2</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="calls">
 <path fill="none" stroke="black" d="M631.15,-524.03C662.77,-504.27 715.17,-471.52 750.62,-449.36"/>
 <polygon fill="black" stroke="black" points="752.23,-452.49 758.85,-444.22 748.52,-446.55 752.23,-452.49"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L59">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="701.52" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -349,7 +349,7 @@
 <title>objective_direction/2</title>
 <polygon fill="cornsilk" stroke="black" points="1035.64,-326 914.36,-326 914.36,-290 1035.64,-290 1035.64,-326"/>
 <text xml:space="preserve" text-anchor="start" x="922.36" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L233" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L233">
+<g id="a_node4_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L233" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L233">
 <text xml:space="preserve" text-anchor="start" x="924.86" y="-309.53" font-family="Monospace" font-size="11.00">objective_direction/2</text>
 </a>
 </g>
@@ -361,12 +361,12 @@
 <!-- loop/33&#45;&gt;objective_direction/2 -->
 <g id="edge5" class="edge">
 <title>loop/33&#45;&gt;objective_direction/2</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L138" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L138" xlink:title="calls">
 <path fill="none" stroke="black" d="M129.68,-409.96C132.78,-408.81 135.92,-407.79 139,-407 328.19,-358.42 382.84,-392.28 577,-371 719.7,-355.36 758.55,-353.48 902.95,-326.29"/>
 <polygon fill="black" stroke="black" points="903.33,-329.78 912.51,-324.48 902.03,-322.9 903.33,-329.78"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L138" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L138">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L138" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L138">
 <text xml:space="preserve" text-anchor="start" x="660" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -376,7 +376,7 @@
 <title>bb_step/8</title>
 <polygon fill="cornsilk" stroke="black" points="289.66,-326 220.34,-326 220.34,-290 289.66,-290 289.66,-326"/>
 <text xml:space="preserve" text-anchor="start" x="228.34" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L239" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L239">
+<g id="a_node5_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L239" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L239">
 <text xml:space="preserve" text-anchor="start" x="230.84" y="-309.53" font-family="Monospace" font-size="11.00">bb_step/8</text>
 </a>
 </g>
@@ -388,12 +388,12 @@
 <!-- loop/33&#45;&gt;bb_step/8 -->
 <g id="edge6" class="edge">
 <title>loop/33&#45;&gt;bb_step/8</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L175" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L175" xlink:title="calls">
 <path fill="none" stroke="black" d="M124.39,-406.53C150.58,-386.97 193.21,-355.14 222.6,-333.19"/>
 <polygon fill="black" stroke="black" points="224.51,-336.13 230.43,-327.35 220.32,-330.53 224.51,-336.13"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L175">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L175">
 <text xml:space="preserve" text-anchor="start" x="182.62" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -403,7 +403,7 @@
 <title>take_step/15</title>
 <polygon fill="cornsilk" stroke="black" points="1138,-326 1054,-326 1054,-290 1138,-290 1138,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1062" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L292" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L292">
+<g id="a_node9_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L292" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L292">
 <text xml:space="preserve" text-anchor="start" x="1064.5" y="-309.53" font-family="Monospace" font-size="11.00">take_step/15</text>
 </a>
 </g>
@@ -415,12 +415,12 @@
 <!-- loop/33&#45;&gt;take_step/15 -->
 <g id="edge7" class="edge">
 <title>loop/33&#45;&gt;take_step/15</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L175" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L175" xlink:title="calls">
 <path fill="none" stroke="black" d="M129.67,-409.91C132.77,-408.77 135.91,-407.77 139,-407 373.73,-348.7 441.22,-393.89 682,-371 840.2,-355.96 884.47,-361.61 1042.52,-326.33"/>
 <polygon fill="black" stroke="black" points="1043.14,-329.78 1052.13,-324.17 1041.6,-322.95 1043.14,-329.78"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L175">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L175">
 <text xml:space="preserve" text-anchor="start" x="788.19" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -428,12 +428,12 @@
 <!-- loop/33&#45;&gt;validate_gradient/2 -->
 <g id="edge8" class="edge">
 <title>loop/33&#45;&gt;validate_gradient/2</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L175" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L175" xlink:title="calls">
 <path fill="none" stroke="black" d="M129.66,-409.87C132.76,-408.74 135.91,-407.75 139,-407 429.29,-336.84 512.64,-398.79 810,-371 956.93,-357.27 996.83,-355 1145,-326.28"/>
 <polygon fill="black" stroke="black" points="1145.23,-329.8 1154.37,-324.45 1143.89,-322.93 1145.23,-329.8"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L175">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L175">
 <text xml:space="preserve" text-anchor="start" x="902.01" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -441,12 +441,12 @@
 <!-- loop/33&#45;&gt;linear_algebra::scale_vector/3 -->
 <g id="edge30" class="edge">
 <title>loop/33&#45;&gt;linear_algebra::scale_vector/3</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L175" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L175" xlink:title="calls">
 <path fill="none" stroke="black" d="M129.84,-410.88C181.51,-387.22 285.71,-338.67 299,-326 312.25,-313.37 305.69,-302.56 319,-290 427.5,-187.61 593.88,-125.23 689.79,-95.67"/>
 <polygon fill="black" stroke="black" points="690.56,-99.1 699.11,-92.84 688.52,-92.4 690.56,-99.1"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L175">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L175">
 <text xml:space="preserve" text-anchor="start" x="370.38" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -454,12 +454,12 @@
 <!-- loop/33&#45;&gt;linear_algebra::euclidean_norm/2 -->
 <g id="edge31" class="edge">
 <title>loop/33&#45;&gt;linear_algebra::euclidean_norm/2</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L175" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L175" xlink:title="calls">
 <path fill="none" stroke="black" d="M102.37,-406.53C103.8,-388.28 106.06,-359.33 107.75,-337.7"/>
 <polygon fill="black" stroke="black" points="111.24,-338.01 108.53,-327.76 104.26,-337.46 111.24,-338.01"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L175">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L175">
 <text xml:space="preserve" text-anchor="start" x="105.77" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -481,12 +481,12 @@
 <!-- loop/33&#45;&gt;linear_algebra::subtract_vectors/3 -->
 <g id="edge32" class="edge">
 <title>loop/33&#45;&gt;linear_algebra::subtract_vectors/3</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L175" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L175" xlink:title="calls">
 <path fill="none" stroke="black" d="M129.79,-410.34C132.86,-409.12 135.97,-407.98 139,-407 214.58,-382.64 239.8,-399.27 314,-371 339.69,-361.21 366.45,-345.7 386.78,-332.65"/>
 <polygon fill="black" stroke="black" points="388.5,-335.71 394.95,-327.3 384.67,-329.85 388.5,-335.71"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L175">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L175">
 <text xml:space="preserve" text-anchor="start" x="332.57" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -505,12 +505,12 @@
 <!-- loop/33&#45;&gt;^^report_final/5 -->
 <g id="edge21" class="edge">
 <title>loop/33&#45;&gt;^^report_final/5</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L126" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L126" xlink:title="calls">
 <path fill="none" stroke="black" d="M129.75,-410.22C132.83,-409.02 135.96,-407.92 139,-407 232.18,-378.9 259.88,-391.61 355,-371 427.15,-355.36 446.88,-347.75 521,-326.55"/>
 <polygon fill="black" stroke="black" points="521.71,-329.99 530.37,-323.89 519.79,-323.26 521.71,-329.99"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L126">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L126">
 <text xml:space="preserve" text-anchor="start" x="394.34" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -529,12 +529,12 @@
 <!-- loop/33&#45;&gt;^^target_reached/3 -->
 <g id="edge22" class="edge">
 <title>loop/33&#45;&gt;^^target_reached/3</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L138" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L138" xlink:title="calls">
 <path fill="none" stroke="black" d="M129.72,-410.11C132.81,-408.93 135.94,-407.86 139,-407 258.48,-373.29 293.54,-391.4 416,-371 511.3,-355.13 537.46,-348.96 634.26,-326.59"/>
 <polygon fill="black" stroke="black" points="635.02,-330.01 643.97,-324.35 633.44,-323.19 635.02,-330.01"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L138" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L138">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L138" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L138">
 <text xml:space="preserve" text-anchor="start" x="467.58" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -553,12 +553,12 @@
 <!-- loop/33&#45;&gt;^^report_progress/6 -->
 <g id="edge23" class="edge">
 <title>loop/33&#45;&gt;^^report_progress/6</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L175" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L175" xlink:title="calls">
 <path fill="none" stroke="black" d="M129.7,-410.02C132.79,-408.86 135.93,-407.82 139,-407 290.49,-366.47 334.53,-391.49 490,-371 611,-355.05 644.11,-351.45 766.77,-326.38"/>
 <polygon fill="black" stroke="black" points="767.15,-329.88 776.25,-324.44 765.75,-323.02 767.15,-329.88"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L175">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L175">
 <text xml:space="preserve" text-anchor="start" x="555.02" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -568,7 +568,7 @@
 <title>bb1_step/6</title>
 <polygon fill="cornsilk" stroke="black" points="199.72,-209 124.28,-209 124.28,-173 199.72,-173 199.72,-209"/>
 <text xml:space="preserve" text-anchor="start" x="132.28" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L259" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L259">
+<g id="a_node6_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L259" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L259">
 <text xml:space="preserve" text-anchor="start" x="134.78" y="-192.53" font-family="Monospace" font-size="11.00">bb1_step/6</text>
 </a>
 </g>
@@ -580,12 +580,12 @@
 <!-- bb_step/8&#45;&gt;bb1_step/6 -->
 <g id="edge10" class="edge">
 <title>bb_step/8&#45;&gt;bb1_step/6</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L246" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L246" xlink:title="calls">
 <path fill="none" stroke="black" d="M240.88,-289.53C225.49,-270.51 200.72,-239.88 183.05,-218.02"/>
 <polygon fill="black" stroke="black" points="185.91,-216.01 176.9,-210.43 180.47,-220.41 185.91,-216.01"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L246" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L246">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L246" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L246">
 <text xml:space="preserve" text-anchor="start" x="211.29" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -595,7 +595,7 @@
 <title>bb2_step/6</title>
 <polygon fill="cornsilk" stroke="black" points="292.72,-209 217.28,-209 217.28,-173 292.72,-173 292.72,-209"/>
 <text xml:space="preserve" text-anchor="start" x="225.28" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L272" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L272">
+<g id="a_node7_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L272" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L272">
 <text xml:space="preserve" text-anchor="start" x="227.78" y="-192.53" font-family="Monospace" font-size="11.00">bb2_step/6</text>
 </a>
 </g>
@@ -607,12 +607,12 @@
 <!-- bb_step/8&#45;&gt;bb2_step/6 -->
 <g id="edge11" class="edge">
 <title>bb_step/8&#45;&gt;bb2_step/6</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L249" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L249" xlink:title="calls">
 <path fill="none" stroke="black" d="M255,-289.53C255,-271.28 255,-242.33 255,-220.7"/>
 <polygon fill="black" stroke="black" points="258.5,-220.77 255,-210.77 251.5,-220.77 258.5,-220.77"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L249" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L249">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L249" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L249">
 <text xml:space="preserve" text-anchor="start" x="255" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -622,7 +622,7 @@
 <title>clamp_step/4</title>
 <polygon fill="cornsilk" stroke="black" points="200.21,-92 113.79,-92 113.79,-56 200.21,-56 200.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="121.79" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L284" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L284">
+<g id="a_node8_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L284" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L284">
 <text xml:space="preserve" text-anchor="start" x="124.29" y="-75.53" font-family="Monospace" font-size="11.00">clamp_step/4</text>
 </a>
 </g>
@@ -634,12 +634,12 @@
 <!-- bb_step/8&#45;&gt;clamp_step/4 -->
 <g id="edge9" class="edge">
 <title>bb_step/8&#45;&gt;clamp_step/4</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L239" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L239" xlink:title="calls">
 <path fill="none" stroke="black" d="M219.86,-290.29C177.57,-269.37 110.53,-233.33 97,-209 76.75,-172.62 106.76,-128.12 131.14,-100.67"/>
 <polygon fill="black" stroke="black" points="133.55,-103.22 137.76,-93.5 128.41,-98.47 133.55,-103.22"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L239" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L239">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L239" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L239">
 <text xml:space="preserve" text-anchor="start" x="97" y="-188.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -647,12 +647,12 @@
 <!-- bb1_step/6&#45;&gt;clamp_step/4 -->
 <g id="edge12" class="edge">
 <title>bb1_step/6&#45;&gt;clamp_step/4</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L259" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L259" xlink:title="calls">
 <path fill="none" stroke="black" d="M161.24,-172.53C160.45,-154.28 159.19,-125.33 158.25,-103.7"/>
 <polygon fill="black" stroke="black" points="161.75,-103.6 157.82,-93.77 154.75,-103.91 161.75,-103.6"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L259" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L259">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L259" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L259">
 <text xml:space="preserve" text-anchor="start" x="159.65" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -674,12 +674,12 @@
 <!-- bb1_step/6&#45;&gt;linear_algebra::dot_product/3 -->
 <g id="edge33" class="edge">
 <title>bb1_step/6&#45;&gt;linear_algebra::dot_product/3</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L259" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L259" xlink:title="calls">
 <path fill="none" stroke="black" d="M184.95,-172.68C198.27,-162.5 215.27,-149.25 230,-137 244.3,-125.11 259.82,-111.45 272.61,-99.98"/>
 <polygon fill="black" stroke="black" points="274.76,-102.75 279.85,-93.45 270.08,-97.55 274.76,-102.75"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L259" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L259">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L259" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L259">
 <text xml:space="preserve" text-anchor="start" x="239.73" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -687,12 +687,12 @@
 <!-- bb2_step/6&#45;&gt;clamp_step/4 -->
 <g id="edge13" class="edge">
 <title>bb2_step/6&#45;&gt;clamp_step/4</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L272" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L272" xlink:title="calls">
 <path fill="none" stroke="black" d="M240.12,-172.53C223.83,-153.43 197.57,-122.61 178.93,-100.73"/>
 <polygon fill="black" stroke="black" points="181.83,-98.75 172.68,-93.41 176.51,-103.29 181.83,-98.75"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L272" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L272">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L272" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L272">
 <text xml:space="preserve" text-anchor="start" x="208.94" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -700,12 +700,12 @@
 <!-- bb2_step/6&#45;&gt;linear_algebra::dot_product/3 -->
 <g id="edge34" class="edge">
 <title>bb2_step/6&#45;&gt;linear_algebra::dot_product/3</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L272" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L272" xlink:title="calls">
 <path fill="none" stroke="black" d="M261.83,-172.53C269.08,-154.02 280.62,-124.52 289.12,-102.8"/>
 <polygon fill="black" stroke="black" points="292.31,-104.25 292.7,-93.66 285.79,-101.7 292.31,-104.25"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L272" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L272">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L272" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L272">
 <text xml:space="preserve" text-anchor="start" x="278.85" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -715,7 +715,7 @@
 <title>phi_armijo_backtrack/16</title>
 <polygon fill="cornsilk" stroke="black" points="973.11,-209 832.89,-209 832.89,-173 973.11,-173 973.11,-209"/>
 <text xml:space="preserve" text-anchor="start" x="840.89" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L325" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L325">
+<g id="a_node10_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L325" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L325">
 <text xml:space="preserve" text-anchor="start" x="843.39" y="-192.53" font-family="Monospace" font-size="11.00">phi_armijo_backtrack/16</text>
 </a>
 </g>
@@ -727,12 +727,12 @@
 <!-- take_step/15&#45;&gt;phi_armijo_backtrack/16 -->
 <g id="edge14" class="edge">
 <title>take_step/15&#45;&gt;phi_armijo_backtrack/16</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L311" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L311" xlink:title="calls">
 <path fill="none" stroke="black" d="M1055.05,-289.55C1033.91,-279.98 1008.02,-267.36 986,-254 967.36,-242.69 947.76,-228.19 932.29,-216.06"/>
 <polygon fill="black" stroke="black" points="934.89,-213.66 924.89,-210.17 930.54,-219.14 934.89,-213.66"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L311" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L311">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L311" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L311">
 <text xml:space="preserve" text-anchor="start" x="986" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -740,12 +740,12 @@
 <!-- take_step/15&#45;&gt;linear_algebra::scale_vector/3 -->
 <g id="edge35" class="edge">
 <title>take_step/15&#45;&gt;linear_algebra::scale_vector/3</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L292" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L292" xlink:title="calls">
 <path fill="none" stroke="black" d="M1053.72,-292.85C973.51,-265.98 807.12,-210.16 806,-209 778.28,-180.47 769.25,-133.74 766.33,-103.68"/>
 <polygon fill="black" stroke="black" points="769.83,-103.5 765.56,-93.81 762.85,-104.05 769.83,-103.5"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L292" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L292">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L292" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L292">
 <text xml:space="preserve" text-anchor="start" x="806" y="-188.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -753,12 +753,12 @@
 <!-- take_step/15&#45;&gt;linear_algebra::dot_product/3 -->
 <g id="edge37" class="edge">
 <title>take_step/15&#45;&gt;linear_algebra::dot_product/3</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L311" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L311" xlink:title="calls">
 <path fill="none" stroke="black" d="M1053.65,-291.93C1050.75,-291.19 1047.84,-290.54 1045,-290 967.59,-275.41 396.79,-305.28 337,-254 314.66,-234.84 305.27,-149.47 301.79,-103.89"/>
 <polygon fill="black" stroke="black" points="305.28,-103.68 301.08,-93.95 298.3,-104.18 305.28,-103.68"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L311" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L311">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L311" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L311">
 <text xml:space="preserve" text-anchor="start" x="316.62" y="-188.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -780,12 +780,12 @@
 <!-- take_step/15&#45;&gt;linear_algebra::add_vectors/3 -->
 <g id="edge36" class="edge">
 <title>take_step/15&#45;&gt;linear_algebra::add_vectors/3</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L292" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L292" xlink:title="calls">
 <path fill="none" stroke="black" d="M1087.29,-289.7C1065.38,-246.2 1009.32,-135.23 1004,-128 996.68,-118.06 987.46,-108.28 978.72,-99.87"/>
 <polygon fill="black" stroke="black" points="981.37,-97.56 971.67,-93.31 976.6,-102.69 981.37,-97.56"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L292" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L292">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L292" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L292">
 <text xml:space="preserve" text-anchor="start" x="1045.09" y="-188.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -804,12 +804,12 @@
 <!-- take_step/15&#45;&gt;^^project_to_bounds/3 -->
 <g id="edge24" class="edge">
 <title>take_step/15&#45;&gt;^^project_to_bounds/3</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L292" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L292" xlink:title="calls">
 <path fill="none" stroke="black" d="M1088.55,-289.58C1078.57,-263.95 1063.08,-214.6 1072,-173 1077.38,-147.88 1089.7,-121.42 1099.95,-102.34"/>
 <polygon fill="black" stroke="black" points="1103,-104.05 1104.78,-93.61 1096.88,-100.66 1103,-104.05"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L292" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L292">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L292" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L292">
 <text xml:space="preserve" text-anchor="start" x="1072" y="-188.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -817,12 +817,12 @@
 <!-- phi_armijo_backtrack/16&#45;&gt;linear_algebra::scale_vector/3 -->
 <g id="edge38" class="edge">
 <title>phi_armijo_backtrack/16&#45;&gt;linear_algebra::scale_vector/3</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L325" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L325" xlink:title="calls">
 <path fill="none" stroke="black" d="M882.04,-172.53C858.7,-153.09 820.81,-121.51 794.49,-99.57"/>
 <polygon fill="black" stroke="black" points="796.79,-96.94 786.87,-93.22 792.31,-102.31 796.79,-96.94"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L325" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L325">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L325" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L325">
 <text xml:space="preserve" text-anchor="start" x="838.14" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -830,12 +830,12 @@
 <!-- phi_armijo_backtrack/16&#45;&gt;linear_algebra::add_vectors/3 -->
 <g id="edge39" class="edge">
 <title>phi_armijo_backtrack/16&#45;&gt;linear_algebra::add_vectors/3</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L325" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L325" xlink:title="calls">
 <path fill="none" stroke="black" d="M910.14,-172.53C917.7,-154.02 929.76,-124.52 938.64,-102.8"/>
 <polygon fill="black" stroke="black" points="941.83,-104.24 942.38,-93.65 935.35,-101.59 941.83,-104.24"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L325" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L325">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L325" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L325">
 <text xml:space="preserve" text-anchor="start" x="927.91" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -843,12 +843,12 @@
 <!-- phi_armijo_backtrack/16&#45;&gt;^^project_to_bounds/3 -->
 <g id="edge25" class="edge">
 <title>phi_armijo_backtrack/16&#45;&gt;^^project_to_bounds/3</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L325" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L325" xlink:title="calls">
 <path fill="none" stroke="black" d="M935.35,-172.53C972.36,-152.55 1033.1,-119.76 1073.8,-97.78"/>
 <polygon fill="black" stroke="black" points="1075.23,-100.99 1082.36,-93.16 1071.9,-94.83 1075.23,-100.99"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L325" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L325">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L325" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L325">
 <text xml:space="preserve" text-anchor="start" x="1015.89" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -870,12 +870,12 @@
 <!-- validate_gradient/2&#45;&gt;list::length/2 -->
 <g id="edge40" class="edge">
 <title>validate_gradient/2&#45;&gt;list::length/2</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L370" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L370" xlink:title="calls">
 <path fill="none" stroke="black" d="M1201.76,-289.53C1189.68,-270.77 1170.34,-240.7 1156.31,-218.91"/>
 <polygon fill="black" stroke="black" points="1159.28,-217.04 1150.92,-210.53 1153.39,-220.83 1159.28,-217.04"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L370" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L370">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L370" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L370">
 <text xml:space="preserve" text-anchor="start" x="1178.22" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -897,12 +897,12 @@
 <!-- validate_gradient/2&#45;&gt;list::member/2 -->
 <g id="edge41" class="edge">
 <title>validate_gradient/2&#45;&gt;list::member/2</title>
-<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L370" xlink:title="calls">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L370" xlink:title="calls">
 <path fill="none" stroke="black" d="M1217.4,-289.53C1222.03,-271.19 1229.38,-242.06 1234.84,-220.4"/>
 <polygon fill="black" stroke="black" points="1238.23,-221.27 1237.28,-210.72 1231.44,-219.56 1238.23,-221.27"/>
 </a>
 </g>
-<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L370" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L370">
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L370" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L370">
 <text xml:space="preserve" text-anchor="start" x="1228.37" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -912,7 +912,7 @@
 <title>progress_hook/5</title>
 <polygon fill="cornsilk" stroke="black" points="986.47,-560 883.53,-560 883.53,-524 986.47,-524 986.47,-560"/>
 <text xml:space="preserve" text-anchor="start" x="891.53" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node13_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L381" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L381">
+<g id="a_node13_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L381" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L381">
 <text xml:space="preserve" text-anchor="start" x="894.03" y="-543.53" font-family="Monospace" font-size="11.00">progress_hook/5</text>
 </a>
 </g>
@@ -926,7 +926,7 @@
 <title>default_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="1278.65,-560 1179.35,-560 1179.35,-524 1278.65,-524 1278.65,-560"/>
 <text xml:space="preserve" text-anchor="start" x="1187.35" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node14_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L386" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L386">
+<g id="a_node14_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L386" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L386">
 <text xml:space="preserve" text-anchor="start" x="1189.86" y="-543.53" font-family="Monospace" font-size="11.00">default_option/1</text>
 </a>
 </g>
@@ -949,12 +949,12 @@
 <!-- default_option/1&#45;&gt;^^default_option/1 -->
 <g id="edge26" class="edge">
 <title>default_option/1&#45;&gt;^^default_option/1</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L394" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L394" xlink:title="calls">
 <path fill="none" stroke="black" d="M1229,-523.53C1229,-505.28 1229,-476.33 1229,-454.7"/>
 <polygon fill="black" stroke="black" points="1232.5,-454.77 1229,-444.77 1225.5,-454.77 1232.5,-454.77"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L394" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L394">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L394" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L394">
 <text xml:space="preserve" text-anchor="start" x="1229" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -964,7 +964,7 @@
 <title>valid_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="1395.44,-560 1306.56,-560 1306.56,-524 1395.44,-524 1395.44,-560"/>
 <text xml:space="preserve" text-anchor="start" x="1314.56" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node15_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L397" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L397">
+<g id="a_node15_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L397" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L397">
 <text xml:space="preserve" text-anchor="start" x="1317.06" y="-543.53" font-family="Monospace" font-size="11.00">valid_option/1</text>
 </a>
 </g>
@@ -987,12 +987,12 @@
 <!-- valid_option/1&#45;&gt;^^valid_option/1 -->
 <g id="edge27" class="edge">
 <title>valid_option/1&#45;&gt;^^valid_option/1</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L413" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L413" xlink:title="calls">
 <path fill="none" stroke="black" d="M1351,-523.53C1351,-505.28 1351,-476.33 1351,-454.7"/>
 <polygon fill="black" stroke="black" points="1354.5,-454.77 1351,-444.77 1347.5,-454.77 1354.5,-454.77"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L413" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/local_optimization/barzilai_borwein.lgt#L413">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L413" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/local_optimization/barzilai_borwein.lgt#L413">
 <text xml:space="preserve" text-anchor="start" x="1351" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>

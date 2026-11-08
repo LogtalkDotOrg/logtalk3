@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-608 1014,-608 1014,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object rk45_ode_solver/1</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;08, 11:30</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;08, 19:54</text>
 <g id="clust1" class="cluster">
 <title>cluster_rk45_ode_solver_1_object</title>
 <g id="a_clust1"><a xlink:title="rk45_ode_solver(System)">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 990,-46 990,-46 996,-46 1002,-52 1002,-58 1002,-58 1002,-584 1002,-584 1002,-590 996,-596 990,-596 990,-596 20,-596 20,-596 14,-596 8,-590 8,-584 8,-584 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-580.3" font-family="Monospace" font-size="10.00" fill="dimgray">rk45_ode_solver(System)</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>solve/6</title>
 <polygon fill="cornsilk" stroke="black" points="458.93,-560 403.07,-560 403.07,-524 458.93,-524 458.93,-560"/>
 <text xml:space="preserve" text-anchor="start" x="411.07" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L44">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L44">
 <text xml:space="preserve" text-anchor="start" x="413.57" y="-543.53" font-family="Monospace" font-size="11.00">solve/6</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>adaptive_loop/25</title>
 <polygon fill="cornsilk" stroke="black" points="122.4,-443 17.6,-443 17.6,-407 122.4,-407 122.4,-443"/>
 <text xml:space="preserve" text-anchor="start" x="25.6" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L71">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L71">
 <text xml:space="preserve" text-anchor="start" x="28.1" y="-426.53" font-family="Monospace" font-size="11.00">adaptive_loop/25</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- solve/6&#45;&gt;adaptive_loop/25 -->
 <g id="edge1" class="edge">
 <title>solve/6&#45;&gt;adaptive_loop/25</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="calls">
 <path fill="none" stroke="black" d="M402.67,-531.98C345.05,-513.62 212.93,-471.53 133.62,-446.27"/>
 <polygon fill="black" stroke="black" points="134.83,-442.98 124.24,-443.28 132.7,-449.65 134.83,-442.98"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L44">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L44">
 <text xml:space="preserve" text-anchor="start" x="261.32" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- solve/6&#45;&gt;list::reverse/2 -->
 <g id="edge14" class="edge">
 <title>solve/6&#45;&gt;list::reverse/2</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="calls">
 <path fill="none" stroke="black" d="M402.67,-527.81C360.91,-508.36 282.31,-471.77 231.6,-448.16"/>
 <polygon fill="black" stroke="black" points="233.14,-445.02 222.6,-443.97 230.19,-451.36 233.14,-445.02"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L44">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L44">
 <text xml:space="preserve" text-anchor="start" x="314.91" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -106,12 +106,12 @@
 <!-- solve/6&#45;&gt;^^check_options/1 -->
 <g id="edge6" class="edge">
 <title>solve/6&#45;&gt;^^check_options/1</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="calls">
 <path fill="none" stroke="black" d="M411.26,-523.53C389.37,-504.17 353.89,-472.79 329.11,-450.86"/>
 <polygon fill="black" stroke="black" points="331.45,-448.26 321.64,-444.26 326.81,-453.5 331.45,-448.26"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L44">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L44">
 <text xml:space="preserve" text-anchor="start" x="369.9" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -130,12 +130,12 @@
 <!-- solve/6&#45;&gt;^^merge_options/2 -->
 <g id="edge7" class="edge">
 <title>solve/6&#45;&gt;^^merge_options/2</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="calls">
 <path fill="none" stroke="black" d="M431,-523.53C431,-505.28 431,-476.33 431,-454.7"/>
 <polygon fill="black" stroke="black" points="434.5,-454.77 431,-444.77 427.5,-454.77 434.5,-454.77"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L44">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L44">
 <text xml:space="preserve" text-anchor="start" x="431" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -154,12 +154,12 @@
 <!-- solve/6&#45;&gt;^^option/2 -->
 <g id="edge8" class="edge">
 <title>solve/6&#45;&gt;^^option/2</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="calls">
 <path fill="none" stroke="black" d="M447.71,-523.53C466.06,-504.34 495.72,-473.33 516.66,-451.44"/>
 <polygon fill="black" stroke="black" points="519.07,-453.99 523.45,-444.35 514.01,-449.15 519.07,-453.99"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L44">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L44">
 <text xml:space="preserve" text-anchor="start" x="489.3" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -178,12 +178,12 @@
 <!-- solve/6&#45;&gt;^^check_initial_value/3 -->
 <g id="edge9" class="edge">
 <title>solve/6&#45;&gt;^^check_initial_value/3</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="calls">
 <path fill="none" stroke="black" d="M459.2,-526.9C498.35,-507.33 569.57,-471.72 616.07,-448.46"/>
 <polygon fill="black" stroke="black" points="617.44,-451.69 624.82,-444.09 614.31,-445.43 617.44,-451.69"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L44">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L44">
 <text xml:space="preserve" text-anchor="start" x="552.9" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -202,12 +202,12 @@
 <!-- solve/6&#45;&gt;^^evaluate_derivative/3 -->
 <g id="edge10" class="edge">
 <title>solve/6&#45;&gt;^^evaluate_derivative/3</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="calls">
 <path fill="none" stroke="black" d="M458.99,-541.89C521.17,-542.14 670.47,-532.88 736,-443 791.77,-366.5 689.28,-263.3 634.82,-216.68"/>
 <polygon fill="black" stroke="black" points="637.27,-214.17 627.36,-210.41 632.76,-219.53 637.27,-214.17"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L44">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L44">
 <text xml:space="preserve" text-anchor="start" x="749.22" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -217,7 +217,7 @@
 <title>rk45_step/9</title>
 <polygon fill="cornsilk" stroke="black" points="138.24,-326 59.76,-326 59.76,-290 138.24,-290 138.24,-326"/>
 <text xml:space="preserve" text-anchor="start" x="67.76" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L102">
+<g id="a_node3_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L102">
 <text xml:space="preserve" text-anchor="start" x="70.26" y="-309.53" font-family="Monospace" font-size="11.00">rk45_step/9</text>
 </a>
 </g>
@@ -229,12 +229,12 @@
 <!-- adaptive_loop/25&#45;&gt;rk45_step/9 -->
 <g id="edge2" class="edge">
 <title>adaptive_loop/25&#45;&gt;rk45_step/9</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L77" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L77" xlink:title="calls">
 <path fill="none" stroke="black" d="M74.4,-406.53C79.03,-388.19 86.38,-359.06 91.84,-337.4"/>
 <polygon fill="black" stroke="black" points="95.23,-338.27 94.28,-327.72 88.44,-336.56 95.23,-338.27"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L77" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L77">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L77" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L77">
 <text xml:space="preserve" text-anchor="start" x="85.37" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -244,7 +244,7 @@
 <title>step_factor/3</title>
 <polygon fill="cornsilk" stroke="black" points="241.3,-326 156.7,-326 156.7,-290 241.3,-290 241.3,-326"/>
 <text xml:space="preserve" text-anchor="start" x="164.7" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L137">
+<g id="a_node6_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L137">
 <text xml:space="preserve" text-anchor="start" x="167.2" y="-309.53" font-family="Monospace" font-size="11.00">step_factor/3</text>
 </a>
 </g>
@@ -256,12 +256,12 @@
 <!-- adaptive_loop/25&#45;&gt;step_factor/3 -->
 <g id="edge3" class="edge">
 <title>adaptive_loop/25&#45;&gt;step_factor/3</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L77" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L77" xlink:title="calls">
 <path fill="none" stroke="black" d="M89.59,-406.53C111.31,-387.17 146.52,-355.79 171.11,-333.86"/>
 <polygon fill="black" stroke="black" points="173.38,-336.53 178.52,-327.26 168.72,-331.3 173.38,-336.53"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L77" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L77">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L77" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L77">
 <text xml:space="preserve" text-anchor="start" x="138.37" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -271,7 +271,7 @@
 <title>stage/4</title>
 <polygon fill="cornsilk" stroke="black" points="127.54,-209 70.46,-209 70.46,-173 127.54,-173 127.54,-209"/>
 <text xml:space="preserve" text-anchor="start" x="78.46" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L123" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L123">
+<g id="a_node4_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L123" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L123">
 <text xml:space="preserve" text-anchor="start" x="80.96" y="-192.53" font-family="Monospace" font-size="11.00">stage/4</text>
 </a>
 </g>
@@ -283,12 +283,12 @@
 <!-- rk45_step/9&#45;&gt;stage/4 -->
 <g id="edge4" class="edge">
 <title>rk45_step/9&#45;&gt;stage/4</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L102" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L102" xlink:title="calls">
 <path fill="none" stroke="black" d="M99,-289.53C99,-271.28 99,-242.33 99,-220.7"/>
 <polygon fill="black" stroke="black" points="102.5,-220.77 99,-210.77 95.5,-220.77 102.5,-220.77"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L102">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L102">
 <text xml:space="preserve" text-anchor="start" x="99" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -298,7 +298,7 @@
 <title>error_norm/7</title>
 <polygon fill="cornsilk" stroke="black" points="230.29,-209 145.71,-209 145.71,-173 230.29,-173 230.29,-209"/>
 <text xml:space="preserve" text-anchor="start" x="153.71" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L130">
+<g id="a_node5_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L130">
 <text xml:space="preserve" text-anchor="start" x="156.21" y="-192.53" font-family="Monospace" font-size="11.00">error_norm/7</text>
 </a>
 </g>
@@ -310,12 +310,12 @@
 <!-- rk45_step/9&#45;&gt;error_norm/7 -->
 <g id="edge5" class="edge">
 <title>rk45_step/9&#45;&gt;error_norm/7</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L102" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L102" xlink:title="calls">
 <path fill="none" stroke="black" d="M112.52,-289.53C127.17,-270.6 150.73,-240.16 167.63,-218.32"/>
 <polygon fill="black" stroke="black" points="170.37,-220.5 173.72,-210.45 164.83,-216.22 170.37,-220.5"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L102">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L102">
 <text xml:space="preserve" text-anchor="start" x="146.17" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -323,12 +323,12 @@
 <!-- rk45_step/9&#45;&gt;^^evaluate_derivative/3 -->
 <g id="edge11" class="edge">
 <title>rk45_step/9&#45;&gt;^^evaluate_derivative/3</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L102" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L102" xlink:title="calls">
 <path fill="none" stroke="black" d="M138.72,-292.76C141.84,-291.78 144.97,-290.85 148,-290 278.63,-253.45 433.55,-222.77 525.04,-205.93"/>
 <polygon fill="black" stroke="black" points="525.46,-209.41 534.66,-204.17 524.2,-202.53 525.46,-209.41"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L102">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L102">
 <text xml:space="preserve" text-anchor="start" x="322.16" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -350,12 +350,12 @@
 <!-- stage/4&#45;&gt;linear_algebra::add_scaled_vector/4 -->
 <g id="edge15" class="edge">
 <title>stage/4&#45;&gt;linear_algebra::add_scaled_vector/4</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L125" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L125" xlink:title="calls">
 <path fill="none" stroke="black" d="M101.73,-172.53C104.6,-154.19 109.17,-125.06 112.55,-103.4"/>
 <polygon fill="black" stroke="black" points="115.98,-104.17 114.07,-93.75 109.06,-103.09 115.98,-104.17"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L125">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L125">
 <text xml:space="preserve" text-anchor="start" x="108.54" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -365,7 +365,7 @@
 <title>default_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="869.65,-560 770.35,-560 770.35,-524 869.65,-524 869.65,-560"/>
 <text xml:space="preserve" text-anchor="start" x="778.35" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L144">
+<g id="a_node7_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L144">
 <text xml:space="preserve" text-anchor="start" x="780.86" y="-543.53" font-family="Monospace" font-size="11.00">default_option/1</text>
 </a>
 </g>
@@ -388,12 +388,12 @@
 <!-- default_option/1&#45;&gt;^^default_option/1 -->
 <g id="edge12" class="edge">
 <title>default_option/1&#45;&gt;^^default_option/1</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L151" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L151" xlink:title="calls">
 <path fill="none" stroke="black" d="M820,-523.53C820,-505.28 820,-476.33 820,-454.7"/>
 <polygon fill="black" stroke="black" points="823.5,-454.77 820,-444.77 816.5,-454.77 823.5,-454.77"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L151">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L151">
 <text xml:space="preserve" text-anchor="start" x="820" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -403,7 +403,7 @@
 <title>valid_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="986.44,-560 897.56,-560 897.56,-524 986.44,-524 986.44,-560"/>
 <text xml:space="preserve" text-anchor="start" x="905.56" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L154" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L154">
+<g id="a_node8_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L154" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L154">
 <text xml:space="preserve" text-anchor="start" x="908.06" y="-543.53" font-family="Monospace" font-size="11.00">valid_option/1</text>
 </a>
 </g>
@@ -426,12 +426,12 @@
 <!-- valid_option/1&#45;&gt;^^valid_option/1 -->
 <g id="edge13" class="edge">
 <title>valid_option/1&#45;&gt;^^valid_option/1</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L168" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L168" xlink:title="calls">
 <path fill="none" stroke="black" d="M942,-523.53C942,-505.28 942,-476.33 942,-454.7"/>
 <polygon fill="black" stroke="black" points="945.5,-454.77 942,-444.77 938.5,-454.77 945.5,-454.77"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/numerical_analysis/rk45_ode_solver.lgt#L168">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/numerical_analysis/rk45_ode_solver.lgt#L168">
 <text xml:space="preserve" text-anchor="start" x="942" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>

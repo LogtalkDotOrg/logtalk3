@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 332.36,-140 332.36,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol mcp_server_transport_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;08, 11:30</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;08, 19:54</text>
 <g id="clust1" class="cluster">
 <title>cluster_mcp_server_transport_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="mcp_server_transport_protocol">
 <path fill="snow" stroke="dimgray" d="M22.68,-46C22.68,-46 305.68,-46 305.68,-46 311.68,-46 317.68,-52 317.68,-58 317.68,-58 317.68,-116 317.68,-116 317.68,-122 311.68,-128 305.68,-128 305.68,-128 22.68,-128 22.68,-128 16.68,-128 10.68,-122 10.68,-116 10.68,-116 10.68,-58 10.68,-58 10.68,-52 16.68,-46 22.68,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/mcp_server/mcp_server_transport_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/mcp_server/mcp_server_transport_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/mcp_server/mcp_server_transport_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/mcp_server/mcp_server_transport_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="22.68" y="-112.3" font-family="Monospace" font-size="10.00" fill="dimgray">mcp_server_transport_protocol</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>spec/1</title>
 <polygon fill="springgreen" stroke="black" points="74.68,-92 20.68,-92 20.68,-56 74.68,-56 74.68,-92"/>
 <text xml:space="preserve" text-anchor="start" x="28.97" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/mcp_server/mcp_server_transport_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/mcp_server/mcp_server_transport_protocol.lgt#L31">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/mcp_server/mcp_server_transport_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/mcp_server/mcp_server_transport_protocol.lgt#L31">
 <text xml:space="preserve" text-anchor="start" x="31.47" y="-75.53" font-family="Monospace" font-size="11.00">spec/1</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>start/4</title>
 <polygon fill="springgreen" stroke="black" points="146.68,-92 92.68,-92 92.68,-56 146.68,-56 146.68,-92"/>
 <text xml:space="preserve" text-anchor="start" x="101.9" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/mcp_server/mcp_server_transport_protocol.lgt#L38" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/mcp_server/mcp_server_transport_protocol.lgt#L38">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/mcp_server/mcp_server_transport_protocol.lgt#L38" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/mcp_server/mcp_server_transport_protocol.lgt#L38">
 <text xml:space="preserve" text-anchor="start" x="104.4" y="-75.53" font-family="Monospace" font-size="11.00">start/4</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>notify/1</title>
 <polygon fill="springgreen" stroke="black" points="220.91,-92 164.45,-92 164.45,-56 220.91,-56 220.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="172.45" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/mcp_server/mcp_server_transport_protocol.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/mcp_server/mcp_server_transport_protocol.lgt#L48">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/mcp_server/mcp_server_transport_protocol.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/mcp_server/mcp_server_transport_protocol.lgt#L48">
 <text xml:space="preserve" text-anchor="start" x="174.95" y="-75.53" font-family="Monospace" font-size="11.00">notify/1</text>
 </a>
 </g>
@@ -71,7 +71,7 @@
 <title>cleanup/0</title>
 <polygon fill="springgreen" stroke="black" points="308.03,-92 239.33,-92 239.33,-56 308.03,-56 308.03,-92"/>
 <text xml:space="preserve" text-anchor="start" x="247.33" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/mcp_server/mcp_server_transport_protocol.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/83eb984fa6ee4f7b60f1d5cb1cfdce6a90cb8642/library/mcp_server/mcp_server_transport_protocol.lgt#L55">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/mcp_server/mcp_server_transport_protocol.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/mcp_server/mcp_server_transport_protocol.lgt#L55">
 <text xml:space="preserve" text-anchor="start" x="249.83" y="-75.53" font-family="Monospace" font-size="11.00">cleanup/0</text>
 </a>
 </g>
