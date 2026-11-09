@@ -280,6 +280,7 @@ sed '1,19d' ../../../library/message_pack/NOTES.md | pandoc -f gfm -t rst -o lib
 sed '1,19d' ../../../library/meta/NOTES.md | pandoc -f gfm -t rst -o libraries/meta.rst
 sed '1,19d' ../../../library/meta_compiler/NOTES.md | pandoc -f gfm -t rst -o libraries/meta_compiler.rst
 sed '1,19d' ../../../library/mime_types/NOTES.md | pandoc -f gfm -t rst -o libraries/mime_types.rst
+sed '1,19d' ../../../library/minizinc/NOTES.md | pandoc -f gfm -t rst -o libraries/minizinc.rst
 sed '1,19d' ../../../library/mlp_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/mlp_classifier.rst
 sed '1,19d' ../../../library/modified_z_score_anomaly_detector/NOTES.md | pandoc -f gfm -t rst -o libraries/modified_z_score_anomaly_detector.rst
 sed '1,19d' ../../../library/mqtt/NOTES.md | pandoc -f gfm -t rst -o libraries/mqtt.rst

@@ -804,6 +804,11 @@ Objects
       mime_types <mime_types_0>
       minheap <minheap_0>
       minimal_output <minimal_output_0>
+      minizinc <minizinc_0>
+      minizinc_expansion <minizinc_expansion_0>
+      minizinc_output <minizinc_output_0>
+      minizinc_process <minizinc_process_0>
+      minizinc_program <minizinc_program_0>
       mlp_classifier <mlp_classifier_0>
       modified_z_score_anomaly_detector <modified_z_score_anomaly_detector_0>
       modules_diagram_support <modules_diagram_support_0>
@@ -1713,6 +1718,11 @@ Objects
    * :doc:`mime_types <mime_types_0>`
    * :doc:`minheap <minheap_0>`
    * :doc:`minimal_output <minimal_output_0>`
+   * :doc:`minizinc <minizinc_0>`
+   * :doc:`minizinc_expansion <minizinc_expansion_0>`
+   * :doc:`minizinc_output <minizinc_output_0>`
+   * :doc:`minizinc_process <minizinc_process_0>`
+   * :doc:`minizinc_program <minizinc_program_0>`
    * :doc:`mlp_classifier <mlp_classifier_0>`
    * :doc:`modified_z_score_anomaly_detector <modified_z_score_anomaly_detector_0>`
    * :doc:`modules_diagram_support <modules_diagram_support_0>`
@@ -2252,6 +2262,8 @@ Protocols
       mcp_ui_protocol <mcp_ui_protocol_0>
       metagol_example_protocol <metagol_example_protocol_0>
       metap <metap_0>
+      minizinc_problem_protocol <minizinc_problem_protocol_0>
+      minizinc_protocol <minizinc_protocol_0>
       monitoring <monitoring_0>
       monitorp <monitorp_0>
       multiplayer_ranking_dataset_protocol <multiplayer_ranking_dataset_protocol_0>
@@ -2481,6 +2493,8 @@ Protocols
    * :doc:`mcp_ui_protocol <mcp_ui_protocol_0>`
    * :doc:`metagol_example_protocol <metagol_example_protocol_0>`
    * :doc:`metap <metap_0>`
+   * :doc:`minizinc_problem_protocol <minizinc_problem_protocol_0>`
+   * :doc:`minizinc_protocol <minizinc_protocol_0>`
    * :doc:`monitoring <monitoring_0>`
    * :doc:`monitorp <monitorp_0>`
    * :doc:`multiplayer_ranking_dataset_protocol <multiplayer_ranking_dataset_protocol_0>`

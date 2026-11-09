@@ -1,0 +1,138 @@
+.. index:: single: minizinc_program
+.. _minizinc_program/0:
+
+.. rst-class:: right
+
+**object**
+
+``minizinc_program``
+====================
+
+Canonical MiniZinc statement validation and source generation.
+
+| **Availability:** 
+|    ``logtalk_load(minizinc(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-09
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: serialize/2
+.. _minizinc_program/0::serialize/2:
+
+``serialize/2``
+^^^^^^^^^^^^^^^
+
+Serializes ground canonical MiniZinc statements to character codes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serialize(Statements,Codes)``
+| **Mode and number of proofs:**
+|    ``serialize(+list(compound),-list(integer))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Statements`` is a variable:
+|        ``instantiation_error``
+|    An element ``Statement`` of the list ``Statements`` is a variable:
+|        ``instantiation_error``
+|    ``Statements`` is neither a variable nor a list:
+|        ``type_error(list,Statements)``
+|    An element ``Statement`` of the list ``Statements`` is not a valid statement:
+|        ``domain_error(minizinc_statement,Statement)``
+
+
+------------
+
+.. index:: serialize/4
+.. _minizinc_program/0::serialize/4:
+
+``serialize/4``
+^^^^^^^^^^^^^^^
+
+Serializes statements with origins and returns ``line(Start, End, Origin)`` source-map entries.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serialize(Statements,Origins,Codes,SourceMap)``
+| **Mode and number of proofs:**
+|    ``serialize(+list(compound),+list,-list(integer),-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Statements`` or ``Origins`` is a variable:
+|        ``instantiation_error``
+|    An element ``Statement`` of the list ``Statements`` is a variable:
+|        ``instantiation_error``
+|    An element ``Origin`` of the list ``Origins`` is a variable:
+|        ``instantiation_error``
+|    ``Statements`` is neither a variable nor a list:
+|        ``type_error(list,Statements)``
+|    ``Origins`` is neither a variable nor a list:
+|        ``type_error(list,Origins)``
+|    An element ``Statement`` of the list ``Statements`` is not a valid statement:
+|        ``domain_error(minizinc_statement,Statement)``
+|    ``Origins`` has an element that is neither ``unknown`` nor a valid ``source(File, Start, End)`` term, or its length differs from ``Statements``:
+|        ``domain_error(minizinc_origins,Origins)``
+
+
+------------
+
+.. index:: valid_identifier/1
+.. _minizinc_program/0::valid_identifier/1:
+
+``valid_identifier/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+True if the argument is a supported, non-reserved MiniZinc identifier atom.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_identifier(Name)``
+| **Mode and number of proofs:**
+|    ``valid_identifier(@term)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

@@ -1,0 +1,144 @@
+.. index:: single: minizinc_process
+.. _minizinc_process/0:
+
+.. rst-class:: right
+
+**object**
+
+``minizinc_process``
+====================
+
+Isolated operating-system shell transport for the MiniZinc CLI.
+
+| **Availability:** 
+|    ``logtalk_load(minizinc(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-09
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`os <os/0>`
+|    :ref:`process <process/0>`
+|    :ref:`reader <reader/0>`
+|    :ref:`type <type/0>`
+|    :ref:`user <user/0>`
+|    :ref:`utf_8 <utf_8/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: quote/3
+.. _minizinc_process/0::quote/3:
+
+``quote/3``
+^^^^^^^^^^^
+
+Quotes an atom as one POSIX shell or Windows PowerShell literal, without interpolation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``quote(Platform,Argument,Quoted)``
+| **Mode and number of proofs:**
+|    ``quote(+atom,+atom,-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Platform`` is a variable:
+|        ``instantiation_error``
+|    ``Argument`` is a variable:
+|        ``instantiation_error``
+|    ``Platform`` is neither a variable nor an atom:
+|        ``type_error(atom,Platform)``
+|    ``Argument`` is neither a variable nor an atom:
+|        ``type_error(atom,Argument)``
+|    ``Platform`` is an atom but neither ``posix`` nor ``windows``:
+|        ``domain_error(minizinc_shell_platform,Platform)``
+|    ``Argument`` is an atom but contains a null character:
+|        ``domain_error(minizinc_shell_argument,Argument)``
+
+
+------------
+
+.. index:: run/8
+.. _minizinc_process/0::run/8:
+
+``run/8``
+^^^^^^^^^
+
+Runs the CLI using an owned directory and separate UTF-8 output files, returning only after cleanup.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run(Executable,Arguments,Source,DataPath,Codes,Diagnostics,RawStatus,NormalizedStatus)``
+| **Mode and number of proofs:**
+|    ``run(+atom,+list(atom),+compound,+atom,-list(integer),-list(integer),-term,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Executable``, ``Arguments``, ``Source``, or ``DataPath`` is a variable:
+|        ``instantiation_error``
+|    An element of the list ``Arguments`` is a variable:
+|        ``instantiation_error``
+|    ``Executable`` is neither a variable nor an atom:
+|        ``type_error(atom,Executable)``
+|    ``Arguments`` is neither a variable nor a list:
+|        ``type_error(list,Arguments)``
+|    An element of the list ``Arguments`` is neither a variable nor an atom:
+|        ``type_error(atom,Argument)``
+|    ``DataPath`` is neither ``none`` nor an atom:
+|        ``type_error(atom,DataPath)``
+|    ``Source`` is neither ``file(Path)`` nor ``codes(Codes)``:
+|        ``domain_error(minizinc_process_source,Source)``
+|    An argument contains a null character:
+|        ``domain_error(minizinc_shell_argument,Argument)``
+|    A launcher dependency does not exist:
+|        ``existence_error(command,Command)``
+|    A source or capture file does not exist:
+|        ``existence_error(source_sink,Path)``
+|    A source or capture file cannot be opened:
+|        ``permission_error(open,source_sink,Path)``
+|    An owned directory cannot be found during cleanup:
+|        ``existence_error(directory,Directory)``
+|    An owned file or directory cannot be removed:
+|        ``permission_error(delete,source_sink,Path)``
+|    A character sequence is not valid UTF-8:
+|        ``representation_error(utf_8)``
+|    A launcher operation fails:
+|        ``minizinc_transport(Stage,Status,Details)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

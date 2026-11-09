@@ -2,6 +2,8 @@
 
 .. _library_clingo:
 
+.. _library_clingo:
+
 ``clingo``
 ==========
 

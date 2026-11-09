@@ -1,0 +1,91 @@
+.. index:: single: minizinc_output
+.. _minizinc_output/0:
+
+.. rst-class:: right
+
+**object**
+
+``minizinc_output``
+===================
+
+Decoding of the MiniZinc ``--json-stream`` message sequence into a collected result.
+
+| **Availability:** 
+|    ``logtalk_load(minizinc(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-09
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`json(ObjectRepresentation,PairRepresentation,StringRepresentation) <json/3>`
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: decode/5
+.. _minizinc_output/0::decode/5:
+
+``decode/5``
+^^^^^^^^^^^^
+
+Decodes CLI JSON-stream output and process metadata into a collected ``minizinc_result(Status, Solutions, Properties)`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode(Codes,RawStatus,NormalizedStatus,Diagnostics,Result)``
+| **Mode and number of proofs:**
+|    ``decode(+list(integer),+term,+compound,+list(integer),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Codes``, ``RawStatus``, ``NormalizedStatus``, or ``Diagnostics`` is a variable:
+|        ``instantiation_error``
+|    ``Codes`` is neither a variable nor a list of character codes:
+|        ``type_error(codes,Codes)``
+|    ``Diagnostics`` is neither a variable nor a list of character codes:
+|        ``type_error(codes,Diagnostics)``
+|    A ``--json-stream`` line is not valid JSON:
+|        ``domain_error(minizinc_output,json-Line)``
+|    A JSON message field has an invalid type or value:
+|        ``domain_error(minizinc_output,Field-Value)``
+|    A JSON message is missing a required field:
+|        ``domain_error(minizinc_output,Field-missing)``
+|    ``NormalizedStatus`` is not ``exit(0)`` and no JSON-stream message was produced:
+|        ``domain_error(minizinc_process_status,NormalizedStatus)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

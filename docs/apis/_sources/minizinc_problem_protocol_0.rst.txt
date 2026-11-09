@@ -1,0 +1,78 @@
+.. index:: single: minizinc_problem_protocol
+.. _minizinc_problem_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``minizinc_problem_protocol``
+=============================
+
+Protocol for ordered, ground MiniZinc statement providers.
+
+| **Availability:** 
+|    ``logtalk_load(minizinc(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-09
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: minizinc_statement/2
+.. _minizinc_problem_protocol/0::minizinc_statement/2:
+
+``minizinc_statement/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Enumerates, by backtracking, canonical MiniZinc statements in source order and their origins.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``minizinc_statement(Statement,Origin)``
+| **Mode and number of proofs:**
+|    ``minizinc_statement(-compound,-term)`` - ``zero_or_more``
+
+| **Remarks:**
+
+    - Origin: Either ``source(File, Start, End)`` or ``unknown``.
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

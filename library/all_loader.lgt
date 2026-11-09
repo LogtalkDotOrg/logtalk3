@@ -273,6 +273,7 @@
 		mrmr_feature_selector(loader),
 		lasso_feature_selector(loader),
 		asp(loader),
+		minizinc(loader),
 		sat(loader),
 		smt(loader),
 		uri_template(loader),

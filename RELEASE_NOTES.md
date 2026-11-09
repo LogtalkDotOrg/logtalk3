@@ -70,6 +70,11 @@ problems as Logtalk objects, invoking the Clingo (default) or zetesis
 command-line solver through the `process` library, and inspecting collected
 models and diagnostics.
 
+* ADDED: New `minizinc` library for representing constraint satisfaction and
+optimization problems as Logtalk objects, invoking the MiniZinc command-line
+tool with a selectable backend solver through the `process` library, and
+inspecting collected results.
+
 * ADDED: New `sat` library for representing SAT problems as Logtalk
 objects, invoking the Kissat (default), CaDiCaL, Glucose, or Z3 command-line
 solvers through the `process` library, and inspecting collected results.

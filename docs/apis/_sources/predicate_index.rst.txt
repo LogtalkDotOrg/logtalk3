@@ -6025,10 +6025,11 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
    * :ref:`jwt <jwt/0::decode/5>`
    * :ref:`jwt_compact <jwt_compact/0::decode/5>`
+   * :ref:`minizinc_output <minizinc_output/0::decode/5>`
 
 .. only:: latex
 
-   * ``decode/5`` - :ref:`jwt <jwt/0::decode/5>`, :ref:`jwt_compact <jwt_compact/0::decode/5>`
+   * ``decode/5`` - :ref:`jwt <jwt/0::decode/5>`, :ref:`jwt_compact <jwt_compact/0::decode/5>`, :ref:`minizinc_output <minizinc_output/0::decode/5>`
 
 .. only:: not latex
 
@@ -19210,6 +19211,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``minizinc_statement/2``
+   ------------------------
+
+   * :ref:`minizinc_problem_protocol <minizinc_problem_protocol/0::minizinc_statement/2>`
+
+.. only:: latex
+
+   * ``minizinc_statement/2`` - :ref:`minizinc_problem_protocol <minizinc_problem_protocol/0::minizinc_statement/2>`
+
+.. only:: not latex
+
    ``minkowski_distance/4``
    ------------------------
 
@@ -19225,10 +19237,11 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    -----------
 
    * :ref:`asp_protocol <asp_protocol/0::model/2>`
+   * :ref:`minizinc_protocol <minizinc_protocol/0::model/2>`
 
 .. only:: latex
 
-   * ``model/2`` - :ref:`asp_protocol <asp_protocol/0::model/2>`
+   * ``model/2`` - :ref:`asp_protocol <asp_protocol/0::model/2>`, :ref:`minizinc_protocol <minizinc_protocol/0::model/2>`
 
 .. only:: not latex
 
@@ -24748,12 +24761,13 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    -------------------
 
    * :ref:`asp_protocol <asp_protocol/0::print_program/1>`
+   * :ref:`minizinc_protocol <minizinc_protocol/0::print_program/1>`
    * :ref:`sat_protocol <sat_protocol/0::print_program/1>`
    * :ref:`smt_protocol <smt_protocol/0::print_program/1>`
 
 .. only:: latex
 
-   * ``print_program/1`` - :ref:`asp_protocol <asp_protocol/0::print_program/1>`, :ref:`sat_protocol <sat_protocol/0::print_program/1>`, :ref:`smt_protocol <smt_protocol/0::print_program/1>`
+   * ``print_program/1`` - :ref:`asp_protocol <asp_protocol/0::print_program/1>`, :ref:`minizinc_protocol <minizinc_protocol/0::print_program/1>`, :ref:`sat_protocol <sat_protocol/0::print_program/1>`, :ref:`smt_protocol <smt_protocol/0::print_program/1>`
 
 .. only:: not latex
 
@@ -24794,12 +24808,13 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    ------------------
 
    * :ref:`asp_protocol <asp_protocol/0::print_result/1>`
+   * :ref:`minizinc_protocol <minizinc_protocol/0::print_result/1>`
    * :ref:`sat_protocol <sat_protocol/0::print_result/1>`
    * :ref:`smt_protocol <smt_protocol/0::print_result/1>`
 
 .. only:: latex
 
-   * ``print_result/1`` - :ref:`asp_protocol <asp_protocol/0::print_result/1>`, :ref:`sat_protocol <sat_protocol/0::print_result/1>`, :ref:`smt_protocol <smt_protocol/0::print_result/1>`
+   * ``print_result/1`` - :ref:`asp_protocol <asp_protocol/0::print_result/1>`, :ref:`minizinc_protocol <minizinc_protocol/0::print_result/1>`, :ref:`sat_protocol <sat_protocol/0::print_result/1>`, :ref:`smt_protocol <smt_protocol/0::print_result/1>`
 
 .. only:: not latex
 
@@ -24963,12 +24978,13 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    -------------
 
    * :ref:`asp_protocol <asp_protocol/0::program/1>`
+   * :ref:`minizinc_protocol <minizinc_protocol/0::program/1>`
    * :ref:`sat_protocol <sat_protocol/0::program/1>`
    * :ref:`smt_protocol <smt_protocol/0::program/1>`
 
 .. only:: latex
 
-   * ``program/1`` - :ref:`asp_protocol <asp_protocol/0::program/1>`, :ref:`sat_protocol <sat_protocol/0::program/1>`, :ref:`smt_protocol <smt_protocol/0::program/1>`
+   * ``program/1`` - :ref:`asp_protocol <asp_protocol/0::program/1>`, :ref:`minizinc_protocol <minizinc_protocol/0::program/1>`, :ref:`sat_protocol <sat_protocol/0::program/1>`, :ref:`smt_protocol <smt_protocol/0::program/1>`
 
 .. only:: not latex
 
@@ -24976,12 +24992,13 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    -------------
 
    * :ref:`asp_protocol <asp_protocol/0::program/2>`
+   * :ref:`minizinc_protocol <minizinc_protocol/0::program/2>`
    * :ref:`sat_protocol <sat_protocol/0::program/2>`
    * :ref:`smt_protocol <smt_protocol/0::program/2>`
 
 .. only:: latex
 
-   * ``program/2`` - :ref:`asp_protocol <asp_protocol/0::program/2>`, :ref:`sat_protocol <sat_protocol/0::program/2>`, :ref:`smt_protocol <smt_protocol/0::program/2>`
+   * ``program/2`` - :ref:`asp_protocol <asp_protocol/0::program/2>`, :ref:`minizinc_protocol <minizinc_protocol/0::program/2>`, :ref:`sat_protocol <sat_protocol/0::program/2>`, :ref:`smt_protocol <smt_protocol/0::program/2>`
 
 .. only:: not latex
 
@@ -25724,12 +25741,13 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    -----------
 
    * :ref:`asp_process <asp_process/0::quote/3>`
+   * :ref:`minizinc_process <minizinc_process/0::quote/3>`
    * :ref:`sat_process <sat_process/0::quote/3>`
    * :ref:`smt_process <smt_process/0::quote/3>`
 
 .. only:: latex
 
-   * ``quote/3`` - :ref:`asp_process <asp_process/0::quote/3>`, :ref:`sat_process <sat_process/0::quote/3>`, :ref:`smt_process <smt_process/0::quote/3>`
+   * ``quote/3`` - :ref:`asp_process <asp_process/0::quote/3>`, :ref:`minizinc_process <minizinc_process/0::quote/3>`, :ref:`sat_process <sat_process/0::quote/3>`, :ref:`smt_process <smt_process/0::quote/3>`
 
 .. only:: not latex
 
@@ -28201,12 +28219,13 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    ---------------------
 
    * :ref:`asp_protocol <asp_protocol/0::result_property/2>`
+   * :ref:`minizinc_protocol <minizinc_protocol/0::result_property/2>`
    * :ref:`sat_protocol <sat_protocol/0::result_property/2>`
    * :ref:`smt_protocol <smt_protocol/0::result_property/2>`
 
 .. only:: latex
 
-   * ``result_property/2`` - :ref:`asp_protocol <asp_protocol/0::result_property/2>`, :ref:`sat_protocol <sat_protocol/0::result_property/2>`, :ref:`smt_protocol <smt_protocol/0::result_property/2>`
+   * ``result_property/2`` - :ref:`asp_protocol <asp_protocol/0::result_property/2>`, :ref:`minizinc_protocol <minizinc_protocol/0::result_property/2>`, :ref:`sat_protocol <sat_protocol/0::result_property/2>`, :ref:`smt_protocol <smt_protocol/0::result_property/2>`
 
 .. only:: not latex
 
@@ -28710,6 +28729,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``run/7`` - :ref:`asp_process <asp_process/0::run/7>`, :ref:`sat_process <sat_process/0::run/7>`, :ref:`smt_process <smt_process/0::run/7>`
+
+.. only:: not latex
+
+   ``run/8``
+   ---------
+
+   * :ref:`minizinc_process <minizinc_process/0::run/8>`
+
+.. only:: latex
+
+   * ``run/8`` - :ref:`minizinc_process <minizinc_process/0::run/8>`
 
 .. only:: not latex
 
@@ -29850,12 +29880,13 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    ---------------
 
    * :ref:`asp_program <asp_program/0::serialize/2>`
+   * :ref:`minizinc_program <minizinc_program/0::serialize/2>`
    * :ref:`sat_program <sat_program/0::serialize/2>`
    * :ref:`smt_program <smt_program/0::serialize/2>`
 
 .. only:: latex
 
-   * ``serialize/2`` - :ref:`asp_program <asp_program/0::serialize/2>`, :ref:`sat_program <sat_program/0::serialize/2>`, :ref:`smt_program <smt_program/0::serialize/2>`
+   * ``serialize/2`` - :ref:`asp_program <asp_program/0::serialize/2>`, :ref:`minizinc_program <minizinc_program/0::serialize/2>`, :ref:`sat_program <sat_program/0::serialize/2>`, :ref:`smt_program <smt_program/0::serialize/2>`
 
 .. only:: not latex
 
@@ -29863,12 +29894,13 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    ---------------
 
    * :ref:`asp_program <asp_program/0::serialize/4>`
+   * :ref:`minizinc_program <minizinc_program/0::serialize/4>`
    * :ref:`sat_program <sat_program/0::serialize/4>`
    * :ref:`smt_program <smt_program/0::serialize/4>`
 
 .. only:: latex
 
-   * ``serialize/4`` - :ref:`asp_program <asp_program/0::serialize/4>`, :ref:`sat_program <sat_program/0::serialize/4>`, :ref:`smt_program <smt_program/0::serialize/4>`
+   * ``serialize/4`` - :ref:`asp_program <asp_program/0::serialize/4>`, :ref:`minizinc_program <minizinc_program/0::serialize/4>`, :ref:`sat_program <sat_program/0::serialize/4>`, :ref:`smt_program <smt_program/0::serialize/4>`
 
 .. only:: not latex
 
@@ -30771,12 +30803,13 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
    * :ref:`asp_protocol <asp_protocol/0::solve/2>`
    * :ref:`linear_programming_protocol <linear_programming_protocol/0::solve/2>`
+   * :ref:`minizinc_protocol <minizinc_protocol/0::solve/2>`
    * :ref:`sat_protocol <sat_protocol/0::solve/2>`
    * :ref:`smt_protocol <smt_protocol/0::solve/2>`
 
 .. only:: latex
 
-   * ``solve/2`` - :ref:`asp_protocol <asp_protocol/0::solve/2>`, :ref:`linear_programming_protocol <linear_programming_protocol/0::solve/2>`, :ref:`sat_protocol <sat_protocol/0::solve/2>`, :ref:`smt_protocol <smt_protocol/0::solve/2>`
+   * ``solve/2`` - :ref:`asp_protocol <asp_protocol/0::solve/2>`, :ref:`linear_programming_protocol <linear_programming_protocol/0::solve/2>`, :ref:`minizinc_protocol <minizinc_protocol/0::solve/2>`, :ref:`sat_protocol <sat_protocol/0::solve/2>`, :ref:`smt_protocol <smt_protocol/0::solve/2>`
 
 .. only:: not latex
 
@@ -30785,12 +30818,13 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
    * :ref:`asp_protocol <asp_protocol/0::solve/3>`
    * :ref:`linear_programming_protocol <linear_programming_protocol/0::solve/3>`
+   * :ref:`minizinc_protocol <minizinc_protocol/0::solve/3>`
    * :ref:`sat_protocol <sat_protocol/0::solve/3>`
    * :ref:`smt_protocol <smt_protocol/0::solve/3>`
 
 .. only:: latex
 
-   * ``solve/3`` - :ref:`asp_protocol <asp_protocol/0::solve/3>`, :ref:`linear_programming_protocol <linear_programming_protocol/0::solve/3>`, :ref:`sat_protocol <sat_protocol/0::solve/3>`, :ref:`smt_protocol <smt_protocol/0::solve/3>`
+   * ``solve/3`` - :ref:`asp_protocol <asp_protocol/0::solve/3>`, :ref:`linear_programming_protocol <linear_programming_protocol/0::solve/3>`, :ref:`minizinc_protocol <minizinc_protocol/0::solve/3>`, :ref:`sat_protocol <sat_protocol/0::solve/3>`, :ref:`smt_protocol <smt_protocol/0::solve/3>`
 
 .. only:: not latex
 
@@ -34763,10 +34797,11 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    ----------------------
 
    * :ref:`asp_program <asp_program/0::valid_identifier/1>`
+   * :ref:`minizinc_program <minizinc_program/0::valid_identifier/1>`
 
 .. only:: latex
 
-   * ``valid_identifier/1`` - :ref:`asp_program <asp_program/0::valid_identifier/1>`
+   * ``valid_identifier/1`` - :ref:`asp_program <asp_program/0::valid_identifier/1>`, :ref:`minizinc_program <minizinc_program/0::valid_identifier/1>`
 
 .. only:: not latex
 

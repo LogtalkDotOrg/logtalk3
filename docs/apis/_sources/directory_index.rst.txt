@@ -3990,6 +3990,32 @@ To load an entity, always load the library that includes it using the goal ``log
 
    * :doc:`mime_types <mime_types_0>`
 
+``library/minizinc/``
+---------------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      minizinc <minizinc_0>
+      minizinc_expansion <minizinc_expansion_0>
+      minizinc_output <minizinc_output_0>
+      minizinc_problem_protocol <minizinc_problem_protocol_0>
+      minizinc_process <minizinc_process_0>
+      minizinc_program <minizinc_program_0>
+      minizinc_protocol <minizinc_protocol_0>
+
+.. only:: latex
+
+   * :doc:`minizinc <minizinc_0>`
+   * :doc:`minizinc_expansion <minizinc_expansion_0>`
+   * :doc:`minizinc_output <minizinc_output_0>`
+   * :doc:`minizinc_problem_protocol <minizinc_problem_protocol_0>`
+   * :doc:`minizinc_process <minizinc_process_0>`
+   * :doc:`minizinc_program <minizinc_program_0>`
+   * :doc:`minizinc_protocol <minizinc_protocol_0>`
+
 ``library/mlp_classifier/``
 ---------------------------
 

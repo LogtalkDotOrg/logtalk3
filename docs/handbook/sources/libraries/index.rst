@@ -230,6 +230,7 @@ directory in the ``NOTES.md`` file.
    meta
    meta_compiler
    mime_types
+   minizinc
    mlp_classifier
    modified_z_score_anomaly_detector
    mqtt
