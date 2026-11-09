@@ -21,7 +21,7 @@
 
 :- if((
 	current_logtalk_flag(prolog_dialect, Dialect),
-	(Dialect == sicstus; Dialect == swi; Dialect == yap)
+	(Dialect == sicstus; Dialect == shumway; Dialect == swi; Dialect == yap)
 )).
 
 	:- use_module(library(clpfd)).
