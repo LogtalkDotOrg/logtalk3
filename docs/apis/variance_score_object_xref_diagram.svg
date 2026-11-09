@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-257 399,-257 399,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object variance_score</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;09, 17:12</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;09, 22:30</text>
 <g id="clust1" class="cluster">
 <title>cluster_variance_score_object</title>
 <g id="a_clust1"><a xlink:title="variance_score">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 375,-46 375,-46 381,-46 387,-52 387,-58 387,-58 387,-233 387,-233 387,-239 381,-245 375,-245 375,-245 20,-245 20,-245 14,-245 8,-239 8,-233 8,-233 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/feature_selection_protocols/variance_score.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/feature_selection_protocols/variance_score.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/feature_selection_protocols/variance_score.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/feature_selection_protocols/variance_score.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-229.3" font-family="Monospace" font-size="10.00" fill="dimgray">variance_score</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>score/3</title>
 <polygon fill="cornsilk" stroke="black" points="205.54,-209 148.46,-209 148.46,-173 205.54,-173 205.54,-209"/>
 <text xml:space="preserve" text-anchor="start" x="156.46" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/feature_selection_protocols/variance_score.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/feature_selection_protocols/variance_score.lgt#L37">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/feature_selection_protocols/variance_score.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/feature_selection_protocols/variance_score.lgt#L37">
 <text xml:space="preserve" text-anchor="start" x="158.96" y="-192.53" font-family="Monospace" font-size="11.00">score/3</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- score/3&#45;&gt;list::length/2 -->
 <g id="edge3" class="edge">
 <title>score/3&#45;&gt;list::length/2</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/feature_selection_protocols/variance_score.lgt#L37" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/feature_selection_protocols/variance_score.lgt#L37" xlink:title="calls">
 <path fill="none" stroke="black" d="M158.93,-172.53C138.98,-153.26 106.7,-122.06 84.03,-100.15"/>
 <polygon fill="black" stroke="black" points="86.57,-97.74 76.94,-93.31 81.7,-102.77 86.57,-97.74"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/feature_selection_protocols/variance_score.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/feature_selection_protocols/variance_score.lgt#L37">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/feature_selection_protocols/variance_score.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/feature_selection_protocols/variance_score.lgt#L37">
 <text xml:space="preserve" text-anchor="start" x="121.07" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -79,12 +79,12 @@
 <!-- score/3&#45;&gt;^^complete_values/2 -->
 <g id="edge1" class="edge">
 <title>score/3&#45;&gt;^^complete_values/2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/feature_selection_protocols/variance_score.lgt#L37" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/feature_selection_protocols/variance_score.lgt#L37" xlink:title="calls">
 <path fill="none" stroke="black" d="M177,-172.53C177,-154.28 177,-125.33 177,-103.7"/>
 <polygon fill="black" stroke="black" points="180.5,-103.77 177,-93.77 173.5,-103.77 180.5,-103.77"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/feature_selection_protocols/variance_score.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/feature_selection_protocols/variance_score.lgt#L37">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/feature_selection_protocols/variance_score.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/feature_selection_protocols/variance_score.lgt#L37">
 <text xml:space="preserve" text-anchor="start" x="177" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -103,12 +103,12 @@
 <!-- score/3&#45;&gt;^^variance_values/2 -->
 <g id="edge2" class="edge">
 <title>score/3&#45;&gt;^^variance_values/2</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/feature_selection_protocols/variance_score.lgt#L37" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/feature_selection_protocols/variance_score.lgt#L37" xlink:title="calls">
 <path fill="none" stroke="black" d="M198.26,-172.53C222.04,-153 260.72,-121.23 287.43,-99.29"/>
 <polygon fill="black" stroke="black" points="289.32,-102.27 294.83,-93.21 284.88,-96.86 289.32,-102.27"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/feature_selection_protocols/variance_score.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/feature_selection_protocols/variance_score.lgt#L37">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/feature_selection_protocols/variance_score.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/feature_selection_protocols/variance_score.lgt#L37">
 <text xml:space="preserve" text-anchor="start" x="251.2" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>

@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 719,-140 719,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol constrained_optimization_problem_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;09, 17:12</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;09, 22:30</text>
 <g id="clust1" class="cluster">
 <title>cluster_constrained_optimization_problem_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="constrained_optimization_problem_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 695,-46 695,-46 701,-46 707,-52 707,-58 707,-58 707,-116 707,-116 707,-122 701,-128 695,-128 695,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/constrained_optimization/constrained_optimization_problem_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/constrained_optimization/constrained_optimization_problem_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/constrained_optimization/constrained_optimization_problem_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/constrained_optimization/constrained_optimization_problem_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.3" font-family="Monospace" font-size="10.00" fill="dimgray">constrained_optimization_problem_protocol</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>equality_constraints/2</title>
 <polygon fill="springgreen" stroke="black" points="145.7,-92 18.3,-92 18.3,-56 145.7,-56 145.7,-92"/>
 <text xml:space="preserve" text-anchor="start" x="26.3" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/constrained_optimization/constrained_optimization_problem_protocol.lgt#L41" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/constrained_optimization/constrained_optimization_problem_protocol.lgt#L41">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/constrained_optimization/constrained_optimization_problem_protocol.lgt#L41" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/constrained_optimization/constrained_optimization_problem_protocol.lgt#L41">
 <text xml:space="preserve" text-anchor="start" x="28.8" y="-75.53" font-family="Monospace" font-size="11.00">equality_constraints/2</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>equality_jacobian/2</title>
 <polygon fill="springgreen" stroke="black" points="278.59,-92 163.41,-92 163.41,-56 278.59,-56 278.59,-92"/>
 <text xml:space="preserve" text-anchor="start" x="171.41" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/constrained_optimization/constrained_optimization_problem_protocol.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/constrained_optimization/constrained_optimization_problem_protocol.lgt#L48">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/constrained_optimization/constrained_optimization_problem_protocol.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/constrained_optimization/constrained_optimization_problem_protocol.lgt#L48">
 <text xml:space="preserve" text-anchor="start" x="173.91" y="-75.53" font-family="Monospace" font-size="11.00">equality_jacobian/2</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>inequality_constraints/2</title>
 <polygon fill="springgreen" stroke="black" points="432.98,-92 297.02,-92 297.02,-56 432.98,-56 432.98,-92"/>
 <text xml:space="preserve" text-anchor="start" x="305.02" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/constrained_optimization/constrained_optimization_problem_protocol.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/constrained_optimization/constrained_optimization_problem_protocol.lgt#L55">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/constrained_optimization/constrained_optimization_problem_protocol.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/constrained_optimization/constrained_optimization_problem_protocol.lgt#L55">
 <text xml:space="preserve" text-anchor="start" x="307.52" y="-75.53" font-family="Monospace" font-size="11.00">inequality_constraints/2</text>
 </a>
 </g>
@@ -71,7 +71,7 @@
 <title>inequality_jacobian/2</title>
 <polygon fill="springgreen" stroke="black" points="574.87,-92 451.13,-92 451.13,-56 574.87,-56 574.87,-92"/>
 <text xml:space="preserve" text-anchor="start" x="459.13" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/constrained_optimization/constrained_optimization_problem_protocol.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/constrained_optimization/constrained_optimization_problem_protocol.lgt#L62">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/constrained_optimization/constrained_optimization_problem_protocol.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/constrained_optimization/constrained_optimization_problem_protocol.lgt#L62">
 <text xml:space="preserve" text-anchor="start" x="461.63" y="-75.53" font-family="Monospace" font-size="11.00">inequality_jacobian/2</text>
 </a>
 </g>
@@ -85,7 +85,7 @@
 <title>inner_progress/6</title>
 <polygon fill="springgreen" stroke="black" points="696.77,-92 593.23,-92 593.23,-56 696.77,-56 696.77,-92"/>
 <text xml:space="preserve" text-anchor="start" x="601.23" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/constrained_optimization/constrained_optimization_problem_protocol.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/constrained_optimization/constrained_optimization_problem_protocol.lgt#L69">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/constrained_optimization/constrained_optimization_problem_protocol.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/constrained_optimization/constrained_optimization_problem_protocol.lgt#L69">
 <text xml:space="preserve" text-anchor="start" x="603.73" y="-75.53" font-family="Monospace" font-size="11.00">inner_progress/6</text>
 </a>
 </g>

@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-491 494,-491 494,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object smt_expansion</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;09, 17:13</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;09, 22:31</text>
 <g id="clust1" class="cluster">
 <title>cluster_smt_expansion_object</title>
 <g id="a_clust1"><a xlink:title="smt_expansion">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 470,-46 470,-46 476,-46 482,-52 482,-58 482,-58 482,-467 482,-467 482,-473 476,-479 470,-479 470,-479 20,-479 20,-479 14,-479 8,-473 8,-467 8,-467 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-463.3" font-family="Monospace" font-size="10.00" fill="dimgray">smt_expansion</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>term_expansion/2</title>
 <polygon fill="cornsilk" stroke="black" points="283.22,-443 174.78,-443 174.78,-407 283.22,-407 283.22,-443"/>
 <text xml:space="preserve" text-anchor="start" x="182.78" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L36">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="185.28" y="-426.53" font-family="Monospace" font-size="11.00">term_expansion/2</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>structural_directive/1</title>
 <polygon fill="cornsilk" stroke="black" points="140.24,-326 17.76,-326 17.76,-290 140.24,-290 140.24,-326"/>
 <text xml:space="preserve" text-anchor="start" x="25.76" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L47">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L47">
 <text xml:space="preserve" text-anchor="start" x="28.26" y="-309.53" font-family="Monospace" font-size="11.00">structural_directive/1</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- term_expansion/2&#45;&gt;structural_directive/1 -->
 <g id="edge1" class="edge">
 <title>term_expansion/2&#45;&gt;structural_directive/1</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L36" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L36" xlink:title="calls">
 <path fill="none" stroke="black" d="M206.22,-406.53C180.63,-386.92 138.94,-354.96 110.31,-333"/>
 <polygon fill="black" stroke="black" points="112.77,-330.48 102.71,-327.17 108.51,-336.04 112.77,-330.48"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L36">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="158.5" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>origin/2</title>
 <polygon fill="cornsilk" stroke="black" points="215.54,-326 158.46,-326 158.46,-290 215.54,-290 215.54,-326"/>
 <text xml:space="preserve" text-anchor="start" x="166.46" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L51">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L51">
 <text xml:space="preserve" text-anchor="start" x="168.96" y="-309.53" font-family="Monospace" font-size="11.00">origin/2</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- term_expansion/2&#45;&gt;origin/2 -->
 <g id="edge3" class="edge">
 <title>term_expansion/2&#45;&gt;origin/2</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L36" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L36" xlink:title="calls">
 <path fill="none" stroke="black" d="M222.62,-406.53C215.86,-388.02 205.08,-358.52 197.15,-336.8"/>
 <polygon fill="black" stroke="black" points="200.54,-335.87 193.82,-327.68 193.96,-338.27 200.54,-335.87"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L36">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="209.26" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -97,7 +97,7 @@
 <title>statement/2</title>
 <polygon fill="cornsilk" stroke="black" points="312.24,-326 233.76,-326 233.76,-290 312.24,-290 312.24,-326"/>
 <text xml:space="preserve" text-anchor="start" x="241.76" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L60">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="244.26" y="-309.53" font-family="Monospace" font-size="11.00">statement/2</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- term_expansion/2&#45;&gt;statement/2 -->
 <g id="edge2" class="edge">
 <title>term_expansion/2&#45;&gt;statement/2</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L36" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L36" xlink:title="calls">
 <path fill="none" stroke="black" d="M235.68,-406.53C242.77,-388.02 254.06,-358.52 262.36,-336.8"/>
 <polygon fill="black" stroke="black" points="265.55,-338.26 265.86,-327.67 259.02,-335.76 265.55,-338.26"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L36">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="252.32" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -136,12 +136,12 @@
 <!-- term_expansion/2&#45;&gt;smt_program::serialize/2 -->
 <g id="edge5" class="edge">
 <title>term_expansion/2&#45;&gt;smt_program::serialize/2</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L36" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L36" xlink:title="calls">
 <path fill="none" stroke="black" d="M255.12,-406.53C284.63,-386.8 332.81,-354.59 365.67,-332.62"/>
 <polygon fill="black" stroke="black" points="367.29,-335.75 373.66,-327.28 363.4,-329.93 367.29,-335.75"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L36">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="320.16" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -151,7 +151,7 @@
 <title>normalize_text/2</title>
 <polygon fill="cornsilk" stroke="black" points="323.85,-209 222.15,-209 222.15,-173 323.85,-173 323.85,-209"/>
 <text xml:space="preserve" text-anchor="start" x="230.15" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L75">
+<g id="a_node5_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L75">
 <text xml:space="preserve" text-anchor="start" x="232.65" y="-192.53" font-family="Monospace" font-size="11.00">normalize_text/2</text>
 </a>
 </g>
@@ -163,12 +163,12 @@
 <!-- statement/2&#45;&gt;normalize_text/2 -->
 <g id="edge4" class="edge">
 <title>statement/2&#45;&gt;normalize_text/2</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L60" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L60" xlink:title="calls">
 <path fill="none" stroke="black" d="M273,-289.53C273,-271.28 273,-242.33 273,-220.7"/>
 <polygon fill="black" stroke="black" points="276.5,-220.77 273,-210.77 269.5,-220.77 276.5,-220.77"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L60">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="273" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -190,12 +190,12 @@
 <!-- normalize_text/2&#45;&gt;type::valid/2 -->
 <g id="edge6" class="edge">
 <title>normalize_text/2&#45;&gt;type::valid/2</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L75" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L75" xlink:title="calls">
 <path fill="none" stroke="black" d="M273,-172.53C273,-154.28 273,-125.33 273,-103.7"/>
 <polygon fill="black" stroke="black" points="276.5,-103.77 273,-93.77 269.5,-103.77 276.5,-103.77"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/smt/smt_expansion.lgt#L75">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/smt/smt_expansion.lgt#L75">
 <text xml:space="preserve" text-anchor="start" x="273" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>

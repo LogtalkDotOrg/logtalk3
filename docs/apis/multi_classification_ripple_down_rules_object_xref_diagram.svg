@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-959 1172,-959 1172,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object multi_classification_ripple_down_rules</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;09, 17:13</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;09, 22:30</text>
 <g id="clust1" class="cluster">
 <title>cluster_multi_classification_ripple_down_rules_object</title>
 <g id="a_clust1"><a xlink:title="multi_classification_ripple_down_rules">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1148,-46 1148,-46 1154,-46 1160,-52 1160,-58 1160,-58 1160,-935 1160,-935 1160,-941 1154,-947 1148,-947 1148,-947 20,-947 20,-947 14,-947 8,-941 8,-935 8,-935 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-931.3" font-family="Monospace" font-size="10.00" fill="dimgray">multi_classification_ripple_down_rules</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>classify/4</title>
 <polygon fill="cornsilk" stroke="black" points="692.12,-794 625.88,-794 625.88,-758 692.12,-758 692.12,-794"/>
 <text xml:space="preserve" text-anchor="start" x="633.88" y="-778.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L54">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L54">
 <text xml:space="preserve" text-anchor="start" x="636.38" y="-777.53" font-family="Monospace" font-size="11.00">classify/4</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>classify_with_context/5</title>
 <polygon fill="cornsilk" stroke="black" points="725.75,-677 592.25,-677 592.25,-641 725.75,-641 725.75,-677"/>
 <text xml:space="preserve" text-anchor="start" x="600.25" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L57">
+<g id="a_node7_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="602.75" y="-660.53" font-family="Monospace" font-size="11.00">classify_with_context/5</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- classify/4&#45;&gt;classify_with_context/5 -->
 <g id="edge3" class="edge">
 <title>classify/4&#45;&gt;classify_with_context/5</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L54" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L54" xlink:title="calls">
 <path fill="none" stroke="black" d="M659,-757.53C659,-739.28 659,-710.33 659,-688.7"/>
 <polygon fill="black" stroke="black" points="662.5,-688.77 659,-678.77 655.5,-688.77 662.5,-688.77"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L54">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L54">
 <text xml:space="preserve" text-anchor="start" x="659" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>new/1</title>
 <polygon fill="cornsilk" stroke="black" points="97,-911 43,-911 43,-875 97,-875 97,-911"/>
 <text xml:space="preserve" text-anchor="start" x="52.82" y="-895.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L37">
+<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L37">
 <text xml:space="preserve" text-anchor="start" x="55.32" y="-894.53" font-family="Monospace" font-size="11.00">new/1</text>
 </a>
 </g>
@@ -84,7 +84,7 @@
 <title>new/2</title>
 <polygon fill="cornsilk" stroke="black" points="97,-794 43,-794 43,-758 97,-758 97,-794"/>
 <text xml:space="preserve" text-anchor="start" x="52.82" y="-778.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L40">
+<g id="a_node3_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L40">
 <text xml:space="preserve" text-anchor="start" x="55.32" y="-777.53" font-family="Monospace" font-size="11.00">new/2</text>
 </a>
 </g>
@@ -96,12 +96,12 @@
 <!-- new/1&#45;&gt;new/2 -->
 <g id="edge1" class="edge">
 <title>new/1&#45;&gt;new/2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L37" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L37" xlink:title="calls">
 <path fill="none" stroke="black" d="M70,-874.53C70,-856.28 70,-827.33 70,-805.7"/>
 <polygon fill="black" stroke="black" points="73.5,-805.77 70,-795.77 66.5,-805.77 73.5,-805.77"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L37">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L37">
 <text xml:space="preserve" text-anchor="start" x="70" y="-832.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -120,12 +120,12 @@
 <!-- new/2&#45;&gt;^^check_options/1 -->
 <g id="edge36" class="edge">
 <title>new/2&#45;&gt;^^check_options/1</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L40" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L40" xlink:title="calls">
 <path fill="none" stroke="black" d="M97.47,-760.9C135.51,-741.37 204.66,-705.87 249.96,-682.61"/>
 <polygon fill="black" stroke="black" points="251.44,-685.78 258.74,-678.1 248.24,-679.56 251.44,-685.78"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L40">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L40">
 <text xml:space="preserve" text-anchor="start" x="188.72" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -144,12 +144,12 @@
 <!-- new/2&#45;&gt;^^merge_options/2 -->
 <g id="edge37" class="edge">
 <title>new/2&#45;&gt;^^merge_options/2</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L40" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L40" xlink:title="calls">
 <path fill="none" stroke="black" d="M70.76,-757.53C71.55,-739.28 72.81,-710.33 73.75,-688.7"/>
 <polygon fill="black" stroke="black" points="77.25,-688.91 74.18,-678.77 70.25,-688.6 77.25,-688.91"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L40">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L40">
 <text xml:space="preserve" text-anchor="start" x="72.65" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -168,12 +168,12 @@
 <!-- new/2&#45;&gt;^^option/2 -->
 <g id="edge38" class="edge">
 <title>new/2&#45;&gt;^^option/2</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L40" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L40" xlink:title="calls">
 <path fill="none" stroke="black" d="M87.47,-757.53C106.74,-738.26 137.94,-707.06 159.85,-685.15"/>
 <polygon fill="black" stroke="black" points="162.08,-687.87 166.68,-678.32 157.13,-682.92 162.08,-687.87"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L40">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L40">
 <text xml:space="preserve" text-anchor="start" x="130.95" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -183,7 +183,7 @@
 <title>valid_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="922.44,-326 833.56,-326 833.56,-290 922.44,-290 922.44,-326"/>
 <text xml:space="preserve" text-anchor="start" x="841.56" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L45">
+<g id="a_node4_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="844.06" y="-309.53" font-family="Monospace" font-size="11.00">valid_option/1</text>
 </a>
 </g>
@@ -209,12 +209,12 @@
 <!-- valid_option/1&#45;&gt;list::valid/1 -->
 <g id="edge39" class="edge">
 <title>valid_option/1&#45;&gt;list::valid/1</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L45" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M874.51,-289.53C870.84,-271.19 865.01,-242.06 860.68,-220.4"/>
 <polygon fill="black" stroke="black" points="864.14,-219.86 858.75,-210.74 857.28,-221.23 864.14,-219.86"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L45">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="867.19" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -224,7 +224,7 @@
 <title>default_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="277.65,-911 178.35,-911 178.35,-875 277.65,-875 277.65,-911"/>
 <text xml:space="preserve" text-anchor="start" x="186.35" y="-895.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L49">
+<g id="a_node5_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L49">
 <text xml:space="preserve" text-anchor="start" x="188.86" y="-894.53" font-family="Monospace" font-size="11.00">default_option/1</text>
 </a>
 </g>
@@ -238,7 +238,7 @@
 <title>classify/3</title>
 <polygon fill="cornsilk" stroke="black" points="802.12,-911 735.88,-911 735.88,-875 802.12,-875 802.12,-911"/>
 <text xml:space="preserve" text-anchor="start" x="743.88" y="-895.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L51">
+<g id="a_node6_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L51">
 <text xml:space="preserve" text-anchor="start" x="746.38" y="-894.53" font-family="Monospace" font-size="11.00">classify/3</text>
 </a>
 </g>
@@ -250,12 +250,12 @@
 <!-- classify/3&#45;&gt;classify/4 -->
 <g id="edge2" class="edge">
 <title>classify/3&#45;&gt;classify/4</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L51" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L51" xlink:title="calls">
 <path fill="none" stroke="black" d="M752.29,-874.53C733.94,-855.34 704.28,-824.33 683.34,-802.44"/>
 <polygon fill="black" stroke="black" points="685.99,-800.15 676.55,-795.35 680.93,-804.99 685.99,-800.15"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L51">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L51">
 <text xml:space="preserve" text-anchor="start" x="717.3" y="-832.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -265,7 +265,7 @@
 <title>check_model/1</title>
 <polygon fill="cornsilk" stroke="black" points="793.49,-560 698.51,-560 698.51,-524 793.49,-524 793.49,-560"/>
 <text xml:space="preserve" text-anchor="start" x="706.51" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L89">
+<g id="a_node11_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L89">
 <text xml:space="preserve" text-anchor="start" x="709.01" y="-543.53" font-family="Monospace" font-size="11.00">check_model/1</text>
 </a>
 </g>
@@ -277,12 +277,12 @@
 <!-- classify_with_context/5&#45;&gt;check_model/1 -->
 <g id="edge4" class="edge">
 <title>classify_with_context/5&#45;&gt;check_model/1</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L57" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M672.21,-640.53C686.54,-621.6 709.57,-591.16 726.09,-569.32"/>
 <polygon fill="black" stroke="black" points="728.79,-571.55 732.03,-561.46 723.21,-567.32 728.79,-571.55"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L57">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="705.11" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -292,7 +292,7 @@
 <title>evaluate_rules/7</title>
 <polygon fill="cornsilk" stroke="black" points="427.86,-560 326.14,-560 326.14,-524 427.86,-524 427.86,-560"/>
 <text xml:space="preserve" text-anchor="start" x="334.14" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node18_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L152" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L152">
+<g id="a_node18_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L152" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L152">
 <text xml:space="preserve" text-anchor="start" x="336.64" y="-543.53" font-family="Monospace" font-size="11.00">evaluate_rules/7</text>
 </a>
 </g>
@@ -304,12 +304,12 @@
 <!-- classify_with_context/5&#45;&gt;evaluate_rules/7 -->
 <g id="edge5" class="edge">
 <title>classify_with_context/5&#45;&gt;evaluate_rules/7</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L57" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M616.17,-640.53C566.34,-620.21 484.02,-586.64 430.15,-564.67"/>
 <polygon fill="black" stroke="black" points="431.75,-561.55 421.17,-561.01 429.11,-568.03 431.75,-561.55"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L57">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="526.46" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -319,7 +319,7 @@
 <title>revise/6</title>
 <polygon fill="cornsilk" stroke="black" points="417.76,-911 358.24,-911 358.24,-875 417.76,-875 417.76,-911"/>
 <text xml:space="preserve" text-anchor="start" x="366.24" y="-895.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64">
+<g id="a_node8_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64">
 <text xml:space="preserve" text-anchor="start" x="368.74" y="-894.53" font-family="Monospace" font-size="11.00">revise/6</text>
 </a>
 </g>
@@ -331,12 +331,12 @@
 <!-- revise/6&#45;&gt;classify/4 -->
 <g id="edge9" class="edge">
 <title>revise/6&#45;&gt;classify/4</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="calls">
 <path fill="none" stroke="black" d="M418.25,-887.24C456.85,-880.35 524.98,-865.44 578,-839 597.74,-829.15 617.44,-814.21 632.48,-801.46"/>
 <polygon fill="black" stroke="black" points="634.36,-804.46 639.61,-795.26 629.77,-799.18 634.36,-804.46"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64">
 <text xml:space="preserve" text-anchor="start" x="592.53" y="-832.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -344,12 +344,12 @@
 <!-- revise/6&#45;&gt;check_model/1 -->
 <g id="edge6" class="edge">
 <title>revise/6&#45;&gt;check_model/1</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="calls">
 <path fill="none" stroke="black" d="M417.92,-892.63C481.41,-892.16 629.6,-881.26 701,-794 754.22,-728.95 753.26,-622.34 749.2,-571.59"/>
 <polygon fill="black" stroke="black" points="752.7,-571.38 748.3,-561.74 745.72,-572.01 752.7,-571.38"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64">
 <text xml:space="preserve" text-anchor="start" x="739.33" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -359,7 +359,7 @@
 <title>check_correction/1</title>
 <polygon fill="cornsilk" stroke="black" points="228.66,-794 115.34,-794 115.34,-758 228.66,-758 228.66,-794"/>
 <text xml:space="preserve" text-anchor="start" x="123.34" y="-778.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node13_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L107">
+<g id="a_node13_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L107">
 <text xml:space="preserve" text-anchor="start" x="125.84" y="-777.53" font-family="Monospace" font-size="11.00">check_correction/1</text>
 </a>
 </g>
@@ -371,12 +371,12 @@
 <!-- revise/6&#45;&gt;check_correction/1 -->
 <g id="edge7" class="edge">
 <title>revise/6&#45;&gt;check_correction/1</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="calls">
 <path fill="none" stroke="black" d="M357.97,-876.01C320.7,-856.17 256.91,-822.21 214.6,-799.68"/>
 <polygon fill="black" stroke="black" points="216.41,-796.68 205.94,-795.07 213.12,-802.86 216.41,-796.68"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64">
 <text xml:space="preserve" text-anchor="start" x="286.48" y="-832.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -386,7 +386,7 @@
 <title>check_callable/2</title>
 <polygon fill="cornsilk" stroke="black" points="349.17,-794 246.83,-794 246.83,-758 349.17,-758 349.17,-794"/>
 <text xml:space="preserve" text-anchor="start" x="254.83" y="-778.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node14_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L119" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L119">
+<g id="a_node14_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L119" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L119">
 <text xml:space="preserve" text-anchor="start" x="257.34" y="-777.53" font-family="Monospace" font-size="11.00">check_callable/2</text>
 </a>
 </g>
@@ -398,12 +398,12 @@
 <!-- revise/6&#45;&gt;check_callable/2 -->
 <g id="edge8" class="edge">
 <title>revise/6&#45;&gt;check_callable/2</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="calls">
 <path fill="none" stroke="black" d="M373.91,-874.93C365.44,-864.6 354.5,-851.12 345,-839 335.97,-827.49 326.17,-814.63 317.87,-803.61"/>
 <polygon fill="black" stroke="black" points="320.73,-801.59 311.92,-795.7 315.13,-805.8 320.73,-801.59"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64">
 <text xml:space="preserve" text-anchor="start" x="345" y="-832.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -413,7 +413,7 @@
 <title>revise_rules/9</title>
 <polygon fill="cornsilk" stroke="black" points="107.74,-326 18.26,-326 18.26,-290 107.74,-290 107.74,-326"/>
 <text xml:space="preserve" text-anchor="start" x="26.26" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node16_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L135">
+<g id="a_node16_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L135">
 <text xml:space="preserve" text-anchor="start" x="28.76" y="-309.53" font-family="Monospace" font-size="11.00">revise_rules/9</text>
 </a>
 </g>
@@ -425,12 +425,12 @@
 <!-- revise/6&#45;&gt;revise_rules/9 -->
 <g id="edge12" class="edge">
 <title>revise/6&#45;&gt;revise_rules/9</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="calls">
 <path fill="none" stroke="black" d="M386.33,-874.76C380.96,-819.69 364.1,-651.03 358,-641 324.77,-586.33 284.55,-604.92 239,-560 166.98,-488.97 104.89,-385.07 77.68,-336.25"/>
 <polygon fill="black" stroke="black" points="80.89,-334.82 73,-327.75 74.76,-338.2 80.89,-334.82"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64">
 <text xml:space="preserve" text-anchor="start" x="320.88" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -440,7 +440,7 @@
 <title>invoke_condition/3</title>
 <polygon fill="cornsilk" stroke="black" points="418.06,-209 305.94,-209 305.94,-173 418.06,-173 418.06,-209"/>
 <text xml:space="preserve" text-anchor="start" x="313.94" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node23_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L193" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L193">
+<g id="a_node23_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L193" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L193">
 <text xml:space="preserve" text-anchor="start" x="316.44" y="-192.53" font-family="Monospace" font-size="11.00">invoke_condition/3</text>
 </a>
 </g>
@@ -452,12 +452,12 @@
 <!-- revise/6&#45;&gt;invoke_condition/3 -->
 <g id="edge10" class="edge">
 <title>revise/6&#45;&gt;invoke_condition/3</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="calls">
 <path fill="none" stroke="black" d="M388.95,-874.78C390.71,-833.42 392.18,-725.62 366,-641 359.36,-619.54 357.1,-613.48 343,-596 327.13,-576.33 315.29,-579.31 299,-560 221.84,-468.58 196.57,-441.65 166,-326 156.11,-288.58 166.78,-267.89 198,-245 213.87,-233.37 256.72,-219.7 294.64,-209.16"/>
 <polygon fill="black" stroke="black" points="295.51,-212.55 304.23,-206.53 293.66,-205.79 295.51,-212.55"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64">
 <text xml:space="preserve" text-anchor="start" x="299" y="-539.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -467,7 +467,7 @@
 <title>invoke_conclusion/4</title>
 <polygon fill="cornsilk" stroke="black" points="682.03,-209 561.97,-209 561.97,-173 682.03,-173 682.03,-209"/>
 <text xml:space="preserve" text-anchor="start" x="569.97" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node24_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L198" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L198">
+<g id="a_node24_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L198" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L198">
 <text xml:space="preserve" text-anchor="start" x="572.47" y="-192.53" font-family="Monospace" font-size="11.00">invoke_conclusion/4</text>
 </a>
 </g>
@@ -479,12 +479,12 @@
 <!-- revise/6&#45;&gt;invoke_conclusion/4 -->
 <g id="edge11" class="edge">
 <title>revise/6&#45;&gt;invoke_conclusion/4</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="calls">
 <path fill="none" stroke="black" d="M418.14,-887.42C470.56,-877.55 573,-849.04 573,-777 573,-777 573,-777 573,-307 573,-274.82 589.44,-241.33 603.28,-218.85"/>
 <polygon fill="black" stroke="black" points="606.11,-220.92 608.56,-210.62 600.22,-217.14 606.11,-220.92"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L64">
 <text xml:space="preserve" text-anchor="start" x="573" y="-539.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -494,7 +494,7 @@
 <title>as_list/2</title>
 <polygon fill="cornsilk" stroke="black" points="952.68,-677 891.32,-677 891.32,-641 952.68,-641 952.68,-677"/>
 <text xml:space="preserve" text-anchor="start" x="899.32" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L80">
+<g id="a_node9_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="901.82" y="-660.53" font-family="Monospace" font-size="11.00">as_list/2</text>
 </a>
 </g>
@@ -506,12 +506,12 @@
 <!-- as_list/2&#45;&gt;check_model/1 -->
 <g id="edge13" class="edge">
 <title>as_list/2&#45;&gt;check_model/1</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L80" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L80" xlink:title="calls">
 <path fill="none" stroke="black" d="M895.27,-640.53C865.07,-620.8 815.77,-588.59 782.16,-566.62"/>
 <polygon fill="black" stroke="black" points="784.25,-563.81 773.96,-561.27 780.42,-569.67 784.25,-563.81"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L80">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="839.28" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -521,7 +521,7 @@
 <title>rule_descriptors/3</title>
 <polygon fill="cornsilk" stroke="black" points="1116.22,-560 1007.78,-560 1007.78,-524 1116.22,-524 1116.22,-560"/>
 <text xml:space="preserve" text-anchor="start" x="1015.78" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node26_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L208">
+<g id="a_node26_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L208">
 <text xml:space="preserve" text-anchor="start" x="1018.28" y="-543.53" font-family="Monospace" font-size="11.00">rule_descriptors/3</text>
 </a>
 </g>
@@ -533,12 +533,12 @@
 <!-- as_list/2&#45;&gt;rule_descriptors/3 -->
 <g id="edge14" class="edge">
 <title>as_list/2&#45;&gt;rule_descriptors/3</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L80" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L80" xlink:title="calls">
 <path fill="none" stroke="black" d="M943.26,-640.53C967.04,-621 1005.72,-589.23 1032.43,-567.29"/>
 <polygon fill="black" stroke="black" points="1034.32,-570.27 1039.83,-561.21 1029.88,-564.86 1034.32,-570.27"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L80">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="996.2" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -548,7 +548,7 @@
 <title>size/2</title>
 <polygon fill="cornsilk" stroke="black" points="981,-794 927,-794 927,-758 981,-758 981,-794"/>
 <text xml:space="preserve" text-anchor="start" x="937.13" y="-778.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L85">
+<g id="a_node10_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L85">
 <text xml:space="preserve" text-anchor="start" x="939.63" y="-777.53" font-family="Monospace" font-size="11.00">size/2</text>
 </a>
 </g>
@@ -560,12 +560,12 @@
 <!-- size/2&#45;&gt;as_list/2 -->
 <g id="edge15" class="edge">
 <title>size/2&#45;&gt;as_list/2</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L85" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L85" xlink:title="calls">
 <path fill="none" stroke="black" d="M949.14,-757.53C944.01,-739.11 935.85,-709.79 929.82,-688.1"/>
 <polygon fill="black" stroke="black" points="933.26,-687.41 927.21,-678.71 926.52,-689.28 933.26,-687.41"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L85">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L85">
 <text xml:space="preserve" text-anchor="start" x="938.96" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -587,12 +587,12 @@
 <!-- size/2&#45;&gt;list::length/2 -->
 <g id="edge40" class="edge">
 <title>size/2&#45;&gt;list::length/2</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L85" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L85" xlink:title="calls">
 <path fill="none" stroke="black" d="M958.45,-757.6C963.78,-735.19 972,-694.96 972,-660 972,-660 972,-660 972,-424 972,-394.48 974.66,-360.8 976.91,-337.56"/>
 <polygon fill="black" stroke="black" points="980.39,-337.93 977.91,-327.63 973.42,-337.22 980.39,-337.93"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L85">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L85">
 <text xml:space="preserve" text-anchor="start" x="972" y="-539.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -602,7 +602,7 @@
 <title>valid_model/1</title>
 <polygon fill="cornsilk" stroke="black" points="792.44,-443 703.56,-443 703.56,-407 792.44,-407 792.44,-443"/>
 <text xml:space="preserve" text-anchor="start" x="711.56" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L97">
+<g id="a_node12_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L97">
 <text xml:space="preserve" text-anchor="start" x="714.06" y="-426.53" font-family="Monospace" font-size="11.00">valid_model/1</text>
 </a>
 </g>
@@ -614,12 +614,12 @@
 <!-- check_model/1&#45;&gt;valid_model/1 -->
 <g id="edge16" class="edge">
 <title>check_model/1&#45;&gt;valid_model/1</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L89" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L89" xlink:title="calls">
 <path fill="none" stroke="black" d="M746.3,-523.53C746.62,-505.28 747.12,-476.33 747.5,-454.7"/>
 <polygon fill="black" stroke="black" points="751,-454.83 747.67,-444.77 744,-454.7 751,-454.83"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L89">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L89">
 <text xml:space="preserve" text-anchor="start" x="747.06" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -629,7 +629,7 @@
 <title>check_conclusions/1</title>
 <polygon fill="cornsilk" stroke="black" points="815.25,-326 692.75,-326 692.75,-290 815.25,-290 815.25,-326"/>
 <text xml:space="preserve" text-anchor="start" x="700.75" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node15_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L127" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L127">
+<g id="a_node15_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L127" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L127">
 <text xml:space="preserve" text-anchor="start" x="703.25" y="-309.53" font-family="Monospace" font-size="11.00">check_conclusions/1</text>
 </a>
 </g>
@@ -641,12 +641,12 @@
 <!-- valid_model/1&#45;&gt;check_conclusions/1 -->
 <g id="edge17" class="edge">
 <title>valid_model/1&#45;&gt;check_conclusions/1</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L97" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L97" xlink:title="calls">
 <path fill="none" stroke="black" d="M748.91,-406.53C749.86,-388.28 751.37,-359.33 752.5,-337.7"/>
 <polygon fill="black" stroke="black" points="756,-337.93 753.02,-327.77 749,-337.57 756,-337.93"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L97">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L97">
 <text xml:space="preserve" text-anchor="start" x="751.18" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -656,7 +656,7 @@
 <title>valid_rules/4</title>
 <polygon fill="cornsilk" stroke="black" points="674.38,-326 591.62,-326 591.62,-290 674.38,-290 674.38,-326"/>
 <text xml:space="preserve" text-anchor="start" x="599.62" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node29_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L223" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L223">
+<g id="a_node29_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L223" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L223">
 <text xml:space="preserve" text-anchor="start" x="602.12" y="-309.53" font-family="Monospace" font-size="11.00">valid_rules/4</text>
 </a>
 </g>
@@ -668,12 +668,12 @@
 <!-- valid_model/1&#45;&gt;valid_rules/4 -->
 <g id="edge18" class="edge">
 <title>valid_model/1&#45;&gt;valid_rules/4</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L97" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L97" xlink:title="calls">
 <path fill="none" stroke="black" d="M730.53,-406.53C711.26,-387.26 680.06,-356.06 658.15,-334.15"/>
 <polygon fill="black" stroke="black" points="660.87,-331.92 651.32,-327.32 655.92,-336.87 660.87,-331.92"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L97">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L97">
 <text xml:space="preserve" text-anchor="start" x="693.95" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -681,12 +681,12 @@
 <!-- valid_model/1&#45;&gt;list::length/2 -->
 <g id="edge41" class="edge">
 <title>valid_model/1&#45;&gt;list::length/2</title>
-<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L97" xlink:title="calls">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L97" xlink:title="calls">
 <path fill="none" stroke="black" d="M783.24,-406.53C823.72,-386.47 890.27,-353.48 934.6,-331.5"/>
 <polygon fill="black" stroke="black" points="936.05,-334.69 943.46,-327.11 932.94,-328.42 936.05,-334.69"/>
 </a>
 </g>
-<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L97">
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L97">
 <text xml:space="preserve" text-anchor="start" x="870.96" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -694,12 +694,12 @@
 <!-- check_conclusions/1&#45;&gt;list::valid/1 -->
 <g id="edge42" class="edge">
 <title>check_conclusions/1&#45;&gt;list::valid/1</title>
-<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L127" xlink:title="calls">
+<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L127" xlink:title="calls">
 <path fill="none" stroke="black" d="M769.34,-289.53C786.12,-270.43 813.19,-239.61 832.4,-217.73"/>
 <polygon fill="black" stroke="black" points="834.88,-220.21 838.85,-210.39 829.62,-215.59 834.88,-220.21"/>
 </a>
 </g>
-<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L127" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L127">
+<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L127" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L127">
 <text xml:space="preserve" text-anchor="start" x="807.53" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -709,7 +709,7 @@
 <title>contributor/4</title>
 <polygon fill="cornsilk" stroke="black" points="100.07,-209 17.93,-209 17.93,-173 100.07,-173 100.07,-209"/>
 <text xml:space="preserve" text-anchor="start" x="25.93" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node17_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L145" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L145">
+<g id="a_node17_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L145" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L145">
 <text xml:space="preserve" text-anchor="start" x="28.43" y="-192.53" font-family="Monospace" font-size="11.00">contributor/4</text>
 </a>
 </g>
@@ -721,12 +721,12 @@
 <!-- revise_rules/9&#45;&gt;contributor/4 -->
 <g id="edge19" class="edge">
 <title>revise_rules/9&#45;&gt;contributor/4</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L135" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L135" xlink:title="calls">
 <path fill="none" stroke="black" d="M55.52,-289.7C51.52,-279.52 47.02,-266.27 45,-254 43.15,-242.81 45.04,-230.6 47.97,-220.01"/>
 <polygon fill="black" stroke="black" points="51.23,-221.3 50.96,-210.71 44.57,-219.15 51.23,-221.3"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L135">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L135">
 <text xml:space="preserve" text-anchor="start" x="45" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -734,12 +734,12 @@
 <!-- revise_rules/9&#45;&gt;invoke_condition/3 -->
 <g id="edge20" class="edge">
 <title>revise_rules/9&#45;&gt;invoke_condition/3</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L135" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L135" xlink:title="calls">
 <path fill="none" stroke="black" d="M78.19,-289.64C91.51,-275.51 112.12,-256.14 134,-245 198.18,-212.32 221.89,-225.5 292,-209 292.82,-208.81 293.65,-208.61 294.48,-208.42"/>
 <polygon fill="black" stroke="black" points="295.08,-211.87 304,-206.15 293.46,-205.06 295.08,-211.87"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L135">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L135">
 <text xml:space="preserve" text-anchor="start" x="134" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -749,7 +749,7 @@
 <title>insert_refinement/4</title>
 <polygon fill="cornsilk" stroke="black" points="233.58,-209 118.42,-209 118.42,-173 233.58,-173 233.58,-209"/>
 <text xml:space="preserve" text-anchor="start" x="126.42" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node25_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L201" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L201">
+<g id="a_node25_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L201" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L201">
 <text xml:space="preserve" text-anchor="start" x="128.92" y="-192.53" font-family="Monospace" font-size="11.00">insert_refinement/4</text>
 </a>
 </g>
@@ -761,12 +761,12 @@
 <!-- revise_rules/9&#45;&gt;insert_refinement/4 -->
 <g id="edge21" class="edge">
 <title>revise_rules/9&#45;&gt;insert_refinement/4</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L135" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L135" xlink:title="calls">
 <path fill="none" stroke="black" d="M66.13,-289.62C69.27,-276.21 75.24,-257.85 86,-245 96.2,-232.8 109.98,-222.74 123.69,-214.79"/>
 <polygon fill="black" stroke="black" points="125.18,-217.96 132.27,-210.09 121.82,-211.82 125.18,-217.96"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L135">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L135">
 <text xml:space="preserve" text-anchor="start" x="86" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -788,12 +788,12 @@
 <!-- revise_rules/9&#45;&gt;list::append/3 -->
 <g id="edge43" class="edge">
 <title>revise_rules/9&#45;&gt;list::append/3</title>
-<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L135" xlink:title="calls">
+<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L135" xlink:title="calls">
 <path fill="none" stroke="black" d="M74.01,-289.54C83.7,-275.54 99.05,-256.41 117,-245 166.15,-213.75 195.9,-243.26 243,-209 262.91,-194.52 297.87,-136.82 317.85,-102.03"/>
 <polygon fill="black" stroke="black" points="320.65,-104.2 322.56,-93.78 314.56,-100.73 320.65,-104.2"/>
 </a>
 </g>
-<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L135">
+<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L135">
 <text xml:space="preserve" text-anchor="start" x="272.58" y="-188.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -803,7 +803,7 @@
 <title>evaluate_rule/7</title>
 <polygon fill="cornsilk" stroke="black" points="425.11,-443 328.89,-443 328.89,-407 425.11,-407 425.11,-443"/>
 <text xml:space="preserve" text-anchor="start" x="336.89" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node19_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L158">
+<g id="a_node19_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L158">
 <text xml:space="preserve" text-anchor="start" x="339.39" y="-426.53" font-family="Monospace" font-size="11.00">evaluate_rule/7</text>
 </a>
 </g>
@@ -815,12 +815,12 @@
 <!-- evaluate_rules/7&#45;&gt;evaluate_rule/7 -->
 <g id="edge22" class="edge">
 <title>evaluate_rules/7&#45;&gt;evaluate_rule/7</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L153" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L153" xlink:title="calls">
 <path fill="none" stroke="black" d="M377,-523.53C377,-505.28 377,-476.33 377,-454.7"/>
 <polygon fill="black" stroke="black" points="380.5,-454.77 377,-444.77 373.5,-454.77 380.5,-454.77"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L153">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L153">
 <text xml:space="preserve" text-anchor="start" x="377" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -828,12 +828,12 @@
 <!-- evaluate_rules/7&#45;&gt;list::append/3 -->
 <g id="edge44" class="edge">
 <title>evaluate_rules/7&#45;&gt;list::append/3</title>
-<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L153" xlink:title="calls">
+<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L153" xlink:title="calls">
 <path fill="none" stroke="black" d="M359,-523.57C325.22,-489.44 253.34,-409.8 227,-326 222.2,-310.74 216.83,-302.36 227,-290 279.65,-225.98 346.7,-307.52 410,-254 438.09,-230.25 440.72,-207.13 427,-173 414.92,-142.95 388.73,-116.93 367.06,-99.27"/>
 <polygon fill="black" stroke="black" points="369.32,-96.59 359.3,-93.16 364.99,-102.09 369.32,-96.59"/>
 </a>
 </g>
-<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L153">
+<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L153">
 <text xml:space="preserve" text-anchor="start" x="227" y="-305.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -843,7 +843,7 @@
 <title>evaluate_refinements/7</title>
 <polygon fill="cornsilk" stroke="black" points="499.68,-326 364.32,-326 364.32,-290 499.68,-290 499.68,-326"/>
 <text xml:space="preserve" text-anchor="start" x="372.32" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node20_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L167">
+<g id="a_node20_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L167">
 <text xml:space="preserve" text-anchor="start" x="374.82" y="-309.53" font-family="Monospace" font-size="11.00">evaluate_refinements/7</text>
 </a>
 </g>
@@ -855,12 +855,12 @@
 <!-- evaluate_rule/7&#45;&gt;evaluate_refinements/7 -->
 <g id="edge25" class="edge">
 <title>evaluate_rule/7&#45;&gt;evaluate_refinements/7</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L158" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L158" xlink:title="calls">
 <path fill="none" stroke="black" d="M385.35,-406.53C394.25,-387.94 408.45,-358.24 418.85,-336.5"/>
 <polygon fill="black" stroke="black" points="421.94,-338.15 423.1,-327.62 415.62,-335.13 421.94,-338.15"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L158">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L158">
 <text xml:space="preserve" text-anchor="start" x="406.15" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -870,7 +870,7 @@
 <title>apply_action/7</title>
 <polygon fill="cornsilk" stroke="black" points="345.97,-326 254.03,-326 254.03,-290 345.97,-290 345.97,-326"/>
 <text xml:space="preserve" text-anchor="start" x="262.03" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node21_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L181">
+<g id="a_node21_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L181">
 <text xml:space="preserve" text-anchor="start" x="264.53" y="-309.53" font-family="Monospace" font-size="11.00">apply_action/7</text>
 </a>
 </g>
@@ -882,12 +882,12 @@
 <!-- evaluate_rule/7&#45;&gt;apply_action/7 -->
 <g id="edge26" class="edge">
 <title>evaluate_rule/7&#45;&gt;apply_action/7</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L158" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L158" xlink:title="calls">
 <path fill="none" stroke="black" d="M365.31,-406.53C352.68,-387.68 332.43,-357.43 317.82,-335.61"/>
 <polygon fill="black" stroke="black" points="320.87,-333.87 312.39,-327.51 315.05,-337.77 320.87,-333.87"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L158">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L158">
 <text xml:space="preserve" text-anchor="start" x="340.81" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -895,12 +895,12 @@
 <!-- evaluate_rule/7&#45;&gt;invoke_condition/3 -->
 <g id="edge23" class="edge">
 <title>evaluate_rule/7&#45;&gt;invoke_condition/3</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L158" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L158" xlink:title="calls">
 <path fill="none" stroke="black" d="M328.66,-415.28C281.02,-403.83 210.75,-378.64 178,-326 143.68,-270.85 229.27,-231.29 294.94,-210.02"/>
 <polygon fill="black" stroke="black" points="295.77,-213.43 304.26,-207.1 293.67,-206.75 295.77,-213.43"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L158">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L158">
 <text xml:space="preserve" text-anchor="start" x="178" y="-305.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -908,12 +908,12 @@
 <!-- evaluate_rule/7&#45;&gt;invoke_conclusion/4 -->
 <g id="edge24" class="edge">
 <title>evaluate_rule/7&#45;&gt;invoke_conclusion/4</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L158" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L158" xlink:title="calls">
 <path fill="none" stroke="black" d="M405.47,-406.51C433.6,-388.42 476.96,-358.34 509,-326 540.35,-294.36 538.9,-278.71 568,-245 576.2,-235.51 585.79,-225.72 594.6,-217.18"/>
 <polygon fill="black" stroke="black" points="596.82,-219.91 601.64,-210.47 591.99,-214.84 596.82,-219.91"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L158">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L158">
 <text xml:space="preserve" text-anchor="start" x="536.92" y="-305.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -921,12 +921,12 @@
 <!-- evaluate_refinements/7&#45;&gt;invoke_condition/3 -->
 <g id="edge27" class="edge">
 <title>evaluate_refinements/7&#45;&gt;invoke_condition/3</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L168" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L168" xlink:title="calls">
 <path fill="none" stroke="black" d="M421.37,-289.53C409.94,-270.77 391.64,-240.7 378.38,-218.91"/>
 <polygon fill="black" stroke="black" points="381.48,-217.27 373.29,-210.55 375.5,-220.91 381.48,-217.27"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L168">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L168">
 <text xml:space="preserve" text-anchor="start" x="399.1" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -934,12 +934,12 @@
 <!-- evaluate_refinements/7&#45;&gt;invoke_conclusion/4 -->
 <g id="edge28" class="edge">
 <title>evaluate_refinements/7&#45;&gt;invoke_conclusion/4</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L168" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L168" xlink:title="calls">
 <path fill="none" stroke="black" d="M452.15,-289.75C468.06,-276.59 491.14,-258.49 513,-245 531.27,-233.72 552.29,-223.02 570.97,-214.21"/>
 <polygon fill="black" stroke="black" points="572.39,-217.41 579.99,-210.03 569.45,-211.06 572.39,-217.41"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L168">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L168">
 <text xml:space="preserve" text-anchor="start" x="513" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -949,7 +949,7 @@
 <title>add_unique/3</title>
 <polygon fill="cornsilk" stroke="black" points="543.84,-209 456.16,-209 456.16,-173 543.84,-173 543.84,-209"/>
 <text xml:space="preserve" text-anchor="start" x="464.16" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node22_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L185">
+<g id="a_node22_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L185">
 <text xml:space="preserve" text-anchor="start" x="466.66" y="-192.53" font-family="Monospace" font-size="11.00">add_unique/3</text>
 </a>
 </g>
@@ -961,12 +961,12 @@
 <!-- apply_action/7&#45;&gt;add_unique/3 -->
 <g id="edge29" class="edge">
 <title>apply_action/7&#45;&gt;add_unique/3</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L182" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L182" xlink:title="calls">
 <path fill="none" stroke="black" d="M346.32,-289.63C369.15,-280.31 396.72,-267.88 420,-254 438.25,-243.12 457.1,-228.69 471.92,-216.49"/>
 <polygon fill="black" stroke="black" points="474.01,-219.3 479.43,-210.2 469.51,-213.94 474.01,-219.3"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L182">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L182">
 <text xml:space="preserve" text-anchor="start" x="433.95" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -974,12 +974,12 @@
 <!-- add_unique/3&#45;&gt;list::append/3 -->
 <g id="edge46" class="edge">
 <title>add_unique/3&#45;&gt;list::append/3</title>
-<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L188" xlink:title="calls">
+<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L188" xlink:title="calls">
 <path fill="none" stroke="black" d="M485.77,-172.68C474.17,-159.31 456.83,-140.96 439,-128 422.72,-116.17 403.41,-105.64 385.76,-97.15"/>
 <polygon fill="black" stroke="black" points="387.51,-94.1 376.96,-93.03 384.54,-100.44 387.51,-94.1"/>
 </a>
 </g>
-<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L188">
+<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L188">
 <text xml:space="preserve" text-anchor="start" x="450.14" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1001,12 +1001,12 @@
 <!-- add_unique/3&#45;&gt;list::member/2 -->
 <g id="edge45" class="edge">
 <title>add_unique/3&#45;&gt;list::member/2</title>
-<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L185" xlink:title="calls">
+<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L185" xlink:title="calls">
 <path fill="none" stroke="black" d="M500.3,-172.53C500.62,-154.28 501.12,-125.33 501.5,-103.7"/>
 <polygon fill="black" stroke="black" points="505,-103.83 501.67,-93.77 498,-103.7 505,-103.83"/>
 </a>
 </g>
-<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L185">
+<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L185">
 <text xml:space="preserve" text-anchor="start" x="501.06" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1014,12 +1014,12 @@
 <!-- insert_refinement/4&#45;&gt;list::append/3 -->
 <g id="edge47" class="edge">
 <title>insert_refinement/4&#45;&gt;list::append/3</title>
-<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L201" xlink:title="calls">
+<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L201" xlink:title="calls">
 <path fill="none" stroke="black" d="M194.28,-172.54C208.21,-159.6 228.16,-141.88 247,-128 261.22,-117.52 277.57,-107.08 292.17,-98.27"/>
 <polygon fill="black" stroke="black" points="293.84,-101.35 300.65,-93.23 290.26,-95.33 293.84,-101.35"/>
 </a>
 </g>
-<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L201" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L201">
+<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L201" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L201">
 <text xml:space="preserve" text-anchor="start" x="247" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1029,7 +1029,7 @@
 <title>rule_descriptor/5</title>
 <polygon fill="cornsilk" stroke="black" points="1113.47,-443 1010.53,-443 1010.53,-407 1113.47,-407 1113.47,-443"/>
 <text xml:space="preserve" text-anchor="start" x="1018.53" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node27_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L213">
+<g id="a_node27_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L213">
 <text xml:space="preserve" text-anchor="start" x="1021.03" y="-426.53" font-family="Monospace" font-size="11.00">rule_descriptor/5</text>
 </a>
 </g>
@@ -1041,12 +1041,12 @@
 <!-- rule_descriptors/3&#45;&gt;rule_descriptor/5 -->
 <g id="edge30" class="edge">
 <title>rule_descriptors/3&#45;&gt;rule_descriptor/5</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L209" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L209" xlink:title="calls">
 <path fill="none" stroke="black" d="M1062,-523.53C1062,-505.28 1062,-476.33 1062,-454.7"/>
 <polygon fill="black" stroke="black" points="1065.5,-454.77 1062,-444.77 1058.5,-454.77 1065.5,-454.77"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L209">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L209">
 <text xml:space="preserve" text-anchor="start" x="1062" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1056,7 +1056,7 @@
 <title>child_descriptors/5</title>
 <polygon fill="cornsilk" stroke="black" points="1150.36,-326 1037.64,-326 1037.64,-290 1150.36,-290 1150.36,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1045.64" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node28_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L217" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L217">
+<g id="a_node28_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L217" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L217">
 <text xml:space="preserve" text-anchor="start" x="1048.14" y="-309.53" font-family="Monospace" font-size="11.00">child_descriptors/5</text>
 </a>
 </g>
@@ -1068,12 +1068,12 @@
 <!-- rule_descriptor/5&#45;&gt;child_descriptors/5 -->
 <g id="edge31" class="edge">
 <title>rule_descriptor/5&#45;&gt;child_descriptors/5</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L213" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L213" xlink:title="calls">
 <path fill="none" stroke="black" d="M1066.86,-406.53C1071.99,-388.11 1080.15,-358.79 1086.18,-337.1"/>
 <polygon fill="black" stroke="black" points="1089.48,-338.28 1088.79,-327.71 1082.74,-336.41 1089.48,-338.28"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L213">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L213">
 <text xml:space="preserve" text-anchor="start" x="1078.96" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1081,12 +1081,12 @@
 <!-- child_descriptors/5&#45;&gt;rule_descriptor/5 -->
 <g id="edge32" class="edge">
 <title>child_descriptors/5&#45;&gt;rule_descriptor/5</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L218" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L218" xlink:title="calls">
 <path fill="none" stroke="black" d="M1076.7,-326.48C1068.41,-336.1 1059.34,-348.76 1055,-362 1051.47,-372.73 1051.98,-385.01 1053.82,-395.79"/>
 <polygon fill="black" stroke="black" points="1050.34,-396.26 1055.89,-405.28 1057.18,-394.76 1050.34,-396.26"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L218" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L218">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L218" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L218">
 <text xml:space="preserve" text-anchor="start" x="1055" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1096,7 +1096,7 @@
 <title>valid_rule/4</title>
 <polygon fill="cornsilk" stroke="black" points="777.63,-209 700.37,-209 700.37,-173 777.63,-173 777.63,-209"/>
 <text xml:space="preserve" text-anchor="start" x="708.37" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node30_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L228">
+<g id="a_node30_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L228">
 <text xml:space="preserve" text-anchor="start" x="710.87" y="-192.53" font-family="Monospace" font-size="11.00">valid_rule/4</text>
 </a>
 </g>
@@ -1108,12 +1108,12 @@
 <!-- valid_rules/4&#45;&gt;valid_rule/4 -->
 <g id="edge33" class="edge">
 <title>valid_rules/4&#45;&gt;valid_rule/4</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L224" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L224" xlink:title="calls">
 <path fill="none" stroke="black" d="M643.36,-289.52C651.44,-276.57 663.38,-258.85 676,-245 685.23,-234.87 696.39,-224.89 706.73,-216.37"/>
 <polygon fill="black" stroke="black" points="708.76,-219.23 714.36,-210.24 704.37,-213.77 708.76,-219.23"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L224">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L224">
 <text xml:space="preserve" text-anchor="start" x="676" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1121,12 +1121,12 @@
 <!-- valid_rule/4&#45;&gt;valid_rules/4 -->
 <g id="edge35" class="edge">
 <title>valid_rule/4&#45;&gt;valid_rules/4</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L228" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L228" xlink:title="calls">
 <path fill="none" stroke="black" d="M727.95,-209.38C719.38,-222.27 706.85,-239.98 694,-254 684.84,-264 673.9,-274.01 663.83,-282.59"/>
 <polygon fill="black" stroke="black" points="661.87,-279.66 656.43,-288.76 666.35,-285.04 661.87,-279.66"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L228">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L228">
 <text xml:space="preserve" text-anchor="start" x="700.85" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1136,7 +1136,7 @@
 <title>valid_kind/1</title>
 <polygon fill="cornsilk" stroke="black" points="778.55,-92 699.45,-92 699.45,-56 778.55,-56 778.55,-92"/>
 <text xml:space="preserve" text-anchor="start" x="707.45" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node31_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L238" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L238">
+<g id="a_node31_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L238" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L238">
 <text xml:space="preserve" text-anchor="start" x="709.95" y="-75.53" font-family="Monospace" font-size="11.00">valid_kind/1</text>
 </a>
 </g>
@@ -1148,12 +1148,12 @@
 <!-- valid_rule/4&#45;&gt;valid_kind/1 -->
 <g id="edge34" class="edge">
 <title>valid_rule/4&#45;&gt;valid_kind/1</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L228" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L228" xlink:title="calls">
 <path fill="none" stroke="black" d="M739,-172.53C739,-154.28 739,-125.33 739,-103.7"/>
 <polygon fill="black" stroke="black" points="742.5,-103.77 739,-93.77 735.5,-103.77 742.5,-103.77"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/321b7410712b5996bd4f7d1afb8661095202017d/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L228">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/960081bcbcbdf0223c675682ca39e9f69729f97c/library/ripple_down_rules/multi_classification_ripple_down_rules.lgt#L228">
 <text xml:space="preserve" text-anchor="start" x="739" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
