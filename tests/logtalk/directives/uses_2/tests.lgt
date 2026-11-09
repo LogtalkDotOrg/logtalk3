@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:10:0,
+		version is 1:11:0,
 		author is 'Paulo Moura',
-		date is 2026-06-30,
+		date is 2026-11-09,
 		comment is 'Unit tests for the "uses/2" built-in directive.'
 	]).
 
@@ -50,7 +50,7 @@
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		(	Dialect == eclipse; Dialect == xvm; Dialect == sicstus;
+		(	Dialect == eclipse; Dialect == xvm; Dialect == sicstus; Dialect == shumway;
 			Dialect == swi; Dialect == trealla; Dialect == yap
 		)
 	)).
