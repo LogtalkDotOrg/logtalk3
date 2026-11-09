@@ -349,6 +349,7 @@ sed '1,19d' ../../../library/sgd_classifier/NOTES.md | pandoc -f gfm -t rst -o l
 sed '1,19d' ../../../library/simple_temporal_networks/NOTES.md | pandoc -f gfm -t rst -o libraries/simple_temporal_networks.rst
 sed '1,19d' ../../../library/simulated_annealing/NOTES.md | pandoc -f gfm -t rst -o libraries/simulated_annealing.rst
 sed '1,19d' ../../../library/slope_one_recommender/NOTES.md | pandoc -f gfm -t rst -o libraries/slope_one_recommender.rst
+sed '1,19d' ../../../library/smt/NOTES.md | pandoc -f gfm -t rst -o libraries/smt.rst
 sed '1,19d' ../../../library/smtp/NOTES.md | pandoc -f gfm -t rst -o libraries/smtp.rst
 sed '1,19d' ../../../library/snowflakeid/NOTES.md | pandoc -f gfm -t rst -o libraries/snowflakeid.rst
 sed '1,19d' ../../../library/sockets/NOTES.md | pandoc -f gfm -t rst -o libraries/sockets.rst

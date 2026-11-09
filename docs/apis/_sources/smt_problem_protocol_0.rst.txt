@@ -1,0 +1,78 @@
+.. index:: single: smt_problem_protocol
+.. _smt_problem_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``smt_problem_protocol``
+========================
+
+Protocol for ordered, ground SMT-LIB 2 statement providers.
+
+| **Availability:** 
+|    ``logtalk_load(smt(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-08
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: smt_statement/2
+.. _smt_problem_protocol/0::smt_statement/2:
+
+``smt_statement/2``
+^^^^^^^^^^^^^^^^^^^
+
+Enumerates, by backtracking, canonical SMT-LIB 2 statements in source order and their origins.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``smt_statement(Statement,Origin)``
+| **Mode and number of proofs:**
+|    ``smt_statement(-compound,-term)`` - ``zero_or_more``
+
+| **Remarks:**
+
+    - Origin: Either ``source(File, Start, End)`` or ``unknown``.
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

@@ -1,0 +1,94 @@
+.. index:: single: smt_output
+.. _smt_output/0:
+
+.. rst-class:: right
+
+**object**
+
+``smt_output``
+==============
+
+Whole-document S-expression tokenizing, parsing, and content-based response classification for Z3, cvc5, Bitwuzla, and Yices 2 plain-text output decoding.
+
+| **Availability:** 
+|    ``logtalk_load(smt(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-08
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: decode/7
+.. _smt_output/0::decode/7:
+
+``decode/7``
+^^^^^^^^^^^^
+
+Decodes captured stdout and process metadata into a list of collected ``smt_result(Status, Model, Properties)`` terms, one per ``check-sat``/``check-sat-assuming`` response, in order. Each response is classified by its shape (status atom, model, unsat core, or get-value pairs), so the decoder does not need the originating statement list and supports every source kind.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode(Solver,Codes,RawStatus,NormalizedStatus,Diagnostics,SourceMap,Results)``
+| **Mode and number of proofs:**
+|    ``decode(+atom,+list(integer),+term,+compound,+list(integer),+list(compound),-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An input is insufficiently instantiated:
+|        ``instantiation_error``
+|    ``Solver`` is not an atom:
+|        ``type_error(atom,Solver)``
+|    A code-list input is not a character-code list:
+|        ``type_error(codes,Input)``
+|    ``SourceMap`` is not a list:
+|        ``type_error(list,SourceMap)``
+|    ``Codes`` contains an unrecognized character or an unbalanced parenthesis:
+|        ``domain_error(smt_output,Field-Value)``
+|    A model, unsat core, or get-value response appears before any status response:
+|        ``domain_error(smt_output,Response-unexpected)``
+|    The solver reported an ``(error ...)`` response:
+|        ``smt_solver_reported_error(Message)``
+|    The process status is fatal or inconsistent with the solver result:
+|        ``domain_error(smt_process_status,NormalizedStatus)``
+|    No response was parsed and the process did not exit cleanly:
+|        ``domain_error(smt_process_status,NormalizedStatus)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

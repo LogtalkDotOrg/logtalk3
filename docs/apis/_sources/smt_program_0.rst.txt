@@ -1,0 +1,130 @@
+.. index:: single: smt_program
+.. _smt_program/0:
+
+.. rst-class:: right
+
+**object**
+
+``smt_program``
+===============
+
+Canonical SMT-LIB 2 statement validation, source generation, and response-producing statement classification.
+
+| **Availability:** 
+|    ``logtalk_load(smt(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-08
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: serialize/2
+.. _smt_program/0::serialize/2:
+
+``serialize/2``
+^^^^^^^^^^^^^^^
+
+Serializes ground canonical SMT-LIB 2 statements to character codes, auto-declaring ``:produce-models`` and ``:produce-unsat-cores`` options when required and not already set by the caller.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serialize(Statements,Codes)``
+| **Mode and number of proofs:**
+|    ``serialize(+list(compound),-list(integer))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Statements`` is insufficiently instantiated:
+|        ``instantiation_error``
+|    ``Statements`` is not a list:
+|        ``type_error(list,Statements)``
+|    A statement is invalid:
+|        ``domain_error(smt_statement,Statement)``
+
+
+------------
+
+.. index:: serialize/4
+.. _smt_program/0::serialize/4:
+
+``serialize/4``
+^^^^^^^^^^^^^^^
+
+Serializes statements with origins and returns ``line(Start, End, Origin)`` source-map entries; auto-declared option statements use the ``unknown`` origin.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serialize(Statements,Origins,Codes,SourceMap)``
+| **Mode and number of proofs:**
+|    ``serialize(+list(compound),+list,-list(integer),-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An input is insufficiently instantiated:
+|        ``instantiation_error``
+|    An input is not a list:
+|        ``type_error(list,Input)``
+|    A statement is invalid:
+|        ``domain_error(smt_statement,Statement)``
+|    An origin is invalid or the list lengths differ:
+|        ``domain_error(smt_origins,Origins)``
+
+
+------------
+
+.. index:: response_producing/1
+.. _smt_program/0::response_producing/1:
+
+``response_producing/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Succeeds when ``Statement`` is a command that produces a solver response line (``check-sat``, ``check-sat-assuming``, ``get-model``, ``get-unsat-core``, or ``get-value``).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``response_producing(Statement)``
+| **Mode and number of proofs:**
+|    ``response_producing(+compound)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

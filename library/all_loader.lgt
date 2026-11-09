@@ -274,6 +274,7 @@
 		lasso_feature_selector(loader),
 		clingo(loader),
 		sat(loader),
+		smt(loader),
 		uri_template(loader),
 		url(loader),
 		sqids(loader),

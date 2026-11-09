@@ -378,6 +378,7 @@ logtalk_library_path(sgd_classifier, library('sgd_classifier/')).
 logtalk_library_path(simple_temporal_networks, library('simple_temporal_networks/')).
 logtalk_library_path(simulated_annealing, library('simulated_annealing/')).
 logtalk_library_path(slope_one_recommender, library('slope_one_recommender/')).
+logtalk_library_path(smt, library('smt/')).
 logtalk_library_path(smtp, library('smtp/')).
 logtalk_library_path(snowflakeid, library('snowflakeid/')).
 logtalk_library_path(sockets, library('sockets/')).

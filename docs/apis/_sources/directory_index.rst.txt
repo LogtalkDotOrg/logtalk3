@@ -5218,6 +5218,32 @@ To load an entity, always load the library that includes it using the goal ``log
 
    * :doc:`slope_one_recommender <slope_one_recommender_0>`
 
+``library/smt/``
+----------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      smt <smt_0>
+      smt_expansion <smt_expansion_0>
+      smt_output <smt_output_0>
+      smt_problem_protocol <smt_problem_protocol_0>
+      smt_process <smt_process_0>
+      smt_program <smt_program_0>
+      smt_protocol <smt_protocol_0>
+
+.. only:: latex
+
+   * :doc:`smt <smt_0>`
+   * :doc:`smt_expansion <smt_expansion_0>`
+   * :doc:`smt_output <smt_output_0>`
+   * :doc:`smt_problem_protocol <smt_problem_protocol_0>`
+   * :doc:`smt_process <smt_process_0>`
+   * :doc:`smt_program <smt_program_0>`
+   * :doc:`smt_protocol <smt_protocol_0>`
+
 ``library/smtp/``
 -----------------
 

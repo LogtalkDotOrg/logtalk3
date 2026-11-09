@@ -299,6 +299,7 @@ directory in the ``NOTES.md`` file.
    simple_temporal_networks
    simulated_annealing
    slope_one_recommender
+   smt
    smtp
    snowflakeid
    sockets

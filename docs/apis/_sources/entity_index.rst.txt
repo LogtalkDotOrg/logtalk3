@@ -990,6 +990,11 @@ Objects
       sk_language_profile <sk_language_profile_0>
       sl_language_profile <sl_language_profile_0>
       slope_one_recommender <slope_one_recommender_0>
+      smt <smt_0>
+      smt_expansion <smt_expansion_0>
+      smt_output <smt_output_0>
+      smt_process <smt_process_0>
+      smt_program <smt_program_0>
       smtp <smtp_0>
       smtp_process_transport <smtp_process_transport_0>
       snowflakeid <snowflakeid_0>
@@ -1894,6 +1899,11 @@ Objects
    * :doc:`sk_language_profile <sk_language_profile_0>`
    * :doc:`sl_language_profile <sl_language_profile_0>`
    * :doc:`slope_one_recommender <slope_one_recommender_0>`
+   * :doc:`smt <smt_0>`
+   * :doc:`smt_expansion <smt_expansion_0>`
+   * :doc:`smt_output <smt_output_0>`
+   * :doc:`smt_process <smt_process_0>`
+   * :doc:`smt_program <smt_program_0>`
    * :doc:`smtp <smtp_0>`
    * :doc:`smtp_process_transport <smtp_process_transport_0>`
    * :doc:`snowflakeid <snowflakeid_0>`
@@ -2294,6 +2304,8 @@ Protocols
       setp <setp_0>
       similarity_metric_protocol <similarity_metric_protocol_0>
       simulated_annealing_protocol <simulated_annealing_protocol_0>
+      smt_problem_protocol <smt_problem_protocol_0>
+      smt_protocol <smt_protocol_0>
       smtp_protocol <smtp_protocol_0>
       snowflakeid_protocol <snowflakeid_protocol_0>
       spelling_normalizer_protocol <spelling_normalizer_protocol_0>
@@ -2521,6 +2533,8 @@ Protocols
    * :doc:`setp <setp_0>`
    * :doc:`similarity_metric_protocol <similarity_metric_protocol_0>`
    * :doc:`simulated_annealing_protocol <simulated_annealing_protocol_0>`
+   * :doc:`smt_problem_protocol <smt_problem_protocol_0>`
+   * :doc:`smt_protocol <smt_protocol_0>`
    * :doc:`smtp_protocol <smtp_protocol_0>`
    * :doc:`snowflakeid_protocol <snowflakeid_protocol_0>`
    * :doc:`spelling_normalizer_protocol <spelling_normalizer_protocol_0>`

@@ -73,6 +73,10 @@ the `process` library, and inspecting collected models and diagnostics.
 objects, invoking the Kissat (default), CaDiCaL, Glucose, or Z3 command-line
 solvers through the `process` library, and inspecting collected results.
 
+* ADDED: New `smt` library for representing SMT problems as Logtalk
+objects, invoking the Z3 (default), cvc5, Bitwuzla, or Yices 2 command-line
+solvers through the `process` library, and inspecting collected results.
+
 * ADDED: New `simple_temporal_networks` library implementing Simple Temporal
 Networks (STNs).
 

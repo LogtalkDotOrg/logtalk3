@@ -349,6 +349,7 @@ Foreach-Object {
 (Get-Content ../../../library/simple_temporal_networks/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/simple_temporal_networks.rst
 (Get-Content ../../../library/simulated_annealing/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/simulated_annealing.rst
 (Get-Content ../../../library/slope_one_recommender/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/slope_one_recommender.rst
+(Get-Content ../../../library/smt/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/smt.rst
 (Get-Content ../../../library/smtp/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/smtp.rst
 (Get-Content ../../../library/snowflakeid/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/snowflakeid.rst
 (Get-Content ../../../library/sockets/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/sockets.rst

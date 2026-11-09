@@ -1,0 +1,59 @@
+.. index:: single: smt_expansion
+.. _smt_expansion/0:
+
+.. rst-class:: right
+
+**object**
+
+``smt_expansion``
+=================
+
+Opt-in statement expansion for pure problem objects, converting canonical statement facts and the ``smt_raw/1`` and ``comment/1`` directives into ``smt_statement/2`` facts.
+
+| **Availability:** 
+|    ``logtalk_load(smt(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-08
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`expanding <expanding/0>`
+| **Uses:**
+|    :ref:`smt_program <smt_program/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`expanding/0::goal_expansion/2`  :ref:`expanding/0::term_expansion/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
