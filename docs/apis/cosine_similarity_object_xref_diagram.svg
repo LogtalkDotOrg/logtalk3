@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-257 668,-257 668,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object cosine_similarity</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;08, 19:54</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;09, 00:26</text>
 <g id="clust1" class="cluster">
 <title>cluster_cosine_similarity_object</title>
 <g id="a_clust1"><a xlink:title="cosine_similarity">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 644,-46 644,-46 650,-46 656,-52 656,-58 656,-58 656,-233 656,-233 656,-239 650,-245 644,-245 644,-245 20,-245 20,-245 14,-245 8,-239 8,-233 8,-233 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/recommender_protocols/cosine_similarity.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/recommender_protocols/cosine_similarity.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/dd331c40ce8241c681007b0b2478eec958a90a3a/library/recommender_protocols/cosine_similarity.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/dd331c40ce8241c681007b0b2478eec958a90a3a/library/recommender_protocols/cosine_similarity.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-229.3" font-family="Monospace" font-size="10.00" fill="dimgray">cosine_similarity</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>similarity/3</title>
 <polygon fill="cornsilk" stroke="black" points="371.48,-209 298.52,-209 298.52,-173 371.48,-173 371.48,-209"/>
 <text xml:space="preserve" text-anchor="start" x="306.52" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/recommender_protocols/cosine_similarity.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/recommender_protocols/cosine_similarity.lgt#L33">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/dd331c40ce8241c681007b0b2478eec958a90a3a/library/recommender_protocols/cosine_similarity.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/dd331c40ce8241c681007b0b2478eec958a90a3a/library/recommender_protocols/cosine_similarity.lgt#L33">
 <text xml:space="preserve" text-anchor="start" x="309.03" y="-192.53" font-family="Monospace" font-size="11.00">similarity/3</text>
 </a>
 </g>
@@ -52,12 +52,12 @@
 <!-- similarity/3&#45;&gt;^^normalize_vector/2 -->
 <g id="edge1" class="edge">
 <title>similarity/3&#45;&gt;^^normalize_vector/2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/recommender_protocols/cosine_similarity.lgt#L33" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/dd331c40ce8241c681007b0b2478eec958a90a3a/library/recommender_protocols/cosine_similarity.lgt#L33" xlink:title="calls">
 <path fill="none" stroke="black" d="M298.19,-173.4C253.61,-153.29 178.34,-119.35 128.91,-97.06"/>
 <polygon fill="black" stroke="black" points="130.4,-93.89 119.84,-92.97 127.52,-100.27 130.4,-93.89"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/recommender_protocols/cosine_similarity.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/recommender_protocols/cosine_similarity.lgt#L33">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/dd331c40ce8241c681007b0b2478eec958a90a3a/library/recommender_protocols/cosine_similarity.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/dd331c40ce8241c681007b0b2478eec958a90a3a/library/recommender_protocols/cosine_similarity.lgt#L33">
 <text xml:space="preserve" text-anchor="start" x="215.15" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -76,12 +76,12 @@
 <!-- similarity/3&#45;&gt;^^common_pairs/3 -->
 <g id="edge2" class="edge">
 <title>similarity/3&#45;&gt;^^common_pairs/3</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/recommender_protocols/cosine_similarity.lgt#L33" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/dd331c40ce8241c681007b0b2478eec958a90a3a/library/recommender_protocols/cosine_similarity.lgt#L33" xlink:title="calls">
 <path fill="none" stroke="black" d="M316.93,-172.53C296.98,-153.26 264.7,-122.06 242.03,-100.15"/>
 <polygon fill="black" stroke="black" points="244.57,-97.74 234.94,-93.31 239.7,-102.77 244.57,-97.74"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/recommender_protocols/cosine_similarity.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/recommender_protocols/cosine_similarity.lgt#L33">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/dd331c40ce8241c681007b0b2478eec958a90a3a/library/recommender_protocols/cosine_similarity.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/dd331c40ce8241c681007b0b2478eec958a90a3a/library/recommender_protocols/cosine_similarity.lgt#L33">
 <text xml:space="preserve" text-anchor="start" x="279.07" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -100,12 +100,12 @@
 <!-- similarity/3&#45;&gt;^^split_pairs/3 -->
 <g id="edge3" class="edge">
 <title>similarity/3&#45;&gt;^^split_pairs/3</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/recommender_protocols/cosine_similarity.lgt#L33" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/dd331c40ce8241c681007b0b2478eec958a90a3a/library/recommender_protocols/cosine_similarity.lgt#L33" xlink:title="calls">
 <path fill="none" stroke="black" d="M335,-172.53C335,-154.28 335,-125.33 335,-103.7"/>
 <polygon fill="black" stroke="black" points="338.5,-103.77 335,-93.77 331.5,-103.77 338.5,-103.77"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/recommender_protocols/cosine_similarity.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/recommender_protocols/cosine_similarity.lgt#L33">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/dd331c40ce8241c681007b0b2478eec958a90a3a/library/recommender_protocols/cosine_similarity.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/dd331c40ce8241c681007b0b2478eec958a90a3a/library/recommender_protocols/cosine_similarity.lgt#L33">
 <text xml:space="preserve" text-anchor="start" x="335" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -124,12 +124,12 @@
 <!-- similarity/3&#45;&gt;^^dot_product/3 -->
 <g id="edge4" class="edge">
 <title>similarity/3&#45;&gt;^^dot_product/3</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/recommender_protocols/cosine_similarity.lgt#L33" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/dd331c40ce8241c681007b0b2478eec958a90a3a/library/recommender_protocols/cosine_similarity.lgt#L33" xlink:title="calls">
 <path fill="none" stroke="black" d="M352.01,-172.53C370.7,-153.34 400.9,-122.33 422.22,-100.44"/>
 <polygon fill="black" stroke="black" points="424.67,-102.94 429.14,-93.34 419.66,-98.06 424.67,-102.94"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/recommender_protocols/cosine_similarity.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/recommender_protocols/cosine_similarity.lgt#L33">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/dd331c40ce8241c681007b0b2478eec958a90a3a/library/recommender_protocols/cosine_similarity.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/dd331c40ce8241c681007b0b2478eec958a90a3a/library/recommender_protocols/cosine_similarity.lgt#L33">
 <text xml:space="preserve" text-anchor="start" x="394.36" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -148,12 +148,12 @@
 <!-- similarity/3&#45;&gt;^^bounded_similarity/2 -->
 <g id="edge5" class="edge">
 <title>similarity/3&#45;&gt;^^bounded_similarity/2</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/recommender_protocols/cosine_similarity.lgt#L33" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/dd331c40ce8241c681007b0b2478eec958a90a3a/library/recommender_protocols/cosine_similarity.lgt#L33" xlink:title="calls">
 <path fill="none" stroke="black" d="M371.94,-172.66C414.82,-152.53 485.63,-119.3 532.54,-97.28"/>
 <polygon fill="black" stroke="black" points="533.82,-100.54 541.38,-93.13 530.85,-94.21 533.82,-100.54"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/recommender_protocols/cosine_similarity.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5efdffd03309ee50fc119340c6ba54c8f7ee739e/library/recommender_protocols/cosine_similarity.lgt#L33">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/dd331c40ce8241c681007b0b2478eec958a90a3a/library/recommender_protocols/cosine_similarity.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/dd331c40ce8241c681007b0b2478eec958a90a3a/library/recommender_protocols/cosine_similarity.lgt#L33">
 <text xml:space="preserve" text-anchor="start" x="464.85" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
