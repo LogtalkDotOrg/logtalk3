@@ -28,9 +28,9 @@
 	complements(type)).
 
 	:- info([
-		version is 2:39:0,
+		version is 2:39:1,
 		author is 'Paulo Moura',
-		date is 2026-08-11,
+		date is 2026-11-09,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``.',
@@ -66,7 +66,7 @@
 	]).
 
 	:- uses(integer, [between/3 as for/3]).
-	:- uses(list, [append/3, length/2, member/2 as in/2]).
+	:- uses(list, [append/3, length/2, member/2 as (in)/2]).
 	:- uses(fast_random, [between/3, maybe/0, maybe/2, member/2, permutation/2, random/1]).
 
 	:- public(arbitrary/1).
