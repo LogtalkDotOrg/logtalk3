@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 444,-140 444,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol block_cipher_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;09, 00:26</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;09, 03:31</text>
 <g id="clust1" class="cluster">
 <title>cluster_block_cipher_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="block_cipher_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 420,-46 420,-46 426,-46 432,-52 432,-58 432,-58 432,-116 432,-116 432,-122 426,-128 420,-128 420,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/dd331c40ce8241c681007b0b2478eec958a90a3a/library/block_ciphers/block_cipher_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/dd331c40ce8241c681007b0b2478eec958a90a3a/library/block_ciphers/block_cipher_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/56be383dee005cee211c8c436b27b93f483a1f4c/library/block_ciphers/block_cipher_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/56be383dee005cee211c8c436b27b93f483a1f4c/library/block_ciphers/block_cipher_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.3" font-family="Monospace" font-size="10.00" fill="dimgray">block_cipher_protocol</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>encrypt_block/3</title>
 <polygon fill="springgreen" stroke="black" points="116.02,-92 17.98,-92 17.98,-56 116.02,-56 116.02,-92"/>
 <text xml:space="preserve" text-anchor="start" x="25.98" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/dd331c40ce8241c681007b0b2478eec958a90a3a/library/block_ciphers/block_cipher_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/dd331c40ce8241c681007b0b2478eec958a90a3a/library/block_ciphers/block_cipher_protocol.lgt#L31">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/56be383dee005cee211c8c436b27b93f483a1f4c/library/block_ciphers/block_cipher_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/56be383dee005cee211c8c436b27b93f483a1f4c/library/block_ciphers/block_cipher_protocol.lgt#L31">
 <text xml:space="preserve" text-anchor="start" x="28.48" y="-75.53" font-family="Monospace" font-size="11.00">encrypt_block/3</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>decrypt_block/3</title>
 <polygon fill="springgreen" stroke="black" points="232.02,-92 133.98,-92 133.98,-56 232.02,-56 232.02,-92"/>
 <text xml:space="preserve" text-anchor="start" x="141.98" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/dd331c40ce8241c681007b0b2478eec958a90a3a/library/block_ciphers/block_cipher_protocol.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/dd331c40ce8241c681007b0b2478eec958a90a3a/library/block_ciphers/block_cipher_protocol.lgt#L45">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/56be383dee005cee211c8c436b27b93f483a1f4c/library/block_ciphers/block_cipher_protocol.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/56be383dee005cee211c8c436b27b93f483a1f4c/library/block_ciphers/block_cipher_protocol.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="144.48" y="-75.53" font-family="Monospace" font-size="11.00">decrypt_block/3</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>block_size/1</title>
 <polygon fill="springgreen" stroke="black" points="331.77,-92 250.23,-92 250.23,-56 331.77,-56 331.77,-92"/>
 <text xml:space="preserve" text-anchor="start" x="258.23" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/dd331c40ce8241c681007b0b2478eec958a90a3a/library/block_ciphers/block_cipher_protocol.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/dd331c40ce8241c681007b0b2478eec958a90a3a/library/block_ciphers/block_cipher_protocol.lgt#L59">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/56be383dee005cee211c8c436b27b93f483a1f4c/library/block_ciphers/block_cipher_protocol.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/56be383dee005cee211c8c436b27b93f483a1f4c/library/block_ciphers/block_cipher_protocol.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="260.73" y="-75.53" font-family="Monospace" font-size="11.00">block_size/1</text>
 </a>
 </g>
@@ -71,7 +71,7 @@
 <title>key_size/1</title>
 <polygon fill="springgreen" stroke="black" points="422.49,-92 349.51,-92 349.51,-56 422.49,-56 422.49,-92"/>
 <text xml:space="preserve" text-anchor="start" x="357.51" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/dd331c40ce8241c681007b0b2478eec958a90a3a/library/block_ciphers/block_cipher_protocol.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/dd331c40ce8241c681007b0b2478eec958a90a3a/library/block_ciphers/block_cipher_protocol.lgt#L66">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/56be383dee005cee211c8c436b27b93f483a1f4c/library/block_ciphers/block_cipher_protocol.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/56be383dee005cee211c8c436b27b93f483a1f4c/library/block_ciphers/block_cipher_protocol.lgt#L66">
 <text xml:space="preserve" text-anchor="start" x="360.01" y="-75.53" font-family="Monospace" font-size="11.00">key_size/1</text>
 </a>
 </g>
