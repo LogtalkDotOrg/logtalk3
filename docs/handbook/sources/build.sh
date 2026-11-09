@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on November 8, 2026
+##   Last updated on November 9, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -88,6 +88,7 @@ sed '1,19d' ../../../library/application/NOTES.md | pandoc -f gfm -t rst -o libr
 sed '1,19d' ../../../library/apriori_pattern_miner/NOTES.md | pandoc -f gfm -t rst -o libraries/apriori_pattern_miner.rst
 sed '1,19d' ../../../library/arbitrary/NOTES.md | pandoc -f gfm -t rst -o libraries/arbitrary.rst
 sed '1,19d' ../../../library/arrangements/NOTES.md | pandoc -f gfm -t rst -o libraries/arrangements.rst
+sed '1,19d' ../../../library/asp/NOTES.md | pandoc -f gfm -t rst -o libraries/asp.rst
 sed '1,19d' ../../../library/assignvars/NOTES.md | pandoc -f gfm -t rst -o libraries/assignvars.rst
 sed '1,19d' ../../../library/association_rule_miner/NOTES.md | pandoc -f gfm -t rst -o libraries/association_rule_miner.rst
 sed '1,19d' ../../../library/atms/NOTES.md | pandoc -f gfm -t rst -o libraries/atms.rst
@@ -119,7 +120,6 @@ sed '1,19d' ../../../library/ccsds_time_fields/NOTES.md | pandoc -f gfm -t rst -
 sed '1,19d' ../../../library/character_sets/NOTES.md | pandoc -f gfm -t rst -o libraries/character_sets.rst
 sed '1,19d' ../../../library/chi_square_feature_selector/NOTES.md | pandoc -f gfm -t rst -o libraries/chi_square_feature_selector.rst
 sed '1,19d' ../../../library/classification_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/classification_protocols.rst
-sed '1,19d' ../../../library/clingo/NOTES.md | pandoc -f gfm -t rst -o libraries/clingo.rst
 sed '1,19d' ../../../library/clo_span_pattern_miner/NOTES.md | pandoc -f gfm -t rst -o libraries/clo_span_pattern_miner.rst
 sed '1,19d' ../../../library/clustering_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/clustering_protocols.rst
 sed '1,19d' ../../../library/cmac/NOTES.md | pandoc -f gfm -t rst -o libraries/cmac.rst

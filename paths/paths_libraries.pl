@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on November 8, 2026
+%  Last updated on November 9, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -42,6 +42,7 @@ logtalk_library_path(application, library('application/')).
 logtalk_library_path(apriori_pattern_miner, library('apriori_pattern_miner/')).
 logtalk_library_path(arbitrary, library('arbitrary/')).
 logtalk_library_path(arrangements, library('arrangements/')).
+logtalk_library_path(asp, library('asp/')).
 logtalk_library_path(assignvars, library('assignvars/')).
 logtalk_library_path(association_rule_miner, library('association_rule_miner/')).
 logtalk_library_path(atms, library('atms/')).
@@ -65,7 +66,6 @@ logtalk_library_path(cbor, library('cbor/')).
 logtalk_library_path(character_sets, library('character_sets/')).
 logtalk_library_path(chi_square_feature_selector, library('chi_square_feature_selector/')).
 logtalk_library_path(classification_protocols, library('classification_protocols/')).
-logtalk_library_path(clingo, library('clingo/')).
 logtalk_library_path(clo_span_pattern_miner, library('clo_span_pattern_miner/')).
 logtalk_library_path(clustering_protocols, library('clustering_protocols/')).
 logtalk_library_path(cmac, library('cmac/')).

@@ -37,6 +37,7 @@ directory in the ``NOTES.md`` file.
    apriori_pattern_miner
    arbitrary
    arrangements
+   asp
    assignvars
    association_rule_miner
    atms
@@ -68,7 +69,6 @@ directory in the ``NOTES.md`` file.
    character_sets
    chi_square_feature_selector
    classification_protocols
-   clingo
    clo_span_pattern_miner
    clustering_protocols
    cmac

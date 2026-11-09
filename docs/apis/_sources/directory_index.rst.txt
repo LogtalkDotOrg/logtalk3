@@ -302,6 +302,34 @@ To load an entity, always load the library that includes it using the goal ``log
    * :doc:`arrangements <arrangements_0>`
    * :doc:`arrangements_protocol <arrangements_protocol_0>`
 
+``library/asp/``
+----------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      asp <asp_0>
+      asp_expansion <asp_expansion_0>
+      asp_output <asp_output_0>
+      asp_problem_protocol <asp_problem_protocol_0>
+      asp_process <asp_process_0>
+      asp_program <asp_program_0>
+      asp_protocol <asp_protocol_0>
+      asp_symbols <asp_symbols_0>
+
+.. only:: latex
+
+   * :doc:`asp <asp_0>`
+   * :doc:`asp_expansion <asp_expansion_0>`
+   * :doc:`asp_output <asp_output_0>`
+   * :doc:`asp_problem_protocol <asp_problem_protocol_0>`
+   * :doc:`asp_process <asp_process_0>`
+   * :doc:`asp_program <asp_program_0>`
+   * :doc:`asp_protocol <asp_protocol_0>`
+   * :doc:`asp_symbols <asp_symbols_0>`
+
 ``library/assignvars/``
 -----------------------
 
@@ -853,34 +881,6 @@ To load an entity, always load the library that includes it using the goal ``log
    * :doc:`dataset_protocol <dataset_protocol_0>`
    * :doc:`probabilistic_classifier_common <probabilistic_classifier_common_0>`
    * :doc:`probabilistic_classifier_protocol <probabilistic_classifier_protocol_0>`
-
-``library/clingo/``
--------------------
-
-.. only:: not latex
-
-   .. toctree::
-      :maxdepth: 1
-
-      clingo <clingo_0>
-      clingo_expansion <clingo_expansion_0>
-      clingo_output <clingo_output_0>
-      clingo_problem_protocol <clingo_problem_protocol_0>
-      clingo_process <clingo_process_0>
-      clingo_program <clingo_program_0>
-      clingo_protocol <clingo_protocol_0>
-      clingo_symbols <clingo_symbols_0>
-
-.. only:: latex
-
-   * :doc:`clingo <clingo_0>`
-   * :doc:`clingo_expansion <clingo_expansion_0>`
-   * :doc:`clingo_output <clingo_output_0>`
-   * :doc:`clingo_problem_protocol <clingo_problem_protocol_0>`
-   * :doc:`clingo_process <clingo_process_0>`
-   * :doc:`clingo_program <clingo_program_0>`
-   * :doc:`clingo_protocol <clingo_protocol_0>`
-   * :doc:`clingo_symbols <clingo_symbols_0>`
 
 ``library/clo_span_pattern_miner/``
 -----------------------------------

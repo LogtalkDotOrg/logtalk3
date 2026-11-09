@@ -65,9 +65,10 @@ compact styling, adding internal links, and reducing the number of pages.
 Library
 -------
 
-* ADDED: New `clingo` library for representing Answer Set Programming (ASP)
-problems as Logtalk objects, invoking the Clingo command-line solver through
-the `process` library, and inspecting collected models and diagnostics.
+* ADDED: New `asp` library for representing Answer Set Programming (ASP)
+problems as Logtalk objects, invoking the Clingo (default) or zetesis
+command-line solver through the `process` library, and inspecting collected
+models and diagnostics.
 
 * ADDED: New `sat` library for representing SAT problems as Logtalk
 objects, invoking the Kissat (default), CaDiCaL, Glucose, or Z3 command-line

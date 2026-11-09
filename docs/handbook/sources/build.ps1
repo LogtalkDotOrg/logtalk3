@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on November 8, 2026
+##   Last updated on November 9, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -88,6 +88,7 @@ Foreach-Object {
 (Get-Content ../../../library/apriori_pattern_miner/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/apriori_pattern_miner.rst
 (Get-Content ../../../library/arbitrary/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/arbitrary.rst
 (Get-Content ../../../library/arrangements/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/arrangements.rst
+(Get-Content ../../../library/asp/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/asp.rst
 (Get-Content ../../../library/assignvars/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/assignvars.rst
 (Get-Content ../../../library/association_rule_miner/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/association_rule_miner.rst
 (Get-Content ../../../library/atms/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/atms.rst
@@ -119,7 +120,6 @@ Foreach-Object {
 (Get-Content ../../../library/character_sets/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/character_sets.rst
 (Get-Content ../../../library/chi_square_feature_selector/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/chi_square_feature_selector.rst
 (Get-Content ../../../library/classification_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/classification_protocols.rst
-(Get-Content ../../../library/clingo/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/clingo.rst
 (Get-Content ../../../library/clo_span_pattern_miner/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/clo_span_pattern_miner.rst
 (Get-Content ../../../library/clustering_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/clustering_protocols.rst
 (Get-Content ../../../library/cmac/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/cmac.rst

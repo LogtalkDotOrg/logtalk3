@@ -1,0 +1,155 @@
+.. index:: single: asp_program
+.. _asp_program/0:
+
+.. rst-class:: right
+
+**object**
+
+``asp_program``
+===============
+
+Canonical ASP statement validation and source generation.
+
+| **Availability:** 
+|    ``logtalk_load(asp(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-09
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: serialize/2
+.. _asp_program/0::serialize/2:
+
+``serialize/2``
+^^^^^^^^^^^^^^^
+
+Serializes ground canonical ASP statements to character codes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serialize(Statements,Codes)``
+| **Mode and number of proofs:**
+|    ``serialize(+list(compound),-list(integer))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Statements`` is insufficiently instantiated:
+|        ``instantiation_error``
+|    ``Statements`` is not a list:
+|        ``type_error(list,Statements)``
+|    A statement is invalid:
+|        ``domain_error(asp_statement,Statement)``
+
+
+------------
+
+.. index:: serialize/4
+.. _asp_program/0::serialize/4:
+
+``serialize/4``
+^^^^^^^^^^^^^^^
+
+Serializes statements with origins and returns ``line(Start, End, Origin)`` source-map entries.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serialize(Statements,Origins,Codes,SourceMap)``
+| **Mode and number of proofs:**
+|    ``serialize(+list(compound),+list,-list(integer),-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An input is insufficiently instantiated:
+|        ``instantiation_error``
+|    An input is not a list:
+|        ``type_error(list,Input)``
+|    A statement is invalid:
+|        ``domain_error(asp_statement,Statement)``
+|    An origin is invalid or the list lengths differ:
+|        ``domain_error(asp_origins,Origins)``
+
+
+------------
+
+.. index:: symbol_codes/2
+.. _asp_program/0::symbol_codes/2:
+
+``symbol_codes/2``
+^^^^^^^^^^^^^^^^^^
+
+Serializes a canonical ground symbol to ASP character codes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``symbol_codes(Symbol,Codes)``
+| **Mode and number of proofs:**
+|    ``symbol_codes(+term,-list(integer))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Symbol`` is insufficiently instantiated:
+|        ``instantiation_error``
+|    ``Symbol`` is not a supported ground symbol:
+|        ``domain_error(asp_symbol,Symbol)``
+
+
+------------
+
+.. index:: valid_identifier/1
+.. _asp_program/0::valid_identifier/1:
+
+``valid_identifier/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+True if the argument is a supported ASP function or predicate identifier.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_identifier(Name)``
+| **Mode and number of proofs:**
+|    ``valid_identifier(@term)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

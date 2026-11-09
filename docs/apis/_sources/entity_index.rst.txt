@@ -316,6 +316,12 @@ Objects
       ar_language_profile <ar_language_profile_0>
       arithmetic_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <arithmetic_operator_replacement_5>
       arrangements <arrangements_0>
+      asp <asp_0>
+      asp_expansion <asp_expansion_0>
+      asp_output <asp_output_0>
+      asp_process <asp_process_0>
+      asp_program <asp_program_0>
+      asp_symbols <asp_symbols_0>
       assertions <assertions_0>
       assertions(Mode) <assertions_1>
       assignvars <assignvars_0>
@@ -400,12 +406,6 @@ Objects
       chi_square_score(Discretization) <chi_square_score_1>
       chi_square_yates_score <chi_square_yates_score_0>
       clauses_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <clauses_reordering_5>
-      clingo <clingo_0>
-      clingo_expansion <clingo_expansion_0>
-      clingo_output <clingo_output_0>
-      clingo_process <clingo_process_0>
-      clingo_program <clingo_program_0>
-      clingo_symbols <clingo_symbols_0>
       clo_span_pattern_miner <clo_span_pattern_miner_0>
       cmac <cmac_0>
       cobertura_report <cobertura_report_0>
@@ -1225,6 +1225,12 @@ Objects
    * :doc:`ar_language_profile <ar_language_profile_0>`
    * :doc:`arithmetic_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <arithmetic_operator_replacement_5>`
    * :doc:`arrangements <arrangements_0>`
+   * :doc:`asp <asp_0>`
+   * :doc:`asp_expansion <asp_expansion_0>`
+   * :doc:`asp_output <asp_output_0>`
+   * :doc:`asp_process <asp_process_0>`
+   * :doc:`asp_program <asp_program_0>`
+   * :doc:`asp_symbols <asp_symbols_0>`
    * :doc:`assertions <assertions_0>`
    * :doc:`assertions(Mode) <assertions_1>`
    * :doc:`assignvars <assignvars_0>`
@@ -1309,12 +1315,6 @@ Objects
    * :doc:`chi_square_score(Discretization) <chi_square_score_1>`
    * :doc:`chi_square_yates_score <chi_square_yates_score_0>`
    * :doc:`clauses_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <clauses_reordering_5>`
-   * :doc:`clingo <clingo_0>`
-   * :doc:`clingo_expansion <clingo_expansion_0>`
-   * :doc:`clingo_output <clingo_output_0>`
-   * :doc:`clingo_process <clingo_process_0>`
-   * :doc:`clingo_program <clingo_program_0>`
-   * :doc:`clingo_symbols <clingo_symbols_0>`
    * :doc:`clo_span_pattern_miner <clo_span_pattern_miner_0>`
    * :doc:`cmac <cmac_0>`
    * :doc:`cobertura_report <cobertura_report_0>`
@@ -2127,6 +2127,8 @@ Protocols
       ant_colony_problem_protocol <ant_colony_problem_protocol_0>
       application_protocol <application_protocol_0>
       arrangements_protocol <arrangements_protocol_0>
+      asp_problem_protocol <asp_problem_protocol_0>
+      asp_protocol <asp_protocol_0>
       assignvarsp <assignvarsp_0>
       association_rule_miner_protocol <association_rule_miner_protocol_0>
       atms_environment_protocol <atms_environment_protocol_0>
@@ -2141,8 +2143,6 @@ Protocols
       class_hierarchyp <class_hierarchyp_0>
       classifier_protocol <classifier_protocol_0>
       clause_mutator_protocol <clause_mutator_protocol_0>
-      clingo_problem_protocol <clingo_problem_protocol_0>
-      clingo_protocol <clingo_protocol_0>
       cloning <cloning_0>
       clusterer_protocol <clusterer_protocol_0>
       clustering_dataset_protocol <clustering_dataset_protocol_0>
@@ -2356,6 +2356,8 @@ Protocols
    * :doc:`ant_colony_problem_protocol <ant_colony_problem_protocol_0>`
    * :doc:`application_protocol <application_protocol_0>`
    * :doc:`arrangements_protocol <arrangements_protocol_0>`
+   * :doc:`asp_problem_protocol <asp_problem_protocol_0>`
+   * :doc:`asp_protocol <asp_protocol_0>`
    * :doc:`assignvarsp <assignvarsp_0>`
    * :doc:`association_rule_miner_protocol <association_rule_miner_protocol_0>`
    * :doc:`atms_environment_protocol <atms_environment_protocol_0>`
@@ -2370,8 +2372,6 @@ Protocols
    * :doc:`class_hierarchyp <class_hierarchyp_0>`
    * :doc:`classifier_protocol <classifier_protocol_0>`
    * :doc:`clause_mutator_protocol <clause_mutator_protocol_0>`
-   * :doc:`clingo_problem_protocol <clingo_problem_protocol_0>`
-   * :doc:`clingo_protocol <clingo_protocol_0>`
    * :doc:`cloning <cloning_0>`
    * :doc:`clusterer_protocol <clusterer_protocol_0>`
    * :doc:`clustering_dataset_protocol <clustering_dataset_protocol_0>`

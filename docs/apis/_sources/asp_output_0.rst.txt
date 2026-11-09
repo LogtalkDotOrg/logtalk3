@@ -1,0 +1,103 @@
+.. index:: single: asp_output
+.. _asp_output/0:
+
+.. rst-class:: right
+
+**object**
+
+``asp_output``
+==============
+
+Whole-document Clingo and Zetesis JSON output decoding.
+
+| **Availability:** 
+|    ``logtalk_load(asp(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-09
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`asp_program <asp_program/0>`
+|    :ref:`asp_symbols <asp_symbols/0>`
+|    :ref:`json(ObjectRepresentation,PairRepresentation,StringRepresentation) <json/3>`
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: decode/8
+.. _asp_output/0::decode/8:
+
+``decode/8``
+^^^^^^^^^^^^
+
+Decodes CLI JSON and process metadata into a collected ``asp_result(Status, Models, Properties)`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode(Solver,Codes,RawStatus,NormalizedStatus,Diagnostics,SourceMap,Result,Options)``
+| **Mode and number of proofs:**
+|    ``decode(+atom,+list(integer),+term,+compound,+list(integer),+list(compound),-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An input is insufficiently instantiated:
+|        ``instantiation_error``
+|    A code-list input is not a character-code list:
+|        ``type_error(codes,Input)``
+|    ``SourceMap`` is not a list:
+|        ``type_error(list,SourceMap)``
+|    ``Options`` is not a list:
+|        ``type_error(list,Options)``
+|    An option is not a compound term:
+|        ``type_error(compound,Option)``
+|    ``Solver`` is not supported:
+|        ``domain_error(asp_solver,Solver)``
+|    ``Codes`` does not contain parsable JSON:
+|        ``domain_error(json,codes(Codes))``
+|    A JSON field has an invalid type or value:
+|        ``domain_error(asp_output,Field-Value)``
+|    The JSON simultaneously reports a time limit and another interruption:
+|        ``domain_error(asp_output,interruption_flags)``
+|    The process status is fatal or inconsistent with the solver result:
+|        ``domain_error(asp_process_status,NormalizedStatus)``
+|    A shown value is not a supported symbol:
+|        ``domain_error(asp_symbol,Codes)``
+|    A numeric symbol cannot be represented as an integer:
+|        ``representation_error(asp_integer)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

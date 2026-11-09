@@ -1,0 +1,84 @@
+.. index:: single: asp_symbols
+.. _asp_symbols/0:
+
+.. rst-class:: right
+
+**object**
+
+``asp_symbols``
+===============
+
+Parser for shown Clingo ground symbols.
+
+| **Availability:** 
+|    ``logtalk_load(asp(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-09
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`asp_program <asp_program/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: parse/2
+.. _asp_symbols/0::parse/2:
+
+``parse/2``
+^^^^^^^^^^^
+
+Parses one complete ground symbol into a canonical tagged term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(Codes,Symbol)``
+| **Mode and number of proofs:**
+|    ``parse(+list(integer),-term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Codes`` is insufficiently instantiated:
+|        ``instantiation_error``
+|    ``Codes`` is not a character-code list:
+|        ``type_error(codes,Codes)``
+|    ``Codes`` does not represent a supported ground symbol:
+|        ``domain_error(asp_symbol,Codes)``
+|    A numeric symbol cannot be represented as an integer:
+|        ``representation_error(asp_integer)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

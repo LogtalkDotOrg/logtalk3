@@ -1,0 +1,134 @@
+.. index:: single: asp_process
+.. _asp_process/0:
+
+.. rst-class:: right
+
+**object**
+
+``asp_process``
+===============
+
+Isolated operating-system shell transport for ASP solver CLIs.
+
+| **Availability:** 
+|    ``logtalk_load(asp(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-09
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`os <os/0>`
+|    :ref:`process <process/0>`
+|    :ref:`reader <reader/0>`
+|    :ref:`type <type/0>`
+|    :ref:`user <user/0>`
+|    :ref:`utf_8 <utf_8/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: quote/3
+.. _asp_process/0::quote/3:
+
+``quote/3``
+^^^^^^^^^^^
+
+Quotes an atom as one POSIX shell or Windows PowerShell literal, without interpolation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``quote(Platform,Argument,Quoted)``
+| **Mode and number of proofs:**
+|    ``quote(+atom,+atom,-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    An input is insufficiently instantiated:
+|        ``instantiation_error``
+|    An input is not an atom:
+|        ``type_error(atom,Input)``
+|    ``Platform`` is neither posix nor windows:
+|        ``domain_error(asp_shell_platform,Platform)``
+|    ``Argument`` contains a null character:
+|        ``domain_error(asp_shell_argument,Argument)``
+
+
+------------
+
+.. index:: run/7
+.. _asp_process/0::run/7:
+
+``run/7``
+^^^^^^^^^
+
+Runs the CLI using an owned directory and separate UTF-8 output files, returning only after cleanup.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run(Executable,Arguments,Source,Codes,Diagnostics,RawStatus,NormalizedStatus)``
+| **Mode and number of proofs:**
+|    ``run(+atom,+list(atom),+compound,-list(integer),-list(integer),-term,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    An input is insufficiently instantiated:
+|        ``instantiation_error``
+|    ``Executable`` or an argument is not an atom:
+|        ``type_error(atom,Input)``
+|    ``Arguments`` is not a list of atoms:
+|        ``type_error(list(atom),Arguments)``
+|    ``Source`` is invalid:
+|        ``domain_error(asp_process_source,Source)``
+|    A launcher dependency cannot be resolved:
+|        ``existence_error(command,Command)``
+|    A shell argument contains a null character:
+|        ``domain_error(asp_shell_argument,Argument)``
+|    A character sequence is not valid UTF-8:
+|        ``representation_error(utf_8)``
+|    A launcher operation fails:
+|        ``asp_transport(Stage,Status,Details)``
+|    A source or capture file cannot be accessed:
+|        ``existence_error(source_sink,Path)``
+|    A source or capture file cannot be opened:
+|        ``permission_error(open,source_sink,Path)``
+|    An owned directory cannot be found during cleanup:
+|        ``existence_error(directory,Directory)``
+|    An owned file or directory cannot be removed:
+|        ``permission_error(delete,source_sink,Path)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
