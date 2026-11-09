@@ -483,7 +483,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-11-08</div>
+<div class="line"><strong>Date:</strong> 2026-11-09</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -540,27 +540,27 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">decode(+atom,+list(integer),+term,+compound,+list(integer),+list(compound),-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">decode(+atom,+list(code),+term,+compound,+list(code),+list(compound),-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">An input is insufficiently instantiated:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Solver</span></code> is not ground:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Solver</span></code> is not an atom:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Solver</span></code> is neither a variable nor an atom:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Solver)</span></code></div>
 </div>
-<div class="line">A code-list input is not a character-code list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Codes</span></code> is a partial list or a list with an element <code class="docutils literal notranslate"><span class="pre">Element</span></code> which is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(codes,Input)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">SourceMap</span></code> is not a list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Codes</span></code> is neither a partial list nor a list of character codes:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,SourceMap)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(codes,Codes)</span></code></div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Codes</span></code> contains an unrecognized character or an unbalanced parenthesis:</div>
 <div class="line-block">
@@ -574,13 +574,37 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">smt_solver_reported_error(Message)</span></code></div>
 </div>
-<div class="line">The process status is fatal or inconsistent with the solver result:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">RawStatus</span></code> is not ground:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">NormalizedStatus</span></code> is not ground:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">NormalizedStatus</span></code> is neither a variable nor one of <code class="docutils literal notranslate"><span class="pre">exit(Code)</span></code>, <code class="docutils literal notranslate"><span class="pre">unknown(Details)</span></code>, nor <code class="docutils literal notranslate"><span class="pre">killed(Details)</span></code>:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(smt_process_status,NormalizedStatus)</span></code></div>
 </div>
 <div class="line">No response was parsed and the process did not exit cleanly:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(smt_process_status,NormalizedStatus)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> is a partial list or a list with an element <code class="docutils literal notranslate"><span class="pre">Element</span></code> which is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> is neither a partial list nor a list of character codes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(codes,Diagnostics)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SourceMap</span></code> is a partial list or a list with an element <code class="docutils literal notranslate"><span class="pre">Element</span></code> which is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SourceMap</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,SourceMap)</span></code></div>
 </div>
 </div>
 </div>

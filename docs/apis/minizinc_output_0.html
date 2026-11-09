@@ -541,23 +541,19 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">decode(+list(integer),+term,+compound,+list(integer),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">decode(+list(code),+term,+compound,+list(code),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Codes</span></code>, <code class="docutils literal notranslate"><span class="pre">RawStatus</span></code>, <code class="docutils literal notranslate"><span class="pre">NormalizedStatus</span></code>, or <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> is a variable:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Codes</span></code> is a partial list or a list with an element <code class="docutils literal notranslate"><span class="pre">Element</span></code> which is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Codes</span></code> is neither a variable nor a list of character codes:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Codes</span></code> is neither a partial list nor a list of character codes:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(codes,Codes)</span></code></div>
-</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> is neither a variable nor a list of character codes:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(codes,Diagnostics)</span></code></div>
 </div>
 <div class="line">A <code class="docutils literal notranslate"><span class="pre">--json-stream</span></code> line is not valid JSON:</div>
 <div class="line-block">
@@ -571,9 +567,25 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minizinc_output,Field-missing)</span></code></div>
 </div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">RawStatus</span></code> is not ground:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">NormalizedStatus</span></code> is not ground:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">NormalizedStatus</span></code> is not <code class="docutils literal notranslate"><span class="pre">exit(0)</span></code> and no JSON-stream message was produced:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minizinc_process_status,NormalizedStatus)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> is a partial list or a list with an element <code class="docutils literal notranslate"><span class="pre">Element</span></code> which is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> is neither a partial list nor a list of character codes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(codes,Diagnostics)</span></code></div>
 </div>
 </div>
 </div>

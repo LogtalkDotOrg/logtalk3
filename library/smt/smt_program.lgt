@@ -24,32 +24,34 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-08,
+		date is 2026-11-09,
 		comment is 'Canonical SMT-LIB 2 statement validation, source generation, and response-producing statement classification.'
 	]).
 
 	:- public(serialize/2).
-	:- mode(serialize(+list(compound), -list(integer)), one_or_error).
+	:- mode(serialize(+list, -list(code)), one_or_error).
 	:- info(serialize/2, [
 		comment is 'Serializes ground canonical SMT-LIB 2 statements to character codes, auto-declaring ``:produce-models`` and ``:produce-unsat-cores`` options when required and not already set by the caller.',
 		argnames is ['Statements', 'Codes'],
 		exceptions is [
-			'``Statements`` is insufficiently instantiated' - instantiation_error,
-			'``Statements`` is not a list' - type_error(list, 'Statements'),
-			'A statement is invalid' - domain_error(smt_statement, 'Statement')
+			'``Statements`` is a partial list or a list with an element ``Statement`` which is a variable' - instantiation_error,
+			'``Statements`` is neither a partial list nor a list' - type_error(list, 'Statements'),
+			'An element ``Statement`` of the list ``Statements`` is not a valid statement' - domain_error(smt_statement, 'Statement')
 		]
 	]).
 
 	:- public(serialize/4).
-	:- mode(serialize(+list(compound), +list, -list(integer), -list(compound)), one_or_error).
+	:- mode(serialize(+list, +list, -list(code), -list(compound)), one_or_error).
 	:- info(serialize/4, [
 		comment is 'Serializes statements with origins and returns ``line(Start, End, Origin)`` source-map entries; auto-declared option statements use the ``unknown`` origin.',
 		argnames is ['Statements', 'Origins', 'Codes', 'SourceMap'],
 		exceptions is [
-			'An input is insufficiently instantiated' - instantiation_error,
-			'An input is not a list' - type_error(list, 'Input'),
-			'A statement is invalid' - domain_error(smt_statement, 'Statement'),
-			'An origin is invalid or the list lengths differ' - domain_error(smt_origins, 'Origins')
+			'``Statements`` is a partial list or a list with an element ``Statement`` which is a variable' - instantiation_error,
+			'``Statements`` is neither a partial list nor a list' - type_error(list, 'Statements'),
+			'An element ``Statement`` of the list ``Statements`` is not a valid statement' - domain_error(smt_statement, 'Statement'),
+			'``Origins`` is a partial list or a list with an element ``Origin`` which is a variable' - instantiation_error,
+			'``Origins`` is neither a partial list nor a list' - type_error(list, 'Origins'),
+			'An element of the list ``Origins`` is neither ``unknown`` nor a valid ``source(File, Start, End)`` term, or its length differs from ``Statements``' - domain_error(smt_origins, 'Origins')
 		]
 	]).
 

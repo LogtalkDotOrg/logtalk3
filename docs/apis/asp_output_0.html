@@ -544,35 +544,31 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">decode(+atom,+list(integer),+term,+compound,+list(integer),+list(compound),-compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">decode(+atom,+list(code),+term,+compound,+list(code),+list(compound),-compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">An input is insufficiently instantiated:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Solver</span></code> is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">A code-list input is not a character-code list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Solver</span></code> is neither a variable nor an atom:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(codes,Input)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Solver)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">SourceMap</span></code> is not a list:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,SourceMap)</span></code></div>
-</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is not a list:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
-</div>
-<div class="line">An option is not a compound term:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
-</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Solver</span></code> is not supported:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Solver</span></code> is an atom but not a valid ASP solver:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(asp_solver,Solver)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Codes</span></code> is a partial list or a list with an element <code class="docutils literal notranslate"><span class="pre">Element</span></code> which is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Codes</span></code> is neither a partial list nor a list of character codes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(codes,Codes)</span></code></div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Codes</span></code> does not contain parsable JSON:</div>
 <div class="line-block">
@@ -582,13 +578,13 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(asp_output,Field-Value)</span></code></div>
 </div>
+<div class="line">A JSON field required by the selected solver output schema is missing:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(asp_output,Field-missing)</span></code></div>
+</div>
 <div class="line">The JSON simultaneously reports a time limit and another interruption:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(asp_output,interruption_flags)</span></code></div>
-</div>
-<div class="line">The process status is fatal or inconsistent with the solver result:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(asp_process_status,NormalizedStatus)</span></code></div>
 </div>
 <div class="line">A shown value is not a supported symbol:</div>
 <div class="line-block">
@@ -597,6 +593,54 @@
 <div class="line">A numeric symbol cannot be represented as an integer:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">representation_error(asp_integer)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">RawStatus</span></code> is not ground:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">NormalizedStatus`</span></code> is not ground:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">NormalizedStatus</span></code> is fatal or inconsistent with the decoded solver result:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(asp_process_status,NormalizedStatus)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> is a partial list or a list with an element <code class="docutils literal notranslate"><span class="pre">Element</span></code> which is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> is neither a partial list nor a list of character codes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(codes,Diagnostics)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SourceMap</span></code> is a partial list or a list with an element <code class="docutils literal notranslate"><span class="pre">Element</span></code> which is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SourceMap</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,SourceMap)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
 </div>
 </div>
 </div>

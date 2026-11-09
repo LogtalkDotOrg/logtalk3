@@ -553,19 +553,27 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">An input is insufficiently instantiated:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Platform</span></code> is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">An input is not an atom:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Platform</span></code> is neither a variable nor an atom:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Input)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Platform)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Platform</span></code> is neither posix nor windows:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Platform</span></code> is an atom but neither <code class="docutils literal notranslate"><span class="pre">posix</span></code> nor <code class="docutils literal notranslate"><span class="pre">windows</span></code>:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(asp_shell_platform,Platform)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Argument</span></code> contains a null character:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Argument</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Argument</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Argument)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Argument</span></code> is an atom but contains a null character:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(asp_shell_argument,Argument)</span></code></div>
 </div>
@@ -589,45 +597,49 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">run(+atom,+list(atom),+compound,-list(integer),-list(integer),-term,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">run(+atom,+list(atom),+compound,-list(code),-list(code),-term,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">An input is insufficiently instantiated:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Executable</span></code> is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Executable</span></code> or an argument is not an atom:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Executable</span></code> is neither a variable nor an atom:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Input)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Executable)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Arguments</span></code> is not a list of atoms:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Arguments</span></code> is a partial list or a list with an element <code class="docutils literal notranslate"><span class="pre">Argument</span></code> which is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Arguments</span></code> is neither a variable nor a list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(atom),Arguments)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is invalid:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Argument</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Arguments</span></code> is neither a variable nor an atom:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(asp_process_source,Source)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Argument)</span></code></div>
 </div>
-<div class="line">A launcher dependency cannot be resolved:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(command,Command)</span></code></div>
-</div>
-<div class="line">A shell argument contains a null character:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Executable</span></code> or an element <code class="docutils literal notranslate"><span class="pre">Argument</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Arguments</span></code> contains a null character:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(asp_shell_argument,Argument)</span></code></div>
 </div>
-<div class="line">A character sequence is not valid UTF-8:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is not ground:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">representation_error(utf_8)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">A launcher operation fails:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is neither <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code> nor <code class="docutils literal notranslate"><span class="pre">codes(Codes)</span></code>:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">asp_transport(Stage,Status,Details)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(asp_process_source,Source)</span></code></div>
 </div>
-<div class="line">A source or capture file cannot be accessed:</div>
+<div class="line">A launcher dependency does not exist:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(command,Command)</span></code></div>
+</div>
+<div class="line">A source or capture file does not exist:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(source_sink,Path)</span></code></div>
 </div>
@@ -642,6 +654,14 @@
 <div class="line">An owned file or directory cannot be removed:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(delete,source_sink,Path)</span></code></div>
+</div>
+<div class="line">A character sequence is not valid UTF-8:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">representation_error(utf_8)</span></code></div>
+</div>
+<div class="line">A launcher operation fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">asp_transport(Stage,Status,Details)</span></code></div>
 </div>
 </div>
 </div>

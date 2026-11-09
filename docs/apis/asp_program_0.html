@@ -544,21 +544,21 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">serialize(+list(compound),-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">serialize(+list,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Statements</span></code> is insufficiently instantiated:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Statements</span></code> is a partial list or a list with an element <code class="docutils literal notranslate"><span class="pre">Statement</span></code> which is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Statements</span></code> is not a list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Statements</span></code> is neither a partial list nor a list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Statements)</span></code></div>
 </div>
-<div class="line">A statement is invalid:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Statement</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Statements</span></code> is not a valid statement:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(asp_statement,Statement)</span></code></div>
 </div>
@@ -582,25 +582,33 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">serialize(+list(compound),+list,-list(integer),-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">serialize(+list,+list,-list(code),-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">An input is insufficiently instantiated:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Statements</span></code> is a partial list or a list with an element <code class="docutils literal notranslate"><span class="pre">Statement</span></code> which is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">An input is not a list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Statements</span></code> is neither a partial list nor a list:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Input)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Statements)</span></code></div>
 </div>
-<div class="line">A statement is invalid:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Statement</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Statements</span></code> is not a valid statement:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(asp_statement,Statement)</span></code></div>
 </div>
-<div class="line">An origin is invalid or the list lengths differ:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Origins</span></code> is a partial list or a list with an element <code class="docutils literal notranslate"><span class="pre">Origin</span></code> which is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Origins</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Origins)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Origins</span></code> has an element that is neither <code class="docutils literal notranslate"><span class="pre">unknown</span></code> nor a valid <code class="docutils literal notranslate"><span class="pre">source(File,</span> <span class="pre">Start,</span> <span class="pre">End)</span></code> term, or its length differs from <code class="docutils literal notranslate"><span class="pre">Statements</span></code>:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(asp_origins,Origins)</span></code></div>
 </div>
@@ -630,11 +638,11 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Symbol</span></code> is insufficiently instantiated:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Symbol</span></code> is not ground:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Symbol</span></code> is not a supported ground symbol:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Symbol</span></code> is ground but not a supported symbol:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(asp_symbol,Symbol)</span></code></div>
 </div>

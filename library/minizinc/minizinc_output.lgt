@@ -29,18 +29,21 @@
 	]).
 
 	:- public(decode/5).
-	:- mode(decode(+list(integer), +term, +compound, +list(integer), -compound), one_or_error).
+	:- mode(decode(+list(code), +term, +compound, +list(code), -compound), one_or_error).
 	:- info(decode/5, [
 		comment is 'Decodes CLI JSON-stream output and process metadata into a collected ``minizinc_result(Status, Solutions, Properties)`` term.',
 		argnames is ['Codes', 'RawStatus', 'NormalizedStatus', 'Diagnostics', 'Result'],
 		exceptions is [
-			'``Codes``, ``RawStatus``, ``NormalizedStatus``, or ``Diagnostics`` is a variable' - instantiation_error,
-			'``Codes`` is neither a variable nor a list of character codes' - type_error(codes, 'Codes'),
-			'``Diagnostics`` is neither a variable nor a list of character codes' - type_error(codes, 'Diagnostics'),
+			'``Codes`` is a partial list or a list with an element ``Element`` which is a variable' - instantiation_error,
+			'``Codes`` is neither a partial list nor a list of character codes' - type_error(codes, 'Codes'),
 			'A ``--json-stream`` line is not valid JSON' - domain_error(minizinc_output, json-'Line'),
 			'A JSON message field has an invalid type or value' - domain_error(minizinc_output, 'Field'-'Value'),
 			'A JSON message is missing a required field' - domain_error(minizinc_output, 'Field'-missing),
-			'``NormalizedStatus`` is not ``exit(0)`` and no JSON-stream message was produced' - domain_error(minizinc_process_status, 'NormalizedStatus')
+			'``RawStatus`` is not ground' - instantiation_error,
+			'``NormalizedStatus`` is not ground' - instantiation_error,
+			'``NormalizedStatus`` is not ``exit(0)`` and no JSON-stream message was produced' - domain_error(minizinc_process_status, 'NormalizedStatus'),
+			'``Diagnostics`` is a partial list or a list with an element ``Element`` which is a variable' - instantiation_error,
+			'``Diagnostics`` is neither a partial list nor a list of character codes' - type_error(codes, 'Diagnostics')
 		]
 	]).
 

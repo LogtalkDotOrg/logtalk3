@@ -29,26 +29,36 @@
 	]).
 
 	:- public(decode/8).
-	:- mode(decode(+atom, +list(integer), +term, +compound, +list(integer), +list(compound), -compound, +list(compound)), one_or_error).
+	:- mode(decode(+atom, +list(code), +term, +compound, +list(code), +list(compound), -compound, +list(compound)), one_or_error).
 	:- info(decode/8, [
 		comment is 'Decodes CLI JSON and process metadata into a collected ``asp_result(Status, Models, Properties)`` term.',
 		argnames is [
-			'Solver', 'Codes', 'RawStatus', 'NormalizedStatus', 'Diagnostics', 'SourceMap', 'Result',
-			'Options'
+			'Solver', 'Codes', 'RawStatus', 'NormalizedStatus', 'Diagnostics', 'SourceMap', 'Result', 'Options'
 		],
 		exceptions is [
-			'An input is insufficiently instantiated' - instantiation_error,
-			'A code-list input is not a character-code list' - type_error(codes, 'Input'),
-			'``SourceMap`` is not a list' - type_error(list, 'SourceMap'),
-			'``Options`` is not a list' - type_error(list, 'Options'),
-			'An option is not a compound term' - type_error(compound, 'Option'),
-			'``Solver`` is not supported' - domain_error(asp_solver, 'Solver'),
+			'``Solver`` is a variable' - instantiation_error,
+			'``Solver`` is neither a variable nor an atom' - type_error(atom, 'Solver'),
+			'``Solver`` is an atom but not a valid ASP solver' - domain_error(asp_solver, 'Solver'),
+			'``Codes`` is a partial list or a list with an element ``Element`` which is a variable' - instantiation_error,
+			'``Codes`` is neither a partial list nor a list of character codes' - type_error(codes, 'Codes'),
 			'``Codes`` does not contain parsable JSON' - domain_error(json, codes('Codes')),
 			'A JSON field has an invalid type or value' - domain_error(asp_output, 'Field'-'Value'),
+			'A JSON field required by the selected solver output schema is missing' - domain_error(asp_output, 'Field'-missing),
 			'The JSON simultaneously reports a time limit and another interruption' - domain_error(asp_output, interruption_flags),
-			'The process status is fatal or inconsistent with the solver result' - domain_error(asp_process_status, 'NormalizedStatus'),
 			'A shown value is not a supported symbol' - domain_error(asp_symbol, 'Codes'),
-			'A numeric symbol cannot be represented as an integer' - representation_error(asp_integer)
+			'A numeric symbol cannot be represented as an integer' - representation_error(asp_integer),
+			'``RawStatus`` is not ground' - instantiation_error,
+			'``NormalizedStatus``` is not ground' - instantiation_error,
+			'``NormalizedStatus`` is fatal or inconsistent with the decoded solver result' - domain_error(asp_process_status, 'NormalizedStatus'),
+			'``Diagnostics`` is a partial list or a list with an element ``Element`` which is a variable' - instantiation_error,
+			'``Diagnostics`` is neither a partial list nor a list of character codes' - type_error(codes, 'Diagnostics'),
+			'``SourceMap`` is a partial list or a list with an element ``Element`` which is a variable' - instantiation_error,
+			'``SourceMap`` is neither a variable nor a list' - type_error(list, 'SourceMap'),
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
 		]
 	]).
 

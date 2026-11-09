@@ -37,31 +37,36 @@
 		comment is 'Quotes an atom as one POSIX shell or Windows PowerShell literal, without interpolation.',
 		argnames is ['Platform', 'Argument', 'Quoted'],
 		exceptions is [
-			'An input is insufficiently instantiated' - instantiation_error,
-			'An input is not an atom' - type_error(atom, 'Input'),
-			'``Platform`` is neither posix nor windows' - domain_error(asp_shell_platform, 'Platform'),
-			'``Argument`` contains a null character' - domain_error(asp_shell_argument, 'Argument')
+			'``Platform`` is a variable' - instantiation_error,
+			'``Platform`` is neither a variable nor an atom' - type_error(atom, 'Platform'),
+			'``Platform`` is an atom but neither ``posix`` nor ``windows``' - domain_error(asp_shell_platform, 'Platform'),
+			'``Argument`` is a variable' - instantiation_error,
+			'``Argument`` is neither a variable nor an atom' - type_error(atom, 'Argument'),
+			'``Argument`` is an atom but contains a null character' - domain_error(asp_shell_argument, 'Argument')
 		]
 	]).
 
 	:- public(run/7).
-	:- mode(run(+atom, +list(atom), +compound, -list(integer), -list(integer), -term, -compound), one_or_error).
+	:- mode(run(+atom, +list(atom), +compound, -list(code), -list(code), -term, -compound), one_or_error).
 	:- info(run/7, [
 		comment is 'Runs the CLI using an owned directory and separate UTF-8 output files, returning only after cleanup.',
 		argnames is ['Executable', 'Arguments', 'Source', 'Codes', 'Diagnostics', 'RawStatus', 'NormalizedStatus'],
 		exceptions is [
-			'An input is insufficiently instantiated' - instantiation_error,
-			'``Executable`` or an argument is not an atom' - type_error(atom, 'Input'),
-			'``Arguments`` is not a list of atoms' - type_error(list(atom), 'Arguments'),
-			'``Source`` is invalid' - domain_error(asp_process_source, 'Source'),
-			'A launcher dependency cannot be resolved' - existence_error(command, 'Command'),
-			'A shell argument contains a null character' - domain_error(asp_shell_argument, 'Argument'),
-			'A character sequence is not valid UTF-8' - representation_error(utf_8),
-			'A launcher operation fails' - asp_transport('Stage', 'Status', 'Details'),
-			'A source or capture file cannot be accessed' - existence_error(source_sink, 'Path'),
+			'``Executable`` is a variable' - instantiation_error,
+			'``Executable`` is neither a variable nor an atom' - type_error(atom, 'Executable'),
+			'``Arguments`` is a partial list or a list with an element ``Argument`` which is a variable' - instantiation_error,
+			'``Arguments`` is neither a variable nor a list' - type_error(list(atom), 'Arguments'),
+			'An element ``Argument`` of the list ``Arguments`` is neither a variable nor an atom' - type_error(atom, 'Argument'),
+			'``Executable`` or an element ``Argument`` of the list ``Arguments`` contains a null character' - domain_error(asp_shell_argument, 'Argument'),
+			'``Source`` is not ground' - instantiation_error,
+			'``Source`` is neither ``file(Path)`` nor ``codes(Codes)``' - domain_error(asp_process_source, 'Source'),
+			'A launcher dependency does not exist' - existence_error(command, 'Command'),
+			'A source or capture file does not exist' - existence_error(source_sink, 'Path'),
 			'A source or capture file cannot be opened' - permission_error(open, source_sink, 'Path'),
 			'An owned directory cannot be found during cleanup' - existence_error(directory, 'Directory'),
-			'An owned file or directory cannot be removed' - permission_error(delete, source_sink, 'Path')
+			'An owned file or directory cannot be removed' - permission_error(delete, source_sink, 'Path'),
+			'A character sequence is not valid UTF-8' - representation_error(utf_8),
+			'A launcher operation fails' - asp_transport('Stage', 'Status', 'Details')
 		]
 	]).
 

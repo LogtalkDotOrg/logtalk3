@@ -31,20 +31,22 @@
 	:- public(solve/2).
 	:- mode(solve(+compound, -compound), one_or_error).
 	:- info(solve/2, [
-		comment is 'Solves a source with default options using the external Clingo CLI and returns a collected result after cleanup.',
+		comment is 'Solves a source with default options using the external Clingo CLI and returns a collected result after cleanup. Valid sources are ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, and ``file(Path)``.',
 		argnames is ['Source', 'Result'],
 		exceptions is [
-			'``Source`` or a provider statement is insufficiently instantiated' - instantiation_error,
-			'A source list has an invalid type' - type_error(list, 'Input'),
-			'``Codes`` is not a character-code list' - type_error(codes, 'Codes'),
-			'``Path`` is not an atom' - type_error(atom, 'Path'),
-			'``Source`` is not supported' - domain_error(asp_source, 'Source'),
-			'A provider statement is invalid' - domain_error(asp_statement, 'Statement'),
-			'A provider origin is invalid' - domain_error(asp_origins, 'Origins'),
+			'``Source`` is not ground' - instantiation_error,
+			'``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``asp_problem_protocol``' - domain_error(asp_source, 'Source'),
+			'``Statements`` is ground but not a list' - type_error(list, 'Statements'),
+			'A statement enumerated by the provider object is not a valid statement' - domain_error(asp_statement, 'Statement'),
+			'An origin enumerated by the provider object is invalid, or its origins and statements differ in length' - domain_error(asp_origins, 'Origins'),
+			'``Codes`` is ground but not a list of character codes' - type_error(codes, 'Codes'),
+			'An element ``Code`` of the list ``Codes`` is ground but not an integer' - type_error(integer, 'Code'),
+			'An element ``Code`` of the list ``Codes`` is an integer but not a valid character code' - domain_error(character_code, 'Code'),
+			'``Path`` is ground but not an atom' - type_error(atom, 'Path'),
+			'``Path`` does not exist' - existence_error(source_sink, 'Path'),
+			'``Path`` cannot be opened for reading' - permission_error(open, source_sink, 'Path'),
 			'A launcher argument contains a null character' - domain_error(asp_shell_argument, 'Argument'),
-			'Clingo or a shell dependency cannot be resolved' - existence_error(command, 'Command'),
-			'A source or capture file cannot be accessed' - existence_error(source_sink, 'Path'),
-			'A source or capture file cannot be opened' - permission_error(open, source_sink, 'Path'),
+			'The solver executable or a shell dependency does not exist' - existence_error(command, 'Command'),
 			'An owned directory cannot be found during cleanup' - existence_error(directory, 'Directory'),
 			'An owned file or directory cannot be removed' - permission_error(delete, source_sink, 'Path'),
 			'A character sequence is not valid UTF-8' - representation_error(utf_8),
@@ -56,23 +58,28 @@
 	:- public(solve/3).
 	:- mode(solve(+compound, -compound, +list(compound)), one_or_error).
 	:- info(solve/3, [
-		comment is 'Solves a source using solver selection, executable, enumeration, optimization, resource, and statistics options. Repeated options use the first occurrence.',
+		comment is 'Solves a source using solver selection, executable, enumeration, optimization, resource, and statistics options. Repeated options use the first occurrence. Valid sources are ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, and ``file(Path)``.',
 		argnames is ['Source', 'Result', 'Options'],
 		exceptions is [
-			'An input is insufficiently instantiated' - instantiation_error,
-			'A source or options list has an invalid type' - type_error(list, 'Input'),
-			'An option is not a compound term' - type_error(compound, 'Option'),
-			'``Codes`` is not a character-code list' - type_error(codes, 'Codes'),
-			'``Path`` is not an atom' - type_error(atom, 'Path'),
-			'``Source`` is not supported' - domain_error(asp_source, 'Source'),
-			'A provider statement is invalid' - domain_error(asp_statement, 'Statement'),
-			'A provider origin is invalid' - domain_error(asp_origins, 'Origins'),
-			'An option is invalid' - domain_error(option, 'Option'),
+			'``Source`` is not ground' - instantiation_error,
+			'``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``asp_problem_protocol``' - domain_error(asp_source, 'Source'),
+			'``Statements`` is ground but not a list' - type_error(list, 'Statements'),
+			'A statement enumerated by the provider object is not a valid statement' - domain_error(asp_statement, 'Statement'),
+			'An origin enumerated by the provider object is invalid, or its origins and statements differ in length' - domain_error(asp_origins, 'Origins'),
+			'``Codes`` is ground but not a list of character codes' - type_error(codes, 'Codes'),
+			'An element ``Code`` of the list ``Codes`` is ground but not an integer' - type_error(integer, 'Code'),
+			'An element ``Code`` of the list ``Codes`` is an integer but not a valid character code' - domain_error(character_code, 'Code'),
+			'``Path`` is ground but not an atom' - type_error(atom, 'Path'),
+			'``Path`` does not exist' - existence_error(source_sink, 'Path'),
+			'``Path`` cannot be opened for reading' - permission_error(open, source_sink, 'Path'),
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
 			'An effective option is unsupported by the selected solver' - domain_error(asp_solver_option, 'Solver'-'Option'),
 			'A launcher argument contains a null character' - domain_error(asp_shell_argument, 'Argument'),
-			'Clingo or a shell dependency cannot be resolved' - existence_error(command, 'Command'),
-			'A source or capture file cannot be accessed' - existence_error(source_sink, 'Path'),
-			'A source or capture file cannot be opened' - permission_error(open, source_sink, 'Path'),
+			'The solver executable or a shell dependency does not exist' - existence_error(command, 'Command'),
 			'An owned directory cannot be found during cleanup' - existence_error(directory, 'Directory'),
 			'An owned file or directory cannot be removed' - permission_error(delete, source_sink, 'Path'),
 			'A character sequence is not valid UTF-8' - representation_error(utf_8),
@@ -87,15 +94,15 @@
 		comment is 'Generates and prints ASP source to the current output, equivalent to ``program/2`` followed by ``print_program/1``, without invoking Clingo.',
 		argnames is ['Source'],
 		exceptions is [
-			'``Source`` or a provider statement is insufficiently instantiated' - instantiation_error,
-			'``Statements`` is not a list' - type_error(list, 'Statements'),
-			'``Codes`` is not a character-code list' - type_error(codes, 'Codes'),
-			'A character code is not an integer' - type_error(integer, 'Code'),
-			'``Path`` is not an atom' - type_error(atom, 'Path'),
-			'A character code is outside the supported range' - domain_error(character_code, 'Code'),
-			'``Source`` is not a supported source or its object does not implement the provider protocol' - domain_error(asp_source, 'Source'),
-			'A provider statement is invalid' - domain_error(asp_statement, 'Statement'),
-			'A provider origin is invalid' - domain_error(asp_origins, 'Origins'),
+			'``Source`` is not ground' - instantiation_error,
+			'``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``asp_problem_protocol``' - domain_error(asp_source, 'Source'),
+			'``Statements`` is ground but not a list' - type_error(list, 'Statements'),
+			'A statement enumerated by the provider object is not a valid statement' - domain_error(asp_statement, 'Statement'),
+			'An origin enumerated by the provider object is invalid, or its origins and statements differ in length' - domain_error(asp_origins, 'Origins'),
+			'``Codes`` is ground but not a list of character codes' - type_error(codes, 'Codes'),
+			'An element ``Code`` of the list ``Codes`` is ground but not an integer' - type_error(integer, 'Code'),
+			'An element ``Code`` of the list ``Codes`` is an integer but not a valid character code' - domain_error(character_code, 'Code'),
+			'``Path`` is ground but not an atom' - type_error(atom, 'Path'),
 			'``Path`` does not exist' - existence_error(source_sink, 'Path'),
 			'``Path`` cannot be opened for reading' - permission_error(open, source_sink, 'Path'),
 			'The current output stream does not allow writing' - permission_error(output, stream, 'Stream')
@@ -108,13 +115,15 @@
 		comment is 'Returns ASP source codes from ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, or ``file(Path)`` without invoking Clingo.',
 		argnames is ['Source', 'Codes'],
 		exceptions is [
-			'``Source`` or a provider statement is insufficiently instantiated' - instantiation_error,
-			'``Statements`` is not a list' - type_error(list, 'Statements'),
-			'``Codes`` is not a character-code list' - type_error(codes, 'Codes'),
-			'``Path`` is not an atom' - type_error(atom, 'Path'),
-			'``Source`` is not a supported source or its object does not implement the provider protocol' - domain_error(asp_source, 'Source'),
-			'A provider statement is invalid' - domain_error(asp_statement, 'Statement'),
-			'A provider origin is invalid' - domain_error(asp_origins, 'Origins'),
+			'``Source`` is not ground' - instantiation_error,
+			'``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``asp_problem_protocol``' - domain_error(asp_source, 'Source'),
+			'``Statements`` is ground but not a list' - type_error(list, 'Statements'),
+			'A statement enumerated by the provider object is not a valid statement' - domain_error(asp_statement, 'Statement'),
+			'An origin enumerated by the provider object is invalid, or its origins and statements differ in length' - domain_error(asp_origins, 'Origins'),
+			'``Codes`` is ground but not a list of character codes' - type_error(codes, 'Codes'),
+			'An element ``Code`` of the list ``Codes`` is ground but not an integer' - type_error(integer, 'Code'),
+			'An element ``Code`` of the list ``Codes`` is an integer but not a valid character code' - domain_error(character_code, 'Code'),
+			'``Path`` is ground but not an atom' - type_error(atom, 'Path'),
 			'``Path`` does not exist' - existence_error(source_sink, 'Path'),
 			'``Path`` cannot be opened for reading' - permission_error(open, source_sink, 'Path')
 		]
@@ -126,10 +135,10 @@
 		comment is 'Prints ASP character codes to the current output without adding a newline or invoking Clingo.',
 		argnames is ['Codes'],
 		exceptions is [
-			'``Codes`` is insufficiently instantiated' - instantiation_error,
-			'``Codes`` is not a character-code list' - type_error(codes, 'Codes'),
-			'A character code is not an integer' - type_error(integer, 'Code'),
-			'A character code is outside the supported range' - domain_error(character_code, 'Code'),
+			'``Codes`` is not ground' - instantiation_error,
+			'``Codes`` is ground but not a list of character codes' - type_error(codes, 'Codes'),
+			'An element ``Code`` of the list ``Codes`` is ground but not an integer' - type_error(integer, 'Code'),
+			'An element ``Code`` of the list ``Codes`` is an integer but not a valid character code' - domain_error(character_code, 'Code'),
 			'The current output stream does not allow writing' - permission_error(output, stream, 'Stream')
 		]
 	]).
@@ -140,8 +149,8 @@
 		comment is 'Enumerates, by backtracking, collected ``model(Symbols, Costs, RawValues)`` records without starting a process.',
 		argnames is ['Result', 'Model'],
 		exceptions is [
-			'``Result`` is insufficiently instantiated' - instantiation_error,
-			'``Result`` is not a collected Clingo result' - domain_error(asp_result, 'Result')
+			'``Result`` is not ground' - instantiation_error,
+			'``Result`` is not a valid collected Clingo result' - domain_error(asp_result, 'Result')
 		]
 	]).
 
@@ -151,8 +160,8 @@
 		comment is 'Enumerates, by backtracking, ``status(Status)`` and the stored result properties.',
 		argnames is ['Result', 'Property'],
 		exceptions is [
-			'``Result`` is insufficiently instantiated' - instantiation_error,
-			'``Result`` is not a collected Clingo result' - domain_error(asp_result, 'Result')
+			'``Result`` is not ground' - instantiation_error,
+			'``Result`` is not a valid collected Clingo result' - domain_error(asp_result, 'Result')
 		]
 	]).
 
@@ -162,8 +171,8 @@
 		comment is 'Prints collected answers, optimization costs, solver status, and summary metadata to the current output using Clingo-style labels, without invoking the solver.',
 		argnames is ['Result'],
 		exceptions is [
-			'``Result`` is insufficiently instantiated' - instantiation_error,
-			'``Result`` is not a collected Clingo result' - domain_error(asp_result, 'Result'),
+			'``Result`` is not ground' - instantiation_error,
+			'``Result`` is not a valid collected Clingo result' - domain_error(asp_result, 'Result'),
 			'The current output stream does not allow writing' - permission_error(output, stream, 'Stream')
 		]
 	]).

@@ -15,7 +15,7 @@ Protocol for process-backed Z3, cvc5, Bitwuzla, and Yices 2 CLI solving, SMT-LIB
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-11-08
+| **Date:** 2026-11-09
 
 | **Compilation flags:**
 |    ``static``
@@ -44,7 +44,7 @@ Public predicates
 ``solve/2``
 ^^^^^^^^^^^
 
-Solves a source with default options using the external SMT solver CLI and returns a collected result per ``check-sat`` command, in script order, after cleanup.
+Solves a source with default options using the external SMT solver CLI and returns a collected result per ``check-sat`` command, in script order, after cleanup. Valid sources are ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, and ``file(Path)``.
 
 | **Compilation flags:**
 |    ``static``
@@ -55,12 +55,38 @@ Solves a source with default options using the external SMT solver CLI and retur
 |    ``solve(+compound,-list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Source`` or a provider statement is insufficiently instantiated:
+|    ``Source`` is not ground:
 |        ``instantiation_error``
-|    A source list has an invalid type:
-|        ``type_error(list,Input)``
-|    ``Source`` is not supported:
+|    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``smt_problem_protocol``:
 |        ``domain_error(smt_source,Source)``
+|    ``Statements`` is ground but not a list:
+|        ``type_error(list,Statements)``
+|    A statement enumerated by the provider object is not a valid statement:
+|        ``domain_error(smt_statement,Statement)``
+|    An origin enumerated by the provider object is invalid, or its origins and statements differ in length:
+|        ``domain_error(smt_origins,Origins)``
+|    ``Codes`` is ground but not a list of character codes:
+|        ``type_error(codes,Codes)``
+|    An element ``Code`` of the list ``Codes`` is ground but not an integer:
+|        ``type_error(integer,Code)``
+|    An element ``Code`` of the list ``Codes`` is an integer but not a valid character code:
+|        ``domain_error(character_code,Code)``
+|    ``Path`` is ground but not an atom:
+|        ``type_error(atom,Path)``
+|    ``Path`` does not exist:
+|        ``existence_error(source_sink,Path)``
+|    ``Path`` cannot be opened for reading:
+|        ``permission_error(open,source_sink,Path)``
+|    A launcher argument contains a null character:
+|        ``domain_error(smt_shell_argument,Argument)``
+|    The selected solver executable or a shell dependency does not exist:
+|        ``existence_error(command,Command)``
+|    An owned directory cannot be found during cleanup:
+|        ``existence_error(directory,Directory)``
+|    An owned file or directory cannot be removed:
+|        ``permission_error(delete,source_sink,Path)``
+|    A character sequence is not valid UTF-8:
+|        ``representation_error(utf_8)``
 |    A launcher operation fails:
 |        ``smt_transport(Stage,Status,Details)``
 |    Solver output is invalid or inconsistent with its exit status:
@@ -75,7 +101,7 @@ Solves a source with default options using the external SMT solver CLI and retur
 ``solve/3``
 ^^^^^^^^^^^
 
-Solves a source using ``solver/1``, ``executable/1``, and ``time_limit/1`` options. Repeated options use the first occurrence.
+Solves a source using ``solver/1``, ``executable/1``, and ``time_limit/1`` options. Repeated options use the first occurrence. Valid sources are ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, and ``file(Path)``.
 
 | **Compilation flags:**
 |    ``static``
@@ -86,32 +112,42 @@ Solves a source using ``solver/1``, ``executable/1``, and ``time_limit/1`` optio
 |    ``solve(+compound,-list(compound),+list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    An input is insufficiently instantiated:
+|    ``Source`` is not ground:
 |        ``instantiation_error``
-|    A source or options list has an invalid type:
-|        ``type_error(list,Input)``
-|    An option is not a compound term:
-|        ``type_error(compound,Option)``
-|    ``Codes`` is not a character-code list:
-|        ``type_error(codes,Codes)``
-|    ``Path`` is not an atom:
-|        ``type_error(atom,Path)``
-|    ``Source`` is not supported:
+|    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``smt_problem_protocol``:
 |        ``domain_error(smt_source,Source)``
-|    A provider statement is invalid:
+|    ``Statements`` is ground but not a list:
+|        ``type_error(list,Statements)``
+|    A statement enumerated by the provider object is not a valid statement:
 |        ``domain_error(smt_statement,Statement)``
-|    A provider origin is invalid:
+|    An origin enumerated by the provider object is invalid, or its origins and statements differ in length:
 |        ``domain_error(smt_origins,Origins)``
-|    An option is invalid:
+|    ``Codes`` is ground but not a list of character codes:
+|        ``type_error(codes,Codes)``
+|    An element ``Code`` of the list ``Codes`` is ground but not an integer:
+|        ``type_error(integer,Code)``
+|    An element ``Code`` of the list ``Codes`` is an integer but not a valid character code:
+|        ``domain_error(character_code,Code)``
+|    ``Path`` is ground but not an atom:
+|        ``type_error(atom,Path)``
+|    ``Path`` does not exist:
+|        ``existence_error(source_sink,Path)``
+|    ``Path`` cannot be opened for reading:
+|        ``permission_error(open,source_sink,Path)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
 |        ``domain_error(option,Option)``
 |    A launcher argument contains a null character:
 |        ``domain_error(smt_shell_argument,Argument)``
-|    The selected solver or a shell dependency cannot be resolved:
+|    The selected solver executable or a shell dependency does not exist:
 |        ``existence_error(command,Command)``
-|    A source or capture file cannot be accessed:
-|        ``existence_error(source_sink,Path)``
-|    A source or capture file cannot be opened:
-|        ``permission_error(open,source_sink,Path)``
 |    An owned directory cannot be found during cleanup:
 |        ``existence_error(directory,Directory)``
 |    An owned file or directory cannot be removed:
@@ -143,20 +179,24 @@ Generates and prints SMT-LIB 2 source to the current output, equivalent to ``pro
 |    ``program(+compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Source`` or a provider statement is insufficiently instantiated:
+|    ``Source`` is not ground:
 |        ``instantiation_error``
-|    ``Statements`` is not a list:
-|        ``type_error(list,Statements)``
-|    ``Codes`` is not a character-code list:
-|        ``type_error(codes,Codes)``
-|    ``Path`` is not an atom:
-|        ``type_error(atom,Path)``
-|    ``Source`` is not a supported source or its object does not implement the provider protocol:
+|    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``smt_problem_protocol``:
 |        ``domain_error(smt_source,Source)``
-|    A provider statement is invalid:
+|    ``Statements`` is ground but not a list:
+|        ``type_error(list,Statements)``
+|    A statement enumerated by the provider object is not a valid statement:
 |        ``domain_error(smt_statement,Statement)``
-|    A provider origin is invalid:
+|    An origin enumerated by the provider object is invalid, or its origins and statements differ in length:
 |        ``domain_error(smt_origins,Origins)``
+|    ``Codes`` is ground but not a list of character codes:
+|        ``type_error(codes,Codes)``
+|    An element ``Code`` of the list ``Codes`` is ground but not an integer:
+|        ``type_error(integer,Code)``
+|    An element ``Code`` of the list ``Codes`` is an integer but not a valid character code:
+|        ``domain_error(character_code,Code)``
+|    ``Path`` is ground but not an atom:
+|        ``type_error(atom,Path)``
 |    ``Path`` does not exist:
 |        ``existence_error(source_sink,Path)``
 |    ``Path`` cannot be opened for reading:
@@ -184,20 +224,24 @@ Returns SMT-LIB 2 source codes from ``object(Object)``, ``terms(Statements)``, `
 |    ``program(+compound,-list(integer))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Source`` or a provider statement is insufficiently instantiated:
+|    ``Source`` is not ground:
 |        ``instantiation_error``
-|    ``Statements`` is not a list:
-|        ``type_error(list,Statements)``
-|    ``Codes`` is not a character-code list:
-|        ``type_error(codes,Codes)``
-|    ``Path`` is not an atom:
-|        ``type_error(atom,Path)``
-|    ``Source`` is not a supported source or its object does not implement the provider protocol:
+|    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``smt_problem_protocol``:
 |        ``domain_error(smt_source,Source)``
-|    A provider statement is invalid:
+|    ``Statements`` is ground but not a list:
+|        ``type_error(list,Statements)``
+|    A statement enumerated by the provider object is not a valid statement:
 |        ``domain_error(smt_statement,Statement)``
-|    A provider origin is invalid:
+|    An origin enumerated by the provider object is invalid, or its origins and statements differ in length:
 |        ``domain_error(smt_origins,Origins)``
+|    ``Codes`` is ground but not a list of character codes:
+|        ``type_error(codes,Codes)``
+|    An element ``Code`` of the list ``Codes`` is ground but not an integer:
+|        ``type_error(integer,Code)``
+|    An element ``Code`` of the list ``Codes`` is an integer but not a valid character code:
+|        ``domain_error(character_code,Code)``
+|    ``Path`` is ground but not an atom:
+|        ``type_error(atom,Path)``
 |    ``Path`` does not exist:
 |        ``existence_error(source_sink,Path)``
 |    ``Path`` cannot be opened for reading:
@@ -223,13 +267,13 @@ Prints SMT-LIB 2 character codes to the current output without adding a newline 
 |    ``print_program(+list(integer))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Codes`` is insufficiently instantiated:
+|    ``Codes`` is not ground:
 |        ``instantiation_error``
-|    ``Codes`` is not a character-code list:
+|    ``Codes`` is ground but not a list of character codes:
 |        ``type_error(codes,Codes)``
-|    A character code is not an integer:
+|    An element ``Code`` of the list ``Codes`` is ground but not an integer:
 |        ``type_error(integer,Code)``
-|    A character code is outside the supported range:
+|    An element ``Code`` of the list ``Codes`` is an integer but not a valid character code:
 |        ``domain_error(character_code,Code)``
 |    The current output stream does not allow writing:
 |        ``permission_error(output,stream,Stream)``
@@ -254,9 +298,9 @@ Returns the collected status (``satisfiable``, ``unsatisfiable``, or ``unknown``
 |    ``status(+compound,-atom)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Result`` is insufficiently instantiated:
+|    ``Result`` is not ground:
 |        ``instantiation_error``
-|    ``Result`` is not a collected SMT solver result:
+|    ``Result`` is not a valid collected SMT solver result:
 |        ``domain_error(smt_result,Result)``
 
 
@@ -279,9 +323,9 @@ Enumerates, by backtracking, the collected model bindings (``Symbol-Value`` pair
 |    ``model_binding(+compound,-pair)`` - ``zero_or_more``
 
 | **Exceptions:**
-|    ``Result`` is insufficiently instantiated:
+|    ``Result`` is not ground:
 |        ``instantiation_error``
-|    ``Result`` is not a collected SMT solver result:
+|    ``Result`` is not a valid collected SMT solver result:
 |        ``domain_error(smt_result,Result)``
 
 
@@ -304,11 +348,11 @@ Looks up the collected model value bound to ``Symbol``. Fails when the result ha
 |    ``model_value(+compound,+atom,-term)`` - ``zero_or_one``
 
 | **Exceptions:**
-|    An input is insufficiently instantiated:
+|    ``Result`` or ``Symbol`` is a variable:
 |        ``instantiation_error``
-|    ``Symbol`` is not an atom:
+|    ``Symbol`` is neither a variable nor an atom:
 |        ``type_error(atom,Symbol)``
-|    ``Result`` is not a collected SMT solver result:
+|    ``Result`` is not a valid collected SMT solver result:
 |        ``domain_error(smt_result,Result)``
 
 
@@ -331,9 +375,9 @@ Enumerates, by backtracking, the named assertions in the collected unsatisfiable
 |    ``unsat_core_name(+compound,-atom)`` - ``zero_or_more``
 
 | **Exceptions:**
-|    ``Result`` is insufficiently instantiated:
+|    ``Result`` is not ground:
 |        ``instantiation_error``
-|    ``Result`` is not a collected SMT solver result:
+|    ``Result`` is not a valid collected SMT solver result:
 |        ``domain_error(smt_result,Result)``
 
 
@@ -356,9 +400,9 @@ Enumerates, by backtracking, ``status(Status)`` and the stored result properties
 |    ``result_property(+compound,?compound)`` - ``zero_or_more``
 
 | **Exceptions:**
-|    ``Result`` is insufficiently instantiated:
+|    ``Result`` is not ground:
 |        ``instantiation_error``
-|    ``Result`` is not a collected SMT solver result:
+|    ``Result`` is not a valid collected SMT solver result:
 |        ``domain_error(smt_result,Result)``
 
 
@@ -381,9 +425,9 @@ Prints a single collected result (status and, when present, model bindings and u
 |    ``print_result(+compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Result`` is insufficiently instantiated:
+|    ``Result`` is not ground:
 |        ``instantiation_error``
-|    ``Result`` is not a collected SMT solver result:
+|    ``Result`` is not a valid collected SMT solver result:
 |        ``domain_error(smt_result,Result)``
 |    The current output stream does not allow writing:
 |        ``permission_error(output,stream,Stream)``
@@ -408,11 +452,11 @@ Prints each collected result in ``Results``, in order, separating consecutive re
 |    ``print_results(+list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Results`` is insufficiently instantiated:
+|    ``Results`` is not ground:
 |        ``instantiation_error``
-|    ``Results`` is not a list:
+|    ``Results`` is ground but not a list:
 |        ``type_error(list,Results)``
-|    A result is not a collected SMT solver result:
+|    An element of the list ``Results`` is not a valid collected SMT solver result:
 |        ``domain_error(smt_result,Result)``
 |    The current output stream does not allow writing:
 |        ``permission_error(output,stream,Stream)``

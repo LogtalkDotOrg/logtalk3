@@ -29,32 +29,30 @@
 	]).
 
 	:- public(serialize/2).
-	:- mode(serialize(+list(compound), -list(integer)), one_or_error).
+	:- mode(serialize(+list, -list(integer)), one_or_error).
 	:- info(serialize/2, [
 		comment is 'Serializes ground canonical ASP statements to character codes.',
 		argnames is ['Statements', 'Codes'],
 		exceptions is [
-			'``Statements`` is insufficiently instantiated' - instantiation_error,
-			'``Statements`` is not a list' - type_error(list, 'Statements'),
-			'A statement is invalid' - domain_error(asp_statement, 'Statement')
+			'``Statements`` is a partial list or a list with an element ``Statement`` which is a variable' - instantiation_error,
+			'``Statements`` is neither a partial list nor a list' - type_error(list, 'Statements'),
+			'An element ``Statement`` of the list ``Statements`` is not a valid statement' - domain_error(asp_statement, 'Statement')
 		]
 	]).
 
 	:- public(serialize/4).
-	:- mode(serialize(+list(compound), +list, -list(integer), -list(compound)), one_or_error).
+	:- mode(serialize(+list, +list, -list(code), -list(compound)), one_or_error).
 	:- info(serialize/4, [
 		comment is 'Serializes statements with origins and returns ``line(Start, End, Origin)`` source-map entries.',
 		argnames is ['Statements', 'Origins', 'Codes', 'SourceMap'],
 		exceptions is [
-			'An input is insufficiently instantiated' - instantiation_error,
-			'An input is not a list' - type_error(list, 'Input'),
-			'A statement is invalid' - domain_error(asp_statement, 'Statement'),
-			'An origin is invalid or the list lengths differ' - domain_error(asp_origins, 'Origins')
+			'``Statements`` is a partial list or a list with an element ``Statement`` which is a variable' - instantiation_error,
+			'``Statements`` is neither a partial list nor a list' - type_error(list, 'Statements'),
+			'An element ``Statement`` of the list ``Statements`` is not a valid statement' - domain_error(asp_statement, 'Statement'),
+			'``Origins`` is a partial list or a list with an element ``Origin`` which is a variable' - instantiation_error,
+			'``Origins`` is neither a variable nor a list' - type_error(list, 'Origins'),
+			'``Origins`` has an element that is neither ``unknown`` nor a valid ``source(File, Start, End)`` term, or its length differs from ``Statements``' - domain_error(asp_origins, 'Origins')
 		]
-	]).
-
-	:- uses(type, [
-		check/3, valid/2
 	]).
 
 	:- public(symbol_codes/2).
@@ -63,13 +61,9 @@
 		comment is 'Serializes a canonical ground symbol to ASP character codes.',
 		argnames is ['Symbol', 'Codes'],
 		exceptions is [
-			'``Symbol`` is insufficiently instantiated' - instantiation_error,
-			'``Symbol`` is not a supported ground symbol' - domain_error(asp_symbol, 'Symbol')
+			'``Symbol`` is not ground' - instantiation_error,
+			'``Symbol`` is ground but not a supported symbol' - domain_error(asp_symbol, 'Symbol')
 		]
-	]).
-
-	:- uses(list, [
-		append/3
 	]).
 
 	:- public(valid_identifier/1).
@@ -77,6 +71,14 @@
 	:- info(valid_identifier/1, [
 		comment is 'True if the argument is a supported ASP function or predicate identifier.',
 		argnames is ['Name']
+	]).
+
+	:- uses(list, [
+		append/3
+	]).
+
+	:- uses(type, [
+		check/3, valid/2
 	]).
 
 	valid_identifier(Name) :-

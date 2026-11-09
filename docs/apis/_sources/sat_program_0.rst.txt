@@ -15,7 +15,7 @@ Canonical CNF statement validation, DIMACS source generation, and variable table
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-11-08
+| **Date:** 2026-11-09
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -52,14 +52,14 @@ Serializes ground canonical CNF statements to DIMACS character codes, assigning 
 | **Template:**
 |    ``serialize(Statements,Codes)``
 | **Mode and number of proofs:**
-|    ``serialize(+list(compound),-list(integer))`` - ``one_or_error``
+|    ``serialize(+list,-list(code))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Statements`` is insufficiently instantiated:
+|    ``Statements`` is a partial list or a list with an element ``Statement`` which is a variable:
 |        ``instantiation_error``
-|    ``Statements`` is not a list:
+|    ``Statements`` is neither a partial list nor a list:
 |        ``type_error(list,Statements)``
-|    A statement is invalid:
+|    An element ``Statement`` of the list ``Statements`` is not a valid statement:
 |        ``domain_error(sat_statement,Statement)``
 
 
@@ -79,16 +79,20 @@ Serializes statements with origins and returns ``line(Start, End, Origin)`` sour
 | **Template:**
 |    ``serialize(Statements,Origins,Codes,SourceMap)``
 | **Mode and number of proofs:**
-|    ``serialize(+list(compound),+list,-list(integer),-list(compound))`` - ``one_or_error``
+|    ``serialize(+list,+list,-list(code),-list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    An input is insufficiently instantiated:
+|    ``Statements`` is a partial list or a list with an element ``Statement`` which is a variable:
 |        ``instantiation_error``
-|    An input is not a list:
-|        ``type_error(list,Input)``
-|    A statement is invalid:
+|    ``Statements`` is neither a partial list nor a list:
+|        ``type_error(list,Statements)``
+|    An element ``Statement`` of the list ``Statements`` is not a valid statement:
 |        ``domain_error(sat_statement,Statement)``
-|    An origin is invalid or the list lengths differ:
+|    ``Origins`` is a partial list or a list with an element ``Origin`` which is a variable:
+|        ``instantiation_error``
+|    ``Origins`` is neither a variable nor a list:
+|        ``type_error(list,Origins)``
+|    ``Origins`` has an element that is neither ``unknown`` nor a valid ``source(File, Start, End)`` term, or its length differs from ``Statements``:
 |        ``domain_error(sat_origins,Origins)``
 
 
@@ -108,14 +112,14 @@ Returns the ordered ``Term-Number`` variable table that ``serialize/2`` and ``se
 | **Template:**
 |    ``variables(Statements,Variables)``
 | **Mode and number of proofs:**
-|    ``variables(+list(compound),-list(pair))`` - ``one_or_error``
+|    ``variables(+list,-list(pair))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Statements`` is insufficiently instantiated:
+|    ``Statements`` is a partial list or a list with an element ``Statement`` which is a variable:
 |        ``instantiation_error``
-|    ``Statements`` is not a list:
+|    ``Statements`` is neither a partial list nor a list:
 |        ``type_error(list,Statements)``
-|    A statement is invalid:
+|    An element ``Statement`` of the list ``Statements`` is not a valid statement:
 |        ``domain_error(sat_statement,Statement)``
 
 

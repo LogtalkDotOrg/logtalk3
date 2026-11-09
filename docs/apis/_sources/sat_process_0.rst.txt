@@ -15,7 +15,7 @@ Isolated operating-system shell transport for the Kissat, CaDiCaL, Glucose, and 
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-11-08
+| **Date:** 2026-11-09
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -60,13 +60,17 @@ Quotes an atom as one POSIX shell or Windows PowerShell literal, without interpo
 |    ``quote(+atom,+atom,-atom)`` - ``one_or_error``
 
 | **Exceptions:**
-|    An input is insufficiently instantiated:
+|    ``Platform`` is a variable:
 |        ``instantiation_error``
-|    An input is not an atom:
-|        ``type_error(atom,Input)``
-|    ``Platform`` is neither posix nor windows:
+|    ``Platform`` is neither a variable nor an atom:
+|        ``type_error(atom,Platform)``
+|    ``Platform`` is an atom but neither ``posix`` nor ``windows``:
 |        ``domain_error(sat_shell_platform,Platform)``
-|    ``Argument`` contains a null character:
+|    ``Argument`` is a variable:
+|        ``instantiation_error``
+|    ``Argument`` is neither a variable nor an atom:
+|        ``type_error(atom,Argument)``
+|    ``Argument`` is an atom but contains a null character:
 |        ``domain_error(sat_shell_argument,Argument)``
 
 
@@ -86,26 +90,28 @@ Runs the CLI using an owned directory and separate UTF-8 output files, returning
 | **Template:**
 |    ``run(Executable,Arguments,Source,Codes,Diagnostics,RawStatus,NormalizedStatus)``
 | **Mode and number of proofs:**
-|    ``run(+atom,+list(atom),+compound,-list(integer),-list(integer),-term,-compound)`` - ``one_or_error``
+|    ``run(+atom,+list(atom),+compound,-list(code),-list(code),-term,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    An input is insufficiently instantiated:
+|    ``Executable`` is a variable:
 |        ``instantiation_error``
-|    ``Executable`` or an argument is not an atom:
-|        ``type_error(atom,Input)``
-|    ``Arguments`` is not a list of atoms:
+|    ``Executable`` is neither a variable nor an atom:
+|        ``type_error(atom,Executable)``
+|    ``Arguments`` is a partial list or a list with an element ``Argument`` which is a variable:
+|        ``instantiation_error``
+|    ``Arguments`` is neither a variable nor a list:
 |        ``type_error(list(atom),Arguments)``
-|    ``Source`` is invalid:
-|        ``domain_error(sat_process_source,Source)``
-|    A launcher dependency cannot be resolved:
-|        ``existence_error(command,Command)``
-|    A shell argument contains a null character:
+|    An element ``Argument`` of the list ``Arguments`` is neither a variable nor an atom:
+|        ``type_error(atom,Argument)``
+|    ``Executable`` or an element ``Argument`` of the list ``Arguments`` contains a null character:
 |        ``domain_error(sat_shell_argument,Argument)``
-|    A character sequence is not valid UTF-8:
-|        ``representation_error(utf_8)``
-|    A launcher operation fails:
-|        ``sat_transport(Stage,Status,Details)``
-|    A source or capture file cannot be accessed:
+|    ``Source`` is not ground:
+|        ``instantiation_error``
+|    ``Source`` is neither ``file(Path)`` nor ``codes(Codes)``:
+|        ``domain_error(sat_process_source,Source)``
+|    A launcher dependency does not exist:
+|        ``existence_error(command,Command)``
+|    A source or capture file does not exist:
 |        ``existence_error(source_sink,Path)``
 |    A source or capture file cannot be opened:
 |        ``permission_error(open,source_sink,Path)``
@@ -113,6 +119,10 @@ Runs the CLI using an owned directory and separate UTF-8 output files, returning
 |        ``existence_error(directory,Directory)``
 |    An owned file or directory cannot be removed:
 |        ``permission_error(delete,source_sink,Path)``
+|    A character sequence is not valid UTF-8:
+|        ``representation_error(utf_8)``
+|    A launcher operation fails:
+|        ``sat_transport(Stage,Status,Details)``
 
 
 ------------

@@ -24,44 +24,46 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-08,
+		date is 2026-11-09,
 		comment is 'Canonical CNF statement validation, DIMACS source generation, and variable table computation.'
 	]).
 
 	:- public(serialize/2).
-	:- mode(serialize(+list(compound), -list(integer)), one_or_error).
+	:- mode(serialize(+list, -list(code)), one_or_error).
 	:- info(serialize/2, [
 		comment is 'Serializes ground canonical CNF statements to DIMACS character codes, assigning sequential variable numbers by first occurrence.',
 		argnames is ['Statements', 'Codes'],
 		exceptions is [
-			'``Statements`` is insufficiently instantiated' - instantiation_error,
-			'``Statements`` is not a list' - type_error(list, 'Statements'),
-			'A statement is invalid' - domain_error(sat_statement, 'Statement')
+			'``Statements`` is a partial list or a list with an element ``Statement`` which is a variable' - instantiation_error,
+			'``Statements`` is neither a partial list nor a list' - type_error(list, 'Statements'),
+			'An element ``Statement`` of the list ``Statements`` is not a valid statement' - domain_error(sat_statement, 'Statement')
 		]
 	]).
 
 	:- public(serialize/4).
-	:- mode(serialize(+list(compound), +list, -list(integer), -list(compound)), one_or_error).
+	:- mode(serialize(+list, +list, -list(code), -list(compound)), one_or_error).
 	:- info(serialize/4, [
 		comment is 'Serializes statements with origins and returns ``line(Start, End, Origin)`` source-map entries; the generated header occupies line 1.',
 		argnames is ['Statements', 'Origins', 'Codes', 'SourceMap'],
 		exceptions is [
-			'An input is insufficiently instantiated' - instantiation_error,
-			'An input is not a list' - type_error(list, 'Input'),
-			'A statement is invalid' - domain_error(sat_statement, 'Statement'),
-			'An origin is invalid or the list lengths differ' - domain_error(sat_origins, 'Origins')
+			'``Statements`` is a partial list or a list with an element ``Statement`` which is a variable' - instantiation_error,
+			'``Statements`` is neither a partial list nor a list' - type_error(list, 'Statements'),
+			'An element ``Statement`` of the list ``Statements`` is not a valid statement' - domain_error(sat_statement, 'Statement'),
+			'``Origins`` is a partial list or a list with an element ``Origin`` which is a variable' - instantiation_error,
+			'``Origins`` is neither a variable nor a list' - type_error(list, 'Origins'),
+			'``Origins`` has an element that is neither ``unknown`` nor a valid ``source(File, Start, End)`` term, or its length differs from ``Statements``' - domain_error(sat_origins, 'Origins')
 		]
 	]).
 
 	:- public(variables/2).
-	:- mode(variables(+list(compound), -list(pair)), one_or_error).
+	:- mode(variables(+list, -list(pair)), one_or_error).
 	:- info(variables/2, [
 		comment is 'Returns the ordered ``Term-Number`` variable table that ``serialize/2`` and ``serialize/4`` assign by first occurrence across clause statements.',
 		argnames is ['Statements', 'Variables'],
 		exceptions is [
-			'``Statements`` is insufficiently instantiated' - instantiation_error,
-			'``Statements`` is not a list' - type_error(list, 'Statements'),
-			'A statement is invalid' - domain_error(sat_statement, 'Statement')
+			'``Statements`` is a partial list or a list with an element ``Statement`` which is a variable' - instantiation_error,
+			'``Statements`` is neither a partial list nor a list' - type_error(list, 'Statements'),
+			'An element ``Statement`` of the list ``Statements`` is not a valid statement' - domain_error(sat_statement, 'Statement')
 		]
 	]).
 
