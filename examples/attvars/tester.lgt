@@ -21,7 +21,9 @@
 
 :- if((
 	current_logtalk_flag(prolog_dialect, Dialect),
-	(Dialect == b; Dialect == swi; Dialect == xsb; Dialect == yap)
+	(	Dialect == b; Dialect == shumway; Dialect == swi;
+		Dialect == xsb; Dialect == yap
+	)
 )).
 
 	:- initialization((

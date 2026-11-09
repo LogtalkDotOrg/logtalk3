@@ -23,9 +23,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2011-03-13,
+		date is 2026-11-09,
 		comment is 'Hook object for compiling objects and categories using attributed variables.'
 	]).
 
@@ -44,6 +44,13 @@
 			logtalk_load_context(entity_prefix, Prefix),
 			logtalk::expand_term((attribute_goals(X) --> Body), (AttrUnifyHookHead :- _)),
 			logtalk::compile_predicate_heads(AttrUnifyHookHead, _, TAttrUnifyHookHead, _).
+
+	:- elif(current_logtalk_flag(prolog_dialect, shumway)).
+
+		term_expansion((attr_unify_hook(Att, Var) :- Body), [(:- multifile(Prefix:attr_unify_hook/2)), (Prefix:attr_unify_hook(_-Att, Var) :- Body), {(:- multifile(Prefix:verify_attributes/4))}, {Prefix:verify_attributes(Prefix, Value, Other, [Prefix:attr_unify_hook(Value, Other)])}]) :-
+			logtalk_load_context(entity_prefix, Prefix).
+		term_expansion((attribute_goals(X) --> Body), [(:- multifile(Prefix:attribute_goals//1)), (Prefix:attribute_goals(X) --> Body)]) :-
+			logtalk_load_context(entity_prefix, Prefix).
 
 	:- else.
 

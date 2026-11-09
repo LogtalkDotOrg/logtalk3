@@ -37,12 +37,12 @@ ________________________________________________________________________
 
 This an example of using attributed variables within Logtalk objects and
 categories. It requires the use of a backend Prolog compiler with support
-for attributed variables. Tested with B-Prolog, SWI-Prolog, XSB, and YAP.
-The individual examples are adaptations of code found on the SWI-Prolog
-documentation.
+for attributed variables. Tested with B-Prolog, Shumway Prolog, SWI-Prolog,
+XSB, and YAP. The individual examples are adaptations of code found on the
+SWI-Prolog documentation.
 
-When using SWI-Prolog or YAP, the `attvars_hook` hook object works by
-creating a shadow module (with the same name as the object or category
+When using Shumway Prolog, SWI-Prolog, or YAP, the `attvars_hook` hook object
+works by creating a shadow module (with the same name as the object or category
 internal prefix) containing the `attribute_goals//1` and `attr_unify_hook/2`
 hooks that are required by the attributed variables implementation. These
 hooks are compiled as module multifile predicates in order to avoid spurious
