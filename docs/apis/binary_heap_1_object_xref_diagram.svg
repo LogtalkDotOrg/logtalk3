@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-608 716,-608 716,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object binary_heap/1</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;10, 00:45</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;10, 22:21</text>
 <g id="clust1" class="cluster">
 <title>cluster_binary_heap_1_object</title>
 <g id="a_clust1"><a xlink:title="binary_heap(Order)">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 692,-46 692,-46 698,-46 704,-52 704,-58 704,-58 704,-584 704,-584 704,-590 698,-596 692,-596 692,-596 20,-596 20,-596 14,-596 8,-590 8,-584 8,-584 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L63">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="20" y="-580.3" font-family="Monospace" font-size="10.00" fill="dimgray">binary_heap(Order)</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>as_heap/2</title>
 <polygon fill="cornsilk" stroke="black" points="92.19,-443 19.81,-443 19.81,-407 92.19,-407 92.19,-443"/>
 <text xml:space="preserve" text-anchor="start" x="27.81" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L162" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L162">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L162" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L162">
 <text xml:space="preserve" text-anchor="start" x="30.31" y="-426.53" font-family="Monospace" font-size="11.00">as_heap/2</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>as_heap/4</title>
 <polygon fill="cornsilk" stroke="black" points="92.19,-326 19.81,-326 19.81,-290 92.19,-290 92.19,-326"/>
 <text xml:space="preserve" text-anchor="start" x="27.81" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node15_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L165" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L165">
+<g id="a_node15_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L165" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L165">
 <text xml:space="preserve" text-anchor="start" x="30.31" y="-309.53" font-family="Monospace" font-size="11.00">as_heap/4</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- as_heap/2&#45;&gt;as_heap/4 -->
 <g id="edge9" class="edge">
 <title>as_heap/2&#45;&gt;as_heap/4</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L162" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L162" xlink:title="calls">
 <path fill="none" stroke="black" d="M56,-406.53C56,-388.28 56,-359.33 56,-337.7"/>
 <polygon fill="black" stroke="black" points="59.5,-337.77 56,-327.77 52.5,-337.77 59.5,-337.77"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L162" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L162">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L162" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L162">
 <text xml:space="preserve" text-anchor="start" x="56" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>empty/1</title>
 <polygon fill="cornsilk" stroke="black" points="78.06,-560 17.94,-560 17.94,-524 78.06,-524 78.06,-560"/>
 <text xml:space="preserve" text-anchor="start" x="25.94" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L132">
+<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L132">
 <text xml:space="preserve" text-anchor="start" x="28.44" y="-543.53" font-family="Monospace" font-size="11.00">empty/1</text>
 </a>
 </g>
@@ -84,7 +84,7 @@
 <title>insert/4</title>
 <polygon fill="cornsilk" stroke="black" points="359.54,-326 302.46,-326 302.46,-290 359.54,-290 359.54,-326"/>
 <text xml:space="preserve" text-anchor="start" x="310.46" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L78" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L78">
+<g id="a_node3_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L78" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L78">
 <text xml:space="preserve" text-anchor="start" x="312.96" y="-309.53" font-family="Monospace" font-size="11.00">insert/4</text>
 </a>
 </g>
@@ -98,7 +98,7 @@
 <title>insert/5</title>
 <polygon fill="cornsilk" stroke="black" points="179.54,-209 122.46,-209 122.46,-173 179.54,-173 179.54,-209"/>
 <text xml:space="preserve" text-anchor="start" x="130.46" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L85">
+<g id="a_node4_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L85">
 <text xml:space="preserve" text-anchor="start" x="132.96" y="-192.53" font-family="Monospace" font-size="11.00">insert/5</text>
 </a>
 </g>
@@ -110,12 +110,12 @@
 <!-- insert/4&#45;&gt;insert/5 -->
 <g id="edge1" class="edge">
 <title>insert/4&#45;&gt;insert/5</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L78" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L78" xlink:title="calls">
 <path fill="none" stroke="black" d="M303.66,-289.53C272.78,-269.8 222.36,-237.59 187.98,-215.62"/>
 <polygon fill="black" stroke="black" points="189.89,-212.69 179.58,-210.26 186.12,-218.59 189.89,-212.69"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L78" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L78">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L78" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L78">
 <text xml:space="preserve" text-anchor="start" x="246.4" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -125,7 +125,7 @@
 <title>insert/8</title>
 <polygon fill="cornsilk" stroke="black" points="142.54,-92 85.46,-92 85.46,-56 142.54,-56 142.54,-92"/>
 <text xml:space="preserve" text-anchor="start" x="93.46" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L95">
+<g id="a_node5_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="95.96" y="-75.53" font-family="Monospace" font-size="11.00">insert/8</text>
 </a>
 </g>
@@ -137,12 +137,12 @@
 <!-- insert/5&#45;&gt;insert/8 -->
 <g id="edge3" class="edge">
 <title>insert/5&#45;&gt;insert/8</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L88" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L88" xlink:title="calls">
 <path fill="none" stroke="black" d="M145.38,-172.53C139.45,-154.11 130.02,-124.79 123.04,-103.1"/>
 <polygon fill="black" stroke="black" points="126.41,-102.14 120.01,-93.69 119.75,-104.29 126.41,-102.14"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L88">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L88">
 <text xml:space="preserve" text-anchor="start" x="133.61" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -152,7 +152,7 @@
 <title>sort/8</title>
 <polygon fill="cornsilk" stroke="black" points="219,-92 165,-92 165,-56 219,-56 219,-92"/>
 <text xml:space="preserve" text-anchor="start" x="175.74" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L102">
+<g id="a_node6_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L102">
 <text xml:space="preserve" text-anchor="start" x="178.24" y="-75.53" font-family="Monospace" font-size="11.00">sort/8</text>
 </a>
 </g>
@@ -164,12 +164,12 @@
 <!-- insert/5&#45;&gt;sort/8 -->
 <g id="edge2" class="edge">
 <title>insert/5&#45;&gt;sort/8</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L88" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L88" xlink:title="calls">
 <path fill="none" stroke="black" d="M157.23,-172.53C163.83,-154.02 174.35,-124.52 182.09,-102.8"/>
 <polygon fill="black" stroke="black" points="185.28,-104.27 185.34,-93.68 178.69,-101.92 185.28,-104.27"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L88">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L88">
 <text xml:space="preserve" text-anchor="start" x="172.73" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -177,12 +177,12 @@
 <!-- insert/8&#45;&gt;insert/5 -->
 <g id="edge4" class="edge">
 <title>insert/8&#45;&gt;insert/5</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L95" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L95" xlink:title="calls">
 <path fill="none" stroke="black" d="M108.91,-92.32C106.04,-105.03 103.95,-122.52 109,-137 112.42,-146.83 118.51,-156.2 125,-164.26"/>
 <polygon fill="black" stroke="black" points="122.2,-166.37 131.4,-171.61 127.48,-161.77 122.2,-166.37"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L95">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="109" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -192,7 +192,7 @@
 <title>insert_all/3</title>
 <polygon fill="cornsilk" stroke="black" points="368.1,-443 293.9,-443 293.9,-407 368.1,-407 368.1,-443"/>
 <text xml:space="preserve" text-anchor="start" x="301.9" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L107">
+<g id="a_node7_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L107">
 <text xml:space="preserve" text-anchor="start" x="304.4" y="-426.53" font-family="Monospace" font-size="11.00">insert_all/3</text>
 </a>
 </g>
@@ -204,12 +204,12 @@
 <!-- insert_all/3&#45;&gt;insert/4 -->
 <g id="edge5" class="edge">
 <title>insert_all/3&#45;&gt;insert/4</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L108" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L108" xlink:title="calls">
 <path fill="none" stroke="black" d="M331,-406.53C331,-388.28 331,-359.33 331,-337.7"/>
 <polygon fill="black" stroke="black" points="334.5,-337.77 331,-327.77 327.5,-337.77 334.5,-337.77"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L108">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L108">
 <text xml:space="preserve" text-anchor="start" x="331" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -219,7 +219,7 @@
 <title>delete/4</title>
 <polygon fill="cornsilk" stroke="black" points="380.07,-560 319.93,-560 319.93,-524 380.07,-524 380.07,-560"/>
 <text xml:space="preserve" text-anchor="start" x="327.93" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L112">
+<g id="a_node8_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L112">
 <text xml:space="preserve" text-anchor="start" x="330.43" y="-543.53" font-family="Monospace" font-size="11.00">delete/4</text>
 </a>
 </g>
@@ -233,7 +233,7 @@
 <title>repair/4</title>
 <polygon fill="cornsilk" stroke="black" points="276.15,-443 217.85,-443 217.85,-407 276.15,-407 276.15,-443"/>
 <text xml:space="preserve" text-anchor="start" x="225.85" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L116">
+<g id="a_node9_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L116">
 <text xml:space="preserve" text-anchor="start" x="228.35" y="-426.53" font-family="Monospace" font-size="11.00">repair/4</text>
 </a>
 </g>
@@ -245,12 +245,12 @@
 <!-- delete/4&#45;&gt;repair/4 -->
 <g id="edge6" class="edge">
 <title>delete/4&#45;&gt;repair/4</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L112" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L112" xlink:title="calls">
 <path fill="none" stroke="black" d="M334.36,-523.53C317.24,-504.43 289.64,-473.61 270.05,-451.73"/>
 <polygon fill="black" stroke="black" points="272.74,-449.49 263.46,-444.38 267.53,-454.17 272.74,-449.49"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L112">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L112">
 <text xml:space="preserve" text-anchor="start" x="301.59" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -260,7 +260,7 @@
 <title>new/1</title>
 <polygon fill="cornsilk" stroke="black" points="230,-560 176,-560 176,-524 230,-524 230,-560"/>
 <text xml:space="preserve" text-anchor="start" x="185.82" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L135">
+<g id="a_node10_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L135">
 <text xml:space="preserve" text-anchor="start" x="188.32" y="-543.53" font-family="Monospace" font-size="11.00">new/1</text>
 </a>
 </g>
@@ -274,7 +274,7 @@
 <title>size/2</title>
 <polygon fill="cornsilk" stroke="black" points="302,-560 248,-560 248,-524 302,-524 302,-560"/>
 <text xml:space="preserve" text-anchor="start" x="258.13" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L137">
+<g id="a_node11_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L137">
 <text xml:space="preserve" text-anchor="start" x="260.63" y="-543.53" font-family="Monospace" font-size="11.00">size/2</text>
 </a>
 </g>
@@ -288,7 +288,7 @@
 <title>as_list/2</title>
 <polygon fill="cornsilk" stroke="black" points="157.68,-560 96.32,-560 96.32,-524 157.68,-524 157.68,-560"/>
 <text xml:space="preserve" text-anchor="start" x="104.32" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L139" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L139">
+<g id="a_node12_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L139" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L139">
 <text xml:space="preserve" text-anchor="start" x="106.82" y="-543.53" font-family="Monospace" font-size="11.00">as_list/2</text>
 </a>
 </g>
@@ -302,7 +302,7 @@
 <title>tree_to_list/2</title>
 <polygon fill="cornsilk" stroke="black" points="195.99,-443 112.01,-443 112.01,-407 195.99,-407 195.99,-443"/>
 <text xml:space="preserve" text-anchor="start" x="120.01" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node13_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L142">
+<g id="a_node13_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L142">
 <text xml:space="preserve" text-anchor="start" x="122.51" y="-426.53" font-family="Monospace" font-size="11.00">tree_to_list/2</text>
 </a>
 </g>
@@ -314,12 +314,12 @@
 <!-- as_list/2&#45;&gt;tree_to_list/2 -->
 <g id="edge7" class="edge">
 <title>as_list/2&#45;&gt;tree_to_list/2</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L139" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L139" xlink:title="calls">
 <path fill="none" stroke="black" d="M131.1,-523.53C135.41,-505.19 142.25,-476.06 147.33,-454.4"/>
 <polygon fill="black" stroke="black" points="150.72,-455.26 149.6,-444.73 143.91,-453.66 150.72,-455.26"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L139" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L139">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L139" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L139">
 <text xml:space="preserve" text-anchor="start" x="141.31" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -329,7 +329,7 @@
 <title>merge_pairs/3</title>
 <polygon fill="cornsilk" stroke="black" points="201.66,-326 110.34,-326 110.34,-290 201.66,-290 201.66,-326"/>
 <text xml:space="preserve" text-anchor="start" x="118.34" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node14_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L148">
+<g id="a_node14_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L148">
 <text xml:space="preserve" text-anchor="start" x="120.84" y="-309.53" font-family="Monospace" font-size="11.00">merge_pairs/3</text>
 </a>
 </g>
@@ -341,12 +341,12 @@
 <!-- tree_to_list/2&#45;&gt;merge_pairs/3 -->
 <g id="edge8" class="edge">
 <title>tree_to_list/2&#45;&gt;merge_pairs/3</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L143" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L143" xlink:title="calls">
 <path fill="none" stroke="black" d="M154.3,-406.53C154.62,-388.28 155.12,-359.33 155.5,-337.7"/>
 <polygon fill="black" stroke="black" points="159,-337.83 155.67,-327.77 152,-337.7 159,-337.83"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L143">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L143">
 <text xml:space="preserve" text-anchor="start" x="155.06" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -354,12 +354,12 @@
 <!-- as_heap/4&#45;&gt;insert/5 -->
 <g id="edge10" class="edge">
 <title>as_heap/4&#45;&gt;insert/5</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L166" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L166" xlink:title="calls">
 <path fill="none" stroke="black" d="M70.43,-289.53C86.14,-270.51 111.44,-239.88 129.5,-218.02"/>
 <polygon fill="black" stroke="black" points="132.11,-220.36 135.78,-210.42 126.72,-215.9 132.11,-220.36"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L166" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L166">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L166" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L166">
 <text xml:space="preserve" text-anchor="start" x="106.35" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -369,7 +369,7 @@
 <title>merge/3</title>
 <polygon fill="cornsilk" stroke="black" points="459.68,-560 398.32,-560 398.32,-524 459.68,-524 459.68,-560"/>
 <text xml:space="preserve" text-anchor="start" x="406.32" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node16_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L171">
+<g id="a_node16_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L171">
 <text xml:space="preserve" text-anchor="start" x="408.82" y="-543.53" font-family="Monospace" font-size="11.00">merge/3</text>
 </a>
 </g>
@@ -383,7 +383,7 @@
 <title>merge_tree/3</title>
 <polygon fill="cornsilk" stroke="black" points="472.21,-443 385.79,-443 385.79,-407 472.21,-407 472.21,-443"/>
 <text xml:space="preserve" text-anchor="start" x="393.79" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node17_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L177">
+<g id="a_node17_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L177">
 <text xml:space="preserve" text-anchor="start" x="396.29" y="-426.53" font-family="Monospace" font-size="11.00">merge_tree/3</text>
 </a>
 </g>
@@ -395,12 +395,12 @@
 <!-- merge/3&#45;&gt;merge_tree/3 -->
 <g id="edge11" class="edge">
 <title>merge/3&#45;&gt;merge_tree/3</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L171" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L171" xlink:title="calls">
 <path fill="none" stroke="black" d="M429,-523.53C429,-505.28 429,-476.33 429,-454.7"/>
 <polygon fill="black" stroke="black" points="432.5,-454.77 429,-444.77 425.5,-454.77 432.5,-454.77"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L171">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L171">
 <text xml:space="preserve" text-anchor="start" x="429" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -408,12 +408,12 @@
 <!-- merge_tree/3&#45;&gt;insert/4 -->
 <g id="edge12" class="edge">
 <title>merge_tree/3&#45;&gt;insert/4</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L178" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L178" xlink:title="calls">
 <path fill="none" stroke="black" d="M414.12,-406.53C397.83,-387.43 371.57,-356.61 352.93,-334.73"/>
 <polygon fill="black" stroke="black" points="355.83,-332.75 346.68,-327.41 350.51,-337.29 355.83,-332.75"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L178">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L178">
 <text xml:space="preserve" text-anchor="start" x="382.94" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -423,7 +423,7 @@
 <title>top/3</title>
 <polygon fill="cornsilk" stroke="black" points="532,-560 478,-560 478,-524 532,-524 532,-560"/>
 <text xml:space="preserve" text-anchor="start" x="490.27" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node18_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L183" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L183">
+<g id="a_node18_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L183" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L183">
 <text xml:space="preserve" text-anchor="start" x="492.77" y="-543.53" font-family="Monospace" font-size="11.00">top/3</text>
 </a>
 </g>
@@ -437,7 +437,7 @@
 <title>top_next/5</title>
 <polygon fill="cornsilk" stroke="black" points="622.19,-560 549.81,-560 549.81,-524 622.19,-524 622.19,-560"/>
 <text xml:space="preserve" text-anchor="start" x="557.81" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node19_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L185">
+<g id="a_node19_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L185">
 <text xml:space="preserve" text-anchor="start" x="560.31" y="-543.53" font-family="Monospace" font-size="11.00">top_next/5</text>
 </a>
 </g>
@@ -451,7 +451,7 @@
 <title>top_next/4</title>
 <polygon fill="cornsilk" stroke="black" points="617.19,-443 544.81,-443 544.81,-407 617.19,-407 617.19,-443"/>
 <text xml:space="preserve" text-anchor="start" x="552.81" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node20_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L188">
+<g id="a_node20_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L188">
 <text xml:space="preserve" text-anchor="start" x="555.31" y="-426.53" font-family="Monospace" font-size="11.00">top_next/4</text>
 </a>
 </g>
@@ -463,12 +463,12 @@
 <!-- top_next/5&#45;&gt;top_next/4 -->
 <g id="edge13" class="edge">
 <title>top_next/5&#45;&gt;top_next/4</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L185" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L185" xlink:title="calls">
 <path fill="none" stroke="black" d="M585.24,-523.53C584.45,-505.28 583.19,-476.33 582.25,-454.7"/>
 <polygon fill="black" stroke="black" points="585.75,-454.6 581.82,-444.77 578.75,-454.91 585.75,-454.6"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L185">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L185">
 <text xml:space="preserve" text-anchor="start" x="583.65" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -478,7 +478,7 @@
 <title>valid/1</title>
 <polygon fill="cornsilk" stroke="black" points="694,-560 640,-560 640,-524 694,-524 694,-560"/>
 <text xml:space="preserve" text-anchor="start" x="648.6" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node21_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L196">
+<g id="a_node21_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L196">
 <text xml:space="preserve" text-anchor="start" x="651.1" y="-543.53" font-family="Monospace" font-size="11.00">valid/1</text>
 </a>
 </g>
@@ -492,7 +492,7 @@
 <title>valid_/3</title>
 <polygon fill="cornsilk" stroke="black" points="694.46,-443 635.54,-443 635.54,-407 694.46,-407 694.46,-443"/>
 <text xml:space="preserve" text-anchor="start" x="643.54" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node22_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L201" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L201">
+<g id="a_node22_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L201" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L201">
 <text xml:space="preserve" text-anchor="start" x="646.04" y="-426.53" font-family="Monospace" font-size="11.00">valid_/3</text>
 </a>
 </g>
@@ -504,12 +504,12 @@
 <!-- valid/1&#45;&gt;valid_/3 -->
 <g id="edge14" class="edge">
 <title>valid/1&#45;&gt;valid_/3</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L196" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L196" xlink:title="calls">
 <path fill="none" stroke="black" d="M666.7,-523.53C666.38,-505.28 665.88,-476.33 665.5,-454.7"/>
 <polygon fill="black" stroke="black" points="669,-454.7 665.33,-444.77 662,-454.83 669,-454.7"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/30b791c6977cc221cf6ae14e961b61018bd41814/library/heaps/binary_heaps.lgt#L196">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/heaps/binary_heaps.lgt#L196">
 <text xml:space="preserve" text-anchor="start" x="666.06" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
