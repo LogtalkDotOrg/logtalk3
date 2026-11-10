@@ -77,10 +77,10 @@
 :- object(smt_raw_fixture,
 	implements(smt_problem_protocol)).
 
-	:- smt_raw('; trusted raw comment').
-	:- smt_raw([59,32,116,114,117,115,116,101,100,32,114,97,119,32,99,111,109,109,101,110,116]).
-	:- smt_raw([';',' ',t,r,u,s,t,e,d,' ',r,a,w,' ',c,o,m,m,e,n,t]).
-	:- smt_raw("; trusted raw comment").
+	:- raw('; trusted raw comment').
+	:- raw([59,32,116,114,117,115,116,101,100,32,114,97,119,32,99,111,109,109,101,110,116]).
+	:- raw([';',' ',t,r,u,s,t,e,d,' ',r,a,w,' ',c,o,m,m,e,n,t]).
+	:- raw("; trusted raw comment").
 
 :- end_object.
 

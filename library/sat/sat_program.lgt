@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-09,
+		date is 2026-11-10,
 		comment is 'Canonical CNF statement validation, DIMACS source generation, and variable table computation.'
 	]).
 
@@ -118,22 +118,31 @@
 		),
 		valid_statements(Statements).
 
-	valid_statement(clause(Literals)) :-
-		valid(list, Literals),
-		valid_literals(Literals).
-	valid_statement(comment(Codes)) :-
-		valid(codes, Codes),
+	valid_statement(false) :-
+		!.
+	valid_statement(comment(Source)) :-
+		!,
+		raw_codes(Source, Codes),
 		\+ member(10, Codes).
-	valid_statement(raw(Codes)) :-
-		valid(codes, Codes).
+	valid_statement(raw(Source)) :-
+		!,
+		raw_codes(Source, _).
+	valid_statement(Disjunction) :-
+		valid_disjunction(Disjunction).
 
-	valid_literals([]).
-	valid_literals([Literal| Literals]) :-
-		valid_literal(Literal),
-		valid_literals(Literals).
+	valid_disjunction((A ; B)) :-
+		!,
+		valid_disjunction(A),
+		valid_disjunction(B).
+	valid_disjunction(Literal) :-
+		valid_literal(Literal).
 
-	valid_literal(pos(_)).
-	valid_literal(neg(_)).
+	valid_literal(+_) :-
+		!.
+	valid_literal(-_) :-
+		!.
+	valid_literal(Term) :-
+		callable(Term).
 
 	valid_origins([], []).
 	valid_origins([_| Statements], [Origin| Origins]) :-
@@ -153,12 +162,26 @@
 		number_variables(Variables0, 1, Variables).
 
 	collect_variables([], Terms, Terms).
-	collect_variables([clause(Literals)| Statements], Terms0, Terms) :-
+	collect_variables([false| Statements], Terms0, Terms) :-
 		!,
+		collect_variables(Statements, Terms0, Terms).
+	collect_variables([comment(_)| Statements], Terms0, Terms) :-
+		!,
+		collect_variables(Statements, Terms0, Terms).
+	collect_variables([raw(_)| Statements], Terms0, Terms) :-
+		!,
+		collect_variables(Statements, Terms0, Terms).
+	collect_variables([Disjunction| Statements], Terms0, Terms) :-
+		disjunction_literals(Disjunction, Literals),
 		literal_terms(Literals, Terms0, Terms1),
 		collect_variables(Statements, Terms1, Terms).
-	collect_variables([_| Statements], Terms0, Terms) :-
-		collect_variables(Statements, Terms0, Terms).
+
+	disjunction_literals((A ; B), Literals) :-
+		!,
+		disjunction_literals(A, LiteralsA),
+		disjunction_literals(B, LiteralsB),
+		append(LiteralsA, LiteralsB, Literals).
+	disjunction_literals(Literal, [Literal]).
 
 	literal_terms([], Terms, Terms).
 	literal_terms([Literal| Literals], Terms0, Terms) :-
@@ -169,8 +192,9 @@
 		),
 		literal_terms(Literals, Terms1, Terms).
 
-	literal_term(pos(Term), Term) :- !.
-	literal_term(neg(Term), Term) :- !.
+	literal_term(+Term, Term) :- !.
+	literal_term(-Term, Term) :- !.
+	literal_term(Term, Term).
 
 	number_variables([], _, []).
 	number_variables([Term| Terms], Number, [Term-Number| Variables]) :-
@@ -178,12 +202,15 @@
 		number_variables(Terms, Next, Variables).
 
 	count_clauses([], 0).
-	count_clauses([clause(_)| Statements], Count) :-
+	count_clauses([comment(_)| Statements], Count) :-
 		!,
+		count_clauses(Statements, Count).
+	count_clauses([raw(_)| Statements], Count) :-
+		!,
+		count_clauses(Statements, Count).
+	count_clauses([_| Statements], Count) :-
 		count_clauses(Statements, Rest),
 		Count is Rest + 1.
-	count_clauses([_| Statements], Count) :-
-		count_clauses(Statements, Count).
 
 	serialize_statements([], _, Codes, Codes).
 	serialize_statements([Statement| Statements], Variables, Codes, Tail) :-
@@ -209,15 +236,20 @@
 	header(VariableCount, ClauseCount) -->
 		text('p cnf '), integer_text(VariableCount), [0' ], integer_text(ClauseCount), [10].
 
-	statement(clause([]), _) -->
+	statement(false, _) -->
 		!,
 		text('0'), [10].
-	statement(clause(Literals), Variables) -->
-		literals(Literals, Variables), text(' 0'), [10].
-	statement(comment(Codes), _) -->
+	statement(comment(Source), _) -->
+		!,
+		{ raw_codes(Source, Codes) },
 		text('c '), codes(Codes), [10].
-	statement(raw(Codes), _) -->
+	statement(raw(Source), _) -->
+		!,
+		{ raw_codes(Source, Codes) },
 		codes(Codes), [10].
+	statement(Disjunction, Variables) -->
+		{ disjunction_literals(Disjunction, Literals) },
+		literals(Literals, Variables), text(' 0'), [10].
 
 	literals([], _) -->
 		[].
@@ -229,13 +261,13 @@
 	literal_tail([Literal| Literals], Variables) -->
 		[0' ], literal(Literal, Variables), literal_tail(Literals, Variables).
 
-	literal(pos(Term), Variables) -->
+	literal(-Term, Variables) -->
 		!,
 		{ memberchk(Term-Number, Variables) },
-		integer_text(Number).
-	literal(neg(Term), Variables) -->
-		{ memberchk(Term-Number, Variables) },
 		[0'-], integer_text(Number).
+	literal(Literal, Variables) -->
+		{ literal_term(Literal, Term), memberchk(Term-Number, Variables) },
+		integer_text(Number).
 
 	integer_text(Integer) -->
 		{ integer(Integer), Integer >= 0, number_codes(Integer, Codes) },
@@ -248,5 +280,19 @@
 		[].
 	codes([Code| Codes]) -->
 		[Code], codes(Codes).
+
+	% accepts an atom, a list of character codes, a list of one-character atoms,
+	% or a backend-native string, normalizing any of them to character codes
+	raw_codes(Source, Codes) :-
+		(	atom(Source) ->
+			atom_codes(Source, Codes)
+		;	valid(chars, Source) ->
+			atom_chars(Atom, Source),
+			atom_codes(Atom, Codes)
+		;	{'$lgt_string'(Source)} ->
+			{'$lgt_string_codes'(Source, Codes)}
+		;	valid(codes, Source),
+			Codes = Source
+		).
 
 :- end_object.

@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-08,
+		date is 2026-11-10,
 		comment is 'Protocol for ordered, ground CNF statement providers.'
 	]).
 

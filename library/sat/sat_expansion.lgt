@@ -25,12 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-08,
+		date is 2026-11-10,
 		comment is 'Opt-in equivalent CNF directive and clause expansion for pure problem objects.'
-	]).
-
-	:- uses(type, [
-		valid/2
 	]).
 
 	term_expansion(Term, Expanded) :-
@@ -57,46 +53,17 @@
 		;	Origin = unknown
 		).
 
-	statement((:- cnf_raw(Source)), raw(Codes)) :-
-		!,
-		normalize_text(Source, Codes).
-	statement((:- comment(Source)), comment(Codes)) :-
-		!,
-		normalize_text(Source, Codes).
+	statement((:- raw(Source)), raw(Source)) :-
+		!.
+	statement((:- comment(Source)), comment(Source)) :-
+		!.
 	statement((:- _), _) :-
 		!,
 		fail.
 	statement((_ :- _), _) :-
 		!,
 		fail.
-	statement(clause(Literals), clause(Normalized)) :-
-		!,
-		(	valid(list, Literals) ->
-			normalize_literals(Literals, Normalized)
-		;	domain_error(sat_clause, Literals)
-		).
-	statement(Fact, clause([pos(Fact)])) :-
+	statement(Fact, Fact) :-
 		callable(Fact).
-
-	normalize_literals([], []).
-	normalize_literals([pos(Term)| Literals], [pos(Term)| Normalized]) :-
-		!,
-		normalize_literals(Literals, Normalized).
-	normalize_literals([neg(Term)| Literals], [neg(Term)| Normalized]) :-
-		!,
-		normalize_literals(Literals, Normalized).
-	normalize_literals([Term| Literals], [pos(Term)| Normalized]) :-
-		normalize_literals(Literals, Normalized).
-
-	normalize_text(Source, Codes) :-
-		(	atom(Source) ->
-			atom_codes(Source, Codes)
-		;	valid(chars, Source) ->
-			atom_chars(Atom, Source),
-			atom_codes(Atom, Codes)
-		;	{'$lgt_string'(Source)} ->
-			{'$lgt_string_codes'(Source, Codes)}
-		;	Codes = Source
-		).
 
 :- end_object.

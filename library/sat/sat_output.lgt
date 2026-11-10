@@ -197,10 +197,10 @@
 	parse_literals([Number| Numbers], Variables, [Literal| Literals]) :-
 		(	Number > 0 ->
 			literal_term(Number, Variables, Term),
-			Literal = pos(Term)
+			Literal = +Term
 		;	Magnitude is -Number,
 			literal_term(Magnitude, Variables, Term),
-			Literal = neg(Term)
+			Literal = -Term
 		),
 		parse_literals(Numbers, Variables, Literals).
 

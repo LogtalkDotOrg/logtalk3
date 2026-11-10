@@ -26,11 +26,7 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-11-08,
-		comment is 'Opt-in statement expansion for pure problem objects, converting canonical statement facts and the ``smt_raw/1`` and ``comment/1`` directives into ``smt_statement/2`` facts.'
-	]).
-
-	:- uses(type, [
-		valid/2
+		comment is 'Opt-in statement expansion for pure problem objects, converting canonical statement facts and the ``raw/1`` and ``comment/1`` directives into ``smt_statement/2`` facts.'
 	]).
 
 	term_expansion(Term, Expanded) :-
@@ -57,12 +53,10 @@
 		;	Origin = unknown
 		).
 
-	statement((:- smt_raw(Source)), raw(Codes)) :-
-		!,
-		normalize_text(Source, Codes).
-	statement((:- comment(Source)), comment(Codes)) :-
-		!,
-		normalize_text(Source, Codes).
+	statement((:- raw(Source)), raw(Source)) :-
+		!.
+	statement((:- comment(Source)), comment(Source)) :-
+		!.
 	statement((:- _), _) :-
 		!,
 		fail.
@@ -71,16 +65,5 @@
 		fail.
 	statement(Statement, Statement) :-
 		callable(Statement).
-
-	normalize_text(Source, Codes) :-
-		(	atom(Source) ->
-			atom_codes(Source, Codes)
-		;	valid(chars, Source) ->
-			atom_chars(Atom, Source),
-			atom_codes(Atom, Codes)
-		;	{'$lgt_string'(Source)} ->
-			{'$lgt_string_codes'(Source, Codes)}
-		;	Codes = Source
-		).
 
 :- end_object.

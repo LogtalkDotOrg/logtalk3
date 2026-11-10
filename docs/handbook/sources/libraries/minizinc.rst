@@ -6,9 +6,7 @@
 The ``minizinc`` library provides access to MiniZinc CLI solving,
 MiniZinc source generation, an opt-in object expansion hook, and
 collected result inspection. MiniZinc is a single frontend that
-delegates solving to a backend solver selected with the ``solver(Id)``
-option; the library does not hardcode a solver list and lets MiniZinc
-itself report an unknown solver identifier.
+delegates solving to a backend solver.
 
 This library interacts with the ``minizinc`` CLI using the ``process``
 library. Therefore, it currently supports ECLiPSe, GNU Prolog, SICStus
@@ -17,17 +15,17 @@ Prolog, Shumway Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 Requirements
 ------------
 
-Solving requires the ``minizinc`` executable, available on PATH or
-selected using the ``executable(Path)`` option. This library was
-developed and tested against MiniZinc 2.10.1, available from its
+Solving requires the ``minizinc`` executable, available on the system
+``PATH`` or selected using the ``executable(Path)`` option. This library
+was developed and tested against MiniZinc 2.10.1, available from its
 `official website <https://www.minizinc.org/>`__. The selected backend
 solver (``solver(Id)`` option) must itself be configured in the MiniZinc
 installation; use ``minizinc --solvers`` to list the solvers your
 installation can use.
 
 On POSIX systems, solving also requires ``/bin/sh``, with ``mktemp``
-available on PATH. On Windows, solving requires PowerShell 7.3 or later
-(``pwsh`` on PATH).
+available on the system ``PATH``. On Windows, solving requires
+PowerShell 7.3 or later (``pwsh`` on the system ``PATH``).
 
 The bundled ``minizinc_process.sh`` and ``minizinc_process.ps1``
 launcher scripts must remain in the ``scripts`` subdirectory of the
@@ -91,7 +89,7 @@ Usage
 -----
 
 Load the library, then compile an object defining a MiniZinc problem
-using the ``minizinc_expansion`` expansion hook. For example:
+using the ``minizinc_expansion`` hook object. For example:
 
 ::
 
@@ -233,8 +231,10 @@ The serializer accepts these statement constructors:
   ``SetExpr`` is the integer-set argument of the ``_(...)``
   constructor), or ``declared`` (forward declaration, cases supplied
   externally).
-- ``raw(Codes)`` preserves trusted native MiniZinc text with a
-  separating newline.
+- ``raw(Source)`` preserves trusted native MiniZinc text with a
+  separating newline; ``Source`` is an atom, a list of character codes,
+  a list of one-character atoms, or a backend-native string, normalized
+  into character codes.
 
 ``TypeInst`` is ``par(Base)`` or ``var(Base)``. ``Base`` is ``bool``,
 ``int``, ``float``, ``string``, ``range(Lo, Hi)``, ``set(Base)``, or
@@ -256,7 +256,7 @@ undifferentiated), ``comprehension(Kind, Expr, Generators)`` with
 sugar used for ``forall``, ``exists``, ``sum``, and similar),
 ``if_then_else(CondThenPairs, Else)`` (``Else`` is an expression or
 ``none``, matching MiniZinc's own optional ``else`` branch), and
-``raw(Codes)`` (an expression-level escape hatch).
+``raw(Source)`` (an expression-level escape hatch).
 
 Generators are ``generator(Names, Collection, Where)``; ``Names`` is a
 list of atoms, including ``'_'`` for an anonymous generator variable;
@@ -287,9 +287,9 @@ recognizes these directives:
 - ``enum(Name)`` (forward declaration), ``enum(Name, Atoms)`` (named
   cases, a plain list), and ``enum(Name, anon(SetExpr))`` (anonymous
   enum).
-- ``minizinc_raw(Source)`` (same text-normalization pattern as other
-  process libraries' raw escape hatches: an atom, a list of character
-  codes, a list of one-character atoms, or a backend-native string).
+- ``raw(Source)`` (same text-normalization pattern as other process
+  libraries' raw escape hatches: an atom, a list of character codes, a
+  list of one-character atoms, or a backend-native string).
 
 Each directive shares the functor and arity of its canonical statement
 constructor, except ``par/2-3`` and ``var/2-3``, which map to
@@ -353,11 +353,11 @@ character codes. The ``file(Path)`` source envelope passes an existing
 MiniZinc file directly to MiniZinc. Neither form requires the
 ``minizinc_expansion`` hook.
 
-The ``minizinc_raw/1`` directive embeds raw source among translated
-clauses in an object compiled with ``hook(minizinc_expansion)``. The
-canonical ``raw(Codes)`` statement provides the same escape hatch within
-a ``terms(Statements)`` source or an object's ``minizinc_statement/2``
-data.
+The ``raw/1`` directive embeds raw source among translated clauses in an
+object compiled with ``hook(minizinc_expansion)``. The canonical
+``raw(Source)`` statement provides the same escape hatch within a
+``terms(Statements)`` source or an object's ``minizinc_statement/2``
+data, accepting the same normalized argument forms as the directive.
 
 Collected results
 -----------------
@@ -452,7 +452,7 @@ does not cover ``let`` expressions, tuples, records, option types,
 type-inst synonyms, user-defined predicates/functions/tests, annotation
 items, custom ``output`` items, or enum-constructor combination (``++``)
 and inverse constructors. Native syntax outside this representation
-requires ``file/1``, ``codes/1``, or ``raw/1``/``minizinc_raw/1``.
+requires ``file/1``, ``codes/1``, or ``raw/1``.
 
 Results and diagnostics are collected in memory, not streamed live.
 Exhaustive model enumeration can require substantial memory.

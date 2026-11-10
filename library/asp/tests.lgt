@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-09,
+		date is 2026-11-10,
 		comment is 'Unit tests for the asp library.'
 	]).
 
@@ -273,9 +273,13 @@
 		]).
 
 	test(asp_expansion_raw_text, deterministic) :-
-		atom_codes('#program base.', Codes),
 		findall(Statement, asp_raw_fixture::asp_statement(Statement, _), Statements),
-		assertion(Statements == [raw(Codes), raw(Codes), raw(Codes), raw(Codes)]),
+		assertion(Statements == [
+			raw('#program base.'),
+			raw([35,112,114,111,103,114,97,109,32,98,97,115,101,46]),
+			raw(['#',p,r,o,g,r,a,m,' ',b,a,s,e,'.']),
+			raw("#program base.")
+		]),
 		asp::program(object(asp_raw_fixture), ProgramCodes),
 		atom_codes(Program, ProgramCodes),
 		assertion(Program == '#program base.\n#program base.\n#program base.\n#program base.\n').

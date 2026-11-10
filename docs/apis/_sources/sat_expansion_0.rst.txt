@@ -15,7 +15,7 @@ Opt-in equivalent CNF directive and clause expansion for pure problem objects.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-11-08
+| **Date:** 2026-11-10
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -25,7 +25,6 @@ Opt-in equivalent CNF directive and clause expansion for pure problem objects.
 |    ``public`` :ref:`expanding <expanding/0>`
 | **Uses:**
 |    :ref:`sat_program <sat_program/0>`
-|    :ref:`type <type/0>`
 
 | **Remarks:**
 |    (none)

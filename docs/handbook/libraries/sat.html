@@ -460,8 +460,8 @@ Prolog, Shumway Prolog, SWI-Prolog, Trealla Prolog, and XVM.</p>
 <section id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
 <p>Solving requires one of the supported solver executables, available on
-PATH or selected using the <code class="docutils literal notranslate"><span class="pre">executable(Path)</span></code> option. The
-<code class="docutils literal notranslate"><span class="pre">solver(Solver)</span></code> option selects which solver is invoked and the
+the system <code class="docutils literal notranslate"><span class="pre">PATH</span></code> or selected using the <code class="docutils literal notranslate"><span class="pre">executable(Path)</span></code> option.
+The <code class="docutils literal notranslate"><span class="pre">solver(Solver)</span></code> option selects which solver is invoked and the
 default executable resolved for it:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">kissat</span></code> (the default) runs the <code class="docutils literal notranslate"><span class="pre">kissat</span></code> executable. Kissat 4.0.4
@@ -479,8 +479,8 @@ repository</a>.</p></li>
 </ul>
 <p>Source generation does not require any executable.</p>
 <p>On POSIX systems, solving also requires <code class="docutils literal notranslate"><span class="pre">/bin/sh</span></code>, with <code class="docutils literal notranslate"><span class="pre">mktemp</span></code>
-available on PATH. On Windows, solving requires PowerShell 7.3 or later
-(<code class="docutils literal notranslate"><span class="pre">pwsh</span></code> on PATH).</p>
+available on the system <code class="docutils literal notranslate"><span class="pre">PATH</span></code>. On Windows, solving requires
+PowerShell 7.3 or later (<code class="docutils literal notranslate"><span class="pre">pwsh</span></code> on the system <code class="docutils literal notranslate"><span class="pre">PATH</span></code>).</p>
 <p>The bundled <code class="docutils literal notranslate"><span class="pre">sat_process.sh</span></code> and <code class="docutils literal notranslate"><span class="pre">sat_process.ps1</span></code> launcher scripts
 must remain alongside the library source files.</p>
 </section>
@@ -534,7 +534,7 @@ limit.</p></li>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <p>Load the library, then compile an object defining a CNF problem using
-the <code class="docutils literal notranslate"><span class="pre">sat_expansion</span></code> expansion hook. For example:</p>
+the <code class="docutils literal notranslate"><span class="pre">sat_expansion</span></code> hook object. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(sat(loader)),
      <span class="k">logtalk_load</span>(sat(<span class="s">&#39;test_files/queens&#39;</span>), [hook(sat_expansion)]).
 </pre></div>
@@ -671,20 +671,27 @@ inclusive, one-based generated line intervals.</p>
 <h2>Canonical representation<a class="headerlink" href="#canonical-representation" title="Link to this heading"></a></h2>
 <p>The serializer accepts these statement constructors:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">clause(Literals)</span></code> emits one DIMACS clause line. <code class="docutils literal notranslate"><span class="pre">Literals</span></code> is an
-ordered list of <code class="docutils literal notranslate"><span class="pre">pos(Term)</span></code> or <code class="docutils literal notranslate"><span class="pre">neg(Term)</span></code>, <code class="docutils literal notranslate"><span class="pre">Term</span></code> being any
-ground Prolog term used as the variable identity; an empty list emits
-the empty clause (<code class="docutils literal notranslate"><span class="pre">0</span></code>), which is immediately unsatisfiable.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">comment(Codes)</span></code> emits one <code class="docutils literal notranslate"><span class="pre">c</span> <span class="pre">...</span></code> comment line; <code class="docutils literal notranslate"><span class="pre">Codes</span></code> must
-not contain a newline.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">raw(Codes)</span></code> preserves trusted native DIMACS text with a separating
-newline. Raw fragments must not redeclare the <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">cnf</span></code> header, since
-the library always generates exactly one, computed from the declared
-clauses.</p></li>
+<li><p>A single literal emits one unit DIMACS clause line; a literal is a
+bare <code class="docutils literal notranslate"><span class="pre">Term</span></code> (positive), <code class="docutils literal notranslate"><span class="pre">+Term</span></code>, or <code class="docutils literal notranslate"><span class="pre">-Term</span></code>, <code class="docutils literal notranslate"><span class="pre">Term</span></code> being any
+ground Prolog term used as the variable identity.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Literal1</span> <span class="pre">;</span> <span class="pre">Literal2</span> <span class="pre">;</span> <span class="pre">...</span> <span class="pre">;</span> <span class="pre">LiteralN</span></code> emits one DIMACS clause line
+with several literals.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">false</span></code> emits the empty clause (<code class="docutils literal notranslate"><span class="pre">0</span></code>), which is immediately
+unsatisfiable.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">comment(Source)</span></code> emits one <code class="docutils literal notranslate"><span class="pre">c</span> <span class="pre">...</span></code> comment line; <code class="docutils literal notranslate"><span class="pre">Source</span></code> is an
+atom, a list of character codes, a list of one-character atoms, or a
+backend-native string, normalized into character codes, which must not
+contain a newline.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">raw(Source)</span></code> preserves trusted native DIMACS text with a separating
+newline; <code class="docutils literal notranslate"><span class="pre">Source</span></code> is an atom, a list of character codes, a list of
+one-character atoms, or a backend-native string, normalized into
+character codes. Raw fragments must not redeclare the <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">cnf</span></code>
+header, since the library always generates exactly one, computed from
+the declared clauses.</p></li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">sat::program/2</span></code> predicate returns the DIMACS source for this
 canonical clause:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> sat<span class="o">::</span>program(terms([<span class="k">clause</span>([pos(p), neg(q)])]), <span class="nv">Codes</span>).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> sat<span class="o">::</span>program(terms([(p <span class="o">;</span> <span class="o">-</span>q)]), <span class="nv">Codes</span>).
 </pre></div>
 </div>
 </section>
@@ -695,25 +702,35 @@ implements <code class="docutils literal notranslate"><span class="pre">sat_prob
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(reachability,
     <span class="k">implements</span>(sat_problem_protocol)).
 
-    <span class="k">clause</span>([pos(a), neg(b)]).
-    <span class="k">clause</span>([neg(a), pos(b), pos(c)]).
+    a <span class="o">;</span> <span class="o">-</span>b.
+    <span class="o">-</span>a <span class="o">;</span> b <span class="o">;</span> c.
 
 <span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>The hook translates clauses into ordered <code class="docutils literal notranslate"><span class="pre">cnf_statement/2</span></code> data,
-preserving clause structure. An ordinary ground fact becomes a unit
-positive clause; for example, <code class="docutils literal notranslate"><span class="pre">edge(a,</span> <span class="pre">b).</span></code> becomes
-<code class="docutils literal notranslate"><span class="pre">clause([pos(edge(a,</span> <span class="pre">b))])</span></code>. A <code class="docutils literal notranslate"><span class="pre">clause(Literals)</span></code> fact lists several
-literals directly, each a bare <code class="docutils literal notranslate"><span class="pre">Term</span></code> (positive), <code class="docutils literal notranslate"><span class="pre">pos(Term)</span></code>, or
-<code class="docutils literal notranslate"><span class="pre">neg(Term)</span></code>. CNF containers accept only bodyless facts; rules (clauses
-with a body) are rejected, since propositional CNF has no grounding or
-inference step of its own. Keep ordinary runtime helpers in separate
-provider objects instead of mixing them into CNF containers.</p>
+preserving clause structure unchanged: a fact is compiled as-is, with no
+translation step. An ordinary ground fact becomes a unit positive
+clause; for example, <code class="docutils literal notranslate"><span class="pre">edge(a,</span> <span class="pre">b).</span></code> becomes the canonical statement
+<code class="docutils literal notranslate"><span class="pre">edge(a,</span> <span class="pre">b)</span></code> itself. Multi literal clauses are written directly as a
+<code class="docutils literal notranslate"><span class="pre">;</span></code>-chain, each a bare <code class="docutils literal notranslate"><span class="pre">Term</span></code> (positive), <code class="docutils literal notranslate"><span class="pre">+Term</span></code>, or <code class="docutils literal notranslate"><span class="pre">-Term</span></code>;
+for example, <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">;</span> <span class="pre">-b.</span></code> becomes the canonical statement <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">;</span> <span class="pre">-b</span></code>. The
+empty clause is written as the reserved fact <code class="docutils literal notranslate"><span class="pre">false.</span></code>; it cannot be
+used as an ordinary literal’s variable identity at the top level. CNF
+containers accept only bodyless facts; rules (clauses with a body) are
+rejected, since propositional CNF has no grounding or inference step of
+its own. Keep ordinary runtime helpers in separate provider objects
+instead of mixing them into CNF containers.</p>
+<p>Writing a negative literal whose variable identity is itself a bare
+integer requires parentheses (<code class="docutils literal notranslate"><span class="pre">-(2)</span></code>), never <code class="docutils literal notranslate"><span class="pre">-2</span></code> adjacent; that
+form is the negative integer <code class="docutils literal notranslate"><span class="pre">-2</span></code>, a different term from the compound
+<code class="docutils literal notranslate"><span class="pre">-(2)</span></code>. This only matters for literals whose identity is a plain
+number, which is not how problem objects normally name variables.</p>
 <p>Equivalent directives are <code class="docutils literal notranslate"><span class="pre">comment/1</span></code>, which shares the functor and
-arity of its canonical <code class="docutils literal notranslate"><span class="pre">comment/1</span></code> statement, and <code class="docutils literal notranslate"><span class="pre">cnf_raw/1</span></code>, which
-maps to canonical <code class="docutils literal notranslate"><span class="pre">raw/1</span></code>. Native DIMACS syntax that is not valid
-Logtalk syntax belongs in <code class="docutils literal notranslate"><span class="pre">file/1</span></code>, <code class="docutils literal notranslate"><span class="pre">codes/1</span></code>, or <code class="docutils literal notranslate"><span class="pre">cnf_raw/1</span></code>.</p>
+arity of its canonical <code class="docutils literal notranslate"><span class="pre">comment/1</span></code> statement, and <code class="docutils literal notranslate"><span class="pre">raw/1</span></code>, which
+shares the functor and arity of canonical <code class="docutils literal notranslate"><span class="pre">raw/1</span></code>. Native DIMACS
+syntax that is not valid Logtalk syntax belongs in <code class="docutils literal notranslate"><span class="pre">file/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">codes/1</span></code>, or <code class="docutils literal notranslate"><span class="pre">raw/1</span></code>.</p>
 </section>
 <section id="raw-dimacs-source">
 <h2>Raw DIMACS source<a class="headerlink" href="#raw-dimacs-source" title="Link to this heading"></a></h2>
@@ -734,16 +751,18 @@ program above:</p>
 <p>Neither form requires the <code class="docutils literal notranslate"><span class="pre">sat_expansion</span></code> hook, nor supplies a
 variable table: witness literals in the collected result use the plain
 DIMACS integer as the term identity instead of a declared symbol.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">cnf_raw/1</span></code> directive embeds raw source among translated clauses
-in an object compiled with <code class="docutils literal notranslate"><span class="pre">hook(sat_expansion)</span></code>. Its argument accepts
-an atom, a list of character codes, a list of one-character atoms, or a
+<p>The <code class="docutils literal notranslate"><span class="pre">raw/1</span></code> directive embeds raw source among translated clauses in an
+object compiled with <code class="docutils literal notranslate"><span class="pre">hook(sat_expansion)</span></code>. Its argument accepts an
+atom, a list of character codes, a list of one-character atoms, or a
 backend-native string. Use an atom or a double-quoted text for readable
-source: the hook handles these representations and normalizes the text
-into character codes without changing the backend’s <code class="docutils literal notranslate"><span class="pre">double_quotes</span></code>
-flag. The argument is literal text, not an executable goal.</p>
-<p>The canonical <code class="docutils literal notranslate"><span class="pre">raw(Codes)</span></code> statement provides the same escape hatch
+source: the library handles these representations and normalizes the
+text into character codes without changing the backend’s
+<code class="docutils literal notranslate"><span class="pre">double_quotes</span></code> flag. The argument is literal text, not an executable
+goal.</p>
+<p>The canonical <code class="docutils literal notranslate"><span class="pre">raw(Source)</span></code> statement provides the same escape hatch
 within a <code class="docutils literal notranslate"><span class="pre">terms(Statements)</span></code> source or an object’s <code class="docutils literal notranslate"><span class="pre">cnf_statement/2</span></code>
-data.</p>
+data, accepting the same normalized argument forms as the <code class="docutils literal notranslate"><span class="pre">raw/1</span></code>
+directive.</p>
 </section>
 <section id="collected-results">
 <h2>Collected results<a class="headerlink" href="#collected-results" title="Link to this heading"></a></h2>
@@ -759,9 +778,8 @@ representation:</p>
 <code class="docutils literal notranslate"><span class="pre">Model</span></code> is <code class="docutils literal notranslate"><span class="pre">assignment(Literals)</span></code> when a witness was reported, or
 <code class="docutils literal notranslate"><span class="pre">none</span></code> when the result is not satisfiable or the witness was
 suppressed with <code class="docutils literal notranslate"><span class="pre">witness(false)</span></code>. <code class="docutils literal notranslate"><span class="pre">Literals</span></code> is an ordered list of
-<code class="docutils literal notranslate"><span class="pre">pos(Term)</span></code> or <code class="docutils literal notranslate"><span class="pre">neg(Term)</span></code>, <code class="docutils literal notranslate"><span class="pre">Term</span></code> being either the declared
-variable term or, when no variable table is available, the plain DIMACS
-integer.</p>
+<code class="docutils literal notranslate"><span class="pre">+Term</span></code> or <code class="docutils literal notranslate"><span class="pre">-Term</span></code>, <code class="docutils literal notranslate"><span class="pre">Term</span></code> being either the declared variable term
+or, when no variable table is available, the plain DIMACS integer.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">literal/2</span></code> predicate enumerates the collected model literals. The
 <code class="docutils literal notranslate"><span class="pre">result_property/2</span></code> predicate enumerates <code class="docutils literal notranslate"><span class="pre">status(Status)</span></code> and stored
 properties:</p>
@@ -841,7 +859,7 @@ and no <code class="docutils literal notranslate"><span class="pre">s</span></co
 <p>The canonical representation supports ground propositional clauses only;
 there is no grounding, quantification, or clausification of arbitrary
 propositional formulas. Native syntax outside this representation
-requires <code class="docutils literal notranslate"><span class="pre">file/1</span></code>, <code class="docutils literal notranslate"><span class="pre">codes/1</span></code>, or <code class="docutils literal notranslate"><span class="pre">cnf_raw/1</span></code>.</p>
+requires <code class="docutils literal notranslate"><span class="pre">file/1</span></code>, <code class="docutils literal notranslate"><span class="pre">codes/1</span></code>, or <code class="docutils literal notranslate"><span class="pre">raw/1</span></code>.</p>
 <p>Source inspection does not parse, validate DIMACS semantics beyond
 statement structure, or resolve includes (DIMACS CNF has none). Results
 and diagnostics are collected in memory, not streamed live.</p>

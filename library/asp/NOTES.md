@@ -33,16 +33,19 @@ Shumway Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 Requirements
 ------------
 
-Solving requires the selected solver executable, available on PATH or selected
-using the `executable(Path)` option. Clingo requires version 5.5.2 or later;
-older versions can emit incorrectly escaped JSON strings. Zetesis requires
-version 0.7.0 with schema-3 JSON output. Source generation and result inspection
-do not require a solver executable. Clingo is available from its
-[official website](https://potassco.org/clingo/); Zetesis is available from its
-[repository](https://github.com/GregoryGelfond/zetesis).
+Solving requires the selected solver executable, available on the system 
+`PATH` or selected using the `executable(Path)` option. Clingo requires
+version 5.5.2 or later; older versions can emit incorrectly escaped JSON
+strings. Zetesis requires version 0.7.0 with schema-3 JSON output. Note
+that source generation and result inspection do not require a solver
+executable. For solver documentation and installation instructions, see:
 
-On POSIX systems, solving also requires `/bin/sh`, with `mktemp` available on PATH.
-On Windows, solving requires PowerShell 7.3 or later (`pwsh` on PATH).
+- https://potassco.org/clingo/
+- https://github.com/GregoryGelfond/zetesis
+
+On POSIX systems, solving also requires `/bin/sh`, with `mktemp` available
+on the system `PATH`. On Windows, solving requires PowerShell 7.3 or later
+(`pwsh` on the system `PATH`).
 
 The bundled `asp_process.sh` and `asp_process.ps1` launcher scripts must
 remain in the `scripts` subdirectory of the library.
@@ -117,14 +120,14 @@ singleton, and multi-element tuples, and the infimum and supremum symbols.
 Output uses empty, signed and unsigned signature, and conditional term show
 directives. Optimization uses minimize, maximize, and weak constraints at
 distinct priorities. The object passes a native `#program base` directive
-through `asp_raw/1`, exercising trusted raw source too.
+through `raw/1`, exercising trusted raw source too.
 
 
 Usage
 -----
 
 Load the library, then compile an object defining an ASP problem using
-the `asp_expansion` expansion hook. For example:
+the `asp_expansion` hook object. For example:
 
 	| ?- logtalk_load(asp(loader)),
 	     logtalk_load(asp('test_files/queens'), [hook(asp_expansion)]).
@@ -263,7 +266,9 @@ The serializer accepts these statement constructors:
 - `show_term(Term, Body)` emits a conditional show directive.
 - `minimize(Elements)` and `maximize(Elements)` emit objective directives.
 - `weak_constraint(Body, Weight, Priority, Tuple)` emits a weak constraint.
-- `raw(Codes)` preserves trusted native ASP text with a separating newline.
+- `raw(Source)` preserves trusted native ASP text with a separating newline;
+  `Source` is an atom, a list of character codes, a list of one-character
+  atoms, or a backend-native string, normalized into character codes.
 
 Atoms use `function(Name, Arguments, Sign)`, where `Sign` is `positive` or
 `negative`. Rule heads use `atom(Atom)`, `disjunction(Atoms)`, or
@@ -335,13 +340,13 @@ in separate provider objects instead of mixing them into ASP containers.
 
 Equivalent directives mostly share the functor and arity of their matching
 canonical statement constructor (`show/1`, `minimize/1`, `maximize/1`,
-`constraint/1`, and `weak_constraint/4`), with three exceptions: `const/2`
-maps to `constant/2`, the two-argument `show/2` directive maps to
-`show_term/2`, and `asp_raw/1` maps to `raw/1`. The surface syntax uses
+`constraint/1`, `weak_constraint/4`, and `raw/1`), with two exceptions:
+`const/2` maps to `constant/2` and the two-argument `show/2` directive maps
+to `show_term/2`. The surface syntax uses
 `not/1` for default negation and `neg/1` for strong negation. Choice,
 disjunction, aggregate, and objective wrappers correspond to the canonical
 constructors. Native ASP syntax that is not valid Logtalk syntax belongs in
-`file/1`, `codes/1`, or `asp_raw/1`.
+`file/1`, `codes/1`, or `raw/1`.
 
 Unconditional choice and disjunction heads can be written as bodyless clauses:
 
@@ -383,13 +388,13 @@ selected solver. For a file named `problem.lp` containing the program above:
 Neither form requires the `asp_expansion` hook. Both solve the complete raw
 program, rather than adding text to another source envelope.
 
-The `asp_raw/1` directive works with both Clingo and Zetesis. It embeds raw
+The `raw/1` directive works with both Clingo and Zetesis. It embeds raw
 source among translated clauses in an object compiled with `hook(asp_expansion)`.
 Select the solver using the `solver(Solver)` option of `asp::solve/3`;
-`asp::solve/2` uses Clingo by default. The `asp_raw/1` argument accepts
+`asp::solve/2` uses Clingo by default. The `raw/1` argument accepts
 an atom, a list of character codes, a list of one-character atoms, or a
 backend-native string. Use an atom or a double-quoted text for readable
-source: the hook handles these representations and normalizes the text into
+source: the library handles these representations and normalizes the text into
 character codes without changing the backend's `double_quotes` flag. The
 argument is literal text, not an executable goal. The following object mixes
 ordinary facts with a raw rule:
@@ -401,7 +406,7 @@ ordinary facts with a raw rule:
 		item(2).
 		item(3).
 
-		:- asp_raw("chosen(X) :- item(X), 1 < X < 3.").
+		:- raw("chosen(X) :- item(X), 1 < X < 3.").
 		:- show(chosen/1).
 
 	:- end_object.
@@ -411,19 +416,19 @@ After compiling this object with the expansion hook, inspect or solve it using
 `asp::solve(object(raw_comparison), Result)`. The hook preserves the raw rule
 at the directive's position without translating its variable names or operators.
 
-The canonical `raw(Codes)` statement provides the same escape hatch within a
-`terms(Statements)` source or an object's `asp_statement/2` data. For example,
+The canonical `raw(Source)` statement provides the same escape hatch within a
+`terms(Statements)` source or an object's `asp_statement/2` data, accepting the
+same normalized argument forms as the `raw/1` directive. For example,
 combine a generated fact with a raw rule and show directive:
 
-	| ?- atom_codes('chosen(X) :- item(X), 1 < X < 3. #show chosen/1.', RawCodes),
-	     asp::solve(terms([
+	| ?- asp::solve(terms([
 	         fact(function(item, [number(2)], positive)),
-	         raw(RawCodes)
+	         raw("chosen(X) :- item(X), 1 < X < 3. #show chosen/1.")
 	     ]), Result).
 
 Raw fragments must contain complete ASP statements, including their required
-terminators. The serializer appends a newline after each `raw(Codes)` statement,
-including those produced by `asp_raw/1`. It does not parse or validate the ASP
+terminators. The serializer appends a newline after each `raw(Source)` statement.
+It does not parse or validate the ASP
 syntax inside a fragment; the selected solver checks syntax, grounding safety,
 and semantics. ASP variables in raw text are ASP variables, not shared Logtalk
 variables. Raw source remains trusted input, with the include and security
@@ -532,7 +537,7 @@ The canonical representation and expansion hook support the documented ASP
 syntax, not every native solver extension. Conditional bodies accept only
 simple literals, not nested conditional literals or aggregates. Constants
 do not accept variables or anonymous terms. Native syntax outside this
-representation requires `file/1`, `codes/1`, or `asp_raw/1`.
+representation requires `file/1`, `codes/1`, or `raw/1`.
 
 Source inspection does not ground a program, resolve includes, or change
 directories. Generated source has no implicit relative-include base. The

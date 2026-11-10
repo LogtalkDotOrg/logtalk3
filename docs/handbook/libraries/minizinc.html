@@ -454,24 +454,22 @@
 <p>The <code class="docutils literal notranslate"><span class="pre">minizinc</span></code> library provides access to MiniZinc CLI solving,
 MiniZinc source generation, an opt-in object expansion hook, and
 collected result inspection. MiniZinc is a single frontend that
-delegates solving to a backend solver selected with the <code class="docutils literal notranslate"><span class="pre">solver(Id)</span></code>
-option; the library does not hardcode a solver list and lets MiniZinc
-itself report an unknown solver identifier.</p>
+delegates solving to a backend solver.</p>
 <p>This library interacts with the <code class="docutils literal notranslate"><span class="pre">minizinc</span></code> CLI using the <code class="docutils literal notranslate"><span class="pre">process</span></code>
 library. Therefore, it currently supports ECLiPSe, GNU Prolog, SICStus
 Prolog, Shumway Prolog, SWI-Prolog, Trealla Prolog, and XVM.</p>
 <section id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
-<p>Solving requires the <code class="docutils literal notranslate"><span class="pre">minizinc</span></code> executable, available on PATH or
-selected using the <code class="docutils literal notranslate"><span class="pre">executable(Path)</span></code> option. This library was
-developed and tested against MiniZinc 2.10.1, available from its
+<p>Solving requires the <code class="docutils literal notranslate"><span class="pre">minizinc</span></code> executable, available on the system
+<code class="docutils literal notranslate"><span class="pre">PATH</span></code> or selected using the <code class="docutils literal notranslate"><span class="pre">executable(Path)</span></code> option. This library
+was developed and tested against MiniZinc 2.10.1, available from its
 <a class="reference external" href="https://www.minizinc.org/">official website</a>. The selected backend
 solver (<code class="docutils literal notranslate"><span class="pre">solver(Id)</span></code> option) must itself be configured in the MiniZinc
 installation; use <code class="docutils literal notranslate"><span class="pre">minizinc</span> <span class="pre">--solvers</span></code> to list the solvers your
 installation can use.</p>
 <p>On POSIX systems, solving also requires <code class="docutils literal notranslate"><span class="pre">/bin/sh</span></code>, with <code class="docutils literal notranslate"><span class="pre">mktemp</span></code>
-available on PATH. On Windows, solving requires PowerShell 7.3 or later
-(<code class="docutils literal notranslate"><span class="pre">pwsh</span></code> on PATH).</p>
+available on the system <code class="docutils literal notranslate"><span class="pre">PATH</span></code>. On Windows, solving requires
+PowerShell 7.3 or later (<code class="docutils literal notranslate"><span class="pre">pwsh</span></code> on the system <code class="docutils literal notranslate"><span class="pre">PATH</span></code>).</p>
 <p>The bundled <code class="docutils literal notranslate"><span class="pre">minizinc_process.sh</span></code> and <code class="docutils literal notranslate"><span class="pre">minizinc_process.ps1</span></code>
 launcher scripts must remain in the <code class="docutils literal notranslate"><span class="pre">scripts</span></code> subdirectory of the
 library.</p>
@@ -526,7 +524,7 @@ captures (solution, status, warning, and error messages) used to test
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <p>Load the library, then compile an object defining a MiniZinc problem
-using the <code class="docutils literal notranslate"><span class="pre">minizinc_expansion</span></code> expansion hook. For example:</p>
+using the <code class="docutils literal notranslate"><span class="pre">minizinc_expansion</span></code> hook object. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(minizinc(loader)),
      <span class="k">logtalk_load</span>(minizinc(<span class="s">&#39;test_files/queens&#39;</span>), [hook(minizinc_expansion)]).
 </pre></div>
@@ -653,8 +651,10 @@ enum.</p></li>
 <code class="docutils literal notranslate"><span class="pre">SetExpr</span></code> is the integer-set argument of the <code class="docutils literal notranslate"><span class="pre">_(...)</span></code>
 constructor), or <code class="docutils literal notranslate"><span class="pre">declared</span></code> (forward declaration, cases supplied
 externally).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">raw(Codes)</span></code> preserves trusted native MiniZinc text with a
-separating newline.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">raw(Source)</span></code> preserves trusted native MiniZinc text with a
+separating newline; <code class="docutils literal notranslate"><span class="pre">Source</span></code> is an atom, a list of character codes,
+a list of one-character atoms, or a backend-native string, normalized
+into character codes.</p></li>
 </ul>
 <p><code class="docutils literal notranslate"><span class="pre">TypeInst</span></code> is <code class="docutils literal notranslate"><span class="pre">par(Base)</span></code> or <code class="docutils literal notranslate"><span class="pre">var(Base)</span></code>. <code class="docutils literal notranslate"><span class="pre">Base</span></code> is <code class="docutils literal notranslate"><span class="pre">bool</span></code>,
 <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">string</span></code>, <code class="docutils literal notranslate"><span class="pre">range(Lo,</span> <span class="pre">Hi)</span></code>, <code class="docutils literal notranslate"><span class="pre">set(Base)</span></code>, or
@@ -675,7 +675,7 @@ undifferentiated), <code class="docutils literal notranslate"><span class="pre">
 sugar used for <code class="docutils literal notranslate"><span class="pre">forall</span></code>, <code class="docutils literal notranslate"><span class="pre">exists</span></code>, <code class="docutils literal notranslate"><span class="pre">sum</span></code>, and similar),
 <code class="docutils literal notranslate"><span class="pre">if_then_else(CondThenPairs,</span> <span class="pre">Else)</span></code> (<code class="docutils literal notranslate"><span class="pre">Else</span></code> is an expression or
 <code class="docutils literal notranslate"><span class="pre">none</span></code>, matching MiniZinc’s own optional <code class="docutils literal notranslate"><span class="pre">else</span></code> branch), and
-<code class="docutils literal notranslate"><span class="pre">raw(Codes)</span></code> (an expression-level escape hatch).</p>
+<code class="docutils literal notranslate"><span class="pre">raw(Source)</span></code> (an expression-level escape hatch).</p>
 <p>Generators are <code class="docutils literal notranslate"><span class="pre">generator(Names,</span> <span class="pre">Collection,</span> <span class="pre">Where)</span></code>; <code class="docutils literal notranslate"><span class="pre">Names</span></code> is a
 list of atoms, including <code class="docutils literal notranslate"><span class="pre">'_'</span></code> for an anonymous generator variable;
 <code class="docutils literal notranslate"><span class="pre">Where</span></code> is a filter expression or <code class="docutils literal notranslate"><span class="pre">none</span></code>.</p>
@@ -703,9 +703,9 @@ recognizes these directives:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">enum(Name)</span></code> (forward declaration), <code class="docutils literal notranslate"><span class="pre">enum(Name,</span> <span class="pre">Atoms)</span></code> (named
 cases, a plain list), and <code class="docutils literal notranslate"><span class="pre">enum(Name,</span> <span class="pre">anon(SetExpr))</span></code> (anonymous
 enum).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">minizinc_raw(Source)</span></code> (same text-normalization pattern as other
-process libraries’ raw escape hatches: an atom, a list of character
-codes, a list of one-character atoms, or a backend-native string).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">raw(Source)</span></code> (same text-normalization pattern as other process
+libraries’ raw escape hatches: an atom, a list of character codes, a
+list of one-character atoms, or a backend-native string).</p></li>
 </ul>
 <p>Each directive shares the functor and arity of its canonical statement
 constructor, except <code class="docutils literal notranslate"><span class="pre">par/2-3</span></code> and <code class="docutils literal notranslate"><span class="pre">var/2-3</span></code>, which map to
@@ -761,11 +761,11 @@ types, or user-defined predicates and functions.</p>
 character codes. The <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code> source envelope passes an existing
 MiniZinc file directly to MiniZinc. Neither form requires the
 <code class="docutils literal notranslate"><span class="pre">minizinc_expansion</span></code> hook.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">minizinc_raw/1</span></code> directive embeds raw source among translated
-clauses in an object compiled with <code class="docutils literal notranslate"><span class="pre">hook(minizinc_expansion)</span></code>. The
-canonical <code class="docutils literal notranslate"><span class="pre">raw(Codes)</span></code> statement provides the same escape hatch within
-a <code class="docutils literal notranslate"><span class="pre">terms(Statements)</span></code> source or an object’s <code class="docutils literal notranslate"><span class="pre">minizinc_statement/2</span></code>
-data.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">raw/1</span></code> directive embeds raw source among translated clauses in an
+object compiled with <code class="docutils literal notranslate"><span class="pre">hook(minizinc_expansion)</span></code>. The canonical
+<code class="docutils literal notranslate"><span class="pre">raw(Source)</span></code> statement provides the same escape hatch within a
+<code class="docutils literal notranslate"><span class="pre">terms(Statements)</span></code> source or an object’s <code class="docutils literal notranslate"><span class="pre">minizinc_statement/2</span></code>
+data, accepting the same normalized argument forms as the directive.</p>
 </section>
 <section id="collected-results">
 <h2>Collected results<a class="headerlink" href="#collected-results" title="Link to this heading"></a></h2>
@@ -849,7 +849,7 @@ does not cover <code class="docutils literal notranslate"><span class="pre">let<
 type-inst synonyms, user-defined predicates/functions/tests, annotation
 items, custom <code class="docutils literal notranslate"><span class="pre">output</span></code> items, or enum-constructor combination (<code class="docutils literal notranslate"><span class="pre">++</span></code>)
 and inverse constructors. Native syntax outside this representation
-requires <code class="docutils literal notranslate"><span class="pre">file/1</span></code>, <code class="docutils literal notranslate"><span class="pre">codes/1</span></code>, or <code class="docutils literal notranslate"><span class="pre">raw/1</span></code>/<code class="docutils literal notranslate"><span class="pre">minizinc_raw/1</span></code>.</p>
+requires <code class="docutils literal notranslate"><span class="pre">file/1</span></code>, <code class="docutils literal notranslate"><span class="pre">codes/1</span></code>, or <code class="docutils literal notranslate"><span class="pre">raw/1</span></code>.</p>
 <p>Results and diagnostics are collected in memory, not streamed live.
 Exhaustive model enumeration can require substantial memory.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">time_limit/1</span></code> option is MiniZinc’s own frontend-level time limit,

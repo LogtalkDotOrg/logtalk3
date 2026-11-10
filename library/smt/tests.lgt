@@ -155,13 +155,16 @@
 
 	test(smt_expansion_raw, deterministic) :-
 		findall(Statement, smt_raw_fixture::smt_statement(Statement, _), Statements),
-		atom_codes('; trusted raw comment', Expected),
-		assertion(Statements == [raw(Expected), raw(Expected), raw(Expected), raw(Expected)]).
+		assertion(Statements == [
+			raw('; trusted raw comment'),
+			raw([59,32,116,114,117,115,116,101,100,32,114,97,119,32,99,111,109,109,101,110,116]),
+			raw([';',' ',t,r,u,s,t,e,d,' ',r,a,w,' ',c,o,m,m,e,n,t]),
+			raw("; trusted raw comment")
+		]).
 
 	test(smt_expansion_comment, deterministic) :-
 		findall(Statement, smt_comment_fixture::smt_statement(Statement, _), Statements),
-		atom_codes('a readable comment', Expected),
-		assertion(Statements == [comment(Expected), set_logic('QF_LIA')]).
+		assertion(Statements == [comment('a readable comment'), set_logic('QF_LIA')]).
 
 	test(smt_expansion_unrelated, deterministic(Value == ordinary)) :-
 		smt_unrelated_fixture::value(Value),

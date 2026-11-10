@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-09,
+		date is 2026-11-10,
 		comment is 'Opt-in equivalent ASP directive and clause expansion for pure problem objects.'
 	]).
 
@@ -93,17 +93,8 @@
 		term(Weight, Names, WeightTerm),
 		term(Priority, Names, PriorityTerm),
 		terms(Tuple, Names, Terms).
-	statement((:- asp_raw(Source)), _, raw(Codes)) :-
-		!,
-		(	atom(Source) ->
-			atom_codes(Source, Codes)
-		;	valid(chars, Source) ->
-			atom_chars(Atom, Source),
-			atom_codes(Atom, Codes)
-		;	{'$lgt_string'(Source)} ->
-			{'$lgt_string_codes'(Source, Codes)}
-		;	Codes = Source
-		).
+	statement((:- raw(Source)), _, raw(Source)) :-
+		!.
 	statement((:- _), _, _) :-
 		!,
 		fail.

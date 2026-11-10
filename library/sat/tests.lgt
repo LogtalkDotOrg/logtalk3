@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-08,
+		date is 2026-11-10,
 		comment is 'Unit tests for the sat library.'
 	]).
 
@@ -54,23 +54,23 @@
 		atom_codes(Atom, Codes).
 
 	test(sat_program_unit_clause, deterministic(Atom == 'p cnf 1 1\n1 0\n')) :-
-		sat_program::serialize([clause([pos(p)])], Codes),
+		sat_program::serialize([p], Codes),
 		atom_codes(Atom, Codes).
 
 	test(sat_program_multi_literal, deterministic(Atom == 'p cnf 2 1\n1 -2 0\n')) :-
-		sat_program::serialize([clause([pos(p), neg(q)])], Codes),
+		sat_program::serialize([(p ; -q)], Codes),
 		atom_codes(Atom, Codes).
 
 	test(sat_program_variable_order, deterministic(Atom == 'p cnf 3 2\n1 2 0\n-2 3 0\n')) :-
-		sat_program::serialize([clause([pos(p), pos(q)]), clause([neg(q), pos(r)])], Codes),
+		sat_program::serialize([(p ; q), (-q ; r)], Codes),
 		atom_codes(Atom, Codes).
 
 	test(sat_program_repeated_term, deterministic(Atom == 'p cnf 1 2\n1 0\n-1 0\n')) :-
-		sat_program::serialize([clause([pos(p)]), clause([neg(p)])], Codes),
+		sat_program::serialize([p, -p], Codes),
 		atom_codes(Atom, Codes).
 
 	test(sat_program_empty_clause, deterministic(Atom == 'p cnf 0 1\n0\n')) :-
-		sat_program::serialize([clause([])], Codes),
+		sat_program::serialize([false], Codes),
 		atom_codes(Atom, Codes).
 
 	test(sat_program_comment, deterministic(Atom == 'p cnf 0 0\nc hello\n')) :-
@@ -85,55 +85,58 @@
 
 	test(sat_program_source_map, deterministic) :-
 		atom_codes(hello, HelloCodes),
-		sat_program::serialize([comment(HelloCodes), clause([pos(p)])], [source('fixture.lgt', 3, 4), unknown], Codes, Map),
+		sat_program::serialize([comment(HelloCodes), p], [source('fixture.lgt', 3, 4), unknown], Codes, Map),
 		atom_codes(Atom, Codes),
 		assertion(Atom == 'p cnf 1 1\nc hello\n1 0\n'),
 		assertion(Map == [line(2, 2, source('fixture.lgt', 3, 4)), line(3, 3, unknown)]).
 
 	test(sat_program_variables, deterministic(Variables == [p-1, q-2])) :-
-		sat_program::variables([clause([pos(p), neg(q)])], Variables).
+		sat_program::variables([(p ; -q)], Variables).
 
 	test(sat_program_unbound, error(instantiation_error)) :-
 		sat_program::serialize(_, _).
 
 	test(sat_program_non_ground, error(instantiation_error)) :-
-		sat_program::serialize([clause([pos(_)])], _).
+		sat_program::serialize([+_], _).
 
 	test(sat_program_non_list, error(type_error(list, invalid))) :-
 		sat_program::serialize(invalid, _).
 
-	test(sat_program_invalid_statement, error(domain_error(sat_statement, call(halt)))) :-
-		sat_program::serialize([call(halt)], _).
+	test(sat_program_invalid_statement, error(domain_error(sat_statement, 3.14))) :-
+		sat_program::serialize([3.14], _).
 
-	test(sat_program_invalid_literal, error(domain_error(sat_statement, clause([p])))) :-
-		sat_program::serialize([clause([p])], _).
+	test(sat_program_invalid_literal, error(domain_error(sat_statement, (p ; 42)))) :-
+		sat_program::serialize([(p ; 42)], _).
 
 	test(sat_program_invalid_comment_newline, error(domain_error(sat_statement, comment([98,97,100,10,120])))) :-
 		sat_program::serialize([comment([98,97,100,10,120])], _).
 
 	test(sat_program_invalid_origins, error(domain_error(sat_origins, [wrong]))) :-
-		sat_program::serialize([clause([pos(p)])], [wrong], _, _).
+		sat_program::serialize([p], [wrong], _, _).
 
 	% sat_expansion tests
 
-	test(sat_expansion_trivial_sat, deterministic(Statements == [clause([pos(p)]), clause([neg(q), pos(p)])])) :-
+	test(sat_expansion_trivial_sat, deterministic(Statements == [p, (-q ; p)])) :-
 		findall(Statement, sat_trivial_sat::cnf_statement(Statement, _), Statements).
 
-	test(sat_expansion_pigeonhole, deterministic(Statements == [clause([pos(in(1))]), clause([pos(in(2))]), clause([neg(in(1)), neg(in(2))])])) :-
+	test(sat_expansion_pigeonhole, deterministic(Statements == [in(1), in(2), (-in(1) ; -in(2))])) :-
 		findall(Statement, sat_pigeonhole_unsat::cnf_statement(Statement, _), Statements).
 
-	test(sat_expansion_empty_clause, deterministic(Statements == [clause([pos(p)]), clause([])])) :-
+	test(sat_expansion_empty_clause, deterministic(Statements == [p, false])) :-
 		findall(Statement, sat_empty_clause_fixture::cnf_statement(Statement, _), Statements).
 
 	test(sat_expansion_raw, deterministic) :-
 		findall(Statement, sat_raw_fixture::cnf_statement(Statement, _), Statements),
-		atom_codes('c trusted raw comment', Expected),
-		assertion(Statements == [raw(Expected), raw(Expected), raw(Expected), raw(Expected)]).
+		assertion(Statements == [
+			raw('c trusted raw comment'),
+			raw([99,32,116,114,117,115,116,101,100,32,114,97,119,32,99,111,109,109,101,110,116]),
+			raw([c,' ',t,r,u,s,t,e,d,' ',r,a,w,' ',c,o,m,m,e,n,t]),
+			raw("c trusted raw comment")
+		]).
 
 	test(sat_expansion_comment, deterministic) :-
 		findall(Statement, sat_comment_fixture::cnf_statement(Statement, _), Statements),
-		atom_codes('a readable comment', Expected),
-		assertion(Statements == [comment(Expected), clause([pos(p)])]).
+		assertion(Statements == [comment('a readable comment'), p]).
 
 	test(sat_expansion_unrelated, deterministic(Value == ordinary)) :-
 		sat_unrelated_fixture::value(Value),
@@ -163,7 +166,7 @@
 
 	test(sat_program_print_terms, deterministic) :-
 		^^set_text_output(''),
-		sat::program(terms([clause([pos(p)])])),
+		sat::program(terms([p])),
 		^^text_output_contents(Chars),
 		list::subtract(Chars, ['\r'], Normalized),
 		atom_chars(Output, Normalized),
@@ -192,17 +195,17 @@
 		sat_output::decode(kissat, Codes, exit(10), exit(10), [], [], [p-1, q-2], Result),
 		Result = sat_result(Status, Model, Properties),
 		assertion(Status == satisfiable),
-		assertion(Model == assignment([pos(p), neg(q)])),
+		assertion(Model == assignment([+p, -q])),
 		assertion(member(termination(completed), Properties)),
 		assertion(member(variable_count(2), Properties)),
 		assertion(member(solver(kissat), Properties)).
 
-	test(sat_output_sat_multiline_witness, deterministic(Model == assignment([pos(p), neg(q), pos(r)]))) :-
+	test(sat_output_sat_multiline_witness, deterministic(Model == assignment([+p, -q, +r]))) :-
 		atom_codes('s SATISFIABLE\nv 1 -2\nv 3 0\n', Codes),
 		sat_output::decode(kissat, Codes, exit(10), exit(10), [], [], [p-1, q-2, r-3], Result),
 		Result = sat_result(_, Model, _).
 
-	test(sat_output_sat_identity, deterministic(Model == assignment([pos(1), neg(2)]))) :-
+	test(sat_output_sat_identity, deterministic(Model == assignment([+1, -(2)]))) :-
 		atom_codes('s SATISFIABLE\nv 1 -2 0\n', Codes),
 		sat_output::decode(kissat, Codes, exit(10), exit(10), [], [], none, Result),
 		Result = sat_result(_, Model, _).
@@ -301,8 +304,8 @@
 
 	% sat result accessor tests
 
-	test(sat_result_literal, deterministic(Literals == [pos(p), neg(q)])) :-
-		Result = sat_result(satisfiable, assignment([pos(p), neg(q)]), []),
+	test(sat_result_literal, deterministic(Literals == [+p, -q])) :-
+		Result = sat_result(satisfiable, assignment([+p, -q]), []),
 		findall(Literal, sat::literal(Result, Literal), Literals).
 
 	test(sat_result_literal_none, deterministic(Literals == [])) :-
@@ -310,7 +313,7 @@
 		findall(Literal, sat::literal(Result, Literal), Literals).
 
 	test(sat_result_property) :-
-		Result = sat_result(satisfiable, assignment([pos(p)]), [solver(kissat), variable_count(1)]),
+		Result = sat_result(satisfiable, assignment([+p]), [solver(kissat), variable_count(1)]),
 		sat::result_property(Result, status(Status)),
 		assertion(Status == satisfiable),
 		sat::result_property(Result, variable_count(Count)),
@@ -325,11 +328,11 @@
 	% sat print_result tests
 
 	test(sat_print_result_satisfiable, deterministic) :-
-		Result = sat_result(satisfiable, assignment([pos(p), neg(q)]), [variables([p-1, q-2])]),
+		Result = sat_result(satisfiable, assignment([+p, -q]), [variables([p-1, q-2])]),
 		assert_printed_result(Result, 's SATISFIABLE\nv 1 -2 0\n').
 
 	test(sat_print_result_satisfiable_identity, deterministic) :-
-		Result = sat_result(satisfiable, assignment([pos(1), neg(2)]), [variables(none)]),
+		Result = sat_result(satisfiable, assignment([+1, -(2)]), [variables(none)]),
 		assert_printed_result(Result, 's SATISFIABLE\nv 1 -2 0\n').
 
 	test(sat_print_result_satisfiable_no_witness, deterministic) :-
@@ -544,7 +547,7 @@
 	check_solve_trivial_sat(Solver) :-
 		sat::solve(object(sat_trivial_sat), Result, [solver(Solver)]),
 		Result = sat_result(satisfiable, assignment(Literals), Properties),
-		assertion(sat::literal(Result, pos(p))),
+		assertion(sat::literal(Result, +p)),
 		assertion(length(Literals, 2)),
 		assertion(member(source_map([_| _]), Properties)),
 		assertion(member(variables([p-1, q-2]), Properties)),
@@ -566,7 +569,7 @@
 		sat::solve(object(sat_queens), Result, [solver(Solver)]),
 		Result = sat_result(Status, assignment(Literals), _),
 		assertion(Status == satisfiable),
-		findall(Row-Column, member(pos(queen(Row, Column)), Literals), Placements),
+		findall(Row-Column, member(+queen(Row, Column), Literals), Placements),
 		assertion(valid_queens_solution(Placements)).
 
 	check_solve_codes_source(Solver, Status) :-
@@ -574,10 +577,10 @@
 		sat::solve(codes(Program), sat_result(Status, _, _), [solver(Solver)]).
 
 	check_solve_terms_source(Solver) :-
-		sat::solve(terms([clause([pos(p)])]), Result, [solver(Solver)]),
+		sat::solve(terms([p]), Result, [solver(Solver)]),
 		Result = sat_result(Status, assignment(Literals), Properties),
 		assertion(Status == satisfiable),
-		assertion(Literals == [pos(p)]),
+		assertion(Literals == [+p]),
 		assertion(member(variables([p-1]), Properties)).
 
 	check_solve_syntax_diagnostics(Solver) :-

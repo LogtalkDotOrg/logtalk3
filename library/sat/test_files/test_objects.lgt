@@ -22,8 +22,8 @@
 :- object(sat_trivial_sat,
 	implements(sat_problem_protocol)).
 
-	clause([p]).
-	clause([neg(q), p]).
+	p.
+	-q ; p.
 
 :- end_object.
 
@@ -32,9 +32,9 @@
 	implements(sat_problem_protocol)).
 
 	% Two pigeons, one hole: both must occupy it, but not simultaneously.
-	clause([in(1)]).
-	clause([in(2)]).
-	clause([neg(in(1)), neg(in(2))]).
+	in(1).
+	in(2).
+	-in(1) ; -in(2).
 
 :- end_object.
 
@@ -42,8 +42,8 @@
 :- object(sat_empty_clause_fixture,
 	implements(sat_problem_protocol)).
 
-	clause([p]).
-	clause([]).
+	p.
+	false.
 
 :- end_object.
 
@@ -51,10 +51,10 @@
 :- object(sat_raw_fixture,
 	implements(sat_problem_protocol)).
 
-	:- cnf_raw('c trusted raw comment').
-	:- cnf_raw([99,32,116,114,117,115,116,101,100,32,114,97,119,32,99,111,109,109,101,110,116]).
-	:- cnf_raw([c,' ',t,r,u,s,t,e,d,' ',r,a,w,' ',c,o,m,m,e,n,t]).
-	:- cnf_raw("c trusted raw comment").
+	:- raw('c trusted raw comment').
+	:- raw([99,32,116,114,117,115,116,101,100,32,114,97,119,32,99,111,109,109,101,110,116]).
+	:- raw([c,' ',t,r,u,s,t,e,d,' ',r,a,w,' ',c,o,m,m,e,n,t]).
+	:- raw("c trusted raw comment").
 
 :- end_object.
 
@@ -63,7 +63,7 @@
 	implements(sat_problem_protocol)).
 
 	:- comment('a readable comment').
-	clause([p]).
+	p.
 
 :- end_object.
 

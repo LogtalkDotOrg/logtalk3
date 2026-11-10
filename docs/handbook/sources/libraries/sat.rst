@@ -15,8 +15,8 @@ Requirements
 ------------
 
 Solving requires one of the supported solver executables, available on
-PATH or selected using the ``executable(Path)`` option. The
-``solver(Solver)`` option selects which solver is invoked and the
+the system ``PATH`` or selected using the ``executable(Path)`` option.
+The ``solver(Solver)`` option selects which solver is invoked and the
 default executable resolved for it:
 
 - ``kissat`` (the default) runs the ``kissat`` executable. Kissat 4.0.4
@@ -35,8 +35,8 @@ default executable resolved for it:
 Source generation does not require any executable.
 
 On POSIX systems, solving also requires ``/bin/sh``, with ``mktemp``
-available on PATH. On Windows, solving requires PowerShell 7.3 or later
-(``pwsh`` on PATH).
+available on the system ``PATH``. On Windows, solving requires
+PowerShell 7.3 or later (``pwsh`` on the system ``PATH``).
 
 The bundled ``sat_process.sh`` and ``sat_process.ps1`` launcher scripts
 must remain alongside the library source files.
@@ -98,7 +98,7 @@ Usage
 -----
 
 Load the library, then compile an object defining a CNF problem using
-the ``sat_expansion`` expansion hook. For example:
+the ``sat_expansion`` hook object. For example:
 
 ::
 
@@ -255,23 +255,30 @@ Canonical representation
 
 The serializer accepts these statement constructors:
 
-- ``clause(Literals)`` emits one DIMACS clause line. ``Literals`` is an
-  ordered list of ``pos(Term)`` or ``neg(Term)``, ``Term`` being any
-  ground Prolog term used as the variable identity; an empty list emits
-  the empty clause (``0``), which is immediately unsatisfiable.
-- ``comment(Codes)`` emits one ``c ...`` comment line; ``Codes`` must
-  not contain a newline.
-- ``raw(Codes)`` preserves trusted native DIMACS text with a separating
-  newline. Raw fragments must not redeclare the ``p cnf`` header, since
-  the library always generates exactly one, computed from the declared
-  clauses.
+- A single literal emits one unit DIMACS clause line; a literal is a
+  bare ``Term`` (positive), ``+Term``, or ``-Term``, ``Term`` being any
+  ground Prolog term used as the variable identity.
+- ``Literal1 ; Literal2 ; ... ; LiteralN`` emits one DIMACS clause line
+  with several literals.
+- ``false`` emits the empty clause (``0``), which is immediately
+  unsatisfiable.
+- ``comment(Source)`` emits one ``c ...`` comment line; ``Source`` is an
+  atom, a list of character codes, a list of one-character atoms, or a
+  backend-native string, normalized into character codes, which must not
+  contain a newline.
+- ``raw(Source)`` preserves trusted native DIMACS text with a separating
+  newline; ``Source`` is an atom, a list of character codes, a list of
+  one-character atoms, or a backend-native string, normalized into
+  character codes. Raw fragments must not redeclare the ``p cnf``
+  header, since the library always generates exactly one, computed from
+  the declared clauses.
 
 The ``sat::program/2`` predicate returns the DIMACS source for this
 canonical clause:
 
 ::
 
-   | ?- sat::program(terms([clause([pos(p), neg(q)])]), Codes).
+   | ?- sat::program(terms([(p ; -q)]), Codes).
 
 Object syntax
 -------------
@@ -284,25 +291,36 @@ implements ``sat_problem_protocol``. For example:
    :- object(reachability,
        implements(sat_problem_protocol)).
 
-       clause([pos(a), neg(b)]).
-       clause([neg(a), pos(b), pos(c)]).
+       a ; -b.
+       -a ; b ; c.
 
    :- end_object.
 
 The hook translates clauses into ordered ``cnf_statement/2`` data,
-preserving clause structure. An ordinary ground fact becomes a unit
-positive clause; for example, ``edge(a, b).`` becomes
-``clause([pos(edge(a, b))])``. A ``clause(Literals)`` fact lists several
-literals directly, each a bare ``Term`` (positive), ``pos(Term)``, or
-``neg(Term)``. CNF containers accept only bodyless facts; rules (clauses
-with a body) are rejected, since propositional CNF has no grounding or
-inference step of its own. Keep ordinary runtime helpers in separate
-provider objects instead of mixing them into CNF containers.
+preserving clause structure unchanged: a fact is compiled as-is, with no
+translation step. An ordinary ground fact becomes a unit positive
+clause; for example, ``edge(a, b).`` becomes the canonical statement
+``edge(a, b)`` itself. Multi literal clauses are written directly as a
+``;``-chain, each a bare ``Term`` (positive), ``+Term``, or ``-Term``;
+for example, ``a ; -b.`` becomes the canonical statement ``a ; -b``. The
+empty clause is written as the reserved fact ``false.``; it cannot be
+used as an ordinary literal's variable identity at the top level. CNF
+containers accept only bodyless facts; rules (clauses with a body) are
+rejected, since propositional CNF has no grounding or inference step of
+its own. Keep ordinary runtime helpers in separate provider objects
+instead of mixing them into CNF containers.
+
+Writing a negative literal whose variable identity is itself a bare
+integer requires parentheses (``-(2)``), never ``-2`` adjacent; that
+form is the negative integer ``-2``, a different term from the compound
+``-(2)``. This only matters for literals whose identity is a plain
+number, which is not how problem objects normally name variables.
 
 Equivalent directives are ``comment/1``, which shares the functor and
-arity of its canonical ``comment/1`` statement, and ``cnf_raw/1``, which
-maps to canonical ``raw/1``. Native DIMACS syntax that is not valid
-Logtalk syntax belongs in ``file/1``, ``codes/1``, or ``cnf_raw/1``.
+arity of its canonical ``comment/1`` statement, and ``raw/1``, which
+shares the functor and arity of canonical ``raw/1``. Native DIMACS
+syntax that is not valid Logtalk syntax belongs in ``file/1``,
+``codes/1``, or ``raw/1``.
 
 Raw DIMACS source
 -----------------
@@ -329,17 +347,19 @@ Neither form requires the ``sat_expansion`` hook, nor supplies a
 variable table: witness literals in the collected result use the plain
 DIMACS integer as the term identity instead of a declared symbol.
 
-The ``cnf_raw/1`` directive embeds raw source among translated clauses
-in an object compiled with ``hook(sat_expansion)``. Its argument accepts
-an atom, a list of character codes, a list of one-character atoms, or a
+The ``raw/1`` directive embeds raw source among translated clauses in an
+object compiled with ``hook(sat_expansion)``. Its argument accepts an
+atom, a list of character codes, a list of one-character atoms, or a
 backend-native string. Use an atom or a double-quoted text for readable
-source: the hook handles these representations and normalizes the text
-into character codes without changing the backend's ``double_quotes``
-flag. The argument is literal text, not an executable goal.
+source: the library handles these representations and normalizes the
+text into character codes without changing the backend's
+``double_quotes`` flag. The argument is literal text, not an executable
+goal.
 
-The canonical ``raw(Codes)`` statement provides the same escape hatch
+The canonical ``raw(Source)`` statement provides the same escape hatch
 within a ``terms(Statements)`` source or an object's ``cnf_statement/2``
-data.
+data, accepting the same normalized argument forms as the ``raw/1``
+directive.
 
 Collected results
 -----------------
@@ -358,9 +378,8 @@ representation:
 ``Model`` is ``assignment(Literals)`` when a witness was reported, or
 ``none`` when the result is not satisfiable or the witness was
 suppressed with ``witness(false)``. ``Literals`` is an ordered list of
-``pos(Term)`` or ``neg(Term)``, ``Term`` being either the declared
-variable term or, when no variable table is available, the plain DIMACS
-integer.
+``+Term`` or ``-Term``, ``Term`` being either the declared variable term
+or, when no variable table is available, the plain DIMACS integer.
 
 The ``literal/2`` predicate enumerates the collected model literals. The
 ``result_property/2`` predicate enumerates ``status(Status)`` and stored
@@ -446,7 +465,7 @@ The four solvers are not fully interchangeable:
 The canonical representation supports ground propositional clauses only;
 there is no grounding, quantification, or clausification of arbitrary
 propositional formulas. Native syntax outside this representation
-requires ``file/1``, ``codes/1``, or ``cnf_raw/1``.
+requires ``file/1``, ``codes/1``, or ``raw/1``.
 
 Source inspection does not parse, validate DIMACS semantics beyond
 statement structure, or resolve includes (DIMACS CNF has none). Results

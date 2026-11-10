@@ -39,9 +39,10 @@ solving; see the "Incremental solving" section below.
 Requirements
 ------------
 
-Solving requires one of the supported solver executables, available on PATH
-or selected using the `executable(Path)` option. The `solver(Solver)` option
-selects which solver is invoked and the default executable resolved for it:
+Solving requires one of the supported solver executables, available on
+the system `PATH` or selected using the `executable(Path)` option. The
+`solver(Solver)` option selects which solver is invoked and the default
+executable resolved for it:
 
 - `z3` (the default) runs the `z3` executable. Z3 5.3.3 or a later version
 	is expected, available from its
@@ -61,8 +62,8 @@ selects which solver is invoked and the default executable resolved for it:
 
 Source generation does not require any executable.
 
-On POSIX systems, solving also requires `/bin/sh`, with `mktemp` available on PATH.
-On Windows, solving requires PowerShell 7.3 or later (`pwsh` on PATH).
+On POSIX systems, solving also requires `/bin/sh`, with `mktemp` available on the system `PATH`.
+On Windows, solving requires PowerShell 7.3 or later (`pwsh` on the system `PATH`).
 
 The bundled `smt_process.sh` and `smt_process.ps1` launcher scripts must
 remain alongside the library source files.
@@ -118,7 +119,7 @@ Usage
 -----
 
 Load the library, then compile an object defining an SMT-LIB 2 problem using
-the `smt_expansion` expansion hook. For example:
+the `smt_expansion` hook object. For example:
 
 	| ?- logtalk_load(smt(loader)),
 	     logtalk_load(smt('test_files/test_objects'), [hook(smt_expansion)]).
@@ -145,11 +146,11 @@ protocol. The object data-provider interface is declared in the
 `smt_problem_protocol` protocol. The serializer, output decoder, and
 expansion hook document their interfaces in their respective source files.
 
-The `solve/2` predicate solves a source with default options. The `solve/3`
-predicate accepts an explicit final options list. Both predicates return a
-ground list of collected results, one per `check-sat`/`check-sat-assuming`
-command in the source, in order, after subprocess completion and resource
-cleanup; UNSATISFIABLE is a successful result, not predicate failure.
+The `solve/2` predicate solves a problem with default options. The `solve/3`
+predicate accepts a list of options. Both predicates return a ground list of
+collected results, one per `check-sat`/`check-sat-assuming` command in the
+problem definiton, in order, after subprocess completion and resource cleanup;
+UNSATISFIABLE is a successful result, not predicate failure.
 
 The supported options are:
 
@@ -232,9 +233,9 @@ The `terms(Statements)` source and an object implementing
 canonical, ground statement vocabulary, serialized by the `smt_program`
 object. Unlike the `asp`, `minizinc`, `sat`, and `souffle` libraries, a
 problem object writes these statement constructors directly as ordinary
-ground facts; the hook only additionally recognizes the `:- smt_raw(Source)`
-and `:- comment(Source)` directives, mapping to the canonical `raw(Codes)`
-and `comment(Codes)` statements listed below:
+ground facts; the hook only additionally recognizes the `:- raw(Source)`
+and `:- comment(Source)` directives, mapping to the canonical `raw(Source)`
+and `comment(Source)` statements listed below:
 
 - `set_logic(Logic)` and `set_option(Keyword, Value)` emit `set-logic` and
 	`set-option` commands; `Keyword` uses an underscore in place of the
@@ -258,8 +259,11 @@ and `comment(Codes)` statements listed below:
 	prepend `(set-option :produce-models true)` and/or
 	`(set-option :produce-unsat-cores true)`, before any other statement, as
 	required by solvers that reject these options once `set-logic` has run.
-- `comment(Codes)` and `raw(Codes)` emit a `;`-prefixed comment line and
-	trusted verbatim SMT-LIB 2 text, respectively, without validation.
+- `comment(Source)` emits a `;`-prefixed comment line, and `raw(Source)` emits
+	trusted verbatim SMT-LIB 2 text, both without further validation beyond
+	rejecting an embedded newline for `comment/1`. `Source` is an
+	atom, a list of character codes, a list of one-character atoms, or a
+	backend-native string, normalized into character codes.
 
 Sorts are either an atom (`int`, `bool`, `real`, or a declared sort name),
 `bv(Width)` for `(_ BitVec Width)`, `array(Index, Element)` for

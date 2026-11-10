@@ -459,17 +459,20 @@ library. Therefore, it currently supports ECLiPSe, GNU Prolog, SICStus
 Prolog, Shumway Prolog, SWI-Prolog, Trealla Prolog, and XVM.</p>
 <section id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
-<p>Solving requires the selected solver executable, available on PATH or
-selected using the <code class="docutils literal notranslate"><span class="pre">executable(Path)</span></code> option. Clingo requires version
-5.5.2 or later; older versions can emit incorrectly escaped JSON
-strings. Zetesis requires version 0.7.0 with schema-3 JSON output.
-Source generation and result inspection do not require a solver
-executable. Clingo is available from its <a class="reference external" href="https://potassco.org/clingo/">official
-website</a>; Zetesis is available from its
-<a class="reference external" href="https://github.com/GregoryGelfond/zetesis">repository</a>.</p>
+<p>Solving requires the selected solver executable, available on the system
+<code class="docutils literal notranslate"><span class="pre">PATH</span></code> or selected using the <code class="docutils literal notranslate"><span class="pre">executable(Path)</span></code> option. Clingo
+requires version 5.5.2 or later; older versions can emit incorrectly
+escaped JSON strings. Zetesis requires version 0.7.0 with schema-3 JSON
+output. Note that source generation and result inspection do not require
+a solver executable. For solver documentation and installation
+instructions, see:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://potassco.org/clingo/">https://potassco.org/clingo/</a></p></li>
+<li><p><a class="reference external" href="https://github.com/GregoryGelfond/zetesis">https://github.com/GregoryGelfond/zetesis</a></p></li>
+</ul>
 <p>On POSIX systems, solving also requires <code class="docutils literal notranslate"><span class="pre">/bin/sh</span></code>, with <code class="docutils literal notranslate"><span class="pre">mktemp</span></code>
-available on PATH. On Windows, solving requires PowerShell 7.3 or later
-(<code class="docutils literal notranslate"><span class="pre">pwsh</span></code> on PATH).</p>
+available on the system <code class="docutils literal notranslate"><span class="pre">PATH</span></code>. On Windows, solving requires
+PowerShell 7.3 or later (<code class="docutils literal notranslate"><span class="pre">pwsh</span></code> on the system <code class="docutils literal notranslate"><span class="pre">PATH</span></code>).</p>
 <p>The bundled <code class="docutils literal notranslate"><span class="pre">asp_process.sh</span></code> and <code class="docutils literal notranslate"><span class="pre">asp_process.ps1</span></code> launcher scripts
 must remain in the <code class="docutils literal notranslate"><span class="pre">scripts</span></code> subdirectory of the library.</p>
 </section>
@@ -544,12 +547,12 @@ and the infimum and supremum symbols. Output uses empty, signed and
 unsigned signature, and conditional term show directives. Optimization
 uses minimize, maximize, and weak constraints at distinct priorities.
 The object passes a native <code class="docutils literal notranslate"><span class="pre">#program</span> <span class="pre">base</span></code> directive through
-<code class="docutils literal notranslate"><span class="pre">asp_raw/1</span></code>, exercising trusted raw source too.</p>
+<code class="docutils literal notranslate"><span class="pre">raw/1</span></code>, exercising trusted raw source too.</p>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <p>Load the library, then compile an object defining an ASP problem using
-the <code class="docutils literal notranslate"><span class="pre">asp_expansion</span></code> expansion hook. For example:</p>
+the <code class="docutils literal notranslate"><span class="pre">asp_expansion</span></code> hook object. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(asp(loader)),
      <span class="k">logtalk_load</span>(asp(<span class="s">&#39;test_files/queens&#39;</span>), [hook(asp_expansion)]).
 </pre></div>
@@ -696,8 +699,10 @@ retain Clingo’s default visibility.</p></li>
 directives.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">weak_constraint(Body,</span> <span class="pre">Weight,</span> <span class="pre">Priority,</span> <span class="pre">Tuple)</span></code> emits a weak
 constraint.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">raw(Codes)</span></code> preserves trusted native ASP text with a separating
-newline.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">raw(Source)</span></code> preserves trusted native ASP text with a separating
+newline; <code class="docutils literal notranslate"><span class="pre">Source</span></code> is an atom, a list of character codes, a list of
+one-character atoms, or a backend-native string, normalized into
+character codes.</p></li>
 </ul>
 <p>Atoms use <code class="docutils literal notranslate"><span class="pre">function(Name,</span> <span class="pre">Arguments,</span> <span class="pre">Sign)</span></code>, where <code class="docutils literal notranslate"><span class="pre">Sign</span></code> is
 <code class="docutils literal notranslate"><span class="pre">positive</span></code> or <code class="docutils literal notranslate"><span class="pre">negative</span></code>. Rule heads use <code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>,
@@ -769,14 +774,13 @@ ordinary runtime helpers in separate provider objects instead of mixing
 them into ASP containers.</p>
 <p>Equivalent directives mostly share the functor and arity of their
 matching canonical statement constructor (<code class="docutils literal notranslate"><span class="pre">show/1</span></code>, <code class="docutils literal notranslate"><span class="pre">minimize/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">maximize/1</span></code>, <code class="docutils literal notranslate"><span class="pre">constraint/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">weak_constraint/4</span></code>), with three
-exceptions: <code class="docutils literal notranslate"><span class="pre">const/2</span></code> maps to <code class="docutils literal notranslate"><span class="pre">constant/2</span></code>, the two-argument
-<code class="docutils literal notranslate"><span class="pre">show/2</span></code> directive maps to <code class="docutils literal notranslate"><span class="pre">show_term/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">asp_raw/1</span></code> maps to
-<code class="docutils literal notranslate"><span class="pre">raw/1</span></code>. The surface syntax uses <code class="docutils literal notranslate"><span class="pre">not/1</span></code> for default negation and
-<code class="docutils literal notranslate"><span class="pre">neg/1</span></code> for strong negation. Choice, disjunction, aggregate, and
-objective wrappers correspond to the canonical constructors. Native ASP
-syntax that is not valid Logtalk syntax belongs in <code class="docutils literal notranslate"><span class="pre">file/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">codes/1</span></code>, or <code class="docutils literal notranslate"><span class="pre">asp_raw/1</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">maximize/1</span></code>, <code class="docutils literal notranslate"><span class="pre">constraint/1</span></code>, <code class="docutils literal notranslate"><span class="pre">weak_constraint/4</span></code>, and <code class="docutils literal notranslate"><span class="pre">raw/1</span></code>),
+with two exceptions: <code class="docutils literal notranslate"><span class="pre">const/2</span></code> maps to <code class="docutils literal notranslate"><span class="pre">constant/2</span></code> and the
+two-argument <code class="docutils literal notranslate"><span class="pre">show/2</span></code> directive maps to <code class="docutils literal notranslate"><span class="pre">show_term/2</span></code>. The surface
+syntax uses <code class="docutils literal notranslate"><span class="pre">not/1</span></code> for default negation and <code class="docutils literal notranslate"><span class="pre">neg/1</span></code> for strong
+negation. Choice, disjunction, aggregate, and objective wrappers
+correspond to the canonical constructors. Native ASP syntax that is not
+valid Logtalk syntax belongs in <code class="docutils literal notranslate"><span class="pre">file/1</span></code>, <code class="docutils literal notranslate"><span class="pre">codes/1</span></code>, or <code class="docutils literal notranslate"><span class="pre">raw/1</span></code>.</p>
 <p>Unconditional choice and disjunction heads can be written as bodyless
 clauses:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>choice(size, [conditional(selected(<span class="nv">Person</span>), person(<span class="nv">Person</span>))], size).
@@ -817,13 +821,13 @@ program above:</p>
 <p>Neither form requires the <code class="docutils literal notranslate"><span class="pre">asp_expansion</span></code> hook. Both solve the
 complete raw program, rather than adding text to another source
 envelope.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">asp_raw/1</span></code> directive works with both Clingo and Zetesis. It
-embeds raw source among translated clauses in an object compiled with
+<p>The <code class="docutils literal notranslate"><span class="pre">raw/1</span></code> directive works with both Clingo and Zetesis. It embeds
+raw source among translated clauses in an object compiled with
 <code class="docutils literal notranslate"><span class="pre">hook(asp_expansion)</span></code>. Select the solver using the <code class="docutils literal notranslate"><span class="pre">solver(Solver)</span></code>
 option of <code class="docutils literal notranslate"><span class="pre">asp::solve/3</span></code>; <code class="docutils literal notranslate"><span class="pre">asp::solve/2</span></code> uses Clingo by default. The
-<code class="docutils literal notranslate"><span class="pre">asp_raw/1</span></code> argument accepts an atom, a list of character codes, a
-list of one-character atoms, or a backend-native string. Use an atom or
-a double-quoted text for readable source: the hook handles these
+<code class="docutils literal notranslate"><span class="pre">raw/1</span></code> argument accepts an atom, a list of character codes, a list of
+one-character atoms, or a backend-native string. Use an atom or a
+double-quoted text for readable source: the library handles these
 representations and normalizes the text into character codes without
 changing the backend’s <code class="docutils literal notranslate"><span class="pre">double_quotes</span></code> flag. The argument is literal
 text, not an executable goal. The following object mixes ordinary facts
@@ -835,7 +839,7 @@ with a raw rule:</p>
     item(<span class="m">2</span>).
     item(<span class="m">3</span>).
 
-<span class="p">    :- </span>asp_raw(<span class="s">&quot;chosen(X) :- item(X), 1 &lt; X &lt; 3.&quot;</span>).
+<span class="p">    :- </span>raw(<span class="s">&quot;chosen(X) :- item(X), 1 &lt; X &lt; 3.&quot;</span>).
 <span class="p">    :- </span>show(chosen<span class="o">/</span><span class="m">1</span>).
 
 <span class="p">:- </span><span class="k">end_object</span>.
@@ -846,25 +850,24 @@ using <code class="docutils literal notranslate"><span class="pre">asp::program(
 <code class="docutils literal notranslate"><span class="pre">asp::solve(object(raw_comparison),</span> <span class="pre">Result)</span></code>. The hook preserves the
 raw rule at the directive’s position without translating its variable
 names or operators.</p>
-<p>The canonical <code class="docutils literal notranslate"><span class="pre">raw(Codes)</span></code> statement provides the same escape hatch
+<p>The canonical <code class="docutils literal notranslate"><span class="pre">raw(Source)</span></code> statement provides the same escape hatch
 within a <code class="docutils literal notranslate"><span class="pre">terms(Statements)</span></code> source or an object’s <code class="docutils literal notranslate"><span class="pre">asp_statement/2</span></code>
-data. For example, combine a generated fact with a raw rule and show
-directive:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">atom_codes</span>(<span class="s">&#39;chosen(X) :- item(X), 1 &lt; X &lt; 3. #show chosen/1.&#39;</span>, <span class="nv">RawCodes</span>),
-     asp<span class="o">::</span>solve(terms([
+data, accepting the same normalized argument forms as the <code class="docutils literal notranslate"><span class="pre">raw/1</span></code>
+directive. For example, combine a generated fact with a raw rule and
+show directive:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> asp<span class="o">::</span>solve(terms([
          fact(function(item, [<span class="k">number</span>(<span class="m">2</span>)], positive)),
-         raw(<span class="nv">RawCodes</span>)
+         raw(<span class="s">&quot;chosen(X) :- item(X), 1 &lt; X &lt; 3. #show chosen/1.&quot;</span>)
      ]), <span class="nv">Result</span>).
 </pre></div>
 </div>
 <p>Raw fragments must contain complete ASP statements, including their
 required terminators. The serializer appends a newline after each
-<code class="docutils literal notranslate"><span class="pre">raw(Codes)</span></code> statement, including those produced by <code class="docutils literal notranslate"><span class="pre">asp_raw/1</span></code>. It
-does not parse or validate the ASP syntax inside a fragment; the
-selected solver checks syntax, grounding safety, and semantics. ASP
-variables in raw text are ASP variables, not shared Logtalk variables.
-Raw source remains trusted input, with the include and security
-limitations described below.</p>
+<code class="docutils literal notranslate"><span class="pre">raw(Source)</span></code> statement. It does not parse or validate the ASP syntax
+inside a fragment; the selected solver checks syntax, grounding safety,
+and semantics. ASP variables in raw text are ASP variables, not shared
+Logtalk variables. Raw source remains trusted input, with the include
+and security limitations described below.</p>
 </section>
 <section id="collected-results">
 <h2>Collected results<a class="headerlink" href="#collected-results" title="Link to this heading"></a></h2>
@@ -977,7 +980,7 @@ ASP syntax, not every native solver extension. Conditional bodies accept
 only simple literals, not nested conditional literals or aggregates.
 Constants do not accept variables or anonymous terms. Native syntax
 outside this representation requires <code class="docutils literal notranslate"><span class="pre">file/1</span></code>, <code class="docutils literal notranslate"><span class="pre">codes/1</span></code>, or
-<code class="docutils literal notranslate"><span class="pre">asp_raw/1</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">raw/1</span></code>.</p>
 <p>Source inspection does not ground a program, resolve includes, or change
 directories. Generated source has no implicit relative-include base. The
 <code class="docutils literal notranslate"><span class="pre">program/2</span></code> predicate does not return a source map; use

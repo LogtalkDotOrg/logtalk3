@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-09,
+		date is 2026-11-10,
 		comment is 'Canonical ASP statement validation and source generation.'
 	]).
 
@@ -177,6 +177,20 @@
 		),
 		count_lines(Codes, Line1, Line).
 
+	% accepts an atom, a list of character codes, a list of one-character atoms,
+	% or a backend-native string, normalizing any of them to character codes
+	raw_codes(Source, Codes) :-
+		(	atom(Source) ->
+			atom_codes(Source, Codes)
+		;	valid(chars, Source) ->
+			atom_chars(Atom, Source),
+			atom_codes(Atom, Codes)
+		;	{'$lgt_string'(Source)} ->
+			{'$lgt_string_codes'(Source, Codes)}
+		;	valid(codes, Source),
+			Codes = Source
+		).
+
 	statement(fact(Atom)) -->
 		!, asp_atom(Atom), [0'., 10].
 	statement(rule(Head, Body)) -->
@@ -203,9 +217,9 @@
 	statement(weak_constraint(Body, Weight, Priority, Tuple)) -->
 		!,
 		text(':~ '), body(Body), text('. ['), objective_tuple(Weight, Priority, Tuple), [0'], 10].
-	statement(raw(Codes)) -->
+	statement(raw(Source)) -->
 		!,
-		{ valid(codes, Codes) },
+		{ raw_codes(Source, Codes) },
 		codes(Codes), [10].
 
 	head(atom(Atom)) -->

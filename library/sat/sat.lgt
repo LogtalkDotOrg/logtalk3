@@ -311,15 +311,15 @@
 		literal_number(Literal, Variables, Number),
 		literal_numbers(Literals, Variables, Numbers).
 
-	literal_number(pos(Term), none, Term) :-
+	literal_number(+Term, none, Term) :-
 		!.
-	literal_number(neg(Term), none, Number) :-
+	literal_number(-Term, none, Number) :-
 		!,
 		Number is -Term.
-	literal_number(pos(Term), Variables, Number) :-
+	literal_number(+Term, Variables, Number) :-
 		!,
 		memberchk(Term-Number, Variables).
-	literal_number(neg(Term), Variables, Number) :-
+	literal_number(-Term, Variables, Number) :-
 		memberchk(Term-VariableNumber, Variables),
 		Number is -VariableNumber.
 
@@ -351,10 +351,10 @@
 		valid_literals(Literals).
 
 	valid_literals([]).
-	valid_literals([pos(_)| Literals]) :-
+	valid_literals([+_| Literals]) :-
 		!,
 		valid_literals(Literals).
-	valid_literals([neg(_)| Literals]) :-
+	valid_literals([-_| Literals]) :-
 		valid_literals(Literals).
 
 :- end_object.

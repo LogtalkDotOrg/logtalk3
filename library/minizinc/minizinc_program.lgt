@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-09,
+		date is 2026-11-10,
 		comment is 'Canonical MiniZinc statement validation and source generation.'
 	]).
 
@@ -152,8 +152,8 @@
 	statement(enum(Name, Cases)) -->
 		!,
 		text('enum '), identifier(Name), enum_cases(Cases), [0';, 10].
-	statement(raw(Codes)) -->
-		{ valid(codes, Codes) },
+	statement(raw(Source)) -->
+		{ raw_codes(Source, Codes) },
 		codes(Codes), [10].
 
 	initializer(none) -->
@@ -282,9 +282,23 @@
 		!,
 		{ Pairs = [_| _] },
 		if_then_chain(Pairs), else_part(Else), text(' endif').
-	expr(raw(Codes)) -->
-		{ valid(codes, Codes) },
+	expr(raw(Source)) -->
+		{ raw_codes(Source, Codes) },
 		codes(Codes).
+
+	% accepts an atom, a list of character codes, a list of one-character atoms,
+	% or a backend-native string, normalizing any of them to character codes
+	raw_codes(Source, Codes) :-
+		(	atom(Source) ->
+			atom_codes(Source, Codes)
+		;	valid(chars, Source) ->
+			atom_chars(Atom, Source),
+			atom_codes(Atom, Codes)
+		;	{'$lgt_string'(Source)} ->
+			{'$lgt_string_codes'(Source, Codes)}
+		;	valid(codes, Source),
+			Codes = Source
+		).
 
 	expr_list([]) -->
 		[].

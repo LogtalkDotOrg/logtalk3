@@ -15,16 +15,16 @@ Prolog, Shumway Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 Requirements
 ------------
 
-Solving requires the ``souffle`` executable, available on PATH or
-selected using the ``executable(Path)`` option. This library targets
-Souffle 2.5. Souffle is available from its `official
+Solving requires the ``souffle`` executable, available on the system
+``PATH`` or selected using the ``executable(Path)`` option. This library
+targets Souffle 2.5. Souffle is available from its `official
 website <https://souffle-lang.github.io/>`__. The ``compile(true)``
 option additionally requires a working C++ toolchain (Souffle's ``-c``
 flag compiles the generated C++ program before running it).
 
 On POSIX systems, solving also requires ``/bin/sh``, with ``mktemp``
 available on PATH. On Windows, solving requires PowerShell 7.3 or later
-(``pwsh`` on PATH).
+(``pwsh`` on the system ``PATH``).
 
 The bundled ``souffle_process.sh`` and ``souffle_process.ps1`` launcher
 scripts must remain in the ``scripts`` subdirectory of the library.

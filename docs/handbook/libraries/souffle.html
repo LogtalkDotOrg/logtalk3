@@ -461,15 +461,15 @@ library. Therefore, it currently supports ECLiPSe, GNU Prolog, SICStus
 Prolog, Shumway Prolog, SWI-Prolog, Trealla Prolog, and XVM.</p>
 <section id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
-<p>Solving requires the <code class="docutils literal notranslate"><span class="pre">souffle</span></code> executable, available on PATH or
-selected using the <code class="docutils literal notranslate"><span class="pre">executable(Path)</span></code> option. This library targets
-Souffle 2.5. Souffle is available from its <a class="reference external" href="https://souffle-lang.github.io/">official
+<p>Solving requires the <code class="docutils literal notranslate"><span class="pre">souffle</span></code> executable, available on the system
+<code class="docutils literal notranslate"><span class="pre">PATH</span></code> or selected using the <code class="docutils literal notranslate"><span class="pre">executable(Path)</span></code> option. This library
+targets Souffle 2.5. Souffle is available from its <a class="reference external" href="https://souffle-lang.github.io/">official
 website</a>. The <code class="docutils literal notranslate"><span class="pre">compile(true)</span></code>
 option additionally requires a working C++ toolchain (Souffle’s <code class="docutils literal notranslate"><span class="pre">-c</span></code>
 flag compiles the generated C++ program before running it).</p>
 <p>On POSIX systems, solving also requires <code class="docutils literal notranslate"><span class="pre">/bin/sh</span></code>, with <code class="docutils literal notranslate"><span class="pre">mktemp</span></code>
 available on PATH. On Windows, solving requires PowerShell 7.3 or later
-(<code class="docutils literal notranslate"><span class="pre">pwsh</span></code> on PATH).</p>
+(<code class="docutils literal notranslate"><span class="pre">pwsh</span></code> on the system <code class="docutils literal notranslate"><span class="pre">PATH</span></code>).</p>
 <p>The bundled <code class="docutils literal notranslate"><span class="pre">souffle_process.sh</span></code> and <code class="docutils literal notranslate"><span class="pre">souffle_process.ps1</span></code> launcher
 scripts must remain in the <code class="docutils literal notranslate"><span class="pre">scripts</span></code> subdirectory of the library.</p>
 </section>

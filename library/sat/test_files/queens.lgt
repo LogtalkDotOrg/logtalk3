@@ -27,91 +27,91 @@
 	implements(sat_problem_protocol)).
 
 	:- comment('four-queens: at least one queen per row').
-	clause([queen(1,1), queen(1,2), queen(1,3), queen(1,4)]).
-	clause([queen(2,1), queen(2,2), queen(2,3), queen(2,4)]).
-	clause([queen(3,1), queen(3,2), queen(3,3), queen(3,4)]).
-	clause([queen(4,1), queen(4,2), queen(4,3), queen(4,4)]).
+	queen(1,1) ; queen(1,2) ; queen(1,3) ; queen(1,4).
+	queen(2,1) ; queen(2,2) ; queen(2,3) ; queen(2,4).
+	queen(3,1) ; queen(3,2) ; queen(3,3) ; queen(3,4).
+	queen(4,1) ; queen(4,2) ; queen(4,3) ; queen(4,4).
 
 	:- comment('at most one queen per row').
-	clause([neg(queen(1,1)), neg(queen(1,2))]).
-	clause([neg(queen(1,1)), neg(queen(1,3))]).
-	clause([neg(queen(1,1)), neg(queen(1,4))]).
-	clause([neg(queen(1,2)), neg(queen(1,3))]).
-	clause([neg(queen(1,2)), neg(queen(1,4))]).
-	clause([neg(queen(1,3)), neg(queen(1,4))]).
-	clause([neg(queen(2,1)), neg(queen(2,2))]).
-	clause([neg(queen(2,1)), neg(queen(2,3))]).
-	clause([neg(queen(2,1)), neg(queen(2,4))]).
-	clause([neg(queen(2,2)), neg(queen(2,3))]).
-	clause([neg(queen(2,2)), neg(queen(2,4))]).
-	clause([neg(queen(2,3)), neg(queen(2,4))]).
-	clause([neg(queen(3,1)), neg(queen(3,2))]).
-	clause([neg(queen(3,1)), neg(queen(3,3))]).
-	clause([neg(queen(3,1)), neg(queen(3,4))]).
-	clause([neg(queen(3,2)), neg(queen(3,3))]).
-	clause([neg(queen(3,2)), neg(queen(3,4))]).
-	clause([neg(queen(3,3)), neg(queen(3,4))]).
-	clause([neg(queen(4,1)), neg(queen(4,2))]).
-	clause([neg(queen(4,1)), neg(queen(4,3))]).
-	clause([neg(queen(4,1)), neg(queen(4,4))]).
-	clause([neg(queen(4,2)), neg(queen(4,3))]).
-	clause([neg(queen(4,2)), neg(queen(4,4))]).
-	clause([neg(queen(4,3)), neg(queen(4,4))]).
+	-queen(1,1) ; -queen(1,2).
+	-queen(1,1) ; -queen(1,3).
+	-queen(1,1) ; -queen(1,4).
+	-queen(1,2) ; -queen(1,3).
+	-queen(1,2) ; -queen(1,4).
+	-queen(1,3) ; -queen(1,4).
+	-queen(2,1) ; -queen(2,2).
+	-queen(2,1) ; -queen(2,3).
+	-queen(2,1) ; -queen(2,4).
+	-queen(2,2) ; -queen(2,3).
+	-queen(2,2) ; -queen(2,4).
+	-queen(2,3) ; -queen(2,4).
+	-queen(3,1) ; -queen(3,2).
+	-queen(3,1) ; -queen(3,3).
+	-queen(3,1) ; -queen(3,4).
+	-queen(3,2) ; -queen(3,3).
+	-queen(3,2) ; -queen(3,4).
+	-queen(3,3) ; -queen(3,4).
+	-queen(4,1) ; -queen(4,2).
+	-queen(4,1) ; -queen(4,3).
+	-queen(4,1) ; -queen(4,4).
+	-queen(4,2) ; -queen(4,3).
+	-queen(4,2) ; -queen(4,4).
+	-queen(4,3) ; -queen(4,4).
 
 	:- comment('at most one queen per column').
-	clause([neg(queen(1,1)), neg(queen(2,1))]).
-	clause([neg(queen(1,1)), neg(queen(3,1))]).
-	clause([neg(queen(1,1)), neg(queen(4,1))]).
-	clause([neg(queen(2,1)), neg(queen(3,1))]).
-	clause([neg(queen(2,1)), neg(queen(4,1))]).
-	clause([neg(queen(3,1)), neg(queen(4,1))]).
-	clause([neg(queen(1,2)), neg(queen(2,2))]).
-	clause([neg(queen(1,2)), neg(queen(3,2))]).
-	clause([neg(queen(1,2)), neg(queen(4,2))]).
-	clause([neg(queen(2,2)), neg(queen(3,2))]).
-	clause([neg(queen(2,2)), neg(queen(4,2))]).
-	clause([neg(queen(3,2)), neg(queen(4,2))]).
-	clause([neg(queen(1,3)), neg(queen(2,3))]).
-	clause([neg(queen(1,3)), neg(queen(3,3))]).
-	clause([neg(queen(1,3)), neg(queen(4,3))]).
-	clause([neg(queen(2,3)), neg(queen(3,3))]).
-	clause([neg(queen(2,3)), neg(queen(4,3))]).
-	clause([neg(queen(3,3)), neg(queen(4,3))]).
-	clause([neg(queen(1,4)), neg(queen(2,4))]).
-	clause([neg(queen(1,4)), neg(queen(3,4))]).
-	clause([neg(queen(1,4)), neg(queen(4,4))]).
-	clause([neg(queen(2,4)), neg(queen(3,4))]).
-	clause([neg(queen(2,4)), neg(queen(4,4))]).
-	clause([neg(queen(3,4)), neg(queen(4,4))]).
+	-queen(1,1) ; -queen(2,1).
+	-queen(1,1) ; -queen(3,1).
+	-queen(1,1) ; -queen(4,1).
+	-queen(2,1) ; -queen(3,1).
+	-queen(2,1) ; -queen(4,1).
+	-queen(3,1) ; -queen(4,1).
+	-queen(1,2) ; -queen(2,2).
+	-queen(1,2) ; -queen(3,2).
+	-queen(1,2) ; -queen(4,2).
+	-queen(2,2) ; -queen(3,2).
+	-queen(2,2) ; -queen(4,2).
+	-queen(3,2) ; -queen(4,2).
+	-queen(1,3) ; -queen(2,3).
+	-queen(1,3) ; -queen(3,3).
+	-queen(1,3) ; -queen(4,3).
+	-queen(2,3) ; -queen(3,3).
+	-queen(2,3) ; -queen(4,3).
+	-queen(3,3) ; -queen(4,3).
+	-queen(1,4) ; -queen(2,4).
+	-queen(1,4) ; -queen(3,4).
+	-queen(1,4) ; -queen(4,4).
+	-queen(2,4) ; -queen(3,4).
+	-queen(2,4) ; -queen(4,4).
+	-queen(3,4) ; -queen(4,4).
 
 	:- comment('at most one queen per diagonal').
-	clause([neg(queen(1,1)), neg(queen(2,2))]).
-	clause([neg(queen(1,1)), neg(queen(3,3))]).
-	clause([neg(queen(1,1)), neg(queen(4,4))]).
-	clause([neg(queen(1,2)), neg(queen(2,1))]).
-	clause([neg(queen(1,2)), neg(queen(2,3))]).
-	clause([neg(queen(1,2)), neg(queen(3,4))]).
-	clause([neg(queen(1,3)), neg(queen(2,2))]).
-	clause([neg(queen(1,3)), neg(queen(2,4))]).
-	clause([neg(queen(1,3)), neg(queen(3,1))]).
-	clause([neg(queen(1,4)), neg(queen(2,3))]).
-	clause([neg(queen(1,4)), neg(queen(3,2))]).
-	clause([neg(queen(1,4)), neg(queen(4,1))]).
-	clause([neg(queen(2,1)), neg(queen(3,2))]).
-	clause([neg(queen(2,1)), neg(queen(4,3))]).
-	clause([neg(queen(2,2)), neg(queen(3,1))]).
-	clause([neg(queen(2,2)), neg(queen(3,3))]).
-	clause([neg(queen(2,2)), neg(queen(4,4))]).
-	clause([neg(queen(2,3)), neg(queen(3,2))]).
-	clause([neg(queen(2,3)), neg(queen(3,4))]).
-	clause([neg(queen(2,3)), neg(queen(4,1))]).
-	clause([neg(queen(2,4)), neg(queen(3,3))]).
-	clause([neg(queen(2,4)), neg(queen(4,2))]).
-	clause([neg(queen(3,1)), neg(queen(4,2))]).
-	clause([neg(queen(3,2)), neg(queen(4,1))]).
-	clause([neg(queen(3,2)), neg(queen(4,3))]).
-	clause([neg(queen(3,3)), neg(queen(4,2))]).
-	clause([neg(queen(3,3)), neg(queen(4,4))]).
-	clause([neg(queen(3,4)), neg(queen(4,3))]).
+	-queen(1,1) ; -queen(2,2).
+	-queen(1,1) ; -queen(3,3).
+	-queen(1,1) ; -queen(4,4).
+	-queen(1,2) ; -queen(2,1).
+	-queen(1,2) ; -queen(2,3).
+	-queen(1,2) ; -queen(3,4).
+	-queen(1,3) ; -queen(2,2).
+	-queen(1,3) ; -queen(2,4).
+	-queen(1,3) ; -queen(3,1).
+	-queen(1,4) ; -queen(2,3).
+	-queen(1,4) ; -queen(3,2).
+	-queen(1,4) ; -queen(4,1).
+	-queen(2,1) ; -queen(3,2).
+	-queen(2,1) ; -queen(4,3).
+	-queen(2,2) ; -queen(3,1).
+	-queen(2,2) ; -queen(3,3).
+	-queen(2,2) ; -queen(4,4).
+	-queen(2,3) ; -queen(3,2).
+	-queen(2,3) ; -queen(3,4).
+	-queen(2,3) ; -queen(4,1).
+	-queen(2,4) ; -queen(3,3).
+	-queen(2,4) ; -queen(4,2).
+	-queen(3,1) ; -queen(4,2).
+	-queen(3,2) ; -queen(4,1).
+	-queen(3,2) ; -queen(4,3).
+	-queen(3,3) ; -queen(4,2).
+	-queen(3,3) ; -queen(4,4).
+	-queen(3,4) ; -queen(4,3).
 
 :- end_object.

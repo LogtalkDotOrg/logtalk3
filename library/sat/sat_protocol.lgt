@@ -145,7 +145,7 @@
 	:- public(literal/2).
 	:- mode(literal(+compound, -compound), zero_or_more).
 	:- info(literal/2, [
-		comment is 'Enumerates, by backtracking, the collected model literals (``pos(Term)`` or ``neg(Term)``) without starting a process. Fails when the result has no witness.',
+		comment is 'Enumerates, by backtracking, the collected model literals (``+Term`` or ``-Term``) without starting a process. Fails when the result has no witness.',
 		argnames is ['Result', 'Literal'],
 		exceptions is [
 			'``Result`` is not ground' - instantiation_error,

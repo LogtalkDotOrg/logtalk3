@@ -195,12 +195,12 @@
 		valid(list, Terms),
 		Terms \== [],
 		valid_terms(Terms).
-	valid_statement(comment(Codes)) :-
+	valid_statement(comment(Source)) :-
 		!,
-		valid(codes, Codes),
+		raw_codes(Source, Codes),
 		\+ member(10, Codes).
-	valid_statement(raw(Codes)) :-
-		valid(codes, Codes).
+	valid_statement(raw(Source)) :-
+		raw_codes(Source, _).
 
 	valid_sorts([]).
 	valid_sorts([Sort| Sorts]) :-
@@ -344,10 +344,12 @@
 	statement(get_value(Terms)) -->
 		!,
 		text('(get-value ('), term_list(Terms), text('))'), [10].
-	statement(comment(Codes)) -->
+	statement(comment(Source)) -->
 		!,
+		{ raw_codes(Source, Codes) },
 		text('; '), codes(Codes), [10].
-	statement(raw(Codes)) -->
+	statement(raw(Source)) -->
+		{ raw_codes(Source, Codes) },
 		codes(Codes), [10].
 
 	option_value(true) -->
@@ -536,5 +538,19 @@
 		[].
 	codes([Code| Codes]) -->
 		[Code], codes(Codes).
+
+	% accepts an atom, a list of character codes, a list of one-character atoms,
+	% or a backend-native string, normalizing any of them to character codes
+	raw_codes(Source, Codes) :-
+		(	atom(Source) ->
+			atom_codes(Source, Codes)
+		;	valid(chars, Source) ->
+			atom_chars(Atom, Source),
+			atom_codes(Atom, Codes)
+		;	{'$lgt_string'(Source)} ->
+			{'$lgt_string_codes'(Source, Codes)}
+		;	valid(codes, Source),
+			Codes = Source
+		).
 
 :- end_object.

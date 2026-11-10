@@ -8,7 +8,7 @@
 ``smt_expansion``
 =================
 
-Opt-in statement expansion for pure problem objects, converting canonical statement facts and the ``smt_raw/1`` and ``comment/1`` directives into ``smt_statement/2`` facts.
+Opt-in statement expansion for pure problem objects, converting canonical statement facts and the ``raw/1`` and ``comment/1`` directives into ``smt_statement/2`` facts.
 
 | **Availability:** 
 |    ``logtalk_load(smt(loader))``
@@ -25,7 +25,6 @@ Opt-in statement expansion for pure problem objects, converting canonical statem
 |    ``public`` :ref:`expanding <expanding/0>`
 | **Uses:**
 |    :ref:`smt_program <smt_program/0>`
-|    :ref:`type <type/0>`
 
 | **Remarks:**
 |    (none)

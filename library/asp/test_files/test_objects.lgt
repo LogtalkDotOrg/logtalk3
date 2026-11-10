@@ -45,10 +45,10 @@
 :- object(asp_raw_fixture,
 	implements(asp_problem_protocol)).
 
-	:- asp_raw('#program base.').
-	:- asp_raw([35,112,114,111,103,114,97,109,32,98,97,115,101,46]).
-	:- asp_raw(['#',p,r,o,g,r,a,m,' ',b,a,s,e,'.']).
-	:- asp_raw("#program base.").
+	:- raw('#program base.').
+	:- raw([35,112,114,111,103,114,97,109,32,98,97,115,101,46]).
+	:- raw(['#',p,r,o,g,r,a,m,' ',b,a,s,e,'.']).
+	:- raw("#program base.").
 
 :- end_object.
 
@@ -64,7 +64,7 @@
 :- object(asp_team_selection,
 	implements(asp_problem_protocol)).
 
-	:- asp_raw("#program base.").
+	:- raw("#program base.").
 	:- const(size, 2).
 	:- const(hours, 7).
 	:- const(budget, 2**3).
