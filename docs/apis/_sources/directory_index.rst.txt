@@ -5332,6 +5332,32 @@ To load an entity, always load the library that includes it using the goal ``log
 
    * :doc:`socket <socket_0>`
 
+``library/souffle/``
+--------------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      souffle <souffle_0>
+      souffle_expansion <souffle_expansion_0>
+      souffle_output <souffle_output_0>
+      souffle_problem_protocol <souffle_problem_protocol_0>
+      souffle_process <souffle_process_0>
+      souffle_program <souffle_program_0>
+      souffle_protocol <souffle_protocol_0>
+
+.. only:: latex
+
+   * :doc:`souffle <souffle_0>`
+   * :doc:`souffle_expansion <souffle_expansion_0>`
+   * :doc:`souffle_output <souffle_output_0>`
+   * :doc:`souffle_problem_protocol <souffle_problem_protocol_0>`
+   * :doc:`souffle_process <souffle_process_0>`
+   * :doc:`souffle_program <souffle_program_0>`
+   * :doc:`souffle_protocol <souffle_protocol_0>`
+
 ``library/spade_pattern_miner/``
 --------------------------------
 

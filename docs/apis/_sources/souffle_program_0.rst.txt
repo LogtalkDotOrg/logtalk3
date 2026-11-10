@@ -1,0 +1,153 @@
+.. index:: single: souffle_program
+.. _souffle_program/0:
+
+.. rst-class:: right
+
+**object**
+
+``souffle_program``
+===================
+
+Canonical Datalog statement validation and source generation for Souffle 2.5.
+
+| **Availability:** 
+|    ``logtalk_load(souffle(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-10
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: serialize/2
+.. _souffle_program/0::serialize/2:
+
+``serialize/2``
+^^^^^^^^^^^^^^^
+
+Serializes ground canonical Datalog statements to character codes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serialize(Statements,Codes)``
+| **Mode and number of proofs:**
+|    ``serialize(+list,-list(integer))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Statements`` is a partial list or a list with an element ``Statement`` which is a variable:
+|        ``instantiation_error``
+|    ``Statements`` is neither a partial list nor a list:
+|        ``type_error(list,Statements)``
+|    An element ``Statement`` of the list ``Statements`` is not a valid statement:
+|        ``domain_error(souffle_statement,Statement)``
+
+
+------------
+
+.. index:: serialize/4
+.. _souffle_program/0::serialize/4:
+
+``serialize/4``
+^^^^^^^^^^^^^^^
+
+Serializes statements with origins and returns ``line(Start, End, Origin)`` source-map entries.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serialize(Statements,Origins,Codes,SourceMap)``
+| **Mode and number of proofs:**
+|    ``serialize(+list,+list,-list(code),-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Statements`` is a partial list or a list with an element ``Statement`` which is a variable:
+|        ``instantiation_error``
+|    ``Statements`` is neither a partial list nor a list:
+|        ``type_error(list,Statements)``
+|    An element ``Statement`` of the list ``Statements`` is not a valid statement:
+|        ``domain_error(souffle_statement,Statement)``
+|    ``Origins`` is a partial list or a list with an element ``Origin`` which is a variable:
+|        ``instantiation_error``
+|    ``Origins`` is neither a variable nor a list:
+|        ``type_error(list,Origins)``
+|    ``Origins`` has an element that is neither ``unknown`` nor a valid ``source(File, Start, End)`` term, or its length differs from ``Statements``:
+|        ``domain_error(souffle_origins,Origins)``
+
+
+------------
+
+.. index:: valid_identifier/1
+.. _souffle_program/0::valid_identifier/1:
+
+``valid_identifier/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+True if the argument is a supported Datalog relation, column, or type identifier (a lowercase or underscore led name).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_identifier(Name)``
+| **Mode and number of proofs:**
+|    ``valid_identifier(@term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_column_type/1
+.. _souffle_program/0::valid_column_type/1:
+
+``valid_column_type/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+True if the argument is one of the four supported primitive column types.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_column_type(Type)``
+| **Mode and number of proofs:**
+|    ``valid_column_type(@term)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

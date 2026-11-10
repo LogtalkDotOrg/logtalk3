@@ -1,0 +1,404 @@
+.. index:: single: souffle_protocol
+.. _souffle_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``souffle_protocol``
+====================
+
+Protocol for process-backed Souffle Datalog solving, source generation, and collected result inspection.
+
+| **Availability:** 
+|    ``logtalk_load(souffle(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-10
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: solve/2
+.. _souffle_protocol/0::solve/2:
+
+``solve/2``
+^^^^^^^^^^^
+
+Solves a source with default options using the external Souffle CLI and returns a collected result after cleanup. Valid sources are ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, and ``file(Path)``. No ``.output``/``.printsize`` relations are decoded unless requested via the ``outputs/1``/``printsizes/1`` options of ``solve/3``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``solve(Source,Result)``
+| **Mode and number of proofs:**
+|    ``solve(+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is not ground:
+|        ``instantiation_error``
+|    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``souffle_problem_protocol``:
+|        ``domain_error(souffle_source,Source)``
+|    ``Statements`` is ground but not a list:
+|        ``type_error(list,Statements)``
+|    A statement enumerated by the provider object is not a valid statement:
+|        ``domain_error(souffle_statement,Statement)``
+|    An origin enumerated by the provider object is invalid, or its origins and statements differ in length:
+|        ``domain_error(souffle_origins,Origins)``
+|    ``Codes`` is ground but not a list of character codes:
+|        ``type_error(codes,Codes)``
+|    An element ``Code`` of the list ``Codes`` is ground but not an integer:
+|        ``type_error(integer,Code)``
+|    An element ``Code`` of the list ``Codes`` is an integer but not a valid character code:
+|        ``domain_error(character_code,Code)``
+|    ``Path`` is ground but not an atom:
+|        ``type_error(atom,Path)``
+|    ``Path`` does not exist:
+|        ``existence_error(source_sink,Path)``
+|    ``Path`` cannot be opened for reading:
+|        ``permission_error(open,source_sink,Path)``
+|    A launcher argument contains a null character:
+|        ``domain_error(souffle_shell_argument,Argument)``
+|    The ``souffle`` executable or a shell dependency does not exist:
+|        ``existence_error(command,Command)``
+|    An owned directory cannot be found during cleanup:
+|        ``existence_error(directory,Directory)``
+|    An owned file or directory cannot be removed:
+|        ``permission_error(delete,source_sink,Path)``
+|    A character sequence is not valid UTF-8:
+|        ``representation_error(utf_8)``
+|    A launcher operation fails:
+|        ``souffle_transport(Stage,Status,Details)``
+|    Solver output is invalid or inconsistent with its exit status:
+|        ``souffle_solver_error(Formal,Status,Diagnostics,SourceMap)``
+
+
+------------
+
+.. index:: solve/3
+.. _souffle_protocol/0::solve/3:
+
+``solve/3``
+^^^^^^^^^^^
+
+Solves a source using executable, parallelism, warning, compilation, EDB facts, and decoded-relation options. Repeated options use the first occurrence. Valid sources are ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, and ``file(Path)``. The ``outputs/1`` option lists which ``.output`` relations to decode and their column types; the ``printsizes/1`` option lists which ``.printsize`` relations to decode.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``solve(Source,Result,Options)``
+| **Mode and number of proofs:**
+|    ``solve(+compound,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is not ground:
+|        ``instantiation_error``
+|    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``souffle_problem_protocol``:
+|        ``domain_error(souffle_source,Source)``
+|    ``Statements`` is ground but not a list:
+|        ``type_error(list,Statements)``
+|    A statement enumerated by the provider object is not a valid statement:
+|        ``domain_error(souffle_statement,Statement)``
+|    An origin enumerated by the provider object is invalid, or its origins and statements differ in length:
+|        ``domain_error(souffle_origins,Origins)``
+|    ``Codes`` is ground but not a list of character codes:
+|        ``type_error(codes,Codes)``
+|    An element ``Code`` of the list ``Codes`` is ground but not an integer:
+|        ``type_error(integer,Code)``
+|    An element ``Code`` of the list ``Codes`` is an integer but not a valid character code:
+|        ``domain_error(character_code,Code)``
+|    ``Path`` is ground but not an atom:
+|        ``type_error(atom,Path)``
+|    ``Path`` does not exist:
+|        ``existence_error(source_sink,Path)``
+|    ``Path`` cannot be opened for reading:
+|        ``permission_error(open,source_sink,Path)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    Both ``facts/1`` and ``facts_data/1`` are given with non-default values:
+|        ``domain_error(souffle_facts_option,facts(Path)-facts_data(Pairs))``
+|    An element of ``facts_data/1`` has a symbol column value containing a tab or newline character, or a value that is not an integer, float, or atom:
+|        ``domain_error(souffle_facts_value,Value)``
+|    A launcher argument contains a null character:
+|        ``domain_error(souffle_shell_argument,Argument)``
+|    The ``souffle`` executable or a shell dependency does not exist:
+|        ``existence_error(command,Command)``
+|    An owned directory cannot be found during cleanup:
+|        ``existence_error(directory,Directory)``
+|    An owned file or directory cannot be removed:
+|        ``permission_error(delete,source_sink,Path)``
+|    A character sequence is not valid UTF-8:
+|        ``representation_error(utf_8)``
+|    A launcher operation fails:
+|        ``souffle_transport(Stage,Status,Details)``
+|    Solver output is invalid or inconsistent with its exit status:
+|        ``souffle_solver_error(Formal,Status,Diagnostics,SourceMap)``
+
+
+------------
+
+.. index:: program/1
+.. _souffle_protocol/0::program/1:
+
+``program/1``
+^^^^^^^^^^^^^
+
+Generates and prints Datalog source to the current output, equivalent to ``program/2`` followed by ``print_program/1``, without invoking Souffle.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``program(Source)``
+| **Mode and number of proofs:**
+|    ``program(+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is not ground:
+|        ``instantiation_error``
+|    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``souffle_problem_protocol``:
+|        ``domain_error(souffle_source,Source)``
+|    ``Statements`` is ground but not a list:
+|        ``type_error(list,Statements)``
+|    A statement enumerated by the provider object is not a valid statement:
+|        ``domain_error(souffle_statement,Statement)``
+|    An origin enumerated by the provider object is invalid, or its origins and statements differ in length:
+|        ``domain_error(souffle_origins,Origins)``
+|    ``Codes`` is ground but not a list of character codes:
+|        ``type_error(codes,Codes)``
+|    An element ``Code`` of the list ``Codes`` is ground but not an integer:
+|        ``type_error(integer,Code)``
+|    An element ``Code`` of the list ``Codes`` is an integer but not a valid character code:
+|        ``domain_error(character_code,Code)``
+|    ``Path`` is ground but not an atom:
+|        ``type_error(atom,Path)``
+|    ``Path`` does not exist:
+|        ``existence_error(source_sink,Path)``
+|    ``Path`` cannot be opened for reading:
+|        ``permission_error(open,source_sink,Path)``
+|    The current output stream does not allow writing:
+|        ``permission_error(output,stream,Stream)``
+
+
+------------
+
+.. index:: program/2
+.. _souffle_protocol/0::program/2:
+
+``program/2``
+^^^^^^^^^^^^^
+
+Returns Datalog source codes from ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, or ``file(Path)`` without invoking Souffle.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``program(Source,Codes)``
+| **Mode and number of proofs:**
+|    ``program(+compound,-list(integer))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is not ground:
+|        ``instantiation_error``
+|    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``souffle_problem_protocol``:
+|        ``domain_error(souffle_source,Source)``
+|    ``Statements`` is ground but not a list:
+|        ``type_error(list,Statements)``
+|    A statement enumerated by the provider object is not a valid statement:
+|        ``domain_error(souffle_statement,Statement)``
+|    An origin enumerated by the provider object is invalid, or its origins and statements differ in length:
+|        ``domain_error(souffle_origins,Origins)``
+|    ``Codes`` is ground but not a list of character codes:
+|        ``type_error(codes,Codes)``
+|    An element ``Code`` of the list ``Codes`` is ground but not an integer:
+|        ``type_error(integer,Code)``
+|    An element ``Code`` of the list ``Codes`` is an integer but not a valid character code:
+|        ``domain_error(character_code,Code)``
+|    ``Path`` is ground but not an atom:
+|        ``type_error(atom,Path)``
+|    ``Path`` does not exist:
+|        ``existence_error(source_sink,Path)``
+|    ``Path`` cannot be opened for reading:
+|        ``permission_error(open,source_sink,Path)``
+
+
+------------
+
+.. index:: print_program/1
+.. _souffle_protocol/0::print_program/1:
+
+``print_program/1``
+^^^^^^^^^^^^^^^^^^^
+
+Prints Datalog character codes to the current output without adding a newline or invoking Souffle.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_program(Codes)``
+| **Mode and number of proofs:**
+|    ``print_program(+list(integer))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Codes`` is not ground:
+|        ``instantiation_error``
+|    ``Codes`` is ground but not a list of character codes:
+|        ``type_error(codes,Codes)``
+|    An element ``Code`` of the list ``Codes`` is ground but not an integer:
+|        ``type_error(integer,Code)``
+|    An element ``Code`` of the list ``Codes`` is an integer but not a valid character code:
+|        ``domain_error(character_code,Code)``
+|    The current output stream does not allow writing:
+|        ``permission_error(output,stream,Stream)``
+
+
+------------
+
+.. index:: relation/4
+.. _souffle_protocol/0::relation/4:
+
+``relation/4``
+^^^^^^^^^^^^^^
+
+Enumerates, by backtracking, decoded ``.output`` relations collected in a result: the relation name, its requested column types, and its rows (each row a list of decoded Prolog values, one per column).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``relation(Result,Name,Columns,Rows)``
+| **Mode and number of proofs:**
+|    ``relation(+compound,?atom,?list(atom),?list(list))`` - ``zero_or_more``
+
+| **Exceptions:**
+|    ``Result`` is not ground:
+|        ``instantiation_error``
+|    ``Result`` is not a valid collected Souffle result:
+|        ``domain_error(souffle_result,Result)``
+
+
+------------
+
+.. index:: size/3
+.. _souffle_protocol/0::size/3:
+
+``size/3``
+^^^^^^^^^^
+
+Enumerates, by backtracking, decoded ``.printsize`` relation counts collected in a result.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``size(Result,Name,Count)``
+| **Mode and number of proofs:**
+|    ``size(+compound,?atom,?integer)`` - ``zero_or_more``
+
+| **Exceptions:**
+|    ``Result`` is not ground:
+|        ``instantiation_error``
+|    ``Result`` is not a valid collected Souffle result:
+|        ``domain_error(souffle_result,Result)``
+
+
+------------
+
+.. index:: result_property/2
+.. _souffle_protocol/0::result_property/2:
+
+``result_property/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Enumerates, by backtracking, the stored result properties (``raw_status/1``, ``process_status/1``, and ``diagnostics/1``).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``result_property(Result,Property)``
+| **Mode and number of proofs:**
+|    ``result_property(+compound,?compound)`` - ``zero_or_more``
+
+| **Exceptions:**
+|    ``Result`` is not ground:
+|        ``instantiation_error``
+|    ``Result`` is not a valid collected Souffle result:
+|        ``domain_error(souffle_result,Result)``
+
+
+------------
+
+.. index:: print_result/1
+.. _souffle_protocol/0::print_result/1:
+
+``print_result/1``
+^^^^^^^^^^^^^^^^^^
+
+Prints collected relations and printsize counts to the current output, without invoking Souffle.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_result(Result)``
+| **Mode and number of proofs:**
+|    ``print_result(+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Result`` is not ground:
+|        ``instantiation_error``
+|    ``Result`` is not a valid collected Souffle result:
+|        ``domain_error(souffle_result,Result)``
+|    The current output stream does not allow writing:
+|        ``permission_error(output,stream,Stream)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on November 9, 2026
+%  Last updated on November 10, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -308,6 +308,7 @@ logtalk_library_path(smt, library('smt/')).
 logtalk_library_path(smtp, library('smtp/')).
 logtalk_library_path(snowflakeid, library('snowflakeid/')).
 logtalk_library_path(sockets, library('sockets/')).
+logtalk_library_path(souffle, library('souffle/')).
 logtalk_library_path(spade_pattern_miner, library('spade_pattern_miner/')).
 logtalk_library_path(spectral_clusterer, library('spectral_clusterer/')).
 logtalk_library_path(sqids, library('sqids/')).

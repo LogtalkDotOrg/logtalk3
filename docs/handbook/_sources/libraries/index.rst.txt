@@ -304,6 +304,7 @@ directory in the ``NOTES.md`` file.
    smtp
    snowflakeid
    sockets
+   souffle
    spade_pattern_miner
    spectral_clusterer
    sqids

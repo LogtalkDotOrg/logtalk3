@@ -1013,6 +1013,11 @@ Objects
       so_language_profile <so_language_profile_0>
       socket <socket_0>
       sonar_report <sonar_report_0>
+      souffle <souffle_0>
+      souffle_expansion <souffle_expansion_0>
+      souffle_output <souffle_output_0>
+      souffle_process <souffle_process_0>
+      souffle_program <souffle_program_0>
       spade_pattern_miner <spade_pattern_miner_0>
       spearman_similarity <spearman_similarity_0>
       spectral_clusterer <spectral_clusterer_0>
@@ -1927,6 +1932,11 @@ Objects
    * :doc:`so_language_profile <so_language_profile_0>`
    * :doc:`socket <socket_0>`
    * :doc:`sonar_report <sonar_report_0>`
+   * :doc:`souffle <souffle_0>`
+   * :doc:`souffle_expansion <souffle_expansion_0>`
+   * :doc:`souffle_output <souffle_output_0>`
+   * :doc:`souffle_process <souffle_process_0>`
+   * :doc:`souffle_program <souffle_program_0>`
    * :doc:`spade_pattern_miner <spade_pattern_miner_0>`
    * :doc:`spearman_similarity <spearman_similarity_0>`
    * :doc:`spectral_clusterer <spectral_clusterer_0>`
@@ -2320,6 +2330,8 @@ Protocols
       smt_protocol <smt_protocol_0>
       smtp_protocol <smtp_protocol_0>
       snowflakeid_protocol <snowflakeid_protocol_0>
+      souffle_problem_protocol <souffle_problem_protocol_0>
+      souffle_protocol <souffle_protocol_0>
       spelling_normalizer_protocol <spelling_normalizer_protocol_0>
       statisticsp <statisticsp_0>
       stemmer_protocol <stemmer_protocol_0>
@@ -2551,6 +2563,8 @@ Protocols
    * :doc:`smt_protocol <smt_protocol_0>`
    * :doc:`smtp_protocol <smtp_protocol_0>`
    * :doc:`snowflakeid_protocol <snowflakeid_protocol_0>`
+   * :doc:`souffle_problem_protocol <souffle_problem_protocol_0>`
+   * :doc:`souffle_protocol <souffle_protocol_0>`
    * :doc:`spelling_normalizer_protocol <spelling_normalizer_protocol_0>`
    * :doc:`statisticsp <statisticsp_0>`
    * :doc:`stemmer_protocol <stemmer_protocol_0>`

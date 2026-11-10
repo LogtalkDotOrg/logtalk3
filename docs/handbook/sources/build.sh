@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on November 9, 2026
+##   Last updated on November 10, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -354,6 +354,7 @@ sed '1,19d' ../../../library/smt/NOTES.md | pandoc -f gfm -t rst -o libraries/sm
 sed '1,19d' ../../../library/smtp/NOTES.md | pandoc -f gfm -t rst -o libraries/smtp.rst
 sed '1,19d' ../../../library/snowflakeid/NOTES.md | pandoc -f gfm -t rst -o libraries/snowflakeid.rst
 sed '1,19d' ../../../library/sockets/NOTES.md | pandoc -f gfm -t rst -o libraries/sockets.rst
+sed '1,19d' ../../../library/souffle/NOTES.md | pandoc -f gfm -t rst -o libraries/souffle.rst
 sed '1,19d' ../../../library/spade_pattern_miner/NOTES.md | pandoc -f gfm -t rst -o libraries/spade_pattern_miner.rst
 sed '1,19d' ../../../library/spectral_clusterer/NOTES.md | pandoc -f gfm -t rst -o libraries/spectral_clusterer.rst
 sed '1,19d' ../../../library/sqids/NOTES.md | pandoc -f gfm -t rst -o libraries/sqids.rst

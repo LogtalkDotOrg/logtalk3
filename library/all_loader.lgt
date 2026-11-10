@@ -276,6 +276,7 @@
 		minizinc(loader),
 		sat(loader),
 		smt(loader),
+		souffle(loader),
 		uri_template(loader),
 		url(loader),
 		sqids(loader),
