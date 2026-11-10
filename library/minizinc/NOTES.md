@@ -118,6 +118,16 @@ run MiniZinc with the Gecode backend:
 
 	| ?- minizinc::solve(object(minizinc_queens), Result, [solver(gecode)]).
 
+In alternative, a Logtalk application can instead dynamically build a list
+of canonical statements and solve them through the `terms(Statements)`
+source, without defining an object or loading the hook. An example using a
+trivial single-variable model:
+
+	| ?- minizinc::solve(terms([
+	         decl(var(bool), x, none),
+	         solve(satisfy)
+	     ]), Result).
+
 See the next section for full details on the solver options.
 
 

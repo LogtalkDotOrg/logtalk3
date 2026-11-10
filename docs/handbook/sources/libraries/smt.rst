@@ -126,6 +126,19 @@ separately is not required):
 
    | ?- smt::solve(object(smt_trivial_sat), Results).
 
+In alternative, a Logtalk application can instead dynamically build a
+list of canonical statements and solve them through the
+``terms(Statements)`` source, without defining an object or loading the
+hook. An example using a trivial single-constant problem:
+
+::
+
+   | ?- smt::solve(terms([
+            declare_const(x, int),
+            assert(>(x, 0)),
+            check_sat
+        ]), Results).
+
 See the next section for full details on the solver features and
 options.
 

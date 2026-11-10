@@ -121,6 +121,15 @@ required):
 
    | ?- sat::solve(object(sat_queens), Result).
 
+In alternative, a Logtalk application can instead dynamically build a
+list of canonical statements and solve them through the
+``terms(Statements)`` source, without defining an object or loading the
+hook. An example with a trivial two-variable encoding:
+
+::
+
+   | ?- sat::solve(terms([(p ; q), -p]), Result).
+
 See the next section for full details on the solver features and
 options.
 
@@ -181,6 +190,11 @@ The supported options are:
   ``solver(z3)`` is selected. For the other three solvers, the collected
   result has no model when the witness is suppressed, even when the
   status is satisfiable.
+- ``embed_variables(Boolean)`` is validated but has no effect on the
+  ``solve/2-3`` predicates. It is only consulted by ``program/3`` (see
+  the "Sources" section below), where it can be set explicitly;
+  ``program/2`` has no options argument and always uses its default
+  value (``true``).
 
 Shared ``options`` semantics apply: repeated options are accepted and
 the first occurrence wins.
@@ -216,7 +230,10 @@ Sources
 -------
 
 The ``program/2`` predicate returns DIMACS CNF character codes without
-invoking a solver. Its first argument is a ground source envelope:
+invoking a solver, using default options. The ``program/3`` predicate
+accepts an explicit options list; the only supported option is
+``embed_variables(Boolean)`` (default ``true``), described below. Their
+first argument is a ground source envelope:
 
 - ``object(Object)`` enumerates the object's ordered ``cnf_statement/2``
   clauses. The object must conform to ``sat_problem_protocol``.
@@ -235,6 +252,21 @@ invoke a solver.
 The ``program/1`` predicate generates and prints DIMACS source,
 equivalent to calling ``program/2`` followed by ``print_program/1``. It
 accepts the same source envelopes.
+
+For the ``object(Object)`` and ``terms(Statements)`` envelopes,
+``embed_variables(true)`` (the default) inserts one ``c v Number Term``
+comment line per declared variable, right after the ``p cnf`` header, in
+table order. ``Term`` is written quoted, so that it can be read back
+unambiguously. These lines are ordinary DIMACS comments: any solver
+ignores them. They let ``solve/2`` and ``solve/3`` recover the original
+variable table when later solving the generated source through the
+``codes/1`` or ``file/1`` envelopes (see Solving below), instead of
+reporting witness literals as bare DIMACS integers.
+``embed_variables(false)`` omits them, generating plain DIMACS source
+with no comment lines. As a ``program/2-3`` source, the ``codes/1`` and
+``file/1`` envelopes are unaffected by this option: they validate and
+return existing text unchanged, without computing a variable table of
+their own; that only happens on the ``solve/2-3`` side, described next.
 
 CNF variables are opaque ground Prolog terms, not raw DIMACS integers;
 the serializer assigns sequential numbers by first occurrence across
@@ -344,8 +376,24 @@ program above:
    | ?- sat::solve(file('problem.cnf'), Result).
 
 Neither form requires the ``sat_expansion`` hook, nor supplies a
-variable table: witness literals in the collected result use the plain
-DIMACS integer as the term identity instead of a declared symbol.
+variable table of its own: witness literals in the collected result use
+the plain DIMACS integer as the term identity instead of a declared
+symbol, unless the source text carries embedded ``c v Number Term``
+comment lines (see ``embed_variables/1`` in Sources above), in which
+case ``solve/2`` and ``solve/3`` recover the variable table from them
+automatically. For example, generating a program from an object and
+solving it back through ``codes/1`` still reports symbolic literals:
+
+::
+
+   | ?- sat::program(object(reachability), Codes),
+        sat::solve(codes(Codes), Result).
+
+Recovery is best-effort: a ``codes/1`` or ``file/1`` source without any
+``c v`` lines, or whose ``c v`` lines do not parse, keeps reporting
+``variables(none)`` exactly as before, never raising an error. For
+``file/1``, the file is read once more in Logtalk to scan for these
+lines, in addition to being handed to the solver directly as a path.
 
 The ``raw/1`` directive embeds raw source among translated clauses in an
 object compiled with ``hook(sat_expansion)``. Its argument accepts an

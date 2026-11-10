@@ -573,6 +573,13 @@ separately is not required):</p>
      ).
 </pre></div>
 </div>
+<p>In alternative, a Logtalk application can instead dynamically build a
+list of canonical statements and solve them through the
+<code class="docutils literal notranslate"><span class="pre">terms(Statements)</span></code> source, without defining an object or loading the
+hook. An example using a trivial single-fact program:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> asp<span class="o">::</span>solve(terms([fact(function(p, [], positive))]), <span class="nv">Result</span>).
+</pre></div>
+</div>
 <p>See the next section for full details on the solver features and
 options.</p>
 <p>To select Zetesis for a compiled problem:</p>

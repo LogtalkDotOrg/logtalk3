@@ -120,6 +120,18 @@ output carries no embedded type information. For example:
 	     ),
 	     souffle::relation(Result, path, _, Rows).
 
+In alternative, a Logtalk application can instead dynamically build a list
+of canonical statements and solve them through the `terms(Statements)`
+source, without defining an object or loading the hook. An example using a
+trivial single-fact program:
+
+	| ?- souffle::solve(terms([
+	         decl(edge, [x-number, y-number]),
+	         fact(function(edge, [number(1), number(2)])),
+	         output(edge)
+	     ]), Result, [outputs([edge-[number,number]])]),
+	     souffle::relation(Result, edge, _, Rows).
+
 See the next section for full details on the options.
 
 

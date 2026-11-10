@@ -15,7 +15,7 @@ Process-backed Kissat, CaDiCaL, Glucose, and Z3 CLI solving, DIMACS CNF source g
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-11-08
+| **Date:** 2026-11-10
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -32,13 +32,14 @@ Process-backed Kissat, CaDiCaL, Glucose, and Z3 CLI solving, DIMACS CNF source g
 |    :ref:`sat_output <sat_output/0>`
 |    :ref:`sat_process <sat_process/0>`
 |    :ref:`sat_program <sat_program/0>`
+|    :ref:`term_io <term_io/0>`
 |    :ref:`type <type/0>`
 
 | **Remarks:**
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`sat_protocol/0::literal/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`sat_protocol/0::print_program/1`  :ref:`sat_protocol/0::print_result/1`  :ref:`sat_protocol/0::program/1`  :ref:`sat_protocol/0::program/2`  :ref:`sat_protocol/0::result_property/2`  :ref:`sat_protocol/0::solve/2`  :ref:`sat_protocol/0::solve/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`sat_protocol/0::literal/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`sat_protocol/0::print_program/1`  :ref:`sat_protocol/0::print_result/1`  :ref:`sat_protocol/0::program/1`  :ref:`sat_protocol/0::program/2`  :ref:`sat_protocol/0::program/3`  :ref:`sat_protocol/0::result_property/2`  :ref:`sat_protocol/0::solve/2`  :ref:`sat_protocol/0::solve/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:

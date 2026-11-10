@@ -27,6 +27,7 @@
 	logtalk_load(process(loader)),
 	logtalk_load(character_sets(loader)),
 	logtalk_load(reader(loader)),
+	logtalk_load(term_io(loader)),
 	logtalk_load([
 		sat_protocol,
 		sat_problem_protocol,

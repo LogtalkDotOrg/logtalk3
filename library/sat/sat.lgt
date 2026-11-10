@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-08,
+		date is 2026-11-10,
 		comment is 'Process-backed Kissat, CaDiCaL, Glucose, and Z3 CLI solving, DIMACS CNF source generation, and collected result inspection.'
 	]).
 
@@ -35,11 +35,15 @@
 	]).
 
 	:- uses(list, [
-		append/3, member/2, memberchk/2
+		append/3, length/2, member/2, memberchk/2, reverse/2
 	]).
 
 	:- uses(reader, [
 		file_to_codes/2
+	]).
+
+	:- uses(term_io, [
+		read_term_from_codes/3, write_term_to_codes/3
 	]).
 
 	:- uses(os, [
@@ -74,12 +78,13 @@
 
 	solve_source(object(Object), codes(Codes), SourceMap, Variables) :-
 		!,
-		object_source(Object, Codes, SourceMap, Variables).
-	solve_source(file(Path), file(Absolute), [], none) :-
+		object_source(Object, false, Codes, SourceMap, Variables).
+	solve_source(file(Path), file(Absolute), [], Variables) :-
 		!,
 		context(Context),
 		check(atom, Path, Context),
-		absolute_file_name(Path, Absolute).
+		absolute_file_name(Path, Absolute),
+		recovered_file_variables(Absolute, Variables).
 	solve_source(terms(Statements), codes(Codes), [], Variables) :-
 		!,
 		context(Context),
@@ -87,11 +92,12 @@
 		check(list, Statements, Context),
 		sat_program::serialize(Statements, Codes),
 		sat_program::variables(Statements, Variables).
-	solve_source(codes(SourceCodes), codes(Codes), [], none) :-
+	solve_source(codes(SourceCodes), codes(Codes), [], Variables) :-
 		!,
 		context(Context),
 		check(codes, SourceCodes, Context),
-		Codes = SourceCodes.
+		Codes = SourceCodes,
+		recovered_variables(Codes, Variables).
 	solve_source(Source, _, _, _) :-
 		domain_error(sat_source, Source).
 
@@ -114,6 +120,8 @@
 		Seed >= 0.
 	valid_option(witness(Boolean)) :-
 		once((Boolean == true; Boolean == false)).
+	valid_option(embed_variables(Boolean)) :-
+		once((Boolean == true; Boolean == false)).
 
 	default_option(solver(kissat)).
 	default_option(time_limit(0)).
@@ -121,6 +129,7 @@
 	default_option(decisions(0)).
 	default_option(seed(0)).
 	default_option(witness(true)).
+	default_option(embed_variables(true)).
 
 	% The executable default depends on the selected solver, so it is resolved with
 	% ^^option/3 at the point of use instead of through a fixed default_option/1 fact.
@@ -223,45 +232,126 @@
 		atom_codes(Atom, Codes).
 
 	program(Source) :-
-		context(Context),
-		check(ground, Source, Context),
-		program_source(Source, Context, Codes),
+		program(Source, Codes, []),
 		print_program(Codes).
 
 	program(Source, Codes) :-
+		program(Source, Codes, []).
+
+	program(Source, Codes, Options) :-
 		context(Context),
 		check(ground, Source, Context),
-		program_source(Source, Context, Codes).
+		^^check_options(Options),
+		^^merge_options(Options, MergedOptions),
+		program_source(Source, Context, MergedOptions, Codes).
 
 	print_program(Codes) :-
 		context(Context),
 		check(codes, Codes, Context),
 		forall(member(Code, Codes), put_code(Code)).
 
-	program_source(terms(Statements), _, Codes) :-
+	program_source(terms(Statements), _, Options, Codes) :-
 		!,
-		sat_program::serialize(Statements, Codes).
-	program_source(codes(SourceCodes), Context, Codes) :-
+		^^option(embed_variables(Embed), Options),
+		embed_terms(Embed, Statements, AllStatements),
+		sat_program::serialize(AllStatements, Codes).
+	program_source(codes(SourceCodes), Context, _, Codes) :-
 		!,
 		check(codes, SourceCodes, Context),
 		Codes = SourceCodes.
-	program_source(file(Path), Context, Codes) :-
+	program_source(file(Path), Context, _, Codes) :-
 		!,
 		check(atom, Path, Context),
 		file_to_codes(Path, Codes).
-	program_source(object(Object), _, Codes) :-
+	program_source(object(Object), _, Options, Codes) :-
 		!,
-		object_source(Object, Codes, _, _).
-	program_source(Source, _, _) :-
+		^^option(embed_variables(Embed), Options),
+		object_source(Object, Embed, Codes, _, _).
+	program_source(Source, _, _, _) :-
 		domain_error(sat_source, Source).
 
-	object_source(Object, Codes, SourceMap, Variables) :-
+	object_source(Object, Embed, Codes, SourceMap, Variables) :-
 		(	conforms_to_protocol(Object, sat_problem_protocol) ->
 			findall(Statement-Origin, Object::cnf_statement(Statement, Origin), Pairs),
 			statements_origins(Pairs, Statements, Origins),
-			sat_program::serialize(Statements, Origins, Codes, SourceMap),
-			sat_program::variables(Statements, Variables)
+			sat_program::variables(Statements, Variables),
+			embed_object(Embed, Variables, Statements, Origins, AllStatements, AllOrigins),
+			sat_program::serialize(AllStatements, AllOrigins, Codes, SourceMap)
 		;	domain_error(sat_source, object(Object))
+		).
+
+	embed_terms(false, Statements, Statements) :-
+		!.
+	embed_terms(true, Statements, AllStatements) :-
+		sat_program::variables(Statements, Variables),
+		variable_comments(Variables, Comments),
+		append(Comments, Statements, AllStatements).
+
+	embed_object(false, _, Statements, Origins, Statements, Origins) :-
+		!.
+	embed_object(true, Variables, Statements, Origins, AllStatements, AllOrigins) :-
+		variable_comments(Variables, Comments),
+		length(Comments, Count),
+		comment_origins(Count, CommentOrigins),
+		append(Comments, Statements, AllStatements),
+		append(CommentOrigins, Origins, AllOrigins).
+
+	comment_origins(0, []) :-
+		!.
+	comment_origins(Count, [unknown| Origins]) :-
+		Count > 0,
+		Next is Count - 1,
+		comment_origins(Next, Origins).
+
+	% embeds a "c v Number Term" marker comment per declared variable, letting
+	% solve/2-3 recover a symbolic variable table from codes/1 or file/1 sources
+	variable_comments([], []).
+	variable_comments([Term-Number| Variables], [comment(MarkerCodes)| Comments]) :-
+		marker_codes(Number, Term, MarkerCodes),
+		variable_comments(Variables, Comments).
+
+	marker_codes(Number, Term, [0'v, 0' | Rest]) :-
+		number_codes(Number, NumberCodes),
+		write_term_to_codes(Term, TermCodes, [quoted(true)]),
+		append(NumberCodes, [0' | TermCodes], Rest).
+
+	recovered_file_variables(Absolute, Variables) :-
+		(	catch(file_to_codes(Absolute, FileCodes), _, fail) ->
+			recovered_variables(FileCodes, Variables)
+		;	Variables = none
+		).
+
+	% best-effort: only ever upgrades variables(none); never raises an error
+	recovered_variables(Codes, Variables) :-
+		split_lines(Codes, Lines),
+		findall(Pair, (member(Line, Lines), marker_pair(Line, Pair)), Pairs),
+		(	Pairs == [] ->
+			Variables = none
+		;	Variables = Pairs
+		).
+
+	split_lines(Codes, Lines) :-
+		split_lines(Codes, [], Lines).
+
+	split_lines([], Line, [RevLine]) :-
+		!,
+		reverse(Line, RevLine).
+	split_lines([10| Codes], Line, [RevLine| Lines]) :-
+		!,
+		reverse(Line, RevLine),
+		split_lines(Codes, [], Lines).
+	split_lines([Code| Codes], Line, Lines) :-
+		split_lines(Codes, [Code| Line], Lines).
+
+	marker_pair([0'c, 0' , 0'v, 0' | Rest], Term-Number) :-
+		append(NumberCodes, [0' | TermCodes], Rest),
+		!,
+		catch(
+			(	number_codes(Number, NumberCodes),
+				read_term_from_codes(TermCodes, Term, [])
+			),
+			_,
+			fail
 		).
 
 	statements_origins([], [], []).

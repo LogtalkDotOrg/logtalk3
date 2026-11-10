@@ -554,6 +554,17 @@ separately is not required):</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> smt<span class="o">::</span>solve(object(smt_trivial_sat), <span class="nv">Results</span>).
 </pre></div>
 </div>
+<p>In alternative, a Logtalk application can instead dynamically build a
+list of canonical statements and solve them through the
+<code class="docutils literal notranslate"><span class="pre">terms(Statements)</span></code> source, without defining an object or loading the
+hook. An example using a trivial single-constant problem:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> smt<span class="o">::</span>solve(terms([
+         declare_const(x, int),
+         assert(<span class="o">&gt;</span>(x, <span class="m">0</span>)),
+         check_sat
+     ]), <span class="nv">Results</span>).
+</pre></div>
+</div>
 <p>See the next section for full details on the solver features and
 options.</p>
 </section>

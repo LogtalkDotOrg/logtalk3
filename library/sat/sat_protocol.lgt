@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-09,
+		date is 2026-11-10,
 		comment is 'Protocol for process-backed Kissat, CaDiCaL, Glucose, and Z3 CLI solving, source generation, and result inspection.'
 	]).
 
@@ -90,7 +90,7 @@
 	:- public(program/1).
 	:- mode(program(+compound), one_or_error).
 	:- info(program/1, [
-		comment is 'Generates and prints DIMACS CNF source to the current output, equivalent to ``program/2`` followed by ``print_program/1``, without invoking the solver.',
+		comment is 'Generates and prints DIMACS CNF source to the current output using default options, equivalent to ``program/2`` followed by ``print_program/1``, without invoking the solver.',
 		argnames is ['Source'],
 		exceptions is [
 			'``Source`` is not ground' - instantiation_error,
@@ -111,7 +111,7 @@
 	:- public(program/2).
 	:- mode(program(+compound, -list(integer)), one_or_error).
 	:- info(program/2, [
-		comment is 'Returns DIMACS CNF source codes from ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, or ``file(Path)`` without invoking the solver.',
+		comment is 'Returns DIMACS CNF source codes from ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, or ``file(Path)`` using default options, without invoking the solver.',
 		argnames is ['Source', 'Codes'],
 		exceptions is [
 			'``Source`` is not ground' - instantiation_error,
@@ -125,6 +125,31 @@
 			'``Path`` is ground but not an atom' - type_error(atom, 'Path'),
 			'``Path`` does not exist' - existence_error(source_sink, 'Path'),
 			'``Path`` cannot be opened for reading' - permission_error(open, source_sink, 'Path')
+		]
+	]).
+
+	:- public(program/3).
+	:- mode(program(+compound, -list(integer), +list(compound)), one_or_error).
+	:- info(program/3, [
+		comment is 'Returns DIMACS CNF source codes from ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, or ``file(Path)``, using the ``embed_variables/1`` option, without invoking the solver.',
+		argnames is ['Source', 'Codes', 'Options'],
+		exceptions is [
+			'``Source`` is not ground' - instantiation_error,
+			'``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``sat_problem_protocol``' - domain_error(sat_source, 'Source'),
+			'``Statements`` is ground but not a list' - type_error(list, 'Statements'),
+			'A statement enumerated by the provider object is not a valid statement' - domain_error(sat_statement, 'Statement'),
+			'An origin enumerated by the provider object is invalid, or its origins and statements differ in length' - domain_error(sat_origins, 'Origins'),
+			'``Codes`` is ground but not a list of character codes' - type_error(codes, 'Codes'),
+			'An element ``Code`` of the list ``Codes`` is ground but not an integer' - type_error(integer, 'Code'),
+			'An element ``Code`` of the list ``Codes`` is an integer but not a valid character code' - domain_error(character_code, 'Code'),
+			'``Path`` is ground but not an atom' - type_error(atom, 'Path'),
+			'``Path`` does not exist' - existence_error(source_sink, 'Path'),
+			'``Path`` cannot be opened for reading' - permission_error(open, source_sink, 'Path'),
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
 		]
 	]).
 

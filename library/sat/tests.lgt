@@ -170,7 +170,35 @@
 		^^text_output_contents(Chars),
 		list::subtract(Chars, ['\r'], Normalized),
 		atom_chars(Output, Normalized),
-		assertion(Output == 'p cnf 1 1\n1 0\n').
+		assertion(Output == 'p cnf 1 1\nc v 1 p\n1 0\n').
+
+	test(sat_program_embed_variables_default, deterministic(Atom == 'p cnf 2 1\nc v 1 p\nc v 2 q\n1 -2 0\n')) :-
+		sat::program(terms([(p ; -q)]), Codes),
+		atom_codes(Atom, Codes).
+
+	test(sat_program_3_embed_variables_false, deterministic(Atom == 'p cnf 2 1\n1 -2 0\n')) :-
+		sat::program(terms([(p ; -q)]), Codes, [embed_variables(false)]),
+		atom_codes(Atom, Codes).
+
+	test(sat_program_3_embed_variables_object, deterministic(Atom == 'p cnf 2 2\nc v 1 p\nc v 2 q\n1 0\n-2 1 0\n')) :-
+		sat::program(object(sat_trivial_sat), Codes, [embed_variables(true)]),
+		atom_codes(Atom, Codes).
+
+	test(sat_program_3_embed_variables_object_false, deterministic(Atom == 'p cnf 2 2\n1 0\n-2 1 0\n')) :-
+		sat::program(object(sat_trivial_sat), Codes, [embed_variables(false)]),
+		atom_codes(Atom, Codes).
+
+	test(sat_program_3_defaults_match_program_2, deterministic(Atom == Expected)) :-
+		sat::program(object(sat_trivial_sat), Codes),
+		atom_codes(Expected, Codes),
+		sat::program(object(sat_trivial_sat), DefaultCodes, []),
+		atom_codes(Atom, DefaultCodes).
+
+	test(sat_program_3_invalid_option, error(domain_error(option, embed_variables(invalid)))) :-
+		sat::program(terms([p]), _, [embed_variables(invalid)]).
+
+	test(sat_program_3_unbound, error(instantiation_error)) :-
+		sat::program(_, _, []).
 
 	test(sat_program_print_object, deterministic) :-
 		sat::program(object(sat_queens), Codes),
@@ -493,6 +521,20 @@
 	test(sat_solve_four_queens_z3, true, [condition(resolve_command_path(z3, _))]) :-
 		check_solve_four_queens(z3).
 
+	% codes/1 solving recovers the embedded "c v Number Term" variable map from
+	% program/2's default output, upgrading variables(none) to a real table.
+	test(sat_solve_recovers_variables_kissat, deterministic, [condition(resolve_command_path(kissat, _))]) :-
+		check_solve_recovers_variables(kissat).
+
+	test(sat_solve_recovers_variables_cadical, deterministic, [condition(resolve_command_path(cadical, _))]) :-
+		check_solve_recovers_variables(cadical).
+
+	test(sat_solve_recovers_variables_glucose, deterministic, [condition(resolve_command_path('glucose-syrup', _))]) :-
+		check_solve_recovers_variables(glucose).
+
+	test(sat_solve_recovers_variables_z3, deterministic, [condition(resolve_command_path(z3, _))]) :-
+		check_solve_recovers_variables(z3).
+
 	test(sat_solve_codes_source_kissat, deterministic(Status == unsatisfiable), [condition(resolve_command_path(kissat, _))]) :-
 		check_solve_codes_source(kissat, Status).
 
@@ -574,7 +616,17 @@
 
 	check_solve_codes_source(Solver, Status) :-
 		atom_codes('p cnf 1 2\n1 0\n-1 0\n', Program),
-		sat::solve(codes(Program), sat_result(Status, _, _), [solver(Solver)]).
+		sat::solve(codes(Program), Result, [solver(Solver)]),
+		Result = sat_result(Status, _, Properties),
+		assertion(member(variables(none), Properties)).
+
+	check_solve_recovers_variables(Solver) :-
+		sat::program(object(sat_trivial_sat), Codes),
+		sat::solve(codes(Codes), Result, [solver(Solver)]),
+		Result = sat_result(satisfiable, assignment(Literals), Properties),
+		assertion(member(variables([p-1, q-2]), Properties)),
+		assertion(sat::literal(Result, +p)),
+		assertion(length(Literals, 2)).
 
 	check_solve_terms_source(Solver) :-
 		sat::solve(terms([p]), Result, [solver(Solver)]),

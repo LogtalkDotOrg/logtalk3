@@ -539,6 +539,16 @@ example, to run MiniZinc with the Gecode backend:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> minizinc<span class="o">::</span>solve(object(minizinc_queens), <span class="nv">Result</span>, [solver(gecode)]).
 </pre></div>
 </div>
+<p>In alternative, a Logtalk application can instead dynamically build a
+list of canonical statements and solve them through the
+<code class="docutils literal notranslate"><span class="pre">terms(Statements)</span></code> source, without defining an object or loading the
+hook. An example using a trivial single-variable model:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> minizinc<span class="o">::</span>solve(terms([
+         decl(<span class="k">var</span>(bool), x, none),
+         solve(satisfy)
+     ]), <span class="nv">Result</span>).
+</pre></div>
+</div>
 <p>See the next section for full details on the solver options.</p>
 </section>
 <section id="solving">

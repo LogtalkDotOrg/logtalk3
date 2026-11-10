@@ -500,7 +500,7 @@
 		workspace_names(After),
 		assertion(Before == After).
 
-	test(asp_solve_native_include_utf8, true, [condition((resolve_command_path(clingo, _), \+ current_logtalk_flag(prolog_dialect, xvm)))]) :-
+	test(asp_solve_native_include_utf8, true, [condition(resolve_command_path(clingo, _))]) :-
 		^^file_path('test_files/shell data ''$();/main.lp', Path),
 		file_to_codes(Path, Before),
 		asp::solve(file(Path), Result),
@@ -761,7 +761,7 @@
 		Result = asp_result(_, _, Properties),
 		assertion(member(enumeration_complete(true), Properties)).
 
-	test(asp_zetesis_native_include_utf8, deterministic, [condition((resolve_command_path(zetesis, _), \+ current_logtalk_flag(prolog_dialect, xvm)))]) :-
+	test(asp_zetesis_native_include_utf8, deterministic, [condition(resolve_command_path(zetesis, _))]) :-
 		^^file_path('test_files/shell data ''$();/main.lp', Path),
 		asp::solve(file(Path), Result, [solver(zetesis)]),
 		normalized_models(Result, Models),

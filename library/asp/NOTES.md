@@ -147,6 +147,13 @@ in `Result` (generating the source separately is not required):
 	         [models(0), constants([n-number(4)])]
 	     ).
 
+In alternative, a Logtalk application can instead dynamically build a list
+of canonical statements and solve them through the `terms(Statements)`
+source, without defining an object or loading the hook. An example using a
+trivial single-fact program:
+
+	| ?- asp::solve(terms([fact(function(p, [], positive))]), Result).
+
 See the next section for full details on the solver features and options.
 
 To select Zetesis for a compiled problem:

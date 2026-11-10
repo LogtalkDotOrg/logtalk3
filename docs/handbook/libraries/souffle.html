@@ -542,6 +542,18 @@ example:</p>
      souffle<span class="o">::</span>relation(<span class="nv">Result</span>, path, <span class="nv">_</span>, <span class="nv">Rows</span>).
 </pre></div>
 </div>
+<p>In alternative, a Logtalk application can instead dynamically build a
+list of canonical statements and solve them through the
+<code class="docutils literal notranslate"><span class="pre">terms(Statements)</span></code> source, without defining an object or loading the
+hook. An example using a trivial single-fact program:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> souffle<span class="o">::</span>solve(terms([
+         decl(edge, [x<span class="o">-</span>number, y<span class="o">-</span>number]),
+         fact(function(edge, [<span class="k">number</span>(<span class="m">1</span>), <span class="k">number</span>(<span class="m">2</span>)])),
+         output(edge)
+     ]), <span class="nv">Result</span>, [outputs([edge<span class="o">-</span>[number,number]])]),
+     souffle<span class="o">::</span>relation(<span class="nv">Result</span>, edge, <span class="nv">_</span>, <span class="nv">Rows</span>).
+</pre></div>
+</div>
 <p>See the next section for full details on the options.</p>
 </section>
 <section id="solving">
