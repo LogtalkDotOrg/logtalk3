@@ -65,15 +65,15 @@
 		;	Origin = unknown
 		).
 
-	statement((:- souffle_decl(Name, Columns)), _, decl(Name, Columns)) :-
+	statement((:- decl(Name, Columns)), _, decl(Name, Columns)) :-
 		!.
-	statement((:- souffle_input(Name)), _, input(Name)) :-
+	statement((:- input(Name)), _, input(Name)) :-
 		!.
-	statement((:- souffle_output(Name)), _, output(Name)) :-
+	statement((:- output(Name)), _, output(Name)) :-
 		!.
-	statement((:- souffle_printsize(Name)), _, printsize(Name)) :-
+	statement((:- printsize(Name)), _, printsize(Name)) :-
 		!.
-	statement((:- souffle_raw(Source)), _, raw(Codes)) :-
+	statement((:- raw(Source)), _, raw(Codes)) :-
 		!,
 		normalize_text(Source, Codes).
 	statement((:- comment(Source)), _, comment(Codes)) :-

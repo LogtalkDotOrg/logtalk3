@@ -97,7 +97,7 @@ Usage
 -----
 
 Load the library, then compile an object defining a Datalog problem using
-the `souffle_expansion` expansion hook. For example:
+the `souffle_expansion` hook. For example:
 
 	| ?- logtalk_load(souffle(loader)),
 	     logtalk_load(souffle('test_files/reachability'), [hook(souffle_expansion)]).
@@ -125,12 +125,10 @@ See the next section for full details on the options.
 Solving
 -------
 
-The public source and result predicates are declared in
-[souffle_protocol.lgt](souffle_protocol.lgt). The object data-provider
-interface is declared in
-[souffle_problem_protocol.lgt](souffle_problem_protocol.lgt). The serializer,
-CSV/printsize decoder, and expansion hook document their interfaces in their
-respective source files.
+The public source and result predicates are declared in the `souffle_protocol`
+protocol. The object data-provider interface is declared in the
+`souffle_problem_protocol` protocol. The serializer, CSV/printsize decoder,
+and expansion hook document their interfaces in their respective source files.
 
 The `solve/2` predicate solves a source with default options. The `solve/3`
 predicate accepts an explicit final options list. Both predicates return a
@@ -203,34 +201,89 @@ Souffle. Its first argument is a ground source envelope:
 Statement vocabulary
 ---------------------
 
-Canonical statements (see [souffle_program.lgt](souffle_program.lgt)):
+A Datalog program can be built in one of two equivalent ways:
 
-- `decl(Name, Columns)`: a `.decl` declaration, `Columns` a list of
-	`ColumnName-Type` pairs (`Type` one of `number`, `unsigned`, `float`,
-	`symbol`).
-- `input(Name)`, `output(Name)`, `printsize(Name)`: `.input`, `.output`, and
-	`.printsize` directives.
-- `fact(Atom)`, `rule(Head, Body)`: `Atom`/`Head` a `function(Name,
-	Arguments)` term; `Body` a list of literals (a positive `function(Name,
-	Arguments)` term, `not(Atom)` for negation, or `compare(Operator, Left,
-	Right)` for `=`, `!=`, `<`, `<=`, `>`, `>=` comparisons, where either
-	operand can be an `aggregate(Function, TargetExpr, Body)` term,
-	`Function` one of `count`, `sum`, `max`, `min`, `mean`).
-- Term arguments: `number(Integer)`, `unsigned(Integer)`, `float(Float)`,
-	`string(Codes)` (a quoted symbol literal), `variable(Name)`, `anonymous`,
-	`arithmetic(Operator, [Left, Right])` for `+`, `-`, `*`, `/`, `%`, and
-	`cat(Left, Right)` (the built-in string-concatenation functor).
-- `comment(Codes)`, `raw(Codes)`: a `//` line comment, or trusted raw
-	Datalog source text passed through unchanged.
+- Write an object implementing `souffle_problem_protocol`, loaded with
+	`hook(souffle_expansion)`, using ordinary directives, facts, and rules
+	(as in `test_files/reachability.lgt` and `test_files/graph_stats.lgt`).
+	The hook translates each directive, fact, and rule into one canonical
+	statement.
+- Supply the canonical statements directly as a `terms(Statements)` source,
+	bypassing the expansion hook entirely.
 
-Using the `souffle_expansion` hook with an object implementing
-`souffle_problem_protocol`, ordinary Prolog-like facts and rules are
-translated automatically, and the following directives are also recognized:
-`:- souffle_decl(Name, Columns)`, `:- souffle_input(Name)`,
-`:- souffle_output(Name)`, `:- souffle_printsize(Name)`,
-`:- souffle_raw(Source)`, and `:- comment(Source)`. The `mean` aggregate
-requires its target expression to already resolve to a `float`-typed value;
-Souffle does not implicitly widen `number` to `float` for `mean`.
+Both paths produce the same canonical statements, serialized by the
+`souffle_program` object.
+
+### Directives
+
+Each directive recognized by `souffle_expansion` has the same functor and
+arity as its canonical statement; the directive is just that statement
+written as a `:-` directive instead of a list element:
+
+| Directive                   | Canonical statement         | Meaning |
+|------------------------------|------------------------------|---------|
+| `:- decl(Name, Columns)`      | `decl(Name, Columns)`        | a `.decl` declaration; `Columns` a list of `ColumnName-Type` pairs (`Type` one of `number`, `unsigned`, `float`, `symbol`) |
+| `:- input(Name)`              | `input(Name)`                | a `.input` directive |
+| `:- output(Name)`             | `output(Name)`                | a `.output` directive |
+| `:- printsize(Name)`          | `printsize(Name)`             | a `.printsize` directive |
+| `:- raw(Source)`              | `raw(Codes)`                  | trusted raw Datalog source text, passed through unchanged (`Source` normalized to `Codes`) |
+| `:- comment(Source)`          | `comment(Codes)`              | a `//` line comment (`Source` normalized to `Codes`) |
+
+For example, `test_files/reachability.lgt` writes:
+
+	:- decl(edge, [x-number, y-number]).
+	:- input(edge).
+
+which the hook turns into the canonical statements `decl(edge, [x-number,
+y-number])` and `input(edge)`.
+
+### Facts and rules
+
+Ordinary Prolog-like facts and rules have no directive form: they are
+translated directly into `fact(Atom)` and `rule(Head, Body)` canonical
+statements, where `Atom`/`Head` is a `function(Name, Arguments)` term and
+`Body` is a list of literals. For example, the rules in
+`test_files/reachability.lgt`:
+
+	path(X, Y) :- edge(X, Y).
+	path(X, Y) :- path(X, Z), edge(Z, Y).
+
+translate into:
+
+	rule(function(path, [variable('X'), variable('Y')]), [
+		function(edge, [variable('X'), variable('Y')])
+	])
+	rule(function(path, [variable('X'), variable('Y')]), [
+		function(path, [variable('X'), variable('Z')]),
+		function(edge, [variable('Z'), variable('Y')])
+	])
+
+A bare fact, such as `edge(1, 2).` in `test_files/graph_stats.lgt`, translates
+into `fact(function(edge, [number(1), number(2)]))`.
+
+Body literals other than a positive `function(Name, Arguments)` atom are:
+
+- `not(Atom)`, from a `\+` goal, for negation. For example,
+	`test_files/graph_stats.lgt`'s `\+ edge(X, _)` translates into
+	`not(function(edge, [variable('X'), anonymous]))`.
+- `compare(Operator, Left, Right)`, from a `=`, `\=`, `<`, `=<`, `>`, or `>=`
+	goal, for `=`, `!=`, `<`, `<=`, `>`, `>=` comparisons. Either operand can
+	be an `aggregate(Function, TargetExpr, Body)` term, written as
+	`aggregate(Function, Target, Body)` (`Target` a variable, a term, or
+	`none`; `Function` one of `count`, `sum`, `max`, `min`, `mean`). For
+	example, `test_files/graph_stats.lgt`'s
+	`X = aggregate(count, none, [edge(_, _)])` translates into
+	`compare('=', variable('X'), aggregate(count, none, [function(edge,
+	[anonymous, anonymous])]))`. The `mean` aggregate requires its target
+	expression to already resolve to a `float`-typed value; Souffle does not
+	implicitly widen `number` to `float` for `mean`.
+
+Term arguments, used both as function arguments and as aggregate targets,
+are: `number(Integer)`, `unsigned(Integer)`, `float(Float)`, `string(Codes)`
+(a quoted symbol literal), `variable(Name)`, `anonymous`,
+`arithmetic(Operator, [Left, Right])` for `+`, `-`, `*`, `/`, `%`, and
+`cat(Left, Right)` (the built-in string-concatenation functor, written
+directly as `cat(Left, Right)` in a clause body or argument position).
 
 
 Known limitations

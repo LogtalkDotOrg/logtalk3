@@ -29,12 +29,12 @@
 		comment is 'Graph reachability fixture (Souffle documentation\'s edge/path example), exercising ``.input``/``.output`` EDB and a transitive-closure rule.'
 	]).
 
-	:- souffle_decl(edge, [x-number, y-number]).
-	:- souffle_input(edge).
+	:- decl(edge, [x-number, y-number]).
+	:- input(edge).
 
-	:- souffle_decl(path, [x-number, y-number]).
-	:- souffle_output(path).
-	:- souffle_printsize(path).
+	:- decl(path, [x-number, y-number]).
+	:- output(path).
+	:- printsize(path).
 
 	path(X, Y) :- edge(X, Y).
 	path(X, Y) :- path(X, Z), edge(Z, Y).

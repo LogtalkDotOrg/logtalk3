@@ -579,10 +579,9 @@ options.</p>
 </section>
 <section id="solving">
 <h2>Solving<a class="headerlink" href="#solving" title="Link to this heading"></a></h2>
-<p>The public source and result predicates are declared in
-<a class="reference external" href="asp_protocol.lgt">asp_protocol.lgt</a>. The object data-provider
-interface is declared in
-<a class="reference external" href="asp_problem_protocol.lgt">asp_problem_protocol.lgt</a>. The serializer,
+<p>The public source and result predicates are declared in the
+<code class="docutils literal notranslate"><span class="pre">asp_protocol</span></code> protocol. The object data-provider interface is
+declared in the <code class="docutils literal notranslate"><span class="pre">asp_problem_protocol</span></code> protocol. The serializer,
 symbol parser, JSON decoder, and expansion hook document their
 interfaces in their respective source files.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">solve/2</span></code> predicate solves a source with default options. The
@@ -749,16 +748,32 @@ it implements <code class="docutils literal notranslate"><span class="pre">asp_p
 <span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
+<p>The hook translates this object into the canonical statements:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>fact(function(edge, [function(a, [], positive), function(b, [], positive)], positive))
+fact(function(edge, [function(b, [], positive), function(c, [], positive)], positive))
+rule(<span class="k">atom</span>(function(reach, [variable(<span class="s">&#39;Start&#39;</span>), variable(<span class="s">&#39;End&#39;</span>)], positive)), [
+    function(edge, [variable(<span class="s">&#39;Start&#39;</span>), variable(<span class="s">&#39;End&#39;</span>)], positive)
+])
+rule(<span class="k">atom</span>(function(reach, [variable(<span class="s">&#39;Start&#39;</span>), variable(<span class="s">&#39;End&#39;</span>)], positive)), [
+    function(edge, [variable(<span class="s">&#39;Start&#39;</span>), variable(<span class="s">&#39;Middle&#39;</span>)], positive),
+    function(reach, [variable(<span class="s">&#39;Middle&#39;</span>), variable(<span class="s">&#39;End&#39;</span>)], positive)
+])
+show(signature(reach, <span class="m">2</span>, positive))
+</pre></div>
+</div>
 <p>The hook transforms clauses into ordered <code class="docutils literal notranslate"><span class="pre">asp_statement/2</span></code> data,
 preserving source variable names and sharing. Unnamed underscores become
 <code class="docutils literal notranslate"><span class="pre">anonymous</span></code>; named underscore variables remain shared. ASP bodies are
 not executable Logtalk goals. Unrelated objects are unchanged. Keep
 ordinary runtime helpers in separate provider objects instead of mixing
 them into ASP containers.</p>
-<p>Equivalent directives include <code class="docutils literal notranslate"><span class="pre">const/2</span></code>, <code class="docutils literal notranslate"><span class="pre">show/1-2</span></code>, <code class="docutils literal notranslate"><span class="pre">minimize/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">maximize/1</span></code>, <code class="docutils literal notranslate"><span class="pre">constraint/1</span></code>, <code class="docutils literal notranslate"><span class="pre">weak_constraint/4</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">asp_raw/1</span></code>. The surface syntax uses <code class="docutils literal notranslate"><span class="pre">not/1</span></code> for default negation
-and <code class="docutils literal notranslate"><span class="pre">neg/1</span></code> for strong negation. Choice, disjunction, aggregate, and
+<p>Equivalent directives mostly share the functor and arity of their
+matching canonical statement constructor (<code class="docutils literal notranslate"><span class="pre">show/1</span></code>, <code class="docutils literal notranslate"><span class="pre">minimize/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">maximize/1</span></code>, <code class="docutils literal notranslate"><span class="pre">constraint/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">weak_constraint/4</span></code>), with three
+exceptions: <code class="docutils literal notranslate"><span class="pre">const/2</span></code> maps to <code class="docutils literal notranslate"><span class="pre">constant/2</span></code>, the two-argument
+<code class="docutils literal notranslate"><span class="pre">show/2</span></code> directive maps to <code class="docutils literal notranslate"><span class="pre">show_term/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">asp_raw/1</span></code> maps to
+<code class="docutils literal notranslate"><span class="pre">raw/1</span></code>. The surface syntax uses <code class="docutils literal notranslate"><span class="pre">not/1</span></code> for default negation and
+<code class="docutils literal notranslate"><span class="pre">neg/1</span></code> for strong negation. Choice, disjunction, aggregate, and
 objective wrappers correspond to the canonical constructors. Native ASP
 syntax that is not valid Logtalk syntax belongs in <code class="docutils literal notranslate"><span class="pre">file/1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">codes/1</span></code>, or <code class="docutils literal notranslate"><span class="pre">asp_raw/1</span></code>.</p>

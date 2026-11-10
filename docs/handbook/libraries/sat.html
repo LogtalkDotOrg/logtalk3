@@ -556,10 +556,9 @@ options.</p>
 </section>
 <section id="solving">
 <h2>Solving<a class="headerlink" href="#solving" title="Link to this heading"></a></h2>
-<p>The public source and result predicates are declared in
-<a class="reference external" href="sat_protocol.lgt">sat_protocol.lgt</a>. The object data-provider
-interface is declared in
-<a class="reference external" href="sat_problem_protocol.lgt">sat_problem_protocol.lgt</a>. The serializer,
+<p>The public source and result predicates are declared in the
+<code class="docutils literal notranslate"><span class="pre">sat_protocol</span></code> protocol. The object data-provider interface is
+declared in the <code class="docutils literal notranslate"><span class="pre">sat_problem_protocol</span></code> protocol. The serializer,
 output decoder, and expansion hook document their interfaces in their
 respective source files.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">solve/2</span></code> predicate solves a source with default options. The
@@ -711,9 +710,10 @@ literals directly, each a bare <code class="docutils literal notranslate"><span 
 with a body) are rejected, since propositional CNF has no grounding or
 inference step of its own. Keep ordinary runtime helpers in separate
 provider objects instead of mixing them into CNF containers.</p>
-<p>Equivalent directives include <code class="docutils literal notranslate"><span class="pre">comment/1</span></code> and <code class="docutils literal notranslate"><span class="pre">cnf_raw/1</span></code>. Native
-DIMACS syntax that is not valid Logtalk syntax belongs in <code class="docutils literal notranslate"><span class="pre">file/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">codes/1</span></code>, or <code class="docutils literal notranslate"><span class="pre">cnf_raw/1</span></code>.</p>
+<p>Equivalent directives are <code class="docutils literal notranslate"><span class="pre">comment/1</span></code>, which shares the functor and
+arity of its canonical <code class="docutils literal notranslate"><span class="pre">comment/1</span></code> statement, and <code class="docutils literal notranslate"><span class="pre">cnf_raw/1</span></code>, which
+maps to canonical <code class="docutils literal notranslate"><span class="pre">raw/1</span></code>. Native DIMACS syntax that is not valid
+Logtalk syntax belongs in <code class="docutils literal notranslate"><span class="pre">file/1</span></code>, <code class="docutils literal notranslate"><span class="pre">codes/1</span></code>, or <code class="docutils literal notranslate"><span class="pre">cnf_raw/1</span></code>.</p>
 </section>
 <section id="raw-dimacs-source">
 <h2>Raw DIMACS source<a class="headerlink" href="#raw-dimacs-source" title="Link to this heading"></a></h2>

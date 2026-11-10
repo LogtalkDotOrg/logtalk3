@@ -132,10 +132,9 @@ options.
 Solving
 -------
 
-The public source and result predicates are declared in
-`smt_protocol.lgt <smt_protocol.lgt>`__. The object data-provider
-interface is declared in
-`smt_problem_protocol.lgt <smt_problem_protocol.lgt>`__. The serializer,
+The public source and result predicates are declared in the
+``smt_protocol`` protocol. The object data-provider interface is
+declared in the ``smt_problem_protocol`` protocol. The serializer,
 output decoder, and expansion hook document their interfaces in their
 respective source files.
 
@@ -228,9 +227,15 @@ accepts the same source envelopes.
 Statements
 ----------
 
-The ``terms(Statements)`` source and the ``smt_problem_protocol``
-provider interface use the following canonical, ground statement
-vocabulary, serialized by `smt_program.lgt <smt_program.lgt>`__:
+The ``terms(Statements)`` source and an object implementing
+``smt_problem_protocol`` (loaded with ``hook(smt_expansion)``) share the
+same canonical, ground statement vocabulary, serialized by the
+``smt_program`` object. Unlike the ``asp``, ``minizinc``, ``sat``, and
+``souffle`` libraries, a problem object writes these statement
+constructors directly as ordinary ground facts; the hook only
+additionally recognizes the ``:- smt_raw(Source)`` and
+``:- comment(Source)`` directives, mapping to the canonical
+``raw(Codes)`` and ``comment(Codes)`` statements listed below:
 
 - ``set_logic(Logic)`` and ``set_option(Keyword, Value)`` emit
   ``set-logic`` and ``set-option`` commands; ``Keyword`` uses an
@@ -293,6 +298,15 @@ binary notation. ``string(Text)`` is a string literal. ``true`` and
 This covers a solid common core; theories, functions, or syntax outside
 this vocabulary are not generated and require the ``raw/1`` escape
 hatch.
+
+The ``smt::program/2`` predicate returns the SMT-LIB 2 source for these
+canonical statements:
+
+::
+
+   | ?- smt::program(terms([
+            declare_const(x, int), assert(>(x, 0)), check_sat
+        ]), Codes).
 
 Results
 -------

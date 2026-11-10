@@ -154,11 +154,11 @@ To select Zetesis for a compiled problem:
 Solving
 -------
 
-The public source and result predicates are declared in
-[asp_protocol.lgt](asp_protocol.lgt). The object data-provider interface
-is declared in [asp_problem_protocol.lgt](asp_problem_protocol.lgt).
-The serializer, symbol parser, JSON decoder, and expansion hook document their
-interfaces in their respective source files.
+The public source and result predicates are declared in the `asp_protocol`
+protocol. The object data-provider interface is declared in the
+`asp_problem_protocol` protocol. The serializer, symbol parser, JSON decoder,
+and expansion hook document their interfaces in their respective source
+files.
 
 The `solve/2` predicate solves a source with default options. The `solve/3`
 predicate accepts an explicit final options list. Both predicates return a
@@ -314,14 +314,30 @@ implements `asp_problem_protocol`. For example:
 
 	:- end_object.
 
+The hook translates this object into the canonical statements:
+
+	fact(function(edge, [function(a, [], positive), function(b, [], positive)], positive))
+	fact(function(edge, [function(b, [], positive), function(c, [], positive)], positive))
+	rule(atom(function(reach, [variable('Start'), variable('End')], positive)), [
+		function(edge, [variable('Start'), variable('End')], positive)
+	])
+	rule(atom(function(reach, [variable('Start'), variable('End')], positive)), [
+		function(edge, [variable('Start'), variable('Middle')], positive),
+		function(reach, [variable('Middle'), variable('End')], positive)
+	])
+	show(signature(reach, 2, positive))
+
 The hook transforms clauses into ordered `asp_statement/2` data, preserving
 source variable names and sharing. Unnamed underscores become `anonymous`;
 named underscore variables remain shared. ASP bodies are not executable
 Logtalk goals. Unrelated objects are unchanged. Keep ordinary runtime helpers
 in separate provider objects instead of mixing them into ASP containers.
 
-Equivalent directives include `const/2`, `show/1-2`, `minimize/1`, `maximize/1`,
-`constraint/1`, `weak_constraint/4`, and `asp_raw/1`. The surface syntax uses
+Equivalent directives mostly share the functor and arity of their matching
+canonical statement constructor (`show/1`, `minimize/1`, `maximize/1`,
+`constraint/1`, and `weak_constraint/4`), with three exceptions: `const/2`
+maps to `constant/2`, the two-argument `show/2` directive maps to
+`show_term/2`, and `asp_raw/1` maps to `raw/1`. The surface syntax uses
 `not/1` for default negation and `neg/1` for strong negation. Choice,
 disjunction, aggregate, and objective wrappers correspond to the canonical
 constructors. Native ASP syntax that is not valid Logtalk syntax belongs in

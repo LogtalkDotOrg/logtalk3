@@ -124,12 +124,11 @@ See the next section for full details on the solver options.
 Solving
 -------
 
-The public source and result predicates are declared in
-[minizinc_protocol.lgt](minizinc_protocol.lgt). The object data-provider
-interface is declared in
-[minizinc_problem_protocol.lgt](minizinc_problem_protocol.lgt). The
-serializer, expansion hook, and JSON-stream decoder document their interfaces
-in their respective source files.
+The public source and result predicates are declared in the
+`minizinc_protocol` protocol. The object data-provider interface is declared
+in the `minizinc_problem_protocol` protocol. The serializer, expansion hook,
+and JSON-stream decoder document their interfaces in their respective source
+files.
 
 The `solve/2` predicate solves a source with default options. The `solve/3`
 predicate accepts an explicit final options list. Both predicates return a
@@ -287,6 +286,10 @@ directives:
   libraries' raw escape hatches: an atom, a list of character codes, a list
   of one-character atoms, or a backend-native string).
 
+Each directive shares the functor and arity of its canonical statement
+constructor, except `par/2-3` and `var/2-3`, which map to `decl/3`, and
+`array_par/3-4` and `array_var/3-4`, which map to `array_decl/4`.
+
 For example:
 
 	:- object(minizinc_queens,
@@ -308,6 +311,19 @@ For example:
 		:- solve(satisfy).
 
 	:- end_object.
+
+The hook translates this object into the canonical statements:
+
+	include('alldifferent.mzn')
+	decl(par(int), n, int(8))
+	array_decl(var(range(int(1), id(n))), [range(int(1), id(n))], q, none)
+	constraint(call(alldifferent, [id(q)]))
+	constraint(call(alldifferent, [
+		comprehension(array, op('+', index(id(q), [id(i)]), id(i)), [
+			generator([i], range(int(1), id(n)), none)
+		])
+	]))
+	solve(satisfy)
 
 Only recognized directives are translated into canonical statements; every
 other term, including ordinary helper clauses and unrelated directives, is

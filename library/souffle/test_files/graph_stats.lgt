@@ -29,51 +29,51 @@
 		comment is 'Fixture exercising typed columns, negation, comparisons, string concatenation, and the count/sum/max/min/mean aggregates.'
 	]).
 
-	:- souffle_decl(edge, [x-number, y-number]).
+	:- decl(edge, [x-number, y-number]).
 	edge(1, 2).
 	edge(2, 3).
 	edge(3, 4).
 
-	:- souffle_decl(node, [n-number]).
-	:- souffle_output(node).
+	:- decl(node, [n-number]).
+	:- output(node).
 	node(X) :- edge(X, _).
 	node(X) :- edge(_, X).
 
-	:- souffle_decl(isolated, [n-number]).
-	:- souffle_output(isolated).
+	:- decl(isolated, [n-number]).
+	:- output(isolated).
 	isolated(X) :- node(X), \+ edge(X, _), \+ edge(_, X).
 
-	:- souffle_decl(edge_count, [cnt-number]).
-	:- souffle_output(edge_count).
+	:- decl(edge_count, [cnt-number]).
+	:- output(edge_count).
 	edge_count(X) :- X = aggregate(count, none, [edge(_, _)]).
 
-	:- souffle_decl(max_x, [m-number]).
-	:- souffle_output(max_x).
+	:- decl(max_x, [m-number]).
+	:- output(max_x).
 	max_x(X) :- X = aggregate(max, Y, [edge(Y, _)]).
 
-	:- souffle_decl(min_x, [m-number]).
-	:- souffle_output(min_x).
+	:- decl(min_x, [m-number]).
+	:- output(min_x).
 	min_x(X) :- X = aggregate(min, Y, [edge(Y, _)]).
 
-	:- souffle_decl(sum_x, [s-number]).
-	:- souffle_output(sum_x).
+	:- decl(sum_x, [s-number]).
+	:- output(sum_x).
 	sum_x(X) :- X = aggregate(sum, Y, [edge(Y, _)]).
 
-	:- souffle_decl(weight, [w-float]).
+	:- decl(weight, [w-float]).
 	weight(1.0).
 	weight(2.0).
 	weight(3.0).
 
-	:- souffle_decl(mean_weight, [m-float]).
-	:- souffle_output(mean_weight).
+	:- decl(mean_weight, [m-float]).
+	:- output(mean_weight).
 	mean_weight(X) :- X = aggregate(mean, Y, [weight(Y)]).
 
-	:- souffle_decl(greeting, [s-symbol]).
-	:- souffle_output(greeting).
+	:- decl(greeting, [s-symbol]).
+	:- output(greeting).
 	greeting(X) :- X = cat(string([104,101,108,108,111,32]), string([119,111,114,108,100])).
 
-	:- souffle_decl(big_x, [n-number]).
-	:- souffle_output(big_x).
+	:- decl(big_x, [n-number]).
+	:- output(big_x).
 	big_x(X) :- node(X), X > 2.
 
 :- end_object.

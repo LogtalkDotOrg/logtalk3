@@ -127,10 +127,9 @@ options.
 Solving
 -------
 
-The public source and result predicates are declared in
-`sat_protocol.lgt <sat_protocol.lgt>`__. The object data-provider
-interface is declared in
-`sat_problem_protocol.lgt <sat_problem_protocol.lgt>`__. The serializer,
+The public source and result predicates are declared in the
+``sat_protocol`` protocol. The object data-provider interface is
+declared in the ``sat_problem_protocol`` protocol. The serializer,
 output decoder, and expansion hook document their interfaces in their
 respective source files.
 
@@ -300,9 +299,10 @@ with a body) are rejected, since propositional CNF has no grounding or
 inference step of its own. Keep ordinary runtime helpers in separate
 provider objects instead of mixing them into CNF containers.
 
-Equivalent directives include ``comment/1`` and ``cnf_raw/1``. Native
-DIMACS syntax that is not valid Logtalk syntax belongs in ``file/1``,
-``codes/1``, or ``cnf_raw/1``.
+Equivalent directives are ``comment/1``, which shares the functor and
+arity of its canonical ``comment/1`` statement, and ``cnf_raw/1``, which
+maps to canonical ``raw/1``. Native DIMACS syntax that is not valid
+Logtalk syntax belongs in ``file/1``, ``codes/1``, or ``cnf_raw/1``.
 
 Raw DIMACS source
 -----------------

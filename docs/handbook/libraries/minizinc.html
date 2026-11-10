@@ -545,12 +545,11 @@ example, to run MiniZinc with the Gecode backend:</p>
 </section>
 <section id="solving">
 <h2>Solving<a class="headerlink" href="#solving" title="Link to this heading"></a></h2>
-<p>The public source and result predicates are declared in
-<a class="reference external" href="minizinc_protocol.lgt">minizinc_protocol.lgt</a>. The object
-data-provider interface is declared in
-<a class="reference external" href="minizinc_problem_protocol.lgt">minizinc_problem_protocol.lgt</a>. The
-serializer, expansion hook, and JSON-stream decoder document their
-interfaces in their respective source files.</p>
+<p>The public source and result predicates are declared in the
+<code class="docutils literal notranslate"><span class="pre">minizinc_protocol</span></code> protocol. The object data-provider interface is
+declared in the <code class="docutils literal notranslate"><span class="pre">minizinc_problem_protocol</span></code> protocol. The serializer,
+expansion hook, and JSON-stream decoder document their interfaces in
+their respective source files.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">solve/2</span></code> predicate solves a source with default options. The
 <code class="docutils literal notranslate"><span class="pre">solve/3</span></code> predicate accepts an explicit final options list. Both
 predicates return a ground collected result after subprocess completion
@@ -708,6 +707,10 @@ enum).</p></li>
 process libraries’ raw escape hatches: an atom, a list of character
 codes, a list of one-character atoms, or a backend-native string).</p></li>
 </ul>
+<p>Each directive shares the functor and arity of its canonical statement
+constructor, except <code class="docutils literal notranslate"><span class="pre">par/2-3</span></code> and <code class="docutils literal notranslate"><span class="pre">var/2-3</span></code>, which map to
+<code class="docutils literal notranslate"><span class="pre">decl/3</span></code>, and <code class="docutils literal notranslate"><span class="pre">array_par/3-4</span></code> and <code class="docutils literal notranslate"><span class="pre">array_var/3-4</span></code>, which map to
+<code class="docutils literal notranslate"><span class="pre">array_decl/4</span></code>.</p>
 <p>For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(minizinc_queens,
     <span class="k">implements</span>(minizinc_problem_protocol)).
@@ -728,6 +731,19 @@ codes, a list of one-character atoms, or a backend-native string).</p></li>
 <span class="p">    :- </span>solve(satisfy).
 
 <span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>The hook translates this object into the canonical statements:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>include(<span class="s">&#39;alldifferent.mzn&#39;</span>)
+decl(par(int), n, int(<span class="m">8</span>))
+array_decl(<span class="k">var</span>(range(int(<span class="m">1</span>), id(n))), [range(int(<span class="m">1</span>), id(n))], q, none)
+constraint(<span class="k">call</span>(alldifferent, [id(q)]))
+constraint(<span class="k">call</span>(alldifferent, [
+    comprehension(array, <span class="k">op</span>(<span class="s">&#39;+&#39;</span>, index(id(q), [id(i)]), id(i)), [
+        generator([i], range(int(<span class="m">1</span>), id(n)), none)
+    ])
+]))
+solve(satisfy)
 </pre></div>
 </div>
 <p>Only recognized directives are translated into canonical statements;

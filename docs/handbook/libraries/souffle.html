@@ -354,7 +354,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#solving">Solving</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#sources">Sources</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#statement-vocabulary">Statement vocabulary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statement-vocabulary">Statement vocabulary</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#directives">Directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#facts-and-rules">Facts and rules</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#known-limitations">Known limitations</a></li>
 </ul>
 </li>
@@ -515,7 +519,7 @@ covering typed columns (<code class="docutils literal notranslate"><span class="
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <p>Load the library, then compile an object defining a Datalog problem
-using the <code class="docutils literal notranslate"><span class="pre">souffle_expansion</span></code> expansion hook. For example:</p>
+using the <code class="docutils literal notranslate"><span class="pre">souffle_expansion</span></code> hook. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(souffle(loader)),
      <span class="k">logtalk_load</span>(souffle(<span class="s">&#39;test_files/reachability&#39;</span>), [hook(souffle_expansion)]).
 </pre></div>
@@ -542,12 +546,11 @@ example:</p>
 </section>
 <section id="solving">
 <h2>Solving<a class="headerlink" href="#solving" title="Link to this heading"></a></h2>
-<p>The public source and result predicates are declared in
-<a class="reference external" href="souffle_protocol.lgt">souffle_protocol.lgt</a>. The object
-data-provider interface is declared in
-<a class="reference external" href="souffle_problem_protocol.lgt">souffle_problem_protocol.lgt</a>. The
-serializer, CSV/printsize decoder, and expansion hook document their
-interfaces in their respective source files.</p>
+<p>The public source and result predicates are declared in the
+<code class="docutils literal notranslate"><span class="pre">souffle_protocol</span></code> protocol. The object data-provider interface is
+declared in the <code class="docutils literal notranslate"><span class="pre">souffle_problem_protocol</span></code> protocol. The serializer,
+CSV/printsize decoder, and expansion hook document their interfaces in
+their respective source files.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">solve/2</span></code> predicate solves a source with default options. The
 <code class="docutils literal notranslate"><span class="pre">solve/3</span></code> predicate accepts an explicit final options list. Both
 predicates return a ground collected result after subprocess completion
@@ -617,39 +620,136 @@ unchanged; Souffle parses and reports any errors directly.</p></li>
 </section>
 <section id="statement-vocabulary">
 <h2>Statement vocabulary<a class="headerlink" href="#statement-vocabulary" title="Link to this heading"></a></h2>
-<p>Canonical statements (see
-<a class="reference external" href="souffle_program.lgt">souffle_program.lgt</a>):</p>
+<p>A Datalog program can be built in one of two equivalent ways:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">decl(Name,</span> <span class="pre">Columns)</span></code>: a <code class="docutils literal notranslate"><span class="pre">.decl</span></code> declaration, <code class="docutils literal notranslate"><span class="pre">Columns</span></code> a list
-of <code class="docutils literal notranslate"><span class="pre">ColumnName-Type</span></code> pairs (<code class="docutils literal notranslate"><span class="pre">Type</span></code> one of <code class="docutils literal notranslate"><span class="pre">number</span></code>,
-<code class="docutils literal notranslate"><span class="pre">unsigned</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">symbol</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">input(Name)</span></code>, <code class="docutils literal notranslate"><span class="pre">output(Name)</span></code>, <code class="docutils literal notranslate"><span class="pre">printsize(Name)</span></code>: <code class="docutils literal notranslate"><span class="pre">.input</span></code>,
-<code class="docutils literal notranslate"><span class="pre">.output</span></code>, and <code class="docutils literal notranslate"><span class="pre">.printsize</span></code> directives.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">fact(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">rule(Head,</span> <span class="pre">Body)</span></code>: <code class="docutils literal notranslate"><span class="pre">Atom</span></code>/<code class="docutils literal notranslate"><span class="pre">Head</span></code> a
-<code class="docutils literal notranslate"><span class="pre">function(Name,</span> <span class="pre">Arguments)</span></code> term; <code class="docutils literal notranslate"><span class="pre">Body</span></code> a list of literals (a
-positive <code class="docutils literal notranslate"><span class="pre">function(Name,</span> <span class="pre">Arguments)</span></code> term, <code class="docutils literal notranslate"><span class="pre">not(Atom)</span></code> for
-negation, or <code class="docutils literal notranslate"><span class="pre">compare(Operator,</span> <span class="pre">Left,</span> <span class="pre">Right)</span></code> for <code class="docutils literal notranslate"><span class="pre">=</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>,
-<code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code> comparisons, where either operand can be
-an <code class="docutils literal notranslate"><span class="pre">aggregate(Function,</span> <span class="pre">TargetExpr,</span> <span class="pre">Body)</span></code> term, <code class="docutils literal notranslate"><span class="pre">Function</span></code> one of
-<code class="docutils literal notranslate"><span class="pre">count</span></code>, <code class="docutils literal notranslate"><span class="pre">sum</span></code>, <code class="docutils literal notranslate"><span class="pre">max</span></code>, <code class="docutils literal notranslate"><span class="pre">min</span></code>, <code class="docutils literal notranslate"><span class="pre">mean</span></code>).</p></li>
-<li><p>Term arguments: <code class="docutils literal notranslate"><span class="pre">number(Integer)</span></code>, <code class="docutils literal notranslate"><span class="pre">unsigned(Integer)</span></code>,
+<li><p>Write an object implementing <code class="docutils literal notranslate"><span class="pre">souffle_problem_protocol</span></code>, loaded with
+<code class="docutils literal notranslate"><span class="pre">hook(souffle_expansion)</span></code>, using ordinary directives, facts, and
+rules (as in <code class="docutils literal notranslate"><span class="pre">test_files/reachability.lgt</span></code> and
+<code class="docutils literal notranslate"><span class="pre">test_files/graph_stats.lgt</span></code>). The hook translates each directive,
+fact, and rule into one canonical statement.</p></li>
+<li><p>Supply the canonical statements directly as a <code class="docutils literal notranslate"><span class="pre">terms(Statements)</span></code>
+source, bypassing the expansion hook entirely.</p></li>
+</ul>
+<p>Both paths produce the same canonical statements, serialized by the
+<code class="docutils literal notranslate"><span class="pre">souffle_program</span></code> object.</p>
+<section id="directives">
+<h3>Directives<a class="headerlink" href="#directives" title="Link to this heading"></a></h3>
+<p>Each directive recognized by <code class="docutils literal notranslate"><span class="pre">souffle_expansion</span></code> has the same functor
+and arity as its canonical statement; the directive is just that
+statement written as a <code class="docutils literal notranslate"><span class="pre">:-</span></code> directive instead of a list element:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Directive</p></th>
+<th class="head"><p>Canonical statement</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">decl(Name,</span> <span class="pre">Columns)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">decl(Name,</span> <span class="pre">Columns)</span></code></p></td>
+<td><p>a <code class="docutils literal notranslate"><span class="pre">.decl</span></code>
+declaration;
+<code class="docutils literal notranslate"><span class="pre">Columns</span></code> a list
+of
+<code class="docutils literal notranslate"><span class="pre">ColumnName-Type</span></code>
+pairs (<code class="docutils literal notranslate"><span class="pre">Type</span></code> one
+of <code class="docutils literal notranslate"><span class="pre">number</span></code>,
+<code class="docutils literal notranslate"><span class="pre">unsigned</span></code>,
+<code class="docutils literal notranslate"><span class="pre">float</span></code>,
+<code class="docutils literal notranslate"><span class="pre">symbol</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">input(Name)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">input(Name)</span></code></p></td>
+<td><p>a <code class="docutils literal notranslate"><span class="pre">.input</span></code>
+directive</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">output(Name)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">output(Name)</span></code></p></td>
+<td><p>a <code class="docutils literal notranslate"><span class="pre">.output</span></code>
+directive</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">printsize(Name)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">printsize(Name)</span></code></p></td>
+<td><p>a <code class="docutils literal notranslate"><span class="pre">.printsize</span></code>
+directive</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">raw(Source)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">raw(Codes)</span></code></p></td>
+<td><p>trusted raw Datalog
+source text, passed
+through unchanged
+(<code class="docutils literal notranslate"><span class="pre">Source</span></code>
+normalized to
+<code class="docutils literal notranslate"><span class="pre">Codes</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">comment(Source)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">comment(Codes)</span></code></p></td>
+<td><p>a <code class="docutils literal notranslate"><span class="pre">//</span></code> line
+comment (<code class="docutils literal notranslate"><span class="pre">Source</span></code>
+normalized to
+<code class="docutils literal notranslate"><span class="pre">Codes</span></code>)</p></td>
+</tr>
+</tbody>
+</table>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">test_files/reachability.lgt</span></code> writes:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span>decl(edge, [x<span class="o">-</span>number, y<span class="o">-</span>number]).
+<span class="p">:- </span>input(edge).
+</pre></div>
+</div>
+<p>which the hook turns into the canonical statements
+<code class="docutils literal notranslate"><span class="pre">decl(edge,</span> <span class="pre">[x-number,</span> <span class="pre">y-number])</span></code> and <code class="docutils literal notranslate"><span class="pre">input(edge)</span></code>.</p>
+</section>
+<section id="facts-and-rules">
+<h3>Facts and rules<a class="headerlink" href="#facts-and-rules" title="Link to this heading"></a></h3>
+<p>Ordinary Prolog-like facts and rules have no directive form: they are
+translated directly into <code class="docutils literal notranslate"><span class="pre">fact(Atom)</span></code> and <code class="docutils literal notranslate"><span class="pre">rule(Head,</span> <span class="pre">Body)</span></code>
+canonical statements, where <code class="docutils literal notranslate"><span class="pre">Atom</span></code>/<code class="docutils literal notranslate"><span class="pre">Head</span></code> is a
+<code class="docutils literal notranslate"><span class="pre">function(Name,</span> <span class="pre">Arguments)</span></code> term and <code class="docutils literal notranslate"><span class="pre">Body</span></code> is a list of literals.
+For example, the rules in <code class="docutils literal notranslate"><span class="pre">test_files/reachability.lgt</span></code>:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>path(<span class="nv">X</span>, <span class="nv">Y</span>) <span class="o">:-</span> edge(<span class="nv">X</span>, <span class="nv">Y</span>).
+path(<span class="nv">X</span>, <span class="nv">Y</span>) <span class="o">:-</span> path(<span class="nv">X</span>, <span class="nv">Z</span>), edge(<span class="nv">Z</span>, <span class="nv">Y</span>).
+</pre></div>
+</div>
+<p>translate into:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>rule(function(path, [variable(<span class="s">&#39;X&#39;</span>), variable(<span class="s">&#39;Y&#39;</span>)]), [
+    function(edge, [variable(<span class="s">&#39;X&#39;</span>), variable(<span class="s">&#39;Y&#39;</span>)])
+])
+rule(function(path, [variable(<span class="s">&#39;X&#39;</span>), variable(<span class="s">&#39;Y&#39;</span>)]), [
+    function(path, [variable(<span class="s">&#39;X&#39;</span>), variable(<span class="s">&#39;Z&#39;</span>)]),
+    function(edge, [variable(<span class="s">&#39;Z&#39;</span>), variable(<span class="s">&#39;Y&#39;</span>)])
+])
+</pre></div>
+</div>
+<p>A bare fact, such as <code class="docutils literal notranslate"><span class="pre">edge(1,</span> <span class="pre">2).</span></code> in <code class="docutils literal notranslate"><span class="pre">test_files/graph_stats.lgt</span></code>,
+translates into <code class="docutils literal notranslate"><span class="pre">fact(function(edge,</span> <span class="pre">[number(1),</span> <span class="pre">number(2)]))</span></code>.</p>
+<p>Body literals other than a positive <code class="docutils literal notranslate"><span class="pre">function(Name,</span> <span class="pre">Arguments)</span></code> atom
+are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">not(Atom)</span></code>, from a <code class="docutils literal notranslate"><span class="pre">\+</span></code> goal, for negation. For example,
+<code class="docutils literal notranslate"><span class="pre">test_files/graph_stats.lgt</span></code>’s <code class="docutils literal notranslate"><span class="pre">\+</span> <span class="pre">edge(X,</span> <span class="pre">_)</span></code> translates into
+<code class="docutils literal notranslate"><span class="pre">not(function(edge,</span> <span class="pre">[variable('X'),</span> <span class="pre">anonymous]))</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">compare(Operator,</span> <span class="pre">Left,</span> <span class="pre">Right)</span></code>, from a <code class="docutils literal notranslate"><span class="pre">=</span></code>, <code class="docutils literal notranslate"><span class="pre">\=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">=&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, or <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code> goal, for <code class="docutils literal notranslate"><span class="pre">=</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code> comparisons. Either operand can be an
+<code class="docutils literal notranslate"><span class="pre">aggregate(Function,</span> <span class="pre">TargetExpr,</span> <span class="pre">Body)</span></code> term, written as
+<code class="docutils literal notranslate"><span class="pre">aggregate(Function,</span> <span class="pre">Target,</span> <span class="pre">Body)</span></code> (<code class="docutils literal notranslate"><span class="pre">Target</span></code> a variable, a term,
+or <code class="docutils literal notranslate"><span class="pre">none</span></code>; <code class="docutils literal notranslate"><span class="pre">Function</span></code> one of <code class="docutils literal notranslate"><span class="pre">count</span></code>, <code class="docutils literal notranslate"><span class="pre">sum</span></code>, <code class="docutils literal notranslate"><span class="pre">max</span></code>, <code class="docutils literal notranslate"><span class="pre">min</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mean</span></code>). For example, <code class="docutils literal notranslate"><span class="pre">test_files/graph_stats.lgt</span></code>’s
+<code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">aggregate(count,</span> <span class="pre">none,</span> <span class="pre">[edge(_,</span> <span class="pre">_)])</span></code> translates into
+<code class="docutils literal notranslate"><span class="pre">compare('=',</span> <span class="pre">variable('X'),</span> <span class="pre">aggregate(count,</span> <span class="pre">none,</span> <span class="pre">[function(edge,</span> <span class="pre">[anonymous,</span> <span class="pre">anonymous])]))</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">mean</span></code> aggregate requires its target expression to already
+resolve to a <code class="docutils literal notranslate"><span class="pre">float</span></code>-typed value; Souffle does not implicitly widen
+<code class="docutils literal notranslate"><span class="pre">number</span></code> to <code class="docutils literal notranslate"><span class="pre">float</span></code> for <code class="docutils literal notranslate"><span class="pre">mean</span></code>.</p></li>
+</ul>
+<p>Term arguments, used both as function arguments and as aggregate
+targets, are: <code class="docutils literal notranslate"><span class="pre">number(Integer)</span></code>, <code class="docutils literal notranslate"><span class="pre">unsigned(Integer)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">float(Float)</span></code>, <code class="docutils literal notranslate"><span class="pre">string(Codes)</span></code> (a quoted symbol literal),
 <code class="docutils literal notranslate"><span class="pre">variable(Name)</span></code>, <code class="docutils literal notranslate"><span class="pre">anonymous</span></code>,
-<code class="docutils literal notranslate"><span class="pre">arithmetic(Operator,</span> <span class="pre">[Left,</span> <span class="pre">Right])</span></code> for <code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">*</span></code>,
-<code class="docutils literal notranslate"><span class="pre">/</span></code>, <code class="docutils literal notranslate"><span class="pre">%</span></code>, and <code class="docutils literal notranslate"><span class="pre">cat(Left,</span> <span class="pre">Right)</span></code> (the built-in
-string-concatenation functor).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">comment(Codes)</span></code>, <code class="docutils literal notranslate"><span class="pre">raw(Codes)</span></code>: a <code class="docutils literal notranslate"><span class="pre">//</span></code> line comment, or trusted
-raw Datalog source text passed through unchanged.</p></li>
-</ul>
-<p>Using the <code class="docutils literal notranslate"><span class="pre">souffle_expansion</span></code> hook with an object implementing
-<code class="docutils literal notranslate"><span class="pre">souffle_problem_protocol</span></code>, ordinary Prolog-like facts and rules are
-translated automatically, and the following directives are also
-recognized: <code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">souffle_decl(Name,</span> <span class="pre">Columns)</span></code>,
-<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">souffle_input(Name)</span></code>, <code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">souffle_output(Name)</span></code>,
-<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">souffle_printsize(Name)</span></code>, <code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">souffle_raw(Source)</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">comment(Source)</span></code>. The <code class="docutils literal notranslate"><span class="pre">mean</span></code> aggregate requires its target
-expression to already resolve to a <code class="docutils literal notranslate"><span class="pre">float</span></code>-typed value; Souffle does
-not implicitly widen <code class="docutils literal notranslate"><span class="pre">number</span></code> to <code class="docutils literal notranslate"><span class="pre">float</span></code> for <code class="docutils literal notranslate"><span class="pre">mean</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">arithmetic(Operator,</span> <span class="pre">[Left,</span> <span class="pre">Right])</span></code> for <code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">*</span></code>, <code class="docutils literal notranslate"><span class="pre">/</span></code>,
+<code class="docutils literal notranslate"><span class="pre">%</span></code>, and <code class="docutils literal notranslate"><span class="pre">cat(Left,</span> <span class="pre">Right)</span></code> (the built-in string-concatenation
+functor, written directly as <code class="docutils literal notranslate"><span class="pre">cat(Left,</span> <span class="pre">Right)</span></code> in a clause body or
+argument position).</p>
+</section>
 </section>
 <section id="known-limitations">
 <h2>Known limitations<a class="headerlink" href="#known-limitations" title="Link to this heading"></a></h2>

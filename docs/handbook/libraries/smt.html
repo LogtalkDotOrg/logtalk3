@@ -559,10 +559,9 @@ options.</p>
 </section>
 <section id="solving">
 <h2>Solving<a class="headerlink" href="#solving" title="Link to this heading"></a></h2>
-<p>The public source and result predicates are declared in
-<a class="reference external" href="smt_protocol.lgt">smt_protocol.lgt</a>. The object data-provider
-interface is declared in
-<a class="reference external" href="smt_problem_protocol.lgt">smt_problem_protocol.lgt</a>. The serializer,
+<p>The public source and result predicates are declared in the
+<code class="docutils literal notranslate"><span class="pre">smt_protocol</span></code> protocol. The object data-provider interface is
+declared in the <code class="docutils literal notranslate"><span class="pre">smt_problem_protocol</span></code> protocol. The serializer,
 output decoder, and expansion hook document their interfaces in their
 respective source files.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">solve/2</span></code> predicate solves a source with default options. The
@@ -643,9 +642,15 @@ accepts the same source envelopes.</p>
 </section>
 <section id="statements">
 <h2>Statements<a class="headerlink" href="#statements" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">terms(Statements)</span></code> source and the <code class="docutils literal notranslate"><span class="pre">smt_problem_protocol</span></code>
-provider interface use the following canonical, ground statement
-vocabulary, serialized by <a class="reference external" href="smt_program.lgt">smt_program.lgt</a>:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">terms(Statements)</span></code> source and an object implementing
+<code class="docutils literal notranslate"><span class="pre">smt_problem_protocol</span></code> (loaded with <code class="docutils literal notranslate"><span class="pre">hook(smt_expansion)</span></code>) share the
+same canonical, ground statement vocabulary, serialized by the
+<code class="docutils literal notranslate"><span class="pre">smt_program</span></code> object. Unlike the <code class="docutils literal notranslate"><span class="pre">asp</span></code>, <code class="docutils literal notranslate"><span class="pre">minizinc</span></code>, <code class="docutils literal notranslate"><span class="pre">sat</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">souffle</span></code> libraries, a problem object writes these statement
+constructors directly as ordinary ground facts; the hook only
+additionally recognizes the <code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">smt_raw(Source)</span></code> and
+<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">comment(Source)</span></code> directives, mapping to the canonical
+<code class="docutils literal notranslate"><span class="pre">raw(Codes)</span></code> and <code class="docutils literal notranslate"><span class="pre">comment(Codes)</span></code> statements listed below:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">set_logic(Logic)</span></code> and <code class="docutils literal notranslate"><span class="pre">set_option(Keyword,</span> <span class="pre">Value)</span></code> emit
 <code class="docutils literal notranslate"><span class="pre">set-logic</span></code> and <code class="docutils literal notranslate"><span class="pre">set-option</span></code> commands; <code class="docutils literal notranslate"><span class="pre">Keyword</span></code> uses an
@@ -706,6 +711,13 @@ binary notation. <code class="docutils literal notranslate"><span class="pre">st
 <p>This covers a solid common core; theories, functions, or syntax outside
 this vocabulary are not generated and require the <code class="docutils literal notranslate"><span class="pre">raw/1</span></code> escape
 hatch.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">smt::program/2</span></code> predicate returns the SMT-LIB 2 source for these
+canonical statements:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> smt<span class="o">::</span>program(terms([
+         declare_const(x, int), assert(<span class="o">&gt;</span>(x, <span class="m">0</span>)), check_sat
+     ]), <span class="nv">Codes</span>).
+</pre></div>
+</div>
 </section>
 <section id="results">
 <h2>Results<a class="headerlink" href="#results" title="Link to this heading"></a></h2>
