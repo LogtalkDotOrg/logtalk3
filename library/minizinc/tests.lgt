@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-09,
+		date is 2026-11-10,
 		comment is 'Unit tests for the minizinc library.'
 	]).
 
@@ -394,8 +394,8 @@
 				throw(Error2)
 			)
 		),
-		file_to_codes('mzn_print_result.tmp', Codes),
+		file_to_codes(Path, Codes),
 		atom_codes(Atom, Codes),
-		delete_file('mzn_print_result.tmp').
+		delete_file(Path).
 
 :- end_object.
