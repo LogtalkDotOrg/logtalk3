@@ -8,14 +8,14 @@
 ``mermaid_graph_language``
 ==========================
 
-Predicates for generating graph files using Mermaid.
+Predicates for generating graph files using Mermaid. Requires Mermaid 12 or later.
 
 | **Availability:** 
 |    ``logtalk_load(diagrams(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:6:0
-| **Date:** 2026-11-04
+| **Version:** 0:7:0
+| **Date:** 2026-11-11
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``

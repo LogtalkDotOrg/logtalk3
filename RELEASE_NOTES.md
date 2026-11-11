@@ -430,6 +430,9 @@ when computing the scripts exit status.
 * IMPROVED: The performance of the `code_metrics`, `dead_code_scanner`,
 `diagrams`, and `lgtdoc` tool tests.
 
+* IMPROVED: The `diagrams` tool experimental support for Mermaid. Mermaid
+version 12 or later is now required.
+
 * IMPROVED: The performance of the `logtalk_tester.sh` Bash shell script.
 
 * IMPROVED: The `logtalk_tester.sh` Bash shell script to use null-terminated

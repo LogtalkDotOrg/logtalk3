@@ -24,10 +24,10 @@
 	imports(options)).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:7:0,
 		author is 'Paulo Moura',
-		date is 2026-11-04,
-		comment is 'Predicates for generating graph files using Mermaid.'
+		date is 2026-11-11,
+		comment is 'Predicates for generating graph files using Mermaid. Requires Mermaid 12 or later.'
 	]).
 
 	:- uses(list, [
@@ -62,8 +62,11 @@
 	file_header(Stream, _Identifier, Options) :-
 		retractall(edge_index_(_)),
 		asserta(edge_index_(0)),
-		write(Stream, '<html>\n<body>\n'),
-		write(Stream, '<script type="module">\nimport mermaid from \'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs\';\nmermaid.initialize({ securityLevel: \'loose\', startOnLoad: true });\n</script>\n'),
+		% Mermaid creates the tooltip element with an inline max-width of 200px, which
+		% truncates long paths; the stylesheet overrides it so that the tooltip box
+		% fits the tooltip text
+		write(Stream, '<html>\n<head>\n<style>\ndiv.mermaidTooltip { max-width: none !important; white-space: nowrap; }\n</style>\n</head>\n<body>\n'),
+		write(Stream, '<script type="module">\nimport mermaid from \'https://cdn.jsdelivr.net/npm/mermaid@12/dist/mermaid.esm.min.mjs\';\nwindow.noop = function() {};\n// keep tooltips, which Mermaid anchors at the node center, inside the window\ndocument.addEventListener(\'mouseover\', function() { var t = document.querySelector(\'.mermaidTooltip\'); if (t) { var m = window.scrollX + document.documentElement.clientWidth - t.offsetWidth - 4, l = parseFloat(t.style.left); if (l > m) { t.style.left = Math.max(window.scrollX, m) + \'px\'; } } });\nmermaid.initialize({ securityLevel: \'loose\', startOnLoad: true, htmlLabels: true });\n</script>\n'),
 		write(Stream, '<pre class="mermaid">\n'),
 		write(Stream, 'graph '),
 		^^option(layout(Layout), Options),
@@ -141,11 +144,11 @@
 	graph_header(Stream, Identifier, Label, Kind, _Options) :-
 		graph_style_margin_color(Kind, _Style, _Margin, Color),
 		write(Stream, 'subgraph '),
-		write(Stream, Identifier),
+		write_safe_identifier(Stream, Identifier),
 		write(Stream, ' ["'),
-		write(Stream, Label),
+		write_html_escaped(Stream, Label, false),
 		write(Stream, '"]\nstyle '),
-		write(Stream, Identifier),
+		write_safe_identifier(Stream, Identifier),
 		write(Stream, ' fill:'),
 		write(Stream, Color),
 		nl(Stream).
@@ -164,96 +167,115 @@
 	graph_style_margin_color(external, rounded, 10, '#ffffff').
 	graph_style_margin_color(entity, rounded, 10, '#fffafa').
 
+	% nodes use the Mermaid 12 "id@{ shape: Shape, label: Label }" syntax with an
+	% HTML label (bold title, optional italic caption, one line per content item);
+	% label text is escaped using Mermaid entity codes; Mermaid lays out the diagram
+	% using its default ELK layout engine
 	node(Stream, Identifier, Label, Caption, Contents, Kind, Options) :-
-		node_shape_style_color(Kind, _Shape, Style, Color),
+		node_shape_style_color(Kind, Shape, Style, Color),
 		write_escaped_identifier(Stream, Identifier),
-		write(Stream, '["`\n**'),
-		write(Stream, Label),
-		write(Stream, '**\n'),
+		write(Stream, '@{ shape: '),
+		write(Stream, Shape),
+		write(Stream, ', label: "<b>'),
+		write_html_escaped(Stream, Label, false),
+		write(Stream, '</b>'),
 		(	^^option(node_type_captions(true), Options),
 			Caption \== '' ->
-			write(Stream, '_'),
-			write(Stream, Caption),
-			write(Stream, '_'),
-			nl(Stream)
+			write(Stream, '<br/><i>'),
+			write_html_escaped(Stream, Caption, false),
+			write(Stream, '</i>')
 		;	true
 		),
 		write_node_lines(Contents, Stream),
 		(	member(metrics_overlay(Ce,Ca,I,A,D), Options) ->
-			nl(Stream),
-			write(Stream, '_Ce: '),
-			write(Stream, Ce),
+			write(Stream, '<br/><i>Ce: '),
+			write_html_escaped(Stream, Ce, false),
 			write(Stream, ' Ca: '),
-			write(Stream, Ca),
-			write(Stream, '_'),
-			nl(Stream),
-			write(Stream, '_I: '),
-			write(Stream, I),
+			write_html_escaped(Stream, Ca, false),
+			write(Stream, '</i><br/><i>I: '),
+			write_html_escaped(Stream, I, false),
 			write(Stream, ' A: '),
-			write(Stream, A),
+			write_html_escaped(Stream, A, false),
 			write(Stream, ' D: '),
-			write(Stream, D),
-			write(Stream, '_'),
-			nl(Stream)
+			write_html_escaped(Stream, D, false),
+			write(Stream, '</i>')
 		;	true
 		),
-		write(Stream, '`"]:::'),
+		write(Stream, '" }\nclass '),
+		write_escaped_identifier(Stream, Identifier),
+		write(Stream, ' '),
 		write(Stream, Style),
 		nl(Stream),
+		node_click(Stream, Identifier, Options),
+		write(Stream, 'style '),
+		write_escaped_identifier(Stream, Identifier),
+		write(Stream, ' fill:'),
+		write(Stream, Color),
+		nl(Stream).
+
+	% clickable nodes: a URL, with an optional tooltip, becomes a link; a tooltip
+	% alone must use the callback form as a single quoted string is always read
+	% by Mermaid as a link; the "noop" callback is defined in the page header
+	node_click(Stream, Identifier, Options) :-
 		(	^^option(url(URL), Options),
 			URL \== '' ->
 			write(Stream, 'click '),
 			write_escaped_identifier(Stream, Identifier),
 			write(Stream, ' "'),
 			write(Stream, URL),
-			write(Stream, '"')
-		;	member(tooltip(Tooltip), Options) ->
+			write(Stream, '"'),
+			(	member(tooltip(Tooltip), Options),
+				Tooltip \== '' ->
+				write(Stream, ' "'),
+				write(Stream, Tooltip),
+				write(Stream, '"')
+			;	true
+			),
+			nl(Stream)
+		;	member(tooltip(Tooltip), Options),
+			Tooltip \== '' ->
 			write(Stream, 'click '),
 			write_escaped_identifier(Stream, Identifier),
-			write(Stream, ' "'),
+			write(Stream, ' noop "'),
 			write(Stream, Tooltip),
-			write(Stream, '"')
+			write(Stream, '"'),
+			nl(Stream)
 		;	true
-		),
-		write(Stream, '\nstyle '),
-		write_escaped_identifier(Stream, Identifier),
-		write(Stream, ' fill:'),
-		write(Stream, Color),
-		write(Stream, '\n').
+		).
 
 	% entities belonging to the file or library being documented
-	node_shape_style_color(prototype, box, filled, '#fff8dc').
-	node_shape_style_color(class, box, filled, '#ffff00').
-	node_shape_style_color(instance, box, filled, '#ffff00').
-	node_shape_style_color(instance_and_class, box, filled, '#ffff00').
-	node_shape_style_color(protocol, note, filled, '#7fffd4').
-	node_shape_style_color(category, component, filled, '#00ffff').
-	node_shape_style_color(module, tab, filled, '#dda0dd').
-	node_shape_style_color(file, box, filled, '#30d5c8').
-	node_shape_style_color(directory, tab, filled, '#ff8c69').
-	node_shape_style_color(library, tab, filled, '#ff8c69').
+	node_shape_style_color(prototype, rect, filled, '#fff8dc').
+	node_shape_style_color(class, rect, filled, '#ffff00').
+	node_shape_style_color(instance, rect, filled, '#ffff00').
+	node_shape_style_color(instance_and_class, rect, filled, '#ffff00').
+	node_shape_style_color(protocol, 'notch-rect', filled, '#7fffd4').
+	node_shape_style_color(category, 'lin-rect', filled, '#00ffff').
+	node_shape_style_color(module, 'tag-rect', filled, '#dda0dd').
+	node_shape_style_color(file, rect, filled, '#30d5c8').
+	node_shape_style_color(directory, 'tag-rect', filled, '#ff8c69').
+	node_shape_style_color(library, 'tag-rect', filled, '#ff8c69').
 	% external entities to the file or library being documented
-	node_shape_style_color(external_prototype, box, dashed, '#f5f5dc').
-	node_shape_style_color(external_class, box, dashed, '#daa520').
-	node_shape_style_color(external_instance, box, dashed, '#daa520').
-	node_shape_style_color(external_instance_and_class, box, dashed, '#daa520').
-	node_shape_style_color(external_protocol, note, dashed, '#7fffd4').
-	node_shape_style_color(external_category, component, dashed, '#00ffff').
-	node_shape_style_color(external_module, tab, dashed, '#d8bfd8').
-	node_shape_style_color(external_file, box, dashed, '#87ceeb').
-	node_shape_style_color(external_directory, tab, dashed, '#fa8072').
-	node_shape_style_color(external_library, tab, dashed, '#fa8072').
+	node_shape_style_color(external_prototype, rect, dashed, '#f5f5dc').
+	node_shape_style_color(external_class, rect, dashed, '#daa520').
+	node_shape_style_color(external_instance, rect, dashed, '#daa520').
+	node_shape_style_color(external_instance_and_class, rect, dashed, '#daa520').
+	node_shape_style_color(external_protocol, 'notch-rect', dashed, '#7fffd4').
+	node_shape_style_color(external_category, 'lin-rect', dashed, '#00ffff').
+	node_shape_style_color(external_module, 'tag-rect', dashed, '#d8bfd8').
+	node_shape_style_color(external_file, rect, dashed, '#87ceeb').
+	node_shape_style_color(external_directory, 'tag-rect', dashed, '#fa8072').
+	node_shape_style_color(external_library, 'tag-rect', dashed, '#fa8072').
 	% predicates of the entities being documented
-	node_shape_style_color(directive, box, filled, '#ffe4c4').
-	node_shape_style_color(predicate, box, filled, '#fff8dc').
-	node_shape_style_color(public_predicate, box, filled, '#00ff00').
-	node_shape_style_color(protected_predicate, box, filled, '#ffff00').
-	node_shape_style_color(private_predicate, box, filled, '#ff0000').
-	node_shape_style_color(local_predicate, box, filled, '#fff8dc').
-	node_shape_style_color(multifile_predicate, box, filled, '#87ceeb').
-	node_shape_style_color(exported_predicate, box, filled, '#00ff00').
+	node_shape_style_color(directive, rect, filled, '#ffe4c4').
+	node_shape_style_color(predicate, rect, filled, '#fff8dc').
+	node_shape_style_color(public_predicate, rect, filled, '#00ff00').
+	node_shape_style_color(protected_predicate, rect, filled, '#ffff00').
+	node_shape_style_color(private_predicate, rect, filled, '#ff0000').
+	node_shape_style_color(local_predicate, rect, filled, '#fff8dc').
+	node_shape_style_color(multifile_predicate, rect, filled, '#87ceeb').
+	node_shape_style_color(exported_predicate, rect, filled, '#00ff00').
 	% external predicates to the entities being documented
-	node_shape_style_color(external_predicate, box, dashed, '#f5f5dc').
+	node_shape_style_color(external_predicate, rect, dashed, '#f5f5dc').
 
 	edge(Stream, Start, End, Labels, Kind, Options) :-
 		retract(edge_index_(N)),
@@ -332,28 +354,71 @@
 	edge_arrow(depends_on_library, '-->').
 	edge_arrow(loads_library, '-->').
 
+	% node and edge identifiers are written between single quotes; subgraph
+	% identifiers are written as is; in both cases, only characters that are safe
+	% in a Mermaid identifier are kept (any other character, e.g. ^ ~ | = < > @ ; [
+	% ] { } or a space, would be a syntax error or would silently split the
+	% identifier) and all other characters are replaced by their character code
+	% between underscores, which keeps distinct identifiers distinct
 	write_escaped_identifier(Stream, Identifier) :-
-		write_term_to_chars(Identifier, Chars, [quoted(false)]),
-		write_escaped_chars(['\''| Chars], Stream).
-
-	write_escaped_chars([], Stream) :-
+		put_char(Stream, '\''),
+		write_safe_identifier(Stream, Identifier),
 		put_char(Stream, '\'').
-	write_escaped_chars([Char| Chars], Stream) :-
-		(	Char == '(' ->
-			put_char(Stream, '_')
-		;	Char == ')' ->
-			put_char(Stream, '_')
-		;	Char == (',') ->
-			put_char(Stream, '_')
-		;	put_char(Stream, Char)
+
+	write_safe_identifier(Stream, Identifier) :-
+		write_term_to_chars(Identifier, Chars, [quoted(false)]),
+		write_safe_chars(Chars, Stream).
+
+	write_safe_chars([], _).
+	write_safe_chars([Char| Chars], Stream) :-
+		char_code(Char, Code),
+		(	safe_identifier_code(Code) ->
+			put_char(Stream, Char)
+		;	write(Stream, '_'),
+			write(Stream, Code),
+			write(Stream, '_')
 		),
-		write_escaped_chars(Chars, Stream).
+		write_safe_chars(Chars, Stream).
+
+	% letters, digits, underscore, slash, and period
+	safe_identifier_code(Code) :-
+		Code >= 0'a, Code =< 0'z, !.
+	safe_identifier_code(Code) :-
+		Code >= 0'A, Code =< 0'Z, !.
+	safe_identifier_code(Code) :-
+		Code >= 0'0, Code =< 0'9, !.
+	safe_identifier_code(0'_).
+	safe_identifier_code(0'/).
+	safe_identifier_code(0'.).
 
 	write_node_lines([], _).
 	write_node_lines([Line| Lines], Stream) :-
-		writeq(Stream, Line),
-		nl(Stream),
+		write(Stream, '<br/>'),
+		write_html_escaped(Stream, Line, true),
 		write_node_lines(Lines, Stream).
+
+	% writes a term as text safe for use inside a Mermaid double-quoted HTML label
+	% (or URL/tooltip string) by using Mermaid entity codes for the characters
+	% that would otherwise be interpreted as markup, as string delimiters, or as
+	% escape sequences (the label is a double-quoted string in the @{ ... } syntax)
+	write_html_escaped(Stream, Term, Quoted) :-
+		write_term_to_chars(Term, Chars, [quoted(Quoted)]),
+		write_html_escaped_chars(Chars, Stream).
+
+	write_html_escaped_chars([], _).
+	write_html_escaped_chars([Char| Chars], Stream) :-
+		(	html_entity(Char, Entity) ->
+			write(Stream, Entity)
+		;	put_char(Stream, Char)
+		),
+		write_html_escaped_chars(Chars, Stream).
+
+	html_entity('#',  '#35;').
+	html_entity('<',  '#lt;').
+	html_entity('>',  '#gt;').
+	html_entity('&',  '#amp;').
+	html_entity('"',  '#quot;').
+	html_entity('\\',  '#92;').
 
 	write_edge_lines([], _).
 	write_edge_lines([Line| Lines], Stream) :-
