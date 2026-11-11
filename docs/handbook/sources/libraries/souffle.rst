@@ -56,11 +56,10 @@ To test this library, load its ``tester.lgt`` file:
 
 The tests include source-generation goldens, CSV/printsize decoding,
 expansion isolation and variable sharing, source/result accessors, and
-solving. Solver integration has been tested with Souffle 2.5 on
-SWI-Prolog and SICStus Prolog 4.10.1 on macOS, and verified empirically
-against the installed CLI (exit codes, CSV formatting, aggregate syntax,
-and escaping) before the serializer and decoder were written. Solver
-tests are conditional on the ``souffle`` executable's availability.
+solving. Solver integration has been tested with Souffle 2.5 and
+verified against the installed CLI (exit codes, CSV formatting,
+aggregate syntax, and escaping). Solver tests are conditional on the
+availability of the ``souffle`` executable.
 
 Problem fixtures are written as Logtalk objects implementing
 ``souffle_problem_protocol``. The tester loads them with

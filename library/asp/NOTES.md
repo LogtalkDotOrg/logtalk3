@@ -75,12 +75,11 @@ To test this library, load its `tester.lgt` file:
 
 The tests include source-generation goldens, symbol parsing, JSON decoding,
 expansion isolation and variable sharing, source/result accessors, and solving.
-Solver integration has been tested with Clingo 5.8.3 and Zetesis 0.7.0 on
-SICStus Prolog 4.10.1 and macOS. Solver tests are conditional on the required
-executable's availability. A deterministic shell fixture generates 128 KiB on
-each output channel to check file-backed capture beyond typical pipe capacity.
-Lifecycle checks verify removal of owned directories after successful execution,
-child failure, and solver errors.
+Solver integration has been tested with Clingo 5.8.3 and Zetesis 0.7.0. Solver
+tests are conditional on the required executable's availability. A deterministic
+shell fixture generates 128 KiB on each output channel to check file-backed
+capture beyond typical pipe capacity. Lifecycle checks verify removal of owned
+directories after successful execution, child failure, and solver errors.
 
 The SAT, UNSAT, optimization, and time-limit JSON fixtures were captured from
 Clingo 5.8.3 with `--outf=2 --quiet=0 - 0`; formatting was compacted without

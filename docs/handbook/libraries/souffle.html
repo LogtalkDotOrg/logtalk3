@@ -494,11 +494,10 @@ link in a web browser.</p>
 </div>
 <p>The tests include source-generation goldens, CSV/printsize decoding,
 expansion isolation and variable sharing, source/result accessors, and
-solving. Solver integration has been tested with Souffle 2.5 on
-SWI-Prolog and SICStus Prolog 4.10.1 on macOS, and verified empirically
-against the installed CLI (exit codes, CSV formatting, aggregate syntax,
-and escaping) before the serializer and decoder were written. Solver
-tests are conditional on the <code class="docutils literal notranslate"><span class="pre">souffle</span></code> executable’s availability.</p>
+solving. Solver integration has been tested with Souffle 2.5 and
+verified against the installed CLI (exit codes, CSV formatting,
+aggregate syntax, and escaping). Solver tests are conditional on the
+availability of the <code class="docutils literal notranslate"><span class="pre">souffle</span></code> executable.</p>
 <p>Problem fixtures are written as Logtalk objects implementing
 <code class="docutils literal notranslate"><span class="pre">souffle_problem_protocol</span></code>. The tester loads them with
 <code class="docutils literal notranslate"><span class="pre">hook(souffle_expansion)</span></code> and solves them using <code class="docutils literal notranslate"><span class="pre">object(Object)</span></code>,

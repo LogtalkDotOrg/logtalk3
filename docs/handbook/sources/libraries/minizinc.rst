@@ -59,10 +59,9 @@ To test this library, load its ``tester.lgt`` file:
 The tests include source-generation goldens, JSON-stream decoding,
 expansion isolation, source/result accessors, and solving. Solver
 integration has been tested with MiniZinc 2.10.1 (Gecode and COIN-BC/CBC
-backends) on SICStus Prolog 4.10.1 and macOS. Solver tests are
-conditional on the ``minizinc`` executable's availability. Lifecycle
-checks verify removal of owned directories after successful execution
-and after solver syntax errors.
+backends). Solver tests are conditional on the availability of the
+``minizinc`` executable. Lifecycle checks verify removal of owned
+directories after successful execution and after solver syntax errors.
 
 Problem fixtures are written as Logtalk objects implementing
 ``minizinc_problem_protocol``. The tester loads them with

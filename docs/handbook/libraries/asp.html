@@ -498,12 +498,11 @@ link in a web browser.</p>
 <p>The tests include source-generation goldens, symbol parsing, JSON
 decoding, expansion isolation and variable sharing, source/result
 accessors, and solving. Solver integration has been tested with Clingo
-5.8.3 and Zetesis 0.7.0 on SICStus Prolog 4.10.1 and macOS. Solver tests
-are conditional on the required executable’s availability. A
-deterministic shell fixture generates 128 KiB on each output channel to
-check file-backed capture beyond typical pipe capacity. Lifecycle checks
-verify removal of owned directories after successful execution, child
-failure, and solver errors.</p>
+5.8.3 and Zetesis 0.7.0. Solver tests are conditional on the required
+executable’s availability. A deterministic shell fixture generates 128
+KiB on each output channel to check file-backed capture beyond typical
+pipe capacity. Lifecycle checks verify removal of owned directories
+after successful execution, child failure, and solver errors.</p>
 <p>The SAT, UNSAT, optimization, and time-limit JSON fixtures were captured
 from Clingo 5.8.3 with <code class="docutils literal notranslate"><span class="pre">--outf=2</span> <span class="pre">--quiet=0</span> <span class="pre">-</span> <span class="pre">0</span></code>; formatting was
 compacted without changing the values. Zetesis fixtures were captured
