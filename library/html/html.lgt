@@ -23,9 +23,9 @@
 :- category(html).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:5:1,
 		author is 'Paul Brown and Paulo Moura',
-		date is 2026-09-12,
+		date is 2026-11-11,
 		comment is 'HTML generation.'
 	]).
 
@@ -35,8 +35,8 @@
 		comment is 'Generates HTML content using the representation specified in the first argument (``stream(Stream)`` or ``file(Path)``) for the term in the second argument.',
 		argnames is ['Sink', 'Term'],
 		exceptions is [
-			'``Sink`` is not ground' - instantiation_error,
-			'``Term`` is not ground' - instantiation_error,
+			'``Sink`` is not a ground term' - instantiation_error,
+			'``Term`` is not a ground term' - instantiation_error,
 			'``Sink`` is ground but not a valid sink term' - domain_error(html_sink, 'Sink')
 		]
 	]).

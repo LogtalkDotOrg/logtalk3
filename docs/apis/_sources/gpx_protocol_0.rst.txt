@@ -14,8 +14,8 @@ GPX 1.1 parser, generator, and validator protocol.
 |    ``logtalk_load(gpx(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-08-02
+| **Version:** 1:0:1
+| **Date:** 2026-11-11
 
 | **Compilation flags:**
 |    ``static``
@@ -86,7 +86,7 @@ Generates a GPX 1.1 document to the given sink (``file(Path)``, ``stream(Stream)
 |        ``instantiation_error``
 |    ``Sink`` is neither a variable nor a valid sink:
 |        ``domain_error(gpx_sink,Sink)``
-|    ``GPX`` is not ground:
+|    ``GPX`` is not a ground term:
 |        ``instantiation_error``
 |    ``GPX`` is ground but not a valid native GPX term:
 |        ``domain_error(gpx,GPX)``

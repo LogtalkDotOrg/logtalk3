@@ -15,7 +15,7 @@ Parser for shown Clingo ground symbols.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-11-09
+| **Date:** 2026-11-11
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -55,7 +55,7 @@ Parses one complete ground symbol into a canonical tagged term.
 |    ``parse(+list(integer),-term)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Codes`` is not ground:
+|    ``Codes`` is not a ground term:
 |        ``instantiation_error``
 |    ``Codes`` is ground but not a list of character codes:
 |        ``type_error(codes,Codes)``

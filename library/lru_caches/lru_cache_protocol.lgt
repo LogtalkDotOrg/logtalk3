@@ -22,9 +22,9 @@
 :- protocol(lru_cache_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-09-08,
+		date is 2026-11-11,
 		comment is 'LRU (Least Recently Used) cache protocol. Key-value pairs are represented as ``Key-Value``.',
 		see_also is [lru_cache]
 	]).
@@ -68,7 +68,7 @@
 		comment is 'Looks up a matching key-value pair without changing its recency. Fails if the key is not found or the value does not unify.',
 		argnames is ['Key', 'Value', 'Cache'],
 		exceptions is [
-			'``Key`` is not ground' - instantiation_error
+			'``Key`` is not a ground term' - instantiation_error
 		]
 	]).
 
@@ -78,7 +78,7 @@
 		comment is 'Looks up a matching key-value pair and marks it as most recently used, returning the updated cache. Fails if the key is not found or the value does not unify.',
 		argnames is ['Key', 'Value', 'Cache', 'NewCache'],
 		exceptions is [
-			'``Key`` is not ground' - instantiation_error
+			'``Key`` is not a ground term' - instantiation_error
 		]
 	]).
 
@@ -88,7 +88,7 @@
 		comment is 'Inserts or replaces a key-value pair, marks it as most recently used, and evicts the least recently used entry when necessary.',
 		argnames is ['Key', 'Value', 'Cache', 'NewCache'],
 		exceptions is [
-			'``Key`` is not ground' - instantiation_error
+			'``Key`` is not a ground term' - instantiation_error
 		]
 	]).
 
@@ -98,7 +98,7 @@
 		comment is 'Updates an existing matching key-value pair and marks it as most recently used. Fails if the key is not found or the old value does not unify.',
 		argnames is ['Key', 'OldValue', 'NewValue', 'Cache', 'NewCache'],
 		exceptions is [
-			'``Key`` is not ground' - instantiation_error
+			'``Key`` is not a ground term' - instantiation_error
 		]
 	]).
 
@@ -108,7 +108,7 @@
 		comment is 'Deletes a matching key-value pair, returning the updated cache. Fails if the key is not found or the value does not unify.',
 		argnames is ['Key', 'Value', 'Cache', 'NewCache'],
 		exceptions is [
-			'``Key`` is not ground' - instantiation_error
+			'``Key`` is not a ground term' - instantiation_error
 		]
 	]).
 

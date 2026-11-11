@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-10,
+		date is 2026-11-11,
 		comment is 'Protocol for process-backed Kissat, CaDiCaL, Glucose, and Z3 CLI solving, source generation, and result inspection.'
 	]).
 
@@ -34,7 +34,7 @@
 		comment is 'Solves a source with default options using the external SAT solver CLI and returns a collected result after cleanup. Valid sources are ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, and ``file(Path)``.',
 		argnames is ['Source', 'Result'],
 		exceptions is [
-			'``Source`` is not ground' - instantiation_error,
+			'``Source`` is not a ground term' - instantiation_error,
 			'``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``sat_problem_protocol``' - domain_error(sat_source, 'Source'),
 			'``Statements`` is ground but not a list' - type_error(list, 'Statements'),
 			'A statement enumerated by the provider object is not a valid statement' - domain_error(sat_statement, 'Statement'),
@@ -61,7 +61,7 @@
 		comment is 'Solves a source using ``solver/1``, ``executable/1``, ``time_limit/1``, ``conflicts/1``, ``decisions/1``, ``seed/1``, and ``witness/1`` options. Repeated options use the first occurrence. Valid sources are ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, and ``file(Path)``.',
 		argnames is ['Source', 'Result', 'Options'],
 		exceptions is [
-			'``Source`` is not ground' - instantiation_error,
+			'``Source`` is not a ground term' - instantiation_error,
 			'``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``sat_problem_protocol``' - domain_error(sat_source, 'Source'),
 			'``Statements`` is ground but not a list' - type_error(list, 'Statements'),
 			'A statement enumerated by the provider object is not a valid statement' - domain_error(sat_statement, 'Statement'),
@@ -93,7 +93,7 @@
 		comment is 'Generates and prints DIMACS CNF source to the current output using default options, equivalent to ``program/2`` followed by ``print_program/1``, without invoking the solver.',
 		argnames is ['Source'],
 		exceptions is [
-			'``Source`` is not ground' - instantiation_error,
+			'``Source`` is not a ground term' - instantiation_error,
 			'``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``sat_problem_protocol``' - domain_error(sat_source, 'Source'),
 			'``Statements`` is ground but not a list' - type_error(list, 'Statements'),
 			'A statement enumerated by the provider object is not a valid statement' - domain_error(sat_statement, 'Statement'),
@@ -114,7 +114,7 @@
 		comment is 'Returns DIMACS CNF source codes from ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, or ``file(Path)`` using default options, without invoking the solver.',
 		argnames is ['Source', 'Codes'],
 		exceptions is [
-			'``Source`` is not ground' - instantiation_error,
+			'``Source`` is not a ground term' - instantiation_error,
 			'``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``sat_problem_protocol``' - domain_error(sat_source, 'Source'),
 			'``Statements`` is ground but not a list' - type_error(list, 'Statements'),
 			'A statement enumerated by the provider object is not a valid statement' - domain_error(sat_statement, 'Statement'),
@@ -134,7 +134,7 @@
 		comment is 'Returns DIMACS CNF source codes from ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, or ``file(Path)``, using the ``embed_variables/1`` option, without invoking the solver.',
 		argnames is ['Source', 'Codes', 'Options'],
 		exceptions is [
-			'``Source`` is not ground' - instantiation_error,
+			'``Source`` is not a ground term' - instantiation_error,
 			'``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``sat_problem_protocol``' - domain_error(sat_source, 'Source'),
 			'``Statements`` is ground but not a list' - type_error(list, 'Statements'),
 			'A statement enumerated by the provider object is not a valid statement' - domain_error(sat_statement, 'Statement'),
@@ -159,7 +159,7 @@
 		comment is 'Prints DIMACS CNF character codes to the current output without adding a newline or invoking the solver.',
 		argnames is ['Codes'],
 		exceptions is [
-			'``Codes`` is not ground' - instantiation_error,
+			'``Codes`` is not a ground term' - instantiation_error,
 			'``Codes`` is ground but not a list of character codes' - type_error(codes, 'Codes'),
 			'An element ``Code`` of the list ``Codes`` is ground but not an integer' - type_error(integer, 'Code'),
 			'An element ``Code`` of the list ``Codes`` is an integer but not a valid character code' - domain_error(character_code, 'Code'),
@@ -173,7 +173,7 @@
 		comment is 'Enumerates, by backtracking, the collected model literals (``+Term`` or ``-Term``) without starting a process. Fails when the result has no witness.',
 		argnames is ['Result', 'Literal'],
 		exceptions is [
-			'``Result`` is not ground' - instantiation_error,
+			'``Result`` is not a ground term' - instantiation_error,
 			'``Result`` is not a valid collected SAT solver result' - domain_error(sat_result, 'Result')
 		]
 	]).
@@ -184,7 +184,7 @@
 		comment is 'Enumerates, by backtracking, ``status(Status)`` and the stored result properties.',
 		argnames is ['Result', 'Property'],
 		exceptions is [
-			'``Result`` is not ground' - instantiation_error,
+			'``Result`` is not a ground term' - instantiation_error,
 			'``Result`` is not a valid collected SAT solver result' - domain_error(sat_result, 'Result')
 		]
 	]).
@@ -195,7 +195,7 @@
 		comment is 'Prints the collected status and, when present, the witness literals to the current output using Kissat-style ``s``/``v`` labels, without invoking the solver.',
 		argnames is ['Result'],
 		exceptions is [
-			'``Result`` is not ground' - instantiation_error,
+			'``Result`` is not a ground term' - instantiation_error,
 			'``Result`` is not a valid collected SAT solver result' - domain_error(sat_result, 'Result'),
 			'The current output stream does not allow writing' - permission_error(output, stream, 'Stream')
 		]

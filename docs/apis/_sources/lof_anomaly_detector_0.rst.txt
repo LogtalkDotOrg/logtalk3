@@ -14,8 +14,8 @@ Local Outlier Factor anomaly detector with multiple distance metrics, mixed-feat
 |    ``logtalk_load(lof_anomaly_detector(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 2:0:0
-| **Date:** 2026-10-12
+| **Version:** 2:0:1
+| **Date:** 2026-11-11
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -95,7 +95,7 @@ Checks prepared numeric, categorical, and missing feature values.
 |    ``check_feature_values(+list(atom),+list)`` - ``one_or_error``
 
 | **Exceptions:**
-|    A bound feature value in ``Values`` is not ground:
+|    A bound feature value in ``Values`` is not a ground term:
 |        ``instantiation_error``
 |    A numeric feature value is not a number:
 |        ``type_error(number,Value)``
@@ -122,7 +122,7 @@ Checks distinct integer identities for training examples.
 |    ``check_instance_ids(+list,+list(integer))`` - ``one_or_error``
 
 | **Exceptions:**
-|    An example identifier in ``Instances`` is not ground:
+|    An example identifier in ``Instances`` is not a ground term:
 |        ``instantiation_error``
 |    An example identifier is not an integer:
 |        ``type_error(integer,Id)``

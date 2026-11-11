@@ -22,9 +22,9 @@
 :- protocol(gpx_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-11-11,
 		comment is 'GPX 1.1 parser, generator, and validator protocol.'
 	]).
 
@@ -48,7 +48,7 @@
 		exceptions is [
 			'``Sink`` is a variable' - instantiation_error,
 			'``Sink`` is neither a variable nor a valid sink' - domain_error(gpx_sink, 'Sink'),
-			'``GPX`` is not ground' - instantiation_error,
+			'``GPX`` is not a ground term' - instantiation_error,
 			'``GPX`` is ground but not a valid native GPX term' - domain_error(gpx, 'GPX')
 		]
 	]).

@@ -15,7 +15,7 @@ Decoding of captured stdout (``.printsize`` lines) and per-relation tab-separate
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-11-10
+| **Date:** 2026-11-11
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -67,9 +67,9 @@ Decodes captured stdout, stderr, per-relation CSV file content, and process meta
 |        ``instantiation_error``
 |    ``RelationCodes``, ``Outputs``, or ``Printsizes`` is neither a partial list nor a list:
 |        ``type_error(list,RelationCodes)``
-|    ``RawStatus`` is not ground:
+|    ``RawStatus`` is not a ground term:
 |        ``instantiation_error``
-|    ``NormalizedStatus`` is not ground:
+|    ``NormalizedStatus`` is not a ground term:
 |        ``instantiation_error``
 |    ``NormalizedStatus`` is not ``exit(0)``:
 |        ``domain_error(souffle_process_status,NormalizedStatus)``

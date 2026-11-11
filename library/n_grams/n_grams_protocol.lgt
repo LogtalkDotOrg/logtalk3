@@ -22,9 +22,9 @@
 :- protocol(n_grams_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-09-05,
+		date is 2026-11-11,
 		comment is 'N-gram generation and counting protocol.',
 		see_also is [n_grams(_)]
 	]).
@@ -39,7 +39,7 @@
 			'The ``Representation`` parameter neither a variable nor ``atom``, ``chars``, or ``codes``' - domain_error(text_representation, 'Representation'),
 			'``N`` is a variable' - instantiation_error,
 			'``N`` is neither a variable nor a positive integer' - type_error(positive_integer, 'Options'),
-			'``Tokens`` is a partial list or a list with an element ``Element`` which is not ground' - instantiation_error,
+			'``Tokens`` is a partial list or a list with an element ``Element`` which is not a ground term' - instantiation_error,
 			'The ``Representation`` parameter is ``atom`` but a ground element ``Element`` of the list ``Tokens`` is not an atom' - type_error(atom, 'Element'),
 			'The ``Representation`` parameter is ``chars`` but an element ``Element`` of the list ``Tokens`` is not a list of characters' - type_error(chars, 'Element'),
 			'The ``Representation`` parameter is ``codes`` but an element ``Element`` of the list ``Tokens`` is not a list of character codes' - type_error(codes, 'Element')
@@ -56,7 +56,7 @@
 			'The ``Representation`` parameter neither a variable nor ``atom``, ``chars``, or ``codes``' - domain_error(text_representation, 'Representation'),
 			'``N`` is a variable' - instantiation_error,
 			'``N`` is neither a variable nor a positive integer' - type_error(positive_integer, 'Options'),
-			'``Tokens`` is a partial list or a list with an element ``Element`` which is not ground' - instantiation_error,
+			'``Tokens`` is a partial list or a list with an element ``Element`` which is not a ground term' - instantiation_error,
 			'The ``Representation`` parameter is ``atom`` but a ground element ``Element`` of the list ``Tokens`` is not an atom' - type_error(atom, 'Element'),
 			'The ``Representation`` parameter is ``chars`` but an element ``Element`` of the list ``Tokens`` is not a list of characters' - type_error(chars, 'Element'),
 			'The ``Representation`` parameter is ``codes`` but an element ``Element`` of the list ``Tokens`` is not a list of character codes' - type_error(codes, 'Element'),
@@ -78,7 +78,7 @@
 			'The ``Representation`` parameter neither a variable nor ``atom``, ``chars``, or ``codes``' - domain_error(text_representation, 'Representation'),
 			'``N`` is a variable' - instantiation_error,
 			'``N`` is neither a variable nor a positive integer' - type_error(positive_integer, 'Options'),
-			'``Text`` is not ground' - instantiation_error,
+			'``Text`` is not a ground term' - instantiation_error,
 			'The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom' - type_error(atom, 'Text'),
 			'The ``Representation`` parameter is ``chars`` but ``Text`` is not a list of characters' - type_error(chars, 'Text'),
 			'The ``Representation`` parameter is ``codes`` but ``Text`` is not a list of character codes' - type_error(codes, 'Text')
@@ -95,7 +95,7 @@
 			'The ``Representation`` parameter neither a variable nor ``atom``, ``chars``, or ``codes``' - domain_error(text_representation, 'Representation'),
 			'``N`` is a variable' - instantiation_error,
 			'``N`` is neither a variable nor a positive integer' - type_error(positive_integer, 'Options'),
-			'``Text`` is not ground' - instantiation_error,
+			'``Text`` is not a ground term' - instantiation_error,
 			'The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom' - type_error(atom, 'Text'),
 			'The ``Representation`` parameter is ``chars`` but ``Text`` is not a list of characters' - type_error(chars, 'Text'),
 			'The ``Representation`` parameter is ``codes`` but ``Text`` is not a list of character codes' - type_error(codes, 'Text'),
@@ -135,7 +135,7 @@
 		exceptions is [
 			'The ``Representation`` parameter is a variable' - instantiation_error,
 			'The ``Representation`` parameter neither a variable nor ``atom``, ``chars``, or ``codes``' - domain_error(text_representation, 'Representation'),
-			'``Tokens`` is a partial list or a list with an element ``Element`` which is not ground' - instantiation_error,
+			'``Tokens`` is a partial list or a list with an element ``Element`` which is not a ground term' - instantiation_error,
 			'The ``Representation`` parameter is ``atom`` but a ground element ``Element`` of the list ``Tokens`` is not an atom' - type_error(atom, 'Element'),
 			'The ``Representation`` parameter is ``chars`` but an element ``Element`` of the list ``Tokens`` is not a list of characters' - type_error(chars, 'Element'),
 			'The ``Representation`` parameter is ``codes`` but an element ``Element`` of the list ``Tokens`` is not a list of character codes' - type_error(codes, 'Element')
@@ -150,7 +150,7 @@
 		exceptions is [
 			'The ``Representation`` parameter is a variable' - instantiation_error,
 			'The ``Representation`` parameter neither a variable nor ``atom``, ``chars``, or ``codes``' - domain_error(text_representation, 'Representation'),
-			'``Tokens`` is a partial list or a list with an element ``Element`` which is not ground' - instantiation_error,
+			'``Tokens`` is a partial list or a list with an element ``Element`` which is not a ground term' - instantiation_error,
 			'The ``Representation`` parameter is ``atom`` but a ground element ``Element`` of the list ``Tokens`` is not an atom' - type_error(atom, 'Element'),
 			'The ``Representation`` parameter is ``chars`` but an element ``Element`` of the list ``Tokens`` is not a list of characters' - type_error(chars, 'Element'),
 			'The ``Representation`` parameter is ``codes`` but an element ``Element`` of the list ``Tokens`` is not a list of character codes' - type_error(codes, 'Element')

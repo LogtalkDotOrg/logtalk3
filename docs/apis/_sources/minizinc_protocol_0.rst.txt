@@ -15,7 +15,7 @@ Protocol for process-backed MiniZinc solving, source generation, and result insp
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-11-09
+| **Date:** 2026-11-11
 
 | **Compilation flags:**
 |    ``static``
@@ -55,7 +55,7 @@ Solves a source with default options using the external MiniZinc CLI and returns
 |    ``solve(+compound,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Source`` is not ground:
+|    ``Source`` is not a ground term:
 |        ``instantiation_error``
 |    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``minizinc_problem_protocol``:
 |        ``domain_error(minizinc_source,Source)``
@@ -108,7 +108,7 @@ Solves a source using solver selection, executable, enumeration, data, and resou
 |    ``solve(+compound,-compound,+list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Source`` is not ground:
+|    ``Source`` is not a ground term:
 |        ``instantiation_error``
 |    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``minizinc_problem_protocol``:
 |        ``domain_error(minizinc_source,Source)``
@@ -175,7 +175,7 @@ Generates and prints MiniZinc source to the current output, equivalent to ``prog
 |    ``program(+compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Source`` is not ground:
+|    ``Source`` is not a ground term:
 |        ``instantiation_error``
 |    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``minizinc_problem_protocol``:
 |        ``domain_error(minizinc_source,Source)``
@@ -220,7 +220,7 @@ Returns MiniZinc source codes from ``object(Object)``, ``terms(Statements)``, ``
 |    ``program(+compound,-list(integer))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Source`` is not ground:
+|    ``Source`` is not a ground term:
 |        ``instantiation_error``
 |    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``minizinc_problem_protocol``:
 |        ``domain_error(minizinc_source,Source)``
@@ -263,7 +263,7 @@ Prints MiniZinc character codes to the current output without adding a newline o
 |    ``print_program(+list(integer))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Codes`` is not ground:
+|    ``Codes`` is not a ground term:
 |        ``instantiation_error``
 |    ``Codes`` is ground but not a list of character codes:
 |        ``type_error(codes,Codes)``
@@ -294,7 +294,7 @@ Enumerates, by backtracking, collected ``solution(Values, Objective, Time)`` rec
 |    ``model(+compound,-compound)`` - ``zero_or_more``
 
 | **Exceptions:**
-|    ``Result`` is not ground:
+|    ``Result`` is not a ground term:
 |        ``instantiation_error``
 |    ``Result`` is not a valid collected MiniZinc result:
 |        ``domain_error(minizinc_result,Result)``
@@ -319,7 +319,7 @@ Enumerates, by backtracking, ``status(Status)`` and the stored result properties
 |    ``result_property(+compound,?compound)`` - ``zero_or_more``
 
 | **Exceptions:**
-|    ``Result`` is not ground:
+|    ``Result`` is not a ground term:
 |        ``instantiation_error``
 |    ``Result`` is not a valid collected MiniZinc result:
 |        ``domain_error(minizinc_result,Result)``
@@ -344,7 +344,7 @@ Prints collected solutions, objective values, and solver status to the current o
 |    ``print_result(+compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Result`` is not ground:
+|    ``Result`` is not a ground term:
 |        ``instantiation_error``
 |    ``Result`` is not a valid collected MiniZinc result:
 |        ``domain_error(minizinc_result,Result)``

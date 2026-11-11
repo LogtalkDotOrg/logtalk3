@@ -15,7 +15,7 @@ Decoding of the MiniZinc ``--json-stream`` message sequence into a collected res
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-11-09
+| **Date:** 2026-11-11
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -66,9 +66,9 @@ Decodes CLI JSON-stream output and process metadata into a collected ``minizinc_
 |        ``domain_error(minizinc_output,Field-Value)``
 |    A JSON message is missing a required field:
 |        ``domain_error(minizinc_output,Field-missing)``
-|    ``RawStatus`` is not ground:
+|    ``RawStatus`` is not a ground term:
 |        ``instantiation_error``
-|    ``NormalizedStatus`` is not ground:
+|    ``NormalizedStatus`` is not a ground term:
 |        ``instantiation_error``
 |    ``NormalizedStatus`` is not ``exit(0)`` and no JSON-stream message was produced:
 |        ``domain_error(minizinc_process_status,NormalizedStatus)``

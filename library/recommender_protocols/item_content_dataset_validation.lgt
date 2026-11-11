@@ -22,9 +22,9 @@
 :- category(item_content_dataset_validation).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-10-04,
+		date is 2026-11-11,
 		comment is 'Shared collection and validation of item catalogs and content descriptors.',
 		see_also is [item_content_dataset_protocol, recommender_common]
 	]).
@@ -43,7 +43,7 @@
 			'A content descriptor is invalid' - domain_error(item_content, 'Content'),
 			'Content representations are mixed' - domain_error(content_representation, 'Content'),
 			'A content list is not a proper list' - type_error(list, 'List'),
-			'A feature or content list is not ground' - instantiation_error,
+			'A feature or content list is not a ground term' - instantiation_error,
 			'A sparse vector repeats a feature key' - domain_error(duplicate_feature, 'Feature'),
 			'A sparse vector entry is not a pair' - type_error(pair, 'Entry'),
 			'A sparse weight is not numeric' - type_error(number, 'Weight'),

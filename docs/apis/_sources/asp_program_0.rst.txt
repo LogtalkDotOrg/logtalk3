@@ -15,7 +15,7 @@ Canonical ASP statement validation and source generation.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-11-10
+| **Date:** 2026-11-11
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -115,7 +115,7 @@ Serializes a canonical ground symbol to ASP character codes.
 |    ``symbol_codes(+term,-list(integer))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Symbol`` is not ground:
+|    ``Symbol`` is not a ground term:
 |        ``instantiation_error``
 |    ``Symbol`` is ground but not a supported symbol:
 |        ``domain_error(asp_symbol,Symbol)``

@@ -15,7 +15,7 @@ Protocol for process-backed Z3, cvc5, Bitwuzla, and Yices 2 CLI solving, SMT-LIB
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-11-09
+| **Date:** 2026-11-11
 
 | **Compilation flags:**
 |    ``static``
@@ -55,7 +55,7 @@ Solves a source with default options using the external SMT solver CLI and retur
 |    ``solve(+compound,-list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Source`` is not ground:
+|    ``Source`` is not a ground term:
 |        ``instantiation_error``
 |    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``smt_problem_protocol``:
 |        ``domain_error(smt_source,Source)``
@@ -112,7 +112,7 @@ Solves a source using ``solver/1``, ``executable/1``, and ``time_limit/1`` optio
 |    ``solve(+compound,-list(compound),+list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Source`` is not ground:
+|    ``Source`` is not a ground term:
 |        ``instantiation_error``
 |    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``smt_problem_protocol``:
 |        ``domain_error(smt_source,Source)``
@@ -179,7 +179,7 @@ Generates and prints SMT-LIB 2 source to the current output, equivalent to ``pro
 |    ``program(+compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Source`` is not ground:
+|    ``Source`` is not a ground term:
 |        ``instantiation_error``
 |    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``smt_problem_protocol``:
 |        ``domain_error(smt_source,Source)``
@@ -224,7 +224,7 @@ Returns SMT-LIB 2 source codes from ``object(Object)``, ``terms(Statements)``, `
 |    ``program(+compound,-list(integer))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Source`` is not ground:
+|    ``Source`` is not a ground term:
 |        ``instantiation_error``
 |    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``smt_problem_protocol``:
 |        ``domain_error(smt_source,Source)``
@@ -267,7 +267,7 @@ Prints SMT-LIB 2 character codes to the current output without adding a newline 
 |    ``print_program(+list(integer))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Codes`` is not ground:
+|    ``Codes`` is not a ground term:
 |        ``instantiation_error``
 |    ``Codes`` is ground but not a list of character codes:
 |        ``type_error(codes,Codes)``
@@ -298,7 +298,7 @@ Returns the collected status (``satisfiable``, ``unsatisfiable``, or ``unknown``
 |    ``status(+compound,-atom)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Result`` is not ground:
+|    ``Result`` is not a ground term:
 |        ``instantiation_error``
 |    ``Result`` is not a valid collected SMT solver result:
 |        ``domain_error(smt_result,Result)``
@@ -323,7 +323,7 @@ Enumerates, by backtracking, the collected model bindings (``Symbol-Value`` pair
 |    ``model_binding(+compound,-pair)`` - ``zero_or_more``
 
 | **Exceptions:**
-|    ``Result`` is not ground:
+|    ``Result`` is not a ground term:
 |        ``instantiation_error``
 |    ``Result`` is not a valid collected SMT solver result:
 |        ``domain_error(smt_result,Result)``
@@ -375,7 +375,7 @@ Enumerates, by backtracking, the named assertions in the collected unsatisfiable
 |    ``unsat_core_name(+compound,-atom)`` - ``zero_or_more``
 
 | **Exceptions:**
-|    ``Result`` is not ground:
+|    ``Result`` is not a ground term:
 |        ``instantiation_error``
 |    ``Result`` is not a valid collected SMT solver result:
 |        ``domain_error(smt_result,Result)``
@@ -400,7 +400,7 @@ Enumerates, by backtracking, ``status(Status)`` and the stored result properties
 |    ``result_property(+compound,?compound)`` - ``zero_or_more``
 
 | **Exceptions:**
-|    ``Result`` is not ground:
+|    ``Result`` is not a ground term:
 |        ``instantiation_error``
 |    ``Result`` is not a valid collected SMT solver result:
 |        ``domain_error(smt_result,Result)``
@@ -425,7 +425,7 @@ Prints a single collected result (status and, when present, model bindings and u
 |    ``print_result(+compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Result`` is not ground:
+|    ``Result`` is not a ground term:
 |        ``instantiation_error``
 |    ``Result`` is not a valid collected SMT solver result:
 |        ``domain_error(smt_result,Result)``
@@ -452,7 +452,7 @@ Prints each collected result in ``Results``, in order, separating consecutive re
 |    ``print_results(+list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Results`` is not ground:
+|    ``Results`` is not a ground term:
 |        ``instantiation_error``
 |    ``Results`` is ground but not a list:
 |        ``type_error(list,Results)``

@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-09,
+		date is 2026-11-11,
 		comment is 'Decoding of the MiniZinc ``--json-stream`` message sequence into a collected result.'
 	]).
 
@@ -39,8 +39,8 @@
 			'A ``--json-stream`` line is not valid JSON' - domain_error(minizinc_output, json-'Line'),
 			'A JSON message field has an invalid type or value' - domain_error(minizinc_output, 'Field'-'Value'),
 			'A JSON message is missing a required field' - domain_error(minizinc_output, 'Field'-missing),
-			'``RawStatus`` is not ground' - instantiation_error,
-			'``NormalizedStatus`` is not ground' - instantiation_error,
+			'``RawStatus`` is not a ground term' - instantiation_error,
+			'``NormalizedStatus`` is not a ground term' - instantiation_error,
 			'``NormalizedStatus`` is not ``exit(0)`` and no JSON-stream message was produced' - domain_error(minizinc_process_status, 'NormalizedStatus'),
 			'``Diagnostics`` is a partial list or a list with an element ``Element`` which is a variable' - instantiation_error,
 			'``Diagnostics`` is neither a partial list nor a list of character codes' - type_error(codes, 'Diagnostics')

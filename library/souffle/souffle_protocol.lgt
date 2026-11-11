@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-10,
+		date is 2026-11-11,
 		comment is 'Protocol for process-backed Souffle Datalog solving, source generation, and collected result inspection.'
 	]).
 
@@ -34,7 +34,7 @@
 		comment is 'Solves a source with default options using the external Souffle CLI and returns a collected result after cleanup. Valid sources are ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, and ``file(Path)``. No ``.output``/``.printsize`` relations are decoded unless requested via the ``outputs/1``/``printsizes/1`` options of ``solve/3``.',
 		argnames is ['Source', 'Result'],
 		exceptions is [
-			'``Source`` is not ground' - instantiation_error,
+			'``Source`` is not a ground term' - instantiation_error,
 			'``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``souffle_problem_protocol``' - domain_error(souffle_source, 'Source'),
 			'``Statements`` is ground but not a list' - type_error(list, 'Statements'),
 			'A statement enumerated by the provider object is not a valid statement' - domain_error(souffle_statement, 'Statement'),
@@ -61,7 +61,7 @@
 		comment is 'Solves a source using executable, parallelism, warning, compilation, EDB facts, and decoded-relation options. Repeated options use the first occurrence. Valid sources are ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, and ``file(Path)``. The ``outputs/1`` option lists which ``.output`` relations to decode and their column types; the ``printsizes/1`` option lists which ``.printsize`` relations to decode.',
 		argnames is ['Source', 'Result', 'Options'],
 		exceptions is [
-			'``Source`` is not ground' - instantiation_error,
+			'``Source`` is not a ground term' - instantiation_error,
 			'``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``souffle_problem_protocol``' - domain_error(souffle_source, 'Source'),
 			'``Statements`` is ground but not a list' - type_error(list, 'Statements'),
 			'A statement enumerated by the provider object is not a valid statement' - domain_error(souffle_statement, 'Statement'),
@@ -95,7 +95,7 @@
 		comment is 'Generates and prints Datalog source to the current output, equivalent to ``program/2`` followed by ``print_program/1``, without invoking Souffle.',
 		argnames is ['Source'],
 		exceptions is [
-			'``Source`` is not ground' - instantiation_error,
+			'``Source`` is not a ground term' - instantiation_error,
 			'``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``souffle_problem_protocol``' - domain_error(souffle_source, 'Source'),
 			'``Statements`` is ground but not a list' - type_error(list, 'Statements'),
 			'A statement enumerated by the provider object is not a valid statement' - domain_error(souffle_statement, 'Statement'),
@@ -116,7 +116,7 @@
 		comment is 'Returns Datalog source codes from ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, or ``file(Path)`` without invoking Souffle.',
 		argnames is ['Source', 'Codes'],
 		exceptions is [
-			'``Source`` is not ground' - instantiation_error,
+			'``Source`` is not a ground term' - instantiation_error,
 			'``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``souffle_problem_protocol``' - domain_error(souffle_source, 'Source'),
 			'``Statements`` is ground but not a list' - type_error(list, 'Statements'),
 			'A statement enumerated by the provider object is not a valid statement' - domain_error(souffle_statement, 'Statement'),
@@ -136,7 +136,7 @@
 		comment is 'Prints Datalog character codes to the current output without adding a newline or invoking Souffle.',
 		argnames is ['Codes'],
 		exceptions is [
-			'``Codes`` is not ground' - instantiation_error,
+			'``Codes`` is not a ground term' - instantiation_error,
 			'``Codes`` is ground but not a list of character codes' - type_error(codes, 'Codes'),
 			'An element ``Code`` of the list ``Codes`` is ground but not an integer' - type_error(integer, 'Code'),
 			'An element ``Code`` of the list ``Codes`` is an integer but not a valid character code' - domain_error(character_code, 'Code'),
@@ -150,7 +150,7 @@
 		comment is 'Enumerates, by backtracking, decoded ``.output`` relations collected in a result: the relation name, its requested column types, and its rows (each row a list of decoded Prolog values, one per column).',
 		argnames is ['Result', 'Name', 'Columns', 'Rows'],
 		exceptions is [
-			'``Result`` is not ground' - instantiation_error,
+			'``Result`` is not a ground term' - instantiation_error,
 			'``Result`` is not a valid collected Souffle result' - domain_error(souffle_result, 'Result')
 		]
 	]).
@@ -161,7 +161,7 @@
 		comment is 'Enumerates, by backtracking, decoded ``.printsize`` relation counts collected in a result.',
 		argnames is ['Result', 'Name', 'Count'],
 		exceptions is [
-			'``Result`` is not ground' - instantiation_error,
+			'``Result`` is not a ground term' - instantiation_error,
 			'``Result`` is not a valid collected Souffle result' - domain_error(souffle_result, 'Result')
 		]
 	]).
@@ -172,7 +172,7 @@
 		comment is 'Enumerates, by backtracking, the stored result properties (``raw_status/1``, ``process_status/1``, and ``diagnostics/1``).',
 		argnames is ['Result', 'Property'],
 		exceptions is [
-			'``Result`` is not ground' - instantiation_error,
+			'``Result`` is not a ground term' - instantiation_error,
 			'``Result`` is not a valid collected Souffle result' - domain_error(souffle_result, 'Result')
 		]
 	]).
@@ -183,7 +183,7 @@
 		comment is 'Prints collected relations and printsize counts to the current output, without invoking Souffle.',
 		argnames is ['Result'],
 		exceptions is [
-			'``Result`` is not ground' - instantiation_error,
+			'``Result`` is not a ground term' - instantiation_error,
 			'``Result`` is not a valid collected Souffle result' - domain_error(souffle_result, 'Result'),
 			'The current output stream does not allow writing' - permission_error(output, stream, 'Stream')
 		]

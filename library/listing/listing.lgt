@@ -22,9 +22,9 @@
 :- category(listing).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2024-01-26,
+		date is 2024-11-11,
 		comment is 'Listing predicates.'
 	]).
 
@@ -42,7 +42,7 @@
 		comment is 'Lists all clauses of a visible dynamic predicate or non-terminal to the current output stream. When the argument is a clause head, lists all matching clauses.',
 		argnames is ['Spec'],
 		exceptions is [
-			'``Spec`` is not ground' - instantiation_error,
+			'``Spec`` is not a ground term' - instantiation_error,
 			'``Spec`` is ground but not a valid predicate indicator' - type_error(predicate_indicator, 'Spec'),
 			'``Spec`` is ground but not a valid non-terminal indicator' - type_error(non_terminal_indicator, 'Spec'),
 			'``Spec`` is a predicate indicator but not a visible predicate' - existence_error(predicate, 'Spec'),

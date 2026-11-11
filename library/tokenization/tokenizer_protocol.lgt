@@ -22,9 +22,9 @@
 :- protocol(tokenizer_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-09-08,
+		date is 2026-11-11,
 		comment is 'Tokenization protocol for text represented as atoms, lists of characters, or lists of character codes.',
 		see_also is [sentence_splitter_protocol, tokenizer_language_protocol, tokenizer(_, _)]
 	]).
@@ -40,7 +40,7 @@
 			'The ``Language`` parameter is a variable' - instantiation_error,
 			'The ``Language`` parameter neither a variable nor an object identifier' - type_error(object_identifier, 'Language'),
 			'The ``Language`` parameter is an object identifier but not an object conforming to ``tokenizer_language_protocol``' - domain_error(tokenizer_language_protocol, 'Language'),
-			'``Text`` is not ground' - instantiation_error,
+			'``Text`` is not a ground term' - instantiation_error,
 			'The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom' - type_error(atom, 'Text'),
 			'The ``Representation`` parameter is ``chars`` but ``Text`` is not a list of characters' - type_error(chars, 'Text'),
 			'The ``Representation`` parameter is ``codes`` but ``Text`` is not a list of character codes' - type_error(codes, 'Text')
@@ -58,7 +58,7 @@
 			'The ``Language`` parameter is a variable' - instantiation_error,
 			'The ``Language`` parameter neither a variable nor an object identifier' - type_error(object_identifier, 'Language'),
 			'The ``Language`` parameter is an object identifier but not an object conforming to ``tokenizer_language_protocol``' - domain_error(tokenizer_language_protocol, 'Language'),
-			'``Text`` is not ground' - instantiation_error,
+			'``Text`` is not a ground term' - instantiation_error,
 			'The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom' - type_error(atom, 'Text'),
 			'The ``Representation`` parameter is ``chars`` but ``Text`` is not a list of characters' - type_error(chars, 'Text'),
 			'The ``Representation`` parameter is ``codes`` but ``Text`` is not a list of character codes' - type_error(codes, 'Text'),
@@ -81,7 +81,7 @@
 			'The ``Language`` parameter is a variable' - instantiation_error,
 			'The ``Language`` parameter neither a variable nor an object identifier' - type_error(object_identifier, 'Language'),
 			'The ``Language`` parameter is an object identifier but not an object conforming to ``tokenizer_language_protocol``' - domain_error(tokenizer_language_protocol, 'Language'),
-			'``Text`` is not ground' - instantiation_error,
+			'``Text`` is not a ground term' - instantiation_error,
 			'The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom' - type_error(atom, 'Text'),
 			'The ``Representation`` parameter is ``chars`` but ``Text`` is not a list of characters' - type_error(chars, 'Text'),
 			'The ``Representation`` parameter is ``codes`` but ``Text`` is not a list of character codes' - type_error(codes, 'Text')
@@ -99,7 +99,7 @@
 			'The ``Language`` parameter is a variable' - instantiation_error,
 			'The ``Language`` parameter neither a variable nor an object identifier' - type_error(object_identifier, 'Language'),
 			'The ``Language`` parameter is an object identifier but not an object conforming to ``tokenizer_language_protocol``' - domain_error(tokenizer_language_protocol, 'Language'),
-			'``Text`` is not ground' - instantiation_error,
+			'``Text`` is not a ground term' - instantiation_error,
 			'The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom' - type_error(atom, 'Text'),
 			'The ``Representation`` parameter is ``chars`` but ``Text`` is not a list of characters' - type_error(chars, 'Text'),
 			'The ``Representation`` parameter is ``codes`` but ``Text`` is not a list of character codes' - type_error(codes, 'Text'),

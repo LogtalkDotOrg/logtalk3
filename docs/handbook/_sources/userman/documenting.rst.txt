@@ -272,13 +272,16 @@ resource errors.
 For each exception, use of *controlled language* as found, e.g., in the
 ISO Prolog Core standard and this Handbook is advised. Some examples:
 
-Instantiation error when one or more arguments cannot be a variable
+Instantiation error when an argument (typically atomic) cannot be a variable
    ``Argument`` is a variable
 
    ``Argument1`` and ``Argument2`` are variables
 
 Instantiation error when a closed list with bound elements is required
    ``Argument`` is a partial list or a list with an element ``Element`` which is a variable
+
+Instantiation error when a compound term (but not a list) must be ground
+   ``Argument`` is not a ground term
 
 Uninstantiation error when an argument is not a variable
    ``Argument`` is not a variable

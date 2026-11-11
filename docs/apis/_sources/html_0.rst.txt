@@ -14,8 +14,8 @@ HTML generation.
 |    ``logtalk_load(html(loader))``
 
 | **Author:** Paul Brown and Paulo Moura
-| **Version:** 0:5:0
-| **Date:** 2026-09-12
+| **Version:** 0:5:1
+| **Date:** 2026-11-11
 
 | **Compilation flags:**
 |    ``static``
@@ -54,9 +54,9 @@ Generates HTML content using the representation specified in the first argument 
 |    ``generate(+compound,++term)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Sink`` is not ground:
+|    ``Sink`` is not a ground term:
 |        ``instantiation_error``
-|    ``Term`` is not ground:
+|    ``Term`` is not a ground term:
 |        ``instantiation_error``
 |    ``Sink`` is ground but not a valid sink term:
 |        ``domain_error(html_sink,Sink)``

@@ -22,9 +22,9 @@
 :- protocol(lemmatizer_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-09-08,
+		date is 2026-11-11,
 		comment is 'Lemmatization protocol for words represented as atoms, lists of characters, or lists of character codes.',
 		see_also is [lemmatizer_language_protocol, lemmatizer(_, _)]
 	]).
@@ -40,7 +40,7 @@
 			'The ``Language`` parameter is a variable' - instantiation_error,
 			'The ``Language`` parameter neither a variable nor an object identifier' - type_error(object_identifier, 'Language'),
 			'The ``Language`` parameter is an object identifier but not an object conforming to ``lemmatizer_language_protocol``' - domain_error(lemmatizer_language_protocol, 'Language'),
-			'``Word`` is not ground' - instantiation_error,
+			'``Word`` is not a ground term' - instantiation_error,
 			'The ``Representation`` parameter is ``atom`` but ``Word`` is not an atom' - type_error(atom, 'Word'),
 			'The ``Representation`` parameter is ``chars`` but ``Word`` is not a list of characters' - type_error(chars, 'Word'),
 			'The ``Representation`` parameter is ``codes`` but ``Word`` is not a list of character codes' - type_error(codes, 'Word')
@@ -58,7 +58,7 @@
 			'The ``Language`` parameter is a variable' - instantiation_error,
 			'The ``Language`` parameter neither a variable nor an object identifier' - type_error(object_identifier, 'Language'),
 			'The ``Language`` parameter is an object identifier but not an object conforming to ``lemmatizer_language_protocol``' - domain_error(lemmatizer_language_protocol, 'Language'),
-			'``Word`` is not ground' - instantiation_error,
+			'``Word`` is not a ground term' - instantiation_error,
 			'The ``Representation`` parameter is ``atom`` but ``Word`` is not an atom' - type_error(atom, 'Word'),
 			'The ``Representation`` parameter is ``chars`` but ``Word`` is not a list of characters' - type_error(chars, 'Word'),
 			'The ``Representation`` parameter is ``codes`` but ``Word`` is not a list of character codes' - type_error(codes, 'Word'),
@@ -84,7 +84,7 @@
 			'The ``Language`` parameter is an object identifier but not an object conforming to ``lemmatizer_language_protocol``' - domain_error(lemmatizer_language_protocol, 'Language'),
 			'``Words`` is a variable or a partial list' - instantiation_error,
 			'``Words`` is neither a variable nor a list' - type_error(list, 'Words'),
-			'An element ``Word`` of the list ``Words`` is not ground' - instantiation_error,
+			'An element ``Word`` of the list ``Words`` is not a ground term' - instantiation_error,
 			'The ``Representation`` parameter is ``atom`` but a ground element ``Word`` of the list ``Words`` is not an atom' - type_error(atom, 'Word'),
 			'The ``Representation`` parameter is ``chars`` but an element ``Word`` of the list ``Words`` is not a list of characters' - type_error(chars, 'Word'),
 			'The ``Representation`` parameter is ``codes`` but an element ``Word`` of the list ``Words`` is not a list of character codes' - type_error(codes, 'Word')
@@ -104,7 +104,7 @@
 			'The ``Language`` parameter is an object identifier but not an object conforming to ``lemmatizer_language_protocol``' - domain_error(lemmatizer_language_protocol, 'Language'),
 			'``Words`` is a variable or a partial list' - instantiation_error,
 			'``Words`` is neither a variable nor a list' - type_error(list, 'Words'),
-			'An element ``Word`` of the list ``Words`` is not ground' - instantiation_error,
+			'An element ``Word`` of the list ``Words`` is not a ground term' - instantiation_error,
 			'The ``Representation`` parameter is ``atom`` but a ground element ``Word`` of the list ``Words`` is not an atom' - type_error(atom, 'Word'),
 			'The ``Representation`` parameter is ``chars`` but an element ``Word`` of the list ``Words`` is not a list of characters' - type_error(chars, 'Word'),
 			'The ``Representation`` parameter is ``codes`` but an element ``Word`` of the list ``Words`` is not a list of character codes' - type_error(codes, 'Word'),

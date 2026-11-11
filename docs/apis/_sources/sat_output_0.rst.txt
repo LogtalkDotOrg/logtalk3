@@ -15,7 +15,7 @@ Whole-document Kissat, CaDiCaL, Glucose, and Z3 plain-text output decoding.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-11-09
+| **Date:** 2026-11-11
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -55,7 +55,7 @@ Decodes captured stdout and process metadata into a collected ``sat_result(Statu
 |    ``decode(+atom,+list(code),+term,+compound,+list(code),+list(compound),+term,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Solver`` is not ground:
+|    ``Solver`` is not a ground term:
 |        ``instantiation_error``
 |    ``Solver`` is neither a variable nor an atom:
 |        ``type_error(atom,Solver)``
@@ -69,9 +69,9 @@ Decodes captured stdout and process metadata into a collected ``sat_result(Statu
 |        ``domain_error(sat_output,witness_terminator_missing)``
 |    A witness literal number has no entry in the variable table:
 |        ``domain_error(sat_output,variable(Number))``
-|    ``RawStatus`` is not ground:
+|    ``RawStatus`` is not a ground term:
 |        ``instantiation_error``
-|    ``NormalizedStatus`` is not ground:
+|    ``NormalizedStatus`` is not a ground term:
 |        ``instantiation_error``
 |    ``NormalizedStatus`` is fatal or inconsistent with the decoded solver result:
 |        ``domain_error(sat_process_status,NormalizedStatus)``
@@ -83,7 +83,7 @@ Decodes captured stdout and process metadata into a collected ``sat_result(Statu
 |        ``instantiation_error``
 |    ``SourceMap`` is neither a variable nor a list:
 |        ``type_error(list,SourceMap)``
-|    ``Variables`` is not ground:
+|    ``Variables`` is not a ground term:
 |        ``instantiation_error``
 |    ``Variables`` is ground but neither ``none`` nor a list of pairs:
 |        ``type_error(list(pair),Variables)``

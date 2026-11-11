@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-09,
+		date is 2026-11-11,
 		comment is 'Whole-document Kissat, CaDiCaL, Glucose, and Z3 plain-text output decoding.'
 	]).
 
@@ -34,21 +34,21 @@
 		comment is 'Decodes captured stdout and process metadata into a collected ``sat_result(Status, Model, Properties)`` term, mapping reported literals back through an optional ``Variables`` table.',
 		argnames is ['Solver', 'Codes', 'RawStatus', 'NormalizedStatus', 'Diagnostics', 'SourceMap', 'Variables', 'Result'],
 		exceptions is [
-			'``Solver`` is not ground' - instantiation_error,
+			'``Solver`` is not a ground term' - instantiation_error,
 			'``Solver`` is neither a variable nor an atom' - type_error(atom, 'Solver'),
 			'``Codes`` is a partial list or a list with an element ``Element`` which is a variable' - instantiation_error,
 			'``Codes`` is neither a partial list nor a list of character codes' - type_error(codes, 'Codes'),
 			'``Codes`` has no status line or an unsupported status label' - domain_error(sat_output, 'Field'-'Value'),
 			'The witness line is missing its zero terminator' - domain_error(sat_output, witness_terminator_missing),
 			'A witness literal number has no entry in the variable table' - domain_error(sat_output, variable('Number')),
-			'``RawStatus`` is not ground' - instantiation_error,
-			'``NormalizedStatus`` is not ground' - instantiation_error,
+			'``RawStatus`` is not a ground term' - instantiation_error,
+			'``NormalizedStatus`` is not a ground term' - instantiation_error,
 			'``NormalizedStatus`` is fatal or inconsistent with the decoded solver result' - domain_error(sat_process_status, 'NormalizedStatus'),
 			'``Diagnostics`` is a partial list or a list with an element ``Element`` which is a variable' - instantiation_error,
 			'``Diagnostics`` is neither a partial list nor a list of character codes' - type_error(codes, 'Diagnostics'),
 			'``SourceMap`` is a partial list or a list with an element ``Element`` which is a variable' - instantiation_error,
 			'``SourceMap`` is neither a variable nor a list' - type_error(list, 'SourceMap'),
-			'``Variables`` is not ground' - instantiation_error,
+			'``Variables`` is not a ground term' - instantiation_error,
 			'``Variables`` is ground but neither ``none`` nor a list of pairs' - type_error(list(pair), 'Variables')
 		]
 	]).

@@ -14,8 +14,8 @@ Text normalization protocol for text represented as atoms, lists of characters, 
 |    ``logtalk_load(text_normalization(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-09-08
+| **Version:** 1:0:1
+| **Date:** 2026-11-11
 
 | **Compilation flags:**
 |    ``static``
@@ -71,7 +71,7 @@ Normalizes text to the specified Unicode normalization form. Valid forms are ``n
 |        ``type_error(atom,Form)``
 |    ``Form`` is not a supported Unicode normalization form:
 |        ``domain_error(unicode_normalization_form,Form)``
-|    ``Text`` is not ground:
+|    ``Text`` is not a ground term:
 |        ``instantiation_error``
 |    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
 |        ``type_error(atom,Text)``
@@ -112,7 +112,7 @@ Canonically decomposes text, removes Unicode mark characters, and returns NFC te
 |        ``type_error(object_identifier,Profile)``
 |    The ``Profile`` parameter is an object identifier but not an object conforming to  ``text_normalization_profile_protocol``:
 |        ``domain_error(text_normalization_profile,Profile)``
-|    ``Text`` is not ground:
+|    ``Text`` is not a ground term:
 |        ``instantiation_error``
 |    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
 |        ``type_error(atom,Text)``
@@ -153,7 +153,7 @@ Removes diacritics and applies profile-defined transliterations for characters w
 |        ``type_error(object_identifier,Profile)``
 |    The ``Profile`` parameter is an object identifier but not an object conforming to  ``text_normalization_profile_protocol``:
 |        ``domain_error(text_normalization_profile,Profile)``
-|    ``Text`` is not ground:
+|    ``Text`` is not a ground term:
 |        ``instantiation_error``
 |    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
 |        ``type_error(atom,Text)``
@@ -194,7 +194,7 @@ Applies full default Unicode case folding, unless overridden by the selected pro
 |        ``type_error(object_identifier,Profile)``
 |    The ``Profile`` parameter is an object identifier but not an object conforming to  ``text_normalization_profile_protocol``:
 |        ``domain_error(text_normalization_profile,Profile)``
-|    ``Text`` is not ground:
+|    ``Text`` is not a ground term:
 |        ``instantiation_error``
 |    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
 |        ``type_error(atom,Text)``
@@ -235,7 +235,7 @@ Converts text to lowercase using the selected profile and Unicode default casing
 |        ``type_error(object_identifier,Profile)``
 |    The ``Profile`` parameter is an object identifier but not an object conforming to  ``text_normalization_profile_protocol``:
 |        ``domain_error(text_normalization_profile,Profile)``
-|    ``Text`` is not ground:
+|    ``Text`` is not a ground term:
 |        ``instantiation_error``
 |    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
 |        ``type_error(atom,Text)``
@@ -276,7 +276,7 @@ Converts text to uppercase using the selected profile and Unicode default casing
 |        ``type_error(object_identifier,Profile)``
 |    The ``Profile`` parameter is an object identifier but not an object conforming to  ``text_normalization_profile_protocol``:
 |        ``domain_error(text_normalization_profile,Profile)``
-|    ``Text`` is not ground:
+|    ``Text`` is not a ground term:
 |        ``instantiation_error``
 |    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
 |        ``type_error(atom,Text)``
@@ -317,7 +317,7 @@ Converts text to title case using the library simple word-boundary definition.
 |        ``type_error(object_identifier,Profile)``
 |    The ``Profile`` parameter is an object identifier but not an object conforming to  ``text_normalization_profile_protocol``:
 |        ``domain_error(text_normalization_profile,Profile)``
-|    ``Text`` is not ground:
+|    ``Text`` is not a ground term:
 |        ``instantiation_error``
 |    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
 |        ``type_error(atom,Text)``
@@ -358,7 +358,7 @@ Decodes semicolon-terminated XML, numeric, and profile-defined named character r
 |        ``type_error(object_identifier,Profile)``
 |    The ``Profile`` parameter is an object identifier but not an object conforming to  ``text_normalization_profile_protocol``:
 |        ``domain_error(text_normalization_profile,Profile)``
-|    ``Text`` is not ground:
+|    ``Text`` is not a ground term:
 |        ``instantiation_error``
 |    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
 |        ``type_error(atom,Text)``
@@ -401,7 +401,7 @@ Decodes semicolon-terminated character references. The recognized option is ``un
 |        ``type_error(object_identifier,Profile)``
 |    The ``Profile`` parameter is an object identifier but not an object conforming to  ``text_normalization_profile_protocol``:
 |        ``domain_error(text_normalization_profile,Profile)``
-|    ``Text`` is not ground:
+|    ``Text`` is not a ground term:
 |        ``instantiation_error``
 |    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
 |        ``type_error(atom,Text)``
@@ -456,7 +456,7 @@ Normalizes whitespace using default options.
 |        ``type_error(object_identifier,Profile)``
 |    The ``Profile`` parameter is an object identifier but not an object conforming to  ``text_normalization_profile_protocol``:
 |        ``domain_error(text_normalization_profile,Profile)``
-|    ``Text`` is not ground:
+|    ``Text`` is not a ground term:
 |        ``instantiation_error``
 |    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
 |        ``type_error(atom,Text)``
@@ -497,7 +497,7 @@ Normalizes whitespace. Recognized options are ``trim(Boolean)``, ``collapse(none
 |        ``type_error(object_identifier,Profile)``
 |    The ``Profile`` parameter is an object identifier but not an object conforming to  ``text_normalization_profile_protocol``:
 |        ``domain_error(text_normalization_profile,Profile)``
-|    ``Text`` is not ground:
+|    ``Text`` is not a ground term:
 |        ``instantiation_error``
 |    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
 |        ``type_error(atom,Text)``
@@ -548,7 +548,7 @@ Cleans text using the default normalization pipeline options.
 |        ``type_error(object_identifier,Profile)``
 |    The ``Profile`` parameter is an object identifier but not an object conforming to  ``text_normalization_profile_protocol``:
 |        ``domain_error(text_normalization_profile,Profile)``
-|    ``Text`` is not ground:
+|    ``Text`` is not a ground term:
 |        ``instantiation_error``
 |    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
 |        ``type_error(atom,Text)``
@@ -591,7 +591,7 @@ Cleans text by applying entity decoding, case conversion, diacritic handling, Un
 |        ``type_error(object_identifier,Profile)``
 |    The ``Profile`` parameter is an object identifier but not an object conforming to  ``text_normalization_profile_protocol``:
 |        ``domain_error(text_normalization_profile,Profile)``
-|    ``Text`` is not ground:
+|    ``Text`` is not a ground term:
 |        ``instantiation_error``
 |    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
 |        ``type_error(atom,Text)``

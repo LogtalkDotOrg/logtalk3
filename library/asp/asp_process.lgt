@@ -27,7 +27,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-09,
+		date is 2026-11-11,
 		comment is 'Isolated operating-system shell transport for ASP solver CLIs.'
 	]).
 
@@ -58,7 +58,7 @@
 			'``Arguments`` is neither a variable nor a list' - type_error(list(atom), 'Arguments'),
 			'An element ``Argument`` of the list ``Arguments`` is neither a variable nor an atom' - type_error(atom, 'Argument'),
 			'``Executable`` or an element ``Argument`` of the list ``Arguments`` contains a null character' - domain_error(asp_shell_argument, 'Argument'),
-			'``Source`` is not ground' - instantiation_error,
+			'``Source`` is not a ground term' - instantiation_error,
 			'``Source`` is neither ``file(Path)`` nor ``codes(Codes)``' - domain_error(asp_process_source, 'Source'),
 			'A launcher dependency does not exist' - existence_error(command, 'Command'),
 			'A source or capture file does not exist' - existence_error(source_sink, 'Path'),

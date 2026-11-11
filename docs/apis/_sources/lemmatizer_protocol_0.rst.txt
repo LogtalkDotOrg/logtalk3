@@ -14,8 +14,8 @@ Lemmatization protocol for words represented as atoms, lists of characters, or l
 |    ``logtalk_load(lemmatization(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-09-08
+| **Version:** 1:0:1
+| **Date:** 2026-11-11
 
 | **Compilation flags:**
 |    ``static``
@@ -65,7 +65,7 @@ Enumerates the distinct lemmas of a word in provider preference order. Returns t
 |        ``type_error(object_identifier,Language)``
 |    The ``Language`` parameter is an object identifier but not an object conforming to ``lemmatizer_language_protocol``:
 |        ``domain_error(lemmatizer_language_protocol,Language)``
-|    ``Word`` is not ground:
+|    ``Word`` is not a ground term:
 |        ``instantiation_error``
 |    The ``Representation`` parameter is ``atom`` but ``Word`` is not an atom:
 |        ``type_error(atom,Word)``
@@ -104,7 +104,7 @@ Lemmatizes a word using the given options. Recognized options are ``part_of_spee
 |        ``type_error(object_identifier,Language)``
 |    The ``Language`` parameter is an object identifier but not an object conforming to ``lemmatizer_language_protocol``:
 |        ``domain_error(lemmatizer_language_protocol,Language)``
-|    ``Word`` is not ground:
+|    ``Word`` is not a ground term:
 |        ``instantiation_error``
 |    The ``Representation`` parameter is ``atom`` but ``Word`` is not an atom:
 |        ``type_error(atom,Word)``
@@ -159,7 +159,7 @@ Lemmatizes a list of words, selecting the first lemma for each word and preservi
 |        ``instantiation_error``
 |    ``Words`` is neither a variable nor a list:
 |        ``type_error(list,Words)``
-|    An element ``Word`` of the list ``Words`` is not ground:
+|    An element ``Word`` of the list ``Words`` is not a ground term:
 |        ``instantiation_error``
 |    The ``Representation`` parameter is ``atom`` but a ground element ``Word`` of the list ``Words`` is not an atom:
 |        ``type_error(atom,Word)``
@@ -202,7 +202,7 @@ Lemmatizes a list of words using the given options. In addition to the scalar op
 |        ``instantiation_error``
 |    ``Words`` is neither a variable nor a list:
 |        ``type_error(list,Words)``
-|    An element ``Word`` of the list ``Words`` is not ground:
+|    An element ``Word`` of the list ``Words`` is not a ground term:
 |        ``instantiation_error``
 |    The ``Representation`` parameter is ``atom`` but a ground element ``Word`` of the list ``Words`` is not an atom:
 |        ``type_error(atom,Word)``

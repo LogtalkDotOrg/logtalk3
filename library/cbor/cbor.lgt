@@ -22,9 +22,9 @@
 :- object(cbor(_StringRepresentation_)).
 
 	:- info([
-		version is 0:12:2,
+		version is 0:12:3,
 		author is 'Paulo Moura',
-		date is 2026-10-15,
+		date is 2026-11-11,
 		comment is 'Concise Binary Object Representation (CBOR) format exporter and importer.',
 		parameters is [
 			'StringRepresentation' - 'Text representation to be used when decoding CBOR strings. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
@@ -37,7 +37,7 @@
 		comment is 'Parses a list of bytes in the CBOR format returning the corresponding term representation. Throws an error when parsing is not possible (usually due to an invalid byte sequence).',
 		argnames is ['Bytes', 'Term'],
 		exceptions is [
-			'``Bytes`` is not ground' - instantiation_error,
+			'``Bytes`` is not a ground term' - instantiation_error,
 			'``Bytes`` is not a valid CBOR byte sequence' - domain_error(cbor_byte_sequence, 'Bytes')
 		]
 	]).

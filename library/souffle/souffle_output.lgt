@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-10,
+		date is 2026-11-11,
 		comment is 'Decoding of captured stdout (``.printsize`` lines) and per-relation tab-separated CSV file content into a collected result.'
 	]).
 
@@ -43,8 +43,8 @@
 			'``Diagnostics`` is neither a partial list nor a list of character codes' - type_error(codes, 'Diagnostics'),
 			'``RelationCodes``, ``Outputs``, or ``Printsizes`` is a partial list or has a variable element' - instantiation_error,
 			'``RelationCodes``, ``Outputs``, or ``Printsizes`` is neither a partial list nor a list' - type_error(list, 'RelationCodes'),
-			'``RawStatus`` is not ground' - instantiation_error,
-			'``NormalizedStatus`` is not ground' - instantiation_error,
+			'``RawStatus`` is not a ground term' - instantiation_error,
+			'``NormalizedStatus`` is not a ground term' - instantiation_error,
 			'``NormalizedStatus`` is not ``exit(0)``' - domain_error(souffle_process_status, 'NormalizedStatus'),
 			'A requested relation in ``Outputs`` has no entry, or a ``missing`` entry, in ``RelationCodes``' - domain_error(souffle_output, 'Name'-missing),
 			'A CSV row for a requested relation has a different number of columns than declared in ``Outputs``' - domain_error(souffle_output, column_count-('Row'-'Types')),

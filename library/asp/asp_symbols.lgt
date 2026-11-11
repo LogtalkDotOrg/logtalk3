@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-09,
+		date is 2026-11-11,
 		comment is 'Parser for shown Clingo ground symbols.'
 	]).
 
@@ -34,7 +34,7 @@
 		comment is 'Parses one complete ground symbol into a canonical tagged term.',
 		argnames is ['Codes', 'Symbol'],
 		exceptions is [
-			'``Codes`` is not ground' - instantiation_error,
+			'``Codes`` is not a ground term' - instantiation_error,
 			'``Codes`` is ground but not a list of character codes' - type_error(codes, 'Codes'),
 			'``Codes`` does not represent a supported ground symbol' - domain_error(asp_symbol, 'Codes'),
 			'A numeric symbol cannot be represented as an integer' - representation_error(asp_integer)

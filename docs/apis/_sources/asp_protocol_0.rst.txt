@@ -15,7 +15,7 @@ Protocol for process-backed ASP solving, source generation, and result inspectio
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-11-09
+| **Date:** 2026-11-11
 
 | **Compilation flags:**
 |    ``static``
@@ -55,7 +55,7 @@ Solves a source with default options using the external Clingo CLI and returns a
 |    ``solve(+compound,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Source`` is not ground:
+|    ``Source`` is not a ground term:
 |        ``instantiation_error``
 |    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``asp_problem_protocol``:
 |        ``domain_error(asp_source,Source)``
@@ -112,7 +112,7 @@ Solves a source using solver selection, executable, enumeration, optimization, r
 |    ``solve(+compound,-compound,+list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Source`` is not ground:
+|    ``Source`` is not a ground term:
 |        ``instantiation_error``
 |    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``asp_problem_protocol``:
 |        ``domain_error(asp_source,Source)``
@@ -181,7 +181,7 @@ Generates and prints ASP source to the current output, equivalent to ``program/2
 |    ``program(+compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Source`` is not ground:
+|    ``Source`` is not a ground term:
 |        ``instantiation_error``
 |    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``asp_problem_protocol``:
 |        ``domain_error(asp_source,Source)``
@@ -226,7 +226,7 @@ Returns ASP source codes from ``object(Object)``, ``terms(Statements)``, ``codes
 |    ``program(+compound,-list(integer))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Source`` is not ground:
+|    ``Source`` is not a ground term:
 |        ``instantiation_error``
 |    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``asp_problem_protocol``:
 |        ``domain_error(asp_source,Source)``
@@ -269,7 +269,7 @@ Prints ASP character codes to the current output without adding a newline or inv
 |    ``print_program(+list(integer))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Codes`` is not ground:
+|    ``Codes`` is not a ground term:
 |        ``instantiation_error``
 |    ``Codes`` is ground but not a list of character codes:
 |        ``type_error(codes,Codes)``
@@ -300,7 +300,7 @@ Enumerates, by backtracking, collected ``model(Symbols, Costs, RawValues)`` reco
 |    ``model(+compound,-compound)`` - ``zero_or_more``
 
 | **Exceptions:**
-|    ``Result`` is not ground:
+|    ``Result`` is not a ground term:
 |        ``instantiation_error``
 |    ``Result`` is not a valid collected Clingo result:
 |        ``domain_error(asp_result,Result)``
@@ -325,7 +325,7 @@ Enumerates, by backtracking, ``status(Status)`` and the stored result properties
 |    ``result_property(+compound,?compound)`` - ``zero_or_more``
 
 | **Exceptions:**
-|    ``Result`` is not ground:
+|    ``Result`` is not a ground term:
 |        ``instantiation_error``
 |    ``Result`` is not a valid collected Clingo result:
 |        ``domain_error(asp_result,Result)``
@@ -350,7 +350,7 @@ Prints collected answers, optimization costs, solver status, and summary metadat
 |    ``print_result(+compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Result`` is not ground:
+|    ``Result`` is not a ground term:
 |        ``instantiation_error``
 |    ``Result`` is not a valid collected Clingo result:
 |        ``domain_error(asp_result,Result)``

@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-09,
+		date is 2026-11-11,
 		comment is 'Protocol for process-backed MiniZinc solving, source generation, and result inspection.'
 	]).
 
@@ -34,7 +34,7 @@
 		comment is 'Solves a source with default options using the external MiniZinc CLI and returns a collected result after cleanup. Valid sources are ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, and ``file(Path)``.',
 		argnames is ['Source', 'Result'],
 		exceptions is [
-			'``Source`` is not ground' - instantiation_error,
+			'``Source`` is not a ground term' - instantiation_error,
 			'``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``minizinc_problem_protocol``' - domain_error(minizinc_source, 'Source'),
 			'``Statements`` is ground but not a list' - type_error(list, 'Statements'),
 			'A statement enumerated by the provider object is not a valid statement' - domain_error(minizinc_statement, 'Statement'),
@@ -59,7 +59,7 @@
 		comment is 'Solves a source using solver selection, executable, enumeration, data, and resource options. Repeated options use the first occurrence. Valid sources are ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, and ``file(Path)``.',
 		argnames is ['Source', 'Result', 'Options'],
 		exceptions is [
-			'``Source`` is not ground' - instantiation_error,
+			'``Source`` is not a ground term' - instantiation_error,
 			'``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``minizinc_problem_protocol``' - domain_error(minizinc_source, 'Source'),
 			'``Statements`` is ground but not a list' - type_error(list, 'Statements'),
 			'A statement enumerated by the provider object is not a valid statement' - domain_error(minizinc_statement, 'Statement'),
@@ -91,7 +91,7 @@
 		comment is 'Generates and prints MiniZinc source to the current output, equivalent to ``program/2`` followed by ``print_program/1``, without invoking MiniZinc.',
 		argnames is ['Source'],
 		exceptions is [
-			'``Source`` is not ground' - instantiation_error,
+			'``Source`` is not a ground term' - instantiation_error,
 			'``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``minizinc_problem_protocol``' - domain_error(minizinc_source, 'Source'),
 			'``Statements`` is ground but not a list' - type_error(list, 'Statements'),
 			'A statement enumerated by the provider object is not a valid statement' - domain_error(minizinc_statement, 'Statement'),
@@ -112,7 +112,7 @@
 		comment is 'Returns MiniZinc source codes from ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, or ``file(Path)`` without invoking MiniZinc.',
 		argnames is ['Source', 'Codes'],
 		exceptions is [
-			'``Source`` is not ground' - instantiation_error,
+			'``Source`` is not a ground term' - instantiation_error,
 			'``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``minizinc_problem_protocol``' - domain_error(minizinc_source, 'Source'),
 			'``Statements`` is ground but not a list' - type_error(list, 'Statements'),
 			'A statement enumerated by the provider object is not a valid statement' - domain_error(minizinc_statement, 'Statement'),
@@ -132,7 +132,7 @@
 		comment is 'Prints MiniZinc character codes to the current output without adding a newline or invoking MiniZinc.',
 		argnames is ['Codes'],
 		exceptions is [
-			'``Codes`` is not ground' - instantiation_error,
+			'``Codes`` is not a ground term' - instantiation_error,
 			'``Codes`` is ground but not a list of character codes' - type_error(codes, 'Codes'),
 			'An element ``Code`` of the list ``Codes`` is ground but not an integer' - type_error(integer, 'Code'),
 			'An element ``Code`` of the list ``Codes`` is an integer but not a valid character code' - domain_error(character_code, 'Code'),
@@ -146,7 +146,7 @@
 		comment is 'Enumerates, by backtracking, collected ``solution(Values, Objective, Time)`` records without starting a process.',
 		argnames is ['Result', 'Solution'],
 		exceptions is [
-			'``Result`` is not ground' - instantiation_error,
+			'``Result`` is not a ground term' - instantiation_error,
 			'``Result`` is not a valid collected MiniZinc result' - domain_error(minizinc_result, 'Result')
 		]
 	]).
@@ -157,7 +157,7 @@
 		comment is 'Enumerates, by backtracking, ``status(Status)`` and the stored result properties.',
 		argnames is ['Result', 'Property'],
 		exceptions is [
-			'``Result`` is not ground' - instantiation_error,
+			'``Result`` is not a ground term' - instantiation_error,
 			'``Result`` is not a valid collected MiniZinc result' - domain_error(minizinc_result, 'Result')
 		]
 	]).
@@ -168,7 +168,7 @@
 		comment is 'Prints collected solutions, objective values, and solver status to the current output using MiniZinc-style markers, without invoking the solver.',
 		argnames is ['Result'],
 		exceptions is [
-			'``Result`` is not ground' - instantiation_error,
+			'``Result`` is not a ground term' - instantiation_error,
 			'``Result`` is not a valid collected MiniZinc result' - domain_error(minizinc_result, 'Result'),
 			'The current output stream does not allow writing' - permission_error(output, stream, 'Stream')
 		]

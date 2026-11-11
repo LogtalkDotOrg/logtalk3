@@ -15,7 +15,7 @@ Whole-document Clingo and Zetesis JSON output decoding.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-11-09
+| **Date:** 2026-11-11
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -80,9 +80,9 @@ Decodes CLI JSON and process metadata into a collected ``asp_result(Status, Mode
 |        ``domain_error(asp_symbol,Codes)``
 |    A numeric symbol cannot be represented as an integer:
 |        ``representation_error(asp_integer)``
-|    ``RawStatus`` is not ground:
+|    ``RawStatus`` is not a ground term:
 |        ``instantiation_error``
-|    ``NormalizedStatus``` is not ground:
+|    ``NormalizedStatus``` is not a ground term:
 |        ``instantiation_error``
 |    ``NormalizedStatus`` is fatal or inconsistent with the decoded solver result:
 |        ``domain_error(asp_process_status,NormalizedStatus)``

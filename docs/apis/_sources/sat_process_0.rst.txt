@@ -15,7 +15,7 @@ Isolated operating-system shell transport for the Kissat, CaDiCaL, Glucose, and 
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-11-09
+| **Date:** 2026-11-11
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -105,7 +105,7 @@ Runs the CLI using an owned directory and separate UTF-8 output files, returning
 |        ``type_error(atom,Argument)``
 |    ``Executable`` or an element ``Argument`` of the list ``Arguments`` contains a null character:
 |        ``domain_error(sat_shell_argument,Argument)``
-|    ``Source`` is not ground:
+|    ``Source`` is not a ground term:
 |        ``instantiation_error``
 |    ``Source`` is neither ``file(Path)`` nor ``codes(Codes)``:
 |        ``domain_error(sat_process_source,Source)``

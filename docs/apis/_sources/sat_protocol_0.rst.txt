@@ -15,7 +15,7 @@ Protocol for process-backed Kissat, CaDiCaL, Glucose, and Z3 CLI solving, source
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-11-10
+| **Date:** 2026-11-11
 
 | **Compilation flags:**
 |    ``static``
@@ -55,7 +55,7 @@ Solves a source with default options using the external SAT solver CLI and retur
 |    ``solve(+compound,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Source`` is not ground:
+|    ``Source`` is not a ground term:
 |        ``instantiation_error``
 |    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``sat_problem_protocol``:
 |        ``domain_error(sat_source,Source)``
@@ -112,7 +112,7 @@ Solves a source using ``solver/1``, ``executable/1``, ``time_limit/1``, ``confli
 |    ``solve(+compound,-compound,+list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Source`` is not ground:
+|    ``Source`` is not a ground term:
 |        ``instantiation_error``
 |    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``sat_problem_protocol``:
 |        ``domain_error(sat_source,Source)``
@@ -179,7 +179,7 @@ Generates and prints DIMACS CNF source to the current output using default optio
 |    ``program(+compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Source`` is not ground:
+|    ``Source`` is not a ground term:
 |        ``instantiation_error``
 |    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``sat_problem_protocol``:
 |        ``domain_error(sat_source,Source)``
@@ -224,7 +224,7 @@ Returns DIMACS CNF source codes from ``object(Object)``, ``terms(Statements)``, 
 |    ``program(+compound,-list(integer))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Source`` is not ground:
+|    ``Source`` is not a ground term:
 |        ``instantiation_error``
 |    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``sat_problem_protocol``:
 |        ``domain_error(sat_source,Source)``
@@ -267,7 +267,7 @@ Returns DIMACS CNF source codes from ``object(Object)``, ``terms(Statements)``, 
 |    ``program(+compound,-list(integer),+list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Source`` is not ground:
+|    ``Source`` is not a ground term:
 |        ``instantiation_error``
 |    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``sat_problem_protocol``:
 |        ``domain_error(sat_source,Source)``
@@ -320,7 +320,7 @@ Prints DIMACS CNF character codes to the current output without adding a newline
 |    ``print_program(+list(integer))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Codes`` is not ground:
+|    ``Codes`` is not a ground term:
 |        ``instantiation_error``
 |    ``Codes`` is ground but not a list of character codes:
 |        ``type_error(codes,Codes)``
@@ -351,7 +351,7 @@ Enumerates, by backtracking, the collected model literals (``+Term`` or ``-Term`
 |    ``literal(+compound,-compound)`` - ``zero_or_more``
 
 | **Exceptions:**
-|    ``Result`` is not ground:
+|    ``Result`` is not a ground term:
 |        ``instantiation_error``
 |    ``Result`` is not a valid collected SAT solver result:
 |        ``domain_error(sat_result,Result)``
@@ -376,7 +376,7 @@ Enumerates, by backtracking, ``status(Status)`` and the stored result properties
 |    ``result_property(+compound,?compound)`` - ``zero_or_more``
 
 | **Exceptions:**
-|    ``Result`` is not ground:
+|    ``Result`` is not a ground term:
 |        ``instantiation_error``
 |    ``Result`` is not a valid collected SAT solver result:
 |        ``domain_error(sat_result,Result)``
@@ -401,7 +401,7 @@ Prints the collected status and, when present, the witness literals to the curre
 |    ``print_result(+compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Result`` is not ground:
+|    ``Result`` is not a ground term:
 |        ``instantiation_error``
 |    ``Result`` is not a valid collected SAT solver result:
 |        ``domain_error(sat_result,Result)``

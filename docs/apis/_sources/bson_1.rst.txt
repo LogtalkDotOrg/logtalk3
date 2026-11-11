@@ -17,8 +17,8 @@ BSON format exporter and importer.
 |    ``logtalk_load(bson(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-08-04
+| **Version:** 1:0:1
+| **Date:** 2026-11-11
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -60,7 +60,7 @@ Parses a list of bytes in the BSON format returning the corresponding document t
 |    ``parse(@list(byte),-ground)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Bytes`` is not ground:
+|    ``Bytes`` is not a ground term:
 |        ``instantiation_error``
 |    ``Bytes`` is ground but not a valid BSON byte sequence:
 |        ``domain_error(bson_byte_sequence,Bytes)``

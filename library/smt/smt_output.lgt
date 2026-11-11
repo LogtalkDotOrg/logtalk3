@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-09,
+		date is 2026-11-11,
 		comment is 'Whole-document S-expression tokenizing, parsing, and content-based response classification for Z3, cvc5, Bitwuzla, and Yices 2 plain-text output decoding.'
 	]).
 
@@ -34,15 +34,15 @@
 		comment is 'Decodes captured stdout and process metadata into a list of collected ``smt_result(Status, Model, Properties)`` terms, one per ``check-sat``/``check-sat-assuming`` response, in order. Each response is classified by its shape (status atom, model, unsat core, or get-value pairs), so the decoder does not need the originating statement list and supports every source kind.',
 		argnames is ['Solver', 'Codes', 'RawStatus', 'NormalizedStatus', 'Diagnostics', 'SourceMap', 'Results'],
 		exceptions is [
-			'``Solver`` is not ground' - instantiation_error,
+			'``Solver`` is not a ground term' - instantiation_error,
 			'``Solver`` is neither a variable nor an atom' - type_error(atom, 'Solver'),
 			'``Codes`` is a partial list or a list with an element ``Element`` which is a variable' - instantiation_error,
 			'``Codes`` is neither a partial list nor a list of character codes' - type_error(codes, 'Codes'),
 			'``Codes`` contains an unrecognized character or an unbalanced parenthesis' - domain_error(smt_output, 'Field'-'Value'),
 			'A model, unsat core, or get-value response appears before any status response' - domain_error(smt_output, 'Response'-unexpected),
 			'The solver reported an ``(error ...)`` response' - smt_solver_reported_error('Message'),
-			'``RawStatus`` is not ground' - instantiation_error,
-			'``NormalizedStatus`` is not ground' - instantiation_error,
+			'``RawStatus`` is not a ground term' - instantiation_error,
+			'``NormalizedStatus`` is not a ground term' - instantiation_error,
 			'``NormalizedStatus`` is neither a variable nor one of ``exit(Code)``, ``unknown(Details)``, nor ``killed(Details)``' - domain_error(smt_process_status, 'NormalizedStatus'),
 			'No response was parsed and the process did not exit cleanly' - domain_error(smt_process_status, 'NormalizedStatus'),
 			'``Diagnostics`` is a partial list or a list with an element ``Element`` which is a variable' - instantiation_error,

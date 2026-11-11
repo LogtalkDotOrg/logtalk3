@@ -15,7 +15,7 @@ Protocol for process-backed Souffle Datalog solving, source generation, and coll
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-11-10
+| **Date:** 2026-11-11
 
 | **Compilation flags:**
 |    ``static``
@@ -55,7 +55,7 @@ Solves a source with default options using the external Souffle CLI and returns 
 |    ``solve(+compound,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Source`` is not ground:
+|    ``Source`` is not a ground term:
 |        ``instantiation_error``
 |    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``souffle_problem_protocol``:
 |        ``domain_error(souffle_source,Source)``
@@ -112,7 +112,7 @@ Solves a source using executable, parallelism, warning, compilation, EDB facts, 
 |    ``solve(+compound,-compound,+list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Source`` is not ground:
+|    ``Source`` is not a ground term:
 |        ``instantiation_error``
 |    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``souffle_problem_protocol``:
 |        ``domain_error(souffle_source,Source)``
@@ -183,7 +183,7 @@ Generates and prints Datalog source to the current output, equivalent to ``progr
 |    ``program(+compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Source`` is not ground:
+|    ``Source`` is not a ground term:
 |        ``instantiation_error``
 |    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``souffle_problem_protocol``:
 |        ``domain_error(souffle_source,Source)``
@@ -228,7 +228,7 @@ Returns Datalog source codes from ``object(Object)``, ``terms(Statements)``, ``c
 |    ``program(+compound,-list(integer))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Source`` is not ground:
+|    ``Source`` is not a ground term:
 |        ``instantiation_error``
 |    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``souffle_problem_protocol``:
 |        ``domain_error(souffle_source,Source)``
@@ -271,7 +271,7 @@ Prints Datalog character codes to the current output without adding a newline or
 |    ``print_program(+list(integer))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Codes`` is not ground:
+|    ``Codes`` is not a ground term:
 |        ``instantiation_error``
 |    ``Codes`` is ground but not a list of character codes:
 |        ``type_error(codes,Codes)``
@@ -302,7 +302,7 @@ Enumerates, by backtracking, decoded ``.output`` relations collected in a result
 |    ``relation(+compound,?atom,?list(atom),?list(list))`` - ``zero_or_more``
 
 | **Exceptions:**
-|    ``Result`` is not ground:
+|    ``Result`` is not a ground term:
 |        ``instantiation_error``
 |    ``Result`` is not a valid collected Souffle result:
 |        ``domain_error(souffle_result,Result)``
@@ -327,7 +327,7 @@ Enumerates, by backtracking, decoded ``.printsize`` relation counts collected in
 |    ``size(+compound,?atom,?integer)`` - ``zero_or_more``
 
 | **Exceptions:**
-|    ``Result`` is not ground:
+|    ``Result`` is not a ground term:
 |        ``instantiation_error``
 |    ``Result`` is not a valid collected Souffle result:
 |        ``domain_error(souffle_result,Result)``
@@ -352,7 +352,7 @@ Enumerates, by backtracking, the stored result properties (``raw_status/1``, ``p
 |    ``result_property(+compound,?compound)`` - ``zero_or_more``
 
 | **Exceptions:**
-|    ``Result`` is not ground:
+|    ``Result`` is not a ground term:
 |        ``instantiation_error``
 |    ``Result`` is not a valid collected Souffle result:
 |        ``domain_error(souffle_result,Result)``
@@ -377,7 +377,7 @@ Prints collected relations and printsize counts to the current output, without i
 |    ``print_result(+compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Result`` is not ground:
+|    ``Result`` is not a ground term:
 |        ``instantiation_error``
 |    ``Result`` is not a valid collected Souffle result:
 |        ``domain_error(souffle_result,Result)``

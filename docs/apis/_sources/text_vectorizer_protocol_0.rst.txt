@@ -14,8 +14,8 @@ Protocol for learning and applying text vectorization models.
 |    ``logtalk_load(text_vectorization(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-09-07
+| **Version:** 1:0:1
+| **Date:** 2026-11-11
 
 | **Compilation flags:**
 |    ``static``
@@ -65,7 +65,7 @@ Learns a vectorizer from a non-empty corpus using default options. Documents are
 |        ``instantiation_error``
 |    An element ``Document`` of the list ``Corpus`` is neither a variable nor a list:
 |        ``type_error(list,Document)``
-|    An element ``Feature`` of a document is not ground:
+|    An element ``Feature`` of a document is not a ground term:
 |        ``instantiation_error``
 |    No corpus feature satisfies the document-frequency filters:
 |        ``domain_error(non_empty_vocabulary,Corpus)``
@@ -100,7 +100,7 @@ Learns a vectorizer from a non-empty corpus using the given options. Documents a
 |        ``instantiation_error``
 |    An element ``Document`` of the list ``Corpus`` is neither a variable nor a list:
 |        ``type_error(list,Document)``
-|    An element ``Feature`` of a document is not ground:
+|    An element ``Feature`` of a document is not a ground term:
 |        ``instantiation_error``
 |    ``Options`` is a variable:
 |        ``instantiation_error``
@@ -147,7 +147,7 @@ Transforms a document into a sparse list of ``Feature-Weight`` pairs in standard
 |        ``instantiation_error``
 |    ``Document`` is neither a variable nor a list:
 |        ``type_error(list,Document)``
-|    An element ``Feature`` of the list ``Document`` is not ground:
+|    An element ``Feature`` of the list ``Document`` is not a ground term:
 |        ``instantiation_error``
 
 
@@ -182,7 +182,7 @@ Transforms all corpus documents into sparse vectors, preserving document order.
 |        ``instantiation_error``
 |    An element ``Document`` of the list ``Corpus`` is neither a variable nor a list:
 |        ``type_error(list,Document)``
-|    An element ``Feature`` of a document is not ground:
+|    An element ``Feature`` of a document is not a ground term:
 |        ``instantiation_error``
 
 
@@ -215,7 +215,7 @@ Learns a vectorizer using default options and transforms the training corpus.
 |        ``instantiation_error``
 |    An element ``Document`` of the list ``Corpus`` is neither a variable nor a list:
 |        ``type_error(list,Document)``
-|    An element ``Feature`` of a document is not ground:
+|    An element ``Feature`` of a document is not a ground term:
 |        ``instantiation_error``
 |    No corpus feature satisfies the document-frequency filters:
 |        ``domain_error(non_empty_vocabulary,Corpus)``
@@ -250,7 +250,7 @@ Learns a vectorizer using the given options and transforms the training corpus.
 |        ``instantiation_error``
 |    An element ``Document`` of the list ``Corpus`` is neither a variable nor a list:
 |        ``type_error(list,Document)``
-|    An element ``Feature`` of a document is not ground:
+|    An element ``Feature`` of a document is not a ground term:
 |        ``instantiation_error``
 |    ``Options`` is a variable:
 |        ``instantiation_error``

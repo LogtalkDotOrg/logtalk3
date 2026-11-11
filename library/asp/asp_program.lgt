@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-10,
+		date is 2026-11-11,
 		comment is 'Canonical ASP statement validation and source generation.'
 	]).
 
@@ -61,7 +61,7 @@
 		comment is 'Serializes a canonical ground symbol to ASP character codes.',
 		argnames is ['Symbol', 'Codes'],
 		exceptions is [
-			'``Symbol`` is not ground' - instantiation_error,
+			'``Symbol`` is not a ground term' - instantiation_error,
 			'``Symbol`` is ground but not a supported symbol' - domain_error(asp_symbol, 'Symbol')
 		]
 	]).

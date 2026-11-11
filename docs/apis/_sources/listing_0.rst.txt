@@ -14,8 +14,8 @@ Listing predicates.
 |    ``logtalk_load(listing(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2024-01-26
+| **Version:** 1:0:1
+| **Date:** 2024-11-11
 
 | **Compilation flags:**
 |    ``static``
@@ -74,7 +74,7 @@ Lists all clauses of a visible dynamic predicate or non-terminal to the current 
 |    ``listing(+callable)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Spec`` is not ground:
+|    ``Spec`` is not a ground term:
 |        ``instantiation_error``
 |    ``Spec`` is ground but not a valid predicate indicator:
 |        ``type_error(predicate_indicator,Spec)``

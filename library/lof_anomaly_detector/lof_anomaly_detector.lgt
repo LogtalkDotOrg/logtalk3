@@ -23,9 +23,9 @@
 	imports(anomaly_detector_common)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:0:1,
 		author is 'Paulo Moura',
-		date is 2026-10-12,
+		date is 2026-11-11,
 		comment is 'Local Outlier Factor anomaly detector with multiple distance metrics, mixed-feature support, and missing-value handling. Learns from baseline training examples selected from a dataset object implementing the ``anomaly_dataset_protocol`` protocol and returns a detector term that can be used for scoring, prediction, and export.',
 		see_also is [
 			anomaly_dataset_protocol, anomaly_detector_protocol, knn_distance_anomaly_detector,
@@ -69,7 +69,7 @@
 		comment is 'Checks prepared numeric, categorical, and missing feature values.',
 		argnames is ['FeatureTypes', 'Values'],
 		exceptions is [
-			'A bound feature value in ``Values`` is not ground' - instantiation_error,
+			'A bound feature value in ``Values`` is not a ground term' - instantiation_error,
 			'A numeric feature value is not a number' - type_error(number, 'Value'),
 			'A categorical feature value is not an atom' - type_error(atom, 'Value')
 		]
@@ -81,7 +81,7 @@
 		comment is 'Checks distinct integer identities for training examples.',
 		argnames is ['Instances', 'Seen'],
 		exceptions is [
-			'An example identifier in ``Instances`` is not ground' - instantiation_error,
+			'An example identifier in ``Instances`` is not a ground term' - instantiation_error,
 			'An example identifier is not an integer' - type_error(integer, 'Id'),
 			'An example identifier occurs more than once' - domain_error(unique_example_id, 'Id')
 		]

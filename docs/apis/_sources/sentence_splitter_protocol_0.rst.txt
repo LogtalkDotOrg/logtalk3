@@ -14,8 +14,8 @@ Sentence splitting protocol for text represented as atoms, lists of characters, 
 |    ``logtalk_load(tokenization(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-09-08
+| **Version:** 1:0:1
+| **Date:** 2026-11-11
 
 | **Compilation flags:**
 |    ``static``
@@ -65,7 +65,7 @@ Splits text into sentences using the default options.
 |        ``type_error(object_identifier,Language)``
 |    The ``Language`` parameter is an object identifier but not an object conforming to ``tokenizer_language_protocol``:
 |        ``domain_error(tokenizer_language_protocol,Language)``
-|    ``Text`` is not ground:
+|    ``Text`` is not a ground term:
 |        ``instantiation_error``
 |    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
 |        ``type_error(atom,Text)``
@@ -104,7 +104,7 @@ Splits text into sentences using the given tokenization options.
 |        ``type_error(object_identifier,Language)``
 |    The ``Language`` parameter is an object identifier but not an object conforming to ``tokenizer_language_protocol``:
 |        ``domain_error(tokenizer_language_protocol,Language)``
-|    ``Text`` is not ground:
+|    ``Text`` is not a ground term:
 |        ``instantiation_error``
 |    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
 |        ``type_error(atom,Text)``

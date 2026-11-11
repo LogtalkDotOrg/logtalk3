@@ -22,9 +22,9 @@
 :- object(bson(_StringRepresentation_)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-08-04,
+		date is 2026-11-11,
 		comment is 'BSON format exporter and importer.',
 		parameters is [
 			'StringRepresentation' - 'Text representation to be used when decoding BSON strings and keys. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
@@ -37,7 +37,7 @@
 		comment is 'Parses a list of bytes in the BSON format returning the corresponding document term. Throws an error when parsing is not possible.',
 		argnames is ['Bytes', 'Document'],
 		exceptions is [
-			'``Bytes`` is not ground' - instantiation_error,
+			'``Bytes`` is not a ground term' - instantiation_error,
 			'``Bytes`` is ground but not a valid BSON byte sequence' - domain_error(bson_byte_sequence, 'Bytes')
 		]
 	]).

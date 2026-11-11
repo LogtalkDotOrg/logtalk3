@@ -22,9 +22,9 @@
 :- object(message_pack(_StringRepresentation_)).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:1:2,
 		author is 'Paulo Moura',
-		date is 2026-06-14,
+		date is 2026-11-11,
 		comment is 'MessagePack format exporter and importer.',
 		parameters is [
 			'StringRepresentation' - 'Text representation to be used when decoding MessagePack strings. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
@@ -37,7 +37,7 @@
 		comment is 'Parses a list of bytes in the MessagePack format returning the corresponding term representation. Throws an error when parsing is not possible (usually due to an invalid byte sequence).',
 		argnames is ['Bytes', 'Term'],
 		exceptions is [
-			'``Bytes`` is not ground' - instantiation_error,
+			'``Bytes`` is not a ground term' - instantiation_error,
 			'``Bytes`` is ground but not a valid MessagePack byte sequence' - domain_error(message_pack_byte_sequence, 'Bytes')
 		]
 	]).

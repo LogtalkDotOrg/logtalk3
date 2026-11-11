@@ -14,8 +14,8 @@ LRU (Least Recently Used) cache protocol. Key-value pairs are represented as ``K
 |    ``logtalk_load(lru_caches(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-09-08
+| **Version:** 1:0:1
+| **Date:** 2026-11-11
 
 | **Compilation flags:**
 |    ``static``
@@ -139,7 +139,7 @@ Looks up a matching key-value pair without changing its recency. Fails if the ke
 |    ``lookup(+ground,?term,+cache)`` - ``zero_or_one_or_error``
 
 | **Exceptions:**
-|    ``Key`` is not ground:
+|    ``Key`` is not a ground term:
 |        ``instantiation_error``
 
 
@@ -162,7 +162,7 @@ Looks up a matching key-value pair and marks it as most recently used, returning
 |    ``get(+ground,?term,+cache,-cache)`` - ``zero_or_one_or_error``
 
 | **Exceptions:**
-|    ``Key`` is not ground:
+|    ``Key`` is not a ground term:
 |        ``instantiation_error``
 
 
@@ -185,7 +185,7 @@ Inserts or replaces a key-value pair, marks it as most recently used, and evicts
 |    ``put(+ground,+term,+cache,-cache)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Key`` is not ground:
+|    ``Key`` is not a ground term:
 |        ``instantiation_error``
 
 
@@ -208,7 +208,7 @@ Updates an existing matching key-value pair and marks it as most recently used. 
 |    ``update(+ground,?term,+term,+cache,-cache)`` - ``zero_or_one_or_error``
 
 | **Exceptions:**
-|    ``Key`` is not ground:
+|    ``Key`` is not a ground term:
 |        ``instantiation_error``
 
 
@@ -231,7 +231,7 @@ Deletes a matching key-value pair, returning the updated cache. Fails if the key
 |    ``delete(+ground,?term,+cache,-cache)`` - ``zero_or_one_or_error``
 
 | **Exceptions:**
-|    ``Key`` is not ground:
+|    ``Key`` is not a ground term:
 |        ``instantiation_error``
 
 

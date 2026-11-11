@@ -22,9 +22,9 @@
 :- protocol(text_vectorizer_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-09-07,
+		date is 2026-11-11,
 		comment is 'Protocol for learning and applying text vectorization models.',
 		see_also is [text_vectorizer]
 	]).
@@ -40,7 +40,7 @@
 			'``Corpus`` is empty' - domain_error(non_empty_corpus, 'Corpus'),
 			'An element ``Document`` of the list ``Corpus`` is a variable or a partial list' - instantiation_error,
 			'An element ``Document`` of the list ``Corpus`` is neither a variable nor a list' - type_error(list, 'Document'),
-			'An element ``Feature`` of a document is not ground' - instantiation_error,
+			'An element ``Feature`` of a document is not a ground term' - instantiation_error,
 			'No corpus feature satisfies the document-frequency filters' - domain_error(non_empty_vocabulary, 'Corpus')
 		]
 	]).
@@ -56,7 +56,7 @@
 			'``Corpus`` is empty' - domain_error(non_empty_corpus, 'Corpus'),
 			'An element ``Document`` of the list ``Corpus`` is a variable or a partial list' - instantiation_error,
 			'An element ``Document`` of the list ``Corpus`` is neither a variable nor a list' - type_error(list, 'Document'),
-			'An element ``Feature`` of a document is not ground' - instantiation_error,
+			'An element ``Feature`` of a document is not a ground term' - instantiation_error,
 			'``Options`` is a variable' - instantiation_error,
 			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
 			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
@@ -78,7 +78,7 @@
 			'``Vectorizer`` is neither a variable nor a valid text vectorizer' - domain_error(text_vectorizer, 'Vectorizer'),
 			'``Document`` is a variable or a partial list' - instantiation_error,
 			'``Document`` is neither a variable nor a list' - type_error(list, 'Document'),
-			'An element ``Feature`` of the list ``Document`` is not ground' - instantiation_error
+			'An element ``Feature`` of the list ``Document`` is not a ground term' - instantiation_error
 		]
 	]).
 
@@ -94,7 +94,7 @@
 			'``Corpus`` is neither a variable nor a list' - type_error(list, 'Corpus'),
 			'An element ``Document`` of the list ``Corpus`` is a variable or a partial list' - instantiation_error,
 			'An element ``Document`` of the list ``Corpus`` is neither a variable nor a list' - type_error(list, 'Document'),
-			'An element ``Feature`` of a document is not ground' - instantiation_error
+			'An element ``Feature`` of a document is not a ground term' - instantiation_error
 		]
 	]).
 
@@ -109,7 +109,7 @@
 			'``Corpus`` is empty' - domain_error(non_empty_corpus, 'Corpus'),
 			'An element ``Document`` of the list ``Corpus`` is a variable or a partial list' - instantiation_error,
 			'An element ``Document`` of the list ``Corpus`` is neither a variable nor a list' - type_error(list, 'Document'),
-			'An element ``Feature`` of a document is not ground' - instantiation_error,
+			'An element ``Feature`` of a document is not a ground term' - instantiation_error,
 			'No corpus feature satisfies the document-frequency filters' - domain_error(non_empty_vocabulary, 'Corpus')
 		]
 	]).
@@ -125,7 +125,7 @@
 			'``Corpus`` is empty' - domain_error(non_empty_corpus, 'Corpus'),
 			'An element ``Document`` of the list ``Corpus`` is a variable or a partial list' - instantiation_error,
 			'An element ``Document`` of the list ``Corpus`` is neither a variable nor a list' - type_error(list, 'Document'),
-			'An element ``Feature`` of a document is not ground' - instantiation_error,
+			'An element ``Feature`` of a document is not a ground term' - instantiation_error,
 			'``Options`` is a variable' - instantiation_error,
 			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
 			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,

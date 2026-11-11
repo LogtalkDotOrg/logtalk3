@@ -15,7 +15,7 @@ Whole-document S-expression tokenizing, parsing, and content-based response clas
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-11-09
+| **Date:** 2026-11-11
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -55,7 +55,7 @@ Decodes captured stdout and process metadata into a list of collected ``smt_resu
 |    ``decode(+atom,+list(code),+term,+compound,+list(code),+list(compound),-list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Solver`` is not ground:
+|    ``Solver`` is not a ground term:
 |        ``instantiation_error``
 |    ``Solver`` is neither a variable nor an atom:
 |        ``type_error(atom,Solver)``
@@ -69,9 +69,9 @@ Decodes captured stdout and process metadata into a list of collected ``smt_resu
 |        ``domain_error(smt_output,Response-unexpected)``
 |    The solver reported an ``(error ...)`` response:
 |        ``smt_solver_reported_error(Message)``
-|    ``RawStatus`` is not ground:
+|    ``RawStatus`` is not a ground term:
 |        ``instantiation_error``
-|    ``NormalizedStatus`` is not ground:
+|    ``NormalizedStatus`` is not a ground term:
 |        ``instantiation_error``
 |    ``NormalizedStatus`` is neither a variable nor one of ``exit(Code)``, ``unknown(Details)``, nor ``killed(Details)``:
 |        ``domain_error(smt_process_status,NormalizedStatus)``

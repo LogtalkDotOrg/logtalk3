@@ -14,8 +14,8 @@ N-gram generation and counting protocol.
 |    ``logtalk_load(n_grams(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-09-05
+| **Version:** 1:0:1
+| **Date:** 2026-11-11
 
 | **Compilation flags:**
 |    ``static``
@@ -63,7 +63,7 @@ Generates overlapping n-grams from a list of text tokens.
 |        ``instantiation_error``
 |    ``N`` is neither a variable nor a positive integer:
 |        ``type_error(positive_integer,Options)``
-|    ``Tokens`` is a partial list or a list with an element ``Element`` which is not ground:
+|    ``Tokens`` is a partial list or a list with an element ``Element`` which is not a ground term:
 |        ``instantiation_error``
 |    The ``Representation`` parameter is ``atom`` but a ground element ``Element`` of the list ``Tokens`` is not an atom:
 |        ``type_error(atom,Element)``
@@ -100,7 +100,7 @@ Generates n-grams from a list of text tokens using the given options.
 |        ``instantiation_error``
 |    ``N`` is neither a variable nor a positive integer:
 |        ``type_error(positive_integer,Options)``
-|    ``Tokens`` is a partial list or a list with an element ``Element`` which is not ground:
+|    ``Tokens`` is a partial list or a list with an element ``Element`` which is not a ground term:
 |        ``instantiation_error``
 |    The ``Representation`` parameter is ``atom`` but a ground element ``Element`` of the list ``Tokens`` is not an atom:
 |        ``type_error(atom,Element)``
@@ -147,7 +147,7 @@ Generates overlapping character n-grams from a text value.
 |        ``instantiation_error``
 |    ``N`` is neither a variable nor a positive integer:
 |        ``type_error(positive_integer,Options)``
-|    ``Text`` is not ground:
+|    ``Text`` is not a ground term:
 |        ``instantiation_error``
 |    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
 |        ``type_error(atom,Text)``
@@ -184,7 +184,7 @@ Generates character n-grams from a text value using the given options.
 |        ``instantiation_error``
 |    ``N`` is neither a variable nor a positive integer:
 |        ``type_error(positive_integer,Options)``
-|    ``Text`` is not ground:
+|    ``Text`` is not a ground term:
 |        ``instantiation_error``
 |    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
 |        ``type_error(atom,Text)``
@@ -273,7 +273,7 @@ Generates overlapping bigrams from a list of text tokens.
 |        ``instantiation_error``
 |    The ``Representation`` parameter neither a variable nor ``atom``, ``chars``, or ``codes``:
 |        ``domain_error(text_representation,Representation)``
-|    ``Tokens`` is a partial list or a list with an element ``Element`` which is not ground:
+|    ``Tokens`` is a partial list or a list with an element ``Element`` which is not a ground term:
 |        ``instantiation_error``
 |    The ``Representation`` parameter is ``atom`` but a ground element ``Element`` of the list ``Tokens`` is not an atom:
 |        ``type_error(atom,Element)``
@@ -306,7 +306,7 @@ Generates overlapping trigrams from a list of text tokens.
 |        ``instantiation_error``
 |    The ``Representation`` parameter neither a variable nor ``atom``, ``chars``, or ``codes``:
 |        ``domain_error(text_representation,Representation)``
-|    ``Tokens`` is a partial list or a list with an element ``Element`` which is not ground:
+|    ``Tokens`` is a partial list or a list with an element ``Element`` which is not a ground term:
 |        ``instantiation_error``
 |    The ``Representation`` parameter is ``atom`` but a ground element ``Element`` of the list ``Tokens`` is not an atom:
 |        ``type_error(atom,Element)``

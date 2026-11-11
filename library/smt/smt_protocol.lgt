@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-09,
+		date is 2026-11-11,
 		comment is 'Protocol for process-backed Z3, cvc5, Bitwuzla, and Yices 2 CLI solving, SMT-LIB 2 source generation, and collected result inspection.'
 	]).
 
@@ -34,7 +34,7 @@
 		comment is 'Solves a source with default options using the external SMT solver CLI and returns a collected result per ``check-sat`` command, in script order, after cleanup. Valid sources are ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, and ``file(Path)``.',
 		argnames is ['Source', 'Results'],
 		exceptions is [
-			'``Source`` is not ground' - instantiation_error,
+			'``Source`` is not a ground term' - instantiation_error,
 			'``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``smt_problem_protocol``' - domain_error(smt_source, 'Source'),
 			'``Statements`` is ground but not a list' - type_error(list, 'Statements'),
 			'A statement enumerated by the provider object is not a valid statement' - domain_error(smt_statement, 'Statement'),
@@ -61,7 +61,7 @@
 		comment is 'Solves a source using ``solver/1``, ``executable/1``, and ``time_limit/1`` options. Repeated options use the first occurrence. Valid sources are ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, and ``file(Path)``.',
 		argnames is ['Source', 'Results', 'Options'],
 		exceptions is [
-			'``Source`` is not ground' - instantiation_error,
+			'``Source`` is not a ground term' - instantiation_error,
 			'``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``smt_problem_protocol``' - domain_error(smt_source, 'Source'),
 			'``Statements`` is ground but not a list' - type_error(list, 'Statements'),
 			'A statement enumerated by the provider object is not a valid statement' - domain_error(smt_statement, 'Statement'),
@@ -93,7 +93,7 @@
 		comment is 'Generates and prints SMT-LIB 2 source to the current output, equivalent to ``program/2`` followed by ``print_program/1``, without invoking the solver.',
 		argnames is ['Source'],
 		exceptions is [
-			'``Source`` is not ground' - instantiation_error,
+			'``Source`` is not a ground term' - instantiation_error,
 			'``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``smt_problem_protocol``' - domain_error(smt_source, 'Source'),
 			'``Statements`` is ground but not a list' - type_error(list, 'Statements'),
 			'A statement enumerated by the provider object is not a valid statement' - domain_error(smt_statement, 'Statement'),
@@ -114,7 +114,7 @@
 		comment is 'Returns SMT-LIB 2 source codes from ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, or ``file(Path)`` without invoking the solver.',
 		argnames is ['Source', 'Codes'],
 		exceptions is [
-			'``Source`` is not ground' - instantiation_error,
+			'``Source`` is not a ground term' - instantiation_error,
 			'``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``smt_problem_protocol``' - domain_error(smt_source, 'Source'),
 			'``Statements`` is ground but not a list' - type_error(list, 'Statements'),
 			'A statement enumerated by the provider object is not a valid statement' - domain_error(smt_statement, 'Statement'),
@@ -134,7 +134,7 @@
 		comment is 'Prints SMT-LIB 2 character codes to the current output without adding a newline or invoking the solver.',
 		argnames is ['Codes'],
 		exceptions is [
-			'``Codes`` is not ground' - instantiation_error,
+			'``Codes`` is not a ground term' - instantiation_error,
 			'``Codes`` is ground but not a list of character codes' - type_error(codes, 'Codes'),
 			'An element ``Code`` of the list ``Codes`` is ground but not an integer' - type_error(integer, 'Code'),
 			'An element ``Code`` of the list ``Codes`` is an integer but not a valid character code' - domain_error(character_code, 'Code'),
@@ -148,7 +148,7 @@
 		comment is 'Returns the collected status (``satisfiable``, ``unsatisfiable``, or ``unknown``) of a single ``check-sat`` result.',
 		argnames is ['Result', 'Status'],
 		exceptions is [
-			'``Result`` is not ground' - instantiation_error,
+			'``Result`` is not a ground term' - instantiation_error,
 			'``Result`` is not a valid collected SMT solver result' - domain_error(smt_result, 'Result')
 		]
 	]).
@@ -159,7 +159,7 @@
 		comment is 'Enumerates, by backtracking, the collected model bindings (``Symbol-Value`` pairs) without starting a process. Fails when the result has no model.',
 		argnames is ['Result', 'Binding'],
 		exceptions is [
-			'``Result`` is not ground' - instantiation_error,
+			'``Result`` is not a ground term' - instantiation_error,
 			'``Result`` is not a valid collected SMT solver result' - domain_error(smt_result, 'Result')
 		]
 	]).
@@ -182,7 +182,7 @@
 		comment is 'Enumerates, by backtracking, the named assertions in the collected unsatisfiable core without starting a process. Fails when the result has no core.',
 		argnames is ['Result', 'Name'],
 		exceptions is [
-			'``Result`` is not ground' - instantiation_error,
+			'``Result`` is not a ground term' - instantiation_error,
 			'``Result`` is not a valid collected SMT solver result' - domain_error(smt_result, 'Result')
 		]
 	]).
@@ -193,7 +193,7 @@
 		comment is 'Enumerates, by backtracking, ``status(Status)`` and the stored result properties.',
 		argnames is ['Result', 'Property'],
 		exceptions is [
-			'``Result`` is not ground' - instantiation_error,
+			'``Result`` is not a ground term' - instantiation_error,
 			'``Result`` is not a valid collected SMT solver result' - domain_error(smt_result, 'Result')
 		]
 	]).
@@ -204,7 +204,7 @@
 		comment is 'Prints a single collected result (status and, when present, model bindings and unsat core names) to the current output, without invoking the solver.',
 		argnames is ['Result'],
 		exceptions is [
-			'``Result`` is not ground' - instantiation_error,
+			'``Result`` is not a ground term' - instantiation_error,
 			'``Result`` is not a valid collected SMT solver result' - domain_error(smt_result, 'Result'),
 			'The current output stream does not allow writing' - permission_error(output, stream, 'Stream')
 		]
@@ -216,7 +216,7 @@
 		comment is 'Prints each collected result in ``Results``, in order, separating consecutive results with a blank line.',
 		argnames is ['Results'],
 		exceptions is [
-			'``Results`` is not ground' - instantiation_error,
+			'``Results`` is not a ground term' - instantiation_error,
 			'``Results`` is ground but not a list' - type_error(list, 'Results'),
 			'An element of the list ``Results`` is not a valid collected SMT solver result' - domain_error(smt_result, 'Result'),
 			'The current output stream does not allow writing' - permission_error(output, stream, 'Stream')

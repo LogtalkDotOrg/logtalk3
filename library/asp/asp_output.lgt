@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-09,
+		date is 2026-11-11,
 		comment is 'Whole-document Clingo and Zetesis JSON output decoding.'
 	]).
 
@@ -47,8 +47,8 @@
 			'The JSON simultaneously reports a time limit and another interruption' - domain_error(asp_output, interruption_flags),
 			'A shown value is not a supported symbol' - domain_error(asp_symbol, 'Codes'),
 			'A numeric symbol cannot be represented as an integer' - representation_error(asp_integer),
-			'``RawStatus`` is not ground' - instantiation_error,
-			'``NormalizedStatus``` is not ground' - instantiation_error,
+			'``RawStatus`` is not a ground term' - instantiation_error,
+			'``NormalizedStatus``` is not a ground term' - instantiation_error,
 			'``NormalizedStatus`` is fatal or inconsistent with the decoded solver result' - domain_error(asp_process_status, 'NormalizedStatus'),
 			'``Diagnostics`` is a partial list or a list with an element ``Element`` which is a variable' - instantiation_error,
 			'``Diagnostics`` is neither a partial list nor a list of character codes' - type_error(codes, 'Diagnostics'),

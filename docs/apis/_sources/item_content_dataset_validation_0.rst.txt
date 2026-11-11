@@ -14,8 +14,8 @@ Shared collection and validation of item catalogs and content descriptors.
 |    ``logtalk_load(recommender_protocols(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-10-04
+| **Version:** 1:0:1
+| **Date:** 2026-11-11
 
 | **Compilation flags:**
 |    ``static``
@@ -77,7 +77,7 @@ Collects and validates a nonempty catalog and its content declarations.
 |        ``domain_error(content_representation,Content)``
 |    A content list is not a proper list:
 |        ``type_error(list,List)``
-|    A feature or content list is not ground:
+|    A feature or content list is not a ground term:
 |        ``instantiation_error``
 |    A sparse vector repeats a feature key:
 |        ``domain_error(duplicate_feature,Feature)``
