@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-1193 1031,-1193 1031,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object asp_symbols</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;10, 22:20</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 02:05</text>
 <g id="clust1" class="cluster">
 <title>cluster_asp_symbols_object</title>
 <g id="a_clust1"><a xlink:title="asp_symbols">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1007,-46 1007,-46 1013,-46 1019,-52 1019,-58 1019,-58 1019,-1169 1019,-1169 1019,-1175 1013,-1181 1007,-1181 1007,-1181 20,-1181 20,-1181 14,-1181 8,-1175 8,-1169 8,-1169 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-1165.3" font-family="Monospace" font-size="10.00" fill="dimgray">asp_symbols</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>parse/2</title>
 <polygon fill="springgreen" stroke="black" points="738.85,-1145 681.15,-1145 681.15,-1109 738.85,-1109 738.85,-1145"/>
 <text xml:space="preserve" text-anchor="start" x="689.15" y="-1129.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L31">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L31">
 <text xml:space="preserve" text-anchor="start" x="691.66" y="-1128.53" font-family="Monospace" font-size="11.00">parse/2</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>complete_symbol//1</title>
 <polygon fill="cornsilk" stroke="black" points="729.41,-1028 610.59,-1028 610.59,-992 729.41,-992 729.41,-1028"/>
 <text xml:space="preserve" text-anchor="start" x="618.59" y="-1012.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L57">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="621.09" y="-1011.53" font-family="Monospace" font-size="11.00">complete_symbol//1</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- parse/2&#45;&gt;complete_symbol//1 -->
 <g id="edge1" class="edge">
 <title>parse/2&#45;&gt;complete_symbol//1</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L48" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L48" xlink:title="calls">
 <path fill="none" stroke="black" d="M703.92,-1108.53C697.51,-1090.11 687.32,-1060.79 679.77,-1039.1"/>
 <polygon fill="black" stroke="black" points="683.09,-1037.98 676.5,-1029.68 676.48,-1040.28 683.09,-1037.98"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L48">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L48">
 <text xml:space="preserve" text-anchor="start" x="691.2" y="-1066.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- parse/2&#45;&gt;type::check/3 -->
 <g id="edge46" class="edge">
 <title>parse/2&#45;&gt;type::check/3</title>
-<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L48" xlink:title="calls">
+<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L48" xlink:title="calls">
 <path fill="none" stroke="black" d="M722.15,-1108.53C735.27,-1089.68 756.31,-1059.43 771.49,-1037.61"/>
 <polygon fill="black" stroke="black" points="774.3,-1039.7 777.13,-1029.5 768.55,-1035.71 774.3,-1039.7"/>
 </a>
 </g>
-<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L48">
+<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L48">
 <text xml:space="preserve" text-anchor="start" x="752.4" y="-1066.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -97,7 +97,7 @@
 <title>symbol//1</title>
 <polygon fill="cornsilk" stroke="black" points="156.04,-911 87.96,-911 87.96,-875 156.04,-875 156.04,-911"/>
 <text xml:space="preserve" text-anchor="start" x="95.96" y="-895.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L60">
+<g id="a_node3_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="98.46" y="-894.53" font-family="Monospace" font-size="11.00">symbol//1</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- complete_symbol//1&#45;&gt;symbol//1 -->
 <g id="edge3" class="edge">
 <title>complete_symbol//1&#45;&gt;symbol//1</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L57" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M610.31,-996.47C499.97,-973.32 266.37,-924.3 167.61,-903.57"/>
 <polygon fill="black" stroke="black" points="168.52,-900.19 158.01,-901.56 167.08,-907.04 168.52,-900.19"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L57">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="412.43" y="-949.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -124,7 +124,7 @@
 <title>white_space//0</title>
 <polygon fill="cornsilk" stroke="black" points="371.19,-209 276.81,-209 276.81,-173 371.19,-173 371.19,-209"/>
 <text xml:space="preserve" text-anchor="start" x="284.81" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node15_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L137">
+<g id="a_node15_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L137">
 <text xml:space="preserve" text-anchor="start" x="287.31" y="-192.53" font-family="Monospace" font-size="11.00">white_space//0</text>
 </a>
 </g>
@@ -136,12 +136,12 @@
 <!-- complete_symbol//1&#45;&gt;white_space//0 -->
 <g id="edge2" class="edge">
 <title>complete_symbol//1&#45;&gt;white_space//0</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L57" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M729.63,-993.88C822.46,-969.5 991,-921.45 991,-894 991,-894 991,-894 991,-658 991,-580.52 1008,-561.98 1008,-484.5 1008,-484.5 1008,-484.5 1008,-307 1008,-243.87 548.97,-207 382.99,-195.73"/>
 <polygon fill="black" stroke="black" points="383.28,-192.24 373.06,-195.06 382.81,-199.22 383.28,-192.24"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L57">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="995.3" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -151,7 +151,7 @@
 <title>symbol_start//2</title>
 <polygon fill="cornsilk" stroke="black" points="615.79,-794 520.21,-794 520.21,-758 615.79,-758 615.79,-794"/>
 <text xml:space="preserve" text-anchor="start" x="528.21" y="-778.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L63">
+<g id="a_node4_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="530.71" y="-777.53" font-family="Monospace" font-size="11.00">symbol_start//2</text>
 </a>
 </g>
@@ -163,12 +163,12 @@
 <!-- symbol//1&#45;&gt;symbol_start//2 -->
 <g id="edge4" class="edge">
 <title>symbol//1&#45;&gt;symbol_start//2</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L60" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L60" xlink:title="calls">
 <path fill="none" stroke="black" d="M156.26,-883.17C231.92,-863.66 414.05,-816.7 508.68,-792.3"/>
 <polygon fill="black" stroke="black" points="509.5,-795.7 518.3,-789.81 507.75,-788.92 509.5,-795.7"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L60">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="358.37" y="-832.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -178,7 +178,7 @@
 <title>negative_symbol//1</title>
 <polygon fill="cornsilk" stroke="black" points="495.89,-677 380.11,-677 380.11,-641 495.89,-641 495.89,-677"/>
 <text xml:space="preserve" text-anchor="start" x="388.11" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L80">
+<g id="a_node5_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="390.61" y="-660.53" font-family="Monospace" font-size="11.00">negative_symbol//1</text>
 </a>
 </g>
@@ -190,12 +190,12 @@
 <!-- symbol_start//2&#45;&gt;negative_symbol//1 -->
 <g id="edge5" class="edge">
 <title>symbol_start//2&#45;&gt;negative_symbol//1</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L63" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L63" xlink:title="calls">
 <path fill="none" stroke="black" d="M548.26,-757.53C526.37,-738.17 490.89,-706.79 466.11,-684.86"/>
 <polygon fill="black" stroke="black" points="468.45,-682.26 458.64,-678.26 463.81,-687.5 468.45,-682.26"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L63">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="506.9" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -205,7 +205,7 @@
 <title>special_symbol//1</title>
 <polygon fill="cornsilk" stroke="black" points="622.22,-677 513.78,-677 513.78,-641 622.22,-641 622.22,-677"/>
 <text xml:space="preserve" text-anchor="start" x="521.78" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L88">
+<g id="a_node6_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L88">
 <text xml:space="preserve" text-anchor="start" x="524.28" y="-660.53" font-family="Monospace" font-size="11.00">special_symbol//1</text>
 </a>
 </g>
@@ -217,12 +217,12 @@
 <!-- symbol_start//2&#45;&gt;special_symbol//1 -->
 <g id="edge7" class="edge">
 <title>symbol_start//2&#45;&gt;special_symbol//1</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L67" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L67" xlink:title="calls">
 <path fill="none" stroke="black" d="M568,-757.53C568,-739.28 568,-710.33 568,-688.7"/>
 <polygon fill="black" stroke="black" points="571.5,-688.77 568,-678.77 564.5,-688.77 571.5,-688.77"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L67">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="568" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -232,7 +232,7 @@
 <title>arguments//1</title>
 <polygon fill="cornsilk" stroke="black" points="259.6,-560 174.4,-560 174.4,-524 259.6,-524 259.6,-560"/>
 <text xml:space="preserve" text-anchor="start" x="182.4" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L93">
+<g id="a_node7_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L93">
 <text xml:space="preserve" text-anchor="start" x="184.9" y="-543.53" font-family="Monospace" font-size="11.00">arguments//1</text>
 </a>
 </g>
@@ -244,12 +244,12 @@
 <!-- symbol_start//2&#45;&gt;arguments//1 -->
 <g id="edge16" class="edge">
 <title>symbol_start//2&#45;&gt;arguments//1</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L74" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L74" xlink:title="calls">
 <path fill="none" stroke="black" d="M519.87,-771.14C472.59,-765.67 399.66,-752.65 344,-722 283.29,-688.57 244.73,-612.27 227.5,-570.91"/>
 <polygon fill="black" stroke="black" points="230.75,-569.61 223.77,-561.63 224.26,-572.22 230.75,-569.61"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L74">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="289.17" y="-656.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -259,7 +259,7 @@
 <title>tuple_content//1</title>
 <polygon fill="cornsilk" stroke="black" points="220.64,-677 121.36,-677 121.36,-641 220.64,-641 220.64,-677"/>
 <text xml:space="preserve" text-anchor="start" x="129.36" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L108">
+<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L108">
 <text xml:space="preserve" text-anchor="start" x="131.86" y="-660.53" font-family="Monospace" font-size="11.00">tuple_content//1</text>
 </a>
 </g>
@@ -271,12 +271,12 @@
 <!-- symbol_start//2&#45;&gt;tuple_content//1 -->
 <g id="edge9" class="edge">
 <title>symbol_start//2&#45;&gt;tuple_content//1</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L69" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L69" xlink:title="calls">
 <path fill="none" stroke="black" d="M519.9,-775.18C454.29,-773.68 334.45,-764.64 243,-722 224.48,-713.37 207.02,-698.57 193.94,-685.6"/>
 <polygon fill="black" stroke="black" points="196.54,-683.25 187.06,-678.51 191.51,-688.12 196.54,-683.25"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L69">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L69">
 <text xml:space="preserve" text-anchor="start" x="243" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -286,7 +286,7 @@
 <title>string_content//1</title>
 <polygon fill="cornsilk" stroke="black" points="948.17,-677 845.83,-677 845.83,-641 948.17,-641 948.17,-677"/>
 <text xml:space="preserve" text-anchor="start" x="853.83" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node13_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L123" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L123">
+<g id="a_node13_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L123" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L123">
 <text xml:space="preserve" text-anchor="start" x="856.34" y="-660.53" font-family="Monospace" font-size="11.00">string_content//1</text>
 </a>
 </g>
@@ -298,12 +298,12 @@
 <!-- symbol_start//2&#45;&gt;string_content//1 -->
 <g id="edge6" class="edge">
 <title>symbol_start//2&#45;&gt;string_content//1</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L65" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L65" xlink:title="calls">
 <path fill="none" stroke="black" d="M615.94,-773.34C670.96,-769.69 762.54,-758.16 832,-722 848.97,-713.17 864.6,-698.56 876.28,-685.74"/>
 <polygon fill="black" stroke="black" points="878.77,-688.22 882.71,-678.39 873.5,-683.61 878.77,-688.22"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L65">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L65">
 <text xml:space="preserve" text-anchor="start" x="844.46" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -311,12 +311,12 @@
 <!-- symbol_start//2&#45;&gt;white_space//0 -->
 <g id="edge8" class="edge">
 <title>symbol_start//2&#45;&gt;white_space//0</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L69" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L69" xlink:title="calls">
 <path fill="none" stroke="black" d="M616.06,-770.28C710.8,-759.87 916.09,-731.42 957,-677 957.99,-675.68 977.85,-561.64 978,-560 979.42,-544.06 980.86,-539.74 978,-524 958.12,-414.68 975.6,-360.83 890,-290 813.18,-226.43 511.03,-202.38 382.44,-194.89"/>
 <polygon fill="black" stroke="black" points="382.98,-191.42 372.79,-194.35 382.58,-198.41 382.98,-191.42"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L69">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L69">
 <text xml:space="preserve" text-anchor="start" x="972.25" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -326,7 +326,7 @@
 <title>digits//1</title>
 <polygon fill="cornsilk" stroke="black" points="795.46,-560 736.54,-560 736.54,-524 795.46,-524 795.46,-560"/>
 <text xml:space="preserve" text-anchor="start" x="744.54" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node16_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L142">
+<g id="a_node16_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L142">
 <text xml:space="preserve" text-anchor="start" x="747.05" y="-543.53" font-family="Monospace" font-size="11.00">digits//1</text>
 </a>
 </g>
@@ -338,12 +338,12 @@
 <!-- symbol_start//2&#45;&gt;digits//1 -->
 <g id="edge11" class="edge">
 <title>symbol_start//2&#45;&gt;digits//1</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L71" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L71" xlink:title="calls">
 <path fill="none" stroke="black" d="M597.59,-757.7C640.27,-730.95 717.96,-675.26 754,-605 759.26,-594.76 762.22,-582.48 763.89,-571.57"/>
 <polygon fill="black" stroke="black" points="767.33,-572.27 765.05,-561.92 760.38,-571.43 767.33,-572.27"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L71">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L71">
 <text xml:space="preserve" text-anchor="start" x="729.6" y="-656.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -353,7 +353,7 @@
 <title>identifier_tail//1</title>
 <polygon fill="cornsilk" stroke="black" points="699.49,-560 604.51,-560 604.51,-524 699.49,-524 699.49,-560"/>
 <text xml:space="preserve" text-anchor="start" x="612.51" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node17_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L147" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L147">
+<g id="a_node17_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L147" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L147">
 <text xml:space="preserve" text-anchor="start" x="615.01" y="-543.53" font-family="Monospace" font-size="11.00">identifier_tail//1</text>
 </a>
 </g>
@@ -365,12 +365,12 @@
 <!-- symbol_start//2&#45;&gt;identifier_tail//1 -->
 <g id="edge14" class="edge">
 <title>symbol_start//2&#45;&gt;identifier_tail//1</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L74" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L74" xlink:title="calls">
 <path fill="none" stroke="black" d="M592.38,-757.68C614.47,-740.26 645.29,-711.13 657,-677 668.98,-642.09 664.2,-599.03 658.83,-571.3"/>
 <polygon fill="black" stroke="black" points="662.26,-570.61 656.77,-561.55 655.41,-572.06 662.26,-570.61"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L74">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="663.91" y="-656.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -380,7 +380,7 @@
 <title>integer_value/2</title>
 <polygon fill="cornsilk" stroke="black" points="374.11,-560 277.89,-560 277.89,-524 374.11,-524 374.11,-560"/>
 <text xml:space="preserve" text-anchor="start" x="285.89" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node18_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L152" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L152">
+<g id="a_node18_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L152" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L152">
 <text xml:space="preserve" text-anchor="start" x="288.39" y="-543.53" font-family="Monospace" font-size="11.00">integer_value/2</text>
 </a>
 </g>
@@ -392,12 +392,12 @@
 <!-- symbol_start//2&#45;&gt;integer_value/2 -->
 <g id="edge12" class="edge">
 <title>symbol_start//2&#45;&gt;integer_value/2</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L71" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L71" xlink:title="calls">
 <path fill="none" stroke="black" d="M519.77,-775.05C472.67,-772.57 401.59,-761.79 356,-722 313.42,-684.83 315.78,-611.87 321.01,-571.52"/>
 <polygon fill="black" stroke="black" points="324.44,-572.26 322.42,-561.86 317.51,-571.25 324.44,-572.26"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L71">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L71">
 <text xml:space="preserve" text-anchor="start" x="326.86" y="-656.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -407,7 +407,7 @@
 <title>valid_identifier/1</title>
 <polygon fill="cornsilk" stroke="black" points="586.25,-560 485.75,-560 485.75,-524 586.25,-524 586.25,-560"/>
 <text xml:space="preserve" text-anchor="start" x="493.75" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node19_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L159">
+<g id="a_node19_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L159">
 <text xml:space="preserve" text-anchor="start" x="496.25" y="-543.53" font-family="Monospace" font-size="11.00">valid_identifier/1</text>
 </a>
 </g>
@@ -419,12 +419,12 @@
 <!-- symbol_start//2&#45;&gt;valid_identifier/1 -->
 <g id="edge15" class="edge">
 <title>symbol_start//2&#45;&gt;valid_identifier/1</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L74" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L74" xlink:title="calls">
 <path fill="none" stroke="black" d="M585.95,-757.92C610.17,-732.71 648.37,-683.89 631,-641 618.85,-611.02 592.65,-585.15 570.84,-567.53"/>
 <polygon fill="black" stroke="black" points="573.04,-564.81 563,-561.43 568.74,-570.33 573.04,-564.81"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L74">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="635.39" y="-656.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -434,7 +434,7 @@
 <title>digit/1</title>
 <polygon fill="cornsilk" stroke="black" points="881,-326 827,-326 827,-290 881,-290 881,-326"/>
 <text xml:space="preserve" text-anchor="start" x="836.82" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node20_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L162" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L162">
+<g id="a_node20_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L162" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L162">
 <text xml:space="preserve" text-anchor="start" x="839.32" y="-309.53" font-family="Monospace" font-size="11.00">digit/1</text>
 </a>
 </g>
@@ -446,12 +446,12 @@
 <!-- symbol_start//2&#45;&gt;digit/1 -->
 <g id="edge10" class="edge">
 <title>symbol_start//2&#45;&gt;digit/1</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L71" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L71" xlink:title="calls">
 <path fill="none" stroke="black" d="M616.09,-758.69C656.48,-742.99 713.59,-715.88 752,-677 772.57,-656.18 866.08,-471.44 873,-443 881.8,-406.84 872.44,-364.14 864.02,-336.82"/>
 <polygon fill="black" stroke="black" points="867.43,-335.98 860.99,-327.56 860.77,-338.16 867.43,-335.98"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L71">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L71">
 <text xml:space="preserve" text-anchor="start" x="836.88" y="-539.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -461,7 +461,7 @@
 <title>identifier_start/1</title>
 <polygon fill="cornsilk" stroke="black" points="462.63,-326 363.37,-326 363.37,-290 462.63,-290 462.63,-326"/>
 <text xml:space="preserve" text-anchor="start" x="371.37" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node21_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L166" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L166">
+<g id="a_node21_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L166" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L166">
 <text xml:space="preserve" text-anchor="start" x="373.87" y="-309.53" font-family="Monospace" font-size="11.00">identifier_start/1</text>
 </a>
 </g>
@@ -473,12 +473,12 @@
 <!-- symbol_start//2&#45;&gt;identifier_start/1 -->
 <g id="edge13" class="edge">
 <title>symbol_start//2&#45;&gt;identifier_start/1</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L74" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L74" xlink:title="calls">
 <path fill="none" stroke="black" d="M520,-765.43C473.43,-753.39 404.97,-727.81 371,-677 353.17,-650.33 367.11,-637.06 366,-605 365.86,-601 365.12,-599.9 366,-596 369.87,-578.73 378.11,-577 383,-560 405.49,-481.79 411.14,-385.19 412.55,-337.88"/>
 <polygon fill="black" stroke="black" points="416.04,-338.02 412.79,-327.93 409.05,-337.84 416.04,-338.02"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L74">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="391.82" y="-539.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -486,12 +486,12 @@
 <!-- negative_symbol//1&#45;&gt;arguments//1 -->
 <g id="edge24" class="edge">
 <title>negative_symbol//1&#45;&gt;arguments//1</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L83" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L83" xlink:title="calls">
 <path fill="none" stroke="black" d="M404.43,-640.53C365.95,-620.51 302.75,-587.62 260.51,-565.64"/>
 <polygon fill="black" stroke="black" points="262.35,-562.65 251.86,-561.14 259.12,-568.86 262.35,-562.65"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L83">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L83">
 <text xml:space="preserve" text-anchor="start" x="334.13" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -499,12 +499,12 @@
 <!-- negative_symbol//1&#45;&gt;white_space//0 -->
 <g id="edge23" class="edge">
 <title>negative_symbol//1&#45;&gt;white_space//0</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L83" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L83" xlink:title="calls">
 <path fill="none" stroke="black" d="M440.75,-640.53C451.42,-571.66 488.74,-321.16 472,-290 452.92,-254.48 414.68,-229.67 381.85,-213.9"/>
 <polygon fill="black" stroke="black" points="383.34,-210.73 372.79,-209.73 380.41,-217.09 383.34,-210.73"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L83">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L83">
 <text xml:space="preserve" text-anchor="start" x="471.18" y="-422.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -512,12 +512,12 @@
 <!-- negative_symbol//1&#45;&gt;digits//1 -->
 <g id="edge18" class="edge">
 <title>negative_symbol//1&#45;&gt;digits//1</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L80" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L80" xlink:title="calls">
 <path fill="none" stroke="black" d="M496.04,-642.96C499.06,-642.28 502.06,-641.62 505,-641 599.81,-621.07 637.36,-655.57 720,-605 733.62,-596.66 744.53,-582.66 752.3,-570.06"/>
 <polygon fill="black" stroke="black" points="755.15,-572.13 757.09,-561.72 749.08,-568.64 755.15,-572.13"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L80">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="731.54" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -525,12 +525,12 @@
 <!-- negative_symbol//1&#45;&gt;identifier_tail//1 -->
 <g id="edge21" class="edge">
 <title>negative_symbol//1&#45;&gt;identifier_tail//1</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L83" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L83" xlink:title="calls">
 <path fill="none" stroke="black" d="M470.5,-640.53C507.69,-620.55 568.71,-587.76 609.61,-565.78"/>
 <polygon fill="black" stroke="black" points="611.06,-568.97 618.21,-561.16 607.74,-562.81 611.06,-568.97"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L83">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L83">
 <text xml:space="preserve" text-anchor="start" x="551.42" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -538,12 +538,12 @@
 <!-- negative_symbol//1&#45;&gt;integer_value/2 -->
 <g id="edge19" class="edge">
 <title>negative_symbol//1&#45;&gt;integer_value/2</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L80" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L80" xlink:title="calls">
 <path fill="none" stroke="black" d="M431.12,-640.57C425.29,-627.31 415.97,-609.17 404,-596 393.73,-584.71 380.6,-574.61 368.05,-566.33"/>
 <polygon fill="black" stroke="black" points="370.22,-563.57 359.9,-561.18 366.48,-569.48 370.22,-563.57"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L80">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="411.24" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -551,12 +551,12 @@
 <!-- negative_symbol//1&#45;&gt;valid_identifier/1 -->
 <g id="edge22" class="edge">
 <title>negative_symbol//1&#45;&gt;valid_identifier/1</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L83" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L83" xlink:title="calls">
 <path fill="none" stroke="black" d="M452.88,-640.53C469.17,-621.43 495.43,-590.61 514.07,-568.73"/>
 <polygon fill="black" stroke="black" points="516.49,-571.29 520.32,-561.41 511.17,-566.75 516.49,-571.29"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L83">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L83">
 <text xml:space="preserve" text-anchor="start" x="489.94" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -564,12 +564,12 @@
 <!-- negative_symbol//1&#45;&gt;digit/1 -->
 <g id="edge17" class="edge">
 <title>negative_symbol//1&#45;&gt;digit/1</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L80" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L80" xlink:title="calls">
 <path fill="none" stroke="black" d="M496.19,-642.08C565.34,-622.3 675.46,-587.74 708,-560 721.93,-548.13 716.3,-538.07 728,-524 764.13,-480.55 796.8,-491.38 826,-443 836.55,-425.53 845.54,-371.18 850.32,-337.31"/>
 <polygon fill="black" stroke="black" points="853.74,-338.16 851.63,-327.77 846.81,-337.21 853.74,-338.16"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L80">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="790.77" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -577,12 +577,12 @@
 <!-- negative_symbol//1&#45;&gt;identifier_start/1 -->
 <g id="edge20" class="edge">
 <title>negative_symbol//1&#45;&gt;identifier_start/1</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L83" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L83" xlink:title="calls">
 <path fill="none" stroke="black" d="M437.46,-640.64C436.62,-615.08 434.78,-565.82 432,-524 427.55,-457.1 420.04,-378.7 415.92,-337.55"/>
 <polygon fill="black" stroke="black" points="419.42,-337.36 414.93,-327.76 412.45,-338.07 419.42,-337.36"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L83">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L83">
 <text xml:space="preserve" text-anchor="start" x="429.4" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -592,7 +592,7 @@
 <title>function_arguments//1</title>
 <polygon fill="cornsilk" stroke="black" points="267.92,-443 138.08,-443 138.08,-407 267.92,-407 267.92,-443"/>
 <text xml:space="preserve" text-anchor="start" x="146.08" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L98" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L98">
+<g id="a_node8_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L98" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L98">
 <text xml:space="preserve" text-anchor="start" x="148.58" y="-426.53" font-family="Monospace" font-size="11.00">function_arguments//1</text>
 </a>
 </g>
@@ -604,12 +604,12 @@
 <!-- arguments//1&#45;&gt;function_arguments//1 -->
 <g id="edge26" class="edge">
 <title>arguments//1&#45;&gt;function_arguments//1</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L93" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L93" xlink:title="calls">
 <path fill="none" stroke="black" d="M214.87,-523.53C212.64,-505.19 209.09,-476.06 206.46,-454.4"/>
 <polygon fill="black" stroke="black" points="209.97,-454.26 205.28,-444.76 203.02,-455.11 209.97,-454.26"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L93">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L93">
 <text xml:space="preserve" text-anchor="start" x="210.42" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -617,12 +617,12 @@
 <!-- arguments//1&#45;&gt;white_space//0 -->
 <g id="edge25" class="edge">
 <title>arguments//1&#45;&gt;white_space//0</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L93" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L93" xlink:title="calls">
 <path fill="none" stroke="black" d="M260.04,-524.55C287.18,-513.46 318.94,-498.91 329,-488 343.49,-472.28 342.16,-464.03 346,-443 360.56,-363.23 342.5,-267.38 331.43,-220.56"/>
 <polygon fill="black" stroke="black" points="334.85,-219.85 329.08,-210.96 328.06,-221.51 334.85,-219.85"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L93">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L93">
 <text xml:space="preserve" text-anchor="start" x="351.38" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -630,12 +630,12 @@
 <!-- function_arguments//1&#45;&gt;symbol//1 -->
 <g id="edge27" class="edge">
 <title>function_arguments//1&#45;&gt;symbol//1</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L100" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L100" xlink:title="calls">
 <path fill="none" stroke="black" d="M145.1,-443.45C113.59,-453.92 78.7,-467.4 67,-479 51.7,-494.16 53.07,-502.85 49,-524 42.9,-555.67 50.68,-564.59 58,-596 80.81,-693.86 105.23,-810.57 116.14,-863.45"/>
 <polygon fill="black" stroke="black" points="112.69,-864.04 118.14,-873.13 119.55,-862.62 112.69,-864.04"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L100">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="75.85" y="-656.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -645,7 +645,7 @@
 <title>argument_tail//1</title>
 <polygon fill="cornsilk" stroke="black" points="214.94,-326 115.06,-326 115.06,-290 214.94,-290 214.94,-326"/>
 <text xml:space="preserve" text-anchor="start" x="123.06" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L103" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L103">
+<g id="a_node9_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L103" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L103">
 <text xml:space="preserve" text-anchor="start" x="125.56" y="-309.53" font-family="Monospace" font-size="11.00">argument_tail//1</text>
 </a>
 </g>
@@ -657,12 +657,12 @@
 <!-- function_arguments//1&#45;&gt;argument_tail//1 -->
 <g id="edge29" class="edge">
 <title>function_arguments//1&#45;&gt;argument_tail//1</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L100" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L100" xlink:title="calls">
 <path fill="none" stroke="black" d="M197.23,-406.53C191.14,-388.11 181.45,-358.79 174.28,-337.1"/>
 <polygon fill="black" stroke="black" points="177.64,-336.09 171.18,-327.69 170.99,-338.28 177.64,-336.09"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L100">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="185.14" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -670,12 +670,12 @@
 <!-- function_arguments//1&#45;&gt;white_space//0 -->
 <g id="edge28" class="edge">
 <title>function_arguments//1&#45;&gt;white_space//0</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L100" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L100" xlink:title="calls">
 <path fill="none" stroke="black" d="M209.21,-406.55C221.22,-373.73 249.43,-301.08 283,-245 288.47,-235.86 295.27,-226.48 301.75,-218.2"/>
 <polygon fill="black" stroke="black" points="304.35,-220.55 307.89,-210.57 298.9,-216.16 304.35,-220.55"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L100">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="257.49" y="-305.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -683,12 +683,12 @@
 <!-- argument_tail//1&#45;&gt;symbol//1 -->
 <g id="edge31" class="edge">
 <title>argument_tail//1&#45;&gt;symbol//1</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L105" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L105" xlink:title="calls">
 <path fill="none" stroke="black" d="M122.63,-326.46C90.45,-342.26 48.5,-368.92 29,-407 -52.54,-566.26 60.66,-788.16 105.29,-864.74"/>
 <polygon fill="black" stroke="black" points="102.22,-866.44 110.33,-873.26 108.25,-862.87 102.22,-866.44"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L105">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L105">
 <text xml:space="preserve" text-anchor="start" x="5.93" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -696,12 +696,12 @@
 <!-- argument_tail//1&#45;&gt;white_space//0 -->
 <g id="edge30" class="edge">
 <title>argument_tail//1&#45;&gt;white_space//0</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L105" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L105" xlink:title="calls">
 <path fill="none" stroke="black" d="M180.2,-289.64C192.32,-276.43 210.16,-258.3 228,-245 243.16,-233.69 261.02,-223.17 277.19,-214.54"/>
 <polygon fill="black" stroke="black" points="278.42,-217.85 285.67,-210.12 275.18,-211.64 278.42,-217.85"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L105">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L105">
 <text xml:space="preserve" text-anchor="start" x="228" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -709,12 +709,12 @@
 <!-- tuple_content//1&#45;&gt;symbol//1 -->
 <g id="edge32" class="edge">
 <title>tuple_content//1&#45;&gt;symbol//1</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L110" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L110" xlink:title="calls">
 <path fill="none" stroke="black" d="M167.34,-677.32C158.95,-717.03 138.28,-814.92 128,-863.59"/>
 <polygon fill="black" stroke="black" points="124.64,-862.57 126,-873.08 131.49,-864.02 124.64,-862.57"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L110" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L110">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L110" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L110">
 <text xml:space="preserve" text-anchor="start" x="149.76" y="-773.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -724,7 +724,7 @@
 <title>tuple_tail//1</title>
 <polygon fill="cornsilk" stroke="black" points="135.63,-560 58.37,-560 58.37,-524 135.63,-524 135.63,-560"/>
 <text xml:space="preserve" text-anchor="start" x="66.37" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L113">
+<g id="a_node11_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L113">
 <text xml:space="preserve" text-anchor="start" x="68.87" y="-543.53" font-family="Monospace" font-size="11.00">tuple_tail//1</text>
 </a>
 </g>
@@ -736,12 +736,12 @@
 <!-- tuple_content//1&#45;&gt;tuple_tail//1 -->
 <g id="edge34" class="edge">
 <title>tuple_content//1&#45;&gt;tuple_tail//1</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L110" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L110" xlink:title="calls">
 <path fill="none" stroke="black" d="M157.45,-640.71C149.69,-630.53 139.94,-617.28 132,-605 124.82,-593.91 117.54,-581.28 111.49,-570.32"/>
 <polygon fill="black" stroke="black" points="114.69,-568.87 106.83,-561.76 108.54,-572.22 114.69,-568.87"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L110" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L110">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L110" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L110">
 <text xml:space="preserve" text-anchor="start" x="132" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -749,12 +749,12 @@
 <!-- tuple_content//1&#45;&gt;white_space//0 -->
 <g id="edge33" class="edge">
 <title>tuple_content//1&#45;&gt;white_space//0</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L110" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L110" xlink:title="calls">
 <path fill="none" stroke="black" d="M164.63,-640.89C155.73,-613.91 143.01,-560.78 165,-524 182.35,-494.99 203.82,-506.67 232,-488 258.62,-470.37 268.67,-468.41 288,-443 309.09,-415.27 311.49,-405.02 319,-371 330.48,-319 328.83,-256.44 326.49,-220.74"/>
 <polygon fill="black" stroke="black" points="329.98,-220.52 325.76,-210.8 323,-221.03 329.98,-220.52"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L110" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L110">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L110" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L110">
 <text xml:space="preserve" text-anchor="start" x="309.45" y="-422.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -762,12 +762,12 @@
 <!-- tuple_tail//1&#45;&gt;symbol//1 -->
 <g id="edge35" class="edge">
 <title>tuple_tail//1&#45;&gt;symbol//1</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L115" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L115" xlink:title="calls">
 <path fill="none" stroke="black" d="M98.25,-560.41C102.27,-616.61 114.95,-793.59 119.95,-863.34"/>
 <polygon fill="black" stroke="black" points="116.45,-863.46 120.65,-873.18 123.43,-862.96 116.45,-863.46"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L115">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L115">
 <text xml:space="preserve" text-anchor="start" x="109.79" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -777,7 +777,7 @@
 <title>tuple_end//1</title>
 <polygon fill="cornsilk" stroke="black" points="119.78,-443 38.22,-443 38.22,-407 119.78,-407 119.78,-443"/>
 <text xml:space="preserve" text-anchor="start" x="46.22" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L118" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L118">
+<g id="a_node12_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L118" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L118">
 <text xml:space="preserve" text-anchor="start" x="48.72" y="-426.53" font-family="Monospace" font-size="11.00">tuple_end//1</text>
 </a>
 </g>
@@ -789,12 +789,12 @@
 <!-- tuple_tail//1&#45;&gt;tuple_end//1 -->
 <g id="edge37" class="edge">
 <title>tuple_tail//1&#45;&gt;tuple_end//1</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L115" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L115" xlink:title="calls">
 <path fill="none" stroke="black" d="M86.37,-523.56C80.9,-513.54 74.8,-500.51 72,-488 69.57,-477.17 70.21,-465.08 71.84,-454.47"/>
 <polygon fill="black" stroke="black" points="75.26,-455.24 73.72,-444.76 68.39,-453.91 75.26,-455.24"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L115">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L115">
 <text xml:space="preserve" text-anchor="start" x="72" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -802,12 +802,12 @@
 <!-- tuple_tail//1&#45;&gt;white_space//0 -->
 <g id="edge36" class="edge">
 <title>tuple_tail//1&#45;&gt;white_space//0</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L115" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L115" xlink:title="calls">
 <path fill="none" stroke="black" d="M135.79,-524.63C183.06,-503.9 258.9,-467.89 277,-443 290.02,-425.1 311.32,-282.4 320.07,-220.49"/>
 <polygon fill="black" stroke="black" points="323.51,-221.14 321.43,-210.75 316.58,-220.17 323.51,-221.14"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L115">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L115">
 <text xml:space="preserve" text-anchor="start" x="297.4" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -815,12 +815,12 @@
 <!-- tuple_end//1&#45;&gt;tuple_tail//1 -->
 <g id="edge39" class="edge">
 <title>tuple_end//1&#45;&gt;tuple_tail//1</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L120" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L120" xlink:title="calls">
 <path fill="none" stroke="black" d="M82.97,-443.11C85.26,-453.46 88.07,-466.94 90,-479 91.74,-489.88 93.2,-501.9 94.33,-512.44"/>
 <polygon fill="black" stroke="black" points="90.82,-512.47 95.31,-522.06 97.78,-511.76 90.82,-512.47"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L120">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L120">
 <text xml:space="preserve" text-anchor="start" x="91.26" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -828,12 +828,12 @@
 <!-- tuple_end//1&#45;&gt;white_space//0 -->
 <g id="edge38" class="edge">
 <title>tuple_end//1&#45;&gt;white_space//0</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L120" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L120" xlink:title="calls">
 <path fill="none" stroke="black" d="M74.89,-406.88C69.35,-379.42 62.86,-325.05 88,-290 128.99,-232.83 209.76,-208.88 265.29,-198.94"/>
 <polygon fill="black" stroke="black" points="265.61,-202.43 274.89,-197.32 264.45,-195.53 265.61,-202.43"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L120">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L120">
 <text xml:space="preserve" text-anchor="start" x="88" y="-305.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -843,7 +843,7 @@
 <title>string_escape//1</title>
 <polygon fill="cornsilk" stroke="black" points="968.86,-560 867.14,-560 867.14,-524 968.86,-524 968.86,-560"/>
 <text xml:space="preserve" text-anchor="start" x="875.14" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node14_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L130">
+<g id="a_node14_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L130">
 <text xml:space="preserve" text-anchor="start" x="877.64" y="-543.53" font-family="Monospace" font-size="11.00">string_escape//1</text>
 </a>
 </g>
@@ -855,12 +855,12 @@
 <!-- string_content//1&#45;&gt;string_escape//1 -->
 <g id="edge40" class="edge">
 <title>string_content//1&#45;&gt;string_escape//1</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L125" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L125" xlink:title="calls">
 <path fill="none" stroke="black" d="M900.19,-640.53C903.54,-622.19 908.86,-593.06 912.81,-571.4"/>
 <polygon fill="black" stroke="black" points="916.22,-572.21 914.58,-561.74 909.34,-570.95 916.22,-572.21"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L125">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L125">
 <text xml:space="preserve" text-anchor="start" x="908.13" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -870,7 +870,7 @@
 <title>whitespace_code/1</title>
 <polygon fill="cornsilk" stroke="black" points="381.59,-92 266.41,-92 266.41,-56 381.59,-56 381.59,-92"/>
 <text xml:space="preserve" text-anchor="start" x="274.41" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node23_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L182">
+<g id="a_node23_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L182">
 <text xml:space="preserve" text-anchor="start" x="276.91" y="-75.53" font-family="Monospace" font-size="11.00">whitespace_code/1</text>
 </a>
 </g>
@@ -882,12 +882,12 @@
 <!-- white_space//0&#45;&gt;whitespace_code/1 -->
 <g id="edge41" class="edge">
 <title>white_space//0&#45;&gt;whitespace_code/1</title>
-<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L137" xlink:title="calls">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L137" xlink:title="calls">
 <path fill="none" stroke="black" d="M324,-172.53C324,-154.28 324,-125.33 324,-103.7"/>
 <polygon fill="black" stroke="black" points="327.5,-103.77 324,-93.77 320.5,-103.77 327.5,-103.77"/>
 </a>
 </g>
-<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L137">
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L137">
 <text xml:space="preserve" text-anchor="start" x="324" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -895,12 +895,12 @@
 <!-- digits//1&#45;&gt;digit/1 -->
 <g id="edge42" class="edge">
 <title>digits//1&#45;&gt;digit/1</title>
-<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L142" xlink:title="calls">
+<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L142" xlink:title="calls">
 <path fill="none" stroke="black" d="M784.1,-523.79C801.96,-505.58 828.37,-475.1 841,-443 854.57,-408.52 856.32,-365.35 855.68,-337.48"/>
 <polygon fill="black" stroke="black" points="859.19,-337.57 855.33,-327.71 852.19,-337.83 859.19,-337.57"/>
 </a>
 </g>
-<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L142">
+<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L142">
 <text xml:space="preserve" text-anchor="start" x="850.77" y="-422.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -910,7 +910,7 @@
 <title>identifier_character/1</title>
 <polygon fill="cornsilk" stroke="black" points="816.86,-443 693.14,-443 693.14,-407 816.86,-407 816.86,-443"/>
 <text xml:space="preserve" text-anchor="start" x="701.14" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node22_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L173">
+<g id="a_node22_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L173">
 <text xml:space="preserve" text-anchor="start" x="703.64" y="-426.53" font-family="Monospace" font-size="11.00">identifier_character/1</text>
 </a>
 </g>
@@ -922,12 +922,12 @@
 <!-- identifier_tail//1&#45;&gt;identifier_character/1 -->
 <g id="edge43" class="edge">
 <title>identifier_tail//1&#45;&gt;identifier_character/1</title>
-<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L147" xlink:title="calls">
+<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L147" xlink:title="calls">
 <path fill="none" stroke="black" d="M667.64,-523.53C684.76,-504.43 712.36,-473.61 731.95,-451.73"/>
 <polygon fill="black" stroke="black" points="734.47,-454.17 738.54,-444.38 729.26,-449.49 734.47,-454.17"/>
 </a>
 </g>
-<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L147" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L147">
+<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L147" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L147">
 <text xml:space="preserve" text-anchor="start" x="706.59" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -949,12 +949,12 @@
 <!-- valid_identifier/1&#45;&gt;asp_program::valid_identifier/1 -->
 <g id="edge47" class="edge">
 <title>valid_identifier/1&#45;&gt;asp_program::valid_identifier/1</title>
-<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L159" xlink:title="calls">
+<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L159" xlink:title="calls">
 <path fill="none" stroke="black" d="M544.05,-523.53C552.62,-504.94 566.3,-475.24 576.33,-453.5"/>
 <polygon fill="black" stroke="black" points="579.41,-455.18 580.41,-444.63 573.05,-452.25 579.41,-455.18"/>
 </a>
 </g>
-<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L159">
+<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L159">
 <text xml:space="preserve" text-anchor="start" x="564.09" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -962,12 +962,12 @@
 <!-- identifier_character/1&#45;&gt;digit/1 -->
 <g id="edge45" class="edge">
 <title>identifier_character/1&#45;&gt;digit/1</title>
-<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L173" xlink:title="calls">
+<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L173" xlink:title="calls">
 <path fill="none" stroke="black" d="M770.04,-406.53C786.49,-387.43 813.01,-356.61 831.85,-334.73"/>
 <polygon fill="black" stroke="black" points="834.29,-337.26 838.16,-327.4 828.98,-332.7 834.29,-337.26"/>
 </a>
 </g>
-<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L173">
+<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L173">
 <text xml:space="preserve" text-anchor="start" x="807.47" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -975,12 +975,12 @@
 <!-- identifier_character/1&#45;&gt;identifier_start/1 -->
 <g id="edge44" class="edge">
 <title>identifier_character/1&#45;&gt;identifier_start/1</title>
-<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L173" xlink:title="calls">
+<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L173" xlink:title="calls">
 <path fill="none" stroke="black" d="M703.06,-406.53C641.37,-385.79 538.65,-351.25 473.45,-329.33"/>
 <polygon fill="black" stroke="black" points="474.95,-326.14 464.36,-326.27 472.72,-332.77 474.95,-326.14"/>
 </a>
 </g>
-<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/asp/asp_symbols.lgt#L173">
+<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/asp/asp_symbols.lgt#L173">
 <text xml:space="preserve" text-anchor="start" x="594.25" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>

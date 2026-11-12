@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-959 2017,-959 2017,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk development tools</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for category mutator_common</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;10, 22:22</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 02:06</text>
 <g id="clust1" class="cluster">
 <title>cluster_mutator_common_category</title>
 <g id="a_clust1"><a xlink:title="mutator_common">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1993,-46 1993,-46 1999,-46 2005,-52 2005,-58 2005,-58 2005,-935 2005,-935 2005,-941 1999,-947 1993,-947 1993,-947 20,-947 20,-947 14,-947 8,-941 8,-935 8,-935 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-931.3" font-family="Monospace" font-size="10.00" fill="dimgray">mutator_common</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>print_mutation/3</title>
 <polygon fill="yellow" stroke="black" points="117.94,-911 18.06,-911 18.06,-875 117.94,-875 117.94,-911"/>
 <text xml:space="preserve" text-anchor="start" x="26.06" y="-895.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="28.56" y="-894.53" font-family="Monospace" font-size="11.00">print_mutation/3</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- print_mutation/3&#45;&gt;logtalk::print_message/3 -->
 <g id="edge22" class="edge">
 <title>print_mutation/3&#45;&gt;logtalk::print_message/3</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L182" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L182" xlink:title="calls">
 <path fill="none" stroke="black" d="M71.04,-874.53C74.23,-856.19 79.29,-827.06 83.06,-805.4"/>
 <polygon fill="black" stroke="black" points="86.47,-806.2 84.74,-795.74 79.58,-805 86.47,-806.2"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L182">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L182">
 <text xml:space="preserve" text-anchor="start" x="78.6" y="-832.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>target_predicate/3</title>
 <polygon fill="yellow" stroke="black" points="668.84,-794 559.16,-794 559.16,-758 668.84,-758 668.84,-794"/>
 <text xml:space="preserve" text-anchor="start" x="567.16" y="-778.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L39">
+<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L39">
 <text xml:space="preserve" text-anchor="start" x="569.66" y="-777.53" font-family="Monospace" font-size="11.00">target_predicate/3</text>
 </a>
 </g>
@@ -84,7 +84,7 @@
 <title>target_predicate_clause_index/4</title>
 <polygon fill="yellow" stroke="black" points="502,-911 322,-911 322,-875 502,-875 502,-911"/>
 <text xml:space="preserve" text-anchor="start" x="330" y="-895.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L46">
+<g id="a_node3_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L46">
 <text xml:space="preserve" text-anchor="start" x="332.5" y="-894.53" font-family="Monospace" font-size="11.00">target_predicate_clause_index/4</text>
 </a>
 </g>
@@ -96,12 +96,12 @@
 <!-- target_predicate_clause_index/4&#45;&gt;target_predicate/3 -->
 <g id="edge1" class="edge">
 <title>target_predicate_clause_index/4&#45;&gt;target_predicate/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L216" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L216" xlink:title="calls">
 <path fill="none" stroke="black" d="M442.68,-874.53C477.63,-854.63 534.89,-822.04 573.49,-800.06"/>
 <polygon fill="black" stroke="black" points="575.09,-803.18 582.05,-795.19 571.63,-797.1 575.09,-803.18"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L216" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L216">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L216" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L216">
 <text xml:space="preserve" text-anchor="start" x="519.06" y="-832.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -111,7 +111,7 @@
 <title>update_target_predicate_clause_index_/2</title>
 <polygon fill="#ff6a6a" stroke="black" points="912.94,-794 687.06,-794 687.06,-758 912.94,-758 912.94,-794"/>
 <text xml:space="preserve" text-anchor="start" x="695.06" y="-778.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L110" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L110">
+<g id="a_node12_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L110" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L110">
 <text xml:space="preserve" text-anchor="start" x="697.56" y="-777.53" font-family="Monospace" font-size="11.00">update_target_predicate_clause_index_/2</text>
 </a>
 </g>
@@ -123,12 +123,12 @@
 <!-- target_predicate_clause_index/4&#45;&gt;update_target_predicate_clause_index_/2 -->
 <g id="edge2" class="edge">
 <title>target_predicate_clause_index/4&#45;&gt;update_target_predicate_clause_index_/2</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L216" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L216" xlink:title="calls">
 <path fill="none" stroke="black" d="M470.93,-874.53C540.64,-853.87 656.54,-819.52 730.55,-797.58"/>
 <polygon fill="black" stroke="black" points="731.11,-801.07 739.7,-794.87 729.12,-794.36 731.11,-801.07"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L216" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L216">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L216" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L216">
 <text xml:space="preserve" text-anchor="start" x="617.63" y="-832.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -138,7 +138,7 @@
 <title>target_scope_directive/3</title>
 <polygon fill="yellow" stroke="black" points="1510.43,-794 1369.57,-794 1369.57,-758 1510.43,-758 1510.43,-794"/>
 <text xml:space="preserve" text-anchor="start" x="1377.57" y="-778.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L53">
+<g id="a_node4_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L53">
 <text xml:space="preserve" text-anchor="start" x="1380.07" y="-777.53" font-family="Monospace" font-size="11.00">target_scope_directive/3</text>
 </a>
 </g>
@@ -152,7 +152,7 @@
 <title>scope_directive_matches_predicate_/2</title>
 <polygon fill="cornsilk" stroke="black" points="1656.89,-677 1445.11,-677 1445.11,-641 1656.89,-641 1656.89,-677"/>
 <text xml:space="preserve" text-anchor="start" x="1453.11" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node23_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L276" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L276">
+<g id="a_node23_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L276" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L276">
 <text xml:space="preserve" text-anchor="start" x="1455.61" y="-660.53" font-family="Monospace" font-size="11.00">scope_directive_matches_predicate_/2</text>
 </a>
 </g>
@@ -164,12 +164,12 @@
 <!-- target_scope_directive/3&#45;&gt;scope_directive_matches_predicate_/2 -->
 <g id="edge3" class="edge">
 <title>target_scope_directive/3&#45;&gt;scope_directive_matches_predicate_/2</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L220" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L220" xlink:title="calls">
 <path fill="none" stroke="black" d="M1456.86,-757.53C1475.38,-738.34 1505.31,-707.33 1526.44,-685.44"/>
 <polygon fill="black" stroke="black" points="1528.87,-687.97 1533.3,-678.34 1523.83,-683.11 1528.87,-687.97"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L220" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L220">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L220" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L220">
 <text xml:space="preserve" text-anchor="start" x="1498.83" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -179,7 +179,7 @@
 <title>target_scope_directive_index/4</title>
 <polygon fill="yellow" stroke="black" points="693.63,-911 520.37,-911 520.37,-875 693.63,-875 693.63,-911"/>
 <text xml:space="preserve" text-anchor="start" x="528.37" y="-895.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L60">
+<g id="a_node5_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="530.87" y="-894.53" font-family="Monospace" font-size="11.00">target_scope_directive_index/4</text>
 </a>
 </g>
@@ -191,12 +191,12 @@
 <!-- target_scope_directive_index/4&#45;&gt;target_scope_directive/3 -->
 <g id="edge4" class="edge">
 <title>target_scope_directive_index/4&#45;&gt;target_scope_directive/3</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L225" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L225" xlink:title="calls">
 <path fill="none" stroke="black" d="M679.25,-874.59C718.19,-864.84 766.95,-852.05 810,-839 821.7,-835.45 824.02,-832.44 836,-830 1061.59,-784.06 1127.36,-825.35 1358.33,-794.24"/>
 <polygon fill="black" stroke="black" points="1358.53,-797.75 1367.96,-792.91 1357.57,-790.81 1358.53,-797.75"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L225" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L225">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L225" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L225">
 <text xml:space="preserve" text-anchor="start" x="836" y="-832.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -206,7 +206,7 @@
 <title>update_target_scope_directive_index_/2</title>
 <polygon fill="#ff6a6a" stroke="black" points="1351.57,-794 1132.43,-794 1132.43,-758 1351.57,-758 1351.57,-794"/>
 <text xml:space="preserve" text-anchor="start" x="1140.43" y="-778.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node14_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L125">
+<g id="a_node14_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L125">
 <text xml:space="preserve" text-anchor="start" x="1142.93" y="-777.53" font-family="Monospace" font-size="11.00">update_target_scope_directive_index_/2</text>
 </a>
 </g>
@@ -218,12 +218,12 @@
 <!-- target_scope_directive_index/4&#45;&gt;update_target_scope_directive_index_/2 -->
 <g id="edge5" class="edge">
 <title>target_scope_directive_index/4&#45;&gt;update_target_scope_directive_index_/2</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L225" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L225" xlink:title="calls">
 <path fill="none" stroke="black" d="M650.36,-874.51C687.38,-860.29 742.36,-840.87 792,-830 933.44,-799.01 974.74,-811.91 1120.92,-794.34"/>
 <polygon fill="black" stroke="black" points="1121.1,-797.84 1130.6,-793.15 1120.24,-790.9 1121.1,-797.84"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L225" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L225">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L225" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L225">
 <text xml:space="preserve" text-anchor="start" x="792" y="-832.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -233,7 +233,7 @@
 <title>target_predicate_directive/3</title>
 <polygon fill="yellow" stroke="black" points="1938.38,-794 1781.62,-794 1781.62,-758 1938.38,-758 1938.38,-794"/>
 <text xml:space="preserve" text-anchor="start" x="1789.62" y="-778.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L67">
+<g id="a_node6_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="1792.13" y="-777.53" font-family="Monospace" font-size="11.00">target_predicate_directive/3</text>
 </a>
 </g>
@@ -247,7 +247,7 @@
 <title>predicate_directive_matches_predicate_/2</title>
 <polygon fill="cornsilk" stroke="black" points="1911.84,-677 1684.16,-677 1684.16,-641 1911.84,-641 1911.84,-677"/>
 <text xml:space="preserve" text-anchor="start" x="1692.16" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node24_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L283" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L283">
+<g id="a_node24_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L283" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L283">
 <text xml:space="preserve" text-anchor="start" x="1694.66" y="-660.53" font-family="Monospace" font-size="11.00">predicate_directive_matches_predicate_/2</text>
 </a>
 </g>
@@ -259,12 +259,12 @@
 <!-- target_predicate_directive/3&#45;&gt;predicate_directive_matches_predicate_/2 -->
 <g id="edge6" class="edge">
 <title>target_predicate_directive/3&#45;&gt;predicate_directive_matches_predicate_/2</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L229" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L229" xlink:title="calls">
 <path fill="none" stroke="black" d="M1850.58,-757.53C1840.51,-738.85 1824.4,-708.97 1812.67,-687.2"/>
 <polygon fill="black" stroke="black" points="1815.85,-685.73 1808.02,-678.59 1809.69,-689.05 1815.85,-685.73"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L229">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L229">
 <text xml:space="preserve" text-anchor="start" x="1830.86" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -274,7 +274,7 @@
 <title>target_predicate_directive_index/4</title>
 <polygon fill="yellow" stroke="black" points="900.58,-911 711.42,-911 711.42,-875 900.58,-875 900.58,-911"/>
 <text xml:space="preserve" text-anchor="start" x="719.42" y="-895.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L74">
+<g id="a_node7_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="721.92" y="-894.53" font-family="Monospace" font-size="11.00">target_predicate_directive_index/4</text>
 </a>
 </g>
@@ -286,12 +286,12 @@
 <!-- target_predicate_directive_index/4&#45;&gt;target_predicate_directive/3 -->
 <g id="edge7" class="edge">
 <title>target_predicate_directive_index/4&#45;&gt;target_predicate_directive/3</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L234" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L234" xlink:title="calls">
 <path fill="none" stroke="black" d="M900.9,-876.21C903.97,-875.79 907.01,-875.38 910,-875 1288.37,-826.38 1389.73,-848.56 1770.01,-794.36"/>
 <polygon fill="black" stroke="black" points="1770.44,-797.83 1779.84,-792.95 1769.45,-790.9 1770.44,-797.83"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L234">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L234">
 <text xml:space="preserve" text-anchor="start" x="1444.4" y="-832.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -301,7 +301,7 @@
 <title>update_target_predicate_directive_index_/2</title>
 <polygon fill="#ff6a6a" stroke="black" points="1763.52,-794 1528.48,-794 1528.48,-758 1763.52,-758 1763.52,-794"/>
 <text xml:space="preserve" text-anchor="start" x="1536.48" y="-778.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node16_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L140">
+<g id="a_node16_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L140">
 <text xml:space="preserve" text-anchor="start" x="1538.98" y="-777.53" font-family="Monospace" font-size="11.00">update_target_predicate_directive_index_/2</text>
 </a>
 </g>
@@ -313,12 +313,12 @@
 <!-- target_predicate_directive_index/4&#45;&gt;update_target_predicate_directive_index_/2 -->
 <g id="edge8" class="edge">
 <title>target_predicate_directive_index/4&#45;&gt;update_target_predicate_directive_index_/2</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L234" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L234" xlink:title="calls">
 <path fill="none" stroke="black" d="M900.92,-876.36C903.98,-875.9 907.01,-875.44 910,-875 1176.41,-835.52 1246.44,-830.25 1516.68,-794.31"/>
 <polygon fill="black" stroke="black" points="1517.08,-797.78 1526.54,-792.99 1516.16,-790.85 1517.08,-797.78"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L234">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L234">
 <text xml:space="preserve" text-anchor="start" x="1234.64" y="-832.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -328,7 +328,7 @@
 <title>target_uses_directive/3</title>
 <polygon fill="yellow" stroke="black" points="310.37,-794 175.63,-794 175.63,-758 310.37,-758 310.37,-794"/>
 <text xml:space="preserve" text-anchor="start" x="183.63" y="-778.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L81">
+<g id="a_node8_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L81">
 <text xml:space="preserve" text-anchor="start" x="186.13" y="-777.53" font-family="Monospace" font-size="11.00">target_uses_directive/3</text>
 </a>
 </g>
@@ -342,7 +342,7 @@
 <title>uses_directive_matches_predicate_/2</title>
 <polygon fill="cornsilk" stroke="black" points="429.83,-677 224.17,-677 224.17,-641 429.83,-641 429.83,-677"/>
 <text xml:space="preserve" text-anchor="start" x="232.17" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node25_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L316" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L316">
+<g id="a_node25_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L316" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L316">
 <text xml:space="preserve" text-anchor="start" x="234.67" y="-660.53" font-family="Monospace" font-size="11.00">uses_directive_matches_predicate_/2</text>
 </a>
 </g>
@@ -354,12 +354,12 @@
 <!-- target_uses_directive/3&#45;&gt;uses_directive_matches_predicate_/2 -->
 <g id="edge9" class="edge">
 <title>target_uses_directive/3&#45;&gt;uses_directive_matches_predicate_/2</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L238" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L238" xlink:title="calls">
 <path fill="none" stroke="black" d="M255.76,-757.53C269.59,-738.6 291.83,-708.16 307.78,-686.32"/>
 <polygon fill="black" stroke="black" points="310.43,-688.62 313.5,-678.48 304.78,-684.49 310.43,-688.62"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L238" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L238">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L238" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L238">
 <text xml:space="preserve" text-anchor="start" x="287.52" y="-715.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -369,7 +369,7 @@
 <title>target_uses_directive_index/4</title>
 <polygon fill="yellow" stroke="black" points="303.57,-911 136.43,-911 136.43,-875 303.57,-875 303.57,-911"/>
 <text xml:space="preserve" text-anchor="start" x="144.43" y="-895.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L88">
+<g id="a_node9_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L88">
 <text xml:space="preserve" text-anchor="start" x="146.93" y="-894.53" font-family="Monospace" font-size="11.00">target_uses_directive_index/4</text>
 </a>
 </g>
@@ -381,12 +381,12 @@
 <!-- target_uses_directive_index/4&#45;&gt;target_uses_directive/3 -->
 <g id="edge10" class="edge">
 <title>target_uses_directive_index/4&#45;&gt;target_uses_directive/3</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L243" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L243" xlink:title="calls">
 <path fill="none" stroke="black" d="M223.49,-874.53C227.16,-856.19 232.99,-827.06 237.32,-805.4"/>
 <polygon fill="black" stroke="black" points="240.72,-806.23 239.25,-795.74 233.86,-804.86 240.72,-806.23"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L243" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L243">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L243" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L243">
 <text xml:space="preserve" text-anchor="start" x="232.19" y="-832.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -396,7 +396,7 @@
 <title>update_target_uses_directive_index_/2</title>
 <polygon fill="#ff6a6a" stroke="black" points="541.51,-794 328.49,-794 328.49,-758 541.51,-758 541.51,-794"/>
 <text xml:space="preserve" text-anchor="start" x="336.49" y="-778.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node18_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L155">
+<g id="a_node18_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="338.99" y="-777.53" font-family="Monospace" font-size="11.00">update_target_uses_directive_index_/2</text>
 </a>
 </g>
@@ -408,12 +408,12 @@
 <!-- target_uses_directive_index/4&#45;&gt;update_target_uses_directive_index_/2 -->
 <g id="edge11" class="edge">
 <title>target_uses_directive_index/4&#45;&gt;update_target_uses_directive_index_/2</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L243" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L243" xlink:title="calls">
 <path fill="none" stroke="black" d="M252.65,-874.53C290.02,-854.55 351.32,-821.76 392.41,-799.78"/>
 <polygon fill="black" stroke="black" points="393.89,-802.96 401.06,-795.16 390.59,-796.79 393.89,-802.96"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L243" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L243">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L243" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L243">
 <text xml:space="preserve" text-anchor="start" x="333.95" y="-832.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -423,7 +423,7 @@
 <title>next_occurrence/1</title>
 <polygon fill="yellow" stroke="black" points="1114.75,-794 1003.25,-794 1003.25,-758 1114.75,-758 1114.75,-794"/>
 <text xml:space="preserve" text-anchor="start" x="1011.25" y="-778.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L95">
+<g id="a_node10_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="1013.75" y="-777.53" font-family="Monospace" font-size="11.00">next_occurrence/1</text>
 </a>
 </g>
@@ -437,7 +437,7 @@
 <title>::seen_/1</title>
 <polygon fill="cornsilk" stroke="black" points="991.13,-677 924.87,-677 924.87,-641 991.13,-641 991.13,-677"/>
 <text xml:space="preserve" text-anchor="start" x="932.87" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node35_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L170">
+<g id="a_node35_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L170">
 <text xml:space="preserve" text-anchor="start" x="935.37" y="-660.53" font-family="Monospace" font-size="11.00">::seen_/1</text>
 </a>
 </g>
@@ -449,12 +449,12 @@
 <!-- next_occurrence/1&#45;&gt;::seen_/1 -->
 <g id="edge32" class="edge">
 <title>next_occurrence/1&#45;&gt;::seen_/1</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L354" xlink:title="updates">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L354" xlink:title="updates">
 <path fill="none" stroke="black" d="M1043.66,-757.53C1027.18,-738.77 1000.77,-708.7 981.63,-686.91"/>
 <polygon fill="black" stroke="black" points="981.67,-686.95 974.7,-685.08 973.75,-677.93 980.71,-679.8 981.67,-686.95"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L354">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L354">
 <text xml:space="preserve" text-anchor="start" x="1011.53" y="-715.07" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -464,7 +464,7 @@
 <title>current_predicate_clause_index_/2</title>
 <polygon fill="#ff6a6a" stroke="black" points="1111.11,-911 918.89,-911 918.89,-875 1111.11,-875 1111.11,-911"/>
 <text xml:space="preserve" text-anchor="start" x="926.89" y="-895.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L102">
+<g id="a_node11_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L102">
 <text xml:space="preserve" text-anchor="start" x="929.39" y="-894.53" font-family="Monospace" font-size="11.00">current_predicate_clause_index_/2</text>
 </a>
 </g>
@@ -478,7 +478,7 @@
 <title>::current_predicate_clause_index_/2</title>
 <polygon fill="cornsilk" stroke="black" points="903.17,-677 704.83,-677 704.83,-641 903.17,-641 903.17,-677"/>
 <text xml:space="preserve" text-anchor="start" x="712.83" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node31_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L170">
+<g id="a_node31_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L170">
 <text xml:space="preserve" text-anchor="start" x="715.33" y="-660.53" font-family="Monospace" font-size="11.00">::current_predicate_clause_index_/2</text>
 </a>
 </g>
@@ -490,12 +490,12 @@
 <!-- update_target_predicate_clause_index_/2&#45;&gt;::current_predicate_clause_index_/2 -->
 <g id="edge28" class="edge">
 <title>update_target_predicate_clause_index_/2&#45;&gt;::current_predicate_clause_index_/2</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L247" xlink:title="updates">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L247" xlink:title="updates">
 <path fill="none" stroke="black" d="M800.61,-757.53C801.23,-739.7 802.2,-711.67 802.95,-690.22"/>
 <polygon fill="black" stroke="black" points="802.95,-690.15 799.16,-684.01 803.37,-678.15 807.16,-684.29 802.95,-690.15"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L247">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L247">
 <text xml:space="preserve" text-anchor="start" x="802.12" y="-715.07" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -505,7 +505,7 @@
 <title>current_scope_directive_index_/2</title>
 <polygon fill="#ff6a6a" stroke="black" points="1314.75,-911 1129.25,-911 1129.25,-875 1314.75,-875 1314.75,-911"/>
 <text xml:space="preserve" text-anchor="start" x="1137.25" y="-895.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node13_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L117">
+<g id="a_node13_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L117">
 <text xml:space="preserve" text-anchor="start" x="1139.76" y="-894.53" font-family="Monospace" font-size="11.00">current_scope_directive_index_/2</text>
 </a>
 </g>
@@ -519,7 +519,7 @@
 <title>::current_scope_directive_index_/2</title>
 <polygon fill="cornsilk" stroke="black" points="1200.8,-677 1009.2,-677 1009.2,-641 1200.8,-641 1200.8,-677"/>
 <text xml:space="preserve" text-anchor="start" x="1017.2" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node32_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L170">
+<g id="a_node32_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L170">
 <text xml:space="preserve" text-anchor="start" x="1019.7" y="-660.53" font-family="Monospace" font-size="11.00">::current_scope_directive_index_/2</text>
 </a>
 </g>
@@ -531,12 +531,12 @@
 <!-- update_target_scope_directive_index_/2&#45;&gt;::current_scope_directive_index_/2 -->
 <g id="edge29" class="edge">
 <title>update_target_scope_directive_index_/2&#45;&gt;::current_scope_directive_index_/2</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L255" xlink:title="updates">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L255" xlink:title="updates">
 <path fill="none" stroke="black" d="M1221.19,-757.53C1198.33,-738.34 1161.39,-707.33 1135.31,-685.44"/>
 <polygon fill="black" stroke="black" points="1135.44,-685.55 1128.27,-684.75 1126.24,-677.83 1133.41,-678.63 1135.44,-685.55"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L255" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L255">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L255" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L255">
 <text xml:space="preserve" text-anchor="start" x="1177.61" y="-715.07" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -546,7 +546,7 @@
 <title>current_predicate_directive_index_/2</title>
 <polygon fill="#ff6a6a" stroke="black" points="1533.69,-911 1332.31,-911 1332.31,-875 1533.69,-875 1533.69,-911"/>
 <text xml:space="preserve" text-anchor="start" x="1340.31" y="-895.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node15_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L132">
+<g id="a_node15_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L132">
 <text xml:space="preserve" text-anchor="start" x="1342.81" y="-894.53" font-family="Monospace" font-size="11.00">current_predicate_directive_index_/2</text>
 </a>
 </g>
@@ -560,7 +560,7 @@
 <title>::current_predicate_directive_index_/2</title>
 <polygon fill="cornsilk" stroke="black" points="1426.75,-677 1219.25,-677 1219.25,-641 1426.75,-641 1426.75,-677"/>
 <text xml:space="preserve" text-anchor="start" x="1227.25" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node33_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L170">
+<g id="a_node33_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L170">
 <text xml:space="preserve" text-anchor="start" x="1229.75" y="-660.53" font-family="Monospace" font-size="11.00">::current_predicate_directive_index_/2</text>
 </a>
 </g>
@@ -572,12 +572,12 @@
 <!-- update_target_predicate_directive_index_/2&#45;&gt;::current_predicate_directive_index_/2 -->
 <g id="edge30" class="edge">
 <title>update_target_predicate_directive_index_/2&#45;&gt;::current_predicate_directive_index_/2</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L262" xlink:title="updates">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L262" xlink:title="updates">
 <path fill="none" stroke="black" d="M1572.47,-757.5C1536.85,-748.27 1493.72,-735.96 1455.97,-722 1425.96,-710.9 1393.39,-695.77 1367.99,-683.23"/>
 <polygon fill="black" stroke="black" points="1368.05,-683.26 1360.89,-684.16 1357.31,-677.9 1364.47,-677 1368.05,-683.26"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L262" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L262">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L262" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L262">
 <text xml:space="preserve" text-anchor="start" x="1455.97" y="-715.07" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -587,7 +587,7 @@
 <title>current_uses_directive_index_/2</title>
 <polygon fill="#ff6a6a" stroke="black" points="1730.69,-911 1551.31,-911 1551.31,-875 1730.69,-875 1730.69,-911"/>
 <text xml:space="preserve" text-anchor="start" x="1559.31" y="-895.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node17_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L147" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L147">
+<g id="a_node17_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L147" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L147">
 <text xml:space="preserve" text-anchor="start" x="1561.81" y="-894.53" font-family="Monospace" font-size="11.00">current_uses_directive_index_/2</text>
 </a>
 </g>
@@ -601,7 +601,7 @@
 <title>::current_uses_directive_index_/2</title>
 <polygon fill="cornsilk" stroke="black" points="668.74,-677 483.26,-677 483.26,-641 668.74,-641 668.74,-677"/>
 <text xml:space="preserve" text-anchor="start" x="491.26" y="-661.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node34_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L170">
+<g id="a_node34_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L170">
 <text xml:space="preserve" text-anchor="start" x="493.76" y="-660.53" font-family="Monospace" font-size="11.00">::current_uses_directive_index_/2</text>
 </a>
 </g>
@@ -613,12 +613,12 @@
 <!-- update_target_uses_directive_index_/2&#45;&gt;::current_uses_directive_index_/2 -->
 <g id="edge31" class="edge">
 <title>update_target_uses_directive_index_/2&#45;&gt;::current_uses_directive_index_/2</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L269" xlink:title="updates">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L269" xlink:title="updates">
 <path fill="none" stroke="black" d="M456.41,-757.53C479.95,-738.34 517.96,-707.33 544.81,-685.44"/>
 <polygon fill="black" stroke="black" points="544.85,-685.41 546.97,-678.52 554.15,-677.82 552.03,-684.72 544.85,-685.41"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L269">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L269">
 <text xml:space="preserve" text-anchor="start" x="509.73" y="-715.07" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -628,7 +628,7 @@
 <title>seen_/1</title>
 <polygon fill="#ff6a6a" stroke="black" points="1820.98,-911 1749.02,-911 1749.02,-875 1820.98,-875 1820.98,-911"/>
 <text xml:space="preserve" text-anchor="start" x="1757.02" y="-895.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node19_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L162" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L162">
+<g id="a_node19_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L162" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L162">
 <text xml:space="preserve" text-anchor="start" x="1765.43" y="-894.53" font-family="Monospace" font-size="11.00">seen_/1</text>
 </a>
 </g>
@@ -642,7 +642,7 @@
 <title>directive_resource_matches_predicate_/2</title>
 <polygon fill="cornsilk" stroke="black" points="1718.61,-326 1493.39,-326 1493.39,-290 1718.61,-290 1718.61,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1501.39" y="-310.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node20_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L331">
+<g id="a_node20_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L331">
 <text xml:space="preserve" text-anchor="start" x="1503.89" y="-309.53" font-family="Monospace" font-size="11.00">directive_resource_matches_predicate_/2</text>
 </a>
 </g>
@@ -656,7 +656,7 @@
 <title>resource_exposed_predicate_/2</title>
 <polygon fill="cornsilk" stroke="black" points="1695.08,-209 1516.92,-209 1516.92,-173 1695.08,-173 1695.08,-209"/>
 <text xml:space="preserve" text-anchor="start" x="1524.92" y="-193.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node28_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L334" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L334">
+<g id="a_node28_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L334" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L334">
 <text xml:space="preserve" text-anchor="start" x="1527.42" y="-192.53" font-family="Monospace" font-size="11.00">resource_exposed_predicate_/2</text>
 </a>
 </g>
@@ -668,12 +668,12 @@
 <!-- directive_resource_matches_predicate_/2&#45;&gt;resource_exposed_predicate_/2 -->
 <g id="edge20" class="edge">
 <title>directive_resource_matches_predicate_/2&#45;&gt;resource_exposed_predicate_/2</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L331" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L331" xlink:title="calls">
 <path fill="none" stroke="black" d="M1606,-289.53C1606,-271.28 1606,-242.33 1606,-220.7"/>
 <polygon fill="black" stroke="black" points="1609.5,-220.77 1606,-210.77 1602.5,-220.77 1609.5,-220.77"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L331">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L331">
 <text xml:space="preserve" text-anchor="start" x="1606" y="-247.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -683,7 +683,7 @@
 <title>coverage_clause_mutator/0</title>
 <polygon fill="cornsilk" stroke="black" points="1995.38,-911 1838.62,-911 1838.62,-875 1995.38,-875 1995.38,-911"/>
 <text xml:space="preserve" text-anchor="start" x="1846.62" y="-895.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node21_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L179" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L179">
+<g id="a_node21_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L179" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L179">
 <text xml:space="preserve" text-anchor="start" x="1849.13" y="-894.53" font-family="Monospace" font-size="11.00">coverage_clause_mutator/0</text>
 </a>
 </g>
@@ -697,7 +697,7 @@
 <title>reset/0</title>
 <polygon fill="cornsilk" stroke="black" points="985.31,-794 930.69,-794 930.69,-758 985.31,-758 985.31,-794"/>
 <text xml:space="preserve" text-anchor="start" x="938.69" y="-778.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node22_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L170">
+<g id="a_node22_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L170">
 <text xml:space="preserve" text-anchor="start" x="941.19" y="-777.53" font-family="Monospace" font-size="11.00">reset/0</text>
 </a>
 </g>
@@ -709,12 +709,12 @@
 <!-- reset/0&#45;&gt;::current_predicate_clause_index_/2 -->
 <g id="edge23" class="edge">
 <title>reset/0&#45;&gt;::current_predicate_clause_index_/2</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="updates">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="updates">
 <path fill="none" stroke="black" d="M934.61,-757.53C908.76,-738.23 866.89,-706.97 837.55,-685.05"/>
 <polygon fill="black" stroke="black" points="837.69,-685.16 830.49,-684.78 828.08,-677.98 835.28,-678.37 837.69,-685.16"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L170">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L170">
 <text xml:space="preserve" text-anchor="start" x="885.62" y="-715.07" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -722,12 +722,12 @@
 <!-- reset/0&#45;&gt;::current_scope_directive_index_/2 -->
 <g id="edge24" class="edge">
 <title>reset/0&#45;&gt;::current_scope_directive_index_/2</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="updates">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="updates">
 <path fill="none" stroke="black" d="M985.74,-761.41C1004.26,-751.7 1028.68,-737.62 1048,-722 1060.75,-711.69 1073.27,-698.52 1083.31,-686.96"/>
 <polygon fill="black" stroke="black" points="1083.12,-687.2 1083.93,-680.03 1090.86,-678.03 1090.04,-685.2 1083.12,-687.2"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L170">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L170">
 <text xml:space="preserve" text-anchor="start" x="1056.67" y="-715.07" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -735,12 +735,12 @@
 <!-- reset/0&#45;&gt;::current_predicate_directive_index_/2 -->
 <g id="edge25" class="edge">
 <title>reset/0&#45;&gt;::current_predicate_directive_index_/2</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="updates">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="updates">
 <path fill="none" stroke="black" d="M985.6,-761.03C988.4,-759.9 991.23,-758.86 994,-758 1088.6,-728.56 1120.58,-755.01 1214,-722 1239.98,-712.82 1266.91,-697.56 1287.51,-684.48"/>
 <polygon fill="black" stroke="black" points="1287.44,-684.53 1290.28,-677.9 1297.49,-677.98 1294.65,-684.61 1287.44,-684.53"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L170">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L170">
 <text xml:space="preserve" text-anchor="start" x="1232.98" y="-715.07" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -748,12 +748,12 @@
 <!-- reset/0&#45;&gt;::current_uses_directive_index_/2 -->
 <g id="edge26" class="edge">
 <title>reset/0&#45;&gt;::current_uses_directive_index_/2</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="updates">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="updates">
 <path fill="none" stroke="black" d="M930.34,-761.22C927.55,-760.05 924.74,-758.95 922,-758 854.76,-734.67 834.54,-741.06 765.97,-722 722.58,-709.94 674.34,-694.16 637.33,-681.55"/>
 <polygon fill="black" stroke="black" points="637.44,-681.58 630.46,-683.42 626.09,-677.69 633.06,-675.85 637.44,-681.58"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L170">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L170">
 <text xml:space="preserve" text-anchor="start" x="765.97" y="-715.07" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -761,12 +761,12 @@
 <!-- reset/0&#45;&gt;::seen_/1 -->
 <g id="edge27" class="edge">
 <title>reset/0&#45;&gt;::seen_/1</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="updates">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="updates">
 <path fill="none" stroke="black" d="M958,-757.53C958,-739.7 958,-711.67 958,-690.22"/>
 <polygon fill="black" stroke="black" points="958,-690.15 954,-684.16 958,-678.15 962,-684.15 958,-690.15"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L170">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L170">
 <text xml:space="preserve" text-anchor="start" x="958" y="-715.07" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -776,7 +776,7 @@
 <title>directive_resources_match_predicate_/2</title>
 <polygon fill="cornsilk" stroke="black" points="1660.55,-560 1441.45,-560 1441.45,-524 1660.55,-524 1660.55,-560"/>
 <text xml:space="preserve" text-anchor="start" x="1449.45" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node26_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L319" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L319">
+<g id="a_node26_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L319" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L319">
 <text xml:space="preserve" text-anchor="start" x="1451.95" y="-543.53" font-family="Monospace" font-size="11.00">directive_resources_match_predicate_/2</text>
 </a>
 </g>
@@ -788,12 +788,12 @@
 <!-- scope_directive_matches_predicate_/2&#45;&gt;directive_resources_match_predicate_/2 -->
 <g id="edge12" class="edge">
 <title>scope_directive_matches_predicate_/2&#45;&gt;directive_resources_match_predicate_/2</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L276" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L276" xlink:title="calls">
 <path fill="none" stroke="black" d="M1551,-640.53C1551,-622.28 1551,-593.33 1551,-571.7"/>
 <polygon fill="black" stroke="black" points="1554.5,-571.77 1551,-561.77 1547.5,-571.77 1554.5,-571.77"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L276" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L276">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L276" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L276">
 <text xml:space="preserve" text-anchor="start" x="1551" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -801,12 +801,12 @@
 <!-- predicate_directive_matches_predicate_/2&#45;&gt;directive_resource_matches_predicate_/2 -->
 <g id="edge14" class="edge">
 <title>predicate_directive_matches_predicate_/2&#45;&gt;directive_resource_matches_predicate_/2</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L305" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L305" xlink:title="calls">
 <path fill="none" stroke="black" d="M1790.99,-640.59C1783.46,-621.23 1771.68,-588.86 1765,-560 1749.54,-493.19 1780.45,-465.7 1745,-407 1724.63,-373.28 1687.74,-348.09 1657.08,-331.7"/>
 <polygon fill="black" stroke="black" points="1658.79,-328.64 1648.3,-327.17 1655.58,-334.86 1658.79,-328.64"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L305" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L305">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L305" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L305">
 <text xml:space="preserve" text-anchor="start" x="1762.56" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -814,12 +814,12 @@
 <!-- predicate_directive_matches_predicate_/2&#45;&gt;directive_resources_match_predicate_/2 -->
 <g id="edge13" class="edge">
 <title>predicate_directive_matches_predicate_/2&#45;&gt;directive_resources_match_predicate_/2</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L283" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L283" xlink:title="calls">
 <path fill="none" stroke="black" d="M1760.49,-640.53C1717.2,-620.38 1645.94,-587.2 1598.74,-565.23"/>
 <polygon fill="black" stroke="black" points="1600.38,-562.13 1589.83,-561.08 1597.42,-568.47 1600.38,-562.13"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L283" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L283">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L283" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L283">
 <text xml:space="preserve" text-anchor="start" x="1681.91" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -829,7 +829,7 @@
 <title>template_matches_predicate_/3</title>
 <polygon fill="cornsilk" stroke="black" points="1951.77,-560 1774.23,-560 1774.23,-524 1951.77,-524 1951.77,-560"/>
 <text xml:space="preserve" text-anchor="start" x="1782.23" y="-544.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node30_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L349" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L349">
+<g id="a_node30_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L349" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L349">
 <text xml:space="preserve" text-anchor="start" x="1784.73" y="-543.53" font-family="Monospace" font-size="11.00">template_matches_predicate_/3</text>
 </a>
 </g>
@@ -841,12 +841,12 @@
 <!-- predicate_directive_matches_predicate_/2&#45;&gt;template_matches_predicate_/3 -->
 <g id="edge15" class="edge">
 <title>predicate_directive_matches_predicate_/2&#45;&gt;template_matches_predicate_/3</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L307" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L307" xlink:title="calls">
 <path fill="none" stroke="black" d="M1807.87,-640.53C1818.43,-621.85 1835.32,-591.97 1847.62,-570.2"/>
 <polygon fill="black" stroke="black" points="1850.63,-572 1852.5,-561.57 1844.54,-568.55 1850.63,-572"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L307" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L307">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L307" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L307">
 <text xml:space="preserve" text-anchor="start" x="1832.45" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -854,12 +854,12 @@
 <!-- uses_directive_matches_predicate_/2&#45;&gt;directive_resources_match_predicate_/2 -->
 <g id="edge16" class="edge">
 <title>uses_directive_matches_predicate_/2&#45;&gt;directive_resources_match_predicate_/2</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L316" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L316" xlink:title="calls">
 <path fill="none" stroke="black" d="M430.17,-645.75C444.87,-644.09 459.82,-642.47 474,-641 820.48,-605.21 1230.4,-569.82 1429.85,-553.05"/>
 <polygon fill="black" stroke="black" points="1430.04,-556.55 1439.71,-552.23 1429.45,-549.58 1430.04,-556.55"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L316" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L316">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L316" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L316">
 <text xml:space="preserve" text-anchor="start" x="917.47" y="-598.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -867,12 +867,12 @@
 <!-- directive_resources_match_predicate_/2&#45;&gt;directive_resource_matches_predicate_/2 -->
 <g id="edge18" class="edge">
 <title>directive_resources_match_predicate_/2&#45;&gt;directive_resource_matches_predicate_/2</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L319" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L319" xlink:title="calls">
 <path fill="none" stroke="black" d="M1520.68,-523.52C1482.27,-498.99 1423.9,-452.26 1449,-407 1468.98,-370.97 1508.34,-346.44 1542.65,-330.94"/>
 <polygon fill="black" stroke="black" points="1543.93,-334.2 1551.72,-327.02 1541.15,-327.77 1543.93,-334.2"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L319" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L319">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L319" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L319">
 <text xml:space="preserve" text-anchor="start" x="1449" y="-422.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -882,7 +882,7 @@
 <title>directive_resource_in_list_matches_predicate_/2</title>
 <polygon fill="cornsilk" stroke="black" points="1735.73,-443 1476.27,-443 1476.27,-407 1735.73,-407 1735.73,-443"/>
 <text xml:space="preserve" text-anchor="start" x="1484.27" y="-427.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node27_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L325" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L325">
+<g id="a_node27_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L325" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L325">
 <text xml:space="preserve" text-anchor="start" x="1486.77" y="-426.53" font-family="Monospace" font-size="11.00">directive_resource_in_list_matches_predicate_/2</text>
 </a>
 </g>
@@ -894,12 +894,12 @@
 <!-- directive_resources_match_predicate_/2&#45;&gt;directive_resource_in_list_matches_predicate_/2 -->
 <g id="edge17" class="edge">
 <title>directive_resources_match_predicate_/2&#45;&gt;directive_resource_in_list_matches_predicate_/2</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L319" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L319" xlink:title="calls">
 <path fill="none" stroke="black" d="M1559.35,-523.53C1568.25,-504.94 1582.45,-475.24 1592.85,-453.5"/>
 <polygon fill="black" stroke="black" points="1595.94,-455.15 1597.1,-444.62 1589.62,-452.13 1595.94,-455.15"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L319" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L319">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L319" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L319">
 <text xml:space="preserve" text-anchor="start" x="1580.15" y="-481.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -907,12 +907,12 @@
 <!-- directive_resource_in_list_matches_predicate_/2&#45;&gt;directive_resource_matches_predicate_/2 -->
 <g id="edge19" class="edge">
 <title>directive_resource_in_list_matches_predicate_/2&#45;&gt;directive_resource_matches_predicate_/2</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L325" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L325" xlink:title="calls">
 <path fill="none" stroke="black" d="M1606,-406.53C1606,-388.28 1606,-359.33 1606,-337.7"/>
 <polygon fill="black" stroke="black" points="1609.5,-337.77 1606,-327.77 1602.5,-337.77 1609.5,-337.77"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L325" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L325">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L325" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L325">
 <text xml:space="preserve" text-anchor="start" x="1606" y="-364.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -922,7 +922,7 @@
 <title>alias_exposed_predicate_/2</title>
 <polygon fill="cornsilk" stroke="black" points="1685,-92 1527,-92 1527,-56 1685,-56 1685,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1535" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node29_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L341" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L341">
+<g id="a_node29_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L341" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L341">
 <text xml:space="preserve" text-anchor="start" x="1537.51" y="-75.53" font-family="Monospace" font-size="11.00">alias_exposed_predicate_/2</text>
 </a>
 </g>
@@ -934,12 +934,12 @@
 <!-- resource_exposed_predicate_/2&#45;&gt;alias_exposed_predicate_/2 -->
 <g id="edge21" class="edge">
 <title>resource_exposed_predicate_/2&#45;&gt;alias_exposed_predicate_/2</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L336" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L336" xlink:title="calls">
 <path fill="none" stroke="black" d="M1606,-172.53C1606,-154.28 1606,-125.33 1606,-103.7"/>
 <polygon fill="black" stroke="black" points="1609.5,-103.77 1606,-93.77 1602.5,-103.77 1609.5,-103.77"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L336" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/tools/mutation_testing/mutator_common.lgt#L336">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L336" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/tools/mutation_testing/mutator_common.lgt#L336">
 <text xml:space="preserve" text-anchor="start" x="1606" y="-130.07" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>

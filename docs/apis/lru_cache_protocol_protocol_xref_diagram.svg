@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 940,-140 940,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol lru_cache_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;10, 22:21</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 02:06</text>
 <g id="clust1" class="cluster">
 <title>cluster_lru_cache_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="lru_cache_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 916,-46 916,-46 922,-46 928,-52 928,-58 928,-58 928,-116 928,-116 928,-122 922,-128 916,-128 916,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/lru_caches/lru_cache_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/lru_caches/lru_cache_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/lru_caches/lru_cache_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/lru_caches/lru_cache_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.3" font-family="Monospace" font-size="10.00" fill="dimgray">lru_cache_protocol</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>new/2</title>
 <polygon fill="springgreen" stroke="black" points="72,-92 18,-92 18,-56 72,-56 72,-92"/>
 <text xml:space="preserve" text-anchor="start" x="27.82" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/lru_caches/lru_cache_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/lru_caches/lru_cache_protocol.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/lru_caches/lru_cache_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/lru_caches/lru_cache_protocol.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="30.32" y="-75.53" font-family="Monospace" font-size="11.00">new/2</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>capacity/2</title>
 <polygon fill="springgreen" stroke="black" points="160.26,-92 89.74,-92 89.74,-56 160.26,-56 160.26,-92"/>
 <text xml:space="preserve" text-anchor="start" x="97.74" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/lru_caches/lru_cache_protocol.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/lru_caches/lru_cache_protocol.lgt#L44">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/lru_caches/lru_cache_protocol.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/lru_caches/lru_cache_protocol.lgt#L44">
 <text xml:space="preserve" text-anchor="start" x="100.24" y="-75.53" font-family="Monospace" font-size="11.00">capacity/2</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>size/2</title>
 <polygon fill="springgreen" stroke="black" points="232,-92 178,-92 178,-56 232,-56 232,-92"/>
 <text xml:space="preserve" text-anchor="start" x="188.13" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/lru_caches/lru_cache_protocol.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/lru_caches/lru_cache_protocol.lgt#L51">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/lru_caches/lru_cache_protocol.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/lru_caches/lru_cache_protocol.lgt#L51">
 <text xml:space="preserve" text-anchor="start" x="190.63" y="-75.53" font-family="Monospace" font-size="11.00">size/2</text>
 </a>
 </g>
@@ -71,7 +71,7 @@
 <title>empty/1</title>
 <polygon fill="springgreen" stroke="black" points="310.06,-92 249.94,-92 249.94,-56 310.06,-56 310.06,-92"/>
 <text xml:space="preserve" text-anchor="start" x="257.94" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/lru_caches/lru_cache_protocol.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/lru_caches/lru_cache_protocol.lgt#L58">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/lru_caches/lru_cache_protocol.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/lru_caches/lru_cache_protocol.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="260.44" y="-75.53" font-family="Monospace" font-size="11.00">empty/1</text>
 </a>
 </g>
@@ -85,7 +85,7 @@
 <title>lookup/3</title>
 <polygon fill="springgreen" stroke="black" points="390.29,-92 327.71,-92 327.71,-56 390.29,-56 390.29,-92"/>
 <text xml:space="preserve" text-anchor="start" x="335.71" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/lru_caches/lru_cache_protocol.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/lru_caches/lru_cache_protocol.lgt#L65">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/lru_caches/lru_cache_protocol.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/lru_caches/lru_cache_protocol.lgt#L65">
 <text xml:space="preserve" text-anchor="start" x="338.21" y="-75.53" font-family="Monospace" font-size="11.00">lookup/3</text>
 </a>
 </g>
@@ -99,7 +99,7 @@
 <title>get/4</title>
 <polygon fill="springgreen" stroke="black" points="462,-92 408,-92 408,-56 462,-56 462,-92"/>
 <text xml:space="preserve" text-anchor="start" x="420.27" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/lru_caches/lru_cache_protocol.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/lru_caches/lru_cache_protocol.lgt#L75">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/lru_caches/lru_cache_protocol.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/lru_caches/lru_cache_protocol.lgt#L75">
 <text xml:space="preserve" text-anchor="start" x="422.77" y="-75.53" font-family="Monospace" font-size="11.00">get/4</text>
 </a>
 </g>
@@ -113,7 +113,7 @@
 <title>put/4</title>
 <polygon fill="springgreen" stroke="black" points="534,-92 480,-92 480,-56 534,-56 534,-92"/>
 <text xml:space="preserve" text-anchor="start" x="492.27" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/lru_caches/lru_cache_protocol.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/lru_caches/lru_cache_protocol.lgt#L85">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/lru_caches/lru_cache_protocol.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/lru_caches/lru_cache_protocol.lgt#L85">
 <text xml:space="preserve" text-anchor="start" x="494.77" y="-75.53" font-family="Monospace" font-size="11.00">put/4</text>
 </a>
 </g>
@@ -127,7 +127,7 @@
 <title>update/5</title>
 <polygon fill="springgreen" stroke="black" points="615.91,-92 552.09,-92 552.09,-56 615.91,-56 615.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="560.09" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/lru_caches/lru_cache_protocol.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/lru_caches/lru_cache_protocol.lgt#L95">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/lru_caches/lru_cache_protocol.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/lru_caches/lru_cache_protocol.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="562.59" y="-75.53" font-family="Monospace" font-size="11.00">update/5</text>
 </a>
 </g>
@@ -141,7 +141,7 @@
 <title>delete/4</title>
 <polygon fill="springgreen" stroke="black" points="694.07,-92 633.93,-92 633.93,-56 694.07,-56 694.07,-92"/>
 <text xml:space="preserve" text-anchor="start" x="641.93" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/lru_caches/lru_cache_protocol.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/lru_caches/lru_cache_protocol.lgt#L105">
+<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/lru_caches/lru_cache_protocol.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/lru_caches/lru_cache_protocol.lgt#L105">
 <text xml:space="preserve" text-anchor="start" x="644.43" y="-75.53" font-family="Monospace" font-size="11.00">delete/4</text>
 </a>
 </g>
@@ -155,7 +155,7 @@
 <title>evict/3</title>
 <polygon fill="springgreen" stroke="black" points="766,-92 712,-92 712,-56 766,-56 766,-92"/>
 <text xml:space="preserve" text-anchor="start" x="720.6" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/lru_caches/lru_cache_protocol.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/lru_caches/lru_cache_protocol.lgt#L115">
+<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/lru_caches/lru_cache_protocol.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/lru_caches/lru_cache_protocol.lgt#L115">
 <text xml:space="preserve" text-anchor="start" x="723.1" y="-75.53" font-family="Monospace" font-size="11.00">evict/3</text>
 </a>
 </g>
@@ -169,7 +169,7 @@
 <title>as_list/2</title>
 <polygon fill="springgreen" stroke="black" points="845.68,-92 784.32,-92 784.32,-56 845.68,-56 845.68,-92"/>
 <text xml:space="preserve" text-anchor="start" x="792.32" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/lru_caches/lru_cache_protocol.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/lru_caches/lru_cache_protocol.lgt#L122">
+<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/lru_caches/lru_cache_protocol.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/lru_caches/lru_cache_protocol.lgt#L122">
 <text xml:space="preserve" text-anchor="start" x="794.82" y="-75.53" font-family="Monospace" font-size="11.00">as_list/2</text>
 </a>
 </g>
@@ -183,7 +183,7 @@
 <title>clear/2</title>
 <polygon fill="springgreen" stroke="black" points="918.01,-92 863.99,-92 863.99,-56 918.01,-56 918.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="871.99" y="-76.07" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/lru_caches/lru_cache_protocol.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec50b2dfd29693508fdc02140a6fc442fecc26c3/library/lru_caches/lru_cache_protocol.lgt#L129">
+<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/lru_caches/lru_cache_protocol.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/786cc94d487b4608116b2925dc0dde1e0ef872c6/library/lru_caches/lru_cache_protocol.lgt#L129">
 <text xml:space="preserve" text-anchor="start" x="874.49" y="-75.53" font-family="Monospace" font-size="11.00">clear/2</text>
 </a>
 </g>
