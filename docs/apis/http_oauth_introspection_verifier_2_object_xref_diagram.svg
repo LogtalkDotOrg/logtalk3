@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-491 918.83,-491 918.83,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object http_oauth_introspection_verifier/2</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 02:56</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 15:49</text>
 <g id="clust1" class="cluster">
 <title>cluster_http_oauth_introspection_verifier_2_object</title>
 <g id="a_clust1"><a xlink:title="http_oauth_introspection_verifier(Endpoint,Options)">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 884,-46 884,-46 890,-46 896,-52 896,-58 896,-58 896,-467 896,-467 896,-473 890,-479 884,-479 884,-479 20,-479 20,-479 14,-479 8,-473 8,-467 8,-467 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-463.46" font-family="monospace" font-size="10.00" fill="dimgray">http_oauth_introspection_verifier(Endpoint,Options)</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>verify/3</title>
 <polygon fill="cornsilk" stroke="black" points="487.81,-443 408.19,-443 408.19,-407 487.81,-407 487.81,-443"/>
 <text xml:space="preserve" text-anchor="start" x="416.19" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L40">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L40">
 <text xml:space="preserve" text-anchor="start" x="421.6" y="-426.71" font-family="monospace" font-size="11.00">verify/3</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>verifier_options/3</title>
 <polygon fill="cornsilk" stroke="black" points="163.81,-326 18.19,-326 18.19,-290 163.81,-290 163.81,-326"/>
 <text xml:space="preserve" text-anchor="start" x="26.19" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L52">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L52">
 <text xml:space="preserve" text-anchor="start" x="31.59" y="-309.71" font-family="monospace" font-size="11.00">verifier_options/3</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- verify/3&#45;&gt;verifier_options/3 -->
 <g id="edge1" class="edge">
 <title>verify/3&#45;&gt;verifier_options/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L40" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L40" xlink:title="calls">
 <path fill="none" stroke="black" d="M407.74,-411.03C346.51,-391.31 229.37,-353.57 155.99,-329.93"/>
 <polygon fill="black" stroke="black" points="157.08,-326.61 146.48,-326.87 154.93,-333.27 157.08,-326.61"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L40">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L40">
 <text xml:space="preserve" text-anchor="start" x="280.2" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>introspection_scopes/2</title>
 <polygon fill="cornsilk" stroke="black" points="354.01,-326 181.99,-326 181.99,-290 354.01,-290 354.01,-326"/>
 <text xml:space="preserve" text-anchor="start" x="189.99" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L68">
+<g id="a_node4_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L68">
 <text xml:space="preserve" text-anchor="start" x="195.39" y="-309.71" font-family="monospace" font-size="11.00">introspection_scopes/2</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- verify/3&#45;&gt;introspection_scopes/2 -->
 <g id="edge2" class="edge">
 <title>verify/3&#45;&gt;introspection_scopes/2</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L40" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L40" xlink:title="calls">
 <path fill="none" stroke="black" d="M420.66,-406.53C389.78,-386.8 339.36,-354.59 304.98,-332.62"/>
 <polygon fill="black" stroke="black" points="306.89,-329.69 296.58,-327.26 303.12,-335.59 306.89,-329.69"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L40">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L40">
 <text xml:space="preserve" text-anchor="start" x="363.4" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -97,7 +97,7 @@
 <title>validate_audience/4</title>
 <polygon fill="cornsilk" stroke="black" points="524.11,-326 371.89,-326 371.89,-290 524.11,-290 524.11,-326"/>
 <text xml:space="preserve" text-anchor="start" x="379.89" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L74">
+<g id="a_node5_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="385.29" y="-309.71" font-family="monospace" font-size="11.00">validate_audience/4</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- verify/3&#45;&gt;validate_audience/4 -->
 <g id="edge3" class="edge">
 <title>verify/3&#45;&gt;validate_audience/4</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L40" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L40" xlink:title="calls">
 <path fill="none" stroke="black" d="M448,-406.53C448,-388.28 448,-359.33 448,-337.7"/>
 <polygon fill="black" stroke="black" points="451.5,-337.77 448,-327.77 444.5,-337.77 451.5,-337.77"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L40">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L40">
 <text xml:space="preserve" text-anchor="start" x="448" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -136,12 +136,12 @@
 <!-- verify/3&#45;&gt;http_oauth_introspection_client::introspect/4 -->
 <g id="edge6" class="edge">
 <title>verify/3&#45;&gt;http_oauth_introspection_client::introspect/4</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L40" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L40" xlink:title="calls">
 <path fill="none" stroke="black" d="M486.88,-406.53C531.84,-386.34 605.91,-353.06 654.83,-331.09"/>
 <polygon fill="black" stroke="black" points="656.11,-334.35 663.79,-327.06 653.24,-327.97 656.11,-334.35"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L40">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L40">
 <text xml:space="preserve" text-anchor="start" x="583.68" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -163,12 +163,12 @@
 <!-- verify/3&#45;&gt;list::memberchk/2 -->
 <g id="edge7" class="edge">
 <title>verify/3&#45;&gt;list::memberchk/2</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L40" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L40" xlink:title="calls">
 <path fill="none" stroke="black" d="M488.07,-420.99C584.81,-412.82 826.73,-386.61 875,-326 957.61,-222.28 744.99,-134.49 629.19,-95.95"/>
 <polygon fill="black" stroke="black" points="630.33,-92.64 619.74,-92.85 628.15,-99.29 630.33,-92.64"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L40">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L40">
 <text xml:space="preserve" text-anchor="start" x="887.82" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -178,7 +178,7 @@
 <title>remove_audience_option/2</title>
 <polygon fill="cornsilk" stroke="black" points="203.61,-209 18.39,-209 18.39,-173 203.61,-173 203.61,-209"/>
 <text xml:space="preserve" text-anchor="start" x="26.39" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L61">
+<g id="a_node3_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L61">
 <text xml:space="preserve" text-anchor="start" x="31.79" y="-192.71" font-family="monospace" font-size="11.00">remove_audience_option/2</text>
 </a>
 </g>
@@ -190,12 +190,12 @@
 <!-- verifier_options/3&#45;&gt;remove_audience_option/2 -->
 <g id="edge4" class="edge">
 <title>verifier_options/3&#45;&gt;remove_audience_option/2</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L54" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L54" xlink:title="calls">
 <path fill="none" stroke="black" d="M94.04,-289.53C97.23,-271.19 102.29,-242.06 106.06,-220.4"/>
 <polygon fill="black" stroke="black" points="109.47,-221.2 107.74,-210.74 102.58,-220 109.47,-221.2"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L54">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L54">
 <text xml:space="preserve" text-anchor="start" x="101.6" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -217,12 +217,12 @@
 <!-- verifier_options/3&#45;&gt;list::member/2 -->
 <g id="edge8" class="edge">
 <title>verifier_options/3&#45;&gt;list::member/2</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L54" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L54" xlink:title="calls">
 <path fill="none" stroke="black" d="M119.86,-289.53C152.59,-269.72 206.14,-237.31 242.43,-215.34"/>
 <polygon fill="black" stroke="black" points="244.15,-218.4 250.89,-210.23 240.52,-212.41 244.15,-218.4"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L54">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L54">
 <text xml:space="preserve" text-anchor="start" x="191.7" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -230,12 +230,12 @@
 <!-- introspection_scopes/2&#45;&gt;list::member/2 -->
 <g id="edge9" class="edge">
 <title>introspection_scopes/2&#45;&gt;list::member/2</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L68" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L68" xlink:title="calls">
 <path fill="none" stroke="black" d="M269.97,-289.53C272.05,-271.19 275.34,-242.06 277.79,-220.4"/>
 <polygon fill="black" stroke="black" points="281.23,-221.09 278.88,-210.76 274.28,-220.3 281.23,-221.09"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L68">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L68">
 <text xml:space="preserve" text-anchor="start" x="274.89" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -245,7 +245,7 @@
 <title>audience_contains/2</title>
 <polygon fill="cornsilk" stroke="black" points="524.11,-209 371.89,-209 371.89,-173 524.11,-173 524.11,-209"/>
 <text xml:space="preserve" text-anchor="start" x="379.89" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L79">
+<g id="a_node6_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L79">
 <text xml:space="preserve" text-anchor="start" x="385.29" y="-192.71" font-family="monospace" font-size="11.00">audience_contains/2</text>
 </a>
 </g>
@@ -257,12 +257,12 @@
 <!-- validate_audience/4&#45;&gt;audience_contains/2 -->
 <g id="edge5" class="edge">
 <title>validate_audience/4&#45;&gt;audience_contains/2</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L75" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L75" xlink:title="calls">
 <path fill="none" stroke="black" d="M448,-289.53C448,-271.28 448,-242.33 448,-220.7"/>
 <polygon fill="black" stroke="black" points="451.5,-220.77 448,-210.77 444.5,-220.77 451.5,-220.77"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L75">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L75">
 <text xml:space="preserve" text-anchor="start" x="448" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -270,12 +270,12 @@
 <!-- validate_audience/4&#45;&gt;list::memberchk/2 -->
 <g id="edge10" class="edge">
 <title>validate_audience/4&#45;&gt;list::memberchk/2</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L75" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L75" xlink:title="calls">
 <path fill="none" stroke="black" d="M468.19,-289.64C487.88,-271.54 517.11,-241.34 533,-209 549.59,-175.23 555.99,-131.9 558.45,-103.79"/>
 <polygon fill="black" stroke="black" points="561.94,-104.14 559.2,-93.91 554.96,-103.62 561.94,-104.14"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L75">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L75">
 <text xml:space="preserve" text-anchor="start" x="546.09" y="-188.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -283,12 +283,12 @@
 <!-- audience_contains/2&#45;&gt;list::memberchk/2 -->
 <g id="edge11" class="edge">
 <title>audience_contains/2&#45;&gt;list::memberchk/2</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L83" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L83" xlink:title="calls">
 <path fill="none" stroke="black" d="M465.01,-172.53C483.7,-153.34 513.9,-122.33 535.22,-100.44"/>
 <polygon fill="black" stroke="black" points="537.67,-102.94 542.14,-93.34 532.66,-98.06 537.67,-102.94"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_introspection_verifier.lgt#L83">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_introspection_verifier.lgt#L83">
 <text xml:space="preserve" text-anchor="start" x="507.36" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>

@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-374 422.07,-374 422.07,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object http_oauth_exact_scope_checker</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 02:56</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 15:49</text>
 <g id="clust1" class="cluster">
 <title>cluster_http_oauth_exact_scope_checker_object</title>
 <g id="a_clust1"><a xlink:title="http_oauth_exact_scope_checker">
 <path fill="snow" stroke="dimgray" d="M119.03,-46C119.03,-46 299.03,-46 299.03,-46 305.03,-46 311.03,-52 311.03,-58 311.03,-58 311.03,-350 311.03,-350 311.03,-356 305.03,-362 299.03,-362 299.03,-362 119.03,-362 119.03,-362 113.03,-362 107.03,-356 107.03,-350 107.03,-350 107.03,-58 107.03,-58 107.03,-52 113.03,-46 119.03,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_exact_scope_checker.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_exact_scope_checker.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_exact_scope_checker.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_exact_scope_checker.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="119.03" y="-346.46" font-family="monospace" font-size="10.00" fill="dimgray">http_oauth_exact_scope_checker</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>sufficient/2</title>
 <polygon fill="cornsilk" stroke="black" points="262.04,-326 156.03,-326 156.03,-290 262.04,-290 262.04,-326"/>
 <text xml:space="preserve" text-anchor="start" x="164.03" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_exact_scope_checker.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_exact_scope_checker.lgt#L36">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_exact_scope_checker.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_exact_scope_checker.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="169.43" y="-309.71" font-family="monospace" font-size="11.00">sufficient/2</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>all_required_scopes/2</title>
 <polygon fill="cornsilk" stroke="black" points="291.74,-209 126.32,-209 126.32,-173 291.74,-173 291.74,-209"/>
 <text xml:space="preserve" text-anchor="start" x="134.32" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_exact_scope_checker.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_exact_scope_checker.lgt#L39">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_exact_scope_checker.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_exact_scope_checker.lgt#L39">
 <text xml:space="preserve" text-anchor="start" x="139.72" y="-192.71" font-family="monospace" font-size="11.00">all_required_scopes/2</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- sufficient/2&#45;&gt;all_required_scopes/2 -->
 <g id="edge1" class="edge">
 <title>sufficient/2&#45;&gt;all_required_scopes/2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_exact_scope_checker.lgt#L36" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_exact_scope_checker.lgt#L36" xlink:title="calls">
 <path fill="none" stroke="black" d="M209.03,-289.53C209.03,-271.28 209.03,-242.33 209.03,-220.7"/>
 <polygon fill="black" stroke="black" points="212.53,-220.77 209.03,-210.77 205.53,-220.77 212.53,-220.77"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_exact_scope_checker.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_exact_scope_checker.lgt#L36">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_exact_scope_checker.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_exact_scope_checker.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="209.03" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- all_required_scopes/2&#45;&gt;list::memberchk/2 -->
 <g id="edge2" class="edge">
 <title>all_required_scopes/2&#45;&gt;list::memberchk/2</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_exact_scope_checker.lgt#L40" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_exact_scope_checker.lgt#L40" xlink:title="calls">
 <path fill="none" stroke="black" d="M209.03,-172.53C209.03,-154.28 209.03,-125.33 209.03,-103.7"/>
 <polygon fill="black" stroke="black" points="212.53,-103.77 209.03,-93.77 205.53,-103.77 212.53,-103.77"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_exact_scope_checker.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/http_oauth/http_oauth_exact_scope_checker.lgt#L40">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_exact_scope_checker.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/http_oauth/http_oauth_exact_scope_checker.lgt#L40">
 <text xml:space="preserve" text-anchor="start" x="209.03" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>

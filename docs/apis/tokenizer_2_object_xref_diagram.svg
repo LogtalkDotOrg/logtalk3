@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-842 1049,-842 1049,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object tokenizer/2</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 02:57</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 15:49</text>
 <g id="clust1" class="cluster">
 <title>cluster_tokenizer_2_object</title>
 <g id="a_clust1"><a xlink:title="tokenizer(Representation,Language)">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1025,-46 1025,-46 1031,-46 1037,-52 1037,-58 1037,-58 1037,-818 1037,-818 1037,-824 1031,-830 1025,-830 1025,-830 20,-830 20,-830 14,-830 8,-824 8,-818 8,-818 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-814.46" font-family="monospace" font-size="10.00" fill="dimgray">tokenizer(Representation,Language)</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>check_text/1</title>
 <polygon fill="cornsilk" stroke="black" points="687.01,-326 580.99,-326 580.99,-290 687.01,-290 687.01,-326"/>
 <text xml:space="preserve" text-anchor="start" x="588.99" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L108">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L108">
 <text xml:space="preserve" text-anchor="start" x="594.39" y="-309.71" font-family="monospace" font-size="11.00">check_text/1</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>check_text/2</title>
 <polygon fill="cornsilk" stroke="black" points="687.01,-209 580.99,-209 580.99,-173 687.01,-173 687.01,-209"/>
 <text xml:space="preserve" text-anchor="start" x="588.99" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node13_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L111">
+<g id="a_node13_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L111">
 <text xml:space="preserve" text-anchor="start" x="594.39" y="-192.71" font-family="monospace" font-size="11.00">check_text/2</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- check_text/1&#45;&gt;check_text/2 -->
 <g id="edge14" class="edge">
 <title>check_text/1&#45;&gt;check_text/2</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L108" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L108" xlink:title="calls">
 <path fill="none" stroke="black" d="M634,-289.53C634,-271.28 634,-242.33 634,-220.7"/>
 <polygon fill="black" stroke="black" points="637.5,-220.77 634,-210.77 630.5,-220.77 637.5,-220.77"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L108">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L108">
 <text xml:space="preserve" text-anchor="start" x="634" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>split_sentences/2</title>
 <polygon fill="cornsilk" stroke="black" points="176.51,-677 37.49,-677 37.49,-641 176.51,-641 176.51,-677"/>
 <text xml:space="preserve" text-anchor="start" x="45.49" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L62">
+<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L62">
 <text xml:space="preserve" text-anchor="start" x="50.89" y="-660.71" font-family="monospace" font-size="11.00">split_sentences/2</text>
 </a>
 </g>
@@ -84,7 +84,7 @@
 <title>split_sentences/3</title>
 <polygon fill="cornsilk" stroke="black" points="176.51,-560 37.49,-560 37.49,-524 176.51,-524 176.51,-560"/>
 <text xml:space="preserve" text-anchor="start" x="45.49" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L65">
+<g id="a_node7_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L65">
 <text xml:space="preserve" text-anchor="start" x="50.89" y="-543.71" font-family="monospace" font-size="11.00">split_sentences/3</text>
 </a>
 </g>
@@ -96,12 +96,12 @@
 <!-- split_sentences/2&#45;&gt;split_sentences/3 -->
 <g id="edge7" class="edge">
 <title>split_sentences/2&#45;&gt;split_sentences/3</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L62" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L62" xlink:title="calls">
 <path fill="none" stroke="black" d="M107,-640.53C107,-622.28 107,-593.33 107,-571.7"/>
 <polygon fill="black" stroke="black" points="110.5,-571.77 107,-561.77 103.5,-571.77 110.5,-571.77"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L62">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L62">
 <text xml:space="preserve" text-anchor="start" x="107" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -111,7 +111,7 @@
 <title>tokenize_sentences/2</title>
 <polygon fill="cornsilk" stroke="black" points="381.41,-794 222.59,-794 222.59,-758 381.41,-758 381.41,-794"/>
 <text xml:space="preserve" text-anchor="start" x="230.59" y="-778.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L54">
+<g id="a_node3_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L54">
 <text xml:space="preserve" text-anchor="start" x="235.99" y="-777.71" font-family="monospace" font-size="11.00">tokenize_sentences/2</text>
 </a>
 </g>
@@ -125,7 +125,7 @@
 <title>tokenize_sentences/3</title>
 <polygon fill="cornsilk" stroke="black" points="381.41,-677 222.59,-677 222.59,-641 381.41,-641 381.41,-677"/>
 <text xml:space="preserve" text-anchor="start" x="230.59" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L57">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="235.99" y="-660.71" font-family="monospace" font-size="11.00">tokenize_sentences/3</text>
 </a>
 </g>
@@ -137,12 +137,12 @@
 <!-- tokenize_sentences/2&#45;&gt;tokenize_sentences/3 -->
 <g id="edge4" class="edge">
 <title>tokenize_sentences/2&#45;&gt;tokenize_sentences/3</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L54" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L54" xlink:title="calls">
 <path fill="none" stroke="black" d="M302,-757.53C302,-739.28 302,-710.33 302,-688.7"/>
 <polygon fill="black" stroke="black" points="305.5,-688.77 302,-678.77 298.5,-688.77 305.5,-688.77"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L54">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L54">
 <text xml:space="preserve" text-anchor="start" x="302" y="-715.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -152,7 +152,7 @@
 <title>tokenize/2</title>
 <polygon fill="cornsilk" stroke="black" points="496.41,-677 403.59,-677 403.59,-641 496.41,-641 496.41,-677"/>
 <text xml:space="preserve" text-anchor="start" x="411.59" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L46">
+<g id="a_node4_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L46">
 <text xml:space="preserve" text-anchor="start" x="416.99" y="-660.71" font-family="monospace" font-size="11.00">tokenize/2</text>
 </a>
 </g>
@@ -166,7 +166,7 @@
 <title>tokenize/3</title>
 <polygon fill="cornsilk" stroke="black" points="496.41,-560 403.59,-560 403.59,-524 496.41,-524 496.41,-560"/>
 <text xml:space="preserve" text-anchor="start" x="411.59" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L49">
+<g id="a_node5_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L49">
 <text xml:space="preserve" text-anchor="start" x="416.99" y="-543.71" font-family="monospace" font-size="11.00">tokenize/3</text>
 </a>
 </g>
@@ -178,12 +178,12 @@
 <!-- tokenize/2&#45;&gt;tokenize/3 -->
 <g id="edge1" class="edge">
 <title>tokenize/2&#45;&gt;tokenize/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L46" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L46" xlink:title="calls">
 <path fill="none" stroke="black" d="M450,-640.53C450,-622.28 450,-593.33 450,-571.7"/>
 <polygon fill="black" stroke="black" points="453.5,-571.77 450,-561.77 446.5,-571.77 453.5,-571.77"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L46">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L46">
 <text xml:space="preserve" text-anchor="start" x="450" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -193,7 +193,7 @@
 <title>prepare/4</title>
 <polygon fill="cornsilk" stroke="black" points="536.11,-443 449.89,-443 449.89,-407 536.11,-407 536.11,-443"/>
 <text xml:space="preserve" text-anchor="start" x="457.89" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L84">
+<g id="a_node10_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L84">
 <text xml:space="preserve" text-anchor="start" x="463.3" y="-426.71" font-family="monospace" font-size="11.00">prepare/4</text>
 </a>
 </g>
@@ -205,12 +205,12 @@
 <!-- tokenize/3&#45;&gt;prepare/4 -->
 <g id="edge2" class="edge">
 <title>tokenize/3&#45;&gt;prepare/4</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L49" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L49" xlink:title="calls">
 <path fill="none" stroke="black" d="M456.53,-523.53C463.45,-505.02 474.49,-475.52 482.61,-453.8"/>
 <polygon fill="black" stroke="black" points="485.79,-455.26 486.02,-444.67 479.24,-452.81 485.79,-455.26"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L49">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L49">
 <text xml:space="preserve" text-anchor="start" x="472.79" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -220,7 +220,7 @@
 <title>codes_texts/2</title>
 <polygon fill="cornsilk" stroke="black" points="244.31,-443 131.69,-443 131.69,-407 244.31,-407 244.31,-443"/>
 <text xml:space="preserve" text-anchor="start" x="139.69" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node15_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L125">
+<g id="a_node15_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L125">
 <text xml:space="preserve" text-anchor="start" x="145.09" y="-426.71" font-family="monospace" font-size="11.00">codes_texts/2</text>
 </a>
 </g>
@@ -232,12 +232,12 @@
 <!-- tokenize/3&#45;&gt;codes_texts/2 -->
 <g id="edge3" class="edge">
 <title>tokenize/3&#45;&gt;codes_texts/2</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L49" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L49" xlink:title="calls">
 <path fill="none" stroke="black" d="M410.21,-523.53C364.1,-503.3 288.07,-469.92 238,-447.95"/>
 <polygon fill="black" stroke="black" points="239.69,-444.86 229.12,-444.05 236.87,-451.27 239.69,-444.86"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L49">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L49">
 <text xml:space="preserve" text-anchor="start" x="326.86" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -245,12 +245,12 @@
 <!-- tokenize_sentences/3&#45;&gt;prepare/4 -->
 <g id="edge5" class="edge">
 <title>tokenize_sentences/3&#45;&gt;prepare/4</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L57" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M381.84,-640.75C421.92,-630.85 465.24,-617.86 481,-605 524.49,-569.52 512.7,-495.29 501.9,-454.45"/>
 <polygon fill="black" stroke="black" points="505.28,-453.53 499.2,-444.85 498.54,-455.43 505.28,-453.53"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L57">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="511.95" y="-539.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -260,7 +260,7 @@
 <title>tokenize_sentence_codes/3</title>
 <polygon fill="cornsilk" stroke="black" points="385.91,-560 194.09,-560 194.09,-524 385.91,-524 385.91,-560"/>
 <text xml:space="preserve" text-anchor="start" x="202.09" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node17_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L137">
+<g id="a_node17_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L137">
 <text xml:space="preserve" text-anchor="start" x="207.49" y="-543.71" font-family="monospace" font-size="11.00">tokenize_sentence_codes/3</text>
 </a>
 </g>
@@ -272,12 +272,12 @@
 <!-- tokenize_sentences/3&#45;&gt;tokenize_sentence_codes/3 -->
 <g id="edge6" class="edge">
 <title>tokenize_sentences/3&#45;&gt;tokenize_sentence_codes/3</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L57" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M300.18,-640.53C298.27,-622.28 295.25,-593.33 292.99,-571.7"/>
 <polygon fill="black" stroke="black" points="296.48,-571.34 291.96,-561.76 289.51,-572.07 296.48,-571.34"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L57">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="296.36" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -285,12 +285,12 @@
 <!-- split_sentences/3&#45;&gt;prepare/4 -->
 <g id="edge8" class="edge">
 <title>split_sentences/3&#45;&gt;prepare/4</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L65" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L65" xlink:title="calls">
 <path fill="none" stroke="black" d="M129.03,-523.57C148.06,-509.4 176.87,-490.01 205,-479 282.67,-448.6 379.07,-435.4 438.3,-429.84"/>
 <polygon fill="black" stroke="black" points="438.47,-433.33 448.12,-428.96 437.85,-426.36 438.47,-433.33"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L65">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L65">
 <text xml:space="preserve" text-anchor="start" x="205" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -298,12 +298,12 @@
 <!-- split_sentences/3&#45;&gt;codes_texts/2 -->
 <g id="edge9" class="edge">
 <title>split_sentences/3&#45;&gt;codes_texts/2</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L65" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L65" xlink:title="calls">
 <path fill="none" stroke="black" d="M110.69,-523.63C114.03,-510.58 119.85,-492.67 129,-479 135.96,-468.59 145.42,-458.89 154.73,-450.71"/>
 <polygon fill="black" stroke="black" points="156.94,-453.43 162.36,-444.33 152.44,-448.06 156.94,-453.43"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L65">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L65">
 <text xml:space="preserve" text-anchor="start" x="129" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -313,7 +313,7 @@
 <title>default_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="719.21,-794 586.79,-794 586.79,-758 719.21,-758 719.21,-794"/>
 <text xml:space="preserve" text-anchor="start" x="594.79" y="-778.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L70">
+<g id="a_node8_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L70">
 <text xml:space="preserve" text-anchor="start" x="600.19" y="-777.71" font-family="monospace" font-size="11.00">default_option/1</text>
 </a>
 </g>
@@ -327,7 +327,7 @@
 <title>valid_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="950.61,-794 831.39,-794 831.39,-758 950.61,-758 950.61,-794"/>
 <text xml:space="preserve" text-anchor="start" x="839.39" y="-778.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L75">
+<g id="a_node9_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L75">
 <text xml:space="preserve" text-anchor="start" x="844.79" y="-777.71" font-family="monospace" font-size="11.00">valid_option/1</text>
 </a>
 </g>
@@ -339,12 +339,12 @@
 <!-- prepare/4&#45;&gt;check_text/1 -->
 <g id="edge12" class="edge">
 <title>prepare/4&#45;&gt;check_text/1</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L84" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L84" xlink:title="calls">
 <path fill="none" stroke="black" d="M514.41,-406.53C538.36,-387 577.31,-355.23 604.22,-333.29"/>
 <polygon fill="black" stroke="black" points="606.14,-336.24 611.67,-327.21 601.71,-330.82 606.14,-336.24"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L84">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L84">
 <text xml:space="preserve" text-anchor="start" x="567.73" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -354,7 +354,7 @@
 <title>check_representation/0</title>
 <polygon fill="cornsilk" stroke="black" points="877.01,-326 704.99,-326 704.99,-290 877.01,-290 877.01,-326"/>
 <text xml:space="preserve" text-anchor="start" x="712.99" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L92">
+<g id="a_node11_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L92">
 <text xml:space="preserve" text-anchor="start" x="718.39" y="-309.71" font-family="monospace" font-size="11.00">check_representation/0</text>
 </a>
 </g>
@@ -366,12 +366,12 @@
 <!-- prepare/4&#45;&gt;check_representation/0 -->
 <g id="edge10" class="edge">
 <title>prepare/4&#45;&gt;check_representation/0</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L84" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L84" xlink:title="calls">
 <path fill="none" stroke="black" d="M536.33,-407.28C588.8,-387.03 677.29,-352.88 734.92,-330.64"/>
 <polygon fill="black" stroke="black" points="736.18,-333.91 744.25,-327.04 733.66,-327.38 736.18,-333.91"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L84">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L84">
 <text xml:space="preserve" text-anchor="start" x="650.94" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -381,7 +381,7 @@
 <title>check_language/0</title>
 <polygon fill="cornsilk" stroke="black" points="1027.21,-326 894.79,-326 894.79,-290 1027.21,-290 1027.21,-326"/>
 <text xml:space="preserve" text-anchor="start" x="902.79" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node12_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L100">
+<g id="a_node12_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="908.19" y="-309.71" font-family="monospace" font-size="11.00">check_language/0</text>
 </a>
 </g>
@@ -393,12 +393,12 @@
 <!-- prepare/4&#45;&gt;check_language/0 -->
 <g id="edge11" class="edge">
 <title>prepare/4&#45;&gt;check_language/0</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L84" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L84" xlink:title="calls">
 <path fill="none" stroke="black" d="M536.19,-413.39C615.17,-393.98 783.9,-352.52 883.3,-328.09"/>
 <polygon fill="black" stroke="black" points="884.13,-331.49 893.01,-325.71 882.46,-324.7 884.13,-331.49"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L84">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L84">
 <text xml:space="preserve" text-anchor="start" x="741.03" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -408,7 +408,7 @@
 <title>text_codes/3</title>
 <polygon fill="cornsilk" stroke="black" points="248.01,-326 141.99,-326 141.99,-290 248.01,-290 248.01,-326"/>
 <text xml:space="preserve" text-anchor="start" x="149.99" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node14_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L118" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L118">
+<g id="a_node14_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L118" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L118">
 <text xml:space="preserve" text-anchor="start" x="155.39" y="-309.71" font-family="monospace" font-size="11.00">text_codes/3</text>
 </a>
 </g>
@@ -420,12 +420,12 @@
 <!-- prepare/4&#45;&gt;text_codes/3 -->
 <g id="edge13" class="edge">
 <title>prepare/4&#45;&gt;text_codes/3</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L84" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L84" xlink:title="calls">
 <path fill="none" stroke="black" d="M449.67,-407.28C397.2,-387.03 308.71,-352.88 251.08,-330.64"/>
 <polygon fill="black" stroke="black" points="252.34,-327.38 241.75,-327.04 249.82,-333.91 252.34,-327.38"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L84">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L84">
 <text xml:space="preserve" text-anchor="start" x="352.94" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -444,12 +444,12 @@
 <!-- prepare/4&#45;&gt;^^check_options/1 -->
 <g id="edge17" class="edge">
 <title>prepare/4&#45;&gt;^^check_options/1</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L84" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L84" xlink:title="calls">
 <path fill="none" stroke="black" d="M469.16,-406.53C442.45,-386.97 398.99,-355.14 369.03,-333.19"/>
 <polygon fill="black" stroke="black" points="371.17,-330.42 361.03,-327.34 367.03,-336.07 371.17,-330.42"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L84">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L84">
 <text xml:space="preserve" text-anchor="start" x="419.21" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -468,12 +468,12 @@
 <!-- prepare/4&#45;&gt;^^merge_options/2 -->
 <g id="edge18" class="edge">
 <title>prepare/4&#45;&gt;^^merge_options/2</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L84" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L84" xlink:title="calls">
 <path fill="none" stroke="black" d="M493,-406.53C493,-388.28 493,-359.33 493,-337.7"/>
 <polygon fill="black" stroke="black" points="496.5,-337.77 493,-327.77 489.5,-337.77 496.5,-337.77"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L84">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L84">
 <text xml:space="preserve" text-anchor="start" x="493" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -495,12 +495,12 @@
 <!-- check_representation/0&#45;&gt;list::member/2 -->
 <g id="edge19" class="edge">
 <title>check_representation/0&#45;&gt;list::member/2</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L92" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L92" xlink:title="calls">
 <path fill="none" stroke="black" d="M791,-289.53C791,-271.28 791,-242.33 791,-220.7"/>
 <polygon fill="black" stroke="black" points="794.5,-220.77 791,-210.77 787.5,-220.77 794.5,-220.77"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L92">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L92">
 <text xml:space="preserve" text-anchor="start" x="791" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -522,12 +522,12 @@
 <!-- check_text/2&#45;&gt;type::check/2 -->
 <g id="edge20" class="edge">
 <title>check_text/2&#45;&gt;type::check/2</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L111" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L111" xlink:title="calls">
 <path fill="none" stroke="black" d="M634,-172.53C634,-154.28 634,-125.33 634,-103.7"/>
 <polygon fill="black" stroke="black" points="637.5,-103.77 634,-93.77 630.5,-103.77 637.5,-103.77"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L111">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L111">
 <text xml:space="preserve" text-anchor="start" x="634" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -537,7 +537,7 @@
 <title>codes_text/3</title>
 <polygon fill="cornsilk" stroke="black" points="124.01,-326 17.99,-326 17.99,-290 124.01,-290 124.01,-326"/>
 <text xml:space="preserve" text-anchor="start" x="25.99" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node16_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L130">
+<g id="a_node16_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L130">
 <text xml:space="preserve" text-anchor="start" x="31.39" y="-309.71" font-family="monospace" font-size="11.00">codes_text/3</text>
 </a>
 </g>
@@ -549,12 +549,12 @@
 <!-- codes_texts/2&#45;&gt;codes_text/3 -->
 <g id="edge15" class="edge">
 <title>codes_texts/2&#45;&gt;codes_text/3</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L126" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L126" xlink:title="calls">
 <path fill="none" stroke="black" d="M170.23,-406.53C150.62,-387.26 118.88,-356.06 96.59,-334.15"/>
 <polygon fill="black" stroke="black" points="99.22,-331.83 89.63,-327.31 94.31,-336.82 99.22,-331.83"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L126">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L126">
 <text xml:space="preserve" text-anchor="start" x="133.01" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -562,12 +562,12 @@
 <!-- tokenize_sentence_codes/3&#45;&gt;codes_texts/2 -->
 <g id="edge16" class="edge">
 <title>tokenize_sentence_codes/3&#45;&gt;codes_texts/2</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L138" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L138" xlink:title="calls">
 <path fill="none" stroke="black" d="M274.51,-523.53C257.56,-504.43 230.23,-473.61 210.82,-451.73"/>
 <polygon fill="black" stroke="black" points="213.56,-449.54 204.31,-444.39 208.32,-454.19 213.56,-449.54"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L138" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tokenization/tokenizer.lgt#L138">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L138" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tokenization/tokenizer.lgt#L138">
 <text xml:space="preserve" text-anchor="start" x="242.06" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>

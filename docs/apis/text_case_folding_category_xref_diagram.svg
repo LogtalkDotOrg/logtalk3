@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-842 1604,-842 1604,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for category text_case_folding</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 02:56</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 15:49</text>
 <g id="clust1" class="cluster">
 <title>cluster_text_case_folding_category</title>
 <g id="a_clust1"><a xlink:title="text_case_folding">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1580,-46 1580,-46 1586,-46 1592,-52 1592,-58 1592,-58 1592,-818 1592,-818 1592,-824 1586,-830 1580,-830 1580,-830 20,-830 20,-830 14,-830 8,-824 8,-818 8,-818 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-814.46" font-family="monospace" font-size="10.00" fill="dimgray">text_case_folding</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>convert_case_codes/4</title>
 <polygon fill="yellow" stroke="black" points="1143.41,-794 984.59,-794 984.59,-758 1143.41,-758 1143.41,-794"/>
 <text xml:space="preserve" text-anchor="start" x="992.59" y="-778.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L31">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L31">
 <text xml:space="preserve" text-anchor="start" x="997.99" y="-777.71" font-family="monospace" font-size="11.00">convert_case_codes/4</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>default_case_conversion/3</title>
 <polygon fill="cornsilk" stroke="black" points="1159.91,-677 968.09,-677 968.09,-641 1159.91,-641 1159.91,-677"/>
 <text xml:space="preserve" text-anchor="start" x="976.09" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L58">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="981.49" y="-660.71" font-family="monospace" font-size="11.00">default_case_conversion/3</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- convert_case_codes/4&#45;&gt;default_case_conversion/3 -->
 <g id="edge1" class="edge">
 <title>convert_case_codes/4&#45;&gt;default_case_conversion/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L51" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L51" xlink:title="calls">
 <path fill="none" stroke="black" d="M1064,-757.53C1064,-739.28 1064,-710.33 1064,-688.7"/>
 <polygon fill="black" stroke="black" points="1067.5,-688.77 1064,-678.77 1060.5,-688.77 1067.5,-688.77"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L51">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L51">
 <text xml:space="preserve" text-anchor="start" x="1064" y="-715.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>map_codes/3</title>
 <polygon fill="cornsilk" stroke="black" points="989.71,-560 890.29,-560 890.29,-524 989.71,-524 989.71,-560"/>
 <text xml:space="preserve" text-anchor="start" x="898.29" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L67">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="903.69" y="-543.71" font-family="monospace" font-size="11.00">map_codes/3</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- default_case_conversion/3&#45;&gt;map_codes/3 -->
 <g id="edge2" class="edge">
 <title>default_case_conversion/3&#45;&gt;map_codes/3</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L58" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L58" xlink:title="calls">
 <path fill="none" stroke="black" d="M1045.17,-640.53C1024.29,-621.17 990.45,-589.79 966.81,-567.86"/>
 <polygon fill="black" stroke="black" points="969.43,-565.52 959.71,-561.28 964.67,-570.65 969.43,-565.52"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L58">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="1005.72" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -97,7 +97,7 @@
 <title>lower_codes/3</title>
 <polygon fill="cornsilk" stroke="black" points="1120.31,-560 1007.69,-560 1007.69,-524 1120.31,-524 1120.31,-560"/>
 <text xml:space="preserve" text-anchor="start" x="1015.69" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L94">
+<g id="a_node5_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L94">
 <text xml:space="preserve" text-anchor="start" x="1021.09" y="-543.71" font-family="monospace" font-size="11.00">lower_codes/3</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- default_case_conversion/3&#45;&gt;lower_codes/3 -->
 <g id="edge3" class="edge">
 <title>default_case_conversion/3&#45;&gt;lower_codes/3</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L60" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L60" xlink:title="calls">
 <path fill="none" stroke="black" d="M1064,-640.53C1064,-622.28 1064,-593.33 1064,-571.7"/>
 <polygon fill="black" stroke="black" points="1067.5,-571.77 1064,-561.77 1060.5,-571.77 1067.5,-571.77"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L60">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="1064" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -124,7 +124,7 @@
 <title>title_codes/4</title>
 <polygon fill="cornsilk" stroke="black" points="1264.31,-560 1151.69,-560 1151.69,-524 1264.31,-524 1264.31,-560"/>
 <text xml:space="preserve" text-anchor="start" x="1159.69" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L121">
+<g id="a_node9_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L121">
 <text xml:space="preserve" text-anchor="start" x="1165.09" y="-543.71" font-family="monospace" font-size="11.00">title_codes/4</text>
 </a>
 </g>
@@ -136,12 +136,12 @@
 <!-- default_case_conversion/3&#45;&gt;title_codes/4 -->
 <g id="edge4" class="edge">
 <title>default_case_conversion/3&#45;&gt;title_codes/4</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L64" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L64" xlink:title="calls">
 <path fill="none" stroke="black" d="M1085.87,-640.53C1110.33,-621 1150.11,-589.23 1177.59,-567.29"/>
 <polygon fill="black" stroke="black" points="1179.58,-570.17 1185.21,-561.2 1175.21,-564.7 1179.58,-570.17"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L64">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L64">
 <text xml:space="preserve" text-anchor="start" x="1140.32" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -151,7 +151,7 @@
 <title>code_mapping/3</title>
 <polygon fill="cornsilk" stroke="black" points="1091.61,-443 972.39,-443 972.39,-407 1091.61,-407 1091.61,-443"/>
 <text xml:space="preserve" text-anchor="start" x="980.39" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L73">
+<g id="a_node4_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L73">
 <text xml:space="preserve" text-anchor="start" x="985.79" y="-426.71" font-family="monospace" font-size="11.00">code_mapping/3</text>
 </a>
 </g>
@@ -163,12 +163,12 @@
 <!-- map_codes/3&#45;&gt;code_mapping/3 -->
 <g id="edge5" class="edge">
 <title>map_codes/3&#45;&gt;code_mapping/3</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L68" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L68" xlink:title="calls">
 <path fill="none" stroke="black" d="M953.97,-523.53C969.19,-504.51 993.69,-473.88 1011.18,-452.02"/>
 <polygon fill="black" stroke="black" points="1013.74,-454.43 1017.25,-444.44 1008.27,-450.06 1013.74,-454.43"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L68">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L68">
 <text xml:space="preserve" text-anchor="start" x="988.76" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -190,12 +190,12 @@
 <!-- map_codes/3&#45;&gt;list::append/3 -->
 <g id="edge18" class="edge">
 <title>map_codes/3&#45;&gt;list::append/3</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L68" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L68" xlink:title="calls">
 <path fill="none" stroke="black" d="M916.43,-523.58C905.9,-514.33 894.63,-501.98 889,-488 884.78,-477.54 885,-465.31 886.73,-454.5"/>
 <polygon fill="black" stroke="black" points="890.11,-455.45 888.76,-444.94 883.26,-454 890.11,-455.45"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L68">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L68">
 <text xml:space="preserve" text-anchor="start" x="889" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -214,12 +214,12 @@
 <!-- code_mapping/3&#45;&gt;user::unicode_data_case_fold_mapping/2 -->
 <g id="edge19" class="edge">
 <title>code_mapping/3&#45;&gt;user::unicode_data_case_fold_mapping/2</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L73" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L73" xlink:title="calls">
 <path fill="none" stroke="black" d="M972.02,-408.58C969.31,-408.02 966.63,-407.49 964,-407 932.18,-401.11 531.76,-353.36 307.21,-326.75"/>
 <polygon fill="black" stroke="black" points="307.83,-323.3 297.49,-325.6 307.01,-330.25 307.83,-323.3"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L73">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L73">
 <text xml:space="preserve" text-anchor="start" x="660.75" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -238,12 +238,12 @@
 <!-- code_mapping/3&#45;&gt;user::unicode_data_upper_case_mapping/2 -->
 <g id="edge20" class="edge">
 <title>code_mapping/3&#45;&gt;user::unicode_data_upper_case_mapping/2</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L78" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L78" xlink:title="calls">
 <path fill="none" stroke="black" d="M971.97,-408.8C969.28,-408.18 966.61,-407.58 964,-407 827.56,-376.81 669.33,-347.12 566.19,-328.47"/>
 <polygon fill="black" stroke="black" points="567.09,-325.08 556.63,-326.75 565.85,-331.97 567.09,-325.08"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L78" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L78">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L78" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L78">
 <text xml:space="preserve" text-anchor="start" x="782.94" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -262,12 +262,12 @@
 <!-- code_mapping/3&#45;&gt;user::unicode_data_title_case_mapping/2 -->
 <g id="edge21" class="edge">
 <title>code_mapping/3&#45;&gt;user::unicode_data_title_case_mapping/2</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L83" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L83" xlink:title="calls">
 <path fill="none" stroke="black" d="M990.39,-406.53C942.06,-386.25 862.32,-352.78 809.97,-330.81"/>
 <polygon fill="black" stroke="black" points="811.53,-327.67 800.95,-327.03 808.82,-334.12 811.53,-327.67"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L83">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L83">
 <text xml:space="preserve" text-anchor="start" x="903.22" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -286,12 +286,12 @@
 <!-- code_mapping/3&#45;&gt;user::unicode_data_lower_case_mapping/2 -->
 <g id="edge22" class="edge">
 <title>code_mapping/3&#45;&gt;user::unicode_data_lower_case_mapping/2</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L88" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L88" xlink:title="calls">
 <path fill="none" stroke="black" d="M1036.25,-406.53C1040.72,-388.19 1047.81,-359.06 1053.09,-337.4"/>
 <polygon fill="black" stroke="black" points="1056.48,-338.27 1055.44,-327.72 1049.67,-336.61 1056.48,-338.27"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L88">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L88">
 <text xml:space="preserve" text-anchor="start" x="1046.84" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -299,12 +299,12 @@
 <!-- lower_codes/3&#45;&gt;code_mapping/3 -->
 <g id="edge7" class="edge">
 <title>lower_codes/3&#45;&gt;code_mapping/3</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L100" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L100" xlink:title="calls">
 <path fill="none" stroke="black" d="M1054.16,-523.9C1048.8,-513.78 1042.55,-500.53 1039,-488 1035.97,-477.32 1034.24,-465.26 1033.26,-454.64"/>
 <polygon fill="black" stroke="black" points="1036.77,-454.63 1032.55,-444.91 1029.79,-455.14 1036.77,-454.63"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L100">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="1039" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -314,7 +314,7 @@
 <title>final_sigma/2</title>
 <polygon fill="cornsilk" stroke="black" points="1357.31,-443 1244.69,-443 1244.69,-407 1357.31,-407 1357.31,-443"/>
 <text xml:space="preserve" text-anchor="start" x="1252.69" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L105">
+<g id="a_node6_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L105">
 <text xml:space="preserve" text-anchor="start" x="1258.09" y="-426.71" font-family="monospace" font-size="11.00">final_sigma/2</text>
 </a>
 </g>
@@ -326,12 +326,12 @@
 <!-- lower_codes/3&#45;&gt;final_sigma/2 -->
 <g id="edge6" class="edge">
 <title>lower_codes/3&#45;&gt;final_sigma/2</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L95" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L95" xlink:title="calls">
 <path fill="none" stroke="black" d="M1100,-523.53C1141.44,-503.42 1209.62,-470.34 1254.91,-448.36"/>
 <polygon fill="black" stroke="black" points="1256.22,-451.62 1263.69,-444.1 1253.17,-445.32 1256.22,-451.62"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L95">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="1189.61" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -339,12 +339,12 @@
 <!-- lower_codes/3&#45;&gt;list::append/3 -->
 <g id="edge23" class="edge">
 <title>lower_codes/3&#45;&gt;list::append/3</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L100" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L100" xlink:title="calls">
 <path fill="none" stroke="black" d="M1017.07,-523.59C996.11,-514.64 971.74,-502.54 952,-488 938.3,-477.91 925.28,-464.19 915.15,-452.22"/>
 <polygon fill="black" stroke="black" points="918.01,-450.18 908.96,-444.66 912.59,-454.62 918.01,-450.18"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L100">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="952" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -354,7 +354,7 @@
 <title>preceded_by_cased/1</title>
 <polygon fill="cornsilk" stroke="black" points="1392.11,-326 1239.89,-326 1239.89,-290 1392.11,-290 1392.11,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1247.89" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L109">
+<g id="a_node7_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L109">
 <text xml:space="preserve" text-anchor="start" x="1253.29" y="-309.71" font-family="monospace" font-size="11.00">preceded_by_cased/1</text>
 </a>
 </g>
@@ -366,12 +366,12 @@
 <!-- final_sigma/2&#45;&gt;preceded_by_cased/1 -->
 <g id="edge8" class="edge">
 <title>final_sigma/2&#45;&gt;preceded_by_cased/1</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L105" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L105" xlink:title="calls">
 <path fill="none" stroke="black" d="M1303.28,-406.53C1305.67,-388.19 1309.47,-359.06 1312.3,-337.4"/>
 <polygon fill="black" stroke="black" points="1315.73,-338.12 1313.55,-327.75 1308.79,-337.22 1315.73,-338.12"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L105">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L105">
 <text xml:space="preserve" text-anchor="start" x="1308.95" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -381,7 +381,7 @@
 <title>followed_by_cased/1</title>
 <polygon fill="cornsilk" stroke="black" points="1562.11,-326 1409.89,-326 1409.89,-290 1562.11,-290 1562.11,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1417.89" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L115">
+<g id="a_node8_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L115">
 <text xml:space="preserve" text-anchor="start" x="1423.29" y="-309.71" font-family="monospace" font-size="11.00">followed_by_cased/1</text>
 </a>
 </g>
@@ -393,12 +393,12 @@
 <!-- final_sigma/2&#45;&gt;followed_by_cased/1 -->
 <g id="edge9" class="edge">
 <title>final_sigma/2&#45;&gt;followed_by_cased/1</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L105" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L105" xlink:title="calls">
 <path fill="none" stroke="black" d="M1329.1,-406.53C1360.97,-386.72 1413.11,-354.31 1448.45,-332.34"/>
 <polygon fill="black" stroke="black" points="1450.01,-335.49 1456.66,-327.24 1446.32,-329.55 1450.01,-335.49"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L105">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L105">
 <text xml:space="preserve" text-anchor="start" x="1399.05" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -408,7 +408,7 @@
 <title>cased/1</title>
 <polygon fill="cornsilk" stroke="black" points="1286.5,-209 1213.5,-209 1213.5,-173 1286.5,-173 1286.5,-209"/>
 <text xml:space="preserve" text-anchor="start" x="1221.5" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L140">
+<g id="a_node10_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L140">
 <text xml:space="preserve" text-anchor="start" x="1226.9" y="-192.71" font-family="monospace" font-size="11.00">cased/1</text>
 </a>
 </g>
@@ -420,12 +420,12 @@
 <!-- preceded_by_cased/1&#45;&gt;cased/1 -->
 <g id="edge11" class="edge">
 <title>preceded_by_cased/1&#45;&gt;cased/1</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L109" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L109" xlink:title="calls">
 <path fill="none" stroke="black" d="M1302.43,-289.92C1294.74,-279.8 1285.24,-266.55 1278,-254 1271.71,-243.1 1265.81,-230.54 1261.06,-219.59"/>
 <polygon fill="black" stroke="black" points="1264.42,-218.54 1257.31,-210.69 1257.97,-221.26 1264.42,-218.54"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L109">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L109">
 <text xml:space="preserve" text-anchor="start" x="1278" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -435,7 +435,7 @@
 <title>case_ignorable/1</title>
 <polygon fill="cornsilk" stroke="black" points="1519.21,-209 1386.79,-209 1386.79,-173 1519.21,-173 1519.21,-209"/>
 <text xml:space="preserve" text-anchor="start" x="1394.79" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L146" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L146">
+<g id="a_node11_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L146" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L146">
 <text xml:space="preserve" text-anchor="start" x="1400.19" y="-192.71" font-family="monospace" font-size="11.00">case_ignorable/1</text>
 </a>
 </g>
@@ -447,12 +447,12 @@
 <!-- preceded_by_cased/1&#45;&gt;case_ignorable/1 -->
 <g id="edge10" class="edge">
 <title>preceded_by_cased/1&#45;&gt;case_ignorable/1</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L109" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L109" xlink:title="calls">
 <path fill="none" stroke="black" d="M1318.73,-289.6C1321.67,-276 1327.55,-257.4 1339,-245 1351.13,-231.85 1367.19,-221.69 1383.41,-213.95"/>
 <polygon fill="black" stroke="black" points="1384.41,-217.33 1392.11,-210.05 1381.56,-210.94 1384.41,-217.33"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L109">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L109">
 <text xml:space="preserve" text-anchor="start" x="1339" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -460,12 +460,12 @@
 <!-- followed_by_cased/1&#45;&gt;cased/1 -->
 <g id="edge13" class="edge">
 <title>followed_by_cased/1&#45;&gt;cased/1</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L115" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L115" xlink:title="calls">
 <path fill="none" stroke="black" d="M1453.36,-289.6C1429.35,-276.93 1395.84,-259.51 1366,-245 1343.52,-234.06 1318.3,-222.46 1297.13,-212.91"/>
 <polygon fill="black" stroke="black" points="1298.72,-209.79 1288.16,-208.88 1295.85,-216.17 1298.72,-209.79"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L115">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L115">
 <text xml:space="preserve" text-anchor="start" x="1382.48" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -473,12 +473,12 @@
 <!-- followed_by_cased/1&#45;&gt;case_ignorable/1 -->
 <g id="edge12" class="edge">
 <title>followed_by_cased/1&#45;&gt;case_ignorable/1</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L115" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L115" xlink:title="calls">
 <path fill="none" stroke="black" d="M1480.99,-289.53C1475.7,-271.11 1467.29,-241.79 1461.06,-220.1"/>
 <polygon fill="black" stroke="black" points="1464.49,-219.36 1458.37,-210.71 1457.76,-221.29 1464.49,-219.36"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L115">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L115">
 <text xml:space="preserve" text-anchor="start" x="1470.49" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -486,12 +486,12 @@
 <!-- title_codes/4&#45;&gt;code_mapping/3 -->
 <g id="edge15" class="edge">
 <title>title_codes/4&#45;&gt;code_mapping/3</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L122" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L122" xlink:title="calls">
 <path fill="none" stroke="black" d="M1182.75,-523.69C1164.35,-511.14 1138.75,-493.84 1116,-479 1100.98,-469.2 1084.3,-458.62 1069.79,-449.5"/>
 <polygon fill="black" stroke="black" points="1071.75,-446.6 1061.42,-444.26 1068.03,-452.54 1071.75,-446.6"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L122">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L122">
 <text xml:space="preserve" text-anchor="start" x="1128.61" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -499,12 +499,12 @@
 <!-- title_codes/4&#45;&gt;final_sigma/2 -->
 <g id="edge16" class="edge">
 <title>title_codes/4&#45;&gt;final_sigma/2</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L122" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L122" xlink:title="calls">
 <path fill="none" stroke="black" d="M1222.12,-523.53C1237.51,-504.51 1262.28,-473.88 1279.95,-452.02"/>
 <polygon fill="black" stroke="black" points="1282.53,-454.41 1286.1,-444.43 1277.09,-450.01 1282.53,-454.41"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L122">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L122">
 <text xml:space="preserve" text-anchor="start" x="1257.29" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -512,12 +512,12 @@
 <!-- title_codes/4&#45;&gt;cased/1 -->
 <g id="edge14" class="edge">
 <title>title_codes/4&#45;&gt;cased/1</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L122" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L122" xlink:title="calls">
 <path fill="none" stroke="black" d="M1210.92,-523.86C1212.6,-513.5 1214.64,-500.02 1216,-488 1225.93,-400.31 1219.25,-377.47 1231,-290 1234.17,-266.39 1239.42,-239.88 1243.59,-220.39"/>
 <polygon fill="black" stroke="black" points="1246.99,-221.24 1245.7,-210.73 1240.15,-219.75 1246.99,-221.24"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L122">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L122">
 <text xml:space="preserve" text-anchor="start" x="1223.97" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -525,12 +525,12 @@
 <!-- title_codes/4&#45;&gt;case_ignorable/1 -->
 <g id="edge17" class="edge">
 <title>title_codes/4&#45;&gt;case_ignorable/1</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L122" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L122" xlink:title="calls">
 <path fill="none" stroke="black" d="M1264.56,-526.63C1348.94,-501.79 1504.9,-441.98 1571,-326 1595.99,-282.15 1541.46,-239.88 1498.45,-214.91"/>
 <polygon fill="black" stroke="black" points="1500.41,-211.99 1489.98,-210.14 1496.98,-218.09 1500.41,-211.99"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L122">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L122">
 <text xml:space="preserve" text-anchor="start" x="1543.89" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -538,12 +538,12 @@
 <!-- title_codes/4&#45;&gt;list::append/3 -->
 <g id="edge24" class="edge">
 <title>title_codes/4&#45;&gt;list::append/3</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L122" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L122" xlink:title="calls">
 <path fill="none" stroke="black" d="M1166.56,-523.58C1142.63,-513.41 1112.01,-500.21 1085,-488 1076.48,-484.15 1074.7,-482.39 1066,-479 1033.62,-466.38 996.9,-454.68 965.81,-445.49"/>
 <polygon fill="black" stroke="black" points="967.1,-442.22 956.52,-442.78 965.14,-448.94 967.1,-442.22"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L122">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L122">
 <text xml:space="preserve" text-anchor="start" x="1085" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -562,12 +562,12 @@
 <!-- cased/1&#45;&gt;user::unicode_data_cased_range/2 -->
 <g id="edge25" class="edge">
 <title>cased/1&#45;&gt;user::unicode_data_cased_range/2</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L140" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L140" xlink:title="calls">
 <path fill="none" stroke="black" d="M1234.36,-172.53C1217.24,-153.43 1189.64,-122.61 1170.05,-100.73"/>
 <polygon fill="black" stroke="black" points="1172.74,-98.49 1163.46,-93.38 1167.53,-103.17 1172.74,-98.49"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L140">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L140">
 <text xml:space="preserve" text-anchor="start" x="1201.59" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -586,12 +586,12 @@
 <!-- case_ignorable/1&#45;&gt;user::unicode_data_case_ignorable_range/2 -->
 <g id="edge26" class="edge">
 <title>case_ignorable/1&#45;&gt;user::unicode_data_case_ignorable_range/2</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L146" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L146" xlink:title="calls">
 <path fill="none" stroke="black" d="M1449.96,-172.53C1446.77,-154.19 1441.71,-125.06 1437.94,-103.4"/>
 <polygon fill="black" stroke="black" points="1441.42,-103 1436.26,-93.74 1434.53,-104.2 1441.42,-103"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L146" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/text_normalization/case_folding.lgt#L146">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L146" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/case_folding.lgt#L146">
 <text xml:space="preserve" text-anchor="start" x="1443.6" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>

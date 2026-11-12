@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-608 964,-608 964,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for category x25519</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 02:56</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 15:49</text>
 <g id="clust1" class="cluster">
 <title>cluster_x25519_category</title>
 <g id="a_clust1"><a xlink:title="x25519">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 940,-46 940,-46 946,-46 952,-52 952,-58 952,-58 952,-584 952,-584 952,-590 946,-596 940,-596 940,-596 20,-596 20,-596 14,-596 8,-590 8,-584 8,-584 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-580.46" font-family="monospace" font-size="10.00" fill="dimgray">x25519</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>x25519_keypair/2</title>
 <polygon fill="springgreen" stroke="black" points="328.21,-560 195.79,-560 195.79,-524 328.21,-524 328.21,-560"/>
 <text xml:space="preserve" text-anchor="start" x="203.79" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="209.19" y="-543.71" font-family="monospace" font-size="11.00">x25519_keypair/2</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>x25519_public_key/2</title>
 <polygon fill="springgreen" stroke="black" points="338.11,-443 185.89,-443 185.89,-407 338.11,-407 338.11,-443"/>
 <text xml:space="preserve" text-anchor="start" x="193.89" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L39">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L39">
 <text xml:space="preserve" text-anchor="start" x="199.29" y="-426.71" font-family="monospace" font-size="11.00">x25519_public_key/2</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- x25519_keypair/2&#45;&gt;x25519_public_key/2 -->
 <g id="edge1" class="edge">
 <title>x25519_keypair/2&#45;&gt;x25519_public_key/2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L77" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L77" xlink:title="calls">
 <path fill="none" stroke="black" d="M262,-523.53C262,-505.28 262,-476.33 262,-454.7"/>
 <polygon fill="black" stroke="black" points="265.5,-454.77 262,-444.77 258.5,-454.77 265.5,-454.77"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L77" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L77">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L77" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L77">
 <text xml:space="preserve" text-anchor="start" x="262" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>x25519_scalar_mult/3</title>
 <polygon fill="cornsilk" stroke="black" points="495.41,-326 336.59,-326 336.59,-290 495.41,-290 495.41,-326"/>
 <text xml:space="preserve" text-anchor="start" x="344.59" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L93">
+<g id="a_node7_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L93">
 <text xml:space="preserve" text-anchor="start" x="349.99" y="-309.71" font-family="monospace" font-size="11.00">x25519_scalar_mult/3</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- x25519_public_key/2&#45;&gt;x25519_scalar_mult/3 -->
 <g id="edge2" class="edge">
 <title>x25519_public_key/2&#45;&gt;x25519_scalar_mult/3</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L81" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L81" xlink:title="calls">
 <path fill="none" stroke="black" d="M278.79,-406.68C291.86,-393.65 310.79,-375.75 329,-362 343.1,-351.35 359.45,-340.93 374.15,-332.2"/>
 <polygon fill="black" stroke="black" points="375.83,-335.27 382.7,-327.2 372.3,-329.22 375.83,-335.27"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L81">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L81">
 <text xml:space="preserve" text-anchor="start" x="329" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- x25519_public_key/2&#45;&gt;type::check/3 -->
 <g id="edge15" class="edge">
 <title>x25519_public_key/2&#45;&gt;type::check/3</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L81" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L81" xlink:title="calls">
 <path fill="none" stroke="black" d="M262,-406.53C262,-388.28 262,-359.33 262,-337.7"/>
 <polygon fill="black" stroke="black" points="265.5,-337.77 262,-327.77 258.5,-337.77 265.5,-337.77"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L81">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L81">
 <text xml:space="preserve" text-anchor="start" x="262" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -124,7 +124,7 @@
 <title>x25519_shared_secret/3</title>
 <polygon fill="springgreen" stroke="black" points="528.01,-443 355.99,-443 355.99,-407 528.01,-407 528.01,-443"/>
 <text xml:space="preserve" text-anchor="start" x="363.99" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L52">
+<g id="a_node3_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L52">
 <text xml:space="preserve" text-anchor="start" x="369.39" y="-426.71" font-family="monospace" font-size="11.00">x25519_shared_secret/3</text>
 </a>
 </g>
@@ -136,12 +136,12 @@
 <!-- x25519_shared_secret/3&#45;&gt;x25519_scalar_mult/3 -->
 <g id="edge3" class="edge">
 <title>x25519_shared_secret/3&#45;&gt;x25519_scalar_mult/3</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L86" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L86" xlink:title="calls">
 <path fill="none" stroke="black" d="M438.05,-406.53C433.9,-388.19 427.32,-359.06 422.42,-337.4"/>
 <polygon fill="black" stroke="black" points="425.85,-336.71 420.23,-327.73 419.03,-338.26 425.85,-336.71"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L86" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L86">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L86" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L86">
 <text xml:space="preserve" text-anchor="start" x="429.78" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -151,7 +151,7 @@
 <title>all_zero_bytes/1</title>
 <polygon fill="cornsilk" stroke="black" points="646.21,-326 513.79,-326 513.79,-290 646.21,-290 646.21,-326"/>
 <text xml:space="preserve" text-anchor="start" x="521.79" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node14_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L171">
+<g id="a_node14_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L171">
 <text xml:space="preserve" text-anchor="start" x="527.19" y="-309.71" font-family="monospace" font-size="11.00">all_zero_bytes/1</text>
 </a>
 </g>
@@ -163,12 +163,12 @@
 <!-- x25519_shared_secret/3&#45;&gt;all_zero_bytes/1 -->
 <g id="edge4" class="edge">
 <title>x25519_shared_secret/3&#45;&gt;all_zero_bytes/1</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L86" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L86" xlink:title="calls">
 <path fill="none" stroke="black" d="M462.96,-406.53C486.3,-387.09 524.19,-355.51 550.51,-333.57"/>
 <polygon fill="black" stroke="black" points="552.69,-336.31 558.13,-327.22 548.21,-330.94 552.69,-336.31"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L86" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L86">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L86" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L86">
 <text xml:space="preserve" text-anchor="start" x="515.14" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -176,12 +176,12 @@
 <!-- x25519_shared_secret/3&#45;&gt;type::check/3 -->
 <g id="edge16" class="edge">
 <title>x25519_shared_secret/3&#45;&gt;type::check/3</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L86" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L86" xlink:title="calls">
 <path fill="none" stroke="black" d="M419.48,-406.71C402.41,-393.87 378.17,-376.18 356,-362 339.53,-351.47 320.87,-340.72 304.54,-331.67"/>
 <polygon fill="black" stroke="black" points="306.49,-328.75 296.04,-327.01 303.13,-334.89 306.49,-328.75"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L86" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L86">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L86" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L86">
 <text xml:space="preserve" text-anchor="start" x="368.05" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -191,7 +191,7 @@
 <title>le_bytes_to_int/2</title>
 <polygon fill="cornsilk" stroke="black" points="162.51,-209 23.49,-209 23.49,-173 162.51,-173 162.51,-209"/>
 <text xml:space="preserve" text-anchor="start" x="31.49" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L152" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L152">
+<g id="a_node4_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L152" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L152">
 <text xml:space="preserve" text-anchor="start" x="36.89" y="-192.71" font-family="monospace" font-size="11.00">le_bytes_to_int/2</text>
 </a>
 </g>
@@ -205,7 +205,7 @@
 <title>le_bytes_to_int/4</title>
 <polygon fill="cornsilk" stroke="black" points="157.51,-92 18.49,-92 18.49,-56 157.51,-56 157.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="26.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L155">
+<g id="a_node11_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="31.89" y="-75.71" font-family="monospace" font-size="11.00">le_bytes_to_int/4</text>
 </a>
 </g>
@@ -217,12 +217,12 @@
 <!-- le_bytes_to_int/2&#45;&gt;le_bytes_to_int/4 -->
 <g id="edge13" class="edge">
 <title>le_bytes_to_int/2&#45;&gt;le_bytes_to_int/4</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L152" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L152" xlink:title="calls">
 <path fill="none" stroke="black" d="M92.24,-172.53C91.45,-154.28 90.19,-125.33 89.25,-103.7"/>
 <polygon fill="black" stroke="black" points="92.75,-103.6 88.82,-93.77 85.75,-103.91 92.75,-103.6"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L152" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L152">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L152" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L152">
 <text xml:space="preserve" text-anchor="start" x="90.65" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -232,7 +232,7 @@
 <title>x25519_modexp/4</title>
 <polygon fill="cornsilk" stroke="black" points="320.91,-209 195.09,-209 195.09,-173 320.91,-173 320.91,-209"/>
 <text xml:space="preserve" text-anchor="start" x="203.09" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L137">
+<g id="a_node5_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L137">
 <text xml:space="preserve" text-anchor="start" x="208.49" y="-192.71" font-family="monospace" font-size="11.00">x25519_modexp/4</text>
 </a>
 </g>
@@ -246,7 +246,7 @@
 <title>x25519_modexp_/5</title>
 <polygon fill="cornsilk" stroke="black" points="308.21,-92 175.79,-92 175.79,-56 308.21,-56 308.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="183.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L140">
+<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L140">
 <text xml:space="preserve" text-anchor="start" x="189.19" y="-75.71" font-family="monospace" font-size="11.00">x25519_modexp_/5</text>
 </a>
 </g>
@@ -258,12 +258,12 @@
 <!-- x25519_modexp/4&#45;&gt;x25519_modexp_/5 -->
 <g id="edge12" class="edge">
 <title>x25519_modexp/4&#45;&gt;x25519_modexp_/5</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L137" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L137" xlink:title="calls">
 <path fill="none" stroke="black" d="M255.57,-172.53C253.02,-154.19 248.96,-125.06 245.95,-103.4"/>
 <polygon fill="black" stroke="black" points="249.45,-103.17 244.61,-93.75 242.52,-104.14 249.45,-103.17"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L137">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L137">
 <text xml:space="preserve" text-anchor="start" x="250.48" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -273,7 +273,7 @@
 <title>x25519_prime/1</title>
 <polygon fill="cornsilk" stroke="black" points="608.61,-92 489.39,-92 489.39,-56 608.61,-56 608.61,-92"/>
 <text xml:space="preserve" text-anchor="start" x="497.39" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L134">
+<g id="a_node6_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L134">
 <text xml:space="preserve" text-anchor="start" x="502.79" y="-75.71" font-family="monospace" font-size="11.00">x25519_prime/1</text>
 </a>
 </g>
@@ -285,12 +285,12 @@
 <!-- x25519_scalar_mult/3&#45;&gt;le_bytes_to_int/2 -->
 <g id="edge5" class="edge">
 <title>x25519_scalar_mult/3&#45;&gt;le_bytes_to_int/2</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L93" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L93" xlink:title="calls">
 <path fill="none" stroke="black" d="M366.94,-289.53C309.51,-269.08 214.4,-235.22 152.72,-213.26"/>
 <polygon fill="black" stroke="black" points="154.01,-210.01 143.41,-209.95 151.66,-216.6 154.01,-210.01"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L93">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L93">
 <text xml:space="preserve" text-anchor="start" x="264.18" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -298,12 +298,12 @@
 <!-- x25519_scalar_mult/3&#45;&gt;x25519_modexp/4 -->
 <g id="edge8" class="edge">
 <title>x25519_scalar_mult/3&#45;&gt;x25519_modexp/4</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L93" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L93" xlink:title="calls">
 <path fill="none" stroke="black" d="M392,-289.53C365.13,-269.97 321.39,-238.14 291.24,-216.19"/>
 <polygon fill="black" stroke="black" points="293.33,-213.39 283.19,-210.33 289.21,-219.05 293.33,-213.39"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L93">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L93">
 <text xml:space="preserve" text-anchor="start" x="341.74" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -311,12 +311,12 @@
 <!-- x25519_scalar_mult/3&#45;&gt;x25519_prime/1 -->
 <g id="edge7" class="edge">
 <title>x25519_scalar_mult/3&#45;&gt;x25519_prime/1</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L93" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L93" xlink:title="calls">
 <path fill="none" stroke="black" d="M431.5,-289.52C447.75,-270.61 473.32,-239.12 491,-209 511.53,-174.03 529.05,-130.44 539.3,-102.66"/>
 <polygon fill="black" stroke="black" points="542.48,-104.16 542.6,-93.57 535.9,-101.77 542.48,-104.16"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L93">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L93">
 <text xml:space="preserve" text-anchor="start" x="509.65" y="-188.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -326,7 +326,7 @@
 <title>x25519_ladder/10</title>
 <polygon fill="cornsilk" stroke="black" points="482.21,-209 349.79,-209 349.79,-173 482.21,-173 482.21,-209"/>
 <text xml:space="preserve" text-anchor="start" x="357.79" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L104">
+<g id="a_node8_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L104">
 <text xml:space="preserve" text-anchor="start" x="363.19" y="-192.71" font-family="monospace" font-size="11.00">x25519_ladder/10</text>
 </a>
 </g>
@@ -338,12 +338,12 @@
 <!-- x25519_scalar_mult/3&#45;&gt;x25519_ladder/10 -->
 <g id="edge6" class="edge">
 <title>x25519_scalar_mult/3&#45;&gt;x25519_ladder/10</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L93" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L93" xlink:title="calls">
 <path fill="none" stroke="black" d="M416,-289.53C416,-271.28 416,-242.33 416,-220.7"/>
 <polygon fill="black" stroke="black" points="419.5,-220.77 416,-210.77 412.5,-220.77 419.5,-220.77"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L93">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L93">
 <text xml:space="preserve" text-anchor="start" x="416" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -353,7 +353,7 @@
 <title>int_to_le_bytes_fixed/3</title>
 <polygon fill="cornsilk" stroke="black" points="775.31,-209 596.69,-209 596.69,-173 775.31,-173 775.31,-209"/>
 <text xml:space="preserve" text-anchor="start" x="604.69" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node12_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L161">
+<g id="a_node12_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L161">
 <text xml:space="preserve" text-anchor="start" x="610.09" y="-192.71" font-family="monospace" font-size="11.00">int_to_le_bytes_fixed/3</text>
 </a>
 </g>
@@ -365,12 +365,12 @@
 <!-- x25519_scalar_mult/3&#45;&gt;int_to_le_bytes_fixed/3 -->
 <g id="edge9" class="edge">
 <title>x25519_scalar_mult/3&#45;&gt;int_to_le_bytes_fixed/3</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L93" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L93" xlink:title="calls">
 <path fill="none" stroke="black" d="M457.01,-289.53C504.52,-269.3 582.88,-235.92 634.47,-213.95"/>
 <polygon fill="black" stroke="black" points="635.83,-217.17 643.66,-210.03 633.09,-210.73 635.83,-217.17"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L93">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L93">
 <text xml:space="preserve" text-anchor="start" x="559.1" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -378,12 +378,12 @@
 <!-- x25519_ladder/10&#45;&gt;x25519_prime/1 -->
 <g id="edge11" class="edge">
 <title>x25519_ladder/10&#45;&gt;x25519_prime/1</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L108" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L108" xlink:title="calls">
 <path fill="none" stroke="black" d="M436.2,-172.53C458.69,-153.09 495.21,-121.51 520.58,-99.57"/>
 <polygon fill="black" stroke="black" points="522.63,-102.43 527.9,-93.24 518.05,-97.14 522.63,-102.43"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L108">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L108">
 <text xml:space="preserve" text-anchor="start" x="486.49" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -393,7 +393,7 @@
 <title>conditional_swap/5</title>
 <polygon fill="cornsilk" stroke="black" points="471.81,-92 326.19,-92 326.19,-56 471.81,-56 471.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="334.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L130">
+<g id="a_node9_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L130">
 <text xml:space="preserve" text-anchor="start" x="339.59" y="-75.71" font-family="monospace" font-size="11.00">conditional_swap/5</text>
 </a>
 </g>
@@ -405,12 +405,12 @@
 <!-- x25519_ladder/10&#45;&gt;conditional_swap/5 -->
 <g id="edge10" class="edge">
 <title>x25519_ladder/10&#45;&gt;conditional_swap/5</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L104" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L104" xlink:title="calls">
 <path fill="none" stroke="black" d="M413.42,-172.53C410.71,-154.19 406.4,-125.06 403.2,-103.4"/>
 <polygon fill="black" stroke="black" points="406.7,-103.13 401.77,-93.75 399.77,-104.16 406.7,-103.13"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L104">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L104">
 <text xml:space="preserve" text-anchor="start" x="408.01" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -420,7 +420,7 @@
 <title>int_to_le_bytes_fixed/2</title>
 <polygon fill="cornsilk" stroke="black" points="942.31,-92 763.69,-92 763.69,-56 942.31,-56 942.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="771.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node13_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L165" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L165">
+<g id="a_node13_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L165" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L165">
 <text xml:space="preserve" text-anchor="start" x="777.09" y="-75.71" font-family="monospace" font-size="11.00">int_to_le_bytes_fixed/2</text>
 </a>
 </g>
@@ -432,12 +432,12 @@
 <!-- int_to_le_bytes_fixed/3&#45;&gt;int_to_le_bytes_fixed/2 -->
 <g id="edge14" class="edge">
 <title>int_to_le_bytes_fixed/3&#45;&gt;int_to_le_bytes_fixed/2</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L161" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L161" xlink:title="calls">
 <path fill="none" stroke="black" d="M711.36,-172.53C739.89,-152.89 786.39,-120.87 818.28,-98.91"/>
 <polygon fill="black" stroke="black" points="820.17,-101.85 826.43,-93.3 816.2,-96.09 820.17,-101.85"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L161">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L161">
 <text xml:space="preserve" text-anchor="start" x="774.51" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -459,12 +459,12 @@
 <!-- int_to_le_bytes_fixed/3&#45;&gt;list::length/2 -->
 <g id="edge17" class="edge">
 <title>int_to_le_bytes_fixed/3&#45;&gt;list::length/2</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L161" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L161" xlink:title="calls">
 <path fill="none" stroke="black" d="M686,-172.53C686,-154.28 686,-125.33 686,-103.7"/>
 <polygon fill="black" stroke="black" points="689.5,-103.77 686,-93.77 682.5,-103.77 689.5,-103.77"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/crypto/x25519.lgt#L161">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/x25519.lgt#L161">
 <text xml:space="preserve" text-anchor="start" x="686" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>

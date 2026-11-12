@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 1184,-140 1184,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol tle_orbits_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 02:56</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 15:49</text>
 <g id="clust1" class="cluster">
 <title>cluster_tle_orbits_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="tle_orbits_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1160,-46 1160,-46 1166,-46 1172,-52 1172,-58 1172,-58 1172,-116 1172,-116 1172,-122 1166,-128 1160,-128 1160,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tle_orbits/tle_orbits_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tle_orbits/tle_orbits_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tle_orbits/tle_orbits_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tle_orbits/tle_orbits_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">tle_orbits_protocol</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>parse/2</title>
 <polygon fill="springgreen" stroke="black" points="91.5,-92 18.5,-92 18.5,-56 91.5,-56 91.5,-92"/>
 <text xml:space="preserve" text-anchor="start" x="26.5" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tle_orbits/tle_orbits_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tle_orbits/tle_orbits_protocol.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tle_orbits/tle_orbits_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tle_orbits/tle_orbits_protocol.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="31.9" y="-75.71" font-family="monospace" font-size="11.00">parse/2</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>parse_lines/4</title>
 <polygon fill="springgreen" stroke="black" points="222.31,-92 109.69,-92 109.69,-56 222.31,-56 222.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="117.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tle_orbits/tle_orbits_protocol.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tle_orbits/tle_orbits_protocol.lgt#L44">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tle_orbits/tle_orbits_protocol.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tle_orbits/tle_orbits_protocol.lgt#L44">
 <text xml:space="preserve" text-anchor="start" x="123.09" y="-75.71" font-family="monospace" font-size="11.00">parse_lines/4</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>propagate/3</title>
 <polygon fill="springgreen" stroke="black" points="339.71,-92 240.29,-92 240.29,-56 339.71,-56 339.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="248.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tle_orbits/tle_orbits_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tle_orbits/tle_orbits_protocol.lgt#L60">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tle_orbits/tle_orbits_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tle_orbits/tle_orbits_protocol.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="253.69" y="-75.71" font-family="monospace" font-size="11.00">propagate/3</text>
 </a>
 </g>
@@ -71,7 +71,7 @@
 <title>propagate/4</title>
 <polygon fill="springgreen" stroke="black" points="456.71,-92 357.29,-92 357.29,-56 456.71,-56 456.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="365.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tle_orbits/tle_orbits_protocol.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tle_orbits/tle_orbits_protocol.lgt#L70">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tle_orbits/tle_orbits_protocol.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tle_orbits/tle_orbits_protocol.lgt#L70">
 <text xml:space="preserve" text-anchor="start" x="370.69" y="-75.71" font-family="monospace" font-size="11.00">propagate/4</text>
 </a>
 </g>
@@ -85,7 +85,7 @@
 <title>propagate/5</title>
 <polygon fill="springgreen" stroke="black" points="573.71,-92 474.29,-92 474.29,-56 573.71,-56 573.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="482.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tle_orbits/tle_orbits_protocol.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tle_orbits/tle_orbits_protocol.lgt#L81">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tle_orbits/tle_orbits_protocol.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tle_orbits/tle_orbits_protocol.lgt#L81">
 <text xml:space="preserve" text-anchor="start" x="487.69" y="-75.71" font-family="monospace" font-size="11.00">propagate/5</text>
 </a>
 </g>
@@ -99,7 +99,7 @@
 <title>propagate_state/4</title>
 <polygon fill="springgreen" stroke="black" points="730.51,-92 591.49,-92 591.49,-56 730.51,-56 730.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="599.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tle_orbits/tle_orbits_protocol.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tle_orbits/tle_orbits_protocol.lgt#L93">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tle_orbits/tle_orbits_protocol.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tle_orbits/tle_orbits_protocol.lgt#L93">
 <text xml:space="preserve" text-anchor="start" x="604.89" y="-75.71" font-family="monospace" font-size="11.00">propagate_state/4</text>
 </a>
 </g>
@@ -113,7 +113,7 @@
 <title>propagate_state/5</title>
 <polygon fill="springgreen" stroke="black" points="887.51,-92 748.49,-92 748.49,-56 887.51,-56 887.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="756.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tle_orbits/tle_orbits_protocol.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tle_orbits/tle_orbits_protocol.lgt#L104">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tle_orbits/tle_orbits_protocol.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tle_orbits/tle_orbits_protocol.lgt#L104">
 <text xml:space="preserve" text-anchor="start" x="761.89" y="-75.71" font-family="monospace" font-size="11.00">propagate_state/5</text>
 </a>
 </g>
@@ -127,7 +127,7 @@
 <title>ground_track/5</title>
 <polygon fill="springgreen" stroke="black" points="1024.61,-92 905.39,-92 905.39,-56 1024.61,-56 1024.61,-92"/>
 <text xml:space="preserve" text-anchor="start" x="913.39" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tle_orbits/tle_orbits_protocol.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tle_orbits/tle_orbits_protocol.lgt#L116">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tle_orbits/tle_orbits_protocol.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tle_orbits/tle_orbits_protocol.lgt#L116">
 <text xml:space="preserve" text-anchor="start" x="918.79" y="-75.71" font-family="monospace" font-size="11.00">ground_track/5</text>
 </a>
 </g>
@@ -141,7 +141,7 @@
 <title>ground_track/6</title>
 <polygon fill="springgreen" stroke="black" points="1161.61,-92 1042.39,-92 1042.39,-56 1161.61,-56 1161.61,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1050.39" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tle_orbits/tle_orbits_protocol.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f375cd514311737e12de6bfe5750ca8814a6e039/library/tle_orbits/tle_orbits_protocol.lgt#L126">
+<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tle_orbits/tle_orbits_protocol.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/tle_orbits/tle_orbits_protocol.lgt#L126">
 <text xml:space="preserve" text-anchor="start" x="1055.79" y="-75.71" font-family="monospace" font-size="11.00">ground_track/6</text>
 </a>
 </g>
