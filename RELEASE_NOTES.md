@@ -388,6 +388,10 @@ recomputing its length from a re-generated wire representation that restores
 the omitted header. The validation now reuses the original parsed body bytes
 when available.
 
+* FIXED: The `os` library ECLiPSe definition for the `absolute_file_name/2`
+predicate to not add an ending slash to the expanded path if not present in
+the original path.
+
 * FIXED: Operator standard conformance issue in the `s3` library.
 
 * FIXED: bug in the `term_io` library `read_term_from_chars/4` and
@@ -467,14 +471,14 @@ paths contain spaces.
 * FIXED: The `issue_creator` tool creation of bug reports for recent changes
 to the `lgtunit` tool representation of test failure reasons.
 
-* FIXED: The `os` library ECLiPSe definition for the `absolute_file_name/2`
-predicate to not add an ending slash to the expanded path if not present in
-the original path.
-
 * FIXED: Bug in the `packs` tool when calling the `registries::defined/4` with
 a bound URL argument would leak an open stream handle on failure.
 
 * FIXED: Duplicated work in the `sbom` tool and documentation typos.
+
+* FIXED: The `diagrams` tool support for `.dot` files to avoid a SVG rendering
+issue where node labels don't fit in the node boxes depending on how Graphviz
+was built and its installed plug-ins.
 
 Examples
 --------
