@@ -22,9 +22,9 @@
 :- object(process).
 
 	:- info([
-		version is 2:3:0,
+		version is 2:4:0,
 		author is 'Paulo Moura',
-		date is 2026-11-06,
+		date is 2026-11-12,
 		comment is 'Portable process handling predicates.',
 		remarks is [
 			'Supported backend Prolog systems' - 'ECLiPSe, GNU Prolog, SICStus Prolog, Shumway Prolog, SWI-Prolog, Trealla Prolog, and XVM.',
@@ -360,8 +360,21 @@
 			translate_options(Options, NativeOptionsTail).
 
 		translate_option(process(Pid), process(Pid)).
-		translate_option(stdin(Stream), stdin(pipe(Stream))).
-		translate_option(stdout(Stream), stdout(pipe(Stream))).
+		:- if((current_logtalk_flag(prolog_version, Version), Version @>= v(12, 2, 1))).
+			translate_option(stdin(Stream), Options, NativeOption) :-
+				(	{member(type(Type), Options)} ->
+					NativeOption = stdin(pipe(Stream, [type(Type)]))
+				;	NativeOption = stdin(pipe(Stream))
+				).
+			translate_option(stdout(Stream), Options, NativeOption) :-
+				(	{member(type(Type), Options)} ->
+					NativeOption = stdout(pipe(Stream, [type(Type)]))
+				;	NativeOption = stdout(pipe(Stream))
+				).
+		:- else.
+			translate_option(stdin(Stream), stdin(pipe(Stream))).
+			translate_option(stdout(Stream), stdout(pipe(Stream))).
+		:- endif.
 		translate_option(stderr(Stream), stderr(pipe(Stream))).
 
 		wait(Pid, Status) :-

@@ -179,6 +179,9 @@ using Lasso regression coefficients.
 * ADDED: New `process` library `wait/3` predicate providing access to both raw
 and normalized process exit status.
 
+* ADDED: Support to the `process` library for using the `create/3` predicate
+`type/1` option when running on XVM 12.2.1 or later version.
+
 * ADDED: New `random` library `sample/3-4` predicates.
 
 * CHANGED: The `mlp_classifier` library to require ground classifier terms,

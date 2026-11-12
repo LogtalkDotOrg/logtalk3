@@ -24,9 +24,9 @@
 	imports([options, http_message_helpers, http_text_helpers])).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2026-11-06,
+		date is 2026-11-12,
 		comment is 'Process-backed HTTP transport predicates using the process library and helper processes.'
 	]).
 
@@ -517,11 +517,11 @@
 		existence_error(http_socket_transport_sse_request, end_of_file).
 
 	open_process_connection(Transport, ExecutableKind, ExecutablePath, Arguments, Type, NormalizedHost, Port, Context, Connection) :-
-		% the type/1 option is only effective for the SICStus Prolog and SWI-Prolog backends
+		% the type/1 option is only effective for some backends
 		process::create(ExecutablePath, Arguments, [stdin(Output), stdout(Input), stderr(Error), process(Process), type(Type)]),
 		Connection = http_connection(NormalizedHost, Port, Input, Output),
+		% for other backends, we need to set the streams type after creating the process
 		catch(
-			% for other backends, we need to set the streams type after creating the process
 			setup_process_connection_streams(Type, Input, Output),
 			SetupError,
 			(	cleanup_process_connection(Transport, Connection, Process, Error),
@@ -624,9 +624,13 @@
 
 	:- elif(current_logtalk_flag(prolog_dialect, xvm)).
 
-		setup_process_connection_streams(Type, Input, Output) :-
-			{set_stream_type(Input, Type)},
-			{set_stream_type(Output, Type)}.
+		:- if((current_logtalk_flag(prolog_version, Version), Version @>= v(12, 2, 1))).
+			setup_process_connection_streams(_Type, _Input, _Output).
+		:- else.
+			setup_process_connection_streams(Type, Input, Output) :-
+				{set_stream_type(Input, Type)},
+				{set_stream_type(Output, Type)}.
+		:- endif.
 
 	:- endif.
 

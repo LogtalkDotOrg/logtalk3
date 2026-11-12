@@ -22,9 +22,9 @@
 :- object(smtp_process_transport).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-11-06,
+		date is 2026-11-12,
 		comment is 'Process-backed TLS transport support for the SMTP client.'
 	]).
 
@@ -74,8 +74,10 @@
 	open(Host, Port, Security, Helo, Executable, ServerName, Options, Connection) :-
 		resolve_command_path(Executable, ExecutablePath),
 		connection_arguments(Host, Port, Security, Helo, ServerName, Options, Arguments),
+		% the type/1 option is only effective for some backends
 		process::create(ExecutablePath, Arguments, [stdin(Output), stdout(Input), stderr(Error), process(Process), type(binary)]),
 		Connection = smtp_process_connection(Input, Output, Error, Process),
+		% for other backends, we need to set the streams type after creating the process
 		catch(
 			setup_streams(Input, Output),
 			SetupError,
@@ -205,9 +207,13 @@
 
 	:- elif(current_logtalk_flag(prolog_dialect, xvm)).
 
-		setup_streams(Input, Output) :-
-			{set_stream_type(Input, binary)},
-			{set_stream_type(Output, binary)}.
+		:- if((current_logtalk_flag(prolog_version, Version), Version @>= v(12, 2, 1))).
+			setup_streams(_Input, _Output).
+		:- else.
+			setup_streams(Input, Output) :-
+				{set_stream_type(Input, binary)},
+				{set_stream_type(Output, binary)}.
+		:- endif.
 
 	:- endif.
 
