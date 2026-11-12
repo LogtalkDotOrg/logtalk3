@@ -75,6 +75,10 @@ optimization problems as Logtalk objects, invoking the MiniZinc command-line
 tool with a selectable backend solver through the `process` library, and
 inspecting collected results.
 
+* ADDED: New `problog` library for representing ProbLog problems as Logtalk
+objects, invoking the ProbLog command-line tool through the `process` library,
+and inspecting collected results.
+
 * ADDED: New `sat` library for representing SAT problems as Logtalk
 objects, invoking the Kissat (default), CaDiCaL, Glucose, or Z3 command-line
 solvers through the `process` library, and inspecting collected results.

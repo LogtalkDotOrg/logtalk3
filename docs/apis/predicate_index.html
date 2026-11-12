@@ -602,6 +602,7 @@
 <li><a class="reference internal" href="#decode-2"><code class="docutils literal notranslate"><span class="pre">decode/2</span></code></a></li>
 <li><a class="reference internal" href="#decode-3"><code class="docutils literal notranslate"><span class="pre">decode/3</span></code></a></li>
 <li><a class="reference internal" href="#decode-5"><code class="docutils literal notranslate"><span class="pre">decode/5</span></code></a></li>
+<li><a class="reference internal" href="#decode-6"><code class="docutils literal notranslate"><span class="pre">decode/6</span></code></a></li>
 <li><a class="reference internal" href="#decode-7"><code class="docutils literal notranslate"><span class="pre">decode/7</span></code></a></li>
 <li><a class="reference internal" href="#decode-8"><code class="docutils literal notranslate"><span class="pre">decode/8</span></code></a></li>
 <li><a class="reference internal" href="#decode-bits-3"><code class="docutils literal notranslate"><span class="pre">decode_bits/3</span></code></a></li>
@@ -2261,10 +2262,12 @@
 <li><a class="reference internal" href="#print-results-1"><code class="docutils literal notranslate"><span class="pre">print_results/1</span></code></a></li>
 <li><a class="reference internal" href="#print-selector-1"><code class="docutils literal notranslate"><span class="pre">print_selector/1</span></code></a></li>
 <li><a class="reference internal" href="#print-solution-1"><code class="docutils literal notranslate"><span class="pre">print_solution/1</span></code></a></li>
+<li><a class="reference internal" href="#probability-3"><code class="docutils literal notranslate"><span class="pre">probability/3</span></code></a></li>
 <li><a class="reference internal" href="#problem-from-matrices-8"><code class="docutils literal notranslate"><span class="pre">problem_from_matrices/8</span></code></a></li>
 <li><a class="reference internal" href="#problem-json-schema-1"><code class="docutils literal notranslate"><span class="pre">problem_json_schema/1</span></code></a></li>
 <li><a class="reference internal" href="#problem-response-6"><code class="docutils literal notranslate"><span class="pre">problem_response/6</span></code></a></li>
 <li><a class="reference internal" href="#problem-response-descriptor-3"><code class="docutils literal notranslate"><span class="pre">problem_response_descriptor/3</span></code></a></li>
+<li><a class="reference internal" href="#problog-statement-2"><code class="docutils literal notranslate"><span class="pre">problog_statement/2</span></code></a></li>
 <li><a class="reference internal" href="#product-2"><code class="docutils literal notranslate"><span class="pre">product/2</span></code></a></li>
 <li><a class="reference internal" href="#product-3"><code class="docutils literal notranslate"><span class="pre">product/3</span></code></a></li>
 <li><a class="reference internal" href="#profile-2"><code class="docutils literal notranslate"><span class="pre">profile/2</span></code></a></li>
@@ -3157,6 +3160,7 @@
 <li><a class="reference internal" href="#valid-reassembly-state-1"><code class="docutils literal notranslate"><span class="pre">valid_reassembly_state/1</span></code></a></li>
 <li><a class="reference internal" href="#valid-recommender-1"><code class="docutils literal notranslate"><span class="pre">valid_recommender/1</span></code></a></li>
 <li><a class="reference internal" href="#valid-regressor-1"><code class="docutils literal notranslate"><span class="pre">valid_regressor/1</span></code></a></li>
+<li><a class="reference internal" href="#valid-result-1"><code class="docutils literal notranslate"><span class="pre">valid_result/1</span></code></a></li>
 <li><a class="reference internal" href="#valid-scale-1"><code class="docutils literal notranslate"><span class="pre">valid_scale/1</span></code></a></li>
 <li><a class="reference internal" href="#valid-segment-1"><code class="docutils literal notranslate"><span class="pre">valid_segment/1</span></code></a></li>
 <li><a class="reference internal" href="#valid-selector-1"><code class="docutils literal notranslate"><span class="pre">valid_selector/1</span></code></a></li>
@@ -6697,6 +6701,12 @@
 <li><p><a class="reference internal" href="jwt_0.html#jwt-0-decode-5"><span class="std std-ref">jwt</span></a></p></li>
 <li><p><a class="reference internal" href="jwt_compact_0.html#jwt-compact-0-decode-5"><span class="std std-ref">jwt_compact</span></a></p></li>
 <li><p><a class="reference internal" href="minizinc_output_0.html#minizinc-output-0-decode-5"><span class="std std-ref">minizinc_output</span></a></p></li>
+</ul>
+</section>
+<section id="decode-6">
+<h2><code class="docutils literal notranslate"><span class="pre">decode/6</span></code><a class="headerlink" href="#decode-6" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="problog_output_0.html#problog-output-0-decode-6"><span class="std std-ref">problog_output</span></a></p></li>
 </ul>
 </section>
 <section id="decode-7">
@@ -17174,6 +17184,7 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="asp_protocol_0.html#asp-protocol-0-print-program-1"><span class="std std-ref">asp_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="minizinc_protocol_0.html#minizinc-protocol-0-print-program-1"><span class="std std-ref">minizinc_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="problog_protocol_0.html#problog-protocol-0-print-program-1"><span class="std std-ref">problog_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="sat_protocol_0.html#sat-protocol-0-print-program-1"><span class="std std-ref">sat_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="smt_protocol_0.html#smt-protocol-0-print-program-1"><span class="std std-ref">smt_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="souffle_protocol_0.html#souffle-protocol-0-print-program-1"><span class="std std-ref">souffle_protocol</span></a></p></li>
@@ -17202,6 +17213,7 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="asp_protocol_0.html#asp-protocol-0-print-result-1"><span class="std std-ref">asp_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="minizinc_protocol_0.html#minizinc-protocol-0-print-result-1"><span class="std std-ref">minizinc_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="problog_protocol_0.html#problog-protocol-0-print-result-1"><span class="std std-ref">problog_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="sat_protocol_0.html#sat-protocol-0-print-result-1"><span class="std std-ref">sat_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="smt_protocol_0.html#smt-protocol-0-print-result-1"><span class="std std-ref">smt_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="souffle_protocol_0.html#souffle-protocol-0-print-result-1"><span class="std std-ref">souffle_protocol</span></a></p></li>
@@ -17223,6 +17235,12 @@
 <h2><code class="docutils literal notranslate"><span class="pre">print_solution/1</span></code><a class="headerlink" href="#print-solution-1" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="linear_programming_protocol_0.html#linear-programming-protocol-0-print-solution-1"><span class="std std-ref">linear_programming_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="probability-3">
+<h2><code class="docutils literal notranslate"><span class="pre">probability/3</span></code><a class="headerlink" href="#probability-3" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="problog_protocol_0.html#problog-protocol-0-probability-3"><span class="std std-ref">problog_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="problem-from-matrices-8">
@@ -17247,6 +17265,12 @@
 <h2><code class="docutils literal notranslate"><span class="pre">problem_response_descriptor/3</span></code><a class="headerlink" href="#problem-response-descriptor-3" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="open_api_0.html#open-api-0-problem-response-descriptor-3"><span class="std std-ref">open_api</span></a></p></li>
+</ul>
+</section>
+<section id="problog-statement-2">
+<h2><code class="docutils literal notranslate"><span class="pre">problog_statement/2</span></code><a class="headerlink" href="#problog-statement-2" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="problog_problem_protocol_0.html#problog-problem-protocol-0-problog-statement-2"><span class="std std-ref">problog_problem_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="product-2">
@@ -17298,6 +17322,7 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="asp_protocol_0.html#asp-protocol-0-program-1"><span class="std std-ref">asp_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="minizinc_protocol_0.html#minizinc-protocol-0-program-1"><span class="std std-ref">minizinc_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="problog_protocol_0.html#problog-protocol-0-program-1"><span class="std std-ref">problog_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="sat_protocol_0.html#sat-protocol-0-program-1"><span class="std std-ref">sat_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="smt_protocol_0.html#smt-protocol-0-program-1"><span class="std std-ref">smt_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="souffle_protocol_0.html#souffle-protocol-0-program-1"><span class="std std-ref">souffle_protocol</span></a></p></li>
@@ -17308,6 +17333,7 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="asp_protocol_0.html#asp-protocol-0-program-2"><span class="std std-ref">asp_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="minizinc_protocol_0.html#minizinc-protocol-0-program-2"><span class="std std-ref">minizinc_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="problog_protocol_0.html#problog-protocol-0-program-2"><span class="std std-ref">problog_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="sat_protocol_0.html#sat-protocol-0-program-2"><span class="std std-ref">sat_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="smt_protocol_0.html#smt-protocol-0-program-2"><span class="std std-ref">smt_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="souffle_protocol_0.html#souffle-protocol-0-program-2"><span class="std std-ref">souffle_protocol</span></a></p></li>
@@ -17734,6 +17760,7 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="asp_process_0.html#asp-process-0-quote-3"><span class="std std-ref">asp_process</span></a></p></li>
 <li><p><a class="reference internal" href="minizinc_process_0.html#minizinc-process-0-quote-3"><span class="std std-ref">minizinc_process</span></a></p></li>
+<li><p><a class="reference internal" href="problog_process_0.html#problog-process-0-quote-3"><span class="std std-ref">problog_process</span></a></p></li>
 <li><p><a class="reference internal" href="sat_process_0.html#sat-process-0-quote-3"><span class="std std-ref">sat_process</span></a></p></li>
 <li><p><a class="reference internal" href="smt_process_0.html#smt-process-0-quote-3"><span class="std std-ref">smt_process</span></a></p></li>
 <li><p><a class="reference internal" href="souffle_process_0.html#souffle-process-0-quote-3"><span class="std std-ref">souffle_process</span></a></p></li>
@@ -19114,6 +19141,7 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="asp_protocol_0.html#asp-protocol-0-result-property-2"><span class="std std-ref">asp_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="minizinc_protocol_0.html#minizinc-protocol-0-result-property-2"><span class="std std-ref">minizinc_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="problog_protocol_0.html#problog-protocol-0-result-property-2"><span class="std std-ref">problog_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="sat_protocol_0.html#sat-protocol-0-result-property-2"><span class="std std-ref">sat_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="smt_protocol_0.html#smt-protocol-0-result-property-2"><span class="std std-ref">smt_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="souffle_protocol_0.html#souffle-protocol-0-result-property-2"><span class="std std-ref">souffle_protocol</span></a></p></li>
@@ -19403,6 +19431,7 @@
 <h2><code class="docutils literal notranslate"><span class="pre">run/7</span></code><a class="headerlink" href="#run-7" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="asp_process_0.html#asp-process-0-run-7"><span class="std std-ref">asp_process</span></a></p></li>
+<li><p><a class="reference internal" href="problog_process_0.html#problog-process-0-run-7"><span class="std std-ref">problog_process</span></a></p></li>
 <li><p><a class="reference internal" href="sat_process_0.html#sat-process-0-run-7"><span class="std std-ref">sat_process</span></a></p></li>
 <li><p><a class="reference internal" href="smt_process_0.html#smt-process-0-run-7"><span class="std std-ref">smt_process</span></a></p></li>
 </ul>
@@ -20062,6 +20091,7 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="asp_program_0.html#asp-program-0-serialize-2"><span class="std std-ref">asp_program</span></a></p></li>
 <li><p><a class="reference internal" href="minizinc_program_0.html#minizinc-program-0-serialize-2"><span class="std std-ref">minizinc_program</span></a></p></li>
+<li><p><a class="reference internal" href="problog_program_0.html#problog-program-0-serialize-2"><span class="std std-ref">problog_program</span></a></p></li>
 <li><p><a class="reference internal" href="sat_program_0.html#sat-program-0-serialize-2"><span class="std std-ref">sat_program</span></a></p></li>
 <li><p><a class="reference internal" href="smt_program_0.html#smt-program-0-serialize-2"><span class="std std-ref">smt_program</span></a></p></li>
 <li><p><a class="reference internal" href="souffle_program_0.html#souffle-program-0-serialize-2"><span class="std std-ref">souffle_program</span></a></p></li>
@@ -20072,6 +20102,7 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="asp_program_0.html#asp-program-0-serialize-4"><span class="std std-ref">asp_program</span></a></p></li>
 <li><p><a class="reference internal" href="minizinc_program_0.html#minizinc-program-0-serialize-4"><span class="std std-ref">minizinc_program</span></a></p></li>
+<li><p><a class="reference internal" href="problog_program_0.html#problog-program-0-serialize-4"><span class="std std-ref">problog_program</span></a></p></li>
 <li><p><a class="reference internal" href="sat_program_0.html#sat-program-0-serialize-4"><span class="std std-ref">sat_program</span></a></p></li>
 <li><p><a class="reference internal" href="smt_program_0.html#smt-program-0-serialize-4"><span class="std std-ref">smt_program</span></a></p></li>
 <li><p><a class="reference internal" href="souffle_program_0.html#souffle-program-0-serialize-4"><span class="std std-ref">souffle_program</span></a></p></li>
@@ -20588,6 +20619,7 @@
 <li><p><a class="reference internal" href="asp_protocol_0.html#asp-protocol-0-solve-2"><span class="std std-ref">asp_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="linear_programming_protocol_0.html#linear-programming-protocol-0-solve-2"><span class="std std-ref">linear_programming_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="minizinc_protocol_0.html#minizinc-protocol-0-solve-2"><span class="std std-ref">minizinc_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="problog_protocol_0.html#problog-protocol-0-solve-2"><span class="std std-ref">problog_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="sat_protocol_0.html#sat-protocol-0-solve-2"><span class="std std-ref">sat_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="smt_protocol_0.html#smt-protocol-0-solve-2"><span class="std std-ref">smt_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="souffle_protocol_0.html#souffle-protocol-0-solve-2"><span class="std std-ref">souffle_protocol</span></a></p></li>
@@ -20599,6 +20631,7 @@
 <li><p><a class="reference internal" href="asp_protocol_0.html#asp-protocol-0-solve-3"><span class="std std-ref">asp_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="linear_programming_protocol_0.html#linear-programming-protocol-0-solve-3"><span class="std std-ref">linear_programming_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="minizinc_protocol_0.html#minizinc-protocol-0-solve-3"><span class="std std-ref">minizinc_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="problog_protocol_0.html#problog-protocol-0-solve-3"><span class="std std-ref">problog_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="sat_protocol_0.html#sat-protocol-0-solve-3"><span class="std std-ref">sat_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="smt_protocol_0.html#smt-protocol-0-solve-3"><span class="std std-ref">smt_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="souffle_protocol_0.html#souffle-protocol-0-solve-3"><span class="std std-ref">souffle_protocol</span></a></p></li>
@@ -22907,6 +22940,12 @@
 <h2><code class="docutils literal notranslate"><span class="pre">valid_regressor/1</span></code><a class="headerlink" href="#valid-regressor-1" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="regressor_protocol_0.html#regressor-protocol-0-valid-regressor-1"><span class="std std-ref">regressor_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="valid-result-1">
+<h2><code class="docutils literal notranslate"><span class="pre">valid_result/1</span></code><a class="headerlink" href="#valid-result-1" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="problog_output_0.html#problog-output-0-valid-result-1"><span class="std std-ref">problog_output</span></a></p></li>
 </ul>
 </section>
 <section id="valid-scale-1">

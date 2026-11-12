@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on November 10, 2026
+%  Last updated on November 12, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -271,6 +271,7 @@ logtalk_library_path(plackett_luce_ranker, library('plackett_luce_ranker/')).
 logtalk_library_path(plackett_luce_last_ranker, library('plackett_luce_last_ranker/')).
 logtalk_library_path(prefix_span_pattern_miner, library('prefix_span_pattern_miner/')).
 logtalk_library_path(probabilistic_pca_projection, library('probabilistic_pca_projection/')).
+logtalk_library_path(problog, library('problog/')).
 logtalk_library_path(process, library('process/')).
 logtalk_library_path(protobuf, library('protobuf/')).
 logtalk_library_path(qda_classifier, library('qda_classifier/')).

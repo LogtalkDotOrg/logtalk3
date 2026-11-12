@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Distribution clean script for packaging
-##   Last updated on November 9, 2026
+##   Last updated on November 12, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -44,8 +44,11 @@ chmod a+x docs/apis/sources/*.sh
 chmod a+x docs/handbook/sources/*.sh
 chmod a+x library/asp/scripts/*.sh
 chmod a+x library/asp/test_files/*.sh
+chmod a+x library/minizinc/scripts/*.sh
+chmod a+x library/problog/scripts/*.sh
 chmod a+x library/sat/scripts/*.sh
 chmod a+x library/sat/test_files/*.sh
+chmod a+x library/souffle/scripts/*.sh
 chmod a+x library/smt/scripts/*.sh
 chmod a+x library/smt/test_files/*.sh
 chmod a+x scripts/*.sh

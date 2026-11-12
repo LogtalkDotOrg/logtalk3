@@ -1,0 +1,275 @@
+.. index:: single: problog_protocol
+.. _problog_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``problog_protocol``
+====================
+
+Process-backed ProbLog exact inference, source generation, and collected query probabilities.
+
+| **Availability:** 
+|    ``logtalk_load(problog(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-12
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: solve/2
+.. _problog_protocol/0::solve/2:
+
+``solve/2``
+^^^^^^^^^^^
+
+Runs exact inference with default options. Valid sources are ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, and ``file(Path)``. Returns a ground collected result after cleanup.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``solve(Source,Result)``
+| **Mode and number of proofs:**
+|    ``solve(+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is not ground:
+|        ``instantiation_error``
+|    ``Source`` is ground but invalid:
+|        ``domain_error(problog_source,Source)``
+|    An executable cannot be resolved:
+|        ``existence_error(command,Command)``
+|    A transport operation fails:
+|        ``problog_transport(Stage,Status,Details)``
+|    Inference fails or produces invalid output:
+|        ``problog_solver_error(Formal,Status,Diagnostics,SourceMap)``
+
+
+------------
+
+.. index:: solve/3
+.. _problog_protocol/0::solve/3:
+
+``solve/3``
+^^^^^^^^^^^
+
+Runs exact inference with the given options options. Repeated options use the first occurrence.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``solve(Source,Result,Options)``
+| **Mode and number of proofs:**
+|    ``solve(+compound,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is not ground:
+|        ``instantiation_error``
+|    ``Source`` is ground but invalid:
+|        ``domain_error(problog_source,Source)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    An executable cannot be resolved:
+|        ``existence_error(command,Command)``
+|    A transport operation fails:
+|        ``problog_transport(Stage,Status,Details)``
+|    Inference fails or produces invalid output:
+|        ``problog_solver_error(Formal,Status,Diagnostics,SourceMap)``
+
+
+------------
+
+.. index:: program/1
+.. _problog_protocol/0::program/1:
+
+``program/1``
+^^^^^^^^^^^^^
+
+Prints source to the current output without invoking ProbLog.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``program(Source)``
+| **Mode and number of proofs:**
+|    ``program(+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is not ground:
+|        ``instantiation_error``
+|    ``Source`` is ground but invalid:
+|        ``domain_error(problog_source,Source)``
+
+
+------------
+
+.. index:: program/2
+.. _problog_protocol/0::program/2:
+
+``program/2``
+^^^^^^^^^^^^^
+
+Returns source character codes without invoking ProbLog. Native file and codes sources are not parsed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``program(Source,Codes)``
+| **Mode and number of proofs:**
+|    ``program(+compound,-list(integer))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is not ground:
+|        ``instantiation_error``
+|    ``Source`` is ground but invalid:
+|        ``domain_error(problog_source,Source)``
+
+
+------------
+
+.. index:: print_program/1
+.. _problog_protocol/0::print_program/1:
+
+``print_program/1``
+^^^^^^^^^^^^^^^^^^^
+
+Prints character codes to the current output without adding a newline.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_program(Codes)``
+| **Mode and number of proofs:**
+|    ``print_program(+list(integer))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Codes`` is a partial list or a list with an element ``Element`` which is a variable:
+|        ``instantiation_error``
+|    ``Codes`` is is neither a partial list nor a list:
+|        ``type_error(codes,Codes)``
+|    An element ``Element`` of the ``Codes`` list is neither a variable nor an integer:
+|        ``type_error(integer,Element)``
+|    An element ``Element`` of the ``Codes`` list is an integer but not a valid character code:
+|        ``domain_error(character_code,Element)``
+
+
+------------
+
+.. index:: probability/3
+.. _problog_protocol/0::probability/3:
+
+``probability/3``
+^^^^^^^^^^^^^^^^^
+
+Enumerates ground query terms and numeric probabilities in a collected result. Query order follows the CLI, not a sorting contract.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``probability(Result,Query,Probability)``
+| **Mode and number of proofs:**
+|    ``probability(+compound,?callable,?number)`` - ``zero_or_more``
+
+| **Exceptions:**
+|    ``Result`` is not ground:
+|        ``instantiation_error``
+|    ``Result`` is ground but invalid:
+|        ``domain_error(problog_result,Result)``
+
+
+------------
+
+.. index:: result_property/2
+.. _problog_protocol/0::result_property/2:
+
+``result_property/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Enumerates raw_status/1, process_status/1, and diagnostics/1 properties. Diagnostics are captured ``stderr character codes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``result_property(Result,Property)``
+| **Mode and number of proofs:**
+|    ``result_property(+compound,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: print_result/1
+.. _problog_protocol/0::print_result/1:
+
+``print_result/1``
+^^^^^^^^^^^^^^^^^^
+
+Prints the collected query probabilities without invoking ProbLog.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_result(Result)``
+| **Mode and number of proofs:**
+|    ``print_result(+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Result`` is not ground:
+|        ``instantiation_error``
+|    ``Result`` is ground but invalid:
+|        ``domain_error(problog_result,Result)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

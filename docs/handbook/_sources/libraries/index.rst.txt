@@ -267,6 +267,7 @@ directory in the ``NOTES.md`` file.
    pls_projection
    prefix_span_pattern_miner
    probabilistic_pca_projection
+   problog
    process
    protobuf
    qda_classifier

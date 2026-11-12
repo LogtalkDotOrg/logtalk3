@@ -909,6 +909,11 @@ Objects
       primal_dual_interior_point(Problem) <primal_dual_interior_point_1>
       print_goal_hook <print_goal_hook_0>
       probabilistic_pca_projection <probabilistic_pca_projection_0>
+      problog <problog_0>
+      problog_expansion <problog_expansion_0>
+      problog_output <problog_output_0>
+      problog_process <problog_process_0>
+      problog_program <problog_program_0>
       process <process_0>
       prolog_module_hook(Module) <prolog_module_hook_1>
       protobuf <protobuf_0>
@@ -1828,6 +1833,11 @@ Objects
    * :doc:`primal_dual_interior_point(Problem) <primal_dual_interior_point_1>`
    * :doc:`print_goal_hook <print_goal_hook_0>`
    * :doc:`probabilistic_pca_projection <probabilistic_pca_projection_0>`
+   * :doc:`problog <problog_0>`
+   * :doc:`problog_expansion <problog_expansion_0>`
+   * :doc:`problog_output <problog_output_0>`
+   * :doc:`problog_process <problog_process_0>`
+   * :doc:`problog_program <problog_program_0>`
    * :doc:`process <process_0>`
    * :doc:`prolog_module_hook(Module) <prolog_module_hook_1>`
    * :doc:`protobuf <protobuf_0>`
@@ -2301,6 +2311,8 @@ Protocols
       pattern_miner_protocol <pattern_miner_protocol_0>
       permutations_protocol <permutations_protocol_0>
       probabilistic_classifier_protocol <probabilistic_classifier_protocol_0>
+      problog_problem_protocol <problog_problem_protocol_0>
+      problog_protocol <problog_protocol_0>
       proto_hierarchyp <proto_hierarchyp_0>
       pseudo_random_protocol <pseudo_random_protocol_0>
       qp_solver_protocol <qp_solver_protocol_0>
@@ -2534,6 +2546,8 @@ Protocols
    * :doc:`pattern_miner_protocol <pattern_miner_protocol_0>`
    * :doc:`permutations_protocol <permutations_protocol_0>`
    * :doc:`probabilistic_classifier_protocol <probabilistic_classifier_protocol_0>`
+   * :doc:`problog_problem_protocol <problog_problem_protocol_0>`
+   * :doc:`problog_protocol <problog_protocol_0>`
    * :doc:`proto_hierarchyp <proto_hierarchyp_0>`
    * :doc:`pseudo_random_protocol <pseudo_random_protocol_0>`
    * :doc:`qp_solver_protocol <qp_solver_protocol_0>`

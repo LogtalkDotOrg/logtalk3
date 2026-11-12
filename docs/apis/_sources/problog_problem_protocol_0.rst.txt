@@ -1,0 +1,79 @@
+.. index:: single: problog_problem_protocol
+.. _problog_problem_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``problog_problem_protocol``
+============================
+
+Protocol for ordered, ground ProbLog statement providers.
+
+| **Availability:** 
+|    ``logtalk_load(problog(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-12
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: problog_statement/2
+.. _problog_problem_protocol/0::problog_statement/2:
+
+``problog_statement/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Enumerates canonical ProbLog statements in source order together with their source origins.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``problog_statement(Statement,Origin)``
+| **Mode and number of proofs:**
+|    ``problog_statement(-compound,-term)`` - ``zero_or_more``
+
+| **Remarks:**
+
+    - Statements: Statements are fully ground and use the vocabulary documented by the ``problog_program`` object.
+    - Origin: Either ``unknown`` or ``source(File, Start, End)`` where positions are positive character offsets.
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

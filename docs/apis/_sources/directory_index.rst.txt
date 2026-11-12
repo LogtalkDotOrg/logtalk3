@@ -4662,6 +4662,32 @@ To load an entity, always load the library that includes it using the goal ``log
 
    * :doc:`probabilistic_pca_projection <probabilistic_pca_projection_0>`
 
+``library/problog/``
+--------------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      problog <problog_0>
+      problog_expansion <problog_expansion_0>
+      problog_output <problog_output_0>
+      problog_problem_protocol <problog_problem_protocol_0>
+      problog_process <problog_process_0>
+      problog_program <problog_program_0>
+      problog_protocol <problog_protocol_0>
+
+.. only:: latex
+
+   * :doc:`problog <problog_0>`
+   * :doc:`problog_expansion <problog_expansion_0>`
+   * :doc:`problog_output <problog_output_0>`
+   * :doc:`problog_problem_protocol <problog_problem_protocol_0>`
+   * :doc:`problog_process <problog_process_0>`
+   * :doc:`problog_program <problog_program_0>`
+   * :doc:`problog_protocol <problog_protocol_0>`
+
 ``library/process/``
 --------------------
 

@@ -1,0 +1,119 @@
+.. index:: single: problog_program
+.. _problog_program/0:
+
+.. rst-class:: right
+
+**object**
+
+``problog_program``
+===================
+
+Canonical ground ProbLog statement validation and source generation.
+
+| **Availability:** 
+|    ``logtalk_load(problog(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-12
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: serialize/2
+.. _problog_program/0::serialize/2:
+
+``serialize/2``
+^^^^^^^^^^^^^^^
+
+Serializes a list of fully ground canonical ProbLog statements to character codes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serialize(Statements,Codes)``
+| **Mode and number of proofs:**
+|    ``serialize(+list,-list(integer))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Statements`` is a partial list or contains a variable:
+|        ``instantiation_error``
+|    ``Statements`` is not a list:
+|        ``type_error(list,Statements)``
+|    A statement or one of its terms is outside the documented ProbLog AST:
+|        ``domain_error(problog_statement,Statement)``
+
+| **Remarks:**
+
+    - Statements: The statement constructors are ``fact(Head)``, ``rule(Head, Body)``, ``probabilistic_fact(P, Head)``, ``probabilistic_rule(P, Head, Body)``, ``annotated_disjunction(Alternatives, Body)``, ``query(Goal)``, ``evidence(Goal, Boolean)``, ``directive(Goal)``, ``comment(Codes)``, and ``raw(Codes)``.
+    - Heads and positive goals: Use ``function(Name, Arguments)``; a zero-arity predicate has an empty argument list. Terms are ``atom(Atom)``, ``number(Number)``, ``variable(Name)``, ``anonymous``, nested ``function(Name, Arguments)``, proper ``list(Elements)``, improper ``list(Elements, Tail)``, and ``arithmetic(Operator, Arguments)``. Logic variables are represented by ground ``variable(Name)`` or ``anonymous`` nodes, preserving variable sharing without putting Prolog variables in the AST.
+    - Goals: Use ``true``, ``function(Name, Arguments)``, ``conjunction(Goals)``, ``disjunction(Goals)``, ``negation(Goal)``, or ``comparison(Operator, Left, Right)``. Arithmetic operators are ``+``, ``-``, ``*``, ``/``, ``//``, ``mod``, and ``**``; comparison operators are ``=``, ``==``, ``\=``, ``\==``, ``<``, ``=<``, ``>``, and ``>=``.
+    - Queries and evidence: ``query(Goal)`` writes a native query directive; ``evidence(Goal, true)`` and ``evidence(Goal, false)`` write positive and negative evidence directives.
+    - Annotated disjunctions: ``annotated_disjunction(Alternatives, Body)`` uses at least two ``Probability-Head`` list elements and writes ``Probability::Head; ...`` optionally followed by ``:- Body``.
+    - Raw source and comments: ``raw(Codes)`` passes trusted native source through, adding a final newline when needed. ``comment(Codes)`` emits comment lines. Both use ground character-code lists.
+    - Probabilities: Probabilities are numbers in the inclusive range [0,1]. Annotated-disjunction probabilities must sum to at most one; a residual probability is allowed.
+
+
+------------
+
+.. index:: serialize/4
+.. _problog_program/0::serialize/4:
+
+``serialize/4``
+^^^^^^^^^^^^^^^
+
+Serializes statements with origins and returns generated ``line(Start, End, Origin)`` source-map entries.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serialize(Statements,Origins,Codes,SourceMap)``
+| **Mode and number of proofs:**
+|    ``serialize(+list,+list,-list(integer),-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Statements`` or ``Origins`` is a partial list or contains a variable:
+|        ``instantiation_error``
+|    ``Statements`` or ``Origins`` is not a list:
+|        ``type_error(list,Statements)``
+|    An invalid statement or origin is supplied, or the list lengths differ:
+|        ``domain_error(problog_origins,Origins)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

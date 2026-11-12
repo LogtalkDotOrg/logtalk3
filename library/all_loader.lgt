@@ -274,6 +274,7 @@
 		lasso_feature_selector(loader),
 		asp(loader),
 		minizinc(loader),
+		problog(loader),
 		sat(loader),
 		smt(loader),
 		souffle(loader),

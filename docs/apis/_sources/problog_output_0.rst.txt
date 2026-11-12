@@ -1,0 +1,94 @@
+.. index:: single: problog_output
+.. _problog_output/0:
+
+.. rst-class:: right
+
+**object**
+
+``problog_output``
+==================
+
+Strict data-only decoding of ProbLog --format prolog query probabilities.
+
+| **Availability:** 
+|    ``logtalk_load(problog(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-12
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`term_io <term_io/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: decode/6
+.. _problog_output/0::decode/6:
+
+``decode/6``
+^^^^^^^^^^^^
+
+Decodes a complete output document and process metadata. Nonzero status and malformed output raise problog_solver_error/4 retaining both output streams.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode(Codes,Diagnostics,RawStatus,NormalizedStatus,SourceMap,Result)``
+| **Mode and number of proofs:**
+|    ``decode(+list(integer),+list(integer),+term,+compound,+list(compound),-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: valid_result/1
+.. _problog_output/0::valid_result/1:
+
+``valid_result/1``
+^^^^^^^^^^^^^^^^^^
+
+True for a ground, structurally valid collected inference result.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_result(Result)``
+| **Mode and number of proofs:**
+|    ``valid_result(@term)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

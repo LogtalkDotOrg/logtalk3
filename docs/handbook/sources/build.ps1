@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on November 10, 2026
+##   Last updated on November 12, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -317,6 +317,7 @@ Foreach-Object {
 (Get-Content ../../../library/pls_projection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/pls_projection.rst
 (Get-Content ../../../library/prefix_span_pattern_miner/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/prefix_span_pattern_miner.rst
 (Get-Content ../../../library/probabilistic_pca_projection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/probabilistic_pca_projection.rst
+(Get-Content ../../../library/problog/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/problog.rst
 (Get-Content ../../../library/process/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/process.rst
 (Get-Content ../../../library/protobuf/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/protobuf.rst
 (Get-Content ../../../library/qda_classifier/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/qda_classifier.rst
