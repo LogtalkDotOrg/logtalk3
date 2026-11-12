@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-491 615,-491 615,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object atms_segmented_bitset_environment</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 15:48</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 20:35</text>
 <g id="clust1" class="cluster">
 <title>cluster_atms_segmented_bitset_environment_object</title>
 <g id="a_clust1"><a xlink:title="atms_segmented_bitset_environment">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 591,-46 591,-46 597,-46 603,-52 603,-58 603,-58 603,-467 603,-467 603,-473 597,-479 591,-479 591,-479 20,-479 20,-479 14,-479 8,-473 8,-467 8,-467 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-463.46" font-family="monospace" font-size="10.00" fill="dimgray">atms_segmented_bitset_environment</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>to_list/2</title>
 <polygon fill="cornsilk" stroke="black" points="104.11,-443 17.89,-443 17.89,-407 104.11,-407 104.11,-443"/>
 <text xml:space="preserve" text-anchor="start" x="25.89" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L87">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L87">
 <text xml:space="preserve" text-anchor="start" x="31.3" y="-426.71" font-family="monospace" font-size="11.00">to_list/2</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>blocks_to_nodes/3</title>
 <polygon fill="cornsilk" stroke="black" points="157.51,-326 18.49,-326 18.49,-290 157.51,-290 157.51,-326"/>
 <text xml:space="preserve" text-anchor="start" x="26.49" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node12_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L90">
+<g id="a_node12_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L90">
 <text xml:space="preserve" text-anchor="start" x="31.89" y="-309.71" font-family="monospace" font-size="11.00">blocks_to_nodes/3</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- to_list/2&#45;&gt;blocks_to_nodes/3 -->
 <g id="edge10" class="edge">
 <title>to_list/2&#45;&gt;blocks_to_nodes/3</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L87" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L87" xlink:title="calls">
 <path fill="none" stroke="black" d="M65.1,-406.53C69.41,-388.19 76.25,-359.06 81.33,-337.4"/>
 <polygon fill="black" stroke="black" points="84.72,-338.26 83.6,-327.73 77.91,-336.66 84.72,-338.26"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L87">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L87">
 <text xml:space="preserve" text-anchor="start" x="75.31" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>equal/2</title>
 <polygon fill="cornsilk" stroke="black" points="195.5,-443 122.5,-443 122.5,-407 195.5,-407 195.5,-443"/>
 <text xml:space="preserve" text-anchor="start" x="130.5" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L64">
+<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L64">
 <text xml:space="preserve" text-anchor="start" x="135.9" y="-426.71" font-family="monospace" font-size="11.00">equal/2</text>
 </a>
 </g>
@@ -84,7 +84,7 @@
 <title>empty/1</title>
 <polygon fill="cornsilk" stroke="black" points="286.5,-443 213.5,-443 213.5,-407 286.5,-407 286.5,-443"/>
 <text xml:space="preserve" text-anchor="start" x="221.5" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L32">
+<g id="a_node3_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="226.9" y="-426.71" font-family="monospace" font-size="11.00">empty/1</text>
 </a>
 </g>
@@ -98,7 +98,7 @@
 <title>singleton/2</title>
 <polygon fill="cornsilk" stroke="black" points="357.71,-209 258.29,-209 258.29,-173 357.71,-173 357.71,-209"/>
 <text xml:space="preserve" text-anchor="start" x="266.29" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L34" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L34">
+<g id="a_node4_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L34" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L34">
 <text xml:space="preserve" text-anchor="start" x="271.69" y="-192.71" font-family="monospace" font-size="11.00">singleton/2</text>
 </a>
 </g>
@@ -112,7 +112,7 @@
 <title>node_bit/3</title>
 <polygon fill="cornsilk" stroke="black" points="488.41,-92 395.59,-92 395.59,-56 488.41,-56 488.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="403.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node14_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L108">
+<g id="a_node14_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L108">
 <text xml:space="preserve" text-anchor="start" x="408.99" y="-75.71" font-family="monospace" font-size="11.00">node_bit/3</text>
 </a>
 </g>
@@ -124,12 +124,12 @@
 <!-- singleton/2&#45;&gt;node_bit/3 -->
 <g id="edge1" class="edge">
 <title>singleton/2&#45;&gt;node_bit/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L34" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L34" xlink:title="calls">
 <path fill="none" stroke="black" d="M328.35,-172.53C351.01,-153.09 387.81,-121.51 413.37,-99.57"/>
 <polygon fill="black" stroke="black" points="415.44,-102.41 420.75,-93.24 410.88,-97.1 415.44,-102.41"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L34" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L34">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L34" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L34">
 <text xml:space="preserve" text-anchor="start" x="379.02" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -139,7 +139,7 @@
 <title>union/3</title>
 <polygon fill="cornsilk" stroke="black" points="377.5,-443 304.5,-443 304.5,-407 377.5,-407 377.5,-443"/>
 <text xml:space="preserve" text-anchor="start" x="312.5" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L37">
+<g id="a_node5_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L37">
 <text xml:space="preserve" text-anchor="start" x="317.9" y="-426.71" font-family="monospace" font-size="11.00">union/3</text>
 </a>
 </g>
@@ -153,7 +153,7 @@
 <title>union/8</title>
 <polygon fill="cornsilk" stroke="black" points="331.5,-326 258.5,-326 258.5,-290 331.5,-290 331.5,-326"/>
 <text xml:space="preserve" text-anchor="start" x="266.5" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L45">
+<g id="a_node6_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="271.9" y="-309.71" font-family="monospace" font-size="11.00">union/8</text>
 </a>
 </g>
@@ -165,12 +165,12 @@
 <!-- union/3&#45;&gt;union/8 -->
 <g id="edge2" class="edge">
 <title>union/3&#45;&gt;union/8</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L41" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L41" xlink:title="calls">
 <path fill="none" stroke="black" d="M319.04,-406.55C309.06,-397.21 298.31,-384.78 293,-371 289,-360.63 288.55,-348.55 289.44,-337.82"/>
 <polygon fill="black" stroke="black" points="292.9,-338.31 290.7,-327.95 285.96,-337.42 292.9,-338.31"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L41" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L41">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L41" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L41">
 <text xml:space="preserve" text-anchor="start" x="293" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -178,12 +178,12 @@
 <!-- union/8&#45;&gt;union/3 -->
 <g id="edge3" class="edge">
 <title>union/8&#45;&gt;union/3</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L45" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M303.84,-326.44C308.88,-336.67 315.13,-349.92 320,-362 324.4,-372.91 328.68,-385.14 332.21,-395.83"/>
 <polygon fill="black" stroke="black" points="328.86,-396.82 335.26,-405.26 335.52,-394.67 328.86,-396.82"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L45">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="323.23" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -193,7 +193,7 @@
 <title>subset/2</title>
 <polygon fill="cornsilk" stroke="black" points="474.81,-443 395.19,-443 395.19,-407 474.81,-407 474.81,-443"/>
 <text xml:space="preserve" text-anchor="start" x="403.19" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L53">
+<g id="a_node7_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L53">
 <text xml:space="preserve" text-anchor="start" x="408.6" y="-426.71" font-family="monospace" font-size="11.00">subset/2</text>
 </a>
 </g>
@@ -207,7 +207,7 @@
 <title>subset/6</title>
 <polygon fill="cornsilk" stroke="black" points="433.81,-326 354.19,-326 354.19,-290 433.81,-290 433.81,-326"/>
 <text xml:space="preserve" text-anchor="start" x="362.19" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L58">
+<g id="a_node8_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="367.6" y="-309.71" font-family="monospace" font-size="11.00">subset/6</text>
 </a>
 </g>
@@ -219,12 +219,12 @@
 <!-- subset/2&#45;&gt;subset/6 -->
 <g id="edge4" class="edge">
 <title>subset/2&#45;&gt;subset/6</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L54" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L54" xlink:title="calls">
 <path fill="none" stroke="black" d="M416.83,-406.68C408.11,-397.1 398.58,-384.43 394,-371 390.41,-360.49 389.71,-348.38 390.16,-337.67"/>
 <polygon fill="black" stroke="black" points="393.64,-338.08 390.94,-327.84 386.66,-337.53 393.64,-338.08"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L54">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L54">
 <text xml:space="preserve" text-anchor="start" x="394" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -232,12 +232,12 @@
 <!-- subset/6&#45;&gt;subset/2 -->
 <g id="edge5" class="edge">
 <title>subset/6&#45;&gt;subset/2</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L58" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L58" xlink:title="calls">
 <path fill="none" stroke="black" d="M404.13,-326.18C409.76,-336.32 416.51,-349.57 421,-362 424.84,-372.63 427.85,-384.68 430.08,-395.32"/>
 <polygon fill="black" stroke="black" points="426.63,-395.93 431.97,-405.08 433.5,-394.6 426.63,-395.93"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L58">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="423.72" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -247,7 +247,7 @@
 <title>from_list/2</title>
 <polygon fill="cornsilk" stroke="black" points="592.71,-443 493.29,-443 493.29,-407 592.71,-407 592.71,-443"/>
 <text xml:space="preserve" text-anchor="start" x="501.29" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L67">
+<g id="a_node9_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="506.69" y="-426.71" font-family="monospace" font-size="11.00">from_list/2</text>
 </a>
 </g>
@@ -261,7 +261,7 @@
 <title>nodes_to_blocks/2</title>
 <polygon fill="cornsilk" stroke="black" points="592.51,-326 453.49,-326 453.49,-290 592.51,-290 592.51,-326"/>
 <text xml:space="preserve" text-anchor="start" x="461.49" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L71">
+<g id="a_node10_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L71">
 <text xml:space="preserve" text-anchor="start" x="466.89" y="-309.71" font-family="monospace" font-size="11.00">nodes_to_blocks/2</text>
 </a>
 </g>
@@ -273,12 +273,12 @@
 <!-- from_list/2&#45;&gt;nodes_to_blocks/2 -->
 <g id="edge6" class="edge">
 <title>from_list/2&#45;&gt;nodes_to_blocks/2</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L67" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L67" xlink:title="calls">
 <path fill="none" stroke="black" d="M539.96,-406.53C536.77,-388.19 531.71,-359.06 527.94,-337.4"/>
 <polygon fill="black" stroke="black" points="531.42,-337 526.26,-327.74 524.53,-338.2 531.42,-337"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L67">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="533.6" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -288,7 +288,7 @@
 <title>complete_block/5</title>
 <polygon fill="cornsilk" stroke="black" points="508.21,-209 375.79,-209 375.79,-173 508.21,-173 508.21,-209"/>
 <text xml:space="preserve" text-anchor="start" x="383.79" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L77" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L77">
+<g id="a_node11_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L77" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L77">
 <text xml:space="preserve" text-anchor="start" x="389.19" y="-192.71" font-family="monospace" font-size="11.00">complete_block/5</text>
 </a>
 </g>
@@ -300,12 +300,12 @@
 <!-- nodes_to_blocks/2&#45;&gt;complete_block/5 -->
 <g id="edge8" class="edge">
 <title>nodes_to_blocks/2&#45;&gt;complete_block/5</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L72" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L72" xlink:title="calls">
 <path fill="none" stroke="black" d="M510.7,-289.53C497.42,-270.68 476.11,-240.43 460.74,-218.61"/>
 <polygon fill="black" stroke="black" points="463.64,-216.65 455.02,-210.49 457.92,-220.68 463.64,-216.65"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L72" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L72">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L72" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L72">
 <text xml:space="preserve" text-anchor="start" x="484.93" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -313,12 +313,12 @@
 <!-- nodes_to_blocks/2&#45;&gt;node_bit/3 -->
 <g id="edge7" class="edge">
 <title>nodes_to_blocks/2&#45;&gt;node_bit/3</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L72" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L72" xlink:title="calls">
 <path fill="none" stroke="black" d="M525.42,-289.87C528.41,-263.75 531.49,-212.83 517,-173 506.84,-145.07 485.66,-118.62 468.39,-100.26"/>
 <polygon fill="black" stroke="black" points="471.31,-98.25 461.84,-93.5 466.29,-103.12 471.31,-98.25"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L72" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L72">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L72" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L72">
 <text xml:space="preserve" text-anchor="start" x="525.45" y="-188.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -326,12 +326,12 @@
 <!-- complete_block/5&#45;&gt;node_bit/3 -->
 <g id="edge9" class="edge">
 <title>complete_block/5&#45;&gt;node_bit/3</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L78" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L78" xlink:title="calls">
 <path fill="none" stroke="black" d="M442,-172.53C442,-154.28 442,-125.33 442,-103.7"/>
 <polygon fill="black" stroke="black" points="445.5,-103.77 442,-93.77 438.5,-103.77 445.5,-103.77"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L78" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L78">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L78" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L78">
 <text xml:space="preserve" text-anchor="start" x="442" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -341,7 +341,7 @@
 <title>bits_to_nodes/4</title>
 <polygon fill="cornsilk" stroke="black" points="150.91,-209 25.09,-209 25.09,-173 150.91,-173 150.91,-209"/>
 <text xml:space="preserve" text-anchor="start" x="33.09" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node13_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L96">
+<g id="a_node13_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L96">
 <text xml:space="preserve" text-anchor="start" x="38.49" y="-192.71" font-family="monospace" font-size="11.00">bits_to_nodes/4</text>
 </a>
 </g>
@@ -353,12 +353,12 @@
 <!-- blocks_to_nodes/3&#45;&gt;bits_to_nodes/4 -->
 <g id="edge11" class="edge">
 <title>blocks_to_nodes/3&#45;&gt;bits_to_nodes/4</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L91" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L91" xlink:title="calls">
 <path fill="none" stroke="black" d="M88,-289.53C88,-271.28 88,-242.33 88,-220.7"/>
 <polygon fill="black" stroke="black" points="91.5,-220.77 88,-210.77 84.5,-220.77 91.5,-220.77"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/atms/atms_segmented_bitset_environment.lgt#L91">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/atms/atms_segmented_bitset_environment.lgt#L91">
 <text xml:space="preserve" text-anchor="start" x="88" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>

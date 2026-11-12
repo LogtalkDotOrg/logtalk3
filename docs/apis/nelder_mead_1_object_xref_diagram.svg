@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-752 2196,-752 2196,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object nelder_mead/1</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 15:49</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 20:35</text>
 <g id="clust1" class="cluster">
 <title>cluster_nelder_mead_1_object</title>
 <g id="a_clust1"><a xlink:title="nelder_mead(Problem)">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 2172,-46 2172,-46 2178,-46 2184,-52 2184,-58 2184,-58 2184,-728 2184,-728 2184,-734 2178,-740 2172,-740 2172,-740 20,-740 20,-740 14,-740 8,-734 8,-728 8,-728 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-724.46" font-family="monospace" font-size="10.00" fill="dimgray">nelder_mead(Problem)</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>run/4</title>
 <polygon fill="cornsilk" stroke="black" points="704.9,-704 645.1,-704 645.1,-668 704.9,-668 704.9,-704"/>
 <text xml:space="preserve" text-anchor="start" x="653.1" y="-688.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="658.5" y="-687.71" font-family="monospace" font-size="11.00">run/4</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>loop/23</title>
 <polygon fill="cornsilk" stroke="black" points="1129.5,-587 1056.5,-587 1056.5,-551 1129.5,-551 1129.5,-587"/>
 <text xml:space="preserve" text-anchor="start" x="1064.5" y="-571.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L111">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L111">
 <text xml:space="preserve" text-anchor="start" x="1069.9" y="-570.71" font-family="monospace" font-size="11.00">loop/23</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- run/4&#45;&gt;loop/23 -->
 <g id="edge5" class="edge">
 <title>run/4&#45;&gt;loop/23</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59" xlink:title="calls">
 <path fill="none" stroke="black" d="M705.28,-678.18C767.51,-663.91 914.33,-629.02 1045.64,-587.61"/>
 <polygon fill="black" stroke="black" points="1046.36,-591.05 1054.83,-584.69 1044.24,-584.38 1046.36,-591.05"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="915.72" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>nelder_mead_coefficients/10</title>
 <polygon fill="cornsilk" stroke="black" points="1352.52,-587 1147.48,-587 1147.48,-551 1352.52,-551 1352.52,-587"/>
 <text xml:space="preserve" text-anchor="start" x="1155.48" y="-571.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L223" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L223">
+<g id="a_node4_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L223" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L223">
 <text xml:space="preserve" text-anchor="start" x="1160.89" y="-570.71" font-family="monospace" font-size="11.00">nelder_mead_coefficients/10</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- run/4&#45;&gt;nelder_mead_coefficients/10 -->
 <g id="edge1" class="edge">
 <title>run/4&#45;&gt;nelder_mead_coefficients/10</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59" xlink:title="calls">
 <path fill="none" stroke="black" d="M705.21,-679.21C755.42,-669.56 859.25,-649.53 947,-632 1016.64,-618.09 1095.21,-602 1154.88,-589.7"/>
 <polygon fill="black" stroke="black" points="1155.23,-593.2 1164.32,-587.76 1153.82,-586.35 1155.23,-593.2"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="988.24" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -97,7 +97,7 @@
 <title>build_simplex/5</title>
 <polygon fill="cornsilk" stroke="black" points="1610.91,-587 1485.09,-587 1485.09,-551 1610.91,-551 1610.91,-587"/>
 <text xml:space="preserve" text-anchor="start" x="1493.09" y="-571.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L262" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L262">
+<g id="a_node11_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L262" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L262">
 <text xml:space="preserve" text-anchor="start" x="1498.49" y="-570.71" font-family="monospace" font-size="11.00">build_simplex/5</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- run/4&#45;&gt;build_simplex/5 -->
 <g id="edge2" class="edge">
 <title>run/4&#45;&gt;build_simplex/5</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59" xlink:title="calls">
 <path fill="none" stroke="black" d="M705.3,-681.01C828.11,-664.83 1290.84,-603.88 1473.34,-579.84"/>
 <polygon fill="black" stroke="black" points="1473.73,-583.31 1483.18,-578.54 1472.81,-576.37 1473.73,-583.31"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="1137.68" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -124,7 +124,7 @@
 <title>evaluate_simplex/4</title>
 <polygon fill="cornsilk" stroke="black" points="487.81,-515 342.19,-515 342.19,-479 487.81,-479 487.81,-515"/>
 <text xml:space="preserve" text-anchor="start" x="350.19" y="-499.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node14_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L296" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L296">
+<g id="a_node14_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L296" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L296">
 <text xml:space="preserve" text-anchor="start" x="355.59" y="-498.71" font-family="monospace" font-size="11.00">evaluate_simplex/4</text>
 </a>
 </g>
@@ -136,12 +136,12 @@
 <!-- run/4&#45;&gt;evaluate_simplex/4 -->
 <g id="edge3" class="edge">
 <title>run/4&#45;&gt;evaluate_simplex/4</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59" xlink:title="calls">
 <path fill="none" stroke="black" d="M644.7,-683.94C545.28,-679.76 231.88,-660.86 171,-587 122.99,-528.75 242.12,-508.62 330.32,-501.67"/>
 <polygon fill="black" stroke="black" points="330.5,-505.17 340.21,-500.94 329.98,-498.19 330.5,-505.17"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="251.28" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -151,7 +151,7 @@
 <title>order_simplex/3</title>
 <polygon fill="cornsilk" stroke="black" points="515.91,-443 390.09,-443 390.09,-407 515.91,-407 515.91,-443"/>
 <text xml:space="preserve" text-anchor="start" x="398.09" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node17_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L315" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L315">
+<g id="a_node17_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L315" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L315">
 <text xml:space="preserve" text-anchor="start" x="403.49" y="-426.71" font-family="monospace" font-size="11.00">order_simplex/3</text>
 </a>
 </g>
@@ -163,12 +163,12 @@
 <!-- run/4&#45;&gt;order_simplex/3 -->
 <g id="edge4" class="edge">
 <title>run/4&#45;&gt;order_simplex/3</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59" xlink:title="calls">
 <path fill="none" stroke="black" d="M644.83,-684.96C538.74,-684.06 186.21,-674.44 129,-587 65.09,-489.34 264.65,-448.63 378.88,-433.65"/>
 <polygon fill="black" stroke="black" points="379.01,-437.16 388.49,-432.43 378.13,-430.21 379.01,-437.16"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="129" y="-566.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -178,7 +178,7 @@
 <title>simplex_size/2</title>
 <polygon fill="cornsilk" stroke="black" points="137.61,-326 18.39,-326 18.39,-290 137.61,-290 137.61,-326"/>
 <text xml:space="preserve" text-anchor="start" x="26.39" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node23_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L350" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L350">
+<g id="a_node23_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L350" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L350">
 <text xml:space="preserve" text-anchor="start" x="31.79" y="-309.71" font-family="monospace" font-size="11.00">simplex_size/2</text>
 </a>
 </g>
@@ -190,12 +190,12 @@
 <!-- run/4&#45;&gt;simplex_size/2 -->
 <g id="edge6" class="edge">
 <title>run/4&#45;&gt;simplex_size/2</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59" xlink:title="calls">
 <path fill="none" stroke="black" d="M644.91,-683.77C550.87,-679.63 263.68,-664.57 177,-632 144.45,-619.77 131.12,-616.68 113,-587 64.33,-507.26 68.98,-390.71 74.35,-337.46"/>
 <polygon fill="black" stroke="black" points="77.81,-338.04 75.42,-327.71 70.85,-337.27 77.81,-338.04"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="83.72" y="-494.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -217,12 +217,12 @@
 <!-- run/4&#45;&gt;list::length/2 -->
 <g id="edge48" class="edge">
 <title>run/4&#45;&gt;list::length/2</title>
-<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59" xlink:title="calls">
+<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59" xlink:title="calls">
 <path fill="none" stroke="black" d="M705.38,-685.15C824.34,-685.07 1269.23,-678.31 1620,-587 1776.84,-546.18 1816.2,-526.66 1955,-443 2025.92,-400.25 2064.29,-400.71 2100,-326 2118.05,-288.25 2089.33,-263.92 2052,-245 2042.53,-240.2 1920.83,-218.4 1840.14,-204.3"/>
 <polygon fill="black" stroke="black" points="1840.99,-200.89 1830.54,-202.62 1839.78,-207.79 1840.99,-200.89"/>
 </a>
 </g>
-<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59">
+<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="2021.96" y="-422.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -241,12 +241,12 @@
 <!-- run/4&#45;&gt;^^check_options/1 -->
 <g id="edge33" class="edge">
 <title>run/4&#45;&gt;^^check_options/1</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59" xlink:title="calls">
 <path fill="none" stroke="black" d="M644.78,-676.82C578.83,-658.98 420.37,-616.1 325.47,-590.42"/>
 <polygon fill="black" stroke="black" points="326.54,-587.08 315.97,-587.85 324.71,-593.84 326.54,-587.08"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="475.24" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -265,12 +265,12 @@
 <!-- run/4&#45;&gt;^^merge_options/2 -->
 <g id="edge34" class="edge">
 <title>run/4&#45;&gt;^^merge_options/2</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59" xlink:title="calls">
 <path fill="none" stroke="black" d="M644.78,-672.03C599.38,-652.55 513.04,-615.5 457.84,-591.81"/>
 <polygon fill="black" stroke="black" points="459.53,-588.73 448.96,-588.01 456.77,-595.17 459.53,-588.73"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="549.04" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -289,12 +289,12 @@
 <!-- run/4&#45;&gt;^^option/2 -->
 <g id="edge35" class="edge">
 <title>run/4&#45;&gt;^^option/2</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59" xlink:title="calls">
 <path fill="none" stroke="black" d="M654.65,-667.53C631.99,-648.09 595.19,-616.51 569.63,-594.57"/>
 <polygon fill="black" stroke="black" points="572.12,-592.1 562.25,-588.24 567.56,-597.41 572.12,-592.1"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="612.02" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -313,12 +313,12 @@
 <!-- run/4&#45;&gt;^^initial_point/2 -->
 <g id="edge36" class="edge">
 <title>run/4&#45;&gt;^^initial_point/2</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59" xlink:title="calls">
 <path fill="none" stroke="black" d="M675,-667.53C675,-649.28 675,-620.33 675,-598.7"/>
 <polygon fill="black" stroke="black" points="678.5,-598.77 675,-588.77 671.5,-598.77 678.5,-598.77"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="675" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -337,12 +337,12 @@
 <!-- run/4&#45;&gt;^^check_bounds/1 -->
 <g id="edge37" class="edge">
 <title>run/4&#45;&gt;^^check_bounds/1</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59" xlink:title="calls">
 <path fill="none" stroke="black" d="M698.39,-667.53C724.58,-647.97 767.21,-616.14 796.6,-594.19"/>
 <polygon fill="black" stroke="black" points="798.51,-597.13 804.43,-588.35 794.32,-591.53 798.51,-597.13"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="756.62" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -361,12 +361,12 @@
 <!-- run/4&#45;&gt;^^check_point/2 -->
 <g id="edge38" class="edge">
 <title>run/4&#45;&gt;^^check_point/2</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59" xlink:title="calls">
 <path fill="none" stroke="black" d="M705.24,-673.45C755.34,-654.31 856.32,-615.73 919.8,-591.47"/>
 <polygon fill="black" stroke="black" points="920.92,-594.79 929.01,-587.95 918.42,-588.25 920.92,-594.79"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L59">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="834.53" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -376,7 +376,7 @@
 <title>nm_step/12</title>
 <polygon fill="cornsilk" stroke="black" points="1235.41,-443 1142.59,-443 1142.59,-407 1235.41,-407 1235.41,-443"/>
 <text xml:space="preserve" text-anchor="start" x="1150.59" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176">
+<g id="a_node3_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176">
 <text xml:space="preserve" text-anchor="start" x="1155.99" y="-426.71" font-family="monospace" font-size="11.00">nm_step/12</text>
 </a>
 </g>
@@ -388,12 +388,12 @@
 <!-- loop/23&#45;&gt;nm_step/12 -->
 <g id="edge8" class="edge">
 <title>loop/23&#45;&gt;nm_step/12</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L151" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L151" xlink:title="calls">
 <path fill="none" stroke="black" d="M1104.77,-550.59C1121.34,-526.08 1151.69,-481.19 1171.07,-452.52"/>
 <polygon fill="black" stroke="black" points="1173.88,-454.61 1176.58,-444.36 1168.08,-450.69 1173.88,-454.61"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L151">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L151">
 <text xml:space="preserve" text-anchor="start" x="1152.42" y="-494.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -401,12 +401,12 @@
 <!-- loop/23&#45;&gt;order_simplex/3 -->
 <g id="edge9" class="edge">
 <title>loop/23&#45;&gt;order_simplex/3</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L151" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L151" xlink:title="calls">
 <path fill="none" stroke="black" d="M1056.28,-553.76C1053.49,-552.79 1050.71,-551.86 1048,-551 925.92,-512.31 894.27,-505.62 769,-479 686.87,-461.55 591.74,-446.25 527.49,-436.64"/>
 <polygon fill="black" stroke="black" points="528.16,-433.2 517.75,-435.19 527.13,-440.12 528.16,-433.2"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L151">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L151">
 <text xml:space="preserve" text-anchor="start" x="923.7" y="-494.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -414,12 +414,12 @@
 <!-- loop/23&#45;&gt;simplex_size/2 -->
 <g id="edge10" class="edge">
 <title>loop/23&#45;&gt;simplex_size/2</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L151" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L151" xlink:title="calls">
 <path fill="none" stroke="black" d="M1056.44,-553.13C1053.61,-552.31 1050.78,-551.58 1048,-551 736.53,-485.99 645.07,-577.07 333,-515 239.52,-496.41 199.53,-509.23 131,-443 101.46,-414.45 88.01,-367.4 82.16,-337.32"/>
 <polygon fill="black" stroke="black" points="85.67,-337.05 80.48,-327.82 78.77,-338.27 85.67,-337.05"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L151">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L151">
 <text xml:space="preserve" text-anchor="start" x="131" y="-422.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -429,7 +429,7 @@
 <title>converged/3</title>
 <polygon fill="cornsilk" stroke="black" points="266.71,-443 167.29,-443 167.29,-407 266.71,-407 266.71,-443"/>
 <text xml:space="preserve" text-anchor="start" x="175.29" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node25_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L360" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L360">
+<g id="a_node25_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L360" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L360">
 <text xml:space="preserve" text-anchor="start" x="180.69" y="-426.71" font-family="monospace" font-size="11.00">converged/3</text>
 </a>
 </g>
@@ -441,12 +441,12 @@
 <!-- loop/23&#45;&gt;converged/3 -->
 <g id="edge7" class="edge">
 <title>loop/23&#45;&gt;converged/3</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L141" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L141" xlink:title="calls">
 <path fill="none" stroke="black" d="M1056.4,-553.33C1053.58,-552.46 1050.76,-551.67 1048,-551 913.22,-518.24 875.3,-534.69 738,-515 571.11,-491.07 375.42,-455.65 278.23,-437.55"/>
 <polygon fill="black" stroke="black" points="279.11,-434.16 268.64,-435.77 277.83,-441.04 279.11,-434.16"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L141" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L141">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L141" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L141">
 <text xml:space="preserve" text-anchor="start" x="738" y="-494.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -465,12 +465,12 @@
 <!-- loop/23&#45;&gt;^^report_final/5 -->
 <g id="edge39" class="edge">
 <title>loop/23&#45;&gt;^^report_final/5</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L111" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L111" xlink:title="calls">
 <path fill="none" stroke="black" d="M1068.72,-550.59C1033.52,-525.34 968.18,-478.48 928.44,-449.98"/>
 <polygon fill="black" stroke="black" points="930.56,-447.2 920.4,-444.21 926.48,-452.89 930.56,-447.2"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L111">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L111">
 <text xml:space="preserve" text-anchor="start" x="1017.56" y="-494.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -489,12 +489,12 @@
 <!-- loop/23&#45;&gt;^^target_reached/3 -->
 <g id="edge40" class="edge">
 <title>loop/23&#45;&gt;^^target_reached/3</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L121" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L121" xlink:title="calls">
 <path fill="none" stroke="black" d="M1087.97,-550.59C1081.02,-526.5 1068.39,-482.75 1060.09,-454.03"/>
 <polygon fill="black" stroke="black" points="1063.5,-453.2 1057.36,-444.57 1056.77,-455.14 1063.5,-453.2"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L121">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L121">
 <text xml:space="preserve" text-anchor="start" x="1077.38" y="-494.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -513,12 +513,12 @@
 <!-- loop/23&#45;&gt;^^report_progress/6 -->
 <g id="edge41" class="edge">
 <title>loop/23&#45;&gt;^^report_progress/6</title>
-<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L151" xlink:title="calls">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L151" xlink:title="calls">
 <path fill="none" stroke="black" d="M1122.64,-550.66C1140.22,-540.36 1162.92,-526.99 1183,-515 1220.05,-492.88 1262.16,-467.34 1291.79,-449.31"/>
 <polygon fill="black" stroke="black" points="1293.32,-452.48 1300.04,-444.29 1289.68,-446.5 1293.32,-452.48"/>
 </a>
 </g>
-<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L151">
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L151">
 <text xml:space="preserve" text-anchor="start" x="1239.67" y="-494.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -528,7 +528,7 @@
 <title>reflect/4</title>
 <polygon fill="cornsilk" stroke="black" points="1117.11,-209 1030.89,-209 1030.89,-173 1117.11,-173 1117.11,-209"/>
 <text xml:space="preserve" text-anchor="start" x="1038.89" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L229">
+<g id="a_node5_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L229">
 <text xml:space="preserve" text-anchor="start" x="1044.3" y="-192.71" font-family="monospace" font-size="11.00">reflect/4</text>
 </a>
 </g>
@@ -540,12 +540,12 @@
 <!-- nm_step/12&#45;&gt;reflect/4 -->
 <g id="edge12" class="edge">
 <title>nm_step/12&#45;&gt;reflect/4</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176" xlink:title="calls">
 <path fill="none" stroke="black" d="M1206.56,-406.87C1231.12,-380.77 1270.23,-329.86 1247,-290 1233.33,-266.55 1171.18,-234.93 1125.26,-214.03"/>
 <polygon fill="black" stroke="black" points="1126.8,-210.88 1116.24,-209.97 1123.92,-217.26 1126.8,-210.88"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176">
 <text xml:space="preserve" text-anchor="start" x="1254.1" y="-305.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -555,7 +555,7 @@
 <title>expand/4</title>
 <polygon fill="cornsilk" stroke="black" points="875.81,-209 796.19,-209 796.19,-173 875.81,-173 875.81,-209"/>
 <text xml:space="preserve" text-anchor="start" x="804.19" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L234">
+<g id="a_node6_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L234">
 <text xml:space="preserve" text-anchor="start" x="809.6" y="-192.71" font-family="monospace" font-size="11.00">expand/4</text>
 </a>
 </g>
@@ -567,12 +567,12 @@
 <!-- nm_step/12&#45;&gt;expand/4 -->
 <g id="edge14" class="edge">
 <title>nm_step/12&#45;&gt;expand/4</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176" xlink:title="calls">
 <path fill="none" stroke="black" d="M1149.2,-406.56C1112.22,-389.26 1056.74,-360.39 1015,-326 978.5,-295.93 983.44,-273.89 946,-245 928.15,-231.22 906.13,-219.75 886.51,-211.03"/>
 <polygon fill="black" stroke="black" points="888.15,-207.93 877.58,-207.2 885.39,-214.36 888.15,-207.93"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176">
 <text xml:space="preserve" text-anchor="start" x="1015" y="-305.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -582,7 +582,7 @@
 <title>contract_outside/4</title>
 <polygon fill="cornsilk" stroke="black" points="601.81,-209 456.19,-209 456.19,-173 601.81,-173 601.81,-209"/>
 <text xml:space="preserve" text-anchor="start" x="464.19" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L239" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L239">
+<g id="a_node7_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L239" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L239">
 <text xml:space="preserve" text-anchor="start" x="469.59" y="-192.71" font-family="monospace" font-size="11.00">contract_outside/4</text>
 </a>
 </g>
@@ -594,12 +594,12 @@
 <!-- nm_step/12&#45;&gt;contract_outside/4 -->
 <g id="edge16" class="edge">
 <title>nm_step/12&#45;&gt;contract_outside/4</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176" xlink:title="calls">
 <path fill="none" stroke="black" d="M1142.32,-409.04C1139.52,-408.31 1136.73,-407.62 1134,-407 958.38,-367.15 887.34,-425.12 737,-326 697.99,-300.28 708.03,-272.13 670,-245 651.24,-231.62 628.69,-221.17 607.18,-213.22"/>
 <polygon fill="black" stroke="black" points="608.42,-209.94 597.82,-209.91 606.08,-216.54 608.42,-209.94"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176">
 <text xml:space="preserve" text-anchor="start" x="737" y="-305.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -609,7 +609,7 @@
 <title>contract_inside/4</title>
 <polygon fill="cornsilk" stroke="black" points="438.51,-209 299.49,-209 299.49,-173 438.51,-173 438.51,-209"/>
 <text xml:space="preserve" text-anchor="start" x="307.49" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L244" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L244">
+<g id="a_node8_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L244" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L244">
 <text xml:space="preserve" text-anchor="start" x="312.89" y="-192.71" font-family="monospace" font-size="11.00">contract_inside/4</text>
 </a>
 </g>
@@ -621,12 +621,12 @@
 <!-- nm_step/12&#45;&gt;contract_inside/4 -->
 <g id="edge17" class="edge">
 <title>nm_step/12&#45;&gt;contract_inside/4</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176" xlink:title="calls">
 <path fill="none" stroke="black" d="M1142.35,-408.91C1139.54,-408.21 1136.74,-407.57 1134,-407 988.65,-376.95 946.7,-404.01 802,-371 743.61,-357.68 728.87,-352.15 675,-326 648.04,-312.92 644.72,-303.55 618,-290 556.88,-259.02 483.52,-231.2 432.32,-213.19"/>
 <polygon fill="black" stroke="black" points="433.77,-209.99 423.18,-210 431.47,-216.6 433.77,-209.99"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176">
 <text xml:space="preserve" text-anchor="start" x="675" y="-305.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -636,7 +636,7 @@
 <title>shrink_simplex/5</title>
 <polygon fill="cornsilk" stroke="black" points="1451.21,-326 1318.79,-326 1318.79,-290 1451.21,-290 1451.21,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1326.79" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L249" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L249">
+<g id="a_node9_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L249" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L249">
 <text xml:space="preserve" text-anchor="start" x="1332.19" y="-309.71" font-family="monospace" font-size="11.00">shrink_simplex/5</text>
 </a>
 </g>
@@ -648,12 +648,12 @@
 <!-- nm_step/12&#45;&gt;shrink_simplex/5 -->
 <g id="edge18" class="edge">
 <title>nm_step/12&#45;&gt;shrink_simplex/5</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176" xlink:title="calls">
 <path fill="none" stroke="black" d="M1218.77,-406.53C1252.68,-386.63 1308.24,-354.04 1345.7,-332.06"/>
 <polygon fill="black" stroke="black" points="1347.11,-335.29 1353.97,-327.21 1343.57,-329.25 1347.11,-335.29"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176">
 <text xml:space="preserve" text-anchor="start" x="1292.88" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -663,7 +663,7 @@
 <title>evaluate_pairs/4</title>
 <polygon fill="cornsilk" stroke="black" points="905.21,-326 772.79,-326 772.79,-290 905.21,-290 905.21,-326"/>
 <text xml:space="preserve" text-anchor="start" x="780.79" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node15_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L302" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L302">
+<g id="a_node15_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L302" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L302">
 <text xml:space="preserve" text-anchor="start" x="786.19" y="-309.71" font-family="monospace" font-size="11.00">evaluate_pairs/4</text>
 </a>
 </g>
@@ -675,12 +675,12 @@
 <!-- nm_step/12&#45;&gt;evaluate_pairs/4 -->
 <g id="edge19" class="edge">
 <title>nm_step/12&#45;&gt;evaluate_pairs/4</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176" xlink:title="calls">
 <path fill="none" stroke="black" d="M1142.31,-409.08C1139.51,-408.34 1136.73,-407.64 1134,-407 1035.37,-383.99 1000.55,-414.3 909,-371 890.82,-362.4 873.84,-347.61 861.16,-334.63"/>
 <polygon fill="black" stroke="black" points="863.91,-332.45 854.52,-327.55 858.81,-337.24 863.91,-332.45"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176">
 <text xml:space="preserve" text-anchor="start" x="909" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -690,7 +690,7 @@
 <title>evaluate_objective/2</title>
 <polygon fill="cornsilk" stroke="black" points="778.41,-209 619.59,-209 619.59,-173 778.41,-173 778.41,-209"/>
 <text xml:space="preserve" text-anchor="start" x="627.59" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node16_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L308" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L308">
+<g id="a_node16_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L308" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L308">
 <text xml:space="preserve" text-anchor="start" x="632.99" y="-192.71" font-family="monospace" font-size="11.00">evaluate_objective/2</text>
 </a>
 </g>
@@ -702,12 +702,12 @@
 <!-- nm_step/12&#45;&gt;evaluate_objective/2 -->
 <g id="edge13" class="edge">
 <title>nm_step/12&#45;&gt;evaluate_objective/2</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176" xlink:title="calls">
 <path fill="none" stroke="black" d="M1142.13,-406.78C1083.13,-384.72 985.55,-346.84 953,-326 933.13,-313.28 933.64,-303.06 914,-290 865.24,-257.59 804.02,-230.86 759.39,-213.54"/>
 <polygon fill="black" stroke="black" points="760.7,-210.3 750.11,-210 758.2,-216.84 760.7,-210.3"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176">
 <text xml:space="preserve" text-anchor="start" x="953" y="-305.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -717,7 +717,7 @@
 <title>replace_worst/3</title>
 <polygon fill="cornsilk" stroke="black" points="1237.91,-326 1112.09,-326 1112.09,-290 1237.91,-290 1237.91,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1120.09" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node20_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L333" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L333">
+<g id="a_node20_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L333" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L333">
 <text xml:space="preserve" text-anchor="start" x="1125.49" y="-309.71" font-family="monospace" font-size="11.00">replace_worst/3</text>
 </a>
 </g>
@@ -729,12 +729,12 @@
 <!-- nm_step/12&#45;&gt;replace_worst/3 -->
 <g id="edge15" class="edge">
 <title>nm_step/12&#45;&gt;replace_worst/3</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176" xlink:title="calls">
 <path fill="none" stroke="black" d="M1186.87,-406.53C1184.64,-388.19 1181.09,-359.06 1178.46,-337.4"/>
 <polygon fill="black" stroke="black" points="1181.97,-337.26 1177.28,-327.76 1175.02,-338.11 1181.97,-337.26"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176">
 <text xml:space="preserve" text-anchor="start" x="1182.42" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -744,7 +744,7 @@
 <title>centroid/3</title>
 <polygon fill="cornsilk" stroke="black" points="1562.41,-326 1469.59,-326 1469.59,-290 1562.41,-290 1562.41,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1477.59" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node21_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L338" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L338">
+<g id="a_node21_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L338" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L338">
 <text xml:space="preserve" text-anchor="start" x="1482.99" y="-309.71" font-family="monospace" font-size="11.00">centroid/3</text>
 </a>
 </g>
@@ -756,12 +756,12 @@
 <!-- nm_step/12&#45;&gt;centroid/3 -->
 <g id="edge11" class="edge">
 <title>nm_step/12&#45;&gt;centroid/3</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176" xlink:title="calls">
 <path fill="none" stroke="black" d="M1235.85,-407.52C1294.61,-386.86 1395.32,-351.44 1458.64,-329.17"/>
 <polygon fill="black" stroke="black" points="1459.54,-332.57 1467.81,-325.95 1457.21,-325.96 1459.54,-332.57"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176">
 <text xml:space="preserve" text-anchor="start" x="1362.3" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -783,12 +783,12 @@
 <!-- nm_step/12&#45;&gt;list::append/3 -->
 <g id="edge49" class="edge">
 <title>nm_step/12&#45;&gt;list::append/3</title>
-<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176" xlink:title="calls">
+<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176" xlink:title="calls">
 <path fill="none" stroke="black" d="M1166.81,-406.58C1143.3,-387.73 1105.58,-356.28 1076,-326 1043.35,-292.58 1040.91,-279.12 1009,-245 1000.2,-235.59 990.1,-225.77 980.93,-217.17"/>
 <polygon fill="black" stroke="black" points="983.31,-214.6 973.59,-210.38 978.55,-219.74 983.31,-214.6"/>
 </a>
 </g>
-<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176">
+<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176">
 <text xml:space="preserve" text-anchor="start" x="1076" y="-305.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -810,12 +810,12 @@
 <!-- nm_step/12&#45;&gt;pairs::keys/2 -->
 <g id="edge50" class="edge">
 <title>nm_step/12&#45;&gt;pairs::keys/2</title>
-<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176" xlink:title="calls">
+<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176" xlink:title="calls">
 <path fill="none" stroke="black" d="M1235.69,-409.61C1238.84,-408.71 1241.96,-407.83 1245,-407 1310.3,-389.16 1327.29,-387.3 1393,-371 1468.8,-352.2 1490.13,-346.65 1569.44,-326.4"/>
 <polygon fill="black" stroke="black" points="1570.19,-329.82 1579.01,-323.95 1568.46,-323.03 1570.19,-329.82"/>
 </a>
 </g>
-<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176">
+<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176">
 <text xml:space="preserve" text-anchor="start" x="1426.94" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -837,12 +837,12 @@
 <!-- nm_step/12&#45;&gt;list::last/2 -->
 <g id="edge51" class="edge">
 <title>nm_step/12&#45;&gt;list::last/2</title>
-<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176" xlink:title="calls">
+<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176" xlink:title="calls">
 <path fill="none" stroke="black" d="M1235.63,-409.36C1238.79,-408.52 1241.93,-407.72 1245,-407 1338.46,-385.01 1363.46,-387.71 1458,-371 1563.09,-352.43 1592.62,-350.7 1699.68,-326.44"/>
 <polygon fill="black" stroke="black" points="1700.19,-329.91 1709.16,-324.28 1698.64,-323.09 1700.19,-329.91"/>
 </a>
 </g>
-<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176">
+<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176">
 <text xml:space="preserve" text-anchor="start" x="1509.73" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -861,12 +861,12 @@
 <!-- nm_step/12&#45;&gt;^^project_to_bounds/3 -->
 <g id="edge42" class="edge">
 <title>nm_step/12&#45;&gt;^^project_to_bounds/3</title>
-<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176" xlink:title="calls">
+<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176" xlink:title="calls">
 <path fill="none" stroke="black" d="M1235.88,-409.02C1238.95,-408.27 1242.01,-407.59 1245,-407 1405.38,-375.53 1868.19,-448.84 1976,-326 1986.55,-313.97 1984.56,-303.52 1976,-290 1956.01,-258.42 1928.46,-278.22 1900,-254 1881.5,-238.26 1878.55,-231.33 1869,-209 1854.32,-174.68 1849.76,-131.47 1848.43,-103.55"/>
 <polygon fill="black" stroke="black" points="1851.93,-103.62 1848.08,-93.75 1844.94,-103.87 1851.93,-103.62"/>
 </a>
 </g>
-<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176">
+<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176">
 <text xml:space="preserve" text-anchor="start" x="1900" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -885,12 +885,12 @@
 <!-- nm_step/12&#45;&gt;^^better_value/3 -->
 <g id="edge43" class="edge">
 <title>nm_step/12&#45;&gt;^^better_value/3</title>
-<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176" xlink:title="calls">
+<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176" xlink:title="calls">
 <path fill="none" stroke="black" d="M1235.9,-409.12C1238.97,-408.34 1242.02,-407.63 1245,-407 1374.67,-379.65 1409.75,-389.34 1541,-371 1664.41,-353.76 1698.17,-350.37 1823.22,-326.48"/>
 <polygon fill="black" stroke="black" points="1823.74,-329.94 1832.91,-324.62 1822.43,-323.07 1823.74,-329.94"/>
 </a>
 </g>
-<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L176">
+<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L176">
 <text xml:space="preserve" text-anchor="start" x="1601.45" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -912,12 +912,12 @@
 <!-- reflect/4&#45;&gt;linear_algebra::subtract_vectors/3 -->
 <g id="edge52" class="edge">
 <title>reflect/4&#45;&gt;linear_algebra::subtract_vectors/3</title>
-<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L229" xlink:title="calls">
+<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L229" xlink:title="calls">
 <path fill="none" stroke="black" d="M1030.46,-175.17C1027.61,-174.38 1024.77,-173.65 1022,-173 914.86,-147.81 883.37,-165.24 777,-137 766.39,-134.18 764.44,-131.39 754,-128 716.17,-115.71 673.68,-104.26 637.38,-95.17"/>
 <polygon fill="black" stroke="black" points="638.35,-91.8 627.8,-92.79 636.66,-98.6 638.35,-91.8"/>
 </a>
 </g>
-<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L229">
+<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L229">
 <text xml:space="preserve" text-anchor="start" x="777" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -939,12 +939,12 @@
 <!-- reflect/4&#45;&gt;linear_algebra::scale_vector/3 -->
 <g id="edge53" class="edge">
 <title>reflect/4&#45;&gt;linear_algebra::scale_vector/3</title>
-<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L229" xlink:title="calls">
+<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L229" xlink:title="calls">
 <path fill="none" stroke="black" d="M1072.18,-172.53C1070.27,-154.28 1067.25,-125.33 1064.99,-103.7"/>
 <polygon fill="black" stroke="black" points="1068.48,-103.34 1063.96,-93.76 1061.51,-104.07 1068.48,-103.34"/>
 </a>
 </g>
-<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L229">
+<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L229">
 <text xml:space="preserve" text-anchor="start" x="1068.36" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -966,12 +966,12 @@
 <!-- reflect/4&#45;&gt;linear_algebra::add_vectors/3 -->
 <g id="edge54" class="edge">
 <title>reflect/4&#45;&gt;linear_algebra::add_vectors/3</title>
-<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L229" xlink:title="calls">
+<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L229" xlink:title="calls">
 <path fill="none" stroke="black" d="M1030.66,-175.57C1027.74,-174.68 1024.83,-173.81 1022,-173 958.18,-154.67 934.25,-170.63 877,-137 861.66,-127.99 847.89,-113.69 837.62,-101.1"/>
 <polygon fill="black" stroke="black" points="840.63,-99.26 831.72,-93.52 835.1,-103.56 840.63,-99.26"/>
 </a>
 </g>
-<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L229">
+<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L229">
 <text xml:space="preserve" text-anchor="start" x="877" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -979,12 +979,12 @@
 <!-- expand/4&#45;&gt;linear_algebra::subtract_vectors/3 -->
 <g id="edge55" class="edge">
 <title>expand/4&#45;&gt;linear_algebra::subtract_vectors/3</title>
-<g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L234" xlink:title="calls">
+<g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L234" xlink:title="calls">
 <path fill="none" stroke="black" d="M795.78,-175.46C792.83,-174.57 789.88,-173.74 787,-173 695.29,-149.4 651.12,-195.94 577,-137 566.61,-128.74 560.32,-115.59 556.54,-103.53"/>
 <polygon fill="black" stroke="black" points="559.95,-102.72 554.02,-93.95 553.18,-104.51 559.95,-102.72"/>
 </a>
 </g>
-<g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L234">
+<g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L234">
 <text xml:space="preserve" text-anchor="start" x="577" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -992,12 +992,12 @@
 <!-- expand/4&#45;&gt;linear_algebra::scale_vector/3 -->
 <g id="edge56" class="edge">
 <title>expand/4&#45;&gt;linear_algebra::scale_vector/3</title>
-<g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L234" xlink:title="calls">
+<g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L234" xlink:title="calls">
 <path fill="none" stroke="black" d="M876.28,-175.57C878.89,-174.69 881.48,-173.82 884,-173 936.93,-155.7 956.68,-166.35 1004,-137 1019.02,-127.69 1032.69,-113.5 1042.99,-101.04"/>
 <polygon fill="black" stroke="black" points="1045.45,-103.57 1048.91,-93.56 1039.96,-99.22 1045.45,-103.57"/>
 </a>
 </g>
-<g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L234">
+<g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L234">
 <text xml:space="preserve" text-anchor="start" x="1015.25" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1005,12 +1005,12 @@
 <!-- expand/4&#45;&gt;linear_algebra::add_vectors/3 -->
 <g id="edge57" class="edge">
 <title>expand/4&#45;&gt;linear_algebra::add_vectors/3</title>
-<g id="a_edge57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L234" xlink:title="calls">
+<g id="a_edge57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L234" xlink:title="calls">
 <path fill="none" stroke="black" d="M795.7,-175.59C768.05,-164.8 734.98,-149.75 727,-137 716.6,-120.38 729.01,-107.18 747.73,-97.3"/>
 <polygon fill="black" stroke="black" points="749.1,-100.53 756.64,-93.09 746.1,-94.2 749.1,-100.53"/>
 </a>
 </g>
-<g id="a_edge57&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L234">
+<g id="a_edge57&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L234">
 <text xml:space="preserve" text-anchor="start" x="727" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1018,12 +1018,12 @@
 <!-- contract_outside/4&#45;&gt;linear_algebra::subtract_vectors/3 -->
 <g id="edge58" class="edge">
 <title>contract_outside/4&#45;&gt;linear_algebra::subtract_vectors/3</title>
-<g id="a_edge58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L239" xlink:title="calls">
+<g id="a_edge58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L239" xlink:title="calls">
 <path fill="none" stroke="black" d="M526.21,-172.69C524.72,-160.14 523.79,-142.84 527,-128 528.84,-119.45 532.19,-110.61 535.81,-102.67"/>
 <polygon fill="black" stroke="black" points="538.87,-104.38 540.13,-93.86 532.58,-101.29 538.87,-104.38"/>
 </a>
 </g>
-<g id="a_edge58&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L239" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L239">
+<g id="a_edge58&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L239" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L239">
 <text xml:space="preserve" text-anchor="start" x="527" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1031,12 +1031,12 @@
 <!-- contract_outside/4&#45;&gt;linear_algebra::scale_vector/3 -->
 <g id="edge59" class="edge">
 <title>contract_outside/4&#45;&gt;linear_algebra::scale_vector/3</title>
-<g id="a_edge59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L239" xlink:title="calls">
+<g id="a_edge59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L239" xlink:title="calls">
 <path fill="none" stroke="black" d="M602.25,-174.44C605.2,-173.93 608.13,-173.45 611,-173 762.46,-149.41 808.16,-184.18 954,-137 961.52,-134.57 995.7,-114.68 1023.62,-98.07"/>
 <polygon fill="black" stroke="black" points="1025.09,-101.27 1031.88,-93.14 1021.5,-95.26 1025.09,-101.27"/>
 </a>
 </g>
-<g id="a_edge59&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L239" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L239">
+<g id="a_edge59&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L239" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L239">
 <text xml:space="preserve" text-anchor="start" x="970.29" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1044,12 +1044,12 @@
 <!-- contract_outside/4&#45;&gt;linear_algebra::add_vectors/3 -->
 <g id="edge60" class="edge">
 <title>contract_outside/4&#45;&gt;linear_algebra::add_vectors/3</title>
-<g id="a_edge60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L239" xlink:title="calls">
+<g id="a_edge60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L239" xlink:title="calls">
 <path fill="none" stroke="black" d="M573.04,-172.53C624.29,-152.21 708.94,-118.64 764.35,-96.67"/>
 <polygon fill="black" stroke="black" points="765.6,-99.94 773.61,-93 763.02,-93.43 765.6,-99.94"/>
 </a>
 </g>
-<g id="a_edge60&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L239" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L239">
+<g id="a_edge60&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L239" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L239">
 <text xml:space="preserve" text-anchor="start" x="682.7" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1057,12 +1057,12 @@
 <!-- contract_inside/4&#45;&gt;linear_algebra::subtract_vectors/3 -->
 <g id="edge61" class="edge">
 <title>contract_inside/4&#45;&gt;linear_algebra::subtract_vectors/3</title>
-<g id="a_edge61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L244" xlink:title="calls">
+<g id="a_edge61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L244" xlink:title="calls">
 <path fill="none" stroke="black" d="M396.64,-172.53C428,-152.72 479.29,-120.31 514.06,-98.34"/>
 <polygon fill="black" stroke="black" points="515.53,-101.55 522.12,-93.25 511.79,-95.63 515.53,-101.55"/>
 </a>
 </g>
-<g id="a_edge61&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L244" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L244">
+<g id="a_edge61&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L244" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L244">
 <text xml:space="preserve" text-anchor="start" x="465.46" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1070,12 +1070,12 @@
 <!-- contract_inside/4&#45;&gt;linear_algebra::scale_vector/3 -->
 <g id="edge62" class="edge">
 <title>contract_inside/4&#45;&gt;linear_algebra::scale_vector/3</title>
-<g id="a_edge62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L244" xlink:title="calls">
+<g id="a_edge62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L244" xlink:title="calls">
 <path fill="none" stroke="black" d="M438.65,-174.33C441.47,-173.85 444.26,-173.4 447,-173 648.55,-143.24 707.14,-189.48 904,-137 913.03,-134.59 914.4,-131.67 923,-128 948.86,-116.96 977.87,-105.72 1002.67,-96.46"/>
 <polygon fill="black" stroke="black" points="1003.81,-99.77 1011.96,-93 1001.37,-93.21 1003.81,-99.77"/>
 </a>
 </g>
-<g id="a_edge62&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L244" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L244">
+<g id="a_edge62&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L244" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L244">
 <text xml:space="preserve" text-anchor="start" x="923" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1083,12 +1083,12 @@
 <!-- contract_inside/4&#45;&gt;linear_algebra::add_vectors/3 -->
 <g id="edge63" class="edge">
 <title>contract_inside/4&#45;&gt;linear_algebra::add_vectors/3</title>
-<g id="a_edge63"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L244" xlink:title="calls">
+<g id="a_edge63"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L244" xlink:title="calls">
 <path fill="none" stroke="black" d="M438.92,-174.49C502.25,-160.4 588.02,-141.19 604,-137 617.46,-133.47 620.64,-131.92 634,-128 671.03,-117.14 712.3,-105.29 746.45,-95.56"/>
 <polygon fill="black" stroke="black" points="747.16,-98.99 755.82,-92.89 745.24,-92.26 747.16,-98.99"/>
 </a>
 </g>
-<g id="a_edge63&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L244" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L244">
+<g id="a_edge63&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L244" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L244">
 <text xml:space="preserve" text-anchor="start" x="634" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1098,7 +1098,7 @@
 <title>shrink_vertices/5</title>
 <polygon fill="cornsilk" stroke="black" points="1274.51,-209 1135.49,-209 1135.49,-173 1274.51,-173 1274.51,-209"/>
 <text xml:space="preserve" text-anchor="start" x="1143.49" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L252" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L252">
+<g id="a_node10_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L252" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L252">
 <text xml:space="preserve" text-anchor="start" x="1148.89" y="-192.71" font-family="monospace" font-size="11.00">shrink_vertices/5</text>
 </a>
 </g>
@@ -1110,12 +1110,12 @@
 <!-- shrink_simplex/5&#45;&gt;shrink_vertices/5 -->
 <g id="edge20" class="edge">
 <title>shrink_simplex/5&#45;&gt;shrink_vertices/5</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L249" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L249" xlink:title="calls">
 <path fill="none" stroke="black" d="M1357.66,-289.53C1326.78,-269.8 1276.36,-237.59 1241.98,-215.62"/>
 <polygon fill="black" stroke="black" points="1243.89,-212.69 1233.58,-210.26 1240.12,-218.59 1243.89,-212.69"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L249" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L249">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L249" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L249">
 <text xml:space="preserve" text-anchor="start" x="1300.4" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1123,12 +1123,12 @@
 <!-- shrink_vertices/5&#45;&gt;linear_algebra::subtract_vectors/3 -->
 <g id="edge64" class="edge">
 <title>shrink_vertices/5&#45;&gt;linear_algebra::subtract_vectors/3</title>
-<g id="a_edge64"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L253" xlink:title="calls">
+<g id="a_edge64"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L253" xlink:title="calls">
 <path fill="none" stroke="black" d="M1135.28,-174.64C1132.15,-174.07 1129.04,-173.51 1126,-173 997.5,-151.27 962.65,-163.25 835,-137 820.94,-134.11 817.92,-131.47 804,-128 754.93,-115.75 700.02,-104.02 653.94,-94.72"/>
 <polygon fill="black" stroke="black" points="654.7,-91.3 644.21,-92.76 653.32,-98.16 654.7,-91.3"/>
 </a>
 </g>
-<g id="a_edge64&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L253" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L253">
+<g id="a_edge64&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L253" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L253">
 <text xml:space="preserve" text-anchor="start" x="835" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1136,12 +1136,12 @@
 <!-- shrink_vertices/5&#45;&gt;linear_algebra::scale_vector/3 -->
 <g id="edge65" class="edge">
 <title>shrink_vertices/5&#45;&gt;linear_algebra::scale_vector/3</title>
-<g id="a_edge65"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L253" xlink:title="calls">
+<g id="a_edge65"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L253" xlink:title="calls">
 <path fill="none" stroke="black" d="M1209.63,-172.61C1212.12,-159.2 1213.07,-140.84 1204,-128 1194.57,-114.64 1181.34,-104.64 1166.72,-97.16"/>
 <polygon fill="black" stroke="black" points="1168.33,-94.05 1157.78,-93.01 1165.38,-100.4 1168.33,-94.05"/>
 </a>
 </g>
-<g id="a_edge65&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L253" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L253">
+<g id="a_edge65&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L253" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L253">
 <text xml:space="preserve" text-anchor="start" x="1208.47" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1149,12 +1149,12 @@
 <!-- shrink_vertices/5&#45;&gt;linear_algebra::add_vectors/3 -->
 <g id="edge66" class="edge">
 <title>shrink_vertices/5&#45;&gt;linear_algebra::add_vectors/3</title>
-<g id="a_edge66"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L253" xlink:title="calls">
+<g id="a_edge66"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L253" xlink:title="calls">
 <path fill="none" stroke="black" d="M1180.93,-172.68C1160.19,-158.57 1128.95,-139.21 1099,-128 1069.77,-117.06 1001.33,-104.03 939.44,-93.63"/>
 <polygon fill="black" stroke="black" points="940.31,-90.22 929.87,-92.03 939.16,-97.13 940.31,-90.22"/>
 </a>
 </g>
-<g id="a_edge66&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L253" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L253">
+<g id="a_edge66&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L253" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L253">
 <text xml:space="preserve" text-anchor="start" x="1117.46" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1162,12 +1162,12 @@
 <!-- shrink_vertices/5&#45;&gt;^^project_to_bounds/3 -->
 <g id="edge44" class="edge">
 <title>shrink_vertices/5&#45;&gt;^^project_to_bounds/3</title>
-<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L253" xlink:title="calls">
+<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L253" xlink:title="calls">
 <path fill="none" stroke="black" d="M1274.76,-174.83C1277.88,-174.2 1280.97,-173.59 1284,-173 1448.82,-140.96 1641.74,-108.53 1753.88,-90.17"/>
 <polygon fill="black" stroke="black" points="1754.34,-93.64 1763.65,-88.58 1753.22,-86.74 1754.34,-93.64"/>
 </a>
 </g>
-<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L253" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L253">
+<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L253" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L253">
 <text xml:space="preserve" text-anchor="start" x="1515.96" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1177,7 +1177,7 @@
 <title>build_vertices/7</title>
 <polygon fill="cornsilk" stroke="black" points="1946.21,-443 1813.79,-443 1813.79,-407 1946.21,-407 1946.21,-443"/>
 <text xml:space="preserve" text-anchor="start" x="1821.79" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node12_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L266" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L266">
+<g id="a_node12_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L266" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L266">
 <text xml:space="preserve" text-anchor="start" x="1827.19" y="-426.71" font-family="monospace" font-size="11.00">build_vertices/7</text>
 </a>
 </g>
@@ -1189,12 +1189,12 @@
 <!-- build_simplex/5&#45;&gt;build_vertices/7 -->
 <g id="edge21" class="edge">
 <title>build_simplex/5&#45;&gt;build_vertices/7</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L262" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L262" xlink:title="calls">
 <path fill="none" stroke="black" d="M1588.71,-550.59C1649.15,-524.74 1762.57,-476.22 1828.64,-447.97"/>
 <polygon fill="black" stroke="black" points="1830.01,-451.19 1837.83,-444.04 1827.26,-444.75 1830.01,-451.19"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L262" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L262">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L262" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L262">
 <text xml:space="preserve" text-anchor="start" x="1753.5" y="-494.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1216,12 +1216,12 @@
 <!-- build_simplex/5&#45;&gt;list::reverse/2 -->
 <g id="edge67" class="edge">
 <title>build_simplex/5&#45;&gt;list::reverse/2</title>
-<g id="a_edge67"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L262" xlink:title="calls">
+<g id="a_edge67"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L262" xlink:title="calls">
 <path fill="none" stroke="black" d="M1548,-550.59C1548,-526.61 1548,-483.14 1548,-454.42"/>
 <polygon fill="black" stroke="black" points="1551.5,-454.62 1548,-444.62 1544.5,-454.62 1551.5,-454.62"/>
 </a>
 </g>
-<g id="a_edge67&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L262" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L262">
+<g id="a_edge67&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L262" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L262">
 <text xml:space="preserve" text-anchor="start" x="1548" y="-494.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1231,7 +1231,7 @@
 <title>perturb/5</title>
 <polygon fill="cornsilk" stroke="black" points="2091.11,-326 2004.89,-326 2004.89,-290 2091.11,-290 2091.11,-326"/>
 <text xml:space="preserve" text-anchor="start" x="2012.89" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node13_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L274" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L274">
+<g id="a_node13_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L274" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L274">
 <text xml:space="preserve" text-anchor="start" x="2018.3" y="-309.71" font-family="monospace" font-size="11.00">perturb/5</text>
 </a>
 </g>
@@ -1243,12 +1243,12 @@
 <!-- build_vertices/7&#45;&gt;perturb/5 -->
 <g id="edge22" class="edge">
 <title>build_vertices/7&#45;&gt;perturb/5</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L269" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L269" xlink:title="calls">
 <path fill="none" stroke="black" d="M1926.5,-406.52C1947.27,-397.56 1971.42,-385.47 1991,-371 2004.68,-360.89 2017.7,-347.16 2027.83,-335.2"/>
 <polygon fill="black" stroke="black" points="2030.39,-337.6 2034.02,-327.65 2024.97,-333.16 2030.39,-337.6"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L269">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L269">
 <text xml:space="preserve" text-anchor="start" x="2001.66" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1258,7 +1258,7 @@
 <title>replace_nth1/4</title>
 <polygon fill="cornsilk" stroke="black" points="2049.61,-209 1930.39,-209 1930.39,-173 2049.61,-173 2049.61,-209"/>
 <text xml:space="preserve" text-anchor="start" x="1938.39" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node28_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L376" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L376">
+<g id="a_node28_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L376" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L376">
 <text xml:space="preserve" text-anchor="start" x="1943.79" y="-192.71" font-family="monospace" font-size="11.00">replace_nth1/4</text>
 </a>
 </g>
@@ -1270,12 +1270,12 @@
 <!-- perturb/5&#45;&gt;replace_nth1/4 -->
 <g id="edge23" class="edge">
 <title>perturb/5&#45;&gt;replace_nth1/4</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L274" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L274" xlink:title="calls">
 <path fill="none" stroke="black" d="M2039.19,-289.53C2029.81,-270.94 2014.84,-241.24 2003.87,-219.5"/>
 <polygon fill="black" stroke="black" points="2007.01,-217.96 1999.38,-210.6 2000.76,-221.11 2007.01,-217.96"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L274" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L274">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L274" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L274">
 <text xml:space="preserve" text-anchor="start" x="2020.74" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1297,12 +1297,12 @@
 <!-- perturb/5&#45;&gt;list::nth1/3 -->
 <g id="edge68" class="edge">
 <title>perturb/5&#45;&gt;list::nth1/3</title>
-<g id="a_edge68"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L274" xlink:title="calls">
+<g id="a_edge68"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L274" xlink:title="calls">
 <path fill="none" stroke="black" d="M2059.09,-289.53C2071,-270.77 2090.09,-240.7 2103.92,-218.91"/>
 <polygon fill="black" stroke="black" points="2106.83,-220.85 2109.24,-210.53 2100.92,-217.1 2106.83,-220.85"/>
 </a>
 </g>
-<g id="a_edge68&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L274" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L274">
+<g id="a_edge68&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L274" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L274">
 <text xml:space="preserve" text-anchor="start" x="2086.69" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1310,12 +1310,12 @@
 <!-- perturb/5&#45;&gt;^^project_to_bounds/3 -->
 <g id="edge45" class="edge">
 <title>perturb/5&#45;&gt;^^project_to_bounds/3</title>
-<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L274" xlink:title="calls">
+<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L274" xlink:title="calls">
 <path fill="none" stroke="black" d="M2005.44,-289.55C1970.91,-273.38 1923.32,-246.21 1894,-209 1869.38,-177.76 1857.51,-132.51 1852.1,-103.43"/>
 <polygon fill="black" stroke="black" points="1855.61,-103.16 1850.48,-93.89 1848.71,-104.34 1855.61,-103.16"/>
 </a>
 </g>
-<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L274" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L274">
+<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L274" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L274">
 <text xml:space="preserve" text-anchor="start" x="1894" y="-188.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1323,12 +1323,12 @@
 <!-- evaluate_simplex/4&#45;&gt;evaluate_objective/2 -->
 <g id="edge24" class="edge">
 <title>evaluate_simplex/4&#45;&gt;evaluate_objective/2</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L297" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L297" xlink:title="calls">
 <path fill="none" stroke="black" d="M462.93,-478.51C483.29,-469.71 506.53,-457.75 525,-443 576.9,-401.54 584.24,-383.21 618,-326 626.81,-311.07 624.79,-305.26 633,-290 646.64,-264.66 665.15,-237.66 679.1,-218.43"/>
 <polygon fill="black" stroke="black" points="681.74,-220.75 684.84,-210.62 676.1,-216.61 681.74,-220.75"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L297" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L297">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L297" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L297">
 <text xml:space="preserve" text-anchor="start" x="596.86" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1336,12 +1336,12 @@
 <!-- evaluate_pairs/4&#45;&gt;evaluate_objective/2 -->
 <g id="edge25" class="edge">
 <title>evaluate_pairs/4&#45;&gt;evaluate_objective/2</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L303" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L303" xlink:title="calls">
 <path fill="none" stroke="black" d="M817.74,-289.53C793.96,-270 755.28,-238.23 728.57,-216.29"/>
 <polygon fill="black" stroke="black" points="731.12,-213.86 721.17,-210.21 726.68,-219.27 731.12,-213.86"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L303" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L303">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L303" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L303">
 <text xml:space="preserve" text-anchor="start" x="773.2" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1351,7 +1351,7 @@
 <title>objective_keys/3</title>
 <polygon fill="cornsilk" stroke="black" points="419.21,-326 286.79,-326 286.79,-290 419.21,-290 419.21,-326"/>
 <text xml:space="preserve" text-anchor="start" x="294.79" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node18_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L320" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L320">
+<g id="a_node18_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L320" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L320">
 <text xml:space="preserve" text-anchor="start" x="300.19" y="-309.71" font-family="monospace" font-size="11.00">objective_keys/3</text>
 </a>
 </g>
@@ -1363,12 +1363,12 @@
 <!-- order_simplex/3&#45;&gt;objective_keys/3 -->
 <g id="edge26" class="edge">
 <title>order_simplex/3&#45;&gt;objective_keys/3</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L315" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L315" xlink:title="calls">
 <path fill="none" stroke="black" d="M437.81,-406.53C421.2,-387.43 394.4,-356.61 375.38,-334.73"/>
 <polygon fill="black" stroke="black" points="378.2,-332.65 369,-327.4 372.92,-337.24 378.2,-332.65"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L315" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L315">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L315" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L315">
 <text xml:space="preserve" text-anchor="start" x="406" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1378,7 +1378,7 @@
 <title>strip_objective_keys/2</title>
 <polygon fill="cornsilk" stroke="black" points="609.01,-326 436.99,-326 436.99,-290 609.01,-290 609.01,-326"/>
 <text xml:space="preserve" text-anchor="start" x="444.99" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node19_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L328" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L328">
+<g id="a_node19_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L328" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L328">
 <text xml:space="preserve" text-anchor="start" x="450.39" y="-309.71" font-family="monospace" font-size="11.00">strip_objective_keys/2</text>
 </a>
 </g>
@@ -1390,12 +1390,12 @@
 <!-- order_simplex/3&#45;&gt;strip_objective_keys/2 -->
 <g id="edge27" class="edge">
 <title>order_simplex/3&#45;&gt;strip_objective_keys/2</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L315" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L315" xlink:title="calls">
 <path fill="none" stroke="black" d="M463.63,-406.53C475.06,-387.77 493.36,-357.7 506.62,-335.91"/>
 <polygon fill="black" stroke="black" points="509.5,-337.91 511.71,-327.55 503.52,-334.27 509.5,-337.91"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L315" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L315">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L315" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L315">
 <text xml:space="preserve" text-anchor="start" x="490.1" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1403,12 +1403,12 @@
 <!-- replace_worst/3&#45;&gt;list::append/3 -->
 <g id="edge69" class="edge">
 <title>replace_worst/3&#45;&gt;list::append/3</title>
-<g id="a_edge69"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L333" xlink:title="calls">
+<g id="a_edge69"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L333" xlink:title="calls">
 <path fill="none" stroke="black" d="M1148.41,-289.76C1127.91,-276.77 1098.65,-258.89 1072,-245 1050.73,-233.91 1026.65,-222.91 1005.75,-213.83"/>
 <polygon fill="black" stroke="black" points="1007.41,-210.74 996.84,-210 1004.64,-217.17 1007.41,-210.74"/>
 </a>
 </g>
-<g id="a_edge69&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L333" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L333">
+<g id="a_edge69&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L333" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L333">
 <text xml:space="preserve" text-anchor="start" x="1086.4" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1418,7 +1418,7 @@
 <title>sum_points/3</title>
 <polygon fill="cornsilk" stroke="black" points="1399.01,-209 1292.99,-209 1292.99,-173 1399.01,-173 1399.01,-209"/>
 <text xml:space="preserve" text-anchor="start" x="1300.99" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node22_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L345" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L345">
+<g id="a_node22_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L345" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L345">
 <text xml:space="preserve" text-anchor="start" x="1306.39" y="-192.71" font-family="monospace" font-size="11.00">sum_points/3</text>
 </a>
 </g>
@@ -1430,12 +1430,12 @@
 <!-- centroid/3&#45;&gt;sum_points/3 -->
 <g id="edge28" class="edge">
 <title>centroid/3&#45;&gt;sum_points/3</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L338" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L338" xlink:title="calls">
 <path fill="none" stroke="black" d="M1469.2,-289.89C1447.93,-280.93 1423.09,-268.74 1403,-254 1389.19,-243.87 1376.08,-230.03 1365.93,-217.99"/>
 <polygon fill="black" stroke="black" points="1368.77,-215.94 1359.73,-210.41 1363.35,-220.37 1368.77,-215.94"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L338" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L338">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L338" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L338">
 <text xml:space="preserve" text-anchor="start" x="1403" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1443,12 +1443,12 @@
 <!-- centroid/3&#45;&gt;list::length/2 -->
 <g id="edge70" class="edge">
 <title>centroid/3&#45;&gt;list::length/2</title>
-<g id="a_edge70"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L338" xlink:title="calls">
+<g id="a_edge70"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L338" xlink:title="calls">
 <path fill="none" stroke="black" d="M1554.43,-289.53C1598.86,-269.34 1672.06,-236.06 1720.41,-214.09"/>
 <polygon fill="black" stroke="black" points="1721.6,-217.39 1729.25,-210.07 1718.7,-211.02 1721.6,-217.39"/>
 </a>
 </g>
-<g id="a_edge70&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L338" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L338">
+<g id="a_edge70&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L338" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L338">
 <text xml:space="preserve" text-anchor="start" x="1650.09" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1456,12 +1456,12 @@
 <!-- centroid/3&#45;&gt;linear_algebra::scale_vector/3 -->
 <g id="edge72" class="edge">
 <title>centroid/3&#45;&gt;linear_algebra::scale_vector/3</title>
-<g id="a_edge72"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L338" xlink:title="calls">
+<g id="a_edge72"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L338" xlink:title="calls">
 <path fill="none" stroke="black" d="M1503.97,-289.54C1481.22,-256.99 1432.05,-188.9 1408,-173 1341.64,-129.12 1255.61,-104.64 1185.94,-91.12"/>
 <polygon fill="black" stroke="black" points="1186.86,-87.74 1176.39,-89.33 1185.57,-94.62 1186.86,-87.74"/>
 </a>
 </g>
-<g id="a_edge72&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L338" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L338">
+<g id="a_edge72&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L338" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L338">
 <text xml:space="preserve" text-anchor="start" x="1442.24" y="-188.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1483,12 +1483,12 @@
 <!-- centroid/3&#45;&gt;linear_algebra::new_vector/3 -->
 <g id="edge71" class="edge">
 <title>centroid/3&#45;&gt;linear_algebra::new_vector/3</title>
-<g id="a_edge71"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L338" xlink:title="calls">
+<g id="a_edge71"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L338" xlink:title="calls">
 <path fill="none" stroke="black" d="M1526.63,-289.53C1538.06,-270.77 1556.36,-240.7 1569.62,-218.91"/>
 <polygon fill="black" stroke="black" points="1572.5,-220.91 1574.71,-210.55 1566.52,-217.27 1572.5,-220.91"/>
 </a>
 </g>
-<g id="a_edge71&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L338" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L338">
+<g id="a_edge71&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L338" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L338">
 <text xml:space="preserve" text-anchor="start" x="1553.1" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1496,12 +1496,12 @@
 <!-- sum_points/3&#45;&gt;linear_algebra::add_vectors/3 -->
 <g id="edge73" class="edge">
 <title>sum_points/3&#45;&gt;linear_algebra::add_vectors/3</title>
-<g id="a_edge73"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L346" xlink:title="calls">
+<g id="a_edge73"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L346" xlink:title="calls">
 <path fill="none" stroke="black" d="M1292.79,-174.42C1258.46,-164.2 1212.93,-150.3 1173,-137 1161.79,-133.27 1159.43,-130.95 1148,-128 1109.36,-118.02 1016.81,-103.41 939.68,-92.05"/>
 <polygon fill="black" stroke="black" points="940.32,-88.61 929.92,-90.62 939.31,-95.53 940.32,-88.61"/>
 </a>
 </g>
-<g id="a_edge73&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L346" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L346">
+<g id="a_edge73&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L346" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L346">
 <text xml:space="preserve" text-anchor="start" x="1173" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1511,7 +1511,7 @@
 <title>max_distance/4</title>
 <polygon fill="cornsilk" stroke="black" points="137.61,-209 18.39,-209 18.39,-173 137.61,-173 137.61,-209"/>
 <text xml:space="preserve" text-anchor="start" x="26.39" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node24_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L353" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L353">
+<g id="a_node24_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L353" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L353">
 <text xml:space="preserve" text-anchor="start" x="31.79" y="-192.71" font-family="monospace" font-size="11.00">max_distance/4</text>
 </a>
 </g>
@@ -1523,12 +1523,12 @@
 <!-- simplex_size/2&#45;&gt;max_distance/4 -->
 <g id="edge29" class="edge">
 <title>simplex_size/2&#45;&gt;max_distance/4</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L350" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L350" xlink:title="calls">
 <path fill="none" stroke="black" d="M78,-289.53C78,-271.28 78,-242.33 78,-220.7"/>
 <polygon fill="black" stroke="black" points="81.5,-220.77 78,-210.77 74.5,-220.77 81.5,-220.77"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L350" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L350">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L350" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L350">
 <text xml:space="preserve" text-anchor="start" x="78" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1536,12 +1536,12 @@
 <!-- max_distance/4&#45;&gt;linear_algebra::subtract_vectors/3 -->
 <g id="edge74" class="edge">
 <title>max_distance/4&#45;&gt;linear_algebra::subtract_vectors/3</title>
-<g id="a_edge74"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L354" xlink:title="calls">
+<g id="a_edge74"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L354" xlink:title="calls">
 <path fill="none" stroke="black" d="M137.84,-175.24C140.93,-174.48 144,-173.73 147,-173 257.93,-145.88 386.07,-114.85 467.77,-95.1"/>
 <polygon fill="black" stroke="black" points="468.36,-98.55 477.26,-92.8 466.72,-91.75 468.36,-98.55"/>
 </a>
 </g>
-<g id="a_edge74&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L354">
+<g id="a_edge74&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L354">
 <text xml:space="preserve" text-anchor="start" x="324.3" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1563,12 +1563,12 @@
 <!-- max_distance/4&#45;&gt;linear_algebra::euclidean_norm/2 -->
 <g id="edge75" class="edge">
 <title>max_distance/4&#45;&gt;linear_algebra::euclidean_norm/2</title>
-<g id="a_edge75"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L354" xlink:title="calls">
+<g id="a_edge75"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L354" xlink:title="calls">
 <path fill="none" stroke="black" d="M86.96,-172.53C96.55,-153.85 111.87,-123.97 123.04,-102.2"/>
 <polygon fill="black" stroke="black" points="126.01,-104.1 127.46,-93.6 119.78,-100.9 126.01,-104.1"/>
 </a>
 </g>
-<g id="a_edge75&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L354">
+<g id="a_edge75&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L354">
 <text xml:space="preserve" text-anchor="start" x="109.27" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1576,12 +1576,12 @@
 <!-- converged/3&#45;&gt;simplex_size/2 -->
 <g id="edge30" class="edge">
 <title>converged/3&#45;&gt;simplex_size/2</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L360" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L360" xlink:title="calls">
 <path fill="none" stroke="black" d="M195.89,-406.53C172.38,-387.09 134.22,-355.51 107.7,-333.57"/>
 <polygon fill="black" stroke="black" points="109.96,-330.9 100.02,-327.22 105.49,-336.29 109.96,-330.9"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L360" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L360">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L360" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L360">
 <text xml:space="preserve" text-anchor="start" x="151.67" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1591,7 +1591,7 @@
 <title>values_span/2</title>
 <polygon fill="cornsilk" stroke="black" points="268.31,-326 155.69,-326 155.69,-290 268.31,-290 268.31,-326"/>
 <text xml:space="preserve" text-anchor="start" x="163.69" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node26_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L366" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L366">
+<g id="a_node26_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L366" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L366">
 <text xml:space="preserve" text-anchor="start" x="169.09" y="-309.71" font-family="monospace" font-size="11.00">values_span/2</text>
 </a>
 </g>
@@ -1603,12 +1603,12 @@
 <!-- converged/3&#45;&gt;values_span/2 -->
 <g id="edge31" class="edge">
 <title>converged/3&#45;&gt;values_span/2</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L360" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L360" xlink:title="calls">
 <path fill="none" stroke="black" d="M216.24,-406.53C215.45,-388.28 214.19,-359.33 213.25,-337.7"/>
 <polygon fill="black" stroke="black" points="216.75,-337.6 212.82,-327.77 209.75,-337.91 216.75,-337.6"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L360" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L360">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L360" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L360">
 <text xml:space="preserve" text-anchor="start" x="214.65" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1618,7 +1618,7 @@
 <title>values_minmax/5</title>
 <polygon fill="cornsilk" stroke="black" points="281.91,-209 156.09,-209 156.09,-173 281.91,-173 281.91,-209"/>
 <text xml:space="preserve" text-anchor="start" x="164.09" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node27_39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L370" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L370">
+<g id="a_node27_39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L370" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L370">
 <text xml:space="preserve" text-anchor="start" x="169.49" y="-192.71" font-family="monospace" font-size="11.00">values_minmax/5</text>
 </a>
 </g>
@@ -1630,12 +1630,12 @@
 <!-- values_span/2&#45;&gt;values_minmax/5 -->
 <g id="edge32" class="edge">
 <title>values_span/2&#45;&gt;values_minmax/5</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L366" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L366" xlink:title="calls">
 <path fill="none" stroke="black" d="M213.06,-289.53C214.17,-271.28 215.94,-242.33 217.25,-220.7"/>
 <polygon fill="black" stroke="black" points="220.74,-220.96 217.86,-210.76 213.76,-220.53 220.74,-220.96"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L366" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L366">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L366" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L366">
 <text xml:space="preserve" text-anchor="start" x="215.71" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1645,7 +1645,7 @@
 <title>progress_hook/5</title>
 <polygon fill="cornsilk" stroke="black" points="1357.91,-704 1232.09,-704 1232.09,-668 1357.91,-668 1357.91,-704"/>
 <text xml:space="preserve" text-anchor="start" x="1240.09" y="-688.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node29_40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L385" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L385">
+<g id="a_node29_40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L385" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L385">
 <text xml:space="preserve" text-anchor="start" x="1245.49" y="-687.71" font-family="monospace" font-size="11.00">progress_hook/5</text>
 </a>
 </g>
@@ -1659,7 +1659,7 @@
 <title>default_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="2017.21,-704 1884.79,-704 1884.79,-668 2017.21,-668 2017.21,-704"/>
 <text xml:space="preserve" text-anchor="start" x="1892.79" y="-688.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node30_41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L390" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L390">
+<g id="a_node30_41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L390" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L390">
 <text xml:space="preserve" text-anchor="start" x="1898.19" y="-687.71" font-family="monospace" font-size="11.00">default_option/1</text>
 </a>
 </g>
@@ -1682,12 +1682,12 @@
 <!-- default_option/1&#45;&gt;^^default_option/1 -->
 <g id="edge46" class="edge">
 <title>default_option/1&#45;&gt;^^default_option/1</title>
-<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L396" xlink:title="calls">
+<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L396" xlink:title="calls">
 <path fill="none" stroke="black" d="M1951,-667.53C1951,-649.28 1951,-620.33 1951,-598.7"/>
 <polygon fill="black" stroke="black" points="1954.5,-598.77 1951,-588.77 1947.5,-598.77 1954.5,-598.77"/>
 </a>
 </g>
-<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L396" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L396">
+<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L396" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L396">
 <text xml:space="preserve" text-anchor="start" x="1951" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1697,7 +1697,7 @@
 <title>valid_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="2167.61,-704 2048.39,-704 2048.39,-668 2167.61,-668 2167.61,-704"/>
 <text xml:space="preserve" text-anchor="start" x="2056.39" y="-688.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node31_42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L399" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L399">
+<g id="a_node31_42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L399" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L399">
 <text xml:space="preserve" text-anchor="start" x="2061.79" y="-687.71" font-family="monospace" font-size="11.00">valid_option/1</text>
 </a>
 </g>
@@ -1720,12 +1720,12 @@
 <!-- valid_option/1&#45;&gt;^^valid_option/1 -->
 <g id="edge47" class="edge">
 <title>valid_option/1&#45;&gt;^^valid_option/1</title>
-<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L411" xlink:title="calls">
+<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L411" xlink:title="calls">
 <path fill="none" stroke="black" d="M2108,-667.53C2108,-649.28 2108,-620.33 2108,-598.7"/>
 <polygon fill="black" stroke="black" points="2111.5,-598.77 2108,-588.77 2104.5,-598.77 2111.5,-598.77"/>
 </a>
 </g>
-<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L411" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/local_optimization/nelder_mead.lgt#L411">
+<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L411" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/nelder_mead.lgt#L411">
 <text xml:space="preserve" text-anchor="start" x="2108" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>

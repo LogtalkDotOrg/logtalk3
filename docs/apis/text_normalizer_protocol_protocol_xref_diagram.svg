@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 1887,-140 1887,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol text_normalizer_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 15:49</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 20:36</text>
 <g id="clust1" class="cluster">
 <title>cluster_text_normalizer_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="text_normalizer_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1863,-46 1863,-46 1869,-46 1875,-52 1875,-58 1875,-58 1875,-116 1875,-116 1875,-122 1869,-128 1863,-128 1863,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/text_normalizer_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/text_normalizer_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/text_normalization/text_normalizer_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/text_normalization/text_normalizer_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">text_normalizer_protocol</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>normalize_unicode/3</title>
 <polygon fill="springgreen" stroke="black" points="170.11,-92 17.89,-92 17.89,-56 170.11,-56 170.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="25.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/text_normalizer_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/text_normalizer_protocol.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/text_normalization/text_normalizer_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/text_normalization/text_normalizer_protocol.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="31.29" y="-75.71" font-family="monospace" font-size="11.00">normalize_unicode/3</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>remove_diacritics/2</title>
 <polygon fill="springgreen" stroke="black" points="340.11,-92 187.89,-92 187.89,-56 340.11,-56 340.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="195.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/text_normalizer_protocol.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/text_normalizer_protocol.lgt#L54">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/text_normalization/text_normalizer_protocol.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/text_normalization/text_normalizer_protocol.lgt#L54">
 <text xml:space="preserve" text-anchor="start" x="201.29" y="-75.71" font-family="monospace" font-size="11.00">remove_diacritics/2</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>fold_diacritics/2</title>
 <polygon fill="springgreen" stroke="black" points="497.51,-92 358.49,-92 358.49,-56 497.51,-56 497.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="366.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/text_normalizer_protocol.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/text_normalizer_protocol.lgt#L73">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/text_normalization/text_normalizer_protocol.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/text_normalization/text_normalizer_protocol.lgt#L73">
 <text xml:space="preserve" text-anchor="start" x="371.89" y="-75.71" font-family="monospace" font-size="11.00">fold_diacritics/2</text>
 </a>
 </g>
@@ -71,7 +71,7 @@
 <title>case_fold/2</title>
 <polygon fill="springgreen" stroke="black" points="614.71,-92 515.29,-92 515.29,-56 614.71,-56 614.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="523.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/text_normalizer_protocol.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/text_normalizer_protocol.lgt#L92">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/text_normalization/text_normalizer_protocol.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/text_normalization/text_normalizer_protocol.lgt#L92">
 <text xml:space="preserve" text-anchor="start" x="528.69" y="-75.71" font-family="monospace" font-size="11.00">case_fold/2</text>
 </a>
 </g>
@@ -85,7 +85,7 @@
 <title>lower_case/2</title>
 <polygon fill="springgreen" stroke="black" points="739.01,-92 632.99,-92 632.99,-56 739.01,-56 739.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="640.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/text_normalizer_protocol.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/text_normalizer_protocol.lgt#L111">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/text_normalization/text_normalizer_protocol.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/text_normalization/text_normalizer_protocol.lgt#L111">
 <text xml:space="preserve" text-anchor="start" x="646.39" y="-75.71" font-family="monospace" font-size="11.00">lower_case/2</text>
 </a>
 </g>
@@ -99,7 +99,7 @@
 <title>upper_case/2</title>
 <polygon fill="springgreen" stroke="black" points="863.01,-92 756.99,-92 756.99,-56 863.01,-56 863.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="764.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/text_normalizer_protocol.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/text_normalizer_protocol.lgt#L130">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/text_normalization/text_normalizer_protocol.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/text_normalization/text_normalizer_protocol.lgt#L130">
 <text xml:space="preserve" text-anchor="start" x="770.39" y="-75.71" font-family="monospace" font-size="11.00">upper_case/2</text>
 </a>
 </g>
@@ -113,7 +113,7 @@
 <title>title_case/2</title>
 <polygon fill="springgreen" stroke="black" points="987.01,-92 880.99,-92 880.99,-56 987.01,-56 987.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="888.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/text_normalizer_protocol.lgt#L149" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/text_normalizer_protocol.lgt#L149">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/text_normalization/text_normalizer_protocol.lgt#L149" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/text_normalization/text_normalizer_protocol.lgt#L149">
 <text xml:space="preserve" text-anchor="start" x="894.39" y="-75.71" font-family="monospace" font-size="11.00">title_case/2</text>
 </a>
 </g>
@@ -127,7 +127,7 @@
 <title>decode_entities/2</title>
 <polygon fill="springgreen" stroke="black" points="1144.51,-92 1005.49,-92 1005.49,-56 1144.51,-56 1144.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1013.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/text_normalizer_protocol.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/text_normalizer_protocol.lgt#L168">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/text_normalization/text_normalizer_protocol.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/text_normalization/text_normalizer_protocol.lgt#L168">
 <text xml:space="preserve" text-anchor="start" x="1018.89" y="-75.71" font-family="monospace" font-size="11.00">decode_entities/2</text>
 </a>
 </g>
@@ -141,7 +141,7 @@
 <title>decode_entities/3</title>
 <polygon fill="springgreen" stroke="black" points="1301.51,-92 1162.49,-92 1162.49,-56 1301.51,-56 1301.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1170.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/text_normalizer_protocol.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/text_normalizer_protocol.lgt#L188">
+<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/text_normalization/text_normalizer_protocol.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/text_normalization/text_normalizer_protocol.lgt#L188">
 <text xml:space="preserve" text-anchor="start" x="1175.89" y="-75.71" font-family="monospace" font-size="11.00">decode_entities/3</text>
 </a>
 </g>
@@ -155,7 +155,7 @@
 <title>normalize_whitespace/2</title>
 <polygon fill="springgreen" stroke="black" points="1492.01,-92 1319.99,-92 1319.99,-56 1492.01,-56 1492.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1327.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/text_normalizer_protocol.lgt#L214" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/text_normalizer_protocol.lgt#L214">
+<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/text_normalization/text_normalizer_protocol.lgt#L214" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/text_normalization/text_normalizer_protocol.lgt#L214">
 <text xml:space="preserve" text-anchor="start" x="1333.39" y="-75.71" font-family="monospace" font-size="11.00">normalize_whitespace/2</text>
 </a>
 </g>
@@ -169,7 +169,7 @@
 <title>normalize_whitespace/3</title>
 <polygon fill="springgreen" stroke="black" points="1682.01,-92 1509.99,-92 1509.99,-56 1682.01,-56 1682.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1517.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/text_normalizer_protocol.lgt#L233" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/text_normalizer_protocol.lgt#L233">
+<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/text_normalization/text_normalizer_protocol.lgt#L233" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/text_normalization/text_normalizer_protocol.lgt#L233">
 <text xml:space="preserve" text-anchor="start" x="1523.39" y="-75.71" font-family="monospace" font-size="11.00">normalize_whitespace/3</text>
 </a>
 </g>
@@ -183,7 +183,7 @@
 <title>clean/2</title>
 <polygon fill="springgreen" stroke="black" points="1773.5,-92 1700.5,-92 1700.5,-56 1773.5,-56 1773.5,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1708.5" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/text_normalizer_protocol.lgt#L257" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/text_normalizer_protocol.lgt#L257">
+<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/text_normalization/text_normalizer_protocol.lgt#L257" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/text_normalization/text_normalizer_protocol.lgt#L257">
 <text xml:space="preserve" text-anchor="start" x="1713.9" y="-75.71" font-family="monospace" font-size="11.00">clean/2</text>
 </a>
 </g>
@@ -197,7 +197,7 @@
 <title>clean/3</title>
 <polygon fill="springgreen" stroke="black" points="1864.5,-92 1791.5,-92 1791.5,-56 1864.5,-56 1864.5,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1799.5" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/text_normalizer_protocol.lgt#L277" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/text_normalization/text_normalizer_protocol.lgt#L277">
+<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/text_normalization/text_normalizer_protocol.lgt#L277" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/text_normalization/text_normalizer_protocol.lgt#L277">
 <text xml:space="preserve" text-anchor="start" x="1804.9" y="-75.71" font-family="monospace" font-size="11.00">clean/3</text>
 </a>
 </g>

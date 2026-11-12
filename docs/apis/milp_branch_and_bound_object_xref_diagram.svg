@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-1103 2123.35,-1103 2123.35,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object milp_branch_and_bound</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 15:49</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 20:35</text>
 <g id="clust1" class="cluster">
 <title>cluster_milp_branch_and_bound_object</title>
 <g id="a_clust1"><a xlink:title="milp_branch_and_bound">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 2069,-46 2069,-46 2075,-46 2081,-52 2081,-58 2081,-58 2081,-1079 2081,-1079 2081,-1085 2075,-1091 2069,-1091 2069,-1091 20,-1091 20,-1091 14,-1091 8,-1085 8,-1079 8,-1079 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-1075.46" font-family="monospace" font-size="10.00" fill="dimgray">milp_branch_and_bound</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>branch_on_value/9</title>
 <polygon fill="cornsilk" stroke="black" points="579.51,-1055 440.49,-1055 440.49,-1019 579.51,-1019 579.51,-1055"/>
 <text xml:space="preserve" text-anchor="start" x="448.49" y="-1039.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L226" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L226">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L226" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L226">
 <text xml:space="preserve" text-anchor="start" x="453.89" y="-1038.71" font-family="monospace" font-size="11.00">branch_on_value/9</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>branch_on_bounds/9</title>
 <polygon fill="cornsilk" stroke="black" points="352.81,-938 207.19,-938 207.19,-902 352.81,-902 352.81,-938"/>
 <text xml:space="preserve" text-anchor="start" x="215.19" y="-922.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node19_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L233" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L233">
+<g id="a_node19_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L233" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L233">
 <text xml:space="preserve" text-anchor="start" x="220.59" y="-921.71" font-family="monospace" font-size="11.00">branch_on_bounds/9</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- branch_on_value/9&#45;&gt;branch_on_bounds/9 -->
 <g id="edge26" class="edge">
 <title>branch_on_value/9&#45;&gt;branch_on_bounds/9</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L226" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L226" xlink:title="calls">
 <path fill="none" stroke="black" d="M475.07,-1018.53C434.93,-998.47 368.96,-965.48 325.01,-943.5"/>
 <polygon fill="black" stroke="black" points="326.75,-940.46 316.24,-939.12 323.62,-946.72 326.75,-940.46"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L226" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L226">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L226" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L226">
 <text xml:space="preserve" text-anchor="start" x="401.9" y="-976.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>solve/2</title>
 <polygon fill="cornsilk" stroke="black" points="757.5,-1055 684.5,-1055 684.5,-1019 757.5,-1019 757.5,-1055"/>
 <text xml:space="preserve" text-anchor="start" x="692.5" y="-1039.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L42">
+<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L42">
 <text xml:space="preserve" text-anchor="start" x="697.9" y="-1038.71" font-family="monospace" font-size="11.00">solve/2</text>
 </a>
 </g>
@@ -93,12 +93,12 @@
 <!-- solve/2&#45;&gt;::solve/3 -->
 <g id="edge35" class="edge">
 <title>solve/2&#45;&gt;::solve/3</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L42" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L42" xlink:title="calls">
 <path fill="none" stroke="black" d="M721,-1018.53C721,-1000.28 721,-971.33 721,-949.7"/>
 <polygon fill="black" stroke="black" points="724.5,-949.77 721,-939.77 717.5,-949.77 724.5,-949.77"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L42">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L42">
 <text xml:space="preserve" text-anchor="start" x="721" y="-976.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -108,7 +108,7 @@
 <title>solve/3</title>
 <polygon fill="cornsilk" stroke="black" points="1385.5,-704 1312.5,-704 1312.5,-668 1385.5,-668 1385.5,-704"/>
 <text xml:space="preserve" text-anchor="start" x="1320.5" y="-688.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L45">
+<g id="a_node3_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="1325.9" y="-687.71" font-family="monospace" font-size="11.00">solve/3</text>
 </a>
 </g>
@@ -122,7 +122,7 @@
 <title>check_solvable_problem/2</title>
 <polygon fill="cornsilk" stroke="black" points="1553.61,-587 1368.39,-587 1368.39,-551 1553.61,-551 1553.61,-587"/>
 <text xml:space="preserve" text-anchor="start" x="1376.39" y="-571.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L84">
+<g id="a_node6_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L84">
 <text xml:space="preserve" text-anchor="start" x="1381.79" y="-570.71" font-family="monospace" font-size="11.00">check_solvable_problem/2</text>
 </a>
 </g>
@@ -134,12 +134,12 @@
 <!-- solve/3&#45;&gt;check_solvable_problem/2 -->
 <g id="edge1" class="edge">
 <title>solve/3&#45;&gt;check_solvable_problem/2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M1366.01,-667.53C1384.7,-648.34 1414.9,-617.33 1436.22,-595.44"/>
 <polygon fill="black" stroke="black" points="1438.67,-597.94 1443.14,-588.34 1433.66,-593.06 1438.67,-597.94"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L45">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="1408.36" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -149,7 +149,7 @@
 <title>check_discrete_domains/1</title>
 <polygon fill="cornsilk" stroke="black" points="1756.61,-587 1571.39,-587 1571.39,-551 1756.61,-551 1756.61,-587"/>
 <text xml:space="preserve" text-anchor="start" x="1579.39" y="-571.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L90">
+<g id="a_node7_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L90">
 <text xml:space="preserve" text-anchor="start" x="1584.79" y="-570.71" font-family="monospace" font-size="11.00">check_discrete_domains/1</text>
 </a>
 </g>
@@ -161,12 +161,12 @@
 <!-- solve/3&#45;&gt;check_discrete_domains/1 -->
 <g id="edge2" class="edge">
 <title>solve/3&#45;&gt;check_discrete_domains/1</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M1385.75,-671.58C1439.75,-651.87 1541.09,-614.87 1605.42,-591.39"/>
 <polygon fill="black" stroke="black" points="1606.59,-594.69 1614.78,-587.97 1604.19,-588.11 1606.59,-594.69"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L45">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="1515.94" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -176,7 +176,7 @@
 <title>initial_state/1</title>
 <polygon fill="cornsilk" stroke="black" points="1900.91,-587 1775.09,-587 1775.09,-551 1900.91,-551 1900.91,-587"/>
 <text xml:space="preserve" text-anchor="start" x="1783.09" y="-571.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L108">
+<g id="a_node8_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L108">
 <text xml:space="preserve" text-anchor="start" x="1788.49" y="-570.71" font-family="monospace" font-size="11.00">initial_state/1</text>
 </a>
 </g>
@@ -188,12 +188,12 @@
 <!-- solve/3&#45;&gt;initial_state/1 -->
 <g id="edge3" class="edge">
 <title>solve/3&#45;&gt;initial_state/1</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M1385.82,-676.36C1456.73,-659.72 1617.47,-621.98 1763.83,-587.51"/>
 <polygon fill="black" stroke="black" points="1764.38,-590.98 1773.31,-585.28 1762.78,-584.16 1764.38,-590.98"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L45">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="1605.53" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -203,7 +203,7 @@
 <title>search_node/4</title>
 <polygon fill="cornsilk" stroke="black" points="858.31,-587 745.69,-587 745.69,-551 858.31,-551 858.31,-587"/>
 <text xml:space="preserve" text-anchor="start" x="753.69" y="-571.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L110" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L110">
+<g id="a_node9_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L110" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L110">
 <text xml:space="preserve" text-anchor="start" x="759.09" y="-570.71" font-family="monospace" font-size="11.00">search_node/4</text>
 </a>
 </g>
@@ -215,12 +215,12 @@
 <!-- solve/3&#45;&gt;search_node/4 -->
 <g id="edge4" class="edge">
 <title>solve/3&#45;&gt;search_node/4</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M1312.27,-678.25C1233.16,-663.56 1040.63,-626.97 869.64,-587.56"/>
 <polygon fill="black" stroke="black" points="870.68,-584.21 860.15,-585.36 869.1,-591.03 870.68,-584.21"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L45">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="1065.02" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -230,7 +230,7 @@
 <title>result_from_state/3</title>
 <polygon fill="cornsilk" stroke="black" points="2071.11,-587 1918.89,-587 1918.89,-551 2071.11,-551 2071.11,-587"/>
 <text xml:space="preserve" text-anchor="start" x="1926.89" y="-571.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node34_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L315" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L315">
+<g id="a_node34_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L315" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L315">
 <text xml:space="preserve" text-anchor="start" x="1932.29" y="-570.71" font-family="monospace" font-size="11.00">result_from_state/3</text>
 </a>
 </g>
@@ -242,12 +242,12 @@
 <!-- solve/3&#45;&gt;result_from_state/3 -->
 <g id="edge5" class="edge">
 <title>solve/3&#45;&gt;result_from_state/3</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M1385.81,-678.89C1473.94,-664.19 1704.2,-625.39 1907.38,-587.47"/>
 <polygon fill="black" stroke="black" points="1907.89,-590.94 1917.07,-585.66 1906.6,-584.06 1907.89,-590.94"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L45">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="1709.69" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -266,12 +266,12 @@
 <!-- solve/3&#45;&gt;^^check_problem/1 -->
 <g id="edge36" class="edge">
 <title>solve/3&#45;&gt;^^check_problem/1</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M1312.17,-674.49C1245.71,-655.53 1104.65,-615.27 1018.31,-590.64"/>
 <polygon fill="black" stroke="black" points="1019.32,-587.28 1008.74,-587.9 1017.4,-594.01 1019.32,-587.28"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L45">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="1159.58" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -290,12 +290,12 @@
 <!-- solve/3&#45;&gt;^^check_options/1 -->
 <g id="edge37" class="edge">
 <title>solve/3&#45;&gt;^^check_options/1</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M1312.17,-667.78C1269.06,-647.63 1197.55,-614.2 1150.35,-592.14"/>
 <polygon fill="black" stroke="black" points="1151.99,-589.04 1141.45,-587.98 1149.03,-595.38 1151.99,-589.04"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L45">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="1233.38" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -314,12 +314,12 @@
 <!-- solve/3&#45;&gt;^^merge_options/2 -->
 <g id="edge38" class="edge">
 <title>solve/3&#45;&gt;^^merge_options/2</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M1335.48,-667.53C1320.83,-648.6 1297.27,-618.16 1280.37,-596.32"/>
 <polygon fill="black" stroke="black" points="1283.17,-594.22 1274.28,-588.45 1277.63,-598.5 1283.17,-594.22"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L45">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="1307.17" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -338,12 +338,12 @@
 <!-- solve/3&#45;&gt;^^discrete_variables/2 -->
 <g id="edge39" class="edge">
 <title>solve/3&#45;&gt;^^discrete_variables/2</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M1344.99,-667.83C1339.62,-640.28 1333.48,-585.8 1359,-551 1423.82,-462.59 1736.97,-369.55 1885.94,-329.4"/>
 <polygon fill="black" stroke="black" points="1886.59,-332.85 1895.35,-326.88 1884.78,-326.09 1886.59,-332.85"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L45">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="1408.62" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -353,7 +353,7 @@
 <title>default_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="1485.21,-1055 1352.79,-1055 1352.79,-1019 1485.21,-1019 1485.21,-1055"/>
 <text xml:space="preserve" text-anchor="start" x="1360.79" y="-1039.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L57">
+<g id="a_node4_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="1366.19" y="-1038.71" font-family="monospace" font-size="11.00">default_option/1</text>
 </a>
 </g>
@@ -367,7 +367,7 @@
 <title>valid_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="1911.61,-1055 1792.39,-1055 1792.39,-1019 1911.61,-1019 1911.61,-1055"/>
 <text xml:space="preserve" text-anchor="start" x="1800.39" y="-1039.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L65">
+<g id="a_node5_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L65">
 <text xml:space="preserve" text-anchor="start" x="1805.79" y="-1038.71" font-family="monospace" font-size="11.00">valid_option/1</text>
 </a>
 </g>
@@ -381,7 +381,7 @@
 <title>handle_relaxation/5</title>
 <polygon fill="cornsilk" stroke="black" points="718.11,-470 565.89,-470 565.89,-434 718.11,-434 718.11,-470"/>
 <text xml:space="preserve" text-anchor="start" x="573.89" y="-454.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L126">
+<g id="a_node10_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L126">
 <text xml:space="preserve" text-anchor="start" x="579.29" y="-453.71" font-family="monospace" font-size="11.00">handle_relaxation/5</text>
 </a>
 </g>
@@ -393,12 +393,12 @@
 <!-- search_node/4&#45;&gt;handle_relaxation/5 -->
 <g id="edge9" class="edge">
 <title>search_node/4&#45;&gt;handle_relaxation/5</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L116" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L116" xlink:title="calls">
 <path fill="none" stroke="black" d="M777.7,-550.53C750.37,-530.89 705.81,-498.87 675.26,-476.91"/>
 <polygon fill="black" stroke="black" points="677.66,-474.32 667.5,-471.32 673.57,-480 677.66,-474.32"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L116">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L116">
 <text xml:space="preserve" text-anchor="start" x="726.8" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -408,7 +408,7 @@
 <title>add_relaxation_iterations/3</title>
 <polygon fill="cornsilk" stroke="black" points="1342.52,-398 1137.48,-398 1137.48,-362 1342.52,-362 1342.52,-398"/>
 <text xml:space="preserve" text-anchor="start" x="1145.48" y="-382.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node29_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L300" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L300">
+<g id="a_node29_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L300" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L300">
 <text xml:space="preserve" text-anchor="start" x="1150.89" y="-381.71" font-family="monospace" font-size="11.00">add_relaxation_iterations/3</text>
 </a>
 </g>
@@ -420,12 +420,12 @@
 <!-- search_node/4&#45;&gt;add_relaxation_iterations/3 -->
 <g id="edge8" class="edge">
 <title>search_node/4&#45;&gt;add_relaxation_iterations/3</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L116" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L116" xlink:title="calls">
 <path fill="none" stroke="black" d="M858.63,-552.79C861.46,-552.15 864.26,-551.55 867,-551 953.55,-533.51 1204.06,-541.41 1256,-470 1268.81,-452.38 1263.04,-427.71 1255.06,-408.82"/>
 <polygon fill="black" stroke="black" points="1258.26,-407.41 1250.87,-399.82 1251.92,-410.37 1258.26,-407.41"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L116">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L116">
 <text xml:space="preserve" text-anchor="start" x="1198.82" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -435,7 +435,7 @@
 <title>increment_nodes/2</title>
 <polygon fill="cornsilk" stroke="black" points="1246.51,-470 1107.49,-470 1107.49,-434 1246.51,-434 1246.51,-470"/>
 <text xml:space="preserve" text-anchor="start" x="1115.49" y="-454.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node30_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L304" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L304">
+<g id="a_node30_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L304" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L304">
 <text xml:space="preserve" text-anchor="start" x="1120.89" y="-453.71" font-family="monospace" font-size="11.00">increment_nodes/2</text>
 </a>
 </g>
@@ -447,12 +447,12 @@
 <!-- search_node/4&#45;&gt;increment_nodes/2 -->
 <g id="edge7" class="edge">
 <title>search_node/4&#45;&gt;increment_nodes/2</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L116" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L116" xlink:title="calls">
 <path fill="none" stroke="black" d="M858.66,-552.9C861.47,-552.24 864.27,-551.6 867,-551 955.2,-531.56 982.03,-545.6 1067,-515 1093.71,-505.38 1121.54,-489.63 1142.53,-476.41"/>
 <polygon fill="black" stroke="black" points="1144.16,-479.52 1150.68,-471.17 1140.37,-473.64 1144.16,-479.52"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L116">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L116">
 <text xml:space="preserve" text-anchor="start" x="1086.09" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -462,7 +462,7 @@
 <title>set_stop_status/3</title>
 <polygon fill="cornsilk" stroke="black" points="1860.51,-326 1721.49,-326 1721.49,-290 1860.51,-290 1860.51,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1729.49" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node33_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L313" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L313">
+<g id="a_node33_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L313" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L313">
 <text xml:space="preserve" text-anchor="start" x="1734.89" y="-309.71" font-family="monospace" font-size="11.00">set_stop_status/3</text>
 </a>
 </g>
@@ -474,12 +474,12 @@
 <!-- search_node/4&#45;&gt;set_stop_status/3 -->
 <g id="edge6" class="edge">
 <title>search_node/4&#45;&gt;set_stop_status/3</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L110" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L110" xlink:title="calls">
 <path fill="none" stroke="black" d="M858,-550.56C918.77,-530.61 1010.44,-497.19 1035,-470 1057.43,-445.17 1047.63,-430.12 1057,-398 1061.65,-382.06 1054.06,-372.41 1067,-362 1120.73,-318.75 1601.1,-334.22 1709.94,-325.77"/>
 <polygon fill="black" stroke="black" points="1710.22,-329.26 1719.81,-324.77 1709.51,-322.29 1710.22,-329.26"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L110" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L110">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L110" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L110">
 <text xml:space="preserve" text-anchor="start" x="1051.18" y="-449.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -501,12 +501,12 @@
 <!-- search_node/4&#45;&gt;simplex::solve/3 -->
 <g id="edge46" class="edge">
 <title>search_node/4&#45;&gt;simplex::solve/3</title>
-<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L116" xlink:title="calls">
+<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L116" xlink:title="calls">
 <path fill="none" stroke="black" d="M802,-550.53C802,-532.28 802,-503.33 802,-481.7"/>
 <polygon fill="black" stroke="black" points="805.5,-481.77 802,-471.77 798.5,-481.77 805.5,-481.77"/>
 </a>
 </g>
-<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L116">
+<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L116">
 <text xml:space="preserve" text-anchor="start" x="802" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -525,12 +525,12 @@
 <!-- search_node/4&#45;&gt;^^option/2 -->
 <g id="edge40" class="edge">
 <title>search_node/4&#45;&gt;^^option/2</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L110" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L110" xlink:title="calls">
 <path fill="none" stroke="black" d="M745.24,-553.08C644.92,-526.12 430.32,-465.74 255,-398 203.53,-378.12 146.42,-350.77 108.17,-331.66"/>
 <polygon fill="black" stroke="black" points="109.76,-328.54 99.25,-327.18 106.62,-334.79 109.76,-328.54"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L110" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L110">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L110" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L110">
 <text xml:space="preserve" text-anchor="start" x="461.4" y="-449.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -549,12 +549,12 @@
 <!-- search_node/4&#45;&gt;^^relax_problem/2 -->
 <g id="edge41" class="edge">
 <title>search_node/4&#45;&gt;^^relax_problem/2</title>
-<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L116" xlink:title="calls">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L116" xlink:title="calls">
 <path fill="none" stroke="black" d="M825.39,-550.53C851.58,-530.97 894.21,-499.14 923.6,-477.19"/>
 <polygon fill="black" stroke="black" points="925.51,-480.13 931.43,-471.35 921.32,-474.53 925.51,-480.13"/>
 </a>
 </g>
-<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L116">
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L116">
 <text xml:space="preserve" text-anchor="start" x="883.62" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -562,12 +562,12 @@
 <!-- handle_relaxation/5&#45;&gt;branch_on_value/9 -->
 <g id="edge17" class="edge">
 <title>handle_relaxation/5&#45;&gt;branch_on_value/9</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="calls">
 <path fill="none" stroke="black" d="M627.02,-470.39C610.14,-491.84 585,-530.12 585,-568 585,-921 585,-921 585,-921 585,-956.35 559.83,-989.34 538.65,-1010.84"/>
 <polygon fill="black" stroke="black" points="536.31,-1008.23 531.58,-1017.72 541.19,-1013.25 536.31,-1008.23"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L142">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L142">
 <text xml:space="preserve" text-anchor="start" x="585" y="-742.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -577,7 +577,7 @@
 <title>bound_pruned/4</title>
 <polygon fill="cornsilk" stroke="black" points="929.61,-326 810.39,-326 810.39,-290 929.61,-290 929.61,-326"/>
 <text xml:space="preserve" text-anchor="start" x="818.39" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L164">
+<g id="a_node11_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L164">
 <text xml:space="preserve" text-anchor="start" x="823.79" y="-309.71" font-family="monospace" font-size="11.00">bound_pruned/4</text>
 </a>
 </g>
@@ -589,12 +589,12 @@
 <!-- handle_relaxation/5&#45;&gt;bound_pruned/4 -->
 <g id="edge14" class="edge">
 <title>handle_relaxation/5&#45;&gt;bound_pruned/4</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="calls">
 <path fill="none" stroke="black" d="M664.81,-433.68C689.78,-415.04 731.29,-384.98 769,-362 786.67,-351.23 806.74,-340.43 824.31,-331.4"/>
 <polygon fill="black" stroke="black" points="825.65,-334.65 832.98,-327 822.48,-328.41 825.65,-334.65"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L142">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L142">
 <text xml:space="preserve" text-anchor="start" x="769" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -604,7 +604,7 @@
 <title>fractional_variable/8</title>
 <polygon fill="cornsilk" stroke="black" points="1112.71,-326 947.29,-326 947.29,-290 1112.71,-290 1112.71,-326"/>
 <text xml:space="preserve" text-anchor="start" x="955.29" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node12_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L171">
+<g id="a_node12_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L171">
 <text xml:space="preserve" text-anchor="start" x="960.69" y="-309.71" font-family="monospace" font-size="11.00">fractional_variable/8</text>
 </a>
 </g>
@@ -616,12 +616,12 @@
 <!-- handle_relaxation/5&#45;&gt;fractional_variable/8 -->
 <g id="edge16" class="edge">
 <title>handle_relaxation/5&#45;&gt;fractional_variable/8</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="calls">
 <path fill="none" stroke="black" d="M718.48,-433.92C744.58,-425.77 772.97,-414.17 796,-398 812.81,-386.2 807.73,-373.14 825,-362 843.83,-349.85 891.22,-337.26 935.7,-327.39"/>
 <polygon fill="black" stroke="black" points="936.42,-330.82 945.44,-325.27 934.93,-323.98 936.42,-330.82"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L142">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L142">
 <text xml:space="preserve" text-anchor="start" x="825" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -631,7 +631,7 @@
 <title>branchable_domain/5</title>
 <polygon fill="cornsilk" stroke="black" points="1283.11,-326 1130.89,-326 1130.89,-290 1283.11,-290 1283.11,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1138.89" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node17_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L211">
+<g id="a_node17_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L211">
 <text xml:space="preserve" text-anchor="start" x="1144.29" y="-309.71" font-family="monospace" font-size="11.00">branchable_domain/5</text>
 </a>
 </g>
@@ -643,12 +643,12 @@
 <!-- handle_relaxation/5&#45;&gt;branchable_domain/5 -->
 <g id="edge12" class="edge">
 <title>handle_relaxation/5&#45;&gt;branchable_domain/5</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L135" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L135" xlink:title="calls">
 <path fill="none" stroke="black" d="M718.42,-434.39C773.71,-421.92 840.62,-405.72 852,-398 868.33,-386.92 861.13,-372.25 878,-362 968.66,-306.92 1011.22,-342.3 1119.53,-326.25"/>
 <polygon fill="black" stroke="black" points="1119.77,-329.76 1129.08,-324.72 1118.66,-322.85 1119.77,-329.76"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L135">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L135">
 <text xml:space="preserve" text-anchor="start" x="878" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -658,7 +658,7 @@
 <title>branch_on_domain/8</title>
 <polygon fill="cornsilk" stroke="black" points="273.81,-326 128.19,-326 128.19,-290 273.81,-290 273.81,-326"/>
 <text xml:space="preserve" text-anchor="start" x="136.19" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node18_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L229">
+<g id="a_node18_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L229">
 <text xml:space="preserve" text-anchor="start" x="141.59" y="-309.71" font-family="monospace" font-size="11.00">branch_on_domain/8</text>
 </a>
 </g>
@@ -670,12 +670,12 @@
 <!-- handle_relaxation/5&#45;&gt;branch_on_domain/8 -->
 <g id="edge13" class="edge">
 <title>handle_relaxation/5&#45;&gt;branch_on_domain/8</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L135" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L135" xlink:title="calls">
 <path fill="none" stroke="black" d="M565.54,-436.19C527.05,-427.43 480.16,-414.74 440,-398 410.94,-385.89 407.85,-374.58 379,-362 349.12,-348.97 315.09,-337.97 284.84,-329.42"/>
 <polygon fill="black" stroke="black" points="285.91,-326.08 275.34,-326.79 284.04,-332.83 285.91,-326.08"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L135">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L135">
 <text xml:space="preserve" text-anchor="start" x="440" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -685,7 +685,7 @@
 <title>snap_discrete_values/3</title>
 <polygon fill="cornsilk" stroke="black" points="1703.01,-326 1530.99,-326 1530.99,-290 1703.01,-290 1703.01,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1538.99" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node23_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L261" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L261">
+<g id="a_node23_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L261" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L261">
 <text xml:space="preserve" text-anchor="start" x="1544.39" y="-309.71" font-family="monospace" font-size="11.00">snap_discrete_values/3</text>
 </a>
 </g>
@@ -697,12 +697,12 @@
 <!-- handle_relaxation/5&#45;&gt;snap_discrete_values/3 -->
 <g id="edge18" class="edge">
 <title>handle_relaxation/5&#45;&gt;snap_discrete_values/3</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="calls">
 <path fill="none" stroke="black" d="M718.43,-435.56C721.32,-435.02 724.19,-434.5 727,-434 828.42,-415.89 869.23,-453.55 956,-398 972.19,-387.63 963.35,-371.63 980,-362 1081.51,-303.25 1384.36,-338.52 1519.24,-326.09"/>
 <polygon fill="black" stroke="black" points="1519.52,-329.58 1529.09,-325.04 1518.77,-322.62 1519.52,-329.58"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L142">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L142">
 <text xml:space="preserve" text-anchor="start" x="980" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -712,7 +712,7 @@
 <title>evaluate_problem_objective/3</title>
 <polygon fill="cornsilk" stroke="black" points="1512.82,-326 1301.18,-326 1301.18,-290 1512.82,-290 1512.82,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1309.18" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node25_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L277" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L277">
+<g id="a_node25_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L277" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L277">
 <text xml:space="preserve" text-anchor="start" x="1314.58" y="-309.71" font-family="monospace" font-size="11.00">evaluate_problem_objective/3</text>
 </a>
 </g>
@@ -724,12 +724,12 @@
 <!-- handle_relaxation/5&#45;&gt;evaluate_problem_objective/3 -->
 <g id="edge19" class="edge">
 <title>handle_relaxation/5&#45;&gt;evaluate_problem_objective/3</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="calls">
 <path fill="none" stroke="black" d="M718.59,-435.66C796.05,-420.12 904.5,-398.33 905,-398 920.97,-387.29 912.51,-371.9 929,-362 995.71,-321.93 1194.72,-334.77 1289.52,-326.09"/>
 <polygon fill="black" stroke="black" points="1289.74,-329.59 1299.31,-325.05 1289,-322.62 1289.74,-329.59"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L142">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L142">
 <text xml:space="preserve" text-anchor="start" x="929" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -739,7 +739,7 @@
 <title>update_incumbent/5</title>
 <polygon fill="cornsilk" stroke="black" points="437.81,-326 292.19,-326 292.19,-290 437.81,-290 437.81,-326"/>
 <text xml:space="preserve" text-anchor="start" x="300.19" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node27_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L286" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L286">
+<g id="a_node27_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L286" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L286">
 <text xml:space="preserve" text-anchor="start" x="305.59" y="-309.71" font-family="monospace" font-size="11.00">update_incumbent/5</text>
 </a>
 </g>
@@ -751,12 +751,12 @@
 <!-- handle_relaxation/5&#45;&gt;update_incumbent/5 -->
 <g id="edge20" class="edge">
 <title>handle_relaxation/5&#45;&gt;update_incumbent/5</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="calls">
 <path fill="none" stroke="black" d="M608.03,-433.59C557.95,-407.91 464.28,-359.89 409,-331.55"/>
 <polygon fill="black" stroke="black" points="410.65,-328.47 400.16,-327.02 407.46,-334.7 410.65,-328.47"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L142">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L142">
 <text xml:space="preserve" text-anchor="start" x="536.46" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -766,7 +766,7 @@
 <title>increment_pruned/2</title>
 <polygon fill="cornsilk" stroke="black" points="601.81,-326 456.19,-326 456.19,-290 601.81,-290 601.81,-326"/>
 <text xml:space="preserve" text-anchor="start" x="464.19" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node31_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L307" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L307">
+<g id="a_node31_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L307" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L307">
 <text xml:space="preserve" text-anchor="start" x="469.59" y="-309.71" font-family="monospace" font-size="11.00">increment_pruned/2</text>
 </a>
 </g>
@@ -778,12 +778,12 @@
 <!-- handle_relaxation/5&#45;&gt;increment_pruned/2 -->
 <g id="edge15" class="edge">
 <title>handle_relaxation/5&#45;&gt;increment_pruned/2</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="calls">
 <path fill="none" stroke="black" d="M628.14,-433.59C608.47,-408.86 572.3,-363.41 549.51,-334.77"/>
 <polygon fill="black" stroke="black" points="552.52,-332.94 543.56,-327.3 547.05,-337.3 552.52,-332.94"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L142">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L142">
 <text xml:space="preserve" text-anchor="start" x="598.94" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -793,7 +793,7 @@
 <title>increment_infeasible/2</title>
 <polygon fill="cornsilk" stroke="black" points="792.01,-326 619.99,-326 619.99,-290 792.01,-290 792.01,-326"/>
 <text xml:space="preserve" text-anchor="start" x="627.99" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node32_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L310" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L310">
+<g id="a_node32_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L310" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L310">
 <text xml:space="preserve" text-anchor="start" x="633.39" y="-309.71" font-family="monospace" font-size="11.00">increment_infeasible/2</text>
 </a>
 </g>
@@ -805,12 +805,12 @@
 <!-- handle_relaxation/5&#45;&gt;increment_infeasible/2 -->
 <g id="edge10" class="edge">
 <title>handle_relaxation/5&#45;&gt;increment_infeasible/2</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L126" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L126" xlink:title="calls">
 <path fill="none" stroke="black" d="M649.85,-433.59C660.8,-409.29 680.77,-364.97 693.71,-336.27"/>
 <polygon fill="black" stroke="black" points="696.75,-338.05 697.67,-327.49 690.37,-335.17 696.75,-338.05"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L126">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L126">
 <text xml:space="preserve" text-anchor="start" x="681.61" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -818,12 +818,12 @@
 <!-- handle_relaxation/5&#45;&gt;set_stop_status/3 -->
 <g id="edge11" class="edge">
 <title>handle_relaxation/5&#45;&gt;set_stop_status/3</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L129" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L129" xlink:title="calls">
 <path fill="none" stroke="black" d="M718.41,-435.46C721.31,-434.95 724.18,-434.46 727,-434 850.81,-413.68 901.04,-465.19 1007,-398 1023.03,-387.83 1013.59,-371.56 1030,-362 1093.13,-325.22 1597.27,-335.18 1710.07,-325.8"/>
 <polygon fill="black" stroke="black" points="1710.23,-329.3 1719.81,-324.78 1709.5,-322.34 1710.23,-329.3"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L129">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L129">
 <text xml:space="preserve" text-anchor="start" x="1030" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -831,12 +831,12 @@
 <!-- handle_relaxation/5&#45;&gt;^^discrete_variables/2 -->
 <g id="edge42" class="edge">
 <title>handle_relaxation/5&#45;&gt;^^discrete_variables/2</title>
-<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L135" xlink:title="calls">
+<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L135" xlink:title="calls">
 <path fill="none" stroke="black" d="M718.4,-435.38C721.3,-434.9 724.17,-434.43 727,-434 874.57,-411.34 924.68,-458.9 1061,-398 1082.84,-388.25 1078.87,-371.09 1101,-362 1255.99,-298.32 1682.03,-343.18 1867.29,-326.11"/>
 <polygon fill="black" stroke="black" points="1867.5,-329.6 1877.1,-325.11 1866.79,-322.64 1867.5,-329.6"/>
 </a>
 </g>
-<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L135">
+<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L135">
 <text xml:space="preserve" text-anchor="start" x="1101" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -844,12 +844,12 @@
 <!-- handle_relaxation/5&#45;&gt;^^option/2 -->
 <g id="edge43" class="edge">
 <title>handle_relaxation/5&#45;&gt;^^option/2</title>
-<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="calls">
+<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="calls">
 <path fill="none" stroke="black" d="M565.56,-441.31C505.69,-432.74 420.65,-418.41 348,-398 305.33,-386.01 297.15,-375.69 255,-362 198.78,-343.74 181.03,-343.23 121.53,-326.65"/>
 <polygon fill="black" stroke="black" points="122.8,-323.37 112.23,-324.01 120.89,-330.1 122.8,-323.37"/>
 </a>
 </g>
-<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L142">
+<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L142">
 <text xml:space="preserve" text-anchor="start" x="348" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -859,7 +859,7 @@
 <title>first_fractional_variable/7</title>
 <polygon fill="cornsilk" stroke="black" points="1318.52,-209 1113.48,-209 1113.48,-173 1318.52,-173 1318.52,-209"/>
 <text xml:space="preserve" text-anchor="start" x="1121.48" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node13_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L177">
+<g id="a_node13_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L177">
 <text xml:space="preserve" text-anchor="start" x="1126.89" y="-192.71" font-family="monospace" font-size="11.00">first_fractional_variable/7</text>
 </a>
 </g>
@@ -871,12 +871,12 @@
 <!-- fractional_variable/8&#45;&gt;first_fractional_variable/7 -->
 <g id="edge21" class="edge">
 <title>fractional_variable/8&#45;&gt;first_fractional_variable/7</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L171" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L171" xlink:title="calls">
 <path fill="none" stroke="black" d="M1058.25,-289.53C1090.3,-269.72 1142.71,-237.31 1178.25,-215.34"/>
 <polygon fill="black" stroke="black" points="1179.84,-218.47 1186.5,-210.24 1176.16,-212.52 1179.84,-218.47"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L171">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L171">
 <text xml:space="preserve" text-anchor="start" x="1128.58" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -886,7 +886,7 @@
 <title>most_fractional_variable/5</title>
 <polygon fill="cornsilk" stroke="black" points="1095.21,-209 896.79,-209 896.79,-173 1095.21,-173 1095.21,-209"/>
 <text xml:space="preserve" text-anchor="start" x="904.79" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node14_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L185">
+<g id="a_node14_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L185">
 <text xml:space="preserve" text-anchor="start" x="910.19" y="-192.71" font-family="monospace" font-size="11.00">most_fractional_variable/5</text>
 </a>
 </g>
@@ -898,12 +898,12 @@
 <!-- fractional_variable/8&#45;&gt;most_fractional_variable/5 -->
 <g id="edge22" class="edge">
 <title>fractional_variable/8&#45;&gt;most_fractional_variable/5</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L174" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L174" xlink:title="calls">
 <path fill="none" stroke="black" d="M1024.84,-289.53C1019.39,-271.11 1010.72,-241.79 1004.31,-220.1"/>
 <polygon fill="black" stroke="black" points="1007.72,-219.3 1001.53,-210.71 1001.01,-221.29 1007.72,-219.3"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L174" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L174">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L174" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L174">
 <text xml:space="preserve" text-anchor="start" x="1014.02" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -913,7 +913,7 @@
 <title>fractionality/2</title>
 <polygon fill="cornsilk" stroke="black" points="1255.91,-92 1130.09,-92 1130.09,-56 1255.91,-56 1255.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1138.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node16_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L204" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L204">
+<g id="a_node16_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L204" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L204">
 <text xml:space="preserve" text-anchor="start" x="1143.49" y="-75.71" font-family="monospace" font-size="11.00">fractionality/2</text>
 </a>
 </g>
@@ -925,12 +925,12 @@
 <!-- first_fractional_variable/7&#45;&gt;fractionality/2 -->
 <g id="edge23" class="edge">
 <title>first_fractional_variable/7&#45;&gt;fractionality/2</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L177" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L177" xlink:title="calls">
 <path fill="none" stroke="black" d="M1212.51,-172.53C1208.84,-154.19 1203.01,-125.06 1198.68,-103.4"/>
 <polygon fill="black" stroke="black" points="1202.14,-102.86 1196.75,-93.74 1195.28,-104.23 1202.14,-102.86"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L177">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L177">
 <text xml:space="preserve" text-anchor="start" x="1205.19" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -952,12 +952,12 @@
 <!-- first_fractional_variable/7&#45;&gt;list::memberchk/2 -->
 <g id="edge47" class="edge">
 <title>first_fractional_variable/7&#45;&gt;list::memberchk/2</title>
-<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L177" xlink:title="calls">
+<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L177" xlink:title="calls">
 <path fill="none" stroke="black" d="M1246.83,-172.53C1281.96,-152.63 1339.5,-120.04 1378.29,-98.06"/>
 <polygon fill="black" stroke="black" points="1379.92,-101.16 1386.89,-93.19 1376.47,-95.07 1379.92,-101.16"/>
 </a>
 </g>
-<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L177">
+<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L177">
 <text xml:space="preserve" text-anchor="start" x="1323.59" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -967,7 +967,7 @@
 <title>more_fractional_candidate/5</title>
 <polygon fill="cornsilk" stroke="black" points="1098.52,-92 893.48,-92 893.48,-56 1098.52,-56 1098.52,-92"/>
 <text xml:space="preserve" text-anchor="start" x="901.48" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node15_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L197" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L197">
+<g id="a_node15_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L197" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L197">
 <text xml:space="preserve" text-anchor="start" x="906.89" y="-75.71" font-family="monospace" font-size="11.00">more_fractional_candidate/5</text>
 </a>
 </g>
@@ -979,12 +979,12 @@
 <!-- most_fractional_variable/5&#45;&gt;more_fractional_candidate/5 -->
 <g id="edge25" class="edge">
 <title>most_fractional_variable/5&#45;&gt;more_fractional_candidate/5</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L187" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L187" xlink:title="calls">
 <path fill="none" stroke="black" d="M996,-172.53C996,-154.28 996,-125.33 996,-103.7"/>
 <polygon fill="black" stroke="black" points="999.5,-103.77 996,-93.77 992.5,-103.77 999.5,-103.77"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L187" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L187">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L187" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L187">
 <text xml:space="preserve" text-anchor="start" x="996" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -992,12 +992,12 @@
 <!-- most_fractional_variable/5&#45;&gt;fractionality/2 -->
 <g id="edge24" class="edge">
 <title>most_fractional_variable/5&#45;&gt;fractionality/2</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L187" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L187" xlink:title="calls">
 <path fill="none" stroke="black" d="M1024.29,-172.68C1044.91,-160.12 1073.57,-142.82 1099,-128 1116.15,-118 1135.22,-107.2 1151.67,-97.97"/>
 <polygon fill="black" stroke="black" points="1153.2,-101.12 1160.22,-93.18 1149.78,-95.01 1153.2,-101.12"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L187" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L187">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L187" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L187">
 <text xml:space="preserve" text-anchor="start" x="1099" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1005,12 +1005,12 @@
 <!-- most_fractional_variable/5&#45;&gt;list::memberchk/2 -->
 <g id="edge48" class="edge">
 <title>most_fractional_variable/5&#45;&gt;list::memberchk/2</title>
-<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L187" xlink:title="calls">
+<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L187" xlink:title="calls">
 <path fill="none" stroke="black" d="M1040.61,-172.63C1076.11,-159.24 1127.24,-140.89 1173,-128 1227.52,-112.64 1289.91,-99.25 1338.22,-89.76"/>
 <polygon fill="black" stroke="black" points="1338.61,-93.25 1347.76,-87.91 1337.27,-86.38 1338.61,-93.25"/>
 </a>
 </g>
-<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L187" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L187">
+<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L187" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L187">
 <text xml:space="preserve" text-anchor="start" x="1173" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1018,12 +1018,12 @@
 <!-- branch_on_domain/8&#45;&gt;branch_on_bounds/9 -->
 <g id="edge27" class="edge">
 <title>branch_on_domain/8&#45;&gt;branch_on_bounds/9</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L229" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L229" xlink:title="calls">
 <path fill="none" stroke="black" d="M212.6,-326.07C229.01,-351.91 257,-403.03 257,-451 257,-804 257,-804 257,-804 257,-834 264.62,-867.55 271.08,-890.64"/>
 <polygon fill="black" stroke="black" points="267.72,-891.61 273.89,-900.23 274.44,-889.65 267.72,-891.61"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L229">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L229">
 <text xml:space="preserve" text-anchor="start" x="257" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1033,7 +1033,7 @@
 <title>branch_in_order/10</title>
 <polygon fill="cornsilk" stroke="black" points="421.81,-821 276.19,-821 276.19,-785 421.81,-785 421.81,-821"/>
 <text xml:space="preserve" text-anchor="start" x="284.19" y="-805.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node20_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L237" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L237">
+<g id="a_node20_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L237" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L237">
 <text xml:space="preserve" text-anchor="start" x="289.59" y="-804.71" font-family="monospace" font-size="11.00">branch_in_order/10</text>
 </a>
 </g>
@@ -1045,12 +1045,12 @@
 <!-- branch_on_bounds/9&#45;&gt;branch_in_order/10 -->
 <g id="edge28" class="edge">
 <title>branch_on_bounds/9&#45;&gt;branch_in_order/10</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L233" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L233" xlink:title="calls">
 <path fill="none" stroke="black" d="M290.48,-901.53C301.74,-882.77 319.78,-852.7 332.86,-830.91"/>
 <polygon fill="black" stroke="black" points="335.73,-832.93 337.87,-822.55 329.72,-829.33 335.73,-832.93"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L233" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L233">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L233" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L233">
 <text xml:space="preserve" text-anchor="start" x="316.57" y="-859.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1058,12 +1058,12 @@
 <!-- branch_on_bounds/9&#45;&gt;^^option/2 -->
 <g id="edge44" class="edge">
 <title>branch_on_bounds/9&#45;&gt;^^option/2</title>
-<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L233" xlink:title="calls">
+<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L233" xlink:title="calls">
 <path fill="none" stroke="black" d="M242.98,-901.58C209.03,-882.74 164,-849.23 164,-804 164,-804 164,-804 164,-451 164,-402.91 125.18,-359.62 95.92,-333.82"/>
 <polygon fill="black" stroke="black" points="98.23,-331.19 88.35,-327.37 93.69,-336.52 98.23,-331.19"/>
 </a>
 </g>
-<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L233" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L233">
+<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L233" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L233">
 <text xml:space="preserve" text-anchor="start" x="164" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1073,7 +1073,7 @@
 <title>search_optional_branch/7</title>
 <polygon fill="cornsilk" stroke="black" points="565.61,-704 380.39,-704 380.39,-668 565.61,-668 565.61,-704"/>
 <text xml:space="preserve" text-anchor="start" x="388.39" y="-688.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node21_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L251" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L251">
+<g id="a_node21_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L251" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L251">
 <text xml:space="preserve" text-anchor="start" x="393.79" y="-687.71" font-family="monospace" font-size="11.00">search_optional_branch/7</text>
 </a>
 </g>
@@ -1085,12 +1085,12 @@
 <!-- branch_in_order/10&#45;&gt;search_optional_branch/7 -->
 <g id="edge29" class="edge">
 <title>branch_in_order/10&#45;&gt;search_optional_branch/7</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L237" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L237" xlink:title="calls">
 <path fill="none" stroke="black" d="M367.83,-784.53C388.71,-765.17 422.55,-733.79 446.19,-711.86"/>
 <polygon fill="black" stroke="black" points="448.33,-714.65 453.29,-705.28 443.57,-709.52 448.33,-714.65"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L237" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L237">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L237" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L237">
 <text xml:space="preserve" text-anchor="start" x="414.72" y="-742.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1100,7 +1100,7 @@
 <title>stopped/1</title>
 <polygon fill="cornsilk" stroke="black" points="362.11,-704 275.89,-704 275.89,-668 362.11,-668 362.11,-704"/>
 <text xml:space="preserve" text-anchor="start" x="283.89" y="-688.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node22_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L258" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L258">
+<g id="a_node22_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L258" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L258">
 <text xml:space="preserve" text-anchor="start" x="289.3" y="-687.71" font-family="monospace" font-size="11.00">stopped/1</text>
 </a>
 </g>
@@ -1112,12 +1112,12 @@
 <!-- branch_in_order/10&#45;&gt;stopped/1 -->
 <g id="edge30" class="edge">
 <title>branch_in_order/10&#45;&gt;stopped/1</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L237" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L237" xlink:title="calls">
 <path fill="none" stroke="black" d="M344.44,-784.53C339.64,-766.11 331.99,-736.79 326.33,-715.1"/>
 <polygon fill="black" stroke="black" points="329.79,-714.51 323.88,-705.72 323.02,-716.28 329.79,-714.51"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L237" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L237">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L237" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L237">
 <text xml:space="preserve" text-anchor="start" x="334.9" y="-742.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1125,12 +1125,12 @@
 <!-- search_optional_branch/7&#45;&gt;search_node/4 -->
 <g id="edge31" class="edge">
 <title>search_optional_branch/7&#45;&gt;search_node/4</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L254" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L254" xlink:title="calls">
 <path fill="none" stroke="black" d="M522.97,-667.53C581.59,-647.04 678.75,-613.08 741.56,-591.13"/>
 <polygon fill="black" stroke="black" points="742.39,-594.54 750.67,-587.94 740.08,-587.94 742.39,-594.54"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L254" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L254">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L254" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L254">
 <text xml:space="preserve" text-anchor="start" x="647.36" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1149,12 +1149,12 @@
 <!-- search_optional_branch/7&#45;&gt;^^tighten_variable_bounds/5 -->
 <g id="edge45" class="edge">
 <title>search_optional_branch/7&#45;&gt;^^tighten_variable_bounds/5</title>
-<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L254" xlink:title="calls">
+<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L254" xlink:title="calls">
 <path fill="none" stroke="black" d="M471.48,-667.53C469.89,-649.28 467.38,-620.33 465.5,-598.7"/>
 <polygon fill="black" stroke="black" points="468.98,-598.42 464.63,-588.76 462.01,-599.03 468.98,-598.42"/>
 </a>
 </g>
-<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L254" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L254">
+<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L254" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L254">
 <text xml:space="preserve" text-anchor="start" x="468.3" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1164,7 +1164,7 @@
 <title>replace_value/4</title>
 <polygon fill="cornsilk" stroke="black" points="1645.91,-209 1520.09,-209 1520.09,-173 1645.91,-173 1645.91,-209"/>
 <text xml:space="preserve" text-anchor="start" x="1528.09" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node24_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L271" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L271">
+<g id="a_node24_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L271" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L271">
 <text xml:space="preserve" text-anchor="start" x="1533.49" y="-192.71" font-family="monospace" font-size="11.00">replace_value/4</text>
 </a>
 </g>
@@ -1176,12 +1176,12 @@
 <!-- snap_discrete_values/3&#45;&gt;replace_value/4 -->
 <g id="edge32" class="edge">
 <title>snap_discrete_values/3&#45;&gt;replace_value/4</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L262" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L262" xlink:title="calls">
 <path fill="none" stroke="black" d="M1611.84,-289.53C1606.39,-271.11 1597.72,-241.79 1591.31,-220.1"/>
 <polygon fill="black" stroke="black" points="1594.72,-219.3 1588.53,-210.71 1588.01,-221.29 1594.72,-219.3"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L262" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L262">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L262" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L262">
 <text xml:space="preserve" text-anchor="start" x="1601.02" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1189,12 +1189,12 @@
 <!-- snap_discrete_values/3&#45;&gt;list::memberchk/2 -->
 <g id="edge49" class="edge">
 <title>snap_discrete_values/3&#45;&gt;list::memberchk/2</title>
-<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L262" xlink:title="calls">
+<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L262" xlink:title="calls">
 <path fill="none" stroke="black" d="M1630.5,-289.5C1649.59,-262.46 1679.57,-209.8 1655,-173 1620.74,-121.67 1554.03,-97.19 1500.25,-85.53"/>
 <polygon fill="black" stroke="black" points="1500.97,-82.11 1490.47,-83.54 1499.57,-88.97 1500.97,-82.11"/>
 </a>
 </g>
-<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L262" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L262">
+<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L262" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L262">
 <text xml:space="preserve" text-anchor="start" x="1664.26" y="-188.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1204,7 +1204,7 @@
 <title>evaluate_expression/4</title>
 <polygon fill="cornsilk" stroke="black" points="1501.71,-209 1336.29,-209 1336.29,-173 1501.71,-173 1501.71,-209"/>
 <text xml:space="preserve" text-anchor="start" x="1344.29" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node26_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L280" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L280">
+<g id="a_node26_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L280" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L280">
 <text xml:space="preserve" text-anchor="start" x="1349.69" y="-192.71" font-family="monospace" font-size="11.00">evaluate_expression/4</text>
 </a>
 </g>
@@ -1216,12 +1216,12 @@
 <!-- evaluate_problem_objective/3&#45;&gt;evaluate_expression/4 -->
 <g id="edge33" class="edge">
 <title>evaluate_problem_objective/3&#45;&gt;evaluate_expression/4</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L277" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L277" xlink:title="calls">
 <path fill="none" stroke="black" d="M1408.82,-289.53C1410.73,-271.28 1413.75,-242.33 1416.01,-220.7"/>
 <polygon fill="black" stroke="black" points="1419.49,-221.07 1417.04,-210.76 1412.52,-220.34 1419.49,-221.07"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L277" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L277">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L277" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L277">
 <text xml:space="preserve" text-anchor="start" x="1413.36" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1229,12 +1229,12 @@
 <!-- evaluate_expression/4&#45;&gt;list::memberchk/2 -->
 <g id="edge50" class="edge">
 <title>evaluate_expression/4&#45;&gt;list::memberchk/2</title>
-<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L281" xlink:title="calls">
+<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L281" xlink:title="calls">
 <path fill="none" stroke="black" d="M1419,-172.53C1419,-154.28 1419,-125.33 1419,-103.7"/>
 <polygon fill="black" stroke="black" points="1422.5,-103.77 1419,-93.77 1415.5,-103.77 1422.5,-103.77"/>
 </a>
 </g>
-<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L281" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L281">
+<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L281" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L281">
 <text xml:space="preserve" text-anchor="start" x="1419" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1244,7 +1244,7 @@
 <title>better_objective/3</title>
 <polygon fill="cornsilk" stroke="black" points="437.81,-209 292.19,-209 292.19,-173 437.81,-173 437.81,-209"/>
 <text xml:space="preserve" text-anchor="start" x="300.19" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node28_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L297" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L297">
+<g id="a_node28_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L297" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L297">
 <text xml:space="preserve" text-anchor="start" x="305.59" y="-192.71" font-family="monospace" font-size="11.00">better_objective/3</text>
 </a>
 </g>
@@ -1256,12 +1256,12 @@
 <!-- update_incumbent/5&#45;&gt;better_objective/3 -->
 <g id="edge34" class="edge">
 <title>update_incumbent/5&#45;&gt;better_objective/3</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L289" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L289" xlink:title="calls">
 <path fill="none" stroke="black" d="M365,-289.53C365,-271.28 365,-242.33 365,-220.7"/>
 <polygon fill="black" stroke="black" points="368.5,-220.77 365,-210.77 361.5,-220.77 368.5,-220.77"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L289" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L289">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L289" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L289">
 <text xml:space="preserve" text-anchor="start" x="365" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1269,12 +1269,12 @@
 <!-- add_relaxation_iterations/3&#45;&gt;list::memberchk/2 -->
 <g id="edge51" class="edge">
 <title>add_relaxation_iterations/3&#45;&gt;list::memberchk/2</title>
-<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L300" xlink:title="calls">
+<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L300" xlink:title="calls">
 <path fill="none" stroke="black" d="M1342.67,-376.06C1557.32,-369.42 2035.82,-351.79 2060,-326 2228.86,-145.87 1707.72,-93.01 1500.28,-79.31"/>
 <polygon fill="black" stroke="black" points="1500.57,-75.82 1490.36,-78.67 1500.12,-82.81 1500.57,-75.82"/>
 </a>
 </g>
-<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L300" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_programming/milp_branch_and_bound.lgt#L300">
+<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L300" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_programming/milp_branch_and_bound.lgt#L300">
 <text xml:space="preserve" text-anchor="start" x="2092.35" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>

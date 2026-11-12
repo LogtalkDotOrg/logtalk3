@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 3715,-140 3715,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol term_io_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 15:49</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 20:36</text>
 <g id="clust1" class="cluster">
 <title>cluster_term_io_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="term_io_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 3691,-46 3691,-46 3697,-46 3703,-52 3703,-58 3703,-58 3703,-116 3703,-116 3703,-122 3697,-128 3691,-128 3691,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">term_io_protocol</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>read_term_from_atom/3</title>
 <polygon fill="springgreen" stroke="black" points="183.71,-92 18.29,-92 18.29,-56 183.71,-56 183.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="26.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L34" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L34">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L34" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L34">
 <text xml:space="preserve" text-anchor="start" x="31.69" y="-75.71" font-family="monospace" font-size="11.00">read_term_from_atom/3</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>read_from_atom/2</title>
 <polygon fill="springgreen" stroke="black" points="334.21,-92 201.79,-92 201.79,-56 334.21,-56 334.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="209.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L50">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L50">
 <text xml:space="preserve" text-anchor="start" x="215.19" y="-75.71" font-family="monospace" font-size="11.00">read_from_atom/2</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>read_term_from_chars/3</title>
 <polygon fill="springgreen" stroke="black" points="524.01,-92 351.99,-92 351.99,-56 524.01,-56 524.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="359.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L62">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L62">
 <text xml:space="preserve" text-anchor="start" x="365.39" y="-75.71" font-family="monospace" font-size="11.00">read_term_from_chars/3</text>
 </a>
 </g>
@@ -71,7 +71,7 @@
 <title>read_term_from_chars/4</title>
 <polygon fill="springgreen" stroke="black" points="714.01,-92 541.99,-92 541.99,-56 714.01,-56 714.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="549.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L79">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L79">
 <text xml:space="preserve" text-anchor="start" x="555.39" y="-75.71" font-family="monospace" font-size="11.00">read_term_from_chars/4</text>
 </a>
 </g>
@@ -85,7 +85,7 @@
 <title>read_from_chars/2</title>
 <polygon fill="springgreen" stroke="black" points="871.51,-92 732.49,-92 732.49,-56 871.51,-56 871.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="740.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L95">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="745.89" y="-75.71" font-family="monospace" font-size="11.00">read_from_chars/2</text>
 </a>
 </g>
@@ -99,7 +99,7 @@
 <title>read_term_from_codes/3</title>
 <polygon fill="springgreen" stroke="black" points="1062.01,-92 889.99,-92 889.99,-56 1062.01,-56 1062.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="897.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L107">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L107">
 <text xml:space="preserve" text-anchor="start" x="903.39" y="-75.71" font-family="monospace" font-size="11.00">read_term_from_codes/3</text>
 </a>
 </g>
@@ -113,7 +113,7 @@
 <title>read_term_from_codes/4</title>
 <polygon fill="springgreen" stroke="black" points="1252.01,-92 1079.99,-92 1079.99,-56 1252.01,-56 1252.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1087.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L124">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L124">
 <text xml:space="preserve" text-anchor="start" x="1093.39" y="-75.71" font-family="monospace" font-size="11.00">read_term_from_codes/4</text>
 </a>
 </g>
@@ -127,7 +127,7 @@
 <title>read_from_codes/2</title>
 <polygon fill="springgreen" stroke="black" points="1409.51,-92 1270.49,-92 1270.49,-56 1409.51,-56 1409.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1278.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L140">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L140">
 <text xml:space="preserve" text-anchor="start" x="1283.89" y="-75.71" font-family="monospace" font-size="11.00">read_from_codes/2</text>
 </a>
 </g>
@@ -141,7 +141,7 @@
 <title>write_term_to_atom/3</title>
 <polygon fill="springgreen" stroke="black" points="1586.41,-92 1427.59,-92 1427.59,-56 1586.41,-56 1586.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1435.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L157">
+<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L157">
 <text xml:space="preserve" text-anchor="start" x="1440.99" y="-75.71" font-family="monospace" font-size="11.00">write_term_to_atom/3</text>
 </a>
 </g>
@@ -155,7 +155,7 @@
 <title>write_to_atom/2</title>
 <polygon fill="springgreen" stroke="black" points="1729.91,-92 1604.09,-92 1604.09,-56 1729.91,-56 1729.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1612.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L171">
+<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L171">
 <text xml:space="preserve" text-anchor="start" x="1617.49" y="-75.71" font-family="monospace" font-size="11.00">write_to_atom/2</text>
 </a>
 </g>
@@ -169,7 +169,7 @@
 <title>write_term_to_chars/3</title>
 <polygon fill="springgreen" stroke="black" points="1913.71,-92 1748.29,-92 1748.29,-56 1913.71,-56 1913.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1756.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L178">
+<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L178">
 <text xml:space="preserve" text-anchor="start" x="1761.69" y="-75.71" font-family="monospace" font-size="11.00">write_term_to_chars/3</text>
 </a>
 </g>
@@ -183,7 +183,7 @@
 <title>write_term_to_chars/4</title>
 <polygon fill="springgreen" stroke="black" points="2096.71,-92 1931.29,-92 1931.29,-56 2096.71,-56 2096.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1939.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L192" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L192">
+<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L192" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L192">
 <text xml:space="preserve" text-anchor="start" x="1944.69" y="-75.71" font-family="monospace" font-size="11.00">write_term_to_chars/4</text>
 </a>
 </g>
@@ -197,7 +197,7 @@
 <title>write_to_chars/2</title>
 <polygon fill="springgreen" stroke="black" points="2247.21,-92 2114.79,-92 2114.79,-56 2247.21,-56 2247.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2122.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L206" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L206">
+<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L206" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L206">
 <text xml:space="preserve" text-anchor="start" x="2128.19" y="-75.71" font-family="monospace" font-size="11.00">write_to_chars/2</text>
 </a>
 </g>
@@ -211,7 +211,7 @@
 <title>write_term_to_codes/3</title>
 <polygon fill="springgreen" stroke="black" points="2430.71,-92 2265.29,-92 2265.29,-56 2430.71,-56 2430.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2273.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node14_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L213">
+<g id="a_node14_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L213">
 <text xml:space="preserve" text-anchor="start" x="2278.69" y="-75.71" font-family="monospace" font-size="11.00">write_term_to_codes/3</text>
 </a>
 </g>
@@ -225,7 +225,7 @@
 <title>write_term_to_codes/4</title>
 <polygon fill="springgreen" stroke="black" points="2613.71,-92 2448.29,-92 2448.29,-56 2613.71,-56 2613.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2456.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node15_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L227">
+<g id="a_node15_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L227">
 <text xml:space="preserve" text-anchor="start" x="2461.69" y="-75.71" font-family="monospace" font-size="11.00">write_term_to_codes/4</text>
 </a>
 </g>
@@ -239,7 +239,7 @@
 <title>write_to_codes/2</title>
 <polygon fill="springgreen" stroke="black" points="2764.21,-92 2631.79,-92 2631.79,-56 2764.21,-56 2764.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2639.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node16_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L241" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L241">
+<g id="a_node16_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L241" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L241">
 <text xml:space="preserve" text-anchor="start" x="2645.19" y="-75.71" font-family="monospace" font-size="11.00">write_to_codes/2</text>
 </a>
 </g>
@@ -253,7 +253,7 @@
 <title>format_to_atom/3</title>
 <polygon fill="springgreen" stroke="black" points="2914.21,-92 2781.79,-92 2781.79,-56 2914.21,-56 2914.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2789.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node17_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L248" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L248">
+<g id="a_node17_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L248" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L248">
 <text xml:space="preserve" text-anchor="start" x="2795.19" y="-75.71" font-family="monospace" font-size="11.00">format_to_atom/3</text>
 </a>
 </g>
@@ -267,7 +267,7 @@
 <title>format_to_chars/3</title>
 <polygon fill="springgreen" stroke="black" points="3071.51,-92 2932.49,-92 2932.49,-56 3071.51,-56 3071.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2940.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node18_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L255" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L255">
+<g id="a_node18_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L255" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L255">
 <text xml:space="preserve" text-anchor="start" x="2945.89" y="-75.71" font-family="monospace" font-size="11.00">format_to_chars/3</text>
 </a>
 </g>
@@ -281,7 +281,7 @@
 <title>format_to_chars/4</title>
 <polygon fill="springgreen" stroke="black" points="3228.51,-92 3089.49,-92 3089.49,-56 3228.51,-56 3228.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3097.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node19_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L262" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L262">
+<g id="a_node19_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L262" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L262">
 <text xml:space="preserve" text-anchor="start" x="3102.89" y="-75.71" font-family="monospace" font-size="11.00">format_to_chars/4</text>
 </a>
 </g>
@@ -295,7 +295,7 @@
 <title>format_to_codes/3</title>
 <polygon fill="springgreen" stroke="black" points="3385.51,-92 3246.49,-92 3246.49,-56 3385.51,-56 3385.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3254.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node20_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L269">
+<g id="a_node20_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L269">
 <text xml:space="preserve" text-anchor="start" x="3259.89" y="-75.71" font-family="monospace" font-size="11.00">format_to_codes/3</text>
 </a>
 </g>
@@ -309,7 +309,7 @@
 <title>format_to_codes/4</title>
 <polygon fill="springgreen" stroke="black" points="3542.51,-92 3403.49,-92 3403.49,-56 3542.51,-56 3542.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3411.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node21_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L276" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L276">
+<g id="a_node21_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L276" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L276">
 <text xml:space="preserve" text-anchor="start" x="3416.89" y="-75.71" font-family="monospace" font-size="11.00">format_to_codes/4</text>
 </a>
 </g>
@@ -323,7 +323,7 @@
 <title>with_output_to/2</title>
 <polygon fill="springgreen" stroke="black" points="3693.21,-92 3560.79,-92 3560.79,-56 3693.21,-56 3693.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3568.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node22_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L283" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/term_io/term_io_protocol.lgt#L283">
+<g id="a_node22_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L283" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/term_io/term_io_protocol.lgt#L283">
 <text xml:space="preserve" text-anchor="start" x="3574.19" y="-75.71" font-family="monospace" font-size="11.00">with_output_to/2</text>
 </a>
 </g>

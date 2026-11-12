@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-752 997,-752 997,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for category item_content_dataset_validation</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 15:49</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 20:36</text>
 <g id="clust1" class="cluster">
 <title>cluster_item_content_dataset_validation_category</title>
 <g id="a_clust1"><a xlink:title="item_content_dataset_validation">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 973,-46 973,-46 979,-46 985,-52 985,-58 985,-58 985,-728 985,-728 985,-734 979,-740 973,-740 973,-740 20,-740 20,-740 14,-740 8,-734 8,-728 8,-728 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-724.46" font-family="monospace" font-size="10.00" fill="dimgray">item_content_dataset_validation</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>collect_contents/3</title>
 <polygon fill="yellow" stroke="black" points="237.81,-704 92.19,-704 92.19,-668 237.81,-668 237.81,-704"/>
 <text xml:space="preserve" text-anchor="start" x="100.19" y="-688.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="105.59" y="-687.71" font-family="monospace" font-size="11.00">collect_contents/3</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>canonical_contents/3</title>
 <polygon fill="yellow" stroke="black" points="244.41,-587 85.59,-587 85.59,-551 244.41,-551 244.41,-587"/>
 <text xml:space="preserve" text-anchor="start" x="93.59" y="-571.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L54">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L54">
 <text xml:space="preserve" text-anchor="start" x="98.99" y="-570.71" font-family="monospace" font-size="11.00">canonical_contents/3</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- collect_contents/3&#45;&gt;canonical_contents/3 -->
 <g id="edge2" class="edge">
 <title>collect_contents/3&#45;&gt;canonical_contents/3</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L95" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L95" xlink:title="calls">
 <path fill="none" stroke="black" d="M165,-667.53C165,-649.28 165,-620.33 165,-598.7"/>
 <polygon fill="black" stroke="black" points="168.5,-598.77 165,-588.77 161.5,-598.77 168.5,-598.77"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L95">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="165" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>check_catalog_items/2</title>
 <polygon fill="cornsilk" stroke="black" points="645.71,-398 480.29,-398 480.29,-362 645.71,-362 645.71,-398"/>
 <text xml:space="preserve" text-anchor="start" x="488.29" y="-382.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L115">
+<g id="a_node4_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L115">
 <text xml:space="preserve" text-anchor="start" x="493.69" y="-381.71" font-family="monospace" font-size="11.00">check_catalog_items/2</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- collect_contents/3&#45;&gt;check_catalog_items/2 -->
 <g id="edge1" class="edge">
 <title>collect_contents/3&#45;&gt;check_catalog_items/2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L95" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L95" xlink:title="calls">
 <path fill="none" stroke="black" d="M187.83,-667.56C255.29,-616.04 453.83,-464.39 531.42,-405.12"/>
 <polygon fill="black" stroke="black" points="533.24,-408.14 539.06,-399.28 528.99,-402.57 533.24,-408.14"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L95">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="336.94" y="-566.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- collect_contents/3&#45;&gt;pairs::keys/2 -->
 <g id="edge12" class="edge">
 <title>collect_contents/3&#45;&gt;pairs::keys/2</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L95" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L95" xlink:title="calls">
 <path fill="none" stroke="black" d="M121.69,-667.67C84.21,-649.48 36,-616.95 36,-570 36,-570 36,-570 36,-307 36,-273.89 55.41,-240.6 71.77,-218.42"/>
 <polygon fill="black" stroke="black" points="74.51,-220.6 77.84,-210.54 68.96,-216.33 74.51,-220.6"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L95">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="36" y="-449.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -122,12 +122,12 @@
 <!-- canonical_contents/3&#45;&gt;check_catalog_items/2 -->
 <g id="edge3" class="edge">
 <title>canonical_contents/3&#45;&gt;check_catalog_items/2</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L124" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L124" xlink:title="calls">
 <path fill="none" stroke="black" d="M209.58,-550.59C256.7,-531.87 332.9,-500.64 397,-470 440.71,-449.1 489.44,-422.58 522.72,-403.95"/>
 <polygon fill="black" stroke="black" points="524.22,-407.12 531.22,-399.17 520.79,-401.02 524.22,-407.12"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L124">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L124">
 <text xml:space="preserve" text-anchor="start" x="315.88" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -137,7 +137,7 @@
 <title>content_kind/2</title>
 <polygon fill="cornsilk" stroke="black" points="257.61,-326 138.39,-326 138.39,-290 257.61,-290 257.61,-326"/>
 <text xml:space="preserve" text-anchor="start" x="146.39" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L133" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L133">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L133" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L133">
 <text xml:space="preserve" text-anchor="start" x="151.79" y="-309.71" font-family="monospace" font-size="11.00">content_kind/2</text>
 </a>
 </g>
@@ -149,12 +149,12 @@
 <!-- canonical_contents/3&#45;&gt;content_kind/2 -->
 <g id="edge4" class="edge">
 <title>canonical_contents/3&#45;&gt;content_kind/2</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L124" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L124" xlink:title="calls">
 <path fill="none" stroke="black" d="M165.49,-550.59C166.36,-524.96 168.62,-475.62 174,-434 178.32,-400.51 186.03,-362.47 191.55,-337.24"/>
 <polygon fill="black" stroke="black" points="194.9,-338.28 193.66,-327.76 188.07,-336.76 194.9,-338.28"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L124">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L124">
 <text xml:space="preserve" text-anchor="start" x="174" y="-449.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -164,7 +164,7 @@
 <title>canonical_descriptors/3</title>
 <polygon fill="cornsilk" stroke="black" points="388.31,-470 209.69,-470 209.69,-434 388.31,-434 388.31,-470"/>
 <text xml:space="preserve" text-anchor="start" x="217.69" y="-454.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L143">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L143">
 <text xml:space="preserve" text-anchor="start" x="223.09" y="-453.71" font-family="monospace" font-size="11.00">canonical_descriptors/3</text>
 </a>
 </g>
@@ -176,12 +176,12 @@
 <!-- canonical_contents/3&#45;&gt;canonical_descriptors/3 -->
 <g id="edge5" class="edge">
 <title>canonical_contents/3&#45;&gt;canonical_descriptors/3</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L124" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L124" xlink:title="calls">
 <path fill="none" stroke="black" d="M185.35,-550.53C208.01,-531.09 244.81,-499.51 270.37,-477.57"/>
 <polygon fill="black" stroke="black" points="272.44,-480.41 277.75,-471.24 267.88,-475.1 272.44,-480.41"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L124">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L124">
 <text xml:space="preserve" text-anchor="start" x="236.02" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -189,12 +189,12 @@
 <!-- canonical_contents/3&#45;&gt;pairs::keys/2 -->
 <g id="edge16" class="edge">
 <title>canonical_contents/3&#45;&gt;pairs::keys/2</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L124" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L124" xlink:title="calls">
 <path fill="none" stroke="black" d="M161.76,-550.87C150.56,-491.53 113.34,-294.41 99.36,-220.4"/>
 <polygon fill="black" stroke="black" points="102.83,-219.9 97.54,-210.72 95.95,-221.2 102.83,-219.9"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L124">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L124">
 <text xml:space="preserve" text-anchor="start" x="132.77" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -216,12 +216,12 @@
 <!-- canonical_contents/3&#45;&gt;type::check/3 -->
 <g id="edge15" class="edge">
 <title>canonical_contents/3&#45;&gt;type::check/3</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L124" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L124" xlink:title="calls">
 <path fill="none" stroke="black" d="M154.86,-550.56C116.04,-482.72 -18.63,-237 29,-173 59.99,-131.37 201.62,-100.83 288.01,-85.69"/>
 <polygon fill="black" stroke="black" points="288.54,-89.15 297.8,-84.01 287.35,-82.26 288.54,-89.15"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L124">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L124">
 <text xml:space="preserve" text-anchor="start" x="45.6" y="-305.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -231,7 +231,7 @@
 <title>check_rated_catalog/2</title>
 <polygon fill="yellow" stroke="black" points="974.71,-209 809.29,-209 809.29,-173 974.71,-173 974.71,-209"/>
 <text xml:space="preserve" text-anchor="start" x="817.29" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L73">
+<g id="a_node3_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L73">
 <text xml:space="preserve" text-anchor="start" x="822.69" y="-192.71" font-family="monospace" font-size="11.00">check_rated_catalog/2</text>
 </a>
 </g>
@@ -257,12 +257,12 @@
 <!-- check_rated_catalog/2&#45;&gt;list::member/2 -->
 <g id="edge21" class="edge">
 <title>check_rated_catalog/2&#45;&gt;list::member/2</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L209" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L209" xlink:title="calls">
 <path fill="none" stroke="black" d="M878.63,-172.53C864.14,-153.6 840.85,-123.16 824.14,-101.32"/>
 <polygon fill="black" stroke="black" points="826.98,-99.27 818.12,-93.46 821.42,-103.52 826.98,-99.27"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L209">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L209">
 <text xml:space="preserve" text-anchor="start" x="850.64" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -270,12 +270,12 @@
 <!-- check_catalog_items/2&#45;&gt;type::check/3 -->
 <g id="edge13" class="edge">
 <title>check_catalog_items/2&#45;&gt;type::check/3</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L116" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L116" xlink:title="calls">
 <path fill="none" stroke="black" d="M566.03,-361.73C573.33,-317.95 589.86,-203.94 570,-173 537.99,-123.13 473.56,-98.31 423.72,-86.16"/>
 <polygon fill="black" stroke="black" points="424.69,-82.8 414.16,-83.96 423.12,-89.62 424.69,-82.8"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L116">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L116">
 <text xml:space="preserve" text-anchor="start" x="579.06" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -283,12 +283,12 @@
 <!-- check_catalog_items/2&#45;&gt;list::member/2 -->
 <g id="edge14" class="edge">
 <title>check_catalog_items/2&#45;&gt;list::member/2</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L116" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L116" xlink:title="calls">
 <path fill="none" stroke="black" d="M598.93,-361.6C648.32,-335.67 736.08,-281.99 780,-209 799.51,-176.57 804.01,-132.29 804.63,-103.66"/>
 <polygon fill="black" stroke="black" points="808.13,-103.97 804.69,-93.95 801.13,-103.93 808.13,-103.97"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L116">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L116">
 <text xml:space="preserve" text-anchor="start" x="751.98" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -296,12 +296,12 @@
 <!-- canonical_descriptors/3&#45;&gt;content_kind/2 -->
 <g id="edge6" class="edge">
 <title>canonical_descriptors/3&#45;&gt;content_kind/2</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L144" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L144" xlink:title="calls">
 <path fill="none" stroke="black" d="M286.62,-433.59C269.1,-408.97 236.98,-363.8 216.59,-335.14"/>
 <polygon fill="black" stroke="black" points="219.7,-333.46 211.05,-327.34 213.99,-337.52 219.7,-333.46"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L144">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L144">
 <text xml:space="preserve" text-anchor="start" x="260.52" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -311,7 +311,7 @@
 <title>canonical_descriptor/2</title>
 <polygon fill="cornsilk" stroke="black" points="448.01,-326 275.99,-326 275.99,-290 448.01,-290 448.01,-326"/>
 <text xml:space="preserve" text-anchor="start" x="283.99" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L153">
+<g id="a_node7_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L153">
 <text xml:space="preserve" text-anchor="start" x="289.39" y="-309.71" font-family="monospace" font-size="11.00">canonical_descriptor/2</text>
 </a>
 </g>
@@ -323,12 +323,12 @@
 <!-- canonical_descriptors/3&#45;&gt;canonical_descriptor/2 -->
 <g id="edge7" class="edge">
 <title>canonical_descriptors/3&#45;&gt;canonical_descriptor/2</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L144" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L144" xlink:title="calls">
 <path fill="none" stroke="black" d="M306.73,-433.59C317.5,-409.29 337.17,-364.97 349.9,-336.27"/>
 <polygon fill="black" stroke="black" points="352.94,-338.05 353.79,-327.49 346.54,-335.22 352.94,-338.05"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L144">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L144">
 <text xml:space="preserve" text-anchor="start" x="338" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -338,7 +338,7 @@
 <title>occurrence_pairs/2</title>
 <polygon fill="cornsilk" stroke="black" points="376.81,-209 231.19,-209 231.19,-173 376.81,-173 376.81,-209"/>
 <text xml:space="preserve" text-anchor="start" x="239.19" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L168">
+<g id="a_node8_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L168">
 <text xml:space="preserve" text-anchor="start" x="244.59" y="-192.71" font-family="monospace" font-size="11.00">occurrence_pairs/2</text>
 </a>
 </g>
@@ -350,12 +350,12 @@
 <!-- canonical_descriptor/2&#45;&gt;occurrence_pairs/2 -->
 <g id="edge8" class="edge">
 <title>canonical_descriptor/2&#45;&gt;occurrence_pairs/2</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L153" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L153" xlink:title="calls">
 <path fill="none" stroke="black" d="M353.19,-289.53C343.81,-270.94 328.84,-241.24 317.87,-219.5"/>
 <polygon fill="black" stroke="black" points="321.01,-217.96 313.38,-210.6 314.76,-221.11 321.01,-217.96"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L153">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L153">
 <text xml:space="preserve" text-anchor="start" x="334.74" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -365,7 +365,7 @@
 <title>check_vector_entries/2</title>
 <polygon fill="cornsilk" stroke="black" points="771.01,-209 598.99,-209 598.99,-173 771.01,-173 771.01,-209"/>
 <text xml:space="preserve" text-anchor="start" x="606.99" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L172" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L172">
+<g id="a_node9_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L172" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L172">
 <text xml:space="preserve" text-anchor="start" x="612.39" y="-192.71" font-family="monospace" font-size="11.00">check_vector_entries/2</text>
 </a>
 </g>
@@ -377,12 +377,12 @@
 <!-- canonical_descriptor/2&#45;&gt;check_vector_entries/2 -->
 <g id="edge9" class="edge">
 <title>canonical_descriptor/2&#45;&gt;check_vector_entries/2</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L161" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L161" xlink:title="calls">
 <path fill="none" stroke="black" d="M448.36,-299.09C497.9,-292.04 560.15,-278.79 611,-254 629.54,-244.96 647.35,-230.29 660.85,-217.49"/>
 <polygon fill="black" stroke="black" points="663.31,-219.98 667.99,-210.48 658.4,-214.99 663.31,-219.98"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L161">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L161">
 <text xml:space="preserve" text-anchor="start" x="624.69" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -392,7 +392,7 @@
 <title>remove_zero_weights/2</title>
 <polygon fill="cornsilk" stroke="black" points="560.71,-209 395.29,-209 395.29,-173 560.71,-173 560.71,-209"/>
 <text xml:space="preserve" text-anchor="start" x="403.29" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L200" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L200">
+<g id="a_node11_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L200" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L200">
 <text xml:space="preserve" text-anchor="start" x="408.69" y="-192.71" font-family="monospace" font-size="11.00">remove_zero_weights/2</text>
 </a>
 </g>
@@ -404,12 +404,12 @@
 <!-- canonical_descriptor/2&#45;&gt;remove_zero_weights/2 -->
 <g id="edge10" class="edge">
 <title>canonical_descriptor/2&#45;&gt;remove_zero_weights/2</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L161" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L161" xlink:title="calls">
 <path fill="none" stroke="black" d="M379.62,-289.53C399.06,-270.26 430.53,-239.06 452.63,-217.15"/>
 <polygon fill="black" stroke="black" points="454.88,-219.85 459.52,-210.32 449.96,-214.87 454.88,-219.85"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L161">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L161">
 <text xml:space="preserve" text-anchor="start" x="423.48" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -417,12 +417,12 @@
 <!-- canonical_descriptor/2&#45;&gt;pairs::keys/2 -->
 <g id="edge18" class="edge">
 <title>canonical_descriptor/2&#45;&gt;pairs::keys/2</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L153" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L153" xlink:title="calls">
 <path fill="none" stroke="black" d="M275.66,-289.95C228.26,-279.63 174.95,-266.15 154,-254 138.36,-244.93 124.13,-230.63 113.46,-218.05"/>
 <polygon fill="black" stroke="black" points="116.32,-216.02 107.3,-210.46 110.88,-220.43 116.32,-216.02"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L153">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L153">
 <text xml:space="preserve" text-anchor="start" x="154" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -430,12 +430,12 @@
 <!-- canonical_descriptor/2&#45;&gt;type::check/3 -->
 <g id="edge17" class="edge">
 <title>canonical_descriptor/2&#45;&gt;type::check/3</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L153" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L153" xlink:title="calls">
 <path fill="none" stroke="black" d="M303.37,-289.55C265.12,-274.77 218.13,-249.4 195,-209 166.24,-158.79 235.41,-119.23 291.9,-96.48"/>
 <polygon fill="black" stroke="black" points="292.82,-99.88 300.86,-92.98 290.27,-93.36 292.82,-99.88"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L153">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L153">
 <text xml:space="preserve" text-anchor="start" x="195" y="-188.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -445,7 +445,7 @@
 <title>finite_weight/1</title>
 <polygon fill="cornsilk" stroke="black" points="725.91,-92 600.09,-92 600.09,-56 725.91,-56 725.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="608.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L196">
+<g id="a_node10_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L196">
 <text xml:space="preserve" text-anchor="start" x="613.49" y="-75.71" font-family="monospace" font-size="11.00">finite_weight/1</text>
 </a>
 </g>
@@ -457,12 +457,12 @@
 <!-- check_vector_entries/2&#45;&gt;finite_weight/1 -->
 <g id="edge11" class="edge">
 <title>check_vector_entries/2&#45;&gt;finite_weight/1</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L173" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L173" xlink:title="calls">
 <path fill="none" stroke="black" d="M681.66,-172.53C678.15,-154.19 672.58,-125.06 668.43,-103.4"/>
 <polygon fill="black" stroke="black" points="671.9,-102.9 666.59,-93.74 665.03,-104.22 671.9,-102.9"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L173">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L173">
 <text xml:space="preserve" text-anchor="start" x="674.66" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -470,12 +470,12 @@
 <!-- check_vector_entries/2&#45;&gt;type::check/3 -->
 <g id="edge20" class="edge">
 <title>check_vector_entries/2&#45;&gt;type::check/3</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L173" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L173" xlink:title="calls">
 <path fill="none" stroke="black" d="M661.94,-172.64C642.4,-158.7 613.14,-139.61 585,-128 532.9,-106.51 470.36,-92.78 423.81,-84.69"/>
 <polygon fill="black" stroke="black" points="424.58,-81.27 414.13,-83.06 423.41,-88.18 424.58,-81.27"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L173">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L173">
 <text xml:space="preserve" text-anchor="start" x="602.45" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -483,12 +483,12 @@
 <!-- check_vector_entries/2&#45;&gt;list::member/2 -->
 <g id="edge19" class="edge">
 <title>check_vector_entries/2&#45;&gt;list::member/2</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L173" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L173" xlink:title="calls">
 <path fill="none" stroke="black" d="M703.07,-172.53C723.02,-153.26 755.3,-122.06 777.97,-100.15"/>
 <polygon fill="black" stroke="black" points="780.3,-102.77 785.06,-93.31 775.43,-97.74 780.3,-102.77"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/recommender_protocols/item_content_dataset_validation.lgt#L173">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/recommender_protocols/item_content_dataset_validation.lgt#L173">
 <text xml:space="preserve" text-anchor="start" x="748.07" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>

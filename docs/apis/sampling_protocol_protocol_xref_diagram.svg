@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 3761,-140 3761,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol sampling_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 15:49</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 20:36</text>
 <g id="clust1" class="cluster">
 <title>cluster_sampling_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="sampling_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 3737,-46 3737,-46 3743,-46 3749,-52 3749,-58 3749,-58 3749,-116 3749,-116 3749,-122 3743,-128 3737,-128 3737,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">sampling_protocol</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>normal/3</title>
 <polygon fill="springgreen" stroke="black" points="97.81,-92 18.19,-92 18.19,-56 97.81,-56 97.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="26.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="31.6" y="-75.71" font-family="monospace" font-size="11.00">normal/3</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>lognormal/3</title>
 <polygon fill="springgreen" stroke="black" points="215.71,-92 116.29,-92 116.29,-56 215.71,-56 215.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="124.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L39">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L39">
 <text xml:space="preserve" text-anchor="start" x="129.69" y="-75.71" font-family="monospace" font-size="11.00">lognormal/3</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>wald/3</title>
 <polygon fill="springgreen" stroke="black" points="300.2,-92 233.8,-92 233.8,-56 300.2,-56 300.2,-92"/>
 <text xml:space="preserve" text-anchor="start" x="241.8" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L46">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L46">
 <text xml:space="preserve" text-anchor="start" x="247.2" y="-75.71" font-family="monospace" font-size="11.00">wald/3</text>
 </a>
 </g>
@@ -71,7 +71,7 @@
 <title>chi_squared/2</title>
 <polygon fill="springgreen" stroke="black" points="431.31,-92 318.69,-92 318.69,-56 431.31,-56 431.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="326.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L53">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L53">
 <text xml:space="preserve" text-anchor="start" x="332.09" y="-75.71" font-family="monospace" font-size="11.00">chi_squared/2</text>
 </a>
 </g>
@@ -85,7 +85,7 @@
 <title>fisher/3</title>
 <polygon fill="springgreen" stroke="black" points="528.81,-92 449.19,-92 449.19,-56 528.81,-56 528.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="457.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L60">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="462.6" y="-75.71" font-family="monospace" font-size="11.00">fisher/3</text>
 </a>
 </g>
@@ -99,7 +99,7 @@
 <title>logseries/2</title>
 <polygon fill="springgreen" stroke="black" points="646.71,-92 547.29,-92 547.29,-56 646.71,-56 646.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="555.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L67">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="560.69" y="-75.71" font-family="monospace" font-size="11.00">logseries/2</text>
 </a>
 </g>
@@ -113,7 +113,7 @@
 <title>geometric/2</title>
 <polygon fill="springgreen" stroke="black" points="763.71,-92 664.29,-92 664.29,-56 763.71,-56 763.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="672.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L74">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="677.69" y="-75.71" font-family="monospace" font-size="11.00">geometric/2</text>
 </a>
 </g>
@@ -127,7 +127,7 @@
 <title>hypergeometric/4</title>
 <polygon fill="springgreen" stroke="black" points="914.21,-92 781.79,-92 781.79,-56 914.21,-56 914.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="789.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L81">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L81">
 <text xml:space="preserve" text-anchor="start" x="795.19" y="-75.71" font-family="monospace" font-size="11.00">hypergeometric/4</text>
 </a>
 </g>
@@ -141,7 +141,7 @@
 <title>exponential/2</title>
 <polygon fill="springgreen" stroke="black" points="1045.31,-92 932.69,-92 932.69,-56 1045.31,-56 1045.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="940.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L88">
+<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L88">
 <text xml:space="preserve" text-anchor="start" x="946.09" y="-75.71" font-family="monospace" font-size="11.00">exponential/2</text>
 </a>
 </g>
@@ -155,7 +155,7 @@
 <title>binomial/3</title>
 <polygon fill="springgreen" stroke="black" points="1156.41,-92 1063.59,-92 1063.59,-56 1156.41,-56 1156.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1071.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L95">
+<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="1076.99" y="-75.71" font-family="monospace" font-size="11.00">binomial/3</text>
 </a>
 </g>
@@ -169,7 +169,7 @@
 <title>bernoulli/2</title>
 <polygon fill="springgreen" stroke="black" points="1273.71,-92 1174.29,-92 1174.29,-56 1273.71,-56 1273.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1182.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L102">
+<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L102">
 <text xml:space="preserve" text-anchor="start" x="1187.69" y="-75.71" font-family="monospace" font-size="11.00">bernoulli/2</text>
 </a>
 </g>
@@ -183,7 +183,7 @@
 <title>beta/3</title>
 <polygon fill="springgreen" stroke="black" points="1358.2,-92 1291.8,-92 1291.8,-56 1358.2,-56 1358.2,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1299.8" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L109">
+<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L109">
 <text xml:space="preserve" text-anchor="start" x="1305.2" y="-75.71" font-family="monospace" font-size="11.00">beta/3</text>
 </a>
 </g>
@@ -197,7 +197,7 @@
 <title>gamma/3</title>
 <polygon fill="springgreen" stroke="black" points="1449.5,-92 1376.5,-92 1376.5,-56 1449.5,-56 1449.5,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1384.5" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L116">
+<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L116">
 <text xml:space="preserve" text-anchor="start" x="1389.9" y="-75.71" font-family="monospace" font-size="11.00">gamma/3</text>
 </a>
 </g>
@@ -211,7 +211,7 @@
 <title>logistic/3</title>
 <polygon fill="springgreen" stroke="black" points="1560.41,-92 1467.59,-92 1467.59,-56 1560.41,-56 1560.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1475.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node14_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L123" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L123">
+<g id="a_node14_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L123" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L123">
 <text xml:space="preserve" text-anchor="start" x="1480.99" y="-75.71" font-family="monospace" font-size="11.00">logistic/3</text>
 </a>
 </g>
@@ -225,7 +225,7 @@
 <title>poisson/2</title>
 <polygon fill="springgreen" stroke="black" points="1665.11,-92 1578.89,-92 1578.89,-56 1665.11,-56 1665.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1586.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node15_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L130">
+<g id="a_node15_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L130">
 <text xml:space="preserve" text-anchor="start" x="1592.3" y="-75.71" font-family="monospace" font-size="11.00">poisson/2</text>
 </a>
 </g>
@@ -239,7 +239,7 @@
 <title>power/2</title>
 <polygon fill="springgreen" stroke="black" points="1756.5,-92 1683.5,-92 1683.5,-56 1756.5,-56 1756.5,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1691.5" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node16_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L137">
+<g id="a_node16_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L137">
 <text xml:space="preserve" text-anchor="start" x="1696.9" y="-75.71" font-family="monospace" font-size="11.00">power/2</text>
 </a>
 </g>
@@ -253,7 +253,7 @@
 <title>weibull/3</title>
 <polygon fill="springgreen" stroke="black" points="1861.11,-92 1774.89,-92 1774.89,-56 1861.11,-56 1861.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1782.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node17_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L144">
+<g id="a_node17_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L144">
 <text xml:space="preserve" text-anchor="start" x="1788.3" y="-75.71" font-family="monospace" font-size="11.00">weibull/3</text>
 </a>
 </g>
@@ -267,7 +267,7 @@
 <title>uniform/3</title>
 <polygon fill="springgreen" stroke="black" points="1965.11,-92 1878.89,-92 1878.89,-56 1965.11,-56 1965.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1886.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node18_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L151">
+<g id="a_node18_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L151">
 <text xml:space="preserve" text-anchor="start" x="1892.3" y="-75.71" font-family="monospace" font-size="11.00">uniform/3</text>
 </a>
 </g>
@@ -281,7 +281,7 @@
 <title>uniform/1</title>
 <polygon fill="springgreen" stroke="black" points="2069.11,-92 1982.89,-92 1982.89,-56 2069.11,-56 2069.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1990.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node19_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L158">
+<g id="a_node19_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L158">
 <text xml:space="preserve" text-anchor="start" x="1996.3" y="-75.71" font-family="monospace" font-size="11.00">uniform/1</text>
 </a>
 </g>
@@ -295,7 +295,7 @@
 <title>triangular/4</title>
 <polygon fill="springgreen" stroke="black" points="2193.01,-92 2086.99,-92 2086.99,-56 2193.01,-56 2193.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2094.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node20_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L165" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L165">
+<g id="a_node20_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L165" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L165">
 <text xml:space="preserve" text-anchor="start" x="2100.39" y="-75.71" font-family="monospace" font-size="11.00">triangular/4</text>
 </a>
 </g>
@@ -309,7 +309,7 @@
 <title>von_mises/3</title>
 <polygon fill="springgreen" stroke="black" points="2310.71,-92 2211.29,-92 2211.29,-56 2310.71,-56 2310.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2219.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node21_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L172" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L172">
+<g id="a_node21_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L172" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L172">
 <text xml:space="preserve" text-anchor="start" x="2224.69" y="-75.71" font-family="monospace" font-size="11.00">von_mises/3</text>
 </a>
 </g>
@@ -323,7 +323,7 @@
 <title>gumbel/3</title>
 <polygon fill="springgreen" stroke="black" points="2408.81,-92 2329.19,-92 2329.19,-56 2408.81,-56 2408.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2337.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node22_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L179" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L179">
+<g id="a_node22_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L179" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L179">
 <text xml:space="preserve" text-anchor="start" x="2342.6" y="-75.71" font-family="monospace" font-size="11.00">gumbel/3</text>
 </a>
 </g>
@@ -337,7 +337,7 @@
 <title>dirichlet/2</title>
 <polygon fill="springgreen" stroke="black" points="2526.71,-92 2427.29,-92 2427.29,-56 2526.71,-56 2526.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2435.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node23_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L186" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L186">
+<g id="a_node23_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L186" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L186">
 <text xml:space="preserve" text-anchor="start" x="2440.69" y="-75.71" font-family="monospace" font-size="11.00">dirichlet/2</text>
 </a>
 </g>
@@ -351,7 +351,7 @@
 <title>circular_uniform_polar/3</title>
 <polygon fill="springgreen" stroke="black" points="2729.61,-92 2544.39,-92 2544.39,-56 2729.61,-56 2729.61,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2552.39" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node24_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L193" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L193">
+<g id="a_node24_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L193" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L193">
 <text xml:space="preserve" text-anchor="start" x="2557.79" y="-75.71" font-family="monospace" font-size="11.00">circular_uniform_polar/3</text>
 </a>
 </g>
@@ -365,7 +365,7 @@
 <title>circular_uniform_cartesian/3</title>
 <polygon fill="springgreen" stroke="black" points="2958.82,-92 2747.18,-92 2747.18,-56 2958.82,-56 2958.82,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2755.18" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node25_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L200" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L200">
+<g id="a_node25_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L200" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L200">
 <text xml:space="preserve" text-anchor="start" x="2760.58" y="-75.71" font-family="monospace" font-size="11.00">circular_uniform_cartesian/3</text>
 </a>
 </g>
@@ -379,7 +379,7 @@
 <title>standard_t/2</title>
 <polygon fill="springgreen" stroke="black" points="3083.01,-92 2976.99,-92 2976.99,-56 3083.01,-56 3083.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2984.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node26_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L207" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L207">
+<g id="a_node26_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L207" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L207">
 <text xml:space="preserve" text-anchor="start" x="2990.39" y="-75.71" font-family="monospace" font-size="11.00">standard_t/2</text>
 </a>
 </g>
@@ -393,7 +393,7 @@
 <title>standard_cauchy/3</title>
 <polygon fill="springgreen" stroke="black" points="3240.51,-92 3101.49,-92 3101.49,-56 3240.51,-56 3240.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3109.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node27_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L214" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L214">
+<g id="a_node27_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L214" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L214">
 <text xml:space="preserve" text-anchor="start" x="3114.89" y="-75.71" font-family="monospace" font-size="11.00">standard_cauchy/3</text>
 </a>
 </g>
@@ -407,7 +407,7 @@
 <title>standard_exponential/1</title>
 <polygon fill="springgreen" stroke="black" points="3431.01,-92 3258.99,-92 3258.99,-56 3431.01,-56 3431.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3266.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node28_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L221" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L221">
+<g id="a_node28_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L221" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L221">
 <text xml:space="preserve" text-anchor="start" x="3272.39" y="-75.71" font-family="monospace" font-size="11.00">standard_exponential/1</text>
 </a>
 </g>
@@ -421,7 +421,7 @@
 <title>standard_gamma/2</title>
 <polygon fill="springgreen" stroke="black" points="3581.21,-92 3448.79,-92 3448.79,-56 3581.21,-56 3581.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3456.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node29_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L228">
+<g id="a_node29_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L228">
 <text xml:space="preserve" text-anchor="start" x="3462.19" y="-75.71" font-family="monospace" font-size="11.00">standard_gamma/2</text>
 </a>
 </g>
@@ -435,7 +435,7 @@
 <title>standard_normal/1</title>
 <polygon fill="springgreen" stroke="black" points="3738.51,-92 3599.49,-92 3599.49,-56 3738.51,-56 3738.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3607.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node30_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L235" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/random/sampling_protocol.lgt#L235">
+<g id="a_node30_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L235" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/random/sampling_protocol.lgt#L235">
 <text xml:space="preserve" text-anchor="start" x="3612.89" y="-75.71" font-family="monospace" font-size="11.00">standard_normal/1</text>
 </a>
 </g>

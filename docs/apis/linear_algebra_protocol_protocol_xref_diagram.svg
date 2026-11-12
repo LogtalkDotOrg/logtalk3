@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 12137,-140 12137,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol linear_algebra_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 15:49</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 20:35</text>
 <g id="clust1" class="cluster">
 <title>cluster_linear_algebra_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="linear_algebra_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 12113,-46 12113,-46 12119,-46 12125,-52 12125,-58 12125,-58 12125,-116 12125,-116 12125,-122 12119,-128 12113,-128 12113,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L1" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L1">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L1" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L1">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">linear_algebra_protocol</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>new_vector/3</title>
 <polygon fill="springgreen" stroke="black" points="124.01,-92 17.99,-92 17.99,-56 124.01,-56 124.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="25.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L10" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L10">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L10" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L10">
 <text xml:space="preserve" text-anchor="start" x="31.39" y="-75.71" font-family="monospace" font-size="11.00">new_vector/3</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>new_vector_like/2</title>
 <polygon fill="springgreen" stroke="black" points="281.51,-92 142.49,-92 142.49,-56 281.51,-56 281.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="150.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L24" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L24">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L24" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L24">
 <text xml:space="preserve" text-anchor="start" x="155.89" y="-75.71" font-family="monospace" font-size="11.00">new_vector_like/2</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>add_vectors/3</title>
 <polygon fill="springgreen" stroke="black" points="412.31,-92 299.69,-92 299.69,-56 412.31,-56 412.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="307.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L31">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L31">
 <text xml:space="preserve" text-anchor="start" x="313.09" y="-75.71" font-family="monospace" font-size="11.00">add_vectors/3</text>
 </a>
 </g>
@@ -71,7 +71,7 @@
 <title>subtract_vectors/3</title>
 <polygon fill="springgreen" stroke="black" points="575.81,-92 430.19,-92 430.19,-56 575.81,-56 575.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="438.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L38" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L38">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L38" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L38">
 <text xml:space="preserve" text-anchor="start" x="443.59" y="-75.71" font-family="monospace" font-size="11.00">subtract_vectors/3</text>
 </a>
 </g>
@@ -85,7 +85,7 @@
 <title>add_scaled_vector/4</title>
 <polygon fill="springgreen" stroke="black" points="746.11,-92 593.89,-92 593.89,-56 746.11,-56 746.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="601.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L45">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="607.29" y="-75.71" font-family="monospace" font-size="11.00">add_scaled_vector/4</text>
 </a>
 </g>
@@ -99,7 +99,7 @@
 <title>scale_vector/3</title>
 <polygon fill="springgreen" stroke="black" points="883.61,-92 764.39,-92 764.39,-56 883.61,-56 883.61,-92"/>
 <text xml:space="preserve" text-anchor="start" x="772.39" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L56">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L56">
 <text xml:space="preserve" text-anchor="start" x="777.79" y="-75.71" font-family="monospace" font-size="11.00">scale_vector/3</text>
 </a>
 </g>
@@ -113,7 +113,7 @@
 <title>dot_product/3</title>
 <polygon fill="springgreen" stroke="black" points="1014.31,-92 901.69,-92 901.69,-56 1014.31,-56 1014.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="909.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L67">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="915.09" y="-75.71" font-family="monospace" font-size="11.00">dot_product/3</text>
 </a>
 </g>
@@ -127,7 +127,7 @@
 <title>euclidean_norm/2</title>
 <polygon fill="springgreen" stroke="black" points="1165.21,-92 1032.79,-92 1032.79,-56 1165.21,-56 1165.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1040.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L74">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="1046.19" y="-75.71" font-family="monospace" font-size="11.00">euclidean_norm/2</text>
 </a>
 </g>
@@ -141,7 +141,7 @@
 <title>vector_norm/3</title>
 <polygon fill="springgreen" stroke="black" points="1296.31,-92 1183.69,-92 1183.69,-56 1296.31,-56 1296.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1191.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L81">
+<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L81">
 <text xml:space="preserve" text-anchor="start" x="1197.09" y="-75.71" font-family="monospace" font-size="11.00">vector_norm/3</text>
 </a>
 </g>
@@ -155,7 +155,7 @@
 <title>basis_vector/3</title>
 <polygon fill="springgreen" stroke="black" points="1433.61,-92 1314.39,-92 1314.39,-56 1433.61,-56 1433.61,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1322.39" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L93">
+<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L93">
 <text xml:space="preserve" text-anchor="start" x="1327.79" y="-75.71" font-family="monospace" font-size="11.00">basis_vector/3</text>
 </a>
 </g>
@@ -169,7 +169,7 @@
 <title>new_matrix/4</title>
 <polygon fill="springgreen" stroke="black" points="1558.01,-92 1451.99,-92 1451.99,-56 1558.01,-56 1558.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1459.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L108">
+<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L108">
 <text xml:space="preserve" text-anchor="start" x="1465.39" y="-75.71" font-family="monospace" font-size="11.00">new_matrix/4</text>
 </a>
 </g>
@@ -183,7 +183,7 @@
 <title>identity_matrix/2</title>
 <polygon fill="springgreen" stroke="black" points="1715.51,-92 1576.49,-92 1576.49,-56 1715.51,-56 1715.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1584.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L125">
+<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L125">
 <text xml:space="preserve" text-anchor="start" x="1589.89" y="-75.71" font-family="monospace" font-size="11.00">identity_matrix/2</text>
 </a>
 </g>
@@ -197,7 +197,7 @@
 <title>matrix_vector_product/3</title>
 <polygon fill="springgreen" stroke="black" points="1912.31,-92 1733.69,-92 1733.69,-56 1912.31,-56 1912.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1741.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L137">
+<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L137">
 <text xml:space="preserve" text-anchor="start" x="1747.09" y="-75.71" font-family="monospace" font-size="11.00">matrix_vector_product/3</text>
 </a>
 </g>
@@ -211,7 +211,7 @@
 <title>matrix_matrix_product/3</title>
 <polygon fill="springgreen" stroke="black" points="2109.31,-92 1930.69,-92 1930.69,-56 2109.31,-56 2109.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1938.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node14_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L144">
+<g id="a_node14_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L144">
 <text xml:space="preserve" text-anchor="start" x="1944.09" y="-75.71" font-family="monospace" font-size="11.00">matrix_matrix_product/3</text>
 </a>
 </g>
@@ -225,7 +225,7 @@
 <title>gram_matrix/2</title>
 <polygon fill="springgreen" stroke="black" points="2240.31,-92 2127.69,-92 2127.69,-56 2240.31,-56 2240.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2135.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node15_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L151">
+<g id="a_node15_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L151">
 <text xml:space="preserve" text-anchor="start" x="2141.09" y="-75.71" font-family="monospace" font-size="11.00">gram_matrix/2</text>
 </a>
 </g>
@@ -239,7 +239,7 @@
 <title>matrix_row_means/2</title>
 <polygon fill="springgreen" stroke="black" points="2403.81,-92 2258.19,-92 2258.19,-56 2403.81,-56 2403.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2266.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node16_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L158">
+<g id="a_node16_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L158">
 <text xml:space="preserve" text-anchor="start" x="2271.59" y="-75.71" font-family="monospace" font-size="11.00">matrix_row_means/2</text>
 </a>
 </g>
@@ -253,7 +253,7 @@
 <title>matrix_column_means/2</title>
 <polygon fill="springgreen" stroke="black" points="2587.71,-92 2422.29,-92 2422.29,-56 2587.71,-56 2587.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2430.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node17_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L168">
+<g id="a_node17_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L168">
 <text xml:space="preserve" text-anchor="start" x="2435.69" y="-75.71" font-family="monospace" font-size="11.00">matrix_column_means/2</text>
 </a>
 </g>
@@ -267,7 +267,7 @@
 <title>center_gram_matrix/4</title>
 <polygon fill="springgreen" stroke="black" points="2764.41,-92 2605.59,-92 2605.59,-56 2764.41,-56 2764.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2613.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node18_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L175">
+<g id="a_node18_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L175">
 <text xml:space="preserve" text-anchor="start" x="2618.99" y="-75.71" font-family="monospace" font-size="11.00">center_gram_matrix/4</text>
 </a>
 </g>
@@ -281,7 +281,7 @@
 <title>center_gram_vector/4</title>
 <polygon fill="springgreen" stroke="black" points="2941.41,-92 2782.59,-92 2782.59,-56 2941.41,-56 2941.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2790.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node19_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L186" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L186">
+<g id="a_node19_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L186" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L186">
 <text xml:space="preserve" text-anchor="start" x="2795.99" y="-75.71" font-family="monospace" font-size="11.00">center_gram_vector/4</text>
 </a>
 </g>
@@ -295,7 +295,7 @@
 <title>outer_product/3</title>
 <polygon fill="springgreen" stroke="black" points="3084.91,-92 2959.09,-92 2959.09,-56 3084.91,-56 3084.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2967.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node20_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L196">
+<g id="a_node20_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L196">
 <text xml:space="preserve" text-anchor="start" x="2972.49" y="-75.71" font-family="monospace" font-size="11.00">outer_product/3</text>
 </a>
 </g>
@@ -309,7 +309,7 @@
 <title>add_matrices/3</title>
 <polygon fill="springgreen" stroke="black" points="3222.61,-92 3103.39,-92 3103.39,-56 3222.61,-56 3222.61,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3111.39" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node21_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L203" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L203">
+<g id="a_node21_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L203" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L203">
 <text xml:space="preserve" text-anchor="start" x="3116.79" y="-75.71" font-family="monospace" font-size="11.00">add_matrices/3</text>
 </a>
 </g>
@@ -323,7 +323,7 @@
 <title>subtract_matrices/3</title>
 <polygon fill="springgreen" stroke="black" points="3393.11,-92 3240.89,-92 3240.89,-56 3393.11,-56 3393.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3248.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node22_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L210" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L210">
+<g id="a_node22_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L210" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L210">
 <text xml:space="preserve" text-anchor="start" x="3254.29" y="-75.71" font-family="monospace" font-size="11.00">subtract_matrices/3</text>
 </a>
 </g>
@@ -337,7 +337,7 @@
 <title>scale_matrix/3</title>
 <polygon fill="springgreen" stroke="black" points="3530.61,-92 3411.39,-92 3411.39,-56 3530.61,-56 3530.61,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3419.39" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node23_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L217" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L217">
+<g id="a_node23_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L217" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L217">
 <text xml:space="preserve" text-anchor="start" x="3424.79" y="-75.71" font-family="monospace" font-size="11.00">scale_matrix/3</text>
 </a>
 </g>
@@ -351,7 +351,7 @@
 <title>frobenius_norm/2</title>
 <polygon fill="springgreen" stroke="black" points="3681.21,-92 3548.79,-92 3548.79,-56 3681.21,-56 3681.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3556.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node24_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L224">
+<g id="a_node24_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L224">
 <text xml:space="preserve" text-anchor="start" x="3562.19" y="-75.71" font-family="monospace" font-size="11.00">frobenius_norm/2</text>
 </a>
 </g>
@@ -365,7 +365,7 @@
 <title>transpose_matrix/2</title>
 <polygon fill="springgreen" stroke="black" points="3844.81,-92 3699.19,-92 3699.19,-56 3844.81,-56 3844.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3707.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node25_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L234">
+<g id="a_node25_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L234">
 <text xml:space="preserve" text-anchor="start" x="3712.59" y="-75.71" font-family="monospace" font-size="11.00">transpose_matrix/2</text>
 </a>
 </g>
@@ -379,7 +379,7 @@
 <title>vector_value/3</title>
 <polygon fill="springgreen" stroke="black" points="3981.61,-92 3862.39,-92 3862.39,-56 3981.61,-56 3981.61,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3870.39" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node26_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L241" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L241">
+<g id="a_node26_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L241" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L241">
 <text xml:space="preserve" text-anchor="start" x="3875.79" y="-75.71" font-family="monospace" font-size="11.00">vector_value/3</text>
 </a>
 </g>
@@ -393,7 +393,7 @@
 <title>matrix_row/3</title>
 <polygon fill="springgreen" stroke="black" points="4106.01,-92 3999.99,-92 3999.99,-56 4106.01,-56 4106.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="4007.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node27_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L253" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L253">
+<g id="a_node27_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L253" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L253">
 <text xml:space="preserve" text-anchor="start" x="4013.39" y="-75.71" font-family="monospace" font-size="11.00">matrix_row/3</text>
 </a>
 </g>
@@ -407,7 +407,7 @@
 <title>matrix_column/3</title>
 <polygon fill="springgreen" stroke="black" points="4249.91,-92 4124.09,-92 4124.09,-56 4249.91,-56 4249.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="4132.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node28_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L265" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L265">
+<g id="a_node28_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L265" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L265">
 <text xml:space="preserve" text-anchor="start" x="4137.49" y="-75.71" font-family="monospace" font-size="11.00">matrix_column/3</text>
 </a>
 </g>
@@ -421,7 +421,7 @@
 <title>matrix_value/4</title>
 <polygon fill="springgreen" stroke="black" points="4387.61,-92 4268.39,-92 4268.39,-56 4387.61,-56 4387.61,-92"/>
 <text xml:space="preserve" text-anchor="start" x="4276.39" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node29_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L277" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L277">
+<g id="a_node29_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L277" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L277">
 <text xml:space="preserve" text-anchor="start" x="4281.79" y="-75.71" font-family="monospace" font-size="11.00">matrix_value/4</text>
 </a>
 </g>
@@ -435,7 +435,7 @@
 <title>matrix_diagonal/2</title>
 <polygon fill="springgreen" stroke="black" points="4544.51,-92 4405.49,-92 4405.49,-56 4544.51,-56 4544.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="4413.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node30_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L292" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L292">
+<g id="a_node30_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L292" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L292">
 <text xml:space="preserve" text-anchor="start" x="4418.89" y="-75.71" font-family="monospace" font-size="11.00">matrix_diagonal/2</text>
 </a>
 </g>
@@ -449,7 +449,7 @@
 <title>matrix_diagonal/3</title>
 <polygon fill="springgreen" stroke="black" points="4701.51,-92 4562.49,-92 4562.49,-56 4701.51,-56 4701.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="4570.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node31_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L302" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L302">
+<g id="a_node31_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L302" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L302">
 <text xml:space="preserve" text-anchor="start" x="4575.89" y="-75.71" font-family="monospace" font-size="11.00">matrix_diagonal/3</text>
 </a>
 </g>
@@ -463,7 +463,7 @@
 <title>diagonal_matrix/2</title>
 <polygon fill="springgreen" stroke="black" points="4858.51,-92 4719.49,-92 4719.49,-56 4858.51,-56 4858.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="4727.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node32_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L314" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L314">
+<g id="a_node32_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L314" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L314">
 <text xml:space="preserve" text-anchor="start" x="4732.89" y="-75.71" font-family="monospace" font-size="11.00">diagonal_matrix/2</text>
 </a>
 </g>
@@ -477,7 +477,7 @@
 <title>diagonal_matrix/3</title>
 <polygon fill="springgreen" stroke="black" points="5015.51,-92 4876.49,-92 4876.49,-56 5015.51,-56 5015.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="4884.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node33_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L321">
+<g id="a_node33_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L321">
 <text xml:space="preserve" text-anchor="start" x="4889.89" y="-75.71" font-family="monospace" font-size="11.00">diagonal_matrix/3</text>
 </a>
 </g>
@@ -491,7 +491,7 @@
 <title>diagonal_matrix/4</title>
 <polygon fill="springgreen" stroke="black" points="5172.51,-92 5033.49,-92 5033.49,-56 5172.51,-56 5172.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="5041.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node34_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L332" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L332">
+<g id="a_node34_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L332" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L332">
 <text xml:space="preserve" text-anchor="start" x="5046.89" y="-75.71" font-family="monospace" font-size="11.00">diagonal_matrix/4</text>
 </a>
 </g>
@@ -505,7 +505,7 @@
 <title>matrix_trace/2</title>
 <polygon fill="springgreen" stroke="black" points="5309.61,-92 5190.39,-92 5190.39,-56 5309.61,-56 5309.61,-92"/>
 <text xml:space="preserve" text-anchor="start" x="5198.39" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node35_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L347" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L347">
+<g id="a_node35_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L347" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L347">
 <text xml:space="preserve" text-anchor="start" x="5203.79" y="-75.71" font-family="monospace" font-size="11.00">matrix_trace/2</text>
 </a>
 </g>
@@ -519,7 +519,7 @@
 <title>shift_matrix_diagonal/3</title>
 <polygon fill="springgreen" stroke="black" points="5506.31,-92 5327.69,-92 5327.69,-56 5506.31,-56 5506.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="5335.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node36_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L357" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L357">
+<g id="a_node36_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L357" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L357">
 <text xml:space="preserve" text-anchor="start" x="5341.09" y="-75.71" font-family="monospace" font-size="11.00">shift_matrix_diagonal/3</text>
 </a>
 </g>
@@ -533,7 +533,7 @@
 <title>upper_triangular_part/2</title>
 <polygon fill="springgreen" stroke="black" points="5703.31,-92 5524.69,-92 5524.69,-56 5703.31,-56 5703.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="5532.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node37_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L368" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L368">
+<g id="a_node37_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L368" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L368">
 <text xml:space="preserve" text-anchor="start" x="5538.09" y="-75.71" font-family="monospace" font-size="11.00">upper_triangular_part/2</text>
 </a>
 </g>
@@ -547,7 +547,7 @@
 <title>upper_triangular_part/3</title>
 <polygon fill="springgreen" stroke="black" points="5900.31,-92 5721.69,-92 5721.69,-56 5900.31,-56 5900.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="5729.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node38_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L378" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L378">
+<g id="a_node38_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L378" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L378">
 <text xml:space="preserve" text-anchor="start" x="5735.09" y="-75.71" font-family="monospace" font-size="11.00">upper_triangular_part/3</text>
 </a>
 </g>
@@ -561,7 +561,7 @@
 <title>lower_triangular_part/2</title>
 <polygon fill="springgreen" stroke="black" points="6097.31,-92 5918.69,-92 5918.69,-56 6097.31,-56 6097.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="5926.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node39_39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L390" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L390">
+<g id="a_node39_39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L390" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L390">
 <text xml:space="preserve" text-anchor="start" x="5932.09" y="-75.71" font-family="monospace" font-size="11.00">lower_triangular_part/2</text>
 </a>
 </g>
@@ -575,7 +575,7 @@
 <title>lower_triangular_part/3</title>
 <polygon fill="springgreen" stroke="black" points="6294.31,-92 6115.69,-92 6115.69,-56 6294.31,-56 6294.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="6123.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node40_40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L400" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L400">
+<g id="a_node40_40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L400" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L400">
 <text xml:space="preserve" text-anchor="start" x="6129.09" y="-75.71" font-family="monospace" font-size="11.00">lower_triangular_part/3</text>
 </a>
 </g>
@@ -589,7 +589,7 @@
 <title>solve_linear_system/3</title>
 <polygon fill="springgreen" stroke="black" points="6477.71,-92 6312.29,-92 6312.29,-56 6477.71,-56 6477.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="6320.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node41_41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L412" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L412">
+<g id="a_node41_41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L412" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L412">
 <text xml:space="preserve" text-anchor="start" x="6325.69" y="-75.71" font-family="monospace" font-size="11.00">solve_linear_system/3</text>
 </a>
 </g>
@@ -603,7 +603,7 @@
 <title>solve_linear_systems/3</title>
 <polygon fill="springgreen" stroke="black" points="6668.01,-92 6495.99,-92 6495.99,-56 6668.01,-56 6668.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="6503.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node42_42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L424" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L424">
+<g id="a_node42_42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L424" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L424">
 <text xml:space="preserve" text-anchor="start" x="6509.39" y="-75.71" font-family="monospace" font-size="11.00">solve_linear_systems/3</text>
 </a>
 </g>
@@ -617,7 +617,7 @@
 <title>determinant/2</title>
 <polygon fill="springgreen" stroke="black" points="6798.31,-92 6685.69,-92 6685.69,-56 6798.31,-56 6798.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="6693.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node43_43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L436" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L436">
+<g id="a_node43_43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L436" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L436">
 <text xml:space="preserve" text-anchor="start" x="6699.09" y="-75.71" font-family="monospace" font-size="11.00">determinant/2</text>
 </a>
 </g>
@@ -631,7 +631,7 @@
 <title>inverse_matrix/2</title>
 <polygon fill="springgreen" stroke="black" points="6949.21,-92 6816.79,-92 6816.79,-56 6949.21,-56 6949.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="6824.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node44_44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L446" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L446">
+<g id="a_node44_44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L446" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L446">
 <text xml:space="preserve" text-anchor="start" x="6830.19" y="-75.71" font-family="monospace" font-size="11.00">inverse_matrix/2</text>
 </a>
 </g>
@@ -645,7 +645,7 @@
 <title>qr_decomposition/3</title>
 <polygon fill="springgreen" stroke="black" points="7112.81,-92 6967.19,-92 6967.19,-56 7112.81,-56 7112.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="6975.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node45_45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L457" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L457">
+<g id="a_node45_45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L457" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L457">
 <text xml:space="preserve" text-anchor="start" x="6980.59" y="-75.71" font-family="monospace" font-size="11.00">qr_decomposition/3</text>
 </a>
 </g>
@@ -659,7 +659,7 @@
 <title>least_squares/3</title>
 <polygon fill="springgreen" stroke="black" points="7256.91,-92 7131.09,-92 7131.09,-56 7256.91,-56 7256.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="7139.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node46_46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L467" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L467">
+<g id="a_node46_46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L467" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L467">
 <text xml:space="preserve" text-anchor="start" x="7144.49" y="-75.71" font-family="monospace" font-size="11.00">least_squares/3</text>
 </a>
 </g>
@@ -673,7 +673,7 @@
 <title>matrix_rank/2</title>
 <polygon fill="springgreen" stroke="black" points="7387.31,-92 7274.69,-92 7274.69,-56 7387.31,-56 7387.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="7282.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node47_47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L478" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L478">
+<g id="a_node47_47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L478" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L478">
 <text xml:space="preserve" text-anchor="start" x="7288.09" y="-75.71" font-family="monospace" font-size="11.00">matrix_rank/2</text>
 </a>
 </g>
@@ -687,7 +687,7 @@
 <title>matrix_rank/3</title>
 <polygon fill="springgreen" stroke="black" points="7518.31,-92 7405.69,-92 7405.69,-56 7518.31,-56 7518.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="7413.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node48_48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L488" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L488">
+<g id="a_node48_48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L488" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L488">
 <text xml:space="preserve" text-anchor="start" x="7419.09" y="-75.71" font-family="monospace" font-size="11.00">matrix_rank/3</text>
 </a>
 </g>
@@ -701,7 +701,7 @@
 <title>symmetric_eigen/3</title>
 <polygon fill="springgreen" stroke="black" points="7675.51,-92 7536.49,-92 7536.49,-56 7675.51,-56 7675.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="7544.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node49_49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L501" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L501">
+<g id="a_node49_49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L501" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L501">
 <text xml:space="preserve" text-anchor="start" x="7549.89" y="-75.71" font-family="monospace" font-size="11.00">symmetric_eigen/3</text>
 </a>
 </g>
@@ -715,7 +715,7 @@
 <title>symmetric_eigen/4</title>
 <polygon fill="springgreen" stroke="black" points="7832.51,-92 7693.49,-92 7693.49,-56 7832.51,-56 7832.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="7701.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node50_50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L512" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L512">
+<g id="a_node50_50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L512" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L512">
 <text xml:space="preserve" text-anchor="start" x="7706.89" y="-75.71" font-family="monospace" font-size="11.00">symmetric_eigen/4</text>
 </a>
 </g>
@@ -729,7 +729,7 @@
 <title>symmetric_eigen/5</title>
 <polygon fill="springgreen" stroke="black" points="7989.51,-92 7850.49,-92 7850.49,-56 7989.51,-56 7989.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="7858.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node51_51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L526" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L526">
+<g id="a_node51_51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L526" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L526">
 <text xml:space="preserve" text-anchor="start" x="7863.89" y="-75.71" font-family="monospace" font-size="11.00">symmetric_eigen/5</text>
 </a>
 </g>
@@ -743,7 +743,7 @@
 <title>symmetric_eigen_partial/7</title>
 <polygon fill="springgreen" stroke="black" points="8198.91,-92 8007.09,-92 8007.09,-56 8198.91,-56 8198.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="8015.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node52_52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L543" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L543">
+<g id="a_node52_52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L543" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L543">
 <text xml:space="preserve" text-anchor="start" x="8020.49" y="-75.71" font-family="monospace" font-size="11.00">symmetric_eigen_partial/7</text>
 </a>
 </g>
@@ -757,7 +757,7 @@
 <title>pseudo_inverse/2</title>
 <polygon fill="springgreen" stroke="black" points="8349.21,-92 8216.79,-92 8216.79,-56 8349.21,-56 8349.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="8224.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node53_53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L562" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L562">
+<g id="a_node53_53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L562" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L562">
 <text xml:space="preserve" text-anchor="start" x="8230.19" y="-75.71" font-family="monospace" font-size="11.00">pseudo_inverse/2</text>
 </a>
 </g>
@@ -771,7 +771,7 @@
 <title>pseudo_inverse/3</title>
 <polygon fill="springgreen" stroke="black" points="8499.21,-92 8366.79,-92 8366.79,-56 8499.21,-56 8499.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="8374.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node54_54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L572" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L572">
+<g id="a_node54_54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L572" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L572">
 <text xml:space="preserve" text-anchor="start" x="8380.19" y="-75.71" font-family="monospace" font-size="11.00">pseudo_inverse/3</text>
 </a>
 </g>
@@ -785,7 +785,7 @@
 <title>null_space/2</title>
 <polygon fill="springgreen" stroke="black" points="8623.01,-92 8516.99,-92 8516.99,-56 8623.01,-56 8623.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="8524.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node55_55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L585" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L585">
+<g id="a_node55_55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L585" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L585">
 <text xml:space="preserve" text-anchor="start" x="8530.39" y="-75.71" font-family="monospace" font-size="11.00">null_space/2</text>
 </a>
 </g>
@@ -799,7 +799,7 @@
 <title>null_space/3</title>
 <polygon fill="springgreen" stroke="black" points="8747.01,-92 8640.99,-92 8640.99,-56 8747.01,-56 8747.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="8648.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node56_56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L595" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L595">
+<g id="a_node56_56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L595" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L595">
 <text xml:space="preserve" text-anchor="start" x="8654.39" y="-75.71" font-family="monospace" font-size="11.00">null_space/3</text>
 </a>
 </g>
@@ -813,7 +813,7 @@
 <title>normalize_vector/2</title>
 <polygon fill="springgreen" stroke="black" points="8910.81,-92 8765.19,-92 8765.19,-56 8910.81,-56 8910.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="8773.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node57_57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L608" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L608">
+<g id="a_node57_57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L608" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L608">
 <text xml:space="preserve" text-anchor="start" x="8778.59" y="-75.71" font-family="monospace" font-size="11.00">normalize_vector/2</text>
 </a>
 </g>
@@ -827,7 +827,7 @@
 <title>normalize_vector/3</title>
 <polygon fill="springgreen" stroke="black" points="9074.81,-92 8929.19,-92 8929.19,-56 9074.81,-56 9074.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="8937.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node58_58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L615" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L615">
+<g id="a_node58_58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L615" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L615">
 <text xml:space="preserve" text-anchor="start" x="8942.59" y="-75.71" font-family="monospace" font-size="11.00">normalize_vector/3</text>
 </a>
 </g>
@@ -841,7 +841,7 @@
 <title>difference_norm/3</title>
 <polygon fill="springgreen" stroke="black" points="9231.51,-92 9092.49,-92 9092.49,-56 9231.51,-56 9231.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="9100.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node59_59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L627" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L627">
+<g id="a_node59_59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L627" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L627">
 <text xml:space="preserve" text-anchor="start" x="9105.89" y="-75.71" font-family="monospace" font-size="11.00">difference_norm/3</text>
 </a>
 </g>
@@ -855,7 +855,7 @@
 <title>stabilize_vector_sign/2</title>
 <polygon fill="springgreen" stroke="black" points="9428.31,-92 9249.69,-92 9249.69,-56 9428.31,-56 9428.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="9257.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node60_60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L634" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L634">
+<g id="a_node60_60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L634" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L634">
 <text xml:space="preserve" text-anchor="start" x="9263.09" y="-75.71" font-family="monospace" font-size="11.00">stabilize_vector_sign/2</text>
 </a>
 </g>
@@ -869,7 +869,7 @@
 <title>stabilize_vector_sign/3</title>
 <polygon fill="springgreen" stroke="black" points="9625.31,-92 9446.69,-92 9446.69,-56 9625.31,-56 9625.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="9454.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node61_61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L641" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L641">
+<g id="a_node61_61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L641" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L641">
 <text xml:space="preserve" text-anchor="start" x="9460.09" y="-75.71" font-family="monospace" font-size="11.00">stabilize_vector_sign/3</text>
 </a>
 </g>
@@ -883,7 +883,7 @@
 <title>first_significant_component/2</title>
 <polygon fill="springgreen" stroke="black" points="9861.12,-92 9642.88,-92 9642.88,-56 9861.12,-56 9861.12,-92"/>
 <text xml:space="preserve" text-anchor="start" x="9650.88" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node62_62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L653" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L653">
+<g id="a_node62_62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L653" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L653">
 <text xml:space="preserve" text-anchor="start" x="9656.28" y="-75.71" font-family="monospace" font-size="11.00">first_significant_component/2</text>
 </a>
 </g>
@@ -897,7 +897,7 @@
 <title>first_significant_component/3</title>
 <polygon fill="springgreen" stroke="black" points="10097.12,-92 9878.88,-92 9878.88,-56 10097.12,-56 10097.12,-92"/>
 <text xml:space="preserve" text-anchor="start" x="9886.88" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node63_63"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L660" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L660">
+<g id="a_node63_63"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L660" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L660">
 <text xml:space="preserve" text-anchor="start" x="9892.28" y="-75.71" font-family="monospace" font-size="11.00">first_significant_component/3</text>
 </a>
 </g>
@@ -911,7 +911,7 @@
 <title>add_scaled_outer_product/4</title>
 <polygon fill="springgreen" stroke="black" points="10313.21,-92 10114.79,-92 10114.79,-56 10313.21,-56 10313.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="10122.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node64_64"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L672" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L672">
+<g id="a_node64_64"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L672" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L672">
 <text xml:space="preserve" text-anchor="start" x="10128.19" y="-75.71" font-family="monospace" font-size="11.00">add_scaled_outer_product/4</text>
 </a>
 </g>
@@ -925,7 +925,7 @@
 <title>covariance_matrix/2</title>
 <polygon fill="springgreen" stroke="black" points="10483.11,-92 10330.89,-92 10330.89,-56 10483.11,-56 10483.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="10338.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node65_65"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L683" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L683">
+<g id="a_node65_65"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L683" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L683">
 <text xml:space="preserve" text-anchor="start" x="10344.29" y="-75.71" font-family="monospace" font-size="11.00">covariance_matrix/2</text>
 </a>
 </g>
@@ -939,7 +939,7 @@
 <title>cholesky_decomposition/2</title>
 <polygon fill="springgreen" stroke="black" points="10686.61,-92 10501.39,-92 10501.39,-56 10686.61,-56 10686.61,-92"/>
 <text xml:space="preserve" text-anchor="start" x="10509.39" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node66_66"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L693" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L693">
+<g id="a_node66_66"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L693" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L693">
 <text xml:space="preserve" text-anchor="start" x="10514.79" y="-75.71" font-family="monospace" font-size="11.00">cholesky_decomposition/2</text>
 </a>
 </g>
@@ -953,7 +953,7 @@
 <title>solve_cholesky/3</title>
 <polygon fill="springgreen" stroke="black" points="10837.21,-92 10704.79,-92 10704.79,-56 10837.21,-56 10837.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="10712.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node67_67"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L703" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L703">
+<g id="a_node67_67"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L703" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L703">
 <text xml:space="preserve" text-anchor="start" x="10718.19" y="-75.71" font-family="monospace" font-size="11.00">solve_cholesky/3</text>
 </a>
 </g>
@@ -967,7 +967,7 @@
 <title>forward_substitution/3</title>
 <polygon fill="springgreen" stroke="black" points="11027.01,-92 10854.99,-92 10854.99,-56 11027.01,-56 11027.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="10862.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node68_68"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L710" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L710">
+<g id="a_node68_68"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L710" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L710">
 <text xml:space="preserve" text-anchor="start" x="10868.39" y="-75.71" font-family="monospace" font-size="11.00">forward_substitution/3</text>
 </a>
 </g>
@@ -981,7 +981,7 @@
 <title>solve_lower_triangular_matrix/3</title>
 <polygon fill="springgreen" stroke="black" points="11276.72,-92 11045.28,-92 11045.28,-56 11276.72,-56 11276.72,-92"/>
 <text xml:space="preserve" text-anchor="start" x="11053.28" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node69_69"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L717" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L717">
+<g id="a_node69_69"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L717" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L717">
 <text xml:space="preserve" text-anchor="start" x="11058.68" y="-75.71" font-family="monospace" font-size="11.00">solve_lower_triangular_matrix/3</text>
 </a>
 </g>
@@ -995,7 +995,7 @@
 <title>solve_upper_triangular/3</title>
 <polygon fill="springgreen" stroke="black" points="11479.61,-92 11294.39,-92 11294.39,-56 11479.61,-56 11479.61,-92"/>
 <text xml:space="preserve" text-anchor="start" x="11302.39" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node70_70"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L724" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L724">
+<g id="a_node70_70"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L724" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L724">
 <text xml:space="preserve" text-anchor="start" x="11307.79" y="-75.71" font-family="monospace" font-size="11.00">solve_upper_triangular/3</text>
 </a>
 </g>
@@ -1009,7 +1009,7 @@
 <title>solve_upper_triangular_matrix/3</title>
 <polygon fill="springgreen" stroke="black" points="11728.72,-92 11497.28,-92 11497.28,-56 11728.72,-56 11728.72,-92"/>
 <text xml:space="preserve" text-anchor="start" x="11505.28" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node71_71"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L731" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L731">
+<g id="a_node71_71"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L731" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L731">
 <text xml:space="preserve" text-anchor="start" x="11510.68" y="-75.71" font-family="monospace" font-size="11.00">solve_upper_triangular_matrix/3</text>
 </a>
 </g>
@@ -1023,7 +1023,7 @@
 <title>backward_substitution/3</title>
 <polygon fill="springgreen" stroke="black" points="11925.31,-92 11746.69,-92 11746.69,-56 11925.31,-56 11925.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="11754.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node72_72"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L738" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L738">
+<g id="a_node72_72"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L738" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L738">
 <text xml:space="preserve" text-anchor="start" x="11760.09" y="-75.71" font-family="monospace" font-size="11.00">backward_substitution/3</text>
 </a>
 </g>
@@ -1037,7 +1037,7 @@
 <title>invert_from_cholesky/2</title>
 <polygon fill="springgreen" stroke="black" points="12115.01,-92 11942.99,-92 11942.99,-56 12115.01,-56 12115.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="11950.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node73_73"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L745" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/linear_algebra/linear_algebra_protocol.lgt#L745">
+<g id="a_node73_73"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L745" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/linear_algebra/linear_algebra_protocol.lgt#L745">
 <text xml:space="preserve" text-anchor="start" x="11956.39" y="-75.71" font-family="monospace" font-size="11.00">invert_from_cholesky/2</text>
 </a>
 </g>

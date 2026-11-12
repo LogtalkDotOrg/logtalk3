@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-257 468,-257 468,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object open_ai</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 15:49</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 20:36</text>
 <g id="clust1" class="cluster">
 <title>cluster_open_ai_object</title>
 <g id="a_clust1"><a xlink:title="open_ai">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 444,-46 444,-46 450,-46 456,-52 456,-58 456,-58 456,-233 456,-233 456,-239 450,-245 444,-245 444,-245 20,-245 20,-245 14,-245 8,-239 8,-233 8,-233 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/open_ai/open_ai.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/open_ai/open_ai.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/open_ai/open_ai.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/open_ai/open_ai.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-229.46" font-family="monospace" font-size="10.00" fill="dimgray">open_ai</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>document/1</title>
 <polygon fill="springgreen" stroke="black" points="143.41,-209 50.59,-209 50.59,-173 143.41,-173 143.41,-209"/>
 <text xml:space="preserve" text-anchor="start" x="58.59" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/open_ai/open_ai.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/open_ai/open_ai.lgt#L31">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/open_ai/open_ai.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/open_ai/open_ai.lgt#L31">
 <text xml:space="preserve" text-anchor="start" x="63.99" y="-192.71" font-family="monospace" font-size="11.00">document/1</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- document/1&#45;&gt;open_api::document/2 -->
 <g id="edge1" class="edge">
 <title>document/1&#45;&gt;open_api::document/2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/open_ai/open_ai.lgt#L45" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/open_ai/open_ai.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M97,-172.53C97,-154.28 97,-125.33 97,-103.7"/>
 <polygon fill="black" stroke="black" points="100.5,-103.77 97,-93.77 93.5,-103.77 100.5,-103.77"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/open_ai/open_ai.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/open_ai/open_ai.lgt#L45">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/open_ai/open_ai.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/open_ai/open_ai.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="97" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>operation_count/1</title>
 <polygon fill="springgreen" stroke="black" points="389.51,-209 250.49,-209 250.49,-173 389.51,-173 389.51,-209"/>
 <text xml:space="preserve" text-anchor="start" x="258.49" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/open_ai/open_ai.lgt#L38" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/open_ai/open_ai.lgt#L38">
+<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/open_ai/open_ai.lgt#L38" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/open_ai/open_ai.lgt#L38">
 <text xml:space="preserve" text-anchor="start" x="263.89" y="-192.71" font-family="monospace" font-size="11.00">operation_count/1</text>
 </a>
 </g>
@@ -96,12 +96,12 @@
 <!-- operation_count/1&#45;&gt;open_ai_catalog::operation_count/1 -->
 <g id="edge2" class="edge">
 <title>operation_count/1&#45;&gt;open_ai_catalog::operation_count/1</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/open_ai/open_ai.lgt#L48" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/open_ai/open_ai.lgt#L48" xlink:title="calls">
 <path fill="none" stroke="black" d="M320,-172.53C320,-154.28 320,-125.33 320,-103.7"/>
 <polygon fill="black" stroke="black" points="323.5,-103.77 320,-93.77 316.5,-103.77 323.5,-103.77"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/open_ai/open_ai.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/open_ai/open_ai.lgt#L48">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/open_ai/open_ai.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/open_ai/open_ai.lgt#L48">
 <text xml:space="preserve" text-anchor="start" x="320" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>

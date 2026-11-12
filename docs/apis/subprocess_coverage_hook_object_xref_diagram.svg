@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-374 614,-374 614,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk development tools</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object subprocess_coverage_hook</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 15:50</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 20:36</text>
 <g id="clust1" class="cluster">
 <title>cluster_subprocess_coverage_hook_object</title>
 <g id="a_clust1"><a xlink:title="subprocess_coverage_hook">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 590,-46 590,-46 596,-46 602,-52 602,-58 602,-58 602,-350 602,-350 602,-356 596,-362 590,-362 590,-362 20,-362 20,-362 14,-362 8,-356 8,-350 8,-350 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L25" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L25">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L25" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L25">
 <text xml:space="preserve" text-anchor="start" x="20" y="-346.46" font-family="monospace" font-size="10.00" fill="dimgray">subprocess_coverage_hook</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>load_coverage_config/1</title>
 <polygon fill="springgreen" stroke="black" points="448.01,-209 275.99,-209 275.99,-173 448.01,-173 448.01,-209"/>
 <text xml:space="preserve" text-anchor="start" x="283.99" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L34" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L34">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L34" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L34">
 <text xml:space="preserve" text-anchor="start" x="289.39" y="-192.71" font-family="monospace" font-size="11.00">load_coverage_config/1</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>coverage_file_/1</title>
 <polygon fill="#ff6a6a" stroke="black" points="410.21,-92 277.79,-92 277.79,-56 410.21,-56 410.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="285.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L41" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L41">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L41" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L41">
 <text xml:space="preserve" text-anchor="start" x="291.19" y="-75.71" font-family="monospace" font-size="11.00">coverage_file_/1</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- load_coverage_config/1&#45;&gt;coverage_file_/1 -->
 <g id="edge5" class="edge">
 <title>load_coverage_config/1&#45;&gt;coverage_file_/1</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L57" xlink:title="updates">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L57" xlink:title="updates">
 <path fill="none" stroke="black" d="M359.27,-172.53C356.46,-154.62 352.04,-126.4 348.68,-104.92"/>
 <polygon fill="black" stroke="black" points="348.7,-105 343.82,-99.69 346.84,-93.14 351.72,-98.45 348.7,-105"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L57">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="353.54" y="-130.21" font-family="monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>coverage_entry_/4</title>
 <polygon fill="#ff6a6a" stroke="black" points="244.51,-92 105.49,-92 105.49,-56 244.51,-56 244.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="113.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L49">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L49">
 <text xml:space="preserve" text-anchor="start" x="118.89" y="-75.71" font-family="monospace" font-size="11.00">coverage_entry_/4</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- load_coverage_config/1&#45;&gt;coverage_entry_/4 -->
 <g id="edge6" class="edge">
 <title>load_coverage_config/1&#45;&gt;coverage_entry_/4</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L57" xlink:title="updates">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L57" xlink:title="updates">
 <path fill="none" stroke="black" d="M338.38,-172.74C320.48,-159.9 295.11,-142.22 272,-128 255.27,-117.7 236.41,-107.17 219.79,-98.23"/>
 <polygon fill="black" stroke="black" points="220.09,-98.39 212.91,-99.09 209.5,-92.74 216.68,-92.03 220.09,-98.39"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L57">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="284.57" y="-130.21" font-family="monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -97,7 +97,7 @@
 <title>write_coverage_file/0</title>
 <polygon fill="cornsilk" stroke="black" points="257.71,-209 92.29,-209 92.29,-173 257.71,-173 257.71,-209"/>
 <text xml:space="preserve" text-anchor="start" x="100.29" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L79">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L79">
 <text xml:space="preserve" text-anchor="start" x="105.69" y="-192.71" font-family="monospace" font-size="11.00">write_coverage_file/0</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- write_coverage_file/0&#45;&gt;coverage_file_/1 -->
 <g id="edge3" class="edge">
 <title>write_coverage_file/0&#45;&gt;coverage_file_/1</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L79" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L79" xlink:title="calls">
 <path fill="none" stroke="black" d="M192.17,-172.73C205.79,-159.55 225.68,-141.45 245,-128 261.03,-116.84 279.68,-106.29 296.44,-97.59"/>
 <polygon fill="black" stroke="black" points="297.92,-100.77 305.24,-93.11 294.74,-94.53 297.92,-100.77"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L79">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L79">
 <text xml:space="preserve" text-anchor="start" x="245" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -122,12 +122,12 @@
 <!-- write_coverage_file/0&#45;&gt;coverage_entry_/4 -->
 <g id="edge4" class="edge">
 <title>write_coverage_file/0&#45;&gt;coverage_entry_/4</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L79" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L79" xlink:title="calls">
 <path fill="none" stroke="black" d="M175,-172.53C175,-154.28 175,-125.33 175,-103.7"/>
 <polygon fill="black" stroke="black" points="178.5,-103.77 175,-93.77 171.5,-103.77 178.5,-103.77"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L79">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L79">
 <text xml:space="preserve" text-anchor="start" x="175" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -137,7 +137,7 @@
 <title>valid_clauses/2</title>
 <polygon fill="cornsilk" stroke="black" points="591.91,-209 466.09,-209 466.09,-173 591.91,-173 591.91,-209"/>
 <text xml:space="preserve" text-anchor="start" x="474.09" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L90">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L90">
 <text xml:space="preserve" text-anchor="start" x="479.49" y="-192.71" font-family="monospace" font-size="11.00">valid_clauses/2</text>
 </a>
 </g>
@@ -151,7 +151,7 @@
 <title>logtalk::message_hook/4</title>
 <polygon fill="skyblue" stroke="black" points="264.31,-326 85.69,-326 85.69,-290 264.31,-290 264.31,-326"/>
 <text xml:space="preserve" text-anchor="start" x="93.69" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L67">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="99.09" y="-309.71" font-family="monospace" font-size="11.00">logtalk::message_hook/4</text>
 </a>
 </g>
@@ -163,12 +163,12 @@
 <!-- logtalk::message_hook/4&#45;&gt;coverage_entry_/4 -->
 <g id="edge7" class="edge">
 <title>logtalk::message_hook/4&#45;&gt;coverage_entry_/4</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L67" xlink:title="updates">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L67" xlink:title="updates">
 <path fill="none" stroke="black" d="M135.04,-289.69C88.28,-266.72 20.21,-223.16 45.19,-173 61.7,-139.86 95.34,-114.97 124.24,-98.56"/>
 <polygon fill="black" stroke="black" points="124.11,-98.63 127.47,-92.25 134.65,-92.9 131.29,-99.28 124.11,-98.63"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L67">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="45.19" y="-188.71" font-family="monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -176,12 +176,12 @@
 <!-- logtalk::message_hook/4&#45;&gt;write_coverage_file/0 -->
 <g id="edge2" class="edge">
 <title>logtalk::message_hook/4&#45;&gt;write_coverage_file/0</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L75" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L75" xlink:title="calls">
 <path fill="none" stroke="black" d="M175,-289.53C175,-271.28 175,-242.33 175,-220.7"/>
 <polygon fill="black" stroke="black" points="178.5,-220.77 175,-210.77 171.5,-220.77 178.5,-220.77"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L75">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L75">
 <text xml:space="preserve" text-anchor="start" x="175" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -189,12 +189,12 @@
 <!-- logtalk::message_hook/4&#45;&gt;valid_clauses/2 -->
 <g id="edge1" class="edge">
 <title>logtalk::message_hook/4&#45;&gt;valid_clauses/2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L67" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L67" xlink:title="calls">
 <path fill="none" stroke="black" d="M228.76,-289.53C291.98,-269 396.81,-234.94 464.39,-212.99"/>
 <polygon fill="black" stroke="black" points="465.44,-216.33 473.87,-209.91 463.28,-209.67 465.44,-216.33"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/tools/mutation_testing/subprocess_coverage_hook.lgt#L67">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/tools/mutation_testing/subprocess_coverage_hook.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="362.61" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>

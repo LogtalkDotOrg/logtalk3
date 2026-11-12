@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-374 557,-374 557,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for category interpolator</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 15:49</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 20:36</text>
 <g id="clust1" class="cluster">
 <title>cluster_interpolator_category</title>
 <g id="a_clust1"><a xlink:title="interpolator">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 533,-46 533,-46 539,-46 545,-52 545,-58 545,-58 545,-350 545,-350 545,-356 539,-362 533,-362 533,-362 20,-362 20,-362 14,-362 8,-356 8,-350 8,-350 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-346.46" font-family="monospace" font-size="10.00" fill="dimgray">interpolator</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>prepare_points/3</title>
 <polygon fill="yellow" stroke="black" points="150.21,-326 17.79,-326 17.79,-290 150.21,-290 150.21,-326"/>
 <text xml:space="preserve" text-anchor="start" x="25.79" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="31.19" y="-309.71" font-family="monospace" font-size="11.00">prepare_points/3</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>valid_points/1</title>
 <polygon fill="cornsilk" stroke="black" points="143.61,-209 24.39,-209 24.39,-173 143.61,-173 143.61,-209"/>
 <text xml:space="preserve" text-anchor="start" x="32.39" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L81">
+<g id="a_node5_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L81">
 <text xml:space="preserve" text-anchor="start" x="37.79" y="-192.71" font-family="monospace" font-size="11.00">valid_points/1</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- prepare_points/3&#45;&gt;valid_points/1 -->
 <g id="edge1" class="edge">
 <title>prepare_points/3&#45;&gt;valid_points/1</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L70" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L70" xlink:title="calls">
 <path fill="none" stroke="black" d="M84,-289.53C84,-271.28 84,-242.33 84,-220.7"/>
 <polygon fill="black" stroke="black" points="87.5,-220.77 84,-210.77 80.5,-220.77 87.5,-220.77"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L70">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L70">
 <text xml:space="preserve" text-anchor="start" x="84" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>strict_points/1</title>
 <polygon fill="cornsilk" stroke="black" points="287.91,-209 162.09,-209 162.09,-173 287.91,-173 287.91,-209"/>
 <text xml:space="preserve" text-anchor="start" x="170.09" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L92">
+<g id="a_node7_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L92">
 <text xml:space="preserve" text-anchor="start" x="175.49" y="-192.71" font-family="monospace" font-size="11.00">strict_points/1</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- prepare_points/3&#45;&gt;strict_points/1 -->
 <g id="edge2" class="edge">
 <title>prepare_points/3&#45;&gt;strict_points/1</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L70" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L70" xlink:title="calls">
 <path fill="none" stroke="black" d="M105.41,-289.53C129.36,-270 168.31,-238.23 195.22,-216.29"/>
 <polygon fill="black" stroke="black" points="197.14,-219.24 202.67,-210.21 192.71,-213.82 197.14,-219.24"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L70">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L70">
 <text xml:space="preserve" text-anchor="start" x="158.73" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -97,7 +97,7 @@
 <title>pairs_lists/3</title>
 <polygon fill="cornsilk" stroke="black" points="418.31,-209 305.69,-209 305.69,-173 418.31,-173 418.31,-209"/>
 <text xml:space="preserve" text-anchor="start" x="313.69" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L101">
+<g id="a_node8_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L101">
 <text xml:space="preserve" text-anchor="start" x="319.09" y="-192.71" font-family="monospace" font-size="11.00">pairs_lists/3</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- prepare_points/3&#45;&gt;pairs_lists/3 -->
 <g id="edge3" class="edge">
 <title>prepare_points/3&#45;&gt;pairs_lists/3</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L70" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L70" xlink:title="calls">
 <path fill="none" stroke="black" d="M126.22,-289.53C175.25,-269.25 256.16,-235.78 309.27,-213.81"/>
 <polygon fill="black" stroke="black" points="310.54,-217.08 318.44,-210.02 307.86,-210.61 310.54,-217.08"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L70">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L70">
 <text xml:space="preserve" text-anchor="start" x="231.34" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -124,7 +124,7 @@
 <title>check_argument/3</title>
 <polygon fill="yellow" stroke="black" points="300.21,-326 167.79,-326 167.79,-290 300.21,-290 300.21,-326"/>
 <text xml:space="preserve" text-anchor="start" x="175.79" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L44">
+<g id="a_node2_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L44">
 <text xml:space="preserve" text-anchor="start" x="181.19" y="-309.71" font-family="monospace" font-size="11.00">check_argument/3</text>
 </a>
 </g>
@@ -138,7 +138,7 @@
 <title>select_interval/3</title>
 <polygon fill="yellow" stroke="black" points="457.51,-326 318.49,-326 318.49,-290 457.51,-290 457.51,-326"/>
 <text xml:space="preserve" text-anchor="start" x="326.49" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L56">
+<g id="a_node3_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L56">
 <text xml:space="preserve" text-anchor="start" x="331.89" y="-309.71" font-family="monospace" font-size="11.00">select_interval/3</text>
 </a>
 </g>
@@ -152,7 +152,7 @@
 <title>fit/2</title>
 <polygon fill="cornsilk" stroke="black" points="534.9,-326 475.1,-326 475.1,-290 534.9,-290 534.9,-326"/>
 <text xml:space="preserve" text-anchor="start" x="483.1" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L67">
+<g id="a_node4_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="488.5" y="-309.71" font-family="monospace" font-size="11.00">fit/2</text>
 </a>
 </g>
@@ -175,12 +175,12 @@
 <!-- fit/2&#45;&gt;::fit/3 -->
 <g id="edge5" class="edge">
 <title>fit/2&#45;&gt;::fit/3</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L67" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L67" xlink:title="calls">
 <path fill="none" stroke="black" d="M503.94,-289.53C502.83,-271.28 501.06,-242.33 499.75,-220.7"/>
 <polygon fill="black" stroke="black" points="503.24,-220.53 499.14,-210.76 496.26,-220.96 503.24,-220.53"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L67">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="501.71" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -190,7 +190,7 @@
 <title>valid_point_values/1</title>
 <polygon fill="cornsilk" stroke="black" points="176.41,-92 17.59,-92 17.59,-56 176.41,-56 176.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="25.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L86" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L86">
+<g id="a_node6_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L86" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L86">
 <text xml:space="preserve" text-anchor="start" x="30.99" y="-75.71" font-family="monospace" font-size="11.00">valid_point_values/1</text>
 </a>
 </g>
@@ -202,12 +202,12 @@
 <!-- valid_points/1&#45;&gt;valid_point_values/1 -->
 <g id="edge4" class="edge">
 <title>valid_points/1&#45;&gt;valid_point_values/1</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L81" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L81" xlink:title="calls">
 <path fill="none" stroke="black" d="M85.97,-172.53C88.05,-154.19 91.34,-125.06 93.79,-103.4"/>
 <polygon fill="black" stroke="black" points="97.23,-104.09 94.88,-93.76 90.28,-103.3 97.23,-104.09"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L81">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L81">
 <text xml:space="preserve" text-anchor="start" x="90.89" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -229,12 +229,12 @@
 <!-- valid_points/1&#45;&gt;list::length/2 -->
 <g id="edge6" class="edge">
 <title>valid_points/1&#45;&gt;list::length/2</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L81" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L81" xlink:title="calls">
 <path fill="none" stroke="black" d="M109.82,-172.53C138.99,-152.8 186.61,-120.59 219.08,-98.62"/>
 <polygon fill="black" stroke="black" points="220.64,-101.79 226.96,-93.29 216.72,-95.99 220.64,-101.79"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/numerical_analysis/interpolator.lgt#L81">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/interpolator.lgt#L81">
 <text xml:space="preserve" text-anchor="start" x="174.1" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>

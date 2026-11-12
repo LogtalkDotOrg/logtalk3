@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-491 4049,-491 4049,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for category authenticated_channel</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 15:49</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 20:35</text>
 <g id="clust1" class="cluster">
 <title>cluster_authenticated_channel_category</title>
 <g id="a_clust1"><a xlink:title="authenticated_channel">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 4025,-46 4025,-46 4031,-46 4037,-52 4037,-58 4037,-58 4037,-467 4037,-467 4037,-473 4031,-479 4025,-479 4025,-479 20,-479 20,-479 14,-479 8,-473 8,-467 8,-467 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-463.46" font-family="monospace" font-size="10.00" fill="dimgray">authenticated_channel</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>authenticated_channel_initiate/4</title>
 <polygon fill="springgreen" stroke="black" points="463.02,-443 224.98,-443 224.98,-407 463.02,-407 463.02,-443"/>
 <text xml:space="preserve" text-anchor="start" x="232.98" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="238.38" y="-426.71" font-family="monospace" font-size="11.00">authenticated_channel_initiate/4</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>offer_signed_bytes/4</title>
 <polygon fill="cornsilk" stroke="black" points="744.41,-326 585.59,-326 585.59,-290 744.41,-290 744.41,-326"/>
 <text xml:space="preserve" text-anchor="start" x="593.59" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node13_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L308" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L308">
+<g id="a_node13_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L308" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L308">
 <text xml:space="preserve" text-anchor="start" x="598.99" y="-309.71" font-family="monospace" font-size="11.00">offer_signed_bytes/4</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- authenticated_channel_initiate/4&#45;&gt;offer_signed_bytes/4 -->
 <g id="edge1" class="edge">
 <title>authenticated_channel_initiate/4&#45;&gt;offer_signed_bytes/4</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L167" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L167" xlink:title="calls">
 <path fill="none" stroke="black" d="M463.22,-414.61C533.51,-406.84 613.86,-393.35 641,-371 651.13,-362.66 656.99,-349.5 660.38,-337.45"/>
 <polygon fill="black" stroke="black" points="663.75,-338.43 662.6,-327.9 656.93,-336.85 663.75,-338.43"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L167">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L167">
 <text xml:space="preserve" text-anchor="start" x="648.31" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- authenticated_channel_initiate/4&#45;&gt;type::check/3 -->
 <g id="edge48" class="edge">
 <title>authenticated_channel_initiate/4&#45;&gt;type::check/3</title>
-<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L167" xlink:title="calls">
+<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L167" xlink:title="calls">
 <path fill="none" stroke="black" d="M224.52,-409.73C116.11,-392.25 -17.87,-356.41 45,-290 170.3,-157.62 681.9,-253.01 864,-245 1348.68,-223.69 1471.73,-251.65 1955,-209 1971.33,-207.56 1988.86,-205.38 2005.27,-203.06"/>
 <polygon fill="black" stroke="black" points="2005.54,-206.56 2014.93,-201.66 2004.53,-199.63 2005.54,-206.56"/>
 </a>
 </g>
-<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L167">
+<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L167">
 <text xml:space="preserve" text-anchor="start" x="45" y="-305.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -106,12 +106,12 @@
 <!-- authenticated_channel_initiate/4&#45;&gt;::ed25519_public_key/2 -->
 <g id="edge34" class="edge">
 <title>authenticated_channel_initiate/4&#45;&gt;::ed25519_public_key/2</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L167" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L167" xlink:title="calls">
 <path fill="none" stroke="black" d="M317.12,-406.53C286.75,-386.8 237.17,-354.59 203.36,-332.62"/>
 <polygon fill="black" stroke="black" points="205.41,-329.78 195.11,-327.27 201.59,-335.65 205.41,-329.78"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L167">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L167">
 <text xml:space="preserve" text-anchor="start" x="260.81" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -130,12 +130,12 @@
 <!-- authenticated_channel_initiate/4&#45;&gt;::x25519_keypair/2 -->
 <g id="edge35" class="edge">
 <title>authenticated_channel_initiate/4&#45;&gt;::x25519_keypair/2</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L167" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L167" xlink:title="calls">
 <path fill="none" stroke="black" d="M344,-406.53C344,-388.28 344,-359.33 344,-337.7"/>
 <polygon fill="black" stroke="black" points="347.5,-337.77 344,-327.77 340.5,-337.77 347.5,-337.77"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L167">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L167">
 <text xml:space="preserve" text-anchor="start" x="344" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -154,12 +154,12 @@
 <!-- authenticated_channel_initiate/4&#45;&gt;::ed25519_sign/3 -->
 <g id="edge36" class="edge">
 <title>authenticated_channel_initiate/4&#45;&gt;::ed25519_sign/3</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L167" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L167" xlink:title="calls">
 <path fill="none" stroke="black" d="M367.84,-406.53C394.55,-386.97 438.01,-355.14 467.97,-333.19"/>
 <polygon fill="black" stroke="black" points="469.97,-336.07 475.97,-327.34 465.83,-330.42 469.97,-336.07"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L167">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L167">
 <text xml:space="preserve" text-anchor="start" x="427.21" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -169,7 +169,7 @@
 <title>authenticated_channel_accept/5</title>
 <polygon fill="springgreen" stroke="black" points="1141.42,-443 916.58,-443 916.58,-407 1141.42,-407 1141.42,-443"/>
 <text xml:space="preserve" text-anchor="start" x="924.58" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L49">
+<g id="a_node2_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L49">
 <text xml:space="preserve" text-anchor="start" x="929.98" y="-426.71" font-family="monospace" font-size="11.00">authenticated_channel_accept/5</text>
 </a>
 </g>
@@ -183,7 +183,7 @@
 <title>check_offer/5</title>
 <polygon fill="cornsilk" stroke="black" points="1229.31,-326 1116.69,-326 1116.69,-290 1229.31,-290 1229.31,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1124.69" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L240" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L240">
+<g id="a_node6_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L240" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L240">
 <text xml:space="preserve" text-anchor="start" x="1130.09" y="-309.71" font-family="monospace" font-size="11.00">check_offer/5</text>
 </a>
 </g>
@@ -195,12 +195,12 @@
 <!-- authenticated_channel_accept/5&#45;&gt;check_offer/5 -->
 <g id="edge2" class="edge">
 <title>authenticated_channel_accept/5&#45;&gt;check_offer/5</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178" xlink:title="calls">
 <path fill="none" stroke="black" d="M1050.87,-406.53C1075.33,-387 1115.11,-355.23 1142.59,-333.29"/>
 <polygon fill="black" stroke="black" points="1144.58,-336.17 1150.21,-327.2 1140.21,-330.7 1144.58,-336.17"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178">
 <text xml:space="preserve" text-anchor="start" x="1105.32" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -208,12 +208,12 @@
 <!-- authenticated_channel_accept/5&#45;&gt;offer_signed_bytes/4 -->
 <g id="edge3" class="edge">
 <title>authenticated_channel_accept/5&#45;&gt;offer_signed_bytes/4</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178" xlink:title="calls">
 <path fill="none" stroke="black" d="M973.72,-406.53C908.59,-385.96 800.48,-351.8 731.01,-329.86"/>
 <polygon fill="black" stroke="black" points="732.24,-326.57 721.65,-326.9 730.13,-333.25 732.24,-326.57"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178">
 <text xml:space="preserve" text-anchor="start" x="857.91" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -223,7 +223,7 @@
 <title>response_signed_bytes/6</title>
 <polygon fill="cornsilk" stroke="black" points="941.31,-326 762.69,-326 762.69,-290 941.31,-290 941.31,-326"/>
 <text xml:space="preserve" text-anchor="start" x="770.69" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node14_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L312" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L312">
+<g id="a_node14_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L312" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L312">
 <text xml:space="preserve" text-anchor="start" x="776.09" y="-309.71" font-family="monospace" font-size="11.00">response_signed_bytes/6</text>
 </a>
 </g>
@@ -235,12 +235,12 @@
 <!-- authenticated_channel_accept/5&#45;&gt;response_signed_bytes/6 -->
 <g id="edge4" class="edge">
 <title>authenticated_channel_accept/5&#45;&gt;response_signed_bytes/6</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178" xlink:title="calls">
 <path fill="none" stroke="black" d="M1002.12,-406.53C971.75,-386.8 922.17,-354.59 888.36,-332.62"/>
 <polygon fill="black" stroke="black" points="890.41,-329.78 880.11,-327.27 886.59,-335.65 890.41,-329.78"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178">
 <text xml:space="preserve" text-anchor="start" x="945.81" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -250,7 +250,7 @@
 <title>transcript_hash/7</title>
 <polygon fill="cornsilk" stroke="black" points="1098.51,-326 959.49,-326 959.49,-290 1098.51,-290 1098.51,-326"/>
 <text xml:space="preserve" text-anchor="start" x="967.49" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node15_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L316" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L316">
+<g id="a_node15_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L316" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L316">
 <text xml:space="preserve" text-anchor="start" x="972.89" y="-309.71" font-family="monospace" font-size="11.00">transcript_hash/7</text>
 </a>
 </g>
@@ -262,12 +262,12 @@
 <!-- authenticated_channel_accept/5&#45;&gt;transcript_hash/7 -->
 <g id="edge5" class="edge">
 <title>authenticated_channel_accept/5&#45;&gt;transcript_hash/7</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178" xlink:title="calls">
 <path fill="none" stroke="black" d="M1029,-406.53C1029,-388.28 1029,-359.33 1029,-337.7"/>
 <polygon fill="black" stroke="black" points="1032.5,-337.77 1029,-327.77 1025.5,-337.77 1032.5,-337.77"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178">
 <text xml:space="preserve" text-anchor="start" x="1029" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -277,7 +277,7 @@
 <title>channel_material/6</title>
 <polygon fill="cornsilk" stroke="black" points="1821.81,-326 1676.19,-326 1676.19,-290 1821.81,-290 1821.81,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1684.19" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node16_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L321">
+<g id="a_node16_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L321">
 <text xml:space="preserve" text-anchor="start" x="1689.59" y="-309.71" font-family="monospace" font-size="11.00">channel_material/6</text>
 </a>
 </g>
@@ -289,12 +289,12 @@
 <!-- authenticated_channel_accept/5&#45;&gt;channel_material/6 -->
 <g id="edge6" class="edge">
 <title>authenticated_channel_accept/5&#45;&gt;channel_material/6</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178" xlink:title="calls">
 <path fill="none" stroke="black" d="M1141.72,-417.76C1220.2,-411.2 1326.58,-397.89 1417,-371 1425.95,-368.34 1427.07,-364.74 1436,-362 1532.33,-332.39 1563.24,-343.86 1664.7,-326.51"/>
 <polygon fill="black" stroke="black" points="1665.01,-330.01 1674.25,-324.82 1663.8,-323.12 1665.01,-330.01"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178">
 <text xml:space="preserve" text-anchor="start" x="1436" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -302,12 +302,12 @@
 <!-- authenticated_channel_accept/5&#45;&gt;type::check/3 -->
 <g id="edge49" class="edge">
 <title>authenticated_channel_accept/5&#45;&gt;type::check/3</title>
-<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178" xlink:title="calls">
+<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178" xlink:title="calls">
 <path fill="none" stroke="black" d="M1078.04,-406.61C1122.11,-389.72 1187.48,-361.45 1238,-326 1256.52,-313 1253.64,-299.88 1274,-290 1342.55,-256.72 1879.45,-218.93 1955,-209 1971.26,-206.86 1988.75,-204.42 2005.16,-202.07"/>
 <polygon fill="black" stroke="black" points="2005.43,-205.56 2014.82,-200.67 2004.42,-198.64 2005.43,-205.56"/>
 </a>
 </g>
-<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178">
+<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178">
 <text xml:space="preserve" text-anchor="start" x="1274" y="-305.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -315,12 +315,12 @@
 <!-- authenticated_channel_accept/5&#45;&gt;::ed25519_public_key/2 -->
 <g id="edge37" class="edge">
 <title>authenticated_channel_accept/5&#45;&gt;::ed25519_public_key/2</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178" xlink:title="calls">
 <path fill="none" stroke="black" d="M916.11,-416.95C808.04,-409.21 640.67,-394.64 497,-371 479.44,-368.11 475.42,-365.59 458,-362 439.04,-358.09 341.4,-340.39 264.38,-326.5"/>
 <polygon fill="black" stroke="black" points="265.13,-323.08 254.67,-324.75 263.89,-329.97 265.13,-323.08"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178">
 <text xml:space="preserve" text-anchor="start" x="497" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -328,12 +328,12 @@
 <!-- authenticated_channel_accept/5&#45;&gt;::x25519_keypair/2 -->
 <g id="edge39" class="edge">
 <title>authenticated_channel_accept/5&#45;&gt;::x25519_keypair/2</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178" xlink:title="calls">
 <path fill="none" stroke="black" d="M916.47,-417.37C820.24,-410.28 678.46,-396.43 557,-371 543.79,-368.23 540.93,-365.87 528,-362 491.36,-351.04 450.49,-339.22 416.59,-329.54"/>
 <polygon fill="black" stroke="black" points="417.88,-326.27 407.3,-326.89 415.96,-333 417.88,-326.27"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178">
 <text xml:space="preserve" text-anchor="start" x="557" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -341,12 +341,12 @@
 <!-- authenticated_channel_accept/5&#45;&gt;::ed25519_sign/3 -->
 <g id="edge40" class="edge">
 <title>authenticated_channel_accept/5&#45;&gt;::ed25519_sign/3</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178" xlink:title="calls">
 <path fill="none" stroke="black" d="M916.1,-421.6C830.22,-416.96 710.17,-404.36 610,-371 583.19,-362.07 555.56,-346.27 534.82,-332.85"/>
 <polygon fill="black" stroke="black" points="536.76,-329.93 526.49,-327.33 532.89,-335.77 536.76,-329.93"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178">
 <text xml:space="preserve" text-anchor="start" x="610" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -365,12 +365,12 @@
 <!-- authenticated_channel_accept/5&#45;&gt;::ed25519_verify/3 -->
 <g id="edge38" class="edge">
 <title>authenticated_channel_accept/5&#45;&gt;::ed25519_verify/3</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178" xlink:title="calls">
 <path fill="none" stroke="black" d="M1136.23,-406.56C1177.8,-398.14 1225.32,-386.45 1267,-371 1294.67,-360.74 1323.96,-345.05 1346.18,-332.01"/>
 <polygon fill="black" stroke="black" points="1347.77,-335.14 1354.57,-327.02 1344.18,-329.13 1347.77,-335.14"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178">
 <text xml:space="preserve" text-anchor="start" x="1286.89" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -389,12 +389,12 @@
 <!-- authenticated_channel_accept/5&#45;&gt;::x25519_shared_secret/3 -->
 <g id="edge41" class="edge">
 <title>authenticated_channel_accept/5&#45;&gt;::x25519_shared_secret/3</title>
-<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178" xlink:title="calls">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178" xlink:title="calls">
 <path fill="none" stroke="black" d="M1141.8,-412.54C1208.12,-404.27 1293.18,-390.98 1367,-371 1377.59,-368.13 1379.62,-365.59 1390,-362 1423.45,-350.44 1460.96,-338.94 1492.72,-329.63"/>
 <polygon fill="black" stroke="black" points="1493.63,-333.01 1502.25,-326.86 1491.67,-326.29 1493.63,-333.01"/>
 </a>
 </g>
-<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L178">
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L178">
 <text xml:space="preserve" text-anchor="start" x="1390" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -404,7 +404,7 @@
 <title>authenticated_channel_finalize/3</title>
 <polygon fill="springgreen" stroke="black" points="1708.02,-443 1469.98,-443 1469.98,-407 1708.02,-407 1708.02,-443"/>
 <text xml:space="preserve" text-anchor="start" x="1477.98" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L73">
+<g id="a_node3_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L73">
 <text xml:space="preserve" text-anchor="start" x="1483.38" y="-426.71" font-family="monospace" font-size="11.00">authenticated_channel_finalize/3</text>
 </a>
 </g>
@@ -418,7 +418,7 @@
 <title>check_response/5</title>
 <polygon fill="cornsilk" stroke="black" points="1972.21,-326 1839.79,-326 1839.79,-290 1972.21,-290 1972.21,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1847.79" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L249" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L249">
+<g id="a_node7_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L249" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L249">
 <text xml:space="preserve" text-anchor="start" x="1853.19" y="-309.71" font-family="monospace" font-size="11.00">check_response/5</text>
 </a>
 </g>
@@ -430,12 +430,12 @@
 <!-- authenticated_channel_finalize/3&#45;&gt;check_response/5 -->
 <g id="edge8" class="edge">
 <title>authenticated_channel_finalize/3&#45;&gt;check_response/5</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L196" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L196" xlink:title="calls">
 <path fill="none" stroke="black" d="M1637.15,-406.53C1693.52,-386.08 1786.86,-352.22 1847.39,-330.26"/>
 <polygon fill="black" stroke="black" points="1848.29,-333.66 1856.5,-326.96 1845.9,-327.08 1848.29,-333.66"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L196">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L196">
 <text xml:space="preserve" text-anchor="start" x="1757" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -445,7 +445,7 @@
 <title>check_pending_state/7</title>
 <polygon fill="cornsilk" stroke="black" points="2155.71,-326 1990.29,-326 1990.29,-290 2155.71,-290 2155.71,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1998.29" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L258" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L258">
+<g id="a_node8_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L258" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L258">
 <text xml:space="preserve" text-anchor="start" x="2003.69" y="-309.71" font-family="monospace" font-size="11.00">check_pending_state/7</text>
 </a>
 </g>
@@ -457,12 +457,12 @@
 <!-- authenticated_channel_finalize/3&#45;&gt;check_pending_state/7 -->
 <g id="edge7" class="edge">
 <title>authenticated_channel_finalize/3&#45;&gt;check_pending_state/7</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L196" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L196" xlink:title="calls">
 <path fill="none" stroke="black" d="M1662.51,-406.53C1750.18,-385.7 1896.42,-350.96 1988.62,-329.05"/>
 <polygon fill="black" stroke="black" points="1989.2,-332.51 1998.12,-326.79 1987.58,-325.7 1989.2,-332.51"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L196">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L196">
 <text xml:space="preserve" text-anchor="start" x="1845.51" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -470,12 +470,12 @@
 <!-- authenticated_channel_finalize/3&#45;&gt;response_signed_bytes/6 -->
 <g id="edge9" class="edge">
 <title>authenticated_channel_finalize/3&#45;&gt;response_signed_bytes/6</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L196" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L196" xlink:title="calls">
 <path fill="none" stroke="black" d="M1477.59,-406.54C1432.93,-398.02 1381.4,-386.27 1336,-371 1327.14,-368.02 1326,-364.49 1317,-362 1162.6,-319.25 1114.56,-346.72 953,-326.31"/>
 <polygon fill="black" stroke="black" points="953.55,-322.86 943.18,-325.03 952.64,-329.8 953.55,-322.86"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L196">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L196">
 <text xml:space="preserve" text-anchor="start" x="1336" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -483,12 +483,12 @@
 <!-- authenticated_channel_finalize/3&#45;&gt;transcript_hash/7 -->
 <g id="edge10" class="edge">
 <title>authenticated_channel_finalize/3&#45;&gt;transcript_hash/7</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L196" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L196" xlink:title="calls">
 <path fill="none" stroke="black" d="M1555.5,-406.59C1521.02,-388.74 1471.7,-363.38 1467,-362 1316.57,-317.92 1268.56,-349.42 1109.83,-326.14"/>
 <polygon fill="black" stroke="black" points="1110.62,-322.72 1100.2,-324.67 1109.56,-329.64 1110.62,-322.72"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L196">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L196">
 <text xml:space="preserve" text-anchor="start" x="1485.05" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -496,12 +496,12 @@
 <!-- authenticated_channel_finalize/3&#45;&gt;channel_material/6 -->
 <g id="edge11" class="edge">
 <title>authenticated_channel_finalize/3&#45;&gt;channel_material/6</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L196" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L196" xlink:title="calls">
 <path fill="none" stroke="black" d="M1613.3,-406.53C1640.63,-386.89 1685.19,-354.87 1715.74,-332.91"/>
 <polygon fill="black" stroke="black" points="1717.43,-336 1723.5,-327.32 1713.34,-330.32 1717.43,-336"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L196">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L196">
 <text xml:space="preserve" text-anchor="start" x="1673.8" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -509,12 +509,12 @@
 <!-- authenticated_channel_finalize/3&#45;&gt;::ed25519_verify/3 -->
 <g id="edge42" class="edge">
 <title>authenticated_channel_finalize/3&#45;&gt;::ed25519_verify/3</title>
-<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L196" xlink:title="calls">
+<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L196" xlink:title="calls">
 <path fill="none" stroke="black" d="M1572.24,-406.67C1558.41,-393.13 1537.75,-374.55 1517,-362 1496.21,-349.43 1471.91,-338.77 1449.76,-330.38"/>
 <polygon fill="black" stroke="black" points="1451.09,-327.14 1440.5,-326.97 1448.67,-333.71 1451.09,-327.14"/>
 </a>
 </g>
-<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L196">
+<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L196">
 <text xml:space="preserve" text-anchor="start" x="1529.94" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -522,12 +522,12 @@
 <!-- authenticated_channel_finalize/3&#45;&gt;::x25519_shared_secret/3 -->
 <g id="edge43" class="edge">
 <title>authenticated_channel_finalize/3&#45;&gt;::x25519_shared_secret/3</title>
-<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L196" xlink:title="calls">
+<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L196" xlink:title="calls">
 <path fill="none" stroke="black" d="M1585.51,-406.53C1581.84,-388.19 1576.01,-359.06 1571.68,-337.4"/>
 <polygon fill="black" stroke="black" points="1575.14,-336.86 1569.75,-327.74 1568.28,-338.23 1575.14,-336.86"/>
 </a>
 </g>
-<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L196">
+<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L196">
 <text xml:space="preserve" text-anchor="start" x="1578.19" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -537,7 +537,7 @@
 <title>authenticated_channel_encrypt/5</title>
 <polygon fill="springgreen" stroke="black" points="2907.72,-443 2676.28,-443 2676.28,-407 2907.72,-407 2907.72,-443"/>
 <text xml:space="preserve" text-anchor="start" x="2684.28" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L96">
+<g id="a_node4_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L96">
 <text xml:space="preserve" text-anchor="start" x="2689.68" y="-426.71" font-family="monospace" font-size="11.00">authenticated_channel_encrypt/5</text>
 </a>
 </g>
@@ -551,7 +551,7 @@
 <title>check_channel_state/10</title>
 <polygon fill="cornsilk" stroke="black" points="3515.01,-326 3342.99,-326 3342.99,-290 3515.01,-290 3515.01,-326"/>
 <text xml:space="preserve" text-anchor="start" x="3350.99" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L269">
+<g id="a_node9_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L269">
 <text xml:space="preserve" text-anchor="start" x="3356.39" y="-309.71" font-family="monospace" font-size="11.00">check_channel_state/10</text>
 </a>
 </g>
@@ -563,12 +563,12 @@
 <!-- authenticated_channel_encrypt/5&#45;&gt;check_channel_state/10 -->
 <g id="edge12" class="edge">
 <title>authenticated_channel_encrypt/5&#45;&gt;check_channel_state/10</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L208" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L208" xlink:title="calls">
 <path fill="none" stroke="black" d="M2877.02,-406.55C2940.55,-393.69 3029.58,-376.08 3108,-362 3205.95,-344.42 3230.83,-342.34 3329,-326 3329.83,-325.86 3330.66,-325.72 3331.5,-325.58"/>
 <polygon fill="black" stroke="black" points="3331.77,-329.09 3341.06,-323.98 3330.62,-322.18 3331.77,-329.09"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L208">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L208">
 <text xml:space="preserve" text-anchor="start" x="3108" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -578,7 +578,7 @@
 <title>channel_direction/3</title>
 <polygon fill="cornsilk" stroke="black" points="3052.11,-326 2899.89,-326 2899.89,-290 3052.11,-290 3052.11,-326"/>
 <text xml:space="preserve" text-anchor="start" x="2907.89" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node12_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L300" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L300">
+<g id="a_node12_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L300" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L300">
 <text xml:space="preserve" text-anchor="start" x="2913.29" y="-309.71" font-family="monospace" font-size="11.00">channel_direction/3</text>
 </a>
 </g>
@@ -590,12 +590,12 @@
 <!-- authenticated_channel_encrypt/5&#45;&gt;channel_direction/3 -->
 <g id="edge14" class="edge">
 <title>authenticated_channel_encrypt/5&#45;&gt;channel_direction/3</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L208" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L208" xlink:title="calls">
 <path fill="none" stroke="black" d="M2819.95,-406.53C2851.65,-386.72 2903.5,-354.31 2938.65,-332.34"/>
 <polygon fill="black" stroke="black" points="2940.18,-335.51 2946.81,-327.24 2936.47,-329.58 2940.18,-335.51"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L208">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L208">
 <text xml:space="preserve" text-anchor="start" x="2889.52" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -605,7 +605,7 @@
 <title>message_material/6</title>
 <polygon fill="cornsilk" stroke="black" points="2755.81,-326 2610.19,-326 2610.19,-290 2755.81,-290 2755.81,-326"/>
 <text xml:space="preserve" text-anchor="start" x="2618.19" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node17_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L332" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L332">
+<g id="a_node17_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L332" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L332">
 <text xml:space="preserve" text-anchor="start" x="2623.59" y="-309.71" font-family="monospace" font-size="11.00">message_material/6</text>
 </a>
 </g>
@@ -617,12 +617,12 @@
 <!-- authenticated_channel_encrypt/5&#45;&gt;message_material/6 -->
 <g id="edge15" class="edge">
 <title>authenticated_channel_encrypt/5&#45;&gt;message_material/6</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L208" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L208" xlink:title="calls">
 <path fill="none" stroke="black" d="M2775.45,-406.53C2757.25,-387.34 2727.87,-356.33 2707.11,-334.44"/>
 <polygon fill="black" stroke="black" points="2709.81,-332.2 2700.39,-327.35 2704.73,-337.02 2709.81,-332.2"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L208">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L208">
 <text xml:space="preserve" text-anchor="start" x="2740.77" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -632,7 +632,7 @@
 <title>message_aad/5</title>
 <polygon fill="cornsilk" stroke="black" points="2529.31,-326 2416.69,-326 2416.69,-290 2529.31,-290 2529.31,-326"/>
 <text xml:space="preserve" text-anchor="start" x="2424.69" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node18_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L340" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L340">
+<g id="a_node18_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L340" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L340">
 <text xml:space="preserve" text-anchor="start" x="2430.09" y="-309.71" font-family="monospace" font-size="11.00">message_aad/5</text>
 </a>
 </g>
@@ -644,12 +644,12 @@
 <!-- authenticated_channel_encrypt/5&#45;&gt;message_aad/5 -->
 <g id="edge17" class="edge">
 <title>authenticated_channel_encrypt/5&#45;&gt;message_aad/5</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L208" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L208" xlink:title="calls">
 <path fill="none" stroke="black" d="M2675.89,-418.35C2599.05,-412.05 2507.69,-398.8 2481,-371 2472.6,-362.25 2470.01,-349.33 2469.75,-337.54"/>
 <polygon fill="black" stroke="black" points="2473.24,-337.96 2470.1,-327.84 2466.25,-337.71 2473.24,-337.96"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L208">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L208">
 <text xml:space="preserve" text-anchor="start" x="2481" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -659,7 +659,7 @@
 <title>check_counter_available/2</title>
 <polygon fill="cornsilk" stroke="black" points="3261.91,-326 3070.09,-326 3070.09,-290 3261.91,-290 3261.91,-326"/>
 <text xml:space="preserve" text-anchor="start" x="3078.09" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node19_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L344" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L344">
+<g id="a_node19_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L344" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L344">
 <text xml:space="preserve" text-anchor="start" x="3083.49" y="-309.71" font-family="monospace" font-size="11.00">check_counter_available/2</text>
 </a>
 </g>
@@ -671,12 +671,12 @@
 <!-- authenticated_channel_encrypt/5&#45;&gt;check_counter_available/2 -->
 <g id="edge13" class="edge">
 <title>authenticated_channel_encrypt/5&#45;&gt;check_counter_available/2</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L208" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L208" xlink:title="calls">
 <path fill="none" stroke="black" d="M2848.8,-406.53C2915.86,-385.91 3027.26,-351.66 3098.62,-329.72"/>
 <polygon fill="black" stroke="black" points="3099.3,-333.17 3107.83,-326.89 3097.24,-326.48 3099.3,-333.17"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L208">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L208">
 <text xml:space="preserve" text-anchor="start" x="2990.21" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -686,7 +686,7 @@
 <title>counter_bytes/2</title>
 <polygon fill="cornsilk" stroke="black" points="2956.91,-209 2831.09,-209 2831.09,-173 2956.91,-173 2956.91,-209"/>
 <text xml:space="preserve" text-anchor="start" x="2839.09" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node20_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L350" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L350">
+<g id="a_node20_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L350" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L350">
 <text xml:space="preserve" text-anchor="start" x="2844.49" y="-192.71" font-family="monospace" font-size="11.00">counter_bytes/2</text>
 </a>
 </g>
@@ -698,12 +698,12 @@
 <!-- authenticated_channel_encrypt/5&#45;&gt;counter_bytes/2 -->
 <g id="edge16" class="edge">
 <title>authenticated_channel_encrypt/5&#45;&gt;counter_bytes/2</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L208" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L208" xlink:title="calls">
 <path fill="none" stroke="black" d="M2799.67,-406.56C2817.25,-366.58 2860.58,-268.01 2881.84,-219.66"/>
 <polygon fill="black" stroke="black" points="2884.95,-221.27 2885.77,-210.71 2878.55,-218.45 2884.95,-221.27"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L208">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L208">
 <text xml:space="preserve" text-anchor="start" x="2849.78" y="-305.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -711,12 +711,12 @@
 <!-- authenticated_channel_encrypt/5&#45;&gt;type::check/3 -->
 <g id="edge50" class="edge">
 <title>authenticated_channel_encrypt/5&#45;&gt;type::check/3</title>
-<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L208" xlink:title="calls">
+<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L208" xlink:title="calls">
 <path fill="none" stroke="black" d="M2739.45,-406.52C2693.47,-389.84 2626.08,-361.94 2574,-326 2555.37,-313.15 2557.89,-300.78 2538,-290 2409.18,-220.19 2235.31,-200.08 2140.89,-194.3"/>
 <polygon fill="black" stroke="black" points="2141.19,-190.81 2131.01,-193.74 2140.79,-197.8 2141.19,-190.81"/>
 </a>
 </g>
-<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L208">
+<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L208">
 <text xml:space="preserve" text-anchor="start" x="2574" y="-305.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -738,12 +738,12 @@
 <!-- authenticated_channel_encrypt/5&#45;&gt;list::append/3 -->
 <g id="edge51" class="edge">
 <title>authenticated_channel_encrypt/5&#45;&gt;list::append/3</title>
-<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L208" xlink:title="calls">
+<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L208" xlink:title="calls">
 <path fill="none" stroke="black" d="M2791.62,-406.63C2791.54,-380.64 2793.26,-330.37 2806,-290 2812.58,-269.13 2835.94,-264.5 2826,-245 2820,-233.24 2810.04,-223.47 2799.37,-215.67"/>
 <polygon fill="black" stroke="black" points="2801.41,-212.82 2791.16,-210.16 2797.51,-218.63 2801.41,-212.82"/>
 </a>
 </g>
-<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L208">
+<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L208">
 <text xml:space="preserve" text-anchor="start" x="2806" y="-305.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -762,12 +762,12 @@
 <!-- authenticated_channel_encrypt/5&#45;&gt;::xchacha20_poly1305_encrypt/5 -->
 <g id="edge44" class="edge">
 <title>authenticated_channel_encrypt/5&#45;&gt;::xchacha20_poly1305_encrypt/5</title>
-<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L208" xlink:title="calls">
+<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L208" xlink:title="calls">
 <path fill="none" stroke="black" d="M2675.85,-412.87C2607.56,-404.71 2519.98,-391.42 2444,-371 2406.07,-360.81 2364.81,-344.42 2333.96,-331.05"/>
 <polygon fill="black" stroke="black" points="2335.46,-327.89 2324.9,-327.08 2332.65,-334.3 2335.46,-327.89"/>
 </a>
 </g>
-<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L208">
+<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L208">
 <text xml:space="preserve" text-anchor="start" x="2444" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -777,7 +777,7 @@
 <title>authenticated_channel_decrypt/5</title>
 <polygon fill="springgreen" stroke="black" points="3452.72,-443 3221.28,-443 3221.28,-407 3452.72,-407 3452.72,-443"/>
 <text xml:space="preserve" text-anchor="start" x="3229.28" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L123" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L123">
+<g id="a_node5_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L123" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L123">
 <text xml:space="preserve" text-anchor="start" x="3234.68" y="-426.71" font-family="monospace" font-size="11.00">authenticated_channel_decrypt/5</text>
 </a>
 </g>
@@ -789,12 +789,12 @@
 <!-- authenticated_channel_decrypt/5&#45;&gt;check_channel_state/10 -->
 <g id="edge18" class="edge">
 <title>authenticated_channel_decrypt/5&#45;&gt;check_channel_state/10</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224" xlink:title="calls">
 <path fill="none" stroke="black" d="M3350.97,-406.53C3366.19,-387.51 3390.69,-356.88 3408.18,-335.02"/>
 <polygon fill="black" stroke="black" points="3410.74,-337.43 3414.25,-327.44 3405.27,-333.06 3410.74,-337.43"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224">
 <text xml:space="preserve" text-anchor="start" x="3385.76" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -804,7 +804,7 @@
 <title>check_message/4</title>
 <polygon fill="cornsilk" stroke="black" points="3658.91,-326 3533.09,-326 3533.09,-290 3658.91,-290 3658.91,-326"/>
 <text xml:space="preserve" text-anchor="start" x="3541.09" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L283" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L283">
+<g id="a_node10_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L283" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L283">
 <text xml:space="preserve" text-anchor="start" x="3546.49" y="-309.71" font-family="monospace" font-size="11.00">check_message/4</text>
 </a>
 </g>
@@ -816,12 +816,12 @@
 <!-- authenticated_channel_decrypt/5&#45;&gt;check_message/4 -->
 <g id="edge19" class="edge">
 <title>authenticated_channel_decrypt/5&#45;&gt;check_message/4</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224" xlink:title="calls">
 <path fill="none" stroke="black" d="M3376.34,-406.53C3421.82,-386.34 3496.77,-353.06 3546.26,-331.09"/>
 <polygon fill="black" stroke="black" points="3547.62,-334.31 3555.34,-327.06 3544.78,-327.92 3547.62,-334.31"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224">
 <text xml:space="preserve" text-anchor="start" x="3474.27" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -829,12 +829,12 @@
 <!-- authenticated_channel_decrypt/5&#45;&gt;channel_direction/3 -->
 <g id="edge21" class="edge">
 <title>authenticated_channel_decrypt/5&#45;&gt;channel_direction/3</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224" xlink:title="calls">
 <path fill="none" stroke="black" d="M3299.62,-406.62C3269.84,-393.21 3226.83,-374.85 3188,-362 3147.68,-348.65 3102.08,-336.85 3063.53,-327.78"/>
 <polygon fill="black" stroke="black" points="3064.34,-324.38 3053.81,-325.52 3062.76,-331.19 3064.34,-324.38"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224">
 <text xml:space="preserve" text-anchor="start" x="3212.91" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -842,12 +842,12 @@
 <!-- authenticated_channel_decrypt/5&#45;&gt;message_material/6 -->
 <g id="edge22" class="edge">
 <title>authenticated_channel_decrypt/5&#45;&gt;message_material/6</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224" xlink:title="calls">
 <path fill="none" stroke="black" d="M3271.92,-406.57C3237.49,-396.91 3194.65,-384.21 3157,-371 3147.03,-367.5 3145.25,-364.55 3135,-362 2976.79,-322.72 2931.28,-349.66 2770,-326 2769,-325.85 2768,-325.7 2766.99,-325.55"/>
 <polygon fill="black" stroke="black" points="2767.94,-322.16 2757.51,-324.03 2766.83,-329.07 2767.94,-322.16"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224">
 <text xml:space="preserve" text-anchor="start" x="3157" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -855,12 +855,12 @@
 <!-- authenticated_channel_decrypt/5&#45;&gt;message_aad/5 -->
 <g id="edge24" class="edge">
 <title>authenticated_channel_decrypt/5&#45;&gt;message_aad/5</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224" xlink:title="calls">
 <path fill="none" stroke="black" d="M3220.8,-420.55C3093.04,-415.31 2882.11,-402.36 2703,-371 2646.36,-361.08 2583.4,-343.65 2537.69,-329.79"/>
 <polygon fill="black" stroke="black" points="2538.79,-326.46 2528.2,-326.88 2536.74,-333.16 2538.79,-326.46"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224">
 <text xml:space="preserve" text-anchor="start" x="2703" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -868,12 +868,12 @@
 <!-- authenticated_channel_decrypt/5&#45;&gt;check_counter_available/2 -->
 <g id="edge20" class="edge">
 <title>authenticated_channel_decrypt/5&#45;&gt;check_counter_available/2</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224" xlink:title="calls">
 <path fill="none" stroke="black" d="M3311.03,-406.53C3281.69,-386.8 3233.79,-354.59 3201.13,-332.62"/>
 <polygon fill="black" stroke="black" points="3203.44,-329.96 3193.19,-327.29 3199.54,-335.77 3203.44,-329.96"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224">
 <text xml:space="preserve" text-anchor="start" x="3256.63" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -881,12 +881,12 @@
 <!-- authenticated_channel_decrypt/5&#45;&gt;counter_bytes/2 -->
 <g id="edge23" class="edge">
 <title>authenticated_channel_decrypt/5&#45;&gt;counter_bytes/2</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224" xlink:title="calls">
 <path fill="none" stroke="black" d="M3452.97,-418.1C3655.18,-405.62 4044.3,-370.8 3973,-290 3906.64,-214.8 3201.96,-196.88 2968.59,-192.99"/>
 <polygon fill="black" stroke="black" points="2968.75,-189.5 2958.69,-192.83 2968.63,-196.5 2968.75,-189.5"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224">
 <text xml:space="preserve" text-anchor="start" x="3981.55" y="-305.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -894,12 +894,12 @@
 <!-- authenticated_channel_decrypt/5&#45;&gt;type::check/3 -->
 <g id="edge52" class="edge">
 <title>authenticated_channel_decrypt/5&#45;&gt;type::check/3</title>
-<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224" xlink:title="calls">
+<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224" xlink:title="calls">
 <path fill="none" stroke="black" d="M3334.2,-406.83C3328.37,-377.19 3311.88,-317.04 3271,-290 3211.23,-250.46 2698.42,-259.99 2627,-254 2451.31,-239.27 2245.13,-214.11 2140.82,-200.82"/>
 <polygon fill="black" stroke="black" points="2141.39,-197.36 2131.02,-199.57 2140.5,-204.31 2141.39,-197.36"/>
 </a>
 </g>
-<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224">
+<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224">
 <text xml:space="preserve" text-anchor="start" x="3304.08" y="-305.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -907,12 +907,12 @@
 <!-- authenticated_channel_decrypt/5&#45;&gt;list::append/3 -->
 <g id="edge53" class="edge">
 <title>authenticated_channel_decrypt/5&#45;&gt;list::append/3</title>
-<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224" xlink:title="calls">
+<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224" xlink:title="calls">
 <path fill="none" stroke="black" d="M3453.09,-414.61C3574.34,-400.55 3737.89,-366.9 3668,-290 3606.47,-222.3 2957.57,-224.62 2824.35,-208.93"/>
 <polygon fill="black" stroke="black" points="2824.99,-205.49 2814.6,-207.57 2824.02,-212.42 2824.99,-205.49"/>
 </a>
 </g>
-<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224">
+<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224">
 <text xml:space="preserve" text-anchor="start" x="3684.76" y="-305.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -931,12 +931,12 @@
 <!-- authenticated_channel_decrypt/5&#45;&gt;::xchacha20_poly1305_decrypt/5 -->
 <g id="edge45" class="edge">
 <title>authenticated_channel_decrypt/5&#45;&gt;::xchacha20_poly1305_decrypt/5</title>
-<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224" xlink:title="calls">
+<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224" xlink:title="calls">
 <path fill="none" stroke="black" d="M3452.91,-414.3C3524.91,-406.51 3618.89,-393.11 3700,-371 3736.61,-361.02 3776.26,-344.65 3805.88,-331.24"/>
 <polygon fill="black" stroke="black" points="3807.31,-334.43 3814.94,-327.08 3804.39,-328.07 3807.31,-334.43"/>
 </a>
 </g>
-<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L224">
+<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L224">
 <text xml:space="preserve" text-anchor="start" x="3725.66" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -944,12 +944,12 @@
 <!-- check_offer/5&#45;&gt;type::check/3 -->
 <g id="edge54" class="edge">
 <title>check_offer/5&#45;&gt;type::check/3</title>
-<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L240" xlink:title="calls">
+<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L240" xlink:title="calls">
 <path fill="none" stroke="black" d="M1183.42,-289.58C1193.34,-274.79 1209.74,-254.5 1230,-245 1303.02,-210.75 1874.72,-216.76 1955,-209 1971.32,-207.42 1988.84,-205.19 2005.25,-202.87"/>
 <polygon fill="black" stroke="black" points="2005.52,-206.37 2014.91,-201.47 2004.51,-199.44 2005.52,-206.37"/>
 </a>
 </g>
-<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L240" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L240">
+<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L240" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L240">
 <text xml:space="preserve" text-anchor="start" x="1230" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -957,12 +957,12 @@
 <!-- check_response/5&#45;&gt;type::check/3 -->
 <g id="edge55" class="edge">
 <title>check_response/5&#45;&gt;type::check/3</title>
-<g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L249" xlink:title="calls">
+<g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L249" xlink:title="calls">
 <path fill="none" stroke="black" d="M1931.36,-289.53C1959.89,-269.89 2006.39,-237.87 2038.28,-215.91"/>
 <polygon fill="black" stroke="black" points="2040.17,-218.85 2046.43,-210.3 2036.2,-213.09 2040.17,-218.85"/>
 </a>
 </g>
-<g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L249" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L249">
+<g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L249" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L249">
 <text xml:space="preserve" text-anchor="start" x="1994.51" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -970,12 +970,12 @@
 <!-- check_pending_state/7&#45;&gt;type::check/3 -->
 <g id="edge56" class="edge">
 <title>check_pending_state/7&#45;&gt;type::check/3</title>
-<g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L258" xlink:title="calls">
+<g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L258" xlink:title="calls">
 <path fill="none" stroke="black" d="M2073,-289.53C2073,-271.28 2073,-242.33 2073,-220.7"/>
 <polygon fill="black" stroke="black" points="2076.5,-220.77 2073,-210.77 2069.5,-220.77 2076.5,-220.77"/>
 </a>
 </g>
-<g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L258" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L258">
+<g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L258" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L258">
 <text xml:space="preserve" text-anchor="start" x="2073" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -985,7 +985,7 @@
 <title>channel_role/1</title>
 <polygon fill="cornsilk" stroke="black" points="3778.61,-209 3659.39,-209 3659.39,-173 3778.61,-173 3778.61,-209"/>
 <text xml:space="preserve" text-anchor="start" x="3667.39" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L296" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L296">
+<g id="a_node11_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L296" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L296">
 <text xml:space="preserve" text-anchor="start" x="3672.79" y="-192.71" font-family="monospace" font-size="11.00">channel_role/1</text>
 </a>
 </g>
@@ -997,12 +997,12 @@
 <!-- check_channel_state/10&#45;&gt;channel_role/1 -->
 <g id="edge25" class="edge">
 <title>check_channel_state/10&#45;&gt;channel_role/1</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L269" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L269" xlink:title="calls">
 <path fill="none" stroke="black" d="M3473.04,-289.53C3524.29,-269.21 3608.94,-235.64 3664.35,-213.67"/>
 <polygon fill="black" stroke="black" points="3665.6,-216.94 3673.61,-210 3663.02,-210.43 3665.6,-216.94"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L269">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L269">
 <text xml:space="preserve" text-anchor="start" x="3582.7" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1010,12 +1010,12 @@
 <!-- check_channel_state/10&#45;&gt;type::check/3 -->
 <g id="edge57" class="edge">
 <title>check_channel_state/10&#45;&gt;type::check/3</title>
-<g id="a_edge57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L269" xlink:title="calls">
+<g id="a_edge57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L269" xlink:title="calls">
 <path fill="none" stroke="black" d="M3342.63,-291.68C3338.03,-291.06 3333.46,-290.5 3329,-290 3028.65,-256.62 2945.37,-317.89 2650,-254 2639.27,-251.68 2637.68,-247.55 2627,-245 2455.34,-204.04 2246.61,-194.55 2141.1,-192.47"/>
 <polygon fill="black" stroke="black" points="2141.25,-188.97 2131.19,-192.3 2141.12,-195.97 2141.25,-188.97"/>
 </a>
 </g>
-<g id="a_edge57&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L269">
+<g id="a_edge57&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L269">
 <text xml:space="preserve" text-anchor="start" x="2650" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1023,12 +1023,12 @@
 <!-- check_message/4&#45;&gt;type::check/3 -->
 <g id="edge58" class="edge">
 <title>check_message/4&#45;&gt;type::check/3</title>
-<g id="a_edge58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L283" xlink:title="calls">
+<g id="a_edge58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L283" xlink:title="calls">
 <path fill="none" stroke="black" d="M3532.9,-291.48C3529.9,-290.94 3526.92,-290.44 3524,-290 3251.67,-248.94 2389.73,-206.69 2140.88,-195.1"/>
 <polygon fill="black" stroke="black" points="2141.16,-191.61 2131.01,-194.64 2140.83,-198.6 2141.16,-191.61"/>
 </a>
 </g>
-<g id="a_edge58&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L283" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L283">
+<g id="a_edge58&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L283" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L283">
 <text xml:space="preserve" text-anchor="start" x="3144.25" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1050,12 +1050,12 @@
 <!-- check_message/4&#45;&gt;list::length/2 -->
 <g id="edge59" class="edge">
 <title>check_message/4&#45;&gt;list::length/2</title>
-<g id="a_edge59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L283" xlink:title="calls">
+<g id="a_edge59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L283" xlink:title="calls">
 <path fill="none" stroke="black" d="M3659.37,-289.95C3731.98,-267.48 3835.23,-224.68 3788,-173 3719.45,-97.99 3002.61,-79.88 2772.02,-75.98"/>
 <polygon fill="black" stroke="black" points="2772.33,-72.48 2762.28,-75.82 2772.22,-79.48 2772.33,-72.48"/>
 </a>
 </g>
-<g id="a_edge59&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L283" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L283">
+<g id="a_edge59&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L283" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L283">
 <text xml:space="preserve" text-anchor="start" x="3799.93" y="-188.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1065,7 +1065,7 @@
 <title>protocol_label/1</title>
 <polygon fill="cornsilk" stroke="black" points="1245.21,-209 1112.79,-209 1112.79,-173 1245.21,-173 1245.21,-209"/>
 <text xml:space="preserve" text-anchor="start" x="1120.79" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node22_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L360" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L360">
+<g id="a_node22_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L360" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L360">
 <text xml:space="preserve" text-anchor="start" x="1126.19" y="-192.71" font-family="monospace" font-size="11.00">protocol_label/1</text>
 </a>
 </g>
@@ -1077,12 +1077,12 @@
 <!-- offer_signed_bytes/4&#45;&gt;protocol_label/1 -->
 <g id="edge26" class="edge">
 <title>offer_signed_bytes/4&#45;&gt;protocol_label/1</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L308" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L308" xlink:title="calls">
 <path fill="none" stroke="black" d="M744.8,-291.26C789.84,-281.76 846.94,-268.67 897,-254 908.33,-250.68 910.62,-248.15 922,-245 998.04,-223.92 1021.35,-225.89 1101.25,-209.52"/>
 <polygon fill="black" stroke="black" points="1101.81,-212.98 1110.88,-207.51 1100.38,-206.13 1101.81,-212.98"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L308" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L308">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L308" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L308">
 <text xml:space="preserve" text-anchor="start" x="922" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1104,12 +1104,12 @@
 <!-- offer_signed_bytes/4&#45;&gt;list::append/2 -->
 <g id="edge60" class="edge">
 <title>offer_signed_bytes/4&#45;&gt;list::append/2</title>
-<g id="a_edge60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L308" xlink:title="calls">
+<g id="a_edge60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L308" xlink:title="calls">
 <path fill="none" stroke="black" d="M698.41,-289.53C736.72,-269.51 799.64,-236.62 841.69,-214.64"/>
 <polygon fill="black" stroke="black" points="843.05,-217.88 850.29,-210.14 839.81,-211.67 843.05,-217.88"/>
 </a>
 </g>
-<g id="a_edge60&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L308" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L308">
+<g id="a_edge60&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L308" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L308">
 <text xml:space="preserve" text-anchor="start" x="781.6" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1117,12 +1117,12 @@
 <!-- response_signed_bytes/6&#45;&gt;protocol_label/1 -->
 <g id="edge27" class="edge">
 <title>response_signed_bytes/6&#45;&gt;protocol_label/1</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L312" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L312" xlink:title="calls">
 <path fill="none" stroke="black" d="M936.56,-289.5C974.05,-280.64 1018.32,-268.63 1057,-254 1061.14,-252.43 1101.83,-231.67 1135.1,-214.59"/>
 <polygon fill="black" stroke="black" points="1136.49,-217.81 1143.79,-210.13 1133.3,-211.58 1136.49,-217.81"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L312" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L312">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L312" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L312">
 <text xml:space="preserve" text-anchor="start" x="1074.97" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1130,12 +1130,12 @@
 <!-- response_signed_bytes/6&#45;&gt;list::append/2 -->
 <g id="edge61" class="edge">
 <title>response_signed_bytes/6&#45;&gt;list::append/2</title>
-<g id="a_edge61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L312" xlink:title="calls">
+<g id="a_edge61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L312" xlink:title="calls">
 <path fill="none" stroke="black" d="M857.01,-289.53C862.3,-271.11 870.71,-241.79 876.94,-220.1"/>
 <polygon fill="black" stroke="black" points="880.24,-221.29 879.63,-210.71 873.51,-219.36 880.24,-221.29"/>
 </a>
 </g>
-<g id="a_edge61&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L312" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L312">
+<g id="a_edge61&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L312" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L312">
 <text xml:space="preserve" text-anchor="start" x="869.49" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1143,12 +1143,12 @@
 <!-- transcript_hash/7&#45;&gt;protocol_label/1 -->
 <g id="edge28" class="edge">
 <title>transcript_hash/7&#45;&gt;protocol_label/1</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L316" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L316" xlink:title="calls">
 <path fill="none" stroke="black" d="M1056.25,-289.59C1071.47,-279.58 1090.63,-266.55 1107,-254 1122.11,-242.42 1138.22,-228.69 1151.37,-217.09"/>
 <polygon fill="black" stroke="black" points="1153.67,-219.73 1158.81,-210.46 1149.02,-214.5 1153.67,-219.73"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L316" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L316">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L316" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L316">
 <text xml:space="preserve" text-anchor="start" x="1117.16" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1156,12 +1156,12 @@
 <!-- transcript_hash/7&#45;&gt;list::append/2 -->
 <g id="edge62" class="edge">
 <title>transcript_hash/7&#45;&gt;list::append/2</title>
-<g id="a_edge62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L316" xlink:title="calls">
+<g id="a_edge62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L316" xlink:title="calls">
 <path fill="none" stroke="black" d="M1007.13,-289.53C982.67,-270 942.89,-238.23 915.41,-216.29"/>
 <polygon fill="black" stroke="black" points="917.79,-213.7 907.79,-210.2 913.42,-219.17 917.79,-213.7"/>
 </a>
 </g>
-<g id="a_edge62&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L316" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L316">
+<g id="a_edge62&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L316" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L316">
 <text xml:space="preserve" text-anchor="start" x="961.32" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1183,12 +1183,12 @@
 <!-- transcript_hash/7&#45;&gt;sha256::digest/2 -->
 <g id="edge63" class="edge">
 <title>transcript_hash/7&#45;&gt;sha256::digest/2</title>
-<g id="a_edge63"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L316" xlink:title="calls">
+<g id="a_edge63"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L316" xlink:title="calls">
 <path fill="none" stroke="black" d="M1029,-289.53C1029,-271.28 1029,-242.33 1029,-220.7"/>
 <polygon fill="black" stroke="black" points="1032.5,-220.77 1029,-210.77 1025.5,-220.77 1032.5,-220.77"/>
 </a>
 </g>
-<g id="a_edge63&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L316" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L316">
+<g id="a_edge63&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L316" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L316">
 <text xml:space="preserve" text-anchor="start" x="1029" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1196,12 +1196,12 @@
 <!-- channel_material/6&#45;&gt;protocol_label/1 -->
 <g id="edge29" class="edge">
 <title>channel_material/6&#45;&gt;protocol_label/1</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L321" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L321" xlink:title="calls">
 <path fill="none" stroke="black" d="M1675.79,-291.18C1673.16,-290.76 1670.56,-290.36 1668,-290 1614.16,-282.4 1217.32,-293.54 1180,-254 1171.74,-245.25 1170.5,-232.33 1171.73,-220.54"/>
 <polygon fill="black" stroke="black" points="1175.15,-221.26 1173.36,-210.82 1168.25,-220.1 1175.15,-221.26"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L321">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L321">
 <text xml:space="preserve" text-anchor="start" x="1180" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1209,12 +1209,12 @@
 <!-- channel_material/6&#45;&gt;list::append/3 -->
 <g id="edge64" class="edge">
 <title>channel_material/6&#45;&gt;list::append/3</title>
-<g id="a_edge64"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L321" xlink:title="calls">
+<g id="a_edge64"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L321" xlink:title="calls">
 <path fill="none" stroke="black" d="M1822.22,-291.21C1825.18,-290.76 1828.11,-290.36 1831,-290 1924.81,-278.37 2593.1,-288.77 2681,-254 2700.56,-246.26 2718.5,-230.85 2731.58,-217.32"/>
 <polygon fill="black" stroke="black" points="2733.82,-220.06 2738.04,-210.35 2728.68,-215.31 2733.82,-220.06"/>
 </a>
 </g>
-<g id="a_edge64&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L321">
+<g id="a_edge64&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L321">
 <text xml:space="preserve" text-anchor="start" x="2697.04" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1222,12 +1222,12 @@
 <!-- channel_material/6&#45;&gt;list::length/2 -->
 <g id="edge65" class="edge">
 <title>channel_material/6&#45;&gt;list::length/2</title>
-<g id="a_edge65"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L321" xlink:title="calls">
+<g id="a_edge65"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L321" xlink:title="calls">
 <path fill="none" stroke="black" d="M1712.46,-289.75C1693.53,-278.3 1676.38,-262.24 1687,-245 1724.32,-184.42 1761.8,-193.3 1830,-173 2117.49,-87.44 2478.64,-75.54 2629.58,-74.59"/>
 <polygon fill="black" stroke="black" points="2629.45,-78.09 2639.43,-74.54 2629.41,-71.09 2629.45,-78.09"/>
 </a>
 </g>
-<g id="a_edge65&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L321">
+<g id="a_edge65&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L321">
 <text xml:space="preserve" text-anchor="start" x="1830" y="-188.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1246,12 +1246,12 @@
 <!-- channel_material/6&#45;&gt;::hkdf/5 -->
 <g id="edge46" class="edge">
 <title>channel_material/6&#45;&gt;::hkdf/5</title>
-<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L321" xlink:title="calls">
+<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L321" xlink:title="calls">
 <path fill="none" stroke="black" d="M1772.84,-289.53C1799.55,-269.97 1843.01,-238.14 1872.97,-216.19"/>
 <polygon fill="black" stroke="black" points="1874.97,-219.07 1880.97,-210.34 1870.83,-213.42 1874.97,-219.07"/>
 </a>
 </g>
-<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L321">
+<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L321">
 <text xml:space="preserve" text-anchor="start" x="1832.21" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1259,12 +1259,12 @@
 <!-- message_material/6&#45;&gt;counter_bytes/2 -->
 <g id="edge31" class="edge">
 <title>message_material/6&#45;&gt;counter_bytes/2</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L332" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L332" xlink:title="calls">
 <path fill="none" stroke="black" d="M2715.05,-289.53C2751.64,-269.59 2811.62,-236.9 2851.94,-214.92"/>
 <polygon fill="black" stroke="black" points="2853.56,-218.02 2860.67,-210.17 2850.21,-211.88 2853.56,-218.02"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L332" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L332">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L332" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L332">
 <text xml:space="preserve" text-anchor="start" x="2794.83" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1272,12 +1272,12 @@
 <!-- message_material/6&#45;&gt;protocol_label/1 -->
 <g id="edge30" class="edge">
 <title>message_material/6&#45;&gt;protocol_label/1</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L332" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L332" xlink:title="calls">
 <path fill="none" stroke="black" d="M2610.02,-291.93C2605.29,-291.2 2600.58,-290.55 2596,-290 2240.83,-247.59 2148.74,-280.01 1792,-254 1599.19,-239.94 1373.09,-214.83 1256.81,-201.28"/>
 <polygon fill="black" stroke="black" points="1257.41,-197.83 1247.07,-200.14 1256.59,-204.78 1257.41,-197.83"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L332" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L332">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L332" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L332">
 <text xml:space="preserve" text-anchor="start" x="1792" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1285,12 +1285,12 @@
 <!-- message_material/6&#45;&gt;list::append/3 -->
 <g id="edge68" class="edge">
 <title>message_material/6&#45;&gt;list::append/3</title>
-<g id="a_edge68"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L332" xlink:title="calls">
+<g id="a_edge68"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L332" xlink:title="calls">
 <path fill="none" stroke="black" d="M2701.83,-289.8C2711.6,-280.06 2723.11,-267.22 2731,-254 2737.22,-243.59 2742.06,-231.16 2745.6,-220.17"/>
 <polygon fill="black" stroke="black" points="2748.88,-221.41 2748.39,-210.83 2742.17,-219.41 2748.88,-221.41"/>
 </a>
 </g>
-<g id="a_edge68&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L332" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L332">
+<g id="a_edge68&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L332" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L332">
 <text xml:space="preserve" text-anchor="start" x="2735.26" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1298,12 +1298,12 @@
 <!-- message_material/6&#45;&gt;list::length/2 -->
 <g id="edge67" class="edge">
 <title>message_material/6&#45;&gt;list::length/2</title>
-<g id="a_edge67"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L332" xlink:title="calls">
+<g id="a_edge67"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L332" xlink:title="calls">
 <path fill="none" stroke="black" d="M2657.08,-289.53C2643.93,-278.34 2631.25,-262.62 2634,-245 2642.25,-192.06 2668.78,-134.97 2685.88,-102.26"/>
 <polygon fill="black" stroke="black" points="2688.94,-103.94 2690.56,-93.47 2682.77,-100.65 2688.94,-103.94"/>
 </a>
 </g>
-<g id="a_edge67&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L332" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L332">
+<g id="a_edge67&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L332" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L332">
 <text xml:space="preserve" text-anchor="start" x="2653.02" y="-188.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1311,12 +1311,12 @@
 <!-- message_material/6&#45;&gt;list::append/2 -->
 <g id="edge66" class="edge">
 <title>message_material/6&#45;&gt;list::append/2</title>
-<g id="a_edge66"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L332" xlink:title="calls">
+<g id="a_edge66"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L332" xlink:title="calls">
 <path fill="none" stroke="black" d="M2610.03,-291.89C2605.29,-291.17 2600.59,-290.53 2596,-290 2182.47,-241.94 2075.76,-275.24 1660,-254 1349.67,-238.14 1266.69,-256.36 956.22,-209.18"/>
 <polygon fill="black" stroke="black" points="956.99,-205.75 946.58,-207.7 955.93,-212.67 956.99,-205.75"/>
 </a>
 </g>
-<g id="a_edge66&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L332" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L332">
+<g id="a_edge66&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L332" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L332">
 <text xml:space="preserve" text-anchor="start" x="1660" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1324,12 +1324,12 @@
 <!-- message_material/6&#45;&gt;::hkdf/5 -->
 <g id="edge47" class="edge">
 <title>message_material/6&#45;&gt;::hkdf/5</title>
-<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L332" xlink:title="calls">
+<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L332" xlink:title="calls">
 <path fill="none" stroke="black" d="M2609.95,-292.42C2605.24,-291.57 2600.55,-290.76 2596,-290 2335.78,-246.69 2268.8,-248.69 2008,-209 1991.42,-206.48 1973.35,-203.53 1957.09,-200.81"/>
 <polygon fill="black" stroke="black" points="1958.1,-197.43 1947.66,-199.22 1956.94,-204.33 1958.1,-197.43"/>
 </a>
 </g>
-<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L332" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L332">
+<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L332" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L332">
 <text xml:space="preserve" text-anchor="start" x="2341.71" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1337,12 +1337,12 @@
 <!-- message_aad/5&#45;&gt;protocol_label/1 -->
 <g id="edge32" class="edge">
 <title>message_aad/5&#45;&gt;protocol_label/1</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L340" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L340" xlink:title="calls">
 <path fill="none" stroke="black" d="M2416.28,-291.55C2413.15,-290.96 2410.05,-290.44 2407,-290 2169.97,-255.93 1564.13,-304.27 1330,-254 1327.35,-253.43 1273.91,-231.39 1231.35,-213.75"/>
 <polygon fill="black" stroke="black" points="1232.78,-210.55 1222.2,-209.95 1230.09,-217.02 1232.78,-210.55"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L340" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L340">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L340" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L340">
 <text xml:space="preserve" text-anchor="start" x="1330" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1350,12 +1350,12 @@
 <!-- message_aad/5&#45;&gt;list::append/2 -->
 <g id="edge69" class="edge">
 <title>message_aad/5&#45;&gt;list::append/2</title>
-<g id="a_edge69"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L340" xlink:title="calls">
+<g id="a_edge69"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L340" xlink:title="calls">
 <path fill="none" stroke="black" d="M2416.28,-291.54C2413.15,-290.96 2410.05,-290.44 2407,-290 2158.73,-254.51 1524.27,-306.32 1279,-254 1268.67,-251.8 1267.23,-247.65 1257,-245 1129.18,-211.91 1089.51,-232.13 955.81,-209.16"/>
 <polygon fill="black" stroke="black" points="956.69,-205.76 946.23,-207.46 955.47,-212.65 956.69,-205.76"/>
 </a>
 </g>
-<g id="a_edge69&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L340" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L340">
+<g id="a_edge69&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L340" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L340">
 <text xml:space="preserve" text-anchor="start" x="1279" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1365,7 +1365,7 @@
 <title>counter_bytes_loop/2</title>
 <polygon fill="cornsilk" stroke="black" points="3972.41,-92 3813.59,-92 3813.59,-56 3972.41,-56 3972.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3821.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node21_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L354">
+<g id="a_node21_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L354">
 <text xml:space="preserve" text-anchor="start" x="3826.99" y="-75.71" font-family="monospace" font-size="11.00">counter_bytes_loop/2</text>
 </a>
 </g>
@@ -1377,12 +1377,12 @@
 <!-- counter_bytes/2&#45;&gt;counter_bytes_loop/2 -->
 <g id="edge33" class="edge">
 <title>counter_bytes/2&#45;&gt;counter_bytes_loop/2</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L350" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L350" xlink:title="calls">
 <path fill="none" stroke="black" d="M2957.25,-182.72C3128.49,-163.01 3601.67,-108.54 3801.76,-85.5"/>
 <polygon fill="black" stroke="black" points="3802.06,-88.99 3811.6,-84.37 3801.26,-82.04 3802.06,-88.99"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L350" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L350">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L350" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L350">
 <text xml:space="preserve" text-anchor="start" x="3423.45" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1390,12 +1390,12 @@
 <!-- counter_bytes/2&#45;&gt;list::length/2 -->
 <g id="edge70" class="edge">
 <title>counter_bytes/2&#45;&gt;list::length/2</title>
-<g id="a_edge70"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L350" xlink:title="calls">
+<g id="a_edge70"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L350" xlink:title="calls">
 <path fill="none" stroke="black" d="M2864.69,-172.53C2831.29,-152.63 2776.58,-120.04 2739.7,-98.06"/>
 <polygon fill="black" stroke="black" points="2741.95,-95.33 2731.57,-93.22 2738.37,-101.34 2741.95,-95.33"/>
 </a>
 </g>
-<g id="a_edge70&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L350" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/crypto/authenticated_channel.lgt#L350">
+<g id="a_edge70&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L350" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/crypto/authenticated_channel.lgt#L350">
 <text xml:space="preserve" text-anchor="start" x="2803.29" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>

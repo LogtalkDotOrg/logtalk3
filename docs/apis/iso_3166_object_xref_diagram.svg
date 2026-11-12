@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-257 416,-257 416,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object iso_3166</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 15:49</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 20:35</text>
 <g id="clust1" class="cluster">
 <title>cluster_iso_3166_object</title>
 <g id="a_clust1"><a xlink:title="iso_3166">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 392,-46 392,-46 398,-46 404,-52 404,-58 404,-58 404,-233 404,-233 404,-239 398,-245 392,-245 392,-245 20,-245 20,-245 14,-245 8,-239 8,-233 8,-233 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/iso_3166/iso_3166.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/iso_3166/iso_3166.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/iso_3166/iso_3166.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/iso_3166/iso_3166.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-229.46" font-family="monospace" font-size="10.00" fill="dimgray">iso_3166</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>country/4</title>
 <polygon fill="cornsilk" stroke="black" points="144.11,-209 57.89,-209 57.89,-173 144.11,-173 144.11,-209"/>
 <text xml:space="preserve" text-anchor="start" x="65.89" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/iso_3166/iso_3166.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/iso_3166/iso_3166.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/iso_3166/iso_3166.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/iso_3166/iso_3166.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="71.3" y="-192.71" font-family="monospace" font-size="11.00">country/4</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- country/4&#45;&gt;iso_3166_1::country/4 -->
 <g id="edge1" class="edge">
 <title>country/4&#45;&gt;iso_3166_1::country/4</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/iso_3166/iso_3166.lgt#L32" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/iso_3166/iso_3166.lgt#L32" xlink:title="calls">
 <path fill="none" stroke="black" d="M101,-172.53C101,-154.28 101,-125.33 101,-103.7"/>
 <polygon fill="black" stroke="black" points="104.5,-103.77 101,-93.77 97.5,-103.77 104.5,-103.77"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/iso_3166/iso_3166.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/iso_3166/iso_3166.lgt#L32">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/iso_3166/iso_3166.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/iso_3166/iso_3166.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="101" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>subdivision/4</title>
 <polygon fill="cornsilk" stroke="black" points="354.31,-209 241.69,-209 241.69,-173 354.31,-173 354.31,-209"/>
 <text xml:space="preserve" text-anchor="start" x="249.69" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/iso_3166/iso_3166.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/iso_3166/iso_3166.lgt#L39">
+<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/iso_3166/iso_3166.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/iso_3166/iso_3166.lgt#L39">
 <text xml:space="preserve" text-anchor="start" x="255.09" y="-192.71" font-family="monospace" font-size="11.00">subdivision/4</text>
 </a>
 </g>
@@ -96,12 +96,12 @@
 <!-- subdivision/4&#45;&gt;iso_3166_2::subdivision/4 -->
 <g id="edge2" class="edge">
 <title>subdivision/4&#45;&gt;iso_3166_2::subdivision/4</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/iso_3166/iso_3166.lgt#L39" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/iso_3166/iso_3166.lgt#L39" xlink:title="calls">
 <path fill="none" stroke="black" d="M298,-172.53C298,-154.28 298,-125.33 298,-103.7"/>
 <polygon fill="black" stroke="black" points="301.5,-103.77 298,-93.77 294.5,-103.77 301.5,-103.77"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/iso_3166/iso_3166.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/iso_3166/iso_3166.lgt#L39">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/iso_3166/iso_3166.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/iso_3166/iso_3166.lgt#L39">
 <text xml:space="preserve" text-anchor="start" x="298" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>

@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-725 1778,-725 1778,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object borda_ranker</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 15:49</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 20:35</text>
 <g id="clust1" class="cluster">
 <title>cluster_borda_ranker_object</title>
 <g id="a_clust1"><a xlink:title="borda_ranker">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1754,-46 1754,-46 1760,-46 1766,-52 1766,-58 1766,-58 1766,-701 1766,-701 1766,-707 1760,-713 1754,-713 1754,-713 20,-713 20,-713 14,-713 8,-707 8,-701 8,-701 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-697.46" font-family="monospace" font-size="10.00" fill="dimgray">borda_ranker</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>learn/2</title>
 <polygon fill="cornsilk" stroke="black" points="715.5,-677 642.5,-677 642.5,-641 715.5,-641 715.5,-677"/>
 <text xml:space="preserve" text-anchor="start" x="650.5" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L39">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L39">
 <text xml:space="preserve" text-anchor="start" x="655.9" y="-660.71" font-family="monospace" font-size="11.00">learn/2</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>learn/3</title>
 <polygon fill="cornsilk" stroke="black" points="715.5,-560 642.5,-560 642.5,-524 715.5,-524 715.5,-560"/>
 <text xml:space="preserve" text-anchor="start" x="650.5" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42">
 <text xml:space="preserve" text-anchor="start" x="655.9" y="-543.71" font-family="monospace" font-size="11.00">learn/3</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- learn/2&#45;&gt;learn/3 -->
 <g id="edge1" class="edge">
 <title>learn/2&#45;&gt;learn/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L39" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L39" xlink:title="calls">
 <path fill="none" stroke="black" d="M679,-640.53C679,-622.28 679,-593.33 679,-571.7"/>
 <polygon fill="black" stroke="black" points="682.5,-571.77 679,-561.77 675.5,-571.77 682.5,-571.77"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L39">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L39">
 <text xml:space="preserve" text-anchor="start" x="679" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>borda_scores/6</title>
 <polygon fill="cornsilk" stroke="black" points="137.61,-443 18.39,-443 18.39,-407 137.61,-407 137.61,-443"/>
 <text xml:space="preserve" text-anchor="start" x="26.39" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L59">
+<g id="a_node4_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="31.79" y="-426.71" font-family="monospace" font-size="11.00">borda_scores/6</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- learn/3&#45;&gt;borda_scores/6 -->
 <g id="edge2" class="edge">
 <title>learn/3&#45;&gt;borda_scores/6</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="calls">
 <path fill="none" stroke="black" d="M642.01,-535.03C556.76,-521.08 339.76,-484.58 149.09,-443.61"/>
 <polygon fill="black" stroke="black" points="150.01,-440.23 139.5,-441.54 148.54,-447.07 150.01,-440.23"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42">
 <text xml:space="preserve" text-anchor="start" x="364.94" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -106,12 +106,12 @@
 <!-- learn/3&#45;&gt;^^check_options/1 -->
 <g id="edge5" class="edge">
 <title>learn/3&#45;&gt;^^check_options/1</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="calls">
 <path fill="none" stroke="black" d="M642.23,-531.69C569.08,-513.16 403.84,-471.3 304.66,-446.18"/>
 <polygon fill="black" stroke="black" points="305.82,-442.86 295.26,-443.8 304.1,-449.65 305.82,-442.86"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42">
 <text xml:space="preserve" text-anchor="start" x="465.61" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -130,12 +130,12 @@
 <!-- learn/3&#45;&gt;^^merge_options/2 -->
 <g id="edge6" class="edge">
 <title>learn/3&#45;&gt;^^merge_options/2</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="calls">
 <path fill="none" stroke="black" d="M642.28,-526.78C590.97,-506.91 497.38,-470.68 437.52,-447.5"/>
 <polygon fill="black" stroke="black" points="439.12,-444.36 428.53,-444.02 436.59,-450.89 439.12,-444.36"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42">
 <text xml:space="preserve" text-anchor="start" x="539.41" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -154,12 +154,12 @@
 <!-- learn/3&#45;&gt;^^validate_grouped_dataset/2 -->
 <g id="edge7" class="edge">
 <title>learn/3&#45;&gt;^^validate_grouped_dataset/2</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="calls">
 <path fill="none" stroke="black" d="M663.2,-523.53C645.92,-504.43 618.06,-473.61 598.27,-451.73"/>
 <polygon fill="black" stroke="black" points="600.92,-449.45 591.62,-444.38 595.73,-454.14 600.92,-449.45"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42">
 <text xml:space="preserve" text-anchor="start" x="630.12" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -178,12 +178,12 @@
 <!-- learn/3&#45;&gt;^^grouped_dataset_items/2 -->
 <g id="edge8" class="edge">
 <title>learn/3&#45;&gt;^^grouped_dataset_items/2</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="calls">
 <path fill="none" stroke="black" d="M696.62,-523.53C716.06,-504.26 747.53,-473.06 769.63,-451.15"/>
 <polygon fill="black" stroke="black" points="771.88,-453.85 776.52,-444.32 766.96,-448.87 771.88,-453.85"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42">
 <text xml:space="preserve" text-anchor="start" x="740.48" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -202,12 +202,12 @@
 <!-- learn/3&#45;&gt;^^grouped_dataset_groups/2 -->
 <g id="edge9" class="edge">
 <title>learn/3&#45;&gt;^^grouped_dataset_groups/2</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="calls">
 <path fill="none" stroke="black" d="M715.8,-527C718.57,-525.97 721.33,-524.96 724,-524 799.81,-496.61 887.59,-466.57 945.25,-447.07"/>
 <polygon fill="black" stroke="black" points="946.23,-450.44 954.58,-443.92 943.99,-443.8 946.23,-450.44"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42">
 <text xml:space="preserve" text-anchor="start" x="848.38" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -226,12 +226,12 @@
 <!-- learn/3&#45;&gt;^^option/2 -->
 <g id="edge10" class="edge">
 <title>learn/3&#45;&gt;^^option/2</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="calls">
 <path fill="none" stroke="black" d="M715.68,-526.61C718.48,-525.67 721.27,-524.79 724,-524 806.26,-500.13 1013.63,-467.47 1114.2,-443.27"/>
 <polygon fill="black" stroke="black" points="1115,-446.68 1123.87,-440.88 1113.32,-439.88 1115,-446.68"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42">
 <text xml:space="preserve" text-anchor="start" x="928.89" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -250,12 +250,12 @@
 <!-- learn/3&#45;&gt;^^initialize_scores/2 -->
 <g id="edge11" class="edge">
 <title>learn/3&#45;&gt;^^initialize_scores/2</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="calls">
 <path fill="none" stroke="black" d="M715.63,-526.44C718.44,-525.55 721.25,-524.72 724,-524 826.64,-497.1 855.24,-504.82 960,-488 1075.34,-469.48 1106.68,-464.24 1225.28,-443.29"/>
 <polygon fill="black" stroke="black" points="1225.53,-446.8 1234.77,-441.62 1224.31,-439.91 1225.53,-446.8"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42">
 <text xml:space="preserve" text-anchor="start" x="1010.92" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -274,12 +274,12 @@
 <!-- learn/3&#45;&gt;^^ordered_scores/3 -->
 <g id="edge12" class="edge">
 <title>learn/3&#45;&gt;^^ordered_scores/3</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="calls">
 <path fill="none" stroke="black" d="M715.6,-526.32C718.42,-525.46 721.24,-524.67 724,-524 862.26,-490.61 900.74,-504.61 1042,-488 1202.56,-469.12 1246.12,-469.76 1408.85,-443.29"/>
 <polygon fill="black" stroke="black" points="1408.94,-446.82 1418.24,-441.75 1407.81,-439.91 1408.94,-446.82"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42">
 <text xml:space="preserve" text-anchor="start" x="1120.15" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -298,12 +298,12 @@
 <!-- learn/3&#45;&gt;^^build_score_ranker/5 -->
 <g id="edge13" class="edge">
 <title>learn/3&#45;&gt;^^build_score_ranker/5</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="calls">
 <path fill="none" stroke="black" d="M715.58,-526.23C718.4,-525.39 721.23,-524.63 724,-524 909.75,-481.94 961.41,-506.05 1151,-488 1335.97,-470.39 1385.47,-469.73 1572.25,-443.34"/>
 <polygon fill="black" stroke="black" points="1572.67,-446.82 1582.08,-441.95 1571.68,-439.89 1572.67,-446.82"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L42">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L42">
 <text xml:space="preserve" text-anchor="start" x="1240.81" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -313,7 +313,7 @@
 <title>rank/3</title>
 <polygon fill="cornsilk" stroke="black" points="813.2,-677 746.8,-677 746.8,-641 813.2,-641 813.2,-677"/>
 <text xml:space="preserve" text-anchor="start" x="754.8" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L55">
+<g id="a_node3_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L55">
 <text xml:space="preserve" text-anchor="start" x="760.2" y="-660.71" font-family="monospace" font-size="11.00">rank/3</text>
 </a>
 </g>
@@ -336,12 +336,12 @@
 <!-- rank/3&#45;&gt;^^score_ranker_data/4 -->
 <g id="edge14" class="edge">
 <title>rank/3&#45;&gt;^^score_ranker_data/4</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L55" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L55" xlink:title="calls">
 <path fill="none" stroke="black" d="M785.47,-640.53C791.24,-622.11 800.41,-592.79 807.2,-571.1"/>
 <polygon fill="black" stroke="black" points="810.5,-572.29 810.15,-561.7 803.82,-570.2 810.5,-572.29"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L55">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L55">
 <text xml:space="preserve" text-anchor="start" x="799.08" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -360,12 +360,12 @@
 <!-- rank/3&#45;&gt;^^rank_by_scores/3 -->
 <g id="edge15" class="edge">
 <title>rank/3&#45;&gt;^^rank_by_scores/3</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L55" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L55" xlink:title="calls">
 <path fill="none" stroke="black" d="M811.89,-640.53C848.31,-620.59 908.01,-587.9 948.14,-565.92"/>
 <polygon fill="black" stroke="black" points="949.73,-569.04 956.82,-561.17 946.37,-562.9 949.73,-569.04"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L55">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L55">
 <text xml:space="preserve" text-anchor="start" x="891.3" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -375,7 +375,7 @@
 <title>relevance_points/3</title>
 <polygon fill="cornsilk" stroke="black" points="163.81,-326 18.19,-326 18.19,-290 163.81,-290 163.81,-326"/>
 <text xml:space="preserve" text-anchor="start" x="26.19" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L68">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L68">
 <text xml:space="preserve" text-anchor="start" x="31.59" y="-309.71" font-family="monospace" font-size="11.00">relevance_points/3</text>
 </a>
 </g>
@@ -387,12 +387,12 @@
 <!-- borda_scores/6&#45;&gt;relevance_points/3 -->
 <g id="edge3" class="edge">
 <title>borda_scores/6&#45;&gt;relevance_points/3</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L60" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L60" xlink:title="calls">
 <path fill="none" stroke="black" d="M79.97,-406.53C82.05,-388.19 85.34,-359.06 87.79,-337.4"/>
 <polygon fill="black" stroke="black" points="91.23,-338.09 88.88,-327.76 84.28,-337.3 91.23,-338.09"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L60">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="84.89" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -411,12 +411,12 @@
 <!-- borda_scores/6&#45;&gt;^^grouped_dataset_item_relevances/4 -->
 <g id="edge16" class="edge">
 <title>borda_scores/6&#45;&gt;^^grouped_dataset_item_relevances/4</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L60" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L60" xlink:title="calls">
 <path fill="none" stroke="black" d="M113.39,-406.53C154.05,-386.47 220.88,-353.48 265.41,-331.5"/>
 <polygon fill="black" stroke="black" points="266.89,-334.68 274.3,-327.11 263.79,-328.4 266.89,-334.68"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L60">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="201.49" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -435,12 +435,12 @@
 <!-- borda_scores/6&#45;&gt;^^grouped_dataset_relevance_frequencies/2 -->
 <g id="edge17" class="edge">
 <title>borda_scores/6&#45;&gt;^^grouped_dataset_relevance_frequencies/2</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L60" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L60" xlink:title="calls">
 <path fill="none" stroke="black" d="M138.04,-408.87C140.73,-408.23 143.39,-407.6 146,-407 271.06,-378.08 415.96,-347.81 509.42,-328.7"/>
 <polygon fill="black" stroke="black" points="509.98,-332.15 519.08,-326.72 508.58,-325.3 509.98,-332.15"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L60">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="348" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -459,12 +459,12 @@
 <!-- borda_scores/6&#45;&gt;^^grouped_dataset_item_relevance_scores/3 -->
 <g id="edge18" class="edge">
 <title>borda_scores/6&#45;&gt;^^grouped_dataset_item_relevance_scores/3</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L60" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L60" xlink:title="calls">
 <path fill="none" stroke="black" d="M137.98,-408.59C140.69,-408.03 143.37,-407.49 146,-407 260.5,-385.54 570.12,-348.82 761.86,-326.94"/>
 <polygon fill="black" stroke="black" points="762.13,-330.43 771.67,-325.82 761.34,-323.48 762.13,-330.43"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L60">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="450.87" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -483,12 +483,12 @@
 <!-- borda_scores/6&#45;&gt;^^accumulate_item_scores/3 -->
 <g id="edge19" class="edge">
 <title>borda_scores/6&#45;&gt;^^accumulate_item_scores/3</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L60" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L60" xlink:title="calls">
 <path fill="none" stroke="black" d="M137.96,-408.46C140.67,-407.93 143.36,-407.44 146,-407 347.97,-373.22 855.46,-351.95 1077,-326.3"/>
 <polygon fill="black" stroke="black" points="1077.27,-329.79 1086.79,-325.13 1076.45,-322.84 1077.27,-329.79"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L60">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="612.5" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -498,7 +498,7 @@
 <title>relevance_points/5</title>
 <polygon fill="cornsilk" stroke="black" points="163.81,-209 18.19,-209 18.19,-173 163.81,-173 163.81,-209"/>
 <text xml:space="preserve" text-anchor="start" x="26.19" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L73">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L73">
 <text xml:space="preserve" text-anchor="start" x="31.59" y="-192.71" font-family="monospace" font-size="11.00">relevance_points/5</text>
 </a>
 </g>
@@ -510,12 +510,12 @@
 <!-- relevance_points/3&#45;&gt;relevance_points/5 -->
 <g id="edge4" class="edge">
 <title>relevance_points/3&#45;&gt;relevance_points/5</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L68" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L68" xlink:title="calls">
 <path fill="none" stroke="black" d="M91,-289.53C91,-271.28 91,-242.33 91,-220.7"/>
 <polygon fill="black" stroke="black" points="94.5,-220.77 91,-210.77 87.5,-220.77 94.5,-220.77"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L68">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L68">
 <text xml:space="preserve" text-anchor="start" x="91" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -537,12 +537,12 @@
 <!-- relevance_points/3&#45;&gt;avltree::as_list/2 -->
 <g id="edge20" class="edge">
 <title>relevance_points/3&#45;&gt;avltree::as_list/2</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L68" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L68" xlink:title="calls">
 <path fill="none" stroke="black" d="M115.91,-289.53C143.92,-269.89 189.59,-237.87 220.9,-215.91"/>
 <polygon fill="black" stroke="black" points="222.71,-218.92 228.89,-210.31 218.69,-213.19 222.71,-218.92"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L68">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L68">
 <text xml:space="preserve" text-anchor="start" x="177.92" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -564,12 +564,12 @@
 <!-- relevance_points/3&#45;&gt;avltree::new/1 -->
 <g id="edge21" class="edge">
 <title>relevance_points/3&#45;&gt;avltree::new/1</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L68" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L68" xlink:title="calls">
 <path fill="none" stroke="black" d="M138.69,-289.53C194.41,-269.13 286.6,-235.36 346.57,-213.4"/>
 <polygon fill="black" stroke="black" points="347.77,-216.69 355.96,-209.96 345.36,-210.11 347.77,-216.69"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L68">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L68">
 <text xml:space="preserve" text-anchor="start" x="257.41" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -591,12 +591,12 @@
 <!-- relevance_points/5&#45;&gt;avltree::insert/4 -->
 <g id="edge22" class="edge">
 <title>relevance_points/5&#45;&gt;avltree::insert/4</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L74" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L74" xlink:title="calls">
 <path fill="none" stroke="black" d="M91,-172.53C91,-154.28 91,-125.33 91,-103.7"/>
 <polygon fill="black" stroke="black" points="94.5,-103.77 91,-93.77 87.5,-103.77 94.5,-103.77"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L74">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="91" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -606,7 +606,7 @@
 <title>score_ranker_model/1</title>
 <polygon fill="cornsilk" stroke="black" points="990.41,-677 831.59,-677 831.59,-641 990.41,-641 990.41,-677"/>
 <text xml:space="preserve" text-anchor="start" x="839.59" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L85">
+<g id="a_node7_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L85">
 <text xml:space="preserve" text-anchor="start" x="844.99" y="-660.71" font-family="monospace" font-size="11.00">score_ranker_model/1</text>
 </a>
 </g>
@@ -620,7 +620,7 @@
 <title>score_ranker_label/1</title>
 <polygon fill="cornsilk" stroke="black" points="1167.41,-677 1008.59,-677 1008.59,-641 1167.41,-641 1167.41,-677"/>
 <text xml:space="preserve" text-anchor="start" x="1016.59" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L87">
+<g id="a_node8_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L87">
 <text xml:space="preserve" text-anchor="start" x="1021.99" y="-660.71" font-family="monospace" font-size="11.00">score_ranker_label/1</text>
 </a>
 </g>
@@ -634,7 +634,7 @@
 <title>score_ranker_term/4</title>
 <polygon fill="cornsilk" stroke="black" points="1338.11,-677 1185.89,-677 1185.89,-641 1338.11,-641 1338.11,-677"/>
 <text xml:space="preserve" text-anchor="start" x="1193.89" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L89">
+<g id="a_node9_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L89">
 <text xml:space="preserve" text-anchor="start" x="1199.29" y="-660.71" font-family="monospace" font-size="11.00">score_ranker_term/4</text>
 </a>
 </g>
@@ -648,7 +648,7 @@
 <title>valid_score/1</title>
 <polygon fill="cornsilk" stroke="black" points="1468.31,-677 1355.69,-677 1355.69,-641 1468.31,-641 1468.31,-677"/>
 <text xml:space="preserve" text-anchor="start" x="1363.69" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L91">
+<g id="a_node10_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L91">
 <text xml:space="preserve" text-anchor="start" x="1369.09" y="-660.71" font-family="monospace" font-size="11.00">valid_score/1</text>
 </a>
 </g>
@@ -662,7 +662,7 @@
 <title>valid_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="1605.61,-677 1486.39,-677 1486.39,-641 1605.61,-641 1605.61,-677"/>
 <text xml:space="preserve" text-anchor="start" x="1494.39" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L95">
+<g id="a_node11_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="1499.79" y="-660.71" font-family="monospace" font-size="11.00">valid_option/1</text>
 </a>
 </g>
@@ -676,7 +676,7 @@
 <title>default_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="1756.21,-677 1623.79,-677 1623.79,-641 1756.21,-641 1756.21,-677"/>
 <text xml:space="preserve" text-anchor="start" x="1631.79" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node12_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/borda_ranker/borda_ranker.lgt#L100">
+<g id="a_node12_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/borda_ranker/borda_ranker.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="1637.19" y="-660.71" font-family="monospace" font-size="11.00">default_option/1</text>
 </a>
 </g>

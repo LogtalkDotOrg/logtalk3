@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-1193 1224,-1193 1224,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object minizinc_output</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 15:49</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 20:35</text>
 <g id="clust1" class="cluster">
 <title>cluster_minizinc_output_object</title>
 <g id="a_clust1"><a xlink:title="minizinc_output">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1200,-46 1200,-46 1206,-46 1212,-52 1212,-58 1212,-58 1212,-1169 1212,-1169 1212,-1175 1206,-1181 1200,-1181 1200,-1181 20,-1181 20,-1181 14,-1181 8,-1175 8,-1169 8,-1169 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-1165.46" font-family="monospace" font-size="10.00" fill="dimgray">minizinc_output</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>decode/5</title>
 <polygon fill="springgreen" stroke="black" points="642.81,-1145 563.19,-1145 563.19,-1109 642.81,-1109 642.81,-1145"/>
 <text xml:space="preserve" text-anchor="start" x="571.19" y="-1129.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L31">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L31">
 <text xml:space="preserve" text-anchor="start" x="576.6" y="-1128.71" font-family="monospace" font-size="11.00">decode/5</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>split_lines/2</title>
 <polygon fill="cornsilk" stroke="black" points="221.31,-1028 108.69,-1028 108.69,-992 221.31,-992 221.31,-1028"/>
 <text xml:space="preserve" text-anchor="start" x="116.69" y="-1012.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L85">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L85">
 <text xml:space="preserve" text-anchor="start" x="122.09" y="-1011.71" font-family="monospace" font-size="11.00">split_lines/2</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- decode/5&#45;&gt;split_lines/2 -->
 <g id="edge1" class="edge">
 <title>decode/5&#45;&gt;split_lines/2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L58" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L58" xlink:title="calls">
 <path fill="none" stroke="black" d="M562.97,-1115.49C487.78,-1095.75 324.73,-1052.94 232.36,-1028.69"/>
 <polygon fill="black" stroke="black" points="233.48,-1025.36 222.92,-1026.21 231.71,-1032.13 233.48,-1025.36"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L58">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="397.13" y="-1066.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>parse_lines/2</title>
 <polygon fill="cornsilk" stroke="black" points="352.31,-1028 239.69,-1028 239.69,-992 352.31,-992 352.31,-1028"/>
 <text xml:space="preserve" text-anchor="start" x="247.69" y="-1012.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L107">
+<g id="a_node5_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L107">
 <text xml:space="preserve" text-anchor="start" x="253.09" y="-1011.71" font-family="monospace" font-size="11.00">parse_lines/2</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- decode/5&#45;&gt;parse_lines/2 -->
 <g id="edge2" class="edge">
 <title>decode/5&#45;&gt;parse_lines/2</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L58" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L58" xlink:title="calls">
 <path fill="none" stroke="black" d="M562.87,-1110.97C509.35,-1090.92 414.32,-1055.32 353.28,-1032.46"/>
 <polygon fill="black" stroke="black" points="354.68,-1029.24 344.09,-1029.01 352.23,-1035.8 354.68,-1029.24"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L58">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="458.71" y="-1066.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -97,7 +97,7 @@
 <title>classify_messages/2</title>
 <polygon fill="cornsilk" stroke="black" points="522.11,-1028 369.89,-1028 369.89,-992 522.11,-992 522.11,-1028"/>
 <text xml:space="preserve" text-anchor="start" x="377.89" y="-1012.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L120">
+<g id="a_node6_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L120">
 <text xml:space="preserve" text-anchor="start" x="383.29" y="-1011.71" font-family="monospace" font-size="11.00">classify_messages/2</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- decode/5&#45;&gt;classify_messages/2 -->
 <g id="edge3" class="edge">
 <title>decode/5&#45;&gt;classify_messages/2</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L58" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L58" xlink:title="calls">
 <path fill="none" stroke="black" d="M579.16,-1108.53C552.45,-1088.97 508.99,-1057.14 479.03,-1035.19"/>
 <polygon fill="black" stroke="black" points="481.17,-1032.42 471.03,-1029.34 477.03,-1038.07 481.17,-1032.42"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L58">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="529.21" y="-1066.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -124,7 +124,7 @@
 <title>derive_status/6</title>
 <polygon fill="cornsilk" stroke="black" points="665.91,-1028 540.09,-1028 540.09,-992 665.91,-992 665.91,-1028"/>
 <text xml:space="preserve" text-anchor="start" x="548.09" y="-1012.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node15_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L218" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L218">
+<g id="a_node15_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L218" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L218">
 <text xml:space="preserve" text-anchor="start" x="553.49" y="-1011.71" font-family="monospace" font-size="11.00">derive_status/6</text>
 </a>
 </g>
@@ -136,12 +136,12 @@
 <!-- decode/5&#45;&gt;derive_status/6 -->
 <g id="edge4" class="edge">
 <title>decode/5&#45;&gt;derive_status/6</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L58" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L58" xlink:title="calls">
 <path fill="none" stroke="black" d="M603,-1108.53C603,-1090.28 603,-1061.33 603,-1039.7"/>
 <polygon fill="black" stroke="black" points="606.5,-1039.77 603,-1029.77 599.5,-1039.77 606.5,-1039.77"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L58">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="603" y="-1066.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -151,7 +151,7 @@
 <title>derive_optimality/2</title>
 <polygon fill="cornsilk" stroke="black" points="836.11,-1028 683.89,-1028 683.89,-992 836.11,-992 836.11,-1028"/>
 <text xml:space="preserve" text-anchor="start" x="691.89" y="-1012.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node16_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L234">
+<g id="a_node16_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L234">
 <text xml:space="preserve" text-anchor="start" x="697.29" y="-1011.71" font-family="monospace" font-size="11.00">derive_optimality/2</text>
 </a>
 </g>
@@ -163,12 +163,12 @@
 <!-- decode/5&#45;&gt;derive_optimality/2 -->
 <g id="edge5" class="edge">
 <title>decode/5&#45;&gt;derive_optimality/2</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L58" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L58" xlink:title="calls">
 <path fill="none" stroke="black" d="M626.84,-1108.53C653.55,-1088.97 697.01,-1057.14 726.97,-1035.19"/>
 <polygon fill="black" stroke="black" points="728.97,-1038.07 734.97,-1029.34 724.83,-1032.42 728.97,-1038.07"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L58">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="686.21" y="-1066.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -178,7 +178,7 @@
 <title>derive_enumeration_complete/2</title>
 <polygon fill="cornsilk" stroke="black" points="1072.12,-1028 853.88,-1028 853.88,-992 1072.12,-992 1072.12,-1028"/>
 <text xml:space="preserve" text-anchor="start" x="861.88" y="-1012.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node17_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L239" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L239">
+<g id="a_node17_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L239" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L239">
 <text xml:space="preserve" text-anchor="start" x="867.28" y="-1011.71" font-family="monospace" font-size="11.00">derive_enumeration_complete/2</text>
 </a>
 </g>
@@ -190,12 +190,12 @@
 <!-- decode/5&#45;&gt;derive_enumeration_complete/2 -->
 <g id="edge6" class="edge">
 <title>decode/5&#45;&gt;derive_enumeration_complete/2</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L58" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L58" xlink:title="calls">
 <path fill="none" stroke="black" d="M643.25,-1113.14C704.98,-1093.42 823.66,-1055.51 897.78,-1031.83"/>
 <polygon fill="black" stroke="black" points="898.48,-1035.29 906.94,-1028.91 896.35,-1028.62 898.48,-1035.29"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L58">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="793.79" y="-1066.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -217,12 +217,12 @@
 <!-- decode/5&#45;&gt;type::check/3 -->
 <g id="edge38" class="edge">
 <title>decode/5&#45;&gt;type::check/3</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L58" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L58" xlink:title="calls">
 <path fill="none" stroke="black" d="M643.13,-1118.53C723.73,-1103.35 911.22,-1067.24 1078.35,-1028.56"/>
 <polygon fill="black" stroke="black" points="1078.9,-1032.03 1087.85,-1026.36 1077.32,-1025.21 1078.9,-1032.03"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L58">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="910.65" y="-1066.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -232,7 +232,7 @@
 <title>split_on_newline/2</title>
 <polygon fill="cornsilk" stroke="black" points="307.81,-911 162.19,-911 162.19,-875 307.81,-875 307.81,-911"/>
 <text xml:space="preserve" text-anchor="start" x="170.19" y="-895.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L89">
+<g id="a_node3_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L89">
 <text xml:space="preserve" text-anchor="start" x="175.59" y="-894.71" font-family="monospace" font-size="11.00">split_on_newline/2</text>
 </a>
 </g>
@@ -244,12 +244,12 @@
 <!-- split_lines/2&#45;&gt;split_on_newline/2 -->
 <g id="edge7" class="edge">
 <title>split_lines/2&#45;&gt;split_on_newline/2</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L85" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L85" xlink:title="calls">
 <path fill="none" stroke="black" d="M175.63,-991.53C187.06,-972.77 205.36,-942.7 218.62,-920.91"/>
 <polygon fill="black" stroke="black" points="221.5,-922.91 223.71,-912.55 215.52,-919.27 221.5,-922.91"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L85">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L85">
 <text xml:space="preserve" text-anchor="start" x="202.1" y="-949.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -259,7 +259,7 @@
 <title>exclude_empty/2</title>
 <polygon fill="cornsilk" stroke="black" points="143.91,-911 18.09,-911 18.09,-875 143.91,-875 143.91,-911"/>
 <text xml:space="preserve" text-anchor="start" x="26.09" y="-895.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L100">
+<g id="a_node4_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="31.49" y="-894.71" font-family="monospace" font-size="11.00">exclude_empty/2</text>
 </a>
 </g>
@@ -271,12 +271,12 @@
 <!-- split_lines/2&#45;&gt;exclude_empty/2 -->
 <g id="edge8" class="edge">
 <title>split_lines/2&#45;&gt;exclude_empty/2</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L85" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L85" xlink:title="calls">
 <path fill="none" stroke="black" d="M152.24,-991.53C138.41,-972.6 116.17,-942.16 100.22,-920.32"/>
 <polygon fill="black" stroke="black" points="103.22,-918.49 94.5,-912.48 97.57,-922.62 103.22,-918.49"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L85">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L85">
 <text xml:space="preserve" text-anchor="start" x="125.52" y="-949.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -298,12 +298,12 @@
 <!-- parse_lines/2&#45;&gt;json(ObjectRepresentation,PairRepresentation,StringRepresentation)::parse/2 -->
 <g id="edge39" class="edge">
 <title>parse_lines/2&#45;&gt;json(ObjectRepresentation,PairRepresentation,StringRepresentation)::parse/2</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L108" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L108" xlink:title="calls">
 <path fill="none" stroke="black" d="M343.23,-991.53C398.42,-971.13 489.73,-937.36 549.13,-915.4"/>
 <polygon fill="black" stroke="black" points="550.25,-918.72 558.41,-911.97 547.82,-912.15 550.25,-918.72"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L108">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L108">
 <text xml:space="preserve" text-anchor="start" x="460.83" y="-949.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -313,7 +313,7 @@
 <title>classify_messages/3</title>
 <polygon fill="cornsilk" stroke="black" points="1202.11,-911 1049.89,-911 1049.89,-875 1202.11,-875 1202.11,-911"/>
 <text xml:space="preserve" text-anchor="start" x="1057.89" y="-895.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L128" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L128">
+<g id="a_node7_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L128" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L128">
 <text xml:space="preserve" text-anchor="start" x="1063.29" y="-894.71" font-family="monospace" font-size="11.00">classify_messages/3</text>
 </a>
 </g>
@@ -325,12 +325,12 @@
 <!-- classify_messages/2&#45;&gt;classify_messages/3 -->
 <g id="edge9" class="edge">
 <title>classify_messages/2&#45;&gt;classify_messages/3</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L120" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L120" xlink:title="calls">
 <path fill="none" stroke="black" d="M522.43,-993.56C525.32,-993.03 528.19,-992.5 531,-992 640.64,-972.34 911.55,-933.61 1038.48,-911.4"/>
 <polygon fill="black" stroke="black" points="1038.85,-914.89 1048.08,-909.7 1037.62,-908 1038.85,-914.89"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L120">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L120">
 <text xml:space="preserve" text-anchor="start" x="809.8" y="-949.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -352,12 +352,12 @@
 <!-- classify_messages/2&#45;&gt;list::reverse/2 -->
 <g id="edge40" class="edge">
 <title>classify_messages/2&#45;&gt;list::reverse/2</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L120" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L120" xlink:title="calls">
 <path fill="none" stroke="black" d="M522.3,-992.86C609.69,-974.27 757.48,-942.53 894.68,-911.51"/>
 <polygon fill="black" stroke="black" points="895.34,-914.95 904.32,-909.32 893.8,-908.12 895.34,-914.95"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L120">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L120">
 <text xml:space="preserve" text-anchor="start" x="723.61" y="-949.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -367,7 +367,7 @@
 <title>classify_message/3</title>
 <polygon fill="cornsilk" stroke="black" points="926.81,-794 781.19,-794 781.19,-758 926.81,-758 926.81,-794"/>
 <text xml:space="preserve" text-anchor="start" x="789.19" y="-778.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L133" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L133">
+<g id="a_node8_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L133" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L133">
 <text xml:space="preserve" text-anchor="start" x="794.59" y="-777.71" font-family="monospace" font-size="11.00">classify_message/3</text>
 </a>
 </g>
@@ -379,12 +379,12 @@
 <!-- classify_messages/3&#45;&gt;classify_message/3 -->
 <g id="edge10" class="edge">
 <title>classify_messages/3&#45;&gt;classify_message/3</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L129" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L129" xlink:title="calls">
 <path fill="none" stroke="black" d="M1084.69,-874.53C1036.72,-854.25 957.55,-820.78 905.59,-798.81"/>
 <polygon fill="black" stroke="black" points="907.22,-795.7 896.65,-795.03 904.49,-802.15 907.22,-795.7"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L129">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L129">
 <text xml:space="preserve" text-anchor="start" x="998.16" y="-832.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -394,7 +394,7 @@
 <title>decode_solution/2</title>
 <polygon fill="cornsilk" stroke="black" points="597.51,-677 458.49,-677 458.49,-641 597.51,-641 597.51,-677"/>
 <text xml:space="preserve" text-anchor="start" x="466.49" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L155">
+<g id="a_node9_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="471.89" y="-660.71" font-family="monospace" font-size="11.00">decode_solution/2</text>
 </a>
 </g>
@@ -406,12 +406,12 @@
 <!-- classify_message/3&#45;&gt;decode_solution/2 -->
 <g id="edge12" class="edge">
 <title>classify_message/3&#45;&gt;decode_solution/2</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L133" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L133" xlink:title="calls">
 <path fill="none" stroke="black" d="M780.87,-762.78C737.51,-754.19 682.02,-740.85 635,-722 609.65,-711.84 583.08,-696.47 562.76,-683.58"/>
 <polygon fill="black" stroke="black" points="564.89,-680.79 554.59,-678.3 561.09,-686.67 564.89,-680.79"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L133" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L133">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L133" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L133">
 <text xml:space="preserve" text-anchor="start" x="635" y="-715.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -421,7 +421,7 @@
 <title>decode_status/2</title>
 <polygon fill="cornsilk" stroke="black" points="843.91,-677 718.09,-677 718.09,-641 843.91,-641 843.91,-677"/>
 <text xml:space="preserve" text-anchor="start" x="726.09" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L175">
+<g id="a_node10_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L175">
 <text xml:space="preserve" text-anchor="start" x="731.49" y="-660.71" font-family="monospace" font-size="11.00">decode_status/2</text>
 </a>
 </g>
@@ -433,12 +433,12 @@
 <!-- classify_message/3&#45;&gt;decode_status/2 -->
 <g id="edge13" class="edge">
 <title>classify_message/3&#45;&gt;decode_status/2</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L133" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L133" xlink:title="calls">
 <path fill="none" stroke="black" d="M842.91,-757.53C831,-738.77 811.91,-708.7 798.08,-686.91"/>
 <polygon fill="black" stroke="black" points="801.08,-685.1 792.76,-678.53 795.17,-688.85 801.08,-685.1"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L133" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L133">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L133" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L133">
 <text xml:space="preserve" text-anchor="start" x="819.69" y="-715.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -448,7 +448,7 @@
 <title>decode_warning/2</title>
 <polygon fill="cornsilk" stroke="black" points="994.21,-677 861.79,-677 861.79,-641 994.21,-641 994.21,-677"/>
 <text xml:space="preserve" text-anchor="start" x="869.79" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node12_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L191" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L191">
+<g id="a_node12_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L191" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L191">
 <text xml:space="preserve" text-anchor="start" x="875.19" y="-660.71" font-family="monospace" font-size="11.00">decode_warning/2</text>
 </a>
 </g>
@@ -460,12 +460,12 @@
 <!-- classify_message/3&#45;&gt;decode_warning/2 -->
 <g id="edge14" class="edge">
 <title>classify_message/3&#45;&gt;decode_warning/2</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L133" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L133" xlink:title="calls">
 <path fill="none" stroke="black" d="M865.24,-757.53C877.32,-738.77 896.66,-708.7 910.69,-686.91"/>
 <polygon fill="black" stroke="black" points="913.61,-688.83 916.08,-678.53 907.72,-685.04 913.61,-688.83"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L133" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L133">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L133" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L133">
 <text xml:space="preserve" text-anchor="start" x="893.22" y="-715.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -475,7 +475,7 @@
 <title>decode_error/2</title>
 <polygon fill="cornsilk" stroke="black" points="1131.61,-677 1012.39,-677 1012.39,-641 1131.61,-641 1131.61,-677"/>
 <text xml:space="preserve" text-anchor="start" x="1020.39" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node13_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L196">
+<g id="a_node13_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L196">
 <text xml:space="preserve" text-anchor="start" x="1025.79" y="-660.71" font-family="monospace" font-size="11.00">decode_error/2</text>
 </a>
 </g>
@@ -487,12 +487,12 @@
 <!-- classify_message/3&#45;&gt;decode_error/2 -->
 <g id="edge15" class="edge">
 <title>classify_message/3&#45;&gt;decode_error/2</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L133" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L133" xlink:title="calls">
 <path fill="none" stroke="black" d="M887.11,-757.53C924.99,-737.55 987.15,-704.76 1028.81,-682.78"/>
 <polygon fill="black" stroke="black" points="1030.39,-685.91 1037.6,-678.15 1027.12,-679.72 1030.39,-685.91"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L133" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L133">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L133" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L133">
 <text xml:space="preserve" text-anchor="start" x="969.54" y="-715.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -502,7 +502,7 @@
 <title>required_field/3</title>
 <polygon fill="cornsilk" stroke="black" points="724.21,-560 591.79,-560 591.79,-524 724.21,-524 724.21,-560"/>
 <text xml:space="preserve" text-anchor="start" x="599.79" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node23_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L318" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L318">
+<g id="a_node23_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L318" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L318">
 <text xml:space="preserve" text-anchor="start" x="605.19" y="-543.71" font-family="monospace" font-size="11.00">required_field/3</text>
 </a>
 </g>
@@ -514,12 +514,12 @@
 <!-- classify_message/3&#45;&gt;required_field/3 -->
 <g id="edge11" class="edge">
 <title>classify_message/3&#45;&gt;required_field/3</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L133" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L133" xlink:title="calls">
 <path fill="none" stroke="black" d="M798.39,-757.56C759.65,-742.47 710.06,-716.72 682,-677 660.04,-645.92 656.21,-600.93 656.39,-571.82"/>
 <polygon fill="black" stroke="black" points="659.89,-572 656.63,-561.92 652.89,-571.83 659.89,-572"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L133" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L133">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L133" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L133">
 <text xml:space="preserve" text-anchor="start" x="682" y="-656.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -529,7 +529,7 @@
 <title>decode_pairs/2</title>
 <polygon fill="cornsilk" stroke="black" points="490.61,-560 371.39,-560 371.39,-524 490.61,-524 490.61,-560"/>
 <text xml:space="preserve" text-anchor="start" x="379.39" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node18_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L255" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L255">
+<g id="a_node18_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L255" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L255">
 <text xml:space="preserve" text-anchor="start" x="384.79" y="-543.71" font-family="monospace" font-size="11.00">decode_pairs/2</text>
 </a>
 </g>
@@ -541,12 +541,12 @@
 <!-- decode_solution/2&#45;&gt;decode_pairs/2 -->
 <g id="edge17" class="edge">
 <title>decode_solution/2&#45;&gt;decode_pairs/2</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L155" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L155" xlink:title="calls">
 <path fill="none" stroke="black" d="M510.84,-640.77C500.96,-630.61 488.46,-617.36 478,-605 468.48,-593.76 458.54,-580.84 450.27,-569.72"/>
 <polygon fill="black" stroke="black" points="453.12,-567.69 444.38,-561.71 447.49,-571.84 453.12,-567.69"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L155">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="478" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -556,7 +556,7 @@
 <title>decode_value/2</title>
 <polygon fill="cornsilk" stroke="black" points="372.61,-443 253.39,-443 253.39,-407 372.61,-407 372.61,-443"/>
 <text xml:space="preserve" text-anchor="start" x="261.39" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node19_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L260" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L260">
+<g id="a_node19_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L260" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L260">
 <text xml:space="preserve" text-anchor="start" x="266.79" y="-426.71" font-family="monospace" font-size="11.00">decode_value/2</text>
 </a>
 </g>
@@ -568,12 +568,12 @@
 <!-- decode_solution/2&#45;&gt;decode_value/2 -->
 <g id="edge18" class="edge">
 <title>decode_solution/2&#45;&gt;decode_value/2</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L155" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L155" xlink:title="calls">
 <path fill="none" stroke="black" d="M459.96,-640.61C417.38,-626.14 365.07,-601.09 335,-560 312.46,-529.2 309.63,-483.78 310.59,-454.53"/>
 <polygon fill="black" stroke="black" points="314.09,-454.76 311.11,-444.59 307.1,-454.4 314.09,-454.76"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L155">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="335" y="-539.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -581,12 +581,12 @@
 <!-- decode_solution/2&#45;&gt;required_field/3 -->
 <g id="edge16" class="edge">
 <title>decode_solution/2&#45;&gt;required_field/3</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L155" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L155" xlink:title="calls">
 <path fill="none" stroke="black" d="M547.74,-640.53C569.63,-621.17 605.11,-589.79 629.89,-567.86"/>
 <polygon fill="black" stroke="black" points="632.19,-570.5 637.36,-561.26 627.55,-565.26 632.19,-570.5"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L155">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="596.9" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -596,7 +596,7 @@
 <title>optional_field/4</title>
 <polygon fill="cornsilk" stroke="black" points="988.21,-443 855.79,-443 855.79,-407 988.21,-407 988.21,-443"/>
 <text xml:space="preserve" text-anchor="start" x="863.79" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node24_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L324" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L324">
+<g id="a_node24_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L324" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L324">
 <text xml:space="preserve" text-anchor="start" x="869.19" y="-426.71" font-family="monospace" font-size="11.00">optional_field/4</text>
 </a>
 </g>
@@ -608,12 +608,12 @@
 <!-- decode_solution/2&#45;&gt;optional_field/4 -->
 <g id="edge19" class="edge">
 <title>decode_solution/2&#45;&gt;optional_field/4</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L155" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L155" xlink:title="calls">
 <path fill="none" stroke="black" d="M526.32,-640.63C524.61,-612.3 525.62,-556.12 556,-524 595.14,-482.61 748.87,-452.37 844.2,-437.13"/>
 <polygon fill="black" stroke="black" points="844.7,-440.6 854.03,-435.59 843.61,-433.68 844.7,-440.6"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L155">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="556" y="-539.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -635,12 +635,12 @@
 <!-- decode_solution/2&#45;&gt;list::memberchk/2 -->
 <g id="edge41" class="edge">
 <title>decode_solution/2&#45;&gt;list::memberchk/2</title>
-<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L155" xlink:title="calls">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L155" xlink:title="calls">
 <path fill="none" stroke="black" d="M523.55,-640.6C518.22,-618.19 510,-577.96 510,-543 510,-543 510,-543 510,-307 510,-273.89 529.41,-240.6 545.77,-218.42"/>
 <polygon fill="black" stroke="black" points="548.51,-220.6 551.84,-210.54 542.96,-216.33 548.51,-220.6"/>
 </a>
 </g>
-<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L155">
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="510" y="-422.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -650,7 +650,7 @@
 <title>status_atom/2</title>
 <polygon fill="cornsilk" stroke="black" points="855.31,-560 742.69,-560 742.69,-524 855.31,-524 855.31,-560"/>
 <text xml:space="preserve" text-anchor="start" x="750.69" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L180">
+<g id="a_node11_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L180">
 <text xml:space="preserve" text-anchor="start" x="756.09" y="-543.71" font-family="monospace" font-size="11.00">status_atom/2</text>
 </a>
 </g>
@@ -662,12 +662,12 @@
 <!-- decode_status/2&#45;&gt;status_atom/2 -->
 <g id="edge21" class="edge">
 <title>decode_status/2&#45;&gt;status_atom/2</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L175" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L175" xlink:title="calls">
 <path fill="none" stroke="black" d="M783.73,-640.53C786.6,-622.19 791.17,-593.06 794.55,-571.4"/>
 <polygon fill="black" stroke="black" points="797.98,-572.17 796.07,-561.75 791.06,-571.09 797.98,-572.17"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L175">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L175">
 <text xml:space="preserve" text-anchor="start" x="790.54" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -675,12 +675,12 @@
 <!-- decode_status/2&#45;&gt;required_field/3 -->
 <g id="edge20" class="edge">
 <title>decode_status/2&#45;&gt;required_field/3</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L175" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L175" xlink:title="calls">
 <path fill="none" stroke="black" d="M746.7,-640.57C730.73,-631.4 712.17,-619.11 698,-605 687.92,-594.97 679.06,-581.98 672.26,-570.48"/>
 <polygon fill="black" stroke="black" points="675.32,-568.78 667.36,-561.79 669.22,-572.22 675.32,-568.78"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L175">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L175">
 <text xml:space="preserve" text-anchor="start" x="698" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -688,12 +688,12 @@
 <!-- decode_status/2&#45;&gt;optional_field/4 -->
 <g id="edge22" class="edge">
 <title>decode_status/2&#45;&gt;optional_field/4</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L175" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L175" xlink:title="calls">
 <path fill="none" stroke="black" d="M798.31,-640.82C816.42,-622.16 844.83,-590.88 864,-560 885.39,-525.55 902.69,-481.83 912.67,-453.88"/>
 <polygon fill="black" stroke="black" points="915.87,-455.32 915.86,-444.72 909.26,-453.01 915.87,-455.32"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L175">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L175">
 <text xml:space="preserve" text-anchor="start" x="883.18" y="-539.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -703,7 +703,7 @@
 <title>decode_location/2</title>
 <polygon fill="cornsilk" stroke="black" points="1138.51,-560 999.49,-560 999.49,-524 1138.51,-524 1138.51,-560"/>
 <text xml:space="preserve" text-anchor="start" x="1007.49" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node14_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L202" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L202">
+<g id="a_node14_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L202" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L202">
 <text xml:space="preserve" text-anchor="start" x="1012.89" y="-543.71" font-family="monospace" font-size="11.00">decode_location/2</text>
 </a>
 </g>
@@ -715,12 +715,12 @@
 <!-- decode_warning/2&#45;&gt;decode_location/2 -->
 <g id="edge25" class="edge">
 <title>decode_warning/2&#45;&gt;decode_location/2</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L191" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L191" xlink:title="calls">
 <path fill="none" stroke="black" d="M949.41,-640.53C973.36,-621 1012.31,-589.23 1039.22,-567.29"/>
 <polygon fill="black" stroke="black" points="1041.14,-570.24 1046.67,-561.21 1036.71,-564.82 1041.14,-570.24"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L191" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L191">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L191" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L191">
 <text xml:space="preserve" text-anchor="start" x="1002.73" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -728,12 +728,12 @@
 <!-- decode_warning/2&#45;&gt;required_field/3 -->
 <g id="edge23" class="edge">
 <title>decode_warning/2&#45;&gt;required_field/3</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L191" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L191" xlink:title="calls">
 <path fill="none" stroke="black" d="M861.57,-641.5C829.56,-632.5 791.04,-620.1 758,-605 734.74,-594.37 710.32,-579.31 691.43,-566.7"/>
 <polygon fill="black" stroke="black" points="693.59,-563.93 683.35,-561.21 689.65,-569.72 693.59,-563.93"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L191" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L191">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L191" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L191">
 <text xml:space="preserve" text-anchor="start" x="758" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -741,12 +741,12 @@
 <!-- decode_warning/2&#45;&gt;optional_field/4 -->
 <g id="edge24" class="edge">
 <title>decode_warning/2&#45;&gt;optional_field/4</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L191" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L191" xlink:title="calls">
 <path fill="none" stroke="black" d="M927.55,-640.56C926.52,-600.83 924,-503.26 922.74,-454.58"/>
 <polygon fill="black" stroke="black" points="926.24,-454.74 922.49,-444.84 919.25,-454.92 926.24,-454.74"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L191" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L191">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L191" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L191">
 <text xml:space="preserve" text-anchor="start" x="925.4" y="-539.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -754,12 +754,12 @@
 <!-- decode_error/2&#45;&gt;decode_location/2 -->
 <g id="edge28" class="edge">
 <title>decode_error/2&#45;&gt;decode_location/2</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L196" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L196" xlink:title="calls">
 <path fill="none" stroke="black" d="M1071.54,-640.53C1071.07,-622.28 1070.31,-593.33 1069.75,-571.7"/>
 <polygon fill="black" stroke="black" points="1073.25,-571.67 1069.49,-561.77 1066.25,-571.85 1073.25,-571.67"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L196">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L196">
 <text xml:space="preserve" text-anchor="start" x="1070.59" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -767,12 +767,12 @@
 <!-- decode_error/2&#45;&gt;required_field/3 -->
 <g id="edge26" class="edge">
 <title>decode_error/2&#45;&gt;required_field/3</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L196" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L196" xlink:title="calls">
 <path fill="none" stroke="black" d="M1012.24,-641.4C938.14,-620.82 811.84,-585.73 731.77,-563.49"/>
 <polygon fill="black" stroke="black" points="732.82,-560.15 722.25,-560.85 730.95,-566.9 732.82,-560.15"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L196">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L196">
 <text xml:space="preserve" text-anchor="start" x="877.41" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -780,12 +780,12 @@
 <!-- decode_error/2&#45;&gt;optional_field/4 -->
 <g id="edge27" class="edge">
 <title>decode_error/2&#45;&gt;optional_field/4</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L196" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L196" xlink:title="calls">
 <path fill="none" stroke="black" d="M1094.59,-640.66C1125.57,-614.7 1174.56,-564.47 1148,-524 1115.32,-474.2 1051.3,-449.58 999.72,-437.48"/>
 <polygon fill="black" stroke="black" points="1000.58,-434.09 990.06,-435.35 999.07,-440.92 1000.58,-434.09"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L196">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L196">
 <text xml:space="preserve" text-anchor="start" x="1155.62" y="-539.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -793,12 +793,12 @@
 <!-- decode_location/2&#45;&gt;optional_field/4 -->
 <g id="edge29" class="edge">
 <title>decode_location/2&#45;&gt;optional_field/4</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L204" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L204" xlink:title="calls">
 <path fill="none" stroke="black" d="M1046.67,-523.53C1021.71,-504 981.1,-472.23 953.05,-450.29"/>
 <polygon fill="black" stroke="black" points="955.28,-447.59 945.25,-444.19 950.97,-453.1 955.28,-447.59"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L204" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L204">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L204" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L204">
 <text xml:space="preserve" text-anchor="start" x="999.91" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -806,12 +806,12 @@
 <!-- decode_pairs/2&#45;&gt;decode_value/2 -->
 <g id="edge30" class="edge">
 <title>decode_pairs/2&#45;&gt;decode_value/2</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L256" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L256" xlink:title="calls">
 <path fill="none" stroke="black" d="M413.08,-523.53C393.3,-504.26 361.29,-473.06 338.81,-451.15"/>
 <polygon fill="black" stroke="black" points="341.39,-448.78 331.79,-444.31 336.51,-453.8 341.39,-448.78"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L256" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L256">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L256" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L256">
 <text xml:space="preserve" text-anchor="start" x="375.54" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -821,7 +821,7 @@
 <title>decode_list/2</title>
 <polygon fill="cornsilk" stroke="black" points="347.31,-326 234.69,-326 234.69,-290 347.31,-290 347.31,-326"/>
 <text xml:space="preserve" text-anchor="start" x="242.69" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node20_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L282" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L282">
+<g id="a_node20_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L282" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L282">
 <text xml:space="preserve" text-anchor="start" x="248.09" y="-309.71" font-family="monospace" font-size="11.00">decode_list/2</text>
 </a>
 </g>
@@ -833,12 +833,12 @@
 <!-- decode_value/2&#45;&gt;decode_list/2 -->
 <g id="edge32" class="edge">
 <title>decode_value/2&#45;&gt;decode_list/2</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L272" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L272" xlink:title="calls">
 <path fill="none" stroke="black" d="M286.58,-406.58C275.21,-397.48 263.14,-385.26 257,-371 251.81,-358.96 256.87,-346.19 264.52,-335.38"/>
 <polygon fill="black" stroke="black" points="267.21,-337.61 270.77,-327.63 261.76,-333.22 267.21,-337.61"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L272" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L272">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L272" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L272">
 <text xml:space="preserve" text-anchor="start" x="257" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -848,7 +848,7 @@
 <title>decode_object/2</title>
 <polygon fill="cornsilk" stroke="black" points="490.91,-326 365.09,-326 365.09,-290 490.91,-290 490.91,-326"/>
 <text xml:space="preserve" text-anchor="start" x="373.09" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node21_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L287" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L287">
+<g id="a_node21_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L287" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L287">
 <text xml:space="preserve" text-anchor="start" x="378.49" y="-309.71" font-family="monospace" font-size="11.00">decode_object/2</text>
 </a>
 </g>
@@ -860,12 +860,12 @@
 <!-- decode_value/2&#45;&gt;decode_object/2 -->
 <g id="edge31" class="edge">
 <title>decode_value/2&#45;&gt;decode_object/2</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L269" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L269" xlink:title="calls">
 <path fill="none" stroke="black" d="M340.22,-406.68C354.15,-397.09 370.89,-384.43 384,-371 394.27,-360.48 403.93,-347.38 411.57,-335.93"/>
 <polygon fill="black" stroke="black" points="414.42,-337.98 416.91,-327.68 408.54,-334.18 414.42,-337.98"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L269">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L269">
 <text xml:space="preserve" text-anchor="start" x="390.97" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -887,12 +887,12 @@
 <!-- decode_value/2&#45;&gt;type::valid/2 -->
 <g id="edge42" class="edge">
 <title>decode_value/2&#45;&gt;type::valid/2</title>
-<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L272" xlink:title="calls">
+<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L272" xlink:title="calls">
 <path fill="none" stroke="black" d="M274.2,-406.56C256.73,-397.53 236.58,-385.37 221,-371 180.81,-333.93 185.65,-308.61 183,-254 181.49,-222.94 187.61,-178.27 190,-173 203.31,-143.61 229.08,-117.39 249.96,-99.48"/>
 <polygon fill="black" stroke="black" points="251.95,-102.38 257.4,-93.29 247.47,-96.99 251.95,-102.38"/>
 </a>
 </g>
-<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L272" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L272">
+<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L272" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L272">
 <text xml:space="preserve" text-anchor="start" x="183" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -900,12 +900,12 @@
 <!-- decode_list/2&#45;&gt;decode_value/2 -->
 <g id="edge33" class="edge">
 <title>decode_list/2&#45;&gt;decode_value/2</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L283" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L283" xlink:title="calls">
 <path fill="none" stroke="black" d="M294.3,-326.25C297.79,-344.51 303.36,-373.64 307.52,-395.35"/>
 <polygon fill="black" stroke="black" points="304.06,-395.88 309.37,-405.05 310.93,-394.57 304.06,-395.88"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L283" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L283">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L283" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L283">
 <text xml:space="preserve" text-anchor="start" x="302.66" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -913,12 +913,12 @@
 <!-- decode_object/2&#45;&gt;decode_pairs/2 -->
 <g id="edge36" class="edge">
 <title>decode_object/2&#45;&gt;decode_pairs/2</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L300" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L300" xlink:title="calls">
 <path fill="none" stroke="black" d="M428.22,-326.32C428.74,-365.95 430,-463.51 430.63,-512.28"/>
 <polygon fill="black" stroke="black" points="427.13,-512.09 430.75,-522.05 434.13,-512 427.13,-512.09"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L300" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L300">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L300" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L300">
 <text xml:space="preserve" text-anchor="start" x="429.7" y="-422.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -926,12 +926,12 @@
 <!-- decode_object/2&#45;&gt;decode_value/2 -->
 <g id="edge35" class="edge">
 <title>decode_object/2&#45;&gt;decode_value/2</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L292" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L292" xlink:title="calls">
 <path fill="none" stroke="black" d="M398.2,-326.29C383.54,-335.68 366.24,-348.19 353,-362 343.15,-372.27 334.33,-385.29 327.49,-396.74"/>
 <polygon fill="black" stroke="black" points="324.47,-394.97 322.54,-405.39 330.54,-398.45 324.47,-394.97"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L292" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L292">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L292" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L292">
 <text xml:space="preserve" text-anchor="start" x="353" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -941,7 +941,7 @@
 <title>decode_set_elements/2</title>
 <polygon fill="cornsilk" stroke="black" points="364.71,-209 199.29,-209 199.29,-173 364.71,-173 364.71,-209"/>
 <text xml:space="preserve" text-anchor="start" x="207.29" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node22_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L303" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L303">
+<g id="a_node22_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L303" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L303">
 <text xml:space="preserve" text-anchor="start" x="212.69" y="-192.71" font-family="monospace" font-size="11.00">decode_set_elements/2</text>
 </a>
 </g>
@@ -953,12 +953,12 @@
 <!-- decode_object/2&#45;&gt;decode_set_elements/2 -->
 <g id="edge34" class="edge">
 <title>decode_object/2&#45;&gt;decode_set_elements/2</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L287" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L287" xlink:title="calls">
 <path fill="none" stroke="black" d="M405.83,-289.53C381.03,-270 340.7,-238.23 312.83,-216.29"/>
 <polygon fill="black" stroke="black" points="315.11,-213.63 305.09,-210.19 310.78,-219.13 315.11,-213.63"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L287" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L287">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L287" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L287">
 <text xml:space="preserve" text-anchor="start" x="359.38" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -966,12 +966,12 @@
 <!-- decode_object/2&#45;&gt;list::memberchk/2 -->
 <g id="edge43" class="edge">
 <title>decode_object/2&#45;&gt;list::memberchk/2</title>
-<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L287" xlink:title="calls">
+<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L287" xlink:title="calls">
 <path fill="none" stroke="black" d="M439.49,-289.53C448.8,-276.25 462.82,-258.1 478,-245 491.16,-233.64 507.08,-223.35 521.86,-214.93"/>
 <polygon fill="black" stroke="black" points="523.47,-218.04 530.53,-210.14 520.08,-211.91 523.47,-218.04"/>
 </a>
 </g>
-<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L287" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L287">
+<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L287" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L287">
 <text xml:space="preserve" text-anchor="start" x="478" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -979,12 +979,12 @@
 <!-- decode_object/2&#45;&gt;type::valid/2 -->
 <g id="edge44" class="edge">
 <title>decode_object/2&#45;&gt;type::valid/2</title>
-<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L287" xlink:title="calls">
+<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L287" xlink:title="calls">
 <path fill="none" stroke="black" d="M423.23,-289.53C415.5,-262.97 398.57,-211.47 374,-173 356.38,-145.42 330.46,-118.65 310.61,-100.07"/>
 <polygon fill="black" stroke="black" points="313.1,-97.6 303.36,-93.41 308.36,-102.76 313.1,-97.6"/>
 </a>
 </g>
-<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L287" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L287">
+<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L287" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L287">
 <text xml:space="preserve" text-anchor="start" x="392.89" y="-188.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -992,12 +992,12 @@
 <!-- decode_set_elements/2&#45;&gt;decode_value/2 -->
 <g id="edge37" class="edge">
 <title>decode_set_elements/2&#45;&gt;decode_value/2</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L304" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L304" xlink:title="calls">
 <path fill="none" stroke="black" d="M257.94,-209.4C226.78,-234.22 178.75,-281.7 199,-326 213.67,-358.1 244.65,-383.63 270.62,-400.58"/>
 <polygon fill="black" stroke="black" points="268.67,-403.49 279,-405.84 272.39,-397.56 268.67,-403.49"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L304" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L304">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L304" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L304">
 <text xml:space="preserve" text-anchor="start" x="199" y="-305.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1005,12 +1005,12 @@
 <!-- decode_set_elements/2&#45;&gt;type::valid/2 -->
 <g id="edge45" class="edge">
 <title>decode_set_elements/2&#45;&gt;type::valid/2</title>
-<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L304" xlink:title="calls">
+<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L304" xlink:title="calls">
 <path fill="none" stroke="black" d="M282,-172.53C282,-154.28 282,-125.33 282,-103.7"/>
 <polygon fill="black" stroke="black" points="285.5,-103.77 282,-93.77 278.5,-103.77 285.5,-103.77"/>
 </a>
 </g>
-<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L304" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L304">
+<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L304" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L304">
 <text xml:space="preserve" text-anchor="start" x="282" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1018,12 +1018,12 @@
 <!-- required_field/3&#45;&gt;list::memberchk/2 -->
 <g id="edge46" class="edge">
 <title>required_field/3&#45;&gt;list::memberchk/2</title>
-<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L318" xlink:title="calls">
+<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L318" xlink:title="calls">
 <path fill="none" stroke="black" d="M653.54,-523.69C639.05,-467.52 593.26,-289.94 575.31,-220.36"/>
 <polygon fill="black" stroke="black" points="578.75,-219.69 572.87,-210.88 571.98,-221.43 578.75,-219.69"/>
 </a>
 </g>
-<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L318" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L318">
+<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L318" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L318">
 <text xml:space="preserve" text-anchor="start" x="614.04" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1031,12 +1031,12 @@
 <!-- optional_field/4&#45;&gt;list::memberchk/2 -->
 <g id="edge47" class="edge">
 <title>optional_field/4&#45;&gt;list::memberchk/2</title>
-<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L324" xlink:title="calls">
+<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L324" xlink:title="calls">
 <path fill="none" stroke="black" d="M895.39,-406.56C832.58,-365.4 675.04,-262.15 603.88,-215.52"/>
 <polygon fill="black" stroke="black" points="605.98,-212.71 595.7,-210.15 602.14,-218.56 605.98,-212.71"/>
 </a>
 </g>
-<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L324" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/minizinc/minizinc_output.lgt#L324">
+<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L324" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/minizinc/minizinc_output.lgt#L324">
 <text xml:space="preserve" text-anchor="start" x="768.54" y="-305.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>

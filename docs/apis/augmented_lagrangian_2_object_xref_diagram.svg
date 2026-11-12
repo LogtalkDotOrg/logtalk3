@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-491 1718,-491 1718,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object augmented_lagrangian/2</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 15:49</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 20:35</text>
 <g id="clust1" class="cluster">
 <title>cluster_augmented_lagrangian_2_object</title>
 <g id="a_clust1"><a xlink:title="augmented_lagrangian(Problem,InnerSolver)">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1694,-46 1694,-46 1700,-46 1706,-52 1706,-58 1706,-58 1706,-467 1706,-467 1706,-473 1700,-479 1694,-479 1694,-479 20,-479 20,-479 14,-479 8,-473 8,-467 8,-467 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-463.46" font-family="monospace" font-size="10.00" fill="dimgray">augmented_lagrangian(Problem,InnerSolver)</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>run/4</title>
 <polygon fill="cornsilk" stroke="black" points="702.9,-443 643.1,-443 643.1,-407 702.9,-407 702.9,-443"/>
 <text xml:space="preserve" text-anchor="start" x="651.1" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L54">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L54">
 <text xml:space="preserve" text-anchor="start" x="656.5" y="-426.71" font-family="monospace" font-size="11.00">run/4</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>outer_termination_reason/8</title>
 <polygon fill="cornsilk" stroke="black" points="1187.21,-326 988.79,-326 988.79,-290 1187.21,-290 1187.21,-326"/>
 <text xml:space="preserve" text-anchor="start" x="996.79" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L95">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="1002.19" y="-309.71" font-family="monospace" font-size="11.00">outer_termination_reason/8</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- run/4&#45;&gt;outer_termination_reason/8 -->
 <g id="edge4" class="edge">
 <title>run/4&#45;&gt;outer_termination_reason/8</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="calls">
 <path fill="none" stroke="black" d="M703.18,-415.64C767.88,-397.71 921.56,-355.12 1013.95,-329.52"/>
 <polygon fill="black" stroke="black" points="1014.74,-332.93 1023.44,-326.89 1012.87,-326.19 1014.74,-332.93"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L54">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L54">
 <text xml:space="preserve" text-anchor="start" x="892.94" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>outer_loop/24</title>
 <polygon fill="cornsilk" stroke="black" points="939.31,-326 826.69,-326 826.69,-290 939.31,-290 939.31,-326"/>
 <text xml:space="preserve" text-anchor="start" x="834.69" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L116">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L116">
 <text xml:space="preserve" text-anchor="start" x="840.09" y="-309.71" font-family="monospace" font-size="11.00">outer_loop/24</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- run/4&#45;&gt;outer_loop/24 -->
 <g id="edge3" class="edge">
 <title>run/4&#45;&gt;outer_loop/24</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="calls">
 <path fill="none" stroke="black" d="M703.08,-411.37C726.4,-401.26 759.29,-386.29 787,-371 808.1,-359.35 830.8,-344.79 848.82,-332.71"/>
 <polygon fill="black" stroke="black" points="850.74,-335.64 857.06,-327.14 846.82,-329.84 850.74,-335.64"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L54">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L54">
 <text xml:space="preserve" text-anchor="start" x="800.49" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -97,7 +97,7 @@
 <title>init_multipliers/3</title>
 <polygon fill="cornsilk" stroke="black" points="1381.81,-326 1236.19,-326 1236.19,-290 1381.81,-290 1381.81,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1244.19" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L174" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L174">
+<g id="a_node5_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L174" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L174">
 <text xml:space="preserve" text-anchor="start" x="1249.59" y="-309.71" font-family="monospace" font-size="11.00">init_multipliers/3</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- run/4&#45;&gt;init_multipliers/3 -->
 <g id="edge1" class="edge">
 <title>run/4&#45;&gt;init_multipliers/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="calls">
 <path fill="none" stroke="black" d="M703.25,-418.53C796.48,-401.67 1081.75,-350.09 1225.03,-324.18"/>
 <polygon fill="black" stroke="black" points="1225.23,-327.7 1234.45,-322.48 1223.98,-320.82 1225.23,-327.7"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L54">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L54">
 <text xml:space="preserve" text-anchor="start" x="1010.07" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -124,7 +124,7 @@
 <title>constraint_violation/2</title>
 <polygon fill="cornsilk" stroke="black" points="190.01,-209 17.99,-209 17.99,-173 190.01,-173 190.01,-209"/>
 <text xml:space="preserve" text-anchor="start" x="25.99" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L204" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L204">
+<g id="a_node8_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L204" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L204">
 <text xml:space="preserve" text-anchor="start" x="31.39" y="-192.71" font-family="monospace" font-size="11.00">constraint_violation/2</text>
 </a>
 </g>
@@ -136,12 +136,12 @@
 <!-- run/4&#45;&gt;constraint_violation/2 -->
 <g id="edge2" class="edge">
 <title>run/4&#45;&gt;constraint_violation/2</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="calls">
 <path fill="none" stroke="black" d="M697.45,-406.52C732.02,-379.72 787.56,-327.65 755,-290 715.92,-244.81 298.84,-221.09 201.55,-209.13"/>
 <polygon fill="black" stroke="black" points="202.33,-205.71 191.95,-207.8 201.37,-212.64 202.33,-205.71"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L54">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L54">
 <text xml:space="preserve" text-anchor="start" x="764.86" y="-305.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -160,12 +160,12 @@
 <!-- run/4&#45;&gt;^^check_options/1 -->
 <g id="edge9" class="edge">
 <title>run/4&#45;&gt;^^check_options/1</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="calls">
 <path fill="none" stroke="black" d="M642.66,-418.4C565.44,-404.07 354.9,-364.68 168.81,-326.56"/>
 <polygon fill="black" stroke="black" points="169.71,-323.17 159.21,-324.59 168.3,-330.03 169.71,-323.17"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L54">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L54">
 <text xml:space="preserve" text-anchor="start" x="388.31" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -184,12 +184,12 @@
 <!-- run/4&#45;&gt;^^merge_options/2 -->
 <g id="edge10" class="edge">
 <title>run/4&#45;&gt;^^merge_options/2</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="calls">
 <path fill="none" stroke="black" d="M642.9,-415.91C576.74,-398.14 416.91,-355.19 321.16,-329.46"/>
 <polygon fill="black" stroke="black" points="322.13,-326.1 311.56,-326.88 320.31,-332.86 322.13,-326.1"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L54">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L54">
 <text xml:space="preserve" text-anchor="start" x="471.83" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -208,12 +208,12 @@
 <!-- run/4&#45;&gt;^^option/2 -->
 <g id="edge11" class="edge">
 <title>run/4&#45;&gt;^^option/2</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="calls">
 <path fill="none" stroke="black" d="M642.64,-412.13C593.58,-392.93 496.13,-354.82 434.44,-330.69"/>
 <polygon fill="black" stroke="black" points="435.73,-327.43 425.14,-327.05 433.18,-333.95 435.73,-327.43"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L54">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L54">
 <text xml:space="preserve" text-anchor="start" x="534.82" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -232,12 +232,12 @@
 <!-- run/4&#45;&gt;^^initial_point/2 -->
 <g id="edge12" class="edge">
 <title>run/4&#45;&gt;^^initial_point/2</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="calls">
 <path fill="none" stroke="black" d="M648.7,-406.53C621.37,-386.89 576.81,-354.87 546.26,-332.91"/>
 <polygon fill="black" stroke="black" points="548.66,-330.32 538.5,-327.32 544.57,-336 548.66,-330.32"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L54">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L54">
 <text xml:space="preserve" text-anchor="start" x="597.8" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -256,12 +256,12 @@
 <!-- run/4&#45;&gt;^^direction_sign/2 -->
 <g id="edge13" class="edge">
 <title>run/4&#45;&gt;^^direction_sign/2</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="calls">
 <path fill="none" stroke="black" d="M673,-406.53C673,-388.28 673,-359.33 673,-337.7"/>
 <polygon fill="black" stroke="black" points="676.5,-337.77 673,-327.77 669.5,-337.77 676.5,-337.77"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L54">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L54">
 <text xml:space="preserve" text-anchor="start" x="673" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -280,12 +280,12 @@
 <!-- outer_termination_reason/8&#45;&gt;^^target_reached/3 -->
 <g id="edge14" class="edge">
 <title>outer_termination_reason/8&#45;&gt;^^target_reached/3</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L95" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L95" xlink:title="calls">
 <path fill="none" stroke="black" d="M1129.12,-289.52C1148.93,-280.25 1172.54,-267.9 1192,-254 1206.79,-243.43 1221.48,-229.51 1233.05,-217.53"/>
 <polygon fill="black" stroke="black" points="1235.53,-220.01 1239.85,-210.33 1230.44,-215.2 1235.53,-220.01"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L95">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="1203.53" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -295,7 +295,7 @@
 <title>report_outer/6</title>
 <polygon fill="cornsilk" stroke="black" points="831.61,-209 712.39,-209 712.39,-173 831.61,-173 831.61,-209"/>
 <text xml:space="preserve" text-anchor="start" x="720.39" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L166" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L166">
+<g id="a_node4_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L166" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L166">
 <text xml:space="preserve" text-anchor="start" x="725.79" y="-192.71" font-family="monospace" font-size="11.00">report_outer/6</text>
 </a>
 </g>
@@ -307,12 +307,12 @@
 <!-- outer_loop/24&#45;&gt;report_outer/6 -->
 <g id="edge7" class="edge">
 <title>outer_loop/24&#45;&gt;report_outer/6</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="calls">
 <path fill="none" stroke="black" d="M880.17,-289.64C877.25,-276.24 871.58,-257.89 861,-245 850.99,-232.81 837.39,-222.75 823.84,-214.79"/>
 <polygon fill="black" stroke="black" points="825.8,-211.88 815.36,-210.1 822.42,-218 825.8,-211.88"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L126">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L126">
 <text xml:space="preserve" text-anchor="start" x="867.05" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -322,7 +322,7 @@
 <title>update_multipliers/6</title>
 <polygon fill="cornsilk" stroke="black" points="1008.41,-209 849.59,-209 849.59,-173 1008.41,-173 1008.41,-209"/>
 <text xml:space="preserve" text-anchor="start" x="857.59" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L186" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L186">
+<g id="a_node6_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L186" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L186">
 <text xml:space="preserve" text-anchor="start" x="862.99" y="-192.71" font-family="monospace" font-size="11.00">update_multipliers/6</text>
 </a>
 </g>
@@ -334,12 +334,12 @@
 <!-- outer_loop/24&#45;&gt;update_multipliers/6 -->
 <g id="edge5" class="edge">
 <title>outer_loop/24&#45;&gt;update_multipliers/6</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="calls">
 <path fill="none" stroke="black" d="M893.25,-289.76C899.01,-279.6 906.01,-266.35 911,-254 915.35,-243.24 919.13,-231.04 922.08,-220.33"/>
 <polygon fill="black" stroke="black" points="925.41,-221.45 924.57,-210.89 918.64,-219.67 925.41,-221.45"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L126">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L126">
 <text xml:space="preserve" text-anchor="start" x="914.12" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -347,12 +347,12 @@
 <!-- outer_loop/24&#45;&gt;constraint_violation/2 -->
 <g id="edge6" class="edge">
 <title>outer_loop/24&#45;&gt;constraint_violation/2</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="calls">
 <path fill="none" stroke="black" d="M826.34,-292.79C771.23,-278.87 693.84,-259.04 680,-254 671.22,-250.81 670.03,-247.4 661,-245 465.57,-192.99 405.45,-233.64 201.8,-209.25"/>
 <polygon fill="black" stroke="black" points="202.27,-205.78 191.91,-208.03 201.41,-212.73 202.27,-205.78"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L126">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L126">
 <text xml:space="preserve" text-anchor="start" x="680" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -374,12 +374,12 @@
 <!-- outer_loop/24&#45;&gt;list::memberchk/2 -->
 <g id="edge24" class="edge">
 <title>outer_loop/24&#45;&gt;list::memberchk/2</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="calls">
 <path fill="none" stroke="black" d="M915.35,-289.53C952.36,-269.55 1013.1,-236.76 1053.8,-214.78"/>
 <polygon fill="black" stroke="black" points="1055.23,-217.99 1062.36,-210.16 1051.9,-211.83 1055.23,-217.99"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L126">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L126">
 <text xml:space="preserve" text-anchor="start" x="995.89" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -387,12 +387,12 @@
 <!-- outer_loop/24&#45;&gt;^^target_reached/3 -->
 <g id="edge18" class="edge">
 <title>outer_loop/24&#45;&gt;^^target_reached/3</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="calls">
 <path fill="none" stroke="black" d="M939.65,-289.53C1006.53,-268.91 1117.63,-234.66 1188.8,-212.72"/>
 <polygon fill="black" stroke="black" points="1189.46,-216.18 1197.98,-209.89 1187.39,-209.49 1189.46,-216.18"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L126">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L126">
 <text xml:space="preserve" text-anchor="start" x="1080.68" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -411,12 +411,12 @@
 <!-- outer_loop/24&#45;&gt;^^build_inner/3 -->
 <g id="edge15" class="edge">
 <title>outer_loop/24&#45;&gt;^^build_inner/3</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="calls">
 <path fill="none" stroke="black" d="M827.94,-289.54C798.57,-279.83 762,-267.08 730,-254 721.35,-250.47 720,-247.49 711,-245 556.17,-202.15 507.3,-234.42 345.46,-209.24"/>
 <polygon fill="black" stroke="black" points="346.04,-205.79 335.61,-207.65 344.93,-212.7 346.04,-205.79"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L126">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L126">
 <text xml:space="preserve" text-anchor="start" x="730" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -435,12 +435,12 @@
 <!-- outer_loop/24&#45;&gt;^^update_penalty/6 -->
 <g id="edge16" class="edge">
 <title>outer_loop/24&#45;&gt;^^update_penalty/6</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="calls">
 <path fill="none" stroke="black" d="M849.48,-289.63C815,-271.8 765.67,-246.47 761,-245 655.66,-211.78 621.46,-227.52 509.37,-209.3"/>
 <polygon fill="black" stroke="black" points="510.21,-205.9 499.77,-207.68 509.04,-212.8 510.21,-205.9"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L126">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L126">
 <text xml:space="preserve" text-anchor="start" x="779.03" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -459,12 +459,12 @@
 <!-- outer_loop/24&#45;&gt;^^objective_direction/2 -->
 <g id="edge17" class="edge">
 <title>outer_loop/24&#45;&gt;^^objective_direction/2</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="calls">
 <path fill="none" stroke="black" d="M867.2,-289.52C853.6,-275.52 832.79,-256.38 811,-245 791.2,-234.66 744.1,-222.25 699.92,-212.04"/>
 <polygon fill="black" stroke="black" points="700.78,-208.65 690.25,-209.83 699.22,-215.47 700.78,-208.65"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L126">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L126">
 <text xml:space="preserve" text-anchor="start" x="824.3" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -486,12 +486,12 @@
 <!-- init_multipliers/3&#45;&gt;list::length/2 -->
 <g id="edge25" class="edge">
 <title>init_multipliers/3&#45;&gt;list::length/2</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L174" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L174" xlink:title="calls">
 <path fill="none" stroke="black" d="M1358.66,-289.53C1416.93,-269.04 1513.5,-235.08 1575.93,-213.13"/>
 <polygon fill="black" stroke="black" points="1576.7,-216.56 1584.98,-209.94 1574.38,-209.96 1576.7,-216.56"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L174" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L174">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L174" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L174">
 <text xml:space="preserve" text-anchor="start" x="1482.3" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -513,12 +513,12 @@
 <!-- init_multipliers/3&#45;&gt;linear_algebra::new_vector/3 -->
 <g id="edge26" class="edge">
 <title>init_multipliers/3&#45;&gt;linear_algebra::new_vector/3</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L174" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L174" xlink:title="calls">
 <path fill="none" stroke="black" d="M1330.87,-289.53C1355.33,-270 1395.11,-238.23 1422.59,-216.29"/>
 <polygon fill="black" stroke="black" points="1424.58,-219.17 1430.21,-210.2 1420.21,-213.7 1424.58,-219.17"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L174" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L174">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L174" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L174">
 <text xml:space="preserve" text-anchor="start" x="1385.32" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -528,7 +528,7 @@
 <title>positive_update/4</title>
 <polygon fill="cornsilk" stroke="black" points="798.51,-92 659.49,-92 659.49,-56 798.51,-56 798.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="667.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L199" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L199">
+<g id="a_node7_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L199" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L199">
 <text xml:space="preserve" text-anchor="start" x="672.89" y="-75.71" font-family="monospace" font-size="11.00">positive_update/4</text>
 </a>
 </g>
@@ -540,12 +540,12 @@
 <!-- update_multipliers/6&#45;&gt;positive_update/4 -->
 <g id="edge8" class="edge">
 <title>update_multipliers/6&#45;&gt;positive_update/4</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L186" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L186" xlink:title="calls">
 <path fill="none" stroke="black" d="M898.62,-172.53C864.02,-152.63 807.32,-120.04 769.11,-98.06"/>
 <polygon fill="black" stroke="black" points="771.06,-95.15 760.65,-93.2 767.57,-101.22 771.06,-95.15"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L186" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L186">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L186" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L186">
 <text xml:space="preserve" text-anchor="start" x="835" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -567,12 +567,12 @@
 <!-- update_multipliers/6&#45;&gt;linear_algebra::scale_vector/3 -->
 <g id="edge27" class="edge">
 <title>update_multipliers/6&#45;&gt;linear_algebra::scale_vector/3</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L186" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L186" xlink:title="calls">
 <path fill="none" stroke="black" d="M929,-172.53C929,-154.28 929,-125.33 929,-103.7"/>
 <polygon fill="black" stroke="black" points="932.5,-103.77 929,-93.77 925.5,-103.77 932.5,-103.77"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L186" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L186">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L186" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L186">
 <text xml:space="preserve" text-anchor="start" x="929" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -594,12 +594,12 @@
 <!-- update_multipliers/6&#45;&gt;linear_algebra::add_vectors/3 -->
 <g id="edge28" class="edge">
 <title>update_multipliers/6&#45;&gt;linear_algebra::add_vectors/3</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L186" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L186" xlink:title="calls">
 <path fill="none" stroke="black" d="M965.45,-172.53C1007.42,-152.42 1076.46,-119.34 1122.33,-97.36"/>
 <polygon fill="black" stroke="black" points="1123.73,-100.57 1131.24,-93.1 1120.7,-94.26 1123.73,-100.57"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L186" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L186">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L186" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L186">
 <text xml:space="preserve" text-anchor="start" x="1056.2" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -618,12 +618,12 @@
 <!-- constraint_violation/2&#45;&gt;^^validate_numeric_vector/2 -->
 <g id="edge19" class="edge">
 <title>constraint_violation/2&#45;&gt;^^validate_numeric_vector/2</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L204" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L204" xlink:title="calls">
 <path fill="none" stroke="black" d="M106.58,-172.53C109.29,-154.19 113.6,-125.06 116.8,-103.4"/>
 <polygon fill="black" stroke="black" points="120.23,-104.16 118.23,-93.75 113.3,-103.13 120.23,-104.16"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L204" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L204">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L204" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L204">
 <text xml:space="preserve" text-anchor="start" x="113.01" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -642,12 +642,12 @@
 <!-- constraint_violation/2&#45;&gt;^^abs_max/2 -->
 <g id="edge20" class="edge">
 <title>constraint_violation/2&#45;&gt;^^abs_max/2</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L204" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L204" xlink:title="calls">
 <path fill="none" stroke="black" d="M132.4,-172.53C164.62,-152.72 217.32,-120.31 253.04,-98.34"/>
 <polygon fill="black" stroke="black" points="254.66,-101.45 261.35,-93.23 251,-95.49 254.66,-101.45"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L204" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L204">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L204" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L204">
 <text xml:space="preserve" text-anchor="start" x="203.11" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -666,12 +666,12 @@
 <!-- constraint_violation/2&#45;&gt;^^positive_max/2 -->
 <g id="edge21" class="edge">
 <title>constraint_violation/2&#45;&gt;^^positive_max/2</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L204" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L204" xlink:title="calls">
 <path fill="none" stroke="black" d="M152.75,-172.53C209.83,-152.08 304.35,-118.22 365.65,-96.26"/>
 <polygon fill="black" stroke="black" points="366.66,-99.62 374.89,-92.95 364.3,-93.03 366.66,-99.62"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L204" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L204">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L204" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L204">
 <text xml:space="preserve" text-anchor="start" x="274.12" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -681,7 +681,7 @@
 <title>default_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="1539.21,-443 1406.79,-443 1406.79,-407 1539.21,-407 1539.21,-443"/>
 <text xml:space="preserve" text-anchor="start" x="1414.79" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L219" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L219">
+<g id="a_node9_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L219" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L219">
 <text xml:space="preserve" text-anchor="start" x="1420.19" y="-426.71" font-family="monospace" font-size="11.00">default_option/1</text>
 </a>
 </g>
@@ -704,12 +704,12 @@
 <!-- default_option/1&#45;&gt;^^default_option/1 -->
 <g id="edge22" class="edge">
 <title>default_option/1&#45;&gt;^^default_option/1</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L225" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L225" xlink:title="calls">
 <path fill="none" stroke="black" d="M1473,-406.53C1473,-388.28 1473,-359.33 1473,-337.7"/>
 <polygon fill="black" stroke="black" points="1476.5,-337.77 1473,-327.77 1469.5,-337.77 1476.5,-337.77"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L225" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L225">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L225" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L225">
 <text xml:space="preserve" text-anchor="start" x="1473" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -719,7 +719,7 @@
 <title>valid_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="1689.61,-443 1570.39,-443 1570.39,-407 1689.61,-407 1689.61,-443"/>
 <text xml:space="preserve" text-anchor="start" x="1578.39" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L228">
+<g id="a_node10_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L228">
 <text xml:space="preserve" text-anchor="start" x="1583.79" y="-426.71" font-family="monospace" font-size="11.00">valid_option/1</text>
 </a>
 </g>
@@ -742,12 +742,12 @@
 <!-- valid_option/1&#45;&gt;^^valid_option/1 -->
 <g id="edge23" class="edge">
 <title>valid_option/1&#45;&gt;^^valid_option/1</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L240" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L240" xlink:title="calls">
 <path fill="none" stroke="black" d="M1630,-406.53C1630,-388.28 1630,-359.33 1630,-337.7"/>
 <polygon fill="black" stroke="black" points="1633.5,-337.77 1630,-327.77 1626.5,-337.77 1633.5,-337.77"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L240" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf55b9f7bb65c327a0c524d23e5eb4376db6c63f/library/constrained_optimization/augmented_lagrangian.lgt#L240">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L240" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/constrained_optimization/augmented_lagrangian.lgt#L240">
 <text xml:space="preserve" text-anchor="start" x="1630" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
