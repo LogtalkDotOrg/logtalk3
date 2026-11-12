@@ -352,9 +352,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-sources">Problem sources</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#solving">Solving</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#sources">Sources</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#statement-vocabulary">Statement vocabulary</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#directives">Directives</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#facts-and-rules">Facts and rules</a></li>
@@ -516,6 +516,22 @@ covering typed columns (<code class="docutils literal notranslate"><span class="
 <code class="docutils literal notranslate"><span class="pre">cat/2</span></code> string-concatenation functor.</p></li>
 </ul>
 </section>
+<section id="problem-sources">
+<h2>Problem sources<a class="headerlink" href="#problem-sources" title="Link to this heading"></a></h2>
+<p>A Datalog problem can be represented in several ways:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>: <code class="docutils literal notranslate"><span class="pre">Path</span></code> must be an atom identifying a native Datalog
+file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">codes(Codes)</span></code>: <code class="docutils literal notranslate"><span class="pre">Codes</span></code> must be a list of character codes
+representing native Datalog source.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">terms(Statements)</span></code>: <code class="docutils literal notranslate"><span class="pre">Statements</span></code> must be an ordered list of
+canonical ground terms representing the problem.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">object(Object)</span></code>: <code class="docutils literal notranslate"><span class="pre">Object</span></code> must be an object containing the
+problem and implementing <code class="docutils literal notranslate"><span class="pre">souffle_problem_protocol</span></code>.</p></li>
+</ul>
+<p>The main library predicates take a ground problem source as an input
+argument.</p>
+</section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <p>Load the library, then compile an object defining a Datalog problem
@@ -554,6 +570,9 @@ hook. An example using a trivial single-fact program:</p>
      souffle<span class="o">::</span>relation(<span class="nv">Result</span>, edge, <span class="nv">_</span>, <span class="nv">Rows</span>).
 </pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">program/2</span></code> predicate returns Datalog character codes without
+invoking Souffle. Native Datalog sources pass through unchanged; Souffle
+parses and reports any errors directly.</p>
 <p>See the next section for full details on the options.</p>
 </section>
 <section id="solving">
@@ -615,20 +634,6 @@ errors. Invalid CSV content, a missing requested relation file, and a
 nonzero Souffle exit status raise
 <code class="docutils literal notranslate"><span class="pre">souffle_solver_error(Formal,</span> <span class="pre">Status,</span> <span class="pre">Diagnostics,</span> <span class="pre">SourceMap)</span></code> errors,
 retaining the captured diagnostics and object source map.</p>
-</section>
-<section id="sources">
-<h2>Sources<a class="headerlink" href="#sources" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">program/2</span></code> predicate returns Datalog character codes without
-invoking Souffle. Its first argument is a ground source envelope:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">object(Object)</span></code> enumerates the object’s ordered
-<code class="docutils literal notranslate"><span class="pre">souffle_statement/2</span></code> clauses. The object must conform to
-<code class="docutils literal notranslate"><span class="pre">souffle_problem_protocol</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">terms(Statements)</span></code> serializes an ordered list of canonical, ground
-statements.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">codes(Codes)</span></code> and <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code> pass through native Datalog source
-unchanged; Souffle parses and reports any errors directly.</p></li>
-</ul>
 </section>
 <section id="statement-vocabulary">
 <h2>Statement vocabulary<a class="headerlink" href="#statement-vocabulary" title="Link to this heading"></a></h2>

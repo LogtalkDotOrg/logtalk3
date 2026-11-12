@@ -84,9 +84,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-sources">Problem sources</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#solving">Solving</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#sources">Sources</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#canonical-representation">Canonical representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#object-syntax">Object syntax</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#raw-asp-source">Raw ASP source</a></li>
@@ -549,6 +549,22 @@ uses minimize, maximize, and weak constraints at distinct priorities.
 The object passes a native <code class="docutils literal notranslate"><span class="pre">#program</span> <span class="pre">base</span></code> directive through
 <code class="docutils literal notranslate"><span class="pre">raw/1</span></code>, exercising trusted raw source too.</p>
 </section>
+<section id="problem-sources">
+<h2>Problem sources<a class="headerlink" href="#problem-sources" title="Link to this heading"></a></h2>
+<p>An ASP problem can be represented in several ways:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>: <code class="docutils literal notranslate"><span class="pre">Path</span></code> must be an atom identifying a native ASP
+file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">codes(Codes)</span></code>: <code class="docutils literal notranslate"><span class="pre">Codes</span></code> must be a list of character codes
+representing native ASP source.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">terms(Statements)</span></code>: <code class="docutils literal notranslate"><span class="pre">Statements</span></code> must be an ordered list of
+canonical ground terms representing the problem.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">object(Object)</span></code>: <code class="docutils literal notranslate"><span class="pre">Object</span></code> must be an object containing the
+problem and implementing <code class="docutils literal notranslate"><span class="pre">asp_problem_protocol</span></code>.</p></li>
+</ul>
+<p>The main library predicates take a ground problem source as an input
+argument.</p>
+</section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <p>Load the library, then compile an object defining an ASP problem using
@@ -580,12 +596,31 @@ hook. An example using a trivial single-fact program:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> asp<span class="o">::</span>solve(terms([fact(function(p, [], positive))]), <span class="nv">Result</span>).
 </pre></div>
 </div>
-<p>See the next section for full details on the solver features and
-options.</p>
 <p>To select Zetesis for a compiled problem:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> asp<span class="o">::</span>solve(object(asp_vertex_cover), <span class="nv">Result</span>, [solver(zetesis), models(<span class="m">0</span>)]).
 </pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">program/2</span></code> predicate returns ASP character codes without invoking
+a solver.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">print_program/1</span></code> predicate validates and prints a character-code
+list to the current output stream, preserving its layout without adding
+a newline. It does not parse or ground the ASP source and does not
+invoke a solver.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">program/1</span></code> predicate generates and prints ASP source, equivalent
+to calling <code class="docutils literal notranslate"><span class="pre">program/2</span></code> followed by <code class="docutils literal notranslate"><span class="pre">print_program/1</span></code>. It accepts the
+same source envelopes.</p>
+<p>ASP variables in canonical data are explicit <code class="docutils literal notranslate"><span class="pre">variable(Name)</span></code> or
+<code class="docutils literal notranslate"><span class="pre">anonymous</span></code> terms, not unbound Logtalk variables. Invalid structures
+raise documented errors. Grounding safety, arithmetic semantics, and
+satisfiability belong to the selected solver.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">asp_program::serialize/2</span></code> predicate serializes canonical
+statements. The <code class="docutils literal notranslate"><span class="pre">asp_program::serialize/4</span></code> predicate also accepts a
+parallel list of origins and returns a source map. Origins are
+<code class="docutils literal notranslate"><span class="pre">source(File,</span> <span class="pre">Start,</span> <span class="pre">End)</span></code> or <code class="docutils literal notranslate"><span class="pre">unknown</span></code>. Map entries are
+<code class="docutils literal notranslate"><span class="pre">line(Start,</span> <span class="pre">End,</span> <span class="pre">Origin)</span></code>, identifying inclusive, one-based generated
+line intervals.</p>
+<p>See the next section for full details on the solver features and
+options.</p>
 </section>
 <section id="solving">
 <h2>Solving<a class="headerlink" href="#solving" title="Link to this heading"></a></h2>
@@ -657,38 +692,6 @@ errors. Invalid JSON, fatal solver exit statuses, and inconsistent
 solver metadata raise
 <code class="docutils literal notranslate"><span class="pre">asp_solver_error(Formal,</span> <span class="pre">Status,</span> <span class="pre">Diagnostics,</span> <span class="pre">SourceMap)</span></code> errors,
 retaining the captured diagnostic codes and object source map.</p>
-</section>
-<section id="sources">
-<h2>Sources<a class="headerlink" href="#sources" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">program/2</span></code> predicate returns ASP character codes without invoking
-Clingo. Its first argument is a ground source envelope:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">object(Object)</span></code> enumerates the object’s ordered <code class="docutils literal notranslate"><span class="pre">asp_statement/2</span></code>
-clauses. The object must conform to <code class="docutils literal notranslate"><span class="pre">asp_problem_protocol</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">terms(Statements)</span></code> serializes an ordered list of canonical, ground
-statements.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">codes(Codes)</span></code> validates and returns native ASP character codes
-unchanged.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">file(Path)</span></code> reads the named native ASP file; <code class="docutils literal notranslate"><span class="pre">Path</span></code> must be an
-atom.</p></li>
-</ul>
-<p>The <code class="docutils literal notranslate"><span class="pre">print_program/1</span></code> predicate validates and prints a character-code
-list to the current output stream, preserving its layout without adding
-a newline. It does not parse or ground the ASP source and does not
-invoke Clingo.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">program/1</span></code> predicate generates and prints ASP source, equivalent
-to calling <code class="docutils literal notranslate"><span class="pre">program/2</span></code> followed by <code class="docutils literal notranslate"><span class="pre">print_program/1</span></code>. It accepts the
-same source envelopes.</p>
-<p>ASP variables in canonical data are explicit <code class="docutils literal notranslate"><span class="pre">variable(Name)</span></code> or
-<code class="docutils literal notranslate"><span class="pre">anonymous</span></code> terms, not unbound Logtalk variables. Invalid structures
-raise documented errors. Grounding safety, arithmetic semantics, and
-satisfiability belong to the selected solver.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">asp_program::serialize/2</span></code> predicate serializes canonical
-statements. The <code class="docutils literal notranslate"><span class="pre">asp_program::serialize/4</span></code> predicate also accepts a
-parallel list of origins and returns a source map. Origins are
-<code class="docutils literal notranslate"><span class="pre">source(File,</span> <span class="pre">Start,</span> <span class="pre">End)</span></code> or <code class="docutils literal notranslate"><span class="pre">unknown</span></code>. Map entries are
-<code class="docutils literal notranslate"><span class="pre">line(Start,</span> <span class="pre">End,</span> <span class="pre">Origin)</span></code>, identifying inclusive, one-based generated
-line intervals.</p>
 </section>
 <section id="canonical-representation">
 <h2>Canonical representation<a class="headerlink" href="#canonical-representation" title="Link to this heading"></a></h2>

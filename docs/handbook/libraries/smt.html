@@ -348,9 +348,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-sources">Problem sources</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#solving">Solving</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#sources">Sources</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#statements">Statements</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#results">Results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#incremental-solving">Incremental solving</a></li>
@@ -535,6 +535,22 @@ native SMT-LIB 2 fixtures used to exercise the <code class="docutils literal not
 the <code class="docutils literal notranslate"><span class="pre">smt_solver_error</span></code> path.</p></li>
 </ul>
 </section>
+<section id="problem-sources">
+<h2>Problem sources<a class="headerlink" href="#problem-sources" title="Link to this heading"></a></h2>
+<p>An SMT-LIB 2 problem can be represented in several ways:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>: <code class="docutils literal notranslate"><span class="pre">Path</span></code> must be an atom identifying a native SMT-LIB
+2 file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">codes(Codes)</span></code>: <code class="docutils literal notranslate"><span class="pre">Codes</span></code> must be a list of character codes
+representing native SMT-LIB 2 source.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">terms(Statements)</span></code>: <code class="docutils literal notranslate"><span class="pre">Statements</span></code> must be an ordered list of
+canonical ground terms representing the problem.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">object(Object)</span></code>: <code class="docutils literal notranslate"><span class="pre">Object</span></code> must be an object containing the
+problem and implementing <code class="docutils literal notranslate"><span class="pre">smt_problem_protocol</span></code>.</p></li>
+</ul>
+<p>The main library predicates take a ground problem source as an input
+argument.</p>
+</section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <p>Load the library, then compile an object defining an SMT-LIB 2 problem
@@ -566,6 +582,15 @@ hook. An example using a trivial single-constant problem:</p>
      ]), <span class="nv">Results</span>).
 </pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">program/2</span></code> predicate returns SMT-LIB 2 character codes without
+invoking a solver.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">print_program/1</span></code> predicate validates and prints a character-code
+list to the current output stream, preserving its layout without adding
+a newline. It does not parse or validate the SMT-LIB 2 syntax and does
+not invoke a solver.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">program/1</span></code> predicate generates and prints SMT-LIB 2 source,
+equivalent to calling <code class="docutils literal notranslate"><span class="pre">program/2</span></code> followed by <code class="docutils literal notranslate"><span class="pre">print_program/1</span></code>. It
+accepts the same source envelopes.</p>
 <p>See the next section for full details on the solver features and
 options.</p>
 </section>
@@ -629,28 +654,6 @@ errors. Malformed solver output, an <code class="docutils literal notranslate"><
 fatal solver exit statuses, and inconsistent solver metadata raise
 <code class="docutils literal notranslate"><span class="pre">smt_solver_error(Formal,</span> <span class="pre">Status,</span> <span class="pre">Diagnostics,</span> <span class="pre">SourceMap)</span></code> errors,
 retaining the captured diagnostics and object source map.</p>
-</section>
-<section id="sources">
-<h2>Sources<a class="headerlink" href="#sources" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">program/2</span></code> predicate returns SMT-LIB 2 character codes without
-invoking a solver. Its first argument is a ground source envelope:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">object(Object)</span></code> enumerates the object’s ordered <code class="docutils literal notranslate"><span class="pre">smt_statement/2</span></code>
-clauses. The object must conform to <code class="docutils literal notranslate"><span class="pre">smt_problem_protocol</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">terms(Statements)</span></code> serializes an ordered list of canonical, ground
-statements.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">codes(Codes)</span></code> validates and returns native SMT-LIB 2 character
-codes unchanged.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">file(Path)</span></code> reads the named native SMT-LIB 2 file; <code class="docutils literal notranslate"><span class="pre">Path</span></code> must be
-an atom.</p></li>
-</ul>
-<p>The <code class="docutils literal notranslate"><span class="pre">print_program/1</span></code> predicate validates and prints a character-code
-list to the current output stream, preserving its layout without adding
-a newline. It does not parse or validate the SMT-LIB 2 syntax and does
-not invoke a solver.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">program/1</span></code> predicate generates and prints SMT-LIB 2 source,
-equivalent to calling <code class="docutils literal notranslate"><span class="pre">program/2</span></code> followed by <code class="docutils literal notranslate"><span class="pre">print_program/1</span></code>. It
-accepts the same source envelopes.</p>
 </section>
 <section id="statements">
 <h2>Statements<a class="headerlink" href="#statements" title="Link to this heading"></a></h2>

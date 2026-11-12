@@ -340,9 +340,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-sources">Problem sources</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#solving">Solving</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#sources">Sources</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#canonical-representation">Canonical representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#object-syntax">Object syntax</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#raw-dimacs-source">Raw DIMACS source</a></li>
@@ -532,6 +532,22 @@ source and, for Kissat, CaDiCaL, and Z3, the <code class="docutils literal notra
 limit.</p></li>
 </ul>
 </section>
+<section id="problem-sources">
+<h2>Problem sources<a class="headerlink" href="#problem-sources" title="Link to this heading"></a></h2>
+<p>A SAT problem can be represented in several ways:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>: <code class="docutils literal notranslate"><span class="pre">Path</span></code> must be an atom identifying a native DIMACS
+CNF file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">codes(Codes)</span></code>: <code class="docutils literal notranslate"><span class="pre">Codes</span></code> must be a list of character codes
+representing native DIMACS CNF source.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">terms(Statements)</span></code>: <code class="docutils literal notranslate"><span class="pre">Statements</span></code> must be an ordered list of
+canonical ground terms representing the problem.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">object(Object)</span></code>: <code class="docutils literal notranslate"><span class="pre">Object</span></code> must be an object containing the
+problem and implementing <code class="docutils literal notranslate"><span class="pre">sat_problem_protocol</span></code>.</p></li>
+</ul>
+<p>The main library predicates take a ground problem source as an input
+argument.</p>
+</section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <p>Load the library, then compile an object defining a CNF problem using
@@ -559,6 +575,43 @@ hook. An example with a trivial two-variable encoding:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> sat<span class="o">::</span>solve(terms([(p <span class="o">;</span> q), <span class="o">-</span>p]), <span class="nv">Result</span>).
 </pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">program/2</span></code> predicate returns DIMACS CNF character codes without
+invoking a solver, using default options. The <code class="docutils literal notranslate"><span class="pre">program/3</span></code> predicate
+accepts an explicit options list; the only supported option is
+<code class="docutils literal notranslate"><span class="pre">embed_variables(Boolean)</span></code> (default <code class="docutils literal notranslate"><span class="pre">true</span></code>), described below.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">print_program/1</span></code> predicate validates and prints a character-code
+list to the current output stream, preserving its layout without adding
+a newline. It does not parse or validate the DIMACS syntax and does not
+invoke a solver.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">program/1</span></code> predicate generates and prints DIMACS source,
+equivalent to calling <code class="docutils literal notranslate"><span class="pre">program/2</span></code> followed by <code class="docutils literal notranslate"><span class="pre">print_program/1</span></code>. It
+accepts the same source envelopes.</p>
+<p>For the <code class="docutils literal notranslate"><span class="pre">object(Object)</span></code> and <code class="docutils literal notranslate"><span class="pre">terms(Statements)</span></code> envelopes,
+<code class="docutils literal notranslate"><span class="pre">embed_variables(true)</span></code> (the default) inserts one <code class="docutils literal notranslate"><span class="pre">c</span> <span class="pre">v</span> <span class="pre">Number</span> <span class="pre">Term</span></code>
+comment line per declared variable, right after the <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">cnf</span></code> header, in
+table order. <code class="docutils literal notranslate"><span class="pre">Term</span></code> is written quoted, so that it can be read back
+unambiguously. These lines are ordinary DIMACS comments: any solver
+ignores them. They let <code class="docutils literal notranslate"><span class="pre">solve/2</span></code> and <code class="docutils literal notranslate"><span class="pre">solve/3</span></code> recover the original
+variable table when later solving the generated source through the
+<code class="docutils literal notranslate"><span class="pre">codes/1</span></code> or <code class="docutils literal notranslate"><span class="pre">file/1</span></code> envelopes (see Solving below), instead of
+reporting witness literals as bare DIMACS integers.
+<code class="docutils literal notranslate"><span class="pre">embed_variables(false)</span></code> omits them, generating plain DIMACS source
+with no comment lines. As a <code class="docutils literal notranslate"><span class="pre">program/2-3</span></code> source, the <code class="docutils literal notranslate"><span class="pre">codes/1</span></code> and
+<code class="docutils literal notranslate"><span class="pre">file/1</span></code> envelopes are unaffected by this option: they validate and
+return existing text unchanged, without computing a variable table of
+their own; that only happens on the <code class="docutils literal notranslate"><span class="pre">solve/2-3</span></code> side, described next.</p>
+<p>CNF variables are opaque ground Prolog terms, not raw DIMACS integers;
+the serializer assigns sequential numbers by first occurrence across
+clause statements and exposes the resulting table through
+<code class="docutils literal notranslate"><span class="pre">sat_program::variables/2</span></code>. Invalid structures raise documented
+errors.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">sat_program::serialize/2</span></code> predicate serializes canonical
+statements. The <code class="docutils literal notranslate"><span class="pre">sat_program::serialize/4</span></code> predicate also accepts a
+parallel list of origins and returns a source map; the generated
+<code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">cnf</span></code> header occupies line 1, and the source map covers the
+remaining statement lines. Origins are <code class="docutils literal notranslate"><span class="pre">source(File,</span> <span class="pre">Start,</span> <span class="pre">End)</span></code> or
+<code class="docutils literal notranslate"><span class="pre">unknown</span></code>. Map entries are <code class="docutils literal notranslate"><span class="pre">line(Start,</span> <span class="pre">End,</span> <span class="pre">Origin)</span></code>, identifying
+inclusive, one-based generated line intervals.</p>
 <p>See the next section for full details on the solver features and
 options.</p>
 </section>
@@ -618,7 +671,7 @@ result has no model when the witness is suppressed, even when the
 status is satisfiable.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">embed_variables(Boolean)</span></code> is validated but has no effect on the
 <code class="docutils literal notranslate"><span class="pre">solve/2-3</span></code> predicates. It is only consulted by <code class="docutils literal notranslate"><span class="pre">program/3</span></code> (see
-the “Sources” section below), where it can be set explicitly;
+the “Usage” section above), where it can be set explicitly;
 <code class="docutils literal notranslate"><span class="pre">program/2</span></code> has no options argument and always uses its default
 value (<code class="docutils literal notranslate"><span class="pre">true</span></code>).</p></li>
 </ul>
@@ -645,57 +698,6 @@ errors. Malformed solver output, fatal solver exit statuses, and
 inconsistent solver metadata raise
 <code class="docutils literal notranslate"><span class="pre">sat_solver_error(Formal,</span> <span class="pre">Status,</span> <span class="pre">Diagnostics,</span> <span class="pre">SourceMap)</span></code> errors,
 retaining the captured diagnostics and object source map.</p>
-</section>
-<section id="sources">
-<h2>Sources<a class="headerlink" href="#sources" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">program/2</span></code> predicate returns DIMACS CNF character codes without
-invoking a solver, using default options. The <code class="docutils literal notranslate"><span class="pre">program/3</span></code> predicate
-accepts an explicit options list; the only supported option is
-<code class="docutils literal notranslate"><span class="pre">embed_variables(Boolean)</span></code> (default <code class="docutils literal notranslate"><span class="pre">true</span></code>), described below. Their
-first argument is a ground source envelope:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">object(Object)</span></code> enumerates the object’s ordered <code class="docutils literal notranslate"><span class="pre">cnf_statement/2</span></code>
-clauses. The object must conform to <code class="docutils literal notranslate"><span class="pre">sat_problem_protocol</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">terms(Statements)</span></code> serializes an ordered list of canonical, ground
-statements.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">codes(Codes)</span></code> validates and returns native DIMACS character codes
-unchanged.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">file(Path)</span></code> reads the named native DIMACS file; <code class="docutils literal notranslate"><span class="pre">Path</span></code> must be an
-atom.</p></li>
-</ul>
-<p>The <code class="docutils literal notranslate"><span class="pre">print_program/1</span></code> predicate validates and prints a character-code
-list to the current output stream, preserving its layout without adding
-a newline. It does not parse or validate the DIMACS syntax and does not
-invoke a solver.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">program/1</span></code> predicate generates and prints DIMACS source,
-equivalent to calling <code class="docutils literal notranslate"><span class="pre">program/2</span></code> followed by <code class="docutils literal notranslate"><span class="pre">print_program/1</span></code>. It
-accepts the same source envelopes.</p>
-<p>For the <code class="docutils literal notranslate"><span class="pre">object(Object)</span></code> and <code class="docutils literal notranslate"><span class="pre">terms(Statements)</span></code> envelopes,
-<code class="docutils literal notranslate"><span class="pre">embed_variables(true)</span></code> (the default) inserts one <code class="docutils literal notranslate"><span class="pre">c</span> <span class="pre">v</span> <span class="pre">Number</span> <span class="pre">Term</span></code>
-comment line per declared variable, right after the <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">cnf</span></code> header, in
-table order. <code class="docutils literal notranslate"><span class="pre">Term</span></code> is written quoted, so that it can be read back
-unambiguously. These lines are ordinary DIMACS comments: any solver
-ignores them. They let <code class="docutils literal notranslate"><span class="pre">solve/2</span></code> and <code class="docutils literal notranslate"><span class="pre">solve/3</span></code> recover the original
-variable table when later solving the generated source through the
-<code class="docutils literal notranslate"><span class="pre">codes/1</span></code> or <code class="docutils literal notranslate"><span class="pre">file/1</span></code> envelopes (see Solving below), instead of
-reporting witness literals as bare DIMACS integers.
-<code class="docutils literal notranslate"><span class="pre">embed_variables(false)</span></code> omits them, generating plain DIMACS source
-with no comment lines. As a <code class="docutils literal notranslate"><span class="pre">program/2-3</span></code> source, the <code class="docutils literal notranslate"><span class="pre">codes/1</span></code> and
-<code class="docutils literal notranslate"><span class="pre">file/1</span></code> envelopes are unaffected by this option: they validate and
-return existing text unchanged, without computing a variable table of
-their own; that only happens on the <code class="docutils literal notranslate"><span class="pre">solve/2-3</span></code> side, described next.</p>
-<p>CNF variables are opaque ground Prolog terms, not raw DIMACS integers;
-the serializer assigns sequential numbers by first occurrence across
-clause statements and exposes the resulting table through
-<code class="docutils literal notranslate"><span class="pre">sat_program::variables/2</span></code>. Invalid structures raise documented
-errors.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">sat_program::serialize/2</span></code> predicate serializes canonical
-statements. The <code class="docutils literal notranslate"><span class="pre">sat_program::serialize/4</span></code> predicate also accepts a
-parallel list of origins and returns a source map; the generated
-<code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">cnf</span></code> header occupies line 1, and the source map covers the
-remaining statement lines. Origins are <code class="docutils literal notranslate"><span class="pre">source(File,</span> <span class="pre">Start,</span> <span class="pre">End)</span></code> or
-<code class="docutils literal notranslate"><span class="pre">unknown</span></code>. Map entries are <code class="docutils literal notranslate"><span class="pre">line(Start,</span> <span class="pre">End,</span> <span class="pre">Origin)</span></code>, identifying
-inclusive, one-based generated line intervals.</p>
 </section>
 <section id="canonical-representation">
 <h2>Canonical representation<a class="headerlink" href="#canonical-representation" title="Link to this heading"></a></h2>
@@ -782,10 +784,11 @@ program above:</p>
 variable table of its own: witness literals in the collected result use
 the plain DIMACS integer as the term identity instead of a declared
 symbol, unless the source text carries embedded <code class="docutils literal notranslate"><span class="pre">c</span> <span class="pre">v</span> <span class="pre">Number</span> <span class="pre">Term</span></code>
-comment lines (see <code class="docutils literal notranslate"><span class="pre">embed_variables/1</span></code> in Sources above), in which
-case <code class="docutils literal notranslate"><span class="pre">solve/2</span></code> and <code class="docutils literal notranslate"><span class="pre">solve/3</span></code> recover the variable table from them
-automatically. For example, generating a program from an object and
-solving it back through <code class="docutils literal notranslate"><span class="pre">codes/1</span></code> still reports symbolic literals:</p>
+comment lines (see <code class="docutils literal notranslate"><span class="pre">embed_variables/1</span></code> in the “Usage” section above),
+in which case <code class="docutils literal notranslate"><span class="pre">solve/2</span></code> and <code class="docutils literal notranslate"><span class="pre">solve/3</span></code> recover the variable table
+from them automatically. For example, generating a program from an
+object and solving it back through <code class="docutils literal notranslate"><span class="pre">codes/1</span></code> still reports symbolic
+literals:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> sat<span class="o">::</span>program(object(reachability), <span class="nv">Codes</span>),
      sat<span class="o">::</span>solve(codes(<span class="nv">Codes</span>), <span class="nv">Result</span>).
 </pre></div>

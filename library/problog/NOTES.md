@@ -22,8 +22,10 @@ ________________________________________________________________________
 =========
 
 The `problog` library provides exact probabilistic inference using the
-[ProbLog](https://dtai.cs.kuleuven.be/problog/) CLI, source generation,
-opt-in expansion of problem objects, and collected query probabilities.
+ProbLog CLI source generation, opt-in expansion of problem objects, and
+collected query probabilities. For information on ProbLog, see:
+
+https://dtai.cs.kuleuven.be/problog/
 
 
 Requirements
@@ -63,16 +65,17 @@ To test this library, load its `tester.lgt` file:
 	| ?- logtalk_load(problog(tester)).
 
 CLI tests are conditional on finding `problog`. Source-generation and results
-decoding tests do not require it.
+decoding tests do not require it. The test fixtures adapt examples from the
+ProbLog's sample directory:
 
-The test fixtures adapt examples from
-[ProbLog's sample directory](https://github.com/ML-KULeuven/problog/tree/master/test/sample):
-`coins.lgt` checks `some_heads = 0.8`, and `coins_evidence.lgt` checks
-`some_heads = 0.6` after conditioning on evidence. `annotated.lgt` exercises
-annotated disjunctions and variable sharing. `diagnostics.lgt` uses ProbLog's
-`debugprint/1` built-in to check that the known diagnostic message is captured
-without depending on the overall output length or formatting. Native file-input
-tests use library-specific fixtures.
+https://github.com/ML-KULeuven/problog/tree/master/test/sample
+
+The `coins` example checks `some_heads = 0.8`, and the `coins_evidence` example
+checks `some_heads = 0.6` after conditioning on evidence. The `annotated`
+example exercises annotated disjunctions and variable sharing. The
+`diagnostics` example uses ProbLog's `debugprint/1` predicate to check that the
+known diagnostic message is captured without depending on the overall output
+length or formatting. Native file-input tests use library-specific fixtures.
 
 
 Problem sources
@@ -83,7 +86,8 @@ A ProbLog problem can be represented in several ways:
 - `file(Path)`: the argument must be the path of a native ProbLog file.
 - `codes(Codes)`: a list of charactert codes suppliing a native source.
 - `terms(Statements)`: a list of canonical ground terms representing the problem.
-- `object(Object)`: the argument must be an object containing the problem.
+- `object(Object)`: the argument must be an object containing the problem and
+  implementing `problog_problem_protocol`.
 
 The main library predicates take a problem source as an input argument.
 

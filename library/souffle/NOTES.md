@@ -92,6 +92,22 @@ source and complete CLI solving:
   `cat/2` string-concatenation functor.
 
 
+Problem sources
+---------------
+
+A Datalog problem can be represented in several ways:
+
+- `file(Path)`: `Path` must be an atom identifying a native Datalog file.
+- `codes(Codes)`: `Codes` must be a list of character codes representing native
+  Datalog source.
+- `terms(Statements)`: `Statements` must be an ordered list of canonical ground
+  terms representing the problem.
+- `object(Object)`: `Object` must be an object containing the problem and
+  implementing `souffle_problem_protocol`.
+
+The main library predicates take a ground problem source as an input argument.
+
+
 Usage
 -----
 
@@ -129,6 +145,10 @@ trivial single-fact program:
 	         output(edge)
 	     ]), Result, [outputs([edge-[number,number]])]),
 	     souffle::relation(Result, edge, _, Rows).
+
+The `program/2` predicate returns Datalog character codes without invoking
+Souffle. Native Datalog sources pass through unchanged; Souffle parses and
+reports any errors directly.
 
 See the next section for full details on the options.
 
@@ -193,20 +213,6 @@ failures raise `souffle_transport(Stage, Status, Details)` errors. Invalid
 CSV content, a missing requested relation file, and a nonzero Souffle exit
 status raise `souffle_solver_error(Formal, Status, Diagnostics, SourceMap)`
 errors, retaining the captured diagnostics and object source map.
-
-
-Sources
--------
-
-The `program/2` predicate returns Datalog character codes without invoking
-Souffle. Its first argument is a ground source envelope:
-
-- `object(Object)` enumerates the object's ordered `souffle_statement/2`
-	clauses. The object must conform to `souffle_problem_protocol`.
-- `terms(Statements)` serializes an ordered list of canonical, ground
-	statements.
-- `codes(Codes)` and `file(Path)` pass through native Datalog source
-	unchanged; Souffle parses and reports any errors directly.
 
 
 Statement vocabulary

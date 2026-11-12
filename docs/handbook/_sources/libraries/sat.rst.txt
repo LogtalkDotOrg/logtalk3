@@ -94,6 +94,23 @@ rather than passing original native CNF files:
   source and, for Kissat, CaDiCaL, and Z3, the ``conflicts/1`` resource
   limit.
 
+Problem sources
+---------------
+
+A SAT problem can be represented in several ways:
+
+- ``file(Path)``: ``Path`` must be an atom identifying a native DIMACS
+  CNF file.
+- ``codes(Codes)``: ``Codes`` must be a list of character codes
+  representing native DIMACS CNF source.
+- ``terms(Statements)``: ``Statements`` must be an ordered list of
+  canonical ground terms representing the problem.
+- ``object(Object)``: ``Object`` must be an object containing the
+  problem and implementing ``sat_problem_protocol``.
+
+The main library predicates take a ground problem source as an input
+argument.
+
 Usage
 -----
 
@@ -129,6 +146,49 @@ hook. An example with a trivial two-variable encoding:
 ::
 
    | ?- sat::solve(terms([(p ; q), -p]), Result).
+
+The ``program/2`` predicate returns DIMACS CNF character codes without
+invoking a solver, using default options. The ``program/3`` predicate
+accepts an explicit options list; the only supported option is
+``embed_variables(Boolean)`` (default ``true``), described below.
+
+The ``print_program/1`` predicate validates and prints a character-code
+list to the current output stream, preserving its layout without adding
+a newline. It does not parse or validate the DIMACS syntax and does not
+invoke a solver.
+
+The ``program/1`` predicate generates and prints DIMACS source,
+equivalent to calling ``program/2`` followed by ``print_program/1``. It
+accepts the same source envelopes.
+
+For the ``object(Object)`` and ``terms(Statements)`` envelopes,
+``embed_variables(true)`` (the default) inserts one ``c v Number Term``
+comment line per declared variable, right after the ``p cnf`` header, in
+table order. ``Term`` is written quoted, so that it can be read back
+unambiguously. These lines are ordinary DIMACS comments: any solver
+ignores them. They let ``solve/2`` and ``solve/3`` recover the original
+variable table when later solving the generated source through the
+``codes/1`` or ``file/1`` envelopes (see Solving below), instead of
+reporting witness literals as bare DIMACS integers.
+``embed_variables(false)`` omits them, generating plain DIMACS source
+with no comment lines. As a ``program/2-3`` source, the ``codes/1`` and
+``file/1`` envelopes are unaffected by this option: they validate and
+return existing text unchanged, without computing a variable table of
+their own; that only happens on the ``solve/2-3`` side, described next.
+
+CNF variables are opaque ground Prolog terms, not raw DIMACS integers;
+the serializer assigns sequential numbers by first occurrence across
+clause statements and exposes the resulting table through
+``sat_program::variables/2``. Invalid structures raise documented
+errors.
+
+The ``sat_program::serialize/2`` predicate serializes canonical
+statements. The ``sat_program::serialize/4`` predicate also accepts a
+parallel list of origins and returns a source map; the generated
+``p cnf`` header occupies line 1, and the source map covers the
+remaining statement lines. Origins are ``source(File, Start, End)`` or
+``unknown``. Map entries are ``line(Start, End, Origin)``, identifying
+inclusive, one-based generated line intervals.
 
 See the next section for full details on the solver features and
 options.
@@ -192,7 +252,7 @@ The supported options are:
   status is satisfiable.
 - ``embed_variables(Boolean)`` is validated but has no effect on the
   ``solve/2-3`` predicates. It is only consulted by ``program/3`` (see
-  the "Sources" section below), where it can be set explicitly;
+  the "Usage" section above), where it can be set explicitly;
   ``program/2`` has no options argument and always uses its default
   value (``true``).
 
@@ -225,62 +285,6 @@ errors. Malformed solver output, fatal solver exit statuses, and
 inconsistent solver metadata raise
 ``sat_solver_error(Formal, Status, Diagnostics, SourceMap)`` errors,
 retaining the captured diagnostics and object source map.
-
-Sources
--------
-
-The ``program/2`` predicate returns DIMACS CNF character codes without
-invoking a solver, using default options. The ``program/3`` predicate
-accepts an explicit options list; the only supported option is
-``embed_variables(Boolean)`` (default ``true``), described below. Their
-first argument is a ground source envelope:
-
-- ``object(Object)`` enumerates the object's ordered ``cnf_statement/2``
-  clauses. The object must conform to ``sat_problem_protocol``.
-- ``terms(Statements)`` serializes an ordered list of canonical, ground
-  statements.
-- ``codes(Codes)`` validates and returns native DIMACS character codes
-  unchanged.
-- ``file(Path)`` reads the named native DIMACS file; ``Path`` must be an
-  atom.
-
-The ``print_program/1`` predicate validates and prints a character-code
-list to the current output stream, preserving its layout without adding
-a newline. It does not parse or validate the DIMACS syntax and does not
-invoke a solver.
-
-The ``program/1`` predicate generates and prints DIMACS source,
-equivalent to calling ``program/2`` followed by ``print_program/1``. It
-accepts the same source envelopes.
-
-For the ``object(Object)`` and ``terms(Statements)`` envelopes,
-``embed_variables(true)`` (the default) inserts one ``c v Number Term``
-comment line per declared variable, right after the ``p cnf`` header, in
-table order. ``Term`` is written quoted, so that it can be read back
-unambiguously. These lines are ordinary DIMACS comments: any solver
-ignores them. They let ``solve/2`` and ``solve/3`` recover the original
-variable table when later solving the generated source through the
-``codes/1`` or ``file/1`` envelopes (see Solving below), instead of
-reporting witness literals as bare DIMACS integers.
-``embed_variables(false)`` omits them, generating plain DIMACS source
-with no comment lines. As a ``program/2-3`` source, the ``codes/1`` and
-``file/1`` envelopes are unaffected by this option: they validate and
-return existing text unchanged, without computing a variable table of
-their own; that only happens on the ``solve/2-3`` side, described next.
-
-CNF variables are opaque ground Prolog terms, not raw DIMACS integers;
-the serializer assigns sequential numbers by first occurrence across
-clause statements and exposes the resulting table through
-``sat_program::variables/2``. Invalid structures raise documented
-errors.
-
-The ``sat_program::serialize/2`` predicate serializes canonical
-statements. The ``sat_program::serialize/4`` predicate also accepts a
-parallel list of origins and returns a source map; the generated
-``p cnf`` header occupies line 1, and the source map covers the
-remaining statement lines. Origins are ``source(File, Start, End)`` or
-``unknown``. Map entries are ``line(Start, End, Origin)``, identifying
-inclusive, one-based generated line intervals.
 
 Canonical representation
 ------------------------
@@ -379,10 +383,11 @@ Neither form requires the ``sat_expansion`` hook, nor supplies a
 variable table of its own: witness literals in the collected result use
 the plain DIMACS integer as the term identity instead of a declared
 symbol, unless the source text carries embedded ``c v Number Term``
-comment lines (see ``embed_variables/1`` in Sources above), in which
-case ``solve/2`` and ``solve/3`` recover the variable table from them
-automatically. For example, generating a program from an object and
-solving it back through ``codes/1`` still reports symbolic literals:
+comment lines (see ``embed_variables/1`` in the "Usage" section above),
+in which case ``solve/2`` and ``solve/3`` recover the variable table
+from them automatically. For example, generating a program from an
+object and solving it back through ``codes/1`` still reports symbolic
+literals:
 
 ::
 

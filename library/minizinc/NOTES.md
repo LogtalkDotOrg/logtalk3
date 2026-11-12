@@ -99,6 +99,22 @@ The `test_files/*.jsonl` fixtures are fixed `--json-stream` message captures
 `minizinc_output::decode/5` directly, without invoking MiniZinc.
 
 
+Problem sources
+---------------
+
+A MiniZinc problem can be represented in several ways:
+
+- `file(Path)`: `Path` must be an atom identifying a native MiniZinc file.
+- `codes(Codes)`: `Codes` must be a list of character codes representing native
+  MiniZinc source.
+- `terms(Statements)`: `Statements` must be an ordered list of canonical ground
+  terms representing the problem.
+- `object(Object)`: `Object` must be an object containing the problem and
+  implementing `minizinc_problem_protocol`.
+
+The main library predicates take a ground problem source as an input argument.
+
+
 Usage
 -----
 
@@ -127,6 +143,22 @@ trivial single-variable model:
 	         decl(var(bool), x, none),
 	         solve(satisfy)
 	     ]), Result).
+
+The `program/2` predicate returns MiniZinc character codes without invoking
+MiniZinc.
+
+The `print_program/1` predicate validates and prints a character-code list to
+the current output stream, preserving its layout without adding a newline.
+
+The `program/1` predicate generates and prints MiniZinc source, equivalent to
+calling `program/2` followed by `print_program/1`.
+
+The `minizinc_program::serialize/2` predicate serializes canonical
+statements. The `minizinc_program::serialize/4` predicate also accepts a
+parallel list of origins and returns a source map. Origins are
+`source(File, Start, End)` or `unknown`. Map entries are
+`line(Start, End, Origin)`, identifying inclusive, one-based generated line
+intervals.
 
 See the next section for full details on the solver options.
 
@@ -191,34 +223,6 @@ process status inconsistent with the absence of any decoded message raises
 the captured diagnostics and object source map. A well-formed solver-reported
 `error` message is a successful, collected result (`Status = error`), not a
 thrown exception.
-
-
-Sources
--------
-
-The `program/2` predicate returns MiniZinc character codes without invoking
-MiniZinc. Its first argument is a ground source envelope:
-
-- `object(Object)` enumerates the object's ordered `minizinc_statement/2`
-  clauses. The object must conform to `minizinc_problem_protocol`.
-- `terms(Statements)` serializes an ordered list of canonical, ground
-  statements.
-- `codes(Codes)` validates and returns native MiniZinc character codes
-  unchanged.
-- `file(Path)` reads the named native MiniZinc file; `Path` must be an atom.
-
-The `print_program/1` predicate validates and prints a character-code list to
-the current output stream, preserving its layout without adding a newline.
-
-The `program/1` predicate generates and prints MiniZinc source, equivalent to
-calling `program/2` followed by `print_program/1`.
-
-The `minizinc_program::serialize/2` predicate serializes canonical
-statements. The `minizinc_program::serialize/4` predicate also accepts a
-parallel list of origins and returns a source map. Origins are
-`source(File, Start, End)` or `unknown`. Map entries are
-`line(Start, End, Origin)`, identifying inclusive, one-based generated line
-intervals.
 
 
 Canonical representation

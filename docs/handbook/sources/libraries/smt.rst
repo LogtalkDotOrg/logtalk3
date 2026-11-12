@@ -99,6 +99,23 @@ Problem fixtures are written as Logtalk objects implementing
   native SMT-LIB 2 fixtures used to exercise the ``file/1`` source and
   the ``smt_solver_error`` path.
 
+Problem sources
+---------------
+
+An SMT-LIB 2 problem can be represented in several ways:
+
+- ``file(Path)``: ``Path`` must be an atom identifying a native SMT-LIB
+  2 file.
+- ``codes(Codes)``: ``Codes`` must be a list of character codes
+  representing native SMT-LIB 2 source.
+- ``terms(Statements)``: ``Statements`` must be an ordered list of
+  canonical ground terms representing the problem.
+- ``object(Object)``: ``Object`` must be an object containing the
+  problem and implementing ``smt_problem_protocol``.
+
+The main library predicates take a ground problem source as an input
+argument.
+
 Usage
 -----
 
@@ -138,6 +155,18 @@ hook. An example using a trivial single-constant problem:
             assert(>(x, 0)),
             check_sat
         ]), Results).
+
+The ``program/2`` predicate returns SMT-LIB 2 character codes without
+invoking a solver.
+
+The ``print_program/1`` predicate validates and prints a character-code
+list to the current output stream, preserving its layout without adding
+a newline. It does not parse or validate the SMT-LIB 2 syntax and does
+not invoke a solver.
+
+The ``program/1`` predicate generates and prints SMT-LIB 2 source,
+equivalent to calling ``program/2`` followed by ``print_program/1``. It
+accepts the same source envelopes.
 
 See the next section for full details on the solver features and
 options.
@@ -212,30 +241,6 @@ errors. Malformed solver output, an ``(error ...)`` solver response,
 fatal solver exit statuses, and inconsistent solver metadata raise
 ``smt_solver_error(Formal, Status, Diagnostics, SourceMap)`` errors,
 retaining the captured diagnostics and object source map.
-
-Sources
--------
-
-The ``program/2`` predicate returns SMT-LIB 2 character codes without
-invoking a solver. Its first argument is a ground source envelope:
-
-- ``object(Object)`` enumerates the object's ordered ``smt_statement/2``
-  clauses. The object must conform to ``smt_problem_protocol``.
-- ``terms(Statements)`` serializes an ordered list of canonical, ground
-  statements.
-- ``codes(Codes)`` validates and returns native SMT-LIB 2 character
-  codes unchanged.
-- ``file(Path)`` reads the named native SMT-LIB 2 file; ``Path`` must be
-  an atom.
-
-The ``print_program/1`` predicate validates and prints a character-code
-list to the current output stream, preserving its layout without adding
-a newline. It does not parse or validate the SMT-LIB 2 syntax and does
-not invoke a solver.
-
-The ``program/1`` predicate generates and prints SMT-LIB 2 source,
-equivalent to calling ``program/2`` followed by ``print_program/1``. It
-accepts the same source envelopes.
 
 Statements
 ----------

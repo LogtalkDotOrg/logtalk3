@@ -451,9 +451,9 @@
   <section id="problog">
 <span id="library-problog"></span><h1><code class="docutils literal notranslate"><span class="pre">problog</span></code><a class="headerlink" href="#problog" title="Link to this heading"></a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">problog</span></code> library provides exact probabilistic inference using the
-<a class="reference external" href="https://dtai.cs.kuleuven.be/problog/">ProbLog</a> CLI, source
-generation, opt-in expansion of problem objects, and collected query
-probabilities.</p>
+ProbLog CLI source generation, opt-in expansion of problem objects, and
+collected query probabilities. For information on ProbLog, see:</p>
+<p><a class="reference external" href="https://dtai.cs.kuleuven.be/problog/">https://dtai.cs.kuleuven.be/problog/</a></p>
 <section id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
 <p>Inference requires ProbLog 2.3.0 (<code class="docutils literal notranslate"><span class="pre">problog</span></code> on PATH, or an executable
@@ -486,16 +486,16 @@ in a web browser.</p>
 </pre></div>
 </div>
 <p>CLI tests are conditional on finding <code class="docutils literal notranslate"><span class="pre">problog</span></code>. Source-generation and
-results decoding tests do not require it.</p>
-<p>The test fixtures adapt examples from <a class="reference external" href="https://github.com/ML-KULeuven/problog/tree/master/test/sample">ProbLog’s sample
-directory</a>:
-<code class="docutils literal notranslate"><span class="pre">coins.lgt</span></code> checks <code class="docutils literal notranslate"><span class="pre">some_heads</span> <span class="pre">=</span> <span class="pre">0.8</span></code>, and <code class="docutils literal notranslate"><span class="pre">coins_evidence.lgt</span></code>
-checks <code class="docutils literal notranslate"><span class="pre">some_heads</span> <span class="pre">=</span> <span class="pre">0.6</span></code> after conditioning on evidence.
-<code class="docutils literal notranslate"><span class="pre">annotated.lgt</span></code> exercises annotated disjunctions and variable sharing.
-<code class="docutils literal notranslate"><span class="pre">diagnostics.lgt</span></code> uses ProbLog’s <code class="docutils literal notranslate"><span class="pre">debugprint/1</span></code> built-in to check
-that the known diagnostic message is captured without depending on the
-overall output length or formatting. Native file-input tests use
-library-specific fixtures.</p>
+results decoding tests do not require it. The test fixtures adapt
+examples from the ProbLog’s sample directory:</p>
+<p><a class="reference external" href="https://github.com/ML-KULeuven/problog/tree/master/test/sample">https://github.com/ML-KULeuven/problog/tree/master/test/sample</a></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">coins</span></code> example checks <code class="docutils literal notranslate"><span class="pre">some_heads</span> <span class="pre">=</span> <span class="pre">0.8</span></code>, and the
+<code class="docutils literal notranslate"><span class="pre">coins_evidence</span></code> example checks <code class="docutils literal notranslate"><span class="pre">some_heads</span> <span class="pre">=</span> <span class="pre">0.6</span></code> after
+conditioning on evidence. The <code class="docutils literal notranslate"><span class="pre">annotated</span></code> example exercises annotated
+disjunctions and variable sharing. The <code class="docutils literal notranslate"><span class="pre">diagnostics</span></code> example uses
+ProbLog’s <code class="docutils literal notranslate"><span class="pre">debugprint/1</span></code> predicate to check that the known diagnostic
+message is captured without depending on the overall output length or
+formatting. Native file-input tests use library-specific fixtures.</p>
 </section>
 <section id="problem-sources">
 <h2>Problem sources<a class="headerlink" href="#problem-sources" title="Link to this heading"></a></h2>
@@ -508,7 +508,7 @@ source.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">terms(Statements)</span></code>: a list of canonical ground terms representing
 the problem.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">object(Object)</span></code>: the argument must be an object containing the
-problem.</p></li>
+problem and implementing <code class="docutils literal notranslate"><span class="pre">problog_problem_protocol</span></code>.</p></li>
 </ul>
 <p>The main library predicates take a problem source as an input argument.</p>
 </section>

@@ -112,6 +112,23 @@ uses minimize, maximize, and weak constraints at distinct priorities.
 The object passes a native ``#program base`` directive through
 ``raw/1``, exercising trusted raw source too.
 
+Problem sources
+---------------
+
+An ASP problem can be represented in several ways:
+
+- ``file(Path)``: ``Path`` must be an atom identifying a native ASP
+  file.
+- ``codes(Codes)``: ``Codes`` must be a list of character codes
+  representing native ASP source.
+- ``terms(Statements)``: ``Statements`` must be an ordered list of
+  canonical ground terms representing the problem.
+- ``object(Object)``: ``Object`` must be an object containing the
+  problem and implementing ``asp_problem_protocol``.
+
+The main library predicates take a ground problem source as an input
+argument.
+
 Usage
 -----
 
@@ -152,14 +169,38 @@ hook. An example using a trivial single-fact program:
 
    | ?- asp::solve(terms([fact(function(p, [], positive))]), Result).
 
-See the next section for full details on the solver features and
-options.
-
 To select Zetesis for a compiled problem:
 
 ::
 
    | ?- asp::solve(object(asp_vertex_cover), Result, [solver(zetesis), models(0)]).
+
+The ``program/2`` predicate returns ASP character codes without invoking
+a solver.
+
+The ``print_program/1`` predicate validates and prints a character-code
+list to the current output stream, preserving its layout without adding
+a newline. It does not parse or ground the ASP source and does not
+invoke a solver.
+
+The ``program/1`` predicate generates and prints ASP source, equivalent
+to calling ``program/2`` followed by ``print_program/1``. It accepts the
+same source envelopes.
+
+ASP variables in canonical data are explicit ``variable(Name)`` or
+``anonymous`` terms, not unbound Logtalk variables. Invalid structures
+raise documented errors. Grounding safety, arithmetic semantics, and
+satisfiability belong to the selected solver.
+
+The ``asp_program::serialize/2`` predicate serializes canonical
+statements. The ``asp_program::serialize/4`` predicate also accepts a
+parallel list of origins and returns a source map. Origins are
+``source(File, Start, End)`` or ``unknown``. Map entries are
+``line(Start, End, Origin)``, identifying inclusive, one-based generated
+line intervals.
+
+See the next section for full details on the solver features and
+options.
 
 Solving
 -------
@@ -239,42 +280,6 @@ errors. Invalid JSON, fatal solver exit statuses, and inconsistent
 solver metadata raise
 ``asp_solver_error(Formal, Status, Diagnostics, SourceMap)`` errors,
 retaining the captured diagnostic codes and object source map.
-
-Sources
--------
-
-The ``program/2`` predicate returns ASP character codes without invoking
-Clingo. Its first argument is a ground source envelope:
-
-- ``object(Object)`` enumerates the object's ordered ``asp_statement/2``
-  clauses. The object must conform to ``asp_problem_protocol``.
-- ``terms(Statements)`` serializes an ordered list of canonical, ground
-  statements.
-- ``codes(Codes)`` validates and returns native ASP character codes
-  unchanged.
-- ``file(Path)`` reads the named native ASP file; ``Path`` must be an
-  atom.
-
-The ``print_program/1`` predicate validates and prints a character-code
-list to the current output stream, preserving its layout without adding
-a newline. It does not parse or ground the ASP source and does not
-invoke Clingo.
-
-The ``program/1`` predicate generates and prints ASP source, equivalent
-to calling ``program/2`` followed by ``print_program/1``. It accepts the
-same source envelopes.
-
-ASP variables in canonical data are explicit ``variable(Name)`` or
-``anonymous`` terms, not unbound Logtalk variables. Invalid structures
-raise documented errors. Grounding safety, arithmetic semantics, and
-satisfiability belong to the selected solver.
-
-The ``asp_program::serialize/2`` predicate serializes canonical
-statements. The ``asp_program::serialize/4`` predicate also accepts a
-parallel list of origins and returns a source map. Origins are
-``source(File, Start, End)`` or ``unknown``. Map entries are
-``line(Start, End, Origin)``, identifying inclusive, one-based generated
-line intervals.
 
 Canonical representation
 ------------------------
