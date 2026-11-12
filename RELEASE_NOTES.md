@@ -480,6 +480,9 @@ a bound URL argument would leak an open stream handle on failure.
 issue where node labels don't fit in the node boxes depending on how Graphviz
 was built and its installed plug-ins.
 
+* FIXED: The `diagrams` tool support for `.dot` files to escape graph and node
+identifiers, tooltips, and URLs.
+
 Examples
 --------
 

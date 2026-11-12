@@ -24,7 +24,7 @@
 	imports(options)).
 
 	:- info([
-		version is 3:15:1,
+		version is 3:15:2,
 		author is 'Paulo Moura',
 		date is 2026-11-12,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
@@ -147,27 +147,27 @@
 		(	member(url(URL), Options) ->
 			(	URL \== '' ->
 				write(Stream, 'label=<<TABLE border="0" cellborder="0"><TR><TD tooltip="'),
-				write(Stream, URL),
+				write_escaped_term(Stream, URL, []),
 				write(Stream, '" href="'),
-				write(Stream, URL),
+				write_escaped_term(Stream, URL, []),
 				write(Stream, '">'),
-				write(Stream, Label),
+				write_escaped_term(Stream, Label, []),
 				write(Stream, '</TD></TR></TABLE>>\n'),
 				write_key_value_nl(Stream, tooltip, Label)
 			;	member(tooltip(Tooltip), Options) ->
 				write(Stream, 'label=<<TABLE border="0" cellborder="0"><TR><TD tooltip="'),
-				write(Stream, Tooltip),
+				write_escaped_term(Stream, Tooltip, []),
 				write(Stream, '">'),
-				write(Stream, Label),
+				write_escaped_term(Stream, Label, []),
 				write(Stream, '</TD></TR></TABLE>>\n'),
 				write_key_value_nl(Stream, tooltip, Tooltip)
 			;	write_key_value_nl(Stream, tooltip, Label)
 			)
 		;	member(tooltip(Tooltip), Options) ->
 			write(Stream, 'label=<<TABLE border="0" cellborder="0"><TR><TD tooltip="'),
-			write(Stream, Tooltip),
+			write_escaped_term(Stream, Tooltip, []),
 			write(Stream, '">'),
-			write(Stream, Label),
+			write_escaped_term(Stream, Label, []),
 			write(Stream, '</TD></TR></TABLE>>\n'),
 			write_key_value_nl(Stream, tooltip, Tooltip)
 		;	write_key_value_nl(Stream, tooltip, Label)
@@ -190,7 +190,7 @@
 	node(Stream, Identifier, Label, Caption, Contents, Kind, Options) :-
 		node_shape_style_color_quoted(Kind, Shape, Style, Color, Quoted),
 		write(Stream, '"'),
-		write(Stream, Identifier),
+		write_escaped_term(Stream, Identifier, []),
 		write(Stream, '" ['),
 		write_key_value_comma(Stream, shape, Shape),
 		write_key_value_comma(Stream, style, Style),
@@ -198,7 +198,7 @@
 		write(Stream, 'label=<<TABLE border="0" cellborder="0" cellspacing="0" cellpadding="0">'),
 		(	member(zoom_url(Diagram), Options) ->
 			write(Stream, '<TR><TD width="11" height="11" fixedsize="true" align="left" tooltip="Zoom" href="'),
-			write(Stream, Diagram),
+			write_escaped_term(Stream, Diagram, []),
 			write(Stream, '">&#128269;</TD></TR>')
 		;	true
 		),
@@ -206,13 +206,13 @@
 		(	^^option(url(URL), Options),
 			URL \== '' ->
 			write(Stream, ' tooltip="'),
-			write(Stream, URL),
+			write_escaped_term(Stream, URL, []),
 			write(Stream, '" href="'),
-			write(Stream, URL),
+			write_escaped_term(Stream, URL, []),
 			write(Stream, '">')
 		;	member(tooltip(Tooltip), Options) ->
 			write(Stream, ' tooltip="'),
-			write(Stream, Tooltip),
+			write_escaped_term(Stream, Tooltip, []),
 			write(Stream, '">')
 		;	write(Stream, '>')
 		),
