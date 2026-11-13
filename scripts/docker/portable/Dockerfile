@@ -295,6 +295,10 @@ RUN if [ "$GNU_VERSION" != "none" ] ; then \
         && cd /usr/local/share/logtalk/scripts/embedding/gprolog \
         && ./gprolog_embed_logtalk.sh -c -n gplgtnc -s none -d /usr/local/bin -- --new-top-level --no-susp-warn ; \
     fi
+ENV LOCALSZ=786432
+ENV GLOBALSZ=3145728
+ENV MAX_ATOM=524288
+ENV TRAILSZ=262144
 
 # Install Shumway Prolog
 WORKDIR /downloads
