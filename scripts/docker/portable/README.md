@@ -58,7 +58,7 @@ Valid identifiers are as shown in the Logtalk GitHub repository at
 - `B_VERSION` (`81`)
 - `CIAO_VERSION` (`v1.23.0-m1`)
 - `CX_VERSION` (`0.98.3`)
-- `ECLIPSE_VERSION` (`7.2_10`)
+- `ECLIPSE_VERSION` (`7.2_13`)
 - `GNU_VERSION` (`master`)
 - `SHUMWAY_VERSION` (`main`)
 - `SWI_VERSION` (`swipl-devel` repo; `master`)

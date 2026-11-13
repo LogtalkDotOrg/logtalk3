@@ -37,7 +37,7 @@ ARG LOGTALK_TEXINFO_VERSION=3.103.0
 ARG B_VERSION=81
 ARG CIAO_VERSION=v1.23.0-m1
 ARG CX_VERSION=0.98.3
-ARG ECLIPSE_VERSION=7.2_10
+ARG ECLIPSE_VERSION=7.2_13
 ARG GNU_VERSION=master
 ARG SHUMWAY_VERSION=main
 ARG SWI_VERSION=master
@@ -273,17 +273,18 @@ RUN if [ "$CX_VERSION" != "none" ] ; then \
     fi
 
 # Install ECLiPSe
-WORKDIR /downloads/eclipse
+WORKDIR /downloads
 RUN if [ "$ECLIPSE_VERSION" != "none" ] ; then \
-        curl -O http://eclipseclp.org/Distribution/Dev/${ECLIPSE_VERSION}/x86_64_linux/eclipse_basic.tgz \
-        && curl -O http://eclipseclp.org/Distribution/Dev/${ECLIPSE_VERSION}/x86_64_linux/eclipse_doc.tgz \
-        && curl -O http://eclipseclp.org/Distribution/Dev/${ECLIPSE_VERSION}/x86_64_linux/UNPACK \
+        curl -O https://eclipseclp.org/Distribution/Builds/${ECLIPSE_VERSION}/src/eclipse_src.tgz \
+        && curl -O http://eclipseclp.org/Distribution/Builds/${ECLIPSE_VERSION}/common/eclipse_doc.tgz \
+        && curl -O https://eclipseclp.org/Distribution/Builds/${ECLIPSE_VERSION}/common/UNPACK \
         && chmod a+x UNPACK \
         && ./UNPACK \
-        && echo -n "\n\n\n\n\n\n" | ./RUNME \
-        && rm -f eclipse_basic.tgz eclipse_doc.tgz ; \
+        && cd Eclipse_${ECLIPSE_VERSION} && ./configure --without-tcl && make -f Makefile.x86_64_linux \
+#        && echo -n "\n\n\n\n\n\n" | ./RUNME \
+        && rm -f eclipse_src.tgz eclipse_doc.tgz ; \
     fi
-ENV PATH=$PATH:/downloads/eclipse/bin/x86_64_linux
+ENV PATH=$PATH:/downloads/Eclipse_${ECLIPSE_VERSION}/bin/x86_64_linux
 
 # Install GNU Prolog
 WORKDIR /downloads

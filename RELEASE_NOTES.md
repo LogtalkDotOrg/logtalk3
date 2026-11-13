@@ -518,6 +518,9 @@ Installers and installation scripts
 * UPDATED: The portable Docker image to run `memcached` and `redis` services
 to enable the corresponding Logtalk libraries.
 
+* FIXED: The portable Docker image ECLiPSe installation by building it from
+sources.
+
 
 3.102.0 - September 14, 2026
 ============================
