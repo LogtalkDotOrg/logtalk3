@@ -1,9 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 #############################################################################
 ##
 ##   ASP solver CLI integration script
-##   Last updated on November 9, 2026
+##   Last updated on November 13, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -23,8 +23,6 @@
 ##
 #############################################################################
 
-
-set -o pipefail
 
 exec 2>&1
 
