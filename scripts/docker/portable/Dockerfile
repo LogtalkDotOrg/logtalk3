@@ -44,7 +44,7 @@ ARG SWI_VERSION=master
 ARG TAU_VERSION=0.3.4
 ARG TREALLA_VERSION=main
 ARG XSB_VERSION=git-origin
-ARG YAP_VERSION=none
+ARG YAP_VERSION=master
 
 # Logtalk environment
 ENV LOGTALKHOME=/usr/local/share/logtalk
@@ -90,6 +90,13 @@ RUN apt-get update \
 # Install MiniZinc
 COPY --from=ghcr.io/minizinc/minizinc:2.10.1-dist /opt/minizinc /opt/minizinc
 ENV PATH=/opt/minizinc/bin:$PATH LD_LIBRARY_PATH=/opt/minizinc/lib
+
+# Install Redis
+RUN curl -fsSL https://packages.redis.io/gpg | gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg \
+    && chmod 644 /usr/share/keyrings/redis-archive-keyring.gpg \
+    && echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/redis.list \
+    && apt-get update \
+    && apt-get install --no-install-recommends -y redis
 
 # Install Souffle
 RUN wget https://souffle-lang.github.io/ppa/souffle-key.public -O /usr/share/keyrings/souffle-archive-keyring.gpg \
@@ -146,6 +153,7 @@ RUN rm -rf /var/lib/apt/lists/* \
         libxpm-dev \
         libxt-dev \
         libyaml-dev \
+        memcached \
         nano \
         ncurses-dev \
         ninja-build \
@@ -369,4 +377,4 @@ WORKDIR /root
 ADD README.md /root/README.md
 
 WORKDIR /source
-ENTRYPOINT ["bash"]
+ENTRYPOINT ["sh", "-c", "service memcached start && redis-server --daemonize yes && exec bash"]
