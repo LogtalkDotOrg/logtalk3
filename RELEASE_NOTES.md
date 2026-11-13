@@ -511,8 +511,9 @@ Installers and installation scripts
 
 * UPDATED: The portable Docker image to support Shumway Prolog.
 
-* UPDATED: The portable Docker image to instal the latest versions of Allure
-(2.46.2), d2 (0.9.0), and glab (1.130.0).
+* UPDATED: The portable Docker image to include the latest versions of Allure
+(2.46.2), d2 (0.9.0), glab (1.130.0), and a compatible version of `ncat`
+(7.99).
 
 * UPDATED: The portable Docker image to run `memcached` and `redis` services
 to enable the corresponding Logtalk libraries.

@@ -76,7 +76,6 @@ RUN apt-get update \
         xsltproc \
         gh \
         openssl \
-        ncat \
         socat \
     && rm -rf /var/lib/apt/lists/* \
     && python3 -m pip install pygments==2.20.0 \
@@ -86,6 +85,33 @@ RUN apt-get update \
     && python3 -m pip install clingo \
     && python3 -m pip install problog \
     && python3 -m pip install z3-solver
+
+# Install a recent ncat (7.99) from source – Ubuntu 22.04 only has an old version
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y \
+        build-essential \
+        libssl-dev \
+        libpcap-dev \
+        liblua5.3-dev \
+        bison \
+        flex \
+    && cd /tmp \
+    && curl -fsSL https://nmap.org/dist/nmap-7.99.tar.bz2 -o nmap-7.99.tar.bz2 \
+    && tar xjf nmap-7.99.tar.bz2 \
+    && cd nmap-7.99 \
+    && ./configure \
+        --prefix=/usr/local \
+        --without-zenmap \
+        --without-ndiff \
+        --without-nping \
+        --without-nmap-update \
+    && make -j$(nproc) build-ncat \
+    && make install-ncat \
+    && cd / \
+    && rm -rf /tmp/nmap-7.99* \
+    && apt-get purge -y bison flex \
+    && apt-get autoremove -y \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install MiniZinc
 COPY --from=ghcr.io/minizinc/minizinc:2.10.1-dist /opt/minizinc /opt/minizinc
