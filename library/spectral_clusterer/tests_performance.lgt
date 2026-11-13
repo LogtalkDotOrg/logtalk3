@@ -19,69 +19,62 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tests_performance).
+:- object(tests_performance,
+	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-21,
+		date is 2026-11-12,
 		comment is 'Repeatable kernel and end-to-end benchmarks for the "spectral_clusterer" library.'
 	]).
 
-	:- public(run/0).
-	:- mode(run, one_or_error).
-	:- info(run/0, [
-		comment is 'Prints seven CPU-time samples per workload, excluding fixture preparation. Propagates learning and prediction errors.',
-		exceptions is ['A learning or prediction workload raises an error' - error('Formal', 'Context')]
+	:- uses(lgtunit, [
+		benchmark/3
 	]).
 
-	:- uses(lgtunit, [benchmark/3]).
-	:- uses(list, [member/2, msort/2]).
-	:- uses(format, [format/2]).
+	:- uses(list, [
+		member/2, msort/2
+	]).
 
-	run :-
-		forall(
-			member(Size, [16, 32, 64]),
-			(	make_rows(Size, Size, Matrix),
-				diagonal_matrix(Matrix, 1, Diagonal),
-				forall(
-					member(Count, [1, 2, 4]),
-					(	eigen_repetitions(Size, Count, Repetitions),
-						report(eigen(Size, Count), eigen(Diagonal, Count), Repetitions)
-					)
-				)
-			)
+	:- uses(format, [
+		format/2
+	]).
+
+	test(spectral_clusterer_eigen_repetitions, all(true)) :-
+		member(Size, [16, 32, 64]),
+		make_rows(Size, Size, Matrix),
+		diagonal_matrix(Matrix, 1, Diagonal),
+		member(Count, [1, 2, 4]),
+		eigen_repetitions(Size, Count, Repetitions),
+		report(eigen(Size, Count), eigen(Diagonal, Count), Repetitions).
+
+	test(spectral_clusterer_spread_repetitions, all(true)) :-
+		member(Size, [128, 512, 2048]),
+		member(Count, [2, 8, 16]),
+		make_rows(Size, Count, Rows),
+		spread_repetitions(Size, Count, Repetitions),
+		report(spread(Size, Count), spread(Rows, Count), Repetitions).
+
+	test(spectral_clusterer_concentric_rings, all(true)) :-
+		member(Dataset-Options, [two_blobs-[], concentric_rings-[sigma(0.4), feature_scaling(off), eigensolver_tolerance(1.0e-6)]]),
+		spectral_clusterer::learn(Dataset, Model, Options),
+		findall(Instance, Dataset::example(_, Instance), Instances),
+		(	Dataset == two_blobs ->
+			Repetitions = 200
+		;	Repetitions = 1
 		),
-		forall(
-			member(Size, [128, 512, 2048]),
-			forall(
-				member(Count, [2, 8, 16]),
-				(	make_rows(Size, Count, Rows),
-					spread_repetitions(Size, Count, Repetitions),
-					report(spread(Size, Count), spread(Rows, Count), Repetitions)
-				)
-			)
-		),
-		forall(
-			member(Dataset-Options, [two_blobs-[], concentric_rings-[sigma(0.4), feature_scaling(off), eigensolver_tolerance(1.0e-6)]]),
-			(	spectral_clusterer::learn(Dataset, Model, Options),
-				findall(Instance, Dataset::example(_, Instance), Instances),
-				(	Dataset == two_blobs ->
-					Repetitions = 200
-				;	Repetitions = 1
-				),
-				report(learn(Dataset), learn(Dataset, Options), Repetitions),
-				report(predict(Dataset), predict(Model, Instances), 1000)
-			)
-		),
-		forall(
-			member(Size, [32, 128, 512]),
-			(	Dataset = spectral_performance_dataset(Size),
-				spectral_clusterer::learn(Dataset, Model, [k(1), sigma(1.0), feature_scaling(off)]),
-				prediction_repetitions(Size, Repetitions),
-				report(predict(Size), predict(Model, [[x-0.25, y-0.5]]), Repetitions)
-			)
-		).
+		report(learn(Dataset), learn(Dataset, Options), Repetitions),
+		report(predict(Dataset), predict(Model, Instances), 1000).
+
+	test(spectral_clusterer_prediction_repetitions, all(true)) :-
+		member(Size, [32, 128, 512]),
+		Dataset = spectral_performance_dataset(Size),
+		spectral_clusterer::learn(Dataset, Model, [k(1), sigma(1.0), feature_scaling(off)]),
+		prediction_repetitions(Size, Repetitions),
+		report(predict(Size), predict(Model, [[x-0.25, y-0.5]]), Repetitions).
+
+	% auxiliary predicates
 
 	eigen_repetitions(16, 1, 150).
 	eigen_repetitions(16, 2, 50).

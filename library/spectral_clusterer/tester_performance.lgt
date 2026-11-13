@@ -25,8 +25,10 @@
 	logtalk_load([
 		clustering_protocols('test_datasets/two_blobs'),
 		test_objects
-	], [optimize(on)]),
+	], [
+		optimize(on)
+	]),
 	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests_performance, [optimize(on)]),
+	logtalk_load(tests_performance, [optimize(on), hook(lgtunit)]),
 	tests_performance::run
 )).
