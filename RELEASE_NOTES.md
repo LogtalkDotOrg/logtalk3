@@ -506,6 +506,14 @@ IDEs, text editors, and syntax highlighters support
 
 * ADDED: Default AI coding assistant support files at `coding/ai`.
 
+Installers and installation scripts
+-----------------------------------
+
+* UPDATED: The portable Docker image to support Shumway Prolog.
+
+* UPDATED: The portable Docker image to instal the latest versions of Allure
+(2.46.2), d2 (0.9.0), and glab (1.130.0).
+
 
 3.102.0 - September 14, 2026
 ============================

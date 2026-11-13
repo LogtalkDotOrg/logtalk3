@@ -28,6 +28,7 @@ Prolog backends:
 - CxProlog
 - ECLiPSe
 - GNU Prolog
+- Shumway Prolog
 - SWI-Prolog
 - Tau Prolog
 - Trealla Prolog
@@ -59,6 +60,7 @@ Valid identifiers are as shown in the Logtalk GitHub repository at
 - `CX_VERSION` (`0.98.3`)
 - `ECLIPSE_VERSION` (`7.2_10`)
 - `GNU_VERSION` (`master`)
+- `SHUMWAY_VERSION` (`main`)
 - `SWI_VERSION` (`swipl-devel` repo; `master`)
 - `TAU_VERSION` (`0.3.4`)
 - `TREALLA_VERSION` (`main`)

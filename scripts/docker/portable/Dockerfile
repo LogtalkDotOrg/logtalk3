@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on September 13, 2026
+##   Last updated on November 13, 2026
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2017-2026 Paulo Moura <pmoura@logtalk.org>
@@ -39,6 +39,7 @@ ARG CIAO_VERSION=v1.23.0-m1
 ARG CX_VERSION=0.98.3
 ARG ECLIPSE_VERSION=7.2_10
 ARG GNU_VERSION=master
+ARG SHUMWAY_VERSION=main
 ARG SWI_VERSION=master
 ARG TAU_VERSION=0.3.4
 ARG TREALLA_VERSION=main
@@ -78,20 +79,33 @@ RUN apt-get update \
         ncat \
         socat \
     && rm -rf /var/lib/apt/lists/* \
-    && python3 -m pip install pygments==2.19.1 \
+    && python3 -m pip install pygments==2.20.0 \
     && python3 -m pip install sphinx==7.4.7 \
     && python3 -m pip install sphinx_rtd_theme==2.0.0 \
-    && python3 -m pip install sphinxcontrib-spelling==8.0.1
+    && python3 -m pip install sphinxcontrib-spelling==8.0.1 \
+    && python3 -m pip install clingo \
+    && python3 -m pip install problog \
+    && python3 -m pip install z3-solver
+
+# Install MiniZinc
+COPY --from=ghcr.io/minizinc/minizinc:2.10.1-dist /opt/minizinc /opt/minizinc
+ENV PATH=/opt/minizinc/bin:$PATH LD_LIBRARY_PATH=/opt/minizinc/lib
+
+# Install Souffle
+RUN wget https://souffle-lang.github.io/ppa/souffle-key.public -O /usr/share/keyrings/souffle-archive-keyring.gpg \
+    && echo "deb [signed-by=/usr/share/keyrings/souffle-archive-keyring.gpg] https://souffle-lang.github.io/ppa/ubuntu/ stable main" | tee /etc/apt/sources.list.d/souffle.list \
+    && apt-get update \
+    && apt-get install --no-install-recommends -y souffle
 
 # Install glab
-RUN curl -OL https://gitlab.com/gitlab-org/cli/-/releases/v1.55.0/downloads/glab_1.55.0_linux_amd64.deb \
-    && dpkg -i glab_1.55.0_linux_amd64.deb \
-    && rm -f glab_1.55.0_linux_amd64.deb
+RUN curl -OL https://gitlab.com/gitlab-org/cli/-/releases/v1.130.0/downloads/glab_1.130.0_linux_amd64.deb \
+    && dpkg -i glab_1.130.0_linux_amd64.deb \
+    && rm -f glab_1.130.0_linux_amd64.deb
 
 # Install Allure
-RUN curl -OL https://github.com/allure-framework/allure2/releases/download/2.33.0/allure_2.33.0-1_all.deb \
-    && dpkg -i allure_2.33.0-1_all.deb \
-    && rm -f allure_2.33.0-1_all.deb
+RUN curl -OL https://github.com/allure-framework/allure2/releases/download/2.46.2/allure_2.46.2-1_all.deb \
+    && dpkg -i allure_2.46.2-1_all.deb \
+    && rm -f allure_2.46.2-1_all.deb
 
 # Install Jupyter and the Logtalk kernel
 RUN python3 -m pip install --upgrade jupyter_core \
@@ -145,6 +159,11 @@ RUN rm -rf /var/lib/apt/lists/* \
         zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
+# Install DotNet for Shumway Prolog
+RUN add-apt-repository ppa:dotnet/backports \
+    && apt-get update \
+    && apt-get install --no-install-recommends -y dotnet-sdk-10.0
+
 # Install Logtalk
 RUN curl -sL https://github.com/LogtalkDotOrg/logtalk3/archive/${LOGTALK_VERSION}.tar.gz | tar xz \
     && logtalk3-${LOGTALK_VERSION}/scripts/install.sh -p /usr/local \
@@ -189,10 +208,10 @@ RUN logtalk_user_setup
 
 # Install d2
 WORKDIR /downloads
-RUN curl -fsSLO https://github.com/terrastruct/d2/releases/download/v0.6.9/d2-v0.6.9-linux-amd64.tar.gz \
-    && tar -xzf d2-v0.6.9-linux-amd64.tar.gz \
-    && make -sC "d2-v0.6.9" install \
-    && rm -rf d2-v0.6.9-linux-amd64.tar.gz
+RUN curl -fsSLO https://github.com/terrastruct/d2/releases/download/v0.9.0/d2-v0.9.0-linux-amd64.tar.gz \
+    && tar -xzf d2-v0.9.0-linux-amd64.tar.gz \
+    && make -sC "d2-v0.9.0" install \
+    && rm -rf d2-v0.9.0-linux-amd64.tar.gz
 
 # Install B-Prolog
 WORKDIR /downloads
@@ -242,6 +261,15 @@ RUN if [ "$GNU_VERSION" != "none" ] ; then \
         && cd /usr/local/share/logtalk/scripts/embedding/gprolog \
         && ./gprolog_embed_logtalk.sh -c -n gplgtnc -s none -d /usr/local/bin -- --new-top-level --no-susp-warn ; \
     fi
+
+# Install Shumway Prolog
+WORKDIR /downloads
+RUN if [ "$SHUMWAY_VERSION" != "none" ] ; then \
+        git clone --depth 1 --branch ${SHUMWAY_VERSION} https://github.com/gusbro/Shumway \
+        && cd Shumway \
+        && dotnet build -c Release Shumway.slnx ; \
+    fi
+ENV PATH=$PATH:/downloads/Shumway/dist/Release
 
 # Install SWI-Prolog
 WORKDIR /downloads
