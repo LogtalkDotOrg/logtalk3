@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-09,
+		date is 2026-11-14,
 		comment is 'Canonical SMT-LIB 2 statement validation, source generation, and response-producing statement classification.'
 	]).
 
@@ -58,7 +58,7 @@
 	:- public(response_producing/1).
 	:- mode(response_producing(+compound), zero_or_one).
 	:- info(response_producing/1, [
-		comment is 'Succeeds when ``Statement`` is a command that produces a solver response line (``check-sat``, ``check-sat-assuming``, ``get-model``, ``get-unsat-core``, or ``get-value``).',
+		comment is 'Succeeds when ``Statement`` is a response-producing command, including ``get-objectives``.',
 		argnames is ['Statement']
 	]).
 
@@ -133,70 +133,61 @@
 		valid_statements(Statements).
 
 	valid_statement(set_logic(Logic)) :-
-		!,
 		atom(Logic).
 	valid_statement(set_option(Keyword, Value)) :-
-		!,
 		atom(Keyword),
-		(atom(Value) ; integer(Value)).
+		(	atom(Value) ->
+			true
+		;	integer(Value)
+		).
 	valid_statement(declare_sort(Name, Arity)) :-
-		!,
 		atom(Name),
 		integer(Arity),
 		Arity >= 0.
 	valid_statement(define_sort(Name, Params, Definition)) :-
-		!,
 		atom(Name),
 		valid(list(atom), Params),
 		valid_sort(Definition).
 	valid_statement(declare_const(Name, Sort)) :-
-		!,
 		atom(Name),
 		valid_sort(Sort).
 	valid_statement(declare_fun(Name, ArgSorts, Sort)) :-
-		!,
 		atom(Name),
 		valid(list, ArgSorts),
 		valid_sorts(ArgSorts),
 		valid_sort(Sort).
 	valid_statement(define_fun(Name, Params, Sort, Body)) :-
-		!,
 		atom(Name),
 		valid_bindings(Params),
 		valid_sort(Sort),
 		valid_term(Body).
 	valid_statement(assert(Term)) :-
-		!,
 		valid_term(Term).
 	valid_statement(assert_named(Name, Term)) :-
-		!,
 		atom(Name),
 		valid_term(Term).
+	valid_statement(minimize(Term)) :-
+		valid_term(Term).
+	valid_statement(maximize(Term)) :-
+		valid_term(Term).
 	valid_statement(push(Count)) :-
-		!,
 		integer(Count),
 		Count >= 0.
 	valid_statement(pop(Count)) :-
-		!,
 		integer(Count),
 		Count >= 0.
-	valid_statement(check_sat) :-
-		!.
+	valid_statement(check_sat).
 	valid_statement(check_sat_assuming(Literals)) :-
-		!,
 		valid(list, Literals),
 		valid_terms(Literals).
-	valid_statement(get_model) :-
-		!.
-	valid_statement(get_unsat_core) :-
-		!.
+	valid_statement(get_model).
+	valid_statement(get_objectives).
+	valid_statement(get_unsat_core).
 	valid_statement(get_value(Terms)) :-
-		!,
 		valid(list, Terms),
 		Terms \== [],
 		valid_terms(Terms).
 	valid_statement(comment(Source)) :-
-		!,
 		raw_codes(Source, Codes),
 		\+ member(10, Codes).
 	valid_statement(raw(Source)) :-
@@ -270,6 +261,7 @@
 	response_producing(check_sat).
 	response_producing(check_sat_assuming(_)).
 	response_producing(get_model).
+	response_producing(get_objectives).
 	response_producing(get_unsat_core).
 	response_producing(get_value(_)).
 
@@ -296,56 +288,45 @@
 
 	% Statement grammar.
 	statement(set_logic(Logic)) -->
-		!,
 		text('(set-logic '), text(Logic), text(')'), [10].
 	statement(set_option(Keyword, Value)) -->
-		!,
 		{ dashed(Keyword, Dashed) },
 		text('(set-option :'), text(Dashed), [0' ], option_value(Value), text(')'), [10].
 	statement(declare_sort(Name, Arity)) -->
-		!,
 		text('(declare-sort '), text(Name), [0' ], integer_text(Arity), text(')'), [10].
 	statement(define_sort(Name, Params, Definition)) -->
-		!,
 		text('(define-sort '), text(Name), text(' ('), atom_list(Params), text(') '), sort(Definition), text(')'), [10].
 	statement(declare_const(Name, Sort)) -->
-		!,
 		text('(declare-const '), text(Name), [0' ], sort(Sort), text(')'), [10].
 	statement(declare_fun(Name, ArgSorts, Sort)) -->
-		!,
 		text('(declare-fun '), text(Name), text(' ('), sort_list(ArgSorts), text(') '), sort(Sort), text(')'), [10].
 	statement(define_fun(Name, Params, Sort, Body)) -->
-		!,
 		text('(define-fun '), text(Name), text(' ('), bindings(Params), text(') '), sort(Sort), [0' ], term(Body), text(')'), [10].
 	statement(assert(Term)) -->
-		!,
 		text('(assert '), term(Term), text(')'), [10].
 	statement(assert_named(Name, Term)) -->
-		!,
 		text('(assert (! '), term(Term), text(' :named '), text(Name), text('))'), [10].
+	statement(minimize(Term)) -->
+		text('(minimize '), term(Term), text(')'), [10].
+	statement(maximize(Term)) -->
+		text('(maximize '), term(Term), text(')'), [10].
 	statement(push(Count)) -->
-		!,
 		text('(push '), integer_text(Count), text(')'), [10].
 	statement(pop(Count)) -->
-		!,
 		text('(pop '), integer_text(Count), text(')'), [10].
 	statement(check_sat) -->
-		!,
 		text('(check-sat)'), [10].
 	statement(check_sat_assuming(Literals)) -->
-		!,
 		text('(check-sat-assuming ('), term_list(Literals), text('))'), [10].
 	statement(get_model) -->
-		!,
 		text('(get-model)'), [10].
+	statement(get_objectives) -->
+		text('(get-objectives)'), [10].
 	statement(get_unsat_core) -->
-		!,
 		text('(get-unsat-core)'), [10].
 	statement(get_value(Terms)) -->
-		!,
 		text('(get-value ('), term_list(Terms), text('))'), [10].
 	statement(comment(Source)) -->
-		!,
 		{ raw_codes(Source, Codes) },
 		text('; '), codes(Codes), [10].
 	statement(raw(Source)) -->

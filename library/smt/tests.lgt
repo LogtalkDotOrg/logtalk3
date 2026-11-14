@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-08,
+		date is 2026-11-14,
 		comment is 'Unit tests for the smt library.'
 	]).
 
@@ -221,6 +221,11 @@
 
 	test(smt_output_get_value_negative, deterministic(Values == [value(x, -5)])) :-
 		atom_codes('sat\n((x (- 5)))\n', Codes),
+		smt_output::decode(z3, Codes, exit(0), exit(0), [], [], [smt_result(_, _, Properties)]),
+		memberchk(values(Values), Properties).
+
+	test(smt_output_get_value_negative_decimal, deterministic(Values == [value(x, -1.5)])) :-
+		atom_codes('sat\n((x (- 1.5)))\n', Codes),
 		smt_output::decode(z3, Codes, exit(0), exit(0), [], [], [smt_result(_, _, Properties)]),
 		memberchk(values(Values), Properties).
 

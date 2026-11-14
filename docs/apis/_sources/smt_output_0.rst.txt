@@ -15,7 +15,7 @@ Whole-document S-expression tokenizing, parsing, and content-based response clas
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-11-11
+| **Date:** 2026-11-14
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -44,7 +44,7 @@ Public predicates
 ``decode/7``
 ^^^^^^^^^^^^
 
-Decodes captured stdout and process metadata into a list of collected ``smt_result(Status, Model, Properties)`` terms, one per ``check-sat``/``check-sat-assuming`` response, in order. Each response is classified by its shape (status atom, model, unsat core, or get-value pairs), so the decoder does not need the originating statement list and supports every source kind.
+Decodes captured stdout and process metadata into a list of collected ``smt_result(Status, Model, Properties)`` terms, one per check response, including objective responses when present.
 
 | **Compilation flags:**
 |    ``static``
@@ -69,6 +69,8 @@ Decodes captured stdout and process metadata into a list of collected ``smt_resu
 |        ``domain_error(smt_output,Response-unexpected)``
 |    The solver reported an ``(error ...)`` response:
 |        ``smt_solver_reported_error(Message)``
+|    The solver reported an unsupported command:
+|        ``smt_solver_reported_error(unsupported)``
 |    ``RawStatus`` is not a ground term:
 |        ``instantiation_error``
 |    ``NormalizedStatus`` is not a ground term:

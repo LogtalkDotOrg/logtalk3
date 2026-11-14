@@ -283,6 +283,9 @@ additionally recognizes the ``:- raw(Source)`` and
   ``(set-option :produce-unsat-cores true)``, before any other
   statement, as required by solvers that reject these options once
   ``set-logic`` has run.
+- ``minimize(Term)``, ``maximize(Term)``, and ``get_objectives`` emit
+  the corresponding optimization extensions. Use the ``omt`` library for
+  optimization solving and objective-bound inspection.
 - ``comment(Source)`` emits a ``;``-prefixed comment line, and
   ``raw(Source)`` emits trusted verbatim SMT-LIB 2 text, both without
   further validation beyond rejecting an embedded newline for
@@ -351,9 +354,10 @@ Solver output is classified by shape rather than by positional
 correlation with the originating statements: a bare
 ``sat``/``unsat``/``unknown`` (or Z3's ``timeout``, treated as
 ``unknown``) starts a new result; a model, unsat core, or ``get-value``
-response is attached to the most recent result. This lets ``solve/2-3``
-decode every source kind, including a native ``file/1`` or ``codes/1``
-source that was never expanded from the canonical statement vocabulary.
+or ``get-objectives`` response is attached to the most recent result.
+This lets ``solve/2-3`` decode every source kind, including a native
+``file/1`` or ``codes/1`` source that was never expanded from the
+canonical statement vocabulary.
 
 The ``status/2``, ``model_binding/2``, ``model_value/3``,
 ``unsat_core_name/2``, and ``result_property/2`` predicates inspect a
@@ -390,9 +394,8 @@ Limitations
 - The term and sort vocabulary covers a solid common core (see the
   "Statements" section); quantified algebraic datatypes, strings and
   sequences, non-standard arithmetic (for example transcendental
-  functions), optimization or soft constraints, proof production, and
-  interpolation are not generated and require the ``raw/1`` escape
-  hatch.
+  functions), soft constraints, proof production, and interpolation are
+  not generated and require the ``raw/1`` escape hatch.
 - ``capability/2`` is a fixed, advisory table checked against four
   specific solver versions; it is not derived from the selected
   executable at run time, so it can drift from the actual installed

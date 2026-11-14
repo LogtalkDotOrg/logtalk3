@@ -24,14 +24,14 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-11,
+		date is 2026-11-14,
 		comment is 'Whole-document S-expression tokenizing, parsing, and content-based response classification for Z3, cvc5, Bitwuzla, and Yices 2 plain-text output decoding.'
 	]).
 
 	:- public(decode/7).
 	:- mode(decode(+atom, +list(code), +term, +compound, +list(code), +list(compound), -list(compound)), one_or_error).
 	:- info(decode/7, [
-		comment is 'Decodes captured stdout and process metadata into a list of collected ``smt_result(Status, Model, Properties)`` terms, one per ``check-sat``/``check-sat-assuming`` response, in order. Each response is classified by its shape (status atom, model, unsat core, or get-value pairs), so the decoder does not need the originating statement list and supports every source kind.',
+		comment is 'Decodes captured stdout and process metadata into a list of collected ``smt_result(Status, Model, Properties)`` terms, one per check response, including objective responses when present.',
 		argnames is ['Solver', 'Codes', 'RawStatus', 'NormalizedStatus', 'Diagnostics', 'SourceMap', 'Results'],
 		exceptions is [
 			'``Solver`` is not a ground term' - instantiation_error,
@@ -41,6 +41,7 @@
 			'``Codes`` contains an unrecognized character or an unbalanced parenthesis' - domain_error(smt_output, 'Field'-'Value'),
 			'A model, unsat core, or get-value response appears before any status response' - domain_error(smt_output, 'Response'-unexpected),
 			'The solver reported an ``(error ...)`` response' - smt_solver_reported_error('Message'),
+			'The solver reported an unsupported command' - smt_solver_reported_error(unsupported),
 			'``RawStatus`` is not a ground term' - instantiation_error,
 			'``NormalizedStatus`` is not a ground term' - instantiation_error,
 			'``NormalizedStatus`` is neither a variable nor one of ``exit(Code)``, ``unknown(Details)``, nor ``killed(Details)``' - domain_error(smt_process_status, 'NormalizedStatus'),
@@ -109,29 +110,28 @@
 		walk(Sexprs, UpdatedEpisode, Episodes1).
 
 	apply_class(status(Status), CurrentEpisode, NewEpisode, Episodes, Episodes1) :-
-		!,
 		flush_episode(CurrentEpisode, Episodes, Episodes1),
-		NewEpisode = episode(Status, [], none, []).
+		NewEpisode = episode(Status, [], none, [], none).
 	apply_class(error(Message), _, _, _, _) :-
-		!,
 		context(Context),
 		throw(error(smt_solver_reported_error(Message), Context)).
 	apply_class(model(Bindings), CurrentEpisode, UpdatedEpisode, Episodes, Episodes) :-
-		!,
 		require_episode(CurrentEpisode),
-		CurrentEpisode = episode(Status, _, Core, Values),
-		UpdatedEpisode = episode(Status, Bindings, Core, Values).
+		CurrentEpisode = episode(Status, _, Core, Values, Objectives),
+		UpdatedEpisode = episode(Status, Bindings, Core, Values, Objectives).
 	apply_class(core(Names), CurrentEpisode, UpdatedEpisode, Episodes, Episodes) :-
-		!,
 		require_episode(CurrentEpisode),
-		CurrentEpisode = episode(Status, Bindings, _, Values),
-		UpdatedEpisode = episode(Status, Bindings, Names, Values).
+		CurrentEpisode = episode(Status, Bindings, _, Values, Objectives),
+		UpdatedEpisode = episode(Status, Bindings, Names, Values, Objectives).
 	apply_class(values(NewValues), CurrentEpisode, UpdatedEpisode, Episodes, Episodes) :-
-		!,
 		require_episode(CurrentEpisode),
-		CurrentEpisode = episode(Status, Bindings, Core, OldValues),
+		CurrentEpisode = episode(Status, Bindings, Core, OldValues, Objectives),
 		append(OldValues, NewValues, AllValues),
-		UpdatedEpisode = episode(Status, Bindings, Core, AllValues).
+		UpdatedEpisode = episode(Status, Bindings, Core, AllValues, Objectives).
+	apply_class(objectives(Objectives), CurrentEpisode, UpdatedEpisode, Episodes, Episodes) :-
+		require_episode(CurrentEpisode),
+		CurrentEpisode = episode(Status, Bindings, Core, Values, _),
+		UpdatedEpisode = episode(Status, Bindings, Core, Values, Objectives).
 	apply_class(unknown, CurrentEpisode, CurrentEpisode, Episodes, Episodes).
 
 	require_episode(none) :-
@@ -152,11 +152,16 @@
 	% than the standard "unknown" status token in plain SMT-LIB 2 mode.
 	classify(timeout, status(unknown)) :-
 		!.
+	classify(unsupported, error(unsupported)) :-
+		!.
 	classify([error, string(Message)], error(Message)) :-
 		!.
 	classify([error, Message], error(Message)) :-
 		atom(Message),
 		!.
+	classify([objectives| Entries], objectives(Objectives)) :-
+		!,
+		objective_entries(Entries, Objectives).
 	classify([model| Defs], model(Bindings)) :-
 		!,
 		definitions_bindings(Defs, Bindings).
@@ -177,6 +182,42 @@
 		all_atoms(Sexpr),
 		!.
 	classify(_, unknown).
+
+	objective_entries([], []) :-
+		!.
+	objective_entries([[Term, Bound], ',', 'range:', '[', Lower, ',', Upper, ']'| Entries], [objective(Objective, annotated(ExactBound, range(ExactLower, ExactUpper)))| Objectives]) :-
+		!,
+		exact_sexpr(Term, Objective),
+		exact_sexpr(Bound, ExactBound),
+		exact_sexpr(Lower, ExactLower),
+		exact_sexpr(Upper, ExactUpper),
+		objective_entries(Entries, Objectives).
+	objective_entries([[Term, Bound]| Entries], [objective(Objective, ExactBound)| Objectives]) :-
+		!,
+		exact_sexpr(Term, Objective),
+		exact_sexpr(Bound, ExactBound),
+		objective_entries(Entries, Objectives).
+	objective_entries(Entries, _) :-
+		domain_error(smt_output, objectives(Entries)).
+
+	exact_sexpr(decimal(Atom), decimal(Atom)) :-
+		!.
+	exact_sexpr([Head| Args], Term) :-
+		!,
+		exact_sexprs(Args, Converted),
+		(	atom(Head) ->
+			Term =.. [Head| Converted]
+		;	exact_sexpr(Head, ConvertedHead),
+			Term = apply(ConvertedHead, Converted)
+		).
+	exact_sexpr([], smt_nil) :-
+		!.
+	exact_sexpr(Value, Value).
+
+	exact_sexprs([], []).
+	exact_sexprs([Value| Values], [Exact| Exacts]) :-
+		exact_sexpr(Value, Exact),
+		exact_sexprs(Values, Exacts).
 
 	all_definitions([]).
 	all_definitions([[Kind, Name| _]| Defs]) :-
@@ -199,16 +240,20 @@
 		all_atoms(Atoms).
 
 	build_results([], _, _, _, _, _, _, _, []).
-	build_results([episode(Status, Bindings, Core, Values)| Episodes], Solver, RawStatus, NormalizedStatus, Termination, Diagnostics, SourceMap, Codes, [Result| Results]) :-
+	build_results([episode(Status, Bindings, Core, Values, Objectives)| Episodes], Solver, RawStatus, NormalizedStatus, Termination, Diagnostics, SourceMap, Codes, [Result| Results]) :-
 		(	Bindings == [] ->
 			Model = none
 		;	Model = bindings(Bindings)
 		),
-		Properties = [
+		BaseProperties = [
 			solver(Solver), raw_status(RawStatus), process_status(NormalizedStatus),
 			termination(Termination), diagnostics(Diagnostics), source_map(SourceMap),
 			raw_output(Codes), core(Core), values(Values)
 		],
+		(	Objectives == none ->
+			Properties = BaseProperties
+		;	append(BaseProperties, [objectives(Objectives)], Properties)
+		),
 		Result = smt_result(Status, Model, Properties),
 		build_results(Episodes, Solver, RawStatus, NormalizedStatus, Termination, Diagnostics, SourceMap, Codes, Results).
 
@@ -239,6 +284,10 @@
 	% back to an ``apply(Head, Args)`` wrapper rather than failing.
 	sexpr_to_term([], smt_nil) :-
 		!.
+	sexpr_to_term(decimal(Atom), Number) :-
+		!,
+		atom_codes(Atom, Codes),
+		number_codes(Number, Codes).
 	sexpr_to_term(['_', Op, N], bv(Value, Width)) :-
 		atom(Op),
 		integer(N),
@@ -247,9 +296,10 @@
 		!,
 		Width = N.
 	sexpr_to_term(['-', N], Negative) :-
-		number(N),
+		sexpr_to_term(N, Number),
+		number(Number),
 		!,
-		Negative is -N.
+		Negative is -Number.
 	sexpr_to_term([Head| Args], Term) :-
 		!,
 		sexpr_to_terms(Args, ConvertedArgs),
@@ -351,7 +401,12 @@
 		scan_number(Codes, NumberCodes, Rest),
 		NumberCodes \== [],
 		!,
-		number_codes(Number, NumberCodes).
+		(	member_decimal_point(NumberCodes) ->
+			atom_codes(Atom, NumberCodes),
+			Number = decimal(Atom)
+		;	number_codes(Number, NumberCodes)
+		).
+
 	next_token(Codes, Atom, Rest) :-
 		scan_symbol(Codes, SymbolCodes, Rest),
 		SymbolCodes \== [],
@@ -359,6 +414,11 @@
 		atom_codes(Atom, SymbolCodes).
 	next_token([Code| _], _, _) :-
 		domain_error(smt_output, character(Code)).
+
+	member_decimal_point([0'.| _]) :-
+		!.
+	member_decimal_point([_| Codes]) :-
+		member_decimal_point(Codes).
 
 	scan_string([0'", 0'"| Codes], [0'"| Chars], Rest) :-
 		!,

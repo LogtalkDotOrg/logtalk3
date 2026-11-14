@@ -15,7 +15,7 @@ Canonical SMT-LIB 2 statement validation, source generation, and response-produc
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-11-09
+| **Date:** 2026-11-14
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -104,7 +104,7 @@ Serializes statements with origins and returns ``line(Start, End, Origin)`` sour
 ``response_producing/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Succeeds when ``Statement`` is a command that produces a solver response line (``check-sat``, ``check-sat-assuming``, ``get-model``, ``get-unsat-core``, or ``get-value``).
+Succeeds when ``Statement`` is a response-producing command, including ``get-objectives``.
 
 | **Compilation flags:**
 |    ``static``

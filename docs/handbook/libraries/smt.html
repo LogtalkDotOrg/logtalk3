@@ -695,6 +695,9 @@ the corresponding <code class="docutils literal notranslate"><span class="pre">s
 <code class="docutils literal notranslate"><span class="pre">(set-option</span> <span class="pre">:produce-unsat-cores</span> <span class="pre">true)</span></code>, before any other
 statement, as required by solvers that reject these options once
 <code class="docutils literal notranslate"><span class="pre">set-logic</span></code> has run.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">minimize(Term)</span></code>, <code class="docutils literal notranslate"><span class="pre">maximize(Term)</span></code>, and <code class="docutils literal notranslate"><span class="pre">get_objectives</span></code> emit
+the corresponding optimization extensions. Use the <code class="docutils literal notranslate"><span class="pre">omt</span></code> library for
+optimization solving and objective-bound inspection.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">comment(Source)</span></code> emits a <code class="docutils literal notranslate"><span class="pre">;</span></code>-prefixed comment line, and
 <code class="docutils literal notranslate"><span class="pre">raw(Source)</span></code> emits trusted verbatim SMT-LIB 2 text, both without
 further validation beyond rejecting an embedded newline for
@@ -756,9 +759,10 @@ an <code class="docutils literal notranslate"><span class="pre">apply(Head,</spa
 correlation with the originating statements: a bare
 <code class="docutils literal notranslate"><span class="pre">sat</span></code>/<code class="docutils literal notranslate"><span class="pre">unsat</span></code>/<code class="docutils literal notranslate"><span class="pre">unknown</span></code> (or Z3’s <code class="docutils literal notranslate"><span class="pre">timeout</span></code>, treated as
 <code class="docutils literal notranslate"><span class="pre">unknown</span></code>) starts a new result; a model, unsat core, or <code class="docutils literal notranslate"><span class="pre">get-value</span></code>
-response is attached to the most recent result. This lets <code class="docutils literal notranslate"><span class="pre">solve/2-3</span></code>
-decode every source kind, including a native <code class="docutils literal notranslate"><span class="pre">file/1</span></code> or <code class="docutils literal notranslate"><span class="pre">codes/1</span></code>
-source that was never expanded from the canonical statement vocabulary.</p>
+or <code class="docutils literal notranslate"><span class="pre">get-objectives</span></code> response is attached to the most recent result.
+This lets <code class="docutils literal notranslate"><span class="pre">solve/2-3</span></code> decode every source kind, including a native
+<code class="docutils literal notranslate"><span class="pre">file/1</span></code> or <code class="docutils literal notranslate"><span class="pre">codes/1</span></code> source that was never expanded from the
+canonical statement vocabulary.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">status/2</span></code>, <code class="docutils literal notranslate"><span class="pre">model_binding/2</span></code>, <code class="docutils literal notranslate"><span class="pre">model_value/3</span></code>,
 <code class="docutils literal notranslate"><span class="pre">unsat_core_name/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">result_property/2</span></code> predicates inspect a
 single collected result without starting a process. The
@@ -792,9 +796,8 @@ assertions, a <code class="docutils literal notranslate"><span class="pre">push<
 <li><p>The term and sort vocabulary covers a solid common core (see the
 “Statements” section); quantified algebraic datatypes, strings and
 sequences, non-standard arithmetic (for example transcendental
-functions), optimization or soft constraints, proof production, and
-interpolation are not generated and require the <code class="docutils literal notranslate"><span class="pre">raw/1</span></code> escape
-hatch.</p></li>
+functions), soft constraints, proof production, and interpolation are
+not generated and require the <code class="docutils literal notranslate"><span class="pre">raw/1</span></code> escape hatch.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">capability/2</span></code> is a fixed, advisory table checked against four
 specific solver versions; it is not derived from the selected
 executable at run time, so it can drift from the actual installed

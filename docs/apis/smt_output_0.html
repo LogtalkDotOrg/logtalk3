@@ -485,7 +485,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-11-11</div>
+<div class="line"><strong>Date:</strong> 2026-11-14</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -528,7 +528,7 @@
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
 <section id="decode-7">
 <span id="smt-output-0-decode-7"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">decode/7</span></code></a><a class="headerlink" href="#decode-7" title="Link to this heading"></a></h3>
-<p>Decodes captured stdout and process metadata into a list of collected <code class="docutils literal notranslate"><span class="pre">smt_result(Status,</span> <span class="pre">Model,</span> <span class="pre">Properties)</span></code> terms, one per <code class="docutils literal notranslate"><span class="pre">check-sat</span></code>/<code class="docutils literal notranslate"><span class="pre">check-sat-assuming</span></code> response, in order. Each response is classified by its shape (status atom, model, unsat core, or get-value pairs), so the decoder does not need the originating statement list and supports every source kind.</p>
+<p>Decodes captured stdout and process metadata into a list of collected <code class="docutils literal notranslate"><span class="pre">smt_result(Status,</span> <span class="pre">Model,</span> <span class="pre">Properties)</span></code> terms, one per check response, including objective responses when present.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -575,6 +575,10 @@
 <div class="line">The solver reported an <code class="docutils literal notranslate"><span class="pre">(error</span> <span class="pre">...)</span></code> response:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">smt_solver_reported_error(Message)</span></code></div>
+</div>
+<div class="line">The solver reported an unsupported command:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">smt_solver_reported_error(unsupported)</span></code></div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">RawStatus</span></code> is not a ground term:</div>
 <div class="line-block">
