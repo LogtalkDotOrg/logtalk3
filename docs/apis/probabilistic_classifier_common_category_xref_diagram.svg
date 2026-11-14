@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-257 440.07,-257 440.07,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for category probabilistic_classifier_common</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 20:35</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;14, 01:02</text>
 <g id="clust1" class="cluster">
 <title>cluster_probabilistic_classifier_common_category</title>
 <g id="a_clust1"><a xlink:title="probabilistic_classifier_common">
 <path fill="snow" stroke="dimgray" d="M45.53,-46C45.53,-46 390.53,-46 390.53,-46 396.53,-46 402.53,-52 402.53,-58 402.53,-58 402.53,-233 402.53,-233 402.53,-239 396.53,-245 390.53,-245 390.53,-245 45.53,-245 45.53,-245 39.53,-245 33.53,-239 33.53,-233 33.53,-233 33.53,-58 33.53,-58 33.53,-52 39.53,-46 45.53,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/classification_protocols/probabilistic_classifier_common.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/classification_protocols/probabilistic_classifier_common.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/classification_protocols/probabilistic_classifier_common.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/classification_protocols/probabilistic_classifier_common.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="45.53" y="-229.46" font-family="monospace" font-size="10.00" fill="dimgray">probabilistic_classifier_common</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>predict_from_probabilities/3</title>
 <polygon fill="yellow" stroke="black" points="329.35,-209 117.72,-209 117.72,-173 329.35,-173 329.35,-209"/>
 <text xml:space="preserve" text-anchor="start" x="125.72" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/classification_protocols/probabilistic_classifier_common.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/classification_protocols/probabilistic_classifier_common.lgt#L33">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/classification_protocols/probabilistic_classifier_common.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/classification_protocols/probabilistic_classifier_common.lgt#L33">
 <text xml:space="preserve" text-anchor="start" x="131.12" y="-192.71" font-family="monospace" font-size="11.00">predict_from_probabilities/3</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>max_probability/3</title>
 <polygon fill="yellow" stroke="black" points="183.04,-92 44.02,-92 44.02,-56 183.04,-56 183.04,-92"/>
 <text xml:space="preserve" text-anchor="start" x="52.02" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/classification_protocols/probabilistic_classifier_common.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/classification_protocols/probabilistic_classifier_common.lgt#L40">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/classification_protocols/probabilistic_classifier_common.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/classification_protocols/probabilistic_classifier_common.lgt#L40">
 <text xml:space="preserve" text-anchor="start" x="57.43" y="-75.71" font-family="monospace" font-size="11.00">max_probability/3</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- predict_from_probabilities/3&#45;&gt;max_probability/3 -->
 <g id="edge1" class="edge">
 <title>predict_from_probabilities/3&#45;&gt;max_probability/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/classification_protocols/probabilistic_classifier_common.lgt#L47" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/classification_protocols/probabilistic_classifier_common.lgt#L47" xlink:title="calls">
 <path fill="none" stroke="black" d="M206.83,-172.53C188.47,-153.34 158.81,-122.33 137.87,-100.44"/>
 <polygon fill="black" stroke="black" points="140.53,-98.15 131.08,-93.35 135.47,-102.99 140.53,-98.15"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/classification_protocols/probabilistic_classifier_common.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/classification_protocols/probabilistic_classifier_common.lgt#L47">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/classification_protocols/probabilistic_classifier_common.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/classification_protocols/probabilistic_classifier_common.lgt#L47">
 <text xml:space="preserve" text-anchor="start" x="171.83" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -79,12 +79,12 @@
 <!-- predict_from_probabilities/3&#45;&gt;::predict_probabilities/3 -->
 <g id="edge2" class="edge">
 <title>predict_from_probabilities/3&#45;&gt;::predict_probabilities/3</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/classification_protocols/probabilistic_classifier_common.lgt#L47" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/classification_protocols/probabilistic_classifier_common.lgt#L47" xlink:title="calls">
 <path fill="none" stroke="black" d="M234.62,-172.53C246.54,-153.77 265.62,-123.7 279.45,-101.91"/>
 <polygon fill="black" stroke="black" points="282.37,-103.85 284.77,-93.53 276.46,-100.1 282.37,-103.85"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/classification_protocols/probabilistic_classifier_common.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/classification_protocols/probabilistic_classifier_common.lgt#L47">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/classification_protocols/probabilistic_classifier_common.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/classification_protocols/probabilistic_classifier_common.lgt#L47">
 <text xml:space="preserve" text-anchor="start" x="262.22" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>

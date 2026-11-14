@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-1103 1973,-1103 1973,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object ccsds_ccs/2</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 20:35</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;14, 01:02</text>
 <g id="clust1" class="cluster">
 <title>cluster_ccsds_ccs_2_object</title>
 <g id="a_clust1"><a xlink:title="ccsds_ccs(CalendarVariant,FractionOctets)">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1949,-46 1949,-46 1955,-46 1961,-52 1961,-58 1961,-58 1961,-1079 1961,-1079 1961,-1085 1955,-1091 1949,-1091 1949,-1091 20,-1091 20,-1091 14,-1091 8,-1085 8,-1079 8,-1079 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-1075.46" font-family="monospace" font-size="10.00" fill="dimgray">ccsds_ccs(CalendarVariant,FractionOctets)</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>year/2</title>
 <polygon fill="springgreen" stroke="black" points="84.2,-1055 17.8,-1055 17.8,-1019 84.2,-1019 84.2,-1055"/>
 <text xml:space="preserve" text-anchor="start" x="25.8" y="-1039.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L36">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="31.2" y="-1038.71" font-family="monospace" font-size="11.00">year/2</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>day_of_year/2</title>
 <polygon fill="springgreen" stroke="black" points="215.31,-1055 102.69,-1055 102.69,-1019 215.31,-1019 215.31,-1055"/>
 <text xml:space="preserve" text-anchor="start" x="110.69" y="-1039.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L43" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L43">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L43" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L43">
 <text xml:space="preserve" text-anchor="start" x="116.09" y="-1038.71" font-family="monospace" font-size="11.00">day_of_year/2</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>month/2</title>
 <polygon fill="springgreen" stroke="black" points="306.5,-1055 233.5,-1055 233.5,-1019 306.5,-1019 306.5,-1055"/>
 <text xml:space="preserve" text-anchor="start" x="241.5" y="-1039.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L50">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L50">
 <text xml:space="preserve" text-anchor="start" x="246.9" y="-1038.71" font-family="monospace" font-size="11.00">month/2</text>
 </a>
 </g>
@@ -71,7 +71,7 @@
 <title>day/2</title>
 <polygon fill="springgreen" stroke="black" points="383.9,-1055 324.1,-1055 324.1,-1019 383.9,-1019 383.9,-1055"/>
 <text xml:space="preserve" text-anchor="start" x="332.1" y="-1039.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L57">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="337.5" y="-1038.71" font-family="monospace" font-size="11.00">day/2</text>
 </a>
 </g>
@@ -85,7 +85,7 @@
 <title>time_of_day/4</title>
 <polygon fill="springgreen" stroke="black" points="1951.31,-470 1838.69,-470 1838.69,-434 1951.31,-434 1951.31,-470"/>
 <text xml:space="preserve" text-anchor="start" x="1846.69" y="-454.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L64">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L64">
 <text xml:space="preserve" text-anchor="start" x="1852.09" y="-453.71" font-family="monospace" font-size="11.00">time_of_day/4</text>
 </a>
 </g>
@@ -99,7 +99,7 @@
 <title>fraction_scale/1</title>
 <polygon fill="cornsilk" stroke="black" points="1670.21,-326 1537.79,-326 1537.79,-290 1670.21,-290 1670.21,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1545.79" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node43_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L381" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L381">
+<g id="a_node43_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L381" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L381">
 <text xml:space="preserve" text-anchor="start" x="1551.19" y="-309.71" font-family="monospace" font-size="11.00">fraction_scale/1</text>
 </a>
 </g>
@@ -111,12 +111,12 @@
 <!-- time_of_day/4&#45;&gt;fraction_scale/1 -->
 <g id="edge22" class="edge">
 <title>time_of_day/4&#45;&gt;fraction_scale/1</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L195" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L195" xlink:title="calls">
 <path fill="none" stroke="black" d="M1886.13,-433.72C1874.77,-413.36 1853.14,-380.03 1825,-362 1782.12,-334.53 1726.31,-321.28 1681.5,-314.91"/>
 <polygon fill="black" stroke="black" points="1682.23,-311.47 1671.86,-313.63 1681.31,-318.41 1682.23,-311.47"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L195" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L195">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L195" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L195">
 <text xml:space="preserve" text-anchor="start" x="1862.6" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -126,7 +126,7 @@
 <title>calendar_from_ordinal/4</title>
 <polygon fill="cornsilk" stroke="black" points="1629.31,-587 1450.69,-587 1450.69,-551 1629.31,-551 1629.31,-587"/>
 <text xml:space="preserve" text-anchor="start" x="1458.69" y="-571.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L426" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L426">
+<g id="a_node6_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L426" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L426">
 <text xml:space="preserve" text-anchor="start" x="1464.09" y="-570.71" font-family="monospace" font-size="11.00">calendar_from_ordinal/4</text>
 </a>
 </g>
@@ -140,7 +140,7 @@
 <title>calendar_from_ordinal/5</title>
 <polygon fill="cornsilk" stroke="black" points="1447.31,-470 1268.69,-470 1268.69,-434 1447.31,-434 1447.31,-470"/>
 <text xml:space="preserve" text-anchor="start" x="1276.69" y="-454.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node48_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L429" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L429">
+<g id="a_node48_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L429" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L429">
 <text xml:space="preserve" text-anchor="start" x="1282.09" y="-453.71" font-family="monospace" font-size="11.00">calendar_from_ordinal/5</text>
 </a>
 </g>
@@ -152,12 +152,12 @@
 <!-- calendar_from_ordinal/4&#45;&gt;calendar_from_ordinal/5 -->
 <g id="edge56" class="edge">
 <title>calendar_from_ordinal/4&#45;&gt;calendar_from_ordinal/5</title>
-<g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L426" xlink:title="calls">
+<g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L426" xlink:title="calls">
 <path fill="none" stroke="black" d="M1518.14,-550.55C1501.53,-537.61 1477.88,-519.9 1456,-506 1439.23,-495.35 1420.15,-484.72 1403.3,-475.8"/>
 <polygon fill="black" stroke="black" points="1404.97,-472.72 1394.49,-471.19 1401.73,-478.93 1404.97,-472.72"/>
 </a>
 </g>
-<g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L426" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L426">
+<g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L426" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L426">
 <text xml:space="preserve" text-anchor="start" x="1467.87" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -167,7 +167,7 @@
 <title>ordinal_from_calendar/4</title>
 <polygon fill="cornsilk" stroke="black" points="1888.31,-587 1709.69,-587 1709.69,-551 1888.31,-551 1888.31,-587"/>
 <text xml:space="preserve" text-anchor="start" x="1717.69" y="-571.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L414" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L414">
+<g id="a_node7_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L414" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L414">
 <text xml:space="preserve" text-anchor="start" x="1723.09" y="-570.71" font-family="monospace" font-size="11.00">ordinal_from_calendar/4</text>
 </a>
 </g>
@@ -181,7 +181,7 @@
 <title>ordinal_from_calendar/6</title>
 <polygon fill="cornsilk" stroke="black" points="1801.31,-470 1622.69,-470 1622.69,-434 1801.31,-434 1801.31,-470"/>
 <text xml:space="preserve" text-anchor="start" x="1630.69" y="-454.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node47_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L417" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L417">
+<g id="a_node47_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L417" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L417">
 <text xml:space="preserve" text-anchor="start" x="1636.09" y="-453.71" font-family="monospace" font-size="11.00">ordinal_from_calendar/6</text>
 </a>
 </g>
@@ -193,12 +193,12 @@
 <!-- ordinal_from_calendar/4&#45;&gt;ordinal_from_calendar/6 -->
 <g id="edge54" class="edge">
 <title>ordinal_from_calendar/4&#45;&gt;ordinal_from_calendar/6</title>
-<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L414" xlink:title="calls">
+<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L414" xlink:title="calls">
 <path fill="none" stroke="black" d="M1785.79,-550.53C1771.46,-531.6 1748.43,-501.16 1731.91,-479.32"/>
 <polygon fill="black" stroke="black" points="1734.79,-477.32 1725.97,-471.46 1729.21,-481.55 1734.79,-477.32"/>
 </a>
 </g>
-<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L414" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L414">
+<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L414" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L414">
 <text xml:space="preserve" text-anchor="start" x="1758.11" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -208,7 +208,7 @@
 <title>power100/2</title>
 <polygon fill="cornsilk" stroke="black" points="353.41,-326 260.59,-326 260.59,-290 353.41,-290 353.41,-326"/>
 <text xml:space="preserve" text-anchor="start" x="268.59" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L396" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L396">
+<g id="a_node8_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L396" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L396">
 <text xml:space="preserve" text-anchor="start" x="273.99" y="-309.71" font-family="monospace" font-size="11.00">power100/2</text>
 </a>
 </g>
@@ -222,7 +222,7 @@
 <title>power100_/3</title>
 <polygon fill="cornsilk" stroke="black" points="356.71,-209 257.29,-209 257.29,-173 356.71,-173 356.71,-209"/>
 <text xml:space="preserve" text-anchor="start" x="265.29" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node45_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L399" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L399">
+<g id="a_node45_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L399" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L399">
 <text xml:space="preserve" text-anchor="start" x="270.69" y="-192.71" font-family="monospace" font-size="11.00">power100_/3</text>
 </a>
 </g>
@@ -234,12 +234,12 @@
 <!-- power100/2&#45;&gt;power100_/3 -->
 <g id="edge52" class="edge">
 <title>power100/2&#45;&gt;power100_/3</title>
-<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L396" xlink:title="calls">
+<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L396" xlink:title="calls">
 <path fill="none" stroke="black" d="M307,-289.53C307,-271.28 307,-242.33 307,-220.7"/>
 <polygon fill="black" stroke="black" points="310.5,-220.77 307,-210.77 303.5,-220.77 310.5,-220.77"/>
 </a>
 </g>
-<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L396" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L396">
+<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L396" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L396">
 <text xml:space="preserve" text-anchor="start" x="307" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -249,7 +249,7 @@
 <title>power10/2</title>
 <polygon fill="cornsilk" stroke="black" points="1451.11,-209 1364.89,-209 1364.89,-173 1451.11,-173 1451.11,-209"/>
 <text xml:space="preserve" text-anchor="start" x="1372.89" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L385" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L385">
+<g id="a_node9_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L385" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L385">
 <text xml:space="preserve" text-anchor="start" x="1378.3" y="-192.71" font-family="monospace" font-size="11.00">power10/2</text>
 </a>
 </g>
@@ -263,7 +263,7 @@
 <title>power10_/3</title>
 <polygon fill="cornsilk" stroke="black" points="1454.41,-92 1361.59,-92 1361.59,-56 1454.41,-56 1454.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1369.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node44_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L388" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L388">
+<g id="a_node44_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L388" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L388">
 <text xml:space="preserve" text-anchor="start" x="1374.99" y="-75.71" font-family="monospace" font-size="11.00">power10_/3</text>
 </a>
 </g>
@@ -275,12 +275,12 @@
 <!-- power10/2&#45;&gt;power10_/3 -->
 <g id="edge51" class="edge">
 <title>power10/2&#45;&gt;power10_/3</title>
-<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L385" xlink:title="calls">
+<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L385" xlink:title="calls">
 <path fill="none" stroke="black" d="M1408,-172.53C1408,-154.28 1408,-125.33 1408,-103.7"/>
 <polygon fill="black" stroke="black" points="1411.5,-103.77 1408,-93.77 1404.5,-103.77 1411.5,-103.77"/>
 </a>
 </g>
-<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L385" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L385">
+<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L385" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L385">
 <text xml:space="preserve" text-anchor="start" x="1408" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -290,7 +290,7 @@
 <title>encode_fraction/3</title>
 <polygon fill="cornsilk" stroke="black" points="390.51,-587 251.49,-587 251.49,-551 390.51,-551 390.51,-587"/>
 <text xml:space="preserve" text-anchor="start" x="259.49" y="-571.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L256" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L256">
+<g id="a_node10_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L256" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L256">
 <text xml:space="preserve" text-anchor="start" x="264.89" y="-570.71" font-family="monospace" font-size="11.00">encode_fraction/3</text>
 </a>
 </g>
@@ -304,7 +304,7 @@
 <title>encode_bcd_octets/4</title>
 <polygon fill="cornsilk" stroke="black" points="452.11,-470 299.89,-470 299.89,-434 452.11,-434 452.11,-470"/>
 <text xml:space="preserve" text-anchor="start" x="307.89" y="-454.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node28_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L272" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L272">
+<g id="a_node28_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L272" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L272">
 <text xml:space="preserve" text-anchor="start" x="313.29" y="-453.71" font-family="monospace" font-size="11.00">encode_bcd_octets/4</text>
 </a>
 </g>
@@ -316,12 +316,12 @@
 <!-- encode_fraction/3&#45;&gt;encode_bcd_octets/4 -->
 <g id="edge35" class="edge">
 <title>encode_fraction/3&#45;&gt;encode_bcd_octets/4</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L256" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L256" xlink:title="calls">
 <path fill="none" stroke="black" d="M329.35,-550.53C338.25,-531.94 352.45,-502.24 362.85,-480.5"/>
 <polygon fill="black" stroke="black" points="365.94,-482.15 367.1,-471.62 359.62,-479.13 365.94,-482.15"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L256" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L256">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L256" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L256">
 <text xml:space="preserve" text-anchor="start" x="350.15" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -331,7 +331,7 @@
 <title>decode_fraction/2</title>
 <polygon fill="cornsilk" stroke="black" points="157.51,-704 18.49,-704 18.49,-668 157.51,-668 157.51,-704"/>
 <text xml:space="preserve" text-anchor="start" x="26.49" y="-688.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L253" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L253">
+<g id="a_node11_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L253" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L253">
 <text xml:space="preserve" text-anchor="start" x="31.89" y="-687.71" font-family="monospace" font-size="11.00">decode_fraction/2</text>
 </a>
 </g>
@@ -345,7 +345,7 @@
 <title>decode_bcd_octets/4</title>
 <polygon fill="cornsilk" stroke="black" points="170.11,-587 17.89,-587 17.89,-551 170.11,-551 170.11,-587"/>
 <text xml:space="preserve" text-anchor="start" x="25.89" y="-571.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node26_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L259" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L259">
+<g id="a_node26_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L259" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L259">
 <text xml:space="preserve" text-anchor="start" x="31.29" y="-570.71" font-family="monospace" font-size="11.00">decode_bcd_octets/4</text>
 </a>
 </g>
@@ -357,12 +357,12 @@
 <!-- decode_fraction/2&#45;&gt;decode_bcd_octets/4 -->
 <g id="edge34" class="edge">
 <title>decode_fraction/2&#45;&gt;decode_bcd_octets/4</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L253" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L253" xlink:title="calls">
 <path fill="none" stroke="black" d="M88.91,-667.53C89.86,-649.28 91.37,-620.33 92.5,-598.7"/>
 <polygon fill="black" stroke="black" points="96,-598.93 93.02,-588.77 89,-598.57 96,-598.93"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L253" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L253">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L253" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L253">
 <text xml:space="preserve" text-anchor="start" x="91.18" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -372,7 +372,7 @@
 <title>expected_length/1</title>
 <polygon fill="cornsilk" stroke="black" points="302.51,-821 163.49,-821 163.49,-785 302.51,-785 302.51,-821"/>
 <text xml:space="preserve" text-anchor="start" x="171.49" y="-805.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node12_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L210" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L210">
+<g id="a_node12_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L210" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L210">
 <text xml:space="preserve" text-anchor="start" x="176.89" y="-804.71" font-family="monospace" font-size="11.00">expected_length/1</text>
 </a>
 </g>
@@ -386,7 +386,7 @@
 <title>parse/2</title>
 <polygon fill="cornsilk" stroke="black" points="474.5,-1055 401.5,-1055 401.5,-1019 474.5,-1019 474.5,-1055"/>
 <text xml:space="preserve" text-anchor="start" x="409.5" y="-1039.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node13_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L79">
+<g id="a_node13_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L79">
 <text xml:space="preserve" text-anchor="start" x="414.9" y="-1038.71" font-family="monospace" font-size="11.00">parse/2</text>
 </a>
 </g>
@@ -400,7 +400,7 @@
 <title>parse_bytes/2</title>
 <polygon fill="cornsilk" stroke="black" points="301.31,-938 188.69,-938 188.69,-902 301.31,-902 301.31,-938"/>
 <text xml:space="preserve" text-anchor="start" x="196.69" y="-922.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node21_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L202" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L202">
+<g id="a_node21_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L202" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L202">
 <text xml:space="preserve" text-anchor="start" x="202.09" y="-921.71" font-family="monospace" font-size="11.00">parse_bytes/2</text>
 </a>
 </g>
@@ -412,12 +412,12 @@
 <!-- parse/2&#45;&gt;parse_bytes/2 -->
 <g id="edge1" class="edge">
 <title>parse/2&#45;&gt;parse_bytes/2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L82" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L82" xlink:title="calls">
 <path fill="none" stroke="black" d="M408.69,-1018.53C375.29,-998.63 320.58,-966.04 283.7,-944.06"/>
 <polygon fill="black" stroke="black" points="285.95,-941.33 275.57,-939.22 282.37,-947.34 285.95,-941.33"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L82">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L82">
 <text xml:space="preserve" text-anchor="start" x="347.29" y="-976.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -439,12 +439,12 @@
 <!-- parse/2&#45;&gt;reader::file_to_bytes/2 -->
 <g id="edge60" class="edge">
 <title>parse/2&#45;&gt;reader::file_to_bytes/2</title>
-<g id="a_edge60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L82" xlink:title="calls">
+<g id="a_edge60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L82" xlink:title="calls">
 <path fill="none" stroke="black" d="M436.63,-1018.53C435.2,-1000.28 432.94,-971.33 431.25,-949.7"/>
 <polygon fill="black" stroke="black" points="434.74,-949.46 430.47,-939.76 427.76,-950.01 434.74,-949.46"/>
 </a>
 </g>
-<g id="a_edge60&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L82">
+<g id="a_edge60&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L82">
 <text xml:space="preserve" text-anchor="start" x="433.77" y="-976.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -466,12 +466,12 @@
 <!-- parse/2&#45;&gt;reader::stream_to_bytes/2 -->
 <g id="edge61" class="edge">
 <title>parse/2&#45;&gt;reader::stream_to_bytes/2</title>
-<g id="a_edge61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L86" xlink:title="calls">
+<g id="a_edge61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L86" xlink:title="calls">
 <path fill="none" stroke="black" d="M467.46,-1018.53C501.03,-998.63 556.03,-966.04 593.1,-944.06"/>
 <polygon fill="black" stroke="black" points="594.46,-947.32 601.27,-939.21 590.89,-941.3 594.46,-947.32"/>
 </a>
 </g>
-<g id="a_edge61&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L86" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L86">
+<g id="a_edge61&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L86" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L86">
 <text xml:space="preserve" text-anchor="start" x="540.82" y="-976.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -481,7 +481,7 @@
 <title>generate/2</title>
 <polygon fill="cornsilk" stroke="black" points="853.41,-938 760.59,-938 760.59,-902 853.41,-902 853.41,-938"/>
 <text xml:space="preserve" text-anchor="start" x="768.59" y="-922.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node14_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L96">
+<g id="a_node14_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L96">
 <text xml:space="preserve" text-anchor="start" x="773.99" y="-921.71" font-family="monospace" font-size="11.00">generate/2</text>
 </a>
 </g>
@@ -495,7 +495,7 @@
 <title>generate/3</title>
 <polygon fill="cornsilk" stroke="black" points="772.41,-821 679.59,-821 679.59,-785 772.41,-785 772.41,-821"/>
 <text xml:space="preserve" text-anchor="start" x="687.59" y="-805.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node15_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L124">
+<g id="a_node15_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L124">
 <text xml:space="preserve" text-anchor="start" x="692.99" y="-804.71" font-family="monospace" font-size="11.00">generate/3</text>
 </a>
 </g>
@@ -507,12 +507,12 @@
 <!-- generate/2&#45;&gt;generate/3 -->
 <g id="edge2" class="edge">
 <title>generate/2&#45;&gt;generate/3</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L99" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L99" xlink:title="calls">
 <path fill="none" stroke="black" d="M794.7,-901.53C781.42,-882.68 760.11,-852.43 744.74,-830.61"/>
 <polygon fill="black" stroke="black" points="747.64,-828.65 739.02,-822.49 741.92,-832.68 747.64,-828.65"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L99" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L99">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L99" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L99">
 <text xml:space="preserve" text-anchor="start" x="768.93" y="-859.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -522,7 +522,7 @@
 <title>write_bytes/2</title>
 <polygon fill="cornsilk" stroke="black" points="903.31,-821 790.69,-821 790.69,-785 903.31,-785 903.31,-821"/>
 <text xml:space="preserve" text-anchor="start" x="798.69" y="-805.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node54_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L505" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L505">
+<g id="a_node54_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L505" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L505">
 <text xml:space="preserve" text-anchor="start" x="804.09" y="-804.71" font-family="monospace" font-size="11.00">write_bytes/2</text>
 </a>
 </g>
@@ -534,12 +534,12 @@
 <!-- generate/2&#45;&gt;write_bytes/2 -->
 <g id="edge3" class="edge">
 <title>generate/2&#45;&gt;write_bytes/2</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L99" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L99" xlink:title="calls">
 <path fill="none" stroke="black" d="M813.08,-901.53C819.49,-883.11 829.68,-853.79 837.23,-832.1"/>
 <polygon fill="black" stroke="black" points="840.52,-833.28 840.5,-822.68 833.91,-830.98 840.52,-833.28"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L99" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L99">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L99" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L99">
 <text xml:space="preserve" text-anchor="start" x="828.2" y="-859.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -549,7 +549,7 @@
 <title>valid/1</title>
 <polygon fill="cornsilk" stroke="black" points="857.5,-704 784.5,-704 784.5,-668 857.5,-668 857.5,-704"/>
 <text xml:space="preserve" text-anchor="start" x="792.5" y="-688.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node16_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L134">
+<g id="a_node16_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L134">
 <text xml:space="preserve" text-anchor="start" x="797.9" y="-687.71" font-family="monospace" font-size="11.00">valid/1</text>
 </a>
 </g>
@@ -561,12 +561,12 @@
 <!-- generate/3&#45;&gt;valid/1 -->
 <g id="edge4" class="edge">
 <title>generate/3&#45;&gt;valid/1</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L127" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L127" xlink:title="calls">
 <path fill="none" stroke="black" d="M740.43,-784.53C756.14,-765.51 781.44,-734.88 799.5,-713.02"/>
 <polygon fill="black" stroke="black" points="802.11,-715.36 805.78,-705.42 796.72,-710.9 802.11,-715.36"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L127" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L127">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L127" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L127">
 <text xml:space="preserve" text-anchor="start" x="776.35" y="-742.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -576,7 +576,7 @@
 <title>encode_time/3</title>
 <polygon fill="cornsilk" stroke="black" points="540.31,-704 427.69,-704 427.69,-668 540.31,-668 540.31,-704"/>
 <text xml:space="preserve" text-anchor="start" x="435.69" y="-688.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node23_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L229">
+<g id="a_node23_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L229">
 <text xml:space="preserve" text-anchor="start" x="441.09" y="-687.71" font-family="monospace" font-size="11.00">encode_time/3</text>
 </a>
 </g>
@@ -588,12 +588,12 @@
 <!-- generate/3&#45;&gt;encode_time/3 -->
 <g id="edge5" class="edge">
 <title>generate/3&#45;&gt;encode_time/3</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L127" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L127" xlink:title="calls">
 <path fill="none" stroke="black" d="M689.25,-784.53C646.92,-764.42 577.31,-731.34 531.06,-709.36"/>
 <polygon fill="black" stroke="black" points="532.6,-706.22 522.07,-705.09 529.6,-712.54 532.6,-706.22"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L127" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L127">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L127" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L127">
 <text xml:space="preserve" text-anchor="start" x="612.26" y="-742.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -603,7 +603,7 @@
 <title>valid_parameters/0</title>
 <polygon fill="cornsilk" stroke="black" points="901.81,-587 756.19,-587 756.19,-551 901.81,-551 901.81,-587"/>
 <text xml:space="preserve" text-anchor="start" x="764.19" y="-571.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node34_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L320" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L320">
+<g id="a_node34_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L320" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L320">
 <text xml:space="preserve" text-anchor="start" x="769.59" y="-570.71" font-family="monospace" font-size="11.00">valid_parameters/0</text>
 </a>
 </g>
@@ -615,12 +615,12 @@
 <!-- valid/1&#45;&gt;valid_parameters/0 -->
 <g id="edge6" class="edge">
 <title>valid/1&#45;&gt;valid_parameters/0</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L134" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L134" xlink:title="calls">
 <path fill="none" stroke="black" d="M822.22,-667.53C823.49,-649.28 825.5,-620.33 827,-598.7"/>
 <polygon fill="black" stroke="black" points="830.49,-598.98 827.69,-588.76 823.51,-598.5 830.49,-598.98"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L134">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L134">
 <text xml:space="preserve" text-anchor="start" x="825.24" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -630,7 +630,7 @@
 <title>valid_calendar_date/3</title>
 <polygon fill="cornsilk" stroke="black" points="1261.71,-587 1096.29,-587 1096.29,-551 1261.71,-551 1261.71,-587"/>
 <text xml:space="preserve" text-anchor="start" x="1104.29" y="-571.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node36_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L331">
+<g id="a_node36_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L331">
 <text xml:space="preserve" text-anchor="start" x="1109.69" y="-570.71" font-family="monospace" font-size="11.00">valid_calendar_date/3</text>
 </a>
 </g>
@@ -642,12 +642,12 @@
 <!-- valid/1&#45;&gt;valid_calendar_date/3 -->
 <g id="edge7" class="edge">
 <title>valid/1&#45;&gt;valid_calendar_date/3</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L134" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L134" xlink:title="calls">
 <path fill="none" stroke="black" d="M857.77,-670.91C860.55,-669.91 863.32,-668.93 866,-668 948.94,-639.38 1045.43,-609.71 1109.11,-590.62"/>
 <polygon fill="black" stroke="black" points="1109.8,-594.07 1118.38,-587.85 1107.79,-587.36 1109.8,-594.07"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L134">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L134">
 <text xml:space="preserve" text-anchor="start" x="1002.81" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -657,7 +657,7 @@
 <title>valid_ordinal_date/2</title>
 <polygon fill="cornsilk" stroke="black" points="1078.41,-587 919.59,-587 919.59,-551 1078.41,-551 1078.41,-587"/>
 <text xml:space="preserve" text-anchor="start" x="927.59" y="-571.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node37_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L341" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L341">
+<g id="a_node37_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L341" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L341">
 <text xml:space="preserve" text-anchor="start" x="932.99" y="-570.71" font-family="monospace" font-size="11.00">valid_ordinal_date/2</text>
 </a>
 </g>
@@ -669,12 +669,12 @@
 <!-- valid/1&#45;&gt;valid_ordinal_date/2 -->
 <g id="edge10" class="edge">
 <title>valid/1&#45;&gt;valid_ordinal_date/2</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L134" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L134" xlink:title="calls">
 <path fill="none" stroke="black" d="M848.03,-667.53C878.57,-647.8 928.44,-615.59 962.43,-593.62"/>
 <polygon fill="black" stroke="black" points="964.23,-596.63 970.73,-588.26 960.43,-590.75 964.23,-596.63"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L134">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L134">
 <text xml:space="preserve" text-anchor="start" x="915.34" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -684,7 +684,7 @@
 <title>valid_clock_time/3</title>
 <polygon fill="cornsilk" stroke="black" points="737.81,-587 592.19,-587 592.19,-551 737.81,-551 737.81,-587"/>
 <text xml:space="preserve" text-anchor="start" x="600.19" y="-571.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node39_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L353" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L353">
+<g id="a_node39_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L353" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L353">
 <text xml:space="preserve" text-anchor="start" x="605.59" y="-570.71" font-family="monospace" font-size="11.00">valid_clock_time/3</text>
 </a>
 </g>
@@ -696,12 +696,12 @@
 <!-- valid/1&#45;&gt;valid_clock_time/3 -->
 <g id="edge8" class="edge">
 <title>valid/1&#45;&gt;valid_clock_time/3</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L134" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L134" xlink:title="calls">
 <path fill="none" stroke="black" d="M797.31,-667.53C770.77,-647.97 727.59,-616.14 697.82,-594.19"/>
 <polygon fill="black" stroke="black" points="700,-591.46 689.88,-588.34 695.85,-597.09 700,-591.46"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L134">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L134">
 <text xml:space="preserve" text-anchor="start" x="747.68" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -711,7 +711,7 @@
 <title>valid_fraction/1</title>
 <polygon fill="cornsilk" stroke="black" points="1432.21,-587 1299.79,-587 1299.79,-551 1432.21,-551 1432.21,-587"/>
 <text xml:space="preserve" text-anchor="start" x="1307.79" y="-571.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node40_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L364" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L364">
+<g id="a_node40_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L364" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L364">
 <text xml:space="preserve" text-anchor="start" x="1313.19" y="-570.71" font-family="monospace" font-size="11.00">valid_fraction/1</text>
 </a>
 </g>
@@ -723,12 +723,12 @@
 <!-- valid/1&#45;&gt;valid_fraction/1 -->
 <g id="edge9" class="edge">
 <title>valid/1&#45;&gt;valid_fraction/1</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L134" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L134" xlink:title="calls">
 <path fill="none" stroke="black" d="M857.67,-670.57C860.47,-669.65 863.27,-668.78 866,-668 906.09,-656.58 1158.25,-608.84 1288.42,-584.46"/>
 <polygon fill="black" stroke="black" points="1288.81,-587.95 1298,-582.67 1287.52,-581.07 1288.81,-587.95"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L134">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L134">
 <text xml:space="preserve" text-anchor="start" x="1079.59" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -738,7 +738,7 @@
 <title>format/1</title>
 <polygon fill="cornsilk" stroke="black" points="1215.81,-1055 1136.19,-1055 1136.19,-1019 1215.81,-1019 1215.81,-1055"/>
 <text xml:space="preserve" text-anchor="start" x="1144.19" y="-1039.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node17_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L149" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L149">
+<g id="a_node17_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L149" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L149">
 <text xml:space="preserve" text-anchor="start" x="1149.6" y="-1038.71" font-family="monospace" font-size="11.00">format/1</text>
 </a>
 </g>
@@ -752,7 +752,7 @@
 <title>epoch/1</title>
 <polygon fill="cornsilk" stroke="black" points="1628.5,-1055 1555.5,-1055 1555.5,-1019 1628.5,-1019 1628.5,-1055"/>
 <text xml:space="preserve" text-anchor="start" x="1563.5" y="-1039.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node18_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L151">
+<g id="a_node18_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L151">
 <text xml:space="preserve" text-anchor="start" x="1568.9" y="-1038.71" font-family="monospace" font-size="11.00">epoch/1</text>
 </a>
 </g>
@@ -766,7 +766,7 @@
 <title>unix_seconds/2</title>
 <polygon fill="cornsilk" stroke="black" points="1089.61,-821 970.39,-821 970.39,-785 1089.61,-785 1089.61,-821"/>
 <text xml:space="preserve" text-anchor="start" x="978.39" y="-805.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node19_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L153">
+<g id="a_node19_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L153">
 <text xml:space="preserve" text-anchor="start" x="983.79" y="-804.71" font-family="monospace" font-size="11.00">unix_seconds/2</text>
 </a>
 </g>
@@ -778,12 +778,12 @@
 <!-- unix_seconds/2&#45;&gt;valid/1 -->
 <g id="edge11" class="edge">
 <title>unix_seconds/2&#45;&gt;valid/1</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L153" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L153" xlink:title="calls">
 <path fill="none" stroke="black" d="M970.2,-791.53C937.76,-783.71 898.24,-770.55 868,-749 855.19,-739.88 844.32,-726.23 836.26,-714.06"/>
 <polygon fill="black" stroke="black" points="839.24,-712.23 830.98,-705.6 833.31,-715.94 839.24,-712.23"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L153">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L153">
 <text xml:space="preserve" text-anchor="start" x="868" y="-742.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -793,7 +793,7 @@
 <title>time_code_to_calendar/8</title>
 <polygon fill="cornsilk" stroke="black" points="1211.31,-704 1032.69,-704 1032.69,-668 1211.31,-668 1211.31,-704"/>
 <text xml:space="preserve" text-anchor="start" x="1040.69" y="-688.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node32_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L310" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L310">
+<g id="a_node32_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L310" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L310">
 <text xml:space="preserve" text-anchor="start" x="1046.09" y="-687.71" font-family="monospace" font-size="11.00">time_code_to_calendar/8</text>
 </a>
 </g>
@@ -805,12 +805,12 @@
 <!-- unix_seconds/2&#45;&gt;time_code_to_calendar/8 -->
 <g id="edge13" class="edge">
 <title>unix_seconds/2&#45;&gt;time_code_to_calendar/8</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L153" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L153" xlink:title="calls">
 <path fill="none" stroke="black" d="M1043.97,-784.53C1059.19,-765.51 1083.69,-734.88 1101.18,-713.02"/>
 <polygon fill="black" stroke="black" points="1103.74,-715.43 1107.25,-705.44 1098.27,-711.06 1103.74,-715.43"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L153">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L153">
 <text xml:space="preserve" text-anchor="start" x="1078.76" y="-742.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -818,12 +818,12 @@
 <!-- unix_seconds/2&#45;&gt;fraction_scale/1 -->
 <g id="edge12" class="edge">
 <title>unix_seconds/2&#45;&gt;fraction_scale/1</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L153" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L153" xlink:title="calls">
 <path fill="none" stroke="black" d="M1071,-784.56C1110.68,-766.85 1171.75,-737.33 1220,-704 1239.68,-690.41 1238.7,-678.87 1260,-668 1298.26,-648.47 1611,-620.4 1638,-587 1655.56,-565.27 1618.67,-496.42 1614,-470 1605.87,-424.03 1604.09,-369.66 1603.83,-337.32"/>
 <polygon fill="black" stroke="black" points="1607.33,-337.57 1603.81,-327.58 1600.33,-337.59 1607.33,-337.57"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L153">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L153">
 <text xml:space="preserve" text-anchor="start" x="1642.71" y="-566.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -833,7 +833,7 @@
 <title>days_from_civil/4</title>
 <polygon fill="cornsilk" stroke="black" points="1014.51,-704 875.49,-704 875.49,-668 1014.51,-668 1014.51,-704"/>
 <text xml:space="preserve" text-anchor="start" x="883.49" y="-688.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node52_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L468" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L468">
+<g id="a_node52_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L468" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L468">
 <text xml:space="preserve" text-anchor="start" x="888.89" y="-687.71" font-family="monospace" font-size="11.00">days_from_civil/4</text>
 </a>
 </g>
@@ -845,12 +845,12 @@
 <!-- unix_seconds/2&#45;&gt;days_from_civil/4 -->
 <g id="edge14" class="edge">
 <title>unix_seconds/2&#45;&gt;days_from_civil/4</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L153" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L153" xlink:title="calls">
 <path fill="none" stroke="black" d="M1017.09,-784.53C1003.09,-765.6 980.59,-735.16 964.45,-713.32"/>
 <polygon fill="black" stroke="black" points="967.41,-711.43 958.65,-705.47 961.78,-715.59 967.41,-711.43"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L153">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L153">
 <text xml:space="preserve" text-anchor="start" x="990.05" y="-742.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -860,7 +860,7 @@
 <title>from_unix_seconds/2</title>
 <polygon fill="cornsilk" stroke="black" points="1604.11,-821 1451.89,-821 1451.89,-785 1604.11,-785 1604.11,-821"/>
 <text xml:space="preserve" text-anchor="start" x="1459.89" y="-805.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node20_39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L164">
+<g id="a_node20_39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L164">
 <text xml:space="preserve" text-anchor="start" x="1465.29" y="-804.71" font-family="monospace" font-size="11.00">from_unix_seconds/2</text>
 </a>
 </g>
@@ -872,12 +872,12 @@
 <!-- from_unix_seconds/2&#45;&gt;valid/1 -->
 <g id="edge21" class="edge">
 <title>from_unix_seconds/2&#45;&gt;valid/1</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="calls">
 <path fill="none" stroke="black" d="M1451.52,-798.2C1317.5,-790.99 1045.77,-773.82 954,-749 921.14,-740.11 886.36,-723.62 860.61,-709.87"/>
 <polygon fill="black" stroke="black" points="862.29,-706.81 851.84,-705.1 858.95,-712.96 862.29,-706.81"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L164">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L164">
 <text xml:space="preserve" text-anchor="start" x="954" y="-742.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -887,7 +887,7 @@
 <title>decompose_day_units/6</title>
 <polygon fill="cornsilk" stroke="black" points="1930.71,-704 1765.29,-704 1765.29,-668 1930.71,-668 1930.71,-704"/>
 <text xml:space="preserve" text-anchor="start" x="1773.29" y="-688.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node31_40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L300" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L300">
+<g id="a_node31_40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L300" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L300">
 <text xml:space="preserve" text-anchor="start" x="1778.69" y="-687.71" font-family="monospace" font-size="11.00">decompose_day_units/6</text>
 </a>
 </g>
@@ -899,12 +899,12 @@
 <!-- from_unix_seconds/2&#45;&gt;decompose_day_units/6 -->
 <g id="edge19" class="edge">
 <title>from_unix_seconds/2&#45;&gt;decompose_day_units/6</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="calls">
 <path fill="none" stroke="black" d="M1576.6,-784.53C1633.5,-764.08 1727.73,-730.22 1788.83,-708.26"/>
 <polygon fill="black" stroke="black" points="1789.82,-711.63 1798.04,-704.95 1787.45,-705.04 1789.82,-711.63"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L164">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L164">
 <text xml:space="preserve" text-anchor="start" x="1697.59" y="-742.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -914,7 +914,7 @@
 <title>calendar_to_time_code/8</title>
 <polygon fill="cornsilk" stroke="black" points="1447.31,-704 1268.69,-704 1268.69,-668 1447.31,-668 1447.31,-704"/>
 <text xml:space="preserve" text-anchor="start" x="1276.69" y="-688.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node33_41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L314" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L314">
+<g id="a_node33_41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L314" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L314">
 <text xml:space="preserve" text-anchor="start" x="1282.09" y="-687.71" font-family="monospace" font-size="11.00">calendar_to_time_code/8</text>
 </a>
 </g>
@@ -926,12 +926,12 @@
 <!-- from_unix_seconds/2&#45;&gt;calendar_to_time_code/8 -->
 <g id="edge20" class="edge">
 <title>from_unix_seconds/2&#45;&gt;calendar_to_time_code/8</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="calls">
 <path fill="none" stroke="black" d="M1502.18,-784.53C1473.01,-764.8 1425.39,-732.59 1392.92,-710.62"/>
 <polygon fill="black" stroke="black" points="1395.28,-707.99 1385.04,-705.29 1391.36,-713.79 1395.28,-707.99"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L164">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L164">
 <text xml:space="preserve" text-anchor="start" x="1448.1" y="-742.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -941,7 +941,7 @@
 <title>valid_year/1</title>
 <polygon fill="cornsilk" stroke="black" points="1188.01,-470 1081.99,-470 1081.99,-434 1188.01,-434 1188.01,-470"/>
 <text xml:space="preserve" text-anchor="start" x="1089.99" y="-454.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node38_42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L348" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L348">
+<g id="a_node38_42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L348" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L348">
 <text xml:space="preserve" text-anchor="start" x="1095.39" y="-453.71" font-family="monospace" font-size="11.00">valid_year/1</text>
 </a>
 </g>
@@ -953,12 +953,12 @@
 <!-- from_unix_seconds/2&#45;&gt;valid_year/1 -->
 <g id="edge18" class="edge">
 <title>from_unix_seconds/2&#45;&gt;valid_year/1</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="calls">
 <path fill="none" stroke="black" d="M1451.67,-797.05C1388.68,-788.47 1302.93,-765.41 1260,-704 1220.94,-648.12 1302.07,-611.68 1271,-551 1253.48,-516.79 1217.84,-491.79 1187.44,-475.61"/>
 <polygon fill="black" stroke="black" points="1189.21,-472.58 1178.71,-471.15 1186.03,-478.82 1189.21,-472.58"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L164">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L164">
 <text xml:space="preserve" text-anchor="start" x="1265.17" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -968,7 +968,7 @@
 <title>rounded_units/3</title>
 <polygon fill="cornsilk" stroke="black" points="1590.91,-704 1465.09,-704 1465.09,-668 1590.91,-668 1590.91,-704"/>
 <text xml:space="preserve" text-anchor="start" x="1473.09" y="-688.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node42_43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L374" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L374">
+<g id="a_node42_43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L374" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L374">
 <text xml:space="preserve" text-anchor="start" x="1478.49" y="-687.71" font-family="monospace" font-size="11.00">rounded_units/3</text>
 </a>
 </g>
@@ -980,12 +980,12 @@
 <!-- from_unix_seconds/2&#45;&gt;rounded_units/3 -->
 <g id="edge16" class="edge">
 <title>from_unix_seconds/2&#45;&gt;rounded_units/3</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="calls">
 <path fill="none" stroke="black" d="M1528,-784.53C1528,-766.28 1528,-737.33 1528,-715.7"/>
 <polygon fill="black" stroke="black" points="1531.5,-715.77 1528,-705.77 1524.5,-715.77 1531.5,-715.77"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L164">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L164">
 <text xml:space="preserve" text-anchor="start" x="1528" y="-742.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -993,12 +993,12 @@
 <!-- from_unix_seconds/2&#45;&gt;fraction_scale/1 -->
 <g id="edge15" class="edge">
 <title>from_unix_seconds/2&#45;&gt;fraction_scale/1</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="calls">
 <path fill="none" stroke="black" d="M1604.53,-794.95C1711.96,-783.28 1898.98,-755.92 1940,-704 1949.92,-691.45 1942.8,-683.75 1940,-668 1930.29,-613.46 1924.61,-599.03 1897,-551 1873.72,-510.49 1856.34,-508.58 1830,-470 1819.68,-454.88 1822.69,-447.19 1810,-434 1765.82,-388.1 1701.3,-352.57 1656.28,-331.32"/>
 <polygon fill="black" stroke="black" points="1657.77,-328.15 1647.22,-327.12 1654.82,-334.5 1657.77,-328.15"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L164">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L164">
 <text xml:space="preserve" text-anchor="start" x="1916.33" y="-566.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1008,7 +1008,7 @@
 <title>civil_from_days/4</title>
 <polygon fill="cornsilk" stroke="black" points="1747.51,-704 1608.49,-704 1608.49,-668 1747.51,-668 1747.51,-704"/>
 <text xml:space="preserve" text-anchor="start" x="1616.49" y="-688.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node53_44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L483" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L483">
+<g id="a_node53_44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L483" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L483">
 <text xml:space="preserve" text-anchor="start" x="1621.89" y="-687.71" font-family="monospace" font-size="11.00">civil_from_days/4</text>
 </a>
 </g>
@@ -1020,12 +1020,12 @@
 <!-- from_unix_seconds/2&#45;&gt;civil_from_days/4 -->
 <g id="edge17" class="edge">
 <title>from_unix_seconds/2&#45;&gt;civil_from_days/4</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="calls">
 <path fill="none" stroke="black" d="M1550.78,-784.53C1576.37,-764.92 1618.06,-732.96 1646.69,-711"/>
 <polygon fill="black" stroke="black" points="1648.49,-714.04 1654.29,-705.17 1644.23,-708.48 1648.49,-714.04"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L164">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L164">
 <text xml:space="preserve" text-anchor="start" x="1607.5" y="-742.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1033,12 +1033,12 @@
 <!-- parse_bytes/2&#45;&gt;expected_length/1 -->
 <g id="edge23" class="edge">
 <title>parse_bytes/2&#45;&gt;expected_length/1</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L202" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L202" xlink:title="calls">
 <path fill="none" stroke="black" d="M243.18,-901.53C241.27,-883.28 238.25,-854.33 235.99,-832.7"/>
 <polygon fill="black" stroke="black" points="239.48,-832.34 234.96,-822.76 232.51,-833.07 239.48,-832.34"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L202" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L202">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L202" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L202">
 <text xml:space="preserve" text-anchor="start" x="239.36" y="-859.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1048,7 +1048,7 @@
 <title>decode_time/2</title>
 <polygon fill="cornsilk" stroke="black" points="433.31,-821 320.69,-821 320.69,-785 433.31,-785 433.31,-821"/>
 <text xml:space="preserve" text-anchor="start" x="328.69" y="-805.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node22_45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L213">
+<g id="a_node22_45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L213">
 <text xml:space="preserve" text-anchor="start" x="334.09" y="-804.71" font-family="monospace" font-size="11.00">decode_time/2</text>
 </a>
 </g>
@@ -1060,12 +1060,12 @@
 <!-- parse_bytes/2&#45;&gt;decode_time/2 -->
 <g id="edge24" class="edge">
 <title>parse_bytes/2&#45;&gt;decode_time/2</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L202" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L202" xlink:title="calls">
 <path fill="none" stroke="black" d="M265.05,-901.53C287.37,-882.09 323.62,-850.51 348.79,-828.57"/>
 <polygon fill="black" stroke="black" points="350.81,-831.46 356.05,-822.25 346.22,-826.18 350.81,-831.46"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L202" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L202">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L202" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L202">
 <text xml:space="preserve" text-anchor="start" x="314.96" y="-859.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1087,12 +1087,12 @@
 <!-- parse_bytes/2&#45;&gt;type::valid/2 -->
 <g id="edge62" class="edge">
 <title>parse_bytes/2&#45;&gt;type::valid/2</title>
-<g id="a_edge62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L202" xlink:title="calls">
+<g id="a_edge62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L202" xlink:title="calls">
 <path fill="none" stroke="black" d="M221.31,-901.53C194.77,-881.97 151.59,-850.14 121.82,-828.19"/>
 <polygon fill="black" stroke="black" points="124,-825.46 113.88,-822.34 119.85,-831.09 124,-825.46"/>
 </a>
 </g>
-<g id="a_edge62&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L202" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L202">
+<g id="a_edge62&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L202" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L202">
 <text xml:space="preserve" text-anchor="start" x="171.68" y="-859.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1100,12 +1100,12 @@
 <!-- decode_time/2&#45;&gt;decode_fraction/2 -->
 <g id="edge27" class="edge">
 <title>decode_time/2&#45;&gt;decode_fraction/2</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L213" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L213" xlink:title="calls">
 <path fill="none" stroke="black" d="M333.11,-784.53C282.04,-764.21 197.68,-730.64 142.47,-708.67"/>
 <polygon fill="black" stroke="black" points="143.82,-705.45 133.24,-705 141.24,-711.95 143.82,-705.45"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L213">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L213">
 <text xml:space="preserve" text-anchor="start" x="241.17" y="-742.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1113,12 +1113,12 @@
 <!-- decode_time/2&#45;&gt;valid/1 -->
 <g id="edge28" class="edge">
 <title>decode_time/2&#45;&gt;valid/1</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L213" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L213" xlink:title="calls">
 <path fill="none" stroke="black" d="M433.57,-793.07C487.78,-783.96 571.67,-768.43 643,-749 688.07,-736.73 738.21,-718.86 773.77,-705.46"/>
 <polygon fill="black" stroke="black" points="774.79,-708.82 782.89,-701.99 772.3,-702.27 774.79,-708.82"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L213">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L213">
 <text xml:space="preserve" text-anchor="start" x="672.61" y="-742.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1128,7 +1128,7 @@
 <title>decode_clock_fields/5</title>
 <polygon fill="cornsilk" stroke="black" points="340.71,-704 175.29,-704 175.29,-668 340.71,-668 340.71,-704"/>
 <text xml:space="preserve" text-anchor="start" x="183.29" y="-688.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node24_47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L243" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L243">
+<g id="a_node24_47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L243" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L243">
 <text xml:space="preserve" text-anchor="start" x="188.69" y="-687.71" font-family="monospace" font-size="11.00">decode_clock_fields/5</text>
 </a>
 </g>
@@ -1140,12 +1140,12 @@
 <!-- decode_time/2&#45;&gt;decode_clock_fields/5 -->
 <g id="edge26" class="edge">
 <title>decode_time/2&#45;&gt;decode_clock_fields/5</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L213" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L213" xlink:title="calls">
 <path fill="none" stroke="black" d="M358.93,-784.53C338.98,-765.26 306.7,-734.06 284.03,-712.15"/>
 <polygon fill="black" stroke="black" points="286.57,-709.74 276.94,-705.31 281.7,-714.77 286.57,-709.74"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L213">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L213">
 <text xml:space="preserve" text-anchor="start" x="321.07" y="-742.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1153,12 +1153,12 @@
 <!-- decode_time/2&#45;&gt;decode_bcd_octets/4 -->
 <g id="edge25" class="edge">
 <title>decode_time/2&#45;&gt;decode_bcd_octets/4</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L213" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L213" xlink:title="calls">
 <path fill="none" stroke="black" d="M378.46,-784.53C379.83,-756.57 378.35,-701.52 350,-668 343.31,-660.09 227.21,-617.57 153.68,-591.21"/>
 <polygon fill="black" stroke="black" points="155.18,-588.03 144.58,-587.95 152.82,-594.62 155.18,-588.03"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L213">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L213">
 <text xml:space="preserve" text-anchor="start" x="369.23" y="-683.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1166,12 +1166,12 @@
 <!-- encode_time/3&#45;&gt;encode_fraction/3 -->
 <g id="edge31" class="edge">
 <title>encode_time/3&#45;&gt;encode_fraction/3</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L229" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L229" xlink:title="calls">
 <path fill="none" stroke="black" d="M459.24,-667.53C431.4,-647.89 386.01,-615.87 354.89,-593.91"/>
 <polygon fill="black" stroke="black" points="357.15,-591.22 346.96,-588.31 353.11,-596.94 357.15,-591.22"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L229">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L229">
 <text xml:space="preserve" text-anchor="start" x="407.39" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1181,7 +1181,7 @@
 <title>encode_clock_fields/5</title>
 <polygon fill="cornsilk" stroke="black" points="573.71,-587 408.29,-587 408.29,-551 573.71,-551 573.71,-587"/>
 <text xml:space="preserve" text-anchor="start" x="416.29" y="-571.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node25_48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L248" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L248">
+<g id="a_node25_48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L248" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L248">
 <text xml:space="preserve" text-anchor="start" x="421.69" y="-570.71" font-family="monospace" font-size="11.00">encode_clock_fields/5</text>
 </a>
 </g>
@@ -1193,12 +1193,12 @@
 <!-- encode_time/3&#45;&gt;encode_clock_fields/5 -->
 <g id="edge30" class="edge">
 <title>encode_time/3&#45;&gt;encode_clock_fields/5</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L229" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L229" xlink:title="calls">
 <path fill="none" stroke="black" d="M485.06,-667.53C486.17,-649.28 487.94,-620.33 489.25,-598.7"/>
 <polygon fill="black" stroke="black" points="492.74,-598.96 489.86,-588.76 485.76,-598.53 492.74,-598.96"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L229">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L229">
 <text xml:space="preserve" text-anchor="start" x="487.71" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1206,12 +1206,12 @@
 <!-- encode_time/3&#45;&gt;encode_bcd_octets/4 -->
 <g id="edge29" class="edge">
 <title>encode_time/3&#45;&gt;encode_bcd_octets/4</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L229" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L229" xlink:title="calls">
 <path fill="none" stroke="black" d="M427.43,-672.4C356.15,-655.25 239.9,-622.58 215,-587 181.33,-538.9 254.16,-498.17 312.56,-474.65"/>
 <polygon fill="black" stroke="black" points="313.82,-477.92 321.86,-471.01 311.27,-471.4 313.82,-477.92"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L229">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L229">
 <text xml:space="preserve" text-anchor="start" x="215" y="-566.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1219,12 +1219,12 @@
 <!-- decode_clock_fields/5&#45;&gt;decode_bcd_octets/4 -->
 <g id="edge32" class="edge">
 <title>decode_clock_fields/5&#45;&gt;decode_bcd_octets/4</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L243" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L243" xlink:title="calls">
 <path fill="none" stroke="black" d="M233.09,-667.53C205.08,-647.89 159.41,-615.87 128.1,-593.91"/>
 <polygon fill="black" stroke="black" points="130.31,-591.19 120.11,-588.31 126.29,-596.92 130.31,-591.19"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L243" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L243">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L243" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L243">
 <text xml:space="preserve" text-anchor="start" x="180.92" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1232,12 +1232,12 @@
 <!-- encode_clock_fields/5&#45;&gt;encode_bcd_octets/4 -->
 <g id="edge33" class="edge">
 <title>encode_clock_fields/5&#45;&gt;encode_bcd_octets/4</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L248" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L248" xlink:title="calls">
 <path fill="none" stroke="black" d="M473.53,-550.53C454.26,-531.26 423.06,-500.06 401.15,-478.15"/>
 <polygon fill="black" stroke="black" points="403.87,-475.92 394.32,-471.32 398.92,-480.87 403.87,-475.92"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L248" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L248">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L248" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L248">
 <text xml:space="preserve" text-anchor="start" x="436.95" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1247,7 +1247,7 @@
 <title>decode_bcd_octets/5</title>
 <polygon fill="cornsilk" stroke="black" points="170.11,-470 17.89,-470 17.89,-434 170.11,-434 170.11,-470"/>
 <text xml:space="preserve" text-anchor="start" x="25.89" y="-454.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node27_49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L264" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L264">
+<g id="a_node27_49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L264" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L264">
 <text xml:space="preserve" text-anchor="start" x="31.29" y="-453.71" font-family="monospace" font-size="11.00">decode_bcd_octets/5</text>
 </a>
 </g>
@@ -1259,12 +1259,12 @@
 <!-- decode_bcd_octets/4&#45;&gt;decode_bcd_octets/5 -->
 <g id="edge36" class="edge">
 <title>decode_bcd_octets/4&#45;&gt;decode_bcd_octets/5</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L261" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L261" xlink:title="calls">
 <path fill="none" stroke="black" d="M94,-550.53C94,-532.28 94,-503.33 94,-481.7"/>
 <polygon fill="black" stroke="black" points="97.5,-481.77 94,-471.77 90.5,-481.77 97.5,-481.77"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L261" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L261">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L261" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L261">
 <text xml:space="preserve" text-anchor="start" x="94" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1274,7 +1274,7 @@
 <title>decode_bcd_octet/2</title>
 <polygon fill="cornsilk" stroke="black" points="166.81,-326 21.19,-326 21.19,-290 166.81,-290 166.81,-326"/>
 <text xml:space="preserve" text-anchor="start" x="29.19" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node29_50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L286" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L286">
+<g id="a_node29_50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L286" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L286">
 <text xml:space="preserve" text-anchor="start" x="34.59" y="-309.71" font-family="monospace" font-size="11.00">decode_bcd_octet/2</text>
 </a>
 </g>
@@ -1286,12 +1286,12 @@
 <!-- decode_bcd_octets/5&#45;&gt;decode_bcd_octet/2 -->
 <g id="edge37" class="edge">
 <title>decode_bcd_octets/5&#45;&gt;decode_bcd_octet/2</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L266" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L266" xlink:title="calls">
 <path fill="none" stroke="black" d="M94,-433.59C94,-409.61 94,-366.14 94,-337.42"/>
 <polygon fill="black" stroke="black" points="97.5,-337.62 94,-327.62 90.5,-337.62 97.5,-337.62"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L266" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L266">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L266" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L266">
 <text xml:space="preserve" text-anchor="start" x="94" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1299,12 +1299,12 @@
 <!-- encode_bcd_octets/4&#45;&gt;power100/2 -->
 <g id="edge39" class="edge">
 <title>encode_bcd_octets/4&#45;&gt;power100/2</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L274" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L274" xlink:title="calls">
 <path fill="none" stroke="black" d="M367.54,-433.59C355.73,-409.29 334.2,-364.97 320.25,-336.27"/>
 <polygon fill="black" stroke="black" points="323.49,-334.94 315.98,-327.47 317.2,-338 323.49,-334.94"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L274" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L274">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L274" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L274">
 <text xml:space="preserve" text-anchor="start" x="349.71" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1314,7 +1314,7 @@
 <title>encode_bcd_octet/2</title>
 <polygon fill="cornsilk" stroke="black" points="516.81,-326 371.19,-326 371.19,-290 516.81,-290 516.81,-326"/>
 <text xml:space="preserve" text-anchor="start" x="379.19" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node30_51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L293" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L293">
+<g id="a_node30_51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L293" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L293">
 <text xml:space="preserve" text-anchor="start" x="384.59" y="-309.71" font-family="monospace" font-size="11.00">encode_bcd_octet/2</text>
 </a>
 </g>
@@ -1326,12 +1326,12 @@
 <!-- encode_bcd_octets/4&#45;&gt;encode_bcd_octet/2 -->
 <g id="edge40" class="edge">
 <title>encode_bcd_octets/4&#45;&gt;encode_bcd_octet/2</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L274" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L274" xlink:title="calls">
 <path fill="none" stroke="black" d="M384.34,-433.59C395.97,-409.29 417.2,-364.97 430.94,-336.27"/>
 <polygon fill="black" stroke="black" points="433.99,-338.01 435.15,-327.48 427.68,-334.98 433.99,-338.01"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L274" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L274">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L274" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L274">
 <text xml:space="preserve" text-anchor="start" x="418.09" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1341,7 +1341,7 @@
 <title>max_bcd_value/2</title>
 <polygon fill="cornsilk" stroke="black" points="936.91,-326 811.09,-326 811.09,-290 936.91,-290 936.91,-326"/>
 <text xml:space="preserve" text-anchor="start" x="819.09" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node46_52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L407" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L407">
+<g id="a_node46_52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L407" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L407">
 <text xml:space="preserve" text-anchor="start" x="824.49" y="-309.71" font-family="monospace" font-size="11.00">max_bcd_value/2</text>
 </a>
 </g>
@@ -1353,12 +1353,12 @@
 <!-- encode_bcd_octets/4&#45;&gt;max_bcd_value/2 -->
 <g id="edge38" class="edge">
 <title>encode_bcd_octets/4&#45;&gt;max_bcd_value/2</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L274" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L274" xlink:title="calls">
 <path fill="none" stroke="black" d="M437.31,-433.52C529.56,-407.21 703.68,-357.57 801.89,-329.56"/>
 <polygon fill="black" stroke="black" points="802.78,-332.95 811.44,-326.84 800.86,-326.21 802.78,-332.95"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L274" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L274">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L274" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L274">
 <text xml:space="preserve" text-anchor="start" x="684.25" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1366,12 +1366,12 @@
 <!-- time_code_to_calendar/8&#45;&gt;calendar_from_ordinal/4 -->
 <g id="edge41" class="edge">
 <title>time_code_to_calendar/8&#45;&gt;calendar_from_ordinal/4</title>
-<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L311" xlink:title="calls">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L311" xlink:title="calls">
 <path fill="none" stroke="black" d="M1185.49,-667.53C1260.74,-646.83 1385.96,-612.38 1465.67,-590.45"/>
 <polygon fill="black" stroke="black" points="1466.43,-593.87 1475.14,-587.84 1464.57,-587.12 1466.43,-593.87"/>
 </a>
 </g>
-<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L311" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L311">
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L311" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L311">
 <text xml:space="preserve" text-anchor="start" x="1343.53" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1379,12 +1379,12 @@
 <!-- calendar_to_time_code/8&#45;&gt;ordinal_from_calendar/4 -->
 <g id="edge42" class="edge">
 <title>calendar_to_time_code/8&#45;&gt;ordinal_from_calendar/4</title>
-<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L317" xlink:title="calls">
+<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L317" xlink:title="calls">
 <path fill="none" stroke="black" d="M1424.98,-667.53C1504.54,-646.79 1637.03,-612.24 1721.09,-590.32"/>
 <polygon fill="black" stroke="black" points="1721.86,-593.73 1730.65,-587.82 1720.09,-586.96 1721.86,-593.73"/>
 </a>
 </g>
-<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L317" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L317">
+<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L317" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L317">
 <text xml:space="preserve" text-anchor="start" x="1591.72" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1394,7 +1394,7 @@
 <title>valid_calendar_variant/1</title>
 <polygon fill="cornsilk" stroke="black" points="921.61,-470 736.39,-470 736.39,-434 921.61,-434 921.61,-470"/>
 <text xml:space="preserve" text-anchor="start" x="744.39" y="-454.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node35_53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L325" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L325">
+<g id="a_node35_53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L325" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L325">
 <text xml:space="preserve" text-anchor="start" x="749.79" y="-453.71" font-family="monospace" font-size="11.00">valid_calendar_variant/1</text>
 </a>
 </g>
@@ -1406,12 +1406,12 @@
 <!-- valid_parameters/0&#45;&gt;valid_calendar_variant/1 -->
 <g id="edge43" class="edge">
 <title>valid_parameters/0&#45;&gt;valid_calendar_variant/1</title>
-<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L320" xlink:title="calls">
+<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L320" xlink:title="calls">
 <path fill="none" stroke="black" d="M829,-550.53C829,-532.28 829,-503.33 829,-481.7"/>
 <polygon fill="black" stroke="black" points="832.5,-481.77 829,-471.77 825.5,-481.77 832.5,-481.77"/>
 </a>
 </g>
-<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L320" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L320">
+<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L320" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L320">
 <text xml:space="preserve" text-anchor="start" x="829" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1419,12 +1419,12 @@
 <!-- valid_calendar_date/3&#45;&gt;valid_year/1 -->
 <g id="edge44" class="edge">
 <title>valid_calendar_date/3&#45;&gt;valid_year/1</title>
-<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L331" xlink:title="calls">
+<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L331" xlink:title="calls">
 <path fill="none" stroke="black" d="M1172.32,-550.53C1165.23,-532.02 1153.94,-502.52 1145.64,-480.8"/>
 <polygon fill="black" stroke="black" points="1148.98,-479.76 1142.14,-471.67 1142.45,-482.26 1148.98,-479.76"/>
 </a>
 </g>
-<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L331">
+<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L331">
 <text xml:space="preserve" text-anchor="start" x="1158.32" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1434,7 +1434,7 @@
 <title>days_in_month/3</title>
 <polygon fill="cornsilk" stroke="black" points="1326.91,-326 1201.09,-326 1201.09,-290 1326.91,-290 1326.91,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1209.09" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node50_54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L444" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L444">
+<g id="a_node50_54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L444" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L444">
 <text xml:space="preserve" text-anchor="start" x="1214.49" y="-309.71" font-family="monospace" font-size="11.00">days_in_month/3</text>
 </a>
 </g>
@@ -1446,12 +1446,12 @@
 <!-- valid_calendar_date/3&#45;&gt;days_in_month/3 -->
 <g id="edge45" class="edge">
 <title>valid_calendar_date/3&#45;&gt;days_in_month/3</title>
-<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L331" xlink:title="calls">
+<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L331" xlink:title="calls">
 <path fill="none" stroke="black" d="M1184.71,-550.6C1199.14,-506.65 1237.15,-390.8 1254.78,-337.09"/>
 <polygon fill="black" stroke="black" points="1258.05,-338.35 1257.84,-327.76 1251.4,-336.17 1258.05,-338.35"/>
 </a>
 </g>
-<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L331">
+<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L331">
 <text xml:space="preserve" text-anchor="start" x="1222.92" y="-449.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1459,12 +1459,12 @@
 <!-- valid_ordinal_date/2&#45;&gt;valid_year/1 -->
 <g id="edge46" class="edge">
 <title>valid_ordinal_date/2&#45;&gt;valid_year/1</title>
-<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L341" xlink:title="calls">
+<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L341" xlink:title="calls">
 <path fill="none" stroke="black" d="M1019.66,-550.53C1042.65,-531.09 1080,-499.51 1105.94,-477.57"/>
 <polygon fill="black" stroke="black" points="1108.06,-480.36 1113.44,-471.23 1103.54,-475.02 1108.06,-480.36"/>
 </a>
 </g>
-<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L341" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L341">
+<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L341" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L341">
 <text xml:space="preserve" text-anchor="start" x="1071.08" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1474,7 +1474,7 @@
 <title>max_day_of_year/2</title>
 <polygon fill="cornsilk" stroke="black" points="1095.51,-398 956.49,-398 956.49,-362 1095.51,-362 1095.51,-398"/>
 <text xml:space="preserve" text-anchor="start" x="964.49" y="-382.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node49_55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L439" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L439">
+<g id="a_node49_55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L439" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L439">
 <text xml:space="preserve" text-anchor="start" x="969.89" y="-381.71" font-family="monospace" font-size="11.00">max_day_of_year/2</text>
 </a>
 </g>
@@ -1486,12 +1486,12 @@
 <!-- valid_ordinal_date/2&#45;&gt;max_day_of_year/2 -->
 <g id="edge47" class="edge">
 <title>valid_ordinal_date/2&#45;&gt;max_day_of_year/2</title>
-<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L341" xlink:title="calls">
+<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L341" xlink:title="calls">
 <path fill="none" stroke="black" d="M1001.49,-550.74C1006.14,-518.54 1016.18,-449 1021.86,-409.66"/>
 <polygon fill="black" stroke="black" points="1025.29,-410.38 1023.26,-399.99 1018.37,-409.38 1025.29,-410.38"/>
 </a>
 </g>
-<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L341" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L341">
+<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L341" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L341">
 <text xml:space="preserve" text-anchor="start" x="1007.41" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1501,7 +1501,7 @@
 <title>max_fraction/1</title>
 <polygon fill="cornsilk" stroke="black" points="1584.61,-470 1465.39,-470 1465.39,-434 1584.61,-434 1584.61,-470"/>
 <text xml:space="preserve" text-anchor="start" x="1473.39" y="-454.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node41_56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L370" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L370">
+<g id="a_node41_56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L370" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L370">
 <text xml:space="preserve" text-anchor="start" x="1478.79" y="-453.71" font-family="monospace" font-size="11.00">max_fraction/1</text>
 </a>
 </g>
@@ -1513,12 +1513,12 @@
 <!-- valid_fraction/1&#45;&gt;max_fraction/1 -->
 <g id="edge48" class="edge">
 <title>valid_fraction/1&#45;&gt;max_fraction/1</title>
-<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L364" xlink:title="calls">
+<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L364" xlink:title="calls">
 <path fill="none" stroke="black" d="M1381.2,-550.64C1393.32,-537.43 1411.16,-519.3 1429,-506 1444.16,-494.69 1462.02,-484.17 1478.19,-475.54"/>
 <polygon fill="black" stroke="black" points="1479.42,-478.85 1486.67,-471.12 1476.18,-472.64 1479.42,-478.85"/>
 </a>
 </g>
-<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L364" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L364">
+<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L364" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L364">
 <text xml:space="preserve" text-anchor="start" x="1429" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1526,12 +1526,12 @@
 <!-- max_fraction/1&#45;&gt;fraction_scale/1 -->
 <g id="edge49" class="edge">
 <title>max_fraction/1&#45;&gt;fraction_scale/1</title>
-<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L370" xlink:title="calls">
+<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L370" xlink:title="calls">
 <path fill="none" stroke="black" d="M1533.72,-433.78C1542.95,-415.74 1558.06,-386.64 1572,-362 1576.88,-353.35 1582.41,-344.04 1587.49,-335.67"/>
 <polygon fill="black" stroke="black" points="1590.36,-337.69 1592.58,-327.33 1584.38,-334.04 1590.36,-337.69"/>
 </a>
 </g>
-<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L370" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L370">
+<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L370" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L370">
 <text xml:space="preserve" text-anchor="start" x="1572" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1539,12 +1539,12 @@
 <!-- fraction_scale/1&#45;&gt;power10/2 -->
 <g id="edge50" class="edge">
 <title>fraction_scale/1&#45;&gt;power10/2</title>
-<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L381" xlink:title="calls">
+<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L381" xlink:title="calls">
 <path fill="none" stroke="black" d="M1574.23,-289.53C1540.32,-269.63 1484.76,-237.04 1447.3,-215.06"/>
 <polygon fill="black" stroke="black" points="1449.43,-212.25 1439.03,-210.21 1445.89,-218.29 1449.43,-212.25"/>
 </a>
 </g>
-<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L381" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L381">
+<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L381" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L381">
 <text xml:space="preserve" text-anchor="start" x="1511.88" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1552,12 +1552,12 @@
 <!-- max_bcd_value/2&#45;&gt;power10/2 -->
 <g id="edge53" class="edge">
 <title>max_bcd_value/2&#45;&gt;power10/2</title>
-<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L409" xlink:title="calls">
+<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L409" xlink:title="calls">
 <path fill="none" stroke="black" d="M937.35,-293.36C1043.23,-270.56 1254.29,-225.1 1353.76,-203.68"/>
 <polygon fill="black" stroke="black" points="1354.23,-207.16 1363.27,-201.63 1352.75,-200.32 1354.23,-207.16"/>
 </a>
 </g>
-<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L409" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L409">
+<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L409" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L409">
 <text xml:space="preserve" text-anchor="start" x="1157.01" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1565,12 +1565,12 @@
 <!-- ordinal_from_calendar/6&#45;&gt;days_in_month/3 -->
 <g id="edge55" class="edge">
 <title>ordinal_from_calendar/6&#45;&gt;days_in_month/3</title>
-<g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L420" xlink:title="calls">
+<g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L420" xlink:title="calls">
 <path fill="none" stroke="black" d="M1645.76,-433.57C1609.12,-423.67 1562.86,-410.74 1522,-398 1452.95,-376.48 1374.52,-348.98 1322.44,-330.29"/>
 <polygon fill="black" stroke="black" points="1323.76,-327.04 1313.16,-326.95 1321.39,-333.63 1323.76,-327.04"/>
 </a>
 </g>
-<g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L420" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L420">
+<g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L420" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L420">
 <text xml:space="preserve" text-anchor="start" x="1522" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1578,12 +1578,12 @@
 <!-- calendar_from_ordinal/5&#45;&gt;days_in_month/3 -->
 <g id="edge57" class="edge">
 <title>calendar_from_ordinal/5&#45;&gt;days_in_month/3</title>
-<g id="a_edge57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L429" xlink:title="calls">
+<g id="a_edge57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L429" xlink:title="calls">
 <path fill="none" stroke="black" d="M1346.47,-433.59C1330.25,-409.08 1300.54,-364.19 1281.55,-335.52"/>
 <polygon fill="black" stroke="black" points="1284.6,-333.78 1276.16,-327.37 1278.76,-337.64 1284.6,-333.78"/>
 </a>
 </g>
-<g id="a_edge57&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L429" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L429">
+<g id="a_edge57&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L429" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L429">
 <text xml:space="preserve" text-anchor="start" x="1322.18" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1593,7 +1593,7 @@
 <title>leap_year/1</title>
 <polygon fill="cornsilk" stroke="black" points="1190.71,-209 1091.29,-209 1091.29,-173 1190.71,-173 1190.71,-209"/>
 <text xml:space="preserve" text-anchor="start" x="1099.29" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node51_57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L461" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L461">
+<g id="a_node51_57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L461" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L461">
 <text xml:space="preserve" text-anchor="start" x="1104.69" y="-192.71" font-family="monospace" font-size="11.00">leap_year/1</text>
 </a>
 </g>
@@ -1605,12 +1605,12 @@
 <!-- max_day_of_year/2&#45;&gt;leap_year/1 -->
 <g id="edge58" class="edge">
 <title>max_day_of_year/2&#45;&gt;leap_year/1</title>
-<g id="a_edge58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L439" xlink:title="calls">
+<g id="a_edge58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L439" xlink:title="calls">
 <path fill="none" stroke="black" d="M1036.61,-361.74C1056.67,-329.12 1100.29,-258.2 1124.31,-219.14"/>
 <polygon fill="black" stroke="black" points="1127.2,-221.13 1129.45,-210.78 1121.23,-217.46 1127.2,-221.13"/>
 </a>
 </g>
-<g id="a_edge58&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L439" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L439">
+<g id="a_edge58&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L439" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L439">
 <text xml:space="preserve" text-anchor="start" x="1078.58" y="-305.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1618,12 +1618,12 @@
 <!-- days_in_month/3&#45;&gt;leap_year/1 -->
 <g id="edge59" class="edge">
 <title>days_in_month/3&#45;&gt;leap_year/1</title>
-<g id="a_edge59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L445" xlink:title="calls">
+<g id="a_edge59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L445" xlink:title="calls">
 <path fill="none" stroke="black" d="M1245.32,-289.53C1224.61,-270.17 1191.04,-238.79 1167.59,-216.86"/>
 <polygon fill="black" stroke="black" points="1170.25,-214.56 1160.56,-210.29 1165.47,-219.67 1170.25,-214.56"/>
 </a>
 </g>
-<g id="a_edge59&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L445" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/ccsds_time_codes/ccsds_ccs.lgt#L445">
+<g id="a_edge59&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L445" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/ccsds_time_codes/ccsds_ccs.lgt#L445">
 <text xml:space="preserve" text-anchor="start" x="1206.19" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>

@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-257 362,-257 362,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object timeout</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 20:36</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;14, 01:03</text>
 <g id="clust1" class="cluster">
 <title>cluster_timeout_object</title>
 <g id="a_clust1"><a xlink:title="timeout">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 338,-46 338,-46 344,-46 350,-52 350,-58 350,-58 350,-233 350,-233 350,-239 344,-245 338,-245 338,-245 20,-245 20,-245 14,-245 8,-239 8,-233 8,-233 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/timeout/timeout.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/timeout/timeout.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/timeout/timeout.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/timeout/timeout.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-229.46" font-family="monospace" font-size="10.00" fill="dimgray">timeout</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>call_with_timeout/2</title>
 <polygon fill="springgreen" stroke="black" points="170.11,-209 17.89,-209 17.89,-173 170.11,-173 170.11,-209"/>
 <text xml:space="preserve" text-anchor="start" x="25.89" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/timeout/timeout.lgt#L34" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/timeout/timeout.lgt#L34">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/timeout/timeout.lgt#L34" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/timeout/timeout.lgt#L34">
 <text xml:space="preserve" text-anchor="start" x="31.29" y="-192.71" font-family="monospace" font-size="11.00">call_with_timeout/2</text>
 </a>
 </g>
@@ -52,12 +52,12 @@
 <!-- call_with_timeout/2&#45;&gt;time:call_with_time_limit/2 -->
 <g id="edge1" class="edge">
 <title>call_with_timeout/2&#45;&gt;time:call_with_time_limit/2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/timeout/timeout.lgt#L142" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/timeout/timeout.lgt#L142" xlink:title="calls">
 <path fill="none" stroke="black" d="M105.09,-172.53C117,-153.77 136.09,-123.7 149.92,-101.91"/>
 <polygon fill="black" stroke="black" points="152.83,-103.85 155.24,-93.53 146.92,-100.1 152.83,-103.85"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/timeout/timeout.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/timeout/timeout.lgt#L142">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/timeout/timeout.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/timeout/timeout.lgt#L142">
 <text xml:space="preserve" text-anchor="start" x="132.69" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -67,7 +67,7 @@
 <title>call_with_timeout/3</title>
 <polygon fill="springgreen" stroke="black" points="340.11,-209 187.89,-209 187.89,-173 340.11,-173 340.11,-209"/>
 <text xml:space="preserve" text-anchor="start" x="195.89" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/timeout/timeout.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/timeout/timeout.lgt#L45">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/timeout/timeout.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/timeout/timeout.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="201.29" y="-192.71" font-family="monospace" font-size="11.00">call_with_timeout/3</text>
 </a>
 </g>
@@ -79,12 +79,12 @@
 <!-- call_with_timeout/3&#45;&gt;time:call_with_time_limit/2 -->
 <g id="edge2" class="edge">
 <title>call_with_timeout/3&#45;&gt;time:call_with_time_limit/2</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/timeout/timeout.lgt#L149" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/timeout/timeout.lgt#L149" xlink:title="calls">
 <path fill="none" stroke="black" d="M249.27,-172.53C233.22,-153.51 207.39,-122.88 188.95,-101.02"/>
 <polygon fill="black" stroke="black" points="191.65,-98.8 182.53,-93.41 186.3,-103.31 191.65,-98.8"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/timeout/timeout.lgt#L149" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/timeout/timeout.lgt#L149">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/timeout/timeout.lgt#L149" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/timeout/timeout.lgt#L149">
 <text xml:space="preserve" text-anchor="start" x="218.41" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>

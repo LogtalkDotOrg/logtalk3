@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 3960,-140 3960,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol geohash_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 20:35</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;14, 01:02</text>
 <g id="clust1" class="cluster">
 <title>cluster_geohash_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="geohash_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 3936,-46 3936,-46 3942,-46 3948,-52 3948,-58 3948,-58 3948,-116 3948,-116 3948,-122 3942,-128 3936,-128 3936,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">geohash_protocol</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>valid_geohash/1</title>
 <polygon fill="springgreen" stroke="black" points="143.91,-92 18.09,-92 18.09,-56 143.91,-56 143.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="26.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L37">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L37">
 <text xml:space="preserve" text-anchor="start" x="31.49" y="-75.71" font-family="monospace" font-size="11.00">valid_geohash/1</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>encode/3</title>
 <polygon fill="springgreen" stroke="black" points="241.81,-92 162.19,-92 162.19,-56 241.81,-56 241.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="170.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L44">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L44">
 <text xml:space="preserve" text-anchor="start" x="175.6" y="-75.71" font-family="monospace" font-size="11.00">encode/3</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>decode/2</title>
 <polygon fill="springgreen" stroke="black" points="339.81,-92 260.19,-92 260.19,-56 339.81,-56 339.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="268.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L51">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L51">
 <text xml:space="preserve" text-anchor="start" x="273.6" y="-75.71" font-family="monospace" font-size="11.00">decode/2</text>
 </a>
 </g>
@@ -71,7 +71,7 @@
 <title>bounding_box/2</title>
 <polygon fill="springgreen" stroke="black" points="476.61,-92 357.39,-92 357.39,-56 476.61,-56 476.61,-92"/>
 <text xml:space="preserve" text-anchor="start" x="365.39" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L58">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="370.79" y="-75.71" font-family="monospace" font-size="11.00">bounding_box/2</text>
 </a>
 </g>
@@ -85,7 +85,7 @@
 <title>precision/3</title>
 <polygon fill="springgreen" stroke="black" points="593.71,-92 494.29,-92 494.29,-56 593.71,-56 593.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="502.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L65">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L65">
 <text xml:space="preserve" text-anchor="start" x="507.69" y="-75.71" font-family="monospace" font-size="11.00">precision/3</text>
 </a>
 </g>
@@ -99,7 +99,7 @@
 <title>cell_dimensions/3</title>
 <polygon fill="springgreen" stroke="black" points="750.51,-92 611.49,-92 611.49,-56 750.51,-56 750.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="619.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L72" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L72">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L72" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L72">
 <text xml:space="preserve" text-anchor="start" x="624.89" y="-75.71" font-family="monospace" font-size="11.00">cell_dimensions/3</text>
 </a>
 </g>
@@ -113,7 +113,7 @@
 <title>adjacent/3</title>
 <polygon fill="springgreen" stroke="black" points="861.41,-92 768.59,-92 768.59,-56 861.41,-56 861.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="776.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L79">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L79">
 <text xml:space="preserve" text-anchor="start" x="781.99" y="-75.71" font-family="monospace" font-size="11.00">adjacent/3</text>
 </a>
 </g>
@@ -127,7 +127,7 @@
 <title>neighbors/2</title>
 <polygon fill="springgreen" stroke="black" points="978.71,-92 879.29,-92 879.29,-56 978.71,-56 978.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="887.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L86" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L86">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L86" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L86">
 <text xml:space="preserve" text-anchor="start" x="892.69" y="-75.71" font-family="monospace" font-size="11.00">neighbors/2</text>
 </a>
 </g>
@@ -141,7 +141,7 @@
 <title>covering/3</title>
 <polygon fill="springgreen" stroke="black" points="1089.41,-92 996.59,-92 996.59,-56 1089.41,-56 1089.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1004.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L93">
+<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L93">
 <text xml:space="preserve" text-anchor="start" x="1009.99" y="-75.71" font-family="monospace" font-size="11.00">covering/3</text>
 </a>
 </g>
@@ -155,7 +155,7 @@
 <title>covering/4</title>
 <polygon fill="springgreen" stroke="black" points="1200.41,-92 1107.59,-92 1107.59,-56 1200.41,-56 1200.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1115.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L100">
+<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="1120.99" y="-75.71" font-family="monospace" font-size="11.00">covering/4</text>
 </a>
 </g>
@@ -169,7 +169,7 @@
 <title>compress/2</title>
 <polygon fill="springgreen" stroke="black" points="1311.41,-92 1218.59,-92 1218.59,-56 1311.41,-56 1311.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1226.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L113">
+<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L113">
 <text xml:space="preserve" text-anchor="start" x="1231.99" y="-75.71" font-family="monospace" font-size="11.00">compress/2</text>
 </a>
 </g>
@@ -183,7 +183,7 @@
 <title>parent/2</title>
 <polygon fill="springgreen" stroke="black" points="1408.81,-92 1329.19,-92 1329.19,-56 1408.81,-56 1408.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1337.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L120">
+<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L120">
 <text xml:space="preserve" text-anchor="start" x="1342.6" y="-75.71" font-family="monospace" font-size="11.00">parent/2</text>
 </a>
 </g>
@@ -197,7 +197,7 @@
 <title>children/2</title>
 <polygon fill="springgreen" stroke="black" points="1519.41,-92 1426.59,-92 1426.59,-56 1519.41,-56 1519.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1434.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L127" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L127">
+<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L127" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L127">
 <text xml:space="preserve" text-anchor="start" x="1439.99" y="-75.71" font-family="monospace" font-size="11.00">children/2</text>
 </a>
 </g>
@@ -211,7 +211,7 @@
 <title>common_prefix/3</title>
 <polygon fill="springgreen" stroke="black" points="1662.91,-92 1537.09,-92 1537.09,-56 1662.91,-56 1662.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1545.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node14_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L134">
+<g id="a_node14_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L134">
 <text xml:space="preserve" text-anchor="start" x="1550.49" y="-75.71" font-family="monospace" font-size="11.00">common_prefix/3</text>
 </a>
 </g>
@@ -225,7 +225,7 @@
 <title>encode_int/3</title>
 <polygon fill="springgreen" stroke="black" points="1787.01,-92 1680.99,-92 1680.99,-56 1787.01,-56 1787.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1688.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node15_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L141" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L141">
+<g id="a_node15_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L141" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L141">
 <text xml:space="preserve" text-anchor="start" x="1694.39" y="-75.71" font-family="monospace" font-size="11.00">encode_int/3</text>
 </a>
 </g>
@@ -239,7 +239,7 @@
 <title>decode_int/3</title>
 <polygon fill="springgreen" stroke="black" points="1911.01,-92 1804.99,-92 1804.99,-56 1911.01,-56 1911.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1812.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node16_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L148">
+<g id="a_node16_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L148">
 <text xml:space="preserve" text-anchor="start" x="1818.39" y="-75.71" font-family="monospace" font-size="11.00">decode_int/3</text>
 </a>
 </g>
@@ -253,7 +253,7 @@
 <title>bounding_box_int/3</title>
 <polygon fill="springgreen" stroke="black" points="2074.81,-92 1929.19,-92 1929.19,-56 2074.81,-56 2074.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1937.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node17_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L155">
+<g id="a_node17_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="1942.59" y="-75.71" font-family="monospace" font-size="11.00">bounding_box_int/3</text>
 </a>
 </g>
@@ -267,7 +267,7 @@
 <title>adjacent_int/4</title>
 <polygon fill="springgreen" stroke="black" points="2211.61,-92 2092.39,-92 2092.39,-56 2211.61,-56 2211.61,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2100.39" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node18_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L162" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L162">
+<g id="a_node18_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L162" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L162">
 <text xml:space="preserve" text-anchor="start" x="2105.79" y="-75.71" font-family="monospace" font-size="11.00">adjacent_int/4</text>
 </a>
 </g>
@@ -281,7 +281,7 @@
 <title>neighbors_int/3</title>
 <polygon fill="springgreen" stroke="black" points="2355.91,-92 2230.09,-92 2230.09,-56 2355.91,-56 2355.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2238.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node19_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L169" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L169">
+<g id="a_node19_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L169" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L169">
 <text xml:space="preserve" text-anchor="start" x="2243.49" y="-75.71" font-family="monospace" font-size="11.00">neighbors_int/3</text>
 </a>
 </g>
@@ -295,7 +295,7 @@
 <title>geohash_to_int/2</title>
 <polygon fill="springgreen" stroke="black" points="2506.21,-92 2373.79,-92 2373.79,-56 2506.21,-56 2506.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2381.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node20_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L176">
+<g id="a_node20_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L176">
 <text xml:space="preserve" text-anchor="start" x="2387.19" y="-75.71" font-family="monospace" font-size="11.00">geohash_to_int/2</text>
 </a>
 </g>
@@ -309,7 +309,7 @@
 <title>int_to_geohash/3</title>
 <polygon fill="springgreen" stroke="black" points="2656.21,-92 2523.79,-92 2523.79,-56 2656.21,-56 2656.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2531.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node21_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L183" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L183">
+<g id="a_node21_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L183" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L183">
 <text xml:space="preserve" text-anchor="start" x="2537.19" y="-75.71" font-family="monospace" font-size="11.00">int_to_geohash/3</text>
 </a>
 </g>
@@ -323,7 +323,7 @@
 <title>encode_bits/3</title>
 <polygon fill="springgreen" stroke="black" points="2787.31,-92 2674.69,-92 2674.69,-56 2787.31,-56 2787.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2682.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node22_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L190" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L190">
+<g id="a_node22_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L190" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L190">
 <text xml:space="preserve" text-anchor="start" x="2688.09" y="-75.71" font-family="monospace" font-size="11.00">encode_bits/3</text>
 </a>
 </g>
@@ -337,7 +337,7 @@
 <title>decode_bits/3</title>
 <polygon fill="springgreen" stroke="black" points="2918.31,-92 2805.69,-92 2805.69,-56 2918.31,-56 2918.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2813.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node23_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L197" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L197">
+<g id="a_node23_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L197" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L197">
 <text xml:space="preserve" text-anchor="start" x="2819.09" y="-75.71" font-family="monospace" font-size="11.00">decode_bits/3</text>
 </a>
 </g>
@@ -351,7 +351,7 @@
 <title>bounding_box_bits/3</title>
 <polygon fill="springgreen" stroke="black" points="3088.11,-92 2935.89,-92 2935.89,-56 3088.11,-56 3088.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2943.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node24_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L204" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L204">
+<g id="a_node24_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L204" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L204">
 <text xml:space="preserve" text-anchor="start" x="2949.29" y="-75.71" font-family="monospace" font-size="11.00">bounding_box_bits/3</text>
 </a>
 </g>
@@ -365,7 +365,7 @@
 <title>adjacent_bits/4</title>
 <polygon fill="springgreen" stroke="black" points="3231.91,-92 3106.09,-92 3106.09,-56 3231.91,-56 3231.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3114.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node25_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L211">
+<g id="a_node25_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L211">
 <text xml:space="preserve" text-anchor="start" x="3119.49" y="-75.71" font-family="monospace" font-size="11.00">adjacent_bits/4</text>
 </a>
 </g>
@@ -379,7 +379,7 @@
 <title>neighbors_bits/3</title>
 <polygon fill="springgreen" stroke="black" points="3382.21,-92 3249.79,-92 3249.79,-56 3382.21,-56 3382.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3257.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node26_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L218" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L218">
+<g id="a_node26_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L218" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L218">
 <text xml:space="preserve" text-anchor="start" x="3263.19" y="-75.71" font-family="monospace" font-size="11.00">neighbors_bits/3</text>
 </a>
 </g>
@@ -393,7 +393,7 @@
 <title>expand/2</title>
 <polygon fill="springgreen" stroke="black" points="3479.81,-92 3400.19,-92 3400.19,-56 3479.81,-56 3479.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3408.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node27_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L225" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L225">
+<g id="a_node27_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L225" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L225">
 <text xml:space="preserve" text-anchor="start" x="3413.6" y="-75.71" font-family="monospace" font-size="11.00">expand/2</text>
 </a>
 </g>
@@ -407,7 +407,7 @@
 <title>expand_int/3</title>
 <polygon fill="springgreen" stroke="black" points="3604.01,-92 3497.99,-92 3497.99,-56 3604.01,-56 3604.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3505.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node28_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L232" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L232">
+<g id="a_node28_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L232" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L232">
 <text xml:space="preserve" text-anchor="start" x="3511.39" y="-75.71" font-family="monospace" font-size="11.00">expand_int/3</text>
 </a>
 </g>
@@ -421,7 +421,7 @@
 <title>polygon_covering/4</title>
 <polygon fill="springgreen" stroke="black" points="3767.81,-92 3622.19,-92 3622.19,-56 3767.81,-56 3767.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3630.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node29_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L239" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L239">
+<g id="a_node29_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L239" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L239">
 <text xml:space="preserve" text-anchor="start" x="3635.59" y="-75.71" font-family="monospace" font-size="11.00">polygon_covering/4</text>
 </a>
 </g>
@@ -435,7 +435,7 @@
 <title>polyline_covering/4</title>
 <polygon fill="springgreen" stroke="black" points="3938.11,-92 3785.89,-92 3785.89,-56 3938.11,-56 3938.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3793.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node30_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L252" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/geohash/geohash_protocol.lgt#L252">
+<g id="a_node30_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L252" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/geohash/geohash_protocol.lgt#L252">
 <text xml:space="preserve" text-anchor="start" x="3799.29" y="-75.71" font-family="monospace" font-size="11.00">polyline_covering/4</text>
 </a>
 </g>

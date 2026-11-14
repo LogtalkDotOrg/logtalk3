@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-374 772,-374 772,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object bisection_root_finder/1</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 20:36</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;14, 01:03</text>
 <g id="clust1" class="cluster">
 <title>cluster_bisection_root_finder_1_object</title>
 <g id="a_clust1"><a xlink:title="bisection_root_finder(Function)">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 748,-46 748,-46 754,-46 760,-52 760,-58 760,-58 760,-350 760,-350 760,-356 754,-362 748,-362 748,-362 20,-362 20,-362 14,-362 8,-356 8,-350 8,-350 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-346.46" font-family="monospace" font-size="10.00" fill="dimgray">bisection_root_finder(Function)</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>find_root/4</title>
 <polygon fill="cornsilk" stroke="black" points="454.71,-326 355.29,-326 355.29,-290 454.71,-290 454.71,-326"/>
 <text xml:space="preserve" text-anchor="start" x="363.29" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L36">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="368.69" y="-309.71" font-family="monospace" font-size="11.00">find_root/4</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>bisect/14</title>
 <polygon fill="cornsilk" stroke="black" points="104.11,-209 17.89,-209 17.89,-173 104.11,-173 104.11,-209"/>
 <text xml:space="preserve" text-anchor="start" x="25.89" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L73">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L73">
 <text xml:space="preserve" text-anchor="start" x="31.3" y="-192.71" font-family="monospace" font-size="11.00">bisect/14</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- find_root/4&#45;&gt;bisect/14 -->
 <g id="edge1" class="edge">
 <title>find_root/4&#45;&gt;bisect/14</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L36" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L36" xlink:title="calls">
 <path fill="none" stroke="black" d="M354.98,-290.28C291.08,-268.92 180.91,-232.08 115.1,-210.09"/>
 <polygon fill="black" stroke="black" points="116.57,-206.89 105.98,-207.04 114.35,-213.53 116.57,-206.89"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L36">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="243.31" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -79,12 +79,12 @@
 <!-- find_root/4&#45;&gt;^^check_options/1 -->
 <g id="edge3" class="edge">
 <title>find_root/4&#45;&gt;^^check_options/1</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L36" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L36" xlink:title="calls">
 <path fill="none" stroke="black" d="M372.65,-289.53C335.64,-269.55 274.9,-236.76 234.2,-214.78"/>
 <polygon fill="black" stroke="black" points="236.1,-211.83 225.64,-210.16 232.77,-217.99 236.1,-211.83"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L36">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="304.89" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -103,12 +103,12 @@
 <!-- find_root/4&#45;&gt;^^merge_options/2 -->
 <g id="edge4" class="edge">
 <title>find_root/4&#45;&gt;^^merge_options/2</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L36" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L36" xlink:title="calls">
 <path fill="none" stroke="black" d="M396.49,-289.53C387.44,-270.94 372.98,-241.24 362.39,-219.5"/>
 <polygon fill="black" stroke="black" points="365.59,-218.07 358.06,-210.61 359.3,-221.14 365.59,-218.07"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L36">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="378.68" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -127,12 +127,12 @@
 <!-- find_root/4&#45;&gt;^^option/2 -->
 <g id="edge5" class="edge">
 <title>find_root/4&#45;&gt;^^option/2</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L36" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L36" xlink:title="calls">
 <path fill="none" stroke="black" d="M416.85,-289.53C429.63,-270.68 450.15,-240.43 464.95,-218.61"/>
 <polygon fill="black" stroke="black" points="467.73,-220.75 470.45,-210.51 461.94,-216.82 467.73,-220.75"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L36">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="446.34" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -151,12 +151,12 @@
 <!-- find_root/4&#45;&gt;^^check_bracket/3 -->
 <g id="edge6" class="edge">
 <title>find_root/4&#45;&gt;^^check_bracket/3</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L36" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L36" xlink:title="calls">
 <path fill="none" stroke="black" d="M437.2,-289.53C473.96,-269.59 534.23,-236.9 574.75,-214.92"/>
 <polygon fill="black" stroke="black" points="576.4,-218.01 583.52,-210.16 573.06,-211.86 576.4,-218.01"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L36">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="517.36" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -175,12 +175,12 @@
 <!-- find_root/4&#45;&gt;^^evaluate_function/2 -->
 <g id="edge7" class="edge">
 <title>find_root/4&#45;&gt;^^evaluate_function/2</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L36" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L36" xlink:title="calls">
 <path fill="none" stroke="black" d="M455.02,-306.67C522.58,-303.19 640.87,-285.74 696,-209 740.68,-146.81 635.05,-109.93 549.99,-91.07"/>
 <polygon fill="black" stroke="black" points="550.93,-87.7 540.42,-89.01 549.46,-94.54 550.93,-87.7"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L36">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="706.6" y="-188.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -190,7 +190,7 @@
 <title>best_endpoint/6</title>
 <polygon fill="cornsilk" stroke="black" points="143.91,-92 18.09,-92 18.09,-56 143.91,-56 143.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="26.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L102">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L102">
 <text xml:space="preserve" text-anchor="start" x="31.49" y="-75.71" font-family="monospace" font-size="11.00">best_endpoint/6</text>
 </a>
 </g>
@@ -202,12 +202,12 @@
 <!-- bisect/14&#45;&gt;best_endpoint/6 -->
 <g id="edge2" class="edge">
 <title>bisect/14&#45;&gt;best_endpoint/6</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L73" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L73" xlink:title="calls">
 <path fill="none" stroke="black" d="M64.04,-172.53C67.23,-154.19 72.29,-125.06 76.06,-103.4"/>
 <polygon fill="black" stroke="black" points="79.47,-104.2 77.74,-93.74 72.58,-103 79.47,-104.2"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L73">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L73">
 <text xml:space="preserve" text-anchor="start" x="71.6" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -215,12 +215,12 @@
 <!-- bisect/14&#45;&gt;^^evaluate_function/2 -->
 <g id="edge8" class="edge">
 <title>bisect/14&#45;&gt;^^evaluate_function/2</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L77" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L77" xlink:title="calls">
 <path fill="none" stroke="black" d="M104.37,-175.69C107.29,-174.76 110.18,-173.86 113,-173 205.04,-144.82 311.76,-114.73 381.41,-95.44"/>
 <polygon fill="black" stroke="black" points="382.09,-98.88 390.8,-92.84 380.23,-92.13 382.09,-98.88"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L77" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/numerical_analysis/bisection_root_finder.lgt#L77">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L77" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/numerical_analysis/bisection_root_finder.lgt#L77">
 <text xml:space="preserve" text-anchor="start" x="263.19" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>

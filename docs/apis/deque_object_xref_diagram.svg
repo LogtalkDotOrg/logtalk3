@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-374 1371,-374 1371,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object deque</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 20:35</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;14, 01:02</text>
 <g id="clust1" class="cluster">
 <title>cluster_deque_object</title>
 <g id="a_clust1"><a xlink:title="deque">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1347,-46 1347,-46 1353,-46 1359,-52 1359,-58 1359,-58 1359,-350 1359,-350 1359,-356 1353,-362 1347,-362 1347,-362 20,-362 20,-362 14,-362 8,-356 8,-350 8,-350 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-346.46" font-family="monospace" font-size="10.00" fill="dimgray">deque</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>new/1</title>
 <polygon fill="cornsilk" stroke="black" points="77.9,-326 18.1,-326 18.1,-290 77.9,-290 77.9,-326"/>
 <text xml:space="preserve" text-anchor="start" x="26.1" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L41" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L41">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L41" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L41">
 <text xml:space="preserve" text-anchor="start" x="31.5" y="-309.71" font-family="monospace" font-size="11.00">new/1</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>empty/1</title>
 <polygon fill="cornsilk" stroke="black" points="168.5,-326 95.5,-326 95.5,-290 168.5,-290 168.5,-326"/>
 <text xml:space="preserve" text-anchor="start" x="103.5" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L43" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L43">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L43" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L43">
 <text xml:space="preserve" text-anchor="start" x="108.9" y="-309.71" font-family="monospace" font-size="11.00">empty/1</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>push_front/3</title>
 <polygon fill="cornsilk" stroke="black" points="293.01,-326 186.99,-326 186.99,-290 293.01,-290 293.01,-326"/>
 <text xml:space="preserve" text-anchor="start" x="194.99" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L45">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="200.39" y="-309.71" font-family="monospace" font-size="11.00">push_front/3</text>
 </a>
 </g>
@@ -71,7 +71,7 @@
 <title>push_back/3</title>
 <polygon fill="cornsilk" stroke="black" points="410.71,-326 311.29,-326 311.29,-290 410.71,-290 410.71,-326"/>
 <text xml:space="preserve" text-anchor="start" x="319.29" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L48">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L48">
 <text xml:space="preserve" text-anchor="start" x="324.69" y="-309.71" font-family="monospace" font-size="11.00">push_back/3</text>
 </a>
 </g>
@@ -85,7 +85,7 @@
 <title>pop_front/3</title>
 <polygon fill="cornsilk" stroke="black" points="527.71,-326 428.29,-326 428.29,-290 527.71,-290 527.71,-326"/>
 <text xml:space="preserve" text-anchor="start" x="436.29" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L51">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L51">
 <text xml:space="preserve" text-anchor="start" x="441.69" y="-309.71" font-family="monospace" font-size="11.00">pop_front/3</text>
 </a>
 </g>
@@ -99,7 +99,7 @@
 <title>last_prefix/4</title>
 <polygon fill="cornsilk" stroke="black" points="195.31,-209 82.69,-209 82.69,-173 195.31,-173 195.31,-209"/>
 <text xml:space="preserve" text-anchor="start" x="90.69" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node20_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L157">
+<g id="a_node20_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L157">
 <text xml:space="preserve" text-anchor="start" x="96.09" y="-192.71" font-family="monospace" font-size="11.00">last_prefix/4</text>
 </a>
 </g>
@@ -111,12 +111,12 @@
 <!-- pop_front/3&#45;&gt;last_prefix/4 -->
 <g id="edge1" class="edge">
 <title>pop_front/3&#45;&gt;last_prefix/4</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L51" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L51" xlink:title="calls">
 <path fill="none" stroke="black" d="M427.82,-291.79C425.18,-291.15 422.57,-290.55 420,-290 362.09,-277.64 200.53,-293.02 156,-254 146.55,-245.73 142.12,-232.75 140.13,-220.8"/>
 <polygon fill="black" stroke="black" points="143.61,-220.46 139.02,-210.92 136.66,-221.24 143.61,-220.46"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L51">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L51">
 <text xml:space="preserve" text-anchor="start" x="156" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -126,7 +126,7 @@
 <title>pop_back/3</title>
 <polygon fill="cornsilk" stroke="black" points="638.41,-326 545.59,-326 545.59,-290 638.41,-290 638.41,-326"/>
 <text xml:space="preserve" text-anchor="start" x="553.59" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L61">
+<g id="a_node6_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L61">
 <text xml:space="preserve" text-anchor="start" x="558.99" y="-309.71" font-family="monospace" font-size="11.00">pop_back/3</text>
 </a>
 </g>
@@ -138,12 +138,12 @@
 <!-- pop_back/3&#45;&gt;last_prefix/4 -->
 <g id="edge2" class="edge">
 <title>pop_back/3&#45;&gt;last_prefix/4</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L61" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L61" xlink:title="calls">
 <path fill="none" stroke="black" d="M545.35,-291.92C542.54,-291.22 539.74,-290.57 537,-290 393.84,-260.28 343.87,-312.79 210,-254 191.31,-245.8 173.99,-230.88 161.13,-217.73"/>
 <polygon fill="black" stroke="black" points="163.78,-215.44 154.39,-210.54 158.67,-220.23 163.78,-215.44"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L61">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L61">
 <text xml:space="preserve" text-anchor="start" x="210" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -153,7 +153,7 @@
 <title>peek_front/2</title>
 <polygon fill="cornsilk" stroke="black" points="762.01,-326 655.99,-326 655.99,-290 762.01,-290 762.01,-326"/>
 <text xml:space="preserve" text-anchor="start" x="663.99" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L71">
+<g id="a_node7_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L71">
 <text xml:space="preserve" text-anchor="start" x="669.39" y="-309.71" font-family="monospace" font-size="11.00">peek_front/2</text>
 </a>
 </g>
@@ -167,7 +167,7 @@
 <title>last/3</title>
 <polygon fill="cornsilk" stroke="black" points="280.2,-209 213.8,-209 213.8,-173 280.2,-173 280.2,-209"/>
 <text xml:space="preserve" text-anchor="start" x="221.8" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node18_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L145" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L145">
+<g id="a_node18_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L145" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L145">
 <text xml:space="preserve" text-anchor="start" x="227.2" y="-192.71" font-family="monospace" font-size="11.00">last/3</text>
 </a>
 </g>
@@ -179,12 +179,12 @@
 <!-- peek_front/2&#45;&gt;last/3 -->
 <g id="edge3" class="edge">
 <title>peek_front/2&#45;&gt;last/3</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L71" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L71" xlink:title="calls">
 <path fill="none" stroke="black" d="M655.67,-291.9C652.75,-291.22 649.84,-290.58 647,-290 532.73,-266.53 499.2,-285.93 387,-254 352.99,-244.32 316.53,-227.96 289.34,-214.48"/>
 <polygon fill="black" stroke="black" points="291.26,-211.53 280.76,-210.15 288.11,-217.78 291.26,-211.53"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L71">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L71">
 <text xml:space="preserve" text-anchor="start" x="387" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -194,7 +194,7 @@
 <title>peek_back/2</title>
 <polygon fill="cornsilk" stroke="black" points="879.71,-326 780.29,-326 780.29,-290 879.71,-290 879.71,-326"/>
 <text xml:space="preserve" text-anchor="start" x="788.29" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L79">
+<g id="a_node8_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L79">
 <text xml:space="preserve" text-anchor="start" x="793.69" y="-309.71" font-family="monospace" font-size="11.00">peek_back/2</text>
 </a>
 </g>
@@ -206,12 +206,12 @@
 <!-- peek_back/2&#45;&gt;last/3 -->
 <g id="edge4" class="edge">
 <title>peek_back/2&#45;&gt;last/3</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L79" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L79" xlink:title="calls">
 <path fill="none" stroke="black" d="M779.93,-291.96C776.92,-291.25 773.93,-290.59 771,-290 634.57,-262.64 596.74,-279.77 460,-254 386.24,-240.1 365.41,-234.32 291.17,-209.56"/>
 <polygon fill="black" stroke="black" points="292.36,-206.27 281.76,-206.42 290.14,-212.9 292.36,-206.27"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L79">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L79">
 <text xml:space="preserve" text-anchor="start" x="460" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -221,7 +221,7 @@
 <title>length/2</title>
 <polygon fill="cornsilk" stroke="black" points="977.81,-326 898.19,-326 898.19,-290 977.81,-290 977.81,-326"/>
 <text xml:space="preserve" text-anchor="start" x="906.19" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L87">
+<g id="a_node9_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L87">
 <text xml:space="preserve" text-anchor="start" x="911.6" y="-309.71" font-family="monospace" font-size="11.00">length/2</text>
 </a>
 </g>
@@ -235,7 +235,7 @@
 <title>as_list/2</title>
 <polygon fill="cornsilk" stroke="black" points="1082.11,-326 995.89,-326 995.89,-290 1082.11,-290 1082.11,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1003.89" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L89">
+<g id="a_node10_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L89">
 <text xml:space="preserve" text-anchor="start" x="1009.3" y="-309.71" font-family="monospace" font-size="11.00">as_list/2</text>
 </a>
 </g>
@@ -249,7 +249,7 @@
 <title>difference_list_to_list/3</title>
 <polygon fill="cornsilk" stroke="black" points="489.91,-209 298.09,-209 298.09,-173 489.91,-173 489.91,-209"/>
 <text xml:space="preserve" text-anchor="start" x="306.09" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node14_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L116">
+<g id="a_node14_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L116">
 <text xml:space="preserve" text-anchor="start" x="311.49" y="-192.71" font-family="monospace" font-size="11.00">difference_list_to_list/3</text>
 </a>
 </g>
@@ -261,12 +261,12 @@
 <!-- as_list/2&#45;&gt;difference_list_to_list/3 -->
 <g id="edge5" class="edge">
 <title>as_list/2&#45;&gt;difference_list_to_list/3</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L89" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L89" xlink:title="calls">
 <path fill="none" stroke="black" d="M995.45,-292.23C992.6,-291.43 989.77,-290.68 987,-290 975.25,-287.13 669.21,-236.97 501.51,-209.55"/>
 <polygon fill="black" stroke="black" points="502.1,-206.11 491.67,-207.95 500.97,-213.01 502.1,-206.11"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L89">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L89">
 <text xml:space="preserve" text-anchor="start" x="771.26" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -288,12 +288,12 @@
 <!-- as_list/2&#45;&gt;list::reverse/2 -->
 <g id="edge11" class="edge">
 <title>as_list/2&#45;&gt;list::reverse/2</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L89" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L89" xlink:title="calls">
 <path fill="none" stroke="black" d="M995.67,-292.53C992.75,-291.65 989.83,-290.8 987,-290 978.36,-287.58 706.08,-223.79 645.34,-209.54"/>
 <polygon fill="black" stroke="black" points="646.22,-206.15 635.69,-207.27 644.62,-212.97 646.22,-206.15"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L89">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L89">
 <text xml:space="preserve" text-anchor="start" x="825.07" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -315,12 +315,12 @@
 <!-- as_list/2&#45;&gt;list::append/3 -->
 <g id="edge12" class="edge">
 <title>as_list/2&#45;&gt;list::append/3</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L89" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L89" xlink:title="calls">
 <path fill="none" stroke="black" d="M995.58,-291.73C938.26,-271.57 837.07,-235.98 772.34,-213.22"/>
 <polygon fill="black" stroke="black" points="773.51,-209.92 762.92,-209.91 771.19,-216.53 773.51,-209.92"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L89">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L89">
 <text xml:space="preserve" text-anchor="start" x="885.3" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -330,7 +330,7 @@
 <title>as_deque/2</title>
 <polygon fill="cornsilk" stroke="black" points="1193.41,-326 1100.59,-326 1100.59,-290 1193.41,-290 1193.41,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1108.59" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L95">
+<g id="a_node11_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="1113.99" y="-309.71" font-family="monospace" font-size="11.00">as_deque/2</text>
 </a>
 </g>
@@ -344,7 +344,7 @@
 <title>list_to_difference_list/4</title>
 <polygon fill="cornsilk" stroke="black" points="981.91,-209 790.09,-209 790.09,-173 981.91,-173 981.91,-209"/>
 <text xml:space="preserve" text-anchor="start" x="798.09" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node15_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L123" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L123">
+<g id="a_node15_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L123" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L123">
 <text xml:space="preserve" text-anchor="start" x="803.49" y="-192.71" font-family="monospace" font-size="11.00">list_to_difference_list/4</text>
 </a>
 </g>
@@ -356,12 +356,12 @@
 <!-- as_deque/2&#45;&gt;list_to_difference_list/4 -->
 <g id="edge6" class="edge">
 <title>as_deque/2&#45;&gt;list_to_difference_list/4</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L95" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L95" xlink:title="calls">
 <path fill="none" stroke="black" d="M1107.36,-289.53C1061.43,-269.3 985.68,-235.92 935.81,-213.95"/>
 <polygon fill="black" stroke="black" points="937.53,-210.88 926.97,-210.05 934.71,-217.29 937.53,-210.88"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L95">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="1024.33" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -371,7 +371,7 @@
 <title>map/2</title>
 <polygon fill="cornsilk" stroke="black" points="1270.9,-326 1211.1,-326 1211.1,-290 1270.9,-290 1270.9,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1219.1" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node12_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L100">
+<g id="a_node12_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="1224.5" y="-309.71" font-family="monospace" font-size="11.00">map/2</text>
 </a>
 </g>
@@ -385,7 +385,7 @@
 <title>map_difference_list/3</title>
 <polygon fill="cornsilk" stroke="black" points="1165.71,-209 1000.29,-209 1000.29,-173 1165.71,-173 1165.71,-209"/>
 <text xml:space="preserve" text-anchor="start" x="1008.29" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node16_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L129">
+<g id="a_node16_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L129">
 <text xml:space="preserve" text-anchor="start" x="1013.69" y="-192.71" font-family="monospace" font-size="11.00">map_difference_list/3</text>
 </a>
 </g>
@@ -397,12 +397,12 @@
 <!-- map/2&#45;&gt;map_difference_list/3 -->
 <g id="edge7" class="edge">
 <title>map/2&#45;&gt;map_difference_list/3</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L102" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L102" xlink:title="calls">
 <path fill="none" stroke="black" d="M1217,-289.53C1190.13,-269.97 1146.39,-238.14 1116.24,-216.19"/>
 <polygon fill="black" stroke="black" points="1118.33,-213.39 1108.19,-210.33 1114.21,-219.05 1118.33,-213.39"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L102">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L102">
 <text xml:space="preserve" text-anchor="start" x="1166.74" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -412,7 +412,7 @@
 <title>map/3</title>
 <polygon fill="cornsilk" stroke="black" points="1348.9,-326 1289.1,-326 1289.1,-290 1348.9,-290 1348.9,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1297.1" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node13_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L107">
+<g id="a_node13_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L107">
 <text xml:space="preserve" text-anchor="start" x="1302.5" y="-309.71" font-family="monospace" font-size="11.00">map/3</text>
 </a>
 </g>
@@ -426,7 +426,7 @@
 <title>map_difference_list/4</title>
 <polygon fill="cornsilk" stroke="black" points="1348.71,-209 1183.29,-209 1183.29,-173 1348.71,-173 1348.71,-209"/>
 <text xml:space="preserve" text-anchor="start" x="1191.29" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node17_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L137">
+<g id="a_node17_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L137">
 <text xml:space="preserve" text-anchor="start" x="1196.69" y="-192.71" font-family="monospace" font-size="11.00">map_difference_list/4</text>
 </a>
 </g>
@@ -438,12 +438,12 @@
 <!-- map/3&#45;&gt;map_difference_list/4 -->
 <g id="edge8" class="edge">
 <title>map/3&#45;&gt;map_difference_list/4</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L110" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L110" xlink:title="calls">
 <path fill="none" stroke="black" d="M1310.95,-289.53C1302.38,-270.94 1288.7,-241.24 1278.67,-219.5"/>
 <polygon fill="black" stroke="black" points="1281.95,-218.25 1274.59,-210.63 1275.59,-221.18 1281.95,-218.25"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L110" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L110">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L110" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L110">
 <text xml:space="preserve" text-anchor="start" x="1294.09" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -453,7 +453,7 @@
 <title>last/4</title>
 <polygon fill="cornsilk" stroke="black" points="280.2,-92 213.8,-92 213.8,-56 280.2,-56 280.2,-92"/>
 <text xml:space="preserve" text-anchor="start" x="221.8" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node19_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L151">
+<g id="a_node19_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L151">
 <text xml:space="preserve" text-anchor="start" x="227.2" y="-75.71" font-family="monospace" font-size="11.00">last/4</text>
 </a>
 </g>
@@ -465,12 +465,12 @@
 <!-- last/3&#45;&gt;last/4 -->
 <g id="edge9" class="edge">
 <title>last/3&#45;&gt;last/4</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L145" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L145" xlink:title="calls">
 <path fill="none" stroke="black" d="M247,-172.53C247,-154.28 247,-125.33 247,-103.7"/>
 <polygon fill="black" stroke="black" points="250.5,-103.77 247,-93.77 243.5,-103.77 250.5,-103.77"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L145" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L145">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L145" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L145">
 <text xml:space="preserve" text-anchor="start" x="247" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -480,7 +480,7 @@
 <title>last_prefix/5</title>
 <polygon fill="cornsilk" stroke="black" points="195.31,-92 82.69,-92 82.69,-56 195.31,-56 195.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="90.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node21_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L163">
+<g id="a_node21_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L163">
 <text xml:space="preserve" text-anchor="start" x="96.09" y="-75.71" font-family="monospace" font-size="11.00">last_prefix/5</text>
 </a>
 </g>
@@ -492,12 +492,12 @@
 <!-- last_prefix/4&#45;&gt;last_prefix/5 -->
 <g id="edge10" class="edge">
 <title>last_prefix/4&#45;&gt;last_prefix/5</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L157" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L157" xlink:title="calls">
 <path fill="none" stroke="black" d="M139,-172.53C139,-154.28 139,-125.33 139,-103.7"/>
 <polygon fill="black" stroke="black" points="142.5,-103.77 139,-93.77 135.5,-103.77 142.5,-103.77"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/deques/deque.lgt#L157">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/deques/deque.lgt#L157">
 <text xml:space="preserve" text-anchor="start" x="139" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>

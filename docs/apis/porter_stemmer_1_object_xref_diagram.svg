@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-1076 1440,-1076 1440,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object porter_stemmer/1</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 20:36</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;14, 01:03</text>
 <g id="clust1" class="cluster">
 <title>cluster_porter_stemmer_1_object</title>
 <g id="a_clust1"><a xlink:title="porter_stemmer(Representation)">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1416,-46 1416,-46 1422,-46 1428,-52 1428,-58 1428,-58 1428,-1052 1428,-1052 1428,-1058 1422,-1064 1416,-1064 1416,-1064 20,-1064 20,-1064 14,-1064 8,-1058 8,-1052 8,-1052 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-1048.46" font-family="monospace" font-size="10.00" fill="dimgray">porter_stemmer(Representation)</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>chars_to_word/2</title>
 <polygon fill="cornsilk" stroke="black" points="149.91,-794 24.09,-794 24.09,-758 149.91,-758 149.91,-794"/>
 <text xml:space="preserve" text-anchor="start" x="32.09" y="-778.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L73">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L73">
 <text xml:space="preserve" text-anchor="start" x="37.49" y="-777.71" font-family="monospace" font-size="11.00">chars_to_word/2</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>chars_to_word/3</title>
 <polygon fill="cornsilk" stroke="black" points="148.91,-677 23.09,-677 23.09,-641 148.91,-641 148.91,-677"/>
 <text xml:space="preserve" text-anchor="start" x="31.09" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L76">
+<g id="a_node6_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L76">
 <text xml:space="preserve" text-anchor="start" x="36.49" y="-660.71" font-family="monospace" font-size="11.00">chars_to_word/3</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- chars_to_word/2&#45;&gt;chars_to_word/3 -->
 <g id="edge7" class="edge">
 <title>chars_to_word/2&#45;&gt;chars_to_word/3</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L73" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L73" xlink:title="calls">
 <path fill="none" stroke="black" d="M86.85,-757.53C86.69,-739.28 86.44,-710.33 86.25,-688.7"/>
 <polygon fill="black" stroke="black" points="89.75,-688.74 86.16,-678.77 82.75,-688.8 89.75,-688.74"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L73">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L73">
 <text xml:space="preserve" text-anchor="start" x="86.53" y="-715.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>word_to_chars/2</title>
 <polygon fill="cornsilk" stroke="black" points="296.91,-794 171.09,-794 171.09,-758 296.91,-758 296.91,-794"/>
 <text xml:space="preserve" text-anchor="start" x="179.09" y="-778.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L64">
+<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L64">
 <text xml:space="preserve" text-anchor="start" x="184.49" y="-777.71" font-family="monospace" font-size="11.00">word_to_chars/2</text>
 </a>
 </g>
@@ -84,7 +84,7 @@
 <title>word_to_chars/3</title>
 <polygon fill="cornsilk" stroke="black" points="296.91,-677 171.09,-677 171.09,-641 296.91,-641 296.91,-677"/>
 <text xml:space="preserve" text-anchor="start" x="179.09" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L67">
+<g id="a_node5_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="184.49" y="-660.71" font-family="monospace" font-size="11.00">word_to_chars/3</text>
 </a>
 </g>
@@ -96,12 +96,12 @@
 <!-- word_to_chars/2&#45;&gt;word_to_chars/3 -->
 <g id="edge5" class="edge">
 <title>word_to_chars/2&#45;&gt;word_to_chars/3</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L64" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L64" xlink:title="calls">
 <path fill="none" stroke="black" d="M234,-757.53C234,-739.28 234,-710.33 234,-688.7"/>
 <polygon fill="black" stroke="black" points="237.5,-688.77 234,-678.77 230.5,-688.77 237.5,-688.77"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L64">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L64">
 <text xml:space="preserve" text-anchor="start" x="234" y="-715.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -111,7 +111,7 @@
 <title>stem/2</title>
 <polygon fill="cornsilk" stroke="black" points="267.2,-911 200.8,-911 200.8,-875 267.2,-875 267.2,-911"/>
 <text xml:space="preserve" text-anchor="start" x="208.8" y="-895.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L49">
+<g id="a_node3_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L49">
 <text xml:space="preserve" text-anchor="start" x="214.2" y="-894.71" font-family="monospace" font-size="11.00">stem/2</text>
 </a>
 </g>
@@ -123,12 +123,12 @@
 <!-- stem/2&#45;&gt;chars_to_word/2 -->
 <g id="edge3" class="edge">
 <title>stem/2&#45;&gt;chars_to_word/2</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L49" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L49" xlink:title="calls">
 <path fill="none" stroke="black" d="M211.67,-874.53C186.71,-855 146.1,-823.23 118.05,-801.29"/>
 <polygon fill="black" stroke="black" points="120.28,-798.59 110.25,-795.19 115.97,-804.1 120.28,-798.59"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L49">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L49">
 <text xml:space="preserve" text-anchor="start" x="164.91" y="-832.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -136,12 +136,12 @@
 <!-- stem/2&#45;&gt;word_to_chars/2 -->
 <g id="edge1" class="edge">
 <title>stem/2&#45;&gt;word_to_chars/2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L49" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L49" xlink:title="calls">
 <path fill="none" stroke="black" d="M234,-874.53C234,-856.28 234,-827.33 234,-805.7"/>
 <polygon fill="black" stroke="black" points="237.5,-805.77 234,-795.77 230.5,-805.77 237.5,-805.77"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L49">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L49">
 <text xml:space="preserve" text-anchor="start" x="234" y="-832.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -151,7 +151,7 @@
 <title>stem_chars/2</title>
 <polygon fill="cornsilk" stroke="black" points="945.01,-794 838.99,-794 838.99,-758 945.01,-758 945.01,-794"/>
 <text xml:space="preserve" text-anchor="start" x="846.99" y="-778.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L96">
+<g id="a_node9_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L96">
 <text xml:space="preserve" text-anchor="start" x="852.39" y="-777.71" font-family="monospace" font-size="11.00">stem_chars/2</text>
 </a>
 </g>
@@ -163,12 +163,12 @@
 <!-- stem/2&#45;&gt;stem_chars/2 -->
 <g id="edge2" class="edge">
 <title>stem/2&#45;&gt;stem_chars/2</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L49" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L49" xlink:title="calls">
 <path fill="none" stroke="black" d="M267.53,-886.14C371.59,-867.95 690.22,-812.27 827.72,-788.23"/>
 <polygon fill="black" stroke="black" points="828.14,-791.71 837.39,-786.54 826.93,-784.82 828.14,-791.71"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L49">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L49">
 <text xml:space="preserve" text-anchor="start" x="582.73" y="-832.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -178,7 +178,7 @@
 <title>stems/2</title>
 <polygon fill="cornsilk" stroke="black" points="270.5,-1028 197.5,-1028 197.5,-992 270.5,-992 270.5,-1028"/>
 <text xml:space="preserve" text-anchor="start" x="205.5" y="-1012.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L55">
+<g id="a_node4_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L55">
 <text xml:space="preserve" text-anchor="start" x="210.9" y="-1011.71" font-family="monospace" font-size="11.00">stems/2</text>
 </a>
 </g>
@@ -190,12 +190,12 @@
 <!-- stems/2&#45;&gt;stem/2 -->
 <g id="edge4" class="edge">
 <title>stems/2&#45;&gt;stem/2</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L56" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L56" xlink:title="calls">
 <path fill="none" stroke="black" d="M234,-991.53C234,-973.28 234,-944.33 234,-922.7"/>
 <polygon fill="black" stroke="black" points="237.5,-922.77 234,-912.77 230.5,-922.77 237.5,-922.77"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L56">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L56">
 <text xml:space="preserve" text-anchor="start" x="234" y="-949.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -205,7 +205,7 @@
 <title>codes_to_chars/2</title>
 <polygon fill="cornsilk" stroke="black" points="300.21,-560 167.79,-560 167.79,-524 300.21,-524 300.21,-560"/>
 <text xml:space="preserve" text-anchor="start" x="175.79" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L87">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L87">
 <text xml:space="preserve" text-anchor="start" x="181.19" y="-543.71" font-family="monospace" font-size="11.00">codes_to_chars/2</text>
 </a>
 </g>
@@ -217,12 +217,12 @@
 <!-- word_to_chars/3&#45;&gt;codes_to_chars/2 -->
 <g id="edge6" class="edge">
 <title>word_to_chars/3&#45;&gt;codes_to_chars/2</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L70" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L70" xlink:title="calls">
 <path fill="none" stroke="black" d="M234,-640.53C234,-622.28 234,-593.33 234,-571.7"/>
 <polygon fill="black" stroke="black" points="237.5,-571.77 234,-561.77 230.5,-571.77 237.5,-571.77"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L70">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L70">
 <text xml:space="preserve" text-anchor="start" x="234" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -232,7 +232,7 @@
 <title>chars_to_codes/2</title>
 <polygon fill="cornsilk" stroke="black" points="150.21,-560 17.79,-560 17.79,-524 150.21,-524 150.21,-560"/>
 <text xml:space="preserve" text-anchor="start" x="25.79" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L82">
+<g id="a_node7_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L82">
 <text xml:space="preserve" text-anchor="start" x="31.19" y="-543.71" font-family="monospace" font-size="11.00">chars_to_codes/2</text>
 </a>
 </g>
@@ -244,12 +244,12 @@
 <!-- chars_to_word/3&#45;&gt;chars_to_codes/2 -->
 <g id="edge8" class="edge">
 <title>chars_to_word/3&#45;&gt;chars_to_codes/2</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L79" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L79" xlink:title="calls">
 <path fill="none" stroke="black" d="M85.7,-640.53C85.38,-622.28 84.88,-593.33 84.5,-571.7"/>
 <polygon fill="black" stroke="black" points="88,-571.7 84.33,-561.77 81,-571.83 88,-571.7"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L79">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L79">
 <text xml:space="preserve" text-anchor="start" x="85.06" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -259,7 +259,7 @@
 <title>step_1a/2</title>
 <polygon fill="cornsilk" stroke="black" points="1314.11,-560 1227.89,-560 1227.89,-524 1314.11,-524 1314.11,-560"/>
 <text xml:space="preserve" text-anchor="start" x="1235.89" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L117">
+<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L117">
 <text xml:space="preserve" text-anchor="start" x="1241.3" y="-543.71" font-family="monospace" font-size="11.00">step_1a/2</text>
 </a>
 </g>
@@ -271,12 +271,12 @@
 <!-- stem_chars/2&#45;&gt;step_1a/2 -->
 <g id="edge9" class="edge">
 <title>stem_chars/2&#45;&gt;step_1a/2</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L96" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L96" xlink:title="calls">
 <path fill="none" stroke="black" d="M945.26,-767.13C1006.56,-755.89 1107.8,-730.35 1178,-677 1215.35,-648.62 1243.3,-600.86 1258.38,-570.68"/>
 <polygon fill="black" stroke="black" points="1261.48,-572.32 1262.69,-561.79 1255.18,-569.27 1261.48,-572.32"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L96">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L96">
 <text xml:space="preserve" text-anchor="start" x="1213.01" y="-656.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -286,7 +286,7 @@
 <title>step_1b/2</title>
 <polygon fill="cornsilk" stroke="black" points="648.11,-677 561.89,-677 561.89,-641 648.11,-641 648.11,-677"/>
 <text xml:space="preserve" text-anchor="start" x="569.89" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L137">
+<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L137">
 <text xml:space="preserve" text-anchor="start" x="575.3" y="-660.71" font-family="monospace" font-size="11.00">step_1b/2</text>
 </a>
 </g>
@@ -298,12 +298,12 @@
 <!-- stem_chars/2&#45;&gt;step_1b/2 -->
 <g id="edge10" class="edge">
 <title>stem_chars/2&#45;&gt;step_1b/2</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L96" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L96" xlink:title="calls">
 <path fill="none" stroke="black" d="M848.41,-757.53C797.69,-737.21 713.92,-703.64 659.09,-681.67"/>
 <polygon fill="black" stroke="black" points="660.52,-678.48 649.93,-678 657.91,-684.97 660.52,-678.48"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L96">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L96">
 <text xml:space="preserve" text-anchor="start" x="757.11" y="-715.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -313,7 +313,7 @@
 <title>step_1c/2</title>
 <polygon fill="cornsilk" stroke="black" points="1418.11,-560 1331.89,-560 1331.89,-524 1418.11,-524 1418.11,-560"/>
 <text xml:space="preserve" text-anchor="start" x="1339.89" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node13_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L181">
+<g id="a_node13_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L181">
 <text xml:space="preserve" text-anchor="start" x="1345.3" y="-543.71" font-family="monospace" font-size="11.00">step_1c/2</text>
 </a>
 </g>
@@ -325,12 +325,12 @@
 <!-- stem_chars/2&#45;&gt;step_1c/2 -->
 <g id="edge11" class="edge">
 <title>stem_chars/2&#45;&gt;step_1c/2</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L96" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L96" xlink:title="calls">
 <path fill="none" stroke="black" d="M945.4,-769.86C1017.95,-760.82 1149.44,-736.95 1244,-677 1290.12,-647.77 1332.07,-599.27 1355.5,-569.33"/>
 <polygon fill="black" stroke="black" points="1358.19,-571.57 1361.51,-561.51 1352.64,-567.3 1358.19,-571.57"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L96">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L96">
 <text xml:space="preserve" text-anchor="start" x="1288.9" y="-656.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -340,7 +340,7 @@
 <title>step_2/2</title>
 <polygon fill="cornsilk" stroke="black" points="1168.81,-677 1089.19,-677 1089.19,-641 1168.81,-641 1168.81,-677"/>
 <text xml:space="preserve" text-anchor="start" x="1097.19" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node14_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L193" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L193">
+<g id="a_node14_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L193" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L193">
 <text xml:space="preserve" text-anchor="start" x="1102.6" y="-660.71" font-family="monospace" font-size="11.00">step_2/2</text>
 </a>
 </g>
@@ -352,12 +352,12 @@
 <!-- stem_chars/2&#45;&gt;step_2/2 -->
 <g id="edge12" class="edge">
 <title>stem_chars/2&#45;&gt;step_2/2</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L96" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L96" xlink:title="calls">
 <path fill="none" stroke="black" d="M928,-757.53C969.44,-737.42 1037.62,-704.34 1082.91,-682.36"/>
 <polygon fill="black" stroke="black" points="1084.22,-685.62 1091.69,-678.1 1081.17,-679.32 1084.22,-685.62"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L96">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L96">
 <text xml:space="preserve" text-anchor="start" x="1017.61" y="-715.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -367,7 +367,7 @@
 <title>step_3/2</title>
 <polygon fill="cornsilk" stroke="black" points="1045.81,-677 966.19,-677 966.19,-641 1045.81,-641 1045.81,-677"/>
 <text xml:space="preserve" text-anchor="start" x="974.19" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node16_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L249" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L249">
+<g id="a_node16_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L249" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L249">
 <text xml:space="preserve" text-anchor="start" x="979.6" y="-660.71" font-family="monospace" font-size="11.00">step_3/2</text>
 </a>
 </g>
@@ -379,12 +379,12 @@
 <!-- stem_chars/2&#45;&gt;step_3/2 -->
 <g id="edge13" class="edge">
 <title>stem_chars/2&#45;&gt;step_3/2</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L96" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L96" xlink:title="calls">
 <path fill="none" stroke="black" d="M909.31,-757.53C928.42,-738.26 959.35,-707.06 981.07,-685.15"/>
 <polygon fill="black" stroke="black" points="983.28,-687.89 987.83,-678.33 978.31,-682.97 983.28,-687.89"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L96">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L96">
 <text xml:space="preserve" text-anchor="start" x="952.42" y="-715.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -394,7 +394,7 @@
 <title>step_4/2</title>
 <polygon fill="cornsilk" stroke="black" points="931.81,-677 852.19,-677 852.19,-641 931.81,-641 931.81,-677"/>
 <text xml:space="preserve" text-anchor="start" x="860.19" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node18_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L277" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L277">
+<g id="a_node18_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L277" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L277">
 <text xml:space="preserve" text-anchor="start" x="865.6" y="-660.71" font-family="monospace" font-size="11.00">step_4/2</text>
 </a>
 </g>
@@ -406,12 +406,12 @@
 <!-- stem_chars/2&#45;&gt;step_4/2 -->
 <g id="edge14" class="edge">
 <title>stem_chars/2&#45;&gt;step_4/2</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L96" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L96" xlink:title="calls">
 <path fill="none" stroke="black" d="M892,-757.53C892,-739.28 892,-710.33 892,-688.7"/>
 <polygon fill="black" stroke="black" points="895.5,-688.77 892,-678.77 888.5,-688.77 895.5,-688.77"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L96">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L96">
 <text xml:space="preserve" text-anchor="start" x="892" y="-715.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -421,7 +421,7 @@
 <title>step_5a/2</title>
 <polygon fill="cornsilk" stroke="black" points="404.11,-560 317.89,-560 317.89,-524 404.11,-524 404.11,-560"/>
 <text xml:space="preserve" text-anchor="start" x="325.89" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node20_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L333" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L333">
+<g id="a_node20_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L333" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L333">
 <text xml:space="preserve" text-anchor="start" x="331.3" y="-543.71" font-family="monospace" font-size="11.00">step_5a/2</text>
 </a>
 </g>
@@ -433,12 +433,12 @@
 <!-- stem_chars/2&#45;&gt;step_5a/2 -->
 <g id="edge15" class="edge">
 <title>stem_chars/2&#45;&gt;step_5a/2</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L96" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L96" xlink:title="calls">
 <path fill="none" stroke="black" d="M838.64,-766.36C765.68,-753.3 631.78,-724.85 526,-677 473.44,-653.22 461.83,-642.5 418,-605 405.25,-594.09 392.48,-580.51 382.27,-568.83"/>
 <polygon fill="black" stroke="black" points="385.15,-566.82 375.98,-561.51 379.84,-571.38 385.15,-566.82"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L96">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L96">
 <text xml:space="preserve" text-anchor="start" x="526" y="-656.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -448,7 +448,7 @@
 <title>step_5b/2</title>
 <polygon fill="cornsilk" stroke="black" points="755.11,-560 668.89,-560 668.89,-524 755.11,-524 755.11,-560"/>
 <text xml:space="preserve" text-anchor="start" x="676.89" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node21_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L349" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L349">
+<g id="a_node21_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L349" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L349">
 <text xml:space="preserve" text-anchor="start" x="682.3" y="-543.71" font-family="monospace" font-size="11.00">step_5b/2</text>
 </a>
 </g>
@@ -460,12 +460,12 @@
 <!-- stem_chars/2&#45;&gt;step_5b/2 -->
 <g id="edge16" class="edge">
 <title>stem_chars/2&#45;&gt;step_5b/2</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L96" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L96" xlink:title="calls">
 <path fill="none" stroke="black" d="M878.47,-757.56C847.12,-717.16 769.36,-616.93 732.29,-569.15"/>
 <polygon fill="black" stroke="black" points="735.26,-567.27 726.37,-561.52 729.73,-571.57 735.26,-567.27"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L96">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L96">
 <text xml:space="preserve" text-anchor="start" x="813.97" y="-656.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -475,7 +475,7 @@
 <title>ends_with/3</title>
 <polygon fill="cornsilk" stroke="black" points="1023.71,-443 924.29,-443 924.29,-407 1023.71,-407 1023.71,-443"/>
 <text xml:space="preserve" text-anchor="start" x="932.29" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node34_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L469" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L469">
+<g id="a_node34_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L469" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L469">
 <text xml:space="preserve" text-anchor="start" x="937.69" y="-426.71" font-family="monospace" font-size="11.00">ends_with/3</text>
 </a>
 </g>
@@ -487,12 +487,12 @@
 <!-- step_1a/2&#45;&gt;ends_with/3 -->
 <g id="edge17" class="edge">
 <title>step_1a/2&#45;&gt;ends_with/3</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L117" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L117" xlink:title="calls">
 <path fill="none" stroke="black" d="M1227.5,-524.15C1175.12,-503.88 1087.08,-469.78 1029.76,-447.59"/>
 <polygon fill="black" stroke="black" points="1031.08,-444.35 1020.49,-444 1028.55,-450.88 1031.08,-444.35"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L117">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L117">
 <text xml:space="preserve" text-anchor="start" x="1131.41" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -514,12 +514,12 @@
 <!-- step_1a/2&#45;&gt;list::append/3 -->
 <g id="edge57" class="edge">
 <title>step_1a/2&#45;&gt;list::append/3</title>
-<g id="a_edge57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L117" xlink:title="calls">
+<g id="a_edge57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L117" xlink:title="calls">
 <path fill="none" stroke="black" d="M1277.23,-523.62C1285.72,-496.73 1297.67,-444.27 1277,-407 1257.02,-370.97 1217.66,-346.44 1183.35,-330.94"/>
 <polygon fill="black" stroke="black" points="1184.85,-327.77 1174.28,-327.02 1182.07,-334.2 1184.85,-327.77"/>
 </a>
 </g>
-<g id="a_edge57&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L117">
+<g id="a_edge57&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L117">
 <text xml:space="preserve" text-anchor="start" x="1287.71" y="-422.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -529,7 +529,7 @@
 <title>step_1b_fixup/2</title>
 <polygon fill="cornsilk" stroke="black" points="567.91,-560 442.09,-560 442.09,-524 567.91,-524 567.91,-560"/>
 <text xml:space="preserve" text-anchor="start" x="450.09" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node12_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L155">
+<g id="a_node12_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="455.49" y="-543.71" font-family="monospace" font-size="11.00">step_1b_fixup/2</text>
 </a>
 </g>
@@ -541,12 +541,12 @@
 <!-- step_1b/2&#45;&gt;step_1b_fixup/2 -->
 <g id="edge21" class="edge">
 <title>step_1b/2&#45;&gt;step_1b_fixup/2</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L137" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L137" xlink:title="calls">
 <path fill="none" stroke="black" d="M587.98,-640.65C578.14,-630.45 565.64,-617.2 555,-605 544.98,-593.52 534.33,-580.44 525.44,-569.27"/>
 <polygon fill="black" stroke="black" points="528.32,-567.27 519.38,-561.59 522.83,-571.61 528.32,-567.27"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L137">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L137">
 <text xml:space="preserve" text-anchor="start" x="555" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -556,7 +556,7 @@
 <title>contains_vowel/1</title>
 <polygon fill="cornsilk" stroke="black" points="691.21,-326 558.79,-326 558.79,-290 691.21,-290 691.21,-326"/>
 <text xml:space="preserve" text-anchor="start" x="566.79" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node26_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L391" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L391">
+<g id="a_node26_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L391" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L391">
 <text xml:space="preserve" text-anchor="start" x="572.19" y="-309.71" font-family="monospace" font-size="11.00">contains_vowel/1</text>
 </a>
 </g>
@@ -568,12 +568,12 @@
 <!-- step_1b/2&#45;&gt;contains_vowel/1 -->
 <g id="edge20" class="edge">
 <title>step_1b/2&#45;&gt;contains_vowel/1</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L137" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L137" xlink:title="calls">
 <path fill="none" stroke="black" d="M561.46,-641.17C523.84,-624.9 469.86,-597.26 433,-560 420.13,-546.99 422.82,-539.45 413,-524 390.43,-488.49 373.85,-483.91 364,-443 360.26,-427.44 354.89,-420.15 364,-407 365.53,-404.79 490.62,-358.46 567.04,-330.3"/>
 <polygon fill="black" stroke="black" points="567.89,-333.72 576.07,-326.98 565.47,-327.15 567.89,-333.72"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L137">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L137">
 <text xml:space="preserve" text-anchor="start" x="385.65" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -583,7 +583,7 @@
 <title>measure/2</title>
 <polygon fill="cornsilk" stroke="black" points="774.11,-443 687.89,-443 687.89,-407 774.11,-407 774.11,-443"/>
 <text xml:space="preserve" text-anchor="start" x="695.89" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node27_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L399" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L399">
+<g id="a_node27_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L399" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L399">
 <text xml:space="preserve" text-anchor="start" x="701.3" y="-426.71" font-family="monospace" font-size="11.00">measure/2</text>
 </a>
 </g>
@@ -595,12 +595,12 @@
 <!-- step_1b/2&#45;&gt;measure/2 -->
 <g id="edge19" class="edge">
 <title>step_1b/2&#45;&gt;measure/2</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L137" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L137" xlink:title="calls">
 <path fill="none" stroke="black" d="M605.67,-640.51C607.33,-613.93 613.08,-562.4 633,-524 648.31,-494.47 675.67,-468.25 697.59,-450.38"/>
 <polygon fill="black" stroke="black" points="699.75,-453.14 705.42,-444.19 695.4,-447.65 699.75,-453.14"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L137">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L137">
 <text xml:space="preserve" text-anchor="start" x="633" y="-539.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -608,12 +608,12 @@
 <!-- step_1b/2&#45;&gt;ends_with/3 -->
 <g id="edge18" class="edge">
 <title>step_1b/2&#45;&gt;ends_with/3</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L137" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L137" xlink:title="calls">
 <path fill="none" stroke="black" d="M638.14,-640.57C671.36,-622.41 723.3,-592.17 764,-560 781.75,-545.97 782.47,-538.32 800,-524 828.06,-501.07 836.62,-497.14 868,-479 886.7,-468.19 907.89,-457.33 926.38,-448.29"/>
 <polygon fill="black" stroke="black" points="927.79,-451.49 935.27,-443.98 924.74,-445.19 927.79,-451.49"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L137">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L137">
 <text xml:space="preserve" text-anchor="start" x="800" y="-539.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -621,12 +621,12 @@
 <!-- step_1b/2&#45;&gt;list::append/3 -->
 <g id="edge58" class="edge">
 <title>step_1b/2&#45;&gt;list::append/3</title>
-<g id="a_edge58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L137" xlink:title="calls">
+<g id="a_edge58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L137" xlink:title="calls">
 <path fill="none" stroke="black" d="M604.78,-640.61C604.74,-628.17 604.94,-611.03 606,-596 609.71,-543.3 600.3,-524.59 627,-479 638.59,-459.2 651.1,-461.98 664,-443 673.74,-428.66 665.71,-418.13 679,-407 707.25,-383.34 931.7,-341.6 1049.05,-321.08"/>
 <polygon fill="black" stroke="black" points="1049.32,-324.59 1058.57,-319.42 1048.12,-317.69 1049.32,-324.59"/>
 </a>
 </g>
-<g id="a_edge58&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L137">
+<g id="a_edge58&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L137">
 <text xml:space="preserve" text-anchor="start" x="627" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -634,12 +634,12 @@
 <!-- step_1b_fixup/2&#45;&gt;measure/2 -->
 <g id="edge24" class="edge">
 <title>step_1b_fixup/2&#45;&gt;measure/2</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L155" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L155" xlink:title="calls">
 <path fill="none" stroke="black" d="M520.49,-523.63C533.57,-509.87 553.42,-491.02 574,-479 605.99,-460.3 645.54,-447 676.94,-438.4"/>
 <polygon fill="black" stroke="black" points="677.45,-441.89 686.22,-435.94 675.65,-435.12 677.45,-441.89"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L155">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="574" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -649,7 +649,7 @@
 <title>double_consonant/1</title>
 <polygon fill="cornsilk" stroke="black" points="586.81,-443 441.19,-443 441.19,-407 586.81,-407 586.81,-443"/>
 <text xml:space="preserve" text-anchor="start" x="449.19" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node32_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L446" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L446">
+<g id="a_node32_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L446" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L446">
 <text xml:space="preserve" text-anchor="start" x="454.59" y="-426.71" font-family="monospace" font-size="11.00">double_consonant/1</text>
 </a>
 </g>
@@ -661,12 +661,12 @@
 <!-- step_1b_fixup/2&#45;&gt;double_consonant/1 -->
 <g id="edge23" class="edge">
 <title>step_1b_fixup/2&#45;&gt;double_consonant/1</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L155" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L155" xlink:title="calls">
 <path fill="none" stroke="black" d="M484.02,-523.75C472.17,-511.79 460.86,-495.17 467,-479 470.84,-468.87 477.61,-459.43 484.83,-451.41"/>
 <polygon fill="black" stroke="black" points="487.21,-453.99 491.68,-444.38 482.19,-449.11 487.21,-453.99"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L155">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="467" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -676,7 +676,7 @@
 <title>ends_cvc/1</title>
 <polygon fill="cornsilk" stroke="black" points="255.41,-443 162.59,-443 162.59,-407 255.41,-407 255.41,-443"/>
 <text xml:space="preserve" text-anchor="start" x="170.59" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node33_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L456" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L456">
+<g id="a_node33_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L456" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L456">
 <text xml:space="preserve" text-anchor="start" x="175.99" y="-426.71" font-family="monospace" font-size="11.00">ends_cvc/1</text>
 </a>
 </g>
@@ -688,12 +688,12 @@
 <!-- step_1b_fixup/2&#45;&gt;ends_cvc/1 -->
 <g id="edge25" class="edge">
 <title>step_1b_fixup/2&#45;&gt;ends_cvc/1</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L155" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L155" xlink:title="calls">
 <path fill="none" stroke="black" d="M441.99,-528.67C403.02,-519.89 352.5,-506.37 310,-488 286.19,-477.71 261.35,-462.53 242.26,-449.76"/>
 <polygon fill="black" stroke="black" points="244.32,-446.93 234.09,-444.19 240.38,-452.72 244.32,-446.93"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L155">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="310" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -701,12 +701,12 @@
 <!-- step_1b_fixup/2&#45;&gt;ends_with/3 -->
 <g id="edge22" class="edge">
 <title>step_1b_fixup/2&#45;&gt;ends_with/3</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L155" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L155" xlink:title="calls">
 <path fill="none" stroke="black" d="M568,-525.9C608.26,-515.91 661.46,-502.11 708,-488 719.7,-484.45 722.23,-482.32 734,-479 794.19,-462 864.14,-447.09 912.93,-437.45"/>
 <polygon fill="black" stroke="black" points="913.31,-440.94 922.45,-435.59 911.97,-434.07 913.31,-440.94"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L155">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="734" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -714,12 +714,12 @@
 <!-- step_1b_fixup/2&#45;&gt;list::append/3 -->
 <g id="edge59" class="edge">
 <title>step_1b_fixup/2&#45;&gt;list::append/3</title>
-<g id="a_edge59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L155" xlink:title="calls">
+<g id="a_edge59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L155" xlink:title="calls">
 <path fill="none" stroke="black" d="M503.24,-523.77C502.79,-510.28 504.32,-491.72 514,-479 538.11,-447.33 562.43,-464.38 596,-443 616.45,-429.97 615.67,-418.55 637,-407 689.34,-378.65 713.83,-399.67 766,-371 771.24,-368.12 770.6,-364.56 776,-362 788.23,-356.2 951.82,-332.56 1048.93,-318.89"/>
 <polygon fill="black" stroke="black" points="1049.22,-322.39 1058.64,-317.53 1048.25,-315.45 1049.22,-322.39"/>
 </a>
 </g>
-<g id="a_edge59&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L155">
+<g id="a_edge59&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="637" y="-422.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -741,12 +741,12 @@
 <!-- step_1b_fixup/2&#45;&gt;list::member/2 -->
 <g id="edge60" class="edge">
 <title>step_1b_fixup/2&#45;&gt;list::member/2</title>
-<g id="a_edge60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L155" xlink:title="calls">
+<g id="a_edge60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L155" xlink:title="calls">
 <path fill="none" stroke="black" d="M486.37,-523.75C472.78,-511.23 453.86,-493.94 437,-479 377.31,-426.13 368.61,-404.26 301,-362 281.52,-349.83 258.76,-339.16 238.15,-330.64"/>
 <polygon fill="black" stroke="black" points="239.59,-327.45 229.01,-326.95 236.97,-333.94 239.59,-327.45"/>
 </a>
 </g>
-<g id="a_edge60&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L155">
+<g id="a_edge60&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="398.04" y="-422.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -754,12 +754,12 @@
 <!-- step_1c/2&#45;&gt;contains_vowel/1 -->
 <g id="edge27" class="edge">
 <title>step_1c/2&#45;&gt;contains_vowel/1</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L181" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L181" xlink:title="calls">
 <path fill="none" stroke="black" d="M1346.12,-523.58C1318.21,-505.76 1275.88,-476.08 1246,-443 1233.42,-429.09 1239.6,-417.4 1224,-407 1200.97,-391.65 784.28,-338.52 702.96,-326.2"/>
 <polygon fill="black" stroke="black" points="703.53,-322.75 693.1,-324.59 702.41,-329.66 703.53,-322.75"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L181">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L181">
 <text xml:space="preserve" text-anchor="start" x="1246" y="-422.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -767,12 +767,12 @@
 <!-- step_1c/2&#45;&gt;ends_with/3 -->
 <g id="edge26" class="edge">
 <title>step_1c/2&#45;&gt;ends_with/3</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L181" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L181" xlink:title="calls">
 <path fill="none" stroke="black" d="M1331.63,-526.67C1328.71,-525.75 1325.82,-524.86 1323,-524 1222.54,-493.49 1104.81,-461.13 1034.97,-442.28"/>
 <polygon fill="black" stroke="black" points="1036.21,-438.99 1025.65,-439.77 1034.39,-445.75 1036.21,-438.99"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L181">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L181">
 <text xml:space="preserve" text-anchor="start" x="1198.65" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -780,12 +780,12 @@
 <!-- step_1c/2&#45;&gt;list::append/3 -->
 <g id="edge61" class="edge">
 <title>step_1c/2&#45;&gt;list::append/3</title>
-<g id="a_edge61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L181" xlink:title="calls">
+<g id="a_edge61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L181" xlink:title="calls">
 <path fill="none" stroke="black" d="M1371.35,-523.53C1364.88,-496.06 1349.14,-442.27 1319,-407 1285.74,-368.08 1233.37,-343.16 1190.7,-328.19"/>
 <polygon fill="black" stroke="black" points="1191.82,-324.87 1181.23,-324.99 1189.58,-331.5 1191.82,-324.87"/>
 </a>
 </g>
-<g id="a_edge61&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L181">
+<g id="a_edge61&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L181">
 <text xml:space="preserve" text-anchor="start" x="1341.96" y="-422.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -795,7 +795,7 @@
 <title>step_2_rule/2</title>
 <polygon fill="cornsilk" stroke="black" points="1210.31,-560 1097.69,-560 1097.69,-524 1210.31,-524 1210.31,-560"/>
 <text xml:space="preserve" text-anchor="start" x="1105.69" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node15_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L199" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L199">
+<g id="a_node15_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L199" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L199">
 <text xml:space="preserve" text-anchor="start" x="1111.09" y="-543.71" font-family="monospace" font-size="11.00">step_2_rule/2</text>
 </a>
 </g>
@@ -807,12 +807,12 @@
 <!-- step_2/2&#45;&gt;step_2_rule/2 -->
 <g id="edge28" class="edge">
 <title>step_2/2&#45;&gt;step_2_rule/2</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L193" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L193" xlink:title="calls">
 <path fill="none" stroke="black" d="M1132.8,-640.53C1136.78,-622.19 1143.12,-593.06 1147.83,-571.4"/>
 <polygon fill="black" stroke="black" points="1151.22,-572.25 1149.93,-561.73 1144.38,-570.76 1151.22,-572.25"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L193" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L193">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L193" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L193">
 <text xml:space="preserve" text-anchor="start" x="1142.25" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -820,12 +820,12 @@
 <!-- step_2_rule/2&#45;&gt;measure/2 -->
 <g id="edge30" class="edge">
 <title>step_2_rule/2&#45;&gt;measure/2</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L199" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L199" xlink:title="calls">
 <path fill="none" stroke="black" d="M1097.42,-525.52C1064.02,-515.85 1021.14,-502.51 984,-488 975.29,-484.6 973.83,-482.05 965,-479 905.04,-458.29 833.61,-443.46 785.57,-434.85"/>
 <polygon fill="black" stroke="black" points="786.44,-431.45 775.98,-433.16 785.22,-438.34 786.44,-431.45"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L199" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L199">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L199" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L199">
 <text xml:space="preserve" text-anchor="start" x="984" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -833,12 +833,12 @@
 <!-- step_2_rule/2&#45;&gt;ends_with/3 -->
 <g id="edge29" class="edge">
 <title>step_2_rule/2&#45;&gt;ends_with/3</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L199" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L199" xlink:title="calls">
 <path fill="none" stroke="black" d="M1126.66,-523.53C1095.78,-503.8 1045.36,-471.59 1010.98,-449.62"/>
 <polygon fill="black" stroke="black" points="1012.89,-446.69 1002.58,-444.26 1009.12,-452.59 1012.89,-446.69"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L199" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L199">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L199" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L199">
 <text xml:space="preserve" text-anchor="start" x="1069.4" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -846,12 +846,12 @@
 <!-- step_2_rule/2&#45;&gt;list::append/3 -->
 <g id="edge62" class="edge">
 <title>step_2_rule/2&#45;&gt;list::append/3</title>
-<g id="a_edge62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L199" xlink:title="calls">
+<g id="a_edge62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L199" xlink:title="calls">
 <path fill="none" stroke="black" d="M1194.32,-523.63C1212.15,-513.04 1227.92,-497.9 1222,-479 1216.18,-460.41 1207.41,-459.46 1197,-443 1174.07,-406.77 1149.76,-363.57 1134.74,-336.2"/>
 <polygon fill="black" stroke="black" points="1137.86,-334.62 1129.99,-327.53 1131.72,-337.98 1137.86,-334.62"/>
 </a>
 </g>
-<g id="a_edge62&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L199" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L199">
+<g id="a_edge62&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L199" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L199">
 <text xml:space="preserve" text-anchor="start" x="1197" y="-422.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -861,7 +861,7 @@
 <title>step_3_rule/2</title>
 <polygon fill="cornsilk" stroke="black" points="1079.31,-560 966.69,-560 966.69,-524 1079.31,-524 1079.31,-560"/>
 <text xml:space="preserve" text-anchor="start" x="974.69" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node17_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L255" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L255">
+<g id="a_node17_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L255" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L255">
 <text xml:space="preserve" text-anchor="start" x="980.09" y="-543.71" font-family="monospace" font-size="11.00">step_3_rule/2</text>
 </a>
 </g>
@@ -873,12 +873,12 @@
 <!-- step_3/2&#45;&gt;step_3_rule/2 -->
 <g id="edge31" class="edge">
 <title>step_3/2&#45;&gt;step_3_rule/2</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L249" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L249" xlink:title="calls">
 <path fill="none" stroke="black" d="M1008.58,-640.53C1011.29,-622.19 1015.6,-593.06 1018.8,-571.4"/>
 <polygon fill="black" stroke="black" points="1022.23,-572.16 1020.23,-561.75 1015.3,-571.13 1022.23,-572.16"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L249" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L249">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L249" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L249">
 <text xml:space="preserve" text-anchor="start" x="1015.01" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -886,12 +886,12 @@
 <!-- step_3_rule/2&#45;&gt;measure/2 -->
 <g id="edge33" class="edge">
 <title>step_3_rule/2&#45;&gt;measure/2</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L255" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L255" xlink:title="calls">
 <path fill="none" stroke="black" d="M978.65,-523.53C926.64,-503.05 840.47,-469.11 784.72,-447.16"/>
 <polygon fill="black" stroke="black" points="786.33,-444.03 775.74,-443.62 783.76,-450.54 786.33,-444.03"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L255" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L255">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L255" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L255">
 <text xml:space="preserve" text-anchor="start" x="885.76" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -899,12 +899,12 @@
 <!-- step_3_rule/2&#45;&gt;ends_with/3 -->
 <g id="edge32" class="edge">
 <title>step_3_rule/2&#45;&gt;ends_with/3</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L255" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L255" xlink:title="calls">
 <path fill="none" stroke="black" d="M1023.17,-523.53C1022.72,-510.75 1020.91,-493.23 1015,-479 1010.98,-469.32 1004.71,-459.89 998.28,-451.73"/>
 <polygon fill="black" stroke="black" points="1001.13,-449.69 992.02,-444.27 995.77,-454.19 1001.13,-449.69"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L255" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L255">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L255" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L255">
 <text xml:space="preserve" text-anchor="start" x="1017.81" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -912,12 +912,12 @@
 <!-- step_3_rule/2&#45;&gt;list::append/3 -->
 <g id="edge63" class="edge">
 <title>step_3_rule/2&#45;&gt;list::append/3</title>
-<g id="a_edge63"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L255" xlink:title="calls">
+<g id="a_edge63"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L255" xlink:title="calls">
 <path fill="none" stroke="black" d="M1061.02,-523.65C1075.6,-515.04 1090.91,-503.18 1100,-488 1128.13,-441.04 1127.14,-374.6 1123.7,-337.29"/>
 <polygon fill="black" stroke="black" points="1127.23,-337.34 1122.69,-327.76 1120.27,-338.07 1127.23,-337.34"/>
 </a>
 </g>
-<g id="a_edge63&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L255" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L255">
+<g id="a_edge63&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L255" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L255">
 <text xml:space="preserve" text-anchor="start" x="1123.75" y="-422.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -927,7 +927,7 @@
 <title>step_4_rule/2</title>
 <polygon fill="cornsilk" stroke="black" points="948.31,-560 835.69,-560 835.69,-524 948.31,-524 948.31,-560"/>
 <text xml:space="preserve" text-anchor="start" x="843.69" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node19_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L283" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L283">
+<g id="a_node19_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L283" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L283">
 <text xml:space="preserve" text-anchor="start" x="849.09" y="-543.71" font-family="monospace" font-size="11.00">step_4_rule/2</text>
 </a>
 </g>
@@ -939,12 +939,12 @@
 <!-- step_4/2&#45;&gt;step_4_rule/2 -->
 <g id="edge34" class="edge">
 <title>step_4/2&#45;&gt;step_4_rule/2</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L277" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L277" xlink:title="calls">
 <path fill="none" stroke="black" d="M892,-640.53C892,-622.28 892,-593.33 892,-571.7"/>
 <polygon fill="black" stroke="black" points="895.5,-571.77 892,-561.77 888.5,-571.77 895.5,-571.77"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L277" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L277">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L277" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L277">
 <text xml:space="preserve" text-anchor="start" x="892" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -952,12 +952,12 @@
 <!-- step_4_rule/2&#45;&gt;measure/2 -->
 <g id="edge36" class="edge">
 <title>step_4_rule/2&#45;&gt;measure/2</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L283" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L283" xlink:title="calls">
 <path fill="none" stroke="black" d="M868.97,-523.69C852.18,-511.14 828.81,-493.84 808,-479 794.39,-469.3 779.27,-458.82 766.05,-449.77"/>
 <polygon fill="black" stroke="black" points="768.3,-447.06 758.06,-444.31 764.35,-452.84 768.3,-447.06"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L283" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L283">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L283" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L283">
 <text xml:space="preserve" text-anchor="start" x="819.53" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -965,12 +965,12 @@
 <!-- step_4_rule/2&#45;&gt;ends_with/3 -->
 <g id="edge35" class="edge">
 <title>step_4_rule/2&#45;&gt;ends_with/3</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L283" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L283" xlink:title="calls">
 <path fill="none" stroke="black" d="M904.45,-523.53C917.9,-504.68 939.47,-474.43 955.02,-452.61"/>
 <polygon fill="black" stroke="black" points="957.86,-454.66 960.82,-444.49 952.16,-450.6 957.86,-454.66"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L283" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L283">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L283" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L283">
 <text xml:space="preserve" text-anchor="start" x="935.46" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -978,12 +978,12 @@
 <!-- step_5a/2&#45;&gt;measure/2 -->
 <g id="edge38" class="edge">
 <title>step_5a/2&#45;&gt;measure/2</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L333" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L333" xlink:title="calls">
 <path fill="none" stroke="black" d="M318.55,-523.55C287.26,-509.46 251.78,-490.2 262,-479 291.48,-446.69 610.78,-449.73 654,-443 661.28,-441.87 668.89,-440.46 676.39,-438.94"/>
 <polygon fill="black" stroke="black" points="677.06,-442.38 686.13,-436.89 675.62,-435.53 677.06,-442.38"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L333" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L333">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L333" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L333">
 <text xml:space="preserve" text-anchor="start" x="262" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -991,12 +991,12 @@
 <!-- step_5a/2&#45;&gt;ends_cvc/1 -->
 <g id="edge39" class="edge">
 <title>step_5a/2&#45;&gt;ends_cvc/1</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L333" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L333" xlink:title="calls">
 <path fill="none" stroke="black" d="M317.56,-526.42C273.54,-511.54 211.67,-490.32 210,-488 203.17,-478.54 201.95,-465.98 202.8,-454.64"/>
 <polygon fill="black" stroke="black" points="206.24,-455.32 204.1,-444.94 199.31,-454.39 206.24,-455.32"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L333" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L333">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L333" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L333">
 <text xml:space="preserve" text-anchor="start" x="210" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1004,12 +1004,12 @@
 <!-- step_5a/2&#45;&gt;ends_with/3 -->
 <g id="edge37" class="edge">
 <title>step_5a/2&#45;&gt;ends_with/3</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L333" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L333" xlink:title="calls">
 <path fill="none" stroke="black" d="M375.83,-523.5C389.36,-508.87 410.73,-488.86 434,-479 444.92,-474.37 773.47,-444.17 912.65,-431.54"/>
 <polygon fill="black" stroke="black" points="912.78,-435.04 922.43,-430.65 912.15,-428.07 912.78,-435.04"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L333" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L333">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L333" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L333">
 <text xml:space="preserve" text-anchor="start" x="434" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1017,12 +1017,12 @@
 <!-- step_5b/2&#45;&gt;measure/2 -->
 <g id="edge40" class="edge">
 <title>step_5b/2&#45;&gt;measure/2</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L349" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L349" xlink:title="calls">
 <path fill="none" stroke="black" d="M694.62,-523.73C684.49,-511.49 674.82,-494.55 681,-479 685.12,-468.62 692.35,-459.09 700.05,-451.06"/>
 <polygon fill="black" stroke="black" points="702.28,-453.78 707.05,-444.32 697.42,-448.74 702.28,-453.78"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L349" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L349">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L349" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L349">
 <text xml:space="preserve" text-anchor="start" x="681" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1030,12 +1030,12 @@
 <!-- step_5b/2&#45;&gt;double_consonant/1 -->
 <g id="edge41" class="edge">
 <title>step_5b/2&#45;&gt;double_consonant/1</title>
-<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L349" xlink:title="calls">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L349" xlink:title="calls">
 <path fill="none" stroke="black" d="M668.46,-527.91C663.92,-526.57 659.37,-525.25 655,-524 596.95,-507.37 564.32,-532.95 524,-488 516,-479.09 513.02,-466.41 512.23,-454.83"/>
 <polygon fill="black" stroke="black" points="515.73,-454.85 512.1,-444.89 508.73,-454.94 515.73,-454.85"/>
 </a>
 </g>
-<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L349" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L349">
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L349" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L349">
 <text xml:space="preserve" text-anchor="start" x="524" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1043,12 +1043,12 @@
 <!-- step_5b/2&#45;&gt;ends_with/3 -->
 <g id="edge42" class="edge">
 <title>step_5b/2&#45;&gt;ends_with/3</title>
-<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L349" xlink:title="calls">
+<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L349" xlink:title="calls">
 <path fill="none" stroke="black" d="M725.96,-523.53C738.05,-509.52 756.74,-490.39 777,-479 819.09,-455.33 872.24,-441.83 912.72,-434.4"/>
 <polygon fill="black" stroke="black" points="913.31,-437.84 922.55,-432.67 912.1,-430.95 913.31,-437.84"/>
 </a>
 </g>
-<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L349" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L349">
+<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L349" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L349">
 <text xml:space="preserve" text-anchor="start" x="777" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1058,7 +1058,7 @@
 <title>vowel/1</title>
 <polygon fill="cornsilk" stroke="black" points="278.5,-92 205.5,-92 205.5,-56 278.5,-56 278.5,-92"/>
 <text xml:space="preserve" text-anchor="start" x="213.5" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node22_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L362" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L362">
+<g id="a_node22_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L362" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L362">
 <text xml:space="preserve" text-anchor="start" x="218.9" y="-75.71" font-family="monospace" font-size="11.00">vowel/1</text>
 </a>
 </g>
@@ -1072,7 +1072,7 @@
 <title>is_vowel_at/2</title>
 <polygon fill="cornsilk" stroke="black" points="355.31,-209 242.69,-209 242.69,-173 355.31,-173 355.31,-209"/>
 <text xml:space="preserve" text-anchor="start" x="250.69" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node23_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L369" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L369">
+<g id="a_node23_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L369" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L369">
 <text xml:space="preserve" text-anchor="start" x="256.09" y="-192.71" font-family="monospace" font-size="11.00">is_vowel_at/2</text>
 </a>
 </g>
@@ -1084,12 +1084,12 @@
 <!-- is_vowel_at/2&#45;&gt;vowel/1 -->
 <g id="edge44" class="edge">
 <title>is_vowel_at/2&#45;&gt;vowel/1</title>
-<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L369" xlink:title="calls">
+<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L369" xlink:title="calls">
 <path fill="none" stroke="black" d="M290.34,-172.53C281.12,-153.94 266.41,-124.24 255.63,-102.5"/>
 <polygon fill="black" stroke="black" points="258.8,-101.02 251.22,-93.61 252.53,-104.12 258.8,-101.02"/>
 </a>
 </g>
-<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L369" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L369">
+<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L369" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L369">
 <text xml:space="preserve" text-anchor="start" x="272.21" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1099,7 +1099,7 @@
 <title>nth1/3</title>
 <polygon fill="cornsilk" stroke="black" points="363.2,-92 296.8,-92 296.8,-56 363.2,-56 363.2,-92"/>
 <text xml:space="preserve" text-anchor="start" x="304.8" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node25_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L384" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L384">
+<g id="a_node25_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L384" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L384">
 <text xml:space="preserve" text-anchor="start" x="310.2" y="-75.71" font-family="monospace" font-size="11.00">nth1/3</text>
 </a>
 </g>
@@ -1111,12 +1111,12 @@
 <!-- is_vowel_at/2&#45;&gt;nth1/3 -->
 <g id="edge43" class="edge">
 <title>is_vowel_at/2&#45;&gt;nth1/3</title>
-<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L369" xlink:title="calls">
+<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L369" xlink:title="calls">
 <path fill="none" stroke="black" d="M303.71,-172.53C308.68,-154.11 316.58,-124.79 322.43,-103.1"/>
 <polygon fill="black" stroke="black" points="325.73,-104.28 324.96,-93.71 318.97,-102.46 325.73,-104.28"/>
 </a>
 </g>
-<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L369" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L369">
+<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L369" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L369">
 <text xml:space="preserve" text-anchor="start" x="315.43" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1126,7 +1126,7 @@
 <title>is_consonant_at/2</title>
 <polygon fill="cornsilk" stroke="black" points="394.51,-326 255.49,-326 255.49,-290 394.51,-290 394.51,-326"/>
 <text xml:space="preserve" text-anchor="start" x="263.49" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node24_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L380" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L380">
+<g id="a_node24_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L380" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L380">
 <text xml:space="preserve" text-anchor="start" x="268.89" y="-309.71" font-family="monospace" font-size="11.00">is_consonant_at/2</text>
 </a>
 </g>
@@ -1138,12 +1138,12 @@
 <!-- is_consonant_at/2&#45;&gt;is_vowel_at/2 -->
 <g id="edge45" class="edge">
 <title>is_consonant_at/2&#45;&gt;is_vowel_at/2</title>
-<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L380" xlink:title="calls">
+<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L380" xlink:title="calls">
 <path fill="none" stroke="black" d="M321.05,-289.53C316.9,-271.19 310.32,-242.06 305.42,-220.4"/>
 <polygon fill="black" stroke="black" points="308.85,-219.71 303.23,-210.73 302.03,-221.26 308.85,-219.71"/>
 </a>
 </g>
-<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L380" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L380">
+<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L380" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L380">
 <text xml:space="preserve" text-anchor="start" x="312.78" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1151,12 +1151,12 @@
 <!-- contains_vowel/1&#45;&gt;is_vowel_at/2 -->
 <g id="edge46" class="edge">
 <title>contains_vowel/1&#45;&gt;is_vowel_at/2</title>
-<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L391" xlink:title="calls">
+<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L391" xlink:title="calls">
 <path fill="none" stroke="black" d="M558.67,-292.91C519.23,-283.68 468.56,-270.31 425,-254 395.73,-243.04 364.18,-227.52 339.97,-214.74"/>
 <polygon fill="black" stroke="black" points="341.88,-211.79 331.41,-210.17 338.58,-217.97 341.88,-211.79"/>
 </a>
 </g>
-<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L391" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L391">
+<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L391" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L391">
 <text xml:space="preserve" text-anchor="start" x="425" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1178,12 +1178,12 @@
 <!-- contains_vowel/1&#45;&gt;list::length/2 -->
 <g id="edge64" class="edge">
 <title>contains_vowel/1&#45;&gt;list::length/2</title>
-<g id="a_edge64"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L391" xlink:title="calls">
+<g id="a_edge64"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L391" xlink:title="calls">
 <path fill="none" stroke="black" d="M608.75,-289.53C590.89,-270.34 562.04,-239.33 541.67,-217.44"/>
 <polygon fill="black" stroke="black" points="544.46,-215.3 535.08,-210.36 539.33,-220.07 544.46,-215.3"/>
 </a>
 </g>
-<g id="a_edge64&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L391" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L391">
+<g id="a_edge64&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L391" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L391">
 <text xml:space="preserve" text-anchor="start" x="574.71" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1205,12 +1205,12 @@
 <!-- contains_vowel/1&#45;&gt;integer::between/3 -->
 <g id="edge65" class="edge">
 <title>contains_vowel/1&#45;&gt;integer::between/3</title>
-<g id="a_edge65"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L391" xlink:title="calls">
+<g id="a_edge65"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L391" xlink:title="calls">
 <path fill="none" stroke="black" d="M633.96,-289.53C643.55,-270.85 658.87,-240.97 670.04,-219.2"/>
 <polygon fill="black" stroke="black" points="673.01,-221.1 674.46,-210.6 666.78,-217.9 673.01,-221.1"/>
 </a>
 </g>
-<g id="a_edge65&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L391" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L391">
+<g id="a_edge65&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L391" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L391">
 <text xml:space="preserve" text-anchor="start" x="656.27" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1220,7 +1220,7 @@
 <title>word_to_vc_sequence/2</title>
 <polygon fill="cornsilk" stroke="black" points="874.71,-326 709.29,-326 709.29,-290 874.71,-290 874.71,-326"/>
 <text xml:space="preserve" text-anchor="start" x="717.29" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node28_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L403" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L403">
+<g id="a_node28_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L403" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L403">
 <text xml:space="preserve" text-anchor="start" x="722.69" y="-309.71" font-family="monospace" font-size="11.00">word_to_vc_sequence/2</text>
 </a>
 </g>
@@ -1232,12 +1232,12 @@
 <!-- measure/2&#45;&gt;word_to_vc_sequence/2 -->
 <g id="edge47" class="edge">
 <title>measure/2&#45;&gt;word_to_vc_sequence/2</title>
-<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L399" xlink:title="calls">
+<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L399" xlink:title="calls">
 <path fill="none" stroke="black" d="M702.6,-406.58C686.73,-394.55 672,-377.92 682,-362 690.21,-348.93 702.65,-339 716.25,-331.49"/>
 <polygon fill="black" stroke="black" points="717.59,-334.74 724.96,-327.12 714.45,-328.48 717.59,-334.74"/>
 </a>
 </g>
-<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L399" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L399">
+<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L399" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L399">
 <text xml:space="preserve" text-anchor="start" x="682" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1247,7 +1247,7 @@
 <title>count_vc/2</title>
 <polygon fill="cornsilk" stroke="black" points="985.41,-326 892.59,-326 892.59,-290 985.41,-290 985.41,-326"/>
 <text xml:space="preserve" text-anchor="start" x="900.59" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node29_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L413" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L413">
+<g id="a_node29_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L413" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L413">
 <text xml:space="preserve" text-anchor="start" x="905.99" y="-309.71" font-family="monospace" font-size="11.00">count_vc/2</text>
 </a>
 </g>
@@ -1259,12 +1259,12 @@
 <!-- measure/2&#45;&gt;count_vc/2 -->
 <g id="edge48" class="edge">
 <title>measure/2&#45;&gt;count_vc/2</title>
-<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L399" xlink:title="calls">
+<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L399" xlink:title="calls">
 <path fill="none" stroke="black" d="M762.59,-406.53C798.66,-386.59 857.8,-353.9 897.54,-331.92"/>
 <polygon fill="black" stroke="black" points="899.07,-335.08 906.13,-327.17 895.68,-328.95 899.07,-335.08"/>
 </a>
 </g>
-<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L399" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L399">
+<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L399" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L399">
 <text xml:space="preserve" text-anchor="start" x="841.24" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1272,12 +1272,12 @@
 <!-- word_to_vc_sequence/2&#45;&gt;is_vowel_at/2 -->
 <g id="edge49" class="edge">
 <title>word_to_vc_sequence/2&#45;&gt;is_vowel_at/2</title>
-<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L403" xlink:title="calls">
+<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L403" xlink:title="calls">
 <path fill="none" stroke="black" d="M708.79,-290.8C658.85,-280.8 594.12,-267.37 537,-254 479.26,-240.49 414.13,-223.39 366.62,-210.58"/>
 <polygon fill="black" stroke="black" points="367.57,-207.21 357.01,-207.98 365.75,-213.97 367.57,-207.21"/>
 </a>
 </g>
-<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L403" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L403">
+<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L403" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L403">
 <text xml:space="preserve" text-anchor="start" x="537" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1285,12 +1285,12 @@
 <!-- word_to_vc_sequence/2&#45;&gt;list::length/2 -->
 <g id="edge66" class="edge">
 <title>word_to_vc_sequence/2&#45;&gt;list::length/2</title>
-<g id="a_edge66"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L403" xlink:title="calls">
+<g id="a_edge66"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L403" xlink:title="calls">
 <path fill="none" stroke="black" d="M766.57,-289.73C745.83,-276.22 715.43,-257.65 687,-245 655.72,-231.08 619.69,-219.25 588.95,-210.32"/>
 <polygon fill="black" stroke="black" points="589.92,-206.95 579.34,-207.57 587.99,-213.68 589.92,-206.95"/>
 </a>
 </g>
-<g id="a_edge66&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L403" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L403">
+<g id="a_edge66&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L403" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L403">
 <text xml:space="preserve" text-anchor="start" x="704.98" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1298,12 +1298,12 @@
 <!-- word_to_vc_sequence/2&#45;&gt;integer::between/3 -->
 <g id="edge67" class="edge">
 <title>word_to_vc_sequence/2&#45;&gt;integer::between/3</title>
-<g id="a_edge67"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L403" xlink:title="calls">
+<g id="a_edge67"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L403" xlink:title="calls">
 <path fill="none" stroke="black" d="M781.35,-289.51C773.06,-276.56 760.84,-258.83 748,-245 738.59,-234.86 727.25,-224.88 716.74,-216.36"/>
 <polygon fill="black" stroke="black" points="718.99,-213.68 708.98,-210.22 714.65,-219.17 718.99,-213.68"/>
 </a>
 </g>
-<g id="a_edge67&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L403" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L403">
+<g id="a_edge67&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L403" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L403">
 <text xml:space="preserve" text-anchor="start" x="754.82" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1313,7 +1313,7 @@
 <title>compress_vc/2</title>
 <polygon fill="cornsilk" stroke="black" points="1046.31,-209 933.69,-209 933.69,-173 1046.31,-173 1046.31,-209"/>
 <text xml:space="preserve" text-anchor="start" x="941.69" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node30_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L417" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L417">
+<g id="a_node30_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L417" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L417">
 <text xml:space="preserve" text-anchor="start" x="947.09" y="-192.71" font-family="monospace" font-size="11.00">compress_vc/2</text>
 </a>
 </g>
@@ -1325,12 +1325,12 @@
 <!-- count_vc/2&#45;&gt;compress_vc/2 -->
 <g id="edge50" class="edge">
 <title>count_vc/2&#45;&gt;compress_vc/2</title>
-<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L413" xlink:title="calls">
+<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L413" xlink:title="calls">
 <path fill="none" stroke="black" d="M946.75,-289.53C954.99,-270.94 968.16,-241.24 977.8,-219.5"/>
 <polygon fill="black" stroke="black" points="980.88,-221.2 981.73,-210.64 974.48,-218.36 980.88,-221.2"/>
 </a>
 </g>
-<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L413" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L413">
+<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L413" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L413">
 <text xml:space="preserve" text-anchor="start" x="966.03" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1340,7 +1340,7 @@
 <title>count_vc_pairs/3</title>
 <polygon fill="cornsilk" stroke="black" points="915.21,-209 782.79,-209 782.79,-173 915.21,-173 915.21,-209"/>
 <text xml:space="preserve" text-anchor="start" x="790.79" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node31_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L427" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L427">
+<g id="a_node31_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L427" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L427">
 <text xml:space="preserve" text-anchor="start" x="796.19" y="-192.71" font-family="monospace" font-size="11.00">count_vc_pairs/3</text>
 </a>
 </g>
@@ -1352,12 +1352,12 @@
 <!-- count_vc/2&#45;&gt;count_vc_pairs/3 -->
 <g id="edge51" class="edge">
 <title>count_vc/2&#45;&gt;count_vc_pairs/3</title>
-<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L413" xlink:title="calls">
+<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L413" xlink:title="calls">
 <path fill="none" stroke="black" d="M925.33,-289.53C910.51,-270.6 886.69,-240.16 869.6,-218.32"/>
 <polygon fill="black" stroke="black" points="872.36,-216.16 863.44,-210.45 866.84,-220.48 872.36,-216.16"/>
 </a>
 </g>
-<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L413" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L413">
+<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L413" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L413">
 <text xml:space="preserve" text-anchor="start" x="896.7" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1365,12 +1365,12 @@
 <!-- double_consonant/1&#45;&gt;is_consonant_at/2 -->
 <g id="edge53" class="edge">
 <title>double_consonant/1&#45;&gt;is_consonant_at/2</title>
-<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L446" xlink:title="calls">
+<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L446" xlink:title="calls">
 <path fill="none" stroke="black" d="M485.29,-406.53C452.73,-386.72 399.47,-354.31 363.36,-332.34"/>
 <polygon fill="black" stroke="black" points="365.32,-329.44 354.96,-327.23 361.68,-335.42 365.32,-329.44"/>
 </a>
 </g>
-<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L446" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L446">
+<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L446" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L446">
 <text xml:space="preserve" text-anchor="start" x="425.17" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1378,12 +1378,12 @@
 <!-- double_consonant/1&#45;&gt;nth1/3 -->
 <g id="edge52" class="edge">
 <title>double_consonant/1&#45;&gt;nth1/3</title>
-<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L446" xlink:title="calls">
+<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L446" xlink:title="calls">
 <path fill="none" stroke="black" d="M513.33,-406.77C511.31,-378.66 503.33,-322.78 472,-290 439.65,-256.16 401.94,-290.81 373,-254 350.61,-225.53 371.98,-208.33 364,-173 358.52,-148.77 349.08,-122.2 341.53,-102.85"/>
 <polygon fill="black" stroke="black" points="344.86,-101.76 337.91,-93.76 338.36,-104.35 344.86,-101.76"/>
 </a>
 </g>
-<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L446" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L446">
+<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L446" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L446">
 <text xml:space="preserve" text-anchor="start" x="373" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1391,12 +1391,12 @@
 <!-- double_consonant/1&#45;&gt;list::length/2 -->
 <g id="edge68" class="edge">
 <title>double_consonant/1&#45;&gt;list::length/2</title>
-<g id="a_edge68"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L446" xlink:title="calls">
+<g id="a_edge68"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L446" xlink:title="calls">
 <path fill="none" stroke="black" d="M514.3,-406.56C514.99,-366.83 516.67,-269.26 517.51,-220.58"/>
 <polygon fill="black" stroke="black" points="521,-220.9 517.68,-210.84 514,-220.78 521,-220.9"/>
 </a>
 </g>
-<g id="a_edge68&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L446" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L446">
+<g id="a_edge68&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L446" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L446">
 <text xml:space="preserve" text-anchor="start" x="516.27" y="-305.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1404,12 +1404,12 @@
 <!-- ends_cvc/1&#45;&gt;is_vowel_at/2 -->
 <g id="edge55" class="edge">
 <title>ends_cvc/1&#45;&gt;is_vowel_at/2</title>
-<g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L456" xlink:title="calls">
+<g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L456" xlink:title="calls">
 <path fill="none" stroke="black" d="M170.17,-406.6C122.5,-382.7 51.48,-337.26 82,-290 114.72,-239.31 180.68,-214.56 231.33,-202.66"/>
 <polygon fill="black" stroke="black" points="232.05,-206.08 241.06,-200.5 230.54,-199.25 232.05,-206.08"/>
 </a>
 </g>
-<g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L456" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L456">
+<g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L456" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L456">
 <text xml:space="preserve" text-anchor="start" x="82" y="-305.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1417,12 +1417,12 @@
 <!-- ends_cvc/1&#45;&gt;is_consonant_at/2 -->
 <g id="edge54" class="edge">
 <title>ends_cvc/1&#45;&gt;is_consonant_at/2</title>
-<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L456" xlink:title="calls">
+<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L456" xlink:title="calls">
 <path fill="none" stroke="black" d="M226.62,-406.53C246.06,-387.26 277.53,-356.06 299.63,-334.15"/>
 <polygon fill="black" stroke="black" points="301.88,-336.85 306.52,-327.32 296.96,-331.87 301.88,-336.85"/>
 </a>
 </g>
-<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L456" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L456">
+<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L456" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L456">
 <text xml:space="preserve" text-anchor="start" x="270.48" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1430,12 +1430,12 @@
 <!-- ends_cvc/1&#45;&gt;nth1/3 -->
 <g id="edge56" class="edge">
 <title>ends_cvc/1&#45;&gt;nth1/3</title>
-<g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L456" xlink:title="calls">
+<g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L456" xlink:title="calls">
 <path fill="none" stroke="black" d="M162.16,-408.3C141.18,-399.64 117.14,-387.29 99,-371 70.66,-345.55 64.53,-327.54 71,-290 74.61,-269.08 74.13,-261.89 87,-245 140.67,-174.54 231.94,-122.01 286.04,-95.13"/>
 <polygon fill="black" stroke="black" points="287.53,-98.29 294.98,-90.76 284.46,-92 287.53,-98.29"/>
 </a>
 </g>
-<g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L456" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L456">
+<g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L456" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L456">
 <text xml:space="preserve" text-anchor="start" x="87" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1443,12 +1443,12 @@
 <!-- ends_cvc/1&#45;&gt;list::member/2 -->
 <g id="edge70" class="edge">
 <title>ends_cvc/1&#45;&gt;list::member/2</title>
-<g id="a_edge70"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L456" xlink:title="calls">
+<g id="a_edge70"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L456" xlink:title="calls">
 <path fill="none" stroke="black" d="M204.29,-406.53C199.32,-388.11 191.42,-358.79 185.57,-337.1"/>
 <polygon fill="black" stroke="black" points="189.03,-336.46 183.04,-327.71 182.27,-338.28 189.03,-336.46"/>
 </a>
 </g>
-<g id="a_edge70&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L456" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L456">
+<g id="a_edge70&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L456" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L456">
 <text xml:space="preserve" text-anchor="start" x="194.43" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1456,12 +1456,12 @@
 <!-- ends_cvc/1&#45;&gt;list::length/2 -->
 <g id="edge69" class="edge">
 <title>ends_cvc/1&#45;&gt;list::length/2</title>
-<g id="a_edge69"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L456" xlink:title="calls">
+<g id="a_edge69"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L456" xlink:title="calls">
 <path fill="none" stroke="black" d="M255.73,-411.04C322.26,-389.97 442.76,-341.55 502,-254 508.7,-244.09 512.6,-231.56 514.86,-220.36"/>
 <polygon fill="black" stroke="black" points="518.26,-221.26 516.43,-210.82 511.35,-220.12 518.26,-221.26"/>
 </a>
 </g>
-<g id="a_edge69&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L456" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L456">
+<g id="a_edge69&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L456" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L456">
 <text xml:space="preserve" text-anchor="start" x="469.73" y="-305.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1469,12 +1469,12 @@
 <!-- ends_with/3&#45;&gt;list::append/3 -->
 <g id="edge71" class="edge">
 <title>ends_with/3&#45;&gt;list::append/3</title>
-<g id="a_edge71"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L469" xlink:title="calls">
+<g id="a_edge71"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L469" xlink:title="calls">
 <path fill="none" stroke="black" d="M996.17,-406.53C1020.97,-387 1061.3,-355.23 1089.17,-333.29"/>
 <polygon fill="black" stroke="black" points="1091.22,-336.13 1096.91,-327.19 1086.89,-330.63 1091.22,-336.13"/>
 </a>
 </g>
-<g id="a_edge71&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L469" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/stemming/porter_stemmer.lgt#L469">
+<g id="a_edge71&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L469" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/stemming/porter_stemmer.lgt#L469">
 <text xml:space="preserve" text-anchor="start" x="1051.38" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>

@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-752 1037,-752 1037,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object simulated_annealing/2</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 20:36</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;14, 01:03</text>
 <g id="clust1" class="cluster">
 <title>cluster_simulated_annealing_2_object</title>
 <g id="a_clust1"><a xlink:title="simulated_annealing(Problem,RandomAlgorithm)">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1013,-46 1013,-46 1019,-46 1025,-52 1025,-58 1025,-58 1025,-728 1025,-728 1025,-734 1019,-740 1013,-740 1013,-740 20,-740 20,-740 14,-740 8,-734 8,-728 8,-728 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-724.46" font-family="monospace" font-size="10.00" fill="dimgray">simulated_annealing(Problem,RandomAlgorithm)</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>estimate_temperature/1</title>
 <polygon fill="springgreen" stroke="black" points="299.01,-704 126.99,-704 126.99,-668 299.01,-668 299.01,-704"/>
 <text xml:space="preserve" text-anchor="start" x="134.99" y="-688.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L49">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L49">
 <text xml:space="preserve" text-anchor="start" x="140.39" y="-687.71" font-family="monospace" font-size="11.00">estimate_temperature/1</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>estimate_temperature/2</title>
 <polygon fill="springgreen" stroke="black" points="299.01,-587 126.99,-587 126.99,-551 299.01,-551 299.01,-587"/>
 <text xml:space="preserve" text-anchor="start" x="134.99" y="-571.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L56">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L56">
 <text xml:space="preserve" text-anchor="start" x="140.39" y="-570.71" font-family="monospace" font-size="11.00">estimate_temperature/2</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- estimate_temperature/1&#45;&gt;estimate_temperature/2 -->
 <g id="edge1" class="edge">
 <title>estimate_temperature/1&#45;&gt;estimate_temperature/2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L111" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L111" xlink:title="calls">
 <path fill="none" stroke="black" d="M213,-667.53C213,-649.28 213,-620.33 213,-598.7"/>
 <polygon fill="black" stroke="black" points="216.5,-598.77 213,-588.77 209.5,-598.77 216.5,-598.77"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L111">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L111">
 <text xml:space="preserve" text-anchor="start" x="213" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>sample_deltas/8</title>
 <polygon fill="cornsilk" stroke="black" points="190.91,-398 65.09,-398 65.09,-362 190.91,-362 190.91,-398"/>
 <text xml:space="preserve" text-anchor="start" x="73.09" y="-382.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L135">
+<g id="a_node6_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L135">
 <text xml:space="preserve" text-anchor="start" x="78.49" y="-381.71" font-family="monospace" font-size="11.00">sample_deltas/8</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- estimate_temperature/2&#45;&gt;sample_deltas/8 -->
 <g id="edge3" class="edge">
 <title>estimate_temperature/2&#45;&gt;sample_deltas/8</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L114" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L114" xlink:title="calls">
 <path fill="none" stroke="black" d="M144.01,-550.61C102.84,-536.3 53.87,-511.42 29,-470 20.76,-456.28 20.78,-447.73 29,-434 36.66,-421.21 48.59,-411.32 61.54,-403.76"/>
 <polygon fill="black" stroke="black" points="63.07,-406.91 70.26,-399.13 59.78,-400.73 63.07,-406.91"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L114" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L114">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L114" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L114">
 <text xml:space="preserve" text-anchor="start" x="69.65" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -97,7 +97,7 @@
 <title>hook_enabled/2</title>
 <polygon fill="cornsilk" stroke="black" points="157.61,-470 38.39,-470 38.39,-434 157.61,-434 157.61,-470"/>
 <text xml:space="preserve" text-anchor="start" x="46.39" y="-454.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L333" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L333">
+<g id="a_node10_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L333" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L333">
 <text xml:space="preserve" text-anchor="start" x="51.79" y="-453.71" font-family="monospace" font-size="11.00">hook_enabled/2</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- estimate_temperature/2&#45;&gt;hook_enabled/2 -->
 <g id="edge2" class="edge">
 <title>estimate_temperature/2&#45;&gt;hook_enabled/2</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L114" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L114" xlink:title="calls">
 <path fill="none" stroke="black" d="M195.53,-550.53C176.26,-531.26 145.06,-500.06 123.15,-478.15"/>
 <polygon fill="black" stroke="black" points="125.87,-475.92 116.32,-471.32 120.92,-480.87 125.87,-475.92"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L114" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L114">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L114" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L114">
 <text xml:space="preserve" text-anchor="start" x="158.95" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -133,12 +133,12 @@
 <!-- estimate_temperature/2&#45;&gt;^^check_options/1 -->
 <g id="edge17" class="edge">
 <title>estimate_temperature/2&#45;&gt;^^check_options/1</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L114" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L114" xlink:title="calls">
 <path fill="none" stroke="black" d="M240.86,-550.67C256.11,-540.79 275.08,-527.86 291,-515 304.96,-503.73 319.5,-490.06 331.29,-478.43"/>
 <polygon fill="black" stroke="black" points="333.66,-481 338.26,-471.46 328.71,-476.05 333.66,-481"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L114" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L114">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L114" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L114">
 <text xml:space="preserve" text-anchor="start" x="300.37" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -157,12 +157,12 @@
 <!-- estimate_temperature/2&#45;&gt;^^merge_options/2 -->
 <g id="edge18" class="edge">
 <title>estimate_temperature/2&#45;&gt;^^merge_options/2</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L114" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L114" xlink:title="calls">
 <path fill="none" stroke="black" d="M282.03,-550.58C315.43,-541.36 355.81,-529.05 391,-515 399.06,-511.78 437.7,-492.02 469.36,-475.66"/>
 <polygon fill="black" stroke="black" points="470.73,-478.9 478,-471.19 467.51,-472.68 470.73,-478.9"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L114" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L114">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L114" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L114">
 <text xml:space="preserve" text-anchor="start" x="409.11" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -181,12 +181,12 @@
 <!-- estimate_temperature/2&#45;&gt;^^option/2 -->
 <g id="edge19" class="edge">
 <title>estimate_temperature/2&#45;&gt;^^option/2</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L114" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L114" xlink:title="calls">
 <path fill="none" stroke="black" d="M212.66,-550.6C212.57,-538.15 212.75,-521.02 214,-506 214.66,-497.99 215.79,-489.36 216.99,-481.43"/>
 <polygon fill="black" stroke="black" points="220.44,-482.04 218.58,-471.61 213.53,-480.92 220.44,-482.04"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L114" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L114">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L114" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L114">
 <text xml:space="preserve" text-anchor="start" x="214" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -196,7 +196,7 @@
 <title>run/2</title>
 <polygon fill="springgreen" stroke="black" points="461.9,-704 402.1,-704 402.1,-668 461.9,-668 461.9,-704"/>
 <text xml:space="preserve" text-anchor="start" x="410.1" y="-688.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L67">
+<g id="a_node3_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="415.5" y="-687.71" font-family="monospace" font-size="11.00">run/2</text>
 </a>
 </g>
@@ -210,7 +210,7 @@
 <title>run/4</title>
 <polygon fill="springgreen" stroke="black" points="514.9,-587 455.1,-587 455.1,-551 514.9,-551 514.9,-587"/>
 <text xml:space="preserve" text-anchor="start" x="463.1" y="-571.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L88">
+<g id="a_node5_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L88">
 <text xml:space="preserve" text-anchor="start" x="468.5" y="-570.71" font-family="monospace" font-size="11.00">run/4</text>
 </a>
 </g>
@@ -222,12 +222,12 @@
 <!-- run/2&#45;&gt;run/4 -->
 <g id="edge5" class="edge">
 <title>run/2&#45;&gt;run/4</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L149" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L149" xlink:title="calls">
 <path fill="none" stroke="black" d="M440.05,-667.53C448.62,-648.94 462.3,-619.24 472.33,-597.5"/>
 <polygon fill="black" stroke="black" points="475.41,-599.18 476.41,-588.63 469.05,-596.25 475.41,-599.18"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L149" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L149">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L149" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L149">
 <text xml:space="preserve" text-anchor="start" x="460.09" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -237,7 +237,7 @@
 <title>run/3</title>
 <polygon fill="springgreen" stroke="black" points="539.9,-704 480.1,-704 480.1,-668 539.9,-668 539.9,-704"/>
 <text xml:space="preserve" text-anchor="start" x="488.1" y="-688.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L74">
+<g id="a_node4_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="493.5" y="-687.71" font-family="monospace" font-size="11.00">run/3</text>
 </a>
 </g>
@@ -249,12 +249,12 @@
 <!-- run/3&#45;&gt;run/4 -->
 <g id="edge6" class="edge">
 <title>run/3&#45;&gt;run/4</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L152" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L152" xlink:title="calls">
 <path fill="none" stroke="black" d="M506.2,-667.53C502.22,-649.19 495.88,-620.06 491.17,-598.4"/>
 <polygon fill="black" stroke="black" points="494.62,-597.76 489.07,-588.73 487.78,-599.25 494.62,-597.76"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L152" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L152">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L152" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L152">
 <text xml:space="preserve" text-anchor="start" x="498.25" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -264,7 +264,7 @@
 <title>restart_loop/18</title>
 <polygon fill="cornsilk" stroke="black" points="725.91,-470 600.09,-470 600.09,-434 725.91,-434 725.91,-470"/>
 <text xml:space="preserve" text-anchor="start" x="608.09" y="-454.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L200" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L200">
+<g id="a_node7_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L200" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L200">
 <text xml:space="preserve" text-anchor="start" x="613.49" y="-453.71" font-family="monospace" font-size="11.00">restart_loop/18</text>
 </a>
 </g>
@@ -276,12 +276,12 @@
 <!-- run/4&#45;&gt;restart_loop/18 -->
 <g id="edge8" class="edge">
 <title>run/4&#45;&gt;restart_loop/18</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L155" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L155" xlink:title="calls">
 <path fill="none" stroke="black" d="M512.03,-550.53C542.57,-530.8 592.44,-498.59 626.43,-476.62"/>
 <polygon fill="black" stroke="black" points="628.23,-479.63 634.73,-471.26 624.43,-473.75 628.23,-479.63"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L155">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="579.34" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -289,12 +289,12 @@
 <!-- run/4&#45;&gt;hook_enabled/2 -->
 <g id="edge7" class="edge">
 <title>run/4&#45;&gt;hook_enabled/2</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L155" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L155" xlink:title="calls">
 <path fill="none" stroke="black" d="M454.94,-563.01C411.25,-555.29 327.98,-538.81 260,-515 251.18,-511.91 249.61,-509.63 241,-506 214.42,-494.8 184.57,-483.54 159.04,-474.29"/>
 <polygon fill="black" stroke="black" points="160.4,-471.06 149.81,-470.97 158.03,-477.65 160.4,-471.06"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L155">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="260" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -316,12 +316,12 @@
 <!-- run/4&#45;&gt;fast_random(Algorithm)::randomize/1 -->
 <g id="edge23" class="edge">
 <title>run/4&#45;&gt;fast_random(Algorithm)::randomize/1</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L155" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L155" xlink:title="calls">
 <path fill="none" stroke="black" d="M515.26,-559.17C577.56,-540.98 721.56,-498.95 808.53,-473.57"/>
 <polygon fill="black" stroke="black" points="809.3,-476.99 817.92,-470.83 807.33,-470.27 809.3,-476.99"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L155">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="693.81" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -329,12 +329,12 @@
 <!-- run/4&#45;&gt;^^check_options/1 -->
 <g id="edge20" class="edge">
 <title>run/4&#45;&gt;^^check_options/1</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L155" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L155" xlink:title="calls">
 <path fill="none" stroke="black" d="M475.21,-550.54C467.2,-537.27 454.93,-519.12 441,-506 428.98,-494.68 414.18,-484.46 400.32,-476.09"/>
 <polygon fill="black" stroke="black" points="402.16,-473.11 391.76,-471.09 398.63,-479.16 402.16,-473.11"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L155">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="449.61" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -342,12 +342,12 @@
 <!-- run/4&#45;&gt;^^merge_options/2 -->
 <g id="edge21" class="edge">
 <title>run/4&#45;&gt;^^merge_options/2</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L155" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L155" xlink:title="calls">
 <path fill="none" stroke="black" d="M489.25,-550.53C493.72,-532.19 500.81,-503.06 506.09,-481.4"/>
 <polygon fill="black" stroke="black" points="509.48,-482.27 508.44,-471.72 502.67,-480.61 509.48,-482.27"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L155">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="499.84" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -355,12 +355,12 @@
 <!-- run/4&#45;&gt;^^option/2 -->
 <g id="edge22" class="edge">
 <title>run/4&#45;&gt;^^option/2</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L155" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L155" xlink:title="calls">
 <path fill="none" stroke="black" d="M454.83,-554.81C410.18,-535.28 325.98,-498.47 272.01,-474.87"/>
 <polygon fill="black" stroke="black" points="273.59,-471.74 263.02,-470.94 270.78,-478.15 273.59,-471.74"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L155">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="361.39" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -370,7 +370,7 @@
 <title>generate_neighbor/6</title>
 <polygon fill="cornsilk" stroke="black" points="256.11,-209 103.89,-209 103.89,-173 256.11,-173 256.11,-209"/>
 <text xml:space="preserve" text-anchor="start" x="111.89" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L320" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L320">
+<g id="a_node9_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L320" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L320">
 <text xml:space="preserve" text-anchor="start" x="117.29" y="-192.71" font-family="monospace" font-size="11.00">generate_neighbor/6</text>
 </a>
 </g>
@@ -382,12 +382,12 @@
 <!-- sample_deltas/8&#45;&gt;generate_neighbor/6 -->
 <g id="edge4" class="edge">
 <title>sample_deltas/8&#45;&gt;generate_neighbor/6</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L137" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L137" xlink:title="calls">
 <path fill="none" stroke="black" d="M132.8,-361.74C141.77,-329.47 161.17,-259.7 172.1,-220.4"/>
 <polygon fill="black" stroke="black" points="175.42,-221.52 174.73,-210.95 168.68,-219.64 175.42,-221.52"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L137">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L137">
 <text xml:space="preserve" text-anchor="start" x="151.77" y="-305.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -397,7 +397,7 @@
 <title>loop/17</title>
 <polygon fill="cornsilk" stroke="black" points="513.5,-326 440.5,-326 440.5,-290 513.5,-290 513.5,-326"/>
 <text xml:space="preserve" text-anchor="start" x="448.5" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L245" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L245">
+<g id="a_node8_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L245" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L245">
 <text xml:space="preserve" text-anchor="start" x="453.9" y="-309.71" font-family="monospace" font-size="11.00">loop/17</text>
 </a>
 </g>
@@ -409,12 +409,12 @@
 <!-- restart_loop/18&#45;&gt;loop/17 -->
 <g id="edge9" class="edge">
 <title>restart_loop/18&#45;&gt;loop/17</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L200" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L200" xlink:title="calls">
 <path fill="none" stroke="black" d="M640.19,-433.59C607.19,-408.4 546.01,-361.68 508.65,-333.17"/>
 <polygon fill="black" stroke="black" points="510.98,-330.54 500.91,-327.25 506.73,-336.1 510.98,-330.54"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L200" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L200">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L200" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L200">
 <text xml:space="preserve" text-anchor="start" x="592.13" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -422,12 +422,12 @@
 <!-- loop/17&#45;&gt;generate_neighbor/6 -->
 <g id="edge11" class="edge">
 <title>loop/17&#45;&gt;generate_neighbor/6</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L275" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L275" xlink:title="calls">
 <path fill="none" stroke="black" d="M440.28,-292.78C388.97,-272.91 295.38,-236.68 235.52,-213.5"/>
 <polygon fill="black" stroke="black" points="237.12,-210.36 226.53,-210.02 234.59,-216.89 237.12,-210.36"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L275" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L275">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L275" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L275">
 <text xml:space="preserve" text-anchor="start" x="337.41" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -437,7 +437,7 @@
 <title>accept/2</title>
 <polygon fill="cornsilk" stroke="black" points="396.81,-209 317.19,-209 317.19,-173 396.81,-173 396.81,-209"/>
 <text xml:space="preserve" text-anchor="start" x="325.19" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L343" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L343">
+<g id="a_node11_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L343" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L343">
 <text xml:space="preserve" text-anchor="start" x="330.6" y="-192.71" font-family="monospace" font-size="11.00">accept/2</text>
 </a>
 </g>
@@ -449,12 +449,12 @@
 <!-- loop/17&#45;&gt;accept/2 -->
 <g id="edge12" class="edge">
 <title>loop/17&#45;&gt;accept/2</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L275" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L275" xlink:title="calls">
 <path fill="none" stroke="black" d="M458.77,-289.53C438.66,-270.26 406.11,-239.06 383.24,-217.15"/>
 <polygon fill="black" stroke="black" points="385.74,-214.69 376.1,-210.3 380.89,-219.75 385.74,-214.69"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L275" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L275">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L275" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L275">
 <text xml:space="preserve" text-anchor="start" x="420.6" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -464,7 +464,7 @@
 <title>cool/4</title>
 <polygon fill="cornsilk" stroke="black" points="481.2,-209 414.8,-209 414.8,-173 481.2,-173 481.2,-209"/>
 <text xml:space="preserve" text-anchor="start" x="422.8" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node12_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L354">
+<g id="a_node12_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L354">
 <text xml:space="preserve" text-anchor="start" x="428.2" y="-192.71" font-family="monospace" font-size="11.00">cool/4</text>
 </a>
 </g>
@@ -476,12 +476,12 @@
 <!-- loop/17&#45;&gt;cool/4 -->
 <g id="edge13" class="edge">
 <title>loop/17&#45;&gt;cool/4</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L275" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L275" xlink:title="calls">
 <path fill="none" stroke="black" d="M472.6,-289.53C467.97,-271.19 460.62,-242.06 455.16,-220.4"/>
 <polygon fill="black" stroke="black" points="458.56,-219.56 452.72,-210.72 451.77,-221.27 458.56,-219.56"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L275" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L275">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L275" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L275">
 <text xml:space="preserve" text-anchor="start" x="463.37" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -491,7 +491,7 @@
 <title>report_progress/7</title>
 <polygon fill="cornsilk" stroke="black" points="775.51,-209 636.49,-209 636.49,-173 775.51,-173 775.51,-209"/>
 <text xml:space="preserve" text-anchor="start" x="644.49" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node13_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L365" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L365">
+<g id="a_node13_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L365" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L365">
 <text xml:space="preserve" text-anchor="start" x="649.89" y="-192.71" font-family="monospace" font-size="11.00">report_progress/7</text>
 </a>
 </g>
@@ -503,12 +503,12 @@
 <!-- loop/17&#45;&gt;report_progress/7 -->
 <g id="edge14" class="edge">
 <title>loop/17&#45;&gt;report_progress/7</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L275" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L275" xlink:title="calls">
 <path fill="none" stroke="black" d="M511.78,-289.53C551.74,-269.47 617.43,-236.48 661.19,-214.5"/>
 <polygon fill="black" stroke="black" points="662.55,-217.74 669.92,-210.12 659.41,-211.48 662.55,-217.74"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L275" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L275">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L275" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L275">
 <text xml:space="preserve" text-anchor="start" x="598.37" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -518,7 +518,7 @@
 <title>report_final/6</title>
 <polygon fill="cornsilk" stroke="black" points="618.61,-209 499.39,-209 499.39,-173 618.61,-173 618.61,-209"/>
 <text xml:space="preserve" text-anchor="start" x="507.39" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node14_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L374" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L374">
+<g id="a_node14_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L374" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L374">
 <text xml:space="preserve" text-anchor="start" x="512.79" y="-192.71" font-family="monospace" font-size="11.00">report_final/6</text>
 </a>
 </g>
@@ -530,12 +530,12 @@
 <!-- loop/17&#45;&gt;report_final/6 -->
 <g id="edge10" class="edge">
 <title>loop/17&#45;&gt;report_final/6</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L245" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L245" xlink:title="calls">
 <path fill="none" stroke="black" d="M489.45,-289.53C502.9,-270.68 524.47,-240.43 540.02,-218.61"/>
 <polygon fill="black" stroke="black" points="542.86,-220.66 545.82,-210.49 537.16,-216.6 542.86,-220.66"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L245" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L245">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L245" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L245">
 <text xml:space="preserve" text-anchor="start" x="520.46" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -557,12 +557,12 @@
 <!-- accept/2&#45;&gt;fast_random(Algorithm)::random/1 -->
 <g id="edge24" class="edge">
 <title>accept/2&#45;&gt;fast_random(Algorithm)::random/1</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L346" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L346" xlink:title="calls">
 <path fill="none" stroke="black" d="M357,-172.53C357,-154.28 357,-125.33 357,-103.7"/>
 <polygon fill="black" stroke="black" points="360.5,-103.77 357,-93.77 353.5,-103.77 360.5,-103.77"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L346" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L346">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L346" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L346">
 <text xml:space="preserve" text-anchor="start" x="357" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -572,7 +572,7 @@
 <title>call_progress/6</title>
 <polygon fill="cornsilk" stroke="black" points="697.91,-92 572.09,-92 572.09,-56 697.91,-56 697.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="580.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node15_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L380" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L380">
+<g id="a_node15_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L380" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L380">
 <text xml:space="preserve" text-anchor="start" x="585.49" y="-75.71" font-family="monospace" font-size="11.00">call_progress/6</text>
 </a>
 </g>
@@ -584,12 +584,12 @@
 <!-- report_progress/7&#45;&gt;call_progress/6 -->
 <g id="edge15" class="edge">
 <title>report_progress/7&#45;&gt;call_progress/6</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L365" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L365" xlink:title="calls">
 <path fill="none" stroke="black" d="M695.22,-172.53C683.63,-153.77 665.07,-123.7 651.61,-101.91"/>
 <polygon fill="black" stroke="black" points="654.68,-100.21 646.45,-93.54 648.72,-103.89 654.68,-100.21"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L365" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L365">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L365" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L365">
 <text xml:space="preserve" text-anchor="start" x="672.63" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -597,12 +597,12 @@
 <!-- report_final/6&#45;&gt;call_progress/6 -->
 <g id="edge16" class="edge">
 <title>report_final/6&#45;&gt;call_progress/6</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L374" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L374" xlink:title="calls">
 <path fill="none" stroke="black" d="M570.54,-172.53C583,-153.68 602.99,-123.43 617.41,-101.61"/>
 <polygon fill="black" stroke="black" points="620.17,-103.79 622.76,-93.52 614.33,-99.93 620.17,-103.79"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L374" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L374">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L374" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L374">
 <text xml:space="preserve" text-anchor="start" x="599.28" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -612,7 +612,7 @@
 <title>default_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="807.21,-704 674.79,-704 674.79,-668 807.21,-668 807.21,-704"/>
 <text xml:space="preserve" text-anchor="start" x="682.79" y="-688.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node16_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L391" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L391">
+<g id="a_node16_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L391" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L391">
 <text xml:space="preserve" text-anchor="start" x="688.19" y="-687.71" font-family="monospace" font-size="11.00">default_option/1</text>
 </a>
 </g>
@@ -626,7 +626,7 @@
 <title>valid_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="1002.61,-704 883.39,-704 883.39,-668 1002.61,-668 1002.61,-704"/>
 <text xml:space="preserve" text-anchor="start" x="891.39" y="-688.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node17_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L400" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L400">
+<g id="a_node17_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L400" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L400">
 <text xml:space="preserve" text-anchor="start" x="896.79" y="-687.71" font-family="monospace" font-size="11.00">valid_option/1</text>
 </a>
 </g>
@@ -652,12 +652,12 @@
 <!-- valid_option/1&#45;&gt;type::valid/2 -->
 <g id="edge25" class="edge">
 <title>valid_option/1&#45;&gt;type::valid/2</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L400" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L400" xlink:title="calls">
 <path fill="none" stroke="black" d="M943,-667.53C943,-649.28 943,-620.33 943,-598.7"/>
 <polygon fill="black" stroke="black" points="946.5,-598.77 943,-588.77 939.5,-598.77 946.5,-598.77"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L400" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/simulated_annealing/simulated_annealing.lgt#L400">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L400" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/simulated_annealing/simulated_annealing.lgt#L400">
 <text xml:space="preserve" text-anchor="start" x="943" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>

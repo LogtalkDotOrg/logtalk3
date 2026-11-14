@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-725 3366,-725 3366,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object qda_classifier</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 20:36</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;14, 01:03</text>
 <g id="clust1" class="cluster">
 <title>cluster_qda_classifier_object</title>
 <g id="a_clust1"><a xlink:title="qda_classifier">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 3342,-46 3342,-46 3348,-46 3354,-52 3354,-58 3354,-58 3354,-701 3354,-701 3354,-707 3348,-713 3342,-713 3342,-713 20,-713 20,-713 14,-713 8,-707 8,-701 8,-701 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-697.46" font-family="monospace" font-size="10.00" fill="dimgray">qda_classifier</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>predict_scores/3</title>
 <polygon fill="springgreen" stroke="black" points="2303.21,-560 2170.79,-560 2170.79,-524 2303.21,-524 2303.21,-560"/>
 <text xml:space="preserve" text-anchor="start" x="2178.79" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L33">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L33">
 <text xml:space="preserve" text-anchor="start" x="2184.19" y="-543.71" font-family="monospace" font-size="11.00">predict_scores/3</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>encode_instance/3</title>
 <polygon fill="cornsilk" stroke="black" points="1712.51,-443 1573.49,-443 1573.49,-407 1712.51,-407 1712.51,-443"/>
 <text xml:space="preserve" text-anchor="start" x="1581.49" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L94">
+<g id="a_node7_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L94">
 <text xml:space="preserve" text-anchor="start" x="1586.89" y="-426.71" font-family="monospace" font-size="11.00">encode_instance/3</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- predict_scores/3&#45;&gt;encode_instance/3 -->
 <g id="edge7" class="edge">
 <title>predict_scores/3&#45;&gt;encode_instance/3</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L76" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L76" xlink:title="calls">
 <path fill="none" stroke="black" d="M2170.4,-525.6C2167.57,-525.04 2164.76,-524.5 2162,-524 2047.23,-503.09 2016.64,-509.61 1902,-488 1839.98,-476.31 1770.48,-459.46 1719.09,-446.28"/>
 <polygon fill="black" stroke="black" points="1720.11,-442.93 1709.55,-443.82 1718.36,-449.71 1720.11,-442.93"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L76">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L76">
 <text xml:space="preserve" text-anchor="start" x="1902" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>model_scores/3</title>
 <polygon fill="cornsilk" stroke="black" points="2053.61,-443 1934.39,-443 1934.39,-407 2053.61,-407 2053.61,-443"/>
 <text xml:space="preserve" text-anchor="start" x="1942.39" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node13_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L150" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L150">
+<g id="a_node13_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L150" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L150">
 <text xml:space="preserve" text-anchor="start" x="1947.79" y="-426.71" font-family="monospace" font-size="11.00">model_scores/3</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- predict_scores/3&#45;&gt;model_scores/3 -->
 <g id="edge8" class="edge">
 <title>predict_scores/3&#45;&gt;model_scores/3</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L76" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L76" xlink:title="calls">
 <path fill="none" stroke="black" d="M2170.67,-524.71C2128.46,-513.69 2078.24,-499.16 2059,-488 2042.66,-478.53 2027.24,-464.15 2015.53,-451.62"/>
 <polygon fill="black" stroke="black" points="2018.35,-449.53 2009.05,-444.45 2013.16,-454.22 2018.35,-449.53"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L76">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L76">
 <text xml:space="preserve" text-anchor="start" x="2059" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -97,7 +97,7 @@
 <title>classifier_data/4</title>
 <polygon fill="cornsilk" stroke="black" points="2210.51,-443 2071.49,-443 2071.49,-407 2210.51,-407 2210.51,-443"/>
 <text xml:space="preserve" text-anchor="start" x="2079.49" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node24_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L226" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L226">
+<g id="a_node24_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L226" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L226">
 <text xml:space="preserve" text-anchor="start" x="2084.89" y="-426.71" font-family="monospace" font-size="11.00">classifier_data/4</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- predict_scores/3&#45;&gt;classifier_data/4 -->
 <g id="edge6" class="edge">
 <title>predict_scores/3&#45;&gt;classifier_data/4</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L76" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L76" xlink:title="calls">
 <path fill="none" stroke="black" d="M2189.74,-523.71C2173.57,-515.41 2157.04,-503.75 2147,-488 2140.81,-478.29 2138.73,-465.93 2138.41,-454.81"/>
 <polygon fill="black" stroke="black" points="2141.91,-454.99 2138.62,-444.92 2134.91,-454.84 2141.91,-454.99"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L76">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L76">
 <text xml:space="preserve" text-anchor="start" x="2147" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -124,7 +124,7 @@
 <title>classifier_export_template/4</title>
 <polygon fill="cornsilk" stroke="black" points="579.82,-677 368.18,-677 368.18,-641 579.82,-641 579.82,-677"/>
 <text xml:space="preserve" text-anchor="start" x="376.18" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L219" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L219">
+<g id="a_node2_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L219" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L219">
 <text xml:space="preserve" text-anchor="start" x="381.58" y="-660.71" font-family="monospace" font-size="11.00">classifier_export_template/4</text>
 </a>
 </g>
@@ -138,7 +138,7 @@
 <title>learn/3</title>
 <polygon fill="cornsilk" stroke="black" points="1078.5,-677 1005.5,-677 1005.5,-641 1078.5,-641 1078.5,-677"/>
 <text xml:space="preserve" text-anchor="start" x="1013.5" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58">
+<g id="a_node3_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="1018.9" y="-660.71" font-family="monospace" font-size="11.00">learn/3</text>
 </a>
 </g>
@@ -152,7 +152,7 @@
 <title>check_continuous_attributes/1</title>
 <polygon fill="cornsilk" stroke="black" points="1753.12,-560 1534.88,-560 1534.88,-524 1753.12,-524 1753.12,-560"/>
 <text xml:space="preserve" text-anchor="start" x="1542.88" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L81">
+<g id="a_node5_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L81">
 <text xml:space="preserve" text-anchor="start" x="1548.28" y="-543.71" font-family="monospace" font-size="11.00">check_continuous_attributes/1</text>
 </a>
 </g>
@@ -164,12 +164,12 @@
 <!-- learn/3&#45;&gt;check_continuous_attributes/1 -->
 <g id="edge1" class="edge">
 <title>learn/3&#45;&gt;check_continuous_attributes/1</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="calls">
 <path fill="none" stroke="black" d="M1078.63,-651.75C1134.75,-642.12 1245.36,-622.87 1339,-605 1409.83,-591.48 1489.69,-575.21 1549.92,-562.73"/>
 <polygon fill="black" stroke="black" points="1550.37,-566.21 1559.45,-560.75 1548.95,-559.36 1550.37,-566.21"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="1380.56" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -179,7 +179,7 @@
 <title>examples_to_rows/3</title>
 <polygon fill="cornsilk" stroke="black" points="1916.81,-560 1771.19,-560 1771.19,-524 1916.81,-524 1916.81,-560"/>
 <text xml:space="preserve" text-anchor="start" x="1779.19" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L89">
+<g id="a_node6_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L89">
 <text xml:space="preserve" text-anchor="start" x="1784.59" y="-543.71" font-family="monospace" font-size="11.00">examples_to_rows/3</text>
 </a>
 </g>
@@ -191,12 +191,12 @@
 <!-- learn/3&#45;&gt;examples_to_rows/3 -->
 <g id="edge2" class="edge">
 <title>learn/3&#45;&gt;examples_to_rows/3</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="calls">
 <path fill="none" stroke="black" d="M1078.85,-653.9C1183.72,-642.03 1492.9,-605.69 1759.66,-560.34"/>
 <polygon fill="black" stroke="black" points="1759.97,-563.84 1769.24,-558.71 1758.79,-556.94 1759.97,-563.84"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="1525.12" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -206,7 +206,7 @@
 <title>class_models/4</title>
 <polygon fill="cornsilk" stroke="black" points="293.61,-560 174.39,-560 174.39,-524 293.61,-524 293.61,-560"/>
 <text xml:space="preserve" text-anchor="start" x="182.39" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L103" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L103">
+<g id="a_node8_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L103" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L103">
 <text xml:space="preserve" text-anchor="start" x="187.79" y="-543.71" font-family="monospace" font-size="11.00">class_models/4</text>
 </a>
 </g>
@@ -218,12 +218,12 @@
 <!-- learn/3&#45;&gt;class_models/4 -->
 <g id="edge3" class="edge">
 <title>learn/3&#45;&gt;class_models/4</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="calls">
 <path fill="none" stroke="black" d="M1005.18,-654.65C898.22,-644.58 578.19,-612.18 304.92,-560.46"/>
 <polygon fill="black" stroke="black" points="305.95,-557.1 295.48,-558.66 304.64,-563.98 305.95,-557.1"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="565.23" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -242,12 +242,12 @@
 <!-- learn/3&#45;&gt;^^check_options/1 -->
 <g id="edge23" class="edge">
 <title>learn/3&#45;&gt;^^check_options/1</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="calls">
 <path fill="none" stroke="black" d="M1005.06,-652.42C914.31,-638.58 673.02,-600.97 461.7,-560.48"/>
 <polygon fill="black" stroke="black" points="462.67,-557.1 452.19,-558.65 461.35,-563.98 462.67,-557.1"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="698.7" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -266,12 +266,12 @@
 <!-- learn/3&#45;&gt;^^merge_options/2 -->
 <g id="edge24" class="edge">
 <title>learn/3&#45;&gt;^^merge_options/2</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="calls">
 <path fill="none" stroke="black" d="M1005.35,-649.64C924.65,-631.22 729.97,-586.8 619.01,-561.49"/>
 <polygon fill="black" stroke="black" points="619.89,-558.1 609.36,-559.28 618.33,-564.92 619.89,-558.1"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="805.11" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -290,12 +290,12 @@
 <!-- learn/3&#45;&gt;^^dataset_attributes/2 -->
 <g id="edge25" class="edge">
 <title>learn/3&#45;&gt;^^dataset_attributes/2</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="calls">
 <path fill="none" stroke="black" d="M1005.11,-645.14C948.75,-625.5 840.62,-587.82 772.62,-564.13"/>
 <polygon fill="black" stroke="black" points="774.09,-560.93 763.5,-560.95 771.79,-567.54 774.09,-560.93"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="886.89" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -314,12 +314,12 @@
 <!-- learn/3&#45;&gt;^^dataset_examples/2 -->
 <g id="edge26" class="edge">
 <title>learn/3&#45;&gt;^^dataset_examples/2</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="calls">
 <path fill="none" stroke="black" d="M1019.67,-640.53C994.71,-621 954.1,-589.23 926.05,-567.29"/>
 <polygon fill="black" stroke="black" points="928.28,-564.59 918.25,-561.19 923.97,-570.1 928.28,-564.59"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="972.91" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -338,12 +338,12 @@
 <!-- learn/3&#45;&gt;^^check_complete_examples_nonvar/2 -->
 <g id="edge27" class="edge">
 <title>learn/3&#45;&gt;^^check_complete_examples_nonvar/2</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="calls">
 <path fill="none" stroke="black" d="M1053.54,-640.53C1066,-621.68 1085.99,-591.43 1100.41,-569.61"/>
 <polygon fill="black" stroke="black" points="1103.17,-571.79 1105.76,-561.52 1097.33,-567.93 1103.17,-571.79"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="1082.28" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -362,12 +362,12 @@
 <!-- learn/3&#45;&gt;^^option/2 -->
 <g id="edge28" class="edge">
 <title>learn/3&#45;&gt;^^option/2</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="calls">
 <path fill="none" stroke="black" d="M1078.77,-645.43C1122.58,-629.47 1196.89,-599.23 1253,-560 1271.54,-547.04 1270.35,-536.82 1289,-524 1339.87,-489.02 1405.26,-461.79 1451.48,-445.01"/>
 <polygon fill="black" stroke="black" points="1452.55,-448.34 1460.79,-441.68 1450.19,-441.75 1452.55,-448.34"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="1289" y="-539.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -386,12 +386,12 @@
 <!-- learn/3&#45;&gt;^^build_linear_encoders/4 -->
 <g id="edge29" class="edge">
 <title>learn/3&#45;&gt;^^build_linear_encoders/4</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="calls">
 <path fill="none" stroke="black" d="M1078.88,-652.47C1127.07,-644.68 1213.71,-628.72 1285,-605 1317.06,-594.33 1351.69,-578.47 1377.99,-565.47"/>
 <polygon fill="black" stroke="black" points="1379.26,-568.74 1386.64,-561.14 1376.13,-562.48 1379.26,-568.74"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L58">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="1307.98" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -401,7 +401,7 @@
 <title>predict/3</title>
 <polygon fill="cornsilk" stroke="black" points="2338.11,-677 2251.89,-677 2251.89,-641 2338.11,-641 2338.11,-677"/>
 <text xml:space="preserve" text-anchor="start" x="2259.89" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L72" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L72">
+<g id="a_node4_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L72" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L72">
 <text xml:space="preserve" text-anchor="start" x="2265.3" y="-660.71" font-family="monospace" font-size="11.00">predict/3</text>
 </a>
 </g>
@@ -413,12 +413,12 @@
 <!-- predict/3&#45;&gt;predict_scores/3 -->
 <g id="edge4" class="edge">
 <title>predict/3&#45;&gt;predict_scores/3</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L72" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L72" xlink:title="calls">
 <path fill="none" stroke="black" d="M2286.19,-640.53C2276.81,-621.94 2261.84,-592.24 2250.87,-570.5"/>
 <polygon fill="black" stroke="black" points="2254.01,-568.96 2246.38,-561.6 2247.76,-572.11 2254.01,-568.96"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L72" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L72">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L72" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L72">
 <text xml:space="preserve" text-anchor="start" x="2267.74" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -428,7 +428,7 @@
 <title>max_score/3</title>
 <polygon fill="cornsilk" stroke="black" points="2420.71,-560 2321.29,-560 2321.29,-524 2420.71,-524 2420.71,-560"/>
 <text xml:space="preserve" text-anchor="start" x="2329.29" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node14_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L158">
+<g id="a_node14_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L158">
 <text xml:space="preserve" text-anchor="start" x="2334.69" y="-543.71" font-family="monospace" font-size="11.00">max_score/3</text>
 </a>
 </g>
@@ -440,12 +440,12 @@
 <!-- predict/3&#45;&gt;max_score/3 -->
 <g id="edge5" class="edge">
 <title>predict/3&#45;&gt;max_score/3</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L72" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L72" xlink:title="calls">
 <path fill="none" stroke="black" d="M2306.54,-640.53C2319,-621.68 2338.99,-591.43 2353.41,-569.61"/>
 <polygon fill="black" stroke="black" points="2356.17,-571.79 2358.76,-561.52 2350.33,-567.93 2356.17,-571.79"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L72" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L72">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L72" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L72">
 <text xml:space="preserve" text-anchor="start" x="2335.28" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -453,12 +453,12 @@
 <!-- examples_to_rows/3&#45;&gt;encode_instance/3 -->
 <g id="edge9" class="edge">
 <title>examples_to_rows/3&#45;&gt;encode_instance/3</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L90" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L90" xlink:title="calls">
 <path fill="none" stroke="black" d="M1776.7,-523.56C1751.37,-515.16 1723.13,-503.49 1700,-488 1685.67,-478.41 1672.44,-464.49 1662.35,-452.28"/>
 <polygon fill="black" stroke="black" points="1665.17,-450.2 1656.21,-444.55 1659.69,-454.56 1665.17,-450.2"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L90">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L90">
 <text xml:space="preserve" text-anchor="start" x="1700" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -480,12 +480,12 @@
 <!-- encode_instance/3&#45;&gt;list::memberchk/2 -->
 <g id="edge33" class="edge">
 <title>encode_instance/3&#45;&gt;list::memberchk/2</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L95" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L95" xlink:title="calls">
 <path fill="none" stroke="black" d="M1610.08,-406.53C1594.44,-397.26 1576.13,-384.91 1562,-371 1551.6,-360.77 1542.26,-347.61 1535.03,-336.04"/>
 <polygon fill="black" stroke="black" points="1538.18,-334.48 1530.04,-327.7 1532.18,-338.08 1538.18,-334.48"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L95">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="1562" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -495,7 +495,7 @@
 <title>collect_class_rows/3</title>
 <polygon fill="cornsilk" stroke="black" points="176.41,-443 17.59,-443 17.59,-407 176.41,-407 176.41,-443"/>
 <text xml:space="preserve" text-anchor="start" x="25.59" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L120">
+<g id="a_node9_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L120">
 <text xml:space="preserve" text-anchor="start" x="30.99" y="-426.71" font-family="monospace" font-size="11.00">collect_class_rows/3</text>
 </a>
 </g>
@@ -507,12 +507,12 @@
 <!-- class_models/4&#45;&gt;collect_class_rows/3 -->
 <g id="edge10" class="edge">
 <title>class_models/4&#45;&gt;collect_class_rows/3</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="calls">
 <path fill="none" stroke="black" d="M213.19,-523.53C190.02,-504.09 152.41,-472.51 126.28,-450.57"/>
 <polygon fill="black" stroke="black" points="128.62,-447.98 118.71,-444.23 124.12,-453.34 128.62,-447.98"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L104">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L104">
 <text xml:space="preserve" text-anchor="start" x="169.61" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -522,7 +522,7 @@
 <title>class_covariance/3</title>
 <polygon fill="cornsilk" stroke="black" points="339.81,-443 194.19,-443 194.19,-407 339.81,-407 339.81,-443"/>
 <text xml:space="preserve" text-anchor="start" x="202.19" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L127" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L127">
+<g id="a_node10_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L127" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L127">
 <text xml:space="preserve" text-anchor="start" x="207.59" y="-426.71" font-family="monospace" font-size="11.00">class_covariance/3</text>
 </a>
 </g>
@@ -534,12 +534,12 @@
 <!-- class_models/4&#45;&gt;class_covariance/3 -->
 <g id="edge11" class="edge">
 <title>class_models/4&#45;&gt;class_covariance/3</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="calls">
 <path fill="none" stroke="black" d="M239.01,-523.53C244.3,-505.11 252.71,-475.79 258.94,-454.1"/>
 <polygon fill="black" stroke="black" points="262.24,-455.29 261.63,-444.71 255.51,-453.36 262.24,-455.29"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L104">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L104">
 <text xml:space="preserve" text-anchor="start" x="251.49" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -561,12 +561,12 @@
 <!-- class_models/4&#45;&gt;list::length/2 -->
 <g id="edge34" class="edge">
 <title>class_models/4&#45;&gt;list::length/2</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="calls">
 <path fill="none" stroke="black" d="M259.17,-523.69C284.14,-505.64 322.41,-475.47 349,-443 360.6,-428.84 353.67,-417.01 369,-407 440.95,-360.02 669.21,-384.92 754,-371 1009.68,-329.03 1307.3,-249.43 1440.4,-212.18"/>
 <polygon fill="black" stroke="black" points="1441.09,-215.62 1449.77,-209.55 1439.19,-208.88 1441.09,-215.62"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L104">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L104">
 <text xml:space="preserve" text-anchor="start" x="801.67" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -588,12 +588,12 @@
 <!-- class_models/4&#45;&gt;linear_algebra::matrix_column_means/2 -->
 <g id="edge35" class="edge">
 <title>class_models/4&#45;&gt;linear_algebra::matrix_column_means/2</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="calls">
 <path fill="none" stroke="black" d="M277.06,-523.51C302.39,-513.2 335.03,-499.89 364,-488 396.36,-474.72 432.61,-459.74 461.36,-447.83"/>
 <polygon fill="black" stroke="black" points="462.7,-451.06 470.6,-444 460.02,-444.6 462.7,-451.06"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L104">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L104">
 <text xml:space="preserve" text-anchor="start" x="384.42" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -615,12 +615,12 @@
 <!-- class_models/4&#45;&gt;linear_algebra::shift_matrix_diagonal/3 -->
 <g id="edge36" class="edge">
 <title>class_models/4&#45;&gt;linear_algebra::shift_matrix_diagonal/3</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="calls">
 <path fill="none" stroke="black" d="M294.03,-525.8C296.72,-525.18 299.39,-524.58 302,-524 438.44,-493.81 596.67,-464.12 699.81,-445.47"/>
 <polygon fill="black" stroke="black" points="700.15,-448.97 709.37,-443.75 698.91,-442.08 700.15,-448.97"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L104">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L104">
 <text xml:space="preserve" text-anchor="start" x="510.74" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -642,12 +642,12 @@
 <!-- class_models/4&#45;&gt;linear_algebra::inverse_matrix/2 -->
 <g id="edge37" class="edge">
 <title>class_models/4&#45;&gt;linear_algebra::inverse_matrix/2</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="calls">
 <path fill="none" stroke="black" d="M293.98,-525.58C296.69,-525.02 299.37,-524.49 302,-524 443.67,-497.69 797.54,-463.37 958.52,-443.29"/>
 <polygon fill="black" stroke="black" points="958.79,-446.79 968.27,-442.06 957.91,-439.84 958.79,-446.79"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L104">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L104">
 <text xml:space="preserve" text-anchor="start" x="631.02" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -669,12 +669,12 @@
 <!-- class_models/4&#45;&gt;linear_algebra::determinant/2 -->
 <g id="edge38" class="edge">
 <title>class_models/4&#45;&gt;linear_algebra::determinant/2</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="calls">
 <path fill="none" stroke="black" d="M293.96,-525.47C296.67,-524.94 299.36,-524.44 302,-524 399.7,-507.57 1074.37,-457.81 1214.25,-443.22"/>
 <polygon fill="black" stroke="black" points="1214.36,-446.73 1223.92,-442.16 1213.6,-439.77 1214.36,-446.73"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L104">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L104">
 <text xml:space="preserve" text-anchor="start" x="783.64" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -682,12 +682,12 @@
 <!-- class_models/4&#45;&gt;^^option/2 -->
 <g id="edge30" class="edge">
 <title>class_models/4&#45;&gt;^^option/2</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="calls">
 <path fill="none" stroke="black" d="M293.95,-525.41C296.66,-524.89 299.36,-524.42 302,-524 551.65,-484.35 1182.65,-489.4 1450.81,-443.09"/>
 <polygon fill="black" stroke="black" points="1451.42,-446.53 1460.65,-441.33 1450.19,-439.64 1451.42,-446.53"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L104">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L104">
 <text xml:space="preserve" text-anchor="start" x="1011.85" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -697,7 +697,7 @@
 <title>feature_count/2</title>
 <polygon fill="cornsilk" stroke="black" points="825.91,-326 700.09,-326 700.09,-290 825.91,-290 825.91,-326"/>
 <text xml:space="preserve" text-anchor="start" x="708.09" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L140">
+<g id="a_node11_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L140">
 <text xml:space="preserve" text-anchor="start" x="713.49" y="-309.71" font-family="monospace" font-size="11.00">feature_count/2</text>
 </a>
 </g>
@@ -709,12 +709,12 @@
 <!-- class_covariance/3&#45;&gt;feature_count/2 -->
 <g id="edge12" class="edge">
 <title>class_covariance/3&#45;&gt;feature_count/2</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L127" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L127" xlink:title="calls">
 <path fill="none" stroke="black" d="M340.18,-407.2C422.4,-388.29 560.16,-356.54 688.95,-326.47"/>
 <polygon fill="black" stroke="black" points="689.37,-329.97 698.31,-324.29 687.78,-323.15 689.37,-329.97"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L127" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L127">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L127" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L127">
 <text xml:space="preserve" text-anchor="start" x="527.88" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -724,7 +724,7 @@
 <title>accumulate_scatter_rows/4</title>
 <polygon fill="cornsilk" stroke="black" points="681.91,-326 490.09,-326 490.09,-290 681.91,-290 681.91,-326"/>
 <text xml:space="preserve" text-anchor="start" x="498.09" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node12_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L143">
+<g id="a_node12_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L143">
 <text xml:space="preserve" text-anchor="start" x="503.49" y="-309.71" font-family="monospace" font-size="11.00">accumulate_scatter_rows/4</text>
 </a>
 </g>
@@ -736,12 +736,12 @@
 <!-- class_covariance/3&#45;&gt;accumulate_scatter_rows/4 -->
 <g id="edge13" class="edge">
 <title>class_covariance/3&#45;&gt;accumulate_scatter_rows/4</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L127" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L127" xlink:title="calls">
 <path fill="none" stroke="black" d="M315.45,-406.53C372.18,-386.08 466.1,-352.22 527.02,-330.26"/>
 <polygon fill="black" stroke="black" points="527.97,-333.64 536.19,-326.95 525.6,-327.05 527.97,-333.64"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L127" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L127">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L127" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L127">
 <text xml:space="preserve" text-anchor="start" x="436.06" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -749,12 +749,12 @@
 <!-- class_covariance/3&#45;&gt;list::length/2 -->
 <g id="edge40" class="edge">
 <title>class_covariance/3&#45;&gt;list::length/2</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L127" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L127" xlink:title="calls">
 <path fill="none" stroke="black" d="M340.08,-409.58C344.79,-408.69 349.46,-407.83 354,-407 567.29,-368.21 646.83,-433.65 835,-326 875.8,-302.66 861.28,-266.65 903,-245 986.94,-201.45 1232.81,-217.35 1327,-209 1364.18,-205.7 1405.57,-201.89 1439.66,-198.72"/>
 <polygon fill="black" stroke="black" points="1439.79,-202.22 1449.42,-197.8 1439.14,-195.25 1439.79,-202.22"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L127" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L127">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L127" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L127">
 <text xml:space="preserve" text-anchor="start" x="865.95" y="-305.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -776,12 +776,12 @@
 <!-- class_covariance/3&#45;&gt;linear_algebra::new_matrix/4 -->
 <g id="edge39" class="edge">
 <title>class_covariance/3&#45;&gt;linear_algebra::new_matrix/4</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L127" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L127" xlink:title="calls">
 <path fill="none" stroke="black" d="M245.28,-406.53C220.99,-387 181.49,-355.23 154.2,-333.29"/>
 <polygon fill="black" stroke="black" points="156.62,-330.74 146.63,-327.2 152.23,-336.2 156.62,-330.74"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L127" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L127">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L127" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L127">
 <text xml:space="preserve" text-anchor="start" x="199.79" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -803,12 +803,12 @@
 <!-- class_covariance/3&#45;&gt;linear_algebra::scale_matrix/3 -->
 <g id="edge41" class="edge">
 <title>class_covariance/3&#45;&gt;linear_algebra::scale_matrix/3</title>
-<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L127" xlink:title="calls">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L127" xlink:title="calls">
 <path fill="none" stroke="black" d="M281.12,-406.53C296.51,-387.51 321.28,-356.88 338.95,-335.02"/>
 <polygon fill="black" stroke="black" points="341.53,-337.41 345.1,-327.43 336.09,-333.01 341.53,-337.41"/>
 </a>
 </g>
-<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L127" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L127">
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L127" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L127">
 <text xml:space="preserve" text-anchor="start" x="316.29" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -816,12 +816,12 @@
 <!-- feature_count/2&#45;&gt;list::length/2 -->
 <g id="edge42" class="edge">
 <title>feature_count/2&#45;&gt;list::length/2</title>
-<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L140" xlink:title="calls">
+<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L140" xlink:title="calls">
 <path fill="none" stroke="black" d="M776.01,-289.65C788.17,-274.91 807.75,-254.65 830,-245 931.57,-200.91 1216.64,-218.09 1327,-209 1364.2,-205.93 1405.59,-202.14 1439.68,-198.92"/>
 <polygon fill="black" stroke="black" points="1439.82,-202.42 1449.44,-197.99 1439.15,-195.46 1439.82,-202.42"/>
 </a>
 </g>
-<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L140">
+<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L140">
 <text xml:space="preserve" text-anchor="start" x="830" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -843,12 +843,12 @@
 <!-- accumulate_scatter_rows/4&#45;&gt;linear_algebra::subtract_vectors/3 -->
 <g id="edge43" class="edge">
 <title>accumulate_scatter_rows/4&#45;&gt;linear_algebra::subtract_vectors/3</title>
-<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L144" xlink:title="calls">
+<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L144" xlink:title="calls">
 <path fill="none" stroke="black" d="M623.2,-289.62C655.29,-275.37 703.24,-255.85 747,-245 848.56,-219.81 966.24,-206.46 1055.06,-199.46"/>
 <polygon fill="black" stroke="black" points="1055.09,-202.97 1064.79,-198.72 1054.55,-195.99 1055.09,-202.97"/>
 </a>
 </g>
-<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L144">
+<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L144">
 <text xml:space="preserve" text-anchor="start" x="747" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -870,12 +870,12 @@
 <!-- accumulate_scatter_rows/4&#45;&gt;linear_algebra::outer_product/3 -->
 <g id="edge44" class="edge">
 <title>accumulate_scatter_rows/4&#45;&gt;linear_algebra::outer_product/3</title>
-<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L144" xlink:title="calls">
+<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L144" xlink:title="calls">
 <path fill="none" stroke="black" d="M566.41,-289.53C544.69,-270.17 509.48,-238.79 484.89,-216.86"/>
 <polygon fill="black" stroke="black" points="487.28,-214.3 477.48,-210.26 482.62,-219.53 487.28,-214.3"/>
 </a>
 </g>
-<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L144">
+<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L144">
 <text xml:space="preserve" text-anchor="start" x="525.37" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -897,12 +897,12 @@
 <!-- accumulate_scatter_rows/4&#45;&gt;linear_algebra::add_matrices/3 -->
 <g id="edge45" class="edge">
 <title>accumulate_scatter_rows/4&#45;&gt;linear_algebra::add_matrices/3</title>
-<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L144" xlink:title="calls">
+<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L144" xlink:title="calls">
 <path fill="none" stroke="black" d="M601.61,-289.51C613.07,-276.88 629.15,-259.55 644,-245 653.56,-235.63 664.37,-225.73 674.1,-217.06"/>
 <polygon fill="black" stroke="black" points="676.36,-219.73 681.53,-210.49 671.72,-214.49 676.36,-219.73"/>
 </a>
 </g>
-<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L144">
+<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L144">
 <text xml:space="preserve" text-anchor="start" x="644" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -910,12 +910,12 @@
 <!-- model_scores/3&#45;&gt;linear_algebra::subtract_vectors/3 -->
 <g id="edge46" class="edge">
 <title>model_scores/3&#45;&gt;linear_algebra::subtract_vectors/3</title>
-<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L151" xlink:title="calls">
+<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L151" xlink:title="calls">
 <path fill="none" stroke="black" d="M1933.99,-408.89C1850.77,-387.56 1704.92,-348.68 1655,-326 1628.06,-313.76 1626.21,-301.63 1599,-290 1509.39,-251.71 1401.99,-226.64 1320.03,-211.45"/>
 <polygon fill="black" stroke="black" points="1320.84,-208.05 1310.38,-209.69 1319.59,-214.93 1320.84,-208.05"/>
 </a>
 </g>
-<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L151">
+<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L151">
 <text xml:space="preserve" text-anchor="start" x="1655" y="-305.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -937,12 +937,12 @@
 <!-- model_scores/3&#45;&gt;linear_algebra::matrix_vector_product/3 -->
 <g id="edge47" class="edge">
 <title>model_scores/3&#45;&gt;linear_algebra::matrix_vector_product/3</title>
-<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L151" xlink:title="calls">
+<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L151" xlink:title="calls">
 <path fill="none" stroke="black" d="M1969.55,-406.53C1942.04,-386.89 1897.21,-354.87 1866.47,-332.91"/>
 <polygon fill="black" stroke="black" points="1868.82,-330.29 1858.65,-327.32 1864.75,-335.98 1868.82,-330.29"/>
 </a>
 </g>
-<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L151">
+<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L151">
 <text xml:space="preserve" text-anchor="start" x="1918.33" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -964,12 +964,12 @@
 <!-- model_scores/3&#45;&gt;linear_algebra::dot_product/3 -->
 <g id="edge48" class="edge">
 <title>model_scores/3&#45;&gt;linear_algebra::dot_product/3</title>
-<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L151" xlink:title="calls">
+<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L151" xlink:title="calls">
 <path fill="none" stroke="black" d="M2010.4,-406.53C2028.43,-387.34 2057.55,-356.33 2078.11,-334.44"/>
 <polygon fill="black" stroke="black" points="2080.47,-337.04 2084.76,-327.36 2075.36,-332.25 2080.47,-337.04"/>
 </a>
 </g>
-<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L151">
+<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L151">
 <text xml:space="preserve" text-anchor="start" x="2051.24" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -979,7 +979,7 @@
 <title>classifier_diagnostics_data/2</title>
 <polygon fill="cornsilk" stroke="black" points="2153.12,-560 1934.88,-560 1934.88,-524 2153.12,-524 2153.12,-560"/>
 <text xml:space="preserve" text-anchor="start" x="1942.88" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node15_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L166" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L166">
+<g id="a_node15_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L166" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L166">
 <text xml:space="preserve" text-anchor="start" x="1948.28" y="-543.71" font-family="monospace" font-size="11.00">classifier_diagnostics_data/2</text>
 </a>
 </g>
@@ -993,7 +993,7 @@
 <title>classes_from_models/2</title>
 <polygon fill="cornsilk" stroke="black" points="1916.71,-443 1751.29,-443 1751.29,-407 1916.71,-407 1916.71,-443"/>
 <text xml:space="preserve" text-anchor="start" x="1759.29" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node16_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L177">
+<g id="a_node16_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L177">
 <text xml:space="preserve" text-anchor="start" x="1764.69" y="-426.71" font-family="monospace" font-size="11.00">classes_from_models/2</text>
 </a>
 </g>
@@ -1005,12 +1005,12 @@
 <!-- classifier_diagnostics_data/2&#45;&gt;classes_from_models/2 -->
 <g id="edge15" class="edge">
 <title>classifier_diagnostics_data/2&#45;&gt;classes_from_models/2</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L166" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L166" xlink:title="calls">
 <path fill="none" stroke="black" d="M2012.11,-523.53C1975.69,-503.59 1915.99,-470.9 1875.86,-448.92"/>
 <polygon fill="black" stroke="black" points="1877.63,-445.9 1867.18,-444.17 1874.27,-452.04 1877.63,-445.9"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L166" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L166">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L166" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L166">
 <text xml:space="preserve" text-anchor="start" x="1945.3" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1018,12 +1018,12 @@
 <!-- classifier_diagnostics_data/2&#45;&gt;classifier_data/4 -->
 <g id="edge14" class="edge">
 <title>classifier_diagnostics_data/2&#45;&gt;classifier_data/4</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L166" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L166" xlink:title="calls">
 <path fill="none" stroke="black" d="M2058.73,-523.53C2074.78,-504.51 2100.61,-473.88 2119.05,-452.02"/>
 <polygon fill="black" stroke="black" points="2121.7,-454.31 2125.47,-444.41 2116.35,-449.8 2121.7,-454.31"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L166" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L166">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L166" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L166">
 <text xml:space="preserve" text-anchor="start" x="2095.41" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1031,12 +1031,12 @@
 <!-- classifier_diagnostics_data/2&#45;&gt;list::length/2 -->
 <g id="edge49" class="edge">
 <title>classifier_diagnostics_data/2&#45;&gt;list::length/2</title>
-<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L166" xlink:title="calls">
+<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L166" xlink:title="calls">
 <path fill="none" stroke="black" d="M1967.46,-523.52C1889.64,-504.48 1775.84,-472.76 1742,-443 1728.26,-430.91 1734.03,-420.79 1722,-407 1682.56,-361.78 1650.84,-373.36 1614,-326 1603.36,-312.32 1608.25,-304.66 1599,-290 1581.85,-262.84 1557.02,-235.98 1538.11,-217.26"/>
 <polygon fill="black" stroke="black" points="1540.58,-214.78 1530.97,-210.32 1535.7,-219.8 1540.58,-214.78"/>
 </a>
 </g>
-<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L166" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L166">
+<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L166" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L166">
 <text xml:space="preserve" text-anchor="start" x="1674.3" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1046,7 +1046,7 @@
 <title>check_classifier/1</title>
 <polygon fill="cornsilk" stroke="black" points="2584.81,-560 2439.19,-560 2439.19,-524 2584.81,-524 2584.81,-560"/>
 <text xml:space="preserve" text-anchor="start" x="2447.19" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node17_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L181">
+<g id="a_node17_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L181">
 <text xml:space="preserve" text-anchor="start" x="2452.59" y="-543.71" font-family="monospace" font-size="11.00">check_classifier/1</text>
 </a>
 </g>
@@ -1060,7 +1060,7 @@
 <title>valid_continuous_encoders/1</title>
 <polygon fill="cornsilk" stroke="black" points="2957.52,-443 2752.48,-443 2752.48,-407 2957.52,-407 2957.52,-443"/>
 <text xml:space="preserve" text-anchor="start" x="2760.48" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node18_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L192" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L192">
+<g id="a_node18_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L192" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L192">
 <text xml:space="preserve" text-anchor="start" x="2765.89" y="-426.71" font-family="monospace" font-size="11.00">valid_continuous_encoders/1</text>
 </a>
 </g>
@@ -1072,12 +1072,12 @@
 <!-- check_classifier/1&#45;&gt;valid_continuous_encoders/1 -->
 <g id="edge17" class="edge">
 <title>check_classifier/1&#45;&gt;valid_continuous_encoders/1</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L181" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L181" xlink:title="calls">
 <path fill="none" stroke="black" d="M2583.29,-523.5C2619.72,-514.01 2664.57,-501.48 2704,-488 2738.51,-476.2 2776.48,-460.6 2805.72,-447.99"/>
 <polygon fill="black" stroke="black" points="2806.9,-451.29 2814.68,-444.1 2804.11,-444.87 2806.9,-451.29"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L181">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L181">
 <text xml:space="preserve" text-anchor="start" x="2724.91" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1087,7 +1087,7 @@
 <title>valid_models/2</title>
 <polygon fill="cornsilk" stroke="black" points="2368.61,-443 2249.39,-443 2249.39,-407 2368.61,-407 2368.61,-443"/>
 <text xml:space="preserve" text-anchor="start" x="2257.39" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node19_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L196">
+<g id="a_node19_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L196">
 <text xml:space="preserve" text-anchor="start" x="2262.79" y="-426.71" font-family="monospace" font-size="11.00">valid_models/2</text>
 </a>
 </g>
@@ -1099,12 +1099,12 @@
 <!-- check_classifier/1&#45;&gt;valid_models/2 -->
 <g id="edge18" class="edge">
 <title>check_classifier/1&#45;&gt;valid_models/2</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L181" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L181" xlink:title="calls">
 <path fill="none" stroke="black" d="M2481.17,-523.53C2446.04,-503.63 2388.5,-471.04 2349.71,-449.06"/>
 <polygon fill="black" stroke="black" points="2351.53,-446.07 2341.11,-444.19 2348.08,-452.16 2351.53,-446.07"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L181">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L181">
 <text xml:space="preserve" text-anchor="start" x="2416.59" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1112,12 +1112,12 @@
 <!-- check_classifier/1&#45;&gt;classifier_data/4 -->
 <g id="edge16" class="edge">
 <title>check_classifier/1&#45;&gt;classifier_data/4</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L181" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L181" xlink:title="calls">
 <path fill="none" stroke="black" d="M2438.72,-525.62C2435.78,-525.06 2432.86,-524.52 2430,-524 2327.32,-505.4 2290.03,-537.17 2198,-488 2182.33,-479.63 2168.69,-465.24 2158.69,-452.42"/>
 <polygon fill="black" stroke="black" points="2161.73,-450.66 2152.97,-444.7 2156.11,-454.82 2161.73,-450.66"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L181">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L181">
 <text xml:space="preserve" text-anchor="start" x="2198" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1125,12 +1125,12 @@
 <!-- check_classifier/1&#45;&gt;list::length/2 -->
 <g id="edge50" class="edge">
 <title>check_classifier/1&#45;&gt;list::length/2</title>
-<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L181" xlink:title="calls">
+<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L181" xlink:title="calls">
 <path fill="none" stroke="black" d="M2438.89,-523.79C2367.32,-505.41 2265.45,-474.63 2240,-443 2197.01,-389.57 2268.31,-338.67 2220,-290 2131.89,-201.24 1743.99,-191.47 1582.22,-191.35"/>
 <polygon fill="black" stroke="black" points="1582.49,-187.85 1572.49,-191.36 1582.49,-194.85 1582.49,-187.85"/>
 </a>
 </g>
-<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L181">
+<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L181">
 <text xml:space="preserve" text-anchor="start" x="2232.59" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1149,12 +1149,12 @@
 <!-- check_classifier/1&#45;&gt;::check_options/1 -->
 <g id="edge22" class="edge">
 <title>check_classifier/1&#45;&gt;::check_options/1</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L181" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L181" xlink:title="calls">
 <path fill="none" stroke="black" d="M2503.49,-523.53C2494.44,-504.94 2479.98,-475.24 2469.39,-453.5"/>
 <polygon fill="black" stroke="black" points="2472.59,-452.07 2465.06,-444.61 2466.3,-455.14 2472.59,-452.07"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L181">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L181">
 <text xml:space="preserve" text-anchor="start" x="2485.68" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1173,12 +1173,12 @@
 <!-- check_classifier/1&#45;&gt;^^valid_linear_encoders/1 -->
 <g id="edge31" class="edge">
 <title>check_classifier/1&#45;&gt;^^valid_linear_encoders/1</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L181" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L181" xlink:title="calls">
 <path fill="none" stroke="black" d="M2531.29,-523.53C2552.67,-504.17 2587.33,-472.79 2611.54,-450.86"/>
 <polygon fill="black" stroke="black" points="2613.76,-453.58 2618.82,-444.27 2609.06,-448.39 2613.76,-453.58"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L181">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L181">
 <text xml:space="preserve" text-anchor="start" x="2579.31" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1188,7 +1188,7 @@
 <title>valid_square_matrix/2</title>
 <polygon fill="cornsilk" stroke="black" points="2414.71,-326 2249.29,-326 2249.29,-290 2414.71,-290 2414.71,-326"/>
 <text xml:space="preserve" text-anchor="start" x="2257.29" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node20_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L206" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L206">
+<g id="a_node20_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L206" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L206">
 <text xml:space="preserve" text-anchor="start" x="2262.69" y="-309.71" font-family="monospace" font-size="11.00">valid_square_matrix/2</text>
 </a>
 </g>
@@ -1200,12 +1200,12 @@
 <!-- valid_models/2&#45;&gt;valid_square_matrix/2 -->
 <g id="edge19" class="edge">
 <title>valid_models/2&#45;&gt;valid_square_matrix/2</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L197" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L197" xlink:title="calls">
 <path fill="none" stroke="black" d="M2312.49,-406.53C2316.16,-388.19 2321.99,-359.06 2326.32,-337.4"/>
 <polygon fill="black" stroke="black" points="2329.72,-338.23 2328.25,-327.74 2322.86,-336.86 2329.72,-338.23"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L197" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L197">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L197" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L197">
 <text xml:space="preserve" text-anchor="start" x="2321.19" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1227,12 +1227,12 @@
 <!-- valid_models/2&#45;&gt;type::valid/2 -->
 <g id="edge51" class="edge">
 <title>valid_models/2&#45;&gt;type::valid/2</title>
-<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L197" xlink:title="calls">
+<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L197" xlink:title="calls">
 <path fill="none" stroke="black" d="M2340.83,-406.68C2394.29,-375.48 2500.08,-304.11 2539,-209 2553.25,-174.18 2541.88,-130.55 2531.35,-102.72"/>
 <polygon fill="black" stroke="black" points="2534.65,-101.56 2527.68,-93.59 2528.16,-104.17 2534.65,-101.56"/>
 </a>
 </g>
-<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L197" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L197">
+<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L197" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L197">
 <text xml:space="preserve" text-anchor="start" x="2519.68" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1242,7 +1242,7 @@
 <title>valid_square_matrix_rows/2</title>
 <polygon fill="cornsilk" stroke="black" points="2530.21,-209 2331.79,-209 2331.79,-173 2530.21,-173 2530.21,-209"/>
 <text xml:space="preserve" text-anchor="start" x="2339.79" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node21_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L211">
+<g id="a_node21_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L211">
 <text xml:space="preserve" text-anchor="start" x="2345.19" y="-192.71" font-family="monospace" font-size="11.00">valid_square_matrix_rows/2</text>
 </a>
 </g>
@@ -1254,12 +1254,12 @@
 <!-- valid_square_matrix/2&#45;&gt;valid_square_matrix_rows/2 -->
 <g id="edge20" class="edge">
 <title>valid_square_matrix/2&#45;&gt;valid_square_matrix_rows/2</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L206" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L206" xlink:title="calls">
 <path fill="none" stroke="black" d="M2347.04,-289.53C2363.49,-270.43 2390.01,-239.61 2408.85,-217.73"/>
 <polygon fill="black" stroke="black" points="2411.29,-220.26 2415.16,-210.4 2405.98,-215.7 2411.29,-220.26"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L206" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L206">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L206" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L206">
 <text xml:space="preserve" text-anchor="start" x="2384.47" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1267,12 +1267,12 @@
 <!-- valid_square_matrix/2&#45;&gt;list::length/2 -->
 <g id="edge53" class="edge">
 <title>valid_square_matrix/2&#45;&gt;list::length/2</title>
-<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L206" xlink:title="calls">
+<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L206" xlink:title="calls">
 <path fill="none" stroke="black" d="M2310.9,-289.66C2291.64,-274.92 2261.72,-254.66 2232,-245 2112.64,-206.21 1739.73,-195.68 1582.28,-192.93"/>
 <polygon fill="black" stroke="black" points="1582.45,-189.43 1572.39,-192.76 1582.33,-196.43 1582.45,-189.43"/>
 </a>
 </g>
-<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L206" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L206">
+<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L206" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L206">
 <text xml:space="preserve" text-anchor="start" x="2252.78" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1280,12 +1280,12 @@
 <!-- valid_square_matrix/2&#45;&gt;type::valid/2 -->
 <g id="edge52" class="edge">
 <title>valid_square_matrix/2&#45;&gt;type::valid/2</title>
-<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L206" xlink:title="calls">
+<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L206" xlink:title="calls">
 <path fill="none" stroke="black" d="M2319.01,-289.53C2300.65,-262.53 2271.9,-209.91 2296,-173 2330.08,-120.79 2398.87,-96.21 2451.08,-84.76"/>
 <polygon fill="black" stroke="black" points="2451.72,-88.2 2460.81,-82.75 2450.31,-81.34 2451.72,-88.2"/>
 </a>
 </g>
-<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L206" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L206">
+<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L206" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L206">
 <text xml:space="preserve" text-anchor="start" x="2296" y="-188.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1293,12 +1293,12 @@
 <!-- valid_square_matrix_rows/2&#45;&gt;type::valid/2 -->
 <g id="edge54" class="edge">
 <title>valid_square_matrix_rows/2&#45;&gt;type::valid/2</title>
-<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L212" xlink:title="calls">
+<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L212" xlink:title="calls">
 <path fill="none" stroke="black" d="M2444.37,-172.53C2458.86,-153.6 2482.15,-123.16 2498.86,-101.32"/>
 <polygon fill="black" stroke="black" points="2501.58,-103.52 2504.88,-93.46 2496.02,-99.27 2501.58,-103.52"/>
 </a>
 </g>
-<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L212" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L212">
+<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L212" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L212">
 <text xml:space="preserve" text-anchor="start" x="2477.64" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1308,7 +1308,7 @@
 <title>export_to_clauses/4</title>
 <polygon fill="cornsilk" stroke="black" points="2755.11,-677 2602.89,-677 2602.89,-641 2755.11,-641 2755.11,-677"/>
 <text xml:space="preserve" text-anchor="start" x="2610.89" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node22_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L216" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L216">
+<g id="a_node22_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L216" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L216">
 <text xml:space="preserve" text-anchor="start" x="2616.29" y="-660.71" font-family="monospace" font-size="11.00">export_to_clauses/4</text>
 </a>
 </g>
@@ -1322,7 +1322,7 @@
 <title>classifier_term_template/2</title>
 <polygon fill="cornsilk" stroke="black" points="3095.21,-677 2896.79,-677 2896.79,-641 3095.21,-641 3095.21,-677"/>
 <text xml:space="preserve" text-anchor="start" x="2904.79" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node23_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L222" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L222">
+<g id="a_node23_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L222" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L222">
 <text xml:space="preserve" text-anchor="start" x="2910.19" y="-660.71" font-family="monospace" font-size="11.00">classifier_term_template/2</text>
 </a>
 </g>
@@ -1336,7 +1336,7 @@
 <title>print_classifier/1</title>
 <polygon fill="cornsilk" stroke="black" points="3114.81,-560 2969.19,-560 2969.19,-524 3114.81,-524 3114.81,-560"/>
 <text xml:space="preserve" text-anchor="start" x="2977.19" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node25_39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L229">
+<g id="a_node25_39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L229">
 <text xml:space="preserve" text-anchor="start" x="2982.59" y="-543.71" font-family="monospace" font-size="11.00">print_classifier/1</text>
 </a>
 </g>
@@ -1348,12 +1348,12 @@
 <!-- print_classifier/1&#45;&gt;classifier_data/4 -->
 <g id="edge21" class="edge">
 <title>print_classifier/1&#45;&gt;classifier_data/4</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L229" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L229" xlink:title="calls">
 <path fill="none" stroke="black" d="M2969.17,-530.54C2846.63,-512.93 2612.22,-479.27 2610,-479 2445.96,-459.26 2403.75,-465 2240,-443 2234.11,-442.21 2228.04,-441.33 2221.93,-440.39"/>
 <polygon fill="black" stroke="black" points="2222.86,-437 2212.44,-438.9 2221.77,-443.91 2222.86,-437"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L229">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L229">
 <text xml:space="preserve" text-anchor="start" x="2664.73" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1375,12 +1375,12 @@
 <!-- print_classifier/1&#45;&gt;format::format/2 -->
 <g id="edge55" class="edge">
 <title>print_classifier/1&#45;&gt;format::format/2</title>
-<g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L229" xlink:title="calls">
+<g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L229" xlink:title="calls">
 <path fill="none" stroke="black" d="M3042,-523.53C3042,-505.28 3042,-476.33 3042,-454.7"/>
 <polygon fill="black" stroke="black" points="3045.5,-454.77 3042,-444.77 3038.5,-454.77 3045.5,-454.77"/>
 </a>
 </g>
-<g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L229">
+<g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L229">
 <text xml:space="preserve" text-anchor="start" x="3042" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1399,12 +1399,12 @@
 <!-- print_classifier/1&#45;&gt;^^print_classifier_template/1 -->
 <g id="edge32" class="edge">
 <title>print_classifier/1&#45;&gt;^^print_classifier_template/1</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L229" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L229" xlink:title="calls">
 <path fill="none" stroke="black" d="M3071.31,-523.53C3104.71,-503.63 3159.42,-471.04 3196.3,-449.06"/>
 <polygon fill="black" stroke="black" points="3197.63,-452.34 3204.43,-444.22 3194.05,-446.33 3197.63,-452.34"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L229">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L229" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L229">
 <text xml:space="preserve" text-anchor="start" x="3144.29" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1414,7 +1414,7 @@
 <title>default_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="3307.21,-677 3174.79,-677 3174.79,-641 3307.21,-641 3307.21,-677"/>
 <text xml:space="preserve" text-anchor="start" x="3182.79" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node26_41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L238" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L238">
+<g id="a_node26_41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L238" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L238">
 <text xml:space="preserve" text-anchor="start" x="3188.19" y="-660.71" font-family="monospace" font-size="11.00">default_option/1</text>
 </a>
 </g>
@@ -1428,7 +1428,7 @@
 <title>valid_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="2687.61,-209 2568.39,-209 2568.39,-173 2687.61,-173 2687.61,-209"/>
 <text xml:space="preserve" text-anchor="start" x="2576.39" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node27_42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L241" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L241">
+<g id="a_node27_42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L241" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L241">
 <text xml:space="preserve" text-anchor="start" x="2581.79" y="-192.71" font-family="monospace" font-size="11.00">valid_option/1</text>
 </a>
 </g>
@@ -1440,12 +1440,12 @@
 <!-- valid_option/1&#45;&gt;type::valid/2 -->
 <g id="edge56" class="edge">
 <title>valid_option/1&#45;&gt;type::valid/2</title>
-<g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L241" xlink:title="calls">
+<g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L241" xlink:title="calls">
 <path fill="none" stroke="black" d="M2611.45,-172.53C2593.25,-153.34 2563.87,-122.33 2543.11,-100.44"/>
 <polygon fill="black" stroke="black" points="2545.81,-98.2 2536.39,-93.35 2540.73,-103.02 2545.81,-98.2"/>
 </a>
 </g>
-<g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L241" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/qda_classifier/qda_classifier.lgt#L241">
+<g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L241" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/qda_classifier/qda_classifier.lgt#L241">
 <text xml:space="preserve" text-anchor="start" x="2576.77" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>

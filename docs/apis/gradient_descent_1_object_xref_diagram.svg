@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-608 1592,-608 1592,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object gradient_descent/1</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;12, 20:35</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;14, 01:03</text>
 <g id="clust1" class="cluster">
 <title>cluster_gradient_descent_1_object</title>
 <g id="a_clust1"><a xlink:title="gradient_descent(Problem)">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1568,-46 1568,-46 1574,-46 1580,-52 1580,-58 1580,-58 1580,-584 1580,-584 1580,-590 1574,-596 1568,-596 1568,-596 20,-596 20,-596 14,-596 8,-590 8,-584 8,-584 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-580.46" font-family="monospace" font-size="10.00" fill="dimgray">gradient_descent(Problem)</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>run/4</title>
 <polygon fill="cornsilk" stroke="black" points="645.9,-560 586.1,-560 586.1,-524 645.9,-524 645.9,-560"/>
 <text xml:space="preserve" text-anchor="start" x="594.1" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="599.5" y="-543.71" font-family="monospace" font-size="11.00">run/4</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>loop/26</title>
 <polygon fill="cornsilk" stroke="black" points="384.5,-443 311.5,-443 311.5,-407 384.5,-407 384.5,-443"/>
 <text xml:space="preserve" text-anchor="start" x="319.5" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L110" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L110">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L110" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L110">
 <text xml:space="preserve" text-anchor="start" x="324.9" y="-426.71" font-family="monospace" font-size="11.00">loop/26</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- run/4&#45;&gt;loop/26 -->
 <g id="edge3" class="edge">
 <title>run/4&#45;&gt;loop/26</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M585.78,-528.03C539.45,-508.15 450.47,-469.97 395.48,-446.37"/>
 <polygon fill="black" stroke="black" points="396.91,-443.18 386.34,-442.45 394.15,-449.61 396.91,-443.18"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="490.04" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>require_gradient/0</title>
 <polygon fill="cornsilk" stroke="black" points="547.81,-443 402.19,-443 402.19,-407 547.81,-407 547.81,-443"/>
 <text xml:space="preserve" text-anchor="start" x="410.19" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L270" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L270">
+<g id="a_node5_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L270" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L270">
 <text xml:space="preserve" text-anchor="start" x="415.59" y="-426.71" font-family="monospace" font-size="11.00">require_gradient/0</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- run/4&#45;&gt;require_gradient/0 -->
 <g id="edge1" class="edge">
 <title>run/4&#45;&gt;require_gradient/0</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M594.59,-523.53C570.64,-504 531.69,-472.23 504.78,-450.29"/>
 <polygon fill="black" stroke="black" points="507.29,-447.82 497.33,-444.21 502.86,-453.24 507.29,-447.82"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="549.73" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -97,7 +97,7 @@
 <title>validate_gradient/2</title>
 <polygon fill="cornsilk" stroke="black" points="1355.11,-326 1202.89,-326 1202.89,-290 1355.11,-290 1355.11,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1210.89" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L276" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L276">
+<g id="a_node6_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L276" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L276">
 <text xml:space="preserve" text-anchor="start" x="1216.29" y="-309.71" font-family="monospace" font-size="11.00">validate_gradient/2</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- run/4&#45;&gt;validate_gradient/2 -->
 <g id="edge2" class="edge">
 <title>run/4&#45;&gt;validate_gradient/2</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M615.7,-523.55C616.21,-494.59 621.79,-436.85 656,-407 744.28,-329.96 1061.32,-344.63 1177,-326 1181.64,-325.25 1186.39,-324.48 1191.19,-323.7"/>
 <polygon fill="black" stroke="black" points="1191.64,-327.17 1200.94,-322.1 1190.5,-320.26 1191.64,-327.17"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="656" y="-422.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -136,12 +136,12 @@
 <!-- run/4&#45;&gt;linear_algebra::euclidean_norm/2 -->
 <g id="edge20" class="edge">
 <title>run/4&#45;&gt;linear_algebra::euclidean_norm/2</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M608.15,-523.73C597.4,-497.44 581.22,-446.29 598,-407 598.71,-405.34 643.37,-362.78 645,-362 753.3,-310.13 795.84,-340.25 918.44,-326.24"/>
 <polygon fill="black" stroke="black" points="918.77,-329.72 928.26,-325.03 917.91,-322.78 918.77,-329.72"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="598" y="-422.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -160,12 +160,12 @@
 <!-- run/4&#45;&gt;^^check_options/1 -->
 <g id="edge7" class="edge">
 <title>run/4&#45;&gt;^^check_options/1</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M638.17,-523.53C662.97,-504 703.3,-472.23 731.17,-450.29"/>
 <polygon fill="black" stroke="black" points="733.22,-453.13 738.91,-444.19 728.89,-447.63 733.22,-453.13"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="693.38" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -184,12 +184,12 @@
 <!-- run/4&#45;&gt;^^merge_options/2 -->
 <g id="edge8" class="edge">
 <title>run/4&#45;&gt;^^merge_options/2</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M646.16,-529.55C696.46,-510.46 798.28,-471.82 862.31,-447.52"/>
 <polygon fill="black" stroke="black" points="863.5,-450.81 871.61,-443.99 861.02,-444.26 863.5,-450.81"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="776.59" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -208,12 +208,12 @@
 <!-- run/4&#45;&gt;^^option/2 -->
 <g id="edge9" class="edge">
 <title>run/4&#45;&gt;^^option/2</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M646.34,-533.75C709.46,-518.55 859.68,-481.79 995.26,-443.72"/>
 <polygon fill="black" stroke="black" points="996.11,-447.12 1004.78,-441.03 994.21,-440.38 996.11,-447.12"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="861.92" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -232,12 +232,12 @@
 <!-- run/4&#45;&gt;^^initial_point/2 -->
 <g id="edge10" class="edge">
 <title>run/4&#45;&gt;^^initial_point/2</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M646.37,-535.37C697.37,-525.87 803.46,-505.93 893,-488 985.27,-469.52 1010.69,-463.69 1106.18,-443.38"/>
 <polygon fill="black" stroke="black" points="1106.68,-446.86 1115.74,-441.35 1105.23,-440.01 1106.68,-446.86"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="934.01" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -256,12 +256,12 @@
 <!-- run/4&#45;&gt;^^check_bounds/1 -->
 <g id="edge11" class="edge">
 <title>run/4&#45;&gt;^^check_bounds/1</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M585.76,-534.64C514.06,-519.54 327.89,-480.17 161.57,-443.56"/>
 <polygon fill="black" stroke="black" points="162.64,-440.21 152.13,-441.47 161.14,-447.05 162.64,-440.21"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="359.49" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -280,12 +280,12 @@
 <!-- run/4&#45;&gt;^^check_point/2 -->
 <g id="edge12" class="edge">
 <title>run/4&#45;&gt;^^check_point/2</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M585.79,-531.98C524.65,-513.71 384.9,-471.97 300.18,-446.66"/>
 <polygon fill="black" stroke="black" points="301.4,-443.38 290.82,-443.87 299.4,-450.08 301.4,-443.38"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L57">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="435.04" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -295,7 +295,7 @@
 <title>line_search/16</title>
 <polygon fill="cornsilk" stroke="black" points="911.61,-326 792.39,-326 792.39,-290 911.61,-290 911.61,-326"/>
 <text xml:space="preserve" text-anchor="start" x="800.39" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L202" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L202">
+<g id="a_node3_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L202" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L202">
 <text xml:space="preserve" text-anchor="start" x="805.79" y="-309.71" font-family="monospace" font-size="11.00">line_search/16</text>
 </a>
 </g>
@@ -307,12 +307,12 @@
 <!-- loop/26&#45;&gt;line_search/16 -->
 <g id="edge4" class="edge">
 <title>loop/26&#45;&gt;line_search/16</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L154" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L154" xlink:title="calls">
 <path fill="none" stroke="black" d="M384.94,-409.76C412.52,-399.11 451.13,-384.18 485,-371 495.23,-367.02 497.37,-364.73 508,-362 623.88,-332.21 659.76,-347.8 781.03,-326.21"/>
 <polygon fill="black" stroke="black" points="781.56,-329.67 790.76,-324.43 780.29,-322.79 781.56,-329.67"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L154" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L154">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L154" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L154">
 <text xml:space="preserve" text-anchor="start" x="508" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -320,12 +320,12 @@
 <!-- loop/26&#45;&gt;validate_gradient/2 -->
 <g id="edge5" class="edge">
 <title>loop/26&#45;&gt;validate_gradient/2</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L154" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L154" xlink:title="calls">
 <path fill="none" stroke="black" d="M384.66,-409.55C387.46,-408.63 390.27,-407.77 393,-407 476.6,-383.57 500.64,-391.5 585,-371 598.52,-367.71 601.3,-364.46 615,-362 861.34,-317.75 928.35,-354.61 1177,-326 1181.66,-325.46 1186.44,-324.86 1191.26,-324.21"/>
 <polygon fill="black" stroke="black" points="1191.63,-327.69 1201.04,-322.82 1190.64,-320.76 1191.63,-327.69"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L154" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L154">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L154" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L154">
 <text xml:space="preserve" text-anchor="start" x="615" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -333,12 +333,12 @@
 <!-- loop/26&#45;&gt;linear_algebra::euclidean_norm/2 -->
 <g id="edge22" class="edge">
 <title>loop/26&#45;&gt;linear_algebra::euclidean_norm/2</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L154" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L154" xlink:title="calls">
 <path fill="none" stroke="black" d="M384.72,-409.74C387.51,-408.78 390.29,-407.85 393,-407 455.11,-387.46 473.01,-390.9 535,-371 545.45,-367.64 547.32,-364.57 558,-362 712.09,-324.95 757.9,-343.78 918.53,-326.23"/>
 <polygon fill="black" stroke="black" points="918.73,-329.73 928.28,-325.14 917.95,-322.78 918.73,-329.73"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L154" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L154">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L154" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L154">
 <text xml:space="preserve" text-anchor="start" x="558" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -360,12 +360,12 @@
 <!-- loop/26&#45;&gt;linear_algebra::scale_vector/3 -->
 <g id="edge21" class="edge">
 <title>loop/26&#45;&gt;linear_algebra::scale_vector/3</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L154" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L154" xlink:title="calls">
 <path fill="none" stroke="black" d="M376.47,-406.59C392.08,-396.69 411.53,-383.75 428,-371 432.73,-367.34 432.66,-364.7 438,-362 508.87,-326.19 557.64,-382.93 613,-326 644.15,-293.97 639.18,-171.8 648,-128 649.63,-119.92 651.54,-111.19 653.36,-103.18"/>
 <polygon fill="black" stroke="black" points="656.73,-104.15 655.56,-93.62 649.9,-102.57 656.73,-104.15"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L154" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L154">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L154" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L154">
 <text xml:space="preserve" text-anchor="start" x="637.35" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -387,12 +387,12 @@
 <!-- loop/26&#45;&gt;linear_algebra::subtract_vectors/3 -->
 <g id="edge23" class="edge">
 <title>loop/26&#45;&gt;linear_algebra::subtract_vectors/3</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L154" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L154" xlink:title="calls">
 <path fill="none" stroke="black" d="M360.86,-406.62C370.97,-393.56 385.84,-375.65 401,-362 412.72,-351.44 426.64,-341.26 439.41,-332.69"/>
 <polygon fill="black" stroke="black" points="441.18,-335.71 447.62,-327.3 437.34,-329.86 441.18,-335.71"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L154" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L154">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L154" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L154">
 <text xml:space="preserve" text-anchor="start" x="401" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -411,12 +411,12 @@
 <!-- loop/26&#45;&gt;^^report_final/5 -->
 <g id="edge13" class="edge">
 <title>loop/26&#45;&gt;^^report_final/5</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L110" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L110" xlink:title="calls">
 <path fill="none" stroke="black" d="M373.57,-406.61C395.19,-392.65 427.44,-373.54 458,-362 530.25,-334.72 552.45,-342.03 628,-326 628.83,-325.82 629.67,-325.65 630.51,-325.47"/>
 <polygon fill="black" stroke="black" points="631.11,-328.92 640.17,-323.42 629.66,-322.07 631.11,-328.92"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L110" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L110">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L110" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L110">
 <text xml:space="preserve" text-anchor="start" x="458" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -435,12 +435,12 @@
 <!-- loop/26&#45;&gt;^^target_reached/3 -->
 <g id="edge14" class="edge">
 <title>loop/26&#45;&gt;^^target_reached/3</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L121" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L121" xlink:title="calls">
 <path fill="none" stroke="black" d="M311.18,-407.52C266.21,-387.4 190,-353.3 140.09,-330.97"/>
 <polygon fill="black" stroke="black" points="141.8,-327.89 131.24,-327.01 138.94,-334.28 141.8,-327.89"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L121">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L121">
 <text xml:space="preserve" text-anchor="start" x="227.21" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -459,12 +459,12 @@
 <!-- loop/26&#45;&gt;^^report_progress/6 -->
 <g id="edge15" class="edge">
 <title>loop/26&#45;&gt;^^report_progress/6</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L154" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L154" xlink:title="calls">
 <path fill="none" stroke="black" d="M334.33,-406.53C319.51,-387.6 295.69,-357.16 278.6,-335.32"/>
 <polygon fill="black" stroke="black" points="281.36,-333.16 272.44,-327.45 275.84,-337.48 281.36,-333.16"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L154" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L154">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L154" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L154">
 <text xml:space="preserve" text-anchor="start" x="305.7" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -474,7 +474,7 @@
 <title>armijo_backtrack/16</title>
 <polygon fill="cornsilk" stroke="black" points="1093.11,-209 940.89,-209 940.89,-173 1093.11,-173 1093.11,-209"/>
 <text xml:space="preserve" text-anchor="start" x="948.89" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L227">
+<g id="a_node4_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L227">
 <text xml:space="preserve" text-anchor="start" x="954.29" y="-192.71" font-family="monospace" font-size="11.00">armijo_backtrack/16</text>
 </a>
 </g>
@@ -486,12 +486,12 @@
 <!-- line_search/16&#45;&gt;armijo_backtrack/16 -->
 <g id="edge6" class="edge">
 <title>line_search/16&#45;&gt;armijo_backtrack/16</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L216" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L216" xlink:title="calls">
 <path fill="none" stroke="black" d="M877.06,-289.53C905.25,-269.89 951.19,-237.87 982.7,-215.91"/>
 <polygon fill="black" stroke="black" points="984.53,-218.9 990.73,-210.31 980.53,-213.15 984.53,-218.9"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L216" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L216">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L216" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L216">
 <text xml:space="preserve" text-anchor="start" x="939.45" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -499,12 +499,12 @@
 <!-- line_search/16&#45;&gt;linear_algebra::scale_vector/3 -->
 <g id="edge24" class="edge">
 <title>line_search/16&#45;&gt;linear_algebra::scale_vector/3</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L202" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L202" xlink:title="calls">
 <path fill="none" stroke="black" d="M791.96,-291.59C750.02,-277.45 696.75,-252 669,-209 648.64,-177.46 650.33,-132.59 654.39,-103.63"/>
 <polygon fill="black" stroke="black" points="657.84,-104.21 655.97,-93.78 650.93,-103.09 657.84,-104.21"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L202" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L202">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L202" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L202">
 <text xml:space="preserve" text-anchor="start" x="669" y="-188.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -526,12 +526,12 @@
 <!-- line_search/16&#45;&gt;linear_algebra::add_vectors/3 -->
 <g id="edge25" class="edge">
 <title>line_search/16&#45;&gt;linear_algebra::add_vectors/3</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L202" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L202" xlink:title="calls">
 <path fill="none" stroke="black" d="M912.05,-290.06C977.22,-270.57 1075.56,-237.56 1102,-209 1127.34,-181.63 1144.93,-158.88 1124,-128 1114.93,-114.63 1101.9,-104.63 1087.49,-97.15"/>
 <polygon fill="black" stroke="black" points="1089.24,-94.11 1078.7,-93.01 1086.26,-100.44 1089.24,-94.11"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L202" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L202">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L202" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L202">
 <text xml:space="preserve" text-anchor="start" x="1128.9" y="-188.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -553,12 +553,12 @@
 <!-- line_search/16&#45;&gt;linear_algebra::dot_product/3 -->
 <g id="edge26" class="edge">
 <title>line_search/16&#45;&gt;linear_algebra::dot_product/3</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L216" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L216" xlink:title="calls">
 <path fill="none" stroke="black" d="M846.23,-289.53C840.14,-271.11 830.45,-241.79 823.28,-220.1"/>
 <polygon fill="black" stroke="black" points="826.64,-219.09 820.18,-210.69 819.99,-221.28 826.64,-219.09"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L216" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L216">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L216" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L216">
 <text xml:space="preserve" text-anchor="start" x="834.14" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -577,12 +577,12 @@
 <!-- line_search/16&#45;&gt;^^project_to_bounds/3 -->
 <g id="edge16" class="edge">
 <title>line_search/16&#45;&gt;^^project_to_bounds/3</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L202" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L202" xlink:title="calls">
 <path fill="none" stroke="black" d="M912.01,-291.24C996.58,-268.53 1142.54,-227.33 1160,-209 1187.43,-180.2 1196.55,-133.54 1199.55,-103.57"/>
 <polygon fill="black" stroke="black" points="1203.03,-103.99 1200.36,-93.74 1196.05,-103.42 1203.03,-103.99"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L202" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L202">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L202" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L202">
 <text xml:space="preserve" text-anchor="start" x="1182.5" y="-188.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -590,12 +590,12 @@
 <!-- armijo_backtrack/16&#45;&gt;linear_algebra::scale_vector/3 -->
 <g id="edge27" class="edge">
 <title>armijo_backtrack/16&#45;&gt;linear_algebra::scale_vector/3</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L227" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L227" xlink:title="calls">
 <path fill="none" stroke="black" d="M962.78,-172.53C898.9,-151.96 792.87,-117.8 724.74,-95.86"/>
 <polygon fill="black" stroke="black" points="726.18,-92.64 715.59,-92.91 724.03,-99.3 726.18,-92.64"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L227">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L227">
 <text xml:space="preserve" text-anchor="start" x="849.2" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -603,12 +603,12 @@
 <!-- armijo_backtrack/16&#45;&gt;linear_algebra::add_vectors/3 -->
 <g id="edge28" class="edge">
 <title>armijo_backtrack/16&#45;&gt;linear_algebra::add_vectors/3</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L227" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L227" xlink:title="calls">
 <path fill="none" stroke="black" d="M1013.05,-172.53C1008.9,-154.19 1002.32,-125.06 997.42,-103.4"/>
 <polygon fill="black" stroke="black" points="1000.85,-102.71 995.23,-93.73 994.03,-104.26 1000.85,-102.71"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L227">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L227">
 <text xml:space="preserve" text-anchor="start" x="1004.78" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -616,12 +616,12 @@
 <!-- armijo_backtrack/16&#45;&gt;^^project_to_bounds/3 -->
 <g id="edge17" class="edge">
 <title>armijo_backtrack/16&#45;&gt;^^project_to_bounds/3</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L227" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L227" xlink:title="calls">
 <path fill="none" stroke="black" d="M1044.95,-172.53C1076.65,-152.72 1128.5,-120.31 1163.65,-98.34"/>
 <polygon fill="black" stroke="black" points="1165.18,-101.51 1171.81,-93.24 1161.47,-95.58 1165.18,-101.51"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L227">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L227">
 <text xml:space="preserve" text-anchor="start" x="1114.52" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -643,12 +643,12 @@
 <!-- validate_gradient/2&#45;&gt;list::length/2 -->
 <g id="edge29" class="edge">
 <title>validate_gradient/2&#45;&gt;list::length/2</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L276" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L276" xlink:title="calls">
 <path fill="none" stroke="black" d="M1302.54,-289.53C1328.91,-269.97 1371.81,-238.14 1401.39,-216.19"/>
 <polygon fill="black" stroke="black" points="1403.33,-219.11 1409.28,-210.34 1399.16,-213.49 1403.33,-219.11"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L276" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L276">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L276" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L276">
 <text xml:space="preserve" text-anchor="start" x="1361.15" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -670,12 +670,12 @@
 <!-- validate_gradient/2&#45;&gt;list::member/2 -->
 <g id="edge30" class="edge">
 <title>validate_gradient/2&#45;&gt;list::member/2</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L276" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L276" xlink:title="calls">
 <path fill="none" stroke="black" d="M1281.73,-289.53C1284.6,-271.19 1289.17,-242.06 1292.55,-220.4"/>
 <polygon fill="black" stroke="black" points="1295.98,-221.17 1294.07,-210.75 1289.06,-220.09 1295.98,-221.17"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L276" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L276">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L276" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L276">
 <text xml:space="preserve" text-anchor="start" x="1288.54" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -685,7 +685,7 @@
 <title>progress_hook/5</title>
 <polygon fill="cornsilk" stroke="black" points="1041.91,-560 916.09,-560 916.09,-524 1041.91,-524 1041.91,-560"/>
 <text xml:space="preserve" text-anchor="start" x="924.09" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L288" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L288">
+<g id="a_node7_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L288" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L288">
 <text xml:space="preserve" text-anchor="start" x="929.49" y="-543.71" font-family="monospace" font-size="11.00">progress_hook/5</text>
 </a>
 </g>
@@ -699,7 +699,7 @@
 <title>default_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="1413.21,-560 1280.79,-560 1280.79,-524 1413.21,-524 1413.21,-560"/>
 <text xml:space="preserve" text-anchor="start" x="1288.79" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L293" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L293">
+<g id="a_node8_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L293" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L293">
 <text xml:space="preserve" text-anchor="start" x="1294.19" y="-543.71" font-family="monospace" font-size="11.00">default_option/1</text>
 </a>
 </g>
@@ -722,12 +722,12 @@
 <!-- default_option/1&#45;&gt;^^default_option/1 -->
 <g id="edge18" class="edge">
 <title>default_option/1&#45;&gt;^^default_option/1</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L298" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L298" xlink:title="calls">
 <path fill="none" stroke="black" d="M1347,-523.53C1347,-505.28 1347,-476.33 1347,-454.7"/>
 <polygon fill="black" stroke="black" points="1350.5,-454.77 1347,-444.77 1343.5,-454.77 1350.5,-454.77"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L298" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L298">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L298" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L298">
 <text xml:space="preserve" text-anchor="start" x="1347" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -737,7 +737,7 @@
 <title>valid_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="1563.61,-560 1444.39,-560 1444.39,-524 1563.61,-524 1563.61,-560"/>
 <text xml:space="preserve" text-anchor="start" x="1452.39" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L301" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L301">
+<g id="a_node9_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L301" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L301">
 <text xml:space="preserve" text-anchor="start" x="1457.79" y="-543.71" font-family="monospace" font-size="11.00">valid_option/1</text>
 </a>
 </g>
@@ -760,12 +760,12 @@
 <!-- valid_option/1&#45;&gt;^^valid_option/1 -->
 <g id="edge19" class="edge">
 <title>valid_option/1&#45;&gt;^^valid_option/1</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L311" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L311" xlink:title="calls">
 <path fill="none" stroke="black" d="M1504,-523.53C1504,-505.28 1504,-476.33 1504,-454.7"/>
 <polygon fill="black" stroke="black" points="1507.5,-454.77 1504,-444.77 1500.5,-454.77 1507.5,-454.77"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L311" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b5c0c0335a85f34a589d8120ad4f084fa49d08d2/library/local_optimization/gradient_descent.lgt#L311">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L311" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a717eccfb7f21b6ada79f7cdce03268427c3e95/library/local_optimization/gradient_descent.lgt#L311">
 <text xml:space="preserve" text-anchor="start" x="1504" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
