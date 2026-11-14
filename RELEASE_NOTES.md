@@ -396,6 +396,9 @@ when available.
 predicate to not add an ending slash to the expanded path if not present in
 the original path.
 
+* FIXED: The `os` library ECLiPSe definition for the `shell/2` predicate on
+non-Windows systems that don't define the `SHELL` environment variable.
+
 * FIXED: Operator standard conformance issue in the `s3` library.
 
 * FIXED: bug in the `term_io` library `read_term_from_chars/4` and
