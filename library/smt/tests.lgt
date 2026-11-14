@@ -26,7 +26,7 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-11-14,
-		comment is 'Unit tests for the smt library.'
+		comment is 'Unit tests for the "smt" library.'
 	]).
 
 	:- uses(lgtunit, [

@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on November 12, 2026
+##   Last updated on November 14, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -297,6 +297,7 @@ Foreach-Object {
 (Get-Content ../../../library/nmea/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/nmea.rst
 (Get-Content ../../../library/nmf_projection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/nmf_projection.rst
 (Get-Content ../../../library/numerical_analysis/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/numerical_analysis.rst
+(Get-Content ../../../library/omt/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/omt.rst
 (Get-Content ../../../library/one_class_svm_anomaly_detector/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/one_class_svm_anomaly_detector.rst
 (Get-Content ../../../library/open_api/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/open_api.rst
 (Get-Content ../../../library/open_ai/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/open_ai.rst

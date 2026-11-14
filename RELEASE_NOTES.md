@@ -87,6 +87,11 @@ solvers through the `process` library, and inspecting collected results.
 objects, invoking the Z3 (default), cvc5, Bitwuzla, or Yices 2 command-line
 solvers through the `process` library, and inspecting collected results.
 
+* ADDED: New `omt` library for representing OMT (optimization modulo theories)
+problems as Logtalk objects, invoking the Z3 (default) or OptiMathSAT
+command-line solvers through the `process` library, and inspecting collected
+results.
+
 * ADDED: New `souffle` library for representing Datalog problems as Logtalk
 objects, invoking the Souffle command-line engine through the `process`
 library, and inspecting collected relations and relation sizes.

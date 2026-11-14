@@ -2781,11 +2781,12 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    ``capability/2``
    ----------------
 
+   * :ref:`omt_protocol <omt_protocol/0::capability/2>`
    * :ref:`smt_protocol <smt_protocol/0::capability/2>`
 
 .. only:: latex
 
-   * ``capability/2`` - :ref:`smt_protocol <smt_protocol/0::capability/2>`
+   * ``capability/2`` - :ref:`omt_protocol <omt_protocol/0::capability/2>`, :ref:`smt_protocol <smt_protocol/0::capability/2>`
 
 .. only:: not latex
 
@@ -19260,22 +19261,24 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    ``model_binding/2``
    -------------------
 
+   * :ref:`omt_protocol <omt_protocol/0::model_binding/2>`
    * :ref:`smt_protocol <smt_protocol/0::model_binding/2>`
 
 .. only:: latex
 
-   * ``model_binding/2`` - :ref:`smt_protocol <smt_protocol/0::model_binding/2>`
+   * ``model_binding/2`` - :ref:`omt_protocol <omt_protocol/0::model_binding/2>`, :ref:`smt_protocol <smt_protocol/0::model_binding/2>`
 
 .. only:: not latex
 
    ``model_value/3``
    -----------------
 
+   * :ref:`omt_protocol <omt_protocol/0::model_value/3>`
    * :ref:`smt_protocol <smt_protocol/0::model_value/3>`
 
 .. only:: latex
 
-   * ``model_value/3`` - :ref:`smt_protocol <smt_protocol/0::model_value/3>`
+   * ``model_value/3`` - :ref:`omt_protocol <omt_protocol/0::model_value/3>`, :ref:`smt_protocol <smt_protocol/0::model_value/3>`
 
 .. only:: not latex
 
@@ -21421,6 +21424,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``objective/2`` - :ref:`local_optimization_problem_protocol <local_optimization_problem_protocol/0::objective/2>`
+
+.. only:: not latex
+
+   ``objective/3``
+   ---------------
+
+   * :ref:`omt_protocol <omt_protocol/0::objective/3>`
+
+.. only:: latex
+
+   * ``objective/3`` - :ref:`omt_protocol <omt_protocol/0::objective/3>`
 
 .. only:: not latex
 
@@ -24774,6 +24788,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
    * :ref:`asp_protocol <asp_protocol/0::print_program/1>`
    * :ref:`minizinc_protocol <minizinc_protocol/0::print_program/1>`
+   * :ref:`omt_protocol <omt_protocol/0::print_program/1>`
    * :ref:`problog_protocol <problog_protocol/0::print_program/1>`
    * :ref:`sat_protocol <sat_protocol/0::print_program/1>`
    * :ref:`smt_protocol <smt_protocol/0::print_program/1>`
@@ -24781,7 +24796,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: latex
 
-   * ``print_program/1`` - :ref:`asp_protocol <asp_protocol/0::print_program/1>`, :ref:`minizinc_protocol <minizinc_protocol/0::print_program/1>`, :ref:`problog_protocol <problog_protocol/0::print_program/1>`, :ref:`sat_protocol <sat_protocol/0::print_program/1>`, :ref:`smt_protocol <smt_protocol/0::print_program/1>`, :ref:`souffle_protocol <souffle_protocol/0::print_program/1>`
+   * ``print_program/1`` - :ref:`asp_protocol <asp_protocol/0::print_program/1>`, :ref:`minizinc_protocol <minizinc_protocol/0::print_program/1>`, :ref:`omt_protocol <omt_protocol/0::print_program/1>`, :ref:`problog_protocol <problog_protocol/0::print_program/1>`, :ref:`sat_protocol <sat_protocol/0::print_program/1>`, :ref:`smt_protocol <smt_protocol/0::print_program/1>`, :ref:`souffle_protocol <souffle_protocol/0::print_program/1>`
 
 .. only:: not latex
 
@@ -24823,6 +24838,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
    * :ref:`asp_protocol <asp_protocol/0::print_result/1>`
    * :ref:`minizinc_protocol <minizinc_protocol/0::print_result/1>`
+   * :ref:`omt_protocol <omt_protocol/0::print_result/1>`
    * :ref:`problog_protocol <problog_protocol/0::print_result/1>`
    * :ref:`sat_protocol <sat_protocol/0::print_result/1>`
    * :ref:`smt_protocol <smt_protocol/0::print_result/1>`
@@ -24830,18 +24846,19 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: latex
 
-   * ``print_result/1`` - :ref:`asp_protocol <asp_protocol/0::print_result/1>`, :ref:`minizinc_protocol <minizinc_protocol/0::print_result/1>`, :ref:`problog_protocol <problog_protocol/0::print_result/1>`, :ref:`sat_protocol <sat_protocol/0::print_result/1>`, :ref:`smt_protocol <smt_protocol/0::print_result/1>`, :ref:`souffle_protocol <souffle_protocol/0::print_result/1>`
+   * ``print_result/1`` - :ref:`asp_protocol <asp_protocol/0::print_result/1>`, :ref:`minizinc_protocol <minizinc_protocol/0::print_result/1>`, :ref:`omt_protocol <omt_protocol/0::print_result/1>`, :ref:`problog_protocol <problog_protocol/0::print_result/1>`, :ref:`sat_protocol <sat_protocol/0::print_result/1>`, :ref:`smt_protocol <smt_protocol/0::print_result/1>`, :ref:`souffle_protocol <souffle_protocol/0::print_result/1>`
 
 .. only:: not latex
 
    ``print_results/1``
    -------------------
 
+   * :ref:`omt_protocol <omt_protocol/0::print_results/1>`
    * :ref:`smt_protocol <smt_protocol/0::print_results/1>`
 
 .. only:: latex
 
-   * ``print_results/1`` - :ref:`smt_protocol <smt_protocol/0::print_results/1>`
+   * ``print_results/1`` - :ref:`omt_protocol <omt_protocol/0::print_results/1>`, :ref:`smt_protocol <smt_protocol/0::print_results/1>`
 
 .. only:: not latex
 
@@ -25017,6 +25034,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
    * :ref:`asp_protocol <asp_protocol/0::program/1>`
    * :ref:`minizinc_protocol <minizinc_protocol/0::program/1>`
+   * :ref:`omt_protocol <omt_protocol/0::program/1>`
    * :ref:`problog_protocol <problog_protocol/0::program/1>`
    * :ref:`sat_protocol <sat_protocol/0::program/1>`
    * :ref:`smt_protocol <smt_protocol/0::program/1>`
@@ -25024,7 +25042,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: latex
 
-   * ``program/1`` - :ref:`asp_protocol <asp_protocol/0::program/1>`, :ref:`minizinc_protocol <minizinc_protocol/0::program/1>`, :ref:`problog_protocol <problog_protocol/0::program/1>`, :ref:`sat_protocol <sat_protocol/0::program/1>`, :ref:`smt_protocol <smt_protocol/0::program/1>`, :ref:`souffle_protocol <souffle_protocol/0::program/1>`
+   * ``program/1`` - :ref:`asp_protocol <asp_protocol/0::program/1>`, :ref:`minizinc_protocol <minizinc_protocol/0::program/1>`, :ref:`omt_protocol <omt_protocol/0::program/1>`, :ref:`problog_protocol <problog_protocol/0::program/1>`, :ref:`sat_protocol <sat_protocol/0::program/1>`, :ref:`smt_protocol <smt_protocol/0::program/1>`, :ref:`souffle_protocol <souffle_protocol/0::program/1>`
 
 .. only:: not latex
 
@@ -25033,6 +25051,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
    * :ref:`asp_protocol <asp_protocol/0::program/2>`
    * :ref:`minizinc_protocol <minizinc_protocol/0::program/2>`
+   * :ref:`omt_protocol <omt_protocol/0::program/2>`
    * :ref:`problog_protocol <problog_protocol/0::program/2>`
    * :ref:`sat_protocol <sat_protocol/0::program/2>`
    * :ref:`smt_protocol <smt_protocol/0::program/2>`
@@ -25040,7 +25059,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: latex
 
-   * ``program/2`` - :ref:`asp_protocol <asp_protocol/0::program/2>`, :ref:`minizinc_protocol <minizinc_protocol/0::program/2>`, :ref:`problog_protocol <problog_protocol/0::program/2>`, :ref:`sat_protocol <sat_protocol/0::program/2>`, :ref:`smt_protocol <smt_protocol/0::program/2>`, :ref:`souffle_protocol <souffle_protocol/0::program/2>`
+   * ``program/2`` - :ref:`asp_protocol <asp_protocol/0::program/2>`, :ref:`minizinc_protocol <minizinc_protocol/0::program/2>`, :ref:`omt_protocol <omt_protocol/0::program/2>`, :ref:`problog_protocol <problog_protocol/0::program/2>`, :ref:`sat_protocol <sat_protocol/0::program/2>`, :ref:`smt_protocol <smt_protocol/0::program/2>`, :ref:`souffle_protocol <souffle_protocol/0::program/2>`
 
 .. only:: not latex
 
@@ -28276,6 +28295,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
    * :ref:`asp_protocol <asp_protocol/0::result_property/2>`
    * :ref:`minizinc_protocol <minizinc_protocol/0::result_property/2>`
+   * :ref:`omt_protocol <omt_protocol/0::result_property/2>`
    * :ref:`problog_protocol <problog_protocol/0::result_property/2>`
    * :ref:`sat_protocol <sat_protocol/0::result_property/2>`
    * :ref:`smt_protocol <smt_protocol/0::result_property/2>`
@@ -28283,7 +28303,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: latex
 
-   * ``result_property/2`` - :ref:`asp_protocol <asp_protocol/0::result_property/2>`, :ref:`minizinc_protocol <minizinc_protocol/0::result_property/2>`, :ref:`problog_protocol <problog_protocol/0::result_property/2>`, :ref:`sat_protocol <sat_protocol/0::result_property/2>`, :ref:`smt_protocol <smt_protocol/0::result_property/2>`, :ref:`souffle_protocol <souffle_protocol/0::result_property/2>`
+   * ``result_property/2`` - :ref:`asp_protocol <asp_protocol/0::result_property/2>`, :ref:`minizinc_protocol <minizinc_protocol/0::result_property/2>`, :ref:`omt_protocol <omt_protocol/0::result_property/2>`, :ref:`problog_protocol <problog_protocol/0::result_property/2>`, :ref:`sat_protocol <sat_protocol/0::result_property/2>`, :ref:`smt_protocol <smt_protocol/0::result_property/2>`, :ref:`souffle_protocol <souffle_protocol/0::result_property/2>`
 
 .. only:: not latex
 
@@ -30889,6 +30909,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    * :ref:`asp_protocol <asp_protocol/0::solve/2>`
    * :ref:`linear_programming_protocol <linear_programming_protocol/0::solve/2>`
    * :ref:`minizinc_protocol <minizinc_protocol/0::solve/2>`
+   * :ref:`omt_protocol <omt_protocol/0::solve/2>`
    * :ref:`problog_protocol <problog_protocol/0::solve/2>`
    * :ref:`sat_protocol <sat_protocol/0::solve/2>`
    * :ref:`smt_protocol <smt_protocol/0::solve/2>`
@@ -30896,7 +30917,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: latex
 
-   * ``solve/2`` - :ref:`asp_protocol <asp_protocol/0::solve/2>`, :ref:`linear_programming_protocol <linear_programming_protocol/0::solve/2>`, :ref:`minizinc_protocol <minizinc_protocol/0::solve/2>`, :ref:`problog_protocol <problog_protocol/0::solve/2>`, :ref:`sat_protocol <sat_protocol/0::solve/2>`, :ref:`smt_protocol <smt_protocol/0::solve/2>`, :ref:`souffle_protocol <souffle_protocol/0::solve/2>`
+   * ``solve/2`` - :ref:`asp_protocol <asp_protocol/0::solve/2>`, :ref:`linear_programming_protocol <linear_programming_protocol/0::solve/2>`, :ref:`minizinc_protocol <minizinc_protocol/0::solve/2>`, :ref:`omt_protocol <omt_protocol/0::solve/2>`, :ref:`problog_protocol <problog_protocol/0::solve/2>`, :ref:`sat_protocol <sat_protocol/0::solve/2>`, :ref:`smt_protocol <smt_protocol/0::solve/2>`, :ref:`souffle_protocol <souffle_protocol/0::solve/2>`
 
 .. only:: not latex
 
@@ -30906,6 +30927,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    * :ref:`asp_protocol <asp_protocol/0::solve/3>`
    * :ref:`linear_programming_protocol <linear_programming_protocol/0::solve/3>`
    * :ref:`minizinc_protocol <minizinc_protocol/0::solve/3>`
+   * :ref:`omt_protocol <omt_protocol/0::solve/3>`
    * :ref:`problog_protocol <problog_protocol/0::solve/3>`
    * :ref:`sat_protocol <sat_protocol/0::solve/3>`
    * :ref:`smt_protocol <smt_protocol/0::solve/3>`
@@ -30913,7 +30935,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: latex
 
-   * ``solve/3`` - :ref:`asp_protocol <asp_protocol/0::solve/3>`, :ref:`linear_programming_protocol <linear_programming_protocol/0::solve/3>`, :ref:`minizinc_protocol <minizinc_protocol/0::solve/3>`, :ref:`problog_protocol <problog_protocol/0::solve/3>`, :ref:`sat_protocol <sat_protocol/0::solve/3>`, :ref:`smt_protocol <smt_protocol/0::solve/3>`, :ref:`souffle_protocol <souffle_protocol/0::solve/3>`
+   * ``solve/3`` - :ref:`asp_protocol <asp_protocol/0::solve/3>`, :ref:`linear_programming_protocol <linear_programming_protocol/0::solve/3>`, :ref:`minizinc_protocol <minizinc_protocol/0::solve/3>`, :ref:`omt_protocol <omt_protocol/0::solve/3>`, :ref:`problog_protocol <problog_protocol/0::solve/3>`, :ref:`sat_protocol <sat_protocol/0::solve/3>`, :ref:`smt_protocol <smt_protocol/0::solve/3>`, :ref:`souffle_protocol <souffle_protocol/0::solve/3>`
 
 .. only:: not latex
 
@@ -31746,11 +31768,12 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
    * :ref:`http_core <http_core/0::status/2>`
    * :ref:`linear_programming_protocol <linear_programming_protocol/0::status/2>`
+   * :ref:`omt_protocol <omt_protocol/0::status/2>`
    * :ref:`smt_protocol <smt_protocol/0::status/2>`
 
 .. only:: latex
 
-   * ``status/2`` - :ref:`http_core <http_core/0::status/2>`, :ref:`linear_programming_protocol <linear_programming_protocol/0::status/2>`, :ref:`smt_protocol <smt_protocol/0::status/2>`
+   * ``status/2`` - :ref:`http_core <http_core/0::status/2>`, :ref:`linear_programming_protocol <linear_programming_protocol/0::status/2>`, :ref:`omt_protocol <omt_protocol/0::status/2>`, :ref:`smt_protocol <smt_protocol/0::status/2>`
 
 .. only:: not latex
 
@@ -34242,11 +34265,12 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    ``unsat_core_name/2``
    ---------------------
 
+   * :ref:`omt_protocol <omt_protocol/0::unsat_core_name/2>`
    * :ref:`smt_protocol <smt_protocol/0::unsat_core_name/2>`
 
 .. only:: latex
 
-   * ``unsat_core_name/2`` - :ref:`smt_protocol <smt_protocol/0::unsat_core_name/2>`
+   * ``unsat_core_name/2`` - :ref:`omt_protocol <omt_protocol/0::unsat_core_name/2>`, :ref:`smt_protocol <smt_protocol/0::unsat_core_name/2>`
 
 .. only:: not latex
 

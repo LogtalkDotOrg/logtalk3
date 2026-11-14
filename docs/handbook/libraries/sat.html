@@ -289,6 +289,7 @@
 <li class="toctree-l2"><a class="reference internal" href="nmf_projection.html"><code class="docutils literal notranslate"><span class="pre">nmf_projection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="numerical_analysis.html"><code class="docutils literal notranslate"><span class="pre">numerical_analysis</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="n_grams.html"><code class="docutils literal notranslate"><span class="pre">n_grams</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="omt.html"><code class="docutils literal notranslate"><span class="pre">omt</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="one_class_svm_anomaly_detector.html"><code class="docutils literal notranslate"><span class="pre">one_class_svm_anomaly_detector</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="open_ai.html"><code class="docutils literal notranslate"><span class="pre">open_ai</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="open_api.html"><code class="docutils literal notranslate"><span class="pre">open_api</span></code></a></li>
@@ -813,31 +814,31 @@ directive.</p>
 </section>
 <section id="collected-results">
 <h2>Collected results<a class="headerlink" href="#collected-results" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">sat_output::decode/8</span></code> predicate consumes the selected solver
-identifier, complete captured stdout, raw and normalized process
-statuses, diagnostic character codes, a source map, and an optional
-variable table. It returns a ground collected result with this
-representation:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">sat::solve/2-3</span></code> predicates return a ground collected result with
+this representation:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>sat_result(<span class="nv">Status</span>, <span class="nv">Model</span>, <span class="nv">Properties</span>)
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">Status</span></code> is <code class="docutils literal notranslate"><span class="pre">satisfiable</span></code>, <code class="docutils literal notranslate"><span class="pre">unsatisfiable</span></code>, or <code class="docutils literal notranslate"><span class="pre">unknown</span></code>.
-<code class="docutils literal notranslate"><span class="pre">Model</span></code> is <code class="docutils literal notranslate"><span class="pre">assignment(Literals)</span></code> when a witness was reported, or
-<code class="docutils literal notranslate"><span class="pre">none</span></code> when the result is not satisfiable or the witness was
-suppressed with <code class="docutils literal notranslate"><span class="pre">witness(false)</span></code>. <code class="docutils literal notranslate"><span class="pre">Literals</span></code> is an ordered list of
-<code class="docutils literal notranslate"><span class="pre">+Term</span></code> or <code class="docutils literal notranslate"><span class="pre">-Term</span></code>, <code class="docutils literal notranslate"><span class="pre">Term</span></code> being either the declared variable term
-or, when no variable table is available, the plain DIMACS integer.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">literal/2</span></code> predicate enumerates the collected model literals. The
-<code class="docutils literal notranslate"><span class="pre">result_property/2</span></code> predicate enumerates <code class="docutils literal notranslate"><span class="pre">status(Status)</span></code> and stored
-properties:</p>
+<p>The term arguments are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Status</span></code>: <code class="docutils literal notranslate"><span class="pre">satisfiable</span></code>, <code class="docutils literal notranslate"><span class="pre">unsatisfiable</span></code>, or <code class="docutils literal notranslate"><span class="pre">unknown</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Model</span></code>: <code class="docutils literal notranslate"><span class="pre">assignment(Literals)</span></code> when a satisfying witness was
+reported, or <code class="docutils literal notranslate"><span class="pre">none</span></code> when no witness was reported. <code class="docutils literal notranslate"><span class="pre">Literals</span></code> is an
+ordered list of <code class="docutils literal notranslate"><span class="pre">+Term</span></code> or <code class="docutils literal notranslate"><span class="pre">-Term</span></code>, where <code class="docutils literal notranslate"><span class="pre">Term</span></code> is either the
+declared variable term or, when no variable table is available, the
+plain DIMACS integer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Properties</span></code>: a list of solver and process information, described
+below.</p></li>
+</ul>
+<p>The stored properties are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">solver(Solver)</span></code> retains the selected solver identifier (<code class="docutils literal notranslate"><span class="pre">kissat</span></code>,
 <code class="docutils literal notranslate"><span class="pre">cadical</span></code>, <code class="docutils literal notranslate"><span class="pre">glucose</span></code>, or <code class="docutils literal notranslate"><span class="pre">z3</span></code>); <code class="docutils literal notranslate"><span class="pre">raw_status(Status)</span></code> and
 <code class="docutils literal notranslate"><span class="pre">process_status(Status)</span></code> retain subprocess metadata.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">termination(Reason)</span></code> distinguishes <code class="docutils literal notranslate"><span class="pre">completed</span></code>,
-<code class="docutils literal notranslate"><span class="pre">resource_limit</span></code>, and <code class="docutils literal notranslate"><span class="pre">interrupted</span></code>. None of the three solvers
-report which configured limit (time, conflicts, or decisions) was
-responsible for an unproven result; Glucose has no graceful
+<code class="docutils literal notranslate"><span class="pre">resource_limit</span></code>, and <code class="docutils literal notranslate"><span class="pre">interrupted</span></code>. A resource-limit result does
+not identify which configured limit (time, conflicts, or decisions)
+was responsible for an unproven result; Glucose has no graceful
 resource-limit result at all (see Limitations).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">variables(Variables)</span></code> retains the <code class="docutils literal notranslate"><span class="pre">Term-Number</span></code> table, or
 <code class="docutils literal notranslate"><span class="pre">none</span></code>.</p></li>
@@ -847,7 +848,24 @@ witness length when no table is available, or <code class="docutils literal notr
 preserve captured stderr, source locations, and the complete captured
 stdout.</p></li>
 </ul>
-<p>The accessors never start or restart a subprocess on backtracking.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">sat</span></code> object provides predicates for inspecting a collected result
+without running a solver again:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">literal(Result,</span> <span class="pre">Literal)</span></code> enumerates its model literals. It fails
+when no witness was reported.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">result_property(Result,</span> <span class="pre">Property)</span></code> enumerates its status and stored
+properties.</p></li>
+</ul>
+<p>For example, the following query solves the two-variable problem from
+the “Usage” section, obtains its status, and checks whether <code class="docutils literal notranslate"><span class="pre">q</span></code> is
+true in the collected witness:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> sat<span class="o">::</span>solve(terms([(p <span class="o">;</span> q), <span class="o">-</span>p]), <span class="nv">Result</span>),
+     sat<span class="o">::</span>result_property(<span class="nv">Result</span>, status(<span class="nv">Status</span>)),
+     sat<span class="o">::</span>literal(<span class="nv">Result</span>, <span class="o">+</span>q).
+</pre></div>
+</div>
+<p>For this problem, <code class="docutils literal notranslate"><span class="pre">Status</span></code> is <code class="docutils literal notranslate"><span class="pre">satisfiable</span></code> and <code class="docutils literal notranslate"><span class="pre">q</span></code> is true. The
+query requires a solver that reports a witness.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">print_result/1</span></code> predicate prints a collected result to the
 current output stream using the shared <code class="docutils literal notranslate"><span class="pre">s</span></code>/<code class="docutils literal notranslate"><span class="pre">v</span></code> status and witness
 line conventions followed by Kissat, CaDiCaL, Glucose (with
@@ -859,6 +877,9 @@ result:</p>
 </pre></div>
 </div>
 <p>Printing uses only the collected data and never invokes a solver.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">sat_output::decode/8</span></code> predicate constructs a collected result
+from captured solver output, process statuses, diagnostics, a source
+map, and an optional variable table.</p>
 </section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>

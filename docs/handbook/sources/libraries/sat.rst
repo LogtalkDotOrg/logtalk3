@@ -417,34 +417,33 @@ directive.
 Collected results
 -----------------
 
-The ``sat_output::decode/8`` predicate consumes the selected solver
-identifier, complete captured stdout, raw and normalized process
-statuses, diagnostic character codes, a source map, and an optional
-variable table. It returns a ground collected result with this
-representation:
+The ``sat::solve/2-3`` predicates return a ground collected result with
+this representation:
 
 ::
 
    sat_result(Status, Model, Properties)
 
-``Status`` is ``satisfiable``, ``unsatisfiable``, or ``unknown``.
-``Model`` is ``assignment(Literals)`` when a witness was reported, or
-``none`` when the result is not satisfiable or the witness was
-suppressed with ``witness(false)``. ``Literals`` is an ordered list of
-``+Term`` or ``-Term``, ``Term`` being either the declared variable term
-or, when no variable table is available, the plain DIMACS integer.
+The term arguments are:
 
-The ``literal/2`` predicate enumerates the collected model literals. The
-``result_property/2`` predicate enumerates ``status(Status)`` and stored
-properties:
+- ``Status``: ``satisfiable``, ``unsatisfiable``, or ``unknown``.
+- ``Model``: ``assignment(Literals)`` when a satisfying witness was
+  reported, or ``none`` when no witness was reported. ``Literals`` is an
+  ordered list of ``+Term`` or ``-Term``, where ``Term`` is either the
+  declared variable term or, when no variable table is available, the
+  plain DIMACS integer.
+- ``Properties``: a list of solver and process information, described
+  below.
+
+The stored properties are:
 
 - ``solver(Solver)`` retains the selected solver identifier (``kissat``,
   ``cadical``, ``glucose``, or ``z3``); ``raw_status(Status)`` and
   ``process_status(Status)`` retain subprocess metadata.
 - ``termination(Reason)`` distinguishes ``completed``,
-  ``resource_limit``, and ``interrupted``. None of the three solvers
-  report which configured limit (time, conflicts, or decisions) was
-  responsible for an unproven result; Glucose has no graceful
+  ``resource_limit``, and ``interrupted``. A resource-limit result does
+  not identify which configured limit (time, conflicts, or decisions)
+  was responsible for an unproven result; Glucose has no graceful
   resource-limit result at all (see Limitations).
 - ``variables(Variables)`` retains the ``Term-Number`` table, or
   ``none``.
@@ -454,7 +453,26 @@ properties:
   preserve captured stderr, source locations, and the complete captured
   stdout.
 
-The accessors never start or restart a subprocess on backtracking.
+The ``sat`` object provides predicates for inspecting a collected result
+without running a solver again:
+
+- ``literal(Result, Literal)`` enumerates its model literals. It fails
+  when no witness was reported.
+- ``result_property(Result, Property)`` enumerates its status and stored
+  properties.
+
+For example, the following query solves the two-variable problem from
+the "Usage" section, obtains its status, and checks whether ``q`` is
+true in the collected witness:
+
+::
+
+   | ?- sat::solve(terms([(p ; q), -p]), Result),
+        sat::result_property(Result, status(Status)),
+        sat::literal(Result, +q).
+
+For this problem, ``Status`` is ``satisfiable`` and ``q`` is true. The
+query requires a solver that reports a witness.
 
 The ``print_result/1`` predicate prints a collected result to the
 current output stream using the shared ``s``/``v`` status and witness
@@ -469,6 +487,10 @@ result:
         sat::print_result(Result).
 
 Printing uses only the collected data and never invokes a solver.
+
+The ``sat_output::decode/8`` predicate constructs a collected result
+from captured solver output, process statuses, diagnostics, a source
+map, and an optional variable table.
 
 Limitations
 -----------

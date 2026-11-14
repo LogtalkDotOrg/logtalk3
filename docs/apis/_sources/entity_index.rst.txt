@@ -852,6 +852,8 @@ Objects
       object_wrapper_hook <object_wrapper_hook_0>
       object_wrapper_hook(Protocol) <object_wrapper_hook_1>
       object_wrapper_hook(Name,Relations) <object_wrapper_hook_2>
+      omt <omt_0>
+      omt_expansion <omt_expansion_0>
       one_class_svm_anomaly_detector <one_class_svm_anomaly_detector_0>
       open_ai <open_ai_0>
       open_ai_api <open_ai_api_0>
@@ -1776,6 +1778,8 @@ Objects
    * :doc:`object_wrapper_hook <object_wrapper_hook_0>`
    * :doc:`object_wrapper_hook(Protocol) <object_wrapper_hook_1>`
    * :doc:`object_wrapper_hook(Name,Relations) <object_wrapper_hook_2>`
+   * :doc:`omt <omt_0>`
+   * :doc:`omt_expansion <omt_expansion_0>`
    * :doc:`one_class_svm_anomaly_detector <one_class_svm_anomaly_detector_0>`
    * :doc:`open_ai <open_ai_0>`
    * :doc:`open_ai_api <open_ai_api_0>`
@@ -2297,6 +2301,8 @@ Protocols
       numberlistp <numberlistp_0>
       ode_solver_protocol <ode_solver_protocol_0>
       ode_system_protocol <ode_system_protocol_0>
+      omt_problem_protocol <omt_problem_protocol_0>
+      omt_protocol <omt_protocol_0>
       open_ai_backend_protocol <open_ai_backend_protocol_0>
       open_api_provider_protocol <open_api_provider_protocol_0>
       options_protocol <options_protocol_0>
@@ -2532,6 +2538,8 @@ Protocols
    * :doc:`numberlistp <numberlistp_0>`
    * :doc:`ode_solver_protocol <ode_solver_protocol_0>`
    * :doc:`ode_system_protocol <ode_system_protocol_0>`
+   * :doc:`omt_problem_protocol <omt_problem_protocol_0>`
+   * :doc:`omt_protocol <omt_protocol_0>`
    * :doc:`open_ai_backend_protocol <open_ai_backend_protocol_0>`
    * :doc:`open_api_provider_protocol <open_api_provider_protocol_0>`
    * :doc:`options_protocol <options_protocol_0>`

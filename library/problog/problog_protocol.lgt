@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-12,
+		date is 2026-11-14,
 		comment is 'Process-backed ProbLog exact inference, source generation, and collected query probabilities.'
 	]).
 
@@ -110,7 +110,7 @@
 	:- public(result_property/2).
 	:- mode(result_property(+compound, ?compound), zero_or_more).
 	:- info(result_property/2, [
-		comment is 'Enumerates raw_status/1, process_status/1, and diagnostics/1 properties. Diagnostics are captured ``stderr character codes.',
+		comment is 'Enumerates ``raw_status/1``, ``process_status/1``, and ``diagnostics/1`` properties. Diagnostics are captured ``stderr`` character codes.',
 		argnames is ['Result', 'Property']
 	]).
 

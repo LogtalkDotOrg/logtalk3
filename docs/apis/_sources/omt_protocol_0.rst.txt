@@ -1,0 +1,327 @@
+.. index:: single: omt_protocol
+.. _omt_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``omt_protocol``
+================
+
+Protocol for single-objective optimization modulo theories.
+
+| **Availability:** 
+|    ``logtalk_load(omt(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-14
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: solve/2
+.. _omt_protocol/0::solve/2:
+
+``solve/2``
+^^^^^^^^^^^
+
+Solves an OMT source with default options and returns one result per check.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``solve(Source,Results)``
+| **Mode and number of proofs:**
+|    ``solve(+compound,-list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: solve/3
+.. _omt_protocol/0::solve/3:
+
+``solve/3``
+^^^^^^^^^^^
+
+Solves with solver/1, executable/1, and time_limit/1 options. OptiMathSAT rejects nonzero time limits.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``solve(Source,Results,Options)``
+| **Mode and number of proofs:**
+|    ``solve(+compound,-list(compound),+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An OptiMathSAT time limit is nonzero:
+|        ``domain_error(optimathsat_time_limit,Seconds)``
+|    Solver output or process status is invalid:
+|        ``omt_solver_error(Formal,Status,Diagnostics,SourceMap)``
+
+
+------------
+
+.. index:: program/1
+.. _omt_protocol/0::program/1:
+
+``program/1``
+^^^^^^^^^^^^^
+
+Generates and prints a source without invoking a solver.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``program(Source)``
+| **Mode and number of proofs:**
+|    ``program(+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: program/2
+.. _omt_protocol/0::program/2:
+
+``program/2``
+^^^^^^^^^^^^^
+
+Generates source character codes without invoking a solver.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``program(Source,Codes)``
+| **Mode and number of proofs:**
+|    ``program(+compound,-list(integer))`` - ``one_or_error``
+
+
+------------
+
+.. index:: print_program/1
+.. _omt_protocol/0::print_program/1:
+
+``print_program/1``
+^^^^^^^^^^^^^^^^^^^
+
+Prints source character codes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_program(Codes)``
+| **Mode and number of proofs:**
+|    ``print_program(+list(integer))`` - ``one_or_error``
+
+
+------------
+
+.. index:: status/2
+.. _omt_protocol/0::status/2:
+
+``status/2``
+^^^^^^^^^^^^
+
+Returns the status of a result.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``status(Result,Status)``
+| **Mode and number of proofs:**
+|    ``status(+compound,-atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: model_binding/2
+.. _omt_protocol/0::model_binding/2:
+
+``model_binding/2``
+^^^^^^^^^^^^^^^^^^^
+
+Enumerates model bindings.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``model_binding(Result,Binding)``
+| **Mode and number of proofs:**
+|    ``model_binding(+compound,-pair)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: model_value/3
+.. _omt_protocol/0::model_value/3:
+
+``model_value/3``
+^^^^^^^^^^^^^^^^^
+
+Returns a named model value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``model_value(Result,Name,Value)``
+| **Mode and number of proofs:**
+|    ``model_value(+compound,+atom,-term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: unsat_core_name/2
+.. _omt_protocol/0::unsat_core_name/2:
+
+``unsat_core_name/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Enumerates unsatisfiable core names.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``unsat_core_name(Result,Name)``
+| **Mode and number of proofs:**
+|    ``unsat_core_name(+compound,-atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: result_property/2
+.. _omt_protocol/0::result_property/2:
+
+``result_property/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Enumerates result properties.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``result_property(Result,Property)``
+| **Mode and number of proofs:**
+|    ``result_property(+compound,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: print_result/1
+.. _omt_protocol/0::print_result/1:
+
+``print_result/1``
+^^^^^^^^^^^^^^^^^^
+
+Prints a result and its objectives.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_result(Result)``
+| **Mode and number of proofs:**
+|    ``print_result(+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: print_results/1
+.. _omt_protocol/0::print_results/1:
+
+``print_results/1``
+^^^^^^^^^^^^^^^^^^^
+
+Prints a list of results.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_results(Results)``
+| **Mode and number of proofs:**
+|    ``print_results(+list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: capability/2
+.. _omt_protocol/0::capability/2:
+
+``capability/2``
+^^^^^^^^^^^^^^^^
+
+Enumerates advisory solver capabilities.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``capability(Solver,Feature)``
+| **Mode and number of proofs:**
+|    ``capability(?atom,?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: objective/3
+.. _omt_protocol/0::objective/3:
+
+``objective/3``
+^^^^^^^^^^^^^^^
+
+Enumerates objective expressions and exact solver-reported bounds from a get-objectives response.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``objective(Result,Expression,Bound)``
+| **Mode and number of proofs:**
+|    ``objective(+compound,-term,-term)`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

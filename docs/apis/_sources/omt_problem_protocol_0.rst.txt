@@ -1,0 +1,56 @@
+.. index:: single: omt_problem_protocol
+.. _omt_problem_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``omt_problem_protocol``
+========================
+
+Protocol for ordered optimization problem statements and origins.
+
+| **Availability:** 
+|    ``logtalk_load(omt(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-14
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`smt_problem_protocol <smt_problem_protocol/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`smt_problem_protocol/0::smt_statement/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

@@ -1,0 +1,67 @@
+.. index:: single: omt
+.. _omt/0:
+
+.. rst-class:: right
+
+**object**
+
+``omt``
+=======
+
+Process-backed single-objective optimization with Z3 and OptiMathSAT.
+
+| **Availability:** 
+|    ``logtalk_load(omt(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-14
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`omt_protocol <omt_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`os <os/0>`
+|    :ref:`smt <smt/0>`
+|    :ref:`smt_output <smt_output/0>`
+|    :ref:`smt_process <smt_process/0>`
+|    :ref:`smt_program <smt_program/0>`
+|    :ref:`type <type/0>`
+|    :ref:`user <user/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`omt_protocol/0::capability/2`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`omt_protocol/0::model_binding/2`  :ref:`omt_protocol/0::model_value/3`  :ref:`omt_protocol/0::objective/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`omt_protocol/0::print_program/1`  :ref:`omt_protocol/0::print_result/1`  :ref:`omt_protocol/0::print_results/1`  :ref:`omt_protocol/0::program/1`  :ref:`omt_protocol/0::program/2`  :ref:`omt_protocol/0::result_property/2`  :ref:`omt_protocol/0::solve/2`  :ref:`omt_protocol/0::solve/3`  :ref:`omt_protocol/0::status/2`  :ref:`omt_protocol/0::unsat_core_name/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

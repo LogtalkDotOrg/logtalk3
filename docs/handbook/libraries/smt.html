@@ -289,6 +289,7 @@
 <li class="toctree-l2"><a class="reference internal" href="nmf_projection.html"><code class="docutils literal notranslate"><span class="pre">nmf_projection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="numerical_analysis.html"><code class="docutils literal notranslate"><span class="pre">numerical_analysis</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="n_grams.html"><code class="docutils literal notranslate"><span class="pre">n_grams</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="omt.html"><code class="docutils literal notranslate"><span class="pre">omt</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="one_class_svm_anomaly_detector.html"><code class="docutils literal notranslate"><span class="pre">one_class_svm_anomaly_detector</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="open_ai.html"><code class="docutils literal notranslate"><span class="pre">open_ai</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="open_api.html"><code class="docutils literal notranslate"><span class="pre">open_api</span></code></a></li>
@@ -742,14 +743,46 @@ canonical statements:</p>
 </section>
 <section id="results">
 <h2>Results<a class="headerlink" href="#results" title="Link to this heading"></a></h2>
-<p>A collected result is <code class="docutils literal notranslate"><span class="pre">smt_result(Status,</span> <span class="pre">Model,</span> <span class="pre">Properties)</span></code>, where
-<code class="docutils literal notranslate"><span class="pre">Status</span></code> is <code class="docutils literal notranslate"><span class="pre">satisfiable</span></code>, <code class="docutils literal notranslate"><span class="pre">unsatisfiable</span></code>, or <code class="docutils literal notranslate"><span class="pre">unknown</span></code>;
-<code class="docutils literal notranslate"><span class="pre">Model</span></code> is <code class="docutils literal notranslate"><span class="pre">none</span></code> or <code class="docutils literal notranslate"><span class="pre">bindings([binding(Symbol,</span> <span class="pre">Value),</span> <span class="pre">...])</span></code>;
-and <code class="docutils literal notranslate"><span class="pre">Properties</span></code> is a list including <code class="docutils literal notranslate"><span class="pre">solver/1</span></code>, <code class="docutils literal notranslate"><span class="pre">raw_status/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">process_status/1</span></code>, <code class="docutils literal notranslate"><span class="pre">termination/1</span></code>, <code class="docutils literal notranslate"><span class="pre">diagnostics/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">source_map/1</span></code>, <code class="docutils literal notranslate"><span class="pre">raw_output/1</span></code>, <code class="docutils literal notranslate"><span class="pre">core/1</span></code> (<code class="docutils literal notranslate"><span class="pre">none</span></code> or a list of
-unsat-core names), and <code class="docutils literal notranslate"><span class="pre">values/1</span></code> (a list of <code class="docutils literal notranslate"><span class="pre">value(Term,</span> <span class="pre">Value)</span></code>
-pairs from <code class="docutils literal notranslate"><span class="pre">get-value</span></code> responses).</p>
+<p>Each result returned by <code class="docutils literal notranslate"><span class="pre">smt::solve/2-3</span></code> uses the term representation:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>smt_result(<span class="nv">Status</span>, <span class="nv">Model</span>, <span class="nv">Properties</span>)
+</pre></div>
+</div>
+<p>The term arguments are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Status</span></code>: <code class="docutils literal notranslate"><span class="pre">satisfiable</span></code>, <code class="docutils literal notranslate"><span class="pre">unsatisfiable</span></code>, or <code class="docutils literal notranslate"><span class="pre">unknown</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Model</span></code>: <code class="docutils literal notranslate"><span class="pre">none</span></code> or <code class="docutils literal notranslate"><span class="pre">bindings([binding(Symbol,</span> <span class="pre">Value),</span> <span class="pre">...])</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Properties</span></code>: a list of solver and process information, including
+<code class="docutils literal notranslate"><span class="pre">solver/1</span></code>, <code class="docutils literal notranslate"><span class="pre">raw_status/1</span></code>, <code class="docutils literal notranslate"><span class="pre">process_status/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">termination/1</span></code>, <code class="docutils literal notranslate"><span class="pre">diagnostics/1</span></code>, <code class="docutils literal notranslate"><span class="pre">source_map/1</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">raw_output/1</span></code>. It also includes <code class="docutils literal notranslate"><span class="pre">core/1</span></code> (<code class="docutils literal notranslate"><span class="pre">none</span></code> or a list of
+unsatisfiable core names) and <code class="docutils literal notranslate"><span class="pre">values/1</span></code> (a list of
+<code class="docutils literal notranslate"><span class="pre">value(Term,</span> <span class="pre">Value)</span></code> pairs from <code class="docutils literal notranslate"><span class="pre">get_value/1</span></code> responses).</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">smt</span></code> object provides predicates for inspecting a collected result
+without running a solver again:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">status(Result,</span> <span class="pre">Status)</span></code> returns its status.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model_binding(Result,</span> <span class="pre">Symbol-Value)</span></code> enumerates its model bindings.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model_value(Result,</span> <span class="pre">Symbol,</span> <span class="pre">Value)</span></code> looks up a model binding by
+symbol.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unsat_core_name(Result,</span> <span class="pre">Name)</span></code> enumerates its unsatisfiable core
+names.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">result_property(Result,</span> <span class="pre">Property)</span></code> enumerates its status and stored
+properties.</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">print_result/1</span></code> predicate prints a single result, while
+<code class="docutils literal notranslate"><span class="pre">print_results/1</span></code> prints a list of results separated by blank lines.</p>
+<p>For example, after loading the <code class="docutils literal notranslate"><span class="pre">smt_trivial_sat</span></code> object as shown in
+the “Usage” section, the following query obtains its status and the
+model value for <code class="docutils literal notranslate"><span class="pre">x</span></code>:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> smt<span class="o">::</span>solve(object(smt_trivial_sat), [<span class="nv">Result</span>]),
+     smt<span class="o">::</span>status(<span class="nv">Result</span>, <span class="nv">Status</span>),
+     smt<span class="o">::</span>model_value(<span class="nv">Result</span>, x, <span class="nv">Value</span>).
+</pre></div>
+</div>
+<p>For this problem, <code class="docutils literal notranslate"><span class="pre">Status</span></code> is <code class="docutils literal notranslate"><span class="pre">satisfiable</span></code> and <code class="docutils literal notranslate"><span class="pre">Value</span></code> is
+<code class="docutils literal notranslate"><span class="pre">bv(N,</span> <span class="pre">8)</span></code>, where <code class="docutils literal notranslate"><span class="pre">N</span></code> is a positive integer no greater than <code class="docutils literal notranslate"><span class="pre">255</span></code>.
+The value selected may vary between solvers.</p>
 <p>A parsed <code class="docutils literal notranslate"><span class="pre">Value</span></code> is a number, <code class="docutils literal notranslate"><span class="pre">true</span></code>/<code class="docutils literal notranslate"><span class="pre">false</span></code>, a plain symbol atom,
 <code class="docutils literal notranslate"><span class="pre">bv(Value,</span> <span class="pre">Width)</span></code> for a bit-vector literal, or a compound term
 mirroring the solver’s reported S-expression. Deeply nested qualified or
@@ -763,11 +796,6 @@ or <code class="docutils literal notranslate"><span class="pre">get-objectives</
 This lets <code class="docutils literal notranslate"><span class="pre">solve/2-3</span></code> decode every source kind, including a native
 <code class="docutils literal notranslate"><span class="pre">file/1</span></code> or <code class="docutils literal notranslate"><span class="pre">codes/1</span></code> source that was never expanded from the
 canonical statement vocabulary.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">status/2</span></code>, <code class="docutils literal notranslate"><span class="pre">model_binding/2</span></code>, <code class="docutils literal notranslate"><span class="pre">model_value/3</span></code>,
-<code class="docutils literal notranslate"><span class="pre">unsat_core_name/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">result_property/2</span></code> predicates inspect a
-single collected result without starting a process. The
-<code class="docutils literal notranslate"><span class="pre">print_result/1</span></code> and <code class="docutils literal notranslate"><span class="pre">print_results/1</span></code> predicates print one result,
-or a list of results separated by a blank line.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">capability/2</span></code> predicate enumerates an advisory, non-blocking
 <code class="docutils literal notranslate"><span class="pre">Solver</span></code>-<code class="docutils literal notranslate"><span class="pre">Feature</span></code> table (<code class="docutils literal notranslate"><span class="pre">quantifiers</span></code>, <code class="docutils literal notranslate"><span class="pre">strings</span></code>,
 <code class="docutils literal notranslate"><span class="pre">linear_arithmetic</span></code>, <code class="docutils literal notranslate"><span class="pre">non_linear_arithmetic</span></code>, <code class="docutils literal notranslate"><span class="pre">unsat_cores</span></code>,

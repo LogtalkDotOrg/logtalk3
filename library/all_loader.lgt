@@ -277,6 +277,7 @@
 		problog(loader),
 		sat(loader),
 		smt(loader),
+		omt(loader),
 		souffle(loader),
 		uri_template(loader),
 		url(loader),

@@ -247,6 +247,7 @@ directory in the ``NOTES.md`` file.
    nmf_projection
    numerical_analysis
    n_grams
+   omt
    one_class_svm_anomaly_detector
    open_ai
    open_api

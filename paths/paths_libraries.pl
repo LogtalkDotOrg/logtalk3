@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on November 12, 2026
+%  Last updated on November 14, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -251,6 +251,7 @@ logtalk_library_path(nested_dictionaries, library('nested_dictionaries/')).
 logtalk_library_path(nmea, library('nmea/')).
 logtalk_library_path(nmf_projection, library('nmf_projection/')).
 logtalk_library_path(numerical_analysis, library('numerical_analysis/')).
+logtalk_library_path(omt, library('omt/')).
 logtalk_library_path(one_class_svm_anomaly_detector, library('one_class_svm_anomaly_detector/')).
 logtalk_library_path(open_api, library('open_api/')).
 logtalk_library_path(open_ai, library('open_ai/')).

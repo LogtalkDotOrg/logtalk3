@@ -15,7 +15,7 @@ Process-backed ProbLog exact inference, source generation, and collected query p
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-11-12
+| **Date:** 2026-11-14
 
 | **Compilation flags:**
 |    ``static``
@@ -220,7 +220,7 @@ Enumerates ground query terms and numeric probabilities in a collected result. Q
 ``result_property/2``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Enumerates raw_status/1, process_status/1, and diagnostics/1 properties. Diagnostics are captured ``stderr character codes.
+Enumerates ``raw_status/1``, ``process_status/1``, and ``diagnostics/1`` properties. Diagnostics are captured ``stderr`` character codes.
 
 | **Compilation flags:**
 |    ``static``

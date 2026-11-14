@@ -321,13 +321,44 @@ canonical statements:
 Results
 -------
 
-A collected result is `smt_result(Status, Model, Properties)`, where `Status`
-is `satisfiable`, `unsatisfiable`, or `unknown`; `Model` is `none` or
-`bindings([binding(Symbol, Value), ...])`; and `Properties` is a list
-including `solver/1`, `raw_status/1`, `process_status/1`, `termination/1`,
-`diagnostics/1`, `source_map/1`, `raw_output/1`, `core/1` (`none` or a list
-of unsat-core names), and `values/1` (a list of `value(Term, Value)` pairs
-from `get-value` responses).
+Each result returned by `smt::solve/2-3` uses the term representation:
+
+    smt_result(Status, Model, Properties)
+
+The term arguments are:
+
+- `Status`: `satisfiable`, `unsatisfiable`, or `unknown`.
+- `Model`: `none` or `bindings([binding(Symbol, Value), ...])`.
+- `Properties`: a list of solver and process information, including
+	`solver/1`, `raw_status/1`, `process_status/1`, `termination/1`,
+	`diagnostics/1`, `source_map/1`, and `raw_output/1`. It also includes
+	`core/1` (`none` or a list of unsatisfiable core names) and `values/1`
+	(a list of `value(Term, Value)` pairs from `get_value/1` responses).
+
+The `smt` object provides predicates for inspecting a collected result
+without running a solver again:
+
+- `status(Result, Status)` returns its status.
+- `model_binding(Result, Symbol-Value)` enumerates its model bindings.
+- `model_value(Result, Symbol, Value)` looks up a model binding by symbol.
+- `unsat_core_name(Result, Name)` enumerates its unsatisfiable core names.
+- `result_property(Result, Property)` enumerates its status and stored
+	properties.
+
+The `print_result/1` predicate prints a single result, while
+`print_results/1` prints a list of results separated by blank lines.
+
+For example, after loading the `smt_trivial_sat` object as shown in the
+"Usage" section, the following query obtains its status and the model value
+for `x`:
+
+	| ?- smt::solve(object(smt_trivial_sat), [Result]),
+	     smt::status(Result, Status),
+	     smt::model_value(Result, x, Value).
+
+For this problem, `Status` is `satisfiable` and `Value` is `bv(N, 8)`, where
+`N` is a positive integer no greater than `255`. The value selected may vary
+between solvers.
 
 A parsed `Value` is a number, `true`/`false`, a plain symbol atom,
 `bv(Value, Width)` for a bit-vector literal, or a compound term mirroring
@@ -342,11 +373,6 @@ or `get-value` or `get-objectives` response is attached to the most recent
 result. This lets `solve/2-3` decode every source kind, including a native
 `file/1` or `codes/1` source that was never expanded from the canonical
 statement vocabulary.
-
-The `status/2`, `model_binding/2`, `model_value/3`, `unsat_core_name/2`, and
-`result_property/2` predicates inspect a single collected result without
-starting a process. The `print_result/1` and `print_results/1` predicates
-print one result, or a list of results separated by a blank line.
 
 The `capability/2` predicate enumerates an advisory, non-blocking
 `Solver`-`Feature` table (`quantifiers`, `strings`, `linear_arithmetic`,
