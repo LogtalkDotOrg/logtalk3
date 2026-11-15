@@ -886,18 +886,39 @@
 
 	% we use the structured printing mechanism in order to allow unit tests
 	% results to be intercepted for alternative reporting by e.g. GUI IDEs
-	:- uses(logtalk, [expand_library_path/2, file_type_extension/2, print_message/3, print_message_tokens/3]).
+	:- uses(logtalk, [
+		expand_library_path/2, file_type_extension/2, print_message/3, print_message_tokens/3
+	]).
+
 	% library support for quick check
-	:- uses(type, [check/2, check/3, valid/2, arbitrary/2, shrink/3, edge_case/2, get_seed/1, set_seed/1]).
+	:- uses(type, [
+		check/2, check/3, valid/2, arbitrary/2, shrink/3, edge_case/2, get_seed/1, set_seed/1
+	]).
+
 	% library support for reporting test execution time and suppressing test output
-	:- uses(os, [absolute_file_name/2, change_directory/1, working_directory/1, cpu_time/1, wall_time/1, null_device_path/1, decompose_file_name/3, decompose_file_name/4, internal_os_path/2]).
+	:- uses(os, [
+		absolute_file_name/2, change_directory/1, working_directory/1, cpu_time/1, wall_time/1,
+		null_device_path/1, decompose_file_name/3, decompose_file_name/4, internal_os_path/2
+	]).
+
 	% library list predicates
-	:- uses(list, [append/3, length/2, member/2, memberchk/2, nth1/3, select/3]).
+	:- uses(list, [
+		append/3, length/2, member/2, memberchk/2, nth1/3, select/3
+	]).
+
 	% for QuickCheck support
-	:- uses(fast_random, [maybe/0]).
+	:- uses(fast_random, [
+		maybe/0
+	]).
+
 	% for converting test identifiers into auxiliary predicate names
-	:- uses(user, [atomic_list_concat/2, atomic_list_concat/3]).
-	:- uses(term_io, [with_output_to/2]).
+	:- uses(user, [
+		atomic_list_concat/2, atomic_list_concat/3
+	]).
+
+	:- uses(term_io, [
+		with_output_to/2
+	]).
 
 	:- if(current_logtalk_flag(prolog_dialect, gnu)).
 		% workaround gplc limitation when dealing with multifile predicates
@@ -2009,6 +2030,7 @@
 	convert_test_outcome(balls(Balls), _, Goal, Balls, Goal, _, _, _, _, _).
 
 	:- meta_predicate(lint_check_assertion(*, *, *, *, *, *, *)).
+
 	lint_check_assertion(_, Assertion, _, _, _, _, _) :-
 		var(Assertion),
 		!.
@@ -2513,6 +2535,7 @@
 		quick_check(Template, []).
 
 	:- meta_predicate(run_quick_check_tests(::, ::, *, *, *)).
+
 	run_quick_check_tests(Template, Options, Seed, Discarded, Labels) :-
 		catch(check(callable, Template), Error, throw(quick_check_broken(template_error(Template), Error))),
 		memberchk(n(N), Options),
@@ -2832,6 +2855,7 @@
 		benchmark_(Clock, Goal, Repetitions, Time).
 
 	:- meta_predicate(benchmark_(*, 0, *, *)).
+
 	benchmark_(cpu, Goal, Repetitions, Time) :-
 		os::cpu_time(Time0),
 		empty_loop(Repetitions),
