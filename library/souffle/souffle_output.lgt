@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-11,
+		date is 2026-11-15,
 		comment is 'Decoding of captured stdout (``.printsize`` lines) and per-relation tab-separated CSV file content into a collected result.'
 	]).
 
@@ -132,14 +132,12 @@
 		domain_error(souffle_output, column_count-(ColumnCodesList-Types)).
 
 	decode_value(number, Codes, Integer) :-
-		!,
 		(	catch(number_codes(Integer, Codes), _, fail),
 			integer(Integer) ->
 			true
 		;	domain_error(souffle_output, number-Codes)
 		).
 	decode_value(unsigned, Codes, Integer) :-
-		!,
 		(	catch(number_codes(Integer, Codes), _, fail),
 			integer(Integer),
 			Integer >= 0 ->
@@ -147,13 +145,14 @@
 		;	domain_error(souffle_output, unsigned-Codes)
 		).
 	decode_value(float, Codes, Float) :-
-		!,
 		(	catch(number_codes(Number, Codes), _, fail) ->
-			(	float(Number) -> Float = Number ; Float is Number * 1.0 )
+			(	float(Number) ->
+				Float = Number
+			;	Float is Number * 1.0
+			)
 		;	domain_error(souffle_output, float-Codes)
 		).
 	decode_value(symbol, Codes, Atom) :-
-		!,
 		atom_codes(Atom, Codes).
 
 	% -----------------------------------------------------------------------

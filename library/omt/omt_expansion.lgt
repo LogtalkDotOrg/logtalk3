@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-14,
+		date is 2026-11-15,
 		comment is 'Opt-in expansion of OMT problem objects.'
 	]).
 
@@ -52,10 +52,17 @@
 		;	Origin = unknown
 		).
 
-	statement((:- raw(Source)), raw(Source)) :- !.
-	statement((:- comment(Source)), comment(Source)) :- !.
-	statement((:- _), _) :- !, fail.
-	statement((_ :- _), _) :- !, fail.
-	statement(Statement, Statement) :- callable(Statement).
+	statement((:- raw(Source)), raw(Source)) :-
+		!.
+	statement((:- comment(Source)), comment(Source)) :-
+		!.
+	statement((:- _), _) :-
+		!,
+		fail.
+	statement((_ :- _), _) :-
+		!,
+		fail.
+	statement(Statement, Statement) :-
+		callable(Statement).
 
 :- end_object.

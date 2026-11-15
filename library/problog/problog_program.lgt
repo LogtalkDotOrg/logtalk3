@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-12,
+		date is 2026-11-15,
 		comment is 'Canonical ground ProbLog statement validation and source generation.'
 	]).
 
@@ -169,17 +169,17 @@
 		[44, 32], term(Term), term_tail(Terms).
 
 	goal(true) -->
-		!, text('true').
+		text('true').
 	goal(function(Name, Arguments)) -->
-		!, positive_atom(function(Name, Arguments)).
+		positive_atom(function(Name, Arguments)).
 	goal(conjunction(Goals)) -->
-		!, [0'(], goals(Goals), [0')].
+		[0'(], goals(Goals), [0')].
 	goal(disjunction(Goals)) -->
-		!, [0'(], disjuncts(Goals), [0')].
+		[0'(], disjuncts(Goals), [0')].
 	goal(negation(Goal)) -->
-		!, text('\\+ ('), goal(Goal), [0')].
+		text('\\+ ('), goal(Goal), [0')].
 	goal(comparison(Operator, Left, Right)) -->
-		!, term(Left), [32], comparison_operator(Operator), [32], term(Right).
+		term(Left), [32], comparison_operator(Operator), [32], term(Right).
 
 	goals([Goal]) -->
 		!, goal(Goal).
@@ -192,38 +192,37 @@
 		goal(Goal), text('; '), disjuncts(Goals).
 
 	comparison_operator('=') -->
-		!, text('=').
+		text('=').
 	comparison_operator('==') -->
-		!, text('==').
+		text('==').
 	comparison_operator('\\=') -->
-		!, text('\\=').
+		text('\\=').
 	comparison_operator('\\==') -->
-		!, text('\\==').
+		text('\\==').
 	comparison_operator('<') -->
-		!, text('<').
+		text('<').
 	comparison_operator('=<') -->
 		!, text('=<').
 	comparison_operator('>') -->
-		!, text('>').
+		text('>').
 	comparison_operator('>=') -->
-		!, text('>=').
+		text('>=').
 
 	term(atom(Atom)) -->
-		!, atom_text(Atom).
+		atom_text(Atom).
 	term(number(Number)) -->
-		!, number_text(Number).
+		number_text(Number).
 	term(variable(Name)) -->
-		!, variable_name(Name).
+		variable_name(Name).
 	term(anonymous) -->
-		!, [0'_].
+		[0'_].
 	term(function(Name, Arguments)) -->
-		!, positive_atom(function(Name, Arguments)).
+		positive_atom(function(Name, Arguments)).
 	term(list(Elements)) -->
-		!, [0'[], list_elements(Elements), [0']].
+		[0'[], list_elements(Elements), [0']].
 	term(list(Elements, Tail)) -->
-		!, { Elements = [_|_] }, [0'[], list_elements(Elements), [0'|, 32], term(Tail), [0']].
+		{ Elements = [_|_] }, [0'[], list_elements(Elements), [0'|, 32], term(Tail), [0']].
 	term(arithmetic(Operator, Arguments)) -->
-		!,
 		{ arithmetic_operator(Operator, Arity), length(Arguments, Arity) },
 		arithmetic(Operator, Arguments).
 

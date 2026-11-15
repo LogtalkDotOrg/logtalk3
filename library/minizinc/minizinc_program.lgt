@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-10,
+		date is 2026-11-15,
 		comment is 'Canonical MiniZinc statement validation and source generation.'
 	]).
 
@@ -133,24 +133,18 @@
 	% -----------------------------------------------------------------------
 
 	statement(include(Path)) -->
-		!,
 		{ atom(Path), atom_codes(Path, PathCodes) },
 		text('include "'), string_codes(PathCodes), text('";'), [10].
 	statement(decl(TypeInst, Name, Expr)) -->
-		!,
 		typeinst(TypeInst), [0':, 0' ], identifier(Name), initializer(Expr), [0';, 10].
 	statement(array_decl(TypeInst, IndexSets, Name, Expr)) -->
-		!,
 		text('array['), indexsets(IndexSets), text('] of '), typeinst(TypeInst), [0':, 0' ],
 		identifier(Name), initializer(Expr), [0';, 10].
 	statement(constraint(Expr)) -->
-		!,
 		text('constraint '), expr(Expr), [0';, 10].
 	statement(solve(Goal)) -->
-		!,
 		text('solve '), solve_goal(Goal), [0';, 10].
 	statement(enum(Name, Cases)) -->
-		!,
 		text('enum '), identifier(Name), enum_cases(Cases), [0';, 10].
 	statement(raw(Source)) -->
 		{ raw_codes(Source, Codes) },
@@ -167,21 +161,21 @@
 		indexset(Range1), [0',], indexset(Range2).
 
 	indexset(range(Lo, Hi)) -->
-		!, range_bounds(Lo, Hi).
+		range_bounds(Lo, Hi).
 	indexset(id(Name)) -->
 		identifier(Name).
 
 	solve_goal(satisfy) -->
-		!, text(satisfy).
+		text(satisfy).
 	solve_goal(minimize(Expr)) -->
-		!, text('minimize '), expr(Expr).
+		text('minimize '), expr(Expr).
 	solve_goal(maximize(Expr)) -->
 		text('maximize '), expr(Expr).
 
 	enum_cases(declared) -->
-		!, [].
+		[].
 	enum_cases(cases([Case| Cases])) -->
-		!, text(' = {'), ident_list([Case| Cases]), [0'}].
+		text(' = {'), ident_list([Case| Cases]), [0'}].
 	enum_cases(anon(CountExpr)) -->
 		text(' = _('), expr(CountExpr), [0')].
 
@@ -195,22 +189,22 @@
 	% -----------------------------------------------------------------------
 
 	typeinst(par(Base)) -->
-		!, base(Base).
+		base(Base).
 	typeinst(var(Base)) -->
 		text('var '), base(Base).
 
 	base(bool) -->
-		!, text(bool).
+		text(bool).
 	base(int) -->
-		!, text(int).
+		text(int).
 	base(float) -->
-		!, text(float).
+		text(float).
 	base(string) -->
-		!, text(string).
+		text(string).
 	base(set(Base)) -->
-		!, text('set of '), base(Base).
+		text('set of '), base(Base).
 	base(range(Lo, Hi)) -->
-		!, range_bounds(Lo, Hi).
+		range_bounds(Lo, Hi).
 	base(id(Name)) -->
 		identifier(Name).
 
@@ -235,51 +229,45 @@
 	needs_parens(raw(_)).
 
 	expr(int(Integer)) -->
-		!, integer_text(Integer).
+		integer_text(Integer).
 	expr(float(Float)) -->
-		!, float_text(Float).
+		float_text(Float).
 	expr(bool(Bool)) -->
-		!, bool_text(Bool).
+		bool_text(Bool).
 	expr(string(Codes)) -->
-		!, [0'"], string_codes(Codes), [0'"].
+		[0'"], string_codes(Codes), [0'"].
 	expr(anonymous) -->
-		!, [0'_].
+		[0'_].
 	expr(id(Name)) -->
-		!, identifier(Name).
+		identifier(Name).
 	expr(range(Lo, Hi)) -->
-		!, range_bounds(Lo, Hi).
+		range_bounds(Lo, Hi).
 	expr(set(Elements)) -->
-		!, [0'{], expr_list(Elements), [0'}].
+		[0'{], expr_list(Elements), [0'}].
 	expr(array(Elements)) -->
-		!, [0'[], expr_list(Elements), [0']].
+		[0'[], expr_list(Elements), [0']].
 	expr(array2d(Rows)) -->
-		!,
 		{ valid(list, Rows), rows_rectangular(Rows) },
 		text('[|'), row_list(Rows), text('|]').
 	expr(index(ArrayExpr, Indices)) -->
-		!,
 		wrapped_expr(ArrayExpr), [0'[], expr_list(Indices), [0']].
 	expr(op(Operator, Left, Right)) -->
-		!,
 		{ binary_operator(Operator) },
 		wrapped_expr(Left), [0' ], op_text(Operator), [0' ], wrapped_expr(Right).
 	expr(op(Operator, Operand)) -->
-		!,
 		{ unary_operator(Operator) },
 		op_text(Operator), [0' ], wrapped_expr(Operand).
 	expr(call(Name, [])) -->
 		!, identifier(Name).
 	expr(call(Name, Args)) -->
-		!, identifier(Name), [0'(], expr_list(Args), [0')].
+		identifier(Name), [0'(], expr_list(Args), [0')].
 	expr(comprehension(array, Head, Generators)) -->
 		!, [0'[], expr(Head), text(' | '), comp_tail(Generators), [0']].
 	expr(comprehension(set, Head, Generators)) -->
 		!, [0'{], expr(Head), text(' | '), comp_tail(Generators), [0'}].
 	expr(comprehension(call(Name), Head, Generators)) -->
-		!,
 		identifier(Name), [0'(], comp_tail(Generators), text(')('), expr(Head), [0')].
 	expr(if_then_else(Pairs, Else)) -->
-		!,
 		{ Pairs = [_| _] },
 		if_then_chain(Pairs), else_part(Else), text(' endif').
 	expr(raw(Source)) -->

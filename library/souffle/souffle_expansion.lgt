@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-10,
+		date is 2026-11-15,
 		comment is 'Opt-in ordinary-clause and directive expansion for pure Datalog problem objects.'
 	]).
 
@@ -65,29 +65,24 @@
 		;	Origin = unknown
 		).
 
-	statement((:- decl(Name, Columns)), _, decl(Name, Columns)) :-
-		!.
-	statement((:- input(Name)), _, input(Name)) :-
-		!.
-	statement((:- output(Name)), _, output(Name)) :-
-		!.
-	statement((:- printsize(Name)), _, printsize(Name)) :-
-		!.
-	statement((:- raw(Source)), _, raw(Codes)) :-
+	statement((:- Directive), _, Statement) :-
 		!,
-		normalize_text(Source, Codes).
-	statement((:- comment(Source)), _, comment(Codes)) :-
-		!,
-		normalize_text(Source, Codes).
-	statement((:- _), _, _) :-
-		!,
-		fail.
+		statement_directive(Directive, Statement).
 	statement((Head :- Body), Names, rule(HeadTerm, Literals)) :-
 		!,
 		positive_atom(Head, Names, HeadTerm),
 		body(Body, Names, Literals).
 	statement(Fact, Names, fact(Term)) :-
 		positive_atom(Fact, Names, Term).
+
+	statement_directive(decl(Name, Columns), decl(Name, Columns)).
+	statement_directive(input(Name), input(Name)).
+	statement_directive(output(Name), output(Name)).
+	statement_directive(printsize(Name), printsize(Name)).
+	statement_directive(raw(Source), raw(Codes)) :-
+		normalize_text(Source, Codes).
+	statement_directive(comment(Source), comment(Codes)) :-
+		normalize_text(Source, Codes).
 
 	normalize_text(Source, Codes) :-
 		(	atom(Source) ->

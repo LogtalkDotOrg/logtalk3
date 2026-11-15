@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-10,
+		date is 2026-11-15,
 		comment is 'Canonical Datalog statement validation and source generation for Souffle 2.5.'
 	]).
 
@@ -149,21 +149,21 @@
 	% -----------------------------------------------------------------------
 
 	statement(decl(Name, Columns)) -->
-		!, text('.decl '), identifier(Name), [0'(], decl_columns(Columns), [0')], [10].
+		text('.decl '), identifier(Name), [0'(], decl_columns(Columns), [0')], [10].
 	statement(input(Name)) -->
-		!, text('.input '), identifier(Name), [10].
+		text('.input '), identifier(Name), [10].
 	statement(output(Name)) -->
-		!, text('.output '), identifier(Name), [10].
+		text('.output '), identifier(Name), [10].
 	statement(printsize(Name)) -->
-		!, text('.printsize '), identifier(Name), [10].
+		text('.printsize '), identifier(Name), [10].
 	statement(fact(Atom)) -->
-		!, souffle_atom(Atom), [0'., 10].
+		souffle_atom(Atom), [0'., 10].
 	statement(rule(Head, Body)) -->
-		!, souffle_atom(Head), rule_body(Body), [0'., 10].
+		souffle_atom(Head), rule_body(Body), [0'., 10].
 	statement(comment(Codes)) -->
-		!, { valid(codes, Codes) }, text('// '), codes(Codes), [10].
+		{ valid(codes, Codes) }, text('// '), codes(Codes), [10].
 	statement(raw(Codes)) -->
-		!, { valid(codes, Codes) }, codes(Codes), [10].
+		{ valid(codes, Codes) }, codes(Codes), [10].
 
 	decl_columns([Name-Type]) -->
 		!, identifier(Name), [0':], column_type(Type).
@@ -238,7 +238,7 @@
 		identifier(Name), arguments(Arguments).
 
 	arguments([]) -->
-		!, [].
+		[].
 	arguments([Term| Terms]) -->
 		[0'(], term(Term), term_tail(Terms), [0')].
 
@@ -248,22 +248,22 @@
 		[0',], term(Term), term_tail(Terms).
 
 	term(number(Integer)) -->
-		!, { integer(Integer) }, integer_text(Integer).
+		{ integer(Integer) }, integer_text(Integer).
 	term(unsigned(Integer)) -->
-		!, { integer(Integer), Integer >= 0 }, integer_text(Integer), [0'u].
+		{ integer(Integer), Integer >= 0 }, integer_text(Integer), [0'u].
 	term(float(Float)) -->
-		!, { float(Float) }, float_text(Float).
+		{ float(Float) }, float_text(Float).
 	term(string(Codes)) -->
-		!, { valid(codes, Codes) }, [0'"], string_codes(Codes), [0'"].
+		{ valid(codes, Codes) }, [0'"], string_codes(Codes), [0'"].
 	term(variable(Name)) -->
-		!, variable_name(Name).
+		variable_name(Name).
 	term(anonymous) -->
-		!, [0'_].
+		[0'_].
 	term(cat(Left, Right)) -->
-		!, text('cat('), term(Left), [0',], term(Right), [0')].
+		text('cat('), term(Left), [0',], term(Right), [0')].
 	term(arithmetic(Operator, [Left, Right])) -->
 		{ arithmetic_operator(Operator) },
-		!, [0'(], term(Left), text(Operator), term(Right), [0')].
+		[0'(], term(Left), text(Operator), term(Right), [0')].
 
 	arithmetic_operator('+').
 	arithmetic_operator('-').
@@ -317,24 +317,22 @@
 		!,
 		identifier_codes(Codes).
 	identifier_codes([First| Rest]) :-
-		First >= 0'a,
-		First =< 0'z,
+		0'a =< First, First =< 0'z,
 		name_tail(Rest).
 
 	variable_start(Code) :-
 		(	Code =:= 0'_ ->
 			true
-		;	Code >= 0'A,
-			Code =< 0'Z
+		;	0'A =< Code, Code =< 0'Z
 		).
 
 	name_tail([]).
 	name_tail([Code| Codes]) :-
-		(	Code >= 0'a, Code =< 0'z ->
+		(	0'a =< Code, Code =< 0'z ->
 			true
-		;	Code >= 0'A, Code =< 0'Z ->
+		;	0'A =< Code, Code =< 0'Z ->
 			true
-		;	Code >= 0'0, Code =< 0'9 ->
+		;	0'0 =< Code, Code =< 0'9 ->
 			true
 		;	Code =:= 0'_
 		),

@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-11,
+		date is 2026-11-15,
 		comment is 'Canonical ASP statement validation and source generation.'
 	]).
 
@@ -192,33 +192,28 @@
 		).
 
 	statement(fact(Atom)) -->
-		!, asp_atom(Atom), [0'., 10].
+		asp_atom(Atom), [0'., 10].
 	statement(rule(Head, Body)) -->
-		!, head(Head), rule_body(Body), [0'., 10].
+		head(Head), rule_body(Body), [0'., 10].
 	statement(constraint(Body)) -->
-		!, [0':, 0'-, 0' ], body(Body), [0'., 10].
+		[0':, 0'-, 0' ], body(Body), [0'., 10].
 	statement(constant(Name, Term)) -->
-		!,
 		{ ground_expression(Term) },
 		text('#const '), identifier(Name), text(' = '), term(Term), [0'., 10].
 	statement(show(none)) -->
 		!, text('#show.'), [10].
 	statement(show(signature(Name, Arity, Sign))) -->
-		!,
 		{ integer(Arity), Arity >= 0 },
 		text('#show '), sign(Sign), identifier(Name), [0'/], integer_text(Arity), [0'., 10].
 	statement(show_term(Term, Body)) -->
-		!,
 		text('#show '), term(Term), condition(Body), [0'., 10].
 	statement(minimize(Elements)) -->
-		!, text('#minimize {'), objectives(Elements), text('}.'), [10].
+		text('#minimize {'), objectives(Elements), text('}.'), [10].
 	statement(maximize(Elements)) -->
-		!, text('#maximize {'), objectives(Elements), text('}.'), [10].
+		text('#maximize {'), objectives(Elements), text('}.'), [10].
 	statement(weak_constraint(Body, Weight, Priority, Tuple)) -->
-		!,
 		text(':~ '), body(Body), text('. ['), objective_tuple(Weight, Priority, Tuple), [0'], 10].
 	statement(raw(Source)) -->
-		!,
 		{ raw_codes(Source, Codes) },
 		codes(Codes), [10].
 
@@ -344,7 +339,7 @@
 		aggregate_tuple(Tuple, Body), aggregate_tail(Elements).
 
 	aggregate_tuple([], Body) -->
-		!, [0':], simple_body(Body).
+		[0':], simple_body(Body).
 	aggregate_tuple([Term| Terms], Body) -->
 		term(Term), term_tail(Terms), condition(Body).
 
@@ -401,29 +396,28 @@
 		[0',], term(Term), term_tail(Terms).
 
 	term(number(Integer)) -->
-		!, integer_text(Integer).
+		integer_text(Integer).
 	term(string(Codes)) -->
-		!,
 		{ valid(codes, Codes) },
 		[0'"], string_codes(Codes), [0'"].
 	term(function(Name, Arguments, Sign)) -->
-		!, asp_atom(function(Name, Arguments, Sign)).
+		asp_atom(function(Name, Arguments, Sign)).
 	term(tuple(Terms)) -->
-		!, [0'(], terms(Terms), tuple_comma(Terms), [0')].
+		[0'(], terms(Terms), tuple_comma(Terms), [0')].
 	term(infimum) -->
-		!, text('#inf').
+		text('#inf').
 	term(supremum) -->
-		!, text('#sup').
+		text('#sup').
 	term(variable(Name)) -->
-		!, variable_name(Name).
+		variable_name(Name).
 	term(anonymous) -->
-		!, [0'_].
+		[0'_].
 	term(interval(Lower, Upper)) -->
-		!, [0'(], term(Lower), text('..'), term(Upper), [0')].
+		[0'(], term(Lower), text('..'), term(Upper), [0')].
 	term(arithmetic(abs, [Term])) -->
-		!, [0'|], term(Term), [0'|].
+		[0'|], term(Term), [0'|].
 	term(arithmetic('-', [Term])) -->
-		!, text('(-'), term(Term), [0')].
+		text('(-'), term(Term), [0')].
 	term(arithmetic(Operator, [Left, Right])) -->
 		{ arithmetic_operator(Operator) },
 		[0'(], term(Left), text(Operator), term(Right), [0')].

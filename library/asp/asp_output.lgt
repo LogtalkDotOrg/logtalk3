@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-11,
+		date is 2026-11-15,
 		comment is 'Whole-document Clingo and Zetesis JSON output decoding.'
 	]).
 
@@ -315,25 +315,21 @@
 		zetesis_token(Kind, Token, Term).
 
 	zetesis_token(number, Token, number(Integer)) -->
-		!,
 		{	required_field(value, Token, Integer),
 			integer(Integer)
 		}.
 	zetesis_token(string, Token, string(Codes)) -->
-		!,
 		{	required_field(value, Token, Atom),
 			atom(Atom),
 			atom_codes(Atom, Codes)
 		}.
 	zetesis_token(symbol, Token, function(Name, [], positive)) -->
-		!,
 		{ required_field(value, Token, Name) }.
 	zetesis_token(infimum, _, infimum) -->
-		!.
+		[].
 	zetesis_token(supremum, _, supremum) -->
-		!.
+		[].
 	zetesis_token(function, Token, function(Name, Arguments, Sign)) -->
-		!,
 		{	required_field(name, Token, Name),
 			required_field(sign, Token, Sign),
 			required_field(arity, Token, Arity),
@@ -391,16 +387,22 @@
 		!.
 	zetesis_optimization(Optimization, Optimality, Costs, Priorities, Ties) :-
 		required_field(optimal, Optimization, Optimal),
-		( Optimal == '@'(true) -> Optimality = proven
-		; ( Optimal == '@'(false) -> Optimality = unproven ; domain_error(asp_output, optimal-Optimal) )
+		(	Optimal == '@'(true) ->
+			Optimality = proven
+		;	Optimal == '@'(false) ->
+			Optimality = unproven
+		;	domain_error(asp_output, optimal-Optimal)
 		),
 		required_field(costs, Optimization, Records),
 		zetesis_costs(Records, Costs, Priorities),
-		( Costs == none -> domain_error(asp_output, costs-Records) ; true ),
+		(	Costs == none ->
+			domain_error(asp_output, costs-Records)
+		;	true
+		),
 		required_field(tied_models, Optimization, RawTies),
-		( RawTies == '@'(null) ->
+		(	RawTies == '@'(null) ->
 			Ties = unknown
-		; nonnegative_integer(tied_models, RawTies),
+		;	nonnegative_integer(tied_models, RawTies),
 			Ties = RawTies
 		).
 
@@ -414,27 +416,45 @@
 		zetesis_model_costs(Models, Rest, Costs, Priorities).
 
 	zetesis_outcome(Label, Completion, Coverage, Interruption, PublicationStop, Error, Status) :-
-		( Error == '@'(null) -> true ; domain_error(asp_output, error-Error) ),
-		( Completion == exhausted -> ExpectedCoverage = exhausted
-		; ( (Completion == requested_models; Completion == interrupted) -> ExpectedCoverage = partial ; domain_error(asp_output, completion-Completion) )
+		(	Error == '@'(null) ->
+			true
+		;	domain_error(asp_output, error-Error)
 		),
-		( Coverage == ExpectedCoverage -> true ; domain_error(asp_output, coverage-Coverage) ),
+		(	Completion == exhausted ->
+			ExpectedCoverage = exhausted
+		;	(	Completion == requested_models
+			;	Completion == interrupted
+			) ->
+			ExpectedCoverage = partial
+		;	domain_error(asp_output, completion-Completion)
+		),
+		(	Coverage == ExpectedCoverage ->
+			true
+		;	domain_error(asp_output, coverage-Coverage)
+		),
 		zetesis_stop_field(interruption, Interruption),
 		zetesis_stop_field(publication_stop, PublicationStop),
-		( Status == exit(0),
+		(	Status == exit(0),
 			PublicationStop == '@'(null),
 			Interruption == '@'(null),
 			Completion \== interrupted,
-			once((Label == satisfiable; Label == unsatisfiable)) ->
+			(	Label == satisfiable
+			;	Label == unsatisfiable
+			) ->
 			true
-		; ( Status == exit(3),
-				Label == incomplete,
-				(Completion == interrupted; PublicationStop \== '@'(null)) ->
+		;	Status == exit(3),
+			Label == incomplete,
+			(	Completion == interrupted
+			;	PublicationStop \== '@'(null)
+			) ->
 			true
-		  ; domain_error(asp_process_status, Status)
-		  )
+		;	domain_error(asp_process_status, Status)
 		),
-		( Label == unsatisfiable, Completion \== exhausted -> domain_error(asp_output, status-Label) ; true ).
+		(	Label == unsatisfiable,
+			Completion \== exhausted ->
+			domain_error(asp_output, status-Label)
+		;	true
+		).
 
 	zetesis_stop_field(_, '@'(null)) :-
 		!.
@@ -454,33 +474,36 @@
 		).
 
 	zetesis_completeness(Completion, Stop, Options, Ties, Count, Complete) :-
-		( Completion \== exhausted -> Complete = false
-		; ( Stop \== '@'(null) -> Complete = false
-		  ; ( Ties == none -> Complete = true
-		    ; ( Ties == unknown -> Complete = unknown
-		      ; ( member(models(Limit), Options), Limit \== 0, Count < Ties -> Complete = false
-		        ; ( Count == Ties -> Complete = true ; Complete = false )
-		        )
-		      )
-		    )
-		  )
+		(	Completion \== exhausted ->
+			Complete = false
+		;	Stop \== '@'(null) ->
+			Complete = false
+		;	Ties == none ->
+			Complete = true
+		;	Ties == unknown ->
+			Complete = unknown
+		;	member(models(Limit), Options),
+			Limit \== 0,
+			Count < Ties ->
+			Complete = false
+		;	Count == Ties ->
+			Complete = true
+		;	Complete = false
 		).
 
 	zetesis_termination(Interruption, Stop, Termination) :-
-		( Interruption \== '@'(null),
+		(	Interruption \== '@'(null),
 			required_field(code, Interruption, Code),
 			Code == deadline ->
 			Termination = time_limit
-		; ( Stop \== '@'(null),
-				required_field(code, Stop, StopCode),
-				StopCode == deadline ->
-				Termination = time_limit
-		  ; ( Interruption == '@'(null),
-					Stop == '@'(null) ->
-					Termination = completed
-				; Termination = interrupted
-				)
-		  )
+		;	Stop \== '@'(null),
+			required_field(code, Stop, StopCode),
+			StopCode == deadline ->
+			Termination = time_limit
+		 ;	Interruption == '@'(null),
+			Stop == '@'(null) ->
+			Termination = completed
+		;	Termination = interrupted
 		).
 
 	field(Key, json(Pairs), Default, Value) :-
