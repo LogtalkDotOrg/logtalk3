@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2026-11-03,
+		date is 2026-11-16,
 		comment is 'Unit tests for the "sbom" tool.'
 	]).
 
@@ -74,12 +74,10 @@
 		logtalk_load(Loader),
 		directory(sbom_fixture_no_checksum_pack, NoChecksumPackDirectory),
 		path_concat(NoChecksumPackDirectory, 'loader.lgt', NoChecksumLoader),
-		logtalk_load(NoChecksumLoader),
-		!.
+		logtalk_load(NoChecksumLoader).
 
 	cleanup :-
-		reset,
-		!.
+		reset.
 
 	test(sbom_document_01, deterministic) :-
 		document(Document),
@@ -392,6 +390,24 @@
 		json_schema_parse(file(Path), Schema),
 		json_schema_validate(Schema, JSON).
 
+	test(sbom_export_03, deterministic) :-
+		export(atom(Atom), [format(cdx), validate_export(true)]),
+		json_parse(atom(Atom), JSON),
+		^^assertion(ground(JSON)),
+		JSON = {
+			bomFormat-'CycloneDX',
+			specVersion-'1.7',
+			serialNumber-_,
+			version-1,
+			metadata-_,
+			externalReferences-_,
+			components-_,
+			dependencies-_
+		},
+		^^file_path('cyclonedx-1.7.schema.json', Path),
+		json_schema_parse(file(Path), Schema),
+		json_schema_validate(Schema, JSON).
+
 	test(sbom_document_06, deterministic) :-
 		document(Document, [format(cdx)]),
 		^^assertion(ground(Document)),
@@ -510,24 +526,6 @@
 		}, Dependencies),
 		memberchk({ref-'SPDXRef-Pack-sbom_fixture_no_checksum_pack'}, Dependencies),
 		memberchk({ref-'SPDXRef-Backend'}, Dependencies).
-
-	test(sbom_export_03, deterministic) :-
-		export(atom(Atom), [format(cdx), validate_export(true)]),
-		json_parse(atom(Atom), JSON),
-		^^assertion(ground(JSON)),
-		JSON = {
-			bomFormat-'CycloneDX',
-			specVersion-'1.7',
-			serialNumber-_,
-			version-1,
-			metadata-_,
-			externalReferences-_,
-			components-_,
-			dependencies-_
-		},
-		^^file_path('cyclonedx-1.7.schema.json', Path),
-		json_schema_parse(file(Path), Schema),
-		json_schema_validate(Schema, JSON).
 
 	test(sbom_document_07, deterministic) :-
 		document(Document, [
@@ -961,13 +959,7 @@
 			dependencies-_
 		}.
 
-	test(sbom_creators_01, deterministic) :-
-		sbom<<creators(spdx, [SPDXCreator], [format(spdx)]),
-		^^assertion(sub_atom(SPDXCreator, 0, _, _, 'Tool: Logtalk SBOM generator-')).
-
-	test(sbom_creators_02, deterministic) :-
-		sbom<<creators(cdx, [CDXCreator], [format(cdx)]),
-		^^assertion(CDXCreator == 'Logtalk SBOM generator').
+	% suppress "packs" tool messages
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).

@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2026-11-03,
+		date is 2026-11-16,
 		comment is 'This tool generates a Software Bill of Materials (SBOM) for an application.'
 	]).
 
@@ -613,15 +613,15 @@
 		sub_atom(Reference, 0, _, _, 'SPDXRef-Pack-'),
 		cyclonedx_pack_external_reference(Name, Version, ExternalReference).
 
-	cyclonedx_pack_external_reference(Name, _Version, {type-website, url-Home}) :-
+	cyclonedx_pack_external_reference(Name, Version, Reference) :-
 		loaded_pack(Registry, Name, VersionTerm),
-		resolved_pack_metadata(Registry, Name, VersionTerm, _License, _Checksum, Home, _SourceURL),
-		Home \== none.
-	cyclonedx_pack_external_reference(Name, Version, {type-distribution, url-URL}) :-
-		loaded_pack(Registry, Name, VersionTerm),
-		version_atom(VersionTerm, Version),
-		resolved_pack_metadata(Registry, Name, VersionTerm, _License, _Checksum, _Home, URL),
-		URL \== none.
+		resolved_pack_metadata(Registry, Name, VersionTerm, _License, _Checksum, Home, URL),
+		(	Home \== none,
+			Reference = {type-website, url-Home}
+		;	version_atom(VersionTerm, Version),
+			URL \== none,
+			Reference = {type-distribution, url-URL}
+		).
 
 	cyclonedx_license_pairs('NOASSERTION', []) :-
 		!.
@@ -657,6 +657,7 @@
 	spdx_or_expression_rest -->
 		spdx_blanks,
 		[0'O,0'R],
+		!,
 		spdx_required_blanks,
 		spdx_and_expression,
 		spdx_or_expression_rest.
@@ -670,6 +671,7 @@
 	spdx_and_expression_rest -->
 		spdx_blanks,
 		[0'A,0'N,0'D],
+		!,
 		spdx_required_blanks,
 		spdx_with_expression,
 		spdx_and_expression_rest.
@@ -683,6 +685,7 @@
 	spdx_with_expression_rest -->
 		spdx_required_blanks,
 		[0'W,0'I,0'T,0'H],
+		!,
 		spdx_required_blanks,
 		spdx_license_token,
 		spdx_blanks.
@@ -692,6 +695,7 @@
 	spdx_primary_expression -->
 		spdx_blanks,
 		[0'(],
+		!,
 		spdx_blanks,
 		spdx_or_expression,
 		spdx_blanks,
@@ -717,7 +721,8 @@
 		!.
 	custom_spdx_reference(Token) :-
 		sub_atom(Token, 0, _, _, 'DocumentRef-'),
-		sub_atom(Token, _, _, _, ':LicenseRef-').
+		sub_atom(Token, _, _, _, ':LicenseRef-'),
+		!.
 
 	spdx_token_codes([Code| Codes]) -->
 		[Code],
@@ -896,30 +901,31 @@
 		spdx_pack_external_reference(Name, Version, Type, URL),
 		spdx_external_reference_json(Type, URL, Reference).
 
-	spdx_pack_external_reference(Name, _Version, website, Home) :-
+	spdx_pack_external_reference(Name, Version, Reference, Value) :-
 		loaded_pack(Registry, Name, VersionTerm),
-		resolved_pack_metadata(Registry, Name, VersionTerm, _License, _Checksum, Home, _SourceURL),
-		Home \== none.
-	spdx_pack_external_reference(Name, Version, distribution, URL) :-
-		loaded_pack(Registry, Name, VersionTerm),
-		version_atom(VersionTerm, Version),
-		resolved_pack_metadata(Registry, Name, VersionTerm, _License, _Checksum, _Home, URL),
-		URL \== none.
+		resolved_pack_metadata(Registry, Name, VersionTerm, _License, _Checksum, Home, URL),
+		(	Home \== none,
+			Reference = website,
+			Value = Home
+		;	version_atom(VersionTerm, Version),
+			URL \== none,
+			Reference = distribution,
+			Value = URL
+		).
 
 	spdx_external_reference_json(Type, Locator, {
 		referenceCategory-Category,
 		referenceType-Type,
 		referenceLocator-Locator
 	}) :-
-		spdx_external_reference_category(Type, Category).
+		(	spdx_external_reference_category(Type, Category) ->
+			true
+		;	Category = 'OTHER'
+		).
 
-	spdx_external_reference_category(purl, 'PACKAGE-MANAGER') :-
-		!.
-	spdx_external_reference_category(gitoid, 'PERSISTENT-ID') :-
-		!.
-	spdx_external_reference_category(swh, 'PERSISTENT-ID') :-
-		!.
-	spdx_external_reference_category(_, 'OTHER').
+	spdx_external_reference_category(purl, 'PACKAGE-MANAGER').
+	spdx_external_reference_category(gitoid, 'PERSISTENT-ID').
+	spdx_external_reference_category(swh, 'PERSISTENT-ID').
 
 	spdx_pack_download_location(SPDXID, Name, Version, URL) :-
 		sub_atom(SPDXID, 0, _, _, 'SPDXRef-Pack-'),
