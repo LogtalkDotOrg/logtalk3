@@ -1,0 +1,179 @@
+.. index:: single: min_cost_flow_protocol
+.. _min_cost_flow_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``min_cost_flow_protocol``
+==========================
+
+Minimum cost flow protocol.
+
+| **Availability:** 
+|    ``logtalk_load(flow_networks(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-16
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: min_cost_flow/4
+.. _min_cost_flow_protocol/0::min_cost_flow/4:
+
+``min_cost_flow/4``
+^^^^^^^^^^^^^^^^^^^
+
+Computes a minimum cost flow satisfying the given supplies and demands, including arc lower bounds. ``Supplies`` is a list of ``Vertex-Amount`` pairs where a positive amount is a supply and a negative amount is a demand; vertices not listed are transshipment vertices. Duplicate vertices are added. Fails if there is no feasible flow. Negative arc costs (including negative cost cycles) are supported. ``Flow`` is a list of ``flow(ArcId, From, To, Amount)`` terms with a positive amount, one per arc carrying flow, in the order of the network arcs. ``ArcId`` is the one-based position of the arc in the input list used to construct the network.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``min_cost_flow(Network,Supplies,Cost,Flow)``
+| **Mode and number of proofs:**
+|    ``min_cost_flow(+compound,+list(pair),-integer,-list(compound))`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Supplies`` is a partial list or contains a variable vertex:
+|        ``instantiation_error``
+|    ``Supplies`` is not a list of ``Vertex-Amount`` pairs:
+|        ``type_error(list(pair),Supplies)``
+|    An amount is not an integer:
+|        ``type_error(integer,Amount)``
+|    A vertex of ``Supplies`` is not a vertex of the network:
+|        ``existence_error(vertex,Vertex)``
+|    The supplies and demands do not add up to zero:
+|        ``domain_error(balanced_supplies,Supplies)``
+
+
+------------
+
+.. index:: min_cost_flow/5
+.. _min_cost_flow_protocol/0::min_cost_flow/5:
+
+``min_cost_flow/5``
+^^^^^^^^^^^^^^^^^^^
+
+As ``min_cost_flow/4``, also returning the final vertex potentials as ``Vertex-Potential`` pairs in vertex order. The potentials certify non-negative reduced costs on the residual arcs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``min_cost_flow(Network,Supplies,Cost,Flow,Potentials)``
+| **Mode and number of proofs:**
+|    ``min_cost_flow(+compound,+list(pair),-integer,-list(compound),-list(pair))`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Supplies`` is a partial list or contains a variable vertex:
+|        ``instantiation_error``
+|    ``Supplies`` is not a list of ``Vertex-Amount`` pairs:
+|        ``type_error(list(pair),Supplies)``
+|    An amount is not an integer:
+|        ``type_error(integer,Amount)``
+|    A vertex of ``Supplies`` is not a vertex of the network:
+|        ``existence_error(vertex,Vertex)``
+|    The supplies and demands do not add up to zero:
+|        ``domain_error(balanced_supplies,Supplies)``
+
+
+------------
+
+.. index:: min_cost_max_flow/6
+.. _min_cost_flow_protocol/0::min_cost_max_flow/6:
+
+``min_cost_max_flow/6``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes a minimum cost flow among the maximum flows from ``Source`` to ``Sink``. Always succeeds for valid terminals. Currently requires zero lower bounds.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``min_cost_max_flow(Network,Source,Sink,Value,Cost,Flow)``
+| **Mode and number of proofs:**
+|    ``min_cost_max_flow(+compound,+ground,+ground,-integer,-integer,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` or ``Sink`` is not ground:
+|        ``instantiation_error``
+|    ``Source`` or ``Sink`` is not a vertex of the network:
+|        ``existence_error(vertex,Vertex)``
+|    ``Source`` and ``Sink`` are the same vertex:
+|        ``consistency_error(distinct_vertices,Source,Sink)``
+|    The network contains a non-zero lower bound:
+|        ``domain_error(zero_lower_bounds,Network)``
+
+
+------------
+
+.. index:: min_cost_max_flow/7
+.. _min_cost_flow_protocol/0::min_cost_max_flow/7:
+
+``min_cost_max_flow/7``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+As ``min_cost_max_flow/6``, also returning final vertex potentials as ``Vertex-Potential`` pairs in vertex order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``min_cost_max_flow(Network,Source,Sink,Value,Cost,Flow,Potentials)``
+| **Mode and number of proofs:**
+|    ``min_cost_max_flow(+compound,+ground,+ground,-integer,-integer,-list(compound),-list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` or ``Sink`` is not ground:
+|        ``instantiation_error``
+|    ``Source`` or ``Sink`` is not a vertex of the network:
+|        ``existence_error(vertex,Vertex)``
+|    ``Source`` and ``Sink`` are the same vertex:
+|        ``consistency_error(distinct_vertices,Source,Sink)``
+|    The network contains a non-zero lower bound:
+|        ``domain_error(zero_lower_bounds,Network)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`flow_network_protocol <flow_network_protocol/0>`, :ref:`max_flow_protocol <max_flow_protocol/0>`, :ref:`successive_shortest_paths(Dictionary) <successive_shortest_paths/1>`
+

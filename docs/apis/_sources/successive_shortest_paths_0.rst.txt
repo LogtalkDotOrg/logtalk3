@@ -1,0 +1,60 @@
+.. index:: single: successive_shortest_paths
+.. _successive_shortest_paths/0:
+
+.. rst-class:: right
+
+**object**
+
+``successive_shortest_paths``
+=============================
+
+Minimum cost flow using the successive shortest paths algorithm and the ``avltree`` dictionary.
+
+| **Availability:** 
+|    ``logtalk_load(flow_networks(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-16
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`successive_shortest_paths(avltree) <successive_shortest_paths/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`min_cost_flow_protocol/0::min_cost_flow/4`  :ref:`min_cost_flow_protocol/0::min_cost_flow/5`  :ref:`min_cost_flow_protocol/0::min_cost_max_flow/6`  :ref:`min_cost_flow_protocol/0::min_cost_max_flow/7`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`successive_shortest_paths(Dictionary) <successive_shortest_paths/1>`, :ref:`dinic <dinic/0>`
+

@@ -932,6 +932,26 @@ To load any library (including developer tools, ports, and contributions), use t
    flags <flags_0>
    flags_validator <flags_validator_0>
 
+:ref:`flow_networks <library_flow_networks>`
+--------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   dinic <dinic_0>
+   dinic(Dictionary) <dinic_1>
+   edmonds_karp <edmonds_karp_0>
+   edmonds_karp(Dictionary) <edmonds_karp_1>
+   flow_network <flow_network_0>
+   flow_network(Dictionary) <flow_network_1>
+   flow_network_protocol <flow_network_protocol_0>
+   flow_support(Dictionary) <flow_support_1>
+   max_flow_common(Dictionary) <max_flow_common_1>
+   max_flow_protocol <max_flow_protocol_0>
+   min_cost_flow_protocol <min_cost_flow_protocol_0>
+   successive_shortest_paths <successive_shortest_paths_0>
+   successive_shortest_paths(Dictionary) <successive_shortest_paths_1>
+
 :ref:`format <library_format>`
 ------------------------------
 

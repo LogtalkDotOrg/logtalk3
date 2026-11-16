@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on November 14, 2026
+##   Last updated on November 16, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -157,6 +157,7 @@ Foreach-Object {
 (Get-Content ../../../library/exponential_smoothing/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/exponential_smoothing.rst
 (Get-Content ../../../library/feature_selection_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/feature_selection_protocols.rst
 (Get-Content ../../../library/fisher_score_feature_selector/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/fisher_score_feature_selector.rst
+(Get-Content ../../../library/flow_networks/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/flow_networks.rst
 (Get-Content ../../../library/format/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/format.rst
 (Get-Content ../../../library/fp_growth_pattern_miner/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/fp_growth_pattern_miner.rst
 (Get-Content ../../../library/frequent_pattern_mining_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/frequent_pattern_mining_protocols.rst

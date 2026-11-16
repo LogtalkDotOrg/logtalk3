@@ -160,6 +160,7 @@
 <li><a class="reference internal" href="#arbitrary-1"><code class="docutils literal notranslate"><span class="pre">arbitrary/1</span></code></a></li>
 <li><a class="reference internal" href="#arbitrary-2"><code class="docutils literal notranslate"><span class="pre">arbitrary/2</span></code></a></li>
 <li><a class="reference internal" href="#archive-1"><code class="docutils literal notranslate"><span class="pre">archive/1</span></code></a></li>
+<li><a class="reference internal" href="#arcs-2"><code class="docutils literal notranslate"><span class="pre">arcs/2</span></code></a></li>
 <li><a class="reference internal" href="#arithmetic-mean-2"><code class="docutils literal notranslate"><span class="pre">arithmetic_mean/2</span></code></a></li>
 <li><a class="reference internal" href="#arrangement-3"><code class="docutils literal notranslate"><span class="pre">arrangement/3</span></code></a></li>
 <li><a class="reference internal" href="#arrangement-4"><code class="docutils literal notranslate"><span class="pre">arrangement/4</span></code></a></li>
@@ -568,6 +569,7 @@
 <li><a class="reference internal" href="#custom-language-scripts-2"><code class="docutils literal notranslate"><span class="pre">custom_language_scripts/2</span></code></a></li>
 <li><a class="reference internal" href="#custom-profile-2"><code class="docutils literal notranslate"><span class="pre">custom_profile/2</span></code></a></li>
 <li><a class="reference internal" href="#cut-3"><code class="docutils literal notranslate"><span class="pre">cut/3</span></code></a></li>
+<li><a class="reference internal" href="#cut-capacity-3"><code class="docutils literal notranslate"><span class="pre">cut_capacity/3</span></code></a></li>
 <li><a class="reference internal" href="#cycle-2"><code class="docutils literal notranslate"><span class="pre">cycle/2</span></code></a></li>
 <li><a class="reference internal" href="#damerau-levenshtein-3"><code class="docutils literal notranslate"><span class="pre">damerau_levenshtein/3</span></code></a></li>
 <li><a class="reference internal" href="#data-0"><code class="docutils literal notranslate"><span class="pre">data/0</span></code></a></li>
@@ -619,6 +621,7 @@
 <li><a class="reference internal" href="#decompose-3"><code class="docutils literal notranslate"><span class="pre">decompose/3</span></code></a></li>
 <li><a class="reference internal" href="#decompose-file-name-3"><code class="docutils literal notranslate"><span class="pre">decompose_file_name/3</span></code></a></li>
 <li><a class="reference internal" href="#decompose-file-name-4"><code class="docutils literal notranslate"><span class="pre">decompose_file_name/4</span></code></a></li>
+<li><a class="reference internal" href="#decompose-flow-3"><code class="docutils literal notranslate"><span class="pre">decompose_flow/3</span></code></a></li>
 <li><a class="reference internal" href="#decr-3"><code class="docutils literal notranslate"><span class="pre">decr/3</span></code></a></li>
 <li><a class="reference internal" href="#decr-4"><code class="docutils literal notranslate"><span class="pre">decr/4</span></code></a></li>
 <li><a class="reference internal" href="#decrby-4"><code class="docutils literal notranslate"><span class="pre">decrby/4</span></code></a></li>
@@ -1048,6 +1051,8 @@
 <li><a class="reference internal" href="#flatten-1"><code class="docutils literal notranslate"><span class="pre">flatten/1</span></code></a></li>
 <li><a class="reference internal" href="#flatten-2"><code class="docutils literal notranslate"><span class="pre">flatten/2</span></code></a></li>
 <li><a class="reference internal" href="#float-1"><code class="docutils literal notranslate"><span class="pre">float//1</span></code></a></li>
+<li><a class="reference internal" href="#flow-balances-3"><code class="docutils literal notranslate"><span class="pre">flow_balances/3</span></code></a></li>
+<li><a class="reference internal" href="#flow-cost-3"><code class="docutils literal notranslate"><span class="pre">flow_cost/3</span></code></a></li>
 <li><a class="reference internal" href="#flush-all-1"><code class="docutils literal notranslate"><span class="pre">flush_all/1</span></code></a></li>
 <li><a class="reference internal" href="#flush-all-2"><code class="docutils literal notranslate"><span class="pre">flush_all/2</span></code></a></li>
 <li><a class="reference internal" href="#fold-diacritics-2"><code class="docutils literal notranslate"><span class="pre">fold_diacritics/2</span></code></a></li>
@@ -1112,6 +1117,7 @@
 <li><a class="reference internal" href="#from-goal-4"><code class="docutils literal notranslate"><span class="pre">from_goal/4</span></code></a></li>
 <li><a class="reference internal" href="#from-goal-or-throw-2"><code class="docutils literal notranslate"><span class="pre">from_goal_or_throw/2</span></code></a></li>
 <li><a class="reference internal" href="#from-goal-or-throw-3"><code class="docutils literal notranslate"><span class="pre">from_goal_or_throw/3</span></code></a></li>
+<li><a class="reference internal" href="#from-graph-2"><code class="docutils literal notranslate"><span class="pre">from_graph/2</span></code></a></li>
 <li><a class="reference internal" href="#from-list-2"><code class="docutils literal notranslate"><span class="pre">from_list/2</span></code></a></li>
 <li><a class="reference internal" href="#from-optional-3"><code class="docutils literal notranslate"><span class="pre">from_optional/3</span></code></a></li>
 <li><a class="reference internal" href="#from-unix-seconds-2"><code class="docutils literal notranslate"><span class="pre">from_unix_seconds/2</span></code></a></li>
@@ -1701,6 +1707,7 @@
 <li><a class="reference internal" href="#max-2"><code class="docutils literal notranslate"><span class="pre">max/2</span></code></a></li>
 <li><a class="reference internal" href="#max-3"><code class="docutils literal notranslate"><span class="pre">max/3</span></code></a></li>
 <li><a class="reference internal" href="#max-clauses-1"><code class="docutils literal notranslate"><span class="pre">max_clauses/1</span></code></a></li>
+<li><a class="reference internal" href="#max-flow-5"><code class="docutils literal notranslate"><span class="pre">max_flow/5</span></code></a></li>
 <li><a class="reference internal" href="#max-inv-preds-1"><code class="docutils literal notranslate"><span class="pre">max_inv_preds/1</span></code></a></li>
 <li><a class="reference internal" href="#max-path-5"><code class="docutils literal notranslate"><span class="pre">max_path/5</span></code></a></li>
 <li><a class="reference internal" href="#max-size-1"><code class="docutils literal notranslate"><span class="pre">max_size/1</span></code></a></li>
@@ -1753,6 +1760,12 @@
 <li><a class="reference internal" href="#min-2"><code class="docutils literal notranslate"><span class="pre">min/2</span></code></a></li>
 <li><a class="reference internal" href="#min-3"><code class="docutils literal notranslate"><span class="pre">min/3</span></code></a></li>
 <li><a class="reference internal" href="#min-clauses-1"><code class="docutils literal notranslate"><span class="pre">min_clauses/1</span></code></a></li>
+<li><a class="reference internal" href="#min-cost-flow-4"><code class="docutils literal notranslate"><span class="pre">min_cost_flow/4</span></code></a></li>
+<li><a class="reference internal" href="#min-cost-flow-5"><code class="docutils literal notranslate"><span class="pre">min_cost_flow/5</span></code></a></li>
+<li><a class="reference internal" href="#min-cost-max-flow-6"><code class="docutils literal notranslate"><span class="pre">min_cost_max_flow/6</span></code></a></li>
+<li><a class="reference internal" href="#min-cost-max-flow-7"><code class="docutils literal notranslate"><span class="pre">min_cost_max_flow/7</span></code></a></li>
+<li><a class="reference internal" href="#min-cut-5"><code class="docutils literal notranslate"><span class="pre">min_cut/5</span></code></a></li>
+<li><a class="reference internal" href="#min-cuts-5"><code class="docutils literal notranslate"><span class="pre">min_cuts/5</span></code></a></li>
 <li><a class="reference internal" href="#min-distances-3"><code class="docutils literal notranslate"><span class="pre">min_distances/3</span></code></a></li>
 <li><a class="reference internal" href="#min-max-3"><code class="docutils literal notranslate"><span class="pre">min_max/3</span></code></a></li>
 <li><a class="reference internal" href="#min-max-normalization-2"><code class="docutils literal notranslate"><span class="pre">min_max_normalization/2</span></code></a></li>
@@ -1784,6 +1797,7 @@
 <li><a class="reference internal" href="#msort-3"><code class="docutils literal notranslate"><span class="pre">msort/3</span></code></a></li>
 <li><a class="reference internal" href="#mul32-3"><code class="docutils literal notranslate"><span class="pre">mul32/3</span></code></a></li>
 <li><a class="reference internal" href="#mul64-3"><code class="docutils literal notranslate"><span class="pre">mul64/3</span></code></a></li>
+<li><a class="reference internal" href="#multi-source-max-flow-5"><code class="docutils literal notranslate"><span class="pre">multi_source_max_flow/5</span></code></a></li>
 <li><a class="reference internal" href="#multinomial-2"><code class="docutils literal notranslate"><span class="pre">multinomial/2</span></code></a></li>
 <li><a class="reference internal" href="#multinomial-3"><code class="docutils literal notranslate"><span class="pre">multinomial/3</span></code></a></li>
 <li><a class="reference internal" href="#multinomial-density-4"><code class="docutils literal notranslate"><span class="pre">multinomial_density/4</span></code></a></li>
@@ -1875,6 +1889,7 @@
 <li><a class="reference internal" href="#node-2"><code class="docutils literal notranslate"><span class="pre">node/2</span></code></a></li>
 <li><a class="reference internal" href="#node-3"><code class="docutils literal notranslate"><span class="pre">node/3</span></code></a></li>
 <li><a class="reference internal" href="#node-7"><code class="docutils literal notranslate"><span class="pre">node/7</span></code></a></li>
+<li><a class="reference internal" href="#node-capacity-max-flow-6"><code class="docutils literal notranslate"><span class="pre">node_capacity_max_flow/6</span></code></a></li>
 <li><a class="reference internal" href="#nodebug-0"><code class="docutils literal notranslate"><span class="pre">nodebug/0</span></code></a></li>
 <li><a class="reference internal" href="#nodes-1"><code class="docutils literal notranslate"><span class="pre">nodes/1</span></code></a></li>
 <li><a class="reference internal" href="#nodes-2"><code class="docutils literal notranslate"><span class="pre">nodes/2</span></code></a></li>
@@ -2779,6 +2794,7 @@
 <li><a class="reference internal" href="#similarity-3"><code class="docutils literal notranslate"><span class="pre">similarity/3</span></code></a></li>
 <li><a class="reference internal" href="#singleton-2"><code class="docutils literal notranslate"><span class="pre">singleton/2</span></code></a></li>
 <li><a class="reference internal" href="#singletons-2"><code class="docutils literal notranslate"><span class="pre">singletons/2</span></code></a></li>
+<li><a class="reference internal" href="#sink-closest-min-cut-5"><code class="docutils literal notranslate"><span class="pre">sink_closest_min_cut/5</span></code></a></li>
 <li><a class="reference internal" href="#sismember-4"><code class="docutils literal notranslate"><span class="pre">sismember/4</span></code></a></li>
 <li><a class="reference internal" href="#size-2"><code class="docutils literal notranslate"><span class="pre">size/2</span></code></a></li>
 <li><a class="reference internal" href="#size-3"><code class="docutils literal notranslate"><span class="pre">size/3</span></code></a></li>
@@ -3084,6 +3100,7 @@
 <li><a class="reference internal" href="#union-3"><code class="docutils literal notranslate"><span class="pre">union/3</span></code></a></li>
 <li><a class="reference internal" href="#union-4"><code class="docutils literal notranslate"><span class="pre">union/4</span></code></a></li>
 <li><a class="reference internal" href="#union-all-3"><code class="docutils literal notranslate"><span class="pre">union_all/3</span></code></a></li>
+<li><a class="reference internal" href="#unique-min-cut-4"><code class="docutils literal notranslate"><span class="pre">unique_min_cut/4</span></code></a></li>
 <li><a class="reference internal" href="#universal-1"><code class="docutils literal notranslate"><span class="pre">universal/1</span></code></a></li>
 <li><a class="reference internal" href="#unix-seconds-2"><code class="docutils literal notranslate"><span class="pre">unix_seconds/2</span></code></a></li>
 <li><a class="reference internal" href="#unix-to-date-time-2"><code class="docutils literal notranslate"><span class="pre">unix_to_date_time/2</span></code></a></li>
@@ -3140,16 +3157,20 @@
 <li><a class="reference internal" href="#valid-coordinate-1"><code class="docutils literal notranslate"><span class="pre">valid_coordinate/1</span></code></a></li>
 <li><a class="reference internal" href="#valid-coordinate-2"><code class="docutils literal notranslate"><span class="pre">valid_coordinate/2</span></code></a></li>
 <li><a class="reference internal" href="#valid-crs-1"><code class="docutils literal notranslate"><span class="pre">valid_crs/1</span></code></a></li>
+<li><a class="reference internal" href="#valid-cut-5"><code class="docutils literal notranslate"><span class="pre">valid_cut/5</span></code></a></li>
 <li><a class="reference internal" href="#valid-date-3"><code class="docutils literal notranslate"><span class="pre">valid_date/3</span></code></a></li>
 <li><a class="reference internal" href="#valid-date-time-1"><code class="docutils literal notranslate"><span class="pre">valid_date_time/1</span></code></a></li>
 <li><a class="reference internal" href="#valid-descriptor-1"><code class="docutils literal notranslate"><span class="pre">valid_descriptor/1</span></code></a></li>
 <li><a class="reference internal" href="#valid-dimension-reducer-1"><code class="docutils literal notranslate"><span class="pre">valid_dimension_reducer/1</span></code></a></li>
 <li><a class="reference internal" href="#valid-discontinuity-policy-1"><code class="docutils literal notranslate"><span class="pre">valid_discontinuity_policy/1</span></code></a></li>
+<li><a class="reference internal" href="#valid-flow-3"><code class="docutils literal notranslate"><span class="pre">valid_flow/3</span></code></a></li>
 <li><a class="reference internal" href="#valid-forecaster-1"><code class="docutils literal notranslate"><span class="pre">valid_forecaster/1</span></code></a></li>
 <li><a class="reference internal" href="#valid-geohash-1"><code class="docutils literal notranslate"><span class="pre">valid_geohash/1</span></code></a></li>
 <li><a class="reference internal" href="#valid-identifier-1"><code class="docutils literal notranslate"><span class="pre">valid_identifier/1</span></code></a></li>
 <li><a class="reference internal" href="#valid-instant-1"><code class="docutils literal notranslate"><span class="pre">valid_instant/1</span></code></a></li>
 <li><a class="reference internal" href="#valid-map-dispatch-1"><code class="docutils literal notranslate"><span class="pre">valid_map_dispatch/1</span></code></a></li>
+<li><a class="reference internal" href="#valid-min-cost-flow-4"><code class="docutils literal notranslate"><span class="pre">valid_min_cost_flow/4</span></code></a></li>
+<li><a class="reference internal" href="#valid-min-cost-flow-5"><code class="docutils literal notranslate"><span class="pre">valid_min_cost_flow/5</span></code></a></li>
 <li><a class="reference internal" href="#valid-model-1"><code class="docutils literal notranslate"><span class="pre">valid_model/1</span></code></a></li>
 <li><a class="reference internal" href="#valid-option-1"><code class="docutils literal notranslate"><span class="pre">valid_option/1</span></code></a></li>
 <li><a class="reference internal" href="#valid-options-1"><code class="docutils literal notranslate"><span class="pre">valid_options/1</span></code></a></li>
@@ -3166,6 +3187,7 @@
 <li><a class="reference internal" href="#valid-segment-1"><code class="docutils literal notranslate"><span class="pre">valid_segment/1</span></code></a></li>
 <li><a class="reference internal" href="#valid-selector-1"><code class="docutils literal notranslate"><span class="pre">valid_selector/1</span></code></a></li>
 <li><a class="reference internal" href="#valid-set-cookie-1"><code class="docutils literal notranslate"><span class="pre">valid_set_cookie/1</span></code></a></li>
+<li><a class="reference internal" href="#valid-st-flow-5"><code class="docutils literal notranslate"><span class="pre">valid_st_flow/5</span></code></a></li>
 <li><a class="reference internal" href="#valid-suffix-1"><code class="docutils literal notranslate"><span class="pre">valid_suffix/1</span></code></a></li>
 <li><a class="reference internal" href="#valid-until-date-1"><code class="docutils literal notranslate"><span class="pre">valid_until_date/1</span></code></a></li>
 <li><a class="reference internal" href="#valid-vectorizer-1"><code class="docutils literal notranslate"><span class="pre">valid_vectorizer/1</span></code></a></li>
@@ -3945,6 +3967,12 @@
 <h2><code class="docutils literal notranslate"><span class="pre">archive/1</span></code><a class="headerlink" href="#archive-1" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="registry_protocol_0.html#registry-protocol-0-archive-1"><span class="std std-ref">registry_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="arcs-2">
+<h2><code class="docutils literal notranslate"><span class="pre">arcs/2</span></code><a class="headerlink" href="#arcs-2" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="flow_network_protocol_0.html#flow-network-protocol-0-arcs-2"><span class="std std-ref">flow_network_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="arithmetic-mean-2">
@@ -6489,6 +6517,12 @@
 <li><p><a class="reference internal" href="hierarchical_clustering_0.html#hierarchical-clustering-0-cut-3"><span class="std std-ref">hierarchical_clustering</span></a></p></li>
 </ul>
 </section>
+<section id="cut-capacity-3">
+<h2><code class="docutils literal notranslate"><span class="pre">cut_capacity/3</span></code><a class="headerlink" href="#cut-capacity-3" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="flow_network_protocol_0.html#flow-network-protocol-0-cut-capacity-3"><span class="std std-ref">flow_network_protocol</span></a></p></li>
+</ul>
+</section>
 <section id="cycle-2">
 <h2><code class="docutils literal notranslate"><span class="pre">cycle/2</span></code><a class="headerlink" href="#cycle-2" title="Link to this heading"></a></h2>
 <ul class="simple">
@@ -6808,6 +6842,12 @@
 <h2><code class="docutils literal notranslate"><span class="pre">decompose_file_name/4</span></code><a class="headerlink" href="#decompose-file-name-4" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="osp_0.html#osp-0-decompose-file-name-4"><span class="std std-ref">osp</span></a></p></li>
+</ul>
+</section>
+<section id="decompose-flow-3">
+<h2><code class="docutils literal notranslate"><span class="pre">decompose_flow/3</span></code><a class="headerlink" href="#decompose-flow-3" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="flow_network_protocol_0.html#flow-network-protocol-0-decompose-flow-3"><span class="std std-ref">flow_network_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="decr-3">
@@ -9567,6 +9607,18 @@
 <li><p><a class="reference internal" href="number_grammars_1.html#number-grammars-1-float-1"><span class="std std-ref">number_grammars(Format)</span></a></p></li>
 </ul>
 </section>
+<section id="flow-balances-3">
+<h2><code class="docutils literal notranslate"><span class="pre">flow_balances/3</span></code><a class="headerlink" href="#flow-balances-3" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="flow_network_protocol_0.html#flow-network-protocol-0-flow-balances-3"><span class="std std-ref">flow_network_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="flow-cost-3">
+<h2><code class="docutils literal notranslate"><span class="pre">flow_cost/3</span></code><a class="headerlink" href="#flow-cost-3" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="flow_network_protocol_0.html#flow-network-protocol-0-flow-cost-3"><span class="std std-ref">flow_network_protocol</span></a></p></li>
+</ul>
+</section>
 <section id="flush-all-1">
 <h2><code class="docutils literal notranslate"><span class="pre">flush_all/1</span></code><a class="headerlink" href="#flush-all-1" title="Link to this heading"></a></h2>
 <ul class="simple">
@@ -9963,6 +10015,12 @@
 <h2><code class="docutils literal notranslate"><span class="pre">from_goal_or_throw/3</span></code><a class="headerlink" href="#from-goal-or-throw-3" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="optional_0.html#optional-0-from-goal-or-throw-3"><span class="std std-ref">optional</span></a></p></li>
+</ul>
+</section>
+<section id="from-graph-2">
+<h2><code class="docutils literal notranslate"><span class="pre">from_graph/2</span></code><a class="headerlink" href="#from-graph-2" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="flow_network_protocol_0.html#flow-network-protocol-0-from-graph-2"><span class="std std-ref">flow_network_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="from-list-2">
@@ -13682,6 +13740,12 @@
 <li><p><a class="reference internal" href="metagol_0.html#metagol-0-max-clauses-1"><span class="std std-ref">metagol</span></a></p></li>
 </ul>
 </section>
+<section id="max-flow-5">
+<h2><code class="docutils literal notranslate"><span class="pre">max_flow/5</span></code><a class="headerlink" href="#max-flow-5" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="max_flow_protocol_0.html#max-flow-protocol-0-max-flow-5"><span class="std std-ref">max_flow_protocol</span></a></p></li>
+</ul>
+</section>
 <section id="max-inv-preds-1">
 <h2><code class="docutils literal notranslate"><span class="pre">max_inv_preds/1</span></code><a class="headerlink" href="#max-inv-preds-1" title="Link to this heading"></a></h2>
 <ul class="simple">
@@ -14006,6 +14070,42 @@
 <li><p><a class="reference internal" href="metagol_0.html#metagol-0-min-clauses-1"><span class="std std-ref">metagol</span></a></p></li>
 </ul>
 </section>
+<section id="min-cost-flow-4">
+<h2><code class="docutils literal notranslate"><span class="pre">min_cost_flow/4</span></code><a class="headerlink" href="#min-cost-flow-4" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="min_cost_flow_protocol_0.html#min-cost-flow-protocol-0-min-cost-flow-4"><span class="std std-ref">min_cost_flow_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="min-cost-flow-5">
+<h2><code class="docutils literal notranslate"><span class="pre">min_cost_flow/5</span></code><a class="headerlink" href="#min-cost-flow-5" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="min_cost_flow_protocol_0.html#min-cost-flow-protocol-0-min-cost-flow-5"><span class="std std-ref">min_cost_flow_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="min-cost-max-flow-6">
+<h2><code class="docutils literal notranslate"><span class="pre">min_cost_max_flow/6</span></code><a class="headerlink" href="#min-cost-max-flow-6" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="min_cost_flow_protocol_0.html#min-cost-flow-protocol-0-min-cost-max-flow-6"><span class="std std-ref">min_cost_flow_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="min-cost-max-flow-7">
+<h2><code class="docutils literal notranslate"><span class="pre">min_cost_max_flow/7</span></code><a class="headerlink" href="#min-cost-max-flow-7" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="min_cost_flow_protocol_0.html#min-cost-flow-protocol-0-min-cost-max-flow-7"><span class="std std-ref">min_cost_flow_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="min-cut-5">
+<h2><code class="docutils literal notranslate"><span class="pre">min_cut/5</span></code><a class="headerlink" href="#min-cut-5" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="max_flow_protocol_0.html#max-flow-protocol-0-min-cut-5"><span class="std std-ref">max_flow_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="min-cuts-5">
+<h2><code class="docutils literal notranslate"><span class="pre">min_cuts/5</span></code><a class="headerlink" href="#min-cuts-5" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="max_flow_protocol_0.html#max-flow-protocol-0-min-cuts-5"><span class="std std-ref">max_flow_protocol</span></a></p></li>
+</ul>
+</section>
 <section id="min-distances-3">
 <h2><code class="docutils literal notranslate"><span class="pre">min_distances/3</span></code><a class="headerlink" href="#min-distances-3" title="Link to this heading"></a></h2>
 <ul class="simple">
@@ -14196,6 +14296,12 @@
 <h2><code class="docutils literal notranslate"><span class="pre">mul64/3</span></code><a class="headerlink" href="#mul64-3" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="hash_common_64_0.html#hash-common-64-0-mul64-3"><span class="std std-ref">hash_common_64</span></a></p></li>
+</ul>
+</section>
+<section id="multi-source-max-flow-5">
+<h2><code class="docutils literal notranslate"><span class="pre">multi_source_max_flow/5</span></code><a class="headerlink" href="#multi-source-max-flow-5" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="max_flow_protocol_0.html#max-flow-protocol-0-multi-source-max-flow-5"><span class="std std-ref">max_flow_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="multinomial-2">
@@ -14601,6 +14707,7 @@
 <h2><code class="docutils literal notranslate"><span class="pre">new/2</span></code><a class="headerlink" href="#new-2" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="atms_protocol_0.html#atms-protocol-0-new-2"><span class="std std-ref">atms_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="flow_network_protocol_0.html#flow-network-protocol-0-new-2"><span class="std std-ref">flow_network_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-new-2"><span class="std std-ref">graph_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="interval_constraint_network_protocol_0.html#interval-constraint-network-protocol-0-new-2"><span class="std std-ref">interval_constraint_network_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="java_access_protocol_0.html#java-access-protocol-0-new-2"><span class="std std-ref">java_access_protocol</span></a></p></li>
@@ -14770,6 +14877,12 @@
 <h2><code class="docutils literal notranslate"><span class="pre">node/7</span></code><a class="headerlink" href="#node-7" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="graph_language_protocol_0.html#graph-language-protocol-0-node-7"><span class="std std-ref">graph_language_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="node-capacity-max-flow-6">
+<h2><code class="docutils literal notranslate"><span class="pre">node_capacity_max_flow/6</span></code><a class="headerlink" href="#node-capacity-max-flow-6" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="max_flow_protocol_0.html#max-flow-protocol-0-node-capacity-max-flow-6"><span class="std std-ref">max_flow_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="nodebug-0">
@@ -20552,6 +20665,12 @@
 <li><p><a class="reference internal" href="termp_0.html#termp-0-singletons-2"><span class="std std-ref">termp</span></a></p></li>
 </ul>
 </section>
+<section id="sink-closest-min-cut-5">
+<h2><code class="docutils literal notranslate"><span class="pre">sink_closest_min_cut/5</span></code><a class="headerlink" href="#sink-closest-min-cut-5" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="max_flow_protocol_0.html#max-flow-protocol-0-sink-closest-min-cut-5"><span class="std std-ref">max_flow_protocol</span></a></p></li>
+</ul>
+</section>
 <section id="sismember-4">
 <h2><code class="docutils literal notranslate"><span class="pre">sismember/4</span></code><a class="headerlink" href="#sismember-4" title="Link to this heading"></a></h2>
 <ul class="simple">
@@ -22457,6 +22576,12 @@
 <li><p><a class="reference internal" href="union_find_protocol_0.html#union-find-protocol-0-union-all-3"><span class="std std-ref">union_find_protocol</span></a></p></li>
 </ul>
 </section>
+<section id="unique-min-cut-4">
+<h2><code class="docutils literal notranslate"><span class="pre">unique_min_cut/4</span></code><a class="headerlink" href="#unique-min-cut-4" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="max_flow_protocol_0.html#max-flow-protocol-0-unique-min-cut-4"><span class="std std-ref">max_flow_protocol</span></a></p></li>
+</ul>
+</section>
 <section id="universal-1">
 <h2><code class="docutils literal notranslate"><span class="pre">universal/1</span></code><a class="headerlink" href="#universal-1" title="Link to this heading"></a></h2>
 <ul class="simple">
@@ -22830,6 +22955,12 @@
 <li><p><a class="reference internal" href="crs_projections_protocol_0.html#crs-projections-protocol-0-valid-crs-1"><span class="std std-ref">crs_projections_protocol</span></a></p></li>
 </ul>
 </section>
+<section id="valid-cut-5">
+<h2><code class="docutils literal notranslate"><span class="pre">valid_cut/5</span></code><a class="headerlink" href="#valid-cut-5" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="flow_network_protocol_0.html#flow-network-protocol-0-valid-cut-5"><span class="std std-ref">flow_network_protocol</span></a></p></li>
+</ul>
+</section>
 <section id="valid-date-3">
 <h2><code class="docutils literal notranslate"><span class="pre">valid_date/3</span></code><a class="headerlink" href="#valid-date-3" title="Link to this heading"></a></h2>
 <ul class="simple">
@@ -22862,6 +22993,12 @@
 <li><p><a class="reference internal" href="ccsds_tc_services_0.html#ccsds-tc-services-0-valid-discontinuity-policy-1"><span class="std std-ref">ccsds_tc_services</span></a></p></li>
 </ul>
 </section>
+<section id="valid-flow-3">
+<h2><code class="docutils literal notranslate"><span class="pre">valid_flow/3</span></code><a class="headerlink" href="#valid-flow-3" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="flow_network_protocol_0.html#flow-network-protocol-0-valid-flow-3"><span class="std std-ref">flow_network_protocol</span></a></p></li>
+</ul>
+</section>
 <section id="valid-forecaster-1">
 <h2><code class="docutils literal notranslate"><span class="pre">valid_forecaster/1</span></code><a class="headerlink" href="#valid-forecaster-1" title="Link to this heading"></a></h2>
 <ul class="simple">
@@ -22892,6 +23029,18 @@
 <h2><code class="docutils literal notranslate"><span class="pre">valid_map_dispatch/1</span></code><a class="headerlink" href="#valid-map-dispatch-1" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="ccsds_tc_services_0.html#ccsds-tc-services-0-valid-map-dispatch-1"><span class="std std-ref">ccsds_tc_services</span></a></p></li>
+</ul>
+</section>
+<section id="valid-min-cost-flow-4">
+<h2><code class="docutils literal notranslate"><span class="pre">valid_min_cost_flow/4</span></code><a class="headerlink" href="#valid-min-cost-flow-4" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="flow_network_protocol_0.html#flow-network-protocol-0-valid-min-cost-flow-4"><span class="std std-ref">flow_network_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="valid-min-cost-flow-5">
+<h2><code class="docutils literal notranslate"><span class="pre">valid_min_cost_flow/5</span></code><a class="headerlink" href="#valid-min-cost-flow-5" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="flow_network_protocol_0.html#flow-network-protocol-0-valid-min-cost-flow-5"><span class="std std-ref">flow_network_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="valid-model-1">
@@ -22990,6 +23139,12 @@
 <h2><code class="docutils literal notranslate"><span class="pre">valid_set_cookie/1</span></code><a class="headerlink" href="#valid-set-cookie-1" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="http_cookies_1.html#http-cookies-1-valid-set-cookie-1"><span class="std std-ref">http_cookies(Representation)</span></a></p></li>
+</ul>
+</section>
+<section id="valid-st-flow-5">
+<h2><code class="docutils literal notranslate"><span class="pre">valid_st_flow/5</span></code><a class="headerlink" href="#valid-st-flow-5" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="flow_network_protocol_0.html#flow-network-protocol-0-valid-st-flow-5"><span class="std std-ref">flow_network_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="valid-suffix-1">
@@ -23398,6 +23553,7 @@
 <section id="vertices-2">
 <h2><code class="docutils literal notranslate"><span class="pre">vertices/2</span></code><a class="headerlink" href="#vertices-2" title="Link to this heading"></a></h2>
 <ul class="simple">
+<li><p><a class="reference internal" href="flow_network_protocol_0.html#flow-network-protocol-0-vertices-2"><span class="std std-ref">flow_network_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-vertices-2"><span class="std std-ref">graph_protocol</span></a></p></li>
 </ul>
 </section>

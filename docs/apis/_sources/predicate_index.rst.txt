@@ -1066,6 +1066,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``arcs/2``
+   ----------
+
+   * :ref:`flow_network_protocol <flow_network_protocol/0::arcs/2>`
+
+.. only:: latex
+
+   * ``arcs/2`` - :ref:`flow_network_protocol <flow_network_protocol/0::arcs/2>`
+
+.. only:: not latex
+
    ``arithmetic_mean/2``
    ---------------------
 
@@ -5648,6 +5659,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``cut_capacity/3``
+   ------------------
+
+   * :ref:`flow_network_protocol <flow_network_protocol/0::cut_capacity/3>`
+
+.. only:: latex
+
+   * ``cut_capacity/3`` - :ref:`flow_network_protocol <flow_network_protocol/0::cut_capacity/3>`
+
+.. only:: not latex
+
    ``cycle/2``
    -----------
 
@@ -6221,6 +6243,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``decompose_file_name/4`` - :ref:`osp <osp/0::decompose_file_name/4>`
+
+.. only:: not latex
+
+   ``decompose_flow/3``
+   --------------------
+
+   * :ref:`flow_network_protocol <flow_network_protocol/0::decompose_flow/3>`
+
+.. only:: latex
+
+   * ``decompose_flow/3`` - :ref:`flow_network_protocol <flow_network_protocol/0::decompose_flow/3>`
 
 .. only:: not latex
 
@@ -11126,6 +11159,28 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``flow_balances/3``
+   -------------------
+
+   * :ref:`flow_network_protocol <flow_network_protocol/0::flow_balances/3>`
+
+.. only:: latex
+
+   * ``flow_balances/3`` - :ref:`flow_network_protocol <flow_network_protocol/0::flow_balances/3>`
+
+.. only:: not latex
+
+   ``flow_cost/3``
+   ---------------
+
+   * :ref:`flow_network_protocol <flow_network_protocol/0::flow_cost/3>`
+
+.. only:: latex
+
+   * ``flow_cost/3`` - :ref:`flow_network_protocol <flow_network_protocol/0::flow_cost/3>`
+
+.. only:: not latex
+
    ``flush_all/1``
    ---------------
 
@@ -11841,6 +11896,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``from_goal_or_throw/3`` - :ref:`optional <optional/0::from_goal_or_throw/3>`
+
+.. only:: not latex
+
+   ``from_graph/2``
+   ----------------
+
+   * :ref:`flow_network_protocol <flow_network_protocol/0::from_graph/2>`
+
+.. only:: latex
+
+   * ``from_graph/2`` - :ref:`flow_network_protocol <flow_network_protocol/0::from_graph/2>`
 
 .. only:: not latex
 
@@ -18506,6 +18572,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``max_flow/5``
+   --------------
+
+   * :ref:`max_flow_protocol <max_flow_protocol/0::max_flow/5>`
+
+.. only:: latex
+
+   * ``max_flow/5`` - :ref:`max_flow_protocol <max_flow_protocol/0::max_flow/5>`
+
+.. only:: not latex
+
    ``max_inv_preds/1``
    -------------------
 
@@ -19090,6 +19167,72 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``min_cost_flow/4``
+   -------------------
+
+   * :ref:`min_cost_flow_protocol <min_cost_flow_protocol/0::min_cost_flow/4>`
+
+.. only:: latex
+
+   * ``min_cost_flow/4`` - :ref:`min_cost_flow_protocol <min_cost_flow_protocol/0::min_cost_flow/4>`
+
+.. only:: not latex
+
+   ``min_cost_flow/5``
+   -------------------
+
+   * :ref:`min_cost_flow_protocol <min_cost_flow_protocol/0::min_cost_flow/5>`
+
+.. only:: latex
+
+   * ``min_cost_flow/5`` - :ref:`min_cost_flow_protocol <min_cost_flow_protocol/0::min_cost_flow/5>`
+
+.. only:: not latex
+
+   ``min_cost_max_flow/6``
+   -----------------------
+
+   * :ref:`min_cost_flow_protocol <min_cost_flow_protocol/0::min_cost_max_flow/6>`
+
+.. only:: latex
+
+   * ``min_cost_max_flow/6`` - :ref:`min_cost_flow_protocol <min_cost_flow_protocol/0::min_cost_max_flow/6>`
+
+.. only:: not latex
+
+   ``min_cost_max_flow/7``
+   -----------------------
+
+   * :ref:`min_cost_flow_protocol <min_cost_flow_protocol/0::min_cost_max_flow/7>`
+
+.. only:: latex
+
+   * ``min_cost_max_flow/7`` - :ref:`min_cost_flow_protocol <min_cost_flow_protocol/0::min_cost_max_flow/7>`
+
+.. only:: not latex
+
+   ``min_cut/5``
+   -------------
+
+   * :ref:`max_flow_protocol <max_flow_protocol/0::min_cut/5>`
+
+.. only:: latex
+
+   * ``min_cut/5`` - :ref:`max_flow_protocol <max_flow_protocol/0::min_cut/5>`
+
+.. only:: not latex
+
+   ``min_cuts/5``
+   --------------
+
+   * :ref:`max_flow_protocol <max_flow_protocol/0::min_cuts/5>`
+
+.. only:: latex
+
+   * ``min_cuts/5`` - :ref:`max_flow_protocol <max_flow_protocol/0::min_cuts/5>`
+
+.. only:: not latex
+
    ``min_distances/3``
    -------------------
 
@@ -19434,6 +19577,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``mul64/3`` - :ref:`hash_common_64 <hash_common_64/0::mul64/3>`
+
+.. only:: not latex
+
+   ``multi_source_max_flow/5``
+   ---------------------------
+
+   * :ref:`max_flow_protocol <max_flow_protocol/0::multi_source_max_flow/5>`
+
+.. only:: latex
+
+   * ``multi_source_max_flow/5`` - :ref:`max_flow_protocol <max_flow_protocol/0::multi_source_max_flow/5>`
 
 .. only:: not latex
 
@@ -20160,6 +20314,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    ---------
 
    * :ref:`atms_protocol <atms_protocol/0::new/2>`
+   * :ref:`flow_network_protocol <flow_network_protocol/0::new/2>`
    * :ref:`graph_protocol <graph_protocol/0::new/2>`
    * :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::new/2>`
    * :ref:`java_access_protocol <java_access_protocol/0::new/2>`
@@ -20171,7 +20326,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: latex
 
-   * ``new/2`` - :ref:`atms_protocol <atms_protocol/0::new/2>`, :ref:`graph_protocol <graph_protocol/0::new/2>`, :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::new/2>`, :ref:`java_access_protocol <java_access_protocol/0::new/2>`, :ref:`lru_cache_protocol <lru_cache_protocol/0::new/2>`, :ref:`ripple_down_rules_common_protocol <ripple_down_rules_common_protocol/0::new/2>`, :ref:`stn_protocol <stn_protocol/0::new/2>`, :ref:`streamvars <streamvars/0::new/2>`, :ref:`union_find_protocol <union_find_protocol/0::new/2>`
+   * ``new/2`` - :ref:`atms_protocol <atms_protocol/0::new/2>`, :ref:`flow_network_protocol <flow_network_protocol/0::new/2>`, :ref:`graph_protocol <graph_protocol/0::new/2>`, :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::new/2>`, :ref:`java_access_protocol <java_access_protocol/0::new/2>`, :ref:`lru_cache_protocol <lru_cache_protocol/0::new/2>`, :ref:`ripple_down_rules_common_protocol <ripple_down_rules_common_protocol/0::new/2>`, :ref:`stn_protocol <stn_protocol/0::new/2>`, :ref:`streamvars <streamvars/0::new/2>`, :ref:`union_find_protocol <union_find_protocol/0::new/2>`
 
 .. only:: not latex
 
@@ -20463,6 +20618,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``node/7`` - :ref:`graph_language_protocol <graph_language_protocol/0::node/7>`
+
+.. only:: not latex
+
+   ``node_capacity_max_flow/6``
+   ----------------------------
+
+   * :ref:`max_flow_protocol <max_flow_protocol/0::node_capacity_max_flow/6>`
+
+.. only:: latex
+
+   * ``node_capacity_max_flow/6`` - :ref:`max_flow_protocol <max_flow_protocol/0::node_capacity_max_flow/6>`
 
 .. only:: not latex
 
@@ -30766,6 +30932,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``sink_closest_min_cut/5``
+   --------------------------
+
+   * :ref:`max_flow_protocol <max_flow_protocol/0::sink_closest_min_cut/5>`
+
+.. only:: latex
+
+   * ``sink_closest_min_cut/5`` - :ref:`max_flow_protocol <max_flow_protocol/0::sink_closest_min_cut/5>`
+
+.. only:: not latex
+
    ``sismember/4``
    ---------------
 
@@ -34196,6 +34373,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``unique_min_cut/4``
+   --------------------
+
+   * :ref:`max_flow_protocol <max_flow_protocol/0::unique_min_cut/4>`
+
+.. only:: latex
+
+   * ``unique_min_cut/4`` - :ref:`max_flow_protocol <max_flow_protocol/0::unique_min_cut/4>`
+
+.. only:: not latex
+
    ``universal/1``
    ---------------
 
@@ -34849,6 +35037,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``valid_cut/5``
+   ---------------
+
+   * :ref:`flow_network_protocol <flow_network_protocol/0::valid_cut/5>`
+
+.. only:: latex
+
+   * ``valid_cut/5`` - :ref:`flow_network_protocol <flow_network_protocol/0::valid_cut/5>`
+
+.. only:: not latex
+
    ``valid_date/3``
    ----------------
 
@@ -34906,6 +35105,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``valid_flow/3``
+   ----------------
+
+   * :ref:`flow_network_protocol <flow_network_protocol/0::valid_flow/3>`
+
+.. only:: latex
+
+   * ``valid_flow/3`` - :ref:`flow_network_protocol <flow_network_protocol/0::valid_flow/3>`
+
+.. only:: not latex
+
    ``valid_forecaster/1``
    ----------------------
 
@@ -34960,6 +35170,28 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``valid_map_dispatch/1`` - :ref:`ccsds_tc_services <ccsds_tc_services/0::valid_map_dispatch/1>`
+
+.. only:: not latex
+
+   ``valid_min_cost_flow/4``
+   -------------------------
+
+   * :ref:`flow_network_protocol <flow_network_protocol/0::valid_min_cost_flow/4>`
+
+.. only:: latex
+
+   * ``valid_min_cost_flow/4`` - :ref:`flow_network_protocol <flow_network_protocol/0::valid_min_cost_flow/4>`
+
+.. only:: not latex
+
+   ``valid_min_cost_flow/5``
+   -------------------------
+
+   * :ref:`flow_network_protocol <flow_network_protocol/0::valid_min_cost_flow/5>`
+
+.. only:: latex
+
+   * ``valid_min_cost_flow/5`` - :ref:`flow_network_protocol <flow_network_protocol/0::valid_min_cost_flow/5>`
 
 .. only:: not latex
 
@@ -35138,6 +35370,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``valid_set_cookie/1`` - :ref:`http_cookies(Representation) <http_cookies/1::valid_set_cookie/1>`
+
+.. only:: not latex
+
+   ``valid_st_flow/5``
+   -------------------
+
+   * :ref:`flow_network_protocol <flow_network_protocol/0::valid_st_flow/5>`
+
+.. only:: latex
+
+   * ``valid_st_flow/5`` - :ref:`flow_network_protocol <flow_network_protocol/0::valid_st_flow/5>`
 
 .. only:: not latex
 
@@ -35852,11 +36095,12 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    ``vertices/2``
    --------------
 
+   * :ref:`flow_network_protocol <flow_network_protocol/0::vertices/2>`
    * :ref:`graph_protocol <graph_protocol/0::vertices/2>`
 
 .. only:: latex
 
-   * ``vertices/2`` - :ref:`graph_protocol <graph_protocol/0::vertices/2>`
+   * ``vertices/2`` - :ref:`flow_network_protocol <flow_network_protocol/0::vertices/2>`, :ref:`graph_protocol <graph_protocol/0::vertices/2>`
 
 .. only:: not latex
 

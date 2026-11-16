@@ -1,0 +1,256 @@
+.. index:: single: flow_support(Dictionary)
+.. _flow_support/1:
+
+.. rst-class:: right
+
+**category**
+
+``flow_support(Dictionary)``
+============================
+
+* ``Dictionary`` - Dictionary object used by the flow network.
+
+
+Support predicates shared by the flow algorithm objects: terminal validation, residual graph traversal, path augmentation, and flow extraction. The category parameter is the dictionary object and must be the same one used to construct the flow network.
+
+| **Availability:** 
+|    ``logtalk_load(flow_networks(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-16
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`queue <queue/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: validate_terminals/3
+.. _flow_support/1::validate_terminals/3:
+
+``validate_terminals/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that the source and sink are distinct vertices of the network.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_terminals(Network,Source,Sink)``
+| **Mode and number of proofs:**
+|    ``validate_terminals(+compound,+ground,+ground)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` or ``Sink`` is not ground:
+|        ``instantiation_error``
+|    ``Source`` or ``Sink`` is not a vertex of the network:
+|        ``existence_error(vertex,Vertex)``
+|    ``Source`` and ``Sink`` are the same vertex:
+|        ``consistency_error(distinct_vertices,Source,Sink)``
+
+
+------------
+
+.. index:: partner/2
+.. _flow_support/1::partner/2:
+
+``partner/2``
+^^^^^^^^^^^^^
+
+Arc identifier of the opposite arc in a residual pair.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``partner(Id,Partner)``
+| **Mode and number of proofs:**
+|    ``partner(+integer,-integer)`` - ``one``
+
+
+------------
+
+.. index:: adjacency/3
+.. _flow_support/1::adjacency/3:
+
+``adjacency/3``
+^^^^^^^^^^^^^^^
+
+Outgoing residual arc identifiers of a vertex (empty list if none).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``adjacency(Vertex,Network,Ids)``
+| **Mode and number of proofs:**
+|    ``adjacency(+ground,+compound,-list(integer))`` - ``one``
+
+
+------------
+
+.. index:: bfs/5
+.. _flow_support/1::bfs/5:
+
+``bfs/5``
+^^^^^^^^^
+
+Breadth-first search over arcs with positive residual capacity. ``Stop`` is either ``stop(Vertex)`` (stop as soon as the vertex is reached) or ``all``. ``Info`` is a dictionary mapping each reached vertex to ``Level-ArcId`` where ``ArcId`` is the arc used to reach it (``none`` for the source).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bfs(Network,Residual,Source,Stop,Info)``
+| **Mode and number of proofs:**
+|    ``bfs(+compound,+compound,+ground,+nonvar,-compound)`` - ``one``
+
+
+------------
+
+.. index:: augment/4
+.. _flow_support/1::augment/4:
+
+``augment/4``
+^^^^^^^^^^^^^
+
+Pushes the given amount of flow along a list of arc identifiers, updating the residual dictionary.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``augment(Ids,Amount,Residual0,Residual)``
+| **Mode and number of proofs:**
+|    ``augment(+list(integer),+integer,+compound,-compound)`` - ``one``
+
+
+------------
+
+.. index:: augment_arc/4
+.. _flow_support/1::augment_arc/4:
+
+``augment_arc/4``
+^^^^^^^^^^^^^^^^^
+
+Pushes the given amount of flow along a single arc, updating the residual dictionary.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``augment_arc(Id,Amount,Residual0,Residual)``
+| **Mode and number of proofs:**
+|    ``augment_arc(+integer,+integer,+compound,-compound)`` - ``one``
+
+
+------------
+
+.. index:: path_ids/4
+.. _flow_support/1::path_ids/4:
+
+``path_ids/4``
+^^^^^^^^^^^^^^
+
+Arc identifiers of the path from the BFS source to the given vertex (in source to vertex order).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``path_ids(Network,Vertex,Info,Ids)``
+| **Mode and number of proofs:**
+|    ``path_ids(+compound,+ground,+compound,-list(integer))`` - ``one``
+
+
+------------
+
+.. index:: bottleneck/3
+.. _flow_support/1::bottleneck/3:
+
+``bottleneck/3``
+^^^^^^^^^^^^^^^^
+
+Minimum residual capacity along a non-empty list of arc identifiers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bottleneck(Ids,Residual,Amount)``
+| **Mode and number of proofs:**
+|    ``bottleneck(+list(integer),+compound,-integer)`` - ``one``
+
+
+------------
+
+.. index:: flow_list/3
+.. _flow_support/1::flow_list/3:
+
+``flow_list/3``
+^^^^^^^^^^^^^^^
+
+Flow on each arc with positive flow as ``flow(ArcId, From, To, Amount)`` terms in arc input order. ``ArcId`` is the one-based input arc position.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``flow_list(Network,Residual,Flow)``
+| **Mode and number of proofs:**
+|    ``flow_list(+compound,+compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: flow_cost/3
+.. _flow_support/1::flow_cost/3:
+
+``flow_cost/3``
+^^^^^^^^^^^^^^^
+
+Total cost of the flow described by the residual dictionary.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``flow_cost(Network,Residual,Cost)``
+| **Mode and number of proofs:**
+|    ``flow_cost(+compound,+compound,-integer)`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

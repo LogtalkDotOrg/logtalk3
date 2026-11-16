@@ -65,6 +65,9 @@ compact styling, adding internal links, and reducing the number of pages.
 Library
 -------
 
+* ADDED: New `flow_networks` library implementing network flow algorithms over
+capacitated directed graphs: maximum flow, minimum cut, and minimum cost flow.
+
 * ADDED: New `asp` library for representing Answer Set Programming (ASP)
 problems as Logtalk objects, invoking the Clingo (default) or zetesis
 command-line solver through the `process` library, and inspecting collected

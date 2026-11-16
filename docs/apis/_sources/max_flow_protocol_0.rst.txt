@@ -1,0 +1,270 @@
+.. index:: single: max_flow_protocol
+.. _max_flow_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``max_flow_protocol``
+=====================
+
+Maximum flow and minimum cut protocol.
+
+| **Availability:** 
+|    ``logtalk_load(flow_networks(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-16
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: max_flow/5
+.. _max_flow_protocol/0::max_flow/5:
+
+``max_flow/5``
+^^^^^^^^^^^^^^
+
+Computes a maximum flow from ``Source`` to ``Sink``. ``Flow`` is a list of ``flow(ArcId, From, To, Amount)`` terms with a positive amount, one per arc carrying flow, in the order of the network arcs. ``ArcId`` is the one-based position of the arc in the input list used to construct the network. Maximum flow currently requires zero lower bounds.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``max_flow(Network,Source,Sink,Value,Flow)``
+| **Mode and number of proofs:**
+|    ``max_flow(+compound,+ground,+ground,-integer,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` or ``Sink`` is not ground:
+|        ``instantiation_error``
+|    ``Source`` or ``Sink`` is not a vertex of the network:
+|        ``existence_error(vertex,Vertex)``
+|    ``Source`` and ``Sink`` are the same vertex:
+|        ``consistency_error(distinct_vertices,Source,Sink)``
+|    The network contains a non-zero lower bound:
+|        ``domain_error(zero_lower_bounds,Network)``
+
+
+------------
+
+.. index:: multi_source_max_flow/5
+.. _max_flow_protocol/0::multi_source_max_flow/5:
+
+``multi_source_max_flow/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes a maximum flow from a non-empty set of distinct sources to a non-empty, disjoint set of distinct sinks. ``Flow`` uses the original network arc IDs and endpoints. Requires zero lower bounds.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multi_source_max_flow(Network,Sources,Sinks,Value,Flow)``
+| **Mode and number of proofs:**
+|    ``multi_source_max_flow(+compound,+list(ground),+list(ground),-integer,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A terminal is not ground:
+|        ``instantiation_error``
+|    A terminal set is empty:
+|        ``domain_error(non_empty_terminal_set,Terminals)``
+|    A terminal is not a vertex of the network:
+|        ``existence_error(vertex,Vertex)``
+|    A terminal set contains duplicates:
+|        ``domain_error(unique_terminals,Terminals)``
+|    A source is also a sink:
+|        ``consistency_error(disjoint_terminals,Sources,Sinks)``
+|    The network contains a non-zero lower bound:
+|        ``domain_error(zero_lower_bounds,Network)``
+
+
+------------
+
+.. index:: node_capacity_max_flow/6
+.. _max_flow_protocol/0::node_capacity_max_flow/6:
+
+``node_capacity_max_flow/6``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes a maximum flow subject to the given intermediate vertex capacities, represented as ``Vertex-Capacity`` pairs. Source and sink capacities are not constrained. ``Flow`` uses the original network arc IDs and endpoints. Requires zero lower bounds.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``node_capacity_max_flow(Network,Source,Sink,NodeCapacities,Value,Flow)``
+| **Mode and number of proofs:**
+|    ``node_capacity_max_flow(+compound,+ground,+ground,+list(pair),-integer,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A node capacity vertex is not ground:
+|        ``instantiation_error``
+|    A node capacity is not a non-negative integer:
+|        ``domain_error(non_negative_integer,Capacity)``
+|    A node capacity vertex is not in the network:
+|        ``existence_error(vertex,Vertex)``
+|    A node capacity is specified for a terminal:
+|        ``domain_error(intermediate_vertex,Vertex)``
+|    A node capacity is specified more than once for a vertex:
+|        ``domain_error(unique_node_capacities,Vertex)``
+|    The network contains a non-zero lower bound:
+|        ``domain_error(zero_lower_bounds,Network)``
+
+
+------------
+
+.. index:: min_cut/5
+.. _max_flow_protocol/0::min_cut/5:
+
+``min_cut/5``
+^^^^^^^^^^^^^
+
+Computes a minimum cut separating ``Source`` from ``Sink``. ``Cut`` is a ``cut(SourceSide, SinkSide, Arcs)`` term where ``SourceSide`` and ``SinkSide`` are sorted lists of vertices and ``Arcs`` is the list of ``arc(From, To, Capacity)`` terms for the arcs with positive capacity going from the source side to the sink side. ``Value`` is both the maximum flow value and the capacity of the cut. Minimum cut currently requires zero lower bounds.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``min_cut(Network,Source,Sink,Value,Cut)``
+| **Mode and number of proofs:**
+|    ``min_cut(+compound,+ground,+ground,-integer,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` or ``Sink`` is not ground:
+|        ``instantiation_error``
+|    ``Source`` or ``Sink`` is not a vertex of the network:
+|        ``existence_error(vertex,Vertex)``
+|    ``Source`` and ``Sink`` are the same vertex:
+|        ``consistency_error(distinct_vertices,Source,Sink)``
+|    The network contains a non-zero lower bound:
+|        ``domain_error(zero_lower_bounds,Network)``
+
+
+------------
+
+.. index:: sink_closest_min_cut/5
+.. _max_flow_protocol/0::sink_closest_min_cut/5:
+
+``sink_closest_min_cut/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the sink-closest minimum cut. Its source side contains exactly the vertices that cannot reach the sink in the final residual graph. Requires zero lower bounds.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sink_closest_min_cut(Network,Source,Sink,Value,Cut)``
+| **Mode and number of proofs:**
+|    ``sink_closest_min_cut(+compound,+ground,+ground,-integer,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` or ``Sink`` is not ground:
+|        ``instantiation_error``
+|    ``Source`` or ``Sink`` is not a vertex of the network:
+|        ``existence_error(vertex,Vertex)``
+|    ``Source`` and ``Sink`` are the same vertex:
+|        ``consistency_error(distinct_vertices,Source,Sink)``
+|    The network contains a non-zero lower bound:
+|        ``domain_error(zero_lower_bounds,Network)``
+
+
+------------
+
+.. index:: unique_min_cut/4
+.. _max_flow_protocol/0::unique_min_cut/4:
+
+``unique_min_cut/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Checks whether the minimum cut separating the given source and sink is unique. ``Unique`` is ``true`` or ``false``. Requires zero lower bounds.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``unique_min_cut(Network,Source,Sink,Unique)``
+| **Mode and number of proofs:**
+|    ``unique_min_cut(+compound,+ground,+ground,-boolean)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` or ``Sink`` is not ground:
+|        ``instantiation_error``
+|    ``Source`` or ``Sink`` is not a vertex of the network:
+|        ``existence_error(vertex,Vertex)``
+|    ``Source`` and ``Sink`` are the same vertex:
+|        ``consistency_error(distinct_vertices,Source,Sink)``
+|    The network contains a non-zero lower bound:
+|        ``domain_error(zero_lower_bounds,Network)``
+
+
+------------
+
+.. index:: min_cuts/5
+.. _max_flow_protocol/0::min_cuts/5:
+
+``min_cuts/5``
+^^^^^^^^^^^^^^
+
+Enumerates all minimum cuts on backtracking as ``cut(SourceSide, SinkSide, Arcs)`` terms. Enumeration uses the strongly connected components of the final residual graph. Requires zero lower bounds.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``min_cuts(Network,Source,Sink,Value,Cut)``
+| **Mode and number of proofs:**
+|    ``min_cuts(+compound,+ground,+ground,-integer,-compound)`` - ``zero_or_more_or_error``
+
+| **Exceptions:**
+|    ``Source`` or ``Sink`` is not ground:
+|        ``instantiation_error``
+|    ``Source`` or ``Sink`` is not a vertex of the network:
+|        ``existence_error(vertex,Vertex)``
+|    ``Source`` and ``Sink`` are the same vertex:
+|        ``consistency_error(distinct_vertices,Source,Sink)``
+|    The network contains a non-zero lower bound:
+|        ``domain_error(zero_lower_bounds,Network)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`flow_network_protocol <flow_network_protocol/0>`, :ref:`edmonds_karp(Dictionary) <edmonds_karp/1>`, :ref:`dinic(Dictionary) <dinic/1>`
+

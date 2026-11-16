@@ -107,6 +107,7 @@ directory in the ``NOTES.md`` file.
    exponential_smoothing
    feature_selection_protocols
    fisher_score_feature_selector
+   flow_networks
    format
    fp_growth_pattern_miner
    frequent_pattern_mining_protocols

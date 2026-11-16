@@ -1562,6 +1562,44 @@ To load an entity, always load the library that includes it using the goal ``log
 
    * :doc:`fisher_score_feature_selector <fisher_score_feature_selector_0>`
 
+``library/flow_networks/``
+--------------------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      dinic <dinic_0>
+      dinic(Dictionary) <dinic_1>
+      edmonds_karp <edmonds_karp_0>
+      edmonds_karp(Dictionary) <edmonds_karp_1>
+      flow_network <flow_network_0>
+      flow_network(Dictionary) <flow_network_1>
+      flow_network_protocol <flow_network_protocol_0>
+      flow_support(Dictionary) <flow_support_1>
+      max_flow_common(Dictionary) <max_flow_common_1>
+      max_flow_protocol <max_flow_protocol_0>
+      min_cost_flow_protocol <min_cost_flow_protocol_0>
+      successive_shortest_paths <successive_shortest_paths_0>
+      successive_shortest_paths(Dictionary) <successive_shortest_paths_1>
+
+.. only:: latex
+
+   * :doc:`dinic <dinic_0>`
+   * :doc:`dinic(Dictionary) <dinic_1>`
+   * :doc:`edmonds_karp <edmonds_karp_0>`
+   * :doc:`edmonds_karp(Dictionary) <edmonds_karp_1>`
+   * :doc:`flow_network <flow_network_0>`
+   * :doc:`flow_network(Dictionary) <flow_network_1>`
+   * :doc:`flow_network_protocol <flow_network_protocol_0>`
+   * :doc:`flow_support(Dictionary) <flow_support_1>`
+   * :doc:`max_flow_common(Dictionary) <max_flow_common_1>`
+   * :doc:`max_flow_protocol <max_flow_protocol_0>`
+   * :doc:`min_cost_flow_protocol <min_cost_flow_protocol_0>`
+   * :doc:`successive_shortest_paths <successive_shortest_paths_0>`
+   * :doc:`successive_shortest_paths(Dictionary) <successive_shortest_paths_1>`
+
 ``library/format/``
 -------------------
 

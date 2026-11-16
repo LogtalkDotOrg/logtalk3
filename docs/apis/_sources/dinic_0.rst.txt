@@ -1,0 +1,60 @@
+.. index:: single: dinic
+.. _dinic/0:
+
+.. rst-class:: right
+
+**object**
+
+``dinic``
+=========
+
+Dinic maximum flow algorithm using the ``avltree`` dictionary.
+
+| **Availability:** 
+|    ``logtalk_load(flow_networks(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-16
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`dinic(avltree) <dinic/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`max_flow_protocol/0::max_flow/5`  :ref:`max_flow_protocol/0::min_cut/5`  :ref:`max_flow_protocol/0::min_cuts/5`  :ref:`max_flow_protocol/0::multi_source_max_flow/5`  :ref:`max_flow_protocol/0::node_capacity_max_flow/6`  :ref:`max_flow_protocol/0::sink_closest_min_cut/5`  :ref:`max_flow_protocol/0::unique_min_cut/4`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`dinic(Dictionary) <dinic/1>`, :ref:`edmonds_karp <edmonds_karp/0>`
+

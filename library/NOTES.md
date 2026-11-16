@@ -33,7 +33,7 @@ Library groups
 	`application`, `expand_library_alias_paths`, `command_line_options`, `logging`, and `options`.
 - Types, collections and generic data processing:
 	`basic_types`, `types`, `assignvars`, `deques`,
-	`dictionaries`, `nested_dictionaries`, `graphs`, `heaps`, `hierarchies`,
+	`dictionaries`, `nested_dictionaries`, `flow_networks`, `graphs`, `heaps`, `hierarchies`,
 	`intervals`, `lru_caches`, `queues`, `ripple_down_rules`, `sets`, `simple_temporal_networks`, `subsequences`, `tries`,
 	`union_find`, and `zippers`.
 - Combinatorics:

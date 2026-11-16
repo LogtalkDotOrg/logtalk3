@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on November 14, 2026
+%  Last updated on November 16, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -186,6 +186,7 @@ logtalk_library_path(expecteds, library('expecteds/')).
 logtalk_library_path(exponential_smoothing, library('exponential_smoothing/')).
 logtalk_library_path(feature_selection_protocols, library('feature_selection_protocols/')).
 logtalk_library_path(fisher_score_feature_selector, library('fisher_score_feature_selector/')).
+logtalk_library_path(flow_networks, library('flow_networks/')).
 logtalk_library_path(format, library('format/')).
 logtalk_library_path(fp_growth_pattern_miner, library('fp_growth_pattern_miner/')).
 logtalk_library_path(frequent_pattern_mining_protocols, library('frequent_pattern_mining_protocols/')).

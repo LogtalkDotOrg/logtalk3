@@ -63,6 +63,7 @@
 		queues(loader),
 		sets(loader),
 		graphs(loader),
+		flow_networks(loader),
 		ripple_down_rules(loader),
 		hierarchies(loader),
 		nanoid(loader),

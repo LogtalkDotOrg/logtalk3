@@ -1,0 +1,352 @@
+.. index:: single: flow_network_protocol
+.. _flow_network_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``flow_network_protocol``
+=========================
+
+Protocol for flow network construction and inspection. A flow network is a directed graph where each arc has a non-negative integer lower bound and capacity, with the lower bound not exceeding the capacity, and an integer cost.
+
+| **Availability:** 
+|    ``logtalk_load(flow_networks(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-16
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: new/2
+.. _flow_network_protocol/0::new/2:
+
+``new/2``
+^^^^^^^^^
+
+Constructs a flow network from a list of arcs. Arcs are ``arc(From, To, Capacity)``, ``arc(From, To, Capacity, Cost)``, or ``arc(From, To, Lower, Capacity, Cost)`` terms. The default cost and lower bound are zero. Vertices can be any ground term. Parallel, antiparallel, and self-loop arcs are allowed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``new(Arcs,Network)``
+| **Mode and number of proofs:**
+|    ``new(+list(compound),--compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Arcs`` is a partial list or contains a non-ground vertex:
+|        ``instantiation_error``
+|    ``Arcs`` is neither a variable nor a list:
+|        ``type_error(list,Arcs)``
+|    An element of ``Arcs`` is not an ``arc/3``, ``arc/4``, or ``arc/5`` term:
+|        ``domain_error(flow_arc,Arc)``
+|    A lower bound is not a non-negative integer:
+|        ``domain_error(non_negative_integer,Lower)``
+|    A lower bound exceeds the capacity:
+|        ``consistency_error(arc_lower_bound_and_capacity,Lower,Capacity)``
+|    A capacity is not a non-negative integer:
+|        ``domain_error(non_negative_integer,Capacity)``
+|    A cost is not an integer:
+|        ``type_error(integer,Cost)``
+
+
+------------
+
+.. index:: from_graph/2
+.. _flow_network_protocol/0::from_graph/2:
+
+``from_graph/2``
+^^^^^^^^^^^^^^^^
+
+Constructs a flow network from a weighted directed graph (created using the ``graphs`` library with the same dictionary object). Edge weights are interpreted as capacities and all costs are zero.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``from_graph(Graph,Network)``
+| **Mode and number of proofs:**
+|    ``from_graph(+compound,--compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: vertices/2
+.. _flow_network_protocol/0::vertices/2:
+
+``vertices/2``
+^^^^^^^^^^^^^^
+
+Returns the sorted list of vertices of a flow network (including vertices that only occur in self-loops).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``vertices(Network,Vertices)``
+| **Mode and number of proofs:**
+|    ``vertices(+compound,-list)`` - ``one``
+
+
+------------
+
+.. index:: arcs/2
+.. _flow_network_protocol/0::arcs/2:
+
+``arcs/2``
+^^^^^^^^^^
+
+Returns the arcs of a flow network as ``arc(From, To, Lower, Capacity, Cost)`` terms in the order they were given to ``new/2``, including self-loops.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``arcs(Network,Arcs)``
+| **Mode and number of proofs:**
+|    ``arcs(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: flow_cost/3
+.. _flow_network_protocol/0::flow_cost/3:
+
+``flow_cost/3``
+^^^^^^^^^^^^^^^
+
+Computes the cost of a capacity-valid flow, without requiring conservation or optimality. Each entry must be a ``flow(ArcId, From, To, Amount)`` term with a unique one-based arc ID, matching endpoints, and a positive integer amount. Every arc lower and upper bound must be respected, including omitted mandatory arcs. Entries may be in any order. Self-loop flows contribute their full cost.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``flow_cost(Network,Flow,Cost)``
+| **Mode and number of proofs:**
+|    ``flow_cost(+compound,+list(compound),-integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Flow`` is a variable or partial list, or an entry has a variable field:
+|        ``instantiation_error``
+|    ``Flow`` is neither a variable nor a list:
+|        ``type_error(list,Flow)``
+|    An entry is not a ``flow/4`` term:
+|        ``domain_error(flow,Term)``
+|    An arc ID or amount is not an integer:
+|        ``type_error(integer,Value)``
+|    An arc ID or amount is not positive:
+|        ``domain_error(positive_integer,Value)``
+|    An arc ID is not in the network:
+|        ``existence_error(arc,ArcId)``
+|    An entry has incorrect endpoints:
+|        ``domain_error(flow_arc_endpoints,Term)``
+|    Arc IDs are repeated or an arc bound is violated:
+|        ``domain_error(capacity_valid_flow,Flow)``
+
+
+------------
+
+.. index:: flow_balances/3
+.. _flow_network_protocol/0::flow_balances/3:
+
+``flow_balances/3``
+^^^^^^^^^^^^^^^^^^^
+
+Returns sorted ``Vertex-NetOutflow`` pairs for every vertex, including zero balances. Positive balances indicate supplies and negative balances indicate demands. Self-loops contribute zero net outflow. Requires a capacity-valid flow with the same validation and exceptions as ``flow_cost/3``, but does not require conservation against particular supplies.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``flow_balances(Network,Flow,Balances)``
+| **Mode and number of proofs:**
+|    ``flow_balances(+compound,+list(compound),-list(pair))`` - ``one_or_error``
+
+
+------------
+
+.. index:: cut_capacity/3
+.. _flow_network_protocol/0::cut_capacity/3:
+
+``cut_capacity/3``
+^^^^^^^^^^^^^^^^^^
+
+Computes the capacity of the cut whose source side is the given vertex set and whose sink side is its complement. Input order is immaterial; vertices must be unique and belong to the network. Empty and full sets are allowed. Counts parallel crossing arcs individually and excludes self-loops. Requires zero lower bounds.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cut_capacity(Network,SourceSide,Capacity)``
+| **Mode and number of proofs:**
+|    ``cut_capacity(+compound,+list(ground),-integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``SourceSide`` is a variable or partial list or contains a non-ground vertex:
+|        ``instantiation_error``
+|    ``SourceSide`` is neither a variable nor a list:
+|        ``type_error(list,SourceSide)``
+|    A vertex is not in the network:
+|        ``existence_error(vertex,Vertex)``
+|    A vertex is repeated:
+|        ``domain_error(unique_cut_vertices,Vertex)``
+|    The network contains a non-zero lower bound:
+|        ``domain_error(zero_lower_bounds,Network)``
+
+
+------------
+
+.. index:: valid_cut/5
+.. _flow_network_protocol/0::valid_cut/5:
+
+``valid_cut/5``
+^^^^^^^^^^^^^^^
+
+Checks a ground ``cut(SourceSide, SinkSide, Arcs)`` candidate and its reported capacity. The sides must be sorted, duplicate-free lists forming a complete disjoint partition of the network vertices, with distinct existing source and sink on their respective sides. ``Arcs`` must list every positive-capacity crossing arc in network input order, including parallel arcs. Requires zero lower bounds and fails for invalid candidates. Cut validity does not imply minimum-cut optimality.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_cut(Network,Source,Sink,Value,Cut)``
+| **Mode and number of proofs:**
+|    ``valid_cut(+compound,+ground,+ground,+integer,+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: decompose_flow/3
+.. _flow_network_protocol/0::decompose_flow/3:
+
+``decompose_flow/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Decomposes a feasible flow into a list of ``path(Vertices, ArcIds, Amount)`` and ``cycle(Vertices, ArcIds, Amount)`` terms. Path endpoints are inferred from the flow balances. Vertex lists for cycles repeat the first vertex at the end. Arc IDs are one-based input arc positions.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decompose_flow(Network,Flow,Decomposition)``
+| **Mode and number of proofs:**
+|    ``decompose_flow(+compound,+list(compound),-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_flow/3
+.. _flow_network_protocol/0::valid_flow/3:
+
+``valid_flow/3``
+^^^^^^^^^^^^^^^^
+
+Checks that ``Flow`` respects every arc lower and upper capacity bound and that vertex net outflows match the given supplies and demands. Duplicate supply entries are added.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_flow(Network,Supplies,Flow)``
+| **Mode and number of proofs:**
+|    ``valid_flow(+compound,+list(pair),+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_st_flow/5
+.. _flow_network_protocol/0::valid_st_flow/5:
+
+``valid_st_flow/5``
+^^^^^^^^^^^^^^^^^^^
+
+Checks that ``Flow`` respects capacities and conservation for a source-to-sink flow of the given value. Fails if either terminal is not ground.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_st_flow(Network,Source,Sink,Value,Flow)``
+| **Mode and number of proofs:**
+|    ``valid_st_flow(+compound,+ground,+ground,+integer,+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_min_cost_flow/4
+.. _flow_network_protocol/0::valid_min_cost_flow/4:
+
+``valid_min_cost_flow/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks flow feasibility, the reported cost, and min-cost optimality by checking for negative-cost cycles in the residual graph.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_min_cost_flow(Network,Supplies,Flow,Cost)``
+| **Mode and number of proofs:**
+|    ``valid_min_cost_flow(+compound,+list(pair),+list(compound),+integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_min_cost_flow/5
+.. _flow_network_protocol/0::valid_min_cost_flow/5:
+
+``valid_min_cost_flow/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks flow feasibility and cost, and validates a potential certificate by verifying non-negative reduced costs on every positive-capacity residual arc.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_min_cost_flow(Network,Supplies,Flow,Cost,Potentials)``
+| **Mode and number of proofs:**
+|    ``valid_min_cost_flow(+compound,+list(pair),+list(compound),+integer,+list(pair))`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`flow_network(Dictionary) <flow_network/1>`, :ref:`flow_network <flow_network/0>`, :ref:`max_flow_protocol <max_flow_protocol/0>`, :ref:`min_cost_flow_protocol <min_cost_flow_protocol/0>`
+

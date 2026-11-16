@@ -1,0 +1,83 @@
+.. index:: single: max_flow_common(Dictionary)
+.. _max_flow_common/1:
+
+.. rst-class:: right
+
+**category**
+
+``max_flow_common(Dictionary)``
+===============================
+
+* ``Dictionary`` - Dictionary object used by the flow network.
+
+
+Maximum flow and minimum cut predicates shared by the maximum flow algorithm objects. Importing objects must define the ``maximize/5`` predicate.
+
+| **Availability:** 
+|    ``logtalk_load(flow_networks(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-16
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Implements:**
+|    ``public`` :ref:`max_flow_protocol <max_flow_protocol/0>`
+| **Extends:**
+|    ``public`` :ref:`flow_support(Dictionary) <flow_support/1>`
+| **Uses:**
+|    :ref:`flow_network(Dictionary) <flow_network/1>`
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+|    :ref:`weighted_directed_graph(Dictionary) <weighted_directed_graph/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`max_flow_protocol/0::max_flow/5`  :ref:`max_flow_protocol/0::min_cut/5`  :ref:`max_flow_protocol/0::min_cuts/5`  :ref:`max_flow_protocol/0::multi_source_max_flow/5`  :ref:`max_flow_protocol/0::node_capacity_max_flow/6`  :ref:`max_flow_protocol/0::sink_closest_min_cut/5`  :ref:`max_flow_protocol/0::unique_min_cut/4`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: maximize/5
+.. _max_flow_common/1::maximize/5:
+
+``maximize/5``
+^^^^^^^^^^^^^^
+
+Runs the maximum flow algorithm returning the flow value and the final residual dictionary. Must be defined by the importing objects.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``maximize(Network,Source,Sink,Value,Residual)``
+| **Mode and number of proofs:**
+|    ``maximize(+compound,+ground,+ground,-integer,-compound)`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

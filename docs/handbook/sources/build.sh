@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on November 14, 2026
+##   Last updated on November 16, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -157,6 +157,7 @@ sed '1,19d' ../../../library/expecteds/NOTES.md | pandoc -f gfm -t rst -o librar
 sed '1,19d' ../../../library/exponential_smoothing/NOTES.md | pandoc -f gfm -t rst -o libraries/exponential_smoothing.rst
 sed '1,19d' ../../../library/feature_selection_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/feature_selection_protocols.rst
 sed '1,19d' ../../../library/fisher_score_feature_selector/NOTES.md | pandoc -f gfm -t rst -o libraries/fisher_score_feature_selector.rst
+sed '1,19d' ../../../library/flow_networks/NOTES.md | pandoc -f gfm -t rst -o libraries/flow_networks.rst
 sed '1,19d' ../../../library/format/NOTES.md | pandoc -f gfm -t rst -o libraries/format.rst
 sed '1,19d' ../../../library/fp_growth_pattern_miner/NOTES.md | pandoc -f gfm -t rst -o libraries/fp_growth_pattern_miner.rst
 sed '1,19d' ../../../library/frequent_pattern_mining_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/frequent_pattern_mining_protocols.rst
