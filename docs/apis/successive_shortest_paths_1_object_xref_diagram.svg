@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-869 2377,-869 2377,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object successive_shortest_paths/1</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;16, 17:23</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;16, 23:03</text>
 <g id="clust1" class="cluster">
 <title>cluster_successive_shortest_paths_1_object</title>
 <g id="a_clust1"><a xlink:title="successive_shortest_paths(Dictionary)">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 2353,-46 2353,-46 2359,-46 2365,-52 2365,-58 2365,-58 2365,-845 2365,-845 2365,-851 2359,-857 2353,-857 2353,-857 20,-857 20,-857 14,-857 8,-851 8,-845 8,-845 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-841.46" font-family="monospace" font-size="10.00" fill="dimgray">successive_shortest_paths(Dictionary)</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>min_cost_flow/4</title>
 <polygon fill="cornsilk" stroke="black" points="1103.91,-704 978.09,-704 978.09,-668 1103.91,-668 1103.91,-704"/>
 <text xml:space="preserve" text-anchor="start" x="986.09" y="-688.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L54">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L54">
 <text xml:space="preserve" text-anchor="start" x="991.49" y="-687.71" font-family="monospace" font-size="11.00">min_cost_flow/4</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>min_cost_flow/5</title>
 <polygon fill="cornsilk" stroke="black" points="1103.91,-587 978.09,-587 978.09,-551 1103.91,-551 1103.91,-587"/>
 <text xml:space="preserve" text-anchor="start" x="986.09" y="-571.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="991.49" y="-570.71" font-family="monospace" font-size="11.00">min_cost_flow/5</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- min_cost_flow/4&#45;&gt;min_cost_flow/5 -->
 <g id="edge1" class="edge">
 <title>min_cost_flow/4&#45;&gt;min_cost_flow/5</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L54" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L54" xlink:title="calls">
 <path fill="none" stroke="black" d="M1041,-667.53C1041,-649.28 1041,-620.33 1041,-598.7"/>
 <polygon fill="black" stroke="black" points="1044.5,-598.77 1041,-588.77 1037.5,-598.77 1044.5,-598.77"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L54">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L54">
 <text xml:space="preserve" text-anchor="start" x="1041" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>validate_supplies/3</title>
 <polygon fill="cornsilk" stroke="black" points="340.11,-470 187.89,-470 187.89,-434 340.11,-434 340.11,-470"/>
 <text xml:space="preserve" text-anchor="start" x="195.89" y="-454.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L97">
+<g id="a_node5_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L97">
 <text xml:space="preserve" text-anchor="start" x="201.29" y="-453.71" font-family="monospace" font-size="11.00">validate_supplies/3</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- min_cost_flow/5&#45;&gt;validate_supplies/3 -->
 <g id="edge2" class="edge">
 <title>min_cost_flow/5&#45;&gt;validate_supplies/3</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M977.84,-560.27C857.84,-545.33 588.43,-510.51 351.67,-470.41"/>
 <polygon fill="black" stroke="black" points="352.36,-466.98 341.91,-468.75 351.18,-473.88 352.36,-466.98"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="633.5" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -97,7 +97,7 @@
 <title>super_vertices/2</title>
 <polygon fill="cornsilk" stroke="black" points="170.21,-470 37.79,-470 37.79,-434 170.21,-434 170.21,-470"/>
 <text xml:space="preserve" text-anchor="start" x="45.79" y="-454.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L130">
+<g id="a_node8_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L130">
 <text xml:space="preserve" text-anchor="start" x="51.19" y="-453.71" font-family="monospace" font-size="11.00">super_vertices/2</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- min_cost_flow/5&#45;&gt;super_vertices/2 -->
 <g id="edge3" class="edge">
 <title>min_cost_flow/5&#45;&gt;super_vertices/2</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M977.66,-563.26C836.32,-552.14 484.46,-521.54 181.78,-470.39"/>
 <polygon fill="black" stroke="black" points="182.52,-466.96 172.07,-468.73 181.35,-473.86 182.52,-466.96"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="485.84" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -124,7 +124,7 @@
 <title>check_reserved/4</title>
 <polygon fill="cornsilk" stroke="black" points="150.21,-398 17.79,-398 17.79,-362 150.21,-362 150.21,-398"/>
 <text xml:space="preserve" text-anchor="start" x="25.79" y="-382.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L132">
+<g id="a_node9_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L132">
 <text xml:space="preserve" text-anchor="start" x="31.19" y="-381.71" font-family="monospace" font-size="11.00">check_reserved/4</text>
 </a>
 </g>
@@ -136,12 +136,12 @@
 <!-- min_cost_flow/5&#45;&gt;check_reserved/4 -->
 <g id="edge4" class="edge">
 <title>min_cost_flow/5&#45;&gt;check_reserved/4</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M977.77,-566.76C766.1,-561.94 92.14,-541.11 29,-470 11.51,-450.3 31.48,-424.36 52.09,-405.57"/>
 <polygon fill="black" stroke="black" points="54.14,-408.43 59.4,-399.24 49.55,-403.14 54.14,-408.43"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="163.05" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -151,7 +151,7 @@
 <title>saturation_balances/2</title>
 <polygon fill="cornsilk" stroke="black" points="523.71,-470 358.29,-470 358.29,-434 523.71,-434 523.71,-470"/>
 <text xml:space="preserve" text-anchor="start" x="366.29" y="-454.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L142">
+<g id="a_node10_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L142">
 <text xml:space="preserve" text-anchor="start" x="371.69" y="-453.71" font-family="monospace" font-size="11.00">saturation_balances/2</text>
 </a>
 </g>
@@ -163,12 +163,12 @@
 <!-- min_cost_flow/5&#45;&gt;saturation_balances/2 -->
 <g id="edge5" class="edge">
 <title>min_cost_flow/5&#45;&gt;saturation_balances/2</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M977.64,-555.86C871.89,-535.59 658.89,-494.76 535.41,-471.1"/>
 <polygon fill="black" stroke="black" points="536.08,-467.66 525.6,-469.22 534.76,-474.53 536.08,-467.66"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="758.99" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -178,7 +178,7 @@
 <title>sum_balances/2</title>
 <polygon fill="cornsilk" stroke="black" points="660.61,-470 541.39,-470 541.39,-434 660.61,-434 660.61,-470"/>
 <text xml:space="preserve" text-anchor="start" x="549.39" y="-454.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L158">
+<g id="a_node11_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L158">
 <text xml:space="preserve" text-anchor="start" x="554.79" y="-453.71" font-family="monospace" font-size="11.00">sum_balances/2</text>
 </a>
 </g>
@@ -190,12 +190,12 @@
 <!-- min_cost_flow/5&#45;&gt;sum_balances/2 -->
 <g id="edge7" class="edge">
 <title>min_cost_flow/5&#45;&gt;sum_balances/2</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M977.96,-551.52C897,-530.36 756.87,-493.74 672.16,-471.6"/>
 <polygon fill="black" stroke="black" points="673.12,-468.23 662.56,-469.09 671.35,-475.01 673.12,-468.23"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="834.19" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -205,7 +205,7 @@
 <title>super_arcs/6</title>
 <polygon fill="cornsilk" stroke="black" points="785.01,-470 678.99,-470 678.99,-434 785.01,-434 785.01,-470"/>
 <text xml:space="preserve" text-anchor="start" x="686.99" y="-454.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node13_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L174" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L174">
+<g id="a_node13_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L174" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L174">
 <text xml:space="preserve" text-anchor="start" x="692.39" y="-453.71" font-family="monospace" font-size="11.00">super_arcs/6</text>
 </a>
 </g>
@@ -217,12 +217,12 @@
 <!-- min_cost_flow/5&#45;&gt;super_arcs/6 -->
 <g id="edge8" class="edge">
 <title>min_cost_flow/5&#45;&gt;super_arcs/6</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M994.07,-550.53C939.24,-530.13 848.51,-496.36 789.5,-474.4"/>
 <polygon fill="black" stroke="black" points="790.88,-471.18 780.28,-470.97 788.43,-477.74 790.88,-471.18"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="895.77" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -232,7 +232,7 @@
 <title>saturate/4</title>
 <polygon fill="cornsilk" stroke="black" points="895.41,-470 802.59,-470 802.59,-434 895.41,-434 895.41,-470"/>
 <text xml:space="preserve" text-anchor="start" x="810.59" y="-454.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node14_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L188">
+<g id="a_node14_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L188">
 <text xml:space="preserve" text-anchor="start" x="815.99" y="-453.71" font-family="monospace" font-size="11.00">saturate/4</text>
 </a>
 </g>
@@ -244,12 +244,12 @@
 <!-- min_cost_flow/5&#45;&gt;saturate/4 -->
 <g id="edge9" class="edge">
 <title>min_cost_flow/5&#45;&gt;saturate/4</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M1011.84,-550.53C978.76,-530.72 924.65,-498.31 887.97,-476.34"/>
 <polygon fill="black" stroke="black" points="889.8,-473.36 879.42,-471.22 886.2,-479.36 889.8,-473.36"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="950.76" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -259,7 +259,7 @@
 <title>potentials/2</title>
 <polygon fill="cornsilk" stroke="black" points="1019.01,-470 912.99,-470 912.99,-434 1019.01,-434 1019.01,-470"/>
 <text xml:space="preserve" text-anchor="start" x="920.99" y="-454.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node15_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L203" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L203">
+<g id="a_node15_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L203" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L203">
 <text xml:space="preserve" text-anchor="start" x="926.39" y="-453.71" font-family="monospace" font-size="11.00">potentials/2</text>
 </a>
 </g>
@@ -271,12 +271,12 @@
 <!-- min_cost_flow/5&#45;&gt;potentials/2 -->
 <g id="edge10" class="edge">
 <title>min_cost_flow/5&#45;&gt;potentials/2</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M1029.61,-550.53C1017.31,-531.68 997.58,-501.43 983.36,-479.61"/>
 <polygon fill="black" stroke="black" points="986.47,-477.99 978.08,-471.52 980.61,-481.81 986.47,-477.99"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="1005.75" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -286,7 +286,7 @@
 <title>project_potentials/3</title>
 <polygon fill="cornsilk" stroke="black" points="1195.41,-470 1036.59,-470 1036.59,-434 1195.41,-434 1195.41,-470"/>
 <text xml:space="preserve" text-anchor="start" x="1044.59" y="-454.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node18_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L215" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L215">
+<g id="a_node18_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L215" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L215">
 <text xml:space="preserve" text-anchor="start" x="1049.99" y="-453.71" font-family="monospace" font-size="11.00">project_potentials/3</text>
 </a>
 </g>
@@ -298,12 +298,12 @@
 <!-- min_cost_flow/5&#45;&gt;project_potentials/3 -->
 <g id="edge13" class="edge">
 <title>min_cost_flow/5&#45;&gt;project_potentials/3</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M1052.39,-550.53C1064.69,-531.68 1084.42,-501.43 1098.64,-479.61"/>
 <polygon fill="black" stroke="black" points="1101.39,-481.81 1103.92,-471.52 1095.53,-477.99 1101.39,-481.81"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="1080.75" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -313,7 +313,7 @@
 <title>shortest_paths/9</title>
 <polygon fill="cornsilk" stroke="black" points="1346.21,-470 1213.79,-470 1213.79,-434 1346.21,-434 1346.21,-470"/>
 <text xml:space="preserve" text-anchor="start" x="1221.79" y="-454.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node20_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L232" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L232">
+<g id="a_node20_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L232" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L232">
 <text xml:space="preserve" text-anchor="start" x="1227.19" y="-453.71" font-family="monospace" font-size="11.00">shortest_paths/9</text>
 </a>
 </g>
@@ -325,12 +325,12 @@
 <!-- min_cost_flow/5&#45;&gt;shortest_paths/9 -->
 <g id="edge11" class="edge">
 <title>min_cost_flow/5&#45;&gt;shortest_paths/9</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M1077.3,-550.53C1119.1,-530.42 1187.85,-497.34 1233.52,-475.36"/>
 <polygon fill="black" stroke="black" points="1234.89,-478.59 1242.39,-471.1 1231.86,-472.28 1234.89,-478.59"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="1167.67" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -340,7 +340,7 @@
 <title>real_flow/4</title>
 <polygon fill="cornsilk" stroke="black" points="1463.71,-470 1364.29,-470 1364.29,-434 1463.71,-434 1463.71,-470"/>
 <text xml:space="preserve" text-anchor="start" x="1372.29" y="-454.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node25_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L301" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L301">
+<g id="a_node25_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L301" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L301">
 <text xml:space="preserve" text-anchor="start" x="1377.69" y="-453.71" font-family="monospace" font-size="11.00">real_flow/4</text>
 </a>
 </g>
@@ -352,12 +352,12 @@
 <!-- min_cost_flow/5&#45;&gt;real_flow/4 -->
 <g id="edge12" class="edge">
 <title>min_cost_flow/5&#45;&gt;real_flow/4</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M1097.65,-550.53C1166.52,-529.3 1282.28,-493.61 1353.04,-471.79"/>
 <polygon fill="black" stroke="black" points="1354.03,-475.15 1362.55,-468.86 1351.96,-468.46 1354.03,-475.15"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="1238.68" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -367,7 +367,7 @@
 <title>append/3</title>
 <polygon fill="cornsilk" stroke="black" points="1561.81,-470 1482.19,-470 1482.19,-434 1561.81,-434 1561.81,-470"/>
 <text xml:space="preserve" text-anchor="start" x="1490.19" y="-454.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node26_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L309" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L309">
+<g id="a_node26_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L309" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L309">
 <text xml:space="preserve" text-anchor="start" x="1495.6" y="-453.71" font-family="monospace" font-size="11.00">append/3</text>
 </a>
 </g>
@@ -379,12 +379,12 @@
 <!-- min_cost_flow/5&#45;&gt;append/3 -->
 <g id="edge6" class="edge">
 <title>min_cost_flow/5&#45;&gt;append/3</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M1104.21,-553.04C1107.18,-552.35 1110.12,-551.66 1113,-551 1269.22,-514.98 1313.31,-514.93 1470.71,-470.51"/>
 <polygon fill="black" stroke="black" points="1471.62,-473.88 1480.28,-467.79 1469.71,-467.15 1471.62,-473.88"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="1330.36" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -406,12 +406,12 @@
 <!-- min_cost_flow/5&#45;&gt;flow_network(Dictionary)::arcs/2 -->
 <g id="edge33" class="edge">
 <title>min_cost_flow/5&#45;&gt;flow_network(Dictionary)::arcs/2</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M1104.15,-552.76C1107.14,-552.14 1110.1,-551.55 1113,-551 1222.41,-530.18 1251.07,-532.88 1361,-515 1442.14,-501.8 1533.72,-485.21 1601.98,-472.52"/>
 <polygon fill="black" stroke="black" points="1602.48,-475.98 1611.67,-470.71 1601.2,-469.1 1602.48,-475.98"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="1407.89" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -433,12 +433,12 @@
 <!-- min_cost_flow/5&#45;&gt;flow_network(Dictionary)::new/3 -->
 <g id="edge34" class="edge">
 <title>min_cost_flow/5&#45;&gt;flow_network(Dictionary)::new/3</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M1104.13,-552.64C1107.12,-552.05 1110.09,-551.5 1113,-551 1256.65,-526.21 1294.13,-531.13 1439,-515 1613.58,-495.56 1660.07,-491.7 1837,-470.35"/>
 <polygon fill="black" stroke="black" points="1837.27,-473.85 1846.78,-469.17 1836.43,-466.9 1837.27,-473.85"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="1515.39" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -457,12 +457,12 @@
 <!-- min_cost_flow/5&#45;&gt;^^flow_cost/3 -->
 <g id="edge27" class="edge">
 <title>min_cost_flow/5&#45;&gt;^^flow_cost/3</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M1104.11,-552.53C1107.11,-551.98 1110.08,-551.46 1113,-551 1218.93,-534.25 1951.59,-490.78 2100.13,-469.97"/>
 <polygon fill="black" stroke="black" points="2100.4,-473.47 2109.75,-468.5 2099.34,-466.55 2100.4,-473.47"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="1660.29" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -481,12 +481,12 @@
 <!-- min_cost_flow/5&#45;&gt;^^flow_list/3 -->
 <g id="edge28" class="edge">
 <title>min_cost_flow/5&#45;&gt;^^flow_list/3</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="calls">
 <path fill="none" stroke="black" d="M1104.1,-552.46C1107.1,-551.93 1110.08,-551.43 1113,-551 1367.61,-513.29 1434.29,-533.65 1691,-515 1928.43,-497.75 1992.73,-509.91 2231.13,-470.14"/>
 <polygon fill="black" stroke="black" points="2231.48,-473.63 2240.76,-468.52 2230.31,-466.73 2231.48,-473.63"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L57">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="1849.07" y="-508.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -496,7 +496,7 @@
 <title>min_cost_max_flow/6</title>
 <polygon fill="cornsilk" stroke="black" points="1284.11,-821 1131.89,-821 1131.89,-785 1284.11,-785 1284.11,-821"/>
 <text xml:space="preserve" text-anchor="start" x="1139.89" y="-805.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L86" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L86">
+<g id="a_node3_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L86" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L86">
 <text xml:space="preserve" text-anchor="start" x="1145.29" y="-804.71" font-family="monospace" font-size="11.00">min_cost_max_flow/6</text>
 </a>
 </g>
@@ -510,7 +510,7 @@
 <title>min_cost_max_flow/7</title>
 <polygon fill="cornsilk" stroke="black" points="1284.11,-704 1131.89,-704 1131.89,-668 1284.11,-668 1284.11,-704"/>
 <text xml:space="preserve" text-anchor="start" x="1139.89" y="-688.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L89">
+<g id="a_node4_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L89">
 <text xml:space="preserve" text-anchor="start" x="1145.29" y="-687.71" font-family="monospace" font-size="11.00">min_cost_max_flow/7</text>
 </a>
 </g>
@@ -522,12 +522,12 @@
 <!-- min_cost_max_flow/6&#45;&gt;min_cost_max_flow/7 -->
 <g id="edge14" class="edge">
 <title>min_cost_max_flow/6&#45;&gt;min_cost_max_flow/7</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L86" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L86" xlink:title="calls">
 <path fill="none" stroke="black" d="M1208,-784.53C1208,-766.28 1208,-737.33 1208,-715.7"/>
 <polygon fill="black" stroke="black" points="1211.5,-715.77 1208,-705.77 1204.5,-715.77 1211.5,-715.77"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L86" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L86">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L86" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L86">
 <text xml:space="preserve" text-anchor="start" x="1208" y="-742.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -535,12 +535,12 @@
 <!-- min_cost_max_flow/7&#45;&gt;min_cost_flow/5 -->
 <g id="edge15" class="edge">
 <title>min_cost_max_flow/7&#45;&gt;min_cost_flow/5</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L89" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L89" xlink:title="calls">
 <path fill="none" stroke="black" d="M1182.64,-667.53C1154.11,-647.89 1107.61,-615.87 1075.72,-593.91"/>
 <polygon fill="black" stroke="black" points="1077.8,-591.09 1067.57,-588.3 1073.83,-596.85 1077.8,-591.09"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L89">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L89">
 <text xml:space="preserve" text-anchor="start" x="1129.51" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -562,12 +562,12 @@
 <!-- min_cost_max_flow/7&#45;&gt;dinic(Dictionary)::max_flow/5 -->
 <g id="edge35" class="edge">
 <title>min_cost_max_flow/7&#45;&gt;dinic(Dictionary)::max_flow/5</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L89" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L89" xlink:title="calls">
 <path fill="none" stroke="black" d="M1241.41,-667.53C1279.72,-647.51 1342.64,-614.62 1384.69,-592.64"/>
 <polygon fill="black" stroke="black" points="1386.05,-595.88 1393.29,-588.14 1382.81,-589.67 1386.05,-595.88"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L89">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L89">
 <text xml:space="preserve" text-anchor="start" x="1324.6" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -586,12 +586,12 @@
 <!-- min_cost_max_flow/7&#45;&gt;^^validate_terminals/3 -->
 <g id="edge29" class="edge">
 <title>min_cost_max_flow/7&#45;&gt;^^validate_terminals/3</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L89" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L89" xlink:title="calls">
 <path fill="none" stroke="black" d="M1208,-667.53C1208,-649.28 1208,-620.33 1208,-598.7"/>
 <polygon fill="black" stroke="black" points="1211.5,-598.77 1208,-588.77 1204.5,-598.77 1211.5,-598.77"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L89">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L89">
 <text xml:space="preserve" text-anchor="start" x="1208" y="-625.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -601,7 +601,7 @@
 <title>validate_supplies_/4</title>
 <polygon fill="cornsilk" stroke="black" points="287.41,-326 128.59,-326 128.59,-290 287.41,-290 287.41,-326"/>
 <text xml:space="preserve" text-anchor="start" x="136.59" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L101">
+<g id="a_node6_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L101">
 <text xml:space="preserve" text-anchor="start" x="141.99" y="-309.71" font-family="monospace" font-size="11.00">validate_supplies_/4</text>
 </a>
 </g>
@@ -613,12 +613,12 @@
 <!-- validate_supplies/3&#45;&gt;validate_supplies_/4 -->
 <g id="edge16" class="edge">
 <title>validate_supplies/3&#45;&gt;validate_supplies_/4</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L97" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L97" xlink:title="calls">
 <path fill="none" stroke="black" d="M257.13,-433.59C247.59,-409.4 230.23,-365.36 218.91,-336.65"/>
 <polygon fill="black" stroke="black" points="222.23,-335.54 215.3,-327.52 215.72,-338.11 222.23,-335.54"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L97">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L97">
 <text xml:space="preserve" text-anchor="start" x="242.66" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -640,12 +640,12 @@
 <!-- validate_supplies/3&#45;&gt;type::check/3 -->
 <g id="edge36" class="edge">
 <title>validate_supplies/3&#45;&gt;type::check/3</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L97" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L97" xlink:title="calls">
 <path fill="none" stroke="black" d="M271.11,-433.75C282.37,-404.43 302.38,-342.91 296,-290 293.12,-266.13 286.43,-239.67 280.84,-220.28"/>
 <polygon fill="black" stroke="black" points="284.26,-219.51 278.06,-210.92 277.55,-221.5 284.26,-219.51"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L97">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L97">
 <text xml:space="preserve" text-anchor="start" x="297.23" y="-305.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -655,7 +655,7 @@
 <title>member_vertex/2</title>
 <polygon fill="cornsilk" stroke="black" points="170.91,-209 45.09,-209 45.09,-173 170.91,-173 170.91,-209"/>
 <text xml:space="preserve" text-anchor="start" x="53.09" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L124">
+<g id="a_node7_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L124">
 <text xml:space="preserve" text-anchor="start" x="58.49" y="-192.71" font-family="monospace" font-size="11.00">member_vertex/2</text>
 </a>
 </g>
@@ -667,12 +667,12 @@
 <!-- validate_supplies_/4&#45;&gt;member_vertex/2 -->
 <g id="edge17" class="edge">
 <title>validate_supplies_/4&#45;&gt;member_vertex/2</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L106" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L106" xlink:title="calls">
 <path fill="none" stroke="black" d="M192.81,-289.53C176.2,-270.43 149.4,-239.61 130.38,-217.73"/>
 <polygon fill="black" stroke="black" points="133.2,-215.65 124,-210.4 127.92,-220.24 133.2,-215.65"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L106">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L106">
 <text xml:space="preserve" text-anchor="start" x="161" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -680,12 +680,12 @@
 <!-- validate_supplies_/4&#45;&gt;type::check/3 -->
 <g id="edge37" class="edge">
 <title>validate_supplies_/4&#45;&gt;type::check/3</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L106" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L106" xlink:title="calls">
 <path fill="none" stroke="black" d="M217.72,-289.53C228.12,-270.85 244.75,-240.97 256.86,-219.2"/>
 <polygon fill="black" stroke="black" points="259.86,-221.02 261.66,-210.58 253.74,-217.61 259.86,-221.02"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L106">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L106">
 <text xml:space="preserve" text-anchor="start" x="241.92" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -693,12 +693,12 @@
 <!-- check_reserved/4&#45;&gt;member_vertex/2 -->
 <g id="edge18" class="edge">
 <title>check_reserved/4&#45;&gt;member_vertex/2</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L132" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L132" xlink:title="calls">
 <path fill="none" stroke="black" d="M85.5,-361.58C87.1,-343.61 89.85,-314.8 93,-290 95.98,-266.53 100.08,-240 103.25,-220.48"/>
 <polygon fill="black" stroke="black" points="106.67,-221.24 104.83,-210.8 99.76,-220.11 106.67,-221.24"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L132">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L132">
 <text xml:space="preserve" text-anchor="start" x="93" y="-305.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -708,7 +708,7 @@
 <title>sum_same/5</title>
 <polygon fill="cornsilk" stroke="black" points="647.41,-326 554.59,-326 554.59,-290 647.41,-290 647.41,-326"/>
 <text xml:space="preserve" text-anchor="start" x="562.59" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node12_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L167">
+<g id="a_node12_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L167">
 <text xml:space="preserve" text-anchor="start" x="567.99" y="-309.71" font-family="monospace" font-size="11.00">sum_same/5</text>
 </a>
 </g>
@@ -720,12 +720,12 @@
 <!-- sum_balances/2&#45;&gt;sum_same/5 -->
 <g id="edge19" class="edge">
 <title>sum_balances/2&#45;&gt;sum_same/5</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L159" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L159" xlink:title="calls">
 <path fill="none" stroke="black" d="M601,-433.59C601,-409.61 601,-366.14 601,-337.42"/>
 <polygon fill="black" stroke="black" points="604.5,-337.62 601,-327.62 597.5,-337.62 604.5,-337.62"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L159">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L159">
 <text xml:space="preserve" text-anchor="start" x="601" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -735,7 +735,7 @@
 <title>potential_pairs/2</title>
 <polygon fill="cornsilk" stroke="black" points="970.51,-326 831.49,-326 831.49,-290 970.51,-290 970.51,-326"/>
 <text xml:space="preserve" text-anchor="start" x="839.49" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node16_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L207" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L207">
+<g id="a_node16_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L207" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L207">
 <text xml:space="preserve" text-anchor="start" x="844.89" y="-309.71" font-family="monospace" font-size="11.00">potential_pairs/2</text>
 </a>
 </g>
@@ -747,12 +747,12 @@
 <!-- potentials/2&#45;&gt;potential_pairs/2 -->
 <g id="edge20" class="edge">
 <title>potentials/2&#45;&gt;potential_pairs/2</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L203" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L203" xlink:title="calls">
 <path fill="none" stroke="black" d="M958.03,-433.59C946.91,-409.29 926.62,-364.97 913.48,-336.27"/>
 <polygon fill="black" stroke="black" points="916.81,-335.12 909.46,-327.49 910.44,-338.04 916.81,-335.12"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L203" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L203">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L203" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L203">
 <text xml:space="preserve" text-anchor="start" x="941.23" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -762,7 +762,7 @@
 <title>update_potentials/5</title>
 <polygon fill="cornsilk" stroke="black" points="1141.11,-326 988.89,-326 988.89,-290 1141.11,-290 1141.11,-326"/>
 <text xml:space="preserve" text-anchor="start" x="996.89" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node17_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L211">
+<g id="a_node17_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L211">
 <text xml:space="preserve" text-anchor="start" x="1002.29" y="-309.71" font-family="monospace" font-size="11.00">update_potentials/5</text>
 </a>
 </g>
@@ -776,7 +776,7 @@
 <title>potentials_update/5</title>
 <polygon fill="cornsilk" stroke="black" points="1100.11,-209 947.89,-209 947.89,-173 1100.11,-173 1100.11,-209"/>
 <text xml:space="preserve" text-anchor="start" x="955.89" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node19_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L220" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L220">
+<g id="a_node19_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L220" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L220">
 <text xml:space="preserve" text-anchor="start" x="961.29" y="-192.71" font-family="monospace" font-size="11.00">potentials_update/5</text>
 </a>
 </g>
@@ -788,12 +788,12 @@
 <!-- update_potentials/5&#45;&gt;potentials_update/5 -->
 <g id="edge21" class="edge">
 <title>update_potentials/5&#45;&gt;potentials_update/5</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L211" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L211" xlink:title="calls">
 <path fill="none" stroke="black" d="M1058.77,-289.53C1052.17,-271.02 1041.65,-241.52 1033.91,-219.8"/>
 <polygon fill="black" stroke="black" points="1037.31,-218.92 1030.66,-210.68 1030.72,-221.27 1037.31,-218.92"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L211">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L211">
 <text xml:space="preserve" text-anchor="start" x="1045.73" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -801,12 +801,12 @@
 <!-- shortest_paths/9&#45;&gt;update_potentials/5 -->
 <g id="edge23" class="edge">
 <title>shortest_paths/9&#45;&gt;update_potentials/5</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L232" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L232" xlink:title="calls">
 <path fill="none" stroke="black" d="M1253.64,-433.59C1215.25,-408.24 1143.87,-361.09 1100.77,-332.62"/>
 <polygon fill="black" stroke="black" points="1102.78,-329.76 1092.51,-327.17 1098.92,-335.6 1102.78,-329.76"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L232" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L232">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L232" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L232">
 <text xml:space="preserve" text-anchor="start" x="1198.08" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -816,7 +816,7 @@
 <title>parent_path/6</title>
 <polygon fill="cornsilk" stroke="black" points="1271.31,-326 1158.69,-326 1158.69,-290 1271.31,-290 1271.31,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1166.69" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node21_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L248" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L248">
+<g id="a_node21_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L248" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L248">
 <text xml:space="preserve" text-anchor="start" x="1172.09" y="-309.71" font-family="monospace" font-size="11.00">parent_path/6</text>
 </a>
 </g>
@@ -828,12 +828,12 @@
 <!-- shortest_paths/9&#45;&gt;parent_path/6 -->
 <g id="edge24" class="edge">
 <title>shortest_paths/9&#45;&gt;parent_path/6</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L232" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L232" xlink:title="calls">
 <path fill="none" stroke="black" d="M1272.03,-433.59C1260.91,-409.29 1240.62,-364.97 1227.48,-336.27"/>
 <polygon fill="black" stroke="black" points="1230.81,-335.12 1223.46,-327.49 1224.44,-338.04 1230.81,-335.12"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L232" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L232">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L232" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L232">
 <text xml:space="preserve" text-anchor="start" x="1255.23" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -843,7 +843,7 @@
 <title>dijkstra/7</title>
 <polygon fill="cornsilk" stroke="black" points="1382.41,-326 1289.59,-326 1289.59,-290 1382.41,-290 1382.41,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1297.59" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node22_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L257" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L257">
+<g id="a_node22_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L257" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L257">
 <text xml:space="preserve" text-anchor="start" x="1302.99" y="-309.71" font-family="monospace" font-size="11.00">dijkstra/7</text>
 </a>
 </g>
@@ -855,12 +855,12 @@
 <!-- shortest_paths/9&#45;&gt;dijkstra/7 -->
 <g id="edge22" class="edge">
 <title>shortest_paths/9&#45;&gt;dijkstra/7</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L232" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L232" xlink:title="calls">
 <path fill="none" stroke="black" d="M1286.87,-433.59C1296.41,-409.4 1313.77,-365.36 1325.09,-336.65"/>
 <polygon fill="black" stroke="black" points="1328.28,-338.11 1328.7,-327.52 1321.77,-335.54 1328.28,-338.11"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L232" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L232">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L232" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L232">
 <text xml:space="preserve" text-anchor="start" x="1314.66" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -879,12 +879,12 @@
 <!-- shortest_paths/9&#45;&gt;^^bottleneck/3 -->
 <g id="edge30" class="edge">
 <title>shortest_paths/9&#45;&gt;^^bottleneck/3</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L232" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L232" xlink:title="calls">
 <path fill="none" stroke="black" d="M1302.07,-433.59C1334.01,-408.4 1393.22,-361.68 1429.37,-333.17"/>
 <polygon fill="black" stroke="black" points="1431.16,-336.21 1436.84,-327.27 1426.82,-330.72 1431.16,-336.21"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L232" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L232">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L232" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L232">
 <text xml:space="preserve" text-anchor="start" x="1391.42" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -903,12 +903,12 @@
 <!-- shortest_paths/9&#45;&gt;^^augment/4 -->
 <g id="edge31" class="edge">
 <title>shortest_paths/9&#45;&gt;^^augment/4</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L232" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L232" xlink:title="calls">
 <path fill="none" stroke="black" d="M1331.96,-433.54C1359.15,-423.92 1392.77,-411.26 1422,-398 1466.32,-377.89 1515.16,-350.91 1548.12,-331.94"/>
 <polygon fill="black" stroke="black" points="1549.6,-335.13 1556.5,-327.09 1546.1,-329.07 1549.6,-335.13"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L232" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L232">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L232" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L232">
 <text xml:space="preserve" text-anchor="start" x="1491.1" y="-377.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -918,7 +918,7 @@
 <title>dijkstra_loop/9</title>
 <polygon fill="cornsilk" stroke="black" points="1643.91,-209 1518.09,-209 1518.09,-173 1643.91,-173 1643.91,-209"/>
 <text xml:space="preserve" text-anchor="start" x="1526.09" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node23_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L265" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L265">
+<g id="a_node23_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L265" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L265">
 <text xml:space="preserve" text-anchor="start" x="1531.49" y="-192.71" font-family="monospace" font-size="11.00">dijkstra_loop/9</text>
 </a>
 </g>
@@ -930,12 +930,12 @@
 <!-- dijkstra/7&#45;&gt;dijkstra_loop/9 -->
 <g id="edge25" class="edge">
 <title>dijkstra/7&#45;&gt;dijkstra_loop/9</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L257" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L257" xlink:title="calls">
 <path fill="none" stroke="black" d="M1373.21,-289.53C1416.15,-269.38 1486.83,-236.2 1533.65,-214.23"/>
 <polygon fill="black" stroke="black" points="1534.91,-217.5 1542.47,-210.08 1531.93,-211.17 1534.91,-217.5"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L257" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L257">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L257" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L257">
 <text xml:space="preserve" text-anchor="start" x="1465.85" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -957,12 +957,12 @@
 <!-- dijkstra/7&#45;&gt;binary_heap_min::new/1 -->
 <g id="edge38" class="edge">
 <title>dijkstra/7&#45;&gt;binary_heap_min::new/1</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L257" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L257" xlink:title="calls">
 <path fill="none" stroke="black" d="M1315.95,-289.53C1293.63,-270.09 1257.38,-238.51 1232.21,-216.57"/>
 <polygon fill="black" stroke="black" points="1234.78,-214.18 1224.95,-210.25 1230.19,-219.46 1234.78,-214.18"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L257" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L257">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L257" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L257">
 <text xml:space="preserve" text-anchor="start" x="1273.96" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -984,12 +984,12 @@
 <!-- dijkstra/7&#45;&gt;binary_heap_min::insert/4 -->
 <g id="edge39" class="edge">
 <title>dijkstra/7&#45;&gt;binary_heap_min::insert/4</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L257" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L257" xlink:title="calls">
 <path fill="none" stroke="black" d="M1346.33,-289.53C1357.43,-270.77 1375.2,-240.7 1388.09,-218.91"/>
 <polygon fill="black" stroke="black" points="1390.95,-220.95 1393.03,-210.56 1384.92,-217.38 1390.95,-220.95"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L257" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L257">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L257" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L257">
 <text xml:space="preserve" text-anchor="start" x="1372.04" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -999,7 +999,7 @@
 <title>relax/12</title>
 <polygon fill="cornsilk" stroke="black" points="1466.81,-92 1387.19,-92 1387.19,-56 1466.81,-56 1466.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1395.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node24_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L282" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L282">
+<g id="a_node24_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L282" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L282">
 <text xml:space="preserve" text-anchor="start" x="1400.6" y="-75.71" font-family="monospace" font-size="11.00">relax/12</text>
 </a>
 </g>
@@ -1011,12 +1011,12 @@
 <!-- dijkstra_loop/9&#45;&gt;relax/12 -->
 <g id="edge26" class="edge">
 <title>dijkstra_loop/9&#45;&gt;relax/12</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L265" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L265" xlink:title="calls">
 <path fill="none" stroke="black" d="M1557.61,-172.53C1531.42,-152.97 1488.79,-121.14 1459.4,-99.19"/>
 <polygon fill="black" stroke="black" points="1461.68,-96.53 1451.57,-93.35 1457.49,-102.13 1461.68,-96.53"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L265" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L265">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L265" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L265">
 <text xml:space="preserve" text-anchor="start" x="1508.62" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1038,12 +1038,12 @@
 <!-- dijkstra_loop/9&#45;&gt;binary_heap_min::delete/4 -->
 <g id="edge40" class="edge">
 <title>dijkstra_loop/9&#45;&gt;binary_heap_min::delete/4</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L265" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L265" xlink:title="calls">
 <path fill="none" stroke="black" d="M1581,-172.53C1581,-154.28 1581,-125.33 1581,-103.7"/>
 <polygon fill="black" stroke="black" points="1584.5,-103.77 1581,-93.77 1577.5,-103.77 1584.5,-103.77"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L265" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L265">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L265" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L265">
 <text xml:space="preserve" text-anchor="start" x="1581" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1062,12 +1062,12 @@
 <!-- dijkstra_loop/9&#45;&gt;^^adjacency/3 -->
 <g id="edge32" class="edge">
 <title>dijkstra_loop/9&#45;&gt;^^adjacency/3</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L265" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L265" xlink:title="calls">
 <path fill="none" stroke="black" d="M1606.82,-172.53C1635.99,-152.8 1683.61,-120.59 1716.08,-98.62"/>
 <polygon fill="black" stroke="black" points="1717.64,-101.79 1723.96,-93.29 1713.72,-95.99 1717.64,-101.79"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L265" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a45aabb7b4d3ea64a0fd0f5612aa0b6296bd5de0/library/flow_networks/successive_shortest_paths.lgt#L265">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L265" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/887016e1a2675ca8e776dcc11f586535221dffb3/library/flow_networks/successive_shortest_paths.lgt#L265">
 <text xml:space="preserve" text-anchor="start" x="1671.1" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
