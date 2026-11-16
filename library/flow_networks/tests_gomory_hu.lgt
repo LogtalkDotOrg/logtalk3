@@ -31,7 +31,7 @@
 	]).
 
 	:- uses(flow_network(_Dictionary_), [
-		new/2, new/3, vertices/2, cut_capacity/3
+		new/2, new/3, vertices/2, arcs/2, cut_capacity/3
 	]).
 
 	:- uses(gomory_hu(_Dictionary_), [
@@ -138,9 +138,14 @@
 
 	check_tree(Network, Tree) :-
 		vertices(Network, Vertices),
+		arcs(Network, Arcs),
+		findall(Side-Capacity, (
+			subset(Vertices, Side),
+			oracle_cut_capacity(Arcs, Side, 0, Capacity)
+		), Cuts),
 		\+ (
 			member(Source, Vertices), member(Sink, Vertices), Source @< Sink,
-			\+ check_pair(Network, Tree, Vertices, Source, Sink)
+			\+ check_pair(Network, Tree, Cuts, Source, Sink)
 		),
 		Tree = tree(_, Edges),
 		\+ (
@@ -149,15 +154,22 @@
 			\+ cut_capacity(Network, Side, Weight)
 		).
 
-	check_pair(Network, Tree, Vertices, Source, Sink) :-
+	check_pair(Network, Tree, Cuts, Source, Sink) :-
 		min_cut_value(Tree, Source, Sink, Value),
 		dinic(_Dictionary_)::min_cut(Network, Source, Sink, Value, _),
 		findall(Capacity, (
-			subset(Vertices, Side),
-			member(Source, Side), \+ member(Sink, Side),
-			cut_capacity(Network, Side, Capacity)
+			member(Side-Capacity, Cuts),
+			member(Source, Side), \+ member(Sink, Side)
 		), Capacities),
 		minimum(Capacities, Value).
+
+	oracle_cut_capacity([], _, Capacity, Capacity).
+	oracle_cut_capacity([arc(From, To, _, Capacity, _)| Arcs], Side, Total0, Total) :-
+		(	member(From, Side), \+ member(To, Side) ->
+			Total1 is Total0 + Capacity
+		;	Total1 = Total0
+		),
+		oracle_cut_capacity(Arcs, Side, Total1, Total).
 
 	subset([], []).
 	subset([Head| Tail], [Head| Rest]) :-
