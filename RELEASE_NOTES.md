@@ -509,6 +509,10 @@ Examples
 * ADDED: New `full_adder_diagnosis` example illustrating the new `atms`
 library.
 
+* ADDED: New `flow_networks_modeling` example illustrating how to model
+project selection, image segmentation, and baseball elimination as network
+flow problems using the `flow_networks` library.
+
 Tests
 -----
 
