@@ -23,9 +23,9 @@
 	implements(graph_protocol)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-04-17,
+		date is 2026-11-16,
 		comment is 'Common graph predicates shared by all graph objects. Uses self-dispatch to call object-specific predicates such as ``neighbors/3``, ``vertices/2``, and ``edges/2``.'
 	]).
 
@@ -73,20 +73,26 @@
 
 	new(Vertices, Edges, Graph) :-
 		::new(Empty),
-		add_vertices(Empty, Vertices, Graph0),
+		add_vertices_(Vertices, Empty, Graph0),
 		::add_edges(Graph0, Edges, Graph).
 
 	% === Vertex list operations ===
 
-	add_vertices(NewGraph, [], NewGraph).
-	add_vertices(Graph, [Vertex| Vertices], NewGraph) :-
-		::add_vertex(Graph, Vertex, NewGraph0),
-		add_vertices(NewGraph0, Vertices, NewGraph).
+	add_vertices(Graph, Vertices, NewGraph) :-
+		add_vertices_(Vertices, Graph, NewGraph).
 
-	delete_vertices(NewGraph, [], NewGraph).
-	delete_vertices(Graph, [Vertex| Vertices], NewGraph) :-
+	add_vertices_([], NewGraph, NewGraph).
+	add_vertices_([Vertex| Vertices], Graph, NewGraph) :-
+		::add_vertex(Graph, Vertex, NewGraph0),
+		add_vertices_(Vertices, NewGraph0, NewGraph).
+
+	delete_vertices(Graph, Vertices, NewGraph) :-
+		delete_vertices_(Vertices, Graph, NewGraph).
+
+	delete_vertices_([], NewGraph, NewGraph).
+	delete_vertices_([Vertex| Vertices], Graph, NewGraph) :-
 		::delete_vertex(Graph, Vertex, NewGraph0),
-		delete_vertices(NewGraph0, Vertices, NewGraph).
+		delete_vertices_(Vertices, NewGraph0, NewGraph).
 
 	% === Graph metrics ===
 
@@ -229,24 +235,24 @@
 	all_pairs_min_paths_sources([], _, []).
 	all_pairs_min_paths_sources([Source| Sources], Graph, Pairs) :-
 		::min_distances(Source, Graph, Distances),
-		tag_distances(Source, Distances, SourcePairs),
+		tag_distances(Distances, Source, SourcePairs),
 		append(SourcePairs, RestPairs, Pairs),
 		all_pairs_min_paths_sources(Sources, Graph, RestPairs).
 
-	tag_distances(_, [], []).
-	tag_distances(Source, [Target-Cost| Distances], [((Source-Target)-Cost)| Pairs]) :-
-		tag_distances(Source, Distances, Pairs).
+	tag_distances([], _, []).
+	tag_distances([Target-Cost| Distances], Source, [((Source-Target)-Cost)| Pairs]) :-
+		tag_distances(Distances, Source, Pairs).
 
 	all_pairs_min_predecessors_sources([], _, []).
 	all_pairs_min_predecessors_sources([Source| Sources], Graph, Pairs) :-
 		::min_predecessors(Source, Graph, Predecessors),
-		tag_predecessors(Source, Predecessors, SourcePairs),
+		tag_predecessors(Predecessors, Source, SourcePairs),
 		append(SourcePairs, RestPairs, Pairs),
 		all_pairs_min_predecessors_sources(Sources, Graph, RestPairs).
 
-	tag_predecessors(_, [], []).
-	tag_predecessors(Source, [Target-Predecessor| Predecessors], [((Source-Target)-Predecessor)| Pairs]) :-
-		tag_predecessors(Source, Predecessors, Pairs).
+	tag_predecessors([], _, []).
+	tag_predecessors([Target-Predecessor| Predecessors], Source, [((Source-Target)-Predecessor)| Pairs]) :-
+		tag_predecessors(Predecessors, Source, Pairs).
 
 	% === Completeness ===
 

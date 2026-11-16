@@ -23,9 +23,9 @@
 	imports((weighted_graph_common(_Dictionary_), directed_graph_common))).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-02-20,
+		date is 2026-11-16,
 		comment is 'Weighted directed graph predicates using a dictionary representation. Edge weights use a pair representation (Vertex-Weight in neighbor lists, (Vertex1-Vertex2)-Weight for edge lists). The parametric object parameter is the dictionary to use for the graph representation.',
 		parnames is ['Dictionary']
 	]).
@@ -217,7 +217,8 @@
 		incr_list(Neighbors, Vertices, Counts0, Counts1),
 		count_edges(Pairs, Vertices, Counts1, Counts2).
 
-	incr_list([], _, Counts, Counts).
+	incr_list([], _, Counts, Counts) :-
+		!.
 	incr_list([Vertex1| Neighbors], [Vertex2| Vertices], [M| Counts0], [N| Counts1]) :-
 		Vertex1 == Vertex2,
 		!,
@@ -239,7 +240,8 @@
 		decr_list(Neighbors, Vertices, Counts1, Counts2, Zeros, NewZeros),
 		top_sort_loop(NewZeros, Sorted, Sorted0, UGraph, Vertices, Counts2).
 
-	decr_list([], _, Counts, Counts, Zeros, Zeros).
+	decr_list([], _, Counts, Counts, Zeros, Zeros) :-
+		!.
 	decr_list([Vertex1| Neighbors], [Vertex2| Vertices], [1| Counts1], [0| Counts2], Zi, Zo) :-
 		Vertex1 == Vertex2,
 		!,

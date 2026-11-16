@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-25,
+		date is 2026-11-16,
 		comment is 'Unit tests for the "unweighted_directed_graph" library predicates.',
 		parnames is ['DictionaryObject']
 	]).
@@ -61,34 +61,35 @@
 		is_sparse/1
 	]).
 
+	cover(graph_common).
 	cover(unweighted_directed_graph(_DictionaryObject_)).
 	cover(unweighted_graph_common(_DictionaryObject_)).
 
 	% new/1 tests
 
-	test(udg_new_1_01, true) :-
+	test(udg_new_1_01, deterministic) :-
 		new(Graph),
 		empty(Graph).
 
 	% new/2 tests
 
-	test(udg_new_2_01, true(nonvar(Graph))) :-
+	test(udg_new_2_01, deterministic(nonvar(Graph))) :-
 		new([1-2,1-3], Graph).
 
 	% new/3 tests
 
-	test(udg_new_3_01, true(nonvar(Graph))) :-
+	test(udg_new_3_01, deterministic(nonvar(Graph))) :-
 		new([1,2,4], [1-2,1-3], Graph).
 
-	test(udg_new_3_02, true(nonvar(Graph))) :-
+	test(udg_new_3_02, deterministic(nonvar(Graph))) :-
 		new([], [1-2,1-3], Graph).
 
-	test(udg_new_3_03, true(nonvar(Graph))) :-
+	test(udg_new_3_03, deterministic(nonvar(Graph))) :-
 		new([1,2,3], [], Graph).
 
 	% empty/1 tests
 
-	test(udg_empty_1_01, true) :-
+	test(udg_empty_1_01, deterministic) :-
 		new(Graph),
 		empty(Graph).
 
@@ -98,43 +99,43 @@
 
 	% vertices/2 tests
 
-	test(udg_vertices_2_01, true(Vertices == [])) :-
+	test(udg_vertices_2_01, deterministic(Vertices == [])) :-
 		new(Graph),
 		vertices(Graph, Vertices).
 
-	test(udg_vertices_2_02, true(Vertices == [1,2,3])) :-
+	test(udg_vertices_2_02, deterministic(Vertices == [1,2,3])) :-
 		new([1,2,3], [1-2,1-3], Graph),
 		vertices(Graph, Vertices).
 
-	test(udg_vertices_2_03, true(Vertices == [1,2,3])) :-
+	test(udg_vertices_2_03, deterministic(Vertices == [1,2,3])) :-
 		new([1-2,1-3], Graph),
 		vertices(Graph, Vertices).
 
-	test(udg_vertices_2_04, true(Vertices == [1,2,3])) :-
+	test(udg_vertices_2_04, deterministic(Vertices == [1,2,3])) :-
 		new([1,2,3], [], Graph),
 		vertices(Graph, Vertices).
 
 	% edges/2 tests
 
-	test(udg_edges_2_01, true(Edges == [])) :-
+	test(udg_edges_2_01, deterministic(Edges == [])) :-
 		new(Graph),
 		edges(Graph, Edges).
 
-	test(udg_edges_2_02, true(Edges == [1-2,1-3])) :-
+	test(udg_edges_2_02, deterministic(Edges == [1-2,1-3])) :-
 		new([1,2,3], [1-2,1-3], Graph),
 		edges(Graph, Edges).
 
-	test(udg_edges_2_03, true(Edges == [1-2,1-3])) :-
+	test(udg_edges_2_03, deterministic(Edges == [1-2,1-3])) :-
 		new([1-2,1-3], Graph),
 		edges(Graph, Edges).
 
-	test(udg_edges_2_04, true(Edges == [])) :-
+	test(udg_edges_2_04, deterministic(Edges == [])) :-
 		new([1,2,3], [], Graph),
 		edges(Graph, Edges).
 
 	% edge/3 tests
 
-	test(udg_edge_3_01, true) :-
+	test(udg_edge_3_01, deterministic) :-
 		new([1-2,1-3], Graph),
 		edge(1, 2, Graph).
 
@@ -144,41 +145,41 @@
 
 	% add_vertex/3 tests
 
-	test(udg_add_vertex_3_01, true(Vertices == [1,2,3,4])) :-
+	test(udg_add_vertex_3_01, deterministic(Vertices == [1,2,3,4])) :-
 		new([1,2,3], [], Graph),
 		add_vertex(Graph, 4, NewGraph),
 		vertices(NewGraph, Vertices).
 
-	test(udg_add_vertex_3_02, true(Vertices == [1,2,3])) :-
+	test(udg_add_vertex_3_02, deterministic(Vertices == [1,2,3])) :-
 		new([1,2,3], [], Graph),
 		add_vertex(Graph, 2, NewGraph),
 		vertices(NewGraph, Vertices).
 
 	% add_vertices/3 tests
 
-	test(udg_add_vertices_3_01, true(Graph == NewGraph)) :-
+	test(udg_add_vertices_3_01, deterministic(Graph == NewGraph)) :-
 		new([1,2,3,5], [1-3,1-5], Graph),
 		add_vertices(Graph, [], NewGraph).
 
-	test(udg_add_vertices_3_02, true(Vertices == [0,1,2,3,5,9])) :-
+	test(udg_add_vertices_3_02, deterministic(Vertices == [0,1,2,3,5,9])) :-
 		new([1,2,3,5], [1-3,1-5], Graph),
 		add_vertices(Graph, [0,1,2,9], NewGraph),
 		vertices(NewGraph, Vertices).
 
 	% delete_vertex/3 tests
 
-	test(udg_delete_vertex_3_01, true(Vertices == [1,3])) :-
+	test(udg_delete_vertex_3_01, deterministic(Vertices == [1,3])) :-
 		new([1,2,3], [1-2,2-3], Graph),
 		delete_vertex(Graph, 2, NewGraph),
 		vertices(NewGraph, Vertices).
 
 	% delete_vertices/3 tests
 
-	test(udg_delete_vertices_3_01, true(Graph == NewGraph)) :-
+	test(udg_delete_vertices_3_01, deterministic(Graph == NewGraph)) :-
 		new([1,2,3,4,5,6,7,8], [1-3,1-5,2-4,4-5,7-2,7-6], Graph),
 		delete_vertices(Graph, [], NewGraph).
 
-	test(udg_delete_vertices_3_02, true((Vertices == [3,4,5,6,7,8], Edges == [4-5,7-6]))) :-
+	test(udg_delete_vertices_3_02, deterministic((Vertices == [3,4,5,6,7,8], Edges == [4-5,7-6]))) :-
 		new([1,2,3,4,5,6,7,8], [1-3,1-5,2-4,4-5,7-2,7-6], Graph),
 		delete_vertices(Graph, [2,1], NewGraph),
 		vertices(NewGraph, Vertices),
@@ -186,36 +187,36 @@
 
 	% add_edge/4 tests
 
-	test(udg_add_edge_4_01, true(Edges == [1-2,1-3,2-3])) :-
+	test(udg_add_edge_4_01, deterministic(Edges == [1-2,1-3,2-3])) :-
 		new([1-2,1-3], Graph),
 		add_edge(Graph, 2, 3, NewGraph),
 		edges(NewGraph, Edges).
 
 	% add_edges/3 tests
 
-	test(udg_add_edges_3_01, true(Graph == NewGraph)) :-
+	test(udg_add_edges_3_01, deterministic(Graph == NewGraph)) :-
 		new([1,2,3,5], [1-3,1-5], Graph),
 		add_edges(Graph, [], NewGraph).
 
-	test(udg_add_edges_3_02, true(Edges == [1-3,1-5,2-3,5-9])) :-
+	test(udg_add_edges_3_02, deterministic(Edges == [1-3,1-5,2-3,5-9])) :-
 		new([1,2,3,5], [1-3,1-5], Graph),
 		add_edges(Graph, [2-3,5-9], NewGraph),
 		edges(NewGraph, Edges).
 
 	% delete_edge/4 tests
 
-	test(udg_delete_edge_4_01, true(Edges == [1-3])) :-
+	test(udg_delete_edge_4_01, deterministic(Edges == [1-3])) :-
 		new([1-2,1-3], Graph),
 		delete_edge(Graph, 1, 2, NewGraph),
 		edges(NewGraph, Edges).
 
 	% delete_edges/3 tests
 
-	test(udg_delete_edges_3_01, true(Graph == NewGraph)) :-
+	test(udg_delete_edges_3_01, deterministic(Graph == NewGraph)) :-
 		new([1,2,3,4,5,6,7,8], [1-3,1-5,2-4,4-5], Graph),
 		delete_edges(Graph, [], NewGraph).
 
-	test(udg_delete_edges_3_02, true((Vertices == [1,2,3,4,5,6,7,8], Edges == [1-5,2-4]))) :-
+	test(udg_delete_edges_3_02, deterministic((Vertices == [1,2,3,4,5,6,7,8], Edges == [1-5,2-4]))) :-
 		new([1,2,3,4,5,6,7,8], [1-3,1-5,2-4,4-5], Graph),
 		delete_edges(Graph, [1-6,2-3,3-2,5-7,3-2,4-5,1-3], NewGraph),
 		vertices(NewGraph, Vertices),
@@ -223,7 +224,7 @@
 
 	% neighbors/3 tests
 
-	test(udg_neighbors_3_01, true(Neighbors == [1,2,5,7])) :-
+	test(udg_neighbors_3_01, deterministic(Neighbors == [1,2,5,7])) :-
 		new([1,2,3,4,5], [1-3,1-5,2-4,4-1,4-2,4-7,4-5], Graph),
 		neighbors(4, Graph, Neighbors).
 
@@ -233,15 +234,15 @@
 
 	% reachable/3 tests
 
-	test(udg_reachable_3_01, true(Vertices == [1,3,5])) :-
+	test(udg_reachable_3_01, deterministic(Vertices == [1,3,5])) :-
 		new([1,2,3,4,5], [1-3,1-5,2-4,4-5], Graph),
 		reachable(1, Graph, Vertices).
 
-	test(udg_reachable_3_02, true(Vertices == [2,4,5])) :-
+	test(udg_reachable_3_02, deterministic(Vertices == [2,4,5])) :-
 		new([1,2,3,4,5], [1-3,1-5,2-4,4-5], Graph),
 		reachable(2, Graph, Vertices).
 
-	test(udg_reachable_3_03, true(Vertices == [1,3,5,6])) :-
+	test(udg_reachable_3_03, deterministic(Vertices == [1,3,5,6])) :-
 		new([1,2,3,4,5], [1-3,1-5,2-4,4-5,5-6], Graph),
 		reachable(1, Graph, Vertices).
 
@@ -251,7 +252,7 @@
 
 	% breadth_first_order/3 tests
 
-	test(udg_breadth_first_order_3_01, true(Vertices == [1,2,3,4,5])) :-
+	test(udg_breadth_first_order_3_01, deterministic(Vertices == [1,2,3,4,5])) :-
 		new([1-2,1-3,2-4,3-5], Graph),
 		breadth_first_order(1, Graph, Vertices).
 
@@ -261,7 +262,7 @@
 
 	% depth_first_order/3 tests
 
-	test(udg_depth_first_order_3_01, true(Vertices == [1,2,4,3,5])) :-
+	test(udg_depth_first_order_3_01, deterministic(Vertices == [1,2,4,3,5])) :-
 		new([1-2,1-3,2-4,3-5], Graph),
 		depth_first_order(1, Graph, Vertices).
 
@@ -271,7 +272,7 @@
 
 	% complement/2 tests
 
-	test(udg_complement_2_01, true((Vertices == [1,2,3,4], Edges == [1-3,2-1,2-3,2-4,3-1,3-2,3-4,4-1,4-2,4-3]))) :-
+	test(udg_complement_2_01, deterministic((Vertices == [1,2,3,4], Edges == [1-3,2-1,2-3,2-4,3-1,3-2,3-4,4-1,4-2,4-3]))) :-
 		new([3], [1-2,1-4], Graph),
 		complement(Graph, NewGraph),
 		vertices(NewGraph, Vertices),
@@ -279,7 +280,7 @@
 
 	% compose/3 tests
 
-	test(udg_compose_3_01, true((Vertices == [1,2,3,4], Edges == [1-4,2-1,2-2,2-4]))) :-
+	test(udg_compose_3_01, deterministic((Vertices == [1,2,3,4], Edges == [1-4,2-1,2-2,2-4]))) :-
 		new([1-2,2-3], Graph1),
 		new([2-4,3-1,3-2,3-4], Graph2),
 		compose(Graph1, Graph2, NewGraph),
@@ -288,14 +289,14 @@
 
 	% union/3 tests
 
-	test(udg_union_3_01, true((Vertices == [1,2,3,4,5], Edges == [1-2,1-3,1-4,4-5]))) :-
+	test(udg_union_3_01, deterministic((Vertices == [1,2,3,4,5], Edges == [1-2,1-3,1-4,4-5]))) :-
 		new([1,2,3], [1-2,1-3], Graph1),
 		new([1,4,5], [1-4,4-5], Graph2),
 		union(Graph1, Graph2, NewGraph),
 		vertices(NewGraph, Vertices),
 		edges(NewGraph, Edges).
 
-	test(udg_union_3_02, true((Vertices == [1,2,3], Edges == [1-2,1-3]))) :-
+	test(udg_union_3_02, deterministic((Vertices == [1,2,3], Edges == [1-2,1-3]))) :-
 		new([1,2,3], [1-2,1-3], Graph1),
 		new(Graph2),
 		union(Graph1, Graph2, NewGraph),
@@ -304,14 +305,14 @@
 
 	% transpose/2 tests
 
-	test(udg_transpose_2_01, true(Edges == [2-1,3-1])) :-
+	test(udg_transpose_2_01, deterministic(Edges == [2-1,3-1])) :-
 		new([1,2,3], [1-2,1-3], Graph),
 		transpose(Graph, NewGraph),
 		edges(NewGraph, Edges).
 
 	% transitive_closure/2 tests
 
-	test(udg_transitive_closure_2_01, true((Vertices == [1,2,3,4,5,6], Edges == [1-2,1-3,1-4,1-5,1-6,2-4,2-5,2-6,4-6]))) :-
+	test(udg_transitive_closure_2_01, deterministic((Vertices == [1,2,3,4,5,6], Edges == [1-2,1-3,1-4,1-5,1-6,2-4,2-5,2-6,4-6]))) :-
 		new([1-2,1-3,2-4,2-5,4-6], Graph),
 		transitive_closure(Graph, Closure),
 		vertices(Closure, Vertices),
@@ -319,72 +320,72 @@
 
 	% symmetric_closure/2 tests
 
-	test(udg_symmetric_closure_2_01, true(Edges == [1-2,1-3,2-1,3-1])) :-
+	test(udg_symmetric_closure_2_01, deterministic(Edges == [1-2,1-3,2-1,3-1])) :-
 		new([1,2,3], [1-2,1-3], Graph),
 		symmetric_closure(Graph, Closure),
 		edges(Closure, Edges).
 
 	% topological_sort/2 tests
 
-	test(udg_topological_sort_2_01, true(Vertices == [1,2,3])) :-
+	test(udg_topological_sort_2_01, deterministic(Vertices == [1,2,3])) :-
 		new([1,2,3], [1-2,2-3], Graph),
 		topological_sort(Graph, Vertices).
 
 	% topological_sort/3 tests
 
-	test(udg_topological_sort_3_01, true(Vertices == [1,2,3,4,5])) :-
+	test(udg_topological_sort_3_01, deterministic(Vertices == [1,2,3,4,5])) :-
 		new([1,2,3], [1-2,2-3], Graph),
 		topological_sort(Graph, [4,5], Vertices).
 
 	% all_pairs_min_paths/2 tests
 
-	test(udg_all_pairs_min_paths_2_01, true(Pairs == [((1-1)-0),((1-2)-1),((1-3)-2),((2-2)-0),((2-3)-1),((3-3)-0)])) :-
+	test(udg_all_pairs_min_paths_2_01, deterministic(Pairs == [((1-1)-0),((1-2)-1),((1-3)-2),((2-2)-0),((2-3)-1),((3-3)-0)])) :-
 		new([1-2,2-3], Graph),
 		all_pairs_min_paths(Graph, Pairs).
 
-	test(udg_all_pairs_min_paths_2_02, true(Pairs == [((1-1)-0),((2-2)-0)])) :-
+	test(udg_all_pairs_min_paths_2_02, deterministic(Pairs == [((1-1)-0),((2-2)-0)])) :-
 		new([1,2], [], Graph),
 		all_pairs_min_paths(Graph, Pairs).
 
 	% all_pairs_min_predecessors/2 tests
 
-	test(udg_all_pairs_min_predecessors_2_01, true(Pairs == [((1-1)-none),((1-2)-1),((1-3)-2),((2-2)-none),((2-3)-2),((3-3)-none)])) :-
+	test(udg_all_pairs_min_predecessors_2_01, deterministic(Pairs == [((1-1)-none),((1-2)-1),((1-3)-2),((2-2)-none),((2-3)-2),((3-3)-none)])) :-
 		new([1-2,2-3], Graph),
 		all_pairs_min_predecessors(Graph, Pairs).
 
-	test(udg_all_pairs_min_predecessors_2_02, true(Pairs == [((1-1)-none),((2-2)-none)])) :-
+	test(udg_all_pairs_min_predecessors_2_02, deterministic(Pairs == [((1-1)-none),((2-2)-none)])) :-
 		new([1,2], [], Graph),
 		all_pairs_min_predecessors(Graph, Pairs).
 
 	% leaves/2 tests
 
-	test(udg_leaves_2_01, true(Leaves == [3,5])) :-
+	test(udg_leaves_2_01, deterministic(Leaves == [3,5])) :-
 		new([1,2,3,4,5], [1-2,2-3,4-5], Graph),
 		leaves(Graph, Leaves).
 
 	% number_of_vertices/2 tests
 
-	test(udg_number_of_vertices_2_01, true(N == 0)) :-
+	test(udg_number_of_vertices_2_01, deterministic(N == 0)) :-
 		new(Graph),
 		number_of_vertices(Graph, N).
 
-	test(udg_number_of_vertices_2_02, true(N == 3)) :-
+	test(udg_number_of_vertices_2_02, deterministic(N == 3)) :-
 		new([1,2,3], [1-2], Graph),
 		number_of_vertices(Graph, N).
 
 	% number_of_edges/2 tests
 
-	test(udg_number_of_edges_2_01, true(N == 0)) :-
+	test(udg_number_of_edges_2_01, deterministic(N == 0)) :-
 		new(Graph),
 		number_of_edges(Graph, N).
 
-	test(udg_number_of_edges_2_02, true(N == 2)) :-
+	test(udg_number_of_edges_2_02, deterministic(N == 2)) :-
 		new([1,2,3], [1-2,1-3], Graph),
 		number_of_edges(Graph, N).
 
 	% path/3 tests
 
-	test(udg_path_3_01, true(Path == [1,2,3])) :-
+	test(udg_path_3_01, exists(Path == [1,2,3])) :-
 		new([1-2,2-3], Graph),
 		path(1, Graph, Path).
 
@@ -399,7 +400,7 @@
 
 	% has_path/3 tests
 
-	test(udg_has_path_3_01, true) :-
+	test(udg_has_path_3_01, deterministic) :-
 		new([1-2,2-3], Graph),
 		has_path(1, 3, Graph).
 
@@ -407,17 +408,17 @@
 		new([1-2,2-3], Graph),
 		has_path(3, 1, Graph).
 
-	test(udg_has_path_3_03, true) :-
+	test(udg_has_path_3_03, deterministic) :-
 		new([1-2,2-3], Graph),
 		has_path(1, 1, Graph).
 
 	% min_path/5 tests
 
-	test(udg_min_path_5_01, true((Path == [1,2,3], Cost == 2))) :-
+	test(udg_min_path_5_01, deterministic((Path == [1,2,3], Cost == 2))) :-
 		new([1-2,2-3,1-4,4-5,5-3], Graph),
 		min_path(1, 3, Graph, Path, Cost).
 
-	test(udg_min_path_5_02, true((Path == [1], Cost == 0))) :-
+	test(udg_min_path_5_02, deterministic((Path == [1], Cost == 0))) :-
 		new([1-2,2-3], Graph),
 		min_path(1, 1, Graph, Path, Cost).
 
@@ -427,23 +428,23 @@
 
 	% min_distances/3 tests
 
-	test(udg_min_distances_3_01, true(Distances == [1-0,2-1,3-2])) :-
+	test(udg_min_distances_3_01, deterministic(Distances == [1-0,2-1,3-2])) :-
 		new([1-2,2-3], Graph),
 		min_distances(1, Graph, Distances).
 
 	% min_predecessors/3 tests
 
-	test(udg_min_predecessors_3_01, true(Predecessors == [1-none,2-1,3-2])) :-
+	test(udg_min_predecessors_3_01, deterministic(Predecessors == [1-none,2-1,3-2])) :-
 		new([1-2,2-3], Graph),
 		min_predecessors(1, Graph, Predecessors).
 
 	% max_path/5 tests
 
-	test(udg_max_path_5_01, true((Path == [1,4,5,3], Cost == 3))) :-
+	test(udg_max_path_5_01, deterministic((Path == [1,4,5,3], Cost == 3))) :-
 		new([1-2,2-3,1-4,4-5,5-3], Graph),
 		max_path(1, 3, Graph, Path, Cost).
 
-	test(udg_max_path_5_02, true((Path == [1], Cost == 0))) :-
+	test(udg_max_path_5_02, deterministic((Path == [1], Cost == 0))) :-
 		new([1-2,2-3], Graph),
 		max_path(1, 1, Graph, Path, Cost).
 
@@ -453,27 +454,27 @@
 
 	% in_degree/3 tests
 
-	test(udg_in_degree_3_01, true(D == 2)) :-
+	test(udg_in_degree_3_01, deterministic(D == 2)) :-
 		new([1-3,2-3,3-4], Graph),
 		in_degree(3, Graph, D).
 
-	test(udg_in_degree_3_02, true(D == 0)) :-
+	test(udg_in_degree_3_02, deterministic(D == 0)) :-
 		new([1-2,1-3], Graph),
 		in_degree(1, Graph, D).
 
 	% out_degree/3 tests
 
-	test(udg_out_degree_3_01, true(D == 2)) :-
+	test(udg_out_degree_3_01, deterministic(D == 2)) :-
 		new([1-2,1-3], Graph),
 		out_degree(1, Graph, D).
 
-	test(udg_out_degree_3_02, true(D == 0)) :-
+	test(udg_out_degree_3_02, deterministic(D == 0)) :-
 		new([1-2,1-3], Graph),
 		out_degree(3, Graph, D).
 
 	% is_acyclic/1 tests
 
-	test(udg_is_acyclic_1_01, true) :-
+	test(udg_is_acyclic_1_01, deterministic) :-
 		new([1-2,2-3], Graph),
 		is_acyclic(Graph).
 
@@ -483,7 +484,7 @@
 
 	% has_cycle/1 tests
 
-	test(udg_has_cycle_1_01, true) :-
+	test(udg_has_cycle_1_01, deterministic) :-
 		new([1-2,2-3,3-1], Graph),
 		has_cycle(Graph).
 
@@ -503,15 +504,15 @@
 
 	% strongly_connected_components/2 tests
 
-	test(udg_strongly_connected_components_2_01, true(Components == [[1],[2],[3]])) :-
+	test(udg_strongly_connected_components_2_01, deterministic(Components == [[1],[2],[3]])) :-
 		new([1-2,2-3], Graph),
 		strongly_connected_components(Graph, Components).
 
-	test(udg_strongly_connected_components_2_02, true(Components == [[1,2,3]])) :-
+	test(udg_strongly_connected_components_2_02, deterministic(Components == [[1,2,3]])) :-
 		new([1-2,2-3,3-1], Graph),
 		strongly_connected_components(Graph, Components).
 
-	test(udg_strongly_connected_components_2_03, true) :-
+	test(udg_strongly_connected_components_2_03, deterministic) :-
 		new([1-2,2-3,3-1,1-4], Graph),
 		strongly_connected_components(Graph, Components),
 		list::msort(Components, Sorted),
@@ -529,19 +530,19 @@
 
 	% transitive_reduction/2 tests
 
-	test(udg_transitive_reduction_2_01, true(Edges == [1-2,2-3])) :-
+	test(udg_transitive_reduction_2_01, deterministic(Edges == [1-2,2-3])) :-
 		new([1-2,2-3,1-3], Graph),
 		transitive_reduction(Graph, Reduced),
 		edges(Reduced, Edges).
 
-	test(udg_transitive_reduction_2_02, true(Edges == [1-2,2-3])) :-
+	test(udg_transitive_reduction_2_02, deterministic(Edges == [1-2,2-3])) :-
 		new([1-2,2-3], Graph),
 		transitive_reduction(Graph, Reduced),
 		edges(Reduced, Edges).
 
 	% is_complete/1 tests
 
-	test(udg_is_complete_1_01, true) :-
+	test(udg_is_complete_1_01, deterministic) :-
 		new([1-2, 2-1, 1-3, 3-1, 2-3, 3-2], Graph),
 		is_complete(Graph).
 
@@ -549,13 +550,13 @@
 		new([1-2, 2-3], Graph),
 		is_complete(Graph).
 
-	test(udg_is_complete_1_03, true) :-
+	test(udg_is_complete_1_03, deterministic) :-
 		new([1-2, 2-1], Graph),
 		is_complete(Graph).
 
 	% is_bipartite/1 tests
 
-	test(udg_is_bipartite_1_01, true) :-
+	test(udg_is_bipartite_1_01, deterministic) :-
 		new([1-2, 2-1, 1-4, 4-1, 3-2, 2-3, 3-4, 4-3], Graph),
 		is_bipartite(Graph).
 
@@ -563,7 +564,7 @@
 		new([1-2, 2-3, 3-1], Graph),
 		is_bipartite(Graph).
 
-	test(udg_is_bipartite_1_03, true) :-
+	test(udg_is_bipartite_1_03, deterministic) :-
 		new(Graph),
 		is_bipartite(Graph).
 
@@ -573,7 +574,7 @@
 
 	% is_sparse/1 tests
 
-	test(udg_is_sparse_1_01, true) :-
+	test(udg_is_sparse_1_01, deterministic) :-
 		% 4 vertices, 3 edges =< 4*log2(4) = 8
 		new([1-2, 2-3, 3-4], Graph),
 		is_sparse(Graph).
@@ -583,7 +584,7 @@
 		new([1-2, 1-3, 1-4, 2-1, 2-3, 2-4, 3-1, 3-2, 3-4, 4-1, 4-2, 4-3], Graph),
 		is_sparse(Graph).
 
-	test(udg_is_sparse_1_03, true) :-
+	test(udg_is_sparse_1_03, deterministic) :-
 		new(Graph),
 		is_sparse(Graph).
 

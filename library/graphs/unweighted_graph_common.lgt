@@ -99,15 +99,21 @@
 
 	% === Edge list operations (add_edge/4, delete_edge/4 are object-specific) ===
 
-	add_edges(Graph, [], Graph).
-	add_edges(Graph, [Vertex1-Vertex2| Edges], NewGraph) :-
-		::add_edge(Graph, Vertex1, Vertex2, NewGraph0),
-		add_edges(NewGraph0, Edges, NewGraph).
+	add_edges(Graph, Edges, NewGraph) :-
+		add_edges_(Edges, Graph, NewGraph).
 
-	delete_edges(Graph, [], Graph).
-	delete_edges(Graph, [Vertex1-Vertex2| Edges], NewGraph) :-
+	add_edges_([], Graph, Graph).
+	add_edges_([Vertex1-Vertex2| Edges], Graph, NewGraph) :-
+		::add_edge(Graph, Vertex1, Vertex2, NewGraph0),
+		add_edges_(Edges, NewGraph0, NewGraph).
+
+	delete_edges(Graph, Edges, NewGraph) :-
+		delete_edges_(Edges, Graph, NewGraph).
+
+	delete_edges_([], Graph, Graph).
+	delete_edges_([Vertex1-Vertex2| Edges], Graph, NewGraph) :-
 		::delete_edge(Graph, Vertex1, Vertex2, NewGraph0),
-		delete_edges(NewGraph0, Edges, NewGraph).
+		delete_edges_(Edges, NewGraph0, NewGraph).
 
 	% === Complement ===
 

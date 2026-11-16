@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-25,
+		date is 2026-11-16,
 		comment is 'Unit tests for the "unweighted_undirected_graph" library predicates.',
 		parnames is ['DictionaryObject']
 	]).
@@ -62,29 +62,30 @@
 		maximum_cliques/2
 	]).
 
+	cover(graph_common).
 	cover(unweighted_undirected_graph(_DictionaryObject_)).
 	cover(unweighted_graph_common(_DictionaryObject_)).
 	cover(undirected_graph_common).
 
 	% new/1 tests
 
-	test(uug_new_1_01, true) :-
+	test(uug_new_1_01, deterministic) :-
 		new(Graph),
 		empty(Graph).
 
 	% new/2 tests
 
-	test(uug_new_2_01, true(nonvar(Graph))) :-
+	test(uug_new_2_01, deterministic(nonvar(Graph))) :-
 		new([1-2,1-3], Graph).
 
 	% new/3 tests
 
-	test(uug_new_3_01, true(nonvar(Graph))) :-
+	test(uug_new_3_01, deterministic(nonvar(Graph))) :-
 		new([1,2,3], [1-2], Graph).
 
 	% empty/1 tests
 
-	test(uug_empty_1_01, true) :-
+	test(uug_empty_1_01, deterministic) :-
 		new(Graph),
 		empty(Graph).
 
@@ -94,31 +95,31 @@
 
 	% vertices/2 tests
 
-	test(uug_vertices_2_01, true(Vertices == [])) :-
+	test(uug_vertices_2_01, deterministic(Vertices == [])) :-
 		new(Graph),
 		vertices(Graph, Vertices).
 
-	test(uug_vertices_2_02, true(Vertices == [1,2,3])) :-
+	test(uug_vertices_2_02, deterministic(Vertices == [1,2,3])) :-
 		new([1,2,3], [1-2], Graph),
 		vertices(Graph, Vertices).
 
 	% edges/2 tests (each undirected edge returned once)
 
-	test(uug_edges_2_01, true(Edges == [1-2,1-3])) :-
+	test(uug_edges_2_01, deterministic(Edges == [1-2,1-3])) :-
 		new([1,2,3], [1-2,1-3], Graph),
 		edges(Graph, Edges).
 
-	test(uug_edges_2_02, true(Edges == [])) :-
+	test(uug_edges_2_02, deterministic(Edges == [])) :-
 		new([1,2,3], [], Graph),
 		edges(Graph, Edges).
 
 	% edge/3 tests (symmetric)
 
-	test(uug_edge_3_01, true) :-
+	test(uug_edge_3_01, deterministic) :-
 		new([1-2], Graph),
 		edge(1, 2, Graph).
 
-	test(uug_edge_3_02, true) :-
+	test(uug_edge_3_02, deterministic) :-
 		new([1-2], Graph),
 		edge(2, 1, Graph).
 
@@ -128,36 +129,36 @@
 
 	% add_edge/4 tests (both directions)
 
-	test(uug_add_edge_4_01, true(Edges == [1-2,1-3])) :-
+	test(uug_add_edge_4_01, deterministic(Edges == [1-2,1-3])) :-
 		new([1-2], Graph),
 		add_edge(Graph, 1, 3, NewGraph),
 		edges(NewGraph, Edges).
 
-	test(uug_add_edge_4_02, true) :-
+	test(uug_add_edge_4_02, deterministic) :-
 		new([1-2], Graph),
 		add_edge(Graph, 1, 3, NewGraph),
 		edge(3, 1, NewGraph).
 	% add_vertex/3 tests
 
-	test(uug_add_vertex_3_01, true(Vertices == [1,2,3])) :-
+	test(uug_add_vertex_3_01, deterministic(Vertices == [1,2,3])) :-
 		new([1-2], Graph),
 		add_vertex(Graph, 3, NewGraph),
 		vertices(NewGraph, Vertices).
 
-	test(uug_add_vertex_3_02, true(Vertices == [1,2])) :-
+	test(uug_add_vertex_3_02, deterministic(Vertices == [1,2])) :-
 		new([1-2], Graph),
 		add_vertex(Graph, 1, NewGraph),
 		vertices(NewGraph, Vertices).
 	% add_vertices/3 tests
 
-	test(uug_add_vertices_3_01, true(Vertices == [1,2,3,4])) :-
+	test(uug_add_vertices_3_01, deterministic(Vertices == [1,2,3,4])) :-
 		new([1,2], [], Graph),
 		add_vertices(Graph, [3,4], NewGraph),
 		vertices(NewGraph, Vertices).
 
 	% delete_vertex/3 tests
 
-	test(uug_delete_vertex_3_01, true((Vertices == [1,3], Edges == []))) :-
+	test(uug_delete_vertex_3_01, deterministic((Vertices == [1,3], Edges == []))) :-
 		new([1,2,3], [1-2,2-3], Graph),
 		delete_vertex(Graph, 2, NewGraph),
 		vertices(NewGraph, Vertices),
@@ -165,14 +166,14 @@
 
 	% delete_vertices/3 tests
 
-	test(uug_delete_vertices_3_01, true(Vertices == [3,4])) :-
+	test(uug_delete_vertices_3_01, deterministic(Vertices == [3,4])) :-
 		new([1,2,3,4], [1-2,2-3,3-4], Graph),
 		delete_vertices(Graph, [1,2], NewGraph),
 		vertices(NewGraph, Vertices).
 
 	% delete_edge/4 tests
 
-	test(uug_delete_edge_4_01, true(Edges == [1-3])) :-
+	test(uug_delete_edge_4_01, deterministic(Edges == [1-3])) :-
 		new([1-2,1-3], Graph),
 		delete_edge(Graph, 1, 2, NewGraph),
 		edges(NewGraph, Edges).
@@ -184,26 +185,26 @@
 
 	% delete_edges/3 tests
 
-	test(uug_delete_edges_3_01, true(Edges == [1-3])) :-
+	test(uug_delete_edges_3_01, deterministic(Edges == [1-3])) :-
 		new([1-2,1-3,2-3], Graph),
 		delete_edges(Graph, [1-2,2-3], NewGraph),
 		edges(NewGraph, Edges).
 
 	% add_edges/3 tests
 
-	test(uug_add_edges_3_01, true(Edges == [1-2,1-3,2-3])) :-
+	test(uug_add_edges_3_01, deterministic(Edges == [1-2,1-3,2-3])) :-
 		new([1-2], Graph),
 		add_edges(Graph, [1-3,2-3], NewGraph),
 		edges(NewGraph, Edges).
 
-	test(uug_add_edges_3_02, true(Edges == [1-2,1-3])) :-
+	test(uug_add_edges_3_02, deterministic(Edges == [1-2,1-3])) :-
 		new([1-2], Graph),
 		add_edges(Graph, [1-3,1-2], NewGraph),
 		edges(NewGraph, Edges).
 
 	% neighbors/3 tests (exclude self)
 
-	test(uug_neighbors_3_01, true(Neighbors == [1,3])) :-
+	test(uug_neighbors_3_01, deterministic(Neighbors == [1,3])) :-
 		new([1,2,3], [1-2,2-3], Graph),
 		neighbors(2, Graph, Neighbors).
 
@@ -213,7 +214,7 @@
 
 	% reachable/3 tests
 
-	test(uug_reachable_3_01, true(Vertices == [1,2,3])) :-
+	test(uug_reachable_3_01, deterministic(Vertices == [1,2,3])) :-
 		new([1,2,3,4], [1-2,2-3], Graph),
 		reachable(1, Graph, Vertices).
 
@@ -223,7 +224,7 @@
 
 	% breadth_first_order/3 tests
 
-	test(uug_breadth_first_order_3_01, true(Vertices == [1,2,3,4,5])) :-
+	test(uug_breadth_first_order_3_01, deterministic(Vertices == [1,2,3,4,5])) :-
 		new([1-2,1-3,2-4,3-5], Graph),
 		breadth_first_order(1, Graph, Vertices).
 
@@ -233,7 +234,7 @@
 
 	% depth_first_order/3 tests
 
-	test(uug_depth_first_order_3_01, true(Vertices == [1,2,4,3,5])) :-
+	test(uug_depth_first_order_3_01, deterministic(Vertices == [1,2,4,3,5])) :-
 		new([1-2,1-3,2-4,3-5], Graph),
 		depth_first_order(1, Graph, Vertices).
 
@@ -243,54 +244,54 @@
 
 	% complement/2 tests
 
-	test(uug_complement_2_01, true(Edges == [1-3,2-3])) :-
+	test(uug_complement_2_01, deterministic(Edges == [1-3,2-3])) :-
 		new([1,2,3], [1-2], Graph),
 		complement(Graph, NewGraph),
 		edges(NewGraph, Edges).
 
 	% all_pairs_min_paths/2 tests
 
-	test(uug_all_pairs_min_paths_2_01, true(Pairs == [((1-1)-0),((1-2)-1),((1-3)-2),((2-1)-1),((2-2)-0),((2-3)-1),((3-1)-2),((3-2)-1),((3-3)-0)])) :-
+	test(uug_all_pairs_min_paths_2_01, deterministic(Pairs == [((1-1)-0),((1-2)-1),((1-3)-2),((2-1)-1),((2-2)-0),((2-3)-1),((3-1)-2),((3-2)-1),((3-3)-0)])) :-
 		new([1-2,2-3], Graph),
 		all_pairs_min_paths(Graph, Pairs).
 
-	test(uug_all_pairs_min_paths_2_02, true(Pairs == [((1-1)-0),((2-2)-0)])) :-
+	test(uug_all_pairs_min_paths_2_02, deterministic(Pairs == [((1-1)-0),((2-2)-0)])) :-
 		new([1,2], [], Graph),
 		all_pairs_min_paths(Graph, Pairs).
 
 	% all_pairs_min_predecessors/2 tests
 
-	test(uug_all_pairs_min_predecessors_2_01, true(Pairs == [((1-1)-none),((1-2)-1),((1-3)-2),((2-1)-2),((2-2)-none),((2-3)-2),((3-1)-2),((3-2)-3),((3-3)-none)])) :-
+	test(uug_all_pairs_min_predecessors_2_01, deterministic(Pairs == [((1-1)-none),((1-2)-1),((1-3)-2),((2-1)-2),((2-2)-none),((2-3)-2),((3-1)-2),((3-2)-3),((3-3)-none)])) :-
 		new([1-2,2-3], Graph),
 		all_pairs_min_predecessors(Graph, Pairs).
 
-	test(uug_all_pairs_min_predecessors_2_02, true(Pairs == [((1-1)-none),((2-2)-none)])) :-
+	test(uug_all_pairs_min_predecessors_2_02, deterministic(Pairs == [((1-1)-none),((2-2)-none)])) :-
 		new([1,2], [], Graph),
 		all_pairs_min_predecessors(Graph, Pairs).
 
 	% number_of_vertices/2 tests
 
-	test(uug_number_of_vertices_2_01, true(N == 0)) :-
+	test(uug_number_of_vertices_2_01, deterministic(N == 0)) :-
 		new(Graph),
 		number_of_vertices(Graph, N).
 
-	test(uug_number_of_vertices_2_02, true(N == 3)) :-
+	test(uug_number_of_vertices_2_02, deterministic(N == 3)) :-
 		new([1,2,3], [1-2], Graph),
 		number_of_vertices(Graph, N).
 
 	% number_of_edges/2 tests
 
-	test(uug_number_of_edges_2_01, true(N == 0)) :-
+	test(uug_number_of_edges_2_01, deterministic(N == 0)) :-
 		new(Graph),
 		number_of_edges(Graph, N).
 
-	test(uug_number_of_edges_2_02, true(N == 2)) :-
+	test(uug_number_of_edges_2_02, deterministic(N == 2)) :-
 		new([1,2,3], [1-2,1-3], Graph),
 		number_of_edges(Graph, N).
 
 	% path/3 tests
 
-	test(uug_path_3_01, true(Path == [1,2,3])) :-
+	test(uug_path_3_01, exists(Path == [1,2,3])) :-
 		new([1-2,2-3], Graph),
 		path(1, Graph, Path).
 
@@ -300,11 +301,11 @@
 
 	% has_path/3 tests
 
-	test(uug_has_path_3_01, true) :-
+	test(uug_has_path_3_01, deterministic) :-
 		new([1-2,2-3], Graph),
 		has_path(1, 3, Graph).
 
-	test(uug_has_path_3_02, true) :-
+	test(uug_has_path_3_02, deterministic) :-
 		new([1-2,2-3], Graph),
 		has_path(3, 1, Graph).
 
@@ -314,11 +315,11 @@
 
 	% min_path/5 tests
 
-	test(uug_min_path_5_01, true((Path == [1,3], Cost == 1))) :-
+	test(uug_min_path_5_01, deterministic((Path == [1,3], Cost == 1))) :-
 		new([1-2,2-3,1-3], Graph),
 		min_path(1, 3, Graph, Path, Cost).
 
-	test(uug_min_path_5_02, true((Path == [1], Cost == 0))) :-
+	test(uug_min_path_5_02, deterministic((Path == [1], Cost == 0))) :-
 		new([1-2,2-3], Graph),
 		min_path(1, 1, Graph, Path, Cost).
 
@@ -328,23 +329,23 @@
 
 	% min_distances/3 tests
 
-	test(uug_min_distances_3_01, true(Distances == [1-0,2-1,3-2])) :-
+	test(uug_min_distances_3_01, deterministic(Distances == [1-0,2-1,3-2])) :-
 		new([1-2,2-3], Graph),
 		min_distances(1, Graph, Distances).
 
 	% min_predecessors/3 tests
 
-	test(uug_min_predecessors_3_01, true(Predecessors == [1-none,2-1,3-2])) :-
+	test(uug_min_predecessors_3_01, deterministic(Predecessors == [1-none,2-1,3-2])) :-
 		new([1-2,2-3], Graph),
 		min_predecessors(1, Graph, Predecessors).
 
 	% max_path/5 tests
 
-	test(uug_max_path_5_01, true((Path == [1,2,3], Cost == 2))) :-
+	test(uug_max_path_5_01, deterministic((Path == [1,2,3], Cost == 2))) :-
 		new([1-2,2-3,1-3], Graph),
 		max_path(1, 3, Graph, Path, Cost).
 
-	test(uug_max_path_5_02, true((Path == [1], Cost == 0))) :-
+	test(uug_max_path_5_02, deterministic((Path == [1], Cost == 0))) :-
 		new([1-2], Graph),
 		max_path(1, 1, Graph, Path, Cost).
 
@@ -354,21 +355,21 @@
 
 	% degree/3 tests
 
-	test(uug_degree_3_01, true(D == 2)) :-
+	test(uug_degree_3_01, deterministic(D == 2)) :-
 		new([1-2,1-3], Graph),
 		degree(1, Graph, D).
 
-	test(uug_degree_3_02, true(D == 1)) :-
+	test(uug_degree_3_02, deterministic(D == 1)) :-
 		new([1-2,1-3], Graph),
 		degree(2, Graph, D).
 
-	test(uug_degree_3_03, true(D == 0)) :-
+	test(uug_degree_3_03, deterministic(D == 0)) :-
 		new([1,2,3], [], Graph),
 		degree(1, Graph, D).
 
 	% is_connected/1 tests
 
-	test(uug_is_connected_1_01, true) :-
+	test(uug_is_connected_1_01, deterministic) :-
 		new([1-2,2-3], Graph),
 		is_connected(Graph).
 
@@ -388,27 +389,27 @@
 
 	% articulation_points/2 tests
 
-	test(uug_articulation_points_2_01, true(Points == [2])) :-
+	test(uug_articulation_points_2_01, deterministic(Points == [2])) :-
 		new([1-2,2-3,2-4], Graph),
 		articulation_points(Graph, Points).
 
-	test(uug_articulation_points_2_02, true(Points == [])) :-
+	test(uug_articulation_points_2_02, deterministic(Points == [])) :-
 		new([1-2,2-3,3-1], Graph),
 		articulation_points(Graph, Points).
 
 	% bridges/2 tests
 
-	test(uug_bridges_2_01, true(Bridges == [1-2,2-3,2-4])) :-
+	test(uug_bridges_2_01, deterministic(Bridges == [1-2,2-3,2-4])) :-
 		new([1-2,2-3,2-4], Graph),
 		bridges(Graph, Bridges).
 
-	test(uug_bridges_2_02, true(Bridges == [])) :-
+	test(uug_bridges_2_02, deterministic(Bridges == [])) :-
 		new([1-2,2-3,3-1], Graph),
 		bridges(Graph, Bridges).
 
 	% is_complete/1 tests
 
-	test(uug_is_complete_1_01, true) :-
+	test(uug_is_complete_1_01, deterministic) :-
 		new([1-2, 1-3, 2-3], Graph),
 		is_complete(Graph).
 
@@ -416,13 +417,13 @@
 		new([1-2, 2-3], Graph),
 		is_complete(Graph).
 
-	test(uug_is_complete_1_03, true) :-
+	test(uug_is_complete_1_03, deterministic) :-
 		new([1-2], Graph),
 		is_complete(Graph).
 
 	% is_bipartite/1 tests
 
-	test(uug_is_bipartite_1_01, true) :-
+	test(uug_is_bipartite_1_01, deterministic) :-
 		new([1-2, 1-4, 3-2, 3-4], Graph),
 		is_bipartite(Graph).
 
@@ -430,17 +431,17 @@
 		new([1-2, 2-3, 1-3], Graph),
 		is_bipartite(Graph).
 
-	test(uug_is_bipartite_1_03, true) :-
+	test(uug_is_bipartite_1_03, deterministic) :-
 		new(Graph),
 		is_bipartite(Graph).
 
-	test(uug_is_bipartite_1_04, true) :-
+	test(uug_is_bipartite_1_04, deterministic) :-
 		new([1-2, 3-4], Graph),
 		is_bipartite(Graph).
 
 	% is_sparse/1 tests
 
-	test(uug_is_sparse_1_01, true) :-
+	test(uug_is_sparse_1_01, deterministic) :-
 		% 4 vertices, 3 edges =< 4*log2(4) = 8
 		new([1-2, 2-3, 3-4], Graph),
 		is_sparse(Graph).
@@ -450,13 +451,13 @@
 		new([1-2,1-3,1-4,1-5,1-6,1-7,2-3,2-4,2-5,2-6,2-7,3-4,3-5,3-6,3-7,4-5,4-6,4-7,5-6,5-7,6-7], Graph),
 		is_sparse(Graph).
 
-	test(uug_is_sparse_1_03, true) :-
+	test(uug_is_sparse_1_03, deterministic) :-
 		new(Graph),
 		is_sparse(Graph).
 
 	% is_tree/1 tests
 
-	test(uug_is_tree_1_01, true) :-
+	test(uug_is_tree_1_01, deterministic) :-
 		% path graph: 3 vertices, 2 edges, connected
 		new([1-2, 2-3], Graph),
 		is_tree(Graph).
@@ -471,7 +472,7 @@
 		new([1-2, 3-4], Graph),
 		is_tree(Graph).
 
-	test(uug_is_tree_1_04, true) :-
+	test(uug_is_tree_1_04, deterministic) :-
 		% single vertex
 		new([1], [], Graph),
 		is_tree(Graph).
@@ -483,7 +484,7 @@
 
 	% has_cycle/1 tests
 
-	test(uug_has_cycle_1_01, true) :-
+	test(uug_has_cycle_1_01, deterministic) :-
 		new([1-2, 2-3, 3-1], Graph),
 		has_cycle(Graph).
 
@@ -493,7 +494,7 @@
 
 	% cycle/2 tests
 
-	test(uug_cycle_2_01, true(Cycle == [1,2,3,1])) :-
+	test(uug_cycle_2_01, exists(Cycle == [1,2,3,1])) :-
 		new([1-2, 2-3, 3-1], Graph),
 		cycle(Graph, Cycle).
 
@@ -503,111 +504,111 @@
 
 	% graph_coloring/3 tests
 
-	test(uug_graph_coloring_3_01, true(NumberOfColors == 3)) :-
+	test(uug_graph_coloring_3_01, deterministic(NumberOfColors == 3)) :-
 		% triangle requires 3 colors
 		new([1-2, 2-3, 3-1], Graph),
 		graph_coloring(Graph, _Coloring, NumberOfColors).
 
-	test(uug_graph_coloring_3_02, true(NumberOfColors == 2)) :-
+	test(uug_graph_coloring_3_02, deterministic(NumberOfColors == 2)) :-
 		% 4-cycle is bipartite, needs 2 colors
 		new([1-2, 2-3, 3-4, 4-1], Graph),
 		graph_coloring(Graph, _Coloring, NumberOfColors).
 
-	test(uug_graph_coloring_3_03, true(NumberOfColors == 1)) :-
+	test(uug_graph_coloring_3_03, deterministic(NumberOfColors == 1)) :-
 		% isolated vertices need 1 color
 		new([1, 2, 3], [], Graph),
 		graph_coloring(Graph, _Coloring, NumberOfColors).
 
-	test(uug_graph_coloring_3_04, true(NumberOfColors == 0)) :-
+	test(uug_graph_coloring_3_04, deterministic(NumberOfColors == 0)) :-
 		% empty graph needs 0 colors
 		new(Graph),
 		graph_coloring(Graph, _Coloring, NumberOfColors).
 
-	test(uug_graph_coloring_3_05, true(NumberOfColors == 2)) :-
+	test(uug_graph_coloring_3_05, deterministic(NumberOfColors == 2)) :-
 		% path graph is bipartite
 		new([1-2, 2-3, 3-4], Graph),
 		graph_coloring(Graph, _Coloring, NumberOfColors).
 
 	% maximal_cliques/2 tests
 
-	test(uug_maximal_cliques_2_01, true(Cliques == [])) :-
+	test(uug_maximal_cliques_2_01, deterministic(Cliques == [])) :-
 		% empty graph has no cliques
 		new(Graph),
 		maximal_cliques(Graph, Cliques).
 
-	test(uug_maximal_cliques_2_02, true(Cliques == [[1],[2],[3]])) :-
+	test(uug_maximal_cliques_2_02, deterministic(Cliques == [[1],[2],[3]])) :-
 		% isolated vertices: each is a maximal clique of size 1
 		new([1,2,3], [], Graph),
 		maximal_cliques(Graph, Cliques).
 
-	test(uug_maximal_cliques_2_03, true(Cliques == [[1,2]])) :-
+	test(uug_maximal_cliques_2_03, deterministic(Cliques == [[1,2]])) :-
 		% single edge: one maximal clique
 		new([1-2], Graph),
 		maximal_cliques(Graph, Cliques).
 
-	test(uug_maximal_cliques_2_04, true(Cliques == [[1,2,3]])) :-
+	test(uug_maximal_cliques_2_04, deterministic(Cliques == [[1,2,3]])) :-
 		% triangle: one maximal clique of size 3
 		new([1-2, 2-3, 1-3], Graph),
 		maximal_cliques(Graph, Cliques).
 
-	test(uug_maximal_cliques_2_05, true(Cliques == [[1,2],[2,3]])) :-
+	test(uug_maximal_cliques_2_05, deterministic(Cliques == [[1,2],[2,3]])) :-
 		% path 1-2-3: two maximal cliques {1,2} and {2,3}
 		new([1-2, 2-3], Graph),
 		maximal_cliques(Graph, Cliques).
 
-	test(uug_maximal_cliques_2_06, true(Cliques == [[1,2,3],[2,3,4]])) :-
+	test(uug_maximal_cliques_2_06, deterministic(Cliques == [[1,2,3],[2,3,4]])) :-
 		% diamond without 1-4: cliques are {1,2,3} and {2,3,4}
 		new([1-2, 1-3, 2-3, 2-4, 3-4], Graph),
 		maximal_cliques(Graph, Cliques).
 
-	test(uug_maximal_cliques_2_07, true(Cliques == [[1,2,3,4]])) :-
+	test(uug_maximal_cliques_2_07, deterministic(Cliques == [[1,2,3,4]])) :-
 		% complete graph K4
 		new([1-2, 1-3, 1-4, 2-3, 2-4, 3-4], Graph),
 		maximal_cliques(Graph, Cliques).
 
-	test(uug_maximal_cliques_2_08, true(Cliques == [[1,2,3],[4]])) :-
+	test(uug_maximal_cliques_2_08, deterministic(Cliques == [[1,2,3],[4]])) :-
 		% triangle plus isolated vertex
 		new([1,2,3,4], [1-2, 2-3, 1-3], Graph),
 		maximal_cliques(Graph, Cliques).
 
 	% maximum_cliques/2 tests
 
-	test(uug_maximum_cliques_2_01, true(Cliques == [])) :-
+	test(uug_maximum_cliques_2_01, deterministic(Cliques == [])) :-
 		% empty graph
 		new(Graph),
 		maximum_cliques(Graph, Cliques).
 
-	test(uug_maximum_cliques_2_02, true(Cliques == [[1],[2],[3]])) :-
+	test(uug_maximum_cliques_2_02, deterministic(Cliques == [[1],[2],[3]])) :-
 		% isolated vertices: all are maximum (size 1)
 		new([1,2,3], [], Graph),
 		maximum_cliques(Graph, Cliques).
 
-	test(uug_maximum_cliques_2_03, true(Cliques == [[1,2,3]])) :-
+	test(uug_maximum_cliques_2_03, deterministic(Cliques == [[1,2,3]])) :-
 		% triangle: one maximum clique
 		new([1-2, 2-3, 1-3], Graph),
 		maximum_cliques(Graph, Cliques).
 
-	test(uug_maximum_cliques_2_04, true(Cliques == [[1,2],[2,3]])) :-
+	test(uug_maximum_cliques_2_04, deterministic(Cliques == [[1,2],[2,3]])) :-
 		% path 1-2-3: both maximal cliques are maximum (size 2)
 		new([1-2, 2-3], Graph),
 		maximum_cliques(Graph, Cliques).
 
-	test(uug_maximum_cliques_2_05, true(Cliques == [[1,2,3],[2,3,4]])) :-
+	test(uug_maximum_cliques_2_05, deterministic(Cliques == [[1,2,3],[2,3,4]])) :-
 		% diamond without 1-4: two maximum cliques of size 3
 		new([1-2, 1-3, 2-3, 2-4, 3-4], Graph),
 		maximum_cliques(Graph, Cliques).
 
-	test(uug_maximum_cliques_2_06, true(Cliques == [[1,2,3,4]])) :-
+	test(uug_maximum_cliques_2_06, deterministic(Cliques == [[1,2,3,4]])) :-
 		% complete graph K4: the whole graph is the only maximum clique
 		new([1-2, 1-3, 1-4, 2-3, 2-4, 3-4], Graph),
 		maximum_cliques(Graph, Cliques).
 
-	test(uug_maximum_cliques_2_07, true(Cliques == [[1,2,3]])) :-
+	test(uug_maximum_cliques_2_07, deterministic(Cliques == [[1,2,3]])) :-
 		% triangle plus isolated vertex: maximum clique is triangle
 		new([1,2,3,4], [1-2, 2-3, 1-3], Graph),
 		maximum_cliques(Graph, Cliques).
 
-	test(uug_maximum_cliques_2_08, true(Cliques == [[1,2,3],[4,5,6]])) :-
+	test(uug_maximum_cliques_2_08, deterministic(Cliques == [[1,2,3],[4,5,6]])) :-
 		% two disjoint triangles: two maximum cliques of size 3
 		new([1-2, 2-3, 1-3, 4-5, 5-6, 4-6], Graph),
 		maximum_cliques(Graph, Cliques).

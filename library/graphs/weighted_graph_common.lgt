@@ -24,9 +24,9 @@
 	extends(graph_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-02-25,
+		date is 2026-11-16,
 		comment is 'Common weighted graph predicates shared by both weighted directed and weighted undirected graph objects. Uses self-dispatch to call object-specific predicates such as ``add_edge/5``, ``delete_edge/5``, and ``edges/2``.',
 		parnames is ['Dictionary']
 	]).
@@ -131,18 +131,24 @@
 		dict_lookup(Vertex1, WNeighbors, Graph),
 		wfind(WNeighbors, Vertex2, Weight).
 
-	add_edges(Graph, [], Graph).
-	add_edges(Graph, [(Vertex1-Vertex2)-Weight| Edges], NewGraph) :-
-		::add_edge(Graph, Vertex1, Vertex2, Weight, NewGraph0),
-		add_edges(NewGraph0, Edges, NewGraph).
+	add_edges(Graph, Edges, NewGraph) :-
+		add_edges_(Edges, Graph, NewGraph).
 
-	delete_edges(Graph, [], Graph).
-	delete_edges(Graph, [(Vertex1-Vertex2)-Weight| Edges], NewGraph) :-
+	add_edges_([], Graph, Graph).
+	add_edges_([(Vertex1-Vertex2)-Weight| Edges], Graph, NewGraph) :-
+		::add_edge(Graph, Vertex1, Vertex2, Weight, NewGraph0),
+		add_edges_(Edges, NewGraph0, NewGraph).
+
+	delete_edges(Graph, Edges, NewGraph) :-
+		delete_edges_(Edges, Graph, NewGraph).
+
+	delete_edges_([], Graph, Graph).
+	delete_edges_([(Vertex1-Vertex2)-Weight| Edges], Graph, NewGraph) :-
 		(	::delete_edge(Graph, Vertex1, Vertex2, Weight, NewGraph0) ->
 			true
 		;	NewGraph0 = Graph
 		),
-		delete_edges(NewGraph0, Edges, NewGraph).
+		delete_edges_(Edges, NewGraph0, NewGraph).
 
 	% === Neighbor queries ===
 
@@ -372,6 +378,7 @@
 		\+ number(Distance1),
 		!.
 	bellman_relax_step(Distance1, Weight, inf, true, NewDistance2) :-
+		!,
 		number(Distance1),
 		NewDistance2 is Distance1 + Weight.
 	bellman_relax_step(Distance1, Weight, Distance2, Better, NewDistance2) :-

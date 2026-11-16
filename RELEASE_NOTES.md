@@ -390,6 +390,9 @@ algorithm limitations.
 outputting the plus sign when writing floats in scientific notation. Thanks
 to Andrew Davison for the bug report and patch.
 
+* FIXED: Spurious choice-points in expected deterministic `graphs` library
+predicates.
+
 * FIXED: The `http_core` library strict request and response validation could
 spuriously reject a `multipart/form-data` body whose parts omit an optional
 per-part `Content-Type` header (as commonly sent by web browsers) by

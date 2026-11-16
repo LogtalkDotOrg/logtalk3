@@ -23,9 +23,9 @@
 	extends(graph_common)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-09-09,
+		date is 2026-11-16,
 		comment is 'Common predicates shared by undirected graph objects. Uses self-dispatch to call object-specific predicates such as ``is_connected/1``, ``vertices/2``, ``edges/2``, and ``neighbors/3``.'
 	]).
 
@@ -292,7 +292,8 @@
 			set_subtract(P, PivotNeighbors, Candidates),
 			bk_loop(Candidates, R, P, X, Graph, Cliques0, Cliques)
 		;	Cliques = Cliques0
-		).
+		),
+		!.
 
 	bk_loop(Candidates, R, P, X, Graph, Cliques0, Cliques) :-
 		(	set_empty(Candidates) ->
