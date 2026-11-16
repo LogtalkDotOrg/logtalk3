@@ -75,7 +75,7 @@ API overview
 ------------
 
 - `flow_network(Dictionary)` and `flow_network`: provide construction
-  (`new/2`, `from_graph/2`) and inspection (`vertices/2`, `arcs/2`,
+  (`new/2-3`, `from_graph/2`) and inspection (`vertices/2`, `arcs/2`,
   `decompose_flow/3`, `flow_cost/3`, `flow_balances/3`, `cut_capacity/3`)
   predicates, plus flow verification and `valid_cut/5`.
 
@@ -93,6 +93,18 @@ API overview
   minimum cost maximum flow. Negative arc costs, including negative cost
   cycles, are supported.
 
+- `capacity_scaling(Dictionary)` and `capacity_scaling`: provide the same
+  maximum-flow and cut API using capacity-scaling augmenting paths.
+
+- `gomory_hu(Dictionary)` and `gomory_hu`: build all-pairs minimum-cut trees
+  for networks with symmetric aggregate capacities.
+
+- `piecewise_costs(Dictionary)` and `piecewise_costs`: expand convex integer
+  marginal-cost segments, including lower bounds, into ordinary linear arcs.
+
+- `time_expanded_network(Dictionary)` and `time_expanded_network`: build
+  finite discrete-time networks from explicit travel and storage schedules.
+
 The `max_flow_protocol` and `min_cost_flow_protocol` protocols define the
 algorithm APIs. The `flow_support` and `max_flow_common` categories contain
 the code shared by the algorithm objects.
@@ -100,6 +112,12 @@ the code shared by the algorithm objects.
 
 Usage
 -----
+
+Use the `new(Vertices, Arcs, Network)` predicate when isolated vertices matter.
+Explicit vertices are combined with arc endpoints, sorted and deduplicated. For
+example, `flow_network::new([s,t], [], Network)` has two isolated vertices
+and maximum flow zero. The `from_graph/2` predicate also preserves isolated
+vertices.
 
 Maximum flow and minimum cut:
 
@@ -223,6 +241,122 @@ from the jobs to a sink, and one arc per worker-job pair with the assignment
 cost.
 
 
+Convex piecewise-linear costs
+----------------------------
+
+`piecewise_costs::build(Vertices, CostArcs, Network, Mapping)` expands each
+`arc(From,To,Lower,Segments)` into ordinary linear-cost arcs. Each
+`segment(Width,MarginalCost)` has a positive integer width, and marginal
+costs must be nondecreasing integers, including negative values. The upper
+bound is the sum of widths and the convex cost at zero is zero. Lower
+bounds are assigned to the cheapest prefix of the segments.
+
+	| ?- piecewise_costs::build([s,t],
+	         [arc(s,t,3,[segment(2,-2),segment(3,1)])], Network, Mapping),
+	     successive_shortest_paths::min_cost_flow(
+	         Network, [s-3,t-(-3)], Cost, ExpandedFlow),
+	     piecewise_costs::collapse_flow(Network, Mapping, ExpandedFlow, Flow).
+	Cost = -3,
+	ExpandedFlow = [flow(1,s,t,2),flow(2,s,t,1)],
+	Flow = [flow(1,s,t,3)].
+
+Original arc IDs follow cost-arc input order; expanded IDs follow segment
+order. Parallel original arcs remain distinct. Keep the opaque mapping
+with its expanded network; projection checks its public vertices/arcs
+snapshot and validates expanded flow capacities. It sums segment amounts
+and omits zero original flows.
+
+The existing minimum-cost solver needs no changes to handle the expanded
+problem. An arbitrary feasible expanded flow, however, may use expensive
+segments while cheaper capacity remains unused. Projection rejects this
+noncanonical allocation because its linear cost would overstate the original
+convex cost. Distributions across equal-cost segments are accepted.
+Mandatory lower-bound cost is already included in the solver's reported
+cost; do not subtract it. The original convex arcs are not themselves a
+core flow network, and projected flows should not be checked against the
+expanded network's arc IDs.
+
+Construction is linear in total segment count before dictionary costs.
+This models convex integer piecewise-linear costs only, not concave costs,
+fixed charges, arbitrary nonlinear functions or floating-point slopes.
+
+
+All-pairs minimum cuts
+---------------------
+
+Gomory-Hu trees apply to undirected capacities, represented here by directed
+networks whose aggregate capacity from each vertex to another equals the
+aggregate capacity in the reverse direction. Parallel-arc multiplicities
+need not match. Costs and self-loops do not affect cuts. Asymmetric
+capacities and nonzero lower bounds are rejected, not silently transformed.
+
+	| ?- flow_network::new([arc(a,b,3),arc(b,a,3),arc(b,c,2),arc(c,b,2)], Network),
+	     gomory_hu::tree(Network, Tree),
+	     gomory_hu::min_cut_value(Tree, a, c, Value).
+	Tree = tree([a,b,c], [edge(b,a,3),edge(c,b,2)]),
+	Value = 2.
+
+The tree uses exactly `n-1` Dinic minimum-cut calls for `n >= 1`. The minimum
+edge on a tree path gives the original pairwise cut value; removing a tree
+edge gives a partition with that edge's cut capacity in the original network.
+Disconnected components are linked by zero-weight edges. Empty and singleton
+networks are supported; value queries require distinct existing vertices.
+Tree queries validate the tree and build adjacency in O(V*log(V)) with balanced
+dictionaries, without an all-pairs table or LCA index.
+
+
+Time-expanded networks
+----------------------
+
+`time_expanded_network::build(Vertices, Horizon, Travels, Storage, Network, Mapping)`
+creates every `time(Vertex,T)` for `T` from zero through the horizon,
+including isolated copies. Each input
+`travel(From,To,Departure,Duration,Lower,Capacity,Cost)` creates one
+departure-specific arc. Positive integer durations, non-negative integer
+capacities/lower bounds and integer costs can vary between departures. Each
+`store(Vertex,Time,Lower,Capacity,Cost)` creates a holdover arc to the next
+time step. Omitting an interval means no waiting capacity, not infinity.
+
+	| ?- time_expanded_network::build(
+	         [depot,shop], 2,
+	         [travel(depot,shop,1,1,0,2,3)],
+	         [store(depot,0,0,2,1)], Network, _),
+	     successive_shortest_paths::min_cost_flow(
+	         Network, [time(depot,0)-2,time(shop,2)-(-2)], Cost, Flow).
+	Cost = 8,
+	Flow = [flow(1,time(depot,1),time(shop,2),2),
+	        flow(2,time(depot,0),time(depot,1),2)].
+
+Travel entries come first in the arc order, followed by storage entries.
+The result `mapping(TravelEntries,StorageEntries)` contains
+`travel(ArcId,EntryId,From,To,Departure,Arrival)` and
+`store(ArcId,EntryId,Vertex,Time,Arrival)` entries, with one-based IDs in
+each input schedule. All endpoints must be declared base vertices; invalid
+times, zero durations and arrivals beyond the horizon raise errors.
+
+For inventory, specify supplies and demands at exact time copies. For
+evacuation by a deadline, add collection arcs from eligible destination
+time copies to a fresh terminal, using a justified finite capacity bound,
+and call maximum flow. Storage limits a single holding interval, not a
+physical vertex's capacity shared across all times. Nonzero lower bounds
+require supply-based minimum-cost flow; maximum-flow APIs still reject them.
+
+Explicit schedules support time-dependent travel and costs without callbacks.
+Constant schedules can be generated as input lists. Zero-duration travel,
+continuous time and automatic horizon selection are not supported. Network
+size is O(V*(H+1) + number of travel entries + number of storage entries).
+
+
+Application reductions
+----------------------
+
+The `flow_networks_modeling` example demonstrates maximum-weight
+closure/project selection, binary image segmentation and baseball elimination,
+including decoded solutions, finite-capacity bounds and elimination
+certificates. They are executable examples, not application-specific library
+APIs.
+
+
 Algorithms
 ----------
 
@@ -230,6 +364,14 @@ Algorithms
 - Dinic: O(V^2*E). Vertices that cannot push the requested amount of flow
   are recorded as dead for the rest of the phase, replacing the current-arc
   pointers of imperative implementations.
+- Capacity scaling: O(E^2*log(U)) for maximum capacity U, before dictionary
+  costs. Starts with the largest power of two no greater than U and halves
+  the residual-capacity threshold down to one. Large capacities alone do
+  not imply a speedup over Dinic, whose bound is independent of U. Small
+  sparse, dense and bipartite comparisons on GNU Prolog favored Dinic,
+  increasingly so for larger capacity ranges. Use scaling as an explicit
+  alternative, not a default performance optimization. Min-cost scaling
+  requires a separate algorithm and is not provided.
 - Successive shortest paths: Dijkstra with node potentials (reduced costs)
   and a binary heap. Arcs with negative cost are saturated beforehand so
   that all residual costs are non-negative; this also handles negative

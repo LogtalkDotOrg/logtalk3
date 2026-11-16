@@ -36,12 +36,29 @@
 		max_flow_common,
 		edmonds_karp,
 		dinic,
+		capacity_scaling,
+		gomory_hu,
+		time_expanded_network,
 		min_cost_flow_protocol,
-		successive_shortest_paths
+		successive_shortest_paths,
+		piecewise_costs
 	], [
 		debug(on),
 		source_data(on)
 	]),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests(avltree)::run
+	logtalk_load([
+		tests, tests_gomory_hu, tests_capacity_scaling,
+		tests_time_expanded_network, tests_piecewise_costs
+	], [hook(lgtunit)]),
+	lgtunit::run_test_sets([
+		tests(avltree),
+		tests_gomory_hu(avltree),
+		tests_capacity_scaling(avltree),
+		tests_gomory_hu(rbtree),
+		tests_capacity_scaling(rbtree),
+		tests_time_expanded_network(avltree),
+		tests_time_expanded_network(rbtree),
+		tests_piecewise_costs(avltree),
+		tests_piecewise_costs(rbtree)
+	])
 )).

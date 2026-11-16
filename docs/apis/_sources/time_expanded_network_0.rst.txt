@@ -1,0 +1,60 @@
+.. index:: single: time_expanded_network
+.. _time_expanded_network/0:
+
+.. rst-class:: right
+
+**object**
+
+``time_expanded_network``
+=========================
+
+Builds time-expanded flow networks using the ``avltree`` dictionary.
+
+| **Availability:** 
+|    ``logtalk_load(flow_networks(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-16
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`time_expanded_network(avltree) <time_expanded_network/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`time_expanded_network/1::build/6`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`time_expanded_network(Dictionary) <time_expanded_network/1>`
+

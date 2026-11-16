@@ -1,0 +1,60 @@
+.. index:: single: gomory_hu
+.. _gomory_hu/0:
+
+.. rst-class:: right
+
+**object**
+
+``gomory_hu``
+=============
+
+Gomory-Hu cut trees using the ``avltree`` dictionary.
+
+| **Availability:** 
+|    ``logtalk_load(flow_networks(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-16
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`gomory_hu(avltree) <gomory_hu/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`gomory_hu/1::min_cut_value/4`  :ref:`gomory_hu/1::tree/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`gomory_hu(Dictionary) <gomory_hu/1>`, :ref:`dinic <dinic/0>`
+

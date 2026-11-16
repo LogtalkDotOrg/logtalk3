@@ -130,6 +130,25 @@ Breadth-first search over arcs with positive residual capacity. ``Stop`` is eith
 
 ------------
 
+.. index:: bfs/6
+.. _flow_support/1::bfs/6:
+
+``bfs/6``
+^^^^^^^^^
+
+As ``bfs/5``, traversing only arcs whose residual capacity is at least ``Threshold``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bfs(Network,Residual,Source,Stop,Threshold,Info)``
+| **Mode and number of proofs:**
+|    ``bfs(+compound,+compound,+ground,+nonvar,+positive_integer,-compound)`` - ``one``
+
+
+------------
+
 .. index:: augment/4
 .. _flow_support/1::augment/4:
 

@@ -384,6 +384,8 @@ Objects
       callable <callable_0>
       caller_diagram <caller_diagram_0>
       caller_diagram(Format) <caller_diagram_1>
+      capacity_scaling <capacity_scaling_0>
+      capacity_scaling(Dictionary) <capacity_scaling_1>
       cartesian_products <cartesian_products_0>
       cbc <cbc_0>
       cbor <cbor_0>
@@ -561,6 +563,8 @@ Objects
       gl_language_profile <gl_language_profile_0>
       glicko2_periodic_ranker <glicko2_periodic_ranker_0>
       glicko2_ranker <glicko2_ranker_0>
+      gomory_hu <gomory_hu_0>
+      gomory_hu(Dictionary) <gomory_hu_1>
       gpx <gpx_0>
       gradient_boosting_classifier <gradient_boosting_classifier_0>
       gradient_boosting_regression <gradient_boosting_regression_0>
@@ -907,6 +911,8 @@ Objects
       penalty_sub_problem(Problem,OuterIteration,StartPoint,Rho,Sign) <penalty_sub_problem_5>
       permutations <permutations_0>
       phase1_sub_problem(Problem,StartPoint) <phase1_sub_problem_2>
+      piecewise_costs <piecewise_costs_0>
+      piecewise_costs(Dictionary) <piecewise_costs_1>
       piecewise_linear_interpolator <piecewise_linear_interpolator_0>
       pl_language_profile <pl_language_profile_0>
       plackett_luce_last_ranker <plackett_luce_last_ranker_0>
@@ -1136,6 +1142,8 @@ Objects
       theta_forecasting <theta_forecasting_0>
       thurstone_mosteller_ranker <thurstone_mosteller_ranker_0>
       time <time_0>
+      time_expanded_network <time_expanded_network_0>
+      time_expanded_network(Dictionary) <time_expanded_network_1>
       time_scales <time_scales_0>
       time_scales_data <time_scales_data_0>
       time_series_regression <time_series_regression_0>
@@ -1318,6 +1326,8 @@ Objects
    * :doc:`callable <callable_0>`
    * :doc:`caller_diagram <caller_diagram_0>`
    * :doc:`caller_diagram(Format) <caller_diagram_1>`
+   * :doc:`capacity_scaling <capacity_scaling_0>`
+   * :doc:`capacity_scaling(Dictionary) <capacity_scaling_1>`
    * :doc:`cartesian_products <cartesian_products_0>`
    * :doc:`cbc <cbc_0>`
    * :doc:`cbor <cbor_0>`
@@ -1495,6 +1505,8 @@ Objects
    * :doc:`gl_language_profile <gl_language_profile_0>`
    * :doc:`glicko2_periodic_ranker <glicko2_periodic_ranker_0>`
    * :doc:`glicko2_ranker <glicko2_ranker_0>`
+   * :doc:`gomory_hu <gomory_hu_0>`
+   * :doc:`gomory_hu(Dictionary) <gomory_hu_1>`
    * :doc:`gpx <gpx_0>`
    * :doc:`gradient_boosting_classifier <gradient_boosting_classifier_0>`
    * :doc:`gradient_boosting_regression <gradient_boosting_regression_0>`
@@ -1841,6 +1853,8 @@ Objects
    * :doc:`penalty_sub_problem(Problem,OuterIteration,StartPoint,Rho,Sign) <penalty_sub_problem_5>`
    * :doc:`permutations <permutations_0>`
    * :doc:`phase1_sub_problem(Problem,StartPoint) <phase1_sub_problem_2>`
+   * :doc:`piecewise_costs <piecewise_costs_0>`
+   * :doc:`piecewise_costs(Dictionary) <piecewise_costs_1>`
    * :doc:`piecewise_linear_interpolator <piecewise_linear_interpolator_0>`
    * :doc:`pl_language_profile <pl_language_profile_0>`
    * :doc:`plackett_luce_last_ranker <plackett_luce_last_ranker_0>`
@@ -2070,6 +2084,8 @@ Objects
    * :doc:`theta_forecasting <theta_forecasting_0>`
    * :doc:`thurstone_mosteller_ranker <thurstone_mosteller_ranker_0>`
    * :doc:`time <time_0>`
+   * :doc:`time_expanded_network <time_expanded_network_0>`
+   * :doc:`time_expanded_network(Dictionary) <time_expanded_network_1>`
    * :doc:`time_scales <time_scales_0>`
    * :doc:`time_scales_data <time_scales_data_0>`
    * :doc:`time_series_regression <time_series_regression_0>`

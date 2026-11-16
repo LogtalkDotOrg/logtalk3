@@ -66,7 +66,9 @@ Library
 -------
 
 * ADDED: New `flow_networks` library implementing network flow algorithms over
-capacitated directed graphs: maximum flow, minimum cut, and minimum cost flow.
+capacitated directed graphs: maximum flow, minimum cut, and minimum cost flow,
+with flow verification and decomposition, Gomory-Hu cut trees, convex arc costs,
+and time-expanded network builders.
 
 * ADDED: New `asp` library for representing Answer Set Programming (ASP)
 problems as Logtalk objects, invoking the Clingo (default) or zetesis

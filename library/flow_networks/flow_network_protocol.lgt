@@ -30,18 +30,34 @@
 	]).
 
 	:- public(new/2).
-	:- mode(new(+list(compound), --compound), one_or_error).
+	:- mode(new(+list(ground), --compound), one_or_error).
 	:- info(new/2, [
 		comment is 'Constructs a flow network from a list of arcs. Arcs are ``arc(From, To, Capacity)``, ``arc(From, To, Capacity, Cost)``, or ``arc(From, To, Lower, Capacity, Cost)`` terms. The default cost and lower bound are zero. Vertices can be any ground term. Parallel, antiparallel, and self-loop arcs are allowed.',
 		argnames is ['Arcs', 'Network'],
 		exceptions is [
-			'``Arcs`` is a partial list or contains a non-ground vertex' - instantiation_error,
-			'``Arcs`` is neither a variable nor a list' - type_error(list, 'Arcs'),
-			'An element of ``Arcs`` is not an ``arc/3``, ``arc/4``, or ``arc/5`` term' - domain_error(flow_arc, 'Arc'),
-			'A lower bound is not a non-negative integer' - domain_error(non_negative_integer, 'Lower'),
-			'A lower bound exceeds the capacity' - consistency_error(arc_lower_bound_and_capacity, 'Lower', 'Capacity'),
-			'A capacity is not a non-negative integer' - domain_error(non_negative_integer, 'Capacity'),
-			'A cost is not an integer' - type_error(integer, 'Cost')
+			'``Arcs`` is a partial list or a list with an element ``Element`` which is not ground' - instantiation_error,
+			'``Arcs`` is neither a variable nor a list' - type_error(list(ground), 'Arcs'),
+			'An element ``Arc`` of ``Arcs`` list is not an ``arc/3``, ``arc/4``, or ``arc/5`` term' - domain_error(flow_arc, 'Arc'),
+			'A capacity, lower bound or cost value is not an integer' - type_error(integer, 'Value'),
+			'A lower bound or capacity value is negative' - domain_error(non_negative_integer, 'Value'),
+			'A lower bound exceeds the capacity' - consistency_error(arc_lower_bound_and_capacity, 'Lower', 'Capacity')
+		]
+	]).
+
+	:- public(new/3).
+	:- mode(new(+list(ground), +list(ground), --compound), one_or_error).
+	:- info(new/3, [
+		comment is 'As ``new/2``, also preserving explicitly listed vertices, including isolated vertices. The vertex set is the sorted, duplicate-free union of ``Vertices`` and arc endpoints.',
+		argnames is ['Vertices', 'Arcs', 'Network'],
+		exceptions is [
+			'``Vertices`` is a partial list or a list with an element ``Element`` which is not ground' - instantiation_error,
+			'``Vertices`` is neither a partial list nor a list' - type_error(list(ground), 'Vertices'),
+			'``Arcs`` is a partial list or a list with an element ``Element`` which is not ground' - instantiation_error,
+			'``Arcs`` is neither a variable nor a list' - type_error(list(ground), 'Arcs'),
+			'An element ``Arc`` of ``Arcs`` list is not an ``arc/3``, ``arc/4``, or ``arc/5`` term' - domain_error(flow_arc, 'Arc'),
+			'A capacity, lower bound or cost value is not an integer' - type_error(integer, 'Value'),
+			'A lower bound or capacity value is negative' - domain_error(non_negative_integer, 'Value'),
+			'A lower bound exceeds the capacity' - consistency_error(arc_lower_bound_and_capacity, 'Lower', 'Capacity')
 		]
 	]).
 

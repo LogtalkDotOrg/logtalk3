@@ -1,0 +1,153 @@
+.. index:: single: piecewise_costs(Dictionary)
+.. _piecewise_costs/1:
+
+.. rst-class:: right
+
+**object**
+
+``piecewise_costs(Dictionary)``
+===============================
+
+* ``Dictionary`` - Dictionary object used by the expanded flow network (e.g., ``avltree``).
+
+
+Builds ordinary flow networks that model convex piecewise-linear integer arc costs by expanding each cost segment into a linear-cost arc. The returned mapping is opaque and records the public vertices and arcs of the expanded network.
+
+| **Availability:** 
+|    ``logtalk_load(flow_networks(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-16
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`flow_network(Dictionary) <flow_network/1>`
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: build/4
+.. _piecewise_costs/1::build/4:
+
+``build/4``
+^^^^^^^^^^^
+
+Expands convex cost arcs ``arc(From, To, Lower, Segments)`` where each segment is ``segment(Width, MarginalCost)``. Widths are positive integers and marginal costs are nondecreasing integers; the original cost at flow amount ``X`` is the sum of the marginal costs of its first ``X`` units, with cost zero at amount zero. Each expanded arc receives the lower-bound portion of the original flow in segment order. The opaque mapping records a ground public network snapshot (vertices and arcs), and preserves original arc and segment order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``build(Vertices,CostArcs,Network,Mapping)``
+| **Mode and number of proofs:**
+|    ``build(+list(ground),+list(compound),-compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    An input list is partial, or a vertex is not ground:
+|        ``instantiation_error``
+|    An input is not a list:
+|        ``type_error(list,Input)``
+|    A cost arc is not an ``arc/4`` term:
+|        ``domain_error(piecewise_cost_arc,Arc)``
+|    A segment is not a ``segment/2`` term:
+|        ``domain_error(piecewise_cost_segment,Segment)``
+|    A lower bound is not an integer:
+|        ``type_error(integer,Lower)``
+|    A lower bound is negative:
+|        ``domain_error(non_negative_integer,Lower)``
+|    A lower bound exceeds the total segment width:
+|        ``consistency_error(piecewise_lower_bound_and_capacity,Lower,Capacity)``
+|    A segment width is not an integer:
+|        ``type_error(integer,Width)``
+|    A segment width is not positive:
+|        ``domain_error(positive_integer,Width)``
+|    A marginal cost is not an integer:
+|        ``type_error(integer,MarginalCost)``
+|    Segment marginal costs decrease:
+|        ``domain_error(non_decreasing_marginal_costs,Segments)``
+|    A cost arc has no segments:
+|        ``domain_error(non_empty_list,Segments)``
+
+
+------------
+
+.. index:: collapse_flow/4
+.. _piecewise_costs/1::collapse_flow/4:
+
+``collapse_flow/4``
+^^^^^^^^^^^^^^^^^^^
+
+Projects a capacity-valid flow on the expanded network to original ``flow(ArcId, From, To, Amount)`` entries, omitting zero flows. Rejects a noncanonical segment allocation when a more expensive segment carries optional flow while a cheaper segment has unused capacity. Arbitrary distribution across equal-cost segments is accepted. The original convex arcs are not themselves a core flow network.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``collapse_flow(Network,Mapping,ExpandedFlow,Flow)``
+| **Mode and number of proofs:**
+|    ``collapse_flow(+compound,+compound,+list(compound),-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    The mapping is not ground:
+|        ``instantiation_error``
+|    The mapping is malformed:
+|        ``domain_error(piecewise_cost_mapping,Mapping)``
+|    The network vertices or arcs differ from the mapped snapshot:
+|        ``consistency_error(piecewise_mapping_network,Snapshot,MappedSnapshot)``
+|    The expanded flow is a variable or partial list, or an entry has a variable field:
+|        ``instantiation_error``
+|    The expanded flow is not a list:
+|        ``type_error(list,ExpandedFlow)``
+|    An expanded-flow entry is malformed:
+|        ``domain_error(flow,Term)``
+|    An expanded arc ID or flow amount is not an integer:
+|        ``type_error(integer,Value)``
+|    An expanded arc ID or flow amount is not positive:
+|        ``domain_error(positive_integer,Value)``
+|    An expanded arc ID is not in the network:
+|        ``existence_error(arc,ArcId)``
+|    An expanded-flow entry has incorrect endpoints:
+|        ``domain_error(flow_arc_endpoints,Term)``
+|    The expanded flow violates an arc bound or repeats an arc ID:
+|        ``domain_error(capacity_valid_flow,ExpandedFlow)``
+|    The segment allocation is not canonical:
+|        ``domain_error(canonical_piecewise_flow,ExpandedFlow)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`flow_network(Dictionary) <flow_network/1>`, :ref:`successive_shortest_paths(Dictionary) <successive_shortest_paths/1>`
+

@@ -2446,6 +2446,28 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``build/4``
+   -----------
+
+   * :ref:`piecewise_costs(Dictionary) <piecewise_costs/1::build/4>`
+
+.. only:: latex
+
+   * ``build/4`` - :ref:`piecewise_costs(Dictionary) <piecewise_costs/1::build/4>`
+
+.. only:: not latex
+
+   ``build/6``
+   -----------
+
+   * :ref:`time_expanded_network(Dictionary) <time_expanded_network/1::build/6>`
+
+.. only:: latex
+
+   * ``build/6`` - :ref:`time_expanded_network(Dictionary) <time_expanded_network/1::build/6>`
+
+.. only:: not latex
+
    ``built_date/1``
    ----------------
 
@@ -4132,6 +4154,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``coefficient_of_variation/2`` - :ref:`statisticsp <statisticsp/0::coefficient_of_variation/2>`
+
+.. only:: not latex
+
+   ``collapse_flow/4``
+   -------------------
+
+   * :ref:`piecewise_costs(Dictionary) <piecewise_costs/1::collapse_flow/4>`
+
+.. only:: latex
+
+   * ``collapse_flow/4`` - :ref:`piecewise_costs(Dictionary) <piecewise_costs/1::collapse_flow/4>`
 
 .. only:: not latex
 
@@ -19222,6 +19255,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: not latex
 
+   ``min_cut_value/4``
+   -------------------
+
+   * :ref:`gomory_hu(Dictionary) <gomory_hu/1::min_cut_value/4>`
+
+.. only:: latex
+
+   * ``min_cut_value/4`` - :ref:`gomory_hu(Dictionary) <gomory_hu/1::min_cut_value/4>`
+
+.. only:: not latex
+
    ``min_cuts/5``
    --------------
 
@@ -20333,12 +20377,13 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    ``new/3``
    ---------
 
+   * :ref:`flow_network_protocol <flow_network_protocol/0::new/3>`
    * :ref:`graph_protocol <graph_protocol/0::new/3>`
    * :ref:`interval_protocol <interval_protocol/0::new/3>`
 
 .. only:: latex
 
-   * ``new/3`` - :ref:`graph_protocol <graph_protocol/0::new/3>`, :ref:`interval_protocol <interval_protocol/0::new/3>`
+   * ``new/3`` - :ref:`flow_network_protocol <flow_network_protocol/0::new/3>`, :ref:`graph_protocol <graph_protocol/0::new/3>`, :ref:`interval_protocol <interval_protocol/0::new/3>`
 
 .. only:: not latex
 
@@ -33962,6 +34007,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``traverse/3`` - :ref:`either <either/0::traverse/3>`, :ref:`maybe <maybe/0::traverse/3>`, :ref:`validated <validated/0::traverse/3>`
+
+.. only:: not latex
+
+   ``tree/2``
+   ----------
+
+   * :ref:`gomory_hu(Dictionary) <gomory_hu/1::tree/2>`
+
+.. only:: latex
+
+   * ``tree/2`` - :ref:`gomory_hu(Dictionary) <gomory_hu/1::tree/2>`
 
 .. only:: not latex
 

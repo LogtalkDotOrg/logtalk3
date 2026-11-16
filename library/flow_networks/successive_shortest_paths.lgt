@@ -67,7 +67,7 @@
 		sum_balances(Sorted, Balances),
 		super_arcs(Balances, Source, Sink, 0, Demand, SuperArcs),
 		append(Arcs, SuperArcs, AllArcs),
-		flow_network(_Dictionary_)::new(AllArcs, Augmented),
+		flow_network(_Dictionary_)::new(Vertices, AllArcs, Augmented),
 		Augmented = network(AllVertices, _, _, Residual0),
 		saturate(Arcs, 0, Residual0, Residual1),
 		potentials(AllVertices, Potentials0),

@@ -500,6 +500,7 @@ logtalk_library_path(family_alt, examples('family_alt/')).
 logtalk_library_path(fft, threads('fft/')).
 logtalk_library_path(fibonacci, threads('fibonacci/')).
 logtalk_library_path(figures, ncl('figures/')).
+logtalk_library_path(flow_networks_modeling, examples('flow_networks_modeling/')).
 logtalk_library_path(fluents, engines('fluents/')).
 logtalk_library_path(free_nodes, ncl('free_nodes/')).
 logtalk_library_path(functions, threads('functions/')).

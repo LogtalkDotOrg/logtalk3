@@ -33,8 +33,12 @@
 		max_flow_common,
 		edmonds_karp,
 		dinic,
+		capacity_scaling,
+		gomory_hu,
+		time_expanded_network,
 		min_cost_flow_protocol,
-		successive_shortest_paths
+		successive_shortest_paths,
+		piecewise_costs
 	], [
 		source_data(on),
 		optimize(on)

@@ -52,11 +52,21 @@
 	%   Adjacency - dictionary mapping vertices to ascending lists of outgoing arc identifiers
 	%   Residual  - dictionary mapping arc identifiers to initial residual capacities
 
-	new(Arcs, network(Vertices, ArcDict, AdjacencyDict, ResidualDict)) :-
+	new(Arcs, Network) :-
 		context(Context),
-		check(list, Arcs, Context),
+		new([], Arcs, Network, Context).
+
+	new(Vertices, Arcs, Network) :-
+		context(Context),
+		new(Vertices, Arcs, Network, Context).
+
+	new(ExplicitVertices, Arcs, network(Vertices, ArcDict, AdjacencyDict, ResidualDict), Context) :-
+		check(list(ground), ExplicitVertices, Context),
+		check(list(ground), Arcs, Context),
 		normalize(Arcs, Normalized, Context),
-		vertices_of(Normalized, Vertices),
+		vertices_of(Normalized, ArcVertices),
+		join_lists(ExplicitVertices, ArcVertices, AllVertices),
+		sort(AllVertices, Vertices),
 		residual_pairs(Normalized, 0, ArcPairs0, ResidualPairs0, AdjacencyPairs0),
 		dict_as_dictionary(ArcPairs0, ArcDict),
 		dict_as_dictionary(ResidualPairs0, ResidualDict),
@@ -65,9 +75,10 @@
 		dict_as_dictionary(AdjacencyPairs, AdjacencyDict).
 
 	from_graph(Graph, Network) :-
+		weighted_directed_graph(_Dictionary_)::vertices(Graph, Vertices),
 		weighted_directed_graph(_Dictionary_)::edges(Graph, Edges),
 		edges_to_arcs(Edges, Arcs),
-		new(Arcs, Network).
+		new(Vertices, Arcs, Network).
 
 	vertices(network(Vertices, _, _, _), Vertices).
 

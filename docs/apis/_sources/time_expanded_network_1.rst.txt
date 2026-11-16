@@ -1,0 +1,104 @@
+.. index:: single: time_expanded_network(Dictionary)
+.. _time_expanded_network/1:
+
+.. rst-class:: right
+
+**object**
+
+``time_expanded_network(Dictionary)``
+=====================================
+
+* ``Dictionary`` - Dictionary object used by the constructed flow network.
+
+
+Builds finite, discrete-time flow networks from explicit departure and storage schedules. Expanded vertices are tagged ``time(Vertex, Time)`` terms; schedule arcs retain input order and arc IDs.
+
+| **Availability:** 
+|    ``logtalk_load(flow_networks(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-16
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`flow_network(Dictionary) <flow_network/1>`
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: build/6
+.. _time_expanded_network/1::build/6:
+
+``build/6``
+^^^^^^^^^^^
+
+Builds a time-expanded flow network. ``Vertices`` is a proper list of ground base vertices and ``Horizon`` is a non-negative integer. Each ``travel(From, To, Departure, Duration, Lower, Capacity, Cost)`` creates one arc from ``time(From,Departure)`` to ``time(To,Departure+Duration)``. Each ``store(Vertex, Time, Lower, Capacity, Cost)`` creates one arc from ``time(Vertex,Time)`` to ``time(Vertex,Time+1)``. Durations are positive; schedule endpoints and arrivals must be within the horizon. Missing storage entries mean no waiting capacity. The mapping is ``mapping(TravelEntries, StorageEntries)`` where entries are ``travel(ArcId, EntryId, From, To, Departure, Arrival)`` and ``store(ArcId, EntryId, Vertex, Time, Arrival)``; entry IDs are one-based in their respective input lists and arc IDs follow travel input order then storage input order. Expanded vertices are tagged ``time(Vertex,Time)`` terms, preserving all time copies including isolated vertices. Supplies and demands at exact times can be passed to the existing minimum-cost flow solver. Evacuation by a deadline can be modeled by adding collection arcs from eligible time copies to a fresh terminal. Storage capacities constrain individual intervals, not a shared per-vertex capacity. Non-zero lower bounds require the supply-based minimum-cost flow solver; maximum-flow APIs require zero lower bounds.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``build(Vertices,Horizon,Travels,Storage,Network,Mapping)``
+| **Mode and number of proofs:**
+|    ``build(+list(ground),+integer,+list(compound),+list(compound),--compound,--compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Vertices``, ``Travels``, or ``Storage`` is a variable or partial list, or a base vertex or schedule endpoint is non-ground:
+|        ``instantiation_error``
+|    An input list is neither a variable nor a list:
+|        ``type_error(list,Input)``
+|    ``Horizon``, a departure, a duration, a storage time, a lower bound, a capacity, or a cost is not an integer:
+|        ``type_error(integer,Value)``
+|    ``Horizon`` is negative:
+|        ``domain_error(non_negative_integer,Horizon)``
+|    A travel or storage entry has an invalid shape:
+|        ``domain_error(time_expanded_schedule,Entry)``
+|    A scheduled endpoint is not in ``Vertices``:
+|        ``existence_error(vertex,Vertex)``
+|    A departure or storage time is outside the horizon, or a travel duration exceeds the remaining horizon:
+|        ``consistency_error(time_expanded_schedule_and_horizon,Entry,Horizon)``
+|    A travel duration is not positive:
+|        ``domain_error(positive_integer,Duration)``
+|    A lower bound or capacity is negative:
+|        ``domain_error(non_negative_integer,Value)``
+|    A lower bound exceeds its capacity:
+|        ``consistency_error(arc_lower_bound_and_capacity,Lower,Capacity)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`time_expanded_network <time_expanded_network/0>`, :ref:`flow_network(Dictionary) <flow_network/1>`, :ref:`successive_shortest_paths(Dictionary) <successive_shortest_paths/1>`, :ref:`dinic(Dictionary) <dinic/1>`
+

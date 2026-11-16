@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths for the programming examples
-%  Last updated on September 26, 2026
+%  Last updated on November 16, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -97,6 +97,7 @@ logtalk_library_path(family_alt, examples('family_alt/')).
 logtalk_library_path(fft, threads('fft/')).
 logtalk_library_path(fibonacci, threads('fibonacci/')).
 logtalk_library_path(figures, ncl('figures/')).
+logtalk_library_path(flow_networks_modeling, examples('flow_networks_modeling/')).
 logtalk_library_path(fluents, engines('fluents/')).
 logtalk_library_path(free_nodes, ncl('free_nodes/')).
 logtalk_library_path(full_adder_diagnosis, examples('full_adder_diagnosis')).

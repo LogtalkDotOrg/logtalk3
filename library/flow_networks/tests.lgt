@@ -47,7 +47,7 @@
 	]).
 
 	:- uses(flow_network(_DictionaryObject_), [
-		new/2, from_graph/2, vertices/2, arcs/2, decompose_flow/3,
+		new/2, new/3, from_graph/2, vertices/2, arcs/2, decompose_flow/3,
 		flow_cost/3, flow_balances/3, cut_capacity/3, valid_cut/5,
 		valid_flow/3 as network_valid_flow/3, valid_st_flow/5 as network_valid_st_flow/5,
 		valid_min_cost_flow/4 as network_valid_min_cost_flow/4,
@@ -64,6 +64,10 @@
 		sink_closest_min_cut/5, unique_min_cut/4, min_cuts/5
 	]).
 
+	:- uses(capacity_scaling(_DictionaryObject_), [
+		max_flow/5 as scaling_max_flow/5
+	]).
+
 	:- uses(successive_shortest_paths(_DictionaryObject_), [
 		min_cost_flow/4, min_cost_flow/5 as min_cost_flow_with_potentials/5,
 		min_cost_max_flow/6, min_cost_max_flow/7 as min_cost_max_flow_with_potentials/7
@@ -75,6 +79,39 @@
 	cover(successive_shortest_paths(_DictionaryObject_)).
 
 	% construction and inspection
+
+	test(flow_network_explicit_vertices, deterministic(Vertices == [a,b,f(1)])) :-
+		new([f(1),a,a], [arc(a,b,1)], Network),
+		vertices(Network, Vertices).
+
+	test(flow_network_explicit_isolated_terminals, deterministic(Value == 0)) :-
+		new([s,t], [], Network),
+		dinic_max_flow(Network, s, t, Value, Flow),
+		network_valid_st_flow(Network, s, t, Value, Flow),
+		flow_balances(Network, Flow, [s-0,t-0]).
+
+	test(flow_network_explicit_nonground, error(instantiation_error)) :-
+		new([f(_)], [], _).
+
+	test(flow_network_explicit_not_list, error(type_error(list(ground), foo))) :-
+		new(foo, [], _).
+
+	test(flow_network_graph_isolated, deterministic(Vertices == [a,b])) :-
+		weighted_directed_graph(_DictionaryObject_)::new([a,b], [], Graph),
+		from_graph(Graph, Network),
+		vertices(Network, Vertices).
+
+	test(flow_network_isolated_min_cost_potentials, deterministic(Potentials == [a-0,b-0])) :-
+		new([a,b], [], Network),
+		min_cost_flow_with_potentials(Network, [], 0, [], Potentials).
+
+	test(flow_network_isolated_infeasible, fail) :-
+		new([a,b], [], Network),
+		min_cost_flow(Network, [a-1,b-(-1)], _, _).
+
+	test(flow_network_isolated_multi_source, deterministic(Value == 0)) :-
+		new([s,t], [], Network),
+		multi_source_max_flow(Network, [s], [t], Value, []).
 
 	test(flow_network_new_2_01, deterministic(Arcs == [arc(a,b,0,3,0), arc(b,c,0,2,-1), arc(a,c,0,5,4)])) :-
 		new([arc(a,b,3), arc(b,c,2,-1), arc(a,c,5,4)], Network),
@@ -101,7 +138,7 @@
 	test(flow_network_new_2_06, error(instantiation_error)) :-
 		new([arc(a,_,1)], _).
 
-	test(flow_network_new_2_07, error(type_error(list, foo))) :-
+	test(flow_network_new_2_07, error(type_error(list(ground), foo))) :-
 		new(foo, _).
 
 	test(flow_network_new_2_08, error(domain_error(flow_arc, edge(a,b)))) :-
@@ -825,12 +862,15 @@
 		brute_st(Arcs1, 1, 5, BestValue, _),
 		ek_max_flow(Network, 1, 5, EKValue, EKFlow),
 		dinic_max_flow(Network, 1, 5, DinicValue, DinicFlow),
+		scaling_max_flow(Network, 1, 5, ScalingValue, ScalingFlow),
 		dinic_min_cut(Network, 1, 5, CutValue, cut(SourceSide, SinkSide, CutArcs)),
 		EKValue =:= BestValue,
 		DinicValue =:= BestValue,
+		ScalingValue =:= BestValue,
 		CutValue =:= BestValue,
 		network_valid_st_flow(Network, 1, 5, EKValue, EKFlow),
 		network_valid_st_flow(Network, 1, 5, DinicValue, DinicFlow),
+		network_valid_st_flow(Network, 1, 5, ScalingValue, ScalingFlow),
 		valid_cut(Network, 1, 5, CutValue, cut(SourceSide, SinkSide, CutArcs)),
 		cut_capacity(Network, SourceSide, CutValue).
 

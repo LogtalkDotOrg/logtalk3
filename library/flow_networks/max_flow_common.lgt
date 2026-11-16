@@ -132,7 +132,7 @@
 		standard_arcs(Arcs, OriginalArcs),
 		append_list(OriginalArcs, SourceArcs, Arcs1),
 		append_list(Arcs1, SinkArcs, AugmentedArcs),
-		flow_network(_Dictionary_)::new(AugmentedArcs, Augmented),
+		flow_network(_Dictionary_)::new(Vertices, AugmentedArcs, Augmented),
 		::maximize(Augmented, SuperSource, SuperSink, Value, Residual),
 		::flow_list(Augmented, Residual, Flow0),
 		project_flow(Flow0, Arcs, Flow).

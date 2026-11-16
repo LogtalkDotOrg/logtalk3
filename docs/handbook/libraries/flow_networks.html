@@ -155,6 +155,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api-overview">API overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#convex-piecewise-linear-costs">Convex piecewise-linear costs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#all-pairs-minimum-cuts">All-pairs minimum cuts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#time-expanded-networks">Time-expanded networks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#application-reductions">Application reductions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#algorithms">Algorithms</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 </ul>
@@ -498,7 +502,7 @@ seeds, restoring the generator state after each randomized test.</p>
 <h2>API overview<a class="headerlink" href="#api-overview" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">flow_network(Dictionary)</span></code> and <code class="docutils literal notranslate"><span class="pre">flow_network</span></code>: provide
-construction (<code class="docutils literal notranslate"><span class="pre">new/2</span></code>, <code class="docutils literal notranslate"><span class="pre">from_graph/2</span></code>) and inspection
+construction (<code class="docutils literal notranslate"><span class="pre">new/2-3</span></code>, <code class="docutils literal notranslate"><span class="pre">from_graph/2</span></code>) and inspection
 (<code class="docutils literal notranslate"><span class="pre">vertices/2</span></code>, <code class="docutils literal notranslate"><span class="pre">arcs/2</span></code>, <code class="docutils literal notranslate"><span class="pre">decompose_flow/3</span></code>, <code class="docutils literal notranslate"><span class="pre">flow_cost/3</span></code>,
 <code class="docutils literal notranslate"><span class="pre">flow_balances/3</span></code>, <code class="docutils literal notranslate"><span class="pre">cut_capacity/3</span></code>) predicates, plus flow
 verification and <code class="docutils literal notranslate"><span class="pre">valid_cut/5</span></code>.</p></li>
@@ -513,6 +517,16 @@ with multiple-source/sink and node-capacity and minimum-cut variants.</p></li>
 <code class="docutils literal notranslate"><span class="pre">successive_shortest_paths</span></code>: provide predicates for minimum cost
 flow with supplies and demands and minimum cost maximum flow. Negative
 arc costs, including negative cost cycles, are supported.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">capacity_scaling(Dictionary)</span></code> and <code class="docutils literal notranslate"><span class="pre">capacity_scaling</span></code>: provide the
+same maximum-flow and cut API using capacity-scaling augmenting paths.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gomory_hu(Dictionary)</span></code> and <code class="docutils literal notranslate"><span class="pre">gomory_hu</span></code>: build all-pairs
+minimum-cut trees for networks with symmetric aggregate capacities.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">piecewise_costs(Dictionary)</span></code> and <code class="docutils literal notranslate"><span class="pre">piecewise_costs</span></code>: expand convex
+integer marginal-cost segments, including lower bounds, into ordinary
+linear arcs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time_expanded_network(Dictionary)</span></code> and <code class="docutils literal notranslate"><span class="pre">time_expanded_network</span></code>:
+build finite discrete-time networks from explicit travel and storage
+schedules.</p></li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">max_flow_protocol</span></code> and <code class="docutils literal notranslate"><span class="pre">min_cost_flow_protocol</span></code> protocols
 define the algorithm APIs. The <code class="docutils literal notranslate"><span class="pre">flow_support</span></code> and <code class="docutils literal notranslate"><span class="pre">max_flow_common</span></code>
@@ -520,6 +534,12 @@ categories contain the code shared by the algorithm objects.</p>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">new(Vertices,</span> <span class="pre">Arcs,</span> <span class="pre">Network)</span></code> predicate when isolated
+vertices matter. Explicit vertices are combined with arc endpoints,
+sorted and deduplicated. For example,
+<code class="docutils literal notranslate"><span class="pre">flow_network::new([s,t],</span> <span class="pre">[],</span> <span class="pre">Network)</span></code> has two isolated vertices and
+maximum flow zero. The <code class="docutils literal notranslate"><span class="pre">from_graph/2</span></code> predicate also preserves
+isolated vertices.</p>
 <p>Maximum flow and minimum cut:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> flow_network<span class="o">::</span>new([arc(s,a,<span class="m">10</span>), arc(s,b,<span class="m">10</span>), arc(a,b,<span class="m">2</span>), arc(a,t,<span class="m">8</span>), arc(b,t,<span class="m">10</span>)], <span class="nv">Network</span>),
      dinic<span class="o">::</span>max_flow(<span class="nv">Network</span>, s, t, <span class="nv">Value</span>, <span class="nv">Flow</span>).
@@ -640,6 +660,118 @@ vertex per worker and per job, unit capacity arcs from a source to the
 workers and from the jobs to a sink, and one arc per worker-job pair
 with the assignment cost.</p>
 </section>
+<section id="convex-piecewise-linear-costs">
+<h2>Convex piecewise-linear costs<a class="headerlink" href="#convex-piecewise-linear-costs" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">piecewise_costs::build(Vertices,</span> <span class="pre">CostArcs,</span> <span class="pre">Network,</span> <span class="pre">Mapping)</span></code> expands
+each <code class="docutils literal notranslate"><span class="pre">arc(From,To,Lower,Segments)</span></code> into ordinary linear-cost arcs.
+Each <code class="docutils literal notranslate"><span class="pre">segment(Width,MarginalCost)</span></code> has a positive integer width, and
+marginal costs must be nondecreasing integers, including negative
+values. The upper bound is the sum of widths and the convex cost at zero
+is zero. Lower bounds are assigned to the cheapest prefix of the
+segments.</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> piecewise_costs<span class="o">::</span>build([s,t],
+         [arc(s,t,<span class="m">3</span>,[segment(<span class="m">2</span>,<span class="o">-</span><span class="m">2</span>),segment(<span class="m">3</span>,<span class="m">1</span>)])], <span class="nv">Network</span>, <span class="nv">Mapping</span>),
+     successive_shortest_paths<span class="o">::</span>min_cost_flow(
+         <span class="nv">Network</span>, [s<span class="o">-</span><span class="m">3</span>,t<span class="o">-</span>(<span class="o">-</span><span class="m">3</span>)], <span class="nv">Cost</span>, <span class="nv">ExpandedFlow</span>),
+     piecewise_costs<span class="o">::</span>collapse_flow(<span class="nv">Network</span>, <span class="nv">Mapping</span>, <span class="nv">ExpandedFlow</span>, <span class="nv">Flow</span>).
+<span class="nv">Cost</span> <span class="o">=</span> <span class="o">-</span><span class="m">3</span>,
+<span class="nv">ExpandedFlow</span> <span class="o">=</span> [flow(<span class="m">1</span>,s,t,<span class="m">2</span>),flow(<span class="m">2</span>,s,t,<span class="m">1</span>)],
+<span class="nv">Flow</span> <span class="o">=</span> [flow(<span class="m">1</span>,s,t,<span class="m">3</span>)].
+</pre></div>
+</div>
+<p>Original arc IDs follow cost-arc input order; expanded IDs follow
+segment order. Parallel original arcs remain distinct. Keep the opaque
+mapping with its expanded network; projection checks its public
+vertices/arcs snapshot and validates expanded flow capacities. It sums
+segment amounts and omits zero original flows.</p>
+<p>The existing minimum-cost solver needs no changes to handle the expanded
+problem. An arbitrary feasible expanded flow, however, may use expensive
+segments while cheaper capacity remains unused. Projection rejects this
+noncanonical allocation because its linear cost would overstate the
+original convex cost. Distributions across equal-cost segments are
+accepted. Mandatory lower-bound cost is already included in the solver’s
+reported cost; do not subtract it. The original convex arcs are not
+themselves a core flow network, and projected flows should not be
+checked against the expanded network’s arc IDs.</p>
+<p>Construction is linear in total segment count before dictionary costs.
+This models convex integer piecewise-linear costs only, not concave
+costs, fixed charges, arbitrary nonlinear functions or floating-point
+slopes.</p>
+</section>
+<section id="all-pairs-minimum-cuts">
+<h2>All-pairs minimum cuts<a class="headerlink" href="#all-pairs-minimum-cuts" title="Link to this heading"></a></h2>
+<p>Gomory-Hu trees apply to undirected capacities, represented here by
+directed networks whose aggregate capacity from each vertex to another
+equals the aggregate capacity in the reverse direction. Parallel-arc
+multiplicities need not match. Costs and self-loops do not affect cuts.
+Asymmetric capacities and nonzero lower bounds are rejected, not
+silently transformed.</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> flow_network<span class="o">::</span>new([arc(a,b,<span class="m">3</span>),arc(b,a,<span class="m">3</span>),arc(b,c,<span class="m">2</span>),arc(c,b,<span class="m">2</span>)], <span class="nv">Network</span>),
+     gomory_hu<span class="o">::</span>tree(<span class="nv">Network</span>, <span class="nv">Tree</span>),
+     gomory_hu<span class="o">::</span>min_cut_value(<span class="nv">Tree</span>, a, c, <span class="nv">Value</span>).
+<span class="nv">Tree</span> <span class="o">=</span> tree([a,b,c], [edge(b,a,<span class="m">3</span>),edge(c,b,<span class="m">2</span>)]),
+<span class="nv">Value</span> <span class="o">=</span> <span class="m">2.</span>
+</pre></div>
+</div>
+<p>The tree uses exactly <code class="docutils literal notranslate"><span class="pre">n-1</span></code> Dinic minimum-cut calls for <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;=</span> <span class="pre">1</span></code>.
+The minimum edge on a tree path gives the original pairwise cut value;
+removing a tree edge gives a partition with that edge’s cut capacity in
+the original network. Disconnected components are linked by zero-weight
+edges. Empty and singleton networks are supported; value queries require
+distinct existing vertices. Tree queries validate the tree and build
+adjacency in O(V*log(V)) with balanced dictionaries, without an
+all-pairs table or LCA index.</p>
+</section>
+<section id="time-expanded-networks">
+<h2>Time-expanded networks<a class="headerlink" href="#time-expanded-networks" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">time_expanded_network::build(Vertices,</span> <span class="pre">Horizon,</span> <span class="pre">Travels,</span> <span class="pre">Storage,</span> <span class="pre">Network,</span> <span class="pre">Mapping)</span></code>
+creates every <code class="docutils literal notranslate"><span class="pre">time(Vertex,T)</span></code> for <code class="docutils literal notranslate"><span class="pre">T</span></code> from zero through the
+horizon, including isolated copies. Each input
+<code class="docutils literal notranslate"><span class="pre">travel(From,To,Departure,Duration,Lower,Capacity,Cost)</span></code> creates one
+departure-specific arc. Positive integer durations, non-negative integer
+capacities/lower bounds and integer costs can vary between departures.
+Each <code class="docutils literal notranslate"><span class="pre">store(Vertex,Time,Lower,Capacity,Cost)</span></code> creates a holdover arc
+to the next time step. Omitting an interval means no waiting capacity,
+not infinity.</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> time_expanded_network<span class="o">::</span>build(
+         [depot,shop], <span class="m">2</span>,
+         [travel(depot,shop,<span class="m">1</span>,<span class="m">1</span>,<span class="m">0</span>,<span class="m">2</span>,<span class="m">3</span>)],
+         [store(depot,<span class="m">0</span>,<span class="m">0</span>,<span class="m">2</span>,<span class="m">1</span>)], <span class="nv">Network</span>, <span class="nv">_</span>),
+     successive_shortest_paths<span class="o">::</span>min_cost_flow(
+         <span class="nv">Network</span>, [time(depot,<span class="m">0</span>)<span class="o">-</span><span class="m">2</span>,time(shop,<span class="m">2</span>)<span class="o">-</span>(<span class="o">-</span><span class="m">2</span>)], <span class="nv">Cost</span>, <span class="nv">Flow</span>).
+<span class="nv">Cost</span> <span class="o">=</span> <span class="m">8</span>,
+<span class="nv">Flow</span> <span class="o">=</span> [flow(<span class="m">1</span>,time(depot,<span class="m">1</span>),time(shop,<span class="m">2</span>),<span class="m">2</span>),
+        flow(<span class="m">2</span>,time(depot,<span class="m">0</span>),time(depot,<span class="m">1</span>),<span class="m">2</span>)].
+</pre></div>
+</div>
+<p>Travel entries come first in the arc order, followed by storage entries.
+The result <code class="docutils literal notranslate"><span class="pre">mapping(TravelEntries,StorageEntries)</span></code> contains
+<code class="docutils literal notranslate"><span class="pre">travel(ArcId,EntryId,From,To,Departure,Arrival)</span></code> and
+<code class="docutils literal notranslate"><span class="pre">store(ArcId,EntryId,Vertex,Time,Arrival)</span></code> entries, with one-based IDs
+in each input schedule. All endpoints must be declared base vertices;
+invalid times, zero durations and arrivals beyond the horizon raise
+errors.</p>
+<p>For inventory, specify supplies and demands at exact time copies. For
+evacuation by a deadline, add collection arcs from eligible destination
+time copies to a fresh terminal, using a justified finite capacity
+bound, and call maximum flow. Storage limits a single holding interval,
+not a physical vertex’s capacity shared across all times. Nonzero lower
+bounds require supply-based minimum-cost flow; maximum-flow APIs still
+reject them.</p>
+<p>Explicit schedules support time-dependent travel and costs without
+callbacks. Constant schedules can be generated as input lists.
+Zero-duration travel, continuous time and automatic horizon selection
+are not supported. Network size is O(V*(H+1) + number of travel entries
++ number of storage entries).</p>
+</section>
+<section id="application-reductions">
+<h2>Application reductions<a class="headerlink" href="#application-reductions" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">flow_networks_modeling</span></code> example demonstrates maximum-weight
+closure/project selection, binary image segmentation and baseball
+elimination, including decoded solutions, finite-capacity bounds and
+elimination certificates. They are executable examples, not
+application-specific library APIs.</p>
+</section>
 <section id="algorithms">
 <h2>Algorithms<a class="headerlink" href="#algorithms" title="Link to this heading"></a></h2>
 <ul class="simple">
@@ -647,6 +779,15 @@ with the assignment cost.</p>
 <li><p>Dinic: O(V^2*E). Vertices that cannot push the requested amount of
 flow are recorded as dead for the rest of the phase, replacing the
 current-arc pointers of imperative implementations.</p></li>
+<li><p>Capacity scaling: O(E^2*log(U)) for maximum capacity U, before
+dictionary costs. Starts with the largest power of two no greater than
+U and halves the residual-capacity threshold down to one. Large
+capacities alone do not imply a speedup over Dinic, whose bound is
+independent of U. Small sparse, dense and bipartite comparisons on GNU
+Prolog favored Dinic, increasingly so for larger capacity ranges. Use
+scaling as an explicit alternative, not a default performance
+optimization. Min-cost scaling requires a separate algorithm and is
+not provided.</p></li>
 <li><p>Successive shortest paths: Dijkstra with node potentials (reduced
 costs) and a binary heap. Arcs with negative cost are saturated
 beforehand so that all residual costs are non-negative; this also

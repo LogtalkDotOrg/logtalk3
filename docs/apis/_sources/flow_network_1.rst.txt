@@ -35,7 +35,7 @@ Flow network construction and inspection. The network is an opaque term. Each in
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`flow_network_protocol/0::arcs/2`  :ref:`flow_network_protocol/0::cut_capacity/3`  :ref:`flow_network_protocol/0::decompose_flow/3`  :ref:`flow_network_protocol/0::flow_balances/3`  :ref:`flow_network_protocol/0::flow_cost/3`  :ref:`flow_network_protocol/0::from_graph/2`  :ref:`flow_network_protocol/0::new/2`  :ref:`flow_network_protocol/0::valid_cut/5`  :ref:`flow_network_protocol/0::valid_flow/3`  :ref:`flow_network_protocol/0::valid_min_cost_flow/4`  :ref:`flow_network_protocol/0::valid_min_cost_flow/5`  :ref:`flow_network_protocol/0::valid_st_flow/5`  :ref:`flow_network_protocol/0::vertices/2`  
+|     :ref:`flow_network_protocol/0::arcs/2`  :ref:`flow_network_protocol/0::cut_capacity/3`  :ref:`flow_network_protocol/0::decompose_flow/3`  :ref:`flow_network_protocol/0::flow_balances/3`  :ref:`flow_network_protocol/0::flow_cost/3`  :ref:`flow_network_protocol/0::from_graph/2`  :ref:`flow_network_protocol/0::new/2`  :ref:`flow_network_protocol/0::new/3`  :ref:`flow_network_protocol/0::valid_cut/5`  :ref:`flow_network_protocol/0::valid_flow/3`  :ref:`flow_network_protocol/0::valid_min_cost_flow/4`  :ref:`flow_network_protocol/0::valid_min_cost_flow/5`  :ref:`flow_network_protocol/0::valid_st_flow/5`  :ref:`flow_network_protocol/0::vertices/2`  
 
 .. contents::
    :local:

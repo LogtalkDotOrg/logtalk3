@@ -26,7 +26,7 @@
 		author is 'Paulo Moura',
 		date is 2026-11-16,
 		comment is 'Maximum flow and minimum cut protocol.',
-		see_also is [flow_network_protocol, edmonds_karp(_), dinic(_)]
+		see_also is [flow_network_protocol, edmonds_karp(_), dinic(_), capacity_scaling(_)]
 	]).
 
 	:- public(max_flow/5).

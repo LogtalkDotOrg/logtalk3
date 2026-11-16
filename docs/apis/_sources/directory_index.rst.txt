@@ -1570,6 +1570,8 @@ To load an entity, always load the library that includes it using the goal ``log
    .. toctree::
       :maxdepth: 1
 
+      capacity_scaling <capacity_scaling_0>
+      capacity_scaling(Dictionary) <capacity_scaling_1>
       dinic <dinic_0>
       dinic(Dictionary) <dinic_1>
       edmonds_karp <edmonds_karp_0>
@@ -1578,14 +1580,22 @@ To load an entity, always load the library that includes it using the goal ``log
       flow_network(Dictionary) <flow_network_1>
       flow_network_protocol <flow_network_protocol_0>
       flow_support(Dictionary) <flow_support_1>
+      gomory_hu <gomory_hu_0>
+      gomory_hu(Dictionary) <gomory_hu_1>
       max_flow_common(Dictionary) <max_flow_common_1>
       max_flow_protocol <max_flow_protocol_0>
       min_cost_flow_protocol <min_cost_flow_protocol_0>
+      piecewise_costs <piecewise_costs_0>
+      piecewise_costs(Dictionary) <piecewise_costs_1>
       successive_shortest_paths <successive_shortest_paths_0>
       successive_shortest_paths(Dictionary) <successive_shortest_paths_1>
+      time_expanded_network <time_expanded_network_0>
+      time_expanded_network(Dictionary) <time_expanded_network_1>
 
 .. only:: latex
 
+   * :doc:`capacity_scaling <capacity_scaling_0>`
+   * :doc:`capacity_scaling(Dictionary) <capacity_scaling_1>`
    * :doc:`dinic <dinic_0>`
    * :doc:`dinic(Dictionary) <dinic_1>`
    * :doc:`edmonds_karp <edmonds_karp_0>`
@@ -1594,11 +1604,17 @@ To load an entity, always load the library that includes it using the goal ``log
    * :doc:`flow_network(Dictionary) <flow_network_1>`
    * :doc:`flow_network_protocol <flow_network_protocol_0>`
    * :doc:`flow_support(Dictionary) <flow_support_1>`
+   * :doc:`gomory_hu <gomory_hu_0>`
+   * :doc:`gomory_hu(Dictionary) <gomory_hu_1>`
    * :doc:`max_flow_common(Dictionary) <max_flow_common_1>`
    * :doc:`max_flow_protocol <max_flow_protocol_0>`
    * :doc:`min_cost_flow_protocol <min_cost_flow_protocol_0>`
+   * :doc:`piecewise_costs <piecewise_costs_0>`
+   * :doc:`piecewise_costs(Dictionary) <piecewise_costs_1>`
    * :doc:`successive_shortest_paths <successive_shortest_paths_0>`
    * :doc:`successive_shortest_paths(Dictionary) <successive_shortest_paths_1>`
+   * :doc:`time_expanded_network <time_expanded_network_0>`
+   * :doc:`time_expanded_network(Dictionary) <time_expanded_network_1>`
 
 ``library/format/``
 -------------------

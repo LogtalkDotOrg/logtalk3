@@ -152,6 +152,8 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#fisher-score-feature-selector"><span class="xref std std-ref">fisher_score_feature_selector</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#flags"><span class="xref std std-ref">flags</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#flow-networks"><span class="xref std std-ref">flow_networks</span></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="capacity_scaling_0.html">capacity_scaling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="capacity_scaling_1.html">capacity_scaling(Dictionary)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dinic_0.html">dinic</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dinic_1.html">dinic(Dictionary)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="edmonds_karp_0.html">edmonds_karp</a></li>
@@ -160,11 +162,17 @@
 <li class="toctree-l3"><a class="reference internal" href="flow_network_1.html">flow_network(Dictionary)</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">flow_network_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="flow_support_1.html">flow_support(Dictionary)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gomory_hu_0.html">gomory_hu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gomory_hu_1.html">gomory_hu(Dictionary)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="max_flow_common_1.html">max_flow_common(Dictionary)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="max_flow_protocol_0.html">max_flow_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="min_cost_flow_protocol_0.html">min_cost_flow_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="piecewise_costs_0.html">piecewise_costs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="piecewise_costs_1.html">piecewise_costs(Dictionary)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="successive_shortest_paths_0.html">successive_shortest_paths</a></li>
 <li class="toctree-l3"><a class="reference internal" href="successive_shortest_paths_1.html">successive_shortest_paths(Dictionary)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time_expanded_network_0.html">time_expanded_network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time_expanded_network_1.html">time_expanded_network(Dictionary)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#format"><span class="xref std std-ref">format</span></a></li>
@@ -524,23 +532,24 @@
 <li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
 <ul>
 <li><p><a class="reference internal" href="#new-2" id="id2"><code class="docutils literal notranslate"><span class="pre">new/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#from-graph-2" id="id3"><code class="docutils literal notranslate"><span class="pre">from_graph/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#vertices-2" id="id4"><code class="docutils literal notranslate"><span class="pre">vertices/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#arcs-2" id="id5"><code class="docutils literal notranslate"><span class="pre">arcs/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#flow-cost-3" id="id6"><code class="docutils literal notranslate"><span class="pre">flow_cost/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#flow-balances-3" id="id7"><code class="docutils literal notranslate"><span class="pre">flow_balances/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#cut-capacity-3" id="id8"><code class="docutils literal notranslate"><span class="pre">cut_capacity/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#valid-cut-5" id="id9"><code class="docutils literal notranslate"><span class="pre">valid_cut/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#decompose-flow-3" id="id10"><code class="docutils literal notranslate"><span class="pre">decompose_flow/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#valid-flow-3" id="id11"><code class="docutils literal notranslate"><span class="pre">valid_flow/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#valid-st-flow-5" id="id12"><code class="docutils literal notranslate"><span class="pre">valid_st_flow/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#valid-min-cost-flow-4" id="id13"><code class="docutils literal notranslate"><span class="pre">valid_min_cost_flow/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#valid-min-cost-flow-5" id="id14"><code class="docutils literal notranslate"><span class="pre">valid_min_cost_flow/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#new-3" id="id3"><code class="docutils literal notranslate"><span class="pre">new/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#from-graph-2" id="id4"><code class="docutils literal notranslate"><span class="pre">from_graph/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#vertices-2" id="id5"><code class="docutils literal notranslate"><span class="pre">vertices/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#arcs-2" id="id6"><code class="docutils literal notranslate"><span class="pre">arcs/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#flow-cost-3" id="id7"><code class="docutils literal notranslate"><span class="pre">flow_cost/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#flow-balances-3" id="id8"><code class="docutils literal notranslate"><span class="pre">flow_balances/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#cut-capacity-3" id="id9"><code class="docutils literal notranslate"><span class="pre">cut_capacity/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-cut-5" id="id10"><code class="docutils literal notranslate"><span class="pre">valid_cut/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#decompose-flow-3" id="id11"><code class="docutils literal notranslate"><span class="pre">decompose_flow/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-flow-3" id="id12"><code class="docutils literal notranslate"><span class="pre">valid_flow/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-st-flow-5" id="id13"><code class="docutils literal notranslate"><span class="pre">valid_st_flow/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-min-cost-flow-4" id="id14"><code class="docutils literal notranslate"><span class="pre">valid_min_cost_flow/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-min-cost-flow-5" id="id15"><code class="docutils literal notranslate"><span class="pre">valid_min_cost_flow/5</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id15">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id16">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id17">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id16">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id17">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id18">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -561,46 +570,100 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">new(+list(compound),--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">new(+list(ground),--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Arcs</span></code> is a partial list or contains a non-ground vertex:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Arcs</span></code> is a partial list or a list with an element <code class="docutils literal notranslate"><span class="pre">Element</span></code> which is not ground:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Arcs</span></code> is neither a variable nor a list:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Arcs)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(ground),Arcs)</span></code></div>
 </div>
-<div class="line">An element of <code class="docutils literal notranslate"><span class="pre">Arcs</span></code> is not an <code class="docutils literal notranslate"><span class="pre">arc/3</span></code>, <code class="docutils literal notranslate"><span class="pre">arc/4</span></code>, or <code class="docutils literal notranslate"><span class="pre">arc/5</span></code> term:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Arc</span></code> of <code class="docutils literal notranslate"><span class="pre">Arcs</span></code> list is not an <code class="docutils literal notranslate"><span class="pre">arc/3</span></code>, <code class="docutils literal notranslate"><span class="pre">arc/4</span></code>, or <code class="docutils literal notranslate"><span class="pre">arc/5</span></code> term:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(flow_arc,Arc)</span></code></div>
 </div>
-<div class="line">A lower bound is not a non-negative integer:</div>
+<div class="line">A capacity, lower bound or cost value is not an integer:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Lower)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Value)</span></code></div>
+</div>
+<div class="line">A lower bound or capacity value is negative:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Value)</span></code></div>
 </div>
 <div class="line">A lower bound exceeds the capacity:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(arc_lower_bound_and_capacity,Lower,Capacity)</span></code></div>
 </div>
-<div class="line">A capacity is not a non-negative integer:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Capacity)</span></code></div>
 </div>
-<div class="line">A cost is not an integer:</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="new-3">
+<span id="flow-network-protocol-0-new-3"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">new/3</span></code></a><a class="headerlink" href="#new-3" title="Link to this heading"></a></h3>
+<p>As <code class="docutils literal notranslate"><span class="pre">new/2</span></code>, also preserving explicitly listed vertices, including isolated vertices. The vertex set is the sorted, duplicate-free union of <code class="docutils literal notranslate"><span class="pre">Vertices</span></code> and arc endpoints.</p>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Cost)</span></code></div>
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">new(Vertices,Arcs,Network)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">new(+list(ground),+list(ground),--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Vertices</span></code> is a partial list or a list with an element <code class="docutils literal notranslate"><span class="pre">Element</span></code> which is not ground:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Vertices</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(ground),Vertices)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Arcs</span></code> is a partial list or a list with an element <code class="docutils literal notranslate"><span class="pre">Element</span></code> which is not ground:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Arcs</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(ground),Arcs)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Arc</span></code> of <code class="docutils literal notranslate"><span class="pre">Arcs</span></code> list is not an <code class="docutils literal notranslate"><span class="pre">arc/3</span></code>, <code class="docutils literal notranslate"><span class="pre">arc/4</span></code>, or <code class="docutils literal notranslate"><span class="pre">arc/5</span></code> term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(flow_arc,Arc)</span></code></div>
+</div>
+<div class="line">A capacity, lower bound or cost value is not an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Value)</span></code></div>
+</div>
+<div class="line">A lower bound or capacity value is negative:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Value)</span></code></div>
+</div>
+<div class="line">A lower bound exceeds the capacity:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(arc_lower_bound_and_capacity,Lower,Capacity)</span></code></div>
 </div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="from-graph-2">
-<span id="flow-network-protocol-0-from-graph-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">from_graph/2</span></code></a><a class="headerlink" href="#from-graph-2" title="Link to this heading"></a></h3>
+<span id="flow-network-protocol-0-from-graph-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">from_graph/2</span></code></a><a class="headerlink" href="#from-graph-2" title="Link to this heading"></a></h3>
 <p>Constructs a flow network from a weighted directed graph (created using the <code class="docutils literal notranslate"><span class="pre">graphs</span></code> library with the same dictionary object). Edge weights are interpreted as capacities and all costs are zero.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -621,7 +684,7 @@
 <hr class="docutils" />
 </section>
 <section id="vertices-2">
-<span id="flow-network-protocol-0-vertices-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">vertices/2</span></code></a><a class="headerlink" href="#vertices-2" title="Link to this heading"></a></h3>
+<span id="flow-network-protocol-0-vertices-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">vertices/2</span></code></a><a class="headerlink" href="#vertices-2" title="Link to this heading"></a></h3>
 <p>Returns the sorted list of vertices of a flow network (including vertices that only occur in self-loops).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -642,7 +705,7 @@
 <hr class="docutils" />
 </section>
 <section id="arcs-2">
-<span id="flow-network-protocol-0-arcs-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">arcs/2</span></code></a><a class="headerlink" href="#arcs-2" title="Link to this heading"></a></h3>
+<span id="flow-network-protocol-0-arcs-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">arcs/2</span></code></a><a class="headerlink" href="#arcs-2" title="Link to this heading"></a></h3>
 <p>Returns the arcs of a flow network as <code class="docutils literal notranslate"><span class="pre">arc(From,</span> <span class="pre">To,</span> <span class="pre">Lower,</span> <span class="pre">Capacity,</span> <span class="pre">Cost)</span></code> terms in the order they were given to <code class="docutils literal notranslate"><span class="pre">new/2</span></code>, including self-loops.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -663,7 +726,7 @@
 <hr class="docutils" />
 </section>
 <section id="flow-cost-3">
-<span id="flow-network-protocol-0-flow-cost-3"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">flow_cost/3</span></code></a><a class="headerlink" href="#flow-cost-3" title="Link to this heading"></a></h3>
+<span id="flow-network-protocol-0-flow-cost-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">flow_cost/3</span></code></a><a class="headerlink" href="#flow-cost-3" title="Link to this heading"></a></h3>
 <p>Computes the cost of a capacity-valid flow, without requiring conservation or optimality. Each entry must be a <code class="docutils literal notranslate"><span class="pre">flow(ArcId,</span> <span class="pre">From,</span> <span class="pre">To,</span> <span class="pre">Amount)</span></code> term with a unique one-based arc ID, matching endpoints, and a positive integer amount. Every arc lower and upper bound must be respected, including omitted mandatory arcs. Entries may be in any order. Self-loop flows contribute their full cost.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -721,7 +784,7 @@
 <hr class="docutils" />
 </section>
 <section id="flow-balances-3">
-<span id="flow-network-protocol-0-flow-balances-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">flow_balances/3</span></code></a><a class="headerlink" href="#flow-balances-3" title="Link to this heading"></a></h3>
+<span id="flow-network-protocol-0-flow-balances-3"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">flow_balances/3</span></code></a><a class="headerlink" href="#flow-balances-3" title="Link to this heading"></a></h3>
 <p>Returns sorted <code class="docutils literal notranslate"><span class="pre">Vertex-NetOutflow</span></code> pairs for every vertex, including zero balances. Positive balances indicate supplies and negative balances indicate demands. Self-loops contribute zero net outflow. Requires a capacity-valid flow with the same validation and exceptions as <code class="docutils literal notranslate"><span class="pre">flow_cost/3</span></code>, but does not require conservation against particular supplies.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -742,7 +805,7 @@
 <hr class="docutils" />
 </section>
 <section id="cut-capacity-3">
-<span id="flow-network-protocol-0-cut-capacity-3"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">cut_capacity/3</span></code></a><a class="headerlink" href="#cut-capacity-3" title="Link to this heading"></a></h3>
+<span id="flow-network-protocol-0-cut-capacity-3"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">cut_capacity/3</span></code></a><a class="headerlink" href="#cut-capacity-3" title="Link to this heading"></a></h3>
 <p>Computes the capacity of the cut whose source side is the given vertex set and whose sink side is its complement. Input order is immaterial; vertices must be unique and belong to the network. Empty and full sets are allowed. Counts parallel crossing arcs individually and excludes self-loops. Requires zero lower bounds.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -788,7 +851,7 @@
 <hr class="docutils" />
 </section>
 <section id="valid-cut-5">
-<span id="flow-network-protocol-0-valid-cut-5"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_cut/5</span></code></a><a class="headerlink" href="#valid-cut-5" title="Link to this heading"></a></h3>
+<span id="flow-network-protocol-0-valid-cut-5"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_cut/5</span></code></a><a class="headerlink" href="#valid-cut-5" title="Link to this heading"></a></h3>
 <p>Checks a ground <code class="docutils literal notranslate"><span class="pre">cut(SourceSide,</span> <span class="pre">SinkSide,</span> <span class="pre">Arcs)</span></code> candidate and its reported capacity. The sides must be sorted, duplicate-free lists forming a complete disjoint partition of the network vertices, with distinct existing source and sink on their respective sides. <code class="docutils literal notranslate"><span class="pre">Arcs</span></code> must list every positive-capacity crossing arc in network input order, including parallel arcs. Requires zero lower bounds and fails for invalid candidates. Cut validity does not imply minimum-cut optimality.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -809,7 +872,7 @@
 <hr class="docutils" />
 </section>
 <section id="decompose-flow-3">
-<span id="flow-network-protocol-0-decompose-flow-3"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">decompose_flow/3</span></code></a><a class="headerlink" href="#decompose-flow-3" title="Link to this heading"></a></h3>
+<span id="flow-network-protocol-0-decompose-flow-3"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">decompose_flow/3</span></code></a><a class="headerlink" href="#decompose-flow-3" title="Link to this heading"></a></h3>
 <p>Decomposes a feasible flow into a list of <code class="docutils literal notranslate"><span class="pre">path(Vertices,</span> <span class="pre">ArcIds,</span> <span class="pre">Amount)</span></code> and <code class="docutils literal notranslate"><span class="pre">cycle(Vertices,</span> <span class="pre">ArcIds,</span> <span class="pre">Amount)</span></code> terms. Path endpoints are inferred from the flow balances. Vertex lists for cycles repeat the first vertex at the end. Arc IDs are one-based input arc positions.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -830,7 +893,7 @@
 <hr class="docutils" />
 </section>
 <section id="valid-flow-3">
-<span id="flow-network-protocol-0-valid-flow-3"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_flow/3</span></code></a><a class="headerlink" href="#valid-flow-3" title="Link to this heading"></a></h3>
+<span id="flow-network-protocol-0-valid-flow-3"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_flow/3</span></code></a><a class="headerlink" href="#valid-flow-3" title="Link to this heading"></a></h3>
 <p>Checks that <code class="docutils literal notranslate"><span class="pre">Flow</span></code> respects every arc lower and upper capacity bound and that vertex net outflows match the given supplies and demands. Duplicate supply entries are added.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -851,7 +914,7 @@
 <hr class="docutils" />
 </section>
 <section id="valid-st-flow-5">
-<span id="flow-network-protocol-0-valid-st-flow-5"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_st_flow/5</span></code></a><a class="headerlink" href="#valid-st-flow-5" title="Link to this heading"></a></h3>
+<span id="flow-network-protocol-0-valid-st-flow-5"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_st_flow/5</span></code></a><a class="headerlink" href="#valid-st-flow-5" title="Link to this heading"></a></h3>
 <p>Checks that <code class="docutils literal notranslate"><span class="pre">Flow</span></code> respects capacities and conservation for a source-to-sink flow of the given value. Fails if either terminal is not ground.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -872,7 +935,7 @@
 <hr class="docutils" />
 </section>
 <section id="valid-min-cost-flow-4">
-<span id="flow-network-protocol-0-valid-min-cost-flow-4"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_min_cost_flow/4</span></code></a><a class="headerlink" href="#valid-min-cost-flow-4" title="Link to this heading"></a></h3>
+<span id="flow-network-protocol-0-valid-min-cost-flow-4"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_min_cost_flow/4</span></code></a><a class="headerlink" href="#valid-min-cost-flow-4" title="Link to this heading"></a></h3>
 <p>Checks flow feasibility, the reported cost, and min-cost optimality by checking for negative-cost cycles in the residual graph.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -893,7 +956,7 @@
 <hr class="docutils" />
 </section>
 <section id="valid-min-cost-flow-5">
-<span id="flow-network-protocol-0-valid-min-cost-flow-5"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_min_cost_flow/5</span></code></a><a class="headerlink" href="#valid-min-cost-flow-5" title="Link to this heading"></a></h3>
+<span id="flow-network-protocol-0-valid-min-cost-flow-5"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_min_cost_flow/5</span></code></a><a class="headerlink" href="#valid-min-cost-flow-5" title="Link to this heading"></a></h3>
 <p>Checks flow feasibility and cost, and validates a potential certificate by verifying non-negative reduced costs on every positive-capacity residual arc.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

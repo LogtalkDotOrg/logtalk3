@@ -82,6 +82,13 @@
 		argnames is ['Network', 'Residual', 'Source', 'Stop', 'Info']
 	]).
 
+	:- protected(bfs/6).
+	:- mode(bfs(+compound, +compound, +ground, +nonvar, +positive_integer, -compound), one).
+	:- info(bfs/6, [
+		comment is 'As ``bfs/5``, traversing only arcs whose residual capacity is at least ``Threshold``.',
+		argnames is ['Network', 'Residual', 'Source', 'Stop', 'Threshold', 'Info']
+	]).
+
 	:- protected(augment/4).
 	:- mode(augment(+list(integer), +integer, +compound, -compound), one).
 	:- info(augment/4, [
@@ -155,14 +162,17 @@
 		;	Ids = []
 		).
 
-	bfs(network(_, Arcs, Adjacency, _), Residual, Source, Stop, Info) :-
+	bfs(Network, Residual, Source, Stop, Info) :-
+		bfs(Network, Residual, Source, Stop, 1, Info).
+
+	bfs(network(_, Arcs, Adjacency, _), Residual, Source, Stop, Threshold, Info) :-
 		dict_new(Info0),
 		dict_insert(Info0, Source, 0-none, Info1),
 		queue_new(Queue0),
 		queue_join(Source, Queue0, Queue1),
-		bfs_loop(Queue1, Arcs, Adjacency, Residual, Stop, Info1, Info).
+		bfs_loop(Queue1, Arcs, Adjacency, Residual, Stop, Threshold, Info1, Info).
 
-	bfs_loop(Queue0, Arcs, Adjacency, Residual, Stop, Info0, Info) :-
+	bfs_loop(Queue0, Arcs, Adjacency, Residual, Stop, Threshold, Info0, Info) :-
 		(	queue_empty(Queue0) ->
 			Info = Info0
 		;	queue_serve(Queue0, Vertex, Queue1),
@@ -172,18 +182,18 @@
 				true
 			;	Ids = []
 			),
-			bfs_expand(Ids, Level1, Arcs, Residual, Stop, Queue1, Queue2, Info0, Info1, Found),
+			bfs_expand(Ids, Level1, Arcs, Residual, Stop, Threshold, Queue1, Queue2, Info0, Info1, Found),
 			(	Found == true ->
 				Info = Info1
-			;	bfs_loop(Queue2, Arcs, Adjacency, Residual, Stop, Info1, Info)
+			;	bfs_loop(Queue2, Arcs, Adjacency, Residual, Stop, Threshold, Info1, Info)
 			)
 		).
 
-	bfs_expand([], _, _, _, _, Queue, Queue, Info, Info, false).
-	bfs_expand([Id| Ids], Level, Arcs, Residual, Stop, Queue0, Queue, Info0, Info, Found) :-
+	bfs_expand([], _, _, _, _, _, Queue, Queue, Info, Info, false).
+	bfs_expand([Id| Ids], Level, Arcs, Residual, Stop, Threshold, Queue0, Queue, Info0, Info, Found) :-
 		dict_lookup(Id, Capacity, Residual),
 		dict_lookup(Id, arc(_, To, _, _), Arcs),
-		(	Capacity > 0,
+		(	Capacity >= Threshold,
 			\+ dict_lookup(To, _, Info0) ->
 			dict_insert(Info0, To, Level-Id, Info1),
 			queue_join(To, Queue0, Queue1),
@@ -191,9 +201,9 @@
 				Queue = Queue1,
 				Info = Info1,
 				Found = true
-			;	bfs_expand(Ids, Level, Arcs, Residual, Stop, Queue1, Queue, Info1, Info, Found)
+			;	bfs_expand(Ids, Level, Arcs, Residual, Stop, Threshold, Queue1, Queue, Info1, Info, Found)
 			)
-		;	bfs_expand(Ids, Level, Arcs, Residual, Stop, Queue0, Queue, Info0, Info, Found)
+		;	bfs_expand(Ids, Level, Arcs, Residual, Stop, Threshold, Queue0, Queue, Info0, Info, Found)
 		).
 
 	augment([], _, Residual, Residual).
