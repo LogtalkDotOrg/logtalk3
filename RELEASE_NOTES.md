@@ -395,6 +395,9 @@ algorithm limitations.
 outputting the plus sign when writing floats in scientific notation. Thanks
 to Andrew Davison for the bug report and patch.
 
+* FIXED: Spurious choice-points in the `character_sets` library
+`bytes_to_codes/2` predicates.
+
 * FIXED: Spurious choice-points in expected deterministic `graphs` library
 predicates.
 

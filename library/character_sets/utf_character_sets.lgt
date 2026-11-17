@@ -136,9 +136,9 @@
 	extends(character_set)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-08-04,
+		date is 2026-11-17,
 		comment is 'UTF-16 character set implementation parameterized by byte order.',
 		parnames is ['Endian']
 	]).
@@ -167,7 +167,8 @@
 		),
 		codes_to_bytes(Codes, Endian, Bytes1, Bytes).
 
-	bytes_to_codes([], _, []).
+	bytes_to_codes([], _, []) :-
+		!.
 	bytes_to_codes(Bytes0, Endian, [Code| Codes]) :-
 		^^endian_order(Endian, Order),
 		bytes_to_integer(Order, 2, Bytes0, Word, Bytes),
@@ -190,9 +191,9 @@
 	extends(character_set)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-08-04,
+		date is 2026-11-17,
 		comment is 'UTF-32 character set implementation parameterized by byte order.',
 		parnames is ['Endian']
 	]).
@@ -214,7 +215,8 @@
 		integer_to_bytes(Order, 4, Code, Bytes0, Bytes1),
 		codes_to_bytes(Codes, Endian, Bytes1, Bytes).
 
-	bytes_to_codes([], _, []).
+	bytes_to_codes([], _, []) :-
+		!.
 	bytes_to_codes(Bytes0, Endian, [Code| Codes]) :-
 		^^endian_order(Endian, Order),
 		bytes_to_integer(Order, 4, Bytes0, Code, Bytes),
