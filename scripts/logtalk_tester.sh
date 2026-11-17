@@ -1077,8 +1077,8 @@ if [ "$testsets" -gt 1 ] && [ -n "$fastest_unit" ] ; then
 	echo "% Fastest test set: $fastest_unit ($(format_decimal "$min_duration" 3) seconds)"
 	echo "% Slowest test set: $slowest_unit ($(format_decimal "$max_duration" 3) seconds)"
 	if [ -n "$mean_duration" ] ; then
-		echo "% Mean test set running time: $(format_decimal "$mean_duration" 3) seconds"
-		echo "% Median test set running time: $(format_decimal "$median_duration" 3) seconds"
+		echo "% Mean test set runtime: $(format_decimal "$mean_duration" 3) seconds"
+		echo "% Median test set runtime: $(format_decimal "$median_duration" 3) seconds"
 	fi
 fi
 

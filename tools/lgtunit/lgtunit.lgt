@@ -28,9 +28,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 22:11:0,
+		version is 22:12:0,
 		author is 'Paulo Moura',
-		date is 2026-10-28,
+		date is 2026-11-17,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -796,6 +796,14 @@
 		argnames is ['Identifier', 'Variables', 'Outcome']
 	]).
 
+	:- private(test_time_/3).
+	:- dynamic(test_time_/3).
+	:- mode(test_time_(?callable, ?object, ?float), zero_or_more).
+	:- info(test_time_/3, [
+		comment is 'Test identifiers, objects, and wall times for the current test run.',
+		argnames is ['Test', 'Object', 'WallTime']
+	]).
+
 	:- private(auxiliary_predicate_counter_/1).
 	:- dynamic(auxiliary_predicate_counter_/1).
 	:- mode(auxiliary_predicate_counter_(?integer), one_or_more).
@@ -903,7 +911,11 @@
 
 	% library list predicates
 	:- uses(list, [
-		append/3, length/2, member/2, memberchk/2, nth1/3, select/3
+		append/3, last/2, length/2, member/2, memberchk/2, nth1/3, select/3
+	]).
+
+	:- uses(numberlist, [
+		average/2, median/2, sum/2
 	]).
 
 	% for QuickCheck support
@@ -1178,6 +1190,7 @@
 		current_output(Output),
 		working_directory(Directory),
 		retractall(running_test_sets_),
+		reset_test_stats,
 		reset_test_counters,
 		reset_coverage_results,
 		write_tests_header,
@@ -1206,6 +1219,7 @@
 		!,
 		retractall(running_test_sets_),
 		assertz(running_test_sets_),
+		reset_test_stats,
 		reset_coverage_results,
 		write_tests_header,
 		run_test_sets_([TestSet1, TestSet2| TestSets]),
@@ -1260,6 +1274,7 @@
 		% save the current output stream and working directory
 		current_output(Output),
 		working_directory(Directory),
+		reset_test_stats,
 		reset_test_counters,
 		reset_coverage_results,
 		(	run_setup ->
@@ -1274,6 +1289,7 @@
 			write_coverage_results
 		;	tests_skipped
 		),
+		write_test_stats,
 		% restore the current output stream and working directory
 		change_directory(Directory),
 		set_output(Output).
@@ -1535,6 +1551,8 @@
 	write_tests_footer :-
 		os::date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
 		print_message(information, lgtunit, tests_end_date_time(Year, Month, Day, Hours, Minutes, Seconds)),
+		write_tests_runtime,
+		write_test_stats,
 		print_message(silent, lgtunit, tests_ended).
 
 	passed_test(Test, File, Position, Flaky, Note, CPUStart, WallStart, Output) :-
@@ -1544,6 +1562,7 @@
 		wall_time(WallEnd),
 		WallTime is WallEnd - WallStart,
 		increment_passed_tests_counter(CPUTime, WallTime),
+		assertz(test_time_(Test, Object, WallTime)),
 		% ensure that any redirection of the current output stream by
 		% the test itself doesn't affect printing the test results
 		current_output(Current), set_output(Output),
@@ -1560,6 +1579,7 @@
 		wall_time(WallEnd),
 		WallTime is WallEnd - WallStart,
 		increment_failed_tests_counter(CPUTime, WallTime),
+		assertz(test_time_(Test, Object, WallTime)),
 		(	Flaky == true ->
 			increment_flaky_tests_counter
 		;	atom(Note), sub_atom(Note, _, _, _, flaky) ->
@@ -1659,6 +1679,33 @@
 		assertz(auxiliary_predicate_counter_(0)),
 		retractall(test_(_, _)),
 		retractall(selected_test_(_)).
+
+	reset_test_stats :-
+		retractall(test_time_(_, _, _)).
+
+	write_tests_runtime :-
+		findall(WallTime, test_time_(_, _, WallTime), WallTimes),
+		sum(WallTimes, Runtime),
+		print_message(information, lgtunit, tests_runtime(Runtime)).
+
+	write_test_stats :-
+		(	test_stats(Stats) ->
+			print_message(information, lgtunit, Stats)
+		;	true
+		),
+		reset_test_stats.
+
+	test_stats(Stats) :-
+		findall(WallTime-test(Test, Object), test_time_(Test, Object, WallTime), Tests),
+		test_stats(Tests, Stats).
+
+	test_stats(Tests, test_stats(FastestTest, FastestObject, FastestWallTime, SlowestTest, SlowestObject, SlowestWallTime, MeanWallTime, MedianWallTime)) :-
+		keysort(Tests, SortedTests),
+		SortedTests = [FastestWallTime-test(FastestTest, FastestObject)| _],
+		last(SortedTests, SlowestWallTime-test(SlowestTest, SlowestObject)),
+		findall(WallTime, member(WallTime-_, Tests), WallTimes),
+		average(WallTimes, MeanWallTime),
+		median(WallTimes, MedianWallTime).
 
 	increment_skipped_tests_counter :-
 		::retract(skipped_(Old)),

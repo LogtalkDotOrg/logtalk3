@@ -14,8 +14,8 @@ A unit test framework supporting predicate clause coverage, determinism testing,
 |    ``logtalk_load(lgtunit(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 22:11:0
-| **Date:** 2026-10-28
+| **Version:** 22:12:0
+| **Date:** 2026-11-17
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -35,6 +35,7 @@ A unit test framework supporting predicate clause coverage, determinism testing,
 |    :ref:`fast_random <fast_random/0>`
 |    :ref:`list <list/0>`
 |    :ref:`logtalk <logtalk/0>`
+|    :ref:`numberlist <numberlist/0>`
 |    :ref:`os <os/0>`
 |    :ref:`term_io <term_io/0>`
 |    :ref:`type <type/0>`
@@ -2120,6 +2121,25 @@ Compiled unit tests. The list of variables is used to ensure variable sharing be
 |    ``test(Identifier,Variables,Outcome)``
 | **Mode and number of proofs:**
 |    ``test(?callable,?list(variable),?nonvar)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: test_time_/3
+.. _lgtunit/0::test_time_/3:
+
+``test_time_/3``
+^^^^^^^^^^^^^^^^
+
+Test identifiers, objects, and wall times for the current test run.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``test_time_(Test,Object,WallTime)``
+| **Mode and number of proofs:**
+|    ``test_time_(?callable,?object,?float)`` - ``zero_or_more``
 
 
 ------------

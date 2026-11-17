@@ -1275,8 +1275,8 @@ $quiet_report = {
 		if ($null -ne $mean_duration) {
 			$mean_str = Format-Decimal -Number $mean_duration -DecimalPlaces 3
 			$median_str = Format-Decimal -Number $median_duration -DecimalPlaces 3
-			Write-Output "% Mean test set running time: $mean_str seconds"
-			Write-Output "% Median test set running time: $median_str seconds"
+			Write-Output "% Mean test set runtime: $mean_str seconds"
+			Write-Output "% Median test set runtime: $median_str seconds"
 		}
 	}
 }

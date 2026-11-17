@@ -29,9 +29,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 12:4:0,
+		version is 12:5:0,
 		author is 'Paulo Moura',
-		date is 2026-09-30,
+		date is 2026-11-17,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -91,7 +91,31 @@
 			integer_to_padded_atom(Seconds, SecondsAtom),
 			Args = [Year, MonthAtom, DayAtom, HoursAtom, MinutesAtom, SecondsAtom]
 		},
-		['tests ended at ~w-~w-~w, ~w:~w:~w'-Args, nl, nl].
+		['tests ended at ~w-~w-~w, ~w:~w:~w'-Args, nl].
+
+	:- if(\+ current_logtalk_flag(prolog_dialect, ji)).
+
+		message_tokens(tests_runtime(Runtime)) -->
+			['tests took ~3f seconds'-[Runtime], nl, nl].
+
+		message_tokens(test_stats(FastestTest, FastestObject, FastestWallTime, SlowestTest, SlowestObject, SlowestWallTime, MeanWallTime, MedianWallTime)) -->
+			['Fastest test: ~q @ ~q (~3f seconds)'-[FastestTest, FastestObject, FastestWallTime], nl],
+			['Slowest test: ~q @ ~q (~3f seconds)'-[SlowestTest, SlowestObject, SlowestWallTime], nl],
+			['Mean test runtime: ~3f seconds'-[MeanWallTime], nl],
+			['Median test runtime: ~3f seconds'-[MedianWallTime], nl, nl].
+
+	:- else.
+
+		message_tokens(tests_runtime(Runtime)) -->
+			['tests took ~w seconds'-[Runtime], nl, nl].
+
+		message_tokens(test_stats(FastestTest, FastestObject, FastestWallTime, SlowestTest, SlowestObject, SlowestWallTime, MeanWallTime, MedianWallTime)) -->
+			['Fastest test: ~q @ ~q (~w seconds)'-[FastestTest, FastestObject, FastestWallTime], nl],
+			['Slowest test: ~q @ ~q (~w seconds)'-[SlowestTest, SlowestObject, SlowestWallTime], nl],
+			['Mean tests runtime: ~w seconds'-[MeanWallTime], nl],
+			['Median tests runtime: ~w seconds'-[MedianWallTime], nl, nl].
+
+	:- endif.
 
 	message_tokens(running_tests_from_object_file(Object, File)) -->
 		{numbervars(Object, 0, _)},
@@ -326,7 +350,7 @@
 		[].
 
 	message_tokens(no_code_coverage_information_collected) -->
-		['no code coverage information collected'-[], nl].
+		['no code coverage information collected'-[], nl, nl].
 
 	% messages for test identifier errors (compile-time)
 

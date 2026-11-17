@@ -180,6 +180,13 @@ where the ``run_test_sets/1`` predicate argument is a list of two or
 more test object identifiers. This predicate makes it possible to get a
 single code coverage report that takes into account all the tests.
 
+At the end of a run, a timing summary identifies the fastest and slowest
+executed tests by wall time and reports the mean and median wall time in
+seconds. Passed and failed tests are included; skipped tests are
+excluded. When running multiple test sets, the summary covers all the
+sets. No timing summary is printed if no tests were executed. Timing
+data is cleared before each run and after printing the summary.
+
 It's also possible to automatically run loaded tests when using the
 ``make`` tool by calling the goal that runs the tests from a definition
 of the hook predicate ``logtalk_make_target_action/1``. For example, by

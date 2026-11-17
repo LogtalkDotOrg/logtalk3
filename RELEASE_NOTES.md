@@ -463,6 +463,9 @@ executable that includes Logtalk for better performance.
 * IMPROVED: The `diagrams` tool experimental support for Mermaid. Mermaid
 version 12 or later is now required.
 
+* IMPROVED: The `lgtunit` tool to print the fastest test, slowest test, mean
+test runtime, and median test runtime at the end of a test run.
+
 * IMPROVED: The performance of the `logtalk_tester.sh` Bash shell script.
 
 * IMPROVED: The `logtalk_tester.sh` Bash shell script to use null-terminated
