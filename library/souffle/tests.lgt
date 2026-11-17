@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-11-10,
+		date is 2026-11-17,
 		comment is 'Unit tests for the souffle library.'
 	]).
 
@@ -227,7 +227,7 @@
 	% souffle facade: option validation
 	% -----------------------------------------------------------------------
 
-	test(souffle_solve_facts_mutual_exclusion, error(domain_error(souffle_facts_option, _))) :-
+	test(souffle_solve_facts_mutual_exclusion, error(domain_error(souffle_facts_option, _)), [condition(resolve_command_path(souffle, _))]) :-
 		souffle::solve(terms([]), _, [facts('/tmp'), facts_data([edge-[[1, 2]]])]).
 
 	test(souffle_solve_missing_executable, error(existence_error(command, logtalk_souffle_missing_executable))) :-
