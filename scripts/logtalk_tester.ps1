@@ -57,7 +57,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
-	Write-Output "$myName 36.0"
+	Write-Output "$myName 37.0"
 }
 
 Function Format-Decimal {
@@ -1170,6 +1170,54 @@ if ($durations_count -gt 0) {
 	}
 }
 
+$unexpected = @{
+	crashed = $crashed
+	broken = $broken
+	timedout = $timeouts
+	failed = $failed - $flaky
+}
+$unexpected_entries = [ordered]@{}
+if ($null -ne $expected_failures) {
+	$unexpected_entries = [ordered]@{
+		broken = [System.Collections.Generic.List[string]]::new()
+		timedout = [System.Collections.Generic.List[string]]::new()
+		crashed = [System.Collections.Generic.List[string]]::new()
+		failed = [System.Collections.Generic.List[string]]::new()
+	}
+	# Entries must be generated exactly as printed in the report sections.
+	$actual = [System.Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+	Get-ChildItem -Path . -Filter *.totals |
+	Foreach-Object {
+		Get-Content -Path $_ |
+		Foreach-Object {
+			if ($_ -match '^failed' -and -not $_.EndsWith(' [flaky]')) {
+				$entry = (($_.split("`t")[1] + " - " + $_.split("`t")[2]) -replace $prefix, "").TrimEnd()
+				[void]$actual.Add("failed`t$entry")
+			}
+		}
+	}
+	$markers = [ordered]@{ broken = 'LOGTALK_BROKEN'; timedout = 'LOGTALK_TIMEOUT'; crashed = 'LOGTALK_CRASH' }
+	Get-ChildItem -Path . -Filter *.errors |
+	Foreach-Object {
+		$errors_file = $_
+		$entry = ((($errors_file.BaseName -replace '___', ':') -replace '__', '/') -replace $prefix, "").TrimEnd()
+		foreach ($kind in $markers.Keys) {
+			if (Select-String -Path $errors_file.FullName -Pattern $markers[$kind] -CaseSensitive -SimpleMatch -Quiet) {
+				[void]$actual.Add("$kind`t$entry")
+			}
+		}
+	}
+	foreach ($entry in $actual) {
+		if (-not $expected_failures.Contains($entry)) {
+			$kind, $line = $entry.Split("`t", 2)
+			$unexpected_entries[$kind].Add($line)
+		}
+	}
+	foreach ($kind in $unexpected_entries.Keys) {
+		$unexpected[$kind] = $unexpected_entries[$kind].Count
+	}
+}
+
 $quiet_report = {
 	if ($o -eq "minimal") {
 		Write-Output "%"
@@ -1256,6 +1304,17 @@ $quiet_report = {
 		}
 		Write-Output "%"
 	}
+	foreach ($kind in $unexpected_entries.Keys) {
+		if ($unexpected_entries[$kind].Count -gt 0) {
+			if ($kind -eq "failed") {
+				Write-Output "% Unexpected failed tests"
+			} else {
+				Write-Output "% Unexpected $kind"
+			}
+			Write-Output $unexpected_entries[$kind]
+			Write-Output "%"
+		}
+	}
 	Write-Output "% $testsets test sets: $testsetruns completed, $testsetskipped skipped, $broken broken, $timeouts timedout, $crashed crashed"
 	Write-Output "% $total tests: $skipped skipped, $passed passed, $failed failed ($flaky flaky)"
 
@@ -1285,44 +1344,6 @@ if ($o -eq "quiet") {
 	& $quiet_report | Out-Null
 } else {
 	& $quiet_report
-}
-
-$unexpected = @{
-	crashed = $crashed
-	broken = $broken
-	timedout = $timeouts
-	failed = $failed - $flaky
-}
-if ($null -ne $expected_failures) {
-	$unexpected = @{ crashed = 0; broken = 0; timedout = 0; failed = 0 }
-	# entries must be generated exactly as printed in the report sections above
-	$actual = [System.Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
-	Get-ChildItem -Path . -Filter *.totals |
-	Foreach-Object {
-		Get-Content -Path $_ |
-		Foreach-Object {
-			if ($_ -match '^failed' -and -not $_.EndsWith(' [flaky]')) {
-				$entry = (($_.split("`t")[1] + " - " + $_.split("`t")[2]) -replace $prefix, "").TrimEnd()
-				[void]$actual.Add("failed`t$entry")
-			}
-		}
-	}
-	$markers = [ordered]@{ broken = 'LOGTALK_BROKEN'; timedout = 'LOGTALK_TIMEOUT'; crashed = 'LOGTALK_CRASH' }
-	Get-ChildItem -Path . -Filter *.errors |
-	Foreach-Object {
-		$errors_file = $_
-		$entry = ((($errors_file.BaseName -replace '___', ':') -replace '__', '/') -replace $prefix, "").TrimEnd()
-		foreach ($kind in $markers.Keys) {
-			if (Select-String -Path $errors_file.FullName -Pattern $markers[$kind] -CaseSensitive -SimpleMatch -Quiet) {
-				[void]$actual.Add("$kind`t$entry")
-			}
-		}
-	}
-	foreach ($entry in $actual) {
-		if (-not $expected_failures.Contains($entry)) {
-			$unexpected[$entry.Split("`t", 2)[0]]++
-		}
-	}
 }
 
 Pop-Location

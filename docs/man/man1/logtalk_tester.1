@@ -91,6 +91,8 @@ Random generator starting seed (no default). Only meaningful when running proper
 .TP
 .BI \-k
 Expected failures file (no default). Relative paths are resolved from the directory where the script is run. The file contains sections whose headers are the report section headers \fI% Broken\fR, \fI% Timedout\fR, \fI% Crashed\fR, and \fI% Failed tests\fR. Each section entry is a line copied from the corresponding report section. Thus, the same \fI-s\fR option must be used when generating the report and when using the file. An entry only applies to its section. Trailing whitespace and, for failed tests, a trailing \fI[flaky]\fR annotation are ignored when matching. Blank lines, lines consisting of a single \fI%\fR character, and lines starting with a \fI#\fR character are ignored. Entries that don't occur when running the tests are ignored. The listed failures are still reported but don't affect the exit status. A missing file, an entry before any section header, or an unknown section header results in an error and exit status 1.
+.IP
+When this option is used, the report also lists unexpected broken, timedout, and crashed test sets and unexpected non-flaky failed tests in separate sections before the summary. Empty sections are omitted.
 .TP
 .BI \-w
 Wipe default scratch directories (\fI./.lgt_tmp\fR and \fI./lgt_tmp\fR) once before running any test sets.

@@ -32,7 +32,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 43.0"
+	echo "$(basename "$0") 44.0"
 	exit 0
 }
 
@@ -128,8 +128,14 @@ format_decimal() {
 	printf "%.${places}f" "$num"
 }
 
-# with mode=count, counts the "kind<TAB>entry" actual lines not listed in the expected failures file
+# With mode=report, emit the counts first, followed by the unexpected sections.
 expected_failures_awk='
+	BEGIN {
+		header["broken"] = "% Unexpected broken"
+		header["timedout"] = "% Unexpected timedout"
+		header["crashed"] = "% Unexpected crashed"
+		header["failed"] = "% Unexpected failed tests"
+	}
 	{
 		sub(/[ \t\r]+$/, "")
 	}
@@ -156,15 +162,29 @@ expected_failures_awk='
 		expected[section "\t" $0] = 1
 		next
 	}
-	!($0 in seen) {
+	!($0 in seen) && !($0 in expected) {
 		seen[$0] = 1
-		if (!($0 in expected)) unexpected[substr($0, 1, index($0, "\t") - 1)]++
+		tab = index($0, "\t")
+		category = substr($0, 1, tab - 1)
+		if (++unexpected[category] == 1) {
+			if (n > 0) report[++n] = "%"
+			report[++n] = header[category]
+		}
+		report[++n] = substr($0, tab + 1)
 	}
 	END {
 		if (error) exit 1
-		if (mode == "count") printf "%d %d %d %d\n", unexpected["crashed"], unexpected["broken"], unexpected["timedout"], unexpected["failed"]
+		if (mode == "report") {
+			printf "%d %d %d %d\n", unexpected["crashed"], unexpected["broken"], unexpected["timedout"], unexpected["failed"]
+			for (i = 1; i <= n; i++) print report[i]
+			if (n > 0) print "%"
+		}
 	}
 '
+
+test_set_issue_entries() {
+	grep -s -a -H "$1" -- *.errors | $sed "s/$1//" | $sed 's/.errors://' | $sed 's|__|/|g' | $sed "s|^$prefix||"
+}
 
 notify_completion() {
 	status="$1"
@@ -1028,17 +1048,17 @@ if grep -q -s -a 'tests skipped' -- *.results || grep -q -s -a '(not applicable)
 fi
 if grep -q -s -a 'LOGTALK_BROKEN' -- *.errors; then
 	echo "% Broken"
-	grep -s -a 'LOGTALK_BROKEN' -- *.errors | $sed 's/LOGTALK_BROKEN//' | $sed 's/.errors://' | $sed 's|__|/|g' | $sed "s|^$prefix||"
+	test_set_issue_entries LOGTALK_BROKEN
 	echo "%"
 fi
 if grep -q -s -a 'LOGTALK_TIMEOUT' -- *.errors; then
 	echo "% Timedout"
-	grep -s -a 'LOGTALK_TIMEOUT' -- *.errors | $sed 's/LOGTALK_TIMEOUT//' | $sed 's/.errors://' | $sed 's|__|/|g' | $sed "s|^$prefix||"
+	test_set_issue_entries LOGTALK_TIMEOUT
 	echo "%"
 fi
 if grep -q -s -a 'LOGTALK_CRASH' -- *.errors; then
 	echo "% Crashed"
-	grep -s -a 'LOGTALK_CRASH' -- *.errors | $sed 's/LOGTALK_CRASH//' | $sed 's/.errors://' | $sed 's|__|/|g' | $sed "s|^$prefix||"
+	test_set_issue_entries LOGTALK_CRASH
 	echo "%"
 fi
 if grep -s -q '^skipped' -- *.totals; then
@@ -1059,6 +1079,25 @@ if grep -s -q '^failed' -- *.totals; then
 	done
 	echo "%"
 fi
+
+unexpected_crashed=$crashed
+unexpected_broken=$broken
+unexpected_timeouts=$timeouts
+unexpected_failures=$((failed - flaky))
+if [ "$expected_failures" != "" ] ; then
+	{
+		read -r unexpected_crashed unexpected_broken unexpected_timeouts unexpected_failures
+		cat
+	} < <(
+		{
+			test_set_issue_entries LOGTALK_BROKEN | awk '{ print "broken\t" $0 }'
+			test_set_issue_entries LOGTALK_TIMEOUT | awk '{ print "timedout\t" $0 }'
+			test_set_issue_entries LOGTALK_CRASH | awk '{ print "crashed\t" $0 }'
+			grep -s -h '^failed' -- *.totals | grep -v ' \[flaky\]$' | cut -f 2,3 | $sed "s|^$prefix||" | $sed "s|\t| - |" | awk '{ print "failed\t" $0 }'
+		} | awk -v mode=report "$expected_failures_awk" kind=expected "$expected_failures" kind=actual -
+	)
+fi
+
 echo "% $testsets test sets: $testsetruns completed, $testsetskipped skipped, $broken broken, $timeouts timedout, $crashed crashed"
 echo "% $total tests: $skipped skipped, $passed passed, $failed failed ($flaky flaky)"
 
@@ -1084,22 +1123,6 @@ fi
 
 if [ "$output" == 'quiet' ] ; then
 	exec 1>&4 4>&-
-fi
-
-unexpected_crashed=$crashed
-unexpected_broken=$broken
-unexpected_timeouts=$timeouts
-unexpected_failures=$((failed - flaky))
-if [ "$expected_failures" != "" ] ; then
-	# entries must be generated exactly as printed in the report sections above
-	read -r unexpected_crashed unexpected_broken unexpected_timeouts unexpected_failures < <(
-		{
-			grep -s -h '^failed' -- *.totals | grep -v ' \[flaky\]$' | cut -f 2,3 | $sed "s|^$prefix||" | $sed "s|\t| - |" | awk '{ print "failed\t" $0 }'
-			grep -s -a -H 'LOGTALK_BROKEN' -- *.errors | $sed 's/LOGTALK_BROKEN//' | $sed 's/.errors://' | $sed 's|__|/|g' | $sed "s|^$prefix||" | awk '{ print "broken\t" $0 }'
-			grep -s -a -H 'LOGTALK_TIMEOUT' -- *.errors | $sed 's/LOGTALK_TIMEOUT//' | $sed 's/.errors://' | $sed 's|__|/|g' | $sed "s|^$prefix||" | awk '{ print "timedout\t" $0 }'
-			grep -s -a -H 'LOGTALK_CRASH' -- *.errors | $sed 's/LOGTALK_CRASH//' | $sed 's/.errors://' | $sed 's|__|/|g' | $sed "s|^$prefix||" | awk '{ print "crashed\t" $0 }'
-		} | awk -v mode=count "$expected_failures_awk" kind=expected "$expected_failures" kind=actual -
-	)
 fi
 
 if [ "$unexpected_crashed" -gt 0 ] ; then
