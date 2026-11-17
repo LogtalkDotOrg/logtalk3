@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-10-15,
+		date is 2026-11-17,
 		comment is 'Unit tests for the "atms" library.',
 		parameters is [
 			'Representation' - 'ATMS environment representation under test.'
@@ -2191,14 +2191,30 @@
 		Counter::reset,
 		new(Counter, State0),
 		create_node(h, State0, Head, State1),
-		add_label_alternatives(Count, Head, State1, State2),
+		% Fourteen assumptions provide 91 pairs without large bit positions.
+		add_free_assumptions(14, State1, Assumptions, State2),
+		findall([First, Second], (
+			member(First, Assumptions),
+			member(Second, Assumptions),
+			First @< Second
+		), AllAlternatives),
+		length(Alternatives, Count),
+		append(Alternatives, _, AllAlternatives),
+		Alternatives = [Antecedents| _],
+		add_combined_label_alternatives(Alternatives, Head, State2, State3),
 		Counter::reset,
-		justify(Head, [node(Count)], extra, State2, State),
+		justify(Head, Antecedents, extra, State3, State),
 		Counter::counts(Calls, _),
 		label(Head, State, Label),
 		length(Label, Count),
 		why(Head, State, Why),
-		memberchk(justification(Head, [node(Count)], extra), Why).
+		memberchk(justification(Head, Antecedents, extra), Why).
+
+	add_combined_label_alternatives([], _, State, State).
+	add_combined_label_alternatives([Antecedents| Alternatives], Head, State0, State) :-
+		% Insert in reverse order so the repeated alternative is first in the label.
+		add_combined_label_alternatives(Alternatives, Head, State0, State1),
+		justify(Head, Antecedents, alternative, State1, State).
 
 	add_label_alternatives(0, _, State, State) :-
 		!.
