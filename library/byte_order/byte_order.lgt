@@ -22,9 +22,9 @@
 :- object(byte_order).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-04,
+		date is 2026-11-17,
 		comment is 'Predicates for converting between integers and fixed-size byte lists in big-endian and little-endian order.'
 	]).
 
@@ -93,12 +93,12 @@
 		integer_to_big_endian_bytes(ByteCount, Integer, Bytes, Tail).
 
 	bytes_to_integer(little, Bytes, Integer) :-
-		little_endian_bytes_to_integer(Bytes, Integer).
+		little_endian_bytes_to_integer(Bytes, 0, 0, Integer).
 	bytes_to_integer(big, Bytes, Integer) :-
 		big_endian_bytes_to_integer(Bytes, 0, Integer).
 
 	bytes_to_integer(little, ByteCount, Bytes, Integer, Rest) :-
-		little_endian_bytes_to_integer(ByteCount, Bytes, Integer, Rest).
+		little_endian_bytes_to_integer(ByteCount, Bytes, 0, 0, Integer, Rest).
 	bytes_to_integer(big, ByteCount, Bytes, Integer, Rest) :-
 		big_endian_bytes_to_integer(ByteCount, Bytes, 0, Integer, Rest).
 
@@ -109,13 +109,13 @@
 		integer_to_bytes(Order, ByteCount, Integer, Bytes, Tail).
 
 	bytes_to_signed_integer(little, Bytes, Integer) :-
-		little_endian_bytes_to_signed_integer(Bytes, Integer).
+		little_endian_bytes_to_signed_integer(Bytes, 0, 0, Integer).
 	bytes_to_signed_integer(big, [Byte| Bytes], Integer) :-
 		sign_accumulator(Byte, Integer0),
 		big_endian_bytes_to_integer([Byte| Bytes], Integer0, Integer).
 
 	bytes_to_signed_integer(little, ByteCount, Bytes, Integer, Rest) :-
-		little_endian_bytes_to_signed_integer(ByteCount, Bytes, Integer, Rest).
+		little_endian_bytes_to_signed_integer(ByteCount, Bytes, 0, 0, Integer, Rest).
 	bytes_to_signed_integer(big, ByteCount, [Byte| Bytes], Integer, Rest) :-
 		sign_accumulator(Byte, Integer0),
 		big_endian_bytes_to_integer(ByteCount, [Byte| Bytes], Integer0, Integer, Rest).
@@ -136,17 +136,19 @@
 		NextByteCount is ByteCount - 1,
 		integer_to_big_endian_bytes(NextByteCount, Integer, Bytes, Tail).
 
-	little_endian_bytes_to_integer([], 0).
-	little_endian_bytes_to_integer([Byte| Bytes], Integer) :-
-		little_endian_bytes_to_integer(Bytes, Integer0),
-		Integer is Integer0 * 256 + Byte.
+	little_endian_bytes_to_integer([], _, Integer, Integer).
+	little_endian_bytes_to_integer([Byte| Bytes], Shift, Integer0, Integer) :-
+		Integer1 is Integer0 + (Byte << Shift),
+		NextShift is Shift + 8,
+		little_endian_bytes_to_integer(Bytes, NextShift, Integer1, Integer).
 
-	little_endian_bytes_to_integer(0, Rest, 0, Rest) :-
+	little_endian_bytes_to_integer(0, Rest, _, Integer, Integer, Rest) :-
 		!.
-	little_endian_bytes_to_integer(ByteCount, [Byte| Bytes], Integer, Rest) :-
+	little_endian_bytes_to_integer(ByteCount, [Byte| Bytes], Shift, Integer0, Integer, Rest) :-
+		Integer1 is Integer0 + (Byte << Shift),
+		NextShift is Shift + 8,
 		NextByteCount is ByteCount - 1,
-		little_endian_bytes_to_integer(NextByteCount, Bytes, Integer0, Rest),
-		Integer is Integer0 * 256 + Byte.
+		little_endian_bytes_to_integer(NextByteCount, Bytes, NextShift, Integer1, Integer, Rest).
 
 	big_endian_bytes_to_integer([], Integer, Integer).
 	big_endian_bytes_to_integer([Byte| Bytes], Integer0, Integer) :-
@@ -160,22 +162,26 @@
 		NextByteCount is ByteCount - 1,
 		big_endian_bytes_to_integer(NextByteCount, Bytes, Integer1, Integer, Rest).
 
-	little_endian_bytes_to_signed_integer([Byte], Integer) :-
+	little_endian_bytes_to_signed_integer([Byte], Shift, Integer0, Integer) :-
 		!,
-		sign_accumulator(Byte, Integer0),
-		Integer is Integer0 * 256 + Byte.
-	little_endian_bytes_to_signed_integer([Byte, NextByte| Bytes], Integer) :-
-		little_endian_bytes_to_signed_integer([NextByte| Bytes], Integer0),
-		Integer is Integer0 * 256 + Byte.
+		sign_accumulator(Byte, Sign),
+		SignedByte is Sign * 256 + Byte,
+		Integer is Integer0 + (SignedByte << Shift).
+	little_endian_bytes_to_signed_integer([Byte, NextByte| Bytes], Shift, Integer0, Integer) :-
+		Integer1 is Integer0 + (Byte << Shift),
+		NextShift is Shift + 8,
+		little_endian_bytes_to_signed_integer([NextByte| Bytes], NextShift, Integer1, Integer).
 
-	little_endian_bytes_to_signed_integer(1, [Byte| Rest], Integer, Rest) :-
+	little_endian_bytes_to_signed_integer(1, [Byte| Rest], Shift, Integer0, Integer, Rest) :-
 		!,
-		sign_accumulator(Byte, Integer0),
-		Integer is Integer0 * 256 + Byte.
-	little_endian_bytes_to_signed_integer(ByteCount, [Byte| Bytes], Integer, Rest) :-
+		sign_accumulator(Byte, Sign),
+		SignedByte is Sign * 256 + Byte,
+		Integer is Integer0 + (SignedByte << Shift).
+	little_endian_bytes_to_signed_integer(ByteCount, [Byte| Bytes], Shift, Integer0, Integer, Rest) :-
+		Integer1 is Integer0 + (Byte << Shift),
+		NextShift is Shift + 8,
 		NextByteCount is ByteCount - 1,
-		little_endian_bytes_to_signed_integer(NextByteCount, Bytes, Integer0, Rest),
-		Integer is Integer0 * 256 + Byte.
+		little_endian_bytes_to_signed_integer(NextByteCount, Bytes, NextShift, Integer1, Integer, Rest).
 
 	sign_accumulator(Byte, Integer) :-
 		(	Byte /\ 128 =:= 0 ->

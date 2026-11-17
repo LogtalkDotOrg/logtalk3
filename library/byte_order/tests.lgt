@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-04,
+		date is 2026-11-17,
 		comment is 'Unit tests for the "byte_order" library.'
 	]).
 
@@ -69,6 +69,12 @@
 	test(byte_order_bytes_to_integer_04, deterministic([Integer, Rest] == [0x1234, [0xaa, 0xbb]])) :-
 		byte_order::bytes_to_integer(little, 2, [0x34, 0x12, 0xaa, 0xbb], Integer, Rest).
 
+	test(byte_order_bytes_to_integer_05, deterministic(Integer == 0)) :-
+		byte_order::bytes_to_integer(little, [], Integer).
+
+	test(byte_order_bytes_to_integer_06, deterministic(Integer-Rest == 0-[0xaa])) :-
+		byte_order::bytes_to_integer(little, 0, [0xaa], Integer, Rest).
+
 	test(byte_order_signed_integer_to_bytes_01, deterministic(Bytes == [0xff, 0xff, 0xff, 0xfe])) :-
 		byte_order::signed_integer_to_bytes(big, 4, -2, Bytes).
 
@@ -91,6 +97,18 @@
 
 	test(byte_order_bytes_to_signed_integer_04, deterministic([Integer, Rest] == [-32768, [0xaa]])) :-
 		byte_order::bytes_to_signed_integer(little, 2, [0x00, 0x80, 0xaa], Integer, Rest).
+
+	test(byte_order_bytes_to_signed_integer_05, deterministic(Integer == -128)) :-
+		byte_order::bytes_to_signed_integer(little, [0x80], Integer).
+
+	test(byte_order_bytes_to_signed_integer_06, deterministic(Integer-Rest == 127-[0xff])) :-
+		byte_order::bytes_to_signed_integer(little, 1, [0x7f, 0xff], Integer, Rest).
+
+	test(byte_order_bytes_to_signed_integer_07, deterministic(Integer == -1)) :-
+		byte_order::bytes_to_signed_integer(little, [0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff], Integer).
+
+	test(byte_order_bytes_to_signed_integer_08, deterministic(Integer-Rest == -1-[0x00])) :-
+		byte_order::bytes_to_signed_integer(little, 8, [0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x00], Integer, Rest).
 
 	test(byte_order_roundtrip_01, deterministic(Decoded == Integer)) :-
 		Integer = 0x12345678,
