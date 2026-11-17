@@ -454,6 +454,9 @@ automation scripts for a `-k` option for passing a file listing expected
 failed tests and broken, timedout, and crashed test sets, which are ignored
 when computing the scripts exit status.
 
+* ADDED: Support to the `logtalk_tester.*` scripts for using a Shumway Prolog
+executable that includes Logtalk for better performance.
+
 * IMPROVED: The performance of the `code_metrics`, `dead_code_scanner`,
 `diagrams`, and `lgtdoc` tool tests.
 

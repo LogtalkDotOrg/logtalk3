@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on November 4, 2026
+##   Last updated on November 17, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -57,7 +57,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
-	Write-Output "$myName 35.0"
+	Write-Output "$myName 36.0"
 }
 
 Function Format-Decimal {
@@ -460,7 +460,7 @@ Function Write-Usage-Help() {
 	Write-Output ""
 	Write-Output "Required arguments:"
 	Write-Output "  -p backend Prolog compiler"
-	Write-Output "     (valid values are b, cx, eclipse, gnu, gnunc, ji, xvm, sicstus, shumway, swi, swipack, tau, trealla, xsb, and yap)"
+	Write-Output "     (valid values are b, cx, eclipse, gnu, gnunc, ji, xvm, sicstus, shumway, shumwaync, swi, swipack, tau, trealla, xsb, and yap)"
 	Write-Output ""
 	Write-Output "Optional arguments:"
 	Write-Output "  -o output (valid values are verbose, minimal, and quiet; default is $o)"
@@ -558,6 +558,11 @@ Function Confirm-Parameters() {
 		$script:backend = 'shumway'
 		$script:prolog = 'Shumway Prolog'
 		$script:logtalk = "shumwaylgt"
+		$script:logtalk_option = "-g"
+	} elseif ($p -eq "shumwaync") {
+		$script:backend = 'shumway'
+		$script:prolog = 'Shumway Prolog (native code)'
+		$script:logtalk = "shumwaylgtnc"
 		$script:logtalk_option = "-g"
 	} elseif ($p -eq "swi") {
 		$script:backend = 'swi'
