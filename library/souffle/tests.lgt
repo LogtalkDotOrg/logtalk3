@@ -25,8 +25,8 @@
 	:- info([
 		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-11-17,
-		comment is 'Unit tests for the souffle library.'
+		date is 2026-11-18,
+		comment is 'Unit tests for the "souffle" library.'
 	]).
 
 	:- uses(lgtunit, [
@@ -45,11 +45,10 @@
 		file_to_codes/2
 	]).
 
+	cover(souffle).
+	cover(souffle_process).
 	cover(souffle_program).
 	cover(souffle_output).
-	cover(souffle_expansion).
-	cover(souffle_process).
-	cover(souffle).
 
 	% -----------------------------------------------------------------------
 	% souffle_program: statement and term serialization

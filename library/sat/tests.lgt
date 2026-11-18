@@ -25,8 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-10,
-		comment is 'Unit tests for the sat library.'
+		date is 2026-11-18,
+		comment is 'Unit tests for the "sat" library.'
 	]).
 
 	:- uses(lgtunit, [
@@ -41,11 +41,10 @@
 		member/2, memberchk/2, msort/2, length/2
 	]).
 
-	cover(sat_program).
-	cover(sat_output).
-	cover(sat_expansion).
 	cover(sat).
 	cover(sat_process).
+	cover(sat_program).
+	cover(sat_output).
 
 	% sat_program tests
 

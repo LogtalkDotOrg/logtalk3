@@ -25,8 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-10,
-		comment is 'Unit tests for the minizinc library.'
+		date is 2026-11-18,
+		comment is 'Unit tests for the "minizinc" library.'
 	]).
 
 	:- uses(lgtunit, [
@@ -45,11 +45,10 @@
 		file_to_codes/2
 	]).
 
+	cover(minizinc).
+	cover(minizinc_process).
 	cover(minizinc_program).
 	cover(minizinc_output).
-	cover(minizinc_expansion).
-	cover(minizinc_process).
-	cover(minizinc).
 
 	% -----------------------------------------------------------------------
 	% minizinc_program: statement and expression serialization

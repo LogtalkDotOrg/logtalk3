@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-14,
+		date is 2026-11-18,
 		comment is 'Unit tests for the "smt" library.'
 	]).
 
@@ -41,11 +41,10 @@
 		member/2, memberchk/2, msort/2, length/2
 	]).
 
-	cover(smt_program).
-	cover(smt_output).
-	cover(smt_expansion).
 	cover(smt).
 	cover(smt_process).
+	cover(smt_program).
+	cover(smt_output).
 
 	% smt_program tests
 

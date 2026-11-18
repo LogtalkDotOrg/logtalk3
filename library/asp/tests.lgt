@@ -25,8 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-10,
-		comment is 'Unit tests for the asp library.'
+		date is 2026-11-18,
+		comment is 'Unit tests for the "asp" library.'
 	]).
 
 	:- uses(lgtunit, [
@@ -45,12 +45,11 @@
 		file_to_codes/2
 	]).
 
-	cover(asp_program).
-	cover(asp_symbols).
-	cover(asp_output).
-	cover(asp_expansion).
 	cover(asp).
 	cover(asp_process).
+	cover(asp_program).
+	cover(asp_output).
+	cover(asp_symbols).
 
 	test(asp_program_empty, deterministic(Codes == [])) :-
 		asp_program::serialize([], Codes).

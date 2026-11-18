@@ -25,8 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-12,
-		comment is 'Source, decoder, expansion, and CLI integration tests for ProbLog.'
+		date is 2026-11-18,
+		comment is 'Unit tests for the "problog" library.'
 	]).
 
 	:- uses(lgtunit, [
