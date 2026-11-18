@@ -421,6 +421,11 @@ non-Windows systems that don't define the `SHELL` environment variable.
 
 * FIXED: Operator standard conformance issue in the `s3` library.
 
+* FIXED: Bug in the `sockets` library with the SWI-Prolog backend where the
+`client_open/4-5` and `server_accept/4-5` predicates would return a stream
+pair instead of separate input and output streams. Thanks to Arun Majumdar
+for the bug report.
+
 * FIXED: bug in the `term_io` library `read_term_from_chars/4` and
 `read_term_from_codes/4` predicates with backends using as default the
 `eof_action(error)` stream option.
