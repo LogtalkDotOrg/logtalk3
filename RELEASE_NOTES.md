@@ -38,6 +38,10 @@ or the goal being goal-expanded.
 dynamic binding caches. Thanks to Andrew Davison and Arun Majumdar for the
 bug reports and patches.
 
+* FIXED: Potential deadlock when calling the `threaded_engine_destroy/1`
+predicate to terminate an engine whose goal creates or destroys engines.
+Thanks to Arun Majumdar for the bug report and patch.
+
 * FIXED: The linter check for duplicated clauses could report false positives
 due to logical update semantics.
 

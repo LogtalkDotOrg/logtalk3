@@ -28114,11 +28114,34 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_threaded_engine_destroy'(Engine, ExCtx) :-
 	with_mutex(
 		'$lgt_engines',
-		'$lgt_threaded_engine_destroy_protected'(Engine, ExCtx)
+		'$lgt_threaded_engine_destroy_protected'(Engine, ExCtx, Queue, TermQueue, Id)
+	),
+	% the engine thread is joined after the mutex is released: its goal may still
+	% create or destroy an engine, which takes the same mutex, before it handles
+	% the signal or ends; joining while holding the mutex would then deadlock;
+	% the engine is no longer registered, and the clean-up below only touches
+	% messages tagged with its thread identifier
+	thread_join(Id, _),
+	message_queue_destroy(TermQueue),
+	% remove any non-consumed answer
+	(	thread_peek_message(Queue, '$lgt_answer'(Engine, Id, _, _)) ->
+		thread_get_message(Queue, '$lgt_answer'(Engine, Id, _, _))
+	;	true
+	),
+	% remove the answer that ensures threaded_engine_next/2 and threaded_engine_next_reified/2
+	% return failures after consuming all solutions if present
+	(	thread_peek_message(Queue, '$lgt_answer'(Engine, Id, _, failure)) ->
+		thread_get_message(Queue, '$lgt_answer'(Engine, Id, _, failure))
+	;	true
+	),
+	% remove the cache entry for the engine term queue handle
+	(	thread_peek_message(Queue, '$lgt_engine_term_queue'(Engine, _, Id)) ->
+		thread_get_message(Queue, '$lgt_engine_term_queue'(Engine, _, Id))
+	;	true
 	).
 
 
-'$lgt_threaded_engine_destroy_protected'(Engine, ExCtx) :-
+'$lgt_threaded_engine_destroy_protected'(Engine, ExCtx, Queue, TermQueue, Id) :-
 	(	var(Engine) ->
 		throw(error(instantiation_error, logtalk(threaded_engine_destroy(Engine), ExCtx)))
 	;	'$lgt_execution_context'(ExCtx, _, _, This, _, _, _),
@@ -28136,26 +28159,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 			thread_send_message(TermQueue, '$lgt_aborted')
 		;	true
 		),
-		% ensure that thread is terminated
-		catch(thread_signal(Id, throw('$lgt_aborted')), _, true),
-		thread_join(Id, _),
-		message_queue_destroy(TermQueue),
-		% remove any non-consumed answer
-		(	thread_peek_message(Queue, '$lgt_answer'(Engine, Id, _, _)) ->
-			thread_get_message(Queue, '$lgt_answer'(Engine, Id, _, _))
-		;	true
-		),
-		% remove the answer that ensures threaded_engine_next/2 and threaded_engine_next_reified/2
-		% return failures after consuming all solutions if present
-		(	thread_peek_message(Queue, '$lgt_answer'(Engine, Id, _, failure)) ->
-			thread_get_message(Queue, '$lgt_answer'(Engine, Id, _, failure))
-		;	true
-		),
-		% remove the cache entry for the engine term queue handle
-		(	thread_peek_message(Queue, '$lgt_engine_term_queue'(Engine, _, Id)) ->
-			thread_get_message(Queue, '$lgt_engine_term_queue'(Engine, _, Id))
-		;	true
-		)
+		% ensure that thread is terminated (joined by the caller, after the mutex is released)
+		catch(thread_signal(Id, throw('$lgt_aborted')), _, true)
 	;	% engine doesn't exist
 		throw(error(existence_error(engine, Engine), logtalk(threaded_engine_destroy(Engine), ExCtx)))
 	).
